@@ -19,14 +19,6 @@
 
 namespace VoodooShader
 {
-	enum Logger_Status
-	{
-		LS_Unknown = 0,
-		LS_Ready   = 1,
-		LS_InProgress = 2,
-		LS_Max
-	};
-
 	// Forward-declare the Logger class so it can be used in log_format
 	class Logger;
 
@@ -69,6 +61,7 @@ namespace VoodooShader
 			} catch ( ... ) { 
 				(this->mFmtObj) % ("Invalid operand");
 			}
+				
 			return (*this);
 		}
 
@@ -87,6 +80,7 @@ namespace VoodooShader
 			} catch ( ... ) { 
 				(this->mFmtObj) % ("Invalid operand");
 			}
+				
 			return (*this);
 		}
 
@@ -100,8 +94,6 @@ namespace VoodooShader
 	private:
 		Logger * mParent;
 		boost::format mFmtObj;
-
-		Logger_Status mState;
 	};
 
 	/**

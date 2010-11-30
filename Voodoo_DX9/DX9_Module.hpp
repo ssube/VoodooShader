@@ -1,10 +1,20 @@
 
+#ifndef VOODOO_DX9_MODULE_HPP
+#define VOODOO_DX9_MODULE_HPP
+
+#define VOODOO_IMPORT
 #include "../Framework/VoodooFramework.hpp"
 #pragma comment(lib, "../Debug/VoodooFramework.lib")
 
 #include "D3D9.h"
 #include "Cg/cgD3D9.h"
 #pragma comment(lib, "cgD3D9.lib")
+
+#ifndef VOODOO_IMPORT_DX9
+#	define VOODOO_API_DX9 __declspec(dllexport)
+#else
+#	define VOODOO_API_DX9 __declspec(dllimport)
+#endif
 
 namespace VoodooShader
 {
@@ -21,7 +31,7 @@ namespace VoodooShader
 
 		LPDIRECT3DVERTEXBUFFER9 FSQuadVerts;
 
-		class VOODOO_API Adapter
+		class VOODOO_API_DX9 Adapter
 			: VoodooShader::Adapter
 		{
 
@@ -48,3 +58,5 @@ namespace VoodooShader
 		};
 	};
 }
+
+#endif /*VOODOO_DX9_MODULE_HPP*/
