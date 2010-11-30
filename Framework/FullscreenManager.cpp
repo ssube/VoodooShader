@@ -7,9 +7,6 @@
 #include "Exception.hpp"
 #include "Core.hpp"
 
-using namespace System;
-using namespace System::Xml;
-
 namespace VoodooShader
 {
 	FullscreenManager::FullscreenManager(Core * parent)
