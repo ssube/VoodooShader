@@ -2118,7 +2118,7 @@ public:
 #ifdef _DEBUG
 		const char * textureType = 
 			VoodooShader::Converter::ToString(
-			VoodooShader::DirectX9::DX9_Converter::FromD3DFMT(pp.BackBufferFormat)
+			VoodooShader::DirectX9::DX9_Converter::ToTextureFormat(pp.BackBufferFormat)
 			);
 		VoodooCore->GetLog()->Format("Voodoo GEM: Backbuffer parameters: %d by %d (%d buffers), TF: %s.\n")
 			.With(pp.BackBufferWidth).With(pp.BackBufferHeight).With(pp.BackBufferCount)

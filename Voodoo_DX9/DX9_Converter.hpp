@@ -11,7 +11,7 @@ namespace VoodooShader
 		class VOODOO_API_DX9 DX9_Converter
 		{
 		public:
-			static inline D3DFORMAT ToD3DFMT(TextureFormat tf)
+			static inline D3DFORMAT ToD3DFormat(TextureFormat tf)
 			{
 				switch ( tf )
 				{
@@ -39,7 +39,7 @@ namespace VoodooShader
 				}
 			}
 
-			static inline TextureFormat FromD3DFMT(D3DFORMAT tf)
+			static inline TextureFormat ToTextureFormat(D3DFORMAT tf)
 			{
 				switch ( tf )
 				{

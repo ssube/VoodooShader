@@ -174,9 +174,12 @@ namespace VoodooShader
 		}
 
 		// Load the programs
-		PassRef mPass(this);
 		Adapter * adapter = mCore->GetAdapter();
-		if ( !adapter->Prepare(mPass) )
+		PassRef mPass(this);
+
+		bool prepResults = adapter->Prepare(mPass);
+
+		if ( prepResults )
 		{
 			Throw("Voodoo Core: Failed to prepare pass for use.", mCore);
 		}
