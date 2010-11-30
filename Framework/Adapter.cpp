@@ -3,7 +3,7 @@
 
 namespace VoodooShader
 {
-	bool Prepare(PassRef pass)
+	bool Adapter::Prepare(PassRef pass)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 		return false;
@@ -27,6 +27,12 @@ namespace VoodooShader
 	void Adapter::Apply(ParameterRef param)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
+	}
+
+	bool Adapter::ConnectTexture(ParameterRef param, TextureRef texture)
+	{
+		Throw("Voodoo Core: Adapter function called.", NULL);
+		return false;
 	}
 
 	TextureRef Adapter::CreateTexture(std::string name, size_t width, size_t height, size_t depth, 

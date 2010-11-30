@@ -16,6 +16,11 @@ namespace VoodooShader
 			return mTextureObject;
 		};
 
+		inline std::string Name()
+		{
+			return mName;
+		};
+
 	private:
 		std::string mName;
 		void * mTextureObject;
@@ -32,7 +37,7 @@ namespace VoodooShader
  * render-target or copied to and from.
  *
  * <table>
- *	<tr><th>Voodoo Format</th>	<th>DirectX Format</th>		<th>OpenGL Format</th>	<th>RT/Copy</td>	</tr>
+ *	<tr><th>Voodoo Format</th>	<th>DirectX Format</th>		<th>OpenGL Format</th>	<th>RT/Copy</th>	</tr>
  *	<tr><td>Unknown</td>		<td>D3DFMT_UNKNOWN</td>		<td>(unknown)</td>		<td>No</td>			</tr>
  *	<tr><td>RGB5</td>			<td>D3DFMT_X1R5G5B5</td>	<td>GL_RGB5</td>		<td>Yes</td>		</tr>
  *	<tr><td>RGB5A1</td>			<td>D3DFMT_A1R5G5B5</td>	<td>GL_RGB5_A1</td>		<td>Yes</td>		</tr>

@@ -46,6 +46,9 @@ namespace VoodooShader
 			CGtype cgType = cgGetParameterType(cParam);
 			ParameterType type = Converter::ToParameterType(cgType);
 
+			ParameterRef param(new Parameter(this, cgGetParameterName(cParam), type));
+			this->mParameters.push_back(param);
+
 			// Branch on parameter general type
 			if ( ( type == PT_Sampler1D ) || ( type == PT_Sampler2D ) || ( type == PT_Sampler3D ) )
 			{
@@ -55,7 +58,13 @@ namespace VoodooShader
 				if ( texName )
 				{
 					TextureRef texture = mCore->GetTexture(texName);
-					//mCore->GetAdapter()->ConnectTexture()
+					if ( texture.get() )
+					{
+						mCore->GetAdapter()->ConnectTexture(param, texture);
+					} else {
+						// Need to create a texture
+						
+					}
 				}
 			}
 
@@ -91,9 +100,11 @@ namespace VoodooShader
 		}
 	}
 
-	Technique::Technique(Core * core, CGtechnique technique)
-		: mCore(core), mTechnique(technique)
+	Technique::Technique(ShaderRef shader, CGtechnique technique)
+		: mParent(shader), mTechnique(technique)
 	{
+		this->mCore = shader->GetCore();
+
 		mName = cgGetTechniqueName(technique);
 		this->SetupPasses();
 	}
@@ -122,7 +133,7 @@ namespace VoodooShader
 		while ( cgIsPass(cPass) )
 		{
 			// Insert the pass into the vector
-			PassRef pass = new Pass(mCore, cPass);
+			PassRef pass = new Pass(this, cPass);
 			const char * name = cgGetPassName(cPass);
 			mPasses.push_back(pass);
 
@@ -130,10 +141,11 @@ namespace VoodooShader
 		}
 	}
 
-	Pass::Pass(Core * core, CGpass pass)
-		: mCore(core), mPass(pass)
+	Pass::Pass(TechniqueRef tech, CGpass pass)
+		: mParent(tech), mPass(pass)
 	{
 		this->mName = cgGetPassName(pass);
+		this->mCore = tech->GetCore();
 
 		this->mVertexProgram = cgGetPassProgram(pass, CG_VERTEX_DOMAIN);
 		this->mFragmentProgram = cgGetPassProgram(pass, CG_FRAGMENT_DOMAIN);
@@ -147,19 +159,25 @@ namespace VoodooShader
 			{
 				const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
 				//! @todo Core::FindTexture needs added and implemented
-				//this->mTarget = core->FindTexture(targetName);
+				this->mTarget = mCore->GetTexture(targetName);
+
 				if ( !this->mTarget.get() )
 				{
-					core->GetLog()->Format("Voodoo Core: Effect %s, pass %s cannot find target %s.")
-						.With(cgGetEffectName(cgGetTechniqueEffect(cgGetPassTechnique(pass))))
-						.With(this->mName).With(targetName).Done();
+					mCore->GetLog()->Format("Voodoo Core: Pass %s cannot find target %s.")
+						.With(this->Name()).With(targetName).Done();
 				}
 			} else {
 				//! @todo Fix this nested mess.
-				core->GetLog()->Format("Voodoo Core: Effect %s, pass %s has annotation \"target\" of invalid type.")
-					.With(cgGetEffectName(cgGetTechniqueEffect(cgGetPassTechnique(pass))))
-					.With(this->mName).Done();
+				mCore->GetLog()->Format("Voodoo Core: Pass %s has annotation \"target\" of invalid type.")
+					.With(this->Name()).Done();
 			}
+		}
+
+		// Load the programs
+		Adapter * adapter = mCore->GetAdapter();
+		if ( !adapter->Prepare(this) )
+		{
+			Throw("Voodoo Core: Failed to prepare pass for use.", mCore);
 		}
 	}
 

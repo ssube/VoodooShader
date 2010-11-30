@@ -10,7 +10,7 @@ namespace VoodooShader
 	class VOODOO_API Parameter
 	{
 	public:
-		Parameter(Core * parent, String name, ParameterType type);
+		Parameter(ShaderRef parent, String name, ParameterType type = PT_Unknown);
 
 		/**
 		 * Binds two parameters, forcing their values to be identical. This should
@@ -19,11 +19,15 @@ namespace VoodooShader
 		 *
 		 * @warning This <em>cannot</em> be used to bind one effect's parameter to
 		 *		another. It can only be used to bind effect parameters to virtual
-		 *		or global parameters.
+		 *		or global parameters. If this is called on a non-virtual parameter,
+		 *		it will throw.
 		 */
-		void Link(ParameterRef param);
+		void Attach(ParameterRef param);
 
 		CGparameter Param(void);
+
+		std::string Name();
+
 		ParameterType Type(void);
 		ParameterCategory Category(void);
 
@@ -50,6 +54,8 @@ namespace VoodooShader
 		};
 
 	private:
+		ShaderRef mParent;
+
 		bool mVirtual;
 		CGparameter mParam;
 		ParameterType mType;

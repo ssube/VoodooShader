@@ -16,13 +16,6 @@ namespace VoodooShader
 		: mParent(parent) 
 	{
 		mShaders.clear();
-
-		System::Xml::XmlDocument ^ n = gcnew XmlDocument();
-		Xml::XmlNode ^ dt = n->DocumentType;
-		System::String ^ val = gcnew System::String(dt->Value);
-
-		System::IntPtr i = System::Runtime::InteropServices::Marshal::StringToBSTR(val);
-		parent->GetLog()->Log((const char*)i);
 	};
 
 	size_t FullscreenManager::Add(Shader * shader, int position)

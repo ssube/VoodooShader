@@ -102,15 +102,25 @@ namespace VoodooShader
 		{
 			// Both should be loaded and valid, if prepare was called
 			HRESULT hr = cgD3D9BindProgram(pass->VertexProgram());
-			hr &= cgD3D9BindProgram(pass->FragmentProgram());
 
 			if ( !SUCCEEDED(hr) )
 			{
-				this->mCore->GetLog()->Format("Voodoo DX9: Error binding programs from '%s': %s.\n")
+				this->mCore->GetLog()->Format("Voodoo DX9: Error binding vertex program from '%s': %s.\n")
 					.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
-			} else {
-				this->mDevice->SetVertexShader(NULL);
-				this->mDevice->SetPixelShader(NULL);
+
+				return;
+			}
+
+			hr = cgD3D9BindProgram(pass->FragmentProgram());
+
+			if ( !SUCCEEDED(hr) )
+			{
+				this->mCore->GetLog()->Format("Voodoo DX9: Error binding fragment program from '%s': %s.\n")
+					.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+
+				cgD3D9UnbindProgram(pass->VertexProgram());
+
+				return;
 			}
 		}
 
@@ -165,6 +175,9 @@ namespace VoodooShader
 				IDirect3DTexture9 * texObj = (IDirect3DTexture9 *)texture->Get();
 				CGparameter texParam = param->Param();
 				cgD3D9SetTextureParameter(texParam, texObj);
+				mCore->GetLog()->Format("Voodoo DX9: Bound texture %s to parameter %s.\n")
+					.With(texture->Name()).With(param->Name()).Done();
+				return true;
 			} else {
 				Throw("Voodoo DX9: Invalid binding attempt, parameter is not a sampler.\n", this->mCore);
 				return false;

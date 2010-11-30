@@ -31,7 +31,7 @@ namespace VoodooShader
 		}
 
 		Reference(void * object)
-			: mObject(object)
+			: mObject(reinterpret_cast<T*>(object))
 		{
 			mCount = new int(1);
 		}
