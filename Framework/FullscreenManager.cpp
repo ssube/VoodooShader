@@ -1,16 +1,29 @@
 // Framework.cpp : Defines the exported functions for the DLL application.
 //
+// 
 
 #include "FullscreenManager.hpp"
 #include "Adapter.hpp"
 #include "Exception.hpp"
 #include "Core.hpp"
 
+using namespace System;
+using namespace System::Xml;
+
 namespace VoodooShader
 {
 	FullscreenManager::FullscreenManager(Core * parent)
 		: mParent(parent) 
-	{ };
+	{
+		mShaders.clear();
+
+		System::Xml::XmlDocument ^ n = gcnew XmlDocument();
+		Xml::XmlNode ^ dt = n->DocumentType;
+		System::String ^ val = gcnew System::String(dt->Value);
+
+		System::IntPtr i = System::Runtime::InteropServices::Marshal::StringToBSTR(val);
+		parent->GetLog()->Log((const char*)i);
+	};
 
 	size_t FullscreenManager::Add(Shader * shader, int position)
 	{
