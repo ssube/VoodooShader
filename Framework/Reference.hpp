@@ -6,7 +6,7 @@ namespace VoodooShader
 	/**
 	 * Simple reference-counter pointer class.
 	 *
-	 * @note This class is not yet thread-safe.
+	 * @note This class is not thread-safe at this point.
 	 */
 	template<typename T>
 	class Reference

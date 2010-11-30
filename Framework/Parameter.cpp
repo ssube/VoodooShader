@@ -46,6 +46,25 @@ namespace VoodooShader
 		return this->mType;
 	}
 
+	ParameterCategory Parameter::Category(void)
+	{
+		switch ( mType )
+		{
+		case PT_Float1:
+		case PT_Float2:
+		case PT_Float3:
+		case PT_Float4:
+			return PC_Float;
+		case PT_Sampler1D:
+		case PT_Sampler2D:
+		case PT_Sampler3D:
+			return PC_Sampler;
+		case PT_Unknown:
+		default:
+			return PC_Unknown;
+		}
+	}
+
 	void Parameter::Set(TextureRef newTex)
 	{
 		this->mValueTexture = newTex;

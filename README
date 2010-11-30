@@ -1,0 +1,136 @@
+
+	Voodoo Shader Framework
+
+	    Prototype Alpha
+
+
+ = Contents:
+ 1. Summary
+ 2. Installation
+  2.a. Core
+  2.b. GEM
+  2.c. NWShader
+ 3. Use
+ 4. Reporting Bugs
+ 5. Contact & Legal
+
+
+1. Summary
+
+The Voodoo Shader Framework is a system designed to add shader support to
+various games and programs and provide a single target for shader authors,
+with a full set of useful features.
+
+It uses a set of "adapters" to connect a single core with each target 
+application; each adapter specifies the exact connection details and 
+implementation. The core provides a single, unified and widely compatible
+base, providing unified and constant system for shaders to interface with.
+The framework uses many features available in the Cg language, including 
+compiling to both HLSL and GLSL (for OpenGL and DirectX compatibility), and 
+a clear and concise syntax for accessing game data and textures.
+
+2. Installation
+
+The Voodoo system requires two main steps for installing the core. After this,
+installing game adapters is made extremely simple.
+
+2.a. Core
+
+Installing the VSF core requires creating a directory with the appropriate
+binary and resource files. These are included in the archive package in a
+"bin/" directory. This must be placed in an accessible location, preferably
+on the computer (network shares may or may not work, this has not been tested).
+The bin directory must then be added to the system or user path environment
+variable, this provides simple access from any game directory.
+
+2.b. GEM
+
+Installing Voodoo/GEM (the Morrowind module) is done by adding the file
+"Voodoo_GEM.dll" to the VSF bin directory and placing the included "d3d8.dll"
+in the Morrowind installation directory. No other files need be placed in the
+Morrowind directory at this time, only the binding module (this will change in
+the future).
+
+2.c. NWShader
+
+Installing Voodoo/NWShader (the Neverwinter Nights module) will  be done by
+adding the file "Voodoo_NWS.dll" to the VSF bin directory and placing the
+included "dinput.dll" in the Neverwinter Nights installation directory. This
+module is not packaged with the current prototype release of Voodoo.
+
+3. Use
+
+Voodoo will automatically hook into the game on launch, if it is properly
+installed. The Voodoo runtime will create a comprehensive log file in the
+game directory. In the future, VSF will use a XML-based settings file to
+specify per-game configuration. The config file will be contained in the game
+directory, while external resources will be in the Voodoo directory.
+
+Debug builds will perform significant logging, potentially slowing the game
+down but providing much information. Voodoo debug modules may be used in place
+of traditional video API debugging, as they are capable of intercepting both
+DirectX and OpenGL calls and logging the times and parameters.
+
+4. Reporting Bugs
+
+Voodoo is a prototype (pre-alpha) library at this point. It undoubtedly has
+bugs. If you run into a bug, please go to http://www.voodooshader.com and
+report the bug on the forum or bug-tracker. This tracker will provide a single
+place to report and manage bugs for the Voodoo framework and all modules.
+
+5. Contact & Legal
+
+To contact the developer of the Voodoo project, you can use any of the
+following methods:
+
+	Email:
+		peachykeen@voodooshader.com
+		peachykeen@fliggerty.com
+		cx029a@live.com
+	Forums:
+		peachykeen at:
+			social.bioware.com
+			fliggerty.com
+			elderscrolls.com/forums
+	IRC:
+		peachykeen on:
+		  chatspike:
+			#morrowind
+			#oblivion
+			#elderscrolls
+			#tamriel
+		  freenode:
+			#ghf
+		  nwn2source:
+			#nwn2cr
+			#projectq
+	MSN:
+		cx029a@live.com
+	AIM:
+		cx029a
+	Skype:
+		pkpeachykeen
+
+
+
+Voodoo Shader Framework (c) 2010 by Sean "peachykeen" Sube, All Rights Reserved
+
+The Voodoo Shader Project, all associated binary or object files, source code,
+or other original work are the sole property of Sean Sube (peachykeen). All
+rights to this content are reserved. It may not be modified in any way,
+including but not limited to repackaging or changing code, under any 
+circumstances. No element of the project may be redistributed or made available
+on any website or service, by any means. This restricted license is intended to
+prevent unstable or work-in-progress copies from becoming mirrored by sites 
+that will not allow the developers to update them; this has occurred and 
+caused significant problems before.
+
+VSF will be under a restricted license until beta release, at which point it
+will be released under the CC-NC-BY-SA or GPL v2 license. The exact terms will
+be determined in the future, based on the dependencies used, their licenses,
+and which provides the most balanced protection and freedom for the project.
+
+VSF is in an unusual situation, providing support for many games. Because of
+the techniques it uses, the Voodoo system is not bound by the EULA of any game
+or application, and is solely the property of the developer(s) involved in the
+project. 

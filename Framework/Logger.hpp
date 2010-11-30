@@ -3,9 +3,8 @@
 
 	All source code,  binaries and  other original  content is 
 	     Copyright (c) 2010 by Sean Sube, all rights reserved.
-	Neither this  project nor  any portion may  be modified or
-	  distributed, or used for public or private demonstration
-	  or any other purpose without express written permission.
+	Neither this  project nor any portion of it may  be modified or distributed, or used for 
+	public or private demonstration or any other purpose without express written permission.
 \**************************************************************************/
 
 #pragma once
@@ -20,6 +19,14 @@
 
 namespace VoodooShader
 {
+	enum Logger_Status
+	{
+		LS_Unknown = 0,
+		LS_Ready   = 1,
+		LS_InProgress = 2,
+		LS_Max
+	};
+
 	// Forward-declare the Logger class so it can be used in log_format
 	class Logger;
 
@@ -93,6 +100,8 @@ namespace VoodooShader
 	private:
 		Logger * mParent;
 		boost::format mFmtObj;
+
+		Logger_Status mState;
 	};
 
 	/**

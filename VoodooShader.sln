@@ -1,19 +1,21 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VoodooFramework", "Framework\Framework.vcproj", "{A5C09646-DA38-4869-82C3-11A66D706C43}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX9", "DX9_Module\DX9_Module.vcproj", "{758A3040-38D6-4573-8C1B-74B35ECCAA6E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX9", "Voodoo_DX9\Voodoo_DX9.vcproj", "{758A3040-38D6-4573-8C1B-74B35ECCAA6E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX89", "DX8_Module\DX8_Module.vcproj", "{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_GEM", "Voodoo_GEM\Voodoo_GEM.vcproj", "{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E} = {758A3040-38D6-4573-8C1B-74B35ECCAA6E}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DX8.9_Redirect", "DX8.9_Redirect\DX8.9_Redirect.vcproj", "{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_NWS", "Voodoo_NWS\Voodoo_NWS.vcproj", "{98903591-D205-49ED-AE60-44BDD620D16E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Debug|Win32.Build.0 = Debug|Win32
 		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Release|Win32.ActiveCfg = Release|Win32
 		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Release|Win32.Build.0 = Release|Win32
+		{98903591-D205-49ED-AE60-44BDD620D16E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{98903591-D205-49ED-AE60-44BDD620D16E}.Debug|Win32.Build.0 = Debug|Win32
+		{98903591-D205-49ED-AE60-44BDD620D16E}.Release|Win32.ActiveCfg = Release|Win32
+		{98903591-D205-49ED-AE60-44BDD620D16E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

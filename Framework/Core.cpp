@@ -9,9 +9,16 @@
 
 namespace VoodooShader
 {
+	//static Core * gCoreSingleton = NULL;
+
 	Core::Core(std::string logfile)
 		: mAdapter(NULL)
 	{
+		//if ( gCoreSingleton )
+		//{
+		//	Throw("Voodoo Core: Attempting to create core while one already exists.", gCoreSingleton);
+		//}
+
 		this->mLogger = new Logger(logfile.c_str());
 #ifdef _DEBUG
 		this->mLogger->SetBufferSize(0);
@@ -31,6 +38,8 @@ namespace VoodooShader
 		this->mManagerFS  = new FullscreenManager(this);
 		this->mManagerMat = new MaterialManager(this);
 
+		//gCoreSingleton = this;
+
 		this->mLogger->Log("Voodoo Core: Core started successfully.\n");
 	}
 
@@ -46,6 +55,8 @@ namespace VoodooShader
 		{
 			delete this->mLogger;
 		}
+
+		//gCoreSingleton = NULL;
 	}
 
 	CGcontext Core::GetCGContext()
@@ -127,6 +138,13 @@ namespace VoodooShader
 		if ( me )
 		{
 			me->mLogger->Format("Voodoo Core: CG error: %s\n").With(cgGetErrorString(error)).Done();
+
+			// Print any compiler errors or other details we can find
+			const char * listing = cgGetLastListing(me->mCGContext);
+			if ( listing )
+			{
+				me->mLogger->Format("Voodoo Core: CG listing: %s\n").With(listing).Done();
+			}
 		}
 	}
 }

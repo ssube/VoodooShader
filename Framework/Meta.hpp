@@ -34,7 +34,7 @@ namespace VoodooShader
 
 	class Converter;
 
-#define Throw(x, y) throw Exception(x, y, __FILE__, __FUNCTION__, __LINE__);
+#define Throw(msg, core) throw Exception(msg, core, __FILE__, __FUNCTION__, __LINE__);
 
 	typedef std::string String;
 
@@ -83,19 +83,19 @@ namespace VoodooShader
 	 */
 	enum TextureFormat
 	{
-		TF_Unknown = 0,
+		TF_Unknown = 0,		// Unknown texture format
 		// Backbuffer formats
-		TF_RGB5,
-		TF_RGBA1,
-		TF_RGB8,
-		TF_RGBA8,
-		TF_RGB10A2,
-		// Extended-depth texture formats
-		TF_RGBA16F,
-		TF_RGBA32F,
+		TF_RGB5,			// 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL)
+		TF_RGB5A1,			// 5 bit RGB, 1 bit alpha
+		TF_RGB8,			// 8 bit RGB (8 bit X in DX)
+		TF_RGBA8,			// 8 bit RGBA
+		TF_RGB10A2,			// 10 bit RGB, 2 bit A
+		// Float texture formats
+		TF_RGBA16F,			// Half-precision RGBA
+		TF_RGBA32F,			// Full-precision RGBA (float/single) 
 		// Depth-buffer formats
-		TF_D16,
-		TF_D32,
+		TF_D16,				// Half-precision depth (Z-buffer)
+		TF_D32,				// Full-precision depth (Z-buffer)
 		// Max
 		TF_Count
 	};
@@ -119,6 +119,15 @@ namespace VoodooShader
 		PT_Sampler3D,
 		// Max
 		PT_Count
+	};
+
+	enum ParameterCategory
+	{
+		PC_Unknown = 0,
+		PC_Float,
+		PC_Sampler,
+		// Max
+		PC_Count
 	};
 }
 

@@ -19,7 +19,8 @@ namespace VoodooShader
 	class VOODOO_API Adapter
 	{
 	public:
-		void Bind(PassRef shader);
+		bool Prepare(PassRef pass);
+		void Bind(PassRef pass);
 		void Unbind();
 
 		void DrawFSQuad();
@@ -27,9 +28,8 @@ namespace VoodooShader
 		void Apply(ParameterRef param);
 
 		bool ConnectTexture(ParameterRef param, TextureRef texture);
-
-		TextureRef CreateTexture(size_t width, size_t height, size_t depth, bool mipmaps,
-			TextureFormat format);
+		TextureRef CreateTexture(std::string name, size_t width, size_t height, size_t depth, 
+			bool mipmaps, TextureFormat format);
 
 		void HandleError(CGcontext context, CGerror error, void * core);
 	};

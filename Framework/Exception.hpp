@@ -16,6 +16,8 @@ namespace VoodooShader
 		Exception(const char * message, Core * core, char * file, char * function, int line);
 		Exception(std::string message, Core * core, char * file, char * function, int line);
 
+		std::string Message();
+
 		const Core * mCore;
 		const std::string mMessage;
 		const char * mFile;

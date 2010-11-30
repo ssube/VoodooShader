@@ -139,6 +139,13 @@ namespace VoodooShader
 
 	VOODOO_API Formatter & Formatter::Record(string fmtString)
 	{
+		if( mState )
+		{
+			this->Done();
+		} else {
+			mState = LS_InProgress;
+		}
+
 		this->mFmtObj.parse(fmtString);
 		return (*this);
 	}
@@ -146,6 +153,8 @@ namespace VoodooShader
 	VOODOO_API void Formatter::Done(bool timestamp)
 	{
 		this->mParent->Log(this->mFmtObj.str(), timestamp);
+
+		mState = LS_Ready;
 	}
 
 	VOODOO_API Formatter::Formatter(Logger * parent)

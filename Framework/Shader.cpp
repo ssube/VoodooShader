@@ -15,6 +15,7 @@ namespace VoodooShader
 		if ( !cgIsEffect(this->mEffect) )
 		{
 			Throw("Voodoo Core: Could not create shader.", this->mCore);
+			//return;
 		}
 
 		this->SetupTechniques();
@@ -43,7 +44,7 @@ namespace VoodooShader
 		while ( cgIsParameter(cParam) )
 		{
 			CGtype cgType = cgGetParameterType(cParam);
-			ParameterType type = Converter::FromCGType(cgType);
+			ParameterType type = Converter::ToParameterType(cgType);
 
 			// Branch on parameter general type
 			if ( ( type == PT_Sampler1D ) || ( type == PT_Sampler2D ) || ( type == PT_Sampler3D ) )
@@ -75,7 +76,8 @@ namespace VoodooShader
 			{
 				// Insert the technique into the map
 				TechniqueRef tech = new Technique(mCore, cTech);
-				const char * name = cgGetTechniqueName(cTech);
+				const char * nameC = cgGetTechniqueName(cTech);
+				std::string name(nameC);
 				mTechniques[name] = tech;
 
 				// The first valid technique is the default one

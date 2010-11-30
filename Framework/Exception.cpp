@@ -11,7 +11,7 @@ namespace VoodooShader
 		if ( core )
 		{
 			Logger * Log = core->GetLog();
-			Log->Format("Voodoo Exception in %s at %s (%d): %s")
+			Log->Format("Voodoo Core: Exception in %s at %s (%d): %s\n")
 				.With(file).With(function).With(line).With(message).Done();
 			Log->Dump();
 		}
@@ -24,9 +24,25 @@ namespace VoodooShader
 		if ( core )
 		{
 			Logger * Log = core->GetLog();
-			Log->Format("Voodoo Exception in %s at %s (%d): %s")
+			Log->Format("Voodoo Core: Exception in %s at %s (%d): %s\n")
 				.With(file).With(function).With(line).With(message).Done();
 			Log->Dump();
 		}
+	}
+
+	std::string Exception::Message()
+	{
+		char buffer[16];
+		_itoa_s(mLine, buffer, 16, 10);
+
+		std::string msg = "Voodoo Exception in ";
+		msg += mFile;
+		msg += " at ";
+		msg += mFunction;
+		msg += " (";
+		msg += buffer;
+		msg += "): ";
+		msg += mMessage;
+		return msg;
 	}
 }

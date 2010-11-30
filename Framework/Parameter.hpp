@@ -25,6 +25,7 @@ namespace VoodooShader
 
 		CGparameter Param(void);
 		ParameterType Type(void);
+		ParameterCategory Category(void);
 
 		void Set(TextureRef newTex);
 		void Set(float newX);
@@ -37,6 +38,16 @@ namespace VoodooShader
 		void Get(float & paramX, float & paramY);
 		void Get(float & paramX, float & paramY, float & paramZ);
 		void Get(float & paramX, float & paramY, float & paramZ, float & paramW);
+
+		inline TextureRef GetTexture()
+		{
+			return mValueTexture;
+		};
+
+		inline float * GetFloat()
+		{
+			return mValueFloat;
+		};
 
 	private:
 		bool mVirtual;

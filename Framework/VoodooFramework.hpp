@@ -12,6 +12,7 @@
 #include "Includes.hpp"
 
 #include "Adapter.hpp"
+#include "Converter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
 #include "FullscreenManager.hpp"
@@ -19,5 +20,6 @@
 #include "MaterialManager.hpp"
 #include "Meta.hpp"
 #include "Parameter.hpp"
+#include "Reference.hpp"
 #include "Shader.hpp"
 #include "Texture.hpp"
