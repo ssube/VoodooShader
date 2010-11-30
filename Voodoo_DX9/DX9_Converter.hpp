@@ -8,7 +8,7 @@ namespace VoodooShader
 {
 	namespace DirectX9
 	{
-		VOODOO_API_DX9 class DX9_Converter
+		class VOODOO_API_DX9 DX9_Converter
 		{
 		public:
 			static inline D3DFORMAT ToD3DFMT(TextureFormat tf)
