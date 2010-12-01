@@ -23,16 +23,35 @@ namespace VoodooShader
 	{
 	public:
 		/**
-		 * Create a new Voodoo Core.
-		 *
+		 * Create a new Voodoo Core and associated Cg context.
+		 * 		 
 		 * @param logfile The filename for this Core's log (will be used by most managers and
 		 *			connected adapters).
 		 * @return A reference to the new core.
+		 *
+		 * @note Avoid using more than one core at any point in time. I'm not entirely sure how
+		 * 		 well the Cg runtime handles this. For most games, a single render context is used,
+		 * 		 so no more than one adapter and core should be necessary.
+		 * @todo Test multi-core/multi-adapter systems. If anyone has info or knows of a game/app
+		 * 		 that uses multiple D3D/OGL render contexts, please let me know.
 		 */
 		Core(std::string logfile = "Voodoo.log");
 		~Core();
 
+		/**
+		 * Retrieve the Cg context associated with this Core.
+		 * 
+		 * @note Each Voodoo Core is associated with exactly one Cg context (Voodoo acts as an OO-
+		 * 		 wrapper around Cg with enhanced features).
+		 */
 		CGcontext GetCGContext();
+
+		/**
+		 * Retrieve the logger object associated with this core.    
+		 * 
+		 * @note If this Core is valid, this will always return a valid Logger attached to an open
+		 * 		 log file. If it doesn't, you have bigger problems to worry about than not logging.        
+		 */
 		Logger * GetLog();
 
 		/**
@@ -50,6 +69,9 @@ namespace VoodooShader
 		 */
 		Adapter * GetAdapter();
 
+		/**
+		 * Create a new shader effect from a file.            
+		 */
 		ShaderRef CreateShader(std::string filename, const char ** args);
 		TextureRef CreateTexture(std::string name, void * data);
 
