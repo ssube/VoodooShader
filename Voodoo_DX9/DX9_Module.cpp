@@ -75,22 +75,28 @@ namespace VoodooShader
 			CGprogram vertProg = pass->VertexProgram();
 			CGprogram fragProg = pass->FragmentProgram();
 
-			HRESULT hr;
+			HRESULT hr = S_OK;
 
-			hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
-			if ( !SUCCEEDED(hr) )
+			if ( cgIsProgram(vertProg) )
 			{
-				this->mCore->GetLog()->Format("Voodoo DX9: Error loading vertex program from '%s': %s.\n")
-					.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
-				return false;
+				hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
+				if ( !SUCCEEDED(hr) )
+				{
+					this->mCore->GetLog()->Format("Voodoo DX9: Error loading vertex program from '%s': %s.\n")
+						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					return false;
+				}
 			}
 
-			hr = cgD3D9LoadProgram(fragProg, CG_TRUE, 0);
-			if ( !SUCCEEDED(hr) )
+			if ( cgIsProgram(fragProg) )
 			{
-				this->mCore->GetLog()->Format("Voodoo DX9: Error loading fragment program from '%s': %s.\n")
-					.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
-				return false;
+				hr = cgD3D9LoadProgram(fragProg, CG_TRUE, 0);
+				if ( !SUCCEEDED(hr) )
+				{
+					this->mCore->GetLog()->Format("Voodoo DX9: Error loading fragment program from '%s': %s.\n")
+						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					return false;
+				}
 			}
 
 			this->mCore->GetLog()->Format("Voodoo DX9: Successfully loaded programs from '%s'.\n")
@@ -100,34 +106,57 @@ namespace VoodooShader
 
 		VOODOO_API_DX9 void Adapter::Bind(PassRef pass)
 		{
-			// Both should be loaded and valid, if prepare was called
-			HRESULT hr = cgD3D9BindProgram(pass->VertexProgram());
+			// Both should be loaded and valid (if they exist and prepare was called)
+			CGprogram vertProg = pass->VertexProgram();
+			CGprogram fragProg = pass->FragmentProgram();
 
-			if ( !SUCCEEDED(hr) )
+			HRESULT hr;
+
+			if ( cgIsProgram(vertProg) )
 			{
-				this->mCore->GetLog()->Format("Voodoo DX9: Error binding vertex program from '%s': %s.\n")
-					.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+				hr = cgD3D9BindProgram(pass->VertexProgram());
 
-				return;
+				if ( !SUCCEEDED(hr) )
+				{
+					this->mCore->GetLog()->Format("Voodoo DX9: Error binding vertex program from '%s': %s.\n")
+						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					return;
+				} else {
+					mBoundVP = vertProg;
+				}
 			}
 
-			hr = cgD3D9BindProgram(pass->FragmentProgram());
-
-			if ( !SUCCEEDED(hr) )
+			if ( cgIsProgram(fragProg) )
 			{
-				this->mCore->GetLog()->Format("Voodoo DX9: Error binding fragment program from '%s': %s.\n")
-					.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+				hr = cgD3D9BindProgram(pass->FragmentProgram());
 
-				cgD3D9UnbindProgram(pass->VertexProgram());
+				if ( !SUCCEEDED(hr) )
+				{
+					this->mCore->GetLog()->Format("Voodoo DX9: Error binding fragment program from '%s': %s.\n")
+						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
 
-				return;
+					if ( cgIsProgram(vertProg) )
+					{
+						cgD3D9UnbindProgram(pass->VertexProgram());
+					}
+					return;
+				} else {
+					mBoundFP = fragProg;
+				}
 			}
 		}
 
 		VOODOO_API_DX9 void Adapter::Unbind()
 		{
-			this->mDevice->SetVertexShader(NULL);
-			this->mDevice->SetPixelShader(NULL);
+			if ( cgIsProgram(mBoundVP) )
+			{
+				cgD3D9UnbindProgram(mBoundVP);
+			}
+
+			if ( cgIsProgram(mBoundFP) )
+			{
+				cgD3D9UnbindProgram(mBoundFP);
+			}
 		}
 
 		VOODOO_API_DX9 void Adapter::DrawFSQuad()
