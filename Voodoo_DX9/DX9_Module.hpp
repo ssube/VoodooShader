@@ -38,13 +38,13 @@ namespace VoodooShader
 		public:
 			Adapter(Core * core, IDirect3DDevice9 * device);
 
-			bool Prepare(PassRef pass);
-			void Bind(PassRef shader);
-			void Unbind();
+			bool PreparePass(PassRef pass);
+			void BindPass(PassRef shader);
+			void UnbindPass();
 
-			void DrawFSQuad();
+			void DrawQuad(bool fullscreen = true, float * coords = NULL);
 
-			void Apply(ParameterRef param);
+			void ApplyParameter(ParameterRef param);
 
 			bool ConnectTexture(ParameterRef param, TextureRef texture);
 			TextureRef CreateTexture(std::string name, size_t width, size_t height, size_t depth, 

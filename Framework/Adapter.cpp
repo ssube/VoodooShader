@@ -3,28 +3,28 @@
 
 namespace VoodooShader
 {
-	bool Adapter::Prepare(PassRef pass)
+	bool Adapter::PreparePass(PassRef pass)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 		return false;
 	}
 
-	void Adapter::Bind(PassRef pass)
+	void Adapter::BindPass(PassRef pass)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 	}
 
-	void Adapter::Unbind()
+	void Adapter::UnbindPass()
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 	}
 
-	void Adapter::DrawFSQuad()
+	void Adapter::DrawQuad(bool fullscreen, float * coords)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 	}
 
-	void Adapter::Apply(ParameterRef param)
+	void Adapter::ApplyParameter(ParameterRef param)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 	}

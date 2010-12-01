@@ -63,17 +63,17 @@ namespace VoodooShader
 			//for ( size_t passNum = 0; passNum < tech->NumPasses(); ++passNum )
 			//{
 				PassRef pass = tech->GetPass(0);
-				adapter->Bind(pass);
+				adapter->BindPass(pass);
 			//	adapter->DrawFSQuad();
 			//}
-			adapter->Bind(pass);
+			adapter->BindPass(pass);
 			this->mBound = shader;		
 		} else {
 			if ( this->mDefault.get() )
 			{
 				TechniqueRef tech = this->mDefault->GetDefaultTechnique();
 				PassRef pass = tech->GetPass(0);
-				adapter->Bind(pass);
+				adapter->BindPass(pass);
 				this->mBound = this->mDefault;
 			} else {
 				Throw("Voodoo Core: Could not find material to bind.", this->mParent);
@@ -92,7 +92,7 @@ namespace VoodooShader
 				Throw("Voodoo Core: Attempted to unbind material with no adapter set.", this->mParent);
 			}
 
-			adapter->Unbind();
+			adapter->UnbindPass();
 			this->mBound = NULL;
 		}
 	}

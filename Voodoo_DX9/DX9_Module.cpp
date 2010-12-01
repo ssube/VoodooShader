@@ -70,7 +70,7 @@ namespace VoodooShader
 			FSQuadVerts->Unlock();
 		}
 
-		VOODOO_API_DX9 bool Adapter::Prepare(PassRef pass)
+		VOODOO_API_DX9 bool Adapter::PreparePass(PassRef pass)
 		{
 			CGprogram vertProg = pass->VertexProgram();
 			CGprogram fragProg = pass->FragmentProgram();
@@ -104,7 +104,7 @@ namespace VoodooShader
 			return true;
 		}
 
-		VOODOO_API_DX9 void Adapter::Bind(PassRef pass)
+		VOODOO_API_DX9 void Adapter::BindPass(PassRef pass)
 		{
 			// Both should be loaded and valid (if they exist and prepare was called)
 			CGprogram vertProg = pass->VertexProgram();
@@ -146,7 +146,7 @@ namespace VoodooShader
 			}
 		}
 
-		VOODOO_API_DX9 void Adapter::Unbind()
+		VOODOO_API_DX9 void Adapter::UnbindPass()
 		{
 			if ( cgIsProgram(mBoundVP) )
 			{
@@ -159,30 +159,33 @@ namespace VoodooShader
 			}
 		}
 
-		VOODOO_API_DX9 void Adapter::DrawFSQuad()
+		VOODOO_API_DX9 void Adapter::DrawQuad(bool fullscreen, float * coords)
 		{
-			IDirect3DVertexBuffer9 * sourceBuffer;
-			UINT sourceOffset, sourceStride;
-			DWORD sourceFVF;
-
-			this->mDevice->GetStreamSource(0, &sourceBuffer, &sourceOffset, &sourceStride);
-			this->mDevice->GetFVF(&sourceFVF);
-
-			this->mDevice->SetStreamSource(0, FSQuadVerts, 0, sizeof(FSVert));
-			this->mDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
-
-			HRESULT hr = this->mDevice->BeginScene();
-			if ( SUCCEEDED(hr) )
+			if ( fullscreen )
 			{
-				this->mDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2); 
-				this->mDevice->EndScene();
+				IDirect3DVertexBuffer9 * sourceBuffer;
+				UINT sourceOffset, sourceStride;
+				DWORD sourceFVF;
+
+				this->mDevice->GetStreamSource(0, &sourceBuffer, &sourceOffset, &sourceStride);
+				this->mDevice->GetFVF(&sourceFVF);
+
+				this->mDevice->SetStreamSource(0, FSQuadVerts, 0, sizeof(FSVert));
+				this->mDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
+
+				HRESULT hr = this->mDevice->BeginScene();
+				if ( SUCCEEDED(hr) )
+				{
+					this->mDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2); 
+					this->mDevice->EndScene();
+				}
+
+				this->mDevice->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);
+				this->mDevice->SetFVF(sourceFVF);
 			}
-			
-			this->mDevice->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);
-			this->mDevice->SetFVF(sourceFVF);
 		}
 
-		VOODOO_API_DX9 void Adapter::Apply(ParameterRef param)
+		VOODOO_API_DX9 void Adapter::ApplyParameter(ParameterRef param)
 		{
 			switch ( param->Category() )
 			{

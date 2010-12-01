@@ -74,8 +74,8 @@ namespace VoodooShader
 			for ( size_t passNum = 0; passNum < tech->NumPasses(); ++passNum )
 			{
 				PassRef pass = tech->GetPass(passNum);
-				adapter->Bind(pass);
-				adapter->DrawFSQuad();
+				adapter->BindPass(pass);
+				adapter->DrawQuad();
 			}
 		}
 	}

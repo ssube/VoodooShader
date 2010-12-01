@@ -177,7 +177,7 @@ namespace VoodooShader
 		Adapter * adapter = mCore->GetAdapter();
 		PassRef mPass(this);
 
-		bool prepResults = adapter->Prepare(mPass);
+		bool prepResults = adapter->PreparePass(mPass);
 
 		if ( prepResults )
 		{
