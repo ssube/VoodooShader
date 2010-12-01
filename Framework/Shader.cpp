@@ -84,7 +84,7 @@ namespace VoodooShader
 			if ( valid == CG_TRUE )
 			{
 				// Insert the technique into the map
-				TechniqueRef tech = new Technique(mCore, cTech);
+				TechniqueRef tech = new Technique(this, cTech);
 				const char * nameC = cgGetTechniqueName(cTech);
 				std::string name(nameC);
 				mTechniques[name] = tech;

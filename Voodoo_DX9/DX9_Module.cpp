@@ -70,7 +70,7 @@ namespace VoodooShader
 			FSQuadVerts->Unlock();
 		}
 
-		/*VOODOO_API_DX9 bool Adapter::Prepare(PassRef pass)
+		VOODOO_API_DX9 bool Adapter::Prepare(PassRef pass)
 		{
 			CGprogram vertProg = pass->VertexProgram();
 			CGprogram fragProg = pass->FragmentProgram();
@@ -96,7 +96,7 @@ namespace VoodooShader
 			this->mCore->GetLog()->Format("Voodoo DX9: Successfully loaded programs from '%s'.\n")
 				.With(pass->Name()).Done();
 			return true;
-		}*/
+		}
 
 		VOODOO_API_DX9 void Adapter::Bind(PassRef pass)
 		{
