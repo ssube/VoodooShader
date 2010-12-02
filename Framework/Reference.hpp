@@ -104,6 +104,11 @@ namespace VoodooShader
 			return mObject;
 		}
 
+		int count()
+		{
+			return (*mCount);
+		}
+
 		template<typename U, typename V>
 		friend bool operator<(const Reference<U> & me, const Reference<V> & other);
 
@@ -113,7 +118,7 @@ namespace VoodooShader
 
 		void release()
 		{
-			if ( mCount )
+			if ( mObject )
 			{
 				--(*mCount);
 

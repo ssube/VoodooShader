@@ -75,7 +75,7 @@ namespace VoodooShader
 			FSQuadVerts->Unlock();
 		}
 
-		bool Adapter::PreparePass(PassRef pass)
+		bool Adapter::LoadPass(PassRef pass)
 		{
 			CGprogram vertProg = pass->VertexProgram();
 			CGprogram fragProg = pass->FragmentProgram();

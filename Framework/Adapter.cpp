@@ -1,9 +1,12 @@
 
 #include "Adapter.hpp"
 
+#include "Core.hpp"
+#include "Exception.hpp"
+
 namespace VoodooShader
 {
-	bool Adapter::PreparePass(PassRef pass)
+	bool Adapter::LoadPass(PassRef pass)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 		return false;

@@ -2082,12 +2082,13 @@ public:
 		backbuffer = VoodooDX9->CreateTexture(
 			"backbuffer", pp.BackBufferWidth, pp.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
 
-		/*try
+		VoodooShader::ShaderRef a;
+		try
 		{
-			VoodooShader::ShaderRef a = VoodooCore->CreateShader("J:\\Morrowind_clean\\test.cgfx", NULL);
+			a = VoodooCore->CreateShader("J:\\Morrowind_clean\\test.cgfx", NULL);
 		} catch ( VoodooShader::Exception & exc ) {
 			VoodooCore->GetLog()->Log("Voodoo GEM: Error compiling shader.\n");
-		}*/
+		}
 
 		return D3D_OK;
 	}

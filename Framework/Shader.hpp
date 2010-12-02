@@ -66,11 +66,14 @@ namespace VoodooShader
 	class VOODOO_API Technique
 	{
 	public:
-		Technique(ShaderRef shader, CGtechnique technique);
+		Technique(Shader * shader, CGtechnique technique);
 
 		inline std::string Name()
 		{
-			return (mParent->Name() + "::" + mName);
+			std::string name = mParent->Name();
+			name += "::";
+			name += mName;
+			return name;
 		};
 
 		inline Core * GetCore()
@@ -85,7 +88,7 @@ namespace VoodooShader
 		void SetupPasses();
 
 		Core * mCore;
-		ShaderRef mParent;
+		Shader * mParent;
 		std::string mName;
 		PassVector mPasses;
 		CGtechnique mTechnique;
@@ -94,12 +97,14 @@ namespace VoodooShader
 	class VOODOO_API Pass
 	{
 	public:
-		Pass(TechniqueRef tech, CGpass pass);
-
+		Pass(Technique * tech, CGpass pass);
 
 		inline std::string Name()
 		{
-			return (mParent->Name() + "::" + mName);
+			std::string name = mParent->Name();
+			name += "::";
+			name += mName;
+			return name;
 		};
 
 		inline Core * GetCore()
@@ -115,7 +120,7 @@ namespace VoodooShader
 
 	private:
 		Core * mCore;
-		TechniqueRef mParent;
+		Technique * mParent;
 
 		std::string mName;
 		TextureRef mTarget;

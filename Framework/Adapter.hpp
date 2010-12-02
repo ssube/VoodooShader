@@ -23,8 +23,6 @@
 #define VOODOO_ADAPTER_HPP
 
 #include "Meta.hpp"
-#include "Texture.hpp"
-#include "Core.hpp"
 
 namespace VoodooShader
 {
@@ -39,7 +37,7 @@ namespace VoodooShader
 	class VOODOO_API Adapter
 	{
 	public:
-		virtual bool PreparePass(PassRef pass);
+		virtual bool LoadPass(PassRef pass);
 		virtual void BindPass(PassRef pass);
 		virtual void UnbindPass();
 
