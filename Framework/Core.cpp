@@ -92,7 +92,7 @@ namespace VoodooShader
 		{
 			Throw("Voodoo Core: Trying to create a texture with a duplicate name.", this);
 		} else {
-			TextureRef texture(new Texture(name, data));
+			TextureRef texture = new Texture(name, data);
 			this->mTextures[name] = texture;
 			return texture;
 		}

@@ -7,7 +7,9 @@
 
 #include <d3d9.h>
 #include <d3dx9.h>
+#include <d3dx9tex.h>
 #pragma comment(lib, "D3D9.lib")
+#pragma comment(lib, "D3dx9.lib")
 
 static const char define[] = "#define API_DX";
 

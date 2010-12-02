@@ -74,6 +74,8 @@ namespace VoodooShader
 
 	void Shader::SetupTechniques()
 	{
+		ShaderRef thisShader(this);
+
 		this->mDefaultTechnique = NULL;
 		this->mTechniques.clear();
 
@@ -84,7 +86,7 @@ namespace VoodooShader
 			if ( valid == CG_TRUE )
 			{
 				// Insert the technique into the map
-				TechniqueRef tech = new Technique(this, cTech);
+				TechniqueRef tech = new Technique(thisShader, cTech);
 				const char * nameC = cgGetTechniqueName(cTech);
 				std::string name(nameC);
 				mTechniques[name] = tech;
@@ -127,15 +129,19 @@ namespace VoodooShader
 
 	void Technique::SetupPasses()
 	{
+		TechniqueRef thisTechnique(this);
+
 		this->mPasses.clear();
 
 		CGpass cPass = cgGetFirstPass(mTechnique);
+
 		while ( cgIsPass(cPass) )
 		{
 			// Insert the pass into the vector
-			PassRef pass = new Pass(this, cPass);
-			const char * name = cgGetPassName(cPass);
+			PassRef pass = new Pass(thisTechnique, cPass);
+
 			mPasses.push_back(pass);
+			//! @todo This causes segfaults, fix
 
 			cPass = cgGetNextPass(cPass);
 		}

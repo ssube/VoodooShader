@@ -36,6 +36,12 @@ static IDirect3DSurface9 *OldDepthSurface;
 
 static int tcount = 0;
 
+VoodooShader::TextureRef backbuffer;
+IDirect3DSurface9 * trueBBSurf;
+
+DWORD cycles = 0;
+DWORD shot = 0;
+
 
 struct RenderState {
 	DWORD FVF;
@@ -639,48 +645,44 @@ public:
 
 	HRESULT _stdcall Present(const RECT * a, const RECT * b, HWND c, const RGNDATA * d)
 	{
-		
-		// Shader draw and flip
-		//VoodooDX9->DrawFSQuad();
-		// Draw a custom quad to the screen
-		struct TLVertex
-		{
-			float x, y, z, rhw;
-			DWORD color;
-		};
-
-		TLVertex vertices[] =
-		{
-			{ -0.5f, -0.5f, 1.0f, 1.0f, 0xffff0000 },
-			{ 99.5f, -0.5f, 1.0f, 1.0f, 0xff00ff00 },
-			{ -0.5f, 99.5f, 1.0f, 1.0f, 0xff0000ff },
-			{ 99.5f, 99.5f, 1.0f, 1.0f, 0xffff0000 }
-		};
-
 		this->mRenderState.SaveState(this->RealDevice);
-		HRESULT overlay = RealDevice->BeginScene();
-		if ( SUCCEEDED(overlay) )
-		{
-			RealDevice->SetVertexShader(0);
-			RealDevice->SetPixelShader(0);
-			RealDevice->SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
-			RealDevice->SetRenderState(D3DRS_ZENABLE, false);
-			RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-			//RealDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
-			//RealDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_DIFFUSE);
-			//RealDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
-			//RealDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_DIFFUSE);
-			RealDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertices, sizeof(TLVertex));
-			RealDevice->SetRenderState(D3DRS_ZENABLE, true);
-			RealDevice->EndScene();
-		} else {
-			VoodooCore->GetLog()->Format("Voodoo GEM: Error starting overlay scene: %d\n").With(overlay).Done();
-		}
+
+		RealDevice->SetRenderTarget(0, trueBBSurf);
+
+		IDirect3DTexture9 * tex = (IDirect3DTexture9 *)backbuffer->Get();
+		RealDevice->SetTexture(0, tex);
+
+		RealDevice->SetVertexShader(0);
+		RealDevice->SetPixelShader(0);
+
+		RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_FALSE);
+		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_FALSE);
+		VoodooDX9->DrawQuad(true);
+		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_TRUE);
+		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+		RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_TRUE);
 
 		this->mRenderState.RestoreState(this->RealDevice);
 
-		//if (DepthTexture) RealDevice->SetDepthStencilSurface (DepthBuffer);
 		HRESULT hr = this->RealDevice->Present(a, b, c, d);
+
+		IDirect3DTexture9 * rtTex = (IDirect3DTexture9 *)backbuffer->Get();
+		IDirect3DSurface9 * rtSurf;
+		HRESULT hr2 = rtTex->GetSurfaceLevel(0, &rtSurf);
+		hr2 = RealDevice->SetRenderTarget(0, rtSurf);
+
+		++cycles;
+		if ( cycles == 100 )
+		{
+			char * name = new char[32];
+			sprintf(name, "GEM_%d.png", shot++);
+
+			D3DXSaveSurfaceToFileA(name, D3DXIFF_PNG, trueBBSurf, NULL, NULL);
+
+			cycles = 0;
+		}
+
 		return hr;
 	}
 
@@ -1523,10 +1525,7 @@ public:
 	HRESULT _stdcall CreateVertexShader(
 		const DWORD * pDeclaration, const DWORD * pFunction, DWORD * pHandle, DWORD Usage
 		)
-	{
-		// The Usage parameter is for legacy purposes only and is disregarded in actual behavior,
-		// as all vertex processing is done in hardware.
-		
+	{		
 		IDirect3DVertexShader9 * shader = NULL;
 		HRESULT hr = RealDevice->CreateVertexShader(pFunction, &shader);
 		if ( SUCCEEDED(hr) )
@@ -1538,52 +1537,18 @@ public:
 				.With(*pHandle).Done();
 			return hr;
 		} else {
-
+			VoodooCore->GetLog()->Format("Voodoo GEM: FakeDevice::CreateVertexShader called, shader %d failed.\n")
+				.With(*pHandle).Done();
 		}
 
-		VoodooCore->GetLog()->Log("Voodoo GEM: FakeDevice::CreateVertexShader called. Shader translation is not yet enabled.\n");
 		return D3D_OK;
-
-		/**c = (vShaderCount += 2);
-		ID3DXBuffer *ShaderData = NULL;
-		int i = 0;
-		switch (*c) {
-		case 9: ++i;
-		case 7: ++i;
-		case 5: ++i;
-		case 3: ++i;
-			char shaderfile [MAX_PATH];
-			sprintf_s (shaderfile, sizeof (shaderfile), "Data Files\\shaders\\water\\vs%i.txt", i);
-			D3DXAssembleShaderFromFileA (shaderfile, NULL, NULL, 0, &ShaderData, NULL);
-			break;
-		default:
-			//ERRORMSG ("Morrowind attempted to create a vertex shader which MGE did not expect");
-			/* ID3DXBuffer *output;
-			HANDLE h;
-			DWORD unused;
-			D3DXDisassembleShader (b, false, NULL, &output);
-			h = CreateFileA ("vout.txt", GENERIC_WRITE, 0, 0, CREATE_ALWAYS, 0, 0);
-			WriteFile (h, output->GetBufferPointer (), output->GetBufferSize () - 1, &unused, NULL);
-			CloseHandle (h);
-			D3DXAssembleShaderFromFileA ("vout.txt", NULL, NULL, 0, &ShaderData, &Errors); break;
-			break; * /
-		}*/
-		//HRESULT hr = RealDevice->CreateVertexShader ((DWORD *)ShaderData->GetBufferPointer (), &NewVShaders [(*c - 3) / 2]);
-		//HRESULT hr = RealDevice->CreateVertexShader(
-		//if (ShaderData) ShaderData->Release ();
 	}
 
 	//-----------------------------------------------------------------------------
 
 	HRESULT _stdcall SetVertexShader(DWORD a)
 	{		
-		VoodooCore->GetLog()->
-			Format("Voodoo GEM: FakeDevice::SetVertexShader called on shader %u. Shader translation is not yet enabled.\n")
-			.With(a).Done();
-
-		//this->CurrentVShader = shaderHandle;
-
-		//return D3D_OK;
+		CurrentVShader = a;
 
 		std::map<DWORD, IDirect3DVertexShader9*>::iterator shaderIter = mVShaders.find(a);
 		if ( shaderIter != mVShaders.end() )
@@ -1591,47 +1556,13 @@ public:
 			return RealDevice->SetVertexShader(shaderIter->second);
 		} else {
 			return RealDevice->SetFVF(a);
-		}
-
-		/*
-		switch (a) 
-		{
-		case 0:
-			RealDevice->SetVertexShader (NULL);
-		case 3:
-		case 5:
-		case 9:
-			RealDevice->SetVertexDeclaration (decl [0]);
-			break;
-		case 7:
-			RealDevice->SetVertexDeclaration (decl [1]);
-			break;
-		default:
-			//Save FVF setting
-			mRenderState.FVF = a;
-
-			CurrentVShader = 0;
-			RealDevice->SetVertexShader (NULL);
-			CurrentFVF = a;
-			return RealDevice->SetFVF (a);
-		}
-		return RealDevice->SetVertexShader (NewVShaders [(a - 3) / 2]);
-		*/
-		
+		}		
 	}
 
 	//-----------------------------------------------------------------------------
 
 	HRESULT _stdcall GetVertexShader(DWORD * a) 
-	{
-		VoodooCore->GetLog()->
-			Format("Voodoo GEM: FakeDevice::GetVertexShader called on shader %u. Shader translation is not yet enabled.\n")
-			.With(*a).Done();
-
-		//*shaderHandle = this->CurrentVShader;
-
-		//return D3D_OK;
-		
+	{		
 		if (CurrentVShader != 0) {
 			*a = CurrentVShader;
 			return D3D_OK;
@@ -1645,13 +1576,10 @@ public:
 
 	HRESULT _stdcall DeleteVertexShader(DWORD shaderHandle)
 	{
-		VoodooCore->GetLog()->
-			Format("Voodoo GEM: FakeDevice::DeleteVertexShader called on shader %d. Shader translation is not yet enabled.\n")
-			.With(shaderHandle).Done();
-
 		if ( shaderHandle == this->CurrentVShader )
 		{
 			VoodooCore->GetLog()->Log("Voodoo GEM: Attempted to delete currently bound shader. This may be an error.\n");
+		} else {
 		}
 
 		return D3D_OK;
@@ -2148,16 +2076,18 @@ public:
 		VoodooCore->GetLog()->Log("Voodoo GEM: Starting VoodooDX9 module...\n");
 		VoodooDX9 = new VoodooShader::DirectX9::Adapter(VoodooCore, RealDevice);
 
+		RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &trueBBSurf);
+
 		// Create backbuffer and scratch textures
-		VoodooShader::TextureRef backbuffer = VoodooDX9->CreateTexture(
+		backbuffer = VoodooDX9->CreateTexture(
 			"backbuffer", pp.BackBufferWidth, pp.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
 
-		try
+		/*try
 		{
 			VoodooShader::ShaderRef a = VoodooCore->CreateShader("J:\\Morrowind_clean\\test.cgfx", NULL);
 		} catch ( VoodooShader::Exception & exc ) {
 			VoodooCore->GetLog()->Log("Voodoo GEM: Error compiling shader.\n");
-		}
+		}*/
 
 		return D3D_OK;
 	}

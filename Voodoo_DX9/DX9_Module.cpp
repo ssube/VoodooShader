@@ -44,25 +44,30 @@ namespace VoodooShader
 			{
 				core->GetLog()->Log("Voodoo DX9: Errors setting Cg states.\n");
 			} else {
-				core->GetLog()->Log("Voodoo DX9: Cg states set succesfully.\n");
+				core->GetLog()->Log("Voodoo DX9: Cg states set successfully.\n");
 			}
 
-			this->mDevice->CreateVertexBuffer(4 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
+			this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
 				D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
 
-			FSVert g_Vertices[4];
-			g_Vertices[0].x = g_Vertices[0].y = 0.0f;
-			g_Vertices[2].x = g_Vertices[2].y = 1.5f;
-			g_Vertices[1].x = g_Vertices[3].y = 0.0f;
-			g_Vertices[3].x = g_Vertices[1].y = 1.5f;
+			FSVert g_Vertices[6];
+			g_Vertices[0].x =   0.0f; g_Vertices[0].y =   0.0f;
+			g_Vertices[1].x =   0.0f; g_Vertices[1].y = 512.0f;
+			g_Vertices[2].x = 512.0f; g_Vertices[2].y = 512.0f;
+			g_Vertices[3].x = 512.0f; g_Vertices[3].y = 512.0f;
+			g_Vertices[4].x = 512.0f; g_Vertices[4].y =   0.0f;
+			g_Vertices[5].x =   0.0f; g_Vertices[5].y =   0.0f;
 
-			g_Vertices[0].tu = g_Vertices[1].tu = 0.0f;
-			g_Vertices[0].tv = g_Vertices[3].tv = 0.0f;
-			g_Vertices[2].tu = g_Vertices[3].tu = 1.0f;
-			g_Vertices[2].tv = g_Vertices[1].tv = 1.0f;
+			g_Vertices[0].tu = 0.0f; g_Vertices[0].tv = 0.0f;
+			g_Vertices[1].tu = 0.0f; g_Vertices[1].tv = 1.0f;
+			g_Vertices[2].tu = 1.0f; g_Vertices[2].tv = 1.0f;
+			g_Vertices[3].tu = 1.0f; g_Vertices[3].tv = 1.0f;
+			g_Vertices[4].tu = 1.0f; g_Vertices[4].tv = 0.0f;
+			g_Vertices[5].tu = 0.0f; g_Vertices[5].tv = 0.0f;
 
-			g_Vertices[0].color = g_Vertices[2].color = 0xFF00F8FF;
-			g_Vertices[1].color = g_Vertices[3].color = 0xFF8F00FF;
+			g_Vertices[0].color = g_Vertices[5].color = 0xFF00F8FF;
+			g_Vertices[2].color = g_Vertices[3].color = 0xFF8F00FF;
+			g_Vertices[4].color = g_Vertices[1].color = 0xFFCFCFFF;
 
 			VOID * pVertices;
 			FSQuadVerts->Lock(0, sizeof(g_Vertices), &pVertices, 0);
@@ -176,7 +181,7 @@ namespace VoodooShader
 				HRESULT hr = this->mDevice->BeginScene();
 				if ( SUCCEEDED(hr) )
 				{
-					this->mDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2); 
+					this->mDevice->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 2); 
 					this->mDevice->EndScene();
 				}
 

@@ -113,13 +113,18 @@ namespace VoodooShader
 
 		void release()
 		{
-			--(*mCount);
-
-			if ( (*mCount) <= 0 )
+			if ( mCount )
 			{
-				// If the count has reached zero, destroy the counter and object.
-				delete mCount;
-				delete mObject;
+				--(*mCount);
+
+				if ( (*mCount) <= 0 )
+				{
+					// If the count has reached zero, destroy the counter and object.
+					delete mCount;
+					mCount = NULL;
+					delete mObject;
+					mObject = NULL;
+				}
 			}
 		}
 	};
