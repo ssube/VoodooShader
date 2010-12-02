@@ -32,7 +32,9 @@ namespace VoodooShader
 		this->mLocalTime = new tm();
 
 		this->Log("Logger created.\n");
-		this->Log(VOODOO_CORE_COPYRIGHT);
+
+		this->Log(VOODOO_CORE_VERSION_STRING, false);
+		this->Log(VOODOO_CORE_COPYRIGHT, false);
 	}
 
 	Logger::~Logger()
