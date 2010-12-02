@@ -37,13 +37,12 @@
 #define VOODOO_CORE_VERSION_MAJOR	0
 #define VOODOO_CORE_VERSION_MINOR	1
 #define VOODOO_CORE_VERSION_PATCH	0
-#define VOODOO_CORE_VERSION_BUILD	0001
 #define VOODOO_CORE_VERSION_GITREV	17
-#define VOODOO_CORE_VERSION_STRING	"Voodoo Shader Framework (version 0.1.0.0000; rev 17; "__TIMESTAMP__")"
+#define VOODOO_CORE_VERSION_STRING	"Voodoo Shader Framework (version 0.1.0; rev 17; "__TIMESTAMP__")"
 
 #define VOODOO_CORE_COPYRIGHT "\n\
 	Voodoo Shader Framework, Copyright (C) 2010 by Sean Sube\n\
-	The Voodoo Shader comes with ABSOLUTELY NO WARRANTY. This is free software and you are \n\
+	The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY. This is free software and you are \n\
 	welcome to redistribute it under certain conditions. Please see the included license file\n\
 	for more details.\n\n"
 

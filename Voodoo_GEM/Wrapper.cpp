@@ -2120,7 +2120,7 @@ public:
 			VoodooShader::Converter::ToString(
 			VoodooShader::DirectX9::DX9_Converter::ToTextureFormat(pp.BackBufferFormat)
 			);
-		VoodooCore->GetLog()->Format("Voodoo GEM: Backbuffer parameters: %d by %d (%d buffers), TF: %s.\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: Backbuffer parameters: %d by %d (%d buffers), %s.\n")
 			.With(pp.BackBufferWidth).With(pp.BackBufferHeight).With(pp.BackBufferCount)
 			.With(textureType).Done();
 #endif
@@ -2128,7 +2128,6 @@ public:
 		IDirect3DDevice9 * RealDevice;
 
 		HRESULT hr = mRealObject->CreateDevice(adapter, type, window, flags, &pp, &RealDevice);
-
 #ifdef _DEBUG
 		VoodooCore->GetLog()->Format("Voodoo GEM: FakeObject::CreateDevice(%d, %d, %d, %d, %d, %d) == %d\n")
 			.With(adapter).With(type).With(window).With(flags).With(&pp).With(RealDevice).With(hr).Done();
@@ -2140,32 +2139,6 @@ public:
 		VoodooCore->GetLog()->Log("Voodoo GEM: Real device created.\n");
 #endif
 
-			/*D3DFORMAT fmt;
-			switch (ZBufFormat) {
-			case 1:
-				fmt = (D3DFORMAT)MAKEFOURCC ('I', 'N', 'T', 'Z');
-				break;
-			case 2:
-				fmt = (D3DFORMAT)MAKEFOURCC ('R', 'A', 'W', 'Z');
-				break;
-			case 3:
-				fmt = (D3DFORMAT)MAKEFOURCC ('D', 'F', '1', '6');
-				break;
-			case 4:
-				fmt = (D3DFORMAT)MAKEFOURCC ('D', 'F', '2', '4');
-				break;
-			}*/
-		//hr = RealDevice->CreateTexture (e->BackBufferWidth, e->BackBufferHeight, 1, 
-		//				D3DUSAGE_DEPTHSTENCIL, fmt, D3DPOOL_DEFAULT, &DepthTexture, 0);
-
-
-		//RealDevice->SetRenderState (D3DRS_ZENABLE, D3DZB_USEW);
-		//RealDevice->SetRenderState (D3DRS_CLIPPING, (D3DTEXTURESTAGESTATETYPE)0);
-		
-		//Create a font object for scribbling over the screen
-		//if (D3DXCreateFontA (RealDevice, 12, 0, 400, 1, false, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-		//	DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "arial", &Font)
-
 #ifdef _DEBUG
 		VoodooCore->GetLog()->Log("Voodoo GEM: Creating fake device...\n");
 #endif
@@ -2174,6 +2147,10 @@ public:
 
 		VoodooCore->GetLog()->Log("Voodoo GEM: Starting VoodooDX9 module...\n");
 		VoodooDX9 = new VoodooShader::DirectX9::Adapter(VoodooCore, RealDevice);
+
+		// Create backbuffer and scratch textures
+		VoodooShader::TextureRef backbuffer = VoodooDX9->CreateTexture(
+			"backbuffer", pp.BackBufferWidth, pp.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
 
 		try
 		{

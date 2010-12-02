@@ -6,7 +6,7 @@ namespace VoodooShader
 {
 	namespace DirectX9
 	{
-		VOODOO_API_DX9 Adapter::Adapter(Core * core, IDirect3DDevice9 * device)
+		Adapter::Adapter(Core * core, IDirect3DDevice9 * device)
 			: mCore(core), mDevice(device)
 		{
 			if ( !core )
@@ -70,7 +70,7 @@ namespace VoodooShader
 			FSQuadVerts->Unlock();
 		}
 
-		VOODOO_API_DX9 bool Adapter::PreparePass(PassRef pass)
+		bool Adapter::PreparePass(PassRef pass)
 		{
 			CGprogram vertProg = pass->VertexProgram();
 			CGprogram fragProg = pass->FragmentProgram();
@@ -104,7 +104,7 @@ namespace VoodooShader
 			return true;
 		}
 
-		VOODOO_API_DX9 void Adapter::BindPass(PassRef pass)
+		void Adapter::BindPass(PassRef pass)
 		{
 			// Both should be loaded and valid (if they exist and prepare was called)
 			CGprogram vertProg = pass->VertexProgram();
@@ -146,7 +146,7 @@ namespace VoodooShader
 			}
 		}
 
-		VOODOO_API_DX9 void Adapter::UnbindPass()
+		void Adapter::UnbindPass()
 		{
 			if ( cgIsProgram(mBoundVP) )
 			{
@@ -159,7 +159,7 @@ namespace VoodooShader
 			}
 		}
 
-		VOODOO_API_DX9 void Adapter::DrawQuad(bool fullscreen, float * coords)
+		void Adapter::DrawQuad(bool fullscreen, float * coords)
 		{
 			if ( fullscreen )
 			{
@@ -185,7 +185,7 @@ namespace VoodooShader
 			}
 		}
 
-		VOODOO_API_DX9 void Adapter::ApplyParameter(ParameterRef param)
+		void Adapter::ApplyParameter(ParameterRef param)
 		{
 			switch ( param->Category() )
 			{
@@ -198,7 +198,7 @@ namespace VoodooShader
 			}
 		}
 
-		VOODOO_API_DX9 bool Adapter::ConnectTexture(ParameterRef param, TextureRef texture)
+		bool Adapter::ConnectTexture(ParameterRef param, TextureRef texture)
 		{
 			if ( param->Category() == PC_Sampler )
 			{
@@ -216,7 +216,7 @@ namespace VoodooShader
 			}
 		}
 
-		VOODOO_API_DX9 TextureRef Adapter::CreateTexture(std::string name, size_t width, size_t height, size_t depth, 
+		TextureRef Adapter::CreateTexture(std::string name, size_t width, size_t height, size_t depth, 
 			bool mipmaps, TextureFormat format)
 		{
 			IDirect3DTexture9 * tex = NULL;
@@ -229,12 +229,14 @@ namespace VoodooShader
 				TextureRef texRef = mCore->CreateTexture(name, reinterpret_cast<void*>(tex));
 				return texRef;
 			} else {
-				mCore->GetLog()->Format("Voodoo DX9: Error creating texture: %i.\n").With(hr).Done();
+				const char * error = cgD3D9TranslateHRESULT(hr);
+				mCore->GetLog()->Format("Voodoo DX9: Error creating texture %s: %s\n")
+					.With(name).With(error).Done();
 				return TextureRef();
 			}
 		}
 
-		VOODOO_API_DX9 void Adapter::HandleError(CGcontext context, CGerror error, void * core)
+		void Adapter::HandleError(CGcontext context, CGerror error, void * core)
 		{
 			Core * actualCore = reinterpret_cast<Core*>(core);
 			actualCore->GetLog()->Format("Voodoo DX9: Cg error: %s\n")

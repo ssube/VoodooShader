@@ -179,7 +179,7 @@ namespace VoodooShader
 
 		bool prepResults = adapter->PreparePass(mPass);
 
-		if ( prepResults )
+		if ( !prepResults )
 		{
 			Throw("Voodoo Core: Failed to prepare pass for use.", mCore);
 		}
