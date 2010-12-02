@@ -15,7 +15,7 @@ namespace VoodooShader
 		mShaders.clear();
 	};
 
-	size_t FullscreenManager::Add(Shader * shader, int position)
+	size_t FullscreenManager::Add(ShaderRef shader, int position)
 	{
 		if ( position < -1 )
 		{

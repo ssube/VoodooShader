@@ -32,7 +32,6 @@
 #pragma warning(disable:4251)
 
 #include "Includes.hpp"
-#include "Reference.hpp"
 
 #define VOODOO_CORE_VERSION_MAJOR	0
 #define VOODOO_CORE_VERSION_MINOR	1
@@ -71,11 +70,11 @@ namespace VoodooShader
 	typedef std::string String;
 
 	// Reference-counted pointer types
-	typedef Reference<Shader>					ShaderRef;
-	typedef Reference<Texture>					TextureRef;
-	typedef Reference<Technique>				TechniqueRef;
-	typedef Reference<Pass>						PassRef;
-	typedef Reference<Parameter>				ParameterRef;
+	typedef boost::shared_ptr<Shader>			ShaderRef;
+	typedef boost::shared_ptr<Texture>			TextureRef;
+	typedef boost::shared_ptr<Technique>		TechniqueRef;
+	typedef boost::shared_ptr<Pass>				PassRef;
+	typedef boost::shared_ptr<Parameter>		ParameterRef;
 
 	// Shader collections
 	typedef std::map<std::string, ShaderRef>	ShaderMap;

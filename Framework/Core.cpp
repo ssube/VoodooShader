@@ -78,10 +78,10 @@ namespace VoodooShader
 		CGEffectMap::iterator CGEffect = this->mCGEffects.find(filename);
 		if ( CGEffect != this->mCGEffects.end() )
 		{
-			return new Shader(this, CGEffect->second);
+			return ShaderRef(new Shader(this, CGEffect->second));
 		} else {
 			// Load the shader from file
-			return new Shader(this, filename, args);
+			return ShaderRef(new Shader(this, filename, args));
 		}
 	}
 
@@ -92,7 +92,7 @@ namespace VoodooShader
 		{
 			Throw("Voodoo Core: Trying to create a texture with a duplicate name.", this);
 		} else {
-			TextureRef texture = new Texture(name, data);
+			TextureRef texture(new Texture(name, data));
 			this->mTextures[name] = texture;
 			return texture;
 		}
@@ -105,7 +105,7 @@ namespace VoodooShader
 		{
 			Throw("Voodoo Core: Trying to create parameter with a duplicate name.", this);
 		} else {
-			ParameterRef parameter = new Parameter(this, name, type);
+			ParameterRef parameter(new Parameter(NULL, name, type));
 			return parameter;
 		}
 	}

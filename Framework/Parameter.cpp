@@ -7,12 +7,13 @@
 
 namespace VoodooShader
 {
-	Parameter::Parameter(ShaderRef parent, String name, ParameterType type)
+	Parameter::Parameter(Shader * parent, String name, ParameterType type)
 		: mType(type), mParent(parent)
 	{ 
-		if ( parent.get() )
+		if ( parent )
 		{
 			// Actual shader parameter
+			//parent->G
 		} else {
 			// Virtual parameter
 			mParam = cgCreateParameter(parent->GetCore()->GetCGContext(), Converter::ToCGType(type));
@@ -22,7 +23,7 @@ namespace VoodooShader
 			case PT_Sampler1D:
 			case PT_Sampler2D:
 			case PT_Sampler3D:
-				this->mValueTexture = NULL;
+				this->mValueTexture = TextureRef();
 				break;
 			case PT_Float4:
 				this->mValueFloat[3] = 0.0f;

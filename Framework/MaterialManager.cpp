@@ -95,7 +95,7 @@ namespace VoodooShader
 			}
 
 			adapter->UnbindPass();
-			this->mBound = NULL;
+			this->mBound = ShaderRef();
 		}
 	}
 

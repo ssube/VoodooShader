@@ -38,6 +38,7 @@ static int tcount = 0;
 
 VoodooShader::TextureRef backbuffer;
 IDirect3DSurface9 * trueBBSurf;
+VoodooShader::ShaderRef testShader;
 
 DWORD cycles = 0;
 DWORD shot = 0;
@@ -655,6 +656,9 @@ public:
 		RealDevice->SetVertexShader(0);
 		RealDevice->SetPixelShader(0);
 
+		VoodooShader::PassRef pass = testShader->GetDefaultTechnique()->GetPass(0);
+		VoodooDX9->BindPass(pass);
+
 		RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_FALSE);
 		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_FALSE);
@@ -662,6 +666,8 @@ public:
 		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_TRUE);
 		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 		RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_TRUE);
+
+		VoodooDX9->UnbindPass();
 
 		this->mRenderState.RestoreState(this->RealDevice);
 
@@ -673,7 +679,7 @@ public:
 		hr2 = RealDevice->SetRenderTarget(0, rtSurf);
 
 		++cycles;
-		if ( cycles == 100 )
+		if ( cycles == 500 )
 		{
 			char * name = new char[32];
 			sprintf(name, "GEM_%d.png", shot++);
@@ -2082,10 +2088,9 @@ public:
 		backbuffer = VoodooDX9->CreateTexture(
 			"backbuffer", pp.BackBufferWidth, pp.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
 
-		VoodooShader::ShaderRef a;
 		try
 		{
-			a = VoodooCore->CreateShader("J:\\Morrowind_clean\\test.cgfx", NULL);
+			testShader = VoodooCore->CreateShader("J:\\Morrowind_clean\\test.cgfx", NULL);
 		} catch ( VoodooShader::Exception & exc ) {
 			VoodooCore->GetLog()->Log("Voodoo GEM: Error compiling shader.\n");
 		}

@@ -60,7 +60,7 @@ namespace VoodooShader
 
 		TechniqueRef mDefaultTechnique;
 		TechniqueMap mTechniques;
-		ParameterVector mParameters;
+		ParameterMap mParameters;
 	};
 
 	class VOODOO_API Technique

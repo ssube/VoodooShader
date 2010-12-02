@@ -33,6 +33,9 @@
 #include <list>
 #include <string>
 
+#include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
+
 #include "Cg/cg.h"
 
 #pragma comment(lib, "cg.lib")

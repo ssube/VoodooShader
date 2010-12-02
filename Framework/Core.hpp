@@ -24,7 +24,6 @@
 
 #include "Meta.hpp"
 
-#include "Reference.hpp"
 #include "Exception.hpp"
 #include "Logger.hpp"
 #include "Texture.hpp"

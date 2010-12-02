@@ -53,7 +53,7 @@ namespace VoodooShader
 		 * @return The index of the shader in the queue.
 		 * @throws Exception if position is less than -1 or greater than the end of the queue.
 		 */
-		size_t Add(Shader * shader, int position = -1);
+		size_t Add(ShaderRef shader, int position = -1);
 
 		/**
 		 * Removes a shader from the render queue.

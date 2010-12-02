@@ -33,6 +33,5 @@
 #include "Logger.hpp"
 #include "MaterialManager.hpp"
 #include "Parameter.hpp"
-#include "Reference.hpp"
 #include "Shader.hpp"
 #include "Texture.hpp"

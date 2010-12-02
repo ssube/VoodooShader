@@ -46,8 +46,10 @@ namespace VoodooShader
 			CGtype cgType = cgGetParameterType(cParam);
 			ParameterType type = Converter::ToParameterType(cgType);
 
-			ParameterRef param(new Parameter(this, cgGetParameterName(cParam), type));
-			this->mParameters.push_back(param);
+			const char * paramName = cgGetParameterName(cParam);
+
+			ParameterRef param(new Parameter(this, paramName, type));
+			this->mParameters[paramName] = param;
 
 			// Branch on parameter general type
 			if ( ( type == PT_Sampler1D ) || ( type == PT_Sampler2D ) || ( type == PT_Sampler3D ) )
@@ -74,7 +76,7 @@ namespace VoodooShader
 
 	void Shader::SetupTechniques()
 	{
-		this->mDefaultTechnique = NULL;
+		this->mDefaultTechnique = TechniqueRef();
 		this->mTechniques.clear();
 
 		CGtechnique cTech = cgGetFirstTechnique(mEffect);
@@ -84,9 +86,12 @@ namespace VoodooShader
 			if ( valid == CG_TRUE )
 			{
 				// Insert the technique into the map
-				TechniqueRef tech = new Technique(this, cTech);
+				TechniqueRef tech(new Technique(this, cTech));
+
+				//! @todo Fix this, awkward
 				const char * nameC = cgGetTechniqueName(cTech);
 				std::string name(nameC);
+
 				mTechniques[name] = tech;
 
 				// The first valid technique is the default one
@@ -134,11 +139,10 @@ namespace VoodooShader
 		while ( cgIsPass(cPass) )
 		{
 			// Insert the pass into the vector
-			Pass * pass = new Pass(this, cPass);
-			PassRef passR(pass);
+			PassRef pass(new Pass(this, cPass));
 
-			mPasses.push_back(pass);
 			//! @todo This causes segfaults, fix
+			mPasses.push_back(pass);
 
 			cPass = cgGetNextPass(cPass);
 		}
@@ -147,14 +151,25 @@ namespace VoodooShader
 	Pass::Pass(Technique * tech, CGpass pass)
 		: mParent(tech), mPass(pass)
 	{
-		this->mName = cgGetPassName(pass);
+		const char * passName = cgGetPassName(pass);
+		if ( passName )
+		{
+			this->mName = passName;
+		} else {
+			char nameBuffer[16];
+			itoa((int)(&pass), nameBuffer, 16);
+
+			this->mName = "pass_";
+			this->mName += nameBuffer;
+		}
+
 		this->mCore = tech->GetCore();
 
 		this->mVertexProgram = cgGetPassProgram(pass, CG_VERTEX_DOMAIN);
 		this->mFragmentProgram = cgGetPassProgram(pass, CG_FRAGMENT_DOMAIN);
 		this->mGeometryProgram = cgGetPassProgram(pass, CG_GEOMETRY_DOMAIN);
 
-		this->mTarget = NULL;
+		this->mTarget = TextureRef();
 		CGannotation targetAnnotation = cgGetNamedPassAnnotation(pass, "target");
 		if ( cgIsAnnotation(targetAnnotation) )
 		{

@@ -23,14 +23,13 @@
 #define VOODOO_PARAMETER_HPP
 
 #include "Meta.hpp"
-#include "Reference.hpp"
 
 namespace VoodooShader
 {
 	class VOODOO_API Parameter
 	{
 	public:
-		Parameter(ShaderRef parent, String name, ParameterType type = PT_Unknown);
+		Parameter(Shader * parent, String name, ParameterType type = PT_Unknown);
 
 		/**
 		 * Binds two parameters, forcing their values to be identical. This should
