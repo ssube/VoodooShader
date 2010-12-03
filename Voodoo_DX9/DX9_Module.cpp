@@ -34,9 +34,12 @@ namespace VoodooShader
 				core->GetLog()->Log("Voodoo DX9: Set Cg device.\n");
 			}
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
 			cgD3D9EnableDebugTracing(CG_TRUE);
-#endif
+//#endif
+
+			cgD3D9SetManageTextureParameters(core->GetCGContext(), CG_TRUE);
+
 			cgD3D9RegisterStates(core->GetCGContext());
 
 			HRESULT errors = cgD3D9GetLastError();
@@ -46,6 +49,15 @@ namespace VoodooShader
 			} else {
 				core->GetLog()->Log("Voodoo DX9: Cg states set successfully.\n");
 			}
+
+			// Setup profiles
+			CGprofile bestFrag = cgD3D9GetLatestPixelProfile();
+			CGprofile bestVert = cgD3D9GetLatestVertexProfile();
+
+			core->GetLog()->Format("Voodoo DX9: Detected the following profiles:\n\tVertex: %s\n\tFragment: %s\n")
+				.With(cgGetProfileString(bestVert)).With(cgGetProfileString(bestFrag)).Done();
+
+			//cgD3D9Se
 
 			// Get params
 			D3DVIEWPORT9 viewport;
@@ -75,9 +87,9 @@ namespace VoodooShader
 			g_Vertices[4].tu = 1.0f; g_Vertices[4].tv = 0.0f;
 			g_Vertices[5].tu = 0.0f; g_Vertices[5].tv = 0.0f;
 
-			g_Vertices[0].color = g_Vertices[5].color = 0xFFFFFFFF; //0xFF00F8FF;
-			g_Vertices[2].color = g_Vertices[3].color = 0xFFFFFFFF; //0xFF8F00FF;
-			g_Vertices[4].color = g_Vertices[1].color = 0xFFFFFFFF; //0xFFCFCFFF;
+			//g_Vertices[0].color = g_Vertices[5].color = 0xFFFFFFFF; //0xFF00F8FF;
+			//g_Vertices[2].color = g_Vertices[3].color = 0xFFFFFFFF; //0xFF8F00FF;
+			//g_Vertices[4].color = g_Vertices[1].color = 0xFFFFFFFF; //0xFFCFCFFF;
 
 			VOID * pVertices;
 			FSQuadVerts->Lock(0, sizeof(g_Vertices), &pVertices, 0);

@@ -23,11 +23,11 @@ namespace VoodooShader
 		struct FSVert
 		{
 			FLOAT x, y, z, rhw;
-			DWORD color;
+			//DWORD color;
 			FLOAT tu, tv;
 		};
 
-#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
+#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_TEX1)
 
 		LPDIRECT3DVERTEXBUFFER9 FSQuadVerts;
 

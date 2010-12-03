@@ -56,8 +56,8 @@ void SetupCornerCoords()
 	cornerCoords[4].x = 512.0f; cornerCoords[4].y =   0.0f;
 	cornerCoords[5].x =   0.0f; cornerCoords[5].y =   0.0f;
 
-	//cornerCoords[0].z = cornerCoords[1].z = cornerCoords[2].z =
-	//	cornerCoords[3].z = cornerCoords[4].z = cornerCoords[5].z = 1.0f;
+	cornerCoords[0].z = cornerCoords[1].z = cornerCoords[2].z =
+		cornerCoords[3].z = cornerCoords[4].z = cornerCoords[5].z = 1.0f;
 
 	cornerCoords[0].tu = 0.0f; cornerCoords[0].tv = 0.0f;
 	cornerCoords[1].tu = 0.0f; cornerCoords[1].tv = 1.0f;
@@ -65,10 +65,6 @@ void SetupCornerCoords()
 	cornerCoords[3].tu = 1.0f; cornerCoords[3].tv = 1.0f;
 	cornerCoords[4].tu = 1.0f; cornerCoords[4].tv = 0.0f;
 	cornerCoords[5].tu = 0.0f; cornerCoords[5].tv = 0.0f;
-
-	cornerCoords[0].color = cornerCoords[5].color = 0xFFFFFFFF; //0xFF00F8FF;
-	cornerCoords[2].color = cornerCoords[3].color = 0xFFFFFFFF; //0xFF8F00FF;
-	cornerCoords[4].color = cornerCoords[1].color = 0xFFFFFFFF; //0xFFCFCFFF;
 }
 
 struct RenderState {
@@ -677,31 +673,25 @@ public:
 
 		RealDevice->SetRenderTarget(0, trueBBSurf);
 
-		//RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_FALSE);
-		RealDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
-		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_FALSE);
+		//RealDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
+		//RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+		RealDevice->SetRenderState (D3DRS_ALPHATESTENABLE, 0);
+		RealDevice->SetRenderState (D3DRS_ALPHABLENDENABLE, 0);
+
+		RealDevice->SetRenderState (D3DRS_ZENABLE, 0);
+		RealDevice->SetRenderState (D3DRS_ZWRITEENABLE, 0);
+		RealDevice->SetRenderState (D3DRS_CULLMODE, 2);
 
 		IDirect3DTexture9 * tex = (IDirect3DTexture9 *)backbuffer->Get();
 		RealDevice->SetTexture(0, tex);
+		RealDevice->SetTexture(1, tex);
 
-		RealDevice->SetVertexShader(0);
-		RealDevice->SetPixelShader(0);
-
-		//VoodooDX9->DrawQuad(true);
-
-		VoodooShader::Pass * pass = testShader->GetDefaultTechnique()->GetPass(0);
-		VoodooDX9->BindPass(pass);
+		//VoodooShader::Pass * pass = testShader->GetDefaultTechnique()->GetPass(0);
+		//VoodooDX9->BindPass(pass);
 
 		VoodooDX9->DrawQuad(true);
-		//VoodooDX9->DrawQuad(false, cornerCoords);
 
-		VoodooDX9->UnbindPass();
-
-
-		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_TRUE);
-		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-		//RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_TRUE);
+		//VoodooDX9->UnbindPass();
 
 		this->mRenderState.RestoreState(this->RealDevice);
 
@@ -713,10 +703,10 @@ public:
 		hr2 = RealDevice->SetRenderTarget(0, rtSurf);
 
 		++cycles;
-		if ( cycles == 1500 )
+		if ( cycles == 1000 )
 		{
 			char * name = new char[32];
-			sprintf(name, "GEM_%d.png", shot++);
+			sprintf(name, "VoodooGEM_%d.png", shot++);
 
 			D3DXSaveSurfaceToFileA(name, D3DXIFF_PNG, trueBBSurf, NULL, NULL);
 
@@ -921,9 +911,9 @@ public:
 		return hr;
 	}
 
-	//-----------------------------------------------------------------------------
-
-	// Voodoo DX8.9 ---------------------------------------------------
+	//----------------------------------------------------------------------------------------------
+	// Voodoo/GEM				--------------------------------------------------------------------
+	
 	/**
 	 * Retrieves the current render target from this device.
 	 *
@@ -933,25 +923,30 @@ public:
 	 */
 	/*HRESULT _stdcall GetRenderTarget(IDirect3DSurface8 ** surface)
 	{
+		DWORD surfaceID = 4;
 		IDirect3DSurface9 * realSurface = NULL;
-		*surface = NULL;
-		DWORD unused = 4;
+		(*surface) = NULL;
 
 		HRESULT hr = RealDevice->GetRenderTarget(0, &realSurface);
 
-		if (hr != D3D_OK || realSurface == NULL)
+		if ( !SUCCEEDED(hr) || realSurface == NULL)
 		{
 			return hr;
 		}
 
-		hr = realSurface->GetPrivateData(guid, (void *)surface, &unused);
+		// Actual surfaces are stored within the D3D9 surface at ID 4, so we'll get that back out:
+		hr = realSurface->GetPrivateData(guid, (void *)surface, &surfaceID);
 
-		if (hr != D3D_OK) *surface = new FakeSurface(realSurface);
+		if ( SUCCEEDED(hr) )
+		{
+			(*surface) = new FakeSurface(realSurface);
+		}
 
 		return D3D_OK;
 	}*/
 
-	// MGE ------------------------------------------------------------
+	// MGE				----------------------------------------------------------------------------
+
 	HRESULT _stdcall GetRenderTarget (IDirect3DSurface8 **a) {
 		IDirect3DSurface9 *a2 = NULL;
 		*a = NULL;
@@ -963,9 +958,10 @@ public:
 		return D3D_OK;
 	}
 
-	// There are some coding style differences.
-
-	//-----------------------------------------------------------------------------
+	// There are some code style differences. One can be maintained, the other will end up a mess.
+	// Clear code with plenty of space doesn't run slower (on the contrary, it can be optimized more
+	// if the compiler can understand it), but is far easier to read, write and test.
+	//----------------------------------------------------------------------------------------------
 
 	HRESULT _stdcall GetDepthStencilSurface (IDirect3DSurface8 **a) {
 		IDirect3DSurface9 *a2 = NULL;
@@ -998,7 +994,7 @@ public:
 
 	HRESULT _stdcall Clear(DWORD a, const D3DRECT *b, DWORD c, D3DCOLOR d, float e, DWORD f)
 	{
-		d = 0xFFF00F88;
+		//d = 0xFFF00F88;
 		return RealDevice->Clear(a, b, c, d, e, f);
 	}
 
@@ -1700,40 +1696,39 @@ public:
 
 	//-----------------------------------------------------------------------------
 
-	HRESULT _stdcall SetPixelShader (DWORD a) {
-		//CurrentPShader = a;
-		//if (a == 0) return RealDevice->SetPixelShader (NULL);
-		//else 
-		//return RealDevice->SetPixelShader (a);
+	HRESULT _stdcall SetPixelShader (DWORD a) 
+	{
+		CurrentPShader = a;
+
+		return D3D_OK; //RealDevice->SetPixelShader(a);
+	}
+
+	//-----------------------------------------------------------------------------
+
+	HRESULT _stdcall GetPixelShader(DWORD *a) 
+	{
+		*a = CurrentPShader;
 		return D3D_OK;
 	}
 
 	//-----------------------------------------------------------------------------
 
-	HRESULT _stdcall GetPixelShader (DWORD *a) {
-		*a = NULL;
+	HRESULT _stdcall DeletePixelShader(DWORD a)
+	{
 		return D3D_OK;
 	}
 
 	//-----------------------------------------------------------------------------
 
-	HRESULT _stdcall DeletePixelShader (DWORD a) {
-		/*if (NewPShaders [a - 1] != NULL) {
-			while (NewPShaders [a - 1]->Release ());
-			NewPShaders [a - 1] = NULL;
-		}*/
-		return D3D_OK;
-	}
-
-	//-----------------------------------------------------------------------------
-
-	HRESULT _stdcall SetPixelShaderConstant (DWORD a, const void *b, DWORD c) {
+	HRESULT _stdcall SetPixelShaderConstant (DWORD a, const void *b, DWORD c) 
+	{
 		return RealDevice->SetPixelShaderConstantF (a, (float *)b, c);
 	}
 
 	//-----------------------------------------------------------------------------
 
-	HRESULT _stdcall GetPixelShaderConstant (DWORD a, void *b, DWORD c) {
+	HRESULT _stdcall GetPixelShaderConstant (DWORD a, void *b, DWORD c) 
+	{
 		return RealDevice->GetPixelShaderConstantF (a, (float *)b, c);
 	}
 
