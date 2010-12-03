@@ -129,14 +129,14 @@ namespace VoodooShader
 		ParameterMap::iterator paramEntry = this->mParameters.find(name);
 		if ( paramEntry != this->mParameters.end() )
 		{
-			return ParameterRef();
-		} else {
 			if ( paramEntry->second->Type() == type )
 			{
 				return paramEntry->second;
 			} else {
 				return ParameterRef();
-			}				
+			}	
+		} else {	
+			return ParameterRef();		
 		}
 	}
 

@@ -1,0 +1,19 @@
+// Trivial as it is, this shader (this file and nothing else) is in the public domain. Have fun. 
+//	- peachykeen
+
+sampler2D mainTex < string texture = "backbuffer"; >;
+
+void fp_main(in float2 uv : TEXCOORD0, out float4 color : COLOR0)
+{
+	float3 texcolor = tex2D(mainTex, uv);
+	texcolor = 1 - texcolor;
+    color = float4(texcolor.x, texcolor.y, texcolor.z, 1.00f);
+}
+
+technique main 
+{
+	pass p0
+	{
+		FragmentProgram = compile latest fp_main();
+	}
+}

@@ -22,7 +22,7 @@ namespace VoodooShader
 		Throw("Voodoo Core: Adapter function called.", NULL);
 	}
 
-	void Adapter::DrawQuad(bool fullscreen, float * coords)
+	void Adapter::DrawQuad(bool fullscreen, void * vertexData)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 	}

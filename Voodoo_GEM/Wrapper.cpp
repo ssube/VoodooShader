@@ -43,6 +43,31 @@ VoodooShader::ShaderRef testShader;
 DWORD cycles = 0;
 DWORD shot = 0;
 
+VoodooShader::DirectX9::FSVert cornerCoords[6];
+
+void SetupCornerCoords()
+{
+	cornerCoords[0].x =   0.0f; cornerCoords[0].y =   0.0f;
+	cornerCoords[1].x =   0.0f; cornerCoords[1].y = 512.0f;
+	cornerCoords[2].x = 512.0f; cornerCoords[2].y = 512.0f;
+	cornerCoords[3].x = 512.0f; cornerCoords[3].y = 512.0f;
+	cornerCoords[4].x = 512.0f; cornerCoords[4].y =   0.0f;
+	cornerCoords[5].x =   0.0f; cornerCoords[5].y =   0.0f;
+
+	//cornerCoords[0].z = cornerCoords[1].z = cornerCoords[2].z =
+	//	cornerCoords[3].z = cornerCoords[4].z = cornerCoords[5].z = 1.0f;
+
+	cornerCoords[0].tu = 0.0f; cornerCoords[0].tv = 0.0f;
+	cornerCoords[1].tu = 0.0f; cornerCoords[1].tv = 1.0f;
+	cornerCoords[2].tu = 1.0f; cornerCoords[2].tv = 1.0f;
+	cornerCoords[3].tu = 1.0f; cornerCoords[3].tv = 1.0f;
+	cornerCoords[4].tu = 1.0f; cornerCoords[4].tv = 0.0f;
+	cornerCoords[5].tu = 0.0f; cornerCoords[5].tv = 0.0f;
+
+	cornerCoords[0].color = cornerCoords[5].color = 0xFFFFFFFF; //0xFF00F8FF;
+	cornerCoords[2].color = cornerCoords[3].color = 0xFFFFFFFF; //0xFF8F00FF;
+	cornerCoords[4].color = cornerCoords[1].color = 0xFFFFFFFF; //0xFFCFCFFF;
+}
 
 struct RenderState {
 	DWORD FVF;
@@ -650,24 +675,31 @@ public:
 
 		RealDevice->SetRenderTarget(0, trueBBSurf);
 
+		//RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_FALSE);
+		RealDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
+		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_FALSE);
+
 		IDirect3DTexture9 * tex = (IDirect3DTexture9 *)backbuffer->Get();
 		RealDevice->SetTexture(0, tex);
 
 		RealDevice->SetVertexShader(0);
 		RealDevice->SetPixelShader(0);
 
+		//VoodooDX9->DrawQuad(true);
+
 		VoodooShader::Pass * pass = testShader->GetDefaultTechnique()->GetPass(0);
 		VoodooDX9->BindPass(pass);
 
-		RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_FALSE);
-		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_FALSE);
 		VoodooDX9->DrawQuad(true);
-		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_TRUE);
-		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-		RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_TRUE);
+		//VoodooDX9->DrawQuad(false, cornerCoords);
 
 		VoodooDX9->UnbindPass();
+
+
+		RealDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, D3DZB_TRUE);
+		RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+		//RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_TRUE);
 
 		this->mRenderState.RestoreState(this->RealDevice);
 
@@ -679,7 +711,7 @@ public:
 		hr2 = RealDevice->SetRenderTarget(0, rtSurf);
 
 		++cycles;
-		if ( cycles == 500 )
+		if ( cycles == 1500 )
 		{
 			char * name = new char[32];
 			sprintf(name, "GEM_%d.png", shot++);
@@ -2081,6 +2113,8 @@ public:
 
 		VoodooCore->GetLog()->Log("Voodoo GEM: Starting VoodooDX9 module...\n");
 		VoodooDX9 = new VoodooShader::DirectX9::Adapter(VoodooCore, RealDevice);
+
+		SetupCornerCoords();
 
 		RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &trueBBSurf);
 

@@ -41,7 +41,7 @@ namespace VoodooShader
 		virtual void BindPass(Pass * pass);
 		virtual void UnbindPass();
 
-		virtual void DrawQuad(bool fullscreen = true, float * coords = NULL);
+		virtual void DrawQuad(bool fullscreen = true, void * vertexData = NULL);
 
 		virtual void ApplyParameter(ParameterRef param);
 

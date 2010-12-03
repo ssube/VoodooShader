@@ -47,16 +47,26 @@ namespace VoodooShader
 				core->GetLog()->Log("Voodoo DX9: Cg states set successfully.\n");
 			}
 
+			// Get params
+			D3DVIEWPORT9 viewport;
+			device->GetViewport(&viewport);
+
+			float fx = viewport.Width;
+			float fy = viewport.Height;
+
 			this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
 				D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
 
 			FSVert g_Vertices[6];
-			g_Vertices[0].x =   0.0f; g_Vertices[0].y =   0.0f;
-			g_Vertices[1].x =   0.0f; g_Vertices[1].y = 512.0f;
-			g_Vertices[2].x = 512.0f; g_Vertices[2].y = 512.0f;
-			g_Vertices[3].x = 512.0f; g_Vertices[3].y = 512.0f;
-			g_Vertices[4].x = 512.0f; g_Vertices[4].y =   0.0f;
-			g_Vertices[5].x =   0.0f; g_Vertices[5].y =   0.0f;
+			g_Vertices[0].x = 0.0f; g_Vertices[0].y = 0.0f;
+			g_Vertices[1].x = 0.0f; g_Vertices[1].y =   fy;
+			g_Vertices[2].x =   fx; g_Vertices[2].y =   fy;
+			g_Vertices[3].x =   fx; g_Vertices[3].y =   fy;
+			g_Vertices[4].x =   fx; g_Vertices[4].y = 0.0f;
+			g_Vertices[5].x = 0.0f; g_Vertices[5].y = 0.0f;
+
+			g_Vertices[0].z = g_Vertices[1].z = g_Vertices[2].z =
+			g_Vertices[3].z = g_Vertices[4].z = g_Vertices[5].z = 2.0f;
 
 			g_Vertices[0].tu = 0.0f; g_Vertices[0].tv = 0.0f;
 			g_Vertices[1].tu = 0.0f; g_Vertices[1].tv = 1.0f;
@@ -65,9 +75,9 @@ namespace VoodooShader
 			g_Vertices[4].tu = 1.0f; g_Vertices[4].tv = 0.0f;
 			g_Vertices[5].tu = 0.0f; g_Vertices[5].tv = 0.0f;
 
-			g_Vertices[0].color = g_Vertices[5].color = 0xFF00F8FF;
-			g_Vertices[2].color = g_Vertices[3].color = 0xFF8F00FF;
-			g_Vertices[4].color = g_Vertices[1].color = 0xFFCFCFFF;
+			g_Vertices[0].color = g_Vertices[5].color = 0xFFFFFFFF; //0xFF00F8FF;
+			g_Vertices[2].color = g_Vertices[3].color = 0xFFFFFFFF; //0xFF8F00FF;
+			g_Vertices[4].color = g_Vertices[1].color = 0xFFFFFFFF; //0xFFCFCFFF;
 
 			VOID * pVertices;
 			FSQuadVerts->Lock(0, sizeof(g_Vertices), &pVertices, 0);
@@ -165,7 +175,7 @@ namespace VoodooShader
 			}
 		}
 
-		void Adapter::DrawQuad(bool fullscreen, float * coords)
+		void Adapter::DrawQuad(bool fullscreen, void * vertexData)
 		{
 			if ( fullscreen )
 			{
@@ -188,6 +198,23 @@ namespace VoodooShader
 
 				this->mDevice->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);
 				this->mDevice->SetFVF(sourceFVF);
+			} else {
+				if ( !vertexData )
+				{
+					Throw("Voodoo DX9: Draw Quad called with no vertices.", mCore);
+				} else {
+					// Draw a quad from user vertices
+					HRESULT hr = this->mDevice->BeginScene();
+					if ( SUCCEEDED(hr) )
+					{
+						hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, 2, vertexData, sizeof(FSVert));
+						if ( !SUCCEEDED(hr) )
+						{
+							this->mCore->GetLog()->Log("Voodoo DX9: Error drawing user quad.");
+						}
+						this->mDevice->EndScene();
+					}
+				}
 			}
 		}
 
