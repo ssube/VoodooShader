@@ -26,13 +26,16 @@
 
 namespace VoodooShader
 {
+	typedef std::map<std::string, Technique*> TechniqueMap_Ptr;
+	typedef std::vector<Pass*> PassVector_Ptr;
+
 	class VOODOO_API Shader
 	{
+		friend class Core;
 	public:
-		Shader(Core * parent, std::string filename, const char ** args = NULL);
-		Shader(Core * parent, CGeffect effect);
+		Shader();
 
-		TechniqueRef GetDefaultTechnique();
+		Technique * GetDefaultTechnique();
 
 		size_t NumParams();
 		ParameterRef GetParam(size_t index);
@@ -48,25 +51,28 @@ namespace VoodooShader
 		}
 
 	protected:
-		void LinkShader();
+		static ShaderRef Create(Core * parent, std::string filename, const char ** args = NULL);
+		static ShaderRef Create(Core * parent, CGeffect effect);
 
+		void Link();
+		void SetupParameters();
 		void SetupTechniques();
 
 	private:
-
 		Core * mCore;
 		std::string mName;
 		CGeffect mEffect;
 
-		TechniqueRef mDefaultTechnique;
-		TechniqueMap mTechniques;
+		Technique * mDefaultTechnique;
+		TechniqueMap_Ptr mTechniques;
 		ParameterMap mParameters;
 	};
 
 	class VOODOO_API Technique
 	{
+		friend class Shader;
 	public:
-		Technique(Shader * shader, CGtechnique technique);
+		Technique();
 
 		inline std::string Name()
 		{
@@ -82,22 +88,26 @@ namespace VoodooShader
 		}
 
 		size_t NumPasses();
-		PassRef GetPass(size_t index);
+		Pass * GetPass(size_t index);
+
+	protected:
+		static Technique * Create(Shader * parent, CGtechnique cgTech);
 
 	private:
-		void SetupPasses();
+		void Link();
 
 		Core * mCore;
 		Shader * mParent;
 		std::string mName;
-		PassVector mPasses;
+		PassVector_Ptr mPasses;
 		CGtechnique mTechnique;
 	};
 
 	class VOODOO_API Pass
 	{
+		friend class Technique;
 	public:
-		Pass(Technique * tech, CGpass pass);
+		Pass();
 
 		inline std::string Name()
 		{
@@ -112,13 +122,21 @@ namespace VoodooShader
 			return mCore;
 		}
 
-		TextureRef Target();
+		TextureRef Target()
+		{
+			return mTarget;
+		}
 
 		CGprogram GeometryProgram();
 		CGprogram VertexProgram();
 		CGprogram FragmentProgram();
 
+	protected:
+		static Pass * Create(Technique * parent, CGpass cgPass);
+
 	private:
+		void Link();
+
 		Core * mCore;
 		Technique * mParent;
 

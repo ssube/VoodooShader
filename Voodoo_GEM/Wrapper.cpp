@@ -656,7 +656,7 @@ public:
 		RealDevice->SetVertexShader(0);
 		RealDevice->SetPixelShader(0);
 
-		VoodooShader::PassRef pass = testShader->GetDefaultTechnique()->GetPass(0);
+		VoodooShader::Pass * pass = testShader->GetDefaultTechnique()->GetPass(0);
 		VoodooDX9->BindPass(pass);
 
 		RealDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_FALSE);
@@ -2091,6 +2091,7 @@ public:
 		try
 		{
 			testShader = VoodooCore->CreateShader("J:\\Morrowind_clean\\test.cgfx", NULL);
+			VoodooCore->LinkShader(testShader);
 		} catch ( VoodooShader::Exception & exc ) {
 			VoodooCore->GetLog()->Log("Voodoo GEM: Error compiling shader.\n");
 		}

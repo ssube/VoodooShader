@@ -75,13 +75,16 @@ namespace VoodooShader
 
 	ShaderRef Core::CreateShader(std::string filename, const char ** args)
 	{
-		CGEffectMap::iterator CGEffect = this->mCGEffects.find(filename);
-		if ( CGEffect != this->mCGEffects.end() )
+		ShaderMap::iterator shader = this->mShaders.find(filename);
+
+		if ( shader != this->mShaders.end() )
 		{
-			return ShaderRef(new Shader(this, CGEffect->second));
+			return shader->second;
 		} else {
 			// Load the shader from file
-			return ShaderRef(new Shader(this, filename, args));
+			ShaderRef newShader = Shader::Create(this, filename, args);
+			this->mShaders[filename] = newShader;
+			return newShader;
 		}
 	}
 
@@ -119,6 +122,27 @@ namespace VoodooShader
 		} else {
 			return textureEntry->second;
 		}
+	}
+
+	ParameterRef Core::GetParameter(std::string name, ParameterType type)
+	{
+		ParameterMap::iterator paramEntry = this->mParameters.find(name);
+		if ( paramEntry != this->mParameters.end() )
+		{
+			return ParameterRef();
+		} else {
+			if ( paramEntry->second->Type() == type )
+			{
+				return paramEntry->second;
+			} else {
+				return ParameterRef();
+			}				
+		}
+	}
+
+	void Core::LinkShader(ShaderRef shader)
+	{
+		shader->Link();
 	}
 		
 	void Core::CGErrorHandler(CGcontext context, CGerror error, void * core)

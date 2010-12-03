@@ -70,10 +70,10 @@ namespace VoodooShader
 		for ( current = start; current != end; ++current )
 		{
 			ShaderRef shader = *current;
-			TechniqueRef tech = shader->GetDefaultTechnique();
+			Technique * tech = shader->GetDefaultTechnique();
 			for ( size_t passNum = 0; passNum < tech->NumPasses(); ++passNum )
 			{
-				PassRef pass = tech->GetPass(passNum);
+				Pass * pass = tech->GetPass(passNum);
 				adapter->BindPass(pass);
 				adapter->DrawQuad();
 			}

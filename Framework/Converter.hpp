@@ -97,6 +97,25 @@ namespace VoodooShader
 			}
 		}
 
+		static inline ParameterCategory ToParameterCategory(ParameterType type)
+		{
+			switch ( type )
+			{
+			case PT_Float1:
+			case PT_Float2:
+			case PT_Float3:
+			case PT_Float4:
+				return PC_Float;
+			case PT_Sampler1D:
+			case PT_Sampler2D:
+			case PT_Sampler3D:
+				return PC_Sampler;
+			case PT_Unknown:
+			default:
+				return PC_Unknown;
+			}
+		}
+
 		/**
 		 * Helper function to convert enum values into readable strings used in logging; this
 		 * overload handles texture formats.
@@ -160,6 +179,20 @@ namespace VoodooShader
 			case PT_Unknown:
 			default:
 				return "PT_Unknown";
+			}
+		}
+
+		static inline const char * ToString(ParameterCategory cat)
+		{
+			switch ( cat )
+			{
+			case PC_Float:
+				return "PC_Float";
+			case PC_Sampler:
+				return "PC_Sampler";
+			case PC_Unknown:
+			default:
+				return "PC_Unknown";
 			}
 		}
 	};

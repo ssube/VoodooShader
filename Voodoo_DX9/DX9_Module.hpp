@@ -38,8 +38,8 @@ namespace VoodooShader
 		public:
 			Adapter(Core * core, IDirect3DDevice9 * device);
 
-			bool LoadPass(PassRef pass);
-			void BindPass(PassRef shader);
+			bool LoadPass(Pass * pass);
+			void BindPass(Pass * shader);
 			void UnbindPass();
 
 			void DrawQuad(bool fullscreen = true, float * coords = NULL);

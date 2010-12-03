@@ -6,13 +6,13 @@
 
 namespace VoodooShader
 {
-	bool Adapter::LoadPass(PassRef pass)
+	bool Adapter::LoadPass(Pass * pass)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 		return false;
 	}
 
-	void Adapter::BindPass(PassRef pass)
+	void Adapter::BindPass(Pass * pass)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 	}

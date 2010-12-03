@@ -60,21 +60,21 @@ namespace VoodooShader
 		if ( material != this->mMaterials.end() )
 		{
 			ShaderRef shader = material->second;
-			TechniqueRef tech = shader->GetDefaultTechnique();
+			Technique * tech = shader->GetDefaultTechnique();
 			//! @todo Support multiple passes for material shaders.
 			//for ( size_t passNum = 0; passNum < tech->NumPasses(); ++passNum )
 			//{
-				PassRef pass = tech->GetPass(0);
+				Pass * pass = tech->GetPass(0);
 				adapter->BindPass(pass);
 			//	adapter->DrawFSQuad();
 			//}
-			adapter->BindPass(pass);
+			//adapter->BindPass(pass);
 			this->mBound = shader;		
 		} else {
 			if ( this->mDefault.get() )
 			{
-				TechniqueRef tech = this->mDefault->GetDefaultTechnique();
-				PassRef pass = tech->GetPass(0);
+				Technique * tech = this->mDefault->GetDefaultTechnique();
+				Pass * pass = tech->GetPass(0);
 				adapter->BindPass(pass);
 				this->mBound = this->mDefault;
 			} else {

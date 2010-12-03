@@ -38,6 +38,7 @@ namespace VoodooShader
 
 		std::string Message();
 
+	private:
 		const Core * mCore;
 		const std::string mMessage;
 		const char * mFile;

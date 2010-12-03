@@ -48,7 +48,6 @@ namespace VoodooShader
 		std::string Name();
 
 		ParameterType Type(void);
-		ParameterCategory Category(void);
 
 		void Set(TextureRef newTex);
 		void Set(float newX);

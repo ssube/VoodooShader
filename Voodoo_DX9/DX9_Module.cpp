@@ -75,7 +75,7 @@ namespace VoodooShader
 			FSQuadVerts->Unlock();
 		}
 
-		bool Adapter::LoadPass(PassRef pass)
+		bool Adapter::LoadPass(Pass * pass)
 		{
 			CGprogram vertProg = pass->VertexProgram();
 			CGprogram fragProg = pass->FragmentProgram();
@@ -109,7 +109,7 @@ namespace VoodooShader
 			return true;
 		}
 
-		void Adapter::BindPass(PassRef pass)
+		void Adapter::BindPass(Pass * pass)
 		{
 			// Both should be loaded and valid (if they exist and prepare was called)
 			CGprogram vertProg = pass->VertexProgram();
@@ -143,6 +143,7 @@ namespace VoodooShader
 					if ( cgIsProgram(vertProg) )
 					{
 						cgD3D9UnbindProgram(pass->VertexProgram());
+						mBoundVP = NULL;
 					}
 					return;
 				} else {
@@ -192,7 +193,7 @@ namespace VoodooShader
 
 		void Adapter::ApplyParameter(ParameterRef param)
 		{
-			switch ( param->Category() )
+			switch ( Converter::ToParameterCategory(param->Type()) )
 			{
 			case PC_Float:
 				cgD3D9SetUniform(param->Param(), param->GetFloat());
@@ -200,12 +201,16 @@ namespace VoodooShader
 			case PC_Sampler:
 				cgD3D9SetTextureParameter(param->Param(), (IDirect3DTexture9 *)param->GetTexture()->Get());
 				break;
+			case PC_Unknown:
+			default:
+				this->mCore->GetLog()->Format("Voodoo DX9: Unable to bind parameter %s of unknown type.")
+					.With(param->Name()).Done();
 			}
 		}
 
 		bool Adapter::ConnectTexture(ParameterRef param, TextureRef texture)
 		{
-			if ( param->Category() == PC_Sampler )
+			if ( Converter::ToParameterCategory(param->Type()) == PC_Sampler )
 			{
 				param->Set(texture);
 

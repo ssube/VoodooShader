@@ -37,8 +37,8 @@ namespace VoodooShader
 	class VOODOO_API Adapter
 	{
 	public:
-		virtual bool LoadPass(PassRef pass);
-		virtual void BindPass(PassRef pass);
+		virtual bool LoadPass(Pass * pass);
+		virtual void BindPass(Pass * pass);
 		virtual void UnbindPass();
 
 		virtual void DrawQuad(bool fullscreen = true, float * coords = NULL);

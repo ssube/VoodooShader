@@ -109,6 +109,9 @@ namespace VoodooShader
 		 * @throws Exception if a parameter with the given name already exists.
 		 */
 		ParameterRef CreateParameter(std::string name, ParameterType type);
+		ParameterRef Core::GetParameter(std::string name, ParameterType type);
+
+		void LinkShader(ShaderRef shader);
 
 	//protected:
 		static void CGErrorHandler(CGcontext context, CGerror error, void * core);
@@ -124,8 +127,6 @@ namespace VoodooShader
 
 		// Cg objects:
 		CGcontext mCGContext;
-
-		CGEffectMap mCGEffects;
 
 		ShaderMap mShaders;
 		TextureMap mTextures;
