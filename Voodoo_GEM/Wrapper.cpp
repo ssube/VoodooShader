@@ -2,6 +2,8 @@
 #include "Wrapper.hpp" //test
 #include "../Voodoo_DX9/DX9_Converter.hpp"
 
+std::string logname = "Voodoo_GEM.log";
+
 VoodooShader::Core * VoodooCore = NULL;
 VoodooShader::DirectX9::Adapter * VoodooDX9 = NULL;
 
@@ -2124,7 +2126,7 @@ public:
 
 		try
 		{
-			testShader = VoodooCore->CreateShader("J:\\Morrowind_clean\\test.cgfx", NULL);
+			testShader = VoodooCore->CreateShader("test.cgfx", NULL);
 			VoodooCore->LinkShader(testShader);
 		} catch ( VoodooShader::Exception & exc ) {
 			VoodooCore->GetLog()->Log("Voodoo GEM: Error compiling shader.\n");
@@ -2142,7 +2144,7 @@ public:
 __declspec(dllexport) void * __stdcall Direct3DCreate8 (UINT version)
 {
 	// Voodoo DX8.9 Init function
-	VoodooCore = new VoodooShader::Core("Voodoo_GEM.log");
+	VoodooCore = new VoodooShader::Core(logname);
 
 #ifdef _DEBUG
 	VoodooCore->GetLog()->SetBufferSize(0);
