@@ -34,13 +34,13 @@ static D3DCAPS8 d3d8Caps;
 
 IDirect3DTexture9 *FakeWaterTexture;
 
-static IDirect3DSurface9 *OldDepthSurface;
+static IDirect3DSurface9 *OldDepthSurface = NULL;
 
 static int tcount = 0;
 
-VoodooShader::TextureRef backbuffer;
-IDirect3DSurface9 * trueBBSurf;
-VoodooShader::ShaderRef testShader;
+VoodooShader::TextureRef backbuffer = VoodooShader::TextureRef();
+IDirect3DSurface9 * trueBBSurf = NULL;
+VoodooShader::ShaderRef testShader = VoodooShader::ShaderRef();
 
 DWORD cycles = 0;
 DWORD shot = 0;
@@ -49,6 +49,8 @@ VoodooShader::DirectX9::FSVert cornerCoords[6];
 
 void SetupCornerCoords()
 {
+	ZeroMemory(cornerCoords, sizeof(cornerCoords[0]) * 6);
+
 	cornerCoords[0].x =   0.0f; cornerCoords[0].y =   0.0f;
 	cornerCoords[1].x =   0.0f; cornerCoords[1].y = 512.0f;
 	cornerCoords[2].x = 512.0f; cornerCoords[2].y = 512.0f;
@@ -683,15 +685,26 @@ public:
 		RealDevice->SetRenderState (D3DRS_CULLMODE, 2);
 
 		IDirect3DTexture9 * tex = (IDirect3DTexture9 *)backbuffer->Get();
+		IDirect3DSurface9 * sur = NULL;
+		tex->GetSurfaceLevel(0, &sur);
+
 		RealDevice->SetTexture(0, tex);
 		RealDevice->SetTexture(1, tex);
 
-		//VoodooShader::Pass * pass = testShader->GetDefaultTechnique()->GetPass(0);
-		//VoodooDX9->BindPass(pass);
+		size_t passCount = testShader->GetDefaultTechnique()->NumPasses();
 
-		VoodooDX9->DrawQuad(true);
+		for ( size_t curPass = 0; curPass < passCount; ++curPass )
+		{
+			VoodooShader::Pass * pass = testShader->GetDefaultTechnique()->GetPass(curPass);
 
-		//VoodooDX9->UnbindPass();
+			VoodooDX9->BindPass(pass);
+
+			VoodooDX9->DrawQuad(true);
+
+			VoodooDX9->UnbindPass();
+
+			HRESULT texcopy = RealDevice->StretchRect(trueBBSurf, NULL, sur, NULL, D3DTEXF_NONE);
+		}
 
 		this->mRenderState.RestoreState(this->RealDevice);
 
@@ -710,6 +723,7 @@ public:
 
 			D3DXSaveSurfaceToFileA(name, D3DXIFF_PNG, trueBBSurf, NULL, NULL);
 
+			delete name;
 			cycles = 0;
 		}
 
