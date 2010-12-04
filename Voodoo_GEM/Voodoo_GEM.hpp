@@ -23,6 +23,7 @@
 #pragma comment(lib, "../Debug/VoodooFramework.lib")
 
 #include "../Voodoo_DX9/DX9_Module.hpp"
+#include "../Voodoo_DX9/DX9_Converter.hpp"
 #pragma comment(lib, "../Debug/Voodoo_DX9.lib")
 
 #include <d3d9.h>
@@ -31,9 +32,16 @@
 #pragma comment(lib, "D3D9.lib")
 #pragma comment(lib, "D3dx9.lib")
 
+#include "MGE/FauxD3D8Header.hpp"
+
 #define GEMCALL(type) type _stdcall
 
 interface IGEM3D8;
 
 extern VoodooShader::Core * VoodooCore;
 extern VoodooShader::DirectX9::Adapter * VoodooDX9;
+
+typedef IDirect3D8 * (__stdcall * D3DFunc8)(UINT);
+
+D3DCAPS8 d3d8Caps;
+

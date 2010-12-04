@@ -177,7 +177,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Wrapper.cpp"
+				RelativePath=".\IGEM3D8.cpp"
 				>
 			</File>
 		</Filter>
@@ -191,9 +191,17 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Wrapper.hpp"
+				RelativePath=".\Voodoo_GEM.hpp"
 				>
 			</File>
+			<Filter
+				Name="MGE"
+				>
+				<File
+					RelativePath=".\MGE\FauxD3D8Header.hpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

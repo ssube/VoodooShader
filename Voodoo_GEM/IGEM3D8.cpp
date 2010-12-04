@@ -19,6 +19,8 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
+#include "Voodoo_GEM.hpp"
+
 /**
  * The core GEM wrapper class for D3D8 objects. This class is responsible for the primary abstraction
  * from D3D8 to D3D9. This class is responsible for creating devices, giving it control over what is
@@ -43,7 +45,7 @@ public:
 	IGEM3D8(IDirect3D9 * realObject)
 		: mRealObject(realObject)
 	{
-		
+
 	}
 
 	// IUnknown methods
@@ -180,7 +182,7 @@ public:
 		D3DDEVTYPE DeviceType,
 		HWND hFocusWindow,
 		DWORD BehaviorFlags,
-		D3DPRESENT_PARAMETERS pPresentationParameters,
+		D3DPRESENT_PARAMETERS * pPresentationParameters,
 		IDirect3DDevice8 ** ppReturnedDeviceInterface
 	)
 	{
@@ -219,7 +221,7 @@ public:
 #endif
 
 		IDirect3DDevice9 * mRealDevice;
-		HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, mpPresentationParameters, &mRealDevice);
+		HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &mRealDevice);
 
 #ifdef _DEBUG
 		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::CreateDevice(%d, %d, %d, %d, %d, %d) == %d\n")
@@ -234,9 +236,9 @@ public:
 			return hr;
 		} else {
 			// Succeeded, create a fake device and go from there
-			IGEM3DDevice8 * mFakeDevice = new IGEM3DDevice8(mRealDevice);
+			//IGEM3DDevice8 * mFakeDevice = new IGEM3DDevice8(mRealDevice);
 
-			(*ppReturnedDeviceInterface) = mFakeDevice;
+			//(*ppReturnedDeviceInterface) = mFakeDevice;
 
 			return hr;
 		}
@@ -281,7 +283,122 @@ public:
 
 #ifdef _DEBUG
 		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetAdapterDisplayMode(%d, %d) == %d\n")
-			.With(Adapter).With(pMode).With(hr).Done();
+			.With(Adapter).With(pMode).With(cgD3D9TranslateHRESULT(hr)).Done();
+#endif
+
+		return hr;
+	}
+
+	/**
+	 * @note This function forcibly ignored WHQL levels            
+	 */
+	GEMCALL(HRESULT) GetAdapterIdentifier
+	(
+		UINT Adapter,
+		DWORD Flags,
+		D3DADAPTER_IDENTIFIER8 * pIdentifier
+	)
+	{
+		D3DADAPTER_IDENTIFIER9 realIdentifier;
+
+		//HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, Flags, pIdentifier);
+		HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
+
+#ifdef _DEBUG
+		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n")
+			.With(Adapter).With(Flags).With(pIdentifier).With(cgD3D9TranslateHRESULT(hr)).Done();
+#endif
+
+		if ( SUCCEEDED(hr) )
+		{
+			// Strings, so use copymemory instead of assignment
+			::CopyMemory (pIdentifier, &realIdentifier, 1024);
+			pIdentifier->DeviceId			= realIdentifier.DeviceId;
+			pIdentifier->DeviceIdentifier	= realIdentifier.DeviceIdentifier;
+			pIdentifier->DriverVersion		= realIdentifier.DriverVersion;
+			pIdentifier->Revision			= realIdentifier.Revision;
+			pIdentifier->SubSysId			= realIdentifier.SubSysId;
+			pIdentifier->VendorId			= realIdentifier.VendorId;
+			pIdentifier->WHQLLevel			= realIdentifier.WHQLLevel;
+		}
+
+		return hr;
+	}
+
+	GEMCALL(UINT) GetAdapterModeCount
+	(
+		UINT Adapter
+	)
+	{
+		UINT r = mRealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
+
+#ifdef _DEBUG
+		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetAdapterModeCount(%d) == %d\n")
+			.With(Adapter).With(r).Done();
+#endif
+
+		return r;
+	}
+
+	GEMCALL(HMONITOR) GetAdapterMonitor
+	(
+		UINT Adapter
+	)
+	{
+		HMONITOR hm = mRealObject->GetAdapterMonitor(Adapter);
+
+#ifdef _DEBUG
+		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetAdapterMonitor(%d) == %d\n")
+			.With(Adapter).With(hm).Done();
+#endif
+
+		return hm;
+	}
+
+	/**
+	 * @note Test function: MGE uses a caching of actual D3D8 caps, let's see if we can just grab
+	 * 		 the appropriate entries from a D3D9 caps struct. They share an identical format until
+	 * 		 the end of the D3D8 caps section, so...            
+	 */
+	GEMCALL(HRESULT) GetDeviceCaps
+	(
+		UINT Adapter,
+		D3DDEVTYPE DeviceType,
+		D3DCAPS8 * pCaps
+	)
+	{
+		D3DCAPS9 realCaps;
+		HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
+
+#ifdef _DEBUG
+		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetDeviceCaps(%d, %d, %d) == %d\n")
+			.With(Adapter).With(DeviceType).With(pCaps).With(cgD3D9TranslateHRESULT(hr)).Done();
+#endif
+
+		if ( SUCCEEDED(hr) )
+		{
+			::CopyMemory(pCaps, &realCaps, sizeof(D3DCAPS8));
+		}
+
+		return hr;
+	}
+
+	/**
+	 * This is a legacy function to register a software renderer into the DX8 system; however, the
+	 * DX8 docs state that it is unsupported. The DX9 docs revise that, reintroducing support for
+	 * it. Since the Voodoo IGEM3D8 layer targets DX9, the function is callable and will target the
+	 * appropriate DX9 function. It will log a warning message, due to technically being illegal.
+	 */
+	GEMCALL(HRESULT) RegisterSoftwareDevice
+	(
+		void * pInitializeFunction
+	)
+	{
+		HRESULT hr = mRealObject->RegisterSoftwareDevice(pInitializeFunction);
+
+#ifdef _DEBUG
+		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::RegisterSoftwareDevice(%d) == %d\n")
+			.With(pInitializeFunction).With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
 
 		return hr;
