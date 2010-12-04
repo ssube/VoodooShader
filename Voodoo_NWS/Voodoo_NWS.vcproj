@@ -181,7 +181,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Resource.hpp"
+				RelativePath=".\resource.h"
 				>
 			</File>
 			<File
@@ -201,5 +201,13 @@
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="BuildVersion_AssemblyInfoFilename"
+			Value="Voodoo_NWS.rc"
+		/>
+		<Global
+			Name="BuildVersion_UseGlobalSettings"
+			Value="True"
+		/>
 	</Globals>
 </VisualStudioProject>

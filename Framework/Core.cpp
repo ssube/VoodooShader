@@ -7,15 +7,45 @@
 #include "Texture.hpp"
 #include "Adapter.hpp"
 
+#pragma comment(lib, "version.lib")
+
 namespace VoodooShader
 {
 	Core::Core(std::string logfile)
 		: mAdapter(NULL)
 	{
 		this->mLogger = new Logger(logfile.c_str());
+
 #ifdef _DEBUG
 		this->mLogger->SetBufferSize(0);
 #endif
+
+		this->mLogger->Log(VOODOO_CORE_COPYRIGHT, false);
+		this->mLogger->Log(VOODOO_CORE_VERSION_STRING, false);
+
+		/*char versionBuffer[8192];
+		BOOL hr = GetFileVersionInfoA("VoodooFramework.dll", NULL, 8192, versionBuffer);
+		if ( hr != 0 )
+		{
+			VS_FIXEDFILEINFO * version = NULL;
+			UINT versionSize;
+			hr = VerQueryValueA(versionBuffer, "\\", (LPVOID*)&version, &versionSize);
+			if ( hr != 0 )
+			{
+				UINT versionMajor = ( version->dwFileVersionMS & 0xFFFF0000 ) / 0x10000;
+				UINT versionMinor = ( version->dwFileVersionMS & 0x0000FFFF );
+				UINT versionBuild = ( version->dwFileVersionLS & 0xFFFF0000 ) / 0x10000;
+				UINT versionRev   = ( version->dwFileVersionLS & 0x0000FFFF );
+
+				this->mLogger->Format("Voodoo Core: Starting version %d.%d.%d (rev %d) core...")
+					.With(versionMajor).With(versionMinor).With(versionBuild).With(versionRev).Done();
+			} else {
+				this->mLogger->Log("Voodoo Core: Failed to retrieve version info.");
+			}
+		} else {
+			this->mLogger->Log("Voodoo Core: Failed to retrieve version info.");
+		}*/
+
 		this->mLogger->Log("Voodoo Core: Preparing core components...\n");
 
 		// Init Cg

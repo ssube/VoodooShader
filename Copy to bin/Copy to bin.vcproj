@@ -33,7 +33,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/VoodooFramework.dll&quot; /B &quot;$(SolutionDir)/bin/VoodooFramework.dll&quot; /B&#x0D;&#x0A;copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/Voodoo_DX9.dll&quot; /B &quot;$(SolutionDir)/bin/Voodoo_DX9.dll&quot; /B&#x0D;&#x0A;copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/Voodoo_GEM.dll&quot; /B &quot;$(SolutionDir)/bin/Voodoo_GEM.dll&quot; /B"
+				CommandLine="copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/VoodooFramework.dll&quot; /B &quot;$(SolutionDir)/bin/VoodooFramework.dll&quot; /B&#x0D;&#x0A;copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/Voodoo_DX9.dll&quot; /B &quot;$(SolutionDir)/bin/Voodoo_DX9.dll&quot; /B&#x0D;&#x0A;copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/Voodoo_GEM.dll&quot; /B &quot;$(SolutionDir)/bin/Voodoo_GEM.dll&quot; /B&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -55,7 +55,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/VoodooFramework.dll&quot; /B &quot;$(SolutionDir)/bin/VoodooFramework.dll&quot; /B&#x0D;&#x0A;copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/Voodoo_DX9.dll&quot; /B &quot;$(SolutionDir)/bin/Voodoo_DX9.dll&quot; /B&#x0D;&#x0A;copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/Voodoo_GEM.dll&quot; /B &quot;$(SolutionDir)/bin/Voodoo_GEM.dll&quot; /B"
+				CommandLine="copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/VoodooFramework.dll&quot; /B &quot;$(SolutionDir)/bin/VoodooFramework.dll&quot; /B&#x0D;&#x0A;copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/Voodoo_DX9.dll&quot; /B &quot;$(SolutionDir)/bin/Voodoo_DX9.dll&quot; /B&#x0D;&#x0A;copy /Y &quot;$(SolutionDir)/$(ConfigurationName)/Voodoo_GEM.dll&quot; /B &quot;$(SolutionDir)/bin/Voodoo_GEM.dll&quot; /B&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -82,5 +82,9 @@
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="BuildVersion_UseGlobalSettings"
+			Value="True"
+		/>
 	</Globals>
 </VisualStudioProject>

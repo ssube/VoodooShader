@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "Resource.hpp"
+#include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -53,8 +53,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,1,1
- PRODUCTVERSION 0,0,1,1
+ FILEVERSION 0,1,0,0
+ PRODUCTVERSION 0,1,0,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -70,12 +70,12 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "FileDescription", "Voodoo Shader MW Module"
-            VALUE "FileVersion", "0, 0, 1, 1"
+            VALUE "FileVersion", "0, 1, 0, 0"
             VALUE "InternalName", "Voodoo/GEM"
             VALUE "LegalCopyright", "Copyright (C) 2010 by Sean Sube"
             VALUE "OriginalFilename", "Voodoo_GEM.dll"
             VALUE "ProductName", "Voodoo Shader Framework"
-            VALUE "ProductVersion", "0, 0, 1, 1"
+            VALUE "ProductVersion", "0, 1, 0, 0"
         END
     END
     BLOCK "VarFileInfo"
