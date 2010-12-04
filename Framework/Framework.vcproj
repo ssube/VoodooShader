@@ -306,5 +306,9 @@
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="BuildVersion_BuildVersioningStyle"
+			Value="None.None.Increment.TimeStamp"
+		/>
 	</Globals>
 </VisualStudioProject>

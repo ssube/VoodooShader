@@ -1,6 +1,7 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by DX8.9_Module.rc
+// Used by Voodoo_NWS.rc
+//
 
 // Next default values for new objects
 // 
