@@ -7,6 +7,8 @@
 #include "Texture.hpp"
 #include "Adapter.hpp"
 
+#pragma comment(lib, "version.lib")
+
 namespace VoodooShader
 {
 	Core::Core(std::string logfile)
@@ -18,15 +20,16 @@ namespace VoodooShader
 		this->mLogger->SetBufferSize(0);
 #endif
 
+		this->mLogger->Log(VOODOO_CORE_COPYRIGHT, false);
 		this->mLogger->Log(VOODOO_CORE_VERSION_STRING, false);
 
-		char versionBuffer[8192];
+		/*char versionBuffer[8192];
 		BOOL hr = GetFileVersionInfoA("VoodooFramework.dll", NULL, 8192, versionBuffer);
 		if ( hr != 0 )
 		{
 			VS_FIXEDFILEINFO * version = NULL;
 			UINT versionSize;
-			hr = VerQueryValueA(versionBuffer, "\\", &version, &versionSize);
+			hr = VerQueryValueA(versionBuffer, "\\", (LPVOID*)&version, &versionSize);
 			if ( hr != 0 )
 			{
 				UINT versionMajor = ( version->dwFileVersionMS & 0xFFFF0000 ) / 0x10000;
@@ -41,9 +44,7 @@ namespace VoodooShader
 			}
 		} else {
 			this->mLogger->Log("Voodoo Core: Failed to retrieve version info.");
-		}
-
-		//this->Log(VOODOO_CORE_COPYRIGHT, false);
+		}*/
 
 		this->mLogger->Log("Voodoo Core: Preparing core components...\n");
 
