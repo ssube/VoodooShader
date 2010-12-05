@@ -180,6 +180,10 @@
 				RelativePath=".\IGEM3D8.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\IGEM3DDevice8.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"

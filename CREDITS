@@ -1,0 +1,123 @@
+This file is an attempt to recognize everyone who helped with or contributed to
+the Voodoo Shader project in any way. I will try to note everyone and their
+contribution, in no particular order, but if I make any mistakes, please let me
+know. 
+
+
+-- Naming and brainstorming:
+
+Mireneye from the BethSoft forums for suggesting Voodoo for the base name.
+	This is a nod to the old graphics cards and 3DFX. Without them, who knows if
+	any of us would be in this mess today.
+	
+Anonytroll, from the #morrowind IRC, and Mireneye contributed the basis for
+	the Morrowind module (the original suggestion was AGEM).
+	
+J-Dawg from F3Underground contributed the names for the Fallout 3 and
+	Oblivion modules (Raven and Sigil, respectively) one night in the IRC.
+	
+Zebranky from the NWNX project contributed the NWN2 module name, Shard (same
+	night, in #nwn2cr).
+
+Thanks as well to all the other people who helped brainstorm names, without
+	checking my IRC logs or learning the alphabet:
+		Archie, brianmeyerdesign, Phantasma (awesome suggestions), Akavit,
+		Cathartis, Zebranky, J-Dawg, Sethan, ...
+	
+-- Code and tech:
+
+Timeslip, d4w, phal, krzymark, LizTail and all the others who worked on MGE. It
+	is an insane feat of engineering and a testament to your skill that all those
+	thousands of lines of undocumented, mysterious code can actually run. ;)
+	Working	on MGE was definitely something I enjoyed.
+	
+phal deserves a second mention for getting depth into shaders in MGE back in
+	the day, that was quite a feat and inspired me to not take D3D9's no for an
+	answer in Voodoo.
+	
+virusman, Zebranky and some of the other NWNX folks for helping me get into the
+	NWN	engine and make sense of that. Scripting in NWN would never have happened 
+	without some of the suggestions and snippets you gave me.
+	
+The BioWare developers who gave us the NWN linker map. Without that, I would
+	have been lost, even with Zebranky and Skywing's help.
+	
+Skywing for his code and the unending days of confusion it gave me. ;) It also
+	simplified NWN's message processing by a huge amount and saved me tons of
+	time.
+	
+Nostrebor and Zebranky from the EA/BioWare social forums, for contributing
+	patches for a few annoying bugs in NWShader. Your suggestions and code pointed
+	out things I never would've caught, and some of them you fixed for me. Thanks
+	to you both.
+	
+Azorbix et al for the Tatnium D3D9 starter kit. Your wrapper saved me a ton of
+	time
+
+
+-- Inspiration: (oh gods, so many people)
+
+Fliggerty of Great House Fliggerty, for a general disbelief in the 
+	classification "impossible" and occasionally encouraging my insanity. The best
+	idea? Nah. Epic? Absolutely. Best wishes to you, Shmiggerty and baby Callie.     
+	
+All the NWShader alpha and beta testers, including Gonzo_og, Inayity, ... and
+	all the others. You found more bugs than I could have, almost more than I
+	could fix at times. What I learned from that project made this one possible.
+	
+The various folks who bounced ideas back at me, which only encouraged this. 
+	Skywing and Zebranky, you both influenced the project. 
+	
+The Morrowind and Neverwinter Nights communities, for their interest and warm
+	reception of MGE and NWShader (after a little selling ;) ). If not for the
+	continued encouragement from you all, none of this would have ever happened.
+	
+The game studios that brought us all these games I've so cruelly abused. 
+		BioWare for Neverwinter Nights
+		Bethesda Softworks for Morrowind, Oblivion and Fallout 3
+		Obsidian for Neverwinter Nights 2 and Fallout: New Vegas
+	I'd love to meet you guys, you've all done some great work. I've seen a few
+	comments from developers in some of my BioBoards and other threads, you guys
+	even noticing my work is reason enough to keep going.
+	 
+	Without you all, none of this would be possible (seriously).
+	
+The studios who inspired me, with their clever or downright awesome graphics.
+		xxx (the STALKER series, some insanely good shaders)
+		CryTek (the Crysis engine and some of your published docs)
+		
+The presenters are SIGGRAPH, AI-something and GDC. I hope to one day come to
+	your conventions; until then, I'll be searching your papers for anything new
+	and awesome (and finding plenty).
+
+Timeslip for creating MGE, the reason I started down this road at all.
+	Indirectly, he was the reason I learned C++, DirectX, OpenGL, and almost
+	everything technical and useful I know today. And I don't even know the man.
+	
+xxx from the TES Alliance forums, for working with me to port an early version
+	of my trueBloom shader to the Oblivion graphics extender. That was the start
+	of this crazy many-game idea. If you had known what you would cause... :P
+
+C. S. Goto for a quote I've had in my forum signatures for some time:
+	"Unlikely and impossible are allied,  but not identical." 
+	I think the quote was actually referring to some form of siege in a 40k
+	book, but I hijacked it and applied it to modding.   
+	
+So, so many bands that have braced up my questionable sanity during long days,
+	nights, and unidentifiable time periods of coding. A few that I listened to
+	repeatedly: The Agonist, Assemblage 23, Apoptygma Berzerk, Concrete Blonde, 
+	Cult of Luna, Delain, Emilie Autumn, Flogging Molly, Hungry Lucy, In Flames,
+	Porcelain and The Tramps, Seraphim Shock, Tiamat and Xandria. You'll never
+	know it, but you contributed to making this a reality.     
+
+The people who put up with my nonsensical rants and ridiculous comments. There 
+	are plenty of you, so I'll just name channels and forums:
+		#elderscrolls, #morrowind, #nwn2cr, #projectq, #ghf, the MW
+		modding Skype channel, TES Alliance forums, Great House
+		Fliggerty forums, BethSoft forums, BioBoards, EA/BioWare social, and 
+		many others over the years. You can all be proud that, in some small
+		way, this is all your fault. ;)
+	The Unforgotten Realms and Forum of the Dead get a special mention, since
+		neither are around any longer, but were some of the first communities I was
+		involved in for modding. Any old members of those, hit me up and we'll go for
+		beers. :)
