@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="Voodoo_GEM"
+	Name="Voodoo_DX89"
 	ProjectGUID="{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}"
 	RootNamespace="DX8_Module"
 	Keyword="Win32Proj"
@@ -177,11 +177,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\IGEM3D8.cpp"
+				RelativePath=".\IVoodoo3D8.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\IGEM3DDevice8.cpp"
+				RelativePath=".\IVoodoo3DDevice8.cpp"
 				>
 			</File>
 		</Filter>
@@ -195,7 +195,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Voodoo_GEM.hpp"
+				RelativePath=".\Voodoo_DX89.hpp"
 				>
 			</File>
 			<Filter
@@ -213,7 +213,7 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\Voodoo_GEM.rc"
+				RelativePath=".\Voodoo_DX89.rc"
 				>
 			</File>
 		</Filter>

@@ -19,18 +19,18 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "Voodoo_GEM.hpp"
+#include "Voodoo3D8.hpp"
 
 /**
  * The core GEM wrapper class for D3D8 objects. This class is responsible for the primary abstraction
  * from D3D8 to D3D9. This class is responsible for creating devices, giving it control over what is
  * returned to the engine.   
  * 
- * @note The various IGEM3D8 interfaces provide an application-opaque wrapper that actually
+ * @note The various IVoodoo3D8 interfaces provide an application-opaque wrapper that actually
  * 		 implements a Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the
- * 		 IGEM3D9 interface set should be used.         
+ * 		 IVoodoo3D9 interface set should be used.         
  */
-class IGEM3D8 
+class IVoodoo3D8 
 	: public IDirect3D8
 {
 	/**
@@ -40,9 +40,9 @@ class IGEM3D8
 
 public:
 	/**
-	 * The default, public constructor for IGEM3D objects.            
+	 * The default, public constructor for IVoodoo3D objects.            
 	 */
-	IGEM3D8(IDirect3D9 * realObject)
+	IVoodoo3D8(IDirect3D9 * realObject)
 		: mRealObject(realObject)
 	{
 
@@ -103,7 +103,7 @@ public:
 		HRESULT hr = mRealObject->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(AdapterFormat).With(RenderTargetFormat)
 			.With(DepthStencilFormat).With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
@@ -124,7 +124,7 @@ public:
 		HRESULT hr = mRealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(AdapterFormat).With(Usage).With(RType)
 			.With(CheckFormat).With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
@@ -148,7 +148,7 @@ public:
 		HRESULT hr = mRealObject->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(SurfaceFormat).With(Windowed).With(MultiSampleType)
 			.With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif	
@@ -168,7 +168,7 @@ public:
 		HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
 #ifdef _DEBUG 
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::CheckDeviceType(%d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::CheckDeviceType(%d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(CheckType).With(DisplayFormat).With(BackBufferFormat).With(Windowed)
 			.With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
@@ -224,19 +224,19 @@ public:
 		HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &mRealDevice);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::CreateDevice(%d, %d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::CreateDevice(%d, %d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(hFocusWindow).With(BehaviorFlags)
 			.With(&mpPresentationParameters).With(mRealDevice).With(hr).Done();
 #endif
 
 		if ( !SUCCEEDED(hr) )
 		{
-			VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::CreateDevice failed with error %d on adapter %d.\n")
+			VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::CreateDevice failed with error %d on adapter %d.\n")
 				.With(cgD3D9TranslateHRESULT(hr)).With(Adapter).Done();
 			return hr;
 		} else {
 			// Succeeded, create a fake device and go from there
-			//IGEM3DDevice8 * mFakeDevice = new IGEM3DDevice8(mRealDevice);
+			//IVoodoo3DDevice8 * mFakeDevice = new IVoodoo3DDevice8(mRealDevice);
 
 			//(*ppReturnedDeviceInterface) = mFakeDevice;
 
@@ -254,7 +254,7 @@ public:
 		HRESULT hr = mRealObject->EnumAdapterModes(Adapter, D3DFMT_X8R8G8B8, Mode, pMode);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::EnumAdapterModes(%d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::EnumAdapterModes(%d, %d, %d) == %d\n")
 			.With(Adapter).With(Mode).With(pMode).With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
 
@@ -266,7 +266,7 @@ public:
 		UINT r = mRealObject->GetAdapterCount();
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetAdapterCount() == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::GetAdapterCount() == %d\n")
 			.With(r).Done();
 #endif
 
@@ -282,7 +282,7 @@ public:
 		HRESULT hr = mRealObject->GetAdapterDisplayMode(Adapter, pMode);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetAdapterDisplayMode(%d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::GetAdapterDisplayMode(%d, %d) == %d\n")
 			.With(Adapter).With(pMode).With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
 
@@ -305,7 +305,7 @@ public:
 		HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n")
 			.With(Adapter).With(Flags).With(pIdentifier).With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
 
@@ -333,7 +333,7 @@ public:
 		UINT r = mRealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetAdapterModeCount(%d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::GetAdapterModeCount(%d) == %d\n")
 			.With(Adapter).With(r).Done();
 #endif
 
@@ -348,7 +348,7 @@ public:
 		HMONITOR hm = mRealObject->GetAdapterMonitor(Adapter);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetAdapterMonitor(%d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::GetAdapterMonitor(%d) == %d\n")
 			.With(Adapter).With(hm).Done();
 #endif
 
@@ -371,7 +371,7 @@ public:
 		HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::GetDeviceCaps(%d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(pCaps).With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
 
@@ -386,7 +386,7 @@ public:
 	/**
 	 * This is a legacy function to register a software renderer into the DX8 system; however, the
 	 * DX8 docs state that it is unsupported. The DX9 docs revise that, reintroducing support for
-	 * it. Since the Voodoo IGEM3D8 layer targets DX9, the function is callable and will target the
+	 * it. Since the Voodoo IVoodoo3D8 layer targets DX9, the function is callable and will target the
 	 * appropriate DX9 function. It will log a warning message, due to technically being illegal.
 	 */
 	GEMCALL(HRESULT) RegisterSoftwareDevice
@@ -397,7 +397,7 @@ public:
 		HRESULT hr = mRealObject->RegisterSoftwareDevice(pInitializeFunction);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo GEM: IGEM3D8::RegisterSoftwareDevice(%d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::RegisterSoftwareDevice(%d) == %d\n")
 			.With(pInitializeFunction).With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
 

@@ -19,22 +19,27 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "Voodoo_GEM.hpp"
+#include "../Framework/VoodooFramework.hpp"
+#pragma comment(lib, "../Debug/VoodooFramework.lib")
 
-/**
-* The core GEM wrapper class for D3D8 objects. This class is responsible for the primary abstraction
-* from D3D8 to D3D9. This class is responsible for creating devices, giving it control over what is
-* returned to the engine.   
-* 
-* @note The various IGEM3D8 interfaces provide an application-opaque wrapper that actually
-* 		 implements a Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the
-* 		 IGEM3D9 interface set should be used.         
-*/
-class IGEM3DDevice8 
-	: public IDirect3DDevice8
-{
-	/**
-	* A pointer to the true underlying IDirect3DDevice9 object wrapped by this IGEM interface.            
-	*/
-	IDirect3DDevice9 * mRealDevice;
-};
+#include "../Voodoo_DX9/DX9_Module.hpp"
+#include "../Voodoo_DX9/DX9_Converter.hpp"
+#pragma comment(lib, "../Debug/Voodoo_DX9.lib")
+
+#include <d3d9.h>
+#include <d3dx9.h>
+#include <d3dx9tex.h>
+#pragma comment(lib, "D3D9.lib")
+#pragma comment(lib, "D3dx9.lib")
+
+#include "MGE/FauxD3D8Header.hpp"
+
+#define GEMCALL(type) type _stdcall
+
+interface IVoodoo3D8;
+
+extern VoodooShader::Core * VoodooCore;
+extern VoodooShader::DirectX9::Adapter * VoodooDX9;
+
+typedef IDirect3D8 * (__stdcall * D3DFunc8)(UINT);
+

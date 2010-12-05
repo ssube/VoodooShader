@@ -1,24 +1,42 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VoodooFramework", "Framework\Framework.vcproj", "{A5C09646-DA38-4869-82C3-11A66D706C43}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Core", "Framework\Framework.vcproj", "{A5C09646-DA38-4869-82C3-11A66D706C43}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX9", "Voodoo_DX9\Voodoo_DX9.vcproj", "{758A3040-38D6-4573-8C1B-74B35ECCAA6E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DX8.9_Redirect", "Utilities\DX8.9_Redirect\DX8.9_Redirect.vcproj", "{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generic Adapters", "Generic Adapters", "{32835D9A-A1C1-48F9-8588-C10837E18EF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specific Adapters", "Specific Adapters", "{817469ED-FCBA-4C43-A6B9-EE19FB4685D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX9", "Generic\Voodoo_DX9\Voodoo_DX9.vcproj", "{758A3040-38D6-4573-8C1B-74B35ECCAA6E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX89", "Generic\Voodoo_DX89\Voodoo_DX89.vcproj", "{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Frost", "Specific\Voodoo_Frost\Voodoo_Frost.vcproj", "{98903591-D205-49ED-AE60-44BDD620D16E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7F047FD6-67EA-4144-8B8F-DE017246ABDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{093207D3-DF56-4F72-BD00-ACACD9476FA8}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\CREDITS = Docs\CREDITS
+		Docs\Doxyfile = Docs\Doxyfile
+		Docs\LICENSE = Docs\LICENSE
+		Docs\README = Docs\README
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_GEM", "Voodoo_GEM\Voodoo_GEM.vcproj", "{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{758A3040-38D6-4573-8C1B-74B35ECCAA6E} = {758A3040-38D6-4573-8C1B-74B35ECCAA6E}
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{9FC03207-E672-46B6-BB1D-B34C6F00AB54}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installers", "Installers", "{2ED5D2C5-78A5-4FDE-BB9F-5D3AF391B3AA}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Installers\Core.iss = Resources\Installers\Core.iss
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DX8.9_Redirect", "DX8.9_Redirect\DX8.9_Redirect.vcproj", "{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_NWS", "Voodoo_NWS\Voodoo_NWS.vcproj", "{98903591-D205-49ED-AE60-44BDD620D16E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Copy to bin", "Copy to bin\Copy to bin.vcproj", "{B32A81B8-3749-4ABD-8EF7-4BA4A113E88D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{EBBF374A-495D-4876-91A8-CE5DAE05A383}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{7FC6175A-13FA-4F59-A164-37BDC94775CF}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Shaders\test.cgfx = Resources\Shaders\test.cgfx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +48,10 @@ Global
 		{A5C09646-DA38-4869-82C3-11A66D706C43}.Debug|Win32.Build.0 = Debug|Win32
 		{A5C09646-DA38-4869-82C3-11A66D706C43}.Release|Win32.ActiveCfg = Release|Win32
 		{A5C09646-DA38-4869-82C3-11A66D706C43}.Release|Win32.Build.0 = Release|Win32
+		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Debug|Win32.Build.0 = Debug|Win32
+		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Release|Win32.ActiveCfg = Release|Win32
+		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Release|Win32.Build.0 = Release|Win32
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E}.Debug|Win32.ActiveCfg = Debug|Win32
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E}.Debug|Win32.Build.0 = Debug|Win32
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E}.Release|Win32.ActiveCfg = Release|Win32
@@ -38,23 +60,21 @@ Global
 		{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}.Debug|Win32.Build.0 = Debug|Win32
 		{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}.Release|Win32.ActiveCfg = Release|Win32
 		{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}.Release|Win32.Build.0 = Release|Win32
-		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Debug|Win32.Build.0 = Debug|Win32
-		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Release|Win32.ActiveCfg = Release|Win32
-		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}.Release|Win32.Build.0 = Release|Win32
 		{98903591-D205-49ED-AE60-44BDD620D16E}.Debug|Win32.ActiveCfg = Debug|Win32
 		{98903591-D205-49ED-AE60-44BDD620D16E}.Debug|Win32.Build.0 = Debug|Win32
 		{98903591-D205-49ED-AE60-44BDD620D16E}.Release|Win32.ActiveCfg = Release|Win32
 		{98903591-D205-49ED-AE60-44BDD620D16E}.Release|Win32.Build.0 = Release|Win32
-		{B32A81B8-3749-4ABD-8EF7-4BA4A113E88D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B32A81B8-3749-4ABD-8EF7-4BA4A113E88D}.Debug|Win32.Build.0 = Debug|Win32
-		{B32A81B8-3749-4ABD-8EF7-4BA4A113E88D}.Release|Win32.ActiveCfg = Release|Win32
-		{B32A81B8-3749-4ABD-8EF7-4BA4A113E88D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B32A81B8-3749-4ABD-8EF7-4BA4A113E88D} = {EBBF374A-495D-4876-91A8-CE5DAE05A383}
+		{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
+		{758A3040-38D6-4573-8C1B-74B35ECCAA6E} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
+		{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
+		{98903591-D205-49ED-AE60-44BDD620D16E} = {817469ED-FCBA-4C43-A6B9-EE19FB4685D1}
+		{A5C09646-DA38-4869-82C3-11A66D706C43} = {7F047FD6-67EA-4144-8B8F-DE017246ABDE}
+		{2ED5D2C5-78A5-4FDE-BB9F-5D3AF391B3AA} = {9FC03207-E672-46B6-BB1D-B34C6F00AB54}
+		{7FC6175A-13FA-4F59-A164-37BDC94775CF} = {9FC03207-E672-46B6-BB1D-B34C6F00AB54}
 	EndGlobalSection
 EndGlobal

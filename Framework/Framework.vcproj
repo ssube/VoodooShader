@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="VoodooFramework"
+	Name="Voodoo_Core"
 	ProjectGUID="{A5C09646-DA38-4869-82C3-11A66D706C43}"
 	RootNamespace="Framework"
 	Keyword="Win32Proj"
