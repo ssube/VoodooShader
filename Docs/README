@@ -115,22 +115,7 @@ following methods:
 
 Voodoo Shader Framework (c) 2010 by Sean "peachykeen" Sube, All Rights Reserved
 
-The Voodoo Shader Project, all associated binary or object files, source code,
-or other original work are the sole property of Sean Sube (peachykeen). All
-rights to this content are reserved. It may not be modified in any way,
-including but not limited to repackaging or changing code, under any 
-circumstances. No element of the project may be redistributed or made available
-on any website or service, by any means. This restricted license is intended to
-prevent unstable or work-in-progress copies from becoming mirrored by sites 
-that will not allow the developers to update them; this has occurred and 
-caused significant problems before.
-
-VSF will be under a restricted license until beta release, at which point it
-will be released under the CC-NC-BY-SA or GPL v2 license. The exact terms will
-be determined in the future, based on the dependencies used, their licenses,
-and which provides the most balanced protection and freedom for the project.
-
-VSF is in an unusual situation, providing support for many games. Because of
-the techniques it uses, the Voodoo system is not bound by the EULA of any game
-or application, and is solely the property of the developer(s) involved in the
-project. 
+The Voodoo Shader Project, all associated binary or object files and source
+code is released under the terms and conditions specified in the document
+LICENSE included with each distribution (this document contains the text
+of the GNU GPL, v2.0).
