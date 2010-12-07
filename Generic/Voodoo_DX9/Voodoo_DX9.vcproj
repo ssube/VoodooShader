@@ -207,6 +207,26 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Hook"
+			>
+			<File
+				RelativePath=".\Hook\Direct3D-Hook.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Hook\Direct3D-Hook.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Hook\MyDirect3D9.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Hook\MyDirect3DDevice9.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 		<Global
