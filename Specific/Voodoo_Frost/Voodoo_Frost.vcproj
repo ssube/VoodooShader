@@ -178,10 +178,6 @@
 				RelativePath=".\HookManager.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\Voodoo_NWS.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -189,11 +185,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\FrostIncludes.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\resource.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Voodoo_NWS.hpp"
+				RelativePath=".\VoodooFrost.hpp"
 				>
 			</File>
 		</Filter>
