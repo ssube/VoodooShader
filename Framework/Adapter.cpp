@@ -12,7 +12,7 @@ namespace VoodooShader
 		return false;
 	}
 
-	void Adapter::BindPass(Pass * pass)
+	void Adapter::BindPass(PassRef pass)
 	{
 		Throw("Voodoo Core: Adapter function called.", NULL);
 	}

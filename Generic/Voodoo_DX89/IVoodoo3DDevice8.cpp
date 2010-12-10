@@ -19,7 +19,7 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "Voodoo3D8.hpp"
+#include "Voodoo_DX89.hpp"
 
 /**
 * The core GEM wrapper class for D3D8 objects. This class is responsible for the primary abstraction

@@ -19,12 +19,11 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "../Framework/VoodooFramework.hpp"
-#pragma comment(lib, "../Debug/VoodooFramework.lib")
+#define VOODOO_IMPORT
+#include "VoodooFramework.hpp"
 
 #include "../Voodoo_DX9/DX9_Module.hpp"
 #include "../Voodoo_DX9/DX9_Converter.hpp"
-#pragma comment(lib, "../Debug/Voodoo_DX9.lib")
 
 #include <d3d9.h>
 #include <d3dx9.h>

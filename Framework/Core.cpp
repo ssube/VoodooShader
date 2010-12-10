@@ -112,7 +112,7 @@ namespace VoodooShader
 			return shader->second;
 		} else {
 			// Load the shader from file
-			ShaderRef newShader = Shader::Create(this, filename, args);
+			ShaderRef newShader(new Shader(this, filename, args));
 			this->mShaders[filename] = newShader;
 			return newShader;
 		}
@@ -168,11 +168,6 @@ namespace VoodooShader
 		} else {	
 			return ParameterRef();		
 		}
-	}
-
-	void Core::LinkShader(ShaderRef shader)
-	{
-		shader->Link();
 	}
 		
 	void Core::CGErrorHandler(CGcontext context, CGerror error, void * core)

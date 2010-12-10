@@ -19,12 +19,12 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "Voodoo3D8.hpp"
+#include "Voodoo_DX89.hpp"
 
 /**
- * The core GEM wrapper class for D3D8 objects. This class is responsible for the primary abstraction
- * from D3D8 to D3D9. This class is responsible for creating devices, giving it control over what is
- * returned to the engine.   
+ * The core Voodoo3D8 wrapper class for D3D8 objects. This class is responsible for the primary 
+ * abstraction from D3D8 to D3D9. This class is responsible for creating devices, giving it control 
+ * over what is returned to the engine.   
  * 
  * @note The various IVoodoo3D8 interfaces provide an application-opaque wrapper that actually
  * 		 implements a Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the
@@ -34,7 +34,7 @@ class IVoodoo3D8
 	: public IDirect3D8
 {
 	/**
-	 * A pointer to the true underlying IDirect3D9 object wrapped by this IGEM interface.            
+	 * A pointer to the true underlying IDirect3D9 object wrapped by this IVoodoo3D8 interface.            
 	 */
 	IDirect3D9 * mRealObject;
 
@@ -89,7 +89,7 @@ public:
 	 * 							 the depth-stencil surface to be tested. 
 	 * @return D3D_OK if the format combination is valid, other values if invalid.
 	 * 		    
-	 * @note Will log heavily in debug builds.
+	 * @note Will log in debug builds.
 	 */
 	GEMCALL(HRESULT) CheckDepthStencilMatch
 	(

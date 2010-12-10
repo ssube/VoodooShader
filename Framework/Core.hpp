@@ -111,8 +111,6 @@ namespace VoodooShader
 		ParameterRef CreateParameter(std::string name, ParameterType type);
 		ParameterRef Core::GetParameter(std::string name, ParameterType type);
 
-		void LinkShader(ShaderRef shader);
-
 	//protected:
 		static void CGErrorHandler(CGcontext context, CGerror error, void * core);
 

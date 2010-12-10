@@ -31,11 +31,11 @@ namespace VoodooShader
 
 	class VOODOO_API Shader
 	{
-		friend class Core;
 	public:
-		Shader();
+		Shader(Core * parent, std::string filename, const char ** args = NULL);
+		Shader(Core * parent, CGeffect effect);
 
-		Technique * GetDefaultTechnique();
+		TechniqueRef GetDefaultTechnique();
 
 		size_t NumParams();
 		ParameterRef GetParam(size_t index);
@@ -50,29 +50,25 @@ namespace VoodooShader
 			return mCore;
 		}
 
-	protected:
-		static ShaderRef Create(Core * parent, std::string filename, const char ** args = NULL);
-		static ShaderRef Create(Core * parent, CGeffect effect);
-
 		void Link();
+
+	private:
 		void SetupParameters();
 		void SetupTechniques();
 
-	private:
 		Core * mCore;
 		std::string mName;
 		CGeffect mEffect;
 
-		Technique * mDefaultTechnique;
-		TechniqueMap_Ptr mTechniques;
+		TechniqueRef mDefaultTechnique;
+		//TechniqueMap_Ptr mTechniques;
 		ParameterMap mParameters;
 	};
 
 	class VOODOO_API Technique
 	{
-		friend class Shader;
 	public:
-		Technique();
+		Technique(Shader * parent, CGtechnique cgTech);
 
 		inline std::string Name()
 		{
@@ -88,26 +84,22 @@ namespace VoodooShader
 		}
 
 		size_t NumPasses();
-		Pass * GetPass(size_t index);
+		PassRef GetPass(size_t index);
 
-	protected:
-		static Technique * Create(Shader * parent, CGtechnique cgTech);
-
-	private:
 		void Link();
 
+	private:
 		Core * mCore;
 		Shader * mParent;
 		std::string mName;
-		PassVector_Ptr mPasses;
+		PassVector mPasses;
 		CGtechnique mTechnique;
 	};
 
 	class VOODOO_API Pass
 	{
-		friend class Technique;
 	public:
-		Pass();
+		Pass(Technique * parent, CGpass cgPass);
 
 		inline std::string Name()
 		{
@@ -131,12 +123,9 @@ namespace VoodooShader
 		CGprogram VertexProgram();
 		CGprogram FragmentProgram();
 
-	protected:
-		static Pass * Create(Technique * parent, CGpass cgPass);
-
-	private:
 		void Link();
 
+	private:
 		Core * mCore;
 		Technique * mParent;
 

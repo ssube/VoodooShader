@@ -38,7 +38,7 @@ namespace VoodooShader
 	{
 	public:
 		virtual bool LoadPass(Pass * pass);
-		virtual void BindPass(Pass * pass);
+		virtual void BindPass(PassRef pass);
 		virtual void UnbindPass();
 
 		virtual void DrawQuad(bool fullscreen = true, void * vertexData = NULL);

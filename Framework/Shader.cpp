@@ -7,41 +7,27 @@
 
 namespace VoodooShader
 {
-	Shader::Shader()
-		: mCore(NULL), mEffect(NULL)
-	{	}
-
-	ShaderRef Shader::Create(Core * parent, std::string filename, const char ** args)
+	Shader::Shader(Core * parent, std::string filename, const char ** args)
+		: mCore(parent), mName(filename), mDefaultTechnique()
 	{
-		Shader * shader = new Shader();
+		this->mEffect = cgCreateEffectFromFile(parent->GetCGContext(), filename.c_str(), args);
 
-		shader->mCore = parent;
-		shader->mName = filename;
-		shader->mEffect = cgCreateEffectFromFile(parent->GetCGContext(), filename.c_str(), args);
-
-		if ( !cgIsEffect(shader->mEffect) )
+		if ( !cgIsEffect(this->mEffect) )
 		{
-			Throw("Voodoo Core: Could not create shader.", parent);
-			//return;
+			Throw("Voodoo Core: Failed to create shader.", parent);
+			return;
 		}
 
-		cgSetEffectName(shader->mEffect, shader->mName.c_str());
-
-		return ShaderRef(shader);
+		cgSetEffectName(this->mEffect, this->mName.c_str());
 	}
 		
-	ShaderRef Shader::Create(Core * parent, CGeffect effect)
+	Shader::Shader(Core * parent, CGeffect effect)
+		: mCore(parent), mEffect(effect)
 	{
-		Shader * shader = new Shader();
-
-		shader->mCore = parent;
-		shader->mName = cgGetEffectName(effect);
-		shader->mEffect = effect;
-
-		return ShaderRef(shader);
+		this->mName = cgGetEffectName(effect);
 	}
 
-	Technique * Shader::GetDefaultTechnique()
+	TechniqueRef Shader::GetDefaultTechnique()
 	{
 		return this->mDefaultTechnique;
 	}
@@ -99,61 +85,56 @@ namespace VoodooShader
 
 	void Shader::SetupTechniques()
 	{
-		this->mDefaultTechnique = NULL;
-		this->mTechniques.clear();
-
 		CGtechnique cTech = cgGetFirstTechnique(mEffect);
 		while ( cgIsTechnique(cTech) )
 		{
 			CGbool valid = cgValidateTechnique(cTech);
+
 			if ( valid == CG_TRUE )
 			{
-				// Insert the technique into the map
-				Technique * tech = Technique::Create(this, cTech);
+				mCore->GetLog()->Format("Voodoo Core: Validated technique %s.\n")
+					.With(cgGetTechniqueName(cTech)).Done();
 
-				mTechniques[tech->mName] = tech;
+				// Insert the technique into the map
+				TechniqueRef tech(new Technique(this, cTech));
+
+				//! @todo Possibly keep a map of valid techniques and allow changing at runtime
 
 				// The first valid technique is the default one
-				if ( !mDefaultTechnique )
+				if ( !mDefaultTechnique.get() )
 				{
 					this->mDefaultTechnique = tech;
 				}
 
 				tech->Link();
+			} else {
+				mCore->GetLog()->Format("Voodoo Core: Technique failed to validate: %s.\n")
+					.With(cgGetTechniqueName(cTech)).Done();
 			}
 
 			cTech = cgGetNextTechnique(cTech);
 		}
 	}
 
-	Technique * Technique::Create(Shader * parent, CGtechnique cgTech)
+	Technique::Technique(Shader * parent, CGtechnique cgTech)
+		: mParent(parent), mTechnique(cgTech)
 	{
-		Technique * tech = new Technique();
+		this->mCore = this->mParent->GetCore();
 
-		tech->mTechnique = cgTech;
-		tech->mParent = parent;
-		tech->mCore = tech->mParent->GetCore();
-
-		const char * techName = cgGetTechniqueName(tech->mTechnique);
+		const char * techName = cgGetTechniqueName(this->mTechnique);
 		if ( techName )
 		{
-			tech->mName = techName;
+			this->mName = techName;
 		} else {
 			char nameBuffer[16];
-			itoa((int)(&tech->mTechnique), nameBuffer, 16);
+			itoa((int)(&this->mTechnique), nameBuffer, 16);
 
-			tech->mName = "tech_";
-			tech->mName += nameBuffer;
+			this->mName = "tech_";
+			this->mName += nameBuffer;
 		}
-
-		return tech;
 	}
 
-	Technique::Technique()
-		: mParent(NULL), mTechnique(NULL), mCore(NULL)
-	{	}
-
-	Pass * Technique::GetPass(size_t index)
+	PassRef Technique::GetPass(size_t index)
 	{
 		if ( index < this->mPasses.size() )
 		{
@@ -178,9 +159,8 @@ namespace VoodooShader
 		while ( cgIsPass(cPass) )
 		{
 			// Insert the pass into the vector
-			Pass * pass = Pass::Create(this, cPass);
+			PassRef pass(new Pass(this, cPass));
 
-			//! @todo This causes segfaults, fix
 			mPasses.push_back(pass);
 
 			pass->Link();
@@ -189,32 +169,23 @@ namespace VoodooShader
 		}
 	}
 
-	Pass * Pass::Create(Technique * parent, CGpass cgPass)
+	Pass::Pass(Technique * parent, CGpass cgPass)
+		: mParent(parent), mPass(cgPass)
 	{
-		Pass * pass = new Pass();
+		this->mCore = this->mParent->GetCore();
 
-		pass->mPass = cgPass;
-		pass->mParent = parent;
-		pass->mCore = pass->mParent->GetCore();
-
-		const char * passName = cgGetPassName(pass->mPass);
+		const char * passName = cgGetPassName(this->mPass);
 		if ( passName )
 		{
-			pass->mName = passName;
+			this->mName = passName;
 		} else {
 			char nameBuffer[16];
-			itoa((int)(&pass->mPass), nameBuffer, 16);
+			itoa((int)(&this->mPass), nameBuffer, 16);
 
-			pass->mName = "pass_";
-			pass->mName += nameBuffer;
+			this->mName = "pass_";
+			this->mName += nameBuffer;
 		}
-
-		return pass;
 	}
-
-	Pass::Pass()
-		: mParent(NULL), mPass(NULL)
-	{ }
 
 	void Pass::Link()
 	{
@@ -247,11 +218,10 @@ namespace VoodooShader
 		// Load the programs
 		Adapter * adapter = mCore->GetAdapter();
 
-		bool prepResults = adapter->LoadPass(this);
-
-		if ( !prepResults )
+		if ( !adapter->LoadPass(this) )
 		{
-			Throw("Voodoo Core: Failed to prepare pass for use.", mCore);
+			mCore->GetLog()->Format("Voodoo Core: Failed to load pass %s.\n")
+				.With(this->Name()).Done();
 		}
 	}
 
