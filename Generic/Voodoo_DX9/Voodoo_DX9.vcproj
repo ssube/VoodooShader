@@ -89,8 +89,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="Copying DX9 module to bin..."
-				CommandLine="copy /Y &quot;$(TargetPath)&quot; /B &quot;$(SolutionDir)/bin/$(TargetFileName)&quot; /B"
+				Description=""
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -168,8 +168,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="Copying DX9 module to bin..."
-				CommandLine="copy /Y &quot;$(TargetPath)&quot; /B &quot;$(SolutionDir)/bin/$(TargetFileName)&quot; /B"
+				Description=""
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>

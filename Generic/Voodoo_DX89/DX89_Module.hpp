@@ -19,11 +19,10 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
+#include <set>
+
 #define VOODOO_IMPORT
 #include "VoodooFramework.hpp"
-
-#include "../Voodoo_DX9/DX9_Module.hpp"
-#include "../Voodoo_DX9/DX9_Converter.hpp"
 
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -31,14 +30,23 @@
 #pragma comment(lib, "D3D9.lib")
 #pragma comment(lib, "D3dx9.lib")
 
+#include "Cg/cgD3D9.h"
+#pragma comment(lib, "cgD3D9.lib")
+
+#ifndef VOODOO_IMPORT_DX89
+#	define VOODOO_API_DX89 __declspec(dllexport)
+#else
+#	define VOODOO_API_DX89 __declspec(dllimport)
+#endif
+
 #include "MGE/FauxD3D8Header.hpp"
 
 #define GEMCALL(type) type _stdcall
 
 interface IVoodoo3D8;
+interface IVoodoo3DDevice8;
 
 extern VoodooShader::Core * VoodooCore;
-extern VoodooShader::DirectX9::Adapter * VoodooDX9;
 
 typedef IDirect3D8 * (__stdcall * D3DFunc8)(UINT);
 

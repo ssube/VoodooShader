@@ -19,7 +19,8 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "Voodoo_DX89.hpp"
+#include "DX89_Module.hpp"
+#include "DX89_Converter.hpp"
 
 /**
  * The core Voodoo3D8 wrapper class for D3D8 objects. This class is responsible for the primary 
@@ -212,7 +213,7 @@ public:
 #ifdef _DEBUG
 		const char * textureType = 
 			VoodooShader::Converter::ToString(
-			VoodooShader::DirectX9::DX9_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
+			VoodooShader::DirectX89::DX89_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
 			);
 
 		VoodooCore->GetLog()->Format("Voodoo GEM: Backbuffer parameters for new device: %d by %d (%d buffers), %s.\n")

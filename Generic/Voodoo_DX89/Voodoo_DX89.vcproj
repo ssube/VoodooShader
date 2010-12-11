@@ -89,8 +89,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="Copying GEM module to bin..."
-				CommandLine="copy /Y &quot;$(TargetPath)&quot; /B &quot;$(SolutionDir)/bin/$(TargetFileName)&quot; /B"
+				Description=""
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -169,8 +169,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="Copying GEM module to bin..."
-				CommandLine="copy /Y &quot;$(TargetPath)&quot; /B &quot;$(SolutionDir)/bin/$(TargetFileName)&quot; /B"
+				Description=""
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -197,11 +197,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\resource.h"
+				RelativePath=".\DX89_Converter.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Voodoo_DX89.hpp"
+				RelativePath=".\DX89_Module.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\resource.h"
 				>
 			</File>
 			<Filter
