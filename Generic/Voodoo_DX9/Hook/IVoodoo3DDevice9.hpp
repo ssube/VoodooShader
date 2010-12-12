@@ -1,11 +1,16 @@
 #pragma once
 
-class MyDirect3DDevice9 : public IDirect3DDevice9
+class IVoodoo3DDevice9 
+	: public IDirect3DDevice9
 {
+private:
+	IDirect3DDevice9* m_device;	
+	IDirect3D9* m_d3d;
+
 public:
 	// We need d3d so that we'd use a pointer to MyDirect3D9 instead of the original IDirect3D9 implementor
 	// in functions like GetDirect3D9
-	MyDirect3DDevice9(IDirect3D9* d3d, IDirect3DDevice9* device) : m_d3d(d3d), m_device(device)
+	IVoodoo3DDevice9(IDirect3D9* d3d, IDirect3DDevice9* device) : m_d3d(d3d), m_device(device)
 	{
 	}
 
@@ -642,8 +647,4 @@ public:
 	{
 		return m_device->CreateQuery(Type, ppQuery);
 	}
-
-private:
-	IDirect3DDevice9* m_device;	
-	IDirect3D9* m_d3d;
 };

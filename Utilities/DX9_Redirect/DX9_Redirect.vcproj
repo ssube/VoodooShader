@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="Voodoo_DX9"
-	ProjectGUID="{758A3040-38D6-4573-8C1B-74B35ECCAA6E}"
-	RootNamespace="DX9_Module"
+	Name="DX9_Redirect"
+	ProjectGUID="{E1C759FC-DC8B-47E1-AEB2-084BC53DED59}"
+	RootNamespace="DX9_Redirect"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196608"
 	>
@@ -19,7 +19,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)\bin\"
-			IntermediateDirectory="$(SolutionDir)\build\$(ProjectName)\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)\build\"
 			ConfigurationType="2"
 			CharacterSet="0"
 			>
@@ -41,8 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(SolutionDir)\Framework"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;DX9_MODULE_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -61,10 +60,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Voodoo_Core_d.lib"
 				OutputFile="$(OutDir)\$(ProjectName)_d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(SolutionDir)\bin"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -89,14 +86,12 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description=""
-				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)\bin\"
-			IntermediateDirectory="$(SolutionDir)\build\$(ProjectName)\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)\build\"
 			ConfigurationType="2"
 			CharacterSet="0"
 			WholeProgramOptimization="1"
@@ -120,8 +115,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(SolutionDir)\Framework"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;DX9_MODULE_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -139,9 +133,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Voodoo_Core.lib"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(SolutionDir)\bin"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -168,8 +161,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description=""
-				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -182,7 +173,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\DX9_Module.cpp"
+				RelativePath="..\DX8.9_Redirect\dllmain.cpp"
 				>
 			</File>
 		</Filter>
@@ -191,54 +182,14 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\DX9_Converter.hpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DX9_Module.hpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resource.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
-			<File
-				RelativePath=".\Voodoo_DX9.rc"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Hook"
-			>
-			<File
-				RelativePath=".\Hook\IVoodoo3D9.hpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Hook\IVoodoo3DDevice9.hpp"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>
-		<Global
-			Name="BuildVersion_AssemblyInfoFilename"
-			Value="Voodoo_DX9.rc"
-		/>
-		<Global
-			Name="BuildVersion_BuildVersioningStyle"
-			Value="None.None.Increment.TimeStamp"
-		/>
-		<Global
-			Name="BuildVersion_UseGlobalSettings"
-			Value="True"
-		/>
 	</Globals>
 </VisualStudioProject>

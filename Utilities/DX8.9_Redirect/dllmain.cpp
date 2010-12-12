@@ -1,7 +1,7 @@
 // Forces compilation
 
 #ifdef _DEBUG
-#	pragma comment(linker, "/export:Direct3DCreate8=Voodoo_DX89_d.Direct3DCreate8")
+#	pragma comment(linker, "/export:Direct3DCreate9=Voodoo_DX9_d.Direct3DCreate9")
 #else
-#	pragma comment(linker, "/export:Direct3DCreate8=Voodoo_DX89.Direct3DCreate8")
+#	pragma comment(linker, "/export:Direct3DCreate9=Voodoo_DX9.Direct3DCreate9")
 #endif

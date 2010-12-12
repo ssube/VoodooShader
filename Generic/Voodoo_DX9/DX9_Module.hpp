@@ -15,6 +15,16 @@
 #	define VOODOO_API_DX9 __declspec(dllimport)
 #endif
 
+#include "Hook/IVoodoo3D9.hpp"
+#include "Hook/IVoodoo3DDevice9.hpp"
+
+extern VoodooShader::Core * VoodooCore;
+
+extern IVoodoo3D9 * VoodooObject;
+extern IVoodoo3DDevice9 * VoodooDevice;
+
+typedef IDirect3D9 * (__stdcall *D3DFunc9)(UINT);
+
 namespace VoodooShader
 {
 	namespace DirectX9

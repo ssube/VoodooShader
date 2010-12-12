@@ -1,11 +1,15 @@
 #pragma once
 
-#include "MyDirect3DDevice9.h"
+#include "IVoodoo3DDevice9.hpp"
 
-class MyDirect3D9 : public IDirect3D9
+class IVoodoo3D9
+	: public IDirect3D9
 {
+private:
+	IDirect3D9* m_d3d;
+
 public:
-	MyDirect3D9(IDirect3D9* d3d) : m_d3d(d3d)
+	IVoodoo3D9(IDirect3D9* d3d) : m_d3d(d3d)
 	{
 	}
 
@@ -103,12 +107,9 @@ public:
 		if(SUCCEEDED(hr))
 		{
 			// Return our device
-			*ppReturnedDeviceInterface = new MyDirect3DDevice9(this, *ppReturnedDeviceInterface);
+			*ppReturnedDeviceInterface = new IVoodoo3DDevice9(this, *ppReturnedDeviceInterface);
 		}
 
 		return hr;
 	}
-
-private:
-	IDirect3D9* m_d3d;
 };

@@ -2,6 +2,11 @@
 #include "DX9_Module.hpp"
 #include "DX9_Converter.hpp"
 
+VoodooShader::Core * VoodooCore = NULL;
+
+IVoodoo3D9 * VoodooObject = NULL;
+IVoodoo3DDevice9 * VoodooDevice = NULL;
+
 namespace VoodooShader
 {
 	namespace DirectX9
@@ -11,7 +16,7 @@ namespace VoodooShader
 		{
 			if ( !core )
 			{
-				core = new VoodooShader::Core();
+				core = VoodooShader::Core::Create();
 			}
 			
 			core->GetLog()->Log("Voodoo DX9: Starting adapter...\n");
@@ -293,3 +298,41 @@ namespace VoodooShader
 		}
 	}
 }
+
+VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
+{
+	// Voodoo DX9 Init function
+	VoodooCore = VoodooShader::Core::Create("Voodoo_DX9.log");
+
+#ifdef _DEBUG
+	VoodooCore->GetLog()->SetBufferSize(0);
+#endif
+
+	VoodooCore->GetLog()->Format("Voodoo GEM: Direct3DCreate9 called, SDK version: %d.\n").With(version).Done();
+
+	//Load the real d3d8 dll and get device caps
+	char Path[MAX_PATH];
+	GetSystemDirectoryA (Path, MAX_PATH);
+	strcat_s (Path, MAX_PATH, "\\d3d9.dll");
+
+	HMODULE d3ddll = LoadLibraryA(Path);
+	D3DFunc9 d3d9func = (D3DFunc9)GetProcAddress (d3ddll, "Direct3DCreate9");
+
+	if (d3d9func == NULL) 
+	{
+		VoodooCore->GetLog()->Log("Voodoo DX9: Could not find D3D9 create true func.\n");
+		return 0;
+	}
+
+	// Call DX9 to create a real device with the latest version
+	IDirect3D9 * object = (d3d9func)(D3D_SDK_VERSION);
+	// Turn it into a FakeObject and return it.
+	IVoodoo3D9 * vObj = new IVoodoo3D9(object);
+	VoodooObject = vObj;
+	return vObj;
+}
+
+// Visual Studio-specific linker directive, forces the function to be exported with and
+// without decoration. The actual symbol is undecorated, but I'd rather allow exception
+// handling than use extern "C".
+#pragma comment(linker, "/export:Direct3DCreate9=?Voodoo3DCreate9@@YGPAXI@Z")

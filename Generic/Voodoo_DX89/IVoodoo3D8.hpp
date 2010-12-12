@@ -296,7 +296,7 @@ public:
 	}
 
 	/**
-	 * @note This function forcibly ignored WHQL levels            
+	 * @note This function forcibly ignores WHQL levels            
 	 */
 	STDMETHOD(GetAdapterIdentifier)
 	(
@@ -307,7 +307,6 @@ public:
 	{
 		D3DADAPTER_IDENTIFIER9 realIdentifier;
 
-		//HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, Flags, pIdentifier);
 		HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
 #ifdef _DEBUG
@@ -388,10 +387,38 @@ public:
 
 		return hr;
 	}/ */
-	HRESULT _stdcall GetDeviceCaps (UINT a, D3DDEVTYPE b, D3DCAPS8 *c) {
-		*c = d3d8Caps;
+
+	STDMETHOD(GetDeviceCaps)
+	(
+		UINT Adapter,
+		D3DDEVTYPE DeviceType,
+		D3DCAPS8 * pCaps
+	)
+	//HRESULT _stdcall GetDeviceCaps (UINT a, D3DDEVTYPE b, D3DCAPS8 *c) 
+	{
+		*pCaps = d3d8Caps;
+
+		D3DCAPS9 realCaps;
+		HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
+
+#ifdef _DEBUG
+		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n")
+			.With(Adapter).With(DeviceType).With(pCaps).With(cgD3D9TranslateHRESULT(hr)).Done();
+#endif
+
+		int same = memcmp(pCaps, &realCaps, sizeof(D3DCAPS8));
+
+		if ( same == 0 )
+		{
+			VoodooCore->GetLog()->Log("Voodoo DX8.9: D3D8 and 9 caps are identical.\n"); 
+		} else {
+			VoodooCore->GetLog()->Log("Voodoo DX8.9: Caps differ.\n");
+		}
+
 		return D3D_OK;
-	}//*/
+	}
+	
+	//*/
 
 	/**
 	 * This is a legacy function to register a software renderer into the DX8 system; however, the
@@ -409,6 +436,8 @@ public:
 #ifdef _DEBUG
 		VoodooCore->GetLog()->Format("Voodoo GEM: IVoodoo3D8::RegisterSoftwareDevice(%d) == %d\n")
 			.With(pInitializeFunction).With(cgD3D9TranslateHRESULT(hr)).Done();
+#else
+		VoodooCore->GetLog()->Log("Voodoo DX8.9: The application has registered a software device.\n");
 #endif
 
 		return hr;
