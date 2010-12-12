@@ -101,13 +101,30 @@ public:
 
     HRESULT STDMETHODCALLTYPE CreateDevice( UINT Adapter,D3DDEVTYPE DeviceType,HWND hFocusWindow,DWORD BehaviorFlags,D3DPRESENT_PARAMETERS* pPresentationParameters,IDirect3DDevice9** ppReturnedDeviceInterface)
 	{
+		IDirect3DDevice9 * realDevice;
 		HRESULT hr = m_d3d->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags,
-			pPresentationParameters, ppReturnedDeviceInterface);
+			pPresentationParameters, &realDevice);
 		
 		if(SUCCEEDED(hr))
 		{
 			// Return our device
-			*ppReturnedDeviceInterface = new IVoodoo3DDevice9(this, *ppReturnedDeviceInterface);
+			*ppReturnedDeviceInterface = new IVoodoo3DDevice9(this, realDevice);
+			VoodooDX9 = new VoodooShader::DirectX9::Adapter(VoodooCore, realDevice);
+
+			HRESULT hrt = realDevice->CreateTexture(
+				pPresentationParameters->BackBufferWidth, pPresentationParameters->BackBufferHeight,
+				1, D3DUSAGE_RENDERTARGET, D3DFMT_X8R8G8B8, D3DPOOL_DEFAULT, &scene, NULL);
+			if ( SUCCEEDED(hrt) )
+			{
+				realDevice->GetRenderTarget(0, &backbufferSurf);
+
+				scene->GetSurfaceLevel(0, &sceneSurf);
+				realDevice->SetRenderTarget(0, sceneSurf);
+
+				VoodooCore->GetLog()->Log("Voodoo DX9: Set up BB texture.\n");
+			} else {
+				VoodooCore->GetLog()->Log("Voodoo DX9: BB texture failed.\n");
+			}
 		}
 
 		return hr;

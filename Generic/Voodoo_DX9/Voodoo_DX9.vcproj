@@ -192,11 +192,23 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\DX9_Adapter.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DX9_Converter.hpp"
 				>
 			</File>
 			<File
 				RelativePath=".\DX9_Module.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3D9.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3DDevice9.hpp"
 				>
 			</File>
 			<File
@@ -211,18 +223,6 @@
 			>
 			<File
 				RelativePath=".\Voodoo_DX9.rc"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Hook"
-			>
-			<File
-				RelativePath=".\Hook\IVoodoo3D9.hpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Hook\IVoodoo3DDevice9.hpp"
 				>
 			</File>
 		</Filter>

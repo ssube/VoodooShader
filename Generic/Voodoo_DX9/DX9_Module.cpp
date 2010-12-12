@@ -2,7 +2,11 @@
 #include "DX9_Module.hpp"
 #include "DX9_Converter.hpp"
 
+#include "IVoodoo3D9.hpp"
+#include "IVoodoo3DDevice9.hpp"
+
 VoodooShader::Core * VoodooCore = NULL;
+VoodooShader::DirectX9::Adapter * VoodooDX9 = NULL;
 
 IVoodoo3D9 * VoodooObject = NULL;
 IVoodoo3DDevice9 * VoodooDevice = NULL;
@@ -68,8 +72,8 @@ namespace VoodooShader
 			D3DVIEWPORT9 viewport;
 			device->GetViewport(&viewport);
 
-			float fx = viewport.Width;
-			float fy = viewport.Height;
+			float fx = viewport.Width	/ 2;
+			float fy = viewport.Height	/ 2;
 
 			this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
 				D3DPOOL_DEFAULT, &FSQuadVerts, NULL);

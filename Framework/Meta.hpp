@@ -41,9 +41,9 @@
 
 #define VOODOO_CORE_COPYRIGHT "\n\
 	Voodoo Shader Framework, Copyright (C) 2010 by Sean Sube\n\
-	The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY. This is free software and you are \n\
-	welcome to redistribute it under certain conditions. Please see the included license file\n\
-	for more details.\n\n"
+	The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.\n\
+	This is free software and you are welcome to redistribute it under\n\
+	certain conditions. Please see the included license file for more details.\n\n"
 
 namespace VoodooShader
 {

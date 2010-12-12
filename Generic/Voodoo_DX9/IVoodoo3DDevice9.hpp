@@ -1,5 +1,7 @@
 #pragma once
 
+#include "DX9_Module.hpp"
+
 class IVoodoo3DDevice9 
 	: public IDirect3DDevice9
 {
@@ -113,7 +115,7 @@ public:
 
 	STDMETHOD(Present)(THIS_ CONST RECT* pSourceRect,CONST RECT* pDestRect,HWND hDestWindowOverride,CONST RGNDATA* pDirtyRegion)
 	{
-		HRESULT hr = m_device->BeginScene();
+		/*HRESULT hr = m_device->BeginScene();
 		if ( SUCCEEDED(hr) )
 		{
 			// Draw a custom quad to the screen
@@ -125,28 +127,45 @@ public:
 
 			TLVertex vertices[] =
 			{
-				{ -0.5f, -0.5f, 0.0f, 1.0f, 0xffff0000 },
-				{ 99.5f, -0.5f, 0.0f, 1.0f, 0xff00ff00 },
-				{ -0.5f, 99.5f, 0.0f, 1.0f, 0xff0000ff },
-				{ 99.5f, 99.5f, 0.0f, 1.0f, 0xffff0000 }
+				{ -0.5f, -0.5f, 0.0f, 1.0f, 0xffffaaaa },
+				{ 99.5f, -0.5f, 0.0f, 1.0f, 0xffaaffaa },
+				{ -0.5f, 99.5f, 0.0f, 1.0f, 0xffaaaaff },
+				{ 99.5f, 99.5f, 0.0f, 1.0f, 0xffffaaaa }
 			};
 
-			SetVertexShader(0);
-			SetPixelShader(0);
-			SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
-			SetRenderState(D3DRS_ZENABLE, false);
-			SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-			SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
-			SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_DIFFUSE);
-			SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
-			SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_DIFFUSE);
+			IDirect3DVertexShader9 * vS;
+			IDirect3DPixelShader9 * pS;
+			DWORD fvf;
+			DWORD z, cull;
+
+			GetVertexShader(&vS);	SetVertexShader(0);
+			GetPixelShader(&pS);	SetPixelShader(0);
+			
+
+			GetFVF(&fvf);			SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
+	
+			GetRenderState(D3DRS_ZENABLE, &z);		SetRenderState(D3DRS_ZENABLE, false);
+			GetRenderState(D3DRS_CULLMODE, &cull);	SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
 			DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertices, sizeof(TLVertex));
-			SetRenderState(D3DRS_ZENABLE, true);
+
+			SetRenderState(D3DRS_ZENABLE, z);
+			SetRenderState(D3DRS_CULLMODE, cull);
+			SetFVF(fvf);
+			SetPixelShader(pS);
+			SetVertexShader(vS);
 
 			m_device->EndScene();
+
 		} else {
 			VoodooCore->GetLog()->Log("Voodoo DX9: Failed to draw overlay scene.\n");
-		}
+		}*/
+		SetRenderTarget(0, backbufferSurf);
+		SetTexture(0, scene);
+
+		VoodooDX9->DrawQuad(true);
+
+		SetRenderTarget(0, sceneSurf);
 
 		return m_device->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 	}
