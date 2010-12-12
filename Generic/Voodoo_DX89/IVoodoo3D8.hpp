@@ -22,6 +22,8 @@
 #include "DX89_Module.hpp"
 #include "DX89_Converter.hpp"
 
+#include "IVoodoo3DDevice8.hpp"
+
 /**
  * The core Voodoo3D8 wrapper class for D3D8 objects. This class is responsible for the primary 
  * abstraction from D3D8 to D3D9. This class is responsible for creating devices, giving it control 
@@ -50,17 +52,17 @@ public:
 	}
 
 	// IUnknown methods
-	GEMCALL(HRESULT) QueryInterface(REFIID riid, void ** ppvObj)
+	STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj)
 	{
 		return mRealObject->QueryInterface(riid, ppvObj);
 	}
 
-	GEMCALL(ULONG) AddRef()
+	STDMETHOD_(ULONG, AddRef)()
 	{
 		return mRealObject->AddRef();
 	}
 
-	GEMCALL(ULONG) Release()
+	STDMETHOD_(ULONG, Release)()
 	{
 		ULONG refCount = mRealObject->Release();
 
@@ -92,7 +94,7 @@ public:
 	 * 		    
 	 * @note Will log in debug builds.
 	 */
-	GEMCALL(HRESULT) CheckDepthStencilMatch
+	STDMETHOD(CheckDepthStencilMatch)
 	(
 		UINT Adapter,
 		D3DDEVTYPE DeviceType,
@@ -112,7 +114,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) CheckDeviceFormat
+	STDMETHOD(CheckDeviceFormat)
 	(
 		UINT Adapter,
 		D3DDEVTYPE DeviceType,
@@ -137,7 +139,7 @@ public:
 	 * @note Direct3D8 doesn't seem to support the concept of multisampling quality levels, or won't
 	 * 		 recognize them in this function. They are not passed back because of this.            
 	 */
-	GEMCALL(HRESULT) CheckDeviceMultiSampleType
+	STDMETHOD(CheckDeviceMultiSampleType)
 	(
 		UINT Adapter,
 		D3DDEVTYPE DeviceType,
@@ -157,7 +159,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) CheckDeviceType
+	STDMETHOD(CheckDeviceType)
 	(
 		UINT Adapter,
 		D3DDEVTYPE CheckType,
@@ -177,13 +179,13 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) CreateDevice
+	STDMETHOD(CreateDevice)
 	(
 		UINT Adapter,
 		D3DDEVTYPE DeviceType,
 		HWND hFocusWindow,
 		DWORD BehaviorFlags,
-		D3DPRESENT_PARAMETERS * pPresentationParameters,
+		D3DPRESENT_PARAMETERS8 * pPresentationParameters,
 		IDirect3DDevice8 ** ppReturnedDeviceInterface
 	)
 	{
@@ -237,15 +239,16 @@ public:
 			return hr;
 		} else {
 			// Succeeded, create a fake device and go from there
-			//IVoodoo3DDevice8 * mFakeDevice = new IVoodoo3DDevice8(mRealDevice);
+			IVoodoo3DDevice8 * mFakeDevice = new IVoodoo3DDevice8(mRealDevice);
+			VoodooDevice = mFakeDevice;
 
-			//(*ppReturnedDeviceInterface) = mFakeDevice;
+			(*ppReturnedDeviceInterface) = (IDirect3DDevice8*)mFakeDevice;
 
 			return hr;
 		}
 	}
 
-	GEMCALL(HRESULT) EnumAdapterModes
+	STDMETHOD(EnumAdapterModes)
 	(
 		UINT Adapter,
 		UINT Mode,
@@ -262,7 +265,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(UINT) GetAdapterCount()
+	STDMETHOD_(UINT, GetAdapterCount)()
 	{
 		UINT r = mRealObject->GetAdapterCount();
 
@@ -274,7 +277,7 @@ public:
 		return r;
 	}
 
-	GEMCALL(HRESULT) GetAdapterDisplayMode
+	STDMETHOD(GetAdapterDisplayMode)
 	(
 		UINT Adapter,
 		D3DDISPLAYMODE * pMode
@@ -287,13 +290,15 @@ public:
 			.With(Adapter).With(pMode).With(cgD3D9TranslateHRESULT(hr)).Done();
 #endif
 
+		pMode->Format = D3DFMT_X8R8G8B8;
+
 		return hr;
 	}
 
 	/**
 	 * @note This function forcibly ignored WHQL levels            
 	 */
-	GEMCALL(HRESULT) GetAdapterIdentifier
+	STDMETHOD(GetAdapterIdentifier)
 	(
 		UINT Adapter,
 		DWORD Flags,
@@ -326,7 +331,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(UINT) GetAdapterModeCount
+	STDMETHOD_(UINT, GetAdapterModeCount)
 	(
 		UINT Adapter
 	)
@@ -341,7 +346,7 @@ public:
 		return r;
 	}
 
-	GEMCALL(HMONITOR) GetAdapterMonitor
+	STDMETHOD_(HMONITOR, GetAdapterMonitor)
 	(
 		UINT Adapter
 	)
@@ -360,8 +365,8 @@ public:
 	 * @note Test function: MGE uses a caching of actual D3D8 caps, let's see if we can just grab
 	 * 		 the appropriate entries from a D3D9 caps struct. They share an identical format until
 	 * 		 the end of the D3D8 caps section, so...            
-	 */
-	GEMCALL(HRESULT) GetDeviceCaps
+	 * /
+	STDMETHOD(GetDeviceCaps)
 	(
 		UINT Adapter,
 		D3DDEVTYPE DeviceType,
@@ -382,7 +387,11 @@ public:
 		}
 
 		return hr;
-	}
+	}/ */
+	HRESULT _stdcall GetDeviceCaps (UINT a, D3DDEVTYPE b, D3DCAPS8 *c) {
+		*c = d3d8Caps;
+		return D3D_OK;
+	}//*/
 
 	/**
 	 * This is a legacy function to register a software renderer into the DX8 system; however, the
@@ -390,7 +399,7 @@ public:
 	 * it. Since the Voodoo IVoodoo3D8 layer targets DX9, the function is callable and will target the
 	 * appropriate DX9 function. It will log a warning message, due to technically being illegal.
 	 */
-	GEMCALL(HRESULT) RegisterSoftwareDevice
+	STDMETHOD(RegisterSoftwareDevice)
 	(
 		void * pInitializeFunction
 	)

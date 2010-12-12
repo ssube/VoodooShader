@@ -64,17 +64,24 @@ public:
 	}
 
 	// IUnknown methods
-	GEMCALL(HRESULT) QueryInterface(REFIID riid, void ** ppvObj)
+	STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj)
 	{
 		return mRealDevice->QueryInterface(riid, ppvObj);
 	}
 
-	GEMCALL(ULONG) AddRef()
+	STDMETHOD_(ULONG, AddRef)()
 	{
-		return mRealDevice->AddRef();
+		ULONG refCount = mRealDevice->AddRef();
+
+#ifdef _DEBUG
+		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::AddRef() == %d\n")
+		.With(refCount).Done();
+#endif
+
+		return refCount;
 	}
 
-	GEMCALL(ULONG) Release()
+	STDMETHOD_(ULONG, Release)()
 	{
 		ULONG refCount = mRealDevice->Release();
 
@@ -88,7 +95,7 @@ public:
 	}
 
 	// IDirect3DDevice8 methods
-	GEMCALL(HRESULT) ApplyStateBlock(DWORD Token)
+	STDMETHOD(ApplyStateBlock)(DWORD Token)
 	{
 #ifdef _DEBUG
 		VoodooCore->GetLog()->Log("Voodoo DX8.9: IVoodoo3DDevice8::ApplyStateBlock == UNUSED\n");
@@ -96,7 +103,7 @@ public:
 		return DefaultErrorCode;
 	}
 
-	GEMCALL(HRESULT) BeginScene()
+	STDMETHOD(BeginScene)()
 	{
 		HRESULT hr = mRealDevice->BeginScene();
 
@@ -108,7 +115,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) BeginStateBlock()
+	STDMETHOD(BeginStateBlock)()
 	{
 		HRESULT hr = mRealDevice->BeginStateBlock();
 
@@ -120,7 +127,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) CaptureStateBlock(DWORD Token)
+	STDMETHOD(CaptureStateBlock)(DWORD Token)
 	{
 #ifdef _DEBUG
 		VoodooCore->GetLog()->Log("Voodoo DX8.9: IVoodoo3DDevice8::CaptureStateBlock == UNUSED\n");
@@ -129,7 +136,7 @@ public:
 		return DefaultErrorCode;
 	}
 
-	GEMCALL(HRESULT) Clear
+	STDMETHOD(Clear)
 	(
 		DWORD Count,
 		const D3DRECT * pRects,
@@ -150,7 +157,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) TestCooperativeLevel
+	STDMETHOD(TestCooperativeLevel)
 	(
 		
 	)
@@ -166,7 +173,7 @@ public:
 	}
 
 
-	GEMCALL(UINT) GetAvailableTextureMem
+	STDMETHOD_(UINT, GetAvailableTextureMem)
 	(
 		
 	)
@@ -182,7 +189,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) ResourceManagerDiscardBytes
+	STDMETHOD(ResourceManagerDiscardBytes)
 	(
 		DWORD Bytes
 	)
@@ -196,12 +203,12 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetDirect3D
+	STDMETHOD(GetDirect3D)
 	(
 		IDirect3D8 ** ppD3D8
 	)
 	{
-		(*ppD3D8) = (IDirect3D8*)mRealObject;
+		(*ppD3D8) = (IDirect3D8*)VoodooObject;
 
 #ifdef _DEBUG
 		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetDirect3D(%d) == D3D_OK\n")
@@ -212,7 +219,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetDeviceCaps
+	STDMETHOD(GetDeviceCaps)
 	(
 		D3DCAPS8 * pCaps
 	)
@@ -235,7 +242,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetDisplayMode
+	STDMETHOD(GetDisplayMode)
 	(
 		D3DDISPLAYMODE * pMode
 	)
@@ -251,7 +258,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetCreationParameters
+	STDMETHOD(GetCreationParameters)
 	(
 		D3DDEVICE_CREATION_PARAMETERS * pParameters
 	)
@@ -267,7 +274,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetCursorProperties
+	STDMETHOD(SetCursorProperties)
 	(
 		UINT XHotSpot,
 		UINT YHotSpot,
@@ -286,7 +293,7 @@ public:
 	}
 
 
-	GEMCALL(void) SetCursorPosition
+	STDMETHOD_(void, SetCursorPosition)
 	(
 		int X,
 		int Y,
@@ -302,7 +309,7 @@ public:
 	}
 
 
-	GEMCALL(BOOL) ShowCursor
+	STDMETHOD_(BOOL, ShowCursor)
 	(
 		BOOL bShow
 	)
@@ -318,7 +325,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) CreateAdditionalSwapChain
+	STDMETHOD(CreateAdditionalSwapChain)
 	(
 		D3DPRESENT_PARAMETERS8 * pPresentationParameters,
 		IDirect3DSwapChain8 ** pSwapChain
@@ -339,7 +346,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) Reset
+	STDMETHOD(Reset)
 	(
 		D3DPRESENT_PARAMETERS8 * pPresentationParameters
 	)
@@ -354,7 +361,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) Present
+	STDMETHOD(Present)
 	(
 		CONST RECT * pSourceRect,
 		CONST RECT * pDestRect,
@@ -373,7 +380,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) GetBackBuffer
+	STDMETHOD(GetBackBuffer)
 	(
 		UINT BackBuffer,
 		D3DBACKBUFFER_TYPE Type,
@@ -390,7 +397,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) GetRasterStatus
+	STDMETHOD(GetRasterStatus)
 	(
 		D3DRASTER_STATUS * pRasterStatus
 	)
@@ -405,14 +412,42 @@ public:
 		return hr;
 	}
 
-	STDMETHOD_(void, SetGammaRamp)(DWORD Flags,CONST D3DGAMMARAMP* pRamp) PURE;
-	STDMETHOD_(void, GetGammaRamp)(D3DGAMMARAMP* pRamp) PURE;
+	STDMETHOD_(void, SetGammaRamp)
+	(
+		DWORD Flags,
+		const D3DGAMMARAMP * pRamp
+	)
+	{
+		mRealDevice->SetGammaRamp(0, Flags, pRamp);
+
+#ifdef _DEBUG
+		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetRasterStatus(%d, %d) == void\n")
+		.With(Flags).With(pRamp).Done();
+#endif
+
+		return;
+	}
+
+	STDMETHOD_(void, GetGammaRamp)
+	(
+		D3DGAMMARAMP * pRamp
+	)
+	{
+		mRealDevice->GetGammaRamp(0, pRamp);
+
+#ifdef _DEBUG
+		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetRasterStatus(%d) == void\n")
+			.With(pRamp).Done();
+#endif
+
+		return;
+	}
 
 	/**
 	 * Creates a texture in the IVoodoo runtime. The new texture must be registered with the core
 	 * and, for shader purposes, we should attempt to create it as a render-target.            
 	 */
-	GEMCALL(HRESULT) CreateTexture
+	STDMETHOD(CreateTexture)
 	(
 		UINT Width,
 		UINT Height,
@@ -465,7 +500,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) CreateVolumeTexture
+	STDMETHOD(CreateVolumeTexture)
 	(
 		UINT Width,
 		UINT Height,
@@ -494,7 +529,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) CreateCubeTexture
+	STDMETHOD(CreateCubeTexture)
 	(
 		UINT EdgeLength,
 		UINT Levels,
@@ -520,7 +555,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) CreateVertexBuffer
+	STDMETHOD(CreateVertexBuffer)
 	(
 		UINT Length,
 		DWORD Usage,
@@ -544,7 +579,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) CreateIndexBuffer
+	STDMETHOD(CreateIndexBuffer)
 	(
 		UINT Length,
 		DWORD Usage,
@@ -575,7 +610,7 @@ public:
 	 * 
 	 * @todo Find a way to force CreateRenderTarget to make RT textures and find a way to name them.
 	 */
-	GEMCALL(HRESULT) CreateRenderTarget
+	STDMETHOD(CreateRenderTarget)
 	(
 		UINT Width,
 		UINT Height,
@@ -600,7 +635,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) CreateDepthStencilSurface
+	STDMETHOD(CreateDepthStencilSurface)
 	(
 		UINT Width,
 		UINT Height,
@@ -631,7 +666,7 @@ public:
 	 * 			same. <em>(non-standard behavior)</em>
 	 * @todo Test the pool these should be created in. May be default, managed or sysmem, not sure yet.
 	 */
-	GEMCALL(HRESULT) CreateImageSurface
+	STDMETHOD(CreateImageSurface)
 	(
 		UINT Width,
 		UINT Height,
@@ -663,7 +698,7 @@ public:
 	 * 			enough to fix, but I want to do more testing first. <em>(non-standard behavior)</em>
 	 * @todo Test and then make this perform identical to the D3D8 version.
 	 */
-	GEMCALL(HRESULT) CopyRects
+	STDMETHOD(CopyRects)
 	(
 		IDirect3DSurface8 * pSourceSurface,
 		CONST RECT * pSourceRectsArray,
@@ -687,7 +722,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) UpdateTexture
+	STDMETHOD(UpdateTexture)
 	(
 		IDirect3DBaseTexture8 * pSourceTexture,
 		IDirect3DBaseTexture8 * pDestinationTexture
@@ -709,7 +744,7 @@ public:
 	/**
 	 * Retrieves the front-buffer surface from the D3D8 device. D3D9 has no equivalent call (kinda).            
 	 */
-	GEMCALL(HRESULT) GetFrontBuffer
+	STDMETHOD(GetFrontBuffer)
 	(
 		IDirect3DSurface8 * pDestSurface
 	)
@@ -726,7 +761,7 @@ public:
 	 * Sets a new render-target surface and depth/stencil buffer. D3D9 does not combine these calls,
 	 * so this automatically splits the calls and returns the combined results.
 	 */
-	GEMCALL(HRESULT) SetRenderTarget
+	STDMETHOD(SetRenderTarget)
 	(
 		IDirect3DSurface8 * pRenderTarget,
 		IDirect3DSurface8 * pNewZStencil
@@ -743,7 +778,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) GetRenderTarget
+	STDMETHOD(GetRenderTarget)
 	(
 		IDirect3DSurface8 ** ppRenderTarget
 	)
@@ -759,7 +794,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetDepthStencilSurface
+	STDMETHOD(GetDepthStencilSurface)
 	(
 		IDirect3DSurface8 ** ppZStencilSurface
 	)
@@ -774,7 +809,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) EndScene()
+	STDMETHOD(EndScene)()
 	{
 		HRESULT hr = mRealDevice->EndScene();
 
@@ -786,7 +821,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) SetTransform
+	STDMETHOD(SetTransform)
 	(
 		D3DTRANSFORMSTATETYPE State,
 		CONST D3DMATRIX * pMatrix
@@ -803,7 +838,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetTransform
+	STDMETHOD(GetTransform)
 	(
 		D3DTRANSFORMSTATETYPE State,
 		D3DMATRIX * pMatrix
@@ -820,7 +855,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) MultiplyTransform
+	STDMETHOD(MultiplyTransform)
 	(
 		D3DTRANSFORMSTATETYPE State,
 		CONST D3DMATRIX * pMatrix
@@ -837,7 +872,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetViewport
+	STDMETHOD(SetViewport)
 	(
 		CONST D3DVIEWPORT8 * pViewport
 	)
@@ -853,7 +888,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetViewport
+	STDMETHOD(GetViewport)
 	(
 		D3DVIEWPORT8 * pViewport
 	)
@@ -869,7 +904,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetMaterial
+	STDMETHOD(SetMaterial)
 	(
 		CONST D3DMATERIAL8 * pMaterial
 	)
@@ -885,7 +920,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetMaterial
+	STDMETHOD(GetMaterial)
 	(
 		D3DMATERIAL8 * pMaterial
 	)
@@ -901,7 +936,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetLight
+	STDMETHOD(SetLight)
 	(
 		DWORD Index,
 		CONST D3DLIGHT8 * Light
@@ -918,7 +953,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetLight
+	STDMETHOD(GetLight)
 	(
 		DWORD Index,
 		D3DLIGHT8 * Light
@@ -935,7 +970,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) LightEnable
+	STDMETHOD(LightEnable)
 	(
 		DWORD Index,
 		BOOL Enable
@@ -952,7 +987,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetLightEnable
+	STDMETHOD(GetLightEnable)
 	(
 		DWORD Index,
 		BOOL * pEnable
@@ -969,7 +1004,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetClipPlane
+	STDMETHOD(SetClipPlane)
 	(
 		DWORD Index,
 		CONST float * pPlane
@@ -986,7 +1021,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetClipPlane
+	STDMETHOD(GetClipPlane)
 	(
 		DWORD Index,
 		float * pPlane
@@ -1003,7 +1038,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetRenderState
+	STDMETHOD(SetRenderState)
 	(
 		D3DRENDERSTATETYPE State,
 		DWORD Value
@@ -1020,7 +1055,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetRenderState
+	STDMETHOD(GetRenderState)
 	(
 		D3DRENDERSTATETYPE State,
 		DWORD * pValue
@@ -1040,7 +1075,7 @@ public:
 	 * Due to differences between the D3D8 and D3D9 APIs, this function is currently non-
 	 * functional.            
 	 */
-	GEMCALL(HRESULT) EndStateBlock
+	STDMETHOD(EndStateBlock)
 	(
 		DWORD * pToken
 	)
@@ -1068,7 +1103,7 @@ public:
 	/**
 	 * This function does not exist in the D3D9 API.            
 	 */
-	GEMCALL(HRESULT) DeleteStateBlock
+	STDMETHOD(DeleteStateBlock)
 	(
 		DWORD Token
 	)
@@ -1097,7 +1132,7 @@ public:
 	* Due to differences between the D3D8 and D3D9 APIs, this function is currently non-
 	* functional.            
 	*/
-	GEMCALL(HRESULT) CreateStateBlock
+	STDMETHOD(CreateStateBlock)
 	(
 		D3DSTATEBLOCKTYPE Type,
 		DWORD * pToken
@@ -1123,7 +1158,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetClipStatus
+	STDMETHOD(SetClipStatus)
 	(
 		CONST D3DCLIPSTATUS8 * pClipStatus
 	)
@@ -1139,7 +1174,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetClipStatus
+	STDMETHOD(GetClipStatus)
 	(
 		D3DCLIPSTATUS8 * pClipStatus
 	)
@@ -1155,7 +1190,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetTexture
+	STDMETHOD(GetTexture)
 	(
 		DWORD Stage,
 		IDirect3DBaseTexture8 ** ppTexture
@@ -1172,7 +1207,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetTexture
+	STDMETHOD(SetTexture)
 	(
 		DWORD Stage,
 		IDirect3DBaseTexture8 * pTexture
@@ -1189,7 +1224,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetTextureStageState
+	STDMETHOD(GetTextureStageState)
 	(
 		DWORD Stage,
 		D3DTEXTURESTAGESTATETYPE Type,
@@ -1207,7 +1242,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetTextureStageState
+	STDMETHOD(SetTextureStageState)
 	(
 		DWORD Stage,
 		D3DTEXTURESTAGESTATETYPE Type,
@@ -1225,7 +1260,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) ValidateDevice
+	STDMETHOD(ValidateDevice)
 	(
 		DWORD * pNumPasses
 	)
@@ -1243,7 +1278,7 @@ public:
 	/**
 	 * No D3D9 equivalent.            
 	 */
-	GEMCALL(HRESULT) GetInfo
+	STDMETHOD(GetInfo)
 	(
 		DWORD DevInfoID,
 		void * pDevInfoStruct,
@@ -1260,7 +1295,7 @@ public:
 		return DefaultErrorCode;
 	}
 
-	GEMCALL(HRESULT) SetPaletteEntries
+	STDMETHOD(SetPaletteEntries)
 	(
 		UINT PaletteNumber,
 		CONST PALETTEENTRY * pEntries
@@ -1276,7 +1311,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) GetPaletteEntries
+	STDMETHOD(GetPaletteEntries)
 	(
 		UINT PaletteNumber,
 		PALETTEENTRY * pEntries
@@ -1293,7 +1328,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetCurrentTexturePalette
+	STDMETHOD(SetCurrentTexturePalette)
 	(
 		UINT PaletteNumber
 	)
@@ -1309,7 +1344,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetCurrentTexturePalette
+	STDMETHOD(GetCurrentTexturePalette)
 	(
 		UINT * PaletteNumber
 	)
@@ -1325,7 +1360,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) DrawPrimitive
+	STDMETHOD(DrawPrimitive)
 	(
 		D3DPRIMITIVETYPE PrimitiveType,
 		UINT StartVertex,
@@ -1344,7 +1379,7 @@ public:
 	}
 
 	//! @todo Check the value of the start index in the D3D9 call.
-	GEMCALL(HRESULT) DrawIndexedPrimitive
+	STDMETHOD(DrawIndexedPrimitive)
 	(
 		D3DPRIMITIVETYPE PrimitiveType,
 		UINT minIndex,
@@ -1364,7 +1399,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) DrawPrimitiveUP
+	STDMETHOD(DrawPrimitiveUP)
 	(
 		D3DPRIMITIVETYPE PrimitiveType,
 		UINT PrimitiveCount,
@@ -1382,7 +1417,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) DrawIndexedPrimitiveUP
+	STDMETHOD(DrawIndexedPrimitiveUP)
 	(
 		D3DPRIMITIVETYPE PrimitiveType,
 		UINT MinVertexIndex,
@@ -1411,7 +1446,7 @@ public:
 	}
 
 	//! @todo Check the parameter of the vertex decl in the D3D9 call. Taken from MGE, so...
-	GEMCALL(HRESULT) ProcessVertices
+	STDMETHOD(ProcessVertices)
 	(
 		UINT SrcStartIndex,
 		UINT DestIndex,
@@ -1435,7 +1470,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) CreateVertexShader
+	STDMETHOD(CreateVertexShader)
 	(
 		CONST DWORD * pDeclaration,
 		CONST DWORD * pFunction,
@@ -1462,7 +1497,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetVertexShader
+	STDMETHOD(SetVertexShader)
 	(
 		DWORD Handle
 	)
@@ -1487,7 +1522,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetVertexShader
+	STDMETHOD(GetVertexShader)
 	(
 		DWORD * pHandle
 	)
@@ -1506,7 +1541,7 @@ public:
 	/**
 	 * D3D9 has no equivalent function.            
 	 */
-	GEMCALL(HRESULT) DeleteVertexShader
+	STDMETHOD(DeleteVertexShader)
 	(
 		DWORD Handle
 	)
@@ -1528,7 +1563,7 @@ public:
 		return D3D_OK;
 	}
 
-	GEMCALL(HRESULT) SetVertexShaderConstant
+	STDMETHOD(SetVertexShaderConstant)
 	(
 		DWORD Register,
 		CONST void * pConstantData,
@@ -1545,7 +1580,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) GetVertexShaderConstant
+	STDMETHOD(GetVertexShaderConstant)
 	(
 		DWORD Register,
 		void * pConstantData,
@@ -1563,7 +1598,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetVertexShaderDeclaration
+	STDMETHOD(GetVertexShaderDeclaration)
 	(
 		DWORD Handle,
 		void * pData,
@@ -1579,7 +1614,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetVertexShaderFunction
+	STDMETHOD(GetVertexShaderFunction)
 	(
 		DWORD Handle,
 		void * pData,
@@ -1597,7 +1632,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetStreamSource
+	STDMETHOD(SetStreamSource)
 	(
 		UINT StreamNumber,
 		IDirect3DVertexBuffer8 * pStreamData,
@@ -1615,7 +1650,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetStreamSource
+	STDMETHOD(GetStreamSource)
 	(
 		UINT StreamNumber,
 		IDirect3DVertexBuffer8 ** ppStreamData,
@@ -1634,7 +1669,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetIndices
+	STDMETHOD(SetIndices)
 	(
 		IDirect3DIndexBuffer8 * pIndexData,
 		UINT BaseVertexIndex
@@ -1652,7 +1687,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetIndices
+	STDMETHOD(GetIndices)
 	(
 		IDirect3DIndexBuffer8 ** ppIndexData,
 		UINT * pBaseVertexIndex
@@ -1670,7 +1705,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) CreatePixelShader
+	STDMETHOD(CreatePixelShader)
 	(
 		CONST DWORD * pFunction,
 		DWORD * pHandle
@@ -1692,7 +1727,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetPixelShader
+	STDMETHOD(SetPixelShader)
 	(
 		DWORD Handle
 	)
@@ -1707,7 +1742,7 @@ public:
 		return hr;
 	}
 
-	GEMCALL(HRESULT) GetPixelShader
+	STDMETHOD(GetPixelShader)
 	(
 		DWORD * pHandle
 	)
@@ -1722,7 +1757,7 @@ public:
 		return D3D_OK;
 	}
 
-	GEMCALL(HRESULT) DeletePixelShader
+	STDMETHOD(DeletePixelShader)
 	(
 		DWORD Handle
 	)
@@ -1745,7 +1780,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) SetPixelShaderConstant
+	STDMETHOD(SetPixelShaderConstant)
 	(
 		DWORD Register,
 		CONST void * pConstantData,
@@ -1763,7 +1798,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetPixelShaderConstant
+	STDMETHOD(GetPixelShaderConstant)
 	(
 		DWORD Register,
 		void * pConstantData,
@@ -1781,7 +1816,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) GetPixelShaderFunction
+	STDMETHOD(GetPixelShaderFunction)
 	(
 		DWORD Handle,
 		void * pData,
@@ -1799,7 +1834,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) DrawRectPatch
+	STDMETHOD(DrawRectPatch)
 	(
 		UINT Handle,
 		CONST float * pNumSegs,
@@ -1817,7 +1852,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) DrawTriPatch
+	STDMETHOD(DrawTriPatch)
 	(
 		UINT Handle,
 		CONST float * pNumSegs,
@@ -1835,7 +1870,7 @@ public:
 	}
 
 
-	GEMCALL(HRESULT) DeletePatch
+	STDMETHOD(DeletePatch)
 	(
 		UINT Handle
 	)

@@ -41,21 +41,8 @@ namespace VoodooShader
 	class VOODOO_API Core
 	{
 	public:
-		/**
-		 * Create a new Voodoo Core and associated Cg context.
-		 * 		 
-		 * @param logfile The filename for this Core's log (will be used by most managers and
-		 *			connected adapters).
-		 * @return A reference to the new core.
-		 *
-		 * @note Avoid using more than one core at any point in time. I'm not entirely sure how
-		 * 		 well the Cg runtime handles this. For most games, a single render context is used,
-		 * 		 so no more than one adapter and core should be necessary.
-		 * @todo Test multi-core/multi-adapter systems. If anyone has info or knows of a game/app
-		 * 		 that uses multiple D3D/OGL render contexts, please let me know.
-		 */
-		Core(std::string logfile = "Voodoo.log");
-		~Core();
+		static Core * Create(std::string logfile = "Voodoo.log");
+		static void Destroy(Core * core);
 
 		/**
 		 * Retrieve the Cg context associated with this Core.
@@ -115,6 +102,28 @@ namespace VoodooShader
 		static void CGErrorHandler(CGcontext context, CGerror error, void * core);
 
 	private:
+
+		/**
+		* Create a new Voodoo Core and associated Cg context.
+		* 		 
+		* @param logfile The filename for this Core's log (will be used by most managers and
+		*			connected adapters).
+		* @return A reference to the new core.
+		*
+		* @note Avoid using more than one core at any point in time. I'm not entirely sure how
+		* 		well the Cg runtime handles this. For most games, a single render context is used,
+		* 		so no more than one adapter and core should be necessary.
+		* @todo Test multi-core/multi-adapter systems. If anyone has info or knows of a game/app
+		* 		that uses multiple D3D/OGL render contexts, please let me know.
+		* @note You can not call this function externally, you must call Code::Create(std::string)
+		* 		instead.
+		*/
+		Core(std::string logfile = "Voodoo.log");
+
+		/**
+		 * Default destructor for Voodoo @ref Core "Cores".
+		 */
+		~Core();
 
 		Adapter * mAdapter;
 		Logger * mLogger;

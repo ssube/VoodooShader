@@ -183,11 +183,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\IVoodoo3D8.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\IVoodoo3DDevice8.cpp"
+				RelativePath=".\DX89_Module.cpp"
 				>
 			</File>
 		</Filter>
@@ -202,6 +198,18 @@
 			</File>
 			<File
 				RelativePath=".\DX89_Module.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3D8.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3DDevice8.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3DSurface8.hpp"
 				>
 			</File>
 			<File

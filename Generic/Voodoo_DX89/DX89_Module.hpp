@@ -41,12 +41,15 @@
 
 #include "MGE/FauxD3D8Header.hpp"
 
-#define GEMCALL(type) type _stdcall
-
-interface IVoodoo3D8;
-interface IVoodoo3DDevice8;
+class IVoodoo3D8;
+class IVoodoo3DDevice8;
+class IVoodoo3DSurface8;
 
 extern VoodooShader::Core * VoodooCore;
+extern D3DCAPS8 d3d8Caps;
 
-typedef IDirect3D8 * (__stdcall * D3DFunc8)(UINT);
+extern IVoodoo3D8 * VoodooObject;
+extern IVoodoo3DDevice8 * VoodooDevice;
+
+typedef IDirect3D8 * (__stdcall *D3DFunc8)(UINT);
 

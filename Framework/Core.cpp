@@ -11,6 +11,21 @@
 
 namespace VoodooShader
 {
+	Core * Core::Create(std::string logfile)
+	{
+		Core * core = new Core(logfile);
+
+		return core;
+	}
+
+	void Core::Destroy(Core * core)
+	{
+		if ( core )
+		{
+			delete core;
+		}
+	}
+
 	Core::Core(std::string logfile)
 		: mAdapter(NULL)
 	{

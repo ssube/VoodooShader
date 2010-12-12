@@ -23,6 +23,8 @@
 // project, originally created by Timeslip and worked on by a number of individuals. All code in the 
 // MGE project is licensed under the GNU GPL, v2 or later (the same license as this project).
 
+#ifndef VOODOO_DX89_FAUXD3D8HEADER_HPP
+#define VOODOO_DX89_FAUXD3D8HEADER_HPP
 
 typedef IDirect3DVertexBuffer9 IDirect3DVertexBuffer;
 typedef IDirect3DIndexBuffer9 IDirect3DIndexBuffer;
@@ -63,7 +65,7 @@ interface IDirect3DSurface8;
 #define D3DTSS_MAXANISOTROPY  21
 #define D3DTSS_ADDRESSW       25
 
-//Object crearion functions
+//Object creation functions
 typedef IDirect3D8* (*D3DProc8)(UINT);
 
 //DX8 structs
@@ -366,3 +368,5 @@ DECLARE_INTERFACE_(IDirect3D8, IUnknown)
 	STDMETHOD_(HMONITOR, GetAdapterMonitor)(UINT Adapter) PURE;
 	STDMETHOD(CreateDevice)(UINT Adapter,D3DDEVTYPE DeviceType,HWND hFocusWindow,DWORD BehaviorFlags,D3DPRESENT_PARAMETERS8* pPresentationParameters,IDirect3DDevice8** ppReturnedDeviceInterface) PURE;
 };
+
+#endif /*VOODOO_DX89_FAUXD3D8HEADER_HPP*/
