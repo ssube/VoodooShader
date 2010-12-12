@@ -35,9 +35,9 @@
 
 #define VOODOO_CORE_VERSION_MAJOR	0
 #define VOODOO_CORE_VERSION_MINOR	1
-#define VOODOO_CORE_VERSION_PATCH	1
-#define VOODOO_CORE_VERSION_GITREV	23
-#define VOODOO_CORE_VERSION_STRING	"Voodoo Shader Framework (version 0.1.1; rev 23; "__TIMESTAMP__")"
+#define VOODOO_CORE_VERSION_PATCH	2
+#define VOODOO_CORE_VERSION_GITREV	47
+#define VOODOO_CORE_VERSION_STRING	"Voodoo Shader Framework (version 0.1.2; rev 47; "__TIMESTAMP__")\n\n"
 
 #define VOODOO_CORE_COPYRIGHT "\n\
 	Voodoo Shader Framework, Copyright (C) 2010 by Sean Sube\n\

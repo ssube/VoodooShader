@@ -113,6 +113,41 @@ public:
 
 	STDMETHOD(Present)(THIS_ CONST RECT* pSourceRect,CONST RECT* pDestRect,HWND hDestWindowOverride,CONST RGNDATA* pDirtyRegion)
 	{
+		HRESULT hr = m_device->BeginScene();
+		if ( SUCCEEDED(hr) )
+		{
+			// Draw a custom quad to the screen
+			struct TLVertex
+			{
+				float x, y, z, rhw;
+				DWORD color;
+			};
+
+			TLVertex vertices[] =
+			{
+				{ -0.5f, -0.5f, 0.0f, 1.0f, 0xffff0000 },
+				{ 99.5f, -0.5f, 0.0f, 1.0f, 0xff00ff00 },
+				{ -0.5f, 99.5f, 0.0f, 1.0f, 0xff0000ff },
+				{ 99.5f, 99.5f, 0.0f, 1.0f, 0xffff0000 }
+			};
+
+			SetVertexShader(0);
+			SetPixelShader(0);
+			SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
+			SetRenderState(D3DRS_ZENABLE, false);
+			SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+			SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
+			SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_DIFFUSE);
+			SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
+			SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_DIFFUSE);
+			DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertices, sizeof(TLVertex));
+			SetRenderState(D3DRS_ZENABLE, true);
+
+			m_device->EndScene();
+		} else {
+			VoodooCore->GetLog()->Log("Voodoo DX9: Failed to draw overlay scene.\n");
+		}
+
 		return m_device->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 	}
 
@@ -238,33 +273,6 @@ public:
 
 	STDMETHOD(EndScene)(THIS)
 	{
-		// Draw a custom quad to the screen
-		struct TLVertex
-		{
-			float x, y, z, rhw;
-			DWORD color;
-		};
-
-		TLVertex vertices[] =
-		{
-			{ -0.5f, -0.5f, 0.0f, 1.0f, 0xffff0000 },
-			{ 99.5f, -0.5f, 0.0f, 1.0f, 0xff00ff00 },
-			{ -0.5f, 99.5f, 0.0f, 1.0f, 0xff0000ff },
-			{ 99.5f, 99.5f, 0.0f, 1.0f, 0xffff0000 }
-		};
-
-		SetVertexShader(0);
-		SetPixelShader(0);
-		SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
-		SetRenderState(D3DRS_ZENABLE, false);
-		SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-		SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
-		SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_DIFFUSE);
-		SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
-		SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_DIFFUSE);
-		DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertices, sizeof(TLVertex));
-		SetRenderState(D3DRS_ZENABLE, true);
-
 		return m_device->EndScene();
 	}
 
