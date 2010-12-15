@@ -22,6 +22,7 @@ class IVoodoo3DDevice9;
 
 extern VoodooShader::Core * VoodooCore;
 extern VoodooShader::DirectX9::Adapter * VoodooDX9;
+extern VoodooShader::ShaderRef testShader;
 
 extern IVoodoo3D9 * VoodooObject;
 extern IVoodoo3DDevice9 * VoodooDevice;

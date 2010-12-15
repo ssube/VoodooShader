@@ -145,7 +145,12 @@ namespace VoodooShader
 
 	VOODOO_API void Formatter::Done(bool timestamp)
 	{
-		this->mParent->Log(this->mFmtObj.str(), timestamp);
+		try
+		{
+			this->mParent->Log(this->mFmtObj.str(), timestamp);
+		} catch ( Exception & exc ) {
+			this->mParent->Log("Voodoo Core: Logger error.", timestamp);
+		}
 	}
 
 	VOODOO_API Formatter::Formatter(Logger * parent)

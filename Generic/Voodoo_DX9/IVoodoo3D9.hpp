@@ -120,8 +120,17 @@ public:
 
 				scene->GetSurfaceLevel(0, &sceneSurf);
 				realDevice->SetRenderTarget(0, sceneSurf);
+				VoodooCore->CreateTexture("backbuffer", scene);
 
 				VoodooCore->GetLog()->Log("Voodoo DX9: Set up BB texture.\n");
+
+				try
+				{
+					testShader = VoodooCore->CreateShader("test.cgfx", NULL);
+					testShader->Link();
+				} catch ( VoodooShader::Exception & exc ) {
+					VoodooCore->GetLog()->Log("Voodoo DX9: Error loading shader.\n");
+				}
 			} else {
 				VoodooCore->GetLog()->Log("Voodoo DX9: BB texture failed.\n");
 			}

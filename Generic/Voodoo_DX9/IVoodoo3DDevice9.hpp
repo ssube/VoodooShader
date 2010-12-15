@@ -2,6 +2,9 @@
 
 #include "DX9_Module.hpp"
 
+IDirect3DStateBlock9 * stateBlock;
+bool recordedStates = false;
+
 class IVoodoo3DDevice9 
 	: public IDirect3DDevice9
 {
@@ -14,6 +17,8 @@ public:
 	// in functions like GetDirect3D9
 	IVoodoo3DDevice9(IDirect3D9* d3d, IDirect3DDevice9* device) : m_d3d(d3d), m_device(device)
 	{
+		CreateStateBlock(D3DSBT_ALL, &stateBlock);
+		BeginStateBlock();
 	}
 
 	/*** IUnknown methods ***/
@@ -115,55 +120,15 @@ public:
 
 	STDMETHOD(Present)(THIS_ CONST RECT* pSourceRect,CONST RECT* pDestRect,HWND hDestWindowOverride,CONST RGNDATA* pDirtyRegion)
 	{
-		/*HRESULT hr = m_device->BeginScene();
-		if ( SUCCEEDED(hr) )
-		{
-			// Draw a custom quad to the screen
-			struct TLVertex
-			{
-				float x, y, z, rhw;
-				DWORD color;
-			};
-
-			TLVertex vertices[] =
-			{
-				{ -0.5f, -0.5f, 0.0f, 1.0f, 0xffffaaaa },
-				{ 99.5f, -0.5f, 0.0f, 1.0f, 0xffaaffaa },
-				{ -0.5f, 99.5f, 0.0f, 1.0f, 0xffaaaaff },
-				{ 99.5f, 99.5f, 0.0f, 1.0f, 0xffffaaaa }
-			};
-
-			IDirect3DVertexShader9 * vS;
-			IDirect3DPixelShader9 * pS;
-			DWORD fvf;
-			DWORD z, cull;
-
-			GetVertexShader(&vS);	SetVertexShader(0);
-			GetPixelShader(&pS);	SetPixelShader(0);
-			
-
-			GetFVF(&fvf);			SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
-	
-			GetRenderState(D3DRS_ZENABLE, &z);		SetRenderState(D3DRS_ZENABLE, false);
-			GetRenderState(D3DRS_CULLMODE, &cull);	SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-
-			DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertices, sizeof(TLVertex));
-
-			SetRenderState(D3DRS_ZENABLE, z);
-			SetRenderState(D3DRS_CULLMODE, cull);
-			SetFVF(fvf);
-			SetPixelShader(pS);
-			SetVertexShader(vS);
-
-			m_device->EndScene();
-
-		} else {
-			VoodooCore->GetLog()->Log("Voodoo DX9: Failed to draw overlay scene.\n");
-		}*/
 		SetRenderTarget(0, backbufferSurf);
-		SetTexture(0, scene);
+
+		VoodooShader::TechniqueRef tech = testShader->GetDefaultTechnique();
+		VoodooShader::PassRef pass = tech->GetPass(0);
+		VoodooDX9->BindPass(pass);
 
 		VoodooDX9->DrawQuad(true);
+
+		VoodooDX9->UnbindPass();
 
 		SetRenderTarget(0, sceneSurf);
 

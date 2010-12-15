@@ -1,47 +1,43 @@
 
-	Voodoo Shader Framework
+###Voodoo Shader Framework
 
-	    Prototype Alpha
+##Prototype Alpha
 
-
- = Contents:
- 1. Summary
- 2. Installation
-  2.a. Core
-  2.b. GEM
-  2.c. NWShader
- 3. Use
- 4. Reporting Bugs
- 5. Contact & Legal
-
-
+#Contents:
 1. Summary
-
-The Voodoo Shader Framework is a system designed to add shader support to
-various games and programs and provide a single target for shader authors,
-with a full set of useful features.
-
-It uses a set of "adapters" to connect a single core with each target 
-application; each adapter specifies the exact connection details and 
-implementation. The core provides a single, unified and widely compatible
-base, providing unified and constant system for shaders to interface with.
-The framework uses many features available in the Cg language, including 
-compiling to both HLSL and GLSL (for OpenGL and DirectX compatibility), and 
-a clear and concise syntax for accessing game data and textures.
-
 2. Installation
-
-The Voodoo system requires two main steps for installing the core. After this,
-installing game adapters is made extremely simple.
-
 2.a. Core
+2.b. Gem (MW)
+2.c. Frost (NWN)
+3. Use
+4. Reporting Bugs
+5. Contact & Legal
 
-Installing the VSF core requires creating a directory with the appropriate
-binary and resource files. These are included in the archive package in a
-"bin/" directory. This must be placed in an accessible location, preferably
-on the computer (network shares may or may not work, this has not been tested).
-The bin directory must then be added to the system or user path environment
-variable, this provides simple access from any game directory.
+
+#1. Summary
+
+The Voodoo Shader Framework is a system designed to add shader support to various games and 
+programs and provide a single target for shader authors, with a full set of useful features.
+
+It uses a set of "adapters" to connect a single core with each target application; each adapter
+specifies the exact connection details and implementation. The core provides a single, unified and
+widely compatible base, providing unified and constant system for shaders to interface with. The
+framework uses many features available in the Cg language, including compiling to both HLSL and 
+GLSL (for OpenGL and DirectX compatibility), and a clear and concise syntax for accessing game data
+and textures.
+
+#2. Installation
+
+The Voodoo system requires two main steps for installing the core. After this, installing game 
+adapters is made extremely simple.
+
+#2.a. Core
+
+Installing the VSF core requires creating a directory with the appropriate binary and resource 
+files. These are included in the archive package in a "bin/" directory. This must be placed in an 
+accessible location, preferably on the computer (network shares may or may not work, this has not 
+been tested). The bin directory must then be added to the system or user path environment variable,
+this provides simple access from any game directory.
 
 2.b. GEM
 

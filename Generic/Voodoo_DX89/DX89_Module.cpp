@@ -20,7 +20,11 @@
 \**************************************************************************************************/
 
 #include "DX89_Module.hpp"
+
 #include "IVoodoo3D8.hpp"
+#include "IVoodoo3DDevice8.hpp"
+#include "IVoodoo3DSurface8.hpp"
+#include "IVoodoo3DTexture8.hpp"
 
 VoodooShader::Core * VoodooCore = NULL;
 D3DCAPS8 d3d8Caps;

@@ -89,7 +89,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description=""
 				CommandLine=""
 			/>
 		</Configuration>
@@ -169,7 +168,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description=""
 				CommandLine=""
 			/>
 		</Configuration>
@@ -210,6 +208,10 @@
 			</File>
 			<File
 				RelativePath=".\IVoodoo3DSurface8.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3DTexture8.hpp"
 				>
 			</File>
 			<File

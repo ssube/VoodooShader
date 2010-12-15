@@ -24,7 +24,7 @@ namespace VoodooShader
 			Adapter(Core * core, IDirect3DDevice9 * device);
 
 			bool LoadPass(Pass * pass);
-			void BindPass(Pass * shader);
+			void BindPass(PassRef shader);
 			void UnbindPass();
 
 			void DrawQuad(bool fullscreen = true, void * vertexData = NULL);

@@ -7,6 +7,7 @@
 
 VoodooShader::Core * VoodooCore = NULL;
 VoodooShader::DirectX9::Adapter * VoodooDX9 = NULL;
+VoodooShader::ShaderRef testShader;
 
 IVoodoo3D9 * VoodooObject = NULL;
 IVoodoo3DDevice9 * VoodooDevice = NULL;
@@ -72,8 +73,8 @@ namespace VoodooShader
 			D3DVIEWPORT9 viewport;
 			device->GetViewport(&viewport);
 
-			float fx = viewport.Width	/ 2;
-			float fy = viewport.Height	/ 2;
+			float fx = viewport.Width;//	/ 2;
+			float fy = viewport.Height;//	/ 2;
 
 			this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
 				D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
@@ -140,17 +141,15 @@ namespace VoodooShader
 			return true;
 		}
 
-		void Adapter::BindPass(Pass * pass)
+		void Adapter::BindPass(PassRef pass)
 		{
 			// Both should be loaded and valid (if they exist and prepare was called)
 			CGprogram vertProg = pass->VertexProgram();
 			CGprogram fragProg = pass->FragmentProgram();
 
-			HRESULT hr;
-
 			if ( cgIsProgram(vertProg) )
 			{
-				hr = cgD3D9BindProgram(pass->VertexProgram());
+				HRESULT hr = cgD3D9BindProgram(pass->VertexProgram());
 
 				if ( !SUCCEEDED(hr) )
 				{
@@ -164,7 +163,7 @@ namespace VoodooShader
 
 			if ( cgIsProgram(fragProg) )
 			{
-				hr = cgD3D9BindProgram(pass->FragmentProgram());
+				HRESULT hr = cgD3D9BindProgram(pass->FragmentProgram());
 
 				if ( !SUCCEEDED(hr) )
 				{
@@ -222,9 +221,9 @@ namespace VoodooShader
 			} else {
 				if ( !vertexData )
 				{
-					Throw("Voodoo DX9: Draw Quad called with no vertices.", mCore);
+					Throw("Voodoo DX9: Draw Quad called with no vertexes.", mCore);
 				} else {
-					// Draw a quad from user vertices
+					// Draw a quad from user vertexes
 					HRESULT hr = this->mDevice->BeginScene();
 					if ( SUCCEEDED(hr) )
 					{

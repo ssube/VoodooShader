@@ -19,6 +19,9 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
+#ifndef VOODOO_DX89_SURFACE_HPP
+#define VOODOO_DX89_SURFACE_HPP
+
 #include "DX89_Module.hpp"
 
 class IVoodoo3DSurface8
@@ -28,10 +31,15 @@ class IVoodoo3DSurface8
 	IDirect3DSurface9 * mRealSurface;
 
 public:
-	IVoodoo3DSurface8(IDirect3DSurface9 * realSurface)
-		: mRealSurface(realSurface)
+	IVoodoo3DSurface8(IVoodoo3DDevice8 * device, IDirect3DSurface9 * realSurface)
+		: mRealDevice(device), mRealSurface(realSurface)
 	{
 
+	}
+
+	inline IDirect3DSurface9 * RealSurface()
+	{
+		return mRealSurface;
 	}
 
 	/*** IUnknown methods ***/
@@ -47,7 +55,15 @@ public:
 
 	STDMETHOD_(ULONG,Release)()
 	{
-		return mRealSurface->Release();
+		ULONG refCount = mRealSurface->Release();
+
+		if ( refCount == 0 )
+		{
+			delete this;
+			return 0;
+		} else {
+			return refCount;
+		}
 	}
 
 	/*** IDirect3DSurface8 methods ***/
@@ -79,7 +95,21 @@ public:
 
 	STDMETHOD(GetDesc)(D3DSURFACE_DESC8 *pDesc)
 	{
-		return mRealSurface->GetDesc(pDesc);
+		D3DSURFACE_DESC9 rDesc;
+		HRESULT hr = mRealSurface->GetDesc(&rDesc);
+		if ( SUCCEEDED(hr) )
+		{
+			pDesc->Format = rDesc.Format;
+			pDesc->Type = rDesc.Type;
+			pDesc->Usage = rDesc.Usage;
+			pDesc->Pool = rDesc.Pool;
+			pDesc->Size = 0;
+			pDesc->MultiSampleType = rDesc.MultiSampleType;
+			pDesc->Width = rDesc.Width;
+			pDesc->Height = rDesc.Height;
+		}
+
+		return hr;
 	}
 
 	STDMETHOD(LockRect)(D3DLOCKED_RECT* pLockedRect,CONST RECT* pRect,DWORD Flags)
@@ -93,3 +123,5 @@ public:
 	}
 
 };
+
+#endif /*VOODOO_DX89_SURFACE_HPP*/
