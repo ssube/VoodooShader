@@ -50,7 +50,7 @@ namespace VoodooShader
 
 			const char * paramName = cgGetParameterName(cParam);
 
-			ParameterRef param(new Parameter(this, paramName, type));
+			ParameterRef param(new Parameter(this, cParam));
 
 			ParameterRef globalParam = this->mCore->GetParameter(paramName, type);
 			if ( globalParam )
@@ -152,6 +152,38 @@ namespace VoodooShader
 
 	void Technique::Link()
 	{
+		this->mTarget = TextureRef();
+		CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(this->mTechnique, "target");
+		if ( cgIsAnnotation(targetAnnotation) )
+		{
+			if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )
+			{
+				const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
+
+				this->mTarget = mCore->GetTexture(targetName);
+
+				if ( !this->mTarget.get() )
+				{
+					mCore->GetLog()->Format("Voodoo Core: Pass %s cannot find target %s.\n")
+						.With(this->Name()).With(targetName).Done();
+
+					this->mTarget = mCore->GetTexture(":lastshader");
+				}
+			} else {
+				//! @todo Fix this nested mess.
+				mCore->GetLog()->Format("Voodoo Core: Pass %s has annotation \"target\" of invalid type.\n")
+					.With(this->Name()).Done();
+
+				this->mTarget = mCore->GetTexture(":lastshader");
+			}
+		} else {
+			mCore->GetLog()->Format("Voodoo Core: Pass %s has no target annotation.\n")
+				.With(this->Name()).Done();
+
+			this->mTarget = mCore->GetTexture(":lastshader");
+		}
+
+
 		this->mPasses.clear();
 
 		CGpass cPass = cgGetFirstPass(mTechnique);
@@ -205,14 +237,23 @@ namespace VoodooShader
 
 				if ( !this->mTarget.get() )
 				{
-					mCore->GetLog()->Format("Voodoo Core: Pass %s cannot find target %s.")
+					mCore->GetLog()->Format("Voodoo Core: Pass %s cannot find target %s.\n")
 						.With(this->Name()).With(targetName).Done();
+
+					this->mTarget = mCore->GetTexture(":lastpass");
 				}
 			} else {
 				//! @todo Fix this nested mess.
-				mCore->GetLog()->Format("Voodoo Core: Pass %s has annotation \"target\" of invalid type.")
+				mCore->GetLog()->Format("Voodoo Core: Pass %s has annotation \"target\" of invalid type.\n")
 					.With(this->Name()).Done();
+
+				this->mTarget = mCore->GetTexture(":lastpass");
 			}
+		} else {
+			mCore->GetLog()->Format("Voodoo Core: Pass %s has no target annotation.\n")
+				.With(this->Name()).Done();
+
+			this->mTarget = mCore->GetTexture(":lastpass");
 		}
 
 		// Load the programs

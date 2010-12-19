@@ -163,9 +163,9 @@ namespace VoodooShader
 		TextureMap::iterator textureEntry = this->mTextures.find(name);
 		if ( textureEntry != this->mTextures.end() )
 		{
-			return TextureRef();
-		} else {
 			return textureEntry->second;
+		} else {
+			return TextureRef();
 		}
 	}
 

@@ -7,16 +7,14 @@
 
 namespace VoodooShader
 {
-	Parameter::Parameter(Shader * parent, String name, ParameterType type)
-		: mType(type), mParent(parent)
+	Parameter::Parameter(Core * core, String name, ParameterType type)
+		: mType(type), mParent()
 	{ 
-		if ( parent )
+		ParameterRef param = core->GetParameter(name, type);
+
+		if ( !param.get() )
 		{
-			// Actual shader parameter
-			//parent->G
-		} else {
-			// Virtual parameter
-			mParam = cgCreateParameter(parent->GetCore()->GetCGContext(), Converter::ToCGType(type));
+			mParam = cgCreateParameter(core->GetCGContext(), Converter::ToCGType(type));
 
 			switch ( this->mType )
 			{
@@ -36,17 +34,56 @@ namespace VoodooShader
 				break;
 			case PT_Unknown:
 			default:
-				//! @todo Fix this, shouldn't Throw with a NULL Core
 				Throw("Invalid parameter type.", NULL);
 				break;
 			}
 		}
 	}
 
+	Parameter::Parameter(Shader * parent, CGparameter param)
+		: mParent(parent), mParam(param)
+	{
+		mType = Converter::ToParameterType(cgGetParameterType(param));
+
+		switch ( this->mType )
+		{
+		case PT_Sampler1D:
+		case PT_Sampler2D:
+		case PT_Sampler3D:
+			this->mValueTexture = TextureRef();
+			break;
+		case PT_Float4:
+			this->mValueFloat[3] = 0.0f;
+		case PT_Float3:
+			this->mValueFloat[2] = 0.0f;
+		case PT_Float2:
+			this->mValueFloat[1] = 0.0f;
+		case PT_Float1:
+			this->mValueFloat[0] = 0.0f;
+			break;
+		case PT_Unknown:
+		default:
+			Throw("Invalid parameter type.", NULL);
+			break;
+		}
+	}
+
 	std::string Parameter::Name()
 	{
-		std::string name = this->mParent->Name();
-		name += cgGetParameterName(this->mParam);
+		std::string name;
+		if ( mParent )
+		{
+			name += this->mParent->Name();
+		}
+
+		name += ":";
+
+		if ( cgIsParameter(mParam) )
+		{
+			name += cgGetParameterName(this->mParam);
+		} else {
+			name += "[invalid_param]";
+		}
 
 		return name;
 	}

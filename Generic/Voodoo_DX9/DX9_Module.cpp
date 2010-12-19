@@ -73,8 +73,8 @@ namespace VoodooShader
 			D3DVIEWPORT9 viewport;
 			device->GetViewport(&viewport);
 
-			float fx = viewport.Width;//	/ 2;
-			float fy = viewport.Height;//	/ 2;
+			float fx = viewport.Width	;/// 2;
+			float fy = viewport.Height	;/// 2;
 
 			this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
 				D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
@@ -201,13 +201,15 @@ namespace VoodooShader
 			{
 				IDirect3DVertexBuffer9 * sourceBuffer;
 				UINT sourceOffset, sourceStride;
-				DWORD sourceFVF;
+				DWORD sourceFVF, zEnabled;
 
 				this->mDevice->GetStreamSource(0, &sourceBuffer, &sourceOffset, &sourceStride);
 				this->mDevice->GetFVF(&sourceFVF);
+				this->mDevice->GetRenderState(D3DRS_ZENABLE, &zEnabled);
 
 				this->mDevice->SetStreamSource(0, FSQuadVerts, 0, sizeof(FSVert));
 				this->mDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
+				this->mDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
 
 				HRESULT hr = this->mDevice->BeginScene();
 				if ( SUCCEEDED(hr) )
@@ -218,6 +220,7 @@ namespace VoodooShader
 
 				this->mDevice->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);
 				this->mDevice->SetFVF(sourceFVF);
+				this->mDevice->SetRenderState(D3DRS_ZENABLE, zEnabled);
 			} else {
 				if ( !vertexData )
 				{

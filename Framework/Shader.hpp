@@ -86,6 +86,11 @@ namespace VoodooShader
 		size_t NumPasses();
 		PassRef GetPass(size_t index);
 
+		TextureRef Target()
+		{
+			return mTarget;
+		}
+
 		void Link();
 
 	private:
@@ -94,6 +99,7 @@ namespace VoodooShader
 		std::string mName;
 		PassVector mPasses;
 		CGtechnique mTechnique;
+		TextureRef mTarget;
 	};
 
 	class VOODOO_API Pass

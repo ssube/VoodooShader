@@ -27,9 +27,19 @@ extern VoodooShader::ShaderRef testShader;
 extern IVoodoo3D9 * VoodooObject;
 extern IVoodoo3DDevice9 * VoodooDevice;
 
-IDirect3DTexture9 * scene;
-IDirect3DSurface9 * sceneSurf;
 IDirect3DSurface9 * backbufferSurf;
+
+IDirect3DTexture9 * texture_Scratch;
+IDirect3DSurface9 * surface_Scratch;
+
+VoodooShader::TextureRef texture_ThisFrame;
+IDirect3DSurface9 * surface_ThisFrame;
+
+VoodooShader::TextureRef texture_LastPass;
+IDirect3DSurface9 * surface_LastPass;
+
+VoodooShader::TextureRef texture_LastShader;
+IDirect3DSurface9 * surface_LastShader;
 
 typedef IDirect3D9 * (__stdcall *D3DFunc9)(UINT);
 

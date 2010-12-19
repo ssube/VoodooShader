@@ -2,9 +2,6 @@
 
 #include "DX9_Module.hpp"
 
-IDirect3DStateBlock9 * stateBlock;
-bool recordedStates = false;
-
 class IVoodoo3DDevice9 
 	: public IDirect3DDevice9
 {
@@ -17,8 +14,6 @@ public:
 	// in functions like GetDirect3D9
 	IVoodoo3DDevice9(IDirect3D9* d3d, IDirect3DDevice9* device) : m_d3d(d3d), m_device(device)
 	{
-		CreateStateBlock(D3DSBT_ALL, &stateBlock);
-		BeginStateBlock();
 	}
 
 	/*** IUnknown methods ***/
@@ -120,17 +115,58 @@ public:
 
 	STDMETHOD(Present)(THIS_ CONST RECT* pSourceRect,CONST RECT* pDestRect,HWND hDestWindowOverride,CONST RGNDATA* pDirtyRegion)
 	{
-		SetRenderTarget(0, backbufferSurf);
-
 		VoodooShader::TechniqueRef tech = testShader->GetDefaultTechnique();
-		VoodooShader::PassRef pass = tech->GetPass(0);
-		VoodooDX9->BindPass(pass);
+		size_t passCount = tech->NumPasses();
 
-		VoodooDX9->DrawQuad(true);
+		for ( size_t curPass = 0; curPass < passCount; ++curPass )
+		{
+			VoodooShader::PassRef pass = tech->GetPass(curPass);
 
-		VoodooDX9->UnbindPass();
+			HRESULT hr = m_device->SetRenderTarget(0, surface_Scratch);
+			if ( FAILED(hr) )
+			{
+				VoodooCore->GetLog()->Log("Voodoo DX9: Failed to bind scratch as RT.\n");
+			}
 
-		SetRenderTarget(0, sceneSurf);
+			VoodooDX9->BindPass(pass);
+			VoodooDX9->DrawQuad(true);
+			VoodooDX9->UnbindPass();
+
+			hr = m_device->SetRenderTarget(0, surface_ThisFrame);
+			if ( FAILED(hr) )
+			{
+				VoodooCore->GetLog()->Log("Voodoo DX9: Failed to bind thisframe as RT.\n");
+			}
+
+			VoodooShader::TextureRef target = pass->Target();
+			IDirect3DTexture9 * texture = (IDirect3DTexture9*)target->Get();
+			IDirect3DSurface9 * surface;
+
+			hr = texture->GetSurfaceLevel(0, &surface);
+			hr = m_device->StretchRect(surface_Scratch, pSourceRect, surface, pDestRect, D3DTEXF_NONE);
+			if ( FAILED(hr) )
+			{
+				VoodooCore->GetLog()->Format("Voodoo DX9: Failed to copy scratch to target for pass %s.\n")
+					.With(pass->Name()).Done();
+			}
+		}
+
+		VoodooShader::TextureRef techtarget = tech->Target();
+		IDirect3DTexture9 * techtexture = (IDirect3DTexture9*)techtarget->Get();
+		IDirect3DSurface9 * techsurface;
+		HRESULT hr = techtexture->GetSurfaceLevel(0, &techsurface);
+
+		hr = m_device->StretchRect(surface_Scratch, NULL, techsurface, NULL, D3DTEXF_NONE);
+		if ( FAILED(hr) )
+		{
+			VoodooCore->GetLog()->Log("Voodoo DX9: Failed to copy scratch to lastshader.\n");
+		}
+
+		hr = m_device->StretchRect(surface_LastShader, NULL, backbufferSurf, NULL, D3DTEXF_NONE);
+		if ( FAILED(hr) )
+		{
+			VoodooCore->GetLog()->Log("Voodoo DX9: Failed to copy lastshader to backbuffer.\n");
+		}
 
 		return m_device->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 	}

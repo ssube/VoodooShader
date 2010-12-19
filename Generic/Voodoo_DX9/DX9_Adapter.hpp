@@ -43,6 +43,8 @@ namespace VoodooShader
 
 			CGprogram mBoundVP;
 			CGprogram mBoundFP;
+
+			IDirect3DSurface9 * mRenderTarget;
 		};
 	};
 }

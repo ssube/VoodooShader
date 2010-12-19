@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="DX8.9_Redirect"
+	Name="DX89_Redirect"
 	ProjectGUID="{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}"
 	RootNamespace="DX89_Redirect"
 	Keyword="Win32Proj"

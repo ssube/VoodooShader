@@ -29,7 +29,12 @@ namespace VoodooShader
 	class VOODOO_API Parameter
 	{
 	public:
-		Parameter(Shader * parent, String name, ParameterType type = PT_Unknown);
+		/**
+		 * Virtual (global-level) parameter constructor. This will create a named parameter
+		 * in the Cg runtime and register it in the given Core. 
+		 */
+		Parameter(Core * core, String name, ParameterType type);
+		Parameter(Shader * parent, CGparameter param);
 
 		/**
 		 * Binds two parameters, forcing their values to be identical. This should
