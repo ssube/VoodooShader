@@ -14,7 +14,7 @@ namespace VoodooShader
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_TEX1)
 
-		LPDIRECT3DVERTEXBUFFER9 FSQuadVerts;
+		LPDIRECT3DVERTEXBUFFER9 FSQuadVerts = NULL;
 
 		class VOODOO_API_DX9 Adapter
 			: VoodooShader::Adapter

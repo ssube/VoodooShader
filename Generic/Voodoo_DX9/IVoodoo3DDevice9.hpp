@@ -115,6 +115,7 @@ public:
 
 	STDMETHOD(Present)(THIS_ CONST RECT* pSourceRect,CONST RECT* pDestRect,HWND hDestWindowOverride,CONST RGNDATA* pDirtyRegion)
 	{
+		/*
 		VoodooShader::TechniqueRef tech = testShader->GetDefaultTechnique();
 		size_t passCount = tech->NumPasses();
 
@@ -129,7 +130,31 @@ public:
 			}
 
 			VoodooDX9->BindPass(pass);
-			VoodooDX9->DrawQuad(true);
+		*/
+
+		IDirect3DBaseTexture9 * tex;
+		IDirect3DSurface9 * rts;
+
+		m_device->GetTexture(0, &tex);
+		m_device->GetRenderTarget(0, &rts);
+
+		m_device->StretchRect(surface_Scratch, NULL, backbufferSurf, NULL, D3DTEXF_NONE);
+
+		VoodooShader::TechniqueRef tech = testShader->GetDefaultTechnique();
+		VoodooShader::PassRef pass = tech->GetPass(0);
+		VoodooDX9->BindPass(pass);
+
+		m_device->SetTexture(0, texture_Scratch);
+		m_device->SetRenderTarget(0, backbufferSurf);
+
+		VoodooDX9->DrawQuad();
+
+		VoodooDX9->UnbindPass();
+
+		m_device->SetRenderTarget(0, rts);
+		m_device->SetTexture(0, tex);
+
+		/*
 			VoodooDX9->UnbindPass();
 
 			hr = m_device->SetRenderTarget(0, surface_ThisFrame);
@@ -167,6 +192,7 @@ public:
 		{
 			VoodooCore->GetLog()->Log("Voodoo DX9: Failed to copy lastshader to backbuffer.\n");
 		}
+		*/
 
 		return m_device->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 	}

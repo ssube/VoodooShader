@@ -6,7 +6,7 @@ class IVoodoo3D9
 	: public IDirect3D9
 {
 private:
-	IDirect3D9* m_d3d;
+	IDirect3D9 * m_d3d;
 
 public:
 	IVoodoo3D9(IDirect3D9* d3d) : m_d3d(d3d)
@@ -180,6 +180,8 @@ public:
 				} else {
 					VoodooCore->GetLog()->Log("Voodoo DX9: Failed to cache scratch surface.\n");
 				}
+
+				realDevice->SetRenderTarget(0, surface_Scratch);
 			} else {
 				VoodooCore->GetLog()->Log("Voodoo DX9: Failed to create scratch texture.\n");
 			}
