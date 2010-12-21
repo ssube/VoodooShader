@@ -6,6 +6,7 @@
 #endif
 */
 // / *
+#include <stdio.h>
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -61,13 +62,19 @@ extern "C" __declspec(dllexport) IDirect3D9 * WINAPI Voodoo3DCreate9(UINT sdkVer
 	if ( !library )
 	{
 		char error[4096];
-		FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, 0, result, 0, error, 4096, NULL);
+		sprintf(error, "Loading from: %s", libraryFile);
 		MessageBoxA(NULL, error, "Voodoo DX9 Hook Error 3", MB_ICONERROR);
 		return NULL;
 	}
 
 	typedef IDirect3D9 * (__stdcall * InitFuncType)(UINT);
 	InitFuncType initFunc = (InitFuncType)GetProcAddress(library, "?Voodoo3DCreate9@@YGPAXI@Z");
+
+	if ( !initFunc )
+	{
+		MessageBoxA(NULL, "Could not find init func.", "Voodoo DX9 Hook Error 4", MB_ICONERROR);
+		return NULL;
+	}
 
 	IDirect3D9 * obj = (*initFunc)(sdkVersion);
 
