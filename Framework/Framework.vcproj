@@ -90,7 +90,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description=""
 				CommandLine=""
 			/>
 		</Configuration>
@@ -169,8 +168,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="Copying framework module to bin..."
-				CommandLine="copy /Y &quot;$(TargetPath)&quot; /B &quot;$(SolutionDir)/bin/$(TargetFileName)&quot; /B"
+				Description=""
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -182,10 +181,6 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
-			<File
-				RelativePath=".\Adapter.cpp"
-				>
-			</File>
 			<File
 				RelativePath=".\Core.cpp"
 				>
@@ -292,6 +287,10 @@
 			</File>
 			<File
 				RelativePath=".\Texture.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Version.hpp"
 				>
 			</File>
 			<File

@@ -73,8 +73,8 @@ namespace VoodooShader
 			D3DVIEWPORT9 viewport;
 			device->GetViewport(&viewport);
 
-			float fx = 450.0f; //viewport.Width + 0.5		;/// 2;
-			float fy = 450.0f; //viewport.Height + 0.5	;/// 2;
+			float fx = viewport.Width  + 0.5	;/// 2;
+			float fy = viewport.Height + 0.5	;/// 2;
 
 			mCore->GetLog()->Format("Voodoo DX9: Prepping for %d by %d target.\n")
 				.With(fx).With(fy).Done();
@@ -90,9 +90,9 @@ namespace VoodooShader
 			FSVert g_Vertices[4];
 			memset(g_Vertices, 0, sizeof(FSVert) * 4);
 
-			g_Vertices[0].x = 50.0f; g_Vertices[0].y = 50.0f; g_Vertices[0].z = 0.5f;
-			g_Vertices[1].x =    fx; g_Vertices[1].y = 50.0f; g_Vertices[1].z = 0.5f;
-			g_Vertices[2].x = 50.0f; g_Vertices[2].y =    fy; g_Vertices[2].z = 0.5f;
+			g_Vertices[0].x = -0.5f; g_Vertices[0].y = -0.5f; g_Vertices[0].z = 0.5f;
+			g_Vertices[1].x =    fx; g_Vertices[1].y = -0.5f; g_Vertices[1].z = 0.5f;
+			g_Vertices[2].x = -0.5f; g_Vertices[2].y =    fy; g_Vertices[2].z = 0.5f;
 			g_Vertices[3].x =    fx; g_Vertices[3].y =    fy; g_Vertices[3].z = 0.5f;
 
 			g_Vertices[0].rhw = g_Vertices[1].rhw = g_Vertices[2].rhw = g_Vertices[3].rhw = 1.0f;
@@ -207,8 +207,8 @@ namespace VoodooShader
 
 		void Adapter::DrawQuad(bool fullscreen, void * vertexData)
 		{
-			//if ( fullscreen )
-			//{
+			if ( fullscreen )
+			{
 				IDirect3DVertexBuffer9 * sourceBuffer;
 				UINT sourceOffset, sourceStride;
 				DWORD sourceFVF, zEnabled, aEnabled, cullMode;
@@ -239,16 +239,16 @@ namespace VoodooShader
 				this->mDevice->SetRenderState(D3DRS_ZENABLE, zEnabled);
 				this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
 				this->mDevice->SetRenderState(D3DRS_CULLMODE, cullMode);
-			/*} else {
+			} else {
 				if ( !vertexData )
 				{
-					Throw("Voodoo DX9: Draw Quad called with no vertexes.", mCore);
+					Throw("Voodoo DX9: DrawQuad called in manual mode with no vertexes.", mCore);
 				} else {
 					// Draw a quad from user vertexes
 					HRESULT hr = this->mDevice->BeginScene();
 					if ( SUCCEEDED(hr) )
 					{
-						hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, 2, vertexData, sizeof(FSVert));
+						hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
 						if ( !SUCCEEDED(hr) )
 						{
 							this->mCore->GetLog()->Log("Voodoo DX9: Error drawing user quad.");
@@ -256,7 +256,7 @@ namespace VoodooShader
 						this->mDevice->EndScene();
 					}
 				}
-			}*/
+			}
 		}
 
 		void Adapter::ApplyParameter(ParameterRef param)
@@ -332,7 +332,7 @@ VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
 	VoodooCore->GetLog()->SetBufferSize(0);
 #endif
 
-	VoodooCore->GetLog()->Format("Voodoo GEM: Direct3DCreate9 called, SDK version: %d.\n").With(version).Done();
+	VoodooCore->GetLog()->Format("Voodoo DX9: Direct3DCreate9 called, SDK version: %d.\n").With(version).Done();
 
 	//Load the real d3d8 dll and get device caps
 	char Path[MAX_PATH];
@@ -342,7 +342,7 @@ VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
 	HMODULE d3ddll = LoadLibraryA(Path);
 	D3DFunc9 d3d9func = (D3DFunc9)GetProcAddress (d3ddll, "Direct3DCreate9");
 
-	if (d3d9func == NULL) 
+	if (!d3d9func) 
 	{
 		VoodooCore->GetLog()->Log("Voodoo DX9: Could not find D3D9 create true func.\n");
 		return 0;
@@ -350,6 +350,12 @@ VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
 
 	// Call DX9 to create a real device with the latest version
 	IDirect3D9 * object = (d3d9func)(D3D_SDK_VERSION);
+
+	if ( !object )
+	{
+		VoodooCore->GetLog()->Log("Voodoo DX9: Direct3DCreate9 returned null.\n");
+	}
+
 	// Turn it into a FakeObject and return it.
 	IVoodoo3D9 * vObj = new IVoodoo3D9(object);
 	VoodooObject = vObj;
@@ -359,4 +365,4 @@ VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
 // Visual Studio-specific linker directive, forces the function to be exported with and
 // without decoration. The actual symbol is undecorated, but I'd rather allow exception
 // handling than use extern "C".
-#pragma comment(linker, "/export:Direct3DCreate9=?Voodoo3DCreate9@@YGPAXI@Z")
+//#pragma comment(linker, "/export:Direct3DCreate9=?Voodoo3DCreate9@@YGPAXI@Z")

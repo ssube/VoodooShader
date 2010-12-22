@@ -181,7 +181,7 @@ public:
 					VoodooCore->GetLog()->Log("Voodoo DX9: Failed to cache scratch surface.\n");
 				}
 
-				realDevice->SetRenderTarget(0, surface_Scratch);
+				//.realDevice->SetRenderTarget(0, surface_Scratch);
 			} else {
 				VoodooCore->GetLog()->Log("Voodoo DX9: Failed to create scratch texture.\n");
 			}

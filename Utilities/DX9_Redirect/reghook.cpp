@@ -11,11 +11,9 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-#include <d3d9.h>
-
-extern "C" __declspec(dllexport) IDirect3D9 * WINAPI Voodoo3DCreate9(UINT sdkVersion)
-//extern "C" __declspec(dllexport) IDirect3D9 * Direct3DCreate9(unsigned int sdkVersion)
-{	// Get the Voodoo location from the registry and load the core
+/*__declspec(dllexport)*/ void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
+{	
+	// Get the Voodoo location from the registry and load the core
 	HKEY VoodooPathKey;
 
 	LONG result = RegOpenKeyEx(HKEY_CURRENT_USER, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
@@ -62,12 +60,12 @@ extern "C" __declspec(dllexport) IDirect3D9 * WINAPI Voodoo3DCreate9(UINT sdkVer
 	if ( !library )
 	{
 		char error[4096];
-		sprintf(error, "Loading from: %s", libraryFile);
+		sprintf(error, "Could not load DLL: %s", libraryFile);
 		MessageBoxA(NULL, error, "Voodoo DX9 Hook Error 3", MB_ICONERROR);
 		return NULL;
 	}
 
-	typedef IDirect3D9 * (__stdcall * InitFuncType)(UINT);
+	typedef void * (__stdcall * InitFuncType)(UINT);
 	InitFuncType initFunc = (InitFuncType)GetProcAddress(library, "?Voodoo3DCreate9@@YGPAXI@Z");
 
 	if ( !initFunc )
@@ -76,10 +74,10 @@ extern "C" __declspec(dllexport) IDirect3D9 * WINAPI Voodoo3DCreate9(UINT sdkVer
 		return NULL;
 	}
 
-	IDirect3D9 * obj = (*initFunc)(sdkVersion);
+	void * obj = (*initFunc)(sdkVersion);
 
 	return obj;
 }
 
-#pragma comment(linker, "/export:Direct3DCreate9=_Voodoo3DCreate9@4")
+#pragma comment(linker, "/export:Direct3DCreate9=?Voodoo3DCreate9@@YGPAXI@Z")
 //* /

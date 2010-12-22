@@ -8,11 +8,11 @@
 * License, or (at your option) any later version.
 * 
 * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-* even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+* even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
 * General Public License for more details.
 *
 * You should have received a copy of the GNU General Public License along with this program; 
-* if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+* if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
 * Boston, MA  02110-1301 US
 *
 * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -32,12 +32,6 @@
 #pragma warning(disable:4251)
 
 #include "Includes.hpp"
-
-#define VOODOO_CORE_VERSION_MAJOR	0
-#define VOODOO_CORE_VERSION_MINOR	1
-#define VOODOO_CORE_VERSION_PATCH	2
-#define VOODOO_CORE_VERSION_GITREV	47
-#define VOODOO_CORE_VERSION_STRING	"Voodoo Shader Framework (version 0.1.2; rev 47; "__TIMESTAMP__")\n\n"
 
 #define VOODOO_CORE_COPYRIGHT "\n\
 	Voodoo Shader Framework, Copyright (C) 2010 by Sean Sube\n\
@@ -77,33 +71,33 @@ namespace VoodooShader
 	typedef boost::shared_ptr<Parameter>		ParameterRef;
 
 	// Shader collections
-	typedef std::map<std::string, ShaderRef>	ShaderMap;
+	typedef std::map<String, ShaderRef>			ShaderMap;
 	typedef std::list<ShaderRef>				ShaderList;
 	typedef std::vector<ShaderRef>				ShaderVector;
 
 	// Technique collections
-	typedef std::map<std::string, TechniqueRef>	TechniqueMap;
+	typedef std::map<String, TechniqueRef>		TechniqueMap;
 	typedef std::list<TechniqueRef>				TechniqueList;
 	typedef std::vector<TechniqueRef>			TechniqueVector;
 
 	// Pass collections
-	typedef std::map<std::string, PassRef>		PassMap;
+	typedef std::map<String, PassRef>			PassMap;
 	typedef std::list<PassRef>					PassList;
 	typedef std::vector<PassRef>				PassVector;
 
 	// Parameter collections
-	typedef std::map<std::string, ParameterRef>	ParameterMap;
+	typedef std::map<String, ParameterRef>		ParameterMap;
 	typedef std::list<ParameterRef>				ParameterList;
 	typedef std::vector<ParameterRef>			ParameterVector;
 
 	// Texture collections
-	typedef std::map<std::string, TextureRef>	TextureMap;
+	typedef std::map<String, TextureRef>		TextureMap;
 	typedef std::list<TextureRef>				TextureList;
 	typedef std::vector<TextureRef>				TextureVector;
 
 	// Miscellaneous collections
 	typedef std::map<TextureRef, ShaderRef>		MaterialMap;
-	typedef std::map<std::string, CGeffect>		CGEffectMap;
+	typedef std::map<String, CGeffect>			CGEffectMap;
 
 	/**
 	 * Texture formats for use by @ref Texture "Textures". These may not be 

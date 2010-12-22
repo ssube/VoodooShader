@@ -65,17 +65,28 @@ namespace VoodooShader
 			{
 				// Link to a texture
 				CGannotation texnameAnnotation = cgGetNamedParameterAnnotation(cParam, "texture");
-				const char * texName = cgGetStringAnnotationValue(texnameAnnotation);
-				if ( texName )
-				{
-					TextureRef texture = mCore->GetTexture(texName);
-					if ( texture.get() )
-					{
-						mCore->GetAdapter()->ConnectTexture(param, texture);
-					} else {
-						// Need to create a texture
 
+				if ( cgIsAnnotation(texnameAnnotation) )
+				{
+					const char * texName = cgGetStringAnnotationValue(texnameAnnotation);
+					if ( texName )
+					{
+						TextureRef texture = mCore->GetTexture(texName);
+						if ( texture.get() )
+						{
+							mCore->GetAdapter()->ConnectTexture(param, texture);
+						} else {
+							// Need to create a texture
+							mCore->GetLog()->Format("Voodoo Core: Could not find texture %s for parameter %s.\n")
+								.With(texName).With(param->Name()).Done();
+						}
+					} else {
+						mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture name for parameter %s.\n")
+							.With(param->Name()).Done();
 					}
+				} else {
+					mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture annotation for parameter %s.\n")
+						.With(param->Name()).Done();
 				}
 			}
 
