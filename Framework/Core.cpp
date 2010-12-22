@@ -6,7 +6,7 @@
 #include "Shader.hpp"
 #include "Texture.hpp"
 #include "Adapter.hpp"
-#include "Version.hpp"
+#include "../Version.hpp"
 
 namespace VoodooShader
 {
@@ -35,7 +35,7 @@ namespace VoodooShader
 #endif
 
 		this->mLogger->Log(VOODOO_CORE_COPYRIGHT, false);
-		this->mLogger->Log(VOODOO_CORE_VERSION_STRING, false);
+		this->mLogger->Log(VOODOO_CORE_VERSION_STRING"\n\n", false);
 
 		/*char versionBuffer[8192];
 		BOOL hr = GetFileVersionInfoA("VoodooFramework.dll", NULL, 8192, versionBuffer);

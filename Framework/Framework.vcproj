@@ -282,6 +282,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\resource.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Shader.hpp"
 				>
 			</File>
@@ -290,7 +294,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Version.hpp"
+				RelativePath="..\Version.hpp"
 				>
 			</File>
 			<File
@@ -303,6 +307,10 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath=".\Voodoo_Core.rc"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

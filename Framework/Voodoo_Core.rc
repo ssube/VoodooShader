@@ -1,7 +1,7 @@
 // Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
-#include "../../Version.hpp"
+#include "../Version.hpp"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -54,8 +54,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION VOODOO_META_VERSION_CHAIN(DX89)
- PRODUCTVERSION VOODOO_META_VERSION_CHAIN(DX89)
+ FILEVERSION VOODOO_META_VERSION_CHAIN(CORE)
+ PRODUCTVERSION VOODOO_META_VERSION_CHAIN(CORE)
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -70,16 +70,16 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "FileDescription", VOODOO_DX89_VERSION_STRING
-            VALUE "FileVersion", VOODOO_DX89_VERSION_STRING_BASIC
-            VALUE "InternalName", VOODOO_DX89_NAME
+            VALUE "FileDescription", VOODOO_CORE_VERSION_STRING
+            VALUE "FileVersion", VOODOO_CORE_VERSION_STRING_BASIC
+            VALUE "InternalName", VOODOO_CORE_NAME
             VALUE "LegalCopyright", "Copyright (C) 2010 by Sean Sube"
 #ifdef _DEBUG
-			VALUE "OriginalFilename", "Voodoo_DX89_d.dll"
+			VALUE "OriginalFilename", "Voodoo_Core_d.dll"
 #else
-            VALUE "OriginalFilename", "Voodoo_DX89.dll"
+            VALUE "OriginalFilename", "Voodoo_Core.dll"
 #endif
-            VALUE "ProductName", VOODOO_CORE_PRETTYNAME
+            VALUE "ProductName", VOODOO_CORE_VERSION_STRING
             VALUE "ProductVersion", VOODOO_CORE_VERSION_STRING_BASIC
         END
     END
