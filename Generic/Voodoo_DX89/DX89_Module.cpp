@@ -27,10 +27,19 @@
 #include "IVoodoo3DTexture8.hpp"
 
 VoodooShader::Core * VoodooCore = NULL;
+VoodooShader::Adapter * VoodooDX89 = NULL;
+
 D3DCAPS8 d3d8Caps;
 
 IVoodoo3D8 * VoodooObject = NULL;
 IVoodoo3DDevice8 * VoodooDevice = NULL;
+
+IDirect3DSurface9 * backbufferSurf = NULL;
+
+IDirect3DSurface9 * surface_ThisFrame;
+VoodooShader::TextureRef texture_ThisFrame;
+
+VoodooShader::ShaderRef testShader;
 
 VOODOO_API_DX89 void * __stdcall Direct3DCreate8(UINT version)
 {

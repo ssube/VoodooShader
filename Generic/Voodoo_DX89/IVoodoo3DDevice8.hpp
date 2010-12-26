@@ -376,6 +376,29 @@ public:
 		CONST RGNDATA * pDirtyRegion
 	)
 	{
+		HRESULT shr = mRealDevice->StretchRect(backbufferSurf, NULL, surface_ThisFrame, NULL, D3DTEXF_NONE);
+		if ( FAILED(shr) )
+		{
+			VoodooCore->GetLog()->Log("Voodoo DX8.9: Failed to stretch backbuffer to scratch texture.\n");
+		}
+
+		shr = mRealDevice->SetRenderTarget(0, backbufferSurf);
+		if ( FAILED(shr) )
+		{
+			VoodooCore->GetLog()->Log("Voodoo DX8.9: Failed to set render target.\n");
+		}
+
+		VoodooShader::TechniqueRef tech = testShader->GetDefaultTechnique();
+		VoodooShader::PassRef pass = tech->GetPass(0);
+
+		VoodooDX89->BindPass(pass);
+
+		VoodooDX89->DrawQuad();
+
+		VoodooDX89->UnbindPass();
+
+		// Present call
+
 		HRESULT hr = mRealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 
 #ifdef _DEBUG

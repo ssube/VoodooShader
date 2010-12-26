@@ -115,11 +115,11 @@ public:
 
 	STDMETHOD(Present)(THIS_ CONST RECT* pSourceRect,CONST RECT* pDestRect,HWND hDestWindowOverride,CONST RGNDATA* pDirtyRegion)
 	{
-		IDirect3DBaseTexture9 * tex;
-		IDirect3DSurface9 * rts;
+		//IDirect3DBaseTexture9 * tex;
+		//IDirect3DSurface9 * rts;
 
-		mRealDevice->GetTexture(0, &tex);
-		mRealDevice->GetRenderTarget(0, &rts);
+		//mRealDevice->GetTexture(0, &tex);
+		//mRealDevice->GetRenderTarget(0, &rts);
 
 		HRESULT hr = mRealDevice->StretchRect(backbufferSurf, NULL, surface_ThisFrame, NULL, D3DTEXF_NONE);
 		if ( FAILED(hr) )
@@ -142,8 +142,8 @@ public:
 
 		VoodooDX9->UnbindPass();
 
-		mRealDevice->SetRenderTarget(0, rts);
-		mRealDevice->SetTexture(0, tex);
+		//mRealDevice->SetRenderTarget(0, rts);
+		//mRealDevice->SetTexture(0, tex);
 
 		return mRealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 	}

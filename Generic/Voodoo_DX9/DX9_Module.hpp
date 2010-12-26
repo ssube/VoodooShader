@@ -21,25 +21,17 @@ class IVoodoo3D9;
 class IVoodoo3DDevice9;
 
 extern VoodooShader::Core * VoodooCore;
-extern VoodooShader::DirectX9::Adapter * VoodooDX9;
-extern VoodooShader::ShaderRef testShader;
+extern VoodooShader::Adapter * VoodooDX9;
 
 extern IVoodoo3D9 * VoodooObject;
 extern IVoodoo3DDevice9 * VoodooDevice;
 
-IDirect3DSurface9 * backbufferSurf = NULL;
+extern VoodooShader::ShaderRef testShader;
 
-IDirect3DTexture9 * texture_Scratch = NULL;
-IDirect3DSurface9 * surface_Scratch = NULL;
+extern IDirect3DSurface9 * backbufferSurf;
 
-VoodooShader::TextureRef texture_ThisFrame();
-IDirect3DSurface9 * surface_ThisFrame = NULL;
-
-VoodooShader::TextureRef texture_LastPass();
-IDirect3DSurface9 * surface_LastPass = NULL;
-
-VoodooShader::TextureRef texture_LastShader();
-IDirect3DSurface9 * surface_LastShader = NULL;
+extern IDirect3DSurface9 * surface_ThisFrame;
+extern VoodooShader::TextureRef texture_ThisFrame;
 
 typedef IDirect3D9 * (__stdcall *D3DFunc9)(UINT);
 

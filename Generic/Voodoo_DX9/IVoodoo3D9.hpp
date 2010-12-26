@@ -109,7 +109,7 @@ public:
 		{
 			// Return our device
 			*ppReturnedDeviceInterface = new IVoodoo3DDevice9(this, realDevice);
-			VoodooDX9 = new VoodooShader::DirectX9::Adapter(VoodooCore, realDevice);
+			VoodooDX9 = (VoodooShader::Adapter*)new VoodooShader::DirectX9::Adapter(VoodooCore, realDevice);
 
 			HRESULT hrt = realDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &backbufferSurf);
 
@@ -120,7 +120,7 @@ public:
 				VoodooCore->GetLog()->Log("Voodoo DX9: Failed to retrieve backbuffer surface.\n");
 			}
 
-			VoodooShader::TextureRef texture_ThisFrame = VoodooDX9->CreateTexture(":thisframe", 
+			texture_ThisFrame = VoodooDX9->CreateTexture(":thisframe", 
 				pPresentationParameters->BackBufferWidth, pPresentationParameters->BackBufferHeight, 1,
 				true, VoodooShader::TF_RGB8);
 			if ( texture_ThisFrame.get() )
@@ -134,101 +134,6 @@ public:
 					VoodooCore->GetLog()->Log("Voodoo DX9: Failed to :thisframe scratch surface.\n");
 				}
 			}
-
-			VoodooShader::TextureRef texture_LastPass = VoodooDX9->CreateTexture(":lastpass", 
-				pPresentationParameters->BackBufferWidth, pPresentationParameters->BackBufferHeight, 1,
-				true, VoodooShader::TF_RGB8);
-			if ( texture_ThisFrame.get() )
-			{
-				IDirect3DTexture9 * texture = (IDirect3DTexture9*)texture_LastPass->Get();
-				hrt = texture->GetSurfaceLevel(0, &surface_LastPass);
-				if ( SUCCEEDED(hrt) )
-				{
-					VoodooCore->GetLog()->Log("Voodoo DX9: Cached :lastpass surface.\n");
-				} else {
-					VoodooCore->GetLog()->Log("Voodoo DX9: Failed to :lastpass scratch surface.\n");
-				}
-			}
-
-			VoodooShader::TextureRef texture_LastShader = VoodooDX9->CreateTexture(":lastshader", 
-				pPresentationParameters->BackBufferWidth, pPresentationParameters->BackBufferHeight, 1,
-				true, VoodooShader::TF_RGB8);
-			if ( texture_ThisFrame.get() )
-			{
-				IDirect3DTexture9 * texture = (IDirect3DTexture9*)texture_LastShader->Get();
-				hrt = texture->GetSurfaceLevel(0, &surface_LastShader);
-				if ( SUCCEEDED(hrt) )
-				{
-					VoodooCore->GetLog()->Log("Voodoo DX9: Cached :lastshader surface.\n");
-				} else {
-					VoodooCore->GetLog()->Log("Voodoo DX9: Failed to :lastshader scratch surface.\n");
-				}
-			}
-
-			hrt = realDevice->CreateTexture(
-				pPresentationParameters->BackBufferWidth, pPresentationParameters->BackBufferHeight,
-				1, D3DUSAGE_RENDERTARGET, D3DFMT_X8R8G8B8, D3DPOOL_DEFAULT, &texture_Scratch, NULL);
-			if ( SUCCEEDED(hrt) )
-			{
-				VoodooCore->GetLog()->Log("Voodoo DX9: Created scratch texture.\n");
-
-				hrt = texture_Scratch->GetSurfaceLevel(0, &surface_Scratch);
-
-				if ( SUCCEEDED(hrt) )
-				{
-					VoodooCore->GetLog()->Log("Voodoo DX9: Cached scratch surface.\n");
-				} else {
-					VoodooCore->GetLog()->Log("Voodoo DX9: Failed to cache scratch surface.\n");
-				}
-
-				//.realDevice->SetRenderTarget(0, surface_Scratch);
-			} else {
-				VoodooCore->GetLog()->Log("Voodoo DX9: Failed to create scratch texture.\n");
-			}
-
-			/*hrt = realDevice->CreateTexture(
-				pPresentationParameters->BackBufferWidth, pPresentationParameters->BackBufferHeight,
-				1, D3DUSAGE_RENDERTARGET, D3DFMT_X8R8G8B8, D3DPOOL_DEFAULT, &thisFrame, NULL);
-			if ( SUCCEEDED(hrt) )
-			{
-				VoodooCore->GetLog()->Log("Voodoo DX9: Created :thisframe texture.\n");
-
-				hrt = thisFrame->GetSurfaceLevel(0, &thisFrameSurface);
-
-				if ( SUCCEEDED(hrt) )
-				{
-					VoodooCore->GetLog()->Log("Voodoo DX9: Cached thisframe surface.\n");
-				} else {
-					VoodooCore->GetLog()->Log("Voodoo DX9: Failed to cache thisframe surface.\n");
-				}
-
-				VoodooCore->CreateTexture(":thisframe", thisFrame);
-
-				hrt = realDevice->SetRenderTarget(0, thisFrameSurface);
-			} else {
-				VoodooCore->GetLog()->Log("Voodoo DX9: Failed to create :thisframe texture.\n");
-			}
-
-			hrt = realDevice->CreateTexture(
-				pPresentationParameters->BackBufferWidth, pPresentationParameters->BackBufferHeight,
-				1, D3DUSAGE_RENDERTARGET, D3DFMT_X8R8G8B8, D3DPOOL_DEFAULT, &lastShader, NULL);
-			if ( SUCCEEDED(hrt) )
-			{
-				VoodooCore->GetLog()->Log("Voodoo DX9: Created :lastshader texture.\n");
-
-				hrt = lastShader->GetSurfaceLevel(0, &lastShaderSurface);
-
-				if ( SUCCEEDED(hrt) )
-				{
-					VoodooCore->GetLog()->Log("Voodoo DX9: Cached lastshader surface.\n");
-				} else {
-					VoodooCore->GetLog()->Log("Voodoo DX9: Failed to cache lastshader surface.\n");
-				}
-
-				VoodooCore->CreateTexture(":lastshader", lastShader);
-			} else {
-				VoodooCore->GetLog()->Log("Voodoo DX9: Failed to create :lastshader texture.\n");
-			}*/
 
 			try
 			{

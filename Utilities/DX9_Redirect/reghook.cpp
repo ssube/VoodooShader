@@ -1,17 +1,10 @@
-/*
-#ifdef _DEBUG
-#	pragma comment(linker, "/export:Direct3DCreate9=Voodoo_DX9_d.Direct3DCreate9")
-#else
-#	pragma comment(linker, "/export:Direct3DCreate9=Voodoo_DX9.Direct3DCreate9")
-#endif
-*/
-// / *
+
 #include <stdio.h>
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-/*__declspec(dllexport)*/ void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
+ void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
 {	
 	// Get the Voodoo location from the registry and load the core
 	HKEY VoodooPathKey;
@@ -80,4 +73,3 @@
 }
 
 #pragma comment(linker, "/export:Direct3DCreate9=?Voodoo3DCreate9@@YGPAXI@Z")
-//* /
