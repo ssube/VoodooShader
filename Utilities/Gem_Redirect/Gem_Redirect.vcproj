@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="DX89_Redirect"
-	ProjectGUID="{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}"
-	RootNamespace="DX89_Redirect"
+	Name="Gem_Redirect"
+	ProjectGUID="{6234D300-FD30-4A04-A3A2-4739C5D9B95F}"
+	RootNamespace="Gem_Redirect"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196608"
 	>
@@ -192,7 +192,7 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\DX89_Redirect.rc"
+				RelativePath=".\Gem_Redirect.rc"
 				>
 			</File>
 		</Filter>

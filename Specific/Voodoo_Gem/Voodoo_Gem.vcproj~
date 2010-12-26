@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="DX89_Redirect"
-	ProjectGUID="{8FFE37CF-C17A-4CFA-8B2D-32E6DC8FB44D}"
-	RootNamespace="DX89_Redirect"
+	Name="Voodoo_DX89"
+	ProjectGUID="{1BCE17B2-8422-45C7-AE61-8277C08FE251}"
+	RootNamespace="DX8_Module"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196608"
 	>
@@ -41,7 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\Framework&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;DX8_MODULE_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -60,10 +61,12 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Voodoo_Core_d.lib"
 				OutputFile="$(OutDir)\$(ProjectName)_d.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\bin&quot;"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -86,6 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -115,7 +119,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\Framework&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;DX8_MODULE_EXPORTS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -133,9 +138,12 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Voodoo_Core.lib"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\bin&quot;"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
@@ -160,6 +168,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -172,7 +181,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\dllmain.cpp"
+				RelativePath=".\DX89_Adapter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DX89_Module.cpp"
 				>
 			</File>
 		</Filter>
@@ -182,9 +195,45 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Gem_Adapter.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Gem_Converter.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Gem_Module.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3D8.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3DDevice8.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3DSurface8.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IVoodoo3DTexture8.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\resource.h"
 				>
 			</File>
+			<Filter
+				Name="MGE"
+				>
+				<File
+					RelativePath=".\MGE\FauxD3D8Header.hpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -192,11 +241,23 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\DX89_Redirect.rc"
+				RelativePath=".\Voodoo_Gem.rc"
 				>
 			</File>
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="BuildVersion_AssemblyInfoFilename"
+			Value="Voodoo_GEM.rc"
+		/>
+		<Global
+			Name="BuildVersion_BuildVersioningStyle"
+			Value="None.None.Increment.TimeStamp"
+		/>
+		<Global
+			Name="BuildVersion_UseGlobalSettings"
+			Value="True"
+		/>
 	</Globals>
 </VisualStudioProject>

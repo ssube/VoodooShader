@@ -79,6 +79,11 @@ namespace VoodooShader
 		 * Create a new shader effect from a file.            
 		 */
 		ShaderRef CreateShader(std::string filename, const char ** args);
+
+		/**
+		 * 
+		 * @warning This should be called only from Adapter::CreateTexture().
+		 */
 		TextureRef CreateTexture(std::string name, void * data);
 
 		TextureRef GetTexture(std::string name);
