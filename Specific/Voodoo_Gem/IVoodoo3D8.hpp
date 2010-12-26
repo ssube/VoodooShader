@@ -107,7 +107,7 @@ public:
 		HRESULT hr = mRealObject->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(AdapterFormat).With(RenderTargetFormat)
 			.With(DepthStencilFormat).With(hr).Done();
 #endif
@@ -128,7 +128,7 @@ public:
 		HRESULT hr = mRealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(AdapterFormat).With(Usage).With(RType)
 			.With(CheckFormat).With(hr).Done();
 #endif
@@ -152,7 +152,7 @@ public:
 		HRESULT hr = mRealObject->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(SurfaceFormat).With(Windowed).With(MultiSampleType)
 			.With(hr).Done();
 #endif	
@@ -172,7 +172,7 @@ public:
 		HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
 #ifdef _DEBUG 
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::CheckDeviceType(%d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::CheckDeviceType(%d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(CheckType).With(DisplayFormat).With(BackBufferFormat).With(Windowed)
 			.With(hr).Done();
 #endif
@@ -219,7 +219,7 @@ public:
 			VoodooShader::DirectX89::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
 			);
 
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: Backbuffer parameters for new device: %d by %d (%d buffers), %s.\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: Backbuffer parameters for new device: %d by %d (%d buffers), %s.\n")
 			.With(mpPresentationParameters.BackBufferWidth).With(mpPresentationParameters.BackBufferHeight)
 			.With(mpPresentationParameters.BackBufferCount).With(textureType).Done();
 #endif
@@ -228,14 +228,14 @@ public:
 		HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &mRealDevice);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::CreateDevice(%d, %d, %d, %d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::CreateDevice(%d, %d, %d, %d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(hFocusWindow).With(BehaviorFlags)
 			.With(&mpPresentationParameters).With(mRealDevice).With(hr).Done();
 #endif
 
 		if ( !SUCCEEDED(hr) )
 		{
-			VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::CreateDevice failed with error %d on adapter %d.\n")
+			VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::CreateDevice failed with error %d on adapter %d.\n")
 				.With(hr).With(Adapter).Done();
 			return hr;
 		} else {
@@ -251,9 +251,9 @@ public:
 
 			if ( SUCCEEDED(hrt) )
 			{
-				VoodooCore->GetLog()->Log("Voodoo DX8.9: Cached backbuffer surface.\n");
+				VoodooCore->GetLog()->Log("Voodoo Gem: Cached backbuffer surface.\n");
 			} else {
-				VoodooCore->GetLog()->Log("Voodoo DX8.9: Failed to retrieve backbuffer surface.\n");
+				VoodooCore->GetLog()->Log("Voodoo Gem: Failed to retrieve backbuffer surface.\n");
 			}
 
 			texture_ThisFrame = VoodooGem->CreateTexture(":thisframe", 
@@ -265,9 +265,9 @@ public:
 				hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
 				if ( SUCCEEDED(hrt) )
 				{
-					VoodooCore->GetLog()->Log("Voodoo DX8.9: Cached :thisframe surface.\n");
+					VoodooCore->GetLog()->Log("Voodoo Gem: Cached :thisframe surface.\n");
 				} else {
-					VoodooCore->GetLog()->Log("Voodoo DX8.9: Failed to :thisframe scratch surface.\n");
+					VoodooCore->GetLog()->Log("Voodoo Gem: Failed to :thisframe scratch surface.\n");
 				}
 			}
 
@@ -276,7 +276,7 @@ public:
 				testShader = VoodooCore->CreateShader("test.cgfx", NULL);
 				testShader->Link();
 			} catch ( VoodooShader::Exception & exc ) {
-				VoodooCore->GetLog()->Log("Voodoo DX8.9: Error loading shader.\n");
+				VoodooCore->GetLog()->Log("Voodoo Gem: Error loading shader.\n");
 			}
 
 			return hr;
@@ -293,7 +293,7 @@ public:
 		HRESULT hr = mRealObject->EnumAdapterModes(Adapter, D3DFMT_X8R8G8B8, Mode, pMode);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::EnumAdapterModes(%d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::EnumAdapterModes(%d, %d, %d) == %d\n")
 			.With(Adapter).With(Mode).With(pMode).With(hr).Done();
 #endif
 
@@ -305,7 +305,7 @@ public:
 		UINT r = mRealObject->GetAdapterCount();
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::GetAdapterCount() == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::GetAdapterCount() == %d\n")
 			.With(r).Done();
 #endif
 
@@ -321,7 +321,7 @@ public:
 		HRESULT hr = mRealObject->GetAdapterDisplayMode(Adapter, pMode);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::GetAdapterDisplayMode(%d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::GetAdapterDisplayMode(%d, %d) == %d\n")
 			.With(Adapter).With(pMode).With(hr).Done();
 #endif
 
@@ -345,7 +345,7 @@ public:
 		HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n")
 			.With(Adapter).With(Flags).With(pIdentifier).With(hr).Done();
 #endif
 
@@ -373,7 +373,7 @@ public:
 		UINT r = mRealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::GetAdapterModeCount(%d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::GetAdapterModeCount(%d) == %d\n")
 			.With(Adapter).With(r).Done();
 #endif
 
@@ -388,7 +388,7 @@ public:
 		HMONITOR hm = mRealObject->GetAdapterMonitor(Adapter);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::GetAdapterMonitor(%d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::GetAdapterMonitor(%d) == %d\n")
 			.With(Adapter).With(hm).Done();
 #endif
 
@@ -411,7 +411,7 @@ public:
 		HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(pCaps).With(hr).Done();
 #endif
 
@@ -437,7 +437,7 @@ public:
 		HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n")
 			.With(Adapter).With(DeviceType).With(pCaps).With(hr).Done();
 #endif
 
@@ -445,9 +445,9 @@ public:
 
 		if ( same == 0 )
 		{
-			VoodooCore->GetLog()->Log("Voodoo DX8.9: D3D8 and 9 caps are identical.\n"); 
+			VoodooCore->GetLog()->Log("Voodoo Gem: D3D8 and 9 caps are identical.\n"); 
 		} else {
-			VoodooCore->GetLog()->Log("Voodoo DX8.9: Caps differ.\n");
+			VoodooCore->GetLog()->Log("Voodoo Gem: Caps differ.\n");
 		}*/
 
 		return D3D_OK;
@@ -469,10 +469,10 @@ public:
 		HRESULT hr = mRealObject->RegisterSoftwareDevice(pInitializeFunction);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3D8::RegisterSoftwareDevice(%d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3D8::RegisterSoftwareDevice(%d) == %d\n")
 			.With(pInitializeFunction).With(hr).Done();
 #else
-		VoodooCore->GetLog()->Log("Voodoo DX8.9: The application has registered a software device.\n");
+		VoodooCore->GetLog()->Log("Voodoo Gem: The application has registered a software device.\n");
 #endif
 
 		return hr;

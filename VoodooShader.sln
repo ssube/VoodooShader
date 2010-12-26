@@ -32,10 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7F047FD6-6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{093207D3-DF56-4F72-BD00-ACACD9476FA8}"
 	ProjectSection(SolutionItems) = preProject
-		Docs\CREDITS = Docs\CREDITS
 		Docs\Doxyfile = Docs\Doxyfile
-		Docs\LICENSE = Docs\LICENSE
-		Docs\README = Docs\README
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{9FC03207-E672-46B6-BB1D-B34C6F00AB54}"

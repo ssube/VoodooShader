@@ -43,7 +43,7 @@ VoodooShader::ShaderRef testShader;
 
 VOODOO_API_Gem void * __stdcall Direct3DCreate8(UINT version)
 {
-	// Voodoo DX8.9 Init function
+	// Voodoo Gem Init function
 	VoodooCore = VoodooShader::Core::Create("Voodoo_GEM.log");
 
 #ifdef _DEBUG
@@ -62,7 +62,7 @@ VOODOO_API_Gem void * __stdcall Direct3DCreate8(UINT version)
 
 	if (d3d8func == NULL) 
 	{
-		VoodooCore->GetLog()->Log("Voodoo DX8.9: Could not find D3D8 create true func.\n");
+		VoodooCore->GetLog()->Log("Voodoo Gem: Could not find D3D8 create true func.\n");
 		return 0;
 	}
 
@@ -70,7 +70,7 @@ VOODOO_API_Gem void * __stdcall Direct3DCreate8(UINT version)
 	HRESULT hr = TempObject->GetDeviceCaps (0, D3DDEVTYPE_HAL, &d3d8Caps);
 	if (hr != D3D_OK) 
 	{ 
-		VoodooCore->GetLog()->Log("Voodoo DX8.9: Could not get D3D8 caps.\n");
+		VoodooCore->GetLog()->Log("Voodoo Gem: Could not get D3D8 caps.\n");
 	}
 	TempObject->Release();
 

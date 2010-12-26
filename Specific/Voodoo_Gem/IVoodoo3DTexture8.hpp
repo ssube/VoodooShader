@@ -42,7 +42,7 @@ public:
 		: mDevice(device), mRealTexture(texture)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DTexture8::IVoodoo3DTexture8(%d, %d) == %d\n")
+		VoodooCore->GetLog()->Format("Voodoo Gem: IVoodoo3DTexture8::IVoodoo3DTexture8(%d, %d) == %d\n")
 			.With(device).With(texture).With(this).Done();
 #endif
 	}

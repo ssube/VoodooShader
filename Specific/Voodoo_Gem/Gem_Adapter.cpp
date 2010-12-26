@@ -30,7 +30,7 @@ namespace VoodooShader
 				//exit(1);
 			}
 
-			core->GetLog()->Format("Voodoo Gem: Assembly ID: "VOODOO_GEM_VERSION_STRING"\n");
+			core->GetLog()->Log("Voodoo Gem: Assembly ID: "VOODOO_GEM_VERSION_STRING"\n");
 
 			HRESULT hr = cgD3D9SetDevice(device);
 			if ( !SUCCEEDED(hr) )
