@@ -2,6 +2,8 @@
 #include "Gem_Adapter.hpp"
 #include "Gem_Converter.hpp"
 
+#include "../../Version.hpp"
+
 namespace VoodooShader
 {
 	namespace DirectX89
@@ -27,6 +29,8 @@ namespace VoodooShader
 					.With(exc.Message()).Done();
 				//exit(1);
 			}
+
+			core->GetLog()->Format("Voodoo Gem: Assembly ID: "VOODOO_GEM_VERSION_STRING"\n");
 
 			HRESULT hr = cgD3D9SetDevice(device);
 			if ( !SUCCEEDED(hr) )

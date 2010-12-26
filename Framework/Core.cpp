@@ -35,7 +35,7 @@ namespace VoodooShader
 #endif
 
 		this->mLogger->Log(VOODOO_CORE_COPYRIGHT, false);
-		this->mLogger->Log(VOODOO_CORE_VERSION_STRING"\n\n", false);
+		this->mLogger->Log("Voodoo Core: Assembly ID: "VOODOO_CORE_VERSION_STRING"\n");
 
 		/*char versionBuffer[8192];
 		BOOL hr = GetFileVersionInfoA("VoodooFramework.dll", NULL, 8192, versionBuffer);

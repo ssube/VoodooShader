@@ -441,14 +441,14 @@ public:
 			.With(Adapter).With(DeviceType).With(pCaps).With(hr).Done();
 #endif
 
-		int same = memcmp(pCaps, &realCaps, sizeof(D3DCAPS8));
+		/*int same = memcmp(pCaps, &realCaps, sizeof(D3DCAPS8));
 
 		if ( same == 0 )
 		{
 			VoodooCore->GetLog()->Log("Voodoo DX8.9: D3D8 and 9 caps are identical.\n"); 
 		} else {
 			VoodooCore->GetLog()->Log("Voodoo DX8.9: Caps differ.\n");
-		}
+		}*/
 
 		return D3D_OK;
 	}
