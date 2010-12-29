@@ -27,8 +27,8 @@ LicenseFile=LICENSE
 
 VersionInfoProductName=Voodoo Shader Framework
 VersionInfoProductVersion=0.1.5.58
-VersionInfoTextVersion=0.1.0.0
-VersionInfoVersion=0.1.0.0
+VersionInfoTextVersion=0.1.0.58
+VersionInfoVersion=0.1.0.58
 
 [Languages]
 Name: english; MessagesFile: compiler:Default.isl
@@ -39,29 +39,30 @@ Name: english; MessagesFile: compiler:Default.isl
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: M:\VoodooShader\bin\cgD3D9.dll; DestDir: {app}\bin; Components: core; 
 Source: M:\VoodooShader\bin\cg.dll; DestDir: {app}\bin; Components: core;
+Source: M:\VoodooShader\bin\Voodoo_Core.dll; DestDir: {app}\bin;  Components: core; 
 Source: M:\VoodooShader\bin\Voodoo_DX9.dll; DestDir: {app}\bin;  Components: core; 
 Source: M:\VoodooShader\bin\Voodoo_DX89.dll; DestDir: {app}\bin;  Components: core; 
-Source: M:\VoodooShader\bin\Voodoo_Gem.dll; DestDir: {app}\bin;  Components: core; 
-Source: M:\VoodooShader\bin\Voodoo_Core.dll; DestDir: {app}\bin;  Components: core; 
 Source: M:\VoodooShader\bin\Voodoo_Core_d.dll; DestDir: {app}\bin; Components: debug; 
 Source: M:\VoodooShader\bin\Voodoo_DX9_d.dll; DestDir: {app}\bin; Components: debug; 
 Source: M:\VoodooShader\bin\Voodoo_DX89_d.dll; DestDir: {app}\bin; Components: debug; 
-Source: M:\VoodooShader\bin\Voodoo_Gem_d.dll; DestDir: {app}\bin; Components: debug; 
 Source: M:\VoodooShader\bin\Voodoo_Core_d.pdb; DestDir: {app}\bin; Components: debug; 
 Source: M:\VoodooShader\bin\Voodoo_DX9_d.pdb; DestDir: {app}\bin; Components: debug; 
 Source: M:\VoodooShader\bin\Voodoo_DX89_d.pdb; DestDir: {app}\bin; Components: debug; 
-Source: M:\VoodooShader\bin\Voodoo_Gem_d.pdb; DestDir: {app}\bin; Components: debug; 
 Source: M:\VoodooShader\CREDITS; DestDir: {app}; Components: core; 
 Source: M:\VoodooShader\LICENSE; DestDir: {app}; Components: core; 
-Source: M:\VoodooShader\README; DestDir: {app}; Components: core; 
+Source: M:\VoodooShader\Docs\voodoo.png; DestDir: {app}\Docs; Components: core; 
+Source: M:\VoodooShader\Docs\readme.html; DestDir: {app}\Docs; Components: core; 
+Source: M:\VoodooShader\Docs\readme.css; DestDir: {app}\Docs; Components: core; 
 
 [Icons]
 Name: {group}\Website; Filename: http://www.voodooshader.com; Components: startmenu; 
 Name: {group}\Voodoo Folder; Filename: {app}; WorkingDir: {app}; Components: startmenu; 
-Name: {group}\Uninstall; Filename: {app}\unins.exe; WorkingDir: {app}; 
+Name: {group}\Uninstall; Filename: {app}\unins.exe; WorkingDir: {app}; Components: startmenu; 
+Name: {group}\Readme; Filename: {app}\Docs\readme.html; Components: startmenu; 
 
 [Run]
-Filename: http://www.voodooshader.com; WorkingDir: {app}; Description: View Voodoo Shader website; Flags: nowait postinstall skipifsilent shellexec
+Filename: http://www.voodooshader.com; WorkingDir: {app}; Description: View Voodoo Shader website; Flags: nowait postinstall skipifsilent shellexec Unchecked; Components: core; 
+Filename: {app}\Docs\readme.html; Flags: PostInstall NoWait ShellExec SkipIfSilent; Components: core; WorkingDir: {app}\Docs; 
 
 [Registry]
 Root: HKCU; SubKey: SOFTWARE\VoodooShader; ValueType: string; ValueName: Path; ValueData: "{app}"; Flags: CreateValueIfDoesntExist UninsDeleteKeyIfEmpty UninsDeleteValue; Components: registry/user; 
@@ -77,8 +78,9 @@ Name: debug; Description: Debug Data; MinVersion: ,5.1; Types: Debug;
 
 [Dirs]
 Name: {app}\bin; Components: core; 
+Name: {app}\docs; Components: core;
 
 [Types]
-Name: Full; Description: Install all core components and common adapters, as well as support files.;
-Name: Debug; Description: Install release and debug assemblies and debugging symbols.;
-Name: Custom; Description: Select components to be installed per-component.; Flags: IsCustom;
+Name: Full; Description: Install all core components and support files.;
+Name: Debug; Description: Install debug assemblies and symbols.;
+Name: Custom; Description: Select components to be installed.; Flags: IsCustom;

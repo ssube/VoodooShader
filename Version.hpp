@@ -45,7 +45,7 @@
 	VOODOO_##token##_VERSION_GITREV
 
 // Global defs
-#define VOODOO_GLOBAL_VERSION_GITREV	58
+#define VOODOO_GLOBAL_VERSION_GITREV	59
 
 // Core defs ------------------------------------------------------------------
 #define VOODOO_CORE_NAME			"Voodoo/_Core"	VOODOO_META_DEBUG_STRING

@@ -81,12 +81,35 @@ namespace VoodooShader
 		ShaderRef CreateShader(std::string filename, const char ** args);
 
 		/**
+		 * Registers a texture with this Core. Texture will not be used by the shader linker
+		 * unless they have been registered with the core. 
+		 *
+		 * @param name The texture name (must be unique).
+		 * @param data A pointer to any texture data to be stored. This should be interpreted and
+		 *		manipulated by the Adapter, the Core merely stores the pointer.
+		 * @return A shared pointer to the newly created Texture object, if successful.
 		 * 
+		 * @throws Exception if a texture with the same name already exists.
+		 *
 		 * @warning This should be called only from Adapter::CreateTexture().
 		 */
 		TextureRef CreateTexture(std::string name, void * data);
 
+		/**
+		 * Retrieves a texture from the Core's texture map by name. 
+		 * 
+		 * @param name The texture name.
+		 * @return A shared pointer to the Texture object, if it exists (otherwise an empty
+		 *		shared pointer).
+		 *
+		 * @note This will not create a texture, only retrieve an existing one.
+		 */
 		TextureRef GetTexture(std::string name);
+
+		/**
+		 * Removes a texture from the Core's texture map. 
+		 */
+		void RemoveTexture(TextureRef texture);
 
 		/**
 		 * Creates a global-level or virtual parameter. This parameter exists
