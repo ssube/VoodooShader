@@ -4,9 +4,13 @@
 
 namespace VoodooShader
 {
-	Exception::Exception(const char * message, Core * core, char * file, char * function, int line)
-		: std::exception(message),
-		  mMessage(message), mCore(core), mFile(file), mFunction(function), mLine(line)
+	Exception::Exception
+	(
+		const char * message, Core * core, char * file, char * function, 
+		int line
+	)
+		: std::exception(message),  mMessage(message), mCore(core), mFile(file),
+			mFunction(function), mLine(line)
 	{
 		if ( core )
 		{
@@ -17,9 +21,12 @@ namespace VoodooShader
 		}
 	}
 
-	Exception::Exception(std::string message, Core * core, char * file, char * function, int line)
-		: std::exception(message.c_str()),
-		  mMessage(message), mCore(core), mFile(file), mFunction(function), mLine(line)
+	Exception::Exception
+	(
+		std::string message, Core * core, char * file, char * function, int line
+	)
+		: std::exception(message.c_str()), mMessage(message), mCore(core), 
+			mFile(file), mFunction(function), mLine(line)
 	{
 		if ( core )
 		{

@@ -157,7 +157,10 @@ namespace VoodooShader
 		paramZ = this->mValueFloat[2];
 	}
 
-	void Parameter::Get(float & paramX, float & paramY, float & paramZ, float & paramW)
+	void Parameter::Get
+	(
+		float & paramX, float & paramY, float & paramZ, float & paramW
+	)
 	{
 		paramX = this->mValueFloat[0];
 		paramY = this->mValueFloat[1];

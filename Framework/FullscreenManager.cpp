@@ -19,7 +19,8 @@ namespace VoodooShader
 	{
 		if ( position < -1 )
 		{
-			Throw("Voodoo Core: Could not add shader, invalid position (< -1).", this->mParent);
+			Throw("Voodoo Core: Could not add shader, invalid position (< -1).",
+				this->mParent);
 		} else if ( position == -1 ) {
 			// Append to the end of the list
 			this->mShaders.push_back(shader);
@@ -35,7 +36,9 @@ namespace VoodooShader
 	{
 		if ( this->mShaders.size() <= position )
 		{
-			Throw("Voodoo Core: Could not remove shader, list size <= position.", this->mParent);
+			Throw(
+				"Voodoo Core: Could not remove shader, list size <= position.", 
+				this->mParent);
 		} else {
 			ShaderVector::iterator shaderPosition = this->mShaders.begin() + position;
 			this->mShaders.erase(shaderPosition);

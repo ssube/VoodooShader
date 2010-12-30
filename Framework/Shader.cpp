@@ -10,7 +10,8 @@ namespace VoodooShader
 	Shader::Shader(Core * parent, std::string filename, const char ** args)
 		: mCore(parent), mName(filename), mDefaultTechnique()
 	{
-		this->mEffect = cgCreateEffectFromFile(parent->GetCGContext(), filename.c_str(), args);
+		this->mEffect = cgCreateEffectFromFile(
+			parent->GetCGContext(), filename.c_str(), args);
 
 		if ( !cgIsEffect(this->mEffect) )
 		{
@@ -64,7 +65,8 @@ namespace VoodooShader
 			if (  Converter::ToParameterCategory(type) == PC_Sampler )
 			{
 				// Link to a texture
-				CGannotation texnameAnnotation = cgGetNamedParameterAnnotation(cParam, "texture");
+				CGannotation texnameAnnotation = cgGetNamedParameterAnnotation(
+					cParam, "texture");
 
 				if ( cgIsAnnotation(texnameAnnotation) )
 				{
@@ -109,7 +111,8 @@ namespace VoodooShader
 				// Insert the technique into the map
 				TechniqueRef tech(new Technique(this, cTech));
 
-				//! @todo Possibly keep a map of valid techniques and allow changing at runtime
+				//! @todo Possibly keep a map of valid techniques and allow 
+				//!		changing at runtime
 
 				// The first valid technique is the default one
 				if ( !mDefaultTechnique.get() )
@@ -151,8 +154,7 @@ namespace VoodooShader
 		{
 			return this->mPasses[index];
 		} else {
-			//! @todo Fix NULL in Throw
-			Throw("Voodoo Core: Invalid pass index (> pass count).", NULL);
+			Throw("Voodoo Core: Invalid pass index (> pass count).", mCore);
 		}
 	}
 

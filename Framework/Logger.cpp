@@ -50,9 +50,14 @@ namespace VoodooShader
 		}
 	}
 
-	/// \brief Adds a timestamp at the current position in the log
-	///
-	/// Writes a hour:minute:second timestamp at the current stream position in the log file.
+	/**
+	 * Writes a timestamp to the log file, if the system time can be retrieved.
+	 * The timestamp is of the form "<code>HH:MM:SS :: </code>" and leading
+	 * zeros are retained so the length will always be 12 characters.
+	 * 
+	 * @note If the system time cannot be retrieved, an error stamp will be
+	 *		printed with an equal length.
+	 */
 	VOODOO_API void Logger::Timestamp()
 	{
 		time_t now = time(NULL);
@@ -101,7 +106,8 @@ namespace VoodooShader
 
 	/// \brief Opens a file for logging
 	///
-	/// Closes the open logfile (if any), then opens a new file (with the given name).
+	/// Closes the open logfile (if any), then opens a new file (with the given 
+	///		name).
 	///
 	/// The new file is truncated if it exists and is opened for writing.
 	VOODOO_API bool Logger::Open(const char* filename)

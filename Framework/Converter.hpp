@@ -27,16 +27,18 @@
 namespace VoodooShader
 {
 	/**
-	 * Conversion-helper class for Voodoo core types. This class provides methods to convert
-	 * various enums to other types or retrieve readable names.
+	 * Conversion-helper class for Voodoo core types. This class provides 
+	 * methods to convert various enums to other types or retrieve readable 
+	 * names.
 	 */
 	class Converter
 	{
 	public:
 		/**
 		 * Convert a Voodoo parameter type to the corresponding Cg runtime type.
-		 * This function should be used to convert between these two types, as it allows for future
-		 * types to be added or updated as necessary without changing any other code.
+		 * This function should be used to convert between these two types, as 
+		 * it allows for future types to be added or updated as necessary 
+		 * without changing any other code.
 		 * 
 		 * @param pt The internal parameter type.
 		 * @return The Cg runtime's corresponding type, if one is known.
@@ -67,8 +69,9 @@ namespace VoodooShader
 
 		/**
 		* Convert a Cg runtime type to the corresponding Voodoo parameter type.
-		* This function should be used to convert between these two types, as it allows for future
-		* types to be added or updated as necessary without changing any other code.
+		* This function should be used to convert between these two types, as it
+		* allows for future types to be added or updated as necessary without 
+		* changing any other code.
 		* 
 		* @param pt The Cg runtime's type.
 		* @return The internal parameter corresponding type, if one is known.
@@ -117,11 +120,12 @@ namespace VoodooShader
 		}
 
 		/**
-		 * Helper function to convert enum values into readable strings used in logging; this
-		 * overload handles texture formats.
+		 * Helper function to convert enum values into readable strings used in 
+		 * logging; this overload handles texture formats.
 		 *
 		 * @param tf The texture format to find the name of.
-		 * @return A C-string with the name (usually identical to the identifier).
+		 * @return A C-string with the name (usually identical to the 
+		 *		identifier).
 		 */
 		static inline const char * ToString(TextureFormat tf)
 		{
@@ -152,11 +156,12 @@ namespace VoodooShader
 		}
 
 		/**
-		* Helper function to convert enum values into readable strings used in logging; this
-		* overload handles parameter types.
+		* Helper function to convert enum values into readable strings used in 
+		* logging; this overload handles parameter types.
 		*
 		* @param pt The parameter type to find the name of.
-		* @return A C-string with the name (usually identical to the identifier).
+		* @return A C-string with the name (usually identical to the 
+		*		identifier).
 		*/
 		static inline const char * ToString(ParameterType pt)
 		{

@@ -52,7 +52,9 @@ namespace VoodooShader
 
 		if ( !adapter )
 		{
-			Throw("Voodoo Core: Attempted to bind material with no adapter set.", this->mParent);
+			Throw(
+				"Voodoo Core: Attempted to bind material with no adapter set.", 
+				this->mParent);
 		}
 
 		MaterialMap::iterator material = this->mMaterials.find(texture);
@@ -91,7 +93,9 @@ namespace VoodooShader
 
 			if ( !adapter )
 			{
-				Throw("Voodoo Core: Attempted to unbind material with no adapter set.", this->mParent);
+				Throw(
+				  "Voodoo Core: Attempted to unbind material with no adapter set.", 
+				  this->mParent);
 			}
 
 			adapter->UnbindPass();

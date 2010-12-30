@@ -35,30 +35,10 @@ namespace VoodooShader
 #endif
 
 		this->mLogger->Log(VOODOO_CORE_COPYRIGHT, false);
-		this->mLogger->Log("Voodoo Core: Assembly ID: "VOODOO_CORE_VERSION_STRING"\n");
-
-		/*char versionBuffer[8192];
-		BOOL hr = GetFileVersionInfoA("VoodooFramework.dll", NULL, 8192, versionBuffer);
-		if ( hr != 0 )
-		{
-			VS_FIXEDFILEINFO * version = NULL;
-			UINT versionSize;
-			hr = VerQueryValueA(versionBuffer, "\\", (LPVOID*)&version, &versionSize);
-			if ( hr != 0 )
-			{
-				UINT versionMajor = ( version->dwFileVersionMS & 0xFFFF0000 ) / 0x10000;
-				UINT versionMinor = ( version->dwFileVersionMS & 0x0000FFFF );
-				UINT versionBuild = ( version->dwFileVersionLS & 0xFFFF0000 ) / 0x10000;
-				UINT versionRev   = ( version->dwFileVersionLS & 0x0000FFFF );
-
-				this->mLogger->Format("Voodoo Core: Starting version %d.%d.%d (rev %d) core...")
-					.With(versionMajor).With(versionMinor).With(versionBuild).With(versionRev).Done();
-			} else {
-				this->mLogger->Log("Voodoo Core: Failed to retrieve version info.");
-			}
-		} else {
-			this->mLogger->Log("Voodoo Core: Failed to retrieve version info.");
-		}*/
+		this->mLogger->Log(
+			"Voodoo Core: Assembly ID: "
+			VOODOO_CORE_VERSION_STRING
+			"\n");
 
 		this->mLogger->Log("Voodoo Core: Preparing core components...\n");
 
@@ -111,7 +91,9 @@ namespace VoodooShader
 	{
 		if ( this->mAdapter )
 		{
-			Throw("Voodoo Core: Attempted to set adapter when one is already set.", this);
+			Throw(
+			  "Voodoo Core: Attempted to set adapter when one is already set.", 
+			  this);
 		}
 
 		this->mAdapter = adapter;
@@ -137,7 +119,9 @@ namespace VoodooShader
 		TextureMap::iterator textureEntry = this->mTextures.find(name);
 		if ( textureEntry != this->mTextures.end() )
 		{
-			Throw("Voodoo Core: Trying to create a texture with a duplicate name.", this);
+			Throw(
+			  "Voodoo Core: Trying to create a texture with a duplicate name.", 
+			  this);
 		} else {
 			TextureRef texture(new Texture(name, data));
 			this->mTextures[name] = texture;
@@ -150,7 +134,9 @@ namespace VoodooShader
 		ParameterMap::iterator paramEntry = this->mParameters.find(name);
 		if ( paramEntry != this->mParameters.end() )
 		{
-			Throw("Voodoo Core: Trying to create parameter with a duplicate name.", this);
+			Throw(
+			  "Voodoo Core: Trying to create parameter with a duplicate name.", 
+			  this);
 		} else {
 			ParameterRef parameter(new Parameter(NULL, name, type));
 			return parameter;
@@ -189,13 +175,15 @@ namespace VoodooShader
 		Core * me = reinterpret_cast<Core*>(core);
 		if ( me )
 		{
-			me->mLogger->Format("Voodoo Core: CG error: %s\n").With(cgGetErrorString(error)).Done();
+			me->mLogger->Format("Voodoo Core: CG error: %s\n")
+				.With(cgGetErrorString(error)).Done();
 
 			// Print any compiler errors or other details we can find
 			const char * listing = cgGetLastListing(me->mCGContext);
 			if ( listing )
 			{
-				me->mLogger->Format("Voodoo Core: CG listing: %s\n").With(listing).Done();
+				me->mLogger->Format("Voodoo Core: CG listing: %s\n")
+					.With(listing).Done();
 			}
 		}
 	}
