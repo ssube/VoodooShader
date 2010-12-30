@@ -28,7 +28,9 @@ namespace VoodooShader
 			void BindPass(PassRef shader);
 			void UnbindPass();
 
-			void DrawQuad(bool fullscreen = true, void * vertexData = NULL);
+			void DrawQuad(Vertex * vertexData);
+
+			void DrawShader(ShaderRef shader);
 
 			void ApplyParameter(ParameterRef param);
 

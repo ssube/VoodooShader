@@ -35,20 +35,14 @@ namespace VoodooShader
 		Shader(Core * parent, std::string filename, const char ** args = NULL);
 		Shader(Core * parent, CGeffect effect);
 
+		std::string Name();
+
 		TechniqueRef GetDefaultTechnique();
 
-		size_t NumParams();
+		size_t GetParamCount();
 		ParameterRef GetParam(size_t index);
 
-		inline std::string Name()
-		{
-			return mName;
-		};
-
-		inline Core * GetCore()
-		{
-			return mCore;
-		}
+		Core * GetCore();
 
 		void Link();
 
@@ -61,7 +55,7 @@ namespace VoodooShader
 		CGeffect mEffect;
 
 		TechniqueRef mDefaultTechnique;
-		//TechniqueMap_Ptr mTechniques;
+		TechniqueMap mTechniques;
 		ParameterMap mParameters;
 	};
 
@@ -70,26 +64,14 @@ namespace VoodooShader
 	public:
 		Technique(Shader * parent, CGtechnique cgTech);
 
-		inline std::string Name()
-		{
-			std::string name = mParent->Name();
-			name += "::";
-			name += mName;
-			return name;
-		};
+		String Name();
 
-		inline Core * GetCore()
-		{
-			return mCore;
-		}
+		Core * GetCore();
 
-		size_t NumPasses();
+		size_t GetPassCount();
 		PassRef GetPass(size_t index);
 
-		TextureRef Target()
-		{
-			return mTarget;
-		}
+		TextureRef GetTarget();
 
 		void Link();
 
@@ -107,23 +89,11 @@ namespace VoodooShader
 	public:
 		Pass(Technique * parent, CGpass cgPass);
 
-		inline std::string Name()
-		{
-			std::string name = mParent->Name();
-			name += "::";
-			name += mName;
-			return name;
-		};
+		String Name();
 
-		inline Core * GetCore()
-		{
-			return mCore;
-		}
+		Core * GetCore();
 
-		TextureRef Target()
-		{
-			return mTarget;
-		}
+		TextureRef GetTarget();
 
 		CGprogram GeometryProgram();
 		CGprogram VertexProgram();

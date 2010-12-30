@@ -36,16 +36,16 @@
 		return NULL;
 	}
 
-	strcat(valuePath, "\\bin\\");
+	strcat_s(valuePath, MAX_PATH, "\\bin\\");
 
 	SetDllDirectory(valuePath);
 
 	char libraryFile[MAX_PATH];
-	strcpy(libraryFile, valuePath);
+	strcpy_s(libraryFile, MAX_PATH, valuePath);
 #ifdef _DEBUG
-	strcat(libraryFile, "Voodoo_DX9_d.dll");
+	strcat_s(libraryFile, MAX_PATH, "Voodoo_DX9_d.dll");
 #else
-	strcat(libraryFile, "Voodoo_DX9.dll");
+	strcat_s(libraryFile, MAX_PATH, "Voodoo_DX9.dll");
 #endif
 
 	HMODULE library = LoadLibrary(libraryFile);
@@ -53,7 +53,7 @@
 	if ( !library )
 	{
 		char error[4096];
-		sprintf(error, "Could not load DLL: %s", libraryFile);
+		sprintf_s(error, 4096, "Could not load DLL: %s", libraryFile);
 		MessageBoxA(NULL, error, "Voodoo DX9 Hook Error 3", MB_ICONERROR);
 		return NULL;
 	}

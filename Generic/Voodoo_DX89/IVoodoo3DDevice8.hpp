@@ -393,7 +393,7 @@ public:
 
 		VoodooDX89->BindPass(pass);
 
-		VoodooDX89->DrawQuad();
+		VoodooDX89->DrawQuad(NULL);
 
 		VoodooDX89->UnbindPass();
 

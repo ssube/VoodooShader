@@ -33,7 +33,8 @@
 	VOODOO_META_STRING(VOODOO_##token##_VERSION_MAJOR) "."\
 	VOODOO_META_STRING(VOODOO_##token##_VERSION_MINOR) "."\
 	VOODOO_META_STRING(VOODOO_##token##_VERSION_PATCH) "."\
-	VOODOO_META_STRING(VOODOO_##token##_VERSION_GITREV)
+	VOODOO_META_STRING(VOODOO_##token##_VERSION_GITREV)\
+	VOODOO_META_DEBUG_STRING
 
 #define VOODOO_META_VERSION_STRING_FULL(token)\
 	VOODOO_##token##_PRETTYNAME " (version " VOODOO_META_VERSION_STRING_BASIC(token) ")"
@@ -44,49 +45,52 @@
 	VOODOO_##token##_VERSION_PATCH,\
 	VOODOO_##token##_VERSION_GITREV
 
-// Global defs
-#define VOODOO_GLOBAL_VERSION_GITREV	59
+#define VOODOO_META_NAME(token) VOODOO_##token##_NAME
+#define VOODOO_META_PRETTYNAME(token) VOODOO_##token##_PRETTYNAME
+
+
+
+// Global defs ----------------------------------------------------------------
+#define VOODOO_GLOBAL_VERSION_GITREV	61
+#define VOODOO_GLOBAL_COPYRIGHT_BRIEF	"Copyright (c) 2010 by Sean Sube"
+//-----------------------------------------------------------------------------
+
 
 // Core defs ------------------------------------------------------------------
-#define VOODOO_CORE_NAME			"Voodoo/_Core"	VOODOO_META_DEBUG_STRING
-#define VOODOO_CORE_PRETTYNAME		"Voodoo Shader Framework Core"	VOODOO_META_DEBUG_STRING
+#define VOODOO_CORE_NAME			"Voodoo/_Core"
+#define VOODOO_CORE_PRETTYNAME		"Voodoo Shader Framework Core"
 #define VOODOO_CORE_VERSION_MAJOR	0
 #define VOODOO_CORE_VERSION_MINOR	1
-#define VOODOO_CORE_VERSION_PATCH	5
+#define VOODOO_CORE_VERSION_PATCH	6
 #define VOODOO_CORE_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
-#define VOODOO_CORE_VERSION_STRING	VOODOO_META_VERSION_STRING_FULL(CORE)
-#define VOODOO_CORE_VERSION_STRING_BASIC VOODOO_META_VERSION_STRING_BASIC(CORE)
 //-----------------------------------------------------------------------------
+
 
 // DX9 defs -------------------------------------------------------------------
-#define VOODOO_DX9_NAME				"Voodoo/_DX9"	VOODOO_META_DEBUG_STRING
-#define VOODOO_DX9_PRETTYNAME		"Voodoo/Generic (DX9)"	VOODOO_META_DEBUG_STRING
+#define VOODOO_DX9_NAME				"Voodoo/_DX9"
+#define VOODOO_DX9_PRETTYNAME		"Voodoo/Generic (DX9)"
 #define VOODOO_DX9_VERSION_MAJOR	0
 #define VOODOO_DX9_VERSION_MINOR	1
-#define VOODOO_DX9_VERSION_PATCH	7
+#define VOODOO_DX9_VERSION_PATCH	8
 #define VOODOO_DX9_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
-#define VOODOO_DX9_VERSION_STRING	VOODOO_META_VERSION_STRING_FULL(DX9)
-#define VOODOO_DX9_VERSION_STRING_BASIC VOODOO_META_VERSION_STRING_BASIC(DX9)
 //-----------------------------------------------------------------------------
+
 
 // DX89 defs ------------------------------------------------------------------
-#define VOODOO_DX89_NAME			"Voodoo/_DX89"	VOODOO_META_DEBUG_STRING
-#define VOODOO_DX89_PRETTYNAME		"Voodoo/Generic (DX8.9)"	VOODOO_META_DEBUG_STRING
+#define VOODOO_DX89_NAME			"Voodoo/_DX89"
+#define VOODOO_DX89_PRETTYNAME		"Voodoo/Generic (DX8.9)"
 #define VOODOO_DX89_VERSION_MAJOR	0
 #define VOODOO_DX89_VERSION_MINOR	1
-#define VOODOO_DX89_VERSION_PATCH	4
+#define VOODOO_DX89_VERSION_PATCH	5
 #define VOODOO_DX89_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
-#define VOODOO_DX89_VERSION_STRING	VOODOO_META_VERSION_STRING_FULL(DX89)
-#define VOODOO_DX89_VERSION_STRING_BASIC VOODOO_META_VERSION_STRING_BASIC(DX89)
 //-----------------------------------------------------------------------------
 
+
 // Gem defs -------------------------------------------------------------------
-#define VOODOO_GEM_NAME				"Voodoo/Gem"	VOODOO_META_DEBUG_STRING
-#define VOODOO_GEM_PRETTYNAME		"Voodoo/Gem"	VOODOO_META_DEBUG_STRING
+#define VOODOO_GEM_NAME				"Voodoo/Gem"
+#define VOODOO_GEM_PRETTYNAME		"Voodoo/Gem"
 #define VOODOO_GEM_VERSION_MAJOR	0
 #define VOODOO_GEM_VERSION_MINOR	1
-#define VOODOO_GEM_VERSION_PATCH	2
+#define VOODOO_GEM_VERSION_PATCH	3
 #define VOODOO_GEM_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
-#define VOODOO_GEM_VERSION_STRING	VOODOO_META_VERSION_STRING_FULL(GEM)
-#define VOODOO_GEM_VERSION_STRING_BASIC VOODOO_META_VERSION_STRING_BASIC(GEM)
 //-----------------------------------------------------------------------------

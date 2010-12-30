@@ -27,7 +27,12 @@
 namespace VoodooShader
 {
 	/**
-	 * Core engine class for the Voodoo Shader Framework. 
+	 * Generic exception class for Voodoo applications. Combines a generic
+	 * standard exception with extended error location data.
+	 *
+	 * @note If possible, thrown Exceptions will automatically log as much data
+	 *		as they contain in a formatted way. You can retrieve this string
+	 *		with the Exception::Message() method.
 	 */
 	class VOODOO_API Exception
 		: public std::exception

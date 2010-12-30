@@ -70,17 +70,17 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "FileDescription", VOODOO_CORE_PRETTYNAME
-            VALUE "FileVersion", VOODOO_CORE_VERSION_STRING_BASIC
-            VALUE "InternalName", VOODOO_CORE_NAME
-            VALUE "LegalCopyright", "Copyright (C) 2010 by Sean Sube"
+            VALUE "FileDescription", VOODOO_META_PRETTYNAME(CORE)
+            VALUE "FileVersion", VOODOO_META_VERSION_STRING_BASIC(CORE)
+            VALUE "InternalName", VOODOO_META_NAME(CORE)
+            VALUE "LegalCopyright", VOODOO_GLOBAL_COPYRIGHT_BRIEF
 #ifdef _DEBUG
 			VALUE "OriginalFilename", "Voodoo_Core_d.dll"
 #else
             VALUE "OriginalFilename", "Voodoo_Core.dll"
 #endif
-            VALUE "ProductName", VOODOO_CORE_VERSION_STRING
-            VALUE "ProductVersion", VOODOO_CORE_VERSION_STRING_BASIC
+            VALUE "ProductName", VOODOO_META_PRETTYNAME(CORE)
+            VALUE "ProductVersion", VOODOO_META_VERSION_STRING_BASIC(CORE)
         END
     END
     BLOCK "VarFileInfo"

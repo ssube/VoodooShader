@@ -155,7 +155,9 @@ namespace VoodooShader
 		{
 			this->mParent->Log(this->mFmtObj.str(), timestamp);
 		} catch ( Exception & exc ) {
-			this->mParent->Log("Voodoo Core: Logger error.", timestamp);
+			this->mParent->Log("Voodoo Core: Logger error: ", timestamp);
+			this->mParent->Log(exc.Message(), false);
+			this->mParent->Log("\n", false);
 		}
 	}
 

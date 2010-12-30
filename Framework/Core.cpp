@@ -37,7 +37,7 @@ namespace VoodooShader
 		this->mLogger->Log(VOODOO_CORE_COPYRIGHT, false);
 		this->mLogger->Log(
 			"Voodoo Core: Assembly ID: "
-			VOODOO_CORE_VERSION_STRING
+			VOODOO_META_VERSION_STRING_FULL(CORE)
 			"\n");
 
 		this->mLogger->Log("Voodoo Core: Preparing core components...\n");
@@ -179,11 +179,12 @@ namespace VoodooShader
 				.With(cgGetErrorString(error)).Done();
 
 			// Print any compiler errors or other details we can find
-			const char * listing = cgGetLastListing(me->mCGContext);
-			if ( listing )
+			const char * listing = cgGetLastListing(context);
+			while ( listing )
 			{
 				me->mLogger->Format("Voodoo Core: CG listing: %s\n")
 					.With(listing).Done();
+				listing = cgGetLastListing(context);
 			}
 		}
 	}

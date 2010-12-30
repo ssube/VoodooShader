@@ -45,7 +45,7 @@ namespace VoodooShader
 		}
 	}
 
-	void FullscreenManager::Render(unsigned int size, int count)
+	void FullscreenManager::Render(unsigned int start, int count)
 	{
 		if ( count == 0 )
 		{
@@ -59,28 +59,38 @@ namespace VoodooShader
 			Throw("Voodoo Core: Parent Core has no Adapter.", this->mParent);
 		}
 
-		ShaderVector::iterator start, current, end;
+		size_t total = mShaders.size();
 
-		start = this->mShaders.begin() + size; 
+		if ( start > total )
+		{
+			Throw("Voodoo Core: Invalid start position (past end of chain).", this->mParent);
+		}
+
+		if ( count > total )
+		{
+			Throw("Voodoo Core: Attempted to render more shaders than in the chain.", this->mParent);
+		}
+		//ShaderVector::iterator chainStart, chainCurrent, chainEnd;
+
+		//unsigned int chainStart = this->mShaders.begin() + start; 
+		unsigned int chainEnd, chainCurrent;
 
 		if ( count == -1 )
 		{
-			end = this->mShaders.end();
+			chainEnd = total;
 		} else {
-			end = start + count;
+			chainEnd = start + count;
+
+			if ( chainEnd > total )
+			{
+				Throw("Voodoo Core: With start offset, end shader is past the end of the chain.", this->mParent);
+			}
 		}
 
-		for ( current = start; current != end; ++current )
+		for ( chainCurrent = start; chainCurrent < chainEnd; ++chainCurrent )
 		{
-			ShaderRef shader = *current;
-			TechniqueRef tech = shader->GetDefaultTechnique();
-			for ( size_t passNum = 0; passNum < tech->NumPasses(); ++passNum )
-			{
-				PassRef pass = tech->GetPass(passNum);
-				adapter->BindPass(pass);
-				adapter->DrawQuad();
-				adapter->UnbindPass();
-			}
+			//ShaderRef shader = *current;
+			adapter->DrawShader(mShaders[chainCurrent]);
 		}
 	}
 }

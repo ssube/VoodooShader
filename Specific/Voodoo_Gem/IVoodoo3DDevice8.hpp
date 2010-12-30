@@ -393,7 +393,7 @@ public:
 
 		VoodooGem->BindPass(pass);
 
-		VoodooGem->DrawQuad();
+		VoodooGem->DrawQuad(NULL);
 
 		VoodooGem->UnbindPass();
 

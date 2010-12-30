@@ -27,6 +27,26 @@
 namespace VoodooShader
 {
 	/**
+	 * Generic vertex format for use with Adapter draw calls. This format is
+	 * compatible with both OpenGL and DirectX.
+	 *
+	 * @note Because of the draw mechanism for adapters, most draws with
+	 *		user-provided vertexes will not use vertex buffers of any sort. 
+	 *		This can hurt performance if used heavily, so the Core avoids
+	 *		drawing through adapters as much as possible.
+	 * @note For simplicity, this uses the D3DFVF_XYZRHW format, which requires
+	 *		a winding value. OpenGL draws can often ignore this. The members are
+	 *		ordered so that <code>&x</code> is a valid float3 with the position
+	 *		and <code>&tu</code> is a valid float2 with the texture coordinate.
+	 */
+	struct Vertex
+	{
+		float x, y, z;
+		float winding;
+		float tu, tv;
+	};
+
+	/**
 	 * Graphics adapter class, responsible for interfacing the Voodoo Core with
 	 * a given graphics program. 
 	 *
@@ -84,15 +104,11 @@ namespace VoodooShader
 		/**
 		 * Draws a quad to the screen.
 		 *
-		 * @param fullscreen Indicates whether the Adapter should use the cached
-		 *		fullscreen quad.
-		 * @param vertexData If fullscreen is false, this must contain a valid 
-		 *		pointer to vertex data for exactly four vertexes. These will be 
-		 *		used to render the quad.
+		 * @param vertexData This must be NULL or contain vertex data.
 		 *
 		 * @note In APIs which do not not support quads, this should be 
 		 *		implemented as two tris or another geometry form capable of 
-		 *		taking the same vertices in the same order as an OpenGL quad.
+		 *		taking the same vertexes in the same order as an OpenGL quad.
 		 * @note The quad must meet a set of requirements:
 		 *		 <ol>
 		 *			<li>The depth buffer should not be written to.</li>
@@ -115,22 +131,20 @@ namespace VoodooShader
 		 *			};
 		 *		</code>
 		 */
-		virtual void DrawQuad(bool fullscreen = true, void * vertexData = NULL) 
-			= 0;
+		virtual void DrawQuad(Vertex * vertexData) = 0;
 
 		virtual void ApplyParameter(ParameterRef param) = 0;
 
 		/**
-		 * Connects a texture to a sampler-type parameter. This is performed 
-		 * differently in each API, but often uses Cg-provided functions (in 
-		 * OpenGL, cgGLSetTextureParameter). The* parameter and texture should 
-		 * be connected for the shader's life.
-		 * 
-		 * @param param The parameter to bind to (must be a sampler type).
-		 * @param texture The texture to be bound.
-		 * @return Whether or not the binding was successful.
+		 * Helper function to handle binding and drawing a single effect. 
+		 * This must take targets into consideration, and should contain 
+		 * <em>all</em> code necessary to render a basic post-processing or
+		 * deferred effect.<br />
+		 * In some Adapter setups and APIs, this may involve blitting textures
+		 * or handling various surfaces and RTT features. These should be
+		 * implemented here to provide a clean 
 		 */
-		virtual bool ConnectTexture(ParameterRef param, TextureRef texture) = 0;
+		virtual void DrawShader(ShaderRef shader) = 0;
 
 		/**
 		 * Creates a named texture within the API and registers it with the 
@@ -157,6 +171,18 @@ namespace VoodooShader
 		virtual TextureRef CreateTexture(std::string name, size_t width, 
 			size_t height, size_t depth, bool mipmaps, TextureFormat format) 
 			= 0;
+
+		/**
+		 * Connects a texture to a sampler-type parameter. This is performed 
+		 * differently in each API, but often uses Cg-provided functions (in 
+		 * OpenGL, cgGLSetTextureParameter). The parameter and texture should 
+		 * be connected for the shader's life.
+		 * 
+		 * @param param The parameter to bind to (must be a sampler type).
+		 * @param texture The texture to be bound.
+		 * @return Whether or not the binding was successful.
+		 */
+		virtual bool ConnectTexture(ParameterRef param, TextureRef texture) = 0;
 
 		/**
 		 * A generic error-handling callback provided to the Cg runtime. This 

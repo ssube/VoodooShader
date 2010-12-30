@@ -65,8 +65,8 @@ namespace VoodooShader
 			D3DVIEWPORT9 viewport;
 			device->GetViewport(&viewport);
 
-			float fx = ( viewport.Width  / 2 ) + 0.5	;/// 2;
-			float fy = ( viewport.Height / 2 ) + 0.5	;/// 2;
+			float fx = ( (float)viewport.Width  / 2 ) + 0.5f	;/// 2;
+			float fy = ( (float)viewport.Height / 2 ) + 0.5f	;/// 2;
 
 			mCore->GetLog()->Format("Voodoo DX89: Prepping for %d by %d target.\n")
 				.With(fx).With(fy).Done();
@@ -197,9 +197,9 @@ namespace VoodooShader
 			mDevice->SetPixelShader(NULL);
 		}
 
-		void Adapter::DrawQuad(bool fullscreen, void * vertexData)
+		void Adapter::DrawQuad(Vertex * vertexData)
 		{
-			if ( fullscreen )
+			if ( !vertexData )
 			{
 				IDirect3DVertexBuffer9 * sourceBuffer;
 				UINT sourceOffset, sourceStride;
@@ -232,23 +232,22 @@ namespace VoodooShader
 				this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
 				this->mDevice->SetRenderState(D3DRS_CULLMODE, cullMode);
 			} else {
-				if ( !vertexData )
+				HRESULT hr = this->mDevice->BeginScene();
+				if ( SUCCEEDED(hr) )
 				{
-					Throw("Voodoo DX89: DrawQuad called in manual mode with no vertexes.", mCore);
-				} else {
-					// Draw a quad from user vertexes
-					HRESULT hr = this->mDevice->BeginScene();
-					if ( SUCCEEDED(hr) )
+					hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
+					if ( !SUCCEEDED(hr) )
 					{
-						hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
-						if ( !SUCCEEDED(hr) )
-						{
-							this->mCore->GetLog()->Log("Voodoo DX89: Error drawing user quad.");
-						}
-						this->mDevice->EndScene();
+						this->mCore->GetLog()->Log("Voodoo DX89: Error drawing user quad.");
 					}
+					this->mDevice->EndScene();
 				}
 			}
+		}
+
+		void Adapter::DrawShader(ShaderRef shader)
+		{
+
 		}
 
 		void Adapter::ApplyParameter(ParameterRef param)

@@ -211,9 +211,9 @@ namespace VoodooShader
 			mDevice->SetPixelShader(NULL);
 		}
 
-		void Adapter::DrawQuad(bool fullscreen, void * vertexData)
+		void Adapter::DrawQuad(Vertex * vertexData)
 		{
-			if ( fullscreen )
+			if ( !vertexData )
 			{
 				IDirect3DVertexBuffer9 * sourceBuffer;
 				UINT sourceOffset, sourceStride;
@@ -246,23 +246,23 @@ namespace VoodooShader
 				this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
 				this->mDevice->SetRenderState(D3DRS_CULLMODE, cullMode);
 			} else {
-				if ( !vertexData )
+				// Draw a quad from user vertexes
+				HRESULT hr = this->mDevice->BeginScene();
+				if ( SUCCEEDED(hr) )
 				{
-					Throw("Voodoo DX9: DrawQuad called in manual mode with no vertexes.", mCore);
-				} else {
-					// Draw a quad from user vertexes
-					HRESULT hr = this->mDevice->BeginScene();
-					if ( SUCCEEDED(hr) )
+					hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
+					if ( !SUCCEEDED(hr) )
 					{
-						hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
-						if ( !SUCCEEDED(hr) )
-						{
-							this->mCore->GetLog()->Log("Voodoo DX9: Error drawing user quad.");
-						}
-						this->mDevice->EndScene();
+						this->mCore->GetLog()->Log("Voodoo DX9: Error drawing user quad.");
 					}
+					this->mDevice->EndScene();
 				}
 			}
+		}
+
+		void Adapter::DrawShader(ShaderRef shader)
+		{
+
 		}
 
 		void Adapter::ApplyParameter(ParameterRef param)

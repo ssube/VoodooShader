@@ -33,6 +33,21 @@ namespace VoodooShader
 		return this->mDefaultTechnique;
 	}
 
+	size_t Shader::GetParamCount()
+	{
+		return mParameters.size();
+	}
+
+	String Shader::Name()
+	{
+		return mName;
+	}
+
+	Core * Shader::GetCore()
+	{
+		return mCore;
+	}
+
 	void Shader::Link()
 	{
 		this->SetupParameters();
@@ -113,6 +128,8 @@ namespace VoodooShader
 
 				//! @todo Possibly keep a map of valid techniques and allow 
 				//!		changing at runtime
+				const char * techName = cgGetTechniqueName(cTech);
+				mTechniques[techName] = tech;
 
 				// The first valid technique is the default one
 				if ( !mDefaultTechnique.get() )
@@ -141,12 +158,25 @@ namespace VoodooShader
 			this->mName = techName;
 		} else {
 			char nameBuffer[16];
-			itoa((int)(&this->mTechnique), nameBuffer, 16);
+			_itoa_s((int)(&this->mTechnique), nameBuffer, 16, 16);
 
 			this->mName = "tech_";
 			this->mName += nameBuffer;
 		}
 	}
+
+	Core * Technique::GetCore()
+	{
+		return mCore;
+	}
+
+	String Technique::Name()
+	{
+		String name = mParent->Name();
+		name += "::";
+		name += mName;
+		return name;
+	};
 
 	PassRef Technique::GetPass(size_t index)
 	{
@@ -158,7 +188,12 @@ namespace VoodooShader
 		}
 	}
 
-	size_t Technique::NumPasses()
+	TextureRef Technique::GetTarget()
+	{
+		return mTarget;
+	}
+
+	size_t Technique::GetPassCount()
 	{
 		return this->mPasses.size();
 	}
@@ -225,11 +260,29 @@ namespace VoodooShader
 			this->mName = passName;
 		} else {
 			char nameBuffer[16];
-			itoa((int)(&this->mPass), nameBuffer, 16);
+			_itoa_s((int)(&this->mPass), nameBuffer, 16, 16);
 
 			this->mName = "pass_";
 			this->mName += nameBuffer;
 		}
+	}
+
+	String Pass::Name()
+	{
+		std::string name = mParent->Name();
+		name += "::";
+		name += mName;
+		return name;
+	};
+
+	Core * Pass::GetCore()
+	{
+		return mCore;
+	}
+
+	TextureRef Pass::GetTarget()
+	{
+		return mTarget;
 	}
 
 	void Pass::Link()

@@ -4,6 +4,9 @@
 
 #include "../../Version.hpp"
 
+IDirect3DSurface9 * scratchSurface = NULL;
+IDirect3DTexture9 * scratchTexture = NULL;
+
 namespace VoodooShader
 {
 	namespace DirectX89
@@ -30,7 +33,7 @@ namespace VoodooShader
 				//exit(1);
 			}
 
-			core->GetLog()->Log("Voodoo Gem: Assembly ID: "VOODOO_GEM_VERSION_STRING"\n");
+			core->GetLog()->Log("Voodoo Gem: Assembly ID: "VOODOO_META_VERSION_STRING_FULL(GEM)"\n");
 
 			HRESULT hr = cgD3D9SetDevice(device);
 			if ( !SUCCEEDED(hr) )
@@ -69,8 +72,8 @@ namespace VoodooShader
 			D3DVIEWPORT9 viewport;
 			device->GetViewport(&viewport);
 
-			float fx = ( viewport.Width  / 2 ) + 0.5	;/// 2;
-			float fy = ( viewport.Height / 2 ) + 0.5	;/// 2;
+			float fx = ( (float)viewport.Width  / 2 ) + 0.5f	;/// 2;
+			float fy = ( (float)viewport.Height / 2 ) + 0.5f	;/// 2;
 
 			mCore->GetLog()->Format("Voodoo Gem: Prepping for %d by %d target.\n")
 				.With(fx).With(fy).Done();
@@ -201,9 +204,69 @@ namespace VoodooShader
 			mDevice->SetPixelShader(NULL);
 		}
 
-		void Adapter::DrawQuad(bool fullscreen, void * vertexData)
+		void Adapter::DrawShader(ShaderRef shader)
 		{
-			if ( fullscreen )
+			// Set up textures and set scratch surface as render target
+			IDirect3DSurface9 * rt = NULL;
+			mDevice->GetRenderTarget(0, &rt);
+			mDevice->SetRenderTarget(0, scratchSurface);
+
+			// Get technique
+			TechniqueRef tech = shader->GetDefaultTechnique();
+
+			size_t passCount = tech->GetPassCount();
+
+			for ( size_t curPass = 0; curPass < passCount; ++curPass )
+			{
+				PassRef pass = tech->GetPass(curPass);
+
+				this->BindPass(pass);
+				this->DrawQuad(NULL);
+				this->UnbindPass();
+
+				TextureRef passTarget = pass->GetTarget();
+				IDirect3DTexture9 * passTargetD3D = (IDirect3DTexture9 *)passTarget->Get();
+				IDirect3DSurface9 * passSurface = NULL;
+
+				HRESULT hr = passTargetD3D->GetSurfaceLevel(0, &passSurface);
+				if ( FAILED(hr) || !passSurface )
+				{
+					mCore->GetLog()->Format("Voodoo Gem: Failed to get target surface for pass %s (targeting texture %s).\n")
+						.With(pass->Name()).With(passTarget->Name()).Done();
+				} else {
+					hr = mDevice->StretchRect(backbufferSurf, NULL, passSurface, NULL, D3DTEXF_NONE);
+					if ( FAILED(hr) )
+					{
+						mCore->GetLog()->Format("Voodoo Gem: Failed to copy results to target for pass %s.\n")
+							.With(pass->Name()).Done();
+					}
+				}
+			}
+
+			TextureRef techTarget = tech->GetTarget();
+			IDirect3DTexture9 * techTargetD3D = (IDirect3DTexture9 *)techTarget->Get();
+			IDirect3DSurface9 * techSurface = NULL;
+
+			HRESULT hr = techTargetD3D->GetSurfaceLevel(0, &techSurface);
+			if ( FAILED(hr) || !techSurface )
+			{
+				mCore->GetLog()->Format("Voodoo Gem: Failed to get target surface for technique %s (targeting texture %s).\n")
+					.With(tech->Name()).With(techTarget->Name()).Done();
+			} else {
+				hr = mDevice->StretchRect(backbufferSurf, NULL, techSurface, NULL, D3DTEXF_NONE);
+				if ( FAILED(hr) )
+				{
+					mCore->GetLog()->Format("Voodoo Gem: Failed to copy results to target for technique %s.\n")
+						.With(tech->Name()).Done();
+				}
+			}
+
+			mDevice->SetRenderTarget(0, rt);
+		}
+
+		void Adapter::DrawQuad(Vertex * vertexData)
+		{
+			if ( !vertexData )
 			{
 				IDirect3DVertexBuffer9 * sourceBuffer;
 				UINT sourceOffset, sourceStride;
@@ -236,21 +299,16 @@ namespace VoodooShader
 				this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
 				this->mDevice->SetRenderState(D3DRS_CULLMODE, cullMode);
 			} else {
-				if ( !vertexData )
+				// Draw a quad from user vertexes
+				HRESULT hr = this->mDevice->BeginScene();
+				if ( SUCCEEDED(hr) )
 				{
-					Throw("Voodoo Gem: DrawQuad called in manual mode with no vertexes.", mCore);
-				} else {
-					// Draw a quad from user vertexes
-					HRESULT hr = this->mDevice->BeginScene();
-					if ( SUCCEEDED(hr) )
+					hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
+					if ( !SUCCEEDED(hr) )
 					{
-						hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
-						if ( !SUCCEEDED(hr) )
-						{
-							this->mCore->GetLog()->Log("Voodoo Gem: Error drawing user quad.");
-						}
-						this->mDevice->EndScene();
+						this->mCore->GetLog()->Log("Voodoo Gem: Error drawing user quad.");
 					}
+					this->mDevice->EndScene();
 				}
 			}
 		}

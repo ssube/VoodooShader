@@ -59,12 +59,22 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_TESTBED));
 
 	// Main message loop:
-	while (GetMessage(&msg, NULL, 0, 0))
+	while ( true )
 	{
-		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+		// Draw DX...
+		if ( d3d_Device )
 		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			DirectXDraw();
+		}
+
+		if (GetMessage(&msg, NULL, 0, 0))
+		{
+
+			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
 		}
 	}
 
@@ -141,8 +151,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    pp.SwapEffect = D3DSWAPEFFECT_DISCARD;
    pp.MultiSampleType = D3DMULTISAMPLE_NONE;
 
-   HRESULT device = d3d_Object->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING,
-	   &pp, &d3d_Device);
+   HRESULT device = d3d_Object->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, 
+	   hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &pp, &d3d_Device);
 
    if ( FAILED(device) )
    {
@@ -206,17 +216,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break;
 	case WM_PAINT:
-		// Draw DX...
-		if ( d3d_Device )
-		{
-			DirectXDraw();
-		}
-		// TODO: Add any drawing code here...
-		DrawGDI(hWnd);
 	default:
 		//break;
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
+
 	return 0;
 }
 
@@ -248,14 +252,22 @@ struct Vert
 #define CVERT (D3DFVF_XYZRHW|D3DFVF_DIFFUSE)
 
 IDirect3DVertexBuffer9 * verts;
+ID3DXFont * font;
+RECT rect;
+char msg[64];
 
 bool DirectXInit()
 {
+	LONG left = 5;//rand() % 200;
+	LONG top = 5;//rand() % 150;
+	rect.left = left; rect.right = left + 250;
+	rect.top = top; rect.bottom = top + 150;
+
 	Vert vertices[] =
 	{
 		{ 150.0f,  50.0f, 0.5f, 1.0f, 0xffff0000, }, // x, y, z, rhw, color
 		{ 250.0f, 250.0f, 0.5f, 1.0f, 0xff00ff00, },
-		{  50.0f, 250.0f, 0.5f, 1.0f, 0xff00ffff, },
+		{  50.0f, 250.0f, 0.5f, 1.0f, 0xff2266ff, },
 	};
 
 	HRESULT hr = d3d_Device->CreateVertexBuffer(sizeof(vertices), D3DUSAGE_WRITEONLY, CVERT, D3DPOOL_DEFAULT, &verts, NULL);
@@ -270,12 +282,34 @@ bool DirectXInit()
 
 	verts->Unlock();
 
+	D3DXCreateFontA(d3d_Device, 12, 8, 1, 0, FALSE, NULL, NULL, NULL, NULL, "Arial", &font);
+
 	return TRUE;
 }
 
+DWORD update;
+
 void DirectXDraw()
 {
-	/*
+	++draws;
+	ticks = GetTickCount();
+	if ( ticks > ( lastTicks + 100 ) )
+	{
+		DWORD span = ticks - lastTicks;
+		fps = ( draws * 10 ) / ((float)span / 100);
+		lastTicks = ticks;
+
+		if ( ++update == 10 )
+		{
+			LONG left = rand() % 200;
+			LONG top = rand() % 150;
+			rect.left = left; rect.right = left + 250;
+			rect.top = top; rect.bottom = top + 150;
+			update = 0;
+		}
+	}
+	sprintf_s(msg, 64, "FPS: %f\0", fps);
+
 	d3d_Device->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0,0,128), 1.0f, 0);
 
 	d3d_Device->BeginScene();
@@ -285,12 +319,16 @@ void DirectXDraw()
 
 	d3d_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
 
-	d3d_Device->EndScene();
-	*/
+	DWORD srcblend, destblend;
+	d3d_Device->GetRenderState(D3DRS_SRCBLEND, &srcblend);
+	d3d_Device->GetRenderState(D3DRS_DESTBLEND, &destblend);
+	d3d_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_ONE);
+	d3d_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCCOLOR);
+	font->DrawTextA(NULL, msg, -1, &rect, DT_CENTER, D3DCOLOR_ARGB(0xFF, 0xFF, 0x88, 0x00));
+	d3d_Device->SetRenderState(D3DRS_SRCBLEND, srcblend);
+	d3d_Device->SetRenderState(D3DRS_DESTBLEND, destblend);
 
-	IDirect3DSurface9 * bb;
-	d3d_Device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &bb);
-	d3d_Device->GetFrontBufferData(0, bb);
+	d3d_Device->EndScene();
 
 	d3d_Device->Present(NULL, NULL, NULL, NULL);
 }
@@ -316,32 +354,17 @@ void DirectXQuit()
 
 void DrawGDI(HWND hWnd)
 {
-	++draws;
-	ticks = GetTickCount();
-	if ( ticks > ( lastTicks + 100 ) )
-	{
-		DWORD span = ticks - lastTicks;
-		fps = ( draws * 10 ) / ((float)span / 1000);
-		lastTicks = ticks;
-	}
-
+/*
 	PAINTSTRUCT ps;
 	HDC hdc;
-	RECT rect;
-	char msg[64];
-
-	LONG left = 5;//rand() % 200;
-	LONG top = 5;//rand() % 150;
-	rect.left = left; rect.right = left + 250;
-	rect.top = top; rect.bottom = top + 150;
 
 	hdc = BeginPaint(hWnd, &ps);
 
 	SetDCPenColor(hdc, 0x0000FFFF);
 	SetROP2(hdc, R2_XORPEN);
 
-	sprintf(msg, "FPS: %f\0", fps);
 	DrawTextA(hdc, msg, -1, &rect, DT_BOTTOM|DT_CENTER);
 
 	EndPaint(hWnd, &ps);
+*/
 }

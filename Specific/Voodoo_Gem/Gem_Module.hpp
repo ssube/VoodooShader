@@ -57,6 +57,9 @@ extern VoodooShader::ShaderRef testShader;
 
 extern IDirect3DSurface9 * backbufferSurf;
 
+extern IDirect3DSurface9 * scratchSurface;
+extern IDirect3DTexture9 * scratchTexture;
+
 extern VoodooShader::TextureRef texture_ThisFrame;
 extern IDirect3DSurface9 * surface_ThisFrame;
 

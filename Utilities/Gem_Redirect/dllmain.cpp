@@ -37,16 +37,16 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 		return NULL;
 	}
 
-	strcat(valuePath, "\\bin\\");
+	strcat_s(valuePath, MAX_PATH, "\\bin\\");
 
 	SetDllDirectory(valuePath);
 
 	char libraryFile[MAX_PATH];
-	strcpy(libraryFile, valuePath);
+	strcpy_s(libraryFile, MAX_PATH, valuePath);
 #ifdef _DEBUG
-	strcat(libraryFile, "Voodoo_Gem_d.dll");
+	strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem_d.dll");
 #else
-	strcat(libraryFile, "Voodoo_Gem.dll");
+	strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem.dll");
 #endif
 
 	HMODULE library = LoadLibrary(libraryFile);
@@ -54,7 +54,7 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 	if ( !library )
 	{
 		char error[4096];
-		sprintf(error, "Could not load DLL: %s", libraryFile);
+		sprintf_s(error, 4096, "Could not load DLL: %s", libraryFile);
 		MessageBoxA(NULL, error, "Voodoo Gem Hook Error 3", MB_ICONERROR);
 		return NULL;
 	}
