@@ -33,7 +33,7 @@ namespace VoodooShader
 				//exit(1);
 			}
 
-			core->GetLog()->Log("Voodoo Gem: Assembly ID: "VOODOO_META_VERSION_STRING_FULL(GEM)"\n");
+			core->GetLog()->Log("Voodoo Gem: Assembly ID: "VOODOO_META_STRING_VERSION_FULL(GEM)"\n");
 
 			HRESULT hr = cgD3D9SetDevice(device);
 			if ( !SUCCEEDED(hr) )
@@ -63,7 +63,7 @@ namespace VoodooShader
 			CGprofile bestFrag = cgD3D9GetLatestPixelProfile();
 			CGprofile bestVert = cgD3D9GetLatestVertexProfile();
 
-			core->GetLog()->Format("Voodoo Gem: Detected the following profiles:\n\tVertex: %s\n\tFragment: %s\n")
+			core->GetLog()->Format("Voodoo Gem: The following profiles have been detected as the latest available:\n\tVertex: %s\n\tFragment: %s\n")
 				.With(cgGetProfileString(bestVert)).With(cgGetProfileString(bestFrag)).Done();
 
 			//cgD3D9Se

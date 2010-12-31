@@ -37,7 +37,7 @@ namespace VoodooShader
 		this->mLogger->Log(VOODOO_CORE_COPYRIGHT, false);
 		this->mLogger->Log(
 			"Voodoo Core: Assembly ID: "
-			VOODOO_META_VERSION_STRING_FULL(CORE)
+			VOODOO_META_STRING_VERSION_FULL(CORE)
 			"\n");
 
 		this->mLogger->Log("Voodoo Core: Preparing core components...\n");

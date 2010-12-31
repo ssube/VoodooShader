@@ -70,13 +70,13 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "FileDescription", VOODOO_META_PRETTYNAME(GEM) " (redirect module)"
-            VALUE "FileVersion", VOODOO_META_VERSION_STRING_BASIC(GEM)
-            VALUE "InternalName", VOODOO_META_NAME(GEM)
+            VALUE "FileDescription", VOODOO_META_STRING_NAME_FULL(GEM) " (redirect module)"
+            VALUE "FileVersion", VOODOO_META_STRING_VERSION_BASIC(GEM)
+            VALUE "InternalName", VOODOO_META_STRING_NAME_BASIC(GEM)
             VALUE "LegalCopyright", VOODOO_GLOBAL_COPYRIGHT_BRIEF
 			VALUE "OriginalFilename", "d3d8.dll"
-            VALUE "ProductName", VOODOO_META_PRETTYNAME(CORE)
-            VALUE "ProductVersion", VOODOO_META_VERSION_STRING_BASIC(CORE)
+            VALUE "ProductName", VOODOO_META_STRING_NAME_FULL(CORE)
+            VALUE "ProductVersion", VOODOO_META_STRING_VERSION_BASIC(CORE)
         END
     END
     BLOCK "VarFileInfo"

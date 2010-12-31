@@ -377,11 +377,13 @@ public:
 	)
 	{
 		HRESULT shr = mRealDevice->StretchRect(backbufferSurf, NULL, surface_ThisFrame, NULL, D3DTEXF_NONE);
+
 		if ( FAILED(shr) )
 		{
 			VoodooCore->GetLog()->Log("Voodoo Gem: Failed to stretch backbuffer to scratch texture.\n");
 		}
 
+		/*
 		shr = mRealDevice->SetRenderTarget(0, backbufferSurf);
 		if ( FAILED(shr) )
 		{
@@ -396,6 +398,9 @@ public:
 		VoodooGem->DrawQuad(NULL);
 
 		VoodooGem->UnbindPass();
+		*/
+
+		VoodooGem->DrawShader(testShader);
 
 		// Present call
 
