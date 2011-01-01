@@ -16,9 +16,11 @@ namespace VoodooShader
 		Adapter::Adapter(Core * core, IDirect3DDevice9 * device)
 			: mCore(core), mDevice(device)
 		{
+			assert(device);
+
 			if ( !core )
 			{
-				core = VoodooShader::Core::Create();
+				core = VoodooShader::Core::Create("Voodoo_Gem.log");
 			}
 
 			core->GetLog()->Log("Voodoo Gem: Starting adapter...\n");
@@ -66,8 +68,6 @@ namespace VoodooShader
 			core->GetLog()->Format("Voodoo Gem: The following profiles have been detected as the latest available:\n\tVertex: %s\n\tFragment: %s\n")
 				.With(cgGetProfileString(bestVert)).With(cgGetProfileString(bestFrag)).Done();
 
-			//cgD3D9Se
-
 			// Get params
 			D3DVIEWPORT9 viewport;
 			device->GetViewport(&viewport);
@@ -111,6 +111,8 @@ namespace VoodooShader
 
 		bool Adapter::LoadPass(Pass * pass)
 		{
+			assert(pass);
+
 			CGprogram vertProg = pass->VertexProgram();
 			CGprogram fragProg = pass->FragmentProgram();
 

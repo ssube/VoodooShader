@@ -10,6 +10,8 @@ namespace VoodooShader
 	Parameter::Parameter(Core * core, String name, ParameterType type)
 		: mType(type), mParent()
 	{ 
+		assert(core);
+
 		ParameterRef param = core->GetParameter(name, type);
 
 		if ( !param.get() )

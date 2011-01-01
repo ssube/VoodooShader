@@ -10,6 +10,8 @@ namespace VoodooShader
 	Shader::Shader(Core * parent, std::string filename, const char ** args)
 		: mCore(parent), mName(filename), mDefaultTechnique()
 	{
+		assert(parent);
+
 		this->mEffect = cgCreateEffectFromFile(
 			parent->GetCGContext(), filename.c_str(), args);
 

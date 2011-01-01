@@ -51,7 +51,7 @@
 
 
 // Global defs ----------------------------------------------------------------
-#define VOODOO_GLOBAL_VERSION_GITREV	62
+#define VOODOO_GLOBAL_VERSION_GITREV	67
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF	"Copyright (c) 2010 by Sean Sube"
 //-----------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@
 #define VOODOO_CORE_PRETTYNAME		"Voodoo Shader Framework Core"
 #define VOODOO_CORE_VERSION_MAJOR	0
 #define VOODOO_CORE_VERSION_MINOR	1
-#define VOODOO_CORE_VERSION_PATCH	6
+#define VOODOO_CORE_VERSION_PATCH	7
 #define VOODOO_CORE_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
 //-----------------------------------------------------------------------------
 
@@ -91,6 +91,6 @@
 #define VOODOO_GEM_PRETTYNAME		"Voodoo/Gem"
 #define VOODOO_GEM_VERSION_MAJOR	0
 #define VOODOO_GEM_VERSION_MINOR	1
-#define VOODOO_GEM_VERSION_PATCH	3
+#define VOODOO_GEM_VERSION_PATCH	4
 #define VOODOO_GEM_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
 //-----------------------------------------------------------------------------

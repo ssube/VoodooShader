@@ -62,10 +62,21 @@ namespace VoodooShader
 	{
 		this->mLogger->Log("Voodoo Core: Stopping...\n");
 
+		if ( this->mManagerFS )
+		{
+			delete this->mManagerFS;
+		}
+
+		if ( this->mManagerMat )
+		{
+			delete this->mManagerMat;
+		}
+
 		if ( cgIsContext(this->mCGContext) )
 		{
 			cgDestroyContext(this->mCGContext);
 		}
+
 		if ( this->mLogger )
 		{
 			delete this->mLogger;
