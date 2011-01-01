@@ -43,6 +43,7 @@ namespace VoodooShader
 			}
 
 			HRESULT hr = cgD3D9SetDevice(device);
+
 			if ( !SUCCEEDED(hr) )
 			{
 				Throw("Voodoo DX9: Could not set Cg device.", core);
