@@ -210,8 +210,19 @@ namespace VoodooShader
 		{
 			// Set up textures and set scratch surface as render target
 			IDirect3DSurface9 * rt = NULL;
-			mDevice->GetRenderTarget(0, &rt);
-			mDevice->SetRenderTarget(0, scratchSurface);
+
+			HRESULT hr = mDevice->GetRenderTarget(0, &rt);
+			if ( FAILED(hr) )
+			{
+				mCore->GetLog()->Format("Voodoo Gem: Failed to retrieve render target for shader %s.\n").With(shader->Name()).Done();
+			}
+			
+			hr = mDevice->SetRenderTarget(0, scratchSurface);
+			if ( FAILED(hr) )
+			{
+				mCore->GetLog()->Format("Voodoo Gem: Failed to bind render target for shader %s.\n").With(shader->Name()).Done();
+				return;
+			}
 
 			// Get technique
 			TechniqueRef tech = shader->GetDefaultTechnique();
@@ -223,30 +234,43 @@ namespace VoodooShader
 				PassRef pass = tech->GetPass(curPass);
 
 				this->BindPass(pass);
+				
 				this->DrawQuad(NULL);
+
 				this->UnbindPass();
 
+				/*
 				TextureRef passTarget = pass->GetTarget();
-				IDirect3DTexture9 * passTargetD3D = (IDirect3DTexture9 *)passTarget->Get();
+				IDirect3DTexture9 * passTargetD3D = (IDirect3DTexture9 *)passTarget->GetTexture();
 				IDirect3DSurface9 * passSurface = NULL;
 
 				HRESULT hr = passTargetD3D->GetSurfaceLevel(0, &passSurface);
 				if ( FAILED(hr) || !passSurface )
-				{
+				{	
 					mCore->GetLog()->Format("Voodoo Gem: Failed to get target surface for pass %s (targeting texture %s).\n")
 						.With(pass->Name()).With(passTarget->Name()).Done();
-				} else {
-					hr = mDevice->StretchRect(backbufferSurf, NULL, passSurface, NULL, D3DTEXF_NONE);
+
+					hr = mDevice->StretchRect(scratchSurface, NULL, passSurface, NULL, D3DTEXF_NONE);
 					if ( FAILED(hr) )
 					{
 						mCore->GetLog()->Format("Voodoo Gem: Failed to copy results to target for pass %s.\n")
 							.With(pass->Name()).Done();
 					}
+				} 
+				*/
+				
+				hr = mDevice->StretchRect(scratchSurface, NULL, backbufferSurf, NULL, D3DTEXF_NONE);
+
+				if ( FAILED(hr) )
+				{
+					mCore->GetLog()->Format("Voodoo Gem: Failed to copy results to target for pass %s (result %d).\n")
+						.With(pass->Name()).With(hr).Done();
 				}
 			}
 
+			/*
 			TextureRef techTarget = tech->GetTarget();
-			IDirect3DTexture9 * techTargetD3D = (IDirect3DTexture9 *)techTarget->Get();
+			IDirect3DTexture9 * techTargetD3D = (IDirect3DTexture9 *)techTarget->GetTexture();
 			IDirect3DSurface9 * techSurface = NULL;
 
 			HRESULT hr = techTargetD3D->GetSurfaceLevel(0, &techSurface);
@@ -255,13 +279,14 @@ namespace VoodooShader
 				mCore->GetLog()->Format("Voodoo Gem: Failed to get target surface for technique %s (targeting texture %s).\n")
 					.With(tech->Name()).With(techTarget->Name()).Done();
 			} else {
-				hr = mDevice->StretchRect(backbufferSurf, NULL, techSurface, NULL, D3DTEXF_NONE);
+				hr = mDevice->StretchRect(scratchSurface, NULL, techSurface, NULL, D3DTEXF_NONE);
 				if ( FAILED(hr) )
 				{
 					mCore->GetLog()->Format("Voodoo Gem: Failed to copy results to target for technique %s.\n")
 						.With(tech->Name()).Done();
 				}
 			}
+			*/
 
 			mDevice->SetRenderTarget(0, rt);
 		}
@@ -317,13 +342,13 @@ namespace VoodooShader
 
 		void Adapter::ApplyParameter(ParameterRef param)
 		{
-			switch ( Converter::ToParameterCategory(param->Type()) )
+			switch ( Converter::ToParameterCategory(param->GetType()) )
 			{
 			case PC_Float:
-				cgD3D9SetUniform(param->Param(), param->GetFloat());
+				cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
 				break;
 			case PC_Sampler:
-				cgD3D9SetTextureParameter(param->Param(), (IDirect3DTexture9 *)param->GetTexture()->Get());
+				cgD3D9SetTextureParameter(param->GetParameter(), (IDirect3DTexture9 *)param->GetTexture()->GetTexture());
 				break;
 			case PC_Unknown:
 			default:
@@ -334,12 +359,12 @@ namespace VoodooShader
 
 		bool Adapter::ConnectTexture(ParameterRef param, TextureRef texture)
 		{
-			if ( Converter::ToParameterCategory(param->Type()) == PC_Sampler )
+			if ( Converter::ToParameterCategory(param->GetType()) == PC_Sampler )
 			{
 				param->Set(texture);
 
-				IDirect3DTexture9 * texObj = (IDirect3DTexture9 *)texture->Get();
-				CGparameter texParam = param->Param();
+				IDirect3DTexture9 * texObj = (IDirect3DTexture9 *)texture->GetTexture();
+				CGparameter texParam = param->GetParameter();
 				cgD3D9SetTextureParameter(texParam, texObj);
 				mCore->GetLog()->Format("Voodoo Gem: Bound texture %s to parameter %s.\n")
 					.With(texture->Name()).With(param->Name()).Done();

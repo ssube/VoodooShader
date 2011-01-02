@@ -1,6 +1,3 @@
-
-
-
 #include "MaterialManager.hpp"
 #include "Adapter.hpp"
 #include "Core.hpp"

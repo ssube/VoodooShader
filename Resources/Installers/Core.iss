@@ -26,9 +26,9 @@ ShowLanguageDialog=no
 LicenseFile=LICENSE
 
 VersionInfoProductName=Voodoo Shader Framework
-VersionInfoProductVersion=0.1.5.58
-VersionInfoTextVersion=0.1.0.58
-VersionInfoVersion=0.1.0.58
+VersionInfoProductVersion=0.1.7.68
+VersionInfoTextVersion=0.1.1.68
+VersionInfoVersion=0.1.1.68
 
 [Languages]
 Name: english; MessagesFile: compiler:Default.isl
@@ -71,9 +71,9 @@ Root: HKLM; SubKey: SOFTWARE\VoodooShader; ValueType: string; ValueName: Path; V
 [Components]
 Name: core; Description: Voodoo Core; Flags: fixed; Types: Full Debug Custom; 
 Name: registry; Description: Registry Integration; Types: Full Debug Custom; Flags: fixed; 
-Name: registry/user; Description: For this user only; Flags: exclusive; Types: Full Debug; 
-Name: registry/machine; Description: For all users; Flags: exclusive; Types: Full Debug; Check: IsAdminLoggedOn;
-Name: startmenu; Description: Start Menu Shortcuts; Types: Full Debug; 
+Name: registry/user; Description: For this user only; Flags: exclusive; Types: Full Debug Custom; 
+Name: registry/machine; Description: For all users; Flags: exclusive; Types: Full Debug Custom; Check: IsAdminLoggedOn;
+Name: startmenu; Description: Start Menu Shortcuts; Types: Full Debug Custom; 
 Name: debug; Description: Debug Data; MinVersion: ,5.1; Types: Debug; 
 
 [Dirs]

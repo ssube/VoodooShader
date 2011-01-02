@@ -1,19 +1,52 @@
-// Trivial as it is, this shader (this file and nothing else) is in the public domain. Have fun. 
-//	- peachykeen
+sampler2D mainTex < string texture = ":thisframe"; >;
 
-sampler2D mainTex < string texture = "backbuffer"; >;
+float2 offset < string parameter = ":rcpres"; > = 
+{ 
+	0.1f, 
+	0.1f
+};
 
+const float3 zero = { 0.00f, 0.00f, 0.00f };
+const float3 lum  = { 0.32f, 0.58f, 0.10f };
+
+/*
+	// Test function, does some stupid texture-effected gradients
 void fp_main(in float2 uv : TEXCOORD0, out float4 color : COLOR0)
 {
 	float3 texcolor = tex2D(mainTex, uv);
-	texcolor = 1 - texcolor;
-    color = float4(texcolor.x, texcolor.y, texcolor.z, 1.00f);
+	
+	if ( ( uv.x < 0.5 ) && ( uv.y < 0.5 ) )
+	{
+		texcolor.gb = max( abs(texcolor.y - uv.y), abs(texcolor.x - uv.x) );
+	} else if ( ( uv.x > 0.5 ) && ( uv.y > 0.5 ) ) { 
+		texcolor.rg -= log(uv.rg) * pow(1.5f, texcolor.rg);
+		texcolor.rg = abs(texcolor.rg);
+	}
+	
+    color = float4(texcolor, 1.00f);
+}
+*/
+
+float findLum(float3 val)
+{
+	float3 mod = val * lum;
+	return ( mod.r + mod.g + mod.b );
+}
+
+void partialInvert(in float2 uv : TEXCOORD0, out float4 color : COLOR0)
+{	
+	float3 rcenter = tex2D(mainTex, uv).rgb;
+	float  center  = findLum(rcenter);
+	float3 icenter = 1 - rcenter;
+	
+	color.rgb = lerp(icenter, rcenter, center);
+	color.a = 1.0f;
 }
 
 technique main 
 {
 	pass p0
 	{
-		FragmentProgram = compile latest fp_main();
+		FragmentProgram = compile latest partialInvert();
 	}
 }

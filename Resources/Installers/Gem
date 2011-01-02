@@ -1,0 +1,24 @@
+[Files]
+Source: M:\VoodooShader\bin\Gem_Redirect.dll; DestDir: {app}; DestName: d3d8.dll; Components: adapter/release; 
+Source: M:\VoodooShader\bin\Gem_Redirect_d.dll; DestDir: {app}; DestName: d3d8.dll; Components: adapter/debug; 
+Source: M:\VoodooShader\Resources\Shaders\test.cgfx; DestDir: {app}; Components: adapter; 
+Source: M:\VoodooShader\Resources\Readmes\README_GEM; DestDir: {app}; Components: adapter; Flags: isreadme; 
+
+[Types]
+Name: Full; Description: Install all Gem components.;
+Name: Debug; Description: Install debug components;
+Name: Custom; Description: Select components to install; Flags: IsCustom;
+
+[Components]
+Name: adapter; Description: Voodoo/Gem Adapter; Flags: fixed; Types: Full Debug Custom;
+Name: adapter/release; Description: Voodoo/Gem Adapter Files; Types: Full Custom; Flags: exclusive; 
+Name: adapter/debug; Description: Debug Files; Flags: exclusive; Types: Debug;
+
+[Registry]
+Components: adapter; Root: HKCU; SubKey: SOFTWARE\VoodooShader; ValueType: string; ValueName: Gem; ValueData: "0.1.4.68"; 
+Components: adapter; Root: HKLM; SubKey: SOFTWARE\VoodooShader; ValueType: string; ValueName: Gem; ValueData: "0.1.4.68"; 
+
+[Run]
+Components: adapter; Filename: notepad.exe; Parameters: {app}\README_GEM; WorkingDir: {app}; Description: Open the Gem Readme; Flags: PostInstall NoWait ShellExec;
+
+[Code]

@@ -203,7 +203,10 @@ namespace VoodooShader
 	void Technique::Link()
 	{
 		this->mTarget = TextureRef();
+
+		// Process the technique's target annotation
 		CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(this->mTechnique, "target");
+
 		if ( cgIsAnnotation(targetAnnotation) )
 		{
 			if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )
@@ -326,6 +329,8 @@ namespace VoodooShader
 
 		// Load the programs
 		Adapter * adapter = mCore->GetAdapter();
+
+		assert(adapter);
 
 		if ( !adapter->LoadPass(this) )
 		{

@@ -31,7 +31,13 @@ namespace VoodooShader
 	public:
 		Texture(std::string name = "", void * texture = NULL);
 
-		inline void * Get()
+		template<typename T>
+		inline T * GetTexture()
+		{
+			return reinterpret_cast<T*>(mTextureObject);
+		};
+
+		inline void * GetTexture()
 		{
 			return mTextureObject;
 		};

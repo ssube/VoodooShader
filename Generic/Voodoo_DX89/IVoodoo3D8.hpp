@@ -261,7 +261,7 @@ public:
 				true, VoodooShader::TF_RGB8);
 			if ( texture_ThisFrame.get() )
 			{
-				IDirect3DTexture9 * texture = (IDirect3DTexture9*)texture_ThisFrame->Get();
+				IDirect3DTexture9 * texture = (IDirect3DTexture9*)texture_ThisFrame->GetTexture();
 				hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
 				if ( SUCCEEDED(hrt) )
 				{

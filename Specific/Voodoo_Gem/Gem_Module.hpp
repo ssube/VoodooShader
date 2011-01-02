@@ -24,6 +24,7 @@
 #define VOODOO_IMPORT
 #include "VoodooFramework.hpp"
 
+#define D3D_DEBUG_INFO
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <d3dx9tex.h>

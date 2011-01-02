@@ -90,17 +90,17 @@ namespace VoodooShader
 		return name;
 	}
 
-	CGparameter Parameter::Param(void)
+	CGparameter Parameter::GetParameter(void)
 	{
 		return this->mParam;
 	}
 
 	void Parameter::Attach(ParameterRef param)
 	{
-		cgConnectParameter(this->mParam, param->Param());
+		cgConnectParameter(param->GetParameter(), this->mParam);
 	}
 
-	ParameterType Parameter::Type(void)
+	ParameterType Parameter::GetType(void)
 	{
 		return this->mType;
 	}

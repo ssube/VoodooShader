@@ -1,0 +1,64 @@
+
+	Voodoo/Gem Readme
+	v0.1.2.58
+
+ 1. Gem Info
+ 2. Installing Gem
+ 3. Disabling Gem
+ 4. Uninstalling Gem
+ 5. Contact/Usage
+
+
+
+ 1. Gem Info
+
+Voodoo/Gem is the adapter for The Elder Scrolls III: Morrowind (a RPG by
+Bethesda Softworks). Gem enables some test shader functions within Morrowind.
+
+GEM SHOULD NOT BE CONSIDERED STABLE AT THIS POINT. THIS IS PURELY FOR BASIC
+TESTING PURPOSES.
+
+ 2. Installing Gem
+
+The Gem package comes with 4 files: the hook module (d3d8.dll), the Gem adapter
+(Voodoo_Gem.dll), a test shader (test.cgfx) and this readme (README).
+
+The hook and test shader should be placed in the same location as Morrowind.exe
+(your Morrowind directory). The readme may be placed here as well, but you
+might want to rename it.
+
+The adapter should be placed in the Voodoo binary directory (if the Voodoo
+core was installed to C:\VoodooShader, the binary directory is 
+C:\VoodooShader\bin).
+
+If you receive an error related to the Gem hook, or a DLL not found error, the
+hook is properly installed but cannot find the adapter module.
+
+ 3. Disabling Gem
+
+To temporarily disable Voodoo/Gem and remove all Voodoo features from
+Morrowind, you should remove or rename the hook file (d3d8.dll) in the
+Morrowind directory. Renaming this file to anything other than d3d8.dll will
+disable Voodoo/Gem entirely.
+
+ 4. Uninstalling Gem
+
+To permanently remove Voodoo/Gem, you should delete the 4 files that were
+installed. The hook (d3d8.dll) and test shader (test.cgfx) should both be in
+your Morrowind directory, the adapter (Voodoo_Gem.dll) should be in your
+Voodoo binary directory, and the readme may be in your Morrowind directory.
+
+ 5. Contact/Usage
+
+To contact the developer, you can use any of the following methods:
+
+	The Great House Fliggerty forums, Bethesda Game Studios forum, 
+	TES Alliance forum or BioWare social boards.
+
+	Chatspike, Freenode or NWN2Source IRC networks, nick peachykeen
+
+	Email to: peachykeen@voodooshader.com
+
+Voodoo/Gem, along with the rest of the Voodoo Shader Framework, is licensed
+under the GNU General Public License. Please see the license file included in
+the core for more details.

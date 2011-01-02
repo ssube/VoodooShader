@@ -11,6 +11,8 @@ namespace VoodooShader
 		Adapter::Adapter(Core * core, IDirect3DDevice9 * device)
 			: mCore(core), mDevice(device)
 		{
+			assert(device);
+
 			if ( !core )
 			{
 				core = VoodooShader::Core::Create();
@@ -104,6 +106,8 @@ namespace VoodooShader
 
 		bool Adapter::LoadPass(Pass * pass)
 		{
+			assert(pass);
+
 			CGprogram vertProg = pass->VertexProgram();
 			CGprogram fragProg = pass->FragmentProgram();
 
@@ -252,13 +256,13 @@ namespace VoodooShader
 
 		void Adapter::ApplyParameter(ParameterRef param)
 		{
-			switch ( Converter::ToParameterCategory(param->Type()) )
+			switch ( Converter::ToParameterCategory(param->GetType()) )
 			{
 			case PC_Float:
-				cgD3D9SetUniform(param->Param(), param->GetFloat());
+				cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
 				break;
 			case PC_Sampler:
-				cgD3D9SetTextureParameter(param->Param(), (IDirect3DTexture9 *)param->GetTexture()->Get());
+				cgD3D9SetTextureParameter(param->GetParameter(), (IDirect3DTexture9 *)param->GetTexture()->GetTexture());
 				break;
 			case PC_Unknown:
 			default:
@@ -269,12 +273,12 @@ namespace VoodooShader
 
 		bool Adapter::ConnectTexture(ParameterRef param, TextureRef texture)
 		{
-			if ( Converter::ToParameterCategory(param->Type()) == PC_Sampler )
+			if ( Converter::ToParameterCategory(param->GetType()) == PC_Sampler )
 			{
 				param->Set(texture);
 
-				IDirect3DTexture9 * texObj = (IDirect3DTexture9 *)texture->Get();
-				CGparameter texParam = param->Param();
+				IDirect3DTexture9 * texObj = (IDirect3DTexture9 *)texture->GetTexture();
+				CGparameter texParam = param->GetParameter();
 				cgD3D9SetTextureParameter(texParam, texObj);
 				mCore->GetLog()->Format("Voodoo DX89: Bound texture %s to parameter %s.\n")
 					.With(texture->Name()).With(param->Name()).Done();

@@ -261,7 +261,7 @@ public:
 				true, VoodooShader::TF_RGB8);
 			if ( texture_ThisFrame.get() )
 			{
-				IDirect3DTexture9 * texture = (IDirect3DTexture9*)texture_ThisFrame->Get();
+				IDirect3DTexture9 * texture = texture_ThisFrame->GetTexture<IDirect3DTexture9>();
 				hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
 				if ( SUCCEEDED(hrt) )
 				{
@@ -269,6 +269,22 @@ public:
 				} else {
 					VoodooCore->GetLog()->Log("Voodoo Gem: Failed to :thisframe scratch surface.\n");
 				}
+			}
+
+			hrt = mRealDevice->CreateTexture(pPresentationParameters->BackBufferWidth,
+				pPresentationParameters->BackBufferHeight, 0, D3DUSAGE_RENDERTARGET, D3DFMT_X8R8G8B8,
+				D3DPOOL_DEFAULT, &scratchTexture, NULL);
+			if ( SUCCEEDED(hrt) )
+			{
+				hrt = scratchTexture->GetSurfaceLevel(0, &scratchSurface);
+				if ( SUCCEEDED(hrt) )
+				{
+					VoodooCore->GetLog()->Log("Voodoo Gem: Cached scratch surface.\n");
+				} else {
+					VoodooCore->GetLog()->Log("Voodoo Gem: Failed to cache scratch surface.\n");
+				}
+			} else {
+				VoodooCore->GetLog()->Log("Voodoo Gem: Failed to create scratch texture.\n");
 			}
 
 			try

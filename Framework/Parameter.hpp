@@ -36,23 +36,23 @@ namespace VoodooShader
 		Parameter(Core * core, String name, ParameterType type);
 		Parameter(Shader * parent, CGparameter param);
 
+		String Name();
+
+		CGparameter GetParameter(void);
+		ParameterType GetType(void);
+
 		/**
-		 * Binds two parameters, forcing their values to be identical. This should
-		 * be used with care, as it has some requirements and restrictions. It is
-		 * used to control some of the more common variables found in shaders.
+		 * Binds two parameters, forcing their values to be identical. This 
+		 * should be used with care, as it has some requirements and 
+		 * restrictions. It is used to control some of the more common variables
+		 * found in shaders.
 		 *
-		 * @warning This <em>cannot</em> be used to bind one effect's parameter to
-		 *		another. It can only be used to bind effect parameters to virtual
-		 *		or global parameters. If this is called on a non-virtual parameter,
-		 *		it will throw.
+		 * @warning This <em>cannot</em> be used to bind one effect's parameter 
+		 *		to another. It can only be used to bind effect parameters to
+		 *		virtual or global parameters. If this is called on a non-virtual
+		 *		parameter, it will throw.
 		 */
 		void Attach(ParameterRef param);
-
-		CGparameter Param(void);
-
-		std::string Name();
-
-		ParameterType Type(void);
 
 		void Set(TextureRef newTex);
 		void Set(float newX);
