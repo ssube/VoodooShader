@@ -11,14 +11,13 @@
 	<li><a href="#prereq">Prerequisites</a></li>
     <li><a href="#install_core">Installing the Core</a></li>
     <li><a href="#install_adapter">Installing Adapters</a></li>
-	<li type="circle"><a href="#adapter_gem">Voodoo/Gem</a></li>
 	<li><a href="#running">Running Voodoo</a></li>
 	<li><a href="#uninstall">Uninstallation</a></li>
 	<li><a href="#support">Help and Support</a></li>
 	<li><a href="#notes">End Notes</a></li>
 </ul></div>
 <div class="content">
-	<h2><img src="voodoo.png" style="display:block" alt="Voodoo Shader Framework" />Readme (v0.1.0.58)</h2>
+	<h2><img src="voodoo.png" style="display:block" alt="Voodoo Shader Framework" />Readme (v0.1.8.70)</h2>
 	<h3><a name="introduction">Introduction</a></h3>
 	<p>The Voodoo Shader Framework is a comprehensive support system for shader effects. It is designed to be used with a number of graphics API and programs, as well as game modding.</p>
 	<p>Voodoo is made up of two main parts. The core contains the shader loading and initialization algorithms, as well as some universal management features. Each game or program using Voodoo then provides an adapter, which handles the details of attaching the Voodoo core with a particular program's graphics system.</p>
@@ -27,9 +26,8 @@
 		<ul>
 			<li>Microsoft Visual C++ Runtimes (x86)</li>
 			<li>Latest drivers for your video card</li>
-			<li><em>(required only for DirectX 8.9 and 9.0 adapters)</em> DirectX 9.0c Runtimes (June 2010 or later)</li>
 		</ul>
-		Voodoo will, in the future, require the Microsoft .Net framework for GUI and updater support.
+		Voodoo will, in the future, require the Microsoft .Net framework for GUI and updater support. Some Voodoo adapters may require OpenGL drivers or the DirectX 9.0c, 10 or 11 runtimes to be installed. These are indicated in the adapter documentation.
 	</p>		
 	<h3><a name="install_core">Installing the Core</a></h3>
 	<p>The Voodoo Core comes with a small installation wizard. The wizard installs all the necessary files and creates the registry key with the Voodoo path. The wizard should easily handle all installation steps for the core.</p>
@@ -40,11 +38,6 @@
 	<p>Once the Voodoo Core has been installed, additional adapters may be installed for any supported program you would like to use Voodoo with. Adapters may use install wizards or require manual installation. Some adapters may require a minimum version of the Voodoo core to function.</p>
 	<p>For adapters with installers, you should run the installer and follow the instructions. These will usually automatically detect the Voodoo core path and any other locations, then install the necessary files. Some adapters may require additional support files (the DirectX adapters require the latest DirectX runtimes).</p>
 	<p>For adapters without installers, you should extract the archive to a temporary folder and find the readme. This should contain instructions on how to install the adapter files. You may need to know the locations of the Voodoo core and other programs on your system, and should have permission to add files to those locations. Most Voodoo adapter DLLs go in a <tt>bin</tt> folder inside the main Voodoo folder.</p>
-	<h4><a name="adapter_gem">Voodoo/Gem</a></h4>
-	<p>Voodoo/Gem is a DirectX 8.9 layer, meaning it causes the original DirectX 8 program to use the updated features of DirectX 9. Because Voodoo/Gem uses DX9, it requires the latest DirectX 9.0c Runtimes, available from Microsoft's website (at the time of writing, these are from June 2010).</p>
-	<p>The Voodoo/Gem adapter, for The Elder Scrolls III: Morrowind, does not include an automatic installer. You must find your Morrowind and Voodoo directories and be able to add files to them.</p>
-	<p>For the first prototype version, you should add the files <tt>d3d8.dll</tt> and <tt>test.cgfx</tt> to your Morrowind directory, and <tt>Voodoo_Gem.dll</tt> to your Voodoo binary directory.</p>
-	<p>The file <tt>d3d8.dll</tt> is a light weight registry-based hook which will cause <tt>Voodoo_Gem.dll</tt> to handle all graphics for Morrowind. If the Voodoo core is not installed, the registry key is not present (or incorrect), or the Gem module not installed in the Voodoo binary directory, the hook and Morrowind will fail to start.</p>
 	<h3><a name="running">Running Voodoo</a></h3>
 	<p>Once you have the Voodoo core and any chosen adapters installed, whenever you run supported program, Voodoo should be automatically used.</p>
 	<p>Shortcuts and other launcher applications should (depending on how they handle things) launch the program with Voodoo enabled. If you find a launcher which does not, or run into a problem, please report it immediately.</p>
@@ -69,6 +62,7 @@
 	<h3><a name="notes">End Notes</a></h3>
 	<p>All trademarks used in this readme are for documentation purposes. The trademark and any copywritten content remain the property of their owner.</p>
 	<p>The Voodoo Shader Framework, all corresponding documentation, code, object or binary files, the wyvern logo and all other original content is the property of Sean Sube, copyright &copy; 2010. Various portions of the project are distributed under different licenses, see the individual documentation for details. The license terms must be followed when using or distributing any component of the Voodoo Shader project.</p>
+	<p>http://www.voodooshader.com</p>
 </div>
 </body>
 </html>

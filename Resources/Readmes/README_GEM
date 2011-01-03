@@ -1,6 +1,6 @@
 
 	Voodoo/Gem Readme
-	v0.1.2.58
+	v0.1.5.70
 
  1. Gem Info
  2. Installing Gem
@@ -19,6 +19,10 @@ GEM SHOULD NOT BE CONSIDERED STABLE AT THIS POINT. THIS IS PURELY FOR BASIC
 TESTING PURPOSES.
 
  2. Installing Gem
+
+** Installer:
+	If you downloaded the installer package of Gem, you should just run
+	the installer and you can skip this section.
 
 The Gem package comes with 4 files: the hook module (d3d8.dll), the Gem adapter
 (Voodoo_Gem.dll), a test shader (test.cgfx) and this readme (README).
@@ -42,6 +46,11 @@ Morrowind directory. Renaming this file to anything other than d3d8.dll will
 disable Voodoo/Gem entirely.
 
  4. Uninstalling Gem
+
+** Installer:
+	If you downloaded the installer package for Gem, you should run the 
+	included uninstaller and you can skip this section.
+
 
 To permanently remove Voodoo/Gem, you should delete the 4 files that were
 installed. The hook (d3d8.dll) and test shader (test.cgfx) should both be in
