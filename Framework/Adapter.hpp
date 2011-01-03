@@ -34,8 +34,11 @@ namespace VoodooShader
 	 *		user-provided vertexes will not use vertex buffers of any sort. 
 	 *		This can hurt performance if used heavily, so the Core avoids
 	 *		drawing through adapters as much as possible.
-	 * @note For simplicity, this uses the D3DFVF_XYZRHW format, which requires
-	 *		a winding value. OpenGL draws can often ignore this. The members are
+	 *
+	 * @note This vertex format provides a float3 position and float2 texture
+	 *		coordinate. For compatibility with Direct3D, a RHW value is also
+	 *		included (the vertex format is D3DFVF_XYZRHW|D3DFVF_TEX1). OpenGL
+	 *		adapters may ignore this winding value. The members of the vert are
 	 *		ordered so that <code>&x</code> is a valid float3 with the position
 	 *		and <code>&tu</code> is a valid float2 with the texture coordinate.
 	 */
@@ -109,7 +112,7 @@ namespace VoodooShader
 		 * @note In APIs which do not not support quads, this should be 
 		 *		implemented as two tris or another geometry form capable of 
 		 *		taking the same vertexes in the same order as an OpenGL quad.
-		 * @note The quad must meet a set of requirements:
+		 * @note The quad draw operation must meet the following requirements:
 		 *		 <ol>
 		 *			<li>The depth buffer should not be written to.</li>
 		 *			<li>The quad must be drawn in front of all other geometry
@@ -120,16 +123,6 @@ namespace VoodooShader
 		 *			<li>Render states must be identical to their original status
 		 *				when the function returns.</li>
 		 *		 </ol>
-		 *
-		 * @note The vertex format is as follows:
-		 *		<code>
-		 *			struct vertex
-		 *			{
-		 *				float3 position;
-		 *				float winding;
-		 *				float2 texcoord0;
-		 *			};
-		 *		</code>
 		 */
 		virtual void DrawQuad(Vertex * vertexData) = 0;
 
@@ -142,7 +135,11 @@ namespace VoodooShader
 		 * deferred effect.<br />
 		 * In some Adapter setups and APIs, this may involve blitting textures
 		 * or handling various surfaces and RTT features. These should be
-		 * implemented here to provide a clean 
+		 * implemented here to provide a clean interface for basic shader
+		 * drawing.<br />
+		 * This function should assume that a fullscreen/postprocessing
+		 * effect is being drawn and use the default vertex setup (done by
+		 * calling <code>this->DrawQuad(NULL);</code>).
 		 */
 		virtual void DrawShader(ShaderRef shader) = 0;
 

@@ -123,13 +123,27 @@ namespace VoodooShader
 		 * Parameter::Link.
 		 *
 		 * @param name The name for this parameter.
-		 * @param type True for texture, false for float4
-		 * @todo Fix this to use a real parameter type parameter.
+		 * @param type The type of the parameter to create.
 		 * @return A new parameter.
 		 * @throws Exception if a parameter with the given name already exists.
+		 *
+		 * @note This function is the only way to create global parameters. You
+		 *		can then attach effect parameters and adjust only the global
+		 *		parameter (an easy way to manage system time or such things).
 		 */
 		ParameterRef CreateParameter(std::string name, ParameterType type);
-		ParameterRef Core::GetParameter(std::string name, ParameterType type);
+
+		/**
+		 * Retrieve a parameter by name.
+		 *
+		 * @param name The name to search for.
+		 * @param type The type to verify. If a parameter with a matching name
+		 *		is found, the type will be checked. If this is PT_Unknown, any
+		 *		type parameter will be returned (only the name will be tested).
+		 * @return A reference to the parameter, if one is found. A null shared
+		 *		pointer otherwise.
+		 */
+		ParameterRef GetParameter(std::string name, ParameterType type);
 
 	//protected:
 		static void CGErrorHandler(CGcontext context, CGerror error, void * core);

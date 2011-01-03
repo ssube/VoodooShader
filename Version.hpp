@@ -51,7 +51,7 @@
 
 
 // Global defs ----------------------------------------------------------------
-#define VOODOO_GLOBAL_VERSION_GITREV	68
+#define VOODOO_GLOBAL_VERSION_GITREV	69
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF	"Copyright (c) 2010 by Sean Sube"
 //-----------------------------------------------------------------------------
 

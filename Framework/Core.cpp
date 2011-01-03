@@ -30,9 +30,9 @@ namespace VoodooShader
 	{
 		this->mLogger = new Logger(logfile.c_str());
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
 		this->mLogger->SetBufferSize(0);
-#endif
+//#endif
 
 		this->mLogger->Log(VOODOO_CORE_COPYRIGHT, false);
 		this->mLogger->Log(
@@ -170,7 +170,7 @@ namespace VoodooShader
 		ParameterMap::iterator paramEntry = this->mParameters.find(name);
 		if ( paramEntry != this->mParameters.end() )
 		{
-			if ( paramEntry->second->GetType() == type )
+			if ( type == PT_Unknown || paramEntry->second->GetType() == type )
 			{
 				return paramEntry->second;
 			} else {

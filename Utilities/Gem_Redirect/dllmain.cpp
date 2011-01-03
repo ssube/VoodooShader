@@ -6,6 +6,19 @@
 
 void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 {	
+#ifdef _DEBUG
+	bool debug = true;
+#else
+	bool debug = false;
+#endif
+
+	HANDLE debugFile = CreateFileA("VOODOO_GEM_DEBUG", 0, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if ( debugFile != INVALID_HANDLE_VALUE )
+	{
+		debug = true;
+		MessageBoxA(NULL, "Debug indicator file found. The hook will load in debug mode.", "Voodoo Gem Hook", MB_ICONWARNING);
+	}
+
 	// Get the Voodoo location from the registry and load the core
 	HKEY VoodooPathKey;
 
@@ -24,15 +37,15 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 		}
 	}
 
-	DWORD valueSize = MAX_PATH;
-	char valuePath[MAX_PATH]; memset(valuePath, 0, MAX_PATH);
+	DWORD valueSize = 4096;
+	char valuePath[4096]; memset(valuePath, 0, MAX_PATH);
 
 	result = RegQueryValueEx(VoodooPathKey, "Path", NULL, NULL, (BYTE*)valuePath, &valueSize);
 
 	if ( result != ERROR_SUCCESS )
 	{
 		char error[4096];
-		FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, 0, result, 0, error, 4096, NULL);
+		sprintf_s(error, "The hook encountered error %d while retrieving the core path (%d characters found, path key %d).", result, valueSize, VoodooPathKey);
 		MessageBoxA(NULL, error, "Voodoo Gem Hook Error 2", MB_ICONERROR);
 		return NULL;
 	}
@@ -43,11 +56,13 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 
 	char libraryFile[MAX_PATH];
 	strcpy_s(libraryFile, MAX_PATH, valuePath);
-#ifdef _DEBUG
-	strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem_d.dll");
-#else
-	strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem.dll");
-#endif
+
+	if ( debug )
+	{
+		strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem_d.dll");
+	} else {
+		strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem.dll");
+	}
 
 	HMODULE library = LoadLibrary(libraryFile);
 

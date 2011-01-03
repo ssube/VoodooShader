@@ -89,10 +89,10 @@ namespace VoodooShader
  * <em>Note <sup>1</sup>:</em> Floating-point texture formats 
  * (RGBA16F and RGBA32F) may not be supported on all hardware.<br />
  * Any features requiring these formats should provide an alternate render path
- * for old hardware.
+ * for old hardware.<br />
  * <em>Note <sup>2</sup>:</em> Depth textures suffer additional restrictions 
- * when used with the DirectX API. See @ref depthbuffers "the depth buffers 
- * section" for more information.
+ * when used with the DirectX API.<br />
+ * See the @ref depthbuffers "depth buffers" section for more information.
  * </div>
  *
  * @section depthbuffers Depth Buffers
@@ -105,12 +105,16 @@ namespace VoodooShader
  * <div>
  *	When possible, it is recommended that the depth information be stored in a
  *	32-bit floating point component. Depth data must be accessible to shaders
- *	from the R channel of the depth texture.
+ *	from the R channel of the depth texture. At this time, the GBA components of
+ *  the texture are considered undefined, but reserved for future use. Depending
+ *  on implementation, they may contain depth data, uninitialized memory, or
+ *  other data. They should not be used.
  * </div>
  * <div>
  *	As DirectX 9 does not usually allow D32F textures to be read, this may 
- *	require rendering to a second target and using a RGBA32F texture. In this
- *	case, the GBA components of the texture are undefined and must not be used.
+ *	require rendering to a second target and using a RGBA32F texture. At this
+ *  point, the GBA components are not used, but future versions of Voodoo may
+ *  pack additional data into them.
  * </div>
  */
 

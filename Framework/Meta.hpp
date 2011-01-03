@@ -100,35 +100,37 @@ namespace VoodooShader
 	typedef std::map<String, CGeffect>			CGEffectMap;
 
 	/**
-	 * Texture formats for use by @ref Texture "Textures". These may not be 
-	 * implemented by the underlying graphics API exactly as they are indicated 
-	 * here, but the available components and sizes are guaranteed to be equal 
-	 * to the indicated values. Further information on texture formats and depth
-	 * may be found on the @ref texturesanddepth "texture formats page".
+	 * Texture formats for use by @ref VoodooShader::Texture "Textures". These 
+	 * may not be  implemented by the underlying graphics API exactly as they 
+	 * are indicated  here, but the available components and sizes are 
+	 * guaranteed to be equal to or greater than the indicated values. Further 
+	 * information on texture formats and depth may be found on the 
+	 * @ref texturesanddepth "texture formats page".
 	 */
 	enum TextureFormat
 	{
-		TF_Unknown = 0,		// Unknown texture format
+		TF_Unknown = 0,		/*!< Unknown texture format */
 		// Backbuffer formats
-		TF_RGB5,			// 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL)
-		TF_RGB5A1,			// 5 bit RGB, 1 bit alpha
-		TF_RGB8,			// 8 bit RGB (8 bit X in DX)
-		TF_RGBA8,			// 8 bit RGBA
-		TF_RGB10A2,			// 10 bit RGB, 2 bit A
+		TF_RGB5,			/*!< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
+		TF_RGB5A1,			/*!< 5 bit RGB, 1 bit alpha */
+		TF_RGB8,			/*!< 8 bit RGB (8 bit X in DX) */
+		TF_RGBA8,			/*!< 8 bit RGBA */
+		TF_RGB10A2,			/*!< 10 bit RGB, 2 bit A */
 		// Float texture formats
-		TF_RGBA16F,			// Half-precision RGBA
-		TF_RGBA32F,			// Full-precision RGBA (float/single) 
+		TF_RGBA16F,			/*!< Half-precision RGBA */
+		TF_RGBA32F,			/*!< Full-precision RGBA (float/single) */
 		// Depth-buffer formats
-		TF_D16,				// Half-precision depth (Z-buffer)
-		TF_D32,				// Full-precision depth (Z-buffer)
+		TF_D16,				/*!< Half-precision depth (Z-buffer) */
+		TF_D32,				/*!< Full-precision depth (Z-buffer) */
 		// Max
-		TF_Count
+		TF_Count			/*!< Enumerator values count. */
 	};
 
 	/**
-	 * Parameter types for use by @ref Parameter "Parameters." These are generally
-	 * handled within the Cg runtime and rarely change in hardware, the common ones
-	 * (float4 and such) are identical across the board.
+	 * Parameter types for use by @ref VoodooShader::Parameter "Parameters." 
+	 * These are generally handled within the Cg runtime and rarely change in
+	 * hardware, the common ones (float4 and such) are identical across the 
+	 * board.
 	 */
 	enum ParameterType
 	{

@@ -128,8 +128,6 @@ namespace VoodooShader
 				// Insert the technique into the map
 				TechniqueRef tech(new Technique(this, cTech));
 
-				//! @todo Possibly keep a map of valid techniques and allow 
-				//!		changing at runtime
 				const char * techName = cgGetTechniqueName(cTech);
 				mTechniques[techName] = tech;
 
@@ -146,6 +144,28 @@ namespace VoodooShader
 			}
 
 			cTech = cgGetNextTechnique(cTech);
+		}
+	}
+
+	void Shader::SetDefaultTechnique(String name)
+	{
+		TechniqueRef tech = this->GetTechnique(name);
+		if ( tech.get() )
+		{
+			this->mDefaultTechnique = tech;
+		} else {
+			Throw("Voodoo Core: Technique not found in shader.", mCore);
+		}
+	}
+
+	TechniqueRef Shader::GetTechnique(String name)
+	{
+		TechniqueMap::iterator tech = mTechniques.find(name);
+		if ( tech != mTechniques.end() )
+		{
+			return tech->second;
+		} else {
+			return TechniqueRef();
 		}
 	}
 
@@ -223,7 +243,6 @@ namespace VoodooShader
 					this->mTarget = mCore->GetTexture(":lastshader");
 				}
 			} else {
-				//! @todo Fix this nested mess.
 				mCore->GetLog()->Format("Voodoo Core: Pass %s has annotation \"target\" of invalid type.\n")
 					.With(this->Name()).Done();
 
@@ -314,7 +333,6 @@ namespace VoodooShader
 					this->mTarget = mCore->GetTexture(":lastpass");
 				}
 			} else {
-				//! @todo Fix this nested mess.
 				mCore->GetLog()->Format("Voodoo Core: Pass %s has annotation \"target\" of invalid type.\n")
 					.With(this->Name()).Done();
 
