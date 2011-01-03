@@ -55,7 +55,7 @@ Source: M:\VoodooShader\docs\readme.css; DestDir: {app}\docs; Components: core;
 [Icons]
 Name: {group}\Website; Filename: http://www.voodooshader.com; Components: startmenu; 
 Name: {group}\Voodoo Folder; Filename: {app}; WorkingDir: {app}; Components: startmenu; 
-Name: {group}\Uninstall; Filename: {uninstallexe}; WorkingDir: {app}; Components: startmenu; 
+Name: {group}\Uninstall; Filename: {uninstallexe}; Components: startmenu; 
 Name: {group}\Readme; Filename: {app}\docs\readme.html; Components: startmenu; 
 
 [Run]

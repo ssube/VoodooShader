@@ -51,6 +51,7 @@ Name: adapter/debug; Description: Debug Files; Types: Debug;
 Name: registry; Description: Registry Integration; Flags: fixed; Types: Full Debug Custom;
 Name: registry/user; Description: Current User Only; Flags: exclusive;
 Name: registry/machine; Description: All Users; Check: IsAdminLoggedOn; Flags: exclusive; Types: Full Debug Custom;
+Name: startmenu; Description: Start Menu Folder; Types: Full Debug Custom;
 
 [Registry]
 Components: registry/user; Root: HKCU; SubKey: SOFTWARE\VoodooShader; ValueType: string; ValueName: Gem; ValueData: "0.1.5.69"; Flags: UninsDeleteKeyIfEmpty UninsDeleteValue; 
@@ -60,8 +61,8 @@ Components: registry/machine; Root: HKLM; SubKey: SOFTWARE\VoodooShader; ValueTy
 Components: adapter; Filename: notepad.exe; Parameters: {app}\docs\README_GEM; WorkingDir: {app}; Description: Open the Gem Readme; Flags: PostInstall NoWait ShellExec;
 
 [Icons]
-Name: {group}\Uninstall; Filename: {uninstallexe};
-Name: {group}\Readme; Filename: notepad.exe; Parameters: {app}\docs\readme_gem;
+Name: {group}\Uninstall; Filename: {uninstallexe}; Components: startmenu; 
+Name: {group}\Readme; Filename: notepad.exe; Parameters: {app}\docs\readme_gem; Components: startmenu; 
 
 [Code]
 var

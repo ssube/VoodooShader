@@ -19,10 +19,7 @@ namespace VoodooShader
 
 	void Core::Destroy(Core * core)
 	{
-		if ( core )
-		{
-			delete core;
-		}
+		delete core;
 	}
 
 	Core::Core(std::string logfile)
@@ -30,6 +27,10 @@ namespace VoodooShader
 	{
 		this->mLogger = new Logger(logfile.c_str());
 
+		/**
+		 * @todo Buffer size for the core logger is 0 for debugging purposes,
+		 *		make it bigger before release.
+		 */
 //#ifdef _DEBUG
 		this->mLogger->SetBufferSize(0);
 //#endif
