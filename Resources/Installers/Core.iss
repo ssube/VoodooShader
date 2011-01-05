@@ -24,9 +24,9 @@ AllowUNCPath=false
 ShowLanguageDialog=no
 LicenseFile=LICENSE
 VersionInfoProductName=Voodoo Shader Framework
-VersionInfoProductVersion=0.1.7.68
-VersionInfoTextVersion=0.1.1.68
-VersionInfoVersion=0.1.1.68
+VersionInfoProductVersion=0.1.8.71
+VersionInfoTextVersion=0.1.1.71
+VersionInfoVersion=0.1.1.71
 
 [Languages]
 Name: english; MessagesFile: compiler:Default.isl

@@ -25,9 +25,9 @@ ShowLanguageDialog=no
 DisableDirPage=yes
 AlwaysShowDirOnReadyPage=false
 VersionInfoProductName=Voodoo/Gem
-VersionInfoProductVersion=0.1.5.69
-VersionInfoTextVersion=0.1.1.69
-VersionInfoVersion=0.1.1.69
+VersionInfoProductVersion=0.1.5.71
+VersionInfoTextVersion=0.1.0.71
+VersionInfoVersion=0.1.0.71
 
 [Languages]
 Name: english; MessagesFile: compiler:Default.isl
