@@ -19,7 +19,9 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-// Functions
+
+
+// Versioning functions -------------------------------------------------------
 #define VOODOO_META__STRING(arg) #arg
 #define VOODOO_META_STRING(arg) VOODOO_META__STRING(arg)
 
@@ -47,6 +49,7 @@
 
 #define VOODOO_META_STRING_NAME_BASIC(token) VOODOO_##token##_NAME VOODOO_META_DEBUG_STRING
 #define VOODOO_META_STRING_NAME_FULL(token) VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING
+//-----------------------------------------------------------------------------
 
 
 
@@ -65,32 +68,3 @@
 #define VOODOO_CORE_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
 //-----------------------------------------------------------------------------
 
-
-// DX9 defs -------------------------------------------------------------------
-#define VOODOO_DX9_NAME				"Voodoo/_DX9"
-#define VOODOO_DX9_PRETTYNAME		"Voodoo/Generic (DX9)"
-#define VOODOO_DX9_VERSION_MAJOR	0
-#define VOODOO_DX9_VERSION_MINOR	1
-#define VOODOO_DX9_VERSION_PATCH	8
-#define VOODOO_DX9_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
-//-----------------------------------------------------------------------------
-
-
-// DX89 defs ------------------------------------------------------------------
-#define VOODOO_DX89_NAME			"Voodoo/_DX89"
-#define VOODOO_DX89_PRETTYNAME		"Voodoo/Generic (DX8.9)"
-#define VOODOO_DX89_VERSION_MAJOR	0
-#define VOODOO_DX89_VERSION_MINOR	1
-#define VOODOO_DX89_VERSION_PATCH	5
-#define VOODOO_DX89_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
-//-----------------------------------------------------------------------------
-
-
-// Gem defs -------------------------------------------------------------------
-#define VOODOO_GEM_NAME				"Voodoo/Gem"
-#define VOODOO_GEM_PRETTYNAME		"Voodoo/Gem"
-#define VOODOO_GEM_VERSION_MAJOR	0
-#define VOODOO_GEM_VERSION_MINOR	1
-#define VOODOO_GEM_VERSION_PATCH	5
-#define VOODOO_GEM_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
-//-----------------------------------------------------------------------------

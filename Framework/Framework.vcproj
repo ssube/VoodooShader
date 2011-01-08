@@ -253,6 +253,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Docs.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Exception.hpp"
 				>
 			</File>
@@ -293,7 +297,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Version.hpp"
+				RelativePath=".\Version.hpp"
 				>
 			</File>
 			<File

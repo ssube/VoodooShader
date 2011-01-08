@@ -55,6 +55,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -89,7 +90,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description=""
 				CommandLine=""
 			/>
 		</Configuration>
@@ -133,6 +133,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -168,7 +169,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description=""
 				CommandLine=""
 			/>
 		</Configuration>
@@ -201,6 +201,10 @@
 			</File>
 			<File
 				RelativePath=".\DX9_Module.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DX9_Version.hpp"
 				>
 			</File>
 			<File

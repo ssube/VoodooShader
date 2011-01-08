@@ -130,6 +130,7 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 
 	strcat_s(valuePath, MAX_PATH, "\\bin\\");
 
+	/*
 	if ( SetDllDirectory(valuePath) )
 	{
 		if ( debug )
@@ -151,6 +152,7 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 		CloseHandle(debugFile);
 		return NULL;
 	}
+	*/
 
 	char libraryFile[MAX_PATH];
 	strcpy_s(libraryFile, MAX_PATH, valuePath);
@@ -162,7 +164,8 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 		strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem.dll");
 	}
 
-	HMODULE library = LoadLibrary(libraryFile);
+	//HMODULE library = LoadLibrary(libraryFile);
+	HMODULE library = LoadLibraryEx(libraryFile, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
 	if ( !library )
 	{

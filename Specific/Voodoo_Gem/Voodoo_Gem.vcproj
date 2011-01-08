@@ -55,6 +55,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -132,6 +133,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -204,6 +206,10 @@
 			</File>
 			<File
 				RelativePath=".\Gem_Module.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Gem_Version.hpp"
 				>
 			</File>
 			<File

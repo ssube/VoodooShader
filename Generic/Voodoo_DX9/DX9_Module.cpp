@@ -372,3 +372,5 @@ VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
 	VoodooObject = vObj;
 	return vObj;
 }
+
+#pragma comment(linker, "/export:Direct3DCreate9=?Voodoo3DCreate9@@YGPAXI@Z")

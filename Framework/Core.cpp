@@ -6,7 +6,7 @@
 #include "Shader.hpp"
 #include "Texture.hpp"
 #include "Adapter.hpp"
-#include "../Version.hpp"
+#include "Version.hpp"
 
 namespace VoodooShader
 {

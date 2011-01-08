@@ -3,6 +3,13 @@
 * Copyright (C) 2010 by Sean Sube
 *
 *
+* While the Voodoo Shader Framework, as a whole, is licensed under the GNU General Public license,
+* adapters designed to work with the framework do not constitute derivative works. In the case an
+* adapter needs to use this file (Adapter.hpp) or Meta.hpp in order to work with the Framework, and
+* is not licensed under the GNU GPL or a compatible license, please contact the developer to figure
+* out alternate licensing arrangements.
+*
+*
 * This program is free software; you can redistribute it and/or modify it under the terms of the 
 * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
 * License, or (at your option) any later version.

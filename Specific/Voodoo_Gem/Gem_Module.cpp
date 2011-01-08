@@ -41,7 +41,7 @@ VoodooShader::TextureRef texture_ThisFrame;
 
 VoodooShader::ShaderRef testShader;
 
-VOODOO_API_Gem void * __stdcall Direct3DCreate8(UINT version)
+VOODOO_API_Gem void * __stdcall Voodoo3DCreate8(UINT version)
 {
 	// Voodoo Gem Init function
 	VoodooCore = VoodooShader::Core::Create("Voodoo_GEM.log");
@@ -87,7 +87,7 @@ VOODOO_API_Gem void * __stdcall Direct3DCreate8(UINT version)
 // Visual Studio-specific linker directive, forces the function to be exported with and
 // without decoration. The actual symbol is undecorated, but I'd rather allow exception
 // handling than use extern "C".
-#pragma comment(linker, "/export:Direct3DCreate8=?Direct3DCreate8@@YGPAXI@Z")
+#pragma comment(linker, "/export:Direct3DCreate8=?Voodoo3DCreate8@@YGPAXI@Z")
 
 //=============================================================================
 

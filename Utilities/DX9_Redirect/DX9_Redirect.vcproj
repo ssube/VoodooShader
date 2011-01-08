@@ -54,6 +54,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework; $(SolutionDir)\Generic\Voodoo_DX9"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -127,6 +128,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework; $(SolutionDir)\Generic\Voodoo_DX9"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -173,7 +175,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\reghook.cpp"
+				RelativePath=".\dllmain.cpp"
 				>
 			</File>
 		</Filter>

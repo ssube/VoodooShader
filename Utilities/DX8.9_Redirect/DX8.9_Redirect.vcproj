@@ -54,6 +54,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework; $(SolutionDir)\Generic\Voodoo_DX89"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -127,6 +128,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework; $(SolutionDir)\Generic\Voodoo_DX89"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"

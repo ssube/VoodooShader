@@ -19,20 +19,13 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#define VOODOO_IMPORT
-
-#include "Includes.hpp"
-
-#include "Meta.hpp"
-
-#include "Adapter.hpp"
-#include "Converter.hpp"
-#include "Core.hpp"
-#include "Exception.hpp"
-#include "FullscreenManager.hpp"
-#include "Logger.hpp"
-#include "MaterialManager.hpp"
-#include "Parameter.hpp"
-#include "Shader.hpp"
-#include "Texture.hpp"
 #include "Version.hpp"
+
+// DX89 defs ------------------------------------------------------------------
+#define VOODOO_DX89_NAME			"Voodoo/_DX89"
+#define VOODOO_DX89_PRETTYNAME		"Voodoo/Generic (DX8.9)"
+#define VOODOO_DX89_VERSION_MAJOR	0
+#define VOODOO_DX89_VERSION_MINOR	1
+#define VOODOO_DX89_VERSION_PATCH	5
+#define VOODOO_DX89_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
+//-----------------------------------------------------------------------------

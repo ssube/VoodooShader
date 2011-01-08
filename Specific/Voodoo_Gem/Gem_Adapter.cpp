@@ -2,7 +2,7 @@
 #include "Gem_Adapter.hpp"
 #include "Gem_Converter.hpp"
 
-#include "../../Version.hpp"
+#include "Gem_Version.hpp"
 
 IDirect3DSurface9 * scratchSurface = NULL;
 IDirect3DTexture9 * scratchTexture = NULL;

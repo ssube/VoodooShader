@@ -1,75 +1,209 @@
 
-#ifdef _DEBUG
-#	pragma comment(linker, "/export:Direct3DCreate9=Voodoo_DX9_d.Direct3DCreate9")
-#else
-#	pragma comment(linker, "/export:Direct3DCreate9=Voodoo_DX9.Direct3DCreate9")
-#endif
+#include <stdio.h>
 
-/*
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-extern "C" __declspec(dllexport) void * Direct3DCreate9(unsigned int sdkVersion)
-{	// Get the Voodoo location from the registry and load the core
+void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
+{	
+#ifdef _DEBUG
+	bool debug = true;
+#else
+	bool debug = false;
+#endif
+
+	HANDLE debugFile = CreateFileA("VOODOO_DEBUG", FILE_WRITE_DATA, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if ( debugFile != INVALID_HANDLE_VALUE )
+	{
+		debug = true;
+		MessageBoxA(NULL, "Debug indicator file found. The hook will load in debug mode.", "Voodoo Gem Hook", MB_ICONWARNING);
+		//CloseHandle(debugFile);
+	}
+
+	bool valueFound = false;
+	DWORD valueSize = 4096;
+	DWORD valueType = REG_NONE;
+	char valuePath[4096];
+
+	// Get the Voodoo location from the registry and load the core
 	HKEY VoodooPathKey;
 
-	LONG result = RegOpenKeyEx(HKEY_CURRENT_USER, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
+	LONG result = RegOpenKeyExA(HKEY_CURRENT_USER, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
 
-	if ( result != ERROR_SUCCESS )
+	if ( result == ERROR_SUCCESS )
 	{
-		result = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
-
-		if ( result != ERROR_SUCCESS )
+		if ( debug )
 		{
-			char error[4096];
-			FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, 0, result, 0, error, 4096, NULL);
-			MessageBoxA(NULL, error, "Voodoo DX9 Hook Error 1", MB_ICONERROR);
-			return NULL;
-			//Throw("Voodoo DX9 Hook: Unable to find core location.", NULL);
+			DWORD written;
+			char msg[] = "Found HKCU\\SOFTWARE\\VoodooShader.\n";
+			WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+		}
+
+		result = RegQueryValueExA(VoodooPathKey, "Path", NULL, &valueType, (BYTE*)valuePath, &valueSize);
+
+		if ( result == ERROR_SUCCESS )
+		{
+			if ( debug )
+			{
+				DWORD written;
+				char msg[4096];
+				sprintf_s(msg, "Loaded key from HKCU, value: %s\n", valuePath);
+				WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+			}
+
+			valueFound = true;
+		} else {
+			if ( debug )
+			{
+				DWORD written;
+				char msg[4096];
+				sprintf_s(msg, "Unable to load key from HKCU, error %d.\n", result);
+				WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+			}
+		}
+	} else {
+		if ( debug )
+		{
+			DWORD written;
+			char msg[4096];
+			sprintf_s(msg, "Unable to find key in HKCU, error %d.\n", valuePath);
+			WriteFile(debugFile, msg, strlen(msg), &written, NULL);
 		}
 	}
 
-	DWORD valueType, valueSize;
-	char valuePath[MAX_PATH];
-	result = RegQueryValueEx(VoodooPathKey, "Path", NULL, &valueType, (BYTE*)valuePath, &valueSize);
-
-	if ( result != ERROR_SUCCESS )
+	if ( !valueFound )
 	{
-		char error[4096];
-		FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, 0, result, 0, error, 4096, NULL);
-		MessageBoxA(NULL, error, "Voodoo DX9 Hook Error 2", MB_ICONERROR);
-		return NULL;
-		//Throw("Voodoo DX9 Hook: Unable to find path.", NULL);
+		result = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
+
+		if ( result == ERROR_SUCCESS )
+		{
+			if ( debug )
+			{
+				DWORD written;
+				char msg[] = "Found HKLM\\SOFTWARE\\VoodooShader.\n";
+				WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+			}
+
+			result = RegQueryValueExA(VoodooPathKey, "Path", NULL, &valueType, (BYTE*)valuePath, &valueSize);
+
+			if ( result == ERROR_SUCCESS )
+			{
+				if ( debug )
+				{
+					DWORD written;
+					char msg[4096];
+					sprintf_s(msg, "Loaded key from HKLM, value: %s\n", valuePath);
+					WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+				}
+
+				valueFound = true;
+			} else {
+				if ( debug )
+				{
+					DWORD written;
+					char msg[4096];
+					sprintf_s(msg, "Unable to load key from HKLM, error %d.\n", result);
+					WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+				}
+			}
+		} else {
+			if ( debug )
+			{
+				DWORD written;
+				char msg[4096];
+				sprintf_s(msg, "Unable to find key in HKLM, error %d.\n", valuePath);
+				WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+			}
+		}
 	}
 
-	strcat(valuePath, "\\bin\\");
+	if ( !valueFound )
+	{
+		strcat_s(valuePath, MAX_PATH, "C:\\VoodooShader\\");
+		if ( debug )
+		{
+			DWORD written;
+			char msg[] = "Using default path.\n";
+			WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+		}
+	}
 
-	SetDllDirectory(valuePath);
+	strcat_s(valuePath, MAX_PATH, "\\bin\\");
+
+	/*
+	if ( SetDllDirectory(valuePath) )
+	{
+		if ( debug )
+		{
+			DWORD written;
+			char msg[4096];
+			sprintf_s(msg, "SetDllDirectory to %s successfully.\n", valuePath);
+			WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+		}
+	} else {
+		if ( debug )
+		{
+			DWORD written;
+			char msg[4096];
+			sprintf_s(msg, "SetDllDirectory to %s failed.\n", valuePath);
+			WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+		}
+
+		CloseHandle(debugFile);
+		return NULL;
+	}
+	*/
 
 	char libraryFile[MAX_PATH];
-	strcpy(libraryFile, valuePath);
-#ifdef _DEBUG
-	strcat(libraryFile, "Voodoo_DX9_d.dll");
-#else
-	strcat(libraryFile, "Voodoo_DX9.dll");
-#endif
+	strcpy_s(libraryFile, MAX_PATH, valuePath);
 
-	HMODULE library = LoadLibrary(libraryFile);
+	if ( debug )
+	{
+		strcat_s(libraryFile, MAX_PATH, "Voodoo_DX9_d.dll");
+	} else {
+		strcat_s(libraryFile, MAX_PATH, "Voodoo_DX9.dll");
+	}
+
+	//HMODULE library = LoadLibrary(libraryFile);
+	HMODULE library = LoadLibraryEx(libraryFile, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
 	if ( !library )
 	{
+		DWORD written;
 		char error[4096];
-		FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, 0, result, 0, error, 4096, NULL);
-		MessageBoxA(NULL, error, "Voodoo DX9 Hook Error 3", MB_ICONERROR);
+		sprintf_s(error, 4096, "Could not load DLL: %s", libraryFile);
+		MessageBoxA(NULL, error, "Voodoo Gem Hook Error 3", MB_ICONERROR);
+
+		WriteFile(debugFile, error, strlen(error), &written, NULL);
+		CloseHandle(debugFile);
+
 		return NULL;
-		//Throw("Voodoo DX9 Hook: Unable to load library.", NULL);
 	}
 
-	typedef void * (__stdcall *InitFunc)(unsigned int);
-	InitFunc initFunc = (InitFunc)GetProcAddress(library, "Direct3DCreate9");
+	typedef void * (__stdcall * InitFuncType)(UINT);
+	InitFuncType initFunc = (InitFuncType)GetProcAddress(library, "Direct3DCreate9");
+
+	if ( !initFunc )
+	{
+		DWORD written;
+		char msg[] = "Could not find init func.\n";
+
+		MessageBoxA(NULL, msg, "Voodoo Gem Hook Error 4", MB_ICONERROR);
+
+		WriteFile(debugFile, msg, strlen(msg), &written, NULL);
+		CloseHandle(debugFile);
+
+		return NULL;
+	}
 
 	void * obj = (*initFunc)(sdkVersion);
 
+	if ( debug )
+	{
+		CloseHandle(debugFile);
+	}
+
 	return obj;
 }
-*/
+
+#pragma comment(linker, "/export:Direct3DCreate9=?Voodoo3DCreate9@@YGPAXI@Z")
