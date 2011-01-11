@@ -52,64 +52,88 @@ namespace VoodooShader
 
 	void Shader::Link()
 	{
-		this->SetupParameters();
-		this->SetupTechniques();
-	}
-
-	void Shader::SetupParameters()
-	{
-		// Setup and link a shader to the core.
+		// Link parameters first
 		CGparameter cParam = cgGetFirstEffectParameter(this->mEffect);
 
 		while ( cgIsParameter(cParam) )
 		{
-			CGtype cgType = cgGetParameterType(cParam);
-			ParameterType type = Converter::ToParameterType(cgType);
+			this->SetupParameter(cParam);
+		}
 
-			const char * paramName = cgGetParameterName(cParam);
+		this->SetupTechniques();
+	}
 
-			ParameterRef param(new Parameter(this, cParam));
+	void Shader::SetupParameter(CGparameter cgparam)
+	{
+		// Cache basic data for future use 
+		ParameterType type = Converter::ToParameterType(cgGetParameterType(cgparam));
+		const char * name = cgGetParameterName(cgparam);
 
-			ParameterRef globalParam = this->mCore->GetParameter(paramName, type);
-			if ( globalParam )
+		// Create the reference that will be stored in the param vector for the
+		// shader's life, this may be accessed many times.
+		ParameterRef param(new Parameter(this, cgparam));
+
+		this->mParameters[name] = param;
+
+		// Check if it has a global link annotation
+		CGannotation globalAnnotation = cgGetNamedParameterAnnotation(
+				cgparam, "global");
+
+		if ( cgIsAnnotation(globalAnnotation) )
+		{
+			const char * globalName = cgGetStringAnnotationValue(globalAnnotation);
+			if ( globalName && strlen(globalName) > 0 )
 			{
-				globalParam->Attach(param);
+				ParameterRef globalParam = mCore->GetParameter(globalName, type);
+				if ( globalParam )
+				{
+					globalParam->Attach(param);
+				} else {
+					mCore->GetLog()->Format("Voodoo Core: Unable to find global param %s for parameter %s.\n")
+						.With(globalName).With(param->Name()).Done();
+				}
+			} else {
+				mCore->GetLog()->Format("Voodoo Core: Unable to read global annotation for parameter %s.\n")
+					.With(param->Name()).Done();
 			}
 
-			this->mParameters[paramName] = param;
+			return;
+		}
 
-			// Branch on parameter general type
-			if (  Converter::ToParameterCategory(type) == PC_Sampler )
+		// If it's not linked to a global, it doesn't need linked unless it is
+		// a sampler.
+		if (  Converter::ToParameterCategory(type) == PC_Sampler )
+		{
+			// Link to a texture
+			CGannotation textureAnnotation = cgGetNamedParameterAnnotation(
+				cgparam, "texture");
+
+			if ( cgIsAnnotation(textureAnnotation) )
 			{
-				// Link to a texture
-				CGannotation texnameAnnotation = cgGetNamedParameterAnnotation(
-					cParam, "texture");
-
-				if ( cgIsAnnotation(texnameAnnotation) )
+				const char * textureName = cgGetStringAnnotationValue(textureAnnotation);
+				if ( textureName && strlen(textureName) > 0 )
 				{
-					const char * texName = cgGetStringAnnotationValue(texnameAnnotation);
-					if ( texName )
+					TextureRef texture = mCore->GetTexture(textureName);
+					if ( texture )
 					{
-						TextureRef texture = mCore->GetTexture(texName);
-						if ( texture.get() )
-						{
-							mCore->GetAdapter()->ConnectTexture(param, texture);
-						} else {
-							// Need to create a texture
-							mCore->GetLog()->Format("Voodoo Core: Could not find texture %s for parameter %s.\n")
-								.With(texName).With(param->Name()).Done();
-						}
+						mCore->GetAdapter()->ConnectTexture(param, texture);
 					} else {
-						mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture name for parameter %s.\n")
-							.With(param->Name()).Done();
+						/**
+						 * @todo Need to create a texture based on the annotation params here. That will
+						 *		involve reading them and calling back into the adapter, so it should be
+						 *		another func.
+						 */
+						mCore->GetLog()->Format("Voodoo Core: Could not find texture %s for parameter %s.\n")
+							.With(textureName).With(param->Name()).Done();
 					}
 				} else {
-					mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture annotation for parameter %s.\n")
+					mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture name for parameter %s.\n")
 						.With(param->Name()).Done();
 				}
+			} else {
+				mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture annotation for parameter %s.\n")
+					.With(param->Name()).Done();
 			}
-
-			cParam = cgGetNextParameter(cParam);
 		}
 	}
 

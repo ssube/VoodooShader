@@ -1,6 +1,6 @@
 /**************************************************************************************************\
 * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
-* Copyright (C) 2010 by Sean Sube
+* Copyright (c) 2010-2011 by Sean Sube
 *
 *
 * This program is free software; you can redistribute it and/or modify it under the terms of the 
@@ -54,13 +54,13 @@
 
 
 // Global defs ----------------------------------------------------------------
-#define VOODOO_GLOBAL_VERSION_GITREV	71	
-#define VOODOO_GLOBAL_COPYRIGHT_BRIEF	"Copyright (c) 2010 by Sean Sube"
+#define VOODOO_GLOBAL_VERSION_GITREV	75
+#define VOODOO_GLOBAL_COPYRIGHT_BRIEF	"Copyright (c) 2010-2011 by Sean Sube"
 //-----------------------------------------------------------------------------
 
 
 // Core defs ------------------------------------------------------------------
-#define VOODOO_CORE_NAME			"Voodoo/_Core"
+#define VOODOO_CORE_NAME			"Voodoo/Core"
 #define VOODOO_CORE_PRETTYNAME		"Voodoo Shader Framework Core"
 #define VOODOO_CORE_VERSION_MAJOR	0
 #define VOODOO_CORE_VERSION_MINOR	1

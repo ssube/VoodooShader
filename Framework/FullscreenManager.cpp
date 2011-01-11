@@ -47,6 +47,9 @@ namespace VoodooShader
 
 	void FullscreenManager::Render(unsigned int start, int count)
 	{
+		// Run a number of basic checks first, shouldn't have much performance
+		// hit, but covers a good few errors.
+
 		if ( count == 0 )
 		{
 			Throw("Voodoo Core: Could not render 0 fullscreen shaders.", this->mParent);
@@ -70,9 +73,8 @@ namespace VoodooShader
 		{
 			Throw("Voodoo Core: Attempted to render more shaders than in the chain.", this->mParent);
 		}
-		//ShaderVector::iterator chainStart, chainCurrent, chainEnd;
-
-		//unsigned int chainStart = this->mShaders.begin() + start; 
+		
+		// Prep and trigger the rendering
 		unsigned int chainEnd, chainCurrent;
 
 		if ( count == -1 )
@@ -89,7 +91,6 @@ namespace VoodooShader
 
 		for ( chainCurrent = start; chainCurrent < chainEnd; ++chainCurrent )
 		{
-			//ShaderRef shader = *current;
 			adapter->DrawShader(mShaders[chainCurrent]);
 		}
 	}

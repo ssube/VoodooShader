@@ -72,7 +72,7 @@ BEGIN
             VALUE "FileDescription", "Voodoo Shader NWN Module"
             VALUE "FileVersion", "0, 1, 0, 0"
             VALUE "InternalName", "Voodoo_NWS"
-            VALUE "LegalCopyright", "Copyright (C) 2010 by Sean Sube"
+            VALUE "LegalCopyright", "Copyright (c) 2010-2011 by Sean Sube"
             VALUE "OriginalFilename", "Voodoo_NWS"
             VALUE "ProductName", "Voodoo Shader Framework"
             VALUE "ProductVersion", "0, 1, 0, 0"

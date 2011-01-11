@@ -1,6 +1,6 @@
 /**************************************************************************************************\
 * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
-* Copyright (C) 2010 by Sean Sube
+* Copyright (c) 2010-2011 by Sean Sube
 *
 *
 * This program is free software; you can redistribute it and/or modify it under the terms of the 
@@ -23,15 +23,15 @@
  * @page License
  * 
  * @section summary Summary
- * &gt;p&lt;
+ * <p>
  *	The Voodoo Shader Framework is licensed under the terms of the GNU General
  *	Public License, in an effort to make it useful to as many people as
  *	possible. While some adapters may use different license terms, the license
  *	for the core is given in this file. This is a verbatim copy of the GPL, v2.
- * &gt;/p&lt;
+ * </p>
  *
  * @section license License
- * &gt;p&lt;
+ * <p>
  *
 		    GNU GENERAL PUBLIC LICENSE
 		       Version 2, June 1991

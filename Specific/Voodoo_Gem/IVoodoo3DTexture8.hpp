@@ -1,6 +1,6 @@
 /*************************************************************************************************\
 * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
-* Copyright (C) 2010 by Sean Sube
+* Copyright (c) 2010-2011 by Sean Sube
 *
 *
 * This program is free software; you can redistribute it and/or modify it under the terms of the 
@@ -165,7 +165,7 @@ public:
 		D3DSURFACE_DESC8 * pDesc
 	)
 	{
-		D3DSURFACE_DESC9 rDesc;
+		D3DSURFACE_DESC rDesc;
 		HRESULT hr = mRealTexture->GetLevelDesc(Level, &rDesc);
 		if ( SUCCEEDED(hr) )
 		{

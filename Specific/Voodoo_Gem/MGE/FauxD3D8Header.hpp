@@ -1,6 +1,6 @@
 /**************************************************************************************************\
 * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
-* Copyright (C) 2010 by Sean Sube
+* Copyright (c) 2010-2011 by Sean Sube
 *
 *
 * This program is free software; you can redistribute it and/or modify it under the terms of the 
@@ -26,12 +26,15 @@
 #ifndef VOODOO_GEM_FAUXD3D8HEADER_HPP
 #define VOODOO_GEM_FAUXD3D8HEADER_HPP
 
+/*
 typedef IDirect3DVertexBuffer9 IDirect3DVertexBuffer;
 typedef IDirect3DIndexBuffer9 IDirect3DIndexBuffer;
 typedef IDirect3DSurface9 IDirect3DSurface;
 typedef IDirect3DTexture9 IDirect3DTexture;
 typedef IDirect3D9 IDirect3D;
 typedef IDirect3DDevice9 IDirect3DDevice;
+*/
+
 typedef D3DLIGHT9 D3DLIGHT8;
 typedef D3DMATERIAL9 D3DMATERIAL8;
 typedef D3DVIEWPORT9 D3DVIEWPORT8;
@@ -45,8 +48,8 @@ typedef D3DCLIPSTATUS9 D3DCLIPSTATUS8;
 #define IDirect3DVolumeTexture8 void
 #define IDirect3DCubeTexture8 void
 
-#define D3DSURFACE_DESC9 D3DSURFACE_DESC
-#define D3DPRESENT_PARAMETERS9 D3DPRESENT_PARAMETERS
+//#define D3DSURFACE_DESC9 D3DSURFACE_DESC
+//#define D3DPRESENT_PARAMETERS9 D3DPRESENT_PARAMETERS
 
 interface IDirect3D8;
 interface IDirect3DDevice8;
@@ -54,6 +57,7 @@ interface IDirect3DTexture8;
 interface IDirect3DSurface8;
 
 //DX8 enums
+/*
 #define D3DTSS_ADDRESSU       13
 #define D3DTSS_ADDRESSV       14
 #define D3DTSS_BORDERCOLOR    15
@@ -64,6 +68,7 @@ interface IDirect3DSurface8;
 #define D3DTSS_MAXMIPLEVEL    20
 #define D3DTSS_MAXANISOTROPY  21
 #define D3DTSS_ADDRESSW       25
+*/
 
 //Object creation functions
 typedef IDirect3D8* (*D3DProc8)(UINT);

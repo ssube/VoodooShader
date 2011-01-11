@@ -1,6 +1,6 @@
 /**************************************************************************************************\
 * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
-* Copyright (C) 2010 by Sean Sube
+* Copyright (c) 2010-2011 by Sean Sube
 *
 *
 * This program is free software; you can redistribute it and/or modify it under the terms of the 
@@ -190,7 +190,7 @@ public:
 		IDirect3DDevice8 ** ppReturnedDeviceInterface
 	)
 	{
-		D3DPRESENT_PARAMETERS9 mpPresentationParameters;
+		D3DPRESENT_PARAMETERS mpPresentationParameters;
 
 		mpPresentationParameters.Flags = pPresentationParameters->Flags;
 

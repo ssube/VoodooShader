@@ -1,6 +1,6 @@
 /**************************************************************************************************\
 * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
-* Copyright (C) 2010 by Sean Sube
+* Copyright (c) 2010-2011 by Sean Sube
 *
 *
 * This program is free software; you can redistribute it and/or modify it under the terms of the 
@@ -109,7 +109,14 @@ namespace VoodooShader
 		void Link();
 
 	private:
-		void SetupParameters();
+		/**
+		 * Link a particular effect-level parameter against various core
+		 * elements (exact behavior depends on param type).
+		 *
+		 * @param cgparam The parameter to link.
+		 */
+		void SetupParameter(CGparameter cgparam);
+
 		void SetupTechniques();
 
 		Core * mCore;
