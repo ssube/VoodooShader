@@ -1,20 +1,17 @@
 
-###Voodoo Shader Framework
+Voodoo Shader Framework
+v0.1.9.75
 
-##Prototype Alpha
-
-#Contents:
+= Contents:
 1. Summary
 2. Installation
-2.a. Core
-2.b. Gem (MW)
-2.c. Frost (NWN)
-3. Use
-4. Reporting Bugs
-5. Contact & Legal
+3. Adapters
+4. Running Voodoo
+5. Reporting Bugs
+6. Contact & Legal
 
 
-#1. Summary
+= 1. Summary
 
 The Voodoo Shader Framework is a system designed to add shader support to various games and 
 programs and provide a single target for shader authors, with a full set of useful features.
@@ -26,92 +23,77 @@ framework uses many features available in the Cg language, including compiling t
 GLSL (for OpenGL and DirectX compatibility), and a clear and concise syntax for accessing game data
 and textures.
 
-#2. Installation
 
-The Voodoo system requires two main steps for installing the core. After this, installing game 
-adapters is made extremely simple.
+= 2. Installation
 
-#2.a. Core
+The Voodoo system function using a core-adapter model. The Voodoo core handles most functions, and
+game-specific adapters interface it with each game in detail. 
 
-Installing the VSF core requires creating a directory with the appropriate binary and resource 
-files. These are included in the archive package in a "bin/" directory. This must be placed in an 
-accessible location, preferably on the computer (network shares may or may not work, this has not 
-been tested). The bin directory must then be added to the system or user path environment variable,
-this provides simple access from any game directory.
+The Voodoo core comes in an install wizard to simplify installation. This wizard creates the
+registry keys Voodoo needs to function properly. To install the core, simply run this wizard and
+Voodoo will be installed to your system.
 
-2.b. GEM
 
-Installing Voodoo/GEM (the Morrowind module) is done by adding the file
-"Voodoo_GEM.dll" to the VSF bin directory and placing the included "d3d8.dll"
-in the Morrowind installation directory. No other files need be placed in the
-Morrowind directory at this time, only the binding module (this will change in
-the future).
+= 3. Adapters
 
-2.c. NWShader
+After the Voodoo core is installed, you will need to install adapters for any game you want to use
+Voodoo in. Various adapters are available for a number of Direct3D 8 and 9 games, and OpenGL
+adapters are in progress. 
 
-Installing Voodoo/NWShader (the Neverwinter Nights module) will  be done by
-adding the file "Voodoo_NWS.dll" to the VSF bin directory and placing the
-included "dinput.dll" in the Neverwinter Nights installation directory. This
-module is not packaged with the current prototype release of Voodoo.
+Adapters can be found included with Voodoo or on the Voodoo Shader Framework site at:
+	http://www.voodooshader.com
 
-3. Use
+Adapters may or may not use install wizards. Each adapter will have documentation on how to install
+and configure it. 
 
-Voodoo will automatically hook into the game on launch, if it is properly
-installed. The Voodoo runtime will create a comprehensive log file in the
-game directory. In the future, VSF will use a XML-based settings file to
-specify per-game configuration. The config file will be contained in the game
-directory, while external resources will be in the Voodoo directory.
+You should only use adapters built against the Voodoo core you have installed, mixing versions may
+cause problems.
 
-Debug builds will perform significant logging, potentially slowing the game
-down but providing much information. Voodoo debug modules may be used in place
-of traditional video API debugging, as they are capable of intercepting both
-DirectX and OpenGL calls and logging the times and parameters.
 
-4. Reporting Bugs
+= 4. Running Voodoo
 
-Voodoo is a prototype (pre-alpha) library at this point. It undoubtedly has
-bugs. If you run into a bug, please go to http://www.voodooshader.com and
-report the bug on the forum or bug-tracker. This tracker will provide a single
-place to report and manage bugs for the Voodoo framework and all modules.
+The precise behavior of Voodoo depends on the adapter and game it is being used with, but the most
+common behavior is described here.
 
-5. Contact & Legal
+Voodoo will automatically hook into the game on launch, if it is properly installed. The Voodoo 
+runtime will create a comprehensive log file in the game directory. In the future, VSF will use a
+XML-based settings file to specify per-game configuration. The config file will be contained in the
+game directory, while external resources will be in the Voodoo directory.
 
-To contact the developer of the Voodoo project, you can use any of the
-following methods:
+Debug builds will perform significant logging, potentially slowing the game down but providing much
+information. Voodoo debug modules may be used in addition to traditional video API debuggers; they
+are capable of intercepting both DirectX and OpenGL calls and logging the times, parameters and
+results in some detail.
 
-	Email:
-		peachykeen@voodooshader.com
-		peachykeen@fliggerty.com
-		cx029a@live.com
-	Forums:
-		peachykeen at:
-			social.bioware.com
-			fliggerty.com
-			elderscrolls.com/forums
-	IRC:
-		peachykeen on:
-		  chatspike:
-			#morrowind
-			#oblivion
-			#elderscrolls
-			#tamriel
-		  freenode:
-			#ghf
-		  nwn2source:
-			#nwn2cr
-			#projectq
-	MSN:
-		cx029a@live.com
-	AIM:
-		cx029a
-	Skype:
-		pkpeachykeen
+
+= 5. Reporting Bugs
+
+Voodoo is a prototype (pre-alpha) library at this point. It undoubtedly has bugs. If you run into a
+bug, please go to http://www.voodooshader.com and report the bug on the forum.
+
+A bug tracker for all Voodoo elements, including shaders and adapters, will be deployed soon.
+
+
+= 6. Contact & Legal
+
+To contact the developer of the Voodoo project, please post on the Voodoo forum at:
+	http://www.voodooshader.com
+or direct emails to:
+	peachykeen@voodooshader.com
+	
+Questions, comments, suggestions, reports, bugs, and almost anything else are welcome. If you have
+any interest in testing or contributing to Voodoo, please get in touch as soon as possible.
+
+You may also try to get in touch via the Bethesda Softworks forums or Bioware social boards, or on
+IRC (nick peachykeen on chatspike, freenode and nwn2source).
 
 
 
-Voodoo Shader Framework (c) 2010 by Sean "peachykeen" Sube, All Rights Reserved
+Voodoo Shader Framework (c) 2010-2011 by Sean "peachykeen" Sube, All Rights Reserved.
 
-The Voodoo Shader Project, all associated binary or object files and source
-code is released under the terms and conditions specified in the document
-LICENSE included with each distribution (this document contains the text
-of the GNU GPL, v2.0).
+The Voodoo Shader Framework, all associated binary or object files and source code is released under
+the terms and conditions of the GNU General Public License. See the included LICENSE file for more
+details.
+
+The Voodoo Shader Framework has absolutely no warranty, as described in the license document. Some
+support may be provided, at the developer's discretion, please use the above contact methods.

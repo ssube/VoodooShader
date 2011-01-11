@@ -1,6 +1,0 @@
-000000: Program Started
-000000: Computer Name: Sean
-000000: Creating Windows
-000001: Begin loading of archive header and invalidation of archived files
-000001: Finished with header loading and invalidation
-000001: Initializing Main
