@@ -192,7 +192,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\FrostIncludes.hpp"
+				RelativePath=".\Frost_Module.hpp"
 				>
 			</File>
 			<File
@@ -201,6 +201,10 @@
 			</File>
 			<File
 				RelativePath=".\VoodooFrost.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\VoodooGL.hpp"
 				>
 			</File>
 		</Filter>

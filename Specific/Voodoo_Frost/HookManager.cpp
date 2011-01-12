@@ -19,150 +19,158 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "FrostIncludes.hpp"
-#include "GL/gl.h"
+HookManager * VoodooHooker = NULL;
 
-TRACED_HOOK_HANDLE 
-	hook_glGetString = NULL, 
-	hook_glViewport = NULL, 
-	hook_wglCreateContext = NULL,
-	hook_wglDeleteContext = NULL, 
-	hook_wglGetProcAddress = NULL, 
-	hook_wglMakeCurrent = NULL,
-	hook_glClear = NULL, 
-	hook_wglSwapLayerBuffers = NULL, 
-	hook_glBegin = NULL, 
-	hook_glBindTexture = NULL,
-	hook_glDeleteTextures = NULL, 
-	hook_glDrawElements = NULL, 
-	hook_glEnd = NULL, 
-	hook_glImage = NULL, 
-	hook_glEnable = NULL, 
-	hook_glFogf = NULL, 
-	hook_glFogfv = NULL,
+/**
+ * Install a single hook at the specified point. This will only affect the
+ * process(es) the HookManager is bound to.
+ *
+ * @param name The name for the hook.
+ * @param src The point to install the hook at.
+ * @param dest The function to redirect execution into.
+ * @return The success of the hook installation.
+ * @throws Exception if a hook with the same name already exists.
+ *
+ * @note The name is often the name of the function in src (&func) for
+ *		simplicities sake. 
+ * @warning The calling convention of src and dest must be identical, or bad
+ *		things might happen. This is only a bother with member functions, but
+ *		can be worked around relatively easily.
+ */
+bool HookManager::InstallHook(std::string name, void * src, void * dest)
+{
+	HookMap::iterator hook = mHooks.find(name);
 
-	hook_Scene_fogFunc = NULL, 
-	hook_Cam_clipFunc = NULL, 
-	hook_screenFunc = NULL,
-	hook_GetName = NULL;
+	if ( hook != mHooks.end() )
+	{
+		Throw("Voodoo Frost: Attempted to install a hook with a duplicate name.", VoodooCore);
+	}
 
+	TRACED_HOOK_HANDLE hookHandle;
+
+	DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
+
+	if ( result != 0 )
+	{
+		VoodooCore->GetLog()->Format("Voodoo Frost: Error %d installing hook %s (%d, %d).\n")
+			.With(result).With(name).With(src).With(dest).Done();
+
+		return false;
+	} else {
+		LhSetInclusiveACL(mThreadIDs, mThreadCount, hookHandle);
+
+		mHooks[name] = hookHandle;
+
+		return true;
+	}
+}
+
+/**
+ * Uninstall a hook.
+ *
+ * @param name The name of the hook to remove.
+ * @return The success of the removal operation.
+ * @throws Exception of the hook is not found.
+ * 
+ * @warning <em>Do not</em>, under any circumstances, remove a hook while
+ *		execution is passing through the trampoline function. This can cause
+ *		the process to crash in rare cases. I'm not sure the reason, but it's
+ *		not good. Until I replace EasyHook, be careful!
+ */
+bool HookManager::UninstallHook(std::string name)
+{
+	HookMap::iterator hook = mHooks.find(name);
+
+	if ( hook != mHooks.end() )
+	{
+		DWORD result = LhUninstallHook(hook->second);
+
+		if ( result != 0 )
+		{
+			VoodooCore->GetLog()->Format("Voodoo Frost: Error %d removing hook %s.\n")
+				.With(result).With(name).Done();
+
+			return true;
+		} else {
+			mHooks.erase(hook);
+
+			return false;
+		}
+	}
+}
+
+/**
+ * Uninstalls all hooks.
+ */
+void HookManager::UninstallAllHooks()
+{
+	LhUninstallAllHooks();
+	LhWaitForPendingRemovals();
+
+	mHooks.clear();
+}
+
+HookManager::HookManager()
+{
+	mHooks.clear();
+
+	mThreadIDs = new ULONG[1];
+	mThreadCount = 1;
+
+	mThreadIDs[0] = NULL;
+
+	LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
+}
+
+HookManager::~HookManager()
+{
+	this->UninstallAllHooks();
+
+	delete mThreadIDs;
+}
+
+#define HOOK_PARAMS(n) #n, &n, &v##n
+
+/**
+ * Install all significant OpenGL hooks. 
+ */
 void HookOpenGL(void)
 {
-	BOOL success = NULL;
+	VoodooCore->GetLog()->Log("Voodoo Frost: Beginning OpenGL hook procedure.\n");
 
-	Log->logSimple(_STR(142));
+	bool success = true;
 
-	ULONG threadIDs[1];
-	threadIDs[0] = NULL;
-	LhSetGlobalInclusiveACL(threadIDs, 1);
+	// System-related
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glGetString));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glViewport);
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglCreateContext));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglDeleteContext));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglGetProcAddress));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglMakeCurrent));
 
-	DWORD retVal = NULL;
+	// Shader-related
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glClear));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglSwapLayerBuffers));
 
-	hook_glGetString = new HOOK_TRACE_INFO();
-	retVal = LhInstallHook( &glGetString, &PLATFORMNAME(glGetString), NULL, hook_glGetString) == 0;
+	// Material-related
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glBindTexture));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glDeleteTextures));
 
-	hook_glViewport = new HOOK_TRACE_INFO();
-	retVal &= LhInstallHook( &(glViewport), &PLATFORMNAME(glViewport), NULL, hook_glViewport) == 0;
+	// Shader/material shared
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glBegin));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glDrawElements));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glEnd));
 
-	hook_wglCreateContext = new HOOK_TRACE_INFO();
-	retVal &= LhInstallHook( &(wglCreateContext), &PLATFORMNAME(wglCreateContext), NULL, hook_wglCreateContext) == 0;
+	// Fog-related
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glEnable));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glFogf));
+	success &= VoodooHooker->InstallHook(HOOK_PARAMS(glFogfv));
 
-	hook_wglDeleteContext = new HOOK_TRACE_INFO();
-	retVal &= LhInstallHook( &(wglDeleteContext), &PLATFORMNAME(wglDeleteContext), NULL, hook_wglDeleteContext) == 0;
-
-	hook_wglGetProcAddress = new HOOK_TRACE_INFO();
-	retVal &= LhInstallHook( &(wglGetProcAddress), &PLATFORMNAME(wglGetProcAddress), NULL, hook_wglGetProcAddress) == 0;
-
-	hook_wglMakeCurrent = new HOOK_TRACE_INFO();
-	retVal &= LhInstallHook( &(wglMakeCurrent), &PLATFORMNAME(wglMakeCurrent), NULL, hook_wglMakeCurrent) == 0;
-
-	if ( nwshader->settings->use_shaders )
+	// Check the results and handle
+	if ( success )
 	{
-		hook_glClear = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(glClear), &PLATFORMNAME(glClear), NULL, hook_glClear) == 0;
-
-		hook_wglSwapLayerBuffers = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(wglSwapLayerBuffers), &PLATFORMNAME(wglSwapLayerBuffers), NULL, hook_wglSwapLayerBuffers) == 0;
-	}
-
-	if ( nwshader->settings->hook_textures || nwshader->settings->use_perpixel )
-	{
-
-		hook_glBindTexture = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(glBindTexture), &PLATFORMNAME(glBindTexture), NULL, hook_glBindTexture) == 0;
-
-		hook_glDeleteTextures = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(glDeleteTextures), &PLATFORMNAME(glDeleteTextures), NULL, hook_glDeleteTextures) == 0;
-	}
-
-	if ( nwshader->settings->use_shaders || nwshader->settings->hook_textures || nwshader->settings->use_perpixel )
-	{
-		hook_glBegin = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(glBegin), &PLATFORMNAME(glBegin), NULL, hook_glBegin) == 0;
-
-		hook_glDrawElements = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(glDrawElements), &PLATFORMNAME(glDrawElements), NULL, hook_glDrawElements) == 0;
-
-		hook_glEnd = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(glEnd), &PLATFORMNAME(glEnd), NULL, hook_glEnd) == 0;
-	}
-
-	if ( !nwshader->settings->use_fog || ( nwshader->settings->fog_mult != 1.00f ) )
-	{
-		hook_glEnable = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(glEnable), &PLATFORMNAME(glEnable), NULL, hook_glEnable) == 0;
-
-		hook_glFogf = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(glFogf), &PLATFORMNAME(glFogf), NULL, hook_glFogf) == 0;
-
-		hook_glFogfv = new HOOK_TRACE_INFO();
-		retVal &= LhInstallHook( &(glFogfv), &PLATFORMNAME(glFogfv), NULL, hook_glFogfv) == 0;
-	}
-
-	if ( retVal )
-	{
-		LhSetInclusiveACL(threadIDs, 1, hook_glGetString);
-		LhSetInclusiveACL(threadIDs, 1, hook_glViewport);
-
-		LhSetInclusiveACL(threadIDs, 1, hook_wglCreateContext);
-		LhSetInclusiveACL(threadIDs, 1, hook_wglDeleteContext);
-		LhSetInclusiveACL(threadIDs, 1, hook_wglGetProcAddress);
-		LhSetInclusiveACL(threadIDs, 1, hook_wglMakeCurrent);
-
-		// Fullscreen shader stuff
-		if ( nwshader->settings->use_shaders )
-		{
-			LhSetInclusiveACL(threadIDs, 1, hook_glClear);
-
-			LhSetInclusiveACL(threadIDs, 1, hook_wglSwapLayerBuffers);
-		}
-
-		if ( nwshader->settings->hook_textures || nwshader->settings->use_perpixel )
-		{
-			LhSetInclusiveACL(threadIDs, 1, hook_glBegin);
-			LhSetInclusiveACL(threadIDs, 1, hook_glBindTexture);
-			LhSetInclusiveACL(threadIDs, 1, hook_glDeleteTextures);
-			LhSetInclusiveACL(threadIDs, 1, hook_glDrawElements);
-			LhSetInclusiveACL(threadIDs, 1, hook_glEnd);
-			Log->logSimple(_STR(144));
-		}
-
-		if ( nwshader->settings->use_shaders || nwshader->settings->hook_textures || nwshader->settings->use_perpixel )
-		{
-			// Needed for drawn-geom flag
-			LhSetInclusiveACL(threadIDs, 1, hook_glBegin);
-			LhSetInclusiveACL(threadIDs, 1, hook_glDrawElements);
-			LhSetInclusiveACL(threadIDs, 1, hook_glEnd);
-		}
-
-		if ( !nwshader->settings->use_fog || ( nwshader->settings->fog_mult != 1.00f ) )
-		{
-			LhSetInclusiveACL(threadIDs, 1, hook_glEnable);
-			LhSetInclusiveACL(threadIDs, 1, hook_glFogf);
-			LhSetInclusiveACL(threadIDs, 1, hook_glFogfv);
-		}
-
-		Log->logSimple(_STR(143));
-		//engineHooked = true;
+		VoodooCore->GetLog()->Log("Voodoo Frost: OpenGL hooked successfully.\n");
+	} else {
+		VoodooCore->GetLog()->Log("Voodoo Frost: OpenGL hook procedure failed.\n");
 	}
 }

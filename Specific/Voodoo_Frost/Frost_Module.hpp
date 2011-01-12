@@ -24,5 +24,6 @@
 // NWShader module
 
 extern VoodooShader::Core * VoodooCore;
+extern VoodooShader::Adapter * VoodooFrost;
 
 #endif /*VOODOO_NWS_MODULE_HPP*/

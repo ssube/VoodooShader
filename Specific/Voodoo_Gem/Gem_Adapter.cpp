@@ -18,6 +18,8 @@ namespace VoodooShader
 		{
 			assert(device);
 
+			device->AddRef(); // Make sure it won't be released while we're using it
+
 			if ( !core )
 			{
 				core = VoodooShader::Core::Create("Voodoo_Gem.log");
@@ -45,9 +47,9 @@ namespace VoodooShader
 				core->GetLog()->Log("Voodoo Gem: Set Cg device.\n");
 			}
 
-			//#ifdef _DEBUG
+#ifdef _DEBUG
 			cgD3D9EnableDebugTracing(CG_TRUE);
-			//#endif
+#endif
 
 			cgD3D9SetManageTextureParameters(core->GetCGContext(), CG_TRUE);
 
@@ -81,6 +83,8 @@ namespace VoodooShader
 			hr = this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
 				D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
 
+			FSQuadVerts->AddRef();
+
 			if ( FAILED(hr) )
 			{
 				mCore->GetLog()->Log("Voodoo Gem: Failed to create vertex buffer.\n");
@@ -107,6 +111,28 @@ namespace VoodooShader
 			memcpy(pVertices, g_Vertices, sizeof(FSVert) * 4);
 
 			FSQuadVerts->Unlock();
+		}
+
+		Adapter::~Adapter()
+		{
+			// Clean up any active shaders
+			if ( mBoundFP )
+			{
+				cgD3D9UnbindProgram(mBoundFP);
+			}
+
+			if ( mBoundVP )
+			{
+				cgD3D9UnbindProgram(mBoundVP);
+			}
+
+			cgD3D9UnloadAllPrograms();
+
+			FSQuadVerts->Release();
+
+			mDevice->Release();
+
+			mCore->SetAdapter(NULL);
 		}
 
 		bool Adapter::LoadPass(Pass * pass)
@@ -215,6 +241,7 @@ namespace VoodooShader
 			if ( FAILED(hr) )
 			{
 				mCore->GetLog()->Format("Voodoo Gem: Failed to retrieve render target for shader %s.\n").With(shader->Name()).Done();
+				return;
 			}
 			
 			hr = mDevice->SetRenderTarget(0, scratchSurface);
