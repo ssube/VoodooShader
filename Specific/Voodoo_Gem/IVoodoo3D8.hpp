@@ -216,7 +216,7 @@ public:
 #ifdef _DEBUG
 		const char * textureType = 
 			VoodooShader::Converter::ToString(
-			VoodooShader::DirectX89::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
+			VoodooShader::Gem::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
 			);
 
 		VoodooCore->GetLog()->Format("Voodoo Gem: Backbuffer parameters for new device: %d by %d (%d buffers), %s.\n")
@@ -243,7 +243,7 @@ public:
 			IVoodoo3DDevice8 * mFakeDevice = new IVoodoo3DDevice8(mRealDevice);
 			VoodooDevice = mFakeDevice;
 
-			VoodooGem = (VoodooShader::Adapter*)new VoodooShader::DirectX89::Adapter(VoodooCore, mRealDevice);
+			VoodooGem = (VoodooShader::Adapter*)new VoodooShader::Gem::Adapter(VoodooCore, mRealDevice);
 
 			(*ppReturnedDeviceInterface) = (IDirect3DDevice8*)mFakeDevice;
 

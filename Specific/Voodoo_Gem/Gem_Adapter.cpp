@@ -9,7 +9,7 @@ IDirect3DTexture9 * scratchTexture = NULL;
 
 namespace VoodooShader
 {
-	namespace DirectX89
+	namespace Gem
 	{
 		LPDIRECT3DVERTEXBUFFER9 FSQuadVerts = NULL;
 

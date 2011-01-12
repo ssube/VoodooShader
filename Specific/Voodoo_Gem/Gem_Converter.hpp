@@ -6,7 +6,7 @@
 
 namespace VoodooShader
 {
-	namespace DirectX89
+	namespace Gem
 	{
 		class VOODOO_API_Gem Gem_Converter
 		{

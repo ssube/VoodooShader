@@ -5,7 +5,7 @@
 
 namespace VoodooShader
 {
-	namespace DirectX89
+	namespace Gem
 	{
 		struct FSVert
 		{

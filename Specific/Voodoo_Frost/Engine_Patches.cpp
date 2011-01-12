@@ -19,7 +19,7 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "FrostIncludes.hpp"
+#include "Frost_Module.hpp"
 
 /**
  * Applies a variation of the popular NWN camera hack to the engine in-memory.
@@ -27,18 +27,15 @@
  * 
  * @todo Update this to use customizable settings when they're implemented.
  */
-bool CameraHack()
+void CameraHack()
 {
 	VoodooCore->GetLog()->Log("Voodoo Frost: Applying camera hack...\n");
 
 	float maxDist	=  120.0f;
 	float minDist	=   -0.2f;
 	float angle		= 1000.0f;
-	//float maxDist	= nwshader->settings->camera_max;
-	//float minDist	= nwshader->settings->camera_min;
-	//float angle	= nwshader->settings->camera_angle;
 
-	DWORD oldProtect;
+	DWORD oldProtect, finalProtect;
 
 	BOOL lockStatus = VirtualProtect( (PVOID)0x004A9000, 0x1000, PAGE_EXECUTE_READWRITE, &oldProtect);
 
@@ -50,7 +47,7 @@ bool CameraHack()
 		memcpy( (PVOID)	0x004A9695,	&maxDist,	sizeof(float) );
 		memcpy(	(PVOID)	0x004A968B,	&minDist,	sizeof(float) );
 
-		VirtualProtect( (PVOID)0x004A9000, 0x1000, oldProtect, NULL);
+		VirtualProtect( (PVOID)0x004A9000, 0x1000, oldProtect, &finalProtect);
 
 		VoodooCore->GetLog()->Log("Voodoo Frost: Camera hack successfully applied.\n");
 	} else {

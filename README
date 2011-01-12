@@ -9,6 +9,7 @@ v0.1.9.75
 4. Running Voodoo
 5. Reporting Bugs
 6. Contact & Legal
+7. Resources
 
 
 = 1. Summary
@@ -91,9 +92,25 @@ IRC (nick peachykeen on chatspike, freenode and nwn2source).
 
 Voodoo Shader Framework (c) 2010-2011 by Sean "peachykeen" Sube, All Rights Reserved.
 
-The Voodoo Shader Framework, all associated binary or object files and source code is released under
-the terms and conditions of the GNU General Public License. See the included LICENSE file for more
-details.
+The Voodoo Shader Framework, all associated binary or object files and source code is released 
+under the terms and conditions of the GNU General Public License. See the included LICENSE file for
+more details.
 
 The Voodoo Shader Framework has absolutely no warranty, as described in the license document. Some
-support may be provided, at the developer's discretion, please use the above contact methods.
+support may be provided, at the developer's discretion; please use the above contact methods to get
+in touch.
+
+
+= 7. Resources
+
+This section has a few useful links for various Voodoo resources. Some of these may not have
+perfect uptime, if they are being moved or tweaked, but most should be relatively reliable.
+
+Main site & forums:
+	http://www.voodooshader.com
+	
+API documentation:
+	http://docs.voodooshader.com/core (replace the /core with a given module to find docs for that)
+	
+Bug tracker:
+	http://tracker.voodooshader.com (may be tied into the forum at some point)

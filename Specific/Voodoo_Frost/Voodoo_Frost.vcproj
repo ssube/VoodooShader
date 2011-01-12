@@ -55,13 +55,14 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Voodoo_Core_d.dll"
+				AdditionalDependencies="Voodoo_Core_d.lib glew32.lib opengl32.lib glu32.lib cg.lib cgGL.lib EasyHook32.lib"
 				OutputFile="$(OutDir)\$(ProjectName)_d.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(SolutionDir)\bin"
@@ -131,13 +132,14 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(SolutionDir)\Framework"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Voodoo_Core.dll"
+				AdditionalDependencies="Voodoo_Core.lib glew32.lib opengl32.lib glu32.lib cg.lib cgGL.lib EasyHook32.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(SolutionDir)\bin"
 				GenerateDebugInformation="true"
@@ -182,7 +184,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Frost_Module.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\HookManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\VoodooGL.cpp"
 				>
 			</File>
 		</Filter>
@@ -196,11 +206,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\resource.h"
+				RelativePath=".\Frost_Version.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\VoodooFrost.hpp"
+				RelativePath=".\HookManager.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\resource.h"
 				>
 			</File>
 			<File
@@ -214,7 +228,7 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\Voodoo_NWS.rc"
+				RelativePath=".\Voodoo_Frost.rc"
 				>
 			</File>
 		</Filter>

@@ -19,4 +19,13 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "FrostIncludes.hpp"
+#include "Version.hpp"
+
+// Frost defs -----------------------------------------------------------------
+#define VOODOO_FROST_NAME			"Voodoo/Frost"
+#define VOODOO_FROST_PRETTYNAME		"Voodoo/Frost"
+#define VOODOO_FROST_VERSION_MAJOR	0
+#define VOODOO_FROST_VERSION_MINOR	1
+#define VOODOO_FROST_VERSION_PATCH	1
+#define VOODOO_FROST_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
+//-----------------------------------------------------------------------------
