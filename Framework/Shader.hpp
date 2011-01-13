@@ -113,9 +113,10 @@ namespace VoodooShader
 		 * Link a particular effect-level parameter against various core
 		 * elements (exact behavior depends on param type).
 		 *
-		 * @param cgparam The parameter to link.
+		 * @param param The parameter to link.
 		 */
-		void SetupParameter(CGparameter cgparam);
+		void LinkParameter(ParameterRef param);
+		void LinkSampler(ParameterRef param);
 
 		void SetupTechniques();
 
@@ -164,9 +165,7 @@ namespace VoodooShader
 
 		TextureRef GetTarget();
 
-		CGprogram GeometryProgram();
-		CGprogram VertexProgram();
-		CGprogram FragmentProgram();
+		CGprogram GetProgram(ProgramStage stage);
 
 		void Link();
 
@@ -181,6 +180,10 @@ namespace VoodooShader
 		CGprogram mGeometryProgram;
 		CGprogram mVertexProgram;
 		CGprogram mFragmentProgram;
+
+		//! @todo Add support for D3D11 tessellation programs
+		//CGprogram mDomainProgram;
+		//CGprogram mHullProgram;
 	};
 }
 

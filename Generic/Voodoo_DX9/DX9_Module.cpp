@@ -123,8 +123,8 @@ namespace VoodooShader
 		{
 			assert(pass);
 
-			CGprogram vertProg = pass->VertexProgram();
-			CGprogram fragProg = pass->FragmentProgram();
+			CGprogram vertProg = pass->GetProgram(PS_Vertex);
+			CGprogram fragProg = pass->GetProgram(PS_Fragment);
 
 			HRESULT hr = S_OK;
 
@@ -158,12 +158,12 @@ namespace VoodooShader
 		void Adapter::BindPass(PassRef pass)
 		{
 			// Both should be loaded and valid (if they exist and prepare was called)
-			CGprogram vertProg = pass->VertexProgram();
-			CGprogram fragProg = pass->FragmentProgram();
+			CGprogram vertProg = pass->GetProgram(PS_Vertex);
+			CGprogram fragProg = pass->GetProgram(PS_Fragment);
 
 			if ( cgIsProgram(vertProg) )
 			{
-				HRESULT hr = cgD3D9BindProgram(pass->VertexProgram());
+				HRESULT hr = cgD3D9BindProgram(vertProg);
 
 				if ( !SUCCEEDED(hr) )
 				{
@@ -179,7 +179,7 @@ namespace VoodooShader
 
 			if ( cgIsProgram(fragProg) )
 			{
-				HRESULT hr = cgD3D9BindProgram(pass->FragmentProgram());
+				HRESULT hr = cgD3D9BindProgram(fragProg);
 
 				if ( !SUCCEEDED(hr) )
 				{
@@ -188,7 +188,7 @@ namespace VoodooShader
 
 					if ( cgIsProgram(vertProg) )
 					{
-						cgD3D9UnbindProgram(pass->VertexProgram());
+						cgD3D9UnbindProgram(vertProg);
 						mBoundVP = NULL;
 					}
 					return;
@@ -218,24 +218,24 @@ namespace VoodooShader
 
 		void Adapter::DrawQuad(Vertex * vertexData)
 		{
+			IDirect3DVertexBuffer9 * sourceBuffer;
+			UINT sourceOffset, sourceStride;
+			DWORD sourceFVF, zEnabled, aEnabled, cullMode;
+
+			this->mDevice->GetStreamSource(0, &sourceBuffer, &sourceOffset, &sourceStride);
+			this->mDevice->GetFVF(&sourceFVF);
+			this->mDevice->GetRenderState(D3DRS_ZENABLE, &zEnabled);
+			this->mDevice->GetRenderState(D3DRS_ALPHABLENDENABLE, &aEnabled);
+			this->mDevice->GetRenderState(D3DRS_CULLMODE, &cullMode);
+
+			this->mDevice->SetStreamSource(0, FSQuadVerts, 0, sizeof(FSVert));
+			this->mDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
+			this->mDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+			this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+			this->mDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
 			if ( !vertexData )
 			{
-				IDirect3DVertexBuffer9 * sourceBuffer;
-				UINT sourceOffset, sourceStride;
-				DWORD sourceFVF, zEnabled, aEnabled, cullMode;
-
-				this->mDevice->GetStreamSource(0, &sourceBuffer, &sourceOffset, &sourceStride);
-				this->mDevice->GetFVF(&sourceFVF);
-				this->mDevice->GetRenderState(D3DRS_ZENABLE, &zEnabled);
-				this->mDevice->GetRenderState(D3DRS_ALPHABLENDENABLE, &aEnabled);
-				this->mDevice->GetRenderState(D3DRS_CULLMODE, &cullMode);
-
-				this->mDevice->SetStreamSource(0, FSQuadVerts, 0, sizeof(FSVert));
-				this->mDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
-				this->mDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
-				this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-				this->mDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-
 				HRESULT hr = this->mDevice->BeginScene();
 				if ( SUCCEEDED(hr) )
 				{
@@ -244,12 +244,6 @@ namespace VoodooShader
 				} else {
 					mCore->GetLog()->Log("Voodoo DX9: Failed to draw quad.\n");
 				}
-
-				this->mDevice->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);
-				this->mDevice->SetFVF(sourceFVF);
-				this->mDevice->SetRenderState(D3DRS_ZENABLE, zEnabled);
-				this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
-				this->mDevice->SetRenderState(D3DRS_CULLMODE, cullMode);
 			} else {
 				// Draw a quad from user vertexes
 				HRESULT hr = this->mDevice->BeginScene();
@@ -263,6 +257,12 @@ namespace VoodooShader
 					this->mDevice->EndScene();
 				}
 			}
+
+			this->mDevice->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);
+			this->mDevice->SetFVF(sourceFVF);
+			this->mDevice->SetRenderState(D3DRS_ZENABLE, zEnabled);
+			this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
+			this->mDevice->SetRenderState(D3DRS_CULLMODE, cullMode);
 		}
 
 		void Adapter::DrawShader(ShaderRef shader)

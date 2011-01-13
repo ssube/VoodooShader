@@ -46,11 +46,11 @@ namespace VoodooShader
 		std::string Message();
 
 	private:
-		const Core * mCore;
-		const std::string mMessage;
-		const char * mFile;
-		const char * mFunction;
-		const int mLine;
+		Core * mCore;
+		std::string mMessage;
+		char * mFile;
+		char * mFunction;
+		int mLine;
 	};
 }
 

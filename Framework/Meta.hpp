@@ -120,8 +120,8 @@ namespace VoodooShader
 		TF_RGBA16F,			/*!< Half-precision RGBA */
 		TF_RGBA32F,			/*!< Full-precision RGBA (float/single) */
 		// Depth-buffer formats
-		TF_D16,				/*!< Half-precision depth (Z-buffer) */
-		TF_D32,				/*!< Full-precision depth (Z-buffer) */
+		TF_D16,				/*!< Half-precision depth (Z-buffer, see @ref depthbuffers "the depth buffers notes" for more info) */
+		TF_D32,				/*!< Full-precision depth (Z-buffer, see @ref depthbuffers "the depth buffers notes" for more info) */
 		// Max
 		TF_Count			/*!< Enumerator values count. */
 	};
@@ -134,27 +134,43 @@ namespace VoodooShader
 	 */
 	enum ParameterType
 	{
-		PT_Unknown = 0,
+		PT_Unknown = 0,		/*!< Unknown parameter type */
 		// Float-vectors
-		PT_Float1,
-		PT_Float2, 
-		PT_Float3,
-		PT_Float4,
+		PT_Float1,			/*!< Single-component float vector */
+		PT_Float2,			/*!< Two-component float vector */
+		PT_Float3,			/*!< Three-component float vector */
+		PT_Float4,			/*!< Four-component float vector */
 		// Samplers
-		PT_Sampler1D,
-		PT_Sampler2D,
-		PT_Sampler3D,
+		PT_Sampler1D,		/*!< One-dimensional sampler (for a 1D texture, see @ref texturetypes "texture types" for more info) */
+		PT_Sampler2D,		/*!< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info) */
+		PT_Sampler3D,		/*!< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info) */
 		// Max
-		PT_Count
+		PT_Count			/*!< Enumerator values count */
 	};
 
 	enum ParameterCategory
 	{
-		PC_Unknown = 0,
-		PC_Float,
-		PC_Sampler,
+		PC_Unknown = 0,		/*!< Unknown parameter category */
+		// Valid categories
+		PC_Float,			/*!< Float vector parameter (may have 1 to 4x4 components) */
+		PC_Sampler,			/*!< Sampler parameter (may sample 1D to 3D textures) */
 		// Max
-		PC_Count
+		PC_Count			/*!< Enumerator values count */
+	};
+
+	enum ProgramStage
+	{
+		PS_Unknown = 0,		/*!< Unknown program stage */
+		// Basic stages
+		PS_Vertex,			/*!< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
+		PS_Fragment,		/*!< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
+		// Geometry stages
+		PS_Geometry,		/*!< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
+		// Tessellation stages
+		PS_Domain,			/*!< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
+		PS_Hull,			/*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
+		// Max
+		PS_Count			/*!< Enumerator values count */
 	};
 }
 

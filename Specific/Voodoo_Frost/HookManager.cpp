@@ -123,7 +123,7 @@ namespace VoodooShader
 		{
 			mHooks.clear();
 
-			mThreadIDs = new ULONG[1];
+			mThreadIDs = new ULONG;
 			mThreadCount = 1;
 
 			mThreadIDs[0] = NULL;

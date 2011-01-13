@@ -57,29 +57,28 @@ namespace VoodooShader
 
 		while ( cgIsParameter(cParam) )
 		{
-			this->SetupParameter(cParam);
+			const char * name = cgGetParameterName(cParam);
+			ParameterRef param(new Parameter(this, cParam));
+
+			this->mParameters[name] = param;
+
+			this->LinkParameter(param);
 		}
 
 		this->SetupTechniques();
 	}
 
-	void Shader::SetupParameter(CGparameter cgparam)
+	void Shader::LinkParameter(ParameterRef param)
 	{
 		// Cache basic data for future use 
-		ParameterType type = Converter::ToParameterType(cgGetParameterType(cgparam));
-		const char * name = cgGetParameterName(cgparam);
-
-		// Create the reference that will be stored in the param vector for the
-		// shader's life, this may be accessed many times.
-		ParameterRef param(new Parameter(this, cgparam));
-
-		this->mParameters[name] = param;
+		ParameterType type = param->GetType();
+		CGparameter cgparam = param->GetParameter();
 
 		// Check if it has a global link annotation
 		CGannotation globalAnnotation = cgGetNamedParameterAnnotation(
 				cgparam, "global");
 
-		if ( cgIsAnnotation(globalAnnotation) )
+		if ( cgIsAnnotation(globalAnnotation) && cgGetAnnotationType(globalAnnotation) == CG_STRING )
 		{
 			const char * globalName = cgGetStringAnnotationValue(globalAnnotation);
 			if ( globalName && strlen(globalName) > 0 )
@@ -104,36 +103,43 @@ namespace VoodooShader
 		// a sampler.
 		if (  Converter::ToParameterCategory(type) == PC_Sampler )
 		{
-			// Link to a texture
-			CGannotation textureAnnotation = cgGetNamedParameterAnnotation(
-				cgparam, "texture");
+			this->LinkSampler(param);
+		}
+	}
 
-			if ( cgIsAnnotation(textureAnnotation) )
+	void Shader::LinkSampler(ParameterRef param)
+	{
+		CGparameter cgparam = param->GetParameter();
+
+		// Link to a texture
+		CGannotation textureAnnotation = cgGetNamedParameterAnnotation(
+			cgparam, "texture");
+
+		if ( cgIsAnnotation(textureAnnotation) && cgGetAnnotationType(textureAnnotation) == CG_STRING )
+		{
+			const char * textureName = cgGetStringAnnotationValue(textureAnnotation);
+			if ( textureName && strlen(textureName) > 0 )
 			{
-				const char * textureName = cgGetStringAnnotationValue(textureAnnotation);
-				if ( textureName && strlen(textureName) > 0 )
+				TextureRef texture = mCore->GetTexture(textureName);
+				if ( texture )
 				{
-					TextureRef texture = mCore->GetTexture(textureName);
-					if ( texture )
-					{
-						mCore->GetAdapter()->ConnectTexture(param, texture);
-					} else {
-						/**
-						 * @todo Need to create a texture based on the annotation params here. That will
-						 *		involve reading them and calling back into the adapter, so it should be
-						 *		another func.
-						 */
-						mCore->GetLog()->Format("Voodoo Core: Could not find texture %s for parameter %s.\n")
-							.With(textureName).With(param->Name()).Done();
-					}
+					mCore->GetAdapter()->ConnectTexture(param, texture);
 				} else {
-					mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture name for parameter %s.\n")
-						.With(param->Name()).Done();
+					/**
+					 * @todo Need to create a texture based on the annotation params here. That will
+					 *		involve reading them and calling back into the adapter, so it should be
+					 *		another func.
+					 */
+					mCore->GetLog()->Format("Voodoo Core: Could not find texture %s for parameter %s.\n")
+						.With(textureName).With(param->Name()).Done();
 				}
 			} else {
-				mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture annotation for parameter %s.\n")
+				mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture name for parameter %s.\n")
 					.With(param->Name()).Done();
 			}
+		} else {
+			mCore->GetLog()->Format("Voodoo Core: Could not retrieve texture annotation for parameter %s.\n")
+				.With(param->Name()).Done();
 		}
 	}
 
@@ -333,6 +339,24 @@ namespace VoodooShader
 		return mTarget;
 	}
 
+	CGprogram Pass::GetProgram(ProgramStage stage)
+	{
+		switch ( stage )
+		{
+		case PS_Vertex:
+			return mVertexProgram;
+		case PS_Fragment:
+			return mFragmentProgram;
+		case PS_Geometry:
+			return mGeometryProgram;
+		case PS_Domain:
+		case PS_Hull:
+		case PS_Unknown:
+		default:
+			return NULL;
+		}
+	}
+
 	void Pass::Link()
 	{
 		this->mVertexProgram = cgGetPassProgram(this->mPass, CG_VERTEX_DOMAIN);
@@ -372,27 +396,19 @@ namespace VoodooShader
 		// Load the programs
 		Adapter * adapter = mCore->GetAdapter();
 
-		assert(adapter);
-
-		if ( !adapter->LoadPass(this) )
+		if ( !adapter )
 		{
-			mCore->GetLog()->Format("Voodoo Core: Failed to load pass %s.\n")
+			mCore->GetLog()->Format("Voodoo Core: No adapter found, pass %s must be explicitly loaded later.\n")
 				.With(this->Name()).Done();
+		} else {
+			if ( !adapter->LoadPass(this) )
+			{
+				mCore->GetLog()->Format("Voodoo Core: Failed to load pass %s.\n")
+					.With(this->Name()).Done();
+			} else {
+				mCore->GetLog()->Format("Voodoo Core: Successfully loaded pass %s.\n")
+					.With(this->Name()).Done();
+			}
 		}
-	}
-
-	CGprogram Pass::GeometryProgram()
-	{
-		return this->mGeometryProgram;
-	}
-
-	CGprogram Pass::FragmentProgram()
-	{
-		return this->mFragmentProgram;
-	}
-
-	CGprogram Pass::VertexProgram()
-	{
-		return this->mVertexProgram;
 	}
 }
