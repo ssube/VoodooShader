@@ -134,13 +134,47 @@ namespace VoodooShader
 	public:
 		Technique(Shader * parent, CGtechnique cgTech);
 
+		/**
+		 * Retrieve a fully qualified technique name (including shader name)
+		 * from the technique.
+		 *
+		 * @return This technique's name
+		 */
 		String Name();
 
+		/**
+		 * Retrieve the core this technique was compiled under.
+		 *
+		 * @return The core
+		 */
 		Core * GetCore();
 
+		/**
+		 * Retrieve the number of passes in this technique.
+		 *
+		 * @return The number of passes
+		 */
 		size_t GetPassCount();
+
+		/**
+		 * Retrieve a specific pass from this technique.
+		 *
+		 * @param index The pass number to retrieve
+		 * @return A reference to the given pass
+		 * @throws Exception if index is greater than the number of passes the
+		 *		technique has (call Technique::GetPassCount() first to find the
+		 *		number of passes)
+		 */
 		PassRef GetPass(size_t index);
 
+		/**
+		 * Retrieve the technique's final target. This is the surface the
+		 * technique expects the results of the final pass to end up in. The
+		 * technique may render to scratch textures, but the final result should
+		 * go into this texture (not, for example, the lastshader texture).
+		 *
+		 * @return A reference to the target texture
+		 */
 		TextureRef GetTarget();
 
 		void Link();
@@ -159,12 +193,45 @@ namespace VoodooShader
 	public:
 		Pass(Technique * parent, CGpass cgPass);
 
+		/**
+		 * Retrieve the fully qualified pass name, including technique and
+		 * shader name.
+		 *
+		 * @return The pass name
+		 */
 		String Name();
 
+		/**
+		 * Retrieve the core this pass was compiled under.
+		 *
+		 * @return The core
+		 */
 		Core * GetCore();
 
+		/**
+		 * Retrieve the target this pass should render to. This will be a texture
+		 * that has been registered with the core. The results of the shader
+		 * program(s), when run, should end up <em>only</em> in this texture
+		 * (scratch textures may be used, but the program should not write to a
+		 * common texture such as lastpass).
+		 *
+		 * @return A reference to the target texture.
+		 */
 		TextureRef GetTarget();
 
+		/**
+		 * Retrieve a specific program stage from this pass. Each pass may have
+		 * many programs, each program controls one stage of the render process.
+		 * The most commonly used stages are the vertex and fragment stages,
+		 * which are supported by almost all hardware. Geometry stages are also
+		 * available, but not as well supported. D3D11 tessellation control 
+		 * stages are not yet supported by the Voodoo Shader Framework.
+		 *
+		 * @param stage The stage to retrieve.
+		 * @return The program corresponding to the desired stage, or NULL if
+		 *		the pass has no program for that stage or an unsupported or
+		 *		unknown stage is requested.
+		 */
 		CGprogram GetProgram(ProgramStage stage);
 
 		void Link();
