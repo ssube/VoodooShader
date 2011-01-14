@@ -35,9 +35,30 @@ namespace VoodooShader
 		return this->mDefaultTechnique;
 	}
 
-	size_t Shader::GetParamCount()
+	size_t Shader::GetParameterCount()
 	{
 		return mParameters.size();
+	}
+
+	ParameterRef Shader::GetParameter(size_t index)
+	{
+		if ( index < mParameters.size() )
+		{
+			return (mParameters.begin() + index);
+		} else {
+			return ParameterRef();
+		}
+	}
+
+	ParameterRef Shader::GetParameter(String name)
+	{
+		ParameterMap::iterator param = mParameters.find(name);
+		if ( param != mParameters.end() )
+		{
+			return param;
+		} else {
+			return ParameterRef();
+		}
 	}
 
 	String Shader::Name()

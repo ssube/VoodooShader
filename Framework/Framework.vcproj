@@ -211,6 +211,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FileSystem.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\FullscreenManager.cpp"
 				>
 			</File>
@@ -258,6 +262,10 @@
 			</File>
 			<File
 				RelativePath=".\Exception.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FileSystem.hpp"
 				>
 			</File>
 			<File

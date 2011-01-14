@@ -55,6 +55,10 @@ namespace VoodooShader
 	class Pass;
 	class Parameter;
 
+	class FileSystem;
+	class File;
+	class Image;
+
 	class Exception;
 
 	class Converter;
@@ -69,6 +73,8 @@ namespace VoodooShader
 	typedef boost::shared_ptr<Technique>		TechniqueRef;
 	typedef boost::shared_ptr<Pass>				PassRef;
 	typedef boost::shared_ptr<Parameter>		ParameterRef;
+	typedef boost::shared_ptr<File>				FileRef;
+	typedef boost::shared_ptr<Image>			ImageRef;
 
 	// Shader collections
 	typedef std::map<String, ShaderRef>			ShaderMap;
@@ -98,6 +104,8 @@ namespace VoodooShader
 	// Miscellaneous collections
 	typedef std::map<TextureRef, ShaderRef>		MaterialMap;
 	typedef std::map<String, CGeffect>			CGEffectMap;
+	typedef std::vector<String>					StringVector;
+	typedef std::list<String>					StringList;
 
 	/**
 	 * Texture formats for use by @ref VoodooShader::Texture "Textures". These 
@@ -171,6 +179,16 @@ namespace VoodooShader
 		PS_Hull,			/*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
 		// Max
 		PS_Count			/*!< Enumerator values count */
+	};
+
+	enum FileOpenMode
+	{
+		FM_Unknown = 0,
+		// Valid modes
+		FM_Read,
+		FM_Write,
+		// Max
+		FM_Count
 	};
 }
 

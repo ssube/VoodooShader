@@ -106,9 +106,9 @@
  *	parameters may be linked by calling Parameter::Attach() on the global
  *	parameter and providing the effect parameter, like so:
  *	<code>
- *	ParameterRef global = Core->CreateParameter("time", PT_Float);
- *	ParameterRef effect = Shader->GetParameter("time");
- *	global->Attach(effect);
+ *	ParameterRef global = Core->CreateParameter("time", PT_Float);<br />
+ *	ParameterRef effect = Shader->GetParameter("time");<br />
+ *	global->Attach(effect);<br />
  *	</code>
  *	Whenever the global parameter is set to a new value, all attached parameters
  *	will also be updated.
@@ -129,15 +129,15 @@
  *	to the <code>lastshader</code> or <code>lastpass</code> texture, will
  *	instead go to the specified target. Targets may be specified like so:
  *	<code>
- *	technique dx9_high
- *		< string target=":buffer_group1"; >
- *	{
- *		pass diffuse
- *			< string target=":buffer_diffuse"; >
- *		{
- *			...
- *		}
- *	}
+ *	technique dx9_high<br />
+ *		< string target=":buffer_group1"; ><br />
+ *	{<br />
+ *		pass diffuse<br />
+ *			< string target=":buffer_diffuse"; ><br />
+ *		{<br />
+ *			...<br />
+ *		}<br />
+ *	}<br />
  *	</code>
  *	This allows pass and technique output to be stored and later used, by other
  *	passes from the same effect or even by other effects.

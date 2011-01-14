@@ -72,7 +72,7 @@ namespace VoodooShader
 		 * 
 		 * @return The parameter count.
 		 */
-		size_t GetParamCount();
+		size_t GetParameterCount();
 
 		/**
 		 * Retrieve a specific parameter from the shader. These may be modified
@@ -80,9 +80,21 @@ namespace VoodooShader
 		 * value (in most cases).
 		 *
 		 * @param index The index of the parameter to retrieve.
-		 * @return A shared reference to the parameter.
+		 * @return A shared reference to the parameter, or to NULL if it is not
+		 *		found (the index is invalid).
 		 */
-		ParameterRef GetParam(size_t index);
+		ParameterRef GetParameter(size_t index);
+
+		/**
+		 * Retrieve a specific parameter from the shader. These may be modified
+		 * at runtime and will automatically update Cg and the GPU with their
+		 * values (in most cases).
+		 *
+		 * @param name The name of the parameter to retrieve.
+		 * @return A shared reference to the parameter, or to NULL if it is not
+		 *		found.
+		 */
+		ParameterRef GetParameter(String name);
 
 		/**
 		 * Retrieve a technique from the shader by name. Most cases should use
