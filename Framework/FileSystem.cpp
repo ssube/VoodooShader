@@ -3,16 +3,6 @@
 
 namespace VoodooShader
 {
-	template <class T> removeMatching
-		: public std::binary_function<T, T, bool>
-	{
-	public:
-		bool operator=(T & arg, T & match)
-		{
-			return ( arg == match );
-		}
-	};
-
 	void FileSystem::RegisterDir(String name)
 	{
 		this->mDirectories.push_front(name);
@@ -20,7 +10,8 @@ namespace VoodooShader
 
 	void FileSystem::RemoveDir(String name)
 	{
-		this->mDirectories.remove_if(removeMatching(name));
+		//! @todo Implement FileSystem::RemoveDir
+		//this->mDirectories.remove_if(removeMatching<String>(name));
 	}
 
 	FileRef FileSystem::GetFile(String name)
@@ -32,20 +23,19 @@ namespace VoodooShader
 			// Try to find the file in each registered dir
 			String fullname = (*curDir) + ( "\\" + name );
 
-			HANDLE file = CreateFileA(fullname, 0, 0, NULL, OPEN_EXISTING, NULL, NULL);
+			HANDLE file = CreateFileA(fullname.c_str(), 0, 0, NULL, OPEN_EXISTING, NULL, NULL);
 
 			if ( file != INVALID_HANDLE_VALUE )
 			{
 				CloseHandle(file);
 
-				return FileRef(new File(fullname));
+				return FileRef(new File(mCore, fullname));
 			}
 
 			++curDir;
 		}
 
-		mCore->GetLog()->Format("Voodoo Core: Unable to find file %s.\n")
-			.With(name).Done();
+		mCore->Log("Voodoo Core: Unable to find file %s.\n", name);
 
 		return FileRef();
 	}
@@ -57,10 +47,10 @@ namespace VoodooShader
 		switch ( mode )
 		{
 		case FM_Read:
-			mode = GENERIC_READ;
+			access = GENERIC_READ;
 			break;
 		case FM_Write:
-			mode = GENERIC_WRITE;
+			access = GENERIC_WRITE;
 			break;
 		case FM_Unknown:
 		default:
@@ -68,8 +58,12 @@ namespace VoodooShader
 			break;
 		}
 
-		mHandle = CreateFileA(mName, access, 0, NULL, OPEN_EXISTING);
+		mHandle = CreateFileA(mName.c_str(), access, 0, NULL, OPEN_EXISTING, NULL, NULL);
 
 		return ( mHandle != INVALID_HANDLE_VALUE );
 	}
+
+	File::File(Core * core, String name)
+		: mName(name), mCore(core), mHandle(NULL)
+	{	};
 }

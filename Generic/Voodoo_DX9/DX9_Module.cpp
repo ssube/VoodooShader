@@ -343,7 +343,7 @@ VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
 	VoodooCore->GetLog()->SetBufferSize(0);
 #endif
 
-	VoodooCore->GetLog()->Format("Voodoo DX9: Direct3DCreate9 called, SDK version: %d.\n").With(version).Done();
+	VoodooCore->GetLog()->Log("Voodoo DX9: Direct3DCreate9 called, SDK version: %d.\n", version);
 
 	//Load the real d3d8 dll and get device caps
 	char Path[MAX_PATH];

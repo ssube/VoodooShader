@@ -14,10 +14,8 @@ namespace VoodooShader
 	{
 		if ( core )
 		{
-			Logger * Log = core->GetLog();
-			Log->Format("Voodoo Core: Exception in %s at %s (%d): %s\n")
-				.With(file).With(function).With(line).With(message).Done();
-			Log->Dump();
+			core->Log("Voodoo Core: Exception in %s at %s (%d): %s\n",
+				file, function, line, message);
 		}
 	}
 
@@ -30,10 +28,8 @@ namespace VoodooShader
 	{
 		if ( core )
 		{
-			Logger * Log = core->GetLog();
-			Log->Format("Voodoo Core: Exception in %s at %s (%d): %s\n")
-				.With(file).With(function).With(line).With(message).Done();
-			Log->Dump();
+			core->Log("Voodoo Core: Exception in %s at %s (%d): %s\n", 
+				file, function, line, message);
 		}
 	}
 

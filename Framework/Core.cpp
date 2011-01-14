@@ -94,9 +94,14 @@ namespace VoodooShader
 		return this->mAdapter;
 	}
 
-	Logger * Core::GetLog()
+	void Core::Log(const char * msg, ...)
 	{
-		return this->mLogger;
+		va_list arglist;
+
+		if ( this->mLogger )
+		{
+			this->mLogger->Log(msg, arglist);
+		}
 	}
 
 	void Core::SetAdapter(Adapter * adapter)
@@ -187,15 +192,13 @@ namespace VoodooShader
 		Core * me = reinterpret_cast<Core*>(core);
 		if ( me )
 		{
-			me->mLogger->Format("Voodoo Core: CG error: %s\n")
-				.With(cgGetErrorString(error)).Done();
+			me->Log("Voodoo Core: CG error: %s\n", cgGetErrorString(error));
 
 			// Print any compiler errors or other details we can find
 			const char * listing = cgGetLastListing(context);
 			while ( listing )
 			{
-				me->mLogger->Format("Voodoo Core: CG listing: %s\n")
-					.With(listing).Done();
+				me->Log("Voodoo Core: CG listing: %s\n", listing);
 				listing = cgGetLastListing(context);
 			}
 		}

@@ -1,9 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <time.h>
-#include <windows.h>
-#include <boost/format.hpp>
+//#include <boost/format.hpp>
 
 #include "Logger.hpp"
 #include "Exception.hpp"
@@ -28,7 +23,6 @@ namespace VoodooShader
 			Throw("Could not open log file!", NULL);
 		}
 
-		this->mFormat = new Formatter(this);
 		this->mLocalTime = new tm();
 
 		this->Log("Logger created.\n");
@@ -44,10 +38,6 @@ namespace VoodooShader
 		{
 			delete this->mLocalTime;
 		}
-		if ( this->mFormat )
-		{
-			delete this->mFormat;
-		}
 	}
 
 	/**
@@ -58,18 +48,20 @@ namespace VoodooShader
 	 * @note If the system time cannot be retrieved, an error stamp will be
 	 *		printed with an equal length.
 	 */
-	VOODOO_API void Logger::Timestamp()
+	VOODOO_API String Logger::Timestamp()
 	{
 		time_t now = time(NULL);
 
 		if ( localtime_s(this->mLocalTime, &now) == ERROR_SUCCESS )
 		{
-			this->Format("%02d.%02d.%02d :: ")
-				.With(this->mLocalTime->tm_hour)
-				.With(this->mLocalTime->tm_min )
-				.With(this->mLocalTime->tm_sec ).Done(false);
+			char stamp[16];
+			sprintf_s(stamp, 16, "%02d.%02d.%02d :: ", 
+				this->mLocalTime->tm_hour,
+				this->mLocalTime->tm_min,
+				this->mLocalTime->tm_sec);
+			return stamp;
 		} else {
-			this->mLogFile <<"Unknown  :: ";
+			return "Unknown  :: ";
 		}
 	}
 
@@ -78,24 +70,24 @@ namespace VoodooShader
 		this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
 	}
 
-	/// Logs a simple timestamped line
-	VOODOO_API void Logger::Log(const char* msg, bool timestamp)
+	/// Logs a simple timestamped string
+	VOODOO_API void Logger::Log(const char * msg, ...)
 	{
-		if ( timestamp )
-		{
-			this->Timestamp();
-		}
-		this->mLogFile << msg;
+		va_list args;
+		char buffer[4096];
+
+		vsnprintf(buffer, 4095, msg, args);
+		buffer[4095] = 0;
+
+		this->mLogFile << this->Timestamp() << buffer;
 	}
 
-	/// Logs a simple timestamped string
-	VOODOO_API void Logger::Log(string msg, bool timestamp)
+	VOODOO_API void Logger::DebugLog(const char * msg, ...)
 	{
-		if ( timestamp )
-		{
-			this->Timestamp();
-		}
-		this->mLogFile << msg;
+#ifdef _DEBUG
+		va_list args;
+		this->Log(msg, args);
+#endif
 	}
 
 	/// \brief Dumps the log file to disk immediately.
@@ -136,33 +128,5 @@ namespace VoodooShader
 			this->Log("Logger: Log file closed by Logger::Close.\n");
 			this->mLogFile.close();
 		}
-	}
-
-	VOODOO_API Formatter & Logger::Format(std::string message)
-	{
-		return this->mFormat->Record(message);
-	}
-
-	VOODOO_API Formatter & Formatter::Record(string fmtString)
-	{
-		this->mFmtObj.parse(fmtString);
-		return (*this);
-	}
-
-	VOODOO_API void Formatter::Done(bool timestamp)
-	{
-		try
-		{
-			this->mParent->Log(this->mFmtObj.str(), timestamp);
-		} catch ( Exception & exc ) {
-			this->mParent->Log("Voodoo Core: Logger error: ", timestamp);
-			this->mParent->Log(exc.Message(), false);
-			this->mParent->Log("\n", false);
-		}
-	}
-
-	VOODOO_API Formatter::Formatter(Logger * parent)
-	{
-		this->mParent = parent;
 	}
 }

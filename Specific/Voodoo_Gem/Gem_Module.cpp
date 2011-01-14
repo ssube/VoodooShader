@@ -50,7 +50,7 @@ VOODOO_API_Gem void * __stdcall Voodoo3DCreate8(UINT version)
 	VoodooCore->GetLog()->SetBufferSize(0);
 #endif
 
-	VoodooCore->GetLog()->Format("Voodoo Gem: Direct3DCreate8 called, SDK version: %d.\n").With(version).Done();
+	VoodooCore->GetLog()->Log("Voodoo Gem: Direct3DCreate8 called, SDK version: %d.\n", version);
 
 	//Load the real d3d8 dll and get device caps
 	char Path[MAX_PATH];

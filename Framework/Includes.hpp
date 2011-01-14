@@ -22,22 +22,20 @@
 #ifndef VOODOO_INCLUDES_HPP
 #define VOODOO_INCLUDES_HPP
 
-#define WIN32_LEAN_AND_MEAN   // Exclude rarely-used stuff from Windows headers
-// Windows Header Files:
-#include <windows.h>
-
 #include <fstream>
 #include <iostream>
 #include <map>
 #include <vector>
 #include <list>
 #include <string>
+#include <time.h>
+
+#define WIN32_LEAN_AND_MEAN   // Exclude rarely-used stuff from Windows headers
+// Windows Header Files:
+#include <windows.h>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
 
 #include "Cg/cg.h"
-
-#pragma comment(lib, "cg.lib")
 
 #endif

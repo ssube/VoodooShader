@@ -21,94 +21,10 @@
 
 #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <windows.h>
-#include <boost/format.hpp>
-
 #include "Meta.hpp"
 
 namespace VoodooShader
 {
-	// Forward-declare the Logger class so it can be used in log_format
-	class Logger;
-
-	/**
-	 * Logging Format class.
-	 *
-	 * @note Formats strings using Boost::Format. See the library docs for full 
-	 *		available syntax.
-	 * @note Only used internally in Logger.
-	 */
-	class VOODOO_API Formatter
-	{
-	public:
-		/**
-		 * Create a log format object.
-		 * 
-		 * @param parent The Logger to be attached as the parent.
-		 */
-		Formatter(Logger * parent);
-
-		/**
-		 * Begins logging a message (passes an initial formatting string).
-		 *
-		 * @param fmtString A format string.
-		 * @return A reference to this Formatter.
-		 */
-		Formatter & Record(std::string fmtString);
-
-		/**
-		 * Passes a single argument to this format object.
-		 *
-		 * @param varString An object to be used in the format message.
-		 * @return A reference to this Formatter.
-		 */
-		template<class T> 
-		Formatter & With(T & varString)
-		{
-			try
-			{
-				(this->mFmtObj) % (varString);
-			} catch ( ... ) { 
-				(this->mFmtObj) % ("[invalid operand]");
-			}
-				
-			return (*this);
-		}
-
-		/**
-		 * Passes a single argument to this format object.
-		 *
-		 * @param varString An object to be used in the format message.
-		 * @return A reference to this Formatter.
-		 */
-		template<class T> 
-		Formatter & With(const T & varString)
-		{
-			try
-			{
-				(this->mFmtObj) % (varString);
-			} catch ( ... ) { 
-				(this->mFmtObj) % ("[invalid operand]");
-			}
-				
-			return (*this);
-		}
-
-		/**
-		 * Finalizes a formatted string and prints it to the log.
-		 *
-		 * @param timestamp Prepend a timestamp to the logged message.
-		 */
-		void Done(bool timestamp = true);
-
-	private:
-		Logger * mParent;
-		boost::format mFmtObj;
-	};
-
 	/**
 	 * Logfile management class, capable of opening, closing, writing to and 
 	 * dumping log files. Throws std::runtime_error on problems opening the log
@@ -137,7 +53,7 @@ namespace VoodooShader
 		 * form <code>HH.MM.SS :: </code>. Leading zeros are guaranteed to be
 		 * present, so the timestamp length remains constant.
 		 */
-		void Timestamp();
+		String Timestamp();
 
 		/**
 		 * Log a simple (pre-formatted) message.
@@ -146,27 +62,11 @@ namespace VoodooShader
 		 * @param timestamp Prepend a timestamp to the message.
 		 * @see Logger::Timestamp()
 		 */
-		void Log(const char * msg, bool timestamp = true);
+		void Log(const char * msg, ...);
 
-		/**
-		 * Log a simple (pre-formatted) message.
-		 *
-		 * @param msg The message string.
-		 * @param timestamp Prepend a timestamp to the message.
-		 * @see Logger::Timestamp()
-		 */
-		void Log(std::string msg, bool timestamp = true);
+		//void Log(bool timestamp, String msg, ...);
 
-		/** 
-		 * Begin a formatted logging operation.
-		 *
-		 * @note This object is a little confusing to use, calls should be of 
-		 *		the form <code>Log->Format("msg").With(param).Done();</code>.
-		 *
-		 * @return A reference to this @ref Logger "Logger's" internal Formatter 
-		 *		object. Parameters should be immediately sent to the formatter.
-		 */
-		Formatter & Format(std::string message);
+		void DebugLog(const char * msg, ...);
 
 		/**
 		 * Sets the internal buffer to a given size.
@@ -210,7 +110,6 @@ namespace VoodooShader
 
 	private:
 		std::fstream mLogFile;
-		Formatter * mFormat;
 		tm * mLocalTime;
 	};
 }

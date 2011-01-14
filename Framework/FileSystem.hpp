@@ -20,6 +20,7 @@
 \**************************************************************************************************/
 
 #include "Meta.hpp"
+#include "Core.hpp"
 
 namespace VoodooShader
 {
@@ -30,7 +31,7 @@ namespace VoodooShader
 	class FileSystem
 	{
 	public:
-		FileSystem();
+		FileSystem(Core * core);
 		~FileSystem();
 
 		void RegisterDir(String dir);
@@ -61,12 +62,13 @@ namespace VoodooShader
 		 * should usually not be called directly, FileManager::GetFile(String)
 		 * will automatically resolve and return paths to simplify things.
 		 */
-		File(String name);
+		File(Core * core, String name);
 
 		bool Open(FileOpenMode mode);
 
 	private:
 		HANDLE mHandle;
 		String mName;
+		Core * mCore;
 	};
 }

@@ -240,14 +240,14 @@ namespace VoodooShader
 			HRESULT hr = mDevice->GetRenderTarget(0, &rt);
 			if ( FAILED(hr) )
 			{
-				mCore->GetLog()->Format("Voodoo Gem: Failed to retrieve render target for shader %s.\n").With(shader->Name()).Done();
+				mCore->GetLog()->Log("Voodoo Gem: Failed to retrieve render target for shader %s.\n", shader->Name());
 				return;
 			}
 			
 			hr = mDevice->SetRenderTarget(0, scratchSurface);
 			if ( FAILED(hr) )
 			{
-				mCore->GetLog()->Format("Voodoo Gem: Failed to bind render target for shader %s.\n").With(shader->Name()).Done();
+				mCore->GetLog()->Log("Voodoo Gem: Failed to bind render target for shader %s.\n", shader->Name());
 				return;
 			}
 

@@ -53,13 +53,12 @@ namespace VoodooShader
 		CGcontext GetCGContext();
 
 		/**
-		 * Retrieve the logger object associated with this core.    
+		 * Writes a string to the log file (may be formatted).
 		 * 
-		 * @note If this Core is valid, this will always return a valid Logger 
-		 *		attached to an open log file. If it doesn't, you have bigger 
-		 *		problems to worry about than not logging.        
+		 * @param msg The format string to use
+		 * @param ... Parameters to insert
 		 */
-		Logger * GetLog();
+		void Log(const char * msg, ...);
 
 		/**
 		 * Attach an Adapter to this Core.
