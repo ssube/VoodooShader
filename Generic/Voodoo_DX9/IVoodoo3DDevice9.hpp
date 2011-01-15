@@ -124,13 +124,13 @@ public:
 		HRESULT hr = mRealDevice->StretchRect(backbufferSurf, NULL, surface_ThisFrame, NULL, D3DTEXF_NONE);
 		if ( FAILED(hr) )
 		{
-			VoodooCore->GetLog()->Log("Voodoo DX9: Failed to stretch backbuffer to scratch texture.\n");
+			VoodooCore->Log("Voodoo DX9: Failed to stretch backbuffer to scratch texture.\n");
 		}
 
 		hr = mRealDevice->SetRenderTarget(0, backbufferSurf);
 		if ( FAILED(hr) )
 		{
-			VoodooCore->GetLog()->Log("Voodoo DX9: Failed to set render target.\n");
+			VoodooCore->Log("Voodoo DX9: Failed to set render target.\n");
 		}
 
 		VoodooShader::TechniqueRef tech = testShader->GetDefaultTechnique();

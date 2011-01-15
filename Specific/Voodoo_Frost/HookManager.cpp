@@ -59,8 +59,8 @@ namespace VoodooShader
 
 			if ( ( result != 0 ) || ( hookHandle == NULL ) )
 			{
-				VoodooCore->GetLog()->Format("Voodoo Frost: Error %d installing hook %s (%d, %d).\n")
-					.With(result).With(name).With(src).With(dest).Done();
+				VoodooCore->Log("Voodoo Frost: Error %d installing hook %s (%d, %d).\n",
+					result, name, src, dest);
 
 				return false;
 			} else {
@@ -94,8 +94,8 @@ namespace VoodooShader
 
 				if ( result != 0 )
 				{
-					VoodooCore->GetLog()->Format("Voodoo Frost: Error %d removing hook %s.\n")
-						.With(result).With(name).Done();
+					VoodooCore->Log("Voodoo Frost: Error %d removing hook %s.\n",
+						result, name);
 
 					return true;
 				} else {
@@ -147,7 +147,7 @@ namespace VoodooShader
 		 */
 		void HookOpenGL(void)
 		{
-			VoodooCore->GetLog()->Log("Voodoo Frost: Beginning OpenGL hook procedure.\n");
+			VoodooCore->Log("Voodoo Frost: Beginning OpenGL hook procedure.\n");
 
 			bool success = true;
 
@@ -180,9 +180,9 @@ namespace VoodooShader
 			// Check the results and handle
 			if ( success )
 			{
-				VoodooCore->GetLog()->Log("Voodoo Frost: OpenGL hooked successfully.\n");
+				VoodooCore->Log("Voodoo Frost: OpenGL hooked successfully.\n");
 			} else {
-				VoodooCore->GetLog()->Log("Voodoo Frost: OpenGL hook procedure failed.\n");
+				VoodooCore->Log("Voodoo Frost: OpenGL hook procedure failed.\n");
 			}
 		}
 	}

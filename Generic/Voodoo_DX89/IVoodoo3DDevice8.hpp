@@ -63,8 +63,8 @@ public:
 		: mRealDevice(realDevice)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::IVoodoo3DDevice8(%d) == %d\n")
-			.With(realDevice).With(this).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::IVoodoo3DDevice8(%d) == %d\n",
+			realDevice, this);
 #endif
 	}
 
@@ -79,8 +79,8 @@ public:
 		ULONG refCount = mRealDevice->AddRef();
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::AddRef() == %d\n")
-		.With(refCount).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::AddRef() == %d\n",
+		refCount);
 #endif
 
 		return refCount;
@@ -103,7 +103,7 @@ public:
 	STDMETHOD(ApplyStateBlock)(DWORD Token)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Log("Voodoo DX8.9: IVoodoo3DDevice8::ApplyStateBlock == UNUSED\n");
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::ApplyStateBlock == UNUSED\n");
 #endif
 		return DefaultErrorCode;
 	}
@@ -113,8 +113,8 @@ public:
 		HRESULT hr = mRealDevice->BeginScene();
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::BeginScene() == %d\n")
-			.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::BeginScene() == %d\n",
+			hr);
 #endif
 
 		return hr;
@@ -125,8 +125,8 @@ public:
 		HRESULT hr = mRealDevice->BeginStateBlock();
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::BeginStateBlock() == %d\n")
-			.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::BeginStateBlock() == %d\n",
+			hr);
 #endif
 
 		return hr;
@@ -135,7 +135,7 @@ public:
 	STDMETHOD(CaptureStateBlock)(DWORD Token)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Log("Voodoo DX8.9: IVoodoo3DDevice8::CaptureStateBlock == UNUSED\n");
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CaptureStateBlock == UNUSED\n");
 #endif
 
 		return DefaultErrorCode;
@@ -154,9 +154,9 @@ public:
 		HRESULT hr = mRealDevice->Clear(Count, pRects, Flags, Color, Z, Stencil);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::Clear(%d, %d, %d, %d, %d, %d) == %d\n")
-			.With(Count).With(pRects).With(Flags).With(Color).With(Z).With(Stencil)
-			.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::Clear(%d, %d, %d, %d, %d, %d) == %d\n",
+			Count, pRects, Flags, Color, Z, Stencil, 
+			hr);
 #endif
 
 		return hr;
@@ -170,8 +170,8 @@ public:
 		HRESULT hr = mRealDevice->TestCooperativeLevel();
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::TestCooperativeLevel() == %d\n")
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::TestCooperativeLevel() == %d\n",
+		hr);
 #endif
 
 		return hr;
@@ -186,8 +186,8 @@ public:
 		UINT mem = mRealDevice->GetAvailableTextureMem();
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetAvailableTextureMem() == %d\n")
-		.With(mem).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetAvailableTextureMem() == %d\n",
+		mem);
 #endif
 
 		return mem;
@@ -200,8 +200,8 @@ public:
 	)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::ResourceManagerDiscardBytes(%d) == UNUSED\n")
-		.With(Bytes).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::ResourceManagerDiscardBytes(%d) == UNUSED\n",
+		Bytes);
 #endif
 
 		return DefaultErrorCode;
@@ -216,8 +216,8 @@ public:
 		(*ppD3D8) = (IDirect3D8*)VoodooObject;
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetDirect3D(%d) == D3D_OK\n")
-		.With(*ppD3D8).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetDirect3D(%d) == D3D_OK\n",
+		*ppD3D8);
 #endif
 
 		return D3D_OK;
@@ -234,8 +234,8 @@ public:
 		HRESULT hr = mRealDevice->GetDeviceCaps(&rCaps);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetDeviceCaps(%d) == %d\n")
-		.With(pCaps).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetDeviceCaps(%d) == %d\n",
+		pCaps, hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -255,8 +255,8 @@ public:
 		HRESULT hr = mRealDevice->GetDisplayMode(0, pMode);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetDisplayMode(%d) == %d\n")
-		.With(pMode).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetDisplayMode(%d) == %d\n",
+		pMode, hr);
 #endif
 
 		return hr;
@@ -271,8 +271,8 @@ public:
 		HRESULT hr = mRealDevice->GetCreationParameters(pParameters);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetCreationParameters(%d) == %d\n")
-		.With(pParameters).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetCreationParameters(%d) == %d\n",
+		pParameters, hr);
 #endif
 
 		return hr;
@@ -292,8 +292,8 @@ public:
 		HRESULT hr = mRealDevice->SetCursorProperties(XHotSpot, YHotSpot, rCursor->RealSurface());
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetCursorProperties(%d, %d, %d) == %d\n")
-		.With(XHotSpot).With(YHotSpot).With(pCursorBitmap).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetCursorProperties(%d, %d, %d) == %d\n",
+		XHotSpot, YHotSpot, pCursorBitmap, hr);
 #endif
 
 		return hr;
@@ -310,8 +310,8 @@ public:
 		mRealDevice->SetCursorPosition(X, Y, Flags);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetCursorPosition(int X,int Y,DWORD Flags)\n")
-		.With(X).With(Y).With(Flags).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetCursorPosition(int X,int Y,DWORD Flags)\n",
+		X, Y, Flags);
 #endif
 	}
 
@@ -324,8 +324,8 @@ public:
 		BOOL show = mRealDevice->ShowCursor(bShow);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::ShowCursor(%d) == %d\n")
-		.With(bShow).With(show).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::ShowCursor(%d) == %d\n",
+		bShow, show);
 #endif
 
 		return show;
@@ -345,8 +345,8 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateAdditionalSwapChain(%d, %d) == %d\n")
-		.With(pPresentationParameters).With(pSwapChain).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateAdditionalSwapChain(%d, %d) == %d\n",
+		pPresentationParameters, pSwapChain, hr);
 #endif
 
 		return hr;
@@ -361,8 +361,8 @@ public:
 		HRESULT hr = mRealDevice->Reset((D3DPRESENT_PARAMETERS*)pPresentationParameters);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::Reset(%d) == %d\n")
-		.With(pPresentationParameters).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::Reset(%d) == %d\n",
+		pPresentationParameters, hr);
 #endif
 
 		return hr;
@@ -379,13 +379,13 @@ public:
 		HRESULT shr = mRealDevice->StretchRect(backbufferSurf, NULL, surface_ThisFrame, NULL, D3DTEXF_NONE);
 		if ( FAILED(shr) )
 		{
-			VoodooCore->GetLog()->Log("Voodoo DX8.9: Failed to stretch backbuffer to scratch texture.\n");
+			VoodooCore->Log("Voodoo DX8.9: Failed to stretch backbuffer to scratch texture.\n");
 		}
 
 		shr = mRealDevice->SetRenderTarget(0, backbufferSurf);
 		if ( FAILED(shr) )
 		{
-			VoodooCore->GetLog()->Log("Voodoo DX8.9: Failed to set render target.\n");
+			VoodooCore->Log("Voodoo DX8.9: Failed to set render target.\n");
 		}
 
 		VoodooShader::TechniqueRef tech = testShader->GetDefaultTechnique();
@@ -402,9 +402,9 @@ public:
 		HRESULT hr = mRealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::Present(%d, %d, %d, %d) == %d\n")
-		.With(pSourceRect).With(pDestRect).With(hDestWindowOverride).With(pDirtyRegion)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::Present(%d, %d, %d, %d) == %d\n",
+		pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion, 
+		hr);
 #endif
 
 		return hr;
@@ -421,8 +421,8 @@ public:
 		HRESULT hr = mRealDevice->GetBackBuffer(0, BackBuffer, Type, &rBackbuffer);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetBackBuffer(%d, %d, %d) == %d\n")
-		.With(BackBuffer).With(Type).With(ppBackBuffer).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetBackBuffer(%d, %d, %d) == %d\n",
+		BackBuffer, Type, ppBackBuffer, hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -442,8 +442,8 @@ public:
 		HRESULT hr = mRealDevice->GetRasterStatus(0, pRasterStatus);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetRasterStatus(%d) == %d\n")
-		.With(pRasterStatus).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetRasterStatus(%d) == %d\n",
+		pRasterStatus, hr);
 #endif
 
 		return hr;
@@ -458,8 +458,8 @@ public:
 		mRealDevice->SetGammaRamp(0, Flags, pRamp);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetRasterStatus(%d, %d) == void\n")
-		.With(Flags).With(pRamp).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetRasterStatus(%d, %d) == void\n",
+		Flags, pRamp);
 #endif
 
 		return;
@@ -473,8 +473,8 @@ public:
 		mRealDevice->GetGammaRamp(0, pRamp);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetRasterStatus(%d) == void\n")
-			.With(pRamp).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetRasterStatus(%d) == void\n",
+			pRamp);
 #endif
 
 		return;
@@ -522,9 +522,9 @@ public:
 		}
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateTexture(%d, %d, %d, %d, %d, %d, %d) == %d\n")
-			.With(Width).With(Height).With(Levels).With(Usage).With(Format).With(Pool).With(ppTexture)
-			.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateTexture(%d, %d, %d, %d, %d, %d, %d) == %d\n",
+			Width, Height, Levels, Usage, Format, Pool, ppTexture, 
+			hr);
 #endif
 
 		// One succeeded, the texture exists. We need to register it with the Voodoo core.
@@ -561,9 +561,9 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateVolumeTexture(%d, %d, %d, %d, %d, %d, %d, %d) == %d\n")
-		.With(Width).With(Height).With(Depth).With(Levels).With(Usage).With(Format).With(Pool)
-		.With(*ppVolumeTexture).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateVolumeTexture(%d, %d, %d, %d, %d, %d, %d, %d) == %d\n",
+		Width, Height, Depth, Levels, Usage, Format, Pool, 
+		*ppVolumeTexture, hr);
 #endif
 
 		//! @todo Set up the core volume texture registration for Voodoo DX8.9
@@ -594,9 +594,9 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateCubeTexture(%d, %d, %d, %d, %d, %d) == %d\n")
-		.With(EdgeLength).With(Levels).With(Usage).With(Format).With(Pool).With(*ppCubeTexture)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateCubeTexture(%d, %d, %d, %d, %d, %d) == %d\n",
+		EdgeLength, Levels, Usage, Format, Pool, *ppCubeTexture, 
+		hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -624,9 +624,9 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateVertexBuffer(%d, %d, %d, %d, %d) == %d\n")
-		.With(Length).With(Usage).With(FVF).With(Pool).With(*ppVertexBuffer)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateVertexBuffer(%d, %d, %d, %d, %d) == %d\n",
+		Length, Usage, FVF, Pool, *ppVertexBuffer, 
+		hr);
 #endif
 
 		return hr;
@@ -648,9 +648,9 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateIndexBuffer(%d, %d, %d, %d, %d) == %d\n")
-		.With(Length).With(Usage).With(Format).With(Pool).With(*ppIndexBuffer)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateIndexBuffer(%d, %d, %d, %d, %d) == %d\n",
+		Length, Usage, Format, Pool, *ppIndexBuffer, 
+		hr);
 #endif
 
 		return hr;
@@ -681,9 +681,9 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateRenderTarget(%d, %d, %d, %d, %d, %d) == %d\n")
-		.With(Width).With(Height).With(Format).With(MultiSample).With(Lockable).With(*ppSurface)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateRenderTarget(%d, %d, %d, %d, %d, %d) == %d\n",
+		Width, Height, Format, MultiSample, Lockable, *ppSurface, 
+		hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -713,9 +713,9 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateDepthStencilSurface(%d, %d, %d, %d, %d) == %d\n")
-		.With(Width).With(Height).With(Format).With(MultiSample).With(*ppSurface)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateDepthStencilSurface(%d, %d, %d, %d, %d) == %d\n",
+		Width, Height, Format, MultiSample, *ppSurface, 
+		hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -751,8 +751,8 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateImageSurface(%d, %d, %d, %d) == %d\n")
-		.With(Width).With(Height).With(Format).With(*ppSurface).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateImageSurface(%d, %d, %d, %d) == %d\n",
+		Width, Height, Format, *ppSurface, hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -793,9 +793,9 @@ public:
 			wDest->RealSurface(), pSourceRectsArray, D3DTEXF_NONE);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CopyRects(%d, %d, %d, %d, %d) == %d\n")
-		.With(pSourceSurface).With(pSourceRectsArray).With(cRects).With(pDestinationSurface)
-		.With(pDestPointsArray).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CopyRects(%d, %d, %d, %d, %d) == %d\n",
+		pSourceSurface, pSourceRectsArray, cRects, pDestinationSurface, 
+		pDestPointsArray, hr);
 #endif
 
 		return hr;
@@ -817,8 +817,8 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::UpdateTexture(%d, %d) == %d\n")
-		.With(pSourceTexture).With(pDestinationTexture).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::UpdateTexture(%d, %d) == %d\n",
+		pSourceTexture, pDestinationTexture, hr);
 #endif
 
 		return hr;
@@ -833,8 +833,8 @@ public:
 	)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetFrontBuffer(%d) == UNUSED\n")
-		.With(pDestSurface).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetFrontBuffer(%d) == UNUSED\n",
+		pDestSurface);
 #endif
 
 		return DefaultErrorCode;
@@ -857,8 +857,8 @@ public:
 		hr |= mRealDevice->SetDepthStencilSurface(wStencil->RealSurface());
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetRenderTarget(%d, %d) == %d\n")
-		.With(pRenderTarget).With(pNewZStencil).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetRenderTarget(%d, %d) == %d\n",
+		pRenderTarget, pNewZStencil, hr);
 #endif
 
 		return hr;
@@ -873,8 +873,8 @@ public:
 		HRESULT hr = mRealDevice->GetRenderTarget(0, &rRenderTarget);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetRenderTarget(%d) == %d\n")
-		.With(*ppRenderTarget).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetRenderTarget(%d) == %d\n",
+		*ppRenderTarget, hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -896,8 +896,8 @@ public:
 		HRESULT hr = mRealDevice->GetDepthStencilSurface(&rZStencilSurface);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetDepthStencilSurface(%d) == %d\n")
-		.With(*ppZStencilSurface).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetDepthStencilSurface(%d) == %d\n",
+		*ppZStencilSurface, hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -914,8 +914,8 @@ public:
 		HRESULT hr = mRealDevice->EndScene();
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::EndScene() == %d\n")
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::EndScene() == %d\n",
+		hr);
 #endif
 
 		return hr;
@@ -930,8 +930,8 @@ public:
 		HRESULT hr = mRealDevice->SetTransform(State, pMatrix);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetTransform(%d, %d) == %d\n")
-		.With(State).With(pMatrix).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetTransform(%d, %d) == %d\n",
+		State, pMatrix, hr);
 #endif
 
 		return hr;
@@ -947,8 +947,8 @@ public:
 		HRESULT hr = mRealDevice->GetTransform(State, pMatrix);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetTransform(%d, %d) == %d\n")
-		.With(State).With(pMatrix).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetTransform(%d, %d) == %d\n",
+		State, pMatrix, hr);
 #endif
 
 		return hr;
@@ -964,8 +964,8 @@ public:
 		HRESULT hr = mRealDevice->MultiplyTransform(State, pMatrix);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::MultiplyTransform(%d, %d) == %d\n")
-		.With(State).With(pMatrix).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::MultiplyTransform(%d, %d) == %d\n",
+		State, pMatrix, hr);
 #endif
 
 		return hr;
@@ -980,8 +980,8 @@ public:
 		HRESULT hr = mRealDevice->SetViewport((CONST D3DVIEWPORT9 *)pViewport);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetViewport(%d) == %d\n")
-		.With(pViewport).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetViewport(%d) == %d\n",
+		pViewport, hr);
 #endif
 
 		return hr;
@@ -996,8 +996,8 @@ public:
 		HRESULT hr = mRealDevice->GetViewport((D3DVIEWPORT9*)pViewport);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetViewport(%d) == %d\n")
-		.With(pViewport).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetViewport(%d) == %d\n",
+		pViewport, hr);
 #endif
 
 		return hr;
@@ -1012,8 +1012,8 @@ public:
 		HRESULT hr = mRealDevice->SetMaterial((CONST D3DMATERIAL9*) pMaterial);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetMaterial(%d) == %d\n")
-		.With(pMaterial).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetMaterial(%d) == %d\n",
+		pMaterial, hr);
 #endif
 
 		return hr;
@@ -1028,8 +1028,8 @@ public:
 		HRESULT hr = mRealDevice->GetMaterial((D3DMATERIAL9*) pMaterial);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetMaterial(%d) == %d\n")
-		.With(pMaterial).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetMaterial(%d) == %d\n",
+		pMaterial, hr);
 #endif
 
 		return hr;
@@ -1045,8 +1045,8 @@ public:
 		HRESULT hr = mRealDevice->SetLight(Index, (CONST D3DLIGHT9*)Light);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetLight(%d, %d) == %d\n")
-		.With(Index).With(Light).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetLight(%d, %d) == %d\n",
+		Index, Light, hr);
 #endif
 
 		return hr;
@@ -1062,8 +1062,8 @@ public:
 		HRESULT hr = mRealDevice->GetLight(Index, (D3DLIGHT9*)Light);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetLight(%d, %d) == %d\n")
-		.With(Index).With(Light).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetLight(%d, %d) == %d\n",
+		Index, Light, hr);
 #endif
 
 		return hr;
@@ -1079,8 +1079,8 @@ public:
 		HRESULT hr = mRealDevice->LightEnable(Index, Enable);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::LightEnable(%d, %d) == %d\n")
-		.With(Index).With(Enable).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::LightEnable(%d, %d) == %d\n",
+		Index, Enable, hr);
 #endif
 
 		return hr;
@@ -1096,8 +1096,8 @@ public:
 		HRESULT hr = mRealDevice->GetLightEnable(Index, pEnable);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetLightEnable(%d, %d) == %d\n")
-		.With(Index).With(pEnable).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetLightEnable(%d, %d) == %d\n",
+		Index, pEnable, hr);
 #endif
 
 		return hr;
@@ -1113,8 +1113,8 @@ public:
 		HRESULT hr = mRealDevice->SetClipPlane(Index, pPlane);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetClipPlane(%d, %d) == %d\n")
-		.With(Index).With(pPlane).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetClipPlane(%d, %d) == %d\n",
+		Index, pPlane, hr);
 #endif
 
 		return hr;
@@ -1130,8 +1130,8 @@ public:
 		HRESULT hr = mRealDevice->GetClipPlane(Index, pPlane);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetClipPlane(%d, %d) == %d\n")
-		.With(Index).With(pPlane).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetClipPlane(%d, %d) == %d\n",
+		Index, pPlane, hr);
 #endif
 
 		return hr;
@@ -1147,8 +1147,8 @@ public:
 		HRESULT hr = mRealDevice->SetRenderState(State, Value);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetRenderState(%d, %d) == %d\n")
-		.With(State).With(Value).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetRenderState(%d, %d) == %d\n",
+		State, Value, hr);
 #endif
 
 		return hr;
@@ -1164,8 +1164,8 @@ public:
 		HRESULT hr = mRealDevice->GetRenderState(State, pValue);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetRenderState(%d, %d) == %d\n")
-		.With(State).With(pValue).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetRenderState(%d, %d) == %d\n",
+		State, pValue, hr);
 #endif
 
 		return hr;
@@ -1181,8 +1181,8 @@ public:
 	)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::EndStateBlock(%d) == UNUSED\n")
-			.With(pToken).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::EndStateBlock(%d) == UNUSED\n",
+			pToken);
 #endif
 
 		return DefaultErrorCode;
@@ -1191,8 +1191,8 @@ public:
 		HRESULT hr = mRealDevice->EndStateBlock(pToken);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::EndStateBlock(%d) == %d\n")
-		.With(pToken).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::EndStateBlock(%d) == %d\n",
+		pToken, hr);
 #endif
 
 		return hr;
@@ -1209,8 +1209,8 @@ public:
 	)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DeleteStateBlock(%d) == UNUSED\n")
-			.With(Token).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeleteStateBlock(%d) == UNUSED\n",
+			Token);
 #endif
 
 		return DefaultErrorCode;
@@ -1219,8 +1219,8 @@ public:
 		HRESULT hr = mRealDevice->DeleteStateBlock(Token);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DeleteStateBlock(%d) == %d\n")
-		.With(Token).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeleteStateBlock(%d) == %d\n",
+		Token, hr);
 #endif
 
 		return hr;
@@ -1239,8 +1239,8 @@ public:
 	)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateStateBlock(%d, %d) == UNUSED\n")
-			.With(Type).With(pToken).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateStateBlock(%d, %d) == UNUSED\n",
+			Type, pToken);
 #endif
 
 		return DefaultErrorCode;
@@ -1249,8 +1249,8 @@ public:
 		HRESULT hr = mRealDevice->CreateStateBlock(Type, pToken);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateStateBlock(%d, %d) == %d\n")
-		.With(Type).With(pToken).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateStateBlock(%d, %d) == %d\n",
+		Type, pToken, hr);
 #endif
 
 		return hr;
@@ -1266,8 +1266,8 @@ public:
 		HRESULT hr = mRealDevice->SetClipStatus((CONST D3DCLIPSTATUS9*)pClipStatus);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetClipStatus(%d) == %d\n")
-		.With(pClipStatus).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetClipStatus(%d) == %d\n",
+		pClipStatus, hr);
 #endif
 
 		return hr;
@@ -1282,8 +1282,8 @@ public:
 		HRESULT hr = mRealDevice->GetClipStatus((D3DCLIPSTATUS9*)pClipStatus);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetClipStatus(%d) == %d\n")
-		.With(pClipStatus).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetClipStatus(%d) == %d\n",
+		pClipStatus, hr);
 #endif
 
 		return hr;
@@ -1300,8 +1300,8 @@ public:
 		HRESULT hr = mRealDevice->GetTexture(Stage, &rTexture);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetTexture(%d, %d) == %d\n")
-		.With(Stage).With(*ppTexture).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetTexture(%d, %d) == %d\n",
+		Stage, *ppTexture, hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -1331,8 +1331,8 @@ public:
 		}
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetTexture(%d, %d) == %d\n")
-		.With(Stage).With(pTexture).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetTexture(%d, %d) == %d\n",
+		Stage, pTexture, hr);
 #endif
 
 		return hr;
@@ -1349,8 +1349,8 @@ public:
 		HRESULT hr = mRealDevice->GetTextureStageState(Stage, Type, pValue);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetTextureStageState(%d, %d, %d) == %d\n")
-		.With(Stage).With(Type).With(pValue).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetTextureStageState(%d, %d, %d) == %d\n",
+		Stage, Type, pValue, hr);
 #endif
 
 		return hr;
@@ -1367,8 +1367,8 @@ public:
 		HRESULT hr = mRealDevice->SetTextureStageState(Stage, Type, Value);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetTextureStageState(%d, %d, %d) == %d\n")
-		.With(Stage).With(Type).With(Value).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetTextureStageState(%d, %d, %d) == %d\n",
+		Stage, Type, Value, hr);
 #endif
 
 		return hr;
@@ -1383,8 +1383,8 @@ public:
 		HRESULT hr = mRealDevice->ValidateDevice(pNumPasses);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::ValidateDevice(%d) == %d\n")
-		.With(*pNumPasses).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::ValidateDevice(%d) == %d\n",
+		*pNumPasses, hr);
 #endif
 
 		return hr;
@@ -1403,8 +1403,8 @@ public:
 		//HRESULT hr = mRealDevice->GetInfo(DevInfoID, pDevInfoStruct, DevInfoStructSize);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetInfo(%d, %d, %d) == UNUSED\n")
-		.With(DevInfoID).With(pDevInfoStruct).With(DevInfoStructSize).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetInfo(%d, %d, %d) == UNUSED\n",
+		DevInfoID, pDevInfoStruct, DevInfoStructSize);
 #endif
 
 		return DefaultErrorCode;
@@ -1419,8 +1419,8 @@ public:
 		HRESULT hr = mRealDevice->SetPaletteEntries(PaletteNumber, pEntries);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetPaletteEntries(%d, %d) == %d\n")
-		.With(PaletteNumber).With(pEntries).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetPaletteEntries(%d, %d) == %d\n",
+		PaletteNumber, pEntries, hr);
 #endif
 
 		return hr;
@@ -1435,8 +1435,8 @@ public:
 		HRESULT hr = mRealDevice->GetPaletteEntries(PaletteNumber, pEntries);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetPaletteEntries(%d, %d) == %d\n")
-		.With(PaletteNumber).With(pEntries).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetPaletteEntries(%d, %d) == %d\n",
+		PaletteNumber, pEntries, hr);
 #endif
 
 		return hr;
@@ -1451,8 +1451,8 @@ public:
 		HRESULT hr = mRealDevice->SetCurrentTexturePalette(PaletteNumber);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetCurrentTexturePalette(%d) == %d\n")
-		.With(PaletteNumber).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetCurrentTexturePalette(%d) == %d\n",
+		PaletteNumber, hr);
 #endif
 
 		return hr;
@@ -1467,8 +1467,8 @@ public:
 		HRESULT hr = mRealDevice->GetCurrentTexturePalette(PaletteNumber);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetCurrentTexturePalette(%d) == %d\n")
-		.With(*PaletteNumber).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetCurrentTexturePalette(%d) == %d\n",
+		*PaletteNumber, hr);
 #endif
 
 		return hr;
@@ -1485,9 +1485,9 @@ public:
 		HRESULT hr = mRealDevice->DrawPrimitive(PrimitiveType, StartVertex, PrimitiveCount);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DrawPrimitive(%d, %d, %d) == %d\n")
-		.With(PrimitiveType).With(StartVertex).With(PrimitiveCount)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawPrimitive(%d, %d, %d) == %d\n",
+		PrimitiveType, StartVertex, PrimitiveCount, 
+		hr);
 #endif
 
 		return hr;
@@ -1506,9 +1506,9 @@ public:
 		HRESULT hr = mRealDevice->DrawIndexedPrimitive(PrimitiveType, mLastBaseIndex, minIndex, NumVertices, startIndex, primCount);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DrawIndexedPrimitive(%d, %d, %d, %d, %d) == %d\n")
-		.With(PrimitiveType).With(minIndex).With(NumVertices).With(startIndex).With(primCount)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawIndexedPrimitive(%d, %d, %d, %d, %d) == %d\n",
+		PrimitiveType, minIndex, NumVertices, startIndex, primCount, 
+		hr);
 #endif
 
 		return hr;
@@ -1525,8 +1525,8 @@ public:
 		HRESULT hr = mRealDevice->DrawPrimitiveUP(PrimitiveType, PrimitiveCount, pVertexStreamZeroData, VertexStreamZeroStride);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DrawPrimitiveUP(%d, %d, %d, %d) == %d\n")
-		.With(PrimitiveType).With(PrimitiveCount).With(pVertexStreamZeroData).With(VertexStreamZeroStride).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawPrimitiveUP(%d, %d, %d, %d) == %d\n",
+		PrimitiveType, PrimitiveCount, pVertexStreamZeroData, VertexStreamZeroStride, hr);
 #endif
 
 		return hr;
@@ -1551,10 +1551,10 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DrawIndexedPrimitiveUP(%d, %d, %d, %d, %d, %d, %d, %d) == %d\n")
-		.With(PrimitiveType).With(MinVertexIndex).With(NumVertexIndices).With(PrimitiveCount)
-		.With(pIndexData).With(IndexDataFormat).With(pVertexStreamZeroData).With(VertexStreamZeroStride)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawIndexedPrimitiveUP(%d, %d, %d, %d, %d, %d, %d, %d) == %d\n",
+		PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, 
+		pIndexData, IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride, 
+		hr);
 #endif
 
 		return hr;
@@ -1576,9 +1576,9 @@ public:
 		);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::ProcessVertices(%d, %d, %d, %d, %d) == %d\n")
-		.With(SrcStartIndex).With(DestIndex).With(VertexCount).With(pDestBuffer).With(Flags)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::ProcessVertices(%d, %d, %d, %d, %d) == %d\n",
+		SrcStartIndex, DestIndex, VertexCount, pDestBuffer, Flags, 
+		hr);
 #endif
 
 		return hr;
@@ -1598,9 +1598,9 @@ public:
 		HRESULT hr = mRealDevice->CreateVertexShader(pFunction, (IDirect3DVertexShader9**)pHandle);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreateVertexShader(%d, %d, %d, %d) == %d\n")
-		.With(pDeclaration).With(pFunction).With(pHandle).With(Usage)
-		.With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateVertexShader(%d, %d, %d, %d) == %d\n",
+		pDeclaration, pFunction, pHandle, Usage, 
+		hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -1629,8 +1629,8 @@ public:
 		}
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetVertexShader(%d) == %d\n")
-		.With(Handle).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetVertexShader(%d) == %d\n",
+		Handle, hr);
 #endif
 
 		return hr;
@@ -1646,8 +1646,8 @@ public:
 		(*pHandle) = mCurrentVertexShader;
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShader(%d) == D3D_OK\n")
-		.With(pHandle).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShader(%d) == D3D_OK\n",
+		pHandle);
 #endif
 
 		return D3D_OK;
@@ -1671,8 +1671,8 @@ public:
 		}
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DeleteVertexShader(%d) == %d\n")
-		.With(Handle).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeleteVertexShader(%d) == %d\n",
+		Handle, hr);
 #endif
 
 		return D3D_OK;
@@ -1688,8 +1688,8 @@ public:
 		HRESULT hr = mRealDevice->SetVertexShaderConstantF(Register, (const float*)pConstantData, ConstantCount);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetVertexShaderConstant(%d, %d, %d) == %d\n")
-		.With(Register).With(pConstantData).With(ConstantCount).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetVertexShaderConstant(%d, %d, %d) == %d\n",
+		Register, pConstantData, ConstantCount, hr);
 #endif
 
 		return hr;
@@ -1705,8 +1705,8 @@ public:
 		HRESULT hr = mRealDevice->GetVertexShaderConstantF(Register, (float*)pConstantData, ConstantCount);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShaderConstant(%d, %d, %d) == %d\n")
-		.With(Register).With(pConstantData).With(ConstantCount).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShaderConstant(%d, %d, %d) == %d\n",
+		Register, pConstantData, ConstantCount, hr);
 #endif
 
 		return hr;
@@ -1721,8 +1721,8 @@ public:
 	)
 	{
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShaderDeclaration(%d, %d, %d) == UNUSED\n")
-		.With(Handle).With(pData).With(pSizeOfData).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShaderDeclaration(%d, %d, %d) == UNUSED\n",
+		Handle, pData, pSizeOfData);
 #endif
 
 		return DefaultErrorCode;
@@ -1739,8 +1739,8 @@ public:
 		//HRESULT hr = mRealDevice->GetVertexShaderFunction(Handle, pData, pSizeOfData);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShaderFunction(%d, %d, %d) == UNUSED\n")
-		.With(Handle).With(pData).With(pSizeOfData).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShaderFunction(%d, %d, %d) == UNUSED\n",
+		Handle, pData, pSizeOfData);
 #endif
 
 		return DefaultErrorCode;
@@ -1757,8 +1757,8 @@ public:
 		HRESULT hr = mRealDevice->SetStreamSource(StreamNumber,(IDirect3DVertexBuffer9*)pStreamData, 0, Stride);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetStreamSource(%d, %d, %d) == %d\n")
-		.With(StreamNumber).With(pStreamData).With(Stride).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetStreamSource(%d, %d, %d) == %d\n",
+		StreamNumber, pStreamData, Stride, hr);
 #endif
 
 		return hr;
@@ -1776,8 +1776,8 @@ public:
 		HRESULT hr = mRealDevice->GetStreamSource(StreamNumber,(IDirect3DVertexBuffer9**)ppStreamData, &offset, pStride);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetStreamSource(%d, %d, %d) == %d\n")
-		.With(StreamNumber).With(*ppStreamData).With(*pStride).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetStreamSource(%d, %d, %d) == %d\n",
+		StreamNumber, *ppStreamData, *pStride, hr);
 #endif
 
 		return hr;
@@ -1794,8 +1794,8 @@ public:
 		mLastBaseIndex = BaseVertexIndex;
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetIndices(%d, %d) == %d\n")
-		.With(pIndexData).With(BaseVertexIndex).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetIndices(%d, %d) == %d\n",
+		pIndexData, BaseVertexIndex, hr);
 #endif
 
 		return hr;
@@ -1812,8 +1812,8 @@ public:
 		(*pBaseVertexIndex) = mLastBaseIndex;
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetIndices(%d, %d) == %d\n")
-		.With(*ppIndexData).With(*pBaseVertexIndex).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetIndices(%d, %d) == %d\n",
+		*ppIndexData, *pBaseVertexIndex, hr);
 #endif
 
 		return hr;
@@ -1829,8 +1829,8 @@ public:
 		HRESULT hr = mRealDevice->CreatePixelShader(pFunction, (IDirect3DPixelShader9**)pHandle);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::CreatePixelShader(%d, %d) == %d\n")
-		.With(pFunction).With(*pHandle).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreatePixelShader(%d, %d) == %d\n",
+		pFunction, *pHandle, hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -1859,8 +1859,8 @@ public:
 		}
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetPixelShader(%d) == %d\n")
-			.With(Handle).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetPixelShader(%d) == %d\n",
+			Handle, hr);
 #endif
 
 		if ( SUCCEEDED(hr) )
@@ -1879,8 +1879,8 @@ public:
 		(*pHandle) = mCurrentPixelShader;
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetPixelShader(%d) == D3D_OK\n")
-		.With(*pHandle).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetPixelShader(%d) == D3D_OK\n",
+		*pHandle);
 #endif
 
 		return D3D_OK;
@@ -1901,8 +1901,8 @@ public:
 		}
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DeletePixelShader(%d) == %d\n")
-		.With(Handle).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeletePixelShader(%d) == %d\n",
+		Handle, hr);
 #endif
 
 		return hr;
@@ -1919,8 +1919,8 @@ public:
 		HRESULT hr = mRealDevice->SetPixelShaderConstantF(Register, (float*)pConstantData, ConstantCount);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::SetPixelShaderConstant(%d, %d, %d) == %d\n")
-		.With(Register).With(pConstantData).With(ConstantCount).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetPixelShaderConstant(%d, %d, %d) == %d\n",
+		Register, pConstantData, ConstantCount, hr);
 #endif
 
 		return hr;
@@ -1937,8 +1937,8 @@ public:
 		HRESULT hr = mRealDevice->GetPixelShaderConstantF(Register, (float*)pConstantData, ConstantCount);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetPixelShaderConstant(%d, %d, %d) == %d\n")
-		.With(Register).With(pConstantData).With(ConstantCount).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetPixelShaderConstant(%d, %d, %d) == %d\n",
+		Register, pConstantData, ConstantCount, hr);
 #endif
 
 		return hr;
@@ -1955,8 +1955,8 @@ public:
 		//HRESULT hr = mRealDevice->GetPixelShaderFunction(Handle,void* pData,DWORD* pSizeOfData);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::GetPixelShaderFunction(%d, %d, %d) == UNUSED\n")
-		.With(Handle).With(pData).With(pSizeOfData).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetPixelShaderFunction(%d, %d, %d) == UNUSED\n",
+		Handle, pData, pSizeOfData);
 #endif
 
 		return DefaultErrorCode;
@@ -1973,8 +1973,8 @@ public:
 		HRESULT hr = mRealDevice->DrawRectPatch(Handle, pNumSegs, pRectPatchInfo);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DrawRectPatch(%d, %d, %d) == %d\n")
-		.With(Handle).With(pNumSegs).With(pRectPatchInfo).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawRectPatch(%d, %d, %d) == %d\n",
+		Handle, pNumSegs, pRectPatchInfo, hr);
 #endif
 
 		return hr;
@@ -1991,8 +1991,8 @@ public:
 		HRESULT hr = mRealDevice->DrawTriPatch(Handle, pNumSegs, pTriPatchInfo);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DrawTriPatch(%d, %d, %d) == %d\n")
-		.With(Handle).With(pNumSegs).With(pTriPatchInfo).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawTriPatch(%d, %d, %d) == %d\n",
+		Handle, pNumSegs, pTriPatchInfo, hr);
 #endif
 
 		return hr;
@@ -2007,8 +2007,8 @@ public:
 		HRESULT hr = mRealDevice->DeletePatch(Handle);
 
 #ifdef _DEBUG
-		VoodooCore->GetLog()->Format("Voodoo DX8.9: IVoodoo3DDevice8::DeletePatch(%d) == %d\n")
-		.With(Handle).With(hr).Done();
+		VoodooCore->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeletePatch(%d) == %d\n",
+		Handle, hr);
 #endif
 
 		return hr;

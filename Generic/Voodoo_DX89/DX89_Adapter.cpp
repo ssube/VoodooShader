@@ -18,15 +18,15 @@ namespace VoodooShader
 				core = VoodooShader::Core::Create();
 			}
 
-			core->GetLog()->Log("Voodoo DX89: Starting adapter...\n");
+			core->Log("Voodoo DX89: Starting adapter...\n");
 
 			try
 			{
 				core->SetAdapter(reinterpret_cast<VoodooShader::Adapter*>(this));
-				core->GetLog()->Log("Voodoo DX89: Core adapter set to this.\n");
+				core->Log("Voodoo DX89: Core adapter set to this.\n");
 			} catch ( VoodooShader::Exception & exc ) {
-				core->GetLog()->Format("Voodoo DX89: Error setting adapter on core: %s.\n")
-					.With(exc.Message()).Done();
+				core->Log("Voodoo DX89: Error setting adapter on core: %s.\n",
+					exc.Message());
 				//exit(1);
 			}
 
@@ -35,7 +35,7 @@ namespace VoodooShader
 			{
 				Throw("Voodoo DX89: Could not set Cg device.", core);
 			} else {
-				core->GetLog()->Log("Voodoo DX89: Set Cg device.\n");
+				core->Log("Voodoo DX89: Set Cg device.\n");
 			}
 
 			//#ifdef _DEBUG
@@ -49,19 +49,17 @@ namespace VoodooShader
 			HRESULT errors = cgD3D9GetLastError();
 			if ( !SUCCEEDED(errors) )
 			{
-				core->GetLog()->Log("Voodoo DX89: Errors setting Cg states.\n");
+				core->Log("Voodoo DX89: Errors setting Cg states.\n");
 			} else {
-				core->GetLog()->Log("Voodoo DX89: Cg states set successfully.\n");
+				core->Log("Voodoo DX89: Cg states set successfully.\n");
 			}
 
 			// Setup profiles
 			CGprofile bestFrag = cgD3D9GetLatestPixelProfile();
 			CGprofile bestVert = cgD3D9GetLatestVertexProfile();
 
-			core->GetLog()->Format("Voodoo DX89: Detected the following profiles:\n\tVertex: %s\n\tFragment: %s\n")
-				.With(cgGetProfileString(bestVert)).With(cgGetProfileString(bestFrag)).Done();
-
-			//cgD3D9Se
+			core->Log("Voodoo DX89: Detected the following profiles:\n\tVertex: %s\n\tFragment: %s\n",
+				cgGetProfileString(bestVert), cgGetProfileString(bestFrag));
 
 			// Get params
 			D3DVIEWPORT9 viewport;
@@ -70,15 +68,15 @@ namespace VoodooShader
 			float fx = ( (float)viewport.Width  / 2 ) + 0.5f	;/// 2;
 			float fy = ( (float)viewport.Height / 2 ) + 0.5f	;/// 2;
 
-			mCore->GetLog()->Format("Voodoo DX89: Prepping for %d by %d target.\n")
-				.With(fx).With(fy).Done();
+			mCore->Log("Voodoo DX89: Prepping for %d by %d target.\n",
+				fx, fy);
 
 			hr = this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
 				D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
 
 			if ( FAILED(hr) )
 			{
-				mCore->GetLog()->Log("Voodoo DX89: Failed to create vertex buffer.\n");
+				mCore->Log("Voodoo DX89: Failed to create vertex buffer.\n");
 			}
 
 			FSVert g_Vertices[4];
@@ -118,8 +116,8 @@ namespace VoodooShader
 				hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
 				if ( !SUCCEEDED(hr) )
 				{
-					this->mCore->GetLog()->Format("Voodoo DX89: Error loading vertex program from '%s': %s.\n")
-						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					this->mCore->Log("Voodoo DX89: Error loading vertex program from '%s': %s.\n",
+						pass->Name(), cgD3D9TranslateHRESULT(hr));
 					return false;
 				}
 			}
@@ -129,14 +127,13 @@ namespace VoodooShader
 				hr = cgD3D9LoadProgram(fragProg, CG_TRUE, 0);
 				if ( !SUCCEEDED(hr) )
 				{
-					this->mCore->GetLog()->Format("Voodoo DX89: Error loading fragment program from '%s': %s.\n")
-						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					this->mCore->Log("Voodoo DX89: Error loading fragment program from '%s': %s.\n",
+						pass->Name(), cgD3D9TranslateHRESULT(hr));
 					return false;
 				}
 			}
 
-			this->mCore->GetLog()->Format("Voodoo DX89: Successfully loaded programs from '%s'.\n")
-				.With(pass->Name()).Done();
+			this->mCore->Log("Voodoo DX89: Successfully loaded programs from '%s'.\n", pass->Name());
 			return true;
 		}
 
@@ -152,8 +149,8 @@ namespace VoodooShader
 
 				if ( !SUCCEEDED(hr) )
 				{
-					this->mCore->GetLog()->Format("Voodoo DX89: Error binding vertex program from '%s': %s.\n")
-						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					this->mCore->Log("Voodoo DX89: Error binding vertex program from '%s': %s.\n",
+						pass->Name(), cgD3D9TranslateHRESULT(hr));
 					return;
 				} else {
 					mBoundVP = vertProg;
@@ -168,8 +165,8 @@ namespace VoodooShader
 
 				if ( !SUCCEEDED(hr) )
 				{
-					this->mCore->GetLog()->Format("Voodoo DX89: Error binding fragment program from '%s': %s.\n")
-						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					this->mCore->Log("Voodoo DX89: Error binding fragment program from '%s': %s.\n",
+						pass->Name(), cgD3D9TranslateHRESULT(hr));
 
 					if ( cgIsProgram(vertProg) )
 					{
@@ -228,7 +225,7 @@ namespace VoodooShader
 					this->mDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2); 
 					this->mDevice->EndScene();
 				} else {
-					mCore->GetLog()->Log("Voodoo DX89: Failed to draw quad.\n");
+					mCore->Log("Voodoo DX89: Failed to draw quad.\n");
 				}
 			} else {
 				HRESULT hr = this->mDevice->BeginScene();
@@ -237,7 +234,7 @@ namespace VoodooShader
 					hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
 					if ( !SUCCEEDED(hr) )
 					{
-						this->mCore->GetLog()->Log("Voodoo DX89: Error drawing user quad.");
+						this->mCore->Log("Voodoo DX89: Error drawing user quad.");
 					}
 					this->mDevice->EndScene();
 				}
@@ -267,8 +264,8 @@ namespace VoodooShader
 				break;
 			case PC_Unknown:
 			default:
-				this->mCore->GetLog()->Format("Voodoo DX89: Unable to bind parameter %s of unknown type.")
-					.With(param->Name()).Done();
+				this->mCore->Log("Voodoo DX89: Unable to bind parameter %s of unknown type.",
+					param->Name());
 			}
 		}
 
@@ -281,8 +278,8 @@ namespace VoodooShader
 				IDirect3DTexture9 * texObj = (IDirect3DTexture9 *)texture->GetTexture();
 				CGparameter texParam = param->GetParameter();
 				cgD3D9SetTextureParameter(texParam, texObj);
-				mCore->GetLog()->Format("Voodoo DX89: Bound texture %s to parameter %s.\n")
-					.With(texture->Name()).With(param->Name()).Done();
+				mCore->Log("Voodoo DX89: Bound texture %s to parameter %s.\n",
+					texture->Name(), param->Name());
 				return true;
 			} else {
 				Throw("Voodoo DX89: Invalid binding attempt, parameter is not a sampler.\n", this->mCore);
@@ -304,8 +301,8 @@ namespace VoodooShader
 				return texRef;
 			} else {
 				const char * error = cgD3D9TranslateHRESULT(hr);
-				mCore->GetLog()->Format("Voodoo DX89: Error creating texture %s: %s\n")
-					.With(name).With(error).Done();
+				mCore->Log("Voodoo DX89: Error creating texture %s: %s\n",
+					name, error);
 				return TextureRef();
 			}
 		}
@@ -313,8 +310,8 @@ namespace VoodooShader
 		void Adapter::HandleError(CGcontext context, CGerror error, void * core)
 		{
 			Core * actualCore = reinterpret_cast<Core*>(core);
-			actualCore->GetLog()->Format("Voodoo DX89: Cg error: %s\n")
-				.With(cgD3D9TranslateCGerror(error)).Done();
+			actualCore->Log("Voodoo DX89: Cg error: %s\n",
+				cgD3D9TranslateCGerror(error));
 		}
 	}
 }

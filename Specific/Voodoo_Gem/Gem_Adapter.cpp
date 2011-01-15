@@ -25,26 +25,26 @@ namespace VoodooShader
 				core = VoodooShader::Core::Create("Voodoo_Gem.log");
 			}
 
-			core->GetLog()->Log("Voodoo Gem: Starting adapter...\n");
+			core->Log("Voodoo Gem: Starting adapter...\n");
 
 			try
 			{
 				core->SetAdapter(reinterpret_cast<VoodooShader::Adapter*>(this));
-				core->GetLog()->Log("Voodoo Gem: Core adapter set to this.\n");
+				core->Log("Voodoo Gem: Core adapter set to this.\n");
 			} catch ( VoodooShader::Exception & exc ) {
-				core->GetLog()->Format("Voodoo Gem: Error setting adapter on core: %s.\n")
-					.With(exc.Message()).Done();
+				core->Log("Voodoo Gem: Error setting adapter on core: %s.\n",
+					exc.Message());
 				//exit(1);
 			}
 
-			core->GetLog()->Log("Voodoo Gem: Assembly ID: "VOODOO_META_STRING_VERSION_FULL(GEM)"\n");
+			core->Log("Voodoo Gem: Assembly ID: "VOODOO_META_STRING_VERSION_FULL(GEM)"\n");
 
 			HRESULT hr = cgD3D9SetDevice(device);
 			if ( !SUCCEEDED(hr) )
 			{
 				Throw("Voodoo Gem: Could not set Cg device.", core);
 			} else {
-				core->GetLog()->Log("Voodoo Gem: Set Cg device.\n");
+				core->Log("Voodoo Gem: Set Cg device.\n");
 			}
 
 #ifdef _DEBUG
@@ -58,17 +58,17 @@ namespace VoodooShader
 			HRESULT errors = cgD3D9GetLastError();
 			if ( !SUCCEEDED(errors) )
 			{
-				core->GetLog()->Log("Voodoo Gem: Errors setting Cg states.\n");
+				core->Log("Voodoo Gem: Errors setting Cg states.\n");
 			} else {
-				core->GetLog()->Log("Voodoo Gem: Cg states set successfully.\n");
+				core->Log("Voodoo Gem: Cg states set successfully.\n");
 			}
 
 			// Setup profiles
 			CGprofile bestFrag = cgD3D9GetLatestPixelProfile();
 			CGprofile bestVert = cgD3D9GetLatestVertexProfile();
 
-			core->GetLog()->Format("Voodoo Gem: The following profiles have been detected as the latest available:\n\tVertex: %s\n\tFragment: %s\n")
-				.With(cgGetProfileString(bestVert)).With(cgGetProfileString(bestFrag)).Done();
+			core->Log("Voodoo Gem: The following profiles have been detected as the latest available:\n\tVertex: %s\n\tFragment: %s\n",
+				cgGetProfileString(bestVert), cgGetProfileString(bestFrag));
 
 			// Get params
 			D3DVIEWPORT9 viewport;
@@ -77,8 +77,8 @@ namespace VoodooShader
 			float fx = ( (float)viewport.Width  / 2 ) + 0.5f	;/// 2;
 			float fy = ( (float)viewport.Height / 2 ) + 0.5f	;/// 2;
 
-			mCore->GetLog()->Format("Voodoo Gem: Prepping for %d by %d target.\n")
-				.With(fx).With(fy).Done();
+			mCore->Log("Voodoo Gem: Prepping for %d by %d target.\n",
+				fx, fy);
 
 			hr = this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
 				D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
@@ -87,7 +87,7 @@ namespace VoodooShader
 
 			if ( FAILED(hr) )
 			{
-				mCore->GetLog()->Log("Voodoo Gem: Failed to create vertex buffer.\n");
+				mCore->Log("Voodoo Gem: Failed to create vertex buffer.\n");
 			}
 
 			FSVert g_Vertices[4];
@@ -149,8 +149,8 @@ namespace VoodooShader
 				hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
 				if ( !SUCCEEDED(hr) )
 				{
-					this->mCore->GetLog()->Format("Voodoo Gem: Error loading vertex program from '%s': %s.\n")
-						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					this->mCore->Log("Voodoo Gem: Error loading vertex program from '%s': %s.\n",
+						pass->Name(), cgD3D9TranslateHRESULT(hr));
 					return false;
 				}
 			}
@@ -160,14 +160,14 @@ namespace VoodooShader
 				hr = cgD3D9LoadProgram(fragProg, CG_TRUE, 0);
 				if ( !SUCCEEDED(hr) )
 				{
-					this->mCore->GetLog()->Format("Voodoo Gem: Error loading fragment program from '%s': %s.\n")
-						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					this->mCore->Log("Voodoo Gem: Error loading fragment program from '%s': %s.\n",
+						pass->Name(), cgD3D9TranslateHRESULT(hr));
 					return false;
 				}
 			}
 
-			this->mCore->GetLog()->Format("Voodoo Gem: Successfully loaded programs from '%s'.\n")
-				.With(pass->Name()).Done();
+			this->mCore->Log("Voodoo Gem: Successfully loaded programs from '%s'.\n",
+				pass->Name());
 			return true;
 		}
 
@@ -183,8 +183,8 @@ namespace VoodooShader
 
 				if ( !SUCCEEDED(hr) )
 				{
-					this->mCore->GetLog()->Format("Voodoo Gem: Error binding vertex program from '%s': %s.\n")
-						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					this->mCore->Log("Voodoo Gem: Error binding vertex program from '%s': %s.\n",
+						pass->Name(), cgD3D9TranslateHRESULT(hr));
 					return;
 				} else {
 					mBoundVP = vertProg;
@@ -199,8 +199,8 @@ namespace VoodooShader
 
 				if ( !SUCCEEDED(hr) )
 				{
-					this->mCore->GetLog()->Format("Voodoo Gem: Error binding fragment program from '%s': %s.\n")
-						.With(pass->Name()).With(cgD3D9TranslateHRESULT(hr)).Done();
+					this->mCore->Log("Voodoo Gem: Error binding fragment program from '%s': %s.\n",
+						pass->Name(), cgD3D9TranslateHRESULT(hr));
 
 					if ( cgIsProgram(vertProg) )
 					{
@@ -240,14 +240,14 @@ namespace VoodooShader
 			HRESULT hr = mDevice->GetRenderTarget(0, &rt);
 			if ( FAILED(hr) )
 			{
-				mCore->GetLog()->Log("Voodoo Gem: Failed to retrieve render target for shader %s.\n", shader->Name());
+				mCore->Log("Voodoo Gem: Failed to retrieve render target for shader %s.\n", shader->Name());
 				return;
 			}
 			
 			hr = mDevice->SetRenderTarget(0, scratchSurface);
 			if ( FAILED(hr) )
 			{
-				mCore->GetLog()->Log("Voodoo Gem: Failed to bind render target for shader %s.\n", shader->Name());
+				mCore->Log("Voodoo Gem: Failed to bind render target for shader %s.\n", shader->Name());
 				return;
 			}
 
@@ -274,14 +274,14 @@ namespace VoodooShader
 				HRESULT hr = passTargetD3D->GetSurfaceLevel(0, &passSurface);
 				if ( FAILED(hr) || !passSurface )
 				{	
-					mCore->GetLog()->Format("Voodoo Gem: Failed to get target surface for pass %s (targeting texture %s).\n")
-						.With(pass->Name()).With(passTarget->Name()).Done();
+					mCore->Log("Voodoo Gem: Failed to get target surface for pass %s (targeting texture %s).\n",
+						pass->Name(), passTarget->Name());
 
 					hr = mDevice->StretchRect(scratchSurface, NULL, passSurface, NULL, D3DTEXF_NONE);
 					if ( FAILED(hr) )
 					{
-						mCore->GetLog()->Format("Voodoo Gem: Failed to copy results to target for pass %s.\n")
-							.With(pass->Name()).Done();
+						mCore->Log("Voodoo Gem: Failed to copy results to target for pass %s.\n",
+							pass->Name());
 					}
 				} 
 				*/
@@ -290,8 +290,8 @@ namespace VoodooShader
 
 				if ( FAILED(hr) )
 				{
-					mCore->GetLog()->Format("Voodoo Gem: Failed to copy results to target for pass %s (result %d).\n")
-						.With(pass->Name()).With(hr).Done();
+					mCore->Log("Voodoo Gem: Failed to copy results to target for pass %s (result %d).\n",
+						pass->Name(), hr);
 				}
 			}
 
@@ -303,14 +303,14 @@ namespace VoodooShader
 			HRESULT hr = techTargetD3D->GetSurfaceLevel(0, &techSurface);
 			if ( FAILED(hr) || !techSurface )
 			{
-				mCore->GetLog()->Format("Voodoo Gem: Failed to get target surface for technique %s (targeting texture %s).\n")
-					.With(tech->Name()).With(techTarget->Name()).Done();
+				mCore->Log("Voodoo Gem: Failed to get target surface for technique %s (targeting texture %s).\n",
+					tech->Name(), techTarget->Name());
 			} else {
 				hr = mDevice->StretchRect(scratchSurface, NULL, techSurface, NULL, D3DTEXF_NONE);
 				if ( FAILED(hr) )
 				{
-					mCore->GetLog()->Format("Voodoo Gem: Failed to copy results to target for technique %s.\n")
-						.With(tech->Name()).Done();
+					mCore->Log("Voodoo Gem: Failed to copy results to target for technique %s.\n",
+						tech->Name());
 				}
 			}
 			*/
@@ -344,7 +344,7 @@ namespace VoodooShader
 					this->mDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2); 
 					this->mDevice->EndScene();
 				} else {
-					mCore->GetLog()->Log("Voodoo Gem: Failed to draw quad.\n");
+					mCore->Log("Voodoo Gem: Failed to draw quad.\n");
 				}
 			} else {
 				// Draw a quad from user vertexes
@@ -354,7 +354,7 @@ namespace VoodooShader
 					hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
 					if ( !SUCCEEDED(hr) )
 					{
-						this->mCore->GetLog()->Log("Voodoo Gem: Error drawing user quad.");
+						this->mCore->Log("Voodoo Gem: Error drawing user quad.");
 					}
 					this->mDevice->EndScene();
 				}
@@ -379,8 +379,8 @@ namespace VoodooShader
 				break;
 			case PC_Unknown:
 			default:
-				this->mCore->GetLog()->Format("Voodoo Gem: Unable to bind parameter %s of unknown type.")
-					.With(param->Name()).Done();
+				this->mCore->Log("Voodoo Gem: Unable to bind parameter %s of unknown type.",
+					param->Name());
 			}
 		}
 
@@ -393,8 +393,8 @@ namespace VoodooShader
 				IDirect3DTexture9 * texObj = (IDirect3DTexture9 *)texture->GetTexture();
 				CGparameter texParam = param->GetParameter();
 				cgD3D9SetTextureParameter(texParam, texObj);
-				mCore->GetLog()->Format("Voodoo Gem: Bound texture %s to parameter %s.\n")
-					.With(texture->Name()).With(param->Name()).Done();
+				mCore->Log("Voodoo Gem: Bound texture %s to parameter %s.\n",
+					texture->Name(), param->Name());
 				return true;
 			} else {
 				Throw("Voodoo Gem: Invalid binding attempt, parameter is not a sampler.\n", this->mCore);
@@ -416,8 +416,8 @@ namespace VoodooShader
 				return texRef;
 			} else {
 				const char * error = cgD3D9TranslateHRESULT(hr);
-				mCore->GetLog()->Format("Voodoo Gem: Error creating texture %s: %s\n")
-					.With(name).With(error).Done();
+				mCore->Log("Voodoo Gem: Error creating texture %s: %s\n",
+					name, error);
 				return TextureRef();
 			}
 		}
@@ -425,8 +425,8 @@ namespace VoodooShader
 		void Adapter::HandleError(CGcontext context, CGerror error, void * core)
 		{
 			Core * actualCore = reinterpret_cast<Core*>(core);
-			actualCore->GetLog()->Format("Voodoo Gem: Cg error: %s\n")
-				.With(cgD3D9TranslateCGerror(error)).Done();
+			actualCore->Log("Voodoo Gem: Cg error: %s\n",
+				cgD3D9TranslateCGerror(error));
 		}
 	}
 }

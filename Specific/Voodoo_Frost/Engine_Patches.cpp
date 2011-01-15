@@ -29,7 +29,7 @@
  */
 void CameraHack()
 {
-	VoodooCore->GetLog()->Log("Voodoo Frost: Applying camera hack...\n");
+	VoodooCore->Log("Voodoo Frost: Applying camera hack...\n");
 
 	float maxDist	=  120.0f;
 	float minDist	=   -0.2f;
@@ -49,11 +49,11 @@ void CameraHack()
 
 		VirtualProtect( (PVOID)0x004A9000, 0x1000, oldProtect, &finalProtect);
 
-		VoodooCore->GetLog()->Log("Voodoo Frost: Camera hack successfully applied.\n");
+		VoodooCore->Log("Voodoo Frost: Camera hack successfully applied.\n");
 	} else {
 		DWORD error = GetLastError();
 		
-		VoodooCore->GetLog()->Format("Voodoo Frost: Camera hack failed with code %d.\n")
-			.With(error).Done();
+		VoodooCore->Log("Voodoo Frost: Camera hack failed with code %d.\n",
+			error);
 	}
 }
