@@ -181,7 +181,7 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 	}
 
 	typedef void * (__stdcall * InitFuncType)(UINT);
-	InitFuncType initFunc = (InitFuncType)GetProcAddress(library, "?Direct3DCreate8@@YGPAXI@Z");
+	InitFuncType initFunc = (InitFuncType)GetProcAddress(library, "?Voodoo3DCreate8@@YGPAXI@Z");
 
 	if ( !initFunc )
 	{

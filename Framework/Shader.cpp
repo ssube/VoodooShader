@@ -92,6 +92,8 @@ namespace VoodooShader
 			this->mParameters[name] = param;
 
 			this->LinkParameter(param);
+
+			cParam = cgGetNextParameter(cParam);
 		}
 
 		this->SetupTechniques();

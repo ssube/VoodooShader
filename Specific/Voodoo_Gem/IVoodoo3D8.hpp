@@ -172,7 +172,7 @@ public:
 		HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
 #ifdef _DEBUG 
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceType(%d, %d, %d, %d, %d) == %d\n",
+		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceType(%u, %u, %u, %u, %u) == %d\n",
 			Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed, 
 			hr);
 #endif
@@ -219,7 +219,7 @@ public:
 			VoodooShader::Gem::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
 			);
 
-		VoodooCore->Log("Voodoo Gem: Backbuffer parameters for new device: %d by %d (%d buffers), %s.\n",
+		VoodooCore->Log("Voodoo Gem: Backbuffer parameters for new device: %u by %u (%u buffers), %s.\n",
 			mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight, 
 			mpPresentationParameters.BackBufferCount, textureType);
 #endif

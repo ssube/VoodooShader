@@ -76,8 +76,10 @@ namespace VoodooShader
 		va_list args;
 		char buffer[4096];
 
-		vsnprintf(buffer, 4095, msg, args);
+		va_start(args, msg);
+		_vsnprintf(buffer, 4095, msg, args);
 		buffer[4095] = 0;
+		va_end(args);
 
 		this->mLogFile << this->Timestamp() << buffer;
 	}

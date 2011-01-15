@@ -35,7 +35,7 @@ namespace VoodooShader
 		this->mLogger->SetBufferSize(0);
 //#endif
 
-		this->mLogger->Log(VOODOO_CORE_COPYRIGHT);
+		this->mLogger->Log("%s", VOODOO_CORE_COPYRIGHT);
 		this->mLogger->Log("Voodoo Core: Assembly ID: %s\n", VOODOO_META_STRING_VERSION_FULL(CORE));
 
 		this->mLogger->Log("Voodoo Core: Preparing core components...\n");
