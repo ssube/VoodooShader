@@ -143,12 +143,11 @@
  *	passes from the same effect or even by other effects.
  * </p>
  * <p>
- *	The default behavior (techniques render to <code>lastshader</code> and
- *	passes to <code>lastpass</code>) is implemented by using those textures as
- *	the target if none is specified.
+ *	If no target is specified in the technique or pass annotations, the shader
+ *	linker uses the texture currently bound to the @ref Core "Core's" special
+ *	textures. These may be set using Core::SetTexture(TextureType, TextureRef).
+ *	Relinking a shader may change these targets.
  * </p>
- * </p>
- *	
  *
  * @page Textures
  * <p>
@@ -162,7 +161,7 @@
  * <p>
  *	Three basic texture types are supported in Voodoo:
  *	<ol>
- *	 <li>1-dimensional textures (a simple row of pixels, 1 by n)</li>
+ *	 <li>1-dimensional textures (a simple row of pixels, 1 by x)</li>
  *	 <li>2-dimensional textures (the most common scene, a rectangle of pixels,
  *		x by y)</li>
  *	 <li>3-dimensional textures (effectively a number of 2D textures stacked in

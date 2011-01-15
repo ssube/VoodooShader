@@ -93,12 +93,30 @@ namespace VoodooShader
 
 	void Core::Log(const char * msg, ...)
 	{
-		va_list arglist;
-
 		if ( this->mLogger )
 		{
-			this->mLogger->Log(msg, arglist);
+			va_list arglist;
+			va_start(arglist, msg);
+
+			this->mLogger->LogList(msg, arglist);
+
+			va_end(arglist);
 		}
+	}
+
+	void Core::Debug(const char * msg, ...)
+	{
+#ifdef _DEBUG
+		if ( this->mLogger )
+		{
+			va_list arglist;
+			va_start(arglist, msg);
+
+			this->mLogger->LogList(msg, arglist);
+
+			va_end(arglist);
+		}
+#endif
 	}
 
 	void Core::SetAdapter(Adapter * adapter)
@@ -165,6 +183,38 @@ namespace VoodooShader
 			return textureEntry->second;
 		} else {
 			return TextureRef();
+		}
+	}
+
+	TextureRef Core::GetTexture(TextureType function)
+	{
+		switch ( function )
+		{
+		case TT_PassTarget:
+			return mLastPass;
+		case TT_ShaderTarget:
+			return mLastShader;
+		case TT_Generic:
+		case TT_Unknown:
+		default:
+			return TextureRef();
+		}
+	}
+
+	void Core::SetTexture(TextureType function, TextureRef texture)
+	{
+		switch ( function )
+		{
+		case TT_PassTarget:
+			mLastPass = texture;
+			break;
+		case TT_ShaderTarget:
+			mLastShader = texture;
+			break;
+		case TT_Generic:
+		case TT_Unknown:
+		default:
+			Throw("Voodoo Core: Unknown texture type (function) given.", this);
 		}
 	}
 

@@ -191,9 +191,11 @@ public:
 	)
 	{
 		D3DPRESENT_PARAMETERS mpPresentationParameters;
+		ZeroMemory(&mpPresentationParameters, sizeof(D3DPRESENT_PARAMETERS));
 
 		mpPresentationParameters.Flags = pPresentationParameters->Flags;
 
+		//! @todo Included because it was in MGE, test if this is necessary.
 		if( mpPresentationParameters.Flags & D3DPRESENTFLAG_LOCKABLE_BACKBUFFER )
 		{
 			mpPresentationParameters.Flags ^= D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
@@ -228,7 +230,7 @@ public:
 		HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &mRealDevice);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CreateDevice(%d, %d, %d, %d, %d, %d) == %d\n",
+		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CreateDevice(%d, %d, %08X, %d, %08X, %08X) == %d\n",
 			Adapter, DeviceType, hFocusWindow, BehaviorFlags, 
 			&mpPresentationParameters, mRealDevice, hr);
 #endif

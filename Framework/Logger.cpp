@@ -84,12 +84,16 @@ namespace VoodooShader
 		this->mLogFile << this->Timestamp() << buffer;
 	}
 
-	VOODOO_API void Logger::DebugLog(const char * msg, ...)
+	VOODOO_API void Logger::LogList(const char * msg, va_list args)
 	{
-#ifdef _DEBUG
-		va_list args;
-		this->Log(msg, args);
-#endif
+		char buffer[4096];
+
+		//va_start(args, msg);
+		_vsnprintf(buffer, 4095, msg, args);
+		buffer[4095] = 0;
+		//va_end(args);
+
+		this->mLogFile << this->Timestamp() << buffer;
 	}
 
 	/// \brief Dumps the log file to disk immediately.

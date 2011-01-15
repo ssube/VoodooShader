@@ -77,7 +77,7 @@ namespace VoodooShader
 			float fx = ( (float)viewport.Width  / 2 ) + 0.5f	;/// 2;
 			float fy = ( (float)viewport.Height / 2 ) + 0.5f	;/// 2;
 
-			mCore->Log("Voodoo Gem: Prepping for %d by %d target.\n",
+			mCore->Log("Voodoo Gem: Prepping for %f by %f target.\n",
 				fx, fy);
 
 			hr = this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,

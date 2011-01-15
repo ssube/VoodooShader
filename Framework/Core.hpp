@@ -53,12 +53,22 @@ namespace VoodooShader
 		CGcontext GetCGContext();
 
 		/**
-		 * Writes a string to the log file (may be formatted).
+		 * Writes a string to the log file using standard printf syntax.
 		 * 
 		 * @param msg The format string to use
 		 * @param ... Parameters to insert
 		 */
 		void Log(const char * msg, ...);
+
+		/**
+		 * Writes a string to the log file, if the core is in debug mode.
+		 *
+		 * @param msg The format string to use
+		 * @param ... Parameters
+		 *
+		 * @note In non-debug builds, this will not log anything.
+		 */
+		void Debug(const char * msg, ...);
 
 		/**
 		 * Attach an Adapter to this Core.
@@ -108,6 +118,27 @@ namespace VoodooShader
 		 * @note This will not create a texture, only retrieve an existing one.
 		 */
 		TextureRef GetTexture(std::string name);
+
+		/**
+		 * Retrieves a texture from the Core's texture map by function.
+		 *
+		 * @param function The texture type to return.
+		 * @return A shared reference to the Texture object if it exists,
+		 *		otherwise an empty reference.
+		 *
+		 * @note This will not create textures and all special textures are
+		 *		empty until set.
+		 */
+		TextureRef GetTexture(TextureType function);
+
+		/**
+		 * Assign a texture to a specialized function. This is used to bind
+		 * textures as the last-pass and last-shader render targets.
+		 *
+		 * @param function The function to set
+		 * @param texture The texture to bind
+		 */
+		void SetTexture(TextureType function, TextureRef texture);
 
 		/**
 		 * Removes a texture from the Core's texture map. 
@@ -186,6 +217,9 @@ namespace VoodooShader
 		ShaderMap mShaders;
 		TextureMap mTextures;
 		ParameterMap mParameters;
+
+		TextureRef mLastPass;
+		TextureRef mLastShader;
 	};
 }
 

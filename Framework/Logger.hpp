@@ -56,17 +56,23 @@ namespace VoodooShader
 		String Timestamp();
 
 		/**
-		 * Log a simple (pre-formatted) message.
+		 * Log a message, may be formatted with printf syntax.
 		 *
 		 * @param msg The message string.
-		 * @param timestamp Prepend a timestamp to the message.
-		 * @see Logger::Timestamp()
+		 * @param ... The parameters to insert
 		 */
 		void Log(const char * msg, ...);
 
-		//void Log(bool timestamp, String msg, ...);
-
-		void DebugLog(const char * msg, ...);
+		/**
+		 * Logs a msg and list of arguments.
+		 * 
+		 * @note This generally shouldn't be called directly, it is provided
+		 *		for wrappers (such as the Core, which hides the logger object).
+		 *
+		 * @param msg The message string
+		 * @param args The arguments to insert
+		 */
+		void LogList(const char * msg, va_list args);
 
 		/**
 		 * Sets the internal buffer to a given size.

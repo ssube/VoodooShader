@@ -181,6 +181,18 @@ namespace VoodooShader
 		PS_Count			/*!< Enumerator values count */
 	};
 
+	enum TextureType
+	{
+		TT_Unknown = 0,		/*!< Unknown texture type */
+		// Generic types
+		TT_Generic,			/*!< Generic texture type, no special function */
+		// Special types
+		TT_ShaderTarget,	/*!< Shader target texture */
+		TT_PassTarget,		/*!< Pass target texture */
+		// Max
+		TT_Count			/*!< Enumerator values count */
+	};
+
 	enum FileOpenMode
 	{
 		FM_Unknown = 0,
