@@ -69,11 +69,6 @@ namespace VoodooShader
 			Throw("Voodoo Core: Invalid start position (past end of chain).", this->mParent);
 		}
 
-		if ( count > total )
-		{
-			Throw("Voodoo Core: Attempted to render more shaders than in the chain.", this->mParent);
-		}
-		
 		// Prep and trigger the rendering
 		unsigned int chainEnd, chainCurrent;
 
@@ -85,7 +80,8 @@ namespace VoodooShader
 
 			if ( chainEnd > total )
 			{
-				Throw("Voodoo Core: With start offset, end shader is past the end of the chain.", this->mParent);
+				this->mParent->Debug("Voodoo Core: Adjusted shader chain would have extended beyond available shaders (%d of %d), correcting.", chainEnd, total);
+				chainEnd = total;
 			}
 		}
 

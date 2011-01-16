@@ -101,6 +101,10 @@ namespace VoodooShader
 			this->mLogger->LogList(msg, arglist);
 
 			va_end(arglist);
+
+#ifdef _DEBUG
+			this->mLogger->Dump();
+#endif
 		}
 	}
 
@@ -115,6 +119,8 @@ namespace VoodooShader
 			this->mLogger->LogList(msg, arglist);
 
 			va_end(arglist);
+
+			this->mLogger->Dump();
 		}
 #endif
 	}

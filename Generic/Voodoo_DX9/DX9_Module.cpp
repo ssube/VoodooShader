@@ -130,7 +130,7 @@ namespace VoodooShader
 				if ( !SUCCEEDED(hr) )
 				{
 					this->mCore->Log("Voodoo DX9: Error loading vertex program from '%s': %d.\n",
-						pass->Name(), hr);
+						pass->Name().c_str(), hr);
 					return false;
 				}
 			}
@@ -141,13 +141,13 @@ namespace VoodooShader
 				if ( !SUCCEEDED(hr) )
 				{
 					this->mCore->Log("Voodoo DX9: Error loading fragment program from '%s': %d.\n",
-						pass->Name(), hr);
+						pass->Name().c_str(), hr);
 					return false;
 				}
 			}
 
 			this->mCore->Log("Voodoo DX9: Successfully loaded programs from '%s'.\n",
-				pass->Name());
+				pass->Name().c_str());
 			return true;
 		}
 
@@ -164,7 +164,7 @@ namespace VoodooShader
 				if ( !SUCCEEDED(hr) )
 				{
 					this->mCore->Log("Voodoo DX9: Error binding vertex program from '%s': %s.\n",
-						pass->Name(), hr);
+						pass->Name().c_str(), hr);
 					return;
 				} else {
 					mBoundVP = vertProg;
@@ -180,7 +180,7 @@ namespace VoodooShader
 				if ( !SUCCEEDED(hr) )
 				{
 					this->mCore->Log("Voodoo DX9: Error binding fragment program from '%s': %s.\n",
-						pass->Name(), cgD3D9TranslateHRESULT(hr));
+						pass->Name().c_str(), cgD3D9TranslateHRESULT(hr));
 
 					if ( cgIsProgram(vertProg) )
 					{
@@ -279,7 +279,7 @@ namespace VoodooShader
 			case PC_Unknown:
 			default:
 				this->mCore->Log("Voodoo DX9: Unable to bind parameter %s of unknown type.",
-					param->Name());
+					param->Name().c_str());
 			}
 		}
 
@@ -293,7 +293,7 @@ namespace VoodooShader
 				CGparameter texParam = param->GetParameter();
 				cgD3D9SetTextureParameter(texParam, texObj);
 				mCore->Log("Voodoo DX9: Bound texture %s to parameter %s.\n",
-					texture->Name(), param->Name());
+					texture->Name().c_str(), param->Name());
 				return true;
 			} else {
 				Throw("Voodoo DX9: Invalid binding attempt, parameter is not a sampler.\n", this->mCore);

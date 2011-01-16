@@ -154,7 +154,7 @@ public:
 		HRESULT hr = mRealDevice->Clear(Count, pRects, Flags, Color, Z, Stencil);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::Clear(%d, %d, %d, %d, %d, %d) == %d\n",
+		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::Clear(%d, %X, %d, %d, %d, %d) == %d\n",
 			Count, pRects, Flags, Color, Z, Stencil, 
 			hr);
 #endif
@@ -216,7 +216,7 @@ public:
 		(*ppD3D8) = (IDirect3D8*)VoodooObject;
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::GetDirect3D(%d) == D3D_OK\n",
+		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::GetDirect3D(%X) == D3D_OK\n",
 		*ppD3D8);
 #endif
 
@@ -234,7 +234,7 @@ public:
 		HRESULT hr = mRealDevice->GetDeviceCaps(&rCaps);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::GetDeviceCaps(%d) == %d\n",
+		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::GetDeviceCaps(%X) == %d\n",
 		pCaps, hr);
 #endif
 
@@ -518,6 +518,8 @@ public:
 		// That failed, create as a standard texture
 		if ( FAILED(hr) )
 		{
+			VoodooCore->Debug("Voodoo Gem: Unable to create texture in debug mode.");
+
 			rtt = false;
 			hr = mRealDevice->CreateTexture
 			(

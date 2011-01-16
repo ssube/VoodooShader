@@ -77,7 +77,7 @@ namespace VoodooShader
 		char buffer[4096];
 
 		va_start(args, msg);
-		_vsnprintf(buffer, 4095, msg, args);
+		_vsnprintf_s(buffer, 4095, 4095, msg, args);
 		buffer[4095] = 0;
 		va_end(args);
 
@@ -89,7 +89,7 @@ namespace VoodooShader
 		char buffer[4096];
 
 		//va_start(args, msg);
-		_vsnprintf(buffer, 4095, msg, args);
+		_vsnprintf_s(buffer, 4095, 4095, msg, args);
 		buffer[4095] = 0;
 		//va_end(args);
 
