@@ -518,20 +518,18 @@ public:
 		// That failed, create as a standard texture
 		if ( FAILED(hr) )
 		{
-			VoodooCore->Debug("Voodoo Gem: Unable to create texture in debug mode.");
+			VoodooCore->Debug("Voodoo Gem: Unable to create texture as a render target.");
 
 			rtt = false;
 			hr = mRealDevice->CreateTexture
 			(
-				Width, Height, Levels, Usage, Format, 
-				Pool, &rTexture, NULL
+				Width, Height, Levels, Usage, Format, Pool, &rTexture, NULL
 			);
 		}
 
 #ifdef _DEBUG
 		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::CreateTexture(%d, %d, %d, %d, %d, %d, %d) == %d\n",
-			Width, Height, Levels, Usage, Format, Pool, ppTexture, 
-			hr);
+			Width, Height, Levels, Usage, Format, Pool, ppTexture, hr);
 #endif
 
 		// One succeeded, the texture exists. We need to register it with the Voodoo core.
@@ -569,15 +567,14 @@ public:
 
 #ifdef _DEBUG
 		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::CreateVolumeTexture(%d, %d, %d, %d, %d, %d, %d, %d) == %d\n",
-		Width, Height, Depth, Levels, Usage, Format, Pool, 
-		*ppVolumeTexture, hr);
+		Width, Height, Depth, Levels, Usage, Format, Pool, *ppVolumeTexture, hr);
 #endif
 
 		//! @todo Set up the core volume texture registration for Voodoo Gem
 		if ( SUCCEEDED(hr) )
 		{
 			IVoodoo3DTexture8 * wTexture = new IVoodoo3DTexture8(this, (IDirect3DTexture9*)rTexture);
-			(*ppVolumeTexture) = (IDirect3DCubeTexture8*)wTexture;
+			(*ppVolumeTexture) = (IDirect3DVolumeTexture8*)wTexture;
 		}
 
 		return hr;

@@ -53,6 +53,16 @@ namespace VoodooShader
 		CGcontext GetCGContext();
 
 		/**
+		 * Enable or disable debug mode at runtime.
+		 *
+		 * @param mode The desired mode
+		 *
+		 * @note This function only has an effect in release builds, in debug
+		 *		builds debug mode is always on.
+		 */
+		void SetDebug(bool mode);
+
+		/**
 		 * Writes a string to the log file using standard printf syntax.
 		 * 
 		 * @param msg The format string to use
@@ -220,6 +230,8 @@ namespace VoodooShader
 
 		TextureRef mLastPass;
 		TextureRef mLastShader;
+
+		bool mDebugMode;
 	};
 }
 

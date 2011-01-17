@@ -23,17 +23,18 @@ namespace VoodooShader
 	}
 
 	Core::Core(std::string logfile)
-		: mAdapter(NULL)
+		: mAdapter(NULL),
+#ifdef _DEBUG
+			mDebugMode(true)
+#else
+			mDebugMode(false)
+#endif
 	{
 		this->mLogger = new Logger(logfile.c_str());
 
-		/**
-		 * @todo Buffer size for the core logger is 0 for debugging purposes,
-		 *		make it bigger before release.
-		 */
-//#ifdef _DEBUG
+#ifdef _DEBUG
 		this->mLogger->SetBufferSize(0);
-//#endif
+#endif
 
 		this->mLogger->Log("%s", VOODOO_CORE_COPYRIGHT);
 		this->mLogger->Log("Voodoo Core: Assembly ID: %s\n", VOODOO_META_STRING_VERSION_FULL(CORE));
@@ -91,6 +92,17 @@ namespace VoodooShader
 		return this->mAdapter;
 	}
 
+	void Core::SetDebug(bool mode)
+	{
+#ifndef _DEBUG
+		this->mDebugMode = mode;
+		if ( mode )
+		{
+			this->mLogger->SetBufferSize(0);
+		}
+#endif
+	}
+
 	void Core::Log(const char * msg, ...)
 	{
 		if ( this->mLogger )
@@ -110,8 +122,7 @@ namespace VoodooShader
 
 	void Core::Debug(const char * msg, ...)
 	{
-#ifdef _DEBUG
-		if ( this->mLogger )
+		if ( mDebugMode && this->mLogger )
 		{
 			va_list arglist;
 			va_start(arglist, msg);
@@ -122,7 +133,6 @@ namespace VoodooShader
 
 			this->mLogger->Dump();
 		}
-#endif
 	}
 
 	void Core::SetAdapter(Adapter * adapter)
