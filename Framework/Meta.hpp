@@ -64,6 +64,16 @@ namespace VoodooShader
 
 	class Converter;
 
+	struct Version
+	{
+		int Major;
+		int Minor;
+		long Patch;
+		long Rev;
+	};
+
+	const size_t VersionSize = sizeof(Version);
+
 #define Throw(msg, core) throw Exception(msg, core, __FILE__, __FUNCTION__, __LINE__);
 
 	typedef std::string String;

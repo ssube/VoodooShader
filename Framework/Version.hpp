@@ -20,7 +20,6 @@
 \**************************************************************************************************/
 
 
-
 // Versioning functions -------------------------------------------------------
 #define VOODOO_META__STRING(arg) #arg
 #define VOODOO_META_STRING(arg) VOODOO_META__STRING(arg)

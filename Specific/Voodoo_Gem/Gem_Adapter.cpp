@@ -39,6 +39,14 @@ namespace VoodooShader
 
 			core->Log("Voodoo Gem: Assembly ID: "VOODOO_META_STRING_VERSION_FULL(GEM)"\n");
 
+			// Core version check
+			Version coreVersion = core->GetVersion();
+
+			if ( coreVersion.Rev != VOODOO_GLOBAL_VERSION_GITREV )
+			{
+				core->Log("Voodoo Gem: Warning: The core module appears to be from a different revision.\n");
+			}
+
 			HRESULT hr = cgD3D9SetDevice(device);
 			if ( !SUCCEEDED(hr) )
 			{

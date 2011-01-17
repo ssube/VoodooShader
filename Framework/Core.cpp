@@ -87,6 +87,13 @@ namespace VoodooShader
 		return this->mCGContext;
 	}
 
+	Version Core::GetVersion()
+	{
+		Version version = { VOODOO_META_VERSION_CHAIN(CORE) };
+
+		return version;
+	}
+
 	Adapter * Core::GetAdapter()
 	{
 		return this->mAdapter;

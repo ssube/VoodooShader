@@ -53,6 +53,14 @@ namespace VoodooShader
 		CGcontext GetCGContext();
 
 		/**
+		 * Retrieve this module's version. This can be used to test
+		 * compatibility.
+		 *
+		 * @return The module's version info.
+		 */
+		Version GetVersion();
+
+		/**
 		 * Enable or disable debug mode at runtime.
 		 *
 		 * @param mode The desired mode

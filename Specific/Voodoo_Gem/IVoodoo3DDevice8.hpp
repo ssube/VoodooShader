@@ -518,7 +518,7 @@ public:
 		// That failed, create as a standard texture
 		if ( FAILED(hr) )
 		{
-			VoodooCore->Debug("Voodoo Gem: Unable to create texture as a render target.");
+			VoodooCore->Debug("Voodoo Gem: Unable to create texture as a render target (%d).\n", hr);
 
 			rtt = false;
 			hr = mRealDevice->CreateTexture
