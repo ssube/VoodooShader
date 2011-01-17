@@ -29,12 +29,11 @@
 #include <list>
 #include <string>
 #include <time.h>
+#include <assert.h>
 
 #define WIN32_LEAN_AND_MEAN   // Exclude rarely-used stuff from Windows headers
 // Windows Header Files:
 #include <windows.h>
-
-#include <boost/shared_ptr.hpp>
 
 #include "Cg/cg.h"
 

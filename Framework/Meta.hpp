@@ -32,6 +32,7 @@
 #pragma warning(disable:4251)
 
 #include "Includes.hpp"
+#include "Reference.hpp"
 
 #define VOODOO_CORE_COPYRIGHT "\n\
 	Voodoo Shader Framework, Copyright © 2010 by Sean Sube\n\
@@ -68,13 +69,13 @@ namespace VoodooShader
 	typedef std::string String;
 
 	// Reference-counted pointer types
-	typedef boost::shared_ptr<Shader>			ShaderRef;
-	typedef boost::shared_ptr<Texture>			TextureRef;
-	typedef boost::shared_ptr<Technique>		TechniqueRef;
-	typedef boost::shared_ptr<Pass>				PassRef;
-	typedef boost::shared_ptr<Parameter>		ParameterRef;
-	typedef boost::shared_ptr<File>				FileRef;
-	typedef boost::shared_ptr<Image>			ImageRef;
+	typedef Reference<Shader>					ShaderRef;
+	typedef Reference<Texture>					TextureRef;
+	typedef Reference<Technique>				TechniqueRef;
+	typedef Reference<Pass>						PassRef;
+	typedef Reference<Parameter>				ParameterRef;
+	typedef Reference<File>						FileRef;
+	typedef Reference<Image>					ImageRef;
 
 	// Shader collections
 	typedef std::map<String, ShaderRef>			ShaderMap;

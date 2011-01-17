@@ -115,7 +115,7 @@ namespace VoodooShader
 			if ( globalName && strlen(globalName) > 0 )
 			{
 				ParameterRef globalParam = mCore->GetParameter(globalName, type);
-				if ( globalParam )
+				if ( globalParam.get() )
 				{
 					globalParam->Attach(param);
 				} else {
@@ -154,7 +154,7 @@ namespace VoodooShader
 			if ( textureName && strlen(textureName) > 0 )
 			{
 				TextureRef texture = mCore->GetTexture(textureName);
-				if ( texture )
+				if ( texture.get() )
 				{
 					mCore->GetAdapter()->ConnectTexture(param, texture);
 				} else {

@@ -73,7 +73,7 @@ namespace VoodooShader
 	std::string Parameter::Name()
 	{
 		std::string name;
-		if ( mParent )
+		if ( mParent.get() )
 		{
 			name += this->mParent->Name();
 		}

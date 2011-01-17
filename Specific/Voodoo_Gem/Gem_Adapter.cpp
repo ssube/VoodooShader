@@ -74,8 +74,8 @@ namespace VoodooShader
 			D3DVIEWPORT9 viewport;
 			device->GetViewport(&viewport);
 
-			float fx = ( (float)viewport.Width  / 2 ) + 0.5f	;/// 2;
-			float fy = ( (float)viewport.Height / 2 ) + 0.5f	;/// 2;
+			float fx = ( (float)viewport.Width   ) + 0.5f	;/// 2;
+			float fy = ( (float)viewport.Height  ) + 0.5f	;/// 2;
 
 			mCore->Log("Voodoo Gem: Prepping for %f by %f target.\n",
 				fx, fy);

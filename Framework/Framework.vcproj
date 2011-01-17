@@ -295,6 +295,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Reference.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\resource.h"
 				>
 			</File>
