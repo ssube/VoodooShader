@@ -19,6 +19,12 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
+// Todo list
+//! @todo Allow parameters to handle matrices
+//! @todo Gem: pass the model/view/proj matrices in to shaders
+
+
+// Various doc pages
 /**
  * @page Voodoo Voodoo Shader Framework
  * <p>

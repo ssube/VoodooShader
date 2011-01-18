@@ -44,7 +44,7 @@ namespace VoodooShader
 
 			if ( coreVersion.Rev != VOODOO_GLOBAL_VERSION_GITREV )
 			{
-				core->Log("Voodoo Gem: Warning: The core module appears to be from a different revision.\n");
+				core->Log("Voodoo Gem: Warning: The core module appears to be from a different version. You may experience errors or crashes. Please upgrade all modules to the same version.\n");
 			}
 
 			HRESULT hr = cgD3D9SetDevice(device);
@@ -384,8 +384,11 @@ namespace VoodooShader
 			case PC_Float:
 				cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
 				break;
+			//case PC_Matrix:
+			//	D3DMATRIX
+			//	cgD3D9SetUniformMatrix(param->GetParameter(), param->Get())
 			case PC_Sampler:
-				cgD3D9SetTextureParameter(param->GetParameter(), (IDirect3DTexture9 *)param->GetTexture()->GetTexture());
+				cgD3D9SetTextureParameter(param->GetParameter(), param->GetTexture()->GetTexture<IDirect3DTexture9>());
 				break;
 			case PC_Unknown:
 			default:
@@ -399,7 +402,7 @@ namespace VoodooShader
 			{
 				param->Set(texture);
 
-				IDirect3DTexture9 * texObj = (IDirect3DTexture9 *)texture->GetTexture();
+				IDirect3DTexture9 * texObj = texture->GetTexture<IDirect3DTexture9>();
 				CGparameter texParam = param->GetParameter();
 				cgD3D9SetTextureParameter(texParam, texObj);
 				mCore->Log("Voodoo Gem: Bound texture %s to parameter %s.\n", texture->Name().c_str(), param->Name().c_str());
