@@ -17,7 +17,6 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 	{
 		debug = true;
 		MessageBoxA(NULL, "Debug indicator file found. The hook will load in debug mode.", "Voodoo Gem Hook", MB_ICONWARNING);
-		//CloseHandle(debugFile);
 	}
 
 	bool valueFound = false;
@@ -130,41 +129,20 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 
 	strcat_s(valuePath, MAX_PATH, "\\bin\\");
 
-	/*
-	if ( SetDllDirectory(valuePath) )
-	{
-		if ( debug )
-		{
-			DWORD written;
-			char msg[4096];
-			sprintf_s(msg, "SetDllDirectory to %s successfully.\n", valuePath);
-			WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-		}
-	} else {
-		if ( debug )
-		{
-			DWORD written;
-			char msg[4096];
-			sprintf_s(msg, "SetDllDirectory to %s failed.\n", valuePath);
-			WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-		}
-
-		CloseHandle(debugFile);
-		return NULL;
-	}
-	*/
-
 	char libraryFile[MAX_PATH];
 	strcpy_s(libraryFile, MAX_PATH, valuePath);
 
+#ifdef _DEBUG
+	strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem_d.dll");
+#else
 	if ( debug )
 	{
 		strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem_d.dll");
 	} else {
 		strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem.dll");
 	}
+#endif
 
-	//HMODULE library = LoadLibrary(libraryFile);
 	HMODULE library = LoadLibraryEx(libraryFile, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
 	if ( !library )

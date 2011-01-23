@@ -41,6 +41,8 @@ VoodooShader::TextureRef texture_ThisFrame;
 
 VoodooShader::ShaderRef testShader;
 
+VoodooShader::ParameterRef matrixView, matrixProj, matrixWorld;
+
 VOODOO_API_Gem void * __stdcall Voodoo3DCreate8(UINT version)
 {
 	// Voodoo Gem Init function

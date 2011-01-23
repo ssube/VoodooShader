@@ -193,7 +193,10 @@ namespace VoodooShader
 			  "Voodoo Core: Trying to create parameter with a duplicate name.", 
 			  this);
 		} else {
-			ParameterRef parameter(new Parameter(NULL, name, type));
+			ParameterRef parameter(new Parameter(this, name, type));
+
+			mParameters[name] = parameter;
+
 			return parameter;
 		}
 	}
@@ -262,15 +265,28 @@ namespace VoodooShader
 		Core * me = reinterpret_cast<Core*>(core);
 		if ( me )
 		{
-			me->Log("Voodoo Core: CG error: %s\n", cgGetErrorString(error));
+			const char * errorString = error ? cgGetErrorString(error) : NULL;
 
-			// Print any compiler errors or other details we can find
-			const char * listing = cgGetLastListing(context);
-			while ( listing )
+			if ( errorString )
 			{
-				me->Log("Voodoo Core: CG listing: %s\n", listing);
-				listing = cgGetLastListing(context);
-			}
+				me->Log("Voodoo Core: Cg core reported error: %s\n", errorString);
+				if ( context && error != CG_INVALID_CONTEXT_HANDLE_ERROR )
+				{
+					// Print any compiler errors or other details we can find
+					const char * listing = cgGetLastListing(context);
+					
+					// @todo This statement should loop to check all listing, but that causes an infinite loop. Check proper method.
+					while ( listing )
+					{
+						me->Log("Voodoo Core: Cg error details: %s\n", listing);
+						listing = cgGetLastListing(context);
+					}
+				} else {
+					me->Log("Voodoo Core: Invalid context for error, no further data available.\n");
+				}
+			} else {
+				me->Log("Voodoo Core: Cg core reported an unknown error (%d)\n", error);
+			}			
 		}
 	}
 }

@@ -59,7 +59,7 @@ namespace VoodooShader
 				this->mLocalTime->tm_hour,
 				this->mLocalTime->tm_min,
 				this->mLocalTime->tm_sec);
-			return stamp;
+			return String(stamp);
 		} else {
 			return "Unknown  :: ";
 		}

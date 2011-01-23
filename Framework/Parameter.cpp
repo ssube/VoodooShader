@@ -8,42 +8,33 @@
 namespace VoodooShader
 {
 	Parameter::Parameter(Core * core, String name, ParameterType type)
-		: mType(type), mParent()
+		: mType(type), mParent(NULL), mVirtual(true), mCore(core)
 	{ 
-		assert(core);
+		mParam = cgCreateParameter(core->GetCGContext(), Converter::ToCGType(type));
 
-		ParameterRef param = core->GetParameter(name, type);
-
-		if ( !param.get() )
+		switch ( this->mType )
 		{
-			mParam = cgCreateParameter(core->GetCGContext(), Converter::ToCGType(type));
-
-			switch ( this->mType )
-			{
-			case PT_Sampler1D:
-			case PT_Sampler2D:
-			case PT_Sampler3D:
-				this->mValueTexture = TextureRef();
-				break;
-			case PT_Float4:
-				this->mValueFloat[3] = 0.0f;
-			case PT_Float3:
-				this->mValueFloat[2] = 0.0f;
-			case PT_Float2:
-				this->mValueFloat[1] = 0.0f;
-			case PT_Float1:
-				this->mValueFloat[0] = 0.0f;
-				break;
-			case PT_Unknown:
-			default:
-				Throw("Invalid parameter type.", NULL);
-				break;
-			}
+		case PT_Sampler1D:
+		case PT_Sampler2D:
+		case PT_Sampler3D:
+			this->mValueTexture = TextureRef();
+			break;
+		case PT_Matrix:
+		case PT_Float4:
+		case PT_Float3:
+		case PT_Float2:
+		case PT_Float1:
+			memset(this->mValueFloat, 0, sizeof(float)*16);
+			break;
+		case PT_Unknown:
+		default:
+			Throw("Invalid parameter type.", NULL);
+			break;
 		}
 	}
 
 	Parameter::Parameter(Shader * parent, CGparameter param)
-		: mParent(parent), mParam(param)
+		: mParent(parent), mParam(param), mVirtual(false), mCore(parent->GetCore())
 	{
 		mType = Converter::ToParameterType(cgGetParameterType(param));
 
@@ -54,14 +45,12 @@ namespace VoodooShader
 		case PT_Sampler3D:
 			this->mValueTexture = TextureRef();
 			break;
+		case PT_Matrix:
 		case PT_Float4:
-			this->mValueFloat[3] = 0.0f;
 		case PT_Float3:
-			this->mValueFloat[2] = 0.0f;
 		case PT_Float2:
-			this->mValueFloat[1] = 0.0f;
 		case PT_Float1:
-			this->mValueFloat[0] = 0.0f;
+			memset(this->mValueFloat, 0, sizeof(float)*16);
 			break;
 		case PT_Unknown:
 		default:
@@ -73,7 +62,7 @@ namespace VoodooShader
 	std::string Parameter::Name()
 	{
 		std::string name;
-		if ( mParent.get() )
+		if ( mParent )
 		{
 			name += this->mParent->Name();
 		}
@@ -97,6 +86,10 @@ namespace VoodooShader
 
 	void Parameter::Attach(ParameterRef param)
 	{
+		if ( !this->mVirtual )
+		{
+			Throw("Voodoo Core: Cannot attach to a non-virtual parameter.", mCore);
+		}
 		cgConnectParameter(param->GetParameter(), this->mParam);
 	}
 
@@ -168,5 +161,45 @@ namespace VoodooShader
 		paramY = this->mValueFloat[1];
 		paramZ = this->mValueFloat[2];
 		paramW = this->mValueFloat[3];
+	}
+
+	void Parameter::ForceUpdate()
+	{
+		if ( mCore )
+		{
+			mCore->Log("Voodoo Core: Force updating parameter %s.\n", this->Name().c_str());
+		}
+
+		switch ( mType )
+		{
+		case PT_Float1:
+			cgSetParameter1fv(mParam, mValueFloat);
+			break;
+		case PT_Float2:
+			cgSetParameter2fv(mParam, mValueFloat);
+			break;
+		case PT_Float3:
+			cgSetParameter3fv(mParam, mValueFloat);
+			break;
+		case PT_Float4:
+			cgSetParameter4fv(mParam, mValueFloat);
+			break;
+		case PT_Matrix:
+			cgSetMatrixParameterfc(mParam, mValueFloat);
+			break;
+		case PT_Sampler1D:
+			if ( mCore )
+			{
+				mCore->Log("Voodoo Core: Unable to force update sampler type parameter (%s).\n", this->Name().c_str());
+			}
+			break;
+		case PT_Unknown:
+		default:
+			if ( mCore )
+			{
+				mCore->Log("Voodoo Core: Cannot force update parameter %s with unknown type.\n", this->Name().c_str());
+			}
+			break;
+		}
 	}
 }

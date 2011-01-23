@@ -76,8 +76,11 @@ namespace VoodooShader
 			return mValueFloat;
 		};
 
+		void ForceUpdate();
+
 	private:
-		ShaderRef mParent;
+		Shader * mParent;
+		Core * mCore;
 
 		bool mVirtual;
 		CGparameter mParam;
@@ -85,7 +88,12 @@ namespace VoodooShader
 
 		// Value
 		TextureRef mValueTexture;
-		float mValueFloat[4];
+
+		union
+		{
+			float mValueMatrix[4][4];
+			float mValueFloat[16];
+		};
 	};
 }
 

@@ -61,6 +61,8 @@ namespace VoodooShader
 				return CG_FLOAT3;
 			case PT_Float4:
 				return CG_FLOAT4;
+			case PT_Matrix:
+				return CG_FLOAT4x4;
 			case PT_Unknown:
 			default:
 				return CG_UNKNOWN_TYPE;
@@ -94,6 +96,8 @@ namespace VoodooShader
 				return PT_Float3;
 			case CG_FLOAT4:
 				return PT_Float4;
+			case CG_FLOAT4x4:
+				return PT_Matrix;
 			case CG_UNKNOWN_TYPE:
 			default:
 				return PT_Unknown;
@@ -113,6 +117,8 @@ namespace VoodooShader
 			case PT_Sampler2D:
 			case PT_Sampler3D:
 				return PC_Sampler;
+			case PT_Matrix:
+				return PC_Matrix;
 			case PT_Unknown:
 			default:
 				return PC_Unknown;

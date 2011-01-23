@@ -64,5 +64,7 @@ extern IDirect3DTexture9 * scratchTexture;
 extern VoodooShader::TextureRef texture_ThisFrame;
 extern IDirect3DSurface9 * surface_ThisFrame;
 
+extern VoodooShader::ParameterRef matrixView, matrixProj, matrixWorld;
+
 typedef IDirect3D8 * (__stdcall *D3DFunc8)(UINT);
 

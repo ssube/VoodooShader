@@ -119,6 +119,11 @@ namespace VoodooShader
 			memcpy(pVertices, g_Vertices, sizeof(FSVert) * 4);
 
 			FSQuadVerts->Unlock();
+
+			// Create the global matrix parameters
+			matrixView  = core->CreateParameter("matrix_view",  PT_Matrix);
+			matrixProj  = core->CreateParameter("matrix_proj",  PT_Matrix);
+			matrixWorld = core->CreateParameter("matrix_world", PT_Matrix);
 		}
 
 		Adapter::~Adapter()
@@ -261,6 +266,14 @@ namespace VoodooShader
 				return;
 			}
 
+			D3DMATRIX * matrix = (D3DMATRIX*)matrixView->GetFloat();
+			int randval = rand();
+			randval = randval % 255;
+
+			matrix->_11 = (float)randval / 255.0f;
+			matrix->_12 = 1 - ((float)randval / 255.0f);
+			matrixView->ForceUpdate();
+
 			// Get technique
 			TechniqueRef tech = shader->GetDefaultTechnique();
 
@@ -379,20 +392,35 @@ namespace VoodooShader
 
 		void Adapter::ApplyParameter(ParameterRef param)
 		{
+#ifdef _DEBUG
+			mCore->Log("Voodoo Gem: Applying parameter %s.\n", param->Name().c_str());
+#endif
+
+			HRESULT hr = S_OK;
+
 			switch ( Converter::ToParameterCategory(param->GetType()) )
 			{
 			case PC_Float:
-				cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
+				hr = cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
 				break;
-			//case PC_Matrix:
-			//	D3DMATRIX
-			//	cgD3D9SetUniformMatrix(param->GetParameter(), param->Get())
+			case PC_Matrix:
+				hr = cgD3D9SetUniformMatrix(param->GetParameter(), reinterpret_cast<D3DMATRIX*>(param->GetFloat()));
+				break;
 			case PC_Sampler:
 				cgD3D9SetTextureParameter(param->GetParameter(), param->GetTexture()->GetTexture<IDirect3DTexture9>());
 				break;
 			case PC_Unknown:
 			default:
 				this->mCore->Log("Voodoo Gem: Unable to bind parameter %s of unknown type.", param->Name().c_str());
+			}
+
+			if ( FAILED(hr) )
+			{
+				mCore->Log("Voodoo Gem: Error applying parameter %s: %s\n", param->Name().c_str(), cgD3D9TranslateHRESULT(hr));
+			} else {
+#ifdef _DEBUG
+				mCore->Log("Voodoo Gem: Applied parameter %s successfully.\n", param->Name().c_str());
+#endif
 			}
 		}
 

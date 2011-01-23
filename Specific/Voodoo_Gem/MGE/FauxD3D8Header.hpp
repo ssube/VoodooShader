@@ -19,9 +19,10 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-// This file contains a good bit of code derived or copied from the Morrowind Graphics Extender (MGE)
-// project, originally created by Timeslip and worked on by a number of individuals. All code in the 
-// MGE project is licensed under the GNU GPL, v2 or later (the same license as this project).
+// This file contains a good bit of code derived or copied from the Morrowind 
+// Graphics Extender (MGE) project, originally created by Timeslip and worked on
+// by a number of individuals. All code in the MGE project is licensed under the
+// GNU GPL, v2 or later (the same license as this project).
 
 #ifndef VOODOO_GEM_FAUXD3D8HEADER_HPP
 #define VOODOO_GEM_FAUXD3D8HEADER_HPP
@@ -73,13 +74,13 @@ typedef struct _D3DCAPS8 {
 	DWORD   AlphaCmpCaps;
 	DWORD   ShadeCaps;
 	DWORD   TextureCaps;
-	DWORD   TextureFilterCaps;          // D3DPTFILTERCAPS for IDirect3DTexture8's
-	DWORD   CubeTextureFilterCaps;      // D3DPTFILTERCAPS for IDirect3DCubeTexture8's
-	DWORD   VolumeTextureFilterCaps;    // D3DPTFILTERCAPS for IDirect3DVolumeTexture8's
-	DWORD   TextureAddressCaps;         // D3DPTADDRESSCAPS for IDirect3DTexture8's
-	DWORD   VolumeTextureAddressCaps;   // D3DPTADDRESSCAPS for IDirect3DVolumeTexture8's
+	DWORD   TextureFilterCaps;   
+	DWORD   CubeTextureFilterCaps;    
+	DWORD   VolumeTextureFilterCaps;  
+	DWORD   TextureAddressCaps;     
+	DWORD   VolumeTextureAddressCaps; 
 
-	DWORD   LineCaps;                   // D3DLINECAPS
+	DWORD   LineCaps;         
 
 	DWORD   MaxTextureWidth, MaxTextureHeight;
 	DWORD   MaxVolumeExtent;
@@ -110,16 +111,16 @@ typedef struct _D3DCAPS8 {
 
 	float   MaxPointSize;
 
-	DWORD   MaxPrimitiveCount;          // max number of primitives per DrawPrimitive call
+	DWORD   MaxPrimitiveCount;   
 	DWORD   MaxVertexIndex;
 	DWORD   MaxStreams;
-	DWORD   MaxStreamStride;            // max stride for SetStreamSource
+	DWORD   MaxStreamStride;    
 
 	DWORD   VertexShaderVersion;
-	DWORD   MaxVertexShaderConst;       // number of vertex shader constant registers
+	DWORD   MaxVertexShaderConst;  
 
 	DWORD   PixelShaderVersion;
-	float   MaxPixelShaderValue;        // max value of pixel shader arithmetic component
+	float   MaxPixelShaderValue; 
 
 } D3DCAPS8;
 
@@ -176,7 +177,7 @@ typedef struct _D3DSURFACE_DESC8
 	UINT                Height;
 } D3DSURFACE_DESC8;
 
-//DX8 interface declerations
+//DX8 interface declarations
 DECLARE_INTERFACE_(IDirect3DSurface8, IUnknown)
 {
 	/*** IUnknown methods ***/

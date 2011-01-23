@@ -938,6 +938,26 @@ public:
 		State, pMatrix, hr);
 #endif
 
+		// Update cached matrices as necessary
+		if ( SUCCEEDED(hr) )
+		{
+			D3DMATRIX * matrix = NULL;
+
+			if ( State == D3DTS_VIEW )
+			{
+				matrix = (D3DMATRIX*) matrixView->GetFloat();
+			} else if ( State == D3DTS_PROJECTION ) {
+				matrix = (D3DMATRIX*) matrixProj->GetFloat();
+			} else if ( State == D3DTS_WORLD ) {
+				matrix = (D3DMATRIX*) matrixWorld->GetFloat();
+			}
+
+			if ( matrix )
+			{
+				memcpy(matrix, pMatrix, sizeof(D3DMATRIX));
+			}
+		}
+
 		return hr;
 	}
 
@@ -971,6 +991,26 @@ public:
 		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::MultiplyTransform(%d, %d) == %d\n",
 		State, pMatrix, hr);
 #endif
+
+		if ( SUCCEEDED(hr) )
+		{
+			D3DMATRIX * matrix = NULL;
+
+			if ( State == D3DTS_VIEW )
+			{
+				matrix = (D3DMATRIX*) matrixView->GetFloat();
+			} else if ( State == D3DTS_PROJECTION ) {
+				matrix = (D3DMATRIX*) matrixProj->GetFloat();
+			} else if ( State == D3DTS_WORLD ) {
+				matrix = (D3DMATRIX*) matrixWorld->GetFloat();
+			}
+
+			if ( matrix )
+			{
+				mRealDevice->GetTransform(State, matrix);
+				//matrix = D3DXMatrixMultiply(NULL, (const D3DXMATRIX*)matrix, pMatrix);
+			}
+		}
 
 		return hr;
 	}

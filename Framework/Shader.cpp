@@ -107,7 +107,7 @@ namespace VoodooShader
 
 		// Check if it has a global link annotation
 		CGannotation globalAnnotation = cgGetNamedParameterAnnotation(
-				cgparam, "global");
+				cgparam, "parameter");
 
 		if ( cgIsAnnotation(globalAnnotation) && cgGetAnnotationType(globalAnnotation) == CG_STRING )
 		{

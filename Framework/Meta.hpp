@@ -163,6 +163,8 @@ namespace VoodooShader
 		PT_Sampler1D,		/*!< One-dimensional sampler (for a 1D texture, see @ref texturetypes "texture types" for more info) */
 		PT_Sampler2D,		/*!< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info) */
 		PT_Sampler3D,		/*!< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info) */
+		// Matrices
+		PT_Matrix,			/*!< Generic float4x4 matrix type */
 		// Max
 		PT_Count			/*!< Enumerator values count */
 	};
@@ -171,8 +173,9 @@ namespace VoodooShader
 	{
 		PC_Unknown = 0,		/*!< Unknown parameter category */
 		// Valid categories
-		PC_Float,			/*!< Float vector parameter (may have 1 to 4x4 components) */
+		PC_Float,			/*!< Float vector parameter (may have 1 to 4 components) */
 		PC_Sampler,			/*!< Sampler parameter (may sample 1D to 3D textures) */
+		PC_Matrix,			/*!< Matrix parameter, 4x4 components */
 		// Max
 		PC_Count			/*!< Enumerator values count */
 	};
