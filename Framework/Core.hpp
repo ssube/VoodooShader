@@ -222,7 +222,18 @@ namespace VoodooShader
 		 */
 		~Core();
 
+		/**
+		 * Reference to the currently bound (active) adapter.
+		 */
 		Adapter * mAdapter;
+
+		/**
+		 * Reference to the current log file. This uses Voodoo's internal
+		 * Logger class at this time, but can be changed to use any similar
+		 * class (XML logging will be made available in the near future).
+		 *
+		 * @todo Implement an XML logger.
+		 */
 		Logger * mLogger;
 
 		// Manager objects:

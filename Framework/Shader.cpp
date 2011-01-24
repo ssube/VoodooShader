@@ -46,10 +46,12 @@ namespace VoodooShader
 		{
 			ParameterMap::iterator param = mParameters.begin();
 
-			//! @todo Dirty ugly stupid hack. Fix.
-			while ( index > 0 )
+			//! @todo Hack. Fix this (get item from std::map based on position).
+			size_t pos = 0;
+			while ( pos < index )
 			{
-				++param; --index;
+				++param;
+				++pos;
 			}
 
 			return param->second;

@@ -1,4 +1,3 @@
-//#include <boost/format.hpp>
 
 #include "Logger.hpp"
 #include "Exception.hpp"
@@ -7,7 +6,7 @@ using namespace std;
 
 namespace VoodooShader
 {
-	VOODOO_API Logger::Logger(const char * filename, bool append)
+	Logger::Logger(const char * filename, bool append)
 	{
 		unsigned int flags = ios_base::out;
 		if ( append )
@@ -40,15 +39,7 @@ namespace VoodooShader
 		}
 	}
 
-	/**
-	 * Writes a timestamp to the log file, if the system time can be retrieved.
-	 * The timestamp is of the form "<code>HH:MM:SS :: </code>" and leading
-	 * zeros are retained so the length will always be 12 characters.
-	 * 
-	 * @note If the system time cannot be retrieved, an error stamp will be
-	 *		printed with an equal length.
-	 */
-	VOODOO_API String Logger::Timestamp()
+	String Logger::Timestamp()
 	{
 		time_t now = time(NULL);
 
@@ -65,13 +56,12 @@ namespace VoodooShader
 		}
 	}
 
-	VOODOO_API void Logger::SetBufferSize(unsigned int bytes)
+	void Logger::SetBufferSize(unsigned int bytes)
 	{
 		this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
 	}
 
-	/// Logs a simple timestamped string
-	VOODOO_API void Logger::Log(const char * msg, ...)
+	void Logger::Log(const char * msg, ...)
 	{
 		va_list args;
 		char buffer[4096];
@@ -84,7 +74,7 @@ namespace VoodooShader
 		this->mLogFile << this->Timestamp() << buffer;
 	}
 
-	VOODOO_API void Logger::LogList(const char * msg, va_list args)
+	void Logger::LogList(const char * msg, va_list args)
 	{
 		char buffer[4096];
 
@@ -96,19 +86,12 @@ namespace VoodooShader
 		this->mLogFile << this->Timestamp() << buffer;
 	}
 
-	/// \brief Dumps the log file to disk immediately.
-	VOODOO_API void Logger::Dump()
+	void Logger::Dump()
 	{
 		this->mLogFile.flush();
 	}
 
-	/// \brief Opens a file for logging
-	///
-	/// Closes the open logfile (if any), then opens a new file (with the given 
-	///		name).
-	///
-	/// The new file is truncated if it exists and is opened for writing.
-	VOODOO_API bool Logger::Open(const char* filename)
+	bool Logger::Open(const char* filename)
 	{
 		if ( this->mLogFile.is_open() )
 		{
@@ -126,8 +109,7 @@ namespace VoodooShader
 		}
 	}
 
-	/// \brief Closes the open logfile, if any
-	VOODOO_API void Logger::Close()
+	void Logger::Close()
 	{
 		if ( this->mLogFile.is_open() )
 		{

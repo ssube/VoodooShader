@@ -26,8 +26,8 @@
 namespace VoodooShader
 {
 	/**
-	 * Logfile management class, capable of opening, closing, writing to and 
-	 * dumping log files. Throws std::runtime_error on problems opening the log
+	 * Log management class, capable of opening, closing, writing to and 
+	 * dumping log files. Throws on problems opening the log
 	 * and has timestamp and formatting capabilities.
 	 */
 	class VOODOO_API Logger
@@ -52,6 +52,9 @@ namespace VoodooShader
 		 * Write a formatted timestamp to the log. The timestamp will have the 
 		 * form <code>HH.MM.SS :: </code>. Leading zeros are guaranteed to be
 		 * present, so the timestamp length remains constant.
+		 *
+		 * @note If the system time cannot be retrieved, an error stamp will be
+		 *		printed with an equal length.
 		 */
 		String Timestamp();
 
@@ -60,6 +63,9 @@ namespace VoodooShader
 		 *
 		 * @param msg The message string.
 		 * @param ... The parameters to insert
+		 *
+		 * @warning This function has a maximum (formatted) message length of
+		 *		4096 characters. This can be changed if it becomes an issue.
 		 */
 		void Log(const char * msg, ...);
 
@@ -71,6 +77,9 @@ namespace VoodooShader
 		 *
 		 * @param msg The message string
 		 * @param args The arguments to insert
+		 *
+		 * @warning This function has a maximum (formatted) message length of
+		 *		4096 characters. This can be changed if it becomes an issue.
 		 */
 		void LogList(const char * msg, va_list args);
 
@@ -81,8 +90,6 @@ namespace VoodooShader
 		 * @note A size of 0 will force messages to be written directly to disk.
 		 *		This may have a notable performance hit, but makes debug 
 		 *		messages more likely to survive	crashes.
-		 * @note LogFormat strings will not be be written until Format::Done() 
-		 *		is called, regardless of the buffer size.
 		 */
 		void SetBufferSize(unsigned int bytes);
 

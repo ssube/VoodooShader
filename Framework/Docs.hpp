@@ -93,6 +93,10 @@
  *	at runtime. They have some similarities to the geometry stage, but provide
  *	more control over the hardware tessellation process.
  * <p>
+ * @note Voodoo does not yet support these shader stages, mostly because I
+ *		don't have access to DX11 hardware. Geometry stages are supported, and
+ *		should work, but aren't terribly useful (older games can't use them).
+ *		The vertex and pixel stages are the most used, by far.
  *
  * @section shadersystem Shader System
  * <p>
@@ -110,7 +114,7 @@
  *	Effect parameters may only be linked to global parameters. Global parameters
  *	are created by calling Core::CreateParameter(), then any number of other
  *	parameters may be linked by calling Parameter::Attach() on the global
- *	parameter and providing the effect parameter, like so:
+ *	parameter and providing the effect parameter, like so:<br />
  *	<code>
  *	ParameterRef global = Core->CreateParameter("time", PT_Float);<br />
  *	ParameterRef effect = Shader->GetParameter("time");<br />
@@ -133,16 +137,16 @@
  *	Each shader technique and pass may have a target annotation, which gives
  *	the name of a texture. The results of the technique or pass, usually sent
  *	to the <code>lastshader</code> or <code>lastpass</code> texture, will
- *	instead go to the specified target. Targets may be specified like so:
+ *	instead go to the specified target. Targets may be specified like so:<br />
  *	<code>
  *	technique dx9_high<br />
- *		< string target=":buffer_group1"; ><br />
+ *	    < string target=":buffer_group1"; ><br />
  *	{<br />
- *		pass diffuse<br />
- *			< string target=":buffer_diffuse"; ><br />
- *		{<br />
- *			...<br />
- *		}<br />
+ *	    pass diffuse<br />
+ *	        < string target=":buffer_diffuse"; ><br />
+ *	    {<br />
+ *		    ...<br />
+ *	    }<br />
  *	}<br />
  *	</code>
  *	This allows pass and technique output to be stored and later used, by other
@@ -150,9 +154,10 @@
  * </p>
  * <p>
  *	If no target is specified in the technique or pass annotations, the shader
- *	linker uses the texture currently bound to the @ref Core "Core's" special
- *	textures. These may be set using Core::SetTexture(TextureType, TextureRef).
- *	Relinking a shader may change these targets.
+ *	linker uses the texture currently bound to the @ref VoodooShader::Core 
+ *	"Core's" special textures. These may be set using 
+ *	VoodooShader::Core::SetTexture(TextureType, TextureRef). Relinking a shader 
+ *	may change these targets.
  * </p>
  *
  * @page Textures
