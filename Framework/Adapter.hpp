@@ -70,9 +70,10 @@ namespace VoodooShader
 	{
 	public:
 		/**
-		 * Causes the Adapter to load a pass for its API. This usually involved 
-		 * the final compilation and any API-specific linking. Often, this is 
-		 * done with Cg-provided functions (in D3D9, cgD3D9LoadProgram). 
+		 * Loads a program in a manner that is compatible with the Adapter's
+		 * underlying API. For Cg-supported APIs, this uses the appropriate 
+		 * module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc).
+		 * This may involve additional compilation or linking.
 		 *
 		 * @param pass The pass to be loaded (not a shared pointer, it is 
 		 *		assumed the pass will be valid for the duration of the call).
@@ -108,6 +109,10 @@ namespace VoodooShader
 		 * @note Adapters must restore all states modified by an 
 		 *		Adapter::BindPass() call. They should cache the data, but the 
 		 *		exact implementation is left to the Adapter.
+		 *
+		 * @note If Adapter::BindPass() is called, render states are likely to
+		 *		change. These are unlikely to be reset until 
+		 *		Adapter::UnbindPass() is called.
 		 */
 		virtual void UnbindPass() = 0;
 
@@ -121,18 +126,25 @@ namespace VoodooShader
 		 *		taking the same vertexes in the same order as an OpenGL quad.
 		 * @note The quad draw operation must meet the following requirements:
 		 *		 <ol>
-		 *			<li>The depth buffer should not be written to.</li>
-		 *			<li>The quad must be drawn in front of all other geometry
-		 *				(no depth test).</li>
-		 *			<li>The quad must be drawn, it must not be culled.</li>
-		 *			<li>Alpha-blending and testing should be disabled entirely.
-		 *				</li>
-		 *			<li>Render states must be identical to their original status
-		 *				when the function returns.</li>
+		 *			<li>Depth and stencil buffers must not be written to.</li>
+		 *			<li>Alpha testing, culling, depth testing and other states 
+		 *				that could cull	portions of the quad must be disabled
+		 *				(the whole quad must be drawn).</li>
+		 *			<li>Alpha-blending should be disabled entirely at this time,
+		 *				in future versions blending may be used during some
+		 *				passes.</li>
+		 *			<li>Any render states modified must be restored to their 
+		 *				original state before the function returns.</li>
 		 *		 </ol>
 		 */
 		virtual void DrawQuad(Vertex * vertexData) = 0;
 
+		/**
+		 * Downloads a parameter's value from system RAM to VRAM, verifying that
+		 * the value on the GPU is the latest value set in the CPU memory buffer
+		 * (all parameter set commands operate on the system RAM buffer for
+		 * speed).
+		 */
 		virtual void ApplyParameter(ParameterRef param) = 0;
 
 		/**
@@ -180,7 +192,7 @@ namespace VoodooShader
 		 * Connects a texture to a sampler-type parameter. This is performed 
 		 * differently in each API, but often uses Cg-provided functions (in 
 		 * OpenGL, cgGLSetTextureParameter). The parameter and texture should 
-		 * be connected for the shader's life.
+		 * be connected for the duration of the shader's life.
 		 * 
 		 * @param param The parameter to bind to (must be a sampler type).
 		 * @param texture The texture to be bound.

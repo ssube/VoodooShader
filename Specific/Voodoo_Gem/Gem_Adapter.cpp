@@ -396,31 +396,35 @@ namespace VoodooShader
 			mCore->Log("Voodoo Gem: Applying parameter %s.\n", param->Name().c_str());
 #endif
 
-			HRESULT hr = S_OK;
+			//! @todo Find out if cgSetParameter or cgD3DSetUniform is better/faster and
+			//!		why cgD3DSetUniform returns errors on valid parameters.
 
-			switch ( Converter::ToParameterCategory(param->GetType()) )
+			switch ( param->GetType() )
 			{
-			case PC_Float:
-				hr = cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
+			case PT_Float1:
+				cgSetParameter1fv(param->GetParameter(), param->GetFloat());
 				break;
-			case PC_Matrix:
-				hr = cgD3D9SetUniformMatrix(param->GetParameter(), reinterpret_cast<D3DMATRIX*>(param->GetFloat()));
+			case PT_Float2:
+				cgSetParameter2fv(param->GetParameter(), param->GetFloat());
 				break;
-			case PC_Sampler:
+			case PT_Float3:
+				cgSetParameter3fv(param->GetParameter(), param->GetFloat());
+				break;
+			case PT_Float4:
+				cgSetParameter4fv(param->GetParameter(), param->GetFloat());
+				break;
+			case PT_Matrix:
+				cgSetMatrixParameterfc(param->GetParameter(), param->GetFloat());
+				break;
+			case PT_Sampler1D:
+			case PT_Sampler2D:
+			case PT_Sampler3D:
 				cgD3D9SetTextureParameter(param->GetParameter(), param->GetTexture()->GetTexture<IDirect3DTexture9>());
 				break;
-			case PC_Unknown:
+			case PT_Unknown:
 			default:
-				this->mCore->Log("Voodoo Gem: Unable to bind parameter %s of unknown type.", param->Name().c_str());
-			}
-
-			if ( FAILED(hr) )
-			{
-				mCore->Log("Voodoo Gem: Error applying parameter %s: %s\n", param->Name().c_str(), cgD3D9TranslateHRESULT(hr));
-			} else {
-#ifdef _DEBUG
-				mCore->Log("Voodoo Gem: Applied parameter %s successfully.\n", param->Name().c_str());
-#endif
+				this->mCore->Log("Voodoo Gem: Unable to bind parameters %s (unknown type).\n", param->Name().c_str());
+				break;
 			}
 		}
 
