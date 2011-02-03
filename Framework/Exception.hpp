@@ -40,14 +40,14 @@ namespace VoodooShader
 	public:
 		Exception(const char * message, Core * core, char * file, 
 			char * function, int line);
-		Exception(std::string message, Core * core, char * file, 
+		Exception(String message, Core * core, char * file, 
 			char * function, int line);
 
-		std::string Message();
+		String Message();
 
 	private:
 		Core * mCore;
-		std::string mMessage;
+		String mMessage;
 		char * mFile;
 		char * mFunction;
 		int mLine;

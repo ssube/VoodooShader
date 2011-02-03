@@ -10,7 +10,7 @@
 
 namespace VoodooShader
 {
-	Core * Core::Create(std::string logfile)
+	Core * Core::Create(String logfile)
 	{
 		Core * core = new Core(logfile);
 
@@ -22,7 +22,7 @@ namespace VoodooShader
 		delete core;
 	}
 
-	Core::Core(std::string logfile)
+	Core::Core(String logfile)
 		: mAdapter(NULL),
 #ifdef _DEBUG
 			mDebugMode(true)
@@ -154,7 +154,7 @@ namespace VoodooShader
 		this->mAdapter = adapter;
 	}
 
-	ShaderRef Core::CreateShader(std::string filename, const char ** args)
+	ShaderRef Core::CreateShader(String filename, const char ** args)
 	{
 		ShaderMap::iterator shader = this->mShaders.find(filename);
 
@@ -169,7 +169,7 @@ namespace VoodooShader
 		}
 	}
 
-	TextureRef Core::CreateTexture(std::string name, void * data)
+	TextureRef Core::CreateTexture(String name, void * data)
 	{
 		TextureMap::iterator textureEntry = this->mTextures.find(name);
 		if ( textureEntry != this->mTextures.end() )
@@ -184,7 +184,7 @@ namespace VoodooShader
 		}
 	}
 
-	ParameterRef Core::CreateParameter(std::string name, ParameterType type)
+	ParameterRef Core::CreateParameter(String name, ParameterType type)
 	{
 		ParameterMap::iterator paramEntry = this->mParameters.find(name);
 		if ( paramEntry != this->mParameters.end() )
@@ -201,7 +201,7 @@ namespace VoodooShader
 		}
 	}
 
-	TextureRef Core::GetTexture(std::string name)
+	TextureRef Core::GetTexture(String name)
 	{
 		TextureMap::iterator textureEntry = this->mTextures.find(name);
 		if ( textureEntry != this->mTextures.end() )
@@ -244,7 +244,7 @@ namespace VoodooShader
 		}
 	}
 
-	ParameterRef Core::GetParameter(std::string name, ParameterType type)
+	ParameterRef Core::GetParameter(String name, ParameterType type)
 	{
 		ParameterMap::iterator paramEntry = this->mParameters.find(name);
 		if ( paramEntry != this->mParameters.end() )

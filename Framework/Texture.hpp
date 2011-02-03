@@ -29,26 +29,21 @@ namespace VoodooShader
 	class VOODOO_API Texture
 	{
 	public:
-		Texture(std::string name = "", void * texture = NULL);
+		Texture(String name = "", void * texture = NULL);
 
+		//! @todo Change the Texture::GetTexture<T>() and Texture::GetTexture()
+		//!		functions to something better, I don't like how they are atm.
 		template<typename T>
 		inline T * GetTexture()
 		{
-			return reinterpret_cast<T*>(mTextureObject);
+			return reinterpret_cast<T*>(GetTexture());
 		};
 
-		inline void * GetTexture()
-		{
-			return mTextureObject;
-		};
-
-		inline std::string Name()
-		{
-			return mName;
-		};
+		void * GetTexture();
+		String Name();
 
 	private:
-		std::string mName;
+		String mName;
 		void * mTextureObject;
 	};
 }

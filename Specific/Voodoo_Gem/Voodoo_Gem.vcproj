@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Voodoo_Core_d.lib cg.lib"
+				AdditionalDependencies="Voodoo_Core_d.lib cg.lib d3d9.lib d3dx9.lib cgD3D9.lib"
 				OutputFile="$(OutDir)\$(ProjectName)_d.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)\bin&quot;"
@@ -140,7 +140,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Voodoo_Core.lib cg.lib"
+				AdditionalDependencies="Voodoo_Core.lib cg.lib d3d9.lib d3dx9.lib cgD3D9.lib"
 				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)\bin&quot;"

@@ -7,7 +7,7 @@
 
 namespace VoodooShader
 {
-	Shader::Shader(Core * parent, std::string filename, const char ** args)
+	Shader::Shader(Core * parent, String filename, const char ** args)
 		: mCore(parent), mName(filename), mDefaultTechnique()
 	{
 		assert(parent);
@@ -357,7 +357,7 @@ namespace VoodooShader
 
 	String Pass::Name()
 	{
-		std::string name = mParent->Name();
+		String name = mParent->Name();
 		name += "::";
 		name += mName;
 		return name;

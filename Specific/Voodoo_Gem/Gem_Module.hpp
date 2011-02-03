@@ -24,15 +24,15 @@
 #define VOODOO_IMPORT
 #include "VoodooFramework.hpp"
 
-//#define D3D_DEBUG_INFO
+#ifdef _DEBUG
+#	define D3D_DEBUG_INFO
+#endif
+
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <d3dx9tex.h>
-#pragma comment(lib, "D3D9.lib")
-#pragma comment(lib, "D3dx9.lib")
 
 #include "Cg/cgD3D9.h"
-#pragma comment(lib, "cgD3D9.lib")
 
 #ifndef VOODOO_IMPORT_GEM
 #	define VOODOO_API_GEM __declspec(dllexport)

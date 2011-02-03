@@ -184,7 +184,7 @@ namespace VoodooShader
 		 *		depending on how the Adapter and API implement 
 		 *		render-to-texture.
 		 */
-		virtual TextureRef CreateTexture(std::string name, size_t width, 
+		virtual TextureRef CreateTexture(String name, size_t width, 
 			size_t height, size_t depth, bool mipmaps, TextureFormat format) 
 			= 0;
 

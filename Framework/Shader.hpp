@@ -26,16 +26,13 @@
 
 namespace VoodooShader
 {
-	typedef std::map<std::string, Technique*> TechniqueMap_Ptr;
-	typedef std::vector<Pass*> PassVector_Ptr;
-
 	class VOODOO_API Shader
 	{
 	public:
-		Shader(Core * parent, std::string filename, const char ** args = NULL);
+		Shader(Core * parent, String filename, const char ** args = NULL);
 		Shader(Core * parent, CGeffect effect);
 
-		std::string Name();
+		String Name();
 
 		/**
 		 * Set a technique from this shader to be used as the default technique.
@@ -133,7 +130,7 @@ namespace VoodooShader
 		void SetupTechniques();
 
 		Core * mCore;
-		std::string mName;
+		String mName;
 		CGeffect mEffect;
 
 		TechniqueRef mDefaultTechnique;
@@ -194,7 +191,7 @@ namespace VoodooShader
 	private:
 		Core * mCore;
 		Shader * mParent;
-		std::string mName;
+		String mName;
 		PassVector mPasses;
 		CGtechnique mTechnique;
 		TextureRef mTarget;
@@ -252,7 +249,7 @@ namespace VoodooShader
 		Core * mCore;
 		Technique * mParent;
 
-		std::string mName;
+		String mName;
 		TextureRef mTarget;
 		CGpass mPass;
 
@@ -261,8 +258,8 @@ namespace VoodooShader
 		CGprogram mFragmentProgram;
 
 		//! @todo Add support for D3D11 tessellation programs
-		//CGprogram mDomainProgram;
-		//CGprogram mHullProgram;
+		CGprogram mDomainProgram;
+		CGprogram mHullProgram;
 	};
 }
 

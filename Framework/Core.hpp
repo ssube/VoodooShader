@@ -41,7 +41,7 @@ namespace VoodooShader
 	class VOODOO_API Core
 	{
 	public:
-		static Core * Create(std::string logfile = "Voodoo.log");
+		static Core * Create(String logfile = "Voodoo.log");
 		static void Destroy(Core * core);
 
 		/**
@@ -107,7 +107,7 @@ namespace VoodooShader
 		/**
 		 * Create a new shader effect from a file.            
 		 */
-		ShaderRef CreateShader(std::string filename, const char ** args);
+		ShaderRef CreateShader(String filename, const char ** args);
 
 		/**
 		 * Registers a texture with this Core. Texture will not be used by the 
@@ -124,7 +124,7 @@ namespace VoodooShader
 		 *
 		 * @warning This should be called only from Adapter::CreateTexture().
 		 */
-		TextureRef CreateTexture(std::string name, void * data);
+		TextureRef CreateTexture(String name, void * data);
 
 		/**
 		 * Retrieves a texture from the Core's texture map by name. 
@@ -135,7 +135,7 @@ namespace VoodooShader
 		 *
 		 * @note This will not create a texture, only retrieve an existing one.
 		 */
-		TextureRef GetTexture(std::string name);
+		TextureRef GetTexture(String name);
 
 		/**
 		 * Retrieves a texture from the Core's texture map by function.
@@ -179,7 +179,7 @@ namespace VoodooShader
 		 *		can then attach effect parameters and adjust only the global
 		 *		parameter (an easy way to manage system time or such things).
 		 */
-		ParameterRef CreateParameter(std::string name, ParameterType type);
+		ParameterRef CreateParameter(String name, ParameterType type);
 
 		/**
 		 * Retrieve a parameter by name.
@@ -191,7 +191,7 @@ namespace VoodooShader
 		 * @return A reference to the parameter, if one is found. A null shared
 		 *		pointer otherwise.
 		 */
-		ParameterRef GetParameter(std::string name, ParameterType type);
+		ParameterRef GetParameter(String name, ParameterType type);
 
 	//protected:
 		static void CGErrorHandler(CGcontext context, CGerror error, void * core);
@@ -213,9 +213,9 @@ namespace VoodooShader
 		*		knows of a game/app	that uses multiple D3D/OGL render contexts, 
 		*		please let me know.
 		* @note You can not call this function externally, you must call 
-		*		Core::Create(std::string) instead.
+		*		Core::Create(String) instead.
 		*/
-		Core(std::string logfile = "Voodoo.log");
+		Core(String logfile);
 
 		/**
 		 * Default destructor for Voodoo @ref Core "Cores".

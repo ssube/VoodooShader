@@ -21,7 +21,7 @@ namespace VoodooShader
 
 	Exception::Exception
 	(
-		std::string message, Core * core, char * file, char * function, int line
+		String message, Core * core, char * file, char * function, int line
 	)
 		: std::exception(message.c_str()), mMessage(message), mCore(core), 
 			mFile(file), mFunction(function), mLine(line)
@@ -33,19 +33,13 @@ namespace VoodooShader
 		}
 	}
 
-	std::string Exception::Message()
+	String Exception::Message()
 	{
-		char buffer[16];
-		_itoa_s(mLine, buffer, 16, 10);
+		char buffer[1024];
+		ZeroMemory(buffer, 1024);
 
-		std::string msg = "Voodoo Exception in ";
-		msg += mFile;
-		msg += " at ";
-		msg += mFunction;
-		msg += " (";
-		msg += buffer;
-		msg += "): ";
-		msg += mMessage;
-		return msg;
+		sprintf_s(buffer, 1023, "VoodooShader::Exception in file %s at %s (line %d): %s", mFile, mFunction, mLine, mMessage);
+
+		return String(buffer);
 	}
 }
