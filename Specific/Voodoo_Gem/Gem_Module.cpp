@@ -29,6 +29,9 @@
 VoodooShader::Core * VoodooCore = NULL;
 VoodooShader::Adapter * VoodooGem = NULL;
 
+//! @todo Shift most of these globals, except the core and adapter, into the adapter (as members).
+//!		This may work well with functions to set some of the matrices and such.
+
 D3DCAPS8 d3d8Caps;
 
 IVoodoo3D8 * VoodooObject = NULL;
@@ -43,7 +46,7 @@ VoodooShader::ShaderRef testShader;
 
 VoodooShader::ParameterRef matrixView, matrixProj, matrixWorld;
 
-VOODOO_API_Gem void * __stdcall Voodoo3DCreate8(UINT version)
+VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
 {
 	// Voodoo Gem Init function
 	VoodooCore = VoodooShader::Core::Create("Voodoo_GEM.log");

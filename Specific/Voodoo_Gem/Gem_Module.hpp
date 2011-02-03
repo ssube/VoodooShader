@@ -34,10 +34,10 @@
 #include "Cg/cgD3D9.h"
 #pragma comment(lib, "cgD3D9.lib")
 
-#ifndef VOODOO_IMPORT_Gem
-#	define VOODOO_API_Gem __declspec(dllexport)
+#ifndef VOODOO_IMPORT_GEM
+#	define VOODOO_API_GEM __declspec(dllexport)
 #else
-#	define VOODOO_API_Gem __declspec(dllimport)
+#	define VOODOO_API_GEM __declspec(dllimport)
 #endif
 
 #include "MGE/FauxD3D8Header.hpp"

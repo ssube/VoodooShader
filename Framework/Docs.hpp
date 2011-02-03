@@ -276,7 +276,7 @@
  *  license terms, the terms below apply only to the core library. 
  * </p>
  *
- * @section changes Changes
+ * @section notes Notes
  * <p>
  *  Due to the design of the Voodoo Shader Framework, some elements of the
  *	system may fall within alternate licenses or outside of the core license.
@@ -286,6 +286,7 @@
  *	Adapter.hpp file and other information required to create a 
  *  Voodoo-compatible binding will be excepted from the terms applied to the 
  *  rest of the core.
+ * </p>
  *
  * @section license License
  * <p>

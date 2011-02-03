@@ -11,8 +11,6 @@ namespace VoodooShader
 {
 	namespace Gem
 	{
-		LPDIRECT3DVERTEXBUFFER9 FSQuadVerts = NULL;
-
 		Adapter::Adapter(Core * core, IDirect3DDevice9 * device)
 			: mCore(core), mDevice(device)
 		{
@@ -34,7 +32,6 @@ namespace VoodooShader
 			} catch ( VoodooShader::Exception & exc ) {
 				core->Log("Voodoo Gem: Error setting adapter on core: %s.\n",
 					exc.Message());
-				//exit(1);
 			}
 
 			core->Log("Voodoo Gem: Assembly ID: "VOODOO_META_STRING_VERSION_FULL(GEM)"\n");
@@ -82,29 +79,28 @@ namespace VoodooShader
 			D3DVIEWPORT9 viewport;
 			device->GetViewport(&viewport);
 
-			float fx = ( (float)viewport.Width   ) + 0.5f	;/// 2;
-			float fy = ( (float)viewport.Height  ) + 0.5f	;/// 2;
+			float fx = (float)viewport.Width;
+			float fy = (float)viewport.Height;
 
-			mCore->Log("Voodoo Gem: Prepping for %f by %f target.\n",
-				fx, fy);
+			mCore->Log("Voodoo Gem: Prepping for %f by %f target.\n", fx, fy);
 
-			hr = this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
-				D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
+			hr = this->mDevice->CreateVertexBuffer(4 * sizeof(StandardQuadVert), 0, D3DFVF_CUSTOMVERTEX,
+				D3DPOOL_DEFAULT, &mQuadVerts, NULL);
 
-			FSQuadVerts->AddRef();
+			mQuadVerts->AddRef();
 
 			if ( FAILED(hr) )
 			{
 				mCore->Log("Voodoo Gem: Failed to create vertex buffer.\n");
 			}
 
-			FSVert g_Vertices[4];
-			memset(g_Vertices, 0, sizeof(FSVert) * 4);
+			StandardQuadVert g_Vertices[4];
+			memset(g_Vertices, 0, sizeof(StandardQuadVert) * 4);
 
-			g_Vertices[0].x = -0.5f; g_Vertices[0].y = -0.5f; g_Vertices[0].z = 0.5f;
-			g_Vertices[1].x =    fx; g_Vertices[1].y = -0.5f; g_Vertices[1].z = 0.5f;
-			g_Vertices[2].x = -0.5f; g_Vertices[2].y =    fy; g_Vertices[2].z = 0.5f;
-			g_Vertices[3].x =    fx; g_Vertices[3].y =    fy; g_Vertices[3].z = 0.5f;
+			g_Vertices[0].x = -0.5f;		g_Vertices[0].y = -0.5f;		g_Vertices[0].z = 1.0f;
+			g_Vertices[1].x = fx + 0.5f;	g_Vertices[1].y = -0.5f;		g_Vertices[1].z = 1.0f;
+			g_Vertices[2].x = -0.5f;		g_Vertices[2].y = fy + 0.5f;	g_Vertices[2].z = 1.0f;
+			g_Vertices[3].x = fx + 0.5f;	g_Vertices[3].y = fy + 0.5f;	g_Vertices[3].z = 1.0f;
 
 			g_Vertices[0].rhw = g_Vertices[1].rhw = g_Vertices[2].rhw = g_Vertices[3].rhw = 1.0f;
 
@@ -114,11 +110,11 @@ namespace VoodooShader
 			g_Vertices[3].tu = 1.0f; g_Vertices[3].tv = 1.0f;
 
 			void * pVertices;
-			FSQuadVerts->Lock(0, sizeof(FSVert) * 4, &pVertices, 0);
+			mQuadVerts->Lock(0, sizeof(StandardQuadVert) * 4, &pVertices, 0);
 
-			memcpy(pVertices, g_Vertices, sizeof(FSVert) * 4);
+			memcpy(pVertices, g_Vertices, sizeof(StandardQuadVert) * 4);
 
-			FSQuadVerts->Unlock();
+			mQuadVerts->Unlock();
 
 			// Create the global matrix parameters
 			matrixView  = core->CreateParameter("matrix_view",  PT_Matrix);
@@ -141,7 +137,7 @@ namespace VoodooShader
 
 			cgD3D9UnloadAllPrograms();
 
-			FSQuadVerts->Release();
+			mQuadVerts->Release();
 
 			mDevice->Release();
 
@@ -353,7 +349,7 @@ namespace VoodooShader
 			this->mDevice->GetRenderState(D3DRS_ALPHABLENDENABLE, &aEnabled);
 			this->mDevice->GetRenderState(D3DRS_CULLMODE, &cullMode);
 
-			this->mDevice->SetStreamSource(0, FSQuadVerts, 0, sizeof(FSVert));
+			this->mDevice->SetStreamSource(0, mQuadVerts, 0, sizeof(StandardQuadVert));
 			this->mDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
 			this->mDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
 			this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
@@ -374,7 +370,7 @@ namespace VoodooShader
 				HRESULT hr = this->mDevice->BeginScene();
 				if ( SUCCEEDED(hr) )
 				{
-					hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
+					hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(StandardQuadVert));
 					if ( !SUCCEEDED(hr) )
 					{
 						this->mCore->Log("Voodoo Gem: Error drawing user quad.");
@@ -451,8 +447,7 @@ namespace VoodooShader
 			IDirect3DTexture9 * tex = NULL;
 			D3DFORMAT fmt = Gem_Converter::ToD3DFormat(format);
 
-			HRESULT hr = mDevice->CreateTexture(width, height, depth, 
-				D3DUSAGE_RENDERTARGET, fmt, D3DPOOL_DEFAULT, &tex, NULL);
+			HRESULT hr = mDevice->CreateTexture(width, height, depth, D3DUSAGE_RENDERTARGET, fmt, D3DPOOL_DEFAULT, &tex, NULL);
 			if ( SUCCEEDED(hr) )
 			{
 				TextureRef texRef = mCore->CreateTexture(name, reinterpret_cast<void*>(tex));

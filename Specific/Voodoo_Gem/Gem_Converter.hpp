@@ -8,7 +8,7 @@ namespace VoodooShader
 {
 	namespace Gem
 	{
-		class VOODOO_API_Gem Gem_Converter
+		class VOODOO_API_GEM Gem_Converter
 		{
 		public:
 			static inline D3DFORMAT ToD3DFormat(TextureFormat tf)

@@ -7,17 +7,15 @@ namespace VoodooShader
 {
 	namespace Gem
 	{
-		struct FSVert
+#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_TEX1)
+
+		struct StandardQuadVert
 		{
 			FLOAT x, y, z, rhw;
 			FLOAT tu, tv;
 		};
 
-#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_TEX1)
-
-		extern LPDIRECT3DVERTEXBUFFER9 FSQuadVerts;
-
-		class VOODOO_API_Gem Adapter
+		class VOODOO_API_GEM Adapter
 			: VoodooShader::Adapter
 		{
 
@@ -49,6 +47,8 @@ namespace VoodooShader
 			CGprogram mBoundFP;
 
 			IDirect3DSurface9 * mRenderTarget;
+			
+			LPDIRECT3DVERTEXBUFFER9 mQuadVerts;
 		};
 	};
 }
