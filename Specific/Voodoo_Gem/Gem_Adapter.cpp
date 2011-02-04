@@ -144,6 +144,13 @@ namespace VoodooShader
 			mCore->SetAdapter(NULL);
 		}
 
+		Version Adapter::GetVersion()
+		{
+			Version version = { VOODOO_META_VERSION_CHAIN(GEM) };
+
+			return version;
+		}
+
 		bool Adapter::LoadPass(Pass * pass)
 		{
 			assert(pass);

@@ -61,7 +61,7 @@ namespace VoodooShader
 	 * a given graphics program. 
 	 *
 	 * This class should be implemented for a specific graphics application; 
-	 * some generic adapters* are provided, but in most cases 
+	 * some generic adapters are provided, but in most cases 
 	 * application-specific behavior will make these only partially helpful. 
 	 * This class does include a generic error-handler function, which adapters 
 	 * may choose not to override if they do not need specific error-handling.
@@ -69,6 +69,14 @@ namespace VoodooShader
 	class VOODOO_API Adapter
 	{
 	public:
+		/**
+		 * Retrieves the adapter module version. This can be used to verify
+		 * support between modules or versions, or from plugins.
+		 *
+		 * @return The adapter version.
+		 */
+		virtual Version GetVersion() = 0;
+
 		/**
 		 * Loads a program in a manner that is compatible with the Adapter's
 		 * underlying API. For Cg-supported APIs, this uses the appropriate 

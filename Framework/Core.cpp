@@ -249,7 +249,7 @@ namespace VoodooShader
 		ParameterMap::iterator paramEntry = this->mParameters.find(name);
 		if ( paramEntry != this->mParameters.end() )
 		{
-			if ( type == PT_Unknown || paramEntry->second->GetType() == type )
+			if ( paramEntry->second->GetType() == type )
 			{
 				return paramEntry->second;
 			} else {
