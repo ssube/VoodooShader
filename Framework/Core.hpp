@@ -243,13 +243,16 @@ namespace VoodooShader
 		// Cg objects:
 		CGcontext mCGContext;
 
+		// Content caches:
 		ShaderMap mShaders;
 		TextureMap mTextures;
 		ParameterMap mParameters;
 
+		// Special textures
 		TextureRef mLastPass;
 		TextureRef mLastShader;
 
+		// Internal flags
 		bool mDebugMode;
 	};
 }

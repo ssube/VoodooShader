@@ -1,6 +1,7 @@
 
 #include "DX89_Adapter.hpp"
 #include "DX89_Converter.hpp"
+#include "DX89_Version.hpp"
 
 namespace VoodooShader
 {
@@ -100,6 +101,13 @@ namespace VoodooShader
 			memcpy(pVertices, g_Vertices, sizeof(FSVert) * 4);
 
 			FSQuadVerts->Unlock();
+		}
+
+		Version Adapter::GetVersion()
+		{
+			Version version = { VOODOO_META_VERSION_CHAIN(DX89) };
+
+			return version;
 		}
 
 		bool Adapter::LoadPass(Pass * pass)

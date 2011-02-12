@@ -30,21 +30,24 @@ VoodooShader::Core * VoodooCore = NULL;
 VoodooShader::Adapter * VoodooGem = NULL;
 
 //! @todo Shift most of these globals, except the core and adapter, into the adapter (as members).
-//!		This may work well with functions to set some of the matrices and such.
+//!		This may work well with functions to set some of the matrices and such. Shifting them
+//!		properly is a right pain and will take some rethinking of parts of the system.
 
 D3DCAPS8 d3d8Caps;
 
 IVoodoo3D8 * VoodooObject = NULL;
 IVoodoo3DDevice8 * VoodooDevice = NULL;
 
-IDirect3DSurface9 * backbufferSurf = NULL;
+TexturePair gBackbuffer;
+TexturePair gScratch;
+TexturePair gThisFrame;
+std::map<VoodooShader::String, TexturePair> gTextures;
 
-IDirect3DSurface9 * surface_ThisFrame;
-VoodooShader::TextureRef texture_ThisFrame;
+VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;
+
+D3DPRESENT_PARAMETERS gParams;
 
 VoodooShader::ShaderRef testShader;
-
-VoodooShader::ParameterRef matrixView, matrixProj, matrixWorld;
 
 VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
 {

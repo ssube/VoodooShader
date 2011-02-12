@@ -48,7 +48,8 @@
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="1"
+				PrecompiledHeaderThrough="Includes.hpp"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
@@ -127,7 +128,8 @@
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;FRAMEWORK_EXPORTS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="1"
+				PrecompiledHeaderThrough="Includes.hpp"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
@@ -218,6 +220,10 @@
 			</File>
 			<File
 				RelativePath=".\FullscreenManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Includes_PCH.cpp"
 				>
 			</File>
 			<File

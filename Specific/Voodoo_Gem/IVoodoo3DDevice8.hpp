@@ -45,6 +45,8 @@ class IVoodoo3DDevice8
 	*/
 	IDirect3DDevice9 * mRealDevice;
 
+	D3DPRESENT_PARAMETERS mParams;
+
 	IDirect3D9 * mRealObject;
 
 	std::set<DWORD> mVertexShaders;
@@ -59,13 +61,19 @@ public:
 	/**
 	* The default, public constructor for IVoodoo3D objects.            
 	*/
-	IVoodoo3DDevice8(IDirect3DDevice9 * realDevice)
-		: mRealDevice(realDevice)
+	IVoodoo3DDevice8(IDirect3DDevice9 * realDevice, D3DPRESENT_PARAMETERS pp)
+		: mRealDevice(realDevice), mParams(pp)
 	{
 #ifdef _DEBUG
 		VoodooCore->Log("Voodoo Gem: IVoodoo3DDevice8::IVoodoo3DDevice8(%d) == %d\n",
 			realDevice, this);
 #endif
+	}
+
+	// IVoodoo3DDevice8 methods
+	STDMETHOD_(D3DPRESENT_PARAMETERS, GetPresentParams)()
+	{
+		return mParams;
 	}
 
 	// IUnknown methods
@@ -286,7 +294,6 @@ public:
 		IDirect3DSurface8 * pCursorBitmap
 	)
 	{
-		//! @todo Will need tweaked when a IVoodoo3DSurface is implemented
 		IVoodoo3DSurface8 * rCursor = (IVoodoo3DSurface8*)pCursorBitmap;
 
 		HRESULT hr = mRealDevice->SetCursorProperties(XHotSpot, YHotSpot, rCursor->RealSurface());
@@ -376,7 +383,7 @@ public:
 		CONST RGNDATA * pDirtyRegion
 	)
 	{
-		HRESULT shr = mRealDevice->StretchRect(backbufferSurf, NULL, surface_ThisFrame, NULL, D3DTEXF_NONE);
+		HRESULT shr = mRealDevice->StretchRect(gBackbuffer.RawSurface, NULL, gThisFrame.RawSurface, NULL, D3DTEXF_NONE);
 
 		if ( FAILED(shr) )
 		{
@@ -945,11 +952,11 @@ public:
 
 			if ( State == D3DTS_VIEW )
 			{
-				matrix = (D3DMATRIX*) matrixView->GetFloat();
+				matrix = (D3DMATRIX*) gMatrixView->GetFloat();
 			} else if ( State == D3DTS_PROJECTION ) {
-				matrix = (D3DMATRIX*) matrixProj->GetFloat();
+				matrix = (D3DMATRIX*) gMatrixProj->GetFloat();
 			} else if ( State == D3DTS_WORLD ) {
-				matrix = (D3DMATRIX*) matrixWorld->GetFloat();
+				matrix = (D3DMATRIX*) gMatrixWorld->GetFloat();
 			}
 
 			if ( matrix )
@@ -998,11 +1005,11 @@ public:
 
 			if ( State == D3DTS_VIEW )
 			{
-				matrix = (D3DMATRIX*) matrixView->GetFloat();
+				matrix = (D3DMATRIX*) gMatrixView->GetFloat();
 			} else if ( State == D3DTS_PROJECTION ) {
-				matrix = (D3DMATRIX*) matrixProj->GetFloat();
+				matrix = (D3DMATRIX*) gMatrixProj->GetFloat();
 			} else if ( State == D3DTS_WORLD ) {
-				matrix = (D3DMATRIX*) matrixWorld->GetFloat();
+				matrix = (D3DMATRIX*) gMatrixWorld->GetFloat();
 			}
 
 			if ( matrix )

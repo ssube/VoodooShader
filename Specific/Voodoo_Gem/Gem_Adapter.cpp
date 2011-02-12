@@ -4,14 +4,11 @@
 
 #include "Gem_Version.hpp"
 
-IDirect3DSurface9 * scratchSurface = NULL;
-IDirect3DTexture9 * scratchTexture = NULL;
-
 namespace VoodooShader
 {
 	namespace Gem
 	{
-		Adapter::Adapter(Core * core, IDirect3DDevice9 * device)
+		Adapter::Adapter(Core * core, LPDIRECT3DDEVICE9 device)
 			: mCore(core), mDevice(device)
 		{
 			assert(device);
@@ -76,11 +73,8 @@ namespace VoodooShader
 				cgGetProfileString(bestVert), cgGetProfileString(bestFrag));
 
 			// Get params
-			D3DVIEWPORT9 viewport;
-			device->GetViewport(&viewport);
-
-			float fx = (float)viewport.Width;
-			float fy = (float)viewport.Height;
+			float fx = (float)gParams.BackBufferWidth;
+			float fy = (float)gParams.BackBufferHeight;
 
 			mCore->Log("Voodoo Gem: Prepping for %f by %f target.\n", fx, fy);
 
@@ -116,10 +110,60 @@ namespace VoodooShader
 
 			mQuadVerts->Unlock();
 
+			// Cache various data bits
+			HRESULT hrt = mDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &(gBackbuffer.RawSurface));
+
+			if ( SUCCEEDED(hrt) )
+			{
+				VoodooCore->Log("Voodoo Gem: Cached backbuffer surface.\n");
+			} else {
+				VoodooCore->Log("Voodoo Gem: Failed to retrieve backbuffer surface.\n");
+			}
+
+			gThisFrame.Texture = this->CreateTexture(":thisframe", 
+				gParams.BackBufferWidth, gParams.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
+
+			if ( gThisFrame.Texture.get() )
+			{
+				gThisFrame.RawTexture = gThisFrame.Texture->GetTexture<IDirect3DTexture9>();
+				hrt = gThisFrame.RawTexture->GetSurfaceLevel(0, &(gThisFrame.RawSurface));
+				if ( SUCCEEDED(hrt) )
+				{
+					VoodooCore->Log("Voodoo Gem: Cached :thisframe surface.\n");
+				} else {
+					VoodooCore->Log("Voodoo Gem: Failed to :thisframe scratch surface.\n");
+				}
+			}
+
+			gScratch.Texture = this->CreateTexture(":scratch", 
+				gParams.BackBufferWidth, gParams.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
+
+			if ( gScratch.Texture.get() )
+			{
+				gScratch.RawTexture = gScratch.Texture->GetTexture<IDirect3DTexture9>();
+				hrt = gScratch.RawTexture->GetSurfaceLevel(0, &(gThisFrame.RawSurface));
+				if ( SUCCEEDED(hrt) )
+				{
+					VoodooCore->Log("Voodoo Gem: Cached :scratch surface.\n");
+				} else {
+					VoodooCore->Log("Voodoo Gem: Failed to cache :scratch surface.\n");
+				}
+			} else {
+				VoodooCore->Log("Voodoo Gem: Failed to create :scratch texture.\n");
+			}
+
 			// Create the global matrix parameters
-			matrixView  = core->CreateParameter("matrix_view",  PT_Matrix);
-			matrixProj  = core->CreateParameter("matrix_proj",  PT_Matrix);
-			matrixWorld = core->CreateParameter("matrix_world", PT_Matrix);
+			gMatrixView  = VoodooCore->CreateParameter("matrix_view",  PT_Matrix);
+			gMatrixProj  = VoodooCore->CreateParameter("matrix_proj",  PT_Matrix);
+			gMatrixWorld = VoodooCore->CreateParameter("matrix_world", PT_Matrix);
+
+			try
+			{
+				testShader = VoodooCore->CreateShader("test.cgfx", NULL);
+				testShader->Link();
+			} catch ( VoodooShader::Exception & exc ) {
+				VoodooCore->Log("Voodoo Gem: Error loading shader.\n");
+			}
 		}
 
 		Adapter::~Adapter()
@@ -262,20 +306,12 @@ namespace VoodooShader
 				return;
 			}
 			
-			hr = mDevice->SetRenderTarget(0, scratchSurface);
+			hr = mDevice->SetRenderTarget(0, gScratch.RawSurface);
 			if ( FAILED(hr) )
 			{
 				mCore->Log("Voodoo Gem: Failed to bind render target for shader %s.\n", shader->Name().c_str());
 				return;
 			}
-
-			D3DMATRIX * matrix = (D3DMATRIX*)matrixView->GetFloat();
-			int randval = rand();
-			randval = randval % 255;
-
-			matrix->_11 = (float)randval / 255.0f;
-			matrix->_12 = 1 - ((float)randval / 255.0f);
-			matrixView->ForceUpdate();
 
 			// Get technique
 			TechniqueRef tech = shader->GetDefaultTechnique();
@@ -312,7 +348,7 @@ namespace VoodooShader
 				} 
 				*/
 				
-				hr = mDevice->StretchRect(scratchSurface, NULL, backbufferSurf, NULL, D3DTEXF_NONE);
+				hr = mDevice->StretchRect(gScratch.RawSurface, NULL, gBackbuffer.RawSurface, NULL, D3DTEXF_NONE);
 
 				if ( FAILED(hr) )
 				{
@@ -448,7 +484,7 @@ namespace VoodooShader
 			}
 		}
 
-		TextureRef Adapter::CreateTexture(std::string name, size_t width, size_t height, size_t depth, 
+		TextureRef Adapter::CreateTexture(String name, size_t width, size_t height, size_t depth, 
 			bool mipmaps, TextureFormat format)
 		{
 			IDirect3DTexture9 * tex = NULL;

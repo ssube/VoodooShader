@@ -1,6 +1,7 @@
 
 #include "DX9_Module.hpp"
 #include "DX9_Converter.hpp"
+#include "DX9_Version.hpp"
 
 #include "IVoodoo3D9.hpp"
 #include "IVoodoo3DDevice9.hpp"
@@ -113,6 +114,13 @@ namespace VoodooShader
 			memcpy(pVertices, g_Vertices, sizeof(FSVert) * 4);
 
 			FSQuadVerts->Unlock();
+		}
+
+		Version Adapter::GetVersion()
+		{
+			Version version = { VOODOO_META_VERSION_CHAIN(DX9) };
+
+			return version;
 		}
 
 		bool Adapter::LoadPass(Pass * pass)

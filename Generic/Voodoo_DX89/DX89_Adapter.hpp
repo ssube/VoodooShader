@@ -24,6 +24,8 @@ namespace VoodooShader
 		public:
 			Adapter(Core * core, IDirect3DDevice9 * device);
 
+			Version GetVersion();
+
 			bool LoadPass(Pass * pass);
 			void BindPass(PassRef shader);
 			void UnbindPass();

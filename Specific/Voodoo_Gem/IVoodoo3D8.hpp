@@ -242,60 +242,13 @@ public:
 			return hr;
 		} else {
 			// Succeeded, create a fake device and go from there
-			IVoodoo3DDevice8 * mFakeDevice = new IVoodoo3DDevice8(mRealDevice);
+			IVoodoo3DDevice8 * mFakeDevice = new IVoodoo3DDevice8(mRealDevice, mpPresentationParameters);
 			VoodooDevice = mFakeDevice;
+			gParams = mpPresentationParameters;
 
 			VoodooGem = (VoodooShader::Adapter*)new VoodooShader::Gem::Adapter(VoodooCore, mRealDevice);
 
 			(*ppReturnedDeviceInterface) = (IDirect3DDevice8*)mFakeDevice;
-
-			HRESULT hrt = mRealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &backbufferSurf);
-
-			if ( SUCCEEDED(hrt) )
-			{
-				VoodooCore->Log("Voodoo Gem: Cached backbuffer surface.\n");
-			} else {
-				VoodooCore->Log("Voodoo Gem: Failed to retrieve backbuffer surface.\n");
-			}
-
-			texture_ThisFrame = VoodooGem->CreateTexture(":thisframe", 
-				pPresentationParameters->BackBufferWidth, pPresentationParameters->BackBufferHeight, 1,
-				true, VoodooShader::TF_RGB8);
-			if ( texture_ThisFrame.get() )
-			{
-				IDirect3DTexture9 * texture = texture_ThisFrame->GetTexture<IDirect3DTexture9>();
-				hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
-				if ( SUCCEEDED(hrt) )
-				{
-					VoodooCore->Log("Voodoo Gem: Cached :thisframe surface.\n");
-				} else {
-					VoodooCore->Log("Voodoo Gem: Failed to :thisframe scratch surface.\n");
-				}
-			}
-
-			hrt = mRealDevice->CreateTexture(pPresentationParameters->BackBufferWidth,
-				pPresentationParameters->BackBufferHeight, 0, D3DUSAGE_RENDERTARGET, D3DFMT_X8R8G8B8,
-				D3DPOOL_DEFAULT, &scratchTexture, NULL);
-			if ( SUCCEEDED(hrt) )
-			{
-				hrt = scratchTexture->GetSurfaceLevel(0, &scratchSurface);
-				if ( SUCCEEDED(hrt) )
-				{
-					VoodooCore->Log("Voodoo Gem: Cached scratch surface.\n");
-				} else {
-					VoodooCore->Log("Voodoo Gem: Failed to cache scratch surface.\n");
-				}
-			} else {
-				VoodooCore->Log("Voodoo Gem: Failed to create scratch texture.\n");
-			}
-
-			try
-			{
-				testShader = VoodooCore->CreateShader("test.cgfx", NULL);
-				testShader->Link();
-			} catch ( VoodooShader::Exception & exc ) {
-				VoodooCore->Log("Voodoo Gem: Error loading shader.\n");
-			}
 
 			return hr;
 		}

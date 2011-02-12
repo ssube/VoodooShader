@@ -1,7 +1,4 @@
-// Framework.cpp : Defines the exported functions for the DLL application.
-//
-// 
-
+#include "Includes.hpp"
 #include "FullscreenManager.hpp"
 #include "Adapter.hpp"
 #include "Exception.hpp"

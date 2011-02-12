@@ -19,6 +19,10 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
+#ifndef VOODOO_GEM_MODULE_HPP
+#define VOODOO_GEM_MODULE_HPP
+
+
 #include <set>
 
 #define VOODOO_IMPORT
@@ -46,6 +50,18 @@ class IVoodoo3D8;
 class IVoodoo3DDevice8;
 class IVoodoo3DSurface8;
 
+/**
+* Storage struct to hold associated Voodoo @ref Texture "Textures" and 
+* API texture objects. The RawTexture and RawSurface fields can hold an
+* OpenGL FBO and texture or DirectX texture and surface.
+*/
+struct TexturePair
+{
+	VoodooShader::TextureRef Texture;
+	LPDIRECT3DTEXTURE9 RawTexture;
+	LPDIRECT3DSURFACE9 RawSurface;
+};
+
 extern D3DCAPS8 d3d8Caps;
 
 extern VoodooShader::Core * VoodooCore;
@@ -56,15 +72,15 @@ extern IVoodoo3DDevice8 * VoodooDevice;
 
 extern VoodooShader::ShaderRef testShader;
 
-extern IDirect3DSurface9 * backbufferSurf;
+extern TexturePair gBackbuffer;
+extern TexturePair gScratch;
+extern TexturePair gThisFrame;
+extern std::map<VoodooShader::String, TexturePair> gTextures;
 
-extern IDirect3DSurface9 * scratchSurface;
-extern IDirect3DTexture9 * scratchTexture;
+extern VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;
 
-extern VoodooShader::TextureRef texture_ThisFrame;
-extern IDirect3DSurface9 * surface_ThisFrame;
-
-extern VoodooShader::ParameterRef matrixView, matrixProj, matrixWorld;
+extern D3DPRESENT_PARAMETERS gParams;
 
 typedef IDirect3D8 * (__stdcall *D3DFunc8)(UINT);
 
+#endif // VOODOO_GEM_MODULE_HPP

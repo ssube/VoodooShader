@@ -22,6 +22,8 @@
 #ifndef VOODOO_REFERENCE_HPP
 #define VOODOO_REFERENCE_HPP
 
+#include "Includes.hpp"
+
 namespace VoodooShader
 {
 	/**

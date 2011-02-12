@@ -1,3 +1,4 @@
+#include "Includes.hpp"
 #include "MaterialManager.hpp"
 #include "Adapter.hpp"
 #include "Core.hpp"

@@ -1,4 +1,5 @@
 
+#include "Includes.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
 #include "FullscreenManager.hpp"
@@ -249,7 +250,7 @@ namespace VoodooShader
 		ParameterMap::iterator paramEntry = this->mParameters.find(name);
 		if ( paramEntry != this->mParameters.end() )
 		{
-			if ( paramEntry->second->GetType() == type )
+			if ( type == PT_Unknown || paramEntry->second->GetType() == type )
 			{
 				return paramEntry->second;
 			} else {
@@ -275,7 +276,6 @@ namespace VoodooShader
 					// Print any compiler errors or other details we can find
 					const char * listing = cgGetLastListing(context);
 					
-					// @todo This statement should loop to check all listing, but that causes an infinite loop. Check proper method.
 					while ( listing )
 					{
 						me->Log("Voodoo Core: Cg error details: %s\n", listing);

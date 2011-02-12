@@ -2,6 +2,7 @@
 #define VOODOO_GEM_ADAPTER_HPP
 
 #include "Gem_Module.hpp"
+#include "IVoodoo3DDevice8.hpp"
 
 namespace VoodooShader
 {
@@ -20,7 +21,7 @@ namespace VoodooShader
 		{
 
 		public:
-			Adapter(Core * core, IDirect3DDevice9 * device);
+			Adapter(Core * core, LPDIRECT3DDEVICE9 device);
 			~Adapter();
 
 			Version GetVersion();
@@ -36,14 +37,14 @@ namespace VoodooShader
 			void ApplyParameter(ParameterRef param);
 
 			bool ConnectTexture(ParameterRef param, TextureRef texture);
-			TextureRef CreateTexture(std::string name, size_t width, size_t height, size_t depth, 
+			TextureRef CreateTexture(String name, size_t width, size_t height, size_t depth, 
 				bool mipmaps, TextureFormat format);
 
 			void HandleError(CGcontext context, CGerror error, void * core);
 
 		private:
 			Core * mCore;
-			IDirect3DDevice9 * mDevice;
+			LPDIRECT3DDEVICE9 mDevice;
 
 			CGprogram mBoundVP;
 			CGprogram mBoundFP;
