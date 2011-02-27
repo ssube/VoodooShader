@@ -120,34 +120,44 @@ namespace VoodooShader
 				VoodooCore->Log("Voodoo Gem: Failed to retrieve backbuffer surface.\n");
 			}
 
-			gThisFrame.Texture = this->CreateTexture(":thisframe", 
+			TextureRef thisframeTex = this->CreateTexture(":thisframe", 
 				gParams.BackBufferWidth, gParams.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
 
-			if ( gThisFrame.Texture.get() )
+			if ( thisframeTex.get() )
 			{
-				gThisFrame.RawTexture = gThisFrame.Texture->GetTexture<IDirect3DTexture9>();
-				hrt = gThisFrame.RawTexture->GetSurfaceLevel(0, &(gThisFrame.RawSurface));
+				LPDIRECT3DTEXTURE9 texture = thisframeTex->GetTexture<IDirect3DTexture9>();
+				LPDIRECT3DSURFACE9 surface;
+				hrt = texture->GetSurfaceLevel(0, &surface);
 				if ( SUCCEEDED(hrt) )
 				{
 					VoodooCore->Log("Voodoo Gem: Cached :thisframe surface.\n");
 				} else {
 					VoodooCore->Log("Voodoo Gem: Failed to :thisframe scratch surface.\n");
 				}
+
+				gThisFrame.Texture = thisframeTex;
+				gThisFrame.RawTexture = texture;
+				gThisFrame.RawSurface = surface;
 			}
 
-			gScratch.Texture = this->CreateTexture(":scratch", 
+			TextureRef scratchTex = this->CreateTexture(":scratch", 
 				gParams.BackBufferWidth, gParams.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
 
-			if ( gScratch.Texture.get() )
+			if ( scratchTex.get() )
 			{
-				gScratch.RawTexture = gScratch.Texture->GetTexture<IDirect3DTexture9>();
-				hrt = gScratch.RawTexture->GetSurfaceLevel(0, &(gThisFrame.RawSurface));
+				LPDIRECT3DTEXTURE9 texture = scratchTex->GetTexture<IDirect3DTexture9>();
+				LPDIRECT3DSURFACE9 surface;
+				hrt = texture->GetSurfaceLevel(0, &surface);
 				if ( SUCCEEDED(hrt) )
 				{
 					VoodooCore->Log("Voodoo Gem: Cached :scratch surface.\n");
 				} else {
 					VoodooCore->Log("Voodoo Gem: Failed to cache :scratch surface.\n");
 				}
+
+				gScratch.Texture = scratchTex;
+				gScratch.RawTexture = texture;
+				gScratch.RawSurface = surface;
 			} else {
 				VoodooCore->Log("Voodoo Gem: Failed to create :scratch texture.\n");
 			}

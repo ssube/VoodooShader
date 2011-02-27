@@ -17,6 +17,8 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 	{
 		debug = true;
 		MessageBoxA(NULL, "Debug indicator file found. The hook will load in debug mode.", "Voodoo Gem Hook", MB_ICONWARNING);
+	} else if ( debug ) {
+		MessageBoxA(NULL, "Debug build running. The hook will load in debug mode.", "Voodoo Gem Hook", MB_ICONWARNING);
 	}
 
 	bool valueFound = false;
