@@ -29,8 +29,18 @@ namespace VoodooShader
 	class VOODOO_API Shader
 	{
 	public:
-		Shader(Core * parent, String filename, const char ** args = NULL);
-		Shader(Core * parent, CGeffect effect);
+		Shader
+        (
+            __in __notnull __readonly Core * parent, 
+            __in String filename, 
+            __in_opt __readonly const char ** args = NULL
+        );
+
+		Shader
+        (
+            __in __notnull __readonly Core * parent, 
+            __in CGeffect effect
+        );
 
 		String Name();
 
@@ -46,7 +56,10 @@ namespace VoodooShader
 		 * 
 		 * @throws Exception if the name is not a valid technique.
 		 */
-		void SetDefaultTechnique(String name);
+		void SetDefaultTechnique
+        (
+            __in String name
+        );
 
 		/**
 		 * Retrieves the default technique from this shader. All drawing should
@@ -80,7 +93,10 @@ namespace VoodooShader
 		 * @return A shared reference to the parameter, or to NULL if it is not
 		 *		found (the index is invalid).
 		 */
-		ParameterRef GetParameter(size_t index);
+		ParameterRef GetParameter
+        (
+            __in size_t index
+        );
 
 		/**
 		 * Retrieve a specific parameter from the shader. These may be modified
@@ -91,7 +107,10 @@ namespace VoodooShader
 		 * @return A shared reference to the parameter, or to NULL if it is not
 		 *		found.
 		 */
-		ParameterRef GetParameter(String name);
+		ParameterRef GetParameter
+        (
+            __in String name
+        );
 
 		/**
 		 * Retrieve a technique from the shader by name. Most cases should use
@@ -102,7 +121,10 @@ namespace VoodooShader
 		 * @return A shared reference to the technique if it is found, an empty
 		 *		shared reference otherwise.
 		 */
-		TechniqueRef GetTechnique(String name);
+		TechniqueRef GetTechnique
+        (
+            __in String name
+        );
 
 		/**
 		 * Retrieve the Core this Shader is a child of.
@@ -124,8 +146,21 @@ namespace VoodooShader
 		 *
 		 * @param param The parameter to link.
 		 */
-		void LinkParameter(ParameterRef param);
-		void LinkSampler(ParameterRef param);
+		void LinkParameter
+        (
+            __in ParameterRef param
+        );
+
+        /**
+         * Links a particular effect-level sampler against a core texture.
+         * This generally should be called by Shader::LinkParameter().
+         * 
+         * @param param The sampler to link.
+         */
+		void LinkSampler
+        (
+            __in ParameterRef param
+        );
 
 		void SetupTechniques();
 
@@ -141,7 +176,11 @@ namespace VoodooShader
 	class VOODOO_API Technique
 	{
 	public:
-		Technique(Shader * parent, CGtechnique cgTech);
+		Technique
+        (
+            __in __notnull __readonly Shader * parent, 
+            __in CGtechnique cgTech
+        );
 
 		/**
 		 * Retrieve a fully qualified technique name (including shader name)
@@ -174,7 +213,10 @@ namespace VoodooShader
 		 *		technique has (call Technique::GetPassCount() first to find the
 		 *		number of passes)
 		 */
-		PassRef GetPass(size_t index);
+		PassRef GetPass
+        (
+            __in size_t index
+        );
 
 		/**
 		 * Retrieve the technique's final target. This is the surface the
@@ -200,7 +242,11 @@ namespace VoodooShader
 	class VOODOO_API Pass
 	{
 	public:
-		Pass(Technique * parent, CGpass cgPass);
+		Pass
+        (
+            __in __notnull __readonly Technique * parent,
+            __in CGpass cgPass
+        );
 
 		/**
 		 * Retrieve the fully qualified pass name, including technique and
@@ -241,7 +287,10 @@ namespace VoodooShader
 		 *		the pass has no program for that stage or an unsupported or
 		 *		unknown stage is requested.
 		 */
-		CGprogram GetProgram(ProgramStage stage);
+		CGprogram GetProgram
+        (
+            __in ProgramStage stage
+        );
 
 		void Link();
 

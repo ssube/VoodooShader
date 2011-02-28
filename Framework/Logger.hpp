@@ -41,7 +41,11 @@ namespace VoodooShader
 		 *		default value is false, which will truncate an existing file).
 		 * @throws Exception if the log file cannot be opened.
 		 */
-		Logger(const char * filename, bool append = false);
+		Logger
+        (
+            __in __notnull const char * filename, 
+            __in_opt bool append = false
+        );
 
 		/** 
 		 * Default destructor, flushes and closes the log file (if open).
@@ -67,7 +71,11 @@ namespace VoodooShader
 		 * @warning This function has a maximum (formatted) message length of
 		 *		4096 characters. This can be changed if it becomes an issue.
 		 */
-		void Log(const char * msg, ...);
+		void Log
+        (
+            __in __notnull const char * msg, 
+            ...
+        );
 
 		/**
 		 * Logs a msg and list of arguments.
@@ -81,7 +89,11 @@ namespace VoodooShader
 		 * @warning This function has a maximum (formatted) message length of
 		 *		4096 characters. This can be changed if it becomes an issue.
 		 */
-		void LogList(const char * msg, va_list args);
+		void LogList
+        (
+            __in __notnull const char * msg, 
+            __in va_list args
+        );
 
 		/**
 		 * Sets the internal buffer to a given size.
@@ -91,7 +103,10 @@ namespace VoodooShader
 		 *		This may have a notable performance hit, but makes debug 
 		 *		messages more likely to survive	crashes.
 		 */
-		void SetBufferSize(unsigned int bytes);
+		void SetBufferSize
+        (
+            __in unsigned int bytes
+        );
 
 		/**
 		 * Immediately writes all pending data to disk.
@@ -114,7 +129,10 @@ namespace VoodooShader
 		 *		or relative path).
 		 * @return Success of the open operation.
 		 */
-		bool Open(const char* filename);
+		bool Open
+        (
+            __in __notnull const char * filename
+        );
 
 		/**
 		 * Closes the log file, if one is open.

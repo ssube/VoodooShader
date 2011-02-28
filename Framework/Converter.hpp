@@ -43,7 +43,10 @@ namespace VoodooShader
 		 * @param pt The internal parameter type.
 		 * @return The Cg runtime's corresponding type, if one is known.
 		 */
-		static inline CGtype ToCGType(ParameterType pt)
+		static inline CGtype ToCGType
+        (
+            __in ParameterType pt
+        )
 		{
 			switch ( pt )
 			{
@@ -78,7 +81,10 @@ namespace VoodooShader
 		* @param pt The Cg runtime's type.
 		* @return The internal parameter corresponding type, if one is known.
 		*/
-		static inline ParameterType ToParameterType(CGtype pt)
+		static inline ParameterType ToParameterType
+        (
+            __in CGtype pt
+        )
 		{
 			switch ( pt )
 			{
@@ -104,7 +110,10 @@ namespace VoodooShader
 			}
 		}
 
-		static inline ParameterCategory ToParameterCategory(ParameterType type)
+		static inline ParameterCategory ToParameterCategory
+        (
+            __in ParameterType type
+        )
 		{
 			switch ( type )
 			{
@@ -133,7 +142,10 @@ namespace VoodooShader
 		 * @return A C-string with the name (usually identical to the 
 		 *		identifier).
 		 */
-		static inline const char * ToString(TextureFormat tf)
+		static inline const char * ToString
+        (
+            __in TextureFormat tf
+        )
 		{
 			switch ( tf )
 			{
@@ -169,7 +181,10 @@ namespace VoodooShader
 		* @return A C-string with the name (usually identical to the 
 		*		identifier).
 		*/
-		static inline const char * ToString(ParameterType pt)
+		static inline const char * ToString
+        (
+            __in ParameterType pt
+        )
 		{
 			switch ( pt )
 			{
@@ -193,7 +208,10 @@ namespace VoodooShader
 			}
 		}
 
-		static inline const char * ToString(ParameterCategory cat)
+		static inline const char * ToString
+        (
+            __in ParameterCategory cat
+        )
 		{
 			switch ( cat )
 			{

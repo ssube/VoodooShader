@@ -34,7 +34,10 @@ namespace VoodooShader
 	class VOODOO_API MaterialManager
 	{
 	public:
-		MaterialManager(Core * parent);
+		MaterialManager
+        (
+            __in __notnull Core * parent
+        );
 
 		/**
 		 * Adds a material (a connected Texture/Shader pair) to the internal 
@@ -50,7 +53,12 @@ namespace VoodooShader
 		 * @note If the given Texture is already present in the material map, it
 		 *		will be rebound to the new Shader.
 		 */
-		void Add(TextureRef texture, ShaderRef shader, bool global = false);
+		void Add
+        (
+            __in TextureRef texture, 
+            __in ShaderRef shader, 
+            __in_opt bool global = false
+        );
 
 		/**
 		 * Removes a material from the internal material map.
@@ -58,7 +66,10 @@ namespace VoodooShader
 		 * @param texture The texture half of the material to be removed.
 		 * @throws Exception if no material exists with the given Texture.
 		 */
-		void Remove(TextureRef texture);
+		void Remove
+        (
+            __in TextureRef texture
+        );
 
 		/**
 		 * Binds a material for use in drawing.
@@ -72,7 +83,10 @@ namespace VoodooShader
 		 * @throws Exception if no graphics adapter is registered with the 
 		 *		parent Core.
 		 */
-		void Bind(TextureRef texture);
+		void Bind
+        (
+            __in TextureRef texture
+        );
 
 		/**
 		 * Unbinds the currently bound material (future draw calls will not use
@@ -93,7 +107,10 @@ namespace VoodooShader
 		 * @param texture The Texture half of the material, used as the index.
 		 * @note Returns NULL if the texture is not found in the material map.
 		 */
-		ShaderRef Find(TextureRef texture);
+		ShaderRef Find
+        (
+            __in TextureRef texture
+        );
 
 	private:
 		Core * mParent;

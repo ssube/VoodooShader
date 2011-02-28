@@ -87,7 +87,10 @@ namespace VoodooShader
 		 *		assumed the pass will be valid for the duration of the call).
 		 * @return Whether or not the pass was successfully loaded.
 		 */
-		virtual bool LoadPass(Pass * pass) = 0;
+		virtual bool LoadPass
+        (
+            __in Pass * pass
+        ) = 0;
 
 		/**
 		* Causes the adapter to load a pass for drawing. The adapter may choose 
@@ -107,7 +110,10 @@ namespace VoodooShader
 		*		before this function returns. These updates must be performed so
 		*		they take effect for any draw calls occurring after this call.
 		*/
-		virtual void BindPass(PassRef pass) = 0;
+		virtual void BindPass
+        (
+            __in PassRef pass
+        ) = 0;
 
 		/**
 		 * Unbinds the last bound pass. This resets the shader state of the 
@@ -145,7 +151,10 @@ namespace VoodooShader
 		 *				original state before the function returns.</li>
 		 *		 </ol>
 		 */
-		virtual void DrawQuad(Vertex * vertexData) = 0;
+		virtual void DrawQuad
+        (
+            __in __notnull Vertex * vertexData
+        ) = 0;
 
 		/**
 		 * Downloads a parameter's value from system RAM to VRAM, verifying that
@@ -153,7 +162,10 @@ namespace VoodooShader
 		 * (all parameter set commands operate on the system RAM buffer for
 		 * speed).
 		 */
-		virtual void ApplyParameter(ParameterRef param) = 0;
+		virtual void ApplyParameter
+        (
+            __in ParameterRef param
+        ) = 0;
 
 		/**
 		 * Helper function to handle binding and drawing a single effect. 
@@ -168,7 +180,10 @@ namespace VoodooShader
 		 * effect is being drawn and use the default vertex setup (done by
 		 * calling <code>this->DrawQuad(NULL);</code>).
 		 */
-		virtual void DrawShader(ShaderRef shader) = 0;
+		virtual void DrawShader
+        (
+            __in ShaderRef shader
+        ) = 0;
 
 		/**
 		 * Creates a named texture within the API and registers it with the 
@@ -192,9 +207,15 @@ namespace VoodooShader
 		 *		depending on how the Adapter and API implement 
 		 *		render-to-texture.
 		 */
-		virtual TextureRef CreateTexture(String name, size_t width, 
-			size_t height, size_t depth, bool mipmaps, TextureFormat format) 
-			= 0;
+		virtual TextureRef CreateTexture
+        (
+            __in String name, 
+            __in size_t width, 
+			__in size_t height, 
+            __in size_t depth, 
+            __in_opt bool mipmaps, 
+            __in TextureFormat format
+        ) = 0;
 
 		/**
 		 * Connects a texture to a sampler-type parameter. This is performed 
@@ -206,7 +227,11 @@ namespace VoodooShader
 		 * @param texture The texture to be bound.
 		 * @return Whether or not the binding was successful.
 		 */
-		virtual bool ConnectTexture(ParameterRef param, TextureRef texture) = 0;
+		virtual bool ConnectTexture
+        (
+            __in ParameterRef param, 
+            __in TextureRef texture
+        ) = 0;
 
 		/**
 		 * A generic error-handling callback provided to the Cg runtime. This 
@@ -216,8 +241,12 @@ namespace VoodooShader
 		 * @param error The error raised.
 		 * @param core The currently active Voodoo Core.
 		 */
-		virtual void HandleError(CGcontext context, CGerror error, void * core) 
-			= 0;
+		virtual void HandleError
+        (
+            __in CGcontext context, 
+            __in CGerror error, 
+            __in __notnull void * core
+        ) = 0;
 	};
 }
 

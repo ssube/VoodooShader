@@ -44,7 +44,10 @@ namespace VoodooShader
 		 *
 		 * @param parent The Core to use as the parent.
 		 */
-		FullscreenManager(Core * parent);
+		FullscreenManager
+        (
+            __in __notnull Core * parent
+        );
 
 		/**
 		 * Insert a shader into the render queue.
@@ -57,7 +60,11 @@ namespace VoodooShader
 		 * @throws Exception if position is less than -1 or greater than the end
 		 *		of the queue.
 		 */
-		size_t Add(ShaderRef shader, int position = -1);
+		size_t Add
+        (
+            __in ShaderRef shader, 
+            __in_opt int position = -1
+        );
 
 		/**
 		 * Removes a shader from the render queue.
@@ -67,7 +74,10 @@ namespace VoodooShader
 		 * @throws Exception if position is less than -1 or greater than the end
 		 *		of the queue.
 		 */
-		void Remove(size_t position);
+		void Remove
+        (
+            __in size_t position
+        );
 
 		/**
 		 * Binds shaders from the post-processing queue and draws them to screen.
@@ -79,7 +89,11 @@ namespace VoodooShader
 		 * @throws Exception if count is 0.
 		 * @throws Exception if the parent Core has no Adapter set.
 		 */
-		void Render(unsigned int start = 0, int count = -1);
+		void Render
+        (
+            __in_opt unsigned int start = 0, 
+            __in_opt int count = -1
+        );
 
 	private:
 		//! A constant reference to the parent VoodooShader::Core

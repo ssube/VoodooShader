@@ -31,11 +31,22 @@ namespace VoodooShader
 	class FileSystem
 	{
 	public:
-		FileSystem(Core * core);
+		FileSystem
+        (
+            __in __notnull Core * core
+        );
+
 		~FileSystem();
 
-		void RegisterDir(String dir);
-		void RemoveDir(String dir);
+		void RegisterDir
+        (
+            __in String dir
+        );
+
+		void RemoveDir
+        (
+            __in String dir
+        );
 
 		/**
 		 * Resolves a relative filename (usually just filename and extension,
@@ -47,7 +58,10 @@ namespace VoodooShader
 		 *		to the file with an absolute path. Otherwise, an empty 
 		 *		reference.
 		 */
-		FileRef GetFile(String name);
+		FileRef GetFile
+        (
+            __in String name
+        );
 
 	private:
 		StringList mDirectories;
@@ -62,9 +76,9 @@ namespace VoodooShader
 		 * should usually not be called directly, FileManager::GetFile(String)
 		 * will automatically resolve and return paths to simplify things.
 		 */
-		File(Core * core, String name);
+		File(__in __notnull Core * core, __in String name);
 
-		bool Open(FileOpenMode mode);
+		bool Open(__in FileOpenMode mode);
 
 	private:
 		HANDLE mHandle;

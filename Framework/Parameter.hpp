@@ -33,13 +33,23 @@ namespace VoodooShader
 		 * Virtual (global-level) parameter constructor. This will create a 
 		 * named parameter in the Cg runtime and register it in the given Core. 
 		 */
-		Parameter(Core * core, String name, ParameterType type);
-		Parameter(Shader * parent, CGparameter param);
+		Parameter
+        (
+            __in __notnull Core * core, 
+            __in String name, 
+            __in_nz ParameterType type
+        );
+
+		Parameter
+        (
+            __in __notnull Shader * parent, 
+            __in __notnull CGparameter param
+        );
 
 		String Name();
 
-		CGparameter GetParameter(void);
-		ParameterType GetType(void);
+		CGparameter GetParameter();
+		ParameterType GetType();
 
 		/**
 		 * Binds two parameters, forcing their values to be identical. This 
@@ -52,19 +62,72 @@ namespace VoodooShader
 		 *		virtual or global parameters. If this is called on a non-virtual
 		 *		parameter, it will throw.
 		 */
-		void Attach(ParameterRef param);
+		void Attach
+        (
+            __in ParameterRef param
+        );
 
-		void Set(TextureRef newTex);
-		void Set(float newX);
-		void Set(float newX, float newY);
-		void Set(float newX, float newY, float newZ);
-		void Set(float newX, float newY, float newZ, float newW);
+		void Set
+        (
+            __in TextureRef newTex
+        );
 
-		void Get(TextureRef & param);
-		void Get(float & paramX);
-		void Get(float & paramX, float & paramY);
-		void Get(float & paramX, float & paramY, float & paramZ);
-		void Get(float & paramX, float & paramY, float & paramZ, float & paramW);
+		void Set
+        (
+            __in float newX
+        );
+
+		void Set
+        (
+            __in float newX, 
+            __in float newY
+        );
+
+		void Set
+        (
+            __in float newX, 
+            __in float newY, 
+            __in float newZ
+        );
+
+		void Set
+        (
+            __in float newX, 
+            __in float newY, 
+            __in float newZ, 
+            __in float newW
+        );
+
+		void Get
+        (
+            __out TextureRef & param
+        );
+
+		void Get
+        (
+            __out float & paramX
+        );
+
+		void Get
+        (
+            __out float & paramX, 
+            __out float & paramY
+        );
+
+		void Get
+        (
+            __out float & paramX, 
+            __out float & paramY, 
+            __out float & paramZ
+        );
+
+		void Get
+        (
+            __out float & paramX, 
+            __out float & paramY, 
+            __out float & paramZ, 
+            __out float & paramW
+        );
 
 		inline TextureRef GetTexture()
 		{

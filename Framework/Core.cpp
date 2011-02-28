@@ -102,12 +102,17 @@ namespace VoodooShader
 
 	void Core::SetDebug(bool mode)
 	{
+        UNREFERENCED_PARAMETER(mode);
+
 #ifndef _DEBUG
 		this->mDebugMode = mode;
 		if ( mode )
 		{
 			this->mLogger->SetBufferSize(0);
 		}
+#else
+        this->mDebugMode = true;
+        this->mLogger->SetBufferSize(0);
 #endif
 	}
 

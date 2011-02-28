@@ -41,8 +41,16 @@ namespace VoodooShader
 	class VOODOO_API Core
 	{
 	public:
-		static Core * Create(String logfile = "Voodoo.log");
-		static void Destroy(Core * core);
+        __checkReturn
+		static Core * Create
+        (
+            __in_opt String logfile = "Voodoo.log"
+        );
+
+		static void Destroy
+        (
+            __in __notnull Core * core
+        );
 
 		/**
 		 * Retrieve the Cg context associated with this Core.
@@ -68,7 +76,10 @@ namespace VoodooShader
 		 * @note This function only has an effect in release builds, in debug
 		 *		builds debug mode is always on.
 		 */
-		void SetDebug(bool mode);
+		void SetDebug
+        (
+            __in bool mode
+        );
 
 		/**
 		 * Writes a string to the log file using standard printf syntax.
@@ -76,7 +87,11 @@ namespace VoodooShader
 		 * @param msg The format string to use
 		 * @param ... Parameters to insert
 		 */
-		void Log(const char * msg, ...);
+		void Log
+        (
+            __in __notnull const char * msg, 
+            ...
+        );
 
 		/**
 		 * Writes a string to the log file, if the core is in debug mode.
@@ -86,7 +101,11 @@ namespace VoodooShader
 		 *
 		 * @note In non-debug builds, this will not log anything.
 		 */
-		void Debug(const char * msg, ...);
+		void Debug
+        (
+            __in __notnull const char * msg, 
+            ...
+        );
 
 		/**
 		 * Attach an Adapter to this Core.
@@ -95,19 +114,27 @@ namespace VoodooShader
 		 *		calls).
 		 * @throws Exception if an Adapter is already connected to this Core.
 		 */
-		void SetAdapter(Adapter * adapter);
+		void SetAdapter
+        (
+            __in __readonly __maybenull Adapter * adapter
+        );
 
 		/**
 		 * Retrieve the Adapter attached to this Core.
 		 *
 		 * @return A pointer to the Adapter or NULL if no Adapter is attached.
 		 */
+        __checkReturn
 		Adapter * GetAdapter();
 
 		/**
 		 * Create a new shader effect from a file.            
 		 */
-		ShaderRef CreateShader(String filename, const char ** args);
+		ShaderRef CreateShader
+        (
+            __in String filename, 
+            __in __readonly __maybenull const char ** args
+        );
 
 		/**
 		 * Registers a texture with this Core. Texture will not be used by the 
@@ -124,7 +151,11 @@ namespace VoodooShader
 		 *
 		 * @warning This should be called only from Adapter::CreateTexture().
 		 */
-		TextureRef CreateTexture(String name, void * data);
+		TextureRef CreateTexture
+        (
+            __in String name, 
+            __in __readonly __notnull void * data
+        );
 
 		/**
 		 * Retrieves a texture from the Core's texture map by name. 
@@ -135,7 +166,10 @@ namespace VoodooShader
 		 *
 		 * @note This will not create a texture, only retrieve an existing one.
 		 */
-		TextureRef GetTexture(String name);
+		TextureRef GetTexture
+        (
+            __in String name
+        );
 
 		/**
 		 * Retrieves a texture from the Core's texture map by function.
@@ -147,7 +181,10 @@ namespace VoodooShader
 		 * @note This will not create textures and all special textures are
 		 *		empty until set.
 		 */
-		TextureRef GetTexture(TextureType function);
+		TextureRef GetTexture
+        (
+            __in TextureType function
+        );
 
 		/**
 		 * Assign a texture to a specialized function. This is used to bind
@@ -156,12 +193,19 @@ namespace VoodooShader
 		 * @param function The function to set
 		 * @param texture The texture to bind
 		 */
-		void SetTexture(TextureType function, TextureRef texture);
+		void SetTexture
+        (
+            __in TextureType function, 
+            __in TextureRef texture
+        );
 
 		/**
 		 * Removes a texture from the Core's texture map. 
 		 */
-		void RemoveTexture(TextureRef texture);
+		void RemoveTexture
+        (
+            __in TextureRef texture
+        );
 
 		/**
 		 * Creates a global-level or virtual parameter. This parameter exists
@@ -179,7 +223,11 @@ namespace VoodooShader
 		 *		can then attach effect parameters and adjust only the global
 		 *		parameter (an easy way to manage system time or such things).
 		 */
-		ParameterRef CreateParameter(String name, ParameterType type);
+		ParameterRef CreateParameter
+        (
+            __in String name, 
+            __in ParameterType type
+        );
 
 		/**
 		 * Retrieve a parameter by name.
@@ -191,10 +239,19 @@ namespace VoodooShader
 		 * @return A reference to the parameter, if one is found. A null shared
 		 *		pointer otherwise.
 		 */
-		ParameterRef GetParameter(String name, ParameterType type);
+		ParameterRef GetParameter
+        (
+            __in String name, 
+            __in ParameterType type
+        );
 
 	//protected:
-		static void CGErrorHandler(CGcontext context, CGerror error, void * core);
+		static void CGErrorHandler
+        (
+            __in CGcontext context, 
+            __in CGerror error, 
+            __in __maybenull void * core
+        );
 
 	private:
 
@@ -215,7 +272,10 @@ namespace VoodooShader
 		* @note You can not call this function externally, you must call 
 		*		Core::Create(String) instead.
 		*/
-		Core(String logfile);
+		Core
+        (
+            __in String logfile
+        );
 
 		/**
 		 * Default destructor for Voodoo @ref Core "Cores".

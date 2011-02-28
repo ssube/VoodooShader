@@ -38,7 +38,7 @@ namespace VoodooShader
 		char buffer[1024];
 		ZeroMemory(buffer, 1024);
 
-		sprintf_s(buffer, 1023, "VoodooShader::Exception in file %s at %s (line %d): %s", mFile, mFunction, mLine, mMessage);
+		sprintf_s(buffer, 1023, "VoodooShader::Exception in file %s at %s (line %d): %s", mFile, mFunction, mLine, mMessage.c_str());
 
 		return String(buffer);
 	}

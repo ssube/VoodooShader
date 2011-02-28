@@ -41,25 +41,37 @@ namespace VoodooShader
 			mCount = new int(1);
 		}
 
-		Reference(const T & object)
+		Reference
+        (
+            __in __readonly const T & object
+        )
 		{
 			mObject = new T(object);
 			mCount = new int(1);
 		}
 
-		Reference(T * object)
+		Reference
+        (
+            __in __notnull __readonly T * object
+        )
 			: mObject(object)
 		{
 			mCount = new int(1);
 		}
 
-		Reference(void * object)
+		Reference
+        (
+            __in __notnull __readonly void * object
+        )
 			: mObject(reinterpret_cast<T*>(object))
 		{
 			mCount = new int(1);
 		}
 
-		Reference(const Reference<T> & other)
+		Reference
+        (
+            __in __readonly const Reference<T> & other
+        )
 			: mObject(other.mObject), mCount(other.mCount)
 		{
 			++(*mCount);
@@ -70,7 +82,10 @@ namespace VoodooShader
 			this->release();
 		}
 
-		Reference<T> & operator= (const Reference<T> & other)
+		Reference<T> & operator= 
+        (
+            __in __readonly const Reference<T> & other
+        )
 		{
 			if ( this != &other )
 			{
@@ -82,7 +97,10 @@ namespace VoodooShader
 			return *this;
 		}
 
-		Reference<T> & operator= (T * object)
+		Reference<T> & operator= 
+        (
+            __in __notnull __readonly T * object
+        )
 		{
 			release();
 			mObject = object;
@@ -101,12 +119,14 @@ namespace VoodooShader
 			return (*mObject);
 		}
 
-		T * operator->()
+		__checkReturn 
+        T * operator->()
 		{
 			return mObject;
 		}
 
-		T * get()
+		__checkReturn 
+        T * get()
 		{
 			return mObject;
 		}
@@ -142,7 +162,11 @@ namespace VoodooShader
 	};
 
 	template<typename U, typename V>
-	bool operator<(const Reference<U> & me, const Reference<V> & other)
+	bool operator<
+    (
+        __in __readonly const Reference<U> & me, 
+        __in __readonly const Reference<V> & other
+    )
 	{
 		return ( me.mObject < other.mObject );
 	}

@@ -38,10 +38,23 @@ namespace VoodooShader
 		: public std::exception
 	{
 	public:
-		Exception(const char * message, Core * core, char * file, 
-			char * function, int line);
-		Exception(String message, Core * core, char * file, 
-			char * function, int line);
+		Exception
+        (
+            __in __notnull const char * message, 
+            __in __notnull Core * core, 
+            __in __notnull char * file, 
+			__in __notnull char * function, 
+            __in int line
+        );
+
+		Exception
+        (
+            __in String message, 
+            __in __notnull Core * core, 
+            __in __notnull char * file, 
+			__in __notnull char * function,
+            __in int line
+        );
 
 		String Message();
 
