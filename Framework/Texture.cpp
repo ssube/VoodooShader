@@ -3,17 +3,17 @@
 
 namespace VoodooShader
 {
-	Texture::Texture(String name, void * texture)
-		: mTextureObject(texture), mName(name)
-	{ };
+    Texture::Texture(String name, void * texture)
+        : mTextureObject(texture), mName(name)
+    { };
 
-	void * Texture::GetTexture()
-	{
-		return mTextureObject;
-	}
+    void * Texture::GetTexture()
+    {
+        return mTextureObject;
+    }
 
-	String Texture::Name()
-	{
-		return mName;
-	};
+    String Texture::Name()
+    {
+        return mName;
+    };
 }

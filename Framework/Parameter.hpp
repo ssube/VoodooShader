@@ -26,71 +26,71 @@
 
 namespace VoodooShader
 {
-	class VOODOO_API Parameter
-	{
-	public:
-		/**
-		 * Virtual (global-level) parameter constructor. This will create a 
-		 * named parameter in the Cg runtime and register it in the given Core. 
-		 */
-		Parameter
+    class VOODOO_API Parameter
+    {
+    public:
+        /**
+         * Virtual (global-level) parameter constructor. This will create a 
+         * named parameter in the Cg runtime and register it in the given Core. 
+         */
+        Parameter
         (
             __in __notnull Core * core, 
             __in String name, 
             __in_nz ParameterType type
         );
 
-		Parameter
+        Parameter
         (
             __in __notnull Shader * parent, 
             __in __notnull CGparameter param
         );
 
-		String Name();
+        String Name();
 
-		CGparameter GetParameter();
-		ParameterType GetType();
+        CGparameter GetParameter();
+        ParameterType GetType();
 
-		/**
-		 * Binds two parameters, forcing their values to be identical. This 
-		 * should be used with care, as it has some requirements and 
-		 * restrictions. It is used to control some of the more common variables
-		 * found in shaders.
-		 *
-		 * @warning This <em>cannot</em> be used to bind one effect's parameter 
-		 *		to another. It can only be used to bind effect parameters to
-		 *		virtual or global parameters. If this is called on a non-virtual
-		 *		parameter, it will throw.
-		 */
-		void Attach
+        /**
+         * Binds two parameters, forcing their values to be identical. This 
+         * should be used with care, as it has some requirements and 
+         * restrictions. It is used to control some of the more common variables
+         * found in shaders.
+         *
+         * @warning This <em>cannot</em> be used to bind one effect's parameter 
+         *        to another. It can only be used to bind effect parameters to
+         *        virtual or global parameters. If this is called on a non-virtual
+         *        parameter, it will throw.
+         */
+        void Attach
         (
             __in ParameterRef param
         );
 
-		void Set
+        void Set
         (
             __in TextureRef newTex
         );
 
-		void Set
+        void Set
         (
             __in float newX
         );
 
-		void Set
+        void Set
         (
             __in float newX, 
             __in float newY
         );
 
-		void Set
+        void Set
         (
             __in float newX, 
             __in float newY, 
             __in float newZ
         );
 
-		void Set
+        void Set
         (
             __in float newX, 
             __in float newY, 
@@ -98,30 +98,30 @@ namespace VoodooShader
             __in float newW
         );
 
-		void Get
+        void Get
         (
             __out TextureRef & param
         );
 
-		void Get
+        void Get
         (
             __out float & paramX
         );
 
-		void Get
+        void Get
         (
             __out float & paramX, 
             __out float & paramY
         );
 
-		void Get
+        void Get
         (
             __out float & paramX, 
             __out float & paramY, 
             __out float & paramZ
         );
 
-		void Get
+        void Get
         (
             __out float & paramX, 
             __out float & paramY, 
@@ -129,35 +129,35 @@ namespace VoodooShader
             __out float & paramW
         );
 
-		inline TextureRef GetTexture()
-		{
-			return mValueTexture;
-		};
+        inline TextureRef GetTexture()
+        {
+            return mValueTexture;
+        };
 
-		inline float * GetFloat()
-		{
-			return mValueFloat;
-		};
+        inline float * GetFloat()
+        {
+            return mValueFloat;
+        };
 
-		void ForceUpdate();
+        void ForceUpdate();
 
-	private:
-		Shader * mParent;
-		Core * mCore;
+    private:
+        Shader * mParent;
+        Core * mCore;
 
-		bool mVirtual;
-		CGparameter mParam;
-		ParameterType mType;
+        bool mVirtual;
+        CGparameter mParam;
+        ParameterType mType;
 
-		// Value
-		TextureRef mValueTexture;
+        // Value
+        TextureRef mValueTexture;
 
-		union
-		{
-			float mValueMatrix[4][4];
-			float mValueFloat[16];
-		};
-	};
+        union
+        {
+            float mValueMatrix[4][4];
+            float mValueFloat[16];
+        };
+    };
 }
 
 #endif /*VOODOO_PARAMETER_HPP*/

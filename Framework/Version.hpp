@@ -25,26 +25,26 @@
 #define VOODOO_META_STRING(arg) VOODOO_META__STRING(arg)
 
 #ifdef _DEBUG
-#	define VOODOO_META_DEBUG_STRING " (DEBUG)"
+#    define VOODOO_META_DEBUG_STRING " (DEBUG)"
 #else
-#	define VOODOO_META_DEBUG_STRING
+#    define VOODOO_META_DEBUG_STRING
 #endif
 
 #define VOODOO_META_VERSION_CHAIN(token)\
-	VOODOO_##token##_VERSION_MAJOR,\
-	VOODOO_##token##_VERSION_MINOR,\
-	VOODOO_##token##_VERSION_PATCH,\
-	VOODOO_##token##_VERSION_GITREV
+    VOODOO_##token##_VERSION_MAJOR,\
+    VOODOO_##token##_VERSION_MINOR,\
+    VOODOO_##token##_VERSION_PATCH,\
+    VOODOO_##token##_VERSION_GITREV
 
 #define VOODOO_META_STRING_VERSION_BASIC(token)\
-	VOODOO_META_STRING(VOODOO_##token##_VERSION_MAJOR) "."\
-	VOODOO_META_STRING(VOODOO_##token##_VERSION_MINOR) "."\
-	VOODOO_META_STRING(VOODOO_##token##_VERSION_PATCH) "."\
-	VOODOO_META_STRING(VOODOO_##token##_VERSION_GITREV)\
-	VOODOO_META_DEBUG_STRING
+    VOODOO_META_STRING(VOODOO_##token##_VERSION_MAJOR) "."\
+    VOODOO_META_STRING(VOODOO_##token##_VERSION_MINOR) "."\
+    VOODOO_META_STRING(VOODOO_##token##_VERSION_PATCH) "."\
+    VOODOO_META_STRING(VOODOO_##token##_VERSION_GITREV)\
+    VOODOO_META_DEBUG_STRING
 
 #define VOODOO_META_STRING_VERSION_FULL(token)\
-	VOODOO_##token##_PRETTYNAME " (version " VOODOO_META_STRING_VERSION_BASIC(token) ")"
+    VOODOO_##token##_PRETTYNAME " (version " VOODOO_META_STRING_VERSION_BASIC(token) ")"
 
 #define VOODOO_META_STRING_NAME_BASIC(token) VOODOO_##token##_NAME VOODOO_META_DEBUG_STRING
 #define VOODOO_META_STRING_NAME_FULL(token) VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING
@@ -53,17 +53,17 @@
 
 
 // Global defs ----------------------------------------------------------------
-#define VOODOO_GLOBAL_VERSION_GITREV	95
-#define VOODOO_GLOBAL_COPYRIGHT_BRIEF	"Copyright (c) 2010-2011 by Sean Sube"
+#define VOODOO_GLOBAL_VERSION_GITREV    95
+#define VOODOO_GLOBAL_COPYRIGHT_BRIEF    "Copyright (c) 2010-2011 by Sean Sube"
 //-----------------------------------------------------------------------------
 
 
 // Core defs ------------------------------------------------------------------
-#define VOODOO_CORE_NAME			"Voodoo/Core"
-#define VOODOO_CORE_PRETTYNAME		"Voodoo Shader Framework Core"
-#define VOODOO_CORE_VERSION_MAJOR	0
-#define VOODOO_CORE_VERSION_MINOR	1
-#define VOODOO_CORE_VERSION_PATCH	11
-#define VOODOO_CORE_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
+#define VOODOO_CORE_NAME            "Voodoo/Core"
+#define VOODOO_CORE_PRETTYNAME        "Voodoo Shader Framework Core"
+#define VOODOO_CORE_VERSION_MAJOR    0
+#define VOODOO_CORE_VERSION_MINOR    1
+#define VOODOO_CORE_VERSION_PATCH    11
+#define VOODOO_CORE_VERSION_GITREV    VOODOO_GLOBAL_VERSION_GITREV
 //-----------------------------------------------------------------------------
 

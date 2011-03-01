@@ -29,31 +29,31 @@
  */
 void CameraHack()
 {
-	VoodooCore->Log("Voodoo Frost: Applying camera hack...\n");
+    VoodooCore->Log("Voodoo Frost: Applying camera hack...\n");
 
-	float maxDist	=  120.0f;
-	float minDist	=   -0.2f;
-	float angle		= 1000.0f;
+    float maxDist    =  120.0f;
+    float minDist    =   -0.2f;
+    float angle        = 1000.0f;
 
-	DWORD oldProtect, finalProtect;
+    DWORD oldProtect, finalProtect;
 
-	BOOL lockStatus = VirtualProtect( (PVOID)0x004A9000, 0x1000, PAGE_EXECUTE_READWRITE, &oldProtect);
+    BOOL lockStatus = VirtualProtect( (PVOID)0x004A9000, 0x1000, PAGE_EXECUTE_READWRITE, &oldProtect);
 
-	if ( lockStatus != 0 )
-	{
-		memcpy(	(PVOID)	0x004A93ED,	&minDist,	sizeof(float) );
-		memcpy( (PVOID)	0x004A93F7,	&maxDist,	sizeof(float) );
-		memcpy(	(PVOID)	0x004A940B,	&angle,		sizeof(float) );
-		memcpy( (PVOID)	0x004A9695,	&maxDist,	sizeof(float) );
-		memcpy(	(PVOID)	0x004A968B,	&minDist,	sizeof(float) );
+    if ( lockStatus != 0 )
+    {
+        memcpy(    (PVOID)    0x004A93ED,    &minDist,    sizeof(float) );
+        memcpy( (PVOID)    0x004A93F7,    &maxDist,    sizeof(float) );
+        memcpy(    (PVOID)    0x004A940B,    &angle,        sizeof(float) );
+        memcpy( (PVOID)    0x004A9695,    &maxDist,    sizeof(float) );
+        memcpy(    (PVOID)    0x004A968B,    &minDist,    sizeof(float) );
 
-		VirtualProtect( (PVOID)0x004A9000, 0x1000, oldProtect, &finalProtect);
+        VirtualProtect( (PVOID)0x004A9000, 0x1000, oldProtect, &finalProtect);
 
-		VoodooCore->Log("Voodoo Frost: Camera hack successfully applied.\n");
-	} else {
-		DWORD error = GetLastError();
-		
-		VoodooCore->Log("Voodoo Frost: Camera hack failed with code %d.\n",
-			error);
-	}
+        VoodooCore->Log("Voodoo Frost: Camera hack successfully applied.\n");
+    } else {
+        DWORD error = GetLastError();
+        
+        VoodooCore->Log("Voodoo Frost: Camera hack failed with code %d.\n",
+            error);
+    }
 }

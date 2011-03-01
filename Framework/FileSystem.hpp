@@ -24,65 +24,65 @@
 
 namespace VoodooShader
 {
-	/**
-	 * Provides a unified file management system for loading shaders and other
-	 * resources.
-	 */
-	class FileSystem
-	{
-	public:
-		FileSystem
+    /**
+     * Provides a unified file management system for loading shaders and other
+     * resources.
+     */
+    class FileSystem
+    {
+    public:
+        FileSystem
         (
             __in __notnull Core * core
         );
 
-		~FileSystem();
+        ~FileSystem();
 
-		void RegisterDir
+        void RegisterDir
         (
             __in String dir
         );
 
-		void RemoveDir
+        void RemoveDir
         (
             __in String dir
         );
 
-		/**
-		 * Resolves a relative filename (usually just filename and extension,
-		 * but may include directories) into an absolute filename by searching
-		 * the list of resource directories registered with this manager.
-		 *
-		 * @param name The filename to search for
-		 * @return If the file is found, a reference to a file object pointing 
-		 *		to the file with an absolute path. Otherwise, an empty 
-		 *		reference.
-		 */
-		FileRef GetFile
+        /**
+         * Resolves a relative filename (usually just filename and extension,
+         * but may include directories) into an absolute filename by searching
+         * the list of resource directories registered with this manager.
+         *
+         * @param name The filename to search for
+         * @return If the file is found, a reference to a file object pointing 
+         *        to the file with an absolute path. Otherwise, an empty 
+         *        reference.
+         */
+        FileRef GetFile
         (
             __in String name
         );
 
-	private:
-		StringList mDirectories;
-		Core * mCore;
-	};
+    private:
+        StringList mDirectories;
+        Core * mCore;
+    };
 
-	class File
-	{
-	public:
-		/**
-		 * Creates a file object from a path (usually an absolute path). This
-		 * should usually not be called directly, FileManager::GetFile(String)
-		 * will automatically resolve and return paths to simplify things.
-		 */
-		File(__in __notnull Core * core, __in String name);
+    class File
+    {
+    public:
+        /**
+         * Creates a file object from a path (usually an absolute path). This
+         * should usually not be called directly, FileManager::GetFile(String)
+         * will automatically resolve and return paths to simplify things.
+         */
+        File(__in __notnull Core * core, __in String name);
 
-		bool Open(__in FileOpenMode mode);
+        bool Open(__in FileOpenMode mode);
 
-	private:
-		HANDLE mHandle;
-		String mName;
-		Core * mCore;
-	};
+    private:
+        HANDLE mHandle;
+        String mName;
+        Core * mCore;
+    };
 }

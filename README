@@ -42,7 +42,7 @@ Voodoo in. Various adapters are available for a number of Direct3D 8 and 9 games
 adapters are in progress. 
 
 Adapters can be found included with Voodoo or on the Voodoo Shader Framework site at:
-	http://www.voodooshader.com
+    http://www.voodooshader.com
 
 Adapters may or may not use install wizards. Each adapter will have documentation on how to install
 and configure it. 
@@ -78,10 +78,10 @@ A bug tracker for all Voodoo elements, including shaders and adapters, will be d
 = 6. Contact & Legal
 
 To contact the developer of the Voodoo project, please post on the Voodoo forum at:
-	http://www.voodooshader.com
+    http://www.voodooshader.com
 or direct emails to:
-	peachykeen@voodooshader.com
-	
+    peachykeen@voodooshader.com
+    
 Questions, comments, suggestions, reports, bugs, and almost anything else are welcome. If you have
 any interest in testing or contributing to Voodoo, please get in touch as soon as possible.
 
@@ -107,10 +107,10 @@ This section has a few useful links for various Voodoo resources. Some of these 
 perfect uptime, if they are being moved or tweaked, but most should be relatively reliable.
 
 Main site & forums:
-	http://www.voodooshader.com
-	
+    http://www.voodooshader.com
+    
 API documentation:
-	http://docs.voodooshader.com/core (replace the /core with a given module to find docs for that)
-	
+    http://docs.voodooshader.com/core (replace the /core with a given module to find docs for that)
+    
 Bug tracker:
-	http://tracker.voodooshader.com (may be tied into the forum at some point)
+    http://tracker.voodooshader.com (may be tied into the forum at some point)

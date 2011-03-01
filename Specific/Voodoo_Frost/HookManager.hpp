@@ -25,22 +25,22 @@ typedef std::map<std::string, TRACED_HOOK_HANDLE> HookMap;
 
 namespace VoodooShader
 {
-	namespace Frost
-	{
-		class HookManager
-		{
-		public:
-			HookManager();
-			~HookManager();
+    namespace Frost
+    {
+        class HookManager
+        {
+        public:
+            HookManager();
+            ~HookManager();
 
-			bool InstallHook(std::string name, void * src, void * dest);
-			bool UninstallHook(std::string name);
-			void UninstallAllHooks();
+            bool InstallHook(std::string name, void * src, void * dest);
+            bool UninstallHook(std::string name);
+            void UninstallAllHooks();
 
-		private:
-			HookMap mHooks;
-			ULONG * mThreadIDs;
-			ULONG mThreadCount;
-		};
-	}
+        private:
+            HookMap mHooks;
+            ULONG * mThreadIDs;
+            ULONG mThreadCount;
+        };
+    }
 }

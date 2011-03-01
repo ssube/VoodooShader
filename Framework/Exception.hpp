@@ -26,45 +26,45 @@
 
 namespace VoodooShader
 {
-	/**
-	 * Generic exception class for Voodoo applications. Combines a generic
-	 * standard exception with extended error location data.
-	 *
-	 * @note If possible, thrown Exceptions will automatically log as much data
-	 *		as they contain in a formatted way. You can retrieve this string
-	 *		with the Exception::Message() method.
-	 */
-	class VOODOO_API Exception
-		: public std::exception
-	{
-	public:
-		Exception
+    /**
+     * Generic exception class for Voodoo applications. Combines a generic
+     * standard exception with extended error location data.
+     *
+     * @note If possible, thrown Exceptions will automatically log as much data
+     *        as they contain in a formatted way. You can retrieve this string
+     *        with the Exception::Message() method.
+     */
+    class VOODOO_API Exception
+        : public std::exception
+    {
+    public:
+        Exception
         (
             __in __notnull const char * message, 
             __in __notnull Core * core, 
             __in __notnull char * file, 
-			__in __notnull char * function, 
+            __in __notnull char * function, 
             __in int line
         );
 
-		Exception
+        Exception
         (
             __in String message, 
             __in __notnull Core * core, 
             __in __notnull char * file, 
-			__in __notnull char * function,
+            __in __notnull char * function,
             __in int line
         );
 
-		String Message();
+        String Message();
 
-	private:
-		Core * mCore;
-		String mMessage;
-		char * mFile;
-		char * mFunction;
-		int mLine;
-	};
+    private:
+        Core * mCore;
+        String mMessage;
+        char * mFile;
+        char * mFunction;
+        int mLine;
+    };
 }
 
 #endif

@@ -26,150 +26,150 @@
 
 namespace VoodooShader
 {
-	/**
-	 * Simple reference-counter pointer class.
-	 *
-	 * @note This class is not thread-safe at this point.
-	 */
-	template<typename T>
-	class Reference
-	{
-	public:
-		Reference()
-			: mObject(NULL)
-		{
-			mCount = new int(1);
-		}
+    /**
+     * Simple reference-counter pointer class.
+     *
+     * @note This class is not thread-safe at this point.
+     */
+    template<typename T>
+    class Reference
+    {
+    public:
+        Reference()
+            : mObject(NULL)
+        {
+            mCount = new int(1);
+        }
 
-		Reference
+        Reference
         (
             __in __readonly const T & object
         )
-		{
-			mObject = new T(object);
-			mCount = new int(1);
-		}
+        {
+            mObject = new T(object);
+            mCount = new int(1);
+        }
 
-		Reference
+        Reference
         (
             __in __notnull __readonly T * object
         )
-			: mObject(object)
-		{
-			mCount = new int(1);
-		}
+            : mObject(object)
+        {
+            mCount = new int(1);
+        }
 
-		Reference
+        Reference
         (
             __in __notnull __readonly void * object
         )
-			: mObject(reinterpret_cast<T*>(object))
-		{
-			mCount = new int(1);
-		}
+            : mObject(reinterpret_cast<T*>(object))
+        {
+            mCount = new int(1);
+        }
 
-		Reference
+        Reference
         (
             __in __readonly const Reference<T> & other
         )
-			: mObject(other.mObject), mCount(other.mCount)
-		{
-			++(*mCount);
-		}
+            : mObject(other.mObject), mCount(other.mCount)
+        {
+            ++(*mCount);
+        }
 
-		~Reference()
-		{
-			this->release();
-		}
+        ~Reference()
+        {
+            this->release();
+        }
 
-		Reference<T> & operator= 
+        Reference<T> & operator= 
         (
             __in __readonly const Reference<T> & other
         )
-		{
-			if ( this != &other )
-			{
-				release();
-				mObject = other.mObject;
-				mCount = other.mCount;
-				++(*mCount);
-			}
-			return *this;
-		}
+        {
+            if ( this != &other )
+            {
+                release();
+                mObject = other.mObject;
+                mCount = other.mCount;
+                ++(*mCount);
+            }
+            return *this;
+        }
 
-		Reference<T> & operator= 
+        Reference<T> & operator= 
         (
             __in __notnull __readonly T * object
         )
-		{
-			release();
-			mObject = object;
-			mCount = new int(1);
+        {
+            release();
+            mObject = object;
+            mCount = new int(1);
 
-			return *this;
-		}
+            return *this;
+        }
 
-		T ** operator&()
-		{
-			return &mObject;
-		}
+        T ** operator&()
+        {
+            return &mObject;
+        }
 
-		T & operator*()
-		{
-			return (*mObject);
-		}
+        T & operator*()
+        {
+            return (*mObject);
+        }
 
-		__checkReturn 
+        __checkReturn 
         T * operator->()
-		{
-			return mObject;
-		}
+        {
+            return mObject;
+        }
 
-		__checkReturn 
+        __checkReturn 
         T * get()
-		{
-			return mObject;
-		}
+        {
+            return mObject;
+        }
 
-		int count()
-		{
-			return (*mCount);
-		}
+        int count()
+        {
+            return (*mCount);
+        }
 
-		template<typename U, typename V>
-		friend bool operator<(const Reference<U> & me, const Reference<V> & other);
+        template<typename U, typename V>
+        friend bool operator<(const Reference<U> & me, const Reference<V> & other);
 
-	private:
-		T * mObject;
-		int * mCount;
+    private:
+        T * mObject;
+        int * mCount;
 
-		void release()
-		{
-			if ( mObject )
-			{
-				--(*mCount);
+        void release()
+        {
+            if ( mObject )
+            {
+                --(*mCount);
 
-				if ( (*mCount) <= 0 )
-				{
-					// If the count has reached zero, destroy the counter and object.
-					delete mCount;
-					mCount = NULL;
-					delete mObject;
-					mObject = NULL;
-				}
-			}
-		}
-	};
+                if ( (*mCount) <= 0 )
+                {
+                    // If the count has reached zero, destroy the counter and object.
+                    delete mCount;
+                    mCount = NULL;
+                    delete mObject;
+                    mObject = NULL;
+                }
+            }
+        }
+    };
 
-	template<typename U, typename V>
-	bool operator<
+    template<typename U, typename V>
+    bool operator<
     (
         __in __readonly const Reference<U> & me, 
         __in __readonly const Reference<V> & other
     )
-	{
-		return ( me.mObject < other.mObject );
-	}
+    {
+        return ( me.mObject < other.mObject );
+    }
 }
 
 #endif /* VOODOO_REFERENCE_HPP */

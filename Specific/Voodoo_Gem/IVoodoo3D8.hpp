@@ -31,421 +31,421 @@
  * over what is returned to the engine.   
  * 
  * @note The various IVoodoo3D8 interfaces provide an application-opaque wrapper that actually
- * 		 implements a Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the
- * 		 IVoodoo3D9 interface set should be used.         
+ *          implements a Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the
+ *          IVoodoo3D9 interface set should be used.         
  */
 class IVoodoo3D8 
-	: public IDirect3D8
+    : public IDirect3D8
 {
-	/**
-	 * A pointer to the true underlying IDirect3D9 object wrapped by this IVoodoo3D8 interface.            
-	 */
-	IDirect3D9 * mRealObject;
+    /**
+     * A pointer to the true underlying IDirect3D9 object wrapped by this IVoodoo3D8 interface.            
+     */
+    IDirect3D9 * mRealObject;
 
 public:
-	/**
-	 * The default, public constructor for IVoodoo3D objects.            
-	 */
-	IVoodoo3D8(IDirect3D9 * realObject)
-		: mRealObject(realObject)
-	{
+    /**
+     * The default, public constructor for IVoodoo3D objects.            
+     */
+    IVoodoo3D8(IDirect3D9 * realObject)
+        : mRealObject(realObject)
+    {
 
-	}
+    }
 
-	// IUnknown methods
-	STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj)
-	{
-		return mRealObject->QueryInterface(riid, ppvObj);
-	}
+    // IUnknown methods
+    STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj)
+    {
+        return mRealObject->QueryInterface(riid, ppvObj);
+    }
 
-	STDMETHOD_(ULONG, AddRef)()
-	{
-		return mRealObject->AddRef();
-	}
+    STDMETHOD_(ULONG, AddRef)()
+    {
+        return mRealObject->AddRef();
+    }
 
-	STDMETHOD_(ULONG, Release)()
-	{
-		ULONG refCount = mRealObject->Release();
+    STDMETHOD_(ULONG, Release)()
+    {
+        ULONG refCount = mRealObject->Release();
 
-		if ( refCount == 0 )
-		{
-			delete this;
-			return 0;
-		} else {
-			return refCount;
-		}
-	}
+        if ( refCount == 0 )
+        {
+            delete this;
+            return 0;
+        } else {
+            return refCount;
+        }
+    }
 
-	// IDirect3D8 methods
+    // IDirect3D8 methods
 
-	/**
-	 * Determines whether or not a depth-stencil format is compatible with a render target format in 
-	 * a particular display mode.
-	 *
-	 * @param Adapter Ordinal number denoting the display adapter to query. D3DADAPTER_DEFAULT is 
-	 * 				  always the primary display adapter. 
-	 * @param DeviceType Member of the D3DDEVTYPE enumerated type, identifying the device type. 
-	 * @param AdapterFormat Member of the D3DFORMAT enumerated type, identifying the format of the 
-	 * 						display mode into which the adapter will be placed. 
-	 * @param RenderTargetFormat Member of the D3DFORMAT enumerated type, identifying the format of 
-	 * 							 the render target surface to be tested.
-	 * @param DepthStencilFormat Member of the D3DFORMAT enumerated type, identifying the format of 
-	 * 							 the depth-stencil surface to be tested. 
-	 * @return D3D_OK if the format combination is valid, other values if invalid.
-	 * 		    
-	 * @note Will log in debug builds.
-	 */
-	STDMETHOD(CheckDepthStencilMatch)
-	(
-		UINT Adapter,
-		D3DDEVTYPE DeviceType,
-		D3DFORMAT AdapterFormat,
-		D3DFORMAT RenderTargetFormat,
-		D3DFORMAT DepthStencilFormat
-	)
-	{
-		HRESULT hr = mRealObject->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
+    /**
+     * Determines whether or not a depth-stencil format is compatible with a render target format in 
+     * a particular display mode.
+     *
+     * @param Adapter Ordinal number denoting the display adapter to query. D3DADAPTER_DEFAULT is 
+     *                   always the primary display adapter. 
+     * @param DeviceType Member of the D3DDEVTYPE enumerated type, identifying the device type. 
+     * @param AdapterFormat Member of the D3DFORMAT enumerated type, identifying the format of the 
+     *                         display mode into which the adapter will be placed. 
+     * @param RenderTargetFormat Member of the D3DFORMAT enumerated type, identifying the format of 
+     *                              the render target surface to be tested.
+     * @param DepthStencilFormat Member of the D3DFORMAT enumerated type, identifying the format of 
+     *                              the depth-stencil surface to be tested. 
+     * @return D3D_OK if the format combination is valid, other values if invalid.
+     *             
+     * @note Will log in debug builds.
+     */
+    STDMETHOD(CheckDepthStencilMatch)
+    (
+        UINT Adapter,
+        D3DDEVTYPE DeviceType,
+        D3DFORMAT AdapterFormat,
+        D3DFORMAT RenderTargetFormat,
+        D3DFORMAT DepthStencilFormat
+    )
+    {
+        HRESULT hr = mRealObject->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d\n",
-			Adapter, DeviceType, AdapterFormat, RenderTargetFormat, 
-			DepthStencilFormat, hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d\n",
+            Adapter, DeviceType, AdapterFormat, RenderTargetFormat, 
+            DepthStencilFormat, hr);
 #endif
 
-		return hr;
-	}
+        return hr;
+    }
 
-	STDMETHOD(CheckDeviceFormat)
-	(
-		UINT Adapter,
-		D3DDEVTYPE DeviceType,
-		D3DFORMAT AdapterFormat,
-		DWORD Usage,
-		D3DRESOURCETYPE RType,
-		D3DFORMAT CheckFormat
-	)
-	{
-		HRESULT hr = mRealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
+    STDMETHOD(CheckDeviceFormat)
+    (
+        UINT Adapter,
+        D3DDEVTYPE DeviceType,
+        D3DFORMAT AdapterFormat,
+        DWORD Usage,
+        D3DRESOURCETYPE RType,
+        D3DFORMAT CheckFormat
+    )
+    {
+        HRESULT hr = mRealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d\n",
-			Adapter, DeviceType, AdapterFormat, Usage, RType, 
-			CheckFormat, hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d\n",
+            Adapter, DeviceType, AdapterFormat, Usage, RType, 
+            CheckFormat, hr);
 #endif
 
-		return hr;
-	}
+        return hr;
+    }
 
-	/**
-	 * @note Direct3D8 doesn't seem to support the concept of multisampling quality levels, or won't
-	 * 		 recognize them in this function. They are not passed back because of this.            
-	 */
-	STDMETHOD(CheckDeviceMultiSampleType)
-	(
-		UINT Adapter,
-		D3DDEVTYPE DeviceType,
-		D3DFORMAT SurfaceFormat,
-		BOOL Windowed,
-		D3DMULTISAMPLE_TYPE MultiSampleType
-	)
-	{
-		HRESULT hr = mRealObject->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
+    /**
+     * @note Direct3D8 doesn't seem to support the concept of multisampling quality levels, or won't
+     *          recognize them in this function. They are not passed back because of this.            
+     */
+    STDMETHOD(CheckDeviceMultiSampleType)
+    (
+        UINT Adapter,
+        D3DDEVTYPE DeviceType,
+        D3DFORMAT SurfaceFormat,
+        BOOL Windowed,
+        D3DMULTISAMPLE_TYPE MultiSampleType
+    )
+    {
+        HRESULT hr = mRealObject->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d\n",
-			Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, 
-			hr);
-#endif	
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d\n",
+            Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, 
+            hr);
+#endif    
 
-		return hr;
-	}
+        return hr;
+    }
 
-	STDMETHOD(CheckDeviceType)
-	(
-		UINT Adapter,
-		D3DDEVTYPE CheckType,
-		D3DFORMAT DisplayFormat,
-		D3DFORMAT BackBufferFormat,
-		BOOL Windowed
-	)
-	{
-		HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
+    STDMETHOD(CheckDeviceType)
+    (
+        UINT Adapter,
+        D3DDEVTYPE CheckType,
+        D3DFORMAT DisplayFormat,
+        D3DFORMAT BackBufferFormat,
+        BOOL Windowed
+    )
+    {
+        HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
 #ifdef _DEBUG 
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceType(%u, %u, %u, %u, %u) == %d\n",
-			Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed, 
-			hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceType(%u, %u, %u, %u, %u) == %d\n",
+            Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed, 
+            hr);
 #endif
 
-		return hr;
-	}
+        return hr;
+    }
 
-	STDMETHOD(CreateDevice)
-	(
-		UINT Adapter,
-		D3DDEVTYPE DeviceType,
-		HWND hFocusWindow,
-		DWORD BehaviorFlags,
-		D3DPRESENT_PARAMETERS8 * pPresentationParameters,
-		IDirect3DDevice8 ** ppReturnedDeviceInterface
-	)
-	{
-		D3DPRESENT_PARAMETERS mpPresentationParameters;
-		ZeroMemory(&mpPresentationParameters, sizeof(D3DPRESENT_PARAMETERS));
+    STDMETHOD(CreateDevice)
+    (
+        UINT Adapter,
+        D3DDEVTYPE DeviceType,
+        HWND hFocusWindow,
+        DWORD BehaviorFlags,
+        D3DPRESENT_PARAMETERS8 * pPresentationParameters,
+        IDirect3DDevice8 ** ppReturnedDeviceInterface
+    )
+    {
+        D3DPRESENT_PARAMETERS mpPresentationParameters;
+        ZeroMemory(&mpPresentationParameters, sizeof(D3DPRESENT_PARAMETERS));
 
-		mpPresentationParameters.Flags = pPresentationParameters->Flags;
+        mpPresentationParameters.Flags = pPresentationParameters->Flags;
 
-		//! @todo Included because it was in MGE, test if this is necessary.
-		if( mpPresentationParameters.Flags & D3DPRESENTFLAG_LOCKABLE_BACKBUFFER )
-		{
-			mpPresentationParameters.Flags ^= D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
-		}
+        //! @todo Included because it was in MGE, test if this is necessary.
+        if( mpPresentationParameters.Flags & D3DPRESENTFLAG_LOCKABLE_BACKBUFFER )
+        {
+            mpPresentationParameters.Flags ^= D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
+        }
 
-		mpPresentationParameters.Windowed = pPresentationParameters->Windowed;
-		mpPresentationParameters.BackBufferCount = pPresentationParameters->BackBufferCount;
-		mpPresentationParameters.BackBufferFormat = pPresentationParameters->BackBufferFormat;
-		mpPresentationParameters.BackBufferHeight = pPresentationParameters->BackBufferHeight;
-		mpPresentationParameters.BackBufferWidth = pPresentationParameters->BackBufferWidth;
-		mpPresentationParameters.hDeviceWindow = pPresentationParameters->hDeviceWindow;
-		mpPresentationParameters.EnableAutoDepthStencil = pPresentationParameters->EnableAutoDepthStencil;
-		mpPresentationParameters.SwapEffect = pPresentationParameters->SwapEffect;
-		mpPresentationParameters.MultiSampleQuality = 0;
-		mpPresentationParameters.MultiSampleType = pPresentationParameters->MultiSampleType;
-		mpPresentationParameters.AutoDepthStencilFormat = D3DFMT_D24S8;
-		mpPresentationParameters.FullScreen_RefreshRateInHz = 0;
-		mpPresentationParameters.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+        mpPresentationParameters.Windowed = pPresentationParameters->Windowed;
+        mpPresentationParameters.BackBufferCount = pPresentationParameters->BackBufferCount;
+        mpPresentationParameters.BackBufferFormat = pPresentationParameters->BackBufferFormat;
+        mpPresentationParameters.BackBufferHeight = pPresentationParameters->BackBufferHeight;
+        mpPresentationParameters.BackBufferWidth = pPresentationParameters->BackBufferWidth;
+        mpPresentationParameters.hDeviceWindow = pPresentationParameters->hDeviceWindow;
+        mpPresentationParameters.EnableAutoDepthStencil = pPresentationParameters->EnableAutoDepthStencil;
+        mpPresentationParameters.SwapEffect = pPresentationParameters->SwapEffect;
+        mpPresentationParameters.MultiSampleQuality = 0;
+        mpPresentationParameters.MultiSampleType = pPresentationParameters->MultiSampleType;
+        mpPresentationParameters.AutoDepthStencilFormat = D3DFMT_D24S8;
+        mpPresentationParameters.FullScreen_RefreshRateInHz = 0;
+        mpPresentationParameters.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 #ifdef _DEBUG
-		const char * textureType = 
-			VoodooShader::Converter::ToString(
-			VoodooShader::Gem::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
-			);
+        const char * textureType = 
+            VoodooShader::Converter::ToString(
+            VoodooShader::Gem::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
+            );
 
-		VoodooCore->Log("Voodoo Gem: Backbuffer parameters for new device: %u by %u (%u buffers), %s.\n",
-			mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight, 
-			mpPresentationParameters.BackBufferCount, textureType);
+        VoodooCore->Log("Voodoo Gem: Backbuffer parameters for new device: %u by %u (%u buffers), %s.\n",
+            mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight, 
+            mpPresentationParameters.BackBufferCount, textureType);
 #endif
 
-		IDirect3DDevice9 * mRealDevice;
-		HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &mRealDevice);
+        IDirect3DDevice9 * mRealDevice;
+        HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &mRealDevice);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CreateDevice(%d, %d, %08X, %d, %08X, %08X) == %d\n",
-			Adapter, DeviceType, hFocusWindow, BehaviorFlags, 
-			&mpPresentationParameters, mRealDevice, hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CreateDevice(%d, %d, %08X, %d, %08X, %08X) == %d\n",
+            Adapter, DeviceType, hFocusWindow, BehaviorFlags, 
+            &mpPresentationParameters, mRealDevice, hr);
 #endif
 
-		if ( !SUCCEEDED(hr) )
-		{
-			VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CreateDevice failed with error %d on adapter %d.\n",
-				hr, Adapter);
-			return hr;
-		} else {
-			// Succeeded, create a fake device and go from there
-			IVoodoo3DDevice8 * mFakeDevice = new IVoodoo3DDevice8(mRealDevice, mpPresentationParameters);
-			VoodooDevice = mFakeDevice;
-			gParams = mpPresentationParameters;
+        if ( !SUCCEEDED(hr) )
+        {
+            VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CreateDevice failed with error %d on adapter %d.\n",
+                hr, Adapter);
+            return hr;
+        } else {
+            // Succeeded, create a fake device and go from there
+            IVoodoo3DDevice8 * mFakeDevice = new IVoodoo3DDevice8(mRealDevice, mpPresentationParameters);
+            VoodooDevice = mFakeDevice;
+            gParams = mpPresentationParameters;
 
-			VoodooGem = (VoodooShader::Adapter*)new VoodooShader::Gem::Adapter(VoodooCore, mRealDevice);
+            VoodooGem = (VoodooShader::Adapter*)new VoodooShader::Gem::Adapter(VoodooCore, mRealDevice);
 
-			(*ppReturnedDeviceInterface) = (IDirect3DDevice8*)mFakeDevice;
+            (*ppReturnedDeviceInterface) = (IDirect3DDevice8*)mFakeDevice;
 
-			return hr;
-		}
-	}
+            return hr;
+        }
+    }
 
-	STDMETHOD(EnumAdapterModes)
-	(
-		UINT Adapter,
-		UINT Mode,
-		D3DDISPLAYMODE * pMode
-	)
-	{
-		HRESULT hr = mRealObject->EnumAdapterModes(Adapter, D3DFMT_X8R8G8B8, Mode, pMode);
+    STDMETHOD(EnumAdapterModes)
+    (
+        UINT Adapter,
+        UINT Mode,
+        D3DDISPLAYMODE * pMode
+    )
+    {
+        HRESULT hr = mRealObject->EnumAdapterModes(Adapter, D3DFMT_X8R8G8B8, Mode, pMode);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::EnumAdapterModes(%d, %d, %d) == %d\n",
-			Adapter, Mode, pMode, hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::EnumAdapterModes(%d, %d, %d) == %d\n",
+            Adapter, Mode, pMode, hr);
 #endif
 
-		return hr;
-	}
+        return hr;
+    }
 
-	STDMETHOD_(UINT, GetAdapterCount)()
-	{
-		UINT r = mRealObject->GetAdapterCount();
+    STDMETHOD_(UINT, GetAdapterCount)()
+    {
+        UINT r = mRealObject->GetAdapterCount();
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterCount() == %d\n",
-			r);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterCount() == %d\n",
+            r);
 #endif
 
-		return r;
-	}
+        return r;
+    }
 
-	STDMETHOD(GetAdapterDisplayMode)
-	(
-		UINT Adapter,
-		D3DDISPLAYMODE * pMode
-	)
-	{
-		HRESULT hr = mRealObject->GetAdapterDisplayMode(Adapter, pMode);
+    STDMETHOD(GetAdapterDisplayMode)
+    (
+        UINT Adapter,
+        D3DDISPLAYMODE * pMode
+    )
+    {
+        HRESULT hr = mRealObject->GetAdapterDisplayMode(Adapter, pMode);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterDisplayMode(%d, %d) == %d\n",
-			Adapter, pMode, hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterDisplayMode(%d, %d) == %d\n",
+            Adapter, pMode, hr);
 #endif
 
-		pMode->Format = D3DFMT_X8R8G8B8;
+        pMode->Format = D3DFMT_X8R8G8B8;
 
-		return hr;
-	}
+        return hr;
+    }
 
-	/**
-	 * @note This function forcibly ignores WHQL levels            
-	 */
-	STDMETHOD(GetAdapterIdentifier)
-	(
-		UINT Adapter,
-		DWORD Flags,
-		D3DADAPTER_IDENTIFIER8 * pIdentifier
-	)
-	{
-		D3DADAPTER_IDENTIFIER9 realIdentifier;
+    /**
+     * @note This function forcibly ignores WHQL levels            
+     */
+    STDMETHOD(GetAdapterIdentifier)
+    (
+        UINT Adapter,
+        DWORD Flags,
+        D3DADAPTER_IDENTIFIER8 * pIdentifier
+    )
+    {
+        D3DADAPTER_IDENTIFIER9 realIdentifier;
 
-		HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
+        HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n",
-			Adapter, Flags, pIdentifier, hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n",
+            Adapter, Flags, pIdentifier, hr);
 #endif
 
-		if ( SUCCEEDED(hr) )
-		{
-			// Strings, so use copymemory instead of assignment
-			::CopyMemory (pIdentifier, &realIdentifier, 1024);
-			pIdentifier->DeviceId			= realIdentifier.DeviceId;
-			pIdentifier->DeviceIdentifier	= realIdentifier.DeviceIdentifier;
-			pIdentifier->DriverVersion		= realIdentifier.DriverVersion;
-			pIdentifier->Revision			= realIdentifier.Revision;
-			pIdentifier->SubSysId			= realIdentifier.SubSysId;
-			pIdentifier->VendorId			= realIdentifier.VendorId;
-			pIdentifier->WHQLLevel			= realIdentifier.WHQLLevel;
-		}
+        if ( SUCCEEDED(hr) )
+        {
+            // Strings, so use copymemory instead of assignment
+            ::CopyMemory (pIdentifier, &realIdentifier, 1024);
+            pIdentifier->DeviceId            = realIdentifier.DeviceId;
+            pIdentifier->DeviceIdentifier    = realIdentifier.DeviceIdentifier;
+            pIdentifier->DriverVersion        = realIdentifier.DriverVersion;
+            pIdentifier->Revision            = realIdentifier.Revision;
+            pIdentifier->SubSysId            = realIdentifier.SubSysId;
+            pIdentifier->VendorId            = realIdentifier.VendorId;
+            pIdentifier->WHQLLevel            = realIdentifier.WHQLLevel;
+        }
 
-		return hr;
-	}
+        return hr;
+    }
 
-	STDMETHOD_(UINT, GetAdapterModeCount)
-	(
-		UINT Adapter
-	)
-	{
-		UINT r = mRealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
+    STDMETHOD_(UINT, GetAdapterModeCount)
+    (
+        UINT Adapter
+    )
+    {
+        UINT r = mRealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterModeCount(%d) == %d\n",
-			Adapter, r);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterModeCount(%d) == %d\n",
+            Adapter, r);
 #endif
 
-		return r;
-	}
+        return r;
+    }
 
-	STDMETHOD_(HMONITOR, GetAdapterMonitor)
-	(
-		UINT Adapter
-	)
-	{
-		HMONITOR hm = mRealObject->GetAdapterMonitor(Adapter);
+    STDMETHOD_(HMONITOR, GetAdapterMonitor)
+    (
+        UINT Adapter
+    )
+    {
+        HMONITOR hm = mRealObject->GetAdapterMonitor(Adapter);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterMonitor(%d) == %d\n",
-			Adapter, hm);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterMonitor(%d) == %d\n",
+            Adapter, hm);
 #endif
 
-		return hm;
-	}
+        return hm;
+    }
 
-	/**
-	 * @note Test function: MGE uses a caching of actual D3D8 caps, let's see if we can just grab
-	 * 		 the appropriate entries from a D3D9 caps struct. They share an identical format until
-	 * 		 the end of the D3D8 caps section, so...            
-	 * /
-	STDMETHOD(GetDeviceCaps)
-	(
-		UINT Adapter,
-		D3DDEVTYPE DeviceType,
-		D3DCAPS8 * pCaps
-	)
-	{
-		D3DCAPS9 realCaps;
-		HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
+    /**
+     * @note Test function: MGE uses a caching of actual D3D8 caps, let's see if we can just grab
+     *          the appropriate entries from a D3D9 caps struct. They share an identical format until
+     *          the end of the D3D8 caps section, so...            
+     * /
+    STDMETHOD(GetDeviceCaps)
+    (
+        UINT Adapter,
+        D3DDEVTYPE DeviceType,
+        D3DCAPS8 * pCaps
+    )
+    {
+        D3DCAPS9 realCaps;
+        HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
-			Adapter, DeviceType, pCaps, hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
+            Adapter, DeviceType, pCaps, hr);
 #endif
 
-		if ( SUCCEEDED(hr) )
-		{
-			::CopyMemory(pCaps, &realCaps, sizeof(D3DCAPS8));
-		}
+        if ( SUCCEEDED(hr) )
+        {
+            ::CopyMemory(pCaps, &realCaps, sizeof(D3DCAPS8));
+        }
 
-		return hr;
-	}/ */
+        return hr;
+    }/ */
 
-	STDMETHOD(GetDeviceCaps)
-	(
-		UINT Adapter,
-		D3DDEVTYPE DeviceType,
-		D3DCAPS8 * pCaps
-	)
-	//HRESULT _stdcall GetDeviceCaps (UINT a, D3DDEVTYPE b, D3DCAPS8 *c) 
-	{
-		*pCaps = d3d8Caps;
+    STDMETHOD(GetDeviceCaps)
+    (
+        UINT Adapter,
+        D3DDEVTYPE DeviceType,
+        D3DCAPS8 * pCaps
+    )
+    //HRESULT _stdcall GetDeviceCaps (UINT a, D3DDEVTYPE b, D3DCAPS8 *c) 
+    {
+        *pCaps = d3d8Caps;
 
-		D3DCAPS9 realCaps;
-		HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
+        D3DCAPS9 realCaps;
+        HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
-			Adapter, DeviceType, pCaps, hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
+            Adapter, DeviceType, pCaps, hr);
 #endif
 
-		/*int same = memcmp(pCaps, &realCaps, sizeof(D3DCAPS8));
+        /*int same = memcmp(pCaps, &realCaps, sizeof(D3DCAPS8));
 
-		if ( same == 0 )
-		{
-			VoodooCore->Log("Voodoo Gem: D3D8 and 9 caps are identical.\n"); 
-		} else {
-			VoodooCore->Log("Voodoo Gem: Caps differ.\n");
-		}*/
+        if ( same == 0 )
+        {
+            VoodooCore->Log("Voodoo Gem: D3D8 and 9 caps are identical.\n"); 
+        } else {
+            VoodooCore->Log("Voodoo Gem: Caps differ.\n");
+        }*/
 
-		return D3D_OK;
-	}
-	
-	//*/
+        return D3D_OK;
+    }
+    
+    //*/
 
-	/**
-	 * This is a legacy function to register a software renderer into the DX8 system; however, the
-	 * DX8 docs state that it is unsupported. The DX9 docs revise that, reintroducing support for
-	 * it. Since the Voodoo IVoodoo3D8 layer targets DX9, the function is callable and will target the
-	 * appropriate DX9 function. It will log a warning message, due to technically being illegal.
-	 */
-	STDMETHOD(RegisterSoftwareDevice)
-	(
-		void * pInitializeFunction
-	)
-	{
-		HRESULT hr = mRealObject->RegisterSoftwareDevice(pInitializeFunction);
+    /**
+     * This is a legacy function to register a software renderer into the DX8 system; however, the
+     * DX8 docs state that it is unsupported. The DX9 docs revise that, reintroducing support for
+     * it. Since the Voodoo IVoodoo3D8 layer targets DX9, the function is callable and will target the
+     * appropriate DX9 function. It will log a warning message, due to technically being illegal.
+     */
+    STDMETHOD(RegisterSoftwareDevice)
+    (
+        void * pInitializeFunction
+    )
+    {
+        HRESULT hr = mRealObject->RegisterSoftwareDevice(pInitializeFunction);
 
 #ifdef _DEBUG
-		VoodooCore->Log("Voodoo Gem: IVoodoo3D8::RegisterSoftwareDevice(%d) == %d\n",
-			pInitializeFunction, hr);
+        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::RegisterSoftwareDevice(%d) == %d\n",
+            pInitializeFunction, hr);
 #else
-		VoodooCore->Log("Voodoo Gem: The application has registered a software device.\n");
+        VoodooCore->Log("Voodoo Gem: The application has registered a software device.\n");
 #endif
 
-		return hr;
-	}
+        return hr;
+    }
 };

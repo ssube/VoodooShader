@@ -77,7 +77,7 @@ BEGIN
 #ifdef _DEBUG
             VALUE "OriginalFilename", "Voodoo_Frost_d.dll"
 #else
-			VALUE "OriginalFilename", "Voodoo_Frost.dll"
+            VALUE "OriginalFilename", "Voodoo_Frost.dll"
 #endif
             VALUE "ProductName", VOODOO_META_STRING_NAME_FULL(CORE)
             VALUE "ProductVersion", VOODOO_META_STRING_VERSION_BASIC(CORE)

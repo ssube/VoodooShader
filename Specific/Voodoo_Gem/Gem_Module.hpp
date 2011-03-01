@@ -29,7 +29,7 @@
 #include "VoodooFramework.hpp"
 
 #ifdef _DEBUG
-#	define D3D_DEBUG_INFO
+#    define D3D_DEBUG_INFO
 #endif
 
 #include <d3d9.h>
@@ -39,9 +39,9 @@
 #include "Cg/cgD3D9.h"
 
 #ifndef VOODOO_IMPORT_GEM
-#	define VOODOO_API_GEM __declspec(dllexport)
+#    define VOODOO_API_GEM __declspec(dllexport)
 #else
-#	define VOODOO_API_GEM __declspec(dllimport)
+#    define VOODOO_API_GEM __declspec(dllimport)
 #endif
 
 #include "MGE/FauxD3D8Header.hpp"
@@ -57,9 +57,9 @@ class IVoodoo3DSurface8;
 */
 struct TexturePair
 {
-	VoodooShader::TextureRef Texture;
-	LPDIRECT3DTEXTURE9 RawTexture;
-	LPDIRECT3DSURFACE9 RawSurface;
+    VoodooShader::TextureRef Texture;
+    LPDIRECT3DTEXTURE9 RawTexture;
+    LPDIRECT3DSURFACE9 RawSurface;
 };
 
 extern D3DCAPS8 d3d8Caps;

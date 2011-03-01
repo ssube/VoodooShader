@@ -26,32 +26,32 @@
 
 namespace VoodooShader
 {
-	class VOODOO_API Texture
-	{
-	public:
-		Texture
+    class VOODOO_API Texture
+    {
+    public:
+        Texture
         (
             __in_opt String name = "", 
             __in_opt __maybenull void * texture = NULL
         );
 
-		//! @todo Change the Texture::GetTexture<T>() and Texture::GetTexture()
-		//!		functions to something better, I don't like this method.
-		template<typename T>
-		inline T * GetTexture()
-		{
-			return reinterpret_cast<T*>(GetTexture());
-		};
+        //! @todo Change the Texture::GetTexture<T>() and Texture::GetTexture()
+        //!        functions to something better, I don't like this method.
+        template<typename T>
+        inline T * GetTexture()
+        {
+            return reinterpret_cast<T*>(GetTexture());
+        };
 
         __checkReturn
-		void * GetTexture();
+        void * GetTexture();
 
-		String Name();
+        String Name();
 
-	private:
-		String mName;
-		void * mTextureObject;
-	};
+    private:
+        String mName;
+        void * mTextureObject;
+    };
 }
 
 

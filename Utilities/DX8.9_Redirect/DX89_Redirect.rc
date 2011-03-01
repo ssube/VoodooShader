@@ -74,7 +74,7 @@ BEGIN
             VALUE "FileVersion", VOODOO_META_STRING_VERSION_BASIC(DX89)
             VALUE "InternalName", VOODOO_META_STRING_NAME_BASIC(DX89)
             VALUE "LegalCopyright", VOODOO_GLOBAL_COPYRIGHT_BRIEF
-			VALUE "OriginalFilename", "d3d8.dll"
+            VALUE "OriginalFilename", "d3d8.dll"
             VALUE "ProductName", VOODOO_META_STRING_NAME_FULL(CORE)
             VALUE "ProductVersion", VOODOO_META_STRING_VERSION_BASIC(CORE)
         END

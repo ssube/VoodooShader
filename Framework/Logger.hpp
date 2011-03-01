@@ -25,122 +25,138 @@
 
 namespace VoodooShader
 {
-	/**
-	 * Log management class, capable of opening, closing, writing to and 
-	 * dumping log files. Throws on problems opening the log
-	 * and has timestamp and formatting capabilities.
-	 */
-	class VOODOO_API Logger
-	{
-	public:
-		/**
-		 * Default constructor, opens a log file with the given name and mode.
-		 *
-		 * @param filename Name of the log file to open.
-		 * @param append If log file already exists, append to contents (the 
-		 *		default value is false, which will truncate an existing file).
-		 * @throws Exception if the log file cannot be opened.
-		 */
-		Logger
+    /**
+     * Log message levels.
+     */
+    enum LogLevel
+    {
+        LL_Unknown = 0,
+        // Working values
+        LL_Info,
+        LL_Warning,
+        LL_Error,
+        // Max value
+        LL_Max
+    };
+
+    /**
+     * Log management class, capable of opening, closing, writing to and 
+     * dumping log files. Throws on problems opening the log
+     * and has timestamp and formatting capabilities.
+     */
+    class VOODOO_API Logger
+    {
+    public:
+        /**
+         * Default constructor, opens a log file with the given name and mode.
+         *
+         * @param filename Name of the log file to open.
+         * @param append If log file already exists, append to contents (the 
+         *        default value is false, which will truncate an existing file).
+         * @throws Exception if the log file cannot be opened.
+         */
+        Logger
         (
             __in __notnull const char * filename, 
             __in_opt bool append = false
         );
 
-		/** 
-		 * Default destructor, flushes and closes the log file (if open).
-		 */
-		~Logger();
+        /** 
+         * Default destructor, flushes and closes the log file (if open).
+         */
+        ~Logger();
 
-		/**
-		 * Write a formatted timestamp to the log. The timestamp will have the 
-		 * form <code>HH.MM.SS :: </code>. Leading zeros are guaranteed to be
-		 * present, so the timestamp length remains constant.
-		 *
-		 * @note If the system time cannot be retrieved, an error stamp will be
-		 *		printed with an equal length.
-		 */
-		String Timestamp();
+        /**
+         * Write a formatted timestamp to the log. The timestamp will have the 
+         * form <code>HH.MM.SS :: </code>. Leading zeros are guaranteed to be
+         * present, so the timestamp length remains constant.
+         *
+         * @note If the system time cannot be retrieved, an error stamp will be
+         *        printed with an equal length.
+         */
+        String Timestamp();
 
-		/**
-		 * Log a message, may be formatted with printf syntax.
-		 *
-		 * @param msg The message string.
-		 * @param ... The parameters to insert
-		 *
-		 * @warning This function has a maximum (formatted) message length of
-		 *		4096 characters. This can be changed if it becomes an issue.
-		 */
-		void Log
+        /**
+         * Log a message, may be formatted with printf syntax.
+         *
+         * @param msg The message string.
+         * @param ... The parameters to insert
+         *
+         * @warning This function has a maximum (formatted) message length of
+         *        4096 characters. This can be changed if it becomes an issue.
+         */
+        void Log
         (
+            __in LogLevel level,
             __in __notnull const char * msg, 
             ...
         );
 
-		/**
-		 * Logs a msg and list of arguments.
-		 * 
-		 * @note This generally shouldn't be called directly, it is provided
-		 *		for wrappers (such as the Core, which hides the logger object).
-		 *
-		 * @param msg The message string
-		 * @param args The arguments to insert
-		 *
-		 * @warning This function has a maximum (formatted) message length of
-		 *		4096 characters. This can be changed if it becomes an issue.
-		 */
-		void LogList
+        /**
+         * Logs a msg and list of arguments.
+         * 
+         * @note This generally shouldn't be called directly, it is provided
+         *        for wrappers (such as the Core, which hides the logger object).
+         *
+         * @param msg The message string
+         * @param args The arguments to insert
+         *
+         * @warning This function has a maximum (formatted) message length of
+         *        4096 characters. This can be changed if it becomes an issue.
+         */
+        void LogList
         (
+            __in LogLevel level,
             __in __notnull const char * msg, 
             __in va_list args
         );
 
-		/**
-		 * Sets the internal buffer to a given size.
-		 *
-		 * @param bytes The size.
-		 * @note A size of 0 will force messages to be written directly to disk.
-		 *		This may have a notable performance hit, but makes debug 
-		 *		messages more likely to survive	crashes.
-		 */
-		void SetBufferSize
+        /**
+         * Sets the internal buffer to a given size.
+         *
+         * @param bytes The size.
+         * @note A size of 0 will force messages to be written directly to disk.
+         *        This may have a notable performance hit, but makes debug 
+         *        messages more likely to survive    crashes.
+         */
+        void SetBufferSize
         (
             __in unsigned int bytes
         );
 
-		/**
-		 * Immediately writes all pending data to disk.
-		 *
-		 * @note This is useful for catchable errors which may have fatal 
-		 *		consequences (Exception calls this in case the exception is 
-		 *		uncaught).
-		 * @warning This may not (probably will not) be any good in case of a 
-		 *		segfault or other crash. If you	need complete debug logging, 
-		 *		call Logger::SetBufferSize(unsigned int) with a buffer size	of 0
-		 *		and all logged messages <em>should</em> make it to disk, even 
-		 *		during fatal crashes.
-		 */
-		void Dump();
+        /**
+         * Immediately writes all pending data to disk.
+         *
+         * @note This is useful for catchable errors which may have fatal 
+         *        consequences (Exception calls this in case the exception is 
+         *        uncaught).
+         * @warning This may not (probably will not) be any good in case of a 
+         *        segfault or other crash. If you    need complete debug logging, 
+         *        call Logger::SetBufferSize(unsigned int) with a buffer size    of 0
+         *        and all logged messages <em>should</em> make it to disk, even 
+         *        during fatal crashes.
+         */
+        void Dump();
 
-		/**
-		 * Opens a file for use by this Logger.
-		 *
-		 * @param filename The name of the file to open (may contain an absolute
-		 *		or relative path).
-		 * @return Success of the open operation.
-		 */
-		bool Open
+        /**
+         * Opens a file for use by this Logger.
+         *
+         * @param filename The name of the file to open (may contain an absolute
+         *        or relative path).
+         * @return Success of the open operation.
+         */
+        bool Open
         (
             __in __notnull const char * filename
         );
 
-		/**
-		 * Closes the log file, if one is open.
-		 */
-		void Close();
+        /**
+         * Closes the log file, if one is open.
+         */
+        void Close();
 
-	private:
-		std::fstream mLogFile;
-		tm * mLocalTime;
-	};
+    private:
+        std::fstream mLogFile;
+        tm * mLocalTime;
+    };
 }

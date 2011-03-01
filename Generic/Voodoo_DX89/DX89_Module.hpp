@@ -34,9 +34,9 @@
 #pragma comment(lib, "cgD3D9.lib")
 
 #ifndef VOODOO_IMPORT_DX89
-#	define VOODOO_API_DX89 __declspec(dllexport)
+#    define VOODOO_API_DX89 __declspec(dllexport)
 #else
-#	define VOODOO_API_DX89 __declspec(dllimport)
+#    define VOODOO_API_DX89 __declspec(dllimport)
 #endif
 
 #include "MGE/FauxD3D8Header.hpp"

@@ -75,7 +75,7 @@ BEGIN
             VALUE "InternalName", VOODOO_META_STRING_NAME_BASIC(GEM)
             VALUE "LegalCopyright", VOODOO_GLOBAL_COPYRIGHT_BRIEF
 #ifdef _DEBUG
-			VALUE "OriginalFilename", "Voodoo_Gem_d.dll"
+            VALUE "OriginalFilename", "Voodoo_Gem_d.dll"
 #else
             VALUE "OriginalFilename", "Voodoo_Gem.dll"
 #endif

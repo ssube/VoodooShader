@@ -40,9 +40,9 @@ IDC_TESTBED MENU
 BEGIN
     POPUP "&File"
     BEGIN
-		MENUITEM "&New",				IDM_NEW
-		MENUITEM "&Open",				IDM_OPEN
-		MENUITEM "&Save",				IDM_SAVE
+        MENUITEM "&New",                IDM_NEW
+        MENUITEM "&Open",                IDM_OPEN
+        MENUITEM "&Save",                IDM_SAVE
         MENUITEM "E&xit",                IDM_EXIT
     END
     POPUP "&Help"
@@ -110,7 +110,7 @@ END
 
 2 TEXTINCLUDE
 BEGIN
-	"#ifndef APSTUDIO_INVOKED\r\n"
+    "#ifndef APSTUDIO_INVOKED\r\n"
     "#include ""targetver.h""\r\n"
     "#endif\r\n"
     "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"

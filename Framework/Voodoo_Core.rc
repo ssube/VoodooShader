@@ -75,7 +75,7 @@ BEGIN
             VALUE "InternalName", VOODOO_META_STRING_NAME_BASIC(CORE)
             VALUE "LegalCopyright", VOODOO_GLOBAL_COPYRIGHT_BRIEF
 #ifdef _DEBUG
-			VALUE "OriginalFilename", "Voodoo_Core_d.dll"
+            VALUE "OriginalFilename", "Voodoo_Core_d.dll"
 #else
             VALUE "OriginalFilename", "Voodoo_Core.dll"
 #endif

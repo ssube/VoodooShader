@@ -9,15 +9,15 @@
 #include "Cg/cgD3D9.h"
 
 //#ifdef _DEBUG
-//#	pragma comment(lib, "cgD3D9d.lib")
+//#    pragma comment(lib, "cgD3D9d.lib")
 //#else
-#	pragma comment(lib, "cgD3D9.lib")
+#    pragma comment(lib, "cgD3D9.lib")
 //#endif
 
 #ifndef VOODOO_IMPORT_DX9
-#	define VOODOO_API_DX9 __declspec(dllexport)
+#    define VOODOO_API_DX9 __declspec(dllexport)
 #else
-#	define VOODOO_API_DX9 __declspec(dllimport)
+#    define VOODOO_API_DX9 __declspec(dllimport)
 #endif
 
 #include "DX9_Adapter.hpp"

@@ -6,115 +6,169 @@ using namespace std;
 
 namespace VoodooShader
 {
-	Logger::Logger(const char * filename, bool append)
-	{
-		unsigned int flags = ios_base::out;
-		if ( append )
-		{
-			flags |= ios_base::app;
-		} else {
-			flags |= ios_base::trunc;
-		}
-		this->mLogFile.open(filename, flags);
+    Logger::Logger(const char * filename, bool append)
+    {
+        unsigned int flags = ios_base::out;
+        if ( append )
+        {
+            flags |= ios_base::app;
+        } else {
+            flags |= ios_base::trunc;
+        }
+        this->mLogFile.open(filename, flags);
 
-		if ( !this->mLogFile.is_open() )
-		{
-			Throw("Could not open log file!", NULL);
-		}
+        if ( !this->mLogFile.is_open() )
+        {
+            Throw("Could not open log file!", NULL);
+        }
 
-		this->mLocalTime = new tm();
+        this->mLocalTime = new tm();
 
-		this->Log("Logger created.\n");
-	}
+        this->mLogFile << "<Log " << this->Timestamp().c_str() << ">\n";
 
-	Logger::~Logger()
-	{
-		if ( this->mLogFile.is_open() )
-		{
-			this->mLogFile.close();
-		}
-		if ( this->mLocalTime )
-		{
-			delete this->mLocalTime;
-		}
-	}
+        this->Log("Logger created.\n");
+    }
 
-	String Logger::Timestamp()
-	{
-		time_t now = time(NULL);
+    Logger::~Logger()
+    {
+        if ( this->mLogFile.is_open() )
+        {
+            this->mLogFile << "</Log>\n";
+            this->mLogFile.close();
+        }
+        if ( this->mLocalTime )
+        {
+            delete this->mLocalTime;
+        }
+    }
 
-		if ( localtime_s(this->mLocalTime, &now) == ERROR_SUCCESS )
-		{
-			char stamp[16];
-			sprintf_s(stamp, 16, "%02d.%02d.%02d :: ", 
-				this->mLocalTime->tm_hour,
-				this->mLocalTime->tm_min,
-				this->mLocalTime->tm_sec);
-			return String(stamp);
-		} else {
-			return "Unknown  :: ";
-		}
-	}
+    String Logger::Timestamp()
+    {
+        time_t now = time(NULL);
 
-	void Logger::SetBufferSize(unsigned int bytes)
-	{
-		this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
-	}
+        if ( localtime_s(this->mLocalTime, &now) == ERROR_SUCCESS )
+        {
+            char stamp[32];
+            sprintf_s(stamp, 32, " timestamp=\"%02d.%02d.%02d\" ", 
+                this->mLocalTime->tm_hour,
+                this->mLocalTime->tm_min,
+                this->mLocalTime->tm_sec);
+            return String(stamp);
+        }
+    }
 
-	void Logger::Log(const char * msg, ...)
-	{
-		va_list args;
-		char buffer[4096];
+    void Logger::SetBufferSize(unsigned int bytes)
+    {
+        this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
+    }
 
-		va_start(args, msg);
-		_vsnprintf_s(buffer, 4095, 4095, msg, args);
-		buffer[4095] = 0;
-		va_end(args);
+    void Logger::Log(LogLevel level, const char * msg, ...)
+    {
+        va_list args;
+        char buffer[4096];
 
-		this->mLogFile << this->Timestamp() << buffer;
-	}
+        va_start(args, msg);
+        _vsnprintf_s(buffer, 4095, 4095, msg, args);
+        buffer[4095] = 0;
+        va_end(args);
 
-	void Logger::LogList(const char * msg, va_list args)
-	{
-		char buffer[4096];
+        switch ( level )
+        {
+        case LL_Info:
+            this->mLogFile << " <Info ";
+            break;
+        case LL_Warning:
+            this->mLogFile << " <Warning ";
+            break;
+        case LL_Error:
+            this->mLogFile << " <Error ";
+            break;
+        };
 
-		//va_start(args, msg);
-		_vsnprintf_s(buffer, 4095, 4095, msg, args);
-		buffer[4095] = 0;
-		//va_end(args);
+        this->mLogFile << this->Timestamp() << ">" << buffer;
 
-		this->mLogFile << this->Timestamp() << buffer;
-	}
+        switch ( level )
+        {
+        case LL_Info:
+            this->mLogFile << "</Info>\n";
+            break;
+        case LL_Warning:
+            this->mLogFile << "</Warning>\n";
+            break;
+        case LL_Error:
+            this->mLogFile << "</Error>\n";
+            break;
+        };
+    }
 
-	void Logger::Dump()
-	{
-		this->mLogFile.flush();
-	}
+    void Logger::LogList(LogLevel level, const char * msg, va_list args)
+    {
+        char buffer[4096];
 
-	bool Logger::Open(const char* filename)
-	{
-		if ( this->mLogFile.is_open() )
-		{
-			this->mLogFile.close();
-		}
+        _vsnprintf_s(buffer, 4095, 4095, msg, args);
+        buffer[4095] = 0;
 
-		this->mLogFile.open(filename, ios_base::out|ios_base::trunc);
+        switch ( level )
+        {
+        case LL_Info:
+            this->mLogFile << " <Info ";
+            break;
+        case LL_Warning:
+            this->mLogFile << " <Warning ";
+            break;
+        case LL_Error:
+            this->mLogFile << " <Error ";
+            break;
+        };
 
-		if ( this->mLogFile.is_open() )
-		{
-			this->Log("Logger: Log file opened by Logger::Open.\n");
-			return true;
-		} else {
-			return false;
-		}
-	}
+        this->mLogFile << this->Timestamp() << ">" << buffer;
 
-	void Logger::Close()
-	{
-		if ( this->mLogFile.is_open() )
-		{
-			this->Log("Logger: Log file closed by Logger::Close.\n");
-			this->mLogFile.close();
-		}
-	}
+        switch ( level )
+        {
+        case LL_Info:
+            this->mLogFile << "</Info>\n";
+            break;
+        case LL_Warning:
+            this->mLogFile << "</Warning>\n";
+            break;
+        case LL_Error:
+            this->mLogFile << "</Error>\n";
+            break;
+        };
+    }
+
+    void Logger::Dump()
+    {
+        this->mLogFile.flush();
+    }
+
+    bool Logger::Open(const char* filename)
+    {
+        if ( this->mLogFile.is_open() )
+        {
+            this->mLogFile << "</Log>\n";
+            this->mLogFile.close();
+        }
+
+        this->mLogFile.open(filename, ios_base::out|ios_base::trunc);
+
+        if ( this->mLogFile.is_open() )
+        {
+            this->mLogFile << "<Log " << this->Timestamp().c_str() << ">\n";
+
+            this->Log("Logger: Log file opened by Logger::Open.\n");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    void Logger::Close()
+    {
+        if ( this->mLogFile.is_open() )
+        {
+            this->Log("Logger: Log file closed by Logger::Close.\n");
+            this->mLogFile.close();
+        }
+    }
 }

@@ -3,191 +3,191 @@
 
 const GLubyte * GLAPIENTRY vglGetString(GLenum name)
 {
-	const GLubyte * result = glGetString(name);
+    const GLubyte * result = glGetString(name);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glGetString(%d) == %d\n",
-		name, result);
+    VoodooCore->Log("Voodoo Frost: glGetString(%d) == %d\n",
+        name, result);
 #endif
 
-	return result;
+    return result;
 }
 
 void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
 {
-	glViewport(x, y, width, height);
+    glViewport(x, y, width, height);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glViewport(%d, %d, %d, %d)\n",
-		x, y, width, height);
+    VoodooCore->Log("Voodoo Frost: glViewport(%d, %d, %d, %d)\n",
+        x, y, width, height);
 #endif
 
-	return;
+    return;
 }
 
 HGLRC vwglCreateContext(HDC hdc)
 {
-	HGLRC result = wglCreateContext(hdc);
+    HGLRC result = wglCreateContext(hdc);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: wglCreateContext(%d) == %d\n",
-		hdc, result);
+    VoodooCore->Log("Voodoo Frost: wglCreateContext(%d) == %d\n",
+        hdc, result);
 #endif
-	
-	return result;
+    
+    return result;
 }
 
 BOOL vwglDeleteContext(HGLRC hglrc)
 {
-	BOOL result = wglDeleteContext(hglrc);
+    BOOL result = wglDeleteContext(hglrc);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: wglDeleteContext(%d) == %d\n",
-		hglrc, result);
+    VoodooCore->Log("Voodoo Frost: wglDeleteContext(%d) == %d\n",
+        hglrc, result);
 #endif
 
-	return result;
+    return result;
 }
 
 PROC vwglGetProcAddress(LPCSTR name)
 {
-	PROC result = wglGetProcAddress(name);
+    PROC result = wglGetProcAddress(name);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: wglGetProcAddress(%s) == %d\n",
-		name, result);
+    VoodooCore->Log("Voodoo Frost: wglGetProcAddress(%s) == %d\n",
+        name, result);
 #endif
 
-	return result;
+    return result;
 }
 
 BOOL vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 {
-	BOOL result = wglMakeCurrent(hdc, hglrc);
+    BOOL result = wglMakeCurrent(hdc, hglrc);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: wglMakeCurrent(%d, %d) == %d\n",
-		hdc, hglrc, result);
+    VoodooCore->Log("Voodoo Frost: wglMakeCurrent(%d, %d) == %d\n",
+        hdc, hglrc, result);
 #endif
 
-	return result;
+    return result;
 }
 
 void GLAPIENTRY vglClear(GLbitfield mask)
 {
-	glClear(mask);
+    glClear(mask);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glClear(%d)\n",
-		mask);
+    VoodooCore->Log("Voodoo Frost: glClear(%d)\n",
+        mask);
 #endif
 
-	return;
+    return;
 }
 
 void GLAPIENTRY vglBegin(GLenum mode)
 {
-	glBegin(mode);
+    glBegin(mode);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glBegin(%d)\n",
-		mode);
+    VoodooCore->Log("Voodoo Frost: glBegin(%d)\n",
+        mode);
 #endif
 
-	return;
+    return;
 }
 
 void GLAPIENTRY vglEnd()
 {
-	glEnd();
+    glEnd();
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glEnd()\n");
+    VoodooCore->Log("Voodoo Frost: glEnd()\n");
 #endif
 
-	return;
+    return;
 }
 
 BOOL GLAPIENTRY vwglSwapLayerBuffers(HDC hdc, UINT uint)
 {
-	BOOL result = wglSwapLayerBuffers(hdc, uint);
+    BOOL result = wglSwapLayerBuffers(hdc, uint);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: wglSwapLayerBuffers(%d, %d) == %d\n",
-		hdc, uint);
+    VoodooCore->Log("Voodoo Frost: wglSwapLayerBuffers(%d, %d) == %d\n",
+        hdc, uint);
 #endif
 
-	return result;
+    return result;
 }
 
 void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 {
-	glBindTexture(target, texture);
+    glBindTexture(target, texture);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glBindTexture(%d, %d)\n",
-		target, texture);
+    VoodooCore->Log("Voodoo Frost: glBindTexture(%d, %d)\n",
+        target, texture);
 #endif
 
-	return;
+    return;
 }
 
 void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
 {
-	glDeleteTextures(n, textures);
+    glDeleteTextures(n, textures);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glDeleteTextures(%d, %d)\n",
-		n, textures);
+    VoodooCore->Log("Voodoo Frost: glDeleteTextures(%d, %d)\n",
+        n, textures);
 #endif
 
-	return;
+    return;
 }
 
 void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
 {
-	glDrawElements(mode, count, type, indices);
+    glDrawElements(mode, count, type, indices);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glDrawElements(%d, %d, %d, %d)\n",
-		mode, count, type, indices);
+    VoodooCore->Log("Voodoo Frost: glDrawElements(%d, %d, %d, %d)\n",
+        mode, count, type, indices);
 #endif
 
-	return;
+    return;
 }
 
 void GLAPIENTRY vglEnable(GLenum cap)
 {
-	glEnable(cap);
+    glEnable(cap);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glEnable(%d)\n",
-		cap);
+    VoodooCore->Log("Voodoo Frost: glEnable(%d)\n",
+        cap);
 #endif
-	
-	return;
+    
+    return;
 }
 
 void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
 {
-	glFogfv(pname, params);
+    glFogfv(pname, params);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glFogfv(%d, %d)\n",
-		pname, params);
+    VoodooCore->Log("Voodoo Frost: glFogfv(%d, %d)\n",
+        pname, params);
 #endif
 
-	return;
+    return;
 }
 
 void GLAPIENTRY vglFogf(GLenum pname, GLfloat param)
 {
-	glFogf(pname, param);
+    glFogf(pname, param);
 
 #ifdef _DEBUG
-	VoodooCore->Log("Voodoo Frost: glFogf(%d, %d)\n",
-		pname, param);
+    VoodooCore->Log("Voodoo Frost: glFogf(%d, %d)\n",
+        pname, param);
 #endif
 
-	return;
+    return;
 }

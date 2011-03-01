@@ -24,166 +24,166 @@
 
 namespace VoodooShader
 {
-	namespace Frost
-	{
-		HookManager * VoodooHooker = NULL;
+    namespace Frost
+    {
+        HookManager * VoodooHooker = NULL;
 
-		/**
-		 * Install a single hook at the specified point. This will only affect the
-		 * process(es) the HookManager is bound to.
-		 *
-		 * @param name The name for the hook.
-		 * @param src The point to install the hook at.
-		 * @param dest The function to redirect execution into.
-		 * @return The success of the hook installation.
-		 * @throws Exception if a hook with the same name already exists.
-		 *
-		 * @note The name is often the name of the function in src (&func) for
-		 *		simplicities sake. 
-		 * @warning The calling convention of src and dest must be identical, or bad
-		 *		things might happen. This is only a bother with member functions, but
-		 *		can be worked around relatively easily.
-		 */
-		bool HookManager::InstallHook(std::string name, void * src, void * dest)
-		{
-			HookMap::iterator hook = mHooks.find(name);
+        /**
+         * Install a single hook at the specified point. This will only affect the
+         * process(es) the HookManager is bound to.
+         *
+         * @param name The name for the hook.
+         * @param src The point to install the hook at.
+         * @param dest The function to redirect execution into.
+         * @return The success of the hook installation.
+         * @throws Exception if a hook with the same name already exists.
+         *
+         * @note The name is often the name of the function in src (&func) for
+         *        simplicities sake. 
+         * @warning The calling convention of src and dest must be identical, or bad
+         *        things might happen. This is only a bother with member functions, but
+         *        can be worked around relatively easily.
+         */
+        bool HookManager::InstallHook(std::string name, void * src, void * dest)
+        {
+            HookMap::iterator hook = mHooks.find(name);
 
-			if ( hook != mHooks.end() )
-			{
-				Throw("Voodoo Frost: Attempted to install a hook with a duplicate name.", VoodooCore);
-			}
+            if ( hook != mHooks.end() )
+            {
+                Throw("Voodoo Frost: Attempted to install a hook with a duplicate name.", VoodooCore);
+            }
 
-			TRACED_HOOK_HANDLE hookHandle = NULL;
+            TRACED_HOOK_HANDLE hookHandle = NULL;
 
-			DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
+            DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
 
-			if ( ( result != 0 ) || ( hookHandle == NULL ) )
-			{
-				VoodooCore->Log("Voodoo Frost: Error %d installing hook %s (%d, %d).\n",
-					result, name, src, dest);
+            if ( ( result != 0 ) || ( hookHandle == NULL ) )
+            {
+                VoodooCore->Log("Voodoo Frost: Error %d installing hook %s (%d, %d).\n",
+                    result, name, src, dest);
 
-				return false;
-			} else {
-				LhSetInclusiveACL(mThreadIDs, mThreadCount, hookHandle);
+                return false;
+            } else {
+                LhSetInclusiveACL(mThreadIDs, mThreadCount, hookHandle);
 
-				mHooks[name] = hookHandle;
+                mHooks[name] = hookHandle;
 
-				return true;
-			}
-		}
+                return true;
+            }
+        }
 
-		/**
-		 * Uninstall a hook.
-		 *
-		 * @param name The name of the hook to remove.
-		 * @return The success of the removal operation.
-		 * @throws Exception of the hook is not found.
-		 * 
-		 * @warning <em>Do not</em>, under any circumstances, remove a hook while
-		 *		execution is passing through the trampoline function. This can cause
-		 *		the process to crash in rare cases. I'm not sure the reason, but it's
-		 *		not good. Until I replace EasyHook, be careful!
-		 */
-		bool HookManager::UninstallHook(std::string name)
-		{
-			HookMap::iterator hook = mHooks.find(name);
+        /**
+         * Uninstall a hook.
+         *
+         * @param name The name of the hook to remove.
+         * @return The success of the removal operation.
+         * @throws Exception of the hook is not found.
+         * 
+         * @warning <em>Do not</em>, under any circumstances, remove a hook while
+         *        execution is passing through the trampoline function. This can cause
+         *        the process to crash in rare cases. I'm not sure the reason, but it's
+         *        not good. Until I replace EasyHook, be careful!
+         */
+        bool HookManager::UninstallHook(std::string name)
+        {
+            HookMap::iterator hook = mHooks.find(name);
 
-			if ( hook != mHooks.end() )
-			{
-				DWORD result = LhUninstallHook(hook->second);
+            if ( hook != mHooks.end() )
+            {
+                DWORD result = LhUninstallHook(hook->second);
 
-				if ( result != 0 )
-				{
-					VoodooCore->Log("Voodoo Frost: Error %d removing hook %s.\n",
-						result, name);
+                if ( result != 0 )
+                {
+                    VoodooCore->Log("Voodoo Frost: Error %d removing hook %s.\n",
+                        result, name);
 
-					return true;
-				} else {
-					mHooks.erase(hook);
+                    return true;
+                } else {
+                    mHooks.erase(hook);
 
-					return false;
-				}
-			} else {
-				Throw("Voodoo Frost: Trying to uninstall hook that does not exist.", VoodooCore);
-			}
-		}
+                    return false;
+                }
+            } else {
+                Throw("Voodoo Frost: Trying to uninstall hook that does not exist.", VoodooCore);
+            }
+        }
 
-		/**
-		 * Uninstalls all hooks.
-		 */
-		void HookManager::UninstallAllHooks()
-		{
-			LhUninstallAllHooks();
-			LhWaitForPendingRemovals();
+        /**
+         * Uninstalls all hooks.
+         */
+        void HookManager::UninstallAllHooks()
+        {
+            LhUninstallAllHooks();
+            LhWaitForPendingRemovals();
 
-			mHooks.clear();
-		}
+            mHooks.clear();
+        }
 
-		HookManager::HookManager()
-		{
-			mHooks.clear();
+        HookManager::HookManager()
+        {
+            mHooks.clear();
 
-			mThreadIDs = new ULONG;
-			mThreadCount = 1;
+            mThreadIDs = new ULONG;
+            mThreadCount = 1;
 
-			mThreadIDs[0] = NULL;
+            mThreadIDs[0] = NULL;
 
-			LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
-		}
+            LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
+        }
 
-		HookManager::~HookManager()
-		{
-			this->UninstallAllHooks();
+        HookManager::~HookManager()
+        {
+            this->UninstallAllHooks();
 
-			delete mThreadIDs;
-		}
+            delete mThreadIDs;
+        }
 
-		#define HOOK_PARAMS(n) #n, &n, &v##n
+        #define HOOK_PARAMS(n) #n, &n, &v##n
 
-		/**
-		 * Install all significant OpenGL hooks. 
-		 *
-		 * @todo This function needs moved out into the DLL init process.
-		 */
-		void HookOpenGL(void)
-		{
-			VoodooCore->Log("Voodoo Frost: Beginning OpenGL hook procedure.\n");
+        /**
+         * Install all significant OpenGL hooks. 
+         *
+         * @todo This function needs moved out into the DLL init process.
+         */
+        void HookOpenGL(void)
+        {
+            VoodooCore->Log("Voodoo Frost: Beginning OpenGL hook procedure.\n");
 
-			bool success = true;
+            bool success = true;
 
-			// System-related
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glGetString));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glViewport));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglCreateContext));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglDeleteContext));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglGetProcAddress));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglMakeCurrent));
+            // System-related
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glGetString));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glViewport));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglCreateContext));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglDeleteContext));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglGetProcAddress));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglMakeCurrent));
 
-			// Shader-related
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glClear));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglSwapLayerBuffers));
+            // Shader-related
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glClear));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglSwapLayerBuffers));
 
-			// Material-related
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glBindTexture));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glDeleteTextures));
+            // Material-related
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glBindTexture));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glDeleteTextures));
 
-			// Shader/material shared
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glBegin));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glDrawElements));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glEnd));
+            // Shader/material shared
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glBegin));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glDrawElements));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glEnd));
 
-			// Fog-related
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glEnable));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glFogf));
-			success &= VoodooHooker->InstallHook(HOOK_PARAMS(glFogfv));
+            // Fog-related
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glEnable));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glFogf));
+            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glFogfv));
 
-			// Check the results and handle
-			if ( success )
-			{
-				VoodooCore->Log("Voodoo Frost: OpenGL hooked successfully.\n");
-			} else {
-				VoodooCore->Log("Voodoo Frost: OpenGL hook procedure failed.\n");
-			}
-		}
-	}
+            // Check the results and handle
+            if ( success )
+            {
+                VoodooCore->Log("Voodoo Frost: OpenGL hooked successfully.\n");
+            } else {
+                VoodooCore->Log("Voodoo Frost: OpenGL hook procedure failed.\n");
+            }
+        }
+    }
 }

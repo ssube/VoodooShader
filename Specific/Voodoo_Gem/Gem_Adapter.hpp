@@ -6,54 +6,54 @@
 
 namespace VoodooShader
 {
-	namespace Gem
-	{
+    namespace Gem
+    {
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_TEX1)
 
-		struct StandardQuadVert
-		{
-			FLOAT x, y, z, rhw;
-			FLOAT tu, tv;
-		};
+        struct StandardQuadVert
+        {
+            FLOAT x, y, z, rhw;
+            FLOAT tu, tv;
+        };
 
-		class VOODOO_API_GEM Adapter
-			: VoodooShader::Adapter
-		{
+        class VOODOO_API_GEM Adapter
+            : VoodooShader::Adapter
+        {
 
-		public:
-			Adapter(Core * core, LPDIRECT3DDEVICE9 device);
-			~Adapter();
+        public:
+            Adapter(Core * core, LPDIRECT3DDEVICE9 device);
+            ~Adapter();
 
-			Version GetVersion();
+            Version GetVersion();
 
-			bool LoadPass(Pass * pass);
-			void BindPass(PassRef shader);
-			void UnbindPass();
+            bool LoadPass(Pass * pass);
+            void BindPass(PassRef shader);
+            void UnbindPass();
 
-			void DrawQuad(Vertex * vertexData);
+            void DrawQuad(Vertex * vertexData);
 
-			void DrawShader(ShaderRef shader);
+            void DrawShader(ShaderRef shader);
 
-			void ApplyParameter(ParameterRef param);
+            void ApplyParameter(ParameterRef param);
 
-			bool ConnectTexture(ParameterRef param, TextureRef texture);
-			TextureRef CreateTexture(String name, size_t width, size_t height, size_t depth, 
-				bool mipmaps, TextureFormat format);
+            bool ConnectTexture(ParameterRef param, TextureRef texture);
+            TextureRef CreateTexture(String name, size_t width, size_t height, size_t depth, 
+                bool mipmaps, TextureFormat format);
 
-			void HandleError(CGcontext context, CGerror error, void * core);
+            void HandleError(CGcontext context, CGerror error, void * core);
 
-		private:
-			Core * mCore;
-			LPDIRECT3DDEVICE9 mDevice;
+        private:
+            Core * mCore;
+            LPDIRECT3DDEVICE9 mDevice;
 
-			CGprogram mBoundVP;
-			CGprogram mBoundFP;
+            CGprogram mBoundVP;
+            CGprogram mBoundFP;
 
-			IDirect3DSurface9 * mRenderTarget;
-			
-			LPDIRECT3DVERTEXBUFFER9 mQuadVerts;
-		};
-	};
+            IDirect3DSurface9 * mRenderTarget;
+            
+            LPDIRECT3DVERTEXBUFFER9 mQuadVerts;
+        };
+    };
 }
 
 #endif /*VOODOO_GEM_ADAPTER_HPP*/

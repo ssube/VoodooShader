@@ -5,5 +5,5 @@ VoodooShader::Core * VoodooCore = NULL;
 
 namespace VoodooShader
 {
-	
+    
 };

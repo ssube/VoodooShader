@@ -22,10 +22,10 @@
 #include "Version.hpp"
 
 // DX89 defs ------------------------------------------------------------------
-#define VOODOO_DX89_NAME			"Voodoo/_DX89"
-#define VOODOO_DX89_PRETTYNAME		"Voodoo/Generic (DX8.9)"
-#define VOODOO_DX89_VERSION_MAJOR	0
-#define VOODOO_DX89_VERSION_MINOR	1
-#define VOODOO_DX89_VERSION_PATCH	5
-#define VOODOO_DX89_VERSION_GITREV	VOODOO_GLOBAL_VERSION_GITREV
+#define VOODOO_DX89_NAME            "Voodoo/_DX89"
+#define VOODOO_DX89_PRETTYNAME        "Voodoo/Generic (DX8.9)"
+#define VOODOO_DX89_VERSION_MAJOR    0
+#define VOODOO_DX89_VERSION_MINOR    1
+#define VOODOO_DX89_VERSION_PATCH    5
+#define VOODOO_DX89_VERSION_GITREV    VOODOO_GLOBAL_VERSION_GITREV
 //-----------------------------------------------------------------------------
