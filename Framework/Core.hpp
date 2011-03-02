@@ -212,11 +212,11 @@ namespace VoodooShader
         );
 
         /**
-         * Creates a global-level or virtual parameter. This parameter exists
+         * Creates a global-level virtual parameter. This parameter exists
          * in the Cg runtime, but is not a part of any shader or program. This
          * is useful for creating parameters that must be shared between 
          * programs. Only parameters created with this function may be used in 
-         * Parameter::Link.
+         * Parameter::Link().
          *
          * @param name The name for this parameter.
          * @param type The type of the parameter to create.
@@ -258,7 +258,6 @@ namespace VoodooShader
         );
 
     private:
-
         /**
         * Create a new Voodoo Core and associated Cg context.
         *          
@@ -268,13 +267,13 @@ namespace VoodooShader
         *
         * @note Avoid using more than one core at any point in time. I'm not 
         *        entirely sure how well the Cg runtime handles this. For most 
-        *        games, a single render context is used,    so no more than one 
+        *        games, a single render context is used, so no more than one 
         *        adapter and core should be necessary.
-        * @todo Test multi-core/multi-adapter systems. If anyone has info or 
-        *        knows of a game/app    that uses multiple D3D/OGL render contexts, 
-        *        please let me know.
         * @note You can not call this function externally, you must call 
         *        Core::Create(String) instead.
+        * @todo Test multi-core/multi-adapter systems. If anyone has info or 
+        *        knows of a game/app that uses multiple D3D/OGL render contexts, 
+        *        please let me know.
         */
         Core
         (

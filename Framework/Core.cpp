@@ -37,10 +37,10 @@ namespace VoodooShader
         this->mLogger->SetBufferSize(0);
 #endif
 
-        this->mLogger->Log("%s", VOODOO_CORE_COPYRIGHT);
-        this->mLogger->Log("Voodoo Core: Assembly ID: %s\n", VOODOO_META_STRING_VERSION_FULL(CORE));
+        this->mLogger->Log(LL_Info, "%s", VOODOO_CORE_COPYRIGHT);
+        this->mLogger->Log(LL_Info, "Voodoo Core: Assembly ID: %s\n", VOODOO_META_STRING_VERSION_FULL(CORE));
 
-        this->mLogger->Log("Voodoo Core: Preparing core components...\n");
+        this->mLogger->Log(LL_Info, "Voodoo Core: Preparing core components...\n");
 
         // Init Cg
         this->mCGContext = cgCreateContext();
@@ -55,12 +55,12 @@ namespace VoodooShader
         this->mManagerFS  = new FullscreenManager(this);
         this->mManagerMat = new MaterialManager(this);
 
-        this->mLogger->Log("Voodoo Core: Core started successfully.\n");
+        this->mLogger->Log(LL_Info, "Voodoo Core: Core started successfully.\n");
     }
 
     Core::~Core()
     {
-        this->mLogger->Log("Voodoo Core: Stopping...\n");
+        this->mLogger->Log(LL_Info, "Voodoo Core: Stopping...\n");
 
         if ( this->mManagerFS )
         {
@@ -116,14 +116,14 @@ namespace VoodooShader
 #endif
     }
 
-    void Core::Log(const char * msg, ...)
+    void Core::Log(LogLevel level, const char * msg, ...)
     {
         if ( this->mLogger )
         {
             va_list arglist;
             va_start(arglist, msg);
 
-            this->mLogger->LogList(msg, arglist);
+            this->mLogger->LogList(level, msg, arglist);
 
             va_end(arglist);
 
@@ -133,14 +133,14 @@ namespace VoodooShader
         }
     }
 
-    void Core::Debug(const char * msg, ...)
+    void Core::Debug(LogLevel level, const char * msg, ...)
     {
         if ( mDebugMode && this->mLogger )
         {
             va_list arglist;
             va_start(arglist, msg);
 
-            this->mLogger->LogList(msg, arglist);
+            this->mLogger->LogList(level, msg, arglist);
 
             va_end(arglist);
 

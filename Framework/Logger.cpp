@@ -24,7 +24,7 @@ namespace VoodooShader
 
         this->mLocalTime = new tm();
 
-        this->mLogFile << "<Log " << this->Timestamp().c_str() << ">\n";
+        this->mLogFile << "<LogFile " << this->Timestamp().c_str() << ">\n";
 
         this->Log("Logger created.\n");
     }
@@ -33,7 +33,7 @@ namespace VoodooShader
     {
         if ( this->mLogFile.is_open() )
         {
-            this->mLogFile << "</Log>\n";
+            this->mLogFile << "</LogFile>\n";
             this->mLogFile.close();
         }
         if ( this->mLocalTime )
@@ -71,34 +71,23 @@ namespace VoodooShader
         _vsnprintf_s(buffer, 4095, 4095, msg, args);
         buffer[4095] = 0;
         va_end(args);
+        
+        this->mLogFile << "<Message type=\"";
 
         switch ( level )
         {
         case LL_Info:
-            this->mLogFile << " <Info ";
+            this->mLogFile << "info";
             break;
         case LL_Warning:
-            this->mLogFile << " <Warning ";
+            this->mLogFile << "warning";
             break;
         case LL_Error:
-            this->mLogFile << " <Error ";
+            this->mLogFile << "error";
             break;
         };
 
-        this->mLogFile << this->Timestamp() << ">" << buffer;
-
-        switch ( level )
-        {
-        case LL_Info:
-            this->mLogFile << "</Info>\n";
-            break;
-        case LL_Warning:
-            this->mLogFile << "</Warning>\n";
-            break;
-        case LL_Error:
-            this->mLogFile << "</Error>\n";
-            break;
-        };
+        this->mLogFile << "\" " << this->Timestamp() << ">" << buffer << "</Message>\n";
     }
 
     void Logger::LogList(LogLevel level, const char * msg, va_list args)
@@ -108,33 +97,22 @@ namespace VoodooShader
         _vsnprintf_s(buffer, 4095, 4095, msg, args);
         buffer[4095] = 0;
 
-        switch ( level )
-        {
-        case LL_Info:
-            this->mLogFile << " <Info ";
-            break;
-        case LL_Warning:
-            this->mLogFile << " <Warning ";
-            break;
-        case LL_Error:
-            this->mLogFile << " <Error ";
-            break;
-        };
-
-        this->mLogFile << this->Timestamp() << ">" << buffer;
+        this->mLogFile << "<Message type=\"";
 
         switch ( level )
         {
         case LL_Info:
-            this->mLogFile << "</Info>\n";
+            this->mLogFile << "info";
             break;
         case LL_Warning:
-            this->mLogFile << "</Warning>\n";
+            this->mLogFile << "warning";
             break;
         case LL_Error:
-            this->mLogFile << "</Error>\n";
+            this->mLogFile << "error";
             break;
         };
+
+        this->mLogFile << "\" " << this->Timestamp() << ">" << buffer << "</Message>\n";
     }
 
     void Logger::Dump()
@@ -146,7 +124,7 @@ namespace VoodooShader
     {
         if ( this->mLogFile.is_open() )
         {
-            this->mLogFile << "</Log>\n";
+            this->mLogFile << "</LogFile>\n";
             this->mLogFile.close();
         }
 
@@ -154,7 +132,7 @@ namespace VoodooShader
 
         if ( this->mLogFile.is_open() )
         {
-            this->mLogFile << "<Log " << this->Timestamp().c_str() << ">\n";
+            this->mLogFile << "<LogFile " << this->Timestamp().c_str() << ">\n";
 
             this->Log("Logger: Log file opened by Logger::Open.\n");
             return true;
