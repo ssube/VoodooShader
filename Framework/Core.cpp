@@ -37,17 +37,17 @@ namespace VoodooShader
         this->mLogger->SetBufferSize(0);
 #endif
 
-        this->mLogger->Log(LL_Info, "%s", VOODOO_CORE_COPYRIGHT);
-        this->mLogger->Log(LL_Info, "Voodoo Core: Assembly ID: %s\n", VOODOO_META_STRING_VERSION_FULL(CORE));
+        this->mLogger->Log(LL_Info, "", "%s", VOODOO_CORE_COPYRIGHT);
+        this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Assembly ID: %s", VOODOO_META_STRING_VERSION_FULL(CORE));
 
-        this->mLogger->Log(LL_Info, "Voodoo Core: Preparing core components...\n");
+        this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
 
         // Init Cg
         this->mCGContext = cgCreateContext();
 
         if ( !cgIsContext(this->mCGContext) )
         {
-            Throw("Voodoo Core: Could not create Cg context.", this);
+            Throw(VOODOO_CORE_NAME, "Could not create Cg context.", this);
         }
 
         cgSetErrorHandler(&(Core::CGErrorHandler), this);
@@ -55,12 +55,12 @@ namespace VoodooShader
         this->mManagerFS  = new FullscreenManager(this);
         this->mManagerMat = new MaterialManager(this);
 
-        this->mLogger->Log(LL_Info, "Voodoo Core: Core started successfully.\n");
+        this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Core started successfully.");
     }
 
     Core::~Core()
     {
-        this->mLogger->Log(LL_Info, "Voodoo Core: Stopping...\n");
+        this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Stopping...");
 
         if ( this->mManagerFS )
         {
@@ -102,8 +102,6 @@ namespace VoodooShader
 
     void Core::SetDebug(bool mode)
     {
-        UNREFERENCED_PARAMETER(mode);
-
 #ifndef _DEBUG
         this->mDebugMode = mode;
         if ( mode )
@@ -111,19 +109,21 @@ namespace VoodooShader
             this->mLogger->SetBufferSize(0);
         }
 #else
+        UNREFERENCED_PARAMETER(mode);
+
         this->mDebugMode = true;
         this->mLogger->SetBufferSize(0);
 #endif
     }
 
-    void Core::Log(LogLevel level, const char * msg, ...)
+    void Core::Log(LogLevel level, const char * module, const char * msg, ...)
     {
         if ( this->mLogger )
         {
             va_list arglist;
             va_start(arglist, msg);
 
-            this->mLogger->LogList(level, msg, arglist);
+            this->mLogger->LogList(level, module, msg, arglist);
 
             va_end(arglist);
 
@@ -133,28 +133,11 @@ namespace VoodooShader
         }
     }
 
-    void Core::Debug(LogLevel level, const char * msg, ...)
-    {
-        if ( mDebugMode && this->mLogger )
-        {
-            va_list arglist;
-            va_start(arglist, msg);
-
-            this->mLogger->LogList(level, msg, arglist);
-
-            va_end(arglist);
-
-            this->mLogger->Dump();
-        }
-    }
-
     void Core::SetAdapter(Adapter * adapter)
     {
-        if ( this->mAdapter )
+        if ( this->mAdapter && adapter )
         {
-            Throw(
-              "Voodoo Core: Attempted to set adapter when one is already set.", 
-              this);
+            Throw(VOODOO_CORE_NAME, "Attempted to set adapter when one is already set.", this);
         }
 
         this->mAdapter = adapter;
@@ -175,14 +158,12 @@ namespace VoodooShader
         }
     }
 
-    TextureRef Core::CreateTexture(String name, void * data)
+    TextureRef Core::AddTexture(String name, void * data)
     {
         TextureMap::iterator textureEntry = this->mTextures.find(name);
         if ( textureEntry != this->mTextures.end() )
         {
-            Throw(
-              "Voodoo Core: Trying to create a texture with a duplicate name.", 
-              this);
+            Throw(VOODOO_CORE_NAME, "Trying to add a texture with a duplicate name.", this);
         } else {
             TextureRef texture(new Texture(name, data));
             this->mTextures[name] = texture;
@@ -195,9 +176,7 @@ namespace VoodooShader
         ParameterMap::iterator paramEntry = this->mParameters.find(name);
         if ( paramEntry != this->mParameters.end() )
         {
-            Throw(
-              "Voodoo Core: Trying to create parameter with a duplicate name.", 
-              this);
+            Throw(VOODOO_CORE_NAME, "Trying to create parameter with a duplicate name.", this);
         } else {
             ParameterRef parameter(new Parameter(this, name, type));
 
@@ -227,6 +206,7 @@ namespace VoodooShader
         case TT_ShaderTarget:
             return mLastShader;
         case TT_Generic:
+        case TT_Count:
         case TT_Unknown:
         default:
             return TextureRef();
@@ -244,9 +224,11 @@ namespace VoodooShader
             mLastShader = texture;
             break;
         case TT_Generic:
+            Throw(VOODOO_CORE_NAME, "Invalid texture type (generic) given.", this);
+        case TT_Count:
         case TT_Unknown:
         default:
-            Throw("Voodoo Core: Unknown texture type (function) given.", this);
+            Throw(VOODOO_CORE_NAME, "Unknown texture type given.", this);
         }
     }
 
@@ -275,7 +257,7 @@ namespace VoodooShader
 
             if ( errorString )
             {
-                me->Log("Voodoo Core: Cg core reported error: %s\n", errorString);
+                me->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
                 if ( context && error != CG_INVALID_CONTEXT_HANDLE_ERROR )
                 {
                     // Print any compiler errors or other details we can find
@@ -283,14 +265,14 @@ namespace VoodooShader
                     
                     while ( listing )
                     {
-                        me->Log("Voodoo Core: Cg error details: %s\n", listing);
+                        me->Log(LL_Error, VOODOO_CG_NAME, "Cg error details: %s", listing);
                         listing = cgGetLastListing(context);
                     }
                 } else {
-                    me->Log("Voodoo Core: Invalid context for error, no further data available.\n");
+                    me->Log(LL_Error, VOODOO_CG_NAME, "Invalid context for error, no further data available.");
                 }
             } else {
-                me->Log("Voodoo Core: Cg core reported an unknown error (%d)\n", error);
+                me->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported an unknown error (%d)", error);
             }            
         }
     }

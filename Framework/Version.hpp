@@ -54,16 +54,24 @@
 
 // Global defs ----------------------------------------------------------------
 #define VOODOO_GLOBAL_VERSION_GITREV    102
-#define VOODOO_GLOBAL_COPYRIGHT_BRIEF    "Copyright (c) 2010-2011 by Sean Sube"
+#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   "Copyright (c) 2010-2011 by Sean Sube"
 //-----------------------------------------------------------------------------
 
 
 // Core defs ------------------------------------------------------------------
-#define VOODOO_CORE_NAME            "Voodoo/Core"
-#define VOODOO_CORE_PRETTYNAME        "Voodoo Shader Framework Core"
-#define VOODOO_CORE_VERSION_MAJOR    0
-#define VOODOO_CORE_VERSION_MINOR    1
-#define VOODOO_CORE_VERSION_PATCH    12
-#define VOODOO_CORE_VERSION_GITREV    VOODOO_GLOBAL_VERSION_GITREV
+#define VOODOO_CORE_NAME                "Voodoo/Core"
+#define VOODOO_CORE_PRETTYNAME          "Voodoo Shader Framework Core"
+#define VOODOO_CORE_VERSION_MAJOR       0
+#define VOODOO_CORE_VERSION_MINOR       1
+#define VOODOO_CORE_VERSION_PATCH       12
+#define VOODOO_CORE_VERSION_GITREV      VOODOO_GLOBAL_VERSION_GITREV
 //-----------------------------------------------------------------------------
 
+// External defs --------------------------------------------------------------
+#define VOODOO_CG_NAME                  "Cg"
+#define VOODOO_CG_PRETTYNAME            "nVidia Cg (July 2010)"
+#define VOODOO_CG_VERSION_MAJOR         3
+#define VOODOO_CG_VERSION_MINOR         0
+#define VOODOO_CG_VERSION_PATCH         0
+#define VOODOO_CG_VERSION_GITREV        7   
+//----------------------------------------------------------------------------- 

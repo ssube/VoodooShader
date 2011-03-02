@@ -40,30 +40,33 @@ namespace VoodooShader
     public:
         Exception
         (
+            __in __notnull const char * module, 
             __in __notnull const char * message, 
             __in __notnull Core * core, 
-            __in __notnull char * file, 
-            __in __notnull char * function, 
-            __in int line
+            __in __notnull const char * file, 
+            __in __notnull const char * function, 
+            __in const int line
         );
 
         Exception
         (
-            __in String message, 
+            __in __notnull const char * module,
+            __in __readonly String message, 
             __in __notnull Core * core, 
-            __in __notnull char * file, 
-            __in __notnull char * function,
-            __in int line
+            __in __notnull const char * file, 
+            __in __notnull const char * function,
+            __in const int line
         );
 
         String Message();
 
     private:
+        const char * mModule;
         Core * mCore;
         String mMessage;
-        char * mFile;
-        char * mFunction;
-        int mLine;
+        const char * mFile;
+        const char * mFunction;
+        const int mLine;
     };
 }
 

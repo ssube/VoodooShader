@@ -3,6 +3,7 @@
 #include "Adapter.hpp"
 #include "Exception.hpp"
 #include "Core.hpp"
+#include "Version.hpp"
 
 namespace VoodooShader
 {
@@ -16,8 +17,12 @@ namespace VoodooShader
     {
         if ( position < -1 )
         {
-            Throw("Voodoo Core: Could not add shader, invalid position (< -1).",
-                this->mParent);
+            Throw
+            (
+                VOODOO_CORE_NAME, 
+                "Could not add shader, invalid position (< -1).",
+                this->mParent
+            );
         } else if ( position == -1 ) {
             // Append to the end of the list
             this->mShaders.push_back(shader);
@@ -25,7 +30,7 @@ namespace VoodooShader
         } else {
             ShaderVector::iterator shaderPosition = this->mShaders.begin() + position;
             this->mShaders.insert(shaderPosition, shader);
-            return position;
+            return (size_t)position;
         }
     }
 
@@ -33,9 +38,12 @@ namespace VoodooShader
     {
         if ( this->mShaders.size() <= position )
         {
-            Throw(
-                "Voodoo Core: Could not remove shader, list size <= position.", 
-                this->mParent);
+            Throw
+            (
+                VOODOO_CORE_NAME, 
+                "Could not remove shader, list size <= position.", 
+                this->mParent
+            );
         } else {
             ShaderVector::iterator shaderPosition = this->mShaders.begin() + position;
             this->mShaders.erase(shaderPosition);
@@ -49,21 +57,21 @@ namespace VoodooShader
 
         if ( count == 0 )
         {
-            Throw("Voodoo Core: Could not render 0 fullscreen shaders.", this->mParent);
+            Throw(VOODOO_CORE_NAME, "Could not render 0 fullscreen shaders.", this->mParent);
         }
 
         Adapter * adapter = this->mParent->GetAdapter();
 
         if ( !adapter )
         {
-            Throw("Voodoo Core: Parent Core has no Adapter.", this->mParent);
+            Throw(VOODOO_CORE_NAME, "Parent Core has no Adapter.", this->mParent);
         }
 
         size_t total = mShaders.size();
 
         if ( start > total )
         {
-            Throw("Voodoo Core: Invalid start position (past end of chain).", this->mParent);
+            Throw(VOODOO_CORE_NAME, "Invalid start position (past end of chain).", this->mParent);
         }
 
         // Prep and trigger the rendering
@@ -77,7 +85,12 @@ namespace VoodooShader
 
             if ( chainEnd > total )
             {
-                this->mParent->Debug("Voodoo Core: Adjusted shader chain would have extended beyond available shaders (%d of %d), correcting.", chainEnd, total);
+                this->mParent->Log
+                (
+                    LL_Warning, VOODOO_CORE_NAME, 
+                    "Adjusted shader chain would have extended beyond available shaders (%d of %d), correcting.", 
+                    chainEnd, total
+                );
                 chainEnd = total;
             }
         }

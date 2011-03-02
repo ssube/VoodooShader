@@ -4,6 +4,7 @@
 #include "Exception.hpp"
 #include "Core.hpp"
 #include "Converter.hpp"
+#include "Version.hpp"
 
 namespace VoodooShader
 {
@@ -28,7 +29,7 @@ namespace VoodooShader
             break;
         case PT_Unknown:
         default:
-            Throw("Invalid parameter type.", NULL);
+            Throw(VOODOO_CORE_NAME, "Invalid parameter type.", NULL);
             break;
         }
     }
@@ -54,7 +55,7 @@ namespace VoodooShader
             break;
         case PT_Unknown:
         default:
-            Throw("Invalid parameter type.", NULL);
+            Throw(VOODOO_CORE_NAME, "Invalid parameter type.", NULL);
             break;
         }
     }
@@ -88,8 +89,9 @@ namespace VoodooShader
     {
         if ( !this->mVirtual )
         {
-            Throw("Voodoo Core: Cannot attach to a non-virtual parameter.", mCore);
+            Throw(VOODOO_CORE_NAME, "Cannot attach to a non-virtual parameter.", mCore);
         }
+
         cgConnectParameter(param->GetParameter(), this->mParam);
     }
 
@@ -167,7 +169,7 @@ namespace VoodooShader
     {
         if ( mCore )
         {
-            mCore->Log("Voodoo Core: Force updating parameter %s.\n", this->Name().c_str());
+            mCore->Log(LL_Debug, VOODOO_CORE_NAME, "Force updating parameter %s.\n", this->Name().c_str());
         }
 
         switch ( mType )
@@ -190,14 +192,26 @@ namespace VoodooShader
         case PT_Sampler1D:
             if ( mCore )
             {
-                mCore->Log("Voodoo Core: Unable to force update sampler type parameter (%s).\n", this->Name().c_str());
+                mCore->Log
+                (
+                    LL_Warning, 
+                    VOODOO_CORE_NAME, 
+                    "Voodoo Core: Unable to force update sampler type parameter (%s).\n", 
+                    this->Name().c_str()
+                );
             }
             break;
         case PT_Unknown:
         default:
             if ( mCore )
             {
-                mCore->Log("Voodoo Core: Cannot force update parameter %s with unknown type.\n", this->Name().c_str());
+                mCore->Log
+                (
+                    LL_Warning,
+                    VOODOO_CORE_NAME,
+                    "Voodoo Core: Cannot force update parameter %s with unknown type.\n", 
+                    this->Name().c_str()
+                );
             }
             break;
         }

@@ -1,6 +1,7 @@
 #include "Includes.hpp"
 #include "Logger.hpp"
 #include "Exception.hpp"
+#include "Version.hpp"
 
 using namespace std;
 
@@ -19,18 +20,19 @@ namespace VoodooShader
 
         if ( !this->mLogFile.is_open() )
         {
-            Throw("Could not open log file!", NULL);
+            Throw(VOODOO_CORE_NAME, "Could not open log file!", NULL);
         }
 
         this->mLocalTime = new tm();
 
-        this->mLogFile << "<LogFile " << this->Timestamp().c_str() << ">\n";
+        this->mLogFile << "<LogFile " << this->Timestamp() << ">\n";
 
-        this->Log("Logger created.\n");
+        this->Log(LL_Info, VOODOO_CORE_NAME, "Logger created.");
     }
 
     Logger::~Logger()
     {
+        this->Log(LL_Info, VOODOO_CORE_NAME, "Logger destroyed.");
         if ( this->mLogFile.is_open() )
         {
             this->mLogFile << "</LogFile>\n";
@@ -54,6 +56,8 @@ namespace VoodooShader
                 this->mLocalTime->tm_min,
                 this->mLocalTime->tm_sec);
             return String(stamp);
+        } else {
+            return String();
         }
     }
 
@@ -62,7 +66,7 @@ namespace VoodooShader
         this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
     }
 
-    void Logger::Log(LogLevel level, const char * msg, ...)
+    void Logger::Log(LogLevel level, const char * module, const char * msg, ...)
     {
         va_list args;
         char buffer[4096];
@@ -79,24 +83,33 @@ namespace VoodooShader
         case LL_Info:
             this->mLogFile << "info";
             break;
+        case LL_Debug:
+            this->mLogFile << "debug";
+            break;
         case LL_Warning:
             this->mLogFile << "warning";
             break;
         case LL_Error:
             this->mLogFile << "error";
             break;
+        case LL_Fatal:
+            this->mLogFile << "fatal";
+            break;
+        case LL_Unknown:
+        default:
+            this->mLogFile << "unknown";
         };
 
-        this->mLogFile << "\" " << this->Timestamp() << ">" << buffer << "</Message>\n";
+        this->mLogFile << "\" " << this->Timestamp() << " module=\"" << module << "\">" << buffer << "</Message>\n";
     }
 
-    void Logger::LogList(LogLevel level, const char * msg, va_list args)
+    void Logger::LogList(LogLevel level, const char * module, const char * msg, va_list args)
     {
         char buffer[4096];
 
         _vsnprintf_s(buffer, 4095, 4095, msg, args);
         buffer[4095] = 0;
-
+        
         this->mLogFile << "<Message type=\"";
 
         switch ( level )
@@ -104,15 +117,24 @@ namespace VoodooShader
         case LL_Info:
             this->mLogFile << "info";
             break;
+        case LL_Debug:
+            this->mLogFile << "debug";
+            break;
         case LL_Warning:
             this->mLogFile << "warning";
             break;
         case LL_Error:
             this->mLogFile << "error";
             break;
+        case LL_Fatal:
+            this->mLogFile << "fatal";
+            break;
+        case LL_Unknown:
+        default:
+            this->mLogFile << "unknown";
         };
 
-        this->mLogFile << "\" " << this->Timestamp() << ">" << buffer << "</Message>\n";
+        this->mLogFile << "\" " << this->Timestamp() << " module=\"" << module << "\">" << buffer << "</Message>\n";
     }
 
     void Logger::Dump()
@@ -132,9 +154,9 @@ namespace VoodooShader
 
         if ( this->mLogFile.is_open() )
         {
-            this->mLogFile << "<LogFile " << this->Timestamp().c_str() << ">\n";
+            this->mLogFile << "<LogFile " << this->Timestamp() << ">\n";
 
-            this->Log("Logger: Log file opened by Logger::Open.\n");
+            this->Log(LL_Info, VOODOO_CORE_NAME, "Logger: Log file opened by Logger::Open.");
             return true;
         } else {
             return false;
@@ -145,7 +167,7 @@ namespace VoodooShader
     {
         if ( this->mLogFile.is_open() )
         {
-            this->Log("Logger: Log file closed by Logger::Close.\n");
+            this->Log(LL_Info, VOODOO_CORE_NAME, "Logger: Log file closed by Logger::Close.");
             this->mLogFile.close();
         }
     }

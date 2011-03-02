@@ -89,20 +89,8 @@ namespace VoodooShader
          */
         void Log
         (
-            __in __notnull const char * msg, 
-            ...
-        );
-
-        /**
-         * Writes a string to the log file, if the core is in debug mode.
-         *
-         * @param msg The format string to use
-         * @param ... Parameters
-         *
-         * @note In non-debug builds, this will not log anything.
-         */
-        void Debug
-        (
+            __in LogLevel level,
+            __in __notnull const char * module, 
             __in __notnull const char * msg, 
             ...
         );
@@ -112,7 +100,9 @@ namespace VoodooShader
          *
          * @param adapter The Adapter to attach (will be used for all graphics 
          *        calls).
-         * @throws Exception if an Adapter is already connected to this Core.
+         * @throws Exception if an Adapter is already connected to this Core and
+         *         adapter is a new Adapter. To prevent this, remove the first
+         *         Adapter <em>before</em> binding the second one.
          */
         void SetAdapter
         (
@@ -153,9 +143,10 @@ namespace VoodooShader
          * 
          * @throws Exception if a texture with the same name already exists.
          *
-         * @warning This should be called only from Adapter::CreateTexture().
+         * @sa To create a texture, see Adapter::CreateTexture() (the texture
+         *      is created and registered with a call to this function).
          */
-        TextureRef CreateTexture
+        TextureRef AddTexture
         (
             __in String name, 
             __in __readonly __notnull void * data
@@ -166,7 +157,7 @@ namespace VoodooShader
          * 
          * @param name The texture name.
          * @return A shared pointer to the Texture object, if it exists 
-         *        (otherwise an empty    shared pointer).
+         *         (otherwise an empty shared pointer).
          *
          * @note This will not create a texture, only retrieve an existing one.
          */
@@ -196,6 +187,10 @@ namespace VoodooShader
          *
          * @param function The function to set
          * @param texture The texture to bind
+         *
+         * @throws Exception if function is invalid or TT_Unknown.
+         * @throws Exception if function is TT_Generic (all textures are generic by
+         *          default, you cannot set a texture to generic).
          */
         void SetTexture
         (
@@ -293,9 +288,7 @@ namespace VoodooShader
         /**
          * Reference to the current log file. This uses Voodoo's internal
          * Logger class at this time, but can be changed to use any similar
-         * class (XML logging will be made available in the near future).
-         *
-         * @todo Implement an XML logger.
+         * class.
          */
         Logger * mLogger;
 

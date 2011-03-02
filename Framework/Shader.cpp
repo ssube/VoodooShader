@@ -4,6 +4,7 @@
 #include "Exception.hpp"
 #include "Adapter.hpp"
 #include "Converter.hpp"
+#include "Version.hpp"
 
 namespace VoodooShader
 {
@@ -17,7 +18,7 @@ namespace VoodooShader
 
         if ( !cgIsEffect(this->mEffect) )
         {
-            Throw("Voodoo Core: Failed to create shader.", parent);
+            Throw(VOODOO_CORE_NAME, "Failed to create shader.", parent);
             return;
         }
 
@@ -121,14 +122,22 @@ namespace VoodooShader
                 {
                     globalParam->Attach(param);
                 } else {
-                    mCore->Log(
-                        "Voodoo Core: Unable to find global param %s for parameter %s.\n",
-                        globalName, param->Name().c_str());
+                    mCore->Log
+                    (
+                        LL_Error,
+                        VOODOO_CORE_NAME, 
+                        "Unable to find global param %s for parameter %s.",
+                        globalName, param->Name().c_str()
+                    );
                 }
             } else {
-                mCore->Log(
-                    "Voodoo Core: Unable to read global annotation for parameter %s.\n",
-                    param->Name().c_str());
+                mCore->Log
+                (
+                    LL_Error,
+                    VOODOO_CORE_NAME, 
+                    "Unable to read global annotation for parameter %s.",
+                    param->Name().c_str()
+                );
             }
 
             return;
@@ -153,7 +162,7 @@ namespace VoodooShader
         if ( cgIsAnnotation(textureAnnotation) && cgGetAnnotationType(textureAnnotation) == CG_STRING )
         {
             const char * textureName = cgGetStringAnnotationValue(textureAnnotation);
-            if ( textureName && strlen(textureName) > 0 )
+            if ( textureName != NULL && strlen(textureName) > 0 )
             {
                 TextureRef texture = mCore->GetTexture(textureName);
                 if ( texture.get() )
@@ -165,16 +174,31 @@ namespace VoodooShader
                      *        involve reading them and calling back into the adapter, so it should be
                      *        another func.
                      */
-                    mCore->Log("Voodoo Core: Could not find texture %s for parameter %s.\n",
-                        textureName, param->Name().c_str());
+                    mCore->Log
+                    (
+                        LL_Warning,
+                        VOODOO_CORE_NAME,
+                        "Could not find texture %s for parameter %s.",
+                        textureName, param->Name().c_str()
+                    );
                 }
             } else {
-                mCore->Log("Voodoo Core: Could not retrieve texture name for parameter %s.\n",
-                    param->Name().c_str());
+                mCore->Log
+                (
+                    LL_Warning,
+                    VOODOO_CORE_NAME,
+                    "Could not retrieve texture name for parameter %s.",
+                    param->Name().c_str()
+                );
             }
         } else {
-            mCore->Log("Voodoo Core: Could not retrieve texture annotation for parameter %s.\n",
-                param->Name().c_str());
+            mCore->Log
+            (
+                LL_Warning,
+                VOODOO_CORE_NAME,
+                "Could not retrieve texture annotation for parameter %s.",
+                param->Name().c_str()
+            );
         }
     }
 
@@ -187,7 +211,13 @@ namespace VoodooShader
 
             if ( valid == CG_TRUE )
             {
-                mCore->Log("Voodoo Core: Validated technique %s.\n", cgGetTechniqueName(cTech));
+                mCore->Log
+                (
+                    LL_Debug,
+                    VOODOO_CORE_NAME,
+                    "Validated technique %s.",
+                    cgGetTechniqueName(cTech)
+                );
 
                 // Insert the technique into the map
                 TechniqueRef tech(new Technique(this, cTech));
@@ -203,8 +233,13 @@ namespace VoodooShader
 
                 tech->Link();
             } else {
-                mCore->Log("Voodoo Core: Technique failed to validate: %s.\n",
-                    cgGetTechniqueName(cTech));
+                mCore->Log
+                (
+                    LL_Warning,
+                    VOODOO_CORE_NAME,
+                    "Technique failed to validate: %s.",
+                    cgGetTechniqueName(cTech)
+                );
             }
 
             cTech = cgGetNextTechnique(cTech);
@@ -218,7 +253,7 @@ namespace VoodooShader
         {
             this->mDefaultTechnique = tech;
         } else {
-            Throw("Voodoo Core: Technique not found in shader.", mCore);
+            Throw(VOODOO_CORE_NAME, "Technique not found in shader.", mCore);
         }
     }
 
@@ -270,7 +305,7 @@ namespace VoodooShader
         {
             return this->mPasses[index];
         } else {
-            Throw("Voodoo Core: Invalid pass index (> pass count).", mCore);
+            Throw(VOODOO_CORE_NAME, "Voodoo Core: Invalid pass index (> pass count).", mCore);
         }
     }
 
@@ -301,20 +336,35 @@ namespace VoodooShader
 
                 if ( !this->mTarget.get() )
                 {
-                    mCore->Log("Voodoo Core: Pass %s cannot find target %s.\n",
-                        this->Name().c_str(), targetName);
+                    mCore->Log
+                    (
+                        LL_Warning,
+                        VOODOO_CORE_NAME,
+                        "Pass %s cannot find target %s.",
+                        this->Name().c_str(), targetName
+                    );
 
                     this->mTarget = mCore->GetTexture(TT_ShaderTarget);
                 }
             } else {
-                mCore->Log("Voodoo Core: Pass %s has annotation \"target\" of invalid type.\n",
-                    this->Name().c_str());
+                mCore->Log
+                (
+                    LL_Warning,
+                    VOODOO_CORE_NAME,
+                    "Pass %s has annotation \"target\" of invalid type.",
+                    this->Name().c_str()
+                );
 
                 this->mTarget = mCore->GetTexture(TT_ShaderTarget);
             }
         } else {
-            mCore->Log("Voodoo Core: Pass %s has no target annotation.\n",
-                this->Name().c_str());
+            mCore->Log
+            (
+                LL_Debug,
+                VOODOO_CORE_NAME,
+                "Pass %s has no target annotation.",
+                this->Name().c_str()
+            );
 
             this->mTarget = mCore->GetTexture(TT_ShaderTarget);
         }
@@ -393,7 +443,7 @@ namespace VoodooShader
 
     void Pass::Link()
     {
-        this->mVertexProgram = cgGetPassProgram(this->mPass, CG_VERTEX_DOMAIN);
+        this->mVertexProgram   = cgGetPassProgram(this->mPass, CG_VERTEX_DOMAIN  );
         this->mFragmentProgram = cgGetPassProgram(this->mPass, CG_FRAGMENT_DOMAIN);
         this->mGeometryProgram = cgGetPassProgram(this->mPass, CG_GEOMETRY_DOMAIN);
 
@@ -409,17 +459,35 @@ namespace VoodooShader
 
                 if ( !this->mTarget.get() )
                 {
-                    mCore->Log("Voodoo Core: Pass %s cannot find target %s.\n", this->Name().c_str(), targetName);
+                    mCore->Log
+                    (
+                        LL_Warning,
+                        VOODOO_CORE_NAME,
+                        "Pass %s cannot find target %s.", 
+                        this->Name().c_str(), targetName
+                    );
 
                     this->mTarget = mCore->GetTexture(TT_PassTarget);
                 }
             } else {
-                mCore->Log("Voodoo Core: Pass %s has annotation \"target\" of invalid type.\n",    this->Name().c_str());
+                mCore->Log
+                (
+                    LL_Warning,
+                    VOODOO_CORE_NAME,
+                    "Pass %s has annotation \"target\" of invalid type.",
+                    this->Name().c_str()
+                );
 
                 this->mTarget = mCore->GetTexture(TT_PassTarget);
             }
         } else {
-            mCore->Log("Voodoo Core: Pass %s has no target annotation.\n", this->Name().c_str());
+            mCore->Log
+            (
+                LL_Debug,
+                VOODOO_CORE_NAME,
+                "Pass %s has no target annotation.", 
+                this->Name().c_str()
+            );
 
             this->mTarget = mCore->GetTexture(TT_PassTarget);
         }
@@ -429,13 +497,19 @@ namespace VoodooShader
 
         if ( !adapter )
         {
-            mCore->Log("Voodoo Core: No adapter found, pass %s must be explicitly loaded later.\n", this->Name().c_str());
+            mCore->Log
+            (
+                LL_Warning,
+                VOODOO_CORE_NAME,
+                "No adapter found, pass %s must be explicitly loaded later.", 
+                this->Name().c_str()
+            );
         } else {
             if ( !adapter->LoadPass(this) )
             {
-                mCore->Log("Voodoo Core: Failed to load pass %s.\n", this->Name().c_str());
+                mCore->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->Name().c_str());
             } else {
-                mCore->Log("Voodoo Core: Successfully loaded pass %s.\n", this->Name().c_str());
+                mCore->Log(LL_Error, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->Name().c_str());
             }
         }
     }

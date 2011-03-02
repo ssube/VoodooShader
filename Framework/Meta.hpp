@@ -28,7 +28,7 @@
 #    define VOODOO_API __declspec(dllimport)
 #endif
 
-// Hide the DLL-interface warnings
+// Hide the DLL-interface warning
 #pragma warning(disable:4251)
 
 #include "Includes.hpp"
@@ -74,7 +74,7 @@ namespace VoodooShader
 
     const size_t VersionSize = sizeof(Version);
 
-#define Throw(msg, core) throw Exception(msg, core, __FILE__, __FUNCTION__, __LINE__);
+#define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__);
 
     typedef std::string String;
 
@@ -215,6 +215,22 @@ namespace VoodooShader
         FM_Write,
         // Max
         FM_Count
+    };
+
+    /**
+     * Log message levels.
+     */
+    enum LogLevel
+    {
+        LL_Unknown = 0,
+        // Working values
+        LL_Info,
+        LL_Debug,
+        LL_Warning,
+        LL_Error,
+        LL_Fatal,
+        // Max value
+        LL_Max
     };
 }
 

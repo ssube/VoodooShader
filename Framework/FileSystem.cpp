@@ -1,5 +1,7 @@
 #include "Includes.hpp"
 #include "FileSystem.hpp"
+#include "Core.hpp"
+#include "Version.hpp"
 
 namespace VoodooShader
 {
@@ -35,7 +37,13 @@ namespace VoodooShader
             ++curDir;
         }
 
-        mCore->Log("Voodoo Core: Unable to find file %s.\n", name);
+        mCore->Log
+        (
+            LL_Error,
+            VOODOO_CORE_NAME,
+            "Unable to find file %s.", 
+            name
+        );
 
         return FileRef();
     }
@@ -52,9 +60,10 @@ namespace VoodooShader
         case FM_Write:
             access = GENERIC_WRITE;
             break;
+        case FM_Count:
         case FM_Unknown:
         default:
-            Throw("Voodoo Core: Attempted to open file with unknown mode.", mCore);
+            Throw(VOODOO_CORE_NAME, "Attempted to open file with unknown mode.", mCore);
             break;
         }
 

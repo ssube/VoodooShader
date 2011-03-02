@@ -19,8 +19,8 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
   
-  
-  // Various doc pages
+// Various doc pages
+
 /**
  * @page Voodoo Voodoo Shader Framework
  * <p>
@@ -204,26 +204,26 @@
  * <table>
  *    <tr><th>Voodoo Format</th>        <th>DirectX Format</th>        
  *        <th>OpenGL Format</th>        <th>RT/Copy</th></tr>
- *    <tr><td>TF_Unknown</td>            <td>D3DFMT_UNKNOWN</td>        
+ *    <tr><td>TF_Unknown</td>           <td>D3DFMT_UNKNOWN</td>        
  *        <td>(unknown)</td>            <td>No</td></tr>
- *    <tr><td>TF_RGB5</td>            <td>D3DFMT_X1R5G5B5</td>    
- *        <td>GL_RGB5</td>            <td>Yes</td></tr>
+ *    <tr><td>TF_RGB5</td>              <td>D3DFMT_X1R5G5B5</td>    
+ *        <td>GL_RGB5</td>              <td>Yes</td></tr>
  *    <tr><td>TF_RGB5A1</td>            <td>D3DFMT_A1R5G5B5</td>    
- *        <td>GL_RGB5_A1</td>            <td>Yes</td></tr>
- *    <tr><td>TF_RGB8</td>            <td>D3DFMT_X8R8G8B8</td>    
- *        <td>GL_RGB8</td>            <td>Yes</td></tr>
+ *        <td>GL_RGB5_A1</td>           <td>Yes</td></tr>
+ *    <tr><td>TF_RGB8</td>              <td>D3DFMT_X8R8G8B8</td>    
+ *        <td>GL_RGB8</td>              <td>Yes</td></tr>
  *    <tr><td>TF_RGB8A1</td>            <td>D3DFMT_A8R8G8B8</td>    
- *        <td>GL_RGB8_A1</td>            <td>Yes</td></tr>
- *    <tr><td>TF_RGB10A2</td>            <td>D3DFMT_A2R10G10B10</td>    
- *        <td>GL_RGB10_A2</td>        <td>Yes</td></tr>
+ *        <td>GL_RGB8_A1</td>           <td>Yes</td></tr>
+ *    <tr><td>TF_RGB10A2</td>           <td>D3DFMT_A2R10G10B10</td>    
+ *        <td>GL_RGB10_A2</td>          <td>Yes</td></tr>
  *    <tr><td>TF_RGBA16F<sup>1</sup></td><td>D3DFMT_A16B16G16R16F</td>
- *        <td>GL_RGBA16F</td>            <td>N/Y</td></tr>
+ *        <td>GL_RGBA16F</td>           <td>N/Y</td></tr>
  *    <tr><td>TF_RGBA32F<sup>1</sup></td><td>D3DFMT_A32B32G32R32F</td>
- *        <td>GL_RGBA32F</td>            <td>N/Y</td></tr>
- *    <tr><td>TF_D16F</td>            <td>D3DFMT_D16F</td>    
- *        <td>GL_DEPTH_COMPONENT16</td><td>N/Y-ish<sup>2</sup></td></tr>
- *    <tr><td>TF_D32F</td>            <td>D3DFMT_D32F</td>
- *        <td>GL_DEPTH_COMPONENT32</td><td>N/Y-ish<sup>2</sup></td></tr>
+ *        <td>GL_RGBA32F</td>           <td>N/Y</td></tr>
+ *    <tr><td>TF_D16F</td>              <td>D3DFMT_D16F</td>    
+ *        <td>GL_DEPTH_COMPONENT16</td> <td>N/Y-ish<sup>2</sup></td></tr>
+ *    <tr><td>TF_D32F</td>              <td>D3DFMT_D32F</td>
+ *        <td>GL_DEPTH_COMPONENT32</td> <td>N/Y-ish<sup>2</sup></td></tr>
  * </table>
  * <p>
  *  <em>Note <sup>1</sup>:</em>

@@ -4,6 +4,7 @@
 #include "Core.hpp"
 #include "Exception.hpp"
 #include "Shader.hpp"
+#include "Version.hpp"
 
 namespace VoodooShader
 {
@@ -40,7 +41,7 @@ namespace VoodooShader
         {
             this->mMaterials.erase(material);    
         } else {
-            Throw("Voodoo Core: Texture not present in material map.", this->mParent);
+            Throw(VOODOO_CORE_NAME, "Texture not present in material map.", this->mParent);
         }
     }
 
@@ -50,9 +51,12 @@ namespace VoodooShader
 
         if ( !adapter )
         {
-            Throw(
-                "Voodoo Core: Attempted to bind material with no adapter set.", 
-                this->mParent);
+            Throw
+            (
+                VOODOO_CORE_NAME, 
+                "Attempted to bind material with no adapter set.", 
+                this->mParent
+            );
         }
 
         MaterialMap::iterator material = this->mMaterials.find(texture);
@@ -78,7 +82,7 @@ namespace VoodooShader
                 adapter->BindPass(pass);
                 this->mBound = this->mDefault;
             } else {
-                Throw("Voodoo Core: Could not find material to bind.", this->mParent);
+                Throw(VOODOO_CORE_NAME, "Could not find material to bind.", this->mParent);
             }
         }
     }
@@ -91,9 +95,12 @@ namespace VoodooShader
 
             if ( !adapter )
             {
-                Throw(
-                  "Voodoo Core: Attempted to unbind material with no adapter set.", 
-                  this->mParent);
+                Throw
+                (
+                    VOODOO_CORE_NAME, 
+                    "Attempted to unbind material with no adapter set.", 
+                    this->mParent
+                );
             }
 
             adapter->UnbindPass();

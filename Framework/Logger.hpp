@@ -26,20 +26,6 @@
 namespace VoodooShader
 {
     /**
-     * Log message levels.
-     */
-    enum LogLevel
-    {
-        LL_Unknown = 0,
-        // Working values
-        LL_Info,
-        LL_Warning,
-        LL_Error,
-        // Max value
-        LL_Max
-    };
-
-    /**
      * Log management class, capable of opening, closing, writing to and 
      * dumping log files. Throws on problems opening the log
      * and has timestamp and formatting capabilities.
@@ -67,6 +53,17 @@ namespace VoodooShader
         ~Logger();
 
         /**
+         * Set the default minimum message level. Messages below this level will
+         * not be logged.
+         *
+         * @param level The minimum log level.
+         */
+        void SetLogLevel
+        (
+            __in LogLevel level
+        );
+
+        /**
          * Write a formatted timestamp to the log. The timestamp will have the 
          * form <code>HH.MM.SS :: </code>. Leading zeros are guaranteed to be
          * present, so the timestamp length remains constant.
@@ -88,6 +85,7 @@ namespace VoodooShader
         void Log
         (
             __in LogLevel level,
+            __in __notnull const char * module,
             __in __notnull const char * msg, 
             ...
         );
@@ -107,6 +105,7 @@ namespace VoodooShader
         void LogList
         (
             __in LogLevel level,
+            __in __notnull const char * module,
             __in __notnull const char * msg, 
             __in va_list args
         );
@@ -156,6 +155,7 @@ namespace VoodooShader
         void Close();
 
     private:
+        LogLevel mLogLevel;
         std::fstream mLogFile;
         tm * mLocalTime;
     };
