@@ -43,8 +43,8 @@ namespace VoodooShader
          */
         Logger
         (
-            __in __notnull const char * filename, 
-            __in_opt bool append = false
+            _In_ const char * filename, 
+            _In_opt_ bool append = false
         );
 
         /** 
@@ -60,7 +60,7 @@ namespace VoodooShader
          */
         void SetLogLevel
         (
-            __in LogLevel level
+            _In_ LogLevel level
         );
 
         /**
@@ -84,9 +84,9 @@ namespace VoodooShader
          */
         void Log
         (
-            __in LogLevel level,
-            __in __notnull const char * module,
-            __in __notnull const char * msg, 
+            _In_ LogLevel level,
+            _In_ const char * module,
+            _In_ _Printf_format_string_ const char * msg, 
             ...
         );
 
@@ -104,10 +104,10 @@ namespace VoodooShader
          */
         void LogList
         (
-            __in LogLevel level,
-            __in __notnull const char * module,
-            __in __notnull const char * msg, 
-            __in va_list args
+            _In_ LogLevel level,
+            _In_ const char * module,
+            _In_ const char * msg, 
+            _In_ va_list args
         );
 
         /**
@@ -120,7 +120,7 @@ namespace VoodooShader
          */
         void SetBufferSize
         (
-            __in unsigned int bytes
+            _In_ unsigned int bytes
         );
 
         /**
@@ -146,7 +146,7 @@ namespace VoodooShader
          */
         bool Open
         (
-            __in __notnull const char * filename
+            _In_ const char * filename
         );
 
         /**

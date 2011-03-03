@@ -36,7 +36,7 @@ namespace VoodooShader
     public:
         MaterialManager
         (
-            __in __notnull Core * parent
+            _In_ Core * parent
         );
 
         /**
@@ -55,9 +55,9 @@ namespace VoodooShader
          */
         void Add
         (
-            __in TextureRef texture, 
-            __in ShaderRef shader, 
-            __in_opt bool global = false
+            _In_ TextureRef texture, 
+            _In_ ShaderRef shader, 
+            _In_opt_ bool global = false
         );
 
         /**
@@ -68,7 +68,7 @@ namespace VoodooShader
          */
         void Remove
         (
-            __in TextureRef texture
+            _In_ TextureRef texture
         );
 
         /**
@@ -85,7 +85,7 @@ namespace VoodooShader
          */
         void Bind
         (
-            __in TextureRef texture
+            _In_ TextureRef texture
         );
 
         /**
@@ -109,7 +109,7 @@ namespace VoodooShader
          */
         ShaderRef Find
         (
-            __in TextureRef texture
+            _In_ TextureRef texture
         );
 
     private:

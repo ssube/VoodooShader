@@ -35,15 +35,15 @@ namespace VoodooShader
          */
         Parameter
         (
-            __in __notnull Core * core, 
-            __in String name, 
-            __in_nz ParameterType type
+            _In_ Core * core, 
+            _In_ String name, 
+            _In_ ParameterType type
         );
 
         Parameter
         (
-            __in __notnull Shader * parent, 
-            __in __notnull CGparameter param
+            _In_ Shader * parent, 
+            _In_ CGparameter param
         );
 
         String Name();
@@ -64,69 +64,69 @@ namespace VoodooShader
          */
         void Attach
         (
-            __in ParameterRef param
+            _In_ ParameterRef param
         );
 
         void Set
         (
-            __in TextureRef newTex
+            _In_ TextureRef newTex
         );
 
         void Set
         (
-            __in float newX
+            _In_ float newX
         );
 
         void Set
         (
-            __in float newX, 
-            __in float newY
+            _In_ float newX, 
+            _In_ float newY
         );
 
         void Set
         (
-            __in float newX, 
-            __in float newY, 
-            __in float newZ
+            _In_ float newX, 
+            _In_ float newY, 
+            _In_ float newZ
         );
 
         void Set
         (
-            __in float newX, 
-            __in float newY, 
-            __in float newZ, 
-            __in float newW
+            _In_ float newX, 
+            _In_ float newY, 
+            _In_ float newZ, 
+            _In_ float newW
         );
 
         void Get
         (
-            __out TextureRef & param
+            _Out_ TextureRef & param
         );
 
         void Get
         (
-            __out float & paramX
+            _Out_ float & paramX
         );
 
         void Get
         (
-            __out float & paramX, 
-            __out float & paramY
+            _Out_ float & paramX, 
+            _Out_ float & paramY
         );
 
         void Get
         (
-            __out float & paramX, 
-            __out float & paramY, 
-            __out float & paramZ
+            _Out_ float & paramX, 
+            _Out_ float & paramY, 
+            _Out_ float & paramZ
         );
 
         void Get
         (
-            __out float & paramX, 
-            __out float & paramY, 
-            __out float & paramZ, 
-            __out float & paramW
+            _Out_ float & paramX, 
+            _Out_ float & paramY, 
+            _Out_ float & paramZ, 
+            _Out_ float & paramW
         );
 
         inline TextureRef GetTexture()

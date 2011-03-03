@@ -31,15 +31,15 @@ namespace VoodooShader
     public:
         Shader
         (
-            __in __notnull __readonly Core * parent, 
-            __in String filename, 
-            __in_opt __readonly const char ** args = NULL
+            _In_ Core * parent, 
+            _In_ String filename, 
+            _In_opt_ const char ** args = NULL
         );
 
         Shader
         (
-            __in __notnull __readonly Core * parent, 
-            __in CGeffect effect
+            _In_ Core * parent, 
+            _In_ CGeffect effect
         );
 
         String Name();
@@ -58,7 +58,7 @@ namespace VoodooShader
          */
         void SetDefaultTechnique
         (
-            __in String name
+            _In_ String name
         );
 
         /**
@@ -95,7 +95,7 @@ namespace VoodooShader
          */
         ParameterRef GetParameter
         (
-            __in size_t index
+            _In_ size_t index
         );
 
         /**
@@ -109,7 +109,7 @@ namespace VoodooShader
          */
         ParameterRef GetParameter
         (
-            __in String name
+            _In_ String name
         );
 
         /**
@@ -123,7 +123,7 @@ namespace VoodooShader
          */
         TechniqueRef GetTechnique
         (
-            __in String name
+            _In_ String name
         );
 
         /**
@@ -148,7 +148,7 @@ namespace VoodooShader
          */
         void LinkParameter
         (
-            __in ParameterRef param
+            _In_ ParameterRef param
         );
 
         /**
@@ -159,7 +159,7 @@ namespace VoodooShader
          */
         void LinkSampler
         (
-            __in ParameterRef param
+            _In_ ParameterRef param
         );
 
         void SetupTechniques();
@@ -178,8 +178,8 @@ namespace VoodooShader
     public:
         Technique
         (
-            __in __notnull __readonly Shader * parent, 
-            __in CGtechnique cgTech
+            _In_ Shader * parent, 
+            _In_ CGtechnique cgTech
         );
 
         /**
@@ -215,7 +215,7 @@ namespace VoodooShader
          */
         PassRef GetPass
         (
-            __in size_t index
+            _In_ size_t index
         );
 
         /**
@@ -244,8 +244,8 @@ namespace VoodooShader
     public:
         Pass
         (
-            __in __notnull __readonly Technique * parent,
-            __in CGpass cgPass
+            _In_ __notnull __readonly Technique * parent,
+            _In_ CGpass cgPass
         );
 
         /**
@@ -289,7 +289,7 @@ namespace VoodooShader
          */
         CGprogram GetProgram
         (
-            __in ProgramStage stage
+            _In_ ProgramStage stage
         );
 
         void Link();

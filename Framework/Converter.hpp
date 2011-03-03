@@ -45,7 +45,7 @@ namespace VoodooShader
          */
         static inline CGtype ToCGType
         (
-            __in ParameterType pt
+            _In_ ParameterType pt
         )
         {
             switch ( pt )
@@ -83,7 +83,7 @@ namespace VoodooShader
         */
         static inline ParameterType ToParameterType
         (
-            __in CGtype pt
+            _In_ CGtype pt
         )
         {
             switch ( pt )
@@ -112,7 +112,7 @@ namespace VoodooShader
 
         static inline ParameterCategory ToParameterCategory
         (
-            __in ParameterType type
+            _In_ ParameterType type
         )
         {
             switch ( type )
@@ -144,7 +144,7 @@ namespace VoodooShader
          */
         static inline const char * ToString
         (
-            __in TextureFormat tf
+            _In_ TextureFormat tf
         )
         {
             switch ( tf )
@@ -183,7 +183,7 @@ namespace VoodooShader
         */
         static inline const char * ToString
         (
-            __in ParameterType pt
+            _In_ ParameterType pt
         )
         {
             switch ( pt )
@@ -202,6 +202,8 @@ namespace VoodooShader
                 return "PT_Float3";
             case PT_Float4:
                 return "PT_Float4";
+            case PT_Matrix:
+                return "PT_Matrix";
             case PT_Unknown:
             default:
                 return "PT_Unknown";
@@ -210,7 +212,7 @@ namespace VoodooShader
 
         static inline const char * ToString
         (
-            __in ParameterCategory cat
+            _In_ ParameterCategory cat
         )
         {
             switch ( cat )
@@ -219,6 +221,8 @@ namespace VoodooShader
                 return "PC_Float";
             case PC_Sampler:
                 return "PC_Sampler";
+            case PC_Matrix:
+                return "PC_Matrix";
             case PC_Unknown:
             default:
                 return "PC_Unknown";

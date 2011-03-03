@@ -5,15 +5,15 @@
 
 namespace VoodooShader
 {
-    void FileSystem::RegisterDir(String name)
+    void FileSystem::AddDirectory(String name)
     {
         this->mDirectories.push_front(name);
     }
 
-    void FileSystem::RemoveDir(String name)
+    void FileSystem::RemoveDirectory(String name)
     {
-        //! @todo Implement FileSystem::RemoveDir
-        //this->mDirectories.remove_if(removeMatching<String>(name));
+        //! @todo Look into alternatives for lambdas in FileSystem::RemoveDirectory().
+        this->mDirectories.remove_if([&](String current){return (current == name);});
     }
 
     FileRef FileSystem::GetFile(String name)
@@ -31,6 +31,14 @@ namespace VoodooShader
             {
                 CloseHandle(file);
 
+                mCore->Log
+                (
+                    LL_Debug,
+                    VOODOO_CORE_NAME,
+                    "File %s found in directory %s.",
+                    name.c_str(), (*curDir).c_str()
+                );
+
                 return FileRef(new File(mCore, fullname));
             }
 
@@ -39,7 +47,7 @@ namespace VoodooShader
 
         mCore->Log
         (
-            LL_Error,
+            LL_Warning,
             VOODOO_CORE_NAME,
             "Unable to find file %s.", 
             name

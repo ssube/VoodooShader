@@ -89,7 +89,7 @@ namespace VoodooShader
          */
         virtual bool LoadPass
         (
-            __in Pass * pass
+            _In_ Pass * pass
         ) = 0;
 
         /**
@@ -98,10 +98,10 @@ namespace VoodooShader
         * managing any errors that may arise.
         *
         * @param pass A shared pointer to the pass to be bound. This should be a
-        *        valid pass, but    Adapters must validate it.
+        *        valid pass, but Adapters must validate it.
         *
         * @note Adapters may, at their discretion, bind some or even no programs
-        *        to the true    graphics API. An example of this is the Direct3D 9 
+        *        to the true graphics API. An example of this is the Direct3D 9 
         *        adapter, which binds only vertex and fragment programs, ignoring
         *        any geometry, domain or hull programs.
         * @note The Adapter may implement passes using deferred parameters; if 
@@ -112,7 +112,7 @@ namespace VoodooShader
         */
         virtual void BindPass
         (
-            __in PassRef pass
+            _In_ PassRef pass
         ) = 0;
 
         /**
@@ -142,7 +142,7 @@ namespace VoodooShader
          *         <ol>
          *            <li>Depth and stencil buffers must not be written to.</li>
          *            <li>Alpha testing, culling, depth testing and other states 
-         *                that could cull    portions of the quad must be disabled
+         *                that could cull portions of the quad must be disabled
          *                (the whole quad must be drawn).</li>
          *            <li>Alpha-blending should be disabled entirely at this time,
          *                in future versions blending may be used during some
@@ -153,7 +153,7 @@ namespace VoodooShader
          */
         virtual void DrawQuad
         (
-            __in __notnull Vertex * vertexData
+            _In_count_c_(4) Vertex * vertexData
         ) = 0;
 
         /**
@@ -164,7 +164,7 @@ namespace VoodooShader
          */
         virtual void ApplyParameter
         (
-            __in ParameterRef param
+            _In_ ParameterRef param
         ) = 0;
 
         /**
@@ -182,7 +182,7 @@ namespace VoodooShader
          */
         virtual void DrawShader
         (
-            __in ShaderRef shader
+            _In_ ShaderRef shader
         ) = 0;
 
         /**
@@ -209,12 +209,8 @@ namespace VoodooShader
          */
         virtual TextureRef CreateTexture
         (
-            __in String name, 
-            __in size_t width, 
-            __in size_t height, 
-            __in size_t depth, 
-            __in_opt bool mipmaps, 
-            __in TextureFormat format
+            _In_ String name, 
+            _In_ TextureDesc desc
         ) = 0;
 
         /**
@@ -229,8 +225,8 @@ namespace VoodooShader
          */
         virtual bool ConnectTexture
         (
-            __in ParameterRef param, 
-            __in TextureRef texture
+            _In_ ParameterRef param, 
+            _In_ TextureRef texture
         ) = 0;
 
         /**
@@ -243,9 +239,9 @@ namespace VoodooShader
          */
         virtual void HandleError
         (
-            __in CGcontext context, 
-            __in CGerror error, 
-            __in __notnull void * core
+            _In_ CGcontext context, 
+            _In_ CGerror error, 
+            _In_ void * core
         ) = 0;
     };
 }

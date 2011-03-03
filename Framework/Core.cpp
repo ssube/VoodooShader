@@ -100,22 +100,6 @@ namespace VoodooShader
         return this->mAdapter;
     }
 
-    void Core::SetDebug(bool mode)
-    {
-#ifndef _DEBUG
-        this->mDebugMode = mode;
-        if ( mode )
-        {
-            this->mLogger->SetBufferSize(0);
-        }
-#else
-        UNREFERENCED_PARAMETER(mode);
-
-        this->mDebugMode = true;
-        this->mLogger->SetBufferSize(0);
-#endif
-    }
-
     void Core::Log(LogLevel level, const char * module, const char * msg, ...)
     {
         if ( this->mLogger )

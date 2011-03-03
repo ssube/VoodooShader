@@ -32,19 +32,19 @@ namespace VoodooShader
     public:
         FileSystem
         (
-            __in __notnull Core * core
+            _In_ Core * core
         );
 
         ~FileSystem();
 
-        void RegisterDir
+        void AddDirectory
         (
-            __in String dir
+            _In_ String dir
         );
 
-        void RemoveDir
+        void RemoveDirectory
         (
-            __in String dir
+            _In_ String dir
         );
 
         /**
@@ -52,14 +52,13 @@ namespace VoodooShader
          * but may include directories) into an absolute filename by searching
          * the list of resource directories registered with this manager.
          *
-         * @param name The filename to search for
-         * @return If the file is found, a reference to a file object pointing 
-         *        to the file with an absolute path. Otherwise, an empty 
-         *        reference.
+         * @param name The filename to search for.
+         * @return If the file is found, a reference to an unopened file object
+         *      is returned. If no file is found, an empty reference is returned.
          */
         FileRef GetFile
         (
-            __in String name
+            _In_ String name
         );
 
     private:
@@ -75,9 +74,34 @@ namespace VoodooShader
          * should usually not be called directly, FileManager::GetFile(String)
          * will automatically resolve and return paths to simplify things.
          */
-        File(__in __notnull Core * core, __in String name);
+        File
+        (
+            _In_ Core * core, 
+            _In_ String name
+        );
 
-        bool Open(__in FileOpenMode mode);
+        /**
+         * Opens the file for read-write access. 
+         * 
+         * @param mode The mode to open the file in.
+         * @return Whether the file was successfully opened.
+         *
+         * @note If this file handle was returned by a FileSystem and the absolute
+         *      path is still valid, this function should always succeed. In single-
+         *      threaded or fullscreen scenarios, this is usually correct.
+         * @warning If this file handle uses a relative path, then it is subject to
+         *      changes in working directory by the any module in the process.
+         *      FileSystem::GetFile() uses an absolute path in the constructor and
+         *      is not susceptible to this.
+         */
+        bool Open
+        (
+            _In_ FileOpenMode mode
+        );
+
+        bool Close();
+
+
 
     private:
         HANDLE mHandle;

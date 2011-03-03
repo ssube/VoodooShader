@@ -43,7 +43,7 @@ namespace VoodooShader
 
         Reference
         (
-            __in __readonly const T & object
+            _In_ const T & object
         )
         {
             mObject = new T(object);
@@ -52,7 +52,7 @@ namespace VoodooShader
 
         Reference
         (
-            __in __notnull __readonly T * object
+            _In_ T * object
         )
             : mObject(object)
         {
@@ -61,7 +61,7 @@ namespace VoodooShader
 
         Reference
         (
-            __in __notnull __readonly void * object
+            _In_opt_ void * object
         )
             : mObject(reinterpret_cast<T*>(object))
         {
@@ -70,7 +70,7 @@ namespace VoodooShader
 
         Reference
         (
-            __in __readonly const Reference<T> & other
+            _In_ const Reference<T> & other
         )
             : mObject(other.mObject), mCount(other.mCount)
         {
@@ -84,7 +84,7 @@ namespace VoodooShader
 
         Reference<T> & operator= 
         (
-            __in __readonly const Reference<T> & other
+            _In_ const Reference<T> & other
         )
         {
             if ( this != &other )
@@ -99,7 +99,7 @@ namespace VoodooShader
 
         Reference<T> & operator= 
         (
-            __in __notnull __readonly T * object
+            _In_ T * object
         )
         {
             release();
@@ -119,13 +119,11 @@ namespace VoodooShader
             return (*mObject);
         }
 
-        __checkReturn 
         T * operator->()
         {
             return mObject;
         }
 
-        __checkReturn 
         T * get()
         {
             return mObject;
@@ -164,8 +162,8 @@ namespace VoodooShader
     template<typename U, typename V>
     bool operator<
     (
-        __in __readonly const Reference<U> & me, 
-        __in __readonly const Reference<V> & other
+        _In_ __readonly const Reference<U> & me, 
+        _In_ __readonly const Reference<V> & other
     )
     {
         return ( me.mObject < other.mObject );

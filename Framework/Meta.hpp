@@ -72,6 +72,15 @@ namespace VoodooShader
         long Rev;
     };
 
+    struct TextureDesc
+    {
+        size_t Width;
+        size_t Height;
+        size_t Depth;
+        bool Mipmaps;
+        TextureFormat Format;
+    };
+
     const size_t VersionSize = sizeof(Version);
 
 #define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__);

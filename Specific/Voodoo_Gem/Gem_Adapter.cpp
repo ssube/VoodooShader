@@ -494,16 +494,20 @@ namespace VoodooShader
             }
         }
 
-        TextureRef Adapter::CreateTexture(String name, size_t width, size_t height, size_t depth, 
-            bool mipmaps, TextureFormat format)
+        TextureRef Adapter::CreateTexture(String name, TextureDesc desc)
         {
             IDirect3DTexture9 * tex = NULL;
-            D3DFORMAT fmt = Gem_Converter::ToD3DFormat(format);
+            D3DFORMAT fmt = Gem_Converter::ToD3DFormat(desc.Format);
 
-            HRESULT hr = mDevice->CreateTexture(width, height, depth, D3DUSAGE_RENDERTARGET, fmt, D3DPOOL_DEFAULT, &tex, NULL);
+            HRESULT hr = mDevice->CreateTexture
+            (
+                desc.Width, desc.Height, desc.Depth, 
+                D3DUSAGE_RENDERTARGET, fmt, D3DPOOL_DEFAULT, &tex, NULL
+            );
+
             if ( SUCCEEDED(hr) )
             {
-                TextureRef texRef = mCore->CreateTexture(name, reinterpret_cast<void*>(tex));
+                TextureRef texRef = mCore->AddTexture(name, reinterpret_cast<void*>(tex));
                 return texRef;
             } else {
                 const char * error = cgD3D9TranslateHRESULT(hr);

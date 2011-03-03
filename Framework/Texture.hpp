@@ -31,8 +31,8 @@ namespace VoodooShader
     public:
         Texture
         (
-            __in_opt String name = "", 
-            __in_opt __maybenull void * texture = NULL
+            _In_opt_ String name = "", 
+            _In_opt_ void * texture = NULL
         );
 
         //! @todo Change the Texture::GetTexture<T>() and Texture::GetTexture()
@@ -43,7 +43,7 @@ namespace VoodooShader
             return reinterpret_cast<T*>(GetTexture());
         };
 
-        __checkReturn
+        _Check_return_
         void * GetTexture();
 
         String Name();

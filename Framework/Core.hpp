@@ -44,12 +44,12 @@ namespace VoodooShader
         __checkReturn
         static Core * Create
         (
-            __in_opt String logfile = "Voodoo.log"
+            _In_opt String logfile = "Voodoo.log"
         );
 
         static void Destroy
         (
-            __in __notnull Core * core
+            _In_ Core * core
         );
 
         /**
@@ -69,19 +69,6 @@ namespace VoodooShader
         Version GetVersion();
 
         /**
-         * Enable or disable debug mode at runtime.
-         *
-         * @param mode The desired mode
-         *
-         * @note This function only has an effect in release builds, in debug
-         *        builds debug mode is always on.
-         */
-        void SetDebug
-        (
-            __in bool mode
-        );
-
-        /**
          * Writes a string to the log file using standard printf syntax.
          * 
          * @param msg The format string to use
@@ -89,9 +76,9 @@ namespace VoodooShader
          */
         void Log
         (
-            __in LogLevel level,
-            __in __notnull const char * module, 
-            __in __notnull const char * msg, 
+            _In_ LogLevel level,
+            _In_ const char * module, 
+            _In_ _Printf_format_string_ const char * msg, 
             ...
         );
 
@@ -106,7 +93,7 @@ namespace VoodooShader
          */
         void SetAdapter
         (
-            __in __readonly __maybenull Adapter * adapter
+            _In_opt_ Adapter * adapter
         );
 
         /**
@@ -114,7 +101,7 @@ namespace VoodooShader
          *
          * @return A pointer to the Adapter or NULL if no Adapter is attached.
          */
-        __checkReturn
+        _Check_return_
         Adapter * GetAdapter();
 
         /**
@@ -126,8 +113,8 @@ namespace VoodooShader
          */
         ShaderRef CreateShader
         (
-            __in String filename, 
-            __in __readonly __maybenull const char ** args
+            _In_ String filename, 
+            _In_opt_ const char ** args
         );
 
         /**
@@ -148,8 +135,8 @@ namespace VoodooShader
          */
         TextureRef AddTexture
         (
-            __in String name, 
-            __in __readonly __notnull void * data
+            _In_ String name, 
+            _In_ void * data
         );
 
         /**
@@ -163,7 +150,7 @@ namespace VoodooShader
          */
         TextureRef GetTexture
         (
-            __in String name
+            _In_ String name
         );
 
         /**
@@ -178,7 +165,7 @@ namespace VoodooShader
          */
         TextureRef GetTexture
         (
-            __in TextureType function
+            _In_ TextureType function
         );
 
         /**
@@ -194,8 +181,8 @@ namespace VoodooShader
          */
         void SetTexture
         (
-            __in TextureType function, 
-            __in TextureRef texture
+            _In_ TextureType function, 
+            _In_ TextureRef texture
         );
 
         /**
@@ -203,7 +190,7 @@ namespace VoodooShader
          */
         void RemoveTexture
         (
-            __in TextureRef texture
+            _In_ TextureRef texture
         );
 
         /**
@@ -224,8 +211,8 @@ namespace VoodooShader
          */
         ParameterRef CreateParameter
         (
-            __in String name, 
-            __in ParameterType type
+            _In_ String name, 
+            _In_ ParameterType type
         );
 
         /**
@@ -240,16 +227,16 @@ namespace VoodooShader
          */
         ParameterRef GetParameter
         (
-            __in String name, 
-            __in ParameterType type
+            _In_ String name, 
+            _In_ ParameterType type
         );
 
     //protected:
         static void CGErrorHandler
         (
-            __in CGcontext context, 
-            __in CGerror error, 
-            __in __maybenull void * core
+            _In_ CGcontext context, 
+            _In_ CGerror error, 
+            _In_opt_ void * core
         );
 
     private:
@@ -272,7 +259,7 @@ namespace VoodooShader
         */
         Core
         (
-            __in String logfile
+            _In_ String logfile
         );
 
         /**
@@ -307,9 +294,6 @@ namespace VoodooShader
         // Special textures
         TextureRef mLastPass;
         TextureRef mLastShader;
-
-        // Internal flags
-        bool mDebugMode;
     };
 }
 

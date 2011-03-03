@@ -29,7 +29,7 @@ namespace VoodooShader
 
     Exception::Exception
     (
-        const char * module, String message, 
+        String module, String message, 
         Core * core, 
         const char * file, const char * function, const int line
     )

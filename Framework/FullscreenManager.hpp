@@ -46,7 +46,7 @@ namespace VoodooShader
          */
         FullscreenManager
         (
-            __in __notnull Core * parent
+            _In_ Core * parent
         );
 
         /**
@@ -62,8 +62,8 @@ namespace VoodooShader
          */
         size_t Add
         (
-            __in ShaderRef shader, 
-            __in_opt int position = -1
+            _In_ ShaderRef shader, 
+            _In_opt_ int position = -1
         );
 
         /**
@@ -76,7 +76,7 @@ namespace VoodooShader
          */
         void Remove
         (
-            __in size_t position
+            _In_ size_t position
         );
 
         /**
@@ -91,8 +91,8 @@ namespace VoodooShader
          */
         void Render
         (
-            __in_opt unsigned int start = 0, 
-            __in_opt int count = -1
+            _In_opt_ unsigned int start = 0, 
+            _In_opt_ int count = -1
         );
 
     private:
