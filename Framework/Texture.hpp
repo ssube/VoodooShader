@@ -31,12 +31,13 @@ namespace VoodooShader
     public:
         Texture
         (
-            _In_opt_ String name = "", 
+            _In_ String name, 
             _In_opt_ void * texture = NULL
         );
 
         //! @todo Change the Texture::GetTexture<T>() and Texture::GetTexture()
         //!        functions to something better, I don't like this method.
+        _Check_return_
         template<typename T>
         inline T * GetTexture()
         {
@@ -53,7 +54,5 @@ namespace VoodooShader
         void * mTextureObject;
     };
 }
-
-
 
 #endif /*VOODOO_TEXTURE_HPP*/

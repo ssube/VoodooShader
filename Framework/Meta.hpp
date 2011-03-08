@@ -227,17 +227,18 @@ namespace VoodooShader
     };
 
     /**
-     * Log message levels.
+     * Log message levels. These are spread out so additional levels can be
+     * added in the future without affecting behavior.
      */
     enum LogLevel
     {
-        LL_Unknown = 0,
+        LL_Unknown  = 0x00,
         // Working values
-        LL_Info,
-        LL_Debug,
-        LL_Warning,
-        LL_Error,
-        LL_Fatal,
+        LL_Debug    = 0x10, // Verbose debug log messages
+        LL_Info     = 0x20, // Informational log messages
+        LL_Warning  = 0x30, // Warning log messages
+        LL_Error    = 0x40, // General error log messages
+        LL_Fatal    = 0x50, // Fatal error log messages
         // Max value
         LL_Max
     };

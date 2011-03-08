@@ -76,8 +76,10 @@ namespace VoodooShader
         /**
          * Log a message, may be formatted with printf syntax.
          *
-         * @param msg The message string.
-         * @param ... The parameters to insert
+         * @param level The level for this message.
+         * @param module The logging module's name.
+         * @param msg The message format string.
+         * @param ... The parameters to insert.
          *
          * @warning This function has a maximum (formatted) message length of
          *        4096 characters. This can be changed if it becomes an issue.
@@ -96,8 +98,10 @@ namespace VoodooShader
          * @note This generally shouldn't be called directly, it is provided
          *        for wrappers (such as the Core, which hides the logger object).
          *
-         * @param msg The message string
-         * @param args The arguments to insert
+         * @param level The level for this message.
+         * @param module The logging module's name.
+         * @param msg The message format string.
+         * @param args The arguments to insert.
          *
          * @warning This function has a maximum (formatted) message length of
          *        4096 characters. This can be changed if it becomes an issue.

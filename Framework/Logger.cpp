@@ -8,6 +8,7 @@ using namespace std;
 namespace VoodooShader
 {
     Logger::Logger(const char * filename, bool append)
+        mLogLevel(LL_Info)
     {
         unsigned int flags = ios_base::out;
         if ( append )
@@ -66,8 +67,15 @@ namespace VoodooShader
         this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
     }
 
+    void Logger::SetLogLevel(LogLevel level)
+    {
+        mLogLevel = level;
+    }
+
     void Logger::Log(LogLevel level, const char * module, const char * msg, ...)
     {
+        if ( level < mLogLevel ) return;
+
         va_list args;
         char buffer[4096];
 
@@ -105,12 +113,14 @@ namespace VoodooShader
 
     void Logger::LogList(LogLevel level, const char * module, const char * msg, va_list args)
     {
+        if ( level < mLogLevel ) return;
+
         char buffer[4096];
 
         _vsnprintf_s(buffer, 4095, 4095, msg, args);
         buffer[4095] = 0;
         
-        this->mLogFile << "<Message type=\"";
+        this->mLogFile << "\t<Message type=\"";
 
         switch ( level )
         {
