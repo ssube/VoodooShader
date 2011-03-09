@@ -19,6 +19,11 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
+#ifndef VOODOO_GEM_OBJECT_HPP
+#define VOODOO_GEM_OBJECT_HPP
+
+#include "Gem_Includes.hpp"
+
 #include "Gem_Module.hpp"
 #include "Gem_Adapter.hpp"
 #include "Gem_Converter.hpp"
@@ -449,3 +454,5 @@ public:
         return hr;
     }
 };
+
+#endif /*VOODOO_GEM_OBJECT_HPP*/

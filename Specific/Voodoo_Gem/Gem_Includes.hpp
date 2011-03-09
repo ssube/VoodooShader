@@ -19,32 +19,53 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_GEM_MODULE_HPP
-#define VOODOO_GEM_MODULE_HPP
+#ifndef VOODOO_GEM_INCLUDES_HPP
+#define VOODOO_GEM_INCLUDES_HPP
 
-#include "Gem_Includes.hpp"
+#include <set>
+#include <tuple>
 
-#include "MGE/FauxD3D8Header.hpp"
+#define VOODOO_IMPORT
+#include "VoodooFramework.hpp"
 
-extern D3DCAPS8 d3d8Caps;
+#ifdef _DEBUG
+#    define D3D_DEBUG_INFO
+#endif
 
-extern VoodooShader::Core * VoodooCore;
-extern VoodooShader::Adapter * VoodooGem;
+#include <d3d9.h>
+#include <d3dx9.h>
 
-extern IVoodoo3D8 * VoodooObject;
-extern IVoodoo3DDevice8 * VoodooDevice;
+#include "Cg/cgD3D9.h"
 
-extern VoodooShader::ShaderRef testShader;
+#ifndef VOODOO_IMPORT_GEM
+#    define VOODOO_API_GEM __declspec(dllexport)
+#else
+#    define VOODOO_API_GEM __declspec(dllimport)
+#endif
 
-extern TextureTuple gBackbuffer;
-extern TextureTuple gScratch;
-extern TextureTuple gThisFrame;
-extern std::map<VoodooShader::String, TextureTuple> gTextures;
+class IVoodoo3D8;
+class IVoodoo3DDevice8;
+class IVoodoo3DSurface8;
+class IVoodoo3DTexture8;
 
-extern VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;
+namespace VoodooShader
+{
+    namespace Gem
+    {
+        /**
+        * Storage struct to hold associated Voodoo @ref Texture "Textures" and 
+        * API texture objects. The RawTexture and RawSurface fields can hold an
+        * OpenGL FBO and texture or DirectX texture and surface.
+        */
+        struct TextureTuple
+        {
+            VoodooShader::TextureRef Texture;
+            LPDIRECT3DTEXTURE9 RawTexture;
+            LPDIRECT3DSURFACE9 RawSurface;
+        };
+    };
+};
 
-extern D3DPRESENT_PARAMETERS gParams;
+//typedef std::tuple<VoodooShader::TextureRef, LPDIRECT3DTEXTURE9, LPDIRECT3DSURFACE9> TextureTuple;
 
-typedef IDirect3D8 * (__stdcall *D3DFunc8)(UINT);
-
-#endif // VOODOO_GEM_MODULE_HPP
+#endif /*VOODOO_GEM_INCLUDES_HPP*/

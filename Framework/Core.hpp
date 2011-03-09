@@ -41,10 +41,10 @@ namespace VoodooShader
     class VOODOO_API Core
     {
     public:
-        __checkReturn
+        _Check_return_
         static Core * Create
         (
-            _In_opt String logfile = "Voodoo.log"
+            _In_opt_ String logfile = "Voodoo.log"
         );
 
         static void Destroy
@@ -71,6 +71,8 @@ namespace VoodooShader
         /**
          * Writes a string to the log file using standard printf syntax.
          * 
+         * @param level The level for this message.
+         * @param module The logging module's name.
          * @param msg The format string to use
          * @param ... Parameters to insert
          */
@@ -87,6 +89,7 @@ namespace VoodooShader
          *
          * @param adapter The Adapter to attach (will be used for all graphics 
          *        calls).
+         *        
          * @throws Exception if an Adapter is already connected to this Core and
          *         adapter is a new Adapter. To prevent this, remove the first
          *         Adapter <em>before</em> binding the second one.

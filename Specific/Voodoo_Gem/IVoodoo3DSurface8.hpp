@@ -22,6 +22,8 @@
 #ifndef VOODOO_GEM_SURFACE_HPP
 #define VOODOO_GEM_SURFACE_HPP
 
+#include "Gem_Includes.hpp"
+
 #include "Gem_Module.hpp"
 
 class IVoodoo3DSurface8

@@ -188,6 +188,7 @@
   <ItemGroup>
     <ClInclude Include="Gem_Adapter.hpp" />
     <ClInclude Include="Gem_Converter.hpp" />
+    <ClInclude Include="Gem_Includes.hpp" />
     <ClInclude Include="Gem_Module.hpp" />
     <ClInclude Include="Gem_Version.hpp" />
     <ClInclude Include="IVoodoo3D8.hpp" />

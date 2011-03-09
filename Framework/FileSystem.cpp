@@ -56,31 +56,41 @@ namespace VoodooShader
         return FileRef();
     }
 
-    bool File::Open(FileOpenMode mode)
-    {
-        DWORD access;
-
-        switch ( mode )
-        {
-        case FM_Read:
-            access = GENERIC_READ;
-            break;
-        case FM_Write:
-            access = GENERIC_WRITE;
-            break;
-        case FM_Count:
-        case FM_Unknown:
-        default:
-            Throw(VOODOO_CORE_NAME, "Attempted to open file with unknown mode.", mCore);
-            break;
-        }
-
-        mHandle = CreateFileA(mName.c_str(), access, 0, NULL, OPEN_EXISTING, NULL, NULL);
-
-        return ( mHandle != INVALID_HANDLE_VALUE );
-    }
-
     File::File(Core * core, String name)
         : mName(name), mCore(core), mHandle(NULL)
     {    };
+
+    bool File::Open(FileOpenMode mode)
+    {
+        DWORD access = 0;
+
+        if ( mode & FM_Read )
+        {
+            access |= GENERIC_READ;
+        }
+
+        if ( mode & FM_Write )
+        {
+            access |= GENERIC_WRITE;
+        }
+
+        if ( access == 0 )
+        {
+            Throw(VOODOO_CORE_NAME, "Attempted to open file with unknown mode.", mCore);
+        }
+
+        mCore->Log
+        (
+            LL_Debug,
+            VOODOO_CORE_NAME,
+            "Opening file %s with mode %x (underlying %u).",
+            mName.c_str(), mode, access
+        );
+
+        mHandle = CreateFileA(mName.c_str(), access, 0, NULL, OPEN_EXISTING, NULL, NULL);
+
+        assert(mHandle);
+
+        return ( mHandle != INVALID_HANDLE_VALUE );
+    }
 }

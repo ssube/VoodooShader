@@ -26,6 +26,23 @@
 
 namespace VoodooShader
 {
+    /**
+     * Complete shader class, managing techniques, passes and metadata. Shaders
+     * contain significant linking and processing data, as well as the Voodoo-specific
+     * linking stage. Shader file loading and compilation are handled internally,
+     * the shader can be constructed from a file location or existing Cg effect
+     * object.
+     * 
+     * @note    Voodoo @ref Shader Shaders correspond to DirectX effects or a group
+     *          of OpenGL programs.
+     * @note    A shader may contain multiple @ref Technique techniques. See the
+     *          Technique class for more information. Shader techniques must be
+     *          separately validated, only techniques valid on the current hardware
+     *          will be usable in the shader.
+     * @warning For any technique in a shader to be valid, the entire shader must
+     *          compile without errors. This <em>does not</em> mean that all techniques
+     *          will be valid.
+     */
     class VOODOO_API Shader
     {
     public:
@@ -173,6 +190,18 @@ namespace VoodooShader
         ParameterMap mParameters;
     };
 
+    /**
+     * Contains a set of passes, designed to be used sequentially to create a 
+     * shader effect. Typically, a single technique will be used, although
+     * shaders may contain multiple techniques. Each technique may contain a
+     * number of passes and some technique-level metadata.
+     * 
+     * @note    All passes in a valid technique are guaranteed to be valid.
+     * 
+     * @warning While a Shader may contain a number of Techniques, not all
+     *          are guaranteed to be valid. Techniques are typically validated
+     *          when the Shader is created and loaded. 
+     */
     class VOODOO_API Technique
     {
     public:
@@ -239,12 +268,25 @@ namespace VoodooShader
         TextureRef mTarget;
     };
 
+    /**
+     * Each Pass contains a single set of programs, each operating on a different
+     * stage of the render pipeline. 
+     * 
+     * @note    A Pass may contain programs for each stage. Valid stages vary by 
+     *          underlying API and version. In OpenGL and DirectX 9 and earlier,
+     *          stages may be left to the fixed-function pipeline by not specifying
+     *          any program to be used. Later APIs require the vertex and pixel
+     *          shaders to be specified in each pass.
+     * 
+     * @warning Some adapters may require programs to be provided for certain
+     *          stages.
+     */
     class VOODOO_API Pass
     {
     public:
         Pass
         (
-            _In_ __notnull __readonly Technique * parent,
+            _In_ __readonly Technique * parent,
             _In_ CGpass cgPass
         );
 

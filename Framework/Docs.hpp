@@ -228,14 +228,14 @@
  * <p>
  *  <em>Note <sup>1</sup>:</em>
  *     Floating-point texture formats (RGBA16F and RGBA32F) may not be supported 
- *     on all hardware.<br />
+ *     on all hardware.
  *     Any features requiring these formats should provide an alternate render 
  *     path for old hardware.
  * </p>
  * <p>
  *    <em>Note <sup>2</sup>:</em>
  *     Depth textures suffer additional restrictions when used with the DirectX 9 
- *     API.<br />
+ *     API.
  *     See the @ref depthbuffers "depth buffers" section for more information.
  * </p>
  *

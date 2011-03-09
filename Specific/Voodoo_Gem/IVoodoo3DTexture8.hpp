@@ -21,7 +21,8 @@
 
 #ifndef VOODOO_GEM_TEXTURE_HPP
 #define VOODOO_GEM_TEXTURE_HPP
-//! @todo Verify/compile/test
+
+#include "Gem_Includes.hpp"
 
 #include "IVoodoo3DSurface8.hpp"
 
@@ -42,8 +43,13 @@ public:
         : mDevice(device), mRealTexture(texture)
     {
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3DTexture8::IVoodoo3DTexture8(%d, %d) == %d\n",
-            device, texture, this);
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DTexture8::IVoodoo3DTexture8(%d, %d) == %d",
+            device, texture, this
+        );
 #endif
     }
 

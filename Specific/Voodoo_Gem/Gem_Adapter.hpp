@@ -1,6 +1,8 @@
 #ifndef VOODOO_GEM_ADAPTER_HPP
 #define VOODOO_GEM_ADAPTER_HPP
 
+#include "Gem_Includes.hpp"
+
 #include "Gem_Module.hpp"
 #include "IVoodoo3DDevice8.hpp"
 

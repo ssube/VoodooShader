@@ -38,10 +38,10 @@ D3DCAPS8 d3d8Caps;
 IVoodoo3D8 * VoodooObject = NULL;
 IVoodoo3DDevice8 * VoodooDevice = NULL;
 
-TexturePair gBackbuffer;
-TexturePair gScratch;
-TexturePair gThisFrame;
-std::map<VoodooShader::String, TexturePair> gTextures;
+TextureTuple gBackbuffer;
+TextureTuple gScratch;
+TextureTuple gThisFrame;
+std::map<VoodooShader::String, TextureTuple> gTextures;
 
 VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;
 
@@ -54,7 +54,13 @@ VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
     // Voodoo Gem Init function
     VoodooCore = VoodooShader::Core::Create("Voodoo_GEM.log");
 
-    VoodooCore->Log("Voodoo Gem: Direct3DCreate8 called, SDK version: %d.\n", version);
+    VoodooCore->Log
+    (
+        LL_Info,
+        VOODOO_GEM_NAME,
+        "Direct3DCreate8 called, SDK version: %d.", 
+        version
+    );
 
     //Load the real d3d8 dll and get device caps
     char Path[MAX_PATH];
@@ -66,7 +72,13 @@ VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
 
     if (d3d8func == NULL) 
     {
-        VoodooCore->Log("Voodoo Gem: Could not find D3D8 create true func.\n");
+        VoodooCore->Log
+        (
+            LL_Fatal, 
+            VOODOO_GEM_NAME, 
+            "Could not find D3D8 create true func."
+        );
+
         return 0;
     }
 
@@ -74,7 +86,12 @@ VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
     HRESULT hr = TempObject->GetDeviceCaps (0, D3DDEVTYPE_HAL, &d3d8Caps);
     if (hr != D3D_OK) 
     { 
-        VoodooCore->Log("Voodoo Gem: Could not get D3D8 caps.\n");
+        VoodooCore->Log
+        (
+            LL_Error,
+            VOODOO_GEM_NAME,
+            "Could not get D3D8 caps."
+        );
     }
     TempObject->Release();
 

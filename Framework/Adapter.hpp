@@ -191,11 +191,7 @@ namespace VoodooShader
          * API-independent form.
          *
          * @param name The name of the texture, usually a fully-qualified name.
-         * @param width The width of the texture in pixels.
-         * @param height The height of the texture in pixels.
-         * @param depth The depth of the texture in pixels.
-         * @param mipmaps Flag for mipmap generation or not.
-         * @param format The texture's format, must be a Voodoo supported format.
+         * @param desc Description of the texture, size and format.
          * @return A shared pointer to the created texture.
          *
          * @note Only Voodoo texture formats are supported, API-specific formats
