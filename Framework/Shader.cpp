@@ -124,7 +124,7 @@ namespace VoodooShader
                 } else {
                     mCore->Log
                     (
-                        LL_Error,
+                        LL_Warning,
                         VOODOO_CORE_NAME, 
                         "Unable to find global param %s for parameter %s.",
                         globalName, param->Name().c_str()
@@ -133,7 +133,7 @@ namespace VoodooShader
             } else {
                 mCore->Log
                 (
-                    LL_Error,
+                    LL_Warning,
                     VOODOO_CORE_NAME, 
                     "Unable to read global annotation for parameter %s.",
                     param->Name().c_str()
@@ -509,7 +509,7 @@ namespace VoodooShader
             {
                 mCore->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->Name().c_str());
             } else {
-                mCore->Log(LL_Error, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->Name().c_str());
+                mCore->Log(LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->Name().c_str());
             }
         }
     }

@@ -22,7 +22,7 @@ namespace VoodooShader
 
             if ( !core )
             {
-                core = VoodooShader::Core::Create("Voodoo_Gem.log");
+                core = VoodooShader::Core::Create("Voodoo_Gem.xml");
             }
 
             core->Log(LL_Info, VOODOO_GEM_NAME, "Starting adapter...");

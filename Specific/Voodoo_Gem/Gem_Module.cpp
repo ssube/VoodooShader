@@ -52,7 +52,7 @@ VoodooShader::ShaderRef testShader;
 VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
 {
     // Voodoo Gem Init function
-    VoodooCore = VoodooShader::Core::Create("Voodoo_GEM.log");
+    VoodooCore = VoodooShader::Core::Create("Voodoo_Gem.xml");
 
     VoodooCore->Log
     (

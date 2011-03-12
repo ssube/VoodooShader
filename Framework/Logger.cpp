@@ -8,7 +8,7 @@ using namespace std;
 namespace VoodooShader
 {
     Logger::Logger(Core * core, const char * filename, bool append)
-        : mCore(core), mLogLevel(LL_Info)
+        : mCore(core), mLogLevel(LL_Unknown)
     {
         unsigned int flags = ios_base::out;
         if ( append )
@@ -26,7 +26,10 @@ namespace VoodooShader
 
         this->mLocalTime = new tm();
 
-        this->mLogFile << "<LogFile " << this->Timestamp() << ">\n";
+        this->mLogFile << 
+            "<?xml version='1.0'?>" <<
+            "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>" <<
+            "<LogFile " << this->Timestamp() << ">\n";
 
         this->Log(LL_Info, VOODOO_CORE_NAME, "Logger created.");
     }
@@ -51,11 +54,16 @@ namespace VoodooShader
 
         if ( localtime_s(this->mLocalTime, &now) == ERROR_SUCCESS )
         {
-            char stamp[32];
-            sprintf_s(stamp, 32, " timestamp=\"%02d.%02d.%02d\" ", 
+            char stamp[64];
+            sprintf_s
+            (
+                stamp, 64, 
+                " timestamp=\"%02d.%02d.%02d\" tick=\"%u\" ", 
                 this->mLocalTime->tm_hour,
                 this->mLocalTime->tm_min,
-                this->mLocalTime->tm_sec);
+                this->mLocalTime->tm_sec,
+                GetTickCount()
+            );
             return String(stamp);
         } else {
             return String();
@@ -84,15 +92,15 @@ namespace VoodooShader
         buffer[4095] = 0;
         va_end(args);
         
-        this->mLogFile << "<Message type=\"";
+        this->mLogFile << "    <Message type=\"";
 
         switch ( level )
         {
-        case LL_Info:
-            this->mLogFile << "info";
-            break;
         case LL_Debug:
             this->mLogFile << "debug";
+            break;
+        case LL_Info:
+            this->mLogFile << "info";
             break;
         case LL_Warning:
             this->mLogFile << "warning";
@@ -120,15 +128,15 @@ namespace VoodooShader
         _vsnprintf_s(buffer, 4095, 4095, msg, args);
         buffer[4095] = 0;
         
-        this->mLogFile << "\t<Message type=\"";
+        this->mLogFile << "    <Message type=\"";
 
         switch ( level )
         {
-        case LL_Info:
-            this->mLogFile << "info";
-            break;
         case LL_Debug:
             this->mLogFile << "debug";
+            break;
+        case LL_Info:
+            this->mLogFile << "info";
             break;
         case LL_Warning:
             this->mLogFile << "warning";
