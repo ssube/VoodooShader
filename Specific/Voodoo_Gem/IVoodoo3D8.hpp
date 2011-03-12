@@ -111,11 +111,9 @@ public:
     {
         HRESULT hr = mRealObject->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d",
             Adapter, DeviceType, AdapterFormat, RenderTargetFormat, 
             DepthStencilFormat, hr);
-#endif
 
         return hr;
     }
@@ -132,11 +130,9 @@ public:
     {
         HRESULT hr = mRealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d",
             Adapter, DeviceType, AdapterFormat, Usage, RType, 
             CheckFormat, hr);
-#endif
 
         return hr;
     }
@@ -156,11 +152,9 @@ public:
     {
         HRESULT hr = mRealObject->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d",
             Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, 
-            hr);
-#endif    
+            hr);  
 
         return hr;
     }
@@ -176,11 +170,9 @@ public:
     {
         HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
-#ifdef _DEBUG 
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CheckDeviceType(%u, %u, %u, %u, %u) == %d\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDeviceType(%u, %u, %u, %u, %u) == %d",
             Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed, 
             hr);
-#endif
 
         return hr;
     }
@@ -226,7 +218,7 @@ public:
             VoodooShader::Gem::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
             );
 
-        VoodooCore->Log("Voodoo Gem: Backbuffer parameters for new device: %u by %u (%u buffers), %s.\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Backbuffer parameters for new device: %u by %u (%u buffers), %s.",
             mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight, 
             mpPresentationParameters.BackBufferCount, textureType);
 #endif
@@ -234,15 +226,17 @@ public:
         IDirect3DDevice9 * mRealDevice;
         HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &mRealDevice);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CreateDevice(%d, %d, %08X, %d, %08X, %08X) == %d\n",
-            Adapter, DeviceType, hFocusWindow, BehaviorFlags, 
-            &mpPresentationParameters, mRealDevice, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::CreateDevice(%d, %d, %p, %d, %p, %p) == %d",
+            Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, mRealDevice, hr
+        );
 
         if ( !SUCCEEDED(hr) )
         {
-            VoodooCore->Log("Voodoo Gem: IVoodoo3D8::CreateDevice failed with error %d on adapter %d.\n",
+            VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CreateDevice failed with error %d on adapter %d.",
                 hr, Adapter);
             return hr;
         } else {
@@ -268,10 +262,13 @@ public:
     {
         HRESULT hr = mRealObject->EnumAdapterModes(Adapter, D3DFMT_X8R8G8B8, Mode, pMode);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::EnumAdapterModes(%d, %d, %d) == %d\n",
-            Adapter, Mode, pMode, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::EnumAdapterModes(%d, %d, %p) == %d",
+            Adapter, Mode, pMode, hr
+        );
 
         return hr;
     }
@@ -280,10 +277,13 @@ public:
     {
         UINT r = mRealObject->GetAdapterCount();
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterCount() == %d\n",
-            r);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::GetAdapterCount() == %d",
+            r
+        );
 
         return r;
     }
@@ -296,10 +296,13 @@ public:
     {
         HRESULT hr = mRealObject->GetAdapterDisplayMode(Adapter, pMode);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterDisplayMode(%d, %d) == %d\n",
-            Adapter, pMode, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::GetAdapterDisplayMode(%d, %p) == %d",
+            Adapter, pMode, hr
+        );
 
         pMode->Format = D3DFMT_X8R8G8B8;
 
@@ -320,10 +323,8 @@ public:
 
         HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d",
             Adapter, Flags, pIdentifier, hr);
-#endif
 
         if ( SUCCEEDED(hr) )
         {
@@ -348,10 +349,8 @@ public:
     {
         UINT r = mRealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterModeCount(%d) == %d\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::GetAdapterModeCount(%d) == %d",
             Adapter, r);
-#endif
 
         return r;
     }
@@ -363,10 +362,8 @@ public:
     {
         HMONITOR hm = mRealObject->GetAdapterMonitor(Adapter);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetAdapterMonitor(%d) == %d\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::GetAdapterMonitor(%d) == %d",
             Adapter, hm);
-#endif
 
         return hm;
     }
@@ -374,7 +371,9 @@ public:
     /**
      * @note Test function: MGE uses a caching of actual D3D8 caps, let's see if we can just grab
      *          the appropriate entries from a D3D9 caps struct. They share an identical format until
-     *          the end of the D3D8 caps section, so...            
+     *          the end of the D3D8 caps section, so...   
+     *          
+     * @todo For some strange reason, this doesn't work (crashes the app, in fact). Find and fix.
      * /
     STDMETHOD(GetDeviceCaps)
     (
@@ -404,32 +403,18 @@ public:
         UINT Adapter,
         D3DDEVTYPE DeviceType,
         D3DCAPS8 * pCaps
-    )
-    //HRESULT _stdcall GetDeviceCaps (UINT a, D3DDEVTYPE b, D3DCAPS8 *c) 
+    ) 
     {
         *pCaps = d3d8Caps;
 
         D3DCAPS9 realCaps;
         HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d",
             Adapter, DeviceType, pCaps, hr);
-#endif
-
-        /*int same = memcmp(pCaps, &realCaps, sizeof(D3DCAPS8));
-
-        if ( same == 0 )
-        {
-            VoodooCore->Log("Voodoo Gem: D3D8 and 9 caps are identical.\n"); 
-        } else {
-            VoodooCore->Log("Voodoo Gem: Caps differ.\n");
-        }*/
 
         return D3D_OK;
     }
-    
-    //*/
 
     /**
      * This is a legacy function to register a software renderer into the DX8 system; however, the
@@ -444,12 +429,16 @@ public:
     {
         HRESULT hr = mRealObject->RegisterSoftwareDevice(pInitializeFunction);
 
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::RegisterSoftwareDevice(%d) == %d\n",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::RegisterSoftwareDevice(%d) == %d",
             pInitializeFunction, hr);
-#else
-        VoodooCore->Log("Voodoo Gem: The application has registered a software device.\n");
-#endif
+
+        VoodooCore->Log
+        (
+            LL_Warning, 
+            VOODOO_GEM_NAME, 
+            "The application has registered a software device. This is illegal in DX8. Host application code should be"
+            "examined for unusual behavior."
+        );
 
         return hr;
     }

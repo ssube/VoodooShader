@@ -63,7 +63,7 @@ namespace VoodooShader
         size_t Add
         (
             _In_ ShaderRef shader, 
-            _In_opt_ int position = -1
+            _In_ int position = -1
         );
 
         /**
@@ -91,8 +91,8 @@ namespace VoodooShader
          */
         void Render
         (
-            _In_opt_ unsigned int start = 0, 
-            _In_opt_ int count = -1
+            _In_ unsigned int start = 0, 
+            _In_ int count = -1
         );
 
     private:

@@ -50,7 +50,7 @@ namespace VoodooShader
             LL_Warning,
             VOODOO_CORE_NAME,
             "Unable to find file %s.", 
-            name
+            name.c_str()
         );
 
         return FileRef();

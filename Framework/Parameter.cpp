@@ -29,7 +29,7 @@ namespace VoodooShader
             break;
         case PT_Unknown:
         default:
-            Throw(VOODOO_CORE_NAME, "Invalid parameter type.", NULL);
+            Throw(VOODOO_CORE_NAME, "Invalid parameter type.", mCore);
             break;
         }
     }
@@ -55,7 +55,7 @@ namespace VoodooShader
             break;
         case PT_Unknown:
         default:
-            Throw(VOODOO_CORE_NAME, "Invalid parameter type.", NULL);
+            Throw(VOODOO_CORE_NAME, "Invalid parameter type.", mCore);
             break;
         }
     }

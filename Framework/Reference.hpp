@@ -162,8 +162,8 @@ namespace VoodooShader
     template<typename U, typename V>
     bool operator<
     (
-        _In_ __readonly const Reference<U> & me, 
-        _In_ __readonly const Reference<V> & other
+        _In_ const Reference<U> & me, 
+        _In_ const Reference<V> & other
     )
     {
         return ( me.mObject < other.mObject );

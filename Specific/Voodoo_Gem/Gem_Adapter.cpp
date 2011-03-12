@@ -11,7 +11,12 @@ namespace VoodooShader
         Adapter::Adapter(Core * core, LPDIRECT3DDEVICE9 device)
             : mCore(core), mDevice(device)
         {
-            assert(device);
+            if ( device == NULL )
+            {
+                core->Log(LL_Error, VOODOO_GEM_NAME, "Adapter created with no device.");
+
+                return;
+            }
 
             device->AddRef(); // Make sure it won't be released while we're using it
 
@@ -32,7 +37,7 @@ namespace VoodooShader
                     LL_Error, 
                     VOODOO_GEM_NAME, 
                     "Error setting adapter on core: %s.",
-                    exc.Message()
+                    exc.Message().c_str()
                 );
             }
 
@@ -54,7 +59,7 @@ namespace VoodooShader
             HRESULT hr = cgD3D9SetDevice(device);
             if ( !SUCCEEDED(hr) )
             {
-                Throw("Could not set Cg device.", core);
+                Throw(VOODOO_GEM_NAME, "Could not set Cg device.", core);
             } else {
                 core->Log(LL_Debug, VOODOO_GEM_NAME, "Set Cg device.");
             }
@@ -135,8 +140,9 @@ namespace VoodooShader
                 VoodooCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to retrieve backbuffer surface.");
             }
 
-            TextureRef thisframeTex = this->CreateTexture(":thisframe", 
-                gParams.BackBufferWidth, gParams.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
+            TextureDesc stdtex = { gParams.BackBufferWidth, gParams.BackBufferHeight, 1, true, VoodooShader::TF_RGB8 };
+
+            TextureRef thisframeTex = this->CreateTexture(":thisframe", stdtex);
 
             if ( thisframeTex.get() )
             {
@@ -155,8 +161,7 @@ namespace VoodooShader
                 gThisFrame.RawSurface = surface;
             }
 
-            TextureRef scratchTex = this->CreateTexture(":scratch", 
-                gParams.BackBufferWidth, gParams.BackBufferHeight, 1, true, VoodooShader::TF_RGB8);
+            TextureRef scratchTex = this->CreateTexture(":scratch", stdtex);
 
             if ( scratchTex.get() )
             {
@@ -187,6 +192,8 @@ namespace VoodooShader
                 testShader = VoodooCore->CreateShader("test.cgfx", NULL);
                 testShader->Link();
             } catch ( VoodooShader::Exception & exc ) {
+                UNREFERENCED_PARAMETER(exc);
+
                 VoodooCore->Log(LL_Error, VOODOO_GEM_NAME, "Voodoo Gem: Error loading test shader.");
             }
         }
@@ -576,7 +583,7 @@ namespace VoodooShader
 
                 return true;
             } else {
-                Throw("Invalid binding attempt, parameter is not a sampler.", this->mCore);
+                Throw(VOODOO_GEM_NAME, "Invalid binding attempt, parameter is not a sampler.", this->mCore);
                 return false;
             }
         }

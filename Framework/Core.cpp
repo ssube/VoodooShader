@@ -24,14 +24,9 @@ namespace VoodooShader
     }
 
     Core::Core(String logfile)
-        : mAdapter(NULL),
-#ifdef _DEBUG
-            mDebugMode(true)
-#else
-            mDebugMode(false)
-#endif
+        : mAdapter(NULL)
     {
-        this->mLogger = new Logger(logfile.c_str());
+        this->mLogger = new Logger(this, logfile.c_str());
 
 #ifdef _DEBUG
         this->mLogger->SetBufferSize(0);

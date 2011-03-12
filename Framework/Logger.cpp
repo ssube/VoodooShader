@@ -7,8 +7,8 @@ using namespace std;
 
 namespace VoodooShader
 {
-    Logger::Logger(const char * filename, bool append)
-        mLogLevel(LL_Info)
+    Logger::Logger(Core * core, const char * filename, bool append)
+        : mCore(core), mLogLevel(LL_Info)
     {
         unsigned int flags = ios_base::out;
         if ( append )
@@ -21,7 +21,7 @@ namespace VoodooShader
 
         if ( !this->mLogFile.is_open() )
         {
-            Throw(VOODOO_CORE_NAME, "Could not open log file!", NULL);
+            Throw(VOODOO_CORE_NAME, "Could not open log file!", mCore);
         }
 
         this->mLocalTime = new tm();

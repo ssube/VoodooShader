@@ -44,7 +44,7 @@ namespace VoodooShader
         _Check_return_
         static Core * Create
         (
-            _In_opt_ String logfile = "Voodoo.log"
+            _In_ String logfile = "Voodoo.log"
         );
 
         static void Destroy

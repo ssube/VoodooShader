@@ -40,12 +40,12 @@ namespace VoodooShader
     public:
         Exception
         (
-            _In_ const char * module, 
-            _In_ const char * message, 
+            _In_ char * module, 
+            _In_ char * message, 
             _In_ Core * core, 
-            _In_ const char * file, 
-            _In_ const char * function, 
-            _In_ const int line
+            _In_ char * file, 
+            _In_ char * function, 
+            _In_ int line
         );
 
         Exception
@@ -53,9 +53,9 @@ namespace VoodooShader
             _In_ String module,
             _In_ String message, 
             _In_ Core * core, 
-            _In_ const char * file, 
-            _In_ const char * function,
-            _In_ const int line
+            _In_ char * file, 
+            _In_ char * function,
+            _In_ int line
         );
 
         String Message();
@@ -64,9 +64,9 @@ namespace VoodooShader
         Core * mCore;
         String mModule;
         String mMessage;
-        const char * mFile;
-        const char * mFunction;
-        const int mLine;
+        char * mFile;
+        char * mFunction;
+        int mLine;
     };
 }
 

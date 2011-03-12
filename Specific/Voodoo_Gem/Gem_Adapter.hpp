@@ -39,8 +39,7 @@ namespace VoodooShader
             void ApplyParameter(ParameterRef param);
 
             bool ConnectTexture(ParameterRef param, TextureRef texture);
-            TextureRef CreateTexture(String name, size_t width, size_t height, size_t depth, 
-                bool mipmaps, TextureFormat format);
+            TextureRef CreateTexture(String name, TextureDesc desc);
 
             void HandleError(CGcontext context, CGerror error, void * core);
 

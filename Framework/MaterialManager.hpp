@@ -57,7 +57,7 @@ namespace VoodooShader
         (
             _In_ TextureRef texture, 
             _In_ ShaderRef shader, 
-            _In_opt_ bool global = false
+            _In_ bool global = false
         );
 
         /**

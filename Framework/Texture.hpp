@@ -37,8 +37,8 @@ namespace VoodooShader
 
         //! @todo Change the Texture::GetTexture<T>() and Texture::GetTexture()
         //!        functions to something better, I don't like this method.
-        _Check_return_
         template<typename T>
+        _Check_return_
         inline T * GetTexture()
         {
             return reinterpret_cast<T*>(GetTexture());

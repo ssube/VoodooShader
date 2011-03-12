@@ -68,6 +68,17 @@ VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
     strcat_s (Path, MAX_PATH, "\\d3d8.dll");
 
     HMODULE d3ddll = LoadLibraryA(Path);
+
+    if ( d3ddll == NULL )
+    {
+        VoodooCore->Log
+        (
+            LL_Fatal,
+            VOODOO_GEM_NAME,
+            "Could not load D3D8 library."
+        );
+    }
+
     D3DFunc8 d3d8func = (D3DFunc8)GetProcAddress (d3ddll, "Direct3DCreate8");
 
     if (d3d8func == NULL) 
@@ -95,7 +106,10 @@ VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
     }
     TempObject->Release();
 
-    FreeLibrary(d3ddll);
+    if ( d3ddll )
+    {
+        FreeLibrary(d3ddll);
+    }
 
     // Call DX9 to create a real device with the latest version
     IDirect3D9 * object = Direct3DCreate9(D3D_SDK_VERSION);
@@ -106,7 +120,7 @@ VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
 }
 
 // Visual Studio-specific linker directive, forces the function to be exported with and
-// without decoration. The actual symbol is undecorated, but I'd rather allow exception
+// without decoration. The actual symbol is undecorated, but I'd rather allow exceptions
 // handling than use extern "C".
 #pragma comment(linker, "/export:Direct3DCreate8=?Voodoo3DCreate8@@YGPAXI@Z")
 

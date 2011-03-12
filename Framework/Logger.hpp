@@ -43,8 +43,9 @@ namespace VoodooShader
          */
         Logger
         (
+            _In_ Core * core,
             _In_ const char * filename, 
-            _In_opt_ bool append = false
+            _In_ bool append = false
         );
 
         /** 
@@ -159,6 +160,7 @@ namespace VoodooShader
         void Close();
 
     private:
+        Core * mCore;
         LogLevel mLogLevel;
         std::fstream mLogFile;
         tm * mLocalTime;

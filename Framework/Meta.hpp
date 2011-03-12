@@ -64,36 +64,6 @@ namespace VoodooShader
 
     class Converter;
 
-    /**
-     * Describes a texture, including size and format.
-     */
-    struct TextureDesc
-    {
-        size_t Width;
-        size_t Height;
-        size_t Depth;
-        bool Mipmaps;
-        TextureFormat Format;
-    };
-
-    /**
-     * Describes the precise version of a particular library, including name, 
-     * main version and revision.
-     * 
-     * @todo Decide if Version should contain module name or UID (potentially useful
-     *          for Adapter ID).
-     */
-    struct Version
-    {
-        //const char * Name;
-        const int Major;
-        const int Minor;
-        const long Patch;
-        const long Rev;
-    };
-
-    const size_t VersionSize = sizeof(Version);
-
 #define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__);
 
     typedef std::string String;
@@ -253,6 +223,36 @@ namespace VoodooShader
         // Max value
         LL_Max                  /*!< Enumerator values count */
     };
+
+    /**
+     * Describes a texture, including size and format.
+     */
+    struct TextureDesc
+    {
+        size_t Width;
+        size_t Height;
+        size_t Depth;
+        bool Mipmaps;
+        TextureFormat Format;
+    };
+
+    /**
+     * Describes the precise version of a particular library, including name, 
+     * main version and revision.
+     * 
+     * @todo Decide if Version should contain module name or UID (potentially useful
+     *          for Adapter ID).
+     */
+    struct Version
+    {
+        //const char * Name;
+        int Major;
+        int Minor;
+        long Patch;
+        long Rev;
+    };
+
+    const size_t VersionSize = sizeof(Version);
 }
 
 #endif /*VOODOO_META_HPP*/

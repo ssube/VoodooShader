@@ -6,9 +6,9 @@ namespace VoodooShader
 {
     Exception::Exception
     (
-        const char * module, const char * message, 
+        char * module, char * message, 
         Core * core, 
-        const char * file, const char * function, const int line
+        char * file, char * function, int line
     )
         : std::exception(message), 
             mModule(module), mMessage(message), 
@@ -31,7 +31,7 @@ namespace VoodooShader
     (
         String module, String message, 
         Core * core, 
-        const char * file, const char * function, const int line
+        char * file, char * function, int line
     )
         : std::exception(message.c_str()), 
             mModule(module), mMessage(message), 
@@ -43,9 +43,9 @@ namespace VoodooShader
             core->Log
             (
                 LL_Error, 
-                module, 
+                module.c_str(), 
                 "Exception in %s at %s (%d): %s", 
-                file, function, line, message
+                file, function, line, message.c_str()
             );
         }
     }
@@ -60,7 +60,7 @@ namespace VoodooShader
             buffer, 
             1023, 
             "VoodooShader::Exception in module %s, file %s at %s (line %d): %s", 
-            mModule, mFile, mFunction, mLine, mMessage.c_str()
+            mModule.c_str(), mFile, mFunction, mLine, mMessage.c_str()
         );
 
         return String(buffer);

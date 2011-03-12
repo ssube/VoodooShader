@@ -23,10 +23,13 @@
 #define VOODOO_GEM_DEVICE_HPP
 
 #include "Gem_Includes.hpp"
+#include "Gem_Version.hpp"
 
 #include "Gem_Module.hpp"
 #include "IVoodoo3DSurface8.hpp"
 #include "IVoodoo3DTexture8.hpp"
+
+using namespace VoodooShader;
 
 static HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 
@@ -66,10 +69,13 @@ public:
     IVoodoo3DDevice8(IDirect3DDevice9 * realDevice, D3DPRESENT_PARAMETERS pp)
         : mRealDevice(realDevice), mParams(pp)
     {
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::IVoodoo3DDevice8(%d) == %d",
-            realDevice, this);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "Voodoo Gem: IVoodoo3DDevice8::IVoodoo3DDevice8(%p) == %p",
+            realDevice, this
+        );
     }
 
     // IVoodoo3DDevice8 methods
@@ -163,11 +169,13 @@ public:
     {
         HRESULT hr = mRealDevice->Clear(Count, pRects, Flags, Color, Z, Stencil);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::Clear(%d, %X, %d, %d, %d, %d) == %d",
-            Count, pRects, Flags, Color, Z, Stencil, 
-            hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "Voodoo Gem: IVoodoo3DDevice8::Clear(%d, %p, %d, %d, %f, %d) == %d",
+            Count, pRects, Flags, Color, Z, Stencil, hr
+        );
 
         return hr;
     }
@@ -179,10 +187,13 @@ public:
     {
         HRESULT hr = mRealDevice->TestCooperativeLevel();
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::TestCooperativeLevel() == %d",
-        hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "Voodoo Gem: IVoodoo3DDevice8::TestCooperativeLevel() == %d",
+            hr
+        );
 
         return hr;
     }
@@ -195,10 +206,13 @@ public:
     {
         UINT mem = mRealDevice->GetAvailableTextureMem();
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::GetAvailableTextureMem() == %d",
-        mem);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "Voodoo Gem: IVoodoo3DDevice8::GetAvailableTextureMem() == %d",
+            mem
+        );
 
         return mem;
     }
@@ -209,10 +223,13 @@ public:
         DWORD Bytes
     )
     {
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::ResourceManagerDiscardBytes(%d) == UNUSED",
-        Bytes);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "Voodoo Gem: IVoodoo3DDevice8::ResourceManagerDiscardBytes(%d) == UNUSED",
+            Bytes
+        );
 
         return DefaultErrorCode;
     }
@@ -225,10 +242,8 @@ public:
     {
         (*ppD3D8) = (IDirect3D8*)VoodooObject;
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::GetDirect3D(%X) == D3D_OK",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::GetDirect3D(%p) == D3D_OK",
         *ppD3D8);
-#endif
 
         return D3D_OK;
     }
@@ -243,10 +258,13 @@ public:
 
         HRESULT hr = mRealDevice->GetDeviceCaps(&rCaps);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::GetDeviceCaps(%X) == %d",
-        pCaps, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::GetDeviceCaps(%p) == %d",
+            pCaps, hr
+        );
 
         if ( SUCCEEDED(hr) )
         {
@@ -265,7 +283,7 @@ public:
         HRESULT hr = mRealDevice->GetDisplayMode(0, pMode);
 
 #ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::GetDisplayMode(%d) == %d",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::GetDisplayMode(%p) == %d",
         pMode, hr);
 #endif
 
@@ -281,7 +299,7 @@ public:
         HRESULT hr = mRealDevice->GetCreationParameters(pParameters);
 
 #ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::GetCreationParameters(%d) == %d",
+        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Voodoo Gem: IVoodoo3DDevice8::GetCreationParameters(%p) == %d",
         pParameters, hr);
 #endif
 
@@ -527,7 +545,7 @@ public:
         // That failed, create as a standard texture
         if ( FAILED(hr) )
         {
-            VoodooCore->Debug("Voodoo Gem: Unable to create texture as a render target (%d).\n", hr);
+            VoodooCore->Log(LL_Warning, VOODOO_GEM_NAME, "Unable to create texture as a render target (%d).", hr);
 
             rtt = false;
             hr = mRealDevice->CreateTexture
