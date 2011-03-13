@@ -11,19 +11,15 @@ namespace VoodooShader
         Adapter::Adapter(Core * core, LPDIRECT3DDEVICE9 device)
             : mCore(core), mDevice(device)
         {
-            if ( device == NULL )
+            if ( core == NULL ) 
             {
-                core->Log(LL_Error, VOODOO_GEM_NAME, "Adapter created with no device.");
-
+                Throw(VOODOO_GEM_NAME, "Adapter created with no core.", NULL);
+            } else if ( device == NULL ) {
+                core->Log(LL_Fatal, VOODOO_GEM_NAME, "Adapter created with no device.");
                 return;
             }
 
             device->AddRef(); // Make sure it won't be released while we're using it
-
-            if ( !core )
-            {
-                core = VoodooShader::Core::Create("Voodoo_Gem.xml");
-            }
 
             core->Log(LL_Info, VOODOO_GEM_NAME, "Starting adapter...");
 
@@ -194,7 +190,7 @@ namespace VoodooShader
             } catch ( VoodooShader::Exception & exc ) {
                 UNREFERENCED_PARAMETER(exc);
 
-                VoodooCore->Log(LL_Error, VOODOO_GEM_NAME, "Voodoo Gem: Error loading test shader.");
+                VoodooCore->Log(LL_Error, VOODOO_GEM_NAME, "Error loading test shader.");
             }
         }
 
@@ -229,7 +225,17 @@ namespace VoodooShader
 
         bool Adapter::LoadPass(Pass * pass)
         {
-            assert(pass);
+            if ( pass == NULL )
+            {
+                this->mCore->Log
+                (
+                    LL_Error,
+                    VOODOO_GEM_NAME,
+                    "Attempted to load null pass."
+                );
+
+                return false;
+            }
 
             CGprogram vertProg = pass->GetProgram(PS_Vertex);
             CGprogram fragProg = pass->GetProgram(PS_Fragment);
@@ -327,7 +333,7 @@ namespace VoodooShader
                     (
                         LL_Error,
                         VOODOO_GEM_NAME,
-                        "Voodoo Gem: Error binding fragment program from '%s': %s.",
+                        "Error binding fragment program from '%s': %s.",
                         pass->Name().c_str(), cgD3D9TranslateHRESULT(hr)
                     );
 
@@ -363,17 +369,27 @@ namespace VoodooShader
 
         void Adapter::DrawShader(ShaderRef shader)
         {
+            if ( !shader.get() )
+            {
+                this->mCore->Log
+                (
+                    LL_Error,
+                    VOODOO_GEM_NAME,
+                    "Attempting to draw null shader."
+                );
+            }
             // Set up textures and set scratch surface as render target
             IDirect3DSurface9 * rt = NULL;
 
             HRESULT hr = mDevice->GetRenderTarget(0, &rt);
+
             if ( FAILED(hr) )
             {
                 mCore->Log
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
-                    "Voodoo Gem: Failed to retrieve render target for shader %s.\n", 
+                    "Failed to retrieve render target for shader %s.\n", 
                     shader->Name().c_str()
                 );
 
@@ -387,7 +403,7 @@ namespace VoodooShader
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
-                    "Voodoo Gem: Failed to bind render target for shader %s.\n", 
+                    "Failed to bind render target for shader %s.\n", 
                     shader->Name().c_str()
                 );
 
@@ -417,13 +433,13 @@ namespace VoodooShader
                 HRESULT hr = passTargetD3D->GetSurfaceLevel(0, &passSurface);
                 if ( FAILED(hr) || !passSurface )
                 {    
-                    mCore->Log("Voodoo Gem: Failed to get target surface for pass %s (targeting texture %s).\n",
+                    mCore->Log("Failed to get target surface for pass %s (targeting texture %s).\n",
                         pass->Name().c_str(), passTarget->Name().c_str());
 
                     hr = mDevice->StretchRect(scratchSurface, NULL, passSurface, NULL, D3DTEXF_NONE);
                     if ( FAILED(hr) )
                     {
-                        mCore->Log("Voodoo Gem: Failed to copy results to target for pass %s.\n",
+                        mCore->Log("Failed to copy results to target for pass %s.\n",
                             pass->Name().c_str());
                     }
                 } 
@@ -451,13 +467,13 @@ namespace VoodooShader
             HRESULT hr = techTargetD3D->GetSurfaceLevel(0, &techSurface);
             if ( FAILED(hr) || !techSurface )
             {
-                mCore->Log("Voodoo Gem: Failed to get target surface for technique %s (targeting texture %s).\n",
+                mCore->Log("Failed to get target surface for technique %s (targeting texture %s).\n",
                     tech->Name().c_str(), techTarget->Name().c_str());
             } else {
                 hr = mDevice->StretchRect(scratchSurface, NULL, techSurface, NULL, D3DTEXF_NONE);
                 if ( FAILED(hr) )
                 {
-                    mCore->Log("Voodoo Gem: Failed to copy results to target for technique %s.\n",
+                    mCore->Log("Failed to copy results to target for technique %s.\n",
                         tech->Name().c_str());
                 }
             }

@@ -34,8 +34,8 @@
 #include "Includes.hpp"
 #include "Reference.hpp"
 
-#define VOODOO_CORE_COPYRIGHT "<div>\
-    Voodoo Shader Framework, Copyright © 2010 by Sean Sube<br />\
+#define VOODOO_CORE_COPYRIGHT "<div align=\"center\">\
+    Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube<br />\
     The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.<br />\
     This is free software and you are welcome to redistribute it under certain conditions.<br />\
     Please see the included license file for more details.</div>"

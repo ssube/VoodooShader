@@ -8,7 +8,7 @@ using namespace std;
 namespace VoodooShader
 {
     Logger::Logger(Core * core, const char * filename, bool append)
-        : mCore(core), mLogLevel(LL_Unknown)
+        : mCore(core), mLogLevel(LL_Info)
     {
         unsigned int flags = ios_base::out;
         if ( append )
@@ -27,9 +27,9 @@ namespace VoodooShader
         this->mLocalTime = new tm();
 
         this->mLogFile << 
-            "<?xml version='1.0'?>" <<
-            "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>" <<
-            "<LogFile " << this->Timestamp() << ">\n";
+            "<?xml version='1.0'?>\n" <<
+            "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
+            "<LogFile " << this->Datestamp() << this->Timestamp() << ">\n";
 
         this->Log(LL_Info, VOODOO_CORE_NAME, "Logger created.");
     }
@@ -54,15 +54,35 @@ namespace VoodooShader
 
         if ( localtime_s(this->mLocalTime, &now) == ERROR_SUCCESS )
         {
-            char stamp[64];
+            char stamp[32];
             sprintf_s
             (
-                stamp, 64, 
-                " timestamp=\"%02d.%02d.%02d\" tick=\"%u\" ", 
+                stamp, 32, 
+                " timestamp=\"%02d%02d%02d\" ", 
                 this->mLocalTime->tm_hour,
                 this->mLocalTime->tm_min,
-                this->mLocalTime->tm_sec,
-                GetTickCount()
+                this->mLocalTime->tm_sec
+            );
+            return String(stamp);
+        } else {
+            return String();
+        }
+    }
+
+    String Logger::Datestamp()
+    {
+        time_t now = time(NULL);
+
+        if ( localtime_s(this->mLocalTime, &now) == ERROR_SUCCESS )
+        {
+            char stamp[32];
+            sprintf_s
+            (
+                stamp, 32, 
+                " datestamp=\"%04d%02d%02d\" ", 
+                this->mLocalTime->tm_year + 1900,
+                this->mLocalTime->tm_mon + 1,
+                this->mLocalTime->tm_mday
             );
             return String(stamp);
         } else {
@@ -92,31 +112,9 @@ namespace VoodooShader
         buffer[4095] = 0;
         va_end(args);
         
-        this->mLogFile << "    <Message type=\"";
-
-        switch ( level )
-        {
-        case LL_Debug:
-            this->mLogFile << "debug";
-            break;
-        case LL_Info:
-            this->mLogFile << "info";
-            break;
-        case LL_Warning:
-            this->mLogFile << "warning";
-            break;
-        case LL_Error:
-            this->mLogFile << "error";
-            break;
-        case LL_Fatal:
-            this->mLogFile << "fatal";
-            break;
-        case LL_Unknown:
-        default:
-            this->mLogFile << "unknown";
-        };
-
-        this->mLogFile << "\" " << this->Timestamp() << " module=\"" << module << "\">" << buffer << "</Message>\n";
+        this->mLogFile << 
+            "    <Message type=\"" << level << "\" " << this->Timestamp() << 
+            " module=\"" << module << "\">" << buffer << "</Message>\n";
     }
 
     void Logger::LogList(LogLevel level, const char * module, const char * msg, va_list args)
@@ -127,32 +125,10 @@ namespace VoodooShader
 
         _vsnprintf_s(buffer, 4095, 4095, msg, args);
         buffer[4095] = 0;
-        
-        this->mLogFile << "    <Message type=\"";
 
-        switch ( level )
-        {
-        case LL_Debug:
-            this->mLogFile << "debug";
-            break;
-        case LL_Info:
-            this->mLogFile << "info";
-            break;
-        case LL_Warning:
-            this->mLogFile << "warning";
-            break;
-        case LL_Error:
-            this->mLogFile << "error";
-            break;
-        case LL_Fatal:
-            this->mLogFile << "fatal";
-            break;
-        case LL_Unknown:
-        default:
-            this->mLogFile << "unknown";
-        };
-
-        this->mLogFile << "\" " << this->Timestamp() << " module=\"" << module << "\">" << buffer << "</Message>\n";
+        this->mLogFile << 
+            "    <Message type=\"" << level << "\" " << this->Timestamp() << 
+            " module=\"" << module << "\">" << buffer << "</Message>\n";
     }
 
     void Logger::Dump()
@@ -172,7 +148,10 @@ namespace VoodooShader
 
         if ( this->mLogFile.is_open() )
         {
-            this->mLogFile << "<LogFile " << this->Timestamp() << ">\n";
+            this->mLogFile << 
+                "<?xml version='1.0'?>\n" <<
+                "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
+                "<LogFile " << this->Datestamp() << this->Timestamp() << ">\n";
 
             this->Log(LL_Info, VOODOO_CORE_NAME, "Logger: Log file opened by Logger::Open.");
             return true;

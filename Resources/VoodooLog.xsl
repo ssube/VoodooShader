@@ -13,42 +13,15 @@
     <html>
       <title>Voodoo Shader Framework Log</title>
       <script src="sorttable.js"></script>
-      <style>
-        table tr
-        {
-        background: #DDDDDD;
-        }
-        .debug
-        {
-        background: #CCCCDD;
-        }
-        .info
-        {
-        background: #DCDCDC;
-        }
-        .warning
-        {
-        background: #FFFF33;
-        }
-        .error
-        {
-        background: #FF0000;
-        color: #CCCCCC;
-        }
-        .fatal
-        {
-        background: #880000;
-        color: #FFFFFF;
-        }
-      </style>
+      <link rel="stylesheet" href="voodoolog.css" media="all" />
       <body>
         <table class="sortable">
           <thead>
             <tr>
-              <th># (<xsl:value-of select="count(child::Message)" />)</th>
-              <th>Type</th>
+		    <th>Event #<br />(of <xsl:value-of select="count(child::Message)" />)</th>
               <th>Timestamp</th>
-              <th>Relative</th>
+              <th>Type</th>
+	      <th>Ticks<br />(of <xsl:value-of select="child::Message[last()]/@tick - /LogFile/@tick" />)</th>
               <th>Step</th>
               <th>Source</th>
               <th>Body</th>
@@ -59,27 +32,41 @@
               <td>
                 <xsl:value-of select="position()" />
               </td>
-              <xsl:if test="@type = 'fatal'">
-                <xsl:variable name="level" select="0" />
-              </xsl:if >
-              <xsl:if test="@type = 'error'">
-                <xsl:variable name="level" select="1" />
-              </xsl:if >
-              <xsl:if test="@type = 'warning'">
-                <xsl:variable name="level" select="2" />
-              </xsl:if >
-              <xsl:if test="@type = 'info'">
-                <xsl:variable name="level" select="3" />
-              </xsl:if >
-              <xsl:if test="@type = 'debug'">
-                <xsl:variable name="level" select="4" />
-              </xsl:if >
-              <td sorttable_customkey="$level">
-                <xsl:value-of select="@type" />
-              </td>
               <td>
                 <xsl:value-of select="@timestamp" />
               </td>
+              <xsl:choose>
+                <xsl:when test="@type = 'fatal'">
+                  <td sorttable_customkey="0">
+                    <xsl:value-of select="@type" />
+                  </td>
+                </xsl:when>
+                <xsl:when test="@type = 'error'">
+                  <td sorttable_customkey="1">
+                    <xsl:value-of select="@type" />
+                  </td>
+                </xsl:when >
+                <xsl:when test="@type = 'warning'">
+                  <td sorttable_customkey="3">
+                    <xsl:value-of select="@type" />
+                  </td>
+                </xsl:when >
+                <xsl:when test="@type = 'info'">
+                  <td sorttable_customkey="4">
+                    <xsl:value-of select="@type" />
+                  </td>
+                </xsl:when >
+                <xsl:when test="@type = 'debug'">
+                  <td sorttable_customkey="5">
+                    <xsl:value-of select="@type" />
+                  </td>
+                </xsl:when >
+                <xsl:otherwise>
+                  <td sorttable_customkey="2">
+                    <xsl:value-of select="@type" />
+                  </td>
+                </xsl:otherwise>
+              </xsl:choose>
               <td>
                 <xsl:value-of select="@tick - /LogFile/@tick" />
               </td>

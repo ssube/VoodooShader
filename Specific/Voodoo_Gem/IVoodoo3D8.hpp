@@ -368,36 +368,10 @@ public:
         return hm;
     }
 
-    /**
-     * @note Test function: MGE uses a caching of actual D3D8 caps, let's see if we can just grab
-     *          the appropriate entries from a D3D9 caps struct. They share an identical format until
-     *          the end of the D3D8 caps section, so...   
-     *          
-     * @todo For some strange reason, this doesn't work (crashes the app, in fact). Find and fix.
-     * /
-    STDMETHOD(GetDeviceCaps)
-    (
-        UINT Adapter,
-        D3DDEVTYPE DeviceType,
-        D3DCAPS8 * pCaps
-    )
-    {
-        D3DCAPS9 realCaps;
-        HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
-
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo Gem: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
-            Adapter, DeviceType, pCaps, hr);
-#endif
-
-        if ( SUCCEEDED(hr) )
-        {
-            ::CopyMemory(pCaps, &realCaps, sizeof(D3DCAPS8));
-        }
-
-        return hr;
-    }/ */
-
+    /**        
+     * @todo DX9 caps and DX8 caps have identical structure for sizeof(D3D8CAPS), but ::CopyMemory
+     *          provides incorrect caps that usually result in a crash. Diagnose and correct.
+     */
     STDMETHOD(GetDeviceCaps)
     (
         UINT Adapter,

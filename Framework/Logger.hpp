@@ -66,13 +66,23 @@ namespace VoodooShader
 
         /**
          * Write a formatted timestamp to the log. The timestamp will have the 
-         * form <code>HH.MM.SS :: </code>. Leading zeros are guaranteed to be
-         * present, so the timestamp length remains constant.
+         * form <code>HHMMSS</code>. Leading zeros are guaranteed to be
+         * present, so the timestamp length is 6 chars.
          *
-         * @note If the system time cannot be retrieved, an error stamp will be
-         *        printed with an equal length.
+         * @note If the system time cannot be retrieved, an error stamp of
+         *          <code>000000</code> will be printed with an equal length.
          */
         String Timestamp();
+
+        /**
+         * Writes a formatted datestamp to the log. The datestamp will have the
+         * form <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present,
+         * so the datestamp length is 8 chars.
+         *
+         * @note If the system time cannot be retrieved, an error stamp of
+         *          <code>00000000</code> will be printed with an equal length.
+         */
+        String Datestamp();
 
         /**
          * Log a message, may be formatted with printf syntax.

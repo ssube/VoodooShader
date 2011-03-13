@@ -51,8 +51,10 @@ VoodooShader::ShaderRef testShader;
 
 VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
 {
-    // Voodoo Gem Init function
-    VoodooCore = VoodooShader::Core::Create("Voodoo_Gem.xml");
+    if ( VoodooCore == NULL )
+    {
+        VoodooCore = VoodooShader::Core::Create("Voodoo_Gem.xml");
+    }
 
     VoodooCore->Log
     (
@@ -77,9 +79,11 @@ VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
             VOODOO_GEM_NAME,
             "Could not load D3D8 library."
         );
+
+        return NULL;
     }
 
-    D3DFunc8 d3d8func = (D3DFunc8)GetProcAddress (d3ddll, "Direct3DCreate8");
+    D3DFunc8 d3d8func = (D3DFunc8)GetProcAddress(d3ddll, "Direct3DCreate8");
 
     if (d3d8func == NULL) 
     {

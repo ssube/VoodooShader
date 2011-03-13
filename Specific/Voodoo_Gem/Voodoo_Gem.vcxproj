@@ -183,6 +183,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Gem_Adapter.cpp" />
     <ClCompile Include="Gem_Module.cpp" />
   </ItemGroup>

@@ -209,7 +209,6 @@
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="FullscreenManager.cpp" />
-    <ClCompile Include="Includes_PCH.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
     <ClCompile Include="Parameter.cpp" />
