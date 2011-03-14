@@ -29,7 +29,11 @@ namespace VoodooShader
         this->mLogFile << 
             "<?xml version='1.0'?>\n" <<
             "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
-            "<LogFile " << this->Datestamp() << this->Timestamp() << ">\n";
+            "<LogFile "; 
+                this->LogDate(); 
+                this->LogTime(); 
+        this->mLogFile << 
+            ">\n";
 
         this->Log(LL_Info, VOODOO_CORE_NAME, "Logger created.");
     }
@@ -48,7 +52,7 @@ namespace VoodooShader
         }
     }
 
-    String Logger::Timestamp()
+    void Logger::LogTime()
     {
         time_t now = time(NULL);
 
@@ -58,18 +62,19 @@ namespace VoodooShader
             sprintf_s
             (
                 stamp, 32, 
-                " timestamp=\"%02d%02d%02d\" ", 
+                " time=\"%02d%02d%02d\" ", 
                 this->mLocalTime->tm_hour,
                 this->mLocalTime->tm_min,
                 this->mLocalTime->tm_sec
             );
-            return String(stamp);
+
+            this->mLogFile << stamp;
         } else {
-            return String();
+            this->mLogFile << " time=\"000000\" ";
         }
     }
 
-    String Logger::Datestamp()
+    void Logger::LogDate()
     {
         time_t now = time(NULL);
 
@@ -79,15 +84,41 @@ namespace VoodooShader
             sprintf_s
             (
                 stamp, 32, 
-                " datestamp=\"%04d%02d%02d\" ", 
+                " date=\"%04d%02d%02d\" ", 
                 this->mLocalTime->tm_year + 1900,
                 this->mLocalTime->tm_mon + 1,
                 this->mLocalTime->tm_mday
             );
-            return String(stamp);
+
+            this->mLogFile << stamp;
         } else {
-            return String();
+            this->mLogFile << " date=\"00000000\" ";
         }
+    }
+
+    void Logger::LogTicks()
+    {
+        char stamp[32];
+        sprintf_s
+        (
+            stamp, 32,
+            " ticks=\"%u\" ",
+            GetTickCount()
+        );
+        this->mLogFile << stamp;
+    }
+
+    void Logger::LogModule
+    (
+        Version version
+    )
+    {
+        this->mLogFile << 
+            "    <Module name=\"" << version.Name << "\" " <<
+            " major=\"" << version.Major << "\" " <<
+            " major=\"" << version.Minor << "\" " <<
+            " major=\"" << version.Patch << "\" " <<
+            " major=\"" << version.Rev << "\" />\n";
     }
 
     void Logger::SetBufferSize(unsigned int bytes)
@@ -113,7 +144,9 @@ namespace VoodooShader
         va_end(args);
         
         this->mLogFile << 
-            "    <Message type=\"" << level << "\" " << this->Timestamp() << 
+            "    <Message level=\"" << level << "\" ";
+        this->LogTime();
+        this->mLogFile << 
             " module=\"" << module << "\">" << buffer << "</Message>\n";
     }
 
@@ -127,8 +160,9 @@ namespace VoodooShader
         buffer[4095] = 0;
 
         this->mLogFile << 
-            "    <Message type=\"" << level << "\" " << this->Timestamp() << 
-            " module=\"" << module << "\">" << buffer << "</Message>\n";
+            "    <Message level=\"" << level << "\" ";
+        this->LogTime();
+        this->mLogFile <<" module=\"" << module << "\">" << buffer << "</Message>\n";
     }
 
     void Logger::Dump()
@@ -151,7 +185,11 @@ namespace VoodooShader
             this->mLogFile << 
                 "<?xml version='1.0'?>\n" <<
                 "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
-                "<LogFile " << this->Datestamp() << this->Timestamp() << ">\n";
+                "<LogFile "; 
+            this->LogDate(); 
+            this->LogTime(); 
+            this->mLogFile << 
+                ">\n";
 
             this->Log(LL_Info, VOODOO_CORE_NAME, "Logger: Log file opened by Logger::Open.");
             return true;

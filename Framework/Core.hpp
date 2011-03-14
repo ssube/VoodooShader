@@ -85,6 +85,14 @@ namespace VoodooShader
         );
 
         /**
+         * Writes module version info to the log file.
+         */
+        void LogModule
+        (
+            _In_ Version version
+        );
+
+        /**
          * Attach an Adapter to this Core.
          *
          * @param adapter The Adapter to attach (will be used for all graphics 

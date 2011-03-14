@@ -21,6 +21,8 @@ namespace VoodooShader
 
             device->AddRef(); // Make sure it won't be released while we're using it
 
+            core->LogModule(this->GetVersion());
+
             core->Log(LL_Info, VOODOO_GEM_NAME, "Starting adapter...");
 
             try
@@ -218,7 +220,7 @@ namespace VoodooShader
 
         Version Adapter::GetVersion()
         {
-            Version version = { VOODOO_META_VERSION_CHAIN(GEM) };
+            Version version = { VOODOO_GEM_NAME, VOODOO_META_VERSION_CHAIN(GEM) };
 
             return version;
         }

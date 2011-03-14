@@ -43,7 +43,6 @@ public:
     IVoodoo3DTexture8(IVoodoo3DDevice8 * device, IDirect3DTexture9 * texture)
         : mDevice(device), mRealTexture(texture)
     {
-#ifdef _DEBUG
         VoodooCore->Log
         (
             VoodooShader::LL_Debug, 
@@ -51,7 +50,6 @@ public:
             "IVoodoo3DTexture8::IVoodoo3DTexture8(%p, %p) == %p",
             device, texture, this
         );
-#endif
     }
 
     inline IDirect3DTexture9 * RealTexture()
@@ -184,7 +182,7 @@ public:
 
     STDMETHOD(GetSurfaceLevel)
     (
-         UINT Level,
+        UINT level,
         IDirect3DSurface8 ** ppSurfaceLevel
     )
     {
@@ -195,6 +193,14 @@ public:
             IVoodoo3DSurface8 * newSurface = new IVoodoo3DSurface8(mDevice, rSurface);
             (*ppSurfaceLevel) = (IDirect3DSurface8*)newSurface;
         }
+
+        VoodooCore->Log
+        (
+            VoodooShader::LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DTexture8::GetSurfaceLevel(%u, %p) == %d",
+            level, *ppSurfaceLevel, hr
+        );
 
         return hr;
     }

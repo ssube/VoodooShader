@@ -72,17 +72,36 @@ namespace VoodooShader
          * @note If the system time cannot be retrieved, an error stamp of
          *          <code>000000</code> will be printed with an equal length.
          */
-        String Timestamp();
+        void LogTime();
 
         /**
-         * Writes a formatted datestamp to the log. The datestamp will have the
+         * Writes a formatted date to the log. The date will have the
          * form <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present,
-         * so the datestamp length is 8 chars.
+         * so the date length is 8 chars.
          *
          * @note If the system time cannot be retrieved, an error stamp of
          *          <code>00000000</code> will be printed with an equal length.
          */
-        String Datestamp();
+        void LogDate();
+
+        /**
+         * Writes a formatted tick to the log. The stamp will have the
+         * form <code>xxxxxxxxx</code>, with a potentially varying length. This
+         * records ticks (usually ms since system start).
+         */
+        void LogTicks();
+
+        /**
+         * Writes a module stamp to the log. This records the name and version
+         * info for a select module (used to log what modules were present during
+         * a logging session).
+         * 
+         * @param module The module version info to log.
+         */
+        void LogModule
+        (
+            _In_ Version module
+        );
 
         /**
          * Log a message, may be formatted with printf syntax.

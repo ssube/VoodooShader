@@ -1725,17 +1725,19 @@ public:
             IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride
         );
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::DrawIndexedPrimitiveUP(%d, %d, %d, %d, %d, %d, %d, %d) == %d\n",
-        PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, 
-        pIndexData, IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride, 
-        hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::DrawIndexedPrimitiveUP(%d, %d, %d, %d, %d, %d, %d, %d) == %d",
+            PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, 
+            pIndexData, IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride, 
+            hr
+        );
 
         return hr;
     }
 
-    //! @todo Check the parameter of the vertex decl in the D3D9 call. Taken from MGE, so...
     STDMETHOD(ProcessVertices)
     (
         UINT SrcStartIndex,
@@ -1750,15 +1752,16 @@ public:
             SrcStartIndex, DestIndex, VertexCount,(IDirect3DVertexBuffer9*)pDestBuffer, NULL, Flags
         );
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::ProcessVertices(%d, %d, %d, %d, %d) == %d\n",
-        SrcStartIndex, DestIndex, VertexCount, pDestBuffer, Flags, 
-        hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::ProcessVertices(%u, %u, %u, %p, %u) == %d",
+            SrcStartIndex, DestIndex, VertexCount, pDestBuffer, Flags, hr
+        );
 
         return hr;
     }
-
 
     STDMETHOD(CreateVertexShader)
     (
@@ -1768,15 +1771,15 @@ public:
         DWORD Usage
     )
     {
-        //! @todo Set this up to keep a running log of shaders (probably a 
-        //!            std::set<IDirect3DVertexShader9**>).
         HRESULT hr = mRealDevice->CreateVertexShader(pFunction, (IDirect3DVertexShader9**)pHandle);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::CreateVertexShader(%d, %d, %d, %d) == %d\n",
-        pDeclaration, pFunction, pHandle, Usage, 
-        hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::CreateVertexShader(%u, %u, %u, %u) == %d",
+            *pDeclaration, *pFunction, *pHandle, Usage, hr
+        );
 
         if ( SUCCEEDED(hr) )
         {
@@ -1792,7 +1795,7 @@ public:
         DWORD Handle
     )
     {
-        //! @todo Test the shader setup
+        //! @todo Test the shader handling further; appears to function properly
         HRESULT hr = D3D_OK;
 
         if ( mVertexShaders.find(Handle) == mVertexShaders.end() )
@@ -1803,10 +1806,13 @@ public:
             hr = mRealDevice->SetVertexShader((IDirect3DVertexShader9*)Handle);
         }
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetVertexShader(%d) == %d\n",
-        Handle, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::SetVertexShader(%u) == %d",
+            Handle, hr
+        );
 
         return hr;
     }
@@ -1817,13 +1823,15 @@ public:
         DWORD * pHandle
     )
     {
-        //HRESULT hr = mRealDevice->GetVertexShader((IDirect3DVertexShader9**)pHandle);
         (*pHandle) = mCurrentVertexShader;
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetVertexShader(%d) == D3D_OK\n",
-        pHandle);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::GetVertexShader(%d) == D3D_OK",
+            *pHandle
+        );
 
         return D3D_OK;
     }
@@ -1836,7 +1844,8 @@ public:
         DWORD Handle
     )
     {
-        HRESULT hr = D3D_OK; //mRealDevice->DeleteVertexShader(DWORD Handle);
+        HRESULT hr = D3D_OK;
+
         std::set<DWORD>::iterator vShader = mVertexShaders.find(Handle);
         if ( vShader != mVertexShaders.end() )
         {
@@ -1845,10 +1854,13 @@ public:
             hr = D3DERR_INVALIDCALL;
         }
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::DeleteVertexShader(%d) == %d\n",
-        Handle, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::DeleteVertexShader(%u) == %d",
+            Handle, hr
+        );
 
         return D3D_OK;
     }
@@ -1862,10 +1874,13 @@ public:
     {
         HRESULT hr = mRealDevice->SetVertexShaderConstantF(Register, (const float*)pConstantData, ConstantCount);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetVertexShaderConstant(%d, %d, %d) == %d\n",
-        Register, pConstantData, ConstantCount, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::SetVertexShaderConstant(%u, %p, %u) == %d",
+            Register, pConstantData, ConstantCount, hr
+        );
 
         return hr;
     }
@@ -1879,10 +1894,13 @@ public:
     {
         HRESULT hr = mRealDevice->GetVertexShaderConstantF(Register, (float*)pConstantData, ConstantCount);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetVertexShaderConstant(%d, %d, %d) == %d\n",
-        Register, pConstantData, ConstantCount, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::GetVertexShaderConstant(%u, %p, %u) == %d",
+            Register, pConstantData, ConstantCount, hr
+        );
 
         return hr;
     }
@@ -1895,10 +1913,13 @@ public:
         DWORD * pSizeOfData
     )
     {
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetVertexShaderDeclaration(%d, %d, %d) == UNUSED\n",
-        Handle, pData, pSizeOfData);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::GetVertexShaderDeclaration(%u, %p, %u) == UNUSED",
+            Handle, pData, *pSizeOfData
+        );
 
         return DefaultErrorCode;
     }
@@ -1911,17 +1932,21 @@ public:
         DWORD * pSizeOfData
     )
     {
-        //HRESULT hr = mRealDevice->GetVertexShaderFunction(Handle, pData, pSizeOfData);
-
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetVertexShaderFunction(%d, %d, %d) == UNUSED\n",
-        Handle, pData, pSizeOfData);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::GetVertexShaderFunction(%u, %p, %u) == UNUSED",
+            Handle, pData, *pSizeOfData
+        );
 
         return DefaultErrorCode;
     }
 
-
+    /**
+     * @note DX8 does not use the concept of stream source offset, so IVoodoo3DDevice8::SetStreamSource always
+     *          0 as the offset. 
+     */
     STDMETHOD(SetStreamSource)
     (
         UINT StreamNumber,
@@ -1931,15 +1956,23 @@ public:
     {
         HRESULT hr = mRealDevice->SetStreamSource(StreamNumber,(IDirect3DVertexBuffer9*)pStreamData, 0, Stride);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetStreamSource(%d, %d, %d) == %d\n",
-        StreamNumber, pStreamData, Stride, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::SetStreamSource(%u, %p, %u) == %d",
+            StreamNumber, pStreamData, Stride, hr
+        );
 
         return hr;
     }
 
-
+    /**
+     * @note DX8 does not use the concept of stream source offset, so IVoodoo3DDevice8::GetStreamSource
+     *          discards the offset during retrieval. Since SetStreamSource uses 0 as the offset, there
+     *          should be no issues with this.
+     * @todo Verify that stream offset is not present in DX8, patch if otherwise.
+     */
     STDMETHOD(GetStreamSource)
     (
         UINT StreamNumber,
@@ -1950,10 +1983,13 @@ public:
         UINT offset;
         HRESULT hr = mRealDevice->GetStreamSource(StreamNumber,(IDirect3DVertexBuffer9**)ppStreamData, &offset, pStride);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetStreamSource(%d, %d, %d) == %d\n",
-        StreamNumber, *ppStreamData, *pStride, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::GetStreamSource(%u, %p, %u) == %d",
+            StreamNumber, *ppStreamData, *pStride, hr
+        );
 
         return hr;
     }

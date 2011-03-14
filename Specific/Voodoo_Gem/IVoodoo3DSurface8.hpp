@@ -36,7 +36,13 @@ public:
     IVoodoo3DSurface8(IVoodoo3DDevice8 * device, IDirect3DSurface9 * realSurface)
         : mRealDevice(device), mRealSurface(realSurface)
     {
-
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DSurface8::IVoodoo3DSurface8(%p, %p) == *p",
+            device, realSurface, this
+        );
     }
 
     inline IDirect3DSurface9 * RealSurface()

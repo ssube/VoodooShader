@@ -51,6 +51,8 @@ namespace VoodooShader
         this->mManagerMat = new MaterialManager(this);
 
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Core started successfully.");
+
+        this->LogModule(this->GetVersion());
     }
 
     Core::~Core()
@@ -85,7 +87,7 @@ namespace VoodooShader
 
     Version Core::GetVersion()
     {
-        Version version = { VOODOO_META_VERSION_CHAIN(CORE) };
+        Version version = { VOODOO_CORE_NAME, VOODOO_META_VERSION_CHAIN(CORE) };
 
         return version;
     }
@@ -110,6 +112,14 @@ namespace VoodooShader
             this->mLogger->Dump();
 #endif
         }
+    }
+    
+    void Core::LogModule
+    (
+        _In_ Version version
+    )
+    {
+        this->mLogger->LogModule(version);
     }
 
     void Core::SetAdapter(Adapter * adapter)

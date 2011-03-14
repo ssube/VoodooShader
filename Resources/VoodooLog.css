@@ -24,6 +24,11 @@ body
 	background: #666666;
 }
 
+table
+{
+	width: 100%;
+}
+
 table tr
 {
 	background: #DDDDDD;
@@ -34,35 +39,150 @@ table thead tr
 	background: #AAAAAA;
 }
 
-.debug
+.section
 {
-	background: #CCCCDD;
+	background: #CCCCCC;
+	padding: 4px;
+	width: 100%;
+	margin-bottom: 2px;
+}
+
+.section_title
+{
+	background: #DDDDDD;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+
+/* 0x00 - unknown */
+.level_0
+{
+	background: #DDBBDD;
 	color: #000000;
 }
 
-.info
+/* 0x10 - ext debug */
+.level_16
 {
-	background: #DCDCDC;
+	background: #D2C8E0;
 	color: #000000;
 }
 
-.warning
+/* 0x20 - debug */
+.level_32
 {
-	background: #fbf49b;
+	background: #CCDDEE;
+	color: #000000;
+}
+
+/* 0x30 - extended info */
+.level_48
+{
+	background: #D0DDCB;
+	color: #000000;
+}
+
+/* 0x40 - info */
+.level_64
+{
+	background: #ECE8AB;
+	color: #000000;
+}
+
+/* 0x50 - warning info */
+.level_80
+{
+	background: #F5D89B;
+	color: #000000;
+	font-style: italic;
+}
+
+/* 0x60 - slight warning */
+.level_96
+{
+	background: #FDC884;
+	color: #000000;
+	font-style: italic;
+}
+
+/* 0x70 - mild warning */
+.level_112
+{
+	background: #FFAA7B;
+	color: #000000;
+	font-style: italic;
+}
+
+/* 0x80 - warning */
+.level_128
+{
+	background: #FF886B;
+	color: #000000;
+	font-style: italic;
+}
+
+/* 0x90 - slight error */
+.level_144
+{
+	background: #FF775B;
+	color: #000000;
+	font-style: italic;
+}
+
+/* 0xA0 - slight error */
+.level_160
+{
+	background: #FF664B;
 	color: #000000;
 	font-style: italic;
 }
 
 /* Error classes use more obvious formatting. */
-.error
+
+/* 0xB0 - slight error */
+.level_176
 {
-	background: #FF0000;
-	color: #CCCCCC;
+	background: #FF4444;
+	color: #222222;
+	font-weight: bold;
 }
 
-.fatal
+/* 0xC0 - error */
+.level_192
 {
-	background: #880000;
+	background: #EE3838;
+	color: #333333;
+	font-weight: bold;
+}
+
+/* 0xD0 - slightly fatal error */
+.level_208
+{
+	background: #DD3030;
+	color: #DDDDDD;
+	font-weight: bold;
+}
+
+/* 0xE0 - mildly fatal error */
+.level_224
+{
+	background: #BB2020;
+	color: #DDDDDD;
+	font-weight: bold;
+}
+
+/* 0xF0 - fatal error */
+.level_240
+{
+	background: #881010;
+	color: #EEEEEE;
+	font-weight: bold;
+}
+
+/* 0xFF - error of doom */
+.level_255
+{
+	background: #440000;
 	color: #FFFFFF;
 	font-weight: bold;
 }

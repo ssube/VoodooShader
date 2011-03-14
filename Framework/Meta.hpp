@@ -209,7 +209,10 @@ namespace VoodooShader
 
     /**
      * Log message levels. These are spread out so additional levels can be
-     * added in the future without affecting behavior.
+     * added in the future without affecting behavior. The lower the value,
+     * the more verbose and less likely to be logged a message is. The Logger
+     * object discards messages less than its internal value. Warnings and
+     * errors, especially fatal errors, should always be logged.
      */
     enum LogLevel
     {
@@ -217,7 +220,7 @@ namespace VoodooShader
         // Working values
         LL_Debug    = 0x20,     /*!< Verbose debug log messages */
         LL_Info     = 0x40,     /*!< Informational log messages */
-        LL_Warning  = 0x80,     /*!< Warning log messages */
+        LL_Warning  = 0xA0,     /*!< Warning log messages */
         LL_Error    = 0xC0,     /*!< General error log messages */
         LL_Fatal    = 0xF0,     /*!< Fatal error log messages */
         // Max value
@@ -245,14 +248,12 @@ namespace VoodooShader
      */
     struct Version
     {
-        //const char * Name;
+        char * Name;
         int Major;
         int Minor;
         long Patch;
         long Rev;
     };
-
-    const size_t VersionSize = sizeof(Version);
 }
 
 #endif /*VOODOO_META_HPP*/

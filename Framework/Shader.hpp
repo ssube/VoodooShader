@@ -286,7 +286,7 @@ namespace VoodooShader
     public:
         Pass
         (
-            _In_ __readonly Technique * parent,
+            _In_ Technique * parent,
             _In_ CGpass cgPass
         );
 
