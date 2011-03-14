@@ -83,13 +83,22 @@ namespace VoodooShader
         (
             LL_Debug,
             VOODOO_CORE_NAME,
-            "Opening file %s with mode %x (underlying %u).",
+            "Opening file %s with mode %u (underlying %u).",
             mName.c_str(), mode, access
         );
 
         mHandle = CreateFileA(mName.c_str(), access, 0, NULL, OPEN_EXISTING, NULL, NULL);
 
-        assert(mHandle);
+        if ( mHandle == INVALID_HANDLE_VALUE )
+        {
+            mCore->Log
+            (
+                LL_Warning,
+                VOODOO_CORE_NAME,
+                "Unable to open file %s.",
+                mName.c_str()
+            );
+        }
 
         return ( mHandle != INVALID_HANDLE_VALUE );
     }

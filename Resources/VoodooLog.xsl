@@ -17,34 +17,39 @@
       <body>
         <div class="section">
           <div class="section_title">Log Information:</div>
-          <xsl:variable name="runtime" select="child::Message[last()]/@tick - /LogFile/@tick" />
-          Log contains <xsl:value-of select="count(child::Message)" /> entries over a run time of
+          <xsl:variable name="runtime" select="child::Message[last()]/@ticks - /LogFile/@ticks" />
+          Log file was started on <xsl:value-of select="/LogFile/@date" /> at <xsl:value-of select="/LogFile/@time" />;
+          contains <xsl:value-of select="count(child::Message)" /> entries over a run time of
           <xsl:choose>
             <xsl:when test="$runtime &gt;= 60000">
               <xsl:variable name="minutes" select="floor($runtime div 60000)" />
-              <xsl:value-of select="$minutes" /> minutes and <xsl:value-of select="round(($runtime mod 60000) div 1000)" /> seconds 
+              <xsl:value-of select="$minutes" /> minutes and <xsl:value-of select="round(($runtime mod 60000) div 1000)" /> seconds
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="$runtime div 1000" /> seconds 
+              <xsl:value-of select="$runtime div 1000" /> seconds
             </xsl:otherwise>
           </xsl:choose>
-          (<xsl:value-of select="$runtime" /> ticks).<br />
-          Log file was started on <xsl:value-of select="/LogFile/@date" /> at <xsl:value-of select="/LogFile/@time" />.
+          (<xsl:value-of select="$runtime" /> ticks).
         </div>
         <div class="section">
           <div class="section_title">Loaded Modules:</div>
-          <table class="modules">
+          <table  class="sortable">
             <thead>
               <tr>
+                <th>Order</th>
                 <th>Name</th>
                 <th>Major</th>
                 <th>Minor</th>
                 <th>Patch</th>
                 <th>Revision</th>
+                <th>Debug</th>
               </tr>
             </thead>
             <xsl:for-each select="Module">
               <tr>
+                <td>
+                  <xsl:value-of select="position()" />
+                </td>
                 <td>
                   <xsl:value-of select="@name" />
                 </td>
@@ -60,6 +65,9 @@
                 <td>
                   <xsl:value-of select="@rev" />
                 </td>
+                <td>
+                  <xsl:value-of select="@debug" />
+                </td>
               </tr>
             </xsl:for-each>
           </table>
@@ -69,7 +77,7 @@
           <table class="sortable" width="100%" height="100%">
             <thead>
               <tr>
-                <th>Event #</th>
+                <th>Event</th>
                 <th>Severity</th>
                 <th>Ticks</th>
                 <th>Step</th>
@@ -78,34 +86,35 @@
               </tr>
             </thead>
             <xsl:for-each select="Message">
-              <xsl:text disable-output-escaping="yes">&lt;tr class="level_</xsl:text>
               <!-- Round to the nearest 0x10 for simpler stylesheet -->
-              <xsl:choose>
-                <xsl:when test="not(@level)">0</xsl:when>
-                <xsl:when test="@level &gt; 250">255</xsl:when>
-                <xsl:when test="@level &lt; 10">0</xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="@level - (@level mod 16)" />
-                </xsl:otherwise>
-              </xsl:choose>
+              <xsl:variable name="level" select="round(@level div 16)" />
+              <xsl:text disable-output-escaping="yes">&lt;tr class="level_</xsl:text>
+              <xsl:value-of select="$level" />
               <xsl:text disable-output-escaping="yes">"&gt;</xsl:text>
               <td>
                 <xsl:value-of select="position()" />
               </td>
-              <td sorttable_customkey="{@level}">
-                <xsl:value-of select="@level" />
+              <td sorttable_customkey="{$level}">
+                <xsl:value-of select="$level" />
               </td>
               <td>
-                <xsl:value-of select="@tick - /LogFile/@tick" />
+                <xsl:value-of select="@ticks - /LogFile/@ticks" />
               </td>
               <td>
-                <xsl:value-of select="@tick - current()/preceding-sibling::Message[position()=1]/@tick" />
+                <xsl:choose>
+                  <xsl:when test="position() = 1">
+                    <xsl:value-of select="@ticks - /LogFile/@ticks" />
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="@ticks - current()/preceding-sibling::Message[position()=1]/@ticks" />
+                  </xsl:otherwise>
+                </xsl:choose>
               </td>
               <td>
                 <xsl:value-of select="@module" />
               </td>
               <td>
-                <xsl:value-of select="." />
+                <xsl:value-of disable-output-escaping="yes" select="." />
               </td>
               <xsl:text disable-output-escaping="yes">&lt;/tr&gt;</xsl:text>
             </xsl:for-each>

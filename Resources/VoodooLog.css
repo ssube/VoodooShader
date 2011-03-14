@@ -52,85 +52,85 @@ table thead tr
 	background: #DDDDDD;
 	font-weight: bold;
 	margin-bottom: 2px;
+	padding: 2px;
 }
 
 /* 0x00 - unknown */
 .level_0
 {
-	background: #DDBBDD;
+	background: #D4C6DD;
 	color: #000000;
 }
 
 /* 0x10 - ext debug */
-.level_16
+.level_1
 {
-	background: #D2C8E0;
+	background: #D0CFDF;
 	color: #000000;
 }
 
 /* 0x20 - debug */
-.level_32
+.level_2
 {
-	background: #CCDDEE;
+	background: #CCDDE0;
 	color: #000000;
 }
 
 /* 0x30 - extended info */
-.level_48
+.level_3
 {
-	background: #D0DDCB;
+	background: #CCDFCC;
 	color: #000000;
 }
 
 /* 0x40 - info */
-.level_64
+.level_4
 {
-	background: #ECE8AB;
 	color: #000000;
 }
 
 /* 0x50 - warning info */
-.level_80
+.level_5
+{
+	background: #ECE8AB;
+	color: #000000;
+	font-style: italic;
+}
+
+/* 0x60 - slight warning */
+.level_6
 {
 	background: #F5D89B;
 	color: #000000;
 	font-style: italic;
 }
 
-/* 0x60 - slight warning */
-.level_96
-{
-	background: #FDC884;
-	color: #000000;
-	font-style: italic;
-}
-
 /* 0x70 - mild warning */
-.level_112
+.level_7
 {
-	background: #FFAA7B;
+	background: #FFCA8B;
 	color: #000000;
 	font-style: italic;
 }
 
 /* 0x80 - warning */
-.level_128
+.level_8
 {
-	background: #FF886B;
+	background: #FFA87B;
 	color: #000000;
 	font-style: italic;
 }
 
 /* 0x90 - slight error */
-.level_144
+.level_9
 {
-	background: #FF775B;
+	background: #FF875B;
 	color: #000000;
 	font-style: italic;
 }
 
 /* 0xA0 - slight error */
-.level_160
+.level_10
 {
 	background: #FF664B;
 	color: #000000;
@@ -140,7 +140,7 @@ table thead tr
 /* Error classes use more obvious formatting. */
 
 /* 0xB0 - slight error */
-.level_176
+.level_11
 {
 	background: #FF4444;
 	color: #222222;
@@ -148,7 +148,7 @@ table thead tr
 }
 
 /* 0xC0 - error */
-.level_192
+.level_12
 {
 	background: #EE3838;
 	color: #333333;
@@ -156,7 +156,7 @@ table thead tr
 }
 
 /* 0xD0 - slightly fatal error */
-.level_208
+.level_13
 {
 	background: #DD3030;
 	color: #DDDDDD;
@@ -164,7 +164,7 @@ table thead tr
 }
 
 /* 0xE0 - mildly fatal error */
-.level_224
+.level_14
 {
 	background: #BB2020;
 	color: #DDDDDD;
@@ -172,7 +172,7 @@ table thead tr
 }
 
 /* 0xF0 - fatal error */
-.level_240
+.level_15
 {
 	background: #881010;
 	color: #EEEEEE;
@@ -180,7 +180,7 @@ table thead tr
 }
 
 /* 0xFF - error of doom */
-.level_255
+.level_16
 {
 	background: #440000;
 	color: #FFFFFF;

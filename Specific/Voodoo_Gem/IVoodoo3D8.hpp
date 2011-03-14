@@ -30,6 +30,8 @@
 
 #include "IVoodoo3DDevice8.hpp"
 
+using namespace VoodooShader;
+
 /**
  * The core Voodoo3D8 wrapper class for D3D8 objects. This class is responsible for the primary 
  * abstraction from D3D8 to D3D9. This class is responsible for creating devices, giving it control 
@@ -323,8 +325,13 @@ public:
 
         HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d",
-            Adapter, Flags, pIdentifier, hr);
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::GetAdapterIdentifier(%u, %u, %p) == %d",
+            Adapter, Flags, pIdentifier, hr
+        );
 
         if ( SUCCEEDED(hr) )
         {
@@ -362,8 +369,13 @@ public:
     {
         HMONITOR hm = mRealObject->GetAdapterMonitor(Adapter);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::GetAdapterMonitor(%d) == %d",
-            Adapter, hm);
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::GetAdapterMonitor(%u) == %p",
+            Adapter, hm
+        );
 
         return hm;
     }
@@ -384,8 +396,13 @@ public:
         D3DCAPS9 realCaps;
         HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d",
-            Adapter, DeviceType, pCaps, hr);
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::GetDeviceCaps(%u, %u, %p) == %d",
+            Adapter, DeviceType, pCaps, hr
+        );
 
         return D3D_OK;
     }
@@ -403,8 +420,13 @@ public:
     {
         HRESULT hr = mRealObject->RegisterSoftwareDevice(pInitializeFunction);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::RegisterSoftwareDevice(%d) == %d",
-            pInitializeFunction, hr);
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::RegisterSoftwareDevice(%p) == %d",
+            pInitializeFunction, hr
+        );
 
         VoodooCore->Log
         (

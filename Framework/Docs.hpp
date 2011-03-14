@@ -265,6 +265,153 @@
  *  pack additional data into them.
  * </p>
  *
+ * @page codestyle Code Style
+ * 
+ * @section intro Intro
+ * <p>
+ *  The Voodoo Shader Framework is designed to work across many games, some already
+ *  incredibly buggy. To prevent Voodoo or any adapter adding bugs, all Voodoo projects
+ *  must meet the following code rules.
+ * </p>
+ * <p>
+ *  Third-party code that is used in Voodoo, or adapters that are not part of the
+ *  official project, do not need to use these rules, but they can rely on Voodoo
+ *  following these precisely.
+ * </p>
+ * 
+ * @section general General Rules
+ * <ul>
+ * <li>All projects must be configured for Visual Studio 2010 (vcxproj files, all dependency
+ *      paths set in the project settings, etc).</li>
+ * <li>#pragma preprocessor directives and other VS-specific features should be avoided.</li>
+ * <ul>
+ *  <li>Voodoo is designed to compile on Windows within Visual Studio. Compatibility with other
+ *      compilers is not guaranteed or tested for, compatibility with other systems is highly
+ *      unlikely. Voodoo relies on some Windows-specific features and APIs, as well as targeting
+ *      mainly Windows-specific software.</li>
+ *  <li>#pragma to disable DLL interface warnings (warning 4251) is excepted.</li>
+ * </ul>
+ * <li>All projects must have 3 standard build configurations and each config must follow the 
+ *      appropriate rules.</li>
+ * <li>All projects must build in all configurations before any release.</li>
+ * <ul>
+ *  <li>This is especially important for new projects. Building under Debug_Analysis can find
+ *      many code issues before they run.</li>
+ *  <li>For some adapters, building under Debug_Analysis may not always be possible. If at all
+ *      possible, it should be done; if not, exceptions may be made only as <em>necessary</em>.
+ *      </li>
+ * <li>Project behavior must remain consistent between build configurations.</li>
+ * <ul>
+ *  <li>#ifdef directives dependent on the build mode should be avoided wherever possible. Log
+ *      messages should use LL_Debug instead (this has no notable performance hit). This improves
+ *      debugging.</li>
+ * </ul>
+ * <li>C++ TR1 and C++0x features may be used <em>as necessary</em> or where they notably improve
+ *      code quality, readability or functionality.</li>
+ * <li>All functions must use SAL annotations (<code>_In_, _Check_return_, etc</code>) wherever
+ *      appropriate.</li>
+ * <ul>
+ *   <li>All functions and methods must have annotations on all parameters.</li>
+ * </ul>
+ * <li>All classes, methods, fields, functions, structs, enums, typedefs or other applicable code
+ *      constructs must be documented with their purpose and any vital notes.</li>
+ *  <ul>
+ *   <li>All documentation must be doxygen compatible and use the same style as the Core.</li>
+ *   <li>Any function that throws must be marked with a @throws note.</li>
+ *   <li>Any function with specific requirements must have them noted in SAL annotations (as
+ *       well as possible) and with @note or @warning documentation.</li>
+ *   <li>All function parameters, global variables, enum members, class members, etc must be
+ *       documented. <em>(Note: The project does not fully conform to this requirement yet)</em></li>
+ *  </ul>
+ * </ul>
+ * 
+ * @section configs Build Configs
+ * 
+ * @subsection all All
+ * <ul>
+ *  <li>Compiler</li>
+ *  <ul>
+ *    <li>Use of MFC must be set to "Use Standard Windows Libraries".</li>
+ *    <li>Use of ATL must be set to "Not using ATL".</li>
+ *    <li>Character set must be set to "Not Set" at this time.</li>
+ *    <li>Common language runtime support must be set to "No Common
+ *          Language Runtime support".</li>
+ *  </ul>
+ * </ul>
+ *    
+ * @subsection debug_analysis Debug_Analysis
+ * <ul>
+ *  <li>Compiler</li>
+ *  <ul>
+ *    <li>Debug mode must be turned on and _DEBUG must be defined.</li>
+ *    <li>Debug information must be set to /Zi (program database).</li>
+ *    <li>Warning level must be /W4.</li>
+ *    <li>Warnings as errors (/WX) must be enabled.</li>
+ *    <li>All optimizations must be disabled.</li>
+ *    <li>Whole program optimizations must be set to "No whole program optimizations".</li>
+ *    <li>Minimal rebuild must be off (/Gm-).</li>
+ *    <li>Runtime checks must be both (/RTC1).</li>
+ *    <li>Runtime library must be multithreaded debug DLL (/MDd).</li>
+ *  </ul>
+ *  <li>Linker</li>
+ *  <ul>
+ *    <li>Generate debug info must be on (/DEBUG).</li>
+ *  </ul>
+ *  <li>Analysis</li>
+ *  <ul>
+ *    <li>Code analysis must be enabled.</li>
+ *    <li>Code analysis on build must be enabled.</li>
+ *    <li>"Microsoft All Rules" ruleset must be used.</li>
+ *  </ul>
+ *  
+ * @subsection debug Debug
+ * <ul>
+ *  <li>Compiler</li>
+ *  <ul>
+ *    <li>Debug mode must be turned on and _DEBUG must be defined.</li>
+ *    <li>Debug information must be set to /Zi (program database).</li>
+ *    <li>Warning level must be /W4.</li>
+ *    <li>Warnings as errors (/WX) must not be enabled.</li>
+ *    <li>All optimizations must be disabled.</li>
+ *    <li>Whole program optimizations must be set to "No whole program optimizations".</li>
+ *    <li>Minimal rebuild must be off (/Gm-).</li>
+ *    <li>Runtime checks must be both (/RTC1).</li>
+ *    <li>Runtime library must be multithreaded debug DLL (/MDd).</li>
+ *  </ul>
+ *  <li>Linker</li>
+ *  <ul>
+ *    <li>Generate debug info must be on (/DEBUG).</li>
+ *  </ul>
+ *  <li>Analysis</li>
+ *  <ul>
+ *    <li>Code analysis must not be enabled.</li>
+ *  </ul>
+ * </ul>
+ *  
+ * @subsection release Release
+ * <ul>
+ *  <li>Compiler</li>
+ *  <ul>
+ *    <li>Debug mode must be turned off and _DEBUG must not be defined.</li>
+ *    <li>Debug information must be set to /Zi (program database).</li>
+ *    <li>Warning level must be /W4.</li>
+ *    <li>Warnings as errors (/WX) must not be enabled.</li>
+ *    <li>Whole program optimizations must be set to "Link-time code generation".</li>
+ *    <li>Optimizations should be set to "Maximize speed" (/O2).</li>
+ *    <li>Inline function expansion should be set to "Any suitable" (/Ob2).</li>
+ *    <li>Enable Intrinsic Functions must be set to "Yes" (/Oi).</li>
+ *    <li>Favor Size Or Speed must be set to "Favor fast code" (/Ot).</li>
+ *    <li>Runtime Library must be set to "Multi-threaded DLL" (/MD).</li>
+ *  </ul>
+ *  <li>Linker</li>
+ *  <ul>
+ *    <li>Generate debug info must be off.</li>
+ *  </ul>
+ *  <li>Analysis</li>
+ *  <ul>
+ *    <li>Code analysis must not be enabled.</li>
+ *  </ul>
+ * </ul>
  *
  * @page License
  * 

@@ -27,6 +27,8 @@
 
 #include "IVoodoo3DSurface8.hpp"
 
+using namespace VoodooShader;
+
 /**
  * Implements a thin wrapper around D3D8 textures to make them compatible with the Voodoo API.
  * This internally translates all calls into appropriate D3D9 calls and keeps a pointer to the
@@ -187,7 +189,7 @@ public:
     )
     {
         IDirect3DSurface9 * rSurface;
-        HRESULT hr = mRealTexture->GetSurfaceLevel(Level, &rSurface);
+        HRESULT hr = mRealTexture->GetSurfaceLevel(level, &rSurface);
         if ( SUCCEEDED(hr) )
         {
             IVoodoo3DSurface8 * newSurface = new IVoodoo3DSurface8(mDevice, rSurface);

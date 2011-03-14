@@ -48,12 +48,15 @@
 
 #define VOODOO_META_STRING_NAME_BASIC(token) VOODOO_##token##_NAME VOODOO_META_DEBUG_STRING
 #define VOODOO_META_STRING_NAME_FULL(token) VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING
+
+#define VOODOO_META_VERSION_STRUCT(token)\
+    { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token) }
 //-----------------------------------------------------------------------------
 
 
 
 // Global defs ----------------------------------------------------------------
-#define VOODOO_GLOBAL_VERSION_GITREV    110
+#define VOODOO_GLOBAL_VERSION_GITREV    111
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   "Copyright (c) 2010-2011 by Sean Sube"
 //-----------------------------------------------------------------------------
 
@@ -63,7 +66,7 @@
 #define VOODOO_CORE_PRETTYNAME          "Voodoo Shader Framework Core"
 #define VOODOO_CORE_VERSION_MAJOR       0
 #define VOODOO_CORE_VERSION_MINOR       1
-#define VOODOO_CORE_VERSION_PATCH       12
+#define VOODOO_CORE_VERSION_PATCH       13
 #define VOODOO_CORE_VERSION_GITREV      VOODOO_GLOBAL_VERSION_GITREV
 //-----------------------------------------------------------------------------
 

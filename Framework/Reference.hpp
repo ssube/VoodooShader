@@ -159,6 +159,12 @@ namespace VoodooShader
         }
     };
 
+    /**
+     * Reference comparison function. Uses templates to allow comparing refs of
+     * different types (since references wrap pointers, the addresses are all
+     * comparable). Needed for sorting and std containers. Comparison results
+     * are identical to <code>(U *) me < (V *) other</code>.
+     */
     template<typename U, typename V>
     bool operator<
     (

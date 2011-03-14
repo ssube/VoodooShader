@@ -32,6 +32,7 @@ namespace VoodooShader
             "<LogFile "; 
                 this->LogDate(); 
                 this->LogTime(); 
+                this->LogTicks();
         this->mLogFile << 
             ">\n";
 
@@ -116,9 +117,10 @@ namespace VoodooShader
         this->mLogFile << 
             "    <Module name=\"" << version.Name << "\" " <<
             " major=\"" << version.Major << "\" " <<
-            " major=\"" << version.Minor << "\" " <<
-            " major=\"" << version.Patch << "\" " <<
-            " major=\"" << version.Rev << "\" />\n";
+            " minor=\"" << version.Minor << "\" " <<
+            " patch=\"" << version.Patch << "\" " <<
+            " rev=\"" << version.Rev << "\" " <<
+            " debug=\"" << version.Debug << "\" />\n";
     }
 
     void Logger::SetBufferSize(unsigned int bytes)
@@ -146,6 +148,7 @@ namespace VoodooShader
         this->mLogFile << 
             "    <Message level=\"" << level << "\" ";
         this->LogTime();
+        this->LogTicks();
         this->mLogFile << 
             " module=\"" << module << "\">" << buffer << "</Message>\n";
     }
@@ -162,6 +165,7 @@ namespace VoodooShader
         this->mLogFile << 
             "    <Message level=\"" << level << "\" ";
         this->LogTime();
+        this->LogTicks();
         this->mLogFile <<" module=\"" << module << "\">" << buffer << "</Message>\n";
     }
 
@@ -188,6 +192,7 @@ namespace VoodooShader
                 "<LogFile "; 
             this->LogDate(); 
             this->LogTime(); 
+            this->LogTicks();
             this->mLogFile << 
                 ">\n";
 

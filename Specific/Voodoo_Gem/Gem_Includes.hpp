@@ -29,7 +29,10 @@
 #include "VoodooFramework.hpp"
 
 #ifdef _DEBUG
-#    define D3D_DEBUG_INFO
+#   define D3D_DEBUG_INFO
+#   define VOODOO_GEM_DEBUG_VALUE 1
+#else
+#   define VOODOO_GEM_DEBUG_VALUE 0
 #endif
 
 #include <d3d9.h>

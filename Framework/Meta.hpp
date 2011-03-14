@@ -28,17 +28,24 @@
 #    define VOODOO_API __declspec(dllimport)
 #endif
 
+#ifdef _DEBUG
+#   define VOODOO_DEBUG
+#   define VOODOO_DEBUG_VALUE 1
+#else
+#   define VOODOO_DEBUG_VALUE 0
+#endif
+
 // Hide the DLL-interface warning
 #pragma warning(disable:4251)
 
 #include "Includes.hpp"
 #include "Reference.hpp"
 
-#define VOODOO_CORE_COPYRIGHT "<div align=\"center\">\
-    Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube<br />\
-    The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.<br />\
-    This is free software and you are welcome to redistribute it under certain conditions.<br />\
-    Please see the included license file for more details.</div>"
+#define VOODOO_CORE_COPYRIGHT\
+    "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube&lt;br /&gt;\
+    The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\
+    This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;\
+    Please see the included license file for more details.&lt;/div&gt;"
 
 namespace VoodooShader
 {
@@ -213,15 +220,19 @@ namespace VoodooShader
      * the more verbose and less likely to be logged a message is. The Logger
      * object discards messages less than its internal value. Warnings and
      * errors, especially fatal errors, should always be logged.
+     * 
+     * @note The enum values here indicate the <em>lowest</em> value
+     *          associated with that message type. All values up to the next
+     *          enum value are considered part of the same type.
      */
     enum LogLevel
     {
         LL_Unknown  = 0x00,     /*!< Log level unknown */
         // Working values
-        LL_Debug    = 0x20,     /*!< Verbose debug log messages */
-        LL_Info     = 0x40,     /*!< Informational log messages */
-        LL_Warning  = 0xA0,     /*!< Warning log messages */
-        LL_Error    = 0xC0,     /*!< General error log messages */
+        LL_Debug    = 0x10,     /*!< Verbose debug log messages */
+        LL_Info     = 0x30,     /*!< Informational log messages */
+        LL_Warning  = 0x50,     /*!< Warning log messages */
+        LL_Error    = 0xB0,     /*!< General error log messages */
         LL_Fatal    = 0xF0,     /*!< Fatal error log messages */
         // Max value
         LL_Max                  /*!< Enumerator values count */
@@ -253,6 +264,7 @@ namespace VoodooShader
         int Minor;
         long Patch;
         long Rev;
+        bool Debug;
     };
 }
 

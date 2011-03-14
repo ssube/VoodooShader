@@ -41,10 +41,13 @@ public:
     IVoodoo3DTexture8(IVoodoo3DDevice8 * device, IDirect3DTexture9 * texture)
         : mDevice(device), mRealTexture(texture)
     {
-#ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3DTexture8::IVoodoo3DTexture8(%d, %d) == %d\n",
-            device, texture, this);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_DX89_NAME,
+            "IVoodoo3DTexture8::IVoodoo3DTexture8(%p, %p) == %p",
+            device, texture, this
+        );
     }
 
     inline IDirect3DTexture9 * RealTexture()
@@ -91,7 +94,7 @@ public:
 
     STDMETHOD(SetPrivateData)
     (
-         REFGUID refguid,
+        REFGUID refguid,
         CONST void * pData,
         DWORD SizeOfData,
         DWORD Flags
@@ -102,7 +105,7 @@ public:
 
     STDMETHOD(GetPrivateData)
     (
-         REFGUID refguid,
+        REFGUID refguid,
         void * pData,
         DWORD * pSizeOfData
     )
@@ -161,7 +164,7 @@ public:
 
     STDMETHOD(GetLevelDesc)
     (
-         UINT Level,
+        UINT Level,
         D3DSURFACE_DESC8 * pDesc
     )
     {
@@ -177,7 +180,7 @@ public:
 
     STDMETHOD(GetSurfaceLevel)
     (
-         UINT Level,
+        UINT Level,
         IDirect3DSurface8 ** ppSurfaceLevel
     )
     {

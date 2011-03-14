@@ -3,16 +3,16 @@
 * Copyright (c) 2010-2011 by Sean Sube
 *
 *
-* This program is free software; you can redistribute it and/or modify it under the terms of the 
-* GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+* This program is free software; you can redistribute it and/or modify it under the terms of the
+* GNU General Public License as published by the Free Software Foundation; either version 2 of the
 * License, or (at your option) any later version.
-* 
+*
 * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-* even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+* even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 * General Public License for more details.
 *
-* You should have received a copy of the GNU General Public License along with this program; 
-* if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+* You should have received a copy of the GNU General Public License along with this program;
+* if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
 * Boston, MA  02110-1301 US
 *
 * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -37,16 +37,16 @@ static HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 * The core Voodoo wrapper class for D3D8 devices. This class is responsible for processing,
 * translating and handling most API calls. Due to this, it must be as optimized as possible
 * (considering the circumstances) and should contain only tested code.
-* 
+*
 * @note The various IVoodoo3D8 interfaces provide an application-opaque wrapper that actually
 *          implements a Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the
-*          IVoodoo3D9 interface set should be used.         
+*          IVoodoo3D9 interface set should be used.
 */
-class IVoodoo3DDevice8 
+class IVoodoo3DDevice8
     : public IDirect3DDevice8
 {
     /**
-    * A pointer to the true underlying IDirect3DDevice9 object wrapped by this IVoodoo interface.            
+    * A pointer to the true underlying IDirect3DDevice9 object wrapped by this IVoodoo interface.
     */
     IDirect3DDevice9 * mRealDevice;
 
@@ -64,15 +64,15 @@ class IVoodoo3DDevice8
 
 public:
     /**
-    * The default, public constructor for IVoodoo3D objects.            
+    * The default, public constructor for IVoodoo3D objects.
     */
     IVoodoo3DDevice8(IDirect3DDevice9 * realDevice, D3DPRESENT_PARAMETERS pp)
         : mRealDevice(realDevice), mParams(pp)
     {
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::IVoodoo3DDevice8(%p) == %p",
             realDevice, this
         );
@@ -171,8 +171,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::Clear(%d, %p, %d, %d, %f, %d) == %d",
             Count, pRects, Flags, Color, Z, Stencil, hr
         );
@@ -182,15 +182,15 @@ public:
 
     STDMETHOD(TestCooperativeLevel)
     (
-        
+
     )
     {
         HRESULT hr = mRealDevice->TestCooperativeLevel();
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::TestCooperativeLevel() == %d",
             hr
         );
@@ -198,25 +198,23 @@ public:
         return hr;
     }
 
-
     STDMETHOD_(UINT, GetAvailableTextureMem)
     (
-        
+
     )
     {
         UINT mem = mRealDevice->GetAvailableTextureMem();
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetAvailableTextureMem() == %d",
             mem
         );
 
         return mem;
     }
-
 
     STDMETHOD(ResourceManagerDiscardBytes)
     (
@@ -225,15 +223,14 @@ public:
     {
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::ResourceManagerDiscardBytes(%d) == UNUSED",
             Bytes
         );
 
         return DefaultErrorCode;
     }
-
 
     STDMETHOD(GetDirect3D)
     (
@@ -248,7 +245,6 @@ public:
         return D3D_OK;
     }
 
-
     STDMETHOD(GetDeviceCaps)
     (
         D3DCAPS8 * pCaps
@@ -260,8 +256,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetDeviceCaps(%p) == %d",
             pCaps, hr
         );
@@ -273,7 +269,6 @@ public:
 
         return hr;
     }
-
 
     STDMETHOD(GetDisplayMode)
     (
@@ -290,7 +285,6 @@ public:
         return hr;
     }
 
-
     STDMETHOD(GetCreationParameters)
     (
         D3DDEVICE_CREATION_PARAMETERS * pParameters
@@ -306,7 +300,6 @@ public:
         return hr;
     }
 
-
     STDMETHOD(SetCursorProperties)
     (
         UINT XHotSpot,
@@ -320,15 +313,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetCursorProperties(%d, %d, %p) == %d",
             XHotSpot, YHotSpot, pCursorBitmap, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD_(void, SetCursorPosition)
     (
@@ -343,7 +335,6 @@ public:
         X, Y, Flags);
     }
 
-
     STDMETHOD_(BOOL, ShowCursor)
     (
         BOOL bShow
@@ -357,7 +348,6 @@ public:
         return show;
     }
 
-
     STDMETHOD(CreateAdditionalSwapChain)
     (
         D3DPRESENT_PARAMETERS8 * pPresentationParameters,
@@ -366,18 +356,20 @@ public:
     {
         HRESULT hr = mRealDevice->CreateAdditionalSwapChain
         (
-            (D3DPRESENT_PARAMETERS*)pPresentationParameters, 
+            (D3DPRESENT_PARAMETERS*)pPresentationParameters,
             (IDirect3DSwapChain9**)pSwapChain
         );
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::CreateAdditionalSwapChain(%d, %d) == %d",
-        pPresentationParameters, pSwapChain, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::CreateAdditionalSwapChain(%p, %p) == %d",
+            pPresentationParameters, *pSwapChain, hr
+        );
 
         return hr;
     }
-
 
     STDMETHOD(Reset)
     (
@@ -386,10 +378,13 @@ public:
     {
         HRESULT hr = mRealDevice->Reset((D3DPRESENT_PARAMETERS*)pPresentationParameters);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::Reset(%d) == %d",
-        pPresentationParameters, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::Reset(%p) == %d",
+            pPresentationParameters, hr
+        );
 
         return hr;
     }
@@ -416,9 +411,9 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
-            "IVoodoo3DDevice8::Present(%d, %d, %d, %d) == %d",
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::Present(%p, %p, %p, %p) == %d",
             pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion, hr
         );
 
@@ -437,10 +432,10 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
-            "IVoodoo3DDevice8::GetBackBuffer(%d, %d, %d) == %d",
-            BackBuffer, Type, ppBackBuffer, hr
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::GetBackBuffer(%d, %d, %p) == %d",
+            BackBuffer, Type, *ppBackBuffer, hr
         );
 
         if ( SUCCEEDED(hr) )
@@ -461,8 +456,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetRasterStatus(%p) == %d",
             pRasterStatus, hr
         );
@@ -480,9 +475,9 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
-            "IVoodoo3DDevice8::GetRasterStatus(%d, %d) == void",
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::GetRasterStatus(%d, %p) == void",
             Flags, pRamp
         );
 
@@ -498,9 +493,9 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
-            "IVoodoo3DDevice8::GetRasterStatus(%d) == void",
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::GetRasterStatus(%p) == void",
             pRamp
         );
 
@@ -509,7 +504,7 @@ public:
 
     /**
      * Creates a texture in the IVoodoo runtime. The new texture must be registered with the core
-     * and, for shader purposes, we should attempt to create it as a render-target.            
+     * and, for shader purposes, we should attempt to create it as a render-target.
      */
     STDMETHOD(CreateTexture)
     (
@@ -532,7 +527,7 @@ public:
         {
             hr = mRealDevice->CreateTexture
             (
-                Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format, 
+                Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format,
                 Pool, &rTexture, NULL
             );
         }
@@ -540,7 +535,13 @@ public:
         // That failed, create as a standard texture
         if ( FAILED(hr) )
         {
-            VoodooCore->Log(LL_Warning, VOODOO_GEM_NAME, "Unable to create texture as a render target (%d).", hr);
+            VoodooCore->Log
+            (
+                LL_Warning, 
+                VOODOO_GEM_NAME, 
+                "Unable to create texture as a render target (%d).", 
+                hr
+            );
 
             rtt = false;
             hr = mRealDevice->CreateTexture
@@ -551,10 +552,10 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
-            "IVoodoo3DDevice8::CreateTexture(%d, %d, %d, %d, %d, %d, %d) == %d",
-            Width, Height, Levels, Usage, Format, Pool, ppTexture, hr
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::CreateTexture(%u, %u, %u, %u, %u, %u, %p) == %d",
+            Width, Height, Levels, Usage, Format, Pool, *ppTexture, hr
         );
 
         // One succeeded, the texture exists. We need to register it with the Voodoo core.
@@ -568,7 +569,6 @@ public:
 
         return hr;
     }
-
 
     STDMETHOD(CreateVolumeTexture)
     (
@@ -591,8 +591,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CreateVolumeTexture(%d, %d, %d, %d, %d, %d, %d, %p) == %d",
             Width, Height, Depth, Levels, Usage, Format, Pool, *ppVolumeTexture, hr
         );
@@ -620,14 +620,14 @@ public:
         IDirect3DCubeTexture9 * rTexture;
         HRESULT hr = mRealDevice->CreateCubeTexture
         (
-            EdgeLength, Levels, Usage, Format, Pool, 
+            EdgeLength, Levels, Usage, Format, Pool,
             &rTexture, NULL
         );
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CreateCubeTexture(%u, %u, %u, %u, %u, %p) == %d",
             EdgeLength, Levels, Usage, Format, Pool, *ppCubeTexture, hr
         );
@@ -640,7 +640,6 @@ public:
 
         return hr;
     }
-
 
     STDMETHOD(CreateVertexBuffer)
     (
@@ -658,15 +657,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CreateVertexBuffer(%u, %u, %u, %u, %p) == %d",
             Length, Usage, FVF, Pool, *ppVertexBuffer, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(CreateIndexBuffer)
     (
@@ -684,8 +682,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CreateIndexBuffer(%u, %u, %u, %u, %p) == %d",
             Length, Usage, Format, Pool, *ppIndexBuffer, hr
         );
@@ -693,12 +691,11 @@ public:
         return hr;
     }
 
-
     /**
      * This function creates a stand-alone render target surface in the original D3D8 and 9 setups.
      * For Voodoo's purposes, this should create a render target texture if at all possible, then
-     * retrieve the surface from that texture. 
-     * 
+     * retrieve the surface from that texture.
+     *
      * @todo Find a way to force CreateRenderTarget to make RT textures and find a way to name them.
      */
     STDMETHOD(CreateRenderTarget)
@@ -719,8 +716,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CreateRenderTarget(%u, %u, %u, %u, %u, %p) == %d",
             Width, Height, Format, MultiSample, Lockable, *ppSurface, hr
         );
@@ -733,7 +730,6 @@ public:
 
         return hr;
     }
-
 
     STDMETHOD(CreateDepthStencilSurface)
     (
@@ -753,8 +749,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CreateDepthStencilSurface(%u, %u, %u, %u, %p) == %d",
             Width, Height, Format, MultiSample, *ppSurface, hr
         );
@@ -771,7 +767,7 @@ public:
     /**
      * Creates a D3D8 image surface, a sort of placeholder surface. Because D3D9 has no equivalent,
      * this is redirected to CreateOffscreenPlainSurface at some point.
-     * 
+     *
      * @warning This uses a different call than the D3D8 original, and may not perform exactly the
      *             same. <em>(non-standard behavior)</em>
      * @todo Test the pool these should be created in. May be default, managed or sysmem, not sure yet.
@@ -793,8 +789,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CreateImageSurface(%u, %u, %u, %p) == %d",
             Width, Height, Format, *ppSurface, hr
         );
@@ -813,8 +809,8 @@ public:
      * D3D9, it instead requires each texture to be stretched separately. It is, however, possible
      * to translate the call as D3D8 applies some very specific restrictions, including a lack of
      * stretching (means the rectangles must be the same dimensions, but at different points) and
-     * the same format and surface properties.         
-     * 
+     * the same format and surface properties.
+     *
      * @warning For testing purposes, this only copies the first given rectangle. This is easy
      *             enough to fix, but I want to do more testing first. <em>(non-standard behavior)</em>
      * @todo Test and then make this perform identical to the D3D8 version.
@@ -833,20 +829,19 @@ public:
 
         HRESULT hr = mRealDevice->StretchRect
         (
-            wSource->RealSurface(), pSourceRectsArray, 
+            wSource->RealSurface(), pSourceRectsArray,
             wDest->RealSurface(), pSourceRectsArray, D3DTEXF_NONE);
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CopyRects(%p, %p, %u, %p, %p) == %d",
             pSourceSurface, pSourceRectsArray, cRects, pDestinationSurface, pDestPointsArray, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(UpdateTexture)
     (
@@ -864,8 +859,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::UpdateTexture(%p, %p) == %d",
             pSourceTexture, pDestinationTexture, hr
         );
@@ -874,7 +869,7 @@ public:
     }
 
     /**
-     * Retrieves the front-buffer surface from the D3D8 device. D3D9 has no equivalent call (kinda).            
+     * Retrieves the front-buffer surface from the D3D8 device. D3D9 has no equivalent call (kinda).
      */
     STDMETHOD(GetFrontBuffer)
     (
@@ -883,8 +878,8 @@ public:
     {
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetFrontBuffer(%p) == UNUSED",
             pDestSurface
         );
@@ -910,8 +905,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetRenderTarget(%p, %p) == %d",
             pRenderTarget, pNewZStencil, hr
         );
@@ -929,8 +924,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetRenderTarget(%p) == %d",
             *ppRenderTarget, hr
         );
@@ -944,7 +939,6 @@ public:
         return hr;
     }
 
-
     STDMETHOD(GetDepthStencilSurface)
     (
         IDirect3DSurface8 ** ppZStencilSurface
@@ -955,8 +949,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetDepthStencilSurface(%p) == %d",
             *ppZStencilSurface, hr
         );
@@ -976,8 +970,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::EndScene() == %d",
             hr
         );
@@ -995,8 +989,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetTransform(%u, %p) == %d\n",
             State, pMatrix, hr
         );
@@ -1024,7 +1018,6 @@ public:
         return hr;
     }
 
-
     STDMETHOD(GetTransform)
     (
         D3DTRANSFORMSTATETYPE State,
@@ -1035,15 +1028,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetTransform(%u, %p) == %d",
             State, pMatrix, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(MultiplyTransform)
     (
@@ -1055,8 +1047,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::MultiplyTransform(%u, %p) == %d",
             State, pMatrix, hr
         );
@@ -1092,7 +1084,6 @@ public:
         return hr;
     }
 
-
     STDMETHOD(SetViewport)
     (
         CONST D3DVIEWPORT8 * pViewport
@@ -1102,15 +1093,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetViewport(%p) == %d",
             pViewport, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetViewport)
     (
@@ -1121,15 +1111,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetViewport(%p) == %d",
             pViewport, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(SetMaterial)
     (
@@ -1140,15 +1129,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetMaterial(%p) == %d",
             pMaterial, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetMaterial)
     (
@@ -1159,15 +1147,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetMaterial(%p) == %d",
             pMaterial, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(SetLight)
     (
@@ -1179,15 +1166,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetLight(%u, %p) == %d",
             Index, Light, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetLight)
     (
@@ -1199,15 +1185,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetLight(%u, %p) == %d",
             Index, Light, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(LightEnable)
     (
@@ -1219,15 +1204,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::LightEnable(%u, %d) == %d",
             Index, Enable, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetLightEnable)
     (
@@ -1239,15 +1223,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetLightEnable(%u, %d) == %d",
             Index, *pEnable, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(SetClipPlane)
     (
@@ -1259,15 +1242,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetClipPlane(%u, %p) == %d",
             Index, pPlane, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetClipPlane)
     (
@@ -1279,15 +1261,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
-            "IVoodoo3DDevice8::GetClipPlane(%u, %d) == %d",
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::GetClipPlane(%u, %p) == %d",
             Index, pPlane, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(SetRenderState)
     (
@@ -1299,15 +1280,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetRenderState(%u, %u) == %d",
             State, Value, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetRenderState)
     (
@@ -1319,8 +1299,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetRenderState(%u, %u) == %d",
             State, *pValue, hr
         );
@@ -1330,7 +1310,7 @@ public:
 
     /**
      * Due to differences between the D3D8 and D3D9 APIs, this function is currently non-
-     * functional.        
+     * functional.
      * @todo Diagnose state blocks, see if they can be translated.
      */
     STDMETHOD(EndStateBlock)
@@ -1340,8 +1320,8 @@ public:
     {
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::EndStateBlock(%u) == UNUSED",
             *pToken
         );
@@ -1349,9 +1329,8 @@ public:
         return DefaultErrorCode;
     }
 
-
     /**
-     * This function does not exist in the D3D9 API.            
+     * This function does not exist in the D3D9 API.
      */
     STDMETHOD(DeleteStateBlock)
     (
@@ -1360,8 +1339,8 @@ public:
     {
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::DeleteStateBlock(%u) == UNUSED",
             Token
         );
@@ -1369,10 +1348,9 @@ public:
         return DefaultErrorCode;
     }
 
-
     /**
     * Due to differences between the D3D8 and D3D9 APIs, this function is currently non-
-    * functional.            
+    * functional.
     */
     STDMETHOD(CreateStateBlock)
     (
@@ -1382,15 +1360,14 @@ public:
     {
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CreateStateBlock(%u, %u) == UNUSED",
             Type, *pToken
         );
 
         return DefaultErrorCode;
     }
-
 
     STDMETHOD(SetClipStatus)
     (
@@ -1401,15 +1378,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetClipStatus(%p) == %d",
             pClipStatus, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetClipStatus)
     (
@@ -1420,15 +1396,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetClipStatus(%p) == %d",
             pClipStatus, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetTexture)
     (
@@ -1441,8 +1416,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetTexture(%u, %p) == %d",
             Stage, *ppTexture, hr
         );
@@ -1455,7 +1430,6 @@ public:
 
         return hr;
     }
-
 
     STDMETHOD(SetTexture)
     (
@@ -1475,15 +1449,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetTexture(%u, %p) == %d",
             Stage, pTexture, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetTextureStageState)
     (
@@ -1496,15 +1469,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetTextureStageState(%u, %u, %p) == %d",
             Stage, Type, pValue, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(SetTextureStageState)
     (
@@ -1517,15 +1489,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetTextureStageState(%u, %u, %u) == %d",
             Stage, Type, Value, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(ValidateDevice)
     (
@@ -1536,8 +1507,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::ValidateDevice(%u) == %d",
             *pNumPasses, hr
         );
@@ -1546,7 +1517,7 @@ public:
     }
 
     /**
-     * No D3D9 equivalent.            
+     * No D3D9 equivalent.
      */
     STDMETHOD(GetInfo)
     (
@@ -1557,8 +1528,8 @@ public:
     {
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetInfo(%u, %p, %u) == UNUSED",
             DevInfoID, pDevInfoStruct, DevInfoStructSize
         );
@@ -1576,8 +1547,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetPaletteEntries(%u, %p) == %d",
             PaletteNumber, pEntries, hr
         );
@@ -1595,15 +1566,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetPaletteEntries(%u, %p) == %d",
             PaletteNumber, pEntries, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(SetCurrentTexturePalette)
     (
@@ -1614,15 +1584,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetCurrentTexturePalette(%u) == %d",
             PaletteNumber, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetCurrentTexturePalette)
     (
@@ -1633,15 +1602,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetCurrentTexturePalette(%u) == %d",
             *PaletteNumber, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(DrawPrimitive)
     (
@@ -1654,8 +1622,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::DrawPrimitive(%u, %u, %u) == %d",
             PrimitiveType, StartVertex, PrimitiveCount, hr
         );
@@ -1677,8 +1645,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::DrawIndexedPrimitive(%u, %u, %u, %u, %u) == %d",
             PrimitiveType, minIndex, NumVertices, startIndex, primCount, hr
         );
@@ -1698,8 +1666,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::DrawPrimitiveUP(%u, %u, %p, %u) == %d",
             PrimitiveType, PrimitiveCount, pVertexStreamZeroData, VertexStreamZeroStride, hr
         );
@@ -1721,18 +1689,17 @@ public:
     {
         HRESULT hr = mRealDevice->DrawIndexedPrimitiveUP
         (
-            PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, pIndexData, 
+            PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, pIndexData,
             IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride
         );
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
-            "IVoodoo3DDevice8::DrawIndexedPrimitiveUP(%d, %d, %d, %d, %d, %d, %d, %d) == %d",
-            PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, 
-            pIndexData, IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride, 
-            hr
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::DrawIndexedPrimitiveUP(%u, %u, %u, %u, %p, %u, %p, %u) == %d",
+            PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, pIndexData,
+            IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride, hr
         );
 
         return hr;
@@ -1754,8 +1721,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::ProcessVertices(%u, %u, %u, %p, %u) == %d",
             SrcStartIndex, DestIndex, VertexCount, pDestBuffer, Flags, hr
         );
@@ -1775,8 +1742,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::CreateVertexShader(%u, %u, %u, %u) == %d",
             *pDeclaration, *pFunction, *pHandle, Usage, hr
         );
@@ -1788,7 +1755,6 @@ public:
 
         return hr;
     }
-
 
     STDMETHOD(SetVertexShader)
     (
@@ -1808,15 +1774,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetVertexShader(%u) == %d",
             Handle, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetVertexShader)
     (
@@ -1827,8 +1792,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetVertexShader(%d) == D3D_OK",
             *pHandle
         );
@@ -1837,7 +1802,7 @@ public:
     }
 
     /**
-     * D3D9 has no equivalent function.            
+     * D3D9 has no equivalent function.
      */
     STDMETHOD(DeleteVertexShader)
     (
@@ -1856,8 +1821,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::DeleteVertexShader(%u) == %d",
             Handle, hr
         );
@@ -1876,8 +1841,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetVertexShaderConstant(%u, %p, %u) == %d",
             Register, pConstantData, ConstantCount, hr
         );
@@ -1896,15 +1861,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetVertexShaderConstant(%u, %p, %u) == %d",
             Register, pConstantData, ConstantCount, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(GetVertexShaderDeclaration)
     (
@@ -1915,15 +1879,14 @@ public:
     {
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetVertexShaderDeclaration(%u, %p, %u) == UNUSED",
             Handle, pData, *pSizeOfData
         );
 
         return DefaultErrorCode;
     }
-
 
     STDMETHOD(GetVertexShaderFunction)
     (
@@ -1934,8 +1897,8 @@ public:
     {
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetVertexShaderFunction(%u, %p, %u) == UNUSED",
             Handle, pData, *pSizeOfData
         );
@@ -1945,7 +1908,7 @@ public:
 
     /**
      * @note DX8 does not use the concept of stream source offset, so IVoodoo3DDevice8::SetStreamSource always
-     *          0 as the offset. 
+     *          0 as the offset.
      */
     STDMETHOD(SetStreamSource)
     (
@@ -1958,8 +1921,8 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::SetStreamSource(%u, %p, %u) == %d",
             StreamNumber, pStreamData, Stride, hr
         );
@@ -1985,15 +1948,14 @@ public:
 
         VoodooCore->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::GetStreamSource(%u, %p, %u) == %d",
             StreamNumber, *ppStreamData, *pStride, hr
         );
 
         return hr;
     }
-
 
     STDMETHOD(SetIndices)
     (
@@ -2004,14 +1966,16 @@ public:
         HRESULT hr = mRealDevice->SetIndices((IDirect3DIndexBuffer9*)pIndexData);
         mLastBaseIndex = BaseVertexIndex;
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetIndices(%d, %d) == %d\n",
-        pIndexData, BaseVertexIndex, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::SetIndices(%p, %u) == %d",
+            pIndexData, BaseVertexIndex, hr
+        );
 
         return hr;
     }
-
 
     STDMETHOD(GetIndices)
     (
@@ -2022,14 +1986,16 @@ public:
         HRESULT hr = mRealDevice->GetIndices((IDirect3DIndexBuffer9**) ppIndexData);
         (*pBaseVertexIndex) = mLastBaseIndex;
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetIndices(%d, %d) == %d\n",
-        *ppIndexData, *pBaseVertexIndex, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::GetIndices(%p, %u) == %d",
+            *ppIndexData, *pBaseVertexIndex, hr
+        );
 
         return hr;
     }
-
 
     STDMETHOD(CreatePixelShader)
     (
@@ -2039,10 +2005,13 @@ public:
     {
         HRESULT hr = mRealDevice->CreatePixelShader(pFunction, (IDirect3DPixelShader9**)pHandle);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::CreatePixelShader(%d, %d) == %d\n",
-        pFunction, *pHandle, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::CreatePixelShader(%p, %u) == %d\n",
+            pFunction, *pHandle, hr
+        );
 
         if ( SUCCEEDED(hr) )
         {
@@ -2051,7 +2020,6 @@ public:
 
         return hr;
     }
-
 
     STDMETHOD(SetPixelShader)
     (
@@ -2069,10 +2037,13 @@ public:
             hr = mRealDevice->SetPixelShader((IDirect3DPixelShader9*)Handle);
         }
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetPixelShader(%d) == %d\n",
-            Handle, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::SetPixelShader(%u) == %d",
+            Handle, hr
+        );
 
         if ( SUCCEEDED(hr) )
         {
@@ -2089,10 +2060,13 @@ public:
     {
         (*pHandle) = mCurrentPixelShader;
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetPixelShader(%d) == D3D_OK\n",
-        *pHandle);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::GetPixelShader(%u) == D3D_OK",
+            *pHandle
+        );
 
         return D3D_OK;
     }
@@ -2111,14 +2085,16 @@ public:
             //hr = D3DERR_INVALIDCALL;
         }
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::DeletePixelShader(%d) == %d\n",
-        Handle, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::DeletePixelShader(%u) == %d",
+            Handle, hr
+        );
 
         return hr;
     }
-
 
     STDMETHOD(SetPixelShaderConstant)
     (
@@ -2129,14 +2105,16 @@ public:
     {
         HRESULT hr = mRealDevice->SetPixelShaderConstantF(Register, (float*)pConstantData, ConstantCount);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetPixelShaderConstant(%d, %d, %d) == %d\n",
-        Register, pConstantData, ConstantCount, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::SetPixelShaderConstant(%u, %p, %u) == %d",
+            Register, pConstantData, ConstantCount, hr
+        );
 
         return hr;
     }
-
 
     STDMETHOD(GetPixelShaderConstant)
     (
@@ -2147,14 +2125,16 @@ public:
     {
         HRESULT hr = mRealDevice->GetPixelShaderConstantF(Register, (float*)pConstantData, ConstantCount);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetPixelShaderConstant(%d, %d, %d) == %d\n",
-        Register, pConstantData, ConstantCount, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::GetPixelShaderConstant(%u, %p, %u) == %d",
+            Register, pConstantData, ConstantCount, hr
+        );
 
         return hr;
     }
-
 
     STDMETHOD(GetPixelShaderFunction)
     (
@@ -2165,14 +2145,16 @@ public:
     {
         //HRESULT hr = mRealDevice->GetPixelShaderFunction(Handle,void* pData,DWORD* pSizeOfData);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetPixelShaderFunction(%d, %d, %d) == UNUSED\n",
-        Handle, pData, pSizeOfData);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::GetPixelShaderFunction(%u, %p, %u) == UNUSED",
+            Handle, pData, *pSizeOfData
+        );
 
         return DefaultErrorCode;
     }
-
 
     STDMETHOD(DrawRectPatch)
     (
@@ -2183,14 +2165,16 @@ public:
     {
         HRESULT hr = mRealDevice->DrawRectPatch(Handle, pNumSegs, pRectPatchInfo);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::DrawRectPatch(%d, %d, %d) == %d\n",
-        Handle, pNumSegs, pRectPatchInfo, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::DrawRectPatch(%u, %p, %p) == %d",
+            Handle, pNumSegs, pRectPatchInfo, hr
+        );
 
         return hr;
     }
-
 
     STDMETHOD(DrawTriPatch)
     (
@@ -2201,14 +2185,16 @@ public:
     {
         HRESULT hr = mRealDevice->DrawTriPatch(Handle, pNumSegs, pTriPatchInfo);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::DrawTriPatch(%d, %d, %d) == %d\n",
-        Handle, pNumSegs, pTriPatchInfo, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::DrawTriPatch(%u, %p, %p) == %d",
+            Handle, pNumSegs, pTriPatchInfo, hr
+        );
 
         return hr;
     }
-
 
     STDMETHOD(DeletePatch)
     (
@@ -2217,15 +2203,16 @@ public:
     {
         HRESULT hr = mRealDevice->DeletePatch(Handle);
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::DeletePatch(%d) == %d\n",
-        Handle, hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::DeletePatch(%u) == %d",
+            Handle, hr
+        );
 
         return hr;
     }
-
-
 };
 
 #endif /*VOODOO_GEM_DEVICE_HPP*/
