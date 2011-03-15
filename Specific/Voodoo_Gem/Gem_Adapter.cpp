@@ -34,12 +34,10 @@ namespace VoodooShader
                 (
                     LL_Error, 
                     VOODOO_GEM_NAME, 
-                    "Error setting adapter on core: %s.",
+                    "Error setting adapter on core: %s",
                     exc.Message().c_str()
                 );
             }
-
-            core->Log(LL_Info, VOODOO_GEM_NAME, "Assembly ID: %s", VOODOO_META_STRING_VERSION_FULL(GEM));
 
             // Core version check
             Version coreVersion = core->GetVersion();

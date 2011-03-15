@@ -36,6 +36,7 @@ namespace VoodooShader
         /**
          * Default constructor, opens a log file with the given name and mode.
          *
+         * @param core The core to bind this Logger to.
          * @param filename Name of the log file to open.
          * @param append If log file already exists, append to contents (the 
          *        default value is false, which will truncate an existing file).

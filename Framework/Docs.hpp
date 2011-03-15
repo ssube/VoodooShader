@@ -300,6 +300,7 @@
  *  <li>For some adapters, building under Debug_Analysis may not always be possible. If at all
  *      possible, it should be done; if not, exceptions may be made only as <em>necessary</em>.
  *      </li>
+ * </ul>
  * <li>Project behavior must remain consistent between build configurations.</li>
  * <ul>
  *  <li>#ifdef directives dependent on the build mode should be avoided wherever possible. Log
@@ -317,13 +318,47 @@
  *      constructs must be documented with their purpose and any vital notes.</li>
  *  <ul>
  *   <li>All documentation must be doxygen compatible and use the same style as the Core.</li>
- *   <li>Any function that throws must be marked with a @throws note.</li>
+ *   <li>Any function that throws must be marked with a <code>@ throws</code> note.</li>
  *   <li>Any function with specific requirements must have them noted in SAL annotations (as
- *       well as possible) and with @note or @warning documentation.</li>
+ *       well as possible) and with <code>@ note</code> or <code>@ warning</code> documentation.</li>
  *   <li>All function parameters, global variables, enum members, class members, etc must be
  *       documented. <em>(Note: The project does not fully conform to this requirement yet)</em></li>
  *  </ul>
  * </ul>
+ * 
+ * @section events Events
+ * 
+ * @subsection commit Commit
+ * <ul>
+ *  <li>Version information must be updated to reflect the new revision.</li>
+ *  <li>Every major commit or on the first commit of a week, a SourceMonitor entry must be made with
+ *      the current revision number as the name (e.g., rev111).</li>
+ * </ul>
+ * 
+ * @subsection push Push
+ * <ul>
+ *   <li>Doxygen documentation must be generated and uploaded along with the push for all modified
+ *          projects.</li>
+ * </ul>
+ * 
+ * @subsection release Release
+ * <ul>
+ *   <li>Full build and static analysis must be run and code must pass.</li>
+ *   <ul>
+ *     <li>The Debug_Analysis build must succeed with no warnings or errors.</li>
+ *     <li>CppCheck analysis must report no warnings or errors.</li>
+ *     <li>Yasca analysis must find no warnings or errors.
+ *     <ul>
+ *       <li>Unused functions are excepted but should be avoided.</li>
+ *       <li>Unsafe/banned functions should be avoided wherever possible.</li>
+ *     </ul>
+ *   </ul>
+ *  <li>A SourceMonitor entry must be made with the release version and name (if present).</li>
+ *  <li>Version information must be updated.</li>
+ *  <li>A release commit must be made and pushed. The commit message must include the release 
+ *      version and name.</li>
+ * </ul>
+ * 
  * 
  * @section configs Build Configs
  * 
@@ -363,6 +398,7 @@
  *    <li>Code analysis on build must be enabled.</li>
  *    <li>"Microsoft All Rules" ruleset must be used.</li>
  *  </ul>
+ * </ul>
  *  
  * @subsection debug Debug
  * <ul>
@@ -401,7 +437,7 @@
  *    <li>Inline function expansion should be set to "Any suitable" (/Ob2).</li>
  *    <li>Enable Intrinsic Functions must be set to "Yes" (/Oi).</li>
  *    <li>Favor Size Or Speed must be set to "Favor fast code" (/Ot).</li>
- *    <li>Runtime Library must be set to "Multi-threaded DLL" (/MD).</li>
+ *    <li>Runtime Library must be set to multithreaded DLL (/MD).</li>
  *  </ul>
  *  <li>Linker</li>
  *  <ul>

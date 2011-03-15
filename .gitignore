@@ -2,6 +2,8 @@
 #Voodoo-specific ignores
 [Bb]uild
 [Dd]ocs/html/*
+[Dd]ocs/xml/*
+CodeAnalyst/*
 #ignore thumbnails created by windows
 Thumbs.db
 #Ignore files build by Visual Studio
