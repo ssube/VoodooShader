@@ -11,16 +11,38 @@
 
 namespace VoodooShader
 {
-    Core * Core::Create(String logfile)
+    Core * gPrimaryCore = NULL;
+
+    Core * Core::Create(String logfile, bool forceCreate)
     {
-        Core * core = new Core(logfile);
+        Core * core = NULL;
+
+        if ( forceCreate || gPrimaryCore == NULL )
+        {
+            core = new Core(logfile);
+        }
+
+        if ( gPrimaryCore == NULL )
+        {
+            gPrimaryCore = core;
+        }
 
         return core;
     }
 
     void Core::Destroy(Core * core)
     {
+        if ( core == gPrimaryCore )
+        {
+            gPrimaryCore = NULL;
+        }
+
         delete core;
+    }
+
+    Core * Core::GetPrimary()
+    {
+        return gPrimaryCore;
     }
 
     Core::Core(String logfile)
@@ -28,12 +50,7 @@ namespace VoodooShader
     {
         this->mLogger = new Logger(this, logfile.c_str());
 
-#ifdef _DEBUG
-        this->mLogger->SetBufferSize(0);
-#endif
-
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "%s", VOODOO_CORE_COPYRIGHT);
-
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
 
         // Init Cg

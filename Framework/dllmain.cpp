@@ -10,14 +10,31 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     UNREFERENCED_PARAMETER(lpReserved);
     UNREFERENCED_PARAMETER(hModule);
 
-    switch (ul_reason_for_call)
+    Core * pc = Core::GetPrimary();
+
+    if ( ul_reason_for_call == DLL_PROCESS_ATTACH && !pc )
     {
-    case DLL_PROCESS_ATTACH:
-    case DLL_THREAD_ATTACH:
-    case DLL_THREAD_DETACH:
-    case DLL_PROCESS_DETACH:
-        break;
+        pc = Core::Create();
+        if ( pc == NULL )
+        {
+            return TRUE;
+        }
+        if ( lpReserved )
+        {
+            pc->Log(LL_Info, VOODOO_CORE_NAME, "Core has been statically loaded.");
+        } else {
+            pc->Log(LL_Info, VOODOO_CORE_NAME, "Core has been dynamically loaded.");
+        }
+    } else if ( ul_reason_for_call == DLL_PROCESS_DETACH && pc ) {
+        if ( lpReserved )
+        {
+            pc->Log(LL_Info, VOODOO_CORE_NAME, "Process is terminating.");
+        } else {
+            pc->Log(LL_Info, VOODOO_CORE_NAME, "Core disconnected with FreeLibrary.");
+        }
+        Core::Destroy(pc);
     }
+
     return TRUE;
 }
 

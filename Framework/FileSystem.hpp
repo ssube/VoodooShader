@@ -88,7 +88,8 @@ namespace VoodooShader
          *
          * @note If this file handle was returned by a FileSystem and the absolute
          *      path is still valid, this function should always succeed. In single-
-         *      threaded or fullscreen scenarios, this is usually correct.
+         *      threaded or fullscreen scenarios with few user tasks, this is usually 
+         *      the case.
          * @warning If this file handle uses a relative path, then it is subject to
          *      changes in working directory by the any module in the process.
          *      FileSystem::GetFile() uses an absolute path in the constructor and
@@ -100,8 +101,6 @@ namespace VoodooShader
         );
 
         bool Close();
-
-
 
     private:
         HANDLE mHandle;

@@ -116,7 +116,8 @@ namespace VoodooShader
     typedef std::list<String>                   StringList;
 
     /**
-     * Texture formats for use by @ref VoodooShader::Texture "Textures". These 
+     * Texture formats for use by @ref VoodooShader::Texture "Textures",
+     * describing the layout and size of the texture data. These 
      * may not be  implemented by the underlying graphics API exactly as they 
      * are indicated  here, but the available components and sizes are 
      * guaranteed to be equal to or greater than the indicated values. Further 
@@ -229,11 +230,13 @@ namespace VoodooShader
     {
         LL_Unknown  = 0x00,     /*!< Log level unknown */
         // Working values
+        LL_APIDebug = 0x02,     /*!< Exceptionally verbose debug logging of API calls */
         LL_Debug    = 0x10,     /*!< Verbose debug log messages */
+        LL_APIInfo  = 0x12,     /*!< Verbose informational logging from API calls */
         LL_Info     = 0x30,     /*!< Informational log messages */
         LL_Warning  = 0x50,     /*!< Warning log messages */
         LL_Error    = 0xB0,     /*!< General error log messages */
-        LL_Fatal    = 0xF0,     /*!< Fatal error log messages */
+        LL_Fatal    = 0xFF,     /*!< Fatal error log messages */
         // Max value
         LL_Max                  /*!< Enumerator values count */
     };

@@ -17,6 +17,7 @@ namespace VoodooShader
         } else {
             flags |= ios_base::trunc;
         }
+
         this->mLogFile.open(filename, flags);
 
         if ( !this->mLogFile.is_open() )

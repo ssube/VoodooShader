@@ -41,16 +41,42 @@ namespace VoodooShader
     class VOODOO_API Core
     {
     public:
+        /**
+         * Creates a new core or returns the primary core.
+         * 
+         * @param logfile The log file to use for the core, if one is created.
+         * @param forceCreate Force a new core to be created. If this is false and
+         *      a primary Core already exists, that will be returned instead. If
+         *      this is true, a new core will always be created.
+         */
         _Check_return_
         static Core * Create
         (
-            _In_ String logfile = "VoodooLog.xml"
+            _In_ String logfile = "VoodooLog.xml",
+            _In_ bool forceCreate = false
         );
-
+        
+        /**
+         * Destroys an existing Core, destroying all resources and the Cg
+         * context associated with the Core. This may invalidate all shaders
+         * and other elements associated with Voodoo. 
+         * 
+         * @warning No cached Voodoo functions or resources should be used after
+         *      the Core they were created with has been destroyed.
+         */
         static void Destroy
         (
             _In_ Core * core
         );
+
+        /**
+         * Returns the primary Core or null if no Core has been created.
+         * 
+         * @note The primary core is created when the module is loaded into
+         *          a process.
+         */
+        _Check_return_
+        static Core * GetPrimary();
 
         /**
          * Retrieve the Cg context associated with this Core.

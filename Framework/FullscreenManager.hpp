@@ -70,13 +70,27 @@ namespace VoodooShader
          * Removes a shader from the render queue.
          *
          * @param position The position of the shader to be removed.
-         *        -1 indicates the end of the queue (aking to pop), 0 the beginning.
+         *        -1 indicates the end of the queue (akin to pop), 0 the beginning.
          * @throws Exception if position is less than -1 or greater than the end
          *        of the queue.
          */
         void Remove
         (
             _In_ size_t position
+        );
+
+        /**
+         * Removes a shader from the render queue.
+         * 
+         * @param shader The shader to be removed.
+         * 
+         * @note If the shader is present more than once in the queue, all entries
+         *       will be removed.
+         * @warning Not implemented.
+         */
+        void Remove
+        (
+            _In_ ShaderRef shader
         );
 
         /**
