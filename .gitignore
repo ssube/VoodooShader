@@ -4,7 +4,9 @@
 [Dd]ocs/html/*
 [Dd]ocs/xml/*
 CodeAnalyst/*
-*Template/*
+Template/*
+*/Template/*
+*/*/Template/*
 *~
 Analysis/Yasca/Yasca-Report-*.html
 #ignore thumbnails created by windows
