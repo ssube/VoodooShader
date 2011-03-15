@@ -118,9 +118,10 @@ public:
     // IDirect3DDevice8 methods
     STDMETHOD(ApplyStateBlock)(DWORD Token)
     {
-#ifdef _DEBUG
+        UNREFERENCED_PARAMETER(Token);
+
         VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::ApplyStateBlock == UNUSED");
-#endif
+
         return DefaultErrorCode;
     }
 
@@ -128,10 +129,13 @@ public:
     {
         HRESULT hr = mRealDevice->BeginScene();
 
-#ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::BeginScene() == %d",
-            hr);
-#endif
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3DDevice8::BeginScene() == %d",
+            hr
+        );
 
         return hr;
     }
@@ -140,19 +144,17 @@ public:
     {
         HRESULT hr = mRealDevice->BeginStateBlock();
 
-#ifdef _DEBUG
         VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::BeginStateBlock() == %d",
             hr);
-#endif
 
         return hr;
     }
 
     STDMETHOD(CaptureStateBlock)(DWORD Token)
     {
-#ifdef _DEBUG
+        UNREFERENCED_PARAMETER(Token);
+
         VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::CaptureStateBlock == UNUSED");
-#endif
 
         return DefaultErrorCode;
     }
@@ -517,7 +519,7 @@ public:
         IDirect3DTexture8 ** ppTexture
     )
     {
-        IDirect3DTexture9 * rTexture;
+        IDirect3DTexture9 * rTexture = NULL;
         HRESULT hr = D3DERR_INVALIDCALL;
 
         // If not a render-target, attempt to create it as one

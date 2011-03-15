@@ -13,7 +13,7 @@ namespace VoodooShader
         {
             if ( core == NULL ) 
             {
-                Throw(VOODOO_GEM_NAME, "Adapter created with no core.", NULL);
+                //Throw(VOODOO_GEM_NAME, "Adapter created with no core.", NULL);
             } else if ( device == NULL ) {
                 core->Log(LL_Fatal, VOODOO_GEM_NAME, "Adapter created with no device.");
                 return;
@@ -600,7 +600,6 @@ namespace VoodooShader
                 return true;
             } else {
                 Throw(VOODOO_GEM_NAME, "Invalid binding attempt, parameter is not a sampler.", this->mCore);
-                return false;
             }
         }
 
@@ -635,6 +634,8 @@ namespace VoodooShader
 
         void Adapter::HandleError(CGcontext context, CGerror error, void * core)
         {
+            UNREFERENCED_PARAMETER(context);
+
             Core * actualCore = reinterpret_cast<Core*>(core);
             actualCore->Log(LL_Error, VOODOO_GEM_NAME, "Cg error: %s", cgD3D9TranslateCGerror(error));
         }
