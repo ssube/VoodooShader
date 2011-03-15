@@ -50,7 +50,12 @@ namespace VoodooShader
 
             if ( hook != mHooks.end() )
             {
-                Throw("Voodoo Frost: Attempted to install a hook with a duplicate name.", VoodooCore);
+                Throw
+                (
+                    VOODOO_FROST_NAME, 
+                    "Attempted to install a hook with a duplicate name.", 
+                    VoodooCore
+                );
             }
 
             TRACED_HOOK_HANDLE hookHandle = NULL;
@@ -59,8 +64,13 @@ namespace VoodooShader
 
             if ( ( result != 0 ) || ( hookHandle == NULL ) )
             {
-                VoodooCore->Log("Voodoo Frost: Error %d installing hook %s (%d, %d).\n",
-                    result, name, src, dest);
+                VoodooCore->Log
+                (
+                    LL_Error,
+                    VOODOO_FROST_NAME,
+                    "Error %u installing hook %s (%p, %p).",
+                    result, name, src, dest
+                );
 
                 return false;
             } else {
@@ -94,8 +104,13 @@ namespace VoodooShader
 
                 if ( result != 0 )
                 {
-                    VoodooCore->Log("Voodoo Frost: Error %d removing hook %s.\n",
-                        result, name);
+                    VoodooCore->Log
+                    (
+                        LL_Error,
+                        VOODOO_FROST_NAME,
+                        "Error %u removing hook %s.",
+                        result, name
+                    );
 
                     return true;
                 } else {
@@ -104,12 +119,17 @@ namespace VoodooShader
                     return false;
                 }
             } else {
-                Throw("Voodoo Frost: Trying to uninstall hook that does not exist.", VoodooCore);
+                Throw
+                (
+                    VOODOO_FROST_NAME,
+                    "Trying to uninstall hook that does not exist.", 
+                    VoodooCore
+                );
             }
         }
 
         /**
-         * Uninstalls all hooks.
+         * Uninstall all hooks created with this HookManager.
          */
         void HookManager::UninstallAllHooks()
         {
@@ -119,6 +139,9 @@ namespace VoodooShader
             mHooks.clear();
         }
 
+        /**
+         * Creates a new HookManager bound to the current process.
+         */
         HookManager::HookManager()
         {
             mHooks.clear();
@@ -131,6 +154,9 @@ namespace VoodooShader
             LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
         }
 
+        /**
+         * Uninstalls all hooks and cleans up the HookManager.
+         */
         HookManager::~HookManager()
         {
             this->UninstallAllHooks();
@@ -138,7 +164,7 @@ namespace VoodooShader
             delete mThreadIDs;
         }
 
-        #define HOOK_PARAMS(n) #n, &n, &v##n
+        #define HOOK_PARAMS(n) #n, &n, &v##n    /*!< Formats a token into the required parameters to create a hook. */
 
         /**
          * Install all significant OpenGL hooks. 

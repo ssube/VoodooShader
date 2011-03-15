@@ -20,8 +20,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{9FC03207-E672-46B6-BB1D-B34C6F00AB54}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installers", "Installers", "{2ED5D2C5-78A5-4FDE-BB9F-5D3AF391B3AA}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Installers\Core.iss = Resources\Installers\Core.iss
+		Resources\Installers\Gem.iss = Resources\Installers\Gem.iss
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{7FC6175A-13FA-4F59-A164-37BDC94775CF}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Shaders\test.cgfx = Resources\Shaders\test.cgfx
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hooks", "Hooks", "{2C578E80-5F76-4525-8D0B-F3FFD969918C}"
 EndProject
@@ -36,8 +43,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Frost", "Specific\Voodoo_Frost\Voodoo_Frost.vcxproj", "{98903591-D205-49ED-AE60-44BDD620D16E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DX9_Redirect", "Utilities\DX9_Redirect\DX9_Redirect.vcxproj", "{E1C759FC-DC8B-47E1-AEB2-084BC53DED59}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionIncrement", "Utilities\VersionIncrement\VersionIncrement.csproj", "{0027F876-E80C-4C23-B196-061BBC59DF08}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Gem", "Specific\Voodoo_Gem\Voodoo_Gem.vcxproj", "{1BCE17B2-8422-45C7-AE61-8277C08FE251}"
 EndProject
@@ -171,24 +176,6 @@ Global
 		{E1C759FC-DC8B-47E1-AEB2-084BC53DED59}.Release|Win32.ActiveCfg = Release|Win32
 		{E1C759FC-DC8B-47E1-AEB2-084BC53DED59}.Release|Win32.Build.0 = Release|Win32
 		{E1C759FC-DC8B-47E1-AEB2-084BC53DED59}.Release|x86.ActiveCfg = Release|Win32
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug_Analysis|Any CPU.ActiveCfg = Debug_Analysis|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug_Analysis|Any CPU.Build.0 = Debug_Analysis|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug_Analysis|Mixed Platforms.ActiveCfg = Debug_Analysis|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug_Analysis|Mixed Platforms.Build.0 = Debug_Analysis|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug_Analysis|Win32.ActiveCfg = Debug_Analysis|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug_Analysis|x86.ActiveCfg = Debug_Analysis|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Release|Win32.ActiveCfg = Release|Any CPU
-		{0027F876-E80C-4C23-B196-061BBC59DF08}.Release|x86.ActiveCfg = Release|Any CPU
 		{1BCE17B2-8422-45C7-AE61-8277C08FE251}.Debug_Analysis|Any CPU.ActiveCfg = Debug_Analysis|Win32
 		{1BCE17B2-8422-45C7-AE61-8277C08FE251}.Debug_Analysis|Mixed Platforms.ActiveCfg = Debug_Analysis|Win32
 		{1BCE17B2-8422-45C7-AE61-8277C08FE251}.Debug_Analysis|Mixed Platforms.Build.0 = Debug_Analysis|Win32
@@ -266,7 +253,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0027F876-E80C-4C23-B196-061BBC59DF08} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
 		{F43BEAEB-9EBF-4FDA-BDB6-B7C810746EF1} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
 		{82C4257D-3F4D-4F7D-A0B6-0282C044E7E7} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
@@ -281,9 +267,9 @@ Global
 		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

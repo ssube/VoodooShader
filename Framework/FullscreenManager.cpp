@@ -15,48 +15,45 @@ namespace VoodooShader
 
     size_t FullscreenManager::Add(ShaderRef shader, int position)
     {
-        if ( position < -1 )
+        if ( position < 0 )
         {
-            Throw
-            (
-                VOODOO_CORE_NAME, 
-                "Could not add shader, invalid position (< -1).",
-                this->mParent
-            );
-        } else if ( position == -1 ) {
-            // Append to the end of the list
-            this->mShaders.push_back(shader);
-            return this->mShaders.size() - 1;
-        } else if ( (size_t)position > mShaders.size() ) {
-            Throw
-            (
-                VOODOO_CORE_NAME,
-                "Could not add shader, position beyond end of list.",
-                this->mParent
-            );
+            if ( position < -1 )
+            {
+                Throw
+                (
+                    VOODOO_CORE_NAME, 
+                    "Could not add shader, invalid position (< -1).",
+                    this->mParent
+                );
+            } else {
+                this->mShaders.push_back(shader);
+                return this->mShaders.size() - 1;
+            }
         } else {
-            //ShaderVector::iterator shaderPosition = this->mShaders[(size_t)position];
-            //this->mShaders.insert(shaderPosition, shader);
-            return (size_t)position; // Safe, because we've already handled all negative cases
+            size_t upos = (size_t)position;
+            size_t prevsize = this->mShaders.size();
+
+            if ( upos > prevsize ) 
+            {
+                Throw
+                (
+                    VOODOO_CORE_NAME,
+                    "Could not add shader, position beyond end of list.",
+                    this->mParent
+                );
+            } else if ( upos == prevsize ) {
+                this->mShaders.push_back(shader);
+                return prevsize;
+            } else {
+                ShaderVector::iterator shaderPosition = this->mShaders.begin() + upos;
+                this->mShaders.insert(shaderPosition, shader);
+                return upos; 
+           }
         }
     }
 
     void FullscreenManager::Remove(size_t position)
     {
-        /*if ( position < -1 )
-        {
-            Throw
-            (
-                VOODOO_CORE_NAME,
-                "Could not remove shader, invalid index (< -1).",
-                this->mParent
-            );
-        }
-        else if ( this->mShaders.size() == -1 )
-        {
-            //this->mShaders.erase(this->mShaders());
-        }* /
-        else* /
         if ( this->mShaders.size() <= position )
         {
             Throw
@@ -66,25 +63,22 @@ namespace VoodooShader
                 this->mParent
             );
         } else {
-            this->mShaders.erase(this->mShaders.at((size_t)position));
-        }*/
+            this->mShaders.erase(this->mShaders.begin() + position);
+        }
     }
 
     void FullscreenManager::Remove(ShaderRef shader)
     {
-        /*std::remove
+        std::remove_if
         (
-            mShaders.begin()
-            
-            )
-        this->mShaders.reremove_if    
-        (
+            mShaders.begin(),
+            mShaders.end(),
             [&]
-            (ShaderList::iterator item)
+            (ShaderRef item)
             {
-                return ( (*item).get() == shader.get() );
+                return ( item.get() == shader.get() );
             }
-        );*/
+        );
     }
 
     void FullscreenManager::Render(size_t start, int count)
@@ -148,11 +142,12 @@ namespace VoodooShader
 
         std::for_each
         (
-            mShaders[start], mShaders[end],
+            mShaders.begin() + start, 
+            mShaders.begin() + end,
             [&]
-            (ShaderList::iterator shader)
+            (ShaderRef shader)
             {
-                adapter->DrawShader(*shader);
+                adapter->DrawShader(shader);
             }
         );
     }

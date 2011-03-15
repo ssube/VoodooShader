@@ -23,7 +23,7 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
     bool valueFound = false;
     DWORD valueSize = 4096;
     DWORD valueType = REG_NONE;
-    char valuePath[4096];
+    char valuePath[4096] = 0x00;
 
     // Get the Voodoo location from the registry and load the core
     HKEY VoodooPathKey;
@@ -66,7 +66,7 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
         {
             DWORD written;
             char msg[4096];
-            sprintf_s(msg, "Unable to find key in HKCU, error %d.\n", valuePath);
+            sprintf_s(msg, "Unable to find key in HKCU, error %d.\n", result);
             WriteFile(debugFile, msg, strlen(msg), &written, NULL);
         }
     }
@@ -111,7 +111,7 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
             {
                 DWORD written;
                 char msg[4096];
-                sprintf_s(msg, "Unable to find key in HKLM, error %d.\n", valuePath);
+                sprintf_s(msg, "Unable to find key in HKLM, error %d.\n", result);
                 WriteFile(debugFile, msg, strlen(msg), &written, NULL);
             }
         }
