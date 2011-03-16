@@ -6,38 +6,16 @@
 
 using namespace VoodooShader;
 
-BOOL APIENTRY DllMain( HMODULE hModule,
-                       DWORD  ul_reason_for_call,
-                       LPVOID lpReserved
-                     )
+BOOL APIENTRY DllMain
+(
+    HMODULE hModule,
+    DWORD  ul_reason_for_call,
+    LPVOID lpReserved
+)
 {
-    UNREFERENCED_PARAMETER(lpReserved);
     UNREFERENCED_PARAMETER(hModule);
-
-    Core * pc = Core::GetPrimary();
-
-    if ( ul_reason_for_call == DLL_PROCESS_ATTACH && !pc )
-    {
-        pc = Core::Create();
-        if ( pc == NULL )
-        {
-            return TRUE;
-        }
-        if ( lpReserved )
-        {
-            pc->Log(LL_Info, VOODOO_CORE_NAME, "Core has been statically loaded.");
-        } else {
-            pc->Log(LL_Info, VOODOO_CORE_NAME, "Core has been dynamically loaded.");
-        }
-    } else if ( ul_reason_for_call == DLL_PROCESS_DETACH && pc ) {
-        if ( lpReserved )
-        {
-            pc->Log(LL_Info, VOODOO_CORE_NAME, "Process is terminating.");
-        } else {
-            pc->Log(LL_Info, VOODOO_CORE_NAME, "Core disconnected with FreeLibrary.");
-        }
-        Core::Destroy(pc);
-    }
+    UNREFERENCED_PARAMETER(ul_reason_for_call);
+    UNREFERENCED_PARAMETER(lpReserved);
 
     return TRUE;
 }

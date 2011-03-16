@@ -1,7 +1,16 @@
 // Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
-#include "Gem_Version.hpp"
+#include "Version.hpp"
+
+// Loader defs ----------------------------------------------------------------
+#define VOODOO_LOADER_NAME                "Voodoo/Loader"
+#define VOODOO_LOADER_PRETTYNAME          "Voodoo Dynamic Loader"
+#define VOODOO_LOADER_VERSION_MAJOR       0
+#define VOODOO_LOADER_VERSION_MINOR       1
+#define VOODOO_LOADER_VERSION_PATCH       1
+#define VOODOO_LOADER_VERSION_GITREV      VOODOO_GLOBAL_VERSION_GITREV
+//-----------------------------------------------------------------------------
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -54,7 +63,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION VOODOO_META_VERSION_CHAIN(GEM)
+ FILEVERSION VOODOO_META_VERSION_CHAIN(LOADER)
  PRODUCTVERSION VOODOO_META_VERSION_CHAIN(CORE)
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
@@ -70,11 +79,11 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "FileDescription", VOODOO_META_STRING_NAME_FULL(GEM) " (redirect module)"
-            VALUE "FileVersion", VOODOO_META_STRING_VERSION_BASIC(GEM)
-            VALUE "InternalName", VOODOO_META_STRING_NAME_BASIC(GEM)
+            VALUE "FileDescription", VOODOO_META_STRING_NAME_FULL(LOADER)
+            VALUE "FileVersion", VOODOO_META_STRING_VERSION_BASIC(LOADER)
+            VALUE "InternalName", VOODOO_META_STRING_NAME_BASIC(LOADER)
             VALUE "LegalCopyright", VOODOO_GLOBAL_COPYRIGHT_BRIEF
-            VALUE "OriginalFilename", "d3d8.dll"
+            VALUE "OriginalFilename", "Voodoo_Loader.dll"
             VALUE "ProductName", VOODOO_META_STRING_NAME_FULL(CORE)
             VALUE "ProductVersion", VOODOO_META_STRING_VERSION_BASIC(CORE)
         END

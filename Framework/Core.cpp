@@ -11,38 +11,14 @@
 
 namespace VoodooShader
 {
-    Core * gPrimaryCore = NULL;
-
-    Core * Core::Create(String logfile, bool forceCreate)
+    Core * Core::Create(String logfile)
     {
-        Core * core = NULL;
-
-        if ( forceCreate || gPrimaryCore == NULL )
-        {
-            core = new Core(logfile);
-        }
-
-        if ( gPrimaryCore == NULL )
-        {
-            gPrimaryCore = core;
-        }
-
-        return core;
+        return new Core(logfile);
     }
 
     void Core::Destroy(Core * core)
     {
-        if ( core == gPrimaryCore )
-        {
-            gPrimaryCore = NULL;
-        }
-
         delete core;
-    }
-
-    Core * Core::GetPrimary()
-    {
-        return gPrimaryCore;
     }
 
     Core::Core(String logfile)

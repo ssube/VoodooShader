@@ -42,18 +42,14 @@ namespace VoodooShader
     {
     public:
         /**
-         * Creates a new core or returns the primary core.
+         * Creates a new core.
          * 
-         * @param logfile The log file to use for the core, if one is created.
-         * @param forceCreate Force a new core to be created. If this is false and
-         *      a primary Core already exists, that will be returned instead. If
-         *      this is true, a new core will always be created.
+         * @param logfile The log file to use for the core.
          */
         _Check_return_
         static Core * Create
         (
-            _In_ String logfile = "VoodooLog.xml",
-            _In_ bool forceCreate = false
+            _In_ String logfile = "VoodooLog.xml"
         );
         
         /**

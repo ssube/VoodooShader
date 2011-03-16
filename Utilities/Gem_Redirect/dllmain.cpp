@@ -1,189 +1,107 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <strsafe.h>
 
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
-{    
-#ifdef _DEBUG
-    bool debug = true;
-#else
-    bool debug = false;
-#endif
+/**
+ * Reads the Adapter's name from the Voodoo config file and loads it, if present.
+ */
+HMODULE LoadAdapter(const char * configFile)
+{
+    FILE * config = NULL;
+    HKEY VoodooPathKey = NULL;
+    char VoodooPath[MAX_PATH];
+    char AdapterModule[MAX_PATH];
 
-    HANDLE debugFile = CreateFileA("VOODOO_DEBUG", FILE_WRITE_DATA, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-    if ( debugFile != INVALID_HANDLE_VALUE )
+    errno_t error = fopen_s(&config, configFile, "r");
+
+    if ( error != 0 || config == NULL )
     {
-        debug = true;
-        MessageBoxA(NULL, "Debug indicator file found. The hook will load in debug mode.", "Voodoo Gem Hook", MB_ICONWARNING);
-    } else if ( debug ) {
-        MessageBoxA(NULL, "Debug build running. The hook will load in debug mode.", "Voodoo Gem Hook", MB_ICONWARNING);
+        MessageBoxA(NULL, "Voodoo Loader: Unable to open config file.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
     }
 
-    bool valueFound = false;
-    DWORD valueSize = 4096;
+    if ( !fgets(AdapterModule, MAX_PATH, config) )
+    {
+        MessageBoxA(NULL, "Voodoo Loader: Unable to read adapter from config file.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
+    }
+
+    LONG keyOpen = RegOpenKeyExA(HKEY_CURRENT_USER, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
+
+    if ( keyOpen != ERROR_SUCCESS )
+    {
+        keyOpen = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
+
+        if ( keyOpen != ERROR_SUCCESS )
+        {
+            MessageBoxA(NULL, "Voodoo Loader: Unable to find Voodoo registry key.", "Loader Error", MB_ICONERROR|MB_OK);
+            exit(1);
+        }
+    }
+
+    // Key is open
     DWORD valueType = REG_NONE;
-    char valuePath[4096];
+    DWORD valueSize = MAX_PATH;
+    LONG valueQuery = RegQueryValueExA(VoodooPathKey, "Path", NULL, &valueType, (BYTE*)VoodooPath, &valueSize);
 
-    // Get the Voodoo location from the registry and load the core
-    HKEY VoodooPathKey;
-
-    LONG result = RegOpenKeyExA(HKEY_CURRENT_USER, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
-
-    if ( result == ERROR_SUCCESS )
+    if ( valueQuery != ERROR_SUCCESS || valueType == REG_NONE )
     {
-        if ( debug )
-        {
-            DWORD written;
-            char msg[] = "Found HKCU\\SOFTWARE\\VoodooShader.\n";
-            WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-        }
-
-        result = RegQueryValueExA(VoodooPathKey, "Path", NULL, &valueType, (BYTE*)valuePath, &valueSize);
-
-        if ( result == ERROR_SUCCESS )
-        {
-            if ( debug )
-            {
-                DWORD written;
-                char msg[4096];
-                sprintf_s(msg, "Loaded key from HKCU, value: %s\n", valuePath);
-                WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-            }
-
-            valueFound = true;
-        } else {
-            if ( debug )
-            {
-                DWORD written;
-                char msg[4096];
-                sprintf_s(msg, "Unable to load key from HKCU, error %d.\n", result);
-                WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-            }
-        }
-    } else {
-        if ( debug )
-        {
-            DWORD written;
-            char msg[4096];
-            sprintf_s(msg, "Unable to find key in HKCU, error %d.\n", valuePath);
-            WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-        }
+        MessageBoxA(NULL, "Voodoo Loader: Unable to retrieve path from registry.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
     }
 
-    if ( !valueFound )
+    StringCchCatA(VoodooPath, MAX_PATH, "\\bin\\");
+    StringCchCatA(VoodooPath, MAX_PATH, AdapterModule);
+
+    HMODULE adapter = LoadLibraryExA(VoodooPath, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+
+    return adapter;
+}
+
+// Support functions
+void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * ep)
+{
+    typedef void * (__stdcall * InitFunc)(UINT);
+
+    HMODULE adapter = LoadAdapter("VoodooConfig.xml");
+
+    if ( !adapter )
     {
-        result = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
-
-        if ( result == ERROR_SUCCESS )
-        {
-            if ( debug )
-            {
-                DWORD written;
-                char msg[] = "Found HKLM\\SOFTWARE\\VoodooShader.\n";
-                WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-            }
-
-            result = RegQueryValueExA(VoodooPathKey, "Path", NULL, &valueType, (BYTE*)valuePath, &valueSize);
-
-            if ( result == ERROR_SUCCESS )
-            {
-                if ( debug )
-                {
-                    DWORD written;
-                    char msg[4096];
-                    sprintf_s(msg, "Loaded key from HKLM, value: %s\n", valuePath);
-                    WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-                }
-
-                valueFound = true;
-            } else {
-                if ( debug )
-                {
-                    DWORD written;
-                    char msg[4096];
-                    sprintf_s(msg, "Unable to load key from HKLM, error %d.\n", result);
-                    WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-                }
-            }
-        } else {
-            if ( debug )
-            {
-                DWORD written;
-                char msg[4096];
-                sprintf_s(msg, "Unable to find key in HKLM, error %d.\n", valuePath);
-                WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-            }
-        }
+        MessageBoxA(NULL, "Voodoo Loader: Unable to load adapter DLL.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
     }
 
-    if ( !valueFound )
-    {
-        strcat_s(valuePath, MAX_PATH, "C:\\VoodooShader\\");
-        if ( debug )
-        {
-            DWORD written;
-            char msg[] = "Using default path.\n";
-            WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-        }
-    }
-
-    strcat_s(valuePath, MAX_PATH, "\\bin\\");
-
-    char libraryFile[MAX_PATH];
-    strcpy_s(libraryFile, MAX_PATH, valuePath);
-
-#ifdef _DEBUG
-    strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem_d.dll");
-#else
-    if ( debug )
-    {
-        strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem_d.dll");
-    } else {
-        strcat_s(libraryFile, MAX_PATH, "Voodoo_Gem.dll");
-    }
-#endif
-
-    HMODULE library = LoadLibraryEx(libraryFile, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-
-    if ( !library )
-    {
-        DWORD written;
-        char error[4096];
-        sprintf_s(error, 4096, "Could not load DLL: %s", libraryFile);
-        MessageBoxA(NULL, error, "Voodoo Gem Hook Error 3", MB_ICONERROR);
-
-        WriteFile(debugFile, error, strlen(error), &written, NULL);
-        CloseHandle(debugFile);
-
-        return NULL;
-    }
-
-    typedef void * (__stdcall * InitFuncType)(UINT);
-    InitFuncType initFunc = (InitFuncType)GetProcAddress(library, "?Voodoo3DCreate8@@YGPAXI@Z");
+    InitFunc initFunc = (InitFunc)GetProcAddress(adapter, ep);
 
     if ( !initFunc )
     {
-        DWORD written;
-        char msg[] = "Could not find init func.\n";
-
-        MessageBoxA(NULL, msg, "Voodoo Gem Hook Error 4", MB_ICONERROR);
-
-        WriteFile(debugFile, msg, strlen(msg), &written, NULL);
-        CloseHandle(debugFile);
-
-        return NULL;
+        MessageBoxA(NULL, "Voodoo Loader: Unable to find adapter EP.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
     }
 
-    void * obj = (*initFunc)(sdkVersion);
-
-    if ( debug )
-    {
-        CloseHandle(debugFile);
-    }
-
-    return obj;
+    return (*initFunc)(sdkVersion);
 }
 
-#pragma comment(linker, "/export:Direct3DCreate8=?Voodoo3DCreate8@@YGPAXI@Z")
+// Various adapter-loading entry points
+
+// Direct3D 8
+void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
+{
+    return VoodooDXCreateGeneric(sdkVersion, "Direct3DCreate8");
+}
+
+// Direct3D 9
+void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
+{
+    return VoodooDXCreateGeneric(sdkVersion, "Direct3DCreate9");
+}
+
+// DInput (8a)
+void * WINAPI VoodooInputCreateA(UINT sdkVersion)
+{
+    return VoodooDXCreateGeneric(sdkVersion, "DInputCreateA");
+}

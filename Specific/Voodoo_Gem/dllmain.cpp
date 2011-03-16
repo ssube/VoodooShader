@@ -22,26 +22,16 @@
 #include "Gem_Includes.hpp"
 #include "Gem_Module.hpp"
 
-BOOL APIENTRY DllMain( HMODULE hModule,
+BOOL APIENTRY DllMain
+( 
+    HMODULE hModule,
     DWORD  ul_reason_for_call,
     LPVOID lpReserved
-    )
+)
 {
-    UNREFERENCED_PARAMETER(lpReserved);
     UNREFERENCED_PARAMETER(hModule);
+    UNREFERENCED_PARAMETER(ul_reason_for_call);
+    UNREFERENCED_PARAMETER(lpReserved);
 
-    switch (ul_reason_for_call)
-    {
-    case DLL_PROCESS_ATTACH:
-        // Voodoo Gem Init function
-        VoodooCore = VoodooShader::Core::Create("Voodoo_Gem.xml");
-        break;
-    case DLL_PROCESS_DETACH:
-        VoodooShader::Core::Destroy(VoodooCore);
-        break;
-    case DLL_THREAD_ATTACH:
-    case DLL_THREAD_DETACH:
-        break;
-    }
     return TRUE;
 }
