@@ -9,14 +9,14 @@
 /**
  * Reads the Adapter's name from the Voodoo config file and loads it, if present.
  */
-HMODULE LoadAdapter(const char * configFile)
+void LoadAdapter()
 {
     FILE * config = NULL;
     HKEY VoodooPathKey = NULL;
     char VoodooPath[MAX_PATH];
     char AdapterModule[MAX_PATH];
 
-    errno_t error = fopen_s(&config, configFile, "r");
+    errno_t error = fopen_s(&config, "VoodooConfig.xml", "r");
 
     if ( error != 0 || config == NULL )
     {
@@ -59,23 +59,14 @@ HMODULE LoadAdapter(const char * configFile)
 
     HMODULE adapter = LoadLibraryExA(VoodooPath, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
-    return adapter;
-}
-
-// Support functions
-void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * ep)
-{
-    typedef void * (__stdcall * InitFunc)(UINT);
-
-    HMODULE adapter = LoadAdapter("VoodooConfig.xml");
-
     if ( !adapter )
     {
         MessageBoxA(NULL, "Voodoo Loader: Unable to load adapter DLL.", "Loader Error", MB_ICONERROR|MB_OK);
         exit(1);
     }
 
-    InitFunc initFunc = (InitFunc)GetProcAddress(adapter, ep);
+    typedef bool (__stdcall * InitFunc)(HMODULE);
+    InitFunc initFunc = (InitFunc)GetProcAddress(adapter, "LoadAdapter");
 
     if ( !initFunc )
     {
@@ -83,25 +74,74 @@ void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * ep)
         exit(1);
     }
 
+    bool success = (*initFunc)(NULL); //! @todo Provide the process handle
+
+    if ( !success )
+    {
+        MessageBoxA(NULL, "Voodoo Loader: Adapter failed to load.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
+    }
+
+    return;
+}
+
+// Support functions
+
+// Load a module from the system directory (uses absolute path to guarantee proper file).
+HMODULE LoadSystemLibrary(const char * libname)
+{
+    char Path[MAX_PATH];
+
+    GetSystemDirectoryA (Path, MAX_PATH);
+    strcat_s(Path, MAX_PATH, "\\");
+    strcat_s(Path, MAX_PATH, libname);
+
+    return LoadLibraryA(Path);
+}
+
+// Most DirectX libraries use an identical loading function, with only the name varying.
+// This function takes an SDK version, library name and function name, loads and calls the 
+// proper init function.
+void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func)
+{
+    typedef void * (__stdcall * DXInitFunc)(UINT);
+
+    LoadAdapter();
+
+    HMODULE baselib = LoadSystemLibrary(lib);
+
+    if ( !baselib )
+    {
+        MessageBoxA(NULL, "Voodoo Loader: Unable to load system DLL.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
+    }
+
+    DXInitFunc initFunc = (DXInitFunc)GetProcAddress(baselib, func);
+
+    if ( !initFunc )
+    {
+        MessageBoxA(NULL, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
+    }
+
     return (*initFunc)(sdkVersion);
 }
 
 // Various adapter-loading entry points
-
 // Direct3D 8
 void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 {
-    return VoodooDXCreateGeneric(sdkVersion, "Direct3DCreate8");
+    return VoodooDXCreateGeneric(sdkVersion, "d3d8.dll", "Direct3DCreate8");
 }
 
 // Direct3D 9
 void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
 {
-    return VoodooDXCreateGeneric(sdkVersion, "Direct3DCreate9");
+    return VoodooDXCreateGeneric(sdkVersion, "d3d9.dll", "Direct3DCreate9");
 }
 
-// DInput (8a)
-void * WINAPI VoodooInputCreateA(UINT sdkVersion)
+// DirectInput 8
+void * WINAPI VoodooInput8Create(UINT sdkVersion)
 {
-    return VoodooDXCreateGeneric(sdkVersion, "DInputCreateA");
+    return VoodooDXCreateGeneric(sdkVersion, "dinput8.dll", "DirectInput8Create");
 }
