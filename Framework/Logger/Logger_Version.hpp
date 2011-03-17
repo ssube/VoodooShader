@@ -19,21 +19,13 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_INCLUDES_HPP
-#define VOODOO_INCLUDES_HPP
+#include "Version.hpp"
 
-#include <fstream>
-#include <iostream>
-#include <map>
-#include <vector>
-#include <list>
-#include <string>
-#include <algorithm>
-#include <assert.h>
-
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-
-#include "Cg/cg.h"
-
-#endif
+// Logger defs -------------------------------------------------------------------
+#define VOODOO_LOGGER_NAME              "Voodoo/Logger"
+#define VOODOO_LOGGER_PRETTYNAME        "Voodoo/Logger"
+#define VOODOO_LOGGER_VERSION_MAJOR     0
+#define VOODOO_LOGGER_VERSION_MINOR     1
+#define VOODOO_LOGGER_VERSION_PATCH     1
+#define VOODOO_LOGGER_VERSION_GITREV    VOODOO_GLOBAL_VERSION_GITREV
+//-----------------------------------------------------------------------------

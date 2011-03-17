@@ -1,14 +1,17 @@
-#include "Includes.hpp"
 #include "Logger.hpp"
-#include "Exception.hpp"
-#include "Version.hpp"
 
 using namespace std;
 
 namespace VoodooShader
 {
-    Logger::Logger(Core * core, const char * filename, bool append)
-        : mCore(core), mLogLevel(LL_Info)
+    enum PrivateLogLevel
+    {
+        PLL_Initial = 0x00,
+        PLL_Internal = 0xFF
+    };
+
+    Logger::Logger(const char * filename, bool append)
+        : mLogLevel(PLL_Initial)
     {
         unsigned int flags = ios_base::out;
         if ( append )
@@ -22,7 +25,7 @@ namespace VoodooShader
 
         if ( !this->mLogFile.is_open() )
         {
-            Throw(VOODOO_CORE_NAME, "Could not open log file!", mCore);
+            throw std::exception("Could not open log file!");
         }
 
         this->mLocalTime = new tm();
@@ -37,12 +40,12 @@ namespace VoodooShader
         this->mLogFile << 
             ">\n";
 
-        this->Log(LL_Info, VOODOO_CORE_NAME, "Logger created.");
+        this->Log(PLL_Internal, "Voodoo/Logger", "Logger created.");
     }
 
     Logger::~Logger()
     {
-        this->Log(LL_Info, VOODOO_CORE_NAME, "Logger destroyed.");
+        this->Log(PLL_Internal, "Voodoo/Logger", "Logger destroyed.");
         if ( this->mLogFile.is_open() )
         {
             this->mLogFile << "</LogFile>\n";
@@ -58,7 +61,7 @@ namespace VoodooShader
     {
         time_t now = time(NULL);
 
-        if ( localtime_s(this->mLocalTime, &now) == ERROR_SUCCESS )
+        if ( localtime_s(this->mLocalTime, &now) == 0 )
         {
             char stamp[32];
             sprintf_s
@@ -80,7 +83,7 @@ namespace VoodooShader
     {
         time_t now = time(NULL);
 
-        if ( localtime_s(this->mLocalTime, &now) == ERROR_SUCCESS )
+        if ( localtime_s(this->mLocalTime, &now) == 0 )
         {
             char stamp[32];
             sprintf_s
@@ -105,7 +108,8 @@ namespace VoodooShader
         (
             stamp, 32,
             " ticks=\"%u\" ",
-            GetTickCount()
+            //GetTickCount()
+            0
         );
         this->mLogFile << stamp;
     }
@@ -129,12 +133,12 @@ namespace VoodooShader
         this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
     }
 
-    void Logger::SetLogLevel(LogLevel level)
+    void Logger::SetLogLevel(size_t level)
     {
         mLogLevel = level;
     }
 
-    void Logger::Log(LogLevel level, const char * module, const char * msg, ...)
+    void Logger::Log(size_t level, const char * module, const char * msg, ...)
     {
         if ( level < mLogLevel ) return;
 
@@ -154,7 +158,7 @@ namespace VoodooShader
             " module=\"" << module << "\">" << buffer << "</Message>\n";
     }
 
-    void Logger::LogList(LogLevel level, const char * module, const char * msg, va_list args)
+    void Logger::LogList(size_t level, const char * module, const char * msg, va_list args)
     {
         if ( level < mLogLevel ) return;
 
@@ -197,7 +201,7 @@ namespace VoodooShader
             this->mLogFile << 
                 ">\n";
 
-            this->Log(LL_Info, VOODOO_CORE_NAME, "Logger: Log file opened by Logger::Open.");
+            this->Log(PLL_Internal, "Voodoo/Logger", "Logger: Log file opened by Logger::Open.");
             return true;
         } else {
             return false;
@@ -208,7 +212,7 @@ namespace VoodooShader
     {
         if ( this->mLogFile.is_open() )
         {
-            this->Log(LL_Info, VOODOO_CORE_NAME, "Logger: Log file closed by Logger::Close.");
+            this->Log(PLL_Internal, VOODOO_CORE_NAME, "Logger: Log file closed by Logger::Close.");
             this->mLogFile.close();
         }
     }

@@ -21,7 +21,21 @@
 
 #pragma once
 
-#include "Meta.hpp"
+#include <fstream>
+#include <time.h>
+#include <stdio.h>
+#include <stdarg.h>
+
+#include "Version.hpp"
+
+#ifdef VOODOO_IMPORT_LOGGER
+#   define VOODOO_LOGGER_API __declspec(dllimport)
+#else
+#   define VOODOO_LOGGER_API __declspec(dllexport)
+#endif
+
+// Hide the DLL-interface warning
+#pragma warning(disable:4251)
 
 namespace VoodooShader
 {
@@ -29,14 +43,18 @@ namespace VoodooShader
      * Log management class, capable of opening, closing, writing to and 
      * dumping log files. Throws on problems opening the log
      * and has timestamp and formatting capabilities.
+     * 
+     * @note The current logger implements a simplistic XML logger with
+     *       some features to provide clearer and more in-depth logs.
+     * @warning If the Logger isn't destroyed properly, the main tag of
+     *       the log file won't be closed and the log won't be valid.
      */
-    class VOODOO_API Logger
+    class VOODOO_LOGGER_API Logger
     {
     public:
         /**
          * Default constructor, opens a log file with the given name and mode.
          *
-         * @param core The core to bind this Logger to.
          * @param filename Name of the log file to open.
          * @param append If log file already exists, append to contents (the 
          *        default value is false, which will truncate an existing file).
@@ -44,7 +62,6 @@ namespace VoodooShader
          */
         Logger
         (
-            _In_ Core * core,
             _In_ const char * filename, 
             _In_ bool append = false
         );
@@ -62,7 +79,7 @@ namespace VoodooShader
          */
         void SetLogLevel
         (
-            _In_ LogLevel level
+            _In_ size_t level
         );
 
         /**
@@ -117,7 +134,7 @@ namespace VoodooShader
          */
         void Log
         (
-            _In_ LogLevel level,
+            _In_ size_t level,
             _In_ const char * module,
             _In_ _Printf_format_string_ const char * msg, 
             ...
@@ -139,7 +156,7 @@ namespace VoodooShader
          */
         void LogList
         (
-            _In_ LogLevel level,
+            _In_ size_t level,
             _In_ const char * module,
             _In_ const char * msg, 
             _In_ va_list args
@@ -190,8 +207,7 @@ namespace VoodooShader
         void Close();
 
     private:
-        Core * mCore;
-        LogLevel mLogLevel;
+        size_t mLogLevel;
         std::fstream mLogFile;
         tm * mLocalTime;
     };

@@ -1,5 +1,5 @@
-#include "Includes.hpp"
 #include "Exception.hpp"
+
 #include "Core.hpp"
 
 namespace VoodooShader

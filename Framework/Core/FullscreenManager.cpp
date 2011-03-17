@@ -1,9 +1,8 @@
-#include "Includes.hpp"
 #include "FullscreenManager.hpp"
+
 #include "Adapter.hpp"
-#include "Exception.hpp"
 #include "Core.hpp"
-#include "Version.hpp"
+#include "Exception.hpp"
 
 namespace VoodooShader
 {
@@ -85,7 +84,7 @@ namespace VoodooShader
     {
         // Run a number of basic checks first, shouldn't have much performance
         // hit, but covers a good few errors.
-        if ( count == 0 || count < -1 )
+        if ( count < 1 && count != -1 )
         {
             this->mParent->Log
             (

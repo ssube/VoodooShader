@@ -1,10 +1,9 @@
-#include "Includes.hpp"
 #include "Parameter.hpp"
 
-#include "Exception.hpp"
 #include "Core.hpp"
 #include "Converter.hpp"
-#include "Version.hpp"
+#include "Exception.hpp"
+#include "Shader.hpp"
 
 namespace VoodooShader
 {
@@ -15,17 +14,17 @@ namespace VoodooShader
 
         switch ( this->mType )
         {
+        case PT_Float1:
+        case PT_Float2:
+        case PT_Float3:
+        case PT_Float4:
+        case PT_Matrix:
+            memset(this->mValueFloat, 0, sizeof(float)*16);
+            break;
         case PT_Sampler1D:
         case PT_Sampler2D:
         case PT_Sampler3D:
             this->mValueTexture = TextureRef();
-            break;
-        case PT_Matrix:
-        case PT_Float4:
-        case PT_Float3:
-        case PT_Float2:
-        case PT_Float1:
-            memset(this->mValueFloat, 0, sizeof(float)*16);
             break;
         case PT_Unknown:
         default:
@@ -41,17 +40,17 @@ namespace VoodooShader
 
         switch ( this->mType )
         {
+        case PT_Float1:
+        case PT_Float2:
+        case PT_Float3:
+        case PT_Float4:
+        case PT_Matrix:
+            memset(this->mValueFloat, 0, sizeof(float)*16);
+            break;
         case PT_Sampler1D:
         case PT_Sampler2D:
         case PT_Sampler3D:
             this->mValueTexture = TextureRef();
-            break;
-        case PT_Matrix:
-        case PT_Float4:
-        case PT_Float3:
-        case PT_Float2:
-        case PT_Float1:
-            memset(this->mValueFloat, 0, sizeof(float)*16);
             break;
         case PT_Unknown:
         default:
@@ -80,7 +79,7 @@ namespace VoodooShader
         return name;
     }
 
-    CGparameter Parameter::GetParameter(void)
+    CGparameter Parameter::GetParameter()
     {
         return this->mParam;
     }
@@ -169,7 +168,7 @@ namespace VoodooShader
     {
         if ( mCore )
         {
-            mCore->Log(LL_Debug, VOODOO_CORE_NAME, "Force updating parameter %s.\n", this->Name().c_str());
+            mCore->Log(LL_Debug, VOODOO_CORE_NAME, "Force updating parameter %s.", this->Name().c_str());
         }
 
         switch ( mType )
@@ -190,13 +189,15 @@ namespace VoodooShader
             cgSetMatrixParameterfc(mParam, mValueFloat);
             break;
         case PT_Sampler1D:
+        case PT_Sampler2D:
+        case PT_Sampler3D:
             if ( mCore )
             {
                 mCore->Log
                 (
                     LL_Warning, 
                     VOODOO_CORE_NAME, 
-                    "Voodoo Core: Unable to force update sampler type parameter (%s).\n", 
+                    "Unable to force update sampler type parameter (%s).", 
                     this->Name().c_str()
                 );
             }
@@ -209,7 +210,7 @@ namespace VoodooShader
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
-                    "Voodoo Core: Cannot force update parameter %s with unknown type.\n", 
+                    "Cannot force update parameter %s with unknown type.", 
                     this->Name().c_str()
                 );
             }

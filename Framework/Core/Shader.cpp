@@ -1,10 +1,10 @@
-#include "Includes.hpp"
 #include "Shader.hpp"
-#include "Core.hpp"
-#include "Exception.hpp"
+
 #include "Adapter.hpp"
 #include "Converter.hpp"
-#include "Version.hpp"
+#include "Core.hpp"
+#include "Exception.hpp"
+#include "Parameter.hpp"
 
 namespace VoodooShader
 {

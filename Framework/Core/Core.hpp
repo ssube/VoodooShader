@@ -24,12 +24,6 @@
 
 #include "Meta.hpp"
 
-#include "Exception.hpp"
-#include "Logger.hpp"
-#include "Texture.hpp"
-#include "Shader.hpp"
-#include "Parameter.hpp"
-
 namespace VoodooShader
 {
     /**

@@ -1,13 +1,14 @@
 
-#include "Includes.hpp"
 #include "Core.hpp"
+
+#include "Adapter.hpp"
 #include "Exception.hpp"
 #include "FullscreenManager.hpp"
+#include "Logger.hpp"
 #include "MaterialManager.hpp"
+#include "Parameter.hpp"
 #include "Shader.hpp"
 #include "Texture.hpp"
-#include "Adapter.hpp"
-#include "Version.hpp"
 
 namespace VoodooShader
 {
@@ -24,9 +25,9 @@ namespace VoodooShader
     Core::Core(String logfile)
         : mAdapter(NULL)
     {
-        this->mLogger = new Logger(this, logfile.c_str());
+        this->mLogger = new Logger(logfile.c_str());
 
-        this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "%s", VOODOO_CORE_COPYRIGHT);
+        this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "%s", VOODOO_GLOBAL_COPYRIGHT_FULL);
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
 
         // Init Cg

@@ -1,10 +1,9 @@
-#include "Includes.hpp"
 #include "MaterialManager.hpp"
+
 #include "Adapter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
 #include "Shader.hpp"
-#include "Version.hpp"
 
 namespace VoodooShader
 {

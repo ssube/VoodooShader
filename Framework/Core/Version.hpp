@@ -19,6 +19,8 @@
 * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
+#ifndef VOODOO_VERSION_HPP
+#define VOODOO_VERSION_HPP
 
 // Versioning functions -------------------------------------------------------
 #define VOODOO_META__STRING(arg) #arg
@@ -54,10 +56,14 @@
 //-----------------------------------------------------------------------------
 
 
-
 // Global defs ----------------------------------------------------------------
 #define VOODOO_GLOBAL_VERSION_GITREV    111
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   "Copyright (c) 2010-2011 by Sean Sube"
+#define VOODOO_GLOBAL_COPYRIGHT_FULL\
+    "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube&lt;br /&gt;\
+    The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\
+    This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;\
+    Please see the included license file for more details.&lt;/div&gt;"
 //-----------------------------------------------------------------------------
 
 
@@ -79,3 +85,22 @@
 #define VOODOO_CG_VERSION_PATCH         0
 #define VOODOO_CG_VERSION_GITREV        7   
 //----------------------------------------------------------------------------- 
+
+namespace VoodooShader
+{
+    /**
+     * Describes the precise version of a particular library, including name, 
+     * main version, revision and debug status.
+     */
+    struct Version
+    {
+        char * Name;
+        int Major;
+        int Minor;
+        long Patch;
+        long Rev;
+        bool Debug;
+    };
+}
+
+#endif /*VOODOO_VERSION_HPP*/

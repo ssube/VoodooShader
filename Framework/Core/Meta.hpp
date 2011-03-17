@@ -40,12 +40,7 @@
 
 #include "Includes.hpp"
 #include "Reference.hpp"
-
-#define VOODOO_CORE_COPYRIGHT\
-    "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube&lt;br /&gt;\
-    The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\
-    This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;\
-    Please see the included license file for more details.&lt;/div&gt;"
+#include "Version.hpp"
 
 namespace VoodooShader
 {
@@ -228,15 +223,15 @@ namespace VoodooShader
      */
     enum LogLevel
     {
-        LL_Unknown  = 0x00,     /*!< Log level unknown */
+        LL_Unknown      = 0x00,     /*!< Log level unknown */
         // Working values
-        LL_APIDebug = 0x02,     /*!< Exceptionally verbose debug logging of API calls */
-        LL_Debug    = 0x10,     /*!< Verbose debug log messages */
-        LL_APIInfo  = 0x12,     /*!< Verbose informational logging from API calls */
-        LL_Info     = 0x30,     /*!< Informational log messages */
-        LL_Warning  = 0x50,     /*!< Warning log messages */
-        LL_Error    = 0xB0,     /*!< General error log messages */
-        LL_Fatal    = 0xFF,     /*!< Fatal error log messages */
+        LL_Debug_API    = 0x07,     /*!< Exceptionally verbose debug logging of API calls */
+        LL_Debug        = 0x10,     /*!< Verbose debug log messages */
+        LL_Info_API     = 0x20,     /*!< Verbose informational logging from API calls */
+        LL_Info         = 0x30,     /*!< Informational log messages */
+        LL_Warning      = 0x50,     /*!< Warning log messages */
+        LL_Error        = 0xB0,     /*!< General error log messages */
+        LL_Fatal        = 0xFF,     /*!< Fatal error log messages */
         // Max value
         LL_Max                  /*!< Enumerator values count */
     };
@@ -251,23 +246,6 @@ namespace VoodooShader
         size_t Depth;
         bool Mipmaps;
         TextureFormat Format;
-    };
-
-    /**
-     * Describes the precise version of a particular library, including name, 
-     * main version and revision.
-     * 
-     * @todo Decide if Version should contain module name or UID (potentially useful
-     *          for Adapter ID).
-     */
-    struct Version
-    {
-        char * Name;
-        int Major;
-        int Minor;
-        long Patch;
-        long Rev;
-        bool Debug;
     };
 }
 
