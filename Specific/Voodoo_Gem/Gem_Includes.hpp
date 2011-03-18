@@ -26,7 +26,7 @@
 #include <tuple>
 
 #define VOODOO_IMPORT
-#include "VoodooFramework.hpp"
+#include "Voodoo_Core.hpp"
 
 #ifdef _DEBUG
 #   define D3D_DEBUG_INFO

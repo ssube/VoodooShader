@@ -7,4 +7,7 @@
   <ItemGroup>
     <ClCompile Include="HookManager.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Voodoo_Hook.def" />
+  </ItemGroup>
 </Project>

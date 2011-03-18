@@ -39,14 +39,15 @@
 #pragma warning(disable:4251)
 
 #include "Includes.hpp"
-#include "Reference.hpp"
 #include "Version.hpp"
 
 namespace VoodooShader
 {
     class Core;
+
     class Adapter;
     class Logger;
+    class HookManager;
 
     class FullscreenManager;
     class MaterialManager;
@@ -71,13 +72,13 @@ namespace VoodooShader
     typedef std::string String;
 
     // Reference-counted pointer types
-    typedef Reference<Shader>                   ShaderRef;
-    typedef Reference<Texture>                  TextureRef;
-    typedef Reference<Technique>                TechniqueRef;
-    typedef Reference<Pass>                     PassRef;
-    typedef Reference<Parameter>                ParameterRef;
-    typedef Reference<File>                     FileRef;
-    typedef Reference<Image>                    ImageRef;
+    typedef std::shared_ptr<Shader>             ShaderRef;
+    typedef std::shared_ptr<Texture>            TextureRef;
+    typedef std::shared_ptr<Technique>          TechniqueRef;
+    typedef std::shared_ptr<Pass>               PassRef;
+    typedef std::shared_ptr<Parameter>          ParameterRef;
+    typedef std::shared_ptr<File>               FileRef;
+    typedef std::shared_ptr<Image>              ImageRef;
 
     // Shader collections
     typedef std::map<String, ShaderRef>         ShaderMap;
@@ -224,6 +225,9 @@ namespace VoodooShader
     enum LogLevel
     {
         LL_Unknown      = 0x00,     /*!< Log level unknown */
+        // Logger internal values
+        LL_Initial      = 0x00,     /*!< Initial log level of Logger */
+        LL_Internal     = 0xFF,     /*!< Log level for Logger-internal messages */
         // Working values
         LL_Debug_API    = 0x07,     /*!< Exceptionally verbose debug logging of API calls */
         LL_Debug        = 0x10,     /*!< Verbose debug log messages */
@@ -233,7 +237,7 @@ namespace VoodooShader
         LL_Error        = 0xB0,     /*!< General error log messages */
         LL_Fatal        = 0xFF,     /*!< Fatal error log messages */
         // Max value
-        LL_Max                  /*!< Enumerator values count */
+        LL_Max                      /*!< Enumerator values count */
     };
 
     /**
@@ -247,6 +251,20 @@ namespace VoodooShader
         bool Mipmaps;
         TextureFormat Format;
     };
-}
+
+    /**
+     * Describes the precise version of a particular library, including name, 
+     * main version, revision and debug status.
+     */
+    struct Version
+    {
+        char * Name;
+        int Major;
+        int Minor;
+        long Patch;
+        long Rev;
+        bool Debug;
+    };
+};
 
 #endif /*VOODOO_META_HPP*/

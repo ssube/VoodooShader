@@ -20,7 +20,6 @@
     <ClInclude Include="MaterialManager.hpp" />
     <ClInclude Include="Meta.hpp" />
     <ClInclude Include="Parameter.hpp" />
-    <ClInclude Include="Reference.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Texture.hpp" />
@@ -35,6 +34,8 @@
     <ClInclude Include="Docs_Graphics.hpp">
       <Filter>Docs</Filter>
     </ClInclude>
+    <ClInclude Include="HookManager.hpp" />
+    <ClInclude Include="Logger.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Core.rc" />

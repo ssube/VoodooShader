@@ -278,12 +278,12 @@ namespace VoodooShader
         *        managers and connected adapters).
         * @return A reference to the new core.
         *
+        * @note You can not call this function externally, you must call 
+        *        Core::Create(String) instead.
         * @note Avoid using more than one core at any point in time. I'm not 
         *        entirely sure how well the Cg runtime handles this. For most 
         *        games, a single render context is used, so no more than one 
         *        adapter and core should be necessary.
-        * @note You can not call this function externally, you must call 
-        *        Core::Create(String) instead.
         * @todo Test multi-core/multi-adapter systems. If anyone has info or 
         *        knows of a game/app that uses multiple D3D/OGL render contexts, 
         *        please let me know.
@@ -299,16 +299,24 @@ namespace VoodooShader
         ~Core();
 
         /**
+         * Load and retrieve functions from the support libraries.
+         */
+        void LoadSupportLibs();
+
+        /**
          * Reference to the currently bound (active) adapter.
          */
         Adapter * mAdapter;
 
         /**
-         * Reference to the current log file. This uses Voodoo's internal
-         * Logger class at this time, but can be changed to use any similar
-         * class.
+         * Reference to the current Logger.
          */
         Logger * mLogger;
+
+        /**
+         * Reference to the current HookManager.
+         */
+        HookManager * mHooker;
 
         // Manager objects:
         FullscreenManager * mManagerFS;

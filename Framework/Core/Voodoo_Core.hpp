@@ -30,6 +30,8 @@
 #include "Core.hpp"
 #include "Exception.hpp"
 #include "FullscreenManager.hpp"
+#include "HookManager.hpp"
+#include "Logger.hpp"
 #include "MaterialManager.hpp"
 #include "Parameter.hpp"
 #include "Shader.hpp"

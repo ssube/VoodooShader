@@ -9,6 +9,17 @@
 
 namespace VoodooShader
 {
+    typedef Logger * (__stdcall * funcTypeLoggerCreate)(Core *, const char*, bool);
+    typedef HookManager * (__stdcall * funcTypeHookerCreate)(Core *, unsigned long, unsigned long *);
+    typedef void (__stdcall * funcTypeLoggerDestroy)(Logger *);
+    typedef void (__stdcall * funcTypeHookerDestroy)(HookManager *);
+
+    HMODULE moduleLogger = NULL, moduleHooker = NULL;
+    funcTypeLoggerCreate  funcLoggerCreate  = NULL;
+    funcTypeLoggerDestroy funcLoggerDestroy = NULL;
+    funcTypeHookerCreate  funcHookerCreate  = NULL;
+    funcTypeHookerDestroy funcHookerDestroy = NULL;
+
     Core * Core::Create(String logfile)
     {
         return new Core(logfile);
@@ -22,7 +33,22 @@ namespace VoodooShader
     Core::Core(String logfile)
         : mAdapter(NULL)
     {
-        this->mLogger = new Logger(logfile.c_str());
+        this->LoadSupportLibs();
+
+        this->mLogger = (*funcLoggerCreate)(this, logfile.c_str(), false);
+
+        if ( mLogger == NULL )
+        {
+            Throw(VOODOO_CORE_NAME, "Unable to create Logger.", this);
+        }
+
+        ULONG threads = NULL;
+        this->mHooker = (*funcHookerCreate)(this, 1, &threads);
+
+        if ( mHooker == NULL )
+        {
+            Throw(VOODOO_CORE_NAME, "Unable to create Hooker.", this);
+        }
 
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "%s", VOODOO_GLOBAL_COPYRIGHT_FULL);
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
@@ -47,6 +73,8 @@ namespace VoodooShader
         this->LogModule(vsver);
 
         this->LogModule(this->GetVersion());
+
+        // 
     }
 
     Core::~Core()
@@ -70,7 +98,42 @@ namespace VoodooShader
 
         if ( this->mLogger )
         {
-            delete this->mLogger;
+            (*funcLoggerDestroy)(mLogger);
+        }
+
+        if ( this->mHooker )
+        {
+            (*funcHookerDestroy)(mHooker);
+        }
+    }
+
+    void Core::LoadSupportLibs()
+    {
+        // Create and load Logger and HookManager
+        if ( moduleLogger == NULL )
+        {
+            moduleLogger = LoadLibraryA("Voodoo_Logger.dll");
+
+            if ( moduleLogger == NULL )
+            {
+                Throw(VOODOO_CORE_NAME, "Could not load Logger module.", this);
+            }
+
+            funcLoggerCreate  = (funcTypeLoggerCreate) GetProcAddress(moduleLogger, "CreateLogger");
+            funcLoggerDestroy = (funcTypeLoggerDestroy)GetProcAddress(moduleLogger, "DestroyLogger");
+        }
+
+        if ( moduleHooker == NULL )
+        {
+            moduleHooker = LoadLibraryA("Voodoo_Hook.dll");
+
+            if ( moduleHooker == NULL )
+            {
+                Throw(VOODOO_CORE_NAME, "Could not load Hooker module.", this);
+            }
+
+            funcHookerCreate  = (funcTypeHookerCreate) GetProcAddress(moduleHooker, "CreateHooker");
+            funcHookerDestroy = (funcTypeHookerDestroy)GetProcAddress(moduleHooker, "DestroyHooker");
         }
     }
 

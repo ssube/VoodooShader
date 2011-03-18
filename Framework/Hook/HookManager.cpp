@@ -26,125 +26,138 @@
 
 namespace VoodooShader
 {
-    HookManager::HookManager(Core * core, unsigned long threadsCount, unsigned long * threadsList)
-        : mCore(core)
+    HookManager * CreateHookManager(_In_ Core * core, _In_ unsigned long threadsCount, _In_count_(threadsCount) unsigned long * threadsList)
     {
-        mHooks.clear();
-
-        mThreadCount = threadsCount;
-
-        mThreadIDs = new ULONG[mThreadCount];
-        memcpy(mThreadIDs, threadsList, sizeof(unsigned int) * threadsCount);
-
-        LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
-
-        Version hookVersion = VOODOO_META_VERSION_STRUCT(HOOK);
-        mCore->LogModule(hookVersion);
-        mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager attached to %u threads.", threadsCount);
+        return new EasyHook::HookManager(core, threadsCount, threadsList);
     }
 
-    HookManager::~HookManager()
+    void DestroyHookManager( _In_ HookManager * manager )
     {
-        this->RemoveAllHooks();
-
-        mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
-
-        delete mThreadIDs;
+        delete manager;
     }
 
-    bool HookManager::CreateHook(std::string name, void * src, void * dest)
+    namespace EasyHook
     {
-        HookMap::iterator hook = mHooks.find(name);
-
-        if ( hook != mHooks.end() )
+        HookManager::HookManager(Core * core, unsigned long threadsCount, unsigned long * threadsList)
+            : mCore(core)
         {
-            Throw
-            (
-                VOODOO_HOOK_NAME, 
-                "Attempted to create a hook with a duplicate name.", 
-                mCore
-            );
+            mHooks.clear();
+
+            mThreadCount = threadsCount;
+
+            mThreadIDs = new ULONG[mThreadCount];
+            memcpy(mThreadIDs, threadsList, sizeof(unsigned int) * threadsCount);
+
+            LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
+
+            Version hookVersion = VOODOO_META_VERSION_STRUCT(HOOK);
+            mCore->LogModule(hookVersion);
+            mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager attached to %u threads.", threadsCount);
         }
 
-        mCore->Log
-        (
-            LL_Debug, 
-            VOODOO_HOOK_NAME,
-            "Creating hook %s. Redirecting function %p to %p.",
-            name.c_str(), src, dest
-        );
-
-        TRACED_HOOK_HANDLE hookHandle = NULL;
-
-        DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
-
-        if ( ( result != 0 ) || ( hookHandle == NULL ) )
+        HookManager::~HookManager()
         {
+            this->RemoveAllHooks();
+
+            mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
+
+            delete mThreadIDs;
+        }
+
+        bool HookManager::CreateHook(std::string name, void * src, void * dest)
+        {
+            HookMap::iterator hook = mHooks.find(name);
+
+            if ( hook != mHooks.end() )
+            {
+                Throw
+                (
+                    VOODOO_HOOK_NAME, 
+                    "Attempted to create a hook with a duplicate name.", 
+                    mCore
+                );
+            }
+
             mCore->Log
             (
-                LL_Error,
+                LL_Debug, 
                 VOODOO_HOOK_NAME,
-                "Error %u creating hook %s (%p, %p).",
-                result, name, src, dest
+                "Creating hook %s. Redirecting function %p to %p.",
+                name.c_str(), src, dest
             );
 
-            return false;
-        } else {
-            LhSetInclusiveACL(mThreadIDs, mThreadCount, hookHandle);
+            TRACED_HOOK_HANDLE hookHandle = NULL;
 
-            mHooks[name] = hookHandle;
+            DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
 
-            return true;
-        }
-    }
-
-    bool HookManager::RemoveHook(std::string name)
-    {
-        HookMap::iterator hook = mHooks.find(name);
-
-        mCore->Log
-        (
-            LL_Debug,
-            VOODOO_HOOK_NAME,
-            "Removing hook %s.",
-            name.c_str()
-        );
-
-        if ( hook != mHooks.end() )
-        {
-            DWORD result = LhUninstallHook((TRACED_HOOK_HANDLE)hook->second);
-
-            if ( result != 0 )
+            if ( ( result != 0 ) || ( hookHandle == NULL ) )
             {
                 mCore->Log
                 (
                     LL_Error,
                     VOODOO_HOOK_NAME,
-                    "Error %u removing hook %s.",
-                    result, name.c_str()
+                    "Error %u creating hook %s (%p, %p).",
+                    result, name, src, dest
                 );
 
-                return true;
-            } else {
-                mHooks.erase(hook);
-
                 return false;
+            } else {
+                LhSetInclusiveACL(mThreadIDs, mThreadCount, hookHandle);
+
+                mHooks[name] = hookHandle;
+
+                return true;
             }
-        } else {
-            Throw
-            (
-                VOODOO_HOOK_NAME,
-                "Trying to remove hook that does not exist.", 
-                mCore
-            );
         }
-    }
 
-    void HookManager::RemoveAllHooks()
-    {
-        LhUninstallAllHooks();
-        LhWaitForPendingRemovals();
+        bool HookManager::RemoveHook(std::string name)
+        {
+            HookMap::iterator hook = mHooks.find(name);
 
-        mHooks.clear();
+            mCore->Log
+            (
+                LL_Debug,
+                VOODOO_HOOK_NAME,
+                "Removing hook %s.",
+                name.c_str()
+            );
+
+            if ( hook != mHooks.end() )
+            {
+                DWORD result = LhUninstallHook((TRACED_HOOK_HANDLE)hook->second);
+
+                if ( result != 0 )
+                {
+                    mCore->Log
+                    (
+                        LL_Error,
+                        VOODOO_HOOK_NAME,
+                        "Error %u removing hook %s.",
+                        result, name.c_str()
+                    );
+
+                    return true;
+                } else {
+                    mHooks.erase(hook);
+
+                    return false;
+                }
+            } else {
+                Throw
+                (
+                    VOODOO_HOOK_NAME,
+                    "Trying to remove hook that does not exist.", 
+                    mCore
+                );
+            }
+        }
+
+        void HookManager::RemoveAllHooks()
+        {
+            LhUninstallAllHooks();
+            LhWaitForPendingRemovals();
+
+            mHooks.clear();
+        }
     }
 }

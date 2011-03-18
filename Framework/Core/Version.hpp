@@ -86,21 +86,4 @@
 #define VOODOO_CG_VERSION_GITREV        7   
 //----------------------------------------------------------------------------- 
 
-namespace VoodooShader
-{
-    /**
-     * Describes the precise version of a particular library, including name, 
-     * main version, revision and debug status.
-     */
-    struct Version
-    {
-        char * Name;
-        int Major;
-        int Minor;
-        long Patch;
-        long Rev;
-        bool Debug;
-    };
-}
-
 #endif /*VOODOO_VERSION_HPP*/
