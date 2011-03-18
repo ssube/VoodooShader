@@ -154,6 +154,11 @@ namespace VoodooShader
         return this->mAdapter;
     }
 
+    HookManager * Core::GetHookManager()
+    {
+        return mHooker;
+    }
+
     void Core::Log(LogLevel level, const char * module, const char * msg, ...)
     {
         if ( this->mLogger )

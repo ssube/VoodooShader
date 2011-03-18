@@ -30,8 +30,6 @@ namespace VoodooShader
     {
         typedef std::map<std::string, void*> HookMap;
 
-    #   define VOODOO_META_HOOK_PARAMS(n, d) #n, &n, &d    /*!< Formats a token into the required parameters to create a hook. */
-    
         extern "C"
         {
             /**

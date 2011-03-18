@@ -50,29 +50,32 @@ D3DPRESENT_PARAMETERS gParams;
 
 VoodooShader::ShaderRef testShader;
 
-extern "C" __declspec(dllexport) bool __stdcall LoadAdapter(HMODULE process)
+void * WINAPI Voodoo3DCreate8(UINT sdkVersion);
+
+typedef std::map<const char *, void *> HookPointMap;
+
+extern "C" __declspec(dllexport) bool __stdcall LoadAdapter(HookPointMap * hookPointMap)
 {
     if ( VoodooCore == NULL )
     {
         VoodooCore = VoodooShader::Core::Create("Voodoo_Gem.xml");
     }
 
-    ULONG threads = 1;
-    ULONG threadIDs = NULL;
+    void * hookPoint = (*hookPointMap)["Direct3DCreate8"];
 
-    VoodooHooker = new HookManager(VoodooCore, threads, &threadIDs);
+    VoodooHooker = VoodooCore->GetHookManager();
 
-    return VoodooHooker->CreateHook(VOODOO_META_HOOK_PARAMS(Direct3DCreate8, Voodoo3DCreate8);
+    return VoodooHooker->CreateHook("Direct3DCreate8", hookPoint, &Voodoo3DCreate8);
 }
 
-void * Voodoo3DCreate8(UINT sdkVersion)
+void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 {
     VoodooCore->Log
     (
         LL_Info,
         VOODOO_GEM_NAME,
         "Direct3DCreate8 called, SDK version: %d.", 
-        version
+        sdkVersion
     );
 
     //Load the real d3d8 dll and get device caps
@@ -108,7 +111,7 @@ void * Voodoo3DCreate8(UINT sdkVersion)
         return 0;
     }
 
-    IDirect3D8 * TempObject = (d3d8func)(version);
+    IDirect3D8 * TempObject = (d3d8func)(sdkVersion);
     HRESULT hr = TempObject->GetDeviceCaps (0, D3DDEVTYPE_HAL, &d3d8Caps);
     if (hr != D3D_OK) 
     { 

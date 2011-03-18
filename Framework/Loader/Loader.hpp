@@ -19,13 +19,42 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "Version.hpp"
+#include <stdio.h>
+#include <stdlib.h>
+#include <map>
 
-// Logger defs -------------------------------------------------------------------
-#define VOODOO_LOGGER_NAME              "Voodoo/Logger"
-#define VOODOO_LOGGER_PRETTYNAME        "Voodoo/Logger"
-#define VOODOO_LOGGER_VERSION_MAJOR     0
-#define VOODOO_LOGGER_VERSION_MINOR     1
-#define VOODOO_LOGGER_VERSION_PATCH     2
-#define VOODOO_LOGGER_VERSION_GITREV    VOODOO_GLOBAL_VERSION_GITREV
-//-----------------------------------------------------------------------------
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <strsafe.h>
+
+typedef bool (__stdcall * funcTypeLoadAdapter)(void *);
+typedef bool (__stdcall * funcTypeUnloadAdapter)();
+
+bool LoadAdapter();
+bool UnloadAdapter();
+
+BOOL DllMain
+(
+    _In_ void * _HDllHandle, 
+    _In_ unsigned _Reason, 
+    _In_opt_ void * _Reserved
+);
+
+HMODULE LoadSystemLibrary(const char * libname);
+void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func);
+void * WINAPI Voodoo3DCreate8(UINT sdkVersion);
+void * WINAPI Voodoo3DCreate9(UINT sdkVersion);
+HRESULT WINAPI VoodooInput8Create
+(
+    HINSTANCE hinst,
+    DWORD dwVersion,
+    REFIID riidltf,
+    LPVOID * ppvOut,
+    LPVOID punkOuter
+);
+HRESULT VoodooSoundCreate8
+(
+    LPCGUID lpcGuidDevice,
+    LPVOID * ppDS8,
+    LPVOID pUnkOuter
+);

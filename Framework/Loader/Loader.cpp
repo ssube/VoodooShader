@@ -1,15 +1,24 @@
+#include "Loader.hpp"
 
-#include <stdio.h>
-#include <stdlib.h>
+std::map<const char *, void *> HookPointMap;
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <strsafe.h>
+funcTypeLoadAdapter   funcLoadAdapter;
+funcTypeUnloadAdapter funcUnloadAdapter;
+
+void CreateHookPointMap()
+{
+    HookPointMap.clear();
+
+    HookPointMap["Direct3DCreate8"]    = &Voodoo3DCreate8;
+    HookPointMap["Direct3DCreate9"]    = &Voodoo3DCreate9;
+    HookPointMap["DirectInput8Create"] = &VoodooInput8Create;
+    HookPointMap["DirectSoundCreate8"] = &VoodooSoundCreate8;
+}
 
 /**
  * Reads the Adapter's name from the Voodoo config file and loads it, if present.
  */
-void LoadAdapter()
+bool LoadAdapter()
 {
     FILE * config = NULL;
     HKEY VoodooPathKey = NULL;
@@ -21,13 +30,13 @@ void LoadAdapter()
     if ( error != 0 || config == NULL )
     {
         MessageBoxA(NULL, "Voodoo Loader: Unable to open config file.", "Loader Error", MB_ICONERROR|MB_OK);
-        exit(1);
+        return false;
     }
 
     if ( !fgets(AdapterModule, MAX_PATH, config) )
     {
         MessageBoxA(NULL, "Voodoo Loader: Unable to read adapter from config file.", "Loader Error", MB_ICONERROR|MB_OK);
-        exit(1);
+        return false;
     }
 
     LONG keyOpen = RegOpenKeyExA(HKEY_CURRENT_USER, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
@@ -39,7 +48,7 @@ void LoadAdapter()
         if ( keyOpen != ERROR_SUCCESS )
         {
             MessageBoxA(NULL, "Voodoo Loader: Unable to find Voodoo registry key.", "Loader Error", MB_ICONERROR|MB_OK);
-            exit(1);
+            return false;
         }
     }
 
@@ -51,7 +60,7 @@ void LoadAdapter()
     if ( valueQuery != ERROR_SUCCESS || valueType == REG_NONE )
     {
         MessageBoxA(NULL, "Voodoo Loader: Unable to retrieve path from registry.", "Loader Error", MB_ICONERROR|MB_OK);
-        exit(1);
+        return false;
     }
 
     StringCchCatA(VoodooPath, MAX_PATH, "\\bin\\");
@@ -62,27 +71,39 @@ void LoadAdapter()
     if ( !adapter )
     {
         MessageBoxA(NULL, "Voodoo Loader: Unable to load adapter DLL.", "Loader Error", MB_ICONERROR|MB_OK);
-        exit(1);
+        return false;
     }
 
-    typedef bool (__stdcall * InitFunc)(HMODULE);
-    InitFunc initFunc = (InitFunc)GetProcAddress(adapter, "LoadAdapter");
+    funcLoadAdapter   = (funcTypeLoadAdapter)  GetProcAddress(adapter, "LoadAdapter");
+    funcUnloadAdapter = (funcTypeUnloadAdapter)GetProcAddress(adapter, "UnloadAdapter");
 
-    if ( !initFunc )
+    if ( !funcLoadAdapter || !funcUnloadAdapter )
     {
         MessageBoxA(NULL, "Voodoo Loader: Unable to find adapter EP.", "Loader Error", MB_ICONERROR|MB_OK);
-        exit(1);
+        return false;
     }
 
-    bool success = (*initFunc)(NULL); //! @todo Provide the process handle
+    return (*funcLoadAdapter)(&HookPointMap);
+}
 
-    if ( !success )
+bool UnloadAdapter()
+{
+    return (*funcUnloadAdapter)();
+}
+
+BOOL DllMain
+(
+    _In_ void * _HDllHandle, 
+    _In_ unsigned _Reason, 
+    _In_opt_ void * _Reserved
+)
+{
+    if ( _Reason == DLL_PROCESS_ATTACH )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Adapter failed to load.", "Loader Error", MB_ICONERROR|MB_OK);
-        exit(1);
+        return (BOOL)LoadAdapter();
+    } else if ( _Reason == DLL_PROCESS_DETACH ) {
+        return (BOOL)UnloadAdapter();
     }
-
-    return;
 }
 
 // Support functions
@@ -105,8 +126,6 @@ HMODULE LoadSystemLibrary(const char * libname)
 void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func)
 {
     typedef void * (__stdcall * DXInitFunc)(UINT);
-
-    LoadAdapter();
 
     HMODULE baselib = LoadSystemLibrary(lib);
 
@@ -152,8 +171,6 @@ HRESULT WINAPI VoodooInput8Create
 {
     typedef HRESULT (__stdcall * DIInitFunc)(HINSTANCE, DWORD, REFIID, LPVOID*, LPVOID);
 
-    LoadAdapter();
-
     HMODULE baselib = LoadSystemLibrary("dinput8.dll");
 
     if ( !baselib )
@@ -182,8 +199,6 @@ HRESULT VoodooSoundCreate8
 )
 {
     typedef HRESULT (__stdcall * DSInitFunc)(LPCGUID, LPVOID*, LPVOID);
-
-    LoadAdapter();
 
     HMODULE baselib = LoadSystemLibrary("dsound8.dll");
 

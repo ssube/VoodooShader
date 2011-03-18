@@ -72,14 +72,14 @@
 #define VOODOO_CORE_PRETTYNAME          "Voodoo Shader Framework Core"
 #define VOODOO_CORE_VERSION_MAJOR       0
 #define VOODOO_CORE_VERSION_MINOR       1
-#define VOODOO_CORE_VERSION_PATCH       13
+#define VOODOO_CORE_VERSION_PATCH       14
 #define VOODOO_CORE_VERSION_GITREV      VOODOO_GLOBAL_VERSION_GITREV
 //-----------------------------------------------------------------------------
 
 
 // External defs --------------------------------------------------------------
 #define VOODOO_CG_NAME                  "Cg"
-#define VOODOO_CG_PRETTYNAME            "nVidia Cg (July 2010)"
+#define VOODOO_CG_PRETTYNAME            "nVidia Cg Toolkit (July 2010)"
 #define VOODOO_CG_VERSION_MAJOR         3
 #define VOODOO_CG_VERSION_MINOR         0
 #define VOODOO_CG_VERSION_PATCH         0

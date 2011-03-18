@@ -113,6 +113,11 @@ namespace VoodooShader
         );
 
         /**
+         * Gets a pointer to the this core's HookManager.
+         */
+         HookManager * GetHookManager();
+
+        /**
          * Attach an Adapter to this Core.
          *
          * @param adapter The Adapter to attach (will be used for all graphics 
