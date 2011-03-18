@@ -19,21 +19,19 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_INCLUDES_HPP
-#define VOODOO_INCLUDES_HPP
+#define VOODOO_IMPORT
 
-#include <fstream>
-#include <iostream>
-#include <map>
-#include <vector>
-#include <list>
-#include <string>
-#include <algorithm>
-#include <assert.h>
+#include "Includes.hpp"
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include "Meta.hpp"
 
-#include "Cg/cg.h"
-
-#endif
+#include "Adapter.hpp"
+#include "Converter.hpp"
+#include "Core.hpp"
+#include "Exception.hpp"
+#include "FullscreenManager.hpp"
+#include "MaterialManager.hpp"
+#include "Parameter.hpp"
+#include "Shader.hpp"
+#include "Texture.hpp"
+#include "Version.hpp"

@@ -366,5 +366,5 @@ void DrawGDI(HWND hWnd)
     DrawTextA(hdc, msg, -1, &rect, DT_BOTTOM|DT_CENTER);
 
     EndPaint(hWnd, &ps);
-*/
+ */
 }

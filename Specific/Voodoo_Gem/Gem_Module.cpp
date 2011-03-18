@@ -1,22 +1,22 @@
 /**************************************************************************************************\
-* This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
-* Copyright (c) 2010-2011 by Sean Sube
-*
-*
-* This program is free software; you can redistribute it and/or modify it under the terms of the 
-* GNU General Public License as published by the Free Software Foundation; either version 2 of the 
-* License, or (at your option) any later version.
-* 
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-* even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License along with this program; 
-* if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
-* Boston, MA  02110-1301 US
-*
-* Support and more information may be found at http://www.voodooshader.com, or by contacting the
-* developer at peachykeen@voodooshader.com
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify it under the terms of the 
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program; 
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * Boston, MA  02110-1301 US
+ *
+ * Support and more information may be found at http://www.voodooshader.com, or by contacting the
+ * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
 #include "Gem_Module.hpp"
@@ -27,6 +27,7 @@
 #include "IVoodoo3DTexture8.hpp"
 
 VoodooShader::Core * VoodooCore = NULL;
+VoodooShader::HookManager * VoodooHooker = NULL;
 VoodooShader::Adapter * VoodooGem = NULL;
 
 //! @todo Shift most of these globals, except the core and adapter, into the adapter (as members).
@@ -49,13 +50,23 @@ D3DPRESENT_PARAMETERS gParams;
 
 VoodooShader::ShaderRef testShader;
 
-VOODOO_API_GEM void * __stdcall Voodoo3DCreate8(UINT version)
+extern "C" __declspec(dllexport) bool __stdcall LoadAdapter(HMODULE process)
 {
     if ( VoodooCore == NULL )
     {
         VoodooCore = VoodooShader::Core::Create("Voodoo_Gem.xml");
     }
 
+    ULONG threads = 1;
+    ULONG threadIDs = NULL;
+
+    VoodooHooker = new HookManager(VoodooCore, threads, &threadIDs);
+
+    return VoodooHooker->CreateHook(VOODOO_META_HOOK_PARAMS(Direct3DCreate8, Voodoo3DCreate8);
+}
+
+void * Voodoo3DCreate8(UINT sdkVersion)
+{
     VoodooCore->Log
     (
         LL_Info,

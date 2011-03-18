@@ -20,7 +20,6 @@
 \**************************************************************************************************/
   
 /**
- *
  * @page Shaders
  * <p>
  *    Voodoo shaders are split into a number of levels with a tree structure.
@@ -92,12 +91,16 @@
  *    Effect parameters may only be linked to global parameters. Global parameters
  *    are created by calling Core::CreateParameter(), then any number of other
  *    parameters may be linked by calling Parameter::Attach() on the global
- *    parameter and providing the effect parameter, like so:<br />
+ *    parameter and providing the effect parameter, like so:
+ * </p>
+ * <p>
  *    <code>
  *    ParameterRef global = Core->CreateParameter("time", PT_Float);<br />
  *    ParameterRef effect = Shader->GetParameter("time");<br />
  *    global->Attach(effect);<br />
  *    </code>
+ * </p>
+ * <p>
  *    Whenever the global parameter is set to a new value, all attached parameters
  *    will also be updated.
  * </p>
@@ -115,18 +118,22 @@
  *    Each shader technique and pass may have a target annotation, which gives
  *    the name of a texture. The results of the technique or pass, usually sent
  *    to the <code>lastshader</code> or <code>lastpass</code> texture, will
- *    instead go to the specified target. Targets may be specified like so:<br />
+ *    instead go to the specified target. Targets may be specified like so:
+ * </p>
+ * <p>
  *    <code>
  *    technique dx9_high<br />
- *        < string target=":buffer_group1"; ><br />
+ *    &nbsp;&nbsp;< string target=":buffer_group1"; ><br />
  *    {<br />
- *        pass diffuse<br />
- *            < string target=":buffer_diffuse"; ><br />
- *        {<br />
- *            ...<br />
- *        }<br />
+ *    &nbsp;&nbsp;&nbsp;&nbsp;pass diffuse<br />
+ *    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;< string target=":buffer_diffuse"; ><br />
+ *    &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+ *    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+ *    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
  *    }<br />
  *    </code>
+ * </p>
+ * <p>
  *    This allows pass and technique output to be stored and later used, by other
  *    passes from the same effect or even by other effects.
  * </p>
@@ -258,5 +265,4 @@
  *  point, the GBA components are not used, but future versions of Voodoo may
  *  pack additional data into them.
  * </p>
- *
  */

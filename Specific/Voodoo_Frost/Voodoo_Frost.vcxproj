@@ -177,13 +177,11 @@
   <ItemGroup>
     <ClCompile Include="Engine_Patches.cpp" />
     <ClCompile Include="Frost_Module.cpp" />
-    <ClCompile Include="HookManager.cpp" />
     <ClCompile Include="VoodooGL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Frost_Module.hpp" />
     <ClInclude Include="Frost_Version.hpp" />
-    <ClInclude Include="HookManager.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="VoodooGL.hpp" />
   </ItemGroup>

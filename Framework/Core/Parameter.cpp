@@ -10,9 +10,13 @@ namespace VoodooShader
     Parameter::Parameter(Core * core, String name, ParameterType type)
         : mType(type), mParent(NULL), mVirtual(true), mCore(core)
     { 
-        mParam = cgCreateParameter(core->GetCGContext(), Converter::ToCGType(type));
+        mParam = cgCreateParameter
+        (
+            core->GetCGContext(), 
+            Converter::ToCGType(mType)
+        );
 
-        switch ( this->mType )
+        switch ( mType )
         {
         case PT_Float1:
         case PT_Float2:

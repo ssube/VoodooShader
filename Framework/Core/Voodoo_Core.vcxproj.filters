@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Exception.cpp" />
+    <ClCompile Include="FullscreenManager.cpp" />
+    <ClCompile Include="MaterialManager.cpp" />
+    <ClCompile Include="Parameter.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Texture.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Adapter.hpp" />
+    <ClInclude Include="Converter.hpp" />
+    <ClInclude Include="Core.hpp" />
+    <ClInclude Include="Exception.hpp" />
+    <ClInclude Include="FullscreenManager.hpp" />
+    <ClInclude Include="Includes.hpp" />
+    <ClInclude Include="MaterialManager.hpp" />
+    <ClInclude Include="Meta.hpp" />
+    <ClInclude Include="Parameter.hpp" />
+    <ClInclude Include="Reference.hpp" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="Texture.hpp" />
+    <ClInclude Include="Version.hpp" />
+    <ClInclude Include="Voodoo_Core.hpp" />
+    <ClInclude Include="Docs_Code.hpp">
+      <Filter>Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs_License.hpp">
+      <Filter>Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs_Graphics.hpp">
+      <Filter>Docs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Voodoo_Core.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{58cae405-568d-456f-8986-e1716ed87ade}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

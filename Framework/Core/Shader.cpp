@@ -4,17 +4,18 @@
 #include "Converter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
-#include "Parameter.hpp"
 
 namespace VoodooShader
 {
     Shader::Shader(Core * parent, String filename, const char ** args)
         : mCore(parent), mName(filename), mDefaultTechnique()
     {
-        assert(parent);
-
-        this->mEffect = cgCreateEffectFromFile(
-            parent->GetCGContext(), filename.c_str(), args);
+        this->mEffect = cgCreateEffectFromFile
+        (
+            parent->GetCGContext(), 
+            filename.c_str(), 
+            args
+        );
 
         if ( !cgIsEffect(this->mEffect) )
         {

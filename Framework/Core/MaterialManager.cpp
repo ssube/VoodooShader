@@ -3,7 +3,6 @@
 #include "Adapter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
-#include "Shader.hpp"
 
 namespace VoodooShader
 {

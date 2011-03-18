@@ -1,5 +1,25 @@
-
-/*
+/**************************************************************************************************\
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify it under the terms of the 
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program; 
+ * if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * Boston, MA  02110-1301 US
+ *
+ * Support and more information may be found at http://www.voodooshader.com, or by contacting the
+ * developer at peachykeen@voodooshader.com
+\**************************************************************************************************/
+  
+/**
  * @page adapterspec Adapter Specifications
  * 
  * The Voodoo Core is API and program independent and leaves most interfacing to the
@@ -10,7 +30,10 @@
  * @section adapterep Entry Point
  * <p>
  *  Each adapter module must export a function with the signature:
- *  <code>bool __stdcall LoadAdapter(HMODULE process)</code><br />
+ * </p>
+ * <p>
+ *  <code>bool __stdcall LoadAdapter(HMODULE process)</code>
+ * </p>
  *  The export must not be mangled and should have the ordinal 0 if at all possible.
  * </p>
  * <p>
@@ -108,6 +131,13 @@
  *   <li>All function parameters, global variables, enum members, class members, etc must be
  *       documented. <em>(Note: The project does not fully conform to this requirement yet)</em></li>
  *  </ul>
+ * <li>Headers should use the HPP extension, code files CPP.</li>
+ * <li>Headers should include as few files as possible.</li>
+ * <ul>
+ *   <li>If the header defines a class which has member of or using the type Reference<T>, the
+ *       appropriate header for the class T must be included in the header (otherwise some
+ *       rather confusing compiler errors will show up).</li>
+ * </ul>
  * </ul>
  * 
  * @section events Events
@@ -232,4 +262,4 @@
  *    <li>Code analysis must not be enabled.</li>
  *  </ul>
  * </ul>
- * */
+ */

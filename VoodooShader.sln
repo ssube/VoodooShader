@@ -35,18 +35,32 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX89", "Generic\Voodoo_DX89\Voodoo_DX89.vcxproj", "{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Frost", "Specific\Voodoo_Frost\Voodoo_Frost.vcxproj", "{98903591-D205-49ED-AE60-44BDD620D16E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6} = {089DE4CD-7134-42A8-9673-2EE03832AEF6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Gem", "Specific\Voodoo_Gem\Voodoo_Gem.vcxproj", "{1BCE17B2-8422-45C7-AE61-8277C08FE251}"
+	ProjectSection(ProjectDependencies) = postProject
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6} = {089DE4CD-7134-42A8-9673-2EE03832AEF6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Testbed", "Utilities\Testbed\Testbed.vcxproj", "{F43BEAEB-9EBF-4FDA-BDB6-B7C810746EF1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogViewer", "Utilities\LogViewer\LogViewer.csproj", "{82C4257D-3F4D-4F7D-A0B6-0282C044E7E7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Core", "Framework\Core\Voodoo_Core.vcxproj", "{A5C09646-DA38-4869-82C3-11A66D706C43}"
+	ProjectSection(ProjectDependencies) = postProject
+		{14D338AC-3555-4742-9F1C-FEBEF90021A5} = {14D338AC-3555-4742-9F1C-FEBEF90021A5}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Loader", "Framework\Loader\Voodoo_Loader.vcxproj", "{6234D300-FD30-4A04-A3A2-4739C5D9B95F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Logger", "Framework\Logger\Voodoo_Logger.vcxproj", "{14D338AC-3555-4742-9F1C-FEBEF90021A5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Hook", "Framework\Hook\Hook.vcxproj", "{089DE4CD-7134-42A8-9673-2EE03832AEF6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -284,6 +298,30 @@ Global
 		{14D338AC-3555-4742-9F1C-FEBEF90021A5}.Template|Win32.ActiveCfg = Release|Win32
 		{14D338AC-3555-4742-9F1C-FEBEF90021A5}.Template|Win32.Build.0 = Release|Win32
 		{14D338AC-3555-4742-9F1C-FEBEF90021A5}.Template|x86.ActiveCfg = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug_Analysis|Any CPU.ActiveCfg = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug_Analysis|Mixed Platforms.ActiveCfg = Debug_Analysis|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug_Analysis|Mixed Platforms.Build.0 = Debug_Analysis|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug_Analysis|Win32.ActiveCfg = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug_Analysis|Win32.Build.0 = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug_Analysis|x86.ActiveCfg = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug|Win32.Build.0 = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Debug|x86.ActiveCfg = Debug|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Release|Any CPU.ActiveCfg = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Release|Win32.ActiveCfg = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Release|Win32.Build.0 = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Release|x86.ActiveCfg = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Template|Any CPU.ActiveCfg = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Template|Mixed Platforms.ActiveCfg = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Template|Mixed Platforms.Build.0 = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Template|Win32.ActiveCfg = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Template|Win32.Build.0 = Release|Win32
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6}.Template|x86.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -300,6 +338,7 @@ Global
 		{A5C09646-DA38-4869-82C3-11A66D706C43} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 		{14D338AC-3555-4742-9F1C-FEBEF90021A5} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
+		{089DE4CD-7134-42A8-9673-2EE03832AEF6} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms

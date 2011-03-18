@@ -6,9 +6,6 @@
 #include "FullscreenManager.hpp"
 #include "Logger.hpp"
 #include "MaterialManager.hpp"
-#include "Parameter.hpp"
-#include "Shader.hpp"
-#include "Texture.hpp"
 
 namespace VoodooShader
 {
