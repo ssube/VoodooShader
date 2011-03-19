@@ -87,19 +87,28 @@ namespace VoodooShader
                 name.c_str(), src, dest
             );
 
-            TRACED_HOOK_HANDLE hookHandle = NULL;
+            TRACED_HOOK_HANDLE hookHandle = new HOOK_TRACE_INFO();
 
             DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
 
             if ( ( result != 0 ) || ( hookHandle == NULL ) )
             {
+                if ( result == STATUS_NO_MEMORY )
+                {
+                    mCore->Log(LL_Error, VOODOO_HOOK_NAME, "No memory while creating hook.");
+                //} else if ( result == STATUS_NOT_SUPPORTED ) {
+                //    mCore->Log(LL_Error, VOODOO_HOOK_NAME, "Not supported while creating hook.");
+                //} else if ( result == STATUS_INSUFFICIENT_RESOURCES ) {
+                //    mCore->Log(LL_Error, VOODOO_HOOK_NAME, "Insufficient resources while creating hook.");
+                } else {
                 mCore->Log
                 (
                     LL_Error,
                     VOODOO_HOOK_NAME,
                     "Error %u creating hook %s (%p, %p).",
-                    result, name, src, dest
+                    result, name.c_str(), src, dest
                 );
+                }
 
                 return false;
             } else {
@@ -125,7 +134,10 @@ namespace VoodooShader
 
             if ( hook != mHooks.end() )
             {
-                DWORD result = LhUninstallHook((TRACED_HOOK_HANDLE)hook->second);
+                TRACED_HOOK_HANDLE tracedHandle = (TRACED_HOOK_HANDLE)hook->second;
+
+                DWORD result = LhUninstallHook(tracedHandle);
+                delete tracedHandle;
 
                 if ( result != 0 )
                 {

@@ -25,6 +25,11 @@
 #include <set>
 #include <tuple>
 
+#include <d3d9.h>
+#include <d3dx9.h>
+
+#include "Cg/cgD3D9.h"
+
 #define VOODOO_IMPORT
 #include "Voodoo_Core.hpp"
 
@@ -34,42 +39,5 @@
 #else
 #   define VOODOO_GEM_DEBUG_VALUE 0
 #endif
-
-#include <d3d9.h>
-#include <d3dx9.h>
-
-#include "Cg/cgD3D9.h"
-
-#ifndef VOODOO_IMPORT_GEM
-#    define VOODOO_API_GEM __declspec(dllexport)
-#else
-#    define VOODOO_API_GEM __declspec(dllimport)
-#endif
-
-class IVoodoo3D8;
-class IVoodoo3DDevice8;
-class IVoodoo3DSurface8;
-class IVoodoo3DTexture8;
-/*
-
-namespace VoodooShader
-{
-    namespace Gem
-    {*/
-        /**
-        * Storage struct to hold associated Voodoo @ref Texture "Textures" and 
-        * API texture objects. The RawTexture and RawSurface fields can hold an
-        * OpenGL FBO and texture or DirectX texture and surface.
-        */
-        struct TextureTuple
-        {
-            VoodooShader::TextureRef Texture;
-            LPDIRECT3DTEXTURE9 RawTexture;
-            LPDIRECT3DSURFACE9 RawSurface;
-        };
- /*   };
-};*/
-
-//typedef std::tuple<VoodooShader::TextureRef, LPDIRECT3DTEXTURE9, LPDIRECT3DSURFACE9> TextureTuple;
 
 #endif /*VOODOO_GEM_INCLUDES_HPP*/

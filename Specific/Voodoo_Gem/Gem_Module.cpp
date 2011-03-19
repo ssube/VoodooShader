@@ -1,6 +1,7 @@
 #include "Gem_Module.hpp"
 
 #include "Gem_Adapter.hpp"
+#include "IVoodoo3D8.hpp"
 
 HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 
@@ -28,10 +29,77 @@ D3DPRESENT_PARAMETERS gParams;
 
 VoodooShader::ShaderRef testShader;
 
-void * Gem_D3D8Create(UINT sdkVersion)
+void * WINAPI Gem_D3D8Create(UINT sdkVersion)
 {
-    IDirect3D9 * realObject = Direct3DCreate9(sdkVersion);
-    IVoodoo3D8 * fakeObject = new IVoodoo3D8(realObject);
+    //IDirect3D9 * realObject = Direct3DCreate9(sdkVersion);
+    //IVoodoo3D8 * fakeObject = new IVoodoo3D8(realObject);
 
-    return fakeObject;
+    //return fakeObject;
+
+    VoodooCore->Log
+    (
+        LL_Info,
+        VOODOO_GEM_NAME,
+        "Direct3DCreate8 called, SDK version: %u.", 
+        sdkVersion
+    );
+
+    //Load the real d3d8 dll and get device caps
+    char Path[MAX_PATH];
+    GetSystemDirectoryA (Path, MAX_PATH);
+    strcat_s (Path, MAX_PATH, "\\d3d8.dll");
+
+    HMODULE d3ddll = LoadLibraryA(Path);
+
+    if ( d3ddll == NULL )
+    {
+        VoodooCore->Log
+        (
+            LL_Fatal,
+            VOODOO_GEM_NAME,
+            "Could not load D3D8 library."
+        );
+
+        return NULL;
+    }
+
+    typedef IDirect3D8 * (__stdcall * D3DFunc8)(UINT);
+    D3DFunc8 d3d8func = (D3DFunc8)GetProcAddress(d3ddll, "Direct3DCreate8");
+
+    if (d3d8func == NULL) 
+    {
+        VoodooCore->Log
+        (
+            LL_Fatal, 
+            VOODOO_GEM_NAME, 
+            "Could not find D3D8 create true func."
+         );
+
+        return 0;
+    }
+
+    IDirect3D8 * TempObject = (d3d8func)(sdkVersion);
+    HRESULT hr = TempObject->GetDeviceCaps(0, D3DDEVTYPE_HAL, &d3d8Caps);
+    if (hr != D3D_OK) 
+    { 
+        VoodooCore->Log
+            (
+            LL_Error,
+            VOODOO_GEM_NAME,
+            "Could not get D3D8 caps."
+            );
+    }
+    TempObject->Release();
+
+    if ( d3ddll )
+    {
+        FreeLibrary(d3ddll);
+    }
+
+    // Call DX9 to create a real device with the latest version
+    IDirect3D9 * object = Direct3DCreate9(D3D_SDK_VERSION);
+    // Turn it into a FakeObject and return it.
+    IVoodoo3D8 * vObj = new IVoodoo3D8(object);
+    VoodooObject = vObj;
+    return vObj;
 }

@@ -1,0 +1,80 @@
+<?xml version='1.0'?>
+<?xml-stylesheet type="text/xsl" href="VoodooLog.xsl"?>
+<LogFile  date="20110319"  time="190614"  ticks="0" >
+    <Message level="255"  time="190614"  ticks="0"  module="Voodoo/Logger">Logger created.</Message>
+    <Module name="Voodoo/Hook"  major="0"  minor="1"  patch="2"  rev="126"  debug="0" />
+    <Message level="48"  time="190614"  ticks="0"  module="Voodoo/Hook">Created hook manager attached to 1 threads.</Message>
+    <Message level="48"  time="190624"  ticks="0"  module="Voodoo/Gem">Starting adapter...</Message>
+    <Module name="Voodoo/Gem"  major="0"  minor="2"  patch="0"  rev="126"  debug="0" />
+    <Message level="48"  time="190624"  ticks="0"  module="Voodoo/Gem">Gem loaded into process H:\Morrowind\Morrowind.exe.</Message>
+    <Message level="16"  time="190624"  ticks="0"  module="Voodoo/Hook">Creating hook d3d8create. Redirecting function 10001014 to 00EC1960.</Message>
+    <Message level="48"  time="190624"  ticks="0"  module="Voodoo/Core">Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube&lt;br /&gt;    The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;    This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;    Please see the included license file for more details.&lt;/div&gt;</Message>
+    <Message level="48"  time="190624"  ticks="0"  module="Voodoo/Core">Preparing core components...</Message>
+    <Message level="48"  time="190624"  ticks="0"  module="Voodoo/Core">Core started successfully.</Message>
+    <Module name="MSVC 10"  major="160040219"  minor="0"  patch="0"  rev="1"  debug="1" />
+    <Module name="Voodoo/Core"  major="0"  minor="2"  patch="0"  rev="126"  debug="0" />
+    <Message level="48"  time="190638"  ticks="0"  module="Voodoo/Gem">Direct3DCreate8 called, SDK version: 120.</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::GetAdapterCount() == 2</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::GetAdapterIdentifier(0, 2, 0128E944) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::GetAdapterDisplayMode(0, 0012F5EC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::GetAdapterModeCount(0) == 21</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 0, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 1, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 2, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 3, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 4, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 5, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 6, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 7, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 8, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 9, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 10, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 11, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 12, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 13, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 14, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 15, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 16, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 17, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 18, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 19, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 20, 0012F5DC) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::GetDeviceCaps(0, 1, 0128F4F4) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::GetAdapterModeCount(0) == 21</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::EnumAdapterModes(0, 0, 0012F574) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceType(0, 1, 22, 22, 0) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceType(0, 1, 22, 22, 1) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 1, 1, 20) == -2005530518</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 1, 1, 21) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 70) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 21, 70) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 71) == -2005530518</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 73) == -2005530518</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 75) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 21, 75) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 80) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 21, 80) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 77) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 21, 77) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 79) == -2005530518</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 1, 1, 22) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 70) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 22, 70) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 71) == -2005530518</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 73) == -2005530518</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 75) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 22, 75) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 80) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 22, 80) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 77) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 22, 77) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 79) == -2005530518</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 1, 1, 23) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 70) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 23, 70) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 71) == -2005530518</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 73) == -2005530518</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 75) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDepthStencilMatch(0, 1, 22, 23, 75) == 0</Message>
+    <Message level="16"  time="190643"  ticks="0"  module="Voodoo/Gem">IVoodoo3D8::CheckDeviceFormat(0, 1, 22, 2, 1, 80) == 0</Message>
+</LogFile>

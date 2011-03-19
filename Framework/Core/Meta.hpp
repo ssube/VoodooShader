@@ -72,12 +72,12 @@ namespace VoodooShader
     // Function pointer types
     namespace Functions
     {
-        typedef Logger * (__stdcall * LoggerCreate)(Core *, const char*, bool);
-        typedef HookManager * (__stdcall * HookerCreate)(Core *);
-        typedef void (__stdcall * LoggerDestroy)(Logger *);
-        typedef void (__stdcall * HookerDestroy)(HookManager *);
-        typedef Adapter * (__stdcall * AdapterCreate)(Core *);
-        typedef void (__stdcall * AdapterDestroy)(Adapter *);
+        typedef Logger * (* LoggerCreate)(Core *, const char*, bool);
+        typedef HookManager * (* HookerCreate)(Core *);
+        typedef void (* LoggerDestroy)(Logger *);
+        typedef void (* HookerDestroy)(HookManager *);
+        typedef Adapter * (* AdapterCreate)(Core *);
+        typedef void (* AdapterDestroy)(Adapter *);
     };
 
     typedef std::string String;
@@ -237,7 +237,7 @@ namespace VoodooShader
     {
         LL_Unknown      = 0x00,     /*!< Log level unknown */
         // Logger internal values
-        LL_Initial      = 0x00,     /*!< Initial log level of Logger */
+        LL_Initial      = 0x20,     /*!< Initial log level of Logger */
         LL_Internal     = 0xFF,     /*!< Log level for Logger-internal messages */
         // Working values
         LL_Debug_API    = 0x07,     /*!< Exceptionally verbose debug logging of API calls */
@@ -247,8 +247,6 @@ namespace VoodooShader
         LL_Warning      = 0x50,     /*!< Warning log messages */
         LL_Error        = 0xB0,     /*!< General error log messages */
         LL_Fatal        = 0xFF,     /*!< Fatal error log messages */
-        // Max value
-        LL_Max                      /*!< Enumerator values count */
     };
 
     /**

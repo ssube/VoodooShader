@@ -17,16 +17,21 @@
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
  * developer at peachykeen@voodooshader.com
- \**************************************************************************************************/
+\**************************************************************************************************/
 
 #ifndef VOODOO_GEM_MODULE_HPP
 #define VOODOO_GEM_MODULE_HPP
 
 #include "Gem_Includes.hpp"
-#include "Gem_Converter.hpp"
 #include "Gem_Version.hpp"
 
 #include "MGE/FauxD3D8Header.hpp"
+
+#ifndef VOODOO_IMPORT_GEM
+#    define VOODOO_API_GEM __declspec(dllexport)
+#else
+#    define VOODOO_API_GEM __declspec(dllimport)
+#endif
 
 namespace VoodooShader
 {
@@ -36,7 +41,24 @@ namespace VoodooShader
     }
 }
 
-_Check_return_ void * Gem_D3D8Create(_In_ UINT sdkVersion);
+/**
+ * Storage struct to hold associated Voodoo @ref Texture "Textures" and 
+ * API texture objects. The RawTexture and RawSurface fields can hold an
+ * OpenGL FBO and texture or DirectX texture and surface.
+ */
+struct TextureTuple
+{
+    VoodooShader::TextureRef Texture;
+    LPDIRECT3DTEXTURE9 RawTexture;
+    LPDIRECT3DSURFACE9 RawSurface;
+};
+
+class IVoodoo3D8;
+class IVoodoo3DDevice8;
+class IVoodoo3DSurface8;
+class IVoodoo3DTexture8;
+
+_Check_return_ void * WINAPI Gem_D3D8Create(_In_ UINT sdkVersion);
 
 extern HRESULT DefaultErrorCode;
 

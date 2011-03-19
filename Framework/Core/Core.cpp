@@ -111,33 +111,27 @@ namespace VoodooShader
         // Create and load Logger and HookManager
         String loggerPath = mBasePath + "\\Voodoo_Logger.dll";
 
+        mModuleLogger = LoadLibraryExA(loggerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+
         if ( mModuleLogger == NULL )
         {
-            mModuleLogger = LoadLibraryExA(loggerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-
-            if ( mModuleLogger == NULL )
-            {
-                throw std::exception("Could not load Logger module.");
-            }
-
-            mFuncLoggerCreate  = (Functions::LoggerCreate) GetProcAddress(mModuleLogger, "CreateLogger");
-            mFuncLoggerDestroy = (Functions::LoggerDestroy)GetProcAddress(mModuleLogger, "DestroyLogger");
+            throw std::exception("Could not load Logger module.");
         }
+
+        mFuncLoggerCreate  = (Functions::LoggerCreate) GetProcAddress(mModuleLogger, "CreateLogger");
+        mFuncLoggerDestroy = (Functions::LoggerDestroy)GetProcAddress(mModuleLogger, "DestroyLogger");
 
         String hookerPath = mBasePath + "\\Voodoo_Hook.dll";
 
-        if (  mModuleHooker == NULL )
+        mModuleHooker = LoadLibraryExA(hookerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+
+        if ( mModuleHooker == NULL )
         {
-            mModuleHooker = LoadLibraryExA(hookerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-
-            if ( mModuleHooker == NULL )
-            {
-                throw std::exception("Could not load Hooker module.");
-            }
-
-            mFuncHookerCreate  = (Functions::HookerCreate) GetProcAddress(mModuleHooker, "CreateHooker");
-            mFuncHookerDestroy = (Functions::HookerDestroy)GetProcAddress(mModuleHooker, "DestroyHooker");
+            throw std::exception("Could not load Hooker module.");
         }
+
+        mFuncHookerCreate  = (Functions::HookerCreate) GetProcAddress(mModuleHooker, "CreateHookManager");
+        mFuncHookerDestroy = (Functions::HookerDestroy)GetProcAddress(mModuleHooker, "DestroyHookManager");
     }
 
     void Core::LoadAdapter()

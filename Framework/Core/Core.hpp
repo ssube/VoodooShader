@@ -135,21 +135,6 @@ namespace VoodooShader
          HookManager * GetHookManager();
 
         /**
-         * Attach an Adapter to this Core.
-         *
-         * @param adapter The Adapter to attach (will be used for all graphics 
-         *        calls).
-         *        
-         * @throws Exception if an Adapter is already connected to this Core and
-         *         adapter is a new Adapter. To prevent this, remove the first
-         *         Adapter <em>before</em> binding the second one.
-         */
-        void SetAdapter
-        (
-            _In_opt_ Adapter * adapter
-        );
-
-        /**
          * Retrieve the Adapter attached to this Core.
          *
          * @return A pointer to the Adapter or NULL if no Adapter is attached.

@@ -25,7 +25,7 @@
 #define VOODOO_GEM_NAME              "Voodoo/Gem"
 #define VOODOO_GEM_PRETTYNAME        "Voodoo Gem Adapter"
 #define VOODOO_GEM_VERSION_MAJOR     0
-#define VOODOO_GEM_VERSION_MINOR     1
-#define VOODOO_GEM_VERSION_PATCH     8
+#define VOODOO_GEM_VERSION_MINOR     2
+#define VOODOO_GEM_VERSION_PATCH     0
 #define VOODOO_GEM_VERSION_GITREV    VOODOO_GLOBAL_VERSION_GITREV
 //-----------------------------------------------------------------------------
