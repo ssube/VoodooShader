@@ -262,7 +262,24 @@
  * <p>
  *    As DirectX 9 does not usually allow D32F textures to be read, this may 
  *    require rendering to a second target and using a RGBA32F texture. At this
- *  point, the GBA components are not used, but future versions of Voodoo may
- *  pack additional data into them.
+ *    point, the GBA components are not used, but future versions of Voodoo may
+ *    pack additional data into them.
+ * </p>
+ * 
+ * @section textureloading Texture Loading
+ * <p>
+ *     Texture loading is implemented through an Adapter callback, so Voodoo
+ *     textures can be created with a variety of options or using any number
+ *     of functions.
+ * </p>
+ * <p>
+ *     To simplify getting texture data into memory in the first place, the
+ *     Voodoo filesystem library includes specialized Image loading classes.
+ *     These use DevIL as the loading library, and so support a ridiculous
+ *     number of formats. Among the most useful formats are DDS, PNG and TGA,
+ *     all supporting high resolutions and transparency. Other formats may
+ *     not be as suitable; JPEG and BMP for example are very lossy and
+ *     large, respectively. For a complete listing of supported formats,
+ *     please see the DevIL documentation.
  * </p>
  */

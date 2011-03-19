@@ -98,7 +98,8 @@
       </PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -130,7 +131,8 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <EnablePREfast>true</EnablePREfast>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -160,7 +162,8 @@
       </PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -189,14 +192,14 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Gem_Adapter.cpp" />
     <ClCompile Include="Gem_Module.cpp" />
   </ItemGroup>
@@ -215,12 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Gem.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework.vcxproj">
-      <Project>{a5c09646-da38-4869-82c3-11a66d706c43}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

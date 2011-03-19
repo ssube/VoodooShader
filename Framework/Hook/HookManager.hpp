@@ -38,9 +38,7 @@ namespace VoodooShader
             _Check_return_
             HookManager * CreateHookManager
             (
-                _In_ Core * core,
-                _In_ unsigned long threadsCount,
-                _In_count_(threadsCount) unsigned long * threadsList
+                _In_ Core * core
             );
         
             /**
@@ -65,9 +63,7 @@ namespace VoodooShader
              */
             HookManager
             (
-                _In_ Core * core,
-                _In_ unsigned long threadsCount,
-                _In_count_(threadsCount) unsigned long * threadsList
+                _In_ Core * core
             );
         
             /**

@@ -26,9 +26,9 @@
 
 namespace VoodooShader
 {
-    HookManager * CreateHookManager(_In_ Core * core, _In_ unsigned long threadsCount, _In_count_(threadsCount) unsigned long * threadsList)
+    HookManager * CreateHookManager(_In_ Core * core)
     {
-        return new EasyHook::HookManager(core, threadsCount, threadsList);
+        return new EasyHook::HookManager(core);
     }
 
     void DestroyHookManager( _In_ HookManager * manager )
@@ -38,21 +38,22 @@ namespace VoodooShader
 
     namespace EasyHook
     {
-        HookManager::HookManager(Core * core, unsigned long threadsCount, unsigned long * threadsList)
+        HookManager::HookManager(Core * core)
             : mCore(core)
         {
             mHooks.clear();
 
-            mThreadCount = threadsCount;
+            mThreadCount = 1;
 
             mThreadIDs = new ULONG[mThreadCount];
-            memcpy(mThreadIDs, threadsList, sizeof(unsigned int) * threadsCount);
+            //memcpy(mThreadIDs, threadsList, sizeof(unsigned int) * threadsCount);
+            mThreadIDs[0] = 0;
 
             LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
 
             Version hookVersion = VOODOO_META_VERSION_STRUCT(HOOK);
             mCore->LogModule(hookVersion);
-            mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager attached to %u threads.", threadsCount);
+            mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager attached to %u threads.", mThreadCount);
         }
 
         HookManager::~HookManager()

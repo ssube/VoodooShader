@@ -29,29 +29,39 @@
  * 
  * @section adapterep Entry Point
  * <p>
- *  Each adapter module must export a function with the signature:
+ *  Each adapter module must export a pair of functions, used to create and destroy the Adapter. The
+ *  functions must have the signatures:
  * </p>
  * <p>
- *  <code>bool __stdcall LoadAdapter(HMODULE process)</code>
- * </p>
- *  The export must not be mangled and should have the ordinal 0 if at all possible.
- * </p>
- * <p>
- *  This function must load and perform all early initialization the Adapter requires. If
- *  this startup sequence fails, the function must clean up any resources it allocated,
- *  perform error handling if possible, then return false. If the startup sequence succeeds,
- *  the Adapter should install any function hooks it needs and return true.
+ *  <code>
+ *      VoodooShader::Adapter * __stdcall CreateAdapter( VoodooShader::Core * core);<br />
+ *      void __stdcall DestroyAdapter( VoodooShader::Adapter * adapter);
+ *  </code>
  * </p>
  * <p>
- *  The parameter to the <code>LoadAdapter</code> is the handle of the module that
- *  started the process (usually the executable that was run). This can be used for version
- *  detection or name-checking.
+ *  The exports must not be mangled or have any symbols prepended or appended. It is recommended that
+ *  these functions be simple wrappers for <code>new</code> and <code>delete</code>, with any
+ *  additional initialization performed within the Adapter constructor and destructor if possible.
  * </p>
  * <p>
- *  The LoadAdapter function should perform the minimum initialization needed for the 
- *  Adapter to successfully load. Use of the graphics and Windows APIs is discouraged.
- *  Use of a HookManager to install hooks for later initialization is the preferred form
- *  of finalizing loading.
+ *  The chain of execution for the Voodoo loading processes begins with the dynamic loader, which
+ *  intercepts a single hook function in the target process. The loader then finds and loads the
+ *  Voodoo core, passing the core's binary path and some additional data through. The Core starts
+ *  itself and parses the VoodooConfig.xml file located in the target's startup directory. This
+ *  configuration file specifies the Adapter module to be used, as well as any extended options
+ *  needed. The Core locates and loads the adapter, following the given settings, and calls the
+ *  <code>CreateAdapter</code> function, passing <code>this</code> as the parameter. The Adapter
+ *  may access the Core's creation parameter by calling Core::GetCreationParameters(). 
+ * </p>
+ * <p>
+ *  The <code>DestroyAdapter</code> is later called when the process is shutting down, although
+ *  the Adapter may destroy itself and the Core at an earlier point, if it so chooses. If the
+ *  Core and/or Adapter are still alive when the loader receives a process detach notification,
+ *  the core's destroy function is called. If an Adapter is still bound to the Core, the 
+ *  destructor then calls <code>DestroyAdapter</code>, passing the bound adapter as the parameter.
+ *  The Adapter is responsible for any necessary cleanup at this point. After the adapter is
+ *  destroyed, the hook manager is destroyed, and finally the logger is dumped to disk and
+ *  destroyed.
  * </p>
  * 
  * @section adapteri Interface
@@ -76,14 +86,23 @@
  * 
  * @section intro Intro
  * <p>
- *  The Voodoo Shader Framework is designed to work across many games, some already
- *  incredibly buggy. To prevent Voodoo or any adapter adding bugs, all Voodoo projects
- *  must meet the following code rules.
+ *  The Voodoo Shader Framework is designed to work across many games, created across a wide 
+ *  variety of compilers, graphics libraries, code styles and time periods. To maximize
+ *  stability and speed, both critical to Voodoo's purpose, all Voodoo projects must meet 
+ *  the following code rules. These are designed to eradicate bugs within Voodoo itself
+ *  and provide the most pleasant user and developer experience possible, especially 
+ *  considering the high degree of complexity within Voodoo.
  * </p>
  * <p>
  *  Third-party code that is used in Voodoo, or adapters that are not part of the
  *  official project, do not need to use these rules, but they can rely on Voodoo
- *  following these precisely.
+ *  following them precisely.
+ * </p>
+ * <p>
+ *  Any bugs, potential bugs, performance bottlenecks, possible points of improvement or
+ *  generally questionable code encountered in Voodoo should be reported as soon as possible.
+ *  Please file an issue with as much information as possible in the official Voodoo bug
+ *  tracker.
  * </p>
  * 
  * @section general General Rules

@@ -1,34 +1,12 @@
-/**************************************************************************************************\
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
- * Copyright (c) 2010-2011 by Sean Sube
- *
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
- * Boston, MA  02110-1301 US
- *
- * Support and more information may be found at http://www.voodooshader.com, or by contacting the
- * developer at peachykeen@voodooshader.com
-\**************************************************************************************************/
-
 #include "Gem_Module.hpp"
 
-#include "IVoodoo3D8.hpp"
-#include "IVoodoo3DDevice8.hpp"
-#include "IVoodoo3DSurface8.hpp"
-#include "IVoodoo3DTexture8.hpp"
+#include "Gem_Adapter.hpp"
+
+HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 
 VoodooShader::Core * VoodooCore = NULL;
 VoodooShader::HookManager * VoodooHooker = NULL;
-VoodooShader::Adapter * VoodooGem = NULL;
+VoodooShader::Gem::Adapter * VoodooGem = NULL;
 
 //! @todo Shift most of these globals, except the core and adapter, into the adapter (as members).
 //!        This may work well with functions to set some of the matrices and such. Shifting them
@@ -50,97 +28,10 @@ D3DPRESENT_PARAMETERS gParams;
 
 VoodooShader::ShaderRef testShader;
 
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion);
-
-typedef std::map<const char *, void *> HookPointMap;
-
-extern "C" __declspec(dllexport) bool __stdcall LoadAdapter(HookPointMap * hookPointMap)
+void * Gem_D3D8Create(UINT sdkVersion)
 {
-    if ( VoodooCore == NULL )
-    {
-        VoodooCore = VoodooShader::Core::Create("Voodoo_Gem.xml");
-    }
+    IDirect3D9 * realObject = Direct3DCreate9(sdkVersion);
+    IVoodoo3D8 * fakeObject = new IVoodoo3D8(realObject);
 
-    void * hookPoint = (*hookPointMap)["Direct3DCreate8"];
-
-    VoodooHooker = VoodooCore->GetHookManager();
-
-    return VoodooHooker->CreateHook("Direct3DCreate8", hookPoint, &Voodoo3DCreate8);
+    return fakeObject;
 }
-
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
-{
-    VoodooCore->Log
-    (
-        LL_Info,
-        VOODOO_GEM_NAME,
-        "Direct3DCreate8 called, SDK version: %d.", 
-        sdkVersion
-    );
-
-    //Load the real d3d8 dll and get device caps
-    char Path[MAX_PATH];
-    GetSystemDirectoryA (Path, MAX_PATH);
-    strcat_s (Path, MAX_PATH, "\\d3d8.dll");
-
-    HMODULE d3ddll = LoadLibraryA(Path);
-
-    if ( d3ddll == NULL )
-    {
-        VoodooCore->Log
-        (
-            LL_Fatal,
-            VOODOO_GEM_NAME,
-            "Could not load D3D8 library."
-        );
-
-        return NULL;
-    }
-
-    D3DFunc8 d3d8func = (D3DFunc8)GetProcAddress(d3ddll, "Direct3DCreate8");
-
-    if (d3d8func == NULL) 
-    {
-        VoodooCore->Log
-        (
-            LL_Fatal, 
-            VOODOO_GEM_NAME, 
-            "Could not find D3D8 create true func."
-        );
-
-        return 0;
-    }
-
-    IDirect3D8 * TempObject = (d3d8func)(sdkVersion);
-    HRESULT hr = TempObject->GetDeviceCaps (0, D3DDEVTYPE_HAL, &d3d8Caps);
-    if (hr != D3D_OK) 
-    { 
-        VoodooCore->Log
-        (
-            LL_Error,
-            VOODOO_GEM_NAME,
-            "Could not get D3D8 caps."
-        );
-    }
-    TempObject->Release();
-
-    if ( d3ddll )
-    {
-        FreeLibrary(d3ddll);
-    }
-
-    // Call DX9 to create a real device with the latest version
-    IDirect3D9 * object = Direct3DCreate9(D3D_SDK_VERSION);
-    // Turn it into a FakeObject and return it.
-    IVoodoo3D8 * vObj = new IVoodoo3D8(object);
-    VoodooObject = vObj;
-    return vObj;
-}
-
-// Visual Studio-specific linker directive, forces the function to be exported with and
-// without decoration. The actual symbol is undecorated, but I'd rather allow exceptions
-// handling than use extern "C".
-#pragma comment(linker, "/export:Direct3DCreate8=?Voodoo3DCreate8@@YGPAXI@Z")
-
-//=============================================================================
-

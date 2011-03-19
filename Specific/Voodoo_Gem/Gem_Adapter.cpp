@@ -1,43 +1,31 @@
 
 #include "Gem_Adapter.hpp"
-#include "Gem_Converter.hpp"
 
-#include "Gem_Version.hpp"
+#include "IVoodoo3D8.hpp"
+#include "IVoodoo3DDevice8.hpp"
+#include "IVoodoo3DSurface8.hpp"
+#include "IVoodoo3DTexture8.hpp"
 
 namespace VoodooShader
 {
     namespace Gem
     {
-        Adapter::Adapter(Core * core, LPDIRECT3DDEVICE9 device)
-            : mCore(core), mDevice(device)
+        Adapter * CreateAdapter(Core * core)
         {
-            if ( core == NULL ) 
-            {
-                //Throw(VOODOO_GEM_NAME, "Adapter created with no core.", NULL);
-            } else if ( device == NULL ) {
-                core->Log(LL_Fatal, VOODOO_GEM_NAME, "Adapter created with no device.");
-                return;
-            }
+            return new Adapter(core);
+        }
 
-            device->AddRef(); // Make sure it won't be released while we're using it
+        void DestroyAdapter(Adapter * adapter)
+        {
+            delete adapter;
+        }
 
-            core->LogModule(this->GetVersion());
+        Adapter::Adapter(Core * core)
+            : mCore(core), mDevice(NULL)
+        {
+            mCore->Log(LL_Info, VOODOO_GEM_NAME, "Starting adapter...");
 
-            core->Log(LL_Info, VOODOO_GEM_NAME, "Starting adapter...");
-
-            try
-            {
-                core->SetAdapter(reinterpret_cast<VoodooShader::Adapter*>(this));
-                core->Log(LL_Debug, VOODOO_GEM_NAME, "Core adapter set to this.");
-            } catch ( VoodooShader::Exception & exc ) {
-                core->Log
-                (
-                    LL_Error, 
-                    VOODOO_GEM_NAME, 
-                    "Error setting adapter on core: %s",
-                    exc.Message().c_str()
-                );
-            }
+            mCore->LogModule(this->GetVersion());
 
             // Core version check
             Version coreVersion = core->GetVersion();
@@ -48,11 +36,51 @@ namespace VoodooShader
                 (
                     LL_Warning, 
                     VOODOO_GEM_NAME, 
-                    "Warning: The core module appears to be from a different version. You may experience errors or crashes. Please upgrade all modules to the same version."
+                    "Warning: The core module appears to a different version than this adapter. You may experience errors or crashes. Please upgrade all modules to the same version."
                 );
             }
 
-            HRESULT hr = cgD3D9SetDevice(device);
+            VoodooCore = mCore;
+            VoodooGem = this;
+
+            // Get the handles to the needed hook modules
+            HMODULE procmodule = GetModuleHandle(NULL);
+            HMODULE d3d8module = GetModuleHandle("d3d8.dll");
+
+            void * d3d8hookpoint = (void*)GetProcAddress(d3d8module, "Direct3DCreate8");
+
+            mCore->GetHookManager->CreateHook("d3d8create", d3d8hookpoint, &Gem_D3D8Create);
+        }
+
+        Adapter::~Adapter()
+        {
+            // Clean up any active shaders
+            if ( mBoundFP )
+            {
+                cgD3D9UnbindProgram(mBoundFP);
+            }
+
+            if ( mBoundVP )
+            {
+                cgD3D9UnbindProgram(mBoundVP);
+            }
+
+            cgD3D9UnloadAllPrograms();
+
+            mQuadVerts->Release();
+
+            mDevice->Release();
+
+            mCore->SetAdapter(NULL);
+        }
+
+        void Adapter::SetDevice( _In_ LPDIRECT3DDEVICE9 device )
+        {
+            mDevice = device;
+
+            mDevice->AddRef(); // Make sure it won't be released while we're using it
+
+            HRESULT hr = cgD3D9SetDevice(mDevice);
             if ( !SUCCEEDED(hr) )
             {
                 Throw(VOODOO_GEM_NAME, "Could not set Cg device.", core);
@@ -71,9 +99,9 @@ namespace VoodooShader
             HRESULT errors = cgD3D9GetLastError();
             if ( !SUCCEEDED(errors) )
             {
-                core->Log(LL_Error, VOODOO_GEM_NAME, "Errors setting Cg states.\n");
+                core->Log(LL_Error, VOODOO_GEM_NAME, "Errors setting Cg states.");
             } else {
-                core->Log(LL_Debug, VOODOO_GEM_NAME, "Cg states set successfully.\n");
+                core->Log(LL_Debug, VOODOO_GEM_NAME, "Cg states set successfully.");
             }
 
             // Setup profiles
@@ -192,28 +220,6 @@ namespace VoodooShader
 
                 VoodooCore->Log(LL_Error, VOODOO_GEM_NAME, "Error loading test shader.");
             }
-        }
-
-        Adapter::~Adapter()
-        {
-            // Clean up any active shaders
-            if ( mBoundFP )
-            {
-                cgD3D9UnbindProgram(mBoundFP);
-            }
-
-            if ( mBoundVP )
-            {
-                cgD3D9UnbindProgram(mBoundVP);
-            }
-
-            cgD3D9UnloadAllPrograms();
-
-            mQuadVerts->Release();
-
-            mDevice->Release();
-
-            mCore->SetAdapter(NULL);
         }
 
         Version Adapter::GetVersion()

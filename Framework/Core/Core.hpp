@@ -31,6 +31,30 @@
 namespace VoodooShader
 {
     /**
+     * Creates a new core.
+     * 
+     * @param logfile The log file to use for the core.
+     */
+    _Check_return_
+    VOODOO_API Core * CreateCore
+    (
+        _In_ const char * path
+    );
+        
+    /**
+     * Destroys an existing Core, destroying all resources and the Cg
+     * context associated with the Core. This may invalidate all shaders
+     * and other elements associated with Voodoo. 
+     * 
+     * @warning No cached Voodoo functions or resources should be used after
+     *      the Core they were created with has been destroyed.
+     */
+    VOODOO_API void DestroyCore
+    (
+        _In_ Core * core
+    );
+
+    /**
      * Core engine class for the Voodoo Shader Framework. Provides a flexible, 
      * uniform API for a complete shader framework. Using various @ref Adapter 
      * "adapters", it is possible to tie the Voodoo Core into almost any game or
@@ -40,43 +64,36 @@ namespace VoodooShader
     {
     public:
         /**
-         * Creates a new core.
-         * 
-         * @param logfile The log file to use for the core.
-         */
-        _Check_return_
-        static Core * Create
+        * Create a new Voodoo Core and associated Cg context.
+        *          
+        * @param logfile The filename for this Core's log (will be used by most 
+        *        managers and connected adapters).
+        * @return A reference to the new core.
+        *
+        * @note You can not call this function externally, you must call 
+        *        Core::Create(String) instead.
+        * @note Avoid using more than one core at any point in time. I'm not 
+        *        entirely sure how well the Cg runtime handles this. For most 
+        *        games, a single render context is used, so no more than one 
+        *        adapter and core should be necessary.
+        * @todo Test multi-core/multi-adapter systems. If anyone has info or 
+        *        knows of a game/app that uses multiple D3D/OGL render contexts, 
+        *        please let me know.
+        */
+        Core
         (
-            _In_ String logfile = "VoodooLog.xml"
-        );
-        
-        /**
-         * Destroys an existing Core, destroying all resources and the Cg
-         * context associated with the Core. This may invalidate all shaders
-         * and other elements associated with Voodoo. 
-         * 
-         * @warning No cached Voodoo functions or resources should be used after
-         *      the Core they were created with has been destroyed.
-         */
-        static void Destroy
-        (
-            _In_ Core * core
+            _In_ const char * path
         );
 
         /**
-         * Returns the primary Core or null if no Core has been created.
-         * 
-         * @note The primary core is created when the module is loaded into
-         *          a process.
+         * Default destructor for Voodoo @ref Core "Cores".
          */
-        _Check_return_
-        static Core * GetPrimary();
+        ~Core();
 
         /**
          * Retrieve the Cg context associated with this Core.
          * 
-         * @note Each Voodoo Core is associated with exactly one Cg context 
-         *        (Voodoo acts as an OO-wrapper around Cg with enhanced features).
+         * @note Each Voodoo Core is associated with a Cg context.
          */
         CGcontext GetCGContext();
 
@@ -277,36 +294,24 @@ namespace VoodooShader
 
     private:
         /**
-        * Create a new Voodoo Core and associated Cg context.
-        *          
-        * @param logfile The filename for this Core's log (will be used by most 
-        *        managers and connected adapters).
-        * @return A reference to the new core.
-        *
-        * @note You can not call this function externally, you must call 
-        *        Core::Create(String) instead.
-        * @note Avoid using more than one core at any point in time. I'm not 
-        *        entirely sure how well the Cg runtime handles this. For most 
-        *        games, a single render context is used, so no more than one 
-        *        adapter and core should be necessary.
-        * @todo Test multi-core/multi-adapter systems. If anyone has info or 
-        *        knows of a game/app that uses multiple D3D/OGL render contexts, 
-        *        please let me know.
-        */
-        Core
-        (
-            _In_ String logfile
-        );
-
-        /**
-         * Default destructor for Voodoo @ref Core "Cores".
-         */
-        ~Core();
-
-        /**
          * Load and retrieve functions from the support libraries.
          */
         void LoadSupportLibs();
+        void LoadAdapter();
+
+        String mBasePath;
+        String mAdapterName;
+        String mLogName;
+
+        HMODULE mModuleAdapter;
+        HMODULE mModuleLogger;
+        HMODULE mModuleHooker;
+        Functions::AdapterCreate  mFuncAdapterCreate;
+        Functions::AdapterDestroy mFuncAdapterDestroy;
+        Functions::HookerCreate   mFuncHookerCreate;
+        Functions::HookerDestroy  mFuncHookerDestroy;
+        Functions::LoggerCreate   mFuncLoggerCreate;
+        Functions::LoggerDestroy  mFuncLoggerDestroy;
 
         /**
          * Reference to the currently bound (active) adapter.

@@ -20,22 +20,37 @@
 \**************************************************************************************************/
   
 /**
- * @page voodoosummary Voodoo Shader Framework
+ * @mainpage Voodoo Shader Framework
  * <p>
- *    The Voodoo Shader Framework is designed to provide extensive support for 
- *    shaders and assist in integration, both before and after release.
+ *    The Voodoo Shader Framework is a set of support libraries designed to provide 
+ *    extensive shader integration into graphics applications, both before and after release.
  * </p>
  * @section voodooshaderlib Shader Support
  * <p>
  *    Voodoo uses nVidia's Cg Toolkit to provide a common, simple shader language
- *    and cross-API compiler for widely supported shaders. In addition, Voodoo
- *    implements a second linking stage to offer more powerful features such as
- *    off-screen rendering and targeted shaders, as well as exposing the underlying
- *    data and textures to scripting engines and similar.
+ *    and cross-API compiler for widely supported shaders. Voodoo shaders run under both
+ *    OpenGL and DirectX and can scale over a great variety of hardware, from OpenGL 1.4
+ *    to 3.0 and DirectX 8 to 11. Applications using any of the supported APIs are
+ *    supported within Voodoo, with a near-identical feature set provided across the board.
+ * </p>
+ * <p>
+ *    In addition to fully supporting the Cg language, Voodoo implements a second, internal 
+ *    linking stage to offer more powerful features such as deferred rendering and 
+ *    material shaders, with or without original application support. Voodoo uses features
+ *    such as semantics and annotations to provide these features without adding complexity 
+ *    to the language or breaking compatibility with other shader tools. Voodoo provides a
+ *    set of compiler options to allow shaders to conditionally compile various levels of
+ *    support.
+ * </p>
+ * <p>
+ *    Voodoo fully supports techniques and passes within a shader, as well as various program
+ *    stages. Access to hardware textures and render information is provided through
+ *    application-specific adapters, allowing Voodoo to be tied tightly into a huge number of
+ *    new and existing programs.
  * </p>
  * @section voodoosupportlibs Support Libraries
  * <p>
- *    Voodoo also provides a number of support libraries, many used within Voodoo.
+ *    Voodoo provides a number of support libraries, many used within Voodoo.
  *    These include the Voodoo dynamic loader (capable to dynamically loading the
  *    Voodoo core and an adapter into a running process), a simple filesystem
  *    manager to streamline resource loading, TinyXML-based XML parsing library,
@@ -49,6 +64,23 @@
  *    shader management, although adapters may prefer to handle that internally.
  *    The core implementations of the managers provide a minimal feature set but
  *    are fully functional.
+ * </p>
+ * @section voodooquality Code Quality
+ * <p>
+ *    The Voodoo framework covers an immense scope and tackles an intriguing and
+ *    often complex task. To maximize stability, speed and clarity, all code within
+ *    the Voodoo Shader Framework must meet a set of quality-control standards and
+ *    be fully tested before release. Tests are carried out within the target
+ *    applications, with internal test suites on the way.
+ * </p>
+ * @section voodoologs Logs and Debugging
+ * <p>
+ *    In addition to code testing, Voodoo features an Xml logging library to record
+ *    all actions in detail. The verbosity of the log can be customized, with the
+ *    highest levels recording API calls and their parameters. Errors and warnings
+ *    originating within Voodoo code are always logged, and safeguards are put in
+ *    place to make sure log data is written to disk, even in the event of a fatal
+ *    error or loss of power.
  * </p>
  * 
  * @page License

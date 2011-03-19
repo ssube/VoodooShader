@@ -22,16 +22,13 @@
 #ifndef VOODOO_GEM_DEVICE_HPP
 #define VOODOO_GEM_DEVICE_HPP
 
-#include "Gem_Includes.hpp"
-#include "Gem_Version.hpp"
-
 #include "Gem_Module.hpp"
+#include "Gem_Adapter.hpp"
+
 #include "IVoodoo3DSurface8.hpp"
 #include "IVoodoo3DTexture8.hpp"
 
 using namespace VoodooShader;
-
-static HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 
 /**
  * The core Voodoo wrapper class for D3D8 devices. This class is responsible for processing,

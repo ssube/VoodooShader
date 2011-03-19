@@ -27,13 +27,13 @@
 #include <windows.h>
 #include <strsafe.h>
 
-typedef bool (__stdcall * funcTypeLoadAdapter)(void *);
-typedef bool (__stdcall * funcTypeUnloadAdapter)();
+typedef void * (__stdcall * funcTypeLoad)(const char *);
+typedef void (__stdcall * funcTypeUnload)(void *);
 
-bool LoadAdapter();
-bool UnloadAdapter();
+bool LoadVoodoo();
+bool UnloadVoodoo();
 
-BOOL DllMain
+BOOL WINAPI DllMain
 (
     _In_ void * _HDllHandle, 
     _In_ unsigned _Reason, 

@@ -3,11 +3,15 @@
   <ItemGroup>
     <ClInclude Include="Logger.hpp" />
     <ClInclude Include="Logger_Version.hpp" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Voodoo_Logger.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Voodoo_Logger.rc" />
   </ItemGroup>
 </Project>

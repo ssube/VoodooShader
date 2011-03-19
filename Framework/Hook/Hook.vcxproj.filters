@@ -3,11 +3,15 @@
   <ItemGroup>
     <ClInclude Include="HookManager.hpp" />
     <ClInclude Include="Hook_Version.hpp" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HookManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Voodoo_Hook.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Voodoo_Hook.rc" />
   </ItemGroup>
 </Project>

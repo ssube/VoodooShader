@@ -68,7 +68,8 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -76,6 +77,9 @@
       <AdditionalLibraryDirectories>$(TargetDir)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Voodoo_Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">
     <ClCompile>
@@ -85,7 +89,8 @@
       <EnablePREfast>true</EnablePREfast>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -93,6 +98,9 @@
       <AdditionalLibraryDirectories>$(TargetDir)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Voodoo_Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -102,7 +110,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -112,16 +121,23 @@
       <AdditionalLibraryDirectories>$(TargetDir)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Voodoo_Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Logger.hpp" />
     <ClInclude Include="Logger_Version.hpp" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Voodoo_Logger.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Voodoo_Logger.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

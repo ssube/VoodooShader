@@ -1,43 +1,18 @@
 #include "Loader.hpp"
 
-std::map<const char *, void *> HookPointMap;
+funcTypeLoad funcLoad;
+funcTypeUnload funcUnload;
 
-funcTypeLoadAdapter   funcLoadAdapter;
-funcTypeUnloadAdapter funcUnloadAdapter;
-
-void CreateHookPointMap()
-{
-    HookPointMap.clear();
-
-    HookPointMap["Direct3DCreate8"]    = &Voodoo3DCreate8;
-    HookPointMap["Direct3DCreate9"]    = &Voodoo3DCreate9;
-    HookPointMap["DirectInput8Create"] = &VoodooInput8Create;
-    HookPointMap["DirectSoundCreate8"] = &VoodooSoundCreate8;
-}
+void * core = NULL;
 
 /**
  * Reads the Adapter's name from the Voodoo config file and loads it, if present.
  */
-bool LoadAdapter()
+bool LoadVoodoo()
 {
-    FILE * config = NULL;
     HKEY VoodooPathKey = NULL;
     char VoodooPath[MAX_PATH];
-    char AdapterModule[MAX_PATH];
-
-    errno_t error = fopen_s(&config, "VoodooConfig.xml", "r");
-
-    if ( error != 0 || config == NULL )
-    {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to open config file.", "Loader Error", MB_ICONERROR|MB_OK);
-        return false;
-    }
-
-    if ( !fgets(AdapterModule, MAX_PATH, config) )
-    {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to read adapter from config file.", "Loader Error", MB_ICONERROR|MB_OK);
-        return false;
-    }
+    char VoodooCorePath[MAX_PATH];
 
     LONG keyOpen = RegOpenKeyExA(HKEY_CURRENT_USER, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
 
@@ -64,45 +39,53 @@ bool LoadAdapter()
     }
 
     StringCchCatA(VoodooPath, MAX_PATH, "\\bin\\");
-    StringCchCatA(VoodooPath, MAX_PATH, AdapterModule);
+    StringCchCopyA(VoodooCorePath, MAX_PATH, VoodooPath);
+    StringCchCatA(VoodooCorePath, MAX_PATH, "Voodoo_Core.dll");
 
-    HMODULE adapter = LoadLibraryExA(VoodooPath, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+    HMODULE adapter = LoadLibraryExA(VoodooCorePath, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
     if ( !adapter )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to load adapter DLL.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBoxA(NULL, "Voodoo Loader: Unable to load core DLL.", "Loader Error", MB_ICONERROR|MB_OK);
         return false;
     }
 
-    funcLoadAdapter   = (funcTypeLoadAdapter)  GetProcAddress(adapter, "LoadAdapter");
-    funcUnloadAdapter = (funcTypeUnloadAdapter)GetProcAddress(adapter, "UnloadAdapter");
+    funcLoad   = (funcTypeLoad)  GetProcAddress(adapter, "CreateCore");
+    funcUnload = (funcTypeUnload)GetProcAddress(adapter, "DestroyCore");
 
-    if ( !funcLoadAdapter || !funcUnloadAdapter )
+    if ( funcLoad == NULL )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to find adapter EP.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBoxA(NULL, "Voodoo Loader: Unable to find core EP.", "Loader Error", MB_ICONERROR|MB_OK);
         return false;
     }
 
-    return (*funcLoadAdapter)(&HookPointMap);
+    core = (*funcLoad)(VoodooPath);
+
+    return ( core != NULL );
 }
 
-bool UnloadAdapter()
+bool UnloadVoodoo()
 {
-    return (*funcUnloadAdapter)();
+    (*funcUnload)(core);
+
+    return true;
 }
 
-BOOL DllMain
+BOOL WINAPI DllMain
 (
     _In_ void * _HDllHandle, 
     _In_ unsigned _Reason, 
     _In_opt_ void * _Reserved
 )
 {
+    UNREFERENCED_PARAMETER(_HDllHandle);
+    UNREFERENCED_PARAMETER(_Reserved);
+
     if ( _Reason == DLL_PROCESS_ATTACH )
     {
-        return (BOOL)LoadAdapter();
+        return (BOOL)LoadVoodoo();
     } else if ( _Reason == DLL_PROCESS_DETACH ) {
-        return (BOOL)UnloadAdapter();
+        return (BOOL)UnloadVoodoo();
     }
 }
 

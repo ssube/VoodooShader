@@ -114,7 +114,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)\Framework\Logger</AdditionalIncludeDirectories>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <Link>
       <AdditionalDependencies>cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -150,7 +151,8 @@
       <EnablePREfast>true</EnablePREfast>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)\Framework\Logger</AdditionalIncludeDirectories>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <Link>
       <AdditionalDependencies>cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +188,8 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)\Framework\Logger</AdditionalIncludeDirectories>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <Link>
       <AdditionalDependencies>cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,22 +216,12 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)\Framework\Logger</AdditionalIncludeDirectories>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="dllmain.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
-    </ClCompile>
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="FullscreenManager.cpp" />
     <ClCompile Include="MaterialManager.cpp" />

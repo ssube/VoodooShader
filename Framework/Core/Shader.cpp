@@ -12,14 +12,14 @@ namespace VoodooShader
     {
         this->mEffect = cgCreateEffectFromFile
         (
-            parent->GetCGContext(), 
-            filename.c_str(), 
+            mCore->GetCGContext(), 
+            mName.c_str(), 
             args
         );
 
         if ( !cgIsEffect(this->mEffect) )
         {
-            Throw(VOODOO_CORE_NAME, "Failed to create shader.", parent);
+            //Throw(VOODOO_CORE_NAME, "Failed to create shader.", mCore);
             return;
         }
 

@@ -69,6 +69,17 @@ namespace VoodooShader
 
 #define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__);
 
+    // Function pointer types
+    namespace Functions
+    {
+        typedef Logger * (__stdcall * LoggerCreate)(Core *, const char*, bool);
+        typedef HookManager * (__stdcall * HookerCreate)(Core *);
+        typedef void (__stdcall * LoggerDestroy)(Logger *);
+        typedef void (__stdcall * HookerDestroy)(HookManager *);
+        typedef Adapter * (__stdcall * AdapterCreate)(Core *);
+        typedef void (__stdcall * AdapterDestroy)(Adapter *);
+    };
+
     typedef std::string String;
 
     // Reference-counted pointer types

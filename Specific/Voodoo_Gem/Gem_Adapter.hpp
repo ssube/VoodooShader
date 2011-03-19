@@ -3,9 +3,6 @@
 
 #include "Gem_Includes.hpp"
 
-#include "Gem_Module.hpp"
-#include "IVoodoo3DDevice8.hpp"
-
 namespace VoodooShader
 {
     namespace Gem
@@ -18,30 +15,50 @@ namespace VoodooShader
             FLOAT tu, tv;
         };
 
+        _Check_return_
+            VOODOO_API_GEM VoodooShader::Gem::Adapter * CreateAdapter
+        (
+            _In_ Core * core
+        );
+
+        VOODOO_API_GEM void DestroyAdapter
+        (
+            _In_ VoodooShader::Gem::Adapter * adapter
+        );
+
         class VOODOO_API_GEM Adapter
-            : VoodooShader::Adapter
+            : public VoodooShader::Adapter
         {
 
         public:
-            Adapter(Core * core, LPDIRECT3DDEVICE9 device);
+            Adapter
+            (
+                _In_ Core * core
+            );
+
             ~Adapter();
 
-            Version GetVersion();
+            virtual Version GetVersion();
 
-            bool LoadPass(Pass * pass);
-            void BindPass(PassRef shader);
-            void UnbindPass();
+            virtual bool LoadPass(Pass * pass);
+            virtual void BindPass(PassRef shader);
+            virtual void UnbindPass();
 
-            void DrawQuad(Vertex * vertexData);
+            virtual void DrawQuad(Vertex * vertexData);
 
-            void DrawShader(ShaderRef shader);
+            virtual void DrawShader(ShaderRef shader);
 
-            void ApplyParameter(ParameterRef param);
+            virtual void ApplyParameter(ParameterRef param);
 
-            bool ConnectTexture(ParameterRef param, TextureRef texture);
-            TextureRef CreateTexture(String name, TextureDesc desc);
+            virtual bool ConnectTexture(ParameterRef param, TextureRef texture);
+            virtual TextureRef CreateTexture(String name, TextureDesc desc);
 
-            void HandleError(CGcontext context, CGerror error, void * core);
+            virtual void HandleError(CGcontext context, CGerror error, void * core);
+
+            virtual void SetDevice
+            (
+                _In_ LPDIRECT3DDEVICE9 device
+            );
 
         private:
             Core * mCore;

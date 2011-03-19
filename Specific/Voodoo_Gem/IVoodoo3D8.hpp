@@ -247,7 +247,7 @@ public:
             VoodooDevice = mFakeDevice;
             gParams = mpPresentationParameters;
 
-            VoodooGem = (VoodooShader::Adapter*)new VoodooShader::Gem::Adapter(VoodooCore, mRealDevice);
+            VoodooGem->SetDevice(mRealDevice);
 
             (*ppReturnedDeviceInterface) = (IDirect3DDevice8*)mFakeDevice;
 

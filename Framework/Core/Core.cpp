@@ -1,4 +1,3 @@
-
 #include "Core.hpp"
 
 #include "Adapter.hpp"
@@ -9,17 +8,6 @@
 
 namespace VoodooShader
 {
-    typedef Logger * (__stdcall * funcTypeLoggerCreate)(Core *, const char*, bool);
-    typedef HookManager * (__stdcall * funcTypeHookerCreate)(Core *, unsigned long, unsigned long *);
-    typedef void (__stdcall * funcTypeLoggerDestroy)(Logger *);
-    typedef void (__stdcall * funcTypeHookerDestroy)(HookManager *);
-
-    HMODULE moduleLogger = NULL, moduleHooker = NULL;
-    funcTypeLoggerCreate  funcLoggerCreate  = NULL;
-    funcTypeLoggerDestroy funcLoggerDestroy = NULL;
-    funcTypeHookerCreate  funcHookerCreate  = NULL;
-    funcTypeHookerDestroy funcHookerDestroy = NULL;
-
     #pragma comment(linker, "/EXPORT:CreateCore=?CreateCore@VoodooShader@@YAPAVCore@1@PBD@Z")
     #pragma comment(linker, "/EXPORT:DestroyCore=?DestroyCore@VoodooShader@@YAXPAVCore@1@@Z")
 
@@ -41,22 +29,22 @@ namespace VoodooShader
         mAdapterName = mBasePath + "\\Voodoo_Gem.dll";
 
         this->LoadSupportLibs();
-        this->LoadAdapter();
 
-        this->mLogger = (*funcLoggerCreate)(this, mLogName.c_str(), false);
+        this->mLogger = (*mFuncLoggerCreate)(this, mLogName.c_str(), false);
 
         if ( mLogger == NULL )
         {
             Throw(VOODOO_CORE_NAME, "Unable to create Logger.", this);
         }
 
-        ULONG threads = NULL;
-        this->mHooker = (*funcHookerCreate)(this, 1, &threads);
+        this->mHooker = (*mFuncHookerCreate)(this);
 
         if ( mHooker == NULL )
         {
             Throw(VOODOO_CORE_NAME, "Unable to create Hooker.", this);
         }
+
+        this->LoadAdapter();
 
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "%s", VOODOO_GLOBAL_COPYRIGHT_FULL);
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
@@ -102,14 +90,19 @@ namespace VoodooShader
             cgDestroyContext(this->mCGContext);
         }
 
-        if ( this->mLogger )
+        if ( this->mAdapter )
         {
-            (*funcLoggerDestroy)(mLogger);
+            (*mFuncAdapterDestroy)(mAdapter);
         }
 
         if ( this->mHooker )
         {
-            (*funcHookerDestroy)(mHooker);
+            (*mFuncHookerDestroy)(mHooker);
+        }
+
+        if ( this->mLogger )
+        {
+            (*mFuncLoggerDestroy)(mLogger);
         }
     }
 
@@ -118,38 +111,48 @@ namespace VoodooShader
         // Create and load Logger and HookManager
         String loggerPath = mBasePath + "\\Voodoo_Logger.dll";
 
-        if ( moduleLogger == NULL )
+        if ( mModuleLogger == NULL )
         {
-            HMODULE logger = LoadLibraryExA(loggerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+            mModuleLogger = LoadLibraryExA(loggerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
-            if ( logger == NULL )
+            if ( mModuleLogger == NULL )
             {
                 throw std::exception("Could not load Logger module.");
             }
 
-            funcLoggerCreate  = (funcTypeLoggerCreate) GetProcAddress(logger, "CreateLogger");
-            funcLoggerDestroy = (funcTypeLoggerDestroy)GetProcAddress(logger, "DestroyLogger");
+            mFuncLoggerCreate  = (Functions::LoggerCreate) GetProcAddress(mModuleLogger, "CreateLogger");
+            mFuncLoggerDestroy = (Functions::LoggerDestroy)GetProcAddress(mModuleLogger, "DestroyLogger");
         }
 
         String hookerPath = mBasePath + "\\Voodoo_Hook.dll";
 
-        if ( moduleHooker == NULL )
+        if (  mModuleHooker == NULL )
         {
-            moduleHooker = LoadLibraryExA(hookerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+            mModuleHooker = LoadLibraryExA(hookerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
-            if ( moduleHooker == NULL )
+            if ( mModuleHooker == NULL )
             {
                 throw std::exception("Could not load Hooker module.");
             }
 
-            funcHookerCreate  = (funcTypeHookerCreate) GetProcAddress(moduleHooker, "CreateHooker");
-            funcHookerDestroy = (funcTypeHookerDestroy)GetProcAddress(moduleHooker, "DestroyHooker");
+            mFuncHookerCreate  = (Functions::HookerCreate) GetProcAddress(mModuleHooker, "CreateHooker");
+            mFuncHookerDestroy = (Functions::HookerDestroy)GetProcAddress(mModuleHooker, "DestroyHooker");
         }
     }
 
     void Core::LoadAdapter()
     {
+        mModuleAdapter = LoadLibraryExA(mAdapterName.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+
+        if ( mModuleAdapter == NULL )
+        {
+            throw std::exception("Could not load Adapter module.");
+        }
+
+        mFuncAdapterCreate  = (Functions::AdapterCreate) GetProcAddress(mModuleAdapter, "CreateAdapter");
+        mFuncAdapterDestroy = (Functions::AdapterDestroy)GetProcAddress(mModuleAdapter, "DestroyAdapter");
         
+        mAdapter = (*mFuncAdapterCreate)(this);
     }
 
     CGcontext Core::GetCGContext()

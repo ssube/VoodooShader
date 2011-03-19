@@ -70,7 +70,8 @@
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -78,6 +79,9 @@
       <AdditionalDependencies>EasyHook32.lib;Voodoo_Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>Voodoo_Hook.def</ModuleDefinitionFile>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">
     <ClCompile>
@@ -86,7 +90,8 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -94,6 +99,9 @@
       <AdditionalDependencies>EasyHook32.lib;Voodoo_Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>Voodoo_Hook.def</ModuleDefinitionFile>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -103,7 +111,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
-      <CallingConvention>StdCall</CallingConvention>
+      <CallingConvention>
+      </CallingConvention>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -113,16 +122,23 @@
       <AdditionalDependencies>EasyHook32.lib;Voodoo_Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>Voodoo_Hook.def</ModuleDefinitionFile>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="HookManager.hpp" />
     <ClInclude Include="Hook_Version.hpp" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HookManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Voodoo_Hook.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Voodoo_Hook.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
