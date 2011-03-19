@@ -20,22 +20,30 @@ namespace VoodooShader
     funcTypeHookerCreate  funcHookerCreate  = NULL;
     funcTypeHookerDestroy funcHookerDestroy = NULL;
 
-    Core * Core::Create(String logfile)
+    #pragma comment(linker, "/EXPORT:CreateCore=?CreateCore@VoodooShader@@YAPAVCore@1@PBD@Z")
+    #pragma comment(linker, "/EXPORT:DestroyCore=?DestroyCore@VoodooShader@@YAXPAVCore@1@@Z")
+
+    Core * CreateCore(const char * path)
     {
-        return new Core(logfile);
+        return new Core(path);
     }
 
-    void Core::Destroy(Core * core)
+    void DestroyCore(Core * core)
     {
         delete core;
     }
 
-    Core::Core(String logfile)
+    Core::Core(const char * path)
         : mAdapter(NULL)
     {
-        this->LoadSupportLibs();
+        mBasePath = path;
+        mLogName = "VoodooLog.xml";
+        mAdapterName = mBasePath + "\\Voodoo_Gem.dll";
 
-        this->mLogger = (*funcLoggerCreate)(this, logfile.c_str(), false);
+        this->LoadSupportLibs();
+        this->LoadAdapter();
+
+        this->mLogger = (*funcLoggerCreate)(this, mLogName.c_str(), false);
 
         if ( mLogger == NULL )
         {
@@ -73,8 +81,6 @@ namespace VoodooShader
         this->LogModule(vsver);
 
         this->LogModule(this->GetVersion());
-
-        // 
     }
 
     Core::~Core()
@@ -110,31 +116,40 @@ namespace VoodooShader
     void Core::LoadSupportLibs()
     {
         // Create and load Logger and HookManager
+        String loggerPath = mBasePath + "\\Voodoo_Logger.dll";
+
         if ( moduleLogger == NULL )
         {
-            moduleLogger = LoadLibraryA("Voodoo_Logger.dll");
+            HMODULE logger = LoadLibraryExA(loggerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
-            if ( moduleLogger == NULL )
+            if ( logger == NULL )
             {
-                Throw(VOODOO_CORE_NAME, "Could not load Logger module.", this);
+                throw std::exception("Could not load Logger module.");
             }
 
-            funcLoggerCreate  = (funcTypeLoggerCreate) GetProcAddress(moduleLogger, "CreateLogger");
-            funcLoggerDestroy = (funcTypeLoggerDestroy)GetProcAddress(moduleLogger, "DestroyLogger");
+            funcLoggerCreate  = (funcTypeLoggerCreate) GetProcAddress(logger, "CreateLogger");
+            funcLoggerDestroy = (funcTypeLoggerDestroy)GetProcAddress(logger, "DestroyLogger");
         }
+
+        String hookerPath = mBasePath + "\\Voodoo_Hook.dll";
 
         if ( moduleHooker == NULL )
         {
-            moduleHooker = LoadLibraryA("Voodoo_Hook.dll");
+            moduleHooker = LoadLibraryExA(hookerPath.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
             if ( moduleHooker == NULL )
             {
-                Throw(VOODOO_CORE_NAME, "Could not load Hooker module.", this);
+                throw std::exception("Could not load Hooker module.");
             }
 
             funcHookerCreate  = (funcTypeHookerCreate) GetProcAddress(moduleHooker, "CreateHooker");
             funcHookerDestroy = (funcTypeHookerDestroy)GetProcAddress(moduleHooker, "DestroyHooker");
         }
+    }
+
+    void Core::LoadAdapter()
+    {
+        
     }
 
     CGcontext Core::GetCGContext()
