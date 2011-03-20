@@ -66,9 +66,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Testbed", "Utilities\Testbe
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogViewer", "Utilities\LogViewer\LogViewer.csproj", "{82C4257D-3F4D-4F7D-A0B6-0282C044E7E7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{14D338AC-3555-4742-9F1C-FEBEF90021A5} = {14D338AC-3555-4742-9F1C-FEBEF90021A5}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Core", "Framework\Core\Voodoo_Core.vcxproj", "{A5C09646-DA38-4869-82C3-11A66D706C43}"
 EndProject
@@ -366,9 +363,9 @@ Global
 		{089DE4CD-7134-42A8-9673-2EE03832AEF6} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

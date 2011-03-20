@@ -154,9 +154,13 @@ public:
     {
         HRESULT hr = mRealObject->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d",
-            Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, 
-            hr);  
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d",
+            Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, hr
+        );  
 
         return hr;
     }
@@ -172,9 +176,13 @@ public:
     {
         HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDeviceType(%u, %u, %u, %u, %u) == %d",
-            Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed, 
-            hr);
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::CheckDeviceType(%u, %u, %u, %u, %u) == %d",
+            Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed, hr
+        );
 
         return hr;
     }
@@ -195,7 +203,7 @@ public:
         mpPresentationParameters.Flags = pPresentationParameters->Flags;
 
         //! @todo Included because it was in MGE, test if this is necessary.
-        if( mpPresentationParameters.Flags & D3DPRESENTFLAG_LOCKABLE_BACKBUFFER )
+        if ( mpPresentationParameters.Flags & D3DPRESENTFLAG_LOCKABLE_BACKBUFFER )
         {
             mpPresentationParameters.Flags ^= D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
         }
@@ -337,11 +345,11 @@ public:
             ::CopyMemory (pIdentifier, &realIdentifier, 1024);
             pIdentifier->DeviceId            = realIdentifier.DeviceId;
             pIdentifier->DeviceIdentifier    = realIdentifier.DeviceIdentifier;
-            pIdentifier->DriverVersion        = realIdentifier.DriverVersion;
+            pIdentifier->DriverVersion       = realIdentifier.DriverVersion;
             pIdentifier->Revision            = realIdentifier.Revision;
             pIdentifier->SubSysId            = realIdentifier.SubSysId;
             pIdentifier->VendorId            = realIdentifier.VendorId;
-            pIdentifier->WHQLLevel            = realIdentifier.WHQLLevel;
+            pIdentifier->WHQLLevel           = realIdentifier.WHQLLevel;
         }
 
         return hr;
@@ -354,8 +362,13 @@ public:
     {
         UINT r = mRealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::GetAdapterModeCount(%d) == %d",
-            Adapter, r);
+        VoodooCore->Log
+        (
+            LL_Debug, 
+            VOODOO_GEM_NAME, 
+            "IVoodoo3D8::GetAdapterModeCount(%d) == %d",
+            Adapter, r
+        );
 
         return r;
     }

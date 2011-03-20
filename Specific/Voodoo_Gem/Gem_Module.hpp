@@ -92,5 +92,6 @@ extern VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;
 extern D3DPRESENT_PARAMETERS gParams;
 
 extern VoodooShader::String gLastFilename;
+extern bool gNextTexture;
 
 #endif /*VOODOO_GEM_MODULE_HPP*/

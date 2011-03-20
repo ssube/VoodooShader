@@ -3,6 +3,8 @@
 #include "Gem_Adapter.hpp"
 #include "IVoodoo3D8.hpp"
 
+#include <regex>
+
 HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 
 VoodooShader::Core * VoodooCore = NULL;
@@ -29,6 +31,7 @@ D3DPRESENT_PARAMETERS gParams;
 
 VoodooShader::ShaderRef testShader;
 VoodooShader::String gLastFilename;
+bool gNextTexture = false;
 
 void * WINAPI Gem_D3D8Create(UINT sdkVersion)
 {
@@ -120,6 +123,21 @@ __out HANDLE WINAPI Gem_CreateFileA
     HANDLE file = CreateFileA(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 
     gLastFilename = lpFileName;
+
+    try
+    {
+        std::tr1::regex imageformat(".*\\.(dds|tga|bmp|targa)");
+        gNextTexture = std::tr1::regex_match(gLastFilename, imageformat);
+    } catch ( std::tr1::regex_error & error ) {
+        VoodooCore->Log
+        (
+            LL_Error,
+            VOODOO_GEM_NAME,
+            "Regex error: %s.",
+            error.what()
+        );
+        gNextTexture = false;
+    }
 
     if ( VoodooCore )
     {

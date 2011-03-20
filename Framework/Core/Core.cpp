@@ -25,7 +25,7 @@ namespace VoodooShader
         : mAdapter(NULL)
     {
         mBasePath = path;
-        mLogName = "VoodooLog.xml";
+        mLogName = "VoodooLog";
         mAdapterName = mBasePath + "\\Voodoo_Gem.dll";
 
         this->LoadSupportLibs();

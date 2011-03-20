@@ -55,11 +55,14 @@ public:
             device, texture, this
         );
 
-        try
+        if ( gNextTexture )
         {
-            mVoodooTexture = VoodooCore->AddTexture(mName, this);
-        } catch ( Exception & exc ) {
-            UNREFERENCED_PARAMETER(exc);
+            try
+            {
+                mVoodooTexture = VoodooCore->AddTexture(mName, this);
+            } catch ( Exception & exc ) {
+                UNREFERENCED_PARAMETER(exc);
+            }
         }
     }
 

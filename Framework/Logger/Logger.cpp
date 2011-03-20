@@ -29,6 +29,10 @@ namespace VoodooShader
                 flags |= ios_base::trunc;
             }
 
+            char fullname[MAX_PATH];
+            StringCchCopyA(fullname, MAX_PATH, filename);
+            StringCchCatA(fullname, MAX_PATH, ".xmllog");
+
             this->mLogFile.open(filename, flags);
 
             if ( !this->mLogFile.is_open() )
@@ -41,7 +45,7 @@ namespace VoodooShader
             this->mLogFile << 
                 "<?xml version='1.0'?>\n" <<
                 "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
-                "<LogFile "; 
+                "<VoodooLog "; 
                     this->LogDate(); 
                     this->LogTime(); 
                     this->LogTicks();
@@ -54,10 +58,9 @@ namespace VoodooShader
         Logger::~Logger()
         {
             this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger destroyed.");
-            if ( this->mLogFile.is_open() )
+            if ( this->mLogFile )
             {
-                this->mLogFile << "</LogFile>\n";
-                this->mLogFile.close();
+                this->Close();
             }
             if ( this->mLocalTime )
             {
@@ -67,6 +70,8 @@ namespace VoodooShader
 
         void Logger::LogTime()
         {
+            if ( mLogFile == NULL ) return;
+
             time_t now = time(NULL);
 
             if ( localtime_s(this->mLocalTime, &now) == 0 )
@@ -89,6 +94,8 @@ namespace VoodooShader
 
         void Logger::LogDate()
         {
+            if ( mLogFile == NULL ) return;
+
             time_t now = time(NULL);
 
             if ( localtime_s(this->mLocalTime, &now) == 0 )
@@ -111,6 +118,8 @@ namespace VoodooShader
 
         void Logger::LogTicks()
         {
+            if ( mLogFile == NULL ) return;
+
             char stamp[32];
             sprintf_s
             (
@@ -127,6 +136,8 @@ namespace VoodooShader
             Version version
         )
         {
+            if ( mLogFile == NULL ) return;
+
             this->mLogFile << 
                 "    <Module name=\"" << version.Name << "\" " <<
                 " major=\"" << version.Major << "\" " <<
@@ -149,6 +160,7 @@ namespace VoodooShader
         void Logger::Log(size_t level, const char * module, const char * msg, ...)
         {
             if ( level < mLogLevel ) return;
+            if ( mLogFile == NULL ) return;
 
             va_list args;
             char buffer[4096];
@@ -159,16 +171,17 @@ namespace VoodooShader
             va_end(args);
         
             this->mLogFile << 
-                "    <Message level=\"" << level << "\" ";
+                "    <Message severity=\"" << level << "\" ";
             this->LogTime();
             this->LogTicks();
             this->mLogFile << 
-                " module=\"" << module << "\">" << buffer << "</Message>\n";
+                " source=\"" << module << "\">" << buffer << "</Message>\n";
         }
 
         void Logger::LogList(size_t level, const char * module, const char * msg, va_list args)
         {
             if ( level < mLogLevel ) return;
+            if ( mLogFile == NULL ) return;
 
             char buffer[4096];
 
@@ -176,10 +189,10 @@ namespace VoodooShader
             buffer[4095] = 0;
 
             this->mLogFile << 
-                "    <Message level=\"" << level << "\" ";
+                "    <Message severity=\"" << level << "\" ";
             this->LogTime();
             this->LogTicks();
-            this->mLogFile <<" module=\"" << module << "\">" << buffer << "</Message>\n";
+            this->mLogFile <<" source=\"" << module << "\">" << buffer << "</Message>\n";
         }
 
         void Logger::Dump()
@@ -189,10 +202,9 @@ namespace VoodooShader
 
         bool Logger::Open(const char* filename)
         {
-            if ( this->mLogFile.is_open() )
+            if ( this->mLogFile != NULL )
             {
-                this->mLogFile << "</LogFile>\n";
-                this->mLogFile.close();
+                this->Close();
             }
 
             this->mLogFile.open(filename, ios_base::out|ios_base::trunc);
@@ -202,14 +214,14 @@ namespace VoodooShader
                 this->mLogFile << 
                     "<?xml version='1.0'?>\n" <<
                     "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
-                    "<LogFile "; 
+                    "<VoodooLog "; 
                 this->LogDate(); 
                 this->LogTime(); 
                 this->LogTicks();
                 this->mLogFile << 
                     ">\n";
 
-                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger: Log file opened by Logger::Open.");
+                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file opened by Logger::Open.");
                 return true;
             } else {
                 return false;
@@ -218,11 +230,13 @@ namespace VoodooShader
 
         void Logger::Close()
         {
-            if ( this->mLogFile.is_open() )
+            if ( this->mLogFile && this->mLogFile.is_open() )
             {
-                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger: Log file closed by Logger::Close.");
+                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file closed by Logger::Close.");
+                this->mLogFile << "</VoodooLog>\n";
                 this->mLogFile.close();
             }
+            mLogFile = NULL;
         }
     }
 }
