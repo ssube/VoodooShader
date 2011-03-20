@@ -59,6 +59,16 @@ class IVoodoo3DSurface8;
 class IVoodoo3DTexture8;
 
 _Check_return_ void * WINAPI Gem_D3D8Create(_In_ UINT sdkVersion);
+__out HANDLE WINAPI Gem_CreateFileA
+(
+    __in LPCSTR lpFileName, 
+    __in DWORD dwDesiredAccess, 
+    __in DWORD dwShareMode, 
+    __in_opt LPSECURITY_ATTRIBUTES lpSecurityAttributes, 
+    __in DWORD dwCreationDisposition, 
+    __in DWORD dwFlagsAndAttributes, 
+    __in_opt HANDLE hTemplateFile
+);
 
 extern HRESULT DefaultErrorCode;
 
@@ -80,5 +90,7 @@ extern std::map<VoodooShader::String, TextureTuple> gTextures;
 extern VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;
 
 extern D3DPRESENT_PARAMETERS gParams;
+
+extern VoodooShader::String gLastFilename;
 
 #endif /*VOODOO_GEM_MODULE_HPP*/

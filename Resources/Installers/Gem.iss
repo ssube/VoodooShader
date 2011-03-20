@@ -4,7 +4,7 @@
 [Setup]
 AppID={{B657ACEC-FAEF-4eef-B7ED-6A25ED68FB96}
 AppName=Voodoo/Gem
-AppVersion=0.1
+AppVersion=0.2
 AppPublisher=Sean Sube (peachykeen)
 AppPublisherURL=http://www.voodooshader.com/
 AppSupportURL=http://www.voodooshader.com/
@@ -16,7 +16,7 @@ Compression=lzma/Max
 SolidCompression=true
 MinVersion=0,5.1
 AppCopyright=Copyright © 2010 by Sean Sube
-AppVerName=Voodoo Shader Framework version 0.1
+AppVerName=Voodoo Shader Framework version 0.2
 PrivilegesRequired=none
 AllowCancelDuringInstall=true
 ChangesEnvironment=false
@@ -25,16 +25,15 @@ ShowLanguageDialog=no
 DisableDirPage=yes
 AlwaysShowDirOnReadyPage=false
 VersionInfoProductName=Voodoo/Gem
-VersionInfoProductVersion=0.1.5.71
-VersionInfoTextVersion=0.1.0.71
-VersionInfoVersion=0.1.0.71
+VersionInfoProductVersion=0.2.0.127
+VersionInfoTextVersion=0.2.0.127
+VersionInfoVersion=0.2.0.127
 
 [Languages]
 Name: english; MessagesFile: compiler:Default.isl
 
 [Files]
-Source: M:\VoodooShader\bin\Gem_Redirect.dll; DestDir: {reg:HKLM\SOFTWARE\Bethesda Softworks\Morrowind,Installed Path|C:\Morrowind}; DestName: d3d8.dll; Components: adapter; 
-Source: M:\VoodooShader\bin\Gem_Redirect_d.dll; DestDir: {reg:HKLM\SOFTWARE\Bethesda Softworks\Morrowind,Installed Path|C:\Morrowind}; DestName: d3d8.dll; Components: adapter/debug; 
+Source: M:\VoodooShader\bin\cgD3D9.dll; DestDir: {app}\bin; Components: core; 
 Source: M:\VoodooShader\Resources\Shaders\test.cgfx; DestDir: {reg:HKLM\SOFTWARE\Bethesda Softworks\Morrowind,Installed Path|C:\Morrowind}; Components: adapter; 
 Source: M:\VoodooShader\Resources\Readmes\README_GEM; DestDir: {reg:HKCU\SOFTWARE\VoodooShader,Path|{reg:HKLM\SOFTWARE\VoodooShader,Path|C:\VoodooShader}}\docs; Components: adapter;
 Source: M:\VoodooShader\bin\Voodoo_Gem.dll; DestDir: {reg:HKCU\SOFTWARE\VoodooShader,Path|{reg:HKLM\SOFTWARE\VoodooShader,Path|C:\VoodooShader}}\bin; Components: adapter; 

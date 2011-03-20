@@ -89,7 +89,7 @@ namespace VoodooShader
              */
             virtual void SetDevice
             (
-                _In_ LPDIRECT3DDEVICE9 device
+                _In_opt_ LPDIRECT3DDEVICE9 device
             );
 
         private:

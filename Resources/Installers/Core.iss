@@ -4,7 +4,7 @@
 [Setup]
 AppID={{F954DF67-68BD-4633-88EC-CDE9AF0C1253}
 AppName=Voodoo Shader Framework
-AppVersion=0.1
+AppVersion=0.2
 AppPublisher=Sean Sube (peachykeen)
 AppPublisherURL=http://www.voodooshader.com/
 AppSupportURL=http://www.voodooshader.com/
@@ -16,7 +16,7 @@ Compression=lzma/Ultra
 SolidCompression=true
 MinVersion=0,5.1
 AppCopyright=Copyright © 2010 by Sean Sube
-AppVerName=Voodoo Shader Framework version 0.1
+AppVerName=Voodoo Shader Framework version 0.2
 PrivilegesRequired=none
 AllowCancelDuringInstall=true
 ChangesEnvironment=false
@@ -24,9 +24,9 @@ AllowUNCPath=false
 ShowLanguageDialog=no
 LicenseFile=LICENSE
 VersionInfoProductName=Voodoo Shader Framework
-VersionInfoProductVersion=0.1.8.71
-VersionInfoTextVersion=0.1.1.71
-VersionInfoVersion=0.1.1.71
+VersionInfoProductVersion=0.2.1.127
+VersionInfoTextVersion=0.2.1.127
+VersionInfoVersion=0.2.1.127
 
 [Languages]
 Name: english; MessagesFile: compiler:Default.isl
@@ -35,7 +35,6 @@ Name: english; MessagesFile: compiler:Default.isl
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: M:\VoodooShader\bin\cgD3D9.dll; DestDir: {app}\bin; Components: core; 
 Source: M:\VoodooShader\bin\cg.dll; DestDir: {app}\bin; Components: core;
 Source: M:\VoodooShader\bin\Voodoo_Core.dll; DestDir: {app}\bin;  Components: core; 
 Source: M:\VoodooShader\bin\Voodoo_DX9.dll; DestDir: {app}\bin;  Components: core; 

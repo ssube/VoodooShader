@@ -73,6 +73,21 @@ public:
             "IVoodoo3DDevice8::IVoodoo3DDevice8(%p) == %p",
             realDevice, this
         );
+
+        VoodooGem->SetDevice(realDevice);
+    }
+
+    ~IVoodoo3DDevice8()
+    {
+        VoodooCore->Log
+        (
+            LL_Debug,
+            VOODOO_GEM_NAME,
+            "IVoodoo3DDevice8::~IVoodoo3DDevice8(%p)",
+            this
+        );
+
+        VoodooGem->SetDevice(NULL);
     }
 
     // IVoodoo3DDevice8 methods

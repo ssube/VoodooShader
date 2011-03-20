@@ -28,6 +28,7 @@ VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;
 D3DPRESENT_PARAMETERS gParams;
 
 VoodooShader::ShaderRef testShader;
+VoodooShader::String gLastFilename;
 
 void * WINAPI Gem_D3D8Create(UINT sdkVersion)
 {
@@ -102,4 +103,35 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
     IVoodoo3D8 * vObj = new IVoodoo3D8(object);
     VoodooObject = vObj;
     return vObj;
+}
+
+__out HANDLE WINAPI Gem_CreateFileA
+(
+    __in LPCSTR lpFileName, 
+    __in DWORD dwDesiredAccess, 
+    __in DWORD dwShareMode, 
+    __in_opt LPSECURITY_ATTRIBUTES lpSecurityAttributes, 
+    __in DWORD dwCreationDisposition, 
+    __in DWORD dwFlagsAndAttributes, 
+    __in_opt HANDLE hTemplateFile
+)
+{
+    //StringCchCopyA(createFileName, MAX_PATH, lpFileName);
+    HANDLE file = CreateFileA(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+
+    gLastFilename = lpFileName;
+
+    if ( VoodooCore )
+    {
+        VoodooCore->Log
+        (
+            LL_Info_API,
+            VOODOO_GEM_NAME,
+            "CreateFileA(%s, %u, %u, %p, %u, %u, %p) == %p",
+            lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes,
+            dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile, file
+        );
+    }
+
+    return file;
 }

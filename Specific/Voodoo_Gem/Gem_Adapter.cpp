@@ -24,7 +24,7 @@ namespace VoodooShader
         #pragma comment(linker, "/EXPORT:DestroyAdapter=?DestroyAdapter@Gem@VoodooShader@@YAXPAVAdapter@12@@Z")
 
         Adapter::Adapter(Core * core)
-            : mCore(core), mDevice(NULL)
+            : mCore(core), mDevice(NULL), mQuadVerts(NULL), mBoundFP(NULL), mBoundVP(NULL)
         {
             mCore->Log(LL_Info, VOODOO_GEM_NAME, "Starting adapter...");
 
@@ -63,6 +63,7 @@ namespace VoodooShader
 
                 HookManager * hooker = mCore->GetHookManager();
                 hooker->CreateHook("d3d8create", d3d8hookpoint, &Gem_D3D8Create);
+                hooker->CreateHook("createfile", &CreateFileA, &Gem_CreateFileA);
             }
         }
 
@@ -71,7 +72,7 @@ namespace VoodooShader
             this->SetDevice(NULL);
         }
 
-        void Adapter::SetDevice( _In_ LPDIRECT3DDEVICE9 device )
+        void Adapter::SetDevice( _In_opt_ LPDIRECT3DDEVICE9 device )
         {
             if ( mQuadVerts )
             {

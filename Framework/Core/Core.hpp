@@ -228,7 +228,7 @@ namespace VoodooShader
          */
         void RemoveTexture
         (
-            _In_ TextureRef texture
+            _In_ String texture
         );
 
         /**

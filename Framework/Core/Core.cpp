@@ -73,7 +73,20 @@ namespace VoodooShader
 
     Core::~Core()
     {
-        this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Stopping...");
+        if ( this->mAdapter )
+        {
+            (*mFuncAdapterDestroy)(mAdapter);
+        }
+
+        if ( this->mHooker )
+        {
+            (*mFuncHookerDestroy)(mHooker);
+        }
+
+        if ( this->mLogger )
+        {
+            (*mFuncLoggerDestroy)(mLogger);
+        }
 
         if ( this->mManagerFS )
         {
@@ -88,21 +101,6 @@ namespace VoodooShader
         if ( cgIsContext(this->mCGContext) )
         {
             cgDestroyContext(this->mCGContext);
-        }
-
-        if ( this->mAdapter )
-        {
-            (*mFuncAdapterDestroy)(mAdapter);
-        }
-
-        if ( this->mHooker )
-        {
-            (*mFuncHookerDestroy)(mHooker);
-        }
-
-        if ( this->mLogger )
-        {
-            (*mFuncLoggerDestroy)(mLogger);
         }
     }
 
@@ -194,16 +192,6 @@ namespace VoodooShader
     )
     {
         this->mLogger->LogModule(version);
-    }
-
-    void Core::SetAdapter(Adapter * adapter)
-    {
-        if ( this->mAdapter && adapter )
-        {
-            Throw(VOODOO_CORE_NAME, "Attempted to set adapter when one is already set.", this);
-        }
-
-        this->mAdapter = adapter;
     }
 
     ShaderRef Core::CreateShader(String filename, const char ** args)
@@ -308,6 +296,15 @@ namespace VoodooShader
             }    
         } else {    
             return ParameterRef();        
+        }
+    }
+
+    void Core::RemoveTexture( _In_ String texture )
+    {
+        TextureMap::iterator location = mTextures.find(texture);
+        if ( location != mTextures.end() )
+        {
+            mTextures.erase(location);
         }
     }
         

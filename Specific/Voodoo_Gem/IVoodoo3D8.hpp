@@ -247,8 +247,6 @@ public:
             VoodooDevice = mFakeDevice;
             gParams = mpPresentationParameters;
 
-            VoodooGem->SetDevice(mRealDevice);
-
             (*ppReturnedDeviceInterface) = (IDirect3DDevice8*)mFakeDevice;
 
             return hr;

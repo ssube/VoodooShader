@@ -40,10 +40,12 @@ class IVoodoo3DTexture8
 private:
     IVoodoo3DDevice8 * mDevice;
     IDirect3DTexture9 * mRealTexture;
+    String mName;
+    TextureRef mVoodooTexture;
 
 public:
     IVoodoo3DTexture8(IVoodoo3DDevice8 * device, IDirect3DTexture9 * texture)
-        : mDevice(device), mRealTexture(texture)
+        : mDevice(device), mRealTexture(texture), mName(gLastFilename)
     {
         VoodooCore->Log
         (
@@ -52,6 +54,18 @@ public:
             "IVoodoo3DTexture8::IVoodoo3DTexture8(%p, %p) == %p",
             device, texture, this
         );
+
+        try
+        {
+            mVoodooTexture = VoodooCore->AddTexture(mName, this);
+        } catch ( Exception & exc ) {
+            UNREFERENCED_PARAMETER(exc);
+        }
+    }
+
+    ~IVoodoo3DTexture8()
+    {
+        VoodooCore->RemoveTexture(mName);
     }
 
     inline IDirect3DTexture9 * RealTexture()
