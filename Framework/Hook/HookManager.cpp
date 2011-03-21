@@ -51,9 +51,9 @@ namespace VoodooShader
 
             LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
 
+            mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", mThreadCount);
             Version hookVersion = VOODOO_META_VERSION_STRUCT(HOOK);
             mCore->LogModule(hookVersion);
-            mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager attached to %u threads.", mThreadCount);
         }
 
         HookManager::~HookManager()

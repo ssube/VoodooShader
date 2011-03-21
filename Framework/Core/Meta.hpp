@@ -67,17 +67,19 @@ namespace VoodooShader
 
     class Converter;
 
-#define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__);
+    struct TextureDesc;
+    struct Version;
+    struct Module;
+
+#define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
 
     // Function pointer types
     namespace Functions
     {
-        typedef Logger * (* LoggerCreate)(Core *, const char*, bool);
-        typedef HookManager * (* HookerCreate)(Core *);
-        typedef void (* LoggerDestroy)(Logger *);
-        typedef void (* HookerDestroy)(HookManager *);
-        typedef Adapter * (* AdapterCreate)(Core *);
-        typedef void (* AdapterDestroy)(Adapter *);
+        typedef int         (*CountFunc  )();
+        typedef const char* (*InfoFunc   )(int);
+        typedef void*       (*CreateFunc )(int, Core*);
+        typedef void        (*DestroyFunc)(void*);
     };
 
     typedef std::string String;
@@ -121,6 +123,7 @@ namespace VoodooShader
     typedef std::map<String, CGeffect>          CGEffectMap;
     typedef std::vector<String>                 StringVector;
     typedef std::list<String>                   StringList;
+    typedef std::map<String, Module>            ModuleMap;
 
     /**
      * Texture formats for use by @ref VoodooShader::Texture "Textures",
@@ -274,6 +277,20 @@ namespace VoodooShader
         long Rev;
         bool Debug;
     };
+
+    /**
+     * Contains the handle to a loaded library and function pointers for
+     * creation and destruction.
+     */
+     struct Module
+     {
+        bool Owned;
+        HMODULE Handle;
+        Functions::CountFunc   ClassCount;
+        Functions::InfoFunc    ClassInfo;  
+        Functions::CreateFunc  ClassCreate;
+        Functions::DestroyFunc ClassDestroy;
+     };
 };
 
 #endif /*VOODOO_META_HPP*/

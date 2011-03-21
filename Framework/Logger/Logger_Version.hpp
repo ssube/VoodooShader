@@ -27,5 +27,5 @@
 #define VOODOO_LOGGER_VERSION_MAJOR     0
 #define VOODOO_LOGGER_VERSION_MINOR     1
 #define VOODOO_LOGGER_VERSION_PATCH     3
-#define VOODOO_LOGGER_VERSION_GITREV    VOODOO_GLOBAL_VERSION_GITREV
+#define VOODOO_LOGGER_VERSION_REV       VOODOO_GLOBAL_VERSION_REV   
 //--------------------------------------------------------------------------------

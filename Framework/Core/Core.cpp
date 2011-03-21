@@ -65,8 +65,10 @@ namespace VoodooShader
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Core started successfully.");
 
         // Log extended build information
-        Version vsver = { "MSVC 10", _MSC_FULL_VER, 0, 0, _MSC_BUILD, VOODOO_DEBUG_VALUE };
+        Version vsver = VOODOO_META_VERSION_STRUCT(VC);
         this->LogModule(vsver);
+        Version cgver = VOODOO_META_VERSION_STRUCT(CG);
+        this->LogModule(cgver);
 
         this->LogModule(this->GetVersion());
     }

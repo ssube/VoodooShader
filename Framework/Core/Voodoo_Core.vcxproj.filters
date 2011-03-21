@@ -8,6 +8,7 @@
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="ModuleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adapter.hpp" />
@@ -35,6 +36,7 @@
     </ClInclude>
     <ClInclude Include="HookManager.hpp" />
     <ClInclude Include="Logger.hpp" />
+    <ClInclude Include="ModuleManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Core.rc" />

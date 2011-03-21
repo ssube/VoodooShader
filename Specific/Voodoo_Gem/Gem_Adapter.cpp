@@ -33,7 +33,7 @@ namespace VoodooShader
             // Core version check
             Version coreVersion = core->GetVersion();
 
-            if ( coreVersion.Rev != VOODOO_GLOBAL_VERSION_GITREV )
+            if ( coreVersion.Rev != VOODOO_GLOBAL_VERSION_REV    )
             {
                 core->Log
                 (

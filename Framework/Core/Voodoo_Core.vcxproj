@@ -153,6 +153,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)\Framework\Logger</AdditionalIncludeDirectories>
       <CallingConvention>
       </CallingConvention>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -225,6 +226,7 @@
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="FullscreenManager.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
+    <ClCompile Include="ModuleManager.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -243,6 +245,7 @@
     <ClInclude Include="Logger.hpp" />
     <ClInclude Include="MaterialManager.hpp" />
     <ClInclude Include="Meta.hpp" />
+    <ClInclude Include="ModuleManager.hpp" />
     <ClInclude Include="Parameter.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.hpp" />

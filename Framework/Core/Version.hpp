@@ -27,22 +27,24 @@
 #define VOODOO_META_STRING(arg) VOODOO_META__STRING(arg)
 
 #ifdef _DEBUG
-#    define VOODOO_META_DEBUG_STRING " (DEBUG)"
+#   define VOODOO_META_DEBUG_BOOL true
+#   define VOODOO_META_DEBUG_STRING " (DEBUG)"
 #else
-#    define VOODOO_META_DEBUG_STRING
+#   define VOODOO_META_DEBUG_BOOL false
+#   define VOODOO_META_DEBUG_STRING
 #endif
 
 #define VOODOO_META_VERSION_CHAIN(token)\
     VOODOO_##token##_VERSION_MAJOR,\
     VOODOO_##token##_VERSION_MINOR,\
     VOODOO_##token##_VERSION_PATCH,\
-    VOODOO_##token##_VERSION_GITREV
+    VOODOO_##token##_VERSION_REV   
 
 #define VOODOO_META_STRING_VERSION_BASIC(token)\
     VOODOO_META_STRING(VOODOO_##token##_VERSION_MAJOR) "."\
     VOODOO_META_STRING(VOODOO_##token##_VERSION_MINOR) "."\
     VOODOO_META_STRING(VOODOO_##token##_VERSION_PATCH) "."\
-    VOODOO_META_STRING(VOODOO_##token##_VERSION_GITREV)\
+    VOODOO_META_STRING(VOODOO_##token##_VERSION_REV)\
     VOODOO_META_DEBUG_STRING
 
 #define VOODOO_META_STRING_VERSION_FULL(token)\
@@ -52,20 +54,21 @@
 #define VOODOO_META_STRING_NAME_FULL(token) VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING
 
 #define VOODOO_META_VERSION_STRUCT(token)\
-    { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token) }
+    { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }
 //-----------------------------------------------------------------------------
 
 
 // Global defs ----------------------------------------------------------------
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     2
-#define VOODOO_GLOBAL_VERSION_GITREV    127
+#define VOODOO_GLOBaL_VERSION_PATCH     0
+#define VOODOO_GLOBAL_VERSION_REV       127
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   "Copyright (c) 2010-2011 by Sean Sube"
 #define VOODOO_GLOBAL_COPYRIGHT_FULL\
-    "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube&lt;br /&gt;\
-    The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\
-    This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;\
-    Please see the included license file for more details.&lt;/div&gt;"
+    "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.\n"\
+    "The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.\n"\
+    "This is free software and you are welcome to redistribute it under certain conditions.\n"\
+    "Please see the included license file for more details."
 //-----------------------------------------------------------------------------
 
 
@@ -75,17 +78,25 @@
 #define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR
 #define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR
 #define VOODOO_CORE_VERSION_PATCH       1
-#define VOODOO_CORE_VERSION_GITREV      VOODOO_GLOBAL_VERSION_GITREV
+#define VOODOO_CORE_VERSION_REV         VOODOO_GLOBAL_VERSION_REV   
 //-----------------------------------------------------------------------------
 
 
 // External defs --------------------------------------------------------------
+//  Cg
 #define VOODOO_CG_NAME                  "Cg"
 #define VOODOO_CG_PRETTYNAME            "nVidia Cg Toolkit (July 2010)"
 #define VOODOO_CG_VERSION_MAJOR         3
 #define VOODOO_CG_VERSION_MINOR         0
 #define VOODOO_CG_VERSION_PATCH         0
-#define VOODOO_CG_VERSION_GITREV        7   
+#define VOODOO_CG_VERSION_REV           7   
+//  VC
+#define VOODOO_VC_NAME                  "MSVC"
+#define VOODOO_VC_PRETTYNAME            "Microsoft Visual C++"
+#define VOODOO_VC_VERSION_MAJOR         _MSC_VER
+#define VOODOO_VC_VERSION_MINOR         0
+#define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER
+#define VOODOO_VC_VERSION_REV           _MSC_BUILD
 //----------------------------------------------------------------------------- 
 
 #endif /*VOODOO_VERSION_HPP*/

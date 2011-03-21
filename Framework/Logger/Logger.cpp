@@ -2,6 +2,10 @@
 
 #include "Logger_Version.hpp"
 
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <strsafe.h>
+
 using namespace std;
 
 namespace VoodooShader
@@ -33,7 +37,7 @@ namespace VoodooShader
             StringCchCopyA(fullname, MAX_PATH, filename);
             StringCchCatA(fullname, MAX_PATH, ".xmllog");
 
-            this->mLogFile.open(filename, flags);
+            this->mLogFile.open(fullname, flags);
 
             if ( !this->mLogFile.is_open() )
             {
@@ -53,12 +57,17 @@ namespace VoodooShader
                 ">\n";
 
             this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger created.");
+
+            // Log version
+            Version loggerver = VOODOO_META_VERSION_STRUCT(LOGGER);
+            this->LogModule(loggerver);
         }
 
         Logger::~Logger()
         {
             this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger destroyed.");
-            if ( this->mLogFile )
+
+            if ( this->mLogFile.is_open() )
             {
                 this->Close();
             }
@@ -70,7 +79,7 @@ namespace VoodooShader
 
         void Logger::LogTime()
         {
-            if ( mLogFile == NULL ) return;
+            if ( !this->mLogFile.is_open() ) return;
 
             time_t now = time(NULL);
 
@@ -94,7 +103,7 @@ namespace VoodooShader
 
         void Logger::LogDate()
         {
-            if ( mLogFile == NULL ) return;
+            if ( !this->mLogFile.is_open() ) return;
 
             time_t now = time(NULL);
 
@@ -118,15 +127,14 @@ namespace VoodooShader
 
         void Logger::LogTicks()
         {
-            if ( mLogFile == NULL ) return;
+            if ( !this->mLogFile.is_open() ) return;
 
             char stamp[32];
             sprintf_s
             (
                 stamp, 32,
                 " ticks=\"%u\" ",
-                //GetTickCount()
-                0
+                GetTickCount()
             );
             this->mLogFile << stamp;
         }
@@ -136,7 +144,7 @@ namespace VoodooShader
             Version version
         )
         {
-            if ( mLogFile == NULL ) return;
+            if ( !this->mLogFile.is_open() ) return;
 
             this->mLogFile << 
                 "    <Module name=\"" << version.Name << "\" " <<
@@ -149,6 +157,8 @@ namespace VoodooShader
 
         void Logger::SetBufferSize(unsigned int bytes)
         {
+            if ( !this->mLogFile.is_open() ) return;
+
             this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
         }
 
@@ -160,7 +170,7 @@ namespace VoodooShader
         void Logger::Log(size_t level, const char * module, const char * msg, ...)
         {
             if ( level < mLogLevel ) return;
-            if ( mLogFile == NULL ) return;
+            if ( !this->mLogFile.is_open() ) return;
 
             va_list args;
             char buffer[4096];
@@ -181,7 +191,7 @@ namespace VoodooShader
         void Logger::LogList(size_t level, const char * module, const char * msg, va_list args)
         {
             if ( level < mLogLevel ) return;
-            if ( mLogFile == NULL ) return;
+            if ( !this->mLogFile.is_open() ) return;
 
             char buffer[4096];
 
@@ -202,7 +212,7 @@ namespace VoodooShader
 
         bool Logger::Open(const char* filename)
         {
-            if ( this->mLogFile != NULL )
+            if ( this->mLogFile.is_open() )
             {
                 this->Close();
             }
@@ -230,13 +240,12 @@ namespace VoodooShader
 
         void Logger::Close()
         {
-            if ( this->mLogFile && this->mLogFile.is_open() )
+            if ( this->mLogFile.is_open() )
             {
                 this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file closed by Logger::Close.");
                 this->mLogFile << "</VoodooLog>\n";
                 this->mLogFile.close();
             }
-            mLogFile = NULL;
         }
     }
 }

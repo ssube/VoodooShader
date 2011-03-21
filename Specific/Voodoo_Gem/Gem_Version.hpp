@@ -27,5 +27,5 @@
 #define VOODOO_GEM_VERSION_MAJOR     0
 #define VOODOO_GEM_VERSION_MINOR     2
 #define VOODOO_GEM_VERSION_PATCH     0
-#define VOODOO_GEM_VERSION_GITREV    VOODOO_GLOBAL_VERSION_GITREV
+#define VOODOO_GEM_VERSION_REV       VOODOO_GLOBAL_VERSION_REV   
 //-----------------------------------------------------------------------------
