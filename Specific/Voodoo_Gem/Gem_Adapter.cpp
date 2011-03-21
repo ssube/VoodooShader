@@ -59,7 +59,7 @@ namespace VoodooShader
 
             if ( d3d8module )
             {
-                void * d3d8hookpoint = (void*)GetProcAddress(d3d8module, "Direct3DCreate8");
+                void * d3d8hookpoint = mCore->GetModuleManager()->FindFunction("d3d8.dll", "Direct3DCreate8");
 
                 HookManager * hooker = mCore->GetHookManager();
                 hooker->CreateHook("d3d8create", d3d8hookpoint, &Gem_D3D8Create);

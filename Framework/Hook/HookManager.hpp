@@ -30,25 +30,31 @@ namespace VoodooShader
     {
         typedef std::map<std::string, void*> HookMap;
 
-        extern "C"
-        {
-            /**
-             * Creates a new HookManager bound to the current process.
-             */
-            _Check_return_
-            HookManager * CreateHookManager
-            (
-                _In_ Core * core
-            );
-        
-            /**
-             * Removes all hooks and cleans up the HookManager.
-             */
-            void DestroyHookManager
-            (
-                _In_ HookManager * manager
-            );
-        }
+        bool RegisterModule
+        (
+            _In_ Core * core, 
+            _In_ Module * module
+        );
+
+        int API_ClassCount();
+
+        const char * API_ClassInfo
+        (
+            _In_ int number
+        );
+
+        void * API_ClassCreate
+        (
+            _In_ int number, 
+            _In_ Core * core
+        );
+
+        void API_ClassDestroy
+        (
+            _In_ int number, 
+            _In_ void * inst 
+        );
+
 
         /**
          * Handles function-level hooks, redirecting existing functions and calls into

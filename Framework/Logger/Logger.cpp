@@ -10,21 +10,96 @@ using namespace std;
 
 namespace VoodooShader
 {
-    Logger * CreateLogger( _In_ Core * core, _In_ const char * filename, _In_ bool append )
-    {
-        return new XmlLogger::Logger(core, filename, append);
-    }
-
-    void DestroyLogger( _In_ Logger * logger )
-    {
-        delete logger;
-    }
-
     namespace XmlLogger
     {
-        Logger::Logger(Core * core, const char * filename, bool append)
+        bool RegisterModule
+        (
+            _In_ Core * core, 
+            _In_ Module * module
+        )
+        {
+            module->SetFunction(FT_ClassCount,   &API_ClassCount  );
+            module->SetFunction(FT_ClassInfo,    &API_ClassInfo   );
+            module->SetFunction(FT_ClassCreate,  &API_ClassCreate );
+            module->SetFunction(FT_ClassDestroy, &API_ClassDestroy);
+
+            //Version loggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
+            //core->LogModule(loggerVersion);
+
+            return true;
+        }
+
+        int API_ClassCount()
+        {
+            return 1;
+        }
+
+        const char * API_ClassInfo
+        (
+            _In_ int number
+        )
+        {
+            if ( number == 0 )
+            {
+                return "Logger";
+            } else {
+                return NULL;
+            }
+        }
+
+        void * API_ClassCreate
+        (
+            _In_ int number, 
+            _In_ Core * core
+        )
+        {
+            if ( number == 0 )
+            {
+                return new XmlLogger::Logger(core);
+            } else {
+                return NULL;
+            }
+        }
+
+        void API_ClassDestroy
+        (
+            _In_ int number, 
+            _In_ void * inst 
+        )
+        {
+            if ( number == 0 )
+            {
+                delete inst;
+            }
+        }
+
+        Logger::Logger(Core * core)
             : mCore(core), mLogLevel(LL_Initial)
         {
+            this->mLocalTime = new tm();
+        }
+
+        Logger::~Logger()
+        {
+            this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger destroyed.");
+
+            if ( this->mLogFile.is_open() )
+            {
+                this->Close();
+            }
+            if ( this->mLocalTime )
+            {
+                delete this->mLocalTime;
+            }
+        }
+
+        bool Logger::Open(const char* filename, bool append)
+        {
+            if ( this->mLogFile.is_open() )
+            {
+                this->Close();
+            }
+
             unsigned int flags = ios_base::out;
             if ( append )
             {
@@ -39,41 +114,36 @@ namespace VoodooShader
 
             this->mLogFile.open(fullname, flags);
 
-            if ( !this->mLogFile.is_open() )
-            {
-                Throw(VOODOO_LOGGER_NAME, "Could not open log file!", mCore);
-            }
-
-            this->mLocalTime = new tm();
-
-            this->mLogFile << 
-                "<?xml version='1.0'?>\n" <<
-                "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
-                "<VoodooLog "; 
-                    this->LogDate(); 
-                    this->LogTime(); 
-                    this->LogTicks();
-            this->mLogFile << 
-                ">\n";
-
-            this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger created.");
-
-            // Log version
-            Version loggerver = VOODOO_META_VERSION_STRUCT(LOGGER);
-            this->LogModule(loggerver);
-        }
-
-        Logger::~Logger()
-        {
-            this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger destroyed.");
-
             if ( this->mLogFile.is_open() )
             {
-                this->Close();
+                this->mLogFile << 
+                    "<?xml version='1.0'?>\n" <<
+                    "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
+                    "<VoodooLog "; 
+                this->LogDate(); 
+                this->LogTime(); 
+                this->LogTicks();
+                this->mLogFile << 
+                    ">\n";
+
+                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file opened by Logger::Open.");
+
+                Version loggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
+                this->LogModule(loggerVersion);
+
+                return true;
+            } else {
+                return false;
             }
-            if ( this->mLocalTime )
+        }
+
+        void Logger::Close()
+        {
+            if ( this->mLogFile.is_open() )
             {
-                delete this->mLocalTime;
+                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file closed by Logger::Close.");
+                this->mLogFile << "</VoodooLog>\n";
+                this->mLogFile.close();
             }
         }
 
@@ -208,44 +278,6 @@ namespace VoodooShader
         void Logger::Dump()
         {
             this->mLogFile.flush();
-        }
-
-        bool Logger::Open(const char* filename)
-        {
-            if ( this->mLogFile.is_open() )
-            {
-                this->Close();
-            }
-
-            this->mLogFile.open(filename, ios_base::out|ios_base::trunc);
-
-            if ( this->mLogFile.is_open() )
-            {
-                this->mLogFile << 
-                    "<?xml version='1.0'?>\n" <<
-                    "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
-                    "<VoodooLog "; 
-                this->LogDate(); 
-                this->LogTime(); 
-                this->LogTicks();
-                this->mLogFile << 
-                    ">\n";
-
-                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file opened by Logger::Open.");
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        void Logger::Close()
-        {
-            if ( this->mLogFile.is_open() )
-            {
-                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file closed by Logger::Close.");
-                this->mLogFile << "</VoodooLog>\n";
-                this->mLogFile.close();
-            }
         }
     }
 }

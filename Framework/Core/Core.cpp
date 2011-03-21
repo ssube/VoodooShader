@@ -36,7 +36,7 @@ namespace VoodooShader
         }
 
         mLogName = "VoodooLog";
-        this->mLogger->Open(mLogName.c_str());
+        this->mLogger->Open(mLogName.c_str(), false);
 
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "%s", VOODOO_GLOBAL_COPYRIGHT_FULL);
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
@@ -135,6 +135,11 @@ namespace VoodooShader
     HookManager * Core::GetHookManager()
     {
         return mHooker;
+    }
+
+    ModuleManager * Core::GetModuleManager()
+    {
+        return mModManager;
     }
 
     void Core::Log(LogLevel level, const char * module, const char * msg, ...)

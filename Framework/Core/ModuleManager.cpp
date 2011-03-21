@@ -125,6 +125,30 @@ namespace VoodooShader
         }
     }
 
+    void Module::SetFunction( _In_ FunctionType type, _In_ void * ptr )
+    {
+        using namespace Functions;
+
+        switch ( type )
+        {
+        case FT_ClassCount:
+            mClassCount = (CountFunc)ptr;
+            break;
+        case FT_ClassInfo:
+            mClassInfo = (InfoFunc)ptr;
+            break;
+        case FT_ClassCreate:
+            mClassCreate = (CreateFunc)ptr;
+            break;
+        case FT_ClassDestroy:
+            mClassDestroy = (DestroyFunc)ptr;
+            break;
+        case FT_Unknown:
+        default:
+            break;
+        }
+    }
+
     int Module::ClassCount()
     {
         if ( mClassCount == NULL )

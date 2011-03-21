@@ -1,5 +1,4 @@
 LIBRARY
 
 EXPORTS
-CreateHookManager = CreateHookManager
-DestroyHookManager = DestroyHookManager
+RegisterModule=RegisterModule

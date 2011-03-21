@@ -40,35 +40,33 @@
 
 namespace VoodooShader
 {
-    /**
-     * Default constructor, opens a log file with the given name and mode.
-     *
-     * @param core The Core to bind this Logger to.
-     * @param filename Name of the log file to open.
-     * @param append If log file already exists, append to contents (the 
-     *        default value is false, which will truncate an existing file).
-     * @throws Exception if the log file cannot be opened.
-     */
-    _Check_return_
-    Logger * CreateLogger
-    (
-        _In_ Core * core,
-        _In_ const char * filename, 
-        _In_ bool append
-    );
-        
-    /** 
-     * Default destructor, flushes and closes the log file (if open).
-     * 
-     * @param logger The Logger to be destroyed.
-     */
-    void DestroyLogger
-    (
-        _In_ Logger * logger
-    );
-
     namespace XmlLogger
     {
+        bool RegisterModule
+        (
+            _In_ Core * core, 
+            _In_ Module * module
+        );
+
+        int API_ClassCount();
+
+        const char * API_ClassInfo
+        (
+            _In_ int number
+        );
+
+        void * API_ClassCreate
+        (
+            _In_ int number, 
+            _In_ Core * core
+        );
+
+        void API_ClassDestroy
+        (
+            _In_ int number, 
+            _In_ void * inst 
+        );
+
         /**
          * Log management class, capable of opening, closing, writing to and 
          * dumping log files. Throws on problems opening the log
@@ -93,15 +91,31 @@ namespace VoodooShader
              */
             Logger
             (
-                _In_ Core * core,
-                _In_ const char * filename, 
-                _In_ bool append
+                _In_ Core * core
             );
 
             /** 
              * Default destructor, flushes and closes the log file (if open).
              */
             ~Logger();
+
+            /**
+             * Opens a file for use by this Logger.
+             *
+             * @param filename The name of the file to open (may contain an absolute
+             *        or relative path).
+             * @return Success of the open operation.
+             */
+            bool Open
+            (
+                _In_ const char * filename, 
+                _In_ bool append
+            );
+
+            /**
+             * Closes the log file, if one is open.
+             */
+            void Close();
 
             /**
              * Set the default minimum message level. Messages below this level will
@@ -220,23 +234,6 @@ namespace VoodooShader
              *        during fatal crashes.
              */
             void Dump();
-
-            /**
-             * Opens a file for use by this Logger.
-             *
-             * @param filename The name of the file to open (may contain an absolute
-             *        or relative path).
-             * @return Success of the open operation.
-             */
-            bool Open
-            (
-                _In_ const char * filename
-            );
-
-            /**
-             * Closes the log file, if one is open.
-             */
-            void Close();
 
         private:
             Core * mCore;

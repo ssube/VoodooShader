@@ -37,7 +37,7 @@ namespace VoodooShader
      * Provides a clean framework for loading and unloading modules in core, as
      * well as retrieving symbols and modules from memory. 
      */
-    class ModuleManager
+    class VOODOO_API ModuleManager
     {
     public:
         ModuleManager
@@ -84,7 +84,7 @@ namespace VoodooShader
      * Contains the handle to a loaded library and function pointers for
      * creation and destruction.
      */
-     class Module
+     class VOODOO_API Module
      {
      public:
         Module
@@ -97,6 +97,12 @@ namespace VoodooShader
         bool Register
         (
             _In_ Core * core
+        );
+
+        void SetFunction
+        (
+            _In_ FunctionType type,
+            _In_ void * ptr
         );
 
         int ClassCount();

@@ -136,6 +136,8 @@ namespace VoodooShader
          */
          HookManager * GetHookManager();
 
+         ModuleManager * GetModuleManager();
+
         /**
          * Retrieve the Adapter attached to this Core.
          *

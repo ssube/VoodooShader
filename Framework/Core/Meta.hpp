@@ -250,6 +250,16 @@ namespace VoodooShader
         LL_Fatal        = 0xFF,     /*!< Fatal error log messages */
     };
 
+    enum FunctionType
+    {
+        FT_Unknown = 0x00,
+        FT_ClassCount,
+        FT_ClassInfo,
+        FT_ClassCreate,
+        FT_ClassDestroy,
+        FT_Count
+    };
+
     /**
      * Describes a texture, including size and format.
      */

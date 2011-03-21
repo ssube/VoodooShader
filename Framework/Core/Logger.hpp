@@ -30,6 +30,24 @@ namespace VoodooShader
     {
     public:
         /**
+         * Opens a file for use by this Logger.
+         *
+         * @param filename The name of the file to open (may contain an absolute
+         *        or relative path).
+         * @return Success of the open operation.
+         */
+        virtual bool Open
+        (
+            _In_ const char * filename,
+            _In_ bool append
+        ) = 0;
+
+        /**
+         * Closes the log file, if one is open.
+         */
+        virtual void Close() = 0;
+
+        /**
          * Set the default minimum message level. Messages below this level will
          * not be logged.
          *
@@ -146,22 +164,5 @@ namespace VoodooShader
          *        during fatal crashes.
          */
         virtual void Dump() = 0;
-
-        /**
-         * Opens a file for use by this Logger.
-         *
-         * @param filename The name of the file to open (may contain an absolute
-         *        or relative path).
-         * @return Success of the open operation.
-         */
-        virtual bool Open
-        (
-            _In_ const char * filename
-        ) = 0;
-
-        /**
-         * Closes the log file, if one is open.
-         */
-        virtual void Close() = 0;
     };
 }

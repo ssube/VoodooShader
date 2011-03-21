@@ -26,18 +26,54 @@
 
 namespace VoodooShader
 {
-    HookManager * CreateHookManager(_In_ Core * core)
-    {
-        return new EasyHook::HookManager(core);
-    }
-
-    void DestroyHookManager( _In_ HookManager * manager )
-    {
-        delete manager;
-    }
-
     namespace EasyHook
     {
+        bool RegisterModule(_In_ Core * core, _In_ Module * module)
+        {
+            module->SetFunction(FT_ClassCount,   &API_ClassCount  );
+            module->SetFunction(FT_ClassInfo,    &API_ClassInfo   );
+            module->SetFunction(FT_ClassCreate,  &API_ClassCreate );
+            module->SetFunction(FT_ClassDestroy, &API_ClassDestroy);
+
+            Version hookVersion = VOODOO_META_VERSION_STRUCT(HOOK);
+            core->LogModule(hookVersion);
+
+            return true;
+        }
+
+        int API_ClassCount()
+        {
+            return 1;
+        }
+
+        const char * API_ClassInfo(_In_ int number)
+        {
+            if ( number == 0 )
+            {
+                return "HookManager";
+            } else {
+                return NULL;
+            }
+        }
+
+        void * API_ClassCreate(_In_ int number, _In_ Core * core)
+        {
+            if ( number == 0 )
+            {
+                return new EasyHook::HookManager(core);
+            } else {
+                return NULL;
+            }
+        }
+
+        void API_ClassDestroy(_In_ int number, _In_ void * inst )
+        {
+            if ( number == 0 )
+            {
+                delete inst;
+            }
+        }
+
         HookManager::HookManager(Core * core)
             : mCore(core)
         {

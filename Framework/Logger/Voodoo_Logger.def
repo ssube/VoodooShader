@@ -1,5 +1,4 @@
 LIBRARY
 
 EXPORTS
-CreateLogger = CreateLogger
-DestroyLogger = DestroyLogger
+RegisterModule=RegisterModule
