@@ -43,55 +43,50 @@
 
 namespace VoodooShader
 {
-    class Core;
-
     class Adapter;
-    class Logger;
-    class HookManager;
-
-    class FullscreenManager;
-    class MaterialManager;
-
-    class Shader;
-    class Texture;
-    
-    class Technique;
-    class Pass;
-    class Parameter;
-
-    class FileSystem;
-    class File;
-    class Image;
-
-    class Exception;
-
     class Converter;
-
+    class Core;
+    class Exception;
+    class File;
+    class FileSystem;
+    class FullscreenManager;
+    class HookManager;
+    class Image;
+    class Logger;
+    class MaterialManager;
+    class Module;
+    class ModuleManager;
+    class Parameter;
+    class Pass;
+    class Technique;
+    class Texture;
+    class Shader;
+    
     struct TextureDesc;
     struct Version;
-    struct Module;
 
 #define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
 
     // Function pointer types
     namespace Functions
     {
-        typedef int         (*CountFunc  )();
-        typedef const char* (*InfoFunc   )(int);
-        typedef void*       (*CreateFunc )(int, Core*);
-        typedef void        (*DestroyFunc)(void*);
+        typedef bool         (*RegFunc    )(Core *, Module *);
+        typedef int          (*CountFunc  )();
+        typedef const char * (*InfoFunc   )(int);
+        typedef void *       (*CreateFunc )(int, Core *);
+        typedef void         (*DestroyFunc)(int, void *);
     };
 
     typedef std::string String;
 
     // Reference-counted pointer types
-    typedef std::shared_ptr<Shader>             ShaderRef;
-    typedef std::shared_ptr<Texture>            TextureRef;
-    typedef std::shared_ptr<Technique>          TechniqueRef;
-    typedef std::shared_ptr<Pass>               PassRef;
-    typedef std::shared_ptr<Parameter>          ParameterRef;
     typedef std::shared_ptr<File>               FileRef;
     typedef std::shared_ptr<Image>              ImageRef;
+    typedef std::shared_ptr<Parameter>          ParameterRef;
+    typedef std::shared_ptr<Pass>               PassRef;
+    typedef std::shared_ptr<Shader>             ShaderRef;
+    typedef std::shared_ptr<Technique>          TechniqueRef;
+    typedef std::shared_ptr<Texture>            TextureRef;
 
     // Shader collections
     typedef std::map<String, ShaderRef>         ShaderMap;
@@ -118,12 +113,15 @@ namespace VoodooShader
     typedef std::list<TextureRef>               TextureList;
     typedef std::vector<TextureRef>             TextureVector;
 
+    // Module management types
+    typedef std::shared_ptr<Module>             ModuleRef;
+    typedef std::map<String, ModuleRef>         ModuleMap;
+    typedef std::pair<ModuleRef, int>           ClassID;
+    typedef std::map<String, ClassID>           ClassMap;
+
     // Miscellaneous collections
     typedef std::map<TextureRef, ShaderRef>     MaterialMap;
     typedef std::map<String, CGeffect>          CGEffectMap;
-    typedef std::vector<String>                 StringVector;
-    typedef std::list<String>                   StringList;
-    typedef std::map<String, Module>            ModuleMap;
 
     /**
      * Texture formats for use by @ref VoodooShader::Texture "Textures",
@@ -277,20 +275,6 @@ namespace VoodooShader
         long Rev;
         bool Debug;
     };
-
-    /**
-     * Contains the handle to a loaded library and function pointers for
-     * creation and destruction.
-     */
-     struct Module
-     {
-        bool Owned;
-        HMODULE Handle;
-        Functions::CountFunc   ClassCount;
-        Functions::InfoFunc    ClassInfo;  
-        Functions::CreateFunc  ClassCreate;
-        Functions::DestroyFunc ClassDestroy;
-     };
 };
 
 #endif /*VOODOO_META_HPP*/

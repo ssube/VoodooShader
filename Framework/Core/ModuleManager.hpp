@@ -26,8 +26,8 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_ADAPTER_HPP
-#define VOODOO_ADAPTER_HPP
+#ifndef VOODOO_MODULEMANAGER_HPP
+#define VOODOO_MODULEMANAGER_HPP
 
 #include "Meta.hpp"
 
@@ -47,21 +47,27 @@ namespace VoodooShader
 
         ~ModuleManager();
 
-        _Check_return_
-        Module * LoadModule
+        ModuleRef LoadModule
         (
-            _In_ String name
-            _In_ bool absolute = false
+            _In_ String name,
+            _In_ bool absolute = false,
             _In_ bool prepend = false
         );
 
-        void UnloadModule
+        _Check_return_
+        void * CreateClass
         (
-            _In_ Module * module
+            _In_ String name
+        );
+
+        void DestroyClass
+        (
+            _In_ String name,
+            _In_ void * inst
         );
 
         _Check_return_
-        void * GetFunction
+        void * FindFunction
         (
             _In_ String module,
             _In_ String name
@@ -69,8 +75,58 @@ namespace VoodooShader
 
     private:
         Core * mCore;
+        String mBasePath;
         ModuleMap mModules;
+        ClassMap mClasses;
     };
+
+    /**
+     * Contains the handle to a loaded library and function pointers for
+     * creation and destruction.
+     */
+     class Module
+     {
+     public:
+        Module
+        (
+            _In_ String path
+        );
+
+        ~Module();
+        
+        bool Register
+        (
+            _In_ Core * core
+        );
+
+        int ClassCount();
+
+        const char * ClassInfo
+        (
+            _In_ int number
+        );
+
+        void * CreateClass
+        (
+            _In_ int number,
+            _In_ Core * core
+        );
+
+        void DestroyClass
+        (
+            _In_ int number,
+            _In_ void * inst
+        );
+
+     private:
+        bool mOwned;
+        HMODULE mHandle;
+        Functions::RegFunc     mRegModule;
+        Functions::CountFunc   mClassCount;
+        Functions::InfoFunc    mClassInfo;  
+        Functions::CreateFunc  mClassCreate;
+        Functions::DestroyFunc mClassDestroy;
+     };
 }
 
-#endif /*VOODOO_ADAPTER_HPP*/
+#endif /*VOODOO_MODULEMANAGER_HPP*/

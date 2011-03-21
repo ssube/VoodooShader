@@ -33,6 +33,7 @@
 #include "HookManager.hpp"
 #include "Logger.hpp"
 #include "MaterialManager.hpp"
+#include "ModuleManager.hpp"
 #include "Parameter.hpp"
 #include "Shader.hpp"
 #include "Texture.hpp"

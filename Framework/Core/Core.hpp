@@ -90,6 +90,8 @@ namespace VoodooShader
          */
         ~Core();
 
+        String GetBasePath();
+
         /**
          * Retrieve the Cg context associated with this Core.
          * 
@@ -278,25 +280,11 @@ namespace VoodooShader
         );
 
     private:
-        /**
-         * Load and retrieve functions from the support libraries.
-         */
-        void LoadSupportLibs();
         void LoadAdapter();
 
         String mBasePath;
         String mAdapterName;
         String mLogName;
-
-        HMODULE mModuleAdapter;
-        HMODULE mModuleLogger;
-        HMODULE mModuleHooker;
-        Functions::AdapterCreate  mFuncAdapterCreate;
-        Functions::AdapterDestroy mFuncAdapterDestroy;
-        Functions::HookerCreate   mFuncHookerCreate;
-        Functions::HookerDestroy  mFuncHookerDestroy;
-        Functions::LoggerCreate   mFuncLoggerCreate;
-        Functions::LoggerDestroy  mFuncLoggerDestroy;
 
         /**
          * Reference to the currently bound (active) adapter.
@@ -312,6 +300,8 @@ namespace VoodooShader
          * Reference to the current HookManager.
          */
         HookManager * mHooker;
+
+        ModuleManager * mModManager;
 
         // Manager objects:
         FullscreenManager * mManagerFS;
