@@ -12,23 +12,6 @@ namespace VoodooShader
 {
     namespace XmlLogger
     {
-        bool RegisterModule
-        (
-            _In_ Core * core, 
-            _In_ Module * module
-        )
-        {
-            module->SetFunction(FT_ClassCount,   &API_ClassCount  );
-            module->SetFunction(FT_ClassInfo,    &API_ClassInfo   );
-            module->SetFunction(FT_ClassCreate,  &API_ClassCreate );
-            module->SetFunction(FT_ClassDestroy, &API_ClassDestroy);
-
-            //Version loggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
-            //core->LogModule(loggerVersion);
-
-            return true;
-        }
-
         int API_ClassCount()
         {
             return 1;
@@ -47,7 +30,7 @@ namespace VoodooShader
             }
         }
 
-        void * API_ClassCreate
+        IObject * API_ClassCreate
         (
             _In_ int number, 
             _In_ Core * core
@@ -58,18 +41,6 @@ namespace VoodooShader
                 return new XmlLogger::Logger(core);
             } else {
                 return NULL;
-            }
-        }
-
-        void API_ClassDestroy
-        (
-            _In_ int number, 
-            _In_ void * inst 
-        )
-        {
-            if ( number == 0 )
-            {
-                delete inst;
             }
         }
 
@@ -91,6 +62,21 @@ namespace VoodooShader
             {
                 delete this->mLocalTime;
             }
+        }
+
+        void Logger::DestroyObject()
+        {
+            delete this;
+        }
+
+        int Logger::GetID()
+        {
+            return 0;
+        }
+
+        const char * Logger::GetName()
+        {
+            return "Logger";
         }
 
         bool Logger::Open(const char* filename, bool append)

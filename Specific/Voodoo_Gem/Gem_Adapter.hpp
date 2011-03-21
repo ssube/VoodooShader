@@ -48,7 +48,7 @@ namespace VoodooShader
         );
 
         class VOODOO_API_GEM Adapter
-            : public VoodooShader::Adapter
+            : public VoodooShader::IAdapter
         {
 
         public:
@@ -58,6 +58,10 @@ namespace VoodooShader
             );
 
             ~Adapter();
+
+            virtual void DestroyObject();
+            virtual int GetID();
+            virtual const char * GetName();
 
             virtual Version GetVersion();
 

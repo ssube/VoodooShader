@@ -30,12 +30,6 @@ namespace VoodooShader
     {
         typedef std::map<std::string, void*> HookMap;
 
-        bool RegisterModule
-        (
-            _In_ Core * core, 
-            _In_ Module * module
-        );
-
         int API_ClassCount();
 
         const char * API_ClassInfo
@@ -43,25 +37,18 @@ namespace VoodooShader
             _In_ int number
         );
 
-        void * API_ClassCreate
+        IObject * API_ClassCreate
         (
             _In_ int number, 
             _In_ Core * core
         );
-
-        void API_ClassDestroy
-        (
-            _In_ int number, 
-            _In_ void * inst 
-        );
-
 
         /**
          * Handles function-level hooks, redirecting existing functions and calls into
          * new locations. 
          */
         class __declspec(dllexport) HookManager
-            : public VoodooShader::HookManager
+            : public VoodooShader::IHookManager
         {
         public:
             /**
@@ -76,6 +63,10 @@ namespace VoodooShader
              * Removes all hooks and cleans up the HookManager.
              */
             ~HookManager();
+
+            virtual void DestroyObject();
+            virtual int GetID();
+            virtual const char * GetName();
         
             /**
              * Install a single hook at the specified point. This will only affect the

@@ -42,12 +42,6 @@ namespace VoodooShader
 {
     namespace XmlLogger
     {
-        bool RegisterModule
-        (
-            _In_ Core * core, 
-            _In_ Module * module
-        );
-
         int API_ClassCount();
 
         const char * API_ClassInfo
@@ -55,16 +49,10 @@ namespace VoodooShader
             _In_ int number
         );
 
-        void * API_ClassCreate
+        IObject * API_ClassCreate
         (
             _In_ int number, 
             _In_ Core * core
-        );
-
-        void API_ClassDestroy
-        (
-            _In_ int number, 
-            _In_ void * inst 
         );
 
         /**
@@ -78,7 +66,7 @@ namespace VoodooShader
          *       the log file won't be closed and the log won't be valid.
          */
         class VOODOO_LOGGER_API Logger
-            : public VoodooShader::Logger
+            : public VoodooShader::ILogger
         {
         public:
             /**
@@ -97,7 +85,11 @@ namespace VoodooShader
             /** 
              * Default destructor, flushes and closes the log file (if open).
              */
-            ~Logger();
+            virtual ~Logger();
+
+            virtual void DestroyObject();
+            virtual int GetID();
+            virtual const char * GetName();
 
             /**
              * Opens a file for use by this Logger.
@@ -106,7 +98,7 @@ namespace VoodooShader
              *        or relative path).
              * @return Success of the open operation.
              */
-            bool Open
+            virtual bool Open
             (
                 _In_ const char * filename, 
                 _In_ bool append
@@ -115,7 +107,7 @@ namespace VoodooShader
             /**
              * Closes the log file, if one is open.
              */
-            void Close();
+            virtual void Close();
 
             /**
              * Set the default minimum message level. Messages below this level will
@@ -123,7 +115,7 @@ namespace VoodooShader
              *
              * @param level The minimum log level.
              */
-            void SetLogLevel
+            virtual void SetLogLevel
             (
                 _In_ size_t level
             );
@@ -136,7 +128,7 @@ namespace VoodooShader
              * @note If the system time cannot be retrieved, an error stamp of
              *          <code>000000</code> will be printed with an equal length.
              */
-            void LogTime();
+            virtual void LogTime();
 
             /**
              * Writes a formatted date to the log. The date will have the
@@ -146,14 +138,14 @@ namespace VoodooShader
              * @note If the system time cannot be retrieved, an error stamp of
              *          <code>00000000</code> will be printed with an equal length.
              */
-            void LogDate();
+            virtual void LogDate();
 
             /**
              * Writes a formatted tick to the log. The stamp will have the
              * form <code>xxxxxxxxx</code>, with a potentially varying length. This
              * records ticks (usually ms since system start).
              */
-            void LogTicks();
+            virtual void LogTicks();
 
             /**
              * Writes a module stamp to the log. This records the name and version
@@ -162,7 +154,7 @@ namespace VoodooShader
              * 
              * @param module The module version info to log.
              */
-            void LogModule
+            virtual void LogModule
             (
                 _In_ Version module
             );
@@ -178,7 +170,7 @@ namespace VoodooShader
              * @warning This function has a maximum (formatted) message length of
              *        4096 characters. This can be changed if it becomes an issue.
              */
-            void Log
+            virtual void Log
             (
                 _In_ size_t level,
                 _In_ const char * module,
@@ -200,7 +192,7 @@ namespace VoodooShader
              * @warning This function has a maximum (formatted) message length of
              *        4096 characters. This can be changed if it becomes an issue.
              */
-            void LogList
+            virtual void LogList
             (
                 _In_ size_t level,
                 _In_ const char * module,
@@ -216,7 +208,7 @@ namespace VoodooShader
              *        This may have a notable performance hit, but makes debug 
              *        messages more likely to survive    crashes.
              */
-            void SetBufferSize
+            virtual void SetBufferSize
             (
                 _In_ unsigned int bytes
             );
@@ -233,7 +225,7 @@ namespace VoodooShader
              *        and all logged messages <em>should</em> make it to disk, even 
              *        during fatal crashes.
              */
-            void Dump();
+            virtual void Dump();
 
         private:
             Core * mCore;

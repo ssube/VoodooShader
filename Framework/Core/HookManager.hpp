@@ -20,6 +20,7 @@
 \**************************************************************************************************/
 
 #include "Meta.hpp"
+#include "Object.hpp"
 
 namespace VoodooShader
 {
@@ -27,7 +28,8 @@ namespace VoodooShader
      * Defines the interface for handling function-level hooks, redirecting existing functions 
      * and calls into new locations. Each Core owns a HookManager implementation.
      */
-    class HookManager
+    class VOODOO_API IHookManager
+        : public IObject
     {
     public:
         /**

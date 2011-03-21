@@ -28,19 +28,6 @@ namespace VoodooShader
 {
     namespace EasyHook
     {
-        bool RegisterModule(_In_ Core * core, _In_ Module * module)
-        {
-            module->SetFunction(FT_ClassCount,   &API_ClassCount  );
-            module->SetFunction(FT_ClassInfo,    &API_ClassInfo   );
-            module->SetFunction(FT_ClassCreate,  &API_ClassCreate );
-            module->SetFunction(FT_ClassDestroy, &API_ClassDestroy);
-
-            Version hookVersion = VOODOO_META_VERSION_STRUCT(HOOK);
-            core->LogModule(hookVersion);
-
-            return true;
-        }
-
         int API_ClassCount()
         {
             return 1;
@@ -56,21 +43,13 @@ namespace VoodooShader
             }
         }
 
-        void * API_ClassCreate(_In_ int number, _In_ Core * core)
+        IObject * API_ClassCreate(_In_ int number, _In_ Core * core)
         {
             if ( number == 0 )
             {
                 return new EasyHook::HookManager(core);
             } else {
                 return NULL;
-            }
-        }
-
-        void API_ClassDestroy(_In_ int number, _In_ void * inst )
-        {
-            if ( number == 0 )
-            {
-                delete inst;
             }
         }
 
@@ -82,12 +61,13 @@ namespace VoodooShader
             mThreadCount = 1;
 
             mThreadIDs = new ULONG[mThreadCount];
-            //memcpy(mThreadIDs, threadsList, sizeof(unsigned int) * threadsCount);
             mThreadIDs[0] = 0;
 
             LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
 
             mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", mThreadCount);
+
+            // Log version
             Version hookVersion = VOODOO_META_VERSION_STRUCT(HOOK);
             mCore->LogModule(hookVersion);
         }
@@ -99,6 +79,21 @@ namespace VoodooShader
             mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
 
             delete mThreadIDs;
+        }
+
+        void HookManager::DestroyObject()
+        {
+            delete this;
+        }
+
+        int HookManager::GetID()
+        {
+            return 0;
+        }
+
+        const char * HookManager::GetName()
+        {
+            return "HookManager";
         }
 
         bool HookManager::CreateHook(std::string name, void * src, void * dest)

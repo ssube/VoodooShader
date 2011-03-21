@@ -97,7 +97,7 @@ namespace VoodooShader
             return;
         }
 
-        Adapter * adapter = this->mParent->GetAdapter();
+        IAdapter * adapter = this->mParent->GetAdapter();
 
         if ( !adapter )
         {

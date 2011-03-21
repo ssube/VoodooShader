@@ -134,7 +134,7 @@ namespace VoodooShader
         /**
          * Gets a pointer to the this core's HookManager.
          */
-         HookManager * GetHookManager();
+         IHookManager * GetHookManager();
 
          ModuleManager * GetModuleManager();
 
@@ -144,7 +144,7 @@ namespace VoodooShader
          * @return A pointer to the Adapter or NULL if no Adapter is attached.
          */
         _Check_return_
-        Adapter * GetAdapter();
+        IAdapter * GetAdapter();
 
         /**
          * Create a new shader effect from a file. 
@@ -291,17 +291,17 @@ namespace VoodooShader
         /**
          * Reference to the currently bound (active) adapter.
          */
-        Adapter * mAdapter;
+        IAdapter * mAdapter;
 
         /**
          * Reference to the current Logger.
          */
-        Logger * mLogger;
+        ILogger * mLogger;
 
         /**
          * Reference to the current HookManager.
          */
-        HookManager * mHooker;
+        IHookManager * mHooker;
 
         ModuleManager * mModManager;
 

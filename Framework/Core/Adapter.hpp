@@ -30,6 +30,7 @@
 #define VOODOO_ADAPTER_HPP
 
 #include "Meta.hpp"
+#include "Object.hpp"
 
 namespace VoodooShader
 {
@@ -66,7 +67,8 @@ namespace VoodooShader
      * This class does include a generic error-handler function, which adapters 
      * may choose not to override if they do not need specific error-handling.
      */
-    class VOODOO_API Adapter
+    class VOODOO_API IAdapter
+        : public IObject
     {
     public:
         /**

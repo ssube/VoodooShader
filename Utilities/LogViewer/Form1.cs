@@ -15,10 +15,12 @@ namespace LogViewer
         {
             InitializeComponent();
 
+            mBasePath = System.IO.Directory.GetCurrentDirectory() + "\\Resources\\";
+
             try
             {
                 mTransform = new XslCompiledTransform(true);
-                mTransform.Load("VoodooLog.xsl");
+                mTransform.Load(mBasePath + "VoodooLog.xsl");
             }
             catch (System.Exception ex)
             {
@@ -29,9 +31,8 @@ namespace LogViewer
                 );
             }
             
-            mBasePath = System.IO.Directory.GetCurrentDirectory() + "\\Resources";
-            mTempFile = mBasePath + "\\temp.html";
-            mDefaultPage = new Uri(mBasePath + "\\default.html", UriKind.Absolute);
+            mTempFile = mBasePath + "temp.html";
+            mDefaultPage = new Uri(mBasePath + "default.html", UriKind.Absolute);
             mTempPage = new Uri(mTempFile, UriKind.Absolute);
             mainBrowser.Url = mDefaultPage;
         }

@@ -111,6 +111,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <ModuleDefinitionFile>Gem_Exports.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -144,6 +145,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <ModuleDefinitionFile>Gem_Exports.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -177,6 +179,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
+      <ModuleDefinitionFile>Gem_Exports.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -188,6 +191,7 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Voodoo_Core.lib;Cg.lib;CgD3D9.lib;D3D9.lib;dxguid.lib;D3D8.lib;dx8guid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>Gem_Exports.def</ModuleDefinitionFile>
     </Link>
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
@@ -218,6 +222,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Gem.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gem_Exports.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

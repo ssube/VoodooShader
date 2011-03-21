@@ -494,7 +494,7 @@ namespace VoodooShader
         }
 
         // Load the programs
-        Adapter * adapter = mCore->GetAdapter();
+        IAdapter * adapter = mCore->GetAdapter();
 
         if ( !adapter )
         {

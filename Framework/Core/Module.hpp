@@ -50,20 +50,13 @@ namespace VoodooShader
         ModuleRef LoadModule
         (
             _In_ String name,
-            _In_ bool absolute = false,
             _In_ bool prepend = false
         );
 
         _Check_return_
-        void * CreateClass
+        IObject * CreateClass
         (
             _In_ String name
-        );
-
-        void DestroyClass
-        (
-            _In_ String name,
-            _In_ void * inst
         );
 
         _Check_return_
@@ -87,24 +80,18 @@ namespace VoodooShader
      class VOODOO_API Module
      {
      public:
-        Module
+        static Module * Load
         (
             _In_ String path
         );
 
+        Module
+        (
+            _In_ HMODULE hmodule
+        );
+
         ~Module();
         
-        bool Register
-        (
-            _In_ Core * core
-        );
-
-        void SetFunction
-        (
-            _In_ FunctionType type,
-            _In_ void * ptr
-        );
-
         int ClassCount();
 
         const char * ClassInfo
@@ -112,26 +99,18 @@ namespace VoodooShader
             _In_ int number
         );
 
-        void * CreateClass
+        IObject * CreateClass
         (
             _In_ int number,
             _In_ Core * core
         );
 
-        void DestroyClass
-        (
-            _In_ int number,
-            _In_ void * inst
-        );
-
      private:
         bool mOwned;
         HMODULE mHandle;
-        Functions::RegFunc     mRegModule;
         Functions::CountFunc   mClassCount;
         Functions::InfoFunc    mClassInfo;  
         Functions::CreateFunc  mClassCreate;
-        Functions::DestroyFunc mClassDestroy;
      };
 }
 

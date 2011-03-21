@@ -26,7 +26,8 @@ namespace VoodooShader
     /**
      * Defines the interface for a Logger class.
      */
-    class Logger
+    class VOODOO_API ILogger
+        : public IObject
     {
     public:
         /**

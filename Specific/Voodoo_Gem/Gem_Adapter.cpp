@@ -61,7 +61,7 @@ namespace VoodooShader
             {
                 void * d3d8hookpoint = mCore->GetModuleManager()->FindFunction("d3d8.dll", "Direct3DCreate8");
 
-                HookManager * hooker = mCore->GetHookManager();
+                IHookManager * hooker = mCore->GetHookManager();
                 hooker->CreateHook("d3d8create", d3d8hookpoint, &Gem_D3D8Create);
                 hooker->CreateHook("createfile", &CreateFileA, &Gem_CreateFileA);
             }
@@ -70,6 +70,21 @@ namespace VoodooShader
         Adapter::~Adapter()
         {
             this->SetDevice(NULL);
+        }
+
+        void Adapter::DestroyObject()
+        {
+            delete this;
+        }
+
+        int Adapter::GetID()
+        {
+            return 0;
+        }
+
+        const char * Adapter::GetName()
+        {
+            return "Gem_Adapter";
         }
 
         void Adapter::SetDevice( _In_opt_ LPDIRECT3DDEVICE9 device )

@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Gem_Adapter.cpp" />
+    <ClCompile Include="Gem_Module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Gem_Adapter.hpp" />
@@ -24,6 +25,7 @@
     <ClInclude Include="IVoodoo3DSurface8.hpp">
       <Filter>IVoodoo</Filter>
     </ClInclude>
+    <ClInclude Include="Gem_Module.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Gem.rc" />
@@ -35,5 +37,8 @@
     <Filter Include="IVoodoo">
       <UniqueIdentifier>{2e05d3b6-ee5b-4dd0-babd-4eac46f1fc0e}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gem_Exports.def" />
   </ItemGroup>
 </Project>

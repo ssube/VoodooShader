@@ -8,7 +8,7 @@
 HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 
 VoodooShader::Core * VoodooCore = NULL;
-VoodooShader::HookManager * VoodooHooker = NULL;
+VoodooShader::IHookManager * VoodooHooker = NULL;
 VoodooShader::Gem::Adapter * VoodooGem = NULL;
 
 //! @todo Shift most of these globals, except the core and adapter, into the adapter (as members).
@@ -32,6 +32,44 @@ D3DPRESENT_PARAMETERS gParams;
 VoodooShader::ShaderRef testShader;
 VoodooShader::String gLastFilename;
 bool gNextTexture = false;
+
+namespace VoodooShader
+{
+    namespace Gem
+    {
+        int API_ClassCount()
+        {
+            return 1;
+        }
+
+        const char * API_ClassInfo
+        (
+            _In_ int number
+        )
+        {
+            if ( number == 0 )
+            {
+                return "Gem_Adapter";
+            } else {
+                return NULL;
+            }
+        }
+
+        IObject * API_ClassCreate
+        (
+            _In_ int number, 
+            _In_ Core * core
+        )
+        {
+            if ( number == 0 )
+            {
+                return new Gem::Adapter(core);
+            } else {
+                return NULL;
+            }
+        }
+    }
+}
 
 void * WINAPI Gem_D3D8Create(UINT sdkVersion)
 {
@@ -141,9 +179,11 @@ __out HANDLE WINAPI Gem_CreateFileA
 
     if ( VoodooCore )
     {
+        LogLevel ll = ( file == INVALID_HANDLE_VALUE ) ? LL_Warning_API : LL_Info_API;
+
         VoodooCore->Log
         (
-            LL_Info_API,
+            ll,
             VOODOO_GEM_NAME,
             "CreateFileA(%s, %u, %u, %p, %u, %u, %p) == %p",
             lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes,

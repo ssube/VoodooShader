@@ -43,16 +43,17 @@
 
 namespace VoodooShader
 {
-    class Adapter;
+    /**
+     * Core classes, all implemented entirely within the core module.
+     * These do not derive from IObject.
+     * 
+     * @addtogroup CoreClasses Core Classes
+     * @{
+     */
     class Converter;
     class Core;
     class Exception;
-    class File;
-    class FileSystem;
     class FullscreenManager;
-    class HookManager;
-    class Image;
-    class Logger;
     class MaterialManager;
     class Module;
     class ModuleManager;
@@ -61,33 +62,89 @@ namespace VoodooShader
     class Technique;
     class Texture;
     class Shader;
+    /**
+     * @}
+     */
+
+    /**
+     * Interface classes, providing standard access to various dynamic
+     * objects. These are not implemented within the core but are instead
+     * dynamically linked at runtime. All are derived from IObject.
+     * 
+     * @addtogroup InterfaceClasses Interface Classes
+     */
+    class IObject;
+    class IAdapter;
+    class IHookManager;
+    class ILogger;
+    class IXmlParser;
+    /**
+     * @}
+     */
     
+    /**
+     * Generic structs for passing simple data sets. Structs have no ctor
+     * or dtor, nor methods; they should be created with the <code>{m,n,o}</code>
+     * syntax. Macros may be available to construct some of them.
+     * 
+     * @addtogroup Structs Structs
+     * @{
+     */
     struct TextureDesc;
     struct Version;
+    /**
+     * @}
+     */
 
+     /**
+      * Macro to throw Voodoo @ref Exception exceptions with extended debug info, particularly
+      * throwing function and filename and line. These exceptions are also logged if possible.
+      */
 #define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
 
-    // Function pointer types
+    /**
+     * Function pointer types for module interfaces.
+     * 
+     * @addtogroup FuncTypes Function Types
+     * @{
+     */
     namespace Functions
     {
-        typedef bool         (*RegFunc    )(Core *, Module *);
         typedef int          (*CountFunc  )();
         typedef const char * (*InfoFunc   )(int);
-        typedef void *       (*CreateFunc )(int, Core *);
-        typedef void         (*DestroyFunc)(int, void *);
+        typedef IObject *    (*CreateFunc )(int, Core *);
     };
+    /**
+     * @}
+     */
 
     typedef std::string String;
 
-    // Reference-counted pointer types
-    typedef std::shared_ptr<File>               FileRef;
-    typedef std::shared_ptr<Image>              ImageRef;
+    /**
+     * Reference-counted pointer types. Only commonly used types
+     * use shared pointers; most major types exist very rarely and
+     * need more intelligent garbage collection (@ref Core Cores, for
+     * example).
+     * 
+     * @addtogroup RefTypes Reference Types
+     * @{
+     */
     typedef std::shared_ptr<Parameter>          ParameterRef;
     typedef std::shared_ptr<Pass>               PassRef;
     typedef std::shared_ptr<Shader>             ShaderRef;
     typedef std::shared_ptr<Technique>          TechniqueRef;
     typedef std::shared_ptr<Texture>            TextureRef;
+    /**
+     * @}
+     */
 
+    /**
+     * Collection types for most common objects. These provide
+     * specialized containers and save typing.
+     *
+     * @addtogroup CollectionTypes Collection Types
+     * @{
+     */
     // Shader collections
     typedef std::map<String, ShaderRef>         ShaderMap;
     typedef std::list<ShaderRef>                ShaderList;
@@ -115,13 +172,17 @@ namespace VoodooShader
 
     // Module management types
     typedef std::shared_ptr<Module>             ModuleRef;
+    typedef std::weak_ptr<Module>               ModulePtr;
     typedef std::map<String, ModuleRef>         ModuleMap;
-    typedef std::pair<ModuleRef, int>           ClassID;
+    typedef std::pair<ModulePtr, int>           ClassID;
     typedef std::map<String, ClassID>           ClassMap;
 
     // Miscellaneous collections
     typedef std::map<TextureRef, ShaderRef>     MaterialMap;
     typedef std::map<String, CGeffect>          CGEffectMap;
+    /**
+     * @}
+     */
 
     /**
      * Texture formats for use by @ref VoodooShader::Texture "Textures",
@@ -246,6 +307,7 @@ namespace VoodooShader
         LL_Info_API     = 0x20,     /*!< Verbose informational logging from API calls */
         LL_Info         = 0x30,     /*!< Informational log messages */
         LL_Warning      = 0x50,     /*!< Warning log messages */
+        LL_Warning_API  = 0x60,     /*!< Verbose, possibly false-positive, warnings from API calls */
         LL_Error        = 0xB0,     /*!< General error log messages */
         LL_Fatal        = 0xFF,     /*!< Fatal error log messages */
     };

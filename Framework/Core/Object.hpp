@@ -3,6 +3,13 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
+ * While the Voodoo Shader Framework, as a whole, is licensed under the GNU General Public license,
+ * adapters designed to work with the framework do not constitute derivative works. In the case an
+ * adapter needs to use this file (Adapter.hpp) or Meta.hpp in order to work with the Framework, and
+ * is not licensed under the GNU GPL or a compatible license, please contact the developer to figure
+ * out alternate licensing arrangements.
+ *
+ *
  * This program is free software; you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
  * License, or (at your option) any later version.
@@ -19,63 +26,26 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#pragma once
+#ifndef VOODOO_OBJECT_HPP
+#define VOODOO_OBJECT_HPP
 
-#define VOODOO_IMPORT
-#include "Voodoo_Core.hpp"
-
-//---
-// Voodoo/Xml uses the pugixml library (http://pugixml.org) for internal XML parsing and
-// handling.
-// pugixml is Copyright (C) 2006-2010 Arseny Kapoulkine
-// This library is used under the terms of the MIT license.
-//---
-#define PUGIXML_IMPORT
-#include "pugixml.hpp"
-
-#ifdef VOODOO_IMPORT_XML
-#   define VOODOO_XML_API __declspec(dllimport)
-#else
-#   define VOODOO_XML_API __declspec(dllexport)
-#endif
-
-// Hide the DLL-interface warning
-#pragma warning(disable:4251)
+#include "Meta.hpp"
+#include "Module.hpp"
 
 namespace VoodooShader
 {
-    namespace PugiXml
+    /**
+     * Defines a simple interface all Voodoo objects must inherit. This
+     * interface tracks and handles destruction of objects, especially
+     * from dynamic libraries.
+     */
+    class VOODOO_API IObject
     {
-        bool RegisterModule
-        (
-            _In_ Core * core, 
-            _In_ Module * module
-        );
-
-        int API_ClassCount();
-
-        const char * API_ClassInfo
-        (
-            _In_ int number
-        );
-
-        void * API_ClassCreate
-        (
-            _In_ int number, 
-            _In_ Core * core
-        );
-
-        void API_ClassDestroy
-        (
-            _In_ int number, 
-            _In_ void * inst 
-        );
-
-        class XmlParser
-        {
-
-        private:
-            pugi::
-        };
-    }
+    public:
+        virtual void DestroyObject() = 0;
+        virtual int GetID() = 0;
+        virtual const char * GetName() = 0;
+    };
 }
+
+#endif /*VOODOO_OBJECT_HPP*/

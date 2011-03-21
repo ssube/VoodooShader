@@ -3,9 +3,10 @@
 #include "Adapter.hpp"
 #include "Exception.hpp"
 #include "FullscreenManager.hpp"
+#include "HookManager.hpp"
 #include "Logger.hpp"
 #include "MaterialManager.hpp"
-#include "ModuleManager.hpp"
+#include "Module.hpp"
 
 namespace VoodooShader
 {
@@ -27,8 +28,8 @@ namespace VoodooShader
     {
         mModManager = new ModuleManager(this);
 
-        mModManager->LoadModule("Voodoo_Logger.dll", true, true);
-        this->mLogger = (Logger*)mModManager->CreateClass("Logger");
+        mModManager->LoadModule("Voodoo_Logger.dll", true);
+        this->mLogger = (ILogger*)mModManager->CreateClass("Logger");
 
         if ( mLogger == NULL )
         {
@@ -42,8 +43,8 @@ namespace VoodooShader
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
 
         // Init hook manager
-        mModManager->LoadModule("Voodoo_Hook.dll", true, true);
-        this->mHooker = (HookManager*)mModManager->CreateClass("HookManager");
+        mModManager->LoadModule("Voodoo_Hook.dll", true);
+        this->mHooker = (IHookManager*)mModManager->CreateClass("HookManager");
 
         if ( mHooker == NULL )
         {
@@ -73,25 +74,16 @@ namespace VoodooShader
         this->LogModule(cgver);
 
         // Load the adapter
-        mAdapterName = mBasePath + "\\Voodoo_Gem.dll";
-        mModManager->LoadModule(mAdapterName, true);
+        mAdapterName = mBasePath + "Voodoo_Gem.dll";
+        mModManager->LoadModule(mAdapterName, false);
+        this->mAdapter = (IAdapter*)mModManager->CreateClass("Gem_Adapter");
     }
 
     Core::~Core()
     {
         if ( this->mAdapter )
         {
-            mModManager->DestroyClass("Adapter", mAdapter);
-        }
-
-        if ( this->mHooker )
-        {
-            mModManager->DestroyClass("HookManager", mHooker);
-        }
-
-        if ( this->mLogger )
-        {
-            mModManager->DestroyClass("Logger", mLogger);
+            this->mAdapter->DestroyObject();
         }
 
         if ( this->mManagerFS )
@@ -107,6 +99,16 @@ namespace VoodooShader
         if ( cgIsContext(this->mCGContext) )
         {
             cgDestroyContext(this->mCGContext);
+        }
+
+        if ( this->mHooker )
+        {
+            this->mHooker->DestroyObject();
+        }
+
+        if ( this->mLogger )
+        {
+            this->mLogger->DestroyObject();
         }
     }
 
@@ -127,12 +129,12 @@ namespace VoodooShader
         return version;
     }
 
-    Adapter * Core::GetAdapter()
+    IAdapter * Core::GetAdapter()
     {
         return this->mAdapter;
     }
 
-    HookManager * Core::GetHookManager()
+    IHookManager * Core::GetHookManager()
     {
         return mHooker;
     }

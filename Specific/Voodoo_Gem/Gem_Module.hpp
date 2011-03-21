@@ -38,6 +38,19 @@ namespace VoodooShader
     namespace Gem
     {
         class Adapter;
+
+        int API_ClassCount();
+
+        const char * API_ClassInfo
+        (
+            _In_ int number
+        );
+
+        IObject * API_ClassCreate
+        (
+            _In_ int number, 
+            _In_ Core * core
+        );
     }
 }
 
