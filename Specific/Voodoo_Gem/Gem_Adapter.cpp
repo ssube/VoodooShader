@@ -65,6 +65,19 @@ namespace VoodooShader
                 hooker->CreateHook("d3d8create", d3d8hookpoint, &Gem_D3D8Create);
                 hooker->CreateHook("createfile", &CreateFileA, &Gem_CreateFileA);
             }
+
+            IDocument * config = mCore->GetConfig();
+            INode * gemRoot = config->GetRoot()->GetSingleChild("Gem_Adapter");
+            NodeMap fsList = gemRoot->GetSingleChild("Shaders")->GetChildren("Shader");
+            std::for_each
+            (
+                fsList.begin(), 
+                fsList.end(), 
+                [&](std::pair<String,INode*> shader)
+                {
+                    mCore->Log(LL_Info, VOODOO_GEM_NAME, "Post shader: %s", shader.second->GetValue().c_str());
+                }
+            );
         }
 
         Adapter::~Adapter()
@@ -223,6 +236,8 @@ namespace VoodooShader
                 gThisFrame.Texture = thisframeTex;
                 gThisFrame.RawTexture = texture;
                 gThisFrame.RawSurface = surface;
+            } else {
+                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to create :scratch texture.");
             }
 
             TextureRef scratchTex = this->CreateTexture(":scratch", stdtex);
@@ -243,7 +258,7 @@ namespace VoodooShader
                 gScratch.RawTexture = texture;
                 gScratch.RawSurface = surface;
             } else {
-                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to create :scratch texture.\n");
+                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to create :scratch texture.");
             }
 
             // Create the global matrix parameters
@@ -264,7 +279,7 @@ namespace VoodooShader
 
         Version Adapter::GetVersion()
         {
-            Version version = { VOODOO_GEM_NAME, VOODOO_META_VERSION_CHAIN(GEM) };
+            Version version = VOODOO_META_VERSION_STRUCT(GEM);
 
             return version;
         }
@@ -435,7 +450,7 @@ namespace VoodooShader
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
-                    "Failed to retrieve render target for shader %s.\n", 
+                    "Failed to retrieve render target for shader %s.", 
                     shader->Name().c_str()
                 );
 
@@ -449,7 +464,7 @@ namespace VoodooShader
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
-                    "Failed to bind render target for shader %s.\n", 
+                    "Failed to bind render target for shader %s.", 
                     shader->Name().c_str()
                 );
 
@@ -479,13 +494,13 @@ namespace VoodooShader
                 HRESULT hr = passTargetD3D->GetSurfaceLevel(0, &passSurface);
                 if ( FAILED(hr) || !passSurface )
                 {    
-                    mCore->Log("Failed to get target surface for pass %s (targeting texture %s).\n",
+                    mCore->Log("Failed to get target surface for pass %s (targeting texture %s).",
                         pass->Name().c_str(), passTarget->Name().c_str());
 
                     hr = mDevice->StretchRect(scratchSurface, NULL, passSurface, NULL, D3DTEXF_NONE);
                     if ( FAILED(hr) )
                     {
-                        mCore->Log("Failed to copy results to target for pass %s.\n",
+                        mCore->Log("Failed to copy results to target for pass %s.",
                             pass->Name().c_str());
                     }
                 } 
@@ -513,13 +528,13 @@ namespace VoodooShader
             HRESULT hr = techTargetD3D->GetSurfaceLevel(0, &techSurface);
             if ( FAILED(hr) || !techSurface )
             {
-                mCore->Log("Failed to get target surface for technique %s (targeting texture %s).\n",
+                mCore->Log("Failed to get target surface for technique %s (targeting texture %s).",
                     tech->Name().c_str(), techTarget->Name().c_str());
             } else {
                 hr = mDevice->StretchRect(scratchSurface, NULL, techSurface, NULL, D3DTEXF_NONE);
                 if ( FAILED(hr) )
                 {
-                    mCore->Log("Failed to copy results to target for technique %s.\n",
+                    mCore->Log("Failed to copy results to target for technique %s.",
                         tech->Name().c_str());
                 }
             }

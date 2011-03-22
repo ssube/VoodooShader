@@ -251,9 +251,10 @@ public:
             return hr;
         } else {
             // Succeeded, create a fake device and go from there
+            gParams = mpPresentationParameters;
+
             IVoodoo3DDevice8 * mFakeDevice = new IVoodoo3DDevice8(mRealDevice, mpPresentationParameters);
             VoodooDevice = mFakeDevice;
-            gParams = mpPresentationParameters;
 
             (*ppReturnedDeviceInterface) = (IDirect3DDevice8*)mFakeDevice;
 

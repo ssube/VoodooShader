@@ -63,7 +63,7 @@ namespace VoodooShader
         {
             pugi::xml_document doc;
 
-            if ( doc.load(filename.c_str()) )
+            if ( doc.load_file(filename.c_str()) )
             {
                 return new XmlDocument(&doc);
             } else {
@@ -72,8 +72,14 @@ namespace VoodooShader
         }
 
         XmlDocument::XmlDocument(pugi::xml_document * doc)
+            : mRootNode(NULL)
         {
-            mRootNode = new XmlNode(doc->root());
+            try
+            {
+                mRootNode = new XmlNode(doc->root().first_child());
+            } catch ( std::exception & ex ) {
+                UNREFERENCED_PARAMETER(ex);
+            }
         }
 
         XmlDocument::~XmlDocument()
@@ -108,8 +114,18 @@ namespace VoodooShader
             if ( !node ) return;
 
             // Get all attributes
+            xml_node_type myType = node.type();
             mName = node.name();
-            mValue = node.value();
+
+            const char * value = node.value();
+            if ( value[0] == NULL )
+            {
+                xml_node possiblevalue = node.first_child();
+                if ( possiblevalue.type() == node_pcdata )
+                {      
+                    mValue = possiblevalue.value();
+                }
+            }
 
             for ( xml_attribute attr = node.first_attribute(); attr; attr = attr.next_attribute() )
             {
@@ -118,9 +134,13 @@ namespace VoodooShader
 
             for ( xml_node child = node.first_child(); child; child = child.next_sibling() )
             {
-                XmlNode * childNode = new XmlNode(child);
-                String name = child.name();
-                this->mChildren.insert(std::pair<String,INode*>(name, childNode));
+                xml_node_type type = child.type();
+                if ( type == node_element || type == node_pcdata )
+                {
+                    XmlNode * childNode = new XmlNode(child);
+                    String name = child.name();
+                    this->mChildren.insert(std::pair<String,INode*>(name, childNode));
+                }
             }
         }
 

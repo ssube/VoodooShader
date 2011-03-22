@@ -136,6 +136,8 @@ namespace VoodooShader
          */
          IHookManager * GetHookManager();
 
+         IDocument * GetConfig();
+
          ModuleManager * GetModuleManager();
 
         /**

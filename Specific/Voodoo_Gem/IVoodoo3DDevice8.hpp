@@ -1005,7 +1005,7 @@ public:
         (
             LL_Debug,
             VOODOO_GEM_NAME,
-            "IVoodoo3DDevice8::SetTransform(%u, %p) == %d\n",
+            "IVoodoo3DDevice8::SetTransform(%u, %p) == %d",
             State, pMatrix, hr
         );
 
@@ -2023,7 +2023,7 @@ public:
         (
             LL_Debug,
             VOODOO_GEM_NAME,
-            "IVoodoo3DDevice8::CreatePixelShader(%p, %u) == %d\n",
+            "IVoodoo3DDevice8::CreatePixelShader(%p, %u) == %d",
             pFunction, *pHandle, hr
         );
 

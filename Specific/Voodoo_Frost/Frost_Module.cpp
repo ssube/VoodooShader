@@ -16,7 +16,7 @@ namespace VoodooShader
          */
         void HookOpenGL(void)
         {
-            VoodooCore->Log("Voodoo Frost: Beginning OpenGL hook procedure.\n");
+            VoodooCore->Log("Voodoo Frost: Beginning OpenGL hook procedure.");
 
             bool success = true;
 
@@ -49,8 +49,8 @@ namespace VoodooShader
             // Check the results and handle
             if ( success )
             {
-                VoodooCore->Log("Voodoo Frost: OpenGL hooked successfully.\n");
+                VoodooCore->Log("Voodoo Frost: OpenGL hooked successfully.");
             } else {
-                VoodooCore->Log("Voodoo Frost: OpenGL hook procedure failed.\n");
+                VoodooCore->Log("Voodoo Frost: OpenGL hook procedure failed.");
             }
         }

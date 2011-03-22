@@ -29,7 +29,7 @@
  */
 void CameraHack()
 {
-    VoodooCore->Log("Voodoo Frost: Applying camera hack...\n");
+    VoodooCore->Log("Voodoo Frost: Applying camera hack...");
 
     float maxDist    =  120.0f;
     float minDist    =   -0.2f;
@@ -41,19 +41,19 @@ void CameraHack()
 
     if ( lockStatus != 0 )
     {
-        memcpy(    (PVOID)    0x004A93ED,    &minDist,    sizeof(float) );
-        memcpy( (PVOID)    0x004A93F7,    &maxDist,    sizeof(float) );
-        memcpy(    (PVOID)    0x004A940B,    &angle,        sizeof(float) );
-        memcpy( (PVOID)    0x004A9695,    &maxDist,    sizeof(float) );
-        memcpy(    (PVOID)    0x004A968B,    &minDist,    sizeof(float) );
+        memcpy( (PVOID)0x004A93ED, &minDist, sizeof(float) );
+        memcpy( (PVOID)0x004A93F7, &maxDist, sizeof(float) );
+        memcpy( (PVOID)0x004A940B, &angle,   sizeof(float) );
+        memcpy( (PVOID)0x004A9695, &maxDist, sizeof(float) );
+        memcpy( (PVOID)0x004A968B, &minDist, sizeof(float) );
 
         VirtualProtect( (PVOID)0x004A9000, 0x1000, oldProtect, &finalProtect);
 
-        VoodooCore->Log("Voodoo Frost: Camera hack successfully applied.\n");
+        VoodooCore->Log("Voodoo Frost: Camera hack successfully applied.");
     } else {
         DWORD error = GetLastError();
         
-        VoodooCore->Log("Voodoo Frost: Camera hack failed with code %d.\n",
+        VoodooCore->Log("Voodoo Frost: Camera hack failed with code %d.",
             error);
     }
 }

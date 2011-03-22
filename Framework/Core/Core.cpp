@@ -164,6 +164,11 @@ namespace VoodooShader
         return mModManager;
     }
 
+    IDocument * Core::GetConfig()
+    {
+        return mConfig;
+    }
+
     void Core::Log(LogLevel level, const char * module, const char * msg, ...)
     {
         if ( this->mLogger )
