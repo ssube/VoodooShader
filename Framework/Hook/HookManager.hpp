@@ -65,8 +65,8 @@ namespace VoodooShader
             ~HookManager();
 
             virtual void DestroyObject();
-            virtual int GetID();
-            virtual const char * GetName();
+            virtual int GetObjectID();
+            virtual const char * GetObjectName();
         
             /**
              * Install a single hook at the specified point. This will only affect the

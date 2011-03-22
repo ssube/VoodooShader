@@ -67,7 +67,7 @@ namespace VoodooShader
      * This class does include a generic error-handler function, which adapters 
      * may choose not to override if they do not need specific error-handling.
      */
-    class VOODOO_API IAdapter
+    class IAdapter
         : public IObject
     {
     public:

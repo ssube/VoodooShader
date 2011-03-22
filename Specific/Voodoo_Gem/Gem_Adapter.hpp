@@ -60,8 +60,8 @@ namespace VoodooShader
             ~Adapter();
 
             virtual void DestroyObject();
-            virtual int GetID();
-            virtual const char * GetName();
+            virtual int GetObjectID();
+            virtual const char * GetObjectName();
 
             virtual Version GetVersion();
 

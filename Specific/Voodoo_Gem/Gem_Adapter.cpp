@@ -77,12 +77,12 @@ namespace VoodooShader
             delete this;
         }
 
-        int Adapter::GetID()
+        int Adapter::GetObjectID()
         {
             return 0;
         }
 
-        const char * Adapter::GetName()
+        const char * Adapter::GetObjectName()
         {
             return "Gem_Adapter";
         }

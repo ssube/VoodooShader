@@ -24,6 +24,11 @@
 #define VOODOO_IMPORT
 #include "Voodoo_Core.hpp"
 
+#include <vector>
+#include <map>
+#include <algorithm>
+#include <regex>
+
 //---
 // Voodoo/Xml uses the pugixml library (http://pugixml.org) for internal XML parsing and
 // handling.
@@ -46,11 +51,9 @@ namespace VoodooShader
 {
     namespace PugiXml
     {
-        bool RegisterModule
-        (
-            _In_ Core * core, 
-            _In_ Module * module
-        );
+        class XmlParser;
+        class XmlDocument;
+        class XmlNode;
 
         int API_ClassCount();
 
@@ -59,23 +62,74 @@ namespace VoodooShader
             _In_ int number
         );
 
-        void * API_ClassCreate
+        IObject * API_ClassCreate
         (
             _In_ int number, 
             _In_ Core * core
         );
 
-        void API_ClassDestroy
-        (
-            _In_ int number, 
-            _In_ void * inst 
-        );
-
         class XmlParser
+            : public IParser
         {
+        public:
+            XmlParser(Core * core);
+            ~XmlParser();
+
+            virtual void DestroyObject();
+            virtual int GetObjectID();
+            virtual const char * GetObjectName();
+
+            virtual IDocument * LoadDocument( _In_ String filename );
 
         private:
-            pugi::
+            Core * mCore;
+        };
+
+        class XmlDocument
+            : public IDocument
+        {
+        public:
+            XmlDocument(pugi::xml_document * doc);
+            ~XmlDocument();
+
+            virtual void DestroyObject();
+            virtual int GetObjectID();
+            virtual const char * GetObjectName();
+            
+            virtual INode * GetRoot();
+
+        private:
+            XmlNode * mRootNode;
+        };
+
+        class XmlNode
+            : public INode
+        {
+        public:
+            XmlNode(pugi::xml_node node);
+            ~XmlNode();
+
+            virtual void DestroyObject();
+            virtual int GetObjectID();
+            virtual const char * GetObjectName();
+
+            virtual String GetName();
+            virtual String GetValue();
+
+            virtual NodeMap::iterator GetFirstChild();
+            virtual bool GetNextChild(NodeMap::iterator & iter);
+            virtual NodeMap GetChildren(String regex);
+            virtual INode * GetSingleChild(String regex);
+
+            virtual AttributeMap::iterator GetFirstAttribute();
+            virtual bool GetNextAttribute(AttributeMap::iterator & iter);
+            virtual String GetAttribute(String name);
+
+        private:
+            String mName;
+            String mValue;
+            NodeMap mChildren;
+            AttributeMap mAttributes;
         };
     }
 }

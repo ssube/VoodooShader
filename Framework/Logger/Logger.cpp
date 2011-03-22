@@ -69,12 +69,12 @@ namespace VoodooShader
             delete this;
         }
 
-        int Logger::GetID()
+        int Logger::GetObjectID()
         {
             return 0;
         }
 
-        const char * Logger::GetName()
+        const char * Logger::GetObjectName()
         {
             return "Logger";
         }

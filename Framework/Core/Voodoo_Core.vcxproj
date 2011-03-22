@@ -248,6 +248,7 @@
     <ClInclude Include="Meta.hpp" />
     <ClInclude Include="Module.hpp" />
     <ClInclude Include="Parameter.hpp" />
+    <ClInclude Include="Parser.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Texture.hpp" />

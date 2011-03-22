@@ -26,25 +26,54 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_OBJECT_HPP
-#define VOODOO_OBJECT_HPP
+#ifndef VOODOO_PARSER_HPP
+#define VOODOO_PARSER_HPP
 
 #include "Meta.hpp"
 
 namespace VoodooShader
 {
+    typedef std::multimap<String, INode *> NodeMap;
+    typedef std::map<String, String> AttributeMap;
+
     /**
      * Defines a simple interface all Voodoo objects must inherit. This
      * interface tracks and handles destruction of objects, especially
      * from dynamic libraries.
      */
-    class IObject
+    class IParser
+        : public IObject
     {
     public:
-        virtual void DestroyObject() = 0;
-        virtual int GetObjectID() = 0;
-        virtual const char * GetObjectName() = 0;
+        virtual IDocument * LoadDocument
+        (
+            _In_ String filename
+        ) = 0;
+    };
+
+    class IDocument
+        : public IObject
+    {
+    public:
+        virtual INode * GetRoot() = 0;
+    };
+
+    class INode
+        : public IObject
+    {
+    public:
+        virtual String GetName() = 0;
+        virtual String GetValue() = 0;
+
+        virtual NodeMap::iterator GetFirstChild() = 0;
+        virtual bool GetNextChild(NodeMap::iterator & iter) = 0;
+        virtual NodeMap GetChildren(String regex) = 0;
+        virtual INode * GetSingleChild(String regex) = 0;
+
+        virtual AttributeMap::iterator GetFirstAttribute() = 0;
+        virtual bool GetNextAttribute(AttributeMap::iterator & iter) = 0;
+        virtual String GetAttribute(String name) = 0;
     };
 }
 
-#endif /*VOODOO_OBJECT_HPP*/
+#endif /*VOODOO_PARSER_HPP*/

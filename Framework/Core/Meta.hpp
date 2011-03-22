@@ -77,7 +77,9 @@ namespace VoodooShader
     class IAdapter;
     class IHookManager;
     class ILogger;
-    class IXmlParser;
+    class IParser;
+    class IDocument;
+    class INode;
     /**
      * @}
      */

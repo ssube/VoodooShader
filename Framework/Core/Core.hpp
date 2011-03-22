@@ -303,6 +303,9 @@ namespace VoodooShader
          */
         IHookManager * mHooker;
 
+        IParser * mParser;
+        IDocument * mConfig;
+
         ModuleManager * mModManager;
 
         // Manager objects:

@@ -1,0 +1,5 @@
+LIBRARY
+EXPORTS
+ClassCount=API_ClassCount
+ClassInfo=API_ClassInfo
+ClassCreate=API_ClassCreate

@@ -19,24 +19,13 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#define VOODOO_IMPORT
-
-#include "Includes.hpp"
-
-#include "Meta.hpp"
-
-#include "Adapter.hpp"
-#include "Converter.hpp"
-#include "Core.hpp"
-#include "Exception.hpp"
-#include "FullscreenManager.hpp"
-#include "HookManager.hpp"
-#include "Logger.hpp"
-#include "MaterialManager.hpp"
-#include "Module.hpp"
-#include "Object.hpp"
-#include "Parameter.hpp"
-#include "Parser.hpp"
-#include "Shader.hpp"
-#include "Texture.hpp"
 #include "Version.hpp"
+
+// XML defs -------------------------------------------------------------------
+#define VOODOO_XML_NAME                 "Voodoo/Xml"
+#define VOODOO_XML_PRETTYNAME           "Voodoo Xml Parser"
+#define VOODOO_XML_VERSION_MAJOR        0
+#define VOODOO_XML_VERSION_MINOR        1
+#define VOODOO_XML_VERSION_PATCH        1
+#define VOODOO_XML_VERSION_REV          VOODOO_GLOBAL_VERSION_REV   
+//--------------------------------------------------------------------------------

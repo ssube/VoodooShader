@@ -88,8 +88,8 @@ namespace VoodooShader
             virtual ~Logger();
 
             virtual void DestroyObject();
-            virtual int GetID();
-            virtual const char * GetName();
+            virtual int GetObjectID();
+            virtual const char * GetObjectName();
 
             /**
              * Opens a file for use by this Logger.

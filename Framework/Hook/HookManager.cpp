@@ -86,12 +86,12 @@ namespace VoodooShader
             delete this;
         }
 
-        int HookManager::GetID()
+        int HookManager::GetObjectID()
         {
             return 0;
         }
 
-        const char * HookManager::GetName()
+        const char * HookManager::GetObjectName()
         {
             return "HookManager";
         }

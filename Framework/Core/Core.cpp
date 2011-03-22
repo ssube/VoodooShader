@@ -7,6 +7,7 @@
 #include "Logger.hpp"
 #include "MaterialManager.hpp"
 #include "Module.hpp"
+#include "Parser.hpp"
 
 namespace VoodooShader
 {
@@ -28,7 +29,27 @@ namespace VoodooShader
     {
         mModManager = new ModuleManager(this);
 
-        mModManager->LoadModule("Voodoo_Logger.dll", true);
+        mModManager->LoadModule("Voodoo_Xml.dll", true);
+        this->mParser = (IParser*)mModManager->CreateClass("Parser");
+        this->mConfig = this->mParser->LoadDocument("VoodooConfig.xmlconfig");
+
+        INode* coreNode = this->mConfig->GetRoot()->GetSingleChild("Core");
+        if ( coreNode )
+        {
+            NodeMap moduleNodes = coreNode->GetChildren("Module");
+            NodeMap::iterator moduleIter = moduleNodes.begin();
+            while ( moduleIter != moduleNodes.end() )
+            {
+                INode * moduleNode = moduleIter->second;
+                String filename = moduleNode->GetAttribute("file");
+
+                mModManager->LoadModule(filename, true);
+
+                ++moduleIter;
+            }
+        }
+
+        // Load logger
         this->mLogger = (ILogger*)mModManager->CreateClass("Logger");
 
         if ( mLogger == NULL )
@@ -36,14 +57,13 @@ namespace VoodooShader
             Throw(VOODOO_CORE_NAME, "Unable to create Logger.", this);
         }
 
-        mLogName = "VoodooLog";
+        mLogName = mConfig->GetRoot()->GetSingleChild("Logger")->GetSingleChild("File")->GetValue();
         this->mLogger->Open(mLogName.c_str(), false);
 
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "%s", VOODOO_GLOBAL_COPYRIGHT_FULL);
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
 
         // Init hook manager
-        mModManager->LoadModule("Voodoo_Hook.dll", true);
         this->mHooker = (IHookManager*)mModManager->CreateClass("HookManager");
 
         if ( mHooker == NULL )

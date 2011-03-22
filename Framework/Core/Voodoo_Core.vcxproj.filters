@@ -88,6 +88,9 @@
     <ClInclude Include="Object.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="Parser.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">

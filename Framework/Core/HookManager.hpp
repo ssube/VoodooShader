@@ -28,7 +28,7 @@ namespace VoodooShader
      * Defines the interface for handling function-level hooks, redirecting existing functions 
      * and calls into new locations. Each Core owns a HookManager implementation.
      */
-    class VOODOO_API IHookManager
+    class IHookManager
         : public IObject
     {
     public:
