@@ -77,9 +77,6 @@ namespace VoodooShader
     class IAdapter;
     class IHookManager;
     class ILogger;
-    class IParser;
-    class IDocument;
-    class INode;
     /**
      * @}
      */
@@ -115,6 +112,7 @@ namespace VoodooShader
         typedef int          (*CountFunc  )();
         typedef const char * (*InfoFunc   )(int);
         typedef IObject *    (*CreateFunc )(int, Core *);
+        typedef Version      (*VersionFunc)();
     };
     /**
      * @}
@@ -312,16 +310,6 @@ namespace VoodooShader
         LL_Warning_API  = 0x60,     /*!< Verbose, possibly false-positive, warnings from API calls */
         LL_Error        = 0xB0,     /*!< General error log messages */
         LL_Fatal        = 0xFF,     /*!< Fatal error log messages */
-    };
-
-    enum FunctionType
-    {
-        FT_Unknown = 0x00,
-        FT_ClassCount,
-        FT_ClassInfo,
-        FT_ClassCreate,
-        FT_ClassDestroy,
-        FT_Count
     };
 
     /**

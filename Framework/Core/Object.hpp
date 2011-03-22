@@ -42,8 +42,7 @@ namespace VoodooShader
     {
     public:
         virtual void DestroyObject() = 0;
-        virtual int GetObjectID() = 0;
-        virtual const char * GetObjectName() = 0;
+        virtual const char * GetObjectClass() = 0;
     };
 }
 

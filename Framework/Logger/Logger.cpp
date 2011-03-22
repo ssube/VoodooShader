@@ -12,6 +12,12 @@ namespace VoodooShader
 {
     namespace XmlLogger
     {
+        Version API_ModuleVersion()
+        {
+            Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
+            return moduleVersion;
+        }
+
         int API_ClassCount()
         {
             return 1;
@@ -69,14 +75,9 @@ namespace VoodooShader
             delete this;
         }
 
-        int Logger::GetObjectID()
+        const char * Logger::GetObjectClass()
         {
-            return 0;
-        }
-
-        const char * Logger::GetObjectName()
-        {
-            return "Logger";
+            return "XmlLogger";
         }
 
         bool Logger::Open(const char* filename, bool append)
@@ -102,15 +103,11 @@ namespace VoodooShader
 
             if ( this->mLogFile.is_open() )
             {
-                this->mLogFile << 
-                    "<?xml version='1.0'?>\n" <<
-                    "<?xml-stylesheet type=\"text/xsl\" href=\"VoodooLog.xsl\"?>\n" <<
-                    "<VoodooLog "; 
+                this->mLogFile << "<?xml version='1.0'?>\n<VoodooLog "; 
                 this->LogDate(); 
                 this->LogTime(); 
                 this->LogTicks();
-                this->mLogFile << 
-                    ">\n";
+                this->mLogFile << ">\n";
 
                 this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file opened by Logger::Open.");
 
@@ -236,12 +233,10 @@ namespace VoodooShader
             buffer[4095] = 0;
             va_end(args);
         
-            this->mLogFile << 
-                "    <Message severity=\"" << level << "\" ";
+            this->mLogFile << "    <Message severity=\"" << level << "\" ";
             this->LogTime();
             this->LogTicks();
-            this->mLogFile << 
-                " source=\"" << module << "\">" << buffer << "</Message>\n";
+            this->mLogFile << " source=\"" << module << "\">" << buffer << "</Message>\n";
         }
 
         void Logger::LogList(size_t level, const char * module, const char * msg, va_list args)
@@ -254,11 +249,10 @@ namespace VoodooShader
             _vsnprintf_s(buffer, 4095, 4095, msg, args);
             buffer[4095] = 0;
 
-            this->mLogFile << 
-                "    <Message severity=\"" << level << "\" ";
+            this->mLogFile << "    <Message severity=\"" << level << "\" ";
             this->LogTime();
             this->LogTicks();
-            this->mLogFile <<" source=\"" << module << "\">" << buffer << "</Message>\n";
+            this->mLogFile << " source=\"" << module << "\">" << buffer << "</Message>\n";
         }
 
         void Logger::Dump()

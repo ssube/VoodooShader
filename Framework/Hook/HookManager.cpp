@@ -28,6 +28,12 @@ namespace VoodooShader
 {
     namespace EasyHook
     {
+        Version API_ModuleVersion()
+        {
+            Version moduleVersion = VOODOO_META_VERSION_STRUCT(HOOK);
+            return moduleVersion;
+        }
+
         int API_ClassCount()
         {
             return 1;
@@ -66,10 +72,6 @@ namespace VoodooShader
             LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
 
             mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", mThreadCount);
-
-            // Log version
-            Version hookVersion = VOODOO_META_VERSION_STRUCT(HOOK);
-            mCore->LogModule(hookVersion);
         }
 
         HookManager::~HookManager()
@@ -86,14 +88,9 @@ namespace VoodooShader
             delete this;
         }
 
-        int HookManager::GetObjectID()
+        const char * HookManager::GetObjectClass()
         {
-            return 0;
-        }
-
-        const char * HookManager::GetObjectName()
-        {
-            return "HookManager";
+            return "EHHookManager";
         }
 
         bool HookManager::CreateHook(std::string name, void * src, void * dest)
@@ -124,14 +121,6 @@ namespace VoodooShader
 
             if ( ( result != 0 ) || ( hookHandle == NULL ) )
             {
-                if ( result == STATUS_NO_MEMORY )
-                {
-                    mCore->Log(LL_Error, VOODOO_HOOK_NAME, "No memory while creating hook.");
-                //} else if ( result == STATUS_NOT_SUPPORTED ) {
-                //    mCore->Log(LL_Error, VOODOO_HOOK_NAME, "Not supported while creating hook.");
-                //} else if ( result == STATUS_INSUFFICIENT_RESOURCES ) {
-                //    mCore->Log(LL_Error, VOODOO_HOOK_NAME, "Insufficient resources while creating hook.");
-                } else {
                 mCore->Log
                 (
                     LL_Error,
@@ -139,7 +128,6 @@ namespace VoodooShader
                     "Error %u creating hook %s (%p, %p).",
                     result, name.c_str(), src, dest
                 );
-                }
 
                 return false;
             } else {

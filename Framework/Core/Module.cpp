@@ -42,6 +42,8 @@ namespace VoodooShader
         mModules[path] = module;
 
         // Register classes from module
+        Version moduleVersion = module->ModuleVersion();
+        mCore->LogModule(moduleVersion);
 
         int classCount = module->ClassCount();
         for ( int curClass = 0; curClass < classCount; ++curClass )
@@ -99,11 +101,12 @@ namespace VoodooShader
         {
             Module * module = new Module(hmodule);
 
-            module->mClassCount  = (Functions::CountFunc )GetProcAddress(hmodule, "ClassCount" );
-            module->mClassInfo   = (Functions::InfoFunc  )GetProcAddress(hmodule, "ClassInfo"  );
-            module->mClassCreate = (Functions::CreateFunc)GetProcAddress(hmodule, "ClassCreate");
+            module->mModuleVersion = (Functions::VersionFunc)GetProcAddress(hmodule, "ModuleVersion");
+            module->mClassCount    = (Functions::CountFunc  )GetProcAddress(hmodule, "ClassCount"   );
+            module->mClassInfo     = (Functions::InfoFunc   )GetProcAddress(hmodule, "ClassInfo"    );
+            module->mClassCreate   = (Functions::CreateFunc )GetProcAddress(hmodule, "ClassCreate"  );
 
-            if ( !(module->mClassCount && module->mClassInfo && module->mClassCreate ) )
+            if ( !(module->mModuleVersion && module->mClassCount && module->mClassInfo && module->mClassCreate ) )
             {
                 FreeLibrary(hmodule);
                 delete module;
@@ -127,33 +130,23 @@ namespace VoodooShader
         mHandle = NULL;
     }
 
+    Version Module::ModuleVersion()
+    {
+        return (*mModuleVersion)();
+    }
+
     int Module::ClassCount()
     {
-        if ( mClassCount == NULL )
-        {
-            return 0;
-        } else {
-            return (*mClassCount)();
-        }
+        return (*mClassCount)();
     }
 
     const char * Module::ClassInfo( _In_ int number )
     {
-        if ( mClassInfo == NULL )
-        {
-            return NULL;
-        } else {
-            return (*mClassInfo)(number);
-        }
+        return (*mClassInfo)(number);
     }
 
     IObject * Module::CreateClass(_In_ int number, _In_ Core * core)
     {
-        if ( mClassCreate == NULL )
-        {
-            return NULL;
-        } else {
-            return (*mClassCreate)(number, core);
-        }
+        return (*mClassCreate)(number, core);
     }
 }

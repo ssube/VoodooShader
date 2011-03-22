@@ -30,6 +30,8 @@ namespace VoodooShader
     {
         typedef std::map<std::string, void*> HookMap;
 
+        Version API_ModuleVersion();
+
         int API_ClassCount();
 
         const char * API_ClassInfo
@@ -65,8 +67,7 @@ namespace VoodooShader
             ~HookManager();
 
             virtual void DestroyObject();
-            virtual int GetObjectID();
-            virtual const char * GetObjectName();
+            virtual const char * GetObjectClass();
         
             /**
              * Install a single hook at the specified point. This will only affect the

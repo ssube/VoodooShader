@@ -136,8 +136,6 @@ namespace VoodooShader
          */
          IHookManager * GetHookManager();
 
-         IDocument * GetConfig();
-
          ModuleManager * GetModuleManager();
 
         /**
@@ -304,9 +302,6 @@ namespace VoodooShader
          * Reference to the current HookManager.
          */
         IHookManager * mHooker;
-
-        IParser * mParser;
-        IDocument * mConfig;
 
         ModuleManager * mModManager;
 

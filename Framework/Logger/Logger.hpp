@@ -42,6 +42,8 @@ namespace VoodooShader
 {
     namespace XmlLogger
     {
+        Version API_ModuleVersion();
+
         int API_ClassCount();
 
         const char * API_ClassInfo
@@ -88,8 +90,7 @@ namespace VoodooShader
             virtual ~Logger();
 
             virtual void DestroyObject();
-            virtual int GetObjectID();
-            virtual const char * GetObjectName();
+            virtual const char * GetObjectClass();
 
             /**
              * Opens a file for use by this Logger.

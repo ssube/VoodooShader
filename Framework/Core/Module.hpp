@@ -91,6 +91,8 @@ namespace VoodooShader
         );
 
         ~Module();
+
+        Version ModuleVersion();
         
         int ClassCount();
 
@@ -108,6 +110,7 @@ namespace VoodooShader
      private:
         bool mOwned;
         HMODULE mHandle;
+        Functions::VersionFunc mModuleVersion;
         Functions::CountFunc   mClassCount;
         Functions::InfoFunc    mClassInfo;  
         Functions::CreateFunc  mClassCreate;

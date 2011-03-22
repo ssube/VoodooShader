@@ -7,7 +7,8 @@
 #include "Logger.hpp"
 #include "MaterialManager.hpp"
 #include "Module.hpp"
-#include "Parser.hpp"
+
+#include "pugixml.hpp"
 
 namespace VoodooShader
 {
@@ -27,21 +28,27 @@ namespace VoodooShader
     Core::Core(const char * path)
         : mAdapter(NULL), mBasePath(path)
     {
+        using namespace pugi;
+
         mModManager = new ModuleManager(this);
 
-        mModManager->LoadModule("Voodoo_Xml.dll", true);
-        this->mParser = (IParser*)mModManager->CreateClass("Parser");
-        this->mConfig = this->mParser->LoadDocument("VoodooConfig.xmlconfig");
+        xml_document * config = new pugi::xml_document();
+        xml_parse_result result = config->load_file("VoodooConfig.xml");
 
-        INode* coreNode = this->mConfig->GetRoot()->GetSingleChild("Core");
+        if ( !result )
+        {
+            Throw(VOODOO_CORE_NAME, "Error parsing config file.", this);
+        }
+
+        xml_node coreNode = config->select_single_node("/VoodooConfig/Core").node();
         if ( coreNode )
         {
-            NodeMap moduleNodes = coreNode->GetChildren("Module");
-            NodeMap::iterator moduleIter = moduleNodes.begin();
+            xpath_node_set moduleNodes = coreNode.select_nodes("./Module");
+            xpath_node_set::const_iterator moduleIter = moduleNodes.begin();
             while ( moduleIter != moduleNodes.end() )
             {
-                INode * moduleNode = moduleIter->second;
-                String filename = moduleNode->GetAttribute("file");
+                xml_node moduleNode = (*moduleIter).node();
+                String filename = moduleNode.attribute("file").value();
 
                 mModManager->LoadModule(filename, true);
 
@@ -50,7 +57,7 @@ namespace VoodooShader
         }
 
         // Load logger
-        String logClass = coreNode->GetSingleChild("Logger")->GetValue();
+        String logClass = coreNode.child("Logger").attribute("class").value();
         this->mLogger = (ILogger*)mModManager->CreateClass(logClass);
 
         if ( mLogger == NULL )
@@ -58,14 +65,15 @@ namespace VoodooShader
             Throw(VOODOO_CORE_NAME, "Unable to create Logger.", this);
         }
 
-        mLogName = mConfig->GetRoot()->GetSingleChild("Logger")->GetSingleChild("File")->GetValue();
+        xml_node loggerNode = config->select_single_node("/VoodooConfig/Logger").node();
+        mLogName = loggerNode.child("File").first_child().value();
         this->mLogger->Open(mLogName.c_str(), false);
 
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "%s", VOODOO_GLOBAL_COPYRIGHT_FULL);
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
 
         // Init hook manager
-        String hookClass = coreNode->GetSingleChild("Hooker")->GetValue();
+        String hookClass = coreNode.child("Hooker").attribute("class").value();
         this->mHooker = (IHookManager*)mModManager->CreateClass(hookClass);
 
         if ( mHooker == NULL )
@@ -96,7 +104,7 @@ namespace VoodooShader
         this->LogModule(cgver);
 
         // Load the adapter
-        mAdapterName = coreNode->GetSingleChild("Adapter")->GetValue();
+        String mAdapterName = coreNode.child("Adapter").attribute("class").value();
         this->mAdapter = (IAdapter*)mModManager->CreateClass(mAdapterName);
     }
 
@@ -163,11 +171,6 @@ namespace VoodooShader
     ModuleManager * Core::GetModuleManager()
     {
         return mModManager;
-    }
-
-    IDocument * Core::GetConfig()
-    {
-        return mConfig;
     }
 
     void Core::Log(LogLevel level, const char * module, const char * msg, ...)
