@@ -50,7 +50,8 @@ namespace VoodooShader
         }
 
         // Load logger
-        this->mLogger = (ILogger*)mModManager->CreateClass("Logger");
+        String logClass = coreNode->GetSingleChild("Logger")->GetValue();
+        this->mLogger = (ILogger*)mModManager->CreateClass(logClass);
 
         if ( mLogger == NULL )
         {
@@ -64,7 +65,8 @@ namespace VoodooShader
         this->mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Preparing core components...");
 
         // Init hook manager
-        this->mHooker = (IHookManager*)mModManager->CreateClass("HookManager");
+        String hookClass = coreNode->GetSingleChild("Hooker")->GetValue();
+        this->mHooker = (IHookManager*)mModManager->CreateClass(hookClass);
 
         if ( mHooker == NULL )
         {
@@ -94,9 +96,8 @@ namespace VoodooShader
         this->LogModule(cgver);
 
         // Load the adapter
-        mAdapterName = mBasePath + "Voodoo_Gem.dll";
-        mModManager->LoadModule(mAdapterName, false);
-        this->mAdapter = (IAdapter*)mModManager->CreateClass("Gem_Adapter");
+        mAdapterName = coreNode->GetSingleChild("Adapter")->GetValue();
+        this->mAdapter = (IAdapter*)mModManager->CreateClass(mAdapterName);
     }
 
     Core::~Core()

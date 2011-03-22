@@ -22,7 +22,7 @@
 #include "Version.hpp"
 
 // Logger defs -------------------------------------------------------------------
-#define VOODOO_HOOK_NAME                "Voodoo/Hook"
+#define VOODOO_HOOK_NAME                "Voodoo/EHHook"
 #define VOODOO_HOOK_PRETTYNAME          "Voodoo Hook Library"
 #define VOODOO_HOOK_VERSION_MAJOR       0
 #define VOODOO_HOOK_VERSION_MINOR       1

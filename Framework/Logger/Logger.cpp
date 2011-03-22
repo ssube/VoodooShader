@@ -24,7 +24,7 @@ namespace VoodooShader
         {
             if ( number == 0 )
             {
-                return "Logger";
+                return "XmlLogger";
             } else {
                 return NULL;
             }

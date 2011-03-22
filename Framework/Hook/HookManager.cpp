@@ -37,7 +37,7 @@ namespace VoodooShader
         {
             if ( number == 0 )
             {
-                return "HookManager";
+                return "EHHookManager";
             } else {
                 return NULL;
             }

@@ -22,7 +22,7 @@
 #include "Version.hpp"
 
 // Logger defs -------------------------------------------------------------------
-#define VOODOO_LOGGER_NAME              "Voodoo/Logger"
+#define VOODOO_LOGGER_NAME              "Voodoo/XmlLogger"
 #define VOODOO_LOGGER_PRETTYNAME        "Voodoo Xml Logger"
 #define VOODOO_LOGGER_VERSION_MAJOR     0
 #define VOODOO_LOGGER_VERSION_MINOR     1
