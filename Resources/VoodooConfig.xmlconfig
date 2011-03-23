@@ -1,0 +1,51 @@
+<VoodooConfig>
+    <!-- 
+        The rough format of this file is like so:
+            /VoodooConfig/
+                /[class-name]/
+                    /[key-name]/
+                        [info]
+
+         Each class *generally* (no guarantees) pulls from
+         a second-level element with the same name. This
+         occurs most commonly with adapters, which need
+         extensive settings. 
+
+         Comments and formatting are ignored in the
+         internal parsing (file to pugixml to IDocument), as
+         is CDATA and processor directives. 
+
+         Key names may be duplicated and may have children.
+         Attribute names may not be duplicated. 
+
+         This file may be read by machines, so comments
+         and other niceties for mere humans may vanish.
+    -->
+    <Core>
+        <!-- 3 required classes -->
+        <Logger module="./Voodoo_Logger.dll" class="XmlLogger" />
+        <Hook module="./Voodoo_Hook.dll" class="EHHookManager" />
+        <Adapter module="./Voodoo_Gem.dll" class="Gem_Adapter" />
+        <!-- Other modules to be loaded -->
+        <!--<Module file="Voodoo_Logger.dll" />-->
+    </Core>
+    <!-- Logger class settings -->
+    <Logger>
+        <!-- Filename for log -->
+        <File>VoodooGem</File>
+    </Logger>
+    <!-- Not implemented -->
+    <Filesystem>
+        <Path>$(current)</Path>
+        <Path>$(core)/Resources/Gem</Path>
+        <Path>$(core)/Resources/Generic</Path>
+        <DefaultExt type="shader" ext="cgfx"/>
+        <DefaultExt type="image" ext="png"/>
+    </Filesystem>
+    <Gem_Adapter>
+        <Shaders>
+            <Shader>test.cgfx</Shader>
+            <Shader>voodoologo.cgfx</Shader>
+        </Shaders>
+    </Gem_Adapter>
+</VoodooConfig>

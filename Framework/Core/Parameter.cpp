@@ -168,6 +168,16 @@ namespace VoodooShader
         paramW = this->mValueFloat[3];
     }
 
+    TextureRef Parameter::GetTexture()
+    {
+        return mValueTexture;
+    };
+
+    float * Parameter::GetFloat()
+    {
+        return mValueFloat;
+    };
+
     void Parameter::ForceUpdate()
     {
         if ( mCore )

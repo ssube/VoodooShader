@@ -1,6 +1,6 @@
 
 Voodoo Shader Framework
-v0.1.11.91
+v0.2.3.139
 
 = Contents:
 1. Summary
@@ -47,8 +47,8 @@ Adapters can be found included with Voodoo or on the Voodoo Shader Framework sit
 Adapters may or may not use install wizards. Each adapter will have documentation on how to install
 and configure it. 
 
-You should only use adapters built against the Voodoo core you have installed, mixing versions may
-cause problems.
+You should only use adapters designed to work with the Voodoo core you have installed. Mixing 
+versions, especially major or minor versions (x.0.0.0 or 0.x.0.0), can cause crashes and other problems.
 
 
 = 4. Running Voodoo
@@ -57,9 +57,9 @@ The precise behavior of Voodoo depends on the adapter and game it is being used 
 common behavior is described here.
 
 Voodoo will automatically hook into the game on launch, if it is properly installed. The Voodoo 
-runtime will create a comprehensive log file in the game directory. In the future, VSF will use a
-XML-based settings file to specify per-game configuration. The config file will be contained in the
-game directory, while external resources will be in the Voodoo directory.
+runtime will create a comprehensive log file in the game directory. Voodoo uses an XML configuration
+file, contained in the game directory, and may use other resources in the game directory or Voodoo
+root directory.
 
 Debug builds will perform significant logging, potentially slowing the game down but providing much
 information. Voodoo debug modules may be used in addition to traditional video API debuggers; they
@@ -69,8 +69,8 @@ results in some detail.
 
 = 5. Reporting Bugs
 
-Voodoo is a prototype (pre-alpha) library at this point. It undoubtedly has bugs. If you run into a
-bug, please go to http://www.voodooshader.com and report the bug on the forum.
+Voodoo is in an alpha testing staget. It undoubtedly has bugs. If you run into a bug, please go 
+to http://www.voodooshader.com and report the bug on the forum.
 
 A bug tracker for all Voodoo elements, including shaders and adapters, will be deployed soon.
 

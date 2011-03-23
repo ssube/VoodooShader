@@ -28,12 +28,19 @@
 
 namespace VoodooShader
 {
+    /**
+     * 
+     */
     class VOODOO_API Parameter
     {
     public:
         /**
-         * Virtual (global-level) parameter constructor. This will create a 
-         * named parameter in the Cg runtime and register it in the given Core. 
+         * Virtual parameter (context-level) constructor. This will create a 
+         * named parameter in the Cg runtime and register it in the given Core, but
+         * the parameter will not exist in any effects. Virtual parameters are used
+         * to link many effect-level params to a single data source.
+         * 
+         * @sa See the @ref virtualparams "parameter documentation" for details.
          */
         Parameter
         (
@@ -42,56 +49,135 @@ namespace VoodooShader
             _In_ ParameterType type
         );
 
+        /**
+         * Creates a parameter from an actual parameter (shader-level). This
+         * parameter will update values in the Shader, but is more limited in use.
+         * 
+         * @sa See the @ref virtualparams "parameter documentation" for details.
+         */
         Parameter
         (
             _In_ Shader * parent, 
             _In_ CGparameter param
         );
 
+        /**
+         * Retrieves the fully-qualified parameter name. Virtual parameters will
+         * be of the form <code>:[param-name]</code>, while actual parameters will
+         * use <code>[shader-name]:[param-name]</code>. If the parameter is no longer
+         * valid, the value "invalid-param" will be used instead (usually illegal as the
+         * '-' character cannot be used in an identifier). 
+         * 
+         * @returns The parameter's name.
+         */
         String Name();
 
-        CGparameter GetParameter();
+        /**
+         * Retrieves the underlying Cg parameter object.
+         * 
+         * @returns The Cg parameter this object is bound to.
+         */
+        const CGparameter GetCgParameter();
+
+        /**
+         * Retrieves the type of this parameter. This specifies what type and how
+         * many data components are used (one texture or 1-16 floats).
+         */
         ParameterType GetType();
 
         /**
-         * Binds two parameters, forcing their values to be identical. This 
-         * should be used with care, as it has some requirements and 
-         * restrictions. It is used to control some of the more common variables
-         * found in shaders.
+         * Attaches a second parameter to this one, forcing the other to update whenever this
+         * value is changed. This can only
          *
-         * @warning This <em>cannot</em> be used to bind one effect's parameter 
-         *        to another. It can only be used to bind effect parameters to
-         *        virtual or global parameters. If this is called on a non-virtual
-         *        parameter, it will throw.
+         * @warning This <em>cannot</em> be used to bind one effect's parameter to another. 
+         *          It can only be used to bind actual parameters to virtual parameters. 
+         *          
+         * @param param The parameter to bind to this one.
+         * @throws Exception if called on an actual parameter.
          */
         void Attach
         (
             _In_ ParameterRef param
         );
 
+        /**
+         * Sets this parameter's texture source.
+         * 
+         * @warning Setting the wrong data type will not return any errors and will not
+         *          invalidate the actual data, but is useless.
+         *          
+         * @sa Parameter::Set(float)
+         * @sa Parameter::Set(float,float)
+         * @sa Parameter::Set(float,float,float)
+         * @sa Parameter::Set(float,float,float,float)
+         */
         void Set
         (
             _In_ TextureRef newTex
         );
-
+        
+        /**
+         * Sets this parameter's first float component (r or x).
+         * 
+         * @warning Setting the wrong data type will not return any errors and will not
+         *          invalidate the actual data, but is useless.
+         * 
+         * @sa Parameter::Set(TextureRef)
+         * @sa Parameter::Set(float,float)
+         * @sa Parameter::Set(float,float,float)
+         * @sa Parameter::Set(float,float,float,float)
+         */
         void Set
         (
             _In_ float newX
         );
-
+        
+        /**
+         * Sets this parameter's first two float components (rg or xy).
+         * 
+         * @warning Setting the wrong data type will not return any errors and will not
+         *          invalidate the actual data, but is useless.
+         *          
+         * @sa Parameter::Set(TextureRef)
+         * @sa Parameter::Set(float)
+         * @sa Parameter::Set(float,float,float)
+         * @sa Parameter::Set(float,float,float,float)
+         */
         void Set
         (
             _In_ float newX, 
             _In_ float newY
         );
-
+        
+        /**
+         * Sets this parameter's first three float components (rgb or xyz).
+         * 
+         * @warning Setting the wrong data type will not return any errors and will not
+         *          invalidate the actual data, but is useless.
+         *          
+         * @sa Parameter::Set(TextureRef)
+         * @sa Parameter::Set(float)
+         * @sa Parameter::Set(float,float)
+         * @sa Parameter::Set(float,float,float,float)
+         */
         void Set
         (
             _In_ float newX, 
             _In_ float newY, 
             _In_ float newZ
         );
-
+        
+        /**
+         * Sets this parameter's first four float components (rgba or xyzw).
+         * 
+         * @warning Setting the wrong data type will not return any errors and will not
+         *          invalidate the actual data, but is useless.
+         *          
+         * @sa Parameter::Set(TextureRef)
+         * @sa Parameter::Set(float)
+         * @sa Parameter::Set(float,float)
+         * @sa Parameter::Set(float,float,float)
+         */
         void Set
         (
             _In_ float newX, 
@@ -99,30 +185,70 @@ namespace VoodooShader
             _In_ float newZ, 
             _In_ float newW
         );
-
+        
+        /**
+         * Gets this parameter's texture source.
+         * 
+         * @sa Parameter::Get(float)
+         * @sa Parameter::Get(float,float)
+         * @sa Parameter::Get(float,float,float)
+         * @sa Parameter::Get(float,float,float,float)
+         */
         void Get
         (
             _Out_ TextureRef & param
         );
-
+        
+        /**
+         * Gets this parameter's texture source.
+         * 
+         * @sa Parameter::Get(TextureRef)
+         * @sa Parameter::Get(float,float)
+         * @sa Parameter::Get(float,float,float)
+         * @sa Parameter::Get(float,float,float,float)
+         */
         void Get
         (
             _Out_ float & paramX
         );
-
+        
+        /**
+         * Gets this parameter's texture source.
+         * 
+         * @sa Parameter::Get(TextureRef)
+         * @sa Parameter::Get(float)
+         * @sa Parameter::Get(float,float,float)
+         * @sa Parameter::Get(float,float,float,float)
+         */
         void Get
         (
             _Out_ float & paramX, 
             _Out_ float & paramY
         );
-
+        
+        /**
+         * Gets this parameter's texture source.
+         * 
+         * @sa Parameter::Get(TextureRef)
+         * @sa Parameter::Get(float)
+         * @sa Parameter::Get(float,float)
+         * @sa Parameter::Get(float,float,float,float)
+         */
         void Get
         (
             _Out_ float & paramX, 
             _Out_ float & paramY, 
             _Out_ float & paramZ
         );
-
+        
+        /**
+         * Gets this parameter's texture source.
+         * 
+         * @sa Parameter::Get(TextureRef)
+         * @sa Parameter::Get(float)
+         * @sa Parameter::Get(float,float)
+         * @sa Parameter::Get(float,float,float)
+         */
         void Get
         (
             _Out_ float & paramX, 
@@ -131,16 +257,25 @@ namespace VoodooShader
             _Out_ float & paramW
         );
 
-        inline TextureRef GetTexture()
-        {
-            return mValueTexture;
-        };
+        /**
+         * Retrieves the texture source for this parameter.
+         */
+        TextureRef GetTexture();
 
-        inline float * GetFloat()
-        {
-            return mValueFloat;
-        };
+        /**
+         * Retrieves the float buffer for this parameter. This contains all
+         * 16 float components, for all sizes (float1 to float4x4). Any component
+         * may be written to, but only the appropriate number will be sent to the
+         * Cg parameter.
+         */
+        _Ret_count_c_(16)
+        float * GetFloat();
 
+        /**
+         * Attempts to update the parameter value of the Cg parameter immediately.
+         * 
+         * @warning This does not work with samplers, only float-type parameters.
+         */
         void ForceUpdate();
 
     private:

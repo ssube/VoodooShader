@@ -9,10 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specific Adapters", "Specif
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{093207D3-DF56-4F72-BD00-ACACD9476FA8}"
 	ProjectSection(SolutionItems) = preProject
-		CREDITS = CREDITS
+		CREDITS.markdown = CREDITS.markdown
 		Docs\Doxyfile = Docs\Doxyfile
 		LICENSE = LICENSE
-		README = README
+		README.markdown = README.markdown
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{9FC03207-E672-46B6-BB1D-B34C6F00AB54}"
@@ -363,9 +363,9 @@ Global
 		{089DE4CD-7134-42A8-9673-2EE03832AEF6} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

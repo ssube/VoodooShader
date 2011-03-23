@@ -20,66 +20,133 @@
 \**************************************************************************************************/
   
 /**
+ * @page modulespec Module Specifications
+ * <p>
+ * The Voodoo Core library (usually Voodoo_Core.dll) is designed to provide a generic framework
+ * and certain Voodoo-specific features to help support shaders. To allow additional features
+ * without breaking compatibility, Voodoo provides a class-based plugin interface. Modules may
+ * be added and classes provided by those modules created and used within Voodoo or adapters.
+ * To handle loading these modules, a known interface is required with a few specific features:
+ * </p>
+ * 
+ * @section moduleexports Module Exports
+ * <p>
+ * Each Voodoo module must export a set of 4 functions. These are used by the core to load and
+ * query the module's version and what classes it adds. All these functions must be exported
+ * as their name only, no mangling or decorating of any kind.
+ * </p>
+ * <p><code>Version ModuleVersion();</code></p>
+ * <p>
+ * The ModuleVersion function returns a Version struct with the module's name, version and
+ * debug build flag. This is used primarily for logging purposes.
+ * </p>
+ * <p><code>int ClassCount();</code></p>
+ * <p>
+ * Returns the total number of classes provided by this module. Any class that needs to be
+ * created by other code must be listed in this function and the next.
+ * </p>
+ * <p><code>const char * ClassInfo(int number);</code></p>
+ * <p>
+ * Returns the name of the given class. This is used to register the classes in the core
+ * ModuleManager initially. As each module is loaded, the provided classes are iterated
+ * through from <code>0</code> to <code>ClassCount</code> and added to the list of
+ * available classes.
+ * </p>
+ * <p><code>IObject * ClassCreate(int number, Core * core);</code></p>
+ * <p>
+ * Creates a new instance of the given class, bound to the provided Core. For classes
+ * needing additional data, they can cache and/or use the core. 
+ * </p>
+ * 
+ * @section moduleiobject IObject Interface
+ * <p>
+ * Every class provided through the above API <em>must</em> derive from the IObject
+ * interface and implement both methods.
+ * </p>
+ * <p><code>void IObject::DestroyObject();</code></p>
+ * <p>
+ * Destroys the object, using <code>delete</code> from the same runtime it was created
+ * in. <code>ClassCreate</code> is usually a wrapper for <code>new</code> and this method
+ * usually just calls <code>delete this</code>. This does not null the pointer, must
+ * clean up all memory allocated to the object, but may throw exceptions.
+ * </p>
+ * <p><code>const char * IObject::GetObjectClass();</code></p>
+ * <p>
+ * Returns the object's class. This can be used to identify the source module or create
+ * another object of the same time. This should return the same value as <code>ClassInfo</code>
+ * for this class, so:
+ * </p>
+ * <p><code>
+ * const char * nameA = ClassInfo(1);<br />
+ * IObject * object = ClassCreate(1);<br />
+ * const char * nameB = object->GetObjectClass();<br />
+ * <br />
+ * assert( nameA == nameB ); // May return the same string, for simplicity, but<br />
+ * assert( strcmp(nameA, nameB) == 0 ); // Strings must always compare to identical<br />
+ * </code></p>
+ * <p>
+ * While IObject does not provide reference-counting or fancier features, it does handle
+ * most vital features of dynamic module classes. Additional features may be added to
+ * later versions as needed.
+ * </p> 
+ *
  * @page adapterspec Adapter Specifications
- * 
- * The Voodoo Core is API and program independent and leaves most interfacing to the
- * loaded adapter. To work properly with the core, each Adapter must provide a standard
- * entry point and implement a class derived from the Adapter interface defined in
- * the core.
- * 
- * @section adapterep Entry Point
  * <p>
- *  Each adapter module must export a pair of functions, used to create and destroy the Adapter. The
- *  functions must have the signatures:
+ * The adapter serves as a binding between an unknown (by the core library) graphics API and
+ * the constant Voodoo framework. The adapter is responsible for handling any interaction between
+ * the two, performing translation as necessary, and handling any required details. 
  * </p>
  * <p>
- *  <code>
- *      VoodooShader::Adapter * __stdcall CreateAdapter( VoodooShader::Core * core);<br />
- *      void __stdcall DestroyAdapter( VoodooShader::Adapter * adapter);
- *  </code>
+ * While most classes provided by addon modules are free to provide whatever interface they wish
+ * and are mostly autonomous, adapter classes must fit a very specific set of behavior rules and
+ * perform exactly as expected by the Core.
  * </p>
  * <p>
- *  The exports must not be mangled or have any symbols prepended or appended. It is recommended that
- *  these functions be simple wrappers for <code>new</code> and <code>delete</code>, with any
- *  additional initialization performed within the Adapter constructor and destructor if possible.
+ * In many senses, adapters are exactly like regular addon modules and they must follow the
+ * @ref modulespec "same specifications" as any other module. However, only one adapter object is
+ * created at a time, and that object <em>must</em> derive from IAdapter.
  * </p>
  * <p>
- *  The chain of execution for the Voodoo loading processes begins with the dynamic loader, which
- *  intercepts a single hook function in the target process. The loader then finds and loads the
- *  Voodoo core, passing the core's binary path and some additional data through. The Core starts
- *  itself and parses the VoodooConfig.xml file located in the target's startup directory. This
- *  configuration file specifies the Adapter module to be used, as well as any extended options
- *  needed. The Core locates and loads the adapter, following the given settings, and calls the
- *  <code>CreateAdapter</code> function, passing <code>this</code> as the parameter. The Adapter
- *  may access the Core's creation parameter by calling Core::GetCreationParameters(). 
- * </p>
- * <p>
- *  The <code>DestroyAdapter</code> is later called when the process is shutting down, although
- *  the Adapter may destroy itself and the Core at an earlier point, if it so chooses. If the
- *  Core and/or Adapter are still alive when the loader receives a process detach notification,
- *  the core's destroy function is called. If an Adapter is still bound to the Core, the 
- *  destructor then calls <code>DestroyAdapter</code>, passing the bound adapter as the parameter.
- *  The Adapter is responsible for any necessary cleanup at this point. After the adapter is
- *  destroyed, the hook manager is destroyed, and finally the logger is dumped to disk and
- *  destroyed.
+ * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter
+ * itself. In most cases, the adapter and supporting classes should conform to a basic naming scheme.
+ * Each Voodoo adapter is given a short one word somewhat-game-related name. It is recommended that
+ * the adapter class be of the form [name]_Adapter and each supporting class use [name]_[classname],
+ * to easily identify them among the available classes. If the adapter or module is official, the
+ * name scheme extends to the module's name (Voodoo/[name]) and often filename (Voodoo_[name].dll).
  * </p>
  * 
- * @section adapteri Interface
+ * @page voodoosystem How Voodoo Works
  * <p>
- *  To allow the Voodoo core to work with adapters, each adapter module must implement
- *  a class derived from the Adapter interface and register the adapter object by calling
- *  Core::SetAdapter() when the adapter object is created. 
+ *  Voodoo provides a framework for constant features across a wide variety of games. Support
+ *  ranges from OpenGL 1.1 to DirectX 10, with a focus on translating older APIs to their newer
+ *  counterparts. To handle the huge differences, Voodoo is very modular and uses a number of
+ *  universal and specific components.
  * </p>
  * <p>
- *  The adapter object may be created at any time during execution. Delays occur often
- *  in DirectX adapters, which must wait for the process to create a device before creating
- *  the Adapter object. To provide this delay, the adapter module's LoadAdapter function
- *  should install any necessary hooks to intercept later function calls. 
+ *  The chain of execution for Voodoo begins with the dynamic loader (Voodoo/Loader), which 
+ *  intercepts a single hook function in the target process. Because of how Window's search path 
+ *  for DLLs works, this loads the dynamic loader into the target's memory space.
  * </p>
  * <p>
- *  The adapter object must implement all functions given in the Adapter interface and they
- *  must perform as stated in the interface documentation. Different behavior may cause
- *  serious bugs.
+ *  The loader then retrieves the Voodoo path from the registry and dynamically loads the core
+ *  module (Voodoo/Core). With the core loaded, the loader creates a Core object and returns
+ *  execution to the target process.
+ * </p>
+ * <p>
+ *  The Core object, during creation, starts Cg and then handles loading other modules. The Cg 
+ *  runtime is loaded, a Cg context created and error callbacks registered. The Core then parses 
+ *  the configuration file present in the current directory and begins loading any additional modules 
+ *  given in that file. The logger is created first, to  provide the most information possible in 
+ *  case of errors. The hook manager is created second and the adapter third. Any other modules 
+ *  (given as Module elements in the config file under /VoodooConfig/Core) are loaded, logged and 
+ *  their classes registered.
+ * </p>
+ * <p>
+ *  The adapter load process performs most of the detail work. In many cases, the adapter creates
+ *  hooks in a number of system functions (creation functions for D3D or functions for OpenGL)
+ *  and may load an API-specific module for the Cg runtime. The adapter's constructor may perform
+ *  immediate binding to the graphics API or simply install hooks so the API is bound during
+ *  creation.
  * </p>
  * 
  * @page codestyle Code Style

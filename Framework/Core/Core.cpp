@@ -15,19 +15,18 @@ namespace VoodooShader
     #pragma comment(linker, "/EXPORT:CreateCore=?CreateCore@VoodooShader@@YAPAVCore@1@PBD@Z")
     #pragma comment(linker, "/EXPORT:DestroyCore=?DestroyCore@VoodooShader@@YAXPAVCore@1@@Z")
 
-    Core * CreateCore(const char * path)
+    Core * CreateCore(_In_ const char * path)
     {
         return new Core(path);
     }
 
-    void DestroyCore(Core * core)
+    void DestroyCore(_In_ Core * core)
     {
         delete core;
     }
 
-    Core::Core(const char * path)
-        : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCGContext(NULL), 
-          mManagerFS(NULL), mManagerMat(NULL), mBasePath(path)
+    Core::Core(_In_ const char * path)
+        : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCGContext(NULL), mBasePath(path)
     {
         using namespace pugi;
 
@@ -40,9 +39,6 @@ namespace VoodooShader
         }
 
         cgSetErrorHandler(&(Core::CGErrorHandler), this);
-
-        this->mManagerFS  = new FullscreenManager(this);
-        this->mManagerMat = new MaterialManager(this);
 
         mModManager = new ModuleManager(this);
 
@@ -160,16 +156,6 @@ namespace VoodooShader
             this->mLogger->DestroyObject();
         }
 
-        if ( this->mManagerFS )
-        {
-            delete this->mManagerFS;
-        }
-
-        if ( this->mManagerMat )
-        {
-            delete this->mManagerMat;
-        }
-
         if ( cgIsContext(this->mCGContext) )
         {
             cgDestroyContext(this->mCGContext);
@@ -181,9 +167,9 @@ namespace VoodooShader
         return mBasePath;
     }
 
-    CGcontext Core::GetCGContext()
+    CGcontext Core::GetCgContext()
     {
-        return this->mCGContext;
+        return this->mCgContext;
     }
 
     Version Core::GetVersion()
