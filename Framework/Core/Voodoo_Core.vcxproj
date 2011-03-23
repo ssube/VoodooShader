@@ -84,14 +84,14 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <RunCodeAnalysis Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">true</RunCodeAnalysis>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(IncludePath);m:\Cg_July2010\include\</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(LibraryPath);m:\Cg_July2010\lib\</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IncludePath);m:\Cg_July2010\include\</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LibraryPath);m:\Cg_July2010\lib\</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IncludePath);m:\Cg_July2010\include\</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LibraryPath);m:\Cg_July2010\lib\</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(IncludePath);m:\Cg_July2010\include\</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(LibraryPath);m:\Cg_July2010\lib\</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(IncludePath);m:\Cg_July2010\include\;M:\pugixml-1.0\src</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(LibraryPath);m:\Cg_July2010\lib\;M:\pugixml-1.0\scripts\vs2010\x32</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IncludePath);m:\Cg_July2010\include\;M:\pugixml-1.0\src</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LibraryPath);m:\Cg_July2010\lib\;M:\pugixml-1.0\scripts\vs2010\x32</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IncludePath);m:\Cg_July2010\include\;M:\pugixml-1.0\src</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LibraryPath);m:\Cg_July2010\lib\;M:\pugixml-1.0\scripts\vs2010\x32</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(IncludePath);m:\Cg_July2010\include\;M:\pugixml-1.0\src</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(LibraryPath);m:\Cg_July2010\lib\;M:\pugixml-1.0\scripts\vs2010\x32</LibraryPath>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
     <CodeAnalysisIgnoreGeneratedCode Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">false</CodeAnalysisIgnoreGeneratedCode>
@@ -118,7 +118,7 @@
       </CallingConvention>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cg.lib;pugixml_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AssemblyDebug>true</AssemblyDebug>
@@ -156,7 +156,7 @@
       <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cg.lib;pugixml_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AssemblyDebug>true</AssemblyDebug>
@@ -193,7 +193,7 @@
       </CallingConvention>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cg.lib;pugixml.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -228,7 +228,6 @@
     <ClCompile Include="MaterialManager.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Parameter.cpp" />
-    <ClCompile Include="pugixml.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
@@ -249,8 +248,6 @@
     <ClInclude Include="Meta.hpp" />
     <ClInclude Include="Module.hpp" />
     <ClInclude Include="Parameter.hpp" />
-    <ClInclude Include="pugiconfig.hpp" />
-    <ClInclude Include="pugixml.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Texture.hpp" />

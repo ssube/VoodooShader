@@ -59,11 +59,13 @@ namespace VoodooShader
         Logger::~Logger()
         {
             this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger destroyed.");
+            this->Dump();
 
             if ( this->mLogFile.is_open() )
             {
                 this->Close();
             }
+
             if ( this->mLocalTime )
             {
                 delete this->mLocalTime;

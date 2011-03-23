@@ -11,13 +11,19 @@ namespace VoodooShader
     {
     }
 
-    ModuleRef ModuleManager::LoadModule( _In_ String name, bool prepend )
+    ModuleManager::~ModuleManager()
+    {
+        mClasses.clear();
+        mModules.clear();
+    }
+
+    ModuleRef ModuleManager::LoadModule( _In_ String name )
     {
         // Build the full path
         String path;
-        if ( prepend )
+        if ( name[0] == '.' )
         {
-            path = mBasePath + name;
+            path = mBasePath + name.substr(2);
         } else {
             path = name;
         }
@@ -35,6 +41,14 @@ namespace VoodooShader
 
         if ( rawmodule == NULL )
         {
+            mCore->Log
+            (
+                LL_Error,
+                VOODOO_CORE_NAME,
+                "Unable to load module %s.",
+                path.c_str()
+            );
+
             return NULL;
         }
 
@@ -42,8 +56,7 @@ namespace VoodooShader
         mModules[path] = module;
 
         // Register classes from module
-        Version moduleVersion = module->ModuleVersion();
-        mCore->LogModule(moduleVersion);
+        mCore->LogModule(module->ModuleVersion());
 
         int classCount = module->ClassCount();
         for ( int curClass = 0; curClass < classCount; ++curClass )

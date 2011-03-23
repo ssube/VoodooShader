@@ -37,6 +37,12 @@ namespace VoodooShader
 {
     namespace Gem
     {
+        Version API_ModuleVersion()
+        {
+            Version moduleVersion = VOODOO_META_VERSION_STRUCT(GEM);
+            return moduleVersion;
+        }
+
         int API_ClassCount()
         {
             return 1;

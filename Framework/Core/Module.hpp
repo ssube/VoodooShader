@@ -49,8 +49,7 @@ namespace VoodooShader
 
         ModuleRef LoadModule
         (
-            _In_ String name,
-            _In_ bool prepend = false
+            _In_ String name
         );
 
         _Check_return_

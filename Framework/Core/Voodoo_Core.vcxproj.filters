@@ -25,9 +25,6 @@
     <ClCompile Include="Module.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="pugixml.cpp">
-      <Filter>pugixml</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Voodoo_Core.hpp" />
@@ -91,12 +88,6 @@
     <ClInclude Include="Object.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="pugixml.hpp">
-      <Filter>pugixml</Filter>
-    </ClInclude>
-    <ClInclude Include="pugiconfig.hpp">
-      <Filter>pugixml</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">
@@ -113,9 +104,6 @@
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{5ef7e194-26d0-463f-b42c-88fc238d12bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="pugixml">
-      <UniqueIdentifier>{d3c83bc1-c799-4627-aa26-ca6a49cc5191}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

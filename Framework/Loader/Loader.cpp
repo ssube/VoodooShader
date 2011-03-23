@@ -59,14 +59,23 @@ bool LoadVoodoo()
         return false;
     }
 
-    core = (*funcLoad)(VoodooPath);
+    try
+    {
+        core = (*funcLoad)(VoodooPath);
+    } catch ( std::exception & exc ) {
+        MessageBoxA(NULL, exc.what(), "Loader Error", MB_ICONERROR|MB_OK);
+        core = NULL;
+    }
 
     return ( core != NULL );
 }
 
 bool UnloadVoodoo()
 {
-    (*funcUnload)(core);
+    if ( funcUnload && core )
+    {
+        (*funcUnload)(core);
+    }
 
     return true;
 }

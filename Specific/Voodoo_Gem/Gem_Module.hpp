@@ -39,6 +39,8 @@ namespace VoodooShader
     {
         class Adapter;
 
+        Version API_ModuleVersion();
+
         int API_ClassCount();
 
         const char * API_ClassInfo

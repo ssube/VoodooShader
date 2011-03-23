@@ -28,28 +28,11 @@ namespace VoodooShader
         {
             mCore->Log(LL_Info, VOODOO_GEM_NAME, "Starting adapter...");
 
-            mCore->LogModule(this->GetVersion());
-
-            // Core version check
-            Version coreVersion = core->GetVersion();
-
-            if ( coreVersion.Rev != VOODOO_GLOBAL_VERSION_REV    )
-            {
-                core->Log
-                (
-                    LL_Warning, 
-                    VOODOO_GEM_NAME, 
-                    "Warning: The core module appears to a different version than this adapter. You may experience errors or crashes. Please upgrade all modules to the same version."
-                );
-            }
-
             VoodooCore = mCore;
             VoodooGem = this;
 
             // Get the handles to the needed hook modules
             HMODULE procmodule = GetModuleHandle(NULL);
-            HMODULE d3d8module = GetModuleHandle("d3d8.dll");
-
             if ( procmodule )
             {
                 char procpath[MAX_PATH];
@@ -57,32 +40,20 @@ namespace VoodooShader
                 mCore->Log(LL_Info, VOODOO_GEM_NAME, "Gem loaded into process %s.", procpath);
             }
 
-            if ( d3d8module )
+            void * d3d8hookpoint = mCore->GetModuleManager()->FindFunction("d3d8.dll", "Direct3DCreate8");
+            if ( d3d8hookpoint )
             {
-                void * d3d8hookpoint = mCore->GetModuleManager()->FindFunction("d3d8.dll", "Direct3DCreate8");
-
                 IHookManager * hooker = mCore->GetHookManager();
                 hooker->CreateHook("d3d8create", d3d8hookpoint, &Gem_D3D8Create);
                 hooker->CreateHook("createfile", &CreateFileA, &Gem_CreateFileA);
+            } else {
+                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Unable to find D3D8 hook point; adapter will most likely not run.");
             }
-
-            IDocument * config = mCore->GetConfig();
-            INode * gemRoot = config->GetRoot()->GetSingleChild("Gem_Adapter");
-            NodeMap fsList = gemRoot->GetSingleChild("Shaders")->GetChildren("Shader");
-            std::for_each
-            (
-                fsList.begin(), 
-                fsList.end(), 
-                [&](std::pair<String,INode*> shader)
-                {
-                    mCore->Log(LL_Info, VOODOO_GEM_NAME, "Post shader: %s", shader.second->GetValue().c_str());
-                }
-            );
         }
 
         Adapter::~Adapter()
         {
-            this->SetDevice(NULL);
+            //this->SetDevice(NULL);
         }
 
         void Adapter::DestroyObject()
@@ -90,12 +61,7 @@ namespace VoodooShader
             delete this;
         }
 
-        int Adapter::GetObjectID()
-        {
-            return 0;
-        }
-
-        const char * Adapter::GetObjectName()
+        const char * Adapter::GetObjectClass()
         {
             return "Gem_Adapter";
         }
