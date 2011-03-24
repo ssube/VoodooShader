@@ -85,29 +85,238 @@
  * 
  * @page License
  * 
- * @section summary Summary
+ * @section licensesummary Summary
  * <p>
  *    The Voodoo Shader Framework is licensed under the terms of the GNU General
- *    Public License with a few minor modifications. This is in an effort to make
- *  it useful to as many people as possible. Adapters and such may use different
- *  license terms, the terms below apply only to the core library. 
+ *    Public License. This is in an effort to make it useful to as many people as 
+ *    possible. 
+ * </p>
+ * <p>
+ *    Some elements of the framework and additional modules may use different
+ *    license terms, the terms below apply only to the core library. Differences
+ *    in license terms are usually clearly marked, please contact the developer(s)
+ *    with any questions you may have.
+ * </p>
+ * @subsection licenseeula Application EULAs
+ * <p>
+ *   The Voodoo Shader Framework is not a derivative work of any other work, nor is it
+ *   bound under the terms of an other application's EULA or other license restrictions. 
+ *   The framework is licensed solely under the terms of the GNU General Public License,
+ *   version 2, and any claims otherwise are both false and unlawful.
+ * </p>
+ * <p>
+ *   Portions of the Voodoo Shader Framework may be designed to operate aware of other 
+ *   applications. These other applications may be licensed under different terms than 
+ *   the framework. Claims have been made that Voodoo is then bound by the terms of these 
+ *   target applications, or has no license terms. These are untrue and in no way change 
+ *   the license terms Voodoo is provided under. Any use, redistribution or modification 
+ *   (among other actions) of Voodoo are legally bound by the terms in this document.
+ * </p>
+ * @subsection licensecontact Contact
+ * <p>
+ *    Questions about the Voodoo framework and its license terms should be directed to Sean
+ *    Sube, at the email address 
+ *    <a href="mailto:peachykeen@voodooshader.com">peachykeen@voodooshader.com</a>.
+ * </p>
+ * <p>
+ *    Questions about other modules and their terms should be directed to the appropriate
+ *    developers. Please check any documentation included in the modules for contact
+ *    information.
+ * </p>
+ * @subsection licensetrademark Trademarks and other property
+ * <p>
+ *    Any trademarks or other intellectual property used in this documentation or the
+ *    Voodoo framework is the property of their respective owner(s). The includes the
+ *    pugixml name, nVidia, Cg and any other such content.
+ * </p>
+ * 
+ * @section pugixmllicense pugixml License
+ * <p>
+ *   The Voodoo Shader Framework core library uses the pugixml library to handle
+ *   XML parsing and data retrieval. This library is used under the terms of the MIT
+ *   license. Thanks are given to Arseny Kapoulkine and all others involved for this
+ *   excellent library, it has made config files a <em>lot</em> easier to work with.
+ * </p>
+ * @subsection pugixmlterms pugixml License Terms
+ * <p>
+ * Copyright (c) 2006-2010 Arseny Kapoulkine
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ * </p>
+ * 
+ * @section cglicense Cg Framework License
+ * <p>
+ *   The Voodoo Shader Framework uses nVidia's Cg Toolkit for shader compiling
+ *   and handling. This library is used under license terms provided below. 
+ *   Voodoo would not really be possible without Cg, so thanks are given to the
+ *   Cg team and nVidia in general for this library.
+ * </p>
+ * @subsection cglicenseterms Cg License Terms
+ * <p>
+ * License For Customer Use of NVIDIA Software
+ * 
+ * IMPORTANT NOTICE -- READ CAREFULLY: This License For Customer Use of
+ * NVIDIA Software ("LICENSE") is the agreement which governs use of the
+ * software of NVIDIA Corporation and its subsidiaries ("NVIDIA") downloadable
+ * herefrom, including computer software and associated printed materials
+ * ("SOFTWARE"). By downloading, installing, copying, or otherwise using the
+ * SOFTWARE, you agree to be bound by the terms of this LICENSE.  If you do
+ * not agree to the terms of this LICENSE, do not download the SOFTWARE.
+ * 
+ * RECITALS
+ * 
+ * Use of NVIDIA's products requires three elements: the SOFTWARE, the hardware
+ * on a graphics controller board, and a personal computer. The SOFTWARE is
+ * protected by copyright laws and international copyright treaties, as well as
+ * other intellectual property laws and treaties.  The SOFTWARE is not sold, and
+ * instead is only licensed for use, strictly in accordance with this document.
+ * The hardware is protected by various patents, and is sold, but this agreement
+ * does not cover that sale, since it may not necessarily be sold as a package
+ * with the SOFTWARE. This agreement sets forth the terms and conditions of the
+ * SOFTWARE LICENSE only.
+ *
+ * 1.  DEFINITIONS
+ * 
+ * 1.1  Customer.  Customer means the entity or individual that downloads the
+ * SOFTWARE.
+ * 
+ * 2.  GRANT OF LICENSE
+ * 
+ * 2.1  Rights and Limitations of Grant.  NVIDIA hereby grants Customer the
+ * following non-exclusive, worldwide, royalty-free, non-transferable right
+ * to use the SOFTWARE, with the following limitations:
+ * 
+ * 2.1.1  Rights.   Customer may use, reproduce, distribute, publicly display
+ * and publicly perform the SOFTWARE.
+ * 
+ * 2.1.2  Limitations.
+ * 
+ * No Reverse Engineering.  Customer may not reverse engineer, decompile, or
+ * disassemble the SOFTWARE, nor attempt in any other manner to obtain the
+ * source code.
+ * No Modification.  The SOFTWARE may be redistributed providing that distributed
+ * Cg compiler and runtime binaries are unmodified, except for decompression and
+ * compression.
+ *  No Rental.  Customer may not rent or lease the SOFTWARE to someone else.
+ * 
+ * No Support.  NVIDIA will not be responsible for providing maintenance and
+ * support to Customer or any other end users for the Software distributed by
+ * Customer or others.
+ * 
+ * 3.  TERMINATION
+ * 
+ * This LICENSE will automatically terminate if Customer fails to comply with
+ * any of the terms and conditions hereof.  In such event, Customer must destroy
+ * all copies of the SOFTWARE and all of its component parts.
+ * 
+ * 4.  COPYRIGHT
+ * 
+ * All title and copyrights in and to the SOFTWARE (including but not limited to
+ * all images, photographs, animations, video, audio, music, text, and other
+ * information incorporated into the SOFTWARE), the accompanying printed
+ * materials, and any copies of the SOFTWARE, are owned by NVIDIA, or its
+ * suppliers.  The SOFTWARE is protected by copyright laws and international
+ * treaty provisions.  Accordingly, Customer is required to treat the SOFTWARE
+ * like any other copyrighted material. 
+ * 
+ * Customer  agrees that the Software is proprietary information of NVIDIA and
+ * that NVIDIA owns all right, title and interest therein. There are no implied
+ * licenses under this License, and any rights not expressly granted are reserved
+ * by NVIDIA. The Software is not sold, and instead is only licensed for use,
+ * strictly in accordance with this License. All copies of the Software shall
+ * contain NVIDIA's proprietary rights notices as provided therein. Customer
+ * shall not remove or modify any such proprietary rights notices of NVIDIA. This
+ * License will automatically terminate if Customer fails to comply with any of
+ * the terms and conditions hereof. In such event, Customer must cease
+ * reproducing, distributing, or otherwise using the Software and destroy all
+ * copies thereof.
+ * 
+ * 5.  APPLICABLE LAW
+ * 
+ * This agreement shall be deemed to have been made in, and shall be construed
+ * pursuant to, the laws of the State of Delaware.  Any suit or controversy
+ * arising hereunder shall be brought in the federal or state courts located in
+ * Santa Clara County, California, and each party submits to the venue and
+ * jurisdiction thereof.
+ * 
+ * 6.  DISCLAIMER OF WARRANTIES AND LIMITATION ON LIABILITY
+ * 
+ * 6.1  No Warranties.  TO THE MAXIMUM EXTENT PERMITTED BY
+ * APPLICABLE LAW, THE SOFTWARE IS PROVIDED "AS IS" AND NVIDIA
+ * AND ITS SUPPLIERS DISCLAIM ALL WARRANTIES, EITHER EXPRESS
+ * OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. 
+ * 6.2  No Liability for Consequential Damages.  TO THE MAXIMUM
+ * EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL
+ * NVIDIA OR ITS SUPPLIERS BE LIABLE FOR ANY SPECIAL,
+ * INCIDENTAL, INDIRECT, OR CONSEQUENTIAL DAMAGES WHATSOEVER
+ * (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF
+ * BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS
+ * INFORMATION, OR ANY OTHER PECUNIARY LOSS) ARISING OUT OF
+ * THE USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF NVIDIA
+ * HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  THESE
+ * LIMITATIONS SHALL APPLY NOTWITHSTANDING ANY FAILURE OF
+ * ESSENTIAL PURPOSE OF ANY LIMITED REMEDY.  NVIDIA SHALL HAVE
+ * NO CONTRACTUAL OBLIGATION TO INDEMNIFY CUSTOMER UNDER
+ * THIS LICENSE. CUSTOMER AND/OR END-USERS OF THE SOFTWARE
+ * DISTRIBUTED BY CUSTOMER ASSUME THE ENTIRE COST OF ANY
+ * DAMAGE, LOSS, OR EXPENSE RESULTING FROM THEIR USE OR
+ * EXPLOITATION OF THE SOFTWARE.
+ * 
+ * 7.  MISCELLANEOUS
+ * 
+ * The United Nations Convention on Contracts for the International Sale of
+ * Goods is specifically disclaimed.    This agreement is the final, complete
+ * and exclusive agreement between the parties relating to the subject matter
+ * hereof, and supersedes all prior or contemporaneous understandings and
+ * agreements relating to such subject matter, whether oral or written.
+ * Customer agrees that it will not ship, transfer or export the SOFTWARE
+ * into any country, or use the SOFTWARE in any manner, prohibited by the
+ * United States Bureau of Export Administration or any export laws,
+ * restrictions or regulations.  
+ * 
+ * If any provision of this License is held to be invalid or unenforceable
+ * for any reason, the remaining provisions will continue in full force
+ * without being impaired or invalidated in any way.
+ * 
+ * No term or provisions hereof shall be deemed waived, and no breach excused,
+ * unless such waiver or consent is in writing and signed by the party claimed
+ * to have waived or consented. The waiver by either party of a breach of any
+ * provision of this License will not operate or be interpreted as a waiver of
+ * any other or subsequent breach.
+ * 
+ * This License may be changed only by mutual agreement in writing of the
+ * authorized representatives of the parties.
  * </p>
  *
- * @section notes Notes
+ * @section corelicense Core License
  * <p>
- *  Due to the design of the Voodoo Shader Framework, some elements of the
- *    system may fall within alternate licenses or outside of the core license.
- *    In these cases, alternate terms may be agreed upon by the primary developer
- *    of the Voodoo Shader Framework (Sean Sube) and the interested party. Please
- *    send any license questions to peachykeen@voodooshader.com. Typically, the
- *    Adapter.hpp file and other information required to create a 
- *  Voodoo-compatible binding will be excepted from the terms applied to the 
- *  rest of the core.
+ *   The Voodoo Shader Framework is provided under the following legally binding license 
+ *   terms. These may or may not apply to addon modules and adapters, please contact the 
+ *   developer of each specific module with any questions.
  * </p>
  *
- * @section license License
- * <p>
- *
+ * @subsection corelicenseterms Core License Terms
  *             GNU GENERAL PUBLIC LICENSE
  *                Version 2, June 1991
  * 

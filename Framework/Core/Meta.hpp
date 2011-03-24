@@ -44,10 +44,12 @@
 namespace VoodooShader
 {
     /**
-     * Core classes, all implemented entirely within the core module.
-     * These do not derive from IObject.
+     * Classes implemented entirely within the core module (these do not derive from IObject).
+     * These core classes are available to all Voodoo modules and addons, but use requires
+     * linking against the core library. These provide most of the basic functions needed by
+     * the framework.
      * 
-     * @addtogroup CoreClasses Core Classes
+     * @addtogroup VoodooCore Voodoo/Core
      * @{
      */
     class Converter;
@@ -67,45 +69,41 @@ namespace VoodooShader
      */
 
     /**
+     * Interfaces for major classes that are <em>not</em> implemented within the core module.
+     * These can be used without linking against the core and are typically used by classes
+     * provided by addon modules. These provide extended functions that are required by the
+     * core (completely unrelated classes are defined in their own modules).
+     * 
+     * @addtogroup VoodooGlobal Voodoo/Global
+     * @{
+     * 
      * Interface classes, providing standard access to various dynamic
      * objects. These are not implemented within the core but are instead
      * dynamically linked at runtime. All are derived from IObject.
-     * 
-     * @addtogroup InterfaceClasses Interface Classes
      */
     class IObject;
     class IAdapter;
     class IHookManager;
     class ILogger;
-    /**
-     * @}
-     */
     
     /**
      * Generic structs for passing simple data sets. Structs have no ctor
      * or dtor, nor methods; they should be created with the <code>{m,n,o}</code>
      * syntax. Macros may be available to construct some of them.
-     * 
-     * @addtogroup Structs Structs
-     * @{
      */
     struct TextureDesc;
     struct Version;
-    /**
-     * @}
-     */
 
      /**
       * Macro to throw Voodoo @ref Exception exceptions with extended debug info, particularly
-      * throwing function and filename and line. These exceptions are also logged if possible.
+      * function, filename and line. These exceptions are also logged if possible (requires a valid
+      * core to be given). The Exception class derives from std::exception, so these are simple to
+      * handle.
       */
 #define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
 
     /**
      * Function pointer types for module interfaces.
-     * 
-     * @addtogroup FuncTypes Function Types
-     * @{
      */
     namespace Functions
     {
@@ -118,32 +116,35 @@ namespace VoodooShader
      * @}
      */
 
-    typedef std::string String;
-
     /**
-     * Reference-counted pointer types. Only commonly used types
-     * use shared pointers; most major types exist very rarely and
-     * need more intelligent garbage collection (@ref Core Cores, for
-     * example).
-     * 
-     * @addtogroup RefTypes Reference Types
+     * @addtogroup VoodooCore Voodoo/Core
      * @{
      */
+    typedef std::string                         String;
+    //typedef std::shared_ptr<Core>               CoreRef;
+    //typedef std::weak_ptr<Core>                 CorePtr;
+    typedef std::shared_ptr<FullscreenManager>  FullscreenManagerRef;
+    typedef std::weak_ptr<FullscreenManager>    FullscreenManagerPtr;
+    typedef std::shared_ptr<MaterialManager>    MaterialManagerRef;
+    typedef std::weak_ptr<MaterialManager>      MaterialManagerPtr;
+    typedef std::shared_ptr<Module>             ModuleRef;
+    typedef std::weak_ptr<Module>               ModulePtr;
+    typedef std::shared_ptr<ModuleManager>      ModuleManagerRef;
+    typedef std::weak_ptr<ModuleManager>        ModuleManagerPtr;
     typedef std::shared_ptr<Parameter>          ParameterRef;
+    typedef std::weak_ptr<Parameter>            ParameterPtr;
     typedef std::shared_ptr<Pass>               PassRef;
+    typedef std::weak_ptr<Pass>                 PassPtr;
     typedef std::shared_ptr<Shader>             ShaderRef;
+    typedef std::weak_ptr<Shader>               ShaderPtr;
     typedef std::shared_ptr<Technique>          TechniqueRef;
+    typedef std::weak_ptr<Technique>            TechniquePtr;
     typedef std::shared_ptr<Texture>            TextureRef;
-    /**
-     * @}
-     */
+    typedef std::weak_ptr<Texture>              TexturePtr;
 
     /**
      * Collection types for most common objects. These provide
      * specialized containers and save typing.
-     *
-     * @addtogroup CollectionTypes Collection Types
-     * @{
      */
     // Shader collections
     typedef std::map<String, ShaderRef>         ShaderMap;
@@ -171,8 +172,6 @@ namespace VoodooShader
     typedef std::vector<TextureRef>             TextureVector;
 
     // Module management types
-    typedef std::shared_ptr<Module>             ModuleRef;
-    typedef std::weak_ptr<Module>               ModulePtr;
     typedef std::map<String, ModuleRef>         ModuleMap;
     typedef std::pair<ModulePtr, int>           ClassID;
     typedef std::map<String, ClassID>           ClassMap;
@@ -180,9 +179,6 @@ namespace VoodooShader
     // Miscellaneous collections
     typedef std::map<TextureRef, ShaderRef>     MaterialMap;
     typedef std::map<String, CGeffect>          CGEffectMap;
-    /**
-     * @}
-     */
 
     /**
      * Texture formats for use by @ref VoodooShader::Texture "Textures",
@@ -311,6 +307,9 @@ namespace VoodooShader
         LL_Error        = 0xB0,     /*!< General error log messages */
         LL_Fatal        = 0xFF,     /*!< Fatal error log messages */
     };
+    /**
+     * @}
+     */
 
     /**
      * Describes a texture, including size and format.

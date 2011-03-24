@@ -49,7 +49,7 @@ namespace VoodooShader
          * Handles function-level hooks, redirecting existing functions and calls into
          * new locations. 
          */
-        class __declspec(dllexport) HookManager
+        class HookManager
             : public VoodooShader::IHookManager
         {
         public:

@@ -34,6 +34,10 @@
 namespace VoodooShader
 {
     /**
+     * @addtogroup VoodooCore
+     * @{
+     */
+    /**
      * Provides a clean framework for loading and unloading modules in core, as
      * well as retrieving symbols and modules from memory. 
      */
@@ -114,6 +118,9 @@ namespace VoodooShader
         Functions::InfoFunc    mClassInfo;  
         Functions::CreateFunc  mClassCreate;
      };
+    /**
+     * @}
+     */
 }
 
 #endif /*VOODOO_MODULEMANAGER_HPP*/

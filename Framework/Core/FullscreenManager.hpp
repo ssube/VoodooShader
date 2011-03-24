@@ -29,6 +29,10 @@
 namespace VoodooShader
 {
     /**
+     * @addtogroup VoodooCore
+     * @{
+     */
+    /**
      * Manager class to simplify loading and unloading fullscreen 
      * (post-processing) shader effects.
      * This object provides complete control and support for a multi-shader, 
@@ -103,7 +107,7 @@ namespace VoodooShader
          *        the end of the queue).
          * @throws Exception if start is past the end of the queue.
          * @throws Exception if count is 0.
-         * @throws Exception if the parent Core has no Adapter set.
+         * @throws Exception if the parent Core has no adapter set.
          */
         void Render
         (
@@ -112,12 +116,19 @@ namespace VoodooShader
         );
 
     private:
-        //! A constant reference to the parent VoodooShader::Core
+        /**
+         * Pointer to the parent core.
+         */
         Core * mParent;
 
-        //! A vector containing the list of shaders to render, in order.
+        /**
+         * A vector containing the list of shaders to render, in order. 
+         */
         ShaderVector mShaders;
     };
+    /**
+     * @}
+     */
 }
 
 #endif

@@ -7,8 +7,9 @@
 namespace VoodooShader
 {
     ModuleManager::ModuleManager( _In_ Core * core )
-        : mCore(core), mBasePath(mCore->GetBasePath())
+        : mCore(core)
     {
+        mBasePath = mCore->GetBasePath() + "bin\\";
     }
 
     ModuleManager::~ModuleManager()

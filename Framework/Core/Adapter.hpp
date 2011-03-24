@@ -35,7 +35,7 @@
 namespace VoodooShader
 {
     /**
-     * Generic vertex format for use with Adapter draw calls. This format is
+     * Generic vertex format for use with IAdapter draw calls. This format is
      * compatible with both OpenGL and DirectX.
      *
      * @note Because of the draw mechanism for adapters, most draws with
@@ -58,14 +58,14 @@ namespace VoodooShader
     };
 
     /**
-     * Graphics adapter class, responsible for interfacing the Voodoo Core with
+     * Graphics adapter class, responsible for interfacing the Voodoo core with
      * a given graphics program. 
      *
-     * This class should be implemented for a specific graphics application; 
-     * some generic adapters are provided, but in most cases 
-     * application-specific behavior will make these only partially helpful. 
-     * This class does include a generic error-handler function, which adapters 
-     * may choose not to override if they do not need specific error-handling.
+     * @note This class should be implemented for a specific graphics application; 
+     *       some generic adapters are provided for major APIs, but in most cases 
+     *       application-specific behavior will make these only partially helpful. 
+     * @sa See the @ref adapterspec "adapter specifications" for details on what
+     *     is required of adapter modules and classes.
      */
     class IAdapter
         : public IObject
@@ -73,14 +73,15 @@ namespace VoodooShader
     public:
         /**
          * Retrieves the adapter module version. This can be used to verify
-         * support between modules or versions, or from plugins.
+         * support between modules (don't rely on versions, but they are good
+         * indicators, minimum supported version is usually safe).
          *
          * @return The adapter version.
          */
         virtual Version GetVersion() = 0;
 
         /**
-         * Loads a program in a manner that is compatible with the Adapter's
+         * Loads a program in a manner that is compatible with the adapter's
          * underlying API. For Cg-supported APIs, this uses the appropriate 
          * module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc).
          * This may involve additional compilation or linking.
@@ -100,17 +101,17 @@ namespace VoodooShader
         * managing any errors that may arise.
         *
         * @param pass A shared pointer to the pass to be bound. This should be a
-        *        valid pass, but Adapters must validate it.
+        *        valid pass, but adapters must validate it.
         *
         * @note Adapters may, at their discretion, bind some or even no programs
-        *        to the true graphics API. An example of this is the Direct3D 9 
-        *        adapter, which binds only vertex and fragment programs, ignoring
-        *        any geometry, domain or hull programs.
-        * @note The Adapter may implement passes using deferred parameters; if 
-        *        so, it <em>must</em> update all pass parameters, including 
-        *        effect-level and global-level parameters used in the pass, 
-        *        before this function returns. These updates must be performed so
-        *        they take effect for any draw calls occurring after this call.
+        *       to the true graphics API. An example of this is the Direct3D 9 
+        *       adapter, which binds only vertex and fragment programs, ignoring
+        *       any geometry, domain or hull programs.
+        * @note The Adapter may implement passes using deferred parameters; if so
+        *       it <em>must</em> update all pass parameters, virtual first and actual
+        *       parameters second (to make sure virtual param values get propagated).
+        *       All parameters updates must be performed before this function returns
+        *       and take effect for any draw calls coming after this call.
         */
         virtual void BindPass
         (
@@ -118,51 +119,47 @@ namespace VoodooShader
         ) = 0;
 
         /**
-         * Unbinds the last bound pass. This resets the shader state of the 
-         * underlying graphics API to the same state as before the pass was 
-         * bound. 
+         * Unbinds the last bound pass. This resets the shader state of the underlying graphics 
+         * API to the same state as before the pass was bound. 
          *
-         * @note Adapters must restore all states modified by an 
-         *        Adapter::BindPass() call. They should cache the data, but the 
-         *        exact implementation is left to the Adapter.
+         * @note Adapters must restore all states modified by an IAdapter::BindPass() call. 
+         *       Caching the changes is a simple method, but the exact implementation is left to 
+         *       the adapter.
          *
-         * @note If Adapter::BindPass() is called, render states are likely to
-         *        change. These are unlikely to be reset until 
-         *        Adapter::UnbindPass() is called.
+         * @warning If IAdapter::BindPass() is called, render states are likely to change. These are 
+         *       unlikely to be reset until IAdapter::UnbindPass() is called and may affect other
+         *       draw calls. This behavior may be desired, but should be noted.
          */
         virtual void UnbindPass() = 0;
 
         /**
          * Draws a quad to the screen.
          *
-         * @param vertexData This must be NULL or contain vertex data.
+         * @param vertexData This must contain vertex data for 4 vertexes or be NULL.
          *
-         * @note In APIs which do not not support quads, this should be 
-         *        implemented as two tris or another geometry form capable of 
-         *        taking the same vertexes in the same order as an OpenGL quad.
-         * @note The quad draw operation must meet the following requirements:
-         *         <ol>
-         *            <li>Depth and stencil buffers must not be written to.</li>
-         *            <li>Alpha testing, culling, depth testing and other states 
-         *                that could cull portions of the quad must be disabled
-         *                (the whole quad must be drawn).</li>
-         *            <li>Alpha-blending should be disabled entirely at this time,
-         *                in future versions blending may be used during some
-         *                passes.</li>
-         *            <li>Any render states modified must be restored to their 
-         *                original state before the function returns.</li>
-         *         </ol>
+         * @note The provided vertexes must be ordered in a Z formation. This provides the
+         *       proper winding for two discrete triangles, which most APIs use for the actual
+         *       draw operation.
+         *        
+         * @note The draw operation must meet the following requirements:
+         * <ol>
+         *   <li>Depth and stencil buffers must not be written to, color buffers must.</li>
+         *   <li>Alpha testing, culling, depth testing and other states that could cull
+         *       portions of the quad must be disabled (the whole quad must be drawn).</li>
+         *   <li>Alpha blending and testing must be disabled.</li>
+         *   <li>Any render states modified <em>within this call</em> must be restored to their 
+         *       original state before the function returns.</li>
+         * </ol>
          */
         virtual void DrawQuad
         (
-            _In_count_c_(4) Vertex * vertexData
+            _In_opt_count_c_(4) Vertex * vertexData
         ) = 0;
 
         /**
-         * Downloads a parameter's value from system RAM to VRAM, verifying that
-         * the value on the GPU is the latest value set in the CPU memory buffer
-         * (all parameter set commands operate on the system RAM buffer for
-         * speed).
+         * Downloads a parameter's value from system RAM to VRAM, verifying that the value on 
+         * the GPU (and in use) is the latest value set in the CPU memory buffer (all parameter 
+         * set commands operate on the system RAM buffer for speed and compatibility). 
          */
         virtual void ApplyParameter
         (
@@ -170,17 +167,17 @@ namespace VoodooShader
         ) = 0;
 
         /**
-         * Helper function to handle binding and drawing a single effect. 
-         * This must take targets into consideration, and should contain 
-         * <em>all</em> code necessary to render a basic post-processing or
-         * deferred effect.<br />
-         * In some Adapter setups and APIs, this may involve blitting textures
-         * or handling various surfaces and RTT features. These should be
-         * implemented here to provide a clean interface for basic shader
-         * drawing.<br />
-         * This function should assume that a fullscreen/postprocessing
-         * effect is being drawn and use the default vertex setup (done by
-         * calling <code>this->DrawQuad(NULL);</code>).
+         * <p>
+         * Helper function to handle binding and drawing a single effect. This must take targets 
+         * into consideration, and should contain <em>all</em> code necessary to render a basic 
+         * post-processing or deferred effect.
+         * </p><p>
+         * In some adapter setups and APIs, this may involve blitting textures or handling various 
+         * surfaces and RTT features. These should be implemented here to provide a clean interface 
+         * for basic shader drawing.
+         * </p><p>
+         * This function should assume that a full screen effect is being drawn and use the default 
+         * vertex setup (by calling <code>this->DrawQuad(NULL);</code>).
          */
         virtual void DrawShader
         (
@@ -197,13 +194,12 @@ namespace VoodooShader
          * @return A shared pointer to the created texture.
          *
          * @note Only Voodoo texture formats are supported, API-specific formats
-         *        are not.
-         * @note This must automatically register textures with the Adapter's 
-         *        associated Core.
+         *       are not and <em>must</em> return errors.
+         * @note This must automatically register textures with the adapter's 
+         *       associated Core.
          * @note This must create a texture that can either be rendered directly
-         *        into or that can have the backbuffer copied into it quickly, 
-         *        depending on how the Adapter and API implement 
-         *        render-to-texture.
+         *       into or that can have the backbuffer copied into it efficiently, 
+         *       depending on how the Adapter and API implement render-to-texture.
          */
         virtual TextureRef CreateTexture
         (
@@ -215,7 +211,8 @@ namespace VoodooShader
          * Connects a texture to a sampler-type parameter. This is performed 
          * differently in each API, but often uses Cg-provided functions (in 
          * OpenGL, cgGLSetTextureParameter). The parameter and texture should 
-         * be connected for the duration of the shader's life.
+         * be connected for the duration of the shader's life or until the parameter
+         * is bound to a different texture.
          * 
          * @param param The parameter to bind to (must be a sampler type).
          * @param texture The texture to be bound.
@@ -229,7 +226,9 @@ namespace VoodooShader
 
         /**
          * A generic error-handling callback provided to the Cg runtime. This 
-         * will be called in event of any Cg error.
+         * will be called in event of any Cg error. This overrides Core::CgErrorHandler(),
+         * although it may call that function (the core handler does no error recovery,
+         * but does log and can handle some malformed errors).
          *
          * @param context The associated Cg context.
          * @param error The error raised.

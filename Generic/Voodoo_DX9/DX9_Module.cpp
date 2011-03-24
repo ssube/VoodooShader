@@ -138,7 +138,7 @@ namespace VoodooShader
                 if ( !SUCCEEDED(hr) )
                 {
                     this->mCore->Log("Voodoo DX9: Error loading vertex program from '%s': %d.\n",
-                        pass->Name().c_str(), hr);
+                        pass->GetName().c_str(), hr);
                     return false;
                 }
             }
@@ -149,13 +149,13 @@ namespace VoodooShader
                 if ( !SUCCEEDED(hr) )
                 {
                     this->mCore->Log("Voodoo DX9: Error loading fragment program from '%s': %d.\n",
-                        pass->Name().c_str(), hr);
+                        pass->GetName().c_str(), hr);
                     return false;
                 }
             }
 
             this->mCore->Log("Voodoo DX9: Successfully loaded programs from '%s'.\n",
-                pass->Name().c_str());
+                pass->GetName().c_str());
             return true;
         }
 

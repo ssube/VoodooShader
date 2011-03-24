@@ -29,6 +29,10 @@
 namespace VoodooShader
 {
     /**
+     * @addtogroup VoodooCore
+     * @{
+     */
+    /**
      * 
      */
     class VOODOO_API Parameter
@@ -70,14 +74,14 @@ namespace VoodooShader
          * 
          * @returns The parameter's name.
          */
-        String Name();
+        String GetName();
 
         /**
          * Retrieves the underlying Cg parameter object.
          * 
          * @returns The Cg parameter this object is bound to.
          */
-        const CGparameter GetCgParameter();
+        CGparameter GetCgParameter();
 
         /**
          * Retrieves the type of this parameter. This specifies what type and how
@@ -295,6 +299,9 @@ namespace VoodooShader
             float mValueFloat[16];
         };
     };
+    /**
+     * @}
+     */
 }
 
 #endif /*VOODOO_PARAMETER_HPP*/

@@ -189,7 +189,15 @@
  *    along with a notation indicating if the texture may be used as a 
  *    render target or copied to and from.
  * </p>
- *
+ * <p>
+ *    Textures are always delivered to shaders as floats through the <code>texXD</code> functions.
+ *    This may cause some confusion as to how texture data is stored; the data is <em>usually</em>
+ *    stored as an integer using the number of bits given below. Textures that are not stored in
+ *    floating-point formats are clamped to range (0-1) in hardware. Shaders may output higher or
+ *    lower values, but they will usually be ignored. If you need to store values outside of that
+ *    range, use one of the formats suffixed with 'F' to store the data as floats (single and
+ *    double texture formats are available).
+ * </p>
  * <table>
  *    <tr><th>Voodoo Format</th>        <th>DirectX Format</th>        
  *        <th>OpenGL Format</th>        <th>RT/Copy</th>
@@ -242,28 +250,26 @@
  *
  * @section depthbuffers Depth Buffers
  * <p>
- *    For an adapter to be considered Voodoo-compatible, it must supply realtime
- *    depth data to a shader-readable texture. How this is performed is left to
- *    the discretion of the adapter, considering how obnoxious it can be under
- *    DirectX 9. To work around the DX9 issues, most Voodoo adapters will use a
- *    two-pass or two-target rendering method with an adapter-specific shader.
- *    The two-pass method takes more time but is compatible on all systems, the
- *    two-target method requires rendering the geometry once, but may not always
- *    be supported (DX9 has some issues with multitarget rendering and multisampling).
+ *    For an adapter to be considered fully Voodoo compatible, it must supply realtime
+ *    depth data to a shader-readable texture. How this is performed is left to the 
+ *    discretion of the adapter, as it varies greatly between old D3D versions and 
+ *    OpenGL or newer D3D. This data should be stored such that greater distances are
+ *    represented by higher values and the distance should be (if possible) not
+ *    normalized (not bounded by <code>(0-1)</code>).
  * </p>
  * <p>
  *    When possible, it is recommended that the depth information be stored in a
  *    32-bit floating point component. Depth data must be accessible to shaders
  *    from the R channel of the depth texture. At this time, the GBA components of
- *  the texture are considered undefined, but reserved for future use. Depending
- *  on implementation, they may contain depth data, uninitialized memory, or
- *  other data. They should not be used.
+ *    the texture are considered undefined, but reserved for future use. Depending
+ *    on implementation, they may contain depth data, uninitialized memory, or
+ *    other data. They should not be used.
  * </p>
  * <p>
  *    As DirectX 9 does not usually allow D32F textures to be read, this may 
- *    require rendering to a second target and using a RGBA32F texture. At this
- *    point, the GBA components are not used, but future versions of Voodoo may
- *    pack additional data into them.
+ *    require rendering to a second target and using a RGBA32F texture. Two-pass
+ *    or two-target rendering can both meet this requirement neatly. Using two passes
+ *    is slower but more compatible, so this should be made an option if possible.
  * </p>
  * 
  * @section textureloading Texture Loading
@@ -273,13 +279,13 @@
  *     of functions.
  * </p>
  * <p>
- *     To simplify getting texture data into memory in the first place, the
- *     Voodoo filesystem library includes specialized Image loading classes.
- *     These use DevIL as the loading library, and so support a ridiculous
- *     number of formats. Among the most useful formats are DDS, PNG and TGA,
- *     all supporting high resolutions and transparency. Other formats may
- *     not be as suitable; JPEG and BMP for example are very lossy and
- *     large, respectively. For a complete listing of supported formats,
- *     please see the DevIL documentation.
+ *     To simplify getting texture data into memory in the first place, the Voodoo 
+ *     filesystem library includes specialized Image loading classes. These use 
+ *     DevIL as the loading library, so support a ridiculous number of formats. 
+ *     Among the most useful formats are DDS, PNG and TGA, all supporting high 
+ *     resolutions and transparency. Other formats may not be as suitable; JPEG and 
+ *     BMP for example are very lossy and large, respectively. For a complete listing 
+ *     of supported formats, please see the DevIL documentation (it works with more
+ *     than you'll ever need).
  * </p>
  */

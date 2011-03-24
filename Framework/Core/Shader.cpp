@@ -12,7 +12,7 @@ namespace VoodooShader
     {
         this->mEffect = cgCreateEffectFromFile
         (
-            mCore->GetCGContext(), 
+            mCore->GetCgContext(), 
             mName.c_str(), 
             args
         );
@@ -73,7 +73,7 @@ namespace VoodooShader
         }
     }
 
-    String Shader::Name()
+    String Shader::GetName()
     {
         return mName;
     }
@@ -107,7 +107,7 @@ namespace VoodooShader
     {
         // Cache basic data for future use 
         ParameterType type = param->GetType();
-        CGparameter cgparam = param->GetParameter();
+        CGparameter cgparam = param->GetCgParameter();
 
         // Check if it has a global link annotation
         CGannotation globalAnnotation = cgGetNamedParameterAnnotation(
@@ -128,7 +128,7 @@ namespace VoodooShader
                         LL_Warning,
                         VOODOO_CORE_NAME, 
                         "Unable to find global param %s for parameter %s.",
-                        globalName, param->Name().c_str()
+                        globalName, param->GetName().c_str()
                     );
                 }
             } else {
@@ -137,7 +137,7 @@ namespace VoodooShader
                     LL_Warning,
                     VOODOO_CORE_NAME, 
                     "Unable to read global annotation for parameter %s.",
-                    param->Name().c_str()
+                    param->GetName().c_str()
                 );
             }
 
@@ -154,7 +154,7 @@ namespace VoodooShader
 
     void Shader::LinkSampler(ParameterRef param)
     {
-        CGparameter cgparam = param->GetParameter();
+        CGparameter cgparam = param->GetCgParameter();
 
         // Link to a texture
         CGannotation textureAnnotation = cgGetNamedParameterAnnotation(
@@ -170,18 +170,15 @@ namespace VoodooShader
                 {
                     mCore->GetAdapter()->ConnectTexture(param, texture);
                 } else {
-                    /**
-                     * @todo Need to create a texture based on the annotation params here. That will
-                     *        involve reading them and calling back into the adapter, so it should be
-                     *        another func.
-                     */
                     mCore->Log
                     (
                         LL_Warning,
                         VOODOO_CORE_NAME,
-                        "Could not find texture %s for parameter %s.",
-                        textureName, param->Name().c_str()
+                        "Could not find texture %s for parameter %s, attempting to create",
+                        textureName, param->GetName().c_str()
                     );
+
+                    this->CreateParameterTexture(param);
                 }
             } else {
                 mCore->Log
@@ -189,7 +186,7 @@ namespace VoodooShader
                     LL_Warning,
                     VOODOO_CORE_NAME,
                     "Could not retrieve texture name for parameter %s.",
-                    param->Name().c_str()
+                    param->GetName().c_str()
                 );
             }
         } else {
@@ -198,10 +195,144 @@ namespace VoodooShader
                 LL_Warning,
                 VOODOO_CORE_NAME,
                 "Could not retrieve texture annotation for parameter %s.",
-                param->Name().c_str()
+                param->GetName().c_str()
             );
         }
     }
+
+    void Shader::CreateParameterTexture( _In_ ParameterRef param )
+    {
+        CGparameter parameter = param->GetCgParameter();
+
+        if ( !cgIsParameter(parameter) )
+        {
+            mCore->Log
+            (
+                LL_Error,
+                VOODOO_CORE_NAME,
+                "Could not create parameter texture for unknown parameter."
+            );
+
+            return;
+        }
+
+        CGannotation atexName   = cgGetNamedParameterAnnotation(parameter, "texture");
+        CGannotation atexSize   = cgGetNamedParameterAnnotation(parameter, "size");
+        CGannotation atexFormat = cgGetNamedParameterAnnotation(parameter, "format");
+
+        if ( !(cgIsAnnotation(atexName) && cgIsAnnotation(atexSize) && cgIsAnnotation(atexFormat) ) )
+        {
+            mCore->Log
+            (
+                LL_Error,
+                VOODOO_CORE_NAME,
+                "Could not create texture for parameter %s, required fields were missing.",
+                param->GetName().c_str()
+            );
+
+            return;
+        }
+
+        String texName;
+
+        if ( cgGetAnnotationType(atexName) != CG_STRING )
+        {
+            mCore->Log
+            (
+                LL_Error,
+                VOODOO_CORE_NAME,
+                "Invalid texture name annotation type in %s.",
+                param->GetName().c_str()
+            );
+
+            return;
+        } else {
+            texName = cgGetStringAnnotationValue(atexName);
+        }
+
+        CGtype texSizeType = cgGetAnnotationType(atexSize);
+        TextureDesc texDesc;
+
+        if ( texSizeType ==  CG_INT1 )
+        {
+            mCore->Log
+             (
+                LL_Debug,
+                VOODOO_CORE_NAME,
+                "1-dimensional texture size found."
+            );
+
+            int outCount;
+            const int * texDims = cgGetIntAnnotationValues(atexSize, &outCount);
+            texDesc.Width = texDims[0];
+            texDesc.Height = texDesc.Depth = 1;
+        } else if ( texSizeType == CG_INT2 ) {
+            mCore->Log
+            (
+                LL_Debug,
+                VOODOO_CORE_NAME,
+                "2-dimensional texture size found."
+            );
+
+            int outCount;
+            const int * texDims = cgGetIntAnnotationValues(atexSize, &outCount);
+            texDesc.Width = texDims[0];
+            texDesc.Height = texDims[1];
+            texDesc.Depth = 1;
+        } else if ( texSizeType == CG_INT3 ) {
+            mCore->Log
+            (
+                LL_Debug,
+                VOODOO_CORE_NAME,
+                "3-dimensional texture size found."
+            );
+
+            int outCount;
+            const int * texDims = cgGetIntAnnotationValues(atexSize, &outCount);
+            texDesc.Width = texDims[0];
+            texDesc.Height = texDims[1];
+            texDesc.Depth = texDims[2];
+        } else if ( texSizeType == CG_INT4 ) {
+            mCore->Log
+            (
+                LL_Error,
+                VOODOO_CORE_NAME,
+                "4-dimensional texture size found. Creating quantum texture... Oh wait, not really (invalid type on %s).",
+                param->GetName().c_str()
+            );        
+        } else {
+            mCore->Log
+            (
+                LL_Error,
+                VOODOO_CORE_NAME,
+                "Invalid texture size annotation type for parameter %s.",
+                param->GetName().c_str()
+            );
+        }
+
+        texDesc.Mipmaps = false;
+
+        if ( cgGetAnnotationType(atexFormat) != CG_STRING )
+        {
+            mCore->Log
+            (
+                LL_Error,
+                VOODOO_CORE_NAME,
+                "Invalid texture format annotation type in %s.",
+                param->GetName().c_str()
+            );
+
+            return;
+        } else {
+            const char * formatString = cgGetStringAnnotationValue(atexFormat);
+            texDesc.Format = Converter::ToTextureFormat(formatString);
+        }
+
+        IAdapter * adapter = mCore->GetAdapter();
+        TextureRef texture = adapter->CreateTexture(texName, texDesc);
+        param->Set(texture);
+    }
+
 
     void Shader::SetupTechniques()
     {
@@ -292,9 +423,9 @@ namespace VoodooShader
         return mCore;
     }
 
-    String Technique::Name()
+    String Technique::GetName()
     {
-        String name = mParent->Name();
+        String name = mParent->GetName();
         name += "::";
         name += mName;
         return name;
@@ -342,7 +473,7 @@ namespace VoodooShader
                         LL_Warning,
                         VOODOO_CORE_NAME,
                         "Pass %s cannot find target %s.",
-                        this->Name().c_str(), targetName
+                        this->GetName().c_str(), targetName
                     );
 
                     this->mTarget = mCore->GetTexture(TT_ShaderTarget);
@@ -353,7 +484,7 @@ namespace VoodooShader
                     LL_Warning,
                     VOODOO_CORE_NAME,
                     "Pass %s has annotation \"target\" of invalid type.",
-                    this->Name().c_str()
+                    this->GetName().c_str()
                 );
 
                 this->mTarget = mCore->GetTexture(TT_ShaderTarget);
@@ -364,7 +495,7 @@ namespace VoodooShader
                 LL_Debug,
                 VOODOO_CORE_NAME,
                 "Pass %s has no target annotation.",
-                this->Name().c_str()
+                this->GetName().c_str()
             );
 
             this->mTarget = mCore->GetTexture(TT_ShaderTarget);
@@ -406,9 +537,9 @@ namespace VoodooShader
         }
     }
 
-    String Pass::Name()
+    String Pass::GetName()
     {
-        String name = mParent->Name();
+        String name = mParent->GetName();
         name += "::";
         name += mName;
         return name;
@@ -465,7 +596,7 @@ namespace VoodooShader
                         LL_Warning,
                         VOODOO_CORE_NAME,
                         "Pass %s cannot find target %s.", 
-                        this->Name().c_str(), targetName
+                        this->GetName().c_str(), targetName
                     );
 
                     this->mTarget = mCore->GetTexture(TT_PassTarget);
@@ -476,7 +607,7 @@ namespace VoodooShader
                     LL_Warning,
                     VOODOO_CORE_NAME,
                     "Pass %s has annotation \"target\" of invalid type.",
-                    this->Name().c_str()
+                    this->GetName().c_str()
                 );
 
                 this->mTarget = mCore->GetTexture(TT_PassTarget);
@@ -487,7 +618,7 @@ namespace VoodooShader
                 LL_Debug,
                 VOODOO_CORE_NAME,
                 "Pass %s has no target annotation.", 
-                this->Name().c_str()
+                this->GetName().c_str()
             );
 
             this->mTarget = mCore->GetTexture(TT_PassTarget);
@@ -503,14 +634,14 @@ namespace VoodooShader
                 LL_Warning,
                 VOODOO_CORE_NAME,
                 "No adapter found, pass %s must be explicitly loaded later.", 
-                this->Name().c_str()
+                this->GetName().c_str()
             );
         } else {
             if ( !adapter->LoadPass(this) )
             {
-                mCore->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->Name().c_str());
+                mCore->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->GetName().c_str());
             } else {
-                mCore->Log(LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->Name().c_str());
+                mCore->Log(LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->GetName().c_str());
             }
         }
     }

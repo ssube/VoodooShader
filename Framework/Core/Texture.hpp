@@ -26,6 +26,17 @@
 
 namespace VoodooShader
 {
+    /**
+     * @addtogroup VoodooCore
+     * @{
+     */
+
+    /**
+     * Contains a hardware texture, for use with Voodoo shaders and effects.
+     * These textures may usually be bound to parameters and shaders can sample pixels
+     * within them to create the on-screen images. Textures may be used to represent
+     * various other surfaces, including render targets or even the backbuffer.
+     */
     class VOODOO_API Texture
     {
     public:
@@ -53,6 +64,9 @@ namespace VoodooShader
         String mName;
         void * mTextureObject;
     };
+    /**
+     * @}
+     */
 }
 
 #endif /*VOODOO_TEXTURE_HPP*/

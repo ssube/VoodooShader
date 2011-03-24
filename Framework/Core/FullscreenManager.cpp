@@ -101,7 +101,7 @@ namespace VoodooShader
 
         if ( !adapter )
         {
-            Throw(VOODOO_CORE_NAME, "Parent Core has no Adapter.", this->mParent);
+            Throw(VOODOO_CORE_NAME, "Parent Core has no adapter.", this->mParent);
         }
 
         size_t total = mShaders.size();

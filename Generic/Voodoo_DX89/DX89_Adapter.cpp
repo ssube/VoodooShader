@@ -176,7 +176,7 @@ namespace VoodooShader
                         LL_Error,
                         VOODOO_DX89_NAME,
                         "Error loading vertex program from '%s': %s",
-                        pass->Name().c_str(), cgD3D9TranslateHRESULT(hr)
+                        pass->GetName().c_str(), cgD3D9TranslateHRESULT(hr)
                     );
 
                     return false;
@@ -193,7 +193,7 @@ namespace VoodooShader
                         LL_Error,
                         VOODOO_DX89_NAME,
                         "Error loading fragment program from '%s': %s",
-                        pass->Name().c_str(), cgD3D9TranslateHRESULT(hr)
+                        pass->GetName().c_str(), cgD3D9TranslateHRESULT(hr)
                     );
 
                     return false;
@@ -205,7 +205,7 @@ namespace VoodooShader
                 LL_Info,
                 VOODOO_DX89_NAME,
                 "Successfully loaded programs from '%s'.",
-                pass->Name().c_str()
+                pass->GetName().c_str()
             );
 
             return true;

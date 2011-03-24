@@ -30,6 +30,10 @@
 namespace VoodooShader
 {
     /**
+     * @addtogroup VoodooCore
+     * @{
+     */
+    /**
      * Manager class to simplify loading and using material (texture-bound) 
      * shaders. This object provides control over the various linkage and 
      * lookups needed by the material system.
@@ -116,11 +120,29 @@ namespace VoodooShader
         );
 
     private:
+        /**
+         * Pointer to the parent core.
+         */
         Core * mParent;
+
+        /**
+         * Map of all assigned materials, keyed by Texture with attached @ref Shader Shaders attached.
+         */
         MaterialMap mMaterials;
+
+        /**
+         * Default Shader to bind if no material is found (may be empty, meaning no default).
+         */
         ShaderRef mDefault;
+
+        /**
+         * Currently bound Shader (may be empty, meaning no shader bound).
+         */
         ShaderRef mBound;
     };
+    /**
+     * @}
+     */
 }
 
 #endif /*VOODOO_MATMANAGER_HPP*/

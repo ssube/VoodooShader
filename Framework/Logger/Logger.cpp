@@ -44,19 +44,19 @@ namespace VoodooShader
         {
             if ( number == 0 )
             {
-                return new XmlLogger::Logger(core);
+                return new XmlLogger::XmlLogger(core);
             } else {
                 return NULL;
             }
         }
 
-        Logger::Logger(Core * core)
+        XmlLogger::XmlLogger(_In_ Core * core)
             : mCore(core), mLogLevel(LL_Initial)
         {
             this->mLocalTime = new tm();
         }
 
-        Logger::~Logger()
+        XmlLogger::~XmlLogger()
         {
             this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger destroyed.");
             this->Dump();
@@ -72,17 +72,17 @@ namespace VoodooShader
             }
         }
 
-        void Logger::DestroyObject()
+        void XmlLogger::DestroyObject()
         {
             delete this;
         }
 
-        const char * Logger::GetObjectClass()
+        const char * XmlLogger::GetObjectClass()
         {
             return "XmlLogger";
         }
 
-        bool Logger::Open(const char* filename, bool append)
+        bool XmlLogger::Open(const char* filename, bool append)
         {
             if ( this->mLogFile.is_open() )
             {
@@ -111,9 +111,9 @@ namespace VoodooShader
                 this->LogTicks();
                 this->mLogFile << ">\n";
 
-                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file opened by Logger::Open.");
+                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file opened by XmlLogger::Open.");
 
-                Version loggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
+                Version XmlLoggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
                 this->LogModule(loggerVersion);
 
                 return true;
@@ -122,17 +122,17 @@ namespace VoodooShader
             }
         }
 
-        void Logger::Close()
+        void XmlLogger::Close()
         {
             if ( this->mLogFile.is_open() )
             {
-                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file closed by Logger::Close.");
+                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file closed by XmlLogger::Close.");
                 this->mLogFile << "</VoodooLog>\n";
                 this->mLogFile.close();
             }
         }
 
-        void Logger::LogTime()
+        void XmlLogger::LogTime()
         {
             if ( !this->mLogFile.is_open() ) return;
 
@@ -156,7 +156,7 @@ namespace VoodooShader
             }
         }
 
-        void Logger::LogDate()
+        void XmlLogger::LogDate()
         {
             if ( !this->mLogFile.is_open() ) return;
 
@@ -180,7 +180,7 @@ namespace VoodooShader
             }
         }
 
-        void Logger::LogTicks()
+        void XmlLogger::LogTicks()
         {
             if ( !this->mLogFile.is_open() ) return;
 
@@ -194,7 +194,7 @@ namespace VoodooShader
             this->mLogFile << stamp;
         }
 
-        void Logger::LogModule
+        void XmlLogger::LogModule
         (
             Version version
         )
@@ -210,38 +210,28 @@ namespace VoodooShader
                 " debug=\"" << version.Debug << "\" />\n";
         }
 
-        void Logger::SetBufferSize(unsigned int bytes)
+        void XmlLogger::SetBufferSize(unsigned int bytes)
         {
             if ( !this->mLogFile.is_open() ) return;
 
             this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
         }
 
-        void Logger::SetLogLevel(size_t level)
+        void XmlLogger::SetLogLevel(LogLevel level)
         {
             mLogLevel = level;
         }
 
-        void Logger::Log(size_t level, const char * module, const char * msg, ...)
+        void XmlLogger::Log(LogLevel level, const char * module, const char * msg, ...)
         {
-            if ( level < mLogLevel ) return;
-            if ( !this->mLogFile.is_open() ) return;
-
             va_list args;
-            char buffer[4096];
 
             va_start(args, msg);
-            _vsnprintf_s(buffer, 4095, 4095, msg, args);
-            buffer[4095] = 0;
+            this->LogList(level, module, msg, args);
             va_end(args);
-        
-            this->mLogFile << "    <Message severity=\"" << level << "\" ";
-            this->LogTime();
-            this->LogTicks();
-            this->mLogFile << " source=\"" << module << "\">" << buffer << "</Message>\n";
         }
 
-        void Logger::LogList(size_t level, const char * module, const char * msg, va_list args)
+        void XmlLogger::LogList(LogLevel level, const char * module, const char * msg, va_list args)
         {
             if ( level < mLogLevel ) return;
             if ( !this->mLogFile.is_open() ) return;
@@ -257,7 +247,7 @@ namespace VoodooShader
             this->mLogFile << " source=\"" << module << "\">" << buffer << "</Message>\n";
         }
 
-        void Logger::Dump()
+        void XmlLogger::Dump()
         {
             this->mLogFile.flush();
         }

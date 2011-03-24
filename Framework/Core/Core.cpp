@@ -26,21 +26,21 @@ namespace VoodooShader
     }
 
     Core::Core(_In_ const char * path)
-        : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCGContext(NULL), mBasePath(path)
+        : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCgContext(NULL), mBasePath(path)
     {
         using namespace pugi;
 
         // Init Cg
-        this->mCGContext = cgCreateContext();
+        this->mCgContext = cgCreateContext();
 
-        if ( !cgIsContext(this->mCGContext) )
+        if ( !cgIsContext(this->mCgContext) )
         {
             throw std::exception("Unable to create Cg context.");
         }
 
-        cgSetErrorHandler(&(Core::CGErrorHandler), this);
+        cgSetErrorHandler(&(Core::CgErrorHandler), this);
 
-        mModManager = new ModuleManager(this);
+        mModManager = ModuleManagerRef(new ModuleManager(this));
 
         xml_document * config = NULL;
 
@@ -136,11 +136,6 @@ namespace VoodooShader
 
     Core::~Core()
     {
-        if ( this->mModManager )
-        {
-            delete this->mModManager;
-        }
-
         if ( this->mAdapter )
         {
             this->mAdapter->DestroyObject();
@@ -156,9 +151,11 @@ namespace VoodooShader
             this->mLogger->DestroyObject();
         }
 
-        if ( cgIsContext(this->mCGContext) )
+        this->mModManager = NULL;
+
+        if ( cgIsContext(this->mCgContext) )
         {
-            cgDestroyContext(this->mCGContext);
+            cgDestroyContext(this->mCgContext);
         }
     }
 
@@ -189,7 +186,7 @@ namespace VoodooShader
         return mHooker;
     }
 
-    ModuleManager * Core::GetModuleManager()
+    ModuleManagerPtr Core::GetModuleManager()
     {
         return mModManager;
     }
@@ -336,7 +333,7 @@ namespace VoodooShader
         }
     }
         
-    void Core::CGErrorHandler(CGcontext context, CGerror error, void * core)
+    void Core::CgErrorHandler(CGcontext context, CGerror error, void * core)
     {
         Core * me = reinterpret_cast<Core*>(core);
         if ( me )

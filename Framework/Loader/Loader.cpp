@@ -1,12 +1,17 @@
 #include "Loader.hpp"
 
+/**
+ * @addtogroup VoodooLoader Voodoo/Loader
+ * @{
+ */
+
 funcTypeLoad funcLoad;
 funcTypeUnload funcUnload;
 
 void * core = NULL;
 
 /**
- * Reads the Adapter's name from the Voodoo config file and loads it, if present.
+ * Reads the adapter's name from the Voodoo config file and loads it, if present.
  */
 bool LoadVoodoo()
 {
@@ -38,9 +43,8 @@ bool LoadVoodoo()
         return false;
     }
 
-    StringCchCatA(VoodooPath, MAX_PATH, "\\bin\\");
     StringCchCopyA(VoodooCorePath, MAX_PATH, VoodooPath);
-    StringCchCatA(VoodooCorePath, MAX_PATH, "Voodoo_Core.dll");
+    StringCchCatA(VoodooCorePath, MAX_PATH, "\\bin\\Voodoo_Core.dll");
 
     HMODULE adapter = LoadLibraryExA(VoodooCorePath, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
@@ -210,3 +214,7 @@ HRESULT VoodooSoundCreate8
 
     return (*initFunc)(lpcGuidDevice, ppDS8, pUnkOuter);
 }
+
+/**
+ * @}
+ */

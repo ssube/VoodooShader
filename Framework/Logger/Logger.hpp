@@ -67,7 +67,7 @@ namespace VoodooShader
          * @warning If the Logger isn't destroyed properly, the main tag of
          *       the log file won't be closed and the log won't be valid.
          */
-        class VOODOO_LOGGER_API Logger
+        class XmlLogger
             : public VoodooShader::ILogger
         {
         public:
@@ -79,7 +79,7 @@ namespace VoodooShader
              *        default value is false, which will truncate an existing file).
              * @throws Exception if the log file cannot be opened.
              */
-            Logger
+            XmlLogger
             (
                 _In_ Core * core
             );
@@ -87,7 +87,7 @@ namespace VoodooShader
             /** 
              * Default destructor, flushes and closes the log file (if open).
              */
-            virtual ~Logger();
+            virtual ~XmlLogger();
 
             virtual void DestroyObject();
             virtual const char * GetObjectClass();
@@ -118,7 +118,7 @@ namespace VoodooShader
              */
             virtual void SetLogLevel
             (
-                _In_ size_t level
+                _In_ LogLevel level
             );
 
             /**
@@ -173,7 +173,7 @@ namespace VoodooShader
              */
             virtual void Log
             (
-                _In_ size_t level,
+                _In_ LogLevel level,
                 _In_ const char * module,
                 _In_ _Printf_format_string_ const char * msg, 
                 ...
@@ -195,7 +195,7 @@ namespace VoodooShader
              */
             virtual void LogList
             (
-                _In_ size_t level,
+                _In_ LogLevel level,
                 _In_ const char * module,
                 _In_ const char * msg, 
                 _In_ va_list args
@@ -230,7 +230,7 @@ namespace VoodooShader
 
         private:
             Core * mCore;
-            size_t mLogLevel;
+            LogLevel mLogLevel;
             std::fstream mLogFile;
             tm * mLocalTime;
         };

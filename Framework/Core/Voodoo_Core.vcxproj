@@ -222,6 +222,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Converter.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="FullscreenManager.cpp" />

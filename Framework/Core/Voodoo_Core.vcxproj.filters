@@ -25,6 +25,9 @@
     <ClCompile Include="Module.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Converter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Voodoo_Core.hpp" />

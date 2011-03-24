@@ -31,6 +31,11 @@
 namespace VoodooShader
 {
     /**
+     * @addtogroup VoodooCore
+     * @{
+     */
+
+    /**
      * Creates a new core. This function is exported and meant for use by the loader.
      * 
      * @param logfile The log file to use for the core.
@@ -60,8 +65,6 @@ namespace VoodooShader
     /**
      * Core engine class for the Voodoo Shader Framework. Manages a variety of major functions
      * and contains a Cg context used by shaders.
-     * 
-     * @addtogroup CoreClasses
      */
     class VOODOO_API Core
     {
@@ -125,7 +128,7 @@ namespace VoodooShader
           *       
           * @return A pointer to the module manager (always valid).
           */
-         ModuleManager * GetModuleManager();
+         ModuleManagerPtr GetModuleManager();
 
         /**
          * Retrieves this core's IHookManager implementation.
@@ -152,7 +155,7 @@ namespace VoodooShader
          * @note Each Voodoo Core is associated with a single Cg context. This context is used
          *       to create all @ref Shader shaders and most other graphics resources. 
          */
-        const CGcontext GetCgContext();
+        CGcontext GetCgContext();
 
         /**
          * Writes a string to the log file using standard printf syntax.
@@ -345,7 +348,7 @@ namespace VoodooShader
          * @param core The core to use for error logging, if one was provided the Cg context
          *             during creation. This may be NULL.
          */
-        static void CGErrorHandler
+        static void CgErrorHandler
         (
             _In_ CGcontext context, 
             _In_ CGerror error, 
@@ -381,7 +384,7 @@ namespace VoodooShader
         /**
          * The current module manager.
          */
-        ModuleManager * mModManager;
+        ModuleManagerRef mModManager;
 
         /**
          * Collection of all shaders created by this core, by name with
@@ -411,6 +414,9 @@ namespace VoodooShader
          */
         TextureRef mLastShader;
     };
+    /**
+     * @}
+     */
 }
 
 #endif

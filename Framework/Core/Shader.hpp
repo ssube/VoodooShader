@@ -30,6 +30,10 @@
 namespace VoodooShader
 {
     /**
+     * @addtogroup VoodooCore
+     * @{
+     */
+    /**
      * Complete shader class, managing techniques, passes and metadata. Shaders
      * contain significant linking and processing data, as well as the Voodoo-specific
      * linking stage. Shader file loading and compilation are handled internally,
@@ -62,11 +66,11 @@ namespace VoodooShader
             _In_ CGeffect effect
         );
 
-        String Name();
+        String GetName();
 
         /**
          * Set a technique from this shader to be used as the default technique.
-         * Some Adapter functions simply retrieve the default technique to draw
+         * Some adapter functions simply retrieve the default technique to draw
          * with. 
          * 
          * @param name The name of a technique within this shader to use.
@@ -182,6 +186,18 @@ namespace VoodooShader
             _In_ ParameterRef param
         );
 
+        /**
+         * Find texture information from a parameter and create a texture
+         * based on that data. Calls Shader::LinkSampler() after texture
+         * creation if appropriate.
+         * 
+         * @param param The parameter to use.
+         */
+        void CreateParameterTexture
+        (
+            _In_ ParameterRef param
+        );
+
         void SetupTechniques();
 
         Core * mCore;
@@ -220,7 +236,7 @@ namespace VoodooShader
          *
          * @return This technique's name
          */
-        String Name();
+        String GetName();
 
         /**
          * Retrieve the core this technique was compiled under.
@@ -299,7 +315,7 @@ namespace VoodooShader
          *
          * @return The pass name
          */
-        String Name();
+        String GetName();
 
         /**
          * Retrieve the core this pass was compiled under.
@@ -350,11 +366,14 @@ namespace VoodooShader
         CGprogram mGeometryProgram;
         CGprogram mVertexProgram;
         CGprogram mFragmentProgram;
-
-        //! @todo Add support for D3D11 tessellation programs
         CGprogram mDomainProgram;
         CGprogram mHullProgram;
+
+        //! @todo Add full support for D3D11 tessellation programs
     };
+    /**
+     * @}
+     */
 }
 
 #endif /*VOODOO_SHADER_HPP*/

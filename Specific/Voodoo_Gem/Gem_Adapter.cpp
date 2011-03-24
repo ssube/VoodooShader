@@ -272,7 +272,7 @@ namespace VoodooShader
                 LL_Debug, 
                 VOODOO_GEM_NAME, 
                 "Loading pass %s", 
-                pass->Name().c_str()
+                pass->GetName().c_str()
             );
 
             HRESULT hr = S_OK;
@@ -287,7 +287,7 @@ namespace VoodooShader
                         LL_Warning,
                         VOODOO_GEM_NAME, 
                         "Error loading vertex program from '%s': %s.",
-                        pass->Name().c_str(), cgD3D9TranslateHRESULT(hr)
+                        pass->GetName().c_str(), cgD3D9TranslateHRESULT(hr)
                     );
 
                     return false;
@@ -304,7 +304,7 @@ namespace VoodooShader
                         LL_Warning,
                         VOODOO_GEM_NAME, 
                         "Error loading fragment program from '%s': %s.",
-                        pass->Name().c_str(), cgD3D9TranslateHRESULT(hr)
+                        pass->GetName().c_str(), cgD3D9TranslateHRESULT(hr)
                     );
 
                     return false;
@@ -316,7 +316,7 @@ namespace VoodooShader
                 LL_Debug,
                 VOODOO_GEM_NAME,
                 "Successfully loaded programs from '%s'.",
-                pass->Name().c_str()
+                pass->GetName().c_str()
             );
 
             return true;

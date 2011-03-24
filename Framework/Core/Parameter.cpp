@@ -12,7 +12,7 @@ namespace VoodooShader
     { 
         mParam = cgCreateParameter
         (
-            core->GetCGContext(), 
+            core->GetCgContext(), 
             Converter::ToCGType(mType)
         );
 
@@ -63,12 +63,12 @@ namespace VoodooShader
         }
     }
 
-    String Parameter::Name()
+    String Parameter::GetName()
     {
         String name;
         if ( mParent )
         {
-            name += this->mParent->Name();
+            name += this->mParent->GetName();
         }
 
         name += ":";
@@ -83,7 +83,7 @@ namespace VoodooShader
         return name;
     }
 
-    CGparameter Parameter::GetParameter()
+    CGparameter Parameter::GetCgParameter()
     {
         return this->mParam;
     }
@@ -95,7 +95,7 @@ namespace VoodooShader
             Throw(VOODOO_CORE_NAME, "Cannot attach to a non-virtual parameter.", mCore);
         }
 
-        cgConnectParameter(param->GetParameter(), this->mParam);
+        cgConnectParameter(param->GetCgParameter(), this->mParam);
     }
 
     ParameterType Parameter::GetType(void)
@@ -182,7 +182,7 @@ namespace VoodooShader
     {
         if ( mCore )
         {
-            mCore->Log(LL_Debug, VOODOO_CORE_NAME, "Force updating parameter %s.", this->Name().c_str());
+            mCore->Log(LL_Debug, VOODOO_CORE_NAME, "Force updating parameter %s.", this->GetName().c_str());
         }
 
         switch ( mType )
@@ -212,7 +212,7 @@ namespace VoodooShader
                     LL_Warning, 
                     VOODOO_CORE_NAME, 
                     "Unable to force update sampler type parameter (%s).", 
-                    this->Name().c_str()
+                    this->GetName().c_str()
                 );
             }
             break;
@@ -225,7 +225,7 @@ namespace VoodooShader
                     LL_Warning,
                     VOODOO_CORE_NAME,
                     "Cannot force update parameter %s with unknown type.", 
-                    this->Name().c_str()
+                    this->GetName().c_str()
                 );
             }
             break;

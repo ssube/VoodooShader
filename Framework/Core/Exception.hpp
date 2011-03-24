@@ -27,6 +27,10 @@
 namespace VoodooShader
 {
     /**
+     * @addtogroup VoodooCore
+     * @{
+     */
+    /**
      * Generic exception class for Voodoo applications. Combines a generic
      * standard exception with extended error location data.
      *
@@ -68,6 +72,9 @@ namespace VoodooShader
         char * mFunction;
         int mLine;
     };
+    /**
+     * @}
+     */
 }
 
 #endif
