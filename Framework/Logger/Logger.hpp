@@ -74,10 +74,7 @@ namespace VoodooShader
             /**
              * Default constructor, opens a log file with the given name and mode.
              *
-             * @param filename Name of the log file to open.
-             * @param append If log file already exists, append to contents (the 
-             *        default value is false, which will truncate an existing file).
-             * @throws Exception if the log file cannot be opened.
+             * @param core The core to bind this logger to.
              */
             XmlLogger
             (
@@ -97,6 +94,7 @@ namespace VoodooShader
              *
              * @param filename The name of the file to open (may contain an absolute
              *        or relative path).
+             * @param append Flag specifying the open mode; if true, any existing log is truncated.
              * @return Success of the open operation.
              */
             virtual bool Open

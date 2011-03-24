@@ -149,7 +149,7 @@
  *  creation.
  * </p>
  * 
- * @page codestyle Code Style
+ * @page codestyle Code Style and Testing
  * 
  * @section intro Intro
  * <p>
@@ -197,8 +197,8 @@
  * <li>Project behavior must remain consistent between build configurations.</li>
  * <ul>
  *  <li>#ifdef directives dependent on the build mode should be avoided wherever possible. Log
- *      messages should use LL_Debug instead (this has no notable performance hit). This improves
- *      debugging.</li>
+ *      messages should use LL_Debug instead (this has no notable performance hit). This greatly
+ *      simplifies debugging.</li>
  * </ul>
  * <li>C++ TR1 and C++0x features may be used <em>as necessary</em> or where they notably improve
  *      code quality, readability or functionality.</li>
@@ -218,12 +218,8 @@
  *       documented. <em>(Note: The project does not fully conform to this requirement yet)</em></li>
  *  </ul>
  * <li>Headers should use the HPP extension, code files CPP.</li>
- * <li>Headers should include as few files as possible.</li>
- * <ul>
- *   <li>If the header defines a class which has member of or using the type Reference<T>, the
- *       appropriate header for the class T must be included in the header (otherwise some
- *       rather confusing compiler errors will show up).</li>
- * </ul>
+ * <li>Headers should include as few files as possible, source files should include only needed
+ *     headers.</li>
  * </ul>
  * 
  * @section events Events

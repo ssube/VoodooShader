@@ -72,8 +72,8 @@ namespace VoodooShader
         /**
         * Create a new Voodoo Core and associated Cg context.
         *          
-        * @param logfile The filename for this Core's log (will be used by most 
-        *        managers and connected adapters).
+        * @param path The base path to use for this core. Acts as the root for all modules and
+        *        resources.
         * @return A reference to the new core.
         *
         * @note You can not call this function externally, you must call CreateCore() instead.

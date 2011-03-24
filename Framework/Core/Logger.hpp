@@ -35,6 +35,7 @@ namespace VoodooShader
          *
          * @param filename The name of the file to open (may contain an absolute
          *        or relative path).
+         * @param append Flag specifying the open mode; if true, any existing log is truncated.
          * @return Success of the open operation.
          */
         virtual bool Open

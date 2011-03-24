@@ -65,12 +65,12 @@
  *    The core implementations of the managers provide a minimal feature set but
  *    are fully functional.
  * </p>
- * @section voodooquality Code Quality
+ * @section voodooquality Testing and Quality
  * <p>
  *    The Voodoo framework covers an immense scope and tackles an intriguing and
- *    often complex task. To maximize stability, speed and clarity, all code within
- *    the Voodoo Shader Framework must meet a set of quality-control standards and
- *    be fully tested before release. Tests are carried out within the target
+ *    often complex task. To maximize stability, speed and code quality, all code within
+ *    the Voodoo Shader Framework must meet @ref codestyle "a set of quality-control standards"
+ *    and be fully tested before release. Tests are carried out within the target
  *    applications, with internal test suites on the way.
  * </p>
  * @section voodoologs Logs and Debugging
