@@ -1,56 +1,50 @@
 
 #include "Frost_Module.hpp"
+#include "Frost_Adapter.hpp"
 
 VoodooShader::Core * VoodooCore = NULL;
-HookManager * VoodooHooker = NULL;
+VoodooShader::Frost::Adapter * VoodooAdapter = NULL;
 
 namespace VoodooShader
 {
-    
-};
-
-        /**
-         * Install all significant OpenGL hooks. 
-         *
-         * @todo This function needs moved out into the DLL init process.
-         */
-        void HookOpenGL(void)
+    namespace Frost
+    {
+        Version API_ModuleVersion()
         {
-            VoodooCore->Log("Voodoo Frost: Beginning OpenGL hook procedure.");
+            Version moduleVersion = VOODOO_META_VERSION_STRUCT(FROST);
+            return moduleVersion;
+        }
 
-            bool success = true;
+        int API_ClassCount()
+        {
+            return 1;
+        }
 
-            // System-related
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glGetString));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glViewport));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglCreateContext));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglDeleteContext));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglGetProcAddress));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglMakeCurrent));
-
-            // Shader-related
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glClear));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(wglSwapLayerBuffers));
-
-            // Material-related
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glBindTexture));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glDeleteTextures));
-
-            // Shader/material shared
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glBegin));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glDrawElements));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glEnd));
-
-            // Fog-related
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glEnable));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glFogf));
-            success &= VoodooHooker->InstallHook(HOOK_PARAMS(glFogfv));
-
-            // Check the results and handle
-            if ( success )
+        const char * API_ClassInfo
+            (
+            _In_ int number
+            )
+        {
+            if ( number == 0 )
             {
-                VoodooCore->Log("Voodoo Frost: OpenGL hooked successfully.");
+                return "Frost_Adapter";
             } else {
-                VoodooCore->Log("Voodoo Frost: OpenGL hook procedure failed.");
+                return NULL;
             }
         }
+
+        IObject * API_ClassCreate
+            (
+            _In_ int number, 
+            _In_ Core * core
+            )
+        {
+            if ( number == 0 )
+            {
+                return new Frost::Adapter(core);
+            } else {
+                return NULL;
+            }
+        }
+    }
+}

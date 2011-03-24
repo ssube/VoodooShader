@@ -128,7 +128,7 @@ namespace VoodooShader
           *       
           * @return A pointer to the module manager (always valid).
           */
-         ModuleManagerPtr GetModuleManager();
+         ModuleManagerRef GetModuleManager();
 
         /**
          * Retrieves this core's IHookManager implementation.

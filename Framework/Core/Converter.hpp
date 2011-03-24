@@ -36,7 +36,7 @@ namespace VoodooShader
      * methods to convert various enums to other types or retrieve readable 
      * names.
      */
-    class Converter
+    class VOODOO_API Converter
     {
     public:
         /**

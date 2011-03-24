@@ -11,7 +11,7 @@ namespace VoodooShader
         return mTextureObject;
     }
 
-    String Texture::Name()
+    String Texture::GetName()
     {
         return mName;
     };

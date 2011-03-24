@@ -44,7 +44,7 @@ namespace VoodooShader
         {
             if ( number == 0 )
             {
-                return new XmlLogger::XmlLogger(core);
+                return new XmlLogger(core);
             } else {
                 return NULL;
             }
@@ -113,7 +113,7 @@ namespace VoodooShader
 
                 this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file opened by XmlLogger::Open.");
 
-                Version XmlLoggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
+                Version loggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
                 this->LogModule(loggerVersion);
 
                 return true;

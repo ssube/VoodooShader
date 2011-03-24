@@ -42,6 +42,14 @@ namespace VoodooShader
 {
     namespace XmlLogger
     {
+        /**
+         * @addtogroup VoodooXmlLogger Voodoo/XmlLogger
+         * @{
+         */
+
+        /**
+         * Return the module's version.
+         */
         Version API_ModuleVersion();
 
         int API_ClassCount();
@@ -58,13 +66,10 @@ namespace VoodooShader
         );
 
         /**
-         * Log management class, capable of opening, closing, writing to and 
-         * dumping log files. Throws on problems opening the log
-         * and has timestamp and formatting capabilities.
+         * Xml logger class, writes neatly formatted logs for use with the log viewer.
+         * Supports all Voodoo ILogger features and debug logging (with no buffer).
          * 
-         * @note The current logger implements a simplistic XML logger with
-         *       some features to provide clearer and more in-depth logs.
-         * @warning If the Logger isn't destroyed properly, the main tag of
+         * @warning If the logger isn't destroyed properly, the main tag of
          *       the log file won't be closed and the log won't be valid.
          */
         class XmlLogger
@@ -232,5 +237,8 @@ namespace VoodooShader
             std::fstream mLogFile;
             tm * mLocalTime;
         };
+        /**
+         * @}
+         */
     }
 }

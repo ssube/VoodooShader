@@ -28,6 +28,10 @@ namespace VoodooShader
 {
     namespace EasyHook
     {
+        /**
+         * @addtogroup VoodooEHHook
+         * @{
+         */
         typedef std::map<std::string, void*> HookMap;
 
         Version API_ModuleVersion();
@@ -120,5 +124,8 @@ namespace VoodooShader
             unsigned long * mThreadIDs;
             unsigned long mThreadCount;
         };
+        /**
+         * @}
+         */
     };
 }

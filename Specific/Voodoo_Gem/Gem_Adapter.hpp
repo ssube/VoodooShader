@@ -59,11 +59,11 @@ namespace VoodooShader
 
             ~Adapter();
 
+            // IObject methods
             virtual void DestroyObject();
             virtual const char * GetObjectClass();
 
-            virtual Version GetVersion();
-
+            // IAdapter methods
             virtual bool LoadPass(Pass * pass);
             virtual void BindPass(PassRef shader);
             virtual void UnbindPass();

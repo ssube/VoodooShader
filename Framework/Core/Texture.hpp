@@ -58,7 +58,7 @@ namespace VoodooShader
         _Check_return_
         void * GetTexture();
 
-        String Name();
+        String GetName();
 
     private:
         String mName;

@@ -186,7 +186,7 @@ namespace VoodooShader
         return mHooker;
     }
 
-    ModuleManagerPtr Core::GetModuleManager()
+    ModuleManagerRef Core::GetModuleManager()
     {
         return mModManager;
     }

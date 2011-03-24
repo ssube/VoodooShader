@@ -40,7 +40,7 @@ namespace VoodooShader
                 mCore->Log(LL_Info, VOODOO_GEM_NAME, "Gem loaded into process %s.", procpath);
             }
 
-            void * d3d8hookpoint = mCore->GetModuleManager()->FindFunction("d3d8.dll", "Direct3DCreate8");
+            void * d3d8hookpoint = mCore->GetModuleManager().lock()->FindFunction("d3d8.dll", "Direct3DCreate8");
             if ( d3d8hookpoint )
             {
                 IHookManager * hooker = mCore->GetHookManager();
@@ -111,9 +111,10 @@ namespace VoodooShader
             cgD3D9EnableDebugTracing(CG_TRUE);
 #endif
 
-            cgD3D9SetManageTextureParameters(mCore->GetCGContext(), CG_TRUE);
+            CGcontext context = mCore->GetCgContext();
+            cgD3D9SetManageTextureParameters(context, CG_TRUE);
 
-            cgD3D9RegisterStates(mCore->GetCGContext());
+            cgD3D9RegisterStates(context);
 
             HRESULT errors = cgD3D9GetLastError();
             if ( !SUCCEEDED(errors) )
@@ -243,13 +244,6 @@ namespace VoodooShader
             }
         }
 
-        Version Adapter::GetVersion()
-        {
-            Version version = VOODOO_META_VERSION_STRUCT(GEM);
-
-            return version;
-        }
-
         bool Adapter::LoadPass(Pass * pass)
         {
             if ( pass == NULL )
@@ -339,7 +333,7 @@ namespace VoodooShader
                         LL_Error,
                         VOODOO_GEM_NAME,
                         "Error binding vertex program from '%s': %s.",
-                        pass->Name().c_str(), cgD3D9TranslateHRESULT(hr)
+                        pass->GetName().c_str(), cgD3D9TranslateHRESULT(hr)
                     );
 
                     return;
@@ -361,7 +355,7 @@ namespace VoodooShader
                         LL_Error,
                         VOODOO_GEM_NAME,
                         "Error binding fragment program from '%s': %s.",
-                        pass->Name().c_str(), cgD3D9TranslateHRESULT(hr)
+                        pass->GetName().c_str(), cgD3D9TranslateHRESULT(hr)
                     );
 
                     if ( cgIsProgram(vertProg) )
@@ -417,7 +411,7 @@ namespace VoodooShader
                     LL_Error,
                     VOODOO_GEM_NAME,
                     "Failed to retrieve render target for shader %s.", 
-                    shader->Name().c_str()
+                    shader->GetName().c_str()
                 );
 
                 return;
@@ -431,7 +425,7 @@ namespace VoodooShader
                     LL_Error,
                     VOODOO_GEM_NAME,
                     "Failed to bind render target for shader %s.", 
-                    shader->Name().c_str()
+                    shader->GetName().c_str()
                 );
 
                 return;
@@ -565,33 +559,34 @@ namespace VoodooShader
                 LL_Debug,
                 VOODOO_GEM_NAME,
                 "Applying parameter %s.",
-                param->Name().c_str()
+                param->GetName().c_str()
             );
 
             //! @todo Find out if cgSetParameter or cgD3DSetUniform is better/faster and
             //!        why cgD3DSetUniform returns errors on valid parameters.
+            CGparameter cgparam = param->GetCgParameter();
 
             switch ( param->GetType() )
             {
             case PT_Float1:
-                cgSetParameter1fv(param->GetParameter(), param->GetFloat());
+                cgSetParameter1fv(cgparam, param->GetFloat());
                 break;
             case PT_Float2:
-                cgSetParameter2fv(param->GetParameter(), param->GetFloat());
+                cgSetParameter2fv(cgparam, param->GetFloat());
                 break;
             case PT_Float3:
-                cgSetParameter3fv(param->GetParameter(), param->GetFloat());
+                cgSetParameter3fv(cgparam, param->GetFloat());
                 break;
             case PT_Float4:
-                cgSetParameter4fv(param->GetParameter(), param->GetFloat());
+                cgSetParameter4fv(cgparam, param->GetFloat());
                 break;
             case PT_Matrix:
-                cgSetMatrixParameterfc(param->GetParameter(), param->GetFloat());
+                cgSetMatrixParameterfc(cgparam, param->GetFloat());
                 break;
             case PT_Sampler1D:
             case PT_Sampler2D:
             case PT_Sampler3D:
-                cgD3D9SetTextureParameter(param->GetParameter(), param->GetTexture()->GetTexture<IDirect3DTexture9>());
+                cgD3D9SetTextureParameter(cgparam, param->GetTexture()->GetTexture<IDirect3DTexture9>());
                 break;
             case PT_Unknown:
             default:
@@ -621,7 +616,7 @@ namespace VoodooShader
                     LL_Debug,
                     VOODOO_GEM_NAME,
                     "Bound texture %s to parameter %s.", 
-                    texture->Name().c_str(), param->Name().c_str()
+                    texture->GetName().c_str(), param->GetName().c_str()
                 );
 
                 return true;

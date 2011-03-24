@@ -57,7 +57,7 @@ namespace VoodooShader
          */
         virtual void SetLogLevel
         (
-            _In_ size_t level
+            _In_ LogLevel level
         ) = 0;
 
         /**
@@ -112,7 +112,7 @@ namespace VoodooShader
          */
         virtual void Log
         (
-            _In_ size_t level,
+            _In_ LogLevel level,
             _In_ const char * module,
             _In_ _Printf_format_string_ const char * msg, 
             ...
@@ -134,7 +134,7 @@ namespace VoodooShader
          */
         virtual void LogList
         (
-            _In_ size_t level,
+            _In_ LogLevel level,
             _In_ const char * module,
             _In_ const char * msg, 
             _In_ va_list args

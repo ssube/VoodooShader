@@ -72,15 +72,6 @@ namespace VoodooShader
     {
     public:
         /**
-         * Retrieves the adapter module version. This can be used to verify
-         * support between modules (don't rely on versions, but they are good
-         * indicators, minimum supported version is usually safe).
-         *
-         * @return The adapter version.
-         */
-        virtual Version GetVersion() = 0;
-
-        /**
          * Loads a program in a manner that is compatible with the adapter's
          * underlying API. For Cg-supported APIs, this uses the appropriate 
          * module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc).
