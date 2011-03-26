@@ -93,7 +93,6 @@ namespace VoodooShader
              */
             virtual ~XmlLogger();
 
-            virtual void DestroyObject();
             virtual const char * GetObjectClass();
 
             /**

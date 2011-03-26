@@ -1,17 +1,19 @@
 
 #include "VoodooGL.hpp"
 
+HWND gNwnWindow;
+
 using namespace VoodooShader;
 
 void GLAPIENTRY vglBegin(GLenum mode)
 {
     VoodooCore->Log
-        (
+    (
         LL_Debug,
         VOODOO_FROST_NAME,
         "glBegin(%u)",
         mode
-        );
+    );
 
     return glBegin(mode);
 }
@@ -19,12 +21,12 @@ void GLAPIENTRY vglBegin(GLenum mode)
 void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 {
     VoodooCore->Log
-        (
+    (
         LL_Debug,
         VOODOO_FROST_NAME,
         "glBindTexture(%u, %u)",
         target, texture
-        );
+    );
 
     return glBindTexture(target, texture);
 }
@@ -32,12 +34,12 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 void GLAPIENTRY vglClear(GLbitfield mask)
 {
     VoodooCore->Log
-        (
+    (
         LL_Debug,
         VOODOO_FROST_NAME,
         "glClear(%u)",
         mask
-        );
+    );
 
     return glClear(mask);;
 }
@@ -45,12 +47,12 @@ void GLAPIENTRY vglClear(GLbitfield mask)
 void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
 {
     VoodooCore->Log
-        (
+    (
         LL_Debug,
         VOODOO_FROST_NAME,
         "glDeleteTextures(%i, %p)",
         n, textures
-        );
+    );
 
     return glDeleteTextures(n, textures);;
 }
@@ -58,12 +60,12 @@ void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
 void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
 {
     VoodooCore->Log
-        (
+    (
         LL_Debug,
         VOODOO_FROST_NAME,
         "glDrawElements(%u, %i, %u, %p)",
         mode, count, type, indices
-        );
+    );
 
     return glDrawElements(mode, count, type, indices);;
 }
@@ -71,12 +73,12 @@ void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const G
 void GLAPIENTRY vglEnable(GLenum cap)
 {
     VoodooCore->Log
-        (
+    (
         LL_Debug,
         VOODOO_FROST_NAME,
         "glEnable(%u)",
         cap
-        );
+    );
 
     return glEnable(cap);
 }
@@ -84,11 +86,11 @@ void GLAPIENTRY vglEnable(GLenum cap)
 void GLAPIENTRY vglEnd()
 {
     VoodooCore->Log
-        (
+    (
         LL_Debug,
         VOODOO_FROST_NAME,
         "glEnd()"
-        );
+    );
 
     return glEnd();
 }
@@ -96,12 +98,12 @@ void GLAPIENTRY vglEnd()
 void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
 {
     VoodooCore->Log
-        (
+    (
         LL_Debug,
         VOODOO_FROST_NAME,
         "glFogfv(%u, %p)",
         pname, params
-        );
+    );
 
     return glFogfv(pname, params);;
 }
@@ -109,12 +111,12 @@ void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
 void GLAPIENTRY vglFogf(GLenum pname, GLfloat param)
 {
     VoodooCore->Log
-        (
+    (
         LL_Debug,
         VOODOO_FROST_NAME,
         "glFogf(%u, %f)",
         pname, param
-        );
+    );
 
     return glFogf(pname, param);;
 }
@@ -158,6 +160,14 @@ HGLRC WINAPI vwglCreateContext(HDC hdc)
         "wglCreateContext(%p) == %p",
         hdc, result
     );
+
+    gNwnWindow = WindowFromDC(hdc);
+    char title[64];
+    if ( GetWindowTextA(gNwnWindow, title, 64) > 0 )
+    {
+        strcat_s(title, " [ Voodoo Frost ]");
+        SetWindowTextA(gNwnWindow, title);
+    }
     
     return result;
 }

@@ -72,11 +72,6 @@ namespace VoodooShader
             }
         }
 
-        void XmlLogger::DestroyObject()
-        {
-            delete this;
-        }
-
         const char * XmlLogger::GetObjectClass()
         {
             return "XmlLogger";

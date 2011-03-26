@@ -1,5 +1,8 @@
 // Testbed.cpp : Defines the entry point for the application.
 //
+// 
+
+#define forever for(;;)
 
 #include "stdafx.h"
 #include "Testbed.h"
@@ -25,7 +28,6 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 void DirectXDraw();
 bool DirectXInit();
 void DirectXQuit();
-void DrawGDI(HWND hWnd);
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -35,7 +37,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-     // TODO: Place code here.
     MSG msg;
     HACCEL hAccelTable;
 
@@ -45,12 +46,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
         return FALSE;
     }
 
-    // Initialize global strings
     LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadString(hInstance, IDC_TESTBED, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
-    // Perform application initialization:
     if (!InitInstance (hInstance, nCmdShow))
     {
         return FALSE;
@@ -58,10 +57,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_TESTBED));
 
-    // Main message loop:
-    while ( true )
+    forever
     {
-        // Draw DX...
         if ( d3d_Device )
         {
             DirectXDraw();
@@ -350,21 +347,4 @@ void DirectXQuit()
         d3d_Object->Release();
         d3d_Object = NULL;
     }
-}
-
-void DrawGDI(HWND hWnd)
-{
-/*
-    PAINTSTRUCT ps;
-    HDC hdc;
-
-    hdc = BeginPaint(hWnd, &ps);
-
-    SetDCPenColor(hdc, 0x0000FFFF);
-    SetROP2(hdc, R2_XORPEN);
-
-    DrawTextA(hdc, msg, -1, &rect, DT_BOTTOM|DT_CENTER);
-
-    EndPaint(hWnd, &ps);
- */
 }

@@ -12,9 +12,6 @@
 
 namespace VoodooShader
 {
-    #pragma comment(linker, "/EXPORT:CreateCore=?CreateCore@VoodooShader@@YAPAVCore@1@PBD@Z")
-    #pragma comment(linker, "/EXPORT:DestroyCore=?DestroyCore@VoodooShader@@YAXPAVCore@1@@Z")
-
     Core * CreateCore(_In_ const char * path)
     {
         return new Core(path);
@@ -152,20 +149,18 @@ namespace VoodooShader
     {
         if ( this->mAdapter )
         {
-            this->mAdapter->DestroyObject();
+            delete this->mAdapter;
         }
 
         if ( this->mHooker )
         {
-            this->mHooker->DestroyObject();
+            delete this->mHooker;
         }
 
         if ( this->mLogger )
         {
-            this->mLogger->DestroyObject();
+            delete this->mLogger;
         }
-
-        this->mModManager = NULL;
 
         if ( cgIsContext(this->mCgContext) )
         {

@@ -74,7 +74,7 @@
         </div>
         <div class="section">
           <div class="section_title">Log Events:</div>
-          <table class="sortable" width="100%" height="100%">
+          <table class="sortable" >
             <thead>
               <tr>
                 <th>Event</th>

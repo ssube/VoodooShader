@@ -70,9 +70,8 @@ namespace VoodooShader
             /**
              * Removes all hooks and cleans up the HookManager.
              */
-            ~HookManager();
+            virtual ~HookManager();
 
-            virtual void DestroyObject();
             virtual const char * GetObjectClass();
         
             /**

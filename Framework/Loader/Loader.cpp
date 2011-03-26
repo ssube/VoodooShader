@@ -1,9 +1,19 @@
+
+#include "Meta.hpp"
 #include "Loader.hpp"
+
+#include "Loader_Version.hpp"
 
 /**
  * @addtogroup VoodooLoader Voodoo/Loader
  * @{
  */
+
+VoodooShader::Version API_ModuleVersion()
+{
+    VoodooShader::Version module = VOODOO_META_VERSION_STRUCT(LOADER);
+    return module;
+}
 
 funcTypeLoad funcLoad;
 funcTypeUnload funcUnload;

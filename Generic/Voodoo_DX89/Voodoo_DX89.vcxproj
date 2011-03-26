@@ -205,12 +205,6 @@
   <ItemGroup>
     <ResourceCompile Include="Voodoo_DX89.rc" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework.vcxproj">
-      <Project>{a5c09646-da38-4869-82c3-11a66d706c43}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

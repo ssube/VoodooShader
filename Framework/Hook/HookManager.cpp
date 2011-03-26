@@ -83,11 +83,6 @@ namespace VoodooShader
             delete mThreadIDs;
         }
 
-        void HookManager::DestroyObject()
-        {
-            delete this;
-        }
-
         const char * HookManager::GetObjectClass()
         {
             return "EHHookManager";

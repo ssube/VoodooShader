@@ -47,7 +47,7 @@ namespace VoodooShader
             _In_ Adapter * adapter
         );
 
-        class VOODOO_API_GEM Adapter
+        class Adapter
             : public VoodooShader::IAdapter
         {
 

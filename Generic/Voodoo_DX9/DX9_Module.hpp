@@ -3,7 +3,7 @@
 #define VOODOO_DX9_MODULE_HPP
 
 #define VOODOO_IMPORT
-#include "VoodooFramework.hpp"
+#include "Voodoo_Core.hpp"
 
 #include "D3D9.h"
 #include "Cg/cgD3D9.h"

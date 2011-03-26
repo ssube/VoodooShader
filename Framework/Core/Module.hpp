@@ -57,6 +57,17 @@ namespace VoodooShader
             _In_ String name
         );
 
+        template<typename T>
+        std::shared_ptr<T> SharedCreateClass
+        (
+            _In_ String name
+        )
+        {
+            IObject * object = this->CreateClass(name);
+
+            return std::shared_ptr<T>((T*)object);
+        }
+
         /**
          * Create a new instance of the given class. This object will be created in a
          * dynamic module and a pointer given. It should be cast to the actual type

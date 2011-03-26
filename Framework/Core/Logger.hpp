@@ -30,6 +30,9 @@ namespace VoodooShader
         : public IObject
     {
     public:
+        virtual ~ILogger() throw()
+        { }
+
         /**
          * Opens a file for use by this Logger.
          *

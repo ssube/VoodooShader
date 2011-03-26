@@ -40,7 +40,9 @@ namespace VoodooShader
     class IObject
     {
     public:
-        virtual void DestroyObject() = 0;
+        virtual ~IObject() throw()
+        { }
+
         virtual const char * GetObjectClass() = 0;
     };
 }

@@ -71,6 +71,9 @@ namespace VoodooShader
         : public IObject
     {
     public:
+        virtual ~IAdapter() throw()
+        { }
+
         /**
          * Loads a program in a manner that is compatible with the adapter's
          * underlying API. For Cg-supported APIs, this uses the appropriate 

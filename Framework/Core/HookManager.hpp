@@ -32,6 +32,9 @@ namespace VoodooShader
         : public IObject
     {
     public:
+        virtual ~IHookManager() throw()
+        { }
+
         /**
          * Install a single hook at the specified point. This will only affect the
          * process(es) the HookManager is bound to.

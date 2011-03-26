@@ -22,7 +22,7 @@
 #include <set>
 
 #define VOODOO_IMPORT
-#include "VoodooFramework.hpp"
+#include "Voodoo_Core.hpp"
 
 #include <d3d9.h>
 #include <d3dx9.h>

@@ -83,6 +83,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>
       </CallingConvention>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -110,6 +111,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <CallingConvention>
       </CallingConvention>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -135,6 +137,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>
       </CallingConvention>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -154,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Loader.hpp" />
+    <ClInclude Include="Loader_Version.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
