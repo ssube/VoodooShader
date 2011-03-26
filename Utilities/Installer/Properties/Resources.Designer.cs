@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LogViewer.Properties {
+namespace Installer.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LogViewer.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LogViewer.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Installer.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,16 +60,9 @@ namespace LogViewer.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap OpenFile {
+        internal static System.Drawing.Bitmap voodoo {
             get {
-                object obj = ResourceManager.GetObject("OpenFile", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap saveHS {
-            get {
-                object obj = ResourceManager.GetObject("saveHS", resourceCulture);
+                object obj = ResourceManager.GetObject("voodoo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -28,12 +28,13 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainwindow));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.mainBrowser = new System.Windows.Forms.WebBrowser();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -73,25 +74,43 @@
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.toolStripButton1,
+            this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(77, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(188, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.Image = global::LogViewer.Properties.Resources.OpenFile;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(67, 22);
+            this.toolStripButton1.Size = new System.Drawing.Size(84, 22);
             this.toolStripButton1.Text = "Open Log";
             this.toolStripButton1.Click += new System.EventHandler(this.openLog);
             // 
             // openFileDialog1
             // 
+            this.openFileDialog1.DefaultExt = "xmllog";
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "XML Log File|*.xmllog|XML File|*.xml|All Files|*";
+            this.openFileDialog1.Title = "Open Voodoo XML Log";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.Image = global::LogViewer.Properties.Resources.saveHS;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(94, 22);
+            this.toolStripButton2.Text = "Save HTML";
+            this.toolStripButton2.Click += new System.EventHandler(this.saveHTML);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "html";
+            this.saveFileDialog1.Filter = "HTML File|*.html|All Files|*";
+            this.saveFileDialog1.Title = "Save HTML Log";
             // 
             // mainwindow
             // 
@@ -121,6 +140,8 @@
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.WebBrowser mainBrowser;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 	}
 }
 

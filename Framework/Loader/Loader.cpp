@@ -121,7 +121,7 @@ HMODULE LoadSystemLibrary(const char * libname)
 // proper init function.
 void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func)
 {
-    typedef void * (__stdcall * DXInitFunc)(UINT);
+    typedef void * (WINAPI * DXInitFunc)(UINT);
 
     HMODULE baselib = LoadSystemLibrary(lib);
 
@@ -165,7 +165,7 @@ HRESULT WINAPI VoodooInput8Create
     LPVOID punkOuter
 )
 {
-    typedef HRESULT (__stdcall * DIInitFunc)(HINSTANCE, DWORD, REFIID, LPVOID*, LPVOID);
+    typedef HRESULT (WINAPI * DIInitFunc)(HINSTANCE, DWORD, REFIID, LPVOID*, LPVOID);
 
     HMODULE baselib = LoadSystemLibrary("dinput8.dll");
 
@@ -185,6 +185,60 @@ HRESULT WINAPI VoodooInput8Create
 
     return (*initFunc)(hinst, dwVersion, riidltf, ppvOut, punkOuter);
 }
+
+// DirectInput (unknown version)
+HRESULT WINAPI VoodooInputCreateGeneric
+(
+    HINSTANCE hinst,
+    DWORD dwVersion,
+    LPVOID * lplpDirectInput,
+    LPVOID punkOuter,
+    const char * func
+)
+{
+    typedef HRESULT (WINAPI * DIInitFunc)(HINSTANCE, DWORD, LPVOID, LPVOID);
+
+    HMODULE baselib = LoadSystemLibrary("dinput.dll");
+
+    if ( !baselib )
+    {
+        MessageBoxA(NULL, "Voodoo Loader: Unable to load system DLL.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
+    }
+
+    DIInitFunc initFunc = (DIInitFunc)GetProcAddress(baselib, func);
+
+    if ( !initFunc )
+    {
+        MessageBoxA(NULL, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR|MB_OK);
+        exit(1);
+    }
+
+    return (*initFunc)(hinst, dwVersion, lplpDirectInput, punkOuter);
+}
+
+HRESULT WINAPI VoodooInputCreateA
+(
+    HINSTANCE hinst,
+    DWORD dwVersion,
+    LPVOID * lplpDirectInput,
+    LPVOID punkOuter
+)
+{
+    return VoodooInputCreateGeneric(hinst, dwVersion, lplpDirectInput, punkOuter, "DirectInputCreateA");
+}
+
+HRESULT WINAPI VoodooInputCreateW
+    (
+    HINSTANCE hinst,
+    DWORD dwVersion,
+    LPVOID * lplpDirectInput,
+    LPVOID punkOuter
+    )
+{
+    return VoodooInputCreateGeneric(hinst, dwVersion, lplpDirectInput, punkOuter, "DirectInputCreateW");
+}
+
 
 // DirectSound 8
 HRESULT VoodooSoundCreate8

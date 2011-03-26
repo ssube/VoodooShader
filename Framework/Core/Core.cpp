@@ -26,9 +26,12 @@ namespace VoodooShader
     }
 
     Core::Core(_In_ const char * path)
-        : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCgContext(NULL), mBasePath(path)
+        : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCgContext(NULL)
     {
         using namespace pugi;
+
+        mBasePath = path;
+        mBasePath += "\\";
 
         // Init Cg
         this->mCgContext = cgCreateContext();
@@ -81,6 +84,13 @@ namespace VoodooShader
             }
 
             // Log extended build information
+            this->Log
+            (
+                LL_Info,
+                VOODOO_CORE_NAME,
+                "%s",
+                VOODOO_GLOBAL_COPYRIGHT_FULL
+            );
             this->LogModule(this->GetVersion());
             Version vsver = VOODOO_META_VERSION_STRUCT(VC);
             this->LogModule(vsver);
@@ -98,6 +108,9 @@ namespace VoodooShader
             {
                 throw std::exception("Unable to create hook object.");
             }
+
+            // Core done loading
+            this->Log(LL_Info, VOODOO_CORE_NAME, "Core initialization complete.");
 
             // Load adapter module
             xml_node adapterNode = coreNode.child("Adapter");
@@ -132,6 +145,7 @@ namespace VoodooShader
             delete config;
             throw exc;
         }
+
     }
 
     Core::~Core()
@@ -155,6 +169,15 @@ namespace VoodooShader
 
         if ( cgIsContext(this->mCgContext) )
         {
+            // Failsafe destruction of all effects
+            CGeffect effect = cgGetFirstEffect(mCgContext);
+            while ( cgIsEffect(effect) )
+            {
+                CGeffect next = cgGetNextEffect(effect);
+                cgDestroyEffect(effect);
+                effect = next;
+            }
+
             cgDestroyContext(this->mCgContext);
         }
     }

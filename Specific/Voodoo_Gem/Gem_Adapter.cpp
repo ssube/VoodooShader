@@ -40,7 +40,7 @@ namespace VoodooShader
                 mCore->Log(LL_Info, VOODOO_GEM_NAME, "Gem loaded into process %s.", procpath);
             }
 
-            void * d3d8hookpoint = mCore->GetModuleManager().lock()->FindFunction("d3d8.dll", "Direct3DCreate8");
+            void * d3d8hookpoint = mCore->GetModuleManager()->FindFunction("d3d8.dll", "Direct3DCreate8");
             if ( d3d8hookpoint )
             {
                 IHookManager * hooker = mCore->GetHookManager();
@@ -475,7 +475,7 @@ namespace VoodooShader
                         LL_Error,
                         VOODOO_GEM_NAME,
                         "Failed to copy results to target for pass %s (result %d).",
-                        pass->Name().c_str(), hr
+                        pass->GetName().c_str(), hr
                     );
                 }
             }
@@ -595,7 +595,7 @@ namespace VoodooShader
                     LL_Error,
                     VOODOO_GEM_NAME,
                     "Unable to bind parameters %s (unknown type).", 
-                    param->Name().c_str()
+                    param->GetName().c_str()
                 );
 
                 break;
@@ -609,7 +609,7 @@ namespace VoodooShader
                 param->Set(texture);
 
                 IDirect3DTexture9 * texObj = texture->GetTexture<IDirect3DTexture9>();
-                CGparameter texParam = param->GetParameter();
+                CGparameter texParam = param->GetCgParameter();
                 cgD3D9SetTextureParameter(texParam, texObj);
                 mCore->Log
                 (

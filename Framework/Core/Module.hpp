@@ -37,6 +37,7 @@ namespace VoodooShader
      * @addtogroup VoodooCore
      * @{
      */
+
     /**
      * Provides a clean framework for loading and unloading modules in core, as
      * well as retrieving symbols and modules from memory. 
@@ -56,12 +57,30 @@ namespace VoodooShader
             _In_ String name
         );
 
+        /**
+         * Create a new instance of the given class. This object will be created in a
+         * dynamic module and a pointer given. It should be cast to the actual type
+         * before being used.
+         * 
+         * @param name The class name to create.
+         * @return New object or null if the class wasn't found or couldn't be created.
+         */
         _Check_return_
         IObject * CreateClass
         (
             _In_ String name
         );
 
+        /**
+         * Finds the address of a function in a module. The module must be loaded into
+         * the process and export the symbol, otherwise this will return null. If the
+         * module name does not have an extension, ".dll" will be appended during the
+         * lookup. It is recommended you <em>do not</em> use an absolute path here.
+         * 
+         * @param module The module name to look up.
+         * @param name The function name to find.
+         * @return The function's address if found, null otherwise.
+         */
         _Check_return_
         void * FindFunction
         (

@@ -21,19 +21,20 @@
 
 #include "Frost_Module.hpp"
 
-const GLubyte * GLAPIENTRY vglGetString(GLenum name);
-void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height);
-HGLRC vwglCreateContext(HDC hdc);
-BOOL vwglDeleteContext(HGLRC hglrc);
-BOOL vwglMakeCurrent(HDC hdc, HGLRC hglrc);
-PROC vwglGetProcAddress(LPCSTR name);
-void GLAPIENTRY vglClear(GLbitfield mask);
 void GLAPIENTRY vglBegin(GLenum mode);
-void GLAPIENTRY vglEnd();
-BOOL GLAPIENTRY vwglSwapLayerBuffers(HDC hdc, UINT uint);
 void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture);
+void GLAPIENTRY vglClear(GLbitfield mask);
 void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures);
 void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices);
 void GLAPIENTRY vglEnable(GLenum cap);
+void GLAPIENTRY vglEnd();
 void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params);
 void GLAPIENTRY vglFogf(GLenum pname, GLfloat param);
+const GLubyte * GLAPIENTRY vglGetString(GLenum name);
+void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height);
+
+HGLRC WINAPI vwglCreateContext(HDC hdc);
+BOOL WINAPI vwglDeleteContext(HGLRC hglrc);
+BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc);
+PROC WINAPI vwglGetProcAddress(LPCSTR name);
+BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint);

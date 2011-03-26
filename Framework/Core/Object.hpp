@@ -34,9 +34,8 @@
 namespace VoodooShader
 {
     /**
-     * Defines a simple interface all Voodoo objects must inherit. This
-     * interface tracks and handles destruction of objects, especially
-     * from dynamic libraries.
+     * Defines a simple interface all Voodoo objects from dynamic modules must inherit. This
+     * interface handles destruction and identification of these objects.
      */
     class IObject
     {

@@ -105,6 +105,8 @@ namespace VoodooShader
 
             if ( this->mLogFile.is_open() )
             {
+                this->SetBufferSize(0);
+
                 this->mLogFile << "<?xml version='1.0'?>\n<VoodooLog "; 
                 this->LogDate(); 
                 this->LogTime(); 

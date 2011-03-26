@@ -59,10 +59,8 @@
  *    can build geometry dynamically. This is often used with a form of render-to-
  *    vertex buffer, to generate and store the geometry for later use. Geometry
  *    stages will often depend heavily on parameters passed into the effect. 
- *    Geometry stages are only supported on DirectX 10 and higher (roughly OpenGL
- *    2.0).
+ *    Geometry stages are supported on DirectX 10 or OpenGL 3.2 and better, usually. 
  * </p>
- * @todo Verify what OGL version supports geometry shaders
  * <p>
  *    Most recently, two tessellation control stages have been added. While these
  *    are supported in DirectX 11 and higher, and so are not wide spread, they
@@ -94,11 +92,11 @@
  *    parameter and providing the effect parameter, like so:
  * </p>
  * <p>
- *    <code>
- *    ParameterRef global = Core->CreateParameter("time", PT_Float);<br />
- *    ParameterRef effect = Shader->GetParameter("time");<br />
- *    global->Attach(effect);<br />
- *    </code>
+ * @code
+ *    ParameterRef global = Core->CreateParameter("time", PT_Float);
+ *    ParameterRef effect = Shader->GetParameter("time");
+ *    global->Attach(effect);
+ * @endcode
  * </p>
  * <p>
  *    Whenever the global parameter is set to a new value, all attached parameters
@@ -121,21 +119,34 @@
  *    instead go to the specified target. Targets may be specified like so:
  * </p>
  * <p>
- *    <code>
- *    technique dx9_high<br />
- *    &nbsp;&nbsp;< string target=":buffer_group1"; ><br />
- *    {<br />
- *    &nbsp;&nbsp;&nbsp;&nbsp;pass diffuse<br />
- *    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;< string target=":buffer_diffuse"; ><br />
- *    &nbsp;&nbsp;&nbsp;&nbsp;{<br />
- *    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
- *    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
- *    }<br />
- *    </code>
+ * @code
+ * sampler2D diffuseSamp < texture=":buffer_diffuse"; >;
+ * sampler2D specSamp < texture=":buffer_specular"; >;
+ * 
+ * technique dx9_high
+ * {
+ *     pass diffuse
+ *        < string target=":buffer_diffuse"; >
+ *     {
+ *         ...
+ *     }
+ *     pass spec
+ *        < string target=":buffer_specular"; >
+ *     {
+ *         ...
+ *     }
+ *     pass combine
+ *     {
+ *         return ( diffuseSamp + specSamp );
+ *     }     
+ * }
+ * @endcode
  * </p>
  * <p>
  *    This allows pass and technique output to be stored and later used, by other
- *    passes from the same effect or even by other effects.
+ *    passes from the same effect or even by other effects (chaining effects to
+ *    use textures can be tricky, especially in how the effects are loaded, so be
+ *    careful with that).
  * </p>
  * <p>
  *    If no target is specified in the technique or pass annotations, the shader
@@ -156,13 +167,13 @@
  * @section texturetypes Texture Types
  * <p>
  *    Three basic texture types are supported in Voodoo:
- *    <ol>
- *     <li>1-dimensional textures (a simple row of pixels, 1 by x)</li>
- *     <li>2-dimensional textures (the most common scene, a rectangle of pixels,
+ *    <ul>
+ *     <li>1-dimensional texture rows (a simple row of pixels, 1 by x)</li>
+ *     <li>2-dimensional texture planes (the most common type, a rectangle of pixels,
  *        x by y)</li>
- *     <li>3-dimensional textures (effectively a number of 2D textures stacked in
+ *     <li>3-dimensional texture volumes (effectively a number of 2D textures stacked in
  *        slices, x by y by z)</li>
- *    </ol>
+ *    </ul>
  * </p>
  * <p>
  *    A different sampler type is provided for each texture type (
@@ -171,7 +182,9 @@
  * </p>
  * <p>
  *    Samplers require texture coordinates when used, and each type of texture
- *    requires a different number of coordinates (one for each dimension).
+ *    requires one coordinate per dimension. Some texture sampling instructions
+ *    can perform additional filtering or draw from specific mipmaps and may need
+ *    more coordinates.
  * </p>
  *
  * @section textureformats Texture Formats
@@ -190,13 +203,13 @@
  *    render target or copied to and from.
  * </p>
  * <p>
- *    Textures are always delivered to shaders as floats through the <code>texXD</code> functions.
- *    This may cause some confusion as to how texture data is stored; the data is <em>usually</em>
- *    stored as an integer using the number of bits given below. Textures that are not stored in
- *    floating-point formats are clamped to range (0-1) in hardware. Shaders may output higher or
- *    lower values, but they will usually be ignored. If you need to store values outside of that
- *    range, use one of the formats suffixed with 'F' to store the data as floats (single and
- *    double texture formats are available).
+ *    Textures are always delivered to shaders as floats through sampling functions.
+ *    This may cause some confusion as to how texture data is stored; the data is <em>not usually</em>
+ *    stored as a float, but instead an integer using the number of bits given below. Textures 
+ *    that are not stored in floating-point formats are typically clamped to range (0-1) in 
+ *    hardware. Shaders may output higher or lower values, but they will usually be clamped.
+ *    If you need to store values outside of that  range, use one of the formats suffixed 
+ *    with 'F' to store the data as floats (single and double texture formats are available).
  * </p>
  * <table>
  *    <tr><th>Voodoo Format</th>        <th>DirectX Format</th>        

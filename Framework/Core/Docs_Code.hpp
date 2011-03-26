@@ -26,8 +26,9 @@
  * and certain Voodoo-specific features to help support shaders. To allow additional features
  * without breaking compatibility, Voodoo provides a class-based plugin interface. Modules may
  * be added and classes provided by those modules created and used within Voodoo or adapters.
- * To handle loading these modules, a known interface is required with a few specific features:
+ * To handle loading these modules, a known interface is required with a few specific features.
  * </p>
+ * @since 0.2.0.0
  * 
  * @section moduleexports Module Exports
  * <p>
@@ -35,24 +36,34 @@
  * query the module's version and what classes it adds. All these functions must be exported
  * as their name only, no mangling or decorating of any kind.
  * </p>
- * <p><code>Version ModuleVersion();</code></p>
+ * <p>
+ * @code 
+ * Version ModuleVersion();
+ * @endcode
+ * </p>
  * <p>
  * The ModuleVersion function returns a Version struct with the module's name, version and
  * debug build flag. This is used primarily for logging purposes.
  * </p>
- * <p><code>int ClassCount();</code></p>
+ * <p>@code int ClassCount();@endcode</p>
  * <p>
  * Returns the total number of classes provided by this module. Any class that needs to be
  * created by other code must be listed in this function and the next.
  * </p>
- * <p><code>const char * ClassInfo(int number);</code></p>
+ * <p>
+ * @code 
+ * const char * ClassInfo(int number);
+ * @endcode</p>
  * <p>
  * Returns the name of the given class. This is used to register the classes in the core
  * ModuleManager initially. As each module is loaded, the provided classes are iterated
  * through from <code>0</code> to <code>ClassCount</code> and added to the list of
  * available classes.
  * </p>
- * <p><code>IObject * ClassCreate(int number, Core * core);</code></p>
+ * <p>
+ * @code 
+ * IObject * ClassCreate(int number, Core * core);
+ * @endcode</p>
  * <p>
  * Creates a new instance of the given class, bound to the provided Core. For classes
  * needing additional data, they can cache and/or use the core. 
@@ -63,27 +74,36 @@
  * Every class provided through the above API <em>must</em> derive from the IObject
  * interface and implement both methods.
  * </p>
- * <p><code>void IObject::DestroyObject();</code></p>
+ * <p>
+ * @code
+ * void IObject::DestroyObject();
+ * @endcode</p>
  * <p>
  * Destroys the object, using <code>delete</code> from the same runtime it was created
  * in. <code>ClassCreate</code> is usually a wrapper for <code>new</code> and this method
  * usually just calls <code>delete this</code>. This does not null the pointer, must
  * clean up all memory allocated to the object, but may throw exceptions.
  * </p>
- * <p><code>const char * IObject::GetObjectClass();</code></p>
+ * <p>
+ * @code
+ * const char * IObject::GetObjectClass();
+ * @endcode
+ * </p>
  * <p>
  * Returns the object's class. This can be used to identify the source module or create
  * another object of the same time. This should return the same value as <code>ClassInfo</code>
  * for this class, so:
  * </p>
- * <p><code>
- * const char * nameA = ClassInfo(1);<br />
- * IObject * object = ClassCreate(1);<br />
- * const char * nameB = object->GetObjectClass();<br />
- * <br />
- * assert( nameA == nameB ); // May return the same string, for simplicity, but<br />
- * assert( strcmp(nameA, nameB) == 0 ); // Strings must always compare to identical<br />
- * </code></p>
+ * <p>
+ * @code
+ * const char * nameA = ClassInfo(1);
+ * IObject * object = ClassCreate(1);
+ * const char * nameB = object->GetObjectClass();
+ * 
+ * assert( nameA == nameB ); // May return the same string, for simplicity, but
+ * assert( strcmp(nameA, nameB) == 0 ); // Strings must always compare to identical
+ * @endcode
+ * </p>
  * <p>
  * While IObject does not provide reference-counting or fancier features, it does handle
  * most vital features of dynamic module classes. Additional features may be added to
@@ -102,13 +122,16 @@
  * perform exactly as expected by the Core.
  * </p>
  * <p>
- * In many senses, adapters are exactly like regular addon modules and they must follow the
+ * In many senses, adapters are addon modules and they must follow the
  * @ref modulespec "same specifications" as any other module. However, only one adapter object is
  * created at a time, and that object <em>must</em> derive from IAdapter.
  * </p>
  * <p>
  * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter
- * itself. In most cases, the adapter and supporting classes should conform to a basic naming scheme.
+ * itself. Adapter modules may even provide more than one adapter class.
+ * </p>
+ * <p>
+ * In most cases, the adapter and supporting classes should conform to a basic naming scheme.
  * Each Voodoo adapter is given a short one word somewhat-game-related name. It is recommended that
  * the adapter class be of the form [name]_Adapter and each supporting class use [name]_[classname],
  * to easily identify them among the available classes. If the adapter or module is official, the
@@ -122,6 +145,7 @@
  *  counterparts. To handle the huge differences, Voodoo is very modular and uses a number of
  *  universal and specific components.
  * </p>
+ * @section voodoosystemloader Voodoo/Loader
  * <p>
  *  The chain of execution for Voodoo begins with the dynamic loader (Voodoo/Loader), which 
  *  intercepts a single hook function in the target process. Because of how Window's search path 
@@ -132,6 +156,7 @@
  *  module (Voodoo/Core). With the core loaded, the loader creates a Core object and returns
  *  execution to the target process.
  * </p>
+ * @section voodoosystemcore Voodoo/Core
  * <p>
  *  The Core object, during creation, starts Cg and then handles loading other modules. The Cg 
  *  runtime is loaded, a Cg context created and error callbacks registered. The Core then parses 
@@ -141,6 +166,7 @@
  *  (given as Module elements in the config file under /VoodooConfig/Core) are loaded, logged and 
  *  their classes registered.
  * </p>
+ * @section voodoosystemadapter Adapter
  * <p>
  *  The adapter load process performs most of the detail work. In many cases, the adapter creates
  *  hooks in a number of system functions (creation functions for D3D or functions for OpenGL)
@@ -176,13 +202,13 @@
  * <ul>
  * <li>All projects must be configured for Visual Studio 2010 (vcxproj files, all dependency
  *      paths set in the project settings, etc).</li>
- * <li>#pragma preprocessor directives and other VS-specific features should be avoided.</li>
+ * <li>\#pragma preprocessor directives and other VS-specific features should be avoided.</li>
  * <ul>
  *  <li>Voodoo is designed to compile on Windows within Visual Studio. Compatibility with other
  *       compilers is not guaranteed or tested for, compatibility with other systems is highly
  *      unlikely. Voodoo relies on some Windows-specific features and APIs, as well as targeting
  *      mainly Windows-specific software.</li>
- *  <li>#pragma to disable DLL interface warnings (warning 4251) is excepted.</li>
+ *  <li>\#pragma to disable DLL interface warnings (warning 4251) is excepted.</li>
  * </ul>
  * <li>All projects must have 3 standard build configurations and each config must follow the 
  *      appropriate rules.</li>
@@ -196,7 +222,7 @@
  * </ul>
  * <li>Project behavior must remain consistent between build configurations.</li>
  * <ul>
- *  <li>#ifdef directives dependent on the build mode should be avoided wherever possible. Log
+ *  <li>\#ifdef directives dependent on the build mode should be avoided wherever possible. Log
  *      messages should use LL_Debug instead (this has no notable performance hit). This greatly
  *      simplifies debugging.</li>
  * </ul>
@@ -211,9 +237,9 @@
  *      constructs must be documented with their purpose and any vital notes.</li>
  *  <ul>
  *   <li>All documentation must be doxygen compatible and use the same style as the Core.</li>
- *   <li>Any function that throws must be marked with a <code>@ throws</code> note.</li>
+ *   <li>Any function that throws must be marked with a <code>\@throws</code> note.</li>
  *   <li>Any function with specific requirements must have them noted in SAL annotations (as
- *       well as possible) and with <code>@ note</code> or <code>@ warning</code> documentation.</li>
+ *       well as possible) and with <code>\@note</code> or <code>\@warning</code> documentation.</li>
  *   <li>All function parameters, global variables, enum members, class members, etc must be
  *       documented. <em>(Note: The project does not fully conform to this requirement yet)</em></li>
  *  </ul>

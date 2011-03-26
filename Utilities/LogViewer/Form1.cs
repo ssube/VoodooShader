@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Xml.Xsl;
 
@@ -15,7 +16,7 @@ namespace LogViewer
         {
             InitializeComponent();
 
-            mBasePath = System.IO.Directory.GetCurrentDirectory() + "\\Resources\\";
+            mBasePath = Path.GetDirectoryName(Application.ExecutablePath) + @"\Resources\";
 
             try
             {
@@ -65,15 +66,42 @@ namespace LogViewer
 
         private void closeForm(object sender, FormClosingEventArgs e)
         {
-            if ( System.IO.File.Exists(mTempFile) )
+            if ( File.Exists(mTempFile) )
             {
                 try
                 {
-                    System.IO.File.Delete(mTempFile);
+                    File.Delete(mTempFile);
                 }
                 catch (System.Exception ex)
                 {
                 	
+                }
+            }
+        }
+
+        private void saveHTML(object sender, EventArgs e)
+        {
+            if ( saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                String destfname = saveFileDialog1.FileName;
+                if (destfname == mTempFile)
+                {
+                    System.Windows.Forms.MessageBox.Show("Unable to save over temp HTML log.");
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        String destpath = Path.GetDirectoryName(destfname);
+                        File.Copy(mTempFile, destfname, true);
+                        File.Copy(mBasePath + "VoodooLog.css", destpath + "VoodooLog.css", true);
+                        File.Copy(mBasePath + "sorttable.js", destpath + "sorttable.js", true);
+                    }
+                    catch (Exception exc)
+                    {
+                        System.Windows.Forms.MessageBox.Show("Error saving log:\n"+exc.Message);
+                    }
                 }
             }
         }

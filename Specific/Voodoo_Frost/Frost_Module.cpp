@@ -3,7 +3,7 @@
 #include "Frost_Adapter.hpp"
 
 VoodooShader::Core * VoodooCore = NULL;
-VoodooShader::Frost::Adapter * VoodooAdapter = NULL;
+VoodooShader::Frost::Adapter * VoodooFrost = NULL;
 
 namespace VoodooShader
 {

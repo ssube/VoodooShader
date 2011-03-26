@@ -69,10 +69,10 @@ namespace VoodooShader
      */
 
     /**
-     * Interfaces for major classes that are <em>not</em> implemented within the core module.
-     * These can be used without linking against the core and are typically used by classes
-     * provided by addon modules. These provide extended functions that are required by the
-     * core (completely unrelated classes are defined in their own modules).
+     * Structures that are <em>not</em> implemented within the core module and/or meant for
+     * use throughout Voodoo. These can be used without linking against the core (header-only,
+     * often interfaces) and are typically used by classes provided by addon modules. These 
+     * provide extended functions that are used by the core.
      * 
      * @addtogroup VoodooGlobal Voodoo/Global
      * @{
@@ -298,6 +298,7 @@ namespace VoodooShader
         LL_Initial      = 0x20,     /*!< Initial log level of Logger */
         LL_Internal     = 0xFF,     /*!< Log level for Logger-internal messages */
         // Working values
+        LL_All          = 0x00,     /*!< All messages will be logged */
         LL_Debug_API    = 0x07,     /*!< Exceptionally verbose debug logging of API calls */
         LL_Debug        = 0x10,     /*!< Verbose debug log messages */
         LL_Info_API     = 0x20,     /*!< Verbose informational logging from API calls */

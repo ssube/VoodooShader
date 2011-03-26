@@ -53,7 +53,7 @@
  *    Voodoo provides a number of support libraries, many used within Voodoo.
  *    These include the Voodoo dynamic loader (capable to dynamically loading the
  *    Voodoo core and an adapter into a running process), a simple filesystem
- *    manager to streamline resource loading, TinyXML-based XML parsing library,
+ *    manager to streamline resource loading, pugixml-based XML parsing library,
  *    and EasyHook-based function intercept library. These libraries are available
  *    for use by code within and outside of the Voodoo project and simplify a
  *    number of common or complex tasks.

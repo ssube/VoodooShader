@@ -34,12 +34,18 @@
 #   define VOODOO_META_DEBUG_STRING
 #endif
 
+/**
+ * Creates a comma-separated chain of version tokens (not string).
+ */
 #define VOODOO_META_VERSION_CHAIN(token)\
     VOODOO_##token##_VERSION_MAJOR,\
     VOODOO_##token##_VERSION_MINOR,\
     VOODOO_##token##_VERSION_PATCH,\
     VOODOO_##token##_VERSION_REV   
 
+/**
+ * Creates a basic version string separated with periods.
+ */
 #define VOODOO_META_STRING_VERSION_BASIC(token)\
     VOODOO_META_STRING(VOODOO_##token##_VERSION_MAJOR) "."\
     VOODOO_META_STRING(VOODOO_##token##_VERSION_MINOR) "."\
@@ -47,12 +53,18 @@
     VOODOO_META_STRING(VOODOO_##token##_VERSION_REV)\
     VOODOO_META_DEBUG_STRING
 
+/**
+ * Creates an extended version string with the module's full name and version.
+ */
 #define VOODOO_META_STRING_VERSION_FULL(token)\
     VOODOO_##token##_PRETTYNAME " (version " VOODOO_META_STRING_VERSION_BASIC(token) ")"
 
 #define VOODOO_META_STRING_NAME_BASIC(token) VOODOO_##token##_NAME VOODOO_META_DEBUG_STRING
 #define VOODOO_META_STRING_NAME_FULL(token) VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING
 
+/**
+ * Creates a Version structure with data for the given module.
+ */
 #define VOODOO_META_VERSION_STRUCT(token)\
     { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }
 //-----------------------------------------------------------------------------
@@ -62,7 +74,7 @@
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     2
 #define VOODOO_GLOBaL_VERSION_PATCH     0
-#define VOODOO_GLOBAL_VERSION_REV       139
+#define VOODOO_GLOBAL_VERSION_REV       143
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   "Copyright (c) 2010-2011 by Sean Sube"
 #define VOODOO_GLOBAL_COPYRIGHT_FULL\
     "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.<br />\n"\

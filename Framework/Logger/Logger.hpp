@@ -43,6 +43,8 @@ namespace VoodooShader
     namespace XmlLogger
     {
         /**
+         * Classes and functions related to the standard XML implementation of ILogger.
+         * 
          * @addtogroup VoodooXmlLogger Voodoo/XmlLogger
          * @{
          */

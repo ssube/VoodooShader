@@ -38,7 +38,8 @@ namespace VoodooShader
     /**
      * Creates a new core. This function is exported and meant for use by the loader.
      * 
-     * @param logfile The log file to use for the core.
+     * @param path The base path to use for this core. Acts as the root for all modules and
+     *        resources.
      * @return A new Core object.
      * @throws std::exception in case of errors.
      */
@@ -94,6 +95,9 @@ namespace VoodooShader
          *          shaders or other Cg-dependent objects, remove hooks and generally
          *          break things. This is usually called when Voodoo is unloading or
          *          the runtime is done using this Core and/or adapter.
+         *          
+         * @bug The call to cgDestroyContext() within this can cause a crash. Not
+         *      sure why, but it only happens when there are outstanding resources.
          */
         ~Core();
 
@@ -115,8 +119,11 @@ namespace VoodooShader
          * @note This is not the Voodoo binary folder, but the main Voodoo framework folder 
          *       as indicated by the registry. Working from this path, you can locate the 
          *       Voodoo binary folder (append "bin\") or resource folders. 
+         *       
          * @note The path given always ends in a backslash, so appending a file or folder name
          *       will create a valid path.
+         *       
+         * @return The core's base path.
          */
         String GetBasePath();
 
@@ -154,6 +161,8 @@ namespace VoodooShader
          * 
          * @note Each Voodoo Core is associated with a single Cg context. This context is used
          *       to create all @ref Shader shaders and most other graphics resources. 
+         *       
+         * @return The Cg context.
          */
         CGcontext GetCgContext();
 

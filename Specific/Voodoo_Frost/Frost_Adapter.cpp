@@ -10,43 +10,47 @@ namespace VoodooShader
         Adapter::Adapter(_In_ Core * core)
             : mCore(core), mDC(NULL), mGLRC(NULL)
         {
+            VoodooCore = mCore;
+            VoodooFrost = this;
+
             mCore->Log(LL_Debug, VOODOO_FROST_NAME, "Beginning OpenGL hook procedure.");
 
-            IHookManager * VoodooHooker = mCore->GetHookManager();
+            IHookManager * hooker = mCore->GetHookManager();
             bool success = true;
 
             // System-related
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glGetString));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glViewport));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglCreateContext));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglDeleteContext));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglGetProcAddress));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglMakeCurrent));
+            //void * func = mCore->GetModuleManager()->FindFunction("opengl32", "glGetString");
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glGetString));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glViewport));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglCreateContext));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglDeleteContext));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglGetProcAddress));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglMakeCurrent));
 
             // Shader-related
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glClear));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglSwapLayerBuffers));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glClear));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglSwapLayerBuffers));
 
             // Material-related
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glBindTexture));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glDeleteTextures));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glBindTexture));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glDeleteTextures));
 
             // Shader/material shared
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glBegin));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glDrawElements));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glEnd));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glBegin));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glDrawElements));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glEnd));
 
             // Fog-related
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glEnable));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glFogf));
-            success &= VoodooHooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glFogfv));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glEnable));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glFogf));
+            success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glFogfv));
 
             // Check the results and handle
             if ( success )
             {
-                VoodooCore->Log(LL_Info, VOODOO_FROST_NAME, "OpenGL hooked successfully.");
+                mCore->Log(LL_Info, VOODOO_FROST_NAME, "OpenGL hooked successfully.");
             } else {
-                VoodooCore->Log(LL_Error, VOODOO_FROST_NAME, "OpenGL hook procedure failed.");
+                mCore->Log(LL_Error, VOODOO_FROST_NAME, "OpenGL hook procedure failed.");
             }
         }
 
