@@ -10,6 +10,30 @@ namespace VoodooShader
         Adapter::Adapter(_In_ Core * core)
             : mCore(core), mDC(NULL), mGLRC(NULL)
         {
+            // Get the handles to the needed hook modules
+            HMODULE procmodule = GetModuleHandle(NULL);
+            if ( procmodule )
+            {
+                char procpath[MAX_PATH];
+                GetModuleFileName(procmodule, procpath, MAX_PATH);
+                
+                mCore->Log(LL_Info, VOODOO_FROST_NAME, "Frost loaded into process \"%s\".", procpath);
+
+                char * pos = strrchr(procpath, '\\');
+                if ( pos != NULL )
+                {
+                    if ( strcmp(pos+1, "nwmain.exe") != 0 )
+                    {
+                        mCore->Log(LL_Warning, VOODOO_FROST_NAME, "The process does not appear to be the engine. Frost will not run.");
+                        return;
+                    }
+                }
+            } else {
+                mCore->Log(LL_Error, VOODOO_FROST_NAME, "Unable to find target module. Frost will not run.");
+
+                return;
+            }
+
             VoodooCore = mCore;
             VoodooFrost = this;
 
@@ -19,7 +43,6 @@ namespace VoodooShader
             bool success = true;
 
             // System-related
-            //void * func = mCore->GetModuleManager()->FindFunction("opengl32", "glGetString");
             success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glGetString));
             success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glViewport));
             success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(wglCreateContext));

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Frost_Adapter.cpp" />
+    <ClCompile Include="Frost_Module.cpp" />
+    <ClCompile Include="VoodooGL.cpp">
+      <Filter>VoodooGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine_Patches.cpp">
+      <Filter>FrostBinding</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Frost_Adapter.hpp" />
+    <ClInclude Include="Frost_Module.hpp" />
+    <ClInclude Include="Frost_Version.hpp" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="VoodooGL.hpp">
+      <Filter>VoodooGL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Voodoo_Frost.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Frost_Exports.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="VoodooGL">
+      <UniqueIdentifier>{181ff183-be86-4ec8-84bb-0ec7fb52cfc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrostBinding">
+      <UniqueIdentifier>{e5903669-cd6b-4e9b-aee8-972b3378f7a9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

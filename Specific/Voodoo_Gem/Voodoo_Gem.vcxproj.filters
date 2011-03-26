@@ -11,7 +11,7 @@
     <ClInclude Include="Gem_Version.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="MGE\FauxD3D8Header.hpp">
-      <Filter>MGE</Filter>
+      <Filter>IVoodoo\MGE</Filter>
     </ClInclude>
     <ClInclude Include="IVoodoo3D8.hpp">
       <Filter>IVoodoo</Filter>
@@ -31,11 +31,11 @@
     <ResourceCompile Include="Voodoo_Gem.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="MGE">
-      <UniqueIdentifier>{1c39828c-a7c9-4f69-9302-82fa6a24078a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="IVoodoo">
       <UniqueIdentifier>{2e05d3b6-ee5b-4dd0-babd-4eac46f1fc0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IVoodoo\MGE">
+      <UniqueIdentifier>{1c39828c-a7c9-4f69-9302-82fa6a24078a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

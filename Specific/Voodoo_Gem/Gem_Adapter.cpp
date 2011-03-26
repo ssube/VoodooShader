@@ -10,19 +10,6 @@ namespace VoodooShader
 {
     namespace Gem
     {
-        Adapter * CreateAdapter(Core * core)
-        {
-            return new Adapter(core);
-        }
-
-        void DestroyAdapter(Adapter * adapter)
-        {
-            delete adapter;
-        }
-
-        #pragma comment(linker, "/EXPORT:CreateAdapter=?CreateAdapter@Gem@VoodooShader@@YAPAVAdapter@12@PAVCore@2@@Z")
-        #pragma comment(linker, "/EXPORT:DestroyAdapter=?DestroyAdapter@Gem@VoodooShader@@YAXPAVAdapter@12@@Z")
-
         Adapter::Adapter(Core * core)
             : mCore(core), mDevice(NULL), mQuadVerts(NULL), mBoundFP(NULL), mBoundVP(NULL)
         {
@@ -37,7 +24,7 @@ namespace VoodooShader
             {
                 char procpath[MAX_PATH];
                 GetModuleFileName(procmodule, procpath, MAX_PATH);
-                mCore->Log(LL_Info, VOODOO_GEM_NAME, "Gem loaded into process %s.", procpath);
+                mCore->Log(LL_Info, VOODOO_GEM_NAME, "Gem loaded into process \"%s\".", procpath);
             }
 
             void * d3d8hookpoint = mCore->GetModuleManager()->FindFunction("d3d8.dll", "Direct3DCreate8");
@@ -54,11 +41,6 @@ namespace VoodooShader
         Adapter::~Adapter()
         {
             //this->SetDevice(NULL);
-        }
-
-        void Adapter::DestroyObject()
-        {
-            delete this;
         }
 
         const char * Adapter::GetObjectClass()

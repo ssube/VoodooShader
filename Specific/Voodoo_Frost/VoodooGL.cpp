@@ -18,6 +18,18 @@ void GLAPIENTRY vglBegin(GLenum mode)
     return glBegin(mode);
 }
 
+/**
+ * Binds a texture to the given target for use in draw ops.
+ * 
+ * @param target The target to bind to (often GL_TEXTURE_2D).
+ * @param texture The texture ID to be bound (must be a valid ID).
+ * 
+ * @note This function also binds material shaders as appropriate. If texture
+ *       is linked to a Shader, the default technique will be retrieved and set
+ *       as the active effect.
+ *
+ * @implements glBindTexture
+ */
 void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 {
     VoodooCore->Log
@@ -27,6 +39,16 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
         "glBindTexture(%u, %u)",
         target, texture
     );
+
+    /*
+    find Technique from Materials[texture]
+    if ( Technique is valid )
+    {
+        setup variables on Technique
+        get first Pass from Technique
+        bind Pass
+    }
+    */
 
     return glBindTexture(target, texture);
 }

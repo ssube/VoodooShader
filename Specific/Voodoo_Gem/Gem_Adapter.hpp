@@ -36,17 +36,6 @@ namespace VoodooShader
             FLOAT tu, tv;
         };
 
-        _Check_return_
-        VOODOO_API_GEM Adapter * CreateAdapter
-        (
-            _In_ Core * core
-        );
-
-        VOODOO_API_GEM void DestroyAdapter
-        (
-            _In_ Adapter * adapter
-        );
-
         class Adapter
             : public VoodooShader::IAdapter
         {
@@ -59,8 +48,6 @@ namespace VoodooShader
 
             ~Adapter();
 
-            // IObject methods
-            virtual void DestroyObject();
             virtual const char * GetObjectClass();
 
             // IAdapter methods
