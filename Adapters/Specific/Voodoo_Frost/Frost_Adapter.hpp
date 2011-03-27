@@ -65,6 +65,9 @@ namespace VoodooShader
             HGLRC mGLRC;
 
             CGpass mLastPass;
+
+            TextureRef mTexLastPass;
+            TextureRef mTexLastShader;
         };
     }
 }

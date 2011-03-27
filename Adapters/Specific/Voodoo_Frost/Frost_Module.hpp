@@ -39,5 +39,6 @@ namespace VoodooShader
 
 extern VoodooShader::Core * VoodooCore;
 extern VoodooShader::Frost::Adapter * VoodooFrost;
+extern VoodooShader::ShaderRef TestShader;
 
 #endif /*VOODOO_NWS_MODULE_HPP*/

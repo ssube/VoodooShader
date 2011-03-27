@@ -4,6 +4,7 @@
 
 VoodooShader::Core * VoodooCore = NULL;
 VoodooShader::Frost::Adapter * VoodooFrost = NULL;
+VoodooShader::ShaderRef TestShader;
 
 namespace VoodooShader
 {

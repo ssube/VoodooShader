@@ -178,7 +178,6 @@ namespace VoodooShader
 
     // Miscellaneous collections
     typedef std::map<TextureRef, ShaderRef>     MaterialMap;
-    typedef std::map<String, CGeffect>          CGEffectMap;
 
     /**
      * Texture formats for use by @ref VoodooShader::Texture "Textures",

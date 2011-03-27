@@ -252,6 +252,11 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 
 BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
 {
+    if ( VoodooFrost && TestShader.get() )
+    {
+        VoodooFrost->DrawShader(TestShader);
+    }
+
     BOOL result = wglSwapLayerBuffers(hdc, uint);
 
     VoodooCore->Log

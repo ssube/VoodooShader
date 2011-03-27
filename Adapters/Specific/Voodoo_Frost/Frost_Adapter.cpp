@@ -188,7 +188,15 @@ namespace VoodooShader
                 this->BindPass(pass);
                 this->DrawQuad(NULL);
                 this->UnbindPass();
+
+                GLuint passtarget = (GLuint)pass->GetTarget()->GetData();
+                glBindTexture(GL_TEXTURE_2D, passtarget);
+                glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
             }
+
+            GLuint techtarget = (GLuint)tech->GetTarget()->GetData();
+            glBindTexture(GL_TEXTURE_2D, techtarget);
+            glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
         }
 
         TextureRef Adapter::CreateTexture( _In_ String name, _In_ TextureDesc desc )
@@ -231,6 +239,9 @@ namespace VoodooShader
             mGLRC = hglrc;
 
             cgGLRegisterStates(mCore->GetCgContext());
+
+            // Load shader
+            TestShader = mCore->CreateShader("test.cgfx", NULL);
         }
     }
 }

@@ -411,14 +411,17 @@ public:
         CONST RGNDATA * pDirtyRegion
     )
     {
-        HRESULT shr = mRealDevice->StretchRect(gBackbuffer.RawSurface, NULL, gThisFrame.RawSurface, NULL, D3DTEXF_NONE);
-
-        if ( FAILED(shr) )
+        if ( VoodooGem && testShader.get() )
         {
-            VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Failed to stretch backbuffer to scratch texture.");
-        }
+            HRESULT shr = mRealDevice->StretchRect(gBackbuffer.RawSurface, NULL, gThisFrame.RawSurface, NULL, D3DTEXF_NONE);
 
-        VoodooGem->DrawShader(testShader);
+            if ( FAILED(shr) )
+            {
+                VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Failed to stretch backbuffer to :thisframe texture.");
+            }
+
+            VoodooGem->DrawShader(testShader);
+        }
 
         // Present call
         HRESULT hr = mRealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
