@@ -96,6 +96,13 @@ namespace VoodooShader
             return true;
         }
 
+        bool Adapter::UnloadPass( _In_ Pass * pass )
+        {
+            UNREFERENCED_PARAMETER(pass);
+
+            return true;
+        }
+
         void Adapter::BindPass( _In_ PassRef pass )
         {
             CGpass cgpass = pass->GetCgPass();

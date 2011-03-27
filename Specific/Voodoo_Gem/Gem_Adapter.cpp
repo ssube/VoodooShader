@@ -298,6 +298,58 @@ namespace VoodooShader
             return true;
         }
 
+        bool Adapter::UnloadPass(Pass * pass)
+        {
+            if ( pass == NULL )
+            {
+                this->mCore->Log
+                (
+                    LL_Error,
+                    VOODOO_GEM_NAME,
+                    "Attempted to unload null pass."
+                );
+
+                return false;
+            }
+
+            CGprogram vertProg = pass->GetProgram(PS_Vertex);
+            CGprogram fragProg = pass->GetProgram(PS_Fragment);
+
+            this->mCore->Log
+            (
+                LL_Debug, 
+                VOODOO_GEM_NAME, 
+                "Unloading pass %s", 
+                pass->GetName().c_str()
+            );
+
+            HRESULT hr = cgD3D9UnloadProgram(vertProg);
+            if ( FAILED(hr) )
+            {
+                this->mCore->Log
+                (
+                    LL_Warning, 
+                    VOODOO_GEM_NAME, 
+                    "Error unloading vertex program from pass %s.", 
+                    pass->GetName().c_str()
+                );
+            }
+            
+            hr = cgD3D9UnloadProgram(fragProg);
+            if ( FAILED(hr) )
+            {
+                this->mCore->Log
+                (
+                    LL_Warning, 
+                    VOODOO_GEM_NAME, 
+                    "Error unloading fragment program from pass %s.", 
+                    pass->GetName().c_str()
+                );
+            }
+
+            return true;
+        }
+
         void Adapter::BindPass(PassRef pass)
         {
             // Both should be loaded and valid (if they exist and prepare was called)

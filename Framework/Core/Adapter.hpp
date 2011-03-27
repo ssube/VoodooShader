@@ -108,8 +108,10 @@ namespace VoodooShader
          *      unloaded.
          * 
          * @param pass The pass to unload.
+         * 
+         * @since 0.2.4.145
          */
-        virtual void UnloadPass
+        virtual bool UnloadPass
         (
             _In_ Pass * pass
         ) = 0;

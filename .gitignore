@@ -8,7 +8,10 @@ Template/*
 */Template/*
 */*/Template/*
 *~
+*.swp
+*.tmp
 Analysis/Yasca/Yasca-Report-*.html
+Resources/Installers/Output/*
 #ignore thumbnails created by windows
 Thumbs.db
 #Ignore files build by Visual Studio

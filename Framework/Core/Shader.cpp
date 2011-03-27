@@ -19,12 +19,19 @@ namespace VoodooShader
 
         if ( !cgIsEffect(this->mEffect) )
         {
-            Throw(VOODOO_CORE_NAME, "Failed to create shader.", mCore);
+            //Throw(VOODOO_CORE_NAME, "Failed to create shader.", mCore);
+            mCore->Log
+            (
+                LL_Error, 
+                VOODOO_CORE_NAME, 
+                "Failed to create shader from source file \"%s\".", 
+                filename.c_str()
+            );
 
             return;
+        } else {
+            cgSetEffectName(this->mEffect, this->mName.c_str());
         }
-
-        cgSetEffectName(this->mEffect, this->mName.c_str());
     }
 
     Shader::~Shader()
@@ -92,6 +99,12 @@ namespace VoodooShader
 
     void Shader::Link()
     {
+        // Make sure it's a valid effect
+        if ( !cgIsEffect(mEffect) )
+        {
+            Throw(VOODOO_CORE_NAME, "Invalid effect.", mCore);
+        }
+
         // Link parameters first
         CGparameter cParam = cgGetFirstEffectParameter(this->mEffect);
 

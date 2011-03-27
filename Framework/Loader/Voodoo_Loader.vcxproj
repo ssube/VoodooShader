@@ -161,7 +161,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Loader.rc" />
+    <ResourceCompile Include="Loader_Version.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="exports.def" />

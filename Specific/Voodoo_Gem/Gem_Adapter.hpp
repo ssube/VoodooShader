@@ -48,23 +48,25 @@ namespace VoodooShader
 
             ~Adapter();
 
-            virtual const char * GetObjectClass();
+            const char * GetObjectClass();
 
             // IAdapter methods
-            virtual bool LoadPass(Pass * pass);
-            virtual void BindPass(PassRef shader);
-            virtual void UnbindPass();
+            bool LoadPass(Pass * pass);
+            bool UnloadPass(Pass * pass);
 
-            virtual void DrawQuad(Vertex * vertexData);
+            void BindPass(PassRef pass);
+            void UnbindPass();
 
-            virtual void DrawShader(ShaderRef shader);
+            void DrawShader(ShaderRef shader);
 
-            virtual void ApplyParameter(ParameterRef param);
+            void DrawQuad(Vertex * vertexData);
 
-            virtual bool ConnectTexture(ParameterRef param, TextureRef texture);
-            virtual TextureRef CreateTexture(String name, TextureDesc desc);
+            void ApplyParameter(ParameterRef param);
 
-            virtual void HandleError(CGcontext context, CGerror error, void * core);
+            bool ConnectTexture(ParameterRef param, TextureRef texture);
+            TextureRef CreateTexture(String name, TextureDesc desc);
+
+            void HandleError(CGcontext context, CGerror error, void * core);
 
             /**
              * Binds a Direct3D9 device to this adapter for use in various rendering
@@ -77,7 +79,7 @@ namespace VoodooShader
              *       graphics resources are unloaded and freed. If the new device is not 
              *       null, new resources are allocated and filled.
              */
-            virtual void SetDevice
+            void SetDevice
             (
                 _In_opt_ LPDIRECT3DDEVICE9 device
             );

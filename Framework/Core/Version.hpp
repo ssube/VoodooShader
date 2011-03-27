@@ -71,10 +71,12 @@
 
 
 // Global defs ----------------------------------------------------------------
+#define VOODOO_GLOBAL_NAME              "Voodoo/Global"
+#define VOODOO_GLOBAL_PRETTYNAME        "Voodoo Shader Framework"
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     2
-#define VOODOO_GLOBaL_VERSION_PATCH     0
-#define VOODOO_GLOBAL_VERSION_REV       145
+#define VOODOO_GLOBaL_VERSION_PATCH     4
+#define VOODOO_GLOBAL_VERSION_REV       147
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   "Copyright (c) 2010-2011 by Sean Sube"
 #define VOODOO_GLOBAL_COPYRIGHT_FULL\
     "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.<br />\n"\
@@ -89,7 +91,7 @@
 #define VOODOO_CORE_PRETTYNAME          "Voodoo Shader Framework Core"
 #define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR
 #define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR
-#define VOODOO_CORE_VERSION_PATCH       3
+#define VOODOO_CORE_VERSION_PATCH       VOODOO_GLOBaL_VERSION_PATCH
 #define VOODOO_CORE_VERSION_REV         VOODOO_GLOBAL_VERSION_REV   
 //-----------------------------------------------------------------------------
 

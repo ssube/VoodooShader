@@ -33,22 +33,23 @@ namespace VoodooShader
             ~Adapter();
 
             // IObject methods
-            virtual const char * GetObjectClass();
+            const char * GetObjectClass();
 
             // IAdapter methods
-            virtual bool LoadPass( _In_ Pass * pass );
-            virtual void BindPass( _In_ PassRef pass );
-            virtual void UnbindPass();
-            virtual void DrawQuad(Vertex * vertexData);
-            virtual void ApplyParameter( _In_ ParameterRef param );
-            virtual void DrawShader( _In_ ShaderRef shader );
-            virtual TextureRef CreateTexture( _In_ String name, _In_ TextureDesc desc );
-            virtual bool ConnectTexture( _In_ ParameterRef param, _In_ TextureRef texture );
-            virtual void HandleError( _In_ CGcontext context, _In_ CGerror error, _In_ void * core );
+            bool LoadPass( _In_ Pass * pass );
+            bool UnloadPass( _In_ Pass * pass );
+            void BindPass( _In_ PassRef pass );
+            void UnbindPass();
+            void DrawQuad(Vertex * vertexData);
+            void ApplyParameter( _In_ ParameterRef param );
+            void DrawShader( _In_ ShaderRef shader );
+            TextureRef CreateTexture( _In_ String name, _In_ TextureDesc desc );
+            bool ConnectTexture( _In_ ParameterRef param, _In_ TextureRef texture );
+            void HandleError( _In_ CGcontext context, _In_ CGerror error, _In_ void * core );
 
             // Frost-specific methods
-            virtual void SetDC(_In_ HDC hdc);
-            virtual void SetGLRC(_In_ HGLRC hglrc);
+            void SetDC(_In_ HDC hdc);
+            void SetGLRC(_In_ HGLRC hglrc);
 
         private:
             Core * mCore;
