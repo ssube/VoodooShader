@@ -98,6 +98,8 @@ namespace VoodooShader
          *          
          * @bug The call to cgDestroyContext() within this can cause a crash. Not
          *      sure why, but it only happens when there are outstanding resources.
+         *      Additional resource cleanup has been implemented throughout Voodoo,
+         *      test fully. This is a segfault on exit, causing a fatal crash.
          */
         ~Core();
 
@@ -397,8 +399,7 @@ namespace VoodooShader
 
         /**
          * Collection of all shaders created by this core, by name with
-         * shared pointers cached. Shaders are not destroyed until they are
-         * removed from this collection.
+         * shared pointers cached.
          */
         ShaderMap mShaders;
 

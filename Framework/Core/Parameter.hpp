@@ -65,6 +65,8 @@ namespace VoodooShader
             _In_ CGparameter param
         );
 
+        ~Parameter();
+
         /**
          * Retrieves the fully-qualified parameter name. Virtual parameters will
          * be of the form <code>:[param-name]</code>, while actual parameters will

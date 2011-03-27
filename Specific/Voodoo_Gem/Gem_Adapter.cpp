@@ -172,7 +172,7 @@ namespace VoodooShader
 
             if ( thisframeTex.get() )
             {
-                LPDIRECT3DTEXTURE9 texture = thisframeTex->GetTexture<IDirect3DTexture9>();
+                LPDIRECT3DTEXTURE9 texture = thisframeTex->GetData<IDirect3DTexture9>();
                 LPDIRECT3DSURFACE9 surface;
                 hrt = texture->GetSurfaceLevel(0, &surface);
                 if ( SUCCEEDED(hrt) )
@@ -193,7 +193,7 @@ namespace VoodooShader
 
             if ( scratchTex.get() )
             {
-                LPDIRECT3DTEXTURE9 texture = scratchTex->GetTexture<IDirect3DTexture9>();
+                LPDIRECT3DTEXTURE9 texture = scratchTex->GetData<IDirect3DTexture9>();
                 LPDIRECT3DSURFACE9 surface;
                 hrt = texture->GetSurfaceLevel(0, &surface);
                 if ( SUCCEEDED(hrt) )
@@ -430,7 +430,7 @@ namespace VoodooShader
 
                 /*
                 TextureRef passTarget = pass->GetTarget();
-                IDirect3DTexture9 * passTargetD3D = (IDirect3DTexture9 *)passTarget->GetTexture();
+                IDirect3DTexture9 * passTargetD3D = (IDirect3DTexture9 *)passTarget->GetData();
                 IDirect3DSurface9 * passSurface = NULL;
 
                 HRESULT hr = passTargetD3D->GetSurfaceLevel(0, &passSurface);
@@ -464,7 +464,7 @@ namespace VoodooShader
 
             /*
             TextureRef techTarget = tech->GetTarget();
-            IDirect3DTexture9 * techTargetD3D = (IDirect3DTexture9 *)techTarget->GetTexture();
+            IDirect3DTexture9 * techTargetD3D = (IDirect3DTexture9 *)techTarget->GetData();
             IDirect3DSurface9 * techSurface = NULL;
 
             HRESULT hr = techTargetD3D->GetSurfaceLevel(0, &techSurface);
@@ -568,7 +568,7 @@ namespace VoodooShader
             case PT_Sampler1D:
             case PT_Sampler2D:
             case PT_Sampler3D:
-                cgD3D9SetTextureParameter(cgparam, param->GetTexture()->GetTexture<IDirect3DTexture9>());
+                cgD3D9SetTextureParameter(cgparam, param->GetTexture()->GetData<IDirect3DTexture9>());
                 break;
             case PT_Unknown:
             default:
@@ -590,7 +590,7 @@ namespace VoodooShader
             {
                 param->Set(texture);
 
-                IDirect3DTexture9 * texObj = texture->GetTexture<IDirect3DTexture9>();
+                IDirect3DTexture9 * texObj = texture->GetData<IDirect3DTexture9>();
                 CGparameter texParam = param->GetCgParameter();
                 cgD3D9SetTextureParameter(texParam, texObj);
                 mCore->Log

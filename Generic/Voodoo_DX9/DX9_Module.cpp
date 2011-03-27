@@ -282,7 +282,7 @@ namespace VoodooShader
                 cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
                 break;
             case PC_Sampler:
-                cgD3D9SetTextureParameter(param->GetParameter(), (IDirect3DTexture9 *)param->GetTexture()->GetTexture());
+                cgD3D9SetTextureParameter(param->GetParameter(), (IDirect3DTexture9 *)param->GetTexture()->GetData());
                 break;
             case PC_Unknown:
             default:

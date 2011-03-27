@@ -147,34 +147,48 @@ namespace VoodooShader
 
     Core::~Core()
     {
+        // Destroy adapter (not sure what it depends on, so handle first)
         if ( this->mAdapter )
         {
             delete this->mAdapter;
         }
 
-        if ( this->mHooker )
-        {
-            delete this->mHooker;
-        }
+        // Clear out object caches (may trigger dtors for many of these)
+        mShaders.clear();
 
-        if ( this->mLogger )
-        {
-            delete this->mLogger;
-        }
+        mParameters.clear();
 
+        mLastPass = NULL;
+        mLastShader = NULL;
+        mTextures.clear();
+
+        // Destroy the Cg context (all resources should be gone)
         if ( cgIsContext(this->mCgContext) )
         {
             // Failsafe destruction of all effects
-            CGeffect effect = cgGetFirstEffect(mCgContext);
+            /*CGeffect effect = cgGetFirstEffect(mCgContext);
             while ( cgIsEffect(effect) )
             {
                 CGeffect next = cgGetNextEffect(effect);
                 cgDestroyEffect(effect);
                 effect = next;
-            }
-
+            }*/
             cgDestroyContext(this->mCgContext);
         }
+
+        // Remove hooks
+        if ( this->mHooker )
+        {
+            delete this->mHooker;
+        }
+
+        // Kill logger
+        if ( this->mLogger )
+        {
+            delete this->mLogger;
+        }
+
+        mModManager = NULL;
     }
 
     String Core::GetBasePath()
@@ -237,6 +251,19 @@ namespace VoodooShader
         }
     }
 
+    TextureRef Core::AddTexture(String name, void * data)
+    {
+        TextureMap::iterator textureEntry = this->mTextures.find(name);
+        if ( textureEntry != this->mTextures.end() )
+        {
+            Throw(VOODOO_CORE_NAME, "Trying to add a texture with a duplicate name.", this);
+        } else {
+            TextureRef texture(new Texture(name, data));
+            this->mTextures[name] = texture;
+            return texture;
+        }
+    }
+
     ShaderRef Core::CreateShader(String filename, const char ** args)
     {
         ShaderMap::iterator shader = this->mShaders.find(filename);
@@ -249,19 +276,6 @@ namespace VoodooShader
             ShaderRef newShader(new Shader(this, filename, args));
             this->mShaders[filename] = newShader;
             return newShader;
-        }
-    }
-
-    TextureRef Core::AddTexture(String name, void * data)
-    {
-        TextureMap::iterator textureEntry = this->mTextures.find(name);
-        if ( textureEntry != this->mTextures.end() )
-        {
-            Throw(VOODOO_CORE_NAME, "Trying to add a texture with a duplicate name.", this);
-        } else {
-            TextureRef texture(new Texture(name, data));
-            this->mTextures[name] = texture;
-            return texture;
         }
     }
 
@@ -363,6 +377,11 @@ namespace VoodooShader
                 me->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
                 if ( context && error != CG_INVALID_CONTEXT_HANDLE_ERROR )
                 {
+                    if ( me->mAdapter )
+                    {
+                        me->mAdapter->HandleError(context, error, me);
+                    }
+
                     // Print any compiler errors or other details we can find
                     const char * listing = cgGetLastListing(context);
                     

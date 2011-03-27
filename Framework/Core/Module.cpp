@@ -96,7 +96,9 @@ namespace VoodooShader
 
             if ( module.get() )
             {
-                return module->CreateClass(number, mCore);
+                IObject * object = module->CreateClass(number, mCore);
+                //object->SourceModule = module;
+                return object;
             } else {
                 return NULL;
             }
@@ -113,12 +115,14 @@ namespace VoodooShader
         // First set of error checks
         if ( hmodule != NULL )
         {
+            using namespace VoodooShader::Functions;
+
             Module * module = new Module(hmodule);
 
-            module->mModuleVersion = (Functions::VersionFunc)GetProcAddress(hmodule, "ModuleVersion");
-            module->mClassCount    = (Functions::CountFunc  )GetProcAddress(hmodule, "ClassCount"   );
-            module->mClassInfo     = (Functions::InfoFunc   )GetProcAddress(hmodule, "ClassInfo"    );
-            module->mClassCreate   = (Functions::CreateFunc )GetProcAddress(hmodule, "ClassCreate"  );
+            module->mModuleVersion = (VersionFunc) GetProcAddress(hmodule, "ModuleVersion");
+            module->mClassCount    = (CountFunc  ) GetProcAddress(hmodule, "ClassCount"   );
+            module->mClassInfo     = (InfoFunc   ) GetProcAddress(hmodule, "ClassInfo"    );
+            module->mClassCreate   = (CreateFunc ) GetProcAddress(hmodule, "ClassCreate"  );
 
             if ( !(module->mModuleVersion && module->mClassCount && module->mClassInfo && module->mClassCreate ) )
             {

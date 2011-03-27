@@ -33,6 +33,7 @@ namespace VoodooShader
      * @addtogroup VoodooCore
      * @{
      */
+
     /**
      * Complete shader class, managing techniques, passes and metadata. Shaders
      * contain significant linking and processing data, as well as the Voodoo-specific
@@ -53,6 +54,13 @@ namespace VoodooShader
     class VOODOO_API Shader
     {
     public:
+        /**
+         * Create a shader from a file, passing options to the compiler.
+         * 
+         * @param parent The Core this Shader is created under.
+         * @param filename The file to use for source.
+         * @param args Optionals arguments to be passed to the compiler (last item in the array must be null).
+         */
         Shader
         (
             _In_ Core * parent, 
@@ -60,12 +68,14 @@ namespace VoodooShader
             _In_opt_ const char ** args = NULL
         );
 
-        Shader
-        (
-            _In_ Core * parent, 
-            _In_ CGeffect effect
-        );
+        /**
+         * Destroys the shader, unlinking and cleaning up the effect and all techniques.
+         */
+        ~Shader();
 
+        /**
+         * Return a simple name (usually filename of source file) for this shader.
+         */
         String GetName();
 
         /**
@@ -156,6 +166,13 @@ namespace VoodooShader
         Core * GetCore();
 
         /**
+         * Retrieve the underlying Cg technique.
+         * 
+         * @return A pointer to the Cg technique.
+         */
+        CGeffect GetCgEffect();
+
+        /**
          * Initialize delayed linking (or relinking) for this shader. This
          * function rebuilds the technique and pass structure, but <em>does not
          * </em> reload or recompile the effect (Cg effects are handled by the
@@ -230,6 +247,8 @@ namespace VoodooShader
             _In_ CGtechnique cgTech
         );
 
+        ~Technique();
+
         /**
          * Retrieve a fully qualified technique name (including shader name)
          * from the technique.
@@ -276,6 +295,13 @@ namespace VoodooShader
          */
         TextureRef GetTarget();
 
+        /**
+         * Retrieve the underlying Cg technique.
+         * 
+         * @return A pointer to the Cg technique.
+         */
+        CGtechnique GetCgTechnique();
+
         void Link();
 
     private:
@@ -308,6 +334,8 @@ namespace VoodooShader
             _In_ Technique * parent,
             _In_ CGpass cgPass
         );
+
+        ~Pass();
 
         /**
          * Retrieve the fully qualified pass name, including technique and
@@ -352,6 +380,13 @@ namespace VoodooShader
         (
             _In_ ProgramStage stage
         );
+
+        /**
+         * Retrieve the underlying Cg technique.
+         * 
+         * @return A pointer to the Cg technique.
+         */
+        CGpass GetCgPass();
 
         void Link();
 

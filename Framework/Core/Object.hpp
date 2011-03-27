@@ -36,14 +36,34 @@ namespace VoodooShader
     /**
      * Defines a simple interface all Voodoo objects from dynamic modules must inherit. This
      * interface handles destruction and identification of these objects.
+     * 
+     * @warning All classes derived from IObject <b><em>must</e></b> have unique names.
      */
     class IObject
     {
     public:
+        /**
+         * Base virtual destructor for all object classes. This throws when called, and so
+         * must be overridden.
+         */
         virtual ~IObject() throw()
-        { }
+        { };
 
+        /**
+         * Get the name of this object's class. May be used for identification or validation
+         * purposes.
+         * 
+         * @note The returned string may be compared, but must not be deleted or modified.
+         */
         virtual const char * GetObjectClass() = 0;
+
+    /*private:
+        / **
+         * A shared pointer to the module this class is defined in. Keeping 
+         * this in the class forces the module to remain in memory until the last 
+         * class from it is destroyed. This prevents class methods from becoming invalid.
+         * /
+        ModuleRef SourceModule;*/
     };
 }
 

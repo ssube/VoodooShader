@@ -46,23 +46,21 @@ namespace VoodooShader
             _In_opt_ void * texture = NULL
         );
 
-        //! @todo Change the Texture::GetTexture<T>() and Texture::GetTexture()
-        //!        functions to something better, I don't like this method.
         template<typename T>
         _Check_return_
-        inline T * GetTexture()
+        inline T * GetData()
         {
-            return reinterpret_cast<T*>(GetTexture());
+            return reinterpret_cast<T*>(GetData());
         };
 
         _Check_return_
-        void * GetTexture();
+        void * GetData();
 
         String GetName();
 
     private:
         String mName;
-        void * mTextureObject;
+        void * mData;
     };
     /**
      * @}

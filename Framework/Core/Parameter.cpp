@@ -63,6 +63,14 @@ namespace VoodooShader
         }
     }
 
+    Parameter::~Parameter()
+    {
+        if ( mVirtual && cgIsParameter(mParam) )
+        {
+            cgDestroyParameter(mParam);
+        }
+    }
+
     String Parameter::GetName()
     {
         String name;

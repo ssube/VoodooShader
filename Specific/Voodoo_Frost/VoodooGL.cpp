@@ -1,10 +1,18 @@
 
 #include "VoodooGL.hpp"
+#include "Frost_Adapter.hpp"
 
 HWND gNwnWindow;
 
 using namespace VoodooShader;
 
+/**
+ * Begins a draw operation and sets the expected vertex order.
+ * 
+ * @param mode Vertex order (GL_QUADS, etc)
+ * 
+ * @implements glBegin
+ */
 void GLAPIENTRY vglBegin(GLenum mode)
 {
     VoodooCore->Log
@@ -190,6 +198,9 @@ HGLRC WINAPI vwglCreateContext(HDC hdc)
         strcat_s(title, " [ Voodoo Frost ]");
         SetWindowTextA(gNwnWindow, title);
     }
+
+    VoodooFrost->SetDC(hdc);
+    VoodooFrost->SetGLRC(result);
     
     return result;
 }

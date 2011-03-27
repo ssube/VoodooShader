@@ -40,8 +40,10 @@ namespace VoodooShader
      *
      * @note Because of the draw mechanism for adapters, most draws with
      *        user-provided vertexes will not use vertex buffers of any sort. 
-     *        This can hurt performance if used heavily, so the Core avoids
-     *        drawing through adapters as much as possible.
+     *        This can hurt performance if used heavily, so drawing through 
+     *        IAdapter::DrawQuad() should be avoided as much as possible.
+     *        Adapters may draw internally, of course, having full control over
+     *        the graphics API.
      *
      * @note This vertex format provides a float3 position and float2 texture
      *        coordinate. For compatibility with Direct3D, a RHW value is also
@@ -75,13 +77,22 @@ namespace VoodooShader
         { }
 
         /**
-         * Loads a program in a manner that is compatible with the adapter's
-         * underlying API. For Cg-supported APIs, this uses the appropriate 
+         * Loads a pass in a manner that is compatible with the adapter's
+         * underlying API. For Cg-supported APIs, this may use the appropriate 
          * module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc).
-         * This may involve additional compilation or linking.
+         * This may involve additional compilation or linking. In some cases,
+         * the pass may not be specifically loaded and this may always return
+         * true. 
+         * 
+         * @note If this returns false, do not bind the pass given. It may
+         *       cause errors or fail.
+         * 
+         * @warning There is no guarantee what programs, if any, will be
+         *      loaded or how this will be performed. The only guarantee is
+         *      that if this call returns true, the pass may be bound to this
+         *      adapter in the future.
          *
-         * @param pass The pass to be loaded (not a shared pointer, it is 
-         *        assumed the pass will be valid for the duration of the call).
+         * @param pass The pass to be loaded.
          * @return Whether or not the pass was successfully loaded.
          */
         virtual bool LoadPass
@@ -90,23 +101,37 @@ namespace VoodooShader
         ) = 0;
 
         /**
-        * Causes the adapter to load a pass for drawing. The adapter may choose 
-        * which programs to bind and how to handle the binding, as well as 
-        * managing any errors that may arise.
-        *
-        * @param pass A shared pointer to the pass to be bound. This should be a
-        *        valid pass, but adapters must validate it.
-        *
-        * @note Adapters may, at their discretion, bind some or even no programs
-        *       to the true graphics API. An example of this is the Direct3D 9 
-        *       adapter, which binds only vertex and fragment programs, ignoring
-        *       any geometry, domain or hull programs.
-        * @note The Adapter may implement passes using deferred parameters; if so
-        *       it <em>must</em> update all pass parameters, virtual first and actual
-        *       parameters second (to make sure virtual param values get propagated).
-        *       All parameters updates must be performed before this function returns
-        *       and take effect for any draw calls coming after this call.
-        */
+         * Unloads a pass from the adapter.
+         * 
+         * @warning There is no guarantee what will occur within this function,
+         *      but the pass given should <em>never</em> be bound after being
+         *      unloaded.
+         * 
+         * @param pass The pass to unload.
+         */
+        virtual void UnloadPass
+        (
+            _In_ Pass * pass
+        ) = 0;
+
+        /**
+         * Causes the adapter to load a pass for drawing. The adapter may choose 
+         * which programs to bind and how to handle the binding, as well as 
+         * managing any errors that may arise.
+         *
+         * @param pass A shared pointer to the pass to be bound. This should be a
+         *        valid pass, but adapters must validate it.
+         *
+         * @note Adapters may, at their discretion, bind some or even no programs
+         *       to the true graphics API. An example of this is the Direct3D 9 
+         *       adapter, which binds only vertex and fragment programs, ignoring
+         *       any geometry, domain or hull programs.
+         * @note The Adapter may implement passes using deferred parameters; if so
+         *       it <em>must</em> update all pass parameters, virtual first and actual
+         *       parameters second (to make sure virtual param values get propagated).
+         *       All parameters updates must be performed before this function returns
+         *       and take effect for any draw calls coming after this call.
+         */
         virtual void BindPass
         (
             _In_ PassRef pass
@@ -220,9 +245,19 @@ namespace VoodooShader
 
         /**
          * A generic error-handling callback provided to the Cg runtime. This 
-         * will be called in event of any Cg error. This overrides Core::CgErrorHandler(),
-         * although it may call that function (the core handler does no error recovery,
-         * but does log and can handle some malformed errors).
+         * will be called by Core::CgErrorHandler() in the event of a error. This allows
+         * the adapter to internally handle any cleanup or other state changes that
+         * become necessary.
+         * 
+         * @note Not all Cg errors will call this; the core performs error validation
+         *       and handles all context-related errors internally, as well as logging
+         *       what data it can find. Malformed errors will not be passed to the
+         *       adapter.
+         *       
+         * @note In the case of compiler errors, the exact messages can be gotten by
+         *       calling cgGetLastListing until it returns null. The Core error handler
+         *       does just this, <em>after</em> the adapter's error handler returns.
+         *       Thus, if the adapter does not dump compiler listings, the core will.
          *
          * @param context The associated Cg context.
          * @param error The error raised.

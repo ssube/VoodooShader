@@ -83,11 +83,6 @@ namespace VoodooShader
         }
 
         // IObject
-        void Adapter::DestroyObject()
-        {
-            delete this;
-        }
-
         const char * Adapter::GetObjectClass()
         {
             return "Frost_Adapter";
@@ -96,47 +91,50 @@ namespace VoodooShader
         // IAdapter
         bool Adapter::LoadPass( _In_ Pass * pass )
         {
-            if ( pass == NULL )
-            {
-                mCore->Log(LL_Error, VOODOO_FROST_NAME, "Unable to load null pass.");
-            }
-
-            CGprogram vert = pass->GetProgram(PS_Vertex);
-            CGprogram frag = pass->GetProgram(PS_Fragment);
-
-            cgGLLoadProgram(vert);
-            cgGLLoadProgram(frag);
+            UNREFERENCED_PARAMETER(pass);
 
             return true;
         }
 
         void Adapter::BindPass( _In_ PassRef pass )
         {
-            mBoundVert = pass->GetProgram(PS_Vertex);
-            mBoundFrag = pass->GetProgram(PS_Fragment);
+            CGpass cgpass = pass->GetCgPass();
+            cgSetPassState(cgpass);
 
-            cgGLBindProgram(mBoundVert);
-            cgGLBindProgram(mBoundFrag);
+            mLastPass = cgpass;
         }
 
         void Adapter::UnbindPass()
         {
-            //cgGLUnbindProgram(CGprofile::mBoundVert);
-            //cgGLUnbindProgram(mBoundFrag);
+            cgResetPassState(mLastPass);
         }
 
         void Adapter::DrawQuad(Vertex * vertexData)
         {
-            glBegin(GL_QUADS);
-            glVertex3f(vertexData[0].x, vertexData[0].y, vertexData[0].z);
-            glTexCoord2f(vertexData[0].tu, vertexData[0].tv);
-            glVertex3f(vertexData[1].x, vertexData[1].y, vertexData[1].z);
-            glTexCoord2f(vertexData[1].tu, vertexData[1].tv);
-            glVertex3f(vertexData[2].x, vertexData[2].y, vertexData[2].z);
-            glTexCoord2f(vertexData[2].tu, vertexData[0].tv);
-            glVertex3f(vertexData[3].x, vertexData[3].y, vertexData[3].z);
-            glTexCoord2f(vertexData[3].tu, vertexData[3].tv);
-            glEnd();
+            if ( vertexData )
+            {
+                glBegin(GL_QUADS);
+                glTexCoord2f(vertexData[0].tu, vertexData[0].tv);
+                glVertex3f(vertexData[0].x, vertexData[0].y, vertexData[0].z);
+                glTexCoord2f(vertexData[1].tu, vertexData[1].tv);
+                glVertex3f(vertexData[1].x, vertexData[1].y, vertexData[1].z);
+                glTexCoord2f(vertexData[2].tu, vertexData[0].tv);
+                glVertex3f(vertexData[2].x, vertexData[2].y, vertexData[2].z);
+                glTexCoord2f(vertexData[3].tu, vertexData[3].tv);
+                glVertex3f(vertexData[3].x, vertexData[3].y, vertexData[3].z);
+                glEnd();
+            } else {
+                glBegin(GL_QUADS);
+                glTexCoord2f(0.0f, 1.0f);
+                glVertex2d(0.0f, 250.0f);
+                glTexCoord2f(0.0f, 0.0f);
+                glVertex2d(0.0f, 0.0f);
+                glTexCoord2f(1.0f, 0.0f);
+                glVertex2d(250.0f, 250.0f);
+                glTexCoord2f(1.0f, 1.0f);
+                glVertex2d(250.0f, 0.0f);
+                glEnd();
+            }
         }
 
         void Adapter::ApplyParameter( _In_ ParameterRef param )
@@ -164,7 +162,7 @@ namespace VoodooShader
                     break;
                 }
             } else if ( pc == PC_Sampler ) {
-                GLuint textureID = (GLuint)param->GetTexture()->GetTexture();
+                GLuint textureID = (GLuint)param->GetTexture()->GetData();
                 cgGLSetupSampler(cgparam, textureID);
             } else {
                 mCore->Log(LL_Warning, VOODOO_FROST_NAME, "Unable to apply parameter %s.", param->GetName().c_str());
@@ -202,7 +200,7 @@ namespace VoodooShader
 
         bool Adapter::ConnectTexture( _In_ ParameterRef param, _In_ TextureRef texture )
         {
-            cgGLSetupSampler(param->GetCgParameter(), (GLuint)texture->GetTexture());
+            cgGLSetupSampler(param->GetCgParameter(), (GLuint)texture->GetData());
             return true;
         }
 

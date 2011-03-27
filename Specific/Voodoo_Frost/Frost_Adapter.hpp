@@ -33,7 +33,6 @@ namespace VoodooShader
             ~Adapter();
 
             // IObject methods
-            virtual void DestroyObject();
             virtual const char * GetObjectClass();
 
             // IAdapter methods
@@ -64,8 +63,7 @@ namespace VoodooShader
              */
             HGLRC mGLRC;
 
-            CGprogram mBoundVert;
-            CGprogram mBoundFrag;
+            CGpass mLastPass;
         };
     }
 }

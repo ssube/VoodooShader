@@ -2,10 +2,10 @@
 //
 // 
 
-#define forever for(;;)
-
 #include "stdafx.h"
 #include "Testbed.h"
+
+#define forever for(;;)
 
 #define MAX_LOADSTRING 100
 

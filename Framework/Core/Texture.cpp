@@ -3,12 +3,12 @@
 namespace VoodooShader
 {
     Texture::Texture(String name, void * texture)
-        : mTextureObject(texture), mName(name)
+        : mData(texture), mName(name)
     { };
 
-    void * Texture::GetTexture()
+    void * Texture::GetData()
     {
-        return mTextureObject;
+        return mData;
     }
 
     String Texture::GetName()

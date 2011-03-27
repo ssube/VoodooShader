@@ -29,8 +29,8 @@
  * <p>
  *    Voodoo uses nVidia's Cg Toolkit to provide a common, simple shader language
  *    and cross-API compiler for widely supported shaders. Voodoo shaders run under both
- *    OpenGL and DirectX and can scale over a great variety of hardware, from OpenGL 1.4
- *    to 3.0 and DirectX 8 to 11. Applications using any of the supported APIs are
+ *    OpenGL and DirectX and can scale over a great variety of hardware, from OpenGL 1.0
+ *    to 4.0 and DirectX 8 to 11. Applications using any of the supported APIs are
  *    supported within Voodoo, with a near-identical feature set provided across the board.
  * </p>
  * <p>

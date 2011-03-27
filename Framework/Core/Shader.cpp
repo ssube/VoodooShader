@@ -19,17 +19,24 @@ namespace VoodooShader
 
         if ( !cgIsEffect(this->mEffect) )
         {
-            //Throw(VOODOO_CORE_NAME, "Failed to create shader.", mCore);
+            Throw(VOODOO_CORE_NAME, "Failed to create shader.", mCore);
+
             return;
         }
 
         cgSetEffectName(this->mEffect, this->mName.c_str());
     }
-        
-    Shader::Shader(Core * parent, CGeffect effect)
-        : mCore(parent), mEffect(effect)
+
+    Shader::~Shader()
     {
-        this->mName = cgGetEffectName(effect);
+        mDefaultTechnique = NULL;
+        mTechniques.clear();
+        mParameters.clear();
+
+        if ( cgIsEffect(mEffect) )
+        {
+            cgDestroyEffect(mEffect);
+        }
     }
 
     TechniqueRef Shader::GetDefaultTechnique()
@@ -297,7 +304,7 @@ namespace VoodooShader
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
-                "4-dimensional texture size found. Creating quantum texture... Oh wait, not really (invalid type on %s).",
+                "4-dimensional texture size found. Creating quantum texture... (invalid type on %s).",
                 param->GetName().c_str()
             );        
         } else {
@@ -400,6 +407,11 @@ namespace VoodooShader
         }
     }
 
+    CGeffect Shader::GetCgEffect()
+    {
+        return mEffect;
+    }
+
     Technique::Technique(Shader * parent, CGtechnique cgTech)
         : mParent(parent), mTechnique(cgTech)
     {
@@ -416,6 +428,12 @@ namespace VoodooShader
             this->mName = "tech_";
             this->mName += nameBuffer;
         }
+    }
+
+    Technique::~Technique()
+    {
+        mTarget = NULL;
+        mPasses.clear();
     }
 
     Core * Technique::GetCore()
@@ -449,6 +467,11 @@ namespace VoodooShader
     size_t Technique::GetPassCount()
     {
         return this->mPasses.size();
+    }
+
+    CGtechnique Technique::GetCgTechnique()
+    {
+        return mTechnique;
     }
 
     void Technique::Link()
@@ -537,6 +560,13 @@ namespace VoodooShader
         }
     }
 
+    Pass::~Pass()
+    {
+        mTarget = NULL;
+
+        mCore->GetAdapter()->UnloadPass(this);
+    }
+
     String Pass::GetName()
     {
         String name = mParent->GetName();
@@ -571,6 +601,11 @@ namespace VoodooShader
         default:
             return NULL;
         }
+    }
+
+    CGpass Pass::GetCgPass()
+    {
+        return mPass;
     }
 
     void Pass::Link()
