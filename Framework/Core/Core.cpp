@@ -165,14 +165,6 @@ namespace VoodooShader
         // Destroy the Cg context (all resources should be gone)
         if ( cgIsContext(this->mCgContext) )
         {
-            // Failsafe destruction of all effects
-            /*CGeffect effect = cgGetFirstEffect(mCgContext);
-            while ( cgIsEffect(effect) )
-            {
-                CGeffect next = cgGetNextEffect(effect);
-                cgDestroyEffect(effect);
-                effect = next;
-            }*/
             cgDestroyContext(this->mCgContext);
         }
 

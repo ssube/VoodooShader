@@ -48,8 +48,8 @@ namespace VoodooShader
             void HandleError( _In_ CGcontext context, _In_ CGerror error, _In_ void * core );
 
             // Frost-specific methods
-            void SetDC(_In_ HDC hdc);
-            void SetGLRC(_In_ HGLRC hglrc);
+            void SetDC(_In_opt_ HDC hdc);
+            void SetGLRC(_In_opt_ HGLRC hglrc);
 
         private:
             Core * mCore;

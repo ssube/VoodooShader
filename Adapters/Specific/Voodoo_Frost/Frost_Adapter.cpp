@@ -178,7 +178,19 @@ namespace VoodooShader
 
         void Adapter::DrawShader( _In_ ShaderRef shader )
         {
+            if ( shader.get() == NULL )
+            {
+                mCore->Log(LL_Error, VOODOO_FROST_NAME, "Unable to draw null shader.");
+                return;
+            }
+
             TechniqueRef tech = shader->GetDefaultTechnique();
+
+            if ( tech.get() == NULL )
+            {
+                mCore->Log(LL_Error, VOODOO_FROST_NAME, "No default technique given for shader %s.", shader->GetName().c_str());
+                return;
+            }
 
             size_t passes = tech->GetPassCount();
             for ( size_t curpass = 0; curpass < passes; ++curpass )
@@ -204,10 +216,19 @@ namespace VoodooShader
             GLuint texture;
             GLint internalFormat = GL_RGBA8; //Frost::Converter::ToGLFormat(desc.Format);
             void * data = malloc(desc.Width * desc.Height * 4);
+
             glGenTextures(1, &texture);
+            GLenum error =  glGetError();
+            while ( error != GL_NO_ERROR )
+            {
+                mCore->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
+                error =  glGetError();
+            }
+
             glBindTexture(GL_TEXTURE_2D, texture);
             glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, desc.Width, desc.Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
             glBindTexture(GL_TEXTURE_2D, 0);
+
             free(data);
 
             return mCore->AddTexture(name, (void*)texture);
@@ -229,19 +250,40 @@ namespace VoodooShader
 
         // Frost
 
-        void Adapter::SetDC(_In_ HDC hdc)
+        void Adapter::SetDC(_In_opt_ HDC hdc)
         {
             mDC = hdc;
         }
 
-        void Adapter::SetGLRC(_In_ HGLRC hglrc)
+        void Adapter::SetGLRC(_In_opt_ HGLRC hglrc)
         {
+            if ( hglrc != NULL )
+            {
+                CGcontext context = mCore->GetCgContext();
+                cgSetParameterSettingMode(context, CG_IMMEDIATE_PARAMETER_SETTING);
+                cgGLRegisterStates(context);
+                cgGLSetManageTextureParameters(context, CG_TRUE);
+
+                TextureDesc desc;
+                desc.Width = desc.Height = 256;
+                desc.Depth = 1;
+                desc.Mipmaps = false;
+                desc.Format = TF_RGBA8;
+
+                mTexLastPass = this->CreateTexture(":lastpass", desc);
+                mTexLastShader = this->CreateTexture(":lastshader", desc);
+
+                // Load shader
+                TestShader = mCore->CreateShader("test.cgfx", NULL);
+                TestShader->Link();
+            } else {
+                mTexLastPass = NULL;
+                mTexLastShader = NULL;
+
+                TestShader = NULL;
+            }
+
             mGLRC = hglrc;
-
-            cgGLRegisterStates(mCore->GetCgContext());
-
-            // Load shader
-            TestShader = mCore->CreateShader("test.cgfx", NULL);
         }
     }
 }

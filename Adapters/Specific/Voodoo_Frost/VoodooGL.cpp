@@ -2,7 +2,8 @@
 #include "VoodooGL.hpp"
 #include "Frost_Adapter.hpp"
 
-HWND gNwnWindow;
+HWND gNwnWindow = NULL;
+bool gSecondContext = NULL;
 
 using namespace VoodooShader;
 
@@ -15,6 +16,14 @@ using namespace VoodooShader;
  */
 void GLAPIENTRY vglBegin(GLenum mode)
 {
+    /*
+    gThisFrame.DrawnGeometry = true
+
+    if ( mode == GL_QUADS && !glIsEnabled(GL_LIGHTING) )
+        gThisFrame.DrawnShadows = true
+        materials.unbind()
+    */
+
     VoodooCore->Log
     (
         LL_Debug,
@@ -49,12 +58,20 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
     );
 
     /*
-    find Technique from Materials[texture]
-    if ( Technique is valid )
+    if ( texture != 0 && texture != lastTexture )
     {
-        setup variables on Technique
-        get first Pass from Technique
-        bind Pass
+        lastTexture = texture;
+        find Technique from Materials[texture]
+        if ( Technique is valid )
+        {
+            setup variables on Technique
+            get first Pass from Technique
+            bind Pass
+            gBoundPass = Pass
+        }
+    } else if ( gBoundPass ) {
+        unbind gBoundPass
+        gBoundPass = null
     }
     */
 
@@ -63,6 +80,14 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 
 void GLAPIENTRY vglClear(GLbitfield mask)
 {
+    /*
+    if ( mask = ( GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT ) && glIsEnabled(GL_LIGHT0) )
+        if ( gBoundPass )
+            unbind gBoundPass
+        
+        shaderFlip()
+    */
+
     VoodooCore->Log
     (
         LL_Debug,
@@ -76,6 +101,11 @@ void GLAPIENTRY vglClear(GLbitfield mask)
 
 void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
 {
+    /*
+    for ( GLsizei i = 0; i < n; ++i )
+        gMaterials.remove(i);
+    */
+
     VoodooCore->Log
     (
         LL_Debug,
@@ -84,11 +114,13 @@ void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
         n, textures
     );
 
-    return glDeleteTextures(n, textures);;
+    return glDeleteTextures(n, textures);
 }
 
 void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
 {
+    // gThisFrame.DrawnGeometry = true
+
     VoodooCore->Log
     (
         LL_Debug,
@@ -102,6 +134,10 @@ void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const G
 
 void GLAPIENTRY vglEnable(GLenum cap)
 {
+    /*
+    if ( cap == GL_FOG && !gUseFog ) return;
+    */
+
     VoodooCore->Log
     (
         LL_Debug,
@@ -140,6 +176,13 @@ void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
 
 void GLAPIENTRY vglFogf(GLenum pname, GLfloat param)
 {
+    /*
+    if ( pname == GL_FOG_START )
+        param = param * gFogMultStart;
+    if ( pname == GL_FOG_END )
+        param = param * gFogMultEnd;
+    */
+
     VoodooCore->Log
     (
         LL_Debug,
@@ -168,6 +211,8 @@ const GLubyte * GLAPIENTRY vglGetString(GLenum name)
 
 void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
 {
+    // VoodooFrost->SetViewport(x, y, width, height)
+
     VoodooCore->Log
     (
         LL_Debug,
@@ -191,22 +236,33 @@ HGLRC WINAPI vwglCreateContext(HDC hdc)
         hdc, result
     );
 
-    gNwnWindow = WindowFromDC(hdc);
-    char title[64];
-    if ( GetWindowTextA(gNwnWindow, title, 64) > 0 )
+    if ( !gSecondContext )
     {
-        strcat_s(title, " [ Voodoo Frost ]");
-        SetWindowTextA(gNwnWindow, title);
+        gSecondContext = true;
+    } else {
+        gNwnWindow = WindowFromDC(hdc);
+        char title[64];
+        if ( GetWindowTextA(gNwnWindow, title, 64) > 0 )
+        {
+            strcat_s(title, " [ Voodoo Frost ]");
+            SetWindowTextA(gNwnWindow, title);
+        }
+        
+        VoodooFrost->SetDC(hdc);
+        VoodooFrost->SetGLRC(result);
     }
-
-    VoodooFrost->SetDC(hdc);
-    VoodooFrost->SetGLRC(result);
     
     return result;
 }
 
 BOOL WINAPI vwglDeleteContext(HGLRC hglrc)
 {
+    if ( gSecondContext && gNwnWindow )
+    {
+        VoodooFrost->SetGLRC(NULL);
+        gSecondContext = false;
+    }
+
     BOOL result = wglDeleteContext(hglrc);
 
     VoodooCore->Log
@@ -247,6 +303,16 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
         hdc, hglrc, result
     );
 
+    /*
+    if ( !gGLSecondContext )
+        gGLSecondContext = true
+    else
+        Log->glVersion
+        glewInit()
+        setupResources()
+        linkShaders()
+    */
+
     return result;
 }
 
@@ -266,6 +332,8 @@ BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
         "wglSwapLayerBuffers(%p, %u) == %i",
         hdc, uint, result
     );
+
+    // updateShaderVars()
 
     return result;
 }

@@ -75,6 +75,14 @@ public:
         );
 
         VoodooGem->SetDevice(realDevice);
+
+        if ( pp.hDeviceWindow != NULL )
+        {
+            char title[64];
+            GetWindowTextA(pp.hDeviceWindow, title, 64);
+            strcat_s(title, " [ Voodoo Gem ]");
+            SetWindowTextA(pp.hDeviceWindow, title);
+        }
     }
 
     ~IVoodoo3DDevice8()
