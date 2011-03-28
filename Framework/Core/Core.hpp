@@ -46,7 +46,8 @@ namespace VoodooShader
     _Check_return_
     VOODOO_API Core * CreateCore
     (
-        _In_ const char * path
+        _In_ const char * path,
+        _In_ const char * startdir
     );
         
     /**
@@ -84,7 +85,8 @@ namespace VoodooShader
         */
         Core
         (
-            _In_ const char * path
+            _In_ const char * path,
+            _In_ const char * startdir
         );
 
         /**
@@ -370,7 +372,8 @@ namespace VoodooShader
         /**
          * Base path this core was created with.
          */
-        String mBasePath;
+        String mGlobalRoot;
+        String mLocalRoot;
 
         /**
          * Cg context used by this core.

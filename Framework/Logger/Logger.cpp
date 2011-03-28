@@ -94,7 +94,7 @@ namespace VoodooShader
 
             char fullname[MAX_PATH];
             StringCchCopyA(fullname, MAX_PATH, filename);
-            StringCchCatA(fullname, MAX_PATH, ".xmllog");
+            StringCchCatA(fullname, MAX_PATH, ".xml");
 
             this->mLogFile.open(fullname, flags);
 

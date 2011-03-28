@@ -1,6 +1,7 @@
 #include "Core.hpp"
 
 #include "Adapter.hpp"
+#include "Converter.hpp"
 #include "Exception.hpp"
 #include "FullscreenManager.hpp"
 #include "HookManager.hpp"
@@ -12,9 +13,9 @@
 
 namespace VoodooShader
 {
-    Core * CreateCore(_In_ const char * path)
+    Core * CreateCore(_In_ const char * path, _In_ const char * startdir)
     {
-        return new Core(path);
+        return new Core(path, startdir);
     }
 
     void DestroyCore(_In_ Core * core)
@@ -22,13 +23,15 @@ namespace VoodooShader
         delete core;
     }
 
-    Core::Core(_In_ const char * path)
+    Core::Core(_In_ const char * path, _In_ const char * startdir)
         : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCgContext(NULL)
     {
         using namespace pugi;
 
-        mBasePath = path;
-        mBasePath += "\\";
+        mGlobalRoot = path;
+        mGlobalRoot += "\\";
+        mLocalRoot = startdir;
+        mLocalRoot += "\\";
 
         // Init Cg
         this->mCgContext = cgCreateContext();
@@ -38,7 +41,12 @@ namespace VoodooShader
             throw std::exception("Unable to create Cg context.");
         }
 
+        cgSetContextBehavior(mCgContext, CG_BEHAVIOR_LATEST);
+        cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
         cgSetErrorHandler(&(Core::CgErrorHandler), this);
+
+        cgSetAutoCompile(mCgContext, CG_COMPILE_IMMEDIATE);
+        cgSetParameterSettingMode(mCgContext, CG_IMMEDIATE_PARAMETER_SETTING);
 
         mModManager = ModuleManagerRef(new ModuleManager(this));
 
@@ -46,8 +54,9 @@ namespace VoodooShader
 
         try
         {
+            String logpath = mLocalRoot + "VoodooConfig.xml";
             config = new pugi::xml_document();
-            xml_parse_result result = config->load_file("VoodooConfig.xmlconfig");
+            xml_parse_result result = config->load_file(logpath.c_str());
 
             if ( !result )
             {
@@ -74,7 +83,7 @@ namespace VoodooShader
             }
 
             xpath_query logFileQuery("/VoodooConfig/Logger/File/text()");
-            String logFileName = logFileQuery.evaluate_string(config->root());
+            String logFileName = logFileQuery.evaluate_string(*config);
             if ( !this->mLogger->Open(logFileName.c_str(), false) )
             {
                 throw std::exception("Unable to open log file.");
@@ -163,9 +172,9 @@ namespace VoodooShader
         mTextures.clear();
 
         // Destroy the Cg context (all resources should be gone)
-        if ( cgIsContext(this->mCgContext) )
+        if ( cgIsContext(mCgContext) )
         {
-            cgDestroyContext(this->mCgContext);
+            cgDestroyContext(mCgContext);
         }
 
         // Remove hooks
@@ -185,7 +194,7 @@ namespace VoodooShader
 
     String Core::GetBasePath()
     {
-        return mBasePath;
+        return mGlobalRoot;
     }
 
     CGcontext Core::GetCgContext()
@@ -252,6 +261,9 @@ namespace VoodooShader
         } else {
             TextureRef texture(new Texture(name, data));
             this->mTextures[name] = texture;
+
+            this->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s with data %p, returning shared pointer to %p.", name.c_str(), data, texture.get());
+
             return texture;
         }
     }
@@ -267,6 +279,9 @@ namespace VoodooShader
             // Load the shader from file
             ShaderRef newShader(new Shader(this, filename, args));
             this->mShaders[filename] = newShader;
+
+            this->Log(LL_Debug, VOODOO_CORE_NAME, "Created shader from %s, returning shared pointer to %p.", filename.c_str(), newShader.get());
+
             return newShader;
         }
     }
@@ -279,8 +294,9 @@ namespace VoodooShader
             Throw(VOODOO_CORE_NAME, "Trying to create parameter with a duplicate name.", this);
         } else {
             ParameterRef parameter(new Parameter(this, name, type));
-
             mParameters[name] = parameter;
+
+            this->Log(LL_Debug, VOODOO_CORE_NAME, "Created parameter named %s with type %s, returning shared pointer to %p.", name.c_str(), Converter::ToString(type), parameter.get());
 
             return parameter;
         }
@@ -291,6 +307,8 @@ namespace VoodooShader
         TextureMap::iterator textureEntry = this->mTextures.find(name);
         if ( textureEntry != this->mTextures.end() )
         {
+            this->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", name.c_str(), textureEntry->second.get());
+
             return textureEntry->second;
         } else {
             return TextureRef();

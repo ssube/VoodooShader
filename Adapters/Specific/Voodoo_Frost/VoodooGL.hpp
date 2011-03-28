@@ -20,6 +20,7 @@
 \**************************************************************************************************/
 
 #include "Frost_Module.hpp"
+#include <GL/glew.h>
 
 void GLAPIENTRY vglBegin(GLenum mode);
 void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture);

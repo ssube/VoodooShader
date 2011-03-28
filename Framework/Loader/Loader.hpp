@@ -27,7 +27,7 @@
 #include <windows.h>
 #include <strsafe.h>
 
-typedef void * (* funcTypeLoad)(const char *);
+typedef void * (* funcTypeLoad)(const char *, const char *);
 typedef void (* funcTypeUnload)(void *);
 
 bool LoadVoodoo();

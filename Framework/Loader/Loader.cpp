@@ -25,6 +25,9 @@ void * core = NULL;
  */
 bool LoadVoodoo()
 {
+    char StartupDir[MAX_PATH];
+    GetCurrentDirectory(MAX_PATH, StartupDir);
+
     HKEY VoodooPathKey = NULL;
     char VoodooPath[MAX_PATH];
     char VoodooCorePath[MAX_PATH];
@@ -75,7 +78,7 @@ bool LoadVoodoo()
 
     try
     {
-        core = (*funcLoad)(VoodooPath);
+        core = (*funcLoad)(VoodooPath, StartupDir);
     } catch ( std::exception & exc ) {
         MessageBoxA(NULL, exc.what(), "Loader Error", MB_ICONERROR|MB_OK);
         core = NULL;

@@ -115,6 +115,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="exports.def" />
+    <None Include="Voodoo_Core.def" />
   </ItemGroup>
 </Project>

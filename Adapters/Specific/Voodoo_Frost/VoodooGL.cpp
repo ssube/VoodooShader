@@ -3,7 +3,8 @@
 #include "Frost_Adapter.hpp"
 
 HWND gNwnWindow = NULL;
-bool gSecondContext = NULL;
+bool gSecondContext = false;
+bool gFrostEnabled = false;
 
 using namespace VoodooShader;
 
@@ -235,22 +236,6 @@ HGLRC WINAPI vwglCreateContext(HDC hdc)
         "wglCreateContext(%p) == %p",
         hdc, result
     );
-
-    if ( !gSecondContext )
-    {
-        gSecondContext = true;
-    } else {
-        gNwnWindow = WindowFromDC(hdc);
-        char title[64];
-        if ( GetWindowTextA(gNwnWindow, title, 64) > 0 )
-        {
-            strcat_s(title, " [ Voodoo Frost ]");
-            SetWindowTextA(gNwnWindow, title);
-        }
-        
-        VoodooFrost->SetDC(hdc);
-        VoodooFrost->SetGLRC(result);
-    }
     
     return result;
 }
@@ -302,6 +287,33 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
         "wglMakeCurrent(%p, %p) == %i",
         hdc, hglrc, result
     );
+
+    if ( !gSecondContext )
+    {
+        gSecondContext = true;
+    } else if ( !gFrostEnabled ) {
+        GLenum glewStatus = glewInit();
+        if ( glewStatus != GLEW_OK )
+        {
+            VoodooCore->Log(LL_Error, VOODOO_FROST_NAME, "Unable to initialize GLEW (code %u).", glewStatus);
+
+            return result;
+        }
+
+        gNwnWindow = WindowFromDC(hdc);
+
+        char title[64];
+        if ( GetWindowTextA(gNwnWindow, title, 64) > 0 )
+        {
+            strcat_s(title, " [ Voodoo Frost ]");
+            SetWindowTextA(gNwnWindow, title);
+        }
+
+        VoodooFrost->SetDC(hdc);
+        VoodooFrost->SetGLRC(hglrc);
+
+        gFrostEnabled = true;
+    }
 
     /*
     if ( !gGLSecondContext )
