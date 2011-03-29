@@ -57,10 +57,12 @@ public:
 
         if ( gNextTexture )
         {
+            gNextTexture = false;
+
             try
             {
                 mVoodooTexture = VoodooCore->AddTexture(mName, this);
-            } catch ( Exception & exc ) {
+            } catch ( std::exception & exc ) {
                 UNREFERENCED_PARAMETER(exc);
             }
         }

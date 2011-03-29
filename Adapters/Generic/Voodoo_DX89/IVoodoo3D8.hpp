@@ -275,8 +275,8 @@ public:
             {
                 testShader = VoodooCore->CreateShader("test.cgfx", NULL);
                 testShader->Link();
-            } catch ( VoodooShader::Exception & exc ) {
-                VoodooCore->Log("Voodoo DX8.9: Error loading shader.\n");
+            } catch ( std::exception & exc ) {
+                VoodooCore->Log("Voodoo DX8.9: Error loading shader: %s", exc.what());
             }
 
             return hr;

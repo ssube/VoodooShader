@@ -39,9 +39,9 @@ namespace VoodooShader
             {
                 core->SetAdapter(reinterpret_cast<VoodooShader::Adapter*>(this));
                 core->Log("Voodoo DX9: Core adapter set to this.\n");
-            } catch ( VoodooShader::Exception & exc ) {
+            } catch ( std::exception & exc ) {
                 core->Log("Voodoo DX9: Error setting adapter on core: %s.\n",
-                    exc.Message());
+                    exc.what());
             }
 
             HRESULT hr = cgD3D9SetDevice(device);

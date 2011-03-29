@@ -1,7 +1,7 @@
 #include "Parameter.hpp"
 
-#include "Core.hpp"
 #include "Converter.hpp"
+#include "Core.hpp"
 #include "Exception.hpp"
 #include "Shader.hpp"
 
@@ -10,9 +10,18 @@ namespace VoodooShader
     Parameter::Parameter(Core * core, String name, ParameterType type)
         : mType(type), mParent(NULL), mVirtual(true), mCore(core)
     { 
+        mCore->Log(LL_Debug, VOODOO_CORE_NAME, "Creating a virtual parameter (%s, core %p) of type %s.", name.c_str(), core, Converter::ToString(type));
+        
+        CGcontext context = mCore->GetCgContext();
+
+        if ( context && cgIsContext(context) )
+        {
+            throw std::exception("Unable to create parameter (core has no context).");
+        }
+
         mParam = cgCreateParameter
         (
-            core->GetCgContext(), 
+            context, 
             Converter::ToCGType(mType)
         );
 
@@ -32,7 +41,7 @@ namespace VoodooShader
             break;
         case PT_Unknown:
         default:
-            //Throw(VOODOO_CORE_NAME, "Invalid parameter type.", mCore);
+            throw std::exception("Invalid parameter type.");
             break;
         }
     }

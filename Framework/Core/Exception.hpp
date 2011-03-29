@@ -36,7 +36,7 @@ namespace VoodooShader
      *
      * @note If possible, thrown Exceptions will automatically log as much data
      *        as they contain in a formatted way. You can retrieve this string
-     *        with the Exception::Message() method.
+     *        with the Exception::what() method.
      */
     class VOODOO_API Exception
         : public std::exception
@@ -62,7 +62,9 @@ namespace VoodooShader
             _In_ int line
         );
 
-        String Message();
+        ~Exception();
+
+        const char * what();
 
     private:
         Core * mCore;
@@ -71,6 +73,7 @@ namespace VoodooShader
         char * mFile;
         char * mFunction;
         int mLine;
+        char * mFmtMsg;
     };
     /**
      * @}

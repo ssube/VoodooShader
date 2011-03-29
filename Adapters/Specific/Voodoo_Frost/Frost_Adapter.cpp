@@ -75,11 +75,34 @@ namespace VoodooShader
             } else {
                 mCore->Log(LL_Error, VOODOO_FROST_NAME, "OpenGL hook procedure failed.");
             }
+
+            // Init Cg
+            this->mCgContext = cgCreateContext();
+
+            if ( !cgIsContext(this->mCgContext) )
+            {
+                throw std::exception("Unable to create Cg context.");
+            }
+
+            cgSetContextBehavior(mCgContext, CG_BEHAVIOR_LATEST);
+            cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
+            cgSetErrorHandler(&(Core::CgErrorHandler), this);
+
+            cgSetAutoCompile(mCgContext, CG_COMPILE_IMMEDIATE);
+            cgSetParameterSettingMode(mCgContext, CG_IMMEDIATE_PARAMETER_SETTING);
+
+            cgGLRegisterStates(context);
+            cgGLSetManageTextureParameters(context, CG_TRUE);
+
+            mCore->SetCgContext(context);
         }
 
         Adapter::~Adapter()
         {
-
+            if ( cgIsContext(mCgContext) )
+            {
+                cgDestroyContext(mCgContext);
+            }
         }
 
         // IObject
@@ -278,10 +301,6 @@ namespace VoodooShader
         {
             if ( hglrc != NULL )
             {
-                CGcontext context = mCore->GetCgContext();
-                cgGLRegisterStates(context);
-                cgGLSetManageTextureParameters(context, CG_TRUE);
-
                 TextureDesc desc;
                 desc.Width = desc.Height = 256;
                 desc.Depth = 1;

@@ -96,13 +96,26 @@ namespace VoodooShader
 
             if ( module.get() )
             {
-                IObject * object = module->CreateClass(number, mCore);
-                //object->SourceModule = module;
-                return object;
+                try
+                {
+                    IObject * object = module->CreateClass(number, mCore);
+
+                    if ( object == NULL )
+                    {
+                        mCore->Log(LL_Error, VOODOO_CORE_NAME, "Error creating instance of class %s.", name.c_str());
+                    }
+
+                    return object;
+                } catch ( std::exception & exc ) {
+                    mCore->Log(LL_Error, VOODOO_CORE_NAME, "Error creating class %s: %s", name.c_str(), exc.what());
+                    return NULL;
+                }
             } else {
+                mCore->Log(LL_Error, VOODOO_CORE_NAME, "Unable to lock module (possibly unloaded) for class %s.", name.c_str());
                 return NULL;
             }
         } else {
+            mCore->Log(LL_Error, VOODOO_CORE_NAME, "Class %s not found.", name.c_str());
             return NULL;
         }
     }
@@ -144,8 +157,11 @@ namespace VoodooShader
 
     Module::~Module()
     {
-        FreeLibrary(mHandle);
-        mHandle = NULL;
+        if ( mHandle != INVALID_HANDLE_VALUE )
+        {
+            FreeLibrary(mHandle);
+            mHandle = NULL;
+        }
     }
 
     Version Module::ModuleVersion()

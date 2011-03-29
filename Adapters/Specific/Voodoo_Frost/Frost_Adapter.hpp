@@ -54,6 +54,8 @@ namespace VoodooShader
         private:
             Core * mCore;
 
+            CGcontext mCgContext;
+
             /**
              * Handle to the device context used by OpenGL.
              */

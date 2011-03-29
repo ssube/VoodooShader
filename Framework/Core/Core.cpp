@@ -33,21 +33,6 @@ namespace VoodooShader
         mLocalRoot = startdir;
         mLocalRoot += "\\";
 
-        // Init Cg
-        this->mCgContext = cgCreateContext();
-
-        if ( !cgIsContext(this->mCgContext) )
-        {
-            throw std::exception("Unable to create Cg context.");
-        }
-
-        cgSetContextBehavior(mCgContext, CG_BEHAVIOR_LATEST);
-        cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
-        cgSetErrorHandler(&(Core::CgErrorHandler), this);
-
-        cgSetAutoCompile(mCgContext, CG_COMPILE_IMMEDIATE);
-        cgSetParameterSettingMode(mCgContext, CG_IMMEDIATE_PARAMETER_SETTING);
-
         mModManager = ModuleManagerRef(new ModuleManager(this));
 
         xml_document * config = NULL;
@@ -144,10 +129,12 @@ namespace VoodooShader
             }
 
             delete config;
-        } catch ( xpath_exception & exc ) {
-            delete config;
-            throw std::exception(exc);
         } catch ( std::exception & exc ) {
+            if ( this->mLogger )
+            {
+                this->Log(LL_Error, VOODOO_CORE_NAME, "Error during Core creation: %s", exc.what());
+            }
+
             delete config;
             throw exc;
         }
@@ -156,25 +143,12 @@ namespace VoodooShader
 
     Core::~Core()
     {
+        this->SetCgContext(NULL);
+
         // Destroy adapter (not sure what it depends on, so handle first)
         if ( this->mAdapter )
         {
             delete this->mAdapter;
-        }
-
-        // Clear out object caches (may trigger dtors for many of these)
-        mShaders.clear();
-
-        mParameters.clear();
-
-        mLastPass = NULL;
-        mLastShader = NULL;
-        mTextures.clear();
-
-        // Destroy the Cg context (all resources should be gone)
-        if ( cgIsContext(mCgContext) )
-        {
-            cgDestroyContext(mCgContext);
         }
 
         // Remove hooks
@@ -195,6 +169,26 @@ namespace VoodooShader
     String Core::GetBasePath()
     {
         return mGlobalRoot;
+    }
+
+    void Core::SetCgContext(CGcontext context)
+    {
+        this->Log(LL_Debug, VOODOO_CORE_NAME, "Setting Cg context to %p.", context);
+
+        if ( context == NULL )
+        {
+            this->Log(LL_Debug, VOODOO_CORE_NAME, "Clearing object cache (null context).");
+
+            mShaders.clear();
+
+            mParameters.clear();
+
+            mLastPass = NULL;
+            mLastShader = NULL;
+            mTextures.clear();
+        }
+
+        this->mCgContext = context;
     }
 
     CGcontext Core::GetCgContext()
@@ -311,6 +305,7 @@ namespace VoodooShader
 
             return textureEntry->second;
         } else {
+            this->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", name.c_str());
             return TextureRef();
         }
     }

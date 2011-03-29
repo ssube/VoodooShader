@@ -36,6 +36,23 @@ namespace VoodooShader
             } else {
                 mCore->Log(LL_Error, VOODOO_GEM_NAME, "Unable to find D3D8 hook point; adapter will most likely not run.");
             }
+
+            // Init Cg
+            this->mCgContext = cgCreateContext();
+
+            if ( !cgIsContext(this->mCgContext) )
+            {
+                throw std::exception("Unable to create Cg context.");
+            }
+
+            cgSetContextBehavior(mCgContext, CG_BEHAVIOR_LATEST);
+            cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
+            cgSetErrorHandler(&(Core::CgErrorHandler), this);
+
+            cgSetAutoCompile(mCgContext, CG_COMPILE_IMMEDIATE);
+            cgSetParameterSettingMode(mCgContext, CG_IMMEDIATE_PARAMETER_SETTING);
+
+            mCore->SetCgContext(context);
         }
 
         Adapter::~Adapter()
@@ -219,10 +236,8 @@ namespace VoodooShader
             {
                 testShader = mCore->CreateShader("test.cgfx", NULL);
                 testShader->Link();
-            } catch ( VoodooShader::Exception & exc ) {
-                UNREFERENCED_PARAMETER(exc);
-
-                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Error loading test shader.");
+            } catch ( std::exception & exc ) {
+                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Error loading test shader: %s", exc.what());
             }
         }
 

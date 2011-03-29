@@ -86,6 +86,7 @@ namespace VoodooShader
 
         private:
             Core * mCore;
+            CGcontext mCgContext;
             LPDIRECT3DDEVICE9 mDevice;
 
             CGprogram mBoundVP;

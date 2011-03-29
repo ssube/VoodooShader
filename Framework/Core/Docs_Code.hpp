@@ -67,6 +67,10 @@
  * <p>
  * Creates a new instance of the given class, bound to the provided Core. For classes
  * needing additional data, they can cache and/or use the core. 
+ * 
+ * @note Class constructors <em>may</em> throw exceptions. The ModuleManager will catch
+ *       and log these when possible. When the class construction throws, null will be
+ *       returned. 
  * </p>
  * 
  * @section moduleiobject IObject Interface
@@ -133,9 +137,33 @@
  * <p>
  * In most cases, the adapter and supporting classes should conform to a basic naming scheme.
  * Each Voodoo adapter is given a short one word somewhat-game-related name. It is recommended that
- * the adapter class be of the form [name]_Adapter and each supporting class use [name]_[classname],
+ * the adapter class be of the form name_Adapter and each supporting class use name_classname,
  * to easily identify them among the available classes. If the adapter or module is official, the
- * name scheme extends to the module's name (Voodoo/[name]) and often filename (Voodoo_[name].dll).
+ * name scheme extends to the module's name (Voodoo/name) and often filename (Voodoo_name.dll).
+ * </p>
+ * @section adapterspeccg Cg Context
+ * @since 0.2.5.151
+ * @attention Due to varying needs between adapters regarding the management, and destruction, of the Cg
+ * context, the Core now exposes methods to get and set the active context and no longer creates
+ * a context. This allows more flexibility within adapters, but is a breaking change. Adapters compiled
+ * for earlier versions will find themselves without a context at all.
+ * <p>This can avoid some crashes with certain adapters due to context lifespan, and
+ * allows adapters to handle cleanup. If at all possible, the Cg context should be created in
+ * the adapter's constructor and destroyed in the adapter's destructor, but this is left up to
+ * the discretion of the adapter.
+ * </p>
+ * @warning Adapters may not create any shaders or parameters until they have provided the core
+ * with a valid context. Exceptions will be thrown if this is attempted. To fully support Voodoo
+ * features, adapter's must not directly use the context when the core provides methods to
+ * handle a particular feature.
+ * <p>
+ * The Core holds references to all created parameters and shaders, but will release these in either
+ * of two cases:
+ * <ol><li>The Core is destroyed (the destructor releases all resources, then destroys the adapter).</li>
+ * <li>Core::SetCgContext() is called with null as the context, indicating that the cached context is to
+ * be cleared.</li></ol>
+ * This will drop the strong references from the core and may free resources, if no other references are
+ * held.
  * </p>
  * 
  * @page voodoosystem How Voodoo Works

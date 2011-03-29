@@ -10,25 +10,23 @@ namespace VoodooShader
     Shader::Shader(Core * parent, String filename, const char ** args)
         : mCore(parent), mName(filename), mDefaultTechnique()
     {
+        CGcontext context = mCore->GetCgContext();
+
+        if ( context && cgIsContext(context) )
+        {
+            throw std::exception("Unable to create parameter (core has no context).");
+        }
+
         this->mEffect = cgCreateEffectFromFile
         (
-            mCore->GetCgContext(), 
+            context, 
             mName.c_str(), 
             args
         );
 
         if ( !cgIsEffect(this->mEffect) )
         {
-            //Throw(VOODOO_CORE_NAME, "Failed to create shader.", mCore);
-            mCore->Log
-            (
-                LL_Error, 
-                VOODOO_CORE_NAME, 
-                "Failed to create shader from source file \"%s\".", 
-                filename.c_str()
-            );
-
-            return;
+            throw std::exception("Failed to create shader.");
         } else {
             cgSetEffectName(this->mEffect, this->mName.c_str());
         }
@@ -60,17 +58,7 @@ namespace VoodooShader
     {
         if ( index < mParameters.size() )
         {
-            ParameterMap::iterator param = mParameters.begin();
-
-            //! @todo Hack. Fix this (get item from std::map based on position).
-            size_t pos = 0;
-            while ( pos < index )
-            {
-                ++param;
-                ++pos;
-            }
-
-            return param->second;
+            return mParameters[index];
         } else {
             return ParameterRef();
         }
@@ -78,13 +66,22 @@ namespace VoodooShader
 
     ParameterRef Shader::GetParameter(String name)
     {
-        ParameterMap::iterator param = mParameters.find(name);
-        if ( param != mParameters.end() )
-        {
-            return param->second;
-        } else {
-            return ParameterRef();
-        }
+        String fullname = this->GetName() + ":" + name;
+
+        std::for_each
+        (
+            mParameters.begin(),
+            mParameters.end(),
+            [&](ParameterRef current)
+            {
+                if ( current->GetName() == fullname )
+                {
+                    return current;
+                }
+            }
+        );
+
+        return ParameterRef();
     }
 
     String Shader::GetName()

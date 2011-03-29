@@ -10,7 +10,7 @@ namespace VoodooShader
         Core * core, 
         char * file, char * function, int line
     )
-        : std::exception(message), 
+        : std::exception(message), mFmtMsg(NULL),
             mModule(module), mMessage(message), 
             mCore(core), 
             mFile(file), mFunction(function), mLine(line)
@@ -33,7 +33,7 @@ namespace VoodooShader
         Core * core, 
         char * file, char * function, int line
     )
-        : std::exception(message.c_str()), 
+        : std::exception(message.c_str()), mFmtMsg(NULL),
             mModule(module), mMessage(message), 
             mCore(core), 
             mFile(file), mFunction(function), mLine(line)
@@ -50,19 +50,22 @@ namespace VoodooShader
         }
     }
 
-    String Exception::Message()
+    const char * Exception::what()
     {
-        char buffer[1024];
-        ZeroMemory(buffer, 1024);
+        if ( mFmtMsg == NULL )
+        {
+            mFmtMsg = new char[1024];
+            ZeroMemory(mFmtMsg, 1024);
 
-        sprintf_s
-        (
-            buffer, 
-            1023, 
-            "VoodooShader::Exception in module %s, file %s at %s (line %d): %s", 
-            mModule.c_str(), mFile, mFunction, mLine, mMessage.c_str()
-        );
+            sprintf_s
+            (
+                mFmtMsg, 
+                1024, 
+                "VoodooShader::Exception in module %s, file %s at %s (line %d): %s", 
+                mModule.c_str(), mFile, mFunction, mLine, mMessage.c_str()
+            );
+        }
 
-        return String(buffer);
+        return mFmtMsg;
     }
 }

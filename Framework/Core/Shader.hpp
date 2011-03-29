@@ -223,7 +223,7 @@ namespace VoodooShader
 
         TechniqueRef mDefaultTechnique;
         TechniqueMap mTechniques;
-        ParameterMap mParameters;
+        ParameterVector mParameters;
     };
 
     /**

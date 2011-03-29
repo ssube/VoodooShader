@@ -160,6 +160,8 @@ namespace VoodooShader
         _Check_return_
         IAdapter * GetAdapter();
 
+        void SetCgContext(_In_opt_ CGcontext context);
+
         /**
          * Retrieve the Cg context associated with this Core.
          * 
@@ -168,6 +170,7 @@ namespace VoodooShader
          *       
          * @return The Cg context.
          */
+        _Check_return_
         CGcontext GetCgContext();
 
         /**

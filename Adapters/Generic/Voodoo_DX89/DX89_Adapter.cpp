@@ -36,13 +36,13 @@ namespace VoodooShader
                     VOODOO_DX89_NAME,
                     "Core adapter set to this."
                 );
-            } catch ( VoodooShader::Exception & exc ) {
+            } catch ( std::exception & exc ) {
                 core->Log
                 (
                     LL_Error,
                     VOODOO_DX89_NAME,
                     "Error setting adapter on core: %s.",
-                    exc.Message().c_str()
+                    exc.what()
                 );
             }
 
