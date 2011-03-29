@@ -60,9 +60,9 @@ namespace VoodooShader
             String logModule = logNode.attribute("module").value();
             String logClass  = logNode.attribute("class").value();
             this->mModManager->LoadModule(logModule);
-            this->mLogger = (ILogger*)mModManager->CreateClass(logClass);
+            this->mLogger = mModManager->SharedCreateClass<ILogger>(logClass);
 
-            if ( mLogger == NULL )
+            if ( mLogger.get() == NULL )
             {
                 throw std::exception("Unable to create logger object.");
             }
@@ -75,42 +75,42 @@ namespace VoodooShader
             }
 
             // Log extended build information
-            this->Log
+            mLogger->Log
             (
                 LL_Info,
                 VOODOO_CORE_NAME,
                 "%s",
                 VOODOO_GLOBAL_COPYRIGHT_FULL
             );
-            this->LogModule(this->GetVersion());
+            mLogger->LogModule(this->GetVersion());
             Version vsver = VOODOO_META_VERSION_STRUCT(VC);
-            this->LogModule(vsver);
+            mLogger->LogModule(vsver);
             Version cgver = VOODOO_META_VERSION_STRUCT(CG);
-            this->LogModule(cgver);
+            mLogger->LogModule(cgver);
 
             // Load hook module
             xml_node hookNode = coreNode.child("Hook");
             String hookModule = hookNode.attribute("module").value();
             String hookClass  = hookNode.attribute("class").value();
             this->mModManager->LoadModule(hookModule);
-            this->mHooker = (IHookManager*)mModManager->CreateClass(hookClass);
+            this->mHooker = mModManager->SharedCreateClass<IHookManager>(hookClass);
 
-            if ( mHooker == NULL )
+            if ( mHooker.get() == NULL )
             {
                 throw std::exception("Unable to create hook object.");
             }
 
             // Core done loading
-            this->Log(LL_Info, VOODOO_CORE_NAME, "Core initialization complete.");
+            mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Core initialization complete.");
 
             // Load adapter module
             xml_node adapterNode = coreNode.child("Adapter");
             String adapterModule = adapterNode.attribute("module").value();
             String adapterClass  = adapterNode.attribute("class").value();
             this->mModManager->LoadModule(adapterModule);
-            this->mAdapter = (IAdapter*)mModManager->CreateClass(adapterClass);
+            this->mAdapter = mModManager->SharedCreateClass<IAdapter>(adapterClass);
 
-            if ( mAdapter == NULL )
+            if ( mAdapter.get() == NULL )
             {
                 throw std::exception("Unable to create adapter object.");
             }
@@ -130,9 +130,9 @@ namespace VoodooShader
 
             delete config;
         } catch ( std::exception & exc ) {
-            if ( this->mLogger )
+            if ( this->mLogger.get() )
             {
-                this->Log(LL_Error, VOODOO_CORE_NAME, "Error during Core creation: %s", exc.what());
+                mLogger->Log(LL_Error, VOODOO_CORE_NAME, "Error during Core creation: %s", exc.what());
             }
 
             delete config;
@@ -146,22 +146,10 @@ namespace VoodooShader
         this->SetCgContext(NULL);
 
         // Destroy adapter (not sure what it depends on, so handle first)
-        if ( this->mAdapter )
-        {
-            delete this->mAdapter;
-        }
+        this->mAdapter = NULL;
 
-        // Remove hooks
-        if ( this->mHooker )
-        {
-            delete this->mHooker;
-        }
-
-        // Kill logger
-        if ( this->mLogger )
-        {
-            delete this->mLogger;
-        }
+        this->mHooker = NULL;
+        this->mLogger = NULL;
 
         mModManager = NULL;
     }
@@ -173,11 +161,11 @@ namespace VoodooShader
 
     void Core::SetCgContext(CGcontext context)
     {
-        this->Log(LL_Debug, VOODOO_CORE_NAME, "Setting Cg context to %p.", context);
+        mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Setting Cg context to %p.", context);
 
         if ( context == NULL )
         {
-            this->Log(LL_Debug, VOODOO_CORE_NAME, "Clearing object cache (null context).");
+            mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Clearing object cache (null context).");
 
             mShaders.clear();
 
@@ -203,47 +191,24 @@ namespace VoodooShader
         return version;
     }
 
-    IAdapter * Core::GetAdapter()
+    IAdapterRef Core::GetAdapter()
     {
         return this->mAdapter;
     }
 
-    IHookManager * Core::GetHookManager()
+    IHookManagerRef Core::GetHookManager()
     {
         return mHooker;
+    }
+
+    ILoggerRef Core::GetLogger()
+    {
+        return mLogger;
     }
 
     ModuleManagerRef Core::GetModuleManager()
     {
         return mModManager;
-    }
-
-    void Core::Log(LogLevel level, const char * module, const char * msg, ...)
-    {
-        if ( this->mLogger )
-        {
-            va_list arglist;
-            va_start(arglist, msg);
-
-            this->mLogger->LogList(level, module, msg, arglist);
-
-            va_end(arglist);
-
-#ifdef _DEBUG
-            this->mLogger->Dump();
-#endif
-        }
-    }
-    
-    void Core::LogModule
-    (
-        _In_ Version version
-    )
-    {
-        if ( this->mLogger )
-        {
-            this->mLogger->LogModule(version);
-        }
     }
 
     TextureRef Core::AddTexture(String name, void * data)
@@ -256,7 +221,7 @@ namespace VoodooShader
             TextureRef texture(new Texture(name, data));
             this->mTextures[name] = texture;
 
-            this->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s with data %p, returning shared pointer to %p.", name.c_str(), data, texture.get());
+            mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s with data %p, returning shared pointer to %p.", name.c_str(), data, texture.get());
 
             return texture;
         }
@@ -274,7 +239,7 @@ namespace VoodooShader
             ShaderRef newShader(new Shader(this, filename, args));
             this->mShaders[filename] = newShader;
 
-            this->Log(LL_Debug, VOODOO_CORE_NAME, "Created shader from %s, returning shared pointer to %p.", filename.c_str(), newShader.get());
+            mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Created shader from %s, returning shared pointer to %p.", filename.c_str(), newShader.get());
 
             return newShader;
         }
@@ -290,7 +255,7 @@ namespace VoodooShader
             ParameterRef parameter(new Parameter(this, name, type));
             mParameters[name] = parameter;
 
-            this->Log(LL_Debug, VOODOO_CORE_NAME, "Created parameter named %s with type %s, returning shared pointer to %p.", name.c_str(), Converter::ToString(type), parameter.get());
+            mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Created parameter named %s with type %s, returning shared pointer to %p.", name.c_str(), Converter::ToString(type), parameter.get());
 
             return parameter;
         }
@@ -301,11 +266,11 @@ namespace VoodooShader
         TextureMap::iterator textureEntry = this->mTextures.find(name);
         if ( textureEntry != this->mTextures.end() )
         {
-            this->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", name.c_str(), textureEntry->second.get());
+            mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", name.c_str(), textureEntry->second.get());
 
             return textureEntry->second;
         } else {
-            this->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", name.c_str());
+            mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", name.c_str());
             return TextureRef();
         }
     }
@@ -379,7 +344,7 @@ namespace VoodooShader
 
             if ( errorString )
             {
-                me->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
+                me->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
                 if ( context && error != CG_INVALID_CONTEXT_HANDLE_ERROR )
                 {
                     if ( me->mAdapter )
@@ -392,14 +357,14 @@ namespace VoodooShader
                     
                     while ( listing )
                     {
-                        me->Log(LL_Error, VOODOO_CG_NAME, "Cg error details: %s", listing);
+                        me->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg error details: %s", listing);
                         listing = cgGetLastListing(context);
                     }
                 } else {
-                    me->Log(LL_Error, VOODOO_CG_NAME, "Invalid context for error, no further data available.");
+                    me->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Invalid context for error, no further data available.");
                 }
             } else {
-                me->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported an unknown error (%d)", error);
+                me->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported an unknown error (%d).", error);
             }            
         }
     }

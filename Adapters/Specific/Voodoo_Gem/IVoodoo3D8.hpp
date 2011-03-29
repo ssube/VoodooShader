@@ -113,7 +113,7 @@ public:
     {
         HRESULT hr = mRealObject->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d",
             Adapter, DeviceType, AdapterFormat, RenderTargetFormat, 
             DepthStencilFormat, hr);
 
@@ -132,7 +132,7 @@ public:
     {
         HRESULT hr = mRealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d",
             Adapter, DeviceType, AdapterFormat, Usage, RType, 
             CheckFormat, hr);
 
@@ -154,7 +154,7 @@ public:
     {
         HRESULT hr = mRealObject->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -176,7 +176,7 @@ public:
     {
         HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -228,7 +228,7 @@ public:
             VoodooShader::Gem::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
             );
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Backbuffer parameters for new device: %u by %u (%u buffers), %s.",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "Backbuffer parameters for new device: %u by %u (%u buffers), %s.",
             mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight, 
             mpPresentationParameters.BackBufferCount, textureType);
 #endif
@@ -236,7 +236,7 @@ public:
         IDirect3DDevice9 * mRealDevice;
         HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &mRealDevice);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -246,7 +246,7 @@ public:
 
         if ( !SUCCEEDED(hr) )
         {
-            VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CreateDevice failed with error %d on adapter %d.",
+            VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CreateDevice failed with error %d on adapter %d.",
                 hr, Adapter);
             return hr;
         } else {
@@ -271,7 +271,7 @@ public:
     {
         HRESULT hr = mRealObject->EnumAdapterModes(Adapter, D3DFMT_X8R8G8B8, Mode, pMode);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -286,7 +286,7 @@ public:
     {
         UINT r = mRealObject->GetAdapterCount();
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -305,7 +305,7 @@ public:
     {
         HRESULT hr = mRealObject->GetAdapterDisplayMode(Adapter, pMode);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -332,7 +332,7 @@ public:
 
         HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -363,7 +363,7 @@ public:
     {
         UINT r = mRealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -381,7 +381,7 @@ public:
     {
         HMONITOR hm = mRealObject->GetAdapterMonitor(Adapter);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -408,7 +408,7 @@ public:
         D3DCAPS9 realCaps;
         HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -432,7 +432,7 @@ public:
     {
         HRESULT hr = mRealObject->RegisterSoftwareDevice(pInitializeFunction);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -440,7 +440,7 @@ public:
             pInitializeFunction, hr
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Warning, 
             VOODOO_GEM_NAME, 

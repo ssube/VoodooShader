@@ -142,6 +142,10 @@ namespace VoodooShader
     typedef std::shared_ptr<Texture>            TextureRef;
     typedef std::weak_ptr<Texture>              TexturePtr;
 
+    typedef std::shared_ptr<IAdapter>           IAdapterRef;
+    typedef std::shared_ptr<IHookManager>       IHookManagerRef;
+    typedef std::shared_ptr<ILogger>            ILoggerRef;
+
     /**
      * Collection types for most common objects. These provide
      * specialized containers and save typing.

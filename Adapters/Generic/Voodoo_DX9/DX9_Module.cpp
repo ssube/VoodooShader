@@ -342,7 +342,7 @@ VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
     // Voodoo DX9 Init function
     VoodooCore = VoodooShader::Core::Create("Voodoo_DX9.log");
 
-    VoodooCore->Log("Voodoo DX9: Direct3DCreate9 called, SDK version: %d.\n", version);
+    VoodooLogger->Log("Voodoo DX9: Direct3DCreate9 called, SDK version: %d.\n", version);
 
     //Load the real d3d8 dll and get device caps
     char Path[MAX_PATH];
@@ -354,7 +354,7 @@ VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
 
     if (!d3d9func) 
     {
-        VoodooCore->Log("Voodoo DX9: Could not find D3D9 create true func.\n");
+        VoodooLogger->Log("Voodoo DX9: Could not find D3D9 create true func.\n");
         return 0;
     }
 
@@ -363,7 +363,7 @@ VOODOO_API_DX9 void * __stdcall Voodoo3DCreate9(UINT version)
 
     if ( !object )
     {
-        VoodooCore->Log("Voodoo DX9: Direct3DCreate9 returned null.\n");
+        VoodooLogger->Log("Voodoo DX9: Direct3DCreate9 returned null.\n");
     }
 
     // Turn it into a FakeObject and return it.

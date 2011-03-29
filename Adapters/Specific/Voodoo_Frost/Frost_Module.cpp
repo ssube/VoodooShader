@@ -3,6 +3,7 @@
 #include "Frost_Adapter.hpp"
 
 VoodooShader::Core * VoodooCore = NULL;
+VoodooShader::ILoggerRef VoodooLogger = NULL;
 VoodooShader::Frost::Adapter * VoodooFrost = NULL;
 VoodooShader::ShaderRef TestShader;
 

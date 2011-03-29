@@ -3,18 +3,19 @@
 #include "Converter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
+#include "Logger.hpp"
 #include "Shader.hpp"
 
 namespace VoodooShader
 {
     Parameter::Parameter(Core * core, String name, ParameterType type)
-        : mType(type), mParent(NULL), mVirtual(true), mCore(core)
+        : mType(type), mParent(NULL), mVirtual(true), mCore(core), mName(name)
     { 
-        mCore->Log(LL_Debug, VOODOO_CORE_NAME, "Creating a virtual parameter (%s, core %p) of type %s.", name.c_str(), core, Converter::ToString(type));
+        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Creating a virtual parameter (%s, core %p) of type %s.", name.c_str(), core, Converter::ToString(type));
         
         CGcontext context = mCore->GetCgContext();
 
-        if ( context && cgIsContext(context) )
+        if ( !context || !cgIsContext(context) )
         {
             throw std::exception("Unable to create parameter (core has no context).");
         }
@@ -50,6 +51,7 @@ namespace VoodooShader
         : mParent(parent), mParam(param), mVirtual(false), mCore(parent->GetCore())
     {
         mType = Converter::ToParameterType(cgGetParameterType(param));
+        mName = cgGetParameterName(param);
 
         switch ( this->mType )
         {
@@ -74,6 +76,8 @@ namespace VoodooShader
 
     Parameter::~Parameter()
     {
+        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying parameter %s.", mName.c_str());
+
         if ( mVirtual && cgIsParameter(mParam) )
         {
             cgDestroyParameter(mParam);
@@ -83,19 +87,13 @@ namespace VoodooShader
     String Parameter::GetName()
     {
         String name;
+
         if ( mParent )
         {
-            name += this->mParent->GetName();
+            name = this->mParent->GetName();
         }
 
-        name += ":";
-
-        if ( cgIsParameter(mParam) )
-        {
-            name += cgGetParameterName(this->mParam);
-        } else {
-            name += "[invalid_param]";
-        }
+        name += ":" + mName;
 
         return name;
     }
@@ -199,7 +197,7 @@ namespace VoodooShader
     {
         if ( mCore )
         {
-            mCore->Log(LL_Debug, VOODOO_CORE_NAME, "Force updating parameter %s.", this->GetName().c_str());
+            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Force updating parameter %s.", this->GetName().c_str());
         }
 
         switch ( mType )
@@ -224,7 +222,7 @@ namespace VoodooShader
         case PT_Sampler3D:
             if ( mCore )
             {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Warning, 
                     VOODOO_CORE_NAME, 
@@ -237,7 +235,7 @@ namespace VoodooShader
         default:
             if ( mCore )
             {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,

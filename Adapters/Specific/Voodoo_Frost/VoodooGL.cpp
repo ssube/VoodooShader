@@ -25,7 +25,7 @@ void GLAPIENTRY vglBegin(GLenum mode)
         materials.unbind()
     */
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -50,7 +50,7 @@ void GLAPIENTRY vglBegin(GLenum mode)
  */
 void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 {
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -89,7 +89,7 @@ void GLAPIENTRY vglClear(GLbitfield mask)
         shaderFlip()
     */
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -107,7 +107,7 @@ void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
         gMaterials.remove(i);
     */
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -122,7 +122,7 @@ void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const G
 {
     // gThisFrame.DrawnGeometry = true
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -139,7 +139,7 @@ void GLAPIENTRY vglEnable(GLenum cap)
     if ( cap == GL_FOG && !gUseFog ) return;
     */
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -152,7 +152,7 @@ void GLAPIENTRY vglEnable(GLenum cap)
 
 void GLAPIENTRY vglEnd()
 {
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -164,7 +164,7 @@ void GLAPIENTRY vglEnd()
 
 void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
 {
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -184,7 +184,7 @@ void GLAPIENTRY vglFogf(GLenum pname, GLfloat param)
         param = param * gFogMultEnd;
     */
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -199,7 +199,7 @@ const GLubyte * GLAPIENTRY vglGetString(GLenum name)
 {
     const GLubyte * result = glGetString(name);
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -214,7 +214,7 @@ void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
 {
     // VoodooFrost->SetViewport(x, y, width, height)
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -229,7 +229,7 @@ HGLRC WINAPI vwglCreateContext(HDC hdc)
 {
     HGLRC result = wglCreateContext(hdc);
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -250,7 +250,7 @@ BOOL WINAPI vwglDeleteContext(HGLRC hglrc)
 
     BOOL result = wglDeleteContext(hglrc);
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -265,7 +265,7 @@ PROC WINAPI vwglGetProcAddress(LPCSTR name)
 {
     PROC result = wglGetProcAddress(name);
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -280,7 +280,7 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 {
     BOOL result = wglMakeCurrent(hdc, hglrc);
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,
@@ -295,7 +295,7 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
         GLenum glewStatus = glewInit();
         if ( glewStatus != GLEW_OK )
         {
-            VoodooCore->Log(LL_Error, VOODOO_FROST_NAME, "Unable to initialize GLEW (code %u).", glewStatus);
+            VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "Unable to initialize GLEW (code %u).", glewStatus);
 
             return result;
         }
@@ -337,7 +337,7 @@ BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
 
     BOOL result = wglSwapLayerBuffers(hdc, uint);
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Debug,
         VOODOO_FROST_NAME,

@@ -107,7 +107,7 @@ public:
         HRESULT hr = mRealObject->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d\n",
             Adapter,DeviceType, AdapterFormat, RenderTargetFormat, 
             DepthStencilFormat, hr);
 #endif
@@ -128,7 +128,7 @@ public:
         HRESULT hr = mRealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d\n",
             Adapter, DeviceType, AdapterFormat, Usage, RType, 
             CheckFormat, hr);
 #endif
@@ -152,7 +152,7 @@ public:
         HRESULT hr = mRealObject->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d\n",
             Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, 
             hr);
 #endif    
@@ -172,7 +172,7 @@ public:
         HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
 #ifdef _DEBUG 
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::CheckDeviceType(%d, %d, %d, %d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::CheckDeviceType(%d, %d, %d, %d, %d) == %d\n",
             Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed, 
             hr);
 #endif
@@ -219,7 +219,7 @@ public:
             VoodooShader::DirectX89::DX89_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
             );
 
-        VoodooCore->Log("Voodoo DX8.9: Backbuffer parameters for new device: %d by %d (%d buffers), %s.\n",
+        VoodooLogger->Log("Voodoo DX8.9: Backbuffer parameters for new device: %d by %d (%d buffers), %s.\n",
             mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight, 
             mpPresentationParameters.BackBufferCount, textureType);
 #endif
@@ -228,14 +228,14 @@ public:
         HRESULT hr = mRealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &mRealDevice);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::CreateDevice(%d, %d, %d, %d, %d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::CreateDevice(%d, %d, %d, %d, %d, %d) == %d\n",
             Adapter, DeviceType, hFocusWindow, BehaviorFlags, 
             &mpPresentationParameters, mRealDevice, hr);
 #endif
 
         if ( !SUCCEEDED(hr) )
         {
-            VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::CreateDevice failed with error %d on adapter %d.\n",
+            VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::CreateDevice failed with error %d on adapter %d.\n",
                 hr, Adapter);
             return hr;
         } else {
@@ -251,9 +251,9 @@ public:
 
             if ( SUCCEEDED(hrt) )
             {
-                VoodooCore->Log("Voodoo DX8.9: Cached backbuffer surface.\n");
+                VoodooLogger->Log("Voodoo DX8.9: Cached backbuffer surface.\n");
             } else {
-                VoodooCore->Log("Voodoo DX8.9: Failed to retrieve backbuffer surface.\n");
+                VoodooLogger->Log("Voodoo DX8.9: Failed to retrieve backbuffer surface.\n");
             }
 
             texture_ThisFrame = VoodooDX89->CreateTexture(":thisframe", 
@@ -265,9 +265,9 @@ public:
                 hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
                 if ( SUCCEEDED(hrt) )
                 {
-                    VoodooCore->Log("Voodoo DX8.9: Cached :thisframe surface.\n");
+                    VoodooLogger->Log("Voodoo DX8.9: Cached :thisframe surface.\n");
                 } else {
-                    VoodooCore->Log("Voodoo DX8.9: Failed to :thisframe scratch surface.\n");
+                    VoodooLogger->Log("Voodoo DX8.9: Failed to :thisframe scratch surface.\n");
                 }
             }
 
@@ -276,7 +276,7 @@ public:
                 testShader = VoodooCore->CreateShader("test.cgfx", NULL);
                 testShader->Link();
             } catch ( std::exception & exc ) {
-                VoodooCore->Log("Voodoo DX8.9: Error loading shader: %s", exc.what());
+                VoodooLogger->Log("Voodoo DX8.9: Error loading shader: %s", exc.what());
             }
 
             return hr;
@@ -293,7 +293,7 @@ public:
         HRESULT hr = mRealObject->EnumAdapterModes(Adapter, D3DFMT_X8R8G8B8, Mode, pMode);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::EnumAdapterModes(%d, %d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::EnumAdapterModes(%d, %d, %d) == %d\n",
             Adapter, Mode, pMode, hr);
 #endif
 
@@ -305,7 +305,7 @@ public:
         UINT r = mRealObject->GetAdapterCount();
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterCount() == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterCount() == %d\n",
             r);
 #endif
 
@@ -321,7 +321,7 @@ public:
         HRESULT hr = mRealObject->GetAdapterDisplayMode(Adapter, pMode);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterDisplayMode(%d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterDisplayMode(%d, %d) == %d\n",
             Adapter, pMode, hr);
 #endif
 
@@ -345,7 +345,7 @@ public:
         HRESULT hr = mRealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d\n",
             Adapter, Flags, pIdentifier, hr);
 #endif
 
@@ -373,7 +373,7 @@ public:
         UINT r = mRealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterModeCount(%d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterModeCount(%d) == %d\n",
             Adapter, r);
 #endif
 
@@ -388,7 +388,7 @@ public:
         HMONITOR hm = mRealObject->GetAdapterMonitor(Adapter);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterMonitor(%d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::GetAdapterMonitor(%d) == %d\n",
             Adapter, hm);
 #endif
 
@@ -411,7 +411,7 @@ public:
         HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
             Adapter, DeviceType, pCaps, hr);
 #endif
 
@@ -437,7 +437,7 @@ public:
         HRESULT hr = mRealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d\n",
             Adapter, DeviceType, pCaps, hr);
 #endif
 
@@ -445,9 +445,9 @@ public:
 
         if ( same == 0 )
         {
-            VoodooCore->Log("Voodoo DX8.9: D3D8 and 9 caps are identical.\n"); 
+            VoodooLogger->Log("Voodoo DX8.9: D3D8 and 9 caps are identical.\n"); 
         } else {
-            VoodooCore->Log("Voodoo DX8.9: Caps differ.\n");
+            VoodooLogger->Log("Voodoo DX8.9: Caps differ.\n");
         }
 
         return D3D_OK;
@@ -469,10 +469,10 @@ public:
         HRESULT hr = mRealObject->RegisterSoftwareDevice(pInitializeFunction);
 
 #ifdef _DEBUG
-        VoodooCore->Log("Voodoo DX8.9: IVoodoo3D8::RegisterSoftwareDevice(%d) == %d\n",
+        VoodooLogger->Log("Voodoo DX8.9: IVoodoo3D8::RegisterSoftwareDevice(%d) == %d\n",
             pInitializeFunction, hr);
 #else
-        VoodooCore->Log("Voodoo DX8.9: The application has registered a software device.\n");
+        VoodooLogger->Log("Voodoo DX8.9: The application has registered a software device.\n");
 #endif
 
         return hr;

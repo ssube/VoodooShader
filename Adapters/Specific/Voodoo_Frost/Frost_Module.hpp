@@ -38,6 +38,7 @@ namespace VoodooShader
 }
 
 extern VoodooShader::Core * VoodooCore;
+extern VoodooShader::ILoggerRef VoodooLogger;
 extern VoodooShader::Frost::Adapter * VoodooFrost;
 extern VoodooShader::ShaderRef TestShader;
 

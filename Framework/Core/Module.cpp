@@ -2,6 +2,7 @@
 
 #include "Core.hpp"
 #include "Exception.hpp"
+#include "Logger.hpp"
 #include "Object.hpp"
 
 namespace VoodooShader
@@ -20,6 +21,8 @@ namespace VoodooShader
 
     ModuleRef ModuleManager::LoadModule( _In_ String name )
     {
+        ILoggerRef logger = mCore->GetLogger();
+
         // Build the full path
         String path;
         if ( name[0] == '.' )
@@ -42,13 +45,16 @@ namespace VoodooShader
 
         if ( rawmodule == NULL )
         {
-            mCore->Log
-            (
-                LL_Error,
-                VOODOO_CORE_NAME,
-                "Unable to load module %s.",
-                path.c_str()
-            );
+            if ( logger.get() )
+            {
+                logger->Log
+                (
+                    LL_Error,
+                    VOODOO_CORE_NAME,
+                    "Unable to load module %s.",
+                    path.c_str()
+                );
+            }
 
             return NULL;
         }
@@ -57,7 +63,10 @@ namespace VoodooShader
         mModules[path] = module;
 
         // Register classes from module
-        mCore->LogModule(module->ModuleVersion());
+        if ( logger.get() )
+        {
+            logger->LogModule(module->ModuleVersion());
+        }
 
         int classCount = module->ClassCount();
         for ( int curClass = 0; curClass < classCount; ++curClass )
@@ -87,6 +96,7 @@ namespace VoodooShader
 
     IObject * ModuleManager::CreateClass( _In_ String name )
     {
+        ILoggerRef logger = mCore->GetLogger();
         ClassMap::iterator classiter = mClasses.find(name);
 
         if ( classiter != mClasses.end() )
@@ -102,20 +112,31 @@ namespace VoodooShader
 
                     if ( object == NULL )
                     {
-                        mCore->Log(LL_Error, VOODOO_CORE_NAME, "Error creating instance of class %s.", name.c_str());
+                        if ( logger.get() )
+                        {
+                            logger->Log(LL_Error, VOODOO_CORE_NAME, "Error creating instance of class %s.", name.c_str());
+                        }
                     }
-
                     return object;
                 } catch ( std::exception & exc ) {
-                    mCore->Log(LL_Error, VOODOO_CORE_NAME, "Error creating class %s: %s", name.c_str(), exc.what());
+                    if ( logger.get() )
+                    {
+                        logger->Log(LL_Error, VOODOO_CORE_NAME, "Error creating class %s: %s", name.c_str(), exc.what());
+                    }
                     return NULL;
                 }
-            } else {
-                mCore->Log(LL_Error, VOODOO_CORE_NAME, "Unable to lock module (possibly unloaded) for class %s.", name.c_str());
+                } else {
+                    if ( logger.get() )
+                    {
+                        logger->Log(LL_Error, VOODOO_CORE_NAME, "Unable to lock module (possibly unloaded) for class %s.", name.c_str());
+                    }
                 return NULL;
             }
         } else {
-            mCore->Log(LL_Error, VOODOO_CORE_NAME, "Class %s not found.", name.c_str());
+            if ( logger.get() )
+            {
+                 logger->Log(LL_Error, VOODOO_CORE_NAME, "Class %s not found.", name.c_str());
+            }
             return NULL;
         }
     }

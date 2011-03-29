@@ -41,7 +41,7 @@ public:
     IVoodoo3DTexture8(IVoodoo3DDevice8 * device, IDirect3DTexture9 * texture)
         : mDevice(device), mRealTexture(texture)
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_DX89_NAME,

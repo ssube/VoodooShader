@@ -47,7 +47,7 @@ public:
     IVoodoo3DTexture8(IVoodoo3DDevice8 * device, IDirect3DTexture9 * texture)
         : mDevice(device), mRealTexture(texture), mName(gLastFilename)
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             VoodooShader::LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -215,7 +215,7 @@ public:
             (*ppSurfaceLevel) = (IDirect3DSurface8*)newSurface;
         }
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             VoodooShader::LL_Debug, 
             VOODOO_GEM_NAME, 

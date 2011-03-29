@@ -287,6 +287,7 @@ namespace VoodooShader
     private:
         Shader * mParent;
         Core * mCore;
+        String mName;
 
         bool mVirtual;
         CGparameter mParam;

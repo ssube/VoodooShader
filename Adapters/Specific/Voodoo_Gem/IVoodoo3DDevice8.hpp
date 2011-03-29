@@ -66,7 +66,7 @@ public:
     IVoodoo3DDevice8(IDirect3DDevice9 * realDevice, D3DPRESENT_PARAMETERS pp)
         : mRealDevice(realDevice), mParams(pp)
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -87,7 +87,7 @@ public:
 
     ~IVoodoo3DDevice8()
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -115,7 +115,7 @@ public:
         ULONG refCount = mRealDevice->AddRef();
 
 #ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::AddRef() == %d",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::AddRef() == %d",
         refCount);
 #endif
 
@@ -140,7 +140,7 @@ public:
     {
         UNREFERENCED_PARAMETER(Token);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::ApplyStateBlock == UNUSED");
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::ApplyStateBlock == UNUSED");
 
         return DefaultErrorCode;
     }
@@ -149,7 +149,7 @@ public:
     {
         HRESULT hr = mRealDevice->BeginScene();
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug, 
             VOODOO_GEM_NAME, 
@@ -164,7 +164,7 @@ public:
     {
         HRESULT hr = mRealDevice->BeginStateBlock();
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::BeginStateBlock() == %d",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::BeginStateBlock() == %d",
             hr);
 
         return hr;
@@ -174,7 +174,7 @@ public:
     {
         UNREFERENCED_PARAMETER(Token);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::CaptureStateBlock == UNUSED");
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::CaptureStateBlock == UNUSED");
 
         return DefaultErrorCode;
     }
@@ -191,7 +191,7 @@ public:
     {
         HRESULT hr = mRealDevice->Clear(Count, pRects, Flags, Color, Z, Stencil);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -209,7 +209,7 @@ public:
     {
         HRESULT hr = mRealDevice->TestCooperativeLevel();
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -227,7 +227,7 @@ public:
     {
         UINT mem = mRealDevice->GetAvailableTextureMem();
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -243,7 +243,7 @@ public:
         DWORD Bytes
     )
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -261,7 +261,7 @@ public:
     {
         (*ppD3D8) = (IDirect3D8*)VoodooObject;
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetDirect3D(%p) == D3D_OK",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetDirect3D(%p) == D3D_OK",
         *ppD3D8);
 
         return D3D_OK;
@@ -276,7 +276,7 @@ public:
 
         HRESULT hr = mRealDevice->GetDeviceCaps(&rCaps);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -300,7 +300,7 @@ public:
         HRESULT hr = mRealDevice->GetDisplayMode(0, pMode);
 
 #ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetDisplayMode(%p) == %d",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetDisplayMode(%p) == %d",
         pMode, hr);
 #endif
 
@@ -315,7 +315,7 @@ public:
         HRESULT hr = mRealDevice->GetCreationParameters(pParameters);
 
 #ifdef _DEBUG
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetCreationParameters(%p) == %d",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetCreationParameters(%p) == %d",
         pParameters, hr);
 #endif
 
@@ -333,7 +333,7 @@ public:
 
         HRESULT hr = mRealDevice->SetCursorProperties(XHotSpot, YHotSpot, rCursor->RealSurface());
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -353,7 +353,7 @@ public:
     {
         mRealDevice->SetCursorPosition(X, Y, Flags);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetCursorPosition(%d, %d, %u)",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetCursorPosition(%d, %d, %u)",
         X, Y, Flags);
     }
 
@@ -364,7 +364,7 @@ public:
     {
         BOOL show = mRealDevice->ShowCursor(bShow);
 
-        VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::ShowCursor(%d) == %d",
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::ShowCursor(%d) == %d",
         bShow, show);
 
         return show;
@@ -382,7 +382,7 @@ public:
             (IDirect3DSwapChain9**)pSwapChain
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -400,7 +400,7 @@ public:
     {
         HRESULT hr = mRealDevice->Reset((D3DPRESENT_PARAMETERS*)pPresentationParameters);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -425,7 +425,7 @@ public:
 
             if ( FAILED(shr) )
             {
-                VoodooCore->Log(LL_Debug, VOODOO_GEM_NAME, "Failed to stretch backbuffer to :thisframe texture.");
+                VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "Failed to stretch backbuffer to :thisframe texture.");
             }
 
             VoodooGem->DrawShader(testShader);
@@ -434,7 +434,7 @@ public:
         // Present call
         HRESULT hr = mRealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -455,7 +455,7 @@ public:
         IDirect3DSurface9 * rBackbuffer;
         HRESULT hr = mRealDevice->GetBackBuffer(0, BackBuffer, Type, &rBackbuffer);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -479,7 +479,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetRasterStatus(0, pRasterStatus);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -498,7 +498,7 @@ public:
     {
         mRealDevice->SetGammaRamp(0, Flags, pRamp);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -516,7 +516,7 @@ public:
     {
         mRealDevice->GetGammaRamp(0, pRamp);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -560,7 +560,7 @@ public:
         // That failed, create as a standard texture
         if ( FAILED(hr) )
         {
-            VoodooCore->Log
+            VoodooLogger->Log
             (
                 LL_Warning, 
                 VOODOO_GEM_NAME, 
@@ -575,7 +575,7 @@ public:
             );
         }
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -614,7 +614,7 @@ public:
             Pool, &rTexture, NULL
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -649,7 +649,7 @@ public:
             &rTexture, NULL
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -680,7 +680,7 @@ public:
             Length, Usage, FVF, Pool, (IDirect3DVertexBuffer9**)ppVertexBuffer, NULL
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -705,7 +705,7 @@ public:
             Length, Usage, Format, Pool, (IDirect3DIndexBuffer9**)ppIndexBuffer, NULL
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -739,7 +739,7 @@ public:
             Width, Height, Format, MultiSample, 0, Lockable, &rSurface, NULL
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -772,7 +772,7 @@ public:
             Width, Height, Format, MultiSample, 0, 0, &rSurface, NULL
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -812,7 +812,7 @@ public:
             Width, Height, Format, D3DPOOL_DEFAULT, &rSurface, NULL
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -857,7 +857,7 @@ public:
             wSource->RealSurface(), pSourceRectsArray,
             wDest->RealSurface(), pSourceRectsArray, D3DTEXF_NONE);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -882,7 +882,7 @@ public:
             wSource->RealTexture(), wDest->RealTexture()
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -901,7 +901,7 @@ public:
         IDirect3DSurface8 * pDestSurface
     )
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -928,7 +928,7 @@ public:
         HRESULT hr  = mRealDevice->SetRenderTarget(0, wRender->RealSurface());
                 hr |= mRealDevice->SetDepthStencilSurface(wStencil->RealSurface());
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -947,7 +947,7 @@ public:
         IDirect3DSurface9 * rRenderTarget;
         HRESULT hr = mRealDevice->GetRenderTarget(0, &rRenderTarget);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -972,7 +972,7 @@ public:
         IDirect3DSurface9 * rZStencilSurface;
         HRESULT hr = mRealDevice->GetDepthStencilSurface(&rZStencilSurface);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -993,7 +993,7 @@ public:
     {
         HRESULT hr = mRealDevice->EndScene();
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1012,7 +1012,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetTransform(State, pMatrix);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1051,7 +1051,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetTransform(State, pMatrix);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1070,7 +1070,7 @@ public:
     {
         HRESULT hr = mRealDevice->MultiplyTransform(State, pMatrix);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1096,7 +1096,7 @@ public:
                 mRealDevice->GetTransform(State, matrix);
                 //matrix = D3DXMatrixMultiply(NULL, (const D3DXMATRIX*)matrix, pMatrix);
             } else {
-                VoodooCore->Log
+                VoodooLogger->Log
                 (
                     LL_Info,
                     VOODOO_GEM_NAME,
@@ -1116,7 +1116,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetViewport((CONST D3DVIEWPORT9 *)pViewport);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1134,7 +1134,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetViewport((D3DVIEWPORT9*)pViewport);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1152,7 +1152,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetMaterial((CONST D3DMATERIAL9*) pMaterial);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1170,7 +1170,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetMaterial((D3DMATERIAL9*) pMaterial);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1189,7 +1189,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetLight(Index, (CONST D3DLIGHT9*)Light);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1208,7 +1208,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetLight(Index, (D3DLIGHT9*)Light);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1227,7 +1227,7 @@ public:
     {
         HRESULT hr = mRealDevice->LightEnable(Index, Enable);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1246,7 +1246,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetLightEnable(Index, pEnable);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1265,7 +1265,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetClipPlane(Index, pPlane);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1284,7 +1284,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetClipPlane(Index, pPlane);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1303,7 +1303,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetRenderState(State, Value);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1322,7 +1322,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetRenderState(State, pValue);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1343,7 +1343,7 @@ public:
         DWORD * pToken
     )
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1362,7 +1362,7 @@ public:
         DWORD Token
     )
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1383,7 +1383,7 @@ public:
         DWORD * pToken
     )
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1401,7 +1401,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetClipStatus((CONST D3DCLIPSTATUS9*)pClipStatus);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1419,7 +1419,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetClipStatus((D3DCLIPSTATUS9*)pClipStatus);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1439,7 +1439,7 @@ public:
         IDirect3DBaseTexture9 * rTexture;
         HRESULT hr = mRealDevice->GetTexture(Stage, &rTexture);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1472,7 +1472,7 @@ public:
             hr = mRealDevice->SetTexture(Stage, NULL);
         }
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1492,7 +1492,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetTextureStageState(Stage, Type, pValue);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1512,7 +1512,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetTextureStageState(Stage, Type, Value);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1530,7 +1530,7 @@ public:
     {
         HRESULT hr = mRealDevice->ValidateDevice(pNumPasses);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1551,7 +1551,7 @@ public:
         DWORD DevInfoStructSize
     )
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1570,7 +1570,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetPaletteEntries(PaletteNumber, pEntries);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1589,7 +1589,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetPaletteEntries(PaletteNumber, pEntries);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1607,7 +1607,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetCurrentTexturePalette(PaletteNumber);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1625,7 +1625,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetCurrentTexturePalette(PaletteNumber);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1645,7 +1645,7 @@ public:
     {
         HRESULT hr = mRealDevice->DrawPrimitive(PrimitiveType, StartVertex, PrimitiveCount);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1668,7 +1668,7 @@ public:
     {
         HRESULT hr = mRealDevice->DrawIndexedPrimitive(PrimitiveType, mLastBaseIndex, minIndex, NumVertices, startIndex, primCount);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1689,7 +1689,7 @@ public:
     {
         HRESULT hr = mRealDevice->DrawPrimitiveUP(PrimitiveType, PrimitiveCount, pVertexStreamZeroData, VertexStreamZeroStride);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1718,7 +1718,7 @@ public:
             IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1744,7 +1744,7 @@ public:
             SrcStartIndex, DestIndex, VertexCount,(IDirect3DVertexBuffer9*)pDestBuffer, NULL, Flags
         );
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1765,7 +1765,7 @@ public:
     {
         HRESULT hr = mRealDevice->CreateVertexShader(pFunction, (IDirect3DVertexShader9**)pHandle);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1797,7 +1797,7 @@ public:
             hr = mRealDevice->SetVertexShader((IDirect3DVertexShader9*)Handle);
         }
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1815,7 +1815,7 @@ public:
     {
         (*pHandle) = mCurrentVertexShader;
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1844,7 +1844,7 @@ public:
             hr = D3DERR_INVALIDCALL;
         }
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1864,7 +1864,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetVertexShaderConstantF(Register, (const float*)pConstantData, ConstantCount);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1884,7 +1884,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetVertexShaderConstantF(Register, (float*)pConstantData, ConstantCount);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1902,7 +1902,7 @@ public:
         DWORD * pSizeOfData
     )
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1920,7 +1920,7 @@ public:
         DWORD * pSizeOfData
     )
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1944,7 +1944,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetStreamSource(StreamNumber,(IDirect3DVertexBuffer9*)pStreamData, 0, Stride);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1971,7 +1971,7 @@ public:
         UINT offset;
         HRESULT hr = mRealDevice->GetStreamSource(StreamNumber,(IDirect3DVertexBuffer9**)ppStreamData, &offset, pStride);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -1991,7 +1991,7 @@ public:
         HRESULT hr = mRealDevice->SetIndices((IDirect3DIndexBuffer9*)pIndexData);
         mLastBaseIndex = BaseVertexIndex;
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2011,7 +2011,7 @@ public:
         HRESULT hr = mRealDevice->GetIndices((IDirect3DIndexBuffer9**) ppIndexData);
         (*pBaseVertexIndex) = mLastBaseIndex;
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2030,7 +2030,7 @@ public:
     {
         HRESULT hr = mRealDevice->CreatePixelShader(pFunction, (IDirect3DPixelShader9**)pHandle);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2062,7 +2062,7 @@ public:
             hr = mRealDevice->SetPixelShader((IDirect3DPixelShader9*)Handle);
         }
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2085,7 +2085,7 @@ public:
     {
         (*pHandle) = mCurrentPixelShader;
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2110,7 +2110,7 @@ public:
             //hr = D3DERR_INVALIDCALL;
         }
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2130,7 +2130,7 @@ public:
     {
         HRESULT hr = mRealDevice->SetPixelShaderConstantF(Register, (float*)pConstantData, ConstantCount);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2150,7 +2150,7 @@ public:
     {
         HRESULT hr = mRealDevice->GetPixelShaderConstantF(Register, (float*)pConstantData, ConstantCount);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2170,7 +2170,7 @@ public:
     {
         //HRESULT hr = mRealDevice->GetPixelShaderFunction(Handle,void* pData,DWORD* pSizeOfData);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2190,7 +2190,7 @@ public:
     {
         HRESULT hr = mRealDevice->DrawRectPatch(Handle, pNumSegs, pRectPatchInfo);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2210,7 +2210,7 @@ public:
     {
         HRESULT hr = mRealDevice->DrawTriPatch(Handle, pNumSegs, pTriPatchInfo);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,
@@ -2228,7 +2228,7 @@ public:
     {
         HRESULT hr = mRealDevice->DeletePatch(Handle);
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,

@@ -115,9 +115,9 @@ public:
 
             if ( SUCCEEDED(hrt) )
             {
-                VoodooCore->Log("Voodoo DX9: Cached backbuffer surface.\n");
+                VoodooLogger->Log("Voodoo DX9: Cached backbuffer surface.\n");
             } else {
-                VoodooCore->Log("Voodoo DX9: Failed to retrieve backbuffer surface.\n");
+                VoodooLogger->Log("Voodoo DX9: Failed to retrieve backbuffer surface.\n");
             }
 
             texture_ThisFrame = VoodooDX9->CreateTexture(":thisframe", 
@@ -129,9 +129,9 @@ public:
                 hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
                 if ( SUCCEEDED(hrt) )
                 {
-                    VoodooCore->Log("Voodoo DX9: Cached :thisframe surface.\n");
+                    VoodooLogger->Log("Voodoo DX9: Cached :thisframe surface.\n");
                 } else {
-                    VoodooCore->Log("Voodoo DX9: Failed to :thisframe scratch surface.\n");
+                    VoodooLogger->Log("Voodoo DX9: Failed to :thisframe scratch surface.\n");
                 }
             }
 
@@ -140,7 +140,7 @@ public:
                 testShader = VoodooCore->CreateShader("test.cgfx", NULL);
                 testShader->Link();
             } catch ( std::exception & exc ) {
-                VoodooCore->Log("Voodoo DX9: Error loading shader: %s.", exc.what());
+                VoodooLogger->Log("Voodoo DX9: Error loading shader: %s.", exc.what());
             }
         }
 

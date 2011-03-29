@@ -20,6 +20,7 @@
 \**************************************************************************************************/
 
 #include "Meta.hpp"
+#include "Object.hpp"
 
 namespace VoodooShader
 {
@@ -119,28 +120,6 @@ namespace VoodooShader
             _In_ const char * module,
             _In_ _Printf_format_string_ const char * msg, 
             ...
-        ) = 0;
-
-        /**
-         * Logs a msg and list of arguments.
-         * 
-         * @note This generally shouldn't be called directly, it is provided
-         *        for wrappers (such as the Core, which hides the logger object).
-         *
-         * @param level The level for this message.
-         * @param module The logging module's name.
-         * @param msg The message format string.
-         * @param args The arguments to insert.
-         *
-         * @warning This function has a maximum (formatted) message length of
-         *        4096 characters. This can be changed if it becomes an issue.
-         */
-        virtual void LogList
-        (
-            _In_ LogLevel level,
-            _In_ const char * module,
-            _In_ const char * msg, 
-            _In_ va_list args
         ) = 0;
 
         /**

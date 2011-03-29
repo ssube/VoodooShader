@@ -31,7 +31,7 @@ using namespace VoodooShader;
  */
 void CameraHack()
 {
-    VoodooCore->Log(LL_Info, VOODOO_FROST_NAME, "Applying camera hack...");
+    VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Applying camera hack...");
 
     float maxDist    =  120.0f;
     float minDist    =   -0.2f;
@@ -51,11 +51,11 @@ void CameraHack()
 
         VirtualProtect( (PVOID)0x004A9000, 0x1000, oldProtect, &finalProtect);
 
-        VoodooCore->Log(LL_Info, VOODOO_FROST_NAME, "Camera hack successfully applied.");
+        VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Camera hack successfully applied.");
     } else {
         DWORD error = GetLastError();
         
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Error,
             VOODOO_FROST_NAME,

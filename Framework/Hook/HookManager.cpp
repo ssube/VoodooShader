@@ -71,14 +71,14 @@ namespace VoodooShader
 
             LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
 
-            mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", mThreadCount);
+            mCore->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", mThreadCount);
         }
 
         HookManager::~HookManager()
         {
             this->RemoveAllHooks();
 
-            mCore->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
+            mCore->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
 
             delete mThreadIDs;
         }
@@ -102,7 +102,7 @@ namespace VoodooShader
                 );
             }
 
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Debug, 
                 VOODOO_HOOK_NAME,
@@ -116,7 +116,7 @@ namespace VoodooShader
 
             if ( ( result != 0 ) || ( hookHandle == NULL ) )
             {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Error,
                     VOODOO_HOOK_NAME,
@@ -138,7 +138,7 @@ namespace VoodooShader
         {
             HookMap::iterator hook = mHooks.find(name);
 
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_HOOK_NAME,
@@ -155,7 +155,7 @@ namespace VoodooShader
 
                 if ( result != 0 )
                 {
-                    mCore->Log
+                    mCore->GetLogger()->Log
                     (
                         LL_Error,
                         VOODOO_HOOK_NAME,

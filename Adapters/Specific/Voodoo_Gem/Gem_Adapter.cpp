@@ -13,9 +13,8 @@ namespace VoodooShader
         Adapter::Adapter(Core * core)
             : mCore(core), mDevice(NULL), mQuadVerts(NULL), mBoundFP(NULL), mBoundVP(NULL)
         {
-            mCore->Log(LL_Info, VOODOO_GEM_NAME, "Starting adapter...");
-
             VoodooCore = mCore;
+            VoodooLogger = mCore->GetLogger();
             VoodooGem = this;
 
             // Get the handles to the needed hook modules
@@ -24,35 +23,18 @@ namespace VoodooShader
             {
                 char procpath[MAX_PATH];
                 GetModuleFileName(procmodule, procpath, MAX_PATH);
-                mCore->Log(LL_Info, VOODOO_GEM_NAME, "Gem loaded into process \"%s\".", procpath);
+                mCore->GetLogger()->Log(LL_Info, VOODOO_GEM_NAME, "Gem loaded into process \"%s\".", procpath);
             }
 
             void * d3d8hookpoint = mCore->GetModuleManager()->FindFunction("d3d8.dll", "Direct3DCreate8");
             if ( d3d8hookpoint )
             {
-                IHookManager * hooker = mCore->GetHookManager();
+                IHookManagerRef hooker = mCore->GetHookManager();
                 hooker->CreateHook("d3d8create", d3d8hookpoint, &Gem_D3D8Create);
                 hooker->CreateHook("createfile", &CreateFileA, &Gem_CreateFileA);
             } else {
-                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Unable to find D3D8 hook point; adapter will most likely not run.");
+                mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Unable to find D3D8 hook point; adapter will most likely not run.");
             }
-
-            // Init Cg
-            this->mCgContext = cgCreateContext();
-
-            if ( !cgIsContext(this->mCgContext) )
-            {
-                throw std::exception("Unable to create Cg context.");
-            }
-
-            cgSetContextBehavior(mCgContext, CG_BEHAVIOR_LATEST);
-            cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
-            cgSetErrorHandler(&(Core::CgErrorHandler), this);
-
-            cgSetAutoCompile(mCgContext, CG_COMPILE_IMMEDIATE);
-            cgSetParameterSettingMode(mCgContext, CG_IMMEDIATE_PARAMETER_SETTING);
-
-            mCore->SetCgContext(context);
         }
 
         Adapter::~Adapter()
@@ -98,12 +80,30 @@ namespace VoodooShader
 
             mDevice->AddRef(); // Make sure it won't be released while we're using it
 
+            // Init Cg
+            this->mCgContext = cgCreateContext();
+
+            if ( !cgIsContext(this->mCgContext) )
+            {
+                throw std::exception("Unable to create Cg context.");
+            }
+
+            cgSetContextBehavior(mCgContext, CG_BEHAVIOR_LATEST);
+            cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
+            cgSetErrorHandler(&(Core::CgErrorHandler), this);
+
+            cgSetAutoCompile(mCgContext, CG_COMPILE_IMMEDIATE);
+            cgSetParameterSettingMode(mCgContext, CG_IMMEDIATE_PARAMETER_SETTING);
+
+            mCore->SetCgContext(mCgContext);
+
+            // Init CgD3D9
             HRESULT hr = cgD3D9SetDevice(mDevice);
             if ( !SUCCEEDED(hr) )
             {
                 Throw(VOODOO_GEM_NAME, "Could not set Cg device.", mCore);
             } else {
-                mCore->Log(LL_Debug, VOODOO_GEM_NAME, "Set Cg device.");
+                mCore->GetLogger()->Log(LL_Debug, VOODOO_GEM_NAME, "Set Cg device.");
             }
 
 #ifdef _DEBUG
@@ -118,16 +118,16 @@ namespace VoodooShader
             HRESULT errors = cgD3D9GetLastError();
             if ( !SUCCEEDED(errors) )
             {
-                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Errors setting Cg states.");
+                mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Errors setting Cg states.");
             } else {
-                mCore->Log(LL_Debug, VOODOO_GEM_NAME, "Cg states set successfully.");
+                mCore->GetLogger()->Log(LL_Debug, VOODOO_GEM_NAME, "Cg states set successfully.");
             }
 
             // Setup profiles
             CGprofile bestFrag = cgD3D9GetLatestPixelProfile();
             CGprofile bestVert = cgD3D9GetLatestVertexProfile();
 
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Info,
                 VOODOO_GEM_NAME,
@@ -135,11 +135,12 @@ namespace VoodooShader
                 cgGetProfileString(bestVert), cgGetProfileString(bestFrag)
             );
 
+            // Setup resources
             // Get params
             float fx = (float)gParams.BackBufferWidth;
             float fy = (float)gParams.BackBufferHeight;
 
-            mCore->Log(LL_Debug, VOODOO_GEM_NAME, "Prepping for %f by %f target.", fx, fy);
+            mCore->GetLogger()->Log(LL_Debug, VOODOO_GEM_NAME, "Prepping for %f by %f target.", fx, fy);
 
             hr = this->mDevice->CreateVertexBuffer(4 * sizeof(StandardQuadVert), 0, D3DFVF_CUSTOMVERTEX,
                 D3DPOOL_DEFAULT, &mQuadVerts, NULL);
@@ -148,7 +149,7 @@ namespace VoodooShader
 
             if ( FAILED(hr) )
             {
-                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to create vertex buffer.");
+                mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Failed to create vertex buffer.");
             }
 
             StandardQuadVert g_Vertices[4];
@@ -178,9 +179,9 @@ namespace VoodooShader
 
             if ( SUCCEEDED(hrt) )
             {
-                mCore->Log(LL_Debug, VOODOO_GEM_NAME, "Cached backbuffer surface.");
+                mCore->GetLogger()->Log(LL_Debug, VOODOO_GEM_NAME, "Cached backbuffer surface.");
             } else {
-                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to retrieve backbuffer surface.");
+                mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Failed to retrieve backbuffer surface.");
             }
 
             TextureDesc stdtex = { gParams.BackBufferWidth, gParams.BackBufferHeight, 1, true, VoodooShader::TF_RGB8 };
@@ -194,16 +195,16 @@ namespace VoodooShader
                 hrt = texture->GetSurfaceLevel(0, &surface);
                 if ( SUCCEEDED(hrt) )
                 {
-                    mCore->Log(LL_Debug, VOODOO_GEM_NAME, "Cached :thisframe surface.");
+                    mCore->GetLogger()->Log(LL_Debug, VOODOO_GEM_NAME, "Cached :thisframe surface.");
                 } else {
-                    mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to :thisframe scratch surface.");
+                    mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Failed to :thisframe scratch surface.");
                 }
 
                 gThisFrame.Texture = thisframeTex;
                 gThisFrame.RawTexture = texture;
                 gThisFrame.RawSurface = surface;
             } else {
-                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to create :scratch texture.");
+                mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Failed to create :scratch texture.");
             }
 
             TextureRef scratchTex = this->CreateTexture(":scratch", stdtex);
@@ -215,16 +216,16 @@ namespace VoodooShader
                 hrt = texture->GetSurfaceLevel(0, &surface);
                 if ( SUCCEEDED(hrt) )
                 {
-                    mCore->Log(LL_Debug, VOODOO_GEM_NAME, "Cached :scratch surface.");
+                    mCore->GetLogger()->Log(LL_Debug, VOODOO_GEM_NAME, "Cached :scratch surface.");
                 } else {
-                    mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to cache :scratch surface.");
+                    mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Failed to cache :scratch surface.");
                 }
 
                 gScratch.Texture = scratchTex;
                 gScratch.RawTexture = texture;
                 gScratch.RawSurface = surface;
             } else {
-                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to create :scratch texture.");
+                mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Failed to create :scratch texture.");
             }
 
             // Create the global matrix parameters
@@ -237,15 +238,17 @@ namespace VoodooShader
                 testShader = mCore->CreateShader("test.cgfx", NULL);
                 testShader->Link();
             } catch ( std::exception & exc ) {
-                mCore->Log(LL_Error, VOODOO_GEM_NAME, "Error loading test shader: %s", exc.what());
+                mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Error loading test shader: %s", exc.what());
             }
         }
 
         bool Adapter::LoadPass(Pass * pass)
         {
+            ILoggerRef logger = this->mCore->GetLogger();
+
             if ( pass == NULL )
             {
-                this->mCore->Log
+                logger->Log
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
@@ -258,7 +261,7 @@ namespace VoodooShader
             CGprogram vertProg = pass->GetProgram(PS_Vertex);
             CGprogram fragProg = pass->GetProgram(PS_Fragment);
 
-            this->mCore->Log
+            logger->Log
             (
                 LL_Debug, 
                 VOODOO_GEM_NAME, 
@@ -273,7 +276,7 @@ namespace VoodooShader
                 hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
                 if ( !SUCCEEDED(hr) )
                 {
-                    this->mCore->Log
+                    logger->Log
                     (
                         LL_Warning,
                         VOODOO_GEM_NAME, 
@@ -290,7 +293,7 @@ namespace VoodooShader
                 hr = cgD3D9LoadProgram(fragProg, CG_TRUE, 0);
                 if ( !SUCCEEDED(hr) )
                 {
-                    this->mCore->Log
+                    logger->Log
                     (
                         LL_Warning,
                         VOODOO_GEM_NAME, 
@@ -302,7 +305,7 @@ namespace VoodooShader
                 }
             }
 
-            this->mCore->Log
+            logger->Log
             (
                 LL_Debug,
                 VOODOO_GEM_NAME,
@@ -315,9 +318,11 @@ namespace VoodooShader
 
         bool Adapter::UnloadPass(Pass * pass)
         {
+            ILoggerRef logger = this->mCore->GetLogger();
+
             if ( pass == NULL )
             {
-                this->mCore->Log
+                logger->Log
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
@@ -330,7 +335,7 @@ namespace VoodooShader
             CGprogram vertProg = pass->GetProgram(PS_Vertex);
             CGprogram fragProg = pass->GetProgram(PS_Fragment);
 
-            this->mCore->Log
+            logger->Log
             (
                 LL_Debug, 
                 VOODOO_GEM_NAME, 
@@ -341,7 +346,7 @@ namespace VoodooShader
             HRESULT hr = cgD3D9UnloadProgram(vertProg);
             if ( FAILED(hr) )
             {
-                this->mCore->Log
+                logger->Log
                 (
                     LL_Warning, 
                     VOODOO_GEM_NAME, 
@@ -353,7 +358,7 @@ namespace VoodooShader
             hr = cgD3D9UnloadProgram(fragProg);
             if ( FAILED(hr) )
             {
-                this->mCore->Log
+                logger->Log
                 (
                     LL_Warning, 
                     VOODOO_GEM_NAME, 
@@ -377,7 +382,7 @@ namespace VoodooShader
 
                 if ( !SUCCEEDED(hr) )
                 {
-                    this->mCore->Log
+                    this->mCore->GetLogger()->Log
                     (
                         LL_Error,
                         VOODOO_GEM_NAME,
@@ -399,7 +404,7 @@ namespace VoodooShader
 
                 if ( !SUCCEEDED(hr) )
                 {
-                    this->mCore->Log
+                    this->mCore->GetLogger()->Log
                     (
                         LL_Error,
                         VOODOO_GEM_NAME,
@@ -441,7 +446,7 @@ namespace VoodooShader
         {
             if ( !shader.get() )
             {
-                this->mCore->Log
+                this->mCore->GetLogger()->Log
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
@@ -455,7 +460,7 @@ namespace VoodooShader
 
             if ( FAILED(hr) )
             {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
@@ -469,7 +474,7 @@ namespace VoodooShader
             hr = mDevice->SetRenderTarget(0, gScratch.RawSurface);
             if ( FAILED(hr) )
             {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
@@ -519,7 +524,7 @@ namespace VoodooShader
 
                 if ( FAILED(hr) )
                 {
-                    mCore->Log
+                    mCore->GetLogger()->Log
                     (
                         LL_Error,
                         VOODOO_GEM_NAME,
@@ -578,7 +583,7 @@ namespace VoodooShader
                     this->mDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2); 
                     this->mDevice->EndScene();
                 } else {
-                    mCore->Log(LL_Error, VOODOO_GEM_NAME, "Failed to draw quad.");
+                    mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Failed to draw quad.");
                 }
             } else {
                 // Draw a quad from user vertexes
@@ -588,7 +593,7 @@ namespace VoodooShader
                     hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(StandardQuadVert));
                     if ( !SUCCEEDED(hr) )
                     {
-                        this->mCore->Log(LL_Error, VOODOO_GEM_NAME, "Error drawing user quad.");
+                        this->mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Error drawing user quad.");
                     }
                     this->mDevice->EndScene();
                 }
@@ -603,7 +608,7 @@ namespace VoodooShader
 
         void Adapter::ApplyParameter(ParameterRef param)
         {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_GEM_NAME,
@@ -639,7 +644,7 @@ namespace VoodooShader
                 break;
             case PT_Unknown:
             default:
-                this->mCore->Log
+                this->mCore->GetLogger()->Log
                 (
                     LL_Error,
                     VOODOO_GEM_NAME,
@@ -660,7 +665,7 @@ namespace VoodooShader
                 IDirect3DTexture9 * texObj = texture->GetData<IDirect3DTexture9>();
                 CGparameter texParam = param->GetCgParameter();
                 cgD3D9SetTextureParameter(texParam, texObj);
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Debug,
                     VOODOO_GEM_NAME,
@@ -691,7 +696,7 @@ namespace VoodooShader
                 return texRef;
             } else {
                 const char * error = cgD3D9TranslateHRESULT(hr);
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Error, 
                     VOODOO_GEM_NAME, 
@@ -708,7 +713,7 @@ namespace VoodooShader
             UNREFERENCED_PARAMETER(context);
 
             Core * actualCore = reinterpret_cast<Core*>(core);
-            actualCore->Log(LL_Error, VOODOO_GEM_NAME, "Cg error: %s", cgD3D9TranslateCGerror(error));
+            actualCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Cg error: %s", cgD3D9TranslateCGerror(error));
         }
     }
 }

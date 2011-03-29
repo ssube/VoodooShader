@@ -4,6 +4,7 @@
 #include "Converter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
+#include "Logger.hpp"
 
 namespace VoodooShader
 {
@@ -12,7 +13,7 @@ namespace VoodooShader
     {
         CGcontext context = mCore->GetCgContext();
 
-        if ( context && cgIsContext(context) )
+        if ( !context || !cgIsContext(context) )
         {
             throw std::exception("Unable to create parameter (core has no context).");
         }
@@ -34,6 +35,8 @@ namespace VoodooShader
 
     Shader::~Shader()
     {
+        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying shader %s.", mName.c_str());
+
         mDefaultTechnique = NULL;
         mTechniques.clear();
         mParameters.clear();
@@ -68,18 +71,14 @@ namespace VoodooShader
     {
         String fullname = this->GetName() + ":" + name;
 
-        std::for_each
-        (
-            mParameters.begin(),
-            mParameters.end(),
-            [&](ParameterRef current)
+        for ( ParameterVector::iterator iparam = mParameters.begin(); iparam != mParameters.end(); ++iparam )
+        {
+            ParameterRef param = (*iparam);
+            if ( param->GetName() == fullname )
             {
-                if ( current->GetName() == fullname )
-                {
-                    return current;
-                }
+                return param;
             }
-        );
+        }
 
         return ParameterRef();
     }
@@ -107,12 +106,11 @@ namespace VoodooShader
 
         while ( cgIsParameter(cParam) )
         {
-            const char * name = cgGetParameterName(cParam);
             ParameterRef param(new Parameter(this, cParam));
 
-            this->mParameters[name] = param;
-
             this->LinkParameter(param);
+
+            this->mParameters.push_back(param);
 
             cParam = cgGetNextParameter(cParam);
         }
@@ -127,8 +125,7 @@ namespace VoodooShader
         CGparameter cgparam = param->GetCgParameter();
 
         // Check if it has a global link annotation
-        CGannotation globalAnnotation = cgGetNamedParameterAnnotation(
-                cgparam, "parameter");
+        CGannotation globalAnnotation = cgGetNamedParameterAnnotation(cgparam, "parameter");
 
         if ( cgIsAnnotation(globalAnnotation) && cgGetAnnotationType(globalAnnotation) == CG_STRING )
         {
@@ -140,7 +137,7 @@ namespace VoodooShader
                 {
                     globalParam->Attach(param);
                 } else {
-                    mCore->Log
+                    mCore->GetLogger()->Log
                     (
                         LL_Warning,
                         VOODOO_CORE_NAME, 
@@ -149,7 +146,7 @@ namespace VoodooShader
                     );
                 }
             } else {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME, 
@@ -187,7 +184,7 @@ namespace VoodooShader
                 {
                     mCore->GetAdapter()->ConnectTexture(param, texture);
                 } else {
-                    mCore->Log
+                    mCore->GetLogger()->Log
                     (
                         LL_Warning,
                         VOODOO_CORE_NAME,
@@ -198,7 +195,7 @@ namespace VoodooShader
                     this->CreateParameterTexture(param);
                 }
             } else {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
@@ -207,7 +204,7 @@ namespace VoodooShader
                 );
             }
         } else {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Warning,
                 VOODOO_CORE_NAME,
@@ -223,7 +220,7 @@ namespace VoodooShader
 
         if ( !cgIsParameter(parameter) )
         {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -239,7 +236,7 @@ namespace VoodooShader
 
         if ( !(cgIsAnnotation(atexName) && cgIsAnnotation(atexSize) && cgIsAnnotation(atexFormat) ) )
         {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -254,7 +251,7 @@ namespace VoodooShader
 
         if ( cgGetAnnotationType(atexName) != CG_STRING )
         {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -272,7 +269,7 @@ namespace VoodooShader
 
         if ( texSizeType ==  CG_INT1 )
         {
-            mCore->Log
+            mCore->GetLogger()->Log
              (
                 LL_Debug,
                 VOODOO_CORE_NAME,
@@ -284,7 +281,7 @@ namespace VoodooShader
             texDesc.Width = texDims[0];
             texDesc.Height = texDesc.Depth = 1;
         } else if ( texSizeType == CG_INT2 ) {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_CORE_NAME,
@@ -297,7 +294,7 @@ namespace VoodooShader
             texDesc.Height = texDims[1];
             texDesc.Depth = 1;
         } else if ( texSizeType == CG_INT3 ) {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_CORE_NAME,
@@ -310,7 +307,7 @@ namespace VoodooShader
             texDesc.Height = texDims[1];
             texDesc.Depth = texDims[2];
         } else if ( texSizeType == CG_INT4 ) {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -318,7 +315,7 @@ namespace VoodooShader
                 param->GetName().c_str()
             );        
         } else {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -331,7 +328,7 @@ namespace VoodooShader
 
         if ( cgGetAnnotationType(atexFormat) != CG_STRING )
         {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -345,7 +342,7 @@ namespace VoodooShader
             texDesc.Format = Converter::ToTextureFormat(formatString);
         }
 
-        IAdapter * adapter = mCore->GetAdapter();
+        IAdapterRef adapter = mCore->GetAdapter();
         TextureRef texture = adapter->CreateTexture(texName, texDesc);
         param->Set(texture);
     }
@@ -360,7 +357,7 @@ namespace VoodooShader
 
             if ( valid == CG_TRUE )
             {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Debug,
                     VOODOO_CORE_NAME,
@@ -382,7 +379,7 @@ namespace VoodooShader
 
                 tech->Link();
             } else {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
@@ -501,7 +498,7 @@ namespace VoodooShader
 
                 if ( !this->mTarget.get() )
                 {
-                    mCore->Log
+                    mCore->GetLogger()->Log
                     (
                         LL_Warning,
                         VOODOO_CORE_NAME,
@@ -512,7 +509,7 @@ namespace VoodooShader
                     this->mTarget = mCore->GetTexture(TT_ShaderTarget);
                 }
             } else {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
@@ -523,7 +520,7 @@ namespace VoodooShader
                 this->mTarget = mCore->GetTexture(TT_ShaderTarget);
             }
         } else {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_CORE_NAME,
@@ -636,7 +633,7 @@ namespace VoodooShader
 
                 if ( !this->mTarget.get() )
                 {
-                    mCore->Log
+                    mCore->GetLogger()->Log
                     (
                         LL_Warning,
                         VOODOO_CORE_NAME,
@@ -647,7 +644,7 @@ namespace VoodooShader
                     this->mTarget = mCore->GetTexture(TT_PassTarget);
                 }
             } else {
-                mCore->Log
+                mCore->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
@@ -658,7 +655,7 @@ namespace VoodooShader
                 this->mTarget = mCore->GetTexture(TT_PassTarget);
             }
         } else {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_CORE_NAME,
@@ -670,11 +667,11 @@ namespace VoodooShader
         }
 
         // Load the programs
-        IAdapter * adapter = mCore->GetAdapter();
+        IAdapterRef adapter = mCore->GetAdapter();
 
         if ( !adapter )
         {
-            mCore->Log
+            mCore->GetLogger()->Log
             (
                 LL_Warning,
                 VOODOO_CORE_NAME,
@@ -684,9 +681,9 @@ namespace VoodooShader
         } else {
             if ( !adapter->LoadPass(this) )
             {
-                mCore->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->GetName().c_str());
+                mCore->GetLogger()->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->GetName().c_str());
             } else {
-                mCore->Log(LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->GetName().c_str());
+                mCore->GetLogger()->Log(LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->GetName().c_str());
             }
         }
     }

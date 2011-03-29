@@ -3,7 +3,8 @@
 #include "Adapter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
-
+#include "Logger.hpp"
+ 
 namespace VoodooShader
 {
     FullscreenManager::FullscreenManager(Core * parent)
@@ -86,7 +87,7 @@ namespace VoodooShader
         // hit, but covers a good few errors.
         if ( count < 1 && count != -1 )
         {
-            this->mParent->Log
+            this->mParent->GetLogger()->Log
             (
                 LL_Warning,
                 VOODOO_CORE_NAME, 
@@ -97,18 +98,12 @@ namespace VoodooShader
             return;
         }
 
-        IAdapter * adapter = this->mParent->GetAdapter();
-
-        if ( !adapter )
-        {
-            Throw(VOODOO_CORE_NAME, "Parent Core has no adapter.", this->mParent);
-        }
-
+        IAdapterRef adapter = this->mParent->GetAdapter();
         size_t total = mShaders.size();
 
         if ( start > total )
         {
-            this->mParent->Log
+            this->mParent->GetLogger()->Log
             (
                 LL_Warning,
                 VOODOO_CORE_NAME, 
@@ -128,7 +123,7 @@ namespace VoodooShader
 
             if ( end > total )
             {
-                this->mParent->Log
+                this->mParent->GetLogger()->Log
                 (
                     LL_Warning, 
                     VOODOO_CORE_NAME, 

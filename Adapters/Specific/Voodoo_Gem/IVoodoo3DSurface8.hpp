@@ -38,7 +38,7 @@ public:
     IVoodoo3DSurface8(IVoodoo3DDevice8 * device, IDirect3DSurface9 * realSurface)
         : mRealDevice(device), mRealSurface(realSurface)
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Debug,
             VOODOO_GEM_NAME,

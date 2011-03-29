@@ -137,28 +137,30 @@ namespace VoodooShader
           * @note Whenever you need to load additional modules or use dynamically
           *       loaded classes, load or create them through the module manager.
           *       
-          * @return A pointer to the module manager (always valid).
+          * @return A shared pointer to the module manager (always valid).
           */
          ModuleManagerRef GetModuleManager();
 
         /**
          * Retrieves this core's IHookManager implementation.
-         * 
-         * @note The Core may not have a hook manager created in some rare cases, so
-         *       you do need to check the return value.
-         *       
-         * @return A pointer to the hook manager or NULL if none exists.
+         *        
+         * @return A shared pointer to the hook manager or empty if none exists.
          */
-         _Check_return_
-         IHookManager * GetHookManager();
+         IHookManagerRef GetHookManager();
 
         /**
          * Retrieve the IAdapter attached to this Core.
          *
-         * @return A pointer to the Adapter or NULL if no Adapter is attached.
+         * @return A shared pointer to the adapter or empty if no adapter is attached.
          */
-        _Check_return_
-        IAdapter * GetAdapter();
+        IAdapterRef GetAdapter();
+        
+        /**
+         * Retrieve the ILogger attached to this Core.
+         *
+         * @return A shared pointer to the logger or empty if no logger is attached.
+         */
+        ILoggerRef GetLogger();
 
         void SetCgContext(_In_opt_ CGcontext context);
 
@@ -172,43 +174,6 @@ namespace VoodooShader
          */
         _Check_return_
         CGcontext GetCgContext();
-
-        /**
-         * Writes a string to the log file using standard printf syntax.
-         * 
-         * @note In debug builds, this calls ILogger::Log() followed immediately by
-         *       ILogger::Dump() to help ensure data makes it to disk. Most loggers should
-         *       not use internal buffers in debug builds.
-         * 
-         * @param level The level for this message.
-         * @param module The logging module's name.
-         * @param msg The format string to use
-         * @param ... Parameters to insert
-         * 
-         */
-        void Log
-        (
-            _In_ LogLevel level,
-            _In_ const char * module, 
-            _In_ _Printf_format_string_ const char * msg, 
-            ...
-        );
-
-        /**
-         * Writes formatted module version info to the log file. This may be used to
-         * log the version of a loaded module.
-         * 
-         * @note This is automatically called by the ModuleManager when it loads a module
-         *       and usually doesn't need to be called from within the module itself. If
-         *       the module needs to load another module, just use the ModuleManager and
-         *       logging will be handled again.
-         *       
-         * @param version The version info to be logged.
-         */
-        void LogModule
-        (
-            _In_ Version version
-        );
 
         /**
          * Create a new shader effect from a file, or copies the effect if the
@@ -386,17 +351,17 @@ namespace VoodooShader
         /**
          * The currently bound (active) IAdapter implementation.
          */
-        IAdapter * mAdapter;
+        IAdapterRef mAdapter;
 
         /**
          * The current ILogger implementation.
          */
-        ILogger * mLogger;
+        ILoggerRef mLogger;
 
         /**
          * The current IHookManager implementation.
          */
-        IHookManager * mHooker;
+        IHookManagerRef mHooker;
 
         /**
          * The current module manager.

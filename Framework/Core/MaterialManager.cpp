@@ -45,7 +45,7 @@ namespace VoodooShader
 
     void MaterialManager::Bind(TextureRef texture)
     {
-        IAdapter * adapter = this->mParent->GetAdapter();
+        IAdapterRef adapter = this->mParent->GetAdapter();
 
         if ( !adapter )
         {
@@ -89,7 +89,7 @@ namespace VoodooShader
     {
         if ( this->mBound.get() )
         {
-            IAdapter * adapter = this->mParent->GetAdapter();
+            IAdapterRef adapter = this->mParent->GetAdapter();
 
             if ( !adapter )
             {

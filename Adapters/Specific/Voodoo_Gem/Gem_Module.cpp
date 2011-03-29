@@ -8,6 +8,7 @@
 HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 
 VoodooShader::Core * VoodooCore = NULL;
+VoodooShader::ILoggerRef VoodooLogger = NULL;
 VoodooShader::IHookManager * VoodooHooker = NULL;
 VoodooShader::Gem::Adapter * VoodooGem = NULL;
 
@@ -84,7 +85,7 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
 
     //return fakeObject;
 
-    VoodooCore->Log
+    VoodooLogger->Log
     (
         LL_Info,
         VOODOO_GEM_NAME,
@@ -101,7 +102,7 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
 
     if ( d3ddll == NULL )
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Fatal,
             VOODOO_GEM_NAME,
@@ -116,7 +117,7 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
 
     if (d3d8func == NULL) 
     {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Fatal, 
             VOODOO_GEM_NAME, 
@@ -130,7 +131,7 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
     HRESULT hr = TempObject->GetDeviceCaps(0, D3DDEVTYPE_HAL, &d3d8Caps);
     if (hr != D3D_OK) 
     { 
-        VoodooCore->Log
+        VoodooLogger->Log
             (
             LL_Error,
             VOODOO_GEM_NAME,
@@ -173,7 +174,7 @@ __out HANDLE WINAPI Gem_CreateFileA
         std::tr1::regex imageformat(".*\\.(dds|tga|bmp|targa)");
         gNextTexture = std::tr1::regex_match(gLastFilename, imageformat);
     } catch ( std::tr1::regex_error & error ) {
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             LL_Error,
             VOODOO_GEM_NAME,
@@ -187,7 +188,7 @@ __out HANDLE WINAPI Gem_CreateFileA
     {
         LogLevel ll = ( file == INVALID_HANDLE_VALUE ) ? LL_Warning_API : LL_Info_API;
 
-        VoodooCore->Log
+        VoodooLogger->Log
         (
             ll,
             VOODOO_GEM_NAME,

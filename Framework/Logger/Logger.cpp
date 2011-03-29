@@ -221,17 +221,12 @@ namespace VoodooShader
 
         void XmlLogger::Log(LogLevel level, const char * module, const char * msg, ...)
         {
+            if ( level < mLogLevel ) return;
+            if ( !this->mLogFile.is_open() ) return;
+
             va_list args;
 
             va_start(args, msg);
-            this->LogList(level, module, msg, args);
-            va_end(args);
-        }
-
-        void XmlLogger::LogList(LogLevel level, const char * module, const char * msg, va_list args)
-        {
-            if ( level < mLogLevel ) return;
-            if ( !this->mLogFile.is_open() ) return;
 
             char buffer[4096];
 
@@ -242,6 +237,8 @@ namespace VoodooShader
             this->LogTime();
             this->LogTicks();
             this->mLogFile << " source=\"" << module << "\">" << buffer << "</Message>\n";
+
+            va_end(args);
         }
 
         void XmlLogger::Dump()

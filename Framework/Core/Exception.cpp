@@ -1,6 +1,7 @@
 #include "Exception.hpp"
 
 #include "Core.hpp"
+#include "Logger.hpp"
 
 namespace VoodooShader
 {
@@ -17,13 +18,17 @@ namespace VoodooShader
     {
         if ( core )
         {
-            core->Log
-            (
-                LL_Error, 
-                module, 
-                "Exception in %s at %s (%d): %s",
-                file, function, line, message
-            );
+            ILoggerRef logger = core->GetLogger();
+            if ( logger.get() )
+            {
+                logger->Log
+                (
+                    LL_Error, 
+                    module, 
+                    "Exception in %s at %s (%d): %s",
+                    file, function, line, message
+                );
+            }
         }
     }
 
@@ -40,13 +45,25 @@ namespace VoodooShader
     {
         if ( core )
         {
-            core->Log
-            (
-                LL_Error, 
-                module.c_str(), 
-                "Exception in %s at %s (%d): %s", 
-                file, function, line, message.c_str()
-            );
+            ILoggerRef logger = core->GetLogger();
+            if ( logger.get() )
+            {
+                logger->Log
+                (
+                    LL_Error, 
+                    module.c_str(), 
+                    "Exception in %s at %s (%d): %s",
+                    file, function, line, message.c_str()
+                );
+            }
+        }
+    }
+
+    Exception::~Exception()
+    {
+        if ( mFmtMsg )
+        {
+            delete mFmtMsg;
         }
     }
 

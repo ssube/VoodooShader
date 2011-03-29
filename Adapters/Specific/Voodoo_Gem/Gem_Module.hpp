@@ -90,6 +90,7 @@ extern HRESULT DefaultErrorCode;
 extern D3DCAPS8 d3d8Caps;
 
 extern VoodooShader::Core * VoodooCore;
+extern VoodooShader::ILoggerRef VoodooLogger;
 extern VoodooShader::Gem::Adapter * VoodooGem;
 
 extern IVoodoo3D8 * VoodooObject;
