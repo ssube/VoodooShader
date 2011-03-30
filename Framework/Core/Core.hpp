@@ -38,16 +38,17 @@ namespace VoodooShader
     /**
      * Creates a new core. This function is exported and meant for use by the loader.
      * 
-     * @param path The base path to use for this core. Acts as the root for all modules and
+     * @param globalroot The base path to use for this core. Acts as the root for all modules and
      *        resources.
+     * @param localroot The local base path, used for some resources.
      * @return A new Core object.
      * @throws std::exception in case of errors.
      */
     _Check_return_
     VOODOO_API Core * CreateCore
     (
-        _In_ const char * path,
-        _In_ const char * startdir
+        _In_ const char * globalroot,
+        _In_ const char * localroot
     );
         
     /**
@@ -72,36 +73,26 @@ namespace VoodooShader
     {
     public:
         /**
-        * Create a new Voodoo Core and associated Cg context.
-        *          
-        * @param path The base path to use for this core. Acts as the root for all modules and
-        *        resources.
-        * @return A reference to the new core.
-        *
-        * @note You can not call this function externally, you must call CreateCore() instead.
-        * 
-        * @todo Test multi-core/multi-adapter systems. If anyone has info or knows of a 
-        *       game/app that uses multiple D3D/OGL render contexts, please let me know.
-        */
+         * Create a new Voodoo Core and associated Cg context.
+         *          
+         * @param globalroot The base path to use for this core. Acts as the root for all modules and
+         *        resources.
+         * @param localroot The local base path, used for some resources.
+         * @return A new core.
+         * @throws std::exception in case of errors.
+         *
+         * @note You can not call this function externally, you must call CreateCore() instead.
+         */
         Core
         (
-            _In_ const char * path,
-            _In_ const char * startdir
+            _In_ const char * globalroot,
+            _In_ const char * localroot
         );
 
         /**
-         * Destroys the associated Cg context, unloads addon modules and cleans up
-         * resources created by this core. 
-         * 
-         * @warning Destroying a Core will invalidate any dynamically created classes, 
-         *          shaders or other Cg-dependent objects, remove hooks and generally
-         *          break things. This is usually called when Voodoo is unloading or
-         *          the runtime is done using this Core and/or adapter.
-         *          
-         * @bug The call to cgDestroyContext() within this can cause a crash. Not
-         *      sure why, but it only happens when there are outstanding resources.
-         *      Additional resource cleanup has been implemented throughout Voodoo,
-         *      test fully. This is a segfault on exit, causing a fatal crash.
+         * Releases all references to modules and objects held by the core, including shaders,
+         * textures, parameters, etc. This may cause the destruction of objects and unloading
+         * of modules. It should not invalidate loaded resources that are held in other locations.
          */
         ~Core();
 
@@ -129,7 +120,9 @@ namespace VoodooShader
          *       
          * @return The core's base path.
          */
-        String GetBasePath();
+        String GetGlobalRoot();
+
+        String GetLocalRoot();
 
          /**
           * Retrieves this core's module manager.
@@ -147,6 +140,13 @@ namespace VoodooShader
          * @return A shared pointer to the hook manager or empty if none exists.
          */
          IHookManagerRef GetHookManager();
+
+         /**
+          * Retrieves this core's IFileSystem implementation.
+          * 
+          * @return A shared pointer to the filesystem or empty if none exists.
+          */
+         IFileSystemRef GetFileSystem();
 
         /**
          * Retrieve the IAdapter attached to this Core.
@@ -362,6 +362,11 @@ namespace VoodooShader
          * The current IHookManager implementation.
          */
         IHookManagerRef mHooker;
+
+        /**
+         * The current IFileSystem implementation.
+         */
+        IFileSystemRef mFileSystem;
 
         /**
          * The current module manager.

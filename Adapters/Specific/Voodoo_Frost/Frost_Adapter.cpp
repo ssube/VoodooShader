@@ -11,7 +11,7 @@ namespace VoodooShader
             : mCore(core), mDC(NULL), mGLRC(NULL), mCgContext(NULL)
         {
             VoodooCore = mCore;
-            VoodooLogger = mCore->GetLogger();
+            VoodooLogger = mLogger = mCore->GetLogger();
             VoodooFrost = this;
 
             // Get the handles to the needed hook modules
@@ -21,24 +21,24 @@ namespace VoodooShader
                 char procpath[MAX_PATH];
                 GetModuleFileName(procmodule, procpath, MAX_PATH);
                 
-                VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Frost loaded into process \"%s\".", procpath);
+                mLogger->Log(LL_Info, VOODOO_FROST_NAME, "Frost loaded into process \"%s\".", procpath);
 
                 char * pos = strrchr(procpath, '\\');
                 if ( pos != NULL )
                 {
                     if ( strcmp(pos+1, "nwmain.exe") != 0 )
                     {
-                        VoodooLogger->Log(LL_Warning, VOODOO_FROST_NAME, "The process does not appear to be the engine. Frost will not run.");
+                        mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "The process does not appear to be the engine. Frost will not run.");
                         return;
                     }
                 }
             } else {
-                VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "Unable to find target module. Frost will not run.");
+                mLogger->Log(LL_Error, VOODOO_FROST_NAME, "Unable to find target module. Frost will not run.");
 
                 return;
             }
 
-            VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "Beginning OpenGL hook procedure.");
+            mLogger->Log(LL_Debug, VOODOO_FROST_NAME, "Beginning OpenGL hook procedure.");
 
             IHookManagerRef hooker = mCore->GetHookManager();
             bool success = true;
@@ -72,18 +72,18 @@ namespace VoodooShader
             // Check the results and handle
             if ( success )
             {
-                VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "OpenGL hooked successfully.");
+                mLogger->Log(LL_Info, VOODOO_FROST_NAME, "OpenGL hooked successfully.");
             } else {
-                VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "OpenGL hook procedure failed.");
+                mLogger->Log(LL_Error, VOODOO_FROST_NAME, "OpenGL hook procedure failed.");
                 return;
             }
 
-            VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Frost adapter initialized.");
+            mLogger->Log(LL_Info, VOODOO_FROST_NAME, "Frost adapter initialized.");
         }
 
         Adapter::~Adapter()
         {
-            //VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Frost adapter shutdown.");
+            mLogger->Log(LL_Info, VOODOO_FROST_NAME, "Frost adapter shutdown.");
         }
 
         // IObject
@@ -176,7 +176,7 @@ namespace VoodooShader
                 GLuint textureID = (GLuint)param->GetTexture()->GetData();
                 cgGLSetupSampler(cgparam, textureID);
             } else {
-                VoodooLogger->Log(LL_Warning, VOODOO_FROST_NAME, "Unable to apply parameter %s.", param->GetName().c_str());
+                mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "Unable to apply parameter %s.", param->GetName().c_str());
             }
         }
 
@@ -184,7 +184,7 @@ namespace VoodooShader
         {
             if ( shader.get() == NULL )
             {
-                VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "Unable to draw null shader.");
+                mLogger->Log(LL_Error, VOODOO_FROST_NAME, "Unable to draw null shader.");
                 return;
             }
 
@@ -192,7 +192,7 @@ namespace VoodooShader
 
             if ( tech.get() == NULL )
             {
-                VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "No default technique given for shader %s.", shader->GetName().c_str());
+                mLogger->Log(LL_Error, VOODOO_FROST_NAME, "No default technique given for shader %s.", shader->GetName().c_str());
                 return;
             }
 
@@ -232,15 +232,15 @@ namespace VoodooShader
             GLenum error =  glGetError();
             while ( error != GL_NO_ERROR )
             {
-                VoodooLogger->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
+                mLogger->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
                 error =  glGetError();
             }
 
             if ( glIsTexture(texture) )
             {
-                VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "OpenGL texture %u created successfully.", texture);
+                mLogger->Log(LL_Debug, VOODOO_FROST_NAME, "OpenGL texture %u created successfully.", texture);
             } else {
-                VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "OpenGL create failed, returned texture %u.", texture);
+                mLogger->Log(LL_Debug, VOODOO_FROST_NAME, "OpenGL create failed, returned texture %u.", texture);
             }
 
             glBindTexture(GL_TEXTURE_2D, texture);
@@ -250,7 +250,7 @@ namespace VoodooShader
             error =  glGetError();
             while ( error != GL_NO_ERROR )
             {
-                VoodooLogger->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
+                mLogger->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
                 error =  glGetError();
             }
 
@@ -259,6 +259,7 @@ namespace VoodooShader
 
         bool Adapter::ConnectTexture( _In_ ParameterRef param, _In_ TextureRef texture )
         {
+            param->Set(texture);
             cgGLSetupSampler(param->GetCgParameter(), (GLuint)texture->GetData());
             return true;
         }
@@ -268,11 +269,10 @@ namespace VoodooShader
             UNREFERENCED_PARAMETER(context);
             UNREFERENCED_PARAMETER(core);
 
-            VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "Received Cg error %u: %s", error, cgGetErrorString(error));
+            mLogger->Log(LL_Error, VOODOO_FROST_NAME, "Received Cg error %u: %s", error, cgGetErrorString(error));
         }
 
         // Frost
-
         void Adapter::SetDC(_In_opt_ HDC hdc)
         {
             mDC = hdc;

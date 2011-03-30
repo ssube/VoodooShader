@@ -10,7 +10,7 @@ namespace VoodooShader
     ModuleManager::ModuleManager( _In_ Core * core )
         : mCore(core)
     {
-        mBasePath = mCore->GetBasePath() + "bin\\";
+        mBasePath = mCore->GetGlobalRoot() + "bin\\";
     }
 
     ModuleManager::~ModuleManager()
@@ -116,7 +116,10 @@ namespace VoodooShader
                         {
                             logger->Log(LL_Error, VOODOO_CORE_NAME, "Error creating instance of class %s.", name.c_str());
                         }
+                    } else {
+                        object->mSourceModule = module;
                     }
+
                     return object;
                 } catch ( std::exception & exc ) {
                     if ( logger.get() )

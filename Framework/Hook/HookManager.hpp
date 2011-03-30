@@ -70,9 +70,9 @@ namespace VoodooShader
             /**
              * Removes all hooks and cleans up the HookManager.
              */
-            virtual ~HookManager();
+            ~HookManager();
 
-            virtual const char * GetObjectClass();
+            const char * GetObjectClass();
         
             /**
              * Install a single hook at the specified point. This will only affect the
@@ -90,7 +90,7 @@ namespace VoodooShader
              *        things might happen. This is only a bother with member functions, but
              *        can be worked around relatively easily.
              */
-            virtual bool CreateHook
+            bool CreateHook
             (
                 _In_ std::string name, 
                 _In_ void * src, 
@@ -109,7 +109,7 @@ namespace VoodooShader
              *        the process to crash in rare cases. I'm not sure the reason, but it's
              *        not good. Until I replace EasyHook, be careful!
              */
-            virtual bool RemoveHook
+            bool RemoveHook
             (
                 _In_ std::string name
             );
@@ -117,7 +117,7 @@ namespace VoodooShader
             /**
              * Removes all hooks created with this HookManager.
              */
-            virtual void RemoveAllHooks();
+            void RemoveAllHooks();
 
         private:
             Core * mCore;

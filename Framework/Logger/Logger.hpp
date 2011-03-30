@@ -91,9 +91,9 @@ namespace VoodooShader
             /** 
              * Default destructor, flushes and closes the log file (if open).
              */
-            virtual ~XmlLogger();
+            ~XmlLogger();
 
-            virtual const char * GetObjectClass();
+            const char * GetObjectClass();
 
             /**
              * Opens a file for use by this Logger.
@@ -103,7 +103,7 @@ namespace VoodooShader
              * @param append Flag specifying the open mode; if true, any existing log is truncated.
              * @return Success of the open operation.
              */
-            virtual bool Open
+            bool Open
             (
                 _In_ const char * filename, 
                 _In_ bool append
@@ -112,7 +112,7 @@ namespace VoodooShader
             /**
              * Closes the log file, if one is open.
              */
-            virtual void Close();
+            void Close();
 
             /**
              * Set the default minimum message level. Messages below this level will
@@ -120,7 +120,7 @@ namespace VoodooShader
              *
              * @param level The minimum log level.
              */
-            virtual void SetLogLevel
+            void SetLogLevel
             (
                 _In_ LogLevel level
             );
@@ -133,7 +133,7 @@ namespace VoodooShader
              * @note If the system time cannot be retrieved, an error stamp of
              *          <code>000000</code> will be printed with an equal length.
              */
-            virtual void LogTime();
+            void LogTime();
 
             /**
              * Writes a formatted date to the log. The date will have the
@@ -143,14 +143,14 @@ namespace VoodooShader
              * @note If the system time cannot be retrieved, an error stamp of
              *          <code>00000000</code> will be printed with an equal length.
              */
-            virtual void LogDate();
+            void LogDate();
 
             /**
              * Writes a formatted tick to the log. The stamp will have the
              * form <code>xxxxxxxxx</code>, with a potentially varying length. This
              * records ticks (usually ms since system start).
              */
-            virtual void LogTicks();
+            void LogTicks();
 
             /**
              * Writes a module stamp to the log. This records the name and version
@@ -159,7 +159,7 @@ namespace VoodooShader
              * 
              * @param module The module version info to log.
              */
-            virtual void LogModule
+            void LogModule
             (
                 _In_ Version module
             );
@@ -175,7 +175,7 @@ namespace VoodooShader
              * @warning This function has a maximum (formatted) message length of
              *        4096 characters. This can be changed if it becomes an issue.
              */
-            virtual void Log
+            void Log
             (
                 _In_ LogLevel level,
                 _In_ const char * module,
@@ -191,7 +191,7 @@ namespace VoodooShader
              *        This may have a notable performance hit, but makes debug 
              *        messages more likely to survive crashes.
              */
-            virtual void SetBufferSize
+            void SetBufferSize
             (
                 _In_ unsigned int bytes
             );
@@ -208,7 +208,7 @@ namespace VoodooShader
              *        and all logged messages <em>should</em> make it to disk, even 
              *        during fatal crashes.
              */
-            virtual void Dump();
+            void Dump();
 
         private:
             Core * mCore;

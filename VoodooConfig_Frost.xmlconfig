@@ -1,0 +1,24 @@
+<VoodooConfig>
+    <Core>
+        <Logger module="./Voodoo_Logger.dll" class="XmlLogger" />
+        <Hook module="./Voodoo_Hook.dll" class="EHHookManager" />
+        <Filesystem module="./Voodoo_Filesystem.dll" class="Filesystem" />
+        <Adapter module="./Voodoo_Frost.dll" class="Frost_Adapter" />
+    </Core>
+    <Logger>
+        <File>VoodooFrost</File>
+    </Logger>
+    <Filesystem>
+        <Paths>
+            <Path>$localroot$/resources</Path>
+            <Path>$globalroot$/resources</Path>
+            <Path>$globalroot$/resources/shaders</Path>
+        </Paths>
+    </Filesystem>
+    <Frost_Adapter>
+        <Shaders>
+            <Shader>test.cgfx</Shader>
+            <Shader>voodoologo.cgfx</Shader>
+        </Shaders>
+    </Frost_Adapter>
+</VoodooConfig>

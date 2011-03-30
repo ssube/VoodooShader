@@ -83,7 +83,10 @@ namespace VoodooShader
      */
     class IObject;
     class IAdapter;
+    class IFileSystem;
+    class IFile;
     class IHookManager;
+    class IImage;
     class ILogger;
     
     /**
@@ -143,7 +146,10 @@ namespace VoodooShader
     typedef std::weak_ptr<Texture>              TexturePtr;
 
     typedef std::shared_ptr<IAdapter>           IAdapterRef;
+    typedef std::shared_ptr<IFile>              IFileRef;
+    typedef std::shared_ptr<IFileSystem>        IFileSystemRef;
     typedef std::shared_ptr<IHookManager>       IHookManagerRef;
+    typedef std::shared_ptr<IImage>             IImageRef;
     typedef std::shared_ptr<ILogger>            ILoggerRef;
 
     /**

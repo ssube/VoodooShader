@@ -53,6 +53,7 @@ namespace VoodooShader
 
         private:
             Core * mCore;
+            ILoggerRef mLogger;
 
             CGcontext mCgContext;
 

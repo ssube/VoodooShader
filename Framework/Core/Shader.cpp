@@ -4,6 +4,7 @@
 #include "Converter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
+#include "Filesystem.hpp"
 #include "Logger.hpp"
 
 namespace VoodooShader
@@ -18,10 +19,17 @@ namespace VoodooShader
             throw std::exception("Unable to create parameter (core has no context).");
         }
 
+        IFileRef fileref = mCore->GetFileSystem()->GetFile(filename);
+
+        if ( !fileref.get() )
+        {
+            throw std::exception("Unable to find file.");
+        }
+
         this->mEffect = cgCreateEffectFromFile
         (
             context, 
-            mName.c_str(), 
+            fileref->GetPath().c_str(), 
             args
         );
 

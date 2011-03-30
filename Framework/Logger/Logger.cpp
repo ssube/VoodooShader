@@ -94,7 +94,7 @@ namespace VoodooShader
 
             char fullname[MAX_PATH];
             StringCchCopyA(fullname, MAX_PATH, filename);
-            StringCchCatA(fullname, MAX_PATH, ".xml");
+            StringCchCatA(fullname, MAX_PATH, ".xmllog");
 
             this->mLogFile.open(fullname, flags);
 
@@ -233,7 +233,9 @@ namespace VoodooShader
             _vsnprintf_s(buffer, 4095, 4095, msg, args);
             buffer[4095] = 0;
 
-            this->mLogFile << "    <Message severity=\"" << level << "\" ";
+            this->mLogFile << "    <Message severity=\"";
+            this->mLogFile << level;
+            this->mLogFile << "\" ";
             this->LogTime();
             this->LogTicks();
             this->mLogFile << " source=\"" << module << "\">" << buffer << "</Message>\n";

@@ -26,30 +26,23 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_OBJECT_HPP
-#define VOODOO_OBJECT_HPP
+#ifndef VOODOO_FILESYSTEM_HPP
+#define VOODOO_FILESYSTEM_HPP
 
 #include "Meta.hpp"
-#include "Module.hpp"
+#include "Object.hpp"
 
 namespace VoodooShader
 {
-    /**
-     * Defines a simple interface all Voodoo objects from dynamic modules must inherit. This
-     * interface handles destruction and identification of these objects.
-     * 
-     * @warning All classes derived from IObject <b><em>must</e></b> have unique names.
-     */
-    class IObject
+    class IFileSystem
+        : public IObject
     {
-        friend IObject * ModuleManager::CreateClass( _In_ String name );
-
     public:
         /**
          * Base virtual destructor for all object classes. This throws when called, and so
          * must be overridden.
          */
-        virtual ~IObject() throw()
+        virtual ~IFileSystem() throw()
         { };
 
         /**
@@ -60,14 +53,58 @@ namespace VoodooShader
          */
         virtual const char * GetObjectClass() = 0;
 
-    private:
-        /**
-         * A shared pointer to the module this class is defined in. Keeping 
-         * this in the class forces the module to remain in memory until the last 
-         * class from it is destroyed. This prevents class methods from becoming invalid.
-         */
-        ModuleRef mSourceModule;
+        virtual void AddDirectory(_In_ String path) = 0;
+        virtual void RemoveDirectory(_In_ String path) = 0;
+
+        virtual IFileRef GetFile
+        (
+            _In_ String name
+        ) = 0;
+
+        virtual IImageRef GetImage
+        (
+            _In_ String name
+        ) = 0;
+
+        virtual String ParsePath(_In_ String rawpath) = 0;
+    };
+
+    class IFile
+        : public IObject
+    {
+    public:
+        ~IFile() throw()
+        { };
+
+        virtual const char * GetObjectClass() = 0;
+
+        virtual String GetPath() = 0;
+
+        virtual bool Open
+        (
+            _In_ FileOpenMode mode
+        ) = 0;
+
+        virtual bool Close() = 0;
+
+        virtual int Read(_In_ int count, _In_opt_count_(count) void * buffer) = 0;
+
+        virtual bool Write(_In_ int count, _In_opt_count_(count) void * buffer) = 0;
+    };
+
+    class IImage
+        : public IObject
+    {
+    public:
+        ~IImage() throw()
+        { };
+
+        virtual const char * GetObjectClass() = 0;
+
+        virtual TextureDesc GetImageDesc() = 0;
+
+        virtual void * GetImageData() = 0;
     };
 }
 
-#endif /*VOODOO_OBJECT_HPP*/
+#endif /*VOODOO_FILESYSTEM_HPP*/

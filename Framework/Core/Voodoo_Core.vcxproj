@@ -244,6 +244,7 @@
     <ClInclude Include="Docs_Graphics.hpp" />
     <ClInclude Include="Docs_License.hpp" />
     <ClInclude Include="Exception.hpp" />
+    <ClInclude Include="Filesystem.hpp" />
     <ClInclude Include="FullscreenManager.hpp" />
     <ClInclude Include="HookManager.hpp" />
     <ClInclude Include="Includes.hpp" />

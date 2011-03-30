@@ -3,6 +3,7 @@
 #include "Adapter.hpp"
 #include "Converter.hpp"
 #include "Exception.hpp"
+#include "Filesystem.hpp"
 #include "FullscreenManager.hpp"
 #include "HookManager.hpp"
 #include "Logger.hpp"
@@ -13,9 +14,9 @@
 
 namespace VoodooShader
 {
-    Core * CreateCore(_In_ const char * path, _In_ const char * startdir)
+    Core * CreateCore(_In_ const char * globalroot, _In_ const char * localroot)
     {
-        return new Core(path, startdir);
+        return new Core(globalroot, localroot);
     }
 
     void DestroyCore(_In_ Core * core)
@@ -23,14 +24,14 @@ namespace VoodooShader
         delete core;
     }
 
-    Core::Core(_In_ const char * path, _In_ const char * startdir)
+    Core::Core(_In_ const char * globalroot, _In_ const char * localroot)
         : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCgContext(NULL)
     {
         using namespace pugi;
 
-        mGlobalRoot = path;
+        mGlobalRoot = globalroot;
         mGlobalRoot += "\\";
-        mLocalRoot = startdir;
+        mLocalRoot = localroot;
         mLocalRoot += "\\";
 
         mModManager = ModuleManagerRef(new ModuleManager(this));
@@ -39,7 +40,7 @@ namespace VoodooShader
 
         try
         {
-            String logpath = mLocalRoot + "VoodooConfig.xml";
+            String logpath = mLocalRoot + "VoodooConfig.xmlconfig";
             config = new pugi::xml_document();
             xml_parse_result result = config->load_file(logpath.c_str());
 
@@ -79,7 +80,6 @@ namespace VoodooShader
             (
                 LL_Info,
                 VOODOO_CORE_NAME,
-                "%s",
                 VOODOO_GLOBAL_COPYRIGHT_FULL
             );
             mLogger->LogModule(this->GetVersion());
@@ -98,6 +98,31 @@ namespace VoodooShader
             if ( mHooker.get() == NULL )
             {
                 throw std::exception("Unable to create hook object.");
+            }
+
+            // Load filesystem module
+            xml_node fsNode = coreNode.child("Filesystem");
+            String fsModule = fsNode.attribute("module").value();
+            String fsClass  = fsNode.attribute("class").value();
+            this->mModManager->LoadModule(fsModule);
+            this->mFileSystem = mModManager->SharedCreateClass<IFileSystem>(fsClass);
+
+            if ( mFileSystem.get() == NULL )
+            {
+                throw std::exception("Unable to create filesystem object.");
+            }
+
+            xpath_query fspathsQuery("/VoodooConfig/Filesystem/Paths/Path");
+            xpath_node_set fspaths = fspathsQuery.evaluate_node_set(*config);
+            xpath_node_set::const_iterator fspathIter = fspaths.begin();
+            while ( fspathIter != fspaths.end() )
+            {
+                xml_node fspathNode = (*fspathIter).node();
+                String path = fspathNode.first_child().value();
+
+                mFileSystem->AddDirectory(path);
+
+                ++fspathIter;
             }
 
             // Core done loading
@@ -138,7 +163,6 @@ namespace VoodooShader
             delete config;
             throw exc;
         }
-
     }
 
     Core::~Core()
@@ -154,9 +178,14 @@ namespace VoodooShader
         mModManager = NULL;
     }
 
-    String Core::GetBasePath()
+    String Core::GetGlobalRoot()
     {
         return mGlobalRoot;
+    }
+
+    String Core::GetLocalRoot()
+    {
+        return mLocalRoot;
     }
 
     void Core::SetCgContext(CGcontext context)
@@ -204,6 +233,11 @@ namespace VoodooShader
     ILoggerRef Core::GetLogger()
     {
         return mLogger;
+    }
+
+    IFileSystemRef Core::GetFileSystem()
+    {
+        return mFileSystem;
     }
 
     ModuleManagerRef Core::GetModuleManager()
