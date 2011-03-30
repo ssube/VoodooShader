@@ -213,15 +213,15 @@
  * </p>
  * <table>
  *    <tr><th>Voodoo Format</th>        <th>DirectX Format</th>        
- *        <th>OpenGL Format</th>        <th>RT/Copy</th>
+ *        <th>OpenGL Format</th>        <th>RT/Copy/Load<sup>4</sup></th>
  *        <th>Bits</th>                 <th>Channels</th></tr>
  *    <tr><td>TF_Unknown</td>           <td>D3DFMT_UNKNOWN</td>        
- *        <td>(unknown)</td>            <td>No</td></tr>
+ *        <td>(unknown)</td>            <td>None</td></tr>
  *    <tr><td>TF_RGB5</td>              <td>D3DFMT_X1R5G5B5</td>    
- *        <td>GL_RGB5</td>              <td>Yes</td>
+ *        <td>GL_RGB5</td>              <td>Y/Y/N</td>
  *        <td>15/16</td>                <td>RGB</td></tr>
  *    <tr><td>TF_RGB5A1</td>            <td>D3DFMT_A1R5G5B5</td>    
- *        <td>GL_RGB5_A1</td>           <td>Yes</td>
+ *        <td>GL_RGB5_A1</td>           <td>Y/Y/N</td>
  *        <td>16</td>                   <td>RGBA</td></tr>
  *    <tr><td>TF_RGB8</td>              <td>D3DFMT_X8R8G8B8</td>    
  *        <td>GL_RGB8</td>              <td>Yes</td>
@@ -230,19 +230,19 @@
  *        <td>GL_RGBA8</td>             <td>Yes</td>
  *        <td>32</td>                   <td>RGBA</td></tr>
  *    <tr><td>TF_RGB10A2</td>           <td>D3DFMT_A2R10G10B10</td>    
- *        <td>GL_RGB10_A2</td>          <td>Yes</td>
+ *        <td>GL_RGB10_A2</td>          <td>Y/Y/N</td>
  *        <td>32</td>                   <td>RGBA</td></tr>
  *    <tr><td>TF_RGBA16F<sup>1</sup></td><td>D3DFMT_A16B16G16R16F</td>
- *        <td>GL_RGBA16F</td>           <td>N/Y</td>
+ *        <td>GL_RGBA16F</td>           <td>N/Y/Y</td>
  *        <td>64</td>                   <td>RGBA</td></tr>
  *    <tr><td>TF_RGBA32F<sup>1</sup></td><td>D3DFMT_A32B32G32R32F</td>
- *        <td>GL_RGBA32F</td>           <td>N/Y</td>
+ *        <td>GL_RGBA32F</td>           <td>N/Y/Y</td>
  *        <td>128</td>                  <td>RGBA</td></tr>
  *    <tr><td>TF_D16F</td>              <td>D3DFMT_D16F</td>    
- *        <td>GL_DEPTH_COMPONENT16</td> <td>N/Y-ish<sup>2</sup></td>
+ *        <td>GL_DEPTH_COMPONENT16</td> <td>N/Y-ish<sup>2</sup>/N</td>
  *        <td>16</td>                   <td>R<sup>3</sup></td></tr>
  *    <tr><td>TF_D32F</td>              <td>D3DFMT_D32F</td>
- *        <td>GL_DEPTH_COMPONENT32</td> <td>N/Y-ish<sup>2</sup></td>
+ *        <td>GL_DEPTH_COMPONENT32</td> <td>N/Y-ish<sup>2</sup>/N</td>
  *        <td>32</td>                   <td>R<sup>3</sup></td></tr>
  * </table>
  *  <em><sup>1</sup>:</em>
@@ -260,6 +260,15 @@
  *     Depth textures do not map to components in all APIs. The most likely
  *     mapping is given, but access is not guaranteed.
  * <br />
+ * <em><sup>4</sup>:</em>
+ *     Texture loading is restricted by the filesystem library. The values
+ *     given apply only to Voodoo/Filesystem, which uses DevIL. Only 8, 16 and
+ *     32 bpc formats can be copied into by IImage::CopyImageData(); DevIL lacks 
+ *     the values to describe packed formats and depth formats are not yet fully
+ *     supported in the filesystem module. The supported formats are more widely 
+ *     supported in other areas of Voodoo, so it is highly recommended you favor 
+ *     these whenever possible. It <em>is</em>, however, possible to load images
+ *     that are in other formats and convert them.
  *
  * @section depthbuffers Depth Buffers
  * <p>

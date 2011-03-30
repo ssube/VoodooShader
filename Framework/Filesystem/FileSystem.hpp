@@ -182,7 +182,7 @@ namespace VoodooShader
             : public IImage
         {
         public:
-            Image(Core * core, unsigned int image);
+            Image(Core * core, String name, unsigned int image);
 
             ~Image();
 
@@ -195,19 +195,45 @@ namespace VoodooShader
              * @return Texture information.
              */
             TextureDesc GetImageDesc();
+            
+            /**
+             * Retrieves a portion of the texture data from the image.
+             * 
+             * @param desc The region and format to be returned.
+             * @param buffer The memory for the return data to be placed in. Must
+             *      already be allocated, or null.
+             * @return The number of bytes retrieved (or, if @arg buffer is null, the
+             *      number that would be retrieved).
+             * @throws Exception on invalid texture format.
+             *      
+             * @warning Due to limitations in this library (or DevIL, not sure which),
+             *      the only texture formats this function can convert into are TF_RGB8,
+             *      TF_RGBA8, TF_RGBA16F, and TF_RGBA32F. Others are not supported and
+             *      will cause this function to throw.
+             * @note This can convert data between most formats, so the format given in
+             *      @arg desc will be the returned format. This makes precalculating the
+             *      buffer size relatively easy.
+             * @warning If this function converts formats or copies a large region, it
+             *      will be slow. Avoid calling often.
+             */
+            size_t CopyImageData(_In_ TextureRegion desc, _In_opt_ void * buffer)
 
             /**
              * Retrieves a pointer to the image data.
              * 
              * @return Pointer to the image data.
              * 
-             * @warning The pointer provided should <em>not</em> be deleted.
+             * @warning The pointer provided should <em>not</em> be deleted. To free
+             *     the data, call Image::FreeImageData().
              */
             void * GetImageData();
+
+            void FreeImageData();
 
         private:
             Core * mCore;
             unsigned int mImage;
+            TextureDesc mDesc;
         };
     }
 }

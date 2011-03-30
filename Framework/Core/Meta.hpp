@@ -196,7 +196,7 @@ namespace VoodooShader
      * are indicated  here, but the available components and sizes are 
      * guaranteed to be equal to or greater than the indicated values. Further 
      * information on texture formats and depth may be found on the 
-     * @ref Textures "texture formats page".
+     * @ref Textures "texture formats page". 
      */
     enum TextureFormat
     {
@@ -330,6 +330,21 @@ namespace VoodooShader
         size_t Height;
         size_t Depth;
         bool Mipmaps;
+        TextureFormat Format;
+    };
+
+    /**
+     * Describes a portion of a texture. This defines a cube region and provides
+     * an optional format the region should be set up as.
+     */
+    struct TextureRegion
+    {
+        size_t OffX;
+        size_t OffY;
+        size_t OffZ;
+        size_t Width;
+        size_t Height;
+        size_t Depth;
         TextureFormat Format;
     };
 

@@ -92,6 +92,13 @@ namespace VoodooShader
                     } else {
                         varname << rawpath[pos];
                     }
+                } else if ( rawpath[pos] == '/' ) {
+                    if ( dest == false )
+                    {
+                        finalname << "\\";
+                    } else {
+                        varname << "\\";
+                    }
                 } else {
                     if ( dest == false )
                     {
@@ -195,18 +202,7 @@ namespace VoodooShader
                         name.c_str(), (*curDir).c_str()
                     );
 
-                    // Do DevIL loading
-                    ILuint image = ilGenImage();
-                    ilBindImage(image);
-
-                    ILboolean loaded = ilLoadImage(fullname.c_str());
-
-                    if ( loaded == IL_FALSE )
-                    {
-                        return IImageRef();
-                    } else {
-                        return IImageRef(new Image(mCore, image));
-                    }
+                    return IImageRef(new Image(mCore, image));
                 }
 
                 ++curDir;
@@ -317,10 +313,56 @@ namespace VoodooShader
             return false;
         }
 
-        Image::Image(Core * core, ILuint image)
-            : mCore(core), mImage(image)
+        IImageRef Image::Load(Core * core, String name)
         {
+            ILuint image = ilGenImage();
+            ilBindImage(image);
 
+            ILboolean loaded = ilLoadImage(name.c_str());
+
+            if ( loaded == IL_FALSE )
+            {
+                ilBindImage(0);
+                ilDeleteImage(image);
+                return IImageRef();
+            } else {
+                return IImageRef(new Image(core, name, image));
+            }
+        }
+
+        Image::Image(Core * core, String name, ILuint image)
+            : mCore(core), mName(name), mImage(image)
+        {
+            mDesc.Width = ilGetInteger(IL_IMAGE_WIDTH);
+            mDesc.Height = ilGetInteger(IL_IMAGE_HEIGHT);
+            mDesc.Depth = ilGetInteger(IL_IMAGE_DEPTH);
+            mDesc.Mipmaps = false;
+            mDesc.Format = TF_Unknown;
+
+            ILint texFmt  = ilGetInteger(IL_IMAGE_FORMAT);
+            ILint texType = ilGetInteger(IL_IMAGE_TYPE);
+
+            if ( texFmt == IL_RGB )
+            {
+                if ( texType == IL_BYTE || texType == IL_UNSIGNED_BYTE )
+                {
+                    mDesc.Format = TF_RGB8;
+                }
+            } else if ( texFmt == IL_RGBA ) {
+                if ( texType == IL_BYTE || texType == IL_UNSIGNED_BYTE )
+                {
+                    mDesc.Format = TF_RGBA8;
+                } else if ( texType == IL_FLOAT ) {
+                    mDesc.Format = TF_RGBA16F;
+                } else if ( texType == IL_DOUBLE ) {
+                    mDesc.Format = TF_RGBA32F;
+                }
+            }
+
+            if ( mDesc.Format == TF_Unknown )
+            {
+                mCore->GetLogger()->Log(LL_Warning, VOODOO_FILESYSTEM_NAME, "Unable to resolve format for image %s (%u).", name.c_str(), image);
+            }
         }
 
         Image::~Image()
@@ -335,15 +377,50 @@ namespace VoodooShader
 
         TextureDesc Image::GetImageDesc()
         {
-            TextureDesc desc;
-            ZeroMemory(&desc, sizeof(desc));
-            return desc;
+            return mDesc;
+        }
+
+        size_t Image::CopyImageData(TextureRegion desc, void * buffer)
+        {
+            ILint ilFmt = 0;
+            ILint ilType = 0;
+
+            // Convert TextureFormat to DevIL format
+            switch ( desc.Format )
+            {
+            case TF_RGB8:
+                ilFmt = IL_RGB;
+                ilType = IL_UNSIGNED_BYTE;
+                break;
+            case TF_RGBA8:
+                ilFmt = IL_RGBA;
+                ilType = IL_UNSIGNED_BYTE;
+                break;
+            case TF_RGBA16F:
+                ilFmt = IL_RGBA;
+                ilType = IL_FLOAT;
+                break;
+            case TF_RGBA32F:
+                ilFmt = IL_RGBA;
+                ilType = IL_DOUBLE;
+                break;
+            case TF_Unknown:
+            default:
+                Throw(VOODOO_FILESYSTEM_NAME, "Invalid texture format for data get.", mCore);
+            }
+
+            return ilCopyPixels(desc.OffX, desc.OffY, desc.OffZ, desc.Width, desc.Height, desc.Depth, ilFmt, ilType, buffer);
         }
 
         void * Image::GetImageData()
         {
             ilBindImage(mImage);
             return ilGetData();
+        }
+
+        void Image::FreeImageData()
+        {
+            ilBindImage(0);
         }
     }
 }
