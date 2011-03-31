@@ -5,6 +5,8 @@
 HWND gNwnWindow = NULL;
 bool gSecondContext = false;
 bool gFrostEnabled = false;
+bool gDrawnGeometry = false;
+float gFogMult = 99.0f;
 
 using namespace VoodooShader;
 
@@ -17,6 +19,7 @@ using namespace VoodooShader;
  */
 void GLAPIENTRY vglBegin(GLenum mode)
 {
+    gDrawnGeometry = true;
     /*
     gThisFrame.DrawnGeometry = true
 
@@ -135,7 +138,7 @@ void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
 
 void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
 {
-    // gThisFrame.DrawnGeometry = true
+    gDrawnGeometry = true;
 
     VoodooLogger->Log
     (
@@ -145,14 +148,12 @@ void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const G
         mode, count, type, indices
     );
 
-    return glDrawElements(mode, count, type, indices);;
+    return glDrawElements(mode, count, type, indices);
 }
 
 void GLAPIENTRY vglEnable(GLenum cap)
 {
-    /*
-    if ( cap == GL_FOG && !gUseFog ) return;
-    */
+    if ( cap == GL_FOG && gFogMult > 0 ) return;
 
     VoodooLogger->Log
     (
@@ -187,17 +188,15 @@ void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
         pname, params
     );
 
-    return glFogfv(pname, params);;
+    return glFogfv(pname, params);
 }
 
 void GLAPIENTRY vglFogf(GLenum pname, GLfloat param)
 {
-    /*
     if ( pname == GL_FOG_START )
-        param = param * gFogMultStart;
+        param = param * gFogMult;
     if ( pname == GL_FOG_END )
-        param = param * gFogMultEnd;
-    */
+        param = param * gFogMult;
 
     VoodooLogger->Log
     (
@@ -207,7 +206,7 @@ void GLAPIENTRY vglFogf(GLenum pname, GLfloat param)
         pname, param
     );
 
-    return glFogf(pname, param);;
+    return glFogf(pname, param);
 }
 
 const GLubyte * GLAPIENTRY vglGetString(GLenum name)
@@ -239,7 +238,7 @@ void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
         x, y, width, height
     );
 
-    return glViewport(x, y, width, height);;
+    return glViewport(x, y, width, height);
 }
 
 HGLRC WINAPI vwglCreateContext(HDC hdc)
@@ -329,18 +328,21 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
         VoodooFrost->SetDC(hdc);
         VoodooFrost->SetGLRC(hglrc);
 
+        VoodooLogger->Log
+        (
+            LL_Info, 
+            VOODOO_FROST_NAME, 
+            "OpenGL driver information:&lt;br /&gt;\nVendor: %s&lt;br /&gt;\nRenderer: %s&lt;br /&gt;\nVersion: %s",
+            glGetString(GL_VENDOR), glGetString(GL_RENDERER), glGetString(GL_VERSION)
+        );
+
+        GLint viewportInfo[4];
+        glGetIntegerv(GL_VIEWPORT, viewportInfo);
+        gViewWidth = viewportInfo[2];
+        gViewHeight = viewportInfo[3];
+
         gFrostEnabled = true;
     }
-
-    /*
-    if ( !gGLSecondContext )
-        gGLSecondContext = true
-    else
-        Log->glVersion
-        glewInit()
-        setupResources()
-        linkShaders()
-    */
 
     return result;
 }
@@ -358,6 +360,7 @@ BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
     );
 
     // updateShaderVars()
+    gDrawnGeometry = false;
 
     return result;
 }

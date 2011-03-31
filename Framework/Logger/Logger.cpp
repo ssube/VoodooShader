@@ -2,6 +2,10 @@
 
 #include "Logger_Version.hpp"
 
+#include <stdio.h>
+#include <sstream>
+#include <iomanip>
+
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <strsafe.h>
@@ -51,7 +55,7 @@ namespace VoodooShader
         }
 
         XmlLogger::XmlLogger(_In_ Core * core)
-            : mCore(core), mLogLevel(LL_All)
+            : mCore(core), mLogLevel(LL_Initial)
         {
             this->mLocalTime = new tm();
         }
@@ -100,7 +104,9 @@ namespace VoodooShader
 
             if ( this->mLogFile.is_open() )
             {
+#ifdef _DEBUG
                 this->SetBufferSize(0);
+#endif
 
                 this->mLogFile << "<?xml version='1.0'?>\n<VoodooLog "; 
                 this->LogDate(); 
@@ -129,66 +135,43 @@ namespace VoodooShader
             }
         }
 
-        void XmlLogger::LogTime()
+        String XmlLogger::LogTime()
         {
-            if ( !this->mLogFile.is_open() ) return;
-
             time_t now = time(NULL);
 
             if ( localtime_s(this->mLocalTime, &now) == 0 )
             {
-                char stamp[32];
-                sprintf_s
-                (
-                    stamp, 32, 
-                    " time=\"%02d%02d%02d\" ", 
-                    this->mLocalTime->tm_hour,
-                    this->mLocalTime->tm_min,
-                    this->mLocalTime->tm_sec
-                );
-
-                this->mLogFile << stamp;
+                stringstream stamp;
+                stamp << put_time(mLocalTime, "%H%M%S");
+                //stamp.fill('0');
+                //stamp << " time=\"" << setw(2) << mLocalTime->tm_hour << setw(2) << mLocalTime->tm_min << setw(2) << mLocalTime->tm_sec << "\" ";
+                return stamp.str();
             } else {
-                this->mLogFile << " time=\"000000\" ";
+                return String(" time=\"000000\" ");
             }
         }
 
-        void XmlLogger::LogDate()
+        String XmlLogger::LogDate()
         {
-            if ( !this->mLogFile.is_open() ) return;
-
             time_t now = time(NULL);
 
             if ( localtime_s(this->mLocalTime, &now) == 0 )
             {
-                char stamp[32];
-                sprintf_s
-                (
-                    stamp, 32, 
-                    " date=\"%04d%02d%02d\" ", 
-                    this->mLocalTime->tm_year + 1900,
-                    this->mLocalTime->tm_mon + 1,
-                    this->mLocalTime->tm_mday
-                );
-
-                this->mLogFile << stamp;
+                stringstream stamp;
+                stamp << put_time(mLocalTime, "%Y%m%d");
+                //stamp.fill('0');
+                //stamp << " date=\"" << setw(4) << ( mLocalTime->tm_year + 1900 ) << setw(2) << (mLocalTime->tm_min + 1) << setw(2) << mLocalTime->tm_sec << "\" ";
+                return stamp.str();
             } else {
-                this->mLogFile << " date=\"00000000\" ";
+                return String(" date=\"00000000\" ");
             }
         }
 
-        void XmlLogger::LogTicks()
+        String XmlLogger::LogTicks()
         {
-            if ( !this->mLogFile.is_open() ) return;
-
-            char stamp[32];
-            sprintf_s
-            (
-                stamp, 32,
-                " ticks=\"%u\" ",
-                GetTickCount()
-            );
-            this->mLogFile << stamp;
+            stringstream stamp;
+            stamp << " ticks=\"" << GetTickCount() << "\" ";
+            return stamp.str();
         }
 
         void XmlLogger::LogModule
@@ -198,13 +181,19 @@ namespace VoodooShader
         {
             if ( !this->mLogFile.is_open() ) return;
 
-            this->mLogFile << 
-                "    <Module name=\"" << version.Name << "\" " <<
+            stringstream logMsg;
+
+            logMsg << "    <Module name=\"" << version.Name << "\" " <<
                 " major=\"" << version.Major << "\" " <<
                 " minor=\"" << version.Minor << "\" " <<
                 " patch=\"" << version.Patch << "\" " <<
                 " rev=\"" << version.Rev << "\" " <<
                 " debug=\"" << version.Debug << "\" />\n";
+
+#ifdef _DBEUG
+            cout << logMsg;
+#endif
+            mLogFile << logMsg;
         }
 
         void XmlLogger::SetBufferSize(unsigned int bytes)
@@ -221,30 +210,51 @@ namespace VoodooShader
 
         void XmlLogger::Log(LogLevel level, const char * module, const char * msg, ...)
         {
+            va_list args;
+
             if ( level < mLogLevel ) return;
             if ( !this->mLogFile.is_open() ) return;
 
-            char buffer[4096];
-            va_list args;
+            try
+            {
+                // Format the message in memory to prevent partial messages from being dumped
+                stringstream logMsg;
 
-            va_start(args, msg);
+                logMsg << "    <Message severity=\"";
+                logMsg << level;
+                logMsg << "\" ";
+                logMsg << this->LogTime();
+                logMsg << this->LogTicks();
+                logMsg << " source=\"";
+                logMsg << module;
+                logMsg << "\">";
 
-            _vsnprintf_s(buffer, 4095, 4095, msg, args);
-            buffer[4095] = 0;
+                char buffer[4096];
+                va_start(args, msg);
+                _vsnprintf_s(buffer, 4095, 4095, msg, args);
+                buffer[4095] = 0;
+                va_end(args);
 
-            va_end(args);
+                logMsg << buffer;
 
-            this->mLogFile << "    <Message severity=\"";
-            this->mLogFile << level;
-            this->mLogFile << "\" ";
-            this->LogTime();
-            this->LogTicks();
-            this->mLogFile << " source=\"" << module << "\">" << buffer << "</Message>\n";
+                logMsg << "</Message>\n";
+
+#ifdef _DBEUG
+                cout << logMsg;
+#endif
+                mLogFile << logMsg;
+            } catch ( std::exception exc ) {
+                UNREFERENCED_PARAMETER(exc);
+                // Unfortunately, we have to swallow the exception and simply fail to log.
+            }
         }
 
         void XmlLogger::Dump()
         {
-            this->mLogFile.flush();
+            if ( this->mLogFile.is_open() )
+            {
+                this->mLogFile.flush();
+            }
         }
     }
 }

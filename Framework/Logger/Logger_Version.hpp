@@ -25,7 +25,7 @@
 #define VOODOO_LOGGER_NAME              "Voodoo/XmlLogger"
 #define VOODOO_LOGGER_PRETTYNAME        "Voodoo Xml Logger"
 #define VOODOO_LOGGER_VERSION_MAJOR     0
-#define VOODOO_LOGGER_VERSION_MINOR     1
-#define VOODOO_LOGGER_VERSION_PATCH     5
+#define VOODOO_LOGGER_VERSION_MINOR     2
+#define VOODOO_LOGGER_VERSION_PATCH     0
 #define VOODOO_LOGGER_VERSION_REV       VOODOO_GLOBAL_VERSION_REV   
 //--------------------------------------------------------------------------------

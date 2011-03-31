@@ -72,7 +72,7 @@ namespace VoodooShader
          * @note If the system time cannot be retrieved, an error stamp of
          *          <code>000000</code> will be printed with an equal length.
          */
-        virtual void LogTime() = 0;
+        virtual String LogTime() = 0;
 
         /**
          * Writes a formatted date to the log. The date will have the
@@ -82,14 +82,14 @@ namespace VoodooShader
          * @note If the system time cannot be retrieved, an error stamp of
          *          <code>00000000</code> will be printed with an equal length.
          */
-        virtual void LogDate() = 0;
+        virtual String LogDate() = 0;
 
         /**
          * Writes a formatted tick to the log. The stamp will have the
          * form <code>xxxxxxxxx</code>, with a potentially varying length. This
          * records ticks (usually ms since system start).
          */
-        virtual void LogTicks() = 0;
+        virtual String LogTicks() = 0;
 
         /**
          * Writes a module stamp to the log. This records the name and version

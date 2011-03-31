@@ -29,12 +29,6 @@
 #define VOODOO_IMPORT
 #include "Voodoo_Core.hpp"
 
-#ifdef VOODOO_IMPORT_LOGGER
-#   define VOODOO_LOGGER_API __declspec(dllimport)
-#else
-#   define VOODOO_LOGGER_API __declspec(dllexport)
-#endif
-
 // Hide the DLL-interface warning
 #pragma warning(disable:4251)
 
@@ -126,31 +120,31 @@ namespace VoodooShader
             );
 
             /**
-             * Write a formatted timestamp to the log. The timestamp will have the 
+             * Formats a timestamp for the log. The timestamp will have the 
              * form <code>HHMMSS</code>. Leading zeros are guaranteed to be
              * present, so the timestamp length is 6 chars.
              *
-             * @note If the system time cannot be retrieved, an error stamp of
-             *          <code>000000</code> will be printed with an equal length.
+             * @note If the system time cannot be retrieved, an equal-length error 
+             *       stamp of <code>000000</code> will be returned.
              */
-            void LogTime();
+            String LogTime();
 
             /**
-             * Writes a formatted date to the log. The date will have the
-             * form <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present,
+             * Formats a date for the log. The date will have the form 
+             * <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present,
              * so the date length is 8 chars.
              *
-             * @note If the system time cannot be retrieved, an error stamp of
-             *          <code>00000000</code> will be printed with an equal length.
+             * @note If the system time cannot be retrieved, an equal-length error 
+             *       stamp of <code>00000000</code> will be returned.
              */
-            void LogDate();
+            String LogDate();
 
             /**
-             * Writes a formatted tick to the log. The stamp will have the
+             * Formats the system's current tick count. The stamp will have the
              * form <code>xxxxxxxxx</code>, with a potentially varying length. This
-             * records ticks (usually ms since system start).
+             * records ticks, usually ms since system start.
              */
-            void LogTicks();
+            String LogTicks();
 
             /**
              * Writes a module stamp to the log. This records the name and version
