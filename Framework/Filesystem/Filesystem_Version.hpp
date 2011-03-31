@@ -26,6 +26,6 @@
 #define VOODOO_FILESYSTEM_PRETTYNAME        "Voodoo Windows Filesystem"
 #define VOODOO_FILESYSTEM_VERSION_MAJOR     0
 #define VOODOO_FILESYSTEM_VERSION_MINOR     1
-#define VOODOO_FILESYSTEM_VERSION_PATCH     3
+#define VOODOO_FILESYSTEM_VERSION_PATCH     4
 #define VOODOO_FILESYSTEM_VERSION_REV       VOODOO_GLOBAL_VERSION_REV   
 //--------------------------------------------------------------------------------

@@ -84,15 +84,7 @@ namespace VoodooShader
             size_t pos = 0;
             while ( pos < total )
             {
-                if ( rawpath[pos] == '/' ) 
-                {
-                    if ( dest == false )
-                    {
-                        finalname << "\\";
-                    } else {
-                        varname << "\\";
-                    }
-                } else if ( rawpath[pos] != '$' )
+                if ( rawpath[pos] != '$' )
                 {
                     if ( dest == false )
                     {
@@ -109,15 +101,24 @@ namespace VoodooShader
                     } else {
                         // End
                         String var = varname.str();
-                        if ( var == "localroot" )
+                        if ( var.length() == 0 )
                         {
+                            finalname << "$";
+                        } else if ( var == "localroot" ) {
                             finalname << mCore->GetLocalRoot();
-                            //"--localroot--";
                         } else if ( var == "globalroot" ) {
                             finalname << mCore->GetGlobalRoot();
-                            //"--globalroot--";
                         } else {
-                            finalname << "--error--";
+                            size_t reqSize = 0;
+                            getenv_s(&reqSize, NULL, 0, var.c_str());
+                            if ( reqSize == 0 )
+                            {
+                                finalname << "--badvar:" << var << "--";
+                            } else {
+                                char value[reqSize];
+                                getenv_s(&reqSize, value, reqSize, var.c_str());
+                                finalname << value;
+                            }
                         }
                         dest = false;
                     }

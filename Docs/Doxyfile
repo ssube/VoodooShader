@@ -31,7 +31,7 @@ PROJECT_NAME           = "Voodoo Shader Framework"
 # This could be handy for archiving the generated documentation or 
 # if some version control system is used.
 
-PROJECT_NUMBER         = 0.2.6.153
+PROJECT_NUMBER         = 0.2.6.158
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer
@@ -612,7 +612,7 @@ WARN_LOGFILE           = M:\VoodooShader\Docs\doxylog
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = M:/VoodooShader
+INPUT                  = M:/VoodooShader/Framework
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 

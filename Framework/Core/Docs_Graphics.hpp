@@ -306,8 +306,88 @@
  *     DevIL as the loading library, so support a ridiculous number of formats. 
  *     Among the most useful formats are DDS, PNG and TGA, all supporting high 
  *     resolutions and transparency. Other formats may not be as suitable; JPEG and 
- *     BMP for example are very lossy and large, respectively. For a complete listing 
- *     of supported formats, please see the DevIL documentation (it works with more
- *     than you'll ever need).
+ *     BMP for example are very lossy and large, respectively. 
+ * </p>
+ * 
+ * @section texturefileformats Supported File Formats
+ * <p>
+ *    Below is provided a full list of the file formats Voodoo/Filesystem is
+ *    capable of loading and saving (via DevIL). This list is taken from the
+ *    DevIL documentation.
+ * </p>
+ * <table>
+ * <tr><th>Format</th><th>Extension</th><th>Load Support</th><th>Save Support</th></tr>
+ * 
+ * <tr><td>Windows Bitmap</td><td>bmp</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Dr. Halo</td><td>cut</td><td>Yes</td></tr>
+ * <tr><td>Multi-PCX</td><td>dcx</td><td>Yes</td></tr>
+ * <tr><td>Dicom</td><td>dcm</td><td>Yes</td></tr>
+ * <tr><td>DirectDraw Surface<sup>3</sup></td><td>dds</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>OpenEXR</td><td>ext</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Flexible Image Transport System</td><td>fits, fit</td><td>Yes</td></tr>
+ * <tr><td>Heavy Metal: FAKK 2</td><td>ftx</td><td>Yes</td>
+ * <tr><td>C-style Header</td><td>h</td><td>Yes</td></tr>
+ * <tr><td>Radiance High Dynamic</td><td>hdr</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Macintosh Icon</td><td>icns</td><td>Yes</td></tr>
+ * <tr><td>Windows icon/cursor</td><td>ico, cur</td><td>Yes<sup>1</sup></td></tr>
+ * <tr><td>Interchange FileFormat</td><td>iff</td><td>Yes</td></tr>
+ * <tr><td>Infinity Ward Image</td><td>iwi</td><td>Yes</td></tr>
+ * <tr><td>Graphics Interchange Format</td><td>gif</td><td>Yes<sup>1</sup></td></tr>
+ * <tr><td>JPEG</td><td>jpg, jpe, jpeg</td><td>Yes<sup>2</sup></td><td>Yes</td></tr>
+ * <tr><td>JPEG 2000</td><td>jp2</td><td>Yes<sup>2</sup></td><td>Yes</td></tr>
+ * <tr><td>Interlaced Bitmap</td><td>lbm</td><td>Yes</td></tr>
+ * <tr><td>Homeworld Texture</td><td>lif</td><td>Yes</td></tr>
+ * <tr><td>Half-Life Model</td><td>mdl</td><td>Yes</td></tr>
+ * <tr><td>MPEG-1 Audio Layer 3</td><td>mp3</td><td>Yes</td></tr>
+ * <tr><td>Palette</td><td>pal</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Kodak PhotoCD</td><td>pcd</td><td>Yes</td></tr>
+ * <tr><td>ZSoft PCX</td><td>pcx</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Softimage PIC</td><td>pic</td><td>Yes</td></tr>
+ * <tr><td>Portable Network Graphics<sup>3</sup></td><td>png</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Portable Anymap</td><td>pbm, pgm, pnm</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Alias | Wavefront</td><td>pix</td><td>Yes</td></tr>
+ * <tr><td>Adobe Photoshop</td><td>psd</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Paintshop Pro</td><td>psp</td><td>Yes</td></tr>
+ * <tr><td>Pixar</td><td>pxr</td><td>Yes</td></tr>
+ * <tr><td>Raw Data</td><td>raw</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Homeworld 2 Texture</td><td>rot</td><td>Yes</td></tr>
+ * <tr><td>Silicon Graphics</td><td>sgi, bw, rgb, rgba</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Creative Assembly Texture</td><td>texture</td><td>Yes</td></tr>
+ * <tr><td>Truevision Targa</td><td>tga</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Tagged Image Format</td><td>tif</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Gamecube Texture</td><td>tpl</td><td>Yes</td></tr>
+ * <tr><td>Unreal Texture</td><td>utx</td><td>Yes</td></tr>
+ * <tr><td>Quake 2 Texture</td><td>wal</td><td>Yes</td></tr>
+ * <tr><td>Valve Texture Format</td><td>vtf</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>HD Photo</td><td>wdp, hdp</td><td>Yes</td></tr>
+ * <tr><td>X Pixel Map</td><td>xpm</td><td>Yes</td></tr>
+ * <tr><td>Doom Graphics</td><td></td><td>Yes</td></tr>
+ * </table>
+ * <em><sup>1</sup>:</em> These formats support animated textures, but animations are not
+ * supported within Voodoo. Only the first frame will be used.<br />
+ * <em><sup>2</sup>:</em> These formats are not recommended for use, due to poor quality or
+ * capabilities.<br />
+ * <em><sup>3</sup>:</em> These formats are recommended for use and support most or all of
+ * the features Voodoo uses.<br />
+ * <p>
+ *    Support for these formats is provided directly by DevIL, including the ability to convert
+ *    most internal formats. Questions regarding formats and support, as they apply to DevIL,
+ *    should be directed to the developer of this fine library. Questions regarding Voodoo's
+ *    support or use of DevIL, or that of any Voodoo module, should be directed to Voodoo or
+ *    module developer(s).
+ * </p>
+ * <p>
+ *    Some of these formats (GIF, for example) do not correspond to any internal Voodoo formats.
+ *    To use images in these formats, you should load the image, then call IImage::CopyImageData()
+ *    and provide the desired format. DevIL will handle conversion internally. This may be slow
+ *    and so should not be used often, but provides a way to load almost any format into Voodoo.
+ * </p>
+ * <p>
+ *    The above list of formats is quite large, and some formats are obscure or not well suited
+ *    for use with Voodoo. However, DevIL supports them and there is no reason to add artificial
+ *    limitations to Voodoo when it takes less work to provide a more flexible structure. Thus,
+ *    these formats are all supported and may be used as desired. Some of the more unusual
+ *    formats may have some innate restrictions or lose data during conversion to Voodoo-
+ *    supported formats, so take care to properly test any image resources you use.
  * </p>
  */

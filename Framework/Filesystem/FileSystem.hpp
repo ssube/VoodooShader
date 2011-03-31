@@ -35,7 +35,9 @@ namespace VoodooShader
 
         /**
          * Provides a unified file management system for loading shaders and other
-         * resources.
+         * resources. This filesystem implementation is a thin wrapper for the 
+         * Windows API, adding only a few nonstandard functions (directory searching
+         * and path variables).
          */
         class FileSystem
             : public IFileSystem
@@ -240,3 +242,119 @@ namespace VoodooShader
         };
     }
 }
+
+/**
+ * @page pathvars Path Variables
+ * <p>
+ *    The default filesystem implementation for Voodoo provides support for a small
+ *    variety of variables to be used in paths. The syntax and use of these variables
+ *    is described in this page.
+ * </p>
+ * @todo Move variable parsing into the Core or a dedicated parser class used by
+ *       the Core and Filesystem. The scope of this parsing is to great for the
+ *       filesystem alone and should not vary depending on filesystem implementation.
+ *       
+ * @section pathvarssyntax Syntax
+ * <p>
+ *    Variables are used in paths by surrounding the variable name with '$' symbols.
+ *    For each variable, the <code>$varname$</code> portion will be removed and the
+ *    value of <code>varname</code> used in place. Variables may be placed at any
+ *    position in the path, but may not be nested.
+ *    
+ * @note The $ character is illegal in filenames, but may be useful when working
+ *       with file streams.
+ * </p>
+ * <p>
+ * Examples:
+ * @code 
+ * localroot = M:\VoodooShader\
+ * gempath = M:\VoodooShader\Gem\
+ * resourcedir = \resources\
+ * 
+ * $localroot$\subdir\file.png = M:\VoodooShader\\subdir\file.png
+ * $gempath$\shaders\test.cgfx = M:\VoodooShader\Gem\\shaders\test.cgfx
+ * $localroot$\$resourcedir$\image.dds = M:\VoodooShader\\\resources\\image.dds
+ * @endcode
+ * 
+ * @note Repeated consecutive slashes will not cause errors with path parsing,
+ *       although in some locations they have special meanings.
+ * </p>
+ *        
+ * @subsection pathsvarsescape Escaping
+ * @since 0.1.4.158
+ * 
+ * To insert a $ into the path, place two $ symbols consecutively (an empty 
+ * variable name). 
+ * @code
+ * $localroot$\file.txt:$$Stream = M:\VoodooShader\\file.txt:$Stream
+ * @endcode
+ * 
+ * @section pathvarserror Errors
+ * <p>
+ *    If a variable cannot be resolved, an error value will be used in place of the
+ *    variable. This value is designed to cause the path to fail in any operations.
+ *    The error value will replace the <code>$varname$</code> with 
+ *    <code>--badvar:varname--</code>.
+ * </p>
+ * @section pathvarsbuiltin Built-In Variables
+ * <p>
+ *    Three built-in variables are provided for path use. These represent paths
+ *    that are otherwise difficult to resolve and may vary each run. These variables
+ *    are all \\-terminated.
+ * </p>
+ * @subsection pathvarsbuiltinlocal $localroot$
+ * <p>
+ *    The local root path is the location of the target executable, that is, the
+ *    program that Voodoo is loaded into. This is the absolute path to the file.
+ *    This path is retrieved from the Windows API during startup.
+ * </p>
+ * <p>
+ *    Example:
+ * @code
+ * TargetEXE = H:\Morrowind\Morrowind.exe
+ * $localroot$ = H:\Morrowind\
+ * @endcode
+ * </p>
+ * @subsection pathvarsbuiltinglobal $globalroot$ 
+ * <p>
+ *    The global root path of Voodoo. This is the main Voodoo folder, containing
+ *    most global resources and binaries. This path is retrieved from the registry
+ *    by the Voodoo loader.
+ * </p>
+ * <p>
+ *    Example:
+ * @code
+ * $globalroot$\bin\ = Voodoo binary path
+ * @endcode
+ * </p>
+ * @subsection pathvarsbuiltinrun $runroot$
+ * <p>
+ *    The running root of Voodoo. This is the directory that the target was
+ *    started in (the startup working directory). This path is retrieved from the
+ *    Windows API by the loader during startup. This is the most variable of the
+ *    builtin variables; it may change each run, depending on how the target
+ *    is started.
+ * </p>
+ * 
+ * @section pathvarsconfig Config Variables
+ * @note Not yet implemented.
+ * <p>
+ *    When the filesystem module is loaded, it retrieves any variables from the
+ *    config (using the XPath query "/VoodooConfig/Filesystem/Variables/Variable").
+ *    These variables must have a @p name attribute and text. They are added to the
+ *    filesystem's variable list. The text of these variables may contain other
+ *    variables, standard parsing rules apply.
+ * </p>
+ * @note Variables with identical names will overwrite their previous value. The
+ *       builtin variables cannot be overwritten.
+ * 
+ * @section pathvarsenviron Environment Variables
+ * <p>
+ *    If a variable name is given that cannot be found in the list of loaded and
+ *    builtin variables, it will be assumed to be an environment variable. These
+ *    variables are pulled directly from the process' environment and so may or
+ *    may not be useful. 
+ * </p>
+ * @warning Care should be taken while using environment variables; config variables
+ *          are much preferred.
+ */
