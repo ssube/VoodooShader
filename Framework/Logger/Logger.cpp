@@ -108,11 +108,18 @@ namespace VoodooShader
                 this->SetBufferSize(0);
 #endif
 
-                this->mLogFile << "<?xml version='1.0'?>\n<VoodooLog "; 
-                this->LogDate(); 
-                this->LogTime(); 
-                this->LogTicks();
-                this->mLogFile << ">\n";
+                stringstream logMsg;
+
+                logMsg << "<?xml version='1.0'?>\n<VoodooLog "; 
+                logMsg << this->LogDate(); 
+                logMsg << this->LogTime(); 
+                logMsg << this->LogTicks();
+                logMsg << ">\n";
+
+#ifdef _DEBUG
+                cout << logMsg.str();
+#endif
+                mLogFile << logMsg.str();
 
                 this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file opened by XmlLogger::Open.");
 
@@ -142,7 +149,7 @@ namespace VoodooShader
             if ( localtime_s(this->mLocalTime, &now) == 0 )
             {
                 stringstream stamp;
-                stamp << put_time(mLocalTime, "%H%M%S");
+                stamp << " time=\"" << put_time(mLocalTime, "%H%M%S") << "\" ";
                 //stamp.fill('0');
                 //stamp << " time=\"" << setw(2) << mLocalTime->tm_hour << setw(2) << mLocalTime->tm_min << setw(2) << mLocalTime->tm_sec << "\" ";
                 return stamp.str();
@@ -158,7 +165,7 @@ namespace VoodooShader
             if ( localtime_s(this->mLocalTime, &now) == 0 )
             {
                 stringstream stamp;
-                stamp << put_time(mLocalTime, "%Y%m%d");
+                stamp << " date=\"" << put_time(mLocalTime, "%Y%m%d") << "\" ";
                 //stamp.fill('0');
                 //stamp << " date=\"" << setw(4) << ( mLocalTime->tm_year + 1900 ) << setw(2) << (mLocalTime->tm_min + 1) << setw(2) << mLocalTime->tm_sec << "\" ";
                 return stamp.str();
@@ -190,7 +197,7 @@ namespace VoodooShader
                 " rev=\"" << version.Rev << "\" " <<
                 " debug=\"" << version.Debug << "\" />\n";
 
-#ifdef _DBEUG
+#ifdef _DEBUG
             cout << logMsg;
 #endif
             mLogFile << logMsg;
@@ -239,10 +246,10 @@ namespace VoodooShader
 
                 logMsg << "</Message>\n";
 
-#ifdef _DBEUG
-                cout << logMsg;
+#ifdef _DEBUG
+                cout << logMsg.str();
 #endif
-                mLogFile << logMsg;
+                mLogFile << logMsg.str();
             } catch ( std::exception exc ) {
                 UNREFERENCED_PARAMETER(exc);
                 // Unfortunately, we have to swallow the exception and simply fail to log.

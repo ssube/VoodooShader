@@ -295,12 +295,25 @@ namespace VoodooShader
 
         int File::Read(_In_ int count, _In_opt_count_(count) void * buffer)
         {
-            UNREFERENCED_PARAMETER(count);
-            UNREFERENCED_PARAMETER(buffer);
-
             if ( mHandle )
             {
-                //ReadFile(mHandle, buffer, )
+                DWORD readsize;
+                if ( count < 0 )
+                {
+                    readsize = GetFileSize(mHandle, NULL);
+                } else {
+                    readsize = (DWORD)count;
+                }
+
+                DWORD retsize = 0;
+                BOOL success = ReadFile(mHandle, buffer, readsize, &retsize, NULL);
+
+                if ( success == 0 )
+                {
+                    return 0;
+                } else {
+                    return (int)retsize;
+                }
             }
 
             return 0;
@@ -308,8 +321,59 @@ namespace VoodooShader
 
         bool File::Write(_In_ int count, _In_opt_count_(count) void * buffer )
         {
-            UNREFERENCED_PARAMETER(count);
-            UNREFERENCED_PARAMETER(buffer);
+            if ( mHandle )
+            {
+                if ( buffer == NULL )
+                {
+                    DWORD size = 0;
+                    if ( count < 0 )
+                    {
+                        Throw(VOODOO_FILESYSTEM_NAME, "Unable to write a negative number of null bytes.", mCore);
+                    } else {
+                        size = (DWORD)count;
+                    }
+
+                    buffer = malloc(size);
+
+                    if ( buffer == NULL )
+                    {
+                        Throw(VOODOO_FILESYSTEM_NAME, "Error allocating memory for null buffer.", mCore);
+                    }
+
+                    memset(buffer, 0, size);
+                    DWORD retsize = 0;
+                    BOOL success = WriteFile(mHandle, buffer, size, &retsize, NULL);
+
+                    free(buffer);
+
+                    if ( success == 0 )
+                    {
+                        return false;
+                    } else if ( retsize != size ) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    if ( count < 0 )
+                    {
+                        Throw(VOODOO_FILESYSTEM_NAME, "Unable to write a negative nubber of bytes.", mCore);
+                    }
+
+                    DWORD size = (DWORD)count;
+                    DWORD retsize = 0;
+                    BOOL success = WriteFile(mHandle, buffer, size, &retsize, NULL);
+
+                    if ( sucess == 0 )
+                    {
+                        return false;
+                    } else if ( retsize != size ) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
 
             return false;
         }
