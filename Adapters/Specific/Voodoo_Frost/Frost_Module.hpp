@@ -42,4 +42,12 @@ extern VoodooShader::ILoggerRef VoodooLogger;
 extern VoodooShader::Frost::Adapter * VoodooFrost;
 extern VoodooShader::ShaderRef TestShader;
 
+extern GLint gDepthTexture;
+extern GLint gThisFrame;
+extern GLint gLastFrame;
+extern GLint gLastShader;
+extern GLint gLastPass;
+extern GLsizei gViewWidth;
+extern GLsizei gViewHeight;
+
 #endif /*VOODOO_NWS_MODULE_HPP*/

@@ -182,6 +182,8 @@ namespace VoodooShader
             : public IImage
         {
         public:
+            static IImageRef Load(Core * core, String name);
+
             Image(Core * core, String name, unsigned int image);
 
             ~Image();
@@ -211,12 +213,12 @@ namespace VoodooShader
              *      TF_RGBA8, TF_RGBA16F, and TF_RGBA32F. Others are not supported and
              *      will cause this function to throw.
              * @note This can convert data between most formats, so the format given in
-             *      @arg desc will be the returned format. This makes precalculating the
+             *      @arg desc will be the returned format. This makes calculating the
              *      buffer size relatively easy.
              * @warning If this function converts formats or copies a large region, it
              *      will be slow. Avoid calling often.
              */
-            size_t CopyImageData(_In_ TextureRegion desc, _In_opt_ void * buffer)
+            size_t CopyImageData(_In_ TextureRegion desc, _In_opt_ void * buffer);
 
             /**
              * Retrieves a pointer to the image data.
@@ -232,6 +234,7 @@ namespace VoodooShader
 
         private:
             Core * mCore;
+            String mName;
             unsigned int mImage;
             TextureDesc mDesc;
         };

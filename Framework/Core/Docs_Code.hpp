@@ -57,8 +57,7 @@
  * <p>
  * Returns the name of the given class. This is used to register the classes in the core
  * ModuleManager initially. As each module is loaded, the provided classes are iterated
- * through from <code>0</code> to <code>ClassCount</code> and added to the list of
- * available classes.
+ * through from @p 0 to @p ClassCount-1 and added to the list ofavailable classes.
  * </p>
  * <p>
  * @code 
@@ -68,29 +67,28 @@
  * Creates a new instance of the given class, bound to the provided Core. For classes
  * needing additional data, they can cache and/or use the core. 
  * 
- * @note Class constructors <em>may</em> throw exceptions. The ModuleManager will catch
+ * @note Class constructors @em may throw exceptions. The ModuleManager will catch
  *       and log these when possible. When the class construction throws, null will be
  *       returned. 
  * </p>
  * 
  * @section moduleiobject IObject Interface
  * <p>
- * Every class provided through the above API <em>must</em> derive from the IObject
+ * Every class provided through the above API @em must derive from the IObject
  * interface and implement both methods.
  * </p>
  * <p>
  * @code
- * void IObject::DestroyObject();
+ * virtual void IObject::~IObject() throw() { };
  * @endcode</p>
  * <p>
- * Destroys the object, using <code>delete</code> from the same runtime it was created
- * in. <code>ClassCreate</code> is usually a wrapper for <code>new</code> and this method
- * usually just calls <code>delete this</code>. This does not null the pointer, must
- * clean up all memory allocated to the object, but may throw exceptions.
+ * Destroys the object, cleaning up any resources. Overloads are called, cleaning up their
+ * resources.\n
+ * This virtual destructor is set to throw if it is called, and so must always be overloaded.
  * </p>
  * <p>
  * @code
- * const char * IObject::GetObjectClass();
+ * virtual const char * IObject::GetObjectClass() = 0;
  * @endcode
  * </p>
  * <p>
@@ -104,8 +102,8 @@
  * IObject * object = ClassCreate(1);
  * const char * nameB = object->GetObjectClass();
  * 
- * assert( nameA == nameB ); // May return the same string, for simplicity, but
- * assert( strcmp(nameA, nameB) == 0 ); // Strings must always compare to identical
+ * assert( nameA == nameB );            // May return the same string, but
+ * assert( strcmp(nameA, nameB) == 0 ); // must return identical strings
  * @endcode
  * </p>
  * <p>

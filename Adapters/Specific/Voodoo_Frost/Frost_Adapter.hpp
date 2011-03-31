@@ -69,6 +69,8 @@ namespace VoodooShader
 
             CGpass mLastPass;
 
+            TextureRef mTexDepthFrame;
+            TextureRef mTexThisFrame;
             TextureRef mTexLastPass;
             TextureRef mTexLastShader;
         };

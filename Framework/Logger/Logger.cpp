@@ -51,7 +51,7 @@ namespace VoodooShader
         }
 
         XmlLogger::XmlLogger(_In_ Core * core)
-            : mCore(core), mLogLevel(LL_Initial)
+            : mCore(core), mLogLevel(LL_All)
         {
             this->mLocalTime = new tm();
         }
@@ -224,14 +224,15 @@ namespace VoodooShader
             if ( level < mLogLevel ) return;
             if ( !this->mLogFile.is_open() ) return;
 
+            char buffer[4096];
             va_list args;
 
             va_start(args, msg);
 
-            char buffer[4096];
-
             _vsnprintf_s(buffer, 4095, 4095, msg, args);
             buffer[4095] = 0;
+
+            va_end(args);
 
             this->mLogFile << "    <Message severity=\"";
             this->mLogFile << level;
@@ -239,8 +240,6 @@ namespace VoodooShader
             this->LogTime();
             this->LogTicks();
             this->mLogFile << " source=\"" << module << "\">" << buffer << "</Message>\n";
-
-            va_end(args);
         }
 
         void XmlLogger::Dump()

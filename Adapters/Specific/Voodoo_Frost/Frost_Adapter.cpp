@@ -83,7 +83,7 @@ namespace VoodooShader
 
         Adapter::~Adapter()
         {
-            mLogger->Log(LL_Info, VOODOO_FROST_NAME, "Frost adapter shutdown.");
+            //mLogger->Log(LL_Info, VOODOO_FROST_NAME, "Frost adapter shutdown.");
         }
 
         // IObject
@@ -137,9 +137,9 @@ namespace VoodooShader
             } else {
                 glBegin(GL_QUADS);
                 glTexCoord2f(0.0f, 1.0f);
-                glVertex2d(0.0f, 250.0f);
-                glTexCoord2f(0.0f, 0.0f);
                 glVertex2d(0.0f, 0.0f);
+                glTexCoord2f(0.0f, 0.0f);
+                glVertex2d(0.0f, 250.0f);
                 glTexCoord2f(1.0f, 0.0f);
                 glVertex2d(250.0f, 250.0f);
                 glTexCoord2f(1.0f, 1.0f);
@@ -196,6 +196,14 @@ namespace VoodooShader
                 return;
             }
 
+            glMatrixMode(GL_PROJECTION);
+            glPushMatrix();
+            glLoadIdentity();
+            glOrtho(0, 250.0, 250.0, 0, -1, 1);
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+            glLoadIdentity();
+
             size_t passes = tech->GetPassCount();
             for ( size_t curpass = 0; curpass < passes; ++curpass )
             {
@@ -221,15 +229,67 @@ namespace VoodooShader
                 glBindTexture(GL_TEXTURE_2D, techtarget);
                 glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
             }
+
+            glMatrixMode(GL_PROJECTION);
+            glPopMatrix();
+            glMatrixMode(GL_MODELVIEW);
+            glPopMatrix();
         }
 
         TextureRef Adapter::CreateTexture( _In_ String name, _In_ TextureDesc desc )
         {
             GLuint texture;
-            GLint internalFormat = GL_RGBA8; //Frost::Converter::ToGLFormat(desc.Format);
+            GLint texFmt, texIFmt, texType;
+            switch ( desc.Format )
+            {
+            case TF_RGBA8:
+                texFmt = GL_RGBA; //Frost::Converter::ToGLFormat(desc.Format);
+                texIFmt = GL_RGBA8;
+                texType = GL_UNSIGNED_BYTE;
+                break;
+            case TF_RGB8:
+                texFmt = GL_RGB;
+                texIFmt = GL_RGB8;
+                texType = GL_UNSIGNED_BYTE;
+                break;
+            case TF_RGBA16F:
+                texFmt = GL_RGBA;
+                texIFmt = GL_RGBA16F;
+                texType = GL_FLOAT;
+                break;
+            case TF_RGBA32F:
+                texFmt = GL_RGBA;
+                texIFmt = GL_RGBA32F;
+                texType = GL_DOUBLE;
+                break;
+            case TF_D16:
+                texFmt = GL_DEPTH_COMPONENT;
+                texIFmt = GL_DEPTH_COMPONENT16;
+                texType = GL_FLOAT;
+                break;
+            case TF_D32:
+                texFmt = GL_DEPTH_COMPONENT;
+                texIFmt = GL_DEPTH_COMPONENT32;
+                texType = GL_DOUBLE;
+                break;
+            case TF_Unknown:
+            default:
+                Throw(VOODOO_FROST_NAME, "Unable to resolve texture format.", mCore);
+            }
 
             glGenTextures(1, &texture);
             GLenum error =  glGetError();
+            while ( error != GL_NO_ERROR )
+            {
+                mLogger->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
+                error =  glGetError();
+            }
+
+            glBindTexture(GL_TEXTURE_2D, texture);
+            glTexImage2D(GL_TEXTURE_2D, 0, texIFmt, desc.Width, desc.Height, 0, texFmt, texType, NULL);
+            glBindTexture(GL_TEXTURE_2D, 0);
+
+            error =  glGetError();
             while ( error != GL_NO_ERROR )
             {
                 mLogger->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
@@ -241,17 +301,6 @@ namespace VoodooShader
                 mLogger->Log(LL_Debug, VOODOO_FROST_NAME, "OpenGL texture %u created successfully.", texture);
             } else {
                 mLogger->Log(LL_Debug, VOODOO_FROST_NAME, "OpenGL create failed, returned texture %u.", texture);
-            }
-
-            glBindTexture(GL_TEXTURE_2D, texture);
-            glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, desc.Width, desc.Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-            glBindTexture(GL_TEXTURE_2D, 0);
-
-            error =  glGetError();
-            while ( error != GL_NO_ERROR )
-            {
-                mLogger->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
-                error =  glGetError();
             }
 
             return mCore->AddTexture(name, (void*)texture);
@@ -310,11 +359,18 @@ namespace VoodooShader
                 desc.Mipmaps = false;
                 desc.Format = TF_RGBA8;
 
-                mTexLastPass = this->CreateTexture(":thisframe", desc);
+                mTexDepthFrame = this->CreateTexture(":depthframe", desc);
+                mTexThisFrame = this->CreateTexture(":thisframe", desc);
                 mTexLastPass = this->CreateTexture(":lastpass", desc);
                 mTexLastShader = this->CreateTexture(":lastshader", desc);
+
                 mCore->SetTexture(TT_ShaderTarget, mTexLastShader);
                 mCore->SetTexture(TT_PassTarget, mTexLastPass);
+
+                gDepthTexture = (GLint)mTexDepthFrame->GetData();
+                gThisFrame = (GLint)mTexThisFrame->GetData();
+                gLastPass = (GLint)mTexLastPass->GetData();
+                gLastShader = (GLint)mTexLastShader->GetData();
 
                 // Load shader
                 TestShader = mCore->CreateShader("test.cgfx", NULL);

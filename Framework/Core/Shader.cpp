@@ -179,39 +179,10 @@ namespace VoodooShader
         CGparameter cgparam = param->GetCgParameter();
 
         // Link to a texture
-        CGannotation textureAnnotation = cgGetNamedParameterAnnotation(
-            cgparam, "texture");
+        CGannotation textureAnnotation = cgGetNamedParameterAnnotation(cgparam, "texture");
 
-        if ( cgIsAnnotation(textureAnnotation) && cgGetAnnotationType(textureAnnotation) == CG_STRING )
+        if ( !cgIsAnnotation(textureAnnotation) || cgGetAnnotationType(textureAnnotation) != CG_STRING )
         {
-            const char * textureName = cgGetStringAnnotationValue(textureAnnotation);
-            if ( textureName != NULL && strlen(textureName) > 0 )
-            {
-                TextureRef texture = mCore->GetTexture(textureName);
-                if ( texture.get() )
-                {
-                    mCore->GetAdapter()->ConnectTexture(param, texture);
-                } else {
-                    mCore->GetLogger()->Log
-                    (
-                        LL_Warning,
-                        VOODOO_CORE_NAME,
-                        "Could not find texture %s for parameter %s, attempting to create",
-                        textureName, param->GetName().c_str()
-                    );
-
-                    this->CreateParameterTexture(param);
-                }
-            } else {
-                mCore->GetLogger()->Log
-                (
-                    LL_Warning,
-                    VOODOO_CORE_NAME,
-                    "Could not retrieve texture name for parameter %s.",
-                    param->GetName().c_str()
-                );
-            }
-        } else {
             mCore->GetLogger()->Log
             (
                 LL_Warning,
@@ -219,6 +190,40 @@ namespace VoodooShader
                 "Could not retrieve texture annotation for parameter %s.",
                 param->GetName().c_str()
             );
+
+            return;
+        }
+
+        const char * textureName = cgGetStringAnnotationValue(textureAnnotation);
+        if ( textureName == NULL || strlen(textureName) == 0 )
+        {
+            mCore->GetLogger()->Log
+            (
+                LL_Warning,
+                VOODOO_CORE_NAME,
+                "Could not retrieve texture name for parameter %s.",
+                param->GetName().c_str()
+            );
+
+            return;
+        }
+
+        // Try to get the texture first, otherwise pass to adapter
+        TextureRef texture = mCore->GetTexture(textureName);
+                
+        if ( texture.get() )
+        {
+            mCore->GetAdapter()->ConnectTexture(param, texture);
+        } else {
+            mCore->GetLogger()->Log
+            (
+                LL_Warning,
+                 VOODOO_CORE_NAME,
+                "Could not find texture %s for parameter %s, attempting to load.",
+                textureName, param->GetName().c_str()
+            );
+
+            this->CreateParameterTexture(param);
         }
     }
 

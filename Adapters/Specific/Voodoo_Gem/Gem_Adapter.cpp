@@ -500,27 +500,39 @@ namespace VoodooShader
 
                 this->UnbindPass();
 
-                /*
                 TextureRef passTarget = pass->GetTarget();
-                IDirect3DTexture9 * passTargetD3D = (IDirect3DTexture9 *)passTarget->GetData();
-                IDirect3DSurface9 * passSurface = NULL;
+                if ( passTarget.get() )
+                {
+                    IDirect3DTexture9 * passTargetD3D = passTarget->GetData<IDirect3DTexture9>();
+                    IDirect3DSurface9 * passSurface = NULL;
 
-                HRESULT hr = passTargetD3D->GetSurfaceLevel(0, &passSurface);
-                if ( FAILED(hr) || !passSurface )
-                {    
-                    mCore->Log("Failed to get target surface for pass %s (targeting texture %s).",
-                        pass->Name().c_str(), passTarget->Name().c_str());
+                    hr = passTargetD3D->GetSurfaceLevel(0, &passSurface);
+                    if ( FAILED(hr) || !passSurface )
+                    {    
+                        mCore->GetLogger()->Log
+                        (
+                            LL_Warning, 
+                            VOODOO_GEM_NAME,
+                            "Failed to get target surface for pass %s (targeting texture %s).", 
+                            pass->GetName().c_str(), passTarget->GetName().c_str()
+                        );
+                    } else {
+                        hr = mDevice->StretchRect(gScratch.RawSurface, NULL, passSurface, NULL, D3DTEXF_NONE);
 
-                    hr = mDevice->StretchRect(scratchSurface, NULL, passSurface, NULL, D3DTEXF_NONE);
-                    if ( FAILED(hr) )
-                    {
-                        mCore->Log("Failed to copy results to target for pass %s.",
-                            pass->Name().c_str());
+                        if ( FAILED(hr) )
+                        {
+                            mCore->GetLogger()->Log
+                            (
+                                LL_Error,
+                                VOODOO_GEM_NAME,
+                                "Failed to copy results to target for pass %s.", 
+                                pass->GetName().c_str()
+                            );
+                        }
                     }
                 } 
-                */
                 
-                hr = mDevice->StretchRect(gScratch.RawSurface, NULL, gBackbuffer.RawSurface, NULL, D3DTEXF_NONE);
+               /* hr = mDevice->StretchRect(gScratch.RawSurface, NULL, gBackbuffer.RawSurface, NULL, D3DTEXF_NONE);
 
                 if ( FAILED(hr) )
                 {
@@ -531,28 +543,40 @@ namespace VoodooShader
                         "Failed to copy results to target for pass %s (result %d).",
                         pass->GetName().c_str(), hr
                     );
-                }
+                }*/
             }
 
-            /*
             TextureRef techTarget = tech->GetTarget();
-            IDirect3DTexture9 * techTargetD3D = (IDirect3DTexture9 *)techTarget->GetData();
-            IDirect3DSurface9 * techSurface = NULL;
-
-            HRESULT hr = techTargetD3D->GetSurfaceLevel(0, &techSurface);
-            if ( FAILED(hr) || !techSurface )
+            if ( techTarget.get() )
             {
-                mCore->Log("Failed to get target surface for technique %s (targeting texture %s).",
-                    tech->Name().c_str(), techTarget->Name().c_str());
-            } else {
-                hr = mDevice->StretchRect(scratchSurface, NULL, techSurface, NULL, D3DTEXF_NONE);
-                if ( FAILED(hr) )
+                IDirect3DTexture9 * techTargetD3D = techTarget->GetData<IDirect3DTexture9>();
+                IDirect3DSurface9 * techSurface = NULL;
+
+                hr = techTargetD3D->GetSurfaceLevel(0, &techSurface);
+                if ( FAILED(hr) || !techSurface )
                 {
-                    mCore->Log("Failed to copy results to target for technique %s.",
-                        tech->Name().c_str());
+                    mCore->GetLogger()->Log
+                    (
+                        LL_Warning,
+                        VOODOO_GEM_NAME,
+                        "Failed to get target surface for technique %s (targeting texture %s).",
+                        tech->GetName().c_str(), techTarget->GetName().c_str()
+                    );
+                } else {
+                    hr = mDevice->StretchRect(gScratch.RawSurface, NULL, techSurface, NULL, D3DTEXF_NONE);
+
+                    if ( FAILED(hr) )
+                    {
+                        mCore->GetLogger()->Log
+                        (
+                            LL_Error,
+                            VOODOO_GEM_NAME,
+                            "Failed to copy results to target for technique %s.",
+                            tech->GetName().c_str()
+                        );
+                    }
                 }
             }
-            */
 
             mDevice->SetRenderTarget(0, rt);
         }

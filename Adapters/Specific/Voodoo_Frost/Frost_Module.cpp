@@ -7,6 +7,14 @@ VoodooShader::ILoggerRef VoodooLogger = NULL;
 VoodooShader::Frost::Adapter * VoodooFrost = NULL;
 VoodooShader::ShaderRef TestShader;
 
+GLint gDepthTexture = 0;
+GLint gThisFrame = 0;
+GLint gLastFrame = 0;
+GLint gLastShader = 0;
+GLint gLastPass = 0;
+GLsizei gViewWidth = 0;
+GLsizei gViewHeight = 0;
+
 namespace VoodooShader
 {
     namespace Frost

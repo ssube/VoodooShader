@@ -79,15 +79,30 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
     return glBindTexture(target, texture);
 }
 
+#define MASK_ALL ( GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_COLOR_BUFFER_BIT )
+#define MASK_HUD ( GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT )
+
 void GLAPIENTRY vglClear(GLbitfield mask)
 {
-    /*
-    if ( mask = ( GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT ) && glIsEnabled(GL_LIGHT0) )
-        if ( gBoundPass )
-            unbind gBoundPass
-        
-        shaderFlip()
-    */
+    if ( VoodooFrost && mask == MASK_HUD && glIsEnabled(GL_LIGHT0) )
+    {
+        GLint prevTexture = 0;
+        glGetIntegerv(GL_TEXTURE_BINDING_2D, &prevTexture);
+
+        // If depth is enabled, cache that now
+        glBindTexture(GL_TEXTURE_2D, gDepthTexture);
+        glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, gViewWidth, gViewHeight, 0);
+        // Fill the color buffers
+        glBindTexture(GL_TEXTURE_2D, gThisFrame);
+        glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, gViewWidth, gViewHeight, 0);
+        glBindTexture(GL_TEXTURE_2D, gLastShader);
+        glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, gViewWidth, gViewHeight, 0);
+        glBindTexture(GL_TEXTURE_2D, gLastPass);
+        glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, gViewWidth, gViewHeight, 0);
+
+        // Do shaders
+        VoodooFrost->DrawShader(TestShader);
+    }
 
     VoodooLogger->Log
     (
@@ -97,7 +112,7 @@ void GLAPIENTRY vglClear(GLbitfield mask)
         mask
     );
 
-    return glClear(mask);;
+    return glClear(mask);
 }
 
 void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
@@ -213,6 +228,8 @@ const GLubyte * GLAPIENTRY vglGetString(GLenum name)
 void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
 {
     // VoodooFrost->SetViewport(x, y, width, height)
+    gViewWidth = width;
+    gViewHeight = height;
 
     VoodooLogger->Log
     (
@@ -330,11 +347,6 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 
 BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
 {
-    if ( VoodooFrost && TestShader.get() )
-    {
-        VoodooFrost->DrawShader(TestShader);
-    }
-
     BOOL result = wglSwapLayerBuffers(hdc, uint);
 
     VoodooLogger->Log

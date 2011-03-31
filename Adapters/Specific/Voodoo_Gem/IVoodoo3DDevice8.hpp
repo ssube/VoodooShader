@@ -46,6 +46,7 @@ class IVoodoo3DDevice8
     * A pointer to the true underlying IDirect3DDevice9 object wrapped by this IVoodoo interface.
     */
     IDirect3DDevice9 * mRealDevice;
+    ULONG mRefCount;
 
     D3DPRESENT_PARAMETERS mParams;
 
@@ -64,7 +65,7 @@ public:
     * The default, public constructor for IVoodoo3D objects.
     */
     IVoodoo3DDevice8(IDirect3DDevice9 * realDevice, D3DPRESENT_PARAMETERS pp)
-        : mRealDevice(realDevice), mParams(pp)
+        : mRealDevice(realDevice), mParams(pp), mRefCount(0)
     {
         VoodooLogger->Log
         (
@@ -112,26 +113,25 @@ public:
 
     STDMETHOD_(ULONG, AddRef)()
     {
-        ULONG refCount = mRealDevice->AddRef();
+        //ULONG refCount = mRealDevice->AddRef();
+        ++mRefCount;
 
-#ifdef _DEBUG
-        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::AddRef() == %d",
-        refCount);
-#endif
+        VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::AddRef() == %d", mRefCount);
 
-        return refCount;
+        return mRefCount;
     }
 
     STDMETHOD_(ULONG, Release)()
     {
-        ULONG refCount = mRealDevice->Release();
+        //ULONG refCount = mRealDevice->Release();
+        --mRefCount;
 
-        if ( refCount == 0 )
+        if ( mRefCount == 0 )
         {
             delete this;
             return 0;
         } else {
-            return refCount;
+            return mRefCount;
         }
     }
 

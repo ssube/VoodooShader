@@ -84,20 +84,21 @@ namespace VoodooShader
             size_t pos = 0;
             while ( pos < total )
             {
-                if ( rawpath[pos] != '$' )
+                if ( rawpath[pos] == '/' ) 
+                {
+                    if ( dest == false )
+                    {
+                        finalname << "\\";
+                    } else {
+                        varname << "\\";
+                    }
+                } else if ( rawpath[pos] != '$' )
                 {
                     if ( dest == false )
                     {
                         finalname << rawpath[pos];
                     } else {
                         varname << rawpath[pos];
-                    }
-                } else if ( rawpath[pos] == '/' ) {
-                    if ( dest == false )
-                    {
-                        finalname << "\\";
-                    } else {
-                        varname << "\\";
                     }
                 } else {
                     if ( dest == false )
@@ -186,7 +187,7 @@ namespace VoodooShader
             while ( curDir != mDirectories.end() )
             {
                 // Try to find the file in each registered dir
-                String fullname = (*curDir) + ( "\\" + filename );
+                String fullname = (*curDir) + filename;
 
                 HANDLE file = CreateFileA(fullname.c_str(), 0, 0, NULL, OPEN_EXISTING, NULL, NULL);
 
@@ -202,7 +203,7 @@ namespace VoodooShader
                         name.c_str(), (*curDir).c_str()
                     );
 
-                    return IImageRef(new Image(mCore, image));
+                    return Image::Load(mCore, fullname);
                 }
 
                 ++curDir;
