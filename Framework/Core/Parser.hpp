@@ -37,7 +37,7 @@ namespace VoodooShader
      * This is used internally to handle file path resolution and Xml key
      * location.
      * 
-     * @sa The @ref vars "variables" documentation has full details on how
+     * @sa The @ref varsyntax "variables" documentation has full details on how
      *     parsing is performed.
      */
     class VOODOO_API Parser
@@ -55,9 +55,11 @@ namespace VoodooShader
         Core * mCore;
         Dictionary mVariables;
     };
+}
+
 
 /**
- * @page vars Variables
+ * @page varsyntax Variables
  * <p>
  *    The Voodoo Core provides a simple variable parser for use in path resolution
  *    or other string usage. The syntax and use of these variables is described in 
@@ -170,6 +172,5 @@ namespace VoodooShader
  *          
  * @}
  */
-}
 
 #endif /*VOODOO_PARSER_HPP*/
