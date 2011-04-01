@@ -5,14 +5,17 @@
         <Filesystem module="./Voodoo_Filesystem.dll" class="Filesystem" />
         <Adapter module="./Voodoo_Frost.dll" class="Frost_Adapter" />
     </Core>
+    <Variables>
+        <Variable name="adapter">Frost</Variable>
+    </Variables>
     <Logger>
         <File>VoodooFrost</File>
     </Logger>
     <Filesystem>
         <Paths>
             <Path>$localroot$/resources</Path>
-            <Path>$globalroot$/resources</Path>
-            <Path>$globalroot$/resources/shaders</Path>
+            <Path>$globalroot$/resources/$adapter$/</Path>
+            <Path>$globalroot$/resources/common/shaders</Path>
         </Paths>
     </Filesystem>
     <Frost_Adapter>

@@ -65,8 +65,6 @@ namespace VoodooShader
         (
             _In_ String name
         ) = 0;
-
-        virtual String ParsePath(_In_ String rawpath) = 0;
     };
 
     class IFile

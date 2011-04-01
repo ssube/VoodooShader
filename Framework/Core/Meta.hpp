@@ -60,6 +60,7 @@ namespace VoodooShader
     class Module;
     class ModuleManager;
     class Parameter;
+    class Parser;
     class Pass;
     class Technique;
     class Texture;
@@ -136,6 +137,8 @@ namespace VoodooShader
     typedef std::weak_ptr<ModuleManager>        ModuleManagerPtr;
     typedef std::shared_ptr<Parameter>          ParameterRef;
     typedef std::weak_ptr<Parameter>            ParameterPtr;
+    typedef std::shared_ptr<Parser>             ParserRef;
+    typedef std::weak_ptr<Parser>               ParserPtr;
     typedef std::shared_ptr<Pass>               PassRef;
     typedef std::weak_ptr<Pass>                 PassPtr;
     typedef std::shared_ptr<Shader>             ShaderRef;
@@ -188,6 +191,7 @@ namespace VoodooShader
 
     // Miscellaneous collections
     typedef std::map<TextureRef, ShaderRef>     MaterialMap;
+    typedef std::map<String, String>            Dictionary;
 
     /**
      * Texture formats for use by @ref VoodooShader::Texture "Textures",
@@ -315,7 +319,20 @@ namespace VoodooShader
         LL_Warning      = 0x50,     /*!< Warning log messages */
         LL_Warning_API  = 0x60,     /*!< Verbose, possibly false-positive, warnings from API calls */
         LL_Error        = 0xB0,     /*!< General error log messages */
-        LL_Fatal        = 0xFF,     /*!< Fatal error log messages */
+        LL_Fatal        = 0xF0,     /*!< Fatal error log messages */
+    };
+
+    /**
+     * String parsing flags. These modify the behavior of the string parser.
+     */
+    enum ParseFlags
+    {
+        PF_None             = 0x00,     /*!< No special behavior */
+        // Working flags
+        PF_SingleSlash      = 0x01,     /*!< No repeated slashes (useful for XPath). */
+        PF_SlashOnly        = 0x02,     /*!< Replace all backslashes with forward slashes. */
+        PF_BackslashOnly    = 0x04,     /*!< Replace all forward slashes with backslashes. */
+        //PF_Lowercase        = 0x08,     /*!< Lowercase all characters */
     };
     /**
      * @}

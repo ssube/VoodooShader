@@ -318,7 +318,7 @@
  * <table>
  * <tr><th>Format</th><th>Extension</th><th>Load Support</th><th>Save Support</th></tr>
  * 
- * <tr><td>Windows Bitmap</td><td>bmp</td><td>Yes</td><td>Yes</td></tr>
+ * <tr><td>Windows Bitmap<sup2></sup></td><td>bmp</td><td>Yes</td><td>Yes</td></tr>
  * <tr><td>Dr. Halo</td><td>cut</td><td>Yes</td></tr>
  * <tr><td>Multi-PCX</td><td>dcx</td><td>Yes</td></tr>
  * <tr><td>Dicom</td><td>dcm</td><td>Yes</td></tr>
@@ -326,7 +326,7 @@
  * <tr><td>OpenEXR</td><td>ext</td><td>Yes</td><td>Yes</td></tr>
  * <tr><td>Flexible Image Transport System</td><td>fits, fit</td><td>Yes</td></tr>
  * <tr><td>Heavy Metal: FAKK 2</td><td>ftx</td><td>Yes</td>
- * <tr><td>C-style Header</td><td>h</td><td>Yes</td></tr>
+ * <tr><td>C-style Header<sup2></sup></td><td>h</td><td></td><td>Yes</td></tr>
  * <tr><td>Radiance High Dynamic</td><td>hdr</td><td>Yes</td><td>Yes</td></tr>
  * <tr><td>Macintosh Icon</td><td>icns</td><td>Yes</td></tr>
  * <tr><td>Windows icon/cursor</td><td>ico, cur</td><td>Yes<sup>1</sup></td></tr>

@@ -37,6 +37,7 @@
 #include "Module.hpp"
 #include "Object.hpp"
 #include "Parameter.hpp"
+#include "Parser.hpp"
 #include "Shader.hpp"
 #include "Texture.hpp"
 #include "Version.hpp"

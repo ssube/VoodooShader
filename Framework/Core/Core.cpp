@@ -9,14 +9,15 @@
 #include "Logger.hpp"
 #include "MaterialManager.hpp"
 #include "Module.hpp"
+#include "Parser.hpp"
 
 #include "pugixml.hpp"
 
 namespace VoodooShader
 {
-    Core * CreateCore(_In_ const char * globalroot, _In_ const char * localroot)
+    Core * CreateCore(_In_ const char * globalroot, _In_ const char * runroot)
     {
-        return new Core(globalroot, localroot);
+        return new Core(globalroot, runroot);
     }
 
     void DestroyCore(_In_ Core * core)
@@ -24,23 +25,37 @@ namespace VoodooShader
         delete core;
     }
 
-    Core::Core(_In_ const char * globalroot, _In_ const char * localroot)
+    Core::Core(_In_ const char * globalroot, _In_ const char * runroot)
         : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCgContext(NULL)
     {
         using namespace pugi;
 
         mGlobalRoot = globalroot;
         mGlobalRoot += "\\";
+        mRunRoot = runroot;
+        mRunRoot += "\\";
+
+        // Get the local root
+        char localroot[MAX_PATH];
+        HMODULE targetModule = GetModuleHandle(NULL);
+        GetModuleFileName(targetModule, localroot, MAX_PATH);
+        char * lastslash = strrchr(localroot, '\\');
+        if ( lastslash )
+        {
+            lastslash[0] = '\0';
+        }
         mLocalRoot = localroot;
         mLocalRoot += "\\";
 
+        // Set up the internal objects
         mModManager = ModuleManagerRef(new ModuleManager(this));
+        mParser = ParserRef(new Parser(this));
 
         xml_document * config = NULL;
 
         try
         {
-            String logpath = mLocalRoot + "VoodooConfig.xmlconfig";
+            String logpath = mRunRoot + "VoodooConfig.xmlconfig";
             config = new pugi::xml_document();
             xml_parse_result result = config->load_file(logpath.c_str());
 
@@ -54,6 +69,21 @@ namespace VoodooShader
             if ( !coreNode )
             {
                 throw std::exception("Could not find Core node.");
+            }
+
+            // Load variables
+            xpath_query varNodesQuery("/VoodooConfig/Variables/Variable");
+            xpath_node_set varNodes = varNodesQuery.evaluate_node_set(*config);
+            xpath_node_set::const_iterator varNodeIter = varNodes.begin();
+            while ( varNodeIter != varNodes.end() )
+            {
+                xml_node varNode = (*varNodeIter).node();
+
+                String name = varNode.attribute("name").value();
+                String value = varNode.first_child().value();
+                mParser->AddVariable(name, value);
+
+                ++varNodeIter;
             }
 
             // Load logger
@@ -188,6 +218,11 @@ namespace VoodooShader
         return mLocalRoot;
     }
 
+    String Core::GetRunRoot()
+    {
+        return mRunRoot;
+    }
+
     void Core::SetCgContext(CGcontext context)
     {
         mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Setting Cg context to %p.", context);
@@ -243,6 +278,11 @@ namespace VoodooShader
     ModuleManagerRef Core::GetModuleManager()
     {
         return mModManager;
+    }
+
+    ParserRef Core::GetParser()
+    {
+        return mParser;
     }
 
     TextureRef Core::AddTexture(String name, void * data)

@@ -5,14 +5,17 @@
         <Filesystem module="./Voodoo_Filesystem.dll" class="Filesystem" />
         <Adapter module="./Voodoo_Gem.dll" class="Gem_Adapter" />
     </Core>
+    <Variables>
+        <Variable name="adapter">Gem</Variable>
+    </Variables>
     <Logger>
         <File>VoodooGem</File>
     </Logger>
     <Filesystem>
         <Paths>
             <Path>$localroot$/resources</Path>
-            <Path>$globalroot$/resources</Path>
-            <Path>$globalroot$/resources/shaders</Path>
+            <Path>$globalroot$/resources/$adapter$/</Path>
+            <Path>$globalroot$/resources/common/shaders</Path>
         </Paths>
     </Filesystem>
     <Gem_Adapter>

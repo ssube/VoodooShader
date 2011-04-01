@@ -28,6 +28,9 @@
     <ClCompile Include="Converter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Voodoo_Core.hpp" />
@@ -93,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="Filesystem.hpp">
       <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

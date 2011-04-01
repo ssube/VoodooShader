@@ -3,8 +3,6 @@
 #include "Filesystem_Version.hpp"
 
 #include "IL\il.h"
-#include <sstream>
-#include <iostream>
 
 namespace VoodooShader
 {
@@ -59,81 +57,23 @@ namespace VoodooShader
 
         void FileSystem::AddDirectory(String name)
         {
-            String realname = this->ParsePath(name) + "\\";
+            String realname = mCore->GetParser()->ParseString(name) + "\\";
 
             this->mDirectories.push_front(realname);
         }
 
         void FileSystem::RemoveDirectory(String name)
         {
-            String realname = this->ParsePath(name) + "\\";
+            String realname = mCore->GetParser()->ParseString(name) + "\\";
 
             this->mDirectories.remove_if([&](String current){return (current == realname);});
-        }
-
-        String FileSystem::ParsePath(_In_ String rawpath)
-        {
-            using namespace std;
-
-            // Parse out any variables in the filename, first
-            stringstream finalname;
-            stringstream varname;
-            bool dest = false;
-
-            size_t total = rawpath.length();
-            size_t pos = 0;
-            while ( pos < total )
-            {
-                if ( rawpath[pos] != '$' )
-                {
-                    if ( dest == false )
-                    {
-                        finalname << rawpath[pos];
-                    } else {
-                        varname << rawpath[pos];
-                    }
-                } else {
-                    if ( dest == false )
-                    {
-                        // Start of a var
-                        varname.clear();
-                        dest = true;
-                    } else {
-                        // End
-                        String var = varname.str();
-                        if ( var.length() == 0 )
-                        {
-                            finalname << "$";
-                        } else if ( var == "localroot" ) {
-                            finalname << mCore->GetLocalRoot();
-                        } else if ( var == "globalroot" ) {
-                            finalname << mCore->GetGlobalRoot();
-                        } else {
-                            size_t reqSize = 0;
-                            getenv_s(&reqSize, NULL, 0, var.c_str());
-                            if ( reqSize == 0 )
-                            {
-                                finalname << "--badvar:" << var << "--";
-                            } else {
-                                char value[reqSize];
-                                getenv_s(&reqSize, value, reqSize, var.c_str());
-                                finalname << value;
-                            }
-                        }
-                        dest = false;
-                    }
-                }
-                ++pos;
-            }
-
-            return finalname.str();
         }
 
         IFileRef FileSystem::GetFile(String name)
         {
             mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for raw file \"%s\".", name.c_str());
 
-            String filename = this->ParsePath(name);
+            String filename = mCore->GetParser()->ParseString(name);
             mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for parsed file \"%s\".", filename.c_str());
 
             // 
@@ -179,7 +119,7 @@ namespace VoodooShader
         {
             mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for raw image \"%s\".", name.c_str());
 
-            String filename = this->ParsePath(name);
+            String filename = mCore->GetParser()->ParseString(name);
             mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for parsed image \"%s\".", filename.c_str());
 
             // 
@@ -302,6 +242,11 @@ namespace VoodooShader
                 if ( count < 0 )
                 {
                     readsize = GetFileSize(mHandle, NULL);
+
+                    if ( buffer == NULL )
+                    {
+                        return (int)readsize;
+                    }
                 } else {
                     readsize = (DWORD)count;
                 }
@@ -363,9 +308,9 @@ namespace VoodooShader
 
                     DWORD size = (DWORD)count;
                     DWORD retsize = 0;
-                    BOOL success = WriteFile(mHandle, buffer, size, &retsize, NULL);
+                    BOOL success = 0; //WriteFile(mHandle, buffer, size, &retsize, NULL);
 
-                    if ( sucess == 0 )
+                    if ( success == 0 )
                     {
                         return false;
                     } else if ( retsize != size ) {

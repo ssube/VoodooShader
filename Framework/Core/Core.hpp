@@ -48,7 +48,7 @@ namespace VoodooShader
     VOODOO_API Core * CreateCore
     (
         _In_ const char * globalroot,
-        _In_ const char * localroot
+        _In_ const char * runroot
     );
         
     /**
@@ -86,7 +86,7 @@ namespace VoodooShader
         Core
         (
             _In_ const char * globalroot,
-            _In_ const char * localroot
+            _In_ const char * runroot
         );
 
         /**
@@ -123,6 +123,15 @@ namespace VoodooShader
         String GetGlobalRoot();
 
         String GetLocalRoot();
+
+        String GetRunRoot();
+
+        /**
+         * Retrieves this core's variable parser.
+         * 
+         * @return A shared pointer to the parser (always valid).
+         */
+        ParserRef GetParser();
 
          /**
           * Retrieves this core's module manager.
@@ -342,6 +351,7 @@ namespace VoodooShader
          */
         String mGlobalRoot;
         String mLocalRoot;
+        String mRunRoot;
 
         /**
          * Cg context used by this core.
@@ -372,6 +382,11 @@ namespace VoodooShader
          * The current module manager.
          */
         ModuleManagerRef mModManager;
+
+        /**
+         * The current variable parser.
+         */
+        ParserRef mParser;
 
         /**
          * Collection of all shaders created by this core, by name with
