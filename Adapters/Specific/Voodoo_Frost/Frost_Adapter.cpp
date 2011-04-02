@@ -281,7 +281,7 @@ namespace VoodooShader
             GLenum error =  glGetError();
             while ( error != GL_NO_ERROR )
             {
-                mLogger->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
+                mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
                 error =  glGetError();
             }
 
@@ -292,7 +292,7 @@ namespace VoodooShader
             error =  glGetError();
             while ( error != GL_NO_ERROR )
             {
-                mLogger->Log(LL_Warning_API, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
+                mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
                 error =  glGetError();
             }
 
@@ -341,7 +341,6 @@ namespace VoodooShader
 
                 cgSetContextBehavior(mCgContext, CG_BEHAVIOR_LATEST);
                 cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
-                cgSetErrorHandler(&(Core::CgErrorHandler), this);
 
                 cgSetAutoCompile(mCgContext, CG_COMPILE_IMMEDIATE);
                 cgSetParameterSettingMode(mCgContext, CG_IMMEDIATE_PARAMETER_SETTING);

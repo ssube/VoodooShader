@@ -76,8 +76,8 @@ namespace VoodooShader
  * variable is used), but names may not contain variables.
  * 
  * @warning Variables may be placed within variable values, these will be resolved when the 
- *    variable is used. This means that recursion (and infinite loops) are possible and you must
- *    take care not to trigger these.
+ *    variable is used. This means that recursion is possible and care must be taken to avoid
+ *    infinite loops.
  *    
  * @note The $ character is illegal in filenames, but may be useful when working
  *    with file streams.
