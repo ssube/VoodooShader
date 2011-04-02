@@ -99,10 +99,10 @@ namespace VoodooShader
     struct Version;
 
      /**
-      * Macro to throw Voodoo @ref Exception exceptions with extended debug info, particularly
-      * function, filename and line. These exceptions are also logged if possible (requires a valid
-      * core to be given). The Exception class derives from std::exception, so these are simple to
-      * handle.
+      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, 
+      * particularly function, filename and line. These exceptions are also logged if possible 
+      * (requires a valid core to be given). The Exception class derives from std::exception, so 
+      * these are simple to handle.
       */
 #define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
 
@@ -373,7 +373,7 @@ namespace VoodooShader
      */
     struct Version
     {
-        char * Name;
+        String Name;
         int Major;
         int Minor;
         long Patch;

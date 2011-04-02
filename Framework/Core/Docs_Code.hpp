@@ -19,6 +19,8 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
   
+namespace VoodooShader
+{
 /**
  * @page modulespec Module Specifications
  * 
@@ -95,7 +97,7 @@
  * assert( strcmp(nameA, nameB) == 0 ); // must return identical strings
  * @endcode
  * 
- * While @ref VoodooShader::IObject does not provide reference-counting or fancier features, it 
+ * While @ref IObject does not provide reference-counting or fancier features, it 
  * does handle most vital features of dynamic module classes. Additional features may be added to 
  * later versions as needed.
  *
@@ -110,7 +112,7 @@
  * 
  * In many senses, adapters are addon modules and they must follow the @ref modulespec as any other
  * module. However, only one adapter object is created at a time, and that object @em must derive 
- * from @ref VoodooShader::IAdapter.
+ * from @ref IAdapter.
  * 
  * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter
  * itself. Adapter modules may even provide more than one adapter class.
@@ -372,3 +374,4 @@
  *    </ul>
  * </ul>
  */
+}

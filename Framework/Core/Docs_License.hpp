@@ -19,6 +19,8 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
   
+namespace VoodooShader
+{
 /**
  * @mainpage Voodoo Shader Framework
  * The Voodoo Shader Framework is a set of support libraries designed to provide extensive shader 
@@ -572,3 +574,4 @@
  *
  *     END OF TERMS AND CONDITIONS
  */
+}

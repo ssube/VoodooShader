@@ -52,7 +52,7 @@ namespace VoodooShader
         }
     }
 
-    void FullscreenManager::Remove(size_t position)
+    void FullscreenManager::Remove(_In_ size_t position)
     {
         if ( this->mShaders.size() <= position )
         {
@@ -67,7 +67,7 @@ namespace VoodooShader
         }
     }
 
-    void FullscreenManager::Remove(ShaderRef shader)
+    void FullscreenManager::Remove(_In_ ShaderRef shader)
     {
         std::remove_if
         (

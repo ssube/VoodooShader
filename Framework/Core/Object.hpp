@@ -38,7 +38,7 @@ namespace VoodooShader
      * Defines a simple interface all Voodoo objects from dynamic modules must inherit. This
      * interface handles destruction and identification of these objects.
      * 
-     * @warning All classes derived from IObject <b><em>must</e></b> have unique names.
+     * @warning All classes derived from IObject <b><em>must</em></b> have unique names.
      */
     class IObject
     {

@@ -7,9 +7,9 @@ namespace VoodooShader
 {
     Exception::Exception
     (
-        char * module, char * message, 
-        Core * core, 
-        char * file, char * function, int line
+        _In_ char * module, _In_ char * message, 
+        _In_ Core * core, 
+        _In_ char * file, _In_ char * function, _In_ int line
     )
         : std::exception(message), mFmtMsg(NULL),
             mModule(module), mMessage(message), 
@@ -34,9 +34,9 @@ namespace VoodooShader
 
     Exception::Exception
     (
-        String module, String message, 
-        Core * core, 
-        char * file, char * function, int line
+        _In_ String module, _In_ String message, 
+        _In_ Core * core, 
+        _In_ char * file, _In_ char * function, _In_ int line
     )
         : std::exception(message.c_str()), mFmtMsg(NULL),
             mModule(module), mMessage(message), 

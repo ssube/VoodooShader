@@ -337,7 +337,7 @@ namespace VoodooShader
         }
     }
 
-    TextureRef Core::GetTexture(String name)
+    TextureRef Core::GetTexture(_In_ String name)
     {
         TextureMap::iterator textureEntry = this->mTextures.find(name);
         if ( textureEntry != this->mTextures.end() )
@@ -351,7 +351,7 @@ namespace VoodooShader
         }
     }
 
-    TextureRef Core::GetTexture(TextureType function)
+    TextureRef Core::GetTexture(_In_ TextureType function)
     {
         switch ( function )
         {

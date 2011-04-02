@@ -19,6 +19,8 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
   
+namespace VoodooShader
+{
 /**
  * @page Shaders
  * Each shader may have one or more techniques. A technique describes a full rendering process, and 
@@ -116,7 +118,7 @@
  * 
  * If no target is specified in the technique or pass annotations, the shader linker uses the 
  * texture currently bound to the core's special textures. These may be set using 
- * VoodooShader::Core::SetTexture(TextureType, TextureRef). Relinking a shader may change these 
+ * Core::SetTexture(TextureType, TextureRef). Relinking a shader may change these 
  * targets.
  *
  * @page Textures
@@ -134,7 +136,7 @@
  *        slices, x by y by z)</li>
  * </ul>
  * 
- * A different sampler type is provided for each texture type (@p sampler1D, @psampler2D, and 
+ * A different sampler type is provided for each texture type (@p sampler1D, @p sampler2D, and 
  * @p sampler3D), each optimized to sample pixels from a particular texture type. Various
  * sampling instructions are provided, varying in how they sample from the texture and what
  * sampler type they use (2d, 3d, mipmap bias, etc).
@@ -323,3 +325,4 @@
  * some innate restrictions or lose data during conversion to Voodoo-supported formats, so take 
  * care to properly test any image resources you use.
  */
+}

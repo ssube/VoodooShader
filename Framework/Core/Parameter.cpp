@@ -8,7 +8,7 @@
 
 namespace VoodooShader
 {
-    Parameter::Parameter(Core * core, String name, ParameterType type)
+    Parameter::Parameter(_In_ Core * core, _In_ String name, _In_ ParameterType type)
         : mType(type), mParent(NULL), mVirtual(true), mCore(core), mName(name)
     { 
         mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Creating a virtual parameter (%s, core %p) of type %s.", name.c_str(), core, Converter::ToString(type));
@@ -47,7 +47,7 @@ namespace VoodooShader
         }
     }
 
-    Parameter::Parameter(Shader * parent, CGparameter param)
+    Parameter::Parameter(_In_ Shader * parent, _In_ CGparameter param)
         : mParent(parent), mParam(param), mVirtual(false), mCore(parent->GetCore())
     {
         mType = Converter::ToParameterType(cgGetParameterType(param));
@@ -118,30 +118,30 @@ namespace VoodooShader
         return this->mType;
     }
 
-    void Parameter::Set(TextureRef newTex)
+    void Parameter::Set(_In_ TextureRef newTex)
     {
         this->mValueTexture = newTex;
     }
 
-    void Parameter::Set(float newX)
+    void Parameter::Set(_In_ float newX)
     {
         this->mValueFloat[0] = newX;
     }
 
-    void Parameter::Set(float newX, float newY)
+    void Parameter::Set(_In_ float newX, _In_ float newY)
     {
         this->mValueFloat[0] = newX;
         this->mValueFloat[1] = newY;
     }
 
-    void Parameter::Set(float newX, float newY, float newZ)
+    void Parameter::Set(_In_ float newX, _In_ float newY, _In_ float newZ)
     {
         this->mValueFloat[0] = newX;
         this->mValueFloat[1] = newY;
         this->mValueFloat[2] = newZ;
     }
 
-    void Parameter::Set(float newX, float newY, float newZ, float newW)
+    void Parameter::Set(_In_ float newX, _In_ float newY, _In_ float newZ, _In_ float newW)
     {
         this->mValueFloat[0] = newX;
         this->mValueFloat[1] = newY;
@@ -149,23 +149,23 @@ namespace VoodooShader
         this->mValueFloat[3] = newW;
     }
 
-    void Parameter::Get(TextureRef & param)
+    void Parameter::Get(_In_ TextureRef & param)
     {
         param = this->mValueTexture;
     }
 
-    void Parameter::Get(float & paramX)
+    void Parameter::Get(_In_ float & paramX)
     {
         paramX = this->mValueFloat[0];
     }
 
-    void Parameter::Get(float & paramX, float & paramY)
+    void Parameter::Get(_In_ float & paramX, _In_ float & paramY)
     {
         paramX = this->mValueFloat[0];
         paramY = this->mValueFloat[1];
     }
 
-    void Parameter::Get(float & paramX, float & paramY, float & paramZ)
+    void Parameter::Get(_In_ float & paramX, _In_ float & paramY, _In_ float & paramZ)
     {
         paramX = this->mValueFloat[0];
         paramY = this->mValueFloat[1];
@@ -174,7 +174,7 @@ namespace VoodooShader
 
     void Parameter::Get
     (
-        float & paramX, float & paramY, float & paramZ, float & paramW
+        _In_ float & paramX, _In_ float & paramY, _In_ float & paramZ, _In_ float & paramW
     )
     {
         paramX = this->mValueFloat[0];
@@ -188,6 +188,7 @@ namespace VoodooShader
         return mValueTexture;
     };
 
+    _Check_return_
     float * Parameter::GetFloat()
     {
         return mValueFloat;
