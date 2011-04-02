@@ -149,23 +149,23 @@ namespace VoodooShader
         this->mValueFloat[3] = newW;
     }
 
-    void Parameter::Get(_In_ TextureRef & param)
+    void Parameter::Get(_Out_ TextureRef & param)
     {
         param = this->mValueTexture;
     }
 
-    void Parameter::Get(_In_ float & paramX)
+    void Parameter::Get(_Out_ float & paramX)
     {
         paramX = this->mValueFloat[0];
     }
 
-    void Parameter::Get(_In_ float & paramX, _In_ float & paramY)
+    void Parameter::Get(_Out_ float & paramX, _Out_ float & paramY)
     {
         paramX = this->mValueFloat[0];
         paramY = this->mValueFloat[1];
     }
 
-    void Parameter::Get(_In_ float & paramX, _In_ float & paramY, _In_ float & paramZ)
+    void Parameter::Get(_Out_ float & paramX, _Out_ float & paramY, _Out_ float & paramZ)
     {
         paramX = this->mValueFloat[0];
         paramY = this->mValueFloat[1];
@@ -174,7 +174,7 @@ namespace VoodooShader
 
     void Parameter::Get
     (
-        _In_ float & paramX, _In_ float & paramY, _In_ float & paramZ, _In_ float & paramW
+        _Out_ float & paramX, _Out_ float & paramY, _Out_ float & paramZ, _Out_ float & paramW
     )
     {
         paramX = this->mValueFloat[0];
@@ -188,7 +188,7 @@ namespace VoodooShader
         return mValueTexture;
     };
 
-    _Check_return_
+    _Ret_count_c_(16)
     float * Parameter::GetFloat()
     {
         return mValueFloat;
