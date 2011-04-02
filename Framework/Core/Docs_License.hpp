@@ -21,124 +21,105 @@
   
 /**
  * @mainpage Voodoo Shader Framework
- * <p>
- *    The Voodoo Shader Framework is a set of support libraries designed to provide 
- *    extensive shader integration into graphics applications, both before and after release.
- * </p>
+ * The Voodoo Shader Framework is a set of support libraries designed to provide extensive shader 
+ * integration into graphics applications, both before and after development.
+ * 
  * @section voodooshaderlib Shader Support
- * <p>
- *    Voodoo uses nVidia's Cg Toolkit to provide a common, simple shader language
- *    and cross-API compiler for widely supported shaders. Voodoo shaders run under both
- *    OpenGL and DirectX and can scale over a great variety of hardware, from OpenGL 1.0
- *    to 4.0 and DirectX 8 to 11. Applications using any of the supported APIs are
- *    supported within Voodoo, with a near-identical feature set provided across the board.
- * </p>
- * <p>
- *    In addition to fully supporting the Cg language, Voodoo implements a second, internal 
- *    linking stage to offer more powerful features such as deferred rendering and 
- *    material shaders, with or without original application support. Voodoo uses features
- *    such as semantics and annotations to provide these features without adding complexity 
- *    to the language or breaking compatibility with other shader tools. Voodoo provides a
- *    set of compiler options to allow shaders to conditionally compile various levels of
- *    support.
- * </p>
- * <p>
- *    Voodoo fully supports techniques and passes within a shader, as well as various program
- *    stages. Access to hardware textures and render information is provided through
- *    application-specific adapters, allowing Voodoo to be tied tightly into a huge number of
- *    new and existing programs.
- * </p>
+ * Voodoo uses nVidia's Cg Toolkit to provide a common, simple shader language and cross-API 
+ * compiler for widely supported shaders. Voodoo shaders run under both OpenGL and DirectX and can 
+ * scale over a great variety of hardware, from OpenGL 1.0 to 4.0 and DirectX 8 to 11. Applications 
+ * using any of the supported APIs are supported within Voodoo, with a near-identical feature set 
+ * provided across the board.
+ *
+ * In addition to fully supporting the Cg language, Voodoo implements a second, internal linking 
+ * stage to offer more powerful features such as deferred rendering and material shaders, with or 
+ * without original application support. Voodoo uses features such as semantics and annotations to 
+ * provide these features without adding complexity to the language or breaking compatibility with 
+ * other shader tools. Voodoo provides a set of compiler options to allow shaders to conditionally 
+ * compile various levels of support.
+ * 
+ * Voodoo fully supports techniques and passes within a shader, as well as various program stages. 
+ * Access to hardware textures and render information is provided through application-specific 
+ * adapters, allowing Voodoo to be tied tightly into a huge number of new and existing programs.
+ * 
  * @section voodoosupportlibs Support Libraries
- * <p>
- *    Voodoo provides a number of support libraries, many used within Voodoo.
- *    These include the Voodoo dynamic loader (capable to dynamically loading the
- *    Voodoo core and an adapter into a running process), a simple filesystem
- *    manager to streamline resource loading, pugixml-based XML parsing library,
- *    and EasyHook-based function intercept library. These libraries are available
- *    for use by code within and outside of the Voodoo project and simplify a
- *    number of common or complex tasks.
- * </p>
+ * Voodoo provides a number of support libraries, many used within Voodoo. These include the Voodoo 
+ * dynamic loader (capable to dynamically loading the Voodoo core and an adapter into a running 
+ * process), a simple filesystem manager to streamline resource loading, pugixml-based XML parsing 
+ * library, and EasyHook-based function intercept library. These libraries are available for use by 
+ * code within and outside of the Voodoo project and simplify a number of common or complex tasks.
+ * 
  * @section voodoosupportclass Support Classes
- * <p>
- *    Voodoo also provides support classes for simple post-processing and material
- *    shader management, although adapters may prefer to handle that internally.
- *    The core implementations of the managers provide a minimal feature set but
- *    are fully functional.
- * </p>
- * @section voodooquality Testing and Quality
- * <p>
- *    The Voodoo framework covers an immense scope and tackles an intriguing and
- *    often complex task. To maximize stability, speed and code quality, all code within
- *    the Voodoo Shader Framework must meet @ref codestyle "a set of quality-control standards"
- *    and be fully tested before release. Tests are carried out within the target
- *    applications, with internal test suites on the way.
- * </p>
+ * Voodoo also provides support classes for variable parsing, simple post-processing and material 
+ * shader management, and a number of other functions. These classes may be used by adapters to
+ * quickly and easily provide core functionality.
+ * 
+ * @section voodooquality Testing and Code Quality
+ * The Voodoo framework covers an immense scope and tackles an intriguing and often complex task. 
+ * To maximize stability, speed and code quality, all code within the Voodoo Shader Framework must 
+ * meet @ref codestyle "a set of quality-control standards" and be fully tested before release. 
+ * Tests are carried out within the target applications, with internal test suites on the way.
+ * 
  * @section voodoologs Logs and Debugging
- * <p>
- *    In addition to code testing, Voodoo features an Xml logging library to record
- *    all actions in detail. The verbosity of the log can be customized, with the
- *    highest levels recording API calls and their parameters. Errors and warnings
- *    originating within Voodoo code are always logged, and safeguards are put in
- *    place to make sure log data is written to disk, even in the event of a fatal
- *    error or loss of power.
- * </p>
+ * In addition to code testing, Voodoo features an Xml logging library to record all actions in 
+ * detail. The verbosity of the log can be customized, with the highest levels recording API calls 
+ * and their parameters. Errors and warnings originating within Voodoo code are always logged, and 
+ * safeguards are put in place to make sure log data is written to disk, even in the event of a 
+ * fatal error or loss of power.
+ * 
+ * Debug builds of Voodoo are available, as is source code, to aid debugging. Debug builds are 
+ * built with full symbols and additional error checking.
+ * 
+ * @section voodoodocs Documentation
+ * The entire Voodoo project is heavily documented using doxygen notation. These docs are compiled
+ * and uploaded along with each code push and release. Everything from the variable syntax to 
+ * texture load formats to the adapter interface are documented in depth, cross-referenced and
+ * any potential issues are noted.
+ * 
+ * The documentation is interwoven in the source, so it is kept up-to-date and extensive and new
+ * code is documented as it's written.
  * 
  * @page License
- * 
  * @section licensesummary Summary
- * <p>
- *    The Voodoo Shader Framework is licensed under the terms of the GNU General
- *    Public License. This is in an effort to make it useful to as many people as 
- *    possible. 
- * </p>
- * <p>
- *    Some elements of the framework and additional modules may use different
- *    license terms, the terms below apply only to the core library. Differences
- *    in license terms are usually clearly marked, please contact the developer(s)
- *    with any questions you may have.
- * </p>
+ * The Voodoo Shader Framework is licensed under the terms of the GNU General Public License. This 
+ * is in an effort to make it useful to as many people as possible. 
+ * 
+ * Some elements of the framework and additional modules may use different license terms, the terms 
+ * below apply only to the core library. Differences in license terms are usually clearly marked, 
+ * please contact the developer(s) with any questions you may have.
+ * 
  * @subsection licenseeula Application EULAs
- * <p>
- *   The Voodoo Shader Framework is not a derivative work of any other work, nor is it
- *   bound under the terms of an other application's EULA or other license restrictions. 
- *   The framework is licensed solely under the terms of the GNU General Public License,
- *   version 2, and any claims otherwise are both false and unlawful.
- * </p>
- * <p>
- *   Portions of the Voodoo Shader Framework may be designed to operate aware of other 
- *   applications. These other applications may be licensed under different terms than 
- *   the framework. Claims have been made that Voodoo is then bound by the terms of these 
- *   target applications, or has no license terms. These are untrue and in no way change 
- *   the license terms Voodoo is provided under. Any use, redistribution or modification 
- *   (among other actions) of Voodoo are legally bound by the terms in this document.
- * </p>
+ * The Voodoo Shader Framework is not a derivative work of any other work, nor is it bound under 
+ * the terms of an other application's EULA or other license restrictions. 
+ * 
+ * The framework is licensed solely under the terms of the GNU General Public License, version 2, 
+ * and any claims otherwise are both false and unlawful.
+ *
+ * @note Portions of the Voodoo Shader Framework may be designed to operate aware of other 
+ *    applications. These other applications may be licensed under different terms than the 
+ *    framework. Claims have been made that Voodoo is then bound by the terms of these target 
+ *    applications, or has no license terms. These are untrue and in no way change the license 
+ *    terms of Voodoo or the target application. 
+ * 
  * @subsection licensecontact Contact
- * <p>
- *    Questions about the Voodoo framework and its license terms should be directed to Sean
- *    Sube, at the email address 
- *    <a href="mailto:peachykeen@voodooshader.com">peachykeen@voodooshader.com</a>.
- * </p>
- * <p>
- *    Questions about other modules and their terms should be directed to the appropriate
- *    developers. Please check any documentation included in the modules for contact
- *    information.
- * </p>
+ * Questions about the Voodoo framework and its license terms should be directed to Sean Sube, at 
+ * the email address <a href="mailto:peachykeen@voodooshader.com">peachykeen@voodooshader.com</a>.
+ * 
+ * Questions about other modules and their terms should be directed to the appropriate developers. 
+ * Please check any documentation included in the modules for contact information.
+ * 
  * @subsection licensetrademark Trademarks and other property
- * <p>
- *    Any trademarks or other intellectual property used in this documentation or the
- *    Voodoo framework is the property of their respective owner(s). The includes the
- *    pugixml name, nVidia, Cg and any other such content.
- * </p>
+ * Any trademarks or company names used in this documentation or the Voodoo framework are the 
+ * property of their respective owner(s). The includes the nVidia, Cg, Windows and any other such 
+ * content.
  * 
  * @section pugixmllicense pugixml License
- * <p>
- *   The Voodoo Shader Framework core library uses the pugixml library to handle
- *   XML parsing and data retrieval. This library is used under the terms of the MIT
- *   license. Thanks are given to Arseny Kapoulkine and all others involved for this
- *   excellent library, it has made config files a <em>lot</em> easier to work with.
- * </p>
+ * The Voodoo Shader Framework core library uses the pugixml library to handle XML parsing and data 
+ * retrieval. This library is used under the terms of the MIT license. Thanks are given to Arseny 
+ * Kapoulkine and all others involved for this excellent library, it has made config files a 
+ * @em lot easier to work with.
+ * 
  * @subsection pugixmlterms pugixml License Terms
- * <p>
  * Copyright (c) 2006-2010 Arseny Kapoulkine
  *
  * Permission is hereby granted, free of charge, to any person
@@ -161,17 +142,13 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
- * </p>
  * 
  * @section cglicense Cg Framework License
- * <p>
- *   The Voodoo Shader Framework uses nVidia's Cg Toolkit for shader compiling
- *   and handling. This library is used under license terms provided below. 
- *   Voodoo would not really be possible without Cg, so thanks are given to the
- *   Cg team and nVidia in general for this library.
- * </p>
+ * The Voodoo Shader Framework uses nVidia's Cg Toolkit for shader compiling and handling. This 
+ * library is used under license terms provided below. Voodoo would not really be possible without 
+ * Cg, so thanks are given to the Cg team and nVidia in general for this library.
+ * 
  * @subsection cglicenseterms Cg License Terms
- * <p>
  * License For Customer Use of NVIDIA Software
  * 
  * IMPORTANT NOTICE -- READ CAREFULLY: This License For Customer Use of
@@ -307,14 +284,11 @@
  * 
  * This License may be changed only by mutual agreement in writing of the
  * authorized representatives of the parties.
- * </p>
  *
  * @section corelicense Core License
- * <p>
- *   The Voodoo Shader Framework is provided under the following legally binding license 
- *   terms. These may or may not apply to addon modules and adapters, please contact the 
- *   developer of each specific module with any questions.
- * </p>
+ * The Voodoo Shader Framework is provided under the following legally binding license terms. These 
+ * may or may not apply to addon modules and adapters, please contact the developer of each 
+ * specific module with any questions.
  *
  * @subsection corelicenseterms Core License Terms
  *             GNU GENERAL PUBLIC LICENSE
@@ -597,5 +571,4 @@
  * POSSIBILITY OF SUCH DAMAGES.
  *
  *     END OF TERMS AND CONDITIONS
- * </p>
  */

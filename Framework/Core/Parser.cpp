@@ -28,12 +28,17 @@ namespace VoodooShader
             return;
         }
 
-        mVariables[name] = ParseString(value);
+        mVariables[name] = value;
     }
 
     void Parser::RemoveVariable(String name)
     {
-        //mVariables.remove_if()
+        Dictionary::iterator varIter = mVariables.find(name);
+
+        if ( varIter != mVariables.end() )
+        {
+            mVariables.erase(varIter);
+        }
     }
 
     String Parser::ParseString(String input, ParseFlags flags)
@@ -119,7 +124,7 @@ namespace VoodooShader
 
                         if ( variter != mVariables.end() )
                         {
-                            output << variter->second;
+                            output << this->ParseString(variter->second, flags);
                         } else {
                             // Unrecognized variable, try env
                             size_t reqSize = 0;
@@ -128,7 +133,7 @@ namespace VoodooShader
                             {
                                 char * buffer = new char[reqSize];
                                 getenv_s(&reqSize, buffer, reqSize, var.c_str());
-                                output << buffer;
+                                output << this->ParseString(buffer, flags);
                                 delete[] buffer;
                             } else {
                                 output << "--badvar:" << var << "--";

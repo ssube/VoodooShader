@@ -21,6 +21,10 @@
 
 #include "Version.hpp"
 
+/**
+ * @addtogroup VoodooFilesystem Voodoo/Filesystem
+ * @{
+ */
 // Filesystem defs ---------------------------------------------------------------
 #define VOODOO_FILESYSTEM_NAME              "Voodoo/Filesystem"
 #define VOODOO_FILESYSTEM_PRETTYNAME        "Voodoo Windows Filesystem"
@@ -29,3 +33,6 @@
 #define VOODOO_FILESYSTEM_VERSION_PATCH     4
 #define VOODOO_FILESYSTEM_VERSION_REV       VOODOO_GLOBAL_VERSION_REV   
 //--------------------------------------------------------------------------------
+/**
+ * @}
+ */

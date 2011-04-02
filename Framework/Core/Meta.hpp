@@ -217,8 +217,8 @@ namespace VoodooShader
         // Depth-buffer formats
         TF_D16,                 /*!< Half-precision depth (Z-buffer, see @ref depthbuffers "the depth buffers notes" for more info) */
         TF_D32,                 /*!< Full-precision depth (Z-buffer, see @ref depthbuffers "the depth buffers notes" for more info) */
-        // Max
-        TF_Count                /*!< Enumerator values count. */
+        // Padding value
+        TF_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
     };
 
     /**
@@ -241,8 +241,8 @@ namespace VoodooShader
         PT_Sampler3D,           /*!< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info) */
         // Matrices
         PT_Matrix,              /*!< Generic float4x4 matrix type */
-        // Max
-        PT_Count                /*!< Enumerator values count */
+        // Padding value
+        PT_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
     };
 
     enum ParameterCategory
@@ -252,8 +252,8 @@ namespace VoodooShader
         PC_Float,               /*!< Float vector parameter (may have 1 to 4 components) */
         PC_Sampler,             /*!< Sampler parameter (may sample 1D to 3D textures) */
         PC_Matrix,              /*!< Matrix parameter, 4x4 components */
-        // Max
-        PC_Count                /*!< Enumerator values count */
+        // Padding value
+        PC_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
     };
 
     enum ProgramStage
@@ -267,8 +267,8 @@ namespace VoodooShader
         // Tessellation stages
         PS_Domain,              /*!< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
         PS_Hull,                /*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
-        // Max
-        PS_Count                /*!< Enumerator values count */
+        // Padding value
+        PS_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
     };
 
     enum TextureType
@@ -279,8 +279,8 @@ namespace VoodooShader
         // Special types
         TT_ShaderTarget,        /*!< Shader target texture */
         TT_PassTarget,          /*!< Pass target texture */
-        // Max
-        TT_Count                /*!< Enumerator values count */
+        // Padding value
+        TT_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
     };
 
     enum FileOpenMode
@@ -289,37 +289,38 @@ namespace VoodooShader
         // Valid modes
         FM_Read     = 0x01,     /*!< Read-only file open mode */
         FM_Write    = 0x02,     /*!< Read/write file open mode */
-        // Max
-        FM_Count                /*!< Enumerator values count */
+        // Padding value
+        FM_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
     };
 
     /**
-     * Log message levels. These are spread out so additional levels can be
-     * added in the future without affecting behavior. The lower the value,
-     * the more verbose and less likely to be logged a message is. The Logger
-     * object discards messages less than its internal value. Warnings and
-     * errors, especially fatal errors, should always be logged.
+     * Log message levels. These are set up to quickly filter based on various flags using binary
+     * logic. Flags are ORed together, with lower-priority flags having all higher-priority flags
+     * set. If the final flag set ANDed by 
      * 
-     * @note The enum values here indicate the <em>lowest</em> value
-     *          associated with that message type. All values up to the next
-     *          enum value are considered part of the same type.
+     * @note The enum values here indicate the <em>lowest</em> value associated with that message 
+     *    type. All values up to the next enum value are considered part of the same type.
      */
     enum LogLevel
     {
         LL_Unknown      = 0x00,     /*!< Log level unknown */
+        // Severity values
+        LL_Debug        = 0x01,
+        LL_Info         = 0x02,
+        LL_Warning      = 0x04,
+        LL_Error        = 0x08,
+        // Origin values
+        LL_API          = 0x10,
+        LL_Framework    = 0x20,
+        LL_Adapter      = 0x40,
+        //LL_Framework    = 0x80,
         // Logger internal values
-        LL_Initial      = 0x20,     /*!< Initial log level of Logger */
-        LL_Internal     = 0xFF,     /*!< Log level for Logger-internal messages */
+        LL_Internal     = 0x82,     /*!< Log level for Logger-internal messages */
+        LL_Initial      = 0xFE,     /*!< Initial log level of Logger */
         // Working values
-        LL_All          = 0x00,     /*!< All messages will be logged */
-        LL_Debug_API    = 0x07,     /*!< Exceptionally verbose debug logging of API calls */
-        LL_Debug        = 0x10,     /*!< Verbose debug log messages */
-        LL_Info_API     = 0x20,     /*!< Verbose informational logging from API calls */
-        LL_Info         = 0x30,     /*!< Informational log messages */
-        LL_Warning      = 0x50,     /*!< Warning log messages */
-        LL_Warning_API  = 0x60,     /*!< Verbose, possibly false-positive, warnings from API calls */
-        LL_Error        = 0xB0,     /*!< General error log messages */
-        LL_Fatal        = 0xF0,     /*!< Fatal error log messages */
+        LL_All          = 0xFF,     /*!< All messages will be logged */
+        // Padding value
+        LL_Max = 0xFFFFFFFF,        /*!< Highest possible value, forcing dword type */
     };
 
     /**
@@ -332,7 +333,8 @@ namespace VoodooShader
         PF_SingleSlash      = 0x01,     /*!< No repeated slashes (useful for XPath). */
         PF_SlashOnly        = 0x02,     /*!< Replace all backslashes with forward slashes. */
         PF_BackslashOnly    = 0x04,     /*!< Replace all forward slashes with backslashes. */
-        //PF_Lowercase        = 0x08,     /*!< Lowercase all characters */
+        // Padding value
+        PF_Max = 0xFFFFFFFF,            /*!< Highest possible value, forcing dword type */
     };
     /**
      * @}

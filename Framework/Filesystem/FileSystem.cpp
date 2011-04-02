@@ -6,7 +6,7 @@
 
 namespace VoodooShader
 {
-    namespace VoodooWVFS
+    namespace VoodooWFS
     {
         Version API_ModuleVersion()
         {
@@ -420,7 +420,12 @@ namespace VoodooShader
                 Throw(VOODOO_FILESYSTEM_NAME, "Invalid texture format for data get.", mCore);
             }
 
-            return ilCopyPixels(desc.OffX, desc.OffY, desc.OffZ, desc.Width, desc.Height, desc.Depth, ilFmt, ilType, buffer);
+            return ilCopyPixels
+            (
+                desc.OffX, desc.OffY, desc.OffZ, 
+                desc.Width, desc.Height, desc.Depth, 
+                ilFmt, ilType, buffer
+            );
         }
 
         void * Image::GetImageData()

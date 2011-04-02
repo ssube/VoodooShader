@@ -90,7 +90,6 @@ namespace VoodooShader
 
             cgSetContextBehavior(mCgContext, CG_BEHAVIOR_LATEST);
             cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
-            cgSetErrorHandler(&(Core::CgErrorHandler), this);
 
             cgSetAutoCompile(mCgContext, CG_COMPILE_IMMEDIATE);
             cgSetParameterSettingMode(mCgContext, CG_IMMEDIATE_PARAMETER_SETTING);

@@ -39,10 +39,10 @@ namespace VoodooShader
     {
     public:
         /**
-         * Virtual parameter (context-level) constructor. This will create a 
-         * named parameter in the Cg runtime and register it in the given Core, but
-         * the parameter will not exist in any effects. Virtual parameters are used
-         * to link many effect-level params to a single data source.
+         * Virtual parameter (context-level) constructor. This will create a named parameter in the 
+         * Cg runtime and register it in the given Core, but the parameter will not exist in any 
+         * effects. Virtual parameters are used to link many effect-level params to a single data 
+         * source.
          * 
          * @sa See the @ref virtualparams "parameter documentation" for details.
          */
@@ -54,8 +54,8 @@ namespace VoodooShader
         );
 
         /**
-         * Creates a parameter from an actual parameter (shader-level). This
-         * parameter will update values in the Shader, but is more limited in use.
+         * Creates a parameter from an actual parameter (shader-level). This parameter will update 
+         * values in the Shader, but is more limited in use.
          * 
          * @sa See the @ref virtualparams "parameter documentation" for details.
          */
@@ -68,11 +68,10 @@ namespace VoodooShader
         ~Parameter();
 
         /**
-         * Retrieves the fully-qualified parameter name. Virtual parameters will
-         * be of the form <code>:[param-name]</code>, while actual parameters will
-         * use <code>[shader-name]:[param-name]</code>. If the parameter is no longer
-         * valid, the value "invalid-param" will be used instead (usually illegal as the
-         * '-' character cannot be used in an identifier). 
+         * Retrieves the fully-qualified parameter name. Virtual parameters will be of the form 
+         * @p :param-name, while actual parameters will use @p shader-name:param-name. If the 
+         * parameter is no longer valid, the value "invalid-param" will be used instead (usually 
+         * illegal as the '-' character cannot be used in an identifier). 
          * 
          * @returns The parameter's name.
          */
@@ -86,17 +85,17 @@ namespace VoodooShader
         CGparameter GetCgParameter();
 
         /**
-         * Retrieves the type of this parameter. This specifies what type and how
-         * many data components are used (one texture or 1-16 floats).
+         * Retrieves the type of this parameter. This specifies what type and how many data 
+         * components are used (one texture or 1-16 floats).
          */
         ParameterType GetType();
 
         /**
-         * Attaches a second parameter to this one, forcing the other to update whenever this
-         * value is changed. This can only
+         * Attaches a second parameter to this one, forcing the other to update whenever this value 
+         * is changed.
          *
-         * @warning This <em>cannot</em> be used to bind one effect's parameter to another. 
-         *          It can only be used to bind actual parameters to virtual parameters. 
+         * @warning This <em>cannot</em> be used to bind one effect's parameter to another. It can 
+         *    only be used to bind actual parameters to virtual parameters. 
          *          
          * @param param The parameter to bind to this one.
          * @throws Exception if called on an actual parameter.
@@ -109,8 +108,8 @@ namespace VoodooShader
         /**
          * Sets this parameter's texture source.
          * 
-         * @warning Setting the wrong data type will not return any errors and will not
-         *          invalidate the actual data, but is useless.
+         * @warning Setting the wrong data type will not return any errors and will not invalidate 
+         *    the actual data, but is useless.
          *          
          * @sa Parameter::Set(float)
          * @sa Parameter::Set(float,float)
@@ -125,8 +124,8 @@ namespace VoodooShader
         /**
          * Sets this parameter's first float component (r or x).
          * 
-         * @warning Setting the wrong data type will not return any errors and will not
-         *          invalidate the actual data, but is useless.
+         * @warning Setting the wrong data type will not return any errors and will not invalidate 
+         *    the actual data, but is useless.
          * 
          * @sa Parameter::Set(TextureRef)
          * @sa Parameter::Set(float,float)
@@ -141,8 +140,8 @@ namespace VoodooShader
         /**
          * Sets this parameter's first two float components (rg or xy).
          * 
-         * @warning Setting the wrong data type will not return any errors and will not
-         *          invalidate the actual data, but is useless.
+         * @warning Setting the wrong data type will not return any errors and will not invalidate 
+         *    the actual data, but is useless.
          *          
          * @sa Parameter::Set(TextureRef)
          * @sa Parameter::Set(float)
@@ -158,8 +157,8 @@ namespace VoodooShader
         /**
          * Sets this parameter's first three float components (rgb or xyz).
          * 
-         * @warning Setting the wrong data type will not return any errors and will not
-         *          invalidate the actual data, but is useless.
+         * @warning Setting the wrong data type will not return any errors and will not invalidate 
+         *    the actual data, but is useless.
          *          
          * @sa Parameter::Set(TextureRef)
          * @sa Parameter::Set(float)
@@ -176,8 +175,8 @@ namespace VoodooShader
         /**
          * Sets this parameter's first four float components (rgba or xyzw).
          * 
-         * @warning Setting the wrong data type will not return any errors and will not
-         *          invalidate the actual data, but is useless.
+         * @warning Setting the wrong data type will not return any errors and will not invalidate 
+         *    the actual data, but is useless.
          *          
          * @sa Parameter::Set(TextureRef)
          * @sa Parameter::Set(float)
@@ -269,10 +268,9 @@ namespace VoodooShader
         TextureRef GetTexture();
 
         /**
-         * Retrieves the float buffer for this parameter. This contains all
-         * 16 float components, for all sizes (float1 to float4x4). Any component
-         * may be written to, but only the appropriate number will be sent to the
-         * Cg parameter.
+         * Retrieves the float buffer for this parameter. This contains all 16 float components, for 
+         * all sizes (float1 to float4x4). Any component may be written to, but only the appropriate 
+         * number will be sent to the Cg parameter.
          */
         _Ret_count_c_(16)
         float * GetFloat();

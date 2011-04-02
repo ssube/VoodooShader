@@ -219,8 +219,8 @@ namespace VoodooShader
         {
             va_list args;
 
-            if ( level < mLogLevel ) return;
             if ( !this->mLogFile.is_open() ) return;
+            if ( !(level & mLogLevel) ) return;
 
             try
             {

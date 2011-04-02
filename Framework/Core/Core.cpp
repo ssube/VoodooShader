@@ -238,6 +238,8 @@ namespace VoodooShader
             mLastPass = NULL;
             mLastShader = NULL;
             mTextures.clear();
+        } else {
+            cgSetErrorHandler(&(Core::CgErrorHandler), this);
         }
 
         this->mCgContext = context;
@@ -358,7 +360,6 @@ namespace VoodooShader
         case TT_ShaderTarget:
             return mLastShader;
         case TT_Generic:
-        case TT_Count:
         case TT_Unknown:
         default:
             return TextureRef();
@@ -377,7 +378,6 @@ namespace VoodooShader
             break;
         case TT_Generic:
             Throw(VOODOO_CORE_NAME, "Invalid texture type (generic) given.", this);
-        case TT_Count:
         case TT_Unknown:
         default:
             Throw(VOODOO_CORE_NAME, "Unknown texture type given.", this);

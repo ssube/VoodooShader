@@ -104,7 +104,7 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
     {
         VoodooLogger->Log
         (
-            LL_Fatal,
+            LL_Error,
             VOODOO_GEM_NAME,
             "Could not load D3D8 library."
         );
@@ -119,7 +119,7 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
     {
         VoodooLogger->Log
         (
-            LL_Fatal, 
+            LL_Error, 
             VOODOO_GEM_NAME, 
             "Could not find D3D8 create true func."
          );
@@ -153,6 +153,8 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
     return vObj;
 }
 
+std::tr1::regex imageformat(".*\\.(dds|tga|bmp|targa)");
+
 __out HANDLE WINAPI Gem_CreateFileA
 (
     __in LPCSTR lpFileName, 
@@ -171,7 +173,6 @@ __out HANDLE WINAPI Gem_CreateFileA
 
     try
     {
-        std::tr1::regex imageformat(".*\\.(dds|tga|bmp|targa)");
         gNextTexture = std::tr1::regex_match(gLastFilename, imageformat);
     } catch ( std::tr1::regex_error & error ) {
         VoodooLogger->Log
@@ -186,7 +187,7 @@ __out HANDLE WINAPI Gem_CreateFileA
 
     if ( VoodooCore )
     {
-        LogLevel ll = ( file == INVALID_HANDLE_VALUE ) ? LL_Warning_API : LL_Info_API;
+        LogLevel ll = ( file == INVALID_HANDLE_VALUE ) ? LL_Warning : LL_Info;
 
         VoodooLogger->Log
         (
