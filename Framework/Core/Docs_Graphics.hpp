@@ -120,6 +120,29 @@ namespace VoodooShader
  * texture currently bound to the core's special textures. These may be set using 
  * Core::SetTexture(TextureType, TextureRef). Relinking a shader may change these 
  * targets.
+ * 
+ * @subpage Parameters
+ * Voodoo supports two general varieties of parameter (virtual and effect) and a number of specific 
+ * data types.
+ * 
+ * @section virtualparams Virtual and Effect Parameters
+ * The primary difference between virtual params and effect params are where they exist. Effect
+ * parameters exist within a shader effect and on the GPU, and are used directly within programs.
+ * Virtual parameters exist only in the runtime and on the CPU, and may have many effect parameters
+ * attached to them. When the virtual parameter is changed, the effect parameters attached will
+ * take the same value (making it easy to provide global variables).
+ * 
+ * @section paramsettings Setting Parameters
+ * When effect parameters are set, the values must be sent to the GPU and the program may have to
+ * be recompiled. The value may be downloaded immediately or when needed, and may be kept in
+ * system RAM by the runtime or driver. Virtual parameters are set immediately, as they are always
+ * kept in system RAM. Any effect parameters attached to a virtual parameter will be updated by
+ * the runtime (the update will occur before use, but exact time may vary).
+ * 
+ * @section paramtypes Parameter Types
+ * Voodoo supports two primary parameter data-type categories, scalar types and samplers. Scalars
+ * are connected to numeric data types, usually from 1 to 16 floating-point components (vectors or 
+ * matrices). Samplers are connected to textures and sample pixel data from them. 
  *
  * @page Textures
  * The shaders used in Voodoo are capable of accessing a number of texture types, and Voodoo is
