@@ -191,10 +191,10 @@ namespace VoodooShader
  *    <tr><td>@ref TF_RGBA32F<sup>1</sup></td><td>D3DFMT_A32B32G32R32F</td>
  *        <td>GL_RGBA32F</td>           <td>N/Y/Y</td>
  *        <td>128</td>                  <td>RGBA</td></tr>
- *    <tr><td>@ref TF_D16F</td>              <td>D3DFMT_D16F</td>    
+ *    <tr><td>@ref TF_D16</td>              <td>D3DFMT_D16F</td>    
  *        <td>GL_DEPTH_COMPONENT16</td> <td>N/Y-ish<sup>2</sup>/N</td>
  *        <td>16</td>                   <td>R<sup>3</sup></td></tr>
- *    <tr><td>@ref TF_D32F</td>              <td>D3DFMT_D32F</td>
+ *    <tr><td>@ref TF_D32</td>              <td>D3DFMT_D32F</td>
  *        <td>GL_DEPTH_COMPONENT32</td> <td>N/Y-ish<sup>2</sup>/N</td>
  *        <td>32</td>                   <td>R<sup>3</sup></td></tr>
  * </table>

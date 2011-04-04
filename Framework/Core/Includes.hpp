@@ -34,6 +34,15 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
+#ifdef _DEBUG_FULL
+#   define _CRTDBG_MAP_ALLOC
+#   include <stdlib.h>
+#   include <crtdbg.h>
+
+#   define DBG_NEW new (_NORMAL_BLOCK, __FILE__, __LINE__)
+#   define new DBG_NEW
+#endif
+
 #include "Cg/cg.h"
 
 #endif

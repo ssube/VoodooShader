@@ -30,6 +30,14 @@ namespace VoodooShader
     {
         using namespace pugi;
 
+#ifdef _DEBUG_FULL
+        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF|_CRTDBG_LEAK_CHECK_DF);
+        _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG|_CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
+        _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG|_CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
+#endif
+
         mGlobalRoot = globalroot;
         mGlobalRoot += "\\";
         mRunRoot = runroot;
@@ -206,6 +214,10 @@ namespace VoodooShader
         this->mLogger = NULL;
 
         mModManager = NULL;
+
+#ifdef _DEBUG_FULL
+        _CrtDumpMemoryLeaks();
+#endif
     }
 
     String Core::GetGlobalRoot()

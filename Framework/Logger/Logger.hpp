@@ -37,7 +37,11 @@ namespace VoodooShader
     namespace XmlLogger
     {
         /**
-         * Classes and functions related to the standard XML implementation of ILogger.
+         * Provides a simple implementation of ILogger, printing a neatly-formatted Xml log. These
+         * logs can be opened with the standard log viewer and support all features. 
+         * 
+         * @note In debug builds, this logger also prints all messages to cout. If a debugger is
+         *    attached, warnings and errors are printed to its output window.
          * 
          * @addtogroup VoodooXmlLogger Voodoo/XmlLogger
          * @{

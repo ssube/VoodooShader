@@ -57,6 +57,7 @@ namespace VoodooShader
  * Returns the name of the given class. This is used to register the classes in the core
  * ModuleManager initially. As each module is loaded, the provided classes are iterated through 
  * from @p 0 to @p ClassCount-1 and added to the list of available classes.
+ * @note For best compatibility, these may be GUIDs in string form.
  * 
  * @subsection moduleexportsclasscreate ClassCreate
  * @code 
@@ -100,6 +101,11 @@ namespace VoodooShader
  * While @ref IObject does not provide reference-counting or fancier features, it 
  * does handle most vital features of dynamic module classes. Additional features may be added to 
  * later versions as needed.
+ * 
+ * @section moduledocs Documentation
+ * It is generally recommended that module creators provide a list of class names and their
+ * functions along with the module (especially if some can be used by the core). This is
+ * particularly useful when classes use GUID names.
  *
  * @page adapterspec Adapter Specifications
  * The adapter serves as a binding between an unknown (by the core library) graphics API and the 
@@ -143,12 +149,11 @@ namespace VoodooShader
  * 
  * The Core holds references to all created parameters and shaders, but will release these in either
  * of two cases:
- * <ol>
- *    <li>The Core is destroyed (the destructor releases all resources, then destroys the 
- *        adapter).</li>
- *    <li>@ref Core::SetCgContext() is called with null as the context, indicating that the cached 
- *        context is to be cleared.</li>
- * </ol>
+ * 
+ * @li The Core is destroyed (the destructor releases all resources, then destroys the adapter).
+ * @li @ref Core::SetCgContext() is called with null as the context, indicating that the cached 
+ *        context is to be cleared.
+ * 
  * This will drop the strong references from the core and may free resources, if no other 
  * references are held.
  * 

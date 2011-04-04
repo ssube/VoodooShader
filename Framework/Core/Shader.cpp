@@ -65,7 +65,7 @@ namespace VoodooShader
         return mParameters.size();
     }
 
-    ParameterRef Shader::GetParameter(size_t index)
+    ParameterRef Shader::GetParameter(_In_ size_t index)
     {
         if ( index < mParameters.size() )
         {
@@ -75,7 +75,7 @@ namespace VoodooShader
         }
     }
 
-    ParameterRef Shader::GetParameter(String name)
+    ParameterRef Shader::GetParameter(_In_ String name)
     {
         String fullname = this->GetName() + ":" + name;
 

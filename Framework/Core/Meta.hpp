@@ -222,10 +222,8 @@ namespace VoodooShader
     };
 
     /**
-     * Parameter types for use by @ref VoodooShader::Parameter "Parameters." 
-     * These are generally handled within the Cg runtime and rarely change in
-     * hardware, the common ones (float4 and such) are identical across the 
-     * board.
+     * Parameter types for use by @ref VoodooShader::Parameter "Parameters." These types are
+     * available across hardware, exposing most common variables.
      */
     enum ParameterType
     {
@@ -235,12 +233,12 @@ namespace VoodooShader
         PT_Float2,              /*!< Two-component float vector */
         PT_Float3,              /*!< Three-component float vector */
         PT_Float4,              /*!< Four-component float vector */
+        // Matrices
+        PT_Matrix,              /*!< Generic float4x4 matrix type */
         // Samplers
         PT_Sampler1D,           /*!< One-dimensional sampler (for a 1D texture, see @ref texturetypes "texture types" for more info) */
         PT_Sampler2D,           /*!< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info) */
         PT_Sampler3D,           /*!< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info) */
-        // Matrices
-        PT_Matrix,              /*!< Generic float4x4 matrix type */
         // Padding value
         PT_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
     };

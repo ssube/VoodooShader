@@ -72,6 +72,11 @@ namespace VoodooShader
  * Debug builds of Voodoo are available, as is source code, to aid debugging. Debug builds are 
  * built with full symbols and additional error checking.
  * 
+ * Voodoo is also fully compatible with your favorite graphics debugger, including PIX for Windows 
+ * (DirectX) and GLintercept (OpenGL). This also extends to screen capture programs and system
+ * tools, and code debuggers. In some cases, Voodoo's logging may be able to augment the 
+ * information from these tools.
+ * 
  * @section voodoodocs Documentation
  * The entire Voodoo project is heavily documented using doxygen notation. These docs are compiled
  * and uploaded along with each code push and release. Everything from the variable syntax to 

@@ -247,6 +247,11 @@ namespace VoodooShader
                 logMsg << "</Message>\n";
 
 #ifdef _DEBUG
+                if ( level & ( LL_Warning | LL_Error ) )
+                {
+                    OutputDebugString(logMsg.str().c_str());
+                }
+
                 cout << logMsg.str();
 #endif
                 mLogFile << logMsg.str();
