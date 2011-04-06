@@ -73,32 +73,32 @@
     <ClInclude Include="Texture.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="HookManager.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="Version.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Adapter.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="Module.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Object.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Filesystem.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="Parser.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IObject.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogger.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IHookManager.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IFilesystem.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IAdapter.hpp">
+      <Filter>Headers\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

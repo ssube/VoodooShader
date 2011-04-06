@@ -25,17 +25,18 @@
 
 #include "Meta.hpp"
 
-#include "Adapter.hpp"
+#include "IObject.hpp"
+#include "IAdapter.hpp"
+#include "IFilesystem.hpp"
+#include "IHookManager.hpp"
+#include "ILogger.hpp"
+
 #include "Converter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
-#include "Filesystem.hpp"
 #include "FullscreenManager.hpp"
-#include "HookManager.hpp"
-#include "Logger.hpp"
 #include "MaterialManager.hpp"
 #include "Module.hpp"
-#include "Object.hpp"
 #include "Parameter.hpp"
 #include "Parser.hpp"
 #include "Shader.hpp"

@@ -174,6 +174,15 @@ namespace VoodooShader
          */
         ILoggerRef GetLogger();
 
+        /**
+         * Retrieve the Xml config document for this Core.
+         * 
+         * @warning This is actually a <code>pugi::xml_document *</code>, but stored and provided
+         *    as a <code>void *</code> so linking against the Core doesn't require the pugixml
+         *    headers. To use this, simply cast it into the actual type.
+         */
+        void * GetConfig();
+
         void SetCgContext(_In_opt_ CGcontext context);
 
         /**
@@ -342,6 +351,11 @@ namespace VoodooShader
         String mGlobalRoot;
         String mLocalRoot;
         String mRunRoot;
+
+        /**
+         * Config file (actually a <code>pugi::xml_document *</code>, stored as void).
+         */
+        void * mConfig;
 
         /**
          * Cg context used by this core.

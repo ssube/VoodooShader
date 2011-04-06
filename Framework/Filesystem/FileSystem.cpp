@@ -3,11 +3,14 @@
 #include "Filesystem_Version.hpp"
 
 #include "IL\il.h"
+#include "pugixml.hpp"
 
 namespace VoodooShader
 {
     namespace VoodooWFS
     {
+        const char * FileSystemName = "WFileSystem";
+
         Version API_ModuleVersion()
         {
             Version version = VOODOO_META_VERSION_STRUCT(FILESYSTEM);
@@ -23,7 +26,7 @@ namespace VoodooShader
         {
             if ( number == 0 )
             {
-                return "Filesystem";
+                return FileSystemName;
             } else {
                 return NULL;
             }
@@ -42,7 +45,26 @@ namespace VoodooShader
         FileSystem::FileSystem( _In_ Core * core )
             : mCore(core)
         {
+            using namespace pugi;
+
+            // Init DevIL
             ilInit();
+
+            // Load paths from the config
+            xml_document * config = (xml_document *)mCore->GetConfig();
+            xpath_query pathsQuery("/VoodooConfig/FileSystem/SearchPaths/Path");
+            xpath_query pathValueQuery("./text()");
+
+            xpath_node_set pathNodes = pathsQuery.evaluate_node_set(*config);
+            xpath_node_set::const_iterator pathIter = pathNodes.begin();
+            while ( pathIter != pathNodes.end() )
+            {
+                String path = pathValueQuery.evaluate_string(*pathIter);
+
+                this->AddDirectory(path);
+
+                ++fspathIter;
+            }
         }
 
         FileSystem::~FileSystem()
@@ -52,7 +74,7 @@ namespace VoodooShader
 
         const char * FileSystem::GetObjectClass()
         {
-            return "FileSystem";
+            return FileSystemName;
         }
 
         void FileSystem::AddDirectory(String name)

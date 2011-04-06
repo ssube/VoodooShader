@@ -3,7 +3,7 @@
 #include "Converter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
-#include "Logger.hpp"
+#include "ILogger.hpp"
 #include "Shader.hpp"
 
 namespace VoodooShader

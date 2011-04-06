@@ -2,15 +2,14 @@
 
 #include "Core.hpp"
 #include "Exception.hpp"
-#include "Logger.hpp"
-#include "Object.hpp"
+#include "ILogger.hpp"
+#include "IObject.hpp"
 
 namespace VoodooShader
 {
     ModuleManager::ModuleManager( _In_ Core * core )
         : mCore(core)
     {
-        mBasePath = mCore->GetGlobalRoot() + "bin\\";
     }
 
     ModuleManager::~ModuleManager()
@@ -25,9 +24,10 @@ namespace VoodooShader
 
         // Build the full path
         String path;
+
         if ( name[0] == '.' )
         {
-            path = mBasePath + name.substr(2);
+            path = mCore->GetGlobalRoot() + "\\bin\\" + name.substr(2);
         } else {
             path = name;
         }
@@ -92,6 +92,11 @@ namespace VoodooShader
         } else {
             return NULL;
         }
+    }
+
+    bool ModuleManager::ClassExists( _In_ String name )
+    {
+        return ( mClasses.find(name) != mClasses.end() );
     }
 
     IObject * ModuleManager::CreateClass( _In_ String name )

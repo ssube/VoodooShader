@@ -72,7 +72,7 @@ namespace VoodooShader
          * @warning If the logger isn't destroyed properly, the main tag of
          *       the log file won't be closed and the log won't be valid.
          */
-        class XmlLogger
+        class  XmlLogger
             : public VoodooShader::ILogger
         {
         public:

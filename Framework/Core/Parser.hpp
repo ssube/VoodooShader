@@ -43,7 +43,24 @@ namespace VoodooShader
         Parser(_In_ Core * core);
         ~Parser();
 
-        void AddVariable(_In_ String name, _In_ String value);
+        /**
+         * Adds a variable to the internal dictionary.
+         * 
+         * @param name The variable name (may contain variables, they will be resolved 
+         *    immediately).
+         * @param value The variable's value (may contain variables, they will be resolved when
+         *    this variable is used).
+         * @param system Marks the variable as a system variable. These cannot be changed or
+         *    removed.
+         */
+        void AddVariable(_In_ String name, _In_ String value, _In_ bool system = false);
+
+        /**
+         * Removes a variable from the internal dictionary.
+         * 
+         * @param name The variable name (may contain variables, they will be resolved
+         *    immediately).
+         */
         void RemoveVariable(_In_ String name);
 
         /**
@@ -57,6 +74,7 @@ namespace VoodooShader
     private:
         Core * mCore;
         Dictionary mVariables;
+        Dictionary mSysVariables;
     };
     /**
      * @}
@@ -66,14 +84,15 @@ namespace VoodooShader
      * usage. The syntax and use of these variables is described in this page.
      *       
      * @section varssyntax Syntax
-     * Variables are used by inserting @p $(variable) tokens into a string. Each variable will be
-     * removed and replaced with the value currently assigned to it. Variable values are parsed 
-     * when used, allowing delayed resolving and recursion. Variables may be placed at any position 
-     * and any number of variables may be used.
+     * Variables are used by inserting <code>\$(variable)</code> tokens into a string. Each 
+     * variable will be removed and replaced with the value currently assigned to it. Variable 
+     * values are parsed when used, allowing delayed resolving and recursion. Variables may contain 
+     * variables in their name or value; names are parsed when the variable is added and values are 
+     * parsed when the variable is used. Variables are replaced innermost to outermost, in a left 
+     * to right fashion (shown below).
      * 
-     * @warning Variables may be placed within variable values, these will be resolved when the 
-     *    variable is used. This means that recursion is possible and care must be taken to avoid
-     *    infinite loops.
+     * @warning Variables within variable values will be resolved when the variable is used. This 
+     *    means that recursion is possible and care must be taken to avoid infinite loops.
      *    
      * @par Examples:
      * @code 
@@ -86,8 +105,8 @@ namespace VoodooShader
      * $(localroot)\$(resourcedir)\image.dds = M:\VoodooShader\\\resources\\image.dds
      * @endcode
      * 
-     * Variables and variable values may contain variables, although variable names themselves may 
-     * not.
+     * Variable names may also contain variables (as mentioned above). The syntax is identical, but
+     * the results are slightly more complex.
      * 
      * @par Examples:
      * (with <code>PF_SingleSlash | PF_BackslashOnly</code>)
@@ -125,7 +144,8 @@ namespace VoodooShader
      * A small assortment of built-in variables are provided for use. These represent  paths or 
      * other values that could be difficult to resolve and may vary each run. Various versions of 
      * the Core may add built in variables, these will be marked here with a note of the earliest 
-     * version providing them.
+     * version providing them. Adapters and other modules may also add system variables, but these
+     * can never overwrite other system variables.
      * 
      * @subsection varsbuiltinlocal $(localroot)
      * The local root path is the location of the target executable, that is, the program that 

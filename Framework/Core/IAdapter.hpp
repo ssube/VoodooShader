@@ -30,7 +30,7 @@
 #define VOODOO_ADAPTER_HPP
 
 #include "Meta.hpp"
-#include "Object.hpp"
+#include "IObject.hpp"
 
 namespace VoodooShader
 {

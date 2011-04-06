@@ -54,29 +54,31 @@ namespace VoodooShader
 
         /**
          * Loads a module into process memory. The module must meet the 
-         * @ref modulespec "module specifications" and export all needed symbols.
-         * If the module does not export these, it will fail to load. 
+         * @ref modulespec "module specifications" and export all needed symbols. If the module 
+         * does not export these, it will fail to load (they are checked during the load process).
          * 
-         * @note Modules are loaded with a call to <code>LoadModuleEx</code>, and 
-         *       the search path is altered so that the module's directory will be 
-         *       searched for any required modules (if a full path is provided).
+         * @note Modules are loaded with a call to @p LoadModuleEx, and the search path is altered 
+         *    so that the module's directory will be searched for any required modules (if a full 
+         *    path is provided).
          *       
-         * @note If the module name begins with the characters ".\\", the Voodoo binary
-         *       path will be prepended (replacing the ".\\") and the module loaded from
-         *       that location. If an absolute path is provided, that will be used.
-         *       Otherwise, the module will be loaded by filename using the Windows
-         *       default search path.
+         * @note If the module name begins with the characters ".\\", the Voodoo binary path will 
+         *    replace that ("$(globalroot)\\bin\\") and the module loaded from that location. If an 
+         *    absolute path is provided, that will be used. Otherwise, the module will be loaded by 
+         *    filename using the Windows default search path.
          *       
-         * @note After the module is loaded, it will not be unloaded until this
-         *       ModuleManager is destroyed <em>and</em> the last class created from it
-         *       is destroyed. Both this object and all IObject-derived classes contain
-         *       shared pointers to the module.
+         * @note After the module is loaded, it will not be unloaded until this ModuleManager is 
+         *    destroyed @em and the last class created from it is destroyed. Both this object and 
+         *    all IObject-derived classes contain shared pointers to the module.
          *       
          * @param name The filename of the module to load.
-         * @return A shared pointer to the Module, or an empty shared pointer if
-         *         loading failed.
+         * @return A shared pointer to the Module, or an empty shared pointer if loading failed.
          */
         ModuleRef LoadModule
+        (
+            _In_ String name
+        );
+
+        bool ClassExists
         (
             _In_ String name
         );
@@ -129,7 +131,6 @@ namespace VoodooShader
 
     private:
         Core * mCore;
-        String mBasePath;
         ModuleMap mModules;
         ClassMap mClasses;
     };

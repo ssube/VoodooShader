@@ -1,6 +1,6 @@
 
 Voodoo Shader Framework
-v0.2.3.139
+v0.2.7.167
 
 = Contents:
 1. Summary
@@ -14,15 +14,16 @@ v0.2.3.139
 
 = 1. Summary
 
-The Voodoo Shader Framework is a system designed to add shader support to various games and 
-programs and provide a single target for shader authors, with a full set of useful features.
+The Voodoo Shader Framework is a set of support libraries designed to provide extensive shader 
+integration into graphics applications, both before and after development.
 
-It uses a set of "adapters" to connect a single core with each target application; each adapter
-specifies the exact connection details and implementation. The core provides a single, unified and
-widely compatible base, providing unified and constant system for shaders to interface with. The
-framework uses many features available in the Cg language, including compiling to both HLSL and 
-GLSL (for OpenGL and DirectX compatibility), and a clear and concise syntax for accessing game data
-and textures.
+Voodoo uses a system of core modules and adapters to provide the widest compatibility and best
+performance possible across a wide range of applications and APIs. Voodoo supports both OpenGL and
+DirectX, using nVidia's Cg language. In addition, Voodoo provides a second processing step to
+provide shaders with easy access to other resources, especially textures.
+
+The Voodoo core and supported shaders remain constant between target applications and adapters,
+providing a unified set of features and single target for shaders.
 
 
 = 2. Installation
@@ -38,17 +39,13 @@ Voodoo will be installed to your system.
 = 3. Adapters
 
 After the Voodoo core is installed, you will need to install adapters for any game you want to use
-Voodoo in. Various adapters are available for a number of Direct3D 8 and 9 games, and OpenGL
-adapters are in progress. 
+Voodoo in. Various adapters are available for a number of Direct3D 8, 9 and OpenGL games.
 
 Adapters can be found included with Voodoo or on the Voodoo Shader Framework site at:
     http://www.voodooshader.com
 
 Adapters may or may not use install wizards. Each adapter will have documentation on how to install
 and configure it. 
-
-You should only use adapters designed to work with the Voodoo core you have installed. Mixing 
-versions, especially major or minor versions (x.0.0.0 or 0.x.0.0), can cause crashes and other problems.
 
 
 = 4. Running Voodoo
@@ -69,7 +66,7 @@ results in some detail.
 
 = 5. Reporting Bugs
 
-Voodoo is in an alpha testing staget. It undoubtedly has bugs. If you run into a bug, please go 
+Voodoo is in an alpha testing stage. It undoubtedly has bugs. If you run into a bug, please go 
 to http://www.voodooshader.com and report the bug on the forum.
 
 A bug tracker for all Voodoo elements, including shaders and adapters, will be deployed soon.

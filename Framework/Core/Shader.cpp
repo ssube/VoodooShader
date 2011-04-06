@@ -1,11 +1,11 @@
 #include "Shader.hpp"
 
-#include "Adapter.hpp"
+#include "IAdapter.hpp"
 #include "Converter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
-#include "Filesystem.hpp"
-#include "Logger.hpp"
+#include "IFilesystem.hpp"
+#include "ILogger.hpp"
 
 namespace VoodooShader
 {
@@ -443,10 +443,8 @@ namespace VoodooShader
             this->mName = techName;
         } else {
             char nameBuffer[16];
-            _itoa_s((int)(&this->mTechnique), nameBuffer, 16, 16);
-
-            this->mName = "tech_";
-            this->mName += nameBuffer;
+            sprintf_s(nameBuffer, "tech_%p", mTechnique);
+            this->mName = nameBuffer;
         }
     }
 

@@ -238,19 +238,19 @@
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Adapter.hpp" />
+    <ClInclude Include="IAdapter.hpp" />
     <ClInclude Include="Converter.hpp" />
     <ClInclude Include="Core.hpp" />
     <ClInclude Include="Docs_Code.hpp" />
     <ClInclude Include="Docs_Graphics.hpp" />
     <ClInclude Include="Docs_License.hpp" />
     <ClInclude Include="Exception.hpp" />
-    <ClInclude Include="Filesystem.hpp" />
+    <ClInclude Include="IFilesystem.hpp" />
     <ClInclude Include="FullscreenManager.hpp" />
-    <ClInclude Include="HookManager.hpp" />
+    <ClInclude Include="IHookManager.hpp" />
     <ClInclude Include="Includes.hpp" />
-    <ClInclude Include="Object.hpp" />
-    <ClInclude Include="Logger.hpp" />
+    <ClInclude Include="IObject.hpp" />
+    <ClInclude Include="ILogger.hpp" />
     <ClInclude Include="MaterialManager.hpp" />
     <ClInclude Include="Meta.hpp" />
     <ClInclude Include="Module.hpp" />

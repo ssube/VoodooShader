@@ -1,6 +1,6 @@
 #include "MaterialManager.hpp"
 
-#include "Adapter.hpp"
+#include "IAdapter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
 

@@ -1,9 +1,9 @@
 #include "FullscreenManager.hpp"
 
-#include "Adapter.hpp"
+#include "IAdapter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
-#include "Logger.hpp"
+#include "ILogger.hpp"
  
 namespace VoodooShader
 {

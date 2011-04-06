@@ -20,7 +20,7 @@
 \**************************************************************************************************/
 
 #include "Meta.hpp"
-#include "Object.hpp"
+#include "IObject.hpp"
 
 namespace VoodooShader
 {

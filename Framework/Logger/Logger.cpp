@@ -16,6 +16,9 @@ namespace VoodooShader
 {
     namespace XmlLogger
     {
+        //const char * XmlLoggerName = "{B531CD82-F741-4926-9929-0619E1317502}";
+        const char * XmlLoggerName = "XmlLogger";
+
         Version API_ModuleVersion()
         {
             Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
@@ -34,7 +37,7 @@ namespace VoodooShader
         {
             if ( number == 0 )
             {
-                return "XmlLogger";
+                return XmlLoggerName;
             } else {
                 return NULL;
             }
@@ -78,7 +81,7 @@ namespace VoodooShader
 
         const char * XmlLogger::GetObjectClass()
         {
-            return "XmlLogger";
+            return XmlLoggerName;
         }
 
         bool XmlLogger::Open(const char* filename, bool append)
@@ -220,7 +223,7 @@ namespace VoodooShader
             va_list args;
 
             if ( !this->mLogFile.is_open() ) return;
-            if ( !(level & mLogLevel) ) return;
+            if ( !((level & mLogLevel) & LL_Severity) || !((level & mLogLevel) & LL_Origin) ) return;
 
             try
             {
@@ -256,8 +259,11 @@ namespace VoodooShader
 #endif
                 mLogFile << logMsg.str();
             } catch ( std::exception exc ) {
+#ifdef _DEBUG
+                OutputDebugString(exc.what());
+#else
                 UNREFERENCED_PARAMETER(exc);
-                // Unfortunately, we have to swallow the exception and simply fail to log.
+#endif
             }
         }
 

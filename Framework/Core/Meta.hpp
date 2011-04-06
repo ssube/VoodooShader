@@ -294,10 +294,13 @@ namespace VoodooShader
     /**
      * Log message levels. These are set up to quickly filter based on various flags using binary
      * logic. Flags are ORed together, with lower-priority flags having all higher-priority flags
-     * set. If the final flag set ANDed by 
-     * 
-     * @note The enum values here indicate the <em>lowest</em> value associated with that message 
-     *    type. All values up to the next enum value are considered part of the same type.
+     * set. When checking a log call, the condition is:
+     * @code
+     * LogLevel maskedLevel = level & storedLevel;
+     * if ( (maskedLevel & LL_Origin) && (maskedLevel & LL_Severity) )
+     * { 
+     *     // Log
+     * @endcode
      */
     enum LogLevel
     {
@@ -307,10 +310,12 @@ namespace VoodooShader
         LL_Info         = 0x02,
         LL_Warning      = 0x04,
         LL_Error        = 0x08,
+        LL_Severity     = 0x0F,
         // Origin values
         LL_API          = 0x10,
         LL_Framework    = 0x20,
         LL_Adapter      = 0x40,
+        LL_Origin       = 0xF0,
         //LL_Framework    = 0x80,
         // Logger internal values
         LL_Internal     = 0x82,     /*!< Log level for Logger-internal messages */
