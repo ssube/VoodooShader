@@ -69,9 +69,10 @@ namespace VoodooShader
 
         /**
          * Retrieves the fully-qualified parameter name. Virtual parameters will be of the form 
-         * @p :param-name, while actual parameters will use @p shader-name:param-name. If the 
-         * parameter is no longer valid, the value "invalid-param" will be used instead (usually 
-         * illegal as the '-' character cannot be used in an identifier). 
+         * <code>:param-name</code>, while effect parameters will use 
+         * <code>shader-name:param-name</code>. If the parameter is no longer valid, the value 
+         * "invalid-param" will be used instead (usually illegal as the '-' character cannot be 
+         * used in an identifier). 
          * 
          * @returns The parameter's name.
          */
@@ -249,10 +250,10 @@ namespace VoodooShader
         /**
          * Gets this parameter's texture source.
          * 
-         * @sa Parameter::Get(TextureRef)
-         * @sa Parameter::Get(float)
-         * @sa Parameter::Get(float,float)
-         * @sa Parameter::Get(float,float,float)
+         * @sa @ref Parameter::Get(TextureRef)
+         * @sa @ref Parameter::Get(float)
+         * @sa @ref Parameter::Get(float,float)
+         * @sa @ref Parameter::Get(float,float,float)
          */
         void Get
         (
@@ -272,7 +273,7 @@ namespace VoodooShader
          * all sizes (float1 to float4x4). Any component may be written to, but only the appropriate 
          * number will be sent to the Cg parameter.
          */
-        _Ret_count_c_(16)
+        _Ret_count_c_(16) 
         float * GetFloat();
 
         /**

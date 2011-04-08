@@ -27,6 +27,11 @@
 #include <windows.h>
 #include <strsafe.h>
 
+/**
+ * @addtogroup VoodooLoader Voodoo/Loader
+ * @{
+ */
+
 typedef void * (* funcTypeLoad)(const char *, const char *);
 typedef void (* funcTypeUnload)(void *);
 
@@ -52,9 +57,35 @@ HRESULT WINAPI VoodooInput8Create
     LPVOID * ppvOut,
     LPVOID punkOuter
 );
+HRESULT WINAPI VoodooInputCreateGeneric
+(
+    HINSTANCE hinst,
+    DWORD dwVersion,
+    LPVOID * lplpDirectInput,
+    LPVOID punkOuter,
+    const char * func
+);
+HRESULT WINAPI VoodooInputCreateA
+(
+    HINSTANCE hinst,
+    DWORD dwVersion,
+    LPVOID * lplpDirectInput,
+    LPVOID punkOuter
+);
+HRESULT WINAPI VoodooInputCreateW
+(
+    HINSTANCE hinst,
+    DWORD dwVersion,
+    LPVOID * lplpDirectInput,
+    LPVOID punkOuter
+);
 HRESULT VoodooSoundCreate8
 (
     LPCGUID lpcGuidDevice,
     LPVOID * ppDS8,
     LPVOID pUnkOuter
 );
+
+/**
+ * @}
+ */

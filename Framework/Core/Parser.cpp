@@ -11,11 +11,7 @@ namespace VoodooShader
 {
     Parser::Parser(_In_ Core * core)
         : mCore(core)
-    {
-        mSysVariables["globalroot"] = core->GetGlobalRoot();
-        mSysVariables["localroot"] = core->GetLocalRoot();
-        mSysVariables["runroot"] = core->GetRunRoot();
-    }
+    {    }
 
     Parser::~Parser()
     {
@@ -24,7 +20,11 @@ namespace VoodooShader
 
     void Parser::AddVariable(_In_ String name, _In_ String value, _In_ bool system)
     {
-        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Adding variable \"%s\" with value \"%s\".", name.c_str(), value.c_str());
+        ILoggerRef logger = mCore->GetLogger();
+        if ( logger.get() )
+        {
+            logger->Log(LL_Debug, VOODOO_CORE_NAME, "Adding variable \"%s\" with value \"%s\".", name.c_str(), value.c_str());
+        }
 
         String finalname = this->ParseString(name);
 
@@ -33,18 +33,25 @@ namespace VoodooShader
             mVariables[finalname] = value;
         } else {
             Dictionary::iterator varIter = mSysVariables.find(finalname);
-            if ( varIter == mVariables.end() )
+            if ( varIter == mSysVariables.end() )
             {
                 mSysVariables[finalname] = value;
             } else {
-                mCore->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, "Unable to add duplicate system variable \"%s\".", finalname.c_str());
+                if ( logger.get() )
+                {
+                    logger->Log(LL_Warning, VOODOO_CORE_NAME, "Unable to add duplicate system variable \"%s\".", finalname.c_str());
+                }
             }
         }
     }
 
     void Parser::RemoveVariable(_In_ String name)
     {
-        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
+        ILoggerRef logger = mCore->GetLogger();
+        if ( logger.get() )
+        {
+            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
+        }
 
         String finalname = this->ParseString(name);
 
@@ -59,8 +66,12 @@ namespace VoodooShader
     String Parser::ParseString(_In_ String input, _In_ ParseFlags flags)
     {
         using namespace std;
-            
-        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
+
+        ILoggerRef logger = mCore->GetLogger();
+        if ( logger.get() )
+        {
+            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
+        }
 
         // Parse out any variables in the filename, first
         String iteration = input;
@@ -89,7 +100,7 @@ namespace VoodooShader
                             output << this->ParseString(variter->second, flags);
                         } else {
                             variter = mVariables.find(varname);
-                            if ( variter != mSysVariables.end() )
+                            if ( variter != mVariables.end() )
                             {
                                 output << this->ParseString(variter->second, flags);
                             } else {
@@ -172,7 +183,10 @@ namespace VoodooShader
 
         iteration = output.str();
 
-        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
+        if ( logger.get() )
+        {
+            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
+        }
 
         return iteration;
     }

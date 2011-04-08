@@ -10,7 +10,10 @@
 #include "FullscreenManager.hpp"
 #include "MaterialManager.hpp"
 #include "Module.hpp"
+#include "Parameter.hpp"
 #include "Parser.hpp"
+#include "Shader.hpp"
+#include "Texture.hpp"
 
 #include "pugixml.hpp"
 
@@ -48,9 +51,16 @@ namespace VoodooShader
         char localroot[MAX_PATH];
         HMODULE targetModule = GetModuleHandle(NULL);
         GetModuleFileName(targetModule, localroot, MAX_PATH);
+        //localroot[chars] = '\0';
         char * lastslash = strrchr(localroot, '\\');
         if ( lastslash )
         {
+            //char targetname[MAX_PATH];
+            //strcpy_s(targetname, MAX_PATH, lastslash + 1);
+            //_strlwr_s(targetname, strlen(targetname));
+            //mTarget = targetname;
+            mTarget = ( lastslash + 1 );
+
             lastslash[1] = '\0';
         }
         mLocalRoot = localroot;
@@ -85,7 +95,12 @@ namespace VoodooShader
             // Create query for node text, used multiple times
             xpath_query nodeTextQuery("./text()");
 
-            // Load variables
+            // Load variables, built-in first
+            mParser->AddVariable("globalroot", mGlobalRoot, true);
+            mParser->AddVariable("localroot", mLocalRoot, true);
+            mParser->AddVariable("runroot", mRunRoot, true);
+            mParser->AddVariable("target", mTarget, true);
+
             xpath_query varNodesQuery("/VoodooConfig/Variables/Variable");
             xpath_query varNodeNameQuery("./@name");
 
@@ -121,9 +136,9 @@ namespace VoodooShader
                 String rawfilename = nodeTextQuery.evaluate_string(*moduleIter);
                 String filename = mParser->ParseString(rawfilename);
 
-                mModManager->LoadModule(filename);
+                ModuleRef cmod = mModManager->LoadModule(filename);
 
-                // Test for the vital classes and create as soon as possible
+                // Test for debug mismatch and vital classes
                 if ( mLogger.get() == NULL && mModManager->ClassExists(logClass) )
                 {
                     mLogger = mModManager->SharedCreateClass<ILogger>(logClass);

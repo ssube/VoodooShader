@@ -1,19 +1,25 @@
 
 #Voodoo-specific ignores
+[Bb]in
 [Bb]uild
-[Dd]ocs/html/*
-[Dd]ocs/xml/*
-CodeAnalyst/*
-Template/*
-*/Template/*
-*/*/Template/*
+[Dd]ocs/html
+[Dd]ocs/xml
+[Dd]ocs/*.chm
+doxylog
+CodeAnalyst
+[Tt]emplate
 *~
 *.swp
 *.tmp
 Analysis/Yasca/Yasca-Report-*.html
 Resources/Installers/Output/*
+[Dd]ependencies/*/*
+[Dd]ebug
+[Rr]elease
+
 #ignore thumbnails created by windows
 Thumbs.db
+
 #Ignore files build by Visual Studio
 *.obj
 *.exe
@@ -34,11 +40,8 @@ Thumbs.db
 *.log
 *.sdf
 *.opensdf
-[Bb]in
-[Dd]ebug*/
 *.lib
 *.sbr
 obj/
-[Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*

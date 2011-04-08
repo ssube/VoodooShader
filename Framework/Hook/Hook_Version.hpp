@@ -21,6 +21,10 @@
 
 #include "Version.hpp"
 
+/**
+ * @addtogroup VoodooEHHook Voodoo/EHHook
+ * @{
+ */
 // Logger defs -------------------------------------------------------------------
 #define VOODOO_HOOK_NAME                "Voodoo/EHHook"
 #define VOODOO_HOOK_PRETTYNAME          "Voodoo Hook Library"
@@ -29,3 +33,7 @@
 #define VOODOO_HOOK_VERSION_PATCH       4
 #define VOODOO_HOOK_VERSION_REV         VOODOO_GLOBAL_VERSION_REV   
 //--------------------------------------------------------------------------------
+/**
+ * @}
+ */
+

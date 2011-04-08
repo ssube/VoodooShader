@@ -121,11 +121,11 @@ namespace VoodooShader
  * Core::SetTexture(TextureType, TextureRef). Relinking a shader may change these 
  * targets.
  * 
- * @subpage Parameters
+ * @page virtualparams Parameters
  * Voodoo supports two general varieties of parameter (virtual and effect) and a number of specific 
  * data types.
  * 
- * @section virtualparams Virtual and Effect Parameters
+ * @section virtualparamsdiff Virtual and Effect Parameters
  * The primary difference between virtual params and effect params are where they exist. Effect
  * parameters exist within a shader effect and on the GPU, and are used directly within programs.
  * Virtual parameters exist only in the runtime and on the CPU, and may have many effect parameters

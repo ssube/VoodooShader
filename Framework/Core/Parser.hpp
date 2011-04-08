@@ -138,7 +138,7 @@ namespace VoodooShader
      * @section varserror Errors
      * If a variable cannot be resolved, an error value will be used in place of the variable. This 
      * value is designed to cause the path to fail in any operations. The error value will replace 
-     * @p varname with @p --badvar:varname--.
+     * @p varname with <code>--badvar:varname--</code>.
      * 
      * @section varsbuiltin Built-In Variables
      * A small assortment of built-in variables are provided for use. These represent  paths or 
@@ -173,6 +173,28 @@ namespace VoodooShader
      * startup working directory). This path is retrieved from the Windows API by the loader during 
      * startup. This is the most variable of the builtin variables; it may change each run, 
      * depending on how the target is started. The value is \\-terminated.
+     * 
+     * @subsection varsbuiltintarget $(target)
+     * The filename of the target application. This does not include the path (found in 
+     * <code>\$(localroot)</code>), only the name. To help use this for variable varnames, this is
+     * forced to all lowercase. You can use it to change the config settings based on the running
+     * executable, like so:
+     * 
+     * @par Example:
+     * Two adapter names, for different games. For this example, the running target is 
+     * <code>nwmain.exe</code>.
+     * @code
+     * globalroot = M:\VoodooShader\
+     * target = nwmain.exe
+     * 
+     * morrowind.exe = Gem
+     * nwmain.exe = Frost
+     * adapter = $($(target))
+     * 
+     * $(adapter)_Adapter = Frost_Adapter
+     * $(globalroot)\resources\$(adapter) = M:\VoodooShader\resources\Frost
+     * @endcode
+     * The variable used in adapter (and so, the value) change depending on the value of target.
      * 
      * @section varsconfig Config Variables
      * When the filesystem module is loaded, it retrieves any variables from the config (using the 

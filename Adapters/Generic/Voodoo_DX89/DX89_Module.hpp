@@ -19,10 +19,10 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include <set>
-
 #define VOODOO_IMPORT
 #include "Voodoo_Core.hpp"
+
+#include <set>
 
 #include <d3d9.h>
 #include <d3dx9.h>

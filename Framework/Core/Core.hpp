@@ -24,17 +24,12 @@
 
 #include "Meta.hpp"
 
-#include "Parameter.hpp"
-#include "Shader.hpp"
-#include "Texture.hpp"
-
 namespace VoodooShader
 {
     /**
      * @addtogroup VoodooCore
      * @{
      */
-     
     /**
      * Creates a new core. This function is exported and meant for use by the loader.
      * 
@@ -297,8 +292,6 @@ namespace VoodooShader
             _In_ ParameterType type
         );
 
-        //! @todo Add a Core::GetShader() function
-
         /**
          * Binds a texture to a specialized function for the shader linker. 
          *
@@ -351,6 +344,7 @@ namespace VoodooShader
         String mGlobalRoot;
         String mLocalRoot;
         String mRunRoot;
+        String mTarget;
 
         /**
          * Config file (actually a <code>pugi::xml_document *</code>, stored as void).

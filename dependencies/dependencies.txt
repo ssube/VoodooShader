@@ -1,0 +1,13 @@
+Voodoo relies on a number of third-party libraries for various functions. This directory contains 
+the necessary files for of these.
+
+Two significant (not included) dependencies also exist:
+ - nVidia's Cg Toolkit (June 2010)
+ - DirectX 9.0c SDK (August 2010)
+
+These cannot be included due to license terms, but may be downloaded from http://www.nvidia.com and
+http://www.microsoft.com, respectively.
+
+The dependencies are in a ZIP archive and must be extracted before use (having them loose greatly 
+increases the repo size). Win32 builds are included (DLL and LIB files) and the projects are set up 
+to use this dir for most dependencies.

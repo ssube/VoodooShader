@@ -59,6 +59,12 @@ namespace VoodooShader
             return NULL;
         }
 
+        Version moduleversion = rawmodule->ModuleVersion();
+        if ( moduleversion.Debug != VOODOO_META_DEBUG_BOOL && logger.get() )
+        {
+            logger->Log(LL_Warning, VOODOO_CORE_NAME, "Debug build mismatch with module %s.", moduleversion.Name.c_str());
+        }
+
         ModuleRef module(rawmodule);
         mModules[path] = module;
 
@@ -80,6 +86,35 @@ namespace VoodooShader
         }
 
         return module;
+    }
+
+    bool ModuleManager::UnloadModule( _In_ String name )
+    {
+        // Build the full path
+        String path;
+
+        if ( name[0] == '.' )
+        {
+            path = mCore->GetGlobalRoot() + "\\bin\\" + name.substr(2);
+        } else {
+            path = name;
+        }
+
+        ModuleMap::iterator modIter = mModules.find(path);
+        if ( modIter != mModules.end() )
+        {
+            ModuleRef mod = modIter->second;
+
+            mModules.erase(modIter);
+
+            if ( mod.use_count() == 1 )
+            {
+                mod = NULL;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void * ModuleManager::FindFunction( _In_ String module, _In_ String name )
@@ -133,11 +168,11 @@ namespace VoodooShader
                     }
                     return NULL;
                 }
-                } else {
-                    if ( logger.get() )
-                    {
-                        logger->Log(LL_Error, VOODOO_CORE_NAME, "Unable to lock module (possibly unloaded) for class %s.", name.c_str());
-                    }
+            } else {
+                if ( logger.get() )
+                {
+                    logger->Log(LL_Error, VOODOO_CORE_NAME, "Unable to lock module (possibly unloaded) for class %s.", name.c_str());
+                }
                 return NULL;
             }
         } else {
@@ -166,7 +201,7 @@ namespace VoodooShader
             module->mClassInfo     = (InfoFunc   ) GetProcAddress(hmodule, "ClassInfo"    );
             module->mClassCreate   = (CreateFunc ) GetProcAddress(hmodule, "ClassCreate"  );
 
-            if ( !(module->mModuleVersion && module->mClassCount && module->mClassInfo && module->mClassCreate ) )
+            if ( !module->mModuleVersion || !module->mClassCount || !module->mClassInfo || !module->mClassCreate )
             {
                 FreeLibrary(hmodule);
                 delete module;

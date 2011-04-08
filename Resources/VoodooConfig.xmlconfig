@@ -9,7 +9,9 @@
          module names and other settings (allows for easy swapping). 
     -->
     <Variables>
-        <Variable name="adapter">Frost</Variable>
+        <Variable name="morrowind.exe">Gem</Variable>
+        <Variable name="nwmain.exe">Frost</Variable>
+        <Variable name="adapter">$($(target))</Variable>
     </Variables>
 
     <Core>

@@ -63,7 +63,7 @@ namespace VoodooShader
 
                 this->AddDirectory(path);
 
-                ++fspathIter;
+                ++pathIter;
             }
         }
 

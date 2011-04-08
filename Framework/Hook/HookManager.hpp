@@ -31,7 +31,7 @@ namespace VoodooShader
         /**
          * Classes and functions related to the EasyHook-based implementation of IHookManager.
          * 
-         * @addtogroup VoodoEHHook Voodoo/EHHook
+         * @addtogroup VoodooEHHook Voodoo/EHHook
          * @{
          */
         typedef std::map<std::string, void*> HookMap;
@@ -52,8 +52,7 @@ namespace VoodooShader
         );
 
         /**
-         * Handles function-level hooks, redirecting existing functions and calls into
-         * new locations. 
+         * Handles function-level hooks, redirecting function calls into new locations. 
          */
         class HookManager
             : public VoodooShader::IHookManager
@@ -75,8 +74,7 @@ namespace VoodooShader
             const char * GetObjectClass();
         
             /**
-             * Install a single hook at the specified point. This will only affect the
-             * process(es) the HookManager is bound to.
+             * Install a hook at the specified function.
              *
              * @param name The name for the hook.
              * @param src The point to install the hook at.
@@ -85,10 +83,10 @@ namespace VoodooShader
              * @throws Exception if a hook with the same name already exists.
              *
              * @note The name is often the name of the function in src (&func) for
-             *        simplicities sake. 
+             *    simplicities sake. 
              * @warning The calling convention of src and dest must be identical, or bad
-             *        things might happen. This is only a bother with member functions, but
-             *        can be worked around relatively easily.
+             *    things might happen. This is only a bother with member functions, but
+             *    can be worked around relatively easily.
              */
             bool CreateHook
             (
@@ -105,9 +103,9 @@ namespace VoodooShader
              * @throws Exception of the hook is not found.
              * 
              * @warning <em>Do not</em>, under any circumstances, remove a hook while
-             *        execution is passing through the trampoline function. This can cause
-             *        the process to crash in rare cases. I'm not sure the reason, but it's
-             *        not good. Until I replace EasyHook, be careful!
+             *    execution is passing through the trampoline function. This can cause
+             *    the process to crash in rare cases. I'm not sure the reason, but it's
+             *    not good. Until I replace EasyHook, be careful!
              */
             bool RemoveHook
             (

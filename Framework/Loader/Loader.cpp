@@ -4,10 +4,10 @@
 
 #include "Loader_Version.hpp"
 
-/**
- * @addtogroup VoodooLoader Voodoo/Loader
- * @{
- */
+funcTypeLoad funcLoad;
+funcTypeUnload funcUnload;
+
+void * core = NULL;
 
 VoodooShader::Version API_ModuleVersion()
 {
@@ -15,13 +15,8 @@ VoodooShader::Version API_ModuleVersion()
     return module;
 }
 
-funcTypeLoad funcLoad;
-funcTypeUnload funcUnload;
-
-void * core = NULL;
-
 /**
- * Reads the adapter's name from the Voodoo config file and loads it, if present.
+ * Locate and load the Voodoo core, verify the functions and initialize the framework.
  */
 bool LoadVoodoo()
 {
@@ -70,7 +65,7 @@ bool LoadVoodoo()
     funcLoad   = (funcTypeLoad)  GetProcAddress(adapter, "CreateCore");
     funcUnload = (funcTypeUnload)GetProcAddress(adapter, "DestroyCore");
 
-    if ( funcLoad == NULL )
+    if ( funcLoad == NULL || funcUnload == NULL )
     {
         MessageBoxA(NULL, "Voodoo Loader: Unable to find core EP.", "Loader Error", MB_ICONERROR|MB_OK);
         return false;
@@ -117,7 +112,9 @@ BOOL WINAPI DllMain
 
 // Support functions
 
-// Load a module from the system directory (uses absolute path to guarantee proper file).
+/**
+ * Load a module from the system directory (uses absolute path to guarantee proper file).
+ */
 HMODULE LoadSystemLibrary(const char * libname)
 {
     char Path[MAX_PATH];
@@ -129,9 +126,11 @@ HMODULE LoadSystemLibrary(const char * libname)
     return LoadLibraryA(Path);
 }
 
-// Most DirectX libraries use an identical loading function, with only the name varying.
-// This function takes an SDK version, library name and function name, loads and calls the 
-// proper init function.
+/**
+ * Most DirectX libraries use an identical loading function, with only the name varying.
+ * This function takes an SDK version, library name and function name, loads and calls the 
+ * proper init function.
+ */
 void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func)
 {
     typedef void * (WINAPI * DXInitFunc)(UINT);
@@ -242,12 +241,12 @@ HRESULT WINAPI VoodooInputCreateA
 }
 
 HRESULT WINAPI VoodooInputCreateW
-    (
+(
     HINSTANCE hinst,
     DWORD dwVersion,
     LPVOID * lplpDirectInput,
     LPVOID punkOuter
-    )
+)
 {
     return VoodooInputCreateGeneric(hinst, dwVersion, lplpDirectInput, punkOuter, "DirectInputCreateW");
 }
@@ -281,7 +280,3 @@ HRESULT VoodooSoundCreate8
 
     return (*initFunc)(lpcGuidDevice, ppDS8, pUnkOuter);
 }
-
-/**
- * @}
- */
