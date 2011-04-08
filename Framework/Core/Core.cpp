@@ -72,13 +72,27 @@ namespace VoodooShader
 
         try
         {
-            String ConfigPath = mRunRoot + "VoodooConfig.xmlconfig";
             xml_document * config = new xml_document();
+
+            // Try loading the config file from each major location
+            String ConfigPath = mRunRoot + "VoodooConfig.xmlconfig";
             xml_parse_result result = config->load_file(ConfigPath.c_str());
 
             if ( !result )
             {
-                throw std::exception("Error parsing config file.");
+                ConfigPath = mLocalRoot + "VoodooConfig.xmlconfig";
+                result = config->load_file(ConfigPath.c_str());
+
+                if ( !result )
+                {
+                    ConfigPath = mGlobalRoot + "VoodooConfig.xmlconfig";
+                    result = config->load_file(ConfigPath.c_str());
+
+                    if ( !result )
+                    {
+                        throw std::exception("Unable to find or parse config file.");
+                    }
+                }
             }
 
             // Store the config file, in case modules need it
@@ -178,6 +192,8 @@ namespace VoodooShader
                 {
                     throw std::exception("Unable to create FileSystem object.");
                 }
+            } else {
+                throw std::exception("FileSystem class not found or module not loaded.");
             }
 
             if ( mHooker.get() == NULL && mModManager->ClassExists(hookClass) )
@@ -188,6 +204,8 @@ namespace VoodooShader
                 {
                     throw std::exception("Unable to create HookManager object.");
                 }
+            } else {
+                throw std::exception("HookManager class not found or module not loaded.");
             }
 
             if ( mAdapter.get() == NULL && mModManager->ClassExists(adpClass) )
@@ -198,6 +216,8 @@ namespace VoodooShader
                 {
                     throw std::exception("Unable to create Adapter object.");
                 }
+            } else {
+                throw std::exception("Adapter class not found or module not loaded.");
             }
 
             // Core done loading

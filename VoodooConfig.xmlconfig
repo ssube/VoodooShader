@@ -1,6 +1,6 @@
 <!-- 
     Generic Voodoo config, set up for rev165 or better. 
-    Includes Gem and Frost settings, with Frost set at the moment. 
+    Includes Gem and Frost settings, set up for target detection. 
 -->
 <VoodooConfig>
 
@@ -11,6 +11,16 @@
     <Variables>
         <Variable name="morrowind.exe">Gem</Variable>
         <Variable name="nwmain.exe">Frost</Variable>
+
+        <Variable name="nwn.exe">Null</Variable>
+        <Variable name="nwconfig.exe">Null</Variable>
+        <Variable name="nwloader.exe">Null</Variable>
+        <Variable name="nwtoolset.exe">Null</Variable>
+        <Variable name="nwserver.exe">Null</Variable>
+        <Variable name="nwupdate.exe">Null</Variable>
+        <Variable name="tes construction set.exe">Null</Variable>
+        <Variable name="morrowind launcher.exe">Null</Variable>
+
         <Variable name="adapter">$($(target))</Variable>
     </Variables>
 
@@ -23,12 +33,12 @@
 
         <!-- Core classes. These are created during startup. -->
         <Logger>XmlLogger</Logger>
-        <Hook>EHHookManager</Hook>
+        <HookManager>EHHookManager</HookManager>
         <FileSystem>WFileSystem</FileSystem>
         <Adapter>$(adapter)_Adapter</Adapter>
 
         <!-- Log filename. -->  
-        <LogFile>$(runroot)\Voodoo_$(adapter).xmllog</LogFile> 
+        <LogFile>$(runroot)\Voodoo_$(adapter)</LogFile> 
     </Core>
 
     <!-- Settings for the WFileSystem class. -->
@@ -41,10 +51,10 @@
                  These first two may be the same, but if the target is run with a
                  working directory, they won't be (allows shortcuts to change paths).
             -->
-            <Path>$(runroot)\resources\</Path>
-            <Path>$(localroot)\resources\</Path>
-            <Path>$(globalroot)\resources\$(adapter)</Path>
             <Path>$(globalroot)\resources\common\</Path>
+            <Path>$(globalroot)\resources\$(adapter)</Path>
+            <Path>$(localroot)\resources\</Path>
+            <Path>$(runroot)\resources\</Path>
         </SearchPaths>
     </WFileSystem>
 

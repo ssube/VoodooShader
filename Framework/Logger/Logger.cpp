@@ -65,9 +65,6 @@ namespace VoodooShader
 
         XmlLogger::~XmlLogger()
         {
-            this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Logger destroyed.");
-            this->Dump();
-
             if ( this->mLogFile.is_open() )
             {
                 this->Close();

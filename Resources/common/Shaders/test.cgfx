@@ -1,0 +1,56 @@
+sampler2D mainTex < string texture = ":thisframe"; >;
+
+float2 res < string parameter = "resolution"; >;
+
+float2 rcpres < string parameter = "resolution_rcp"; > = 
+{ 
+	0.1f, 
+	0.1f
+};
+
+float4x4 viewMatrix < string parameter = "matrix_view"; >;
+
+const float3 zero = { 0.00f, 0.00f, 0.00f };
+const float3 lum  = { 0.27f, 0.67f, 0.06f };
+
+float findLum(float3 val)
+{
+	float3 mod = val * lum;
+	return ( mod.r + mod.g + mod.b );
+}
+
+void partialInvert(in float2 uv : TEXCOORD0, out float4 color : COLOR0)
+{	
+	float3 rcenter = tex2D(mainTex, uv).rgb;
+	float  center  = findLum(rcenter);
+	float3 icenter = 1 - rcenter;
+	
+	if ( uv.x < 0.5 )
+	{
+		color.rgb = lerp(icenter, rcenter, center);
+	} else {
+		color.rgb = lerp(rcenter, icenter, center);
+	}
+	color.a = 1.0f;
+}
+
+void redScreen(in float2 uv : TEXCOORD0, out float4 color : COLOR0)
+{
+	color = float4(1.0f, 0.0f, 0.0f, 1.0f);
+}
+
+technique main 
+{
+	pass p0
+	{
+		FragmentProgram = compile latest partialInvert();
+	}
+}
+
+technique alternate
+{
+	pass p0
+	{
+		FragmentProgram = compile latest redScreen();
+	}
+}
