@@ -9,23 +9,23 @@ namespace VoodooShader
     {
         switch ( pt )
         {
-        case PT_Sampler1D:
+        case (PT_Sampler1D):
             return CG_SAMPLER1D;
-        case PT_Sampler2D:
+        case (PT_Sampler2D):
             return CG_SAMPLER2D;
-        case PT_Sampler3D:
+        case (PT_Sampler3D):
             return CG_SAMPLER3D;
-        case PT_Float1:
+        case (PT_Float1):
             return CG_FLOAT;
-        case PT_Float2:
+        case (PT_Float2):
             return CG_FLOAT2;
-        case PT_Float3:
+        case (PT_Float3):
             return CG_FLOAT3;
-        case PT_Float4:
+        case (PT_Float4):
             return CG_FLOAT4;
-        case PT_Matrix:
+        case (PT_Matrix):
             return CG_FLOAT4x4;
-        case PT_Unknown:
+        case (PT_Unknown):
         default:
             return CG_UNKNOWN_TYPE;
         }

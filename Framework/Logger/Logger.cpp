@@ -217,7 +217,9 @@ namespace VoodooShader
             va_list args;
 
             if ( !this->mLogFile.is_open() ) return;
-            if ( !((level & mLogLevel) & LL_Severity) || !((level & mLogLevel) & LL_Origin) ) return;
+
+            LogLevel mask = (LogLevel)( level & mLogLevel );
+            if ( !( mask & LL_Severity ) || !( mask & LL_Origin ) ) return;
 
             try
             {
@@ -244,7 +246,7 @@ namespace VoodooShader
                 logMsg << "</Message>\n";
 
 #ifdef _DEBUG
-                if ( level & ( LL_Warning | LL_Error ) )
+                if ( level == LL_Internal || level & ( LL_Warning | LL_Error ) )
                 {
                     OutputDebugString(logMsg.str().c_str());
                 }

@@ -76,7 +76,7 @@
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     2
 #define VOODOO_GLOBAL_VERSION_PATCH     9
-#define VOODOO_GLOBAL_VERSION_REV       169
+#define VOODOO_GLOBAL_VERSION_REV       172
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   "Copyright (c) 2010-2011 by Sean Sube"
 #define VOODOO_GLOBAL_COPYRIGHT_FULL\
     "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&lt;br /&gt;\n"\

@@ -160,6 +160,11 @@ namespace VoodooShader
                 varname = this->ParseStringRaw(varname, PF_VarName, ++depth, state);
 
                 state[varname] = newvalue;
+
+                stringstream output;
+                output << iteration.substr(0, startpos - 1) << iteration.substr(endpos + 1);
+                iteration = output.str();
+
                 continue;
             } 
 
@@ -235,7 +240,7 @@ namespace VoodooShader
             return this->ToLower(iteration);
         } 
         
-        if ( flags & PF__SlashFlags )
+        if ( flags & PF_SlashFlags )
         {
             bool singleslash = ( flags & PF_SingleSlash );
             bool prevslash = false;
@@ -281,7 +286,7 @@ namespace VoodooShader
             iteration = output.str();
         }
 
-        if ( flags & PF__CaseFlags )
+        if ( flags & PF_CaseFlags )
         {
             if ( flags & PF_Lowercase )
             {
