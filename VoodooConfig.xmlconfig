@@ -1,5 +1,5 @@
 <!-- 
-    Generic Voodoo config, set up for rev165 or better. 
+    Generic Voodoo config, set up for rev170 or better. 
     Includes Gem and Frost settings, set up for target detection. 
 -->
 <VoodooConfig>

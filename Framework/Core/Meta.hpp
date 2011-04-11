@@ -306,16 +306,18 @@ namespace VoodooShader
      */
     enum ParseFlags
     {
-        PF_None             = 0x00,     /*!< No special behavior */
+        PF_None             = 0x0000,     /*!< No special behavior */
         // Slash flags
-        PF_SingleSlash      = 0x01,     /*!< No repeated slashes (useful for XPath). */
-        PF_SlashOnly        = 0x02,     /*!< Replace all backslashes with forward slashes. */
-        PF_BackslashOnly    = 0x04,     /*!< Replace all forward slashes with backslashes. */
+        PF_SingleSlash      = 0x0001,     /*!< No repeated slashes (useful for XPath). */
+        PF_SlashOnly        = 0x0002,     /*!< Replace all backslashes with forward slashes. */
+        PF_BackslashOnly    = 0x0004,     /*!< Replace all forward slashes with backslashes. */
+        PF__SlashFlags      = 0x0007,
         // Case flags
-        PF_Lowercase        = 0x08,
-        PF_Uppercase        = 0x10,
-        // State blocks
-        PF_RetainState      = 0x20,
+        PF_Lowercase        = 0x0010,
+        PF_Uppercase        = 0x0020,
+        PF__CaseFlags       = 0x0030,
+        // General flags
+        PF_VarName          = 0x0100,
         // Padding value
         PF_Max = 0xFFFFFFFF,            /*!< Highest possible value, forcing dword type */
     };

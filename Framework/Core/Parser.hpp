@@ -74,14 +74,17 @@ namespace VoodooShader
          */
         String ParseString(_In_ String input, _In_ ParseFlags flags = PF_None);
 
+        static const int VarMaxDepth = 8;
+        static const char VarDelimStart = '(';
+        static const char VarDelimEnd   = ')';
+        static const char VarDelimPre   = '$';
+
     private:
         String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state);
 
         Core * mCore;
         Dictionary mVariables;
         Dictionary mSysVariables;
-
-        static const int mMaxDepth = 8;
     };
     /**
      * @}
@@ -105,19 +108,24 @@ namespace VoodooShader
      * or '!'. These characters have special meaning and will be stripped or will modify the name
      * before it is used.
      * 
-     * The ':' character indicates state variables, described below. 
-     * 
-     * The '?' character indicate optional variables, which are not replaced with an error note if 
-     * they are not found. 
-     * 
-     * The remaining listed characters are reserved.
-     * 
      * Variable names may contain variables, which will be resolved using standard rules (this
      * allows for variable variable names and dynamic string creation).
      * 
      * When a variable is added to the parser, the name is immediately parsed using 
      * @p PF_Lowercase and the result is used as the actual name. This contrasts with values,
      * which are parsed when used.
+     * 
+     * @subsubsection varssyntaxnamesspec Special Characters
+     * The ':' character indicates state variables, described below. 
+     * 
+     * The '?' character indicates optional variables, which are not replaced with an error note if 
+     * they are not found. 
+     * 
+     * The '!' character indicates express variables, which do not have their value parsed (and so
+     * may contain other variables without replacements). This can be useful when building variable
+     * variables to avoid recursion constraints.
+     * 
+     * The remaining listed characters are reserved.
      * 
      * @subsection varssyntaxvalue Variable Values
      * Variable values may contain any characters and embedded variables. 
@@ -130,7 +138,8 @@ namespace VoodooShader
      * 
      * The depth counter handles recursion and operated very simply. Each time the parser
      * encounters a string that requires parsing, the counter is incremented and passed on. This
-     * prevents more than @ref Parser::mMaxDepth levels of recursion and prevents infinite loops.
+     * prevents more than @ref Parser::mMaxDepth levels of recursion (8, by default) and prevents 
+     * infinite loops. When this limit is reached, variables will not be parsed.
      * 
      * State blocks are somewhat more Cthulhic in their logic. When the parser is called, a state
      * block is created and passed on, similar to the depth counter. However, if a variable name
