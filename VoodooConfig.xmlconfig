@@ -3,25 +3,23 @@
     Includes Gem and Frost settings, set up for target detection. 
 -->
 <VoodooConfig>
-
     <!-- 
          Global variables. These are loaded first and may be used in
          module names and other settings (allows for easy swapping). 
     -->
     <Variables>
-        <Variable name="morrowind.exe">Gem</Variable>
-        <Variable name="nwmain.exe">Frost</Variable>
+        <!-- 
+             Target variables. $(adapter) will take on the value of
+             the var whose name matches $(target). Variable names are
+             case insensitive, so these match all files with the name.
+        -->
+        <Variable name="morrowind.exe">$(adapter_class:Gem)</Variable>
+        <Variable name="nwmain.exe">$(adapter_class:Frost)</Variable>
 
-        <Variable name="nwn.exe">Null</Variable>
-        <Variable name="nwconfig.exe">Null</Variable>
-        <Variable name="nwloader.exe">Null</Variable>
-        <Variable name="nwtoolset.exe">Null</Variable>
-        <Variable name="nwserver.exe">Null</Variable>
-        <Variable name="nwupdate.exe">Null</Variable>
-        <Variable name="tes construction set.exe">Null</Variable>
-        <Variable name="morrowind launcher.exe">Null</Variable>
+        <!-- Null adapter class for all other targets. -->
+        <Variable name="adapter_class">Null</Variable>
 
-        <Variable name="adapter">$($(target))</Variable>
+        <Variable name="adapter">$(?$(target))$(adapter_class)</Variable>
     </Variables>
 
     <Core>
@@ -39,22 +37,23 @@
 
         <!-- Log filename. -->  
         <LogFile>$(runroot)\Voodoo_$(adapter)</LogFile> 
+        <LogLevel>FF</LogLevel>
     </Core>
 
     <!-- Settings for the WFileSystem class. -->
     <WFileSystem>
-        <!-- Not implemented, will use search paths below for all files. -->
+        <!-- Use search paths below for all files. (not implemented) -->
         <RewritePaths enabled="false" /> 
 
         <SearchPaths>
-            <!-- 
-                 These first two may be the same, but if the target is run with a
-                 working directory, they won't be (allows shortcuts to change paths).
-            -->
             <Path>$(globalroot)\resources\common\</Path>
             <Path>$(globalroot)\resources\$(adapter)</Path>
             <Path>$(localroot)\resources\</Path>
             <Path>$(runroot)\resources\</Path>
+            <Path>$(allgames)\VoodooShader\resources\common\</Path>
+            <Path>$(mygames)\VoodooShader\resources\common\</Path>
+            <Path>$(allgames)\VoodooShader\resources\$(adapter)\</Path>
+            <Path>$(mygames)\VoodooShader\resources\$(adapter)\</Path>
         </SearchPaths>
     </WFileSystem>
 
@@ -74,6 +73,5 @@
             <Shader>voodoologo.cgfx</Shader>
         </PostShaders>
     </Gem_Adapter>
-    
 
 </VoodooConfig>

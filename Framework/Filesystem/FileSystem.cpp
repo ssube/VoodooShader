@@ -5,6 +5,14 @@
 #include "IL\il.h"
 #include "pugixml.hpp"
 
+// The MS shlobj header contains a few functions that cause errors in analysis under /W4 (and cause
+// the build to fail under /WX). This disables the warning for only that header.
+#pragma warning(push)
+#pragma warning(disable:6387)
+#include <shlobj.h>
+#pragma warning(pop)
+#include <strsafe.h>
+
 namespace VoodooShader
 {
     namespace VoodooWFS
@@ -46,6 +54,25 @@ namespace VoodooShader
             : mCore(core)
         {
             using namespace pugi;
+
+            // Create builtin vars
+            ParserRef parser = mCore->GetParser();
+
+            char cvar[MAX_PATH];
+            if ( SHGetFolderPath(NULL, CSIDL_COMMON_DOCUMENTS, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
+            {
+                StringCchCatA(cvar, MAX_PATH, "\\My Games\\");
+                parser->AddVariable("allgames", cvar, true);
+            }
+            if ( SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
+            {
+                StringCchCatA(cvar, MAX_PATH, "\\My Games\\");
+                parser->AddVariable("mygames", cvar, true);
+            }
+            if ( SHGetFolderPath(NULL, CSIDL_SYSTEM, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
+            {
+                parser->AddVariable("systemroot", cvar, true);
+            }
 
             // Init DevIL
             ilInit();

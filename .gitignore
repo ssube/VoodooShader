@@ -2,9 +2,7 @@
 #Voodoo-specific ignores
 [Bb]in
 [Bb]uild
-[Dd]ocs/html
-[Dd]ocs/xml
-[Dd]ocs/*.chm
+[Dd]ocs/doxygen
 doxylog
 CodeAnalyst
 [Tt]emplate

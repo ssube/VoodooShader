@@ -28,13 +28,6 @@
 #    define VOODOO_API __declspec(dllimport)
 #endif
 
-#ifdef _DEBUG
-#   define VOODOO_DEBUG
-#   define VOODOO_DEBUG_VALUE 1
-#else
-#   define VOODOO_DEBUG_VALUE 0
-#endif
-
 // Hide the DLL-interface warning
 #pragma warning(disable:4251)
 
@@ -65,19 +58,8 @@ namespace VoodooShader
     class Technique;
     class Texture;
     class Shader;
-    /**
-     * @}
-     */
 
-    /**
-     * Structures that are <em>not</em> implemented within the core module and/or meant for
-     * use throughout Voodoo. These can be used without linking against the core (header-only,
-     * often interfaces) and are typically used by classes provided by addon modules. These 
-     * provide extended functions that are used by the core.
-     * 
-     * @addtogroup VoodooGlobal Voodoo/Global
-     * @{
-     * 
+    /**  
      * Interface classes, providing standard access to various dynamic
      * objects. These are not implemented within the core but are instead
      * dynamically linked at runtime. All are derived from IObject.
@@ -93,7 +75,7 @@ namespace VoodooShader
     /**
      * Generic structs for passing simple data sets. Structs have no ctor
      * or dtor, nor methods; they should be created with the <code>{m,n,o}</code>
-     * syntax. Macros may be available to construct some of them.
+     * syntax. Macros may be available to construct some struct types.
      */
     struct TextureDesc;
     struct Version;
@@ -116,14 +98,7 @@ namespace VoodooShader
         typedef IObject *    (*CreateFunc )(int, Core *);
         typedef Version      (*VersionFunc)();
     };
-    /**
-     * @}
-     */
 
-    /**
-     * @addtogroup VoodooCore Voodoo/Core
-     * @{
-     */
     typedef std::string                         String;
     //typedef std::shared_ptr<Core>               CoreRef;
     //typedef std::weak_ptr<Core>                 CorePtr;
@@ -185,9 +160,9 @@ namespace VoodooShader
     typedef std::vector<TextureRef>             TextureVector;
 
     // Module management types
-    typedef std::map<String, ModuleRef>         ModuleMap;
-    typedef std::pair<ModulePtr, int>           ClassID;
-    typedef std::map<String, ClassID>           ClassMap;
+    typedef std::map<String, ModuleRef>         ModuleMap; /*!< Provides a map of modules, keyed by name. */
+    typedef std::pair<ModulePtr, int>           ClassID; /*!< Defines the necessary data to create a class (source module and class number). */
+    typedef std::map<String, ClassID>           ClassMap; /*!< Provides a map of classes, keyed by name. */
 
     // Miscellaneous collections
     typedef std::map<TextureRef, ShaderRef>     MaterialMap;
@@ -332,10 +307,15 @@ namespace VoodooShader
     enum ParseFlags
     {
         PF_None             = 0x00,     /*!< No special behavior */
-        // Working flags
+        // Slash flags
         PF_SingleSlash      = 0x01,     /*!< No repeated slashes (useful for XPath). */
         PF_SlashOnly        = 0x02,     /*!< Replace all backslashes with forward slashes. */
         PF_BackslashOnly    = 0x04,     /*!< Replace all forward slashes with backslashes. */
+        // Case flags
+        PF_Lowercase        = 0x08,
+        PF_Uppercase        = 0x10,
+        // State blocks
+        PF_RetainState      = 0x20,
         // Padding value
         PF_Max = 0xFFFFFFFF,            /*!< Highest possible value, forcing dword type */
     };

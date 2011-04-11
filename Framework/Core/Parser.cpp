@@ -18,6 +18,20 @@ namespace VoodooShader
         mVariables.clear();
     }
 
+    String Parser::ToLower(_In_ String input)
+    {
+        String ret = input;
+        std::transform(ret.begin(), ret.end(), ret.begin(), ::tolower);
+        return ret;
+    }
+
+    String Parser::ToUpper(_In_ String input)
+    {
+        String ret = input;
+        std::transform(ret.begin(), ret.end(), ret.begin(), ::toupper);
+        return ret;
+    }
+
     void Parser::AddVariable(_In_ String name, _In_ String value, _In_ bool system)
     {
         ILoggerRef logger = mCore->GetLogger();
@@ -26,7 +40,7 @@ namespace VoodooShader
             logger->Log(LL_Debug, VOODOO_CORE_NAME, "Adding variable \"%s\" with value \"%s\".", name.c_str(), value.c_str());
         }
 
-        String finalname = this->ParseString(name);
+        String finalname = this->ParseString(name, PF_Lowercase);
 
         if ( !system )
         {
@@ -53,7 +67,7 @@ namespace VoodooShader
             mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
         }
 
-        String finalname = this->ParseString(name);
+        String finalname = this->ParseString(name, PF_Lowercase);
 
         Dictionary::iterator varIter = mVariables.find(finalname);
 
@@ -65,7 +79,19 @@ namespace VoodooShader
 
     String Parser::ParseString(_In_ String input, _In_ ParseFlags flags)
     {
+        Dictionary parseState;
+
+        return this->ParseStringRaw(input, (ParseFlags)(flags | PF_RetainState), 0, parseState);
+    }
+
+    String Parser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state)
+    {
         using namespace std;
+
+        if ( depth > Parser::mMaxDepth )
+        {
+            return input;
+        }
 
         ILoggerRef logger = mCore->GetLogger();
         if ( logger.get() )
@@ -89,34 +115,93 @@ namespace VoodooShader
                     if ( startpos > 0 && iteration[startpos-1] == '$' )
                     {
                         stringstream output;
-                        String varname = iteration.substr(startpos + 1, endpos - startpos - 1);
 
                         output << iteration.substr(0, startpos - 1);
-                        
-                        // Lookup and place the variable
-                        Dictionary::iterator variter = mSysVariables.find(varname);
-                        if ( variter != mSysVariables.end() )
+
+                        size_t varnamelen = endpos - startpos - 1;
+                        if ( varnamelen == 0 )
                         {
-                            output << this->ParseString(variter->second, flags);
-                        } else {
-                            variter = mVariables.find(varname);
-                            if ( variter != mVariables.end() )
+                            output << iteration.substr(endpos + 1);
+
+                            iteration = output.str();
+                            foundvar = true;
+                            continue;
+                        }
+
+                        String varname = this->ToLower(iteration.substr(startpos + 1, endpos - startpos - 1));
+                        bool supress = false;
+
+                        if ( varname[0] == '?' )
+                        {
+                            supress = true;
+                            varname = varname.substr(1);
+                        }
+
+                        size_t equalpos = varname.find(':');
+                        if ( equalpos != string::npos )
+                        {
+                            // State set, handle
+                            String newvalue = varname.substr(equalpos + 1);
+                            if ( newvalue.length() > 0 )
                             {
-                                output << this->ParseString(variter->second, flags);
+                                newvalue = this->ParseStringRaw(newvalue, flags, ++depth, state);
+                            }
+
+                            varname = varname.substr(0, equalpos - 1);
+                            if ( varname.length() > 0 )
+                            {
+                                varname = this->ParseStringRaw(varname, flags, ++depth, state);
+                            }
+
+                            //if ( varname == "depth" )
+                            //{
+                            //    newvalue >> depth;
+                            //} else {
+                                state[varname] = newvalue;
+                            //}
+                        } else {
+                            // Lookup and place the variable
+                            Dictionary::iterator variter = mSysVariables.find(varname);
+                            String varvalue;
+
+                            // Find variable's value
+                            if ( variter != mSysVariables.end() )
+                            {
+                                varvalue = variter->second;
                             } else {
-                                // Unrecognized variable, try env
-                                size_t reqSize = 0;
-                                getenv_s(&reqSize, NULL, 0, varname.c_str());
-                                if ( reqSize != 0 )
+                                variter = state.find(varname);
+                                if ( variter != state.end() )
                                 {
-                                    char * buffer = new char[reqSize];
-                                    getenv_s(&reqSize, buffer, reqSize, varname.c_str());
-                                    output << this->ParseString(buffer, flags);
-                                    delete[] buffer;
+                                    varvalue = variter->second;
                                 } else {
-                                    output << "--badvar:" << varname << "--";
+                                    variter = mVariables.find(varname);
+                                    if ( variter != mVariables.end() )
+                                    {
+                                        varvalue = variter->second;
+                                    } else {
+                                        // Unrecognized variable, try env
+                                        size_t reqSize = 0;
+                                        getenv_s(&reqSize, NULL, 0, varname.c_str());
+                                        if ( reqSize != 0 )
+                                        {
+                                            char * buffer = new char[reqSize];
+                                            getenv_s(&reqSize, buffer, reqSize, varname.c_str());
+                                            varvalue = variter->second;
+                                            delete[] buffer;
+                                        } else {
+                                            if ( !supress )
+                                            {
+                                                output << "--badvar:" << varname << "--";
+                                            }
+                                        }
+                                    }
                                 }
                             }
+
+                            if ( varvalue.length() > 0 )
+                            {
+                                output << this->ParseStringRaw(variter->second, flags, ++depth, state);
+                            } 
                         }
 
                         output << iteration.substr(endpos + 1);
@@ -182,6 +267,13 @@ namespace VoodooShader
         }
 
         iteration = output.str();
+
+        if ( flags & PF_Lowercase )
+        {
+            iteration = this->ToLower(iteration);
+        } else if ( flags & PF_Uppercase ) {
+            iteration = this->ToUpper(iteration);
+        }
 
         if ( logger.get() )
         {

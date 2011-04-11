@@ -173,6 +173,7 @@ namespace VoodooShader
             }
 
             // Log extended build information
+            mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from \"%s\".", ConfigPath.c_str());
             mLogger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
             Version vfver = VOODOO_META_VERSION_STRUCT(CORE);

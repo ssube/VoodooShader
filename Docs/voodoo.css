@@ -137,7 +137,7 @@ dl.el {
 }
 
 pre.fragment {
-    border: 1px solid #C2AEE9;
+    border: 1px dashed #C2AEE9;
     background-color: #FBFAFD;
     padding: 4px 6px;
     margin: 4px 8px 4px 2px;
@@ -802,12 +802,12 @@ dl.bug
 p code, dd code
 {
     font-family: monospace, fixed;
-    /* font-size: 105%; */
-    border: 1px solid #C2AEE9;
+    font-size: 105%;
+    border: 1px dashed #C2AEE9;
     background-color: #FBFAFD;
     padding: 0px 2px 0px 2px;
     overflow: auto;
     word-wrap: break-word;
     font-size:  9pt;
-    /* line-height: 125%; */      
+    line-height: 125%;      
 }

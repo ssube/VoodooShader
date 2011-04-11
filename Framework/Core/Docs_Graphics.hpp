@@ -329,7 +329,7 @@ namespace VoodooShader
  * capabilities.<br />
  * <em><sup>3</sup>:</em> These formats are recommended for use and support most or all of
  * the features Voodoo uses.<br />
- * <em><sup>4</sup>:</em> @ref VoodooFilesystem does not yet support saving images.
+ * <em><sup>4</sup>:</em> @ref VoodooWFileSystem does not yet support saving images.
  * 
  * Support for these formats is provided directly by DevIL, including the ability to convert most 
  * internal formats. Questions regarding formats and support, as they apply to DevIL, should be 

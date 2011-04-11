@@ -28,10 +28,14 @@ namespace VoodooShader
      * Primary Voodoo filesystem implementation. This provides a thin wrapper for the Windows file
      * access API and DevIL, matching them to the Voodoo interfaces.
      * 
-     * @note This module exports 1 class, named @p Filesystem (@ref VoodooWFS::FileSystem). 
-     *    Provides implementations of @ref IFileSystem, @ref IFile and @ref IImage.
+     * @note This module exports 1 class, named @p WFileSystem (@ref VoodooWFS::FileSystem) and 
+     *    provides implementations of @ref IFileSystem, @ref IFile and @ref IImage. The following
+     *    global variables are added when the filesystem object is created:
+     *    @li <code>\$(mygames)</code> Current user's My Games folder.
+     *    @li <code>\$(allgames)</code> Shared (all user's) My Games folder.
+     *    @li <code>\$(systemroot)</code> System path (e.g., <code>C:\\Windows\\System32</code>)
      * 
-     * @addtogroup VoodooFilesystem Voodoo/Filesystem
+     * @addtogroup VoodooWFileSystem Voodoo/WFileSystem
      * @{
      */
     namespace VoodooWFS
@@ -243,8 +247,10 @@ namespace VoodooShader
              * 
              * @return Pointer to the image data.
              * 
-             * @warning The pointer provided should @e not be deleted. To free the data, call 
-             *    Image::FreeImageData().
+             * @warning The pointer provided <em>must not</em> be deleted. To free the data, call 
+             *    @ref Image::FreeImageData(). Only one image can be bound/accessed through this
+             *    method at a time, making it thread-unsafe. Using @ref Image::CopyImageData is
+             *    recommended for simple image access.
              */
             void * GetImageData();
 

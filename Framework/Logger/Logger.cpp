@@ -136,7 +136,7 @@ namespace VoodooShader
         {
             if ( this->mLogFile.is_open() )
             {
-                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file closed by XmlLogger::Close.");
+                //this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file closed by XmlLogger::Close.");
                 this->mLogFile << "</VoodooLog>\n";
                 this->mLogFile.close();
             }
@@ -150,8 +150,6 @@ namespace VoodooShader
             {
                 stringstream stamp;
                 stamp << " time=\"" << put_time(mLocalTime, "%H%M%S") << "\" ";
-                //stamp.fill('0');
-                //stamp << " time=\"" << setw(2) << mLocalTime->tm_hour << setw(2) << mLocalTime->tm_min << setw(2) << mLocalTime->tm_sec << "\" ";
                 return stamp.str();
             } else {
                 return String(" time=\"000000\" ");
@@ -166,8 +164,6 @@ namespace VoodooShader
             {
                 stringstream stamp;
                 stamp << " date=\"" << put_time(mLocalTime, "%Y%m%d") << "\" ";
-                //stamp.fill('0');
-                //stamp << " date=\"" << setw(4) << ( mLocalTime->tm_year + 1900 ) << setw(2) << (mLocalTime->tm_min + 1) << setw(2) << mLocalTime->tm_sec << "\" ";
                 return stamp.str();
             } else {
                 return String(" date=\"00000000\" ");
@@ -198,9 +194,10 @@ namespace VoodooShader
                 " debug=\"" << version.Debug << "\" />\n";
 
 #ifdef _DEBUG
-            cout << logMsg;
+            cout << logMsg.str();
 #endif
-            mLogFile << logMsg;
+
+            mLogFile << logMsg.str();
         }
 
         void XmlLogger::SetBufferSize(unsigned int bytes)
@@ -238,7 +235,7 @@ namespace VoodooShader
 
                 char buffer[4096];
                 va_start(args, msg);
-                _vsnprintf_s(buffer, 4095, 4095, msg, args);
+                _vsnprintf_s(buffer, 4096, 4096, msg, args);
                 buffer[4095] = 0;
                 va_end(args);
 

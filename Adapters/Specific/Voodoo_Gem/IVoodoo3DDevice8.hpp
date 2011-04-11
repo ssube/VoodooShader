@@ -60,6 +60,8 @@ class IVoodoo3DDevice8
 
     UINT mLastBaseIndex;
 
+    HWND mWindow;
+
 public:
     /**
     * The default, public constructor for IVoodoo3D objects.
@@ -79,6 +81,8 @@ public:
 
         if ( pp.hDeviceWindow != NULL )
         {
+            mWindow = pp.hDeviceWindow;
+
             char title[64];
             GetWindowTextA(pp.hDeviceWindow, title, 64);
             strcat_s(title, " [ Voodoo Gem ]");
@@ -419,6 +423,17 @@ public:
         CONST RGNDATA * pDirtyRegion
     )
     {
+        // Run the window check
+        if ( hDestWindowOverride != mWindow )
+        {
+            mWindow = hDestWindowOverride;
+
+            char title[64];
+            GetWindowTextA(hDestWindowOverride, title, 64);
+            strcat_s(title, " [ Voodoo Gem ]");
+            SetWindowTextA(hDestWindowOverride, title);
+        }
+
         if ( VoodooGem && testShader.get() )
         {
             HRESULT shr = mRealDevice->StretchRect(gBackbuffer.RawSurface, NULL, gThisFrame.RawSurface, NULL, D3DTEXF_NONE);

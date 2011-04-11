@@ -43,6 +43,9 @@ namespace VoodooShader
         Parser(_In_ Core * core);
         ~Parser();
 
+        String ToLower(_In_ String input);
+        String ToUpper(_In_ String input);
+
         /**
          * Adds a variable to the internal dictionary.
          * 
@@ -72,9 +75,13 @@ namespace VoodooShader
         String ParseString(_In_ String input, _In_ ParseFlags flags = PF_None);
 
     private:
+        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state);
+
         Core * mCore;
         Dictionary mVariables;
         Dictionary mSysVariables;
+
+        static const int mMaxDepth = 8;
     };
     /**
      * @}
@@ -85,14 +92,54 @@ namespace VoodooShader
      *       
      * @section varssyntax Syntax
      * Variables are used by inserting <code>\$(variable)</code> tokens into a string. Each 
-     * variable will be removed and replaced with the value currently assigned to it. Variable 
-     * values are parsed when used, allowing delayed resolving and recursion. Variables may contain 
-     * variables in their name or value; names are parsed when the variable is added and values are 
-     * parsed when the variable is used. Variables are replaced innermost to outermost, in a left 
-     * to right fashion (shown below).
+     * variable will be removed and replaced with the value currently assigned to it. Variables are 
+     * parsed when used, allowing delayed resolving and recursion. Variables are replaced
+     * innermost to outermost and left to right (see examples below). 
      * 
-     * @warning Variables within variable values will be resolved when the variable is used. This 
-     *    means that recursion is possible and care must be taken to avoid infinite loops.
+     * Four levels of priority are used in parsing. Builtin variables are searched first, then
+     * state variables, then regular variables, and finally environment variables supplied by
+     * Windows.
+     * 
+     * @subsection varssyntaxnames Variable Names
+     * Variable names may contain any characters but ':' and may start with any character but '?'
+     * or '!'. These characters have special meaning and will be stripped or will modify the name
+     * before it is used.
+     * 
+     * The ':' character indicates state variables, described below. 
+     * 
+     * The '?' character indicate optional variables, which are not replaced with an error note if 
+     * they are not found. 
+     * 
+     * The remaining listed characters are reserved.
+     * 
+     * Variable names may contain variables, which will be resolved using standard rules (this
+     * allows for variable variable names and dynamic string creation).
+     * 
+     * When a variable is added to the parser, the name is immediately parsed using 
+     * @p PF_Lowercase and the result is used as the actual name. This contrasts with values,
+     * which are parsed when used.
+     * 
+     * @subsection varssyntaxvalue Variable Values
+     * Variable values may contain any characters and embedded variables. 
+     * 
+     * Values are parsed when used, using the current state and flags (in contrast to names, which 
+     * are parsed when added).
+     * 
+     * @subsection varssyntexstate Variable States & Recursion
+     * Each parsing call creates a state block and uses a discrete depth counter.
+     * 
+     * The depth counter handles recursion and operated very simply. Each time the parser
+     * encounters a string that requires parsing, the counter is incremented and passed on. This
+     * prevents more than @ref Parser::mMaxDepth levels of recursion and prevents infinite loops.
+     * 
+     * State blocks are somewhat more Cthulhic in their logic. When the parser is called, a state
+     * block is created and passed on, similar to the depth counter. However, if a variable name
+     * containing a ':' character is encountered, the state may change. The variable name in
+     * question will be split at the ':' into a new name and value, both of which will be parsed
+     * using the current state. The returned values will be inserted into the state block as a new
+     * variable (or to overwrite an existing state variable). State variable may then be used in
+     * future parsing. While intended for relatively simple dynamic strings, state variables can
+     * (with sufficient cleverness and masochism) be used to perform simple logic operations.
      *    
      * @par Examples:
      * @code 
@@ -120,8 +167,31 @@ namespace VoodooShader
      * 
      * @note Repeated consecutive slashes will not cause errors with path parsing, although in some 
      *    locations they have special meanings. They may cause errors when using the string for 
-     *    other reasons; calling @ref Parser::ParseString() with the 
-     *    @ref PF_SingleSlash flag set will attempt to strip these.
+     *    other reasons; calling @ref Parser::ParseString() with the @ref PF_SingleSlash flag set 
+     *    will attempt to strip these.
+     *    
+     * Finally, state variables and suppression use a variation on the name syntax.
+     * 
+     * @par Examples:
+     * @code
+     * basepath = M:\VoodooShader\
+     * game.exe = $(adapter:Gem)
+     * Gem_Adapter = Voodoo_Gem.dll
+     * _Adapter = Voodoo_Null.dll
+     *  
+     * $(target) = game.exe
+     * $(?$(target)_Adapter) = $(Gem_Adapter) = Voodoo_Gem.dll
+     * 
+     * $(target) = test.exe
+     * $(?$(target)_Adapter) = $(_Adapter) = Voodoo_Null.dll
+     * $($(target)_Adapter) = $(--badvar:test.exe--_Adapter) = --badvar:--badvar:test.exe--_Adapter--
+     * @endcode
+     *    
+     * @section varssys System Variables
+     * Some variables, typically built-ins, are marked as system variables. These may be added once
+     * and may not be overwritten or later changed (all other variables may be changed by 
+     * overwriting the name). The @ref Parser::RemoveVariable() method does not remove system 
+     * variables.
      *        
      * @section varsflags Flags
      * The variable parser provides a small set of flags to control parsing modes. 
@@ -134,6 +204,13 @@ namespace VoodooShader
      * @subsection varsflagsslashtype PF_SlashOnly & PF_BackslashOnly
      * Replaces all slashes with a single type (forward or back). This may be functional; XPath 
      * syntax, for example, uses forward slashes while Windows paths tend to prefer backslashes. 
+     * 
+     * @subsection varsflagscase PF_Lowercase & PF_Uppercase
+     * Transforms the string into a specific case. All alphabetic characters (a-z and A-Z) will be
+     * replaced with the given case.
+     * 
+     * @subsection varsflagsstateblock PF_RetainState
+     * This flag has no effect
      * 
      * @section varserror Errors
      * If a variable cannot be resolved, an error value will be used in place of the variable. This 
