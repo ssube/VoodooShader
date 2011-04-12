@@ -38,6 +38,7 @@ namespace LogViewer
             mainBrowser.Url = mDefaultPage;
         }
 
+        //! @todo Add reload button to reload current log file.
         private void openLog(object sender, EventArgs e)
         {
             mainBrowser.Url = mDefaultPage;
@@ -95,8 +96,8 @@ namespace LogViewer
                     {
                         String destpath = Path.GetDirectoryName(destfname);
                         File.Copy(mTempFile, destfname, true);
-                        File.Copy(mBasePath + "VoodooLog.css", destpath + "VoodooLog.css", true);
-                        File.Copy(mBasePath + "sorttable.js", destpath + "sorttable.js", true);
+                        File.Copy(mBasePath + "VoodooLog.css", destpath + @"\" + "VoodooLog.css", true);
+                        File.Copy(mBasePath + "sorttable.js", destpath + @"\" + "sorttable.js", true);
                     }
                     catch (Exception exc)
                     {

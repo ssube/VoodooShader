@@ -424,7 +424,7 @@ public:
     )
     {
         // Run the window check
-        if ( hDestWindowOverride != mWindow )
+        if ( hDestWindowOverride != NULL && hDestWindowOverride != mWindow )
         {
             mWindow = hDestWindowOverride;
 
@@ -440,10 +440,17 @@ public:
 
             if ( FAILED(shr) )
             {
-                VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "Failed to stretch backbuffer to :thisframe texture.");
+                VoodooLogger->Log(LL_Error, VOODOO_GEM_NAME, "Failed to stretch backbuffer to :thisframe texture (%u).", shr);
             }
-
+            
             VoodooGem->DrawShader(testShader);
+
+            shr = mRealDevice->StretchRect(gLastShader.RawSurface, NULL, gBackbuffer.RawSurface, NULL, D3DTEXF_NONE);
+
+            if ( FAILED(shr) )
+            {
+                VoodooLogger->Log(LL_Error, VOODOO_GEM_NAME, "Failed to stretch :lastshader texture to backbuffer (%u).", shr);
+            }
         }
 
         // Present call

@@ -24,6 +24,9 @@ IVoodoo3DDevice8 * VoodooDevice = NULL;
 TextureTuple gBackbuffer;
 TextureTuple gScratch;
 TextureTuple gThisFrame;
+TextureTuple gLastFrame;
+TextureTuple gLastShader;
+TextureTuple gLastPass;
 std::map<VoodooShader::String, TextureTuple> gTextures;
 
 VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;

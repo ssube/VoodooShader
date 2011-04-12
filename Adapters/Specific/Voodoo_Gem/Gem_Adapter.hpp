@@ -89,8 +89,7 @@ namespace VoodooShader
             CGcontext mCgContext;
             LPDIRECT3DDEVICE9 mDevice;
 
-            CGprogram mBoundVP;
-            CGprogram mBoundFP;
+            CGpass mBoundPass;
 
             IDirect3DSurface9 * mRenderTarget;
             

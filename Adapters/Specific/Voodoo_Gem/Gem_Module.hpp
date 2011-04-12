@@ -101,6 +101,9 @@ extern VoodooShader::ShaderRef testShader;
 extern TextureTuple gBackbuffer;
 extern TextureTuple gScratch;
 extern TextureTuple gThisFrame;
+extern TextureTuple gLastFrame;
+extern TextureTuple gLastShader;
+extern TextureTuple gLastPass;
 extern std::map<VoodooShader::String, TextureTuple> gTextures;
 
 extern VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;

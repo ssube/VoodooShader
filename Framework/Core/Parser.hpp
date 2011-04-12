@@ -138,7 +138,7 @@ namespace VoodooShader
      * 
      * The depth counter handles recursion and operated very simply. Each time the parser
      * encounters a string that requires parsing, the counter is incremented and passed on. This
-     * prevents more than @ref Parser::mMaxDepth levels of recursion (8, by default) and prevents 
+     * prevents more than @ref Parser::VarMaxDepth levels of recursion (8, by default) and prevents 
      * infinite loops. When this limit is reached, variables will not be parsed.
      * 
      * State blocks are somewhat more Cthulhic in their logic. When the parser is called, a state

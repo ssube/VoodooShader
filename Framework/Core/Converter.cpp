@@ -89,7 +89,7 @@ namespace VoodooShader
         _In_ const char * format
     )
     {
-        if ( strncmp(format, "TF_", 3) != 0 )
+        if ( _strnicmp(format, "TF_", 3) != 0 )
         {
             return TF_Unknown;
         }
@@ -99,16 +99,16 @@ namespace VoodooShader
         if ( formatBody[0] == 'D' )
         {
             // Depth format
-            if ( strcmp(formatBody, "D16") == 0 ) return TF_D16;
-            if ( strcmp(formatBody, "D32") == 0 ) return TF_D32;
+            if ( _stricmp(formatBody, "D16") == 0 ) return TF_D16;
+            if ( _stricmp(formatBody, "D32") == 0 ) return TF_D32;
         } else {
-            if ( strcmp(formatBody, "RGB5"   ) == 0 ) return TF_RGB5;
-            if ( strcmp(formatBody, "RGB5A1" ) == 0 ) return TF_RGB5A1;
-            if ( strcmp(formatBody, "RGB8"   ) == 0 ) return TF_RGB8;
-            if ( strcmp(formatBody, "RGBA8"  ) == 0 ) return TF_RGBA8;
-            if ( strcmp(formatBody, "RGB10A2") == 0 ) return TF_RGB10A2;
-            if ( strcmp(formatBody, "RGBA16F") == 0 ) return TF_RGBA16F;
-            if ( strcmp(formatBody, "RGBA32F") == 0 ) return TF_RGBA32F;
+            if ( _stricmp(formatBody, "RGB5"   ) == 0 ) return TF_RGB5;
+            if ( _stricmp(formatBody, "RGB5A1" ) == 0 ) return TF_RGB5A1;
+            if ( _stricmp(formatBody, "RGB8"   ) == 0 ) return TF_RGB8;
+            if ( _stricmp(formatBody, "RGBA8"  ) == 0 ) return TF_RGBA8;
+            if ( _stricmp(formatBody, "RGB10A2") == 0 ) return TF_RGB10A2;
+            if ( _stricmp(formatBody, "RGBA16F") == 0 ) return TF_RGBA16F;
+            if ( _stricmp(formatBody, "RGBA32F") == 0 ) return TF_RGBA32F;
         }
 
         return TF_Unknown;
@@ -191,4 +191,5 @@ namespace VoodooShader
         default:
             return "PC_Unknown";
         }
-    }}
+    }
+}
