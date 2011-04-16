@@ -71,6 +71,10 @@ namespace VoodooShader
              * 
              * @note This function uses Parser::ParseString() for all paths. Variables are 
              *    evaluated when the path is added.
+             *    
+             * @note This function will split paths at the ';' character, similar to how Windows
+             *    treats the path variable. This (combined with env vars) allows regular-form
+             *    environment vars to be added to the filesystem.
              */
             void AddDirectory
             (

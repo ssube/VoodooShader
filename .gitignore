@@ -15,6 +15,9 @@ Resources/Installers/Output/*
 [Dd]ebug
 [Rr]elease
 
+#Temp ignore for CMake files (until system is ready)
+CMakeLists.txt
+
 #ignore thumbnails created by windows
 Thumbs.db
 

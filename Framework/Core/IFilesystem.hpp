@@ -91,11 +91,13 @@ namespace VoodooShader
     };
 
     class IImage
-        : public IObject
+        : public IFile, public IObject
     {
     public:
         ~IImage() throw()
         { };
+
+        virtual String GetPath() = 0;
 
         virtual const char * GetObjectClass() = 0;
 

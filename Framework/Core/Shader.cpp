@@ -243,17 +243,14 @@ namespace VoodooShader
             return;
         }
 
-        CGannotation atexName   = cgGetNamedParameterAnnotation(parameter, "texture");
-        CGannotation atexSize   = cgGetNamedParameterAnnotation(parameter, "size");
-        CGannotation atexFormat = cgGetNamedParameterAnnotation(parameter, "format");
-
-        if ( !(cgIsAnnotation(atexName) && cgIsAnnotation(atexSize) && cgIsAnnotation(atexFormat) ) )
+        CGannotation atexName = cgGetNamedParameterAnnotation(parameter, "texture");
+        if ( !cgIsAnnotation(atexName) || cgGetAnnotationType(atexName) != CG_STRING )
         {
             mCore->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
-                "Could not create texture for parameter %s, required fields were missing.",
+                "Invalid or missing texture name for parameter %s.",
                 param->GetName().c_str()
             );
 
@@ -261,7 +258,6 @@ namespace VoodooShader
         }
 
         String texName;
-
         if ( cgGetAnnotationType(atexName) != CG_STRING )
         {
             mCore->GetLogger()->Log
@@ -275,7 +271,22 @@ namespace VoodooShader
             return;
         } else {
             texName = cgGetStringAnnotationValue(atexName);
+            texName = mCore->GetParser()->ParseString(texName);
         }
+
+        // Check for a valid texture file
+        IImageRef texFile = mCore->GetFileSystem()->GetFile(texName);
+        if ( texFile.get() )
+        {
+            TextureRef tex = mCore->GetAdapter()->CreateTexture(texFile);
+            param->Set(tex);
+            return;
+        }
+
+        // No file, make blank texture
+        CGannotation atexSize   = cgGetNamedParameterAnnotation(parameter, "size");
+        CGannotation atexFormat = cgGetNamedParameterAnnotation(parameter, "format");
+        CGannotation atexColor  = cgGetNamedParameterAnnotation(parameter, "color");
 
         CGtype texSizeType = cgGetAnnotationType(atexSize);
         TextureDesc texDesc;

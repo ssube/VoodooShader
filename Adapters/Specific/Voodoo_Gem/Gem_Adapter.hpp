@@ -65,6 +65,7 @@ namespace VoodooShader
 
             bool ConnectTexture(ParameterRef param, TextureRef texture);
             TextureRef CreateTexture(String name, TextureDesc desc);
+            TextureRef LoadTexture( _In_ IImageRef image );
 
             void HandleError(CGcontext context, CGerror error, void * core);
 

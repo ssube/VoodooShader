@@ -106,7 +106,15 @@ namespace VoodooShader
 
         void FileSystem::AddDirectory(String name)
         {
-            String realname = mCore->GetParser()->ParseString(name) + "\\";
+            String realname = mCore->GetParser()->ParseString(name);
+
+            size_t splitter = realname.find(';');
+            while ( splitter != string::npos )
+            {
+                String partname = realname.substr(0, splitter);
+                this->mDirectories.push_front(partname);
+                realname = realname.substr(splitter+1)
+            }
 
             this->mDirectories.push_front(realname);
         }

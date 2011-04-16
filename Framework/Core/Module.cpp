@@ -59,16 +59,16 @@ namespace VoodooShader
             return NULL;
         }
 
-        Version moduleversion = rawmodule->ModuleVersion();
-        if ( moduleversion.Debug != VOODOO_META_DEBUG_BOOL && logger.get() )
-        {
-            logger->Log(LL_Warning, VOODOO_CORE_NAME, "Debug build mismatch with module %s.", moduleversion.Name.c_str());
-        }
-
         ModuleRef module(rawmodule);
         mModules[path] = module;
 
-        // Register classes from module
+		// Register classes from module
+		Version moduleversion = rawmodule->ModuleVersion();
+		if ( moduleversion.Debug != VOODOO_META_DEBUG_BOOL && logger.get() )
+		{
+			logger->Log(LL_Warning, VOODOO_CORE_NAME, "Debug build mismatch with module %s.", moduleversion.Name.c_str());
+		}
+
         if ( logger.get() )
         {
             logger->LogModule(module->ModuleVersion());

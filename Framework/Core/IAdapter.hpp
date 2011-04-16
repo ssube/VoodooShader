@@ -206,9 +206,8 @@ namespace VoodooShader
         ) = 0;
 
         /**
-         * Creates a named texture within the API and registers it with the 
-         * Core. The various texture parameters are specified here in an 
-         * API-independent form.
+         * Creates a named texture within the API and registers it with the Core. The various 
+         * texture parameters are specified here in an API-independent form.
          *
          * @param name The name of the texture, usually a fully-qualified name.
          * @param desc Description of the texture, size and format.
@@ -226,6 +225,18 @@ namespace VoodooShader
         (
             _In_ String name, 
             _In_ TextureDesc desc
+        ) = 0;
+
+        /**
+         * Loads a named texture into the API and registers it with the Core. The texture source is
+         * provided here and all dimensions should be drawn from that, with as little conversion as
+         * possible.
+         * 
+         * @param image The image reference to load from.
+         */
+        virtual TextureRef LoadTexture
+        (
+            _In_ IImageRef image
         ) = 0;
 
         /**

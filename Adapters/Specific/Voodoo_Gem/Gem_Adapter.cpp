@@ -685,6 +685,16 @@ namespace VoodooShader
             }
         }
 
+        TextureRef Adapter::LoadTexture( _In_ IImageRef image )
+        {
+            TextureRef tex = this->CreateTexture(image->GetPath(), image->GetImageDesc());
+
+            LPDIRECT3DTEXTURE9 pTex = tex->GetData<IDirect3DTexture9>();
+            LPDIRECT3DSURFACE9 pSurf;
+            pTex->GetSurfaceLevel(0, &pSurf);
+            pSurf->LockRect( , NULL, D3DLOCK_DISCARD);
+        }
+
         void Adapter::HandleError(CGcontext context, CGerror error, void * core)
         {
             Core * actualCore = reinterpret_cast<Core*>(core);
