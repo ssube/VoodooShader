@@ -104,10 +104,6 @@ namespace VoodooShader
         virtual TextureDesc GetImageDesc() = 0;
 
         virtual size_t CopyImageData(_In_ TextureRegion desc, _In_opt_ void * buffer) = 0;
-
-        virtual void * GetImageData() = 0;
-
-        virtual void FreeImageData() = 0;
     };
 }
 
