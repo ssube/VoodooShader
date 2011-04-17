@@ -19,65 +19,22 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "Common.hpp"
+#include <stdio.h>
+#include <stdlib.h>
+
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 
 /**
  * @addtogroup VoodooLoader Voodoo/Loader
  * @{
  */
 
-typedef void * (* funcTypeLoad)(const char *, const char *);
-typedef void (* funcTypeUnload)(void *);
+HMODULE LoadSystemLibrary(const PTCHAR libname);
+void LoadVoodoo();
+void UnloadVoodoo();
 
-bool LoadVoodoo();
-bool UnloadVoodoo();
-
-BOOL WINAPI DllMain
-(
-    _In_ void * _HDllHandle, 
-    _In_ unsigned _Reason, 
-    _In_opt_ void * _Reserved
-);
-
-void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func);
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion);
-void * WINAPI Voodoo3DCreate9(UINT sdkVersion);
-HRESULT WINAPI VoodooInput8Create
-(
-    HINSTANCE hinst,
-    DWORD dwVersion,
-    REFIID riidltf,
-    LPVOID * ppvOut,
-    LPVOID punkOuter
-);
-HRESULT WINAPI VoodooInputCreateGeneric
-(
-    HINSTANCE hinst,
-    DWORD dwVersion,
-    LPVOID * lplpDirectInput,
-    LPVOID punkOuter,
-    const char * func
-);
-HRESULT WINAPI VoodooInputCreateA
-(
-    HINSTANCE hinst,
-    DWORD dwVersion,
-    LPVOID * lplpDirectInput,
-    LPVOID punkOuter
-);
-HRESULT WINAPI VoodooInputCreateW
-(
-    HINSTANCE hinst,
-    DWORD dwVersion,
-    LPVOID * lplpDirectInput,
-    LPVOID punkOuter
-);
-HRESULT VoodooSoundCreate8
-(
-    LPCGUID lpcGuidDevice,
-    LPVOID * ppDS8,
-    LPVOID pUnkOuter
-);
+extern LPUNKNOWN VoodooCore;
 
 /**
  * @}

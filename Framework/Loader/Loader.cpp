@@ -112,19 +112,6 @@ BOOL WINAPI DllMain
 
 // Support functions
 
-/**
- * Load a module from the system directory (uses absolute path to guarantee proper file).
- */
-HMODULE LoadSystemLibrary(const char * libname)
-{
-    char Path[MAX_PATH];
-
-    GetSystemDirectoryA (Path, MAX_PATH);
-    strcat_s(Path, MAX_PATH, "\\");
-    strcat_s(Path, MAX_PATH, libname);
-
-    return LoadLibraryA(Path);
-}
 
 /**
  * Most DirectX libraries use an identical loading function, with only the name varying.
@@ -133,7 +120,7 @@ HMODULE LoadSystemLibrary(const char * libname)
  */
 void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func)
 {
-    typedef void * (WINAPI * DXInitFunc)(UINT);
+    typedef IUnknown * (WINAPI * DXInitFunc)(UINT);
 
     HMODULE baselib = LoadSystemLibrary(lib);
 
@@ -150,6 +137,11 @@ void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const cha
         MessageBoxA(NULL, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR|MB_OK);
         exit(1);
     }
+
+    IUnknown * dxObj = (*initFunc)(sdkVersion);
+    dxObj->Release();
+    // COM and D3D are both started. Initialize Voodoo.
+    CoCreateInstance(VOODOO_CORE, &Core, )
 
     return (*initFunc)(sdkVersion);
 }

@@ -34,30 +34,6 @@
 
 namespace VoodooShader
 {
-    /**
-     * Generic vertex format for use with IAdapter draw calls. This format is
-     * compatible with both OpenGL and DirectX.
-     *
-     * @note Because of the draw mechanism for adapters, most draws with
-     *        user-provided vertexes will not use vertex buffers of any sort. 
-     *        This can hurt performance if used heavily, so drawing through 
-     *        IAdapter::DrawQuad() should be avoided as much as possible.
-     *        Adapters may draw internally, of course, having full control over
-     *        the graphics API.
-     *
-     * @note This vertex format provides a float3 position and float2 texture
-     *        coordinate. For compatibility with Direct3D, a RHW value is also
-     *        included (the vertex format is D3DFVF_XYZRHW|D3DFVF_TEX1). OpenGL
-     *        adapters may ignore this winding value. The members of the vert are
-     *        ordered so that <code>&x</code> is a valid float3 with the position
-     *        and <code>&tu</code> is a valid float2 with the texture coordinate.
-     */
-    struct Vertex
-    {
-        float x, y, z;
-        float winding;
-        float tu, tv;
-    };
 
     /**
      * Graphics adapter class, responsible for interfacing the Voodoo core with

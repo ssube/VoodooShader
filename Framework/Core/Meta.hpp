@@ -22,113 +22,146 @@
 #ifndef VOODOO_META_HPP
 #define VOODOO_META_HPP
 
-#ifndef VOODOO_IMPORT
-#    define VOODOO_API __declspec(dllexport)
-#else
-#    define VOODOO_API __declspec(dllimport)
-#endif
-
-// Hide the DLL-interface warning
-#pragma warning(disable:4251)
-
 #include "Includes.hpp"
 #include "Version.hpp"
 
 namespace VoodooShader
 {
     /**
-     * Classes implemented entirely within the core module (these do not derive from IObject).
-     * These core classes are available to all Voodoo modules and addons, but use requires
-     * linking against the core library. These provide most of the basic functions needed by
-     * the framework.
+     * Interfaces for core classes and functionality. Implementations for all of these are
+     * available within the core.
+     * 
+     * @note For IAdapter, IFileSystem, IHookManager and ILogger, only null implementations are
+     *    given. These may provide limited or partial functionality.
      * 
      * @addtogroup VoodooCore Voodoo/Core
      * @{
      */
-    class Converter;
-    class Core;
-    class Exception;
-    class FullscreenManager;
-    class MaterialManager;
-    class Module;
-    class ModuleManager;
-    class Parameter;
-    class Parser;
-    class Pass;
-    class Technique;
-    class Texture;
-    class Shader;
-
-    /**  
-     * Interface classes, providing standard access to various dynamic
-     * objects. These are not implemented within the core but are instead
-     * dynamically linked at runtime. All are derived from IObject.
-     */
-    class IObject;
-    class IAdapter;
-    class IFileSystem;
-    class IFile;
-    class IHookManager;
-    class IImage;
-    class ILogger;
     
     /**
-     * Generic structs for passing simple data sets. Structs have no ctor
-     * or dtor, nor methods; they should be created with the <code>{m,n,o}</code>
-     * syntax. Macros may be available to construct some struct types.
+     * Generic structs for passing simple data sets. Macros may be available to construct some 
+     * struct types.
      */
     struct TextureDesc;
+    struct TextureRegion;
     struct Version;
-
-     /**
-      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, 
-      * particularly function, filename and line. These exceptions are also logged if possible 
-      * (requires a valid core to be given). The Exception class derives from std::exception, so 
-      * these are simple to handle.
-      */
-#define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
+    struct Vertex;
 
     /**
-     * Function pointer types for module interfaces.
+     * Standard interfaces.
      */
-    namespace Functions
+    interface DECLSPEC_UUID("76073706-54E6-457D-B891-52A80410BEEF") IVoodooAdapter;
+    interface DECLSPEC_UUID("94158AA0-87AD-4F99-89F2-7E7B8E9D5CDB") IVoodooConverter;
+    interface DECLSPEC_UUID("31420F71-1050-45D9-838F-8735BBB8EDEA") IVoodooCore;
+    interface DECLSPEC_UUID("73926B89-5899-4E58-A714-851812188F15") IVoodooFile;
+    interface DECLSPEC_UUID("229B5CF6-99BF-4250-9088-128FE299767E") IVoodooFileSystem;
+    interface DECLSPEC_UUID("4939253A-71F0-44F5-94ED-711B62E6B4DB") IVoodooFsManager;
+    interface DECLSPEC_UUID("38C848CD-915A-49EB-92A4-A463053C62A8") IVoodooHookSystem;
+    interface DECLSPEC_UUID("7EF1C1F0-A474-4115-BF5A-441C83474536") IVoodooImage;
+    interface DECLSPEC_UUID("41482ECA-13DA-4D12-B254-F7E55D4DC28D") IVoodooLogger;
+    interface DECLSPEC_UUID("F11D985D-5865-4646-8CBB-44ECDDEE371E") IVoodooMatManager;
+    interface DECLSPEC_UUID("FC21372A-6EA6-4CA5-811C-5ED4835973B7") IVoodooParameter;
+    interface DECLSPEC_UUID("41F3AEE5-0F0E-4BF4-9512-DC290E37EB7B") IVoodooParser;
+    interface DECLSPEC_UUID("C8BEBCB5-B62F-48B8-82CE-802220B5E930") IVoodooPass;
+    interface DECLSPEC_UUID("1BD418B4-7D6C-4CFB-8138-339D26ACB378") IVoodooTechnique;
+    interface DECLSPEC_UUID("0F33959B-242E-4282-8510-BE6C9997F464") IVoodooTexture;
+    interface DECLSPEC_UUID("7FFF4B7A-A831-4D98-A3DD-F5DA592BE748") IVoodooShader;
+
+    typedef IVoodooAdapter      *LPVOODOOADAPTER,       *PVOODOOADAPTER;
+    typedef IVoodooConverter    *LPVOODOOCONVERTER,     *PVOODOOCONVERTER;
+    typedef IVoodooCore         *LPVOODOOCORE,          *PVOODOOCORE;
+    typedef IVoodooFile         *LPVOODOOFILE,          *PVOODOOFILE;
+    typedef IVoodooFileSystem   *LPVOODOOFILESYSTEM,    *PVOODOOFILESYSTEM;
+    typedef IVoodooFsManager    *LPVOODOOFSMANAGER,     *PVOODOOFSMANAGER;
+    typedef IVoodooHookSystem   *LPVOODOOHOOKSYSTEM,    *LPVOODOOHOOKSYSTEM;
+    typedef IVoodooImage        *LPVOODOOIMAGE,         *LPVOODOOIMAGE;
+    typedef IVoodooLogger       *LPVOODOOLOGGER,        *LPVOODOOLOGGER;
+    typedef IVoodooMatManager   *LPVOODOOMATMANAGER,    *LPVOODOOMATMANAGER;
+    typedef IVoodooParameter    *LPVOODOOPARAMETER,     *LPVOODOOPARAMETER;
+    typedef IVoodooParser       *LPVOODOOPARSER,        *LPVOODOOPARSER;
+    typedef IVoodooPass         *LPVOODOOPASS,          *LPVOODOOPASS;
+    typedef IVoodooTechnique    *LPVOODOOTECHNIQUE,     *LPVOODOOTECHNIQUE;
+    typedef IVoodooTexture      *LPVOODOOTEXTURE,       *LPVOODOOTEXTURE;
+    typedef IVoodooShader       *LPVOODOOSHADER,        *PVOODOOSHADER;
+
+    [
+        object, dual, pointer_default(unique),
+        uuid("76073706-54E6-457D-B891-52A80410BEEF"),
+        helpstring("Adapter Interface")
+    ]
+    __interface IVoodooAdapter
+        : IUnknown
     {
-        typedef int          (*CountFunc  )();
-        typedef const char * (*InfoFunc   )(int);
-        typedef IObject *    (*CreateFunc )(int, Core *);
-        typedef Version      (*VersionFunc)();
+        STDMETHOD(LoadPass)([in] IVoodooPass * pPass) PURE;
+        STDMETHOD(UnloadPass)([in] IVoodooPass * pPass) PURE;
+        STDMETHOD(BindPass)([in] IVoodooPass * pPass) PURE;
+        STDMETHOD(UnbindPass)([in] IVoodooPass * pPass) PURE;
+        STDMETHOD(DrawGeometry)([in] UINT Vertexes, [in, optional] Vertex * pVertexData) PURE;
+        STDMETHOD(ApplyParameter)([in] IVoodooParameter * pParameter) PURE;
+        STDMETHOD(DrawShader)([in] IVoodooShader * pShader) PURE;
+        STDMETHOD(CreateTexture)([in] LPCSTR pName, [in] TextureDesc Description, [out, retval] IVoodooTexture ** ppTexture) PURE;
+        STDMETHOD(LoadTexture)([in] IVoodooImage * pImage, [out, retval] IVoodooTexture ** ppTexture) PURE;
+        STDMETHOD(ConnectTexture)([in] IVoodooParameter * pParameter, [in] IVoodooTexture * pTexture) PURE;
+        STDMETHOD(HandleError)([in, optional] void * pContext, [in] DWORD Error, [in, optional] IVoodooCore * pCore) PURE;
     };
 
-    typedef std::string                         String;
-    //typedef std::shared_ptr<Core>               CoreRef;
-    //typedef std::weak_ptr<Core>                 CorePtr;
-    typedef std::shared_ptr<FullscreenManager>  FullscreenManagerRef;
-    typedef std::weak_ptr<FullscreenManager>    FullscreenManagerPtr;
-    typedef std::shared_ptr<MaterialManager>    MaterialManagerRef;
-    typedef std::weak_ptr<MaterialManager>      MaterialManagerPtr;
-    typedef std::shared_ptr<Module>             ModuleRef;
-    typedef std::weak_ptr<Module>               ModulePtr;
-    typedef std::shared_ptr<ModuleManager>      ModuleManagerRef;
-    typedef std::weak_ptr<ModuleManager>        ModuleManagerPtr;
-    typedef std::shared_ptr<Parameter>          ParameterRef;
-    typedef std::weak_ptr<Parameter>            ParameterPtr;
-    typedef std::shared_ptr<Parser>             ParserRef;
-    typedef std::weak_ptr<Parser>               ParserPtr;
-    typedef std::shared_ptr<Pass>               PassRef;
-    typedef std::weak_ptr<Pass>                 PassPtr;
-    typedef std::shared_ptr<Shader>             ShaderRef;
-    typedef std::weak_ptr<Shader>               ShaderPtr;
-    typedef std::shared_ptr<Technique>          TechniqueRef;
-    typedef std::weak_ptr<Technique>            TechniquePtr;
-    typedef std::shared_ptr<Texture>            TextureRef;
-    typedef std::weak_ptr<Texture>              TexturePtr;
+    [
+        object, dual, pointer_default(unique),
+        uuid("31420F71-1050-45D9-838F-8735BBB8EDEA"),
+        helpstring("Core Interface")
+    ]
+    __interface IVoodooCore
+        : IUnknown
+    {
+        STDMETHOD(GetParser)([out, retval] IVoodooParser ** pParser) PURE;
+        STDMETHOD(GetHookSystem)([out, retval] IVoodooHookSystem ** ppHookManager) PURE;
+        STDMETHOD(GetFileSystem)([out, retval] IVoodooFileSystem ** ppFileSystem) PURE;
+        STDMETHOD(GetAdapter)([out, retval] IVoodooAdapter ** ppAdapter) PURE;
+        STDMETHOD(GetLogger)([out, retval] IVoodooLogger ** ppLogger) PURE;
+        STDMETHOD(GetConfig)([out, retval] void ** ppConfig) PURE;
+        [propget, id(7)] STDMETHOD(GetCgContext)([out, retval] void ** ppCgContext) PURE;
+        [propput, id(7)] STDMETHOD(SetCgContext)([in] void * pCgContext) PURE;
 
-    typedef std::shared_ptr<IAdapter>           IAdapterRef;
-    typedef std::shared_ptr<IFile>              IFileRef;
-    typedef std::shared_ptr<IFileSystem>        IFileSystemRef;
-    typedef std::shared_ptr<IHookManager>       IHookManagerRef;
-    typedef std::shared_ptr<IImage>             IImageRef;
-    typedef std::shared_ptr<ILogger>            ILoggerRef;
+        STDMETHOD(CreateShader)([in] IVoodooFile * pFile, [in, optional] LPCSTR * ppArgs, [out, retval] IVoodooShader ** ppShader) PURE;
+        STDMETHOD(CreateParameter)([in] LPCSTR pName, [in] ParameterType Type, [out, retval] IVoodooParameter ** ppParameter) PURE;
+        STDMETHOD(AddTexture)([in] LPCSTR pName, [in] void * pData) PURE;
+        STDMETHOD(GetTexture)([in] LPCSTR pName, [out, retval] IVoodooTexture ** ppTexture) PURE;
+
+        [propget, id(13)] STDMETHOD(GetStageTexture)([in] TextureType Stage, [out, retval] IVoodooTexture ** ppTexture) PURE;
+        [propput, id(13)] STDMETHOD(SetStageTexture)([in] TextureType Stage, [in] IVoodooTexture * pTexture) PURE;
+
+    };
+
+    [
+        object, dual, pointer_default(unique),
+        uuid("FC21372A-6EA6-4CA5-811C-5ED4835973B7"),
+        helpstring("Parameter Interface")
+    ]
+    __interface IVoodooParameter
+        : IUnknown
+    {
+        STDMETHOD(GetName)([in] LPCSTR pName) PURE;
+        STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
+        STDMETHOD(GetType)([out, retval] ParameterType * pType) PURE;
+        STDMETHOD(AttachParameter)([in] IVoodooParameter * pParameter) PURE;
+        STDMETHOD(ForceUpdate)() PURE;
+
+        STDMETHOD(SetValue)([in, optional] IVoodooTexture * pTexture) PURE;
+        STDMETHOD(SetValue)([in] float X) PURE;
+        STDMETHOD(SetValue)([in] float X, [in] float Y) PURE;
+        STDMETHOD(SetValue)([in] float X, [in] float Y, [in] float Z) PURE;
+        STDMETHOD(SetValue)([in] float X, [in] float Y, [in] float Z, [in] float W) PURE;
+        STDMETHOD(SetValue)([in, size_is(pData + sizeof(float)*16)] float * pData) PURE;
+
+        STDMETHOD(GetValue)([out, retval] IVoodooTexture ** ppTexture) PURE;
+        STDMETHOD(GetValue)([out] float * pX) PURE;
+        STDMETHOD(GetValue)([out] float * pX, [out] float * pY) PURE;
+        STDMETHOD(GetValue)([out] float * pX, [out] float * pY, [out] float * pZ) PURE;
+        STDMETHOD(GetValue)([out] float * pX, [out] float * pY, [out] float * pZ, [out] float * pW) PURE;
+        STDMETHOD(GetValue)([out] float * pData) PURE;
+    };
+    
+    typedef std::string                         String;
 
     /**
      * Collection types for most common objects. These provide
@@ -377,6 +410,31 @@ namespace VoodooShader
         long Patch;
         long Rev;
         bool Debug;
+    };
+
+    /**
+     * Generic vertex format for use with IAdapter draw calls. This format is
+     * compatible with both OpenGL and DirectX.
+     *
+     * @note Because of the draw mechanism for adapters, most draws with
+     *        user-provided vertexes will not use vertex buffers of any sort. 
+     *        This can hurt performance if used heavily, so drawing through 
+     *        IAdapter::DrawQuad() should be avoided as much as possible.
+     *        Adapters may draw internally, of course, having full control over
+     *        the graphics API.
+     *
+     * @note This vertex format provides a float3 position and float2 texture
+     *        coordinate. For compatibility with Direct3D, a RHW value is also
+     *        included (the vertex format is D3DFVF_XYZRHW|D3DFVF_TEX1). OpenGL
+     *        adapters may ignore this winding value. The members of the vert are
+     *        ordered so that <code>&x</code> is a valid float3 with the position
+     *        and <code>&tu</code> is a valid float2 with the texture coordinate.
+     */
+    struct Vertex
+    {
+        float x, y, z;
+        float winding;
+        float tu, tv;
     };
 };
 
