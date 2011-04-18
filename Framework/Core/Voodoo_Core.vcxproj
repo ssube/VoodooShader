@@ -232,13 +232,11 @@
   <ItemGroup>
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Exception.cpp" />
-    <ClCompile Include="FullscreenManager.cpp" />
-    <ClCompile Include="MaterialManager.cpp" />
-    <ClCompile Include="Module.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Pass.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Technique.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -248,15 +246,13 @@
     <ClInclude Include="Docs_Code.hpp" />
     <ClInclude Include="Docs_Graphics.hpp" />
     <ClInclude Include="Docs_License.hpp" />
-    <ClInclude Include="Exception.hpp" />
-    <ClInclude Include="FullscreenManager.hpp" />
-    <ClInclude Include="MaterialManager.hpp" />
     <ClInclude Include="Meta.hpp" />
-    <ClInclude Include="Module.hpp" />
     <ClInclude Include="Parameter.hpp" />
     <ClInclude Include="Parser.hpp" />
+    <ClInclude Include="Pass.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="Technique.hpp" />
     <ClInclude Include="Texture.hpp" />
     <ClInclude Include="Version.hpp" />
     <ClInclude Include="Voodoo.hpp" />

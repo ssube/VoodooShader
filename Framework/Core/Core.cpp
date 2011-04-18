@@ -35,10 +35,7 @@ namespace VoodooShader
         if ( pp == NULL )
         {
             return E_POINTER;
-        } else if ( iid == IID_IUnknown ) {
-            *pp = this;
-            return S_OK;
-        } else if ( iid == IID_VoodooCore ) {
+        } else if ( iid == IID_IUnknown || iid == IID_VoodooObject || iid == IID_VoodooCore ) {
             *pp = this;
             return S_OK;
         } else {
@@ -132,7 +129,7 @@ namespace VoodooShader
 
         // Start setting things up
         IXMLDOMNode * pCoreNode = NULL;
-        BSTR coreNodeStr = _BSTR("/VoodooConfig/Core");
+        CComBSTR coreNodeStr = L"/VoodooConfig/Core";
         hr = config->selectSingleNode(coreNodeStr, &pCoreNode);
 
         if ( FAILED(hr) || pCoreNode == NULL )
@@ -143,8 +140,8 @@ namespace VoodooShader
         SysFreeString(coreNodeStr);
 
         // Create query for node text, used multiple times
-        BSTR queryNodeText = _BSTR("./text()");
-        BSTR queryNodeName = _BSTR("./@name");
+        CComBSTR queryNodeText = L"./text()";
+        CComBSTR queryNodeName = L"./@name";
 
         // Set up the internal objects
         hr = CoCreateInstance(CLSID_Parser, NULL, NULL, IID_VoodooParser, (LPVOID*)&mParser);
@@ -159,7 +156,7 @@ namespace VoodooShader
         mParser->AddVariable(L"runroot", mRunRoot, TRUE);
         mParser->AddVariable(L"target", mTarget, TRUE);
 
-        BSTR queryVarNodes = _BSTR("/VoodooConfig/Variables/Variable");
+        CComBSTR queryVarNodes = L"/VoodooConfig/Variables/Variable";
 
         IXMLDOMNodeList * pVarList = NULL;
         hr = config->selectNodes(queryVarNodes, &pVarList);
@@ -184,7 +181,7 @@ namespace VoodooShader
 
         // Lookup classes
         {
-            BSTR query = _BSTR("./Logger/text()");
+            CComBSTR query = L"./Logger/text()";
             IXMLDOMNode * pNode = NULL;
             if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
             {
@@ -198,7 +195,7 @@ namespace VoodooShader
                 {
                     return E_BADLOGCLSID;
                 } else {
-                    BSTR queryLF = _BSTR("./LogFile/text()");
+                    CComBSTR queryLF = L"./LogFile/text()";
                     IXMLDOMNode * pFileNode = NULL;
                     if ( SUCCEEDED(pCoreNode->selectSingleNode(queryLF, &pFileNode)) )
                     {
@@ -209,15 +206,13 @@ namespace VoodooShader
                         mLogger->Open(filename, FALSE);
                         SysFreeString(filename);
                     }
-                    SysFreeString(queryLF);
                 }
                 SysFreeString(str);
             }
-            SysFreeString(query);
         }
 
         {
-            BSTR query = _BSTR("./FileSystem/text()");
+            CComBSTR query = L"./FileSystem/text()";
             IXMLDOMNode * pNode;
             if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
             {
@@ -233,11 +228,10 @@ namespace VoodooShader
                 }
                 SysFreeString(str);
             }
-            SysFreeString(query);
         }
 
         {
-            BSTR query = _BSTR("./HookSystem/text()");
+            CComBSTR query = L"./HookSystem/text()";
             IXMLDOMNode * pNode;
             if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
             {
@@ -253,11 +247,10 @@ namespace VoodooShader
                 }
                 SysFreeString(str);
             }
-            SysFreeString(query);
         }
 
         {
-            BSTR query = _BSTR("./Adapter/text()");
+            CComBSTR query = L"./Adapter/text()";
             IXMLDOMNode * pNode;
             if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
             {
@@ -273,11 +266,7 @@ namespace VoodooShader
                 }
                 SysFreeString(str);
             }
-            SysFreeString(query);
         }
-
-        SysFreeString(queryNodeName);
-        SysFreeString(queryNodeText);
 
         // Log extended build information
         //BSTR configLocation = _BSTR("Config loaded from \"%s\".");
@@ -293,9 +282,8 @@ namespace VoodooShader
         mLogger->LogModule(cgver);
 
         // Core done loading
-        BSTR done = _BSTR("Core initialization complete.");
+        CComBSTR done = L"Core initialization complete.";
         //mLogger->Log(LL_Info, VOODOO_CORE_NAME, done, NULL);
-        SysFreeString(done);
 
         return S_OK;
     }

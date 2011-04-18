@@ -1,12 +1,5 @@
 #include "Shader.hpp"
 
-#include "IAdapter.hpp"
-#include "Converter.hpp"
-#include "Core.hpp"
-#include "Exception.hpp"
-#include "IFilesystem.hpp"
-#include "ILogger.hpp"
-
 namespace VoodooShader
 {
     Shader::Shader(Core * parent, String filename, const char ** args)
@@ -43,7 +36,7 @@ namespace VoodooShader
 
     Shader::~Shader()
     {
-        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying shader %s.", mName.c_str());
+        //mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying shader %s.", mName.c_str());
 
         mDefaultTechnique = NULL;
         mTechniques.clear();
@@ -55,50 +48,120 @@ namespace VoodooShader
         }
     }
 
-    TechniqueRef Shader::GetDefaultTechnique()
+    HRESULT Core::QueryInterface(REFIID iid, void ** pp)
     {
-        return this->mDefaultTechnique;
+        if ( pp == NULL )
+        {
+            return E_POINTER;
+        } else if ( iid == IID_IUnknown || iid == IID_VoodooObject || iid == IID_VoodooShader ) {
+            *pp = this;
+            return S_OK;
+        } else {
+            *pp = NULL;
+            return E_NOINTERFACE;
+        }
     }
 
-    size_t Shader::GetParameterCount()
+    ULONG Core::AddRef()
+    {
+        return (++mRefrs);
+    }
+
+    ULONG Core::Release()
+    {
+        --mRefrs;
+        if ( mRefrs == 0 )
+        {
+            delete this;
+            return 0;
+        } else {
+            return mRefrs;
+        }
+    }
+
+    HRESULT Core::GetName(LPBSTR pName)
+    {
+        if ( pName == NULL )
+        {
+            return E_INVALIDARG;
+        } else {
+            return mName.CopyTo(pName);
+        }
+    }
+
+    HRESULT Core::GetCore(IVoodooCore ** ppCore)
+    {
+        if ( ppCore == NULL )
+        {
+            return E_INVALIDARG;
+        } else {
+            *ppCore = mCore;
+            return S_OK;
+        }
+    }
+
+    UINT get_TechniqueCount()
+    {
+        return mTechniques.size();
+    }
+
+    HRESULT GetTechnique(UINT Number, IVoodooTechnique ** ppTechnique)
+    {
+        if ( ppTechnique == NULL )
+        {
+            return E_INVALIDARG;
+        } else if ( Number < mTechniques.size() ) {
+            *ppTechnique = mTechniques[Number];
+            return S_OK;
+        } else {
+            return E_INVALIDARG;
+        }
+    }
+
+    HRESULT Shader::get_DefaultTechnique(IVoodooTechnique ** ppTechnique)
+    {
+        if ( ppTechnique == NULL )
+        {
+            return E_INVALIDARG;
+        } else {
+            *ppTechnique = mDefaultTechnique;
+            return S_OK;
+        }
+    }
+
+    HRESULT Shader::put_DefaultTechnique(IVoodooTechnique * ppTechnique)
+    {
+        mDefaultTechnique = ppTechnique;
+        return S_OK;
+    }
+
+    UINT Shader::get_ParameterCount()
     {
         return mParameters.size();
     }
 
-    ParameterRef Shader::GetParameter(_In_ size_t index)
+    HRESULT Shader::GetParameter(UINT Number, IVoodooParameter ** ppParameter)
     {
-        if ( index < mParameters.size() )
+        if ( ppParameter == NULL )
         {
-            return mParameters[index];
+            return E_INVALIDARG;
+        } else if ( Number < mParameters.size() ) {
+            *ppParameter = mParameters[Number];
+            return S_OK;
         } else {
-            return ParameterRef();
+            return E_INVALIDARG;
         }
     }
 
-    ParameterRef Shader::GetParameter(_In_ String name)
+    HRESULT Shader::GetCgShader(void ** ppCgShader)
     {
-        String fullname = this->GetName() + ":" + name;
-
-        for ( ParameterVector::iterator iparam = mParameters.begin(); iparam != mParameters.end(); ++iparam )
+        if ( ppCgShader == NULL )
         {
-            ParameterRef param = (*iparam);
-            if ( param->GetName() == fullname )
-            {
-                return param;
-            }
+            return E_INVALIDARG;
+        } else {
+            *ppCgShader = mCgShader;
+            return S_OK;
         }
-
-        return ParameterRef();
-    }
-
-    String Shader::GetName()
-    {
-        return mName;
-    }
-
-    Core * Shader::GetCore()
-    {
-        return mCore;
     }
 
     void Shader::Link()
@@ -443,270 +506,4 @@ namespace VoodooShader
         return mEffect;
     }
 
-    Technique::Technique(Shader * parent, CGtechnique cgTech)
-        : mParent(parent), mTechnique(cgTech)
-    {
-        this->mCore = this->mParent->GetCore();
-
-        const char * techName = cgGetTechniqueName(this->mTechnique);
-        if ( techName )
-        {
-            this->mName = techName;
-        } else {
-            char nameBuffer[16];
-            sprintf_s(nameBuffer, "tech_%p", mTechnique);
-            this->mName = nameBuffer;
-        }
-    }
-
-    Technique::~Technique()
-    {
-        mTarget = NULL;
-        mPasses.clear();
-    }
-
-    Core * Technique::GetCore()
-    {
-        return mCore;
-    }
-
-    String Technique::GetName()
-    {
-        String name = mParent->GetName();
-        name += "::";
-        name += mName;
-        return name;
-    };
-
-    PassRef Technique::GetPass(size_t index)
-    {
-        if ( index < this->mPasses.size() )
-        {
-            return this->mPasses[index];
-        } else {
-            Throw(VOODOO_CORE_NAME, "Voodoo Core: Invalid pass index (> pass count).", mCore);
-        }
-    }
-
-    TextureRef Technique::GetTarget()
-    {
-        return mTarget;
-    }
-
-    size_t Technique::GetPassCount()
-    {
-        return this->mPasses.size();
-    }
-
-    CGtechnique Technique::GetCgTechnique()
-    {
-        return mTechnique;
-    }
-
-    void Technique::Link()
-    {
-        this->mTarget = TextureRef();
-
-        // Process the technique's target annotation
-        CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(this->mTechnique, "target");
-
-        if ( cgIsAnnotation(targetAnnotation) )
-        {
-            if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )
-            {
-                const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
-
-                this->mTarget = mCore->GetTexture(targetName);
-
-                if ( !this->mTarget.get() )
-                {
-                    mCore->GetLogger()->Log
-                    (
-                        LL_Warning,
-                        VOODOO_CORE_NAME,
-                        "Pass %s cannot find target %s.",
-                        this->GetName().c_str(), targetName
-                    );
-
-                    this->mTarget = mCore->GetTexture(TT_ShaderTarget);
-                }
-            } else {
-                mCore->GetLogger()->Log
-                (
-                    LL_Warning,
-                    VOODOO_CORE_NAME,
-                    "Pass %s has annotation \"target\" of invalid type.",
-                    this->GetName().c_str()
-                );
-
-                this->mTarget = mCore->GetTexture(TT_ShaderTarget);
-            }
-        } else {
-            mCore->GetLogger()->Log
-            (
-                LL_Debug,
-                VOODOO_CORE_NAME,
-                "Pass %s has no target annotation.",
-                this->GetName().c_str()
-            );
-
-            this->mTarget = mCore->GetTexture(TT_ShaderTarget);
-        }
-
-
-        this->mPasses.clear();
-
-        CGpass cPass = cgGetFirstPass(mTechnique);
-
-        while ( cgIsPass(cPass) )
-        {
-            // Insert the pass into the vector
-            PassRef pass(new Pass(this, cPass));
-
-            mPasses.push_back(pass);
-
-            pass->Link();
-
-            cPass = cgGetNextPass(cPass);
-        }
-    }
-
-    Pass::Pass(Technique * parent, CGpass cgPass)
-        : mParent(parent), mPass(cgPass)
-    {
-        this->mCore = this->mParent->GetCore();
-
-        const char * passName = cgGetPassName(this->mPass);
-        if ( passName )
-        {
-            this->mName = passName;
-        } else {
-            char nameBuffer[16];
-            _itoa_s((int)(&this->mPass), nameBuffer, 16, 16);
-
-            this->mName = "pass_";
-            this->mName += nameBuffer;
-        }
-    }
-
-    Pass::~Pass()
-    {
-        mTarget = NULL;
-
-        mCore->GetAdapter()->UnloadPass(this);
-    }
-
-    String Pass::GetName()
-    {
-        String name = mParent->GetName();
-        name += "::";
-        name += mName;
-        return name;
-    };
-
-    Core * Pass::GetCore()
-    {
-        return mCore;
-    }
-
-    TextureRef Pass::GetTarget()
-    {
-        return mTarget;
-    }
-
-    CGprogram Pass::GetProgram(ProgramStage stage)
-    {
-        switch ( stage )
-        {
-        case PS_Vertex:
-            return mVertexProgram;
-        case PS_Fragment:
-            return mFragmentProgram;
-        case PS_Geometry:
-            return mGeometryProgram;
-        case PS_Domain:
-        case PS_Hull:
-        case PS_Unknown:
-        default:
-            return NULL;
-        }
-    }
-
-    CGpass Pass::GetCgPass()
-    {
-        return mPass;
-    }
-
-    void Pass::Link()
-    {
-        this->mVertexProgram   = cgGetPassProgram(this->mPass, CG_VERTEX_DOMAIN  );
-        this->mFragmentProgram = cgGetPassProgram(this->mPass, CG_FRAGMENT_DOMAIN);
-        this->mGeometryProgram = cgGetPassProgram(this->mPass, CG_GEOMETRY_DOMAIN);
-
-        this->mTarget = TextureRef();
-        CGannotation targetAnnotation = cgGetNamedPassAnnotation(this->mPass, "target");
-        if ( cgIsAnnotation(targetAnnotation) )
-        {
-            if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )
-            {
-                const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
-
-                this->mTarget = mCore->GetTexture(targetName);
-
-                if ( !this->mTarget.get() )
-                {
-                    mCore->GetLogger()->Log
-                    (
-                        LL_Warning,
-                        VOODOO_CORE_NAME,
-                        "Pass %s cannot find target %s.", 
-                        this->GetName().c_str(), targetName
-                    );
-
-                    this->mTarget = mCore->GetTexture(TT_PassTarget);
-                }
-            } else {
-                mCore->GetLogger()->Log
-                (
-                    LL_Warning,
-                    VOODOO_CORE_NAME,
-                    "Pass %s has annotation \"target\" of invalid type.",
-                    this->GetName().c_str()
-                );
-
-                this->mTarget = mCore->GetTexture(TT_PassTarget);
-            }
-        } else {
-            mCore->GetLogger()->Log
-            (
-                LL_Debug,
-                VOODOO_CORE_NAME,
-                "Pass %s has no target annotation.", 
-                this->GetName().c_str()
-            );
-
-            this->mTarget = mCore->GetTexture(TT_PassTarget);
-        }
-
-        // Load the programs
-        IAdapterRef adapter = mCore->GetAdapter();
-
-        if ( !adapter )
-        {
-            mCore->GetLogger()->Log
-            (
-                LL_Warning,
-                VOODOO_CORE_NAME,
-                "No adapter found, pass %s must be explicitly loaded later.", 
-                this->GetName().c_str()
-            );
-        } else {
-            if ( !adapter->LoadPass(this) )
-            {
-                mCore->GetLogger()->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->GetName().c_str());
-            } else {
-                mCore->GetLogger()->Log(LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->GetName().c_str());
-            }
-        }
-    }
 }

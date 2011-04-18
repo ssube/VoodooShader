@@ -7,28 +7,22 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Exception.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="FullscreenManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Parameter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Module.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Converter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Pass.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -46,15 +40,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Core.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Exception.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="FullscreenManager.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialManager.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Meta.hpp">
@@ -75,16 +60,19 @@
     <ClInclude Include="Version.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Module.hpp">
+    <ClInclude Include="Parser.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Parser.hpp">
+    <ClInclude Include="Common.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Voodoo.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Common.hpp">
+    <ClInclude Include="Technique.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Pass.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
