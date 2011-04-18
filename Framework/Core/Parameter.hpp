@@ -35,7 +35,13 @@ namespace VoodooShader
     /**
      * 
      */
-    class VOODOO_API Parameter
+    [
+        coclass,
+        progid("VoodooCore.Parameter.1"), vi_progid("VoodooCore.Parameter"), default(IVoodooParameter),
+        uuid("F530DD21-9A1A-4F25-89B9-46E976ECCD64"")
+    ]
+    class Parameter
+        : public IVoodooParameter
     {
     public:
         /**

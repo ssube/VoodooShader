@@ -43,6 +43,7 @@ namespace VoodooShader
     class Core
         : public IVoodooCore
     {
+    public:
         /**
          * Create a new Voodoo Core and initializes appropriate paths.
          *
@@ -57,38 +58,36 @@ namespace VoodooShader
          */
         ~Core();
 
-        // IUnknown Methods
-        STDMETHOD(QueryInterface)(REFIID iid, void ** pp);
-        STDMETHOD_(ULONG, AddRef)();
-        STDMETHOD_(ULONG, Release)();
+        // IUnknown
+        //STDMETHOD(QueryInterface)(REFIID riid, void** ppvObj);
+        //STDMETHOD_(ULONG,AddRef)();
+        //STDMETHOD_(ULONG,Release)();
 
+        // IVoodooObject
+        STDMETHOD(GetName)(LPBSTR pName);
+        STDMETHOD(GetCore)(IVoodooCore ** ppCore);
+
+        // IVoodooCore
         STDMETHOD(Initialize)(BSTR pConfig);
-        STDMETHOD(GetParser)(IVoodooParser ** pParser);
-        STDMETHOD(GetHookManager)(IVoodooHookSystem ** ppHookManager);
-        STDMETHOD(GetFileSystem)(IVoodooFileSystem ** ppFileSystem);
-        STDMETHOD(GetAdapter)(IVoodooAdapter ** ppAdapter);
-        STDMETHOD(GetLogger)(IVoodooLogger ** ppLogger);
+        STDMETHOD(get_Parser)(IVoodooParser ** pParser);
+        STDMETHOD(get_HookSystem)(IVoodooHookSystem ** ppHookManager);
+        STDMETHOD(get_FileSystem)(IVoodooFileSystem ** ppFileSystem);
+        STDMETHOD(get_Adapter)(IVoodooAdapter ** ppAdapter);
+        STDMETHOD(get_Logger)(IVoodooLogger ** ppLogger);
+        STDMETHOD(get_Config)(IUnknown ** ppConfig);
 
-        /**
-         * Retrieve the Xml config document for this Core.
-         * 
-         * @note This is actually a <code>pugi::xml_document *</code>, but stored and provided
-         *    as a <code>void *</code> so linking against the Core doesn't require the pugixml
-         *    headers. To use this, simply cast it into the actual type.
-         */
-        STDMETHOD(GetConfig)(void ** ppConfig);
+        STDMETHOD(get_CgContext)(void ** ppContext);
+        STDMETHOD(put_CgContext)(void * pContext);
 
-        STDMETHOD(SetCgContext)(void * pContext);
-        STDMETHOD(GetCgContext)(void ** ppContext);
-
-        STDMETHOD(CreateShader)(IVoodooFile * pFile, BSTR * ppArgs, IVoodooShader ** ppShader);
+        STDMETHOD(CreateShader)(IVoodooFile * pFile, IVoodooShader ** ppShader);
         STDMETHOD(CreateParameter)(BSTR pName, ParameterType Type, IVoodooParameter ** ppParameter);
+        STDMETHOD(CreateTexture)(BSTR pName, IVoodooTarget * pData, IVoodooTexture ** ppTexture);
         STDMETHOD(GetParameter)(BSTR pName, IVoodooParameter ** ppParameter);
-        STDMETHOD(AddTexture)(BSTR pName, void * pData);
         STDMETHOD(GetTexture)(BSTR pName, IVoodooTexture ** ppTexture);
         STDMETHOD(RemoveTexture)(BSTR pName);
-        STDMETHOD(GetStageTexture)(TextureType Stage, IVoodooTexture ** ppTexture);
-        STDMETHOD(SetStageTexture)(TextureType Stage, IVoodooTexture * pTexture);
+
+        STDMETHOD(get_StageTexture)(TextureType Stage, IVoodooTexture ** ppTexture);
+        STDMETHOD(put_StageTexture)(TextureType Stage, IVoodooTexture * pTexture);
 
     private:
         /**
@@ -122,7 +121,7 @@ namespace VoodooShader
         /**
          * Config file (actually a <code>pugi::xml_document *</code>, stored as void).
          */
-        void * mConfig;
+        IUnknown * mConfig;
 
         /**
          * Cg context used by this core.
@@ -154,8 +153,8 @@ namespace VoodooShader
          */
         IVoodooParser * mParser;
 
-        std::map<std::string, IVoodooParameter*> mParameters;
-        std::map<std::string, IVoodooTexture*> mTextures;
+        std::map<CComBSTR, IVoodooParameter*> mParameters;
+        std::map<CComBSTR, IVoodooTexture*> mTextures;
         std::map<TextureType, IVoodooTexture*> mStageTextures;
     };
     /**

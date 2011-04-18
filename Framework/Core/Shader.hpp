@@ -51,6 +51,11 @@ namespace VoodooShade
      *          compile without errors. This <em>does not</em> mean that all techniques
      *          will be valid.
      */
+    [
+        coclass,
+        progid("VoodooCore.Shader.1"), vi_progid("VoodooCore.Shader"), default(IVoodooShader),
+        uuid("FC7FA3C9-DCB3-47FC-9645-80F4A96D2E51")
+    ]
     class VOODOO_API Shader
     {
     public:

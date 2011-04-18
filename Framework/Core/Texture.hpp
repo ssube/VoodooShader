@@ -37,7 +37,13 @@ namespace VoodooShader
      * within them to create the on-screen images. Textures may be used to represent
      * various other surfaces, including render targets or even the backbuffer.
      */
-    class VOODOO_API Texture
+    [
+        coclass,
+        progid("VoodooCore.Texture.1"), vi_progid("VoodooCore.Texture"), default(IVoodooTexture),
+        uuid("CA2AE4FC-136F-426C-9C92-FB665D216026")
+    ]
+    class Texture
+        : public IVoodooTexture
     {
     public:
         Texture
