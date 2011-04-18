@@ -27,25 +27,29 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>false</CLRSupport>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <UseOfAtl>Static</UseOfAtl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>false</CLRSupport>
+    <UseOfAtl>Static</UseOfAtl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>false</CLRSupport>
+    <UseOfAtl>Static</UseOfAtl>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfAtl>Static</UseOfAtl>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -238,19 +242,14 @@
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IAdapter.hpp" />
+    <ClInclude Include="Common.hpp" />
     <ClInclude Include="Converter.hpp" />
     <ClInclude Include="Core.hpp" />
     <ClInclude Include="Docs_Code.hpp" />
     <ClInclude Include="Docs_Graphics.hpp" />
     <ClInclude Include="Docs_License.hpp" />
     <ClInclude Include="Exception.hpp" />
-    <ClInclude Include="IFilesystem.hpp" />
     <ClInclude Include="FullscreenManager.hpp" />
-    <ClInclude Include="IHookManager.hpp" />
-    <ClInclude Include="Includes.hpp" />
-    <ClInclude Include="IObject.hpp" />
-    <ClInclude Include="ILogger.hpp" />
     <ClInclude Include="MaterialManager.hpp" />
     <ClInclude Include="Meta.hpp" />
     <ClInclude Include="Module.hpp" />
@@ -260,16 +259,13 @@
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Texture.hpp" />
     <ClInclude Include="Version.hpp" />
-    <ClInclude Include="Voodoo_Core.hpp" />
+    <ClInclude Include="Voodoo.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Core.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Voodoo_Core.def" />
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="Core.idl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

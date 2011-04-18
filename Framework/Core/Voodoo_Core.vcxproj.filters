@@ -54,9 +54,6 @@
     <ClInclude Include="FullscreenManager.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Includes.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="MaterialManager.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -84,22 +81,10 @@
     <ClInclude Include="Parser.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="IObject.hpp">
-      <Filter>Headers\Interfaces</Filter>
+    <ClInclude Include="Voodoo.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ILogger.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IHookManager.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IFilesystem.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IAdapter.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Voodoo_Core.hpp">
+    <ClInclude Include="Common.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -110,28 +95,17 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{a6f67f75-d805-4304-8d0c-9f73c712eeb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Interfaces">
-      <UniqueIdentifier>{d35396d6-ae0d-4592-a84a-6f0b2e158404}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{0aff68d5-58a6-4d05-a169-dc374fba27cf}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{5ef7e194-26d0-463f-b42c-88fc238d12bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interfaces">
-      <UniqueIdentifier>{7d5f5174-2078-4b83-a040-433cf2f1f203}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Core.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="Core.idl">
-      <Filter>Interfaces</Filter>
-    </Midl>
   </ItemGroup>
   <ItemGroup>
     <None Include="Voodoo_Core.def">

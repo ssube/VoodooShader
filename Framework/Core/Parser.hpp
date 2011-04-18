@@ -37,7 +37,13 @@ namespace VoodooShader
      * This is used internally to handle file path resolution and Xml key
      * location.
      */
-    class VOODOO_API Parser
+    [
+        coclass,
+        progid("VoodooCore.Parser.1"), vi_progid("VoodooCore.Parser"),
+        uuid("4261CE17-F55D-4BBE-80AD-439AAB157E3C")
+    ]
+    class Parser
+        : public IVoodooParser
     {
     public:
         Parser(_In_ Core * core);

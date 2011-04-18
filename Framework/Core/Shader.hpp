@@ -27,7 +27,7 @@
 #include "Parameter.hpp"
 #include "Texture.hpp"
 
-namespace VoodooShader
+namespace VoodooShade
 {
     /**
      * @addtogroup VoodooCore

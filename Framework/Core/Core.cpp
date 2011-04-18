@@ -1,180 +1,235 @@
 #include "Core.hpp"
 
-#include "IAdapter.hpp"
-#include "IFilesystem.hpp"
-#include "IHookManager.hpp"
-#include "ILogger.hpp"
-
-#include "Converter.hpp"
-#include "Exception.hpp"
-#include "FullscreenManager.hpp"
-#include "MaterialManager.hpp"
-#include "Module.hpp"
-#include "Parameter.hpp"
-#include "Parser.hpp"
-#include "Shader.hpp"
-#include "Texture.hpp"
-
-#include "pugixml.hpp"
-
 namespace VoodooShader
 {
-    Core * CreateCore(_In_ const char * globalroot, _In_ const char * runroot)
+    Core::Core()
+        : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCgContext(NULL), mConfig(NULL), mRefrs(0)
+    { }
+
+    HRESULT Core::QueryInterface(REFIID iid, void ** pp)
     {
-        return new Core(globalroot, runroot);
+        if ( pp == NULL )
+        {
+            return E_POINTER;
+        } else if ( iid == IID_IUnknown ) {
+            *pp = this;
+            return S_OK;
+        } else if ( iid == IID_VoodooCore ) {
+            *pp = this;
+            return S_OK;
+        } else {
+            *pp = NULL;
+            return E_NOINTERFACE;
+        }
     }
 
-    void DestroyCore(_In_ Core * core)
+    ULONG Core::AddRef()
     {
-        delete core;
+        return (++mRefrs);
     }
 
-    Core::Core(_In_ const char * globalroot, _In_ const char * runroot)
-        : mAdapter(NULL), mHooker(NULL), mLogger(NULL), mCgContext(NULL), mConfig(NULL)
+    ULONG Core::Release()
     {
-        using namespace pugi;
+        --mRefrs;
+        if ( mRefrs == 0 )
+        {
+            delete this;
+        }
+    }
 
-#ifdef _DEBUG_FULL
-        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF|_CRTDBG_LEAK_CHECK_DF);
-        _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG|_CRTDBG_MODE_FILE);
-        _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
-        _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG|_CRTDBG_MODE_FILE);
-        _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
-#endif
+    HRESULT Core::Initialize(BSTR pConfig)
+    {
+        using namespace std;
 
-        mGlobalRoot = globalroot;
-        mGlobalRoot += "\\";
-        mRunRoot = runroot;
-        mRunRoot += "\\";
+        //mGlobalRoot = globalroot;
+        //mGlobalRoot += "\\";
+        //mRunRoot = runroot;
+        //mRunRoot += "\\";
 
         // Get the local root
-        char localroot[MAX_PATH];
+        TCHAR localroot[MAX_PATH];
         HMODULE targetModule = GetModuleHandle(NULL);
         GetModuleFileName(targetModule, localroot, MAX_PATH);
-        //localroot[chars] = '\0';
-        char * lastslash = strrchr(localroot, '\\');
-        if ( lastslash )
-        {
+        //char * lastslash = strrchr(localroot, '\\');
+        //if ( lastslash )
+        //{
             //char targetname[MAX_PATH];
             //strcpy_s(targetname, MAX_PATH, lastslash + 1);
             //_strlwr_s(targetname, strlen(targetname));
             //mTarget = targetname;
-            mTarget = ( lastslash + 1 );
+        //    mTarget = ( lastslash + 1 );
 
-            lastslash[1] = '\0';
-        }
+        //    lastslash[1] = '\0';
+        //}
         mLocalRoot = localroot;
         //mLocalRoot += "\\";
 
-        // Set up the internal objects
-        mModManager = ModuleManagerRef(new ModuleManager(this));
-        mParser = ParserRef(new Parser(this));
-
         try
         {
-            xml_document * config = new xml_document();
-
-            // Try loading the config file from each major location
-            String ConfigPath = mRunRoot + "VoodooConfig.xmlconfig";
-            xml_parse_result result = config->load_file(ConfigPath.c_str());
-
-            if ( !result )
+            IXMLDOMDocument * config = NULL;
+            HRESULT hr = CoCreateInstance(__uuidof(MSXML2::DOMDocument60), NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&config));
+            if ( FAILED(hr) )
             {
-                ConfigPath = mLocalRoot + "VoodooConfig.xmlconfig";
-                result = config->load_file(ConfigPath.c_str());
+                return E_MSXMLERROR;
+            }
 
-                if ( !result )
-                {
-                    ConfigPath = mGlobalRoot + "VoodooConfig.xmlconfig";
-                    result = config->load_file(ConfigPath.c_str());
+            config->put_async(VARIANT_FALSE);
+            config->put_validateOnParse(VARIANT_FALSE);
+            config->put_resolveExternals(VARIANT_FALSE);
+            config->put_preserveWhiteSpace(VARIANT_TRUE);
 
-                    if ( !result )
-                    {
-                        throw std::exception("Unable to find or parse config file.");
-                    }
-                }
+            VARIANT_BOOL loadStatus;
+            VARIANT configFileName;
+            VariantInit(&configFileName);
+            V_VT(&configFileName) = VT_BSTR;
+            V_BSTR(&configFileName) = pConfig;
+
+            hr = config->load(configFileName, &loadStatus);
+            if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
+            {
+                return E_INVALIDCFG;
             }
 
             // Store the config file, in case modules need it
-            mConfig = (void *)config;
+            mConfig = (void*)config;
 
             // Start setting things up
-            xml_node coreNode = config->select_single_node("/VoodooConfig/Core").node();
+            IXMLDOMNode * pCoreNode = NULL;
+            BSTR coreNodeStr = _BSTR("/VoodooConfig/Core");
+            hr = config->selectSingleNode(coreNodeStr, &pCoreNode);
 
-            if ( !coreNode )
+            if ( FAILED(hr) || pCoreNode == NULL )
             {
-                throw std::exception("Could not find Core node.");
+                return E_INVALIDCFG;
             }
 
             // Create query for node text, used multiple times
-            xpath_query nodeTextQuery("./text()");
+            BSTR queryNodeText = _BSTR("./text()");
+            BSTR queryNodeName = _BSTR("./@name");
+
+            // Set up the internal objects
+            {
+                HRESULT hr = CoCreateInstance(CLSID_Parser, NULL, NULL, IID_VoodooParser, (LPVOID*)&mParser);
+                if ( FAILED(hr) )
+                {
+                    return E_BADCLSID;
+                }
+            }
 
             // Load variables, built-in first
-            mParser->AddVariable("globalroot", mGlobalRoot, true);
-            mParser->AddVariable("localroot", mLocalRoot, true);
-            mParser->AddVariable("runroot", mRunRoot, true);
-            mParser->AddVariable("target", mTarget, true);
+            mParser->AddVariable(L"globalroot", mGlobalRoot, TRUE);
+            mParser->AddVariable(L"localroot", mLocalRoot, TRUE);
+            mParser->AddVariable(L"runroot", mRunRoot, TRUE);
+            mParser->AddVariable(L"target", mTarget, TRUE);
 
-            xpath_query varNodesQuery("/VoodooConfig/Variables/Variable");
-            xpath_query varNodeNameQuery("./@name");
+            BSTR queryVarNodes = _BSTR("/VoodooConfig/Variables/Variable");
 
-            xpath_node_set varNodes = varNodesQuery.evaluate_node_set(*config);
-            xpath_node_set::const_iterator varNodeIter = varNodes.begin();
-            while ( varNodeIter != varNodes.end() )
+            IXMLDOMNodeList * pVarList = NULL;
+            hr = config->selectNodes(queryVarNodes, &pVarList);
+            if ( SUCCEEDED(hr) )
             {
-                String name = varNodeNameQuery.evaluate_string(*varNodeIter);
-                String value = nodeTextQuery.evaluate_string(*varNodeIter);
-                mParser->AddVariable(name, value);
+                IXMLDOMNode * pVarNode = NULL;
+                while ( hr = pVarList->nextNode(&pVarNode) && hr == S_OK && pVarNode != NULL )
+                {
+                    IXMLDOMNode * pNameNode, * pTextNode;
+                    pVarNode->selectSingleNode(queryNodeName, &pNameNode);
+                    pVarNode->selectSingleNode(queryNodeText, &pTextNode);
 
-                ++varNodeIter;
+                    VARIANT name, text;
+                    pNameNode->get_nodeValue(&name);
+                    pTextNode->get_nodeValue(&text);
+
+                    mParser->AddVariable(name.bstrVal, text.bstrVal, false);
+                }
             }
 
             // Lookup classes
-            xpath_query logQuery ("/VoodooConfig/Core/Logger/text()");
-            xpath_query fsQuery  ("/VoodooConfig/Core/FileSystem/text()");
-            xpath_query hookQuery("/VoodooConfig/Core/HookManager/text()");
-            xpath_query adpQuery ("/VoodooConfig/Core/Adapter/text()");
-            xpath_query logfQuery("/VoodooConfig/Core/LogFile/text()");
-
-            String logClass  = mParser->ParseString(logQuery.evaluate_string( *config));
-            String fsClass   = mParser->ParseString(fsQuery.evaluate_string(  *config));
-            String hookClass = mParser->ParseString(hookQuery.evaluate_string(*config));
-            String adpClass  = mParser->ParseString(adpQuery.evaluate_string( *config));
-            String logFile   = mParser->ParseString(logfQuery.evaluate_string(*config));
-
-            // Load modules
-            xpath_node_set moduleNodes = coreNode.select_nodes("Module");
-            xpath_node_set::const_iterator moduleIter = moduleNodes.begin();
-            while ( moduleIter != moduleNodes.end() )
             {
-                String rawfilename = nodeTextQuery.evaluate_string(*moduleIter);
-                String filename = mParser->ParseString(rawfilename);
-
-                ModuleRef cmod = mModManager->LoadModule(filename);
-
-                // Test for debug mismatch and vital classes
-                if ( mLogger.get() == NULL && mModManager->ClassExists(logClass) )
+                BSTR query = _BSTR("./Logger/text()");
+                IXMLDOMNode * pNode = NULL;
+                if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
                 {
-                    mLogger = mModManager->SharedCreateClass<ILogger>(logClass);
-
-                    if ( mLogger.get() == NULL || !mLogger->Open(logFile.c_str(), false) )
-                    {
-                        throw std::exception("Unable to create Logger object or open log file.");
-                    }
+                    VARIANT v;
+                    pNode->get_nodeValue(&v);
+                    BSTR str;
+                    mParser->Parse(v.bstrVal, &str);
                 }
 
-                ++moduleIter;
+                HRESULT hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mLogger);
+                if ( FAILED(hr) || mLogger == NULL )
+                {
+                    return E_BADLOGCLSID;
+                } else {
+                    BSTR queryLF = _BSTR("./LogFile/text()");
+                    IXMLDOMNode * pFileNode = NULL;
+                    if ( SUCCEEDED(pCoreNode->selectSingleNode(queryLF, &pFileNode)) )
+                    {
+                        VARIANT fn;
+                        pNode->get_nodeValue(&fn);
+                        BSTR filename;
+                        mParser->Parse(fn.bstrVal, &filename);
+                        mLogger->Open(filename, FALSE);
+                    }
+                }
             }
 
-            // Make sure a logger was loaded
-            if ( mLogger.get() == NULL )
             {
-                throw std::exception("Unable to create Logger object (class not found).");
+                BSTR query = _BSTR("./FileSystem/text()");
+                IXMLDOMNode * pNode;
+                if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
+                {
+                    VARIANT v;
+                    pNode->get_nodeValue(&v);
+                    BSTR str;
+                    mParser->Parse(v.bstrVal, &str);
+                }
+
+                HRESULT hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mFileSystem);
+                if ( FAILED(hr) || mFileSystem == NULL )
+                {
+                    return E_BADFSCLSID;
+                }
+            }
+
+            {
+                BSTR query = _BSTR("./HookSystem/text()");
+                IXMLDOMNode * pNode;
+                if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
+                {
+                    VARIANT v;
+                    pNode->get_nodeValue(&v);
+                    BSTR str;
+                    mParser->Parse(v.bstrVal, &str);
+                }
+
+                HRESULT hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mHookSystem);
+                if ( FAILED(hr) || mFileSystem == NULL )
+                {
+                    return E_BADHSCLSID;
+                }
+            }
+
+            {
+                BSTR query = _BSTR("./Adapter/text()");
+                IXMLDOMNode * pNode;
+                if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
+                {
+                    VARIANT v;
+                    pNode->get_nodeValue(&v);
+                    BSTR str;
+                    mParser->Parse(v.bstrVal, &str);
+                }
+
+                HRESULT hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mAdapter);
+                if ( FAILED(hr) || mFileSystem == NULL )
+                {
+                    return E_BADFSCLSID;
+                }
             }
 
             // Log extended build information
-            mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from \"%s\".", ConfigPath.c_str());
-            mLogger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
+            //mLogger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from \"%s\".", ConfigPath.c_str());
+            //mLogger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
             Version vfver = VOODOO_META_VERSION_STRUCT(CORE);
             Version vsver = VOODOO_META_VERSION_STRUCT(VC);
@@ -252,7 +307,7 @@ namespace VoodooShader
 #endif
     }
 
-    String Core::GetGlobalRoot()
+    STDMETHODIMPL(String Core::GetGlobalRoot()
     {
         return mGlobalRoot;
     }

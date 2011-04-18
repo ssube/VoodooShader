@@ -25,11 +25,13 @@ HMODULE LoadSystemLibrary(const PTCHAR libname)
 
 void LoadVoodoo()
 {
-    HRESULT hr = CoCreateInstance(NULL, NULL, CLSCTX_INPROC_SERVER, NULL, &VoodooCore);
+    HRESULT hr = CoCreateInstance(CLSID_Core, NULL, CLSCTX_INPROC_SERVER, IID_VoodooCore, &VoodooCore);
 
     if ( FAILED(hr) )
     {
         MessageBox(NULL, T"Unable to load the Voodoo core.", T"Voodoo Error", MB_ICONWARNING|MB_OK);
+    } else {
+        HRESULT hr = VoodooCore->Initialize("VoodooConfig.xml");
     }
 }
 

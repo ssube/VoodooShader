@@ -35,24 +35,20 @@ namespace VoodooShader
      * Core engine class for the Voodoo Shader Framework. Manages a variety of major functions and
      * contains a Cg context used by shaders.
      */
-    DECLARE_INTERFACE_(ICore, IUnknown)
+    [
+        coclass,
+        progid("VoodooCore.Core.1"), vi_progid("VoodooCore.Core"), default(IVoodooCore),
+        uuid("C4693A1C-EDC6-4794-930C-257497FC8722")
+    ]
+    class Core
+        : public IVoodooCore
     {
         /**
-         * Create a new Voodoo Core and associated Cg context.
-         *          
-         * @param globalroot The base path to use for this core. Acts as the root for all modules and
-         *    resources.
-         * @param runroot The local base path, used for some resources.
-         * @return A new core.
-         * @throws std::exception in case of errors.
+         * Create a new Voodoo Core and initializes appropriate paths.
          *
-         * @note You can not call this function externally, you must call CreateCore() instead.
+         * @note You can not call this function externally, you must call CoCreate instead.
          */
-        Core
-        (
-            _In_ const char * globalroot,
-            _In_ const char * runroot
-        );
+        Core();
 
         /**
          * Releases all references to modules and objects held by the core, including shaders,
@@ -61,194 +57,38 @@ namespace VoodooShader
          */
         ~Core();
 
-        /**
-         * Retrieves this core's variable parser.
-         * 
-         * @return A shared pointer to the parser (always valid).
-         */
-        STDMETHOD(GetParser)(IParser ** pParser) PURE;
+        // IUnknown Methods
+        STDMETHOD(QueryInterface)(REFIID iid, void ** pp);
+        STDMETHOD_(ULONG, AddRef)();
+        STDMETHOD_(ULONG, Release)();
 
-        /**
-         * Retrieves this core's IHookManager implementation.
-         *        
-         * @return A shared pointer to the hook manager or empty if none exists.
-         */
-        STDMETHOD(GetHookManager)(_Out_ IHookManager ** ppHookManager) PURE;
-
-         /**
-          * Retrieves this core's IFileSystem implementation.
-          * 
-          * @return A shared pointer to the filesystem or empty if none exists.
-          */
-        STDMETHOD(GetFileSystem)(_Out_ IFileSystem ** ppFileSystem) PURE;
-
-        /**
-         * Retrieve the IAdapter attached to this Core.
-         *
-         * @return A shared pointer to the adapter or empty if no adapter is attached.
-         */
-        STDMETHOD(GetAdapter)(_Out_ IAdapter ** ppAdapter) PURE;
-        
-        /**
-         * Retrieve the ILogger attached to this Core.
-         *
-         * @return A shared pointer to the logger or empty if no logger is attached.
-         */
-        STDMETHOD(GetLogger)(_Out_ ILogger ** ppLogger) PURE;
+        STDMETHOD(Initialize)(BSTR pConfig);
+        STDMETHOD(GetParser)(IVoodooParser ** pParser);
+        STDMETHOD(GetHookManager)(IVoodooHookSystem ** ppHookManager);
+        STDMETHOD(GetFileSystem)(IVoodooFileSystem ** ppFileSystem);
+        STDMETHOD(GetAdapter)(IVoodooAdapter ** ppAdapter);
+        STDMETHOD(GetLogger)(IVoodooLogger ** ppLogger);
 
         /**
          * Retrieve the Xml config document for this Core.
          * 
-         * @warning This is actually a <code>pugi::xml_document *</code>, but stored and provided
+         * @note This is actually a <code>pugi::xml_document *</code>, but stored and provided
          *    as a <code>void *</code> so linking against the Core doesn't require the pugixml
          *    headers. To use this, simply cast it into the actual type.
          */
-        STDMETHOD(GetConfig)(_Out_ void ** ppConfig) PURE;
+        STDMETHOD(GetConfig)(void ** ppConfig);
 
-        STDMETHOD(SetCgContext)(_In_ void * pContext) PURE;
+        STDMETHOD(SetCgContext)(void * pContext);
+        STDMETHOD(GetCgContext)(void ** ppContext);
 
-        /**
-         * Retrieve the Cg context associated with this Core.
-         * 
-         * @note Each Voodoo Core is associated with a single Cg context. This context is used
-         *    to create all @ref Shader shaders and most other graphics resources. 
-         *       
-         * @return The Cg context.
-         */
-        STDMETHOD(GetCgContext)(_In_ void ** ppContext) PURE;
-
-        /**
-         * Tries to compile a new shader effect from a file, or copies the effect if the
-         * file has already been loaded.
-         * 
-         * @param pFilename The file to load and compile.
-         * @param ppArgs Optional arguments providing compiler directives, usually shader 
-         *    model-specific definitions or preprocessor defines.
-         */
-        STDMETHOD(CreateShader)
-        (
-            _In_ LPCSTR pFilename, 
-            _In_opt_ LPCSTR * ppArgs
-            _Out_ IShader ** ppShader
-        ) PURE;
-
-        /**
-         * Creates a global-level virtual parameter. This parameter exists in the Cg runtime, but 
-         * is not a part of any shader or program. This is useful for creating parameters that must 
-         * be shared between programs. Only parameters created with this function may be used in 
-         * Parameter::Link().
-         *
-         * @param name The name for this parameter.
-         * @param type The type of the parameter to create.
-         * @return A new parameter.
-         * @throws Exception if a parameter with the given name already exists.
-         *
-         * @note This function is the only way to create global parameters. You can then attach 
-         *    effect parameters and adjust only the global parameter (an easy way to manage system 
-         *    time or such things).
-         */
-        STDMETHOD(CreateParameter)
-        (
-            _In_ LPCSTR pName, 
-            _In_ ParameterType Type,
-            _Out_ IParameter ** ppParameter;
-        ) PURE;
-
-        /**
-         * Registers a texture with this Core. Texture will not be used by the shader linker unless 
-         * they have been registered with the core. 
-         *
-         * @param name The texture name (must be unique).
-         * @param data A pointer to any texture data to be stored. This should be interpreted and 
-         *    manipulated by the Adapter, the Core merely stores the pointer.
-         * @return A shared pointer to the newly created Texture object, if successful.
-         * 
-         * @throws Exception if a texture with the same name already exists.
-         *
-         * @sa To create a texture, see Adapter::CreateTexture() (the texture is created and 
-         *    registered with a call to this function). This  method does not create a texture, it 
-         *    merely notifies the Core one exists and returns a shared pointer to the metadata.
-         */
-        STDMETHOD(AddTexture)
-        (
-            _In_ LPCSTR pName, 
-            _In_ void * pData
-        ) PURE;
-
-        /**
-         * Retrieves a texture from the Core's texture map by name. 
-         * 
-         * @param name The texture name.
-         * @return A shared pointer to the Texture object if it exists, otherwise an empty shared 
-         *    pointer).
-         *
-         * @sa To create a texture, use IAdapter::CreateTexture()
-         * @sa To register an existing texture with the core, use Core::AddTexture()
-         */
-        STDMETHOD(GetTexture)
-        (
-            _In_ LPCSTR pName,
-            _Out_ ITexture ** ppTexture
-        ) PURE;
-
-        /**
-         * Retrieves a texture from the Core's texture map by function. Each specialized texture 
-         * function may have a single texture bound to it for use by the shader linker.
-         *
-         * @param function The function whose bound texture should be returned.
-         * @return A shared pointer to the Texture object if it exists, otherwise an empty shared 
-         *    pointer.
-         *         
-         * @sa To bind a texture to one of the special functions, use Core::SetTexture()
-         */
-        STDMETHOD(GetTexture)
-        (
-            _In_ TextureType Function,
-            _Out_ ITexutre ** ppTexture
-        ) PURE;
-
-        /**
-         * Retrieve a parameter by name.
-         *
-         * @param name The name to search for.
-         * @param type The type to verify. If a parameter with a matching name is found, the type 
-         *    will be checked. If this is PT_Unknown, any type parameter will be returned (only the 
-         *    name will be tested).
-         * @return A reference to the parameter, if one is found. An empty shared pointer otherwise.
-         */
-        STDMETHOD(GetParameter)
-        (
-            _In_ LPCSTR pName, 
-            _In_ ParameterType Type,
-            _Out_ IParameter ** ppParameter
-        ) PURE;
-
-        /**
-         * Binds a texture to a specialized function for the shader linker. 
-         *
-         * @param function The function to set.
-         * @param texture The texture to bind.
-         *
-         * @throws Exception if function is invalid or TT_Unknown.
-         * @throws Exception if function is TT_Generic (all textures are generic by default, you 
-         *    cannot set a texture to generic).
-         */
-        STDMETHOD(SetTexture)
-        (
-            _In_ TextureType Function, 
-            _In_opt_ ITexture * pTexture
-        ) PURE;
-
-        /**
-         * Removes a texture from the Core's texture map and unbinds it from any specialized 
-         * functions it may be attached to.
-         * 
-         * @param texture The texture to remove.
-         */
-        STDMETHOD(RemoveTexture)
-        (
-            _In_ LPCSTR pTexture
-        ) PURE;
+        STDMETHOD(CreateShader)(IVoodooFile * pFile, BSTR * ppArgs, IVoodooShader ** ppShader);
+        STDMETHOD(CreateParameter)(BSTR pName, ParameterType Type, IVoodooParameter ** ppParameter);
+        STDMETHOD(GetParameter)(BSTR pName, IVoodooParameter ** ppParameter);
+        STDMETHOD(AddTexture)(BSTR pName, void * pData);
+        STDMETHOD(GetTexture)(BSTR pName, IVoodooTexture ** ppTexture);
+        STDMETHOD(RemoveTexture)(BSTR pName);
+        STDMETHOD(GetStageTexture)(TextureType Stage, IVoodooTexture ** ppTexture);
+        STDMETHOD(SetStageTexture)(TextureType Stage, IVoodooTexture * pTexture);
 
     private:
         /**
@@ -269,13 +109,15 @@ namespace VoodooShader
         );
 
     private:
+        UINT mRefrs;
+
         /**
          * Base path this core was created with.
          */
-        String mGlobalRoot;
-        String mLocalRoot;
-        String mRunRoot;
-        String mTarget;
+        CComBSTR mGlobalRoot;
+        CComBSTR mLocalRoot;
+        CComBSTR mRunRoot;
+        CComBSTR mTarget;
 
         /**
          * Config file (actually a <code>pugi::xml_document *</code>, stored as void).
@@ -290,59 +132,31 @@ namespace VoodooShader
         /**
          * The currently bound (active) IAdapter implementation.
          */
-        IAdapterRef mAdapter;
+        IVoodooAdapter * mAdapter;
 
         /**
          * The current ILogger implementation.
          */
-        ILoggerRef mLogger;
+        IVoodooLogger * mLogger;
 
         /**
          * The current IHookManager implementation.
          */
-        IHookManagerRef mHooker;
+        IVoodooHookSystem * mHookSystem;
 
         /**
          * The current IFileSystem implementation.
          */
-        IFileSystemRef mFileSystem;
-
-        /**
-         * The current module manager.
-         */
-        ModuleManagerRef mModManager;
+        IVoodooFileSystem * mFileSystem;
 
         /**
          * The current variable parser.
          */
-        ParserRef mParser;
+        IVoodooParser * mParser;
 
-        /**
-         * Collection of all shaders created by this core, by name with
-         * shared pointers cached.
-         */
-        ShaderMap mShaders;
-
-        /**
-         * Collection of all usable textures.
-         */
-        TextureMap mTextures;
-
-        /**
-         * Collection of all virtual parameters created by this core and
-         * used by the Cg context.
-         */
-        ParameterMap mParameters;
-
-        /**
-         * Default pass target texture for shader linker.
-         */
-        TextureRef mLastPass;
-
-        /**
-         * Default technique target for shader linker.
-         */
-        TextureRef mLastShader;
+        std::map<std::string, IVoodooParameter*> mParameters;
+        std::map<std::string, IVoodooTexture*> mTextures;
+        std::map<TextureType, IVoodooTexture*> mStageTextures;
     };
     /**
      * @}
