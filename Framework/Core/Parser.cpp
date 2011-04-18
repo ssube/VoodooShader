@@ -18,95 +18,76 @@ namespace VoodooShader
         mVariables.clear();
     }
 
-    String Parser::ToLower(_In_ String input)
+    HRESULT Parser::AddVariable(BSTR pName, BSTR pValue,BOOL System)
     {
-        String ret = input;
-        std::transform(ret.begin(), ret.end(), ret.begin(), ::tolower);
-        return ret;
-    }
-
-    String Parser::ToUpper(_In_ String input)
-    {
-        String ret = input;
-        std::transform(ret.begin(), ret.end(), ret.begin(), ::toupper);
-        return ret;
-    }
-
-    void Parser::AddVariable(_In_ String name, _In_ String value, _In_ bool system)
-    {
-        ILoggerRef logger = mCore->GetLogger();
+        /*ILoggerRef logger = mCore->GetLogger();
         if ( logger.get() )
         {
             logger->Log(LL_Debug, VOODOO_CORE_NAME, "Adding variable \"%s\" with value \"%s\".", name.c_str(), value.c_str());
-        }
+        }*/
 
-        String finalname = this->ParseString(name, PF_VarName);
+        CComBSTR name(pName);
+        this->Parse(name, PF_VarName);
 
-        if ( !system )
+        if ( system == TRUE )
         {
-            mVariables[finalname] = value;
-        } else {
-            Dictionary::iterator varIter = mSysVariables.find(finalname);
-            if ( varIter == mSysVariables.end() )
+            if ( mSysVariables.PLookup(name) == NULL )
             {
-                mSysVariables[finalname] = value;
+                mSysVariables.SetAt(name, pValue);
             } else {
-                if ( logger.get() )
+                /*if ( logger.get() )
                 {
                     logger->Log(LL_Warning, VOODOO_CORE_NAME, "Unable to add duplicate system variable \"%s\".", finalname.c_str());
-                }
+                }*/
             }
+        } else {
+            mVariables.SetAt(name, value);
         }
+        return S_OK;
     }
 
-    void Parser::RemoveVariable(_In_ String name)
+    HRESULT Parser::RemoveVariable(BSTR pName)
     {
-        ILoggerRef logger = mCore->GetLogger();
+        /*ILoggerRef logger = mCore->GetLogger();
         if ( logger.get() )
         {
             mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
-        }
+        }*/
 
-        String finalname = this->ParseString(name, PF_VarName);
-
-        Dictionary::iterator varIter = mVariables.find(finalname);
-
-        if ( varIter != mVariables.end() )
-        {
-            mVariables.erase(varIter);
-        }
+        CComBSTR name(pName);
+        this->Parse(name, PF_VarName);
+        mVariables.RemoveKey(name);
+        return S_OK;
     }
 
-    String Parser::ParseString(_In_ String input, _In_ ParseFlags flags)
+    HRESULT Parser::Parse(LPBSTR pString, ParseFlags Flags)
     {
         Dictionary parseState;
 
-        return this->ParseStringRaw(input, flags, 0, parseState);
+        return this->ParseRaw(pString, Flags, 0, parseState);
     }
 
-    String Parser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state)
+    HRESULT Parser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth, Dictionary & State)
     {
-        using namespace std;
+        //ILoggerRef logger = mCore->GetLogger();
+        //if ( logger.get() )
+        //{
+            //mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
+        //}
 
-        ILoggerRef logger = mCore->GetLogger();
-        if ( logger.get() )
+        if ( Depth > Parser::VarMaxDepth || SysStringLen(pString) < 3 )
         {
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
-        }
-
-        if ( depth > Parser::VarMaxDepth || input.length() < 3 )
-        {
-            return input;
+            return S_OK;
         }
 
         // Parse out any variables in the filename, first
-        String iteration = input;
+        CStringW iteration(pString);
 
         // Variable parsing loop
         bool loop = true;
         while ( loop )
         {
-            const size_t itlen = iteration.length();
+            const UINT itlen = iteration.GetLength();
             if ( itlen < 3 )
             {
                 // Stop parsing if the string is too small to contain variables 
@@ -114,122 +95,93 @@ namespace VoodooShader
                 break;
             }
 
-            size_t endpos = iteration.find_first_of(Parser::VarDelimEnd);
-            if ( endpos == string::npos )
+            int endpos = iteration.Find(Parser::VarDelimEnd);
+            if ( endpos == -1 )
             {
                 // Stop parsing if no closing delimiter is found
                 break;
             }
             
-            size_t startpos = iteration.find_last_of(Parser::VarDelimStart, endpos);
-            if ( startpos == string::npos || 
-                 startpos == 0 || 
-                 iteration[startpos-1] != Parser::VarDelimPre 
-               )
+            CStringW varname = iteration.Left(endpos);
+            int startpos = varname.ReverseFind(Parser::VarDelimStart);
+            if ( startpos < 1 || varname[startpos-1] != Parser::VarDelimPre )
             {
                 // Stop parsing if no opening sequence is found, or there is no room for one
                 break;
             }
 
-            size_t varnamelen = endpos - startpos - 1;
-            if ( varnamelen == 0 )
-            {
-                // Erase the variable sequence if it is the empty variable and restart the loop
-                stringstream output;
-                output << iteration.substr(0, startpos - 1);
-                if ( endpos < itlen )
-                {
-                    output << iteration.substr(endpos + 1);
-                }
-                iteration = output.str();
-                continue;
-            }
-
-            // We may actually have a variable here. Get the name
-            String varname = iteration.substr(startpos + 1, varnamelen);
+            varname = varname.Mid(startpos);
 
             // Check for state variables
-            size_t statepos = varname.find(':');
-            if ( statepos != string::npos )
+            int statepos = varname.Find(':');
+            if ( statepos > 0 )
             {
                 // State set, handle
-                String newvalue = varname.substr(statepos + 1);
-                newvalue = this->ParseStringRaw(newvalue, flags, ++depth, state);
+                String newvalue = varname.Mid(statepos + 1);
+                this->ParseRaw(newvalue, Flags, ++Depth, State);
 
-                varname = varname.substr(0, statepos);
-                varname = this->ParseStringRaw(varname, PF_VarName, ++depth, state);
+                varname = varname.Left(statepos);
+                this->ParseRaw(varname, PF_VarName, ++Depth, State);
 
-                state[varname] = newvalue;
-
-                stringstream output;
-                output << iteration.substr(0, startpos - 1) << iteration.substr(endpos + 1);
-                iteration = output.str();
-
-                continue;
+                state.SetAt(varname, newvalue);
+                varname.Empty();
             } 
+
+            if ( varname.Length() < 1 )
+            {
+                // Erase the variable sequence if it is an empty variable and restart the loop
+                CStringW output = iteration.Left(startpos - 1);
+                output += iteration.Right(endpos);
+
+                iteration = output;
+                continue;
+            }
 
             // Handle variable flags
             bool supress = false;
             bool parse = true;
             // The length of varname is > 0, guaranteed in line 134
-            if ( varname[0] == '?' )
+            if ( varname[0] = L'$' )
             {
+                varname = varname.Mid(1);        
+            } else if ( varname[0] == L'?' ) {
                 supress = true;
-                varname = varname.substr(1);
-            } else if ( varname[0] == '!' ) {
+                varname = varname.Mid(1);
+            } else if ( varname[0] == L'!' ) {
                 parse = false;
-                varname = varname.substr(1);
+                varname = varname.Mid(1);
             }
 
             // Properly format the variable name (recursive call to simplify future syntax exts)
-            varname = this->ParseStringRaw(varname, PF_VarName, ++depth, state);
+            varname = this->ParseRaw(varname, PF_VarName, ++Depth, State);
 
             // Lookup and replace the variable
             bool foundvar = true;
-            String varvalue;
+            CStringW varvalue;
 
-            Dictionary::iterator variter = mSysVariables.find(varname);
-            if ( variter != mSysVariables.end() )
+            
+            if ( 
+                mSysVariables.Lookup(varname, &varvalue) == 0 &&
+                State.Lookup(varname, &varvalue) == 0 &&
+                mVariables.Lookup(varname, &varvalue) == 0 &&
+                varvalue.GetEnvironmentVariable(varname) == 0 &&
+                !supress
+               )
             {
-                varvalue = variter->second;
-            } else {
-                variter = state.find(varname);
-                if ( variter != state.end() )
-                {
-                    varvalue = variter->second;
-                } else {
-                    variter = mVariables.find(varname);
-                    if ( variter != mVariables.end() )
-                    {
-                        varvalue = variter->second;
-                    } else {
-                        // Unrecognized variable, try env
-                        size_t reqSize = 0;
-                        getenv_s(&reqSize, NULL, 0, varname.c_str());
-                        if ( reqSize != 0 )
-                        {
-                            char * buffer = new char[reqSize];
-                            getenv_s(&reqSize, buffer, reqSize, varname.c_str());
-                            varvalue = buffer;
-                            delete[] buffer;
-                        } else {
-                            foundvar = false;
-                        }
-                    }
-                }
+                // Not a stored variable
+                varvalue = L"badvar:" + varname;
             }
 
-            stringstream output;
-            output << iteration.substr(0, startpos - 1);
-            if ( parse && varvalue.length() > 0 )
+            CStringW output = iteration.Left(startpos - 1);
+            if ( parse && varvalue.GetLength() > 0 )
             {
-                output << this->ParseStringRaw(varvalue, flags, ++depth, state);
-            } else if ( !foundvar && !supress ) {
-                output << "--badvar:" << varname << "--";
+                CComBSTR varinternal(varvalue);
+                this->ParseRaw(varinternal, Flags, ++Depth, State);
+                output += CStringW(varinternal);
             }
-            output << iteration.substr(endpos + 1);
+            output += iteration.Right(endpos);
 
-            iteration = output.str();
+            iteration = output;
         }
 
         // Handle slash replacement
@@ -237,49 +189,25 @@ namespace VoodooShader
         {
             return iteration;
         } else if ( flags == PF_VarName ) {
-            return this->ToLower(iteration);
+            iteration.ToLower();
+            return iteration;
         } 
         
         if ( flags & PF_SlashFlags )
         {
             bool singleslash = ( flags & PF_SingleSlash );
-            bool prevslash = false;
-            bool slashrewrite = false;
-            char slashchar = ' ';
             if ( flags & PF_SlashOnly )
             {
-                slashrewrite = true;
-                slashchar = '/';
-            } else if ( flags & PF_BackslashOnly ) {
-                slashrewrite = true;
-                slashchar = '\\';
-            }
-
-            stringstream output;
-            size_t total = iteration.length();
-            size_t cur = 0;
-            while ( cur < total )
-            {
-                char inchar = iteration[cur];
-                ++cur;
-
-                if ( inchar == '/' || inchar == '\\' )
+                iteration.Replace(L'\\', L'/');
+                if ( singleslash )
                 {
-                    if ( slashrewrite )
-                    {
-                        inchar = slashchar;
-                    }
-
-                    if ( singleslash && prevslash )
-                    {
-                        continue;
-                    }
-
-                    prevslash = true;
-                    output << inchar;
-                } else {
-                    prevslash = false;
-                    output << inchar;
+                    while ( iteration.Replace(L"//", L"/") > 0 ) { }
+                }
+            } else if ( flags & PF_BackslashOnly ) {
+                iteration.Replace(L'/', L'\\');
+                if ( singleslash )
+                {
+                    while ( iteration.Replace(L"\\\\", L"\\") > 0 ) { }
                 }
             }
 
@@ -290,17 +218,19 @@ namespace VoodooShader
         {
             if ( flags & PF_Lowercase )
             {
-                iteration = this->ToLower(iteration);
+                iteration.ToLower();
             } else if ( flags & PF_Uppercase ) {
-                iteration = this->ToUpper(iteration);
+                iteration.ToUpper();
             }
         }
 
-        if ( logger.get() )
-        {
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
-        }
+        //if ( logger.get() )
+        //{
+            //mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
+        //}
 
-        return iteration;
+        iteration.SetSysString(pString);
+
+        return S_OK;
     }
 }

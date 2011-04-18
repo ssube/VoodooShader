@@ -24,12 +24,15 @@
 
 #include "Meta.hpp"
 
+#include <afxtempl.h>
+
 namespace VoodooShader
 {
     /**
      * @addtogroup VoodooCore
      * @{
      */
+    typedef CMap<CComBSTR, CComBSTR> Dictionary;
 
     /**
      * Provides extensive variable handling and string parsing. 
@@ -38,7 +41,7 @@ namespace VoodooShader
      * location.
      */
     [
-        coclass,
+        coclass, noncreatable,
         progid("VoodooCore.Parser.1"), vi_progid("VoodooCore.Parser"),
         uuid("4261CE17-F55D-4BBE-80AD-439AAB157E3C")
     ]
@@ -48,9 +51,6 @@ namespace VoodooShader
     public:
         Parser(_In_ Core * core);
         ~Parser();
-
-        String ToLower(_In_ String input);
-        String ToUpper(_In_ String input);
 
         /**
          * Adds a variable to the internal dictionary.
@@ -62,7 +62,7 @@ namespace VoodooShader
          * @param system Marks the variable as a system variable. These cannot be changed or
          *    removed.
          */
-        void AddVariable(_In_ String name, _In_ String value, _In_ bool system = false);
+        STDMETHOD(AddVariable)(BSTR pName, BSTR pValue, BOOL System);
 
         /**
          * Removes a variable from the internal dictionary.
@@ -70,7 +70,7 @@ namespace VoodooShader
          * @param name The variable name (may contain variables, they will be resolved
          *    immediately).
          */
-        void RemoveVariable(_In_ String name);
+        STDMETHOD(RemoveVariable)(BSTR pName);
 
         /**
          * Parses a string, replacing any variables with their values. Variables are resolved when
@@ -78,15 +78,15 @@ namespace VoodooShader
          * 
          * @sa @ref varsyntax for details on how variables work.
          */
-        String ParseString(_In_ String input, _In_ ParseFlags flags = PF_None);
+        STDMETHOD(Parse)(LPBSTR pString, ParseFlags Flags);
 
-        static const int VarMaxDepth = 8;
-        static const char VarDelimStart = '(';
-        static const char VarDelimEnd   = ')';
-        static const char VarDelimPre   = '$';
+        static const INT VarMaxDepth = 8;
+        static const WCHAR VarDelimStart = '(';
+        static const WCHAR VarDelimEnd   = ')';
+        static const WCHAR VarDelimPre   = '$';
 
     private:
-        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state);
+        STDMETHOD(ParseRaw)(LPBSTR input, ParseFlags Flags, INT Depth, Dictionary & State);
 
         Core * mCore;
         Dictionary mVariables;
