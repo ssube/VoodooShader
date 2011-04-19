@@ -183,8 +183,8 @@ namespace VoodooShader
         CGeffect mCgShader;
 
         IVoodooTechnique * mDefaultTechnique;
-        std::vector<IVoodooTechnique*> mTechniques;
-        std::vector<IVoodooParameter*> mParameters;
+        CArray<CComPtr<IVoodooTechnique>> mTechniques;
+        CArray<CComPtr<IVoodooParameter>> mParameters;
     };
     /**
      * @}

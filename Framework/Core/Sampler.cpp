@@ -2,7 +2,6 @@
 
 namespace VoodooShader
 {
-
     HRESULT Sampler::QueryInterface(REFIID iid, void ** pp) throw()
     {
         if ( pp == NULL )
@@ -81,9 +80,10 @@ namespace VoodooShader
         return S_OK;
     }
 
-    HRESULT Sampler::AttachParameter(IVoodooParameter * pParameter)
+    HRESULT Sampler::AttachParameter(IVoodooSampler * pParameter)
     {
         if ( m_Virtual == FALSE ) return E_NOTVIRTUAL;
+        if ( pParameter == NULL ) return E_INVALIDARG;
 
         CGparameter other = NULL;
         pParameter->GetCgParameter(&other);

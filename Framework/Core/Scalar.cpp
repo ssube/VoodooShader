@@ -1,250 +1,129 @@
-#include "Parameter.hpp"
-
-#include "Converter.hpp"
-#include "Core.hpp"
-#include "Exception.hpp"
-#include "ILogger.hpp"
-#include "Shader.hpp"
+#include "Scalar.hpp"
 
 namespace VoodooShader
 {
-    Parameter::Parameter(_In_ Core * core, _In_ String name, _In_ ParameterType type)
-        : mType(type), mParent(NULL), mVirtual(true), mCore(core), mName(name)
-    { 
-        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Creating a virtual parameter (%s, core %p) of type %s.", name.c_str(), core, Converter::ToString(type));
-        
-        CGcontext context = mCore->GetCgContext();
-
-        if ( !context || !cgIsContext(context) )
+    HRESULT Scalar::QueryInterface(REFIID iid, void ** pp) throw()
+    {
+        if ( pp == NULL )
         {
-            throw std::exception("Unable to create parameter (core has no context).");
-        }
-
-        mParam = cgCreateParameter
-        (
-            context, 
-            Converter::ToCGType(mType)
-        );
-
-        switch ( mType )
-        {
-        case PT_Float1:
-        case PT_Float2:
-        case PT_Float3:
-        case PT_Float4:
-        case PT_Matrix:
-            memset(this->mValueFloat, 0, sizeof(float)*16);
-            break;
-        case PT_Sampler1D:
-        case PT_Sampler2D:
-        case PT_Sampler3D:
-            this->mValueTexture = TextureRef();
-            break;
-        case PT_Unknown:
-        default:
-            throw std::exception("Invalid parameter type.");
-            break;
+            return E_POINTER;
+        } else if ( iid == IID_IUnknown || iid == IID_VoodooObject || iid == IID_VoodooParameter || iid == IID_VoodooScalar ) {
+            *pp = this;
+            return S_OK;
+        } else {
+            *pp = NULL;
+            return E_NOINTERFACE;
         }
     }
 
-    Parameter::Parameter(_In_ Shader * parent, _In_ CGparameter param)
-        : mParent(parent), mParam(param), mVirtual(false), mCore(parent->GetCore())
+    ULONG Scalar::AddRef()
     {
-        mType = Converter::ToParameterType(cgGetParameterType(param));
-        mName = cgGetParameterName(param);
+        return (++m_Refrs);
+    }
 
-        switch ( this->mType )
+    ULONG Scalar::Release()
+    {
+        --m_Refrs;
+        if ( m_Refrs == 0 )
         {
-        case PT_Float1:
-        case PT_Float2:
-        case PT_Float3:
-        case PT_Float4:
-        case PT_Matrix:
-            memset(this->mValueFloat, 0, sizeof(float)*16);
-            break;
-        case PT_Sampler1D:
-        case PT_Sampler2D:
-        case PT_Sampler3D:
-            this->mValueTexture = TextureRef();
-            break;
-        case PT_Unknown:
-        default:
-            Throw(VOODOO_CORE_NAME, "Invalid parameter type.", mCore);
-            break;
+            delete this;
+            return 0;
+        } else {
+            return m_Refrs;
         }
     }
 
-    Parameter::~Parameter()
+    HRESULT Scalar::GetName(LPBSTR pName)
     {
-        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying parameter %s.", mName.c_str());
-
-        if ( mVirtual && cgIsParameter(mParam) )
+        if ( pName == NULL )
         {
-            cgDestroyParameter(mParam);
-        }
-    }
-
-    String Parameter::GetName()
-    {
-        String name;
-
-        if ( mParent )
-        {
-            name = this->mParent->GetName();
+            return E_INVALIDARG;
         }
 
-        name += ":" + mName;
-
-        return name;
+        return m_Name.CopyTo(pName);
     }
 
-    CGparameter Parameter::GetCgParameter()
+    HRESULT Scalar::GetCore(IVoodooCore ** ppCore)
     {
-        return this->mParam;
-    }
-
-    void Parameter::Attach(ParameterRef param)
-    {
-        if ( !this->mVirtual )
+        if ( ppCore == NULL )
         {
-            Throw(VOODOO_CORE_NAME, "Cannot attach to a non-virtual parameter.", mCore);
+            return E_INVALIDARG;
         }
 
-        cgConnectParameter(param->GetCgParameter(), this->mParam);
+        *ppCore = m_Core;
+        return S_OK;
     }
 
-    ParameterType Parameter::GetType(void)
+    UINT Scalar::get_IsVirtual()
     {
-        return this->mType;
+        return m_Virtual;
     }
 
-    void Parameter::Set(_In_ TextureRef newTex)
+    HRESULT Scalar::GetShader(IVoodooShader ** ppShader)
     {
-        this->mValueTexture = newTex;
-    }
-
-    void Parameter::Set(_In_ float newX)
-    {
-        this->mValueFloat[0] = newX;
-    }
-
-    void Parameter::Set(_In_ float newX, _In_ float newY)
-    {
-        this->mValueFloat[0] = newX;
-        this->mValueFloat[1] = newY;
-    }
-
-    void Parameter::Set(_In_ float newX, _In_ float newY, _In_ float newZ)
-    {
-        this->mValueFloat[0] = newX;
-        this->mValueFloat[1] = newY;
-        this->mValueFloat[2] = newZ;
-    }
-
-    void Parameter::Set(_In_ float newX, _In_ float newY, _In_ float newZ, _In_ float newW)
-    {
-        this->mValueFloat[0] = newX;
-        this->mValueFloat[1] = newY;
-        this->mValueFloat[2] = newZ;
-        this->mValueFloat[3] = newW;
-    }
-
-    void Parameter::Get(_Out_ TextureRef & param)
-    {
-        param = this->mValueTexture;
-    }
-
-    void Parameter::Get(_Out_ float & paramX)
-    {
-        paramX = this->mValueFloat[0];
-    }
-
-    void Parameter::Get(_Out_ float & paramX, _Out_ float & paramY)
-    {
-        paramX = this->mValueFloat[0];
-        paramY = this->mValueFloat[1];
-    }
-
-    void Parameter::Get(_Out_ float & paramX, _Out_ float & paramY, _Out_ float & paramZ)
-    {
-        paramX = this->mValueFloat[0];
-        paramY = this->mValueFloat[1];
-        paramZ = this->mValueFloat[2];
-    }
-
-    void Parameter::Get
-    (
-        _Out_ float & paramX, _Out_ float & paramY, _Out_ float & paramZ, _Out_ float & paramW
-    )
-    {
-        paramX = this->mValueFloat[0];
-        paramY = this->mValueFloat[1];
-        paramZ = this->mValueFloat[2];
-        paramW = this->mValueFloat[3];
-    }
-
-    TextureRef Parameter::GetTexture()
-    {
-        return mValueTexture;
-    };
-
-    _Ret_count_c_(16)
-    float * Parameter::GetFloat()
-    {
-        return mValueFloat;
-    };
-
-    void Parameter::ForceUpdate()
-    {
-        if ( mCore )
+        if ( m_Virtual == TRUE )
         {
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Force updating parameter %s.", this->GetName().c_str());
+            return E_VIRTUAL;
+        } else if ( ppShader == NULL ) {
+            return E_INVALIDARG;
         }
 
-        switch ( mType )
-        {
-        case PT_Float1:
-            cgSetParameter1fv(mParam, mValueFloat);
-            break;
-        case PT_Float2:
-            cgSetParameter2fv(mParam, mValueFloat);
-            break;
-        case PT_Float3:
-            cgSetParameter3fv(mParam, mValueFloat);
-            break;
-        case PT_Float4:
-            cgSetParameter4fv(mParam, mValueFloat);
-            break;
-        case PT_Matrix:
-            cgSetMatrixParameterfc(mParam, mValueFloat);
-            break;
-        case PT_Sampler1D:
-        case PT_Sampler2D:
-        case PT_Sampler3D:
-            if ( mCore )
-            {
-                mCore->GetLogger()->Log
-                (
-                    LL_Warning, 
-                    VOODOO_CORE_NAME, 
-                    "Unable to force update sampler type parameter (%s).", 
-                    this->GetName().c_str()
-                );
-            }
-            break;
-        case PT_Unknown:
-        default:
-            if ( mCore )
-            {
-                mCore->GetLogger()->Log
-                (
-                    LL_Warning,
-                    VOODOO_CORE_NAME,
-                    "Cannot force update parameter %s with unknown type.", 
-                    this->GetName().c_str()
-                );
-            }
-            break;
-        }
+        *ppShader = m_Shader;
+        return S_OK;
+    }
+
+    HRESULT Scalar::GetParameterType(ParameterType * pType)
+    {
+        if ( pType == NULL ) return E_INVALIDARG;
+
+        *pType = m_Type;
+        return S_OK;
+    }
+
+    HRESULT Scalar::AttachParameter(IVoodooScalar * pParameter)
+    {
+        if ( m_Virtual == FALSE ) return E_NOTVIRTUAL;
+        if ( pParameter == NULL ) return E_INVALIDARG;
+
+        CGparameter other = NULL;
+        pParameter->GetCgParameter(&other);
+
+        cgConnectParameter(m_Parameter, other);
+
+        return S_OK;
+    }
+
+    HRESULT Scalar::GetCgParameter(void ** ppCgParameter)
+    {
+        if ( ppCgParameter == NULL ) return E_INVALIDARG;
+
+        *ppCgParameter = m_Parameter;
+        return S_OK;
+    }
+
+    HRESULT Scalar::put_Value(SAFEARRAY * pData)
+    {
+        if ( pData == NULL ) return E_INVALIDARG;
+
+        m_Value.CopyFrom(pData);
+        return S_OK;
+    }
+
+    HRESULT Scalar::get_Value(SAFEARRAY * ppData)
+    {
+        if ( ppTexture == NULL ) return E_INVALIDARG;
+
+        m_Value.CopyTo(ppData);
+        return S_OK;
+    }
+
+    UINT Scalar::get_Components()
+    {
+        if ( m_Type == PT_Float1 ) return 1;
+        if ( m_Type == PT_Float2 ) return 2;
+        if ( m_Type == PT_Float3 ) return 3;
+        if ( m_Type == PT_Float4 ) return 4;
+        if ( m_Type == PT_Matrix ) return 16;
+        return 0;
     }
 }

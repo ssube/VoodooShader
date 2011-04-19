@@ -728,7 +728,7 @@ namespace VoodooShader
         [propget, id(6)] STDMETHOD_(BOOL, IsVirtual)() PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
         STDMETHOD(GetParameterType)([out, retval] ParameterType * pType) PURE;
-        STDMETHOD(AttachParameter)([in] IVoodooParameter * pParameter) PURE;
+        STDMETHOD(AttachParameter)([in] IVoodooSampler * pParameter) PURE;
         STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
 
         // IVoodooSampler
@@ -760,7 +760,7 @@ namespace VoodooShader
         [propget, id(6)] STDMETHOD_(BOOL, IsVirtual)() PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
         STDMETHOD(GetParameterType)([out, retval] ParameterType * pType) PURE;
-        STDMETHOD(AttachParameter)([in] IVoodooParameter * pParameter) PURE;
+        STDMETHOD(AttachParameter)([in] IVoodooScalar * pParameter) PURE;
         STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
 
         // IVoodooSampler

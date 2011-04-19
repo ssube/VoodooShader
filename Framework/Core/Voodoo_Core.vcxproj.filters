@@ -7,9 +7,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Parameter.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -31,6 +28,9 @@
     <ClCompile Include="Sampler.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Scalar.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Docs_Code.hpp">
@@ -46,9 +46,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Core.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Parameter.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Shader.hpp">
@@ -79,6 +76,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Sampler.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Scalar.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

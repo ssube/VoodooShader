@@ -239,7 +239,7 @@
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Parameter.cpp" />
+    <ClCompile Include="Scalar.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pass.cpp" />
     <ClCompile Include="Sampler.cpp" />
@@ -254,7 +254,7 @@
     <ClInclude Include="Docs_Graphics.hpp" />
     <ClInclude Include="Docs_License.hpp" />
     <ClInclude Include="Common.hpp" />
-    <ClInclude Include="Parameter.hpp" />
+    <ClInclude Include="Scalar.hpp" />
     <ClInclude Include="Parser.hpp" />
     <ClInclude Include="Pass.hpp" />
     <ClInclude Include="resource.h" />

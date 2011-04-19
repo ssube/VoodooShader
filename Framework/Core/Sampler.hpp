@@ -112,7 +112,7 @@ namespace VoodooShader
          * @param param The parameter to bind to this one.
          * @throws Exception if called on an actual parameter.
          */
-        STDMETHOD(AttachParameter)(IVoodooParameter * pParameter);
+        STDMETHOD(AttachParameter)(IVoodooSampler * pParameter);
         /**
          * Retrieves the underlying Cg parameter object.
          * 
@@ -120,8 +120,8 @@ namespace VoodooShader
          */
         STDMETHOD(GetCgParameter)(void ** ppCgParameter);
 
-        STDMETHOD(put_Value)([in] IVoodooTexture * pTexture);
-        STDMETHOD(get_Value)([out, retval] IVoodooTexture ** ppTexture);
+        STDMETHOD(put_Texture)([in] IVoodooTexture * pTexture);
+        STDMETHOD(get_Texture)([out, retval] IVoodooTexture ** ppTexture);
 
         STDMETHOD_(UINT, get_Dimensions)();
 
