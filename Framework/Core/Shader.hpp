@@ -22,7 +22,7 @@
 #ifndef VOODOO_SHADER_HPP
 #define VOODOO_SHADER_HPP
 
-#include "Meta.hpp"
+#include "Common.hpp"
 
 namespace VoodooShader
 {
@@ -49,7 +49,7 @@ namespace VoodooShader
      *    will be valid.
      */
     [
-        coclass,
+        coclass, noncreatable
         progid("VoodooCore.Shader.1"), vi_progid("VoodooCore.Shader"), default(IVoodooShader),
         uuid("FC7FA3C9-DCB3-47FC-9645-80F4A96D2E51")
     ]

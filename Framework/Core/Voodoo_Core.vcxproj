@@ -31,18 +31,21 @@
     <CLRSupport>false</CLRSupport>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfAtl>Static</UseOfAtl>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>false</CLRSupport>
     <UseOfAtl>Static</UseOfAtl>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>false</CLRSupport>
     <UseOfAtl>Static</UseOfAtl>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -50,6 +53,7 @@
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <CharacterSet>Unicode</CharacterSet>
     <UseOfAtl>Static</UseOfAtl>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -120,6 +124,8 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CallingConvention>
       </CallingConvention>
+      <ShowIncludes>false</ShowIncludes>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);cg.lib;pugixml_d.lib;</AdditionalDependencies>
@@ -230,27 +236,29 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Common.cpp" />
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pass.cpp" />
+    <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Technique.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common.hpp" />
     <ClInclude Include="Converter.hpp" />
     <ClInclude Include="Core.hpp" />
     <ClInclude Include="Docs_Code.hpp" />
     <ClInclude Include="Docs_Graphics.hpp" />
     <ClInclude Include="Docs_License.hpp" />
-    <ClInclude Include="Meta.hpp" />
+    <ClInclude Include="Common.hpp" />
     <ClInclude Include="Parameter.hpp" />
     <ClInclude Include="Parser.hpp" />
     <ClInclude Include="Pass.hpp" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Sampler.hpp" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Technique.hpp" />
     <ClInclude Include="Texture.hpp" />

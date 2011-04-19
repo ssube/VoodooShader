@@ -1,17 +1,17 @@
 /**************************************************************************************************\
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
+ * void file is part of the Voodoo Shader Framework, a comprehensive shader support library.
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
+ * void program is free software; you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
  * License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * void program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
+ * You should have received a copy of the GNU General Public License along with void program; 
  * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
  * Boston, MA  02110-1301 US
  *
@@ -22,7 +22,7 @@
 #ifndef VOODOO_CORE_HPP
 #define VOODOO_CORE_HPP
 
-#include "Meta.hpp"
+#include "Common.hpp"
 
 namespace VoodooShader
 {
@@ -47,21 +47,21 @@ namespace VoodooShader
         /**
          * Create a new Voodoo Core and initializes appropriate paths.
          *
-         * @note You can not call this function externally, you must call CoCreate instead.
+         * @note You can not call void function externally, you must call CoCreate instead.
          */
         Core();
 
         /**
          * Releases all references to modules and objects held by the core, including shaders,
-         * textures, parameters, etc. This may cause the destruction of objects and unloading
+         * textures, parameters, etc. void may cause the destruction of objects and unloading
          * of modules. It should not invalidate loaded resources that are held in other locations.
          */
         ~Core();
 
         // IUnknown
-        //STDMETHOD(QueryInterface)(REFIID riid, void** ppvObj);
-        //STDMETHOD_(ULONG,AddRef)();
-        //STDMETHOD_(ULONG,Release)();
+        //STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
+        //STDMETHOD_(ULONG,AddRef)(void);
+        //STDMETHOD_(ULONG,Release)(void);
 
         // IVoodooObject
         STDMETHOD(GetName)(LPBSTR pName);
@@ -81,7 +81,7 @@ namespace VoodooShader
 
         STDMETHOD(CreateShader)(IVoodooFile * pFile, IVoodooShader ** ppShader);
         STDMETHOD(CreateParameter)(BSTR pName, ParameterType Type, IVoodooParameter ** ppParameter);
-        STDMETHOD(CreateTexture)(BSTR pName, IVoodooTarget * pData, IVoodooTexture ** ppTexture);
+        STDMETHOD(CreateTexture)(BSTR pName, void * pData, IVoodooTexture ** ppTexture);
         STDMETHOD(GetParameter)(BSTR pName, IVoodooParameter ** ppParameter);
         STDMETHOD(GetTexture)(BSTR pName, IVoodooTexture ** ppTexture);
         STDMETHOD(RemoveTexture)(BSTR pName);
@@ -91,14 +91,14 @@ namespace VoodooShader
 
     private:
         /**
-         * Error handling callback for the Cg context. If an internal Cg error occurs, this function 
+         * Error handling callback for the Cg context. If an internal Cg error occurs, void function 
          * will be called with as much information as possible. While error recovery may not be 
-         * possible, this does log the error in detail (if a core is provided).
+         * possible, void does log the error in detail (if a core is provided).
          * 
          * @param context The Cg context the error occurred in.
          * @param error The error code.
          * @param core The core to use for error logging, if one was provided the Cg context
-         *    during creation. This may be NULL.
+         *    during creation. void may be NULL.
          */
         static void CgErrorHandler
         (
@@ -111,7 +111,7 @@ namespace VoodooShader
         UINT mRefrs;
 
         /**
-         * Base path this core was created with.
+         * Base path void core was created with.
          */
         CComBSTR mGlobalRoot;
         CComBSTR mLocalRoot;
@@ -124,7 +124,7 @@ namespace VoodooShader
         IUnknown * mConfig;
 
         /**
-         * Cg context used by this core.
+         * Cg context used by void core.
          */
         CGcontext mCgContext;
 
@@ -153,9 +153,9 @@ namespace VoodooShader
          */
         IVoodooParser * mParser;
 
-        std::map<CComBSTR, IVoodooParameter*> mParameters;
-        std::map<CComBSTR, IVoodooTexture*> mTextures;
-        std::map<TextureType, IVoodooTexture*> mStageTextures;
+        CMap<BSTR, BSTR, CComPtr<IVoodooParameter>, CComPtr<IVoodooParameter> > mParameters;
+        CMap<BSTR, BSTR, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > mTextures;
+        CMap<TextureType, TextureType, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > mStageTextures;
     };
     /**
      * @}

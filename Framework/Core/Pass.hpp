@@ -22,7 +22,7 @@
 #ifndef VOODOO_SHADER_HPP
 #define VOODOO_SHADER_HPP
 
-#include "Meta.hpp"
+#include "Common.hpp"
 
 namespace VoodooShader
 {

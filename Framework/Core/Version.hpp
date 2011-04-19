@@ -71,24 +71,24 @@
 
 
 // Global defs ----------------------------------------------------------------
-#define VOODOO_GLOBAL_NAME              "Voodoo/Global"
-#define VOODOO_GLOBAL_PRETTYNAME        "Voodoo Shader Framework"
+#define VOODOO_GLOBAL_NAME              L"Voodoo/Global"
+#define VOODOO_GLOBAL_PRETTYNAME        L"Voodoo Shader Framework"
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     10
 #define VOODOO_GLOBAL_VERSION_PATCH     0
 #define VOODOO_GLOBAL_VERSION_REV       177
-#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   "Copyright (c) 2010-2011 by Sean Sube"
+#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   L"Copyright (c) 2010-2011 by Sean Sube"
 #define VOODOO_GLOBAL_COPYRIGHT_FULL\
-    "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&lt;br /&gt;\n"\
-    "The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\n"\
-    "This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;\n"\
-    "Please see the included license file for more details."
+    L"Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&lt;br /&gt;\n"\
+    L"The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\n"\
+    L"This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;\n"\
+    L"Please see the included license file for more details."
 //-----------------------------------------------------------------------------
 
 
 // Core defs ------------------------------------------------------------------
-#define VOODOO_CORE_NAME                "Voodoo/Core"
-#define VOODOO_CORE_PRETTYNAME          "Voodoo Shader Framework Core"
+#define VOODOO_CORE_NAME                L"Voodoo/Core"
+#define VOODOO_CORE_PRETTYNAME          L"Voodoo Shader Framework Core"
 #define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR
 #define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR
 #define VOODOO_CORE_VERSION_PATCH       VOODOO_GLOBAL_VERSION_PATCH
@@ -98,15 +98,15 @@
 
 // External defs --------------------------------------------------------------
 //  Cg
-#define VOODOO_CG_NAME                  "Cg"
-#define VOODOO_CG_PRETTYNAME            "nVidia Cg Toolkit (July 2010)"
+#define VOODOO_CG_NAME                  L"Cg"
+#define VOODOO_CG_PRETTYNAME            L"nVidia Cg Toolkit (July 2010)"
 #define VOODOO_CG_VERSION_MAJOR         3
 #define VOODOO_CG_VERSION_MINOR         0
 #define VOODOO_CG_VERSION_PATCH         0
 #define VOODOO_CG_VERSION_REV           7   
 //  VC
-#define VOODOO_VC_NAME                  "MSVC"
-#define VOODOO_VC_PRETTYNAME            "Microsoft Visual C++"
+#define VOODOO_VC_NAME                  L"MSVC"
+#define VOODOO_VC_PRETTYNAME            L"Microsoft Visual C++"
 #define VOODOO_VC_VERSION_MAJOR         _MSC_VER
 #define VOODOO_VC_VERSION_MINOR         0
 #define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER

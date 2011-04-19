@@ -22,9 +22,7 @@
 #ifndef VOODOO_PARSER_HPP
 #define VOODOO_PARSER_HPP
 
-#include "Meta.hpp"
-
-#include <afxtempl.h>
+#include "Common.hpp"
 
 namespace VoodooShader
 {
@@ -32,7 +30,7 @@ namespace VoodooShader
      * @addtogroup VoodooCore
      * @{
      */
-    typedef CMap<CComBSTR, CComBSTR> Dictionary;
+    typedef CMap<BSTR, BSTR, BSTR, BSTR> Dictionary;
 
     /**
      * Provides extensive variable handling and string parsing. 
@@ -42,7 +40,7 @@ namespace VoodooShader
      */
     [
         coclass, noncreatable,
-        progid("VoodooCore.Parser.1"), vi_progid("VoodooCore.Parser"),
+        progid("VoodooCore.Parser.1"), vi_progid("VoodooCore.Parser"), default(IVoodooParser),
         uuid("4261CE17-F55D-4BBE-80AD-439AAB157E3C")
     ]
     class Parser
@@ -51,6 +49,15 @@ namespace VoodooShader
     public:
         Parser(_In_ Core * core);
         ~Parser();
+
+        // IUnknown
+        STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
+        STDMETHOD_(ULONG,AddRef)(void);
+        STDMETHOD_(ULONG,Release)(void);
+
+        // IVoodooObject
+        STDMETHOD(GetName)(LPBSTR pName);
+        STDMETHOD(GetCore)(IVoodooCore ** ppCore);
 
         /**
          * Adds a variable to the internal dictionary.
@@ -80,14 +87,15 @@ namespace VoodooShader
          */
         STDMETHOD(Parse)(LPBSTR pString, ParseFlags Flags);
 
+    private:
+        STDMETHOD(ParseRaw)(LPBSTR input, ParseFlags Flags, INT Depth, Dictionary * State);
+
         static const INT VarMaxDepth = 8;
         static const WCHAR VarDelimStart = '(';
         static const WCHAR VarDelimEnd   = ')';
         static const WCHAR VarDelimPre   = '$';
 
-    private:
-        STDMETHOD(ParseRaw)(LPBSTR input, ParseFlags Flags, INT Depth, Dictionary & State);
-
+        UINT mRefrs;
         Core * mCore;
         Dictionary mVariables;
         Dictionary mSysVariables;
@@ -110,9 +118,9 @@ namespace VoodooShader
      * Windows.
      * 
      * @subsection varssyntaxnames Variable Names
-     * Variable names may contain any characters but ':' and may start with any character but '?'
-     * or '!'. These characters have special meaning and will be stripped or will modify the name
-     * before it is used.
+     * Variable names may contain any characters but ':' and may start with any character but '?',
+     * '!' or '$'. These characters have special meaning and will be stripped or will modify the 
+     * name before it is used.
      * 
      * Variable names may contain variables, which will be resolved using standard rules (this
      * allows for variable variable names and dynamic string creation).
@@ -125,13 +133,18 @@ namespace VoodooShader
      * The ':' character indicates state variables, described below. 
      * 
      * The '?' character indicates optional variables, which are not replaced with an error note if 
-     * they are not found. 
+     * they are not found. It is only recognized as the first character of a variable name; in all
+     * other positions it has no special meaning.
      * 
      * The '!' character indicates express variables, which do not have their value parsed (and so
      * may contain other variables without replacements). This can be useful when building variable
-     * variables to avoid recursion constraints.
+     * variables to avoid recursion constraints. It is only recognized as the first character of a 
+     * variable name; in all other positions it has no special meaning.
      * 
-     * The remaining listed characters are reserved.
+     * The '$' character indicates an escaped variable name. It may be used to escape variables
+     * with '?' or '!' as their first character (the variable <code>$($?var)</code> has a name of
+     * "<code>?var</code>", instead of being optional). It is only recognized as the first 
+     * character of a variable name; in all other positions it has no special meaning.
      * 
      * @subsection varssyntaxvalue Variable Values
      * Variable values may contain any characters and embedded variables. 

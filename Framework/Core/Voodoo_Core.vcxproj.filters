@@ -25,6 +25,12 @@
     <ClCompile Include="Pass.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Docs_Code.hpp">
@@ -40,9 +46,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Core.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Meta.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Parameter.hpp">
@@ -63,9 +66,6 @@
     <ClInclude Include="Parser.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Common.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Voodoo.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -73,6 +73,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Pass.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sampler.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

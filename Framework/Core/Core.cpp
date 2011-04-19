@@ -1,5 +1,7 @@
 #include "Core.hpp"
 
+#include "Parser.hpp"
+
 namespace VoodooShader
 {
     Core::Core()
@@ -8,7 +10,6 @@ namespace VoodooShader
 
     Core::~Core()
     {
-        // Destroy adapter (not sure what it depends on, so handle first)
         if ( this->mAdapter )
         {
             this->mAdapter->Release();
@@ -30,7 +31,7 @@ namespace VoodooShader
         }
     }
 
-    HRESULT Core::QueryInterface(REFIID iid, void ** pp)
+    HRESULT Core::QueryInterface(REFIID iid, void ** pp) throw()
     {
         if ( pp == NULL )
         {
@@ -63,12 +64,22 @@ namespace VoodooShader
 
     HRESULT Core::GetName(LPBSTR pName)
     {
+        if ( pName == NULL )
+        {
+            return E_INVALIDARG;
+        }
+
         *pName = NULL;
         return E_NONAME;
     }
 
     HRESULT Core::GetCore(IVoodooCore ** ppCore)
     {
+        if ( ppCore == NULL )
+        {
+            return E_INVALIDARG;
+        }
+
         *ppCore = this;
         return S_ISCORE;
     }
@@ -144,11 +155,12 @@ namespace VoodooShader
         CComBSTR queryNodeName = L"./@name";
 
         // Set up the internal objects
-        hr = CoCreateInstance(CLSID_Parser, NULL, NULL, IID_VoodooParser, (LPVOID*)&mParser);
+        /*hr = CoCreateInstance(CLSID_Parser, NULL, NULL, IID_VoodooParser, (LPVOID*)&mParser);
         if ( FAILED(hr) )
         {
             return E_BADCLSID;
-        }
+        }*/
+        mParser = new Parser(this);
 
         // Load variables, built-in first
         mParser->AddVariable(L"globalroot", mGlobalRoot, TRUE);
@@ -187,8 +199,8 @@ namespace VoodooShader
             {
                 VARIANT v;
                 pNode->get_nodeValue(&v);
-                BSTR str;
-                mParser->Parse(v.bstrVal, &str);
+                CComBSTR str(v.bstrVal);
+                mParser->Parse(&str, PF_None);
 
                 hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mLogger);
                 if ( FAILED(hr) || mLogger == NULL )
@@ -201,8 +213,8 @@ namespace VoodooShader
                     {
                         VARIANT fn;
                         pNode->get_nodeValue(&fn);
-                        BSTR filename;
-                        mParser->Parse(fn.bstrVal, &filename);
+                        CComBSTR filename(fn.bstrVal);
+                        mParser->Parse(&filename, PF_None);
                         mLogger->Open(filename, FALSE);
                         SysFreeString(filename);
                     }
@@ -218,8 +230,8 @@ namespace VoodooShader
             {
                 VARIANT v;
                 pNode->get_nodeValue(&v);
-                BSTR str;
-                mParser->Parse(v.bstrVal, &str);
+                CComBSTR str(v.bstrVal);
+                mParser->Parse(&str, PF_None);
 
                 hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mFileSystem);
                 if ( FAILED(hr) || mFileSystem == NULL )
@@ -237,8 +249,8 @@ namespace VoodooShader
             {
                 VARIANT v;
                 pNode->get_nodeValue(&v);
-                BSTR str;
-                mParser->Parse(v.bstrVal, &str);
+                CComBSTR str(v.bstrVal);
+                mParser->Parse(&str, PF_None);
 
                 hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mHookSystem);
                 if ( FAILED(hr) || mFileSystem == NULL )
@@ -256,8 +268,8 @@ namespace VoodooShader
             {
                 VARIANT v;
                 pNode->get_nodeValue(&v);
-                BSTR str;
-                mParser->Parse(v.bstrVal, &str);
+                CComBSTR str(v.bstrVal);
+                mParser->Parse(&str, PF_None);
 
                 hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mAdapter);
                 if ( FAILED(hr) || mFileSystem == NULL )
@@ -373,9 +385,9 @@ namespace VoodooShader
         {
             //mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Clearing object cache (null context).");
 
-            mParameters.clear();
-            mTextures.clear();
-            mStageTextures.clear();
+            mParameters.RemoveAll();
+            mTextures.RemoveAll();
+            mStageTextures.RemoveAll();
         } else {
             cgSetErrorHandler(&(Core::CgErrorHandler), this);
         }
@@ -405,9 +417,12 @@ namespace VoodooShader
     HRESULT Core::CreateParameter(BSTR pName, ParameterType Type, IVoodooParameter ** ppParameter)
     {
         UNREFERENCED_PARAMETER(Type);
+        if ( ppParameter == NULL )
+        {
+            return E_INVALIDARG;
+        }
 
-        std::map<CComBSTR, IVoodooParameter*>::iterator paramEntry = this->mParameters.find(pName);
-        if ( paramEntry != this->mParameters.end() )
+        if ( this->mParameters.PLookup(pName) != NULL )
         {
             return E_DUPNAME;
         } else {
@@ -417,7 +432,7 @@ namespace VoodooShader
                 return hr;
             }
 
-            mParameters[pName] = *ppParameter;
+            mParameters.SetAt(pName, *ppParameter);
 
             //mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Created parameter named %s with type %s, returning shared pointer to %p.", name.c_str(), Converter::ToString(type), parameter.get());
 
@@ -425,12 +440,15 @@ namespace VoodooShader
         }
     }
 
-    HRESULT Core::CreateTexture(BSTR pName, IVoodooTarget * pData, IVoodooTexture ** ppTexture)
+    HRESULT Core::CreateTexture(BSTR pName, void * pData, IVoodooTexture ** ppTexture)
     {
         UNREFERENCED_PARAMETER(pData);
+        if ( ppTexture == NULL )
+        {
+            return E_INVALIDARG;
+        }
 
-        std::map<CComBSTR, IVoodooTexture*>::iterator textureEntry = this->mTextures.find(pName);
-        if ( textureEntry != this->mTextures.end() )
+        if ( this->mTextures.PLookup(pName) != NULL )
         {
             return E_DUPNAME;
         } else {
@@ -440,7 +458,7 @@ namespace VoodooShader
                 return hr;
             }
 
-            mTextures[pName] = *ppTexture;
+            mTextures.SetAt(pName, *ppTexture);
 
             //mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s with data %p, returning shared pointer to %p.", name.c_str(), data, texture.get());
 
@@ -450,66 +468,66 @@ namespace VoodooShader
 
     HRESULT Core::GetParameter(BSTR pName, IVoodooParameter ** ppParameter)
     {
-        std::map<CComBSTR, IVoodooParameter*>::iterator paramEntry = this->mParameters.find(pName);
-        if ( paramEntry != this->mParameters.end() )
+        if ( ppParameter == NULL )
         {
-            *ppParameter = paramEntry->second;
-            return S_OK;
-        } else {
+            return E_INVALIDARG;
+        }
+
+        CComPtr<IVoodooParameter> param;
+        if ( this->mParameters.Lookup(pName, param) == 0 )
+        {
             *ppParameter = NULL;
             return E_NOT_FOUND;
+        } else {
+            ppParameter = &param;
+            return S_OK;
         }
     }
 
     HRESULT Core::GetTexture(BSTR pName, IVoodooTexture ** ppTexture)
     {
-        std::map<CComBSTR, IVoodooTexture*>::iterator paramEntry = this->mTextures.find(pName);
-        if ( paramEntry != this->mTextures.end() )
+        if ( ppTexture == NULL )
         {
-            *ppTexture = paramEntry->second;
-            return S_OK;
-        } else {
+            return E_INVALIDARG;
+        }
+
+        CComPtr<IVoodooTexture> texture;
+        if ( this->mTextures.Lookup(pName, texture) == 0 )
+        {
             *ppTexture = NULL;
             return E_NOT_FOUND;
+        } else {
+            ppTexture = &texture;
+            return S_OK;
         }
     }
 
     HRESULT Core::RemoveTexture(BSTR pName)
     {
-        std::map<CComBSTR, IVoodooTexture*>::iterator paramEntry = this->mTextures.find(pName);
-        if ( paramEntry != this->mTextures.end() )
+        if ( this->mTextures.RemoveKey(pName) == 0 )
         {
-            mTextures.erase(paramEntry);
-            return S_OK;
-        } else {
             return S_NOT_FOUND;
+        } else {
+            return S_OK;
         }
     }
 
     HRESULT Core::get_StageTexture(TextureType Stage, IVoodooTexture ** ppTexture)
     {
-        std::map<TextureType, IVoodooTexture*>::iterator paramEntry = this->mStageTextures.find(Stage);
-        if ( paramEntry != this->mStageTextures.end() )
+        CComPtr<IVoodooTexture> texture;
+        if ( this->mStageTextures.Lookup(Stage, texture) == 0 )
         {
-            *ppTexture = paramEntry->second;
-            return S_OK;
-        } else {
             *ppTexture = NULL;
             return E_NOT_FOUND;
+        } else {
+            ppTexture = &texture;
+            return S_OK;
         }
     }
 
     HRESULT Core::put_StageTexture(TextureType Stage, IVoodooTexture * pTexture)
     {
-        std::map<TextureType, IVoodooTexture*>::iterator paramEntry = this->mStageTextures.find(Stage);
-        if ( paramEntry != this->mStageTextures.end() )
-        {
-            paramEntry->second->Release();
-        }
-
-        pTexture->AddRef();
-        mStageTextures[Stage] = pTexture;
-
+        this->mStageTextures.SetAt(Stage, pTexture);
         return S_OK;
     }
         

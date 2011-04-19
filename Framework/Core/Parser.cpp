@@ -2,11 +2,6 @@
 
 #include "Core.hpp"
 
-#include "ILogger.hpp"
-
-#include <sstream>
-#include <iostream>
-
 namespace VoodooShader
 {
     Parser::Parser(_In_ Core * core)
@@ -15,7 +10,50 @@ namespace VoodooShader
 
     Parser::~Parser()
     {
-        mVariables.clear();
+        //mVariables.clear();
+    }
+
+    HRESULT Parser::QueryInterface(REFIID iid, void ** pp)
+    {
+        if ( pp == NULL )
+        {
+            return E_POINTER;
+        } else if ( iid == IID_IUnknown || iid == IID_VoodooObject || iid == IID_VoodooParser ) {
+            *pp = this;
+            return S_OK;
+        } else {
+            *pp = NULL;
+            return E_NOINTERFACE;
+        }
+    }
+
+    ULONG Parser::AddRef()
+    {
+        return (++mRefrs);
+    }
+
+    ULONG Parser::Release()
+    {
+        --mRefrs;
+        if ( mRefrs == 0 )
+        {
+            delete this;
+            return 0;
+        } else {
+            return mRefrs;
+        }
+    }
+
+    HRESULT Parser::GetName(LPBSTR pName)
+    {
+        *pName = NULL;
+        return E_NONAME;
+    }
+
+    HRESULT Parser::GetCore(IVoodooCore ** ppCore)
+    {
+        *ppCore = mCore;
+        return S_OK;
     }
 
     HRESULT Parser::AddVariable(BSTR pName, BSTR pValue,BOOL System)
@@ -27,9 +65,9 @@ namespace VoodooShader
         }*/
 
         CComBSTR name(pName);
-        this->Parse(name, PF_VarName);
+        this->Parse(&name, PF_VarName);
 
-        if ( system == TRUE )
+        if ( System == TRUE )
         {
             if ( mSysVariables.PLookup(name) == NULL )
             {
@@ -41,7 +79,7 @@ namespace VoodooShader
                 }*/
             }
         } else {
-            mVariables.SetAt(name, value);
+            mVariables.SetAt(name, pValue);
         }
         return S_OK;
     }
@@ -55,7 +93,7 @@ namespace VoodooShader
         }*/
 
         CComBSTR name(pName);
-        this->Parse(name, PF_VarName);
+        this->Parse(&name, PF_VarName);
         mVariables.RemoveKey(name);
         return S_OK;
     }
@@ -63,28 +101,25 @@ namespace VoodooShader
     HRESULT Parser::Parse(LPBSTR pString, ParseFlags Flags)
     {
         Dictionary parseState;
-
-        return this->ParseRaw(pString, Flags, 0, parseState);
+        return this->ParseRaw(pString, Flags, 0, &parseState);
     }
 
-    HRESULT Parser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth, Dictionary & State)
+    HRESULT Parser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth, Dictionary * State)
     {
         //ILoggerRef logger = mCore->GetLogger();
         //if ( logger.get() )
         //{
             //mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
         //}
-
-        if ( Depth > Parser::VarMaxDepth || SysStringLen(pString) < 3 )
+        if ( Depth > Parser::VarMaxDepth || SysStringLen(*pString) < 3 )
         {
             return S_OK;
         }
 
-        // Parse out any variables in the filename, first
-        CStringW iteration(pString);
-
         // Variable parsing loop
+        CStringW iteration(*pString);
         bool loop = true;
+
         while ( loop )
         {
             const UINT itlen = iteration.GetLength();
@@ -117,17 +152,17 @@ namespace VoodooShader
             if ( statepos > 0 )
             {
                 // State set, handle
-                String newvalue = varname.Mid(statepos + 1);
-                this->ParseRaw(newvalue, Flags, ++Depth, State);
+                CComBSTR svalue(varname.Mid(statepos + 1));
+                this->ParseRaw(&svalue, Flags, ++Depth, State);
 
-                varname = varname.Left(statepos);
-                this->ParseRaw(varname, PF_VarName, ++Depth, State);
+                CComBSTR sname(varname.Left(statepos));
+                this->ParseRaw(&sname, PF_VarName, ++Depth, State);
 
-                state.SetAt(varname, newvalue);
+                State->SetAt(sname, svalue);
                 varname.Empty();
             } 
 
-            if ( varname.Length() < 1 )
+            if ( varname.GetLength() < 1 )
             {
                 // Erase the variable sequence if it is an empty variable and restart the loop
                 CStringW output = iteration.Left(startpos - 1);
@@ -141,7 +176,7 @@ namespace VoodooShader
             bool supress = false;
             bool parse = true;
             // The length of varname is > 0, guaranteed in line 134
-            if ( varname[0] = L'$' )
+            if ( varname[0] == L'$' )
             {
                 varname = varname.Mid(1);        
             } else if ( varname[0] == L'?' ) {
@@ -153,31 +188,35 @@ namespace VoodooShader
             }
 
             // Properly format the variable name (recursive call to simplify future syntax exts)
-            varname = this->ParseRaw(varname, PF_VarName, ++Depth, State);
+            CComBSTR fname(varname);
+            this->ParseRaw(&fname, PF_VarName, ++Depth, State);
 
             // Lookup and replace the variable
-            bool foundvar = true;
-            CStringW varvalue;
+            BSTR fvalue;
 
-            
             if ( 
-                mSysVariables.Lookup(varname, &varvalue) == 0 &&
-                State.Lookup(varname, &varvalue) == 0 &&
-                mVariables.Lookup(varname, &varvalue) == 0 &&
-                varvalue.GetEnvironmentVariable(varname) == 0 &&
-                !supress
+                mSysVariables.Lookup(fname, fvalue) == 0 &&
+                State->Lookup(fname, fvalue) == 0 &&
+                mVariables.Lookup(fname, fvalue) == 0
                )
             {
                 // Not a stored variable
-                varvalue = L"badvar:" + varname;
+                CStringW var;
+                if ( var.GetEnvironmentVariable(fname) == 0 && !supress )
+                {
+                    // Not a variable
+                    var = L"badvar:";
+                    var.Append(fname);
+                }
+                var.SetSysString(&fvalue);
             }
 
+            // Put the final string together
             CStringW output = iteration.Left(startpos - 1);
-            if ( parse && varvalue.GetLength() > 0 )
+            if ( parse && SysStringLen(fvalue) > 0 )
             {
-                CComBSTR varinternal(varvalue);
-                this->ParseRaw(varinternal, Flags, ++Depth, State);
-                output += CStringW(varinternal);
+                this->ParseRaw(&fvalue, Flags, ++Depth, State);
+                output += CStringW(fvalue);
             }
             output += iteration.Right(endpos);
 
@@ -185,42 +224,41 @@ namespace VoodooShader
         }
 
         // Handle slash replacement
-        if ( flags == PF_None )
+        if ( Flags == PF_None )
         {
-            return iteration;
-        } else if ( flags == PF_VarName ) {
-            iteration.ToLower();
-            return iteration;
+            iteration.SetSysString(pString);
+            return S_OK;
+        } else if ( Flags == PF_VarName ) {
+            iteration.MakeLower();
+            iteration.SetSysString(pString);
+            return S_OK;
         } 
         
-        if ( flags & PF_SlashFlags )
+        if ( Flags & PF_SlashFlags )
         {
-            bool singleslash = ( flags & PF_SingleSlash );
-            if ( flags & PF_SlashOnly )
+            if ( Flags & PF_SlashOnly )
             {
                 iteration.Replace(L'\\', L'/');
-                if ( singleslash )
+                if ( Flags & PF_SingleSlash )
                 {
                     while ( iteration.Replace(L"//", L"/") > 0 ) { }
                 }
-            } else if ( flags & PF_BackslashOnly ) {
+            } else if ( Flags & PF_BackslashOnly ) {
                 iteration.Replace(L'/', L'\\');
-                if ( singleslash )
+                if ( Flags & PF_SingleSlash )
                 {
                     while ( iteration.Replace(L"\\\\", L"\\") > 0 ) { }
                 }
             }
-
-            iteration = output.str();
         }
 
-        if ( flags & PF_CaseFlags )
+        if ( Flags & PF_CaseFlags )
         {
-            if ( flags & PF_Lowercase )
+            if ( Flags & PF_Lowercase )
             {
-                iteration.ToLower();
-            } else if ( flags & PF_Uppercase ) {
-                iteration.ToUpper();
+                iteration.MakeLower();
+            } else if ( Flags & PF_Uppercase ) {
+                iteration.MakeUpper();
             }
         }
 
@@ -230,7 +268,6 @@ namespace VoodooShader
         //}
 
         iteration.SetSysString(pString);
-
         return S_OK;
     }
 }
