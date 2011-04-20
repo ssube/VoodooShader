@@ -19,12 +19,9 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_PARAMETER_HPP
-#define VOODOO_PARAMETER_HPP
+#pragma once
 
-#include "Meta.hpp"
-
-#include "Texture.hpp"
+#include "Common.hpp"
 
 namespace VoodooShader
 {
@@ -36,8 +33,8 @@ namespace VoodooShader
      * 
      */
     [
-        coclass,
-        progid("VoodooCore.Scalar.1"), vi_progid("VoodooCore.Scalar"), default(IVoodooScalar),
+        coclass, noncreatable,
+        vi_progid("VoodooCore.Scalar"), progid("VoodooCore.Scalar.1"), default(IVoodooScalar),
         uuid("F530DD21-9A1A-4F25-89B9-46E976ECCD64")
     ]
     class Scalar
@@ -54,9 +51,9 @@ namespace VoodooShader
          */
         Scalar
         (
-            _In_ Core * core, 
-            _In_ String name, 
-            _In_ ParameterType type
+            _In_ IVoodooCore * pCore, 
+            _In_ BSTR pName, 
+            _In_ ParameterType Type
         );
 
         /**
@@ -67,16 +64,16 @@ namespace VoodooShader
          */
         Scalar
         (
-            _In_ Shader * parent, 
-            _In_ CGparameter param
+            _In_ IVoodooShader * pShader, 
+            _In_ CGparameter pParameter
         );
 
         ~Scalar();
 
         // IUnknown
-        STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj) PURE;
-        STDMETHOD_(ULONG,AddRef)(void) PURE;
-        STDMETHOD_(ULONG,Release)(void) PURE;
+        STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
+        STDMETHOD_(ULONG,AddRef)(void);
+        STDMETHOD_(ULONG,Release)(void);
 
         // IVoodooObject
         /**
@@ -88,19 +85,19 @@ namespace VoodooShader
          * 
          * @returns The parameter's name.
          */
-        STDMETHOD(GetName)(LPBSTR pName) PURE;
+        STDMETHOD(GetName)(LPBSTR pName);
 
-        STDMETHOD(GetCore)(IVoodooCore ** ppCore) PURE;
+        STDMETHOD(GetCore)(IVoodooCore ** ppCore);
 
         // IVoodooParameter
-        [propget, id(6)] STDMETHOD_(UINT, IsVirtual)() PURE;
+        STDMETHOD_(BOOL, get_IsVirtual)();
 
-        STDMETHOD(GetShader)(IVoodooShader ** ppShader) PURE;
+        STDMETHOD(GetShader)(IVoodooShader ** ppShader);
         /**
          * Retrieves the type of this parameter. This specifies what type and how many data 
          * components are used (one texture or 1-16 floats).
          */
-        STDMETHOD(GetParameterType)(ParameterType * pType) PURE;
+        STDMETHOD(GetParameterType)(ParameterType * pType);
         /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value 
          * is changed.
@@ -111,20 +108,21 @@ namespace VoodooShader
          * @param param The parameter to bind to this one.
          * @throws Exception if called on an actual parameter.
          */
-        STDMETHOD(AttachParameter)(IVoodooScalar * pParameter) PURE;
+        STDMETHOD(AttachParameter)(IVoodooScalar * pParameter);
         /**
          * Retrieves the underlying Cg parameter object.
          * 
          * @returns The Cg parameter this object is bound to.
          */
-        STDMETHOD(GetCgParameter)(void ** ppCgParameter) PURE;
+        STDMETHOD(GetCgParameter)(void ** ppCgParameter);
 
-        STDMETHOD(Value)(SAFEARRAY * pData) PURE;
-        STDMETHOD(Value)(SAFEARRAY ** ppData) PURE;
+        STDMETHOD(put_Value)(SAFEARRAY * pData);
+        STDMETHOD(get_Value)(SAFEARRAY ** ppData);
 
-        STDMETHOD_(UINT, Components)() PURE;
+        STDMETHOD_(UINT, get_Components)();
 
     private:
+        UINT m_Refrs;
         IVoodooShader * m_Shader;
         IVoodooCore * m_Core;
         CComBSTR m_Name;
@@ -133,11 +131,9 @@ namespace VoodooShader
 
         CGparameter m_Parameter;
         ParameterType m_Type;
-        CComSafeArray m_Value;
+        CComSafeArray<float> m_Value;
     };
     /**
      * @}
      */
 }
-
-#endif /*VOODOO_PARAMETER_HPP*/

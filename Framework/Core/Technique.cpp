@@ -3,128 +3,166 @@
 namespace VoodooShader
 {
     Technique::Technique(Shader * parent, CGtechnique cgTech)
-        : mParent(parent), mTechnique(cgTech)
+        : m_Shader(parent), m_Technique(cgTech)
     {
-        this->mCore = this->mParent->GetCore();
+        m_Shader->GetCore(&m_Core);
 
         const char * techName = cgGetTechniqueName(this->mTechnique);
         if ( techName )
         {
             this->mName = techName;
         } else {
-            char nameBuffer[16];
-            sprintf_s(nameBuffer, "tech_%p", mTechnique);
-            this->mName = nameBuffer;
+            CStringW name;
+            name.Format(L"tech_%p", cgTech);
+            this->m_Name = name;
         }
     }
 
     Technique::~Technique()
     {
-        mTarget = NULL;
-        mPasses.clear();
-    }
-
-    Core * Technique::GetCore()
-    {
-        return mCore;
-    }
-
-    String Technique::GetName()
-    {
-        String name = mParent->GetName();
-        name += "::";
-        name += mName;
-        return name;
-    };
-
-    PassRef Technique::GetPass(size_t index)
-    {
-        if ( index < this->mPasses.size() )
+        if ( m_Target != NULL )
         {
-            return this->mPasses[index];
+            m_Target->Release();
+            m_Target = NULL;
+        }
+        m_Passes.RemoveAll();
+    }
+
+    HRESULT Technique::QueryInterface(REFIID iid, void ** pp)
+    {
+        if ( pp == NULL )
+        {
+            return E_POINTER;
+        } else if ( iid == IID_IUnknown || iid == IID_VoodooObject || iid == IID_VoodooTechnique ) {
+            *pp = this;
+            return S_OK;
         } else {
-            Throw(VOODOO_CORE_NAME, "Voodoo Core: Invalid pass index (> pass count).", mCore);
+            *pp = NULL;
+            return E_NOINTERFACE;
         }
     }
 
-    TextureRef Technique::GetTarget()
+    ULONG Technique::AddRef()
     {
-        return mTarget;
+        return (++m_Refrs);
     }
 
-    size_t Technique::GetPassCount()
+    ULONG Technique::Release()
     {
-        return this->mPasses.size();
+        --m_Refrs;
+        if ( m_Refrs == 0 )
+        {
+            delete this;
+            return 0;
+        } else {
+            return m_Refrs;
+        }
     }
 
-    CGtechnique Technique::GetCgTechnique()
+    HRESULT Technique::GetName(LPBSTR pName)
     {
-        return mTechnique;
+        if ( pName == NULL )
+        {
+            return E_INVALIDARG;
+        } else {
+            return m_Name.CopyTo(pName);
+        }
     }
 
-    void Technique::Link()
+    HRESULT Technique::GetCore(IVoodooCore ** ppCore)
     {
-        this->mTarget = TextureRef();
+        if ( ppCore == NULL )
+        {
+            return E_INVALIDARG;
+        } else {
+            *ppCore = m_Core;
+            return S_OK;
+        }
+    }
+
+    HRESULT Technique::GetTarget(IVoodooTexture ** ppTexture)
+    {
+        if ( ppTexture == NULL ) return E_INVALIDARG;
+
+        *ppTexture = m_Target;
+        return S_OK;
+    }
+
+    UINT Technique::get_PassCount()
+    {
+        return (UINT)m_Passes.GetSize();
+    }
+
+    HRESULT Technique::GetPass(UINT Number, IVoodooPass ** ppPass)
+    {
+        if ( ppPass == NULL ) return E_INVALIDARG;
+        if ( Number > m_Passes.GetSize() ) return E_INVALIDARG;
+
+        *ppPass = m_Passes.GetAt(Number);
+        return S_OK;
+    }
+
+    HRESULT Technique::GetCgTechnique(void ** ppTechnique)
+    {
+        if ( ppTechnique == NULL ) return E_INVALIDARG;
+
+        *ppTechnique = m_Technique;
+        return S_OK;
+    }
+
+    HRESULT Technique::Link()
+    {
+        this->m_Target = NULL;
 
         // Process the technique's target annotation
-        CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(this->mTechnique, "target");
+        CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(m_Technique, "target");
 
-        if ( cgIsAnnotation(targetAnnotation) )
+        if ( cgIsAnnotation(targetAnnotation) && cgGetAnnotationType(targetAnnotation) == CG_STRING )
         {
-            if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )
+            const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
+            CComBSTR targetbstr(targetName);
+
+            m_Core->GetTexture(targetbstr, &m_Target);
+
+            if ( m_Target == NULL )
             {
-                const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
-
-                this->mTarget = mCore->GetTexture(targetName);
-
-                if ( !this->mTarget.get() )
-                {
-                    mCore->GetLogger()->Log
-                        (
-                        LL_Warning,
-                        VOODOO_CORE_NAME,
-                        "Pass %s cannot find target %s.",
-                        this->GetName().c_str(), targetName
-                        );
-
-                    this->mTarget = mCore->GetTexture(TT_ShaderTarget);
-                }
-            } else {
-                mCore->GetLogger()->Log
-                    (
+                /*mCore->GetLogger()->Log
+                (
                     LL_Warning,
                     VOODOO_CORE_NAME,
-                    "Pass %s has annotation \"target\" of invalid type.",
-                    this->GetName().c_str()
-                    );
+                    "Pass %s cannot find target %s.",
+                    this->GetName().c_str(), targetName
+                );*/
 
-                this->mTarget = mCore->GetTexture(TT_ShaderTarget);
+                m_Core->GetTexture(TT_ShaderTarget, m_Target);
             }
         } else {
-            mCore->GetLogger()->Log
-                (
+            /*mCore->GetLogger()->Log
+            (
                 LL_Debug,
                 VOODOO_CORE_NAME,
                 "Pass %s has no target annotation.",
                 this->GetName().c_str()
-                );
+            );*/
 
-            this->mTarget = mCore->GetTexture(TT_ShaderTarget);
+            m_Core->GetTexture(TT_ShaderTarget, m_Target);
         }
 
 
-        this->mPasses.clear();
+        this->m_Passes.RemoveAll();
 
-        CGpass cPass = cgGetFirstPass(mTechnique);
+        CGpass cPass = cgGetFirstPass(m_Technique);
 
         while ( cgIsPass(cPass) )
         {
             // Insert the pass into the vector
-            PassRef pass(new Pass(this, cPass));
+            IVoodooPass * passi = NULL;
 
-            mPasses.push_back(pass);
-
+            Pass * pass = new Pass(this, cPass);
             pass->Link();
+
+            pass->QueryInterface(IID_VoodooPass, &passi);
+            m_Passes.Add(passi);
 
             cPass = cgGetNextPass(cPass);
         }

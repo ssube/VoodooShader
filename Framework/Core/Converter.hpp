@@ -22,7 +22,7 @@
 #ifndef VOODOO_CONVERTER_HPP
 #define VOODOO_CONVERTER_HPP
 
-#include "Meta.hpp"
+#include "Common.hpp"
 
 namespace VoodooShader
 {
@@ -36,7 +36,7 @@ namespace VoodooShader
      * methods to convert various enums to other types or retrieve readable 
      * names.
      */
-    class VOODOO_API Converter
+    class Converter
     {
     public:
         /**

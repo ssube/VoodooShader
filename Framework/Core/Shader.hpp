@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_SHADER_HPP
-#define VOODOO_SHADER_HPP
+#pragma once
 
 #include "Common.hpp"
 
@@ -49,8 +48,8 @@ namespace VoodooShader
      *    will be valid.
      */
     [
-        coclass, noncreatable
-        progid("VoodooCore.Shader.1"), vi_progid("VoodooCore.Shader"), default(IVoodooShader),
+        coclass, noncreatable,
+        vi_progid("VoodooCore.Shader"), progid("VoodooCore.Shader.1"), default(IVoodooShader),
         uuid("FC7FA3C9-DCB3-47FC-9645-80F4A96D2E51")
     ]
     class Shader
@@ -142,16 +141,15 @@ namespace VoodooShader
         STDMETHOD(GetCgShader)(void ** ppCgShader);
 
     private:
+        STDMETHOD(Link)();
+
         /**
          * Link a particular effect-level parameter against various core
          * elements (exact behavior depends on param type).
          *
          * @param param The parameter to link.
          */
-        void LinkParameter
-        (
-            _In_ ParameterRef param
-        );
+        STDMETHOD(LinkParameter)(IVoodooParameter * pParameter);
 
         /**
          * Links a particular effect-level sampler against a core texture.
@@ -159,10 +157,7 @@ namespace VoodooShader
          * 
          * @param param The sampler to link.
          */
-        void LinkSampler
-        (
-            _In_ ParameterRef param
-        );
+        STDMETHOD(LinkSampler)(IVoodooParameter * pSampler);
 
         /**
          * Find texture information from a parameter and create a texture
@@ -171,24 +166,19 @@ namespace VoodooShader
          * 
          * @param param The parameter to use.
          */
-        void CreateParameterTexture
-        (
-            _In_ ParameterRef param
-        );
+        STDMETHOD(CreateParameterTexture)(IVoodooParameter * pParameter);
 
-        void SetupTechniques();
+        STDMETHOD(SetupTechniques)();
 
-        IVoodooCore * mCore;
-        CComBSTR mName;
-        CGeffect mCgShader;
+        IVoodooCore * m_Core;
+        CComBSTR m_Name;
+        CGeffect m_CgShader;
 
-        IVoodooTechnique * mDefaultTechnique;
-        CArray<CComPtr<IVoodooTechnique>> mTechniques;
-        CArray<CComPtr<IVoodooParameter>> mParameters;
+        IVoodooTechnique * m_DefaultTechnique;
+        CArray<CComPtr<IVoodooTechnique>> m_Techniques;
+        CArray<CComPtr<IVoodooParameter>> m_Parameters;
     };
     /**
      * @}
      */
 }
-
-#endif /*VOODOO_SHADER_HPP*/

@@ -40,7 +40,7 @@ namespace VoodooShader
      */
     [
         coclass, noncreatable,
-        progid("VoodooCore.Parser.1"), vi_progid("VoodooCore.Parser"), default(IVoodooParser),
+        vi_progid("VoodooCore.Parser"), progid("VoodooCore.Parser.1"), default(IVoodooParser),
         uuid("4261CE17-F55D-4BBE-80AD-439AAB157E3C")
     ]
     class Parser

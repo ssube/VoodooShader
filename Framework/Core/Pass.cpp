@@ -2,141 +2,193 @@
 
 namespace VoodooShader
 {
-    Pass::Pass(Technique * parent, CGpass cgPass)
-        : mParent(parent), mPass(cgPass)
+    Pass::Pass(IVoodooTechnique * pTechnique, CGpass pPass)
+        : m_Technique(pTechnique), m_Pass(pPass)
     {
-        this->mCore = this->mParent->GetCore();
+        m_Technique->GetCore(&m_Core);
 
-        const char * passName = cgGetPassName(this->mPass);
+        const char * passName = cgGetPassName(m_Pass);
         if ( passName )
         {
-            this->mName = passName;
+            this->m_Name = passName;
         } else {
-            char nameBuffer[16];
-            _itoa_s((int)(&this->mPass), nameBuffer, 16, 16);
-
-            this->mName = "pass_";
-            this->mName += nameBuffer;
+            CStringW mname;
+            mname.Format(L"pass_%p", m_Pass);
+            m_Name = mname;
         }
     }
 
     Pass::~Pass()
     {
-        mTarget = NULL;
+        m_Target->Release();
 
-        mCore->GetAdapter()->UnloadPass(this);
+        //mCore->GetAdapter()->UnloadPass(this);
     }
 
-    String Pass::GetName()
+    HRESULT Pass::QueryInterface(REFIID iid, void ** pp)
     {
-        String name = mParent->GetName();
-        name += "::";
-        name += mName;
-        return name;
-    };
-
-    Core * Pass::GetCore()
-    {
-        return mCore;
-    }
-
-    TextureRef Pass::GetTarget()
-    {
-        return mTarget;
-    }
-
-    CGprogram Pass::GetProgram(ProgramStage stage)
-    {
-        switch ( stage )
+        if ( pp == NULL )
         {
-        case PS_Vertex:
-            return mVertexProgram;
-        case PS_Fragment:
-            return mFragmentProgram;
-        case PS_Geometry:
-            return mGeometryProgram;
-        case PS_Domain:
-        case PS_Hull:
-        case PS_Unknown:
-        default:
-            return NULL;
+            return E_POINTER;
+        } else if ( iid == IID_IUnknown || iid == IID_VoodooObject || iid == IID_VoodooPass ) {
+            *pp = this;
+            return S_OK;
+        } else {
+            *pp = NULL;
+            return E_NOINTERFACE;
         }
     }
 
-    CGpass Pass::GetCgPass()
+    ULONG Pass::AddRef()
     {
-        return mPass;
+        return (++m_Refrs);
+    }
+
+    ULONG Pass::Release()
+    {
+        --m_Refrs;
+        if ( m_Refrs == 0 )
+        {
+            delete this;
+            return 0;
+        } else {
+            return m_Refrs;
+        }
+    }
+
+    HRESULT Pass::GetName(LPBSTR pName)
+    {
+        if ( pName == NULL )
+        {
+            return E_INVALIDARG;
+        } else {
+            return m_Name.CopyTo(pName);
+        }
+    }
+
+    HRESULT Pass::GetCore(IVoodooCore ** ppCore)
+    {
+        if ( ppCore == NULL )
+        {
+            return E_INVALIDARG;
+        } else {
+            *ppCore = m_Core;
+            return S_OK;
+        }
+    }
+
+    HRESULT Pass::GetTarget(IVoodooTexture ** ppTexture)
+    {
+        if ( ppTexture == NULL ) return E_INVALIDARG;
+
+        *ppTexture = m_Target;
+        return S_OK;
+    }
+
+    HRESULT Pass::GetProgram(ProgramStage stage, void ** ppProgram)
+    {
+        if ( ppProgram == NULL ) return E_INVALIDARG;
+        
+        switch ( stage )
+        {
+        case PS_Vertex:
+            *ppProgram = m_VertexProgram;
+            return S_OK;
+        case PS_Fragment:
+            *ppProgram = m_FragmentProgram;
+            return S_OK;
+        case PS_Geometry:
+            *ppProgram = m_GeometryProgram;
+            return S_OK;
+        case PS_Domain:
+            *ppProgram = m_DomainProgram;
+            return S_OK;
+        case PS_Hull:
+            *ppProgram = m_HullProgram;
+            return S_OK;
+        case PS_Unknown:
+        default:
+            return E_INVALIDARG;
+        }
+    }
+
+    HRESULT Pass::GetCgPass(void ** ppPass)
+    {
+        if ( ppPass == NULL ) return E_INVALIDARG;
+
+        *ppPass = m_Pass;
+        return S_OK;
+    }
+
+    HRESULT Pass::GetShader(IVoodooShader ** ppShader)
+    {
+        if ( ppShader == NULL ) return E_INVALIDARG;
+
+        *ppShader = m_Shader;
+        return S_OK;
+    }
+
+    HRESULT Pass::GetTechnique(IVoodooTechnique ** ppTechnique)
+    {
+        if ( ppTechnique ) return E_INVALIDARG;
+
+        *ppTechnique = m_Technique;
+        return S_OK;
     }
 
     void Pass::Link()
     {
-        this->mVertexProgram   = cgGetPassProgram(this->mPass, CG_VERTEX_DOMAIN  );
-        this->mFragmentProgram = cgGetPassProgram(this->mPass, CG_FRAGMENT_DOMAIN);
-        this->mGeometryProgram = cgGetPassProgram(this->mPass, CG_GEOMETRY_DOMAIN);
+        m_VertexProgram   = cgGetPassProgram(m_Pass, CG_VERTEX_DOMAIN  );
+        m_FragmentProgram = cgGetPassProgram(m_Pass, CG_FRAGMENT_DOMAIN);
+        m_GeometryProgram = cgGetPassProgram(m_Pass, CG_GEOMETRY_DOMAIN);
+        m_DomainProgram   = cgGetPassProgram(m_Pass, CG_TESSELLATION_CONTROL_DOMAIN);
+        m_HullProgram     = cgGetPassProgram(m_Pass, CG_TESSELLATION_EVALUATION_DOMAIN);
 
-        this->mTarget = TextureRef();
-        CGannotation targetAnnotation = cgGetNamedPassAnnotation(this->mPass, "target");
-        if ( cgIsAnnotation(targetAnnotation) )
+        m_Target = NULL;
+
+        CGannotation targetAnnotation = cgGetNamedPassAnnotation(m_Pass, "target");
+        if ( cgIsAnnotation(targetAnnotation) && cgGetAnnotationType(targetAnnotation) == CG_STRING )
         {
-            if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )
+            const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
+            CComBSTR targetbstr(targetName);
+
+            m_Core->GetTexture(targetbstr, &m_Target);
+
+            if ( m_Target == NULL )
             {
-                const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
-
-                this->mTarget = mCore->GetTexture(targetName);
-
-                if ( !this->mTarget.get() )
-                {
-                    mCore->GetLogger()->Log
-                        (
-                        LL_Warning,
-                        VOODOO_CORE_NAME,
-                        "Pass %s cannot find target %s.", 
-                        this->GetName().c_str(), targetName
-                        );
-
-                    this->mTarget = mCore->GetTexture(TT_PassTarget);
-                }
-            } else {
-                mCore->GetLogger()->Log
-                    (
-                    LL_Warning,
-                    VOODOO_CORE_NAME,
-                    "Pass %s has annotation \"target\" of invalid type.",
-                    this->GetName().c_str()
-                    );
-
-                this->mTarget = mCore->GetTexture(TT_PassTarget);
+                m_Core->get_StageTexture(TT_PassTarget, &m_Target);
             }
         } else {
-            mCore->GetLogger()->Log
-                (
+            /*mCore->GetLogger()->Log
+            (
                 LL_Debug,
                 VOODOO_CORE_NAME,
                 "Pass %s has no target annotation.", 
                 this->GetName().c_str()
-                );
+            );*/
 
-            this->mTarget = mCore->GetTexture(TT_PassTarget);
+            m_Core->GetTexture(TT_PassTarget, &m_Target);
         }
 
         // Load the programs
-        IAdapterRef adapter = mCore->GetAdapter();
+        IVoodooAdapter * adapter = NULL;
+        m_Core->get_Adapter(&adapter);
 
-        if ( !adapter )
+        if ( adapter == NULL )
         {
-            mCore->GetLogger()->Log
-                (
+            /*mCore->GetLogger()->Log
+            (
                 LL_Warning,
                 VOODOO_CORE_NAME,
                 "No adapter found, pass %s must be explicitly loaded later.", 
                 this->GetName().c_str()
-                );
+            )*/;
         } else {
-            if ( !adapter->LoadPass(this) )
+            if ( FAILED(adapter->LoadPass(this)) )
             {
-                mCore->GetLogger()->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->GetName().c_str());
+                //mCore->GetLogger()->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->GetName().c_str());
             } else {
-                mCore->GetLogger()->Log(LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->GetName().c_str());
+                //mCore->GetLogger()->Log(LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->GetName().c_str());
             }
         }
     }

@@ -2,7 +2,29 @@
 
 namespace VoodooShader
 {
-    HRESULT Scalar::QueryInterface(REFIID iid, void ** pp) throw()
+    Scalar::Scalar( _In_ IVoodooCore * pCore, _In_ BSTR pName, _In_ ParameterType Type )
+        : m_Core(pCore), m_Shader(NULL), m_Name(pName), m_Type(Type), m_Refrs(0)
+    {
+        m_Value.Create(16);
+    }
+
+    Scalar::Scalar( _In_ IVoodooShader * pShader, CGparameter pParameter)
+        : m_Shader(pShader), m_Parameter(pParameter), m_Refrs(0)
+    {
+        m_Value.Create(16);
+        m_Shader->GetCore(&m_Core);
+        const char * name = cgGetParameterName(m_Parameter);
+        if ( name == NULL )
+        {
+            CStringW mname;
+            mname.Format(L"parameter_%p", m_Parameter);
+            m_Name = mname;
+        } else {
+            m_Name = name;
+        }
+    }
+
+    HRESULT Scalar::QueryInterface(REFIID iid, void ** pp)
     {
         if ( pp == NULL )
         {
@@ -54,7 +76,7 @@ namespace VoodooShader
         return S_OK;
     }
 
-    UINT Scalar::get_IsVirtual()
+    BOOL Scalar::get_IsVirtual()
     {
         return m_Virtual;
     }
@@ -86,7 +108,7 @@ namespace VoodooShader
         if ( pParameter == NULL ) return E_INVALIDARG;
 
         CGparameter other = NULL;
-        pParameter->GetCgParameter(&other);
+        pParameter->GetCgParameter((void**)&other);
 
         cgConnectParameter(m_Parameter, other);
 
@@ -109,9 +131,9 @@ namespace VoodooShader
         return S_OK;
     }
 
-    HRESULT Scalar::get_Value(SAFEARRAY * ppData)
+    HRESULT Scalar::get_Value(SAFEARRAY ** ppData)
     {
-        if ( ppTexture == NULL ) return E_INVALIDARG;
+        if ( ppData == NULL ) return E_INVALIDARG;
 
         m_Value.CopyTo(ppData);
         return S_OK;

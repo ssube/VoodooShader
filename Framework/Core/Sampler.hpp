@@ -19,12 +19,9 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_SAMPLER_HPP
-#define VOODOO_SAMPLER_HPP
+#pragma once
 
-#include "Meta.hpp"
-
-#include "Texture.hpp"
+#include "Common.hpp"
 
 namespace VoodooShader
 {
@@ -38,7 +35,7 @@ namespace VoodooShader
      */
     [
         coclass, noncreatable,
-        progid("VoodooCore.Sampler.1"), vi_progid("VoodooCore.Sampler"), default(IVoodooSampler),
+        vi_progid("VoodooCore.Sampler"), progid("VoodooCore.Sampler.1"), default(IVoodooSampler),
         uuid("CB669091-84B2-4B72-85A1-4128E00FA956")
     ]
     class Sampler
@@ -55,9 +52,9 @@ namespace VoodooShader
          */
         Sampler
         (
-            _In_ Core * core, 
-            _In_ String name, 
-            _In_ ParameterType type
+            _In_ IVoodooCore * pCore, 
+            _In_ BSTR pName, 
+            _In_ ParameterType Type
         );
 
         /**
@@ -68,8 +65,8 @@ namespace VoodooShader
          */
         Sampler
         (
-            _In_ Shader * parent, 
-            _In_ CGparameter param
+            _In_ IVoodooShader * pShader, 
+            _In_ CGparameter pParameter
         );
 
         ~Sampler();
@@ -120,8 +117,8 @@ namespace VoodooShader
          */
         STDMETHOD(GetCgParameter)(void ** ppCgParameter);
 
-        STDMETHOD(put_Texture)([in] IVoodooTexture * pTexture);
-        STDMETHOD(get_Texture)([out, retval] IVoodooTexture ** ppTexture);
+        STDMETHOD(put_Texture)(IVoodooTexture * pTexture);
+        STDMETHOD(get_Texture)(IVoodooTexture ** ppTexture);
 
         STDMETHOD_(UINT, get_Dimensions)();
 
@@ -141,5 +138,3 @@ namespace VoodooShader
      * @}
      */
 }
-
-#endif /*VOODOO_SAMPLER_HPP*/

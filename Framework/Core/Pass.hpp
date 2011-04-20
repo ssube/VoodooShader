@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_SHADER_HPP
-#define VOODOO_SHADER_HPP
+#pragma once
 
 #include "Common.hpp"
 
@@ -44,13 +43,19 @@ namespace VoodooShader
      * @warning Some adapters may require programs to be provided for certain
      *          stages.
      */
-    class VOODOO_API Pass
+    [
+        coclass, noncreatable,
+        vi_progid("VoodooCore.Pass"), progid("VoodooCore.Pass"), default(IVoodooPass),
+        uuid("CFF48724-61DC-4390-BB19-25F77301D739")
+    ]
+    class Pass
+        : public IVoodooPass
     {
     public:
         Pass
         (
-            _In_ Technique * parent,
-            _In_ CGpass cgPass
+            _In_ IVoodooTechnique * pTechnique,
+            _In_ CGpass pPass
         );
 
         ~Pass();
@@ -79,7 +84,7 @@ namespace VoodooShader
          *
          * @return A reference to the target texture.
          */
-        STDMETHOD(GetTarget)(IVoodooTarget ** ppTexture);
+        STDMETHOD(GetTarget)(IVoodooTexture ** ppTexture);
 
         /**
          * Retrieve a specific program stage from this pass. Each pass may have
@@ -105,23 +110,23 @@ namespace VoodooShader
         STDMETHOD(GetShader)(IVoodooShader ** ppShader);
         STDMETHOD(GetTechnique)(IVoodooTechnique ** ppTechnique);
 
-        void Link();
-
     private:
-        BSTR mName;
-        IVoodooCore * mCore;
+        STDMETHOD_(void, Link)();
 
-        IVoodooShader * mShader;
-        IVoodooTechnique * mTechnique;
+        CComBSTR m_Name;
+        IVoodooCore * m_Core;
 
-        IVoodooTarget * mTarget;
+        IVoodooShader * m_Shader;
+        IVoodooTechnique * m_Technique;
 
-        CGpass mPass;
-        CGprogram mDomainProgram;
-        CGprogram mHullProgram;
-        CGprogram mVertexProgram;
-        CGprogram mGeometryProgram;
-        CGprogram mFragmentProgram;
+        IVoodooTexture * m_Target;
+
+        CGpass m_Pass;
+        CGprogram m_DomainProgram;
+        CGprogram m_HullProgram;
+        CGprogram m_VertexProgram;
+        CGprogram m_GeometryProgram;
+        CGprogram m_FragmentProgram;
     };
     /**
      * @}

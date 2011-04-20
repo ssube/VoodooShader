@@ -85,7 +85,7 @@ namespace VoodooShader
          *
          * @return A reference to the target texture
          */
-        STDMETHOD(GetTarget)(IVoodooTarget ** ppTexture);
+        STDMETHOD(GetTarget)(IVoodooTexture ** ppTexture);
 
         // IVoodooTechnique
         /**
@@ -111,17 +111,18 @@ namespace VoodooShader
          * 
          * @return A pointer to the Cg technique.
          */
-        STDMETHOD(GetCgTechnique)(void ** ppPass);
-
-        void Link();
+        STDMETHOD(GetCgTechnique)(void ** ppTechnique);
 
     private:
-        IVoodooCore * mCore;
-        IVoodooShader * mParent;
-        BSTR mName;
-        std::vector<IVoodooPass*> mPasses;
-        IVoodooTarget * mTarget;
-        CGtechnique mTechnique;
+        STDMETHOD(Link)();
+
+        UINT m_Refrs;
+        IVoodooCore * m_Core;
+        IVoodooShader * m_Shader;
+        CComBSTR m_Name;
+        CArray<CComPtr<IVoodooPass>, CComPtr<IVoodooPass>> m_Passes;
+        IVoodooTexture * m_Target;
+        CGtechnique m_Technique;
     };
     /**
      * @}

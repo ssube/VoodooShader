@@ -2,6 +2,27 @@
 
 namespace VoodooShader
 {
+    Sampler::Sampler( _In_ IVoodooCore * pCore, _In_ BSTR pName, _In_ ParameterType Type )
+        : m_Core(pCore), m_Shader(NULL), m_Name(pName), m_Type(Type), m_Refrs(0)
+    {
+
+    }
+
+    Sampler::Sampler( _In_ IVoodooShader * pShader, CGparameter pParameter)
+        : m_Shader(pShader), m_Parameter(pParameter), m_Refrs(0)
+    {
+        m_Shader->GetCore(&m_Core);
+        const char * name = cgGetParameterName(m_Parameter);
+        if ( name == NULL )
+        {
+            CStringW mname;
+            mname.Format("parameter_%p", m_Parameter);
+            m_Name = mname;
+        } else {
+            m_Name = name;
+        }
+    }
+
     HRESULT Sampler::QueryInterface(REFIID iid, void ** pp) throw()
     {
         if ( pp == NULL )

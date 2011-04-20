@@ -29,10 +29,11 @@
 #define _ATL_NO_AUTOMATIC_NAMESPACE
 #include <atlbase.h>
 #include <atlcom.h>
-#include <atlwin.h>
-#include <atltypes.h>
 #include <atlctl.h>
 #include <atlhost.h>
+#include <atlsafe.h>
+#include <atltypes.h>
+#include <atlwin.h>
 
 using namespace ATL;
 
@@ -45,6 +46,7 @@ namespace VoodooShader
     const HRESULT E_NOCORE      = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0002);
     const HRESULT E_DUPNAME     = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0003);
     const HRESULT E_NOT_FOUND   = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0004);
+    const HRESULT E_INVALIDPOS  = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0005);
     const HRESULT E_BADCLSID    = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0100);
 
     // IVoodooCore
@@ -57,8 +59,8 @@ namespace VoodooShader
     const HRESULT E_BADLOGCLSID = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0104);
 
     // IVoodooParameter
-    conost HRESULT E_VIRTUAL     = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0011);
-    conost HRESULT E_NOTVIRTUAL  = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0012);
+    const HRESULT E_VIRTUAL     = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0011);
+    const HRESULT E_NOTVIRTUAL  = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0012);
 
     // Success
     const HRESULT S_ISCORE      = MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_ITF, 0x0002);
@@ -650,10 +652,9 @@ namespace VoodooShader
         STDMETHOD(GetCore)([out, retval] IVoodooCore ** ppCore) PURE;
 
         // IVoodooParameter
-        [propget, id(6)] STDMETHOD_(UINT, IsVirtual)() PURE;
+        [propget, id(6)] STDMETHOD_(BOOL, IsVirtual)() PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
         STDMETHOD(GetParameterType)([out, retval] ParameterType * pType) PURE;
-        STDMETHOD(AttachParameter)([in] IVoodooParameter * pParameter) PURE;
         STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
     };
 
@@ -728,14 +729,14 @@ namespace VoodooShader
         [propget, id(6)] STDMETHOD_(BOOL, IsVirtual)() PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
         STDMETHOD(GetParameterType)([out, retval] ParameterType * pType) PURE;
-        STDMETHOD(AttachParameter)([in] IVoodooSampler * pParameter) PURE;
         STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
 
         // IVoodooSampler
-        [propput, id(10)] STDMETHOD(Texture)([in] IVoodooTexture * pTexture) PURE;
-        [propget, id(10)] STDMETHOD(Texture)([out, retval] IVoodooTexture ** ppTexture) PURE;
+        STDMETHOD(AttachParameter)([in] IVoodooSampler * pParameter) PURE;
+        [propput, id(11)] STDMETHOD(Texture)([in] IVoodooTexture * pTexture) PURE;
+        [propget, id(11)] STDMETHOD(Texture)([out, retval] IVoodooTexture ** ppTexture) PURE;
 
-        [propget, id(12)] STDMETHOD_(UINT, Dimensions)() PURE;
+        [propget, id(13)] STDMETHOD_(UINT, Dimensions)() PURE;
     };
 
 
@@ -760,14 +761,14 @@ namespace VoodooShader
         [propget, id(6)] STDMETHOD_(BOOL, IsVirtual)() PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
         STDMETHOD(GetParameterType)([out, retval] ParameterType * pType) PURE;
-        STDMETHOD(AttachParameter)([in] IVoodooScalar * pParameter) PURE;
         STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
 
         // IVoodooSampler
-        [propput, id(10)] STDMETHOD(Value)([in, satype(float)] SAFEARRAY * pData) PURE;
-        [propget, id(10)] STDMETHOD(Value)([out, retval, satype(float)] SAFEARRAY ** ppData) PURE;
+        STDMETHOD(AttachParameter)([in] IVoodooScalar * pParameter) PURE;
+        [propput, id(11)] STDMETHOD(Value)([in, satype(float)] SAFEARRAY * pData) PURE;
+        [propget, id(11)] STDMETHOD(Value)([out, retval, satype(float)] SAFEARRAY ** ppData) PURE;
 
-        [propget, id(12)] STDMETHOD_(UINT, Components)() PURE;
+        [propget, id(13)] STDMETHOD_(UINT, Components)() PURE;
     };
 
     [

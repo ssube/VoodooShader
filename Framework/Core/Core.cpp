@@ -1,33 +1,35 @@
 #include "Core.hpp"
 
 #include "Parser.hpp"
+#include "Sampler.hpp"
+#include "Scalar.hpp"
 
 namespace VoodooShader
 {
     Core::Core()
-        : mAdapter(NULL), mHookSystem(NULL), mFileSystem(NULL), mLogger(NULL), mCgContext(NULL), mConfig(NULL), mRefrs(0)
+        : m_Adapter(NULL), m_HookSystem(NULL), m_FileSystem(NULL), m_Logger(NULL), m_CgContext(NULL), m_Config(NULL), m_Refrs(0)
     { }
 
     Core::~Core()
     {
-        if ( this->mAdapter )
+        if ( this->m_Adapter )
         {
-            this->mAdapter->Release();
+            this->m_Adapter->Release();
         }
 
-        if ( this->mFileSystem )
+        if ( this->m_FileSystem )
         {
-            this->mFileSystem->Release();
+            this->m_FileSystem->Release();
         }
 
-        if ( this->mHookSystem )
+        if ( this->m_HookSystem )
         {
-            this->mHookSystem->Release();
+            this->m_HookSystem->Release();
         }
 
-        if ( this->mLogger )
+        if ( this->m_Logger )
         {
-            this->mLogger->Release();
+            this->m_Logger->Release();
         }
     }
 
@@ -47,18 +49,18 @@ namespace VoodooShader
 
     ULONG Core::AddRef()
     {
-        return (++mRefrs);
+        return (++m_Refrs);
     }
 
     ULONG Core::Release()
     {
-        --mRefrs;
-        if ( mRefrs == 0 )
+        --m_Refrs;
+        if ( m_Refrs == 0 )
         {
             delete this;
             return 0;
         } else {
-            return mRefrs;
+            return m_Refrs;
         }
     }
 
@@ -88,10 +90,10 @@ namespace VoodooShader
     {
         using namespace std;
 
-        //mGlobalRoot = globalroot;
-        //mGlobalRoot += "\\";
-        //mRunRoot = runroot;
-        //mRunRoot += "\\";
+        //m_GlobalRoot = globalroot;
+        //m_GlobalRoot += "\\";
+        //m_RunRoot = runroot;
+        //m_RunRoot += "\\";
 
         // Get the local root
         TCHAR localroot[MAX_PATH];
@@ -103,25 +105,24 @@ namespace VoodooShader
         //char targetname[MAX_PATH];
         //strcpy_s(targetname, MAX_PATH, lastslash + 1);
         //_strlwr_s(targetname, strlen(targetname));
-        //mTarget = targetname;
-        //    mTarget = ( lastslash + 1 );
+        //m_Target = targetname;
+        //    m_Target = ( lastslash + 1 );
 
         //    lastslash[1] = '\0';
         //}
-        mLocalRoot = localroot;
-        //mLocalRoot += "\\";
+        m_LocalRoot = localroot;
+        //m_LocalRoot += "\\";
 
-        IXMLDOMDocument * config = NULL;
-        HRESULT hr = CoCreateInstance(__uuidof(MSXML2::DOMDocument60), NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&config));
+        HRESULT hr = CoCreateInstance(__uuidof(MSXML2::DOMDocument60), NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&m_Config));
         if ( FAILED(hr) )
         {
             return E_MSXMLERROR;
         }
 
-        config->put_async(VARIANT_FALSE);
-        config->put_validateOnParse(VARIANT_FALSE);
-        config->put_resolveExternals(VARIANT_FALSE);
-        config->put_preserveWhiteSpace(VARIANT_TRUE);
+        m_Config->put_async(VARIANT_FALSE);
+        m_Config->put_validateOnParse(VARIANT_FALSE);
+        m_Config->put_resolveExternals(VARIANT_FALSE);
+        m_Config->put_preserveWhiteSpace(VARIANT_TRUE);
 
         VARIANT_BOOL loadStatus;
         VARIANT configFileName;
@@ -129,19 +130,16 @@ namespace VoodooShader
         V_VT(&configFileName) = VT_BSTR;
         V_BSTR(&configFileName) = pConfig;
 
-        hr = config->load(configFileName, &loadStatus);
+        hr = m_Config->load(configFileName, &loadStatus);
         if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
         {
             return E_INVALIDCFG;
         }
 
-        // Store the config file, in case modules need it
-        config->QueryInterface(IID_IUnknown, (void**)&mConfig);
-
         // Start setting things up
         IXMLDOMNode * pCoreNode = NULL;
         CComBSTR coreNodeStr = L"/VoodooConfig/Core";
-        hr = config->selectSingleNode(coreNodeStr, &pCoreNode);
+        hr = m_Config->selectSingleNode(coreNodeStr, &pCoreNode);
 
         if ( FAILED(hr) || pCoreNode == NULL )
         {
@@ -155,23 +153,23 @@ namespace VoodooShader
         CComBSTR queryNodeName = L"./@name";
 
         // Set up the internal objects
-        /*hr = CoCreateInstance(CLSID_Parser, NULL, NULL, IID_VoodooParser, (LPVOID*)&mParser);
+        /*hr = CoCreateInstance(CLSID_Parser, NULL, NULL, IID_VoodooParser, (LPVOID*)&m_Parser);
         if ( FAILED(hr) )
         {
             return E_BADCLSID;
         }*/
-        mParser = new Parser(this);
+        m_Parser = new Parser(this);
 
         // Load variables, built-in first
-        mParser->AddVariable(L"globalroot", mGlobalRoot, TRUE);
-        mParser->AddVariable(L"localroot", mLocalRoot, TRUE);
-        mParser->AddVariable(L"runroot", mRunRoot, TRUE);
-        mParser->AddVariable(L"target", mTarget, TRUE);
+        m_Parser->AddVariable(L"globalroot", m_GlobalRoot, TRUE);
+        m_Parser->AddVariable(L"localroot", m_LocalRoot, TRUE);
+        m_Parser->AddVariable(L"runroot", m_RunRoot, TRUE);
+        m_Parser->AddVariable(L"target", m_Target, TRUE);
 
         CComBSTR queryVarNodes = L"/VoodooConfig/Variables/Variable";
 
         IXMLDOMNodeList * pVarList = NULL;
-        hr = config->selectNodes(queryVarNodes, &pVarList);
+        hr = m_Config->selectNodes(queryVarNodes, &pVarList);
         if ( SUCCEEDED(hr) )
         {
             IXMLDOMNode * pVarNode = NULL;
@@ -185,7 +183,7 @@ namespace VoodooShader
                 pNameNode->get_nodeValue(&name);
                 pTextNode->get_nodeValue(&text);
 
-                mParser->AddVariable(name.bstrVal, text.bstrVal, false);
+                m_Parser->AddVariable(name.bstrVal, text.bstrVal, false);
             }
         }
 
@@ -200,10 +198,10 @@ namespace VoodooShader
                 VARIANT v;
                 pNode->get_nodeValue(&v);
                 CComBSTR str(v.bstrVal);
-                mParser->Parse(&str, PF_None);
+                m_Parser->Parse(&str, PF_None);
 
-                hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mLogger);
-                if ( FAILED(hr) || mLogger == NULL )
+                hr = InstanceFromString(str, IID_VoodooLogger, (void**)&m_Logger);
+                if ( FAILED(hr) || m_Logger == NULL )
                 {
                     return E_BADLOGCLSID;
                 } else {
@@ -214,8 +212,8 @@ namespace VoodooShader
                         VARIANT fn;
                         pNode->get_nodeValue(&fn);
                         CComBSTR filename(fn.bstrVal);
-                        mParser->Parse(&filename, PF_None);
-                        mLogger->Open(filename, FALSE);
+                        m_Parser->Parse(&filename, PF_None);
+                        m_Logger->Open(filename, FALSE);
                         SysFreeString(filename);
                     }
                 }
@@ -231,10 +229,10 @@ namespace VoodooShader
                 VARIANT v;
                 pNode->get_nodeValue(&v);
                 CComBSTR str(v.bstrVal);
-                mParser->Parse(&str, PF_None);
+                m_Parser->Parse(&str, PF_None);
 
-                hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mFileSystem);
-                if ( FAILED(hr) || mFileSystem == NULL )
+                hr = InstanceFromString(str, IID_VoodooLogger, (void**)&m_FileSystem);
+                if ( FAILED(hr) || m_FileSystem == NULL )
                 {
                     return E_BADFSCLSID;
                 }
@@ -250,10 +248,10 @@ namespace VoodooShader
                 VARIANT v;
                 pNode->get_nodeValue(&v);
                 CComBSTR str(v.bstrVal);
-                mParser->Parse(&str, PF_None);
+                m_Parser->Parse(&str, PF_None);
 
-                hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mHookSystem);
-                if ( FAILED(hr) || mFileSystem == NULL )
+                hr = InstanceFromString(str, IID_VoodooLogger, (void**)&m_HookSystem);
+                if ( FAILED(hr) || m_FileSystem == NULL )
                 {
                     return E_BADHSCLSID;
                 }
@@ -269,10 +267,10 @@ namespace VoodooShader
                 VARIANT v;
                 pNode->get_nodeValue(&v);
                 CComBSTR str(v.bstrVal);
-                mParser->Parse(&str, PF_None);
+                m_Parser->Parse(&str, PF_None);
 
-                hr = InstanceFromString(str, IID_VoodooLogger, (void**)&mAdapter);
-                if ( FAILED(hr) || mFileSystem == NULL )
+                hr = InstanceFromString(str, IID_VoodooLogger, (void**)&m_Adapter);
+                if ( FAILED(hr) || m_FileSystem == NULL )
                 {
                     return E_BADFSCLSID;
                 }
@@ -282,20 +280,20 @@ namespace VoodooShader
 
         // Log extended build information
         //BSTR configLocation = _BSTR("Config loaded from \"%s\".");
-        //mLogger->Log(LL_Info, VOODOO_CORE_NAME, configLocation, pConfig);
-        //mLogger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
+        //m_Logger->Log(LL_Info, VOODOO_CORE_NAME, configLocation, pConfig);
+        //m_Logger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
         Version vfver = VOODOO_META_VERSION_STRUCT(CORE);
         Version vsver = VOODOO_META_VERSION_STRUCT(VC);
         Version cgver = VOODOO_META_VERSION_STRUCT(CG);
 
-        mLogger->LogModule(vfver);
-        mLogger->LogModule(vsver);
-        mLogger->LogModule(cgver);
+        m_Logger->LogModule(vfver);
+        m_Logger->LogModule(vsver);
+        m_Logger->LogModule(cgver);
 
         // Core done loading
         CComBSTR done = L"Core initialization complete.";
-        //mLogger->Log(LL_Info, VOODOO_CORE_NAME, done, NULL);
+        //m_Logger->Log(LL_Info, VOODOO_CORE_NAME, done, NULL);
 
         return S_OK;
     }
@@ -306,7 +304,7 @@ namespace VoodooShader
         {
             return E_INVALIDARG;
         } else {
-            *ppAdapter = mAdapter;
+            *ppAdapter = m_Adapter;
             return S_OK;
         }
     }
@@ -317,7 +315,7 @@ namespace VoodooShader
         {
             return E_INVALIDARG;
         } else {
-            *ppHookSystem = mHookSystem;
+            *ppHookSystem = m_HookSystem;
             return S_OK;
         }
     }
@@ -328,7 +326,7 @@ namespace VoodooShader
         {
             return E_INVALIDARG;
         } else {
-            *ppLogger = mLogger;
+            *ppLogger = m_Logger;
             return S_OK;
         }
     }
@@ -339,7 +337,7 @@ namespace VoodooShader
         {
             return E_INVALIDARG;
         } else {
-            *ppFileSystem = mFileSystem;
+            *ppFileSystem = m_FileSystem;
             return S_OK;
         }
     }
@@ -350,7 +348,7 @@ namespace VoodooShader
         {
             return E_INVALIDARG;
         } else {
-            *ppParser = mParser;
+            *ppParser = m_Parser;
             return S_OK;
         }
     }
@@ -361,7 +359,7 @@ namespace VoodooShader
         {
             return E_INVALIDARG;
         } else {
-            *ppConfig = mConfig;
+            *ppConfig = m_Config;
             return S_OK;
         }
     }
@@ -372,27 +370,27 @@ namespace VoodooShader
         {
             return E_INVALIDARG;
         } else {
-            *ppContext = mCgContext;
+            *ppContext = m_CgContext;
             return S_OK;
         }
     }
 
     HRESULT Core::put_CgContext(void * pContext)
     {
-        //mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Setting Cg context to %p.", context);
+        //m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Setting Cg context to %p.", context);
 
         if ( pContext == NULL )
         {
-            //mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Clearing object cache (null context).");
+            //m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Clearing object cache (null context).");
 
-            mParameters.RemoveAll();
-            mTextures.RemoveAll();
-            mStageTextures.RemoveAll();
+            m_Parameters.RemoveAll();
+            m_Textures.RemoveAll();
+            m_StageTextures.RemoveAll();
         } else {
             cgSetErrorHandler(&(Core::CgErrorHandler), this);
         }
 
-        this->mCgContext = (CGcontext)pContext;
+        this->m_CgContext = (CGcontext)pContext;
 
         return S_OK;
     }
@@ -422,19 +420,23 @@ namespace VoodooShader
             return E_INVALIDARG;
         }
 
-        if ( this->mParameters.PLookup(pName) != NULL )
+        if ( this->m_Parameters.PLookup(pName) != NULL )
         {
             return E_DUPNAME;
         } else {
-            HRESULT hr = CoCreateInstance(CLSID_Parameter, NULL, NULL, IID_VoodooParameter, (void**)ppParameter);
-            if ( FAILED(hr) )
+            ParameterCategory pc = Converter::ToParameterCategory(Type);
+            if ( pc == PC_Float || pc == PC_Matrix )
             {
-                return hr;
+                *ppParameter = new Scalar(this, pName, Type);
+            } else if ( pc == PC_Matrix ) {
+                *ppParameter = new Sampler(this, pName, Type);
+            } else {
+                return E_INVALIDARG;
             }
 
-            mParameters.SetAt(pName, *ppParameter);
+            m_Parameters.SetAt(pName, *ppParameter);
 
-            //mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Created parameter named %s with type %s, returning shared pointer to %p.", name.c_str(), Converter::ToString(type), parameter.get());
+            //m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Created parameter named %s with type %s, returning shared pointer to %p.", name.c_str(), Converter::ToString(type), parameter.get());
 
             return S_OK;
         }
@@ -448,7 +450,7 @@ namespace VoodooShader
             return E_INVALIDARG;
         }
 
-        if ( this->mTextures.PLookup(pName) != NULL )
+        if ( this->m_Textures.PLookup(pName) != NULL )
         {
             return E_DUPNAME;
         } else {
@@ -458,9 +460,9 @@ namespace VoodooShader
                 return hr;
             }
 
-            mTextures.SetAt(pName, *ppTexture);
+            m_Textures.SetAt(pName, *ppTexture);
 
-            //mLogger->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s with data %p, returning shared pointer to %p.", name.c_str(), data, texture.get());
+            //m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s with data %p, returning shared pointer to %p.", name.c_str(), data, texture.get());
 
             return S_OK;
         }
@@ -474,7 +476,7 @@ namespace VoodooShader
         }
 
         CComPtr<IVoodooParameter> param;
-        if ( this->mParameters.Lookup(pName, param) == 0 )
+        if ( this->m_Parameters.Lookup(pName, param) == 0 )
         {
             *ppParameter = NULL;
             return E_NOT_FOUND;
@@ -492,7 +494,7 @@ namespace VoodooShader
         }
 
         CComPtr<IVoodooTexture> texture;
-        if ( this->mTextures.Lookup(pName, texture) == 0 )
+        if ( this->m_Textures.Lookup(pName, texture) == 0 )
         {
             *ppTexture = NULL;
             return E_NOT_FOUND;
@@ -504,7 +506,7 @@ namespace VoodooShader
 
     HRESULT Core::RemoveTexture(BSTR pName)
     {
-        if ( this->mTextures.RemoveKey(pName) == 0 )
+        if ( this->m_Textures.RemoveKey(pName) == 0 )
         {
             return S_NOT_FOUND;
         } else {
@@ -515,7 +517,7 @@ namespace VoodooShader
     HRESULT Core::get_StageTexture(TextureType Stage, IVoodooTexture ** ppTexture)
     {
         CComPtr<IVoodooTexture> texture;
-        if ( this->mStageTextures.Lookup(Stage, texture) == 0 )
+        if ( this->m_StageTextures.Lookup(Stage, texture) == 0 )
         {
             *ppTexture = NULL;
             return E_NOT_FOUND;
@@ -527,7 +529,7 @@ namespace VoodooShader
 
     HRESULT Core::put_StageTexture(TextureType Stage, IVoodooTexture * pTexture)
     {
-        this->mStageTextures.SetAt(Stage, pTexture);
+        this->m_StageTextures.SetAt(Stage, pTexture);
         return S_OK;
     }
         
@@ -543,9 +545,9 @@ namespace VoodooShader
                 //me->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
                 if ( context && error != CG_INVALID_CONTEXT_HANDLE_ERROR )
                 {
-                    if ( me->mAdapter )
+                    if ( me->m_Adapter )
                     {
-                        me->mAdapter->HandleError(context, error, me);
+                        me->m_Adapter->HandleError(context, error, me);
                     }
 
                     // Print any compiler errors or other details we can find

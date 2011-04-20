@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_CORE_HPP
-#define VOODOO_CORE_HPP
+#pragma once
 
 #include "Common.hpp"
 
@@ -108,58 +107,56 @@ namespace VoodooShader
         );
 
     private:
-        UINT mRefrs;
+        UINT m_Refrs;
 
         /**
          * Base path void core was created with.
          */
-        CComBSTR mGlobalRoot;
-        CComBSTR mLocalRoot;
-        CComBSTR mRunRoot;
-        CComBSTR mTarget;
+        CComBSTR m_GlobalRoot;
+        CComBSTR m_LocalRoot;
+        CComBSTR m_RunRoot;
+        CComBSTR m_Target;
 
         /**
          * Config file (actually a <code>pugi::xml_document *</code>, stored as void).
          */
-        IUnknown * mConfig;
+        IXMLDOMDocument * m_Config;
 
         /**
          * Cg context used by void core.
          */
-        CGcontext mCgContext;
+        CGcontext m_CgContext;
 
         /**
          * The currently bound (active) IAdapter implementation.
          */
-        IVoodooAdapter * mAdapter;
+        IVoodooAdapter * m_Adapter;
 
         /**
          * The current ILogger implementation.
          */
-        IVoodooLogger * mLogger;
+        IVoodooLogger * m_Logger;
 
         /**
          * The current IHookManager implementation.
          */
-        IVoodooHookSystem * mHookSystem;
+        IVoodooHookSystem * m_HookSystem;
 
         /**
          * The current IFileSystem implementation.
          */
-        IVoodooFileSystem * mFileSystem;
+        IVoodooFileSystem * m_FileSystem;
 
         /**
          * The current variable parser.
          */
-        IVoodooParser * mParser;
+        IVoodooParser * m_Parser;
 
-        CMap<BSTR, BSTR, CComPtr<IVoodooParameter>, CComPtr<IVoodooParameter> > mParameters;
-        CMap<BSTR, BSTR, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > mTextures;
-        CMap<TextureType, TextureType, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > mStageTextures;
+        CMap<BSTR, BSTR, CComPtr<IVoodooParameter>, CComPtr<IVoodooParameter> > m_Parameters;
+        CMap<BSTR, BSTR, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > m_Textures;
+        CMap<TextureType, TextureType, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > m_StageTextures;
     };
     /**
      * @}
      */
 }
-
-#endif
