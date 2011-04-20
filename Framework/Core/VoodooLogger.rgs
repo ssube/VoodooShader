@@ -1,0 +1,26 @@
+HKCR
+{
+	VoodooCore.Logger.1 = s 'VoodooLogger Class'
+	{
+		CLSID = s '{7C6B6D83-F882-4954-952B-F5689DA3D4D7}'
+	}
+	VoodooCore.Logger = s 'VoodooLogger Class'
+	{
+		CurVer = s 'VoodooCore.Logger.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {7C6B6D83-F882-4954-952B-F5689DA3D4D7} = s 'VoodooLogger Class'
+		{
+			ProgID = s 'VoodooCore.Logger.1'
+			VersionIndependentProgID = s 'VoodooCore.Logger'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			Version = s '1.0'
+		}
+	}
+}

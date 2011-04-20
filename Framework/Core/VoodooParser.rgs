@@ -1,0 +1,26 @@
+HKCR
+{
+	VoodooCore.Parser.1 = s 'VoodooParser Class'
+	{
+		CLSID = s '{F4F858F0-C357-4C67-8FB0-9F91AE2DDD4C}'
+	}
+	VoodooCore.Parser = s 'VoodooParser Class'
+	{
+		CurVer = s 'VoodooCore.Parser.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F4F858F0-C357-4C67-8FB0-9F91AE2DDD4C} = s 'VoodooParser Class'
+		{
+			ProgID = s 'VoodooCore.Parser.1'
+			VersionIndependentProgID = s 'VoodooCore.Parser'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			Version = s '1.0'
+		}
+	}
+}

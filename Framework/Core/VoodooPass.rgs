@@ -1,0 +1,26 @@
+HKCR
+{
+	VoodooCore.Pass.1 = s 'VoodooPass Class'
+	{
+		CLSID = s '{9B99881A-821B-4300-8C88-E86FFD787F8B}'
+	}
+	VoodooCore.Pass = s 'VoodooPass Class'
+	{
+		CurVer = s 'VoodooCore.Pass.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9B99881A-821B-4300-8C88-E86FFD787F8B} = s 'VoodooPass Class'
+		{
+			ProgID = s 'VoodooCore.Pass.1'
+			VersionIndependentProgID = s 'VoodooCore.Pass'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			Version = s '1.0'
+		}
+	}
+}

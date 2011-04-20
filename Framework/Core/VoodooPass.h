@@ -1,0 +1,51 @@
+// VoodooPass.h : Declaration of the CVoodooPass
+
+#pragma once
+#include "Core_i.h"
+#include "resource.h"       // main symbols
+#include <comsvcs.h>
+
+using namespace ATL;
+
+
+
+// CVoodooPass
+
+class ATL_NO_VTABLE CVoodooPass :
+	public CComObjectRootEx<CComSingleThreadModel>,
+	public CComCoClass<CVoodooPass, &CLSID_VoodooPass>,
+	public IDispatchImpl<IVoodooPass, &IID_IVoodooPass, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+{
+public:
+	CVoodooPass()
+	{
+	}
+
+	DECLARE_PROTECT_FINAL_CONSTRUCT()
+
+	HRESULT FinalConstruct()
+	{
+		return S_OK;
+	}
+
+	void FinalRelease()
+	{
+	}
+
+DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOPASS)
+
+DECLARE_NOT_AGGREGATABLE(CVoodooPass)
+
+BEGIN_COM_MAP(CVoodooPass)
+	COM_INTERFACE_ENTRY(IVoodooPass)
+	COM_INTERFACE_ENTRY(IDispatch)
+END_COM_MAP()
+
+
+
+
+// IVoodooPass
+public:
+};
+
+OBJECT_ENTRY_AUTO(__uuidof(VoodooPass), CVoodooPass)

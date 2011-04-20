@@ -1,51 +1,200 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Core.cpp" />
-    <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="Exception.cpp" />
-    <ClCompile Include="FileSystem.cpp" />
-    <ClCompile Include="FullscreenManager.cpp" />
-    <ClCompile Include="Logger.cpp" />
-    <ClCompile Include="MaterialManager.cpp" />
-    <ClCompile Include="Parameter.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Texture.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Adapter.hpp" />
-    <ClInclude Include="Converter.hpp" />
-    <ClInclude Include="Core.hpp" />
-    <ClInclude Include="Exception.hpp" />
-    <ClInclude Include="FileSystem.hpp" />
-    <ClInclude Include="FullscreenManager.hpp" />
-    <ClInclude Include="Includes.hpp" />
-    <ClInclude Include="Logger.hpp" />
-    <ClInclude Include="MaterialManager.hpp" />
-    <ClInclude Include="Meta.hpp" />
-    <ClInclude Include="Parameter.hpp" />
-    <ClInclude Include="Reference.hpp" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Shader.hpp" />
-    <ClInclude Include="Texture.hpp" />
-    <ClInclude Include="Version.hpp" />
-    <ClInclude Include="VoodooFramework.hpp" />
-    <ClInclude Include="Docs_Graphics.hpp">
-      <Filter>Docs</Filter>
-    </ClInclude>
-    <ClInclude Include="Docs_Code.hpp">
-      <Filter>Docs</Filter>
-    </ClInclude>
-    <ClInclude Include="Docs_License.hpp">
-      <Filter>Docs</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Voodoo_Core.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Docs">
-      <UniqueIdentifier>{0cf9a08b-31a0-4c91-883c-8d37a6e3715a}</UniqueIdentifier>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{e9e1ef71-2af8-455b-a99b-f7e6ce4e4d13}</UniqueIdentifier>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="compreg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xdlldata.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_i.c">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooTechnique.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooPass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooAdapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooFileSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooHookSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dllmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compreg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xdlldata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_i.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooTechnique.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooPass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooFileSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooHookSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Core.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="Core.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Core.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="VoodooCore.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooShader.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooParser.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooTechnique1.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooPass.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooTexture.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooParameter.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooLogger.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooAdapter.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooFileSystem.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooFile.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooImage.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooHookSystem.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="Core.idl">
+      <Filter>Source Files</Filter>
+    </Midl>
   </ItemGroup>
 </Project>

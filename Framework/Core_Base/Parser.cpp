@@ -13,7 +13,7 @@ namespace VoodooShader
         //m_Variables.clear();
     }
 
-    Parser * Parser::Create(_In_ Core * pCore)
+    Parser * Parser::Create(_In_ IVoodooCore * pCore)
     {
         if ( pCore == NULL ) return NULL;
 

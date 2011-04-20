@@ -43,14 +43,14 @@ namespace VoodooShader
     DEFINE_GUID(CLSID_Technique,    0x60674c0b, 0x29e3, 0x4344, 0x85, 0xe8, 0xea, 0x9c, 0x50, 0x50, 0x67, 0x95);
     DEFINE_GUID(CLSID_Texture,      0xCA2AE4FC, 0x136F, 0x426C, 0x9C, 0x92, 0xFB, 0x66, 0x5D, 0x21, 0x60, 0x26);
 
-    class Core;
+    /*class Core;
     class Parser;
     class Pass;
     class Sampler;
     class Scalar;
     class Shader;
     class Technique;
-    class Texture;
+    class Texture;*/
 
     // Creates an interface to a string-format class ID. The ID may be in registry form or a ProgID.
     HRESULT WINAPI InstanceFromString(_In_ BSTR lpStr, _In_ REFIID iid, _In_ void ** pp);

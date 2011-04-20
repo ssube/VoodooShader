@@ -1,0 +1,26 @@
+HKCR
+{
+	VoodooCore.File.1 = s 'VoodooFile Class'
+	{
+		CLSID = s '{26747ECA-9219-4829-B448-4CD7C46534C0}'
+	}
+	VoodooCore.File = s 'VoodooFile Class'
+	{
+		CurVer = s 'VoodooCore.File.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {26747ECA-9219-4829-B448-4CD7C46534C0} = s 'VoodooFile Class'
+		{
+			ProgID = s 'VoodooCore.File.1'
+			VersionIndependentProgID = s 'VoodooCore.File'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			Version = s '1.0'
+		}
+	}
+}

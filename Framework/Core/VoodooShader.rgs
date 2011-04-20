@@ -1,0 +1,26 @@
+HKCR
+{
+	VoodooCore.Shader.1 = s 'VoodooShader Class'
+	{
+		CLSID = s '{9E6F15CB-5B03-4BD8-9D04-B27D576C3975}'
+	}
+	VoodooCore.Shader = s 'VoodooShader Class'
+	{
+		CurVer = s 'VoodooCore.Shader.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9E6F15CB-5B03-4BD8-9D04-B27D576C3975} = s 'VoodooShader Class'
+		{
+			ProgID = s 'VoodooCore.Shader.1'
+			VersionIndependentProgID = s 'VoodooCore.Shader'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			Version = s '1.0'
+		}
+	}
+}

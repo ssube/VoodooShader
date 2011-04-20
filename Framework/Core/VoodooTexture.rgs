@@ -1,0 +1,26 @@
+HKCR
+{
+	VoodooCore.Texture.1 = s 'VoodooTexture Class'
+	{
+		CLSID = s '{E2FC29A5-4B54-4720-A3AD-2E86255D2138}'
+	}
+	VoodooCore.Texture = s 'VoodooTexture Class'
+	{
+		CurVer = s 'VoodooCore.Texture.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E2FC29A5-4B54-4720-A3AD-2E86255D2138} = s 'VoodooTexture Class'
+		{
+			ProgID = s 'VoodooCore.Texture.1'
+			VersionIndependentProgID = s 'VoodooCore.Texture'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			Version = s '1.0'
+		}
+	}
+}

@@ -52,9 +52,9 @@ namespace VoodooShader
         static Parser * Create(_In_ IVoodooCore * core);
 
         // IUnknown
-        STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
-        STDMETHOD_(ULONG,AddRef)(void);
-        STDMETHOD_(ULONG,Release)(void);
+        //STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
+        //STDMETHOD_(ULONG,AddRef)(void);
+        //STDMETHOD_(ULONG,Release)(void);
 
         // IVoodooObject
         STDMETHOD(GetName)(LPBSTR pName);
@@ -97,7 +97,7 @@ namespace VoodooShader
         static const WCHAR VarDelimPre   = '$';
 
         UINT m_Refrs;
-        Core * m_Core;
+        IVoodooCore * m_Core;
         Dictionary m_Variables;
         Dictionary m_SysVariables;
     };

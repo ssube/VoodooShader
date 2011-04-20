@@ -1,0 +1,558 @@
+// Core.idl : IDL source for Core
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Core.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+// Enums and such
+typedef [v1_enum]
+enum {
+    TF_Unknown = 0,         /*!< Unknown texture format */
+    // Backbuffer formats
+    TF_RGB5,                /*!< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
+    TF_RGB5A1,              /*!< 5 bit RGB, 1 bit alpha */
+    TF_RGB8,                /*!< 8 bit RGB (8 bit X in DX). Most common backbuffer format, 
+                                    common texture format. */
+    TF_RGBA8,               /*!< 8 bit RGBA. Common texture format. */
+    TF_RGB10A2,             /*!< 10 bit RGB, 2 bit A */
+    // Float texture formats
+    TF_RGBA16F,             /*!< Half-precision RGBA. HDR format. */
+    TF_RGBA32F,             /*!< Full-precision RGBA (float/single). HDR format. */
+    // Depth-buffer formats
+    TF_D16,                 /*!< Half-precision depth (Z-buffer, see @ref depthbuffers 
+                                    for more info) */
+    TF_D32,                 /*!< Full-precision depth (Z-buffer, see @ref depthbuffers 
+                                    for more info) */
+    // Padding value
+    TF_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
+} TextureFormat;
+
+typedef [v1_enum]
+enum {
+    PT_Unknown = 0,         /*!< Unknown parameter type */
+    // Samplers
+    PT_Sampler1D,           /*!< One-dimensional sampler (for a 1D texture, see 
+                                    @ref texturetypes "texture types" for more info) */
+    PT_Sampler2D,           /*!< Two-dimensional sampler (for a 2D texture, see 
+                                    @ref texturetypes "texture types" for more info) */
+    PT_Sampler3D,           /*!< Three-dimensional sampler (for a 3D/volume texture, see 
+                                    @ref texturetypes "texture types" for more info) */
+    // Float-vectors
+    PT_Float1,              /*!< Single-component float vector */
+    PT_Float2,              /*!< Two-component float vector */
+    PT_Float3,              /*!< Three-component float vector */
+    PT_Float4,              /*!< Four-component float vector */
+    // Matrices
+    PT_Matrix,              /*!< Generic float4x4 matrix type */
+    // Padding value
+    PT_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
+} ParameterType;
+
+typedef [v1_enum]
+enum {
+    PC_Unknown = 0,         /*!< Unknown parameter category */
+    // Valid categories
+    PC_Float,               /*!< Float vector parameter (may have 1 to 4 components) */
+    PC_Sampler,             /*!< Sampler parameter (may sample 1D to 3D textures) */
+    PC_Matrix,              /*!< Matrix parameter, 4x4 components */
+    // Padding value
+    PC_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
+} ParameterCategory;
+
+typedef [v1_enum]
+enum {
+    PS_Unknown = 0,         /*!< Unknown program stage */
+    // Basic stages
+    PS_Vertex,              /*!< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
+    PS_Fragment,            /*!< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
+    // Geometry stages
+    PS_Geometry,            /*!< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
+    // Tessellation stages
+    PS_Domain,              /*!< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
+    PS_Hull,                /*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
+    // Padding value
+    PS_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
+} ProgramStage;
+    
+typedef [v1_enum]
+enum {
+    TT_Unknown = 0,         /*!< Unknown texture type */
+    // Generic types
+    TT_Generic,             /*!< Generic texture type, no special function */
+    // Special types
+    TT_ShaderTarget,        /*!< Shader target texture */
+    TT_PassTarget,          /*!< Pass target texture */
+    // Padding value
+    TT_Max = 0xFFFFFFFF,    /*!< Highest possible value, forcing dword type */
+} TextureType;
+    
+typedef [v1_enum]
+enum {
+    FM_Unknown   = 0x00,     /*!< Unknown file open mode */
+    // Valid modes
+    FM_Read      = 0x01,     /*!< Read-only file open mode */
+    FM_Write     = 0x02,     /*!< Read/write file open mode */
+    // Padding value
+    FM_Max = 0xFFFFFFFF,     /*!< Highest possible value, forcing dword type */
+} FileOpenMode;
+
+typedef [v1_enum]
+enum {
+    LL_Unknown      = 0x00,     /*!< Log level unknown */
+    // Severity values
+    LL_S_Debug      = 0x01,
+    LL_S_Info       = 0x02,
+    LL_S_Warning    = 0x04,
+    LL_S_Error      = 0x08,
+    LL_Severity     = 0x0F,
+    // Origin values
+    LL_O_API        = 0x10,
+    LL_O_External   = 0x20,
+    LL_O_Module     = 0x40,
+    LL_O_Framework  = 0x80,
+    LL_Origin       = 0xF0,
+    // Logger internal values
+    LL_Internal     = 0x82,     /*!< Log level for Logger-internal messages */
+    LL_Initial      = 0xFE,     /*!< Initial log level of Logger */
+    // Default values
+    LL_Debug        = 0x41,
+    LL_Info         = 0x42,
+    LL_Warning      = 0x44,
+    LL_Error        = 0x48,
+    // Misc values
+    LL_All          = 0xFF,     /*!< All messages will be logged */
+    // Padding value
+    LL_Max    = 0xFFFFFFFF,     /*!< Highest possible value, forcing dword type */
+} LogLevel;
+
+typedef [v1_enum]
+enum {
+    PF_None             = 0x0000,     /*!< No special behavior */
+    // Slash flags
+    PF_SingleSlash      = 0x0001,     /*!< No repeated slashes (useful for XPath). */
+    PF_SlashOnly        = 0x0002,     /*!< Replace all backslashes with forward slashes. */
+    PF_BackslashOnly    = 0x0004,     /*!< Replace all forward slashes with backslashes. */
+    PF_SlashFlags       = 0x0007,
+    // Case flags
+    PF_Lowercase        = 0x0010,
+    PF_Uppercase        = 0x0020,
+    PF_CaseFlags        = 0x0030,
+    // General flags
+    PF_VarName          = 0x0100,
+    // Padding value
+    PF_Max          = 0xFFFFFFFF,     /*!< Highest possible value, forcing dword type */
+} ParseFlags;
+
+typedef struct
+{
+    UINT Width;
+    UINT Height;
+    UINT Depth;
+    BOOL Mipmaps;
+    TextureFormat Format;
+} TextureDesc;
+
+typedef struct 
+{
+    UINT Width;
+    UINT Height;
+    UINT Depth;
+    BOOL Mipmaps;
+    UINT OffX;
+    UINT OffY;
+    UINT OffZ;
+    TextureFormat Format;
+} TextureRegion;
+
+typedef struct 
+{
+    BSTR Name;
+    UINT Major;
+    UINT Minor;
+    ULONG Patch;
+    ULONG Rev;
+    BOOL Debug;
+} Version;
+
+typedef struct 
+{
+    float X, Y, Z;
+    float Winding;
+    float U, V;
+} Vertex;
+
+typedef struct
+{
+    int unused;
+} Function;
+typedef [ptr] Function * FunctionPtr;
+
+interface IVoodooAdapter;
+interface IVoodooCore;
+interface IVoodooFile;
+interface IVoodooFileSystem;
+interface IVoodooHookSystem;
+interface IVoodooImage;
+interface IVoodooLogger;
+interface IVoodooParameter;
+interface IVoodooPass;
+interface IVoodooShader;
+interface IVoodooParser;
+interface IVoodooTechnique;
+interface IVoodooTexture;
+
+[
+	object,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,	
+	pointer_default(unique)
+]
+interface IComponentRegistrar : IDispatch
+{
+	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
+	[id(2)]	HRESULT RegisterAll();
+	[id(3)]	HRESULT UnregisterAll();
+	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+};
+
+[
+	object,
+	uuid(6D183074-9127-4615-8366-02587BAFE38C),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooCore : IDispatch{
+    [id(1)] HRESULT Initialize([in, optional] VARIANT * pConfig);
+    [propget, id(2)] HRESULT Parser([out, retval] IVoodooParser ** pParser);
+    [propget, id(3)] HRESULT HookSystem([out, retval] IVoodooHookSystem ** ppHookManager);
+    [propget, id(4)] HRESULT FileSystem([out, retval] IVoodooFileSystem ** ppFileSystem);
+    [propget, id(5)] HRESULT Adapter([out, retval] IVoodooAdapter ** ppAdapter);
+    [propget, id(6)] HRESULT Logger([out, retval] IVoodooLogger ** ppLogger);
+    [propget, id(7)] HRESULT Config([out, retval] IXMLDOMDocument ** ppConfig);
+    [propget, id(8)] HRESULT CgContext([out, retval] VARIANT ** ppCgContext);
+    [propput, id(8)] HRESULT CgContext([in] VARIANT * pCgContext);
+    [id(10)] HRESULT CreateShader([in] IVoodooFile * pFile, [out, retval] IVoodooShader ** ppShader);
+    [id(11)] HRESULT CreateParameter([in] BSTR pName, [in] ParameterType Type, [out, retval] IVoodooParameter ** ppParameter);
+    [id(12)] HRESULT CreateTexture([in] BSTR pName, [in] VARIANT * pData, [out, retval] IVoodooTexture ** ppTexture);
+    [id(13)] HRESULT GetParameter([in] BSTR pName, [out, retval] IVoodooParameter ** ppParameter);
+    [id(14)] HRESULT GetTexture([in] BSTR pName, [out, retval] IVoodooTexture ** ppTexture);
+    [id(15)] HRESULT RemoveTexture([in] BSTR pName);
+    [propget, id(16)] HRESULT StageTexture([in] TextureType Stage, [out, retval] IVoodooTexture ** ppTexture);
+    [propput, id(16)] HRESULT StageTexture([in] TextureType Stage, [in] IVoodooTexture * pTexture);
+};
+[
+	object,
+	uuid(B375BC6B-5A6C-4B8B-888B-A937BA3814FD),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooParser : IDispatch{
+    [id(1)] HRESULT AddVariable([in] BSTR pName, [in] BSTR pValue, [in] BOOL System);
+    [id(2)] HRESULT RemoveVariable([in] BSTR pName);
+    [id(3)] HRESULT Parse([in] BSTR pString, [in, defaultvalue(PF_None)] ParseFlags Flags, [out, retval] LPBSTR pParsed);
+};
+[
+	object,
+	uuid(8C26CEBA-45AD-4382-BEA9-EDBB2F446B21),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooShader : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [propget, id(3)] HRESULT TechniqueCount([out, retval] UINT ** ppCount);
+    [id(4)] HRESULT GetTechnique([in] UINT Number, [out, retval] IVoodooTechnique ** ppTechnique);
+    [propget, id(5)] HRESULT DefaultTechnique([out, retval] IVoodooTechnique ** ppTechnique);
+    [propput, id(6)] HRESULT DefaultTechnique([in] IVoodooTechnique * pTechnique);
+    [propget, id(7)] HRESULT ParameterCount([out, retval] UINT ** ppCount);
+    [id(8)] HRESULT GetParameter([in] UINT Number, [out, retval] IVoodooParameter ** ppParameter);
+    [id(9)] HRESULT GetCgShader([out, retval] VARIANT ** ppCgShader);
+};
+[
+	object,
+	uuid(B0D5E12B-2A58-4AF3-BD0A-A41A3968AB36),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooTechnique : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [propget, id(3)] HRESULT Target([out, retval] IVoodooTexture ** ppTexture);
+    [propget, id(4)] HRESULT PassCount([out, retval] UINT ** ppCount);
+    [id(5)] HRESULT GetPass([in] UINT Number, [out, retval] IVoodooPass ** ppPass);
+    [propget, id(6)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
+    [id(7)] HRESULT GetCgTechnique([out, retval] VARIANT ** ppPass);
+};
+[
+	object,
+	uuid(7C231D9E-146B-40CF-9F39-A4D3513DD7F7),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooPass : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [propget, id(3)] HRESULT Target([out, retval] IVoodooTexture ** ppTexture);
+    [propget, id(4)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
+    [propget, id(5)] HRESULT Technique([out, retval] IVoodooTechnique ** ppTechnique);
+    [id(6)] HRESULT GetCgProgram([in] ProgramStage Stage, [out, retval] VARIANT ** ppProgram);
+    [id(7)] HRESULT GetCgPass([out, retval] VARIANT ** ppPass);
+};
+[
+	object,
+	uuid(164A33FD-E80D-4666-AE93-298B33020986),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooTexture : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [propget, id(3)] HRESULT Data([out, retval] VARIANT ** ppData);
+};
+[
+	object,
+	uuid(6AB220A5-4579-441E-9060-4AF7535D6601),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooParameter : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [propget, id(3)] HRESULT Type([out, retval] ParameterType * pType);
+    [propget, id(4)] HRESULT Virtual([out, retval] BOOL * pVirtual);
+    [id(6)] HRESULT AttachParameter([in] IVoodooParameter * pParameter);
+    [propget, id(7)] HRESULT Components();
+    [propget, id(8)] HRESULT SamplerValue([out, retval] IVoodooTexture ** ppTexture);
+    [propput, id(8)] HRESULT SamplerValue([in] IVoodooTexture * pTexture);
+    [propget, id(10)] HRESULT ScalarValue([out, retval] SAFEARRAY(float) ** ppData);
+    [propput, id(10)] HRESULT ScalarValue([in] SAFEARRAY(float) * pData);
+    [id(12)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
+    [id(13)] HRESULT CgParameter([out, retval] VARIANT ** ppCgParameter);
+};
+[
+	object,
+	uuid(D26A5521-3E3D-4BD9-8A75-1AD5014D2479),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooLogger : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [id(3)] HRESULT Open([in] BSTR pFilename, [in] BOOL Append);
+    [id(4)] HRESULT Close();
+    [id(5)] HRESULT Dump();
+    [propget, id(6)] HRESULT LogLevel([out, retval] LogLevel * pLevel);
+    [propput, id(6)] HRESULT LogLevel([in] LogLevel * Level);
+    [id(8)] HRESULT LogModule([in] Version Module);
+    [id(9), vararg] HRESULT Log([in] LogLevel Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) * pArgs);
+    [propget, id(10)] HRESULT BufferSize([out, retval] UINT * pSize);
+    [propput, id(10)] HRESULT BufferSize([in] UINT Size);
+};
+[
+	object,
+	uuid(59C2FE67-A7EC-48B2-982E-9707A3840259),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooAdapter : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [id(3)] HRESULT LoadPass([in] IVoodooPass * pPass);
+    [id(4)] HRESULT UnloadPass([in] IVoodooPass * pPass);
+    [propget, id(5)] HRESULT Pass([out, retval] IVoodooPass ** ppPass);
+    [propput, id(5)] HRESULT Pass([in] IVoodooPass * pPass);
+    [propget, id(7)] HRESULT Target([out, retval] IVoodooTexture ** ppTarget);
+    [propget, id(7)] HRESULT Target([in] IVoodooTexture * pTarget);
+    [id(9)] HRESULT DrawGeometry([in] UINT Vertexes, [in] Vertex * pVertexData);
+    [id(10)] HRESULT ApplyParameter([in] IVoodooParameter * pParameter);
+    [id(11))] HRESULT DrawShader([in] IVoodooShader * pShader);
+    [id(12)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Description, [out, retval] IVoodooTexture ** ppTexture);
+    [id(13)] HRESULT LoadTexture([in] IVoodooImage * pImage, [out, retval] IVoodooTexture ** ppTexture);
+    [id(14)] HRESULT ConnectTexture([in] IVoodooParameter * pParameter, [in] IVoodooTexture * pTexture);
+    [id(15)] HRESULT HandleError([in] void * pContext, [in] DWORD Error, [in] IVoodooCore * pCore);
+};
+[
+	object,
+	uuid(2ADFD66B-2C4F-4172-823F-47D480BF8523),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooFileSystem : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [id(3)] HRESULT AddDirectory([in] BSTR pPath);
+    [id(4)] HRESULT RemoveDirectory([in] BSTR pPath);
+    [id(5)] HRESULT FindFile([in] BSTR pPath, [out, retval] IVoodooFile ** ppFile);
+    [id(6)] HRESULT FindImage([in] BSTR pPath, [out, retval] IVoodooImage ** ppImage);
+};
+[
+	object,
+	uuid(35068CA2-B06B-48DF-ADAB-BC1FDA163C1F),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooFile : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [propget, id(3)] HRESULT Path([out, optional] LPBSTR pPath);
+    [id(4)] HRESULT Open([in] FileOpenMode Mode);
+    [id(5)] HRESULT Close();
+    [id(6)] HRESULT Read([in, out] UINT * Length, [out, size_is(*Length)] byte Buffer[0..*]);
+    [id(7)] HRESULT Write([in] UINT Length, [in, size_is(*Length)] byte Buffer[0..*]);
+};
+[
+	object,
+	uuid(8B74AE58-98A2-4597-B963-4605F03A86D3),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooImage : IVoodooFile{
+    /*[propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [propget, id(3)] HRESULT Path([out, optional] LPBSTR pPath);
+    [id(4)] HRESULT Open([in] FileOpenMode Mode);
+    [id(5)] HRESULT Close();
+    [id(6)] HRESULT Read([in, out] UINT * Length, [out, size_is(*Length)] byte Buffer[0..*]);
+    [id(7)] HRESULT Write([in] UINT Length, [in, size_is(*Length)] byte Buffer[0..*]);*/
+    [propget, id(1)] HRESULT Desc([out, retval] TextureDesc * pDesc);
+    [propget, id(2)] HRESULT Data([in] TextureRegion Region, [out, retval] byte ppBuffer[*]);
+};
+[
+	object,
+	uuid(4E25F9D4-87D0-4CE8-84C0-B72225336DA3),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooHookSystem : IDispatch{
+    [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [id(3)] HRESULT Add([in] BSTR pName, [in] FunctionPtr pSource, [in] FunctionPtr pDest);
+    [id(4)] HRESULT Remove([in] BSTR pName);
+    [id(5)] HRESULT RemoveAll();
+};
+[
+	uuid(74838A0A-2645-4638-9AFF-B45ABF5B1365),
+	version(1.0),
+	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{5F3D58FE-A84D-4E15-9AAA-878EAC2E4BED}")
+]
+library CoreLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(5F3D58FE-A84D-4E15-9AAA-878EAC2E4BED)		
+	]
+	coclass CompReg
+	{
+		[default] interface IComponentRegistrar;
+	};
+	[		
+		uuid(C50C9C7D-7E66-40ED-B5FD-BE7135DA40BF)		
+	]
+	coclass VoodooCore
+	{
+		[default] interface IVoodooCore;
+	};
+	[		
+		uuid(F4F858F0-C357-4C67-8FB0-9F91AE2DDD4C)		
+	]
+	coclass VoodooParser
+	{
+		[default] interface IVoodooParser;
+	};
+	[		
+		uuid(9E6F15CB-5B03-4BD8-9D04-B27D576C3975)		
+	]
+	coclass VoodooShader
+	{
+		[default] interface IVoodooShader;
+	};
+	[		
+		uuid(1401CE59-BC88-4B38-A34E-0E478CEFD7A8)		
+	]
+	coclass VoodooTechnique
+	{
+		[default] interface IVoodooTechnique;
+	};
+	[		
+		uuid(9B99881A-821B-4300-8C88-E86FFD787F8B)		
+	]
+	coclass VoodooPass
+	{
+		[default] interface IVoodooPass;
+	};
+	[		
+		uuid(E2FC29A5-4B54-4720-A3AD-2E86255D2138)		
+	]
+	coclass VoodooTexture
+	{
+		[default] interface IVoodooTexture;
+	};
+	[		
+		uuid(5190BCB1-B6E5-4611-86B6-C12EF24D6870)		
+	]
+	coclass VoodooParameter
+	{
+		[default] interface IVoodooParameter;
+	};
+	[		
+		uuid(7C6B6D83-F882-4954-952B-F5689DA3D4D7)		
+	]
+	coclass VoodooLogger
+	{
+		[default] interface IVoodooLogger;
+	};
+	[		
+		uuid(66063841-6A4E-4D12-A186-5319762EFEB2)		
+	]
+	coclass VoodooAdapter
+	{
+		[default] interface IVoodooAdapter;
+	};
+	[		
+		uuid(14CC5267-85B7-41B2-A0DC-C69DDEA9E97C)		
+	]
+	coclass VoodooFileSystem
+	{
+		[default] interface IVoodooFileSystem;
+	};
+	[		
+		uuid(26747ECA-9219-4829-B448-4CD7C46534C0)		
+	]
+	coclass VoodooFile
+	{
+		[default] interface IVoodooFile;
+	};
+	[		
+		uuid(EAB336C3-CB16-4731-8CD2-A6F691FB5E18)		
+	]
+	coclass VoodooImage
+	{
+		[default] interface IVoodooImage;
+	};
+	[		
+		uuid(04666805-E086-4104-BCC6-9A0C7FADB924)		
+	]
+	coclass VoodooHookSystem
+	{
+		[default] interface IVoodooHookSystem;
+	};
+};
+

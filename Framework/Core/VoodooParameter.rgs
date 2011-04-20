@@ -1,0 +1,26 @@
+HKCR
+{
+	VoodooCore.Parameter.1 = s 'VoodooParameter Class'
+	{
+		CLSID = s '{5190BCB1-B6E5-4611-86B6-C12EF24D6870}'
+	}
+	VoodooCore.Parameter = s 'VoodooParameter Class'
+	{
+		CurVer = s 'VoodooCore.Parameter.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {5190BCB1-B6E5-4611-86B6-C12EF24D6870} = s 'VoodooParameter Class'
+		{
+			ProgID = s 'VoodooCore.Parameter.1'
+			VersionIndependentProgID = s 'VoodooCore.Parameter'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			Version = s '1.0'
+		}
+	}
+}

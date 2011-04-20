@@ -372,7 +372,7 @@ namespace VoodooShader
     typedef IVoodooScalar       *LPVOODOOSCALAR,        *PVOODOOSCALAR;
     typedef IVoodooShader       *LPVOODOOSHADER,        *PVOODOOSHADER;
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("AC697824-E290-43FB-9C06-CCFB0D8BF68E"),
         helpstring("Named Object Interface")
@@ -388,9 +388,9 @@ namespace VoodooShader
         // IVoodooObject
         STDMETHOD(GetName)([out, retval] LPBSTR pName) PURE;
         STDMETHOD(GetCore)([out, retval] IVoodooCore ** ppCore) PURE;
-    };
+    }*/;
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("67D488C5-A57D-4B8D-B48B-7295608B924A"),
         helpstring("Targeted Interface")
@@ -409,30 +409,9 @@ namespace VoodooShader
 
         // IVoodooTargeted
         STDMETHOD(GetTarget)([out, retval] IVoodooTexture ** ppTexture) PURE;
-    };
-
-    /*[
-        object, pointer_default(unique),
-        uuid("B2286B91-AF4F-4330-A7AC-7ECB9055BA17"),
-        helpstring("Target Interface")
-    ]
-    __interface IVoodooTarget
-        : IVoodooObject
-    {
-        // IUnknown
-        STDMETHOD(QueryInterface)([in] REFIID riid, [out] void ** ppvObj) PURE;
-        STDMETHOD_(ULONG,AddRef)(void) PURE;
-        STDMETHOD_(ULONG,Release)(void) PURE;
-
-        // IVoodooObject
-        STDMETHOD(GetName)([out, retval] LPBSTR pName) PURE;
-        STDMETHOD(GetCore)([out, retval] IVoodooCore ** ppCore) PURE;
-
-        // IVoodooTarget
-        STDMETHOD(GetRenderTarget)([out, retval] void ** ppTarget) PURE;
     };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("76073706-54E6-457D-B891-52A80410BEEF"),
         helpstring("Adapter Interface")
@@ -463,9 +442,9 @@ namespace VoodooShader
         STDMETHOD(LoadTexture)([in] IVoodooImage * pImage, [out, retval] IVoodooTexture ** ppTexture) PURE;
         STDMETHOD(ConnectTexture)([in] IVoodooParameter * pParameter, [in] IVoodooTexture * pTexture) PURE;
         STDMETHOD(HandleError)([in] void * pContext, [in] DWORD Error, [in] IVoodooCore * pCore) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("31420F71-1050-45D9-838F-8735BBB8EDEA"),
         helpstring("Core Interface")
@@ -474,25 +453,25 @@ namespace VoodooShader
         : IVoodooObject
     {
         // IUnknown
-        STDMETHOD(QueryInterface)([in] REFIID riid, [out] void ** ppvObj) PURE;
-        STDMETHOD_(ULONG,AddRef)(void) PURE;
-        STDMETHOD_(ULONG,Release)(void) PURE;
+        //STDMETHOD(QueryInterface)([in] REFIID riid, [out] void ** ppvObj) PURE;
+        //STDMETHOD_(ULONG,AddRef)(void) PURE;
+        //STDMETHOD_(ULONG,Release)(void) PURE;
 
         // IVoodooObject
-        STDMETHOD(GetName)([out, retval] LPBSTR pName) PURE;
-        STDMETHOD(GetCore)([out, retval] IVoodooCore ** ppCore) PURE;
+        //STDMETHOD(GetName)([out, retval] LPBSTR pName) PURE;
+        //STDMETHOD(GetCore)([out, retval] IVoodooCore ** ppCore) PURE;
 
         // IVoodooCore
         STDMETHOD(Initialize)([in, optional] BSTR pConfig) PURE;
-        [propget, id(7)] STDMETHOD(Parser)([out, retval] IVoodooParser ** pParser) PURE;
-        [propget, id(8)] STDMETHOD(HookSystem)([out, retval] IVoodooHookSystem ** ppHookManager) PURE;
-        [propget, id(9)] STDMETHOD(FileSystem)([out, retval] IVoodooFileSystem ** ppFileSystem) PURE;
-        [propget, id(10)] STDMETHOD(Adapter)([out, retval] IVoodooAdapter ** ppAdapter) PURE;
-        [propget, id(11)] STDMETHOD(Logger)([out, retval] IVoodooLogger ** ppLogger) PURE;
-        [propget, id(12)] STDMETHOD(Config)([out, retval] IUnknown ** ppConfig) PURE;
+        [propget, id(2)] STDMETHOD(Parser)([out, retval] IVoodooParser ** pParser) PURE;
+        [propget, id(3)] STDMETHOD(HookSystem)([out, retval] IVoodooHookSystem ** ppHookManager) PURE;
+        [propget, id(4)] STDMETHOD(FileSystem)([out, retval] IVoodooFileSystem ** ppFileSystem) PURE;
+        [propget, id(5)] STDMETHOD(Adapter)([out, retval] IVoodooAdapter ** ppAdapter) PURE;
+        [propget, id(6)] STDMETHOD(Logger)([out, retval] IVoodooLogger ** ppLogger) PURE;
+        [propget, id(7)] STDMETHOD(Config)([out, retval] IUnknown ** ppConfig) PURE;
 
-        [propget, id(13)] STDMETHOD(CgContext)([out, retval] void ** ppCgContext) PURE;
-        [propput, id(13)] STDMETHOD(CgContext)([in] void * pCgContext) PURE;
+        [propget, id(8)] STDMETHOD(CgContext)([out, retval] void ** ppCgContext) PURE;
+        [propput, id(8)] STDMETHOD(CgContext)([in] void * pCgContext) PURE;
 
         STDMETHOD(CreateShader)([in] IVoodooFile * pFile, [out, retval] IVoodooShader ** ppShader) PURE;
         STDMETHOD(CreateParameter)([in] BSTR pName, [in] ParameterType Type, [out, retval] IVoodooParameter ** ppParameter) PURE;
@@ -501,11 +480,11 @@ namespace VoodooShader
         STDMETHOD(GetTexture)([in] BSTR pName, [out, retval] IVoodooTexture ** ppTexture) PURE;
         STDMETHOD(RemoveTexture)([in] BSTR pName) PURE;
 
-        [propget, id(21)] STDMETHOD(StageTexture)([in] TextureType Stage, [out, retval] IVoodooTexture ** ppTexture) PURE;
-        [propput, id(21)] STDMETHOD(StageTexture)([in] TextureType Stage, [in] IVoodooTexture * pTexture) PURE;
-    };
+        [propget, id(16)] STDMETHOD(StageTexture)([in] TextureType Stage, [out, retval] IVoodooTexture ** ppTexture) PURE;
+        [propput, id(16)] STDMETHOD(StageTexture)([in] TextureType Stage, [in] IVoodooTexture * pTexture) PURE;
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("73926B89-5899-4E58-A714-851812188F15"),
         helpstring("File Interface")
@@ -528,9 +507,9 @@ namespace VoodooShader
         STDMETHOD(Close)() PURE;
         STDMETHOD(Read)([in, out] UINT * Length, [out, size_is(Length)] void * ppBuffer) PURE;
         STDMETHOD(Write)([in] UINT Length, [in, size_is(Length)] void * pBuffer) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("229B5CF6-99BF-4250-9088-128FE299767E"),
         helpstring("FileSystem Interface")
@@ -552,9 +531,9 @@ namespace VoodooShader
         STDMETHOD(RemoveDirectory)([in] BSTR pPath) PURE;
         STDMETHOD(FindFile)([in] BSTR pPath, [out, retval] IVoodooFile ** ppFile) PURE;
         STDMETHOD(FindImage)([in] BSTR pPath, [out, retval] IVoodooImage ** ppImage) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("38C848CD-915A-49EB-92A4-A463053C62A8"),
         helpstring("Hook System Interface")
@@ -575,9 +554,9 @@ namespace VoodooShader
         STDMETHOD(CreateHook)([in] BSTR pName, [in] void * pSource, [in] void * pDest) PURE;
         STDMETHOD(RemoveHook)([in] BSTR pName) PURE;
         STDMETHOD(RemoveAllHooks)() PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("7EF1C1F0-A474-4115-BF5A-441C83474536"),
         helpstring("Image File Interface")
@@ -604,9 +583,9 @@ namespace VoodooShader
         // IVoodooImage
         STDMETHOD(GetDesc)([out, retval] TextureDesc * pDesc) PURE;
         STDMETHOD(GetData)([in] TextureRegion Region, [out, retval] void * ppBuffer) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("41482ECA-13DA-4D12-B254-F7E55D4DC28D"),
         helpstring("Logger Interface")
@@ -633,9 +612,9 @@ namespace VoodooShader
         [vararg] STDMETHOD(Log)([in] LogLevel Level, [in] BSTR pModule, [in] BSTR pFormat, [in, satype(VARIANT)] SAFEARRAY * pArgs) PURE;
         [propget, id(9)] STDMETHOD(GetBufferSize)([out, retval] UINT * pSize) PURE;
         [propput, id(9)] STDMETHOD(SetBufferSize)([in] UINT Size) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("FC21372A-6EA6-4CA5-811C-5ED4835973B7"),
         helpstring("Parameter Interface")
@@ -657,9 +636,9 @@ namespace VoodooShader
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
         STDMETHOD(GetType)([out, retval] ParameterType * pType) PURE;
         STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("41F3AEE5-0F0E-4BF4-9512-DC290E37EB7B"),
         helpstring("Variable Parser Interface")
@@ -668,21 +647,21 @@ namespace VoodooShader
         : IUnknown
     {
         // IUnknown
-        STDMETHOD(QueryInterface)([in] REFIID riid, [out] void ** ppvObj) PURE;
-        STDMETHOD_(ULONG,AddRef)(void) PURE;
-        STDMETHOD_(ULONG,Release)(void) PURE;
+        //STDMETHOD(QueryInterface)([in] REFIID riid, [out] void ** ppvObj) PURE;
+        //STDMETHOD_(ULONG,AddRef)(void) PURE;
+        //STDMETHOD_(ULONG,Release)(void) PURE;
 
         // IVoodooObject
-        STDMETHOD(GetName)([out, retval] LPBSTR pName) PURE;
-        STDMETHOD(GetCore)([out, retval] IVoodooCore ** ppCore) PURE;
+        //STDMETHOD(GetName)([out, retval] LPBSTR pName) PURE;
+        //STDMETHOD(GetCore)([out, retval] IVoodooCore ** ppCore) PURE;
 
         // IVoodooParser
         STDMETHOD(AddVariable)([in] BSTR pName, [in] BSTR pValue, [in] BOOL System) PURE;
         STDMETHOD(RemoveVariable)([in] BSTR pName) PURE;
         STDMETHOD(Parse)([in, out] LPBSTR pString, [in, defaultvalue(PF_None)] ParseFlags Flags) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("C8BEBCB5-B62F-48B8-82CE-802220B5E930"),
         helpstring("Pass Interface")
@@ -707,9 +686,9 @@ namespace VoodooShader
         STDMETHOD(GetCgPass)([out, retval] void ** ppPass) PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
         STDMETHOD(GetTechnique)([out, retval] IVoodooTechnique ** ppTechnique) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("2A63B473-4DBF-4D8A-A97F-B285EDE583C8"),
         helpstring("Sampler Parameter Interface")
@@ -738,10 +717,9 @@ namespace VoodooShader
         [propget, id(11)] STDMETHOD(Texture)([out, retval] IVoodooTexture ** ppTexture) PURE;
 
         [propget, id(13)] STDMETHOD_(UINT, Dimensions)() PURE;
-    };
+    };*/
 
-
-    [
+    /*[
         object, pointer_default(unique),
         uuid("78BFC69B-0359-4A04-94DF-41272C5CE88F"),
         helpstring("Scalar Parameter Interface")
@@ -770,9 +748,9 @@ namespace VoodooShader
         [propget, id(11)] STDMETHOD(Value)([out, retval, satype(float)] SAFEARRAY ** ppData) PURE;
 
         [propget, id(13)] STDMETHOD_(UINT, Components)() PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("7FFF4B7A-A831-4D98-A3DD-F5DA592BE748"),
         helpstring("Shader Interface")
@@ -797,9 +775,9 @@ namespace VoodooShader
         [propget, id(10)] STDMETHOD_(UINT, ParameterCount)() PURE;
         STDMETHOD(GetParameter)([in] UINT Number, [out, retval] IVoodooParameter ** ppParameter) PURE;
         STDMETHOD(GetCgShader)([out, retval] void ** ppCgShader) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("1BD418B4-7D6C-4CFB-8138-339D26ACB378"),
         helpstring("Technique Interface")
@@ -824,9 +802,9 @@ namespace VoodooShader
         STDMETHOD(GetPass)([in] UINT Number, [out, retval] IVoodooPass ** ppPass) PURE;
         STDMETHOD(GetCgTechnique)([out, retval] void ** ppPass) PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
-    };
+    };*/
 
-    [
+    /*[
         object, pointer_default(unique),
         uuid("0F33959B-242E-4282-8510-BE6C9997F464"),
         helpstring("Texture Interface")
@@ -845,5 +823,5 @@ namespace VoodooShader
 
         // IVoodooTexture
         STDMETHOD(GetData)([out, retval] void ** ppData) PURE;
-    };
+    };*/
 }
