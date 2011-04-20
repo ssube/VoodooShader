@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_PARSER_HPP
-#define VOODOO_PARSER_HPP
+#pragma once
 
 #include "Common.hpp"
 
@@ -47,8 +46,10 @@ namespace VoodooShader
         : public IVoodooParser
     {
     public:
-        Parser(_In_ Core * core);
+        Parser();
         ~Parser();
+
+        static Parser * Create(_In_ IVoodooCore * core);
 
         // IUnknown
         STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
@@ -95,10 +96,10 @@ namespace VoodooShader
         static const WCHAR VarDelimEnd   = ')';
         static const WCHAR VarDelimPre   = '$';
 
-        UINT mRefrs;
-        Core * mCore;
-        Dictionary mVariables;
-        Dictionary mSysVariables;
+        UINT m_Refrs;
+        Core * m_Core;
+        Dictionary m_Variables;
+        Dictionary m_SysVariables;
     };
     /**
      * @}
@@ -322,5 +323,3 @@ namespace VoodooShader
      * @}
      */
 }
-
-#endif /*VOODOO_PARSER_HPP*/

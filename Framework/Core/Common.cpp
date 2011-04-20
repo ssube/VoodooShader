@@ -1,5 +1,7 @@
 #include "Common.hpp"
 
+#include "Converter.hpp"
+
 namespace VoodooShader
 {
     HRESULT WINAPI InstanceFromString(_In_ BSTR lpStr, _In_ REFIID iid, _In_ void ** pp)
@@ -30,5 +32,16 @@ namespace VoodooShader
         }
 
         return CoCreateInstance(clsid, NULL, NULL, iid, pp);
+    }
+
+    CGparameter WINAPI CreateVirtualParameter(IVoodooCore * pCore, ParameterType Type)
+    {
+        if ( pCore == NULL ) return NULL;
+
+        CGtype cgtype = Converter::ToCGType(Type);
+        CGcontext cgcontext = NULL;
+        pCore->get_CgContext((void**)&cgcontext);
+
+        return cgCreateParameter(cgcontext, cgtype);
     }
 }

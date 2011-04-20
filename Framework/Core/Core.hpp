@@ -125,7 +125,7 @@ namespace VoodooShader
         /**
          * Cg context used by void core.
          */
-        CGcontext m_CgContext;
+        CGcontext m_Context;
 
         /**
          * The currently bound (active) IAdapter implementation.

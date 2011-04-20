@@ -56,6 +56,13 @@ namespace VoodooShader
         : public IVoodooShader
     {
     public:
+        Shader();
+
+        /**
+         * Destroys the shader, unlinking and cleaning up the effect and all techniques.
+         */
+        ~Shader();
+        
         /**
          * Create a shader from a file, passing options to the compiler.
          * 
@@ -63,12 +70,7 @@ namespace VoodooShader
          * @param filename The file to use for source.
          * @param args Optionals arguments to be passed to the compiler (last item in the array must be null).
          */
-        Shader();
-
-        /**
-         * Destroys the shader, unlinking and cleaning up the effect and all techniques.
-         */
-        ~Shader();
+        static Shader * Create(IVoodooCore * pCore, IVoodooFile * pFile);
 
         // IVoodooObject
         /**
@@ -170,9 +172,10 @@ namespace VoodooShader
 
         STDMETHOD(SetupTechniques)();
 
+        UINT m_Refrs;
         IVoodooCore * m_Core;
         CComBSTR m_Name;
-        CGeffect m_CgShader;
+        CGeffect m_Shader;
 
         IVoodooTechnique * m_DefaultTechnique;
         CArray<CComPtr<IVoodooTechnique>> m_Techniques;

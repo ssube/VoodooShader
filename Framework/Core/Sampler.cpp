@@ -1,29 +1,55 @@
 #include "Sampler.hpp"
 
+#include "Converter.hpp"
+
 namespace VoodooShader
 {
-    Sampler::Sampler( _In_ IVoodooCore * pCore, _In_ BSTR pName, _In_ ParameterType Type )
-        : m_Core(pCore), m_Shader(NULL), m_Name(pName), m_Type(Type), m_Refrs(0)
-    {
+    Sampler::Sampler()
+        : m_Refrs(0), m_Core(NULL), m_Shader(NULL), m_Virtual(FALSE), m_Parameter(NULL), 
+          m_Texture(NULL), m_Type(PT_Unknown)
+    { }
 
+    Sampler * Sampler::Create(_In_ IVoodooCore * pCore, _In_ BSTR pName, _In_ ParameterType Type)
+    {
+        if ( pCore == NULL ) return NULL;
+
+        Sampler * sampler = new Sampler();
+        sampler->m_Core = pCore;
+        sampler->m_Virtual = TRUE;
+        sampler->m_Name = pName;
+        sampler->m_Type = Type;
+        sampler->m_Parameter = CreateVirtualParameter(pCore, Type);
+        
+        return sampler;
     }
 
-    Sampler::Sampler( _In_ IVoodooShader * pShader, CGparameter pParameter)
-        : m_Shader(pShader), m_Parameter(pParameter), m_Refrs(0)
+    Sampler * Sampler::Create(_In_ IVoodooShader * pShader, CGparameter pParameter)
     {
-        m_Shader->GetCore(&m_Core);
-        const char * name = cgGetParameterName(m_Parameter);
+        if ( pShader == NULL ) return NULL;
+
+        Sampler * sampler = new Sampler();
+        pShader->GetCore(&sampler->m_Core);
+        sampler->m_Shader = pShader;
+        sampler->m_Virtual = FALSE;
+        sampler->m_Parameter = pParameter;
+
+        CGtype cgtype = cgGetParameterType(pParameter);
+        sampler->m_Type = Converter::ToParameterType(cgtype);
+
+        const char * name = cgGetParameterName(pParameter);
         if ( name == NULL )
         {
             CStringW mname;
-            mname.Format("parameter_%p", m_Parameter);
-            m_Name = mname;
+            mname.Format(L"parameter_%p", pParameter);
+            sampler->m_Name = mname;
         } else {
-            m_Name = name;
+            sampler->m_Name = name;
         }
+
+        return sampler;
     }
 
-    HRESULT Sampler::QueryInterface(REFIID iid, void ** pp) throw()
+    HRESULT Sampler::QueryInterface(REFIID iid, void ** pp)
     {
         if ( pp == NULL )
         {
@@ -75,7 +101,7 @@ namespace VoodooShader
         return S_OK;
     }
 
-    UINT Sampler::get_IsVirtual()
+    BOOL Sampler::get_IsVirtual()
     {
         return m_Virtual;
     }
@@ -93,7 +119,7 @@ namespace VoodooShader
         return S_OK;
     }
 
-    HRESULT Sampler::GetParameterType(ParameterType * pType)
+    HRESULT Sampler::GetType(ParameterType * pType)
     {
         if ( pType == NULL ) return E_INVALIDARG;
 
@@ -107,7 +133,7 @@ namespace VoodooShader
         if ( pParameter == NULL ) return E_INVALIDARG;
 
         CGparameter other = NULL;
-        pParameter->GetCgParameter(&other);
+        pParameter->GetCgParameter((void**)&other);
 
         cgConnectParameter(m_Parameter, other);
 

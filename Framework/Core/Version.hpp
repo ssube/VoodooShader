@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_VERSION_HPP
-#define VOODOO_VERSION_HPP
+#pragma once
 
 // Versioning functions -------------------------------------------------------
 #define VOODOO_META__STRING(arg) #arg
@@ -112,5 +111,3 @@
 #define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER
 #define VOODOO_VC_VERSION_REV           _MSC_BUILD
 //----------------------------------------------------------------------------- 
-
-#endif /*VOODOO_VERSION_HPP*/

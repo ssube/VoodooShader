@@ -1,5 +1,6 @@
 #include "Core.hpp"
 
+#include "Converter.hpp"
 #include "Parser.hpp"
 #include "Sampler.hpp"
 #include "Scalar.hpp"
@@ -7,7 +8,9 @@
 namespace VoodooShader
 {
     Core::Core()
-        : m_Adapter(NULL), m_HookSystem(NULL), m_FileSystem(NULL), m_Logger(NULL), m_CgContext(NULL), m_Config(NULL), m_Refrs(0)
+        : m_Refrs(0), m_GlobalRoot(), m_LocalRoot(), m_RunRoot(), m_Target(),
+          m_Config(NULL), m_Context(NULL), m_Adapter(NULL), m_Logger(NULL),
+          m_HookSystem(NULL), m_FileSystem(NULL), m_Parser(NULL)
     { }
 
     Core::~Core()
@@ -158,7 +161,11 @@ namespace VoodooShader
         {
             return E_BADCLSID;
         }*/
-        m_Parser = new Parser(this);
+        m_Parser = Parser::Create(this);
+        if ( m_Parser == NULL )
+        {
+            return E_BADTHING;
+        }
 
         // Load variables, built-in first
         m_Parser->AddVariable(L"globalroot", m_GlobalRoot, TRUE);
@@ -370,7 +377,7 @@ namespace VoodooShader
         {
             return E_INVALIDARG;
         } else {
-            *ppContext = m_CgContext;
+            *ppContext = m_Context;
             return S_OK;
         }
     }
@@ -390,7 +397,7 @@ namespace VoodooShader
             cgSetErrorHandler(&(Core::CgErrorHandler), this);
         }
 
-        this->m_CgContext = (CGcontext)pContext;
+        this->m_Context = (CGcontext)pContext;
 
         return S_OK;
     }
@@ -427,9 +434,11 @@ namespace VoodooShader
             ParameterCategory pc = Converter::ToParameterCategory(Type);
             if ( pc == PC_Float || pc == PC_Matrix )
             {
-                *ppParameter = new Scalar(this, pName, Type);
+                Scalar * param = Scalar::Create(this, pName, Type);
+                param->QueryInterface(IID_VoodooParameter, (void**)ppParameter);
             } else if ( pc == PC_Matrix ) {
-                *ppParameter = new Sampler(this, pName, Type);
+                Sampler * param = Sampler::Create(this, pName, Type);
+                param->QueryInterface(IID_VoodooParameter, (void**)ppParameter);
             } else {
                 return E_INVALIDARG;
             }

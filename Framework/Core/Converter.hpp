@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_CONVERTER_HPP
-#define VOODOO_CONVERTER_HPP
+#pragma once
 
 #include "Common.hpp"
 
@@ -64,17 +63,17 @@ namespace VoodooShader
         */
         static ParameterType ToParameterType
         (
-            _In_ CGtype pt
+            _In_ CGtype Type
         );
 
         static ParameterCategory ToParameterCategory
         (
-            _In_ ParameterType type
+            _In_ ParameterType Type
         );
 
         static TextureFormat ToTextureFormat
         (
-            _In_ const char * format
+            _In_ BSTR pFormat
         );
 
         /**
@@ -85,10 +84,10 @@ namespace VoodooShader
          * @return A C-string with the name (usually identical to the 
          *        identifier).
          */
-        static const char * ToString
+        /*static const char * ToString
         (
-            _In_ TextureFormat tf
-        ); 
+            _In_ TextureFormat Format
+        ); */
 
         /**
         * Helper function to convert enum values into readable strings used in 
@@ -98,7 +97,7 @@ namespace VoodooShader
         * @return A C-string with the name (usually identical to the 
         *        identifier).
         */
-        static const char * ToString
+        /*static const char * ToString
         (
             _In_ ParameterType pt
         );
@@ -106,10 +105,9 @@ namespace VoodooShader
         static const char * ToString
         (
             _In_ ParameterCategory cat
-        );    };
+        );*/    
+    };
     /**
      * @}
      */
 }
-
-#endif /*VOODOO_CONVERTER_HPP*/

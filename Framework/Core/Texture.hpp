@@ -19,10 +19,9 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_TEXTURE_HPP
-#define VOODOO_TEXTURE_HPP
+#pragma once
 
-#include "Meta.hpp"
+#include "Common.hpp"
 
 namespace VoodooShader
 {
@@ -46,31 +45,28 @@ namespace VoodooShader
         : public IVoodooTexture
     {
     public:
-        Texture
-        (
-            _In_ String name, 
-            _In_opt_ void * texture = NULL
-        );
+        Texture();
 
-        template<typename T>
-        _Check_return_
-        inline T * GetData()
-        {
-            return reinterpret_cast<T*>(GetData());
-        };
+        static Texture * Create(_In_ BSTR pName, _In_opt_ void * pData);
 
-        _Check_return_
-        void * GetData();
+        // IUnknown
+        STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
+        STDMETHOD_(ULONG,AddRef)(void);
+        STDMETHOD_(ULONG,Release)(void);
 
-        String GetName();
+        // IVoodooObject
+        STDMETHOD(GetName)(LPBSTR pName);
+        STDMETHOD(GetCore)(IVoodooCore ** ppCore);
+
+        // IVoodooTexture
+        STDMETHOD(GetData)(void ** ppData);
 
     private:
-        String mName;
-        void * mData;
+        UINT m_Refrs;
+        CComBSTR m_Name;
+        void * m_Data;
     };
     /**
      * @}
      */
 }
-
-#endif /*VOODOO_TEXTURE_HPP*/

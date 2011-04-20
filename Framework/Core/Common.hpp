@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_META_HPP
-#define VOODOO_META_HPP
+#pragma once
 
 #include <afxtempl.h>
 #import <msxml6.dll>
@@ -55,6 +54,5 @@ namespace VoodooShader
 
     // Creates an interface to a string-format class ID. The ID may be in registry form or a ProgID.
     HRESULT WINAPI InstanceFromString(_In_ BSTR lpStr, _In_ REFIID iid, _In_ void ** pp);
+    CGparameter WINAPI CreateVirtualParameter(IVoodooCore * pCore, ParameterType Type);
 }
-
-#endif /*VOODOO_META_HPP*/

@@ -86,35 +86,35 @@ namespace VoodooShader
 
     TextureFormat Converter::ToTextureFormat
     (
-        _In_ const char * format
+        _In_ BSTR format
     )
     {
-        if ( _strnicmp(format, "TF_", 3) != 0 )
+        CStringW str(format);
+
+        if ( str.Left(3).CompareNoCase(L"TF_") != 0 )
         {
             return TF_Unknown;
         }
 
-        const char * formatBody = format + 3;
-
-        if ( formatBody[0] == 'D' )
+        if ( str[3] == 'D' )
         {
             // Depth format
-            if ( _stricmp(formatBody, "D16") == 0 ) return TF_D16;
-            if ( _stricmp(formatBody, "D32") == 0 ) return TF_D32;
+            if ( str.CompareNoCase(L"TF_D16") == 0 )     return TF_D16;
+            if ( str.CompareNoCase(L"TF_D32") == 0 )     return TF_D32;
         } else {
-            if ( _stricmp(formatBody, "RGB5"   ) == 0 ) return TF_RGB5;
-            if ( _stricmp(formatBody, "RGB5A1" ) == 0 ) return TF_RGB5A1;
-            if ( _stricmp(formatBody, "RGB8"   ) == 0 ) return TF_RGB8;
-            if ( _stricmp(formatBody, "RGBA8"  ) == 0 ) return TF_RGBA8;
-            if ( _stricmp(formatBody, "RGB10A2") == 0 ) return TF_RGB10A2;
-            if ( _stricmp(formatBody, "RGBA16F") == 0 ) return TF_RGBA16F;
-            if ( _stricmp(formatBody, "RGBA32F") == 0 ) return TF_RGBA32F;
+            if ( str.CompareNoCase(L"TF_RGB5") == 0 )    return TF_RGB5;
+            if ( str.CompareNoCase(L"TF_RGB5A1") == 0 )  return TF_RGB5A1;
+            if ( str.CompareNoCase(L"TF_RGB8") == 0 )    return TF_RGB8;
+            if ( str.CompareNoCase(L"TF_RGBA8") == 0 )   return TF_RGBA8;
+            if ( str.CompareNoCase(L"TF_RGB10A2") == 0 ) return TF_RGB10A2;
+            if ( str.CompareNoCase(L"TF_RGBA16F") == 0 ) return TF_RGBA16F;
+            if ( str.CompareNoCase(L"TF_RGBA32F") == 0 ) return TF_RGBA32F;
         }
 
         return TF_Unknown;
     }
 
-    const char * Converter::ToString
+    /*const char * Converter::ToString
     (
         _In_ TextureFormat tf
     )
@@ -191,5 +191,5 @@ namespace VoodooShader
         default:
             return "PC_Unknown";
         }
-    }
+    }*/
 }

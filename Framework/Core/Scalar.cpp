@@ -1,27 +1,49 @@
 #include "Scalar.hpp"
 
+#include "Converter.hpp"
+
 namespace VoodooShader
 {
-    Scalar::Scalar( _In_ IVoodooCore * pCore, _In_ BSTR pName, _In_ ParameterType Type )
-        : m_Core(pCore), m_Shader(NULL), m_Name(pName), m_Type(Type), m_Refrs(0)
+    Scalar::Scalar()
+        : m_Refrs(0), m_Shader(NULL), m_Core(NULL), m_Virtual(FALSE), m_Parameter(NULL), m_Type(PT_Unknown)
+    { }
+
+    Scalar * Scalar::Create(_In_ IVoodooCore * pCore, _In_ BSTR pName, _In_ ParameterType Type)
     {
-        m_Value.Create(16);
+        if ( pCore == NULL ) return NULL;
+
+        Scalar * scalar = new Scalar();
+        scalar->m_Core = pCore;
+        scalar->m_Shader = NULL;
+        scalar->m_Name = pName;
+        scalar->m_Type = Type;
+        scalar->m_Value.Create(16);
+        scalar->m_Parameter = CreateVirtualParameter(pCore, Type);
     }
 
-    Scalar::Scalar( _In_ IVoodooShader * pShader, CGparameter pParameter)
-        : m_Shader(pShader), m_Parameter(pParameter), m_Refrs(0)
+    Scalar * Scalar::Create(_In_ IVoodooShader * pShader, CGparameter pParameter)
     {
-        m_Value.Create(16);
-        m_Shader->GetCore(&m_Core);
-        const char * name = cgGetParameterName(m_Parameter);
+        if ( pShader == NULL ) return NULL;
+
+        Scalar * scalar = new Scalar();
+        pShader->GetCore(&scalar->m_Core);
+        scalar->m_Parameter = pParameter;
+        scalar->m_Value.Create(16);
+
+        const char * name = cgGetParameterName(pParameter);
         if ( name == NULL )
         {
             CStringW mname;
-            mname.Format(L"parameter_%p", m_Parameter);
-            m_Name = mname;
+            mname.Format(L"parameter_%p", pParameter);
+            scalar->m_Name = mname;
         } else {
-            m_Name = name;
+            scalar->m_Name = name;
         }
+
+        CGtype cgtype = cgGetParameterType(pParameter);
+        scalar->m_Type = Converter::ToParameterType(cgtype);
+
+        return scalar;
     }
 
     HRESULT Scalar::QueryInterface(REFIID iid, void ** pp)
@@ -94,7 +116,7 @@ namespace VoodooShader
         return S_OK;
     }
 
-    HRESULT Scalar::GetParameterType(ParameterType * pType)
+    HRESULT Scalar::GetType(ParameterType * pType)
     {
         if ( pType == NULL ) return E_INVALIDARG;
 

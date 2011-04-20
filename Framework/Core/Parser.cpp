@@ -4,13 +4,23 @@
 
 namespace VoodooShader
 {
-    Parser::Parser(_In_ Core * core)
-        : mCore(core)
-    {    }
+    Parser::Parser()
+        : m_Refrs(0), m_Core(NULL)
+    { }
 
     Parser::~Parser()
     {
-        //mVariables.clear();
+        //m_Variables.clear();
+    }
+
+    Parser * Parser::Create(_In_ Core * pCore)
+    {
+        if ( pCore == NULL ) return NULL;
+
+        Parser * parser = new Parser();
+        parser->m_Core = pCore;
+
+        return parser;
     }
 
     HRESULT Parser::QueryInterface(REFIID iid, void ** pp)
@@ -29,18 +39,18 @@ namespace VoodooShader
 
     ULONG Parser::AddRef()
     {
-        return (++mRefrs);
+        return (++m_Refrs);
     }
 
     ULONG Parser::Release()
     {
-        --mRefrs;
-        if ( mRefrs == 0 )
+        --m_Refrs;
+        if ( m_Refrs == 0 )
         {
             delete this;
             return 0;
         } else {
-            return mRefrs;
+            return m_Refrs;
         }
     }
 
@@ -52,13 +62,13 @@ namespace VoodooShader
 
     HRESULT Parser::GetCore(IVoodooCore ** ppCore)
     {
-        *ppCore = mCore;
+        *ppCore = m_Core;
         return S_OK;
     }
 
     HRESULT Parser::AddVariable(BSTR pName, BSTR pValue,BOOL System)
     {
-        /*ILoggerRef logger = mCore->GetLogger();
+        /*ILoggerRef logger = m_Core->GetLogger();
         if ( logger.get() )
         {
             logger->Log(LL_Debug, VOODOO_CORE_NAME, "Adding variable \"%s\" with value \"%s\".", name.c_str(), value.c_str());
@@ -69,9 +79,9 @@ namespace VoodooShader
 
         if ( System == TRUE )
         {
-            if ( mSysVariables.PLookup(name) == NULL )
+            if ( m_SysVariables.PLookup(name) == NULL )
             {
-                mSysVariables.SetAt(name, pValue);
+                m_SysVariables.SetAt(name, pValue);
             } else {
                 /*if ( logger.get() )
                 {
@@ -79,22 +89,22 @@ namespace VoodooShader
                 }*/
             }
         } else {
-            mVariables.SetAt(name, pValue);
+            m_Variables.SetAt(name, pValue);
         }
         return S_OK;
     }
 
     HRESULT Parser::RemoveVariable(BSTR pName)
     {
-        /*ILoggerRef logger = mCore->GetLogger();
+        /*ILoggerRef logger = m_Core->GetLogger();
         if ( logger.get() )
         {
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
         }*/
 
         CComBSTR name(pName);
         this->Parse(&name, PF_VarName);
-        mVariables.RemoveKey(name);
+        m_Variables.RemoveKey(name);
         return S_OK;
     }
 
@@ -106,10 +116,10 @@ namespace VoodooShader
 
     HRESULT Parser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth, Dictionary * State)
     {
-        //ILoggerRef logger = mCore->GetLogger();
+        //ILoggerRef logger = m_Core->GetLogger();
         //if ( logger.get() )
         //{
-            //mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
+            //m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
         //}
         if ( Depth > Parser::VarMaxDepth || SysStringLen(*pString) < 3 )
         {
@@ -195,9 +205,9 @@ namespace VoodooShader
             BSTR fvalue;
 
             if ( 
-                mSysVariables.Lookup(fname, fvalue) == 0 &&
+                m_SysVariables.Lookup(fname, fvalue) == 0 &&
                 State->Lookup(fname, fvalue) == 0 &&
-                mVariables.Lookup(fname, fvalue) == 0
+                m_Variables.Lookup(fname, fvalue) == 0
                )
             {
                 // Not a stored variable
@@ -264,7 +274,7 @@ namespace VoodooShader
 
         //if ( logger.get() )
         //{
-            //mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
+            //m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
         //}
 
         iteration.SetSysString(pString);

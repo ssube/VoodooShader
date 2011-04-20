@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_SHADER_HPP
-#define VOODOO_SHADER_HPP
+#pragma once
 
 #include "Common.hpp"
 
@@ -52,13 +51,10 @@ namespace VoodooShader
         : public IVoodooTechnique
     {
     public:
-        Technique
-        (
-            _In_ Shader * parent, 
-            _In_ CGtechnique cgTech
-        );
-
+        Technique();
         ~Technique();
+
+        static Technique * Create(Shader * pShader, CGtechnique pTechnique)
 
         // IVoodooObject
         /**

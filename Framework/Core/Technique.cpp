@@ -2,21 +2,9 @@
 
 namespace VoodooShader
 {
-    Technique::Technique(Shader * parent, CGtechnique cgTech)
-        : m_Shader(parent), m_Technique(cgTech)
-    {
-        m_Shader->GetCore(&m_Core);
-
-        const char * techName = cgGetTechniqueName(this->mTechnique);
-        if ( techName )
-        {
-            this->mName = techName;
-        } else {
-            CStringW name;
-            name.Format(L"tech_%p", cgTech);
-            this->m_Name = name;
-        }
-    }
+    Technique::Technique()
+        : m_Refrs(0), m_Core(NULL), m_Shader(NULL), m_Target(NULL), m_Technique(NULL)
+    { }
 
     Technique::~Technique()
     {
@@ -26,6 +14,28 @@ namespace VoodooShader
             m_Target = NULL;
         }
         m_Passes.RemoveAll();
+    }
+
+    Technique * Technique::Create(Shader * pShader, CGtechnique pTechnique)
+    {
+        if ( pShader == NULL || pTechnique == NULL ) return NULL;
+
+        Technique * tech = new Technique();
+        tech->m_Shader = pShader;
+        tech->m_Technique = pTechnique;
+        m_Shader->GetCore(&tech->m_Core);
+
+        const char * techName = cgGetTechniqueName(pTechnique);
+        if ( techName )
+        {
+            tech->m_Name = techName;
+        } else {
+            CStringW name;
+            name.Format(L"tech_%p", pTechnique);
+            tech->m_Name = name;
+        }
+
+        return tech;
     }
 
     HRESULT Technique::QueryInterface(REFIID iid, void ** pp)

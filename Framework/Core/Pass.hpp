@@ -52,13 +52,10 @@ namespace VoodooShader
         : public IVoodooPass
     {
     public:
-        Pass
-        (
-            _In_ IVoodooTechnique * pTechnique,
-            _In_ CGpass pPass
-        );
-
+        Pass();
         ~Pass();
+
+        static Pass * Create(_In_ IVoodooTechnique * pTechnique, _In_ CGpass pPass);
 
         /**
          * Retrieve the fully qualified pass name, including technique and
@@ -113,6 +110,7 @@ namespace VoodooShader
     private:
         STDMETHOD_(void, Link)();
 
+        UINT m_Refrs;
         CComBSTR m_Name;
         IVoodooCore * m_Core;
 

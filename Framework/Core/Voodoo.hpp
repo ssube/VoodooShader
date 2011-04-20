@@ -48,6 +48,7 @@ namespace VoodooShader
     const HRESULT E_NOT_FOUND   = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0004);
     const HRESULT E_INVALIDPOS  = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0005);
     const HRESULT E_BADCLSID    = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0100);
+    const HRESULT E_BADTHING    = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0xFFFF);
 
     // IVoodooCore
     const HRESULT E_CFGNOTFOUND = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0011);
@@ -522,7 +523,7 @@ namespace VoodooShader
         STDMETHOD(GetCore)([out, retval] IVoodooCore ** ppCore) PURE;
 
         // IVoodooFile
-        STDMETHOD(GetPath)([in, out] UINT * Length, [out, optional] LPBSTR pPath) PURE;
+        [propget, id(6)] STDMETHOD(Path)([out, optional] LPBSTR pPath) PURE;
         STDMETHOD(Open)([in] FileOpenMode Mode) PURE;
         STDMETHOD(Close)() PURE;
         STDMETHOD(Read)([in, out] UINT * Length, [out, size_is(Length)] void * ppBuffer) PURE;
@@ -594,7 +595,7 @@ namespace VoodooShader
         STDMETHOD(GetCore)([out, retval] IVoodooCore ** ppCore) PURE;
 
         // IVoodooFile
-        STDMETHOD(GetPath)([in, out] UINT * Length, [out, optional] LPBSTR pPath) PURE;
+        [propget, id(6)] STDMETHOD(Path)([out, optional] LPBSTR pPath) PURE;
         STDMETHOD(Open)([in] FileOpenMode Mode) PURE;
         STDMETHOD(Close)() PURE;
         STDMETHOD(Read)([in, out] UINT * Length, [out, size_is(Length)] void * ppBuffer) PURE;
@@ -654,7 +655,7 @@ namespace VoodooShader
         // IVoodooParameter
         [propget, id(6)] STDMETHOD_(BOOL, IsVirtual)() PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
-        STDMETHOD(GetParameterType)([out, retval] ParameterType * pType) PURE;
+        STDMETHOD(GetType)([out, retval] ParameterType * pType) PURE;
         STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
     };
 
@@ -728,7 +729,7 @@ namespace VoodooShader
         // IVoodooParameter
         [propget, id(6)] STDMETHOD_(BOOL, IsVirtual)() PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
-        STDMETHOD(GetParameterType)([out, retval] ParameterType * pType) PURE;
+        STDMETHOD(GetType)([out, retval] ParameterType * pType) PURE;
         STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
 
         // IVoodooSampler
@@ -760,7 +761,7 @@ namespace VoodooShader
         // IVoodooParameter
         [propget, id(6)] STDMETHOD_(BOOL, IsVirtual)() PURE;
         STDMETHOD(GetShader)([out, retval] IVoodooShader ** ppShader) PURE;
-        STDMETHOD(GetParameterType)([out, retval] ParameterType * pType) PURE;
+        STDMETHOD(GetType)([out, retval] ParameterType * pType) PURE;
         STDMETHOD(GetCgParameter)([out, retval] void ** ppCgParameter) PURE;
 
         // IVoodooSampler

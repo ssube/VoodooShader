@@ -42,6 +42,9 @@ namespace VoodooShader
         : public IVoodooSampler
     {
     public:
+        Sampler();
+        ~Sampler();
+        
         /**
          * Virtual parameter (context-level) constructor. This will create a named parameter in the 
          * Cg runtime and register it in the given Core, but the parameter will not exist in any 
@@ -50,26 +53,14 @@ namespace VoodooShader
          * 
          * @sa See the @ref virtualparams "parameter documentation" for details.
          */
-        Sampler
-        (
-            _In_ IVoodooCore * pCore, 
-            _In_ BSTR pName, 
-            _In_ ParameterType Type
-        );
-
+        static Sampler * Create(IVoodooCore * pCore, BSTR pName, ParameterType Type);
         /**
          * Creates a parameter from an actual parameter (shader-level). This parameter will update 
          * values in the Shader, but is more limited in use.
          * 
          * @sa See the @ref virtualparams "parameter documentation" for details.
          */
-        Sampler
-        (
-            _In_ IVoodooShader * pShader, 
-            _In_ CGparameter pParameter
-        );
-
-        ~Sampler();
+        static Sampler * Create(IVoodooShader * pShader, CGparameter pParameter);
 
         // IUnknown
         STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
@@ -98,7 +89,7 @@ namespace VoodooShader
          * Retrieves the type of this parameter. This specifies what type and how many data 
          * components are used (one texture or 1-16 floats).
          */
-        STDMETHOD(GetParameterType)(ParameterType * pType);
+        STDMETHOD(GetType)(ParameterType * pType);
         /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value 
          * is changed.

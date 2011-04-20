@@ -1,50 +1,62 @@
 #include "Shader.hpp"
 
+#include "Converter.hpp"
+
 namespace VoodooShader
 {
-    Shader::Shader(Core * parent, String filename, const char ** args)
-        : m_Core(parent), m_Name(filename), m_DefaultTechnique()
-    {
-        CGcontext context = m_Core->GetCgContext();
-
-        if ( !context || !cgIsContext(context) )
-        {
-            throw std::exception("Unable to create parameter (core has no context).");
-        }
-
-        IFileRef fileref = m_Core->GetFileSystem()->GetFile(filename);
-
-        if ( !fileref.get() )
-        {
-            throw std::exception("Unable to find file.");
-        }
-
-        this->mEffect = cgCreateEffectFromFile
-        (
-            context, 
-            fileref->GetPath().c_str(), 
-            args
-        );
-
-        if ( !cgIsEffect(this->mEffect) )
-        {
-            throw std::exception("Failed to create shader.");
-        } else {
-            cgSetEffectName(this->mEffect, this->m_Name.c_str());
-        }
-    }
+    Shader::Shader()
+        : m_Refrs(0), m_Core(NULL), m_Shader(NULL), m_DefaultTechnique(NULL)
+    { }
 
     Shader::~Shader()
     {
         //m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying shader %s.", m_Name.c_str());
 
         m_DefaultTechnique = NULL;
-        m_Techniques.clear();
-        m_Parameters.clear();
+        m_Techniques.RemoveAll();
+        m_Parameters.RemoveAll();
 
-        if ( cgIsEffect(mEffect) )
+        if ( cgIsEffect(m_Shader) )
         {
-            cgDestroyEffect(mEffect);
+            cgDestroyEffect(m_Shader);
+        }
+    }
+
+    Shader * Shader::Create(IVoodooCore * pCore, IVoodooFile * pFile)
+    {
+        if ( pCore == NULL || pFile == NULL )
+        {
+            return NULL;
+        }
+
+        Shader * shader = new Shader();
+
+        pFile->get_Path(&shader->m_Name);
+
+        CGcontext context = NULL; 
+        pCore->get_CgContext((void**)&context);
+
+        if ( context == NULL || !cgIsContext(context) )
+        {
+            delete shader;
+            return NULL;
+        }
+
+        CW2A filename(shader->m_Name);
+        shader->m_Shader = cgCreateEffectFromFile
+        (
+            context, 
+            filename, 
+            NULL
+        );
+
+        if ( !cgIsEffect(shader->m_Shader) )
+        {
+            delete shader;
+            return NULL;
+        } else {
+            cgSetEffectName(shader->m_Shader, filename);
+            return shader;
         }
     }
 
@@ -64,18 +76,18 @@ namespace VoodooShader
 
     ULONG Shader::AddRef()
     {
-        return (++mRefrs);
+        return (++m_Refrs);
     }
 
     ULONG Shader::Release()
     {
-        --mRefrs;
-        if ( mRefrs == 0 )
+        --m_Refrs;
+        if ( m_Refrs == 0 )
         {
             delete this;
             return 0;
         } else {
-            return mRefrs;
+            return m_Refrs;
         }
     }
 
@@ -146,7 +158,7 @@ namespace VoodooShader
         if ( ppParameter == NULL )
         {
             return E_INVALIDARG;
-        } else if ( Number < m_Parameters.GetSize() ) {
+        } else if ( Number < (UINT)m_Parameters.GetSize() ) {
             *ppParameter = m_Parameters[Number];
             return S_OK;
         } else {
@@ -160,29 +172,39 @@ namespace VoodooShader
         {
             return E_INVALIDARG;
         } else {
-            *ppCgShader = m_CgShader;
+            *ppCgShader = m_Shader;
             return S_OK;
         }
     }
 
-    void Shader::Link()
+    HRESULT Shader::Link()
     {
         // Make sure it's a valid effect
-        if ( !cgIsEffect(mEffect) )
+        if ( !cgIsEffect(m_Shader) )
         {
-            Throw(VOODOO_CORE_NAME, "Invalid effect.", m_Core);
+            return E_BADTHING;
         }
 
         // Link parameters first
-        CGparameter cParam = cgGetFirstEffectParameter(this->mEffect);
+        CGparameter cParam = cgGetFirstEffectParameter(m_Shader);
 
         while ( cgIsParameter(cParam) )
         {
-            ParameterRef param(new Parameter(this, cParam));
+            IVoodooParameter * iparameter = NULL;
 
-            this->LinkParameter(param);
+            ParameterCategory pc = Converter::ToParameterCategory(cgGetParameterType(cParam));
+            if ( pc == PC_Float || pc == PC_Matrix )
+            {
+                Scalar * parameter = Scalar::Create(this, cParam);
+                parameter->QueryInterface(IID_VoodooParameter, &iparameter);
+            } else if ( pc == PC_Sampler ) {
+                Sampler * parameter = Sampler::Create(this, cParam);
+                parameter->QueryInterface(IID_VoodooParameter, &iparameter);
+            }
 
-            this->m_Parameters.push_back(param);
+            m_Parameters.Add(iparameter);
+
+            this->LinkParameter(iparameter);
 
             cParam = cgGetNextParameter(cParam);
         }
@@ -190,11 +212,13 @@ namespace VoodooShader
         this->SetupTechniques();
     }
 
-    void Shader::LinkParameter(ParameterRef param)
+    void Shader::LinkParameter(IVoodooParameter * param)
     {
         // Cache basic data for future use 
-        ParameterType type = param->GetType();
-        CGparameter cgparam = param->GetCgParameter();
+        ParameterType type;
+        param->GetType(&type);
+        CGparameter cgparam;
+        param->GetCgParameter(&cgparam);
 
         // Check if it has a global link annotation
         CGannotation globalAnnotation = cgGetNamedParameterAnnotation(cgparam, "parameter");
@@ -445,35 +469,35 @@ namespace VoodooShader
 
             if ( valid == CG_TRUE )
             {
-                m_Core->GetLogger()->Log
+                /*m_Core->GetLogger()->Log
                 (
                     LL_Debug,
                     VOODOO_CORE_NAME,
                     "Validated technique %s.",
                     cgGetTechniqueName(cTech)
-                );
+                );*/
 
                 // Insert the technique into the map
-                TechniqueRef tech(new Technique(this, cTech));
+                Technique * tech = Technique::Create(this, cTech);
+                tech->Link();
 
-                const char * techName = cgGetTechniqueName(cTech);
-                m_Techniques[techName] = tech;
+                IVoodooTechnique * itech = NULL;
+                tech->QueryInterface(IID_VoodooTechnique, (void**)&itech);
+                m_Techniques.Add(itech);
 
                 // The first valid technique is the default one
-                if ( !m_DefaultTechnique.get() )
+                if ( m_DefaultTechnique == NULL )
                 {
-                    this->m_DefaultTechnique = tech;
+                    m_DefaultTechnique = itech;
                 }
-
-                tech->Link();
             } else {
-                m_Core->GetLogger()->Log
+                /*m_Core->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
                     "Technique failed to validate: %s.",
                     cgGetTechniqueName(cTech)
-                );
+                );*/
             }
 
             cTech = cgGetNextTechnique(cTech);

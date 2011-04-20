@@ -2,27 +2,41 @@
 
 namespace VoodooShader
 {
-    Pass::Pass(IVoodooTechnique * pTechnique, CGpass pPass)
-        : m_Technique(pTechnique), m_Pass(pPass)
-    {
-        m_Technique->GetCore(&m_Core);
-
-        const char * passName = cgGetPassName(m_Pass);
-        if ( passName )
-        {
-            this->m_Name = passName;
-        } else {
-            CStringW mname;
-            mname.Format(L"pass_%p", m_Pass);
-            m_Name = mname;
-        }
-    }
+    Pass::Pass()
+        : m_Refrs(0), m_Core(NULL), m_Shader(NULL), m_Technique(NULL), m_Target(NULL),
+          m_Pass(NULL), m_VertexProgram(NULL), m_FragmentProgram(NULL), m_GeometryProgram(NULL),
+          m_DomainProgram(NULL), m_HullProgram(NULL)
+    { }
 
     Pass::~Pass()
     {
         m_Target->Release();
 
         //mCore->GetAdapter()->UnloadPass(this);
+    }
+
+    Pass * Pass::Create(_In_ IVoodooTechnique * pTechnique, _In_ CGpass pPass)
+    {
+        if ( pTechnique == NULL || pPass == NULL || !cgIsPass(pPass) ) return NULL;
+        
+        Pass * pass = new Pass();
+        pTechnique->GetCore(&pass->m_Core);
+        pTechnique->GetShader(&pass->m_Shader);
+        pass->m_Technique = pTechnique;
+        pass->m_Pass = pPass;
+
+        const char * passName = cgGetPassName(pPass);
+        if ( passName )
+        {
+            pTechnique->GetName(&pass->m_Name);
+            pass->m_Name += passName;
+        } else {
+            CStringW mname;
+            mname.Format(L"pass_%p", pPass);
+            pass->m_Name = mname;
+        }
+
+        return pass;
     }
 
     HRESULT Pass::QueryInterface(REFIID iid, void ** pp)
@@ -85,7 +99,7 @@ namespace VoodooShader
         return S_OK;
     }
 
-    HRESULT Pass::GetProgram(ProgramStage stage, void ** ppProgram)
+    HRESULT Pass::GetCgProgram(ProgramStage stage, void ** ppProgram)
     {
         if ( ppProgram == NULL ) return E_INVALIDARG;
         
@@ -167,7 +181,7 @@ namespace VoodooShader
                 this->GetName().c_str()
             );*/
 
-            m_Core->GetTexture(TT_PassTarget, &m_Target);
+            m_Core->get_StageTexture(TT_PassTarget, &m_Target);
         }
 
         // Load the programs
