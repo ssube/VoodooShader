@@ -6,6 +6,31 @@
 #include "Common.hpp"
 
 // CVoodooTexture
+CVoodooTexture::CVoodooTexture()
+{
+    m_Core = NULL;
+    m_Name.Empty();
+    m_Data = NULL;
+}
+
+CVoodooTexture::~CVoodooTexture()
+{
+    m_Core = NULL;
+    m_Name.Empty();
+    m_Data = NULL;
+}
+
+CVoodooTexture * CVoodooTexture::Create(IVoodooCore * pCore, BSTR pName, void * pData)
+{
+    if ( pCore == NULL || pName == NULL ) return NULL;
+
+    CVoodooTexture * texture = new CVoodooTexture();
+    texture->m_Core = pCore;
+    texture->m_Name = pName;
+    texture->m_Data = pData;
+    return texture;
+}
+
 STDMETHODIMP CVoodooTexture::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )

@@ -15,7 +15,7 @@ STDMETHODIMP CVoodooCore::QueryInterface(REFIID iid, void ** pp) throw()
     if ( pp == NULL )
     {
         return E_POINTER;
-    } else if ( iid == IID_IUnknown || iid == IID_IVoodooCore) ) {
+    } else if ( iid == IID_IUnknown || iid == IID_IVoodooCore ) {
         this->AddRef();
         *pp = this;
         return S_OK;
@@ -70,7 +70,7 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
     HRESULT hr = CoCreateInstance(__uuidof(DOMDocument60), NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&m_Config));
     if ( FAILED(hr) )
     {
-        return E_MSXMLERROR;
+        return E_INVALIDCFG;
     }
 
     m_Config->put_async(VARIANT_FALSE);
@@ -102,8 +102,9 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
     CComBSTR queryNodeName = L"./@name";
 
     // Set up the internal objects
-    m_Parser = new CVoodooParser(this);
-    if ( m_Parser == NULL )
+    CVoodooParser * parser = new CVoodooParser(this);
+    hr = parser->QueryInterface(IID_IVoodooParser, &m_Parser);
+    if ( FAILED(hr) || m_Parser == NULL )
     {
         return E_BADTHING;
     }
@@ -151,7 +152,7 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
             hr = InstanceFromString(str, IID_IVoodooLogger, (void**)&m_Logger);
             if ( FAILED(hr) || m_Logger == NULL )
             {
-                return E_BADLOGCLSID;
+                return E_BADCLSID;
             } else {
                 CComBSTR queryLF = L"./LogFile/text()";
                 IXMLDOMNode * pFileNode = NULL;
@@ -182,7 +183,7 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
             hr = InstanceFromString(str, IID_IVoodooHookSystem, (void**)&m_HookSystem);
             if ( FAILED(hr) || m_FileSystem == NULL )
             {
-                return E_BADHSCLSID;
+                return E_BADCLSID;
             }
             SysFreeString(str);
         }
@@ -201,7 +202,7 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
             hr = InstanceFromString(str, IID_IVoodooFileSystem, (void**)&m_FileSystem);
             if ( FAILED(hr) || m_FileSystem == NULL )
             {
-                return E_BADFSCLSID;
+                return E_BADCLSID;
             }
             SysFreeString(str);
         }
@@ -215,12 +216,12 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
             VARIANT v;
             pNode->get_nodeValue(&v);
             CComBSTR str(v.bstrVal);
-            m_Parser->Parse(&str, PF_None);
+            m_Parser->Parse(str, PF_None, &str);
 
             hr = InstanceFromString(str, IID_IVoodooAdapter, (void**)&m_Adapter);
             if ( FAILED(hr) || m_FileSystem == NULL )
             {
-                return E_BADFSCLSID;
+                return E_BADCLSID;
             }
             SysFreeString(str);
         }
@@ -335,7 +336,7 @@ STDMETHODIMP CVoodooCore::put_CgContext(
     {
         return E_INVALIDARG;
     } else {
-        m_Context = V_BYREF(&ppCgContext);
+        m_Context = V_BYREF(&pCgContext);
         return S_OK;
     }
 }
@@ -377,7 +378,7 @@ STDMETHODIMP CVoodooCore::CreateParameter(
         if ( pc == PC_Float || pc == PC_Matrix || pc == PC_Sampler )
         {
             CVoodooParameter * param = new CVoodooParameter();
-            param->QueryInterface(IID_VoodooParameter, (void**)ppParameter);
+            param->QueryInterface(IID_IVoodooParameter, (void**)ppParameter);
         } else {
             return E_INVALIDARG;
         }

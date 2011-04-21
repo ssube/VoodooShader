@@ -268,12 +268,12 @@ interface IVoodooParser : IDispatch{
 interface IVoodooShader : IDispatch{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [propget, id(3)] HRESULT TechniqueCount([out, retval] UINT ** ppCount);
-    [id(4)] HRESULT GetTechnique([in] UINT Number, [out, retval] IVoodooTechnique ** ppTechnique);
+    [propget, id(3)] HRESULT TechniqueCount([out, retval] INT * ppCount);
+    [id(4)] HRESULT GetTechnique([in] INT Number, [out, retval] IVoodooTechnique ** ppTechnique);
     [propget, id(5)] HRESULT DefaultTechnique([out, retval] IVoodooTechnique ** ppTechnique);
     [propput, id(5)] HRESULT DefaultTechnique([in] IVoodooTechnique * pTechnique);
-    [propget, id(7)] HRESULT ParameterCount([out, retval] UINT ** ppCount);
-    [id(8)] HRESULT GetParameter([in] UINT Number, [out, retval] IVoodooParameter ** ppParameter);
+    [propget, id(7)] HRESULT ParameterCount([out, retval] INT * ppCount);
+    [id(8)] HRESULT GetParameter([in] INT Number, [out, retval] IVoodooParameter ** ppParameter);
     [id(9)] HRESULT GetCgShader([out, retval] VARIANT * ppCgShader);
 };
 [
@@ -287,8 +287,8 @@ interface IVoodooTechnique : IDispatch{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [propget, id(3)] HRESULT Target([out, retval] IVoodooTexture ** ppTexture);
-    [propget, id(4)] HRESULT PassCount([out, retval] UINT ** ppCount);
-    [id(5)] HRESULT GetPass([in] UINT Number, [out, retval] IVoodooPass ** ppPass);
+    [propget, id(4)] HRESULT PassCount([out, retval] INT * ppCount);
+    [id(5)] HRESULT GetPass([in] INT Number, [out, retval] IVoodooPass ** ppPass);
     [propget, id(6)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
     [id(7)] HRESULT GetCgTechnique([out, retval] VARIANT * ppPass);
 };
@@ -299,13 +299,13 @@ interface IVoodooTechnique : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooPass : IUnknown{
+interface IVoodooPass : IDispatch{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR pName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [propget, id(3)] HRESULT Target([out, retval] IVoodooTexture ** ppTexture);
     [propget, id(4)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
     [propget, id(5)] HRESULT Technique([out, retval] IVoodooTechnique ** ppTechnique);
-    [id(6)] HRESULT GetCgProgram([in] ProgramStage Stage, [out, retval] VARIANT ** ppProgram);
+    [id(6)] HRESULT GetCgProgram([in] ProgramStage Stage, [out, retval] VARIANT * ppProgram);
     [id(7)] HRESULT GetCgPass([out, retval] VARIANT * ppPass);
 };
 [

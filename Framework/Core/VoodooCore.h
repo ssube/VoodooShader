@@ -6,6 +6,8 @@
 #include <comsvcs.h>
 #include <msxml2.h>
 
+#include "Common.hpp"
+
 using namespace ATL;
 
 // CVoodooCore

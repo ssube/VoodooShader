@@ -5,6 +5,8 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
+#include "Common.hpp"
+
 using namespace ATL;
 
 
@@ -46,6 +48,43 @@ END_COM_MAP()
 
 // IVoodooShader
 public:
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+        /* [retval][out] */ LPBSTR pName);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+        /* [retval][out] */ IVoodooCore **ppCore);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TechniqueCount( 
+        /* [retval][out] */ INT * pCount);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetTechnique( 
+        /* [in] */ INT Number,
+        /* [retval][out] */ IVoodooTechnique **ppTechnique);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DefaultTechnique( 
+        /* [retval][out] */ IVoodooTechnique **ppTechnique);
+
+    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DefaultTechnique( 
+        /* [in] */ IVoodooTechnique *pTechnique);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ParameterCount( 
+        /* [retval][out] */ INT *ppCount);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetParameter( 
+        /* [in] */ INT Number,
+        /* [retval][out] */ IVoodooParameter **ppParameter);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgShader( 
+        /* [retval][out] */ VARIANT *ppCgShader);
+
+private:
+    ULONG m_Refrs;
+    CComBSTR m_Name;
+    IVoodooCore * m_Core;
+    CArray<CComPtr<IVoodooTechnique>> m_Techniques;
+    CComPtr<IVoodooTechnique> m_Default;
+    CArray<CComPtr<IVoodooParameter>> m_Parameters;
+    CGeffect m_Effect;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooShader), CVoodooShader)

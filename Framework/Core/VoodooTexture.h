@@ -5,6 +5,8 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
+#include "Common.hpp"
+
 using namespace ATL;
 
 
@@ -17,9 +19,9 @@ class ATL_NO_VTABLE CVoodooTexture :
 	public IDispatchImpl<IVoodooTexture, &IID_IVoodooTexture, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooTexture()
-	{
-	}
+	CVoodooTexture();
+    ~CVoodooTexture();
+    CVoodooTexture * Create(IVoodooCore * pCore, BSTR pName, void * pData);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
@@ -43,6 +45,10 @@ END_COM_MAP()
 
 // IVoodooTexture
 public:
+    //virtual HRESULT QueryInterface(REFIID riid, void ** ppvObject);
+    //virtual ULONG AddRef();
+    //virtual ULONG Release();
+
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
         /* [retval][out] */ LPBSTR pName);
 

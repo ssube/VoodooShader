@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu Apr 21 03:41:27 2011
+/* at Thu Apr 21 15:37:44 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -1117,10 +1117,10 @@ EXTERN_C const IID IID_IVoodooShader;
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TechniqueCount( 
-            /* [retval][out] */ UINT **ppCount) = 0;
+            /* [retval][out] */ INT *ppCount) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetTechnique( 
-            /* [in] */ UINT Number,
+            /* [in] */ INT Number,
             /* [retval][out] */ IVoodooTechnique **ppTechnique) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DefaultTechnique( 
@@ -1130,10 +1130,10 @@ EXTERN_C const IID IID_IVoodooShader;
             /* [in] */ IVoodooTechnique *pTechnique) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ParameterCount( 
-            /* [retval][out] */ UINT **ppCount) = 0;
+            /* [retval][out] */ INT *ppCount) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetParameter( 
-            /* [in] */ UINT Number,
+            /* [in] */ INT Number,
             /* [retval][out] */ IVoodooParameter **ppParameter) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgShader( 
@@ -1198,11 +1198,11 @@ EXTERN_C const IID IID_IVoodooShader;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TechniqueCount )( 
             IVoodooShader * This,
-            /* [retval][out] */ UINT **ppCount);
+            /* [retval][out] */ INT *ppCount);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTechnique )( 
             IVoodooShader * This,
-            /* [in] */ UINT Number,
+            /* [in] */ INT Number,
             /* [retval][out] */ IVoodooTechnique **ppTechnique);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultTechnique )( 
@@ -1215,11 +1215,11 @@ EXTERN_C const IID IID_IVoodooShader;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ParameterCount )( 
             IVoodooShader * This,
-            /* [retval][out] */ UINT **ppCount);
+            /* [retval][out] */ INT *ppCount);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetParameter )( 
             IVoodooShader * This,
-            /* [in] */ UINT Number,
+            /* [in] */ INT Number,
             /* [retval][out] */ IVoodooParameter **ppParameter);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCgShader )( 
@@ -1325,10 +1325,10 @@ EXTERN_C const IID IID_IVoodooTechnique;
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PassCount( 
-            /* [retval][out] */ UINT **ppCount) = 0;
+            /* [retval][out] */ INT *ppCount) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetPass( 
-            /* [in] */ UINT Number,
+            /* [in] */ INT Number,
             /* [retval][out] */ IVoodooPass **ppPass) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shader( 
@@ -1400,11 +1400,11 @@ EXTERN_C const IID IID_IVoodooTechnique;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PassCount )( 
             IVoodooTechnique * This,
-            /* [retval][out] */ UINT **ppCount);
+            /* [retval][out] */ INT *ppCount);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetPass )( 
             IVoodooTechnique * This,
-            /* [in] */ UINT Number,
+            /* [in] */ INT Number,
             /* [retval][out] */ IVoodooPass **ppPass);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Shader )( 
@@ -1495,7 +1495,7 @@ EXTERN_C const IID IID_IVoodooPass;
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
     MIDL_INTERFACE("7C231D9E-146B-40CF-9F39-A4D3513DD7F7")
-    IVoodooPass : public IUnknown
+    IVoodooPass : public IDispatch
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
@@ -1515,7 +1515,7 @@ EXTERN_C const IID IID_IVoodooPass;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgProgram( 
             /* [in] */ ProgramStage Stage,
-            /* [retval][out] */ VARIANT **ppProgram) = 0;
+            /* [retval][out] */ VARIANT *ppProgram) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgPass( 
             /* [retval][out] */ VARIANT *ppPass) = 0;
@@ -1540,6 +1540,35 @@ EXTERN_C const IID IID_IVoodooPass;
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IVoodooPass * This);
         
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IVoodooPass * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IVoodooPass * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IVoodooPass * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IVoodooPass * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             IVoodooPass * This,
             /* [retval][out] */ LPBSTR pName);
@@ -1563,7 +1592,7 @@ EXTERN_C const IID IID_IVoodooPass;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCgProgram )( 
             IVoodooPass * This,
             /* [in] */ ProgramStage Stage,
-            /* [retval][out] */ VARIANT **ppProgram);
+            /* [retval][out] */ VARIANT *ppProgram);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCgPass )( 
             IVoodooPass * This,
@@ -1590,6 +1619,19 @@ EXTERN_C const IID IID_IVoodooPass;
 
 #define IVoodooPass_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IVoodooPass_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IVoodooPass_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IVoodooPass_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IVoodooPass_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IVoodooPass_get_Name(This,pName)	\
