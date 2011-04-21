@@ -46,6 +46,26 @@ END_COM_MAP()
 
 // IVoodooHookSystem
 public:
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+        /* [retval][out] */ LPBSTR pName);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+        /* [retval][out] */ IVoodooCore **ppCore);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
+        /* [in] */ BSTR pName,
+        /* [in] */ FunctionPtr pSource,
+        /* [in] */ FunctionPtr pDest);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Remove( 
+        /* [in] */ BSTR pName);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveAll( void);
+
+private:
+    ULONG m_Refrs;
+    CComBSTR m_Name;
+    IVoodooCore * m_Core;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooHookSystem), CVoodooHookSystem)

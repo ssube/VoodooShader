@@ -46,6 +46,30 @@ END_COM_MAP()
 
 // IVoodooFileSystem
 public:
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+        /* [retval][out] */ LPBSTR pName);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+        /* [retval][out] */ IVoodooCore **ppCore);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddDirectory( 
+        /* [in] */ BSTR pPath);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveDirectory( 
+        /* [in] */ BSTR pPath);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE FindFile( 
+        /* [in] */ BSTR pPath,
+        /* [retval][out] */ IVoodooFile **ppFile);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE FindImage( 
+        /* [in] */ BSTR pPath,
+        /* [retval][out] */ IVoodooImage **ppImage);
+
+private:
+    ULONG m_Refrs;
+    CComBSTR m_Name;
+    IVoodooCore * m_Core;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooFileSystem), CVoodooFileSystem)

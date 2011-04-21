@@ -5,6 +5,8 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
+#include "VoodooFile.h"
+
 using namespace ATL;
 
 
@@ -14,7 +16,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooImage :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooImage, &CLSID_VoodooImage>,
-	public IDispatchImpl<IVoodooImage, &IID_IVoodooImage, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+    public IDispatchImpl<IVoodooImage, &IID_IVoodooImage, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooImage()
@@ -41,11 +43,44 @@ BEGIN_COM_MAP(CVoodooImage)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
+// IVoodooFile
+virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+    /* [retval][out] */ LPBSTR pName);
 
+virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+    /* [retval][out] */ IVoodooCore **ppCore);
 
+virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+    /* [retval][out] */ LPBSTR pPath);
+
+virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
+    /* [in] */ FileOpenMode Mode);
+
+virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close(void);
+
+virtual /* [id] */ HRESULT STDMETHODCALLTYPE Read( 
+    /* [out][in] */ int *Length,
+    /* [size_is][out] */ byte Buffer[  ]);
+
+virtual /* [id] */ HRESULT STDMETHODCALLTYPE Write( 
+    /* [in] */ int Length,
+    /* [size_is][in] */ byte Buffer[  ]);
 
 // IVoodooImage
 public:
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Desc( 
+        /* [retval][out] */ TextureDesc *pDesc);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
+        /* [in] */ TextureRegion Region,
+        /* [out][in] */ int *pSize,
+        /* [size_is][retval][out] */ byte ppBuffer[  ]);
+
+private:
+    ULONG m_Refrs;
+    CComBSTR m_Name;
+    IVoodooCore * m_Core;
+    CComBSTR m_Path;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooImage), CVoodooImage)

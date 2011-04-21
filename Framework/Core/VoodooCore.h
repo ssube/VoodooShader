@@ -4,13 +4,11 @@
 #include "Core_i.h"
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
+#include <msxml2.h>
 
 using namespace ATL;
 
-
-
 // CVoodooCore
-
 class ATL_NO_VTABLE CVoodooCore :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooCore, &CLSID_VoodooCore>,
@@ -45,7 +43,116 @@ END_COM_MAP()
 
 
 // IVoodooCore
-public:
+public:    
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Initialize( 
+        /* [optional][in] */ VARIANT pConfig) ;
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Parser( 
+        /* [retval][out] */ IVoodooParser **ppParser) ;
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_HookSystem( 
+        /* [retval][out] */ IVoodooHookSystem **ppHookSystem) ;
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FileSystem( 
+        /* [retval][out] */ IVoodooFileSystem **ppFileSystem) ;
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Adapter( 
+        /* [retval][out] */ IVoodooAdapter **ppAdapter) ;
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Logger( 
+        /* [retval][out] */ IVoodooLogger **ppLogger) ;
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Config( 
+        /* [retval][out] */ IXMLDOMDocument **ppConfig) ;
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgContext( 
+        /* [retval][out] */ VARIANT * pCgContext) ;
+
+    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_CgContext( 
+        /* [in] */ VARIANT pCgContext) ;
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateShader( 
+        /* [in] */ IVoodooFile *pFile,
+        /* [retval][out] */ IVoodooShader **ppShader) ;
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateParameter( 
+        /* [in] */ BSTR pName,
+        /* [in] */ ParameterType Type,
+        /* [retval][out] */ IVoodooParameter **ppParameter) ;
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
+        /* [in] */ BSTR pName,
+        /* [in] */ VARIANT *pData,
+        /* [retval][out] */ IVoodooTexture **ppTexture) ;
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetParameter( 
+        /* [in] */ BSTR pName,
+        /* [retval][out] */ IVoodooParameter **ppParameter) ;
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetTexture( 
+        /* [in] */ BSTR pName,
+        /* [retval][out] */ IVoodooTexture **ppTexture) ;
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveTexture( 
+        /* [in] */ BSTR pName) ;
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StageTexture( 
+        /* [in] */ TextureType Stage,
+        /* [retval][out] */ IVoodooTexture **ppTexture) ;
+
+    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_StageTexture( 
+        /* [in] */ TextureType Stage,
+        /* [in] */ IVoodooTexture *pTexture) ;
+
+    private:
+        UINT m_Refrs;
+
+        /**
+         * Base path void core was created with.
+         */
+        CComBSTR m_GlobalRoot;
+        CComBSTR m_LocalRoot;
+        CComBSTR m_RunRoot;
+        CComBSTR m_Target;
+
+        /**
+         * Config file (actually a <code>pugi::xml_document *</code>, stored as void).
+         */
+        IXMLDOMDocument * m_Config;
+
+        /**
+         * Cg context used by void core.
+         */
+        void * m_Context;
+
+        /**
+         * The currently bound (active) IAdapter implementation.
+         */
+        IVoodooAdapter * m_Adapter;
+
+        /**
+         * The current ILogger implementation.
+         */
+        IVoodooLogger * m_Logger;
+
+        /**
+         * The current IHookManager implementation.
+         */
+        IVoodooHookSystem * m_HookSystem;
+
+        /**
+         * The current IFileSystem implementation.
+         */
+        IVoodooFileSystem * m_FileSystem;
+
+        /**
+         * The current variable parser.
+         */
+        IVoodooParser * m_Parser;
+
+        CMap<BSTR, BSTR, CComPtr<IVoodooParameter>, CComPtr<IVoodooParameter> > m_Parameters;
+        CMap<BSTR, BSTR, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > m_Textures;
+        CMap<TextureType, TextureType, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > m_StageTextures;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooCore), CVoodooCore)

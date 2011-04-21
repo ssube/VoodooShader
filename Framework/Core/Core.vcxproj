@@ -161,6 +161,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common.hpp" />
     <ClInclude Include="compreg.h" />
     <ClInclude Include="Core_i.h" />
     <ClInclude Include="dllmain.h" />

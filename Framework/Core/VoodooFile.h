@@ -7,8 +7,6 @@
 
 using namespace ATL;
 
-
-
 // CVoodooFile
 
 class ATL_NO_VTABLE CVoodooFile :
@@ -41,11 +39,35 @@ BEGIN_COM_MAP(CVoodooFile)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
-
-
-
 // IVoodooFile
 public:
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+        /* [retval][out] */ LPBSTR pName);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+        /* [retval][out] */ IVoodooCore **ppCore);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+        /* [retval][out] */ LPBSTR pPath);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
+        /* [in] */ FileOpenMode Mode);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close(void);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Read( 
+        /* [out][in] */ int *Length,
+        /* [size_is][out] */ byte Buffer[  ]);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Write( 
+        /* [in] */ int Length,
+        /* [size_is][in] */ byte Buffer[  ]);
+
+private:
+    ULONG m_Refrs;
+    CComBSTR m_Name;
+    IVoodooCore * m_Core;
+    CComBSTR m_Path;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooFile), CVoodooFile)

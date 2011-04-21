@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "VoodooTechnique.h"
 
+#include "Common.hpp"
+
 
 // CVoodooTechnique
 

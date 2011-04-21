@@ -46,6 +46,62 @@ END_COM_MAP()
 
 // IVoodooAdapter
 public:
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+        /* [retval][out] */ LPBSTR pName);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+        /* [retval][out] */ IVoodooCore **ppCore);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadPass( 
+        /* [in] */ IVoodooPass *pPass);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE UnloadPass( 
+        /* [in] */ IVoodooPass *pPass);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Pass( 
+        /* [retval][out] */ IVoodooPass **ppPass);
+
+    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Pass( 
+        /* [in] */ IVoodooPass *pPass);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Target( 
+        /* [retval][out] */ IVoodooTexture **ppTarget);
+
+    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Target( 
+        /* [in] */ IVoodooTexture *pTarget);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
+        /* [in] */ UINT Vertexes,
+        /* [in] */ Vertex *pVertexData);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
+        /* [in] */ IVoodooParameter *pParameter);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawShader( 
+        /* [in] */ IVoodooShader *pShader);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
+        /* [in] */ BSTR pName,
+        /* [in] */ TextureDesc Description,
+        /* [retval][out] */ IVoodooTexture **ppTexture);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadTexture( 
+        /* [in] */ IVoodooImage *pImage,
+        /* [retval][out] */ IVoodooTexture **ppTexture);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE ConnectTexture( 
+        /* [in] */ IVoodooParameter *pParameter,
+        /* [in] */ IVoodooTexture *pTexture);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE HandleError( 
+        /* [in] */ VARIANT pContext,
+        /* [in] */ DWORD Error,
+        /* [in] */ IVoodooCore *pCore);
+
+private:
+    ULONG m_Refrs;
+    CComBSTR m_Name;
+    IVoodooCore * m_Core;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooAdapter), CVoodooAdapter)

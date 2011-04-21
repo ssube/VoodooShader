@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "VoodooShader.h"
 
+#include "Common.hpp"
+
 
 // CVoodooShader
 

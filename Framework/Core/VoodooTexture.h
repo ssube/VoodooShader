@@ -41,11 +41,22 @@ BEGIN_COM_MAP(CVoodooTexture)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
-
-
-
 // IVoodooTexture
 public:
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+        /* [retval][out] */ LPBSTR pName);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+        /* [retval][out] */ IVoodooCore **ppCore);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
+        /* [retval][out] */ VARIANT *ppData);
+
+private:
+    ULONG m_Refrs;
+    CComBSTR m_Name;
+    IVoodooCore * m_Core;
+    void * m_Data;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooTexture), CVoodooTexture)
