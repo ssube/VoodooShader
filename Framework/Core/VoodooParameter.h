@@ -4,6 +4,9 @@
 #include "Core_i.h"
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
+#include <atlsafe.h>
+
+#include "Common.hpp"
 
 using namespace ATL;
 
@@ -46,6 +49,52 @@ END_COM_MAP()
 
 // IVoodooParameter
 public:
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+        /* [retval][out] */ LPBSTR pName);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+        /* [retval][out] */ IVoodooCore **ppCore);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
+        /* [retval][out] */ ParameterType *pType);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Virtual( 
+        /* [retval][out] */ BOOL *pVirtual);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE AttachParameter( 
+        /* [in] */ IVoodooParameter *pParameter);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Components( 
+        /* [retval][out] */ int *pComponents);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_SamplerValue( 
+        /* [retval][out] */ IVoodooTexture **ppTexture);
+
+    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_SamplerValue( 
+        /* [in] */ IVoodooTexture *pTexture);
+
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ScalarValue( 
+        /* [retval][out] */ SAFEARRAY * *ppData);
+
+    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ScalarValue( 
+        /* [in] */ SAFEARRAY * pData);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE get_Shader( 
+        /* [retval][out] */ IVoodooShader **ppShader);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE get_CgParameter( 
+        /* [retval][out] */ VARIANT *ppCgParameter);
+
+private:
+    ULONG m_Refrs;
+    CComBSTR m_Name;
+    IVoodooCore * m_Core;
+    IVoodooShader * m_Shader;
+    ParameterType m_Type;
+    BOOL m_Virtual;
+    IVoodooTexture * m_Texture;
+    CComSafeArray<float> m_Data;
+    CGparameter m_Parameter;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooParameter), CVoodooParameter)

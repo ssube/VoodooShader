@@ -333,13 +333,13 @@ interface IVoodooParameter : IDispatch{
     [propget, id(3)] HRESULT Type([out, retval] ParameterType * pType);
     [propget, id(4)] HRESULT Virtual([out, retval] BOOL * pVirtual);
     [id(6)] HRESULT AttachParameter([in] IVoodooParameter * pParameter);
-    [propget, id(7)] HRESULT Components();
+    [propget, id(7)] HRESULT Components([out, retval] int * pComponents);
     [propget, id(8)] HRESULT SamplerValue([out, retval] IVoodooTexture ** ppTexture);
     [propput, id(8)] HRESULT SamplerValue([in] IVoodooTexture * pTexture);
-    [propget, id(10)] HRESULT ScalarValue([out, retval] SAFEARRAY(float) ** ppData);
-    [propput, id(10)] HRESULT ScalarValue([in] SAFEARRAY(float) * pData);
-    [id(12)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
-    [id(13)] HRESULT CgParameter([out, retval] VARIANT * ppCgParameter);
+    [propget, id(10)] HRESULT ScalarValue([out, retval] SAFEARRAY(float) * ppData);
+    [propput, id(10)] HRESULT ScalarValue([in] SAFEARRAY(float) pData);
+    [propget, id(12)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
+    [propget, id(13)] HRESULT CgParameter([out, retval] VARIANT * ppCgParameter);
 };
 [
 	object,

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Apr 20 22:35:43 2011
+/* at Thu Apr 21 03:41:27 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -1795,7 +1795,8 @@ EXTERN_C const IID IID_IVoodooParameter;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AttachParameter( 
             /* [in] */ IVoodooParameter *pParameter) = 0;
         
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Components( void) = 0;
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Components( 
+            /* [retval][out] */ int *pComponents) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_SamplerValue( 
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
@@ -1804,15 +1805,15 @@ EXTERN_C const IID IID_IVoodooParameter;
             /* [in] */ IVoodooTexture *pTexture) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ScalarValue( 
-            /* [retval][out] */ SAFEARRAY * **ppData) = 0;
+            /* [retval][out] */ SAFEARRAY * *ppData) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ScalarValue( 
-            /* [in] */ SAFEARRAY * *pData) = 0;
+            /* [in] */ SAFEARRAY * pData) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Shader( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shader( 
             /* [retval][out] */ IVoodooShader **ppShader) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CgParameter( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgParameter( 
             /* [retval][out] */ VARIANT *ppCgParameter) = 0;
         
     };
@@ -1885,7 +1886,8 @@ EXTERN_C const IID IID_IVoodooParameter;
             /* [in] */ IVoodooParameter *pParameter);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Components )( 
-            IVoodooParameter * This);
+            IVoodooParameter * This,
+            /* [retval][out] */ int *pComponents);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SamplerValue )( 
             IVoodooParameter * This,
@@ -1897,17 +1899,17 @@ EXTERN_C const IID IID_IVoodooParameter;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScalarValue )( 
             IVoodooParameter * This,
-            /* [retval][out] */ SAFEARRAY * **ppData);
+            /* [retval][out] */ SAFEARRAY * *ppData);
         
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScalarValue )( 
             IVoodooParameter * This,
-            /* [in] */ SAFEARRAY * *pData);
+            /* [in] */ SAFEARRAY * pData);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Shader )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Shader )( 
             IVoodooParameter * This,
             /* [retval][out] */ IVoodooShader **ppShader);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CgParameter )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CgParameter )( 
             IVoodooParameter * This,
             /* [retval][out] */ VARIANT *ppCgParameter);
         
@@ -1962,8 +1964,8 @@ EXTERN_C const IID IID_IVoodooParameter;
 #define IVoodooParameter_AttachParameter(This,pParameter)	\
     ( (This)->lpVtbl -> AttachParameter(This,pParameter) ) 
 
-#define IVoodooParameter_get_Components(This)	\
-    ( (This)->lpVtbl -> get_Components(This) ) 
+#define IVoodooParameter_get_Components(This,pComponents)	\
+    ( (This)->lpVtbl -> get_Components(This,pComponents) ) 
 
 #define IVoodooParameter_get_SamplerValue(This,ppTexture)	\
     ( (This)->lpVtbl -> get_SamplerValue(This,ppTexture) ) 
@@ -1977,11 +1979,11 @@ EXTERN_C const IID IID_IVoodooParameter;
 #define IVoodooParameter_put_ScalarValue(This,pData)	\
     ( (This)->lpVtbl -> put_ScalarValue(This,pData) ) 
 
-#define IVoodooParameter_Shader(This,ppShader)	\
-    ( (This)->lpVtbl -> Shader(This,ppShader) ) 
+#define IVoodooParameter_get_Shader(This,ppShader)	\
+    ( (This)->lpVtbl -> get_Shader(This,ppShader) ) 
 
-#define IVoodooParameter_CgParameter(This,ppCgParameter)	\
-    ( (This)->lpVtbl -> CgParameter(This,ppCgParameter) ) 
+#define IVoodooParameter_get_CgParameter(This,ppCgParameter)	\
+    ( (This)->lpVtbl -> get_CgParameter(This,ppCgParameter) ) 
 
 #endif /* COBJMACROS */
 

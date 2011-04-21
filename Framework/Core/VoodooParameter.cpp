@@ -7,4 +7,184 @@
 
 
 // CVoodooParameter
+STDMETHODIMP CVoodooParameter::QueryInterface(REFIID iid, void ** pp) throw()
+{
+    if ( pp == NULL )
+    {
+        return E_POINTER;
+    } else if ( iid == IID_IUnknown || iid == IID_IVoodooTexture ) {
+        this->AddRef();
+        *pp = this;
+        return S_OK;
+    } else {
+        *pp = NULL;
+        return E_NOINTERFACE;
+    }
+}
 
+STDMETHODIMP_(ULONG) CVoodooParameter::AddRef()
+{
+    return (++m_Refrs);
+}
+
+STDMETHODIMP_(ULONG) CVoodooParameter::Release()
+{
+    --m_Refrs;
+    if ( m_Refrs == 0 )
+    {
+        delete this;
+        return 0;
+    } else {
+        return m_Refrs;
+    }
+}
+
+STDMETHODIMP CVoodooParameter::get_Name(LPBSTR pName)
+{
+    if ( pName == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        return m_Name.CopyTo(pName);
+    }
+}
+
+STDMETHODIMP CVoodooParameter::get_Core(IVoodooCore **ppCore)
+{
+    if ( ppCore == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        *ppCore = m_Core;
+        return S_OK;
+    }
+}
+
+STDMETHODIMP CVoodooParameter::get_Type(ParameterType *pType)
+{
+    if ( pType == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        *pType = m_Type;
+        return S_OK;
+    }
+}
+
+STDMETHODIMP CVoodooParameter::get_Virtual(BOOL *pVirtual)
+{
+    if ( pVirtual == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        *pVirtual = m_Virtual;
+        return S_OK;
+    }
+}
+
+STDMETHODIMP CVoodooParameter::AttachParameter(IVoodooParameter *pParameter)
+{
+    if ( pParameter == NULL )
+    {
+        return E_INVALIDARG;
+    }
+
+    // Check types
+    ParameterType othertype;
+    pParameter->get_Type(&othertype);
+
+    if ( othertype != m_Type )
+    {
+        return E_INVALIDARG;
+    }
+
+    CGparameter otherparam;
+    VARIANT othervar;
+    pParameter->get_CgParameter(&othervar);
+    otherparam = (CGparameter)V_BYREF(&othervar);
+
+    cgConnectParameter(m_Parameter, otherparam);
+
+    return S_OK;
+}
+
+STDMETHODIMP CVoodooParameter::get_Components(int * Components)
+{
+    switch ( m_Type )
+    {
+    case PT_Float1:
+        return 1;
+    case PT_Float2:
+        return 2;
+    case PT_Float3:
+        return 3;
+    case PT_Float4:
+        return 4;
+    case PT_Matrix:
+        return 16;
+    case PT_Sampler1D:
+        return 1;
+    case PT_Sampler2D:
+        return 2;
+    case PT_Sampler3D:
+        return 3;
+    default:
+        return 0;
+    }
+} 
+
+STDMETHODIMP CVoodooParameter::get_SamplerValue( 
+    /* [retval][out] */ IVoodooTexture **ppTexture)
+{
+    if ( ppTexture == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        *ppTexture = m_Texture;
+        return S_OK;
+    }
+}
+
+STDMETHODIMP CVoodooParameter::put_SamplerValue( 
+    /* [in] */ IVoodooTexture *pTexture)
+{
+    pTexture = m_Texture;
+    return S_OK;
+}
+
+STDMETHODIMP CVoodooParameter::get_ScalarValue( 
+    /* [retval][out] */ SAFEARRAY * *ppData)
+{
+    return m_Data.CopyTo(ppData);
+}
+
+STDMETHODIMP CVoodooParameter::put_ScalarValue( 
+    /* [in] */ SAFEARRAY * pData)
+{
+    return m_Data.CopyFrom(pData);
+}
+
+STDMETHODIMP CVoodooParameter::get_Shader( 
+    /* [retval][out] */ IVoodooShader **ppShader)
+{
+    if ( ppShader == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        *ppShader = m_Shader;
+        return S_OK;
+    }
+}
+
+STDMETHODIMP CVoodooParameter::get_CgParameter( 
+    /* [retval][out] */ VARIANT *ppCgParameter)
+{
+    if ( ppCgParameter == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        V_VT(ppCgParameter) = VT_BYREF;
+        V_BYREF(ppCgParameter) = m_Parameter;
+        return S_OK;
+    }
+}

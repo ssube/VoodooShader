@@ -7,7 +7,7 @@
 
 using namespace ATL;
 
-
+typedef CMap<BSTR, BSTR, BSTR, BSTR> Dictionary;
 
 // CVoodooParser
 
@@ -46,6 +46,31 @@ END_COM_MAP()
 
 // IVoodooParser
 public:
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddVariable( 
+        /* [in] */ BSTR pName,
+        /* [in] */ BSTR pValue,
+        /* [in] */ BOOL System);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveVariable( 
+        /* [in] */ BSTR pName);
+
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Parse( 
+        /* [in] */ BSTR pString,
+        /* [defaultvalue][in] */ ParseFlags Flags,
+        /* [retval][out] */ LPBSTR pParsed);
+
+private:
+    HRESULT STDMETHODCALLTYPE ParseRaw(LPBSTR input, ParseFlags Flags, INT Depth, Dictionary * State);
+
+    static const INT VarMaxDepth = 8;
+    static const WCHAR VarDelimStart = '(';
+    static const WCHAR VarDelimEnd   = ')';
+    static const WCHAR VarDelimPre   = '$';
+
+    UINT m_Refrs;
+    IVoodooCore * m_Core;
+    Dictionary m_Variables;
+    Dictionary m_SysVariables;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooParser), CVoodooParser)
