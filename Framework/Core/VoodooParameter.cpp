@@ -7,12 +7,81 @@
 
 
 // CVoodooParameter
+CVoodooParameter::CVoodooParameter()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+    m_Shader = NULL;
+    m_Data.Create(16);
+    m_Texture = NULL;
+}
+
+CVoodooParameter::~CVoodooParameter()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+    m_Shader = NULL;
+    m_Data.Destroy();
+    m_Texture = NULL;
+}
+
+IVoodooParameter * CVoodooParameter::Create(IVoodooCore * pCore, BSTR pName, ParameterType Type)
+{
+    if ( pCore == NULL ) return NULL;
+
+    CComPtr<CVoodooParameter> ipParameter = NULL;
+
+    CComObject<CVoodooParameter> * pParameter = NULL;
+    HRESULT hr = CComObject<CVoodooParameter>::CreateInstance(&pParameter);
+    if ( SUCCEEDED(hr) )
+    {
+        pParameter->AddRef();
+
+        pParameter->m_Parameter = CreateVirtualParameter(pCore, Type);
+        pParameter->m_Type = Type;
+        pParameter->m_Virtual = TRUE;
+        pParameter->m_Core = pCore;
+        pParameter->m_Name = pName;
+
+        hr = pParameter->QueryInterface(IID_IVoodooTechnique, (void**)&ipParameter);
+        pParameter->Release();
+    }
+
+    return ipParameter.Detach();
+}
+
+IVoodooParameter * CVoodooParameter::Create(IVoodooShader * pShader, CGparameter Parameter)
+{
+    if ( pShader == NULL ) return NULL;
+
+    CComPtr<CVoodooParameter> ipParameter = NULL;
+
+    CComObject<CVoodooParameter> * pParameter = NULL;
+    HRESULT hr = CComObject<CVoodooParameter>::CreateInstance(&pParameter);
+    if ( SUCCEEDED(hr) )
+    {
+        pParameter->AddRef();
+
+        pParameter->m_Parameter = Parameter;
+        pParameter->m_Type = ToParameterType(cgGetParameterType(Parameter));
+        pParameter->m_Shader = pShader;
+        pParameter->m_Virtual = FALSE;
+        pShader->get_Core(&pParameter->m_Core);
+        pParameter->m_Name = CA2W(cgGetParameterName(Parameter));
+
+        hr = pParameter->QueryInterface(IID_IVoodooTechnique, (void**)&ipParameter);
+        pParameter->Release();
+    }
+
+    return ipParameter.Detach();
+}
+
 STDMETHODIMP CVoodooParameter::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )
     {
         return E_POINTER;
-    } else if ( iid == IID_IUnknown || iid == IID_IVoodooTexture ) {
+    } else if ( iid == IID_IUnknown || iid == IID_IVoodooParameter ) {
         this->AddRef();
         *pp = this;
         return S_OK;

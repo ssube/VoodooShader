@@ -407,7 +407,7 @@ STDMETHODIMP CVoodooCore::CreateTexture(
     {
         return E_DUPNAME;
     } else {
-        CVoodooTexture * tex = new CVoodooTexture(this, pName, pData);
+        CVoodooTexture * tex = CVoodooTexture::Create(this, pName, pData);
         HRESULT hr = tex->QueryInterface(__uuidof(IVoodooTexture), (void**)ppTexture);
 
         if ( FAILED(hr) )

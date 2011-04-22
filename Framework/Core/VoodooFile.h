@@ -17,9 +17,9 @@ class ATL_NO_VTABLE CVoodooFile :
 	public IDispatchImpl<IVoodooFile, &IID_IVoodooFile, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooFile()
-	{
-	}
+	CVoodooFile();
+    virtual ~CVoodooFile();
+    static IVoodooFile * Create(IVoodooCore * pCore, BSTR pPath);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 

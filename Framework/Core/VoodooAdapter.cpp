@@ -7,6 +7,39 @@
 
 
 // CVoodooAdapter
+CVoodooAdapter::CVoodooAdapter()
+{
+    m_Refrs = 0;
+    m_Name = L"Null Adapter";
+    m_Core = NULL;
+}
+
+CVoodooAdapter::~CVoodooAdapter()
+{
+    m_Refrs = 0;
+    m_Name.Empty();
+    m_Core = NULL;
+}
+
+IVoodooAdapter * CVoodooAdapter::Create(IVoodooCore * pCore)
+{
+    if ( pCore == NULL ) return NULL;
+
+    CComPtr<CVoodooAdapter> ipAdapter = NULL;
+
+    CComObject<CVoodooAdapter> * pAdapter = NULL;
+    HRESULT hr = CComObject<CVoodooAdapter>::CreateInstance(&pAdapter);
+    if ( SUCCEEDED(hr) )
+    {
+        pAdapter->AddRef();
+        pAdapter->m_Core = pCore;
+        hr = pAdapter->QueryInterface(IID_IVoodooTechnique, (void**)&ipAdapter);
+        pAdapter->Release();
+    }
+
+    return ipAdapter.Detach();
+}
+
 STDMETHODIMP CVoodooAdapter::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )

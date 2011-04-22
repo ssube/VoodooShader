@@ -6,6 +6,8 @@
 
 #include <Cg/Cg.h>
 
+#define MEMBER_FROM_PTR(obj, token) obj->m_##token = p##token
+
 extern const HRESULT E_BADTHING     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0000);
 extern const HRESULT E_INVALIDCFG   = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0100);
 extern const HRESULT E_BADCLSID     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0200);
@@ -24,3 +26,6 @@ extern const HRESULT E_NULLIMPL     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_IT
 // Creates an interface to a string-format class ID. The ID may be in registry form or a ProgID.
 HRESULT WINAPI InstanceFromString(_In_ BSTR lpStr, _In_ REFIID iid, _In_ void ** pp);
 CGparameter WINAPI CreateVirtualParameter(IVoodooCore * pCore, ParameterType Type);
+
+ParameterType WINAPI ToParameterType(CGtype Type);
+ParameterCategory WINAPI ToParameterCategory(ParameterType Type);

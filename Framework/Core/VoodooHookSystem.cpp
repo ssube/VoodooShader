@@ -7,6 +7,37 @@
 
 
 // CVoodooHookSystem
+CVoodooHookSystem::CVoodooHookSystem()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+CVoodooHookSystem::~CVoodooHookSystem()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+IVoodooHookSystem * CVoodooHookSystem::Create(IVoodooCore * pCore)
+{
+    if ( pCore == NULL ) return NULL;
+
+    CComPtr<CVoodooHookSystem> ipHookSystem = NULL;
+
+    CComObject<CVoodooHookSystem> * pHookSystem = NULL;
+    HRESULT hr = CComObject<CVoodooHookSystem>::CreateInstance(&pHookSystem);
+    if ( SUCCEEDED(hr) )
+    {
+        pHookSystem->AddRef();
+        pHookSystem->m_Core = pCore;
+        hr = pHookSystem->QueryInterface(IID_IVoodooTechnique, (void**)&ipHookSystem);
+        pHookSystem->Release();
+    }
+
+    return ipHookSystem.Detach();
+}
+
 STDMETHODIMP CVoodooHookSystem::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )

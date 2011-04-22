@@ -21,9 +21,9 @@ class ATL_NO_VTABLE CVoodooImage :
     public IDispatchImpl<IVoodooImage, &IID_IVoodooImage, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooImage()
-	{
-	}
+	CVoodooImage();
+    virtual ~CVoodooImage();
+    static IVoodooImage * Create(IVoodooCore * pFileSystem, BSTR pPath);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 

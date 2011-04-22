@@ -20,8 +20,8 @@ class ATL_NO_VTABLE CVoodooTexture :
 {
 public:
 	CVoodooTexture();
-    ~CVoodooTexture();
-    CVoodooTexture * Create(IVoodooCore * pCore, BSTR pName, void * pData);
+    virtual ~CVoodooTexture();
+    static IVoodooTexture * Create(IVoodooCore * pCore, BSTR pName, void * pData);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
@@ -45,9 +45,9 @@ END_COM_MAP()
 
 // IVoodooTexture
 public:
-    //virtual HRESULT QueryInterface(REFIID riid, void ** ppvObject);
-    //virtual ULONG AddRef();
-    //virtual ULONG Release();
+//     virtual HRESULT QueryInterface(REFIID riid, void ** ppvObject) throw();
+//     virtual ULONG AddRef() throw();
+//     virtual ULONG Release() throw();
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
         /* [retval][out] */ LPBSTR pName);

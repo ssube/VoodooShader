@@ -20,9 +20,10 @@ class ATL_NO_VTABLE CVoodooParameter :
 	public IDispatchImpl<IVoodooParameter, &IID_IVoodooParameter, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooParameter()
-	{
-	}
+	CVoodooParameter();
+    virtual ~CVoodooParameter();
+    static IVoodooParameter * Create(IVoodooCore * pCore, BSTR pName, ParameterType Type);
+    static IVoodooParameter * Create(IVoodooShader * pShader, CGparameter Parameter);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
@@ -92,7 +93,7 @@ private:
     IVoodooShader * m_Shader;
     ParameterType m_Type;
     BOOL m_Virtual;
-    IVoodooTexture * m_Texture;
+    CComPtr<IVoodooTexture> m_Texture;
     CComSafeArray<float> m_Data;
     CGparameter m_Parameter;
 };

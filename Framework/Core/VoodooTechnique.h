@@ -19,9 +19,9 @@ class ATL_NO_VTABLE CVoodooTechnique :
 	public IDispatchImpl<IVoodooTechnique, &IID_IVoodooTechnique, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooTechnique()
-	{
-	}
+	CVoodooTechnique();
+    virtual ~CVoodooTechnique();
+    static IVoodooTechnique * Create(IVoodooShader * pShader, CGtechnique pTechnique);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 

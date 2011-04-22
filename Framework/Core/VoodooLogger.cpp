@@ -7,6 +7,37 @@
 
 
 // CVoodooLogger
+CVoodooLogger::CVoodooLogger()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+CVoodooLogger::~CVoodooLogger()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+IVoodooLogger * CVoodooLogger::Create(IVoodooCore * pCore)
+{
+    if ( pCore == NULL ) return NULL;
+
+    CComPtr<CVoodooLogger> ipLogger = NULL;
+
+    CComObject<CVoodooLogger> * pLogger = NULL;
+    HRESULT hr = CComObject<CVoodooLogger>::CreateInstance(&pLogger);
+    if ( SUCCEEDED(hr) )
+    {
+        pLogger->AddRef();
+        pLogger->m_Core = pCore;
+        hr = pLogger->QueryInterface(IID_IVoodooTechnique, (void**)&ipLogger);
+        pLogger->Release();
+    }
+
+    return ipLogger.Detach();
+}
+
 STDMETHODIMP CVoodooLogger::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )

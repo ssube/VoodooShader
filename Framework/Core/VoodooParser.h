@@ -19,9 +19,9 @@ class ATL_NO_VTABLE CVoodooParser :
 	public IDispatchImpl<IVoodooParser, &IID_IVoodooParser, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooParser()
-	{
-	}
+	CVoodooParser();
+    virtual ~CVoodooParser();
+    static IVoodooParser * Create(IVoodooCore * pCore);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 

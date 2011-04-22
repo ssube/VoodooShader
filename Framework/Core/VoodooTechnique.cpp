@@ -7,6 +7,57 @@
 
 
 // CVoodooTechnique
+CVoodooTechnique::CVoodooTechnique()
+{
+    m_Refrs = 0;
+    m_Name.Empty();
+    m_Core = NULL;
+    m_Target = NULL;
+    m_Passes.RemoveAll();
+    m_Shader = NULL;
+    m_Technique = NULL;
+}
+
+CVoodooTechnique::~CVoodooTechnique()
+{
+    m_Refrs = 0;
+    m_Name.Empty();
+    m_Core = NULL;
+    m_Target = NULL;
+    m_Passes.RemoveAll();
+    m_Shader = NULL;
+    m_Technique = NULL;
+}
+
+IVoodooTechnique * CVoodooTechnique::Create(IVoodooShader * pShader, CGtechnique pTechnique)
+{
+    if ( pShader == NULL || pTechnique == NULL || !cgIsTechnique(pTechnique) ) return NULL;
+
+    CComPtr<CVoodooTechnique> ipcTechnique = NULL;
+
+    CComObject<CVoodooTechnique> * pcTechnique = NULL;
+    HRESULT hr = CComObject<CVoodooTechnique>::CreateInstance(&pcTechnique);
+    if ( SUCCEEDED(hr) )
+    {
+        pcTechnique->AddRef();
+
+        CComBSTR name;
+        pShader->get_Name(&name);
+        name.Append(L":");
+        name.Append(cgGetTechniqueName(pTechnique));
+        pcTechnique->m_Name = name;
+
+        pShader->get_Core(&pcTechnique->m_Core);
+        pcTechnique->m_Shader = pShader;
+        pcTechnique->m_Technique = pTechnique;
+
+        hr = pcTechnique->QueryInterface(IID_IVoodooTechnique, (void**)&ipcTechnique);
+        pcTechnique->Release();
+    }
+
+    return ipcTechnique.Detach();
+}
+
 STDMETHODIMP CVoodooTechnique::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )

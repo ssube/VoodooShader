@@ -6,6 +6,41 @@
 #include "Common.hpp"
 
 // CVoodooFile
+CVoodooFile::CVoodooFile()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+CVoodooFile::~CVoodooFile()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+IVoodooFile * CVoodooFile::Create(IVoodooCore * pCore, BSTR pPath)
+{
+    if ( pCore == NULL ) return NULL;
+
+    CComPtr<CVoodooFile> ipFile = NULL;
+
+    CComObject<CVoodooFile> * pFile = NULL;
+    HRESULT hr = CComObject<CVoodooFile>::CreateInstance(&pFile);
+    if ( SUCCEEDED(hr) )
+    {
+        pFile->AddRef();
+
+        pFile->m_Core = pCore;
+        pFile->m_Name = pPath; //! @todo Change this to just the filename, no path
+        pFile->m_Path = pPath;
+
+        hr = pFile->QueryInterface(IID_IVoodooTechnique, (void**)&ipFile);
+        pFile->Release();
+    }
+
+    return ipFile.Detach();
+}
+
 STDMETHODIMP CVoodooFile::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )

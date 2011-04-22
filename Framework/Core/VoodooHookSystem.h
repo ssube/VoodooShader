@@ -19,9 +19,9 @@ class ATL_NO_VTABLE CVoodooHookSystem :
 	public IDispatchImpl<IVoodooHookSystem, &IID_IVoodooHookSystem, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooHookSystem()
-	{
-	}
+	CVoodooHookSystem();
+    virtual ~CVoodooHookSystem();
+    static IVoodooHookSystem * Create(IVoodooCore * pCore);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 

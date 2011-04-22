@@ -8,6 +8,7 @@
 // CVoodooTexture
 CVoodooTexture::CVoodooTexture()
 {
+    m_Refrs = 0;
     m_Core = NULL;
     m_Name.Empty();
     m_Data = NULL;
@@ -15,20 +16,31 @@ CVoodooTexture::CVoodooTexture()
 
 CVoodooTexture::~CVoodooTexture()
 {
+    m_Refrs = 0;
     m_Core = NULL;
     m_Name.Empty();
     m_Data = NULL;
 }
 
-CVoodooTexture * CVoodooTexture::Create(IVoodooCore * pCore, BSTR pName, void * pData)
+IVoodooTexture * CVoodooTexture::Create(IVoodooCore * pCore, BSTR pName, void * pData)
 {
     if ( pCore == NULL || pName == NULL ) return NULL;
 
-    CVoodooTexture * texture = new CVoodooTexture();
-    texture->m_Core = pCore;
-    texture->m_Name = pName;
-    texture->m_Data = pData;
-    return texture;
+    CComPtr<IVoodooTexture> ipTexture = NULL;
+
+    CComObject<CVoodooTexture> * pTexture = NULL;
+    HRESULT hr = CComObject<CVoodooTexture>::CreateInstance(&pTexture);
+    if ( SUCCEEDED(hr) )
+    {
+        pTexture->AddRef();
+        pTexture->m_Core = pCore;
+        pTexture->m_Name = pName;
+        pTexture->m_Data = pData;
+        hr = pTexture->QueryInterface(IID_IVoodooTexture, (void**)&ipTexture);
+        pTexture->Release();
+    }
+
+    return ipTexture.Detach();
 }
 
 STDMETHODIMP CVoodooTexture::QueryInterface(REFIID iid, void ** pp) throw()

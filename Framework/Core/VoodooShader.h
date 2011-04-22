@@ -19,9 +19,9 @@ class ATL_NO_VTABLE CVoodooShader :
 	public IDispatchImpl<IVoodooShader, &IID_IVoodooShader, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooShader()
-	{
-	}
+	CVoodooShader();
+    virtual ~CVoodooShader();
+    static IVoodooShader * Create(IVoodooCore * pCore, IVoodooFile * pFile);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 

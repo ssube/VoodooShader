@@ -7,12 +7,64 @@
 
 
 // CVoodooShader
+CVoodooShader::CVoodooShader()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+CVoodooShader::~CVoodooShader()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+IVoodooShader * CVoodooShader::Create(IVoodooCore * pCore, IVoodooFile * pFile)
+{
+    if ( pCore == NULL || pFile == NULL ) return NULL;
+
+    CComPtr<CVoodooShader> ipShader = NULL;
+
+    CComObject<CVoodooShader> * pShader = NULL;
+    HRESULT hr = CComObject<CVoodooShader>::CreateInstance(&pShader);
+    if ( SUCCEEDED(hr) )
+    {
+        CGcontext context = NULL;
+        VARIANT vc;
+        pCore->get_CgContext(&vc);
+        context = (CGcontext)V_BYREF(&vc);
+
+        if ( context == NULL || !cgIsContext(context) )
+        {
+            return NULL;
+        }
+
+        BSTR path;
+        pFile->get_Path(&path);
+        CW2A apath(path);
+
+        CGeffect effect = cgCreateEffectFromFile(context, (LPSTR)apath, NULL);
+
+        if ( effect == NULL || !cgIsEffect(effect) )
+        {
+            return NULL;
+        }
+
+        pShader->AddRef();
+        pShader->m_Core = pCore;
+        hr = pShader->QueryInterface(IID_IVoodooShader, (void**)&ipShader);
+        pShader->Release();
+    }
+
+    return ipShader.Detach();
+}
+
 STDMETHODIMP CVoodooShader::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )
     {
         return E_POINTER;
-    } else if ( iid == IID_IUnknown || iid == IID_IVoodooTexture ) {
+    } else if ( iid == IID_IUnknown || iid == IID_IVoodooShader ) {
         this->AddRef();
         *pp = this;
         return S_OK;

@@ -19,9 +19,9 @@ class ATL_NO_VTABLE CVoodooAdapter :
 	public IDispatchImpl<IVoodooAdapter, &IID_IVoodooAdapter, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooAdapter()
-	{
-	}
+	CVoodooAdapter();
+    virtual ~CVoodooAdapter();
+    static IVoodooAdapter * Create(IVoodooCore * pCore);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 

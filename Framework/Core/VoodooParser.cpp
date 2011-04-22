@@ -7,6 +7,37 @@
 
 
 // CVoodooParser
+CVoodooParser::CVoodooParser()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+CVoodooParser::~CVoodooParser()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+IVoodooParser * CVoodooParser::Create(IVoodooCore * pCore)
+{
+    if ( pCore == NULL ) return NULL;
+
+    CComPtr<CVoodooParser> ipParser = NULL;
+
+    CComObject<CVoodooParser> * pParser = NULL;
+    HRESULT hr = CComObject<CVoodooParser>::CreateInstance(&pParser);
+    if ( SUCCEEDED(hr) )
+    {
+        pParser->AddRef();
+        pParser->m_Core = pCore;
+        hr = pParser->QueryInterface(IID_IVoodooTechnique, (void**)&ipParser);
+        pParser->Release();
+    }
+
+    return ipParser.Detach();
+}
+
 STDMETHODIMP CVoodooParser::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )

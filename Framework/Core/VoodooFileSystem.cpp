@@ -7,6 +7,39 @@
 
 
 // CVoodooFileSystem
+CVoodooFileSystem::CVoodooFileSystem()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+CVoodooFileSystem::~CVoodooFileSystem()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+IVoodooFileSystem * CVoodooFileSystem::Create(IVoodooCore * pCore)
+{
+    if ( pCore == NULL ) return NULL;
+
+    CComPtr<CVoodooFileSystem> ipFileSystem = NULL;
+
+    CComObject<CVoodooFileSystem> * pFileSystem = NULL;
+    HRESULT hr = CComObject<CVoodooFileSystem>::CreateInstance(&pFileSystem);
+    if ( SUCCEEDED(hr) )
+    {
+        pFileSystem->AddRef();
+        pFileSystem->m_Core = pCore;
+        pFileSystem->m_Name = L"Null FileSystem";
+
+        hr = pFileSystem->QueryInterface(IID_IVoodooTechnique, (void**)&ipFileSystem);
+        pFileSystem->Release();
+    }
+
+    return ipFileSystem.Detach();
+}
+
 STDMETHODIMP CVoodooFileSystem::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )

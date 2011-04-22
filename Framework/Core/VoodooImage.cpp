@@ -7,6 +7,39 @@
 
 
 // CVoodooImage
+CVoodooImage::CVoodooImage()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+CVoodooImage::~CVoodooImage()
+{
+    m_Refrs = 0;
+    m_Core = NULL;
+}
+
+IVoodooImage * CVoodooImage::Create(IVoodooCore * pCore, BSTR pPath)
+{
+    if ( pCore == NULL ) return NULL;
+
+    CComPtr<CVoodooImage> ipImage = NULL;
+
+    CComObject<CVoodooImage> * pImage = NULL;
+    HRESULT hr = CComObject<CVoodooImage>::CreateInstance(&pImage);
+    if ( SUCCEEDED(hr) )
+    {
+        pImage->AddRef();
+        pImage->m_Core = pCore;
+        pImage->m_Name = pPath;
+        pImage->m_Path = pPath;
+        hr = pImage->QueryInterface(IID_IVoodooTechnique, (void**)&ipImage);
+        pImage->Release();
+    }
+
+    return ipImage.Detach();
+}
+
 STDMETHODIMP CVoodooImage::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )
