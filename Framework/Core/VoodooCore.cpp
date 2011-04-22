@@ -241,7 +241,7 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
 
     // Core done loading
     CComBSTR done = L"Core initialization complete.";
-    m_Logger->Log((LogLevel)Info|Framework, L"Core", done, NULL);
+    m_Logger->Log(LogLevel(Info|Framework), L"Core", done, NULL);
 
     return S_OK;
 }
@@ -342,6 +342,7 @@ STDMETHODIMP CVoodooCore::put_CgContext(
 
 STDMETHODIMP CVoodooCore::CreateShader( 
    IVoodooFile *pFile,
+   SAFEARRAY * pArgs,
    IVoodooShader **ppShader)
 {
     if ( pFile == NULL || ppShader == NULL )

@@ -74,7 +74,7 @@ public:
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
         /* [in] */ int Vertexes,
-        /* [in] */ SAFEARRAY *pVertexData);
+        /* [in] */ VertexStruct *pVertexData);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
         /* [in] */ IVoodooParameter *pParameter);

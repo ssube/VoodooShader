@@ -370,7 +370,7 @@ interface IVoodooAdapter : IDispatch{
     [propput, id(4)] HRESULT Pass([in] IVoodooPass * pPass);
     [propget, id(6)] HRESULT Target([out, retval] IVoodooTexture ** ppTarget);
     [propput, id(6)] HRESULT Target([in] IVoodooTexture * pTarget);
-    [id(8)] HRESULT DrawGeometry([in] int Vertexes, [in] SAFEARRAY(VertexStruct) pVertexData);
+    [id(8)] HRESULT DrawGeometry([in] int Vertexes, [in, size_is(Vertexes), length_is(Vertexes)] VertexStruct pVertexData[*]);
     [id(9)] HRESULT ApplyParameter([in] IVoodooParameter * pParameter);
     [id(10)] HRESULT DrawShader([in] IVoodooShader * pShader);
     [id(11)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Description, [out, retval] IVoodooTexture ** ppTexture);

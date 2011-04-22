@@ -135,7 +135,7 @@ STDMETHODIMP CVoodooAdapter::put_Target(IVoodooTexture *pTarget)
     return E_NULLIMPL;
 }
 
-STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, SAFEARRAY *pVertexData)
+STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, VertexStruct *pVertexData)
 {
     return E_NULLIMPL;
 }

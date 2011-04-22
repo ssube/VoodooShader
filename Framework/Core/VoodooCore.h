@@ -75,6 +75,7 @@ public:
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateShader( 
         /* [in] */ IVoodooFile *pFile,
+        SAFEARRAY * pArgs,
         /* [retval][out] */ IVoodooShader **ppShader) ;
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateParameter( 

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Fri Apr 22 04:00:22 2011
+/* at Fri Apr 22 04:15:44 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -335,9 +335,9 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0002
 	Float1x3	= 0x13,
 	Float1x4	= 0x14,
 	Float2x1	= 0x21,
-	Float2x2	= 0x21,
-	Float2x3	= 0x21,
-	Float2x4	= 0x21,
+	Float2x2	= 0x22,
+	Float2x3	= 0x23,
+	Float2x4	= 0x24,
 	Float3x1	= 0x31,
 	Float3x2	= 0x32,
 	Float3x3	= 0x33,
@@ -2295,7 +2295,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
             /* [in] */ int Vertexes,
-            /* [in] */ SAFEARRAY * pVertexData) = 0;
+            /* [length_is][size_is][in] */ VertexStruct pVertexData[  ]) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
             /* [in] */ IVoodooParameter *pParameter) = 0;
@@ -2402,7 +2402,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DrawGeometry )( 
             IVoodooAdapter * This,
             /* [in] */ int Vertexes,
-            /* [in] */ SAFEARRAY * pVertexData);
+            /* [length_is][size_is][in] */ VertexStruct pVertexData[  ]);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ApplyParameter )( 
             IVoodooAdapter * This,
