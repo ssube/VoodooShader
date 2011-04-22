@@ -45,7 +45,7 @@ STDMETHODIMP CVoodooAdapter::QueryInterface(REFIID iid, void ** pp) throw()
     if ( pp == NULL )
     {
         return E_POINTER;
-    } else if ( iid == IID_IUnknown || iid == IID_IVoodooTexture ) {
+    } else if ( iid == IID_IUnknown || iid == IID_IVoodooAdapter ) {
         this->AddRef();
         *pp = this;
         return S_OK;
@@ -135,7 +135,7 @@ STDMETHODIMP CVoodooAdapter::put_Target(IVoodooTexture *pTarget)
     return E_NULLIMPL;
 }
 
-STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, VertexStruct *pVertexData)
+STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, SAFEARRAY *pVertexData)
 {
     return E_NULLIMPL;
 }
@@ -161,7 +161,7 @@ STDMETHODIMP CVoodooAdapter::CreateTexture(BSTR pName, TextureDesc Description, 
     }
 }
 
-STDMETHODIMP CVoodooAdapter::LoadTexture(IVoodooImage *pImage, IVoodooTexture **ppTexture)
+STDMETHODIMP CVoodooAdapter::LoadTexture(IVoodooImage *pImage, TextureRegion Region, IVoodooTexture **ppTexture)
 {
     if ( ppTexture == NULL || pImage == NULL )
     {

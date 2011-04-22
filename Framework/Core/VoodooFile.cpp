@@ -46,7 +46,7 @@ STDMETHODIMP CVoodooFile::QueryInterface(REFIID iid, void ** pp) throw()
     if ( pp == NULL )
     {
         return E_POINTER;
-    } else if ( iid == IID_IUnknown || iid == __uuidof(IVoodooTexture) ) {
+    } else if ( iid == IID_IUnknown || iid == IID_IVoodooFile ) {
         this->AddRef();
         *pp = this;
         return S_OK;

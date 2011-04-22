@@ -93,12 +93,12 @@ STDMETHODIMP CVoodooLogger::get_Core(IVoodooCore **ppCore)
 
 STDMETHODIMP CVoodooLogger::Open( 
     /* [in] */ BSTR pFilename,
-    /* [in] */ BOOL Append)
+    /* [in] */ boolean Append)
 {
     if ( pFilename == NULL ) return E_INVALIDARG;
 
     UINT create = CFile::modeWrite;
-    if ( Append == TRUE )
+    if ( Append )
     {
         create |= CFile::modeNoTruncate;
     } else {
@@ -145,26 +145,26 @@ STDMETHODIMP CVoodooLogger::put_LogLevel(
 STDMETHODIMP CVoodooLogger::LogModule( 
     /* [in] */ VersionStruct Module)
 {
-    return S_OK;
+    return E_NOTIMPL;
 }
 
 STDMETHODIMP CVoodooLogger::Log( 
     /* [in] */ LogLevel Level,
     /* [in] */ BSTR pModule,
     /* [in] */ BSTR pFormat,
-    /* [in] */ SAFEARRAY * *pArgs)
+    /* [in] */ SAFEARRAY * ppArgs)
 {
-    return S_OK;
+    return E_NOTIMPL;
 }
 
 STDMETHODIMP CVoodooLogger::get_BufferSize( 
-    /* [retval][out] */ UINT *pSize)
+    /* [retval][out] */ int *pSize)
 {
-    return S_OK;
+    return E_NOTIMPL;
 }
 
 STDMETHODIMP CVoodooLogger::put_BufferSize( 
-    /* [in] */ UINT Size)
+    /* [in] */ int Size)
 {
-    return S_OK;
+    return E_NOTIMPL;
 }

@@ -56,7 +56,7 @@ public:
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
         /* [in] */ BSTR pFilename,
-        /* [in] */ BOOL Append);
+        /* [in] */ boolean Append);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close( void);
 
@@ -75,13 +75,13 @@ public:
         /* [in] */ LogLevel Level,
         /* [in] */ BSTR pModule,
         /* [in] */ BSTR pFormat,
-        /* [in] */ SAFEARRAY * *pArgs);
+        /* [in] */ SAFEARRAY * ppArgs);
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BufferSize( 
-        /* [retval][out] */ UINT *pSize);
+        /* [retval][out] */ int *pSize);
 
     virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_BufferSize( 
-        /* [in] */ UINT Size);
+        /* [in] */ int Size);
 
 private:
     ULONG m_Refrs;

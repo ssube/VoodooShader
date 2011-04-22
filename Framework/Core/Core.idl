@@ -41,9 +41,9 @@ enum {
     Float1x3 = 0x13,
     Float1x4 = 0x14,
     Float2x1 = 0x21,
-    Float2x2 = 0x21,
-    Float2x3 = 0x21,
-    Float2x4 = 0x21,
+    Float2x2 = 0x22,
+    Float2x3 = 0x23,
+    Float2x4 = 0x24,
     Float3x1 = 0x31,
     Float3x2 = 0x32,
     Float3x3 = 0x33,
@@ -331,8 +331,8 @@ interface IVoodooParameter : IDispatch{
     [propget, id(7)] HRESULT Components([out, retval] int * pComponents);
     [propget, id(8)] HRESULT SamplerValue([out, retval] IVoodooTexture ** ppTexture);
     [propput, id(8)] HRESULT SamplerValue([in] IVoodooTexture * pTexture);
-    [propget, id(10)] HRESULT ScalarValue([out, retval] SAFEARRAY(float) * pData);
-    [propput, id(10)] HRESULT ScalarValue([in] SAFEARRAY(float) Data);
+    [propget, id(10)] HRESULT ScalarValue([out, retval] SAFEARRAY(float) * ppData);
+    [propput, id(10)] HRESULT ScalarValue([in] SAFEARRAY(float) pData);
     [propget, id(12)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
     [propget, id(13)] HRESULT CgParameter([out, retval] VARIANT * pCgParameter);
 };
@@ -351,7 +351,7 @@ interface IVoodooLogger : IDispatch{
     [propget, id(5)] HRESULT LogLevel([out, retval] LogLevel * pLevel);
     [propput, id(5)] HRESULT LogLevel([in] LogLevel Level);
     [id(6)] HRESULT LogModule([in] VersionStruct Module);
-    [id(7), vararg] HRESULT Log([in] LogLevel Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) * pArgs);
+    [id(7), vararg] HRESULT Log([in] LogLevel Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
     [propget, id(8)] HRESULT BufferSize([out, retval] int * pSize);
     [propput, id(8)] HRESULT BufferSize([in] int Size);
 };
@@ -370,7 +370,7 @@ interface IVoodooAdapter : IDispatch{
     [propput, id(4)] HRESULT Pass([in] IVoodooPass * pPass);
     [propget, id(6)] HRESULT Target([out, retval] IVoodooTexture ** ppTarget);
     [propput, id(6)] HRESULT Target([in] IVoodooTexture * pTarget);
-    [id(8)] HRESULT DrawGeometry([in] int Vertexes, [in] SAFEARRAY(VertexStruct) * pVertexData);
+    [id(8)] HRESULT DrawGeometry([in] int Vertexes, [in] SAFEARRAY(VertexStruct) pVertexData);
     [id(9)] HRESULT ApplyParameter([in] IVoodooParameter * pParameter);
     [id(10)] HRESULT DrawShader([in] IVoodooShader * pShader);
     [id(11)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Description, [out, retval] IVoodooTexture ** ppTexture);

@@ -74,7 +74,7 @@ public:
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
         /* [in] */ int Vertexes,
-        /* [in] */ VertexStruct *pVertexData);
+        /* [in] */ SAFEARRAY *pVertexData);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
         /* [in] */ IVoodooParameter *pParameter);
@@ -89,6 +89,7 @@ public:
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadTexture( 
         /* [in] */ IVoodooImage *pImage,
+        TextureRegion Region,
         /* [retval][out] */ IVoodooTexture **ppTexture);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE ConnectTexture( 

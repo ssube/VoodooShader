@@ -160,7 +160,7 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
                     VARIANT fn;
                     pNode->get_nodeValue(&fn);
                     CComBSTR filename(fn.bstrVal);
-                    m_Parser->Parse(filename, None, &filename);
+                    m_Parser->Parse(filename, NoFlags, &filename);
                     m_Logger->Open(filename, false);
                     SysFreeString(filename);
                 }

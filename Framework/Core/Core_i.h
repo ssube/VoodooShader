@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Fri Apr 22 03:46:13 2011
+/* at Fri Apr 22 04:00:22 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -1851,10 +1851,10 @@ EXTERN_C const IID IID_IVoodooParameter;
             /* [in] */ IVoodooTexture *pTexture) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ScalarValue( 
-            /* [retval][out] */ SAFEARRAY * *pData) = 0;
+            /* [retval][out] */ SAFEARRAY * *ppData) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ScalarValue( 
-            /* [in] */ SAFEARRAY * Data) = 0;
+            /* [in] */ SAFEARRAY * pData) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shader( 
             /* [retval][out] */ IVoodooShader **ppShader) = 0;
@@ -1945,11 +1945,11 @@ EXTERN_C const IID IID_IVoodooParameter;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScalarValue )( 
             IVoodooParameter * This,
-            /* [retval][out] */ SAFEARRAY * *pData);
+            /* [retval][out] */ SAFEARRAY * *ppData);
         
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScalarValue )( 
             IVoodooParameter * This,
-            /* [in] */ SAFEARRAY * Data);
+            /* [in] */ SAFEARRAY * pData);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Shader )( 
             IVoodooParameter * This,
@@ -2019,11 +2019,11 @@ EXTERN_C const IID IID_IVoodooParameter;
 #define IVoodooParameter_put_SamplerValue(This,pTexture)	\
     ( (This)->lpVtbl -> put_SamplerValue(This,pTexture) ) 
 
-#define IVoodooParameter_get_ScalarValue(This,pData)	\
-    ( (This)->lpVtbl -> get_ScalarValue(This,pData) ) 
+#define IVoodooParameter_get_ScalarValue(This,ppData)	\
+    ( (This)->lpVtbl -> get_ScalarValue(This,ppData) ) 
 
-#define IVoodooParameter_put_ScalarValue(This,Data)	\
-    ( (This)->lpVtbl -> put_ScalarValue(This,Data) ) 
+#define IVoodooParameter_put_ScalarValue(This,pData)	\
+    ( (This)->lpVtbl -> put_ScalarValue(This,pData) ) 
 
 #define IVoodooParameter_get_Shader(This,ppShader)	\
     ( (This)->lpVtbl -> get_Shader(This,ppShader) ) 
@@ -2081,7 +2081,7 @@ EXTERN_C const IID IID_IVoodooLogger;
             /* [in] */ LogLevel Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
-            /* [in] */ SAFEARRAY * *pArgs) = 0;
+            /* [in] */ SAFEARRAY * pArgs) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BufferSize( 
             /* [retval][out] */ int *pSize) = 0;
@@ -2170,7 +2170,7 @@ EXTERN_C const IID IID_IVoodooLogger;
             /* [in] */ LogLevel Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
-            /* [in] */ SAFEARRAY * *pArgs);
+            /* [in] */ SAFEARRAY * pArgs);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferSize )( 
             IVoodooLogger * This,
@@ -2295,7 +2295,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
             /* [in] */ int Vertexes,
-            /* [in] */ SAFEARRAY * *pVertexData) = 0;
+            /* [in] */ SAFEARRAY * pVertexData) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
             /* [in] */ IVoodooParameter *pParameter) = 0;
@@ -2402,7 +2402,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DrawGeometry )( 
             IVoodooAdapter * This,
             /* [in] */ int Vertexes,
-            /* [in] */ SAFEARRAY * *pVertexData);
+            /* [in] */ SAFEARRAY * pVertexData);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ApplyParameter )( 
             IVoodooAdapter * This,
