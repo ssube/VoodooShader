@@ -99,11 +99,11 @@ public:
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveTexture( 
         /* [in] */ BSTR pName) ;
 
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StageTexture( 
+    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE GetStageTexture( 
         /* [in] */ TextureStage Stage,
         /* [retval][out] */ IVoodooTexture **ppTexture) ;
 
-    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_StageTexture( 
+    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE SetStageTexture( 
         /* [in] */ TextureStage Stage,
         /* [in] */ IVoodooTexture *pTexture) ;
 

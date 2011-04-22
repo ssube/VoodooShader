@@ -72,9 +72,13 @@ public:
     virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Target( 
         /* [in] */ IVoodooTexture *pTarget);
 
+    virtual HRESULT STDMETHODCALLTYPE get_Light(int Index, LightStruct *pLight);
+    virtual HRESULT STDMETHODCALLTYPE put_Light(int Index, LightStruct Light);
+    virtual HRESULT STDMETHODCALLTYPE SetProperty(BSTR pName, VARIANT *pData);
+
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
         /* [in] */ int Vertexes,
-        /* [in] */ VertexStruct *pVertexData);
+        /* [in] */ SAFEARRAY *pVertexData);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
         /* [in] */ IVoodooParameter *pParameter);

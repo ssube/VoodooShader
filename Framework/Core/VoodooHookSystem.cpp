@@ -31,7 +31,7 @@ IVoodooHookSystem * CVoodooHookSystem::Create(IVoodooCore * pCore)
     {
         pHookSystem->AddRef();
         pHookSystem->m_Core = pCore;
-        hr = pHookSystem->QueryInterface(IID_IVoodooTechnique, (void**)&ipHookSystem);
+        hr = pHookSystem->QueryInterface(IID_IVoodooHookSystem, (void**)&ipHookSystem);
         pHookSystem->Release();
     }
 

@@ -82,6 +82,15 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
     hr = m_Config->load(pConfig, &loadStatus);
     if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
     {
+        IXMLDOMParseError * pError = NULL;
+        m_Config->get_parseError(&pError);
+        CComBSTR fullError = L"XML Error:\n";
+        CComBSTR temp;
+        pError->get_reason(&temp);
+        fullError += temp;
+        fullError += L"\n";
+        long line;
+        pError->get_line(&line);
         return E_INVALIDCFG;
     }
 
@@ -95,8 +104,6 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
         return E_INVALIDCFG;
     }
 
-    SysFreeString(coreNodeStr);
-
     // Create query for node text, used multiple times
     CComBSTR queryNodeText = L"./text()";
     CComBSTR queryNodeName = L"./@name";
@@ -109,10 +116,10 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
     }
 
     // Load variables, built-in first
-    m_Parser->AddVariable(L"globalroot", m_GlobalRoot);
-    m_Parser->AddVariable(L"localroot", m_LocalRoot);
-    m_Parser->AddVariable(L"runroot", m_RunRoot);
-    m_Parser->AddVariable(L"target", m_Target);
+    m_Parser->AddVariable(L"globalroot", m_GlobalRoot, System);
+    m_Parser->AddVariable(L"localroot", m_LocalRoot, System);
+    m_Parser->AddVariable(L"runroot", m_RunRoot, System);
+    m_Parser->AddVariable(L"target", m_Target, System);
 
     CComBSTR queryVarNodes = L"/VoodooConfig/Variables/Variable";
 
@@ -134,8 +141,6 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
             m_Parser->AddVariable(name.bstrVal, text.bstrVal);
         }
     }
-
-    SysFreeString(queryVarNodes);
 
     // Lookup classes
     {
@@ -162,10 +167,8 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
                     CComBSTR filename(fn.bstrVal);
                     m_Parser->Parse(filename, NoFlags, &filename);
                     m_Logger->Open(filename, false);
-                    SysFreeString(filename);
                 }
             }
-            SysFreeString(str);
         }
     }
 
@@ -184,7 +187,6 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
             {
                 return E_BADCLSID;
             }
-            SysFreeString(str);
         }
     }
 
@@ -203,7 +205,6 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
             {
                 return E_BADCLSID;
             }
-            SysFreeString(str);
         }
     }
 
@@ -222,7 +223,6 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
             {
                 return E_BADCLSID;
             }
-            SysFreeString(str);
         }
     }
 
@@ -470,7 +470,7 @@ STDMETHODIMP CVoodooCore::RemoveTexture(
     }
 }
 
-STDMETHODIMP CVoodooCore::get_StageTexture( 
+STDMETHODIMP CVoodooCore::GetStageTexture( 
    TextureStage Stage,
    IVoodooTexture **ppTexture)
 {
@@ -485,7 +485,7 @@ STDMETHODIMP CVoodooCore::get_StageTexture(
     }
 }
 
-STDMETHODIMP CVoodooCore::put_StageTexture( 
+STDMETHODIMP CVoodooCore::SetStageTexture( 
    TextureStage Stage,
    IVoodooTexture *pTexture)
 {

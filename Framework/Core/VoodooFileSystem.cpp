@@ -33,7 +33,7 @@ IVoodooFileSystem * CVoodooFileSystem::Create(IVoodooCore * pCore)
         pFileSystem->m_Core = pCore;
         pFileSystem->m_Name = L"Null FileSystem";
 
-        hr = pFileSystem->QueryInterface(IID_IVoodooTechnique, (void**)&ipFileSystem);
+        hr = pFileSystem->QueryInterface(IID_IVoodooFileSystem, (void**)&ipFileSystem);
         pFileSystem->Release();
     }
 

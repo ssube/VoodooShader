@@ -33,7 +33,7 @@ IVoodooAdapter * CVoodooAdapter::Create(IVoodooCore * pCore)
     {
         pAdapter->AddRef();
         pAdapter->m_Core = pCore;
-        hr = pAdapter->QueryInterface(IID_IVoodooTechnique, (void**)&ipAdapter);
+        hr = pAdapter->QueryInterface(IID_IVoodooAdapter, (void**)&ipAdapter);
         pAdapter->Release();
     }
 
@@ -135,7 +135,32 @@ STDMETHODIMP CVoodooAdapter::put_Target(IVoodooTexture *pTarget)
     return E_NULLIMPL;
 }
 
-STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, VertexStruct *pVertexData)
+STDMETHODIMP CVoodooAdapter::get_Light(int Index, LightStruct *pLight)
+{
+    if ( pLight == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        return E_NULLIMPL;
+    }
+}
+
+STDMETHODIMP CVoodooAdapter::put_Light(int Index, LightStruct pLight)
+{
+    return E_NULLIMPL;
+}
+
+STDMETHODIMP CVoodooAdapter::SetProperty(BSTR pName, VARIANT *pData)
+{
+    if ( pData == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        return E_NULLIMPL;
+    }
+}
+
+STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, SAFEARRAY *pVertexData)
 {
     return E_NULLIMPL;
 }

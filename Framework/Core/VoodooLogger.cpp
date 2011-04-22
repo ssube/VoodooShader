@@ -31,7 +31,7 @@ IVoodooLogger * CVoodooLogger::Create(IVoodooCore * pCore)
     {
         pLogger->AddRef();
         pLogger->m_Core = pCore;
-        hr = pLogger->QueryInterface(IID_IVoodooTechnique, (void**)&ipLogger);
+        hr = pLogger->QueryInterface(IID_IVoodooLogger, (void**)&ipLogger);
         pLogger->Release();
     }
 

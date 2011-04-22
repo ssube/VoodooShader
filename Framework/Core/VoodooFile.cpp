@@ -34,7 +34,7 @@ IVoodooFile * CVoodooFile::Create(IVoodooCore * pCore, BSTR pPath)
         pFile->m_Name = pPath; //! @todo Change this to just the filename, no path
         pFile->m_Path = pPath;
 
-        hr = pFile->QueryInterface(IID_IVoodooTechnique, (void**)&ipFile);
+        hr = pFile->QueryInterface(IID_IVoodooFile, (void**)&ipFile);
         pFile->Release();
     }
 

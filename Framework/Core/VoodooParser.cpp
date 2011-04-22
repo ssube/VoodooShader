@@ -31,7 +31,7 @@ IVoodooParser * CVoodooParser::Create(IVoodooCore * pCore)
     {
         pParser->AddRef();
         pParser->m_Core = pCore;
-        hr = pParser->QueryInterface(IID_IVoodooTechnique, (void**)&ipParser);
+        hr = pParser->QueryInterface(IID_IVoodooParser, (void**)&ipParser);
         pParser->Release();
     }
 
@@ -91,6 +91,7 @@ STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, VariableType Ty
             {
                 logger->Log(LL_Warning, VOODOO_CORE_NAME, "Unable to add duplicate system variable \"%s\".", finalname.c_str());
             }*/
+            return E_ISSYSVAR;
         }
     } else {
         m_Variables.SetAt(name, pValue);

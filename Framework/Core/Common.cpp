@@ -16,6 +16,9 @@ const HRESULT E_FILEERROR    = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x00
 // IVoodooPass
 const HRESULT E_NOPROGRAM    = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0001);
 
+// IVoodooParser
+const HRESULT E_ISSYSVAR     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0001);
+
 const HRESULT E_NULLIMPL     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0xFFFF);
 
 // Creates an interface to a string-format class ID. The ID may be in registry form or a ProgID.
@@ -105,6 +108,8 @@ CGtype WINAPI ToCgType(ParameterType Type)
         return CG_SAMPLER2D;
     case Sampler3D:
         return CG_SAMPLER3D;
+    case UserStruct:
+        return CG_STRUCT;
     case UnknownType:
     default:
         return CG_UNKNOWN_TYPE;
@@ -153,6 +158,8 @@ ParameterType WINAPI ToParameterType(CGtype Type)
         return Sampler2D;
     case CG_SAMPLER3D:
         return Sampler3D;
+    case CG_STRUCT:
+        return UserStruct;
     case CG_UNKNOWN_TYPE:
     default:
         return UnknownType;
@@ -184,6 +191,8 @@ ParameterCategory WINAPI ToParameterCategory(ParameterType Type)
     case Sampler2D:
     case Sampler3D:
         return Sampler;
+    case UserStruct:
+        return Struct;
     default:
         return UnknownCategory;
     }

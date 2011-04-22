@@ -43,7 +43,7 @@ IVoodooParameter * CVoodooParameter::Create(IVoodooCore * pCore, BSTR pName, Par
         pParameter->m_Core = pCore;
         pParameter->m_Name = pName;
 
-        hr = pParameter->QueryInterface(IID_IVoodooTechnique, (void**)&ipParameter);
+        hr = pParameter->QueryInterface(IID_IVoodooParameter, (void**)&ipParameter);
         pParameter->Release();
     }
 

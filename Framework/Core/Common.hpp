@@ -21,6 +21,9 @@ extern const HRESULT E_FILEERROR;
 // IVoodooPass
 extern const HRESULT E_NOPROGRAM;
 
+// IVoodooParser
+extern const HRESULT E_ISSYSVAR;
+
 extern const HRESULT E_NULLIMPL;
 
 // Creates an interface to a string-format class ID. The ID may be in registry form or a ProgID.

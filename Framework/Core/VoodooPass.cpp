@@ -52,7 +52,7 @@ IVoodooPass * CVoodooPass::Create(IVoodooTechnique * pTechnique, CGpass Pass)
         pTechnique->get_Shader(&pPass->m_Shader);
         pTechnique->get_Core(&pPass->m_Core);
 
-        hr = pPass->QueryInterface(IID_IVoodooTechnique, (void**)&ipPass);
+        hr = pPass->QueryInterface(IID_IVoodooPass, (void**)&ipPass);
         pPass->Release();
     }
 

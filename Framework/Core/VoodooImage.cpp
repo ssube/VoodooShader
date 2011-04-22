@@ -33,7 +33,7 @@ IVoodooImage * CVoodooImage::Create(IVoodooCore * pCore, BSTR pPath)
         pImage->m_Core = pCore;
         pImage->m_Name = pPath;
         pImage->m_Path = pPath;
-        hr = pImage->QueryInterface(IID_IVoodooTechnique, (void**)&ipImage);
+        hr = pImage->QueryInterface(IID_IVoodooImage, (void**)&ipImage);
         pImage->Release();
     }
 

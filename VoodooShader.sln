@@ -74,7 +74,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{6F
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Filesystem", "Framework\Filesystem\Filesystem.vcxproj", "{88003ADC-5DD3-4CF7-B636-9F7F16DECEB3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core", "Framework\Core\Core.vcxproj", "{BC08F231-D53D-4D19-AF7E-9387521187BF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Core", "Framework\Core\Core.vcxproj", "{BC08F231-D53D-4D19-AF7E-9387521187BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9E41722B-FF31-4AA9-A64C-96B9AA175C30}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core_Basic_Cpp_NoHarness", "Tests\Core_Basic_Cpp_NoHarness\Core_Basic_Cpp_NoHarness.vcxproj", "{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -384,6 +388,30 @@ Global
 		{BC08F231-D53D-4D19-AF7E-9387521187BF}.Template|Win32.ActiveCfg = Release|Win32
 		{BC08F231-D53D-4D19-AF7E-9387521187BF}.Template|Win32.Build.0 = Release|Win32
 		{BC08F231-D53D-4D19-AF7E-9387521187BF}.Template|x86.ActiveCfg = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug_Analysis|Any CPU.ActiveCfg = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug_Analysis|Mixed Platforms.ActiveCfg = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug_Analysis|Mixed Platforms.Build.0 = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug_Analysis|Win32.ActiveCfg = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug_Analysis|Win32.Build.0 = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug_Analysis|x86.ActiveCfg = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug|Win32.Build.0 = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Debug|x86.ActiveCfg = Debug|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Release|Any CPU.ActiveCfg = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Release|Win32.ActiveCfg = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Release|Win32.Build.0 = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Release|x86.ActiveCfg = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Template|Any CPU.ActiveCfg = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Template|Mixed Platforms.ActiveCfg = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Template|Mixed Platforms.Build.0 = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Template|Win32.ActiveCfg = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Template|Win32.Build.0 = Release|Win32
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}.Template|x86.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -405,11 +433,12 @@ Global
 		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 		{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
+		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"
