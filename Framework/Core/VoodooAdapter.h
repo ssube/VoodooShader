@@ -16,7 +16,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooAdapter :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooAdapter, &CLSID_VoodooAdapter>,
-	public IDispatchImpl<IVoodooAdapter, &IID_IVoodooAdapter, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooAdapter, &IID_IVoodooAdapter, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooAdapter();
@@ -73,8 +73,8 @@ public:
         /* [in] */ IVoodooTexture *pTarget);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
-        /* [in] */ UINT Vertexes,
-        /* [in] */ Vertex *pVertexData);
+        /* [in] */ int Vertexes,
+        /* [in] */ VertexStruct *pVertexData);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
         /* [in] */ IVoodooParameter *pParameter);

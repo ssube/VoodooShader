@@ -109,7 +109,7 @@ STDMETHODIMP CVoodooLogger::Open(
     {
         return E_FILEERROR;
     } else {
-        this->Log(LL_Internal, L"Voodoo/Logger", L"Log file opened.", NULL);
+        this->Log(Internal, L"Voodoo/Logger", L"Log file opened.", NULL);
     }
     return S_OK;
 }
@@ -143,7 +143,7 @@ STDMETHODIMP CVoodooLogger::put_LogLevel(
 }
 
 STDMETHODIMP CVoodooLogger::LogModule( 
-    /* [in] */ Version Module)
+    /* [in] */ VersionStruct Module)
 {
     return S_OK;
 }

@@ -18,7 +18,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooImage :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooImage, &CLSID_VoodooImage>,
-    public IDispatchImpl<IVoodooImage, &IID_IVoodooImage, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+    public IDispatchImpl<IVoodooImage, &IID_IVoodooImage, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooImage();

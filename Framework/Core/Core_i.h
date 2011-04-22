@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu Apr 21 15:37:44 2011
+/* at Fri Apr 22 03:46:13 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -309,141 +309,143 @@ extern "C"{
 /* interface __MIDL_itf_Core_0000_0000 */
 /* [local] */ 
 
-typedef /* [public][public][public][public][public][public][v1_enum] */ 
+typedef /* [public][public][public][public][public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0001
-    {	TF_Unknown	= 0,
-	TF_RGB5	= ( TF_Unknown + 1 ) ,
-	TF_RGB5A1	= ( TF_RGB5 + 1 ) ,
-	TF_RGB8	= ( TF_RGB5A1 + 1 ) ,
-	TF_RGBA8	= ( TF_RGB8 + 1 ) ,
-	TF_RGB10A2	= ( TF_RGBA8 + 1 ) ,
-	TF_RGBA16F	= ( TF_RGB10A2 + 1 ) ,
-	TF_RGBA32F	= ( TF_RGBA16F + 1 ) ,
-	TF_D16	= ( TF_RGBA32F + 1 ) ,
-	TF_D32	= ( TF_D16 + 1 ) ,
-	TF_Max	= 0xffffffff
+    {	UnknownFormat	= 0,
+	RGB5	= ( UnknownFormat + 1 ) ,
+	RGB5A1	= ( RGB5 + 1 ) ,
+	RGB8	= ( RGB5A1 + 1 ) ,
+	RGBA8	= ( RGB8 + 1 ) ,
+	RGB10A2	= ( RGBA8 + 1 ) ,
+	RGBA16F	= ( RGB10A2 + 1 ) ,
+	RGBA32F	= ( RGBA16F + 1 ) ,
+	D16	= ( RGBA32F + 1 ) ,
+	D32	= ( D16 + 1 ) 
     } 	TextureFormat;
 
-typedef /* [public][public][public][v1_enum] */ 
+typedef /* [public][public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0002
-    {	PT_Unknown	= 0,
-	PT_Sampler1D	= ( PT_Unknown + 1 ) ,
-	PT_Sampler2D	= ( PT_Sampler1D + 1 ) ,
-	PT_Sampler3D	= ( PT_Sampler2D + 1 ) ,
-	PT_Float1	= ( PT_Sampler3D + 1 ) ,
-	PT_Float2	= ( PT_Float1 + 1 ) ,
-	PT_Float3	= ( PT_Float2 + 1 ) ,
-	PT_Float4	= ( PT_Float3 + 1 ) ,
-	PT_Matrix	= ( PT_Float4 + 1 ) ,
-	PT_Max	= 0xffffffff
+    {	UnknownType	= 0,
+	Float1	= 0x11,
+	Float2	= 0x12,
+	Float3	= 0x13,
+	Float4	= 0x14,
+	Float1x1	= 0x11,
+	Float1x2	= 0x12,
+	Float1x3	= 0x13,
+	Float1x4	= 0x14,
+	Float2x1	= 0x21,
+	Float2x2	= 0x21,
+	Float2x3	= 0x21,
+	Float2x4	= 0x21,
+	Float3x1	= 0x31,
+	Float3x2	= 0x32,
+	Float3x3	= 0x33,
+	Float3x4	= 0x34,
+	Float4x1	= 0x41,
+	Float4x2	= 0x42,
+	Float4x3	= 0x43,
+	Float4x4	= 0x44,
+	Sampler1D	= 0x101,
+	Sampler2D	= 0x102,
+	Sampler3D	= 0x103
     } 	ParameterType;
 
-typedef /* [public][v1_enum] */ 
+typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0003
-    {	PC_Unknown	= 0,
-	PC_Float	= ( PC_Unknown + 1 ) ,
-	PC_Sampler	= ( PC_Float + 1 ) ,
-	PC_Matrix	= ( PC_Sampler + 1 ) ,
-	PC_Max	= 0xffffffff
+    {	UnknownCategory	= 0,
+	Scalar	= ( UnknownCategory + 1 ) ,
+	Sampler	= ( Scalar + 1 ) 
     } 	ParameterCategory;
 
-typedef /* [public][public][v1_enum] */ 
+typedef /* [public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0004
-    {	PS_Unknown	= 0,
-	PS_Vertex	= ( PS_Unknown + 1 ) ,
-	PS_Fragment	= ( PS_Vertex + 1 ) ,
-	PS_Geometry	= ( PS_Fragment + 1 ) ,
-	PS_Domain	= ( PS_Geometry + 1 ) ,
-	PS_Hull	= ( PS_Domain + 1 ) ,
-	PS_Max	= 0xffffffff
+    {	UnknownProgram	= 0,
+	Vertex	= ( UnknownProgram + 1 ) ,
+	Fragment	= ( Vertex + 1 ) ,
+	Geometry	= ( Fragment + 1 ) ,
+	Domain	= ( Geometry + 1 ) ,
+	Hull	= ( Domain + 1 ) 
     } 	ProgramStage;
 
-typedef /* [public][public][public][v1_enum] */ 
+typedef /* [public][public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0005
-    {	TT_Unknown	= 0,
-	TT_Generic	= ( TT_Unknown + 1 ) ,
-	TT_ShaderTarget	= ( TT_Generic + 1 ) ,
-	TT_PassTarget	= ( TT_ShaderTarget + 1 ) ,
-	TT_Max	= 0xffffffff
-    } 	TextureType;
+    {	UnknownStage	= 0,
+	ShaderTarget	= ( UnknownStage + 1 ) ,
+	PassTarget	= ( ShaderTarget + 1 ) 
+    } 	TextureStage;
 
-typedef /* [public][public][v1_enum] */ 
+typedef /* [public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0006
-    {	FM_Unknown	= 0,
-	FM_Read	= 0x1,
-	FM_Write	= 0x2,
-	FM_Max	= 0xffffffff
+    {	UnknownMode	= 0,
+	Read	= 0x1,
+	Write	= 0x2
     } 	FileOpenMode;
 
-typedef /* [public][public][public][public][v1_enum] */ 
+typedef /* [public][public][public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0007
-    {	LL_Unknown	= 0,
-	LL_S_Debug	= 0x1,
-	LL_S_Info	= 0x2,
-	LL_S_Warning	= 0x4,
-	LL_S_Error	= 0x8,
-	LL_Severity	= 0xf,
-	LL_O_API	= 0x10,
-	LL_O_External	= 0x20,
-	LL_O_Module	= 0x40,
-	LL_O_Framework	= 0x80,
-	LL_Origin	= 0xf0,
-	LL_Internal	= 0x82,
-	LL_Initial	= 0xfe,
-	LL_Debug	= 0x41,
-	LL_Info	= 0x42,
-	LL_Warning	= 0x44,
-	LL_Error	= 0x48,
-	LL_All	= 0xff,
-	LL_Max	= 0xffffffff
+    {	UnknownLevel	= 0,
+	Debug	= 0x1,
+	Info	= 0x2,
+	Warning	= 0x4,
+	Error	= 0x8,
+	External	= 0x10,
+	Module	= 0x40,
+	Framework	= 0x80,
+	Internal	= 0x82,
+	Initial	= 0xfe,
+	All	= 0xff
     } 	LogLevel;
 
-typedef /* [public][public][v1_enum] */ 
+typedef /* [public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0008
-    {	PF_None	= 0,
-	PF_SingleSlash	= 0x1,
-	PF_SlashOnly	= 0x2,
-	PF_BackslashOnly	= 0x4,
-	PF_SlashFlags	= 0x7,
-	PF_Lowercase	= 0x10,
-	PF_Uppercase	= 0x20,
-	PF_CaseFlags	= 0x30,
-	PF_VarName	= 0x100,
-	PF_Max	= 0xffffffff
+    {	NoFlags	= 0,
+	SingleSlash	= 0x1,
+	SlashOnly	= 0x2,
+	BackslashOnly	= 0x4,
+	Lowercase	= 0x10,
+	Uppercase	= 0x20,
+	VarName	= 0x100
     } 	ParseFlags;
 
-typedef /* [public][public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0009
+typedef /* [public][public][helpstring][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0009
+    {	Normal	= 0,
+	System	= 0x10
+    } 	VariableType;
+
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0010
     {
-    UINT Width;
-    UINT Height;
-    UINT Depth;
-    BOOL Mipmaps;
+    int Width;
+    int Height;
+    int Depth;
+    boolean Mipmaps;
     TextureFormat Format;
     } 	TextureDesc;
 
-typedef /* [public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0010
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
     {
-    UINT Width;
-    UINT Height;
-    UINT Depth;
-    BOOL Mipmaps;
-    UINT OffX;
-    UINT OffY;
-    UINT OffZ;
+    int Width;
+    int Height;
+    int Depth;
+    boolean Mipmaps;
+    int OffX;
+    int OffY;
+    int OffZ;
     TextureFormat Format;
     } 	TextureRegion;
 
-typedef /* [public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
     {
     BSTR Name;
-    UINT Major;
-    UINT Minor;
-    ULONG Patch;
-    ULONG Rev;
-    BOOL Debug;
-    } 	Version;
+    int Major;
+    int Minor;
+    long Patch;
+    long Rev;
+    boolean Debug;
+    } 	VersionStruct;
 
-typedef /* [public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0013
     {
     float X;
     float Y;
@@ -451,9 +453,9 @@ typedef /* [public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
     float Winding;
     float U;
     float V;
-    } 	Vertex;
+    } 	VertexStruct;
 
-typedef /* [public][public][public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0013
+typedef /* [public][public][public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0014
     {
     int unused;
     } 	Function;
@@ -663,7 +665,7 @@ EXTERN_C const IID IID_IVoodooCore;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [optional][in] */ VARIANT pConfig) = 0;
+            /* [in] */ VARIANT pConfig) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Parser( 
             /* [retval][out] */ IVoodooParser **ppParser) = 0;
@@ -684,13 +686,14 @@ EXTERN_C const IID IID_IVoodooCore;
             /* [retval][out] */ IXMLDOMDocument **ppConfig) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgContext( 
-            /* [retval][out] */ VARIANT *ppCgContext) = 0;
+            /* [retval][out] */ VARIANT *pCgContext) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_CgContext( 
-            /* [in] */ VARIANT pCgContext) = 0;
+            /* [in] */ VARIANT CgContext) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateShader( 
+        virtual /* [id][vararg] */ HRESULT STDMETHODCALLTYPE CreateShader( 
             /* [in] */ IVoodooFile *pFile,
+            /* [in] */ SAFEARRAY * pArgs,
             /* [retval][out] */ IVoodooShader **ppShader) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateParameter( 
@@ -700,7 +703,7 @@ EXTERN_C const IID IID_IVoodooCore;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
             /* [in] */ BSTR pName,
-            /* [in] */ VARIANT pData,
+            /* [in] */ VARIANT Data,
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetParameter( 
@@ -715,11 +718,11 @@ EXTERN_C const IID IID_IVoodooCore;
             /* [in] */ BSTR pName) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StageTexture( 
-            /* [in] */ TextureType Stage,
+            /* [in] */ TextureStage Stage,
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_StageTexture( 
-            /* [in] */ TextureType Stage,
+            /* [in] */ TextureStage Stage,
             /* [in] */ IVoodooTexture *pTexture) = 0;
         
     };
@@ -773,7 +776,7 @@ EXTERN_C const IID IID_IVoodooCore;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IVoodooCore * This,
-            /* [optional][in] */ VARIANT pConfig);
+            /* [in] */ VARIANT pConfig);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Parser )( 
             IVoodooCore * This,
@@ -801,15 +804,16 @@ EXTERN_C const IID IID_IVoodooCore;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CgContext )( 
             IVoodooCore * This,
-            /* [retval][out] */ VARIANT *ppCgContext);
+            /* [retval][out] */ VARIANT *pCgContext);
         
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CgContext )( 
             IVoodooCore * This,
-            /* [in] */ VARIANT pCgContext);
+            /* [in] */ VARIANT CgContext);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateShader )( 
+        /* [id][vararg] */ HRESULT ( STDMETHODCALLTYPE *CreateShader )( 
             IVoodooCore * This,
             /* [in] */ IVoodooFile *pFile,
+            /* [in] */ SAFEARRAY * pArgs,
             /* [retval][out] */ IVoodooShader **ppShader);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateParameter )( 
@@ -821,7 +825,7 @@ EXTERN_C const IID IID_IVoodooCore;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateTexture )( 
             IVoodooCore * This,
             /* [in] */ BSTR pName,
-            /* [in] */ VARIANT pData,
+            /* [in] */ VARIANT Data,
             /* [retval][out] */ IVoodooTexture **ppTexture);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetParameter )( 
@@ -840,12 +844,12 @@ EXTERN_C const IID IID_IVoodooCore;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StageTexture )( 
             IVoodooCore * This,
-            /* [in] */ TextureType Stage,
+            /* [in] */ TextureStage Stage,
             /* [retval][out] */ IVoodooTexture **ppTexture);
         
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StageTexture )( 
             IVoodooCore * This,
-            /* [in] */ TextureType Stage,
+            /* [in] */ TextureStage Stage,
             /* [in] */ IVoodooTexture *pTexture);
         
         END_INTERFACE
@@ -905,20 +909,20 @@ EXTERN_C const IID IID_IVoodooCore;
 #define IVoodooCore_get_Config(This,ppConfig)	\
     ( (This)->lpVtbl -> get_Config(This,ppConfig) ) 
 
-#define IVoodooCore_get_CgContext(This,ppCgContext)	\
-    ( (This)->lpVtbl -> get_CgContext(This,ppCgContext) ) 
+#define IVoodooCore_get_CgContext(This,pCgContext)	\
+    ( (This)->lpVtbl -> get_CgContext(This,pCgContext) ) 
 
-#define IVoodooCore_put_CgContext(This,pCgContext)	\
-    ( (This)->lpVtbl -> put_CgContext(This,pCgContext) ) 
+#define IVoodooCore_put_CgContext(This,CgContext)	\
+    ( (This)->lpVtbl -> put_CgContext(This,CgContext) ) 
 
-#define IVoodooCore_CreateShader(This,pFile,ppShader)	\
-    ( (This)->lpVtbl -> CreateShader(This,pFile,ppShader) ) 
+#define IVoodooCore_CreateShader(This,pFile,pArgs,ppShader)	\
+    ( (This)->lpVtbl -> CreateShader(This,pFile,pArgs,ppShader) ) 
 
 #define IVoodooCore_CreateParameter(This,pName,Type,ppParameter)	\
     ( (This)->lpVtbl -> CreateParameter(This,pName,Type,ppParameter) ) 
 
-#define IVoodooCore_CreateTexture(This,pName,pData,ppTexture)	\
-    ( (This)->lpVtbl -> CreateTexture(This,pName,pData,ppTexture) ) 
+#define IVoodooCore_CreateTexture(This,pName,Data,ppTexture)	\
+    ( (This)->lpVtbl -> CreateTexture(This,pName,Data,ppTexture) ) 
 
 #define IVoodooCore_GetParameter(This,pName,ppParameter)	\
     ( (This)->lpVtbl -> GetParameter(This,pName,ppParameter) ) 
@@ -964,7 +968,7 @@ EXTERN_C const IID IID_IVoodooParser;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddVariable( 
             /* [in] */ BSTR pName,
             /* [in] */ BSTR pValue,
-            /* [in] */ BOOL System) = 0;
+            /* [defaultvalue][in] */ VariableType System = Normal) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveVariable( 
             /* [in] */ BSTR pName) = 0;
@@ -1027,7 +1031,7 @@ EXTERN_C const IID IID_IVoodooParser;
             IVoodooParser * This,
             /* [in] */ BSTR pName,
             /* [in] */ BSTR pValue,
-            /* [in] */ BOOL System);
+            /* [defaultvalue][in] */ VariableType System);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RemoveVariable )( 
             IVoodooParser * This,
@@ -1111,16 +1115,16 @@ EXTERN_C const IID IID_IVoodooShader;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
+            /* [retval][out] */ LPBSTR ppName) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TechniqueCount( 
-            /* [retval][out] */ INT *ppCount) = 0;
+            /* [retval][out] */ int *pCount) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetTechnique( 
-            /* [in] */ INT Number,
+            /* [in] */ int Number,
             /* [retval][out] */ IVoodooTechnique **ppTechnique) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DefaultTechnique( 
@@ -1130,14 +1134,14 @@ EXTERN_C const IID IID_IVoodooShader;
             /* [in] */ IVoodooTechnique *pTechnique) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ParameterCount( 
-            /* [retval][out] */ INT *ppCount) = 0;
+            /* [retval][out] */ int *pCount) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetParameter( 
-            /* [in] */ INT Number,
+            /* [in] */ int Number,
             /* [retval][out] */ IVoodooParameter **ppParameter) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgShader( 
-            /* [retval][out] */ VARIANT *ppCgShader) = 0;
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgShader( 
+            /* [retval][out] */ VARIANT *pCgShader) = 0;
         
     };
     
@@ -1190,7 +1194,7 @@ EXTERN_C const IID IID_IVoodooShader;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             IVoodooShader * This,
-            /* [retval][out] */ LPBSTR pName);
+            /* [retval][out] */ LPBSTR ppName);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooShader * This,
@@ -1198,11 +1202,11 @@ EXTERN_C const IID IID_IVoodooShader;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TechniqueCount )( 
             IVoodooShader * This,
-            /* [retval][out] */ INT *ppCount);
+            /* [retval][out] */ int *pCount);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTechnique )( 
             IVoodooShader * This,
-            /* [in] */ INT Number,
+            /* [in] */ int Number,
             /* [retval][out] */ IVoodooTechnique **ppTechnique);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultTechnique )( 
@@ -1215,16 +1219,16 @@ EXTERN_C const IID IID_IVoodooShader;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ParameterCount )( 
             IVoodooShader * This,
-            /* [retval][out] */ INT *ppCount);
+            /* [retval][out] */ int *pCount);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetParameter )( 
             IVoodooShader * This,
-            /* [in] */ INT Number,
+            /* [in] */ int Number,
             /* [retval][out] */ IVoodooParameter **ppParameter);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCgShader )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CgShader )( 
             IVoodooShader * This,
-            /* [retval][out] */ VARIANT *ppCgShader);
+            /* [retval][out] */ VARIANT *pCgShader);
         
         END_INTERFACE
     } IVoodooShaderVtbl;
@@ -1262,14 +1266,14 @@ EXTERN_C const IID IID_IVoodooShader;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooShader_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
+#define IVoodooShader_get_Name(This,ppName)	\
+    ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
 #define IVoodooShader_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
-#define IVoodooShader_get_TechniqueCount(This,ppCount)	\
-    ( (This)->lpVtbl -> get_TechniqueCount(This,ppCount) ) 
+#define IVoodooShader_get_TechniqueCount(This,pCount)	\
+    ( (This)->lpVtbl -> get_TechniqueCount(This,pCount) ) 
 
 #define IVoodooShader_GetTechnique(This,Number,ppTechnique)	\
     ( (This)->lpVtbl -> GetTechnique(This,Number,ppTechnique) ) 
@@ -1280,14 +1284,14 @@ EXTERN_C const IID IID_IVoodooShader;
 #define IVoodooShader_put_DefaultTechnique(This,pTechnique)	\
     ( (This)->lpVtbl -> put_DefaultTechnique(This,pTechnique) ) 
 
-#define IVoodooShader_get_ParameterCount(This,ppCount)	\
-    ( (This)->lpVtbl -> get_ParameterCount(This,ppCount) ) 
+#define IVoodooShader_get_ParameterCount(This,pCount)	\
+    ( (This)->lpVtbl -> get_ParameterCount(This,pCount) ) 
 
 #define IVoodooShader_GetParameter(This,Number,ppParameter)	\
     ( (This)->lpVtbl -> GetParameter(This,Number,ppParameter) ) 
 
-#define IVoodooShader_GetCgShader(This,ppCgShader)	\
-    ( (This)->lpVtbl -> GetCgShader(This,ppCgShader) ) 
+#define IVoodooShader_get_CgShader(This,pCgShader)	\
+    ( (This)->lpVtbl -> get_CgShader(This,pCgShader) ) 
 
 #endif /* COBJMACROS */
 
@@ -1316,7 +1320,7 @@ EXTERN_C const IID IID_IVoodooTechnique;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
+            /* [retval][out] */ LPBSTR ppName) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
@@ -1325,17 +1329,17 @@ EXTERN_C const IID IID_IVoodooTechnique;
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PassCount( 
-            /* [retval][out] */ INT *ppCount) = 0;
+            /* [retval][out] */ int *pCount) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetPass( 
-            /* [in] */ INT Number,
+            /* [in] */ int Number,
             /* [retval][out] */ IVoodooPass **ppPass) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shader( 
             /* [retval][out] */ IVoodooShader **ppShader) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgTechnique( 
-            /* [retval][out] */ VARIANT *ppPass) = 0;
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgTechnique( 
+            /* [retval][out] */ VARIANT *pCgTechnique) = 0;
         
     };
     
@@ -1388,7 +1392,7 @@ EXTERN_C const IID IID_IVoodooTechnique;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             IVoodooTechnique * This,
-            /* [retval][out] */ LPBSTR pName);
+            /* [retval][out] */ LPBSTR ppName);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooTechnique * This,
@@ -1400,20 +1404,20 @@ EXTERN_C const IID IID_IVoodooTechnique;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PassCount )( 
             IVoodooTechnique * This,
-            /* [retval][out] */ INT *ppCount);
+            /* [retval][out] */ int *pCount);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetPass )( 
             IVoodooTechnique * This,
-            /* [in] */ INT Number,
+            /* [in] */ int Number,
             /* [retval][out] */ IVoodooPass **ppPass);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Shader )( 
             IVoodooTechnique * This,
             /* [retval][out] */ IVoodooShader **ppShader);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCgTechnique )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CgTechnique )( 
             IVoodooTechnique * This,
-            /* [retval][out] */ VARIANT *ppPass);
+            /* [retval][out] */ VARIANT *pCgTechnique);
         
         END_INTERFACE
     } IVoodooTechniqueVtbl;
@@ -1451,8 +1455,8 @@ EXTERN_C const IID IID_IVoodooTechnique;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooTechnique_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
+#define IVoodooTechnique_get_Name(This,ppName)	\
+    ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
 #define IVoodooTechnique_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
@@ -1460,8 +1464,8 @@ EXTERN_C const IID IID_IVoodooTechnique;
 #define IVoodooTechnique_get_Target(This,ppTexture)	\
     ( (This)->lpVtbl -> get_Target(This,ppTexture) ) 
 
-#define IVoodooTechnique_get_PassCount(This,ppCount)	\
-    ( (This)->lpVtbl -> get_PassCount(This,ppCount) ) 
+#define IVoodooTechnique_get_PassCount(This,pCount)	\
+    ( (This)->lpVtbl -> get_PassCount(This,pCount) ) 
 
 #define IVoodooTechnique_GetPass(This,Number,ppPass)	\
     ( (This)->lpVtbl -> GetPass(This,Number,ppPass) ) 
@@ -1469,8 +1473,8 @@ EXTERN_C const IID IID_IVoodooTechnique;
 #define IVoodooTechnique_get_Shader(This,ppShader)	\
     ( (This)->lpVtbl -> get_Shader(This,ppShader) ) 
 
-#define IVoodooTechnique_GetCgTechnique(This,ppPass)	\
-    ( (This)->lpVtbl -> GetCgTechnique(This,ppPass) ) 
+#define IVoodooTechnique_get_CgTechnique(This,pCgTechnique)	\
+    ( (This)->lpVtbl -> get_CgTechnique(This,pCgTechnique) ) 
 
 #endif /* COBJMACROS */
 
@@ -1499,7 +1503,7 @@ EXTERN_C const IID IID_IVoodooPass;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
+            /* [retval][out] */ LPBSTR ppName) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
@@ -1515,10 +1519,10 @@ EXTERN_C const IID IID_IVoodooPass;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgProgram( 
             /* [in] */ ProgramStage Stage,
-            /* [retval][out] */ VARIANT *ppProgram) = 0;
+            /* [retval][out] */ VARIANT *pProgram) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgPass( 
-            /* [retval][out] */ VARIANT *ppPass) = 0;
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgPass( 
+            /* [retval][out] */ VARIANT *pCgPass) = 0;
         
     };
     
@@ -1571,7 +1575,7 @@ EXTERN_C const IID IID_IVoodooPass;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             IVoodooPass * This,
-            /* [retval][out] */ LPBSTR pName);
+            /* [retval][out] */ LPBSTR ppName);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooPass * This,
@@ -1592,11 +1596,11 @@ EXTERN_C const IID IID_IVoodooPass;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCgProgram )( 
             IVoodooPass * This,
             /* [in] */ ProgramStage Stage,
-            /* [retval][out] */ VARIANT *ppProgram);
+            /* [retval][out] */ VARIANT *pProgram);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCgPass )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CgPass )( 
             IVoodooPass * This,
-            /* [retval][out] */ VARIANT *ppPass);
+            /* [retval][out] */ VARIANT *pCgPass);
         
         END_INTERFACE
     } IVoodooPassVtbl;
@@ -1634,8 +1638,8 @@ EXTERN_C const IID IID_IVoodooPass;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooPass_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
+#define IVoodooPass_get_Name(This,ppName)	\
+    ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
 #define IVoodooPass_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
@@ -1649,11 +1653,11 @@ EXTERN_C const IID IID_IVoodooPass;
 #define IVoodooPass_get_Technique(This,ppTechnique)	\
     ( (This)->lpVtbl -> get_Technique(This,ppTechnique) ) 
 
-#define IVoodooPass_GetCgProgram(This,Stage,ppProgram)	\
-    ( (This)->lpVtbl -> GetCgProgram(This,Stage,ppProgram) ) 
+#define IVoodooPass_GetCgProgram(This,Stage,pProgram)	\
+    ( (This)->lpVtbl -> GetCgProgram(This,Stage,pProgram) ) 
 
-#define IVoodooPass_GetCgPass(This,ppPass)	\
-    ( (This)->lpVtbl -> GetCgPass(This,ppPass) ) 
+#define IVoodooPass_get_CgPass(This,pCgPass)	\
+    ( (This)->lpVtbl -> get_CgPass(This,pCgPass) ) 
 
 #endif /* COBJMACROS */
 
@@ -1682,13 +1686,13 @@ EXTERN_C const IID IID_IVoodooTexture;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
+            /* [retval][out] */ LPBSTR ppName) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
-            /* [retval][out] */ VARIANT *ppData) = 0;
+            /* [retval][out] */ VARIANT *pData) = 0;
         
     };
     
@@ -1741,7 +1745,7 @@ EXTERN_C const IID IID_IVoodooTexture;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             IVoodooTexture * This,
-            /* [retval][out] */ LPBSTR pName);
+            /* [retval][out] */ LPBSTR ppName);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooTexture * This,
@@ -1749,7 +1753,7 @@ EXTERN_C const IID IID_IVoodooTexture;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Data )( 
             IVoodooTexture * This,
-            /* [retval][out] */ VARIANT *ppData);
+            /* [retval][out] */ VARIANT *pData);
         
         END_INTERFACE
     } IVoodooTextureVtbl;
@@ -1787,14 +1791,14 @@ EXTERN_C const IID IID_IVoodooTexture;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooTexture_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
+#define IVoodooTexture_get_Name(This,ppName)	\
+    ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
 #define IVoodooTexture_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
-#define IVoodooTexture_get_Data(This,ppData)	\
-    ( (This)->lpVtbl -> get_Data(This,ppData) ) 
+#define IVoodooTexture_get_Data(This,pData)	\
+    ( (This)->lpVtbl -> get_Data(This,pData) ) 
 
 #endif /* COBJMACROS */
 
@@ -1823,7 +1827,7 @@ EXTERN_C const IID IID_IVoodooParameter;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
+            /* [retval][out] */ LPBSTR ppName) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
@@ -1832,7 +1836,7 @@ EXTERN_C const IID IID_IVoodooParameter;
             /* [retval][out] */ ParameterType *pType) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Virtual( 
-            /* [retval][out] */ BOOL *pVirtual) = 0;
+            /* [retval][out] */ boolean *pVirtual) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AttachParameter( 
             /* [in] */ IVoodooParameter *pParameter) = 0;
@@ -1847,16 +1851,16 @@ EXTERN_C const IID IID_IVoodooParameter;
             /* [in] */ IVoodooTexture *pTexture) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ScalarValue( 
-            /* [retval][out] */ SAFEARRAY * *ppData) = 0;
+            /* [retval][out] */ SAFEARRAY * *pData) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ScalarValue( 
-            /* [in] */ SAFEARRAY * pData) = 0;
+            /* [in] */ SAFEARRAY * Data) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shader( 
             /* [retval][out] */ IVoodooShader **ppShader) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgParameter( 
-            /* [retval][out] */ VARIANT *ppCgParameter) = 0;
+            /* [retval][out] */ VARIANT *pCgParameter) = 0;
         
     };
     
@@ -1909,7 +1913,7 @@ EXTERN_C const IID IID_IVoodooParameter;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             IVoodooParameter * This,
-            /* [retval][out] */ LPBSTR pName);
+            /* [retval][out] */ LPBSTR ppName);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooParameter * This,
@@ -1921,7 +1925,7 @@ EXTERN_C const IID IID_IVoodooParameter;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Virtual )( 
             IVoodooParameter * This,
-            /* [retval][out] */ BOOL *pVirtual);
+            /* [retval][out] */ boolean *pVirtual);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AttachParameter )( 
             IVoodooParameter * This,
@@ -1941,11 +1945,11 @@ EXTERN_C const IID IID_IVoodooParameter;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScalarValue )( 
             IVoodooParameter * This,
-            /* [retval][out] */ SAFEARRAY * *ppData);
+            /* [retval][out] */ SAFEARRAY * *pData);
         
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScalarValue )( 
             IVoodooParameter * This,
-            /* [in] */ SAFEARRAY * pData);
+            /* [in] */ SAFEARRAY * Data);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Shader )( 
             IVoodooParameter * This,
@@ -1953,7 +1957,7 @@ EXTERN_C const IID IID_IVoodooParameter;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CgParameter )( 
             IVoodooParameter * This,
-            /* [retval][out] */ VARIANT *ppCgParameter);
+            /* [retval][out] */ VARIANT *pCgParameter);
         
         END_INTERFACE
     } IVoodooParameterVtbl;
@@ -1991,8 +1995,8 @@ EXTERN_C const IID IID_IVoodooParameter;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooParameter_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
+#define IVoodooParameter_get_Name(This,ppName)	\
+    ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
 #define IVoodooParameter_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
@@ -2015,17 +2019,17 @@ EXTERN_C const IID IID_IVoodooParameter;
 #define IVoodooParameter_put_SamplerValue(This,pTexture)	\
     ( (This)->lpVtbl -> put_SamplerValue(This,pTexture) ) 
 
-#define IVoodooParameter_get_ScalarValue(This,ppData)	\
-    ( (This)->lpVtbl -> get_ScalarValue(This,ppData) ) 
+#define IVoodooParameter_get_ScalarValue(This,pData)	\
+    ( (This)->lpVtbl -> get_ScalarValue(This,pData) ) 
 
-#define IVoodooParameter_put_ScalarValue(This,pData)	\
-    ( (This)->lpVtbl -> put_ScalarValue(This,pData) ) 
+#define IVoodooParameter_put_ScalarValue(This,Data)	\
+    ( (This)->lpVtbl -> put_ScalarValue(This,Data) ) 
 
 #define IVoodooParameter_get_Shader(This,ppShader)	\
     ( (This)->lpVtbl -> get_Shader(This,ppShader) ) 
 
-#define IVoodooParameter_get_CgParameter(This,ppCgParameter)	\
-    ( (This)->lpVtbl -> get_CgParameter(This,ppCgParameter) ) 
+#define IVoodooParameter_get_CgParameter(This,pCgParameter)	\
+    ( (This)->lpVtbl -> get_CgParameter(This,pCgParameter) ) 
 
 #endif /* COBJMACROS */
 
@@ -2053,15 +2057,12 @@ EXTERN_C const IID IID_IVoodooLogger;
     IVoodooLogger : public IDispatch
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
-        
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
             /* [in] */ BSTR pFilename,
-            /* [in] */ BOOL Append) = 0;
+            /* [in] */ boolean Append) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
@@ -2074,7 +2075,7 @@ EXTERN_C const IID IID_IVoodooLogger;
             /* [in] */ LogLevel Level) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogModule( 
-            /* [in] */ Version Module) = 0;
+            /* [in] */ VersionStruct Module) = 0;
         
         virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE Log( 
             /* [in] */ LogLevel Level,
@@ -2083,10 +2084,10 @@ EXTERN_C const IID IID_IVoodooLogger;
             /* [in] */ SAFEARRAY * *pArgs) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BufferSize( 
-            /* [retval][out] */ UINT *pSize) = 0;
+            /* [retval][out] */ int *pSize) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_BufferSize( 
-            /* [in] */ UINT Size) = 0;
+            /* [in] */ int Size) = 0;
         
     };
     
@@ -2137,10 +2138,6 @@ EXTERN_C const IID IID_IVoodooLogger;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            IVoodooLogger * This,
-            /* [retval][out] */ LPBSTR pName);
-        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooLogger * This,
             /* [retval][out] */ IVoodooCore **ppCore);
@@ -2148,7 +2145,7 @@ EXTERN_C const IID IID_IVoodooLogger;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             IVoodooLogger * This,
             /* [in] */ BSTR pFilename,
-            /* [in] */ BOOL Append);
+            /* [in] */ boolean Append);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             IVoodooLogger * This);
@@ -2166,7 +2163,7 @@ EXTERN_C const IID IID_IVoodooLogger;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LogModule )( 
             IVoodooLogger * This,
-            /* [in] */ Version Module);
+            /* [in] */ VersionStruct Module);
         
         /* [vararg][id] */ HRESULT ( STDMETHODCALLTYPE *Log )( 
             IVoodooLogger * This,
@@ -2177,11 +2174,11 @@ EXTERN_C const IID IID_IVoodooLogger;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferSize )( 
             IVoodooLogger * This,
-            /* [retval][out] */ UINT *pSize);
+            /* [retval][out] */ int *pSize);
         
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BufferSize )( 
             IVoodooLogger * This,
-            /* [in] */ UINT Size);
+            /* [in] */ int Size);
         
         END_INTERFACE
     } IVoodooLoggerVtbl;
@@ -2218,9 +2215,6 @@ EXTERN_C const IID IID_IVoodooLogger;
 #define IVoodooLogger_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
-
-#define IVoodooLogger_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
 
 #define IVoodooLogger_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
@@ -2278,9 +2272,6 @@ EXTERN_C const IID IID_IVoodooAdapter;
     IVoodooAdapter : public IDispatch
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
-        
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
         
@@ -2303,8 +2294,8 @@ EXTERN_C const IID IID_IVoodooAdapter;
             /* [in] */ IVoodooTexture *pTarget) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
-            /* [in] */ UINT Vertexes,
-            /* [in] */ Vertex *pVertexData) = 0;
+            /* [in] */ int Vertexes,
+            /* [in] */ SAFEARRAY * *pVertexData) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
             /* [in] */ IVoodooParameter *pParameter) = 0;
@@ -2319,6 +2310,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadTexture( 
             /* [in] */ IVoodooImage *pImage,
+            /* [in] */ TextureRegion Region,
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ConnectTexture( 
@@ -2379,10 +2371,6 @@ EXTERN_C const IID IID_IVoodooAdapter;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            IVoodooAdapter * This,
-            /* [retval][out] */ LPBSTR pName);
-        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooAdapter * This,
             /* [retval][out] */ IVoodooCore **ppCore);
@@ -2413,8 +2401,8 @@ EXTERN_C const IID IID_IVoodooAdapter;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DrawGeometry )( 
             IVoodooAdapter * This,
-            /* [in] */ UINT Vertexes,
-            /* [in] */ Vertex *pVertexData);
+            /* [in] */ int Vertexes,
+            /* [in] */ SAFEARRAY * *pVertexData);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ApplyParameter )( 
             IVoodooAdapter * This,
@@ -2433,6 +2421,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LoadTexture )( 
             IVoodooAdapter * This,
             /* [in] */ IVoodooImage *pImage,
+            /* [in] */ TextureRegion Region,
             /* [retval][out] */ IVoodooTexture **ppTexture);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConnectTexture )( 
@@ -2482,9 +2471,6 @@ EXTERN_C const IID IID_IVoodooAdapter;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooAdapter_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
-
 #define IVoodooAdapter_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
@@ -2518,8 +2504,8 @@ EXTERN_C const IID IID_IVoodooAdapter;
 #define IVoodooAdapter_CreateTexture(This,pName,Description,ppTexture)	\
     ( (This)->lpVtbl -> CreateTexture(This,pName,Description,ppTexture) ) 
 
-#define IVoodooAdapter_LoadTexture(This,pImage,ppTexture)	\
-    ( (This)->lpVtbl -> LoadTexture(This,pImage,ppTexture) ) 
+#define IVoodooAdapter_LoadTexture(This,pImage,Region,ppTexture)	\
+    ( (This)->lpVtbl -> LoadTexture(This,pImage,Region,ppTexture) ) 
 
 #define IVoodooAdapter_ConnectTexture(This,pParameter,pTexture)	\
     ( (This)->lpVtbl -> ConnectTexture(This,pParameter,pTexture) ) 
@@ -2553,9 +2539,6 @@ EXTERN_C const IID IID_IVoodooFileSystem;
     IVoodooFileSystem : public IDispatch
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
-        
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
         
@@ -2622,10 +2605,6 @@ EXTERN_C const IID IID_IVoodooFileSystem;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            IVoodooFileSystem * This,
-            /* [retval][out] */ LPBSTR pName);
-        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooFileSystem * This,
             /* [retval][out] */ IVoodooCore **ppCore);
@@ -2684,9 +2663,6 @@ EXTERN_C const IID IID_IVoodooFileSystem;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooFileSystem_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
-
 #define IVoodooFileSystem_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
@@ -2728,12 +2704,6 @@ EXTERN_C const IID IID_IVoodooFile;
     IVoodooFile : public IDispatch
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
-        
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-            /* [retval][out] */ IVoodooCore **ppCore) = 0;
-        
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
             /* [retval][out] */ LPBSTR pPath) = 0;
         
@@ -2799,14 +2769,6 @@ EXTERN_C const IID IID_IVoodooFile;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            IVoodooFile * This,
-            /* [retval][out] */ LPBSTR pName);
-        
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
-            IVoodooFile * This,
-            /* [retval][out] */ IVoodooCore **ppCore);
-        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             IVoodooFile * This,
             /* [retval][out] */ LPBSTR pPath);
@@ -2863,12 +2825,6 @@ EXTERN_C const IID IID_IVoodooFile;
 #define IVoodooFile_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
-
-#define IVoodooFile_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
-
-#define IVoodooFile_get_Core(This,ppCore)	\
-    ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
 #define IVoodooFile_get_Path(This,pPath)	\
     ( (This)->lpVtbl -> get_Path(This,pPath) ) 
@@ -2968,14 +2924,6 @@ EXTERN_C const IID IID_IVoodooImage;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            IVoodooImage * This,
-            /* [retval][out] */ LPBSTR pName);
-        
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
-            IVoodooImage * This,
-            /* [retval][out] */ IVoodooCore **ppCore);
-        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             IVoodooImage * This,
             /* [retval][out] */ LPBSTR pPath);
@@ -3043,12 +2991,6 @@ EXTERN_C const IID IID_IVoodooImage;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooImage_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
-
-#define IVoodooImage_get_Core(This,ppCore)	\
-    ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
-
 #define IVoodooImage_get_Path(This,pPath)	\
     ( (This)->lpVtbl -> get_Path(This,pPath) ) 
 
@@ -3097,9 +3039,6 @@ EXTERN_C const IID IID_IVoodooHookSystem;
     IVoodooHookSystem : public IDispatch
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ LPBSTR pName) = 0;
-        
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
         
@@ -3162,10 +3101,6 @@ EXTERN_C const IID IID_IVoodooHookSystem;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            IVoodooHookSystem * This,
-            /* [retval][out] */ LPBSTR pName);
-        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooHookSystem * This,
             /* [retval][out] */ IVoodooCore **ppCore);
@@ -3219,9 +3154,6 @@ EXTERN_C const IID IID_IVoodooHookSystem;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooHookSystem_get_Name(This,pName)	\
-    ( (This)->lpVtbl -> get_Name(This,pName) ) 
-
 #define IVoodooHookSystem_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
@@ -3246,14 +3178,14 @@ EXTERN_C const IID IID_IVoodooHookSystem;
 
 
 
-#ifndef __CoreLib_LIBRARY_DEFINED__
-#define __CoreLib_LIBRARY_DEFINED__
+#ifndef __Voodoo_Core_LIBRARY_DEFINED__
+#define __Voodoo_Core_LIBRARY_DEFINED__
 
-/* library CoreLib */
+/* library Voodoo_Core */
 /* [custom][version][uuid] */ 
 
 
-EXTERN_C const IID LIBID_CoreLib;
+EXTERN_C const IID LIBID_Voodoo_Core;
 
 EXTERN_C const CLSID CLSID_CompReg;
 
@@ -3366,7 +3298,7 @@ EXTERN_C const CLSID CLSID_VoodooHookSystem;
 class DECLSPEC_UUID("04666805-E086-4104-BCC6-9A0C7FADB924")
 VoodooHookSystem;
 #endif
-#endif /* __CoreLib_LIBRARY_DEFINED__ */
+#endif /* __Voodoo_Core_LIBRARY_DEFINED__ */
 
 /* Additional Prototypes for ALL interfaces */
 

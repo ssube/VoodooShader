@@ -17,7 +17,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooParameter :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooParameter, &CLSID_VoodooParameter>,
-	public IDispatchImpl<IVoodooParameter, &IID_IVoodooParameter, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooParameter, &IID_IVoodooParameter, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooParameter();
@@ -60,7 +60,7 @@ public:
         /* [retval][out] */ ParameterType *pType);
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Virtual( 
-        /* [retval][out] */ BOOL *pVirtual);
+        /* [retval][out] */ boolean *pVirtual);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE AttachParameter( 
         /* [in] */ IVoodooParameter *pParameter);
@@ -92,7 +92,7 @@ private:
     IVoodooCore * m_Core;
     IVoodooShader * m_Shader;
     ParameterType m_Type;
-    BOOL m_Virtual;
+    boolean m_Virtual;
     CComPtr<IVoodooTexture> m_Texture;
     CComSafeArray<float> m_Data;
     CGparameter m_Parameter;

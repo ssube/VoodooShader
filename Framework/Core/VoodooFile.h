@@ -14,7 +14,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooFile :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooFile, &CLSID_VoodooFile>,
-	public IDispatchImpl<IVoodooFile, &IID_IVoodooFile, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooFile, &IID_IVoodooFile, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooFile();

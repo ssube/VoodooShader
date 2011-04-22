@@ -16,7 +16,7 @@ typedef CMap<BSTR, BSTR, BSTR, BSTR> Dictionary;
 class ATL_NO_VTABLE CVoodooParser :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooParser, &CLSID_VoodooParser>,
-	public IDispatchImpl<IVoodooParser, &IID_IVoodooParser, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooParser, &IID_IVoodooParser, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooParser();
@@ -51,7 +51,7 @@ public:
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddVariable( 
         /* [in] */ BSTR pName,
         /* [in] */ BSTR pValue,
-        /* [in] */ BOOL System);
+        /* [in] */ VariableType Type);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveVariable( 
         /* [in] */ BSTR pName);

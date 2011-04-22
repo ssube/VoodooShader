@@ -16,12 +16,12 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooPass :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooPass, &CLSID_VoodooPass>,
-	public IDispatchImpl<IVoodooPass, &IID_IVoodooPass, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooPass, &IID_IVoodooPass, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooPass()
-	{
-	}
+	CVoodooPass();
+    virtual ~CVoodooPass();
+    static IVoodooPass * Create(IVoodooTechnique * pTechnique, CGpass Pass);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
@@ -67,7 +67,7 @@ public:
         /* [in] */ ProgramStage Stage,
         /* [retval][out] */ VARIANT *ppProgram);
 
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgPass( 
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE get_CgPass( 
         /* [retval][out] */ VARIANT *ppPass);
 
 private:

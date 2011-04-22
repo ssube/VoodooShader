@@ -70,7 +70,7 @@ STDMETHODIMP_(ULONG) CVoodooParser::Release()
     }
 }
 
-STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue,BOOL System)
+STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, VariableType Type)
 {
     /*ILoggerRef logger = m_Core->GetLogger();
     if ( logger.get() )
@@ -79,9 +79,9 @@ STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue,BOOL System)
     }*/
 
     CComBSTR name(pName);
-    this->Parse(name, PF_VarName, &name);
+    this->Parse(name, VarName, &name);
 
-    if ( System == TRUE )
+    if ( Type == System )
     {
         if ( m_SysVariables.PLookup(name) == NULL )
         {
@@ -107,7 +107,7 @@ STDMETHODIMP CVoodooParser::RemoveVariable(BSTR pName)
     }*/
 
     CComBSTR name(pName);
-    this->Parse(name, PF_VarName, &name);
+    this->Parse(name, VarName, &name);
 
     m_Variables.RemoveKey(name);
     return S_OK;
@@ -174,7 +174,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth
             this->ParseRaw(&svalue, Flags, ++Depth, State);
 
             CComBSTR sname(varname.Left(statepos));
-            this->ParseRaw(&sname, PF_VarName, ++Depth, State);
+            this->ParseRaw(&sname, VarName, ++Depth, State);
 
             State->SetAt(sname, svalue);
             varname.Empty();
@@ -207,7 +207,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth
 
         // Properly format the variable name (recursive call to simplify future syntax exts)
         CComBSTR fname(varname);
-        this->ParseRaw(&fname, PF_VarName, ++Depth, State);
+        this->ParseRaw(&fname, VarName, ++Depth, State);
 
         // Lookup and replace the variable
         BSTR fvalue;
@@ -242,42 +242,36 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth
     }
 
     // Handle slash replacement
-    if ( Flags == PF_None )
+    if ( Flags == NoFlags )
     {
         iteration.SetSysString(pString);
         return S_OK;
-    } else if ( Flags == PF_VarName ) {
+    } else if ( Flags == VarName ) {
         iteration.MakeLower();
         iteration.SetSysString(pString);
         return S_OK;
     } 
         
-    if ( Flags & PF_SlashFlags )
+    if ( Flags & SlashOnly )
     {
-        if ( Flags & PF_SlashOnly )
+        iteration.Replace(L'\\', L'/');
+        if ( Flags & SingleSlash )
         {
-            iteration.Replace(L'\\', L'/');
-            if ( Flags & PF_SingleSlash )
-            {
-                while ( iteration.Replace(L"//", L"/") > 0 ) { }
-            }
-        } else if ( Flags & PF_BackslashOnly ) {
-            iteration.Replace(L'/', L'\\');
-            if ( Flags & PF_SingleSlash )
-            {
-                while ( iteration.Replace(L"\\\\", L"\\") > 0 ) { }
-            }
+            while ( iteration.Replace(L"//", L"/") > 0 ) { }
+        }
+    } else if ( Flags & BackslashOnly ) {
+        iteration.Replace(L'/', L'\\');
+        if ( Flags & SingleSlash )
+        {
+            while ( iteration.Replace(L"\\\\", L"\\") > 0 ) { }
         }
     }
 
-    if ( Flags & PF_CaseFlags )
+    if ( Flags & Lowercase )
     {
-        if ( Flags & PF_Lowercase )
-        {
-            iteration.MakeLower();
-        } else if ( Flags & PF_Uppercase ) {
-            iteration.MakeUpper();
-        }
+        iteration.MakeLower();
+    } else if ( Flags & Uppercase ) {
+        iteration.MakeUpper();
     }
 
     //if ( logger.get() )

@@ -16,7 +16,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooTechnique :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooTechnique, &CLSID_VoodooTechnique>,
-	public IDispatchImpl<IVoodooTechnique, &IID_IVoodooTechnique, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooTechnique, &IID_IVoodooTechnique, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooTechnique();
@@ -67,7 +67,7 @@ public:
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shader( 
         /* [retval][out] */ IVoodooShader **ppShader);
 
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgTechnique( 
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE get_CgTechnique( 
         /* [retval][out] */ VARIANT *ppPass);
 
 private:

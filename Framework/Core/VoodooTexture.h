@@ -16,7 +16,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooTexture :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooTexture, &CLSID_VoodooTexture>,
-	public IDispatchImpl<IVoodooTexture, &IID_IVoodooTexture, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooTexture, &IID_IVoodooTexture, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooTexture();

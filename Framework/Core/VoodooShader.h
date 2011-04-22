@@ -16,7 +16,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooShader :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooShader, &CLSID_VoodooShader>,
-	public IDispatchImpl<IVoodooShader, &IID_IVoodooShader, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooShader, &IID_IVoodooShader, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooShader();
@@ -74,7 +74,7 @@ public:
         /* [in] */ INT Number,
         /* [retval][out] */ IVoodooParameter **ppParameter);
 
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgShader( 
+    virtual /* [id] */ HRESULT STDMETHODCALLTYPE get_CgShader( 
         /* [retval][out] */ VARIANT *ppCgShader);
 
 private:

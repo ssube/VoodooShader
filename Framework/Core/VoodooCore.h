@@ -14,7 +14,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooCore :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooCore, &CLSID_VoodooCore>,
-	public IDispatchImpl<IVoodooCore, &IID_IVoodooCore, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooCore, &IID_IVoodooCore, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooCore()
@@ -84,7 +84,7 @@ public:
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
         /* [in] */ BSTR pName,
-        /* [in] */ VARIANT *pData,
+        /* [in] */ VARIANT Data,
         /* [retval][out] */ IVoodooTexture **ppTexture) ;
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetParameter( 
@@ -99,11 +99,11 @@ public:
         /* [in] */ BSTR pName) ;
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StageTexture( 
-        /* [in] */ TextureType Stage,
+        /* [in] */ TextureStage Stage,
         /* [retval][out] */ IVoodooTexture **ppTexture) ;
 
     virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_StageTexture( 
-        /* [in] */ TextureType Stage,
+        /* [in] */ TextureStage Stage,
         /* [in] */ IVoodooTexture *pTexture) ;
 
     private:
@@ -154,7 +154,7 @@ public:
 
         CMap<BSTR, BSTR, CComPtr<IVoodooParameter>, CComPtr<IVoodooParameter> > m_Parameters;
         CMap<BSTR, BSTR, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > m_Textures;
-        CMap<TextureType, TextureType, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > m_StageTextures;
+        CMap<TextureStage, TextureStage, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture> > m_StageTextures;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooCore), CVoodooCore)

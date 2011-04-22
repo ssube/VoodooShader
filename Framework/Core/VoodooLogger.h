@@ -16,7 +16,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooLogger :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooLogger, &CLSID_VoodooLogger>,
-	public IDispatchImpl<IVoodooLogger, &IID_IVoodooLogger, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooLogger, &IID_IVoodooLogger, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooLogger();
@@ -69,7 +69,7 @@ public:
         /* [in] */ LogLevel Level);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogModule( 
-        /* [in] */ Version Module);
+        /* [in] */ VersionStruct Module);
 
     virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE Log( 
         /* [in] */ LogLevel Level,

@@ -16,7 +16,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooHookSystem :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooHookSystem, &CLSID_VoodooHookSystem>,
-	public IDispatchImpl<IVoodooHookSystem, &IID_IVoodooHookSystem, &LIBID_CoreLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooHookSystem, &IID_IVoodooHookSystem, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
 	CVoodooHookSystem();

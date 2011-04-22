@@ -63,7 +63,7 @@ STDMETHODIMP CVoodooTechnique::QueryInterface(REFIID iid, void ** pp) throw()
     if ( pp == NULL )
     {
         return E_POINTER;
-    } else if ( iid == IID_IUnknown || iid == IID_IVoodooTexture ) {
+    } else if ( iid == IID_IUnknown || iid == IID_IVoodooTechnique ) {
         this->AddRef();
         *pp = this;
         return S_OK;
@@ -158,7 +158,7 @@ STDMETHODIMP CVoodooTechnique::get_Shader(IVoodooShader **ppShader)
     }
 }
 
-STDMETHODIMP CVoodooTechnique::GetCgTechnique(VARIANT *ppPass)
+STDMETHODIMP CVoodooTechnique::get_CgTechnique(VARIANT *ppPass)
 {
     if ( ppPass == NULL )
     {

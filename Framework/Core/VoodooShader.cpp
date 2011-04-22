@@ -190,7 +190,7 @@ STDMETHODIMP CVoodooShader::GetParameter(INT Number, IVoodooParameter **ppParame
     }
 }
 
-STDMETHODIMP CVoodooShader::GetCgShader(VARIANT *ppCgShader)
+STDMETHODIMP CVoodooShader::get_CgShader(VARIANT *ppCgShader)
 {
     if ( ppCgShader == NULL )
     {

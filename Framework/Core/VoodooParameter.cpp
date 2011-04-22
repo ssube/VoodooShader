@@ -140,7 +140,7 @@ STDMETHODIMP CVoodooParameter::get_Type(ParameterType *pType)
     }
 }
 
-STDMETHODIMP CVoodooParameter::get_Virtual(BOOL *pVirtual)
+STDMETHODIMP CVoodooParameter::get_Virtual(boolean *pVirtual)
 {
     if ( pVirtual == NULL )
     {
@@ -181,24 +181,24 @@ STDMETHODIMP CVoodooParameter::get_Components(int * Components)
 {
     switch ( m_Type )
     {
-    case PT_Float1:
+    case Float1:
         return 1;
-    case PT_Float2:
+    case Float2:
         return 2;
-    case PT_Float3:
+    case Float3:
         return 3;
-    case PT_Float4:
+    case Float4:
         return 4;
-    case PT_Matrix:
+    case Float4x4:
         return 16;
-    case PT_Sampler1D:
+    case Sampler1D:
         return 1;
-    case PT_Sampler2D:
+    case Sampler2D:
         return 2;
-    case PT_Sampler3D:
+    case Sampler3D:
         return 3;
     default:
-        return 0;
+        return -1;
     }
 } 
 
