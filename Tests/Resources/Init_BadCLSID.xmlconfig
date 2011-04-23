@@ -1,0 +1,47 @@
+<VoodooConfig>
+    <Variables>
+        <Variable name="adapter">Null</Variable>
+        <Variable name="Null_Logname">NullTest</Variable>
+    </Variables>
+
+    <Core>
+        <Logger>{7C6B6D83-THIS- IS -FAKE-F5689DA3D4D7}</Logger>
+        <HookSystem>{04666805-E086-4104-BCC6-9A0C7FADB924}</HookSystem>
+        <FileSystem>{14CC5267-85B7-41B2-A0DC-C69DDEA9E97C}</FileSystem>
+        <Adapter>{66063841-6A4E-4D12-A186-5319762EFEB2}</Adapter>
+
+        <!-- Log filename. -->  
+        <LogFile>$(runroot)\Voodoo_$($(adapter)_Logname)</LogFile> 
+        <LogLevel>0xFF</LogLevel>
+    </Core>
+
+    <WFileSystem>
+        <!-- Use search paths below for all files. (not implemented) -->
+        <RewritePaths enabled="false" /> 
+
+        <SearchPaths>
+            <Path>$(globalroot)\resources\common\</Path>
+            <Path>$(globalroot)\resources\$(adapter)</Path>
+            <Path>$(localroot)\resources\</Path>
+            <Path>$(runroot)\resources\</Path>
+        </SearchPaths>
+    </WFileSystem>
+
+    <!-- Settings for Frost_Adapter class. -->
+    <Frost_Adapter>
+        <PostShaders>
+            <Shader>test.cgfx</Shader>
+            <Shader>voodoologo.cgfx</Shader>
+        </PostShaders>
+    </Frost_Adapter>
+
+    <!-- Settings for Gem_Adapter class. -->
+    <Gem_Adapter>
+        <TrueHDR enabled="false" />
+        <PostShaders>
+            <Shader>test.cgfx</Shader>
+            <Shader>voodoologo.cgfx</Shader>
+        </PostShaders>
+    </Gem_Adapter>
+
+</VoodooConfig>

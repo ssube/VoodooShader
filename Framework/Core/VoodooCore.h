@@ -17,9 +17,8 @@ class ATL_NO_VTABLE CVoodooCore :
 	public IDispatchImpl<IVoodooCore, &IID_IVoodooCore, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooCore()
-	{
-	}
+	CVoodooCore();
+    virtual ~CVoodooCore();
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
@@ -108,6 +107,7 @@ public:
         /* [in] */ IVoodooTexture *pTexture) ;
 
     private:
+        bool m_Init;
         UINT m_Refrs;
 
         /**
@@ -126,7 +126,7 @@ public:
         /**
          * Cg context used by void core.
          */
-        void * m_Context;
+        CGcontext m_Context;
 
         /**
          * The currently bound (active) IAdapter implementation.

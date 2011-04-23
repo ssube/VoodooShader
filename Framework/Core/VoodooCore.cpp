@@ -10,6 +10,17 @@
 #include "VoodooTexture.h"
 
 // CVoodooCore
+CVoodooCore::CVoodooCore()
+{
+    m_Init = false;
+    m_Refrs = 0;
+}
+
+CVoodooCore::~CVoodooCore()
+{
+
+}
+
 STDMETHODIMP CVoodooCore::QueryInterface(REFIID iid, void ** pp) throw()
 {
     if ( pp == NULL )
@@ -247,12 +258,14 @@ STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
     CComBSTR done = L"Core initialization complete.";
     m_Logger->Log(LogLevel(Info|Framework), L"Core", done, NULL);
 
+    m_Init = true;
     return S_OK;
 }
 
 STDMETHODIMP CVoodooCore::get_Parser( 
    IVoodooParser ** ppParser)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppParser == NULL ) return E_INVALIDARG;
 
     *ppParser = m_Parser;
@@ -262,6 +275,7 @@ STDMETHODIMP CVoodooCore::get_Parser(
 STDMETHODIMP CVoodooCore::get_HookSystem( 
    IVoodooHookSystem **ppHookSystem)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppHookSystem == NULL )
     {
         return E_INVALIDARG;
@@ -274,6 +288,7 @@ STDMETHODIMP CVoodooCore::get_HookSystem(
 STDMETHODIMP CVoodooCore::get_FileSystem( 
    IVoodooFileSystem **ppFileSystem)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppFileSystem == NULL )
     {
         return E_INVALIDARG;
@@ -286,6 +301,7 @@ STDMETHODIMP CVoodooCore::get_FileSystem(
 STDMETHODIMP CVoodooCore::get_Adapter( 
    IVoodooAdapter **ppAdapter)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppAdapter == NULL )
     {
         return E_INVALIDARG;
@@ -298,6 +314,7 @@ STDMETHODIMP CVoodooCore::get_Adapter(
 STDMETHODIMP CVoodooCore::get_Logger( 
    IVoodooLogger **ppLogger)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppLogger == NULL )
     {
         return E_INVALIDARG;
@@ -310,6 +327,7 @@ STDMETHODIMP CVoodooCore::get_Logger(
 STDMETHODIMP CVoodooCore::get_Config( 
    IXMLDOMDocument **ppConfig)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppConfig == NULL )
     {
         return E_INVALIDARG;
@@ -322,6 +340,7 @@ STDMETHODIMP CVoodooCore::get_Config(
 STDMETHODIMP CVoodooCore::get_CgContext( 
    VARIANT * ppCgContext)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppCgContext == NULL )
     {
         return E_INVALIDARG;
@@ -335,11 +354,12 @@ STDMETHODIMP CVoodooCore::get_CgContext(
 STDMETHODIMP CVoodooCore::put_CgContext( 
    VARIANT pCgContext)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( V_VT(&pCgContext) != VT_BYREF )
     {
         return E_INVALIDARG;
     } else {
-        m_Context = V_BYREF(&pCgContext);
+        m_Context = (CGcontext)V_BYREF(&pCgContext);
         return S_OK;
     }
 }
@@ -349,6 +369,7 @@ STDMETHODIMP CVoodooCore::CreateShader(
    SAFEARRAY * pArgs,
    IVoodooShader **ppShader)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( pFile == NULL || ppShader == NULL )
     {
         return E_INVALIDARG;
@@ -369,6 +390,7 @@ STDMETHODIMP CVoodooCore::CreateParameter(
    ParameterType Type,
    IVoodooParameter **ppParameter)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppParameter == NULL )
     {
         return E_INVALIDARG;
@@ -399,6 +421,7 @@ STDMETHODIMP CVoodooCore::CreateTexture(
    VARIANT Data,
    IVoodooTexture **ppTexture)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppTexture == NULL || V_VT(&Data) != VT_BYREF )
     {
         return E_INVALIDARG;
@@ -427,6 +450,7 @@ STDMETHODIMP CVoodooCore::GetParameter(
    BSTR pName,
    IVoodooParameter **ppParameter)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppParameter == NULL )
     {
         return E_INVALIDARG;
@@ -447,6 +471,7 @@ STDMETHODIMP CVoodooCore::GetTexture(
    BSTR pName,
    IVoodooTexture **ppTexture)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( ppTexture == NULL )
     {
         return E_INVALIDARG;
@@ -466,6 +491,7 @@ STDMETHODIMP CVoodooCore::GetTexture(
 STDMETHODIMP CVoodooCore::RemoveTexture( 
    BSTR pName)
 {
+    if ( !m_Init ) return E_NOTINIT;
     if ( this->m_Textures.RemoveKey(pName) == 0 )
     {
         return S_NOT_FOUND;
@@ -478,6 +504,7 @@ STDMETHODIMP CVoodooCore::GetStageTexture(
    TextureStage Stage,
    IVoodooTexture **ppTexture)
 {
+    if ( !m_Init ) return E_NOTINIT;
     CComPtr<IVoodooTexture> texture;
     if ( this->m_StageTextures.Lookup(Stage, texture) == 0 )
     {
@@ -493,6 +520,7 @@ STDMETHODIMP CVoodooCore::SetStageTexture(
    TextureStage Stage,
    IVoodooTexture *pTexture)
 {
+    if ( !m_Init ) return E_NOTINIT;
     this->m_StageTextures.SetAt(Stage, pTexture);
 
     return S_OK;

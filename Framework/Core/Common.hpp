@@ -15,6 +15,9 @@ extern const HRESULT E_DUPNAME;
 extern const HRESULT E_NOT_FOUND;
 extern const HRESULT S_NOT_FOUND;
 
+// IVoodooCore
+extern const HRESULT E_NOTINIT;
+
 // IVoodooLogger
 extern const HRESULT E_FILEERROR;
 
