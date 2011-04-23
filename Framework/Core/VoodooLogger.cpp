@@ -157,6 +157,30 @@ STDMETHODIMP CVoodooLogger::Log(
     return E_NOTIMPL;
 }
 
+STDMETHODIMP CVoodooLogger::LogList( 
+    /* [in] */ LogLevel Level,
+    /* [in] */ BSTR pModule,
+    /* [in] */ BSTR pFormat,
+    /* [in] */ VARIANT pList)
+{
+    if ( pFormat == NULL ) return E_INVALIDARG;
+
+    CStringW msg;
+
+    msg.Format(L"Level: %u\tModule: %s\tMessage:\n\t", Level, pModule);
+
+    va_list vargs = (va_list)V_BYREF(&pList);
+    //va_start(vargs, pFormat);
+    msg.AppendFormatV(pFormat, vargs);
+    //va_end(vargs);
+
+    msg.AppendChar(L'\n');
+
+    m_File.WriteString(msg);
+
+    return S_OK;
+}
+
 STDMETHODIMP CVoodooLogger::get_BufferSize( 
     /* [retval][out] */ int *pSize)
 {

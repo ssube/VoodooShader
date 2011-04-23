@@ -49,7 +49,7 @@ HRESULT WINAPI InstanceFromString(_In_ BSTR lpStr, _In_ REFIID iid, _In_ void **
         }
     }
 
-    return CoCreateInstance(clsid, NULL, NULL, iid, pp);
+    return CoCreateInstance(clsid, NULL, CLSCTX_INPROC_SERVER, iid, pp);
 }
 
 CGparameter WINAPI CreateVirtualParameter(IVoodooCore * pCore, ParameterType Type)

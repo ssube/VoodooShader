@@ -9,7 +9,7 @@
 
 using namespace ATL;
 
-typedef CMap<BSTR, BSTR, BSTR, BSTR> Dictionary;
+typedef CMap<CComBSTR, CComBSTR, CComBSTR, CComBSTR> Dictionary;
 
 // CVoodooParser
 

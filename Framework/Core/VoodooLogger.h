@@ -77,6 +77,12 @@ public:
         /* [in] */ BSTR pFormat,
         /* [in] */ SAFEARRAY * ppArgs);
 
+    virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE LogList( 
+        /* [in] */ LogLevel Level,
+        /* [in] */ BSTR pModule,
+        /* [in] */ BSTR pFormat,
+        /* [in] */ VARIANT pList);
+
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BufferSize( 
         /* [retval][out] */ int *pSize);
 
@@ -88,7 +94,7 @@ private:
     CComBSTR m_Name;
     IVoodooCore * m_Core;
     LogLevel m_Level;
-    CFile m_File;
+    CStdioFile m_File;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(VoodooLogger), CVoodooLogger)

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Fri Apr 22 15:22:42 2011
+/* at Fri Apr 22 16:52:47 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -384,7 +384,7 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0006
 	Write	= 0x2
     } 	FileOpenMode;
 
-typedef /* [public][public][public][public][helpstring][v1_enum] */ 
+typedef /* [public][public][public][public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0007
     {	UnknownLevel	= 0,
 	Debug	= 0x1,
@@ -980,7 +980,7 @@ EXTERN_C const IID IID_IVoodooCore;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ VARIANT pConfig) = 0;
+            /* [in] */ BSTR pConfig) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Parser( 
             /* [retval][out] */ IVoodooParser **ppParser) = 0;
@@ -1091,7 +1091,7 @@ EXTERN_C const IID IID_IVoodooCore;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IVoodooCore * This,
-            /* [in] */ VARIANT pConfig);
+            /* [in] */ BSTR pConfig);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Parser )( 
             IVoodooCore * This,
@@ -2398,6 +2398,12 @@ EXTERN_C const IID IID_IVoodooLogger;
             /* [in] */ BSTR pFormat,
             /* [in] */ SAFEARRAY * pArgs) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogList( 
+            /* [in] */ LogLevel Level,
+            /* [in] */ BSTR pModule,
+            /* [in] */ BSTR pFormat,
+            /* [in] */ VARIANT pList) = 0;
+        
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BufferSize( 
             /* [retval][out] */ int *pSize) = 0;
         
@@ -2487,6 +2493,13 @@ EXTERN_C const IID IID_IVoodooLogger;
             /* [in] */ BSTR pFormat,
             /* [in] */ SAFEARRAY * pArgs);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *LogList )( 
+            IVoodooLogger * This,
+            /* [in] */ LogLevel Level,
+            /* [in] */ BSTR pModule,
+            /* [in] */ BSTR pFormat,
+            /* [in] */ VARIANT pList);
+        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferSize )( 
             IVoodooLogger * This,
             /* [retval][out] */ int *pSize);
@@ -2554,6 +2567,9 @@ EXTERN_C const IID IID_IVoodooLogger;
 
 #define IVoodooLogger_Log(This,Level,pModule,pFormat,pArgs)	\
     ( (This)->lpVtbl -> Log(This,Level,pModule,pFormat,pArgs) ) 
+
+#define IVoodooLogger_LogList(This,Level,pModule,pFormat,pList)	\
+    ( (This)->lpVtbl -> LogList(This,Level,pModule,pFormat,pList) ) 
 
 #define IVoodooLogger_get_BufferSize(This,pSize)	\
     ( (This)->lpVtbl -> get_BufferSize(This,pSize) ) 

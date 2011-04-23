@@ -47,7 +47,7 @@ END_COM_MAP()
 // IVoodooCore
 public:    
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE Initialize( 
-        /* [optional][in] */ VARIANT pConfig) ;
+        /* [optional][in] */ BSTR pConfig) ;
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Parser( 
         /* [retval][out] */ IVoodooParser **ppParser) ;

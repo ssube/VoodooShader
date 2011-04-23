@@ -286,7 +286,7 @@ interface IVoodooAdapter : IDispatch{
 	pointer_default(unique)
 ]
 interface IVoodooCore : IDispatch{
-    [id(1)] HRESULT Initialize([in] VARIANT pConfig);
+    [id(1)] HRESULT Initialize([in] BSTR pConfig);
     [propget, id(2)] HRESULT Parser([out, retval] IVoodooParser ** ppParser);
     [propget, id(3)] HRESULT HookSystem([out, retval] IVoodooHookSystem ** ppHookSystem);
     [propget, id(4)] HRESULT FileSystem([out, retval] IVoodooFileSystem ** ppFileSystem);
@@ -415,8 +415,9 @@ interface IVoodooLogger : IDispatch{
     [propput, id(5)] HRESULT LogLevel([in] LogLevel Level);
     [id(6)] HRESULT LogModule([in] VersionStruct Module);
     [id(7), vararg] HRESULT Log([in] LogLevel Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
-    [propget, id(8)] HRESULT BufferSize([out, retval] int * pSize);
-    [propput, id(8)] HRESULT BufferSize([in] int Size);
+    [id(8)] HRESULT LogList([in] LogLevel Level, [in] BSTR pModule, [in] BSTR pFormat, [in] VARIANT pList);
+    [propget, id(9)] HRESULT BufferSize([out, retval] int * pSize);
+    [propput, id(9)] HRESULT BufferSize([in] int Size);
 };
 [
 	object,

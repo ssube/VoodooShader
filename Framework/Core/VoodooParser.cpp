@@ -31,6 +31,8 @@ IVoodooParser * CVoodooParser::Create(IVoodooCore * pCore)
     {
         pParser->AddRef();
         pParser->m_Core = pCore;
+        pParser->m_SysVariables.InitHashTable(47);
+        pParser->m_Variables.InitHashTable(91);
         hr = pParser->QueryInterface(IID_IVoodooParser, (void**)&ipParser);
         pParser->Release();
     }
@@ -80,12 +82,13 @@ STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, VariableType Ty
 
     CComBSTR name(pName);
     this->Parse(name, VarName, &name);
+    CComBSTR value(pValue);
 
     if ( Type == System )
     {
         if ( m_SysVariables.PLookup(name) == NULL )
         {
-            m_SysVariables.SetAt(name, pValue);
+            m_SysVariables.SetAt(name, value);
         } else {
             /*if ( logger.get() )
             {
@@ -94,7 +97,7 @@ STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, VariableType Ty
             return E_ISSYSVAR;
         }
     } else {
-        m_Variables.SetAt(name, pValue);
+        m_Variables.SetAt(name, value);
     }
     return S_OK;
 }
@@ -164,7 +167,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth
             break;
         }
 
-        varname = varname.Mid(startpos);
+        varname = varname.Mid(startpos+1);
 
         // Check for state variables
         int statepos = varname.Find(':');
@@ -211,23 +214,33 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth
         this->ParseRaw(&fname, VarName, ++Depth, State);
 
         // Lookup and replace the variable
-        BSTR fvalue;
+        CComBSTR fvalue;
 
-        if ( 
-            m_SysVariables.Lookup(fname, fvalue) == 0 &&
-            State->Lookup(fname, fvalue) == 0 &&
-            m_Variables.Lookup(fname, fvalue) == 0
-            )
+        Dictionary::CPair * pPair = m_SysVariables.PLookup(fname);
+        if ( pPair != NULL )
         {
-            // Not a stored variable
-            CStringW var;
-            if ( var.GetEnvironmentVariable(fname) == 0 && !supress )
+            fvalue = pPair->value;
+        } else {
+            pPair = State->PLookup(fname);
+            if ( pPair != NULL )
             {
-                // Not a variable
-                var = L"badvar:";
-                var.Append(fname);
+                fvalue = pPair->value;
+            } else {
+                pPair = m_Variables.PLookup(fname);
+                if ( pPair != NULL )
+                {
+                    fvalue = pPair->value;
+                } else {
+                    CStringW var;
+                    if ( var.GetEnvironmentVariable(fname) == 0 && !supress )
+                    {
+                        // Not a variable
+                        var = L"badvar:";
+                        var.Append(fname);
+                    }
+                    fvalue = var.AllocSysString();
+                }
             }
-            var.SetSysString(&fvalue);
         }
 
         // Put the final string together
@@ -238,6 +251,11 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth
             output += CStringW(fvalue);
         }
         output += iteration.Right(endpos);
+
+        if ( fvalue )
+        {
+            SysFreeString(fvalue);
+        }
 
         iteration = output;
     }

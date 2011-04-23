@@ -42,7 +42,7 @@ STDMETHODIMP_(ULONG) CVoodooCore::Release()
     }
 }
 
-STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
+STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
 {
     //m_GlobalRoot = globalroot;
     //m_GlobalRoot += "\\";
@@ -78,8 +78,12 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
     m_Config->put_resolveExternals(VARIANT_FALSE);
     m_Config->put_preserveWhiteSpace(VARIANT_TRUE);
 
+    VARIANT vConfig;
+    VariantInit(&vConfig);
+    V_VT(&vConfig) = VT_BSTR;
+    V_BSTR(&vConfig) = pConfig;
     VARIANT_BOOL loadStatus;
-    hr = m_Config->load(pConfig, &loadStatus);
+    hr = m_Config->load(vConfig, &loadStatus);
     if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
     {
         IXMLDOMParseError * pError = NULL;
@@ -163,7 +167,7 @@ STDMETHODIMP CVoodooCore::Initialize(VARIANT pConfig)
                 if ( SUCCEEDED(pCoreNode->selectSingleNode(queryLF, &pFileNode)) )
                 {
                     VARIANT fn;
-                    pNode->get_nodeValue(&fn);
+                    pFileNode->get_nodeValue(&fn);
                     CComBSTR filename(fn.bstrVal);
                     m_Parser->Parse(filename, NoFlags, &filename);
                     m_Logger->Open(filename, false);
