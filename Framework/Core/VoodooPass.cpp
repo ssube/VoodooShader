@@ -108,6 +108,7 @@ STDMETHODIMP CVoodooPass::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
+        *ppCore->AddRef();
         return S_OK;
     }
 }
@@ -119,6 +120,7 @@ STDMETHODIMP CVoodooPass::get_Target(IVoodooTexture **ppTexture)
         return E_INVALIDARG;
     } else {
         *ppTexture = m_Target;
+        *ppTexture->AddRef();
         return S_OK;
     }
 }
@@ -130,6 +132,7 @@ STDMETHODIMP CVoodooPass::get_Shader(IVoodooShader **ppShader)
         return E_INVALIDARG;
     } else {
         *ppShader = m_Shader;
+        *ppShader->AddRef();
         return S_OK;
     }
 }
@@ -142,6 +145,7 @@ STDMETHODIMP CVoodooPass::get_Technique(
         return E_INVALIDARG;
     } else {
         *ppTechnique = m_Technique;
+        *ppTechnique->AddRef();
         return S_OK;
     }
 }

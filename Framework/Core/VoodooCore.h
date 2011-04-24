@@ -107,8 +107,10 @@ public:
         /* [in] */ IVoodooTexture *pTexture) ;
 
     private:
+        HRESULT STDMETHODCALLTYPE LoadConfig(BSTR pFile);
+
         bool m_Init;
-        UINT m_Refrs;
+        ULONG m_Refrs;
 
         /**
          * Base path void core was created with.

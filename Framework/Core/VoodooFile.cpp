@@ -90,6 +90,7 @@ STDMETHODIMP CVoodooFile::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
+        *ppCore->AddRef();
         return S_OK;
     }
 }

@@ -73,42 +73,34 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     m_Config->put_resolveExternals(VARIANT_FALSE);
     m_Config->put_preserveWhiteSpace(VARIANT_TRUE);
 
-    VARIANT_BOOL loadStatus;
-    VARIANT vConfig;
-    VariantInit(&vConfig);
-    V_VT(&vConfig) = VT_BSTR;
+    CComBSTR configPath = m_ConfigFile;
 
-    CComBSTR configPath = m_RunRoot;
-    configPath += m_ConfigFile;
-    V_BSTR(&vConfig) = configPath;
-    hr = m_Config->load(vConfig, &loadStatus);
-
-    if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
+    if ( FAILED(LoadConfig(configPath)) )
     {
-        configPath = m_LocalRoot;
+        configPath = m_RunRoot;
         configPath += m_ConfigFile;
-        V_BSTR(&vConfig) = configPath;
-        hr = m_Config->load(vConfig, &loadStatus);
-
-        if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
+        if ( FAILED(LoadConfig(configPath)) )
         {
-            configPath = m_GlobalRoot;
+            configPath = m_LocalRoot;
             configPath += m_ConfigFile;
-            V_BSTR(&vConfig) = configPath;
-            hr = m_Config->load(vConfig, &loadStatus);
 
-            if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
+            if ( FAILED(LoadConfig(configPath)) )
             {
-                IXMLDOMParseError * pError = NULL;
-                m_Config->get_parseError(&pError);
-                CComBSTR fullError = L"XML Error:\n";
-                CComBSTR temp;
-                pError->get_reason(&temp);
-                fullError += temp;
-                fullError += L"\n";
-                long line;
-                pError->get_line(&line);
-                return E_INVALIDCFG;
+                configPath = m_GlobalRoot;
+                configPath += m_ConfigFile;
+
+                if ( FAILED(LoadConfig(configPath)) )
+                {
+                    IXMLDOMParseError * pError = NULL;
+                    m_Config->get_parseError(&pError);
+                    CComBSTR fullError = L"XML Error:\n";
+                    CComBSTR temp;
+                    pError->get_reason(&temp);
+                    fullError += temp;
+                    fullError += L"\n";
+                    // Handle further
+                    return E_INVALIDCFG;
+                }
             }
         }
     }
@@ -277,13 +269,15 @@ STDMETHODIMP CVoodooCore::get_Parser(
         return E_INVALIDARG;
     } else {
         *ppParser = m_Parser;
-        m_Parser->AddRef();
+        *ppParser->AddRef();
         return S_OK;
     }
 }
 
-STDMETHODIMP CVoodooCore::get_HookSystem( 
-   IVoodooHookSystem **ppHookSystem)
+STDMETHODIMP CVoodooCore::get_HookSystem
+( 
+   IVoodooHookSystem ** ppHookSystem
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     if ( ppHookSystem == NULL )
@@ -291,13 +285,15 @@ STDMETHODIMP CVoodooCore::get_HookSystem(
         return E_INVALIDARG;
     } else {
         *ppHookSystem = m_HookSystem;
-        m_HookSystem->AddRef();
+        *ppHookSystem->AddRef();
         return S_OK;
     }
 }
 
-STDMETHODIMP CVoodooCore::get_FileSystem( 
-   IVoodooFileSystem **ppFileSystem)
+STDMETHODIMP CVoodooCore::get_FileSystem
+( 
+   IVoodooFileSystem ** ppFileSystem
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     if ( ppFileSystem == NULL )
@@ -305,13 +301,15 @@ STDMETHODIMP CVoodooCore::get_FileSystem(
         return E_INVALIDARG;
     } else {
         *ppFileSystem = m_FileSystem;
-        m_FileSystem->AddRef();
+        *ppFileSystem->AddRef();
         return S_OK;
     }
 }
 
-STDMETHODIMP CVoodooCore::get_Adapter( 
-   IVoodooAdapter **ppAdapter)
+STDMETHODIMP CVoodooCore::get_Adapter
+( 
+   IVoodooAdapter ** ppAdapter
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     if ( ppAdapter == NULL )
@@ -319,13 +317,15 @@ STDMETHODIMP CVoodooCore::get_Adapter(
         return E_INVALIDARG;
     } else {
         *ppAdapter = m_Adapter;
-        m_Adapter->AddRef();
+        *ppAdapter->AddRef();
         return S_OK;
     }
 }
 
-STDMETHODIMP CVoodooCore::get_Logger( 
-   IVoodooLogger **ppLogger)
+STDMETHODIMP CVoodooCore::get_Logger
+( 
+   IVoodooLogger **ppLogger
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     if ( ppLogger == NULL )
@@ -333,13 +333,15 @@ STDMETHODIMP CVoodooCore::get_Logger(
         return E_INVALIDARG;
     } else {
         *ppLogger = m_Logger;
-        m_Logger->AddRef();
+        *ppLogger->AddRef();
         return S_OK;
     }
 }
 
-STDMETHODIMP CVoodooCore::get_Config( 
-   IXMLDOMDocument **ppConfig)
+STDMETHODIMP CVoodooCore::get_Config
+( 
+   IXMLDOMDocument ** ppConfig
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     if ( ppConfig == NULL )
@@ -347,7 +349,7 @@ STDMETHODIMP CVoodooCore::get_Config(
         return E_INVALIDARG;
     } else {
         *ppConfig = m_Config;
-        m_Config->AddRef();
+        *ppConfig->AddRef();
         return S_OK;
     }
 }
@@ -472,9 +474,11 @@ STDMETHODIMP CVoodooCore::CreateTexture(
     }
 }
 
-STDMETHODIMP CVoodooCore::GetParameter( 
+STDMETHODIMP CVoodooCore::GetParameter
+( 
    BSTR pName,
-   IVoodooParameter **ppParameter)
+   IVoodooParameter ** ppParameter
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     if ( ppParameter == NULL )
@@ -488,14 +492,17 @@ STDMETHODIMP CVoodooCore::GetParameter(
         *ppParameter = NULL;
         return E_NOT_FOUND;
     } else {
-        ppParameter = &param;
+        *ppParameter = param;
+        *ppParameter->AddRef();
         return S_OK;
     }
 }
 
-STDMETHODIMP CVoodooCore::GetTexture( 
+STDMETHODIMP CVoodooCore::GetTexture
+( 
    BSTR pName,
-   IVoodooTexture **ppTexture)
+   IVoodooTexture ** ppTexture
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     if ( ppTexture == NULL )
@@ -509,13 +516,16 @@ STDMETHODIMP CVoodooCore::GetTexture(
         *ppTexture = NULL;
         return E_NOT_FOUND;
     } else {
-        ppTexture = &texture;
+        *ppTexture = texture;
+        *ppTexture->AddRef();
         return S_OK;
     }
 }
 
-STDMETHODIMP CVoodooCore::RemoveTexture( 
-   BSTR pName)
+STDMETHODIMP CVoodooCore::RemoveTexture
+( 
+   BSTR pName
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     if ( this->m_Textures.RemoveKey(pName) == 0 )
@@ -526,9 +536,11 @@ STDMETHODIMP CVoodooCore::RemoveTexture(
     }
 }
 
-STDMETHODIMP CVoodooCore::GetStageTexture( 
+STDMETHODIMP CVoodooCore::GetStageTexture
+( 
    DWORD Stage,
-   IVoodooTexture **ppTexture)
+   IVoodooTexture ** ppTexture
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     CComPtr<IVoodooTexture> texture;
@@ -538,13 +550,16 @@ STDMETHODIMP CVoodooCore::GetStageTexture(
         return E_NOT_FOUND;
     } else {
         *ppTexture = texture;
+        *ppTexture->AddRef();
         return S_OK;
     }
 }
 
-STDMETHODIMP CVoodooCore::SetStageTexture( 
+STDMETHODIMP CVoodooCore::SetStageTexture
+( 
    DWORD Stage,
-   IVoodooTexture *pTexture)
+   IVoodooTexture * pTexture
+)
 {
     if ( !m_Init ) return E_NOTINIT;
     this->m_StageTextures.SetAt((TextureStage)Stage, pTexture);
@@ -552,3 +567,13 @@ STDMETHODIMP CVoodooCore::SetStageTexture(
     return S_OK;
 }
 
+STDMETHODIMP CVoodooCore::LoadConfig(BSTR pFile)
+{
+    VARIANT_BOOL loadStatus; // Not checked atm - 24/04/2011
+    VARIANT vConfig;
+    VariantInit(&vConfig);
+    V_VT(&vConfig) = VT_BSTR;
+    V_BSTR(&vConfig) = pFile;
+
+    return m_Config->load(vConfig, &loadStatus);
+}

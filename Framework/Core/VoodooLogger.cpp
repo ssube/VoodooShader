@@ -87,6 +87,7 @@ STDMETHODIMP CVoodooLogger::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
+        *ppCore->AddRef();
         return S_OK;
     }
 }
@@ -126,8 +127,10 @@ STDMETHODIMP CVoodooLogger::Dump( void)
     return S_OK;
 }
 
-STDMETHODIMP CVoodooLogger::get_LogLevel( 
-    /* [retval][out] */ DWORD *pLevel)
+STDMETHODIMP CVoodooLogger::get_LogLevel
+( 
+    DWORD * pLevel
+)
 {
     if ( pLevel == NULL ) return E_INVALIDARG;
 

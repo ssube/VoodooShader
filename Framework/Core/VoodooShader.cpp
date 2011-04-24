@@ -108,6 +108,7 @@ STDMETHODIMP CVoodooShader::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
+        *ppCore->AddRef();
         return S_OK;
     }
 }
@@ -132,6 +133,7 @@ STDMETHODIMP CVoodooShader::GetTechnique(INT Number, IVoodooTechnique **ppTechni
         return E_INVALIDARG;
     } else {
         *ppTechnique = m_Techniques.GetAt(Number);
+        *ppTechnique->AddRef();
         return S_OK;
     }
 }
@@ -143,6 +145,7 @@ STDMETHODIMP CVoodooShader::get_DefaultTechnique(IVoodooTechnique ** ppTechnique
         return E_INVALIDARG;
     } else {
         *ppTechnique = m_Default;
+        *ppTechnique->AddRef();
         return S_OK;
     }
 }
@@ -160,6 +163,10 @@ STDMETHODIMP CVoodooShader::put_DefaultTechnique(IVoodooTechnique * pTechnique)
         {
             return E_INVALIDARG;
         } else {
+            if ( m_Default )
+            {
+                m_Default->Release();
+            }
             m_Default = pTechnique;
             return S_OK;
         }
@@ -186,6 +193,7 @@ STDMETHODIMP CVoodooShader::GetParameter(INT Number, IVoodooParameter **ppParame
         return E_INVALIDARG;
     } else {
         *ppParameter = m_Parameters.GetAt(Number);
+        *ppParameter->AddRef();
         return S_OK;
     }
 }

@@ -125,6 +125,7 @@ STDMETHODIMP CVoodooParameter::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
+        *ppCore->AddRef();
         return S_OK;
     }
 }
@@ -181,25 +182,71 @@ STDMETHODIMP CVoodooParameter::get_Components(int * Components)
 {
     switch ( m_Type )
     {
-    case PT_Float1:
-        return 1;
-    case PT_Float2:
-        return 2;
-    case PT_Float3:
-        return 3;
-    case PT_Float4:
-        return 4;
+    case PT_Float1x1:
+        *Components = 1;
+        break;
+    case PT_Float1x2:
+        *Components = 2;
+        break;
+    case PT_Float1x3:
+        *Components = 3;
+        break;
+    case PT_Float1x4:
+        *Components = 4;
+        break;
+    case PT_Float2x1:
+        *Components = 2;
+        break;
+    case PT_Float2x2:
+        *Components = 4;
+        break;
+    case PT_Float2x3:
+        *Components = 6;
+        break;
+    case PT_Float2x4:
+        *Components = 8;
+        break;
+    case PT_Float3x1:
+        *Components = 3;
+        break;
+    case PT_Float3x2:
+        *Components = 6;
+        break;
+    case PT_Float3x3:
+        *Components = 9;
+        break;
+    case PT_Float3x4:
+        *Components = 12;
+        break;
+    case PT_Float4x1:
+        *Components = 4;
+        break;
+    case PT_Float4x2:
+        *Components = 8;
+        break;
+    case PT_Float4x3:
+        *Components = 12;
+        break;
     case PT_Float4x4:
-        return 16;
+        *Components = 16;
+        break;
     case PT_Sampler1D:
-        return 1;
+        *Components = 1;
+        break;
     case PT_Sampler2D:
-        return 2;
+        *Components = 2;
+        break;
     case PT_Sampler3D:
-        return 3;
+        *Components = 3;
+        break;
+    case PT_Struct:
+        return E_NOTIMPL;
     default:
-        return -1;
+        *Components = -1;
+        break;
     }
+
+    return S_OK;
 } 
 
 STDMETHODIMP CVoodooParameter::get_SamplerValue( 
@@ -233,14 +280,17 @@ STDMETHODIMP CVoodooParameter::put_ScalarValue(
     return m_Data.CopyFrom(pData);
 }
 
-STDMETHODIMP CVoodooParameter::get_Shader( 
-    /* [retval][out] */ IVoodooShader **ppShader)
+STDMETHODIMP CVoodooParameter::get_Shader
+( 
+    IVoodooShader ** ppShader
+)
 {
     if ( ppShader == NULL )
     {
         return E_INVALIDARG;
     } else {
         *ppShader = m_Shader;
+        *ppShader->AddRef();
         return S_OK;
     }
 }

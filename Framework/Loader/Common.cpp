@@ -43,7 +43,9 @@ bool WINAPI VoodooStartup()
     {
         CString error;
         error.Format(_T("Unable to create Voodoo Core. Error %X."), hr);
+
         MessageBox(NULL, error, _T("Voodoo Error"), MB_ICONWARNING|MB_OK);
+
         return false;
     } else {
         HRESULT hr = gVoodooCore->Initialize(gInitParams);

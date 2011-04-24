@@ -1,8 +1,8 @@
 LIBRARY
 
 EXPORTS
-Direct3DCreate8 = Voodoo3DCreate8
-Direct3DCreate9 = Voodoo3DCreate9
+Direct3DCreate8    = Voodoo3DCreate8
+Direct3DCreate9    = Voodoo3DCreate9
 DirectInput8Create = VoodooInput8Create
 DirectInputCreateA = VoodooInputCreateA
 DirectInputCreateW = VoodooInputCreateW

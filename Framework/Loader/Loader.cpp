@@ -1,6 +1,5 @@
 
 #include "Loader.hpp"
-
 #include "Loader_Version.hpp"
 
 BOOL WINAPI DllMain
@@ -167,7 +166,7 @@ HRESULT WINAPI VoodooInputCreateW
 
 
 // DirectSound 8
-HRESULT VoodooSoundCreate8
+HRESULT WINAPI  VoodooSoundCreate8
 (
     LPCGUID lpcGuidDevice,
     LPVOID * ppDS8,

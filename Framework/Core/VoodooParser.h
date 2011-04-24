@@ -69,7 +69,7 @@ private:
     static const WCHAR VarDelimEnd   = ')';
     static const WCHAR VarDelimPre   = '$';
 
-    UINT m_Refrs;
+    ULONG m_Refrs;
     IVoodooCore * m_Core;
     Dictionary m_Variables;
     Dictionary m_SysVariables;

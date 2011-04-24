@@ -66,7 +66,7 @@ HRESULT WINAPI VoodooInputCreateW
     LPVOID * lplpDirectInput,
     LPVOID punkOuter
 );
-HRESULT VoodooSoundCreate8
+HRESULT WINAPI VoodooSoundCreate8
 (
     LPCGUID lpcGuidDevice,
     LPVOID * ppDS8,
