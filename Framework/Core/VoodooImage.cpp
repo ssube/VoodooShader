@@ -113,7 +113,7 @@ STDMETHODIMP CVoodooImage::get_Path(LPBSTR pPath)
     }
 }
 
-STDMETHODIMP CVoodooImage::Open(FileOpenMode Mode)
+STDMETHODIMP CVoodooImage::Open(DWORD Mode)
 {
     return E_NULLIMPL;
 }

@@ -26,22 +26,16 @@
  * @{
  */
 
-typedef void * (* funcTypeLoad)(const char *, const char *);
-typedef void (* funcTypeUnload)(void *);
-
-bool LoadVoodoo();
-bool UnloadVoodoo();
-
 BOOL WINAPI DllMain
 (
-    _In_ void * _HDllHandle, 
-    _In_ unsigned _Reason, 
-    _In_opt_ void * _Reserved
+    _In_ HINSTANCE hInst, 
+    _In_ unsigned Reason, 
+    _In_opt_ void * Reserved
 );
 
-void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func);
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion);
-void * WINAPI Voodoo3DCreate9(UINT sdkVersion);
+IUnknown * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func);
+IUnknown * WINAPI Voodoo3DCreate8(UINT sdkVersion);
+IUnknown * WINAPI Voodoo3DCreate9(UINT sdkVersion);
 HRESULT WINAPI VoodooInput8Create
 (
     HINSTANCE hinst,

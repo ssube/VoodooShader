@@ -51,18 +51,18 @@ public:
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddVariable( 
         /* [in] */ BSTR pName,
         /* [in] */ BSTR pValue,
-        /* [in] */ VariableType Type);
+        /* [in] */ DWORD Type);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveVariable( 
         /* [in] */ BSTR pName);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE Parse( 
         /* [in] */ BSTR pString,
-        /* [defaultvalue][in] */ ParseFlags Flags,
+        /* [defaultvalue][in] */ DWORD Flags,
         /* [retval][out] */ LPBSTR pParsed);
 
 private:
-    HRESULT STDMETHODCALLTYPE ParseRaw(LPBSTR input, ParseFlags Flags, INT Depth, Dictionary * State);
+    HRESULT STDMETHODCALLTYPE ParseRaw(LPBSTR input, DWORD Flags, INT Depth, Dictionary * State);
 
     static const INT VarMaxDepth = 8;
     static const WCHAR VarDelimStart = '(';

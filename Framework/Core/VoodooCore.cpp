@@ -53,30 +53,14 @@ STDMETHODIMP_(ULONG) CVoodooCore::Release()
     }
 }
 
-STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
+STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 {
-    //m_GlobalRoot = globalroot;
-    //m_GlobalRoot += "\\";
-    //m_RunRoot = runroot;
-    //m_RunRoot += "\\";
-
-    // Get the local root
-    TCHAR localroot[MAX_PATH];
-    HMODULE targetModule = GetModuleHandle(NULL);
-    GetModuleFileName(targetModule, localroot, MAX_PATH);
-    //char * lastslash = strrchr(localroot, '\\');
-    //if ( lastslash )
-    //{
-    //char targetname[MAX_PATH];
-    //strcpy_s(targetname, MAX_PATH, lastslash + 1);
-    //_strlwr_s(targetname, strlen(targetname));
-    //m_Target = targetname;
-    //    m_Target = ( lastslash + 1 );
-
-    //    lastslash[1] = '\0';
-    //}
-    m_LocalRoot = localroot;
-    //m_LocalRoot += "\\";
+    if ( Params.GlobalRoot ) { m_GlobalRoot.AssignBSTR(Params.GlobalRoot); }
+    if ( Params.LocalRoot  ) { m_LocalRoot.AssignBSTR (Params.LocalRoot ); }
+    if ( Params.RunRoot    ) { m_RunRoot.AssignBSTR   (Params.RunRoot   ); }
+    if ( Params.Target     ) { m_Target.AssignBSTR    (Params.Target    ); }
+    if ( Params.Loader     ) { m_Loader.AssignBSTR    (Params.Loader    ); }
+    if ( Params.Config     ) { m_ConfigFile.AssignBSTR(Params.Config    ); }
 
     HRESULT hr = CoCreateInstance(__uuidof(DOMDocument60), NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&m_Config));
     if ( FAILED(hr) )
@@ -89,24 +73,44 @@ STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
     m_Config->put_resolveExternals(VARIANT_FALSE);
     m_Config->put_preserveWhiteSpace(VARIANT_TRUE);
 
+    VARIANT_BOOL loadStatus;
     VARIANT vConfig;
     VariantInit(&vConfig);
     V_VT(&vConfig) = VT_BSTR;
-    V_BSTR(&vConfig) = pConfig;
-    VARIANT_BOOL loadStatus;
+
+    CComBSTR configPath = m_RunRoot;
+    configPath += m_ConfigFile;
+    V_BSTR(&vConfig) = configPath;
     hr = m_Config->load(vConfig, &loadStatus);
+
     if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
     {
-        IXMLDOMParseError * pError = NULL;
-        m_Config->get_parseError(&pError);
-        CComBSTR fullError = L"XML Error:\n";
-        CComBSTR temp;
-        pError->get_reason(&temp);
-        fullError += temp;
-        fullError += L"\n";
-        long line;
-        pError->get_line(&line);
-        return E_INVALIDCFG;
+        configPath = m_LocalRoot;
+        configPath += m_ConfigFile;
+        V_BSTR(&vConfig) = configPath;
+        hr = m_Config->load(vConfig, &loadStatus);
+
+        if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
+        {
+            configPath = m_GlobalRoot;
+            configPath += m_ConfigFile;
+            V_BSTR(&vConfig) = configPath;
+            hr = m_Config->load(vConfig, &loadStatus);
+
+            if ( FAILED(hr) || loadStatus == VARIANT_FALSE )
+            {
+                IXMLDOMParseError * pError = NULL;
+                m_Config->get_parseError(&pError);
+                CComBSTR fullError = L"XML Error:\n";
+                CComBSTR temp;
+                pError->get_reason(&temp);
+                fullError += temp;
+                fullError += L"\n";
+                long line;
+                pError->get_line(&line);
+                return E_INVALIDCFG;
+            }
+        }
     }
 
     // Start setting things up
@@ -131,11 +135,14 @@ STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
     }
 
     // Load variables, built-in first
-    m_Parser->AddVariable(L"globalroot", m_GlobalRoot, System);
-    m_Parser->AddVariable(L"localroot", m_LocalRoot, System);
-    m_Parser->AddVariable(L"runroot", m_RunRoot, System);
-    m_Parser->AddVariable(L"target", m_Target, System);
+    m_Parser->AddVariable(L"globalroot",    m_GlobalRoot, VT_System);
+    m_Parser->AddVariable(L"localroot",     m_LocalRoot,  VT_System);
+    m_Parser->AddVariable(L"runroot",       m_RunRoot,    VT_System);
+    m_Parser->AddVariable(L"target",        m_Target,     VT_System);
+    m_Parser->AddVariable(L"loader",        m_Loader,     VT_System);
+    m_Parser->AddVariable(L"config",        m_ConfigFile, VT_System);
 
+    // Load config vars
     CComBSTR queryVarNodes = L"/VoodooConfig/Variables/Variable";
 
     IXMLDOMNodeList * pVarList = NULL;
@@ -166,7 +173,7 @@ STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
             VARIANT v;
             pNode->get_nodeValue(&v);
             CComBSTR str(v.bstrVal);
-            m_Parser->Parse(str, NoFlags, &str);
+            m_Parser->Parse(str, PF_None, &str);
 
             hr = InstanceFromString(str, IID_IVoodooLogger, (void**)&m_Logger);
             if ( FAILED(hr) || m_Logger == NULL )
@@ -180,7 +187,7 @@ STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
                     VARIANT fn;
                     pFileNode->get_nodeValue(&fn);
                     CComBSTR filename(fn.bstrVal);
-                    m_Parser->Parse(filename, NoFlags, &filename);
+                    m_Parser->Parse(filename, PF_None, &filename);
                     m_Logger->Open(filename, false);
                 }
             }
@@ -195,7 +202,7 @@ STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
             VARIANT v;
             pNode->get_nodeValue(&v);
             CComBSTR str(v.bstrVal);
-            m_Parser->Parse(str, NoFlags, &str);
+            m_Parser->Parse(str, PF_None, &str);
 
             hr = InstanceFromString(str, IID_IVoodooHookSystem, (void**)&m_HookSystem);
             if ( FAILED(hr) || m_FileSystem == NULL )
@@ -213,7 +220,7 @@ STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
             VARIANT v;
             pNode->get_nodeValue(&v);
             CComBSTR str(v.bstrVal);
-            m_Parser->Parse(str, NoFlags, &str);
+            m_Parser->Parse(str, PF_None, &str);
 
             hr = InstanceFromString(str, IID_IVoodooFileSystem, (void**)&m_FileSystem);
             if ( FAILED(hr) || m_FileSystem == NULL )
@@ -231,7 +238,7 @@ STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
             VARIANT v;
             pNode->get_nodeValue(&v);
             CComBSTR str(v.bstrVal);
-            m_Parser->Parse(str, NoFlags, &str);
+            m_Parser->Parse(str, PF_None, &str);
 
             hr = InstanceFromString(str, IID_IVoodooAdapter, (void**)&m_Adapter);
             if ( FAILED(hr) || m_FileSystem == NULL )
@@ -242,21 +249,20 @@ STDMETHODIMP CVoodooCore::Initialize(BSTR pConfig)
     }
 
     // Log extended build information
-    //BSTR configLocation = _BSTR("Config loaded from \"%s\".");
-    //m_Logger->Log(LL_Info, VOODOO_CORE_NAME, configLocation, pConfig);
-    //m_Logger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
-    /*Version vfver = VOODOO_META_VERSION_STRUCT(CORE);
-    Version vsver = VOODOO_META_VERSION_STRUCT(VC);
-    Version cgver = VOODOO_META_VERSION_STRUCT(CG);
+    LogMsg(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, L"Voodoo loaded, using config %s.", configPath);
+    LogMsg(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
+
+    VersionStruct vfver = VOODOO_META_VERSION_STRUCT(CORE);
+    VersionStruct vsver = VOODOO_META_VERSION_STRUCT(VC);
+    VersionStruct cgver = VOODOO_META_VERSION_STRUCT(CG);
 
     m_Logger->LogModule(vfver);
     m_Logger->LogModule(vsver);
-    m_Logger->LogModule(cgver);*/
+    m_Logger->LogModule(cgver);
 
     // Core done loading
-    CComBSTR done = L"Core initialization complete.";
-    m_Logger->Log(LogLevel(Info|Framework), L"Core", done, NULL);
+    LogMsg(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, L"Core initialization complete.");
 
     m_Init = true;
     return S_OK;
@@ -266,10 +272,14 @@ STDMETHODIMP CVoodooCore::get_Parser(
    IVoodooParser ** ppParser)
 {
     if ( !m_Init ) return E_NOTINIT;
-    if ( ppParser == NULL ) return E_INVALIDARG;
-
-    *ppParser = m_Parser;
-    return S_OK;
+    if ( ppParser == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        *ppParser = m_Parser;
+        m_Parser->AddRef();
+        return S_OK;
+    }
 }
 
 STDMETHODIMP CVoodooCore::get_HookSystem( 
@@ -281,6 +291,7 @@ STDMETHODIMP CVoodooCore::get_HookSystem(
         return E_INVALIDARG;
     } else {
         *ppHookSystem = m_HookSystem;
+        m_HookSystem->AddRef();
         return S_OK;
     }
 }
@@ -294,6 +305,7 @@ STDMETHODIMP CVoodooCore::get_FileSystem(
         return E_INVALIDARG;
     } else {
         *ppFileSystem = m_FileSystem;
+        m_FileSystem->AddRef();
         return S_OK;
     }
 }
@@ -307,6 +319,7 @@ STDMETHODIMP CVoodooCore::get_Adapter(
         return E_INVALIDARG;
     } else {
         *ppAdapter = m_Adapter;
+        m_Adapter->AddRef();
         return S_OK;
     }
 }
@@ -320,6 +333,7 @@ STDMETHODIMP CVoodooCore::get_Logger(
         return E_INVALIDARG;
     } else {
         *ppLogger = m_Logger;
+        m_Logger->AddRef();
         return S_OK;
     }
 }
@@ -333,6 +347,7 @@ STDMETHODIMP CVoodooCore::get_Config(
         return E_INVALIDARG;
     } else {
         *ppConfig = m_Config;
+        m_Config->AddRef();
         return S_OK;
     }
 }
@@ -375,7 +390,7 @@ STDMETHODIMP CVoodooCore::CreateShader(
         return E_INVALIDARG;
     }
 
-    HRESULT hr = E_INVALIDARG; //CoCreateInstance(CLSID_Shader, NULL, NULL, IID_VoodooShader, (void**)ppShader);
+    HRESULT hr = E_NOTIMPL; //CoCreateInstance(CLSID_Shader, NULL, NULL, IID_VoodooShader, (void**)ppShader);
     if ( FAILED(hr) )
     {
         return hr;
@@ -387,7 +402,7 @@ STDMETHODIMP CVoodooCore::CreateShader(
 
 STDMETHODIMP CVoodooCore::CreateParameter( 
    BSTR pName,
-   ParameterType Type,
+   DWORD Type,
    IVoodooParameter **ppParameter)
 {
     if ( !m_Init ) return E_NOTINIT;
@@ -400,17 +415,23 @@ STDMETHODIMP CVoodooCore::CreateParameter(
     {
         return E_DUPNAME;
     } else {
-        ParameterCategory pc = ToParameterCategory(Type);
-        if ( pc == Scalar || pc == Sampler )
+        ParameterType type = (ParameterType)Type;
+        ParameterCategory pc = ToParameterCategory(type);
+        if ( pc == PC_Float || pc == PC_Sampler )
         {
-            *ppParameter = CVoodooParameter::Create(this, pName, Type);
+            *ppParameter = CVoodooParameter::Create(this, pName, type);
         } else {
             return E_INVALIDARG;
         }
 
         m_Parameters.SetAt(pName, *ppParameter);
 
-        //m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Created parameter named %s with type %s, returning shared pointer to %p.", name.c_str(), Converter::ToString(type), parameter.get());
+        LogMsg
+        (
+            m_Logger, LL_Debug, VOODOO_CORE_NAME, 
+            L"Created parameter named %s with type %X, returning shared pointer to %p.", 
+            pName, Type, *ppParameter
+        );
 
         return S_OK;
     }
@@ -440,7 +461,12 @@ STDMETHODIMP CVoodooCore::CreateTexture(
 
         m_Textures.SetAt(pName, *ppTexture);
 
-        //m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s with data %p, returning shared pointer to %p.", name.c_str(), data, texture.get());
+        LogMsg
+        (
+            m_Logger, LL_Debug, VOODOO_CORE_NAME, 
+            L"Added texture %s with data %p, returning shared pointer to %p.", 
+            pName, V_BYREF(&Data), *ppTexture
+        );
 
         return S_OK;
     }
@@ -501,27 +527,27 @@ STDMETHODIMP CVoodooCore::RemoveTexture(
 }
 
 STDMETHODIMP CVoodooCore::GetStageTexture( 
-   TextureStage Stage,
+   DWORD Stage,
    IVoodooTexture **ppTexture)
 {
     if ( !m_Init ) return E_NOTINIT;
     CComPtr<IVoodooTexture> texture;
-    if ( this->m_StageTextures.Lookup(Stage, texture) == 0 )
+    if ( this->m_StageTextures.Lookup((TextureStage)Stage, texture) == 0 )
     {
         *ppTexture = NULL;
         return E_NOT_FOUND;
     } else {
-        ppTexture = &texture;
+        *ppTexture = texture;
         return S_OK;
     }
 }
 
 STDMETHODIMP CVoodooCore::SetStageTexture( 
-   TextureStage Stage,
+   DWORD Stage,
    IVoodooTexture *pTexture)
 {
     if ( !m_Init ) return E_NOTINIT;
-    this->m_StageTextures.SetAt(Stage, pTexture);
+    this->m_StageTextures.SetAt((TextureStage)Stage, pTexture);
 
     return S_OK;
 }

@@ -57,7 +57,7 @@ public:
         /* [retval][out] */ IVoodooCore **ppCore);
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-        /* [retval][out] */ ParameterType *pType);
+        /* [retval][out] */ DWORD *pType);
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Virtual( 
         /* [retval][out] */ boolean *pVirtual);

@@ -72,7 +72,7 @@ STDMETHODIMP_(ULONG) CVoodooParser::Release()
     }
 }
 
-STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, VariableType Type)
+STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, DWORD Type)
 {
     /*ILoggerRef logger = m_Core->GetLogger();
     if ( logger.get() )
@@ -81,10 +81,10 @@ STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, VariableType Ty
     }*/
 
     CComBSTR name(pName);
-    this->Parse(name, VarName, &name);
+    this->Parse(name, PF_VarName, &name);
     CComBSTR value(pValue);
 
-    if ( Type == System )
+    if ( Type == VT_System )
     {
         if ( m_SysVariables.PLookup(name) == NULL )
         {
@@ -111,13 +111,13 @@ STDMETHODIMP CVoodooParser::RemoveVariable(BSTR pName)
     }*/
 
     CComBSTR name(pName);
-    this->Parse(name, VarName, &name);
+    this->Parse(name, PF_VarName, &name);
 
     m_Variables.RemoveKey(name);
     return S_OK;
 }
 
-STDMETHODIMP CVoodooParser::Parse(BSTR pString, ParseFlags Flags, LPBSTR pParsed)
+STDMETHODIMP CVoodooParser::Parse(BSTR pString, DWORD Flags, LPBSTR pParsed)
 {
     Dictionary parseState;
     CComBSTR input(pString);
@@ -126,7 +126,7 @@ STDMETHODIMP CVoodooParser::Parse(BSTR pString, ParseFlags Flags, LPBSTR pParsed
     return hr;
 }
 
-STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth, Dictionary * State)
+STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dictionary * State)
 {
     //ILoggerRef logger = m_Core->GetLogger();
     //if ( logger.get() )
@@ -178,7 +178,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth
             this->ParseRaw(&svalue, Flags, ++Depth, State);
 
             CComBSTR sname(varname.Left(statepos));
-            this->ParseRaw(&sname, VarName, ++Depth, State);
+            this->ParseRaw(&sname, PF_VarName, ++Depth, State);
 
             State->SetAt(sname, svalue);
             varname.Empty();
@@ -211,7 +211,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth
 
         // Properly format the variable name (recursive call to simplify future syntax exts)
         CComBSTR fname(varname);
-        this->ParseRaw(&fname, VarName, ++Depth, State);
+        this->ParseRaw(&fname, PF_VarName, ++Depth, State);
 
         // Lookup and replace the variable
         CComBSTR fvalue;
@@ -261,35 +261,35 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, ParseFlags Flags, INT Depth
     }
 
     // Handle slash replacement
-    if ( Flags == NoFlags )
+    if ( Flags == PF_None )
     {
         iteration.SetSysString(pString);
         return S_OK;
-    } else if ( Flags == VarName ) {
+    } else if ( Flags == PF_VarName ) {
         iteration.MakeLower();
         iteration.SetSysString(pString);
         return S_OK;
     } 
         
-    if ( Flags & SlashOnly )
+    if ( Flags & PF_SlashOnly )
     {
         iteration.Replace(L'\\', L'/');
-        if ( Flags & SingleSlash )
+        if ( Flags & PF_SingleSlash )
         {
             while ( iteration.Replace(L"//", L"/") > 0 ) { }
         }
-    } else if ( Flags & BackslashOnly ) {
+    } else if ( Flags & PF_BackslashOnly ) {
         iteration.Replace(L'/', L'\\');
-        if ( Flags & SingleSlash )
+        if ( Flags & PF_SingleSlash )
         {
             while ( iteration.Replace(L"\\\\", L"\\") > 0 ) { }
         }
     }
 
-    if ( Flags & Lowercase )
+    if ( Flags & PF_Lowercase )
     {
         iteration.MakeLower();
-    } else if ( Flags & Uppercase ) {
+    } else if ( Flags & PF_Uppercase ) {
         iteration.MakeUpper();
     }
 

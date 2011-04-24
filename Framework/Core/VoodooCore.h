@@ -46,7 +46,7 @@ END_COM_MAP()
 // IVoodooCore
 public:    
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE Initialize( 
-        /* [optional][in] */ BSTR pConfig) ;
+        /* [optional][in] */ const InitParams Params);
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Parser( 
         /* [retval][out] */ IVoodooParser **ppParser) ;
@@ -79,7 +79,7 @@ public:
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateParameter( 
         /* [in] */ BSTR pName,
-        /* [in] */ ParameterType Type,
+        /* [in] */ DWORD Type,
         /* [retval][out] */ IVoodooParameter **ppParameter) ;
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
@@ -99,11 +99,11 @@ public:
         /* [in] */ BSTR pName) ;
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE GetStageTexture( 
-        /* [in] */ TextureStage Stage,
+        /* [in] */ DWORD Stage,
         /* [retval][out] */ IVoodooTexture **ppTexture) ;
 
     virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE SetStageTexture( 
-        /* [in] */ TextureStage Stage,
+        /* [in] */ DWORD Stage,
         /* [in] */ IVoodooTexture *pTexture) ;
 
     private:
@@ -117,6 +117,8 @@ public:
         CComBSTR m_LocalRoot;
         CComBSTR m_RunRoot;
         CComBSTR m_Target;
+        CComBSTR m_Loader;
+        CComBSTR m_ConfigFile;
 
         /**
          * Config file (actually a <code>pugi::xml_document *</code>, stored as void).

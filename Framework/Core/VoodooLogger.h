@@ -63,22 +63,22 @@ public:
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE Dump( void);
 
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LogLevel( 
-        /* [retval][out] */ LogLevel *pLevel);
+        /* [retval][out] */ DWORD *pLevel);
 
     virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LogLevel( 
-        /* [in] */ LogLevel Level);
+        /* [in] */ DWORD Level);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogModule( 
         /* [in] */ VersionStruct Module);
 
     virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE Log( 
-        /* [in] */ LogLevel Level,
+        /* [in] */ DWORD Level,
         /* [in] */ BSTR pModule,
         /* [in] */ BSTR pFormat,
         /* [in] */ SAFEARRAY * ppArgs);
 
     virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE LogList( 
-        /* [in] */ LogLevel Level,
+        /* [in] */ DWORD Level,
         /* [in] */ BSTR pModule,
         /* [in] */ BSTR pFormat,
         /* [in] */ VARIANT pList);

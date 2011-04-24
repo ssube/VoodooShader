@@ -69,51 +69,67 @@ CGparameter WINAPI CreateVirtualParameter(IVoodooCore * pCore, ParameterType Typ
     return cgCreateParameter(cgcontext, cgtype);
 }
 
+HRESULT WINAPI LogMsg(IVoodooLogger * pLogger, DWORD Level, LPWSTR pModule, LPWSTR pMsg, ...)
+{
+    VARIANT v;
+    VariantInit(&v);
+    V_VT(&v) = VT_BYREF;
+
+    va_list args;
+    va_start(args, pModule);
+
+    V_BYREF(&v) = args;
+    HRESULT hr = pLogger->LogList(Level, pModule, pMsg, v);
+
+    va_end(args);
+    return hr;
+}
+
 CGtype WINAPI ToCgType(ParameterType Type)
 {
     switch ( Type )
     {
-    case Float1x1:
+    case PT_Float1x1:
         return CG_FLOAT;
-    case Float1x2:
+    case PT_Float1x2:
         return CG_FLOAT2;
-    case Float1x3:
+    case PT_Float1x3:
         return CG_FLOAT3;
-    case Float1x4:
+    case PT_Float1x4:
         return CG_FLOAT4;
-    case Float2x1:
+    case PT_Float2x1:
         return CG_FLOAT2x1;
-    case Float2x2:
+    case PT_Float2x2:
         return CG_FLOAT2x2;
-    case Float2x3:
+    case PT_Float2x3:
         return CG_FLOAT2x3;
-    case Float2x4:
+    case PT_Float2x4:
         return CG_FLOAT2x4;
-    case Float3x1:
+    case PT_Float3x1:
         return CG_FLOAT3x1;
-    case Float3x2:
+    case PT_Float3x2:
         return CG_FLOAT3x2;
-    case Float3x3:
+    case PT_Float3x3:
         return CG_FLOAT3x3;
-    case Float3x4:
+    case PT_Float3x4:
         return CG_FLOAT3x4;
-    case Float4x1:
+    case PT_Float4x1:
         return CG_FLOAT4x1;
-    case Float4x2:
+    case PT_Float4x2:
         return CG_FLOAT4x2;
-    case Float4x3:
+    case PT_Float4x3:
         return CG_FLOAT4x3;
-    case Float4x4:
+    case PT_Float4x4:
         return CG_FLOAT4x4;
-    case Sampler1D:
+    case PT_Sampler1D:
         return CG_SAMPLER1D;
-    case Sampler2D:
+    case PT_Sampler2D:
         return CG_SAMPLER2D;
-    case Sampler3D:
+    case PT_Sampler3D:
         return CG_SAMPLER3D;
-    case UserStruct:
+    case PT_Struct:
         return CG_STRUCT;
-    case UnknownType:
+    case PT_Unknown:
     default:
         return CG_UNKNOWN_TYPE;
     }
@@ -124,48 +140,48 @@ ParameterType WINAPI ToParameterType(CGtype Type)
     switch ( Type )
     {
     case CG_FLOAT1x1:
-        return Float1;
+        return PT_Float1;
     case CG_FLOAT1x2:
-        return Float2;
+        return PT_Float2;
     case CG_FLOAT1x3:
-        return Float3;
+        return PT_Float3;
     case CG_FLOAT1x4:
-        return Float4;
+        return PT_Float4;
     case CG_FLOAT2x1:
-        return Float2x1;
+        return PT_Float2x1;
     case CG_FLOAT2x2:
-        return Float2x2;
+        return PT_Float2x2;
     case CG_FLOAT2x3:
-        return Float2x3;
+        return PT_Float2x3;
     case CG_FLOAT2x4:
-        return Float2x4;
+        return PT_Float2x4;
     case CG_FLOAT3x1:
-        return Float3x1;
+        return PT_Float3x1;
     case CG_FLOAT3x2:
-        return Float3x2;
+        return PT_Float3x2;
     case CG_FLOAT3x3:
-        return Float3x3;
+        return PT_Float3x3;
     case CG_FLOAT3x4:
-        return Float3x4;
+        return PT_Float3x4;
     case CG_FLOAT4x1:
-        return Float4x1;
+        return PT_Float4x1;
     case CG_FLOAT4x2:
-        return Float4x2;
+        return PT_Float4x2;
     case CG_FLOAT4x3:
-        return Float4x3;
+        return PT_Float4x3;
     case CG_FLOAT4x4:
-        return Float4x4;
+        return PT_Float4x4;
     case CG_SAMPLER1D:
-        return Sampler1D;
+        return PT_Sampler1D;
     case CG_SAMPLER2D:
-        return Sampler2D;
+        return PT_Sampler2D;
     case CG_SAMPLER3D:
-        return Sampler3D;
+        return PT_Sampler3D;
     case CG_STRUCT:
-        return UserStruct;
+        return PT_Struct;
     case CG_UNKNOWN_TYPE:
     default:
-        return UnknownType;
+        return PT_Unknown;
     }
 }
 
@@ -173,30 +189,30 @@ ParameterCategory WINAPI ToParameterCategory(ParameterType Type)
 {
     switch ( Type )
     {
-    case Float1x1:
-    case Float1x2:
-    case Float1x3:
-    case Float1x4:
-    case Float2x1:
-    case Float2x2:
-    case Float2x3:
-    case Float2x4:
-    case Float3x1:
-    case Float3x2:
-    case Float3x3:
-    case Float3x4:
-    case Float4x1:
-    case Float4x2:
-    case Float4x3:
-    case Float4x4:
-        return Scalar;
-    case Sampler1D:
-    case Sampler2D:
-    case Sampler3D:
-        return Sampler;
-    case UserStruct:
-        return Struct;
+    case PT_Float1x1:
+    case PT_Float1x2:
+    case PT_Float1x3:
+    case PT_Float1x4:
+    case PT_Float2x1:
+    case PT_Float2x2:
+    case PT_Float2x3:
+    case PT_Float2x4:
+    case PT_Float3x1:
+    case PT_Float3x2:
+    case PT_Float3x3:
+    case PT_Float3x4:
+    case PT_Float4x1:
+    case PT_Float4x2:
+    case PT_Float4x3:
+    case PT_Float4x4:
+        return PC_Float;
+    case PT_Sampler1D:
+    case PT_Sampler2D:
+    case PT_Sampler3D:
+        return PC_Sampler;
+    case PT_Struct:
+        return PC_Struct;
     default:
-        return UnknownCategory;
+        return PC_Unknown;
     }
 }

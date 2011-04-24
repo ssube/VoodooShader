@@ -56,7 +56,7 @@ virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Path(
     /* [retval][out] */ LPBSTR pPath);
 
 virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
-    /* [in] */ FileOpenMode Mode);
+    /* [in] */ DWORD Mode);
 
 virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close(void);
 

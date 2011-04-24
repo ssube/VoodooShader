@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Fri Apr 22 16:52:47 2011
+/* at Sat Apr 23 21:38:20 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -311,113 +311,132 @@ extern "C"{
 
 typedef /* [public][public][public][public][public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0001
-    {	UnknownFormat	= 0,
-	RGB5	= ( UnknownFormat + 1 ) ,
-	RGB5A1	= ( RGB5 + 1 ) ,
-	RGB8	= ( RGB5A1 + 1 ) ,
-	RGBA8	= ( RGB8 + 1 ) ,
-	RGB10A2	= ( RGBA8 + 1 ) ,
-	RGBA16F	= ( RGB10A2 + 1 ) ,
-	RGBA32F	= ( RGBA16F + 1 ) ,
-	D16	= ( RGBA32F + 1 ) ,
-	D32	= ( D16 + 1 ) 
+    {	TF_Unknown	= 0,
+	TF_RGB5	= ( TF_Unknown + 1 ) ,
+	TF_RGB5A1	= ( TF_RGB5 + 1 ) ,
+	TF_RGB8	= ( TF_RGB5A1 + 1 ) ,
+	TF_RGBA8	= ( TF_RGB8 + 1 ) ,
+	TF_RGB10A2	= ( TF_RGBA8 + 1 ) ,
+	TF_RGBA16F	= ( TF_RGB10A2 + 1 ) ,
+	TF_RGBA32F	= ( TF_RGBA16F + 1 ) ,
+	TF_D16	= ( TF_RGBA32F + 1 ) ,
+	TF_D32	= ( TF_D16 + 1 ) ,
+	TF_Max	= 0x7fffffff
     } 	TextureFormat;
 
-typedef /* [public][public][public][helpstring][v1_enum] */ 
+typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0002
-    {	UnknownType	= 0,
-	Float1	= 0x11,
-	Float2	= 0x12,
-	Float3	= 0x13,
-	Float4	= 0x14,
-	Float1x1	= 0x11,
-	Float1x2	= 0x12,
-	Float1x3	= 0x13,
-	Float1x4	= 0x14,
-	Float2x1	= 0x21,
-	Float2x2	= 0x22,
-	Float2x3	= 0x23,
-	Float2x4	= 0x24,
-	Float3x1	= 0x31,
-	Float3x2	= 0x32,
-	Float3x3	= 0x33,
-	Float3x4	= 0x34,
-	Float4x1	= 0x41,
-	Float4x2	= 0x42,
-	Float4x3	= 0x43,
-	Float4x4	= 0x44,
-	Sampler1D	= 0x101,
-	Sampler2D	= 0x102,
-	Sampler3D	= 0x103,
-	UserStruct	= 0x1000
+    {	PT_Unknown	= 0,
+	PT_Float1	= 0x11,
+	PT_Float2	= 0x12,
+	PT_Float3	= 0x13,
+	PT_Float4	= 0x14,
+	PT_Float1x1	= 0x11,
+	PT_Float1x2	= 0x12,
+	PT_Float1x3	= 0x13,
+	PT_Float1x4	= 0x14,
+	PT_Float2x1	= 0x21,
+	PT_Float2x2	= 0x22,
+	PT_Float2x3	= 0x23,
+	PT_Float2x4	= 0x24,
+	PT_Float3x1	= 0x31,
+	PT_Float3x2	= 0x32,
+	PT_Float3x3	= 0x33,
+	PT_Float3x4	= 0x34,
+	PT_Float4x1	= 0x41,
+	PT_Float4x2	= 0x42,
+	PT_Float4x3	= 0x43,
+	PT_Float4x4	= 0x44,
+	PT_Sampler1D	= 0x101,
+	PT_Sampler2D	= 0x102,
+	PT_Sampler3D	= 0x103,
+	PT_Struct	= 0x1000,
+	PT_Max	= 0x7fffffff
     } 	ParameterType;
 
 typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0003
-    {	UnknownCategory	= 0,
-	Scalar	= 0x1,
-	Sampler	= 0x2,
-	Struct	= 0x4
+    {	PC_Unknown	= 0,
+	PC_Float	= 0x1,
+	PC_Sampler	= 0x2,
+	PC_Struct	= 0x4,
+	PC_Max	= 0x7fffffff
     } 	ParameterCategory;
 
-typedef /* [public][public][helpstring][v1_enum] */ 
+typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0004
-    {	UnknownProgram	= 0,
-	Vertex	= ( UnknownProgram + 1 ) ,
-	Fragment	= ( Vertex + 1 ) ,
-	Geometry	= ( Fragment + 1 ) ,
-	Domain	= ( Geometry + 1 ) ,
-	Hull	= ( Domain + 1 ) 
+    {	PS_Unknown	= 0,
+	PS_Vertex	= ( PS_Unknown + 1 ) ,
+	PS_Fragment	= ( PS_Vertex + 1 ) ,
+	PS_Geometry	= ( PS_Fragment + 1 ) ,
+	PS_Domain	= ( PS_Geometry + 1 ) ,
+	PS_Hull	= ( PS_Domain + 1 ) ,
+	PS_Max	= 0x7fffffff
     } 	ProgramStage;
 
-typedef /* [public][public][public][helpstring][v1_enum] */ 
+typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0005
-    {	UnknownStage	= 0,
-	ShaderTarget	= ( UnknownStage + 1 ) ,
-	PassTarget	= ( ShaderTarget + 1 ) 
+    {	TS_Unknown	= 0,
+	TS_Shader	= ( TS_Unknown + 1 ) ,
+	TS_Pass	= ( TS_Shader + 1 ) ,
+	TS_Max	= 0x7fffffff
     } 	TextureStage;
 
-typedef /* [public][public][helpstring][v1_enum] */ 
+typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0006
-    {	UnknownMode	= 0,
-	Read	= 0x1,
-	Write	= 0x2
+    {	FM_Unknown	= 0,
+	FM_Read	= 0x1,
+	FM_Write	= 0x2,
+	FM_Max	= 0x7fffffff
     } 	FileOpenMode;
 
-typedef /* [public][public][public][public][public][helpstring][v1_enum] */ 
+typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0007
-    {	UnknownLevel	= 0,
-	Debug	= 0x1,
-	Info	= 0x2,
-	Warning	= 0x4,
-	Error	= 0x8,
-	External	= 0x10,
-	Module	= 0x40,
-	Framework	= 0x80,
-	Internal	= 0x82,
-	Initial	= 0xfe,
-	All	= 0xff
+    {	LL_Unknown	= 0,
+	LL_Debug	= 0x1,
+	LL_Info	= 0x2,
+	LL_Warning	= 0x4,
+	LL_Error	= 0x8,
+	LL_External	= 0x10,
+	LL_Module	= 0x40,
+	LL_Framework	= 0x80,
+	LL_Internal	= 0x82,
+	LL_Initial	= 0xfe,
+	LL_All	= 0xff,
+	LL_Max	= 0x7fffffff
     } 	LogLevel;
 
-typedef /* [public][public][helpstring][v1_enum] */ 
+typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0008
-    {	NoFlags	= 0,
-	SingleSlash	= 0x1,
-	SlashOnly	= 0x2,
-	BackslashOnly	= 0x4,
-	Lowercase	= 0x10,
-	Uppercase	= 0x20,
-	VarName	= 0x100
+    {	PF_None	= 0,
+	PF_SingleSlash	= 0x1,
+	PF_SlashOnly	= 0x2,
+	PF_BackslashOnly	= 0x4,
+	PF_Lowercase	= 0x10,
+	PF_Uppercase	= 0x20,
+	PF_VarName	= 0x100,
+	PF_Max	= 0x7fffffff
     } 	ParseFlags;
 
-typedef /* [public][public][helpstring][v1_enum] */ 
+typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0009
-    {	Normal	= 0,
-	State	= 0x1,
-	System	= 0x10
+    {	VT_Normal	= 0,
+	VT_State	= 0x1,
+	VT_System	= 0x10,
+	VT_Max	= 0x7fffffff
     } 	VariableType;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0010
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0010
+    {
+    BSTR GlobalRoot;
+    BSTR LocalRoot;
+    BSTR RunRoot;
+    BSTR Target;
+    BSTR Loader;
+    BSTR Config;
+    } 	InitParams;
+
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
     {
     int Width;
     int Height;
@@ -426,7 +445,7 @@ typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core
     TextureFormat Format;
     } 	TextureDesc;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
     {
     int Width;
     int Height;
@@ -438,7 +457,7 @@ typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core
     int OffZ;
     } 	TextureRegion;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0013
     {
     BSTR Name;
     int Major;
@@ -448,20 +467,20 @@ typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_00
     boolean Debug;
     } 	VersionStruct;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0013
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0014
     {
     float X;
     float Y;
     } 	float2;
 
-typedef /* [public][public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0014
+typedef /* [public][public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0015
     {
     float X;
     float Y;
     float Z;
     } 	float3;
 
-typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0015
+typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0016
     {
     float X;
     float Y;
@@ -469,14 +488,14 @@ typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_
     float W;
     } 	float4;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0016
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0017
     {
     float3 Position;
     float Winding;
     float2 TexCoord;
     } 	VertexStruct;
 
-typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0017
+typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0018
     {
     int Type;
     float4 Diffuse;
@@ -491,7 +510,7 @@ typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0017
     float Phi;
     } 	LightStruct;
 
-typedef /* [public][public][public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0018
+typedef /* [public][public][public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0019
     {
     int unused;
     } 	Function;
@@ -980,7 +999,7 @@ EXTERN_C const IID IID_IVoodooCore;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ BSTR pConfig) = 0;
+            /* [in] */ const InitParams pParams) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Parser( 
             /* [retval][out] */ IVoodooParser **ppParser) = 0;
@@ -1013,7 +1032,7 @@ EXTERN_C const IID IID_IVoodooCore;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateParameter( 
             /* [in] */ BSTR pName,
-            /* [in] */ ParameterType Type,
+            /* [in] */ DWORD Type,
             /* [retval][out] */ IVoodooParameter **ppParameter) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
@@ -1033,11 +1052,11 @@ EXTERN_C const IID IID_IVoodooCore;
             /* [in] */ BSTR pName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetStageTexture( 
-            /* [in] */ TextureStage Stage,
+            /* [in] */ DWORD Stage,
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetStageTexture( 
-            /* [in] */ TextureStage Stage,
+            /* [in] */ DWORD Stage,
             /* [in] */ IVoodooTexture *pTexture) = 0;
         
     };
@@ -1091,7 +1110,7 @@ EXTERN_C const IID IID_IVoodooCore;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IVoodooCore * This,
-            /* [in] */ BSTR pConfig);
+            /* [in] */ const InitParams pParams);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Parser )( 
             IVoodooCore * This,
@@ -1134,7 +1153,7 @@ EXTERN_C const IID IID_IVoodooCore;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateParameter )( 
             IVoodooCore * This,
             /* [in] */ BSTR pName,
-            /* [in] */ ParameterType Type,
+            /* [in] */ DWORD Type,
             /* [retval][out] */ IVoodooParameter **ppParameter);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateTexture )( 
@@ -1159,12 +1178,12 @@ EXTERN_C const IID IID_IVoodooCore;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetStageTexture )( 
             IVoodooCore * This,
-            /* [in] */ TextureStage Stage,
+            /* [in] */ DWORD Stage,
             /* [retval][out] */ IVoodooTexture **ppTexture);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetStageTexture )( 
             IVoodooCore * This,
-            /* [in] */ TextureStage Stage,
+            /* [in] */ DWORD Stage,
             /* [in] */ IVoodooTexture *pTexture);
         
         END_INTERFACE
@@ -1203,8 +1222,8 @@ EXTERN_C const IID IID_IVoodooCore;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooCore_Initialize(This,pConfig)	\
-    ( (This)->lpVtbl -> Initialize(This,pConfig) ) 
+#define IVoodooCore_Initialize(This,pParams)	\
+    ( (This)->lpVtbl -> Initialize(This,pParams) ) 
 
 #define IVoodooCore_get_Parser(This,ppParser)	\
     ( (This)->lpVtbl -> get_Parser(This,ppParser) ) 
@@ -1283,14 +1302,14 @@ EXTERN_C const IID IID_IVoodooParser;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddVariable( 
             /* [in] */ BSTR pName,
             /* [in] */ BSTR pValue,
-            /* [defaultvalue][in] */ VariableType System = Normal) = 0;
+            /* [defaultvalue][in] */ DWORD System = VT_Normal) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveVariable( 
             /* [in] */ BSTR pName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Parse( 
             /* [in] */ BSTR pString,
-            /* [defaultvalue][in] */ ParseFlags Flags,
+            /* [defaultvalue][in] */ DWORD Flags,
             /* [retval][out] */ LPBSTR pParsed) = 0;
         
     };
@@ -1346,7 +1365,7 @@ EXTERN_C const IID IID_IVoodooParser;
             IVoodooParser * This,
             /* [in] */ BSTR pName,
             /* [in] */ BSTR pValue,
-            /* [defaultvalue][in] */ VariableType System);
+            /* [defaultvalue][in] */ DWORD System);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RemoveVariable )( 
             IVoodooParser * This,
@@ -1355,7 +1374,7 @@ EXTERN_C const IID IID_IVoodooParser;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Parse )( 
             IVoodooParser * This,
             /* [in] */ BSTR pString,
-            /* [defaultvalue][in] */ ParseFlags Flags,
+            /* [defaultvalue][in] */ DWORD Flags,
             /* [retval][out] */ LPBSTR pParsed);
         
         END_INTERFACE
@@ -1833,7 +1852,7 @@ EXTERN_C const IID IID_IVoodooPass;
             /* [retval][out] */ IVoodooTechnique **ppTechnique) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgProgram( 
-            /* [in] */ ProgramStage Stage,
+            /* [in] */ DWORD Stage,
             /* [retval][out] */ VARIANT *pProgram) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgPass( 
@@ -1910,7 +1929,7 @@ EXTERN_C const IID IID_IVoodooPass;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCgProgram )( 
             IVoodooPass * This,
-            /* [in] */ ProgramStage Stage,
+            /* [in] */ DWORD Stage,
             /* [retval][out] */ VARIANT *pProgram);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CgPass )( 
@@ -2148,7 +2167,7 @@ EXTERN_C const IID IID_IVoodooParameter;
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [retval][out] */ ParameterType *pType) = 0;
+            /* [retval][out] */ DWORD *pType) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Virtual( 
             /* [retval][out] */ boolean *pVirtual) = 0;
@@ -2236,7 +2255,7 @@ EXTERN_C const IID IID_IVoodooParameter;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IVoodooParameter * This,
-            /* [retval][out] */ ParameterType *pType);
+            /* [retval][out] */ DWORD *pType);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Virtual )( 
             IVoodooParameter * This,
@@ -2384,22 +2403,22 @@ EXTERN_C const IID IID_IVoodooLogger;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Dump( void) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LogLevel( 
-            /* [retval][out] */ LogLevel *pLevel) = 0;
+            /* [retval][out] */ DWORD *pLevel) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LogLevel( 
-            /* [in] */ LogLevel Level) = 0;
+            /* [in] */ DWORD Level) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogModule( 
             /* [in] */ VersionStruct Module) = 0;
         
         virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE Log( 
-            /* [in] */ LogLevel Level,
+            /* [in] */ DWORD Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
             /* [in] */ SAFEARRAY * pArgs) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogList( 
-            /* [in] */ LogLevel Level,
+            /* [in] */ DWORD Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
             /* [in] */ VARIANT pList) = 0;
@@ -2476,11 +2495,11 @@ EXTERN_C const IID IID_IVoodooLogger;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogLevel )( 
             IVoodooLogger * This,
-            /* [retval][out] */ LogLevel *pLevel);
+            /* [retval][out] */ DWORD *pLevel);
         
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogLevel )( 
             IVoodooLogger * This,
-            /* [in] */ LogLevel Level);
+            /* [in] */ DWORD Level);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LogModule )( 
             IVoodooLogger * This,
@@ -2488,14 +2507,14 @@ EXTERN_C const IID IID_IVoodooLogger;
         
         /* [vararg][id] */ HRESULT ( STDMETHODCALLTYPE *Log )( 
             IVoodooLogger * This,
-            /* [in] */ LogLevel Level,
+            /* [in] */ DWORD Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
             /* [in] */ SAFEARRAY * pArgs);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LogList )( 
             IVoodooLogger * This,
-            /* [in] */ LogLevel Level,
+            /* [in] */ DWORD Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
             /* [in] */ VARIANT pList);
@@ -2772,7 +2791,7 @@ EXTERN_C const IID IID_IVoodooFile;
             /* [retval][out] */ LPBSTR pPath) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
-            /* [in] */ FileOpenMode Mode) = 0;
+            /* [in] */ DWORD Mode) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
@@ -2839,7 +2858,7 @@ EXTERN_C const IID IID_IVoodooFile;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             IVoodooFile * This,
-            /* [in] */ FileOpenMode Mode);
+            /* [in] */ DWORD Mode);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             IVoodooFile * This);
@@ -2994,7 +3013,7 @@ EXTERN_C const IID IID_IVoodooImage;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             IVoodooImage * This,
-            /* [in] */ FileOpenMode Mode);
+            /* [in] */ DWORD Mode);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             IVoodooImage * This);

@@ -7,5 +7,3 @@ DirectInput8Create = VoodooInput8Create
 DirectInputCreateA = VoodooInputCreateA
 DirectInputCreateW = VoodooInputCreateW
 DirectSoundCreate8 = VoodooSoundCreate8
-
-ModuleVersion=API_ModuleVersion

@@ -129,7 +129,7 @@ STDMETHODIMP CVoodooParameter::get_Core(IVoodooCore **ppCore)
     }
 }
 
-STDMETHODIMP CVoodooParameter::get_Type(ParameterType *pType)
+STDMETHODIMP CVoodooParameter::get_Type(DWORD *pType)
 {
     if ( pType == NULL )
     {
@@ -160,7 +160,7 @@ STDMETHODIMP CVoodooParameter::AttachParameter(IVoodooParameter *pParameter)
 
     // Check types
     ParameterType othertype;
-    pParameter->get_Type(&othertype);
+    pParameter->get_Type((DWORD*)&othertype);
 
     if ( othertype != m_Type )
     {
@@ -181,21 +181,21 @@ STDMETHODIMP CVoodooParameter::get_Components(int * Components)
 {
     switch ( m_Type )
     {
-    case Float1:
+    case PT_Float1:
         return 1;
-    case Float2:
+    case PT_Float2:
         return 2;
-    case Float3:
+    case PT_Float3:
         return 3;
-    case Float4:
+    case PT_Float4:
         return 4;
-    case Float4x4:
+    case PT_Float4x4:
         return 16;
-    case Sampler1D:
+    case PT_Sampler1D:
         return 1;
-    case Sampler2D:
+    case PT_Sampler2D:
         return 2;
-    case Sampler3D:
+    case PT_Sampler3D:
         return 3;
     default:
         return -1;

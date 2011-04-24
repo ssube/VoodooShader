@@ -35,14 +35,10 @@ SETUP(CoreInitFixture)
     WIN_ASSERT_TRUE(SUCCEEDED(hr) && pCore != NULL, _T("IVoodooCore not created."));
 
     BSTR pFileName = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig");
-    WIN_ASSERT_NOT_EQUAL(nullptr, pFileName);
-
-    WIN_TRACE(_T("Using config file: %s\n"), pFileName);
+    WIN_ASSERT_NOT_NULL(pFileName);
 
     hr = pCore->Initialize(pFileName);
-    WIN_TRACE(_T("HRESULT: %X\n"), hr);
-
-    WIN_ASSERT_TRUE(SUCCEEDED(hr));
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("Config: %s\nHRESULT: %X\n"), pFileName, hr);
 
     SysFreeString(pFileName);
 }
@@ -59,14 +55,10 @@ TEARDOWN(CoreInitFixture)
 BEGIN_TESTF(CoreInit_Working, CoreFixture)
 {
     BSTR pFileName = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig");
-    WIN_ASSERT_NOT_EQUAL(nullptr, pFileName);
-
-    WIN_TRACE(_T("Using config file: %s\n"), pFileName);
+    WIN_ASSERT_NOT_NULL(pFileName);
 
     HRESULT hr = pCore->Initialize(pFileName);
-    WIN_TRACE(_T("HRESULT: %X\n"), hr);
-
-    WIN_ASSERT_TRUE(SUCCEEDED(hr));
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("Config: %s\nHRESULT: %X\n"), pFileName, hr);
 
     SysFreeString(pFileName);
 }
@@ -76,15 +68,11 @@ END_TESTF;
 BEGIN_TESTF(CoreInit_BadXml, CoreFixture)
 {
     BSTR pFileName = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_BadXml.xmlconfig");
-    WIN_ASSERT_NOT_EQUAL(nullptr, pFileName);
-
-    WIN_TRACE(_T("Using config file: %s\n"), pFileName);
+    WIN_ASSERT_NOT_NULL(pFileName);
 
     HRESULT hr = pCore->Initialize(pFileName);
-    WIN_TRACE(_T("HRESULT: %X\n"), hr);
-
     //WIN_ASSERT_EQUAL(E_INVALIDCFG, hr);
-    WIN_ASSERT_TRUE(FAILED(hr));
+    WIN_ASSERT_TRUE(FAILED(hr), _T("Config: %s\nHRESULT: %X\n"), pFileName, hr);
 
     SysFreeString(pFileName);
 }
@@ -94,15 +82,11 @@ END_TESTF;
 BEGIN_TESTF(CoreInit_BadCLSID, CoreFixture)
 {
     BSTR pFileName = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_BadCLSID.xmlconfig");
-    WIN_ASSERT_NOT_EQUAL(nullptr, pFileName);
-
-    WIN_TRACE(_T("Using config file: %s\n"), pFileName);
+    WIN_ASSERT_NOT_NULL(pFileName);
 
     HRESULT hr = pCore->Initialize(pFileName);
-    WIN_TRACE(_T("HRESULT: %X\n"), hr);
-
     //WIN_ASSERT_EQUAL(E_BADCLSID, hr);
-    WIN_ASSERT_TRUE(FAILED(hr));
+    WIN_ASSERT_TRUE(FAILED(hr), _T("Config: %s\nHRESULT: %X\n"), pFileName, hr);
 
     SysFreeString(pFileName);
 }
@@ -114,10 +98,8 @@ BEGIN_TESTF(CoreNoInit_GetParser, CoreFixture)
     IVoodooParser * pParser = NULL;
 
     HRESULT hr = pCore->get_Parser(&pParser);
-    WIN_TRACE(_T("HRESULT: %X\n"), hr);
-
-    WIN_ASSERT_TRUE(FAILED(hr));
-    WIN_ASSERT_EQUAL(nullptr, pParser);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pParser);
 }
 END_TESTF;
 
@@ -127,17 +109,20 @@ BEGIN_TESTF(CoreInit_GetParser, CoreInitFixture)
     IVoodooParser * pParser = NULL;
 
     HRESULT hr = pCore->get_Parser(&pParser);
-    WIN_TRACE(_T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pParser);
 
+    IUnknown * pUnk = NULL;
+    hr = pParser->QueryInterface(IID_IUnknown, (void**)&pUnk);
     WIN_ASSERT_TRUE(SUCCEEDED(hr));
-    WIN_ASSERT_NOT_EQUAL(nullptr, pParser);
+    WIN_ASSERT_NOT_NULL(pUnk);
 }
 END_TESTF;
 
 // Test putting and getting a (fake) context
 BEGIN_TESTF(CoreInit_FakeContext, CoreInitFixture)
 {
-    void * context = (void*)0x0a0d09FF;
+    void * context = (void*)0x0A0D09FF;
 
     VARIANT vc;
     VariantInit(&vc);
@@ -145,18 +130,70 @@ BEGIN_TESTF(CoreInit_FakeContext, CoreInitFixture)
     V_BYREF(&vc) = context;
 
     HRESULT hr = pCore->put_CgContext(vc);
-    WIN_TRACE(_T("HRESULT: %X\n"), hr);
-
-    WIN_ASSERT_TRUE(SUCCEEDED(hr));
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
     VARIANT ovc;
     hr = pCore->get_CgContext(&ovc);
-    WIN_TRACE(_T("HRESULT: %X\n"), hr);
-
-    WIN_ASSERT_EQUAL(VT_BYREF, V_VT(&ovc));
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_EQUAL(VT_BYREF, V_VT(&ovc), _T("Return variant type: %X"), V_VT(&ovc));
 
     void * outcontext = V_BYREF(&ovc);
-
     WIN_ASSERT_EQUAL(context, outcontext);
+}
+END_TESTF;
+
+BEGIN_TESTF(CoreInit_TextureTest, CoreInitFixture)
+{
+    void * TexAddr1 = (void*)0xDD44BB99;
+    void * TexAddr2 = (void*)0x11CC7700;
+    IVoodooTexture * pPassTex = nullptr;
+    IVoodooTexture * pTechTex = nullptr;
+    BSTR TexName1 = SysAllocString(L"Texture1");
+    BSTR TexName2 = SysAllocString(L"Texture2");
+    VARIANT TexData;
+    VariantInit(&TexData);
+    V_VT(&TexData) = VT_BYREF;
+
+    V_BYREF(&TexData) = TexAddr1;
+    HRESULT hr = pCore->CreateTexture(TexName1, TexData, &pPassTex);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    V_BYREF(&TexData) = TexAddr2;
+    hr = pCore->CreateTexture(TexName2, TexData, &pTechTex);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    SysFreeString(TexName1);
+    SysFreeString(TexName2);
+
+    hr = pCore->SetStageTexture(PassTarget, pPassTex);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->SetStageTexture(ShaderTarget, pTechTex);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    IVoodooTexture * pPassOTex = nullptr;
+    IVoodooTexture * pTechOTex = nullptr;
+
+    hr = pCore->GetStageTexture(PassTarget, &pPassOTex);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->GetStageTexture(ShaderTarget, &pTechOTex);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    WIN_ASSERT_EQUAL(pPassTex, pPassOTex);
+    WIN_ASSERT_EQUAL(pTechTex, pTechOTex);
+
+    VARIANT OTexData;
+    VariantInit(&OTexData);
+
+    hr = pPassOTex->get_Data(&OTexData);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_EQUAL(VT_BYREF, V_VT(&OTexData));
+    WIN_ASSERT_EQUAL(TexAddr1, V_BYREF(&OTexData));
+
+    hr = pTechOTex->get_Data(&OTexData);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_EQUAL(VT_BYREF, V_VT(&OTexData));
+    WIN_ASSERT_EQUAL(TexAddr2, V_BYREF(&OTexData));
 }
 END_TESTF;

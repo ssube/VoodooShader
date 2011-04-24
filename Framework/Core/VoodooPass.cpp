@@ -147,26 +147,26 @@ STDMETHODIMP CVoodooPass::get_Technique(
 }
 
 STDMETHODIMP CVoodooPass::GetCgProgram( 
-    /* [in] */ ProgramStage Stage,
+    /* [in] */ DWORD Stage,
     /* [retval][out] */ VARIANT *ppProgram)
 {
     CGprogram program = NULL;
 
     switch ( Stage )
     {
-    case Domain:
+    case PS_Domain:
         program = cgGetPassProgram(m_Pass, CG_TESSELLATION_CONTROL_DOMAIN);
         break;
-    case Hull:
+    case PS_Hull:
         program = cgGetPassProgram(m_Pass, CG_TESSELLATION_EVALUATION_DOMAIN);
         break;
-    case Vertex:
+    case PS_Vertex:
         program = cgGetPassProgram(m_Pass, CG_VERTEX_DOMAIN);
         break;
-    case Geometry:
+    case PS_Geometry:
         program = cgGetPassProgram(m_Pass, CG_GEOMETRY_DOMAIN);
         break;
-    case Fragment:
+    case PS_Fragment:
         program = cgGetPassProgram(m_Pass, CG_FRAGMENT_DOMAIN);
         break;
     default:

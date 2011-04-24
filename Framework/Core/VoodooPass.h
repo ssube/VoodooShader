@@ -64,7 +64,7 @@ public:
         /* [retval][out] */ IVoodooTechnique **ppTechnique);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgProgram( 
-        /* [in] */ ProgramStage Stage,
+        /* [in] */ DWORD Stage,
         /* [retval][out] */ VARIANT *ppProgram);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE get_CgPass( 

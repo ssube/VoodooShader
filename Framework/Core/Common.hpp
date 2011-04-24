@@ -6,6 +6,8 @@
 
 #include <Cg/Cg.h>
 
+#include "Version.hpp"
+
 #define MEMBER_FROM_PTR(obj, token) obj->m_##token = p##token
 
 extern const HRESULT E_BADTHING;
@@ -32,6 +34,7 @@ extern const HRESULT E_NULLIMPL;
 // Creates an interface to a string-format class ID. The ID may be in registry form or a ProgID.
 HRESULT WINAPI InstanceFromString(_In_ BSTR lpStr, _In_ REFIID iid, _In_ void ** pp);
 CGparameter WINAPI CreateVirtualParameter(IVoodooCore * pCore, ParameterType Type);
+HRESULT WINAPI LogMsg(IVoodooLogger * pLogger, DWORD Level, LPWSTR pModule, LPWSTR pMsg, ...);
 
 CGtype WINAPI ToCgType(ParameterType Type);
 ParameterType WINAPI ToParameterType(CGtype Type);

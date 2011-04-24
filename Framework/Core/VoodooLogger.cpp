@@ -109,7 +109,7 @@ STDMETHODIMP CVoodooLogger::Open(
     {
         return E_FILEERROR;
     } else {
-        this->Log(Internal, L"Voodoo/Logger", L"Log file opened.", NULL);
+        this->Log(LL_Internal, L"Voodoo/Logger", L"Log file opened.", NULL);
     }
     return S_OK;
 }
@@ -127,7 +127,7 @@ STDMETHODIMP CVoodooLogger::Dump( void)
 }
 
 STDMETHODIMP CVoodooLogger::get_LogLevel( 
-    /* [retval][out] */ LogLevel *pLevel)
+    /* [retval][out] */ DWORD *pLevel)
 {
     if ( pLevel == NULL ) return E_INVALIDARG;
 
@@ -136,9 +136,9 @@ STDMETHODIMP CVoodooLogger::get_LogLevel(
 }
 
 STDMETHODIMP CVoodooLogger::put_LogLevel( 
-    /* [in] */ LogLevel Level)
+    /* [in] */ DWORD Level)
 {
-    m_Level = Level;
+    m_Level = (LogLevel)Level;
     return S_OK;
 }
 
@@ -149,7 +149,7 @@ STDMETHODIMP CVoodooLogger::LogModule(
 }
 
 STDMETHODIMP CVoodooLogger::Log( 
-    /* [in] */ LogLevel Level,
+    /* [in] */ DWORD Level,
     /* [in] */ BSTR pModule,
     /* [in] */ BSTR pFormat,
     /* [in] */ SAFEARRAY * ppArgs)
@@ -158,7 +158,7 @@ STDMETHODIMP CVoodooLogger::Log(
 }
 
 STDMETHODIMP CVoodooLogger::LogList( 
-    /* [in] */ LogLevel Level,
+    /* [in] */ DWORD Level,
     /* [in] */ BSTR pModule,
     /* [in] */ BSTR pFormat,
     /* [in] */ VARIANT pList)

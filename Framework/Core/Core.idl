@@ -10,136 +10,156 @@ import "ocidl.idl";
 // Enums and such
 typedef [v1_enum, helpstring("Texture Formats")]
 enum {
-    UnknownFormat = 0,         /*!< Unknown texture format */
+    TF_Unknown = 0,         /*!< Unknown texture format */
     // Backbuffer formats
-    RGB5,                /*!< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
-    RGB5A1,              /*!< 5 bit RGB, 1 bit alpha */
-    RGB8,                /*!< 8 bit RGB (8 bit X in DX). Most common backbuffer format, 
+    TF_RGB5,                /*!< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
+    TF_RGB5A1,              /*!< 5 bit RGB, 1 bit alpha */
+    TF_RGB8,                /*!< 8 bit RGB (8 bit X in DX). Most common backbuffer format, 
                                     common texture format. */
-    RGBA8,               /*!< 8 bit RGBA. Common texture format. */
-    RGB10A2,             /*!< 10 bit RGB, 2 bit A */
+    TF_RGBA8,               /*!< 8 bit RGBA. Common texture format. */
+    TF_RGB10A2,             /*!< 10 bit RGB, 2 bit A */
     // Float texture formats
-    RGBA16F,             /*!< Half-precision RGBA. HDR format. */
-    RGBA32F,             /*!< Full-precision RGBA (float/single). HDR format. */
+    TF_RGBA16F,             /*!< Half-precision RGBA. HDR format. */
+    TF_RGBA32F,             /*!< Full-precision RGBA (float/single). HDR format. */
     // Depth-buffer formats
-    D16,                 /*!< Half-precision depth (Z-buffer, see @ref depthbuffers 
+    TF_D16,                 /*!< Half-precision depth (Z-buffer, see @ref depthbuffers 
                                     for more info) */
-    D32,                 /*!< Full-precision depth (Z-buffer, see @ref depthbuffers 
+    TF_D32,                 /*!< Full-precision depth (Z-buffer, see @ref depthbuffers 
                                     for more info) */
+    TF_Max = 0x7FFFFFFF
 } TextureFormat;
 
 typedef [v1_enum, helpstring("Parameter Types")]
 enum {
-    UnknownType = 0,         /*!< Unknown parameter type */
+    PT_Unknown = 0,         /*!< Unknown parameter type */
     // Float-vectors
-    Float1   = 0x11,              /*!< Single-component float vector */
-    Float2   = 0x12,              /*!< Two-component float vector */
-    Float3   = 0x13,              /*!< Three-component float vector */
-    Float4   = 0x14,              /*!< Four-component float vector */
-    Float1x1 = 0x11,
-    Float1x2 = 0x12,
-    Float1x3 = 0x13,
-    Float1x4 = 0x14,
-    Float2x1 = 0x21,
-    Float2x2 = 0x22,
-    Float2x3 = 0x23,
-    Float2x4 = 0x24,
-    Float3x1 = 0x31,
-    Float3x2 = 0x32,
-    Float3x3 = 0x33,
-    Float3x4 = 0x34,
-    Float4x1 = 0x41,
-    Float4x2 = 0x42,
-    Float4x3 = 0x43,
-    Float4x4 = 0x44,              /*!< Generic float4x4 matrix type */
+    PT_Float1   = 0x11,              /*!< Single-component float vector */
+    PT_Float2   = 0x12,              /*!< Two-component float vector */
+    PT_Float3   = 0x13,              /*!< Three-component float vector */
+    PT_Float4   = 0x14,              /*!< Four-component float vector */
+    PT_Float1x1 = 0x11,
+    PT_Float1x2 = 0x12,
+    PT_Float1x3 = 0x13,
+    PT_Float1x4 = 0x14,
+    PT_Float2x1 = 0x21,
+    PT_Float2x2 = 0x22,
+    PT_Float2x3 = 0x23,
+    PT_Float2x4 = 0x24,
+    PT_Float3x1 = 0x31,
+    PT_Float3x2 = 0x32,
+    PT_Float3x3 = 0x33,
+    PT_Float3x4 = 0x34,
+    PT_Float4x1 = 0x41,
+    PT_Float4x2 = 0x42,
+    PT_Float4x3 = 0x43,
+    PT_Float4x4 = 0x44,              /*!< Generic float4x4 matrix type */
     // Samplers
-    Sampler1D = 0x101,           /*!< One-dimensional sampler (for a 1D texture, see 
+    PT_Sampler1D = 0x101,           /*!< One-dimensional sampler (for a 1D texture, see 
                                     @ref texturetypes "texture types" for more info) */
-    Sampler2D = 0x102,           /*!< Two-dimensional sampler (for a 2D texture, see 
+    PT_Sampler2D = 0x102,           /*!< Two-dimensional sampler (for a 2D texture, see 
                                     @ref texturetypes "texture types" for more info) */
-    Sampler3D = 0x103,           /*!< Three-dimensional sampler (for a 3D/volume texture, see 
+    PT_Sampler3D = 0x103,           /*!< Three-dimensional sampler (for a 3D/volume texture, see 
                                     @ref texturetypes "texture types" for more info) */
     // Unknown struct
-    UserStruct = 0x1000
+    PT_Struct = 0x1000,
+    PT_Max = 0x7FFFFFFF
 } ParameterType;
 
 typedef [v1_enum, helpstring("Parameter Categories")]
 enum {
-    UnknownCategory = 0,         /*!< Unknown parameter category */
+    PC_Unknown = 0,    /*!< Unknown parameter category */
     // Valid categories
-    Scalar  = 0x01,               /*!< Float vector parameter (may have 1 to 4 components) */
-    Sampler = 0x02,             /*!< Sampler parameter (may sample 1D to 3D textures) */
-    Struct  = 0x04
+    PC_Float  = 0x01,         /*!< Float vector parameter (may have 1 to 4 components) */
+    PC_Sampler = 0x02,         /*!< Sampler parameter (may sample 1D to 3D textures) */
+    PC_Struct  = 0x04,
+    PC_Max = 0x7FFFFFFF
 } ParameterCategory;
 
 typedef [v1_enum, helpstring("Shader Program Stages")]
 enum {
-    UnknownProgram = 0,         /*!< Unknown program stage */
+    PS_Unknown = 0,     /*!< Unknown program stage */
     // Basic stages
-    Vertex,              /*!< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
-    Fragment,            /*!< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
-    // Geometry stages
-    Geometry,            /*!< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
+    PS_Vertex,                 /*!< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
+    PS_Fragment,               /*!< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
+    // PS_Geometry stages
+    PS_Geometry,               /*!< PS_Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
     // Tessellation stages
-    Domain,              /*!< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
-    Hull,                /*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
+    PS_Domain,                 /*!< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
+    PS_Hull,                   /*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
+    PS_Max = 0x7FFFFFFF
 } ProgramStage;
     
 typedef [v1_enum, helpstring("Texture Stages")]
 enum {
-    UnknownStage = 0,         /*!< Unknown texture type */
+    TS_Unknown = 0,         /*!< Unknown texture type */
     // Special types
-    ShaderTarget,        /*!< Shader target texture */
-    PassTarget,          /*!< Pass target texture */
+    TS_Shader,        /*!< Shader target texture */
+    TS_Pass,          /*!< Pass target texture */
+    TS_Max = 0x7FFFFFFF
 } TextureStage;
     
 typedef [v1_enum, helpstring("File Access Modes")]
 enum {
-    UnknownMode   = 0x00,     /*!< Unknown file open mode */
+    FM_Unknown   = 0x00,     /*!< Unknown file open mode */
     // Valid modes
-    Read      = 0x01,     /*!< Read-only file open mode */
-    Write     = 0x02,     /*!< Read/write file open mode */
+    FM_Read      = 0x01,     /*!< Read-only file open mode */
+    FM_Write     = 0x02,     /*!< Read/write file open mode */
+    FM_Max = 0x7FFFFFFF
 } FileOpenMode;
 
 typedef [v1_enum, helpstring("Log Levels")]
 enum {
-    UnknownLevel = 0x00,     /*!< Log level unknown */
+    LL_Unknown = 0x00,     /*!< Log level unknown */
     // Severity values
-    Debug      = 0x01,
-    Info       = 0x02,
-    Warning    = 0x04,
-    Error      = 0x08,
+    LL_Debug      = 0x01,
+    LL_Info       = 0x02,
+    LL_Warning    = 0x04,
+    LL_Error      = 0x08,
     // Origin values
-    External   = 0x10,
-    Module     = 0x40,
-    Framework  = 0x80,
+    LL_External   = 0x10,
+    LL_Module     = 0x40,
+    LL_Framework  = 0x80,
     // Logger internal values
-    Internal     = 0x82,     /*!< Log level for Logger-internal messages */
-    Initial      = 0xFE,     /*!< Initial log level of Logger */
+    LL_Internal     = 0x82,     /*!< Log level for Logger-internal messages */
+    LL_Initial      = 0xFE,     /*!< Initial log level of Logger */
     // Misc values
-    All          = 0xFF,     /*!< All messages will be logged */
+    LL_All          = 0xFF,     /*!< All messages will be logged */
+    LL_Max = 0x7FFFFFFF
 } LogLevel;
 
 typedef [v1_enum, helpstring("Variable Parsing Modifiers")]
 enum {
-    NoFlags          = 0x0000,     /*!< No special behavior */
+    PF_None          = 0x0000,     /*!< No special behavior */
     // Slash flags
-    SingleSlash      = 0x0001,     /*!< No repeated slashes (useful for XPath). */
-    SlashOnly        = 0x0002,     /*!< Replace all backslashes with forward slashes. */
-    BackslashOnly    = 0x0004,     /*!< Replace all forward slashes with backslashes. */
+    PF_SingleSlash      = 0x0001,     /*!< No repeated slashes (useful for XPath). */
+    PF_SlashOnly        = 0x0002,     /*!< Replace all backslashes with forward slashes. */
+    PF_BackslashOnly    = 0x0004,     /*!< Replace all forward slashes with backslashes. */
     // Case flags
-    Lowercase        = 0x0010,
-    Uppercase        = 0x0020,
+    PF_Lowercase        = 0x0010,
+    PF_Uppercase        = 0x0020,
     // Special flags
-    VarName          = 0x0100,
+    PF_VarName          = 0x0100,
+    PF_Max = 0x7FFFFFFF
 } ParseFlags;
 
 typedef [v1_enum, helpstring("Variable Type")]
 enum {
-    Normal      = 0x00,
-    State       = 0x01,
-    System      = 0x10
+    VT_Normal      = 0x00,
+    VT_State       = 0x01,
+    VT_System      = 0x10,
+    VT_Max = 0x7FFFFFFF
 } VariableType;
+
+typedef [helpstring("Core Intialization Struct")]
+struct
+{
+    BSTR GlobalRoot;
+    BSTR LocalRoot;
+    BSTR RunRoot;
+    BSTR Target;
+    BSTR Loader;
+    BSTR Config;
+} InitParams;
 
 typedef [helpstring("Texture Description")]
 struct
@@ -286,7 +306,7 @@ interface IVoodooAdapter : IDispatch{
 	pointer_default(unique)
 ]
 interface IVoodooCore : IDispatch{
-    [id(1)] HRESULT Initialize([in] BSTR pConfig);
+    [id(1)] HRESULT Initialize([in] const InitParams pParams);
     [propget, id(2)] HRESULT Parser([out, retval] IVoodooParser ** ppParser);
     [propget, id(3)] HRESULT HookSystem([out, retval] IVoodooHookSystem ** ppHookSystem);
     [propget, id(4)] HRESULT FileSystem([out, retval] IVoodooFileSystem ** ppFileSystem);
@@ -296,13 +316,13 @@ interface IVoodooCore : IDispatch{
     [propget, id(8)] HRESULT CgContext([out, retval] VARIANT * pCgContext);
     [propput, id(8)] HRESULT CgContext([in] VARIANT CgContext);
     [vararg, id(10)] HRESULT CreateShader([in] IVoodooFile * pFile, [in] SAFEARRAY(VARIANT) pArgs, [out, retval] IVoodooShader ** ppShader);
-    [id(11)] HRESULT CreateParameter([in] BSTR pName, [in] ParameterType Type, [out, retval] IVoodooParameter ** ppParameter);
+    [id(11)] HRESULT CreateParameter([in] BSTR pName, [in] DWORD Type, [out, retval] IVoodooParameter ** ppParameter);
     [id(12)] HRESULT CreateTexture([in] BSTR pName, [in] VARIANT Data, [out, retval] IVoodooTexture ** ppTexture);
     [id(13)] HRESULT GetParameter([in] BSTR pName, [out, retval] IVoodooParameter ** ppParameter);
     [id(14)] HRESULT GetTexture([in] BSTR pName, [out, retval] IVoodooTexture ** ppTexture);
     [id(15)] HRESULT RemoveTexture([in] BSTR pName);
-    [id(16)] HRESULT GetStageTexture([in] TextureStage Stage, [out, retval] IVoodooTexture ** ppTexture);
-    [id(17)] HRESULT SetStageTexture([in] TextureStage Stage, [in] IVoodooTexture * pTexture);
+    [id(16)] HRESULT GetStageTexture([in] DWORD Stage, [out, retval] IVoodooTexture ** ppTexture);
+    [id(17)] HRESULT SetStageTexture([in] DWORD Stage, [in] IVoodooTexture * pTexture);
 };
 [
 	object,
@@ -312,9 +332,9 @@ interface IVoodooCore : IDispatch{
 	pointer_default(unique)
 ]
 interface IVoodooParser : IDispatch{
-    [id(1)] HRESULT AddVariable([in] BSTR pName, [in] BSTR pValue, [in, defaultvalue(Normal)] VariableType System);
+    [id(1)] HRESULT AddVariable([in] BSTR pName, [in] BSTR pValue, [in, defaultvalue(VT_Normal)] DWORD System);
     [id(2)] HRESULT RemoveVariable([in] BSTR pName);
-    [id(3)] HRESULT Parse([in] BSTR pString, [in, defaultvalue(NoFlags)] ParseFlags Flags, [out, retval] LPBSTR pParsed);
+    [id(3)] HRESULT Parse([in] BSTR pString, [in, defaultvalue(PF_None)] DWORD Flags, [out, retval] LPBSTR pParsed);
 };
 [
 	object,
@@ -363,7 +383,7 @@ interface IVoodooPass : IDispatch{
     [propget, id(3)] HRESULT Target([out, retval] IVoodooTexture ** ppTexture);
     [propget, id(4)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
     [propget, id(5)] HRESULT Technique([out, retval] IVoodooTechnique ** ppTechnique);
-    [id(6)] HRESULT GetCgProgram([in] ProgramStage Stage, [out, retval] VARIANT * pProgram);
+    [id(6)] HRESULT GetCgProgram([in] DWORD Stage, [out, retval] VARIANT * pProgram);
     [propget, id(7)] HRESULT CgPass([out, retval] VARIANT * pCgPass);
 };
 [
@@ -388,7 +408,7 @@ interface IVoodooTexture : IDispatch{
 interface IVoodooParameter : IDispatch{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [propget, id(3)] HRESULT Type([out, retval] ParameterType * pType);
+    [propget, id(3)] HRESULT Type([out, retval] DWORD * pType);
     [propget, id(4)] HRESULT Virtual([out, retval] boolean * pVirtual);
     [id(6)] HRESULT AttachParameter([in] IVoodooParameter * pParameter);
     [propget, id(7)] HRESULT Components([out, retval] int * pComponents);
@@ -411,11 +431,11 @@ interface IVoodooLogger : IDispatch{
     [id(2)] HRESULT Open([in] BSTR pFilename, [in] boolean Append);
     [id(3)] HRESULT Close();
     [id(4)] HRESULT Dump();
-    [propget, id(5)] HRESULT LogLevel([out, retval] LogLevel * pLevel);
-    [propput, id(5)] HRESULT LogLevel([in] LogLevel Level);
+    [propget, id(5)] HRESULT LogLevel([out, retval] DWORD * pLevel);
+    [propput, id(5)] HRESULT LogLevel([in] DWORD Level);
     [id(6)] HRESULT LogModule([in] VersionStruct Module);
-    [id(7), vararg] HRESULT Log([in] LogLevel Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
-    [id(8)] HRESULT LogList([in] LogLevel Level, [in] BSTR pModule, [in] BSTR pFormat, [in] VARIANT pList);
+    [id(7), vararg] HRESULT Log([in] DWORD Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
+    [id(8)] HRESULT LogList([in] DWORD Level, [in] BSTR pModule, [in] BSTR pFormat, [in] VARIANT pList);
     [propget, id(9)] HRESULT BufferSize([out, retval] int * pSize);
     [propput, id(9)] HRESULT BufferSize([in] int Size);
 };
@@ -442,7 +462,7 @@ interface IVoodooFileSystem : IDispatch{
 ]
 interface IVoodooFile : IDispatch{
     [propget, id(1)] HRESULT Path([out, retval] LPBSTR pPath);
-    [id(2)] HRESULT Open([in] FileOpenMode Mode);
+    [id(2)] HRESULT Open([in] DWORD Mode);
     [id(3)] HRESULT Close();
     [id(4)] HRESULT Read([in, out] int * Length, [out, size_is(*Length)] byte Buffer[*]);
     [id(5)] HRESULT Write([in] int Length, [in, size_is(Length)] byte Buffer[*]);

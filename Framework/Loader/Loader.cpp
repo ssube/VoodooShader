@@ -1,112 +1,25 @@
 
-#include "Meta.hpp"
 #include "Loader.hpp"
 
 #include "Loader_Version.hpp"
 
-funcTypeLoad funcLoad;
-funcTypeUnload funcUnload;
-
-void * core = NULL;
-
-VoodooShader::Version API_ModuleVersion()
-{
-    VoodooShader::Version module = VOODOO_META_VERSION_STRUCT(LOADER);
-    return module;
-}
-
-/**
- * Locate and load the Voodoo core, verify the functions and initialize the framework.
- */
-bool LoadVoodoo()
-{
-    char StartupDir[MAX_PATH];
-    GetCurrentDirectory(MAX_PATH, StartupDir);
-
-    HKEY VoodooPathKey = NULL;
-    char VoodooPath[MAX_PATH];
-    char VoodooCorePath[MAX_PATH];
-
-    LONG keyOpen = RegOpenKeyExA(HKEY_CURRENT_USER, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
-
-    if ( keyOpen != ERROR_SUCCESS )
-    {
-        keyOpen = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &VoodooPathKey);
-
-        if ( keyOpen != ERROR_SUCCESS )
-        {
-            MessageBoxA(NULL, "Voodoo Loader: Unable to find Voodoo registry key.", "Loader Error", MB_ICONERROR|MB_OK);
-            return false;
-        }
-    }
-
-    // Key is open
-    DWORD valueType = REG_NONE;
-    DWORD valueSize = MAX_PATH;
-    LONG valueQuery = RegQueryValueExA(VoodooPathKey, "Path", NULL, &valueType, (BYTE*)VoodooPath, &valueSize);
-
-    if ( valueQuery != ERROR_SUCCESS || valueType == REG_NONE )
-    {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to retrieve path from registry.", "Loader Error", MB_ICONERROR|MB_OK);
-        return false;
-    }
-
-    StringCchCopyA(VoodooCorePath, MAX_PATH, VoodooPath);
-    StringCchCatA(VoodooCorePath, MAX_PATH, "\\bin\\Voodoo_Core.dll");
-
-    HMODULE adapter = LoadLibraryExA(VoodooCorePath, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-
-    if ( !adapter )
-    {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to load core DLL.", "Loader Error", MB_ICONERROR|MB_OK);
-        return false;
-    }
-
-    funcLoad   = (funcTypeLoad)  GetProcAddress(adapter, "CreateCore");
-    funcUnload = (funcTypeUnload)GetProcAddress(adapter, "DestroyCore");
-
-    if ( funcLoad == NULL || funcUnload == NULL )
-    {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to find core EP.", "Loader Error", MB_ICONERROR|MB_OK);
-        return false;
-    }
-
-    try
-    {
-        core = (*funcLoad)(VoodooPath, StartupDir);
-    } catch ( std::exception & exc ) {
-        MessageBoxA(NULL, exc.what(), "Loader Error", MB_ICONERROR|MB_OK);
-        core = NULL;
-    }
-
-    return ( core != NULL );
-}
-
-bool UnloadVoodoo()
-{
-    if ( funcUnload && core )
-    {
-        (*funcUnload)(core);
-    }
-
-    return true;
-}
-
 BOOL WINAPI DllMain
 (
-    _In_ void * _HDllHandle, 
-    _In_ unsigned _Reason, 
-    _In_opt_ void * _Reserved
+    _In_ HINSTANCE hInst, 
+    _In_ unsigned Reason, 
+    _In_opt_ void * Reserved
 )
 {
-    UNREFERENCED_PARAMETER(_HDllHandle);
-    UNREFERENCED_PARAMETER(_Reserved);
+    UNREFERENCED_PARAMETER(Reserved);
 
-    if ( _Reason == DLL_PROCESS_ATTACH )
+    if ( Reason == DLL_PROCESS_ATTACH )
     {
-        return (BOOL)LoadVoodoo();
-    } else if ( _Reason == DLL_PROCESS_DETACH ) {
-        return (BOOL)UnloadVoodoo();
+        bool init = true;
+        init &= GetRunRoot();
+        init &= GetLoader(hInst);
+        return (BOOL)init;
+    } else if ( Reason == DLL_PROCESS_DETACH ) {
+        return (BOOL)VoodooShutdown();
     }
 }
 
@@ -118,7 +31,7 @@ BOOL WINAPI DllMain
  * This function takes an SDK version, library name and function name, loads and calls the 
  * proper init function.
  */
-void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const char * func)
+IUnknown * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const PTCHAR lib, const char * func)
 {
     typedef IUnknown * (WINAPI * DXInitFunc)(UINT);
 
@@ -126,7 +39,7 @@ void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const cha
 
     if ( !baselib )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to load system DLL.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBox(NULL, _T("Voodoo Loader: Unable to load system DLL."), _T("Loader Error"), MB_ICONERROR|MB_OK);
         exit(1);
     }
 
@@ -134,29 +47,40 @@ void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const char * lib, const cha
 
     if ( !initFunc )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBox(NULL, _T("Voodoo Loader: Unable to find system EP."), _T("Loader Error"), MB_ICONERROR|MB_OK);
         exit(1);
     }
 
     IUnknown * dxObj = (*initFunc)(sdkVersion);
-    dxObj->Release();
-    // COM and D3D are both started. Initialize Voodoo.
-    CoCreateInstance(VOODOO_CORE, &Core, )
 
-    return (*initFunc)(sdkVersion);
+    return dxObj;
 }
 
 // Various adapter-loading entry points
 // Direct3D 8
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
+IUnknown * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 {
-    return VoodooDXCreateGeneric(sdkVersion, "d3d8.dll", "Direct3DCreate8");
+    IUnknown * D3D8Obj = VoodooDXCreateGeneric(sdkVersion, _T("d3d8.dll"), "Direct3DCreate8");
+
+    VoodooStartup();
+    VARIANT * v = PtrVariant(D3D8Obj);
+    gVoodooAdapter->SetProperty(L"Direct3DCreate8", v);
+    delete v;
+
+    return D3D8Obj;
 }
 
 // Direct3D 9
-void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
+IUnknown * WINAPI Voodoo3DCreate9(UINT sdkVersion)
 {
-    return VoodooDXCreateGeneric(sdkVersion, "d3d9.dll", "Direct3DCreate9");
+    IUnknown * D3D9Obj = VoodooDXCreateGeneric(sdkVersion, _T("d3d9.dll"), "Direct3DCreate9");
+
+    VoodooStartup();
+    VARIANT * v = PtrVariant(D3D9Obj);
+    gVoodooAdapter->SetProperty(L"Direct3DCreate9", v);
+    delete v;
+
+    return D3D9Obj;
 }
 
 // DirectInput 8
@@ -171,19 +95,17 @@ HRESULT WINAPI VoodooInput8Create
 {
     typedef HRESULT (WINAPI * DIInitFunc)(HINSTANCE, DWORD, REFIID, LPVOID*, LPVOID);
 
-    HMODULE baselib = LoadSystemLibrary("dinput8.dll");
-
+    HMODULE baselib = LoadSystemLibrary(_T("dinput8.dll"));
     if ( !baselib )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to load system DLL.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBox(NULL, _T("Voodoo Loader: Unable to load system DLL."), _T("Loader Error"), MB_ICONERROR|MB_OK);
         exit(1);
     }
 
     DIInitFunc initFunc = (DIInitFunc)GetProcAddress(baselib, "DirectInput8Create");
-
     if ( !initFunc )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBox(NULL, _T("Voodoo Loader: Unable to find system EP."), _T("Loader Error"), MB_ICONERROR|MB_OK);
         exit(1);
     }
 
@@ -202,11 +124,11 @@ HRESULT WINAPI VoodooInputCreateGeneric
 {
     typedef HRESULT (WINAPI * DIInitFunc)(HINSTANCE, DWORD, LPVOID, LPVOID);
 
-    HMODULE baselib = LoadSystemLibrary("dinput.dll");
+    HMODULE baselib = LoadSystemLibrary(_T("dinput.dll"));
 
     if ( !baselib )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to load system DLL.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBox(NULL, _T("Voodoo Loader: Unable to load system DLL."), _T("Loader Error"), MB_ICONERROR|MB_OK);
         exit(1);
     }
 
@@ -214,7 +136,7 @@ HRESULT WINAPI VoodooInputCreateGeneric
 
     if ( !initFunc )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBox(NULL, _T("Voodoo Loader: Unable to find system EP."), _T("Loader Error"), MB_ICONERROR|MB_OK);
         exit(1);
     }
 
@@ -254,11 +176,11 @@ HRESULT VoodooSoundCreate8
 {
     typedef HRESULT (__stdcall * DSInitFunc)(LPCGUID, LPVOID*, LPVOID);
 
-    HMODULE baselib = LoadSystemLibrary("dsound8.dll");
+    HMODULE baselib = LoadSystemLibrary(_T("dsound8.dll"));
 
     if ( !baselib )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to load system DLL.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBox(NULL, _T("Voodoo Loader: Unable to load system DLL."), _T("Loader Error"), MB_ICONERROR|MB_OK);
         exit(1);
     }
 
@@ -266,7 +188,7 @@ HRESULT VoodooSoundCreate8
 
     if ( !initFunc )
     {
-        MessageBoxA(NULL, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR|MB_OK);
+        MessageBox(NULL, _T("Voodoo Loader: Unable to find system EP."), _T("Loader Error"), MB_ICONERROR|MB_OK);
         exit(1);
     }
 

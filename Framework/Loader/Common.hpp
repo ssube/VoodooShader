@@ -25,16 +25,29 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
+#include <atlstr.h>
+
+#include "Core_i.h"
+
 /**
  * @addtogroup VoodooLoader Voodoo/Loader
  * @{
  */
 
+VARIANT * PtrVariant(void * ptr);
 HMODULE LoadSystemLibrary(const PTCHAR libname);
-void LoadVoodoo();
-void UnloadVoodoo();
 
-extern LPUNKNOWN VoodooCore;
+bool WINAPI VoodooStartup();
+bool WINAPI VoodooShutdown();
+
+bool WINAPI GetLoader(HINSTANCE hLoader);
+bool WINAPI GetRunRoot();
+bool WINAPI GetLocalRoot();
+bool WINAPI GetGlobalRoot();
+
+extern IVoodooCore * gVoodooCore;
+extern IVoodooAdapter * gVoodooAdapter;
+extern InitParams gInitParams;
 
 /**
  * @}
