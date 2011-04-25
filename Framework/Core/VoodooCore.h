@@ -10,11 +10,50 @@
 
 using namespace ATL;
 
-// CVoodooCore
+/**
+ * @struct IVoodooCore
+ * 
+ * @par IID/CLSID
+ *    @ref IID_IVoodooCore
+ * @par GUID
+ *    {6D183074-9127-4615-8366-02587BAFE38C}
+ * @par Attributes
+ *    object, dual, nonextensible, pointer_default(unique)
+ * 
+ * @brief 
+ *    Primary core interface for Voodoo, acts as a kind of meta-factory and provides all core
+ *    functionality.
+ *    
+ * The Core handles most Voodoo tasks that are not better suited to a plugin, and provides most
+ * major implementation details. It handles the general compilation and loading of shaders, and
+ * provides a list of active textures and parameters for use in the shader linker.
+ * 
+ * @note Requires a Cg context be provided before shader-related functions will work.
+ **/
+
+/**
+ * @class CVoodooCore
+ * 
+ * @par Interface
+ *    @ref IVoodooCore
+ * @par IID/CLSID
+ *    @ref CLSID_VoodooCore
+ * @par GUID
+ *    {C50C9C7D-7E66-40ED-B5FD-BE7135DA40BF}
+ * @par Attributes
+ *    none
+ * @par Version
+ *    0.3
+ *    
+ * @brief 
+ *    Core implementation of Voodoo (full implementation).
+ *    
+ * 
+ */
 class ATL_NO_VTABLE CVoodooCore :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooCore, &CLSID_VoodooCore>,
-	public IDispatchImpl<IVoodooCore, &IID_IVoodooCore, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooCore, &IID_IVoodooCore, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
 	CVoodooCore();

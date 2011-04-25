@@ -1,22 +1,83 @@
-// VoodooParser.h : Declaration of the CVoodooParser
+/**************************************************************************************************\
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify it under the terms of the 
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program; 
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * Boston, MA  02110-1301 US
+ *
+ * Support and more information may be found at http://www.voodooshader.com, or by contacting the
+ * developer at peachykeen@voodooshader.com
+\**************************************************************************************************/
 
 #pragma once
-#include "Core_i.h"
-#include "resource.h"       // main symbols
-#include <comsvcs.h>
 
 #include "Common.hpp"
 
 using namespace ATL;
 
+/**
+ * @struct IVoodooParser
+ * 
+ * @par IID/CLSID
+ *    @ref IID_IVoodooParser
+ * @par GUID
+ *    {B375BC6B-5A6C-4B8B-888B-A937BA3814FD}
+ * @par Attributes
+ *    object, dual, nonextensible, pointer_default(unique)
+ * 
+ * @brief 
+ *    Relatively simple variable parser (find and replace with a few other features).
+ *    
+ * The parser provides a simple system for using variables within Voodoo strings and paths. Most
+ * major string are run through this before being used.
+ * 
+ * A number of potentially useful features, including temporary variables and specialized rules for
+ * path parsing, are available.
+ * 
+ * @sa @ref page_varsyntax
+ * @sa @ref ParseFlags
+ **/
+
+/**
+ * String/string map, functioning as a dictionary for variables. Keys are variable name.
+ */
 typedef CMap<CComBSTR, CComBSTR, CComBSTR, CComBSTR> Dictionary;
 
-// CVoodooParser
-
+/**
+ * @class CVoodooParser
+ * 
+ * @par Interface
+ *    @ref IVoodooParser
+ * @par IID/CLSID
+ *    @ref CLSID_VoodooParser
+ * @par GUID
+ *    {F4F858F0-C357-4C67-8FB0-9F91AE2DDD4C}
+ * @par Attributes
+ *    none
+ * @par Version
+ *    0.3
+ *    
+ * @brief 
+ *    Primary parser implementation.
+ *    
+ * This object may be created externally (@tt CoCreateInstance) but will not feature logging in
+ * that case. When created within Voodoo/Core (automatically performed by CVoodooCore on init), it
+ * will be linked to an IVoodooLogger and can dump debug information on parsing.
+ */
 class ATL_NO_VTABLE CVoodooParser :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooParser, &CLSID_VoodooParser>,
-	public IDispatchImpl<IVoodooParser, &IID_IVoodooParser, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooParser, &IID_IVoodooParser, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
 	CVoodooParser();

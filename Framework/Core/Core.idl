@@ -291,6 +291,9 @@ interface IVoodooParser : IDispatch{
     [id(2)] HRESULT RemoveVariable([in] BSTR pName);
     [id(3)] HRESULT Parse([in] BSTR pString, [in, defaultvalue(PF_None)] EnumType Flags, [out, retval] LPBSTR pParsed);
 };
+
+// --------------------------------------------------
+// Shader interfaces
 [
 	object,
 	uuid(8C26CEBA-45AD-4382-BEA9-EDBB2F446B21),
@@ -298,9 +301,6 @@ interface IVoodooParser : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-
-// --------------------------------------------------
-// Shader interfaces
 interface IVoodooShader : IDispatch{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
@@ -526,7 +526,7 @@ library Voodoo_Core
 	{
 		[default] interface IComponentRegistrar;
 	};
-	[		
+	[
 		uuid(C50C9C7D-7E66-40ED-B5FD-BE7135DA40BF)	
 	]
 	coclass VoodooCore
@@ -576,21 +576,21 @@ library Voodoo_Core
 		[default] interface IVoodooParameter;
 	};
 	[		
-		uuid(7C6B6D83-F882-4954-952B-F5689DA3D4D7), noncreatable		
+		uuid(7C6B6D83-F882-4954-952B-F5689DA3D4D7)	
 	]
 	coclass VoodooLogger
 	{
 		[default] interface IVoodooLogger;
 	};
 	[		
-		uuid(66063841-6A4E-4D12-A186-5319762EFEB2), noncreatable		
+		uuid(66063841-6A4E-4D12-A186-5319762EFEB2)	
 	]
 	coclass VoodooAdapter
 	{
 		[default] interface IVoodooAdapter;
 	};
 	[		
-		uuid(14CC5267-85B7-41B2-A0DC-C69DDEA9E97C), noncreatable		
+		uuid(14CC5267-85B7-41B2-A0DC-C69DDEA9E97C)	
 	]
 	coclass VoodooFileSystem
 	{
@@ -611,7 +611,7 @@ library Voodoo_Core
 		[default] interface IVoodooImage;
 	};
 	[		
-		uuid(04666805-E086-4104-BCC6-9A0C7FADB924), noncreatable		
+		uuid(04666805-E086-4104-BCC6-9A0C7FADB924)		
 	]
 	coclass VoodooHookSystem
 	{

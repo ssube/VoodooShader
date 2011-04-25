@@ -21,31 +21,6 @@
 
 #pragma once
 
-/**
- * @par Interface
- *    IID_IVoodooCore
- * @par GUID
- *    {6D183074-9127-4615-8366-02587BAFE38C}
- *
- * @brief Can create, primary (core) class.
- * 
- * Primary core interface for Voodoo, base for all other functions. Acts as a kind of meta-factory,
- * able to generate a number of other objects. In particular, handles compiling and standard linking
- * of shaders.
- * 
- * @note Requires a Cg context be provided before shader-related functions will work.
- **/
-/**
- * @par Interface
- *    IID_IVoodooParser
- * @par GUID
- *    {B375BC6B-5A6C-4B8B-888B-A937BA3814FD}
- *    
- * @brief Can create, string parser.
- *    
- * Simple string parser interface.
- **/
-
 /** 
  * This file is the public-facing header for the Voodoo Shader Framework (Voodoo/Core module).
  * 

@@ -1,20 +1,73 @@
-// VoodooShader.h : Declaration of the CVoodooShader
+/**************************************************************************************************\
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify it under the terms of the 
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program; 
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * Boston, MA  02110-1301 US
+ *
+ * Support and more information may be found at http://www.voodooshader.com, or by contacting the
+ * developer at peachykeen@voodooshader.com
+\**************************************************************************************************/
 
 #pragma once
-#include "Core_i.h"
-#include "resource.h"       // main symbols
-#include <comsvcs.h>
 
 #include "Common.hpp"
 
 using namespace ATL;
 
-// CVoodooShader
+/**
+ * @struct IVoodooShader
+ * 
+ * @par IID/CLSID
+ *    @ref IID_IVoodooShader
+ * @par GUID
+ *    {8C26CEBA-45AD-4382-BEA9-EDBB2F446B21}
+ * @par Attributes
+ *    object, dual, nonextensible, pointer_default(unique)
+ * 
+ * @brief 
+ *    Top-level shader object, encapsulates an entire effect tree.
+ *    
+ * Provides the shader loader and linker, as well as access to the generated tree of effect
+ * components.
+ * 
+ * @sa @ref page_shaders
+ **/
 
+/**
+ * @class CVoodooShader
+ * 
+ * @par Interface
+ *    @ref IVoodooShader
+ * @par IID/CLSID
+ *    @ref CLSID_VoodooShader
+ * @par GUID
+ *    {9E6F15CB-5B03-4BD8-9D04-B27D576C3975}
+ * @par Attributes
+ *    noncreatable
+ * @par Version
+ *    0.3
+ *    
+ * @brief 
+ *    Top-level shader object, encapsulates an entire effect tree.
+ *    
+ * Complete shader loader and linker using Cg, created from @ref IVoodooCore::CreateShader() 
+ * (the file given is loaded and compiled as a Cg effect). 
+ */
 class ATL_NO_VTABLE CVoodooShader :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooShader, &CLSID_VoodooShader>,
-	public IDispatchImpl<IVoodooShader, &IID_IVoodooShader, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooShader, &IID_IVoodooShader, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
 	CVoodooShader();
