@@ -255,7 +255,7 @@ interface IVoodooTexture;
 // Global interfaces (generic framework).
 [
 	object,
-	uuid(6D183074-9127-4615-8366-02587BAFE38C),
+	uuid(1d3d7f86-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -281,7 +281,7 @@ interface IVoodooCore : IDispatch{
 };
 [
 	object,
-	uuid(B375BC6B-5A6C-4B8B-888B-A937BA3814FD),
+	uuid(1d3d7f87-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -296,7 +296,7 @@ interface IVoodooParser : IDispatch{
 // Shader interfaces
 [
 	object,
-	uuid(8C26CEBA-45AD-4382-BEA9-EDBB2F446B21),
+	uuid(1d3d7f88-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -315,7 +315,7 @@ interface IVoodooShader : IDispatch{
 
 [
 	object,
-	uuid(B0D5E12B-2A58-4AF3-BD0A-A41A3968AB36),
+	uuid(1d3d7f89-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -331,7 +331,7 @@ interface IVoodooTechnique : IDispatch{
 };
 [
 	object,
-	uuid(7C231D9E-146B-40CF-9F39-A4D3513DD7F7),
+	uuid(1d3d7f8a-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -350,7 +350,7 @@ interface IVoodooPass : IDispatch{
 // Shader-related data containers.
 [
 	object,
-	uuid(164A33FD-E80D-4666-AE93-298B33020986),
+	uuid(1d3d7f8b-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -362,7 +362,7 @@ interface IVoodooTexture : IDispatch{
 };
 [
 	object,
-	uuid(6AB220A5-4579-441E-9060-4AF7535D6601),
+	uuid(1d3d7f8c-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -389,7 +389,7 @@ interface IVoodooParameter : IDispatch{
 
 [
 	object,
-	uuid(59C2FE67-A7EC-48B2-982E-9707A3840259),
+	uuid(1d3d7f8d-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -414,7 +414,7 @@ interface IVoodooAdapter : IDispatch{
 
 [
 	object,
-	uuid(4E25F9D4-87D0-4CE8-84C0-B72225336DA3),
+	uuid(1d3d7f8e-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -429,7 +429,7 @@ interface IVoodooHookSystem : IDispatch{
 // Logger interface
 [
 	object,
-	uuid(D26A5521-3E3D-4BD9-8A75-1AD5014D2479),
+	uuid(1d3d7f8f-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -451,7 +451,7 @@ interface IVoodooLogger : IDispatch{
 // FileSystem interfaces
 [
 	object,
-	uuid(2ADFD66B-2C4F-4172-823F-47D480BF8523),
+	uuid(1d3d7f90-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -466,7 +466,7 @@ interface IVoodooFileSystem : IDispatch{
 
 [
 	object,
-	uuid(35068CA2-B06B-48DF-ADAB-BC1FDA163C1F),
+	uuid(1d3d7f91-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -481,7 +481,7 @@ interface IVoodooFile : IDispatch{
 
 [
 	object,
-	uuid(8B74AE58-98A2-4597-B963-4605F03A86D3),
+	uuid(1d3d7f92-6f32-11e0-8ac0-005056c00000),
 	dual,
 	nonextensible,
 	pointer_default(unique)
@@ -493,7 +493,8 @@ interface IVoodooImage : IVoodooFile{
 
 // --------------------------------------------------
 // Internal Voodoo/Core interfaces and coclasses.
-// These MUST NOT compile in external projects.
+// These MUST NOT compile into external projects.
+// (this file should not be included externally)
 #ifdef VOODOO_INTERNAL
 [
 	object,
@@ -512,7 +513,7 @@ interface IComponentRegistrar : IDispatch
 };
 
 [
-	uuid(74838A0A-2645-4638-9AFF-B45ABF5B1365),
+	uuid(1d3d7f85-6f32-11e0-8ac0-005056c00000),
 	version(0.3),
 	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{5F3D58FE-A84D-4E15-9AAA-878EAC2E4BED}")
 ]
@@ -527,95 +528,95 @@ library Voodoo_Core
 		[default] interface IComponentRegistrar;
 	};
 	[
-		uuid(C50C9C7D-7E66-40ED-B5FD-BE7135DA40BF)	
+		uuid(1d3d7fa3-6f32-11e0-8ac0-005056c00000)	
 	]
 	coclass VoodooCore
 	{
 		[default] interface IVoodooCore;
 	};
 	[		
-		uuid(F4F858F0-C357-4C67-8FB0-9F91AE2DDD4C)		
+		uuid(1d3d7fa4-6f32-11e0-8ac0-005056c00000)		
 	]
 	coclass VoodooParser
 	{
 		[default] interface IVoodooParser;
 	};
 	[		
-		uuid(9E6F15CB-5B03-4BD8-9D04-B27D576C3975), noncreatable		
+		uuid(1d3d7fa5-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
 	coclass VoodooShader
 	{
 		[default] interface IVoodooShader;
 	};
 	[		
-		uuid(1401CE59-BC88-4B38-A34E-0E478CEFD7A8), noncreatable		
+		uuid(1d3d7fa6-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
 	coclass VoodooTechnique
 	{
 		[default] interface IVoodooTechnique;
 	};
 	[		
-		uuid(9B99881A-821B-4300-8C88-E86FFD787F8B), noncreatable		
+		uuid(1d3d7fa7-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
 	coclass VoodooPass
 	{
 		[default] interface IVoodooPass;
 	};
 	[		
-		uuid(E2FC29A5-4B54-4720-A3AD-2E86255D2138), noncreatable		
+		uuid(1d3d7fa8-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
 	coclass VoodooTexture
 	{
 		[default] interface IVoodooTexture;
 	};
 	[		
-		uuid(5190BCB1-B6E5-4611-86B6-C12EF24D6870), noncreatable		
+		uuid(1d3d7fa9-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
 	coclass VoodooParameter
 	{
 		[default] interface IVoodooParameter;
 	};
 	[		
-		uuid(7C6B6D83-F882-4954-952B-F5689DA3D4D7)	
-	]
-	coclass VoodooLogger
-	{
-		[default] interface IVoodooLogger;
-	};
-	[		
-		uuid(66063841-6A4E-4D12-A186-5319762EFEB2)	
+		uuid(1d3d7faa-6f32-11e0-8ac0-005056c00000)	
 	]
 	coclass VoodooAdapter
 	{
 		[default] interface IVoodooAdapter;
 	};
 	[		
-		uuid(14CC5267-85B7-41B2-A0DC-C69DDEA9E97C)	
+		uuid(1d3d7fab-6f32-11e0-8ac0-005056c00000)		
+	]
+	coclass VoodooHookSystem
+	{
+		[default] interface IVoodooHookSystem;
+	};
+	[		
+		uuid(1d3d7fac-6f32-11e0-8ac0-005056c00000)	
+	]
+	coclass VoodooLogger
+	{
+		[default] interface IVoodooLogger;
+	};
+	[		
+		uuid(1d3d7fad-6f32-11e0-8ac0-005056c00000)	
 	]
 	coclass VoodooFileSystem
 	{
 		[default] interface IVoodooFileSystem;
 	};
 	[		
-		uuid(26747ECA-9219-4829-B448-4CD7C46534C0), noncreatable		
+		uuid(1d3d7fae-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
 	coclass VoodooFile
 	{
 		[default] interface IVoodooFile;
 	};
 	[		
-		uuid(EAB336C3-CB16-4731-8CD2-A6F691FB5E18), noncreatable		
+		uuid(1d3d7faf-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
 	coclass VoodooImage
 	{
 		[default] interface IVoodooImage;
-	};
-	[		
-		uuid(04666805-E086-4104-BCC6-9A0C7FADB924)		
-	]
-	coclass VoodooHookSystem
-	{
-		[default] interface IVoodooHookSystem;
 	};
 };
 #endif /*VOODOO_INTERNAL*/
