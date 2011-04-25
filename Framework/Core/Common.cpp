@@ -1,14 +1,16 @@
 
 #include "stdafx.h"
 
-#include "Common.hpp"
+#include "Common.cpp"
 
-const HRESULT E_BADTHING     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0000);
-const HRESULT E_INVALIDCFG   = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0100);
-const HRESULT E_BADCLSID     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0200);
-const HRESULT E_DUPNAME      = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0300);
-const HRESULT E_NOT_FOUND    = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0400);
-const HRESULT S_NOT_FOUND    = MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_ITF, 0x0400);
+// 0b1nnnnnnn is a library-level code. 0b0nnnnnnn is interface-level. This works around
+// the facility restriction.
+const HRESULT E_BADTHING     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8000);
+const HRESULT E_INVALIDCFG   = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8001);
+const HRESULT E_BADCLSID     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8002);
+const HRESULT E_DUPNAME      = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8003);
+const HRESULT E_NOT_FOUND    = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8004);
+const HRESULT S_NOT_FOUND    = MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_ITF, 0x8004);
 
 // IVoodooCore
 const HRESULT E_NOTINIT      = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0001);
@@ -67,22 +69,6 @@ CGparameter WINAPI CreateVirtualParameter(IVoodooCore * pCore, ParameterType Typ
     cgcontext = (CGcontext)V_BYREF(&vc);
 
     return cgCreateParameter(cgcontext, cgtype);
-}
-
-HRESULT WINAPI LogMsg(IVoodooLogger * pLogger, DWORD Level, LPWSTR pModule, LPWSTR pMsg, ...)
-{
-    VARIANT v;
-    VariantInit(&v);
-    V_VT(&v) = VT_BYREF;
-
-    va_list args;
-    va_start(args, pModule);
-
-    V_BYREF(&v) = args;
-    HRESULT hr = pLogger->LogList(Level, pModule, pMsg, v);
-
-    va_end(args);
-    return hr;
 }
 
 CGtype WINAPI ToCgType(ParameterType Type)

@@ -43,6 +43,7 @@ Thumbs.db
 *.opensdf
 *.lib
 *.sbr
+*.vs10x
 obj/
 _ReSharper*/
 [Tt]est[Rr]esult*

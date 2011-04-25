@@ -5,8 +5,6 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
-#include "Common.hpp"
-
 using namespace ATL;
 
 // CVoodooFile

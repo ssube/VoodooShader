@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "VoodooTechnique.h"
 
-#include "Common.hpp"
+
 
 
 // CVoodooTechnique
@@ -107,7 +107,7 @@ STDMETHODIMP CVoodooTechnique::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
-        *ppCore->AddRef();
+        (*ppCore)->AddRef();
         return S_OK;
     }
 }
@@ -119,7 +119,7 @@ STDMETHODIMP CVoodooTechnique::get_Target(IVoodooTexture ** ppTexture)
         return E_INVALIDARG;
     } else {
         *ppTexture = m_Target;
-        *ppTexture->AddRef();
+        (*ppTexture)->AddRef();
         return S_OK;
     }
 }
@@ -145,7 +145,7 @@ STDMETHODIMP CVoodooTechnique::GetPass(INT Number, IVoodooPass **ppPass)
     } else {
         CComPtr<IVoodooPass> pass = m_Passes.GetAt(Number);
         *ppPass = pass;
-        *ppPass->AddRef();
+        (*ppPass)->AddRef();
         return S_OK;
     }
 }
@@ -157,7 +157,7 @@ STDMETHODIMP CVoodooTechnique::get_Shader(IVoodooShader **ppShader)
         return E_INVALIDARG;
     } else {
         *ppShader = m_Shader;
-        *ppShader->AddRef();
+        (*ppShader)->AddRef();
         return S_OK;
     }
 }

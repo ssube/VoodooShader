@@ -13,6 +13,8 @@ BOOL WINAPI DllMain
 
     if ( Reason == DLL_PROCESS_ATTACH )
     {
+        ZeroMemory(gInitParams);
+
         bool init = true;
         init &= GetRunRoot();
         init &= GetLoader(hInst);
@@ -23,7 +25,6 @@ BOOL WINAPI DllMain
 }
 
 // Support functions
-
 
 /**
  * Most DirectX libraries use an identical loading function, with only the name varying.

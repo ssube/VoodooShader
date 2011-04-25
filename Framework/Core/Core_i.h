@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Sat Apr 23 21:38:20 2011
+/* at Sun Apr 24 19:00:00 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -44,18 +44,6 @@
 #endif
 
 /* Forward Declarations */ 
-
-#ifndef __IComponentRegistrar_FWD_DEFINED__
-#define __IComponentRegistrar_FWD_DEFINED__
-typedef interface IComponentRegistrar IComponentRegistrar;
-#endif 	/* __IComponentRegistrar_FWD_DEFINED__ */
-
-
-#ifndef __IVoodooAdapter_FWD_DEFINED__
-#define __IVoodooAdapter_FWD_DEFINED__
-typedef interface IVoodooAdapter IVoodooAdapter;
-#endif 	/* __IVoodooAdapter_FWD_DEFINED__ */
-
 
 #ifndef __IVoodooCore_FWD_DEFINED__
 #define __IVoodooCore_FWD_DEFINED__
@@ -99,6 +87,18 @@ typedef interface IVoodooParameter IVoodooParameter;
 #endif 	/* __IVoodooParameter_FWD_DEFINED__ */
 
 
+#ifndef __IVoodooAdapter_FWD_DEFINED__
+#define __IVoodooAdapter_FWD_DEFINED__
+typedef interface IVoodooAdapter IVoodooAdapter;
+#endif 	/* __IVoodooAdapter_FWD_DEFINED__ */
+
+
+#ifndef __IVoodooHookSystem_FWD_DEFINED__
+#define __IVoodooHookSystem_FWD_DEFINED__
+typedef interface IVoodooHookSystem IVoodooHookSystem;
+#endif 	/* __IVoodooHookSystem_FWD_DEFINED__ */
+
+
 #ifndef __IVoodooLogger_FWD_DEFINED__
 #define __IVoodooLogger_FWD_DEFINED__
 typedef interface IVoodooLogger IVoodooLogger;
@@ -123,10 +123,10 @@ typedef interface IVoodooImage IVoodooImage;
 #endif 	/* __IVoodooImage_FWD_DEFINED__ */
 
 
-#ifndef __IVoodooHookSystem_FWD_DEFINED__
-#define __IVoodooHookSystem_FWD_DEFINED__
-typedef interface IVoodooHookSystem IVoodooHookSystem;
-#endif 	/* __IVoodooHookSystem_FWD_DEFINED__ */
+#ifndef __IComponentRegistrar_FWD_DEFINED__
+#define __IComponentRegistrar_FWD_DEFINED__
+typedef interface IComponentRegistrar IComponentRegistrar;
+#endif 	/* __IComponentRegistrar_FWD_DEFINED__ */
 
 
 #ifndef __CompReg_FWD_DEFINED__
@@ -309,6 +309,7 @@ extern "C"{
 /* interface __MIDL_itf_Core_0000_0000 */
 /* [local] */ 
 
+#include "Common.hpp"
 typedef /* [public][public][public][public][public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0001
     {	TF_Unknown	= 0,
@@ -517,6 +518,8 @@ typedef /* [public][public][public][public] */ struct __MIDL___MIDL_itf_Core_000
 
 typedef /* [full] */ Function *FunctionPtr;
 
+typedef DWORD EnumType;
+
 
 
 
@@ -534,454 +537,6 @@ typedef /* [full] */ Function *FunctionPtr;
 
 extern RPC_IF_HANDLE __MIDL_itf_Core_0000_0000_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_Core_0000_0000_v0_0_s_ifspec;
-
-#ifndef __IComponentRegistrar_INTERFACE_DEFINED__
-#define __IComponentRegistrar_INTERFACE_DEFINED__
-
-/* interface IComponentRegistrar */
-/* [unique][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IComponentRegistrar;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("a817e7a2-43fa-11d0-9e44-00aa00b6770a")
-    IComponentRegistrar : public IDispatch
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Attach( 
-            /* [in] */ BSTR bstrPath) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RegisterAll( void) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE UnregisterAll( void) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetComponents( 
-            /* [out] */ SAFEARRAY * *pbstrCLSIDs,
-            /* [out] */ SAFEARRAY * *pbstrDescriptions) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RegisterComponent( 
-            /* [in] */ BSTR bstrCLSID) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE UnregisterComponent( 
-            /* [in] */ BSTR bstrCLSID) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IComponentRegistrarVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IComponentRegistrar * This,
-            /* [in] */ REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            __RPC__deref_out  void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IComponentRegistrar * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IComponentRegistrar * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IComponentRegistrar * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IComponentRegistrar * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IComponentRegistrar * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IComponentRegistrar * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Attach )( 
-            IComponentRegistrar * This,
-            /* [in] */ BSTR bstrPath);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RegisterAll )( 
-            IComponentRegistrar * This);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterAll )( 
-            IComponentRegistrar * This);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetComponents )( 
-            IComponentRegistrar * This,
-            /* [out] */ SAFEARRAY * *pbstrCLSIDs,
-            /* [out] */ SAFEARRAY * *pbstrDescriptions);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RegisterComponent )( 
-            IComponentRegistrar * This,
-            /* [in] */ BSTR bstrCLSID);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterComponent )( 
-            IComponentRegistrar * This,
-            /* [in] */ BSTR bstrCLSID);
-        
-        END_INTERFACE
-    } IComponentRegistrarVtbl;
-
-    interface IComponentRegistrar
-    {
-        CONST_VTBL struct IComponentRegistrarVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IComponentRegistrar_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define IComponentRegistrar_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define IComponentRegistrar_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#define IComponentRegistrar_GetTypeInfoCount(This,pctinfo)	\
-    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
-
-#define IComponentRegistrar_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
-
-#define IComponentRegistrar_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
-
-#define IComponentRegistrar_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
-
-
-#define IComponentRegistrar_Attach(This,bstrPath)	\
-    ( (This)->lpVtbl -> Attach(This,bstrPath) ) 
-
-#define IComponentRegistrar_RegisterAll(This)	\
-    ( (This)->lpVtbl -> RegisterAll(This) ) 
-
-#define IComponentRegistrar_UnregisterAll(This)	\
-    ( (This)->lpVtbl -> UnregisterAll(This) ) 
-
-#define IComponentRegistrar_GetComponents(This,pbstrCLSIDs,pbstrDescriptions)	\
-    ( (This)->lpVtbl -> GetComponents(This,pbstrCLSIDs,pbstrDescriptions) ) 
-
-#define IComponentRegistrar_RegisterComponent(This,bstrCLSID)	\
-    ( (This)->lpVtbl -> RegisterComponent(This,bstrCLSID) ) 
-
-#define IComponentRegistrar_UnregisterComponent(This,bstrCLSID)	\
-    ( (This)->lpVtbl -> UnregisterComponent(This,bstrCLSID) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IComponentRegistrar_INTERFACE_DEFINED__ */
-
-
-#ifndef __IVoodooAdapter_INTERFACE_DEFINED__
-#define __IVoodooAdapter_INTERFACE_DEFINED__
-
-/* interface IVoodooAdapter */
-/* [unique][nonextensible][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IVoodooAdapter;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("59C2FE67-A7EC-48B2-982E-9707A3840259")
-    IVoodooAdapter : public IDispatch
-    {
-    public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-            /* [retval][out] */ IVoodooCore **ppCore) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadPass( 
-            /* [in] */ IVoodooPass *pPass) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE UnloadPass( 
-            /* [in] */ IVoodooPass *pPass) = 0;
-        
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Pass( 
-            /* [retval][out] */ IVoodooPass **ppPass) = 0;
-        
-        virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Pass( 
-            /* [in] */ IVoodooPass *pPass) = 0;
-        
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Target( 
-            /* [retval][out] */ IVoodooTexture **ppTarget) = 0;
-        
-        virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Target( 
-            /* [in] */ IVoodooTexture *pTarget) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
-            /* [in] */ BSTR pName,
-            /* [in] */ TextureDesc Description,
-            /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadTexture( 
-            /* [in] */ IVoodooImage *pImage,
-            /* [in] */ TextureRegion Region,
-            /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
-            /* [in] */ int Vertexes,
-            /* [in] */ SAFEARRAY * pVertexData) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawShader( 
-            /* [in] */ IVoodooShader *pShader) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
-            /* [in] */ IVoodooParameter *pParameter) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetProperty( 
-            /* [in] */ BSTR pName,
-            /* [out][in] */ VARIANT *pData) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ConnectTexture( 
-            /* [in] */ IVoodooParameter *pParameter,
-            /* [in] */ IVoodooTexture *pTexture) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE HandleError( 
-            /* [in] */ VARIANT pContext,
-            /* [in] */ DWORD Error,
-            /* [in] */ IVoodooCore *pCore) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IVoodooAdapterVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IVoodooAdapter * This,
-            /* [in] */ REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            __RPC__deref_out  void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IVoodooAdapter * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IVoodooAdapter * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IVoodooAdapter * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IVoodooAdapter * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IVoodooAdapter * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IVoodooAdapter * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
-            IVoodooAdapter * This,
-            /* [retval][out] */ IVoodooCore **ppCore);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *LoadPass )( 
-            IVoodooAdapter * This,
-            /* [in] */ IVoodooPass *pPass);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *UnloadPass )( 
-            IVoodooAdapter * This,
-            /* [in] */ IVoodooPass *pPass);
-        
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pass )( 
-            IVoodooAdapter * This,
-            /* [retval][out] */ IVoodooPass **ppPass);
-        
-        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Pass )( 
-            IVoodooAdapter * This,
-            /* [in] */ IVoodooPass *pPass);
-        
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Target )( 
-            IVoodooAdapter * This,
-            /* [retval][out] */ IVoodooTexture **ppTarget);
-        
-        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Target )( 
-            IVoodooAdapter * This,
-            /* [in] */ IVoodooTexture *pTarget);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateTexture )( 
-            IVoodooAdapter * This,
-            /* [in] */ BSTR pName,
-            /* [in] */ TextureDesc Description,
-            /* [retval][out] */ IVoodooTexture **ppTexture);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *LoadTexture )( 
-            IVoodooAdapter * This,
-            /* [in] */ IVoodooImage *pImage,
-            /* [in] */ TextureRegion Region,
-            /* [retval][out] */ IVoodooTexture **ppTexture);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *DrawGeometry )( 
-            IVoodooAdapter * This,
-            /* [in] */ int Vertexes,
-            /* [in] */ SAFEARRAY * pVertexData);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *DrawShader )( 
-            IVoodooAdapter * This,
-            /* [in] */ IVoodooShader *pShader);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ApplyParameter )( 
-            IVoodooAdapter * This,
-            /* [in] */ IVoodooParameter *pParameter);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
-            IVoodooAdapter * This,
-            /* [in] */ BSTR pName,
-            /* [out][in] */ VARIANT *pData);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConnectTexture )( 
-            IVoodooAdapter * This,
-            /* [in] */ IVoodooParameter *pParameter,
-            /* [in] */ IVoodooTexture *pTexture);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *HandleError )( 
-            IVoodooAdapter * This,
-            /* [in] */ VARIANT pContext,
-            /* [in] */ DWORD Error,
-            /* [in] */ IVoodooCore *pCore);
-        
-        END_INTERFACE
-    } IVoodooAdapterVtbl;
-
-    interface IVoodooAdapter
-    {
-        CONST_VTBL struct IVoodooAdapterVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IVoodooAdapter_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define IVoodooAdapter_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define IVoodooAdapter_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#define IVoodooAdapter_GetTypeInfoCount(This,pctinfo)	\
-    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
-
-#define IVoodooAdapter_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
-
-#define IVoodooAdapter_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
-
-#define IVoodooAdapter_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
-
-
-#define IVoodooAdapter_get_Core(This,ppCore)	\
-    ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
-
-#define IVoodooAdapter_LoadPass(This,pPass)	\
-    ( (This)->lpVtbl -> LoadPass(This,pPass) ) 
-
-#define IVoodooAdapter_UnloadPass(This,pPass)	\
-    ( (This)->lpVtbl -> UnloadPass(This,pPass) ) 
-
-#define IVoodooAdapter_get_Pass(This,ppPass)	\
-    ( (This)->lpVtbl -> get_Pass(This,ppPass) ) 
-
-#define IVoodooAdapter_put_Pass(This,pPass)	\
-    ( (This)->lpVtbl -> put_Pass(This,pPass) ) 
-
-#define IVoodooAdapter_get_Target(This,ppTarget)	\
-    ( (This)->lpVtbl -> get_Target(This,ppTarget) ) 
-
-#define IVoodooAdapter_put_Target(This,pTarget)	\
-    ( (This)->lpVtbl -> put_Target(This,pTarget) ) 
-
-#define IVoodooAdapter_CreateTexture(This,pName,Description,ppTexture)	\
-    ( (This)->lpVtbl -> CreateTexture(This,pName,Description,ppTexture) ) 
-
-#define IVoodooAdapter_LoadTexture(This,pImage,Region,ppTexture)	\
-    ( (This)->lpVtbl -> LoadTexture(This,pImage,Region,ppTexture) ) 
-
-#define IVoodooAdapter_DrawGeometry(This,Vertexes,pVertexData)	\
-    ( (This)->lpVtbl -> DrawGeometry(This,Vertexes,pVertexData) ) 
-
-#define IVoodooAdapter_DrawShader(This,pShader)	\
-    ( (This)->lpVtbl -> DrawShader(This,pShader) ) 
-
-#define IVoodooAdapter_ApplyParameter(This,pParameter)	\
-    ( (This)->lpVtbl -> ApplyParameter(This,pParameter) ) 
-
-#define IVoodooAdapter_SetProperty(This,pName,pData)	\
-    ( (This)->lpVtbl -> SetProperty(This,pName,pData) ) 
-
-#define IVoodooAdapter_ConnectTexture(This,pParameter,pTexture)	\
-    ( (This)->lpVtbl -> ConnectTexture(This,pParameter,pTexture) ) 
-
-#define IVoodooAdapter_HandleError(This,pContext,Error,pCore)	\
-    ( (This)->lpVtbl -> HandleError(This,pContext,Error,pCore) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IVoodooAdapter_INTERFACE_DEFINED__ */
-
 
 #ifndef __IVoodooCore_INTERFACE_DEFINED__
 #define __IVoodooCore_INTERFACE_DEFINED__
@@ -1032,7 +587,7 @@ EXTERN_C const IID IID_IVoodooCore;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateParameter( 
             /* [in] */ BSTR pName,
-            /* [in] */ DWORD Type,
+            /* [in] */ EnumType Type,
             /* [retval][out] */ IVoodooParameter **ppParameter) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
@@ -1052,11 +607,11 @@ EXTERN_C const IID IID_IVoodooCore;
             /* [in] */ BSTR pName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetStageTexture( 
-            /* [in] */ DWORD Stage,
+            /* [in] */ EnumType Stage,
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetStageTexture( 
-            /* [in] */ DWORD Stage,
+            /* [in] */ EnumType Stage,
             /* [in] */ IVoodooTexture *pTexture) = 0;
         
     };
@@ -1153,7 +708,7 @@ EXTERN_C const IID IID_IVoodooCore;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateParameter )( 
             IVoodooCore * This,
             /* [in] */ BSTR pName,
-            /* [in] */ DWORD Type,
+            /* [in] */ EnumType Type,
             /* [retval][out] */ IVoodooParameter **ppParameter);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateTexture )( 
@@ -1178,12 +733,12 @@ EXTERN_C const IID IID_IVoodooCore;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetStageTexture )( 
             IVoodooCore * This,
-            /* [in] */ DWORD Stage,
+            /* [in] */ EnumType Stage,
             /* [retval][out] */ IVoodooTexture **ppTexture);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetStageTexture )( 
             IVoodooCore * This,
-            /* [in] */ DWORD Stage,
+            /* [in] */ EnumType Stage,
             /* [in] */ IVoodooTexture *pTexture);
         
         END_INTERFACE
@@ -1302,14 +857,14 @@ EXTERN_C const IID IID_IVoodooParser;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddVariable( 
             /* [in] */ BSTR pName,
             /* [in] */ BSTR pValue,
-            /* [defaultvalue][in] */ DWORD System = VT_Normal) = 0;
+            /* [defaultvalue][in] */ EnumType System = VT_Normal) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveVariable( 
             /* [in] */ BSTR pName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Parse( 
             /* [in] */ BSTR pString,
-            /* [defaultvalue][in] */ DWORD Flags,
+            /* [defaultvalue][in] */ EnumType Flags,
             /* [retval][out] */ LPBSTR pParsed) = 0;
         
     };
@@ -1365,7 +920,7 @@ EXTERN_C const IID IID_IVoodooParser;
             IVoodooParser * This,
             /* [in] */ BSTR pName,
             /* [in] */ BSTR pValue,
-            /* [defaultvalue][in] */ DWORD System);
+            /* [defaultvalue][in] */ EnumType System);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RemoveVariable )( 
             IVoodooParser * This,
@@ -1374,7 +929,7 @@ EXTERN_C const IID IID_IVoodooParser;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Parse )( 
             IVoodooParser * This,
             /* [in] */ BSTR pString,
-            /* [defaultvalue][in] */ DWORD Flags,
+            /* [defaultvalue][in] */ EnumType Flags,
             /* [retval][out] */ LPBSTR pParsed);
         
         END_INTERFACE
@@ -1852,7 +1407,7 @@ EXTERN_C const IID IID_IVoodooPass;
             /* [retval][out] */ IVoodooTechnique **ppTechnique) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgProgram( 
-            /* [in] */ DWORD Stage,
+            /* [in] */ EnumType Stage,
             /* [retval][out] */ VARIANT *pProgram) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgPass( 
@@ -1929,7 +1484,7 @@ EXTERN_C const IID IID_IVoodooPass;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCgProgram )( 
             IVoodooPass * This,
-            /* [in] */ DWORD Stage,
+            /* [in] */ EnumType Stage,
             /* [retval][out] */ VARIANT *pProgram);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CgPass )( 
@@ -2167,7 +1722,7 @@ EXTERN_C const IID IID_IVoodooParameter;
             /* [retval][out] */ IVoodooCore **ppCore) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [retval][out] */ DWORD *pType) = 0;
+            /* [retval][out] */ EnumType *pType) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Virtual( 
             /* [retval][out] */ boolean *pVirtual) = 0;
@@ -2255,7 +1810,7 @@ EXTERN_C const IID IID_IVoodooParameter;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IVoodooParameter * This,
-            /* [retval][out] */ DWORD *pType);
+            /* [retval][out] */ EnumType *pType);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Virtual )( 
             IVoodooParameter * This,
@@ -2376,6 +1931,438 @@ EXTERN_C const IID IID_IVoodooParameter;
 #endif 	/* __IVoodooParameter_INTERFACE_DEFINED__ */
 
 
+#ifndef __IVoodooAdapter_INTERFACE_DEFINED__
+#define __IVoodooAdapter_INTERFACE_DEFINED__
+
+/* interface IVoodooAdapter */
+/* [unique][nonextensible][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IVoodooAdapter;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("59C2FE67-A7EC-48B2-982E-9707A3840259")
+    IVoodooAdapter : public IDispatch
+    {
+    public:
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+            /* [retval][out] */ IVoodooCore **ppCore) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadPass( 
+            /* [in] */ IVoodooPass *pPass) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE UnloadPass( 
+            /* [in] */ IVoodooPass *pPass) = 0;
+        
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Pass( 
+            /* [retval][out] */ IVoodooPass **ppPass) = 0;
+        
+        virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Pass( 
+            /* [in] */ IVoodooPass *pPass) = 0;
+        
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Target( 
+            /* [retval][out] */ IVoodooTexture **ppTarget) = 0;
+        
+        virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Target( 
+            /* [in] */ IVoodooTexture *pTarget) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
+            /* [in] */ BSTR pName,
+            /* [in] */ TextureDesc Description,
+            /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadTexture( 
+            /* [in] */ IVoodooImage *pImage,
+            /* [in] */ TextureRegion Region,
+            /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
+            /* [in] */ int Vertexes,
+            /* [in] */ SAFEARRAY * pVertexData) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawShader( 
+            /* [in] */ IVoodooShader *pShader) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ApplyParameter( 
+            /* [in] */ IVoodooParameter *pParameter) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetProperty( 
+            /* [in] */ BSTR pName,
+            /* [out][in] */ VARIANT *pData) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ConnectTexture( 
+            /* [in] */ IVoodooParameter *pParameter,
+            /* [in] */ IVoodooTexture *pTexture) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE HandleError( 
+            /* [in] */ VARIANT pContext,
+            /* [in] */ EnumType Error,
+            /* [in] */ IVoodooCore *pCore) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IVoodooAdapterVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IVoodooAdapter * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IVoodooAdapter * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IVoodooAdapter * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IVoodooAdapter * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IVoodooAdapter * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IVoodooAdapter * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IVoodooAdapter * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
+            IVoodooAdapter * This,
+            /* [retval][out] */ IVoodooCore **ppCore);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *LoadPass )( 
+            IVoodooAdapter * This,
+            /* [in] */ IVoodooPass *pPass);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *UnloadPass )( 
+            IVoodooAdapter * This,
+            /* [in] */ IVoodooPass *pPass);
+        
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pass )( 
+            IVoodooAdapter * This,
+            /* [retval][out] */ IVoodooPass **ppPass);
+        
+        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Pass )( 
+            IVoodooAdapter * This,
+            /* [in] */ IVoodooPass *pPass);
+        
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Target )( 
+            IVoodooAdapter * This,
+            /* [retval][out] */ IVoodooTexture **ppTarget);
+        
+        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Target )( 
+            IVoodooAdapter * This,
+            /* [in] */ IVoodooTexture *pTarget);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateTexture )( 
+            IVoodooAdapter * This,
+            /* [in] */ BSTR pName,
+            /* [in] */ TextureDesc Description,
+            /* [retval][out] */ IVoodooTexture **ppTexture);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *LoadTexture )( 
+            IVoodooAdapter * This,
+            /* [in] */ IVoodooImage *pImage,
+            /* [in] */ TextureRegion Region,
+            /* [retval][out] */ IVoodooTexture **ppTexture);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *DrawGeometry )( 
+            IVoodooAdapter * This,
+            /* [in] */ int Vertexes,
+            /* [in] */ SAFEARRAY * pVertexData);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *DrawShader )( 
+            IVoodooAdapter * This,
+            /* [in] */ IVoodooShader *pShader);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ApplyParameter )( 
+            IVoodooAdapter * This,
+            /* [in] */ IVoodooParameter *pParameter);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
+            IVoodooAdapter * This,
+            /* [in] */ BSTR pName,
+            /* [out][in] */ VARIANT *pData);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConnectTexture )( 
+            IVoodooAdapter * This,
+            /* [in] */ IVoodooParameter *pParameter,
+            /* [in] */ IVoodooTexture *pTexture);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *HandleError )( 
+            IVoodooAdapter * This,
+            /* [in] */ VARIANT pContext,
+            /* [in] */ EnumType Error,
+            /* [in] */ IVoodooCore *pCore);
+        
+        END_INTERFACE
+    } IVoodooAdapterVtbl;
+
+    interface IVoodooAdapter
+    {
+        CONST_VTBL struct IVoodooAdapterVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IVoodooAdapter_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IVoodooAdapter_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IVoodooAdapter_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IVoodooAdapter_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IVoodooAdapter_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IVoodooAdapter_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IVoodooAdapter_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IVoodooAdapter_get_Core(This,ppCore)	\
+    ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
+
+#define IVoodooAdapter_LoadPass(This,pPass)	\
+    ( (This)->lpVtbl -> LoadPass(This,pPass) ) 
+
+#define IVoodooAdapter_UnloadPass(This,pPass)	\
+    ( (This)->lpVtbl -> UnloadPass(This,pPass) ) 
+
+#define IVoodooAdapter_get_Pass(This,ppPass)	\
+    ( (This)->lpVtbl -> get_Pass(This,ppPass) ) 
+
+#define IVoodooAdapter_put_Pass(This,pPass)	\
+    ( (This)->lpVtbl -> put_Pass(This,pPass) ) 
+
+#define IVoodooAdapter_get_Target(This,ppTarget)	\
+    ( (This)->lpVtbl -> get_Target(This,ppTarget) ) 
+
+#define IVoodooAdapter_put_Target(This,pTarget)	\
+    ( (This)->lpVtbl -> put_Target(This,pTarget) ) 
+
+#define IVoodooAdapter_CreateTexture(This,pName,Description,ppTexture)	\
+    ( (This)->lpVtbl -> CreateTexture(This,pName,Description,ppTexture) ) 
+
+#define IVoodooAdapter_LoadTexture(This,pImage,Region,ppTexture)	\
+    ( (This)->lpVtbl -> LoadTexture(This,pImage,Region,ppTexture) ) 
+
+#define IVoodooAdapter_DrawGeometry(This,Vertexes,pVertexData)	\
+    ( (This)->lpVtbl -> DrawGeometry(This,Vertexes,pVertexData) ) 
+
+#define IVoodooAdapter_DrawShader(This,pShader)	\
+    ( (This)->lpVtbl -> DrawShader(This,pShader) ) 
+
+#define IVoodooAdapter_ApplyParameter(This,pParameter)	\
+    ( (This)->lpVtbl -> ApplyParameter(This,pParameter) ) 
+
+#define IVoodooAdapter_SetProperty(This,pName,pData)	\
+    ( (This)->lpVtbl -> SetProperty(This,pName,pData) ) 
+
+#define IVoodooAdapter_ConnectTexture(This,pParameter,pTexture)	\
+    ( (This)->lpVtbl -> ConnectTexture(This,pParameter,pTexture) ) 
+
+#define IVoodooAdapter_HandleError(This,pContext,Error,pCore)	\
+    ( (This)->lpVtbl -> HandleError(This,pContext,Error,pCore) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IVoodooAdapter_INTERFACE_DEFINED__ */
+
+
+#ifndef __IVoodooHookSystem_INTERFACE_DEFINED__
+#define __IVoodooHookSystem_INTERFACE_DEFINED__
+
+/* interface IVoodooHookSystem */
+/* [unique][nonextensible][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IVoodooHookSystem;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("4E25F9D4-87D0-4CE8-84C0-B72225336DA3")
+    IVoodooHookSystem : public IDispatch
+    {
+    public:
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+            /* [retval][out] */ IVoodooCore **ppCore) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
+            /* [in] */ BSTR pName,
+            /* [in] */ FunctionPtr pSource,
+            /* [in] */ FunctionPtr pDest) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Remove( 
+            /* [in] */ BSTR pName) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveAll( void) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IVoodooHookSystemVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IVoodooHookSystem * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IVoodooHookSystem * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IVoodooHookSystem * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IVoodooHookSystem * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IVoodooHookSystem * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IVoodooHookSystem * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IVoodooHookSystem * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
+            IVoodooHookSystem * This,
+            /* [retval][out] */ IVoodooCore **ppCore);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
+            IVoodooHookSystem * This,
+            /* [in] */ BSTR pName,
+            /* [in] */ FunctionPtr pSource,
+            /* [in] */ FunctionPtr pDest);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
+            IVoodooHookSystem * This,
+            /* [in] */ BSTR pName);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RemoveAll )( 
+            IVoodooHookSystem * This);
+        
+        END_INTERFACE
+    } IVoodooHookSystemVtbl;
+
+    interface IVoodooHookSystem
+    {
+        CONST_VTBL struct IVoodooHookSystemVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IVoodooHookSystem_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IVoodooHookSystem_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IVoodooHookSystem_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IVoodooHookSystem_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IVoodooHookSystem_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IVoodooHookSystem_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IVoodooHookSystem_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IVoodooHookSystem_get_Core(This,ppCore)	\
+    ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
+
+#define IVoodooHookSystem_Add(This,pName,pSource,pDest)	\
+    ( (This)->lpVtbl -> Add(This,pName,pSource,pDest) ) 
+
+#define IVoodooHookSystem_Remove(This,pName)	\
+    ( (This)->lpVtbl -> Remove(This,pName) ) 
+
+#define IVoodooHookSystem_RemoveAll(This)	\
+    ( (This)->lpVtbl -> RemoveAll(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IVoodooHookSystem_INTERFACE_DEFINED__ */
+
+
 #ifndef __IVoodooLogger_INTERFACE_DEFINED__
 #define __IVoodooLogger_INTERFACE_DEFINED__
 
@@ -2403,22 +2390,22 @@ EXTERN_C const IID IID_IVoodooLogger;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Dump( void) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LogLevel( 
-            /* [retval][out] */ DWORD *pLevel) = 0;
+            /* [retval][out] */ EnumType *pLevel) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LogLevel( 
-            /* [in] */ DWORD Level) = 0;
+            /* [in] */ EnumType Level) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogModule( 
             /* [in] */ VersionStruct Module) = 0;
         
         virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE Log( 
-            /* [in] */ DWORD Level,
+            /* [in] */ EnumType Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
             /* [in] */ SAFEARRAY * pArgs) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogList( 
-            /* [in] */ DWORD Level,
+            /* [in] */ EnumType Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
             /* [in] */ VARIANT pList) = 0;
@@ -2495,11 +2482,11 @@ EXTERN_C const IID IID_IVoodooLogger;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogLevel )( 
             IVoodooLogger * This,
-            /* [retval][out] */ DWORD *pLevel);
+            /* [retval][out] */ EnumType *pLevel);
         
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogLevel )( 
             IVoodooLogger * This,
-            /* [in] */ DWORD Level);
+            /* [in] */ EnumType Level);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LogModule )( 
             IVoodooLogger * This,
@@ -2507,14 +2494,14 @@ EXTERN_C const IID IID_IVoodooLogger;
         
         /* [vararg][id] */ HRESULT ( STDMETHODCALLTYPE *Log )( 
             IVoodooLogger * This,
-            /* [in] */ DWORD Level,
+            /* [in] */ EnumType Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
             /* [in] */ SAFEARRAY * pArgs);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LogList )( 
             IVoodooLogger * This,
-            /* [in] */ DWORD Level,
+            /* [in] */ EnumType Level,
             /* [in] */ BSTR pModule,
             /* [in] */ BSTR pFormat,
             /* [in] */ VARIANT pList);
@@ -2791,7 +2778,7 @@ EXTERN_C const IID IID_IVoodooFile;
             /* [retval][out] */ LPBSTR pPath) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
-            /* [in] */ DWORD Mode) = 0;
+            /* [in] */ EnumType Mode) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
@@ -2858,7 +2845,7 @@ EXTERN_C const IID IID_IVoodooFile;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             IVoodooFile * This,
-            /* [in] */ DWORD Mode);
+            /* [in] */ EnumType Mode);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             IVoodooFile * This);
@@ -3013,7 +3000,7 @@ EXTERN_C const IID IID_IVoodooImage;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             IVoodooImage * This,
-            /* [in] */ DWORD Mode);
+            /* [in] */ EnumType Mode);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             IVoodooImage * This);
@@ -3107,66 +3094,70 @@ EXTERN_C const IID IID_IVoodooImage;
 #endif 	/* __IVoodooImage_INTERFACE_DEFINED__ */
 
 
-#ifndef __IVoodooHookSystem_INTERFACE_DEFINED__
-#define __IVoodooHookSystem_INTERFACE_DEFINED__
+#ifndef __IComponentRegistrar_INTERFACE_DEFINED__
+#define __IComponentRegistrar_INTERFACE_DEFINED__
 
-/* interface IVoodooHookSystem */
-/* [unique][nonextensible][dual][uuid][object] */ 
+/* interface IComponentRegistrar */
+/* [unique][dual][uuid][object] */ 
 
 
-EXTERN_C const IID IID_IVoodooHookSystem;
+EXTERN_C const IID IID_IComponentRegistrar;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("4E25F9D4-87D0-4CE8-84C0-B72225336DA3")
-    IVoodooHookSystem : public IDispatch
+    MIDL_INTERFACE("a817e7a2-43fa-11d0-9e44-00aa00b6770a")
+    IComponentRegistrar : public IDispatch
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-            /* [retval][out] */ IVoodooCore **ppCore) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Attach( 
+            /* [in] */ BSTR bstrPath) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ BSTR pName,
-            /* [in] */ FunctionPtr pSource,
-            /* [in] */ FunctionPtr pDest) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RegisterAll( void) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ BSTR pName) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE UnregisterAll( void) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveAll( void) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetComponents( 
+            /* [out] */ SAFEARRAY * *pbstrCLSIDs,
+            /* [out] */ SAFEARRAY * *pbstrDescriptions) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RegisterComponent( 
+            /* [in] */ BSTR bstrCLSID) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE UnregisterComponent( 
+            /* [in] */ BSTR bstrCLSID) = 0;
         
     };
     
 #else 	/* C style interface */
 
-    typedef struct IVoodooHookSystemVtbl
+    typedef struct IComponentRegistrarVtbl
     {
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IVoodooHookSystem * This,
+            IComponentRegistrar * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IVoodooHookSystem * This);
+            IComponentRegistrar * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            IVoodooHookSystem * This);
+            IComponentRegistrar * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IVoodooHookSystem * This,
+            IComponentRegistrar * This,
             /* [out] */ UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IVoodooHookSystem * This,
+            IComponentRegistrar * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IVoodooHookSystem * This,
+            IComponentRegistrar * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
@@ -3174,7 +3165,7 @@ EXTERN_C const IID IID_IVoodooHookSystem;
             /* [size_is][out] */ DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IVoodooHookSystem * This,
+            IComponentRegistrar * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -3184,29 +3175,35 @@ EXTERN_C const IID IID_IVoodooHookSystem;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
-            IVoodooHookSystem * This,
-            /* [retval][out] */ IVoodooCore **ppCore);
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Attach )( 
+            IComponentRegistrar * This,
+            /* [in] */ BSTR bstrPath);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
-            IVoodooHookSystem * This,
-            /* [in] */ BSTR pName,
-            /* [in] */ FunctionPtr pSource,
-            /* [in] */ FunctionPtr pDest);
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RegisterAll )( 
+            IComponentRegistrar * This);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
-            IVoodooHookSystem * This,
-            /* [in] */ BSTR pName);
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterAll )( 
+            IComponentRegistrar * This);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RemoveAll )( 
-            IVoodooHookSystem * This);
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetComponents )( 
+            IComponentRegistrar * This,
+            /* [out] */ SAFEARRAY * *pbstrCLSIDs,
+            /* [out] */ SAFEARRAY * *pbstrDescriptions);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RegisterComponent )( 
+            IComponentRegistrar * This,
+            /* [in] */ BSTR bstrCLSID);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterComponent )( 
+            IComponentRegistrar * This,
+            /* [in] */ BSTR bstrCLSID);
         
         END_INTERFACE
-    } IVoodooHookSystemVtbl;
+    } IComponentRegistrarVtbl;
 
-    interface IVoodooHookSystem
+    interface IComponentRegistrar
     {
-        CONST_VTBL struct IVoodooHookSystemVtbl *lpVtbl;
+        CONST_VTBL struct IComponentRegistrarVtbl *lpVtbl;
     };
 
     
@@ -3214,40 +3211,46 @@ EXTERN_C const IID IID_IVoodooHookSystem;
 #ifdef COBJMACROS
 
 
-#define IVoodooHookSystem_QueryInterface(This,riid,ppvObject)	\
+#define IComponentRegistrar_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooHookSystem_AddRef(This)	\
+#define IComponentRegistrar_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooHookSystem_Release(This)	\
+#define IComponentRegistrar_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooHookSystem_GetTypeInfoCount(This,pctinfo)	\
+#define IComponentRegistrar_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooHookSystem_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+#define IComponentRegistrar_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooHookSystem_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+#define IComponentRegistrar_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooHookSystem_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+#define IComponentRegistrar_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooHookSystem_get_Core(This,ppCore)	\
-    ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
+#define IComponentRegistrar_Attach(This,bstrPath)	\
+    ( (This)->lpVtbl -> Attach(This,bstrPath) ) 
 
-#define IVoodooHookSystem_Add(This,pName,pSource,pDest)	\
-    ( (This)->lpVtbl -> Add(This,pName,pSource,pDest) ) 
+#define IComponentRegistrar_RegisterAll(This)	\
+    ( (This)->lpVtbl -> RegisterAll(This) ) 
 
-#define IVoodooHookSystem_Remove(This,pName)	\
-    ( (This)->lpVtbl -> Remove(This,pName) ) 
+#define IComponentRegistrar_UnregisterAll(This)	\
+    ( (This)->lpVtbl -> UnregisterAll(This) ) 
 
-#define IVoodooHookSystem_RemoveAll(This)	\
-    ( (This)->lpVtbl -> RemoveAll(This) ) 
+#define IComponentRegistrar_GetComponents(This,pbstrCLSIDs,pbstrDescriptions)	\
+    ( (This)->lpVtbl -> GetComponents(This,pbstrCLSIDs,pbstrDescriptions) ) 
+
+#define IComponentRegistrar_RegisterComponent(This,bstrCLSID)	\
+    ( (This)->lpVtbl -> RegisterComponent(This,bstrCLSID) ) 
+
+#define IComponentRegistrar_UnregisterComponent(This,bstrCLSID)	\
+    ( (This)->lpVtbl -> UnregisterComponent(This,bstrCLSID) ) 
 
 #endif /* COBJMACROS */
 
@@ -3257,7 +3260,7 @@ EXTERN_C const IID IID_IVoodooHookSystem;
 
 
 
-#endif 	/* __IVoodooHookSystem_INTERFACE_DEFINED__ */
+#endif 	/* __IComponentRegistrar_INTERFACE_DEFINED__ */
 
 
 

@@ -1,11 +1,28 @@
-// Core.idl : IDL source for Core
-//
-
-// This file will be processed by the MIDL tool to
-// produce the type library (Core.tlb) and marshalling code.
+/**************************************************************************************************\
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify it under the terms of the 
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program; 
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * Boston, MA  02110-1301 US
+ *
+ * Support and more information may be found at http://www.voodooshader.com, or by contacting the
+ * developer at peachykeen@voodooshader.com
+\**************************************************************************************************/
 
 import "oaidl.idl";
 import "ocidl.idl";
+
+cpp_quote("#include \"Common.hpp\"")
 
 // Enums and such
 typedef [v1_enum, helpstring("Texture Formats")]
@@ -243,6 +260,11 @@ typedef struct
 } Function;
 typedef [ptr] Function * FunctionPtr;
 
+
+typedef DWORD EnumType;
+
+// --------------------------------------------------
+// Interface forward-declarations.
 interface IVoodooAdapter;
 interface IVoodooCore;
 interface IVoodooFile;
@@ -257,47 +279,8 @@ interface IVoodooParser;
 interface IVoodooTechnique;
 interface IVoodooTexture;
 
-[
-	object,
-	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
-	dual,	
-	pointer_default(unique)
-]
-interface IComponentRegistrar : IDispatch
-{
-	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
-	[id(2)]	HRESULT RegisterAll();
-	[id(3)]	HRESULT UnregisterAll();
-	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
-	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
-	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
-};
-
-[
-	object,
-	uuid(59C2FE67-A7EC-48B2-982E-9707A3840259),
-	dual,
-	nonextensible,
-	pointer_default(unique)
-]
-interface IVoodooAdapter : IDispatch{
-    [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [id(2)] HRESULT LoadPass([in] IVoodooPass * pPass);
-    [id(3)] HRESULT UnloadPass([in] IVoodooPass * pPass);
-    [propget, id(4)] HRESULT Pass([out, retval] IVoodooPass ** ppPass);
-    [propput, id(4)] HRESULT Pass([in] IVoodooPass * pPass);
-    [propget, id(6)] HRESULT Target([out, retval] IVoodooTexture ** ppTarget);
-    [propput, id(6)] HRESULT Target([in] IVoodooTexture * pTarget);
-    [id(8)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Description, [out, retval] IVoodooTexture ** ppTexture);
-    [id(9)] HRESULT LoadTexture([in] IVoodooImage * pImage, [in] TextureRegion Region, [out, retval] IVoodooTexture ** ppTexture);
-    [id(10)] HRESULT DrawGeometry([in] int Vertexes, [in] SAFEARRAY(VertexStruct) pVertexData);
-    [id(11)] HRESULT DrawShader([in] IVoodooShader * pShader);
-    [id(12)] HRESULT ApplyParameter([in] IVoodooParameter * pParameter);
-    [id(13)] HRESULT SetProperty([in] BSTR pName, [in, out] VARIANT * pData);
-    [id(14)] HRESULT ConnectTexture([in] IVoodooParameter * pParameter, [in] IVoodooTexture * pTexture);
-    [id(15)] HRESULT HandleError([in] VARIANT pContext, [in] DWORD Error, [in] IVoodooCore * pCore);
-};
-
+// --------------------------------------------------
+// Global interfaces (generic framework).
 [
 	object,
 	uuid(6D183074-9127-4615-8366-02587BAFE38C),
@@ -316,13 +299,13 @@ interface IVoodooCore : IDispatch{
     [propget, id(8)] HRESULT CgContext([out, retval] VARIANT * pCgContext);
     [propput, id(8)] HRESULT CgContext([in] VARIANT CgContext);
     [vararg, id(10)] HRESULT CreateShader([in] IVoodooFile * pFile, [in] SAFEARRAY(VARIANT) pArgs, [out, retval] IVoodooShader ** ppShader);
-    [id(11)] HRESULT CreateParameter([in] BSTR pName, [in] DWORD Type, [out, retval] IVoodooParameter ** ppParameter);
+    [id(11)] HRESULT CreateParameter([in] BSTR pName, [in] EnumType Type, [out, retval] IVoodooParameter ** ppParameter);
     [id(12)] HRESULT CreateTexture([in] BSTR pName, [in] VARIANT Data, [out, retval] IVoodooTexture ** ppTexture);
     [id(13)] HRESULT GetParameter([in] BSTR pName, [out, retval] IVoodooParameter ** ppParameter);
     [id(14)] HRESULT GetTexture([in] BSTR pName, [out, retval] IVoodooTexture ** ppTexture);
     [id(15)] HRESULT RemoveTexture([in] BSTR pName);
-    [id(16)] HRESULT GetStageTexture([in] DWORD Stage, [out, retval] IVoodooTexture ** ppTexture);
-    [id(17)] HRESULT SetStageTexture([in] DWORD Stage, [in] IVoodooTexture * pTexture);
+    [id(16)] HRESULT GetStageTexture([in] EnumType Stage, [out, retval] IVoodooTexture ** ppTexture);
+    [id(17)] HRESULT SetStageTexture([in] EnumType Stage, [in] IVoodooTexture * pTexture);
 };
 [
 	object,
@@ -332,9 +315,9 @@ interface IVoodooCore : IDispatch{
 	pointer_default(unique)
 ]
 interface IVoodooParser : IDispatch{
-    [id(1)] HRESULT AddVariable([in] BSTR pName, [in] BSTR pValue, [in, defaultvalue(VT_Normal)] DWORD System);
+    [id(1)] HRESULT AddVariable([in] BSTR pName, [in] BSTR pValue, [in, defaultvalue(VT_Normal)] EnumType System);
     [id(2)] HRESULT RemoveVariable([in] BSTR pName);
-    [id(3)] HRESULT Parse([in] BSTR pString, [in, defaultvalue(PF_None)] DWORD Flags, [out, retval] LPBSTR pParsed);
+    [id(3)] HRESULT Parse([in] BSTR pString, [in, defaultvalue(PF_None)] EnumType Flags, [out, retval] LPBSTR pParsed);
 };
 [
 	object,
@@ -343,6 +326,9 @@ interface IVoodooParser : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
+
+// --------------------------------------------------
+// Shader interfaces
 interface IVoodooShader : IDispatch{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
@@ -354,6 +340,7 @@ interface IVoodooShader : IDispatch{
     [id(8)] HRESULT GetParameter([in] int Number, [out, retval] IVoodooParameter ** ppParameter);
     [propget, id(9)] HRESULT CgShader([out, retval] VARIANT * pCgShader);
 };
+
 [
 	object,
 	uuid(B0D5E12B-2A58-4AF3-BD0A-A41A3968AB36),
@@ -383,9 +370,12 @@ interface IVoodooPass : IDispatch{
     [propget, id(3)] HRESULT Target([out, retval] IVoodooTexture ** ppTexture);
     [propget, id(4)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
     [propget, id(5)] HRESULT Technique([out, retval] IVoodooTechnique ** ppTechnique);
-    [id(6)] HRESULT GetCgProgram([in] DWORD Stage, [out, retval] VARIANT * pProgram);
+    [id(6)] HRESULT GetCgProgram([in] EnumType Stage, [out, retval] VARIANT * pProgram);
     [propget, id(7)] HRESULT CgPass([out, retval] VARIANT * pCgPass);
 };
+
+// --------------------------------------------------
+// Shader-related data containers.
 [
 	object,
 	uuid(164A33FD-E80D-4666-AE93-298B33020986),
@@ -408,7 +398,7 @@ interface IVoodooTexture : IDispatch{
 interface IVoodooParameter : IDispatch{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [propget, id(3)] HRESULT Type([out, retval] DWORD * pType);
+    [propget, id(3)] HRESULT Type([out, retval] EnumType * pType);
     [propget, id(4)] HRESULT Virtual([out, retval] boolean * pVirtual);
     [id(6)] HRESULT AttachParameter([in] IVoodooParameter * pParameter);
     [propget, id(7)] HRESULT Components([out, retval] int * pComponents);
@@ -419,6 +409,52 @@ interface IVoodooParameter : IDispatch{
     [propget, id(12)] HRESULT Shader([out, retval] IVoodooShader ** ppShader);
     [propget, id(13)] HRESULT CgParameter([out, retval] VARIANT * pCgParameter);
 };
+
+// --------------------------------------------------
+// External/plugin interfaces.
+//  Only null implementations of these are provided.
+// 
+
+[
+	object,
+	uuid(59C2FE67-A7EC-48B2-982E-9707A3840259),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooAdapter : IDispatch{
+    [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [id(2)] HRESULT LoadPass([in] IVoodooPass * pPass);
+    [id(3)] HRESULT UnloadPass([in] IVoodooPass * pPass);
+    [propget, id(4)] HRESULT Pass([out, retval] IVoodooPass ** ppPass);
+    [propput, id(4)] HRESULT Pass([in] IVoodooPass * pPass);
+    [propget, id(6)] HRESULT Target([out, retval] IVoodooTexture ** ppTarget);
+    [propput, id(6)] HRESULT Target([in] IVoodooTexture * pTarget);
+    [id(8)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Description, [out, retval] IVoodooTexture ** ppTexture);
+    [id(9)] HRESULT LoadTexture([in] IVoodooImage * pImage, [in] TextureRegion Region, [out, retval] IVoodooTexture ** ppTexture);
+    [id(10)] HRESULT DrawGeometry([in] int Vertexes, [in] SAFEARRAY(VertexStruct) pVertexData);
+    [id(11)] HRESULT DrawShader([in] IVoodooShader * pShader);
+    [id(12)] HRESULT ApplyParameter([in] IVoodooParameter * pParameter);
+    [id(13)] HRESULT SetProperty([in] BSTR pName, [in, out] VARIANT * pData);
+    [id(14)] HRESULT ConnectTexture([in] IVoodooParameter * pParameter, [in] IVoodooTexture * pTexture);
+    [id(15)] HRESULT HandleError([in] VARIANT pContext, [in] EnumType Error, [in] IVoodooCore * pCore);
+};
+
+[
+	object,
+	uuid(4E25F9D4-87D0-4CE8-84C0-B72225336DA3),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IVoodooHookSystem : IDispatch{
+    [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+    [id(2)] HRESULT Add([in] BSTR pName, [in] FunctionPtr pSource, [in] FunctionPtr pDest);
+    [id(3)] HRESULT Remove([in] BSTR pName);
+    [id(4)] HRESULT RemoveAll();
+};
+
+// Logger interface
 [
 	object,
 	uuid(D26A5521-3E3D-4BD9-8A75-1AD5014D2479),
@@ -431,14 +467,16 @@ interface IVoodooLogger : IDispatch{
     [id(2)] HRESULT Open([in] BSTR pFilename, [in] boolean Append);
     [id(3)] HRESULT Close();
     [id(4)] HRESULT Dump();
-    [propget, id(5)] HRESULT LogLevel([out, retval] DWORD * pLevel);
-    [propput, id(5)] HRESULT LogLevel([in] DWORD Level);
+    [propget, id(5)] HRESULT LogLevel([out, retval] EnumType * pLevel);
+    [propput, id(5)] HRESULT LogLevel([in] EnumType Level);
     [id(6)] HRESULT LogModule([in] VersionStruct Module);
-    [id(7), vararg] HRESULT Log([in] DWORD Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
-    [id(8)] HRESULT LogList([in] DWORD Level, [in] BSTR pModule, [in] BSTR pFormat, [in] VARIANT pList);
+    [id(7), vararg] HRESULT Log([in] EnumType Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
+    [id(8)] HRESULT LogList([in] EnumType Level, [in] BSTR pModule, [in] BSTR pFormat, [in] VARIANT pList);
     [propget, id(9)] HRESULT BufferSize([out, retval] int * pSize);
     [propput, id(9)] HRESULT BufferSize([in] int Size);
 };
+
+// FileSystem interfaces
 [
 	object,
 	uuid(2ADFD66B-2C4F-4172-823F-47D480BF8523),
@@ -453,6 +491,7 @@ interface IVoodooFileSystem : IDispatch{
     [id(4)] HRESULT FindFile([in] BSTR pPath, [out, retval] IVoodooFile ** ppFile);
     [id(5)] HRESULT FindImage([in] BSTR pPath, [out, retval] IVoodooImage ** ppImage);
 };
+
 [
 	object,
 	uuid(35068CA2-B06B-48DF-ADAB-BC1FDA163C1F),
@@ -462,11 +501,12 @@ interface IVoodooFileSystem : IDispatch{
 ]
 interface IVoodooFile : IDispatch{
     [propget, id(1)] HRESULT Path([out, retval] LPBSTR pPath);
-    [id(2)] HRESULT Open([in] DWORD Mode);
+    [id(2)] HRESULT Open([in] EnumType Mode);
     [id(3)] HRESULT Close();
     [id(4)] HRESULT Read([in, out] int * Length, [out, size_is(*Length)] byte Buffer[*]);
     [id(5)] HRESULT Write([in] int Length, [in, size_is(Length)] byte Buffer[*]);
 };
+
 [
 	object,
 	uuid(8B74AE58-98A2-4597-B963-4605F03A86D3),
@@ -478,19 +518,27 @@ interface IVoodooImage : IVoodooFile{
     [propget, id(6)] HRESULT Desc([out, retval] TextureDesc * pDesc);
     [propget, id(7)] HRESULT Data([in] TextureRegion Region, [in, out] int * pSize, [out, retval, size_is(*pSize)] byte ppBuffer[*]);
 };
+
+// --------------------------------------------------
+// Internal Voodoo/Core interfaces and coclasses.
+// These MUST NOT compile in external projects.
+#ifdef VOODOO_INTERNAL
 [
 	object,
-	uuid(4E25F9D4-87D0-4CE8-84C0-B72225336DA3),
-	dual,
-	nonextensible,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,	
 	pointer_default(unique)
 ]
-interface IVoodooHookSystem : IDispatch{
-    [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [id(2)] HRESULT Add([in] BSTR pName, [in] FunctionPtr pSource, [in] FunctionPtr pDest);
-    [id(3)] HRESULT Remove([in] BSTR pName);
-    [id(4)] HRESULT RemoveAll();
+interface IComponentRegistrar : IDispatch
+{
+	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
+	[id(2)]	HRESULT RegisterAll();
+	[id(3)]	HRESULT UnregisterAll();
+	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
 };
+
 [
 	uuid(74838A0A-2645-4638-9AFF-B45ABF5B1365),
 	version(0.3),
@@ -598,4 +646,4 @@ library Voodoo_Core
 		[default] interface IVoodooHookSystem;
 	};
 };
-
+#endif /*VOODOO_INTERNAL*/

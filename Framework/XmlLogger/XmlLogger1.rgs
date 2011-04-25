@@ -1,0 +1,26 @@
+HKCR
+{
+	VoodooXmlLogger.Logger.1 = s 'XmlLogger Class'
+	{
+		CLSID = s '{88B84D54-D198-4FBE-9FA2-C103F82DE3E3}'
+	}
+	VoodooXmlLogger.Logger = s 'XmlLogger Class'
+	{		
+		CurVer = s 'VoodooXmlLogger.Logger.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {88B84D54-D198-4FBE-9FA2-C103F82DE3E3} = s 'XmlLogger Class'
+		{
+			ProgID = s 'VoodooXmlLogger.Logger.1'
+			VersionIndependentProgID = s 'VoodooXmlLogger.Logger'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Neutral'
+			}
+			TypeLib = s '{07E7A06A-D963-4058-B461-23461B6EEFF4}'
+			Version = s '1.0'
+		}
+	}
+}

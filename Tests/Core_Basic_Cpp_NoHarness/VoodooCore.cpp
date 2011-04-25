@@ -34,13 +34,14 @@ SETUP(CoreInitFixture)
 
     WIN_ASSERT_TRUE(SUCCEEDED(hr) && pCore != NULL, _T("IVoodooCore not created."));
 
-    BSTR pFileName = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig");
-    WIN_ASSERT_NOT_NULL(pFileName);
+    InitParams iParams;
+    iParams.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig");
+    WIN_ASSERT_NOT_NULL(iParams.Config);
 
-    hr = pCore->Initialize(pFileName);
-    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("Config: %s\nHRESULT: %X\n"), pFileName, hr);
+    hr = pCore->Initialize(iParams);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("Config: %s\nHRESULT: %X\n"), iParams.Config, hr);
 
-    SysFreeString(pFileName);
+    SysFreeString(iParams.Config);
 }
 
 TEARDOWN(CoreInitFixture)
@@ -54,41 +55,44 @@ TEARDOWN(CoreInitFixture)
 // Test the Core init with a known-working config.
 BEGIN_TESTF(CoreInit_Working, CoreFixture)
 {
-    BSTR pFileName = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig");
-    WIN_ASSERT_NOT_NULL(pFileName);
+    InitParams iParams;
+    iParams.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig");
+    WIN_ASSERT_NOT_NULL(iParams.Config);
 
-    HRESULT hr = pCore->Initialize(pFileName);
-    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("Config: %s\nHRESULT: %X\n"), pFileName, hr);
+    HRESULT hr = pCore->Initialize(iParams);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("Config: %s\nHRESULT: %X\n"), iParams.Config, hr);
 
-    SysFreeString(pFileName);
+    SysFreeString(iParams.Config);
 }
 END_TESTF;
 
 // Test Core init with a bad XML
 BEGIN_TESTF(CoreInit_BadXml, CoreFixture)
 {
-    BSTR pFileName = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_BadXml.xmlconfig");
-    WIN_ASSERT_NOT_NULL(pFileName);
+    InitParams iParams;
+    iParams.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_BadXml.xmlconfig");
+    WIN_ASSERT_NOT_NULL(iParams.Config);
 
-    HRESULT hr = pCore->Initialize(pFileName);
+    HRESULT hr = pCore->Initialize(iParams);
     //WIN_ASSERT_EQUAL(E_INVALIDCFG, hr);
-    WIN_ASSERT_TRUE(FAILED(hr), _T("Config: %s\nHRESULT: %X\n"), pFileName, hr);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("Config: %s\nHRESULT: %X\n"), iParams.Config, hr);
 
-    SysFreeString(pFileName);
+    SysFreeString(iParams.Config);
 }
 END_TESTF;
 
 // Test Core init with a bad XML
 BEGIN_TESTF(CoreInit_BadCLSID, CoreFixture)
 {
-    BSTR pFileName = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_BadCLSID.xmlconfig");
-    WIN_ASSERT_NOT_NULL(pFileName);
+    InitParams iParams;
+    iParams.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_BadCLSID.xmlconfig");
+    WIN_ASSERT_NOT_NULL(iParams.Config);
 
-    HRESULT hr = pCore->Initialize(pFileName);
+    HRESULT hr = pCore->Initialize(iParams);
     //WIN_ASSERT_EQUAL(E_BADCLSID, hr);
-    WIN_ASSERT_TRUE(FAILED(hr), _T("Config: %s\nHRESULT: %X\n"), pFileName, hr);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("Config: %s\nHRESULT: %X\n"), iParams.Config, hr);
 
-    SysFreeString(pFileName);
+    SysFreeString(iParams.Config);
 }
 END_TESTF;
 
@@ -165,19 +169,19 @@ BEGIN_TESTF(CoreInit_TextureTest, CoreInitFixture)
     SysFreeString(TexName1);
     SysFreeString(TexName2);
 
-    hr = pCore->SetStageTexture(PassTarget, pPassTex);
+    hr = pCore->SetStageTexture(TS_Pass, pPassTex);
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
-    hr = pCore->SetStageTexture(ShaderTarget, pTechTex);
+    hr = pCore->SetStageTexture(TS_Shader, pTechTex);
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
     IVoodooTexture * pPassOTex = nullptr;
     IVoodooTexture * pTechOTex = nullptr;
 
-    hr = pCore->GetStageTexture(PassTarget, &pPassOTex);
+    hr = pCore->GetStageTexture(TS_Pass, &pPassOTex);
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
-    hr = pCore->GetStageTexture(ShaderTarget, &pTechOTex);
+    hr = pCore->GetStageTexture(TS_Shader, &pTechOTex);
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
     WIN_ASSERT_EQUAL(pPassTex, pPassOTex);

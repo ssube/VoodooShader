@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "VoodooImage.h"
 
-#include "Common.hpp"
+
 
 
 // CVoodooImage
@@ -89,7 +89,7 @@ STDMETHODIMP CVoodooImage::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
-        *ppCore->AddRef();
+        (*ppCore)->AddRef();
         return S_OK;
     }
 }

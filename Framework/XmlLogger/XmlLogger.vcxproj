@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{BC08F231-D53D-4D19-AF7E-9387521187BF}</ProjectGuid>
+    <ProjectGuid>{4673085C-9333-42F6-AACF-7BB5650BE70D}</ProjectGuid>
     <Keyword>AtlProj</Keyword>
-    <ProjectName>Voodoo_Core</ProjectName>
+    <ProjectName>Voodoo_XmlLogger</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -43,14 +43,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>M:\Cg_July2010\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>M:\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>M:\Cg_July2010\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>M:\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -62,15 +58,16 @@
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <PreprocessorDefinitions>_DEBUG;VOODOO_INTERNAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <HeaderFileName>Core_i.h</HeaderFileName>
-      <InterfaceIdentifierFileName>Core_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>Core_p.c</ProxyFileName>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>XmlLogger_i.h</HeaderFileName>
+      <InterfaceIdentifierFileName>XmlLogger_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>XmlLogger_p.c</ProxyFileName>
       <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>$(IntDir)Core.tlb</TypeLibraryName>
+      <TypeLibraryName>$(IntDir)XmlLogger.tlb</TypeLibraryName>
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -79,11 +76,10 @@
     </ResourceCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <ModuleDefinitionFile>.\Core.def</ModuleDefinitionFile>
-      <AdditionalDependencies>comsvcs.lib;cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\XmlLogger.def</ModuleDefinitionFile>
+      <AdditionalDependencies>comsvcs.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RegisterOutput>true</RegisterOutput>
-      <PerUserRedirection>true</PerUserRedirection>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -96,15 +92,16 @@
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <PreprocessorDefinitions>NDEBUG;VOODOO_INTERNAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <HeaderFileName>Core_i.h</HeaderFileName>
-      <InterfaceIdentifierFileName>Core_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>Core_p.c</ProxyFileName>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>XmlLogger_i.h</HeaderFileName>
+      <InterfaceIdentifierFileName>XmlLogger_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>XmlLogger_p.c</ProxyFileName>
       <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>$(IntDir)Core.tlb</TypeLibraryName>
+      <TypeLibraryName>$(IntDir)XmlLogger.tlb</TypeLibraryName>
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -113,27 +110,16 @@
     </ResourceCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <ModuleDefinitionFile>.\Core.def</ModuleDefinitionFile>
-      <AdditionalDependencies>comsvcs.lib;cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\XmlLogger.def</ModuleDefinitionFile>
+      <AdditionalDependencies>comsvcs.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <RegisterOutput>true</RegisterOutput>
-      <PerUserRedirection>true</PerUserRedirection>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Common.cpp" />
     <ClCompile Include="compreg.cpp" />
-    <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Core_i.c">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -146,20 +132,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="VoodooAdapter.cpp" />
-    <ClCompile Include="VoodooCore.cpp" />
-    <ClCompile Include="VoodooFile.cpp" />
-    <ClCompile Include="VoodooFileSystem.cpp" />
-    <ClCompile Include="VoodooHookSystem.cpp" />
-    <ClCompile Include="VoodooImage.cpp" />
-    <ClCompile Include="VoodooLogger.cpp" />
-    <ClCompile Include="VoodooParameter.cpp" />
-    <ClCompile Include="VoodooPass.cpp" />
-    <ClCompile Include="VoodooShader.cpp" />
-    <ClCompile Include="VoodooParser.cpp" />
-    <ClCompile Include="VoodooTechnique.cpp" />
-    <ClCompile Include="VoodooTexture.cpp" />
     <ClCompile Include="xdlldata.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="XmlLogger.cpp" />
+    <ClCompile Include="XmlLogger_i.c">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -169,53 +151,26 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common.hpp" />
     <ClInclude Include="compreg.h" />
-    <ClInclude Include="Core_i.h" />
     <ClInclude Include="dllmain.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Version.hpp" />
-    <ClInclude Include="VoodooAdapter.h" />
-    <ClInclude Include="VoodooCore.h" />
-    <ClInclude Include="VoodooFile.h" />
-    <ClInclude Include="VoodooFileSystem.h" />
-    <ClInclude Include="VoodooFramework.h" />
-    <ClInclude Include="VoodooHookSystem.h" />
-    <ClInclude Include="VoodooImage.h" />
-    <ClInclude Include="VoodooLogger.h" />
-    <ClInclude Include="VoodooParameter.h" />
-    <ClInclude Include="VoodooPass.h" />
-    <ClInclude Include="VoodooShader.h" />
-    <ClInclude Include="VoodooParser.h" />
-    <ClInclude Include="VoodooTechnique.h" />
-    <ClInclude Include="VoodooTexture.h" />
     <ClInclude Include="xdlldata.h" />
+    <ClInclude Include="XmlLogger.h" />
+    <ClInclude Include="XmlLogger_i.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Core.rc" />
+    <ResourceCompile Include="XmlLogger.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Core.def" />
-    <None Include="Core.rgs" />
     <None Include="ReadMe.txt" />
-    <None Include="VoodooAdapter.rgs" />
-    <None Include="VoodooCore.rgs" />
-    <None Include="VoodooFile.rgs" />
-    <None Include="VoodooFileSystem.rgs" />
-    <None Include="VoodooHookSystem.rgs" />
-    <None Include="VoodooImage.rgs" />
-    <None Include="VoodooLogger.rgs" />
-    <None Include="VoodooParameter.rgs" />
-    <None Include="VoodooPass.rgs" />
-    <None Include="VoodooShader.rgs" />
-    <None Include="VoodooParser.rgs" />
-    <None Include="VoodooTechnique1.rgs" />
-    <None Include="VoodooTexture.rgs" />
+    <None Include="XmlLogger.def" />
+    <None Include="XmlLogger.rgs" />
+    <None Include="XmlLogger1.rgs" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="Core.idl" />
+    <Midl Include="XmlLogger.idl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

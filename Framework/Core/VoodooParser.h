@@ -5,7 +5,7 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
-#include "Common.hpp"
+
 
 using namespace ATL;
 
@@ -71,6 +71,7 @@ private:
 
     ULONG m_Refrs;
     IVoodooCore * m_Core;
+    CComPtr<IVoodooLogger> m_Logger;
     Dictionary m_Variables;
     Dictionary m_SysVariables;
 };

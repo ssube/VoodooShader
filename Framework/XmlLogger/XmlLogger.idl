@@ -1,0 +1,49 @@
+// XmlLogger.idl : IDL source for XmlLogger
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (XmlLogger.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "Core.idl";
+
+[
+	object,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,	
+	pointer_default(unique)
+]
+interface IComponentRegistrar : IDispatch
+{
+	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
+	[id(2)]	HRESULT RegisterAll();
+	[id(3)]	HRESULT UnregisterAll();
+	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+};
+[
+	uuid(07E7A06A-D963-4058-B461-23461B6EEFF4),
+	version(1.0),
+	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{C65BEDFC-E865-4E00-A774-AB5874ACDE58}")
+]
+library XmlLoggerLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(C65BEDFC-E865-4E00-A774-AB5874ACDE58)		
+	]
+	coclass CompReg
+	{
+		[default] interface IComponentRegistrar;
+	};
+	[
+		uuid(88B84D54-D198-4FBE-9FA2-C103F82DE3E3)		
+	]
+	coclass XmlLogger
+	{
+		[default] interface IVoodooLogger;
+	};
+};
+

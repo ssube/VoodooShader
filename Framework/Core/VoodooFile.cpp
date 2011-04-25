@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "VoodooFile.h"
 
-#include "Common.hpp"
+
 
 // CVoodooFile
 CVoodooFile::CVoodooFile()
@@ -90,7 +90,7 @@ STDMETHODIMP CVoodooFile::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
-        *ppCore->AddRef();
+        (*ppCore)->AddRef();
         return S_OK;
     }
 }

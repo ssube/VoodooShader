@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "VoodooHookSystem.h"
 
-#include "Common.hpp"
+
 
 
 // CVoodooHookSystem
@@ -87,7 +87,7 @@ STDMETHODIMP CVoodooHookSystem::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
-        *ppCore->AddRef();
+        (*ppCore)->AddRef();
         return S_OK;
     }
 }

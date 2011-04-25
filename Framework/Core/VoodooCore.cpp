@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "VoodooCore.h"
 
-#include "Common.hpp"
+
 
 #include "VoodooParameter.h"
 #include "VoodooParser.h"
@@ -269,7 +269,7 @@ STDMETHODIMP CVoodooCore::get_Parser(
         return E_INVALIDARG;
     } else {
         *ppParser = m_Parser;
-        *ppParser->AddRef();
+        (*ppParser)->AddRef();
         return S_OK;
     }
 }
@@ -285,7 +285,7 @@ STDMETHODIMP CVoodooCore::get_HookSystem
         return E_INVALIDARG;
     } else {
         *ppHookSystem = m_HookSystem;
-        *ppHookSystem->AddRef();
+        (*ppHookSystem)->AddRef();
         return S_OK;
     }
 }
@@ -301,7 +301,7 @@ STDMETHODIMP CVoodooCore::get_FileSystem
         return E_INVALIDARG;
     } else {
         *ppFileSystem = m_FileSystem;
-        *ppFileSystem->AddRef();
+        (*ppFileSystem)->AddRef();
         return S_OK;
     }
 }
@@ -317,7 +317,7 @@ STDMETHODIMP CVoodooCore::get_Adapter
         return E_INVALIDARG;
     } else {
         *ppAdapter = m_Adapter;
-        *ppAdapter->AddRef();
+        (*ppAdapter)->AddRef();
         return S_OK;
     }
 }
@@ -333,7 +333,7 @@ STDMETHODIMP CVoodooCore::get_Logger
         return E_INVALIDARG;
     } else {
         *ppLogger = m_Logger;
-        *ppLogger->AddRef();
+        (*ppLogger)->AddRef();
         return S_OK;
     }
 }
@@ -349,7 +349,7 @@ STDMETHODIMP CVoodooCore::get_Config
         return E_INVALIDARG;
     } else {
         *ppConfig = m_Config;
-        *ppConfig->AddRef();
+        (*ppConfig)->AddRef();
         return S_OK;
     }
 }
@@ -493,7 +493,7 @@ STDMETHODIMP CVoodooCore::GetParameter
         return E_NOT_FOUND;
     } else {
         *ppParameter = param;
-        *ppParameter->AddRef();
+        (*ppParameter)->AddRef();
         return S_OK;
     }
 }
@@ -517,7 +517,7 @@ STDMETHODIMP CVoodooCore::GetTexture
         return E_NOT_FOUND;
     } else {
         *ppTexture = texture;
-        *ppTexture->AddRef();
+        (*ppTexture)->AddRef();
         return S_OK;
     }
 }
@@ -550,7 +550,7 @@ STDMETHODIMP CVoodooCore::GetStageTexture
         return E_NOT_FOUND;
     } else {
         *ppTexture = texture;
-        *ppTexture->AddRef();
+        (*ppTexture)->AddRef();
         return S_OK;
     }
 }
@@ -569,11 +569,17 @@ STDMETHODIMP CVoodooCore::SetStageTexture
 
 STDMETHODIMP CVoodooCore::LoadConfig(BSTR pFile)
 {
-    VARIANT_BOOL loadStatus; // Not checked atm - 24/04/2011
+    VARIANT_BOOL loadStatus;
     VARIANT vConfig;
     VariantInit(&vConfig);
     V_VT(&vConfig) = VT_BSTR;
     V_BSTR(&vConfig) = pFile;
 
-    return m_Config->load(vConfig, &loadStatus);
+    HRESULT hr = m_Config->load(vConfig, &loadStatus);
+    
+    if ( hr == S_FALSE && loadStatus == VARIANT_FALSE ) {
+        return E_INVALIDCFG;
+    } else {
+        return hr;
+    }
 }

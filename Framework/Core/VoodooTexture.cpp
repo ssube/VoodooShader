@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "VoodooTexture.h"
 
-#include "Common.hpp"
+
 
 // CVoodooTexture
 CVoodooTexture::CVoodooTexture()
@@ -92,7 +92,7 @@ STDMETHODIMP CVoodooTexture::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
-        *ppCore->AddRef();
+        (*ppCore)->AddRef();
         return S_OK;
     }
 }

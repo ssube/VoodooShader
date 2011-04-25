@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "VoodooParameter.h"
 
-#include "Common.hpp"
+
 
 
 // CVoodooParameter
@@ -125,7 +125,7 @@ STDMETHODIMP CVoodooParameter::get_Core(IVoodooCore **ppCore)
         return E_INVALIDARG;
     } else {
         *ppCore = m_Core;
-        *ppCore->AddRef();
+        (*ppCore)->AddRef();
         return S_OK;
     }
 }
@@ -290,7 +290,7 @@ STDMETHODIMP CVoodooParameter::get_Shader
         return E_INVALIDARG;
     } else {
         *ppShader = m_Shader;
-        *ppShader->AddRef();
+        (*ppShader)->AddRef();
         return S_OK;
     }
 }

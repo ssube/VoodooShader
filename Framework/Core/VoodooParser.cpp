@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "VoodooParser.h"
 
-#include "Common.hpp"
+
 
 
 // CVoodooParser
@@ -11,12 +11,14 @@ CVoodooParser::CVoodooParser()
 {
     m_Refrs = 0;
     m_Core = NULL;
+    m_Logger = NULL;
 }
 
 CVoodooParser::~CVoodooParser()
 {
     m_Refrs = 0;
     m_Core = NULL;
+    m_Logger = NULL;
 }
 
 IVoodooParser * CVoodooParser::Create(IVoodooCore * pCore)
@@ -30,9 +32,10 @@ IVoodooParser * CVoodooParser::Create(IVoodooCore * pCore)
     if ( SUCCEEDED(hr) )
     {
         pParser->AddRef();
+
         pParser->m_Core = pCore;
-        pParser->m_SysVariables.InitHashTable(47);
-        pParser->m_Variables.InitHashTable(91);
+        pCore->get_Logger(&pParser->m_Logger);
+
         hr = pParser->QueryInterface(IID_IVoodooParser, (void**)&ipParser);
         pParser->Release();
     }
@@ -74,15 +77,14 @@ STDMETHODIMP_(ULONG) CVoodooParser::Release()
 
 STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, DWORD Type)
 {
-    /*ILoggerRef logger = m_Core->GetLogger();
-    if ( logger.get() )
-    {
-        logger->Log(LL_Debug, VOODOO_CORE_NAME, "Adding variable \"%s\" with value \"%s\".", name.c_str(), value.c_str());
-    }*/
-
     CComBSTR name(pName);
     this->Parse(name, PF_VarName, &name);
     CComBSTR value(pValue);
+
+    if ( m_Logger )
+    {
+        LogMsg(m_Logger, LL_Debug|LL_Framework, VOODOO_CORE_NAME, L"Adding variable \"%s\" with value \"%s\".", name, value);
+    }
 
     if ( Type == VT_System )
     {
@@ -90,10 +92,10 @@ STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, DWORD Type)
         {
             m_SysVariables.SetAt(name, value);
         } else {
-            /*if ( logger.get() )
+            if ( m_Logger )
             {
-                logger->Log(LL_Warning, VOODOO_CORE_NAME, "Unable to add duplicate system variable \"%s\".", finalname.c_str());
-            }*/
+                LogMsg(m_Logger, LL_Warning|LL_Framework, VOODOO_CORE_NAME, L"Unable to add duplicate system variable \"%s\".", name);
+            }
             return E_ISSYSVAR;
         }
     } else {
