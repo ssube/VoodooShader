@@ -50,12 +50,8 @@
  * This file is the public-facing header for the Voodoo Shader Framework (Voodoo/Core module).
  * 
  * It is the only file which needs included to use or define Voodoo classes in other modules,
- * and should be included by all Voodoo-compatible or targeted code.
+ * and should be included by all Voodoo-compatible code.
  **/
-
-#ifndef VOODOO_VERSION
-#define VOODOO_VERSION 196
-#endif
 
 #define COM_NO_WINDOWS_H
 #include <objbase.h>
@@ -128,9 +124,9 @@ typedef interface IVoodooFile       IVoodooFile;
 typedef interface IVoodooImage      IVoodooImage;
 
 /* Voodoo types */
-#include "VoodooTypes.h"
+#include "VoodooTypes.hpp"
 
-    /* Cg types */
+/* Cg types */
 #ifndef CG_VERSION_NUM
 typedef void * CGcontext;
 typedef void * CGprogram;
@@ -138,6 +134,12 @@ typedef void * CGparameter;
 typedef void * CGeffect;
 typedef void * CGtechnique;
 typedef void * CGpass;
+#endif
+
+/* Voodoo version info */
+#include "VoodooVersion.hpp"
+#ifndef VOODOO_VERSION
+#define VOODOO_VERSION VOODOO_GLOBAL_VERSION_REV
 #endif
 
 #undef INTERFACE

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Sun Apr 24 19:00:00 2011
+/* at Mon Apr 25 03:22:14 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -309,19 +309,17 @@ extern "C"{
 /* interface __MIDL_itf_Core_0000_0000 */
 /* [local] */ 
 
-#include "Common.hpp"
 typedef /* [public][public][public][public][public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0001
     {	TF_Unknown	= 0,
-	TF_RGB5	= ( TF_Unknown + 1 ) ,
-	TF_RGB5A1	= ( TF_RGB5 + 1 ) ,
-	TF_RGB8	= ( TF_RGB5A1 + 1 ) ,
-	TF_RGBA8	= ( TF_RGB8 + 1 ) ,
-	TF_RGB10A2	= ( TF_RGBA8 + 1 ) ,
-	TF_RGBA16F	= ( TF_RGB10A2 + 1 ) ,
-	TF_RGBA32F	= ( TF_RGBA16F + 1 ) ,
-	TF_D16	= ( TF_RGBA32F + 1 ) ,
-	TF_D32	= ( TF_D16 + 1 ) ,
+	TF_RGB5	= 0x1,
+	TF_RGB8	= 0x3,
+	TF_RGBA8	= 0x4,
+	TF_RGB10A2	= 0x5,
+	TF_RGBA16F	= 0x10,
+	TF_RGBA32F	= 0x11,
+	TF_D16	= 0x40,
+	TF_D32	= 0x41,
 	TF_Max	= 0x7fffffff
     } 	TextureFormat;
 
@@ -367,19 +365,19 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0003
 typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0004
     {	PS_Unknown	= 0,
-	PS_Vertex	= ( PS_Unknown + 1 ) ,
-	PS_Fragment	= ( PS_Vertex + 1 ) ,
-	PS_Geometry	= ( PS_Fragment + 1 ) ,
-	PS_Domain	= ( PS_Geometry + 1 ) ,
-	PS_Hull	= ( PS_Domain + 1 ) ,
+	PS_Vertex	= 0x1,
+	PS_Fragment	= 0x2,
+	PS_Geometry	= 0x3,
+	PS_Domain	= 0x4,
+	PS_Hull	= 0x5,
 	PS_Max	= 0x7fffffff
     } 	ProgramStage;
 
 typedef /* [public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0005
     {	TS_Unknown	= 0,
-	TS_Shader	= ( TS_Unknown + 1 ) ,
-	TS_Pass	= ( TS_Shader + 1 ) ,
+	TS_Shader	= 0x1,
+	TS_Pass	= 0x2,
 	TS_Max	= 0x7fffffff
     } 	TextureStage;
 

@@ -22,149 +22,121 @@
 import "oaidl.idl";
 import "ocidl.idl";
 
-cpp_quote("#include \"Common.hpp\"")
-
 // Enums and such
 typedef [v1_enum, helpstring("Texture Formats")]
 enum {
-    TF_Unknown = 0,         /*!< Unknown texture format */
-    // Backbuffer formats
-    TF_RGB5,                /*!< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
-    TF_RGB5A1,              /*!< 5 bit RGB, 1 bit alpha */
-    TF_RGB8,                /*!< 8 bit RGB (8 bit X in DX). Most common backbuffer format, 
-                                    common texture format. */
-    TF_RGBA8,               /*!< 8 bit RGBA. Common texture format. */
-    TF_RGB10A2,             /*!< 10 bit RGB, 2 bit A */
-    // Float texture formats
-    TF_RGBA16F,             /*!< Half-precision RGBA. HDR format. */
-    TF_RGBA32F,             /*!< Full-precision RGBA (float/single). HDR format. */
-    // Depth-buffer formats
-    TF_D16,                 /*!< Half-precision depth (Z-buffer, see @ref depthbuffers 
-                                    for more info) */
-    TF_D32,                 /*!< Full-precision depth (Z-buffer, see @ref depthbuffers 
-                                    for more info) */
-    TF_Max = 0x7FFFFFFF
+    TF_Unknown  = 0x00,
+    TF_RGB5     = 0x01,
+    TF_RGB8     = 0x03,
+    TF_RGBA8    = 0x04,
+    TF_RGB10A2  = 0x05,
+    TF_RGBA16F  = 0x10,
+    TF_RGBA32F  = 0x11,
+    TF_D16      = 0x40,
+    TF_D32      = 0x41,
+    TF_Max      = 0x7FFFFFFF
 } TextureFormat;
 
 typedef [v1_enum, helpstring("Parameter Types")]
 enum {
-    PT_Unknown = 0,         /*!< Unknown parameter type */
-    // Float-vectors
-    PT_Float1   = 0x11,              /*!< Single-component float vector */
-    PT_Float2   = 0x12,              /*!< Two-component float vector */
-    PT_Float3   = 0x13,              /*!< Three-component float vector */
-    PT_Float4   = 0x14,              /*!< Four-component float vector */
-    PT_Float1x1 = 0x11,
-    PT_Float1x2 = 0x12,
-    PT_Float1x3 = 0x13,
-    PT_Float1x4 = 0x14,
-    PT_Float2x1 = 0x21,
-    PT_Float2x2 = 0x22,
-    PT_Float2x3 = 0x23,
-    PT_Float2x4 = 0x24,
-    PT_Float3x1 = 0x31,
-    PT_Float3x2 = 0x32,
-    PT_Float3x3 = 0x33,
-    PT_Float3x4 = 0x34,
-    PT_Float4x1 = 0x41,
-    PT_Float4x2 = 0x42,
-    PT_Float4x3 = 0x43,
-    PT_Float4x4 = 0x44,              /*!< Generic float4x4 matrix type */
-    // Samplers
-    PT_Sampler1D = 0x101,           /*!< One-dimensional sampler (for a 1D texture, see 
-                                    @ref texturetypes "texture types" for more info) */
-    PT_Sampler2D = 0x102,           /*!< Two-dimensional sampler (for a 2D texture, see 
-                                    @ref texturetypes "texture types" for more info) */
-    PT_Sampler3D = 0x103,           /*!< Three-dimensional sampler (for a 3D/volume texture, see 
-                                    @ref texturetypes "texture types" for more info) */
-    // Unknown struct
-    PT_Struct = 0x1000,
-    PT_Max = 0x7FFFFFFF
+    PT_Unknown      = 0x00,
+    PT_Float1       = 0x11,
+    PT_Float2       = 0x12,
+    PT_Float3       = 0x13,
+    PT_Float4       = 0x14,
+    PT_Float1x1     = 0x11,
+    PT_Float1x2     = 0x12,
+    PT_Float1x3     = 0x13,
+    PT_Float1x4     = 0x14,
+    PT_Float2x1     = 0x21,
+    PT_Float2x2     = 0x22,
+    PT_Float2x3     = 0x23,
+    PT_Float2x4     = 0x24,
+    PT_Float3x1     = 0x31,
+    PT_Float3x2     = 0x32,
+    PT_Float3x3     = 0x33,
+    PT_Float3x4     = 0x34,
+    PT_Float4x1     = 0x41,
+    PT_Float4x2     = 0x42,
+    PT_Float4x3     = 0x43,
+    PT_Float4x4     = 0x44,
+    PT_Sampler1D    = 0x101,
+    PT_Sampler2D    = 0x102,
+    PT_Sampler3D    = 0x103,
+    PT_Struct       = 0x1000,
+    PT_Max          = 0x7FFFFFFF
 } ParameterType;
 
 typedef [v1_enum, helpstring("Parameter Categories")]
 enum {
-    PC_Unknown = 0,    /*!< Unknown parameter category */
-    // Valid categories
-    PC_Float  = 0x01,         /*!< Float vector parameter (may have 1 to 4 components) */
-    PC_Sampler = 0x02,         /*!< Sampler parameter (may sample 1D to 3D textures) */
-    PC_Struct  = 0x04,
+    PC_Unknown  = 0x00,
+    PC_Float    = 0x01,
+    PC_Sampler  = 0x02,
+    PC_Struct   = 0x04,
     PC_Max = 0x7FFFFFFF
 } ParameterCategory;
 
 typedef [v1_enum, helpstring("Shader Program Stages")]
 enum {
-    PS_Unknown = 0,     /*!< Unknown program stage */
-    // Basic stages
-    PS_Vertex,                 /*!< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
-    PS_Fragment,               /*!< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
-    // PS_Geometry stages
-    PS_Geometry,               /*!< PS_Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
-    // Tessellation stages
-    PS_Domain,                 /*!< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
-    PS_Hull,                   /*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
+    PS_Unknown  = 0x00,
+    PS_Vertex   = 0x01,
+    PS_Fragment = 0x02,
+    PS_Geometry = 0x03,
+    PS_Domain   = 0x04,
+    PS_Hull     = 0x05,
     PS_Max = 0x7FFFFFFF
 } ProgramStage;
     
 typedef [v1_enum, helpstring("Texture Stages")]
 enum {
-    TS_Unknown = 0,         /*!< Unknown texture type */
-    // Special types
-    TS_Shader,        /*!< Shader target texture */
-    TS_Pass,          /*!< Pass target texture */
-    TS_Max = 0x7FFFFFFF
+    TS_Unknown  = 0x00,
+    TS_Shader   = 0x01,
+    TS_Pass     = 0x02,
+    TS_Max      = 0x7FFFFFFF
 } TextureStage;
     
 typedef [v1_enum, helpstring("File Access Modes")]
 enum {
-    FM_Unknown   = 0x00,     /*!< Unknown file open mode */
-    // Valid modes
-    FM_Read      = 0x01,     /*!< Read-only file open mode */
-    FM_Write     = 0x02,     /*!< Read/write file open mode */
-    FM_Max = 0x7FFFFFFF
+    FM_Unknown  = 0x00,
+    FM_Read     = 0x01,
+    FM_Write    = 0x02,
+    FM_Max      = 0x7FFFFFFF
 } FileOpenMode;
 
 typedef [v1_enum, helpstring("Log Levels")]
 enum {
-    LL_Unknown = 0x00,     /*!< Log level unknown */
-    // Severity values
-    LL_Debug      = 0x01,
-    LL_Info       = 0x02,
-    LL_Warning    = 0x04,
-    LL_Error      = 0x08,
-    // Origin values
-    LL_External   = 0x10,
-    LL_Module     = 0x40,
-    LL_Framework  = 0x80,
-    // Logger internal values
-    LL_Internal     = 0x82,     /*!< Log level for Logger-internal messages */
-    LL_Initial      = 0xFE,     /*!< Initial log level of Logger */
-    // Misc values
-    LL_All          = 0xFF,     /*!< All messages will be logged */
-    LL_Max = 0x7FFFFFFF
+    LL_Unknown      = 0x00,
+    LL_Debug        = 0x01,
+    LL_Info         = 0x02,
+    LL_Warning      = 0x04,
+    LL_Error        = 0x08,
+    LL_External     = 0x10,
+    LL_Module       = 0x40,
+    LL_Framework    = 0x80,
+    LL_Internal     = 0x82,
+    LL_Initial      = 0xFE,
+    LL_All          = 0xFF,
+    LL_Max          = 0x7FFFFFFF
 } LogLevel;
 
 typedef [v1_enum, helpstring("Variable Parsing Modifiers")]
 enum {
-    PF_None          = 0x0000,     /*!< No special behavior */
-    // Slash flags
-    PF_SingleSlash      = 0x0001,     /*!< No repeated slashes (useful for XPath). */
-    PF_SlashOnly        = 0x0002,     /*!< Replace all backslashes with forward slashes. */
-    PF_BackslashOnly    = 0x0004,     /*!< Replace all forward slashes with backslashes. */
-    // Case flags
+    PF_None             = 0x0000,
+    PF_SingleSlash      = 0x0001,
+    PF_SlashOnly        = 0x0002,
+    PF_BackslashOnly    = 0x0004,
     PF_Lowercase        = 0x0010,
     PF_Uppercase        = 0x0020,
-    // Special flags
     PF_VarName          = 0x0100,
-    PF_Max = 0x7FFFFFFF
+    PF_Max              = 0x7FFFFFFF
 } ParseFlags;
 
 typedef [v1_enum, helpstring("Variable Type")]
 enum {
-    VT_Normal      = 0x00,
-    VT_State       = 0x01,
-    VT_System      = 0x10,
-    VT_Max = 0x7FFFFFFF
+    VT_Normal   = 0x00,
+    VT_State    = 0x01,
+    VT_System   = 0x10,
+    VT_Max      = 0x7FFFFFFF
 } VariableType;
 
 typedef [helpstring("Core Intialization Struct")]

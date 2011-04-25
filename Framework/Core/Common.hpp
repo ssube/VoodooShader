@@ -1,15 +1,13 @@
 
 #pragma once
 
-#include "Voodoo.h"
-
 #include "Core_i.h"
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
 #include <Cg/Cg.h>
 
-#include "Version.hpp"
+#include "VoodooVersion.hpp"
 
 extern const HRESULT E_BADTHING;
 extern const HRESULT E_INVALIDCFG;

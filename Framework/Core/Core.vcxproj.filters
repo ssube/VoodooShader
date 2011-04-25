@@ -144,10 +144,13 @@
     <ClInclude Include="Common.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Version.hpp">
+    <ClInclude Include="VoodooVersion.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VoodooFramework.h">
+    <ClInclude Include="VoodooFramework.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooTypes.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

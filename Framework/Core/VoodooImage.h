@@ -5,13 +5,11 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
-
+#include "Common.hpp"
 
 #include "VoodooFile.h"
 
 using namespace ATL;
-
-
 
 // CVoodooImage
 

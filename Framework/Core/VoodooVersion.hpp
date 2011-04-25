@@ -26,18 +26,34 @@
 #   define VOODOO_META__STRING(arg) L ## #arg
 #   define VOODOO_META_STRING(arg) L ## arg
 #else
-#   define VOODOO_META__STRING(arg) #arg
 #   define VOODOO_META_STRING(arg) arg
+#   define VOODOO_META__STRING(arg) #arg
 #endif
+
 #define VOODOO_META_TOSTRING(arg) VOODOO_META__STRING(arg)
 
 #ifdef _DEBUG
 #   define VOODOO_META_DEBUG_BOOL true
-#   define VOODOO_META_DEBUG_STRING VOODOO_META_STRING("(DEBUG)")
+#   define VOODOO_META_DEBUG_STRING VOODOO_META_STRING(" (DEBUG)")
 #else
 #   define VOODOO_META_DEBUG_BOOL false
 #   define VOODOO_META_DEBUG_STRING
 #endif
+
+// Version extractors
+#define VOODOO_VERSION_MAJOR(ver) (((unsigned __int32)(ver & 0xFF000000)) >> 24)
+#define VOODOO_VERSION_MINOR(ver) (((unsigned __int32)(ver & 0x00FF0000)) >> 16)
+#define VOODOO_VERSION_PATCH(ver) (((unsigned __int32)(ver & 0x0000FF00)) >>  8)
+#define VOODOO_VERSION_REV(ver)   (((unsigned __int32)(ver & 0x000000FF))
+
+/**
+ * Creates a dword version.
+ */
+#define VOODOO_META_VERSION_VALUE(token) (unsigned __int32)\
+   (( VOODOO_##token##_VERSION_MAJOR << 24 ) |\
+    ( VOODOO_##token##_VERSION_MINOR << 16 ) |\
+    ( VOODOO_##token##_VERSION_PATCH <<  8 ) |\
+    ( VOODOO_##token##_VERSION_REV ))
 
 /**
  * Creates a comma-separated chain of version tokens (not string).

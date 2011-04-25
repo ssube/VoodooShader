@@ -1,7 +1,7 @@
 
 #include "stdafx.h"
 
-#include "Common.cpp"
+#include "Common.hpp"
 
 // 0b1nnnnnnn is a library-level code. 0b0nnnnnnn is interface-level. This works around
 // the facility restriction.

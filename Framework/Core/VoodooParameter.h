@@ -6,11 +6,9 @@
 #include <comsvcs.h>
 #include <atlsafe.h>
 
-
+#include "Common.hpp"
 
 using namespace ATL;
-
-
 
 // CVoodooParameter
 
