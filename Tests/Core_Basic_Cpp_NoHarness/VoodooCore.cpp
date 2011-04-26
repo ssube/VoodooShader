@@ -148,6 +148,7 @@ END_TESTF;
 
 BEGIN_TESTF(CoreInit_TextureTest, CoreInitFixture)
 {
+    TextureDesc Desc = { 256, 256, 256, false, true, TF_RGBA8 };
     void * TexAddr1 = (void*)0xDD44BB99;
     void * TexAddr2 = (void*)0x11CC7700;
     IVoodooTexture * pPassTex = nullptr;
@@ -159,11 +160,12 @@ BEGIN_TESTF(CoreInit_TextureTest, CoreInitFixture)
     V_VT(&TexData) = VT_BYREF;
 
     V_BYREF(&TexData) = TexAddr1;
-    HRESULT hr = pCore->CreateTexture(TexName1, TexData, &pPassTex);
+    HRESULT hr = pCore->CreateTexture(TexName1, Desc, TexData, &pPassTex);
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
+    Desc.RenderTarget = false;
     V_BYREF(&TexData) = TexAddr2;
-    hr = pCore->CreateTexture(TexName2, TexData, &pTechTex);
+    hr = pCore->CreateTexture(TexName2, Desc, TexData, &pTechTex);
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
     SysFreeString(TexName1);

@@ -82,6 +82,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core_Tests", "Tests\Core_Ba
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Standalone_Core", "Tests\Standalone_Core\Standalone_Core.vcxproj", "{4013F9BF-9367-405B-8005-025EABF878BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetInherit", "Tests\NetInherit\NetInherit.csproj", "{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Analysis|Any CPU = Debug_Analysis|Any CPU
@@ -438,6 +440,30 @@ Global
 		{4013F9BF-9367-405B-8005-025EABF878BD}.Template|Win32.ActiveCfg = Release|Win32
 		{4013F9BF-9367-405B-8005-025EABF878BD}.Template|Win32.Build.0 = Release|Win32
 		{4013F9BF-9367-405B-8005-025EABF878BD}.Template|x86.ActiveCfg = Release|Win32
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug_Analysis|Any CPU.ActiveCfg = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug_Analysis|Mixed Platforms.ActiveCfg = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug_Analysis|Mixed Platforms.Build.0 = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug_Analysis|Win32.ActiveCfg = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug_Analysis|x86.ActiveCfg = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug_Analysis|x86.Build.0 = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug|Win32.ActiveCfg = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug|x86.ActiveCfg = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Debug|x86.Build.0 = Debug|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Release|Any CPU.ActiveCfg = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Release|Mixed Platforms.Build.0 = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Release|Win32.ActiveCfg = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Release|x86.ActiveCfg = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Release|x86.Build.0 = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Template|Any CPU.ActiveCfg = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Template|Mixed Platforms.ActiveCfg = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Template|Mixed Platforms.Build.0 = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Template|Win32.ActiveCfg = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Template|x86.ActiveCfg = Release|x86
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}.Template|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -461,11 +487,12 @@ Global
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
 		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
 		{4013F9BF-9367-405B-8005-025EABF878BD} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
+		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

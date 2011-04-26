@@ -4,8 +4,7 @@
 #pragma comment(lib, "ole32.lib")
 #pragma comment(lib, "oleaut32.lib")
 
-#include "Core_i.h"
-#include "Core_i.c"
+#include "VoodooFramework.hpp"
 
 #include "WinUnit.h"
 
@@ -27,6 +26,13 @@ int main(int argc, TCHAR * argv[])
     {
         return 1;
     }
+
+    IVoodooParser * pParser;
+    pCore->get_Parser(&pParser);
+
+    BSTR Parsed;
+    pParser->AddVariable(L"lang", L"c++");
+    pParser->Parse(L"this is from $(lang).", PF_None, &Parsed);
 
     CoUninitialize();
 }

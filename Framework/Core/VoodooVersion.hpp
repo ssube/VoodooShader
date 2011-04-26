@@ -26,8 +26,8 @@
 #   define VOODOO_META__STRING(arg) L ## #arg
 #   define VOODOO_META_STRING(arg) L ## arg
 #else
-#   define VOODOO_META_STRING(arg) arg
 #   define VOODOO_META__STRING(arg) #arg
+#   define VOODOO_META_STRING(arg) arg
 #endif
 
 #define VOODOO_META_TOSTRING(arg) VOODOO_META__STRING(arg)
@@ -97,7 +97,7 @@
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     10
 #define VOODOO_GLOBAL_VERSION_PATCH     3
-#define VOODOO_GLOBAL_VERSION_REV       196
+#define VOODOO_GLOBAL_VERSION_REV       203
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   VOODOO_META_STRING("Copyright (c) 2010-2011 by Sean Sube")
 #define VOODOO_GLOBAL_COPYRIGHT_FULL\
     VOODOO_META_STRING("Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube. &lt;br /&gt;\n")\

@@ -2,18 +2,15 @@
 #Voodoo-specific ignores
 [Bb]in
 [Bb]uild
+[Dd]ebug*/
+[Rr]elease*/
 [Dd]ocs/doxygen
-doxylog
-CodeAnalyst
-[Tt]emplate
-*~
-*.swp
-*.tmp
+[Dd]ocs/doxylog
+CodeAnalyst*/
+[Tt]emplate*/
 Analysis/Yasca/Yasca-Report-*.html
 Resources/Installers/Output/*
 [Dd]ependencies/*/*
-[Dd]ebug
-[Rr]elease
 
 #Temp ignore for CMake files (until system is ready)
 CMakeLists.txt
@@ -44,6 +41,9 @@ Thumbs.db
 *.lib
 *.sbr
 *.vs10x
+*.swp
+*.tmp
+*~
 obj/
 _ReSharper*/
 [Tt]est[Rr]esult*

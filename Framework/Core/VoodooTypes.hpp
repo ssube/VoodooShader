@@ -187,7 +187,7 @@ typedef struct __MIDL___MIDL_itf_Core_0000_0000_0014
         float X, Y;
         float R, G;
         float U, V;
-    }
+    };
 } float2;
 
 typedef struct __MIDL___MIDL_itf_Core_0000_0000_0015
@@ -234,9 +234,7 @@ typedef struct __MIDL___MIDL_itf_Core_0000_0000_0018
 
 typedef struct __MIDL___MIDL_itf_Core_0000_0000_0019
 {
-    int unused;
-} Function;
-
-typedef Function * FunctionPtr;
+    unsigned __int64 Address;
+} FunctionPtr;
 
 typedef DWORD EnumType;

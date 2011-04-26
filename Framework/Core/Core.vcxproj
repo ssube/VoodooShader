@@ -67,10 +67,12 @@
       <InterfaceIdentifierFileName>Core_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>Core_p.c</ProxyFileName>
       <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>$(IntDir)Core.tlb</TypeLibraryName>
+      <TypeLibraryName>$(IntDir)\Voodoo_Core.tlb</TypeLibraryName>
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
+      <WarningLevel>4</WarningLevel>
+      <EnableErrorChecks>All</EnableErrorChecks>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -82,8 +84,9 @@
       <ModuleDefinitionFile>.\Core.def</ModuleDefinitionFile>
       <AdditionalDependencies>comsvcs.lib;cg.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <RegisterOutput>true</RegisterOutput>
-      <PerUserRedirection>true</PerUserRedirection>
+      <RegisterOutput>false</RegisterOutput>
+      <PerUserRedirection>false</PerUserRedirection>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -101,10 +104,12 @@
       <InterfaceIdentifierFileName>Core_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>Core_p.c</ProxyFileName>
       <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>$(IntDir)Core.tlb</TypeLibraryName>
+      <TypeLibraryName>$(IntDir)\Voodoo_Core.tlb</TypeLibraryName>
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
+      <WarningLevel>4</WarningLevel>
+      <EnableErrorChecks>All</EnableErrorChecks>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -118,8 +123,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <RegisterOutput>true</RegisterOutput>
-      <PerUserRedirection>true</PerUserRedirection>
+      <RegisterOutput>false</RegisterOutput>
+      <PerUserRedirection>false</PerUserRedirection>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

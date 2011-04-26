@@ -4,10 +4,10 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Mon Apr 25 19:51:50 2011
+/* at Tue Apr 26 13:57:00 2011
  */
 /* Compiler settings for Core.idl:
-    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
+    Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
     protocol : dce , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
     VC __declspec() decoration level: 
@@ -309,8 +309,8 @@ extern "C"{
 /* interface __MIDL_itf_Core_0000_0000 */
 /* [local] */ 
 
-typedef /* [public][public][public][public][public][public][public][public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0001
+typedef /* [helpstring][v1_enum] */ 
+enum TextureFormat
     {	TF_Unknown	= 0,
 	TF_RGB5	= 0x1,
 	TF_RGB8	= 0x3,
@@ -323,8 +323,8 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0001
 	TF_Max	= 0x7fffffff
     } 	TextureFormat;
 
-typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0002
+typedef /* [helpstring][v1_enum] */ 
+enum ParameterType
     {	PT_Unknown	= 0,
 	PT_Float1	= 0x11,
 	PT_Float2	= 0x12,
@@ -354,7 +354,7 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0002
     } 	ParameterType;
 
 typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0003
+enum __MIDL___MIDL_itf_Core_0000_0000_0001
     {	PC_Unknown	= 0,
 	PC_Float	= 0x1,
 	PC_Sampler	= 0x2,
@@ -363,7 +363,7 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0003
     } 	ParameterCategory;
 
 typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0004
+enum __MIDL___MIDL_itf_Core_0000_0000_0002
     {	PS_Unknown	= 0,
 	PS_Vertex	= 0x1,
 	PS_Fragment	= 0x2,
@@ -374,7 +374,7 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0004
     } 	ProgramStage;
 
 typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0005
+enum __MIDL___MIDL_itf_Core_0000_0000_0003
     {	TS_Unknown	= 0,
 	TS_Shader	= 0x1,
 	TS_Pass	= 0x2,
@@ -382,7 +382,7 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0005
     } 	TextureStage;
 
 typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0006
+enum __MIDL___MIDL_itf_Core_0000_0000_0004
     {	FM_Unknown	= 0,
 	FM_Read	= 0x1,
 	FM_Write	= 0x2,
@@ -390,7 +390,7 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0006
     } 	FileOpenMode;
 
 typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0007
+enum __MIDL___MIDL_itf_Core_0000_0000_0005
     {	LL_Unknown	= 0,
 	LL_Debug	= 0x1,
 	LL_Info	= 0x2,
@@ -407,7 +407,7 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0007
     } 	LogLevel;
 
 typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0008
+enum __MIDL___MIDL_itf_Core_0000_0000_0006
     {	PF_None	= 0,
 	PF_SingleSlash	= 0x1,
 	PF_SlashOnly	= 0x2,
@@ -419,14 +419,14 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0008
     } 	ParseFlags;
 
 typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0009
+enum __MIDL___MIDL_itf_Core_0000_0000_0007
     {	VT_Normal	= 0,
 	VT_State	= 0x1,
 	VT_System	= 0x10,
 	VT_Max	= 0x7fffffff
     } 	VariableType;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0010
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0008
     {
     BSTR GlobalRoot;
     BSTR LocalRoot;
@@ -436,7 +436,7 @@ typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_00
     BSTR Config;
     } 	InitParams;
 
-typedef /* [public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
+typedef /* [public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0009
     {
     int Width;
     int Height;
@@ -446,7 +446,7 @@ typedef /* [public][public][public][public][public][helpstring] */ struct __MIDL
     TextureFormat Format;
     } 	TextureDesc;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0010
     {
     int Width;
     int Height;
@@ -459,7 +459,7 @@ typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core
     int OffZ;
     } 	TextureRegion;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0013
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
     {
     BSTR Name;
     int Major;
@@ -469,20 +469,20 @@ typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_00
     boolean Debug;
     } 	VersionStruct;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0014
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
     {
     float X;
     float Y;
     } 	float2;
 
-typedef /* [public][public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0015
+typedef /* [public][public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0013
     {
     float X;
     float Y;
     float Z;
     } 	float3;
 
-typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0016
+typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0014
     {
     float X;
     float Y;
@@ -490,14 +490,14 @@ typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_
     float W;
     } 	float4;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0017
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0015
     {
     float3 Position;
     float Winding;
     float2 TexCoord;
     } 	VertexStruct;
 
-typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0018
+typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0016
     {
     int Type;
     float4 Diffuse;
@@ -512,12 +512,10 @@ typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0018
     float Phi;
     } 	LightStruct;
 
-typedef /* [public][public][public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0019
+typedef /* [public][public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0017
     {
-    int unused;
-    } 	Function;
-
-typedef /* [full] */ Function *FunctionPtr;
+    unsigned __int64 Address;
+    } 	FunctionPtr;
 
 typedef DWORD EnumType;
 
