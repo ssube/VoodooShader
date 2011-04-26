@@ -441,11 +441,12 @@ STDMETHODIMP CVoodooCore::CreateParameter(
 
 STDMETHODIMP CVoodooCore::CreateTexture( 
    BSTR pName,
+   TextureDesc Desc,
    VARIANT Data,
    IVoodooTexture **ppTexture)
 {
     if ( !m_Init ) return E_NOTINIT;
-    if ( ppTexture == NULL || V_VT(&Data) != VT_BYREF )
+    if ( ppTexture == NULL )
     {
         return E_INVALIDARG;
     }
@@ -454,7 +455,7 @@ STDMETHODIMP CVoodooCore::CreateTexture(
     {
         return E_DUPNAME;
     } else {
-        *ppTexture = CVoodooTexture::Create(this, pName, V_BYREF(&Data));
+        *ppTexture = CVoodooTexture::Create(this, pName, Desc, Data);
 
         if ( *ppTexture == NULL )
         {
@@ -467,7 +468,7 @@ STDMETHODIMP CVoodooCore::CreateTexture(
         (
             m_Logger, LL_Debug, VOODOO_CORE_NAME, 
             L"Added texture %s with data %p, returning shared pointer to %p.", 
-            pName, V_BYREF(&Data), *ppTexture
+            pName, &Data, *ppTexture
         );
 
         return S_OK;

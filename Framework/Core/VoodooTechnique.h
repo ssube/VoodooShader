@@ -31,7 +31,7 @@ using namespace ATL;
  * @par IID/CLSID
  *    @ref IID_IVoodooTechnique
  * @par GUID
- *    {B0D5E12B-2A58-4AF3-BD0A-A41A3968AB36}
+ *    {1d3d7f89-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    object, dual, nonextensible, pointer_default(unique)
  * 
@@ -54,7 +54,7 @@ using namespace ATL;
  * @par IID/CLSID
  *    @ref CLSID_VoodooTechnique
  * @par GUID
- *    {9E6F15CB-5B03-4BD8-9D04-B27D576C3975}
+ *    {1d3d7fa6-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    noncreatable
  * @par Version

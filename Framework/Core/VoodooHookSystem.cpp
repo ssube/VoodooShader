@@ -3,9 +3,6 @@
 #include "stdafx.h"
 #include "VoodooHookSystem.h"
 
-
-
-
 // CVoodooHookSystem
 CVoodooHookSystem::CVoodooHookSystem()
 {

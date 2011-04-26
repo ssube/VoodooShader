@@ -3,15 +3,12 @@
 #include "stdafx.h"
 #include "VoodooTexture.h"
 
-
-
 // CVoodooTexture
 CVoodooTexture::CVoodooTexture()
 {
     m_Refrs = 0;
     m_Core = NULL;
     m_Name.Empty();
-    m_Data = NULL;
 }
 
 CVoodooTexture::~CVoodooTexture()
@@ -19,10 +16,9 @@ CVoodooTexture::~CVoodooTexture()
     m_Refrs = 0;
     m_Core = NULL;
     m_Name.Empty();
-    m_Data = NULL;
 }
 
-IVoodooTexture * CVoodooTexture::Create(IVoodooCore * pCore, BSTR pName, void * pData)
+IVoodooTexture * CVoodooTexture::Create(IVoodooCore * pCore, BSTR pName, TextureDesc Desc, VARIANT Data)
 {
     if ( pCore == NULL || pName == NULL ) return NULL;
 
@@ -33,9 +29,12 @@ IVoodooTexture * CVoodooTexture::Create(IVoodooCore * pCore, BSTR pName, void * 
     if ( SUCCEEDED(hr) )
     {
         pTexture->AddRef();
+
         pTexture->m_Core = pCore;
         pTexture->m_Name = pName;
-        pTexture->m_Data = pData;
+        pTexture->m_Desc = Desc;
+        pTexture->m_Data = Data;
+
         hr = pTexture->QueryInterface(IID_IVoodooTexture, (void**)&ipTexture);
         pTexture->Release();
     }
@@ -103,9 +102,18 @@ STDMETHODIMP CVoodooTexture::get_Data(VARIANT *ppData)
     {
         return E_INVALIDARG;
     } else {
-        V_VT(ppData) = VT_BYREF;
-        V_BYREF(ppData) = m_Data;
+        *ppData = m_Data;
         return S_OK;
     }
 }
 
+STDMETHODIMP CVoodooTexture::get_Desc(TextureDesc *pDesc)
+{
+    if ( pDesc == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        *pDesc = m_Desc;
+        return S_OK;
+    }
+}

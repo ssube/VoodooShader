@@ -31,7 +31,7 @@ using namespace ATL;
  * @par IID/CLSID
  *    @ref IID_IVoodooParser
  * @par GUID
- *    {B375BC6B-5A6C-4B8B-888B-A937BA3814FD}
+ *    {1d3d7f87-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    object, dual, nonextensible, pointer_default(unique)
  * 
@@ -61,7 +61,7 @@ typedef CMap<CComBSTR, CComBSTR, CComBSTR, CComBSTR> Dictionary;
  * @par IID/CLSID
  *    @ref CLSID_VoodooParser
  * @par GUID
- *    {F4F858F0-C357-4C67-8FB0-9F91AE2DDD4C}
+ *    {1d3d7fa4-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    none
  * @par Version

@@ -31,7 +31,7 @@ using namespace ATL;
  * @par IID/CLSID
  *    @ref IID_IVoodooShader
  * @par GUID
- *    {8C26CEBA-45AD-4382-BEA9-EDBB2F446B21}
+ *    {1d3d7f88-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    object, dual, nonextensible, pointer_default(unique)
  * 
@@ -40,6 +40,10 @@ using namespace ATL;
  *    
  * Provides the shader loader and linker, as well as access to the generated tree of effect
  * components.
+ * 
+ * Each shader consists of techniques and parameters. Techniques are validated during loading and
+ * not added if they cannot run on the current hardware. All effect-level parameters with 
+ * compatible types are added and linked as appropriate.
  * 
  * @sa @ref page_shaders
  **/
@@ -52,7 +56,7 @@ using namespace ATL;
  * @par IID/CLSID
  *    @ref CLSID_VoodooShader
  * @par GUID
- *    {9E6F15CB-5B03-4BD8-9D04-B27D576C3975}
+ *    {1d3d7fa5-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    noncreatable
  * @par Version
@@ -94,39 +98,17 @@ BEGIN_COM_MAP(CVoodooShader)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
-
-
-
 // IVoodooShader
 public:
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-        /* [retval][out] */ LPBSTR pName);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-        /* [retval][out] */ IVoodooCore **ppCore);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TechniqueCount( 
-        /* [retval][out] */ INT * pCount);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetTechnique( 
-        /* [in] */ INT Number,
-        /* [retval][out] */ IVoodooTechnique **ppTechnique);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DefaultTechnique( 
-        /* [retval][out] */ IVoodooTechnique **ppTechnique);
-
-    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DefaultTechnique( 
-        /* [in] */ IVoodooTechnique *pTechnique);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ParameterCount( 
-        /* [retval][out] */ INT *ppCount);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetParameter( 
-        /* [in] */ INT Number,
-        /* [retval][out] */ IVoodooParameter **ppParameter);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE get_CgShader( 
-        /* [retval][out] */ VARIANT *ppCgShader);
+    virtual HRESULT STDMETHODCALLTYPE get_Name(LPBSTR pName);
+    virtual HRESULT STDMETHODCALLTYPE get_Core(IVoodooCore **ppCore);
+    virtual HRESULT STDMETHODCALLTYPE get_TechniqueCount(INT * pCount);
+    virtual HRESULT STDMETHODCALLTYPE GetTechnique(INT Number, IVoodooTechnique **ppTechnique);
+    virtual HRESULT STDMETHODCALLTYPE get_DefaultTechnique(IVoodooTechnique **ppTechnique);
+    virtual HRESULT STDMETHODCALLTYPE put_DefaultTechnique(IVoodooTechnique *pTechnique);
+    virtual HRESULT STDMETHODCALLTYPE get_ParameterCount(INT *ppCount);
+    virtual HRESULT STDMETHODCALLTYPE GetParameter(INT Number, IVoodooParameter **ppParameter);
+    virtual HRESULT STDMETHODCALLTYPE get_CgShader(VARIANT *ppCgShader);
 
 private:
     ULONG m_Refrs;

@@ -111,6 +111,7 @@ enum {
     LL_Warning      = 0x04,
     LL_Error        = 0x08,
     LL_External     = 0x10,
+    LL_Plugin       = 0x20,
     LL_Module       = 0x40,
     LL_Framework    = 0x80,
     LL_Internal     = 0x82,
@@ -157,6 +158,7 @@ struct
     int Height;
     int Depth;
     boolean Mipmaps;
+    boolean RenderTarget;
     TextureFormat Format;
 } TextureDesc;
 
@@ -167,6 +169,7 @@ struct
     int Height;
     int Depth;
     boolean Mipmaps;
+    boolean RenderTarget;
     TextureFormat Format;
     int OffX;
     int OffY;
@@ -272,7 +275,7 @@ interface IVoodooCore : IDispatch{
     [propput, id(8)] HRESULT CgContext([in] VARIANT CgContext);
     [vararg, id(10)] HRESULT CreateShader([in] IVoodooFile * pFile, [in] SAFEARRAY(VARIANT) pArgs, [out, retval] IVoodooShader ** ppShader);
     [id(11)] HRESULT CreateParameter([in] BSTR pName, [in] EnumType Type, [out, retval] IVoodooParameter ** ppParameter);
-    [id(12)] HRESULT CreateTexture([in] BSTR pName, [in] VARIANT Data, [out, retval] IVoodooTexture ** ppTexture);
+    [id(12)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Desc, [in] VARIANT Data, [out, retval] IVoodooTexture ** ppTexture);
     [id(13)] HRESULT GetParameter([in] BSTR pName, [out, retval] IVoodooParameter ** ppParameter);
     [id(14)] HRESULT GetTexture([in] BSTR pName, [out, retval] IVoodooTexture ** ppTexture);
     [id(15)] HRESULT RemoveTexture([in] BSTR pName);
@@ -359,6 +362,7 @@ interface IVoodooTexture : IDispatch{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [propget, id(3)] HRESULT Data([out, retval] VARIANT * pData);
+    [propget, id(4)] HRESULT Desc([out, retval] TextureDesc * pDesc);
 };
 [
 	object,

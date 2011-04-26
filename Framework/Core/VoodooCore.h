@@ -1,10 +1,25 @@
-// VoodooCore.h : Declaration of the CVoodooCore
+/**************************************************************************************************\
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify it under the terms of the 
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program; 
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * Boston, MA  02110-1301 US
+ *
+ * Support and more information may be found at http://www.voodooshader.com, or by contacting the
+ * developer at peachykeen@voodooshader.com
+\**************************************************************************************************/
 
 #pragma once
-#include "Core_i.h"
-#include "resource.h"       // main symbols
-#include <comsvcs.h>
-#include <msxml2.h>
 
 #include "Common.hpp"
 
@@ -16,7 +31,7 @@ using namespace ATL;
  * @par IID/CLSID
  *    @ref IID_IVoodooCore
  * @par GUID
- *    {6D183074-9127-4615-8366-02587BAFE38C}
+ *    {1d3d7f86-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    object, dual, nonextensible, pointer_default(unique)
  * 
@@ -39,7 +54,7 @@ using namespace ATL;
  * @par IID/CLSID
  *    @ref CLSID_VoodooCore
  * @par GUID
- *    {C50C9C7D-7E66-40ED-B5FD-BE7135DA40BF}
+ *    {1d3d7fa3-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    none
  * @par Version
@@ -79,71 +94,25 @@ BEGIN_COM_MAP(CVoodooCore)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
-
-
-
 // IVoodooCore
 public:    
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Initialize( 
-        /* [optional][in] */ const InitParams Params);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Parser( 
-        /* [retval][out] */ IVoodooParser **ppParser) ;
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_HookSystem( 
-        /* [retval][out] */ IVoodooHookSystem **ppHookSystem) ;
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FileSystem( 
-        /* [retval][out] */ IVoodooFileSystem **ppFileSystem) ;
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Adapter( 
-        /* [retval][out] */ IVoodooAdapter **ppAdapter) ;
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Logger( 
-        /* [retval][out] */ IVoodooLogger **ppLogger) ;
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Config( 
-        /* [retval][out] */ IXMLDOMDocument **ppConfig) ;
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgContext( 
-        /* [retval][out] */ VARIANT * pCgContext) ;
-
-    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_CgContext( 
-        /* [in] */ VARIANT pCgContext) ;
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateShader( 
-        /* [in] */ IVoodooFile *pFile,
-        SAFEARRAY * pArgs,
-        /* [retval][out] */ IVoodooShader **ppShader) ;
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateParameter( 
-        /* [in] */ BSTR pName,
-        /* [in] */ DWORD Type,
-        /* [retval][out] */ IVoodooParameter **ppParameter) ;
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
-        /* [in] */ BSTR pName,
-        /* [in] */ VARIANT Data,
-        /* [retval][out] */ IVoodooTexture **ppTexture) ;
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetParameter( 
-        /* [in] */ BSTR pName,
-        /* [retval][out] */ IVoodooParameter **ppParameter) ;
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetTexture( 
-        /* [in] */ BSTR pName,
-        /* [retval][out] */ IVoodooTexture **ppTexture) ;
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveTexture( 
-        /* [in] */ BSTR pName) ;
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE GetStageTexture( 
-        /* [in] */ DWORD Stage,
-        /* [retval][out] */ IVoodooTexture **ppTexture) ;
-
-    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE SetStageTexture( 
-        /* [in] */ DWORD Stage,
-        /* [in] */ IVoodooTexture *pTexture) ;
+    virtual HRESULT STDMETHODCALLTYPE Initialize(const InitParams Params);
+    virtual HRESULT STDMETHODCALLTYPE get_Parser(IVoodooParser **ppParser);
+    virtual HRESULT STDMETHODCALLTYPE get_HookSystem(IVoodooHookSystem **ppHookSystem);
+    virtual HRESULT STDMETHODCALLTYPE get_FileSystem(IVoodooFileSystem **ppFileSystem);
+    virtual HRESULT STDMETHODCALLTYPE get_Adapter(IVoodooAdapter **ppAdapter);
+    virtual HRESULT STDMETHODCALLTYPE get_Logger(IVoodooLogger **ppLogger);
+    virtual HRESULT STDMETHODCALLTYPE get_Config(IXMLDOMDocument **ppConfig);
+    virtual HRESULT STDMETHODCALLTYPE get_CgContext(VARIANT * pCgContext);
+    virtual HRESULT STDMETHODCALLTYPE put_CgContext(VARIANT pCgContext);
+    virtual HRESULT STDMETHODCALLTYPE CreateShader(IVoodooFile *pFile, SAFEARRAY * pArgs, IVoodooShader **ppShader);
+    virtual HRESULT STDMETHODCALLTYPE CreateParameter(BSTR pName, DWORD Type, IVoodooParameter **ppParameter);
+    virtual HRESULT STDMETHODCALLTYPE CreateTexture(BSTR pName, TextureDesc Desc, VARIANT Data, IVoodooTexture **ppTexture);
+    virtual HRESULT STDMETHODCALLTYPE GetParameter(BSTR pName, IVoodooParameter **ppParameter);
+    virtual HRESULT STDMETHODCALLTYPE GetTexture(BSTR pName, IVoodooTexture **ppTexture);
+    virtual HRESULT STDMETHODCALLTYPE RemoveTexture(BSTR pName);
+    virtual HRESULT STDMETHODCALLTYPE GetStageTexture(DWORD Stage, IVoodooTexture **ppTexture);
+    virtual HRESULT STDMETHODCALLTYPE SetStageTexture(DWORD Stage, IVoodooTexture *pTexture);
 
     private:
         HRESULT STDMETHODCALLTYPE LoadConfig(BSTR pFile);

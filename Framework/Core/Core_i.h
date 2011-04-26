@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Mon Apr 25 04:42:44 2011
+/* at Mon Apr 25 19:51:50 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -225,18 +225,6 @@ typedef struct VoodooParameter VoodooParameter;
 #endif 	/* __VoodooParameter_FWD_DEFINED__ */
 
 
-#ifndef __VoodooLogger_FWD_DEFINED__
-#define __VoodooLogger_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class VoodooLogger VoodooLogger;
-#else
-typedef struct VoodooLogger VoodooLogger;
-#endif /* __cplusplus */
-
-#endif 	/* __VoodooLogger_FWD_DEFINED__ */
-
-
 #ifndef __VoodooAdapter_FWD_DEFINED__
 #define __VoodooAdapter_FWD_DEFINED__
 
@@ -247,6 +235,30 @@ typedef struct VoodooAdapter VoodooAdapter;
 #endif /* __cplusplus */
 
 #endif 	/* __VoodooAdapter_FWD_DEFINED__ */
+
+
+#ifndef __VoodooHookSystem_FWD_DEFINED__
+#define __VoodooHookSystem_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class VoodooHookSystem VoodooHookSystem;
+#else
+typedef struct VoodooHookSystem VoodooHookSystem;
+#endif /* __cplusplus */
+
+#endif 	/* __VoodooHookSystem_FWD_DEFINED__ */
+
+
+#ifndef __VoodooLogger_FWD_DEFINED__
+#define __VoodooLogger_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class VoodooLogger VoodooLogger;
+#else
+typedef struct VoodooLogger VoodooLogger;
+#endif /* __cplusplus */
+
+#endif 	/* __VoodooLogger_FWD_DEFINED__ */
 
 
 #ifndef __VoodooFileSystem_FWD_DEFINED__
@@ -285,18 +297,6 @@ typedef struct VoodooImage VoodooImage;
 #endif 	/* __VoodooImage_FWD_DEFINED__ */
 
 
-#ifndef __VoodooHookSystem_FWD_DEFINED__
-#define __VoodooHookSystem_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class VoodooHookSystem VoodooHookSystem;
-#else
-typedef struct VoodooHookSystem VoodooHookSystem;
-#endif /* __cplusplus */
-
-#endif 	/* __VoodooHookSystem_FWD_DEFINED__ */
-
-
 /* header files for imported files */
 #include "oaidl.h"
 #include "ocidl.h"
@@ -309,7 +309,7 @@ extern "C"{
 /* interface __MIDL_itf_Core_0000_0000 */
 /* [local] */ 
 
-typedef /* [public][public][public][public][public][public][helpstring][v1_enum] */ 
+typedef /* [public][public][public][public][public][public][public][public][helpstring][v1_enum] */ 
 enum __MIDL___MIDL_itf_Core_0000_0000_0001
     {	TF_Unknown	= 0,
 	TF_RGB5	= 0x1,
@@ -397,6 +397,7 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0007
 	LL_Warning	= 0x4,
 	LL_Error	= 0x8,
 	LL_External	= 0x10,
+	LL_Plugin	= 0x20,
 	LL_Module	= 0x40,
 	LL_Framework	= 0x80,
 	LL_Internal	= 0x82,
@@ -435,12 +436,13 @@ typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_00
     BSTR Config;
     } 	InitParams;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
+typedef /* [public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
     {
     int Width;
     int Height;
     int Depth;
     boolean Mipmaps;
+    boolean RenderTarget;
     TextureFormat Format;
     } 	TextureDesc;
 
@@ -450,6 +452,7 @@ typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core
     int Height;
     int Depth;
     boolean Mipmaps;
+    boolean RenderTarget;
     TextureFormat Format;
     int OffX;
     int OffY;
@@ -547,7 +550,7 @@ EXTERN_C const IID IID_IVoodooCore;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("6D183074-9127-4615-8366-02587BAFE38C")
+    MIDL_INTERFACE("1d3d7f86-6f32-11e0-8ac0-005056c00000")
     IVoodooCore : public IDispatch
     {
     public:
@@ -590,6 +593,7 @@ EXTERN_C const IID IID_IVoodooCore;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateTexture( 
             /* [in] */ BSTR pName,
+            /* [in] */ TextureDesc Desc,
             /* [in] */ VARIANT Data,
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
         
@@ -712,6 +716,7 @@ EXTERN_C const IID IID_IVoodooCore;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateTexture )( 
             IVoodooCore * This,
             /* [in] */ BSTR pName,
+            /* [in] */ TextureDesc Desc,
             /* [in] */ VARIANT Data,
             /* [retval][out] */ IVoodooTexture **ppTexture);
         
@@ -808,8 +813,8 @@ EXTERN_C const IID IID_IVoodooCore;
 #define IVoodooCore_CreateParameter(This,pName,Type,ppParameter)	\
     ( (This)->lpVtbl -> CreateParameter(This,pName,Type,ppParameter) ) 
 
-#define IVoodooCore_CreateTexture(This,pName,Data,ppTexture)	\
-    ( (This)->lpVtbl -> CreateTexture(This,pName,Data,ppTexture) ) 
+#define IVoodooCore_CreateTexture(This,pName,Desc,Data,ppTexture)	\
+    ( (This)->lpVtbl -> CreateTexture(This,pName,Desc,Data,ppTexture) ) 
 
 #define IVoodooCore_GetParameter(This,pName,ppParameter)	\
     ( (This)->lpVtbl -> GetParameter(This,pName,ppParameter) ) 
@@ -848,7 +853,7 @@ EXTERN_C const IID IID_IVoodooParser;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("B375BC6B-5A6C-4B8B-888B-A937BA3814FD")
+    MIDL_INTERFACE("1d3d7f87-6f32-11e0-8ac0-005056c00000")
     IVoodooParser : public IDispatch
     {
     public:
@@ -997,7 +1002,7 @@ EXTERN_C const IID IID_IVoodooShader;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("8C26CEBA-45AD-4382-BEA9-EDBB2F446B21")
+    MIDL_INTERFACE("1d3d7f88-6f32-11e0-8ac0-005056c00000")
     IVoodooShader : public IDispatch
     {
     public:
@@ -1202,7 +1207,7 @@ EXTERN_C const IID IID_IVoodooTechnique;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("B0D5E12B-2A58-4AF3-BD0A-A41A3968AB36")
+    MIDL_INTERFACE("1d3d7f89-6f32-11e0-8ac0-005056c00000")
     IVoodooTechnique : public IDispatch
     {
     public:
@@ -1385,7 +1390,7 @@ EXTERN_C const IID IID_IVoodooPass;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("7C231D9E-146B-40CF-9F39-A4D3513DD7F7")
+    MIDL_INTERFACE("1d3d7f8a-6f32-11e0-8ac0-005056c00000")
     IVoodooPass : public IDispatch
     {
     public:
@@ -1568,7 +1573,7 @@ EXTERN_C const IID IID_IVoodooTexture;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("164A33FD-E80D-4666-AE93-298B33020986")
+    MIDL_INTERFACE("1d3d7f8b-6f32-11e0-8ac0-005056c00000")
     IVoodooTexture : public IDispatch
     {
     public:
@@ -1580,6 +1585,9 @@ EXTERN_C const IID IID_IVoodooTexture;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
             /* [retval][out] */ VARIANT *pData) = 0;
+        
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Desc( 
+            /* [retval][out] */ TextureDesc *pDesc) = 0;
         
     };
     
@@ -1642,6 +1650,10 @@ EXTERN_C const IID IID_IVoodooTexture;
             IVoodooTexture * This,
             /* [retval][out] */ VARIANT *pData);
         
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Desc )( 
+            IVoodooTexture * This,
+            /* [retval][out] */ TextureDesc *pDesc);
+        
         END_INTERFACE
     } IVoodooTextureVtbl;
 
@@ -1687,6 +1699,9 @@ EXTERN_C const IID IID_IVoodooTexture;
 #define IVoodooTexture_get_Data(This,pData)	\
     ( (This)->lpVtbl -> get_Data(This,pData) ) 
 
+#define IVoodooTexture_get_Desc(This,pDesc)	\
+    ( (This)->lpVtbl -> get_Desc(This,pDesc) ) 
+
 #endif /* COBJMACROS */
 
 
@@ -1709,7 +1724,7 @@ EXTERN_C const IID IID_IVoodooParameter;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("6AB220A5-4579-441E-9060-4AF7535D6601")
+    MIDL_INTERFACE("1d3d7f8c-6f32-11e0-8ac0-005056c00000")
     IVoodooParameter : public IDispatch
     {
     public:
@@ -1940,7 +1955,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("59C2FE67-A7EC-48B2-982E-9707A3840259")
+    MIDL_INTERFACE("1d3d7f8d-6f32-11e0-8ac0-005056c00000")
     IVoodooAdapter : public IDispatch
     {
     public:
@@ -2219,7 +2234,7 @@ EXTERN_C const IID IID_IVoodooHookSystem;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("4E25F9D4-87D0-4CE8-84C0-B72225336DA3")
+    MIDL_INTERFACE("1d3d7f8e-6f32-11e0-8ac0-005056c00000")
     IVoodooHookSystem : public IDispatch
     {
     public:
@@ -2372,7 +2387,7 @@ EXTERN_C const IID IID_IVoodooLogger;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("D26A5521-3E3D-4BD9-8A75-1AD5014D2479")
+    MIDL_INTERFACE("1d3d7f8f-6f32-11e0-8ac0-005056c00000")
     IVoodooLogger : public IDispatch
     {
     public:
@@ -2603,7 +2618,7 @@ EXTERN_C const IID IID_IVoodooFileSystem;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("2ADFD66B-2C4F-4172-823F-47D480BF8523")
+    MIDL_INTERFACE("1d3d7f90-6f32-11e0-8ac0-005056c00000")
     IVoodooFileSystem : public IDispatch
     {
     public:
@@ -2768,7 +2783,7 @@ EXTERN_C const IID IID_IVoodooFile;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("35068CA2-B06B-48DF-ADAB-BC1FDA163C1F")
+    MIDL_INTERFACE("1d3d7f91-6f32-11e0-8ac0-005056c00000")
     IVoodooFile : public IDispatch
     {
     public:
@@ -2931,7 +2946,7 @@ EXTERN_C const IID IID_IVoodooImage;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("8B74AE58-98A2-4597-B963-4605F03A86D3")
+    MIDL_INTERFACE("1d3d7f92-6f32-11e0-8ac0-005056c00000")
     IVoodooImage : public IVoodooFile
     {
     public:
@@ -3283,7 +3298,7 @@ EXTERN_C const CLSID CLSID_VoodooCore;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("C50C9C7D-7E66-40ED-B5FD-BE7135DA40BF")
+class DECLSPEC_UUID("1d3d7fa3-6f32-11e0-8ac0-005056c00000")
 VoodooCore;
 #endif
 
@@ -3291,7 +3306,7 @@ EXTERN_C const CLSID CLSID_VoodooParser;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("F4F858F0-C357-4C67-8FB0-9F91AE2DDD4C")
+class DECLSPEC_UUID("1d3d7fa4-6f32-11e0-8ac0-005056c00000")
 VoodooParser;
 #endif
 
@@ -3299,7 +3314,7 @@ EXTERN_C const CLSID CLSID_VoodooShader;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("9E6F15CB-5B03-4BD8-9D04-B27D576C3975")
+class DECLSPEC_UUID("1d3d7fa5-6f32-11e0-8ac0-005056c00000")
 VoodooShader;
 #endif
 
@@ -3307,7 +3322,7 @@ EXTERN_C const CLSID CLSID_VoodooTechnique;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("1401CE59-BC88-4B38-A34E-0E478CEFD7A8")
+class DECLSPEC_UUID("1d3d7fa6-6f32-11e0-8ac0-005056c00000")
 VoodooTechnique;
 #endif
 
@@ -3315,7 +3330,7 @@ EXTERN_C const CLSID CLSID_VoodooPass;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("9B99881A-821B-4300-8C88-E86FFD787F8B")
+class DECLSPEC_UUID("1d3d7fa7-6f32-11e0-8ac0-005056c00000")
 VoodooPass;
 #endif
 
@@ -3323,7 +3338,7 @@ EXTERN_C const CLSID CLSID_VoodooTexture;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("E2FC29A5-4B54-4720-A3AD-2E86255D2138")
+class DECLSPEC_UUID("1d3d7fa8-6f32-11e0-8ac0-005056c00000")
 VoodooTexture;
 #endif
 
@@ -3331,31 +3346,39 @@ EXTERN_C const CLSID CLSID_VoodooParameter;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("5190BCB1-B6E5-4611-86B6-C12EF24D6870")
+class DECLSPEC_UUID("1d3d7fa9-6f32-11e0-8ac0-005056c00000")
 VoodooParameter;
-#endif
-
-EXTERN_C const CLSID CLSID_VoodooLogger;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("7C6B6D83-F882-4954-952B-F5689DA3D4D7")
-VoodooLogger;
 #endif
 
 EXTERN_C const CLSID CLSID_VoodooAdapter;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("66063841-6A4E-4D12-A186-5319762EFEB2")
+class DECLSPEC_UUID("1d3d7faa-6f32-11e0-8ac0-005056c00000")
 VoodooAdapter;
+#endif
+
+EXTERN_C const CLSID CLSID_VoodooHookSystem;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("1d3d7fab-6f32-11e0-8ac0-005056c00000")
+VoodooHookSystem;
+#endif
+
+EXTERN_C const CLSID CLSID_VoodooLogger;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("1d3d7fac-6f32-11e0-8ac0-005056c00000")
+VoodooLogger;
 #endif
 
 EXTERN_C const CLSID CLSID_VoodooFileSystem;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("14CC5267-85B7-41B2-A0DC-C69DDEA9E97C")
+class DECLSPEC_UUID("1d3d7fad-6f32-11e0-8ac0-005056c00000")
 VoodooFileSystem;
 #endif
 
@@ -3363,7 +3386,7 @@ EXTERN_C const CLSID CLSID_VoodooFile;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("26747ECA-9219-4829-B448-4CD7C46534C0")
+class DECLSPEC_UUID("1d3d7fae-6f32-11e0-8ac0-005056c00000")
 VoodooFile;
 #endif
 
@@ -3371,16 +3394,8 @@ EXTERN_C const CLSID CLSID_VoodooImage;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("EAB336C3-CB16-4731-8CD2-A6F691FB5E18")
+class DECLSPEC_UUID("1d3d7faf-6f32-11e0-8ac0-005056c00000")
 VoodooImage;
-#endif
-
-EXTERN_C const CLSID CLSID_VoodooHookSystem;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("04666805-E086-4104-BCC6-9A0C7FADB924")
-VoodooHookSystem;
 #endif
 #endif /* __Voodoo_Core_LIBRARY_DEFINED__ */
 

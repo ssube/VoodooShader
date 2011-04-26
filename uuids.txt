@@ -1,3 +1,13 @@
+// 
+// Voodoo GUID stockpile.
+// 
+// These GUIDs are intended for use within Voodoo and are reserved
+// (please don't generate them for your own project! :P). They were 
+// generated sequentially to simplify the internals. More blocks may
+// be made and used if needed. A range is reserved for future (Ex, v2)
+// interfaces, core only.
+//
+
 1d3d7f85-6f32-11e0-8ac0-005056c00000 // Voodoo/Core library
 1d3d7f86-6f32-11e0-8ac0-005056c00000 // IVoodooCore
 1d3d7f87-6f32-11e0-8ac0-005056c00000 // IVoodooParser
@@ -41,10 +51,11 @@
 1d3d7fad-6f32-11e0-8ac0-005056c00000 // CVoodooFileSystem
 1d3d7fae-6f32-11e0-8ac0-005056c00000 // CVoodooFile
 1d3d7faf-6f32-11e0-8ac0-005056c00000 // CVoodooImage
-1d3d7fb0-6f32-11e0-8ac0-005056c00000
-1d3d7fb1-6f32-11e0-8ac0-005056c00000
-1d3d7fb2-6f32-11e0-8ac0-005056c00000
-1d3d7fb3-6f32-11e0-8ac0-005056c00000
+1d3d7fb0-6f32-11e0-8ac0-005056c00000 // Plugin - CXmlLogger
+1d3d7fb1-6f32-11e0-8ac0-005056c00000 // Plugin - CWFileSystem
+1d3d7fb2-6f32-11e0-8ac0-005056c00000 // Plugin - CEHHookSystem
+1d3d7fb3-6f32-11e0-8ac0-005056c00000 // Loader?
 1d3d7fb4-6f32-11e0-8ac0-005056c00000
 1d3d7fb5-6f32-11e0-8ac0-005056c00000
 1d3d7fb6-6f32-11e0-8ac0-005056c00000
+// End of 50-block 1 (25/04/2011 - 0500).

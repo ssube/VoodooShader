@@ -31,7 +31,7 @@ using namespace ATL;
  * @par IID/CLSID
  *    @ref IID_IVoodooPass
  * @par GUID
- *    {7C231D9E-146B-40CF-9F39-A4D3513DD7F7}
+ *    {1d3d7f8a-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    object, dual, nonextensible, pointer_default(unique)
  * 
@@ -51,7 +51,7 @@ using namespace ATL;
  *     make additional stages available. Voodoo internally supports all stages up to OpenGL 4.0/
  *     DirectX 11.
  * 
- * @sa @ref page_shaders_sec_tech
+ * @sa @ref page_shaders_sec_pass
  **/
 
 /**
@@ -62,7 +62,7 @@ using namespace ATL;
  * @par IID/CLSID
  *    @ref CLSID_VoodooPass
  * @par GUID
- *    {9B99881A-821B-4300-8C88-E86FFD787F8B}
+ *    {1d3d7fa7-6f32-11e0-8ac0-005056c00000}
  * @par Attributes
  *    noncreatable
  * @par Version
@@ -74,7 +74,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CVoodooPass :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CVoodooPass, &CLSID_VoodooPass>,
-	public IDispatchImpl<IVoodooPass, &IID_IVoodooPass, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<IVoodooPass, &IID_IVoodooPass, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
 	CVoodooPass();
@@ -101,32 +101,15 @@ BEGIN_COM_MAP(CVoodooPass)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
-
-
-
 // IVoodooPass
 public:
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-        /* [retval][out] */ LPBSTR pName);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-        /* [retval][out] */ IVoodooCore **ppCore);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Target( 
-        /* [retval][out] */ IVoodooTexture **ppTexture);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shader( 
-        /* [retval][out] */ IVoodooShader **ppShader);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Technique( 
-        /* [retval][out] */ IVoodooTechnique **ppTechnique);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCgProgram( 
-        /* [in] */ DWORD Stage,
-        /* [retval][out] */ VARIANT *ppProgram);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE get_CgPass( 
-        /* [retval][out] */ VARIANT *ppPass);
+    virtual HRESULT STDMETHODCALLTYPE get_Name(LPBSTR pName);
+    virtual HRESULT STDMETHODCALLTYPE get_Core(IVoodooCore **ppCore);
+    virtual HRESULT STDMETHODCALLTYPE get_Target(IVoodooTexture **ppTexture);
+    virtual HRESULT STDMETHODCALLTYPE get_Shader(IVoodooShader **ppShader);
+    virtual HRESULT STDMETHODCALLTYPE get_Technique(IVoodooTechnique **ppTechnique);
+    virtual HRESULT STDMETHODCALLTYPE GetCgProgram(DWORD Stage, VARIANT *ppProgram);
+    virtual HRESULT STDMETHODCALLTYPE get_CgPass(VARIANT *ppPass);
 
 private:
     ULONG m_Refrs;

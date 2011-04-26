@@ -108,6 +108,7 @@ typedef enum __MIDL___MIDL_itf_Core_0000_0000_0007
     LL_Warning	    = 0x4,
     LL_Error	    = 0x8,
     LL_External	    = 0x10,
+    LL_Plugin       = 0x20,
     LL_Module	    = 0x40,
     LL_Framework	= 0x80,
     LL_Internal	    = 0x82,
@@ -152,6 +153,7 @@ typedef struct __MIDL___MIDL_itf_Core_0000_0000_0011
     int Height;
     int Depth;
     boolean Mipmaps;
+    boolean RenderTarget;
     TextureFormat Format;
 } TextureDesc;
 
@@ -161,6 +163,7 @@ typedef struct __MIDL___MIDL_itf_Core_0000_0000_0012
     int Height;
     int Depth;
     boolean Mipmaps;
+    boolean RenderTarget;
     TextureFormat Format;
     int OffX;
     int OffY;
