@@ -2,7 +2,7 @@ HKCR
 {
 	VoodooCore.Pass.1 = s 'VoodooPass Class'
 	{
-		CLSID = s '{9B99881A-821B-4300-8C88-E86FFD787F8B}'
+		CLSID = s '{1d3d7fa7-6f32-11e0-8ac0-005056c00000}'
 	}
 	VoodooCore.Pass = s 'VoodooPass Class'
 	{
@@ -10,7 +10,7 @@ HKCR
 	}
 	NoRemove CLSID
 	{
-		ForceRemove {9B99881A-821B-4300-8C88-E86FFD787F8B} = s 'VoodooPass Class'
+		ForceRemove {1d3d7fa7-6f32-11e0-8ac0-005056c00000} = s 'VoodooPass Class'
 		{
 			ProgID = s 'VoodooCore.Pass.1'
 			VersionIndependentProgID = s 'VoodooCore.Pass'
@@ -19,7 +19,7 @@ HKCR
 			{
 				val ThreadingModel = s 'Both'
 			}
-			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
 			Version = s '1.0'
 		}
 	}

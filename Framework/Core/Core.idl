@@ -23,8 +23,7 @@ import "oaidl.idl";
 import "ocidl.idl";
 
 // Enums and such
-typedef [v1_enum, helpstring("Texture Formats")]
-enum TextureFormat 
+typedef [v1_enum] enum 
 {
     TF_Unknown  = 0x00,
     TF_RGB5     = 0x01,
@@ -38,8 +37,7 @@ enum TextureFormat
     TF_Max      = 0x7FFFFFFF
 } TextureFormat;
 
-typedef [v1_enum, helpstring("Parameter Types")]
-enum ParameterType 
+typedef [v1_enum] enum 
 {
     PT_Unknown      = 0x00,
     PT_Float1       = 0x11,
@@ -69,18 +67,16 @@ enum ParameterType
     PT_Max          = 0x7FFFFFFF
 } ParameterType;
 
-typedef [v1_enum, helpstring("Parameter Categories")]
-enum ParameterCategory 
+typedef [v1_enum] enum 
 {
     PC_Unknown  = 0x00,
     PC_Float    = 0x01,
     PC_Sampler  = 0x02,
     PC_Struct   = 0x04,
-    PC_Max = 0x7FFFFFFF
+    PC_Max      = 0x7FFFFFFF
 } ParameterCategory;
 
-typedef [v1_enum, helpstring("Shader Program Stages")]
-enum ProgramStage 
+typedef [v1_enum] enum 
 {
     PS_Unknown  = 0x00,
     PS_Vertex   = 0x01,
@@ -88,11 +84,10 @@ enum ProgramStage
     PS_Geometry = 0x03,
     PS_Domain   = 0x04,
     PS_Hull     = 0x05,
-    PS_Max = 0x7FFFFFFF
+    PS_Max      = 0x7FFFFFFF
 } ProgramStage;
     
-typedef [v1_enum, helpstring("Texture Stages")]
-enum TextureStage 
+typedef [v1_enum] enum 
 {
     TS_Unknown  = 0x00,
     TS_Shader   = 0x01,
@@ -100,8 +95,7 @@ enum TextureStage
     TS_Max      = 0x7FFFFFFF
 } TextureStage;
     
-typedef [v1_enum, helpstring("File Access Modes")]
-enum FileOpenMode 
+typedef [v1_enum] enum 
 {
     FM_Unknown  = 0x00,
     FM_Read     = 0x01,
@@ -109,8 +103,7 @@ enum FileOpenMode
     FM_Max      = 0x7FFFFFFF
 } FileOpenMode;
 
-typedef [v1_enum, helpstring("Log Levels")]
-enum LogLevel 
+typedef [v1_enum] enum
 {
     LL_Unknown      = 0x00,
     LL_Debug        = 0x01,
@@ -127,8 +120,7 @@ enum LogLevel
     LL_Max          = 0x7FFFFFFF
 } LogLevel;
 
-typedef [v1_enum, helpstring("Variable Parsing Modifiers")]
-enum ParseFlags 
+typedef [v1_enum] enum 
 {
     PF_None             = 0x0000,
     PF_SingleSlash      = 0x0001,
@@ -140,8 +132,7 @@ enum ParseFlags
     PF_Max              = 0x7FFFFFFF
 } ParseFlags;
 
-typedef [v1_enum, helpstring("Variable Type")]
-enum VariableType 
+typedef [v1_enum] enum 
 {
     VT_Normal   = 0x00,
     VT_State    = 0x01,
@@ -149,8 +140,7 @@ enum VariableType
     VT_Max      = 0x7FFFFFFF
 } VariableType;
 
-typedef [helpstring("Core Intialization Struct")]
-struct InitParams
+typedef [helpstring("Core Intialization Struct")] struct
 {
     BSTR GlobalRoot;
     BSTR LocalRoot;
@@ -160,25 +150,23 @@ struct InitParams
     BSTR Config;
 } InitParams;
 
-typedef [helpstring("Texture Description")]
-struct TextureDesc
+typedef [helpstring("Texture Description")] struct
 {
     int Width;
     int Height;
     int Depth;
-    boolean Mipmaps;
-    boolean RenderTarget;
+    VARIANT_BOOL Mipmaps;
+    VARIANT_BOOL RenderTarget;
     TextureFormat Format;
 } TextureDesc;
 
-typedef [helpstring("Texture Region Description")]
-struct TextureRegion
+typedef [helpstring("Texture Region Description")] struct
 {
     int Width;
     int Height;
     int Depth;
-    boolean Mipmaps;
-    boolean RenderTarget;
+    VARIANT_BOOL Mipmaps;
+    VARIANT_BOOL RenderTarget;
     TextureFormat Format;
     int OffX;
     int OffY;
@@ -186,60 +174,60 @@ struct TextureRegion
 } TextureRegion;
 
 typedef [helpstring("Module Version")]
-struct VersionStruct
+struct 
 {
     BSTR Name;
     int Major;
     int Minor;
     long Patch;
     long Rev;
-    boolean Debug;
+    VARIANT_BOOL Debug;
 } VersionStruct;
 
 typedef [helpstring("3-component float vector")]
-struct float2
+struct 
 {
     float X, Y;
 } float2;
 
 typedef [helpstring("3-component float vector")]
-struct float3
+struct 
 {
     float X, Y, Z;
 } float3;
 
 typedef [helpstring("4-component float vector")]
-struct float4
+struct 
 {
     float X, Y, Z, W;
 } float4;
 
 typedef [helpstring("Pre-transformed vertex structure")]
-struct VertexStruct
+struct 
 {
-    float3 Position;
-    float Winding;
-    float2 TexCoord;
+    float3  Position;
+    float   Winding;
+    float2  TexCoord;
 } VertexStruct;
 
 typedef [helpstring("Shader-compatible light structure")]
-struct LightStruct
+struct 
 {
-    int Type;
-    float4 Diffuse;
-    float4 Specular;
-    float4 Ambient;
-    float3 Position;
-    float3 Direction;
-    float Range;
-    float Falloff;
-    float3 Attenuation;
-    float Theta;
-    float Phi;
+    int     Type;
+    float4  Diffuse;
+    float4  Specular;
+    float4  Ambient;
+    float3  Position;
+    float3  Direction;
+    float   Range;
+    float   Falloff;
+    float3  Attenuation;
+    float   Theta;
+    float   Phi;
 } LightStruct;
 
 typedef [helpstring("Platform-independent function pointer/memory offset")]
-struct FunctionPtr
+struct 
 {
     unsigned __int64 Address;
 } FunctionPtr;
@@ -383,7 +371,7 @@ interface IVoodooParameter : IDispatch{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [propget, id(3)] HRESULT Type([out, retval] EnumType * pType);
-    [propget, id(4)] HRESULT Virtual([out, retval] boolean * pVirtual);
+    [propget, id(4)] HRESULT Virtual([out, retval] VARIANT_BOOL * pVirtual);
     [id(6)] HRESULT AttachParameter([in] IVoodooParameter * pParameter);
     [propget, id(7)] HRESULT Components([out, retval] int * pComponents);
     [propget, id(8)] HRESULT SamplerValue([out, retval] IVoodooTexture ** ppTexture);
@@ -448,7 +436,7 @@ interface IVoodooHookSystem : IDispatch{
 ]
 interface IVoodooLogger : IDispatch{
     [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [id(2)] HRESULT Open([in] BSTR pFilename, [in] boolean Append);
+    [id(2)] HRESULT Open([in] BSTR pFilename, [in] VARIANT_BOOL Append);
     [id(3)] HRESULT Close();
     [id(4)] HRESULT Dump();
     [propget, id(5)] HRESULT LogLevel([out, retval] EnumType * pLevel);

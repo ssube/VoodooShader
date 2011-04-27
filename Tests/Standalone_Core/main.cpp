@@ -20,7 +20,7 @@ int main(int argc, TCHAR * argv[])
 
     InitParams params;
     ZeroMemory(&params, sizeof(params));
-    params.Config = SysAllocString(L"VoodooConfig.xmlconfig");
+    params.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\NetInherit.xmlconfig");
     params.GlobalRoot = SysAllocString(L"M:\\VoodooShader\\");
     if ( FAILED(pCore->Initialize(params)) )
     {
@@ -33,6 +33,11 @@ int main(int argc, TCHAR * argv[])
     BSTR Parsed;
     pParser->AddVariable(L"lang", L"c++");
     pParser->Parse(L"this is from $(lang).", PF_None, &Parsed);
+
+    IVoodooHookSystem * pHookSystem;
+    pCore->get_HookSystem(&pHookSystem);
+    FunctionPtr addr = { 0x0000 };
+    pHookSystem->Add(Parsed, addr, addr);
 
     CoUninitialize();
 }

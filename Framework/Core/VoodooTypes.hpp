@@ -20,21 +20,22 @@
 \**************************************************************************************************/
 
 #pragma once
-typedef enum __MIDL___MIDL_itf_Core_0000_0000_0001
-{	
-    TF_Unknown	= 0,
-    TF_RGB5	    = 0x1,
-    TF_RGB8	    = 0x3,
-    TF_RGBA8	= 0x4,
-    TF_RGB10A2	= 0x5,
-    TF_RGBA16F	= 0x10,
-    TF_RGBA32F	= 0x11,
-    TF_D16	    = 0x40,
-    TF_D32	    = 0x41,
-    TF_Max	    = 0x7fffffff
-} TextureFormat;
 
-typedef enum __MIDL___MIDL_itf_Core_0000_0000_0002
+enum TextureFormat
+{	
+    TF_Unknown	    = 0,
+    TF_RGB5	        = 0x1,
+    TF_RGB8	        = 0x3,
+    TF_RGBA8	    = 0x4,
+    TF_RGB10A2	    = 0x5,
+    TF_RGBA16F	    = 0x10,
+    TF_RGBA32F	    = 0x11,
+    TF_D16	        = 0x40,
+    TF_D32	        = 0x41,
+    TF_Max	        = 0x7fffffff
+};
+
+enum ParameterType
 {	
     PT_Unknown	    = 0,
     PT_Float1	    = 0x11,
@@ -62,45 +63,45 @@ typedef enum __MIDL___MIDL_itf_Core_0000_0000_0002
     PT_Sampler3D	= 0x103,
     PT_Struct	    = 0x1000,
     PT_Max	        = 0x7fffffff
-} ParameterType;
+};
 
-typedef enum __MIDL___MIDL_itf_Core_0000_0000_0003
+enum ParameterCategory
 {	
-    PC_Unknown	= 0,
-    PC_Float	= 0x1,
-    PC_Sampler	= 0x2,
-    PC_Struct	= 0x4,
-    PC_Max	    = 0x7fffffff
-} ParameterCategory;
+    PC_Unknown	    = 0,
+    PC_Float	    = 0x1,
+    PC_Sampler	    = 0x2,
+    PC_Struct	    = 0x4,
+    PC_Max	        = 0x7fffffff
+};
 
-typedef enum __MIDL___MIDL_itf_Core_0000_0000_0004
+enum ProgramStage
 {	
-    PS_Unknown	= 0,
-    PS_Vertex	= 0x1,
-    PS_Fragment	= 0x2,
-    PS_Geometry	= 0x3,
-    PS_Domain	= 0x4,
-    PS_Hull	    = 0x5,
-    PS_Max	    = 0x7fffffff
-} ProgramStage;
+    PS_Unknown	    = 0,
+    PS_Vertex	    = 0x1,
+    PS_Fragment	    = 0x2,
+    PS_Geometry	    = 0x3,
+    PS_Domain	    = 0x4,
+    PS_Hull	        = 0x5,
+    PS_Max	        = 0x7fffffff
+};
 
-typedef enum __MIDL___MIDL_itf_Core_0000_0000_0005
+enum TextureStage
 {	
-    TS_Unknown	= 0,
-    TS_Shader	= 0x1,
-    TS_Pass	    = 0x2,
-    TS_Max	    = 0x7fffffff
-} TextureStage;
+    TS_Unknown	    = 0,
+    TS_Shader	    = 0x1,
+    TS_Pass	        = 0x2,
+    TS_Max	        = 0x7fffffff
+};
 
-typedef enum __MIDL___MIDL_itf_Core_0000_0000_0006
+enum FileOpenMode
 {	
-    FM_Unknown	= 0,
-    FM_Read	    = 0x1,
-    FM_Write	= 0x2,
-    FM_Max	    = 0x7fffffff
-} FileOpenMode;
+    FM_Unknown	    = 0,
+    FM_Read	        = 0x1,
+    FM_Write	    = 0x2,
+    FM_Max	        = 0x7fffffff
+};
 
-typedef enum __MIDL___MIDL_itf_Core_0000_0000_0007
+enum LogLevel
 {	
     LL_Unknown	    = 0,
     LL_Debug	    = 0x1,
@@ -115,29 +116,29 @@ typedef enum __MIDL___MIDL_itf_Core_0000_0000_0007
     LL_Initial	    = 0xfe,
     LL_All	        = 0xff,
     LL_Max	        = 0x7fffffff
-} LogLevel;
+};
 
-typedef enum __MIDL___MIDL_itf_Core_0000_0000_0008
+enum ParseFlags
 {	
-    PF_None	            = 0,
-    PF_SingleSlash	    = 0x1,
-    PF_SlashOnly	    = 0x2,
-    PF_BackslashOnly	= 0x4,
-    PF_Lowercase	    = 0x10,
-    PF_Uppercase	    = 0x20,
-    PF_VarName	        = 0x100,
-    PF_Max	            = 0x7fffffff
-} ParseFlags;
+    PF_None	        = 0,
+    PF_SingleSlash	= 0x1,
+    PF_SlashOnly	= 0x2,
+    PF_BackslashOnly= 0x4,
+    PF_Lowercase	= 0x10,
+    PF_Uppercase	= 0x20,
+    PF_VarName	    = 0x100,
+    PF_Max	        = 0x7fffffff
+};
 
-typedef enum __MIDL___MIDL_itf_Core_0000_0000_0009
+enum VariableType
 {	
-    VT_Normal	= 0,
-    VT_State	= 0x1,
-    VT_System	= 0x10,
-    VT_Max	    = 0x7fffffff
-} VariableType;
+    VT_Normal	    = 0,
+    VT_State	    = 0x1,
+    VT_System	    = 0x10,
+    VT_Max	        = 0x7fffffff
+} ;
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0010
+struct InitParams
 {
     BSTR GlobalRoot;
     BSTR LocalRoot;
@@ -145,42 +146,42 @@ typedef struct __MIDL___MIDL_itf_Core_0000_0000_0010
     BSTR Target;
     BSTR Loader;
     BSTR Config;
-} InitParams;
+};
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0011
+struct TextureDesc
 {
     int Width;
     int Height;
     int Depth;
-    boolean Mipmaps;
-    boolean RenderTarget;
+    VARIANT_BOOL Mipmaps;
+    VARIANT_BOOL RenderTarget;
     TextureFormat Format;
-} TextureDesc;
+};
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0012
+struct TextureRegion
 {
     int Width;
     int Height;
     int Depth;
-    boolean Mipmaps;
-    boolean RenderTarget;
+    VARIANT_BOOL Mipmaps;
+    VARIANT_BOOL RenderTarget;
     TextureFormat Format;
     int OffX;
     int OffY;
     int OffZ;
-} TextureRegion;
+};
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0013
+struct VersionStruct
 {
     BSTR Name;
     int Major;
     int Minor;
     long Patch;
     long Rev;
-    boolean Debug;
-} VersionStruct;
+    VARIANT_BOOL Debug;
+};
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0014
+struct float2
 {
     union
     {
@@ -188,9 +189,9 @@ typedef struct __MIDL___MIDL_itf_Core_0000_0000_0014
         float R, G;
         float U, V;
     };
-} float2;
+};
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0015
+struct float3
 {
     union
     {
@@ -198,9 +199,9 @@ typedef struct __MIDL___MIDL_itf_Core_0000_0000_0015
         float R, G, B;
         float U, V, S;
     };
-} float3;
+};
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0016
+struct float4
 {
     union
     {
@@ -208,16 +209,16 @@ typedef struct __MIDL___MIDL_itf_Core_0000_0000_0016
         float R, G, B, A;
         float U, V, S, T;
     };
-} float4;
+};
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0017
+struct VertexStruct
 {
     float3 Position;
     float Winding;
     float2 TexCoord;
-} VertexStruct;
+};
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0018
+struct LightStruct
 {
     int Type;
     float4 Diffuse;
@@ -230,11 +231,11 @@ typedef struct __MIDL___MIDL_itf_Core_0000_0000_0018
     float3 Attenuation;
     float Theta;
     float Phi;
-} LightStruct;
+};
 
-typedef struct __MIDL___MIDL_itf_Core_0000_0000_0019
+struct FunctionPtr
 {
     unsigned __int64 Address;
-} FunctionPtr;
+};
 
 typedef DWORD EnumType;

@@ -108,7 +108,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE get_Name(LPBSTR pName);
     virtual HRESULT STDMETHODCALLTYPE get_Core(IVoodooCore **ppCore);
     virtual HRESULT STDMETHODCALLTYPE get_Type(DWORD *pType);
-    virtual HRESULT STDMETHODCALLTYPE get_Virtual(boolean *pVirtual);
+    virtual HRESULT STDMETHODCALLTYPE get_Virtual(VARIANT_BOOL *pVirtual);
     virtual HRESULT STDMETHODCALLTYPE AttachParameter(IVoodooParameter *pParameter);
     virtual HRESULT STDMETHODCALLTYPE get_Components(int *pComponents);
     virtual HRESULT STDMETHODCALLTYPE get_SamplerValue(IVoodooTexture **ppTexture);
@@ -124,7 +124,7 @@ private:
     IVoodooCore * m_Core;
     IVoodooShader * m_Shader;
     ParameterType m_Type;
-    boolean m_Virtual;
+    VARIANT_BOOL m_Virtual;
     CComPtr<IVoodooTexture> m_Texture;
     CComSafeArray<float> m_Data;
     CGparameter m_Parameter;

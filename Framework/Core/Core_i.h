@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Tue Apr 26 13:57:00 2011
+/* at Wed Apr 27 02:24:37 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -309,8 +309,8 @@ extern "C"{
 /* interface __MIDL_itf_Core_0000_0000 */
 /* [local] */ 
 
-typedef /* [helpstring][v1_enum] */ 
-enum TextureFormat
+typedef /* [public][public][public][public][public][public][public][public][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0001
     {	TF_Unknown	= 0,
 	TF_RGB5	= 0x1,
 	TF_RGB8	= 0x3,
@@ -323,8 +323,8 @@ enum TextureFormat
 	TF_Max	= 0x7fffffff
     } 	TextureFormat;
 
-typedef /* [helpstring][v1_enum] */ 
-enum ParameterType
+typedef /* [public][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0002
     {	PT_Unknown	= 0,
 	PT_Float1	= 0x11,
 	PT_Float2	= 0x12,
@@ -353,8 +353,8 @@ enum ParameterType
 	PT_Max	= 0x7fffffff
     } 	ParameterType;
 
-typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0001
+typedef /* [public][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0003
     {	PC_Unknown	= 0,
 	PC_Float	= 0x1,
 	PC_Sampler	= 0x2,
@@ -362,8 +362,8 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0001
 	PC_Max	= 0x7fffffff
     } 	ParameterCategory;
 
-typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0002
+typedef /* [public][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0004
     {	PS_Unknown	= 0,
 	PS_Vertex	= 0x1,
 	PS_Fragment	= 0x2,
@@ -373,24 +373,24 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0002
 	PS_Max	= 0x7fffffff
     } 	ProgramStage;
 
-typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0003
+typedef /* [public][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0005
     {	TS_Unknown	= 0,
 	TS_Shader	= 0x1,
 	TS_Pass	= 0x2,
 	TS_Max	= 0x7fffffff
     } 	TextureStage;
 
-typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0004
+typedef /* [public][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0006
     {	FM_Unknown	= 0,
 	FM_Read	= 0x1,
 	FM_Write	= 0x2,
 	FM_Max	= 0x7fffffff
     } 	FileOpenMode;
 
-typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0005
+typedef /* [public][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0007
     {	LL_Unknown	= 0,
 	LL_Debug	= 0x1,
 	LL_Info	= 0x2,
@@ -406,8 +406,8 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0005
 	LL_Max	= 0x7fffffff
     } 	LogLevel;
 
-typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0006
+typedef /* [public][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0008
     {	PF_None	= 0,
 	PF_SingleSlash	= 0x1,
 	PF_SlashOnly	= 0x2,
@@ -418,15 +418,15 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0006
 	PF_Max	= 0x7fffffff
     } 	ParseFlags;
 
-typedef /* [public][helpstring][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0007
+typedef /* [public][v1_enum] */ 
+enum __MIDL___MIDL_itf_Core_0000_0000_0009
     {	VT_Normal	= 0,
 	VT_State	= 0x1,
 	VT_System	= 0x10,
 	VT_Max	= 0x7fffffff
     } 	VariableType;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0008
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0010
     {
     BSTR GlobalRoot;
     BSTR LocalRoot;
@@ -436,53 +436,53 @@ typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_00
     BSTR Config;
     } 	InitParams;
 
-typedef /* [public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0009
+typedef /* [public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
     {
     int Width;
     int Height;
     int Depth;
-    boolean Mipmaps;
-    boolean RenderTarget;
+    VARIANT_BOOL Mipmaps;
+    VARIANT_BOOL RenderTarget;
     TextureFormat Format;
     } 	TextureDesc;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0010
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
     {
     int Width;
     int Height;
     int Depth;
-    boolean Mipmaps;
-    boolean RenderTarget;
+    VARIANT_BOOL Mipmaps;
+    VARIANT_BOOL RenderTarget;
     TextureFormat Format;
     int OffX;
     int OffY;
     int OffZ;
     } 	TextureRegion;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0013
     {
     BSTR Name;
     int Major;
     int Minor;
     long Patch;
     long Rev;
-    boolean Debug;
+    VARIANT_BOOL Debug;
     } 	VersionStruct;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0014
     {
     float X;
     float Y;
     } 	float2;
 
-typedef /* [public][public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0013
+typedef /* [public][public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0015
     {
     float X;
     float Y;
     float Z;
     } 	float3;
 
-typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0014
+typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0016
     {
     float X;
     float Y;
@@ -490,14 +490,14 @@ typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_
     float W;
     } 	float4;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0015
+typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0017
     {
     float3 Position;
     float Winding;
     float2 TexCoord;
     } 	VertexStruct;
 
-typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0016
+typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0018
     {
     int Type;
     float4 Diffuse;
@@ -512,7 +512,7 @@ typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0016
     float Phi;
     } 	LightStruct;
 
-typedef /* [public][public][public] */ struct __MIDL___MIDL_itf_Core_0000_0000_0017
+typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0019
     {
     unsigned __int64 Address;
     } 	FunctionPtr;
@@ -1736,7 +1736,7 @@ EXTERN_C const IID IID_IVoodooParameter;
             /* [retval][out] */ EnumType *pType) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Virtual( 
-            /* [retval][out] */ boolean *pVirtual) = 0;
+            /* [retval][out] */ VARIANT_BOOL *pVirtual) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AttachParameter( 
             /* [in] */ IVoodooParameter *pParameter) = 0;
@@ -1825,7 +1825,7 @@ EXTERN_C const IID IID_IVoodooParameter;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Virtual )( 
             IVoodooParameter * This,
-            /* [retval][out] */ boolean *pVirtual);
+            /* [retval][out] */ VARIANT_BOOL *pVirtual);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AttachParameter )( 
             IVoodooParameter * This,
@@ -2394,7 +2394,7 @@ EXTERN_C const IID IID_IVoodooLogger;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
             /* [in] */ BSTR pFilename,
-            /* [in] */ boolean Append) = 0;
+            /* [in] */ VARIANT_BOOL Append) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
@@ -2483,7 +2483,7 @@ EXTERN_C const IID IID_IVoodooLogger;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             IVoodooLogger * This,
             /* [in] */ BSTR pFilename,
-            /* [in] */ boolean Append);
+            /* [in] */ VARIANT_BOOL Append);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             IVoodooLogger * This);

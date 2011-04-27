@@ -3,9 +3,6 @@
 #include "stdafx.h"
 #include "VoodooLogger.h"
 
-
-
-
 // CVoodooLogger
 CVoodooLogger::CVoodooLogger()
 {
@@ -94,12 +91,12 @@ STDMETHODIMP CVoodooLogger::get_Core(IVoodooCore **ppCore)
 
 STDMETHODIMP CVoodooLogger::Open( 
     /* [in] */ BSTR pFilename,
-    /* [in] */ boolean Append)
+    /* [in] */ VARIANT_BOOL Append)
 {
     if ( pFilename == NULL ) return E_INVALIDARG;
 
     UINT create = CFile::modeWrite;
-    if ( Append )
+    if ( Append == VARIANT_TRUE )
     {
         create |= CFile::modeNoTruncate;
     } else {
@@ -110,7 +107,7 @@ STDMETHODIMP CVoodooLogger::Open(
     {
         return E_FILEERROR;
     } else {
-        this->Log(LL_Internal, L"Voodoo/Logger", L"Log file opened.", NULL);
+        this->Log(LL_Internal, VOODOO_CORE_NAME, L"Log file opened.", NULL);
     }
     return S_OK;
 }

@@ -2,7 +2,7 @@ HKCR
 {
 	VoodooCore.HookSystem.1 = s 'VoodooHookSystem Class'
 	{
-		CLSID = s '{04666805-E086-4104-BCC6-9A0C7FADB924}'
+		CLSID = s '{1d3d7fac-6f32-11e0-8ac0-005056c00000}'
 	}
 	VoodooCore.HookSystem = s 'VoodooHookSystem Class'
 	{
@@ -10,7 +10,7 @@ HKCR
 	}
 	NoRemove CLSID
 	{
-		ForceRemove {04666805-E086-4104-BCC6-9A0C7FADB924} = s 'VoodooHookSystem Class'
+		ForceRemove {1d3d7fac-6f32-11e0-8ac0-005056c00000} = s 'VoodooHookSystem Class'
 		{
 			ProgID = s 'VoodooCore.HookSystem.1'
 			VersionIndependentProgID = s 'VoodooCore.HookSystem'
@@ -19,7 +19,7 @@ HKCR
 			{
 				val ThreadingModel = s 'Both'
 			}
-			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
 			Version = s '1.0'
 		}
 	}

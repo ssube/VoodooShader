@@ -252,12 +252,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dic
             this->ParseRaw(&fvalue, Flags, ++Depth, State);
             output += CStringW(fvalue);
         }
-        output += iteration.Right(endpos);
-
-        if ( fvalue )
-        {
-            SysFreeString(fvalue);
-        }
+        output += iteration.Mid(endpos+1);
 
         iteration = output;
     }

@@ -2,7 +2,7 @@ HKCR
 {
 	VoodooCore.Parameter.1 = s 'VoodooParameter Class'
 	{
-		CLSID = s '{5190BCB1-B6E5-4611-86B6-C12EF24D6870}'
+		CLSID = s '{1d3d7fa9-6f32-11e0-8ac0-005056c00000}'
 	}
 	VoodooCore.Parameter = s 'VoodooParameter Class'
 	{
@@ -10,7 +10,7 @@ HKCR
 	}
 	NoRemove CLSID
 	{
-		ForceRemove {5190BCB1-B6E5-4611-86B6-C12EF24D6870} = s 'VoodooParameter Class'
+		ForceRemove {1d3d7fa9-6f32-11e0-8ac0-005056c00000} = s 'VoodooParameter Class'
 		{
 			ProgID = s 'VoodooCore.Parameter.1'
 			VersionIndependentProgID = s 'VoodooCore.Parameter'
@@ -19,7 +19,7 @@ HKCR
 			{
 				val ThreadingModel = s 'Both'
 			}
-			TypeLib = s '{74838A0A-2645-4638-9AFF-B45ABF5B1365}'
+			TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
 			Version = s '1.0'
 		}
 	}

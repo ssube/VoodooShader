@@ -39,7 +39,7 @@ IVoodooParameter * CVoodooParameter::Create(IVoodooCore * pCore, BSTR pName, Par
 
         pParameter->m_Parameter = CreateVirtualParameter(pCore, Type);
         pParameter->m_Type = Type;
-        pParameter->m_Virtual = TRUE;
+        pParameter->m_Virtual = VARIANT_TRUE;
         pParameter->m_Core = pCore;
         pParameter->m_Name = pName;
 
@@ -65,7 +65,7 @@ IVoodooParameter * CVoodooParameter::Create(IVoodooShader * pShader, CGparameter
         pParameter->m_Parameter = Parameter;
         pParameter->m_Type = ToParameterType(cgGetParameterType(Parameter));
         pParameter->m_Shader = pShader;
-        pParameter->m_Virtual = FALSE;
+        pParameter->m_Virtual = VARIANT_FALSE;
         pShader->get_Core(&pParameter->m_Core);
         pParameter->m_Name = CA2W(cgGetParameterName(Parameter));
 
@@ -141,7 +141,7 @@ STDMETHODIMP CVoodooParameter::get_Type(DWORD *pType)
     }
 }
 
-STDMETHODIMP CVoodooParameter::get_Virtual(boolean *pVirtual)
+STDMETHODIMP CVoodooParameter::get_Virtual(VARIANT_BOOL *pVirtual)
 {
     if ( pVirtual == NULL )
     {
@@ -269,7 +269,7 @@ STDMETHODIMP CVoodooParameter::put_SamplerValue(
 }
 
 STDMETHODIMP CVoodooParameter::get_ScalarValue( 
-    /* [retval][out] */ SAFEARRAY * *ppData)
+    /* [retval][out] */ SAFEARRAY ** ppData)
 {
     return m_Data.CopyTo(ppData);
 }

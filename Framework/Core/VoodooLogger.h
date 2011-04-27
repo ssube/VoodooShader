@@ -109,9 +109,7 @@ public:
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
         /* [retval][out] */ IVoodooCore **ppCore);
 
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
-        /* [in] */ BSTR pFilename,
-        /* [in] */ boolean Append);
+    virtual HRESULT STDMETHODCALLTYPE Open(BSTR pFilename, VARIANT_BOOL Append);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close( void);
 
