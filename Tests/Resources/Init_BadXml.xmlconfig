@@ -5,10 +5,10 @@
     </Variables>
 
     <Core
-        <Logger>{7C6B6D83-F882-4954-952B-F5689DA3D4D7}</Logger>
-        <HookSystem>{04666805-E086-4104-BCC6-9A0C7FADB924}</HookSystem>
-        <FileSystem>{14CC5267-85B7-41B2-A0DC-C69DDEA9E97C}</FileSystem>
-        <Adapter>{66063841-6A4E-4D12-A186-5319762EFEB2}</Adapter>
+        <Logger>{1d3d7fac-6f32-11e0-8ac0-005056c00000}</Logger>
+        <HookSystem>{1d3d7fab-6f32-11e0-8ac0-005056c00000}</HookSystem>
+        <FileSystem>{1d3d7fad-6f32-11e0-8ac0-005056c00000}</FileSystem>
+        <Adapter>{1d3d7faa-6f32-11e0-8ac0-005056c00000}</Adapter>
 
         <!-- Log filename. -->  
         <LogFile>$(runroot)\Voodoo_$($(adapter)_Logname)</LogFile> 

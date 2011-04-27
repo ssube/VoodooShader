@@ -72,7 +72,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="VoodooCore.cpp" />
+    <ClCompile Include="TVoodooCore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Includes.hpp" />

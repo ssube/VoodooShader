@@ -164,6 +164,7 @@ STDMETHODIMP CVoodooLogger::LogList(
     /* [in] */ VARIANT pList)
 {
     if ( pFormat == NULL ) return E_INVALIDARG;
+    if ( m_File.m_hFile == CFile::hFileNull ) return E_NOTINIT;
 
     CStringW msg;
 

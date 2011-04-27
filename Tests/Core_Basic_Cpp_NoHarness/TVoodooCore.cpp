@@ -35,6 +35,7 @@ SETUP(CoreInitFixture)
     WIN_ASSERT_TRUE(SUCCEEDED(hr) && pCore != NULL, _T("IVoodooCore not created."));
 
     InitParams iParams;
+    ZeroMemory(&iParams, sizeof(iParams));
     iParams.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig");
     WIN_ASSERT_NOT_NULL(iParams.Config);
 
@@ -56,6 +57,7 @@ TEARDOWN(CoreInitFixture)
 BEGIN_TESTF(CoreInit_Working, CoreFixture)
 {
     InitParams iParams;
+    ZeroMemory(&iParams, sizeof(iParams));
     iParams.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig");
     WIN_ASSERT_NOT_NULL(iParams.Config);
 
@@ -70,6 +72,7 @@ END_TESTF;
 BEGIN_TESTF(CoreInit_BadXml, CoreFixture)
 {
     InitParams iParams;
+    ZeroMemory(&iParams, sizeof(iParams));
     iParams.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_BadXml.xmlconfig");
     WIN_ASSERT_NOT_NULL(iParams.Config);
 
@@ -85,6 +88,7 @@ END_TESTF;
 BEGIN_TESTF(CoreInit_BadCLSID, CoreFixture)
 {
     InitParams iParams;
+    ZeroMemory(&iParams, sizeof(iParams));
     iParams.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_BadCLSID.xmlconfig");
     WIN_ASSERT_NOT_NULL(iParams.Config);
 
@@ -96,14 +100,123 @@ BEGIN_TESTF(CoreInit_BadCLSID, CoreFixture)
 }
 END_TESTF;
 
-// Test uninit-ed core with get_Parser
-BEGIN_TESTF(CoreNoInit_GetParser, CoreFixture)
+// Test uninit-ed core with most get funcs
+BEGIN_TESTF(CoreNoInit_GetFuncs, CoreFixture)
 {
     IVoodooParser * pParser = NULL;
-
     HRESULT hr = pCore->get_Parser(&pParser);
     WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NULL(pParser);
+
+    IVoodooHookSystem * pHS = NULL;
+    hr = pCore->get_HookSystem(&pHS);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NULL(pHS);
+
+    IVoodooFileSystem * pFS = NULL;
+    hr = pCore->get_FileSystem(&pFS);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NULL(pFS);
+
+    IVoodooAdapter * pAdapter = NULL;
+    hr = pCore->get_Adapter(&pAdapter);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NULL(pAdapter);
+
+    IVoodooLogger * pLogger = NULL;
+    hr = pCore->get_Logger(&pLogger);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NULL(pLogger);
+
+    IXMLDOMDocument * pConfig = NULL;
+    hr = pCore->get_Config(&pConfig);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NULL(pConfig);
+
+    VARIANT v;
+    VariantInit(&v);
+    hr = pCore->put_CgContext(v);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->get_CgContext(&v);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+}
+END_TESTF;
+
+// Test init-ed core with invalid params
+BEGIN_TESTF(CoreNoInit_GetFuncsInvalidParams, CoreInitFixture)
+{
+    HRESULT hr = pCore->get_Parser(NULL);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->get_HookSystem(NULL);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->get_FileSystem(NULL);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->get_Adapter(NULL);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->get_Logger(NULL);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->get_Config(NULL);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->get_CgContext(NULL);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+
+    VARIANT v;
+    V_VT(&v) = VT_BSTR_BLOB;
+    hr = pCore->put_CgContext(v);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+}
+END_TESTF;
+
+// Test init-ed core with most get funcs
+BEGIN_TESTF(CoreInit_GetFuncs, CoreInitFixture)
+{
+    IVoodooParser * pParser = NULL;
+    HRESULT hr = pCore->get_Parser(&pParser);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_NOT_NULL(pParser);
+
+    IVoodooHookSystem * pHS = NULL;
+    hr = pCore->get_HookSystem(&pHS);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pHS);
+
+    IVoodooFileSystem * pFS = NULL;
+    hr = pCore->get_FileSystem(&pFS);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pFS);
+
+    IVoodooAdapter * pAdapter = NULL;
+    hr = pCore->get_Adapter(&pAdapter);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pAdapter);
+
+    IVoodooLogger * pLogger = NULL;
+    hr = pCore->get_Logger(&pLogger);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pLogger);
+
+    IXMLDOMDocument * pConfig = NULL;
+    hr = pCore->get_Config(&pConfig);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pConfig);
+
+    VARIANT v;
+    VariantInit(&v);
+    V_VT(&v) = VT_BYREF;
+    V_BYREF(&v) = (void*)0xFFFF0000;
+
+    hr = pCore->put_CgContext(v);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->get_CgContext(&v);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 }
 END_TESTF;
 
@@ -146,6 +259,24 @@ BEGIN_TESTF(CoreInit_FakeContext, CoreInitFixture)
 }
 END_TESTF;
 
+// Test texture create without init
+BEGIN_TESTF(CoreNoInit_TextureTest, CoreFixture)
+{
+    TextureDesc Desc = { 256, 256, 256, false, true, TF_RGBA8 };
+    void * TexAddr1 = (void*)0xDD44BB99;
+    IVoodooTexture * pPassTex = nullptr;
+    BSTR TexName1 = SysAllocString(L"Texture1");
+    VARIANT TexData;
+    VariantInit(&TexData);
+    V_VT(&TexData) = VT_BYREF;
+
+    V_BYREF(&TexData) = TexAddr1;
+    HRESULT hr = pCore->CreateTexture(TexName1, Desc, TexData, &pPassTex);
+    WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
+}
+END_TESTF;
+
+// Test texture creation, stage texture get/set
 BEGIN_TESTF(CoreInit_TextureTest, CoreInitFixture)
 {
     TextureDesc Desc = { 256, 256, 256, false, true, TF_RGBA8 };
@@ -201,5 +332,47 @@ BEGIN_TESTF(CoreInit_TextureTest, CoreInitFixture)
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_EQUAL(VT_BYREF, V_VT(&OTexData));
     WIN_ASSERT_EQUAL(TexAddr2, V_BYREF(&OTexData));
+}
+END_TESTF;
+
+// Test texture duplicate names
+BEGIN_TESTF(CoreInit_TextureTestDupName, CoreInitFixture)
+{
+    TextureDesc Desc = { 256, 256, 256, false, true, TF_RGBA8 };
+    void * TexAddr1 = (void*)0xDD44BB99;
+    IVoodooTexture * pPassTex = nullptr;
+    BSTR TexName1 = SysAllocString(L"Texture1");
+    VARIANT TexData;
+    VariantInit(&TexData);
+    V_VT(&TexData) = VT_BYREF;
+
+    V_BYREF(&TexData) = TexAddr1;
+    HRESULT hr = pCore->CreateTexture(TexName1, Desc, TexData, &pPassTex);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->CreateTexture(TexName1, Desc, TexData, &pPassTex);
+    WIN_ASSERT_EQUAL(VSFERR_DUPNAME, hr, _T("HRESULT: %X\n"), hr);
+}
+END_TESTF;
+
+// Test texture get-by-name
+BEGIN_TESTF(CoreInit_TextureTestGetName, CoreInitFixture)
+{
+    TextureDesc Desc = { 256, 256, 256, false, true, TF_RGBA8 };
+    void * TexAddr1 = (void*)0xDD44BB99;
+    IVoodooTexture * pPassTex = nullptr;
+    IVoodooTexture * pPassTexD = nullptr;
+    BSTR TexName1 = SysAllocString(L"Texture1");
+    VARIANT TexData;
+    VariantInit(&TexData);
+    V_VT(&TexData) = VT_BYREF;
+
+    V_BYREF(&TexData) = TexAddr1;
+    HRESULT hr = pCore->CreateTexture(TexName1, Desc, TexData, &pPassTex);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->GetTexture(TexName1, &pPassTexD);
+    WIN_ASSERT_EQUAL(VSFERR_DUPNAME, hr, _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pPassTexD);
 }
 END_TESTF;
