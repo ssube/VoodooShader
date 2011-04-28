@@ -119,6 +119,10 @@ public:
     virtual HRESULT STDMETHODCALLTYPE get_CgParameter(VARIANT *ppCgParameter);
 
 private:
+    HRESULT STDMETHODCALLTYPE LinkParameter();
+    HRESULT STDMETHODCALLTYPE LinkSampler();
+    HRESULT STDMETHODCALLTYPE CreateSamplerTexture();
+
     ULONG m_Refrs;
     CComBSTR m_Name;
     IVoodooCore * m_Core;

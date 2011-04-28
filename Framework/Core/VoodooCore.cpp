@@ -3,8 +3,7 @@
 #include "stdafx.h"
 #include "VoodooCore.h"
 
-
-
+#include "VoodooShader.h"
 #include "VoodooParameter.h"
 #include "VoodooParser.h"
 #include "VoodooTexture.h"
@@ -65,7 +64,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     HRESULT hr = CoCreateInstance(__uuidof(DOMDocument60), NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&m_Config));
     if ( FAILED(hr) )
     {
-        return E_INVALIDCFG;
+        return VSFERR_INVALID_CFG;
     }
 
     m_Config->put_async(VARIANT_FALSE);
@@ -99,7 +98,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
                     fullError += temp;
                     fullError += L"\n";
                     // Handle further
-                    return E_INVALIDCFG;
+                    return VSFERR_INVALID_CFG;
                 }
             }
         }
@@ -112,7 +111,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 
     if ( FAILED(hr) || pCoreNode == NULL )
     {
-        return E_INVALIDCFG;
+        return VSFERR_INVALID_CFG;
     }
 
     // Create query for node text, used multiple times
@@ -123,7 +122,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     m_Parser = CVoodooParser::Create(this);
     if ( m_Parser == NULL )
     {
-        return E_BADTHING;
+        return VSFERR_NO_PARSER;
     }
 
     // Load variables, built-in first
@@ -170,7 +169,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
             hr = InstanceFromString(str, IID_IVoodooLogger, (void**)&m_Logger);
             if ( FAILED(hr) || m_Logger == NULL )
             {
-                return E_BADCLSID;
+                return VSFERR_BAD_CLSID;
             } else {
                 CComBSTR queryLF = L"./LogFile/text()";
                 IXMLDOMNode * pFileNode = NULL;
@@ -199,7 +198,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
             hr = InstanceFromString(str, IID_IVoodooHookSystem, (void**)&m_HookSystem);
             if ( FAILED(hr) || m_FileSystem == NULL )
             {
-                return E_BADCLSID;
+                return VSFERR_BAD_CLSID;
             }
         }
     }
@@ -217,7 +216,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
             hr = InstanceFromString(str, IID_IVoodooFileSystem, (void**)&m_FileSystem);
             if ( FAILED(hr) || m_FileSystem == NULL )
             {
-                return E_BADCLSID;
+                return VSFERR_BAD_CLSID;
             }
         }
     }
@@ -235,7 +234,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
             hr = InstanceFromString(str, IID_IVoodooAdapter, (void**)&m_Adapter);
             if ( FAILED(hr) || m_FileSystem == NULL )
             {
-                return E_BADCLSID;
+                return VSFERR_BAD_CLSID;
             }
         }
     }
@@ -263,7 +262,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 STDMETHODIMP CVoodooCore::get_Parser( 
    IVoodooParser ** ppParser)
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppParser == NULL )
     {
         return E_INVALIDARG;
@@ -279,7 +278,7 @@ STDMETHODIMP CVoodooCore::get_HookSystem
    IVoodooHookSystem ** ppHookSystem
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppHookSystem == NULL )
     {
         return E_INVALIDARG;
@@ -295,7 +294,7 @@ STDMETHODIMP CVoodooCore::get_FileSystem
    IVoodooFileSystem ** ppFileSystem
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppFileSystem == NULL )
     {
         return E_INVALIDARG;
@@ -311,7 +310,7 @@ STDMETHODIMP CVoodooCore::get_Adapter
    IVoodooAdapter ** ppAdapter
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppAdapter == NULL )
     {
         return E_INVALIDARG;
@@ -327,7 +326,7 @@ STDMETHODIMP CVoodooCore::get_Logger
    IVoodooLogger **ppLogger
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppLogger == NULL )
     {
         return E_INVALIDARG;
@@ -343,7 +342,7 @@ STDMETHODIMP CVoodooCore::get_Config
    IXMLDOMDocument ** ppConfig
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppConfig == NULL )
     {
         return E_INVALIDARG;
@@ -357,7 +356,7 @@ STDMETHODIMP CVoodooCore::get_Config
 STDMETHODIMP CVoodooCore::get_CgContext( 
    VARIANT * ppCgContext)
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppCgContext == NULL )
     {
         return E_INVALIDARG;
@@ -371,7 +370,7 @@ STDMETHODIMP CVoodooCore::get_CgContext(
 STDMETHODIMP CVoodooCore::put_CgContext( 
    VARIANT pCgContext)
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( V_VT(&pCgContext) != VT_BYREF )
     {
         return E_INVALIDARG;
@@ -386,19 +385,20 @@ STDMETHODIMP CVoodooCore::CreateShader(
    SAFEARRAY * pArgs,
    IVoodooShader **ppShader)
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( pFile == NULL || ppShader == NULL )
     {
         return E_INVALIDARG;
     }
 
-    HRESULT hr = E_NOTIMPL; //CoCreateInstance(CLSID_Shader, NULL, NULL, IID_VoodooShader, (void**)ppShader);
-    if ( FAILED(hr) )
+    IVoodooShader * pShader = CVoodooShader::Create(this, pFile, pArgs);
+    *ppShader = pShader;
+
+    if ( pShader == NULL )
     {
-        return hr;
+        return VSFERR_NO_SHADER;
     }
 
-    // Compile and load
     return S_OK;
 }
 
@@ -407,15 +407,15 @@ STDMETHODIMP CVoodooCore::CreateParameter(
    DWORD Type,
    IVoodooParameter **ppParameter)
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppParameter == NULL )
     {
-        return E_INVALIDARG;
+        return VSFERR_INVALID_ARG;
     }
 
     if ( this->m_Parameters.PLookup(pName) != NULL )
     {
-        return E_DUPNAME;
+        return VSFERR_DUP_NAME;
     } else {
         ParameterType type = (ParameterType)Type;
         ParameterCategory pc = ToParameterCategory(type);
@@ -423,7 +423,7 @@ STDMETHODIMP CVoodooCore::CreateParameter(
         {
             *ppParameter = CVoodooParameter::Create(this, pName, type);
         } else {
-            return E_INVALIDARG;
+            return VSFERR_INVALID_ARG;
         }
 
         m_Parameters.SetAt(pName, *ppParameter);
@@ -435,7 +435,7 @@ STDMETHODIMP CVoodooCore::CreateParameter(
             pName, Type, *ppParameter
         );
 
-        return S_OK;
+        return VSF_OK;
     }
 }
 
@@ -445,21 +445,21 @@ STDMETHODIMP CVoodooCore::CreateTexture(
    VARIANT Data,
    IVoodooTexture **ppTexture)
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppTexture == NULL )
     {
-        return E_INVALIDARG;
+        return VSFERR_INVALID_ARG;
     }
 
     if ( this->m_Textures.PLookup(pName) != NULL )
     {
-        return E_DUPNAME;
+        return VSFERR_DUP_NAME;
     } else {
         *ppTexture = CVoodooTexture::Create(this, pName, Desc, Data);
 
         if ( *ppTexture == NULL )
         {
-            return E_BADTHING;
+            return VSFERR_NO_SHADER;
         }
 
         m_Textures.SetAt(pName, *ppTexture);
@@ -471,7 +471,7 @@ STDMETHODIMP CVoodooCore::CreateTexture(
             pName, &Data, *ppTexture
         );
 
-        return S_OK;
+        return VSF_OK;
     }
 }
 
@@ -481,21 +481,21 @@ STDMETHODIMP CVoodooCore::GetParameter
    IVoodooParameter ** ppParameter
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppParameter == NULL )
     {
-        return E_INVALIDARG;
+        return VSFERR_INVALID_ARG;
     }
 
     CComPtr<IVoodooParameter> param;
     if ( this->m_Parameters.Lookup(pName, param) == 0 )
     {
         *ppParameter = NULL;
-        return E_NOT_FOUND;
+        return VSFERR_NOT_FOUND;
     } else {
         *ppParameter = param;
         (*ppParameter)->AddRef();
-        return S_OK;
+        return VSF_OK;
     }
 }
 
@@ -505,21 +505,21 @@ STDMETHODIMP CVoodooCore::GetTexture
    IVoodooTexture ** ppTexture
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( ppTexture == NULL )
     {
-        return E_INVALIDARG;
+        return VSFERR_INVALID_ARG;
     }
 
     CComPtr<IVoodooTexture> texture;
     if ( this->m_Textures.Lookup(pName, texture) == 0 )
     {
         *ppTexture = NULL;
-        return E_NOT_FOUND;
+        return VSFERR_NOT_FOUND;
     } else {
         *ppTexture = texture;
         (*ppTexture)->AddRef();
-        return S_OK;
+        return VSF_OK;
     }
 }
 
@@ -528,12 +528,12 @@ STDMETHODIMP CVoodooCore::RemoveTexture
    BSTR pName
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     if ( this->m_Textures.RemoveKey(pName) == 0 )
     {
-        return S_NOT_FOUND;
+        return VSFOK_NOT_FOUND;
     } else {
-        return S_OK;
+        return VSF_OK;
     }
 }
 
@@ -543,16 +543,16 @@ STDMETHODIMP CVoodooCore::GetStageTexture
    IVoodooTexture ** ppTexture
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     CComPtr<IVoodooTexture> texture;
     if ( this->m_StageTextures.Lookup((TextureStage)Stage, texture) == 0 )
     {
         *ppTexture = NULL;
-        return E_NOT_FOUND;
+        return VSFERR_NOT_FOUND;
     } else {
         *ppTexture = texture;
         (*ppTexture)->AddRef();
-        return S_OK;
+        return VSF_OK;
     }
 }
 
@@ -562,7 +562,7 @@ STDMETHODIMP CVoodooCore::SetStageTexture
    IVoodooTexture * pTexture
 )
 {
-    if ( !m_Init ) return E_NOTINIT;
+    if ( !m_Init ) return VSFERR_NOT_INIT;
     this->m_StageTextures.SetAt((TextureStage)Stage, pTexture);
 
     return S_OK;
@@ -579,7 +579,7 @@ STDMETHODIMP CVoodooCore::LoadConfig(BSTR pFile)
     HRESULT hr = m_Config->load(vConfig, &loadStatus);
     
     if ( hr == S_FALSE && loadStatus == VARIANT_FALSE ) {
-        return E_INVALIDCFG;
+        return VSFERR_INVALID_CFG;
     } else {
         return hr;
     }

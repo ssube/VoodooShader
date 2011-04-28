@@ -96,12 +96,12 @@ STDMETHODIMP CVoodooFileSystem::get_Core(IVoodooCore **ppCore)
 
 STDMETHODIMP CVoodooFileSystem::AddDirectory(BSTR pPath)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooFileSystem::RemoveDirectory(BSTR pPath)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooFileSystem::FindFile(BSTR pPath, IVoodooFile **ppFile)
@@ -110,7 +110,7 @@ STDMETHODIMP CVoodooFileSystem::FindFile(BSTR pPath, IVoodooFile **ppFile)
     {
         return E_INVALIDARG;
     } else {
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
@@ -120,6 +120,6 @@ STDMETHODIMP CVoodooFileSystem::FindImage(BSTR pPath, IVoodooImage **ppImage)
     {
         return E_INVALIDARG;
     } else {
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Apr 27 02:24:37 2011
+/* at Wed Apr 27 19:01:52 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -313,6 +313,7 @@ typedef /* [public][public][public][public][public][public][public][public][v1_e
 enum __MIDL___MIDL_itf_Core_0000_0000_0001
     {	TF_Unknown	= 0,
 	TF_RGB5	= 0x1,
+	TF_RGB5A1	= 0x2,
 	TF_RGB8	= 0x3,
 	TF_RGBA8	= 0x4,
 	TF_RGB10A2	= 0x5,

@@ -93,7 +93,7 @@ STDMETHODIMP CVoodooLogger::Open(
     /* [in] */ BSTR pFilename,
     /* [in] */ VARIANT_BOOL Append)
 {
-    if ( pFilename == NULL ) return E_INVALIDARG;
+    if ( pFilename == NULL ) return VSFERR_INVALID_ARG;
 
     UINT create = CFile::modeWrite;
     if ( Append == VARIANT_TRUE )
@@ -105,23 +105,23 @@ STDMETHODIMP CVoodooLogger::Open(
 
     if ( m_File.Open(pFilename, create) == 0 )
     {
-        return E_FILEERROR;
+        return VSFERR_FILE_ERROR;
     } else {
         this->Log(LL_Internal, VOODOO_CORE_NAME, L"Log file opened.", NULL);
     }
-    return S_OK;
+    return VSF_OK;
 }
 
 STDMETHODIMP CVoodooLogger::Close( void)
 {
     m_File.Close();
-    return S_OK;
+    return VSF_OK;
 }
 
 STDMETHODIMP CVoodooLogger::Dump( void)
 {
     m_File.Flush();
-    return S_OK;
+    return VSF_OK;
 }
 
 STDMETHODIMP CVoodooLogger::get_LogLevel
@@ -132,7 +132,7 @@ STDMETHODIMP CVoodooLogger::get_LogLevel
     if ( pLevel == NULL ) return E_INVALIDARG;
 
     *pLevel = m_Level;
-    return S_OK;
+    return VSF_OK;
 }
 
 STDMETHODIMP CVoodooLogger::put_LogLevel( 
@@ -163,8 +163,8 @@ STDMETHODIMP CVoodooLogger::LogList(
     /* [in] */ BSTR pFormat,
     /* [in] */ VARIANT pList)
 {
-    if ( pFormat == NULL ) return E_INVALIDARG;
-    if ( m_File.m_hFile == CFile::hFileNull ) return E_NOTINIT;
+    if ( pFormat == NULL ) return VSFERR_INVALID_ARG;
+    if ( m_File.m_hFile == CFile::hFileNull ) return VSFERR_NO_FILE;
 
     CStringW msg;
 

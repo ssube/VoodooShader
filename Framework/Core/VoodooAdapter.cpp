@@ -76,7 +76,7 @@ STDMETHODIMP CVoodooAdapter::get_Name(LPBSTR pName)
 {
     if ( pName == NULL )
     {
-        return E_INVALIDARG;
+        return VSFERR_INVALID_ARG;
     } else {
         return m_Name.CopyTo(pName);
     }
@@ -86,54 +86,54 @@ STDMETHODIMP CVoodooAdapter::get_Core(IVoodooCore **ppCore)
 {
     if ( ppCore == NULL )
     {
-        return E_INVALIDARG;
+        return VSFERR_INVALID_ARG;
     } else {
         *ppCore = m_Core;
         (*ppCore)->AddRef();
-        return S_OK;
+        return VSF_OK;
     }
 }
 
 STDMETHODIMP CVoodooAdapter::LoadPass(IVoodooPass *pPass)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::UnloadPass(IVoodooPass *pPass)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::get_Pass(IVoodooPass **ppPass)
 {
     if ( ppPass == NULL )
     {
-        return E_INVALIDARG;
+        return VSFERR_INVALID_ARG;
     } else {
         *ppPass = NULL;
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
 STDMETHODIMP CVoodooAdapter::put_Pass(IVoodooPass *pPass)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::get_Target(IVoodooTexture **ppTarget)
 {
     if ( ppTarget == NULL )
     {
-        return E_INVALIDARG;
+        return VSFERR_INVALID_ARG;
     } else {
         *ppTarget = NULL;
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
 STDMETHODIMP CVoodooAdapter::put_Target(IVoodooTexture *pTarget)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::get_Light(int Index, LightStruct *pLight)
@@ -142,13 +142,13 @@ STDMETHODIMP CVoodooAdapter::get_Light(int Index, LightStruct *pLight)
     {
         return E_INVALIDARG;
     } else {
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
 STDMETHODIMP CVoodooAdapter::put_Light(int Index, LightStruct pLight)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::SetProperty(BSTR pName, VARIANT *pData)
@@ -157,23 +157,23 @@ STDMETHODIMP CVoodooAdapter::SetProperty(BSTR pName, VARIANT *pData)
     {
         return E_INVALIDARG;
     } else {
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
 STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, SAFEARRAY *pVertexData)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::ApplyParameter(IVoodooParameter *pParameter)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::DrawShader(IVoodooShader *pShader)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::CreateTexture(BSTR pName, TextureDesc Description, IVoodooTexture **ppTexture)
@@ -183,7 +183,7 @@ STDMETHODIMP CVoodooAdapter::CreateTexture(BSTR pName, TextureDesc Description, 
         return E_INVALIDARG;
     } else {
         *ppTexture = NULL;
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
@@ -194,7 +194,7 @@ STDMETHODIMP CVoodooAdapter::LoadTexture(IVoodooImage *pImage, TextureRegion Reg
         return E_INVALIDARG;
     } else {
         *ppTexture = NULL;
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
@@ -204,11 +204,11 @@ STDMETHODIMP CVoodooAdapter::ConnectTexture(IVoodooParameter *pParameter, IVoodo
     {
         return E_INVALIDARG;
     } else {
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
 STDMETHODIMP CVoodooAdapter::HandleError(VARIANT pContext, DWORD Error, IVoodooCore *pCore)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }

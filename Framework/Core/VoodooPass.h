@@ -112,6 +112,8 @@ public:
     virtual HRESULT STDMETHODCALLTYPE get_CgPass(VARIANT *ppPass);
 
 private:
+    HRESULT STDMETHODCALLTYPE LinkPass();
+
     ULONG m_Refrs;
     CComBSTR m_Name;
     IVoodooCore * m_Core;

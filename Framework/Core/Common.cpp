@@ -5,26 +5,47 @@
 
 // 0b1nnnnnnn is a library-level code. 0b0nnnnnnn is interface-level. This works around
 // the facility restriction.
-const HRESULT E_BADTHING     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8000);
-const HRESULT E_INVALIDCFG   = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8001);
-const HRESULT E_BADCLSID     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8002);
-const HRESULT E_DUPNAME      = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8003);
-const HRESULT E_NOT_FOUND    = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x8004);
-const HRESULT S_NOT_FOUND    = MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_ITF, 0x8004);
+const HRESULT VSF_OK                  MAKE_VSF_LOK(0x0000);
+const HRESULT VSF_FAIL                MAKE_VSF_LERR(0x0000);
+
+const HRESULT VSFOK_NOT_FOUND         MAKE_VSF_LOK(0x0006);
+const HRESULT VSFOK_NULL_IMPL         MAKE_VSF_LERR(0x0003);
+
+const HRESULT VSFERR_BAD_CLSID        MAKE_VSF_LERR(0x0001);
+const HRESULT VSFERR_DUP_NAME         MAKE_VSF_LERR(0x0002);
+const HRESULT VSFERR_LINKER_ERROR     MAKE_VSF_LERR(0x0004);
+
+const HRESULT VSFERR_NOT_LINKED       MAKE_VSF_LERR(0x0005);
+const HRESULT VSFERR_NOT_FOUND        MAKE_VSF_LERR(0x0006);
+
+const HRESULT VSFERR_INVALID_CFG      MAKE_VSF_LERR(0x0007);
+const HRESULT VSFERR_INVALID_CG       MAKE_VSF_LERR(0x0008);
+const HRESULT VSFERR_INVALID_TECH     MAKE_VSF_LERR(0x0009);
+const HRESULT VSFERR_INVALID_ARG      MAKE_VSF_LERR(0x0010);
+
+const HRESULT VSFERR_NO_CORE          MAKE_VSF_LERR(0x0020);
+const HRESULT VSFERR_NO_PARSER        MAKE_VSF_LERR(0x0021);
+const HRESULT VSFERR_NO_SHADER        MAKE_VSF_LERR(0x0022);
+const HRESULT VSFERR_NO_TECHNIQUE     MAKE_VSF_LERR(0x0023);
+const HRESULT VSFERR_NO_PASS          MAKE_VSF_LERR(0x0024);
+const HRESULT VSFERR_NO_TEXTURE       MAKE_VSF_LERR(0x0025);
+const HRESULT VSFERR_NO_PARAMETER     MAKE_VSF_LERR(0x0026);
+const HRESULT VSFERR_NO_ADAPTER       MAKE_VSF_LERR(0x0027);
+const HRESULT VSFERR_NO_HOOKSYSTEM    MAKE_VSF_LERR(0x0028);
+const HRESULT VSFERR_NO_LOGGER        MAKE_VSF_LERR(0x0029);
+const HRESULT VSFERR_NO_FILESYSTEM    MAKE_VSF_LERR(0x002A);
+const HRESULT VSFERR_NO_FILE          MAKE_VSF_LERR(0x002B);
+const HRESULT VSFERR_NO_IMAGE         MAKE_VSF_LERR(0x002C);
+const HRESULT VSFERR_NO_PROGRAM       MAKE_VSF_LERR(0x002D);
 
 // IVoodooCore
-const HRESULT E_NOTINIT      = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0001);
+const HRESULT VSFERR_NOT_INIT         MAKE_VSF_IERR(0x0001);
 
 // IVoodooLogger
-const HRESULT E_FILEERROR    = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0001);
-
-// IVoodooPass
-const HRESULT E_NOPROGRAM    = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0001);
+const HRESULT VSFERR_FILE_ERROR       MAKE_VSF_IERR(0x0001);
 
 // IVoodooParser
-const HRESULT E_ISSYSVAR     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x0001);
-
-const HRESULT E_NULLIMPL     = MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0xFFFF);
+const HRESULT VSFERR_IS_SYSVAR        MAKE_VSF_IERR(0x0001);
 
 // Creates an interface to a string-format class ID. The ID may be in registry form or a ProgID.
 HRESULT WINAPI InstanceFromString(_In_ BSTR lpStr, _In_ REFIID iid, _In_ void ** pp)
@@ -201,4 +222,31 @@ ParameterCategory WINAPI ToParameterCategory(ParameterType Type)
     default:
         return PC_Unknown;
     }
+}
+
+TextureFormat WINAPI ToTextureFormat(BSTR pString)
+{
+    CStringW str(pString);
+
+    if ( str.Left(3).CompareNoCase(L"TF_") != 0 )
+    {
+        return TF_Unknown;
+    }
+
+    if ( str[3] == 'D' )
+    {
+        // Depth format
+        if ( str.CompareNoCase(L"TF_D16") == 0 )     return TF_D16;
+        if ( str.CompareNoCase(L"TF_D32") == 0 )     return TF_D32;
+    } else {
+        if ( str.CompareNoCase(L"TF_RGB5") == 0 )    return TF_RGB5;
+        if ( str.CompareNoCase(L"TF_RGB5A1") == 0 )  return TF_RGB5A1;
+        if ( str.CompareNoCase(L"TF_RGB8") == 0 )    return TF_RGB8;
+        if ( str.CompareNoCase(L"TF_RGBA8") == 0 )   return TF_RGBA8;
+        if ( str.CompareNoCase(L"TF_RGB10A2") == 0 ) return TF_RGB10A2;
+        if ( str.CompareNoCase(L"TF_RGBA16F") == 0 ) return TF_RGBA16F;
+        if ( str.CompareNoCase(L"TF_RGBA32F") == 0 ) return TF_RGBA32F;
+    }
+
+    return TF_Unknown;
 }

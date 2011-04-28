@@ -107,12 +107,12 @@ STDMETHODIMP CVoodooFile::get_Path(LPBSTR pPath)
 
 STDMETHODIMP CVoodooFile::Open(DWORD Mode)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooFile::Close()
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooFile::Read(int *Length, byte Buffer[ ])
@@ -122,7 +122,7 @@ STDMETHODIMP CVoodooFile::Read(int *Length, byte Buffer[ ])
         return E_INVALIDARG;
     } else {
         *Length = 0;
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
@@ -132,6 +132,6 @@ STDMETHODIMP CVoodooFile::Write(int Length, byte Buffer[ ])
     {
         return E_INVALIDARG;
     } else {
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }

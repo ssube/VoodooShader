@@ -76,7 +76,7 @@ class ATL_NO_VTABLE CVoodooShader :
 public:
 	CVoodooShader();
     virtual ~CVoodooShader();
-    static IVoodooShader * Create(IVoodooCore * pCore, IVoodooFile * pFile);
+    static IVoodooShader * Create(IVoodooCore * pCore, IVoodooFile * pFile, SAFEARRAY * pArgs);
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
@@ -111,6 +111,9 @@ public:
     virtual HRESULT STDMETHODCALLTYPE get_CgShader(VARIANT *ppCgShader);
 
 private:
+    HRESULT STDMETHODCALLTYPE LinkShader();
+
+    bool m_Linked;
     ULONG m_Refrs;
     CComBSTR m_Name;
     IVoodooCore * m_Core;

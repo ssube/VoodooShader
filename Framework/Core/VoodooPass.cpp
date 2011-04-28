@@ -3,18 +3,7 @@
 #include "stdafx.h"
 #include "VoodooPass.h"
 
-
-
-
 // CVoodooPass
-ULONG m_Refrs;
-CComBSTR m_Name;
-IVoodooCore * m_Core;
-IVoodooTexture * m_Target;
-IVoodooShader * m_Shader;
-IVoodooTechnique * m_Technique;
-CGpass m_Pass;
-
 CVoodooPass::CVoodooPass()
 {
     m_Refrs = 0;
@@ -51,6 +40,8 @@ IVoodooPass * CVoodooPass::Create(IVoodooTechnique * pTechnique, CGpass Pass)
         pPass->m_Technique = pTechnique;
         pTechnique->get_Shader(&pPass->m_Shader);
         pTechnique->get_Core(&pPass->m_Core);
+
+        pPass->LinkPass();
 
         hr = pPass->QueryInterface(IID_IVoodooPass, (void**)&ipPass);
         pPass->Release();
@@ -179,7 +170,7 @@ STDMETHODIMP CVoodooPass::GetCgProgram(
 
     if ( !cgIsProgram(program) )
     {
-        return E_NOPROGRAM;
+        return VSFERR_NO_PROGRAM;
     }
 
     V_VT(ppProgram) = VT_BYREF;
@@ -198,4 +189,62 @@ STDMETHODIMP CVoodooPass::get_CgPass(
         V_BYREF(ppPass) = (void*)m_Pass;
         return S_OK;
     }
+}
+
+STDMETHODIMP CVoodooPass::LinkPass()
+{
+    if ( !cgIsPass(m_Pass) )
+    {
+        return VSFERR_INVALID_CG;
+    }
+
+    CGannotation targetAnnotation = cgGetNamedPassAnnotation(m_Pass, "target");
+    if ( cgIsAnnotation(targetAnnotation) && cgGetAnnotationType(targetAnnotation) == CG_STRING )
+    {
+        const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
+        CComBSTR targetbstr(targetName);
+
+        m_Core->GetTexture(targetbstr, &m_Target);
+
+        if ( m_Target == NULL )
+        {
+            m_Core->GetStageTexture(TS_Pass, &m_Target);
+        }
+    } else {
+        /*mCore->GetLogger()->Log
+        (
+            LL_Debug,
+            VOODOO_CORE_NAME,
+            "Pass %s has no target annotation.", 
+            this->GetName().c_str()
+        );*/
+
+        m_Core->GetStageTexture(TS_Pass, &m_Target);
+    }
+
+    // Load the programs
+    IVoodooAdapter * adapter = NULL;
+    m_Core->get_Adapter(&adapter);
+
+    if ( adapter != NULL )
+    {
+        if ( FAILED(adapter->LoadPass(this)) )
+        {
+            //mCore->GetLogger()->Log(LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", this->GetName().c_str());
+            return VSFERR_LINKER_ERROR;
+        } else {
+            //mCore->GetLogger()->Log(LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", this->GetName().c_str());
+        }
+    } else {
+        /*mCore->GetLogger()->Log
+        (
+            LL_Warning,
+            VOODOO_CORE_NAME,
+            "No adapter found, pass %s must be explicitly loaded later.", 
+            this->GetName().c_str()
+        )*/;
+        return VSFERR_NO_ADAPTER;
+    }
+
+    return VSF_OK;
 }

@@ -2,25 +2,29 @@
 
 #include "stdafx.h"
 #include "VoodooShader.h"
-
-
-
+#include "VoodooParameter.h"
+#include "VoodooTechnique.h"
 
 // CVoodooShader
 CVoodooShader::CVoodooShader()
 {
+    m_Linked = 0;
     m_Refrs = 0;
     m_Core = NULL;
 }
 
 CVoodooShader::~CVoodooShader()
 {
+    m_Linked = 0;
     m_Refrs = 0;
     m_Core = NULL;
 }
 
-IVoodooShader * CVoodooShader::Create(IVoodooCore * pCore, IVoodooFile * pFile)
+IVoodooShader * CVoodooShader::Create(IVoodooCore * pCore, IVoodooFile * pFile, SAFEARRAY * pArgs)
 {
+    //! @todo Make the pArgs field used. Will require conversion to cstrs
+    UNREFERENCED_PARAMETER(pArgs);
+
     if ( pCore == NULL || pFile == NULL ) return NULL;
 
     CComPtr<CVoodooShader> ipShader = NULL;
@@ -51,7 +55,12 @@ IVoodooShader * CVoodooShader::Create(IVoodooCore * pCore, IVoodooFile * pFile)
         }
 
         pShader->AddRef();
+
         pShader->m_Core = pCore;
+        pShader->m_Effect = effect;
+
+        pShader->LinkShader();
+
         hr = pShader->QueryInterface(IID_IVoodooShader, (void**)&ipShader);
         pShader->Release();
     }
@@ -115,6 +124,7 @@ STDMETHODIMP CVoodooShader::get_Core(IVoodooCore **ppCore)
 
 STDMETHODIMP CVoodooShader::get_TechniqueCount(INT * pCount)
 {
+    if ( !m_Linked ) return VSFERR_NOT_LINKED;
     if ( pCount == NULL )
     {
         return E_INVALIDARG;
@@ -126,6 +136,7 @@ STDMETHODIMP CVoodooShader::get_TechniqueCount(INT * pCount)
 
 STDMETHODIMP CVoodooShader::GetTechnique(INT Number, IVoodooTechnique **ppTechnique)
 {
+    if ( !m_Linked ) return VSFERR_NOT_LINKED;
     if ( ppTechnique == NULL )
     {
         return E_INVALIDARG;
@@ -140,6 +151,7 @@ STDMETHODIMP CVoodooShader::GetTechnique(INT Number, IVoodooTechnique **ppTechni
 
 STDMETHODIMP CVoodooShader::get_DefaultTechnique(IVoodooTechnique ** ppTechnique)
 {
+    if ( !m_Linked ) return VSFERR_NOT_LINKED;
     if ( ppTechnique == NULL )
     {
         return E_INVALIDARG;
@@ -152,6 +164,7 @@ STDMETHODIMP CVoodooShader::get_DefaultTechnique(IVoodooTechnique ** ppTechnique
 
 STDMETHODIMP CVoodooShader::put_DefaultTechnique(IVoodooTechnique * pTechnique)
 {
+    if ( !m_Linked ) return VSFERR_NOT_LINKED;
     if ( pTechnique == NULL )
     {
         return E_INVALIDARG;
@@ -171,6 +184,7 @@ STDMETHODIMP CVoodooShader::put_DefaultTechnique(IVoodooTechnique * pTechnique)
 
 STDMETHODIMP CVoodooShader::get_ParameterCount(INT * pCount)
 {
+    if ( !m_Linked ) return VSFERR_NOT_LINKED;
     if ( pCount == NULL )
     {
         return E_INVALIDARG;
@@ -182,6 +196,7 @@ STDMETHODIMP CVoodooShader::get_ParameterCount(INT * pCount)
 
 STDMETHODIMP CVoodooShader::GetParameter(INT Number, IVoodooParameter **ppParameter)
 {
+    if ( !m_Linked ) return VSFERR_NOT_LINKED;
     if ( ppParameter == NULL )
     {
         return E_INVALIDARG;
@@ -204,4 +219,48 @@ STDMETHODIMP CVoodooShader::get_CgShader(VARIANT *ppCgShader)
         V_BYREF(ppCgShader) = (void*)m_Effect;
         return S_OK;
     }
+}
+
+STDMETHODIMP CVoodooShader::LinkShader()
+{
+    // Make sure it's a valid effect
+    if ( !cgIsEffect(m_Effect) )
+    {
+        return VSFERR_INVALID_CG;
+    }
+
+    // Link parameters first
+    CGparameter cgParameter = cgGetFirstEffectParameter(m_Effect);
+    while ( cgIsParameter(cgParameter) )
+    {
+        IVoodooParameter * iParameter = CVoodooParameter::Create(this, cgParameter);
+
+        if ( iParameter != NULL )
+        {
+            m_Parameters.Add(iParameter);
+        }
+
+        cgParameter = cgGetNextParameter(cgParameter);
+    }
+
+    // Validate and link techniques next
+    CGtechnique cgTechnique = cgGetFirstTechnique(m_Effect);
+    while ( cgIsTechnique(cgTechnique) )
+    {
+        IVoodooTechnique * iTechnique = CVoodooTechnique::Create(this, cgTechnique);
+
+        if ( iTechnique != NULL )
+        {
+            if ( m_Default == NULL )
+            {
+                m_Default = iTechnique;
+            }
+
+            m_Techniques.Add(iTechnique);
+        }
+
+        cgTechnique = cgGetNextTechnique(cgTechnique);
+    }
+
+    return VSF_OK;
 }

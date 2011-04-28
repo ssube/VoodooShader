@@ -100,7 +100,7 @@ STDMETHODIMP CVoodooImage::get_Desc(TextureDesc *pDesc)
     {
         return E_INVALIDARG;
     } else {
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
@@ -116,12 +116,12 @@ STDMETHODIMP CVoodooImage::get_Path(LPBSTR pPath)
 
 STDMETHODIMP CVoodooImage::Open(DWORD Mode)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooImage::Close()
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooImage::Read(int *Length, byte Buffer[ ])
@@ -131,7 +131,7 @@ STDMETHODIMP CVoodooImage::Read(int *Length, byte Buffer[ ])
         return E_INVALIDARG;
     } else {
         *Length = 0;
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
@@ -141,7 +141,7 @@ STDMETHODIMP CVoodooImage::Write(int Length, byte Buffer[ ])
     {
         return E_INVALIDARG;
     } else {
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }
 
@@ -151,6 +151,6 @@ STDMETHODIMP CVoodooImage::get_Data(TextureRegion Region, int *pSize, byte ppBuf
     {
         return E_INVALIDARG;
     } else {
-        return E_NULLIMPL;
+        return VSFOK_NULL_IMPL;
     }
 }

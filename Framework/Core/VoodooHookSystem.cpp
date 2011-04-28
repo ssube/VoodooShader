@@ -91,15 +91,15 @@ STDMETHODIMP CVoodooHookSystem::get_Core(IVoodooCore **ppCore)
 
 STDMETHODIMP CVoodooHookSystem::Add(BSTR pName, FunctionPtr pSource, FunctionPtr pDest)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooHookSystem::Remove(BSTR pName)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooHookSystem::RemoveAll(void)
 {
-    return E_NULLIMPL;
+    return VSFOK_NULL_IMPL;
 }

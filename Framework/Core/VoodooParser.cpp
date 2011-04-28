@@ -96,7 +96,7 @@ STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, DWORD Type)
             {
                 LogMsg(m_Logger, LL_Warning|LL_Framework, VOODOO_CORE_NAME, L"Unable to add duplicate system variable \"%s\".", name);
             }
-            return E_ISSYSVAR;
+            return VSFERR_IS_SYSVAR;
         }
     } else {
         m_Variables.SetAt(name, value);

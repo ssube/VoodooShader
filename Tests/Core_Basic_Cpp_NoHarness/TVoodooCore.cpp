@@ -374,5 +374,8 @@ BEGIN_TESTF(CoreInit_TextureTestGetName, CoreInitFixture)
     hr = pCore->GetTexture(TexName1, &pPassTexD);
     WIN_ASSERT_EQUAL(VSFERR_DUPNAME, hr, _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_NOT_NULL(pPassTexD);
+
+    hr = pCore->RemoveTexture(TexName1);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 }
 END_TESTF;

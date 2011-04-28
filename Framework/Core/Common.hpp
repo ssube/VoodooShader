@@ -31,26 +31,65 @@
 
 #include "VoodooVersion.hpp"
 
-extern const HRESULT E_BADTHING;
-extern const HRESULT E_INVALIDCFG;
-extern const HRESULT E_BADCLSID;
-extern const HRESULT E_DUPNAME;
-extern const HRESULT E_NOT_FOUND;
-extern const HRESULT S_NOT_FOUND;
+/* Voodoo HRESULTS */
+#define _FACVSF FACILITY_ITF
+
+// General Voodoo HRESULT macros
+#define MAKE_VSF_OK(code)     MAKE_HRESULT(SEVERITY_SUCCESS, _FACVSF, code)
+#define MAKE_VSF_ERR(code)    MAKE_HRESULT(SEVERITY_ERROR, _FACVSF, code)
+
+// Library/interface specific HRESULT macros
+#define MAKE_VSF_LOK(code)    MAKE_HRESULT(SEVERITY_SUCCESS, _FACVSF, code ^ 0x8000 )
+#define MAKE_VSF_IOK(code)    MAKE_HRESULT(SEVERITY_SUCCESS, _FACVSF, code | 0x8000 )
+#define MAKE_VSF_LERR(code)   MAKE_HRESULT(SEVERITY_ERROR, _FACVSF, code ^ 0x8000 )
+#define MAKE_VSF_IERR(code)   MAKE_HRESULT(SEVERITY_ERROR, _FACVSF, code | 0x8000 )
+
+// Library/interface HRESULT get macros
+#define IS_LIB_HR(hr)   (( hr & 0x00008000 ) == 0x00000000 )
+#define IS_IFACE_HR(hr) (( hr & 0x00008000 ) == 0x00008000 )
+
+// IVoodoo*
+extern const HRESULT VSF_OK;
+extern const HRESULT VSF_FAIL;
+
+extern const HRESULT VSFOK_NULL_IMPL;
+extern const HRESULT VSFOK_NOT_FOUND;
+
+extern const HRESULT VSFERR_BAD_CLSID;
+extern const HRESULT VSFERR_DUP_NAME;
+extern const HRESULT VSFERR_LINKER_ERROR;
+
+extern const HRESULT VSFERR_NOT_LINKED;
+extern const HRESULT VSFERR_NOT_FOUND;
+
+extern const HRESULT VSFERR_INVALID_CFG;
+extern const HRESULT VSFERR_INVALID_CG;
+extern const HRESULT VSFERR_INVALID_TECH;
+extern const HRESULT VSFERR_INVALID_ARG;
+
+extern const HRESULT VSFERR_NO_CORE;
+extern const HRESULT VSFERR_NO_PARSER;
+extern const HRESULT VSFERR_NO_SHADER;
+extern const HRESULT VSFERR_NO_TECHNIQUE;
+extern const HRESULT VSFERR_NO_PASS;
+extern const HRESULT VSFERR_NO_TEXTURE;
+extern const HRESULT VSFERR_NO_PARAMETER;
+extern const HRESULT VSFERR_NO_ADAPTER;
+extern const HRESULT VSFERR_NO_HOOKSYSTEM;
+extern const HRESULT VSFERR_NO_LOGGER;
+extern const HRESULT VSFERR_NO_FILESYSTEM;
+extern const HRESULT VSFERR_NO_FILE;
+extern const HRESULT VSFERR_NO_IMAGE;
+extern const HRESULT VSFERR_NO_PROGRAM;
 
 // IVoodooCore
-extern const HRESULT E_NOTINIT;
+extern const HRESULT VSFERR_NOT_INIT;
 
 // IVoodooLogger
-extern const HRESULT E_FILEERROR;
-
-// IVoodooPass
-extern const HRESULT E_NOPROGRAM;
+extern const HRESULT VSFERR_FILE_ERROR;
 
 // IVoodooParser
-extern const HRESULT E_ISSYSVAR;
-
-extern const HRESULT E_NULLIMPL;
+extern const HRESULT VSFERR_IS_SYSVAR;
 
 // Creates an interface to a string-format class ID. The ID may be in registry form or a ProgID.
 HRESULT WINAPI InstanceFromString(_In_ BSTR lpStr, _In_ REFIID iid, _In_ void ** pp);
@@ -75,3 +114,4 @@ inline HRESULT WINAPI LogMsg(IVoodooLogger * pLogger, DWORD Level, LPWSTR pModul
 CGtype WINAPI ToCgType(ParameterType Type);
 ParameterType WINAPI ToParameterType(CGtype Type);
 ParameterCategory WINAPI ToParameterCategory(ParameterType Type);
+TextureFormat WINAPI ToTextureFormat(BSTR pString);

@@ -95,9 +95,6 @@ BEGIN_COM_MAP(CVoodooTechnique)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
-
-
-
 // IVoodooTechnique
 public:
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
@@ -123,6 +120,8 @@ public:
         /* [retval][out] */ VARIANT *ppPass);
 
 private:
+    HRESULT STDMETHODCALLTYPE LinkTechnique();
+
     ULONG m_Refrs;
     CComBSTR m_Name;
     IVoodooCore * m_Core;

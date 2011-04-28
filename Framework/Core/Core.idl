@@ -27,6 +27,7 @@ typedef [v1_enum] enum
 {
     TF_Unknown  = 0x00,
     TF_RGB5     = 0x01,
+    TF_RGB5A1   = 0x02,
     TF_RGB8     = 0x03,
     TF_RGBA8    = 0x04,
     TF_RGB10A2  = 0x05,
