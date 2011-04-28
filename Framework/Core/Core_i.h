@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Apr 27 19:12:30 2011
+/* at Wed Apr 27 21:22:19 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W0, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -572,7 +572,7 @@ EXTERN_C const IID IID_IVoodooCore;
             /* [retval][out] */ IVoodooLogger **ppLogger) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Config( 
-            /* [retval][out] */ IXMLDOMDocument **ppConfig) = 0;
+            /* [retval][out] */ IUnknown **ppConfig) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CgContext( 
             /* [retval][out] */ VARIANT *pCgContext) = 0;
@@ -603,6 +603,9 @@ EXTERN_C const IID IID_IVoodooCore;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetTexture( 
             /* [in] */ BSTR pName,
             /* [retval][out] */ IVoodooTexture **ppTexture) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveParameter( 
+            /* [in] */ BSTR pName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveTexture( 
             /* [in] */ BSTR pName) = 0;
@@ -690,7 +693,7 @@ EXTERN_C const IID IID_IVoodooCore;
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Config )( 
             IVoodooCore * This,
-            /* [retval][out] */ IXMLDOMDocument **ppConfig);
+            /* [retval][out] */ IUnknown **ppConfig);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CgContext )( 
             IVoodooCore * This,
@@ -728,6 +731,10 @@ EXTERN_C const IID IID_IVoodooCore;
             IVoodooCore * This,
             /* [in] */ BSTR pName,
             /* [retval][out] */ IVoodooTexture **ppTexture);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RemoveParameter )( 
+            IVoodooCore * This,
+            /* [in] */ BSTR pName);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RemoveTexture )( 
             IVoodooCore * This,
@@ -820,6 +827,9 @@ EXTERN_C const IID IID_IVoodooCore;
 
 #define IVoodooCore_GetTexture(This,pName,ppTexture)	\
     ( (This)->lpVtbl -> GetTexture(This,pName,ppTexture) ) 
+
+#define IVoodooCore_RemoveParameter(This,pName)	\
+    ( (This)->lpVtbl -> RemoveParameter(This,pName) ) 
 
 #define IVoodooCore_RemoveTexture(This,pName)	\
     ( (This)->lpVtbl -> RemoveTexture(This,pName) ) 

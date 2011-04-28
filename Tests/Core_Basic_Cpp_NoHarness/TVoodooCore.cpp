@@ -375,7 +375,7 @@ BEGIN_TESTF(CoreInit_TextureTestGetName, CoreInitFixture)
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
     hr = pCore->GetTexture(TexName1, &pPassTexD);
-    WIN_ASSERT_EQUAL(VSFERR_DUP_NAME, hr, _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_NOT_NULL(pPassTexD);
 
     hr = pCore->RemoveTexture(TexName1);
@@ -407,11 +407,11 @@ BEGIN_TESTF(CoreInit_Parameter, CoreInitFixture)
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_NOT_NULL(pParameter2);
 
-    hr = pCore->RemoveTexture(pName);
+    hr = pCore->RemoveParameter(pName);
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
     hr = pCore->GetParameter(pName, &pParameter2);
-    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
-    WIN_ASSERT_NOT_NULL(pParameter2);
+    WIN_ASSERT_EQUAL(VSFERR_NOT_FOUND, hr, _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NULL(pParameter2);
 }
 END_TESTF;

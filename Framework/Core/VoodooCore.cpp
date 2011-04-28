@@ -339,7 +339,7 @@ STDMETHODIMP CVoodooCore::get_Logger
 
 STDMETHODIMP CVoodooCore::get_Config
 ( 
-   IXMLDOMDocument ** ppConfig
+   IUnknown ** ppConfig
 )
 {
     if ( !m_Init ) return VSFERR_NOT_INIT;
@@ -347,9 +347,7 @@ STDMETHODIMP CVoodooCore::get_Config
     {
         return E_INVALIDARG;
     } else {
-        *ppConfig = m_Config;
-        (*ppConfig)->AddRef();
-        return S_OK;
+        return m_Config->QueryInterface(IID_IUnknown, (void**)ppConfig);
     }
 }
 
@@ -519,6 +517,20 @@ STDMETHODIMP CVoodooCore::GetTexture
     } else {
         *ppTexture = texture;
         (*ppTexture)->AddRef();
+        return VSF_OK;
+    }
+}
+
+STDMETHODIMP CVoodooCore::RemoveParameter
+( 
+    BSTR pName
+)
+{
+    if ( !m_Init ) return VSFERR_NOT_INIT;
+    if ( this->m_Parameters.RemoveKey(pName) == 0 )
+    {
+        return VSFOK_NOT_FOUND;
+    } else {
         return VSF_OK;
     }
 }

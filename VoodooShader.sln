@@ -490,9 +490,9 @@ Global
 		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

@@ -161,7 +161,7 @@ DECLARE_INTERFACE_(IVoodooCore, IDispatch)
     STDMETHOD(get_FileSystem)(THIS_ IVoodooFileSystem ** ppFileSystem) PURE;
     STDMETHOD(get_Adapter)(THIS_ IVoodooAdapter ** ppAdapter) PURE;
     STDMETHOD(get_Logger)(THIS_ IVoodooLogger ** ppLogger) PURE;
-    STDMETHOD(get_Config)(THIS_ IXMLDOMDocument ** ppConfig) PURE;
+    STDMETHOD(get_Config)(THIS_ IUnknown ** ppConfig) PURE;
     STDMETHOD(get_CgContext)(THIS_ VARIANT * pCgContext) PURE;
     STDMETHOD(put_CgContext)THIS_ (VARIANT CgContext) PURE;
     STDMETHOD(CreateShader)(THIS_ IVoodooFile * pFile, SAFEARRAY * pArgs, IVoodooShader ** ppShader) PURE;
@@ -169,6 +169,7 @@ DECLARE_INTERFACE_(IVoodooCore, IDispatch)
     STDMETHOD(CreateTexture)(THIS_ BSTR pName, TextureDesc Desc, VARIANT Data, IVoodooTexture ** ppTexture) PURE;
     STDMETHOD(GetParameter)(THIS_ BSTR pName, IVoodooParameter ** ppParameter) PURE;
     STDMETHOD(GetTexture)(THIS_ BSTR pName, IVoodooTexture ** ppTexture) PURE;
+    STDMETHOD(RemoveParameter)(THIS_ BSTR pName) PURE;
     STDMETHOD(RemoveTexture)(THIS_ BSTR pName) PURE;
     STDMETHOD(GetStageTexture)(THIS_ EnumType Stage, IVoodooTexture ** ppTexture) PURE;
     STDMETHOD(SetStageTexture)(THIS_ EnumType Stage, IVoodooTexture * pTexture) PURE;
@@ -503,10 +504,10 @@ typedef struct IVoodooImage *LPVOODOOIMAGE, *PVOODOOIMAGE;
 #define MAKE_VSF_ERR(code)    MAKE_HRESULT(SEVERITY_ERROR, _FACVSF, code)
 
 // Library/interface specific HRESULT macros
-#define MAKE_VSF_LOK(code)    MAKE_HRESULT(SEVERITY_SUCCESS, _FACVSF, code | 0x8000 )
-#define MAKE_VSF_IOK(code)    MAKE_HRESULT(SEVERITY_SUCCESS, _FACVSF, code ^ 0x8000 )
-#define MAKE_VSF_LERR(code)   MAKE_HRESULT(SEVERITY_ERROR, _FACVSF, code | 0x8000 )
-#define MAKE_VSF_IERR(code)   MAKE_HRESULT(SEVERITY_ERROR, _FACVSF, code ^ 0x8000 )
+#define MAKE_VSF_LOK(code)    MAKE_HRESULT(SEVERITY_SUCCESS, _FACVSF, code ^ 0x8000 )
+#define MAKE_VSF_IOK(code)    MAKE_HRESULT(SEVERITY_SUCCESS, _FACVSF, code | 0x8000 )
+#define MAKE_VSF_LERR(code)   MAKE_HRESULT(SEVERITY_ERROR, _FACVSF, code ^ 0x8000 )
+#define MAKE_VSF_IERR(code)   MAKE_HRESULT(SEVERITY_ERROR, _FACVSF, code | 0x8000 )
 
 // Library/interface HRESULT get macros
 #define IS_LIB_HR(hr)   (  hr & 0x00008000 )

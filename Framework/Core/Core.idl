@@ -267,7 +267,7 @@ interface IVoodooCore : IDispatch{
     [propget, id(4)] HRESULT FileSystem([out, retval] IVoodooFileSystem ** ppFileSystem);
     [propget, id(5)] HRESULT Adapter([out, retval] IVoodooAdapter ** ppAdapter);
     [propget, id(6)] HRESULT Logger([out, retval] IVoodooLogger ** ppLogger);
-    [propget, id(7)] HRESULT Config([out, retval] IXMLDOMDocument ** ppConfig);
+    [propget, id(7)] HRESULT Config([out, retval] IUnknown ** ppConfig);
     [propget, id(8)] HRESULT CgContext([out, retval] VARIANT * pCgContext);
     [propput, id(8)] HRESULT CgContext([in] VARIANT CgContext);
     [vararg, id(10)] HRESULT CreateShader([in] IVoodooFile * pFile, [in] SAFEARRAY(VARIANT) pArgs, [out, retval] IVoodooShader ** ppShader);
@@ -275,9 +275,10 @@ interface IVoodooCore : IDispatch{
     [id(12)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Desc, [in] VARIANT Data, [out, retval] IVoodooTexture ** ppTexture);
     [id(13)] HRESULT GetParameter([in] BSTR pName, [out, retval] IVoodooParameter ** ppParameter);
     [id(14)] HRESULT GetTexture([in] BSTR pName, [out, retval] IVoodooTexture ** ppTexture);
-    [id(15)] HRESULT RemoveTexture([in] BSTR pName);
-    [id(16)] HRESULT GetStageTexture([in] EnumType Stage, [out, retval] IVoodooTexture ** ppTexture);
-    [id(17)] HRESULT SetStageTexture([in] EnumType Stage, [in] IVoodooTexture * pTexture);
+    [id(16)] HRESULT RemoveParameter([in] BSTR pName);
+    [id(17)] HRESULT RemoveTexture([in] BSTR pName);
+    [id(18)] HRESULT GetStageTexture([in] EnumType Stage, [out, retval] IVoodooTexture ** ppTexture);
+    [id(19)] HRESULT SetStageTexture([in] EnumType Stage, [in] IVoodooTexture * pTexture);
 };
 [
 	object,

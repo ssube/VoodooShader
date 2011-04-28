@@ -1,4 +1,0 @@
-LIBRARY
-EXPORTS
-CreateCore=CreateCore
-DestroyCore=DestroyCore
