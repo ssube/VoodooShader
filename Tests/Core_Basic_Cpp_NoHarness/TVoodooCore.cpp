@@ -37,6 +37,9 @@ SETUP(CoreInitFixture)
     InitParams iParams;
     ZeroMemory(&iParams, sizeof(iParams));
     iParams.Config = SysAllocString(L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig");
+    iParams.Target = SysAllocString(L"M:\\VoodooShader\\TargetApp.exe");
+    iParams.Loader = SysAllocString(L"M:\\VoodooShader\\LoaderApp.exe");
+    iParams.GlobalRoot = iParams.RunRoot = iParams.LocalRoot = SysAllocString(L"M:\\VoodooShader\\");
     WIN_ASSERT_NOT_NULL(iParams.Config);
 
     hr = pCore->Initialize(iParams);
@@ -351,7 +354,7 @@ BEGIN_TESTF(CoreInit_TextureTestDupName, CoreInitFixture)
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
     hr = pCore->CreateTexture(TexName1, Desc, TexData, &pPassTex);
-    WIN_ASSERT_EQUAL(VSFERR_DUPNAME, hr, _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_EQUAL(VSFERR_DUP_NAME, hr, _T("HRESULT: %X\n"), hr);
 }
 END_TESTF;
 
@@ -372,10 +375,43 @@ BEGIN_TESTF(CoreInit_TextureTestGetName, CoreInitFixture)
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
 
     hr = pCore->GetTexture(TexName1, &pPassTexD);
-    WIN_ASSERT_EQUAL(VSFERR_DUPNAME, hr, _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_EQUAL(VSFERR_DUP_NAME, hr, _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_NOT_NULL(pPassTexD);
 
     hr = pCore->RemoveTexture(TexName1);
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+}
+END_TESTF;
+
+// Test parameter functions
+BEGIN_TESTF(CoreInit_Parameter, CoreInitFixture)
+{
+    BSTR pName = SysAllocString(L"Namey");
+    WIN_ASSERT_NOT_NULL(pName, _T("Unable to alloc param name."));
+    ParameterType Type = PT_Float3x2;
+    IVoodooParameter * pParameter = NULL;
+
+    HRESULT hr = pCore->CreateParameter(pName, Type, NULL);
+    WIN_ASSERT_EQUAL(VSFERR_INVALID_ARG, hr, _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->CreateParameter(pName, Type, &pParameter);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pParameter);
+
+    IVoodooParameter * pParameter2 = NULL;
+    hr = pCore->CreateParameter(pName, Type, &pParameter2);
+    WIN_ASSERT_EQUAL(VSFERR_DUP_NAME, hr, _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NULL(pParameter2);
+
+    hr = pCore->GetParameter(pName, &pParameter2);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pParameter2);
+
+    hr = pCore->RemoveTexture(pName);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+
+    hr = pCore->GetParameter(pName, &pParameter2);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
+    WIN_ASSERT_NOT_NULL(pParameter2);
 }
 END_TESTF;

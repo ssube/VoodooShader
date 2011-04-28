@@ -71,8 +71,8 @@
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
-      <WarningLevel>4</WarningLevel>
-      <EnableErrorChecks>All</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+      <EnableErrorChecks>None</EnableErrorChecks>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -109,8 +109,8 @@
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
-      <WarningLevel>4</WarningLevel>
-      <EnableErrorChecks>All</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+      <EnableErrorChecks>None</EnableErrorChecks>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>

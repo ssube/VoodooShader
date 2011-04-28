@@ -459,7 +459,7 @@ STDMETHODIMP CVoodooCore::CreateTexture(
 
         if ( *ppTexture == NULL )
         {
-            return VSFERR_NO_SHADER;
+            return VSFERR_NO_TEXTURE;
         }
 
         m_Textures.SetAt(pName, *ppTexture);

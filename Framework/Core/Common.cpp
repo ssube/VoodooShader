@@ -250,3 +250,33 @@ TextureFormat WINAPI ToTextureFormat(BSTR pString)
 
     return TF_Unknown;
 }
+
+/*
+#ifdef _DEBUG
+CPair<long, int> VoodooMemMgr_MemBlock;
+CMap<void*, void*, VoodooMemMgr_MemBlock, VoodooMemMgr_MemBlock> VoodooMemMgr_Memory;
+
+int VoodooMemMgr(int allocType, void *userData, size_t size, int blockType, long requestNumber, const unsigned char *filename, int lineNumber)
+{
+    // Alloc
+    if ( allocType == _HOOK_ALLOC )
+    {
+
+    }
+}
+
+void VoodooMemMgr_Report()
+{
+    VoodooMemMgr_Memory::CPair * pObj = NULL;
+    pObj = VoodooMemMgr_Memory.PGetFirstAssoc();
+    while ( pObj != NULL )
+    {
+        CStringW leak;
+        leak.Format("Memory leak of %i bytes at %p (%i remaining references).\n", pObj->second->first, pObj->first, pObj->second->second);
+        OutputDebugString(leak);
+
+        pObj = VoodooMemMgr_Memory.PGetNextAssoc(pObj);
+    }
+
+}
+#endif*/

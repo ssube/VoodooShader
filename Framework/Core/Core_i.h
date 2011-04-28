@@ -4,12 +4,12 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Apr 27 19:01:52 2011
+/* at Wed Apr 27 19:12:30 2011
  */
 /* Compiler settings for Core.idl:
-    Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
+    Oicf, W0, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
     protocol : dce , ms_ext, c_ext, robust
-    error checks: allocation ref bounds_check enum stub_data 
+    error checks: none
     VC __declspec() decoration level: 
          __declspec(uuid()), __declspec(selectany), __declspec(novtable)
          DECLSPEC_UUID(), MIDL_INTERFACE()
