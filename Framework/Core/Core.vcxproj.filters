@@ -20,6 +20,9 @@
     <Filter Include="Header Files\Public">
       <UniqueIdentifier>{43571c3d-d7e2-4909-8888-b212e5fae012}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Docs">
+      <UniqueIdentifier>{ec843915-84ba-47e7-a85b-8a009ab2310b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -155,6 +158,18 @@
     </ClInclude>
     <ClInclude Include="VoodooFramework.hpp">
       <Filter>Header Files\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs\Docs_Code.hpp">
+      <Filter>Header Files\Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs\Docs_Graphics.hpp">
+      <Filter>Header Files\Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs\Docs_License.hpp">
+      <Filter>Header Files\Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs\Docs_Vars.hpp">
+      <Filter>Header Files\Docs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

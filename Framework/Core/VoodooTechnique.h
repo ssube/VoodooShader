@@ -97,27 +97,13 @@ END_COM_MAP()
 
 // IVoodooTechnique
 public:
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-        /* [retval][out] */ LPBSTR pName);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-        /* [retval][out] */ IVoodooCore **ppCore);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Target( 
-        /* [retval][out] */ IVoodooTexture **ppTexture);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PassCount( 
-        /* [retval][out] */ INT *ppCount);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetPass( 
-        /* [in] */ INT Number,
-        /* [retval][out] */ IVoodooPass **ppPass);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shader( 
-        /* [retval][out] */ IVoodooShader **ppShader);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE get_CgTechnique( 
-        /* [retval][out] */ VARIANT *ppPass);
+    virtual HRESULT STDMETHODCALLTYPE get_Name(LPBSTR pName);
+    virtual HRESULT STDMETHODCALLTYPE get_Core(IVoodooCore **ppCore);
+    virtual HRESULT STDMETHODCALLTYPE get_Target(IVoodooTexture **ppTexture);
+    virtual HRESULT STDMETHODCALLTYPE get_PassCount(INT *ppCount);
+    virtual HRESULT STDMETHODCALLTYPE GetPass(INT Number, IVoodooPass **ppPass);
+    virtual HRESULT STDMETHODCALLTYPE get_Shader(IVoodooShader **ppShader);
+    virtual HRESULT STDMETHODCALLTYPE get_CgTechnique(VARIANT *ppPass);
 
 private:
     HRESULT STDMETHODCALLTYPE LinkTechnique();

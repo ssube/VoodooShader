@@ -1,5 +1,5 @@
 @echo Voodoo Shader Framework - Unit Tests
-@cd Release
+@cd Debug
 
 @echo Instrumenting modules...
 @vsinstr /coverage Voodoo_Core.dll

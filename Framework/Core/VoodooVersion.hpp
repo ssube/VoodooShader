@@ -23,14 +23,15 @@
 
 // Versioning functions -------------------------------------------------------
 #ifdef _UNICODE
-#   define VOODOO_META__STRING(arg) L ## #arg
-#   define VOODOO_META_STRING(arg) L ## arg
+#   define VOODOO_META_STRING_ARG(arg) L ## #arg
+#   define VOODOO_META_STRING_STR(arg) L ## arg
 #else
-#   define VOODOO_META__STRING(arg) #arg
-#   define VOODOO_META_STRING(arg) arg
+#   define VOODOO_META_STRING_ARG(arg) #arg
+#   define VOODOO_META_STRING_STR(arg) arg
 #endif
 
-#define VOODOO_META_TOSTRING(arg) VOODOO_META__STRING(arg)
+#define VOODOO_META_TOSTRING(arg) VOODOO_META_STRING_ARG(arg)
+#define VOODOO_META_STRING(arg) VOODOO_META_STRING_STR(arg)
 
 #ifdef _DEBUG
 #   define VOODOO_META_DEBUG_BOOL true
@@ -39,21 +40,6 @@
 #   define VOODOO_META_DEBUG_BOOL false
 #   define VOODOO_META_DEBUG_STRING
 #endif
-
-// Version extractors
-#define VOODOO_VERSION_MAJOR(ver) (((unsigned __int32)(ver & 0xFF000000)) >> 24)
-#define VOODOO_VERSION_MINOR(ver) (((unsigned __int32)(ver & 0x00FF0000)) >> 16)
-#define VOODOO_VERSION_PATCH(ver) (((unsigned __int32)(ver & 0x0000FF00)) >>  8)
-#define VOODOO_VERSION_REV(ver)   (((unsigned __int32)(ver & 0x000000FF))
-
-/**
- * Creates a dword version.
- */
-#define VOODOO_META_VERSION_VALUE(token) (unsigned __int32)\
-   (( VOODOO_##token##_VERSION_MAJOR << 24 ) |\
-    ( VOODOO_##token##_VERSION_MINOR << 16 ) |\
-    ( VOODOO_##token##_VERSION_PATCH <<  8 ) |\
-    ( VOODOO_##token##_VERSION_REV ))
 
 /**
  * Creates a comma-separated chain of version tokens (not string).
@@ -96,8 +82,8 @@
 #define VOODOO_GLOBAL_PRETTYNAME        VOODOO_META_STRING("Voodoo Shader Framework")
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     10
-#define VOODOO_GLOBAL_VERSION_PATCH     3
-#define VOODOO_GLOBAL_VERSION_REV       203
+#define VOODOO_GLOBAL_VERSION_PATCH     4
+#define VOODOO_GLOBAL_VERSION_REV       209
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   VOODOO_META_STRING("Copyright (c) 2010-2011 by Sean Sube")
 #define VOODOO_GLOBAL_COPYRIGHT_FULL\
     VOODOO_META_STRING("Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube. &lt;br /&gt;\n")\

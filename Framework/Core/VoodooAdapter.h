@@ -48,7 +48,7 @@ using namespace ATL;
  **/
 
 /**
- * @class CVoodooShader
+ * @class CVoodooAdapter
  * 
  * @par Interface
  *    @ref IVoodooShader

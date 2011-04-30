@@ -126,12 +126,12 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     }
 
     // Load variables, built-in first
-    m_Parser->AddVariable(L"globalroot",    m_GlobalRoot, VT_System);
-    m_Parser->AddVariable(L"localroot",     m_LocalRoot,  VT_System);
-    m_Parser->AddVariable(L"runroot",       m_RunRoot,    VT_System);
-    m_Parser->AddVariable(L"target",        m_Target,     VT_System);
-    m_Parser->AddVariable(L"loader",        m_Loader,     VT_System);
-    m_Parser->AddVariable(L"config",        m_ConfigFile, VT_System);
+    m_Parser->Add(L"globalroot",    m_GlobalRoot, VT_System);
+    m_Parser->Add(L"localroot",     m_LocalRoot,  VT_System);
+    m_Parser->Add(L"runroot",       m_RunRoot,    VT_System);
+    m_Parser->Add(L"target",        m_Target,     VT_System);
+    m_Parser->Add(L"loader",        m_Loader,     VT_System);
+    m_Parser->Add(L"config",        m_ConfigFile, VT_System);
 
     // Load config vars
     CComBSTR queryVarNodes = L"/VoodooConfig/Variables/Variable";
@@ -151,7 +151,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
             pNameNode->get_nodeValue(&name);
             pTextNode->get_nodeValue(&text);
 
-            m_Parser->AddVariable(name.bstrVal, text.bstrVal);
+            m_Parser->Add(name.bstrVal, text.bstrVal);
         }
     }
 

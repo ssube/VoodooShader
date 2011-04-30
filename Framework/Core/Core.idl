@@ -23,22 +23,24 @@ import "oaidl.idl";
 import "ocidl.idl";
 
 // Enums and such
-typedef [v1_enum] enum 
+typedef [v1_enum] 
+enum TextureFormat
 {
-    TF_Unknown  = 0x00,
-    TF_RGB5     = 0x01,
-    TF_RGB5A1   = 0x02,
-    TF_RGB8     = 0x03,
-    TF_RGBA8    = 0x04,
-    TF_RGB10A2  = 0x05,
-    TF_RGBA16F  = 0x10,
-    TF_RGBA32F  = 0x11,
-    TF_D16      = 0x40,
-    TF_D32      = 0x41,
-    TF_Max      = 0x7FFFFFFF
+    TF_Unknown      = 0x00,
+    TF_RGB5         = 0x01,
+    TF_RGB5A1       = 0x02,
+    TF_RGB8         = 0x03,
+    TF_RGBA8        = 0x04,
+    TF_RGB10A2      = 0x05,
+    TF_RGBA16F      = 0x10,
+    TF_RGBA32F      = 0x11,
+    TF_D16          = 0x40,
+    TF_D32          = 0x41,
+    TF_Max          = 0x7FFFFFFF
 } TextureFormat;
 
-typedef [v1_enum] enum 
+typedef [v1_enum] 
+enum ParameterType
 {
     PT_Unknown      = 0x00,
     PT_Float1       = 0x11,
@@ -68,43 +70,48 @@ typedef [v1_enum] enum
     PT_Max          = 0x7FFFFFFF
 } ParameterType;
 
-typedef [v1_enum] enum 
+typedef [v1_enum] 
+enum ParameterCategory
 {
-    PC_Unknown  = 0x00,
-    PC_Float    = 0x01,
-    PC_Sampler  = 0x02,
-    PC_Struct   = 0x04,
-    PC_Max      = 0x7FFFFFFF
+    PC_Unknown      = 0x00,
+    PC_Float        = 0x01,
+    PC_Sampler      = 0x02,
+    PC_Struct       = 0x04,
+    PC_Max          = 0x7FFFFFFF
 } ParameterCategory;
 
-typedef [v1_enum] enum 
+typedef [v1_enum] 
+enum ProgramStage
 {
-    PS_Unknown  = 0x00,
-    PS_Vertex   = 0x01,
-    PS_Fragment = 0x02,
-    PS_Geometry = 0x03,
-    PS_Domain   = 0x04,
-    PS_Hull     = 0x05,
-    PS_Max      = 0x7FFFFFFF
+    PS_Unknown      = 0x00,
+    PS_Vertex       = 0x01,
+    PS_Fragment     = 0x02,
+    PS_Geometry     = 0x03,
+    PS_Domain       = 0x04,
+    PS_Hull         = 0x05,
+    PS_Max          = 0x7FFFFFFF
 } ProgramStage;
     
-typedef [v1_enum] enum 
+typedef [v1_enum] 
+enum TextureStage
 {
-    TS_Unknown  = 0x00,
-    TS_Shader   = 0x01,
-    TS_Pass     = 0x02,
-    TS_Max      = 0x7FFFFFFF
+    TS_Unknown      = 0x00,
+    TS_Shader       = 0x01,
+    TS_Pass         = 0x02,
+    TS_Max          = 0x7FFFFFFF
 } TextureStage;
     
-typedef [v1_enum] enum 
+typedef [v1_enum] 
+enum FileOpenMode
 {
-    FM_Unknown  = 0x00,
-    FM_Read     = 0x01,
-    FM_Write    = 0x02,
-    FM_Max      = 0x7FFFFFFF
+    FM_Unknown      = 0x00,
+    FM_Read         = 0x01,
+    FM_Write        = 0x02,
+    FM_Max          = 0x7FFFFFFF
 } FileOpenMode;
 
-typedef [v1_enum] enum
+typedef [v1_enum] 
+enum LogLevel
 {
     LL_Unknown      = 0x00,
     LL_Debug        = 0x01,
@@ -121,27 +128,30 @@ typedef [v1_enum] enum
     LL_Max          = 0x7FFFFFFF
 } LogLevel;
 
-typedef [v1_enum] enum 
+typedef [v1_enum] 
+enum ParseFlags
 {
-    PF_None             = 0x0000,
-    PF_SingleSlash      = 0x0001,
-    PF_SlashOnly        = 0x0002,
-    PF_BackslashOnly    = 0x0004,
-    PF_Lowercase        = 0x0010,
-    PF_Uppercase        = 0x0020,
-    PF_VarName          = 0x0100,
-    PF_Max              = 0x7FFFFFFF
+    PF_None         = 0x0000,
+    PF_SingleSlash  = 0x0001,
+    PF_SlashOnly    = 0x0002,
+    PF_BackslashOnly= 0x0004,
+    PF_Lowercase    = 0x0010,
+    PF_Uppercase    = 0x0020,
+    PF_VarName      = 0x0100,
+    PF_Max          = 0x7FFFFFFF
 } ParseFlags;
 
-typedef [v1_enum] enum 
+typedef [v1_enum] 
+enum VariableType
 {
-    VT_Normal   = 0x00,
-    VT_State    = 0x01,
-    VT_System   = 0x10,
-    VT_Max      = 0x7FFFFFFF
+    VT_Normal       = 0x00,
+    VT_State        = 0x01,
+    VT_System       = 0x10,
+    VT_Max          = 0x7FFFFFFF
 } VariableType;
 
-typedef [helpstring("Core Intialization Struct")] struct
+typedef [helpstring("Core Intialization Struct")]
+struct InitParams
 {
     BSTR GlobalRoot;
     BSTR LocalRoot;
@@ -151,7 +161,8 @@ typedef [helpstring("Core Intialization Struct")] struct
     BSTR Config;
 } InitParams;
 
-typedef [helpstring("Texture Description")] struct
+typedef [helpstring("Texture Description")] 
+struct TextureDesc
 {
     int Width;
     int Height;
@@ -161,7 +172,8 @@ typedef [helpstring("Texture Description")] struct
     TextureFormat Format;
 } TextureDesc;
 
-typedef [helpstring("Texture Region Description")] struct
+typedef [helpstring("Texture Region Description")] 
+struct TextureRegion
 {
     int Width;
     int Height;
@@ -175,7 +187,7 @@ typedef [helpstring("Texture Region Description")] struct
 } TextureRegion;
 
 typedef [helpstring("Module Version")]
-struct 
+struct VersionStruct
 {
     BSTR Name;
     int Major;
@@ -186,25 +198,25 @@ struct
 } VersionStruct;
 
 typedef [helpstring("3-component float vector")]
-struct 
+struct float2
 {
     float X, Y;
 } float2;
 
 typedef [helpstring("3-component float vector")]
-struct 
+struct float3
 {
     float X, Y, Z;
 } float3;
 
 typedef [helpstring("4-component float vector")]
-struct 
+struct float4
 {
     float X, Y, Z, W;
 } float4;
 
 typedef [helpstring("Pre-transformed vertex structure")]
-struct 
+struct VertexStruct
 {
     float3  Position;
     float   Winding;
@@ -212,7 +224,7 @@ struct
 } VertexStruct;
 
 typedef [helpstring("Shader-compatible light structure")]
-struct 
+struct LightStruct
 {
     int     Type;
     float4  Diffuse;
@@ -228,7 +240,7 @@ struct
 } LightStruct;
 
 typedef [helpstring("Platform-independent function pointer/memory offset")]
-struct 
+struct FunctionPtr
 {
     unsigned __int64 Address;
 } FunctionPtr;
@@ -260,7 +272,8 @@ interface IVoodooTexture;
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooCore : IDispatch{
+interface IVoodooCore : IDispatch
+{
     [id(1)] HRESULT Initialize([in] const InitParams pParams);
     [propget, id(2)] HRESULT Parser([out, retval] IVoodooParser ** ppParser);
     [propget, id(3)] HRESULT HookSystem([out, retval] IVoodooHookSystem ** ppHookSystem);
@@ -287,9 +300,10 @@ interface IVoodooCore : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooParser : IDispatch{
-    [id(1)] HRESULT AddVariable([in] BSTR pName, [in] BSTR pValue, [in, defaultvalue(VT_Normal)] EnumType System);
-    [id(2)] HRESULT RemoveVariable([in] BSTR pName);
+interface IVoodooParser : IDispatch
+{
+    [id(1)] HRESULT Add([in] BSTR pName, [in] BSTR pValue, [in, defaultvalue(VT_Normal)] EnumType System);
+    [id(2)] HRESULT Remove([in] BSTR pName);
     [id(3)] HRESULT Parse([in] BSTR pString, [in, defaultvalue(PF_None)] EnumType Flags, [out, retval] LPBSTR pParsed);
 };
 
@@ -302,7 +316,8 @@ interface IVoodooParser : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooShader : IDispatch{
+interface IVoodooShader : IDispatch
+{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [propget, id(3)] HRESULT TechniqueCount([out, retval] int * pCount);
@@ -321,7 +336,8 @@ interface IVoodooShader : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooTechnique : IDispatch{
+interface IVoodooTechnique : IDispatch
+{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [propget, id(3)] HRESULT Target([out, retval] IVoodooTexture ** ppTexture);
@@ -337,7 +353,8 @@ interface IVoodooTechnique : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooPass : IDispatch{
+interface IVoodooPass : IDispatch
+{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [propget, id(3)] HRESULT Target([out, retval] IVoodooTexture ** ppTexture);
@@ -356,7 +373,8 @@ interface IVoodooPass : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooTexture : IDispatch{
+interface IVoodooTexture : IDispatch
+{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [propget, id(3)] HRESULT Data([out, retval] VARIANT * pData);
@@ -369,7 +387,8 @@ interface IVoodooTexture : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooParameter : IDispatch{
+interface IVoodooParameter : IDispatch
+{
     [propget, id(1)] HRESULT Name([out, retval] LPBSTR ppName);
     [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [propget, id(3)] HRESULT Type([out, retval] EnumType * pType);
@@ -396,7 +415,8 @@ interface IVoodooParameter : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooAdapter : IDispatch{
+interface IVoodooAdapter : IDispatch
+{
     [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [id(2)] HRESULT LoadPass([in] IVoodooPass * pPass);
     [id(3)] HRESULT UnloadPass([in] IVoodooPass * pPass);
@@ -421,7 +441,8 @@ interface IVoodooAdapter : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooHookSystem : IDispatch{
+interface IVoodooHookSystem : IDispatch
+{
     [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [id(2)] HRESULT Add([in] BSTR pName, [in] FunctionPtr pSource, [in] FunctionPtr pDest);
     [id(3)] HRESULT Remove([in] BSTR pName);
@@ -436,7 +457,8 @@ interface IVoodooHookSystem : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooLogger : IDispatch{
+interface IVoodooLogger : IDispatch
+{
     [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [id(2)] HRESULT Open([in] BSTR pFilename, [in] VARIANT_BOOL Append);
     [id(3)] HRESULT Close();
@@ -458,7 +480,8 @@ interface IVoodooLogger : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooFileSystem : IDispatch{
+interface IVoodooFileSystem : IDispatch
+{
     [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
     [id(2)] HRESULT AddDirectory([in] BSTR pPath);
     [id(3)] HRESULT RemoveDirectory([in] BSTR pPath);
@@ -473,7 +496,8 @@ interface IVoodooFileSystem : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooFile : IDispatch{
+interface IVoodooFile : IDispatch
+{
     [propget, id(1)] HRESULT Path([out, retval] LPBSTR pPath);
     [id(2)] HRESULT Open([in] EnumType Mode);
     [id(3)] HRESULT Close();
@@ -488,7 +512,8 @@ interface IVoodooFile : IDispatch{
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooImage : IVoodooFile{
+interface IVoodooImage : IVoodooFile
+{
     [propget, id(6)] HRESULT Desc([out, retval] TextureDesc * pDesc);
     [propget, id(7)] HRESULT Data([in] TextureRegion Region, [in, out] int * pSize, [out, retval, size_is(*pSize)] byte ppBuffer[*]);
 };
@@ -529,6 +554,31 @@ library Voodoo_Core
 	{
 		[default] interface IComponentRegistrar;
 	};
+
+    // Enums/structs
+    enum TextureFormat;
+    enum ParameterType;
+    enum ParameterCategory;
+    enum ProgramStage;
+    enum TextureStage;
+    enum FileOpenMode;
+    enum LogLevel;
+    enum ParseFlags;
+    enum VariableType;
+
+    struct InitParams;
+    struct TextureDesc;
+    struct TextureRegion;
+    struct VersionStruct;
+    struct float2;
+    struct float3;
+    struct float4;
+    struct VertexStruct;
+    struct LightStruct;
+    struct FunctionPtr;
+
+    // CoClasses
+    // Core coclasses
 	[
 		uuid(1d3d7fa3-6f32-11e0-8ac0-005056c00000)	
 	]
@@ -543,6 +593,7 @@ library Voodoo_Core
 	{
 		[default] interface IVoodooParser;
 	};
+    // Shader coclasses
 	[		
 		uuid(1d3d7fa5-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
@@ -564,6 +615,7 @@ library Voodoo_Core
 	{
 		[default] interface IVoodooPass;
 	};
+    // Shader data coclasses
 	[		
 		uuid(1d3d7fa8-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
@@ -578,6 +630,8 @@ library Voodoo_Core
 	{
 		[default] interface IVoodooParameter;
 	};
+    // Plugin coclasses 
+    // (null implementations)
 	[		
 		uuid(1d3d7faa-6f32-11e0-8ac0-005056c00000)	
 	]

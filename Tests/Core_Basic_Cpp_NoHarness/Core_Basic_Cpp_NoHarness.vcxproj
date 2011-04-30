@@ -73,6 +73,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="TVoodooCore.cpp" />
+    <ClCompile Include="TVoodooParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Includes.hpp" />

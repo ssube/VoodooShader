@@ -55,7 +55,7 @@
 1d3d7fb1-6f32-11e0-8ac0-005056c00000 // Plugin - CWFileSystem
 1d3d7fb2-6f32-11e0-8ac0-005056c00000 // Plugin - CEHHookSystem
 1d3d7fb3-6f32-11e0-8ac0-005056c00000 // Loader?
-1d3d7fb4-6f32-11e0-8ac0-005056c00000
+1d3d7fb4-6f32-11e0-8ac0-005056c00000 // Core module, for installer
 1d3d7fb5-6f32-11e0-8ac0-005056c00000
 1d3d7fb6-6f32-11e0-8ac0-005056c00000
 // End of 50-block 1 (25/04/2011 - 0500).

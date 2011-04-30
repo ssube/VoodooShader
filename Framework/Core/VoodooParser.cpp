@@ -75,7 +75,7 @@ STDMETHODIMP_(ULONG) CVoodooParser::Release()
     }
 }
 
-STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, DWORD Type)
+STDMETHODIMP CVoodooParser::Add(BSTR pName, BSTR pValue, DWORD Type)
 {
     CComBSTR name(pName);
     this->Parse(name, PF_VarName, &name);
@@ -104,7 +104,7 @@ STDMETHODIMP CVoodooParser::AddVariable(BSTR pName, BSTR pValue, DWORD Type)
     return S_OK;
 }
 
-STDMETHODIMP CVoodooParser::RemoveVariable(BSTR pName)
+STDMETHODIMP CVoodooParser::Remove(BSTR pName)
 {
     /*ILoggerRef logger = m_Core->GetLogger();
     if ( logger.get() )
@@ -268,19 +268,16 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dic
         return S_OK;
     } 
         
+    if ( Flags & PF_SingleSlash )
+    {
+        while ( iteration.Replace(L"//", L"/") > 0 ) { }
+        while ( iteration.Replace(L"\\\\", L"\\") > 0 ) { }
+    }
     if ( Flags & PF_SlashOnly )
     {
         iteration.Replace(L'\\', L'/');
-        if ( Flags & PF_SingleSlash )
-        {
-            while ( iteration.Replace(L"//", L"/") > 0 ) { }
-        }
     } else if ( Flags & PF_BackslashOnly ) {
         iteration.Replace(L'/', L'\\');
-        if ( Flags & PF_SingleSlash )
-        {
-            while ( iteration.Replace(L"\\\\", L"\\") > 0 ) { }
-        }
     }
 
     if ( Flags & PF_Lowercase )

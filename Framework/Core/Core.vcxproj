@@ -45,12 +45,16 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>M:\Cg_July2010\include\;$(IncludePath)</IncludePath>
     <LibraryPath>M:\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IntDir>$(SolutionDir)\build\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>M:\Cg_July2010\include\;$(IncludePath)</IncludePath>
     <LibraryPath>M:\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IntDir>$(SolutionDir)\build\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -180,6 +184,10 @@
     <ClInclude Include="compreg.h" />
     <ClInclude Include="Core_i.h" />
     <ClInclude Include="dllmain.h" />
+    <ClInclude Include="Docs\Docs_Code.hpp" />
+    <ClInclude Include="Docs\Docs_Graphics.hpp" />
+    <ClInclude Include="Docs\Docs_License.hpp" />
+    <ClInclude Include="Docs\Docs_Vars.hpp" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

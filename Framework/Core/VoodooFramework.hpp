@@ -192,8 +192,8 @@ DECLARE_INTERFACE_(IVoodooParser, IDispatch)
     STDMETHOD(GetIDsOfNames)(THIS_ REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
     STDMETHOD(Invoke)(THIS_ DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr) PURE;
     /* IVoodooParser */
-    STDMETHOD(AddVariable)(THIS_ BSTR pName, BSTR pValue, EnumType System = VT_Normal) PURE;
-    STDMETHOD(RemoveVariable)(THIS_ BSTR pName) PURE;
+    STDMETHOD(Add)(THIS_ BSTR pName, BSTR pValue, EnumType System = VT_Normal) PURE;
+    STDMETHOD(Remove)(THIS_ BSTR pName) PURE;
     STDMETHOD(Parse)(THIS_ BSTR pString, EnumType Flags, LPBSTR pParsed) PURE;
 };
 

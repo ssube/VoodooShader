@@ -35,9 +35,9 @@
  * Windows.
  * 
  * @subsection page_vars_ssec_syntaxnames Variable Names
- * Variable names may contain any characters but ':' and may start with any character but '?',
- * '!' or '$'. These characters have special meaning and will be stripped or will modify the 
- * name before it is used.
+ * Variable names may not contain any symbols (?, !, #, :, etc). Only alphanumerical characters may
+ * be used within variable names. Using these may cause errors or undefined behavior; some symbol
+ * characters are reserved for future functions and some have special meanings (given below).
  * 
  * Variable names may contain variables, which will be resolved using standard rules (this
  * allows for variable variable names and dynamic string creation).
@@ -60,8 +60,8 @@
  * 
  * The '$' character indicates an escaped variable name. It may be used to escape variables
  * with '?' or '!' as their first character (the variable <code>$($?var)</code> has a name of
- * "<code>?var</code>", instead of being optional). It is only recognized as the first 
- * character of a variable name; in all other positions it has no special meaning.
+ * <code>?var</code>, instead of being optional). It is only recognized as the first character of a
+ * variable name; in all other positions it has no special meaning.
  * 
  * @subsection page_vars_ssec_syntaxvalues Variable Values
  * Variable values may contain any characters and embedded variables. 
@@ -74,8 +74,8 @@
  * 
  * The depth counter handles recursion and operated very simply. Each time the parser
  * encounters a string that requires parsing, the counter is incremented and passed on. This
- * prevents more than @ref Parser::VarMaxDepth levels of recursion (8, by default) and prevents 
- * infinite loops. When this limit is reached, variables will not be parsed.
+ * prevents more than @ref CVoodooParser::VarMaxDepth levels of recursion (8, by default) and 
+ * prevents infinite loops. When this limit is reached, variables will no longer be parsed.
  * 
  * State blocks are somewhat more Cthulhic in their logic. When the parser is called, a state
  * block is created and passed on, similar to the depth counter. However, if a variable name
@@ -112,7 +112,7 @@
  * 
  * @note Repeated consecutive slashes will not cause errors with path parsing, although in some 
  *    locations they have special meanings. They may cause errors when using the string for 
- *    other reasons; calling @ref Parser::ParseString() with the @ref PF_SingleSlash flag set 
+ *    other reasons; calling @ref IVoodooParser::Parse() with the @ref PF_SingleSlash flag set 
  *    will attempt to strip these.
  *    
  * Finally, state variables and suppression use a variation on the name syntax.
@@ -129,38 +129,49 @@
  * 
  * $(target) = test.exe
  * $(?$(target)_Adapter) = $(_Adapter) = Voodoo_Null.dll
- * $($(target)_Adapter) = $(--badvar:test.exe--_Adapter) = --badvar:--badvar:test.exe--_Adapter--
+ * 
+ * $($(target)_Adapter) = $($(badvar:test.exe)_Adapter) = $(_Adapter) = Voodoo_Null.dll [and]
+ * $(badvar) = test.exe
  * @endcode
  *    
  * @section page_vars_sec_sysvars System Variables
  * Some variables, typically built-ins, are marked as system variables. These may be added once
  * and may not be overwritten or later changed (all other variables may be changed by 
- * overwriting the name). The @ref Parser::RemoveVariable() method does not remove system 
+ * overwriting the name). The @ref IVoodooParser::RemoveVariable() method does not remove system 
  * variables.
+ * 
+ * System variables take priority over all other variables during parsing, including state and
+ * regular variables. No error is given if a state or regular variable is created with the same
+ * name as a system variable (an error @em is given if a system variable is created), but the
+ * second variable will be ignored and only the system variable used.
  *        
  * @section page_vars_sec_flags Flags
- * The variable parser provides a small set of flags to control parsing modes. 
+ * The variable parser provides a small set of flags to control parsing modes. Flags are listed in
+ * the order they operate (PF_SingleSlash will be handled before PF_Lowercase, for example), with
+ * the exception of PF_None and PF_VarName which are exclusive with all other flags and cause early
+ * parsing and return.
  * 
- * @subsection varsflagssingleslash PF_SingleSlash
+ * @subsection page_vars_ssec_flagssingleslash PF_SingleSlash
  * Attempts to remove repeated slashes. This considers both forward slash and backslashes and 
- * is a very simple method, but is sufficient to remove the majority of repeats and clean up 
- * paths.
+ * uses standard MFC string replace functions.
  * 
- * @subsection varsflagsslashtype PF_SlashOnly & PF_BackslashOnly
- * Replaces all slashes with a single type (forward or back). This may be functional; XPath 
- * syntax, for example, uses forward slashes while Windows paths tend to prefer backslashes. 
+ * @subsection page_vars_ssec_flagsslashtype PF_SlashOnly & PF_BackslashOnly
+ * Replaces all slashes with a single type (forward or back). This may be useful when working with
+ * file paths, XPath or other slash-delimited strings.
  * 
- * @subsection varsflagscase PF_Lowercase & PF_Uppercase
+ * @subsection page_vars_ssec_flagscase PF_Lowercase & PF_Uppercase
  * Transforms the string into a specific case. All alphabetic characters (a-z and A-Z) will be
  * replaced with the given case.
  * 
- * @subsection varsflagsstateblock PF_RetainState
- * This flag has no effect
+ * @subsection page_vars_ssec_flagsname PF_VarName
+ * This is a meta-flag, forcing a set of flags and special behavior appropriate for variable names. 
+ * At the moment, this simply forces PF_Lowercase.
  * 
  * @section page_vars_sec_errors Errors
  * If a variable cannot be resolved, an error value will be used in place of the variable. This 
  * value is designed to cause the path to fail in any operations. The error value will replace 
- * @p varname with <code>--badvar:varname--</code>.
+ * @p varname with <code>$(badvar:varname)</code>. This sets an internal state variable, which
+ * contains the name of the last error variable.
  * 
  * @section page_vars_sec_builtin Built-In Variables
  * A small assortment of built-in variables are provided for use. These represent paths or 
@@ -172,7 +183,7 @@
  * @note Built-in variables will not be present if the parser was created manually or externally
  *    (not automatically by a core).
  * 
- * @subsection varsbuiltinlocal $(localroot)
+ * @subsection page_vars_ssec_localroot $(localroot)
  * The local root path is the location of the target executable, that is, the program that 
  * Voodoo is loaded into. This is the absolute path to the file. This path is retrieved from 
  * the Windows API during startup. The value is \\-terminated.
@@ -183,7 +194,7 @@
  * $(localroot) = H:\Program\
  * @endcode
  * 
- * @subsection varsbuiltinglobal $(globalroot)
+ * @subsection page_vars_ssec_globalroot $(globalroot)
  * The global root path of Voodoo. This is the main Voodoo folder, containing most global 
  * resources and binaries. This path is retrieved from the registry by the Voodoo loader. The 
  * value is \\-terminated.
@@ -193,13 +204,13 @@
  * $(globalroot)\bin\ = Voodoo binary path
  * @endcode
  * 
- * @subsection varsbuiltinrun $(runroot)
+ * @subsection page_vars_ssec_runroot $(runroot)
  * The running root of Voodoo. This is the directory that the target was started in (the 
  * startup working directory). This path is retrieved from the Windows API by the loader during 
  * startup. This is the most variable of the builtin variables; it may change each run, 
  * depending on how the target is started. The value is \\-terminated.
  * 
- * @subsection varsbuiltintarget $(target)
+ * @subsection page_vars_ssec_target $(target)
  * The filename of the target application. This does not include the path (found in 
  * <code>\$(localroot)</code>), only the name. To help use this for variable varnames, this is
  * forced to all lowercase. You can use it to change the config settings based on the running
@@ -221,7 +232,7 @@
  * @endcode
  * The variable used in adapter (and so, the value) change depending on the value of target.
  * 
- * @section varsconfig Config Variables
+ * @section page_vars_sec_config Config Variables
  * When the filesystem module is loaded, it retrieves any variables from the config (using the 
  * XPath query "/VoodooConfig/Variables/Variable"). These variables must have a @p name 
  * attribute and text. They are added to the variable list, but not parsed until used.
@@ -229,7 +240,7 @@
  * @note Variables with identical names will overwrite their previous value. The built-in 
  *    variables cannot be overwritten.
  * 
- * @section varsenviron Environment Variables
+ * @section page_vars_sec_environ Environment Variables
  * If a variable name is given that cannot be found in the list of loaded and built-in 
  * variables, it will be assumed to be an environment variable. These variables are pulled 
  * directly from the process' environment and so are system-dependent. They may or may not be 
@@ -238,6 +249,5 @@
  * @warning Care should be taken while using environment variables; config variables are much 
  *    preferred. Environment variables should only be used when sharing paths between 
  *    applications or throughout the system is needed.
- *          
  * @}
  */

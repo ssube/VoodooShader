@@ -104,23 +104,11 @@ BEGIN_COM_MAP(CVoodooParser)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
-
-
-
 // IVoodooParser
 public:
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddVariable( 
-        /* [in] */ BSTR pName,
-        /* [in] */ BSTR pValue,
-        /* [in] */ DWORD Type);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveVariable( 
-        /* [in] */ BSTR pName);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Parse( 
-        /* [in] */ BSTR pString,
-        /* [defaultvalue][in] */ DWORD Flags,
-        /* [retval][out] */ LPBSTR pParsed);
+    virtual HRESULT STDMETHODCALLTYPE Add(BSTR pName, BSTR pValue, DWORD Type);
+    virtual HRESULT STDMETHODCALLTYPE Remove(BSTR pName);
+    virtual HRESULT STDMETHODCALLTYPE Parse(BSTR pString, DWORD Flags, LPBSTR pParsed);
 
 private:
     HRESULT STDMETHODCALLTYPE ParseRaw(LPBSTR input, DWORD Flags, INT Depth, Dictionary * State);

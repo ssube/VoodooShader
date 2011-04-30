@@ -19,8 +19,6 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
   
-namespace VoodooShader
-{
 /**
  * @mainpage Voodoo Shader Framework
  * The Voodoo Shader Framework is a set of support libraries designed to provide extensive shader 
@@ -47,14 +45,9 @@ namespace VoodooShader
  * @section voodoosupportlibs Support Libraries
  * Voodoo provides a number of support libraries, many used within Voodoo. These include the Voodoo 
  * dynamic loader (capable to dynamically loading the Voodoo core and an adapter into a running 
- * process), a simple filesystem manager to streamline resource loading, pugixml-based XML parsing 
- * library, and EasyHook-based function intercept library. These libraries are available for use by 
- * code within and outside of the Voodoo project and simplify a number of common or complex tasks.
- * 
- * @section voodoosupportclass Support Classes
- * Voodoo also provides support classes for variable parsing, simple post-processing and material 
- * shader management, and a number of other functions. These classes may be used by adapters to
- * quickly and easily provide core functionality.
+ * process), a simple filesystem manager to streamline resource loading and EasyHook-based function 
+ * intercept library. These libraries are available for use by code within and outside of the 
+ * Voodoo project and simplify a number of common or complex tasks.
  * 
  * @section voodooquality Testing and Code Quality
  * The Voodoo framework covers an immense scope and tackles an intriguing and often complex task. 
@@ -86,6 +79,10 @@ namespace VoodooShader
  * The documentation is interwoven in the source, so it is kept up-to-date and extensive and new
  * code is documented as it's written.
  * 
+ * @section voodoolicense License
+ * The Voodoo Shader Framework is licensed under the terms of the GNU General Public License. This 
+ * is in an effort to make it useful to as many people as possible. 
+ * 
  * @page License
  * @section licensesummary Summary
  * The Voodoo Shader Framework is licensed under the terms of the GNU General Public License. This 
@@ -97,7 +94,8 @@ namespace VoodooShader
  * 
  * @subsection licenseeula Application EULAs
  * The Voodoo Shader Framework is not a derivative work of any other work, nor is it bound under 
- * the terms of an other application's EULA or other license restrictions. 
+ * the terms of an other application's EULA or other license restrictions. Any interaction with
+ * other programs, libraries or systems falls under normal use.
  * 
  * The framework is licensed solely under the terms of the GNU General Public License, version 2, 
  * and any claims otherwise are both false and unlawful.
@@ -105,8 +103,9 @@ namespace VoodooShader
  * @note Portions of the Voodoo Shader Framework may be designed to operate aware of other 
  *    applications. These other applications may be licensed under different terms than the 
  *    framework. Claims have been made that Voodoo is then bound by the terms of these target 
- *    applications, or has no license terms. These are untrue and in no way change the license 
- *    terms of Voodoo or the target application. 
+ *    applications, or has no license terms. These are not true and in no way change the license 
+ *    terms of Voodoo or the target application. Voodoo's license is the sole legally binding 
+ *    license applied, only the terms it contains and no others are applicable.
  * 
  * @subsection licensecontact Contact
  * Questions about the Voodoo framework and its license terms should be directed to Sean Sube, at 
@@ -119,36 +118,6 @@ namespace VoodooShader
  * Any trademarks or company names used in this documentation or the Voodoo framework are the 
  * property of their respective owner(s). The includes the nVidia, Cg, Windows and any other such 
  * content.
- * 
- * @section pugixmllicense pugixml License
- * The Voodoo Shader Framework core library uses the pugixml library to handle XML parsing and data 
- * retrieval. This library is used under the terms of the MIT license. Thanks are given to Arseny 
- * Kapoulkine and all others involved for this excellent library, it has made config files a 
- * @em lot easier to work with.
- * 
- * @subsection pugixmlterms pugixml License Terms
- * Copyright (c) 2006-2010 Arseny Kapoulkine
- *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
  * 
  * @section cglicense Cg Framework License
  * The Voodoo Shader Framework uses nVidia's Cg Toolkit for shader compiling and handling. This 

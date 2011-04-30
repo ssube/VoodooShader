@@ -19,115 +19,101 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
   
-namespace VoodooShader
-{
 /**
- * @page modulespec Module Specifications
+ * @page page_modules Module Specifications
  * 
  * The Voodoo Core library (usually Voodoo_Core.dll) is designed to provide a generic framework
  * and certain Voodoo-specific features to help support shaders. To allow additional features
- * without breaking compatibility, Voodoo provides a class-based plugin interface. Modules may be 
- * added and classes provided by those modules created and used within Voodoo or adapters. To 
- * handle loading these modules, a known interface is required with a few specific features.
- * @since 0.2.0.0
+ * without breaking compatibility, Voodoo uses Microsoft's COM technology to allow a highly 
+ * flexible plugin system. 
+ * @since 0.10.0
  * 
- * @section moduleexports Module Exports
- * Each Voodoo module must export a set of 4 functions. These are used by the core to load and
- * query the module's version and what classes it adds. All these functions must be exported as 
- * their name only, no mangling or decorating of any kind.
+ * To provide Voodoo plugins, modules must provide COM components matching one of the expected
+ * interfaces and be registered with the system as providing these. Many tools, such as Visual 
+ * Studio, provide relatively simple methods for creating new COM components. These components
+ * should derive from the interface they wish to provide and must implement all methods. 
  * 
- * @subsection moduleexportsmoduleversion ModuleVersion
- * @code 
- * Version ModuleVersion();
- * @endcode
- * The ModuleVersion function returns a Version struct with the module's name, version and debug 
- * build flag. This is used primarily for logging purposes.
+ * @section page_modules_sec_compat Compatibility
+ * Voodoo uses the COM system to handle all plugins and provides little restriction on what may be
+ * done within that. Any language or compiler capable of producing COM components may be used.
  * 
- * @subsection moduleexportsclasscount ClassCount
- * @code 
- * int ClassCount();
- * @endcode
- * Returns the total number of classes provided by this module. Any class that needs to be created 
- * by other code must be listed in this function and the next.
+ * @subsection page_modules_ssec_lang Supported Languages
+ * As a side benefit of using COM, Voodoo plugins may be written in a variety of languages. At this
+ * time C++ may be used, as well as any language supported by the .Net framework. A partial list of 
+ * common, and compatible, languages includes:
+ * @ul
+ *    @li C++
+ *    @li C#
+ *    @li F#
+ *    @li Java 
+ *    @li Lua
+ *    @li Perl
+ *    @li Python
+ *    @li Ruby
+ *    
+ * @warning Due to the additional marshalling and conversion required, using .Net languages may
+ *    cause a decrease in performance. The extent and amount depend greatly on the interface;
+ *    rarely-used adapter plugins will have little effect, while replacing the logger may have a
+ *    great hit. Voodoo's interfaces are designed to cause as little marshalling as possible
+ *    (occasionally at the cost of more complex core code).
+ *    
+ * @note C is technically legal for use, but the Voodoo public headers do not provide C functions
+ *    for the interfaces. If there is a demand for C compatibility with Voodoo, this will change.
+ *    
+ * To create a plugin, simply make sure the Voodoo core (or appropriate interface provider) is
+ * registered on your system and inherit from an interface. Implement all methods and verify the 
+ * class is both public and COM-visible (these depend slightly on your language). Build and 
+ * register the module, then use the class' GUID in the config.
  * 
- * @subsection moduleexportsclassinfo ClassInfo
- * @code 
- * const char * ClassInfo(int number);
- * @endcode
- * Returns the name of the given class. This is used to register the classes in the core
- * ModuleManager initially. As each module is loaded, the provided classes are iterated through 
- * from @p 0 to @p ClassCount-1 and added to the list of available classes.
- * @note For best compatibility, these may be GUIDs in string form.
+ * More extensive tutorials on writing COM components may be found in the MSDN documentation and
+ * elsewhere on the internet. Some books on the subject are also available. A brief tutorial for
+ * C++ and C# may be included in this documentation in the future.
  * 
- * @subsection moduleexportsclasscreate ClassCreate
- * @code 
- * IObject * ClassCreate(int number, Core * core);
- * @endcode
- * Creates a new instance of the given class, bound to the provided Core. For classes needing 
- * additional data, they can cache and/or use the core. 
+ * @subsection page_modules_ssec_restrictions Restrictions
+ * Not all languages may function properly with the Voodoo interfaces. This depends heavily on the
+ * syntax and form of the language. Most .Net languages are compatible.
  * 
- * @note Class constructors @em may throw exceptions. The @ref ModuleManager will catch and log 
- *    these when possible. When the class construction throws, null will be returned. 
+ * Multiple versions of the .Net runtime may not be loaded within a single process, @em unless the
+ * .Net 4 runtime is installed. This means, for example, a system with .Net 3.5 installed
+ * may use .Net 2.0 @em or .Net 3.5 plugins, but not both. However, a system with .Net 4.0 
+ * installed may use 2.0 and 3.5 plugins simultaneously. This is a limitation of the .Net framework
+ * and cannot be changed within Voodoo.
  * 
- * @section moduleiobject IObject Interface
- * Every class provided through the above API @em must derive from the IObject interface and 
- * implement both methods.
+ * @section page_modules_sec_docs Documentation
+ * It is highly recommended that module creators provide a list of class descriptions, GUIDS and 
+ * ProgIDs (readable IDs) along with the module. The GUID or ProgID is required to reference the
+ * class from the config, but are not externally visible from a compiled module.
  * 
- * @subsection moduleiobjectdtor Destructor
- * @code
- * virtual void IObject::~IObject() throw() { };
- * @endcode 
- * Destroys the object, cleaning up any resources. Overloads are called, cleaning up their
- * resources.
+ * @subsection page_modules_ssec_naming Naming Scheme
+ * It is suggested that plugin modules conform to a basic naming scheme. This is not required for
+ * third-party modules, but is for official Voodoo plugins.
  * 
- * This virtual destructor is set to throw if it is called, and so must always be overloaded.
+ * Each plugin module is typically given a one-word name (for adapters, this is related to the
+ * target application in some manner). It is recommended that the module filename be 
+ * <code>Voodoo_[name].dll</code> for official plugins. Classes should use 
+ * <code>Voodoo[name].[class]</code> for the ProgID. Documentation and the module's version 
+ * resource should use <code>Voodoo/[name]</code> to refer to the module. Official plugins will be 
+ * referenced by these name schemes in Voodoo documentation.
  * 
- * @subsection moduleiobjectgetobjectclass GetObjectClass
- * @code
- * virtual const char * IObject::GetObjectClass() = 0;
- * @endcode
- * Returns the object's class. This can be used to identify the source module or create another 
- * object of the same time. This should return the same value as @p ClassInfo for this class, so:
- * 
- * @code
- * const char * nameA = ClassInfo(1);
- * IObject * object = ClassCreate(1);
- * const char * nameB = object->GetObjectClass();
- * 
- * assert( nameA == nameB );            // May return the same string, but
- * assert( strcmp(nameA, nameB) == 0 ); // must return identical strings
- * @endcode
- * 
- * While @ref IObject does not provide reference-counting or fancier features, it 
- * does handle most vital features of dynamic module classes. Additional features may be added to 
- * later versions as needed.
- * 
- * @section moduledocs Documentation
- * It is generally recommended that module creators provide a list of class names and their
- * functions along with the module (especially if some can be used by the core). This is
- * particularly useful when classes use GUID names.
+ * Third-party plugins should not use the word Voodoo in any names or IDs. Instead, they should use
+ * a unique name or the developer's name to identify themselves.
  *
- * @page adapterspec Adapter Specifications
+ * @page page_adapters Adapter Specifications
  * The adapter serves as a binding between an unknown (by the core library) graphics API and the 
  * constant Voodoo framework. The adapter is responsible for handling any interaction between the 
  * two, performing translation as necessary, and handling any required details. 
  * 
- * While most classes provided by addon modules are free to provide whatever interface they wish
- * and are mostly autonomous, adapter classes must fit a very specific set of behavior rules and
- * perform exactly as expected by the Core.
+ * While most classes provided by modules are free to implement interfaces in whatever way they
+ * wish and have few behavior restrictions, adapter classes must fit a very specific set of 
+ * behavior rules and perform exactly as expected by the core.
  * 
- * In many senses, adapters are addon modules and they must follow the @ref modulespec as any other
- * module. However, only one adapter object is created at a time, and that object @em must derive 
- * from @ref IAdapter.
+ * In many senses, adapters are plugin modules and they must follow the @ref page_modules as any 
+ * other module. However, only one adapter object is created at a time, and that object @em must 
+ * derive from @ref IVoodooAdapter.
  * 
  * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter
- * itself. Adapter modules may even provide more than one adapter class.
- * 
- * In most cases, the adapter and supporting classes should conform to a basic naming scheme.
- * Each Voodoo adapter is given a short one word somewhat-game-related name. It is recommended that
- * the adapter class be of the form name_Adapter and each supporting class use name_classname,
- * to easily identify them among the available classes. If the adapter or module is official, the
- * name scheme extends to the module's name (Voodoo/name) and often filename (Voodoo_name.dll).
+ * itself. Adapter modules may even provide more than one adapter class, possibly for debugging and
+ * regular use. Only one adapter will be used at a time, however.
  * 
  * @section adapterspeccg Cg Context
 
@@ -157,13 +143,13 @@ namespace VoodooShader
  * This will drop the strong references from the core and may free resources, if no other 
  * references are held.
  * 
- * @page voodoosystem How Voodoo Works
+ * @page page_howitworks How Voodoo Works
  * Voodoo provides a framework for constant features across a wide variety of games. Support
  * ranges from OpenGL 1.1 to DirectX 10, with a focus on translating older APIs to their newer
  * counterparts. To handle the huge differences, Voodoo is very modular and uses a number of
  * universal and specific components.
  * 
- * @section voodoosystemloader Voodoo/Loader
+ * @section page_howitworks_sec_loader Voodoo/Loader
  * The chain of execution for Voodoo begins with the dynamic loader (Voodoo/Loader), which 
  * intercepts a single hook function in the target process. Because of how Window's search path 
  * for DLLs works, this loads the dynamic loader into the target's memory space.
@@ -172,7 +158,7 @@ namespace VoodooShader
  * module (Voodoo/Core). With the core loaded, the loader creates a Core object and returns
  * execution to the target process.
  * 
- * @section voodoosystemcore Voodoo/Core
+ * @section page_howitworks_sec_core Voodoo/Core
  * The Core object, during creation, starts Cg and then handles loading other modules. The Cg 
  * runtime is loaded, a Cg context created and error callbacks registered. The Core then parses 
  * the configuration file present in the current directory and begins loading any additional 
@@ -181,16 +167,16 @@ namespace VoodooShader
  * modules (given as Module elements in the config file under /VoodooConfig/Core) are loaded, 
  * logged and their classes registered.
  * 
- * @section voodoosystemadapter Adapter
+ * @section page_howitworks_sec_adapter Adapter
  * The adapter load process performs most of the detail work. In many cases, the adapter creates
  * hooks in a number of system functions (creation functions for D3D or functions for OpenGL)
  * and may load an API-specific module for the Cg runtime. The adapter's constructor may perform
  * immediate binding to the graphics API or simply install hooks so the API is bound during
  * creation.
  * 
- * @page codestyle Code Style and Testing
+ * @page page_quality Code Style and Testing
  * 
- * @section intro Intro
+ * @section page_quality_sec_intro Intro
  * The Voodoo Shader Framework is designed to work across many games, created across a wide 
  * variety of compilers, graphics libraries, code styles and time periods. To maximize stability 
  * and speed, both critical to Voodoo's purpose, all Voodoo projects must meet the following code 
@@ -205,56 +191,68 @@ namespace VoodooShader
  * questionable code encountered in Voodoo should be reported as soon as possible. Please file an 
  * issue with as much information as possible in the official Voodoo bug tracker.
  * 
- * @section general General Rules
+ * @section page_quality_sec_summary Summary
+ * To help ensure quality, Voodoo's rules are summarized as follows:
+ * @ul
+ *    @li All modules must meet COM guidelines and applicable best-practice rules for their
+ *        language.
+ *    @li Modules must fully support Unicode and be able to interoperate with other modules using
+ *        Unicode strings (UTF-8, in particular).
+ *    @li Modules must meet COM interop guidelines, as various languages or runtimes may be mixed
+ *        in the process.
+ *    @li Modules should, with rare exceptions, compile with the highest typical warning level for
+ *        their language and warnings-as-errors enabled (for C++ in VS, this is 
+ *        <code>/W4 /WX</code>).
+ *    @li Modules should, if possible, be run through full static analysis with warnings-as-errors
+ *        enabled.
+ *    @li Modules should use unit tests to verify functionality, and regression tests where needed.
+ *        A full suite of unit tests should provide 100% <em>branch coverage for all module 
+ *        code</em> (this does not include code used from other libraries, such as MFC or ATL).
+ *    @li Modules must not be released if any compiler warnings, static analysis or unit tests 
+ *        fail. 
+ *    @li Modules should provide complete and up-to-date documentation, where applicable. For the
+ *        Voodoo core, this is produced by the doxygen tool.
+ * 
+ * @section page_quality_sec_general General Rules
  * <ul>
  *    <li>All projects must be configured for Visual Studio 2010 (vcxproj files, all dependency
  *        paths set in the project settings, etc).</li>
- *    <li>\#pragma preprocessor directives and other VS-specific features should be avoided.</li>
  *    <ul>
  *       <li>Voodoo is designed to compile on Windows within Visual Studio. Compatibility with 
- *           other compilers is not guaranteed or tested for, compatibility with other systems is 
- *           highly unlikely. Voodoo relies on some Windows-specific features and APIs, as well as 
- *           targeting mainly Windows-specific software.</li>
- *       <li>\#pragma to disable DLL interface warnings (warning 4251) is excepted.</li>
+ *           other compilers or systems is not guaranteed or tested for and is highly unlikely. 
+ *           Voodoo relies heavily Windows-specific features and APIs, as well as targeting mainly 
+ *           Windows-specific software. Compatibility with Wine and Crossover will be tested in the
+ *           future.</li>
  *    </ul>
- *    <li>All projects must have 3 standard build configurations and each config must follow the 
+ *    <li>\#pragma preprocessor directives should not be used to link libraries.</li>
+ *    <li>Projects should have 3 standard build configurations and each config must follow the 
  *        appropriate rules.</li>
  *    <li>All projects must build in all configurations before any release.</li>
  *    <ul>
  *       <li>This is especially important for new projects. Building under Debug_Analysis can find
  *           many code issues before they run.</li>
- *       <li>For some adapters, building under Debug_Analysis may not always be possible. If at all
- *           possible, it should be done; if not, exceptions may be made only as 
- *           @em necessary.</li>
  *    </ul>
- *    <li>Project behavior must remain consistent between build configurations.</li>
+ *    <li>Project behavior must remain consistent between build configurations. To help this, 
+ *        \#ifdef _DEBUG and similar should be avoided.</li>
+ *    <li>For C++ projects:
  *    <ul>
- *       <li>\#ifdef directives dependent on the build mode should be avoided wherever possible. 
- *           Log messages should use LL_Debug instead (this has no notable performance hit). This 
- *           greatly simplifies debugging.</li>
- *    </ul>
- *    <li>C++ TR1 and C++0x features may be used <em>as necessary</em> or where they notably 
- *        improve code quality, readability or functionality.</li>
- *    <li>All functions must use SAL annotations (<code>_In_, _Check_return_, etc</code>) wherever
- *      appropriate.</li>
+ *       <li>TR1 and C++0x/C++11 features may be used and are encouraged if they simplify code. 
+ *           Visual Studio 2010 has limited support for C++0x features.</li>
+ *       <li>All functions should use SAL annotations (<code>_In_, _Check_return_, etc</code>) 
+ *           where appropriate. This improves static analysis quality.</li>
  *    <ul>
- *       <li>All functions and methods must have annotations on all parameters.</li>
- *    </ul>
  *    <li>All classes, methods, fields, functions, structs, enums, typedefs or other applicable 
  *        code constructs must be documented with their purpose and any vital notes.</li>
  *    <ul>
- *       <li>All documentation must be doxygen compatible and use the same style as the Core.</li>
- *       <li>Any function that throws must be marked with a <code>\@throws</code> note.</li>
- *       <li>Any function with specific requirements must have them noted in SAL annotations (as
- *           well as possible) and with @p \@note or @p \@warning documentation.</li>
+ *       <li>Any function with unusual requirements or potential problems must have them 
+ *           noted.</li>
  *       <li>All function parameters, global variables, enum members, class members, etc must be
- *           documented. <em>(Note: The project does not fully conform to this requirement 
- *           yet)</em></li>
+ *           documented.</li>
  *    </ul>
- *    <li>Headers should use the HPP extension, code files CPP.</li>
- *    <li>Headers should include as few files as possible, source files should include only needed
- *        headers.</li>
  * </ul>
+ * 
+ * These rules apply primarily to C++ projects built within VS. For other languages, the closest 
+ * equivalent should be followed.
  * 
  * @section events Events
  * 
@@ -296,11 +294,10 @@ namespace VoodooShader
  * <ul>
  *    <li>Compiler</li>
  *    <ul>
- *       <li>Use of MFC must be set to "Use Standard Windows Libraries".</li>
- *       <li>Use of ATL must be set to "Not using ATL".</li>
- *       <li>Character set must be set to "Not Set" at this time.</li>
- *       <li>Common language runtime support must be set to "No Common Language Runtime 
- *           support".</li>
+ *       <li>Use of MFC and ATL and CLR support should be set as applicable to the project, but 
+ *           must be identical across configurations.</li>
+ *       <li>Character set must be set to "Use Unicode Character Set" or equivalent (.Net uses 
+ *           Unicode by default).</li>
  *    </ul>
  * </ul>
  *    
@@ -379,4 +376,3 @@ namespace VoodooShader
  *    </ul>
  * </ul>
  */
-}

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Apr 27 21:22:19 2011
+/* at Fri Apr 29 21:55:44 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W0, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -309,8 +309,8 @@ extern "C"{
 /* interface __MIDL_itf_Core_0000_0000 */
 /* [local] */ 
 
-typedef /* [public][public][public][public][public][public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0001
+typedef /* [v1_enum] */ 
+enum TextureFormat
     {	TF_Unknown	= 0,
 	TF_RGB5	= 0x1,
 	TF_RGB5A1	= 0x2,
@@ -324,8 +324,8 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0001
 	TF_Max	= 0x7fffffff
     } 	TextureFormat;
 
-typedef /* [public][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0002
+typedef /* [v1_enum] */ 
+enum ParameterType
     {	PT_Unknown	= 0,
 	PT_Float1	= 0x11,
 	PT_Float2	= 0x12,
@@ -354,8 +354,8 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0002
 	PT_Max	= 0x7fffffff
     } 	ParameterType;
 
-typedef /* [public][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0003
+typedef /* [v1_enum] */ 
+enum ParameterCategory
     {	PC_Unknown	= 0,
 	PC_Float	= 0x1,
 	PC_Sampler	= 0x2,
@@ -363,8 +363,8 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0003
 	PC_Max	= 0x7fffffff
     } 	ParameterCategory;
 
-typedef /* [public][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0004
+typedef /* [v1_enum] */ 
+enum ProgramStage
     {	PS_Unknown	= 0,
 	PS_Vertex	= 0x1,
 	PS_Fragment	= 0x2,
@@ -374,24 +374,24 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0004
 	PS_Max	= 0x7fffffff
     } 	ProgramStage;
 
-typedef /* [public][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0005
+typedef /* [v1_enum] */ 
+enum TextureStage
     {	TS_Unknown	= 0,
 	TS_Shader	= 0x1,
 	TS_Pass	= 0x2,
 	TS_Max	= 0x7fffffff
     } 	TextureStage;
 
-typedef /* [public][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0006
+typedef /* [v1_enum] */ 
+enum FileOpenMode
     {	FM_Unknown	= 0,
 	FM_Read	= 0x1,
 	FM_Write	= 0x2,
 	FM_Max	= 0x7fffffff
     } 	FileOpenMode;
 
-typedef /* [public][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0007
+typedef /* [v1_enum] */ 
+enum LogLevel
     {	LL_Unknown	= 0,
 	LL_Debug	= 0x1,
 	LL_Info	= 0x2,
@@ -407,8 +407,8 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0007
 	LL_Max	= 0x7fffffff
     } 	LogLevel;
 
-typedef /* [public][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0008
+typedef /* [v1_enum] */ 
+enum ParseFlags
     {	PF_None	= 0,
 	PF_SingleSlash	= 0x1,
 	PF_SlashOnly	= 0x2,
@@ -419,15 +419,15 @@ enum __MIDL___MIDL_itf_Core_0000_0000_0008
 	PF_Max	= 0x7fffffff
     } 	ParseFlags;
 
-typedef /* [public][v1_enum] */ 
-enum __MIDL___MIDL_itf_Core_0000_0000_0009
+typedef /* [v1_enum] */ 
+enum VariableType
     {	VT_Normal	= 0,
 	VT_State	= 0x1,
 	VT_System	= 0x10,
 	VT_Max	= 0x7fffffff
     } 	VariableType;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0010
+typedef /* [helpstring] */ struct InitParams
     {
     BSTR GlobalRoot;
     BSTR LocalRoot;
@@ -437,7 +437,7 @@ typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_00
     BSTR Config;
     } 	InitParams;
 
-typedef /* [public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0011
+typedef /* [helpstring] */ struct TextureDesc
     {
     int Width;
     int Height;
@@ -447,7 +447,7 @@ typedef /* [public][public][public][public][public][helpstring] */ struct __MIDL
     TextureFormat Format;
     } 	TextureDesc;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0012
+typedef /* [helpstring] */ struct TextureRegion
     {
     int Width;
     int Height;
@@ -460,7 +460,7 @@ typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core
     int OffZ;
     } 	TextureRegion;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0013
+typedef /* [helpstring] */ struct VersionStruct
     {
     BSTR Name;
     int Major;
@@ -470,20 +470,20 @@ typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_00
     VARIANT_BOOL Debug;
     } 	VersionStruct;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0014
+typedef /* [helpstring] */ struct float2
     {
     float X;
     float Y;
     } 	float2;
 
-typedef /* [public][public][public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0015
+typedef /* [helpstring] */ struct float3
     {
     float X;
     float Y;
     float Z;
     } 	float3;
 
-typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0016
+typedef /* [helpstring] */ struct float4
     {
     float X;
     float Y;
@@ -491,14 +491,14 @@ typedef /* [public][public][public][public][helpstring] */ struct __MIDL___MIDL_
     float W;
     } 	float4;
 
-typedef /* [public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0017
+typedef /* [helpstring] */ struct VertexStruct
     {
     float3 Position;
     float Winding;
     float2 TexCoord;
     } 	VertexStruct;
 
-typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0018
+typedef /* [helpstring] */ struct LightStruct
     {
     int Type;
     float4 Diffuse;
@@ -513,7 +513,7 @@ typedef /* [public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0018
     float Phi;
     } 	LightStruct;
 
-typedef /* [public][public][public][helpstring] */ struct __MIDL___MIDL_itf_Core_0000_0000_0019
+typedef /* [helpstring] */ struct FunctionPtr
     {
     unsigned __int64 Address;
     } 	FunctionPtr;
@@ -866,12 +866,12 @@ EXTERN_C const IID IID_IVoodooParser;
     IVoodooParser : public IDispatch
     {
     public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddVariable( 
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
             /* [in] */ BSTR pName,
             /* [in] */ BSTR pValue,
             /* [defaultvalue][in] */ EnumType System = VT_Normal) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveVariable( 
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Remove( 
             /* [in] */ BSTR pName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Parse( 
@@ -928,13 +928,13 @@ EXTERN_C const IID IID_IVoodooParser;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddVariable )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             IVoodooParser * This,
             /* [in] */ BSTR pName,
             /* [in] */ BSTR pValue,
             /* [defaultvalue][in] */ EnumType System);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RemoveVariable )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             IVoodooParser * This,
             /* [in] */ BSTR pName);
         
@@ -980,11 +980,11 @@ EXTERN_C const IID IID_IVoodooParser;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooParser_AddVariable(This,pName,pValue,System)	\
-    ( (This)->lpVtbl -> AddVariable(This,pName,pValue,System) ) 
+#define IVoodooParser_Add(This,pName,pValue,System)	\
+    ( (This)->lpVtbl -> Add(This,pName,pValue,System) ) 
 
-#define IVoodooParser_RemoveVariable(This,pName)	\
-    ( (This)->lpVtbl -> RemoveVariable(This,pName) ) 
+#define IVoodooParser_Remove(This,pName)	\
+    ( (This)->lpVtbl -> Remove(This,pName) ) 
 
 #define IVoodooParser_Parse(This,pString,Flags,pParsed)	\
     ( (This)->lpVtbl -> Parse(This,pString,Flags,pParsed) ) 
@@ -3291,6 +3291,25 @@ EXTERN_C const IID IID_IComponentRegistrar;
 
 /* library Voodoo_Core */
 /* [custom][version][uuid] */ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 EXTERN_C const IID LIBID_Voodoo_Core;

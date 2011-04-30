@@ -19,17 +19,15 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
   
-namespace VoodooShader
-{
 /**
- * @page Shaders
+ * @page page_shaders Shaders
  * Each shader may have one or more techniques. A technique describes a full rendering process, and 
  * may have one or more passes. Each pass describes a particular way to render the given geometry, 
  * and may have multiple programs. Each program controls a particular part of the render process. 
  * In addition, shaders, techniques and passes contain some metadata used by the system to control 
  * how and where they are rendered.
  *
- * @section programstages Program Stages
+ * @section page_shaders_sec_stages Program Stages
  * Each program is designed to control a single specific stage of the render pipeline, typically
  * handling how a data type is transformed (geometry, vertex, fragment/pixel).
  * 
@@ -58,11 +56,11 @@ namespace VoodooShader
  *    to DX11 hardware. All stages are supported in theory, but no testing is performed on tess
  *    shaders. The vertex and pixel stages are the most used, by far.
  *
- * @section shadersystem Shader System
+ * @section page_shaders_sec_system Shader System
  * In addition to the standard Cg compiler, Voodoo adds a few additional features to the shader 
  * system.
  * 
- * @subsection shaderparameters Shader Parameters
+ * @subsection page_shaders_ssec_params Shader Parameters
  * Voodoo provides a system to link effect-level parameters to application or system-level 
  * variables. This provides an easy way to provide data to shaders and is capable of linking many 
  * parameters from various effects to the same global parameter.
@@ -82,7 +80,7 @@ namespace VoodooShader
  * This mechanism is useful for things like system time, common matrices, random values or other 
  * data that changes each frame but not within the frame but does not vary between shaders.
  * 
- * @subsection shadertargets Shader Targets
+ * @subsection page_shaders_ssec_targets Shader Targets
  * Voodoo also provides a system to specify a target for each technique or pass. This provides an 
  * easy way to setup render-to-texture effects.
  * 
@@ -121,35 +119,39 @@ namespace VoodooShader
  * Core::SetTexture(TextureType, TextureRef). Relinking a shader may change these 
  * targets.
  * 
- * @page virtualparams Parameters
+ * @page page_params Parameters
  * Voodoo supports two general varieties of parameter (virtual and effect) and a number of specific 
  * data types.
  * 
- * @section virtualparamsdiff Virtual and Effect Parameters
+ * @section page_params_sec_diff Virtual and Effect Parameters
  * The primary difference between virtual params and effect params are where they exist. Effect
  * parameters exist within a shader effect and on the GPU, and are used directly within programs.
  * Virtual parameters exist only in the runtime and on the CPU, and may have many effect parameters
  * attached to them. When the virtual parameter is changed, the effect parameters attached will
  * take the same value (making it easy to provide global variables).
  * 
- * @section paramsettings Setting Parameters
+ * @section page_params_sec_set Setting Parameters
  * When effect parameters are set, the values must be sent to the GPU and the program may have to
  * be recompiled. The value may be downloaded immediately or when needed, and may be kept in
  * system RAM by the runtime or driver. Virtual parameters are set immediately, as they are always
  * kept in system RAM. Any effect parameters attached to a virtual parameter will be updated by
  * the runtime (the update will occur before use, but exact time may vary).
  * 
- * @section paramtypes Parameter Types
- * Voodoo supports two primary parameter data-type categories, scalar types and samplers. Scalars
+ * @section page_params_sec_type Parameter Types
+ * Voodoo supports two primary parameter data-type categories: scalar types and samplers. Scalars
  * are connected to numeric data types, usually from 1 to 16 floating-point components (vectors or 
  * matrices). Samplers are connected to textures and sample pixel data from them. 
+ * 
+ * @note Partial support is available for user-defined struct types, but this is not complete yet.
+ *    Precise implementation details are not decided, but additional methods will be made available
+ *    to handle these.
  *
- * @page Textures
+ * @page page_textures Textures
  * The shaders used in Voodoo are capable of accessing a number of texture types, and Voodoo is
  * able to load a number of texture formats. This provides a very powerful system and allows you to 
  * use a great variety of textures.
  * 
- * @section texturetypes Texture Types
+ * @section page_textures_sec_types Texture Types
  * Three basic texture types are supported in Voodoo:
  * <ul>
  *    <li>1-dimensional texture rows (a simple row of pixels, 1 by x)</li>
@@ -168,7 +170,7 @@ namespace VoodooShader
  * per dimension. Some texture sampling instructions can perform additional filtering or draw from 
  * specific mipmaps and may need more coordinates.
  *
- * @section textureformats Texture Formats
+ * @section page_textures_sec_formats Texture Formats
  * Voodoo supports a decent sampling of internal texture formats. These formats specify how much 
  * data a texture holds and how it is stored. There are some limitations and some potentially 
  * useful formats are not yet supported, due to the differences between DirectX and OpenGL, but 
@@ -232,18 +234,15 @@ namespace VoodooShader
  * <br />
  * <em><sup>3</sup>:</em>
  *    Depth textures do not map to components in all APIs. The most likely mapping is given, but 
- *    access is not guaranteed.
+ *    access is not guaranteed and may be impossible (in DirectX 9, for example).
  * <br />
  * <em><sup>4</sup>:</em>
  *    Texture loading is restricted by the file system library. The values given apply only to 
  *    Voodoo/Filesystem, which uses DevIL. Only 8, 16 and 32 bpc formats can be copied into by 
- *    IImage::CopyImageData(); DevIL lacks the values to describe packed formats and depth formats 
- *    are not yet fully supported in the file system module. The supported formats are more widely 
- *    supported in other areas of Voodoo, so it is highly recommended you favor these whenever 
- *    possible. It @e is, however, possible to load images that are in other formats and convert 
- *    them.
+ *    IVoodooImage::Data(). Only a subset of Voodoo's supported texture formats are available via
+ *    the image loader, but you may load images that are in other formats and convert them.
  *
- * @section depthbuffers Depth Buffers
+ * @section page_textures_sec_depth Depth Buffers
  * For an adapter to be considered fully Voodoo compatible, it must supply realtime depth data to a 
  * shader-readable texture. How this is performed is left to the discretion of the adapter, as it 
  * varies greatly between old D3D versions and OpenGL or newer D3D. This data should be stored such 
@@ -261,7 +260,7 @@ namespace VoodooShader
  * both meet this requirement neatly. Using two passes is slower but more compatible, so this 
  * should be made an option if possible.
  * 
- * @section textureloading Texture Loading
+ * @section page_textures_sec_loading Texture Loading
  * Texture loading is implemented through an Adapter callback, so Voodoo textures can be created 
  * with a variety of options or using any number of functions.
  * 
@@ -271,7 +270,7 @@ namespace VoodooShader
  * high resolutions and transparency. Other formats may not be as suitable; JPEG and BMP for 
  * example are very lossy and large, respectively. 
  * 
- * @section texturefileformats Supported File Formats
+ * @subsection page_textures_ssec_fileformats Supported File Formats
  * Below is provided a full list of the file formats Voodoo/Filesystem is capable of loading and 
  * saving (via DevIL). This list is taken from the DevIL documentation.
  * 
@@ -337,9 +336,9 @@ namespace VoodooShader
  * DevIL, or that of any Voodoo module, should be directed to Voodoo or module developer(s).
  * 
  * Some of these formats (GIF, for example) do not correspond to any internal Voodoo formats. To 
- * use images in these formats, you should load the image, then call IImage::CopyImageData() and 
- * provide the desired format. DevIL will handle conversion internally. This may be slow and so 
- * should not be used often, but provides a way to load almost any format into Voodoo.
+ * use images in these formats, you should load the image, then call IVoodooImage::Data() with the 
+ * desired format. DevIL will handle conversion internally. This may be slow and so should not be 
+ * used often, but provides a way to load almost any format into Voodoo.
  * 
  * The above list of formats is quite large, and some formats are obscure or not well suited for 
  * use with Voodoo. However, DevIL supports them and there is no reason to add artificial
@@ -348,4 +347,3 @@ namespace VoodooShader
  * some innate restrictions or lose data during conversion to Voodoo-supported formats, so take 
  * care to properly test any image resources you use.
  */
-}

@@ -131,7 +131,7 @@ BEGIN_TESTF(CoreNoInit_GetFuncs, CoreFixture)
     WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_NULL(pLogger);
 
-    IXMLDOMDocument * pConfig = NULL;
+    IUnknown * pConfig = NULL;
     hr = pCore->get_Config(&pConfig);
     WIN_ASSERT_TRUE(FAILED(hr), _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_NULL(pConfig);
@@ -205,7 +205,7 @@ BEGIN_TESTF(CoreInit_GetFuncs, CoreInitFixture)
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_NOT_NULL(pLogger);
 
-    IXMLDOMDocument * pConfig = NULL;
+    IUnknown * pConfig = NULL;
     hr = pCore->get_Config(&pConfig);
     WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("HRESULT: %X\n"), hr);
     WIN_ASSERT_NOT_NULL(pConfig);
