@@ -95,52 +95,24 @@ DECLARE_NOT_AGGREGATABLE(CVoodooLogger)
 
 BEGIN_COM_MAP(CVoodooLogger)
 	COM_INTERFACE_ENTRY(IVoodooLogger)
+    COM_INTERFACE_ENTRY(IVoodooPlugin)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
-
-
-
 // IVoodooLogger
 public:
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-        /* [retval][out] */ LPBSTR pName);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-        /* [retval][out] */ IVoodooCore **ppCore);
-
+    virtual HRESULT STDMETHODCALLTYPE Initialize(IVoodooCore *pCore);
+    virtual HRESULT STDMETHODCALLTYPE get_Core(IVoodooCore **ppCore);
     virtual HRESULT STDMETHODCALLTYPE Open(BSTR pFilename, VARIANT_BOOL Append);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close( void);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE Dump( void);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LogLevel( 
-        /* [retval][out] */ DWORD *pLevel);
-
-    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LogLevel( 
-        /* [in] */ DWORD Level);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogModule( 
-        /* [in] */ VersionStruct Module);
-
-    virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE Log( 
-        /* [in] */ DWORD Level,
-        /* [in] */ BSTR pModule,
-        /* [in] */ BSTR pFormat,
-        /* [in] */ SAFEARRAY * ppArgs);
-
-    virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE LogList( 
-        /* [in] */ DWORD Level,
-        /* [in] */ BSTR pModule,
-        /* [in] */ BSTR pFormat,
-        /* [in] */ VARIANT pList);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BufferSize( 
-        /* [retval][out] */ int *pSize);
-
-    virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_BufferSize( 
-        /* [in] */ int Size);
+    virtual HRESULT STDMETHODCALLTYPE Close(void);
+    virtual HRESULT STDMETHODCALLTYPE Dump(void);
+    virtual HRESULT STDMETHODCALLTYPE get_LogLevel(DWORD *pLevel);
+    virtual HRESULT STDMETHODCALLTYPE put_LogLevel(DWORD Level);
+    virtual HRESULT STDMETHODCALLTYPE LogModule(VersionStruct Module);
+    virtual HRESULT STDMETHODCALLTYPE Log(DWORD Level, BSTR pModule, BSTR pFormat, SAFEARRAY * ppArgs);
+    virtual HRESULT STDMETHODCALLTYPE LogList(DWORD Level, BSTR pModule, BSTR pFormat, VARIANT pList);
+    virtual HRESULT STDMETHODCALLTYPE get_BufferSize(int *pSize);
+    virtual HRESULT STDMETHODCALLTYPE put_BufferSize(int Size);
 
 private:
     ULONG m_Refrs;

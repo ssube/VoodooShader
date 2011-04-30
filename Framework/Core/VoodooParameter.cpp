@@ -499,7 +499,7 @@ STDMETHODIMP CVoodooParameter::CreateSamplerTexture()
     // No file, make blank texture
     CGannotation atexSize   = cgGetNamedParameterAnnotation(m_Parameter, "size");
     CGannotation atexFormat = cgGetNamedParameterAnnotation(m_Parameter, "format");
-    CGannotation atexColor  = cgGetNamedParameterAnnotation(m_Parameter, "color");
+    //CGannotation atexColor  = cgGetNamedParameterAnnotation(m_Parameter, "color");
 
     CGtype texSizeType = cgGetAnnotationType(atexSize);
     TextureDesc texDesc;
@@ -583,7 +583,6 @@ STDMETHODIMP CVoodooParameter::CreateSamplerTexture()
 
     IVoodooAdapter * pAdapter = NULL;
     m_Core->get_Adapter(&pAdapter);
-    IVoodooTexture * pTexture = NULL;
     pAdapter->CreateTexture(texName, texDesc, &m_Texture);
     if ( m_Texture == NULL )
     {

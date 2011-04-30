@@ -37,7 +37,8 @@ DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOFILESYSTEM)
 DECLARE_NOT_AGGREGATABLE(CVoodooFileSystem)
 
 BEGIN_COM_MAP(CVoodooFileSystem)
-	COM_INTERFACE_ENTRY(IVoodooFileSystem)
+    COM_INTERFACE_ENTRY(IVoodooFileSystem)
+    COM_INTERFACE_ENTRY(IVoodooPlugin)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
@@ -46,11 +47,8 @@ END_COM_MAP()
 
 // IVoodooFileSystem
 public:
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-        /* [retval][out] */ LPBSTR pName);
-
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-        /* [retval][out] */ IVoodooCore **ppCore);
+    virtual HRESULT STDMETHODCALLTYPE Initialize(IVoodooCore *pCore);
+    virtual HRESULT STDMETHODCALLTYPE get_Core(IVoodooCore **ppCore);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddDirectory( 
         /* [in] */ BSTR pPath);

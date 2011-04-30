@@ -37,20 +37,16 @@ DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOHOOKSYSTEM)
 DECLARE_NOT_AGGREGATABLE(CVoodooHookSystem)
 
 BEGIN_COM_MAP(CVoodooHookSystem)
-	COM_INTERFACE_ENTRY(IVoodooHookSystem)
+    COM_INTERFACE_ENTRY(IVoodooHookSystem)
+    COM_INTERFACE_ENTRY(IVoodooPlugin)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
-
-
-
 // IVoodooHookSystem
 public:
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-        /* [retval][out] */ LPBSTR pName);
 
-    virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-        /* [retval][out] */ IVoodooCore **ppCore);
+    virtual HRESULT STDMETHODCALLTYPE Initialize(IVoodooCore *pCore);
+    virtual HRESULT STDMETHODCALLTYPE get_Core(IVoodooCore **ppCore);
 
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
         /* [in] */ BSTR pName,

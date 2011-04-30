@@ -72,14 +72,15 @@ STDMETHODIMP_(ULONG) CVoodooAdapter::Release()
     }
 }
 
-STDMETHODIMP CVoodooAdapter::get_Name(LPBSTR pName)
+STDMETHODIMP CVoodooAdapter::Initialize(IVoodooCore * pCore)
 {
-    if ( pName == NULL )
+    if ( pCore == NULL )
     {
         return VSFERR_INVALID_ARG;
-    } else {
-        return m_Name.CopyTo(pName);
     }
+
+    m_Core = pCore;
+    return S_OK;
 }
 
 STDMETHODIMP CVoodooAdapter::get_Core(IVoodooCore **ppCore)

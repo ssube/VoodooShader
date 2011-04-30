@@ -4,10 +4,10 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Fri Apr 29 21:55:44 2011
+/* at Sat Apr 30 03:38:52 2011
  */
 /* Compiler settings for Core.idl:
-    Oicf, W0, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
+    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
     protocol : dce , ms_ext, c_ext, robust
     error checks: none
     VC __declspec() decoration level: 
@@ -55,6 +55,12 @@ typedef interface IVoodooCore IVoodooCore;
 #define __IVoodooParser_FWD_DEFINED__
 typedef interface IVoodooParser IVoodooParser;
 #endif 	/* __IVoodooParser_FWD_DEFINED__ */
+
+
+#ifndef __IVoodooPlugin_FWD_DEFINED__
+#define __IVoodooPlugin_FWD_DEFINED__
+typedef interface IVoodooPlugin IVoodooPlugin;
+#endif 	/* __IVoodooPlugin_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooShader_FWD_DEFINED__
@@ -535,6 +541,7 @@ typedef DWORD EnumType;
 
 
 
+
 extern RPC_IF_HANDLE __MIDL_itf_Core_0000_0000_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_Core_0000_0000_v0_0_s_ifspec;
 
@@ -998,6 +1005,137 @@ EXTERN_C const IID IID_IVoodooParser;
 
 
 #endif 	/* __IVoodooParser_INTERFACE_DEFINED__ */
+
+
+#ifndef __IVoodooPlugin_INTERFACE_DEFINED__
+#define __IVoodooPlugin_INTERFACE_DEFINED__
+
+/* interface IVoodooPlugin */
+/* [unique][nonextensible][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IVoodooPlugin;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("1d3d7f93-6f32-11e0-8ac0-005056c00000")
+    IVoodooPlugin : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Initialize( 
+            /* [in] */ IVoodooCore *pCore) = 0;
+        
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
+            /* [retval][out] */ IVoodooCore **ppCore) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IVoodooPluginVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IVoodooPlugin * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IVoodooPlugin * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IVoodooPlugin * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IVoodooPlugin * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IVoodooPlugin * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IVoodooPlugin * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IVoodooPlugin * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
+            IVoodooPlugin * This,
+            /* [in] */ IVoodooCore *pCore);
+        
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
+            IVoodooPlugin * This,
+            /* [retval][out] */ IVoodooCore **ppCore);
+        
+        END_INTERFACE
+    } IVoodooPluginVtbl;
+
+    interface IVoodooPlugin
+    {
+        CONST_VTBL struct IVoodooPluginVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IVoodooPlugin_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IVoodooPlugin_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IVoodooPlugin_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IVoodooPlugin_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IVoodooPlugin_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IVoodooPlugin_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IVoodooPlugin_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IVoodooPlugin_Initialize(This,pCore)	\
+    ( (This)->lpVtbl -> Initialize(This,pCore) ) 
+
+#define IVoodooPlugin_get_Core(This,ppCore)	\
+    ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IVoodooPlugin_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooShader_INTERFACE_DEFINED__
@@ -1965,12 +2103,9 @@ EXTERN_C const IID IID_IVoodooAdapter;
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
     MIDL_INTERFACE("1d3d7f8d-6f32-11e0-8ac0-005056c00000")
-    IVoodooAdapter : public IDispatch
+    IVoodooAdapter : public IVoodooPlugin
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-            /* [retval][out] */ IVoodooCore **ppCore) = 0;
-        
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadPass( 
             /* [in] */ IVoodooPass *pPass) = 0;
         
@@ -2070,6 +2205,10 @@ EXTERN_C const IID IID_IVoodooAdapter;
             /* [out] */ VARIANT *pVarResult,
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
+            IVoodooAdapter * This,
+            /* [in] */ IVoodooCore *pCore);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooAdapter * This,
@@ -2176,8 +2315,12 @@ EXTERN_C const IID IID_IVoodooAdapter;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
+#define IVoodooAdapter_Initialize(This,pCore)	\
+    ( (This)->lpVtbl -> Initialize(This,pCore) ) 
+
 #define IVoodooAdapter_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
+
 
 #define IVoodooAdapter_LoadPass(This,pPass)	\
     ( (This)->lpVtbl -> LoadPass(This,pPass) ) 
@@ -2244,12 +2387,9 @@ EXTERN_C const IID IID_IVoodooHookSystem;
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
     MIDL_INTERFACE("1d3d7f8e-6f32-11e0-8ac0-005056c00000")
-    IVoodooHookSystem : public IDispatch
+    IVoodooHookSystem : public IVoodooPlugin
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-            /* [retval][out] */ IVoodooCore **ppCore) = 0;
-        
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
             /* [in] */ BSTR pName,
             /* [in] */ FunctionPtr pSource,
@@ -2309,6 +2449,10 @@ EXTERN_C const IID IID_IVoodooHookSystem;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
+            IVoodooHookSystem * This,
+            /* [in] */ IVoodooCore *pCore);
+        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooHookSystem * This,
             /* [retval][out] */ IVoodooCore **ppCore);
@@ -2362,8 +2506,12 @@ EXTERN_C const IID IID_IVoodooHookSystem;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
+#define IVoodooHookSystem_Initialize(This,pCore)	\
+    ( (This)->lpVtbl -> Initialize(This,pCore) ) 
+
 #define IVoodooHookSystem_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
+
 
 #define IVoodooHookSystem_Add(This,pName,pSource,pDest)	\
     ( (This)->lpVtbl -> Add(This,pName,pSource,pDest) ) 
@@ -2397,12 +2545,9 @@ EXTERN_C const IID IID_IVoodooLogger;
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
     MIDL_INTERFACE("1d3d7f8f-6f32-11e0-8ac0-005056c00000")
-    IVoodooLogger : public IDispatch
+    IVoodooLogger : public IVoodooPlugin
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-            /* [retval][out] */ IVoodooCore **ppCore) = 0;
-        
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
             /* [in] */ BSTR pFilename,
             /* [in] */ VARIANT_BOOL Append) = 0;
@@ -2486,6 +2631,10 @@ EXTERN_C const IID IID_IVoodooLogger;
             /* [out] */ VARIANT *pVarResult,
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
+            IVoodooLogger * This,
+            /* [in] */ IVoodooCore *pCore);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooLogger * This,
@@ -2572,8 +2721,12 @@ EXTERN_C const IID IID_IVoodooLogger;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
+#define IVoodooLogger_Initialize(This,pCore)	\
+    ( (This)->lpVtbl -> Initialize(This,pCore) ) 
+
 #define IVoodooLogger_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
+
 
 #define IVoodooLogger_Open(This,pFilename,Append)	\
     ( (This)->lpVtbl -> Open(This,pFilename,Append) ) 
@@ -2628,12 +2781,9 @@ EXTERN_C const IID IID_IVoodooFileSystem;
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
     MIDL_INTERFACE("1d3d7f90-6f32-11e0-8ac0-005056c00000")
-    IVoodooFileSystem : public IDispatch
+    IVoodooFileSystem : public IVoodooPlugin
     {
     public:
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Core( 
-            /* [retval][out] */ IVoodooCore **ppCore) = 0;
-        
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddDirectory( 
             /* [in] */ BSTR pPath) = 0;
         
@@ -2697,6 +2847,10 @@ EXTERN_C const IID IID_IVoodooFileSystem;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
+            IVoodooFileSystem * This,
+            /* [in] */ IVoodooCore *pCore);
+        
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Core )( 
             IVoodooFileSystem * This,
             /* [retval][out] */ IVoodooCore **ppCore);
@@ -2755,8 +2909,12 @@ EXTERN_C const IID IID_IVoodooFileSystem;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
+#define IVoodooFileSystem_Initialize(This,pCore)	\
+    ( (This)->lpVtbl -> Initialize(This,pCore) ) 
+
 #define IVoodooFileSystem_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
+
 
 #define IVoodooFileSystem_AddDirectory(This,pPath)	\
     ( (This)->lpVtbl -> AddDirectory(This,pPath) ) 

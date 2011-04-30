@@ -22,7 +22,7 @@
 1d3d7f90-6f32-11e0-8ac0-005056c00000 // IVoodooFileSystem
 1d3d7f91-6f32-11e0-8ac0-005056c00000 // IVoodooFile
 1d3d7f92-6f32-11e0-8ac0-005056c00000 // IVoodooImage
-1d3d7f93-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces
+1d3d7f93-6f32-11e0-8ac0-005056c00000 // IVoodooPlugin
 1d3d7f94-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces
 1d3d7f95-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces
 1d3d7f96-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces

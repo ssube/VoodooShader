@@ -74,6 +74,7 @@
   <ItemGroup>
     <ClCompile Include="TVoodooCore.cpp" />
     <ClCompile Include="TVoodooParser.cpp" />
+    <ClCompile Include="TVoodooShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Includes.hpp" />

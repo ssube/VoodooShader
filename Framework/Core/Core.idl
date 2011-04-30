@@ -258,6 +258,7 @@ interface IVoodooImage;
 interface IVoodooLogger;
 interface IVoodooParameter;
 interface IVoodooPass;
+interface IVoodooPlugin;
 interface IVoodooShader;
 interface IVoodooParser;
 interface IVoodooTechnique;
@@ -306,7 +307,18 @@ interface IVoodooParser : IDispatch
     [id(2)] HRESULT Remove([in] BSTR pName);
     [id(3)] HRESULT Parse([in] BSTR pString, [in, defaultvalue(PF_None)] EnumType Flags, [out, retval] LPBSTR pParsed);
 };
-
+[
+    object,
+    uuid(1d3d7f93-6f32-11e0-8ac0-005056c00000),
+    dual,
+    nonextensible,
+    pointer_default(unique)
+]
+interface IVoodooPlugin : IDispatch
+{
+    [id(1)] HRESULT Initialize([in] IVoodooCore * pCore);
+    [propget, id(2)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
+};
 // --------------------------------------------------
 // Shader interfaces
 [
@@ -407,7 +419,6 @@ interface IVoodooParameter : IDispatch
 // External/plugin interfaces.
 //  Only null implementations of these are provided.
 // 
-
 [
 	object,
 	uuid(1d3d7f8d-6f32-11e0-8ac0-005056c00000),
@@ -415,23 +426,22 @@ interface IVoodooParameter : IDispatch
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooAdapter : IDispatch
+interface IVoodooAdapter : IVoodooPlugin
 {
-    [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [id(2)] HRESULT LoadPass([in] IVoodooPass * pPass);
-    [id(3)] HRESULT UnloadPass([in] IVoodooPass * pPass);
-    [propget, id(4)] HRESULT Pass([out, retval] IVoodooPass ** ppPass);
-    [propput, id(4)] HRESULT Pass([in] IVoodooPass * pPass);
-    [propget, id(6)] HRESULT Target([out, retval] IVoodooTexture ** ppTarget);
-    [propput, id(6)] HRESULT Target([in] IVoodooTexture * pTarget);
-    [id(8)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Description, [out, retval] IVoodooTexture ** ppTexture);
-    [id(9)] HRESULT LoadTexture([in] IVoodooImage * pImage, [in] TextureRegion Region, [out, retval] IVoodooTexture ** ppTexture);
-    [id(10)] HRESULT DrawGeometry([in] int Vertexes, [in] SAFEARRAY(VertexStruct) pVertexData);
-    [id(11)] HRESULT DrawShader([in] IVoodooShader * pShader);
-    [id(12)] HRESULT ApplyParameter([in] IVoodooParameter * pParameter);
-    [id(13)] HRESULT SetProperty([in] BSTR pName, [in, out] VARIANT * pData);
-    [id(14)] HRESULT ConnectTexture([in] IVoodooParameter * pParameter, [in] IVoodooTexture * pTexture);
-    [id(15)] HRESULT HandleError([in] VARIANT pContext, [in] EnumType Error, [in] IVoodooCore * pCore);
+    [id(3)] HRESULT LoadPass([in] IVoodooPass * pPass);
+    [id(4)] HRESULT UnloadPass([in] IVoodooPass * pPass);
+    [propget, id(5)] HRESULT Pass([out, retval] IVoodooPass ** ppPass);
+    [propput, id(5)] HRESULT Pass([in] IVoodooPass * pPass);
+    [propget, id(7)] HRESULT Target([out, retval] IVoodooTexture ** ppTarget);
+    [propput, id(7)] HRESULT Target([in] IVoodooTexture * pTarget);
+    [id(9)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Description, [out, retval] IVoodooTexture ** ppTexture);
+    [id(10)] HRESULT LoadTexture([in] IVoodooImage * pImage, [in] TextureRegion Region, [out, retval] IVoodooTexture ** ppTexture);
+    [id(11)] HRESULT DrawGeometry([in] int Vertexes, [in] SAFEARRAY(VertexStruct) pVertexData);
+    [id(12)] HRESULT DrawShader([in] IVoodooShader * pShader);
+    [id(13)] HRESULT ApplyParameter([in] IVoodooParameter * pParameter);
+    [id(14)] HRESULT SetProperty([in] BSTR pName, [in, out] VARIANT * pData);
+    [id(15)] HRESULT ConnectTexture([in] IVoodooParameter * pParameter, [in] IVoodooTexture * pTexture);
+    [id(16)] HRESULT HandleError([in] VARIANT pContext, [in] EnumType Error, [in] IVoodooCore * pCore);
 };
 
 [
@@ -441,12 +451,11 @@ interface IVoodooAdapter : IDispatch
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooHookSystem : IDispatch
+interface IVoodooHookSystem : IVoodooPlugin
 {
-    [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [id(2)] HRESULT Add([in] BSTR pName, [in] FunctionPtr pSource, [in] FunctionPtr pDest);
-    [id(3)] HRESULT Remove([in] BSTR pName);
-    [id(4)] HRESULT RemoveAll();
+    [id(3)] HRESULT Add([in] BSTR pName, [in] FunctionPtr pSource, [in] FunctionPtr pDest);
+    [id(4)] HRESULT Remove([in] BSTR pName);
+    [id(5)] HRESULT RemoveAll();
 };
 
 // Logger interface
@@ -457,19 +466,18 @@ interface IVoodooHookSystem : IDispatch
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooLogger : IDispatch
+interface IVoodooLogger : IVoodooPlugin
 {
-    [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [id(2)] HRESULT Open([in] BSTR pFilename, [in] VARIANT_BOOL Append);
-    [id(3)] HRESULT Close();
-    [id(4)] HRESULT Dump();
-    [propget, id(5)] HRESULT LogLevel([out, retval] EnumType * pLevel);
-    [propput, id(5)] HRESULT LogLevel([in] EnumType Level);
-    [id(6)] HRESULT LogModule([in] VersionStruct Module);
-    [id(7), vararg] HRESULT Log([in] EnumType Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
-    [id(8)] HRESULT LogList([in] EnumType Level, [in] BSTR pModule, [in] BSTR pFormat, [in] VARIANT pList);
-    [propget, id(9)] HRESULT BufferSize([out, retval] int * pSize);
-    [propput, id(9)] HRESULT BufferSize([in] int Size);
+    [id(3)] HRESULT Open([in] BSTR pFilename, [in] VARIANT_BOOL Append);
+    [id(4)] HRESULT Close();
+    [id(5)] HRESULT Dump();
+    [propget, id(6)] HRESULT LogLevel([out, retval] EnumType * pLevel);
+    [propput, id(6)] HRESULT LogLevel([in] EnumType Level);
+    [id(8)] HRESULT LogModule([in] VersionStruct Module);
+    [id(9), vararg] HRESULT Log([in] EnumType Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
+    [id(10)] HRESULT LogList([in] EnumType Level, [in] BSTR pModule, [in] BSTR pFormat, [in] VARIANT pList);
+    [propget, id(11)] HRESULT BufferSize([out, retval] int * pSize);
+    [propput, id(11)] HRESULT BufferSize([in] int Size);
 };
 
 // FileSystem interfaces
@@ -480,13 +488,12 @@ interface IVoodooLogger : IDispatch
 	nonextensible,
 	pointer_default(unique)
 ]
-interface IVoodooFileSystem : IDispatch
+interface IVoodooFileSystem : IVoodooPlugin
 {
-    [propget, id(1)] HRESULT Core([out, retval] IVoodooCore ** ppCore);
-    [id(2)] HRESULT AddDirectory([in] BSTR pPath);
-    [id(3)] HRESULT RemoveDirectory([in] BSTR pPath);
-    [id(4)] HRESULT FindFile([in] BSTR pPath, [out, retval] IVoodooFile ** ppFile);
-    [id(5)] HRESULT FindImage([in] BSTR pPath, [out, retval] IVoodooImage ** ppImage);
+    [id(3)] HRESULT AddDirectory([in] BSTR pPath);
+    [id(4)] HRESULT RemoveDirectory([in] BSTR pPath);
+    [id(5)] HRESULT FindFile([in] BSTR pPath, [out, retval] IVoodooFile ** ppFile);
+    [id(6)] HRESULT FindImage([in] BSTR pPath, [out, retval] IVoodooImage ** ppImage);
 };
 
 [

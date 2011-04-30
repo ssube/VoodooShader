@@ -72,14 +72,31 @@ STDMETHODIMP_(ULONG) CVoodooFileSystem::Release()
     }
 }
 
-STDMETHODIMP CVoodooFileSystem::get_Name(LPBSTR pName)
+STDMETHODIMP CVoodooFileSystem::Initialize(IVoodooCore * pCore)
 {
-    if ( pName == NULL )
+    if ( pCore == NULL )
     {
-        return E_INVALIDARG;
-    } else {
-        return m_Name.CopyTo(pName);
+        return VSFERR_INVALID_ARG;
     }
+
+    m_Core = pCore;
+
+    // Handle internal path init (unused)
+    CArray<CStringW> Paths;
+
+    CStringW EnvPath;
+    if ( EnvPath.GetEnvironmentVariable(L"VoodooPath") != 0 )
+    {
+        int splitPos = EnvPath.Find(L';');
+        while ( splitPos > 0 )
+        {
+            Paths.Add(EnvPath.Left(splitPos));
+            EnvPath = EnvPath.Mid(splitPos);
+            splitPos = EnvPath.Find(L';');
+        }
+    }
+
+    return S_OK;
 }
 
 STDMETHODIMP CVoodooFileSystem::get_Core(IVoodooCore **ppCore)

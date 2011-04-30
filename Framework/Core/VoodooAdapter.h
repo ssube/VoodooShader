@@ -93,13 +93,14 @@ DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOADAPTER)
 DECLARE_NOT_AGGREGATABLE(CVoodooAdapter)
 
 BEGIN_COM_MAP(CVoodooAdapter)
-	COM_INTERFACE_ENTRY(IVoodooAdapter)
+    COM_INTERFACE_ENTRY(IVoodooAdapter)
+    COM_INTERFACE_ENTRY(IVoodooPlugin)
 	COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooAdapter
-public:
-    virtual HRESULT STDMETHODCALLTYPE get_Name(LPBSTR pName);
+public: 
+    virtual HRESULT STDMETHODCALLTYPE Initialize(IVoodooCore *pCore);
     virtual HRESULT STDMETHODCALLTYPE get_Core(IVoodooCore **ppCore);
     virtual HRESULT STDMETHODCALLTYPE LoadPass(IVoodooPass *pPass);
     virtual HRESULT STDMETHODCALLTYPE UnloadPass(IVoodooPass *pPass);

@@ -59,7 +59,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -75,7 +75,7 @@
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
-      <WarningLevel>0</WarningLevel>
+      <WarningLevel>1</WarningLevel>
       <EnableErrorChecks>None</EnableErrorChecks>
     </Midl>
     <ResourceCompile>
@@ -97,7 +97,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -113,7 +113,7 @@
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
-      <WarningLevel>0</WarningLevel>
+      <WarningLevel>1</WarningLevel>
       <EnableErrorChecks>None</EnableErrorChecks>
     </Midl>
     <ResourceCompile>

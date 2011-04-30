@@ -53,6 +53,7 @@ IMPLEMENT_GUID(IID_IVoodooLogger,      0x1d3d7f8f, 0x6f32, 0x11e0, 0x8a, 0xc0, 0
 IMPLEMENT_GUID(IID_IVoodooFileSystem,  0x1d3d7f90, 0x6f32, 0x11e0, 0x8a, 0xc0, 0x00, 0x50, 0x56, 0xc0, 0x00, 0x00);
 IMPLEMENT_GUID(IID_IVoodooFile,        0x1d3d7f91, 0x6f32, 0x11e0, 0x8a, 0xc0, 0x00, 0x50, 0x56, 0xc0, 0x00, 0x00);
 IMPLEMENT_GUID(IID_IVoodooImage,       0x1d3d7f92, 0x6f32, 0x11e0, 0x8a, 0xc0, 0x00, 0x50, 0x56, 0xc0, 0x00, 0x00);
+IMPLEMENT_GUID(IID_IVoodooPlugin,      0x1d3d7f93, 0x6f32, 0x11e0, 0x8a, 0xc0, 0x00, 0x50, 0x56, 0xc0, 0x00, 0x00);
 
 /* CoClass CLSIDs */
 IMPLEMENT_GUID(CLSID_VoodooCore,       0x1d3d7fa3, 0x6f32, 0x11e0, 0x8a, 0xc0, 0x00, 0x50, 0x56, 0xc0, 0x00, 0x00);
@@ -90,6 +91,7 @@ interface DECLSPEC_UUID("1d3d7f8f-6f32-11e0-8ac0-005056c00000") IVoodooLogger;
 interface DECLSPEC_UUID("1d3d7f90-6f32-11e0-8ac0-005056c00000") IVoodooFileSystem;
 interface DECLSPEC_UUID("1d3d7f91-6f32-11e0-8ac0-005056c00000") IVoodooFile;
 interface DECLSPEC_UUID("1d3d7f92-6f32-11e0-8ac0-005056c00000") IVoodooImage;
+interface DECLSPEC_UUID("1d3d7f93-6f32-11e0-8ac0-005056c00000") IVoodooPlugin;
 
 #if defined(_COM_SMARTPTR_TYPEDEF)
 _COM_SMARTPTR_TYPEDEF(IVoodooCore,          __uuidof(IVoodooCore));
@@ -105,6 +107,7 @@ _COM_SMARTPTR_TYPEDEF(IVoodooLogger,        __uuidof(IVoodooLogger));
 _COM_SMARTPTR_TYPEDEF(IVoodooFileSystem,    __uuidof(IVoodooFileSystem));
 _COM_SMARTPTR_TYPEDEF(IVoodooFile,          __uuidof(IVoodooFile));
 _COM_SMARTPTR_TYPEDEF(IVoodooImage,         __uuidof(IVoodooImage));
+_COM_SMARTPTR_TYPEDEF(IVoodooPlugin,        __uuidof(IVoodooPlugin));
 #endif /*_COM_SMARTPTR_TYPEDEF*/
 
 typedef interface IVoodooCore       IVoodooCore;
@@ -120,6 +123,7 @@ typedef interface IVoodooLogger     IVoodooLogger;
 typedef interface IVoodooFileSystem IVoodooFileSystem;
 typedef interface IVoodooFile       IVoodooFile;
 typedef interface IVoodooImage      IVoodooImage;
+typedef interface IVoodooPlugin     IVoodooPlugin;
 
 /* Voodoo types */
 #include "VoodooTypes.hpp"
@@ -137,7 +141,7 @@ typedef void * CGpass;
 /* Voodoo version info */
 #include "VoodooVersion.hpp"
 #ifndef VOODOO_VERSION
-#define VOODOO_VERSION VOODOO_META_VERSION_VALUE(GLOBAL)
+#define VOODOO_VERSION VOODOO_GLOBAL_VERSION_REV
 #endif
 
 #undef INTERFACE
@@ -198,6 +202,25 @@ DECLARE_INTERFACE_(IVoodooParser, IDispatch)
 };
 
 typedef struct IVoodooParser *LPVOODOOPARSER, *PVOODOOPARSER;
+
+#undef INTERFACE
+#define INTERFACE IVoodooPlugin
+
+DECLARE_INTERFACE_(IVoodooPlugin, IDispatch)
+{
+    /* IUnknown */
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
+    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG, Release)(THIS) PURE;
+    /* IDispatch */
+    STDMETHOD(GetTypeInfoCount)(THIS_ UINT * pctinfo) PURE;
+    STDMETHOD(GetTypeInfo)(THIS_ UINT iTInfo, LCID lcid, ITypeInfo ** ppTInfo) PURE;
+    STDMETHOD(GetIDsOfNames)(THIS_ REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
+    STDMETHOD(Invoke)(THIS_ DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr) PURE;
+    /* IVoodooPlugin */
+    STDMETHOD(Initialize)(THIS_ IVoodooCore * pCore) PURE;
+    STDMETHOD(get_Core)(THIS_ IVoodooCore ** ppCore) PURE;
+};
 
 #undef INTERFACE
 #define INTERFACE IVoodooShader
@@ -346,8 +369,10 @@ DECLARE_INTERFACE_(IVoodooAdapter, IDispatch)
     STDMETHOD(GetTypeInfo)(THIS_ UINT iTInfo, LCID lcid, ITypeInfo ** ppTInfo) PURE;
     STDMETHOD(GetIDsOfNames)(THIS_ REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
     STDMETHOD(Invoke)(THIS_ DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr) PURE;
+    /* IVoodooPlugin */
+    STDMETHOD(Initialize)(THIS_ IVoodooCore * pCore) PURE;
+    STDMETHOD(get_Core)(THIS_ IVoodooCore ** ppCore) PURE;
     /* IVoodooAdapter */
-    STDMETHOD(get_Core)(THIS_ IVoodooCore **ppCore) PURE;
     STDMETHOD(LoadPass)(THIS_ IVoodooPass *pPass) PURE;
     STDMETHOD(UnloadPass)(THIS_ IVoodooPass *pPass) PURE;
     STDMETHOD(get_Pass)(THIS_ IVoodooPass **ppPass) PURE;
@@ -380,8 +405,10 @@ DECLARE_INTERFACE_(IVoodooHookSystem, IDispatch)
     STDMETHOD(GetTypeInfo)(THIS_ UINT iTInfo, LCID lcid, ITypeInfo ** ppTInfo) PURE;
     STDMETHOD(GetIDsOfNames)(THIS_ REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
     STDMETHOD(Invoke)(THIS_ DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr) PURE;
-    /* IVoodooHookSystem */
+    /* IVoodooPlugin */
+    STDMETHOD(Initialize)(THIS_ IVoodooCore * pCore) PURE;
     STDMETHOD(get_Core)(THIS_ IVoodooCore ** ppCore) PURE;
+    /* IVoodooHookSystem */
     STDMETHOD(Add)(THIS_ BSTR pName, FunctionPtr pSource, FunctionPtr pDest) PURE;
     STDMETHOD(Remove)(THIS_ BSTR pName) PURE;
     STDMETHOD(RemoveAll)(THIS) PURE;
@@ -403,8 +430,10 @@ DECLARE_INTERFACE_(IVoodoooLogger, IDispatch)
     STDMETHOD(GetTypeInfo)(THIS_ UINT iTInfo, LCID lcid, ITypeInfo ** ppTInfo) PURE;
     STDMETHOD(GetIDsOfNames)(THIS_ REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
     STDMETHOD(Invoke)(THIS_ DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr) PURE;
+    /* IVoodooPlugin */
+    STDMETHOD(Initialize)(THIS_ IVoodooCore * pCore) PURE;
+    STDMETHOD(get_Core)(THIS_ IVoodooCore ** ppCore) PURE;
     /* IVoodoooLogger */
-    STDMETHOD(get_Core)(THIS_  IVoodooCore ** ppCore) PURE;
     STDMETHOD(Open)(THIS_ BSTR pFilename, boolean Append) PURE;
     STDMETHOD(Close)(THIS) PURE;
     STDMETHOD(Dump)(THIS) PURE;
@@ -433,8 +462,10 @@ DECLARE_INTERFACE_(IVoodooFileSystem, IDispatch)
     STDMETHOD(GetTypeInfo)(THIS_ UINT iTInfo, LCID lcid, ITypeInfo ** ppTInfo) PURE;
     STDMETHOD(GetIDsOfNames)(THIS_ REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
     STDMETHOD(Invoke)(THIS_ DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr) PURE;
-    /* IVoodooFileSystem */
+    /* IVoodooPlugin */
+    STDMETHOD(Initialize)(THIS_ IVoodooCore * pCore) PURE;
     STDMETHOD(get_Core)(THIS_ IVoodooCore ** ppCore) PURE;
+    /* IVoodooFileSystem */
     STDMETHOD(AddDirectory)(THIS_ BSTR pPath) PURE;
     STDMETHOD(RemoveDirectory)(THIS_ BSTR pPath) PURE;
     STDMETHOD(FindFile)(THIS_ BSTR pPath, IVoodooFile ** ppFile) PURE;
