@@ -132,9 +132,9 @@ private:
     CComBSTR m_ConfigFile;
 
     /**
-     * Config file (actually a <code>pugi::xml_document *</code>, stored as void).
+     * Config file.
      */
-    IXMLDOMDocument * m_Config;
+    CComPtr<IXMLDOMDocument> m_Config;
 
     /**
      * Cg context used by void core.
@@ -144,27 +144,27 @@ private:
     /**
      * The currently bound (active) IAdapter implementation.
      */
-    IVoodooAdapter * m_Adapter;
+    CComPtr<IVoodooAdapter> m_Adapter;
 
     /**
      * The current ILogger implementation.
      */
-    IVoodooLogger * m_Logger;
+    CComPtr<IVoodooLogger> m_Logger;
 
     /**
      * The current IHookManager implementation.
      */
-    IVoodooHookSystem * m_HookSystem;
+    CComPtr<IVoodooHookSystem> m_HookSystem;
 
     /**
      * The current IFileSystem implementation.
      */
-    IVoodooFileSystem * m_FileSystem;
+    CComPtr<IVoodooFileSystem> m_FileSystem;
 
     /**
      * The current variable parser.
      */
-    IVoodooParser * m_Parser;
+    CComPtr<IVoodooParser> m_Parser;
 
     CMap<BSTR, BSTR, CComPtr<IVoodooParameter>, CComPtr<IVoodooParameter>> m_Parameters;
     CMap<BSTR, BSTR, CComPtr<IVoodooTexture>, CComPtr<IVoodooTexture>> m_Textures;

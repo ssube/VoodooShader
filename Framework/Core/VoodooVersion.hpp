@@ -85,7 +85,7 @@
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     10
 #define VOODOO_GLOBAL_VERSION_PATCH     4
-#define VOODOO_GLOBAL_VERSION_REV       209
+#define VOODOO_GLOBAL_VERSION_REV       212
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   VOODOO_META_STRING("Copyright (c) 2010-2011 by Sean Sube")
 #define VOODOO_GLOBAL_COPYRIGHT_FULL\
     VOODOO_META_STRING("Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube. &lt;br /&gt;\n")\

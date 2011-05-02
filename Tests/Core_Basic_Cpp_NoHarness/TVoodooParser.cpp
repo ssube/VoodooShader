@@ -59,6 +59,12 @@ BEGIN_TESTF(Parser_EmptyVar, ParserFixture)
     hr = pParser->Parse(msg, PF_None, &msg);
     WIN_ASSERT_TRUE(SUCCEEDED(hr));
     WIN_ASSERT_EQUAL(expected, msg, _T("String mismatch:\n\tParsed: %s\n"),msg );
+
+    hr = pParser->Remove(varname1);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr));
+
+    hr = pParser->Remove(varname2);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr));
 }
 END_TESTF;
 
@@ -76,6 +82,20 @@ BEGIN_TESTF(Parser_SysOverwrite, ParserFixture)
     WIN_ASSERT_TRUE(FAILED(hr));
 
     hr = pParser->Parse(msg, PF_None, &msg);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr));
+    WIN_ASSERT_EQUAL(expected, msg, _T("String mismatch:\n\tParsed: %s\n"),msg );
+
+    hr = pParser->Remove(varname);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr));
+}
+END_TESTF;
+
+BEGIN_TESTF(Parser_StateVar, ParserFixture)
+{
+    CComBSTR msg =      L"this is a $(svtest:state variable test)$(svtest) msg.";
+    CComBSTR expected = L"this is a state variable test msg.";
+
+    HRESULT hr = pParser->Parse(msg, PF_None, &msg);
     WIN_ASSERT_TRUE(SUCCEEDED(hr));
     WIN_ASSERT_EQUAL(expected, msg, _T("String mismatch:\n\tParsed: %s\n"),msg );
 }

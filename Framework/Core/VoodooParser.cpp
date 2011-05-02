@@ -190,7 +190,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dic
         {
             // Erase the variable sequence if it is an empty variable and restart the loop
             CStringW output = iteration.Left(startpos - 1);
-            output += iteration.Right(endpos);
+            output += iteration.Mid(endpos+1);
 
             iteration = output;
             continue;

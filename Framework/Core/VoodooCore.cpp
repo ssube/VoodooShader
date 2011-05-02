@@ -17,7 +17,7 @@ CVoodooCore::CVoodooCore()
 
 CVoodooCore::~CVoodooCore()
 {
-    if ( m_Logger )
+    if ( m_Logger != NULL )
     {
         m_Logger->Close();
     }
@@ -108,7 +108,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     }
 
     // Start setting things up
-    IXMLDOMNode * pCoreNode = NULL;
+    CComPtr<IXMLDOMNode> pCoreNode = NULL;
     CComBSTR coreNodeStr = L"/VoodooConfig/Core";
     hr = m_Config->selectSingleNode(coreNodeStr, &pCoreNode);
 
@@ -139,11 +139,11 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     // Load config vars
     CComBSTR queryVarNodes = L"/VoodooConfig/Variables/Variable";
 
-    IXMLDOMNodeList * pVarList = NULL;
+    CComPtr<IXMLDOMNodeList> pVarList = NULL;
     hr = m_Config->selectNodes(queryVarNodes, &pVarList);
     if ( SUCCEEDED(hr) )
     {
-        IXMLDOMNode * pVarNode = NULL;
+        CComPtr<IXMLDOMNode> pVarNode = NULL;
         while ( ( hr = pVarList->nextNode(&pVarNode) ) == S_OK && pVarNode != NULL )
         {
             IXMLDOMNode * pNameNode, * pTextNode;
@@ -155,13 +155,14 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
             pTextNode->get_nodeValue(&text);
 
             m_Parser->Add(name.bstrVal, text.bstrVal);
+            pVarNode = NULL;
         }
     }
 
     // Lookup classes
     {
         CComBSTR query = L"./Logger/text()";
-        IXMLDOMNode * pNode = NULL;
+        CComPtr<IXMLDOMNode> pNode = NULL;
         if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
         {
             VARIANT v;
@@ -177,7 +178,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
                 m_Logger->Initialize(this);
 
                 CComBSTR filequery = L"./LogFile/text()";
-                IXMLDOMNode * pFileNode = NULL;
+                CComPtr<IXMLDOMNode> pFileNode = NULL;
                 if ( SUCCEEDED(pCoreNode->selectSingleNode(filequery, &pFileNode)) )
                 {
                     VARIANT v;
@@ -192,7 +193,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 
     {
         CComBSTR query = L"./HookSystem/text()";
-        IXMLDOMNode * pNode;
+        CComPtr<IXMLDOMNode> pNode;
         if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
         {
             VARIANT v;
@@ -201,7 +202,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
             m_Parser->Parse(str, PF_None, &str);
 
             hr = InstanceFromString(str, IID_IVoodooHookSystem, (void**)&m_HookSystem);
-            if ( FAILED(hr) || m_FileSystem == NULL )
+            if ( FAILED(hr) || m_HookSystem == NULL )
             {
                 return VSFERR_BAD_CLSID;
             }
@@ -210,7 +211,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 
     {
         CComBSTR query = L"./FileSystem/text()";
-        IXMLDOMNode * pNode;
+        CComPtr<IXMLDOMNode> pNode;
         if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
         {
             VARIANT v;
@@ -228,7 +229,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 
     {
         CComBSTR query = L"./Adapter/text()";
-        IXMLDOMNode * pNode;
+        CComPtr<IXMLDOMNode> pNode;
         if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
         {
             VARIANT v;
