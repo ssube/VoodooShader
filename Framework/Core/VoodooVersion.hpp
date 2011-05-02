@@ -30,14 +30,16 @@
 #   define VOODOO_META_STRING_STR(arg) arg
 #endif
 
-#define VOODOO_META_TOSTRING(arg) VOODOO_META_STRING_ARG(arg)
-#define VOODOO_META_STRING(arg) VOODOO_META_STRING_STR(arg)
+#define VOODOO_META_TOSTRING(arg)   VOODOO_META_STRING_ARG(arg)
+#define VOODOO_META_STRING(arg)     VOODOO_META_STRING_STR(arg)
 
 #ifdef _DEBUG
-#   define VOODOO_META_DEBUG_BOOL true
+#   define VOODOO_META_DEBUG_BOOL   true
+#   define VOODOO_META_DEBUG_VBOOL  VARIANT_TRUE
 #   define VOODOO_META_DEBUG_STRING VOODOO_META_STRING(" (DEBUG)")
 #else
-#   define VOODOO_META_DEBUG_BOOL false
+#   define VOODOO_META_DEBUG_BOOL   false
+#   define VOODOO_META_DEBUG_VBOOL  VARIANT_FALSE
 #   define VOODOO_META_DEBUG_STRING
 #endif
 
@@ -73,7 +75,7 @@
  * Creates a Version structure with data for the given module.
  */
 #define VOODOO_META_VERSION_STRUCT(token)\
-    { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }
+    { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_VBOOL }
 //-----------------------------------------------------------------------------
 
 

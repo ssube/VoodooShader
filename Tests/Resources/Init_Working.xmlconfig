@@ -5,13 +5,14 @@
     </Variables>
 
     <Core>
-        <Logger>{1d3d7fac-6f32-11e0-8ac0-005056c00000}</Logger>
+        <!-- Internal: <Logger>{1d3d7fac-6f32-11e0-8ac0-005056c00000}</Logger> -->
+        <!-- Xml --> <Logger>{BB6E7CAD-9F9A-4083-A618-47E62921F940}</Logger>
         <HookSystem>{1d3d7fab-6f32-11e0-8ac0-005056c00000}</HookSystem>
         <FileSystem>{1d3d7fad-6f32-11e0-8ac0-005056c00000}</FileSystem>
         <Adapter>{1d3d7faa-6f32-11e0-8ac0-005056c00000}</Adapter>
 
         <!-- Log filename. -->  
-        <LogFile>$(runroot)\Voodoo_$($(adapter)_Logname)</LogFile> 
+        <LogFile>.\Voodoo_$($(adapter)_Logname).log</LogFile> 
         <LogLevel>0xFF</LogLevel>
     </Core>
 

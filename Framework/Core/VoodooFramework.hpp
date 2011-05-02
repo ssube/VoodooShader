@@ -26,18 +26,22 @@
  * 
  * It is the only file which needs included to use or define Voodoo classes in other modules,
  * and should be included by all Voodoo-compatible code.
- * 
- * To use the IIDs and CLSIDs included, you should link against VoodooGUIDs.lib (static lib).
  **/
 
+#ifdef __cplusplus
+
 #define COM_NO_WINDOWS_H
-#include <objbase.h>
-#include <windows.h>
+#include "objbase.h"
+#include "windows.h"
+#include "oaidl.h"
 
 /* GUID implement macro (to prevent linking reqs) */
 #define IMPLEMENT_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
     extern const GUID name;\
     const DECLSPEC_SELECTANY GUID name = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
+
+/* Library LIBID */
+IMPLEMENT_GUID(LIBID_Voodoo_Core,      0x1d3d7f85, 0x6f32, 0x11e0, 0x8a, 0xc0, 0x00, 0x50, 0x56, 0xc0, 0x00, 0x00);
 
 /* Interface IIDs */
 IMPLEMENT_GUID(IID_IVoodooCore,        0x1d3d7f86, 0x6f32, 0x11e0, 0x8a, 0xc0, 0x00, 0x50, 0x56, 0xc0, 0x00, 0x00);
@@ -144,10 +148,11 @@ typedef void * CGpass;
 #define VOODOO_VERSION VOODOO_GLOBAL_VERSION_REV
 #endif
 
+/* Voodoo/Core interfaces */
 #undef INTERFACE
 #define INTERFACE IVoodooCore
 
-DECLARE_INTERFACE_(IVoodooCore, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooCore, IDispatch, "1d3d7f86-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -167,7 +172,7 @@ DECLARE_INTERFACE_(IVoodooCore, IDispatch)
     STDMETHOD(get_Logger)(THIS_ IVoodooLogger ** ppLogger) PURE;
     STDMETHOD(get_Config)(THIS_ IUnknown ** ppConfig) PURE;
     STDMETHOD(get_CgContext)(THIS_ VARIANT * pCgContext) PURE;
-    STDMETHOD(put_CgContext)THIS_ (VARIANT CgContext) PURE;
+    STDMETHOD(put_CgContext)(THIS_ VARIANT CgContext) PURE;
     STDMETHOD(CreateShader)(THIS_ IVoodooFile * pFile, SAFEARRAY * pArgs, IVoodooShader ** ppShader) PURE;
     STDMETHOD(CreateParameter)(THIS_ BSTR pName, EnumType Type, IVoodooParameter ** ppParameter) PURE;
     STDMETHOD(CreateTexture)(THIS_ BSTR pName, TextureDesc Desc, VARIANT Data, IVoodooTexture ** ppTexture) PURE;
@@ -184,7 +189,7 @@ typedef struct IVoodooCore *LPVOODOOCORE, *PVOODOOCORE;
 #undef INTERFACE
 #define INTERFACE IVoodooParser
 
-DECLARE_INTERFACE_(IVoodooParser, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooParser, IDispatch, "1d3d7f87-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -196,7 +201,7 @@ DECLARE_INTERFACE_(IVoodooParser, IDispatch)
     STDMETHOD(GetIDsOfNames)(THIS_ REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
     STDMETHOD(Invoke)(THIS_ DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr) PURE;
     /* IVoodooParser */
-    STDMETHOD(Add)(THIS_ BSTR pName, BSTR pValue, EnumType System = VT_Normal) PURE;
+    STDMETHOD(Add)(THIS_ BSTR pName, BSTR pValue, EnumType System) PURE;
     STDMETHOD(Remove)(THIS_ BSTR pName) PURE;
     STDMETHOD(Parse)(THIS_ BSTR pString, EnumType Flags, LPBSTR pParsed) PURE;
 };
@@ -206,7 +211,7 @@ typedef struct IVoodooParser *LPVOODOOPARSER, *PVOODOOPARSER;
 #undef INTERFACE
 #define INTERFACE IVoodooPlugin
 
-DECLARE_INTERFACE_(IVoodooPlugin, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooPlugin, IDispatch, "1d3d7f93-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -225,7 +230,7 @@ DECLARE_INTERFACE_(IVoodooPlugin, IDispatch)
 #undef INTERFACE
 #define INTERFACE IVoodooShader
 
-DECLARE_INTERFACE_(IVoodooShader, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooShader, IDispatch, "1d3d7f88-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -253,7 +258,7 @@ typedef struct IVoodooShader *LPVOODOOSHADER, *PVOODOOSHADER;
 #undef INTERFACE
 #define INTERFACE IVoodooTechnique
 
-DECLARE_INTERFACE_(IVoodooTechnique, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooTechnique, IDispatch, "1d3d7f89-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -279,7 +284,7 @@ typedef struct IVoodooTechnique *LPVOODOOTECHNIQUE, *PVOODOOTECHNIQUE;
 #undef INTERFACE
 #define INTERFACE IVoodooPass
 
-DECLARE_INTERFACE_(IVoodooPass, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooPass, IDispatch, "1d3d7f8a-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -305,7 +310,7 @@ typedef struct IVoodooPass *LPVOODOOPASS, *PVOODOOPASS;
 #undef INTERFACE
 #define INTERFACE IVoodooTexture
 
-DECLARE_INTERFACE_(IVoodooTexture, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooTexture, IDispatch, "1d3d7f8b-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -327,7 +332,7 @@ typedef struct IVoodooTexture *LPVOODOOTEXTURE, *PVOODOOTEXTURE;
 #undef INTERFACE
 #define INTERFACE IVoodooParameter
 
-DECLARE_INTERFACE_(IVoodooParameter, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooParameter, IDispatch, "1d3d7f8c-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -358,7 +363,7 @@ typedef struct IVoodooParameter *LPVOODOOPARAMETER, *PVOODOOPARAMETER;
 #undef INTERFACE
 #define INTERFACE IVoodooAdapter
 
-DECLARE_INTERFACE_(IVoodooAdapter, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooAdapter, IVoodooPlugin, "1d3d7f8d-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -394,7 +399,7 @@ typedef struct IVoodooAdapter *LPVOODOOADAPTER, *PVOODOOADAPTER;
 #undef INTERFACE
 #define INTERFACE IVoodooHookSystem
 
-DECLARE_INTERFACE_(IVoodooHookSystem, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooHookSystem, IVoodooPlugin, "1d3d7f8e-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -419,7 +424,7 @@ typedef struct IVoodooHookSystem *LPVOODOOHOOKSYSTEM, *PVOODOOHOOKSYSTEM;
 #undef INTERFACE
 #define INTERFACE IVoodoooLogger
 
-DECLARE_INTERFACE_(IVoodoooLogger, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooLogger, IVoodooPlugin, "1d3d7f8f-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -434,7 +439,7 @@ DECLARE_INTERFACE_(IVoodoooLogger, IDispatch)
     STDMETHOD(Initialize)(THIS_ IVoodooCore * pCore) PURE;
     STDMETHOD(get_Core)(THIS_ IVoodooCore ** ppCore) PURE;
     /* IVoodoooLogger */
-    STDMETHOD(Open)(THIS_ BSTR pFilename, boolean Append) PURE;
+    STDMETHOD(Open)(THIS_ BSTR pFilename, VARIANT_BOOL Append) PURE;
     STDMETHOD(Close)(THIS) PURE;
     STDMETHOD(Dump)(THIS) PURE;
     STDMETHOD(get_LogLevel)(THIS_ EnumType * pLevel) PURE;
@@ -446,12 +451,12 @@ DECLARE_INTERFACE_(IVoodoooLogger, IDispatch)
     STDMETHOD(put_BufferSize)(THIS_ int Size) PURE;
 };
 
-typedef struct IVoodooLogger *LPVOODOOLOGGER, *PVOODOOLOGGER;
+typedef IVoodooLogger *LPVOODOOLOGGER, *PVOODOOLOGGER;
 
 #undef INTERFACE
 #define INTERFACE IVoodooFileSystem
 
-DECLARE_INTERFACE_(IVoodooFileSystem, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooFileSystem, IVoodooPlugin, "1d3d7f90-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -477,7 +482,7 @@ typedef struct IVoodooFileSystem *LPVOODOOFILESYSTEM, *PVOODOOFILESYSTEM;
 #undef INTERFACE
 #define INTERFACE IVoodooFile
 
-DECLARE_INTERFACE_(IVoodooFile, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooFile, IDispatch, "1d3d7f91-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -501,7 +506,7 @@ typedef struct IVoodooFile *LPVOODOOFILE, *PVOODOOFILE;
 #undef INTERFACE
 #define INTERFACE IVoodooImage
 
-DECLARE_INTERFACE_(IVoodooImage, IDispatch)
+DECLARE_INTERFACE_IID_(IVoodooImage, IDispatch, "1d3d7f92-6f32-11e0-8ac0-005056c00000")
 {
     /* IUnknown */
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void ** ppvObject) PURE;
@@ -583,6 +588,10 @@ typedef struct IVoodooImage *LPVOODOOIMAGE, *PVOODOOIMAGE;
 
 // IVoodooLogger
 #define VSFERR_FILE_ERROR       MAKE_VSF_IERR(0x0001)
+#define VSFERR_LOG_ERROR        MAKE_VSF_IERR(0x0003)
+#define VSFOK_LOG_LEVEL         MAKE_VSF_IOK(0x0002)
 
 // IVoodooParser
 #define VSFERR_IS_SYSVAR        MAKE_VSF_IERR(0x0001)
+
+#endif /*__cplusplus*/

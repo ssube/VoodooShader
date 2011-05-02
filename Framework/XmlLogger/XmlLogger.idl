@@ -1,0 +1,52 @@
+// XmlLogger.idl : IDL source for XmlLogger
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (XmlLogger.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+cpp_quote("#include \"VoodooFramework.hpp\"")
+
+[
+	object,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,	
+	pointer_default(unique)
+]
+interface IComponentRegistrar : IDispatch
+{
+	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
+	[id(2)]	HRESULT RegisterAll();
+	[id(3)]	HRESULT UnregisterAll();
+	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+};
+
+[
+	uuid(1DC3205C-29C3-4A33-9DAE-42F2745DAE21),
+	version(1.0),
+	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{BCFBB52D-E864-453A-82FA-568180DE0DAF}")
+]
+library XmlLoggerLib
+{
+	importlib("stdole2.tlb");
+    importlib("Voodoo_Core.tlb");
+
+	[
+		uuid(BCFBB52D-E864-453A-82FA-568180DE0DAF)		
+	]
+	coclass CompReg
+	{
+		[default] interface IComponentRegistrar;
+	};
+	[		
+		uuid(BB6E7CAD-9F9A-4083-A618-47E62921F940)		
+	]
+	coclass XmlLogger
+	{
+		[default] interface IVoodooLogger;
+	};
+};
+

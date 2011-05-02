@@ -150,15 +150,6 @@
     <ClInclude Include="Common.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VoodooVersion.hpp">
-      <Filter>Header Files\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="VoodooTypes.hpp">
-      <Filter>Header Files\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="VoodooFramework.hpp">
-      <Filter>Header Files\Public</Filter>
-    </ClInclude>
     <ClInclude Include="Docs\Docs_Code.hpp">
       <Filter>Header Files\Docs</Filter>
     </ClInclude>
@@ -170,6 +161,15 @@
     </ClInclude>
     <ClInclude Include="Docs\Docs_Vars.hpp">
       <Filter>Header Files\Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooFramework.hpp">
+      <Filter>Header Files\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooTypes.hpp">
+      <Filter>Header Files\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooVersion.hpp">
+      <Filter>Header Files\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

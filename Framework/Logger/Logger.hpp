@@ -21,201 +21,132 @@
 
 #pragma once
 
-#include <fstream>
-#include <time.h>
+#include <afx.h>
+
+#define STRICT
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0500
+#endif
+#define _ATL_ATTRIBUTES
+#define _ATL_APARTMENT_THREADED
+#define _ATL_NO_AUTOMATIC_NAMESPACE
+#define COM_NO_WINDOWS_H
+
+#include <atlbase.h>
+#include <atlcom.h>
+#include <atlwin.h>
+#include <atltypes.h>
+#include <atlctl.h>
+#include <atlhost.h>
+#include <atlplus.h>
+
+using namespace ATL;
+
+#include <iostream>
 #include <stdio.h>
-#include <stdarg.h>
 
-#define VOODOO_IMPORT
-#include "Voodoo_Core.hpp"
+using std::wcout;
 
-// Hide the DLL-interface warning
-#pragma warning(disable:4251)
+//#include "Core_i.h"
+#include "VoodooFramework.h"
 
-namespace VoodooShader
+[module(dll, name="Voodoo_XmlLogger")];
+//#import "Debug\\Voodoo_Core.tlb" embedded_idl("emitidl")
+[emitidl];
+
+/**
+ * Provides a simple implementation of ILogger, printing a neatly-formatted Xml log. These
+ * logs can be opened with the standard log viewer and support all features. 
+ * 
+ * @note In debug builds, this logger also prints all messages to cout. If a debugger is
+ *    attached, warnings and errors are printed to its output window.
+ * 
+ * @addtogroup VoodooXmlLogger Voodoo/XmlLogger
+ * @{
+ */
+
+/**
+ * Xml logger class, writes neatly formatted logs for use with the log viewer.
+ * Supports all Voodoo ILogger features and debug logging (with no buffer).
+ * 
+ * @warning If the logger isn't destroyed properly, the main tag of the log file won't be closed 
+ *    and the log won't be valid.
+ */
+[
+    coclass, default(IVoodooLogger),
+    vi_progid("VoodooXmlLogger.Logger"), progid("VoodooXmlLogger.Logger.1"),
+    uuid("1d3d7fb0-6f32-11e0-8ac0-005056c00000")
+]
+class XmlLogger
+    : public IVoodooLogger
 {
-    namespace XmlLogger
+public:
+    /**
+     * Default constructor, opens a log file with the given name and mode.
+     *
+     * @param core The core to bind this logger to.
+     */
+    XmlLogger();
+
+    /** 
+     * Default destructor, flushes and closes the log file (if open).
+     */
+    virtual ~XmlLogger();
+
+    virtual HRESULT STDMETHODCALLTYPE Initialize(IVoodooCore *pCore);
+    virtual HRESULT STDMETHODCALLTYPE get_Core(IVoodooCore **ppCore);
+    virtual HRESULT STDMETHODCALLTYPE Open(BSTR pFilename, VARIANT_BOOL Append);
+    virtual HRESULT STDMETHODCALLTYPE Close(void);
+    virtual HRESULT STDMETHODCALLTYPE Dump(void);
+    virtual HRESULT STDMETHODCALLTYPE get_LogLevel(DWORD *pLevel);
+    virtual HRESULT STDMETHODCALLTYPE put_LogLevel(DWORD Level);
+    virtual HRESULT STDMETHODCALLTYPE LogModule(VersionStruct Module);
+    virtual HRESULT STDMETHODCALLTYPE Log(DWORD Level, BSTR pModule, BSTR pFormat, SAFEARRAY * ppArgs);
+    virtual HRESULT STDMETHODCALLTYPE LogList(DWORD Level, BSTR pModule, BSTR pFormat, VARIANT pList);
+    virtual HRESULT STDMETHODCALLTYPE get_BufferSize(int *pSize);
+    virtual HRESULT STDMETHODCALLTYPE put_BufferSize(int Size);
+
+private:
+    /**
+     * Formats a timestamp for the log. The timestamp will have the 
+     * form <code>HHMMSS</code>. Leading zeros are guaranteed to be
+     * present, so the timestamp length is 6 chars.
+     *
+     * @note If the system time cannot be retrieved, an equal-length error 
+     *       stamp of <code>000000</code> will be returned.
+     */
+    CStringW STDMETHODCALLTYPE LogTime();
+
+    /**
+     * Formats a date for the log. The date will have the form 
+     * <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present,
+     * so the date length is 8 chars.
+     *
+     * @note If the system time cannot be retrieved, an equal-length error 
+     *       stamp of <code>00000000</code> will be returned.
+     */
+    CStringW STDMETHODCALLTYPE LogDate();
+
+    /**
+     * Formats the system's current tick count. The stamp will have the
+     * form <code>xxxxxxxxx</code>, with a potentially varying length. This
+     * records ticks, usually ms since system start.
+     */
+    CStringW STDMETHODCALLTYPE LogTicks();
+
+    inline void DebugLog(LPCWSTR pMsg)
     {
-        /**
-         * Provides a simple implementation of ILogger, printing a neatly-formatted Xml log. These
-         * logs can be opened with the standard log viewer and support all features. 
-         * 
-         * @note In debug builds, this logger also prints all messages to cout. If a debugger is
-         *    attached, warnings and errors are printed to its output window.
-         * 
-         * @addtogroup VoodooXmlLogger Voodoo/XmlLogger
-         * @{
-         */
+#ifdef _DEBUG
+        OutputDebugString(pMsg);
+        wcout << pMsg;
+#endif
+    };
 
-        /**
-         * Return the module's version.
-         */
-        Version API_ModuleVersion();
-
-        int API_ClassCount();
-
-        const char * API_ClassInfo
-        (
-            _In_ int number
-        );
-
-        IObject * API_ClassCreate
-        (
-            _In_ int number, 
-            _In_ Core * core
-        );
-
-        /**
-         * Xml logger class, writes neatly formatted logs for use with the log viewer.
-         * Supports all Voodoo ILogger features and debug logging (with no buffer).
-         * 
-         * @warning If the logger isn't destroyed properly, the main tag of
-         *       the log file won't be closed and the log won't be valid.
-         */
-        class  XmlLogger
-            : public VoodooShader::ILogger
-        {
-        public:
-            /**
-             * Default constructor, opens a log file with the given name and mode.
-             *
-             * @param core The core to bind this logger to.
-             */
-            XmlLogger
-            (
-                _In_ Core * core
-            );
-
-            /** 
-             * Default destructor, flushes and closes the log file (if open).
-             */
-            ~XmlLogger();
-
-            const char * GetObjectClass();
-
-            /**
-             * Opens a file for use by this Logger.
-             *
-             * @param filename The name of the file to open (may contain an absolute
-             *        or relative path).
-             * @param append Flag specifying the open mode; if true, any existing log is truncated.
-             * @return Success of the open operation.
-             */
-            bool Open
-            (
-                _In_ const char * filename, 
-                _In_ bool append
-            );
-
-            /**
-             * Closes the log file, if one is open.
-             */
-            void Close();
-
-            /**
-             * Set the default minimum message level. Messages below this level will
-             * not be logged.
-             *
-             * @param level The minimum log level.
-             */
-            void SetLogLevel
-            (
-                _In_ LogLevel level
-            );
-
-            /**
-             * Formats a timestamp for the log. The timestamp will have the 
-             * form <code>HHMMSS</code>. Leading zeros are guaranteed to be
-             * present, so the timestamp length is 6 chars.
-             *
-             * @note If the system time cannot be retrieved, an equal-length error 
-             *       stamp of <code>000000</code> will be returned.
-             */
-            String LogTime();
-
-            /**
-             * Formats a date for the log. The date will have the form 
-             * <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present,
-             * so the date length is 8 chars.
-             *
-             * @note If the system time cannot be retrieved, an equal-length error 
-             *       stamp of <code>00000000</code> will be returned.
-             */
-            String LogDate();
-
-            /**
-             * Formats the system's current tick count. The stamp will have the
-             * form <code>xxxxxxxxx</code>, with a potentially varying length. This
-             * records ticks, usually ms since system start.
-             */
-            String LogTicks();
-
-            /**
-             * Writes a module stamp to the log. This records the name and version
-             * info for a select module (used to log what modules were present during
-             * a logging session).
-             * 
-             * @param module The module version info to log.
-             */
-            void LogModule
-            (
-                _In_ Version module
-            );
-
-            /**
-             * Log a message, may be formatted with printf syntax.
-             *
-             * @param level The level for this message.
-             * @param module The logging module's name.
-             * @param msg The message format string.
-             * @param ... The parameters to insert.
-             *
-             * @warning This function has a maximum (formatted) message length of
-             *        4096 characters. This can be changed if it becomes an issue.
-             */
-            void Log
-            (
-                _In_ LogLevel level,
-                _In_ const char * module,
-                _In_ _Printf_format_string_ const char * msg, 
-                ...
-            );
-
-            /**
-             * Sets the internal buffer to a given size.
-             *
-             * @param bytes The size.
-             * @note A size of 0 will force messages to be written directly to disk.
-             *        This may have a notable performance hit, but makes debug 
-             *        messages more likely to survive crashes.
-             */
-            void SetBufferSize
-            (
-                _In_ unsigned int bytes
-            );
-
-            /**
-             * Immediately writes all pending data to disk.
-             *
-             * @note This is useful for catchable errors which may have fatal 
-             *        consequences (Exception calls this in case the exception is 
-             *        uncaught).
-             * @warning This may not (probably will not) be any good in case of a 
-             *        segfault or other crash. If you need complete debug logging, 
-             *        call Logger::SetBufferSize(unsigned int) with a buffer size of 0
-             *        and all logged messages <em>should</em> make it to disk, even 
-             *        during fatal crashes.
-             */
-            void Dump();
-
-        private:
-            Core * mCore;
-            LogLevel mLogLevel;
-            std::fstream mLogFile;
-            tm * mLocalTime;
-        };
-        /**
-         * @}
-         */
-    }
-}
+    ULONG m_Refrs;
+    IVoodooCore * m_Core;
+    LogLevel m_LogLevel;
+    CStdioFile m_LogFile;
+};
+/**
+ * @}
+ **/

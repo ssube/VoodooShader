@@ -21,6 +21,29 @@
 
 #pragma once
 
+typedef DWORD EnumType;
+
+typedef enum TextureFormat      TextureFormat;
+typedef enum ParameterType      ParameterType;
+typedef enum ParameterCategory  ParameterCategory;
+typedef enum ProgramStage       ProgramStage;
+typedef enum TextureStage       TextureStage;
+typedef enum FileOpenMode       FileOpenMode;
+typedef enum LogLevel           LogLevel;
+typedef enum ParseFlags         ParseFlags;
+typedef enum VariableType       VariableType;
+
+typedef struct InitParams       InitParams;
+typedef struct TextureDesc      TextureDesc;
+typedef struct TextureRegion    TextureRegion;
+typedef struct VersionStruct    VersionStruct;
+typedef struct float2           float2;
+typedef struct float3           float3;
+typedef struct float4           float4;
+typedef struct VertexStruct     VertexStruct;
+typedef struct LightStruct      LightStruct;
+typedef struct FunctionPtr      FunctionPtr;
+
 enum TextureFormat
 {	
     TF_Unknown	    = 0,
@@ -237,5 +260,3 @@ struct FunctionPtr
 {
     unsigned __int64 Address;
 };
-
-typedef DWORD EnumType;

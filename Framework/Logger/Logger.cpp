@@ -2,273 +2,200 @@
 
 #include "Logger_Version.hpp"
 
-#include <stdio.h>
-#include <sstream>
-#include <iomanip>
-
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <strsafe.h>
-
-using namespace std;
-
-namespace VoodooShader
+XmlLogger::XmlLogger()
+    : m_Core(NULL), m_LogLevel(LL_Initial)
 {
-    namespace XmlLogger
+}
+
+XmlLogger::~XmlLogger()
+{
+    m_LogFile.Close();
+}
+
+STDMETHODIMP XmlLogger::QueryInterface(REFIID iid, void ** pp) throw()
+{
+    if ( pp == NULL )
     {
-        //const char * XmlLoggerName = "{B531CD82-F741-4926-9929-0619E1317502}";
-        const char * XmlLoggerName = "XmlLogger";
+        return E_POINTER;
+    } else if ( iid == IID_IUnknown || iid == IID_IVoodooPlugin || iid == IID_IVoodooLogger ) {
+        this->AddRef();
+        *pp = this;
+        return S_OK;
+    } else {
+        *pp = NULL;
+        return E_NOINTERFACE;
+    }
+}
 
-        Version API_ModuleVersion()
-        {
-            Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
-            return moduleVersion;
-        }
+STDMETHODIMP_(ULONG) XmlLogger::AddRef()
+{
+    return (++m_Refrs);
+}
 
-        int API_ClassCount()
-        {
-            return 1;
-        }
+STDMETHODIMP_(ULONG) XmlLogger::Release()
+{
+    --m_Refrs;
+    if ( m_Refrs == 0 )
+    {
+        delete this;
+        return 0;
+    } else {
+        return m_Refrs;
+    }
+}
 
-        const char * API_ClassInfo
-        (
-            _In_ int number
-        )
-        {
-            if ( number == 0 )
-            {
-                return XmlLoggerName;
-            } else {
-                return NULL;
-            }
-        }
+STDMETHODIMP XmlLogger::Initialize(IVoodooCore * pCore)
+{
+    if ( pCore == NULL )
+    {
+        return VSFERR_INVALID_ARG;
+    }
 
-        IObject * API_ClassCreate
-        (
-            _In_ int number, 
-            _In_ Core * core
-        )
-        {
-            if ( number == 0 )
-            {
-                return new XmlLogger(core);
-            } else {
-                return NULL;
-            }
-        }
+    m_Core = pCore;
+    return S_OK;
+}
 
-        XmlLogger::XmlLogger(_In_ Core * core)
-            : mCore(core), mLogLevel(LL_Initial)
-        {
-            this->mLocalTime = new tm();
-        }
+STDMETHODIMP XmlLogger::get_Core(IVoodooCore **ppCore)
+{
+    if ( ppCore == NULL )
+    {
+        return E_INVALIDARG;
+    } else {
+        *ppCore = m_Core;
+        (*ppCore)->AddRef();
+        return S_OK;
+    }
+}
 
-        XmlLogger::~XmlLogger()
-        {
-            if ( this->mLogFile.is_open() )
-            {
-                this->Close();
-            }
+HRESULT XmlLogger::Open(BSTR pFilename, VARIANT_BOOL Append)
+{
+    if ( pFilename == NULL ) return VSFERR_INVALID_ARG;
 
-            if ( this->mLocalTime )
-            {
-                delete this->mLocalTime;
-            }
-        }
+    UINT create = CFile::modeWrite;
+    if ( Append == VARIANT_TRUE )
+    {
+        create |= CFile::modeNoTruncate;
+    } else {
+        create |= CFile::modeCreate;
+    }
 
-        const char * XmlLogger::GetObjectClass()
-        {
-            return XmlLoggerName;
-        }
+    if ( m_LogFile.Open(pFilename, create) == 0 )
+    {
+        return VSFERR_FILE_ERROR;
+    } else {
+        CStringW logMsg(L"<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+        logMsg.Append(L"\n<VoodooLog ");
+        logMsg.Append(this->LogDate());
+        logMsg.Append(this->LogTime());
+        logMsg.Append(this->LogTicks());
+        logMsg.Append(L" >\n");
 
-        bool XmlLogger::Open(const char* filename, bool append)
-        {
-            if ( this->mLogFile.is_open() )
-            {
-                this->Close();
-            }
+        this->DebugLog(logMsg);
+        this->m_LogFile.WriteString(logMsg);
 
-            unsigned int flags = ios_base::out;
-            if ( append )
-            {
-                flags |= ios_base::app;
-            } else {
-                flags |= ios_base::trunc;
-            }
+        this->Log(LL_Internal, VOODOO_LOGGER_NAME, L"Log file opened by XmlLogger::Open.", NULL);
 
-            char fullname[MAX_PATH];
-            StringCchCopyA(fullname, MAX_PATH, filename);
-            StringCchCatA(fullname, MAX_PATH, ".xmllog");
+        VersionStruct loggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
+        this->LogModule(loggerVersion);
+    }
+    return VSF_OK;
+}
 
-            this->mLogFile.open(fullname, flags);
+HRESULT XmlLogger::Close()
+{
+    m_LogFile.WriteString(L"</VoodooLog>");
+    m_LogFile.Close();
 
-            if ( this->mLogFile.is_open() )
-            {
-#ifdef _DEBUG
-                this->SetBufferSize(0);
-#endif
+    return VSF_OK;
+}
 
-                stringstream logMsg;
+HRESULT XmlLogger::Dump()
+{
+    m_LogFile.Flush();
+    return VSF_OK;
+}
 
-                logMsg << "<?xml version='1.0'?>\n<VoodooLog "; 
-                logMsg << this->LogDate(); 
-                logMsg << this->LogTime(); 
-                logMsg << this->LogTicks();
-                logMsg << ">\n";
+CStringW XmlLogger::LogTime()
+{
+    CTime time = CTime::GetCurrentTime();
 
-#ifdef _DEBUG
-                cout << logMsg.str();
-#endif
-                mLogFile << logMsg.str();
+    return time.Format(L" time=\"%H%M%S\" ");
+}
 
-                this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file opened by XmlLogger::Open.");
+CStringW XmlLogger::LogDate()
+{
+    CTime date = CTime::GetCurrentTime();
 
-                Version loggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
-                this->LogModule(loggerVersion);
+    return date.Format(L" time=\"%Y%m%d\" ");
+}
 
-                return true;
-            } else {
-                return false;
-            }
-        }
+CStringW XmlLogger::LogTicks()
+{
+    CStringW ticks;
+    ticks.Format(L" ticks=\"%u\" ", GetTickCount());
+    return ticks;
+}
 
-        void XmlLogger::Close()
-        {
-            if ( this->mLogFile.is_open() )
-            {
-                //this->Log(LL_Internal, VOODOO_LOGGER_NAME, "Log file closed by XmlLogger::Close.");
-                this->mLogFile << "</VoodooLog>\n";
-                this->mLogFile.close();
-            }
-        }
+HRESULT XmlLogger::LogModule
+(
+    VersionStruct version
+)
+{
+    //if ( !this->m_LogFile.GetSt() ) return VSFERR_FILE_ERROR;
 
-        String XmlLogger::LogTime()
-        {
-            time_t now = time(NULL);
+    CStringW logMsg;
 
-            if ( localtime_s(this->mLocalTime, &now) == 0 )
-            {
-                stringstream stamp;
-                stamp << " time=\"" << put_time(mLocalTime, "%H%M%S") << "\" ";
-                return stamp.str();
-            } else {
-                return String(" time=\"000000\" ");
-            }
-        }
+    logMsg.Format
+    (
+        L"    <Module name=\"%s\" major=\"%i\" minor=\"%i\" patch=\"%i\" rev=\"%i\" debug=\"%i\" />\n", 
+        version.Name, version.Major, version.Minor, version.Patch, version.Rev, (version.Debug == VARIANT_TRUE)
+    );
 
-        String XmlLogger::LogDate()
-        {
-            time_t now = time(NULL);
+    DebugLog(logMsg);
+    m_LogFile.WriteString(logMsg);
 
-            if ( localtime_s(this->mLocalTime, &now) == 0 )
-            {
-                stringstream stamp;
-                stamp << " date=\"" << put_time(mLocalTime, "%Y%m%d") << "\" ";
-                return stamp.str();
-            } else {
-                return String(" date=\"00000000\" ");
-            }
-        }
+    return VSF_OK;
+}
 
-        String XmlLogger::LogTicks()
-        {
-            stringstream stamp;
-            stamp << " ticks=\"" << GetTickCount() << "\" ";
-            return stamp.str();
-        }
+HRESULT XmlLogger::put_BufferSize(int Size)
+{
+    //if ( !this->mLogFile.is_open() ) return;
 
-        void XmlLogger::LogModule
-        (
-            Version version
-        )
-        {
-            if ( !this->mLogFile.is_open() ) return;
+    //this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
+}
 
-            stringstream logMsg;
+HRESULT XmlLogger::get_LogLevel(DWORD *pLevel)
+{
+    if ( pLevel == NULL ) return VSFERR_INVALID_ARG;
 
-            logMsg << "    <Module name=\"" << version.Name << "\" " <<
-                " major=\"" << version.Major << "\" " <<
-                " minor=\"" << version.Minor << "\" " <<
-                " patch=\"" << version.Patch << "\" " <<
-                " rev=\"" << version.Rev << "\" " <<
-                " debug=\"" << version.Debug << "\" />\n";
+    *pLevel = m_LogLevel;
+    return VSF_OK;
+}
 
-#ifdef _DEBUG
-            cout << logMsg.str();
-#endif
+HRESULT XmlLogger::put_LogLevel(DWORD Level)
+{
+    m_LogLevel = (LogLevel)Level;
+    return VSF_OK;
+}
 
-            mLogFile << logMsg.str();
-        }
+HRESULT XmlLogger::Log(DWORD Level, BSTR pModule, BSTR pMsg, SAFEARRAY * pArgs)
+{
+    try
+    {
+        //if ( !this->mLogFile.is_open() ) return;
+        DWORD mask = (LogLevel)(Level & m_LogLevel);
+        if ( !(mask & 0x0F) || !(mask & 0xF0) ) return VSFOK_LOG_LEVEL;
 
-        void XmlLogger::SetBufferSize(unsigned int bytes)
-        {
-            if ( !this->mLogFile.is_open() ) return;
+        CStringW logMsg;
+        logMsg.Format(L"    <Message severity=\"%X\" %s %s source=\"%s\">", Level, this->LogTime(), this->LogTicks(), pModule);
+        logMsg.Append(pMsg);
+        logMsg.Append(L"</Message>\n");
 
-            this->mLogFile.rdbuf()->pubsetbuf(0, bytes);
-        }
+        DebugLog(logMsg);
+        m_LogFile.WriteString(logMsg);
 
-        void XmlLogger::SetLogLevel(LogLevel level)
-        {
-            mLogLevel = level;
-        }
-
-        void XmlLogger::Log(LogLevel level, const char * module, const char * msg, ...)
-        {
-            va_list args;
-
-            if ( !this->mLogFile.is_open() ) return;
-
-            LogLevel mask = (LogLevel)( level & mLogLevel );
-            if ( !( mask & LL_Severity ) || !( mask & LL_Origin ) ) return;
-
-            try
-            {
-                // Format the message in memory to prevent partial messages from being dumped
-                stringstream logMsg;
-
-                logMsg << "    <Message severity=\"";
-                logMsg << level;
-                logMsg << "\" ";
-                logMsg << this->LogTime();
-                logMsg << this->LogTicks();
-                logMsg << " source=\"";
-                logMsg << module;
-                logMsg << "\">";
-
-                char buffer[4096];
-                va_start(args, msg);
-                _vsnprintf_s(buffer, 4096, 4096, msg, args);
-                buffer[4095] = 0;
-                va_end(args);
-
-                logMsg << buffer;
-
-                logMsg << "</Message>\n";
-
-#ifdef _DEBUG
-                if ( level == LL_Internal || level & ( LL_Warning | LL_Error ) )
-                {
-                    OutputDebugString(logMsg.str().c_str());
-                }
-
-                cout << logMsg.str();
-#endif
-                mLogFile << logMsg.str();
-            } catch ( std::exception exc ) {
-#ifdef _DEBUG
-                OutputDebugString(exc.what());
-#else
-                UNREFERENCED_PARAMETER(exc);
-#endif
-            }
-        }
-
-        void XmlLogger::Dump()
-        {
-            if ( this->mLogFile.is_open() )
-            {
-                this->mLogFile.flush();
-            }
-        }
+        return VSF_OK;
+    } catch ( CException & exc ) {
+        return VSFERR_LOG_ERROR;
     }
 }

@@ -143,19 +143,50 @@ STDMETHODIMP CVoodooLogger::put_LogLevel(
     return S_OK;
 }
 
-STDMETHODIMP CVoodooLogger::LogModule( 
-    /* [in] */ VersionStruct Module)
+STDMETHODIMP CVoodooLogger::LogModule(VersionStruct Module)
 {
+    UNREFERENCED_PARAMETER(Module);
+
     return E_NOTIMPL;
 }
 
-STDMETHODIMP CVoodooLogger::Log( 
+STDMETHODIMP CVoodooLogger::Log
+( 
     /* [in] */ DWORD Level,
     /* [in] */ BSTR pModule,
     /* [in] */ BSTR pFormat,
-    /* [in] */ SAFEARRAY * ppArgs)
+    /* [in] */ SAFEARRAY * ppArgs
+)
 {
-    return E_NOTIMPL;
+    if ( pFormat == NULL ) return VSFERR_INVALID_ARG;
+    if ( m_File.m_hFile == CFile::hFileNull ) return VSFERR_NO_FILE;
+    
+    //! @todo Implement proper formatting here that isn't so ugly.
+    CComSafeArray<VARIANT> args;
+    args.Attach(ppArgs);
+    CStringW msg(pFormat);
+
+    for ( ULONG carg = 0; carg < args.GetCount(); ++carg )
+    {
+        CStringW search;
+        search.Format(L"{%u}", carg);
+        // Format the arg alone
+        VARIANT varg = args.GetAt(carg);
+        CStringW farg;
+        switch ( V_VT(&varg)  )
+        {
+        case VT_UINT:
+            farg.Format(L"%u", V_UINT(&varg));
+            break;
+        default:
+            farg = L"-argerror-";
+        }
+
+        msg.Replace(search.GetString(), farg.GetString());
+    }
+
+    m_File.WriteString(msg);
+    return S_OK;
 }
 
 STDMETHODIMP CVoodooLogger::LogList( 

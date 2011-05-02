@@ -17,7 +17,10 @@ CVoodooCore::CVoodooCore()
 
 CVoodooCore::~CVoodooCore()
 {
-
+    if ( m_Logger )
+    {
+        m_Logger->Close();
+    }
 }
 
 STDMETHODIMP CVoodooCore::QueryInterface(REFIID iid, void ** pp) throw()
@@ -171,15 +174,17 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
             {
                 return VSFERR_BAD_CLSID;
             } else {
-                CComBSTR queryLF = L"./LogFile/text()";
+                m_Logger->Initialize(this);
+
+                CComBSTR filequery = L"./LogFile/text()";
                 IXMLDOMNode * pFileNode = NULL;
-                if ( SUCCEEDED(pCoreNode->selectSingleNode(queryLF, &pFileNode)) )
+                if ( SUCCEEDED(pCoreNode->selectSingleNode(filequery, &pFileNode)) )
                 {
-                    VARIANT fn;
-                    pFileNode->get_nodeValue(&fn);
-                    CComBSTR filename(fn.bstrVal);
+                    VARIANT v;
+                    pFileNode->get_nodeValue(&v);
+                    CComBSTR filename(v.bstrVal);
                     m_Parser->Parse(filename, PF_None, &filename);
-                    m_Logger->Open(filename, false);
+                    m_Logger->Open(filename, VARIANT_FALSE);
                 }
             }
         }
@@ -251,6 +256,11 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     m_Logger->LogModule(vfver);
     m_Logger->LogModule(vsver);
     m_Logger->LogModule(cgver);
+
+    // Init each object
+    m_HookSystem->Initialize(this);
+    m_FileSystem->Initialize(this);
+    m_Adapter->Initialize(this);
 
     // Core done loading
     LogMsg(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, L"Core initialization complete.");
