@@ -1,0 +1,52 @@
+// EHHook.idl : IDL source for EHHook
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (EHHook.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+cpp_quote("#include \"VoodooFramework.hpp\"")
+
+[
+	object,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,	
+	pointer_default(unique)
+]
+interface IComponentRegistrar : IDispatch
+{
+	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
+	[id(2)]	HRESULT RegisterAll();
+	[id(3)]	HRESULT UnregisterAll();
+	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+};
+
+[
+	uuid(663DAC87-A792-4639-8218-F3684AA73418),
+	version(1.0),
+	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{01C6187C-D3D1-4C0D-8D50-4BC3DA389583}")
+]
+library EHHookLib
+{
+	importlib("stdole2.tlb");
+    importlib("Voodoo_Core.tlb");
+
+	[
+		uuid(01C6187C-D3D1-4C0D-8D50-4BC3DA389583)		
+	]
+	coclass CompReg
+	{
+		[default] interface IComponentRegistrar;
+	};
+	[		
+		uuid(D187B7EF-998D-4639-A557-C878EBDC1B90)		
+	]
+	coclass EHHookSystem
+	{
+		[default] interface IVoodooHookSystem;
+	};
+};
+

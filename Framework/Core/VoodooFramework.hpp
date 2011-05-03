@@ -22,10 +22,16 @@
 #pragma once
 
 /** 
- * This file is the public-facing header for the Voodoo Shader Framework (Voodoo/Core module).
+ * @file VoodooFramework.hpp
+ * 
+ * This is the public-facing header for the Voodoo Shader Framework (Voodoo/Core module).
  * 
  * It is the only file which needs included to use or define Voodoo classes in other modules,
- * and should be included by all Voodoo-compatible code.
+ * and should be included by all Voodoo-compatible code. This file includes the version and general
+ * type headers.
+ * 
+ * You may, if necessary, include VoodooSupport.hpp to provide a small set of helper functions for
+ * use with Voodoo.
  **/
 
 #ifdef __cplusplus
@@ -446,7 +452,6 @@ DECLARE_INTERFACE_IID_(IVoodooLogger, IVoodooPlugin, "1d3d7f8f-6f32-11e0-8ac0-00
     STDMETHOD(put_LogLevel)(THIS_ EnumType Level) PURE;
     STDMETHOD(LogModule)(THIS_ VersionStruct Module) PURE;
     STDMETHOD(Log)(THIS_ EnumType Level, BSTR pModule, BSTR pFormat, SAFEARRAY * pArgs) PURE;
-    STDMETHOD(LogList)(THIS_ EnumType Level, BSTR pModule, BSTR pFormat, VARIANT pList) PURE;
     STDMETHOD(get_BufferSize)(THIS_ int * pSize) PURE;
     STDMETHOD(put_BufferSize)(THIS_ int Size) PURE;
 };

@@ -1,0 +1,26 @@
+HKCR
+{
+	Voodoo.EHHook.HookSystem.1 = s 'EHHookSystem Class'
+	{
+		CLSID = s '{D187B7EF-998D-4639-A557-C878EBDC1B90}'
+	}
+	Voodoo.EHHook.HookSystem = s 'EHHookSystem Class'
+	{
+		CurVer = s 'Voodoo.EHHook.HookSystem.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D187B7EF-998D-4639-A557-C878EBDC1B90} = s 'EHHookSystem Class'
+		{
+			ProgID = s 'Voodoo.EHHook.HookSystem.1'
+			VersionIndependentProgID = s 'Voodoo.EHHook.HookSystem'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{663DAC87-A792-4639-8218-F3684AA73418}'
+			Version = s '1.0'
+		}
+	}
+}

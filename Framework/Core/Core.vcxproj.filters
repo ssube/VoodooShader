@@ -171,6 +171,9 @@
     <ClInclude Include="VoodooVersion.hpp">
       <Filter>Header Files\Public</Filter>
     </ClInclude>
+    <ClInclude Include="VoodooSupport.hpp">
+      <Filter>Header Files\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Core.rc">

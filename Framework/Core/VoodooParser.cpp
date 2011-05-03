@@ -83,7 +83,7 @@ STDMETHODIMP CVoodooParser::Add(BSTR pName, BSTR pValue, DWORD Type)
 
     if ( m_Logger )
     {
-        LogMsg(m_Logger, LL_Debug|LL_Framework, VOODOO_CORE_NAME, L"Adding variable \"%s\" with value \"%s\".", name, value);
+        LogFormat(m_Logger, LL_Debug|LL_Framework, VOODOO_CORE_NAME, L"Adding variable \"%s\" with value \"%s\".", name, value);
     }
 
     if ( Type == VT_System )
@@ -94,7 +94,7 @@ STDMETHODIMP CVoodooParser::Add(BSTR pName, BSTR pValue, DWORD Type)
         } else {
             if ( m_Logger )
             {
-                LogMsg(m_Logger, LL_Warning|LL_Framework, VOODOO_CORE_NAME, L"Unable to add duplicate system variable \"%s\".", name);
+                LogFormat(m_Logger, LL_Warning|LL_Framework, VOODOO_CORE_NAME, L"Unable to add duplicate system variable \"%s\".", name);
             }
             return VSFERR_IS_SYSVAR;
         }

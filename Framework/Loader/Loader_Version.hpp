@@ -19,7 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "Version.hpp"
+#include "VoodooVersion.hpp"
 
 /**
  * @addtogroup VoodooLoader Voodoo/Loader

@@ -73,21 +73,6 @@ namespace VoodooShader
 
             const char * GetObjectClass();
         
-            /**
-             * Install a hook at the specified function.
-             *
-             * @param name The name for the hook.
-             * @param src The point to install the hook at.
-             * @param dest The function to redirect execution into.
-             * @return The success of the hook installation.
-             * @throws Exception if a hook with the same name already exists.
-             *
-             * @note The name is often the name of the function in src (&func) for
-             *    simplicities sake. 
-             * @warning The calling convention of src and dest must be identical, or bad
-             *    things might happen. This is only a bother with member functions, but
-             *    can be worked around relatively easily.
-             */
             bool CreateHook
             (
                 _In_ std::string name, 
@@ -95,18 +80,7 @@ namespace VoodooShader
                 _In_ void * dest
             );
         
-            /**
-             * Removes a single hook.
-             *
-             * @param name The name of the hook to remove.
-             * @return The success of the removal operation.
-             * @throws Exception of the hook is not found.
-             * 
-             * @warning <em>Do not</em>, under any circumstances, remove a hook while
-             *    execution is passing through the trampoline function. This can cause
-             *    the process to crash in rare cases. I'm not sure the reason, but it's
-             *    not good. Until I replace EasyHook, be careful!
-             */
+            
             bool RemoveHook
             (
                 _In_ std::string name

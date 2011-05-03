@@ -27,12 +27,14 @@
 
 #include <atlstr.h>
 
-#include "Core_i.h"
+#include "VoodooFramework.hpp"
 
 /**
  * @addtogroup VoodooLoader Voodoo/Loader
  * @{
  */
+
+void WINAPI ErrorMessage(LPTSTR pMsg, ...);
 
 VARIANT * PtrVariant(void * ptr);
 HMODULE LoadSystemLibrary(const PTCHAR libname);

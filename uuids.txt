@@ -1,28 +1,26 @@
 // 
 // Voodoo GUID stockpile.
 // 
-// These GUIDs are intended for use within Voodoo and are reserved
-// (please don't generate them for your own project! :P). They were 
-// generated sequentially to simplify the internals. More blocks may
-// be made and used if needed. A range is reserved for future (Ex, v2)
-// interfaces, core only.
+// These GUIDs are intended for use within Voodoo and are reserved (please don't generate them 
+// for your own project! :P). They were generated sequentially to simplify the internals. More 
+// blocks may be used if needed. A range is reserved for future (Ex, v2) interfaces, core only.
 //
 
-1d3d7f85-6f32-11e0-8ac0-005056c00000 // Voodoo/Core library
-1d3d7f86-6f32-11e0-8ac0-005056c00000 // IVoodooCore
-1d3d7f87-6f32-11e0-8ac0-005056c00000 // IVoodooParser
-1d3d7f88-6f32-11e0-8ac0-005056c00000 // IVoodooShader
-1d3d7f89-6f32-11e0-8ac0-005056c00000 // IVoodooTechnique 
-1d3d7f8a-6f32-11e0-8ac0-005056c00000 // IVoodooPass
-1d3d7f8b-6f32-11e0-8ac0-005056c00000 // IVoodooTexture
-1d3d7f8c-6f32-11e0-8ac0-005056c00000 // IVoodooParameter
-1d3d7f8d-6f32-11e0-8ac0-005056c00000 // IVoodooAdapter
-1d3d7f8e-6f32-11e0-8ac0-005056c00000 // IVoodooHookSystem
-1d3d7f8f-6f32-11e0-8ac0-005056c00000 // IVoodooLogger
-1d3d7f90-6f32-11e0-8ac0-005056c00000 // IVoodooFileSystem
-1d3d7f91-6f32-11e0-8ac0-005056c00000 // IVoodooFile
-1d3d7f92-6f32-11e0-8ac0-005056c00000 // IVoodooImage
-1d3d7f93-6f32-11e0-8ac0-005056c00000 // IVoodooPlugin
+1d3d7f85-6f32-11e0-8ac0-005056c00000 // LIBID_Voodoo_Core
+1d3d7f86-6f32-11e0-8ac0-005056c00000 // IID_IVoodooCore
+1d3d7f87-6f32-11e0-8ac0-005056c00000 // IID_IVoodooParser
+1d3d7f88-6f32-11e0-8ac0-005056c00000 // IID_IVoodooShader
+1d3d7f89-6f32-11e0-8ac0-005056c00000 // IID_IVoodooTechnique 
+1d3d7f8a-6f32-11e0-8ac0-005056c00000 // IID_IVoodooPass
+1d3d7f8b-6f32-11e0-8ac0-005056c00000 // IID_IVoodooTexture
+1d3d7f8c-6f32-11e0-8ac0-005056c00000 // IID_IVoodooParameter
+1d3d7f8d-6f32-11e0-8ac0-005056c00000 // IID_IVoodooAdapter
+1d3d7f8e-6f32-11e0-8ac0-005056c00000 // IID_IVoodooHookSystem
+1d3d7f8f-6f32-11e0-8ac0-005056c00000 // IID_IVoodooLogger
+1d3d7f90-6f32-11e0-8ac0-005056c00000 // IID_IVoodooFileSystem
+1d3d7f91-6f32-11e0-8ac0-005056c00000 // IID_IVoodooFile
+1d3d7f92-6f32-11e0-8ac0-005056c00000 // IID_IVoodooImage
+1d3d7f93-6f32-11e0-8ac0-005056c00000 // IID_IVoodooPlugin
 1d3d7f94-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces
 1d3d7f95-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces
 1d3d7f96-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces
@@ -38,24 +36,27 @@
 1d3d7fa0-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces
 1d3d7fa1-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces
 1d3d7fa2-6f32-11e0-8ac0-005056c00000 //   Reserved for future interfaces
-1d3d7fa3-6f32-11e0-8ac0-005056c00000 // CVoodooCore
-1d3d7fa4-6f32-11e0-8ac0-005056c00000 // CVoodooParser
-1d3d7fa5-6f32-11e0-8ac0-005056c00000 // CVoodooShader
-1d3d7fa6-6f32-11e0-8ac0-005056c00000 // CVoodooTechnique
-1d3d7fa7-6f32-11e0-8ac0-005056c00000 // CVoodooPass
-1d3d7fa8-6f32-11e0-8ac0-005056c00000 // CVoodooTexture
-1d3d7fa9-6f32-11e0-8ac0-005056c00000 // CVoodooParameter
-1d3d7faa-6f32-11e0-8ac0-005056c00000 // CVoodooAdapter
-1d3d7fab-6f32-11e0-8ac0-005056c00000 // CVoodooHookSystem
-1d3d7fac-6f32-11e0-8ac0-005056c00000 // CVoodooLogger
-1d3d7fad-6f32-11e0-8ac0-005056c00000 // CVoodooFileSystem
-1d3d7fae-6f32-11e0-8ac0-005056c00000 // CVoodooFile
-1d3d7faf-6f32-11e0-8ac0-005056c00000 // CVoodooImage
-1d3d7fb0-6f32-11e0-8ac0-005056c00000 // Plugin - CXmlLogger
-1d3d7fb1-6f32-11e0-8ac0-005056c00000 // Plugin - CWFileSystem
-1d3d7fb2-6f32-11e0-8ac0-005056c00000 // Plugin - CEHHookSystem
-1d3d7fb3-6f32-11e0-8ac0-005056c00000 // Loader?
-1d3d7fb4-6f32-11e0-8ac0-005056c00000 // Core module, for installer
+1d3d7fa3-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooCore (Voodoo.Core.Core)
+1d3d7fa4-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooParser (Voodoo.Core.Parser)
+1d3d7fa5-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooShader (Voodoo.Core.Shader)
+1d3d7fa6-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooTechnique (Voodoo.Core.Technique)
+1d3d7fa7-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooPass (Voodoo.Core.Pass)
+1d3d7fa8-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooTexture (Voodoo.Core.Texture)
+1d3d7fa9-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooParameter (Voodoo.Core.Parameter)
+1d3d7faa-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooAdapter (Voodoo.Core.Adapter)
+1d3d7fab-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooHookSystem (Voodoo.Core.HookSystem)
+1d3d7fac-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooLogger (Voodoo.Core.Logger)
+1d3d7fad-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooFileSystem (Voodoo.Core.FileSystem)
+1d3d7fae-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooFile (Voodoo.Core.File)
+1d3d7faf-6f32-11e0-8ac0-005056c00000 // CLSID_VoodooImage (Voodoo.Core.Image)
+1d3d7fb0-6f32-11e0-8ac0-005056c00000
+1d3d7fb1-6f32-11e0-8ac0-005056c00000
+1d3d7fb2-6f32-11e0-8ac0-005056c00000
+1d3d7fb3-6f32-11e0-8ac0-005056c00000
+1d3d7fb4-6f32-11e0-8ac0-005056c00000 // Core installer
 1d3d7fb5-6f32-11e0-8ac0-005056c00000
 1d3d7fb6-6f32-11e0-8ac0-005056c00000
 // End of 50-block 1 (25/04/2011 - 0500).
+
+BB6E7CAD-9F9A-4083-A618-47E62921F940 // CLSID_XmlLogger (plugin, Voodoo/XmlLogger)
+D187B7EF-998D-4639-A557-C878EBDC1B90 // CLSID_EHHookSystem (plugin, Voodoo/EHHookSystem)

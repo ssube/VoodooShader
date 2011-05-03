@@ -1,7 +1,6 @@
 #include "Common.hpp"
 
 #include <strsafe.h>
-#include "Core_i.c"
 
 /**
  * @addtogroup VoodooLoader Voodoo/Loader
@@ -11,6 +10,19 @@
 IVoodooCore * gVoodooCore = NULL;
 IVoodooAdapter * gVoodooAdapter = NULL;
 InitParams gInitParams;
+
+void WINAPI ErrorMessage(LPTSTR pMsg, ...)
+{
+    va_list args;
+    va_start(args, pMsg);
+
+    CString Msg;
+    Msg.FormatV(pMsg, args);
+
+    va_end(args);
+
+    MessageBox(NULL, Msg, _T("Voodoo Loader Error"), MB_OK|MB_ICONWARNING);
+}
 
 /**
  * Load a module from the system directory (uses absolute path to guarantee proper file).
@@ -41,15 +53,18 @@ bool WINAPI VoodooStartup()
 
     if ( FAILED(hr) )
     {
-        CString error;
-        error.Format(_T("Unable to create Voodoo Core. Error %X."), hr);
-
-        MessageBox(NULL, error, _T("Voodoo Error"), MB_ICONWARNING|MB_OK);
-
+        ErrorMessage(_T("Unable to create Voodoo Core. CCI Error %X."), hr);
         return false;
     } else {
         HRESULT hr = gVoodooCore->Initialize(gInitParams);
-        return ( SUCCEEDED(hr) );
+
+        if ( FAILED(hr))
+        {
+            ErrorMessage(_T("Unable to create Voodoo Core. Init Error %X."), hr);
+            return false;
+        } else {
+            return true;
+        }
     }
 }
 
@@ -76,7 +91,7 @@ bool WINAPI GetGlobalRoot()
 
         if ( keyOpen != ERROR_SUCCESS )
         {
-            MessageBox(NULL, _T("Voodoo Loader: Unable to find Voodoo registry key."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+            ErrorMessage(_T("Unable to find Voodoo registry key. Error %u."), keyOpen);
             return false;
         }
     }
@@ -88,7 +103,7 @@ bool WINAPI GetGlobalRoot()
 
     if ( valueQuery != ERROR_SUCCESS || valueType == REG_NONE )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to retrieve path from registry."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Unable to retrieve path from registry. Error %u."), valueQuery);
         return false;
     }
 
@@ -100,14 +115,14 @@ bool WINAPI GetLocalRoot()
     HMODULE hModule = GetModuleHandle(NULL);
     if ( hModule == NULL )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to retrieve target module."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Unable to retrieve target module."));
         return false;
     }
 
     TCHAR pPath[MAX_PATH];
     if ( GetModuleFileName(hModule, pPath, MAX_PATH) == 0 )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to retrieve target path."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Unable to retrieve target path."));
         return false;
     }
 
@@ -116,7 +131,7 @@ bool WINAPI GetLocalRoot()
 
     if ( lastSlash == -1 )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to parse target path."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to parse target path."));
         return false;
     }
 
@@ -130,7 +145,7 @@ bool WINAPI GetRunRoot()
 
     if ( GetCurrentDirectory(MAX_PATH, pPath) == 0 )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to retrieve current path."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to retrieve current path."));
         return false;
     }
 
@@ -142,7 +157,7 @@ bool WINAPI GetLoader(HINSTANCE hLoader)
     TCHAR pPath[MAX_PATH];
     if ( GetModuleFileName(hLoader, pPath, MAX_PATH) == 0 )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to retrieve loader path."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to retrieve loader path."));
         return false;
     }
 
@@ -151,7 +166,7 @@ bool WINAPI GetLoader(HINSTANCE hLoader)
 
     if ( lastSlash == -1 )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to parse loader path."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to parse loader path."));
         return false;
     }
 

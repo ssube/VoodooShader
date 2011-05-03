@@ -5,6 +5,8 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
+#include "atlsafe.h"
+
 using namespace ATL;
 
 
@@ -17,9 +19,7 @@ class ATL_NO_VTABLE CXmlLogger :
 	public IDispatchImpl<IVoodooLogger, &IID_IVoodooLogger, &LIBID_XmlLoggerLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CXmlLogger()
-	{
-	}
+	CXmlLogger();
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
@@ -85,6 +85,9 @@ private:
      * records ticks, usually ms since system start.
      */
     CStringW STDMETHODCALLTYPE LogTicks();
+
+    CStringW STDMETHODCALLTYPE FormatSA(BSTR pFormatStr, SAFEARRAY * pArgs);
+    bool STDMETHODCALLTYPE CheckVT(TCHAR TypeChar, VARIANT * Variant);
 
     inline void DebugLog(LPCWSTR pMsg)
     {

@@ -247,8 +247,8 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 
     // Log extended build information
 
-    LogMsg(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, L"Voodoo loaded, using config %s.", configPath);
-    LogMsg(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
+    LogFormat(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, L"Voodoo loaded, using config %s.", configPath);
+    LogFormat(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
     VersionStruct vfver = VOODOO_META_VERSION_STRUCT(CORE);
     VersionStruct vsver = VOODOO_META_VERSION_STRUCT(VC);
@@ -264,7 +264,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     m_Adapter->Initialize(this);
 
     // Core done loading
-    LogMsg(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, L"Core initialization complete.");
+    LogFormat(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, L"Core initialization complete.");
 
     m_Init = true;
     return S_OK;
@@ -437,7 +437,7 @@ STDMETHODIMP CVoodooCore::CreateParameter(
 
         m_Parameters.SetAt(pName, *ppParameter);
 
-        LogMsg
+        LogFormat
         (
             m_Logger, LL_Debug, VOODOO_CORE_NAME, 
             L"Created parameter named %s with type %X, returning shared pointer to %p.", 
@@ -473,7 +473,7 @@ STDMETHODIMP CVoodooCore::CreateTexture(
 
         m_Textures.SetAt(pName, *ppTexture);
 
-        LogMsg
+        LogFormat
         (
             m_Logger, LL_Debug, VOODOO_CORE_NAME, 
             L"Added texture %s with data %p, returning shared pointer to %p.", 

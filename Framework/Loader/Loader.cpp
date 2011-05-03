@@ -13,7 +13,7 @@ BOOL WINAPI DllMain
 
     if ( Reason == DLL_PROCESS_ATTACH )
     {
-        ZeroMemory(gInitParams);
+        ZeroMemory(&gInitParams, sizeof(gInitParams));
 
         bool init = true;
         init &= GetRunRoot();
@@ -39,7 +39,7 @@ IUnknown * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const PTCHAR lib, const
 
     if ( !baselib )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to load system DLL."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to load system DLL \"%s\"."), lib);
         exit(1);
     }
 
@@ -47,7 +47,11 @@ IUnknown * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const PTCHAR lib, const
 
     if ( !initFunc )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to find system EP."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+#ifdef _UNICODE
+        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"%S\"."), func);
+#else
+        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"%s\"."), func);
+#endif
         exit(1);
     }
 
@@ -98,14 +102,14 @@ HRESULT WINAPI VoodooInput8Create
     HMODULE baselib = LoadSystemLibrary(_T("dinput8.dll"));
     if ( !baselib )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to load system DLL."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to load system DLL \"dinput8.dll\"."));
         exit(1);
     }
 
     DIInitFunc initFunc = (DIInitFunc)GetProcAddress(baselib, "DirectInput8Create");
     if ( !initFunc )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to find system EP."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"DirectInput8Create\"."));
         exit(1);
     }
 
@@ -128,7 +132,7 @@ HRESULT WINAPI VoodooInputCreateGeneric
 
     if ( !baselib )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to load system DLL."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to load system DLL \"dinput.dll\"."));
         exit(1);
     }
 
@@ -136,7 +140,11 @@ HRESULT WINAPI VoodooInputCreateGeneric
 
     if ( !initFunc )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to find system EP."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+#ifdef _UNICODE
+        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"%S\"."), func);
+#else
+        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"%s\"."), func);
+#endif
         exit(1);
     }
 
@@ -180,7 +188,7 @@ HRESULT WINAPI  VoodooSoundCreate8
 
     if ( !baselib )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to load system DLL."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to load system DLL \"dsound8.dll\"."));
         exit(1);
     }
 
@@ -188,7 +196,7 @@ HRESULT WINAPI  VoodooSoundCreate8
 
     if ( !initFunc )
     {
-        MessageBox(NULL, _T("Voodoo Loader: Unable to find system EP."), _T("Loader Error"), MB_ICONERROR|MB_OK);
+        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"DirectSoundCreate8\"."));
         exit(1);
     }
 

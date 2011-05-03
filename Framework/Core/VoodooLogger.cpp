@@ -189,31 +189,6 @@ STDMETHODIMP CVoodooLogger::Log
     return S_OK;
 }
 
-STDMETHODIMP CVoodooLogger::LogList( 
-    /* [in] */ DWORD Level,
-    /* [in] */ BSTR pModule,
-    /* [in] */ BSTR pFormat,
-    /* [in] */ VARIANT pList)
-{
-    if ( pFormat == NULL ) return VSFERR_INVALID_ARG;
-    if ( m_File.m_hFile == CFile::hFileNull ) return VSFERR_NO_FILE;
-
-    CStringW msg;
-
-    msg.Format(L"Level: %u\tModule: %s\tMessage:\n\t", Level, pModule);
-
-    va_list vargs = (va_list)V_BYREF(&pList);
-    //va_start(vargs, pFormat);
-    msg.AppendFormatV(pFormat, vargs);
-    //va_end(vargs);
-
-    msg.AppendChar(L'\n');
-
-    m_File.WriteString(msg);
-
-    return S_OK;
-}
-
 STDMETHODIMP CVoodooLogger::get_BufferSize( 
     /* [retval][out] */ int *pSize)
 {

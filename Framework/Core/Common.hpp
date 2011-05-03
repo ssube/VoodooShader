@@ -95,20 +95,19 @@ extern const HRESULT VSFERR_IS_SYSVAR;
 HRESULT WINAPI InstanceFromString(_In_ BSTR lpStr, _In_ REFIID iid, _In_ void ** pp);
 CGparameter WINAPI CreateVirtualParameter(IVoodooCore * pCore, ParameterType Type);
 
-inline HRESULT WINAPI LogMsg(IVoodooLogger * pLogger, DWORD Level, LPWSTR pModule, LPWSTR pMsg, ...)
+inline HRESULT WINAPI LogFormat(IVoodooLogger * pLogger, DWORD Level, LPWSTR pModule, LPWSTR pMsg, ...)
 {
-    VARIANT v;
-    VariantInit(&v);
-    V_VT(&v) = VT_BYREF;
+    if ( pLogger == NULL || pModule == NULL || pMsg == NULL ) return VSFERR_INVALID_ARG;
+
+    CStringW fmtMsg;
 
     va_list args;
     va_start(args, pModule);
-
-    V_BYREF(&v) = args;
-    HRESULT hr = pLogger->LogList(Level, pModule, pMsg, v);
-
+    fmtMsg.FormatV(pMsg, args);
     va_end(args);
-    return hr;
+
+    CComBSTR fmtBSTR = fmtMsg;
+    return pLogger->Log(Level, pModule, fmtBSTR, NULL);
 }
 
 CGtype WINAPI ToCgType(ParameterType Type);

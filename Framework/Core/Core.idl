@@ -475,7 +475,6 @@ interface IVoodooLogger : IVoodooPlugin
     [propput, id(6)] HRESULT LogLevel([in] EnumType Level);
     [id(8)] HRESULT LogModule([in] VersionStruct Module);
     [id(9), vararg] HRESULT Log([in] EnumType Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
-    [id(10)] HRESULT LogList([in] EnumType Level, [in] BSTR pModule, [in] BSTR pFormat, [in] VARIANT pList);
     [propget, id(11)] HRESULT BufferSize([out, retval] int * pSize);
     [propput, id(11)] HRESULT BufferSize([in] int Size);
 };
@@ -593,7 +592,7 @@ library Voodoo_Core
 	{
 		[default] interface IVoodooCore;
 	};
-	[		
+	[	
 		uuid(1d3d7fa4-6f32-11e0-8ac0-005056c00000)		
 	]
 	coclass VoodooParser
@@ -615,7 +614,7 @@ library Voodoo_Core
 	{
 		[default] interface IVoodooTechnique;
 	};
-	[		
+	[	
 		uuid(1d3d7fa7-6f32-11e0-8ac0-005056c00000), noncreatable		
 	]
 	coclass VoodooPass
