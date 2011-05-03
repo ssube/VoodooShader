@@ -2,6 +2,8 @@
 
 #include "stdafx.h"
 #include "EHHookSystem.h"
+#include "VoodooSupport.hpp"
+#include "Hook_Version.hpp"
 
 // CEHHookSystem
 STDMETHODIMP CEHHookSystem::QueryInterface(REFIID iid, void ** pp) throw()
@@ -36,6 +38,14 @@ STDMETHODIMP_(ULONG) CEHHookSystem::Release()
     }
 }
 
+STDMETHODIMP CEHHookSystem::get_Core(IVoodooCore ** ppCore)
+{
+    if ( ppCore == NULL ) return VSFERR_INVALID_ARG;
+
+    *ppCore = m_Core;
+    return VSF_OK;
+}
+
 STDMETHODIMP CEHHookSystem::Initialize(IVoodooCore *pCore)
 {
     if ( pCore == NULL ) return VSFERR_INVALID_ARG;
@@ -43,102 +53,85 @@ STDMETHODIMP CEHHookSystem::Initialize(IVoodooCore *pCore)
     m_Core = pCore;
     m_Core->get_Logger(&m_Logger);
 
-    ULONG ThreadCount = 1;
-    ULONG ThreadIDs[1] = { 0 };
+    m_ThreadCount = 1;
+    m_ThreadIDs = new ULONG[1];
+    m_ThreadIDs[0] = 0;
 
-    LhSetGlobalInclusiveACL(ThreadIDs, ThreadCount);
+    LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
 
-    m_Logger->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", NULL);
+    m_Logger->Log(LL_Info, VOODOO_HOOK_NAME, L"Created hook manager.", NULL);
+
+    return VSF_OK;
 }
 
-STDMETHODIMP CEHHookSystem::CreateHook(BSTR pName, FunctionPtr src, FunctionPtr dest)
+STDMETHODIMP CEHHookSystem::Add(BSTR pName, FunctionPtr src, FunctionPtr dest)
 {
-    HookMap::iterator hook = mHooks.find(name);
-
-    if ( hook != mHooks.end() )
+    if ( m_Hooks.PLookup(pName) != NULL )
     {
-        Throw
-            (
-            VOODOO_HOOK_NAME, 
-            "Attempted to create a hook with a duplicate name.", 
-            mCore
-            );
+        return VSFERR_DUP_NAME;
     }
 
-    mCore->GetLogger()->Log
+    LogFormat
     (
-        LL_Debug, 
-        VOODOO_HOOK_NAME,
-        "Creating hook %s. Redirecting function %p to %p.",
-        name.c_str(), src, dest
+        m_Logger, LL_Debug, 
+        VOODOO_HOOK_NAME, L"Creating hook %s. Redirecting function %p to %p.",
+        pName, src.Address, dest.Address
     );
 
-    TRACED_HOOK_HANDLE hookHandle = new HOOK_TRACE_INFO();
+    HookPtr hookHandle(new HOOK_TRACE_INFO());
 
-    DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
+    DWORD result = LhInstallHook((void*)src.Address, (void*)dest.Address, NULL, hookHandle.get());
 
     if ( ( result != 0 ) || ( hookHandle == NULL ) )
     {
-        mCore->GetLogger()->Log
-            (
-            LL_Error,
-            VOODOO_HOOK_NAME,
-            "Error %u creating hook %s (%p, %p).",
-            result, name.c_str(), src, dest
-            );
+        LogFormat
+        (
+            m_Logger, LL_Debug, 
+            VOODOO_HOOK_NAME, L"Error %u creating hook %s (%p, %p).",
+            result, pName, src.Address, dest.Address
+        );
 
-        return false;
+        return VSF_FAIL;
     } else {
-        LhSetInclusiveACL(mThreadIDs, mThreadCount, hookHandle);
+        LhSetInclusiveACL(m_ThreadIDs, m_ThreadCount, hookHandle.get());
 
-        mHooks[name] = hookHandle;
+        m_Hooks.SetAt(pName, hookHandle);
 
-        return true;
+        return VSF_OK;
     }
 }
 
-STDMETHODIMP CEHHookSystem::RemoveHook(std::string name)
+STDMETHODIMP CEHHookSystem::Remove(BSTR pName)
 {
-    HookMap::iterator hook = mHooks.find(name);
-
-    mCore->GetLogger()->Log
+    LogFormat
     (
-        LL_Debug,
-        VOODOO_HOOK_NAME,
-        "Removing hook %s.",
-        name.c_str()
+        m_Logger, LL_Debug,
+        VOODOO_HOOK_NAME, L"Removing hook %s.",
+        pName
     );
 
-    if ( hook != mHooks.end() )
+    HookMap::CPair * hook = m_Hooks.PLookup(pName);
+    if ( hook != NULL )
     {
-        TRACED_HOOK_HANDLE tracedHandle = (TRACED_HOOK_HANDLE)hook->second;
+        return VSF_OK;
+    } else {
+        HookPtr tracedHandle = hook->value;
 
-        DWORD result = LhUninstallHook(tracedHandle);
-        delete tracedHandle;
+        DWORD result = LhUninstallHook(tracedHandle.get());
 
         if ( result != 0 )
         {
-            mCore->GetLogger()->Log
-                (
-                LL_Error,
-                VOODOO_HOOK_NAME,
-                "Error %u removing hook %s.",
-                result, name.c_str()
-                );
-
-            return true;
+            LogFormat
+            (
+                m_Logger, LL_Error,
+                VOODOO_HOOK_NAME, L"Error %u removing hook %s.",
+                result, pName
+            );
+            return VSF_FAIL;
         } else {
-            mHooks.erase(hook);
-
-            return false;
+            m_Hooks.RemoveKey(pName);
+            return VSF_OK;
         }
-    } else {
-        Throw
-        (
-            VOODOO_HOOK_NAME,
-            "Trying to remove hook that does not exist.", 
-            mCore
-        );
     }
 }
 
@@ -148,4 +141,6 @@ STDMETHODIMP CEHHookSystem::RemoveAll()
     LhWaitForPendingRemovals();
 
     m_Hooks.RemoveAll();
+
+    return VSF_OK;
 }

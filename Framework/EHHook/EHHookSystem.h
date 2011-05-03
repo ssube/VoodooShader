@@ -5,7 +5,15 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
+#include "EasyHook.h"
+#pragma comment(lib, "EasyHook32.lib")
+
+#include <memory>
+typedef std::shared_ptr<HOOK_TRACE_INFO> HookPtr;
+
 using namespace ATL;
+
+typedef CMap<CComBSTR, CComBSTR, HookPtr, HookPtr> HookMap;
 
 // CEHHookSystem
 
@@ -86,7 +94,9 @@ private:
     ULONG m_Refrs;
     IVoodooCore * m_Core;
     CComPtr<IVoodooLogger> m_Logger;
-    CMap<CComBSTR, CComBSTR, TRACED_HOOK_HANDLE*, TRACED_HOOK_HANDLE*> m_Hooks;
+    ULONG m_ThreadCount;
+    ULONG * m_ThreadIDs;
+    HookMap m_Hooks; //!< @todo Make m_Hooks here use smart ptrs for handles
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(EHHookSystem), CEHHookSystem)

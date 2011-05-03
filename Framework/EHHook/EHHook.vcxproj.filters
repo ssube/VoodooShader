@@ -66,6 +66,9 @@
     <ClInclude Include="EHHookSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Hook_Version.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EHHook.rc">
