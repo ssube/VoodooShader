@@ -52,26 +52,49 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogViewer", "Utilities\LogViewer\LogViewer.csproj", "{82C4257D-3F4D-4F7D-A0B6-0282C044E7E7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Loader", "Framework\Loader\Voodoo_Loader.vcxproj", "{6234D300-FD30-4A04-A3A2-4739C5D9B95F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager", "Utilities\Manager\Manager.csproj", "{C700ACFD-EDD6-46F9-9E42-FB3A1B901E80}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{6F835D16-DF88-4950-A9AA-422CBEB3F3CF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Filesystem", "Framework\Filesystem\Filesystem.vcxproj", "{88003ADC-5DD3-4CF7-B636-9F7F16DECEB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Core", "Framework\Core\Core.vcxproj", "{BC08F231-D53D-4D19-AF7E-9387521187BF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9E41722B-FF31-4AA9-A64C-96B9AA175C30}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core_Tests", "Tests\Core_Basic_Cpp_NoHarness\Core_Basic_Cpp_NoHarness.vcxproj", "{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Standalone_Core", "Tests\Standalone_Core\Standalone_Core.vcxproj", "{4013F9BF-9367-405B-8005-025EABF878BD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetInherit", "Tests\NetInherit\NetInherit.csproj", "{F0B829B9-0E64-47F0-8808-7E5A64EA96F6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_XmlLogger", "Framework\XmlLogger\XmlLogger.vcxproj", "{87CD02DD-A1F1-4F95-9D3A-A4994DB5E1C6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_EHHook", "Framework\EHHook\EHHook.vcxproj", "{500C3802-95EE-4D5C-A5CA-133E531C80F9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WFileSystem", "Framework\WFileSystem\WFileSystem.vcxproj", "{52D4AFA6-F986-4362-9D2F-A04809464B54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -453,6 +476,30 @@ Global
 		{500C3802-95EE-4D5C-A5CA-133E531C80F9}.Template|Win32.ActiveCfg = Release|Win32
 		{500C3802-95EE-4D5C-A5CA-133E531C80F9}.Template|Win32.Build.0 = Release|Win32
 		{500C3802-95EE-4D5C-A5CA-133E531C80F9}.Template|x86.ActiveCfg = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug_Analysis|Any CPU.ActiveCfg = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug_Analysis|Mixed Platforms.ActiveCfg = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug_Analysis|Mixed Platforms.Build.0 = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug_Analysis|Win32.ActiveCfg = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug_Analysis|Win32.Build.0 = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug_Analysis|x86.ActiveCfg = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug|Win32.ActiveCfg = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug|Win32.Build.0 = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Debug|x86.ActiveCfg = Debug|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Release|Any CPU.ActiveCfg = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Release|Win32.ActiveCfg = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Release|Win32.Build.0 = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Release|x86.ActiveCfg = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Template|Any CPU.ActiveCfg = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Template|Mixed Platforms.ActiveCfg = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Template|Mixed Platforms.Build.0 = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Template|Win32.ActiveCfg = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Template|Win32.Build.0 = Release|Win32
+		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Template|x86.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -472,6 +519,7 @@ Global
 		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 		{87CD02DD-A1F1-4F95-9D3A-A4994DB5E1C6} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 		{500C3802-95EE-4D5C-A5CA-133E531C80F9} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
+		{52D4AFA6-F986-4362-9D2F-A04809464B54} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 		{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
 		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
