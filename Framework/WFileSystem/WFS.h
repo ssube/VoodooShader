@@ -17,9 +17,7 @@ class ATL_NO_VTABLE CWFS :
 	public IDispatchImpl<IVoodooFileSystem, &IID_IVoodooFileSystem, &LIBID_WFileSystemLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CWFS()
-	{
-	}
+	CWFS();
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
@@ -49,6 +47,12 @@ public:
     virtual HRESULT STDMETHODCALLTYPE RemoveDirectory(BSTR pPath);
     virtual HRESULT STDMETHODCALLTYPE FindFile(BSTR pPath, IVoodooFile **ppFile);
     virtual HRESULT STDMETHODCALLTYPE FindImage(BSTR pPath, IVoodooImage **ppImage);
+
+private:
+	BOOL m_Init;
+    ULONG m_Refrs;
+    IVoodooCore * m_Core;
+	CStringList m_Directories;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(WFS), CWFS)

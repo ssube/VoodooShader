@@ -451,7 +451,7 @@ DECLARE_INTERFACE_IID_(IVoodooLogger, IVoodooPlugin, "1d3d7f8f-6f32-11e0-8ac0-00
     STDMETHOD(get_LogLevel)(THIS_ EnumType * pLevel) PURE;
     STDMETHOD(put_LogLevel)(THIS_ EnumType Level) PURE;
     STDMETHOD(LogModule)(THIS_ VersionStruct Module) PURE;
-    STDMETHOD(Log)(THIS_ EnumType Level, BSTR pModule, BSTR pFormat, SAFEARRAY * pArgs) PURE;
+    STDMETHOD(Log)(THIS_ EnumType Level, BSTR pModule, BSTR pMessage) PURE;
     STDMETHOD(get_BufferSize)(THIS_ int * pSize) PURE;
     STDMETHOD(put_BufferSize)(THIS_ int Size) PURE;
 };
@@ -567,11 +567,14 @@ typedef struct IVoodooImage *LPVOODOOIMAGE, *PVOODOOIMAGE;
 
 #define VSFERR_NOT_LINKED       MAKE_VSF_LERR(0x0005)
 #define VSFERR_NOT_FOUND        MAKE_VSF_LERR(0x0006)
+#define VSFERR_NOT_INIT         MAKE_VSF_LERR(0x0007)
 
-#define VSFERR_INVALID_CFG      MAKE_VSF_LERR(0x0007)
-#define VSFERR_INVALID_CG       MAKE_VSF_LERR(0x0008)
-#define VSFERR_INVALID_TECH     MAKE_VSF_LERR(0x0009)
-#define VSFERR_INVALID_ARG      MAKE_VSF_LERR(0x0010)
+#define VSFERR_INVALID_CFG      MAKE_VSF_LERR(0x0008)
+#define VSFERR_INVALID_CG       MAKE_VSF_LERR(0x0009)
+#define VSFERR_INVALID_TECH     MAKE_VSF_LERR(0x0010)
+#define VSFERR_INVALID_ARG      MAKE_VSF_LERR(0x0011)
+
+#define VSFERR_ALREADY_INIT		MAKE_VSF_LERR(0x0012)
 
 #define VSFERR_NO_CORE          MAKE_VSF_LERR(0x0020)
 #define VSFERR_NO_PARSER        MAKE_VSF_LERR(0x0021)
@@ -589,7 +592,6 @@ typedef struct IVoodooImage *LPVOODOOIMAGE, *PVOODOOIMAGE;
 #define VSFERR_NO_PROGRAM       MAKE_VSF_LERR(0x002D)
 
 // IVoodooCore
-#define VSFERR_NOT_INIT         MAKE_VSF_IERR(0x0001)
 
 // IVoodooLogger
 #define VSFERR_FILE_ERROR       MAKE_VSF_IERR(0x0001)

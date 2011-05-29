@@ -109,7 +109,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE get_LogLevel(DWORD *pLevel);
     virtual HRESULT STDMETHODCALLTYPE put_LogLevel(DWORD Level);
     virtual HRESULT STDMETHODCALLTYPE LogModule(VersionStruct Module);
-    virtual HRESULT STDMETHODCALLTYPE Log(DWORD Level, BSTR pModule, BSTR pFormat, SAFEARRAY * ppArgs);
+    virtual HRESULT STDMETHODCALLTYPE Log(DWORD Level, BSTR pModule, BSTR pMessage);
     virtual HRESULT STDMETHODCALLTYPE get_BufferSize(int *pSize);
     virtual HRESULT STDMETHODCALLTYPE put_BufferSize(int Size);
 

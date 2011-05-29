@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Tue May 03 11:59:18 2011
+/* at Sat May 28 13:12:11 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -2565,11 +2565,10 @@ EXTERN_C const IID IID_IVoodooLogger;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LogModule( 
             /* [in] */ VersionStruct Module) = 0;
         
-        virtual /* [vararg][id] */ HRESULT STDMETHODCALLTYPE Log( 
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Log( 
             /* [in] */ EnumType Level,
             /* [in] */ BSTR pModule,
-            /* [in] */ BSTR pFormat,
-            /* [in] */ SAFEARRAY * pArgs) = 0;
+            /* [in] */ BSTR pMessage) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BufferSize( 
             /* [retval][out] */ int *pSize) = 0;
@@ -2657,12 +2656,11 @@ EXTERN_C const IID IID_IVoodooLogger;
             IVoodooLogger * This,
             /* [in] */ VersionStruct Module);
         
-        /* [vararg][id] */ HRESULT ( STDMETHODCALLTYPE *Log )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Log )( 
             IVoodooLogger * This,
             /* [in] */ EnumType Level,
             /* [in] */ BSTR pModule,
-            /* [in] */ BSTR pFormat,
-            /* [in] */ SAFEARRAY * pArgs);
+            /* [in] */ BSTR pMessage);
         
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferSize )( 
             IVoodooLogger * This,
@@ -2733,8 +2731,8 @@ EXTERN_C const IID IID_IVoodooLogger;
 #define IVoodooLogger_LogModule(This,Module)	\
     ( (This)->lpVtbl -> LogModule(This,Module) ) 
 
-#define IVoodooLogger_Log(This,Level,pModule,pFormat,pArgs)	\
-    ( (This)->lpVtbl -> Log(This,Level,pModule,pFormat,pArgs) ) 
+#define IVoodooLogger_Log(This,Level,pModule,pMessage)	\
+    ( (This)->lpVtbl -> Log(This,Level,pModule,pMessage) ) 
 
 #define IVoodooLogger_get_BufferSize(This,pSize)	\
     ( (This)->lpVtbl -> get_BufferSize(This,pSize) ) 

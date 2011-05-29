@@ -474,7 +474,7 @@ interface IVoodooLogger : IVoodooPlugin
     [propget, id(6)] HRESULT LogLevel([out, retval] EnumType * pLevel);
     [propput, id(6)] HRESULT LogLevel([in] EnumType Level);
     [id(8)] HRESULT LogModule([in] VersionStruct Module);
-    [id(9), vararg] HRESULT Log([in] EnumType Level, [in] BSTR pModule, [in] BSTR pFormat, [in] SAFEARRAY(VARIANT) pArgs);
+    [id(9)] HRESULT Log([in] EnumType Level, [in] BSTR pModule, [in] BSTR pMessage);
     [propget, id(11)] HRESULT BufferSize([out, retval] int * pSize);
     [propput, id(11)] HRESULT BufferSize([in] int Size);
 };
