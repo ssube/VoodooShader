@@ -1,0 +1,26 @@
+HKCR
+{
+    Voodoo.WFS.Image.1 = s 'WImage Class'
+    {
+        CLSID = s '{454ABDBB-FC59-47BA-9722-4511BD231DB2}'
+    }
+    Voodoo.WFS.Image = s 'WImage Class'
+    {
+        CurVer = s 'Voodoo.WFS.Image.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {454ABDBB-FC59-47BA-9722-4511BD231DB2} = s 'WImage Class'
+        {
+            ProgID = s 'Voodoo.WFS.Image.1'
+            VersionIndependentProgID = s 'Voodoo.WFS.Image'
+            ForceRemove Programmable
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Both'
+            }
+            TypeLib = s '{AEF0CD49-3324-4EAF-9BB5-E6121E0D4207}'
+            Version = s '1.0'
+        }
+    }
+}

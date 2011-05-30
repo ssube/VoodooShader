@@ -130,13 +130,3 @@ STDMETHODIMP CVoodooFileSystem::FindFile(BSTR pPath, IVoodooFile **ppFile)
         return VSFOK_NULL_IMPL;
     }
 }
-
-STDMETHODIMP CVoodooFileSystem::FindImage(BSTR pPath, IVoodooImage **ppImage)
-{
-    if ( ppImage == NULL )
-    {
-        return E_INVALIDARG;
-    } else {
-        return VSFOK_NULL_IMPL;
-    }
-}

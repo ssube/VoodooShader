@@ -1,26 +1,26 @@
 HKCR
 {
-	VoodooCore.Shader.1 = s 'VoodooShader Class'
-	{
-		CLSID = s '{1d3d7fa5-6f32-11e0-8ac0-005056c00000}'
-	}
-	VoodooCore.Shader = s 'VoodooShader Class'
-	{
-		CurVer = s 'VoodooCore.Shader.1'
-	}
-	NoRemove CLSID
-	{
-		ForceRemove {1d3d7fa5-6f32-11e0-8ac0-005056c00000} = s 'VoodooShader Class'
-		{
-			ProgID = s 'VoodooCore.Shader.1'
-			VersionIndependentProgID = s 'VoodooCore.Shader'
-			ForceRemove Programmable
-			InprocServer32 = s '%MODULE%'
-			{
-				val ThreadingModel = s 'Both'
-			}
-			TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
-			Version = s '1.0'
-		}
-	}
+    VoodooCore.Shader.1 = s 'VoodooShader Class'
+    {
+        CLSID = s '{1d3d7fa5-6f32-11e0-8ac0-005056c00000}'
+    }
+    VoodooCore.Shader = s 'VoodooShader Class'
+    {
+        CurVer = s 'VoodooCore.Shader.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {1d3d7fa5-6f32-11e0-8ac0-005056c00000} = s 'VoodooShader Class'
+        {
+            ProgID = s 'VoodooCore.Shader.1'
+            VersionIndependentProgID = s 'VoodooCore.Shader'
+            ForceRemove Programmable
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Both'
+            }
+            TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
+            Version = s '1.0'
+        }
+    }
 }

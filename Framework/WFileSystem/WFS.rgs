@@ -1,26 +1,26 @@
 HKCR
 {
-	Voodoo.WFS.FileSystem.1 = s 'WFS Class'
-	{
-		CLSID = s '{B66C7DA3-9D30-48C7-9142-2A92BCD8B30D}'
-	}
-	Voodoo.WFS.FileSystem = s 'WFS Class'
-	{
-		CurVer = s 'Voodoo.WFS.FileSystem.1'
-	}
-	NoRemove CLSID
-	{
-		ForceRemove {B66C7DA3-9D30-48C7-9142-2A92BCD8B30D} = s 'WFS Class'
-		{
-			ProgID = s 'Voodoo.WFS.FileSystem.1'
-			VersionIndependentProgID = s 'Voodoo.WFS.FileSystem'
-			ForceRemove Programmable
-			InprocServer32 = s '%MODULE%'
-			{
-				val ThreadingModel = s 'Both'
-			}
-			TypeLib = s '{AEF0CD49-3324-4EAF-9BB5-E6121E0D4207}'
-			Version = s '1.0'
-		}
-	}
+    Voodoo.WFS.FileSystem.1 = s 'WFS Class'
+    {
+        CLSID = s '{B66C7DA3-9D30-48C7-9142-2A92BCD8B30D}'
+    }
+    Voodoo.WFS.FileSystem = s 'WFS Class'
+    {
+        CurVer = s 'Voodoo.WFS.FileSystem.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {B66C7DA3-9D30-48C7-9142-2A92BCD8B30D} = s 'WFS Class'
+        {
+            ProgID = s 'Voodoo.WFS.FileSystem.1'
+            VersionIndependentProgID = s 'Voodoo.WFS.FileSystem'
+            ForceRemove Programmable
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Both'
+            }
+            TypeLib = s '{AEF0CD49-3324-4EAF-9BB5-E6121E0D4207}'
+            Version = s '1.0'
+        }
+    }
 }

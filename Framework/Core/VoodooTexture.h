@@ -68,33 +68,33 @@ using namespace ATL;
  * provided by the API creator).
  */
 class ATL_NO_VTABLE CVoodooTexture :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooTexture, &CLSID_VoodooTexture>,
-	public IDispatchImpl<IVoodooTexture, &IID_IVoodooTexture, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooTexture, &CLSID_VoodooTexture>,
+    public IDispatchImpl<IVoodooTexture, &IID_IVoodooTexture, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
-	CVoodooTexture();
+    CVoodooTexture();
     virtual ~CVoodooTexture();
     static IVoodooTexture * Create(IVoodooCore * pCore, BSTR pName, TextureDesc Desc, VARIANT pData);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOTEXTURE)
 
 DECLARE_NOT_AGGREGATABLE(CVoodooTexture)
 
 BEGIN_COM_MAP(CVoodooTexture)
-	COM_INTERFACE_ENTRY(IVoodooTexture)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IVoodooTexture)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooTexture

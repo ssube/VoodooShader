@@ -72,33 +72,33 @@ using namespace ATL;
  *    Bottom-level shader object, contains a set of programs and states.
  */
 class ATL_NO_VTABLE CVoodooPass :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooPass, &CLSID_VoodooPass>,
-	public IDispatchImpl<IVoodooPass, &IID_IVoodooPass, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooPass, &CLSID_VoodooPass>,
+    public IDispatchImpl<IVoodooPass, &IID_IVoodooPass, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
-	CVoodooPass();
+    CVoodooPass();
     virtual ~CVoodooPass();
     static IVoodooPass * Create(IVoodooTechnique * pTechnique, CGpass Pass);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOPASS)
 
 DECLARE_NOT_AGGREGATABLE(CVoodooPass)
 
 BEGIN_COM_MAP(CVoodooPass)
-	COM_INTERFACE_ENTRY(IVoodooPass)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IVoodooPass)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooPass

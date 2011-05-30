@@ -64,9 +64,9 @@ Resource.h
 /////////////////////////////////////////////////////////////////////////////
 Other notes:
 
-	The COM+ 1.0 Support option builds the COM+ 1.0 library into your skeleton application,
-	making COM+ 1.0 classes, objects, and functions available to you.
+    The COM+ 1.0 Support option builds the COM+ 1.0 library into your skeleton application,
+    making COM+ 1.0 classes, objects, and functions available to you.
 
-	The MFC Support option builds the Microsoft Foundation Class libraries into your skeleton application,
-	making MFC classes, objects and functions available to you.
+    The MFC Support option builds the Microsoft Foundation Class libraries into your skeleton application,
+    making MFC classes, objects and functions available to you.
 /////////////////////////////////////////////////////////////////////////////

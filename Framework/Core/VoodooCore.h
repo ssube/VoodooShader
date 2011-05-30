@@ -66,32 +66,32 @@ using namespace ATL;
  * 
  */
 class ATL_NO_VTABLE CVoodooCore :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooCore, &CLSID_VoodooCore>,
-	public IDispatchImpl<IVoodooCore, &IID_IVoodooCore, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooCore, &CLSID_VoodooCore>,
+    public IDispatchImpl<IVoodooCore, &IID_IVoodooCore, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
-	CVoodooCore();
+    CVoodooCore();
     virtual ~CVoodooCore();
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOCORE)
 
 DECLARE_NOT_AGGREGATABLE(CVoodooCore)
 
 BEGIN_COM_MAP(CVoodooCore)
-	COM_INTERFACE_ENTRY(IVoodooCore)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IVoodooCore)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooCore

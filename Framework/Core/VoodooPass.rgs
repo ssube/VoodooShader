@@ -1,26 +1,26 @@
 HKCR
 {
-	VoodooCore.Pass.1 = s 'VoodooPass Class'
-	{
-		CLSID = s '{1d3d7fa7-6f32-11e0-8ac0-005056c00000}'
-	}
-	VoodooCore.Pass = s 'VoodooPass Class'
-	{
-		CurVer = s 'VoodooCore.Pass.1'
-	}
-	NoRemove CLSID
-	{
-		ForceRemove {1d3d7fa7-6f32-11e0-8ac0-005056c00000} = s 'VoodooPass Class'
-		{
-			ProgID = s 'VoodooCore.Pass.1'
-			VersionIndependentProgID = s 'VoodooCore.Pass'
-			ForceRemove Programmable
-			InprocServer32 = s '%MODULE%'
-			{
-				val ThreadingModel = s 'Both'
-			}
-			TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
-			Version = s '1.0'
-		}
-	}
+    VoodooCore.Pass.1 = s 'VoodooPass Class'
+    {
+        CLSID = s '{1d3d7fa7-6f32-11e0-8ac0-005056c00000}'
+    }
+    VoodooCore.Pass = s 'VoodooPass Class'
+    {
+        CurVer = s 'VoodooCore.Pass.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {1d3d7fa7-6f32-11e0-8ac0-005056c00000} = s 'VoodooPass Class'
+        {
+            ProgID = s 'VoodooCore.Pass.1'
+            VersionIndependentProgID = s 'VoodooCore.Pass'
+            ForceRemove Programmable
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Both'
+            }
+            TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
+            Version = s '1.0'
+        }
+    }
 }

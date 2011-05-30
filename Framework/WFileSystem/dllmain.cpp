@@ -14,10 +14,10 @@ class CWFileSystemApp : public CWinApp
 public:
 
 // Overrides
-	virtual BOOL InitInstance();
-	virtual int ExitInstance();
+    virtual BOOL InitInstance();
+    virtual int ExitInstance();
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 };
 
 BEGIN_MESSAGE_MAP(CWFileSystemApp, CWinApp)
@@ -28,13 +28,13 @@ CWFileSystemApp theApp;
 BOOL CWFileSystemApp::InitInstance()
 {
 #ifdef _MERGE_PROXYSTUB
-	if (!PrxDllMain(m_hInstance, DLL_PROCESS_ATTACH, NULL))
-		return FALSE;
+    if (!PrxDllMain(m_hInstance, DLL_PROCESS_ATTACH, NULL))
+        return FALSE;
 #endif
-	return CWinApp::InitInstance();
+    return CWinApp::InitInstance();
 }
 
 int CWFileSystemApp::ExitInstance()
 {
-	return CWinApp::ExitInstance();
+    return CWinApp::ExitInstance();
 }

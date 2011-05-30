@@ -73,28 +73,6 @@ STDMETHODIMP_(ULONG) CVoodooFile::Release()
     }
 }
 
-STDMETHODIMP CVoodooFile::get_Name(LPBSTR pName)
-{
-    if ( pName == NULL )
-    {
-        return E_INVALIDARG;
-    } else {
-        return m_Name.CopyTo(pName);
-    }
-}
-
-STDMETHODIMP CVoodooFile::get_Core(IVoodooCore **ppCore)
-{
-    if ( ppCore == NULL )
-    {
-        return E_INVALIDARG;
-    } else {
-        *ppCore = m_Core;
-        (*ppCore)->AddRef();
-        return S_OK;
-    }
-}
-
 STDMETHODIMP CVoodooFile::get_Path(LPBSTR pPath)
 {
     if ( pPath == NULL )

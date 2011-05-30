@@ -75,33 +75,33 @@ typedef CMap<CComBSTR, CComBSTR, CComBSTR, CComBSTR> Dictionary;
  * will be linked to an IVoodooLogger and can dump debug information on parsing.
  */
 class ATL_NO_VTABLE CVoodooParser :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooParser, &CLSID_VoodooParser>,
-	public IDispatchImpl<IVoodooParser, &IID_IVoodooParser, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooParser, &CLSID_VoodooParser>,
+    public IDispatchImpl<IVoodooParser, &IID_IVoodooParser, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
-	CVoodooParser();
+    CVoodooParser();
     virtual ~CVoodooParser();
     static IVoodooParser * Create(IVoodooCore * pCore);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOPARSER)
 
 DECLARE_NOT_AGGREGATABLE(CVoodooParser)
 
 BEGIN_COM_MAP(CVoodooParser)
-	COM_INTERFACE_ENTRY(IVoodooParser)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IVoodooParser)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooParser

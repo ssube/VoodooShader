@@ -66,33 +66,33 @@ using namespace ATL;
  * A single compiled, validated and linked technique. 
  */
 class ATL_NO_VTABLE CVoodooTechnique :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooTechnique, &CLSID_VoodooTechnique>,
-	public IDispatchImpl<IVoodooTechnique, &IID_IVoodooTechnique, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooTechnique, &CLSID_VoodooTechnique>,
+    public IDispatchImpl<IVoodooTechnique, &IID_IVoodooTechnique, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
-	CVoodooTechnique();
+    CVoodooTechnique();
     virtual ~CVoodooTechnique();
     static IVoodooTechnique * Create(IVoodooShader * pShader, CGtechnique pTechnique);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOTECHNIQUE)
 
 DECLARE_NOT_AGGREGATABLE(CVoodooTechnique)
 
 BEGIN_COM_MAP(CVoodooTechnique)
-	COM_INTERFACE_ENTRY(IVoodooTechnique)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IVoodooTechnique)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooTechnique

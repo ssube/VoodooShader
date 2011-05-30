@@ -1,26 +1,26 @@
 HKCR
 {
-	VoodooCore.Adapter.1 = s 'VoodooAdapter Class'
-	{
-		CLSID = s '{1d3d7fab-6f32-11e0-8ac0-005056c00000}'
-	}
-	VoodooCore.Adapter = s 'VoodooAdapter Class'
-	{
-		CurVer = s 'VoodooCore.Adapter.1'
-	}
-	NoRemove CLSID
-	{
-		ForceRemove {1d3d7fab-6f32-11e0-8ac0-005056c00000} = s 'VoodooAdapter Class'
-		{
-			ProgID = s 'VoodooCore.Adapter.1'
-			VersionIndependentProgID = s 'VoodooCore.Adapter'
-			ForceRemove Programmable
-			InprocServer32 = s '%MODULE%'
-			{
-				val ThreadingModel = s 'Both'
-			}
-			TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
-			Version = s '1.0'
-		}
-	}
+    VoodooCore.Adapter.1 = s 'VoodooAdapter Class'
+    {
+        CLSID = s '{1d3d7fab-6f32-11e0-8ac0-005056c00000}'
+    }
+    VoodooCore.Adapter = s 'VoodooAdapter Class'
+    {
+        CurVer = s 'VoodooCore.Adapter.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {1d3d7fab-6f32-11e0-8ac0-005056c00000} = s 'VoodooAdapter Class'
+        {
+            ProgID = s 'VoodooCore.Adapter.1'
+            VersionIndependentProgID = s 'VoodooCore.Adapter'
+            ForceRemove Programmable
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Both'
+            }
+            TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
+            Version = s '1.0'
+        }
+    }
 }

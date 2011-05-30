@@ -1,26 +1,26 @@
 HKCR
 {
-	VoodooCore.FileSystem.1 = s 'VoodooFileSystem Class'
-	{
-		CLSID = s '{1d3d7fad-6f32-11e0-8ac0-005056c00000}'
-	}
-	VoodooCore.FileSystem = s 'VoodooFileSystem Class'
-	{
-		CurVer = s 'VoodooCore.FileSystem.1'
-	}
-	NoRemove CLSID
-	{
-		ForceRemove {1d3d7fad-6f32-11e0-8ac0-005056c00000} = s 'VoodooFileSystem Class'
-		{
-			ProgID = s 'VoodooCore.FileSystem.1'
-			VersionIndependentProgID = s 'VoodooCore.FileSystem'
-			ForceRemove Programmable
-			InprocServer32 = s '%MODULE%'
-			{
-				val ThreadingModel = s 'Both'
-			}
-			TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
-			Version = s '1.0'
-		}
-	}
+    VoodooCore.FileSystem.1 = s 'VoodooFileSystem Class'
+    {
+        CLSID = s '{1d3d7fad-6f32-11e0-8ac0-005056c00000}'
+    }
+    VoodooCore.FileSystem = s 'VoodooFileSystem Class'
+    {
+        CurVer = s 'VoodooCore.FileSystem.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {1d3d7fad-6f32-11e0-8ac0-005056c00000} = s 'VoodooFileSystem Class'
+        {
+            ProgID = s 'VoodooCore.FileSystem.1'
+            VersionIndependentProgID = s 'VoodooCore.FileSystem'
+            ForceRemove Programmable
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Both'
+            }
+            TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
+            Version = s '1.0'
+        }
+    }
 }

@@ -40,6 +40,12 @@
     <ClCompile Include="WFS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -66,6 +72,12 @@
     <ClInclude Include="WFS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WFileSystem.rc">
@@ -81,6 +93,12 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="WFS.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="WFile.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="WImage.rgs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -69,33 +69,33 @@ using namespace ATL;
  * (the file given is loaded and compiled as a Cg effect). 
  */
 class ATL_NO_VTABLE CVoodooShader :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooShader, &CLSID_VoodooShader>,
-	public IDispatchImpl<IVoodooShader, &IID_IVoodooShader, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooShader, &CLSID_VoodooShader>,
+    public IDispatchImpl<IVoodooShader, &IID_IVoodooShader, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
-	CVoodooShader();
+    CVoodooShader();
     virtual ~CVoodooShader();
     static IVoodooShader * Create(IVoodooCore * pCore, IVoodooFile * pFile, SAFEARRAY * pArgs);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOSHADER)
 
 DECLARE_NOT_AGGREGATABLE(CVoodooShader)
 
 BEGIN_COM_MAP(CVoodooShader)
-	COM_INTERFACE_ENTRY(IVoodooShader)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IVoodooShader)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooShader

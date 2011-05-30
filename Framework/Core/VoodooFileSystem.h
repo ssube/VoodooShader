@@ -12,25 +12,25 @@ using namespace ATL;
 // CVoodooFileSystem
 
 class ATL_NO_VTABLE CVoodooFileSystem :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooFileSystem, &CLSID_VoodooFileSystem>,
-	public IDispatchImpl<IVoodooFileSystem, &IID_IVoodooFileSystem, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooFileSystem, &CLSID_VoodooFileSystem>,
+    public IDispatchImpl<IVoodooFileSystem, &IID_IVoodooFileSystem, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooFileSystem();
+    CVoodooFileSystem();
     virtual ~CVoodooFileSystem();
     static IVoodooFileSystem * Create(IVoodooCore * pCore);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOFILESYSTEM)
 
@@ -39,7 +39,7 @@ DECLARE_NOT_AGGREGATABLE(CVoodooFileSystem)
 BEGIN_COM_MAP(CVoodooFileSystem)
     COM_INTERFACE_ENTRY(IVoodooFileSystem)
     COM_INTERFACE_ENTRY(IVoodooPlugin)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 
@@ -59,10 +59,6 @@ public:
     virtual /* [id] */ HRESULT STDMETHODCALLTYPE FindFile( 
         /* [in] */ BSTR pPath,
         /* [retval][out] */ IVoodooFile **ppFile);
-
-    virtual /* [id] */ HRESULT STDMETHODCALLTYPE FindImage( 
-        /* [in] */ BSTR pPath,
-        /* [retval][out] */ IVoodooImage **ppImage);
 
 private:
     ULONG m_Refrs;

@@ -68,25 +68,25 @@ using namespace ATL;
  * VSFERR_NULLIMPL for all method calls.
  */
 class ATL_NO_VTABLE CVoodooAdapter :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooAdapter, &CLSID_VoodooAdapter>,
-	public IDispatchImpl<IVoodooAdapter, &IID_IVoodooAdapter, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooAdapter, &CLSID_VoodooAdapter>,
+    public IDispatchImpl<IVoodooAdapter, &IID_IVoodooAdapter, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
-	CVoodooAdapter();
+    CVoodooAdapter();
     virtual ~CVoodooAdapter();
     static IVoodooAdapter * Create(IVoodooCore * pCore);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOADAPTER)
 
@@ -95,7 +95,7 @@ DECLARE_NOT_AGGREGATABLE(CVoodooAdapter)
 BEGIN_COM_MAP(CVoodooAdapter)
     COM_INTERFACE_ENTRY(IVoodooAdapter)
     COM_INTERFACE_ENTRY(IVoodooPlugin)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooAdapter

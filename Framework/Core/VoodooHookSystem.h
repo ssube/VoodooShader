@@ -12,25 +12,25 @@ using namespace ATL;
 // CVoodooHookSystem
 
 class ATL_NO_VTABLE CVoodooHookSystem :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooHookSystem, &CLSID_VoodooHookSystem>,
-	public IDispatchImpl<IVoodooHookSystem, &IID_IVoodooHookSystem, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooHookSystem, &CLSID_VoodooHookSystem>,
+    public IDispatchImpl<IVoodooHookSystem, &IID_IVoodooHookSystem, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooHookSystem();
+    CVoodooHookSystem();
     virtual ~CVoodooHookSystem();
     static IVoodooHookSystem * Create(IVoodooCore * pCore);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOHOOKSYSTEM)
 
@@ -39,7 +39,7 @@ DECLARE_NOT_AGGREGATABLE(CVoodooHookSystem)
 BEGIN_COM_MAP(CVoodooHookSystem)
     COM_INTERFACE_ENTRY(IVoodooHookSystem)
     COM_INTERFACE_ENTRY(IVoodooPlugin)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooHookSystem

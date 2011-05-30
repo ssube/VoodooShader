@@ -9,44 +9,59 @@ import "ocidl.idl";
 cpp_quote("#include \"VoodooFramework.hpp\"")
 
 [
-	object,
-	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
-	dual,	
-	pointer_default(unique)
+    object,
+    uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+    dual,    
+    pointer_default(unique)
 ]
 interface IComponentRegistrar : IDispatch
 {
-	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
-	[id(2)]	HRESULT RegisterAll();
-	[id(3)]	HRESULT UnregisterAll();
-	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
-	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
-	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+    [id(1)]    HRESULT Attach([in] BSTR bstrPath);
+    [id(2)]    HRESULT RegisterAll();
+    [id(3)]    HRESULT UnregisterAll();
+    [id(4)]    HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+    [id(5)]    HRESULT RegisterComponent([in] BSTR bstrCLSID);
+    [id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
 };
 
 [
-	uuid(AEF0CD49-3324-4EAF-9BB5-E6121E0D4207),
-	version(1.0),
-	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{F6E274A2-92F9-4672-8FA8-334CC04A915E}")
+    uuid(AEF0CD49-3324-4EAF-9BB5-E6121E0D4207),
+    version(1.0),
+    custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{F6E274A2-92F9-4672-8FA8-334CC04A915E}")
 ]
 library WFileSystemLib
 {
-	importlib("stdole2.tlb");
+    importlib("stdole2.tlb");
     importlib("Voodoo_Core.tlb");
 
-	[
-		uuid(F6E274A2-92F9-4672-8FA8-334CC04A915E)		
-	]
-	coclass CompReg
-	{
-		[default] interface IComponentRegistrar;
-	};
-	[		
-		uuid(B66C7DA3-9D30-48C7-9142-2A92BCD8B30D)		
-	]
-	coclass WFS
-	{
-		[default] interface IVoodooFileSystem;
-	};
+    [
+        uuid(F6E274A2-92F9-4672-8FA8-334CC04A915E)        
+    ]
+    coclass CompReg
+    {
+        [default] interface IComponentRegistrar;
+    };
+
+    [        
+        uuid(B66C7DA3-9D30-48C7-9142-2A92BCD8B30D)        
+    ]
+    coclass WFS
+    {
+        [default] interface IVoodooFileSystem;
+    };
+    [        
+        uuid(BF62E06F-E561-4713-8B1E-6D53D3718BA6)        
+    ]
+    coclass WFile
+    {
+        [default] interface IVoodooFile;
+    };
+    [        
+        uuid(454ABDBB-FC59-47BA-9722-4511BD231DB2)        
+    ]
+    coclass WImage
+    {
+        [default] interface IVoodooImage;
+    };
 };
 

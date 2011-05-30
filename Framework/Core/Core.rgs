@@ -1,15 +1,15 @@
 HKCR
 {
-	NoRemove CLSID
-	{
-		ForceRemove {5F3D58FE-A84D-4E15-9AAA-878EAC2E4BED} = s 'CompReg Class'
-		{
-			InprocServer32 = s '%MODULE%'
-			{
-				val ThreadingModel = s 'Apartment'
-			}
-			TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
-			Version = s '1.0'
-		}
-	}
+    NoRemove CLSID
+    {
+        ForceRemove {5F3D58FE-A84D-4E15-9AAA-878EAC2E4BED} = s 'CompReg Class'
+        {
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+            TypeLib = s '{1d3d7f85-6f32-11e0-8ac0-005056c00000}'
+            Version = s '1.0'
+        }
+    }
 }

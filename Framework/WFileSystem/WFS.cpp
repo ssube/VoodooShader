@@ -4,13 +4,13 @@
 #include "WFS.h"
 
 CWFS::CWFS()
-	: m_Init(FALSE)
+    : m_Init(FALSE)
 { }
 
 // CWFS
 STDMETHODIMP CWFS::Initialize(IVoodooCore *pCore)
 {
-	if ( this->m_Init ) return VSFERR_ALREADY_INIT;
+    if ( this->m_Init ) return VSFERR_ALREADY_INIT;
     if ( pCore == NULL ) return VSFERR_INVALID_ARG;
 
     // Create builtin vars
@@ -64,51 +64,108 @@ STDMETHODIMP CWFS::Initialize(IVoodooCore *pCore)
 
 STDMETHODIMP CWFS::get_Core(IVoodooCore **ppCore)
 {
-	if ( !this->m_Init ) return VSFERR_NOT_INIT;
-	if ( ppCore == NULL ) return VSFERR_INVALID_ARG;
+    if ( !this->m_Init ) return VSFERR_NOT_INIT;
+    if ( ppCore == NULL ) return VSFERR_INVALID_ARG;
 
-	*ppCore = this->m_Core;
-	return VSF_OK;
+    *ppCore = this->m_Core;
+    return VSF_OK;
 }
 
 STDMETHODIMP CWFS::AddDirectory(BSTR pPath)
 {
-	if ( !this->m_Init ) return VSFERR_NOT_INIT;
+    if ( !this->m_Init ) return VSFERR_NOT_INIT;
 
-	CComBSTR modPath(pPath);
+    CComBSTR modPath(pPath);
 
-	IVoodooParser * pParser = NULL;
-	this->m_Core->get_Parser(&pParser);
-	pParser->Parse(modPath, PF_None, &modPath);
+    IVoodooParser * pParser = NULL;
+    this->m_Core->get_Parser(&pParser);
+    pParser->Parse(modPath, PF_None, &modPath);
 
-	CString dir(modPath);
+    CString dir(modPath);
 
-	this->m_Directories.AddHead(dir);
+    int splitter = dir.Find(L";");
+    if ( splitter > 0 )
+    {
+        CString partDir = dir.Left(splitter);
+        this->m_Directories.AddHead(partDir);
+
+        dir = dir.Mid(splitter);
+        splitter = dir.Find(L";");
+    }
+
+    if ( dir.GetLength() > 0 )
+    {
+        this->m_Directories.AddHead(dir);
+    }
+
+    return VSF_OK;
 }
 
 STDMETHODIMP CWFS::RemoveDirectory(BSTR pPath)
 {
-	if ( !this->m_Init ) return VSFERR_NOT_INIT;
+    if ( !this->m_Init ) return VSFERR_NOT_INIT;
 
-	CComBSTR modPath(pPath);
+    CComBSTR modPath(pPath);
 
-	IVoodooParser * pParser = NULL;
-	this->m_Core->get_Parser(&pParser);
-	pParser->Parse(modPath, PF_None, &modPath);
-	
-	CString dir(modPath);
+    IVoodooParser * pParser = NULL;
+    this->m_Core->get_Parser(&pParser);
+    pParser->Parse(modPath, PF_None, &modPath);
+    
+    CString dir(modPath);
 
-	POSITION pos = this->m_Directories.Find(dir);
+    POSITION pos = this->m_Directories.Find(dir);
 
-	if ( pos == NULL )
-	{
-		return VSFOK_NOT_FOUND;
-	} else {
-		this->m_Directories.Remove(pos);
-		return VSF_OK;
-	}
+    if ( pos == NULL )
+    {
+        return VSFOK_NOT_FOUND;
+    } else {
+        this->m_Directories.Remove(pos);
+        return VSF_OK;
+    }
 }
 
-STDMETHODIMP CWFS::FindFile(BSTR pPath, IVoodooFile **ppFile);
-STDMETHODIMP CWFS::FindImage(BSTR pPath, IVoodooImage **ppImage);
+STDMETHODIMP CWFS::FindFile(BSTR pPath, IVoodooFile **ppFile)
+{
+    if ( !this->m_Init ) return VSFERR_NOT_INIT;
+    if ( ppFile == NULL ) return VSFERR_INVALID_ARG;
+
+    *ppFile = NULL;
+
+    CComBSTR modFile(pPath);
+
+    IVoodooParser * pParser = NULL;
+    this->m_Core->get_Parser(&pParser);
+    pParser->Parse(modFile, PF_None, &modFile);
+
+    POSITION dirPos = this->m_Directories.GetHeadPosition();
+    while ( dirPos )
+    {
+        CStringW filename = m_Directories.GetNext(dirPos);
+        filename += modFile;
+
+        CFile file(dir);
+        if ( file.m_hFile != CFile::hFileNull )
+        {
+            // File exists. Test for image.
+            ILuint image = ilGenImage();
+            ilBindImage(image);
+
+            ILboolean loaded = ilLoadImage(filename.);
+
+            if ( loaded == IL_FALSE )
+            {
+                ilBindImage(0);
+                ilDeleteImage(image);
+                
+                *ppFile = CWFile.Create(file)
+            } else {
+                *ppFile = CWImage.Create(file);
+            }
+
+            return VSF_OK;
+        }
+    }
+
+    return VSFERR_NOT_FOUND;
+}
 

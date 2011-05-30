@@ -73,34 +73,34 @@ using namespace ATL;
  *    Data container for shader inputs.
  */
 class ATL_NO_VTABLE CVoodooParameter :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooParameter, &CLSID_VoodooParameter>,
-	public IDispatchImpl<IVoodooParameter, &IID_IVoodooParameter, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooParameter, &CLSID_VoodooParameter>,
+    public IDispatchImpl<IVoodooParameter, &IID_IVoodooParameter, &LIBID_Voodoo_Core, /*wMajor =*/ 0, /*wMinor =*/ 3>
 {
 public:
-	CVoodooParameter();
+    CVoodooParameter();
     virtual ~CVoodooParameter();
     static IVoodooParameter * Create(IVoodooCore * pCore, BSTR pName, ParameterType Type);
     static IVoodooParameter * Create(IVoodooShader * pShader, CGparameter Parameter);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOPARAMETER)
 
 DECLARE_NOT_AGGREGATABLE(CVoodooParameter)
 
 BEGIN_COM_MAP(CVoodooParameter)
-	COM_INTERFACE_ENTRY(IVoodooParameter)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IVoodooParameter)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooParameter

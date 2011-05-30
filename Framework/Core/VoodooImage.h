@@ -14,33 +14,33 @@ using namespace ATL;
 // CVoodooImage
 
 class ATL_NO_VTABLE CVoodooImage :
-	public CComObjectRootEx<CComSingleThreadModel>,
-	public CComCoClass<CVoodooImage, &CLSID_VoodooImage>,
+    public CComObjectRootEx<CComSingleThreadModel>,
+    public CComCoClass<CVoodooImage, &CLSID_VoodooImage>,
     public IDispatchImpl<IVoodooImage, &IID_IVoodooImage, &LIBID_Voodoo_Core, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CVoodooImage();
+    CVoodooImage();
     virtual ~CVoodooImage();
     static IVoodooImage * Create(IVoodooCore * pFileSystem, BSTR pPath);
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+    HRESULT FinalConstruct()
+    {
+        return S_OK;
+    }
 
-	void FinalRelease()
-	{
-	}
+    void FinalRelease()
+    {
+    }
 
 DECLARE_REGISTRY_RESOURCEID(IDR_VOODOOIMAGE)
 
 DECLARE_NOT_AGGREGATABLE(CVoodooImage)
 
 BEGIN_COM_MAP(CVoodooImage)
-	COM_INTERFACE_ENTRY(IVoodooImage)
-	COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IVoodooImage)
+    COM_INTERFACE_ENTRY(IDispatch)
 END_COM_MAP()
 
 // IVoodooFile
@@ -67,7 +67,6 @@ virtual /* [id] */ HRESULT STDMETHODCALLTYPE Write(
     /* [size_is][in] */ byte Buffer[  ]);
 
 // IVoodooImage
-public:
     virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Desc( 
         /* [retval][out] */ TextureDesc *pDesc);
 
