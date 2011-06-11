@@ -14,7 +14,7 @@ SETUP(ShaderFixture)
 
     HRESULT hr = CoCreateInstance(CLSID_VoodooCore, NULL, CLSCTX_INPROC_SERVER, IID_IVoodooCore, (void**)&pCore);
 
-    WIN_ASSERT_TRUE(SUCCEEDED(hr) && pCore != NULL, _T("IVoodooCore not created."));
+    WIN_ASSERT_TRUE(SUCCEEDED(hr) && pCore != NULL, VSTR("IVoodooCore not created."));
 
     CComBSTR config = L"M:\\VoodooShader\\Tests\\Resources\\Init_Working.xmlconfig";
     CComBSTR target = L"M:\\VoodooShader\\TargetApp.exe";
@@ -28,12 +28,12 @@ SETUP(ShaderFixture)
     Params.GlobalRoot = Params.RunRoot = Params.LocalRoot = root;
 
     hr = pCore->Initialize(Params);
-    WIN_ASSERT_TRUE(SUCCEEDED(hr), _T("Config: %s\nHRESULT: %X\n"), Params.Config, hr);
+    WIN_ASSERT_TRUE(SUCCEEDED(hr), VSTR("Config: %s\nHRESULT: %X\n"), Params.Config, hr);
 }
 
 TEARDOWN(ShaderFixture)
 {
-    WIN_ASSERT_EQUAL(0, pCore->Release(), _T("IVoodooCore not properly released."));
+    WIN_ASSERT_EQUAL(0, pCore->Release(), VSTR("IVoodooCore not properly released."));
 
     pCore = NULL;
     CoUninitialize();

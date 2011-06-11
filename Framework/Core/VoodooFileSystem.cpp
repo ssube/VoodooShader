@@ -31,7 +31,7 @@ IVoodooFileSystem * CVoodooFileSystem::Create(IVoodooCore * pCore)
     {
         pFileSystem->AddRef();
         pFileSystem->m_Core = pCore;
-        pFileSystem->m_Name = L"Null FileSystem";
+        pFileSystem->m_Name = VSTR("Null FileSystem");
 
         hr = pFileSystem->QueryInterface(IID_IVoodooFileSystem, (void**)&ipFileSystem);
         pFileSystem->Release();
@@ -82,10 +82,10 @@ STDMETHODIMP CVoodooFileSystem::Initialize(IVoodooCore * pCore)
     m_Core = pCore;
 
     // Handle internal path init (unused)
-    CArray<CStringW> Paths;
+    CArray<CString> Paths;
 
-    CStringW EnvPath;
-    if ( EnvPath.GetEnvironmentVariable(L"VoodooPath") != 0 )
+    CString EnvPath;
+    if ( EnvPath.GetEnvironmentVariable(VSTR("VoodooPath")) != 0 )
     {
         int splitPos = EnvPath.Find(L';');
         while ( splitPos > 0 )

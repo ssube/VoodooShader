@@ -21,7 +21,6 @@
 
 #pragma once
 
-// Versioning functions -------------------------------------------------------
 #ifdef _UNICODE
 #   define VOODOO_META_STRING_ARG(arg) L ## #arg
 #   define VOODOO_META_STRING_STR(arg) L ## arg
@@ -32,6 +31,7 @@
 
 #define VOODOO_META_TOSTRING(arg)   VOODOO_META_STRING_ARG(arg)
 #define VOODOO_META_STRING(arg)     VOODOO_META_STRING_STR(arg)
+#define VSTR(arg) VOODOO_META_STRING_STR(arg)
 
 #ifdef _DEBUG
 #   define VOODOO_META_DEBUG_BOOL   true
@@ -43,6 +43,7 @@
 #   define VOODOO_META_DEBUG_STRING
 #endif
 
+// Versioning functions -------------------------------------------------------
 /**
  * Creates a comma-separated chain of version tokens (not string).
  */

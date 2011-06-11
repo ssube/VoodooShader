@@ -21,8 +21,6 @@
 
 #include "Frost_Module.hpp"
 
-using namespace VoodooShader;
-
 /**
  * Applies a variation of the popular NWN camera hack to the engine in-memory.
  * This technique is simpler to manipulate and customize than the traditional byte-patcher. 
@@ -31,7 +29,7 @@ using namespace VoodooShader;
  */
 void CameraHack()
 {
-    VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Applying camera hack...");
+    VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, VSTR("Applying camera hack..."));
 
     float maxDist    =  120.0f;
     float minDist    =   -0.2f;
@@ -51,16 +49,15 @@ void CameraHack()
 
         VirtualProtect( (PVOID)0x004A9000, 0x1000, oldProtect, &finalProtect);
 
-        VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Camera hack successfully applied.");
+        VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, VSTR("Camera hack successfully applied."));
     } else {
         DWORD error = GetLastError();
         
-        VoodooLogger->Log
+        LogFormat
         (
-            LL_Error,
-            VOODOO_FROST_NAME,
-            "Camera hack failed with code %u.",
-            error
+            VoodooLogger, 
+            LL_Error, VOODOO_FROST_NAME, 
+            VSTR("Camera hack failed with code %u."), error
         );
     }
 }

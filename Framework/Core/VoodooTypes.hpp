@@ -46,25 +46,25 @@ typedef struct FunctionPtr      FunctionPtr;
 
 enum TextureFormat
 {    
-    TF_Unknown        = 0,
+    TF_Unknown         = 0,
     TF_RGB5            = 0x1,
     TF_RGB8            = 0x3,
-    TF_RGBA8        = 0x4,
-    TF_RGB10A2        = 0x5,
-    TF_RGBA16F        = 0x10,
-    TF_RGBA32F        = 0x11,
-    TF_D16            = 0x40,
-    TF_D32            = 0x41,
-    TF_Max            = 0x7fffffff
+    TF_RGBA8           = 0x4,
+    TF_RGB10A2         = 0x5,
+    TF_RGBA16F         = 0x10,
+    TF_RGBA32F         = 0x11,
+    TF_D16             = 0x40,
+    TF_D32             = 0x41,
+    TF_Max             = 0x7fffffff
 };
 
 enum ParameterType
 {    
-    PT_Unknown        = 0,
-    PT_Float1        = 0x11,
-    PT_Float2        = 0x12,
-    PT_Float3        = 0x13,
-    PT_Float4        = 0x14,
+    PT_Unknown         = 0,
+    PT_Float1          = 0x11,
+    PT_Float2          = 0x12,
+    PT_Float3          = 0x13,
+    PT_Float4          = 0x14,
     PT_Float1x1        = 0x11,
     PT_Float1x2        = 0x12,
     PT_Float1x3        = 0x13,
@@ -81,87 +81,87 @@ enum ParameterType
     PT_Float4x2        = 0x42,
     PT_Float4x3        = 0x43,
     PT_Float4x4        = 0x44,
-    PT_Sampler1D    = 0x101,
-    PT_Sampler2D    = 0x102,
-    PT_Sampler3D    = 0x103,
-    PT_Struct        = 0x1000,
-    PT_Max            = 0x7fffffff
+    PT_Sampler1D       = 0x101,
+    PT_Sampler2D       = 0x102,
+    PT_Sampler3D       = 0x103,
+    PT_Struct          = 0x1000,
+    PT_Max             = 0x7fffffff
 };
 
 enum ParameterCategory
 {    
-    PC_Unknown        = 0,
-    PC_Float        = 0x1,
-    PC_Sampler        = 0x2,
-    PC_Struct        = 0x4,
-    PC_Max            = 0x7fffffff
+    PC_Unknown         = 0,
+    PC_Float           = 0x1,
+    PC_Sampler         = 0x2,
+    PC_Struct          = 0x4,
+    PC_Max             = 0x7fffffff
 };
 
 enum ProgramStage
 {    
-    PS_Unknown        = 0,
-    PS_Vertex        = 0x1,
+    PS_Unknown         = 0,
+    PS_Vertex          = 0x1,
     PS_Fragment        = 0x2,
     PS_Geometry        = 0x3,
-    PS_Domain        = 0x4,
+    PS_Domain          = 0x4,
     PS_Hull            = 0x5,
-    PS_Max            = 0x7fffffff
+    PS_Max             = 0x7fffffff
 };
 
 enum TextureStage
 {    
-    TS_Unknown        = 0,
-    TS_Shader        = 0x1,
+    TS_Unknown         = 0,
+    TS_Shader          = 0x1,
     TS_Pass            = 0x2,
-    TS_Max            = 0x7fffffff
+    TS_Max             = 0x7fffffff
 };
 
 enum FileOpenMode
 {    
-    FM_Unknown        = 0,
+    FM_Unknown         = 0,
     FM_Read            = 0x1,
-    FM_Write        = 0x2,
-    FM_ReadWrite    = 0x3,
-    FM_CreateOnly   = 0x10,
-    FM_OpenOnly     = 0x20,
-    FM_AlwaysOpen    = 0x30,
-    FM_Max            = 0x7fffffff
+    FM_Write           = 0x2,
+    FM_ReadWrite       = 0x3,
+    FM_CreateOnly      = 0x10,
+    FM_OpenOnly        = 0x20,
+    FM_AlwaysOpen      = 0x30,
+    FM_Max             = 0x7fffffff
 };
 
 enum LogLevel
 {    
-    LL_Unknown        = 0,
-    LL_Debug        = 0x1,
+    LL_Unknown         = 0,
+    LL_Debug           = 0x1,
     LL_Info            = 0x2,
-    LL_Warning        = 0x4,
-    LL_Error        = 0x8,
+    LL_Warning         = 0x4,
+    LL_Error           = 0x8,
     LL_External        = 0x10,
-    LL_Plugin       = 0x20,
-    LL_Module        = 0x40,
-    LL_Framework    = 0x80,
+    LL_Plugin          = 0x20,
+    LL_Module          = 0x40,
+    LL_Framework       = 0x80,
     LL_Internal        = 0x82,
-    LL_Initial        = 0xfe,
-    LL_All            = 0xff,
-    LL_Max            = 0x7fffffff
+    LL_Initial         = 0xfe,
+    LL_All             = 0xff,
+    LL_Max             = 0x7fffffff
 };
 
 enum ParseFlags
 {    
     PF_None            = 0,
-    PF_SingleSlash    = 0x1,
-    PF_SlashOnly    = 0x2,
-    PF_BackslashOnly= 0x4,
-    PF_Lowercase    = 0x10,
-    PF_Uppercase    = 0x20,
-    PF_VarName        = 0x100,
-    PF_Max            = 0x7fffffff
+    PF_SingleSlash     = 0x1,
+    PF_SlashOnly       = 0x2,
+    PF_BackslashOnly   = 0x4,
+    PF_Lowercase       = 0x10,
+    PF_Uppercase       = 0x20,
+    PF_VarName         = 0x100,
+    PF_Max             = 0x7fffffff
 };
 
 enum VariableType
 {    
-    VT_Normal        = 0,
-    VT_State        = 0x1,
-    VT_System        = 0x10,
+    VT_Normal         = 0,
+    VT_State          = 0x1,
+    VT_System         = 0x10,
     VT_Max            = 0x7fffffff
 } ;
 

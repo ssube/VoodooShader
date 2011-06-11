@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#define VOODOO_IMPORT
-#include "Voodoo_Core.hpp"
+#include "VoodooFramework.hpp"
 
 #include <set>
 

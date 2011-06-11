@@ -95,11 +95,11 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
                 {
                     IXMLDOMParseError * pError = NULL;
                     m_Config->get_parseError(&pError);
-                    CComBSTR fullError = L"XML Error:\n";
+                    CComBSTR fullError = VSTR("XML Error:\n");
                     CComBSTR temp;
                     pError->get_reason(&temp);
                     fullError += temp;
-                    fullError += L"\n";
+                    fullError += VSTR("\n");
                     // Handle further
                     return VSFERR_INVALID_CFG;
                 }
@@ -109,7 +109,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 
     // Start setting things up
     CComPtr<IXMLDOMNode> pCoreNode = NULL;
-    CComBSTR coreNodeStr = L"/VoodooConfig/Core";
+    CComBSTR coreNodeStr = VSTR("/VoodooConfig/Core");
     hr = m_Config->selectSingleNode(coreNodeStr, &pCoreNode);
 
     if ( FAILED(hr) || pCoreNode == NULL )
@@ -118,8 +118,8 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     }
 
     // Create query for node text, used multiple times
-    CComBSTR queryNodeText = L"./text()";
-    CComBSTR queryNodeName = L"./@name";
+    CComBSTR queryNodeText = VSTR("./text()");
+    CComBSTR queryNodeName = VSTR("./@name");
 
     // Set up the internal objects
     m_Parser = CVoodooParser::Create(this);
@@ -129,15 +129,15 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     }
 
     // Load variables, built-in first
-    m_Parser->Add(L"globalroot",    m_GlobalRoot, VT_System);
-    m_Parser->Add(L"localroot",     m_LocalRoot,  VT_System);
-    m_Parser->Add(L"runroot",       m_RunRoot,    VT_System);
-    m_Parser->Add(L"target",        m_Target,     VT_System);
-    m_Parser->Add(L"loader",        m_Loader,     VT_System);
-    m_Parser->Add(L"config",        m_ConfigFile, VT_System);
+    m_Parser->Add(VSTR("globalroot"),    m_GlobalRoot, VT_System);
+    m_Parser->Add(VSTR("localroot"),     m_LocalRoot,  VT_System);
+    m_Parser->Add(VSTR("runroot"),       m_RunRoot,    VT_System);
+    m_Parser->Add(VSTR("target"),        m_Target,     VT_System);
+    m_Parser->Add(VSTR("loader"),        m_Loader,     VT_System);
+    m_Parser->Add(VSTR("config"),        m_ConfigFile, VT_System);
 
     // Load config vars
-    CComBSTR queryVarNodes = L"/VoodooConfig/Variables/Variable";
+    CComBSTR queryVarNodes = VSTR("/VoodooConfig/Variables/Variable");
 
     CComPtr<IXMLDOMNodeList> pVarList = NULL;
     hr = m_Config->selectNodes(queryVarNodes, &pVarList);
@@ -161,7 +161,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 
     // Lookup classes
     {
-        CComBSTR query = L"./Logger/text()";
+        CComBSTR query = VSTR("./Logger/text()");
         CComPtr<IXMLDOMNode> pNode = NULL;
         if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
         {
@@ -177,7 +177,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
             } else {
                 m_Logger->Initialize(this);
 
-                CComBSTR filequery = L"./LogFile/text()";
+                CComBSTR filequery = VSTR("./LogFile/text()");
                 CComPtr<IXMLDOMNode> pFileNode = NULL;
                 if ( SUCCEEDED(pCoreNode->selectSingleNode(filequery, &pFileNode)) )
                 {
@@ -192,7 +192,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     }
 
     {
-        CComBSTR query = L"./HookSystem/text()";
+        CComBSTR query = VSTR("./HookSystem/text()");
         CComPtr<IXMLDOMNode> pNode;
         if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
         {
@@ -210,7 +210,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     }
 
     {
-        CComBSTR query = L"./FileSystem/text()";
+        CComBSTR query = VSTR("./FileSystem/text()");
         CComPtr<IXMLDOMNode> pNode;
         if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
         {
@@ -228,7 +228,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     }
 
     {
-        CComBSTR query = L"./Adapter/text()";
+        CComBSTR query = VSTR("./Adapter/text()");
         CComPtr<IXMLDOMNode> pNode;
         if ( SUCCEEDED(pCoreNode->selectSingleNode(query, &pNode)) )
         {
@@ -247,7 +247,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 
     // Log extended build information
 
-    LogFormat(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, L"Voodoo loaded, using config %s.", configPath);
+    LogFormat(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, VSTR("Voodoo loaded, using config %s."), configPath);
     LogFormat(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
     VersionStruct vfver = VOODOO_META_VERSION_STRUCT(CORE);
@@ -264,7 +264,7 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
     m_Adapter->Initialize(this);
 
     // Core done loading
-    LogFormat(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, L"Core initialization complete.");
+    LogFormat(m_Logger, LL_Info|LL_Framework, VOODOO_CORE_NAME, VSTR("Core initialization complete."));
 
     m_Init = true;
     return S_OK;
@@ -440,7 +440,7 @@ STDMETHODIMP CVoodooCore::CreateParameter(
         LogFormat
         (
             m_Logger, LL_Debug, VOODOO_CORE_NAME, 
-            L"Created parameter named %s with type %X, returning shared pointer to %p.", 
+            VSTR("Created parameter named %s with type %X, returning shared pointer to %p."), 
             pName, Type, *ppParameter
         );
 
@@ -476,7 +476,7 @@ STDMETHODIMP CVoodooCore::CreateTexture(
         LogFormat
         (
             m_Logger, LL_Debug, VOODOO_CORE_NAME, 
-            L"Added texture %s with data %p, returning shared pointer to %p.", 
+            VSTR("Added texture %s with data %p, returning shared pointer to %p."), 
             pName, &Data, *ppTexture
         );
 

@@ -99,7 +99,7 @@ inline HRESULT WINAPI LogFormat(IVoodooLogger * pLogger, DWORD Level, LPWSTR pMo
 {
     if ( pLogger == NULL || pModule == NULL || pMsg == NULL ) return VSFERR_INVALID_ARG;
 
-    CStringW fmtMsg;
+    CString fmtMsg;
 
     va_list args;
     va_start(args, pModule);

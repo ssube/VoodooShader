@@ -148,6 +148,26 @@ typedef void * CGtechnique;
 typedef void * CGpass;
 #endif
 
+/* Smart pointers */
+#ifndef VOODOO_NO_COMPTR
+#include <atlbase.h>
+
+typedef ATL::CComPtr<IVoodooCore>        VoodooCoreRef;
+typedef ATL::CComPtr<IVoodooParser>      VoodooParserRef;
+typedef ATL::CComPtr<IVoodooShader>      VoodooShaderRef;
+typedef ATL::CComPtr<IVoodooTechnique>   VoodooTechniqueRef;
+typedef ATL::CComPtr<IVoodooPass>        VoodooPassRef;
+typedef ATL::CComPtr<IVoodooTexture>     VoodooTextureRef;
+typedef ATL::CComPtr<IVoodooParameter>   VoodooParameterRef;
+typedef ATL::CComPtr<IVoodooAdapter>     VoodooAdapterRef;
+typedef ATL::CComPtr<IVoodooHookSystem>  VoodooHookSystemRef;
+typedef ATL::CComPtr<IVoodooLogger>      VoodooLoggerRef;
+typedef ATL::CComPtr<IVoodooFileSystem>  VoodooFileSystemRef;
+typedef ATL::CComPtr<IVoodooFile>        VoodooFileRef;
+typedef ATL::CComPtr<IVoodooImage>       VoodooImageRef;
+typedef ATL::CComPtr<IVoodooPlugin>      VoodooPluginRef;
+#endif
+
 /* Voodoo version info */
 #include "VoodooVersion.hpp"
 #ifndef VOODOO_VERSION
@@ -572,9 +592,9 @@ typedef struct IVoodooImage *LPVOODOOIMAGE, *PVOODOOIMAGE;
 #define VSFERR_INVALID_TECH     MAKE_VSF_LERR(0x0010)
 #define VSFERR_INVALID_ARG      MAKE_VSF_LERR(0x0011)
 
-#define VSFERR_ALREADY_INIT        MAKE_VSF_LERR(0x0012)
+#define VSFERR_ALREADY_INIT     MAKE_VSF_LERR(0x0012)
 
-#define VSFERR_BUFFER_ERROR        MAKE_VSF_LERR(0x0013)
+#define VSFERR_BUFFER_ERROR     MAKE_VSF_LERR(0x0013)
 
 #define VSFERR_NO_CORE          MAKE_VSF_LERR(0x0020)
 #define VSFERR_NO_PARSER        MAKE_VSF_LERR(0x0021)

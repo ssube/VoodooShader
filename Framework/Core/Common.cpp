@@ -226,9 +226,9 @@ ParameterCategory WINAPI ToParameterCategory(ParameterType Type)
 
 TextureFormat WINAPI ToTextureFormat(BSTR pString)
 {
-    CStringW str(pString);
+    CString str(pString);
 
-    if ( str.Left(3).CompareNoCase(L"TF_") != 0 )
+    if ( str.Left(3).CompareNoCase(VSTR("TF_")) != 0 )
     {
         return TF_Unknown;
     }
@@ -236,16 +236,16 @@ TextureFormat WINAPI ToTextureFormat(BSTR pString)
     if ( str[3] == 'D' )
     {
         // Depth format
-        if ( str.CompareNoCase(L"TF_D16") == 0 )     return TF_D16;
-        if ( str.CompareNoCase(L"TF_D32") == 0 )     return TF_D32;
+        if ( str.CompareNoCase(VSTR("TF_D16")) == 0 )     return TF_D16;
+        if ( str.CompareNoCase(VSTR("TF_D32")) == 0 )     return TF_D32;
     } else {
-        if ( str.CompareNoCase(L"TF_RGB5") == 0 )    return TF_RGB5;
-        if ( str.CompareNoCase(L"TF_RGB5A1") == 0 )  return TF_RGB5A1;
-        if ( str.CompareNoCase(L"TF_RGB8") == 0 )    return TF_RGB8;
-        if ( str.CompareNoCase(L"TF_RGBA8") == 0 )   return TF_RGBA8;
-        if ( str.CompareNoCase(L"TF_RGB10A2") == 0 ) return TF_RGB10A2;
-        if ( str.CompareNoCase(L"TF_RGBA16F") == 0 ) return TF_RGBA16F;
-        if ( str.CompareNoCase(L"TF_RGBA32F") == 0 ) return TF_RGBA32F;
+        if ( str.CompareNoCase(VSTR("TF_RGB5")) == 0 )    return TF_RGB5;
+        if ( str.CompareNoCase(VSTR("TF_RGB5A1")) == 0 )  return TF_RGB5A1;
+        if ( str.CompareNoCase(VSTR("TF_RGB8")) == 0 )    return TF_RGB8;
+        if ( str.CompareNoCase(VSTR("TF_RGBA8")) == 0 )   return TF_RGBA8;
+        if ( str.CompareNoCase(VSTR("TF_RGB10A2")) == 0 ) return TF_RGB10A2;
+        if ( str.CompareNoCase(VSTR("TF_RGBA16F")) == 0 ) return TF_RGBA16F;
+        if ( str.CompareNoCase(VSTR("TF_RGBA32F")) == 0 ) return TF_RGBA32F;
     }
 
     return TF_Unknown;
@@ -271,7 +271,7 @@ void VoodooMemMgr_Report()
     pObj = VoodooMemMgr_Memory.PGetFirstAssoc();
     while ( pObj != NULL )
     {
-        CStringW leak;
+        CString leak;
         leak.Format("Memory leak of %i bytes at %p (%i remaining references).\n", pObj->second->first, pObj->first, pObj->second->second);
         OutputDebugString(leak);
 

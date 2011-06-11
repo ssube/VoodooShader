@@ -30,8 +30,7 @@
 
 #include "Cg/cgD3D9.h"
 
-#define VOODOO_IMPORT
-#include "Voodoo_Core.hpp"
+#include "VoodooFramework.hpp"
 
 #ifdef _DEBUG
 #   define D3D_DEBUG_INFO

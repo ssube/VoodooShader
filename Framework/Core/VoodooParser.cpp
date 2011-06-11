@@ -83,7 +83,7 @@ STDMETHODIMP CVoodooParser::Add(BSTR pName, BSTR pValue, DWORD Type)
 
     if ( m_Logger )
     {
-        LogFormat(m_Logger, LL_Debug|LL_Framework, VOODOO_CORE_NAME, L"Adding variable \"%s\" with value \"%s\".", name, value);
+        LogFormat(m_Logger, LL_Debug|LL_Framework, VOODOO_CORE_NAME, VSTR("Adding variable \"%s\" with value \"%s\"."), name, value);
     }
 
     if ( Type == VT_System )
@@ -94,7 +94,7 @@ STDMETHODIMP CVoodooParser::Add(BSTR pName, BSTR pValue, DWORD Type)
         } else {
             if ( m_Logger )
             {
-                LogFormat(m_Logger, LL_Warning|LL_Framework, VOODOO_CORE_NAME, L"Unable to add duplicate system variable \"%s\".", name);
+                LogFormat(m_Logger, LL_Warning|LL_Framework, VOODOO_CORE_NAME, VSTR("Unable to add duplicate system variable \"%s\"."), name);
             }
             return VSFERR_IS_SYSVAR;
         }
@@ -141,7 +141,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dic
     }
 
     // Variable parsing loop
-    CStringW iteration(*pString);
+    CString iteration(*pString);
     bool loop = true;
 
     while ( loop )
@@ -161,7 +161,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dic
             break;
         }
             
-        CStringW varname = iteration.Left(endpos);
+        CString varname = iteration.Left(endpos);
         int startpos = varname.ReverseFind(CVoodooParser::VarDelimStart);
         if ( startpos < 1 || varname[startpos-1] != CVoodooParser::VarDelimPre )
         {
@@ -189,7 +189,7 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dic
         if ( varname.GetLength() < 1 )
         {
             // Erase the variable sequence if it is an empty variable and restart the loop
-            CStringW output = iteration.Left(startpos - 1);
+            CString output = iteration.Left(startpos - 1);
             output += iteration.Mid(endpos+1);
 
             iteration = output;
@@ -233,11 +233,11 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dic
                 {
                     fvalue = pPair->value;
                 } else {
-                    CStringW var;
+                    CString var;
                     if ( var.GetEnvironmentVariable(fname) == 0 && !supress )
                     {
                         // Not a variable
-                        var = L"badvar:";
+                        var = VSTR("badvar:");
                         var.Append(fname);
                     }
                     fvalue = var.AllocSysString();
@@ -246,11 +246,11 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dic
         }
 
         // Put the final string together
-        CStringW output = iteration.Left(startpos - 1);
+        CString output = iteration.Left(startpos - 1);
         if ( parse && SysStringLen(fvalue) > 0 )
         {
             this->ParseRaw(&fvalue, Flags, ++Depth, State);
-            output += CStringW(fvalue);
+            output += CString(fvalue);
         }
         output += iteration.Mid(endpos+1);
 
@@ -270,14 +270,14 @@ STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dic
         
     if ( Flags & PF_SingleSlash )
     {
-        while ( iteration.Replace(L"//", L"/") > 0 ) { }
-        while ( iteration.Replace(L"\\\\", L"\\") > 0 ) { }
+        while ( iteration.Replace(VSTR("//"), VSTR("/")) > 0 ) { }
+        while ( iteration.Replace(VSTR("\\\\"), VSTR("\\")) > 0 ) { }
     }
     if ( Flags & PF_SlashOnly )
     {
-        iteration.Replace(L'\\', L'/');
+        iteration.Replace(VSTR('\\'), VSTR('/'));
     } else if ( Flags & PF_BackslashOnly ) {
-        iteration.Replace(L'/', L'\\');
+        iteration.Replace(VSTR('/'), VSTR('\\'));
     }
 
     if ( Flags & PF_Lowercase )

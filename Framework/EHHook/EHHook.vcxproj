@@ -47,6 +47,7 @@
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)\Framework\Core;$(SolutionDir)\dependencies\EasyHook_2.6\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\dependencies\EasyHook_2.6\lib;$(LibraryPath)</LibraryPath>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>

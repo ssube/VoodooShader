@@ -41,15 +41,15 @@ IVoodooTechnique * CVoodooTechnique::Create(IVoodooShader * pShader, CGtechnique
 
         CComBSTR name;
         pShader->get_Name(&name);
-        name.Append(L":");
+        name.Append(VSTR(":"));
 
         const char * cgname = cgGetTechniqueName(pTechnique);
         if ( cgname )
         {
             name.Append(cgname);
         } else {
-            CStringW pname;
-            pname.Format(L"%p", pTechnique);
+            CString pname;
+            pname.Format(VSTR("%p"), pTechnique);
             name.Append(pname);
         }
 

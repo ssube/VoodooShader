@@ -47,6 +47,7 @@
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)\Framework\Core;$(SolutionDir)\Dependencies\DevIL_x86_1.7.8\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Dependencies\DevIL_x86_1.7.8\lib\unicode;$(LibraryPath)</LibraryPath>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>

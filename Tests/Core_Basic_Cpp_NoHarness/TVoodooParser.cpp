@@ -13,12 +13,12 @@ SETUP(ParserFixture)
 
     HRESULT hr = CoCreateInstance(CLSID_VoodooParser, NULL, CLSCTX_INPROC_SERVER, IID_IVoodooParser, (void**)&pParser);
 
-    WIN_ASSERT_TRUE(SUCCEEDED(hr) && pParser != NULL, _T("IVoodooParser not created."));
+    WIN_ASSERT_TRUE(SUCCEEDED(hr) && pParser != NULL, VSTR("IVoodooParser not created."));
 }
 
 TEARDOWN(ParserFixture)
 {
-    WIN_ASSERT_EQUAL(0, pParser->Release(), _T("IVoodooParser not properly released."));
+    WIN_ASSERT_EQUAL(0, pParser->Release(), VSTR("IVoodooParser not properly released."));
 
     pParser = NULL;
     CoUninitialize();
@@ -37,7 +37,7 @@ BEGIN_TESTF(Parser_SingleVar, ParserFixture)
 
     hr = pParser->Parse(msg, PF_None, &msg);
     WIN_ASSERT_TRUE(SUCCEEDED(hr));
-    WIN_ASSERT_EQUAL(expected, msg, _T("String mismatch:\n\tParsed: %s\n"),msg );
+    WIN_ASSERT_EQUAL(expected, msg, VSTR("String mismatch:\n\tParsed: %s\n"),msg );
 }
 END_TESTF;
 
@@ -58,7 +58,7 @@ BEGIN_TESTF(Parser_EmptyVar, ParserFixture)
 
     hr = pParser->Parse(msg, PF_None, &msg);
     WIN_ASSERT_TRUE(SUCCEEDED(hr));
-    WIN_ASSERT_EQUAL(expected, msg, _T("String mismatch:\n\tParsed: %s\n"),msg );
+    WIN_ASSERT_EQUAL(expected, msg, VSTR("String mismatch:\n\tParsed: %s\n"),msg );
 
     hr = pParser->Remove(varname1);
     WIN_ASSERT_TRUE(SUCCEEDED(hr));
@@ -83,7 +83,7 @@ BEGIN_TESTF(Parser_SysOverwrite, ParserFixture)
 
     hr = pParser->Parse(msg, PF_None, &msg);
     WIN_ASSERT_TRUE(SUCCEEDED(hr));
-    WIN_ASSERT_EQUAL(expected, msg, _T("String mismatch:\n\tParsed: %s\n"),msg );
+    WIN_ASSERT_EQUAL(expected, msg, VSTR("String mismatch:\n\tParsed: %s\n"),msg );
 
     hr = pParser->Remove(varname);
     WIN_ASSERT_TRUE(SUCCEEDED(hr));
@@ -97,6 +97,6 @@ BEGIN_TESTF(Parser_StateVar, ParserFixture)
 
     HRESULT hr = pParser->Parse(msg, PF_None, &msg);
     WIN_ASSERT_TRUE(SUCCEEDED(hr));
-    WIN_ASSERT_EQUAL(expected, msg, _T("String mismatch:\n\tParsed: %s\n"),msg );
+    WIN_ASSERT_EQUAL(expected, msg, VSTR("String mismatch:\n\tParsed: %s\n"),msg );
 }
 END_TESTF;

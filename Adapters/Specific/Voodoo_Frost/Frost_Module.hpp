@@ -2,15 +2,15 @@
 #ifndef VOODOO_NWS_MODULE_HPP
 #define VOODOO_NWS_MODULE_HPP
 
-#define VOODOO_IMPORT
-#include "Voodoo_Core.hpp"
-
 // GLEW OpenGL extensions
 #include <GL/glew.h>
 #include <GL/wglew.h>
 
 #include "GL/gl.h"
 #include "Cg/cgGL.h"
+
+#include "VoodooFramework.hpp"
+#include "VoodooSupport.hpp"
 
 #include "Frost_Version.hpp"
 
@@ -19,28 +19,13 @@ namespace VoodooShader
     namespace Frost
     {
         class Adapter;
-
-        Version API_ModuleVersion();
-
-        int API_ClassCount();
-
-        const char * API_ClassInfo
-        (
-            _In_ int number
-        );
-
-        IObject * API_ClassCreate
-        (
-            _In_ int number, 
-            _In_ Core * core
-        );
     }
 }
 
-extern VoodooShader::Core * VoodooCore;
-extern VoodooShader::ILoggerRef VoodooLogger;
+extern LPVOODOOCORE VoodooCore;
+extern LPVOODOOLOGGER VoodooLogger;
 extern VoodooShader::Frost::Adapter * VoodooFrost;
-extern VoodooShader::ShaderRef TestShader;
+extern LPVOODOOSHADER TestShader;
 
 extern GLint gDepthTexture;
 extern GLint gThisFrame;

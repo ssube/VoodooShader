@@ -10,7 +10,7 @@
 CVoodooAdapter::CVoodooAdapter()
 {
     m_Refrs = 0;
-    m_Name = L"Null Adapter";
+    m_Name = VSTR("Null Adapter");
     m_Core = NULL;
 }
 

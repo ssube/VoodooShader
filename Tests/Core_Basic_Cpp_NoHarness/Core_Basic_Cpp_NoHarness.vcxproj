@@ -45,6 +45,7 @@
     <IncludePath>$(SolutionDir)\Framework\Core;N:\Code\WinUnit\Include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)\Framework\Core;N:\Code\WinUnit\Include;$(IncludePath)</IncludePath>

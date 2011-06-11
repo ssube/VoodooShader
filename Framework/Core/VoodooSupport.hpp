@@ -31,8 +31,10 @@
 
 #include "VoodooFramework.hpp"
 
+#include <atlstr.h>
+
 /**
- * Writes a formatted message to the given logger. This function uses CStringW.FormatV internally,
+ * Writes a formatted message to the given logger. This function uses CString.FormatV internally,
  * so any formatting restrictions on that also apply here (it uses printf syntax). This formats the
  * message use a va_list before crossing module/process boundaries, providing safer memory 
  * handling. This functions essentially identically to the .Net syntax for IVoodooLogger::Log(),
@@ -44,17 +46,20 @@
  * @param pMsg The format string to use.
  * @param ... The arguments to use for formatting.
  */
-inline HRESULT WINAPI LogFormat(IVoodooLogger * pLogger, DWORD Level, LPWSTR pModule, LPWSTR pMsg, ...)
+inline HRESULT WINAPI LogFormat(IVoodooLogger * pLogger, DWORD Level, LPTSTR pModule, LPTSTR pMsg, ...)
 {
     if ( pLogger == NULL || pModule == NULL || pMsg == NULL ) return VSFERR_INVALID_ARG;
 
-    CStringW fmtMsg;
+    CString fmtMsg;
+    CString module(pModule);
 
     va_list args;
     va_start(args, pModule);
     fmtMsg.FormatV(pMsg, args);
     va_end(args);
 
-    CComBSTR fmtBSTR = fmtMsg;
+    CComBSTR fmtBSTR(fmtMsg);
+    CComBSTR modBSTR(module);
+
     return pLogger->Log(Level, pModule, fmtBSTR);
 }

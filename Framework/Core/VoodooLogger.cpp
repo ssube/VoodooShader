@@ -108,7 +108,7 @@ STDMETHODIMP CVoodooLogger::Open(
     {
         return VSFERR_FILE_ERROR;
     } else {
-        this->Log(LL_Internal, VOODOO_CORE_NAME, L"Log file opened.");
+        this->Log(LL_Internal, VOODOO_CORE_NAME, VSTR("Log file opened."));
     }
     return VSF_OK;
 }

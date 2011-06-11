@@ -39,7 +39,7 @@ IUnknown * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const PTCHAR lib, const
 
     if ( !baselib )
     {
-        ErrorMessage(_T("Voodoo Loader: Unable to load system DLL \"%s\"."), lib);
+        ErrorMessage(VSTR("Voodoo Loader: Unable to load system DLL \"%s\"."), lib);
         exit(1);
     }
 
@@ -48,9 +48,9 @@ IUnknown * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const PTCHAR lib, const
     if ( !initFunc )
     {
 #ifdef _UNICODE
-        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"%S\"."), func);
+        ErrorMessage(VSTR("Voodoo Loader: Unable to find system DLL function \"%S\"."), func);
 #else
-        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"%s\"."), func);
+        ErrorMessage(VSTR("Voodoo Loader: Unable to find system DLL function \"%s\"."), func);
 #endif
         exit(1);
     }
@@ -64,7 +64,7 @@ IUnknown * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const PTCHAR lib, const
 // Direct3D 8
 IUnknown * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 {
-    IUnknown * D3D8Obj = VoodooDXCreateGeneric(sdkVersion, _T("d3d8.dll"), "Direct3DCreate8");
+    IUnknown * D3D8Obj = VoodooDXCreateGeneric(sdkVersion, VSTR("d3d8.dll"), "Direct3DCreate8");
 
     VoodooStartup();
     VARIANT * v = PtrVariant(D3D8Obj);
@@ -77,7 +77,7 @@ IUnknown * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 // Direct3D 9
 IUnknown * WINAPI Voodoo3DCreate9(UINT sdkVersion)
 {
-    IUnknown * D3D9Obj = VoodooDXCreateGeneric(sdkVersion, _T("d3d9.dll"), "Direct3DCreate9");
+    IUnknown * D3D9Obj = VoodooDXCreateGeneric(sdkVersion, VSTR("d3d9.dll"), "Direct3DCreate9");
 
     VoodooStartup();
     VARIANT * v = PtrVariant(D3D9Obj);
@@ -99,17 +99,17 @@ HRESULT WINAPI VoodooInput8Create
 {
     typedef HRESULT (WINAPI * DIInitFunc)(HINSTANCE, DWORD, REFIID, LPVOID*, LPVOID);
 
-    HMODULE baselib = LoadSystemLibrary(_T("dinput8.dll"));
+    HMODULE baselib = LoadSystemLibrary(VSTR("dinput8.dll"));
     if ( !baselib )
     {
-        ErrorMessage(_T("Voodoo Loader: Unable to load system DLL \"dinput8.dll\"."));
+        ErrorMessage(VSTR("Voodoo Loader: Unable to load system DLL \"dinput8.dll\"."));
         exit(1);
     }
 
     DIInitFunc initFunc = (DIInitFunc)GetProcAddress(baselib, "DirectInput8Create");
     if ( !initFunc )
     {
-        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"DirectInput8Create\"."));
+        ErrorMessage(VSTR("Voodoo Loader: Unable to find system DLL function \"DirectInput8Create\"."));
         exit(1);
     }
 
@@ -128,11 +128,11 @@ HRESULT WINAPI VoodooInputCreateGeneric
 {
     typedef HRESULT (WINAPI * DIInitFunc)(HINSTANCE, DWORD, LPVOID, LPVOID);
 
-    HMODULE baselib = LoadSystemLibrary(_T("dinput.dll"));
+    HMODULE baselib = LoadSystemLibrary(VSTR("dinput.dll"));
 
     if ( !baselib )
     {
-        ErrorMessage(_T("Voodoo Loader: Unable to load system DLL \"dinput.dll\"."));
+        ErrorMessage(VSTR("Voodoo Loader: Unable to load system DLL \"dinput.dll\"."));
         exit(1);
     }
 
@@ -141,9 +141,9 @@ HRESULT WINAPI VoodooInputCreateGeneric
     if ( !initFunc )
     {
 #ifdef _UNICODE
-        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"%S\"."), func);
+        ErrorMessage(VSTR("Voodoo Loader: Unable to find system DLL function \"%S\"."), func);
 #else
-        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"%s\"."), func);
+        ErrorMessage(VSTR("Voodoo Loader: Unable to find system DLL function \"%s\"."), func);
 #endif
         exit(1);
     }
@@ -184,11 +184,11 @@ HRESULT WINAPI  VoodooSoundCreate8
 {
     typedef HRESULT (__stdcall * DSInitFunc)(LPCGUID, LPVOID*, LPVOID);
 
-    HMODULE baselib = LoadSystemLibrary(_T("dsound8.dll"));
+    HMODULE baselib = LoadSystemLibrary(VSTR("dsound8.dll"));
 
     if ( !baselib )
     {
-        ErrorMessage(_T("Voodoo Loader: Unable to load system DLL \"dsound8.dll\"."));
+        ErrorMessage(VSTR("Voodoo Loader: Unable to load system DLL \"dsound8.dll\"."));
         exit(1);
     }
 
@@ -196,7 +196,7 @@ HRESULT WINAPI  VoodooSoundCreate8
 
     if ( !initFunc )
     {
-        ErrorMessage(_T("Voodoo Loader: Unable to find system DLL function \"DirectSoundCreate8\"."));
+        ErrorMessage(VSTR("Voodoo Loader: Unable to find system DLL function \"DirectSoundCreate8\"."));
         exit(1);
     }
 
