@@ -5,6 +5,8 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
+#include "IL/il.h"
+
 using namespace ATL;
 
 // CWImage

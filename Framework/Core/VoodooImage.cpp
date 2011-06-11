@@ -116,6 +116,8 @@ STDMETHODIMP CVoodooImage::get_Path(LPBSTR pPath)
 
 STDMETHODIMP CVoodooImage::Open(DWORD Mode)
 {
+    UNREFERENCED_PARAMETER(Mode);
+
     return VSFOK_NULL_IMPL;
 }
 
@@ -137,6 +139,8 @@ STDMETHODIMP CVoodooImage::Read(int *Length, byte Buffer[ ])
 
 STDMETHODIMP CVoodooImage::Write(int Length, byte Buffer[ ])
 {
+    UNREFERENCED_PARAMETER(Length);
+
     if ( Buffer == NULL )
     {
         return E_INVALIDARG;
@@ -147,6 +151,9 @@ STDMETHODIMP CVoodooImage::Write(int Length, byte Buffer[ ])
 
 STDMETHODIMP CVoodooImage::get_Data(TextureRegion Region, int *pSize, byte ppBuffer[ ])
 {
+    UNREFERENCED_PARAMETER(Region);
+    UNREFERENCED_PARAMETER(ppBuffer);
+
     if ( pSize == NULL )
     {
         return E_INVALIDARG;

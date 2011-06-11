@@ -97,11 +97,15 @@ STDMETHODIMP CVoodooAdapter::get_Core(IVoodooCore **ppCore)
 
 STDMETHODIMP CVoodooAdapter::LoadPass(IVoodooPass *pPass)
 {
+    UNREFERENCED_PARAMETER(pPass);
+
     return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::UnloadPass(IVoodooPass *pPass)
 {
+    UNREFERENCED_PARAMETER(pPass);
+
     return VSFOK_NULL_IMPL;
 }
 
@@ -118,6 +122,8 @@ STDMETHODIMP CVoodooAdapter::get_Pass(IVoodooPass **ppPass)
 
 STDMETHODIMP CVoodooAdapter::put_Pass(IVoodooPass *pPass)
 {
+    UNREFERENCED_PARAMETER(pPass);
+
     return VSFOK_NULL_IMPL;
 }
 
@@ -134,11 +140,15 @@ STDMETHODIMP CVoodooAdapter::get_Target(IVoodooTexture **ppTarget)
 
 STDMETHODIMP CVoodooAdapter::put_Target(IVoodooTexture *pTarget)
 {
+    UNREFERENCED_PARAMETER(pTarget);
+
     return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::get_Light(int Index, LightStruct *pLight)
 {
+    UNREFERENCED_PARAMETER(Index);
+
     if ( pLight == NULL )
     {
         return E_INVALIDARG;
@@ -149,11 +159,16 @@ STDMETHODIMP CVoodooAdapter::get_Light(int Index, LightStruct *pLight)
 
 STDMETHODIMP CVoodooAdapter::put_Light(int Index, LightStruct pLight)
 {
+    UNREFERENCED_PARAMETER(Index);
+    UNREFERENCED_PARAMETER(pLight);
+
     return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::SetProperty(BSTR pName, VARIANT *pData)
 {
+    UNREFERENCED_PARAMETER(pName);
+
     if ( pData == NULL )
     {
         return E_INVALIDARG;
@@ -164,21 +179,31 @@ STDMETHODIMP CVoodooAdapter::SetProperty(BSTR pName, VARIANT *pData)
 
 STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, SAFEARRAY *pVertexData)
 {
+    UNREFERENCED_PARAMETER(Vertexes);
+    UNREFERENCED_PARAMETER(pVertexData);
+
     return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::ApplyParameter(IVoodooParameter *pParameter)
 {
+    UNREFERENCED_PARAMETER(pParameter);
+
     return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::DrawShader(IVoodooShader *pShader)
 {
+    UNREFERENCED_PARAMETER(pShader);
+
     return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooAdapter::CreateTexture(BSTR pName, TextureDesc Description, IVoodooTexture **ppTexture)
 {
+    UNREFERENCED_PARAMETER(pName);
+    UNREFERENCED_PARAMETER(Description);
+
     if ( ppTexture == NULL )
     {
         return E_INVALIDARG;
@@ -190,6 +215,8 @@ STDMETHODIMP CVoodooAdapter::CreateTexture(BSTR pName, TextureDesc Description, 
 
 STDMETHODIMP CVoodooAdapter::LoadTexture(IVoodooImage *pImage, TextureRegion Region, IVoodooTexture **ppTexture)
 {
+    UNREFERENCED_PARAMETER(Region);
+
     if ( ppTexture == NULL || pImage == NULL )
     {
         return E_INVALIDARG;
@@ -201,6 +228,8 @@ STDMETHODIMP CVoodooAdapter::LoadTexture(IVoodooImage *pImage, TextureRegion Reg
 
 STDMETHODIMP CVoodooAdapter::ConnectTexture(IVoodooParameter *pParameter, IVoodooTexture *pTexture)
 {
+    UNREFERENCED_PARAMETER(pTexture);
+
     if ( pParameter == NULL )
     {
         return E_INVALIDARG;
@@ -211,5 +240,9 @@ STDMETHODIMP CVoodooAdapter::ConnectTexture(IVoodooParameter *pParameter, IVoodo
 
 STDMETHODIMP CVoodooAdapter::HandleError(VARIANT pContext, DWORD Error, IVoodooCore *pCore)
 {
+    UNREFERENCED_PARAMETER(pContext);
+    UNREFERENCED_PARAMETER(Error);
+    UNREFERENCED_PARAMETER(pCore);
+
     return VSFOK_NULL_IMPL;
 }

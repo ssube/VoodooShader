@@ -92,11 +92,17 @@ STDMETHODIMP CVoodooHookSystem::get_Core(IVoodooCore **ppCore)
 
 STDMETHODIMP CVoodooHookSystem::Add(BSTR pName, FunctionPtr pSource, FunctionPtr pDest)
 {
+    UNREFERENCED_PARAMETER(pName);
+    UNREFERENCED_PARAMETER(pSource);
+    UNREFERENCED_PARAMETER(pDest);
+
     return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooHookSystem::Remove(BSTR pName)
 {
+    UNREFERENCED_PARAMETER(pName);
+
     return VSFOK_NULL_IMPL;
 }
 

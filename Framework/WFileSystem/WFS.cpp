@@ -2,6 +2,10 @@
 
 #include "stdafx.h"
 #include "WFS.h"
+#include "WFile.h"
+#include "WImage.h"
+
+#include "Il/il.h"
 
 CWFS::CWFS()
     : m_Init(FALSE)
@@ -20,19 +24,25 @@ STDMETHODIMP CWFS::Initialize(IVoodooCore *pCore)
     WCHAR cvar[MAX_PATH] = { 0 };
     if ( SHGetFolderPath(NULL, CSIDL_COMMON_DOCUMENTS, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
     {
-        StringCchCat(cvar, MAX_PATH, L"\\My Games\\");
-        pParser->AddVariable(L"allgames", cvar, true);
+        CComBSTR dir(cvar);
+        dir.Append(L"\\My Games\\");
+
+        pParser->Add(L"allgames", dir, true);
     }
     cvar[0] = 0;
     if ( SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
     {
-        StringCchCat(cvar, MAX_PATH, L"\\My Games\\");
-        pParser->AddVariable(L"mygames", cvar, true);
+        CComBSTR dir(cvar);
+        dir.Append(L"\\My Games\\");
+
+        pParser->Add(L"mygames", dir, true);
     }
     cvar[0] = 0;
     if ( SHGetFolderPath(NULL, CSIDL_SYSTEM, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
     {
-        pParser->AddVariable(L"systemroot", cvar, true);
+        CComBSTR dir(cvar);
+
+        pParser->Add(L"systemroot", dir, true);
     }
 
     // Init DevIL
@@ -48,7 +58,7 @@ STDMETHODIMP CWFS::Initialize(IVoodooCore *pCore)
     CComBSTR pathValueQuery(L"./text()");
 
     CComPtr<IXMLDOMNodeList> pPathList = NULL;
-    hr = pConfig->selectNodes(pathsQuery, &pPathList);
+    HRESULT hr = pConfig->selectNodes(pathsQuery, &pPathList);
     if ( SUCCEEDED(hr) && pPathList != NULL )
     {
         CComPtr<IXMLDOMNode> pPathNode = NULL;
@@ -60,6 +70,8 @@ STDMETHODIMP CWFS::Initialize(IVoodooCore *pCore)
             this->AddDirectory(vpath.bstrVal);
         }
     }
+
+    return VSF_OK;
 }
 
 STDMETHODIMP CWFS::get_Core(IVoodooCore **ppCore)
@@ -119,7 +131,7 @@ STDMETHODIMP CWFS::RemoveDirectory(BSTR pPath)
     {
         return VSFOK_NOT_FOUND;
     } else {
-        this->m_Directories.Remove(pos);
+        this->m_Directories.RemoveAt(pos);
         return VSF_OK;
     }
 }
@@ -143,23 +155,18 @@ STDMETHODIMP CWFS::FindFile(BSTR pPath, IVoodooFile **ppFile)
         CStringW filename = m_Directories.GetNext(dirPos);
         filename += modFile;
 
-        CFile file(dir);
+        CFile file;
+        file.Open(filename, CFile::modeRead);
+
         if ( file.m_hFile != CFile::hFileNull )
         {
+            file.Close();
+
             // File exists. Test for image.
-            ILuint image = ilGenImage();
-            ilBindImage(image);
-
-            ILboolean loaded = ilLoadImage(filename.);
-
-            if ( loaded == IL_FALSE )
+            IVoodooFile * pFile = CWImage::Create(filename);
+            if ( pFile == NULL )
             {
-                ilBindImage(0);
-                ilDeleteImage(image);
-                
-                *ppFile = CWFile.Create(file)
-            } else {
-                *ppFile = CWImage.Create(file);
+                pFile = CWFile::Create(filename);
             }
 
             return VSF_OK;

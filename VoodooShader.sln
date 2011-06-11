@@ -25,25 +25,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX9", "Adapters\Generic\Voodoo_DX9\Voodoo_DX9.vcxproj", "{758A3040-38D6-4573-8C1B-74B35ECCAA6E}"
 	ProjectSection(ProjectDependencies) = postProject
-		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX89", "Adapters\Generic\Voodoo_DX89\Voodoo_DX89.vcxproj", "{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F}"
 	ProjectSection(ProjectDependencies) = postProject
-		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Frost", "Adapters\Specific\Voodoo_Frost\Voodoo_Frost.vcxproj", "{98903591-D205-49ED-AE60-44BDD620D16E}"
 	ProjectSection(ProjectDependencies) = postProject
-		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Gem", "Adapters\Specific\Voodoo_Gem\Voodoo_Gem.vcxproj", "{1BCE17B2-8422-45C7-AE61-8277C08FE251}"
 	ProjectSection(ProjectDependencies) = postProject
-		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Testbed", "Utilities\Testbed\Testbed.vcxproj", "{F43BEAEB-9EBF-4FDA-BDB6-B7C810746EF1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogViewer", "Utilities\LogViewer\LogViewer.csproj", "{82C4257D-3F4D-4F7D-A0B6-0282C044E7E7}"
 EndProject
@@ -86,6 +89,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_EHHook", "Framework\
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_WFileSystem", "Framework\WFileSystem\WFileSystem.vcxproj", "{52D4AFA6-F986-4362-9D2F-A04809464B54}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -493,9 +499,9 @@ Global
 		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

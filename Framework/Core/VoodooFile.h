@@ -19,7 +19,7 @@ class ATL_NO_VTABLE CVoodooFile :
 public:
     CVoodooFile();
     virtual ~CVoodooFile();
-    static IVoodooFile * Create(IVoodooCore * pCore, BSTR pPath);
+    static IVoodooFile * Create(BSTR pPath);
 
     DECLARE_PROTECT_FINAL_CONSTRUCT()
 

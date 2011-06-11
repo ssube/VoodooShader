@@ -107,20 +107,10 @@ inline HRESULT WINAPI LogFormat(IVoodooLogger * pLogger, DWORD Level, LPWSTR pMo
     va_end(args);
 
     CComBSTR fmtBSTR = fmtMsg;
-    return pLogger->Log(Level, pModule, fmtBSTR, NULL);
+    return pLogger->Log(Level, pModule, fmtBSTR);
 }
 
 CGtype WINAPI ToCgType(ParameterType Type);
 ParameterType WINAPI ToParameterType(CGtype Type);
 ParameterCategory WINAPI ToParameterCategory(ParameterType Type);
 TextureFormat WINAPI ToTextureFormat(BSTR pString);
-
-/*
-#ifdef _DEBUG
-CPair<long, int> VoodooMemMgr_MemBlock;
-CMap<void*, void*, VoodooMemMgr_MemBlock, VoodooMemMgr_MemBlock> VoodooMemMgr_Memory;
-
-int VoodooMemMgr(int allocType, void *userData, size_t size, int blockType, long requestNumber, const unsigned char *filename, int lineNumber);
-void VoodooMemMgr_Report();
-#endif
-*/

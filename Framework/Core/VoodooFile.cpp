@@ -9,19 +9,15 @@
 CVoodooFile::CVoodooFile()
 {
     m_Refrs = 0;
-    m_Core = NULL;
 }
 
 CVoodooFile::~CVoodooFile()
 {
     m_Refrs = 0;
-    m_Core = NULL;
 }
 
-IVoodooFile * CVoodooFile::Create(IVoodooCore * pCore, BSTR pPath)
+IVoodooFile * CVoodooFile::Create(BSTR pPath)
 {
-    if ( pCore == NULL ) return NULL;
-
     CComPtr<CVoodooFile> ipFile = NULL;
 
     CComObject<CVoodooFile> * pFile = NULL;
@@ -30,8 +26,6 @@ IVoodooFile * CVoodooFile::Create(IVoodooCore * pCore, BSTR pPath)
     {
         pFile->AddRef();
 
-        pFile->m_Core = pCore;
-        pFile->m_Name = pPath; //! @todo Change this to just the filename, no path
         pFile->m_Path = pPath;
 
         hr = pFile->QueryInterface(IID_IVoodooFile, (void**)&ipFile);
@@ -85,6 +79,8 @@ STDMETHODIMP CVoodooFile::get_Path(LPBSTR pPath)
 
 STDMETHODIMP CVoodooFile::Open(DWORD Mode)
 {
+    UNREFERENCED_PARAMETER(Mode);
+
     return VSFOK_NULL_IMPL;
 }
 
@@ -106,6 +102,8 @@ STDMETHODIMP CVoodooFile::Read(int *Length, byte Buffer[ ])
 
 STDMETHODIMP CVoodooFile::Write(int Length, byte Buffer[ ])
 {
+    UNREFERENCED_PARAMETER(Length);
+
     if ( Buffer == NULL )
     {
         return E_INVALIDARG;

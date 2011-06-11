@@ -6,7 +6,7 @@
 // CWFile
 IVoodooFile * CWFile::Create(CStringW Filename)
 {
-    if ( Filename.Empty() ) return NULL;
+    if ( Filename.GetLength() == 0 ) return NULL;
 
     CComPtr<IVoodooFile> ipFile = NULL;
 
@@ -78,6 +78,8 @@ STDMETHODIMP CWFile::Open
 STDMETHODIMP CWFile::Close(void)
 {
     this->m_File.Close();
+
+    return VSF_OK;
 }
 
 STDMETHODIMP CWFile::Read
@@ -94,7 +96,7 @@ STDMETHODIMP CWFile::Read
     if ( gotLen != tryLen )
     {
         *Length = gotLen;
-        return VSFERR_READ_LEN;
+        return VSF_FAIL;
     } else {
         return VSF_OK;
     }

@@ -190,7 +190,7 @@ HRESULT CXmlLogger::Open(BSTR pFilename, VARIANT_BOOL Append)
         this->DebugLog(logMsg);
         this->m_LogFile.WriteString(logMsg);
 
-        this->Log(LL_Internal, VOODOO_LOGGER_NAME, L"Log file opened by XmlLogger::Open.", NULL);
+        this->Log(LL_Internal, VOODOO_LOGGER_NAME, L"Log file opened by XmlLogger::Open.");
 
         VersionStruct loggerVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
         this->LogModule(loggerVersion);
@@ -258,6 +258,29 @@ HRESULT CXmlLogger::LogModule
     return VSF_OK;
 }
 
+HRESULT CXmlLogger::Log(DWORD Level, BSTR pModule, BSTR pMsg)
+{
+    if ( m_LogFile.m_hFile == CFile::hFileNull ) return VSFERR_NO_FILE;
+
+    try
+    {
+        DWORD mask = (LogLevel)(Level & m_LogLevel);
+        if ( !(mask & 0x0F) || !(mask & 0xF0) ) return VSFOK_LOG_LEVEL;
+
+        CStringW logMsg;
+        logMsg.Format(L"    <Message severity=\"%X\" %s %s source=\"%s\">%s</Message>\n", Level, this->LogTime(), this->LogTicks(), pModule, pMsg);
+
+        DebugLog(logMsg);
+        m_LogFile.WriteString(logMsg);
+
+        return VSF_OK;
+    } catch ( CException & exc ) {
+        UNREFERENCED_PARAMETER(exc);
+
+        return VSFERR_LOG_ERROR;
+    }
+}
+
 HRESULT CXmlLogger::get_BufferSize(int * pSize)
 {
     if ( pSize == NULL ) return VSFERR_INVALID_ARG;
@@ -286,95 +309,4 @@ HRESULT CXmlLogger::put_LogLevel(DWORD Level)
 {
     m_LogLevel = (LogLevel)Level;
     return VSF_OK;
-}
-
-HRESULT CXmlLogger::Log(DWORD Level, BSTR pModule, BSTR pMsg, SAFEARRAY * pArgs)
-{
-    if ( m_LogFile.m_hFile == CFile::hFileNull ) return VSFERR_NO_FILE;
-
-    try
-    {
-        DWORD mask = (LogLevel)(Level & m_LogLevel);
-        if ( !(mask & 0x0F) || !(mask & 0xF0) ) return VSFOK_LOG_LEVEL;
-
-        CStringW logMsg;
-        logMsg.Format(L"    <Message severity=\"%X\" %s %s source=\"%s\">", Level, this->LogTime(), this->LogTicks(), pModule);
-        logMsg.Append(FormatSA(pMsg, pArgs));
-        logMsg.Append(L"</Message>\n");
-
-        DebugLog(logMsg);
-        m_LogFile.WriteString(logMsg);
-
-        return VSF_OK;
-    } catch ( CException & exc ) {
-        return VSFERR_LOG_ERROR;
-    }
-}
-
-HRESULT CXmlLogger::LogList(DWORD Level, BSTR pModule, BSTR pFormat, VARIANT pList)
-{
-    if ( m_LogFile.m_hFile == CFile::hFileNull ) return VSFERR_NO_FILE;
-
-    return E_NOTIMPL;
-}
-
-CStringW CXmlLogger::FormatSA(BSTR pFormatStr, SAFEARRAY * pArgs)
-{
-    CStringW fmt(pFormatStr);
-    const int fmtlen = fmt.GetLength();
-    int argpos = fmt.Find(L'%');
-
-    if ( argpos == -1 )
-    {
-        return fmt;
-    }
-
-    CComSafeArray<VARIANT> args;
-    args.Attach(pArgs);
-    const int arglen = args.GetCount();
-    int carg = 0;
-
-    CStringW out;
-
-    while ( argpos != -1 && argpos < (fmtlen-1) && carg < arglen )
-    {
-        out.Append(fmt.Left(argpos-1));
-
-        WCHAR type = fmt.GetAt(argpos+1);
-        VARIANT arg = args.GetAt(carg);
-
-        if ( CheckVT(type, &arg) )
-        {
-            out.AppendFormat(out.Mid(argpos, 2), arg);
-        } else {
-            out.Append(L"arg error");
-        }
-
-        fmt = fmt.Mid(2);
-        argpos = fmt.Find(L'%');
-        ++carg;
-    }
-
-    out.Append(fmt);
-
-    return out;
-}
-
-bool CXmlLogger::CheckVT(TCHAR TypeChar, VARIANT * Variant)
-{
-    if ( Variant == NULL ) return false;
-
-    switch ( TypeChar )
-    {
-    case L'u':
-        return ( V_VT(Variant) & ( VT_UI2 | VT_UI4 | VT_UI8 | VT_UINT ) ) != 0;
-    case L'i':
-        return ( V_VT(Variant) & ( VT_I2 | VT_I4 | VT_I8 | VT_INT ) ) != 0;
-    case L'f':
-        return ( V_VT(Variant) & ( VT_R4 | VT_R8 ) ) != 0;
-    case L's':
-        return ( V_VT(Variant) & VT_BSTR ) != 0;
-    default:
-        return false;
-    }
 }

@@ -113,16 +113,22 @@ STDMETHODIMP CVoodooFileSystem::get_Core(IVoodooCore **ppCore)
 
 STDMETHODIMP CVoodooFileSystem::AddDirectory(BSTR pPath)
 {
+    UNREFERENCED_PARAMETER(pPath);
+
     return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooFileSystem::RemoveDirectory(BSTR pPath)
 {
+    UNREFERENCED_PARAMETER(pPath);
+
     return VSFOK_NULL_IMPL;
 }
 
 STDMETHODIMP CVoodooFileSystem::FindFile(BSTR pPath, IVoodooFile **ppFile)
 {
+    UNREFERENCED_PARAMETER(pPath);
+
     if ( ppFile == NULL )
     {
         return E_INVALIDARG;

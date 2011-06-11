@@ -43,16 +43,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>M:\Cg_July2010\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>M:\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>N:\Code\Cg_July2010\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>N:\Code\\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>M:\Cg_July2010\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>M:\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>N:\Code\Cg_July2010\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>N:\Code\\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>

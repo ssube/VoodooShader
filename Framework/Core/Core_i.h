@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Sat May 28 13:12:11 2011
+/* at Sat Jun 11 00:11:54 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -48,91 +48,91 @@
 #ifndef __IVoodooCore_FWD_DEFINED__
 #define __IVoodooCore_FWD_DEFINED__
 typedef interface IVoodooCore IVoodooCore;
-#endif     /* __IVoodooCore_FWD_DEFINED__ */
+#endif 	/* __IVoodooCore_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooParser_FWD_DEFINED__
 #define __IVoodooParser_FWD_DEFINED__
 typedef interface IVoodooParser IVoodooParser;
-#endif     /* __IVoodooParser_FWD_DEFINED__ */
+#endif 	/* __IVoodooParser_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooPlugin_FWD_DEFINED__
 #define __IVoodooPlugin_FWD_DEFINED__
 typedef interface IVoodooPlugin IVoodooPlugin;
-#endif     /* __IVoodooPlugin_FWD_DEFINED__ */
+#endif 	/* __IVoodooPlugin_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooShader_FWD_DEFINED__
 #define __IVoodooShader_FWD_DEFINED__
 typedef interface IVoodooShader IVoodooShader;
-#endif     /* __IVoodooShader_FWD_DEFINED__ */
+#endif 	/* __IVoodooShader_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooTechnique_FWD_DEFINED__
 #define __IVoodooTechnique_FWD_DEFINED__
 typedef interface IVoodooTechnique IVoodooTechnique;
-#endif     /* __IVoodooTechnique_FWD_DEFINED__ */
+#endif 	/* __IVoodooTechnique_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooPass_FWD_DEFINED__
 #define __IVoodooPass_FWD_DEFINED__
 typedef interface IVoodooPass IVoodooPass;
-#endif     /* __IVoodooPass_FWD_DEFINED__ */
+#endif 	/* __IVoodooPass_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooTexture_FWD_DEFINED__
 #define __IVoodooTexture_FWD_DEFINED__
 typedef interface IVoodooTexture IVoodooTexture;
-#endif     /* __IVoodooTexture_FWD_DEFINED__ */
+#endif 	/* __IVoodooTexture_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooParameter_FWD_DEFINED__
 #define __IVoodooParameter_FWD_DEFINED__
 typedef interface IVoodooParameter IVoodooParameter;
-#endif     /* __IVoodooParameter_FWD_DEFINED__ */
+#endif 	/* __IVoodooParameter_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooAdapter_FWD_DEFINED__
 #define __IVoodooAdapter_FWD_DEFINED__
 typedef interface IVoodooAdapter IVoodooAdapter;
-#endif     /* __IVoodooAdapter_FWD_DEFINED__ */
+#endif 	/* __IVoodooAdapter_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooHookSystem_FWD_DEFINED__
 #define __IVoodooHookSystem_FWD_DEFINED__
 typedef interface IVoodooHookSystem IVoodooHookSystem;
-#endif     /* __IVoodooHookSystem_FWD_DEFINED__ */
+#endif 	/* __IVoodooHookSystem_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooLogger_FWD_DEFINED__
 #define __IVoodooLogger_FWD_DEFINED__
 typedef interface IVoodooLogger IVoodooLogger;
-#endif     /* __IVoodooLogger_FWD_DEFINED__ */
+#endif 	/* __IVoodooLogger_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooFileSystem_FWD_DEFINED__
 #define __IVoodooFileSystem_FWD_DEFINED__
 typedef interface IVoodooFileSystem IVoodooFileSystem;
-#endif     /* __IVoodooFileSystem_FWD_DEFINED__ */
+#endif 	/* __IVoodooFileSystem_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooFile_FWD_DEFINED__
 #define __IVoodooFile_FWD_DEFINED__
 typedef interface IVoodooFile IVoodooFile;
-#endif     /* __IVoodooFile_FWD_DEFINED__ */
+#endif 	/* __IVoodooFile_FWD_DEFINED__ */
 
 
 #ifndef __IVoodooImage_FWD_DEFINED__
 #define __IVoodooImage_FWD_DEFINED__
 typedef interface IVoodooImage IVoodooImage;
-#endif     /* __IVoodooImage_FWD_DEFINED__ */
+#endif 	/* __IVoodooImage_FWD_DEFINED__ */
 
 
 #ifndef __IComponentRegistrar_FWD_DEFINED__
 #define __IComponentRegistrar_FWD_DEFINED__
 typedef interface IComponentRegistrar IComponentRegistrar;
-#endif     /* __IComponentRegistrar_FWD_DEFINED__ */
+#endif 	/* __IComponentRegistrar_FWD_DEFINED__ */
 
 
 #ifndef __CompReg_FWD_DEFINED__
@@ -144,7 +144,7 @@ typedef class CompReg CompReg;
 typedef struct CompReg CompReg;
 #endif /* __cplusplus */
 
-#endif     /* __CompReg_FWD_DEFINED__ */
+#endif 	/* __CompReg_FWD_DEFINED__ */
 
 
 #ifndef __VoodooCore_FWD_DEFINED__
@@ -156,7 +156,7 @@ typedef class VoodooCore VoodooCore;
 typedef struct VoodooCore VoodooCore;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooCore_FWD_DEFINED__ */
+#endif 	/* __VoodooCore_FWD_DEFINED__ */
 
 
 #ifndef __VoodooParser_FWD_DEFINED__
@@ -168,7 +168,7 @@ typedef class VoodooParser VoodooParser;
 typedef struct VoodooParser VoodooParser;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooParser_FWD_DEFINED__ */
+#endif 	/* __VoodooParser_FWD_DEFINED__ */
 
 
 #ifndef __VoodooShader_FWD_DEFINED__
@@ -180,7 +180,7 @@ typedef class VoodooShader VoodooShader;
 typedef struct VoodooShader VoodooShader;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooShader_FWD_DEFINED__ */
+#endif 	/* __VoodooShader_FWD_DEFINED__ */
 
 
 #ifndef __VoodooTechnique_FWD_DEFINED__
@@ -192,7 +192,7 @@ typedef class VoodooTechnique VoodooTechnique;
 typedef struct VoodooTechnique VoodooTechnique;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooTechnique_FWD_DEFINED__ */
+#endif 	/* __VoodooTechnique_FWD_DEFINED__ */
 
 
 #ifndef __VoodooPass_FWD_DEFINED__
@@ -204,7 +204,7 @@ typedef class VoodooPass VoodooPass;
 typedef struct VoodooPass VoodooPass;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooPass_FWD_DEFINED__ */
+#endif 	/* __VoodooPass_FWD_DEFINED__ */
 
 
 #ifndef __VoodooTexture_FWD_DEFINED__
@@ -216,7 +216,7 @@ typedef class VoodooTexture VoodooTexture;
 typedef struct VoodooTexture VoodooTexture;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooTexture_FWD_DEFINED__ */
+#endif 	/* __VoodooTexture_FWD_DEFINED__ */
 
 
 #ifndef __VoodooParameter_FWD_DEFINED__
@@ -228,7 +228,7 @@ typedef class VoodooParameter VoodooParameter;
 typedef struct VoodooParameter VoodooParameter;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooParameter_FWD_DEFINED__ */
+#endif 	/* __VoodooParameter_FWD_DEFINED__ */
 
 
 #ifndef __VoodooAdapter_FWD_DEFINED__
@@ -240,7 +240,7 @@ typedef class VoodooAdapter VoodooAdapter;
 typedef struct VoodooAdapter VoodooAdapter;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooAdapter_FWD_DEFINED__ */
+#endif 	/* __VoodooAdapter_FWD_DEFINED__ */
 
 
 #ifndef __VoodooHookSystem_FWD_DEFINED__
@@ -252,7 +252,7 @@ typedef class VoodooHookSystem VoodooHookSystem;
 typedef struct VoodooHookSystem VoodooHookSystem;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooHookSystem_FWD_DEFINED__ */
+#endif 	/* __VoodooHookSystem_FWD_DEFINED__ */
 
 
 #ifndef __VoodooLogger_FWD_DEFINED__
@@ -264,7 +264,7 @@ typedef class VoodooLogger VoodooLogger;
 typedef struct VoodooLogger VoodooLogger;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooLogger_FWD_DEFINED__ */
+#endif 	/* __VoodooLogger_FWD_DEFINED__ */
 
 
 #ifndef __VoodooFileSystem_FWD_DEFINED__
@@ -276,7 +276,7 @@ typedef class VoodooFileSystem VoodooFileSystem;
 typedef struct VoodooFileSystem VoodooFileSystem;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooFileSystem_FWD_DEFINED__ */
+#endif 	/* __VoodooFileSystem_FWD_DEFINED__ */
 
 
 #ifndef __VoodooFile_FWD_DEFINED__
@@ -288,7 +288,7 @@ typedef class VoodooFile VoodooFile;
 typedef struct VoodooFile VoodooFile;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooFile_FWD_DEFINED__ */
+#endif 	/* __VoodooFile_FWD_DEFINED__ */
 
 
 #ifndef __VoodooImage_FWD_DEFINED__
@@ -300,7 +300,7 @@ typedef class VoodooImage VoodooImage;
 typedef struct VoodooImage VoodooImage;
 #endif /* __cplusplus */
 
-#endif     /* __VoodooImage_FWD_DEFINED__ */
+#endif 	/* __VoodooImage_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -317,121 +317,125 @@ extern "C"{
 
 typedef /* [v1_enum] */ 
 enum TextureFormat
-    {    TF_Unknown    = 0,
-    TF_RGB5    = 0x1,
-    TF_RGB5A1    = 0x2,
-    TF_RGB8    = 0x3,
-    TF_RGBA8    = 0x4,
-    TF_RGB10A2    = 0x5,
-    TF_RGBA16F    = 0x10,
-    TF_RGBA32F    = 0x11,
-    TF_D16    = 0x40,
-    TF_D32    = 0x41,
-    TF_Max    = 0x7fffffff
-    }     TextureFormat;
+    {	TF_Unknown	= 0,
+	TF_RGB5	= 0x1,
+	TF_RGB5A1	= 0x2,
+	TF_RGB8	= 0x3,
+	TF_RGBA8	= 0x4,
+	TF_RGB10A2	= 0x5,
+	TF_RGBA16F	= 0x10,
+	TF_RGBA32F	= 0x11,
+	TF_D16	= 0x40,
+	TF_D32	= 0x41,
+	TF_Max	= 0x7fffffff
+    } 	TextureFormat;
 
 typedef /* [v1_enum] */ 
 enum ParameterType
-    {    PT_Unknown    = 0,
-    PT_Float1    = 0x11,
-    PT_Float2    = 0x12,
-    PT_Float3    = 0x13,
-    PT_Float4    = 0x14,
-    PT_Float1x1    = 0x11,
-    PT_Float1x2    = 0x12,
-    PT_Float1x3    = 0x13,
-    PT_Float1x4    = 0x14,
-    PT_Float2x1    = 0x21,
-    PT_Float2x2    = 0x22,
-    PT_Float2x3    = 0x23,
-    PT_Float2x4    = 0x24,
-    PT_Float3x1    = 0x31,
-    PT_Float3x2    = 0x32,
-    PT_Float3x3    = 0x33,
-    PT_Float3x4    = 0x34,
-    PT_Float4x1    = 0x41,
-    PT_Float4x2    = 0x42,
-    PT_Float4x3    = 0x43,
-    PT_Float4x4    = 0x44,
-    PT_Sampler1D    = 0x101,
-    PT_Sampler2D    = 0x102,
-    PT_Sampler3D    = 0x103,
-    PT_Struct    = 0x1000,
-    PT_Max    = 0x7fffffff
-    }     ParameterType;
+    {	PT_Unknown	= 0,
+	PT_Float1	= 0x11,
+	PT_Float2	= 0x12,
+	PT_Float3	= 0x13,
+	PT_Float4	= 0x14,
+	PT_Float1x1	= 0x11,
+	PT_Float1x2	= 0x12,
+	PT_Float1x3	= 0x13,
+	PT_Float1x4	= 0x14,
+	PT_Float2x1	= 0x21,
+	PT_Float2x2	= 0x22,
+	PT_Float2x3	= 0x23,
+	PT_Float2x4	= 0x24,
+	PT_Float3x1	= 0x31,
+	PT_Float3x2	= 0x32,
+	PT_Float3x3	= 0x33,
+	PT_Float3x4	= 0x34,
+	PT_Float4x1	= 0x41,
+	PT_Float4x2	= 0x42,
+	PT_Float4x3	= 0x43,
+	PT_Float4x4	= 0x44,
+	PT_Sampler1D	= 0x101,
+	PT_Sampler2D	= 0x102,
+	PT_Sampler3D	= 0x103,
+	PT_Struct	= 0x1000,
+	PT_Max	= 0x7fffffff
+    } 	ParameterType;
 
 typedef /* [v1_enum] */ 
 enum ParameterCategory
-    {    PC_Unknown    = 0,
-    PC_Float    = 0x1,
-    PC_Sampler    = 0x2,
-    PC_Struct    = 0x4,
-    PC_Max    = 0x7fffffff
-    }     ParameterCategory;
+    {	PC_Unknown	= 0,
+	PC_Float	= 0x1,
+	PC_Sampler	= 0x2,
+	PC_Struct	= 0x4,
+	PC_Max	= 0x7fffffff
+    } 	ParameterCategory;
 
 typedef /* [v1_enum] */ 
 enum ProgramStage
-    {    PS_Unknown    = 0,
-    PS_Vertex    = 0x1,
-    PS_Fragment    = 0x2,
-    PS_Geometry    = 0x3,
-    PS_Domain    = 0x4,
-    PS_Hull    = 0x5,
-    PS_Max    = 0x7fffffff
-    }     ProgramStage;
+    {	PS_Unknown	= 0,
+	PS_Vertex	= 0x1,
+	PS_Fragment	= 0x2,
+	PS_Geometry	= 0x3,
+	PS_Domain	= 0x4,
+	PS_Hull	= 0x5,
+	PS_Max	= 0x7fffffff
+    } 	ProgramStage;
 
 typedef /* [v1_enum] */ 
 enum TextureStage
-    {    TS_Unknown    = 0,
-    TS_Shader    = 0x1,
-    TS_Pass    = 0x2,
-    TS_Max    = 0x7fffffff
-    }     TextureStage;
+    {	TS_Unknown	= 0,
+	TS_Shader	= 0x1,
+	TS_Pass	= 0x2,
+	TS_Max	= 0x7fffffff
+    } 	TextureStage;
 
 typedef /* [v1_enum] */ 
 enum FileOpenMode
-    {    FM_Unknown    = 0,
-    FM_Read    = 0x1,
-    FM_Write    = 0x2,
-    FM_Max    = 0x7fffffff
-    }     FileOpenMode;
+    {	FM_Unknown	= 0,
+	FM_Read	= 0x1,
+	FM_Write	= 0x2,
+	FM_ReadWrite	= 0x3,
+	FM_CreateOnly	= 0x10,
+	FM_OpenOnly	= 0x20,
+	FM_AlwaysOpen	= 0x30,
+	FM_Max	= 0x7fffffff
+    } 	FileOpenMode;
 
 typedef /* [v1_enum] */ 
 enum LogLevel
-    {    LL_Unknown    = 0,
-    LL_Debug    = 0x1,
-    LL_Info    = 0x2,
-    LL_Warning    = 0x4,
-    LL_Error    = 0x8,
-    LL_External    = 0x10,
-    LL_Plugin    = 0x20,
-    LL_Module    = 0x40,
-    LL_Framework    = 0x80,
-    LL_Internal    = 0x82,
-    LL_Initial    = 0xfe,
-    LL_All    = 0xff,
-    LL_Max    = 0x7fffffff
-    }     LogLevel;
+    {	LL_Unknown	= 0,
+	LL_Debug	= 0x1,
+	LL_Info	= 0x2,
+	LL_Warning	= 0x4,
+	LL_Error	= 0x8,
+	LL_External	= 0x10,
+	LL_Plugin	= 0x20,
+	LL_Module	= 0x40,
+	LL_Framework	= 0x80,
+	LL_Internal	= 0x82,
+	LL_Initial	= 0xfe,
+	LL_All	= 0xff,
+	LL_Max	= 0x7fffffff
+    } 	LogLevel;
 
 typedef /* [v1_enum] */ 
 enum ParseFlags
-    {    PF_None    = 0,
-    PF_SingleSlash    = 0x1,
-    PF_SlashOnly    = 0x2,
-    PF_BackslashOnly    = 0x4,
-    PF_Lowercase    = 0x10,
-    PF_Uppercase    = 0x20,
-    PF_VarName    = 0x100,
-    PF_Max    = 0x7fffffff
-    }     ParseFlags;
+    {	PF_None	= 0,
+	PF_SingleSlash	= 0x1,
+	PF_SlashOnly	= 0x2,
+	PF_BackslashOnly	= 0x4,
+	PF_Lowercase	= 0x10,
+	PF_Uppercase	= 0x20,
+	PF_VarName	= 0x100,
+	PF_Max	= 0x7fffffff
+    } 	ParseFlags;
 
 typedef /* [v1_enum] */ 
 enum VariableType
-    {    VT_Normal    = 0,
-    VT_State    = 0x1,
-    VT_System    = 0x10,
-    VT_Max    = 0x7fffffff
-    }     VariableType;
+    {	VT_Normal	= 0,
+	VT_State	= 0x1,
+	VT_System	= 0x10,
+	VT_Max	= 0x7fffffff
+    } 	VariableType;
 
 typedef /* [helpstring] */ struct InitParams
     {
@@ -441,7 +445,7 @@ typedef /* [helpstring] */ struct InitParams
     BSTR Target;
     BSTR Loader;
     BSTR Config;
-    }     InitParams;
+    } 	InitParams;
 
 typedef /* [helpstring] */ struct TextureDesc
     {
@@ -451,7 +455,7 @@ typedef /* [helpstring] */ struct TextureDesc
     VARIANT_BOOL Mipmaps;
     VARIANT_BOOL RenderTarget;
     TextureFormat Format;
-    }     TextureDesc;
+    } 	TextureDesc;
 
 typedef /* [helpstring] */ struct TextureRegion
     {
@@ -464,7 +468,7 @@ typedef /* [helpstring] */ struct TextureRegion
     int OffX;
     int OffY;
     int OffZ;
-    }     TextureRegion;
+    } 	TextureRegion;
 
 typedef /* [helpstring] */ struct VersionStruct
     {
@@ -474,20 +478,20 @@ typedef /* [helpstring] */ struct VersionStruct
     long Patch;
     long Rev;
     VARIANT_BOOL Debug;
-    }     VersionStruct;
+    } 	VersionStruct;
 
 typedef /* [helpstring] */ struct float2
     {
     float X;
     float Y;
-    }     float2;
+    } 	float2;
 
 typedef /* [helpstring] */ struct float3
     {
     float X;
     float Y;
     float Z;
-    }     float3;
+    } 	float3;
 
 typedef /* [helpstring] */ struct float4
     {
@@ -495,14 +499,14 @@ typedef /* [helpstring] */ struct float4
     float Y;
     float Z;
     float W;
-    }     float4;
+    } 	float4;
 
 typedef /* [helpstring] */ struct VertexStruct
     {
     float3 Position;
     float Winding;
     float2 TexCoord;
-    }     VertexStruct;
+    } 	VertexStruct;
 
 typedef /* [helpstring] */ struct LightStruct
     {
@@ -517,12 +521,12 @@ typedef /* [helpstring] */ struct LightStruct
     float3 Attenuation;
     float Theta;
     float Phi;
-    }     LightStruct;
+    } 	LightStruct;
 
 typedef /* [helpstring] */ struct FunctionPtr
     {
     unsigned __int64 Address;
-    }     FunctionPtr;
+    } 	FunctionPtr;
 
 typedef DWORD EnumType;
 
@@ -627,7 +631,7 @@ EXTERN_C const IID IID_IVoodooCore;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooCoreVtbl
     {
@@ -770,92 +774,92 @@ EXTERN_C const IID IID_IVoodooCore;
 #ifdef COBJMACROS
 
 
-#define IVoodooCore_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooCore_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooCore_AddRef(This)    \
+#define IVoodooCore_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooCore_Release(This)    \
+#define IVoodooCore_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooCore_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooCore_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooCore_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooCore_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooCore_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooCore_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooCore_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooCore_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooCore_Initialize(This,pParams)    \
+#define IVoodooCore_Initialize(This,pParams)	\
     ( (This)->lpVtbl -> Initialize(This,pParams) ) 
 
-#define IVoodooCore_get_Parser(This,ppParser)    \
+#define IVoodooCore_get_Parser(This,ppParser)	\
     ( (This)->lpVtbl -> get_Parser(This,ppParser) ) 
 
-#define IVoodooCore_get_HookSystem(This,ppHookSystem)    \
+#define IVoodooCore_get_HookSystem(This,ppHookSystem)	\
     ( (This)->lpVtbl -> get_HookSystem(This,ppHookSystem) ) 
 
-#define IVoodooCore_get_FileSystem(This,ppFileSystem)    \
+#define IVoodooCore_get_FileSystem(This,ppFileSystem)	\
     ( (This)->lpVtbl -> get_FileSystem(This,ppFileSystem) ) 
 
-#define IVoodooCore_get_Adapter(This,ppAdapter)    \
+#define IVoodooCore_get_Adapter(This,ppAdapter)	\
     ( (This)->lpVtbl -> get_Adapter(This,ppAdapter) ) 
 
-#define IVoodooCore_get_Logger(This,ppLogger)    \
+#define IVoodooCore_get_Logger(This,ppLogger)	\
     ( (This)->lpVtbl -> get_Logger(This,ppLogger) ) 
 
-#define IVoodooCore_get_Config(This,ppConfig)    \
+#define IVoodooCore_get_Config(This,ppConfig)	\
     ( (This)->lpVtbl -> get_Config(This,ppConfig) ) 
 
-#define IVoodooCore_get_CgContext(This,pCgContext)    \
+#define IVoodooCore_get_CgContext(This,pCgContext)	\
     ( (This)->lpVtbl -> get_CgContext(This,pCgContext) ) 
 
-#define IVoodooCore_put_CgContext(This,CgContext)    \
+#define IVoodooCore_put_CgContext(This,CgContext)	\
     ( (This)->lpVtbl -> put_CgContext(This,CgContext) ) 
 
-#define IVoodooCore_CreateShader(This,pFile,pArgs,ppShader)    \
+#define IVoodooCore_CreateShader(This,pFile,pArgs,ppShader)	\
     ( (This)->lpVtbl -> CreateShader(This,pFile,pArgs,ppShader) ) 
 
-#define IVoodooCore_CreateParameter(This,pName,Type,ppParameter)    \
+#define IVoodooCore_CreateParameter(This,pName,Type,ppParameter)	\
     ( (This)->lpVtbl -> CreateParameter(This,pName,Type,ppParameter) ) 
 
-#define IVoodooCore_CreateTexture(This,pName,Desc,Data,ppTexture)    \
+#define IVoodooCore_CreateTexture(This,pName,Desc,Data,ppTexture)	\
     ( (This)->lpVtbl -> CreateTexture(This,pName,Desc,Data,ppTexture) ) 
 
-#define IVoodooCore_GetParameter(This,pName,ppParameter)    \
+#define IVoodooCore_GetParameter(This,pName,ppParameter)	\
     ( (This)->lpVtbl -> GetParameter(This,pName,ppParameter) ) 
 
-#define IVoodooCore_GetTexture(This,pName,ppTexture)    \
+#define IVoodooCore_GetTexture(This,pName,ppTexture)	\
     ( (This)->lpVtbl -> GetTexture(This,pName,ppTexture) ) 
 
-#define IVoodooCore_RemoveParameter(This,pName)    \
+#define IVoodooCore_RemoveParameter(This,pName)	\
     ( (This)->lpVtbl -> RemoveParameter(This,pName) ) 
 
-#define IVoodooCore_RemoveTexture(This,pName)    \
+#define IVoodooCore_RemoveTexture(This,pName)	\
     ( (This)->lpVtbl -> RemoveTexture(This,pName) ) 
 
-#define IVoodooCore_GetStageTexture(This,Stage,ppTexture)    \
+#define IVoodooCore_GetStageTexture(This,Stage,ppTexture)	\
     ( (This)->lpVtbl -> GetStageTexture(This,Stage,ppTexture) ) 
 
-#define IVoodooCore_SetStageTexture(This,Stage,pTexture)    \
+#define IVoodooCore_SetStageTexture(This,Stage,pTexture)	\
     ( (This)->lpVtbl -> SetStageTexture(This,Stage,pTexture) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooCore_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooCore_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooParser_INTERFACE_DEFINED__
@@ -888,7 +892,7 @@ EXTERN_C const IID IID_IVoodooParser;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooParserVtbl
     {
@@ -964,47 +968,47 @@ EXTERN_C const IID IID_IVoodooParser;
 #ifdef COBJMACROS
 
 
-#define IVoodooParser_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooParser_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooParser_AddRef(This)    \
+#define IVoodooParser_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooParser_Release(This)    \
+#define IVoodooParser_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooParser_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooParser_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooParser_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooParser_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooParser_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooParser_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooParser_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooParser_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooParser_Add(This,pName,pValue,System)    \
+#define IVoodooParser_Add(This,pName,pValue,System)	\
     ( (This)->lpVtbl -> Add(This,pName,pValue,System) ) 
 
-#define IVoodooParser_Remove(This,pName)    \
+#define IVoodooParser_Remove(This,pName)	\
     ( (This)->lpVtbl -> Remove(This,pName) ) 
 
-#define IVoodooParser_Parse(This,pString,Flags,pParsed)    \
+#define IVoodooParser_Parse(This,pString,Flags,pParsed)	\
     ( (This)->lpVtbl -> Parse(This,pString,Flags,pParsed) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooParser_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooParser_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooPlugin_INTERFACE_DEFINED__
@@ -1030,7 +1034,7 @@ EXTERN_C const IID IID_IVoodooPlugin;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooPluginVtbl
     {
@@ -1098,44 +1102,44 @@ EXTERN_C const IID IID_IVoodooPlugin;
 #ifdef COBJMACROS
 
 
-#define IVoodooPlugin_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooPlugin_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooPlugin_AddRef(This)    \
+#define IVoodooPlugin_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooPlugin_Release(This)    \
+#define IVoodooPlugin_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooPlugin_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooPlugin_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooPlugin_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooPlugin_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooPlugin_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooPlugin_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooPlugin_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooPlugin_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooPlugin_Initialize(This,pCore)    \
+#define IVoodooPlugin_Initialize(This,pCore)	\
     ( (This)->lpVtbl -> Initialize(This,pCore) ) 
 
-#define IVoodooPlugin_get_Core(This,ppCore)    \
+#define IVoodooPlugin_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooPlugin_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooPlugin_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooShader_INTERFACE_DEFINED__
@@ -1184,7 +1188,7 @@ EXTERN_C const IID IID_IVoodooShader;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooShaderVtbl
     {
@@ -1282,65 +1286,65 @@ EXTERN_C const IID IID_IVoodooShader;
 #ifdef COBJMACROS
 
 
-#define IVoodooShader_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooShader_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooShader_AddRef(This)    \
+#define IVoodooShader_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooShader_Release(This)    \
+#define IVoodooShader_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooShader_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooShader_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooShader_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooShader_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooShader_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooShader_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooShader_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooShader_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooShader_get_Name(This,ppName)    \
+#define IVoodooShader_get_Name(This,ppName)	\
     ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
-#define IVoodooShader_get_Core(This,ppCore)    \
+#define IVoodooShader_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
-#define IVoodooShader_get_TechniqueCount(This,pCount)    \
+#define IVoodooShader_get_TechniqueCount(This,pCount)	\
     ( (This)->lpVtbl -> get_TechniqueCount(This,pCount) ) 
 
-#define IVoodooShader_GetTechnique(This,Number,ppTechnique)    \
+#define IVoodooShader_GetTechnique(This,Number,ppTechnique)	\
     ( (This)->lpVtbl -> GetTechnique(This,Number,ppTechnique) ) 
 
-#define IVoodooShader_get_DefaultTechnique(This,ppTechnique)    \
+#define IVoodooShader_get_DefaultTechnique(This,ppTechnique)	\
     ( (This)->lpVtbl -> get_DefaultTechnique(This,ppTechnique) ) 
 
-#define IVoodooShader_put_DefaultTechnique(This,pTechnique)    \
+#define IVoodooShader_put_DefaultTechnique(This,pTechnique)	\
     ( (This)->lpVtbl -> put_DefaultTechnique(This,pTechnique) ) 
 
-#define IVoodooShader_get_ParameterCount(This,pCount)    \
+#define IVoodooShader_get_ParameterCount(This,pCount)	\
     ( (This)->lpVtbl -> get_ParameterCount(This,pCount) ) 
 
-#define IVoodooShader_GetParameter(This,Number,ppParameter)    \
+#define IVoodooShader_GetParameter(This,Number,ppParameter)	\
     ( (This)->lpVtbl -> GetParameter(This,Number,ppParameter) ) 
 
-#define IVoodooShader_get_CgShader(This,pCgShader)    \
+#define IVoodooShader_get_CgShader(This,pCgShader)	\
     ( (This)->lpVtbl -> get_CgShader(This,pCgShader) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooShader_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooShader_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooTechnique_INTERFACE_DEFINED__
@@ -1382,7 +1386,7 @@ EXTERN_C const IID IID_IVoodooTechnique;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooTechniqueVtbl
     {
@@ -1471,59 +1475,59 @@ EXTERN_C const IID IID_IVoodooTechnique;
 #ifdef COBJMACROS
 
 
-#define IVoodooTechnique_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooTechnique_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooTechnique_AddRef(This)    \
+#define IVoodooTechnique_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooTechnique_Release(This)    \
+#define IVoodooTechnique_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooTechnique_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooTechnique_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooTechnique_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooTechnique_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooTechnique_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooTechnique_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooTechnique_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooTechnique_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooTechnique_get_Name(This,ppName)    \
+#define IVoodooTechnique_get_Name(This,ppName)	\
     ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
-#define IVoodooTechnique_get_Core(This,ppCore)    \
+#define IVoodooTechnique_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
-#define IVoodooTechnique_get_Target(This,ppTexture)    \
+#define IVoodooTechnique_get_Target(This,ppTexture)	\
     ( (This)->lpVtbl -> get_Target(This,ppTexture) ) 
 
-#define IVoodooTechnique_get_PassCount(This,pCount)    \
+#define IVoodooTechnique_get_PassCount(This,pCount)	\
     ( (This)->lpVtbl -> get_PassCount(This,pCount) ) 
 
-#define IVoodooTechnique_GetPass(This,Number,ppPass)    \
+#define IVoodooTechnique_GetPass(This,Number,ppPass)	\
     ( (This)->lpVtbl -> GetPass(This,Number,ppPass) ) 
 
-#define IVoodooTechnique_get_Shader(This,ppShader)    \
+#define IVoodooTechnique_get_Shader(This,ppShader)	\
     ( (This)->lpVtbl -> get_Shader(This,ppShader) ) 
 
-#define IVoodooTechnique_get_CgTechnique(This,pCgTechnique)    \
+#define IVoodooTechnique_get_CgTechnique(This,pCgTechnique)	\
     ( (This)->lpVtbl -> get_CgTechnique(This,pCgTechnique) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooTechnique_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooTechnique_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooPass_INTERFACE_DEFINED__
@@ -1565,7 +1569,7 @@ EXTERN_C const IID IID_IVoodooPass;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooPassVtbl
     {
@@ -1654,59 +1658,59 @@ EXTERN_C const IID IID_IVoodooPass;
 #ifdef COBJMACROS
 
 
-#define IVoodooPass_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooPass_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooPass_AddRef(This)    \
+#define IVoodooPass_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooPass_Release(This)    \
+#define IVoodooPass_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooPass_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooPass_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooPass_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooPass_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooPass_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooPass_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooPass_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooPass_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooPass_get_Name(This,ppName)    \
+#define IVoodooPass_get_Name(This,ppName)	\
     ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
-#define IVoodooPass_get_Core(This,ppCore)    \
+#define IVoodooPass_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
-#define IVoodooPass_get_Target(This,ppTexture)    \
+#define IVoodooPass_get_Target(This,ppTexture)	\
     ( (This)->lpVtbl -> get_Target(This,ppTexture) ) 
 
-#define IVoodooPass_get_Shader(This,ppShader)    \
+#define IVoodooPass_get_Shader(This,ppShader)	\
     ( (This)->lpVtbl -> get_Shader(This,ppShader) ) 
 
-#define IVoodooPass_get_Technique(This,ppTechnique)    \
+#define IVoodooPass_get_Technique(This,ppTechnique)	\
     ( (This)->lpVtbl -> get_Technique(This,ppTechnique) ) 
 
-#define IVoodooPass_GetCgProgram(This,Stage,pProgram)    \
+#define IVoodooPass_GetCgProgram(This,Stage,pProgram)	\
     ( (This)->lpVtbl -> GetCgProgram(This,Stage,pProgram) ) 
 
-#define IVoodooPass_get_CgPass(This,pCgPass)    \
+#define IVoodooPass_get_CgPass(This,pCgPass)	\
     ( (This)->lpVtbl -> get_CgPass(This,pCgPass) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooPass_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooPass_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooTexture_INTERFACE_DEFINED__
@@ -1738,7 +1742,7 @@ EXTERN_C const IID IID_IVoodooTexture;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooTextureVtbl
     {
@@ -1814,50 +1818,50 @@ EXTERN_C const IID IID_IVoodooTexture;
 #ifdef COBJMACROS
 
 
-#define IVoodooTexture_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooTexture_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooTexture_AddRef(This)    \
+#define IVoodooTexture_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooTexture_Release(This)    \
+#define IVoodooTexture_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooTexture_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooTexture_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooTexture_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooTexture_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooTexture_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooTexture_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooTexture_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooTexture_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooTexture_get_Name(This,ppName)    \
+#define IVoodooTexture_get_Name(This,ppName)	\
     ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
-#define IVoodooTexture_get_Core(This,ppCore)    \
+#define IVoodooTexture_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
-#define IVoodooTexture_get_Data(This,pData)    \
+#define IVoodooTexture_get_Data(This,pData)	\
     ( (This)->lpVtbl -> get_Data(This,pData) ) 
 
-#define IVoodooTexture_get_Desc(This,pDesc)    \
+#define IVoodooTexture_get_Desc(This,pDesc)	\
     ( (This)->lpVtbl -> get_Desc(This,pDesc) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooTexture_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooTexture_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooParameter_INTERFACE_DEFINED__
@@ -1913,7 +1917,7 @@ EXTERN_C const IID IID_IVoodooParameter;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooParameterVtbl
     {
@@ -2021,74 +2025,74 @@ EXTERN_C const IID IID_IVoodooParameter;
 #ifdef COBJMACROS
 
 
-#define IVoodooParameter_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooParameter_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooParameter_AddRef(This)    \
+#define IVoodooParameter_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooParameter_Release(This)    \
+#define IVoodooParameter_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooParameter_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooParameter_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooParameter_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooParameter_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooParameter_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooParameter_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooParameter_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooParameter_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooParameter_get_Name(This,ppName)    \
+#define IVoodooParameter_get_Name(This,ppName)	\
     ( (This)->lpVtbl -> get_Name(This,ppName) ) 
 
-#define IVoodooParameter_get_Core(This,ppCore)    \
+#define IVoodooParameter_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
-#define IVoodooParameter_get_Type(This,pType)    \
+#define IVoodooParameter_get_Type(This,pType)	\
     ( (This)->lpVtbl -> get_Type(This,pType) ) 
 
-#define IVoodooParameter_get_Virtual(This,pVirtual)    \
+#define IVoodooParameter_get_Virtual(This,pVirtual)	\
     ( (This)->lpVtbl -> get_Virtual(This,pVirtual) ) 
 
-#define IVoodooParameter_AttachParameter(This,pParameter)    \
+#define IVoodooParameter_AttachParameter(This,pParameter)	\
     ( (This)->lpVtbl -> AttachParameter(This,pParameter) ) 
 
-#define IVoodooParameter_get_Components(This,pComponents)    \
+#define IVoodooParameter_get_Components(This,pComponents)	\
     ( (This)->lpVtbl -> get_Components(This,pComponents) ) 
 
-#define IVoodooParameter_get_SamplerValue(This,ppTexture)    \
+#define IVoodooParameter_get_SamplerValue(This,ppTexture)	\
     ( (This)->lpVtbl -> get_SamplerValue(This,ppTexture) ) 
 
-#define IVoodooParameter_put_SamplerValue(This,pTexture)    \
+#define IVoodooParameter_put_SamplerValue(This,pTexture)	\
     ( (This)->lpVtbl -> put_SamplerValue(This,pTexture) ) 
 
-#define IVoodooParameter_get_ScalarValue(This,ppData)    \
+#define IVoodooParameter_get_ScalarValue(This,ppData)	\
     ( (This)->lpVtbl -> get_ScalarValue(This,ppData) ) 
 
-#define IVoodooParameter_put_ScalarValue(This,pData)    \
+#define IVoodooParameter_put_ScalarValue(This,pData)	\
     ( (This)->lpVtbl -> put_ScalarValue(This,pData) ) 
 
-#define IVoodooParameter_get_Shader(This,ppShader)    \
+#define IVoodooParameter_get_Shader(This,ppShader)	\
     ( (This)->lpVtbl -> get_Shader(This,ppShader) ) 
 
-#define IVoodooParameter_get_CgParameter(This,pCgParameter)    \
+#define IVoodooParameter_get_CgParameter(This,pCgParameter)	\
     ( (This)->lpVtbl -> get_CgParameter(This,pCgParameter) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooParameter_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooParameter_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooAdapter_INTERFACE_DEFINED__
@@ -2159,7 +2163,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooAdapterVtbl
     {
@@ -2292,87 +2296,87 @@ EXTERN_C const IID IID_IVoodooAdapter;
 #ifdef COBJMACROS
 
 
-#define IVoodooAdapter_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooAdapter_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooAdapter_AddRef(This)    \
+#define IVoodooAdapter_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooAdapter_Release(This)    \
+#define IVoodooAdapter_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooAdapter_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooAdapter_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooAdapter_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooAdapter_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooAdapter_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooAdapter_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooAdapter_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooAdapter_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooAdapter_Initialize(This,pCore)    \
+#define IVoodooAdapter_Initialize(This,pCore)	\
     ( (This)->lpVtbl -> Initialize(This,pCore) ) 
 
-#define IVoodooAdapter_get_Core(This,ppCore)    \
+#define IVoodooAdapter_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
 
-#define IVoodooAdapter_LoadPass(This,pPass)    \
+#define IVoodooAdapter_LoadPass(This,pPass)	\
     ( (This)->lpVtbl -> LoadPass(This,pPass) ) 
 
-#define IVoodooAdapter_UnloadPass(This,pPass)    \
+#define IVoodooAdapter_UnloadPass(This,pPass)	\
     ( (This)->lpVtbl -> UnloadPass(This,pPass) ) 
 
-#define IVoodooAdapter_get_Pass(This,ppPass)    \
+#define IVoodooAdapter_get_Pass(This,ppPass)	\
     ( (This)->lpVtbl -> get_Pass(This,ppPass) ) 
 
-#define IVoodooAdapter_put_Pass(This,pPass)    \
+#define IVoodooAdapter_put_Pass(This,pPass)	\
     ( (This)->lpVtbl -> put_Pass(This,pPass) ) 
 
-#define IVoodooAdapter_get_Target(This,ppTarget)    \
+#define IVoodooAdapter_get_Target(This,ppTarget)	\
     ( (This)->lpVtbl -> get_Target(This,ppTarget) ) 
 
-#define IVoodooAdapter_put_Target(This,pTarget)    \
+#define IVoodooAdapter_put_Target(This,pTarget)	\
     ( (This)->lpVtbl -> put_Target(This,pTarget) ) 
 
-#define IVoodooAdapter_CreateTexture(This,pName,Description,ppTexture)    \
+#define IVoodooAdapter_CreateTexture(This,pName,Description,ppTexture)	\
     ( (This)->lpVtbl -> CreateTexture(This,pName,Description,ppTexture) ) 
 
-#define IVoodooAdapter_LoadTexture(This,pImage,Region,ppTexture)    \
+#define IVoodooAdapter_LoadTexture(This,pImage,Region,ppTexture)	\
     ( (This)->lpVtbl -> LoadTexture(This,pImage,Region,ppTexture) ) 
 
-#define IVoodooAdapter_DrawGeometry(This,Vertexes,pVertexData)    \
+#define IVoodooAdapter_DrawGeometry(This,Vertexes,pVertexData)	\
     ( (This)->lpVtbl -> DrawGeometry(This,Vertexes,pVertexData) ) 
 
-#define IVoodooAdapter_DrawShader(This,pShader)    \
+#define IVoodooAdapter_DrawShader(This,pShader)	\
     ( (This)->lpVtbl -> DrawShader(This,pShader) ) 
 
-#define IVoodooAdapter_ApplyParameter(This,pParameter)    \
+#define IVoodooAdapter_ApplyParameter(This,pParameter)	\
     ( (This)->lpVtbl -> ApplyParameter(This,pParameter) ) 
 
-#define IVoodooAdapter_SetProperty(This,pName,pData)    \
+#define IVoodooAdapter_SetProperty(This,pName,pData)	\
     ( (This)->lpVtbl -> SetProperty(This,pName,pData) ) 
 
-#define IVoodooAdapter_ConnectTexture(This,pParameter,pTexture)    \
+#define IVoodooAdapter_ConnectTexture(This,pParameter,pTexture)	\
     ( (This)->lpVtbl -> ConnectTexture(This,pParameter,pTexture) ) 
 
-#define IVoodooAdapter_HandleError(This,pContext,Error,pCore)    \
+#define IVoodooAdapter_HandleError(This,pContext,Error,pCore)	\
     ( (This)->lpVtbl -> HandleError(This,pContext,Error,pCore) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooAdapter_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooAdapter_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooHookSystem_INTERFACE_DEFINED__
@@ -2402,7 +2406,7 @@ EXTERN_C const IID IID_IVoodooHookSystem;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooHookSystemVtbl
     {
@@ -2483,54 +2487,54 @@ EXTERN_C const IID IID_IVoodooHookSystem;
 #ifdef COBJMACROS
 
 
-#define IVoodooHookSystem_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooHookSystem_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooHookSystem_AddRef(This)    \
+#define IVoodooHookSystem_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooHookSystem_Release(This)    \
+#define IVoodooHookSystem_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooHookSystem_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooHookSystem_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooHookSystem_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooHookSystem_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooHookSystem_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooHookSystem_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooHookSystem_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooHookSystem_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooHookSystem_Initialize(This,pCore)    \
+#define IVoodooHookSystem_Initialize(This,pCore)	\
     ( (This)->lpVtbl -> Initialize(This,pCore) ) 
 
-#define IVoodooHookSystem_get_Core(This,ppCore)    \
+#define IVoodooHookSystem_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
 
-#define IVoodooHookSystem_Add(This,pName,pSource,pDest)    \
+#define IVoodooHookSystem_Add(This,pName,pSource,pDest)	\
     ( (This)->lpVtbl -> Add(This,pName,pSource,pDest) ) 
 
-#define IVoodooHookSystem_Remove(This,pName)    \
+#define IVoodooHookSystem_Remove(This,pName)	\
     ( (This)->lpVtbl -> Remove(This,pName) ) 
 
-#define IVoodooHookSystem_RemoveAll(This)    \
+#define IVoodooHookSystem_RemoveAll(This)	\
     ( (This)->lpVtbl -> RemoveAll(This) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooHookSystem_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooHookSystem_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooLogger_INTERFACE_DEFINED__
@@ -2578,7 +2582,7 @@ EXTERN_C const IID IID_IVoodooLogger;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooLoggerVtbl
     {
@@ -2683,72 +2687,72 @@ EXTERN_C const IID IID_IVoodooLogger;
 #ifdef COBJMACROS
 
 
-#define IVoodooLogger_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooLogger_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooLogger_AddRef(This)    \
+#define IVoodooLogger_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooLogger_Release(This)    \
+#define IVoodooLogger_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooLogger_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooLogger_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooLogger_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooLogger_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooLogger_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooLogger_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooLogger_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooLogger_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooLogger_Initialize(This,pCore)    \
+#define IVoodooLogger_Initialize(This,pCore)	\
     ( (This)->lpVtbl -> Initialize(This,pCore) ) 
 
-#define IVoodooLogger_get_Core(This,ppCore)    \
+#define IVoodooLogger_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
 
-#define IVoodooLogger_Open(This,pFilename,Append)    \
+#define IVoodooLogger_Open(This,pFilename,Append)	\
     ( (This)->lpVtbl -> Open(This,pFilename,Append) ) 
 
-#define IVoodooLogger_Close(This)    \
+#define IVoodooLogger_Close(This)	\
     ( (This)->lpVtbl -> Close(This) ) 
 
-#define IVoodooLogger_Dump(This)    \
+#define IVoodooLogger_Dump(This)	\
     ( (This)->lpVtbl -> Dump(This) ) 
 
-#define IVoodooLogger_get_LogLevel(This,pLevel)    \
+#define IVoodooLogger_get_LogLevel(This,pLevel)	\
     ( (This)->lpVtbl -> get_LogLevel(This,pLevel) ) 
 
-#define IVoodooLogger_put_LogLevel(This,Level)    \
+#define IVoodooLogger_put_LogLevel(This,Level)	\
     ( (This)->lpVtbl -> put_LogLevel(This,Level) ) 
 
-#define IVoodooLogger_LogModule(This,Module)    \
+#define IVoodooLogger_LogModule(This,Module)	\
     ( (This)->lpVtbl -> LogModule(This,Module) ) 
 
-#define IVoodooLogger_Log(This,Level,pModule,pMessage)    \
+#define IVoodooLogger_Log(This,Level,pModule,pMessage)	\
     ( (This)->lpVtbl -> Log(This,Level,pModule,pMessage) ) 
 
-#define IVoodooLogger_get_BufferSize(This,pSize)    \
+#define IVoodooLogger_get_BufferSize(This,pSize)	\
     ( (This)->lpVtbl -> get_BufferSize(This,pSize) ) 
 
-#define IVoodooLogger_put_BufferSize(This,Size)    \
+#define IVoodooLogger_put_BufferSize(This,Size)	\
     ( (This)->lpVtbl -> put_BufferSize(This,Size) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooLogger_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooLogger_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooFileSystem_INTERFACE_DEFINED__
@@ -2776,13 +2780,9 @@ EXTERN_C const IID IID_IVoodooFileSystem;
             /* [in] */ BSTR pPath,
             /* [retval][out] */ IVoodooFile **ppFile) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE FindImage( 
-            /* [in] */ BSTR pPath,
-            /* [retval][out] */ IVoodooImage **ppImage) = 0;
-        
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooFileSystemVtbl
     {
@@ -2850,11 +2850,6 @@ EXTERN_C const IID IID_IVoodooFileSystem;
             /* [in] */ BSTR pPath,
             /* [retval][out] */ IVoodooFile **ppFile);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *FindImage )( 
-            IVoodooFileSystem * This,
-            /* [in] */ BSTR pPath,
-            /* [retval][out] */ IVoodooImage **ppImage);
-        
         END_INTERFACE
     } IVoodooFileSystemVtbl;
 
@@ -2868,57 +2863,54 @@ EXTERN_C const IID IID_IVoodooFileSystem;
 #ifdef COBJMACROS
 
 
-#define IVoodooFileSystem_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooFileSystem_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooFileSystem_AddRef(This)    \
+#define IVoodooFileSystem_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooFileSystem_Release(This)    \
+#define IVoodooFileSystem_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooFileSystem_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooFileSystem_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooFileSystem_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooFileSystem_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooFileSystem_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooFileSystem_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooFileSystem_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooFileSystem_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooFileSystem_Initialize(This,pCore)    \
+#define IVoodooFileSystem_Initialize(This,pCore)	\
     ( (This)->lpVtbl -> Initialize(This,pCore) ) 
 
-#define IVoodooFileSystem_get_Core(This,ppCore)    \
+#define IVoodooFileSystem_get_Core(This,ppCore)	\
     ( (This)->lpVtbl -> get_Core(This,ppCore) ) 
 
 
-#define IVoodooFileSystem_AddDirectory(This,pPath)    \
+#define IVoodooFileSystem_AddDirectory(This,pPath)	\
     ( (This)->lpVtbl -> AddDirectory(This,pPath) ) 
 
-#define IVoodooFileSystem_RemoveDirectory(This,pPath)    \
+#define IVoodooFileSystem_RemoveDirectory(This,pPath)	\
     ( (This)->lpVtbl -> RemoveDirectory(This,pPath) ) 
 
-#define IVoodooFileSystem_FindFile(This,pPath,ppFile)    \
+#define IVoodooFileSystem_FindFile(This,pPath,ppFile)	\
     ( (This)->lpVtbl -> FindFile(This,pPath,ppFile) ) 
-
-#define IVoodooFileSystem_FindImage(This,pPath,ppImage)    \
-    ( (This)->lpVtbl -> FindImage(This,pPath,ppImage) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooFileSystem_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooFileSystem_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooFile_INTERFACE_DEFINED__
@@ -2954,7 +2946,7 @@ EXTERN_C const IID IID_IVoodooFile;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooFileVtbl
     {
@@ -3035,53 +3027,53 @@ EXTERN_C const IID IID_IVoodooFile;
 #ifdef COBJMACROS
 
 
-#define IVoodooFile_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooFile_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooFile_AddRef(This)    \
+#define IVoodooFile_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooFile_Release(This)    \
+#define IVoodooFile_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooFile_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooFile_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooFile_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooFile_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooFile_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooFile_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooFile_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooFile_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooFile_get_Path(This,pPath)    \
+#define IVoodooFile_get_Path(This,pPath)	\
     ( (This)->lpVtbl -> get_Path(This,pPath) ) 
 
-#define IVoodooFile_Open(This,Mode)    \
+#define IVoodooFile_Open(This,Mode)	\
     ( (This)->lpVtbl -> Open(This,Mode) ) 
 
-#define IVoodooFile_Close(This)    \
+#define IVoodooFile_Close(This)	\
     ( (This)->lpVtbl -> Close(This) ) 
 
-#define IVoodooFile_Read(This,Length,Buffer)    \
+#define IVoodooFile_Read(This,Length,Buffer)	\
     ( (This)->lpVtbl -> Read(This,Length,Buffer) ) 
 
-#define IVoodooFile_Write(This,Length,Buffer)    \
+#define IVoodooFile_Write(This,Length,Buffer)	\
     ( (This)->lpVtbl -> Write(This,Length,Buffer) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooFile_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooFile_INTERFACE_DEFINED__ */
 
 
 #ifndef __IVoodooImage_INTERFACE_DEFINED__
@@ -3109,7 +3101,7 @@ EXTERN_C const IID IID_IVoodooImage;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IVoodooImageVtbl
     {
@@ -3200,60 +3192,60 @@ EXTERN_C const IID IID_IVoodooImage;
 #ifdef COBJMACROS
 
 
-#define IVoodooImage_QueryInterface(This,riid,ppvObject)    \
+#define IVoodooImage_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IVoodooImage_AddRef(This)    \
+#define IVoodooImage_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IVoodooImage_Release(This)    \
+#define IVoodooImage_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IVoodooImage_GetTypeInfoCount(This,pctinfo)    \
+#define IVoodooImage_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IVoodooImage_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IVoodooImage_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IVoodooImage_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IVoodooImage_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IVoodooImage_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IVoodooImage_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IVoodooImage_get_Path(This,pPath)    \
+#define IVoodooImage_get_Path(This,pPath)	\
     ( (This)->lpVtbl -> get_Path(This,pPath) ) 
 
-#define IVoodooImage_Open(This,Mode)    \
+#define IVoodooImage_Open(This,Mode)	\
     ( (This)->lpVtbl -> Open(This,Mode) ) 
 
-#define IVoodooImage_Close(This)    \
+#define IVoodooImage_Close(This)	\
     ( (This)->lpVtbl -> Close(This) ) 
 
-#define IVoodooImage_Read(This,Length,Buffer)    \
+#define IVoodooImage_Read(This,Length,Buffer)	\
     ( (This)->lpVtbl -> Read(This,Length,Buffer) ) 
 
-#define IVoodooImage_Write(This,Length,Buffer)    \
+#define IVoodooImage_Write(This,Length,Buffer)	\
     ( (This)->lpVtbl -> Write(This,Length,Buffer) ) 
 
 
-#define IVoodooImage_get_Desc(This,pDesc)    \
+#define IVoodooImage_get_Desc(This,pDesc)	\
     ( (This)->lpVtbl -> get_Desc(This,pDesc) ) 
 
-#define IVoodooImage_get_Data(This,Region,pSize,ppBuffer)    \
+#define IVoodooImage_get_Data(This,Region,pSize,ppBuffer)	\
     ( (This)->lpVtbl -> get_Data(This,Region,pSize,ppBuffer) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IVoodooImage_INTERFACE_DEFINED__ */
+#endif 	/* __IVoodooImage_INTERFACE_DEFINED__ */
 
 
 #ifndef __IComponentRegistrar_INTERFACE_DEFINED__
@@ -3290,7 +3282,7 @@ EXTERN_C const IID IID_IComponentRegistrar;
         
     };
     
-#else     /* C style interface */
+#else 	/* C style interface */
 
     typedef struct IComponentRegistrarVtbl
     {
@@ -3373,56 +3365,56 @@ EXTERN_C const IID IID_IComponentRegistrar;
 #ifdef COBJMACROS
 
 
-#define IComponentRegistrar_QueryInterface(This,riid,ppvObject)    \
+#define IComponentRegistrar_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IComponentRegistrar_AddRef(This)    \
+#define IComponentRegistrar_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IComponentRegistrar_Release(This)    \
+#define IComponentRegistrar_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IComponentRegistrar_GetTypeInfoCount(This,pctinfo)    \
+#define IComponentRegistrar_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IComponentRegistrar_GetTypeInfo(This,iTInfo,lcid,ppTInfo)    \
+#define IComponentRegistrar_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IComponentRegistrar_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)    \
+#define IComponentRegistrar_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IComponentRegistrar_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)    \
+#define IComponentRegistrar_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IComponentRegistrar_Attach(This,bstrPath)    \
+#define IComponentRegistrar_Attach(This,bstrPath)	\
     ( (This)->lpVtbl -> Attach(This,bstrPath) ) 
 
-#define IComponentRegistrar_RegisterAll(This)    \
+#define IComponentRegistrar_RegisterAll(This)	\
     ( (This)->lpVtbl -> RegisterAll(This) ) 
 
-#define IComponentRegistrar_UnregisterAll(This)    \
+#define IComponentRegistrar_UnregisterAll(This)	\
     ( (This)->lpVtbl -> UnregisterAll(This) ) 
 
-#define IComponentRegistrar_GetComponents(This,pbstrCLSIDs,pbstrDescriptions)    \
+#define IComponentRegistrar_GetComponents(This,pbstrCLSIDs,pbstrDescriptions)	\
     ( (This)->lpVtbl -> GetComponents(This,pbstrCLSIDs,pbstrDescriptions) ) 
 
-#define IComponentRegistrar_RegisterComponent(This,bstrCLSID)    \
+#define IComponentRegistrar_RegisterComponent(This,bstrCLSID)	\
     ( (This)->lpVtbl -> RegisterComponent(This,bstrCLSID) ) 
 
-#define IComponentRegistrar_UnregisterComponent(This,bstrCLSID)    \
+#define IComponentRegistrar_UnregisterComponent(This,bstrCLSID)	\
     ( (This)->lpVtbl -> UnregisterComponent(This,bstrCLSID) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif     /* C style interface */
+#endif 	/* C style interface */
 
 
 
 
-#endif     /* __IComponentRegistrar_INTERFACE_DEFINED__ */
+#endif 	/* __IComponentRegistrar_INTERFACE_DEFINED__ */
 
 
 

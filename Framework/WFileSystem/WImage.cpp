@@ -15,7 +15,7 @@ IVoodooFile * CWImage::Create(CStringW Filename)
 
     ilBindImage(0);
 
-    if ( loaded == IL_FALSE )
+    if ( isImage == IL_FALSE )
     {
         ilDeleteImage(ilImage);
         return NULL;
@@ -60,7 +60,8 @@ STDMETHODIMP CWImage::get_Path
 {
     if ( pPath == NULL ) return VSFERR_INVALID_ARG;
 
-    return this->m_Path.CopyTo(pPath);
+    CComBSTR oPath = this->m_Path;
+    return oPath.CopyTo(pPath);
 }
 
 STDMETHODIMP CWImage::Open
@@ -92,6 +93,7 @@ STDMETHODIMP CWImage::Open
 STDMETHODIMP CWImage::Close(void)
 {
     this->m_File.Close();
+    return VSF_OK;
 }
 
 STDMETHODIMP CWImage::Read
@@ -108,7 +110,7 @@ STDMETHODIMP CWImage::Read
     if ( gotLen != tryLen )
     {
         *Length = gotLen;
-        return VSFERR_READ_LEN;
+        return VSF_FAIL;
     } else {
         return VSF_OK;
     }
@@ -220,7 +222,7 @@ STDMETHODIMP CWImage::get_Data
 
     ilBindImage(m_Image);
 
-    ilCopyPixels
+    ILuint retval = ilCopyPixels
     (
         Region.OffX, Region.OffY, Region.OffZ, 
         Region.Width, Region.Height, Region.Depth, 
@@ -228,4 +230,6 @@ STDMETHODIMP CWImage::get_Data
     );
 
     ilBindImage(0);
+
+    return VSF_OK;
 }

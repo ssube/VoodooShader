@@ -479,7 +479,6 @@ DECLARE_INTERFACE_IID_(IVoodooFileSystem, IVoodooPlugin, "1d3d7f90-6f32-11e0-8ac
     STDMETHOD(AddDirectory)(THIS_ BSTR pPath) PURE;
     STDMETHOD(RemoveDirectory)(THIS_ BSTR pPath) PURE;
     STDMETHOD(FindFile)(THIS_ BSTR pPath, IVoodooFile ** ppFile) PURE;
-    STDMETHOD(FindImage)(THIS_ BSTR pPath, IVoodooImage ** ppImage) PURE;
 };
 
 typedef struct IVoodooFileSystem *LPVOODOOFILESYSTEM, *PVOODOOFILESYSTEM;

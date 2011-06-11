@@ -53,8 +53,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE get_LogLevel(DWORD *pLevel);
     virtual HRESULT STDMETHODCALLTYPE put_LogLevel(DWORD Level);
     virtual HRESULT STDMETHODCALLTYPE LogModule(VersionStruct Module);
-    virtual HRESULT STDMETHODCALLTYPE Log(DWORD Level, BSTR pModule, BSTR pFormat, SAFEARRAY * ppArgs);
-    virtual HRESULT STDMETHODCALLTYPE LogList(DWORD Level, BSTR pModule, BSTR pFormat, VARIANT pList);
+    virtual HRESULT STDMETHODCALLTYPE Log(DWORD Level, BSTR pModule, BSTR pFormat);
     virtual HRESULT STDMETHODCALLTYPE get_BufferSize(int *pSize);
     virtual HRESULT STDMETHODCALLTYPE put_BufferSize(int Size);
 
@@ -85,9 +84,6 @@ private:
      * records ticks, usually ms since system start.
      */
     CStringW STDMETHODCALLTYPE LogTicks();
-
-    CStringW STDMETHODCALLTYPE FormatSA(BSTR pFormatStr, SAFEARRAY * pArgs);
-    bool STDMETHODCALLTYPE CheckVT(TCHAR TypeChar, VARIANT * Variant);
 
     inline void DebugLog(LPCWSTR pMsg)
     {

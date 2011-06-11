@@ -483,17 +483,21 @@ STDMETHODIMP CVoodooParameter::CreateSamplerTexture()
     // Check for a valid texture file
     IVoodooFileSystem * pFS = NULL;
     m_Core->get_FileSystem(&pFS);
-    IVoodooImage * pImage = NULL;
-    pFS->FindImage(texName, &pImage);
-    if ( pImage != NULL )
+    CComPtr<IVoodooFile> pFile;
+    pFS->FindFile(texName, &pFile);
+    if ( pFile != NULL )
     {
-        IVoodooAdapter * pAdapter = NULL;
-        m_Core->get_Adapter(&pAdapter);
-        IVoodooTexture * pTexture = NULL;
-        TextureRegion region = { 0, 0, 0, VARIANT_FALSE, VARIANT_FALSE, TF_Unknown, 0, 0, 0 };
-        pAdapter->LoadTexture(pImage, region, &pTexture);
-        m_Texture = pTexture;
-        return S_OK;
+        CComPtr<IVoodooImage> pImage;
+        if ( SUCCEEDED(pFile->QueryInterface(IID_IVoodooImage, (void**)&pImage)) && pImage != NULL )
+        {
+            IVoodooAdapter * pAdapter = NULL;
+            m_Core->get_Adapter(&pAdapter);
+            IVoodooTexture * pTexture = NULL;
+            TextureRegion region = { 0, 0, 0, VARIANT_FALSE, VARIANT_FALSE, TF_Unknown, 0, 0, 0 };
+            pAdapter->LoadTexture(pImage, region, &pTexture);
+            m_Texture = pTexture;
+            return S_OK;
+        }
     }
 
     // No file, make blank texture

@@ -108,7 +108,7 @@ STDMETHODIMP CVoodooLogger::Open(
     {
         return VSFERR_FILE_ERROR;
     } else {
-        this->Log(LL_Internal, VOODOO_CORE_NAME, L"Log file opened.", NULL);
+        this->Log(LL_Internal, VOODOO_CORE_NAME, L"Log file opened.");
     }
     return VSF_OK;
 }
@@ -154,36 +154,16 @@ STDMETHODIMP CVoodooLogger::Log
 ( 
     /* [in] */ DWORD Level,
     /* [in] */ BSTR pModule,
-    /* [in] */ BSTR pFormat,
-    /* [in] */ SAFEARRAY * ppArgs
+    /* [in] */ BSTR pMsg
 )
 {
-    if ( pFormat == NULL ) return VSFERR_INVALID_ARG;
+    UNREFERENCED_PARAMETER(Level);
+    UNREFERENCED_PARAMETER(pModule);
+
+    if ( pMsg == NULL ) return VSFERR_INVALID_ARG;
     if ( m_File.m_hFile == CFile::hFileNull ) return VSFERR_NO_FILE;
     
-    //! @todo Implement proper formatting here that isn't so ugly.
-    CComSafeArray<VARIANT> args;
-    args.Attach(ppArgs);
-    CStringW msg(pFormat);
-
-    for ( ULONG carg = 0; carg < args.GetCount(); ++carg )
-    {
-        CStringW search;
-        search.Format(L"{%u}", carg);
-        // Format the arg alone
-        VARIANT varg = args.GetAt(carg);
-        CStringW farg;
-        switch ( V_VT(&varg)  )
-        {
-        case VT_UINT:
-            farg.Format(L"%u", V_UINT(&varg));
-            break;
-        default:
-            farg = L"-argerror-";
-        }
-
-        msg.Replace(search.GetString(), farg.GetString());
-    }
+    CComBSTR msg(pMsg);
 
     m_File.WriteString(msg);
     return S_OK;
@@ -192,11 +172,15 @@ STDMETHODIMP CVoodooLogger::Log
 STDMETHODIMP CVoodooLogger::get_BufferSize( 
     /* [retval][out] */ int *pSize)
 {
+    UNREFERENCED_PARAMETER(pSize);
+
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CVoodooLogger::put_BufferSize( 
     /* [in] */ int Size)
 {
+    UNREFERENCED_PARAMETER(Size);
+
     return E_NOTIMPL;
 }

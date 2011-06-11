@@ -59,7 +59,7 @@ STDMETHODIMP CEHHookSystem::Initialize(IVoodooCore *pCore)
 
     LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
 
-    m_Logger->Log(LL_Info, VOODOO_HOOK_NAME, L"Created hook manager.", NULL);
+    m_Logger->Log(LL_Info, VOODOO_HOOK_NAME, L"Created hook manager.");
 
     return VSF_OK;
 }

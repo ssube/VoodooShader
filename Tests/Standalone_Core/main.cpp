@@ -31,7 +31,7 @@ int main(int argc, TCHAR * argv[])
     pCore->get_Parser(&pParser);
 
     BSTR Parsed;
-    pParser->AddVariable(L"lang", L"c++");
+    pParser->Add(L"lang", L"c++", VT_Normal);
     pParser->Parse(L"this is from $(lang).", PF_None, &Parsed);
 
     IVoodooHookSystem * pHookSystem;

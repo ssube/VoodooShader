@@ -56,5 +56,5 @@ inline HRESULT WINAPI LogFormat(IVoodooLogger * pLogger, DWORD Level, LPWSTR pMo
     va_end(args);
 
     CComBSTR fmtBSTR = fmtMsg;
-    return pLogger->Log(Level, pModule, fmtBSTR, NULL);
+    return pLogger->Log(Level, pModule, fmtBSTR);
 }

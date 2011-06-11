@@ -108,6 +108,8 @@ bool WINAPI GetGlobalRoot()
     }
 
     gInitParams.GlobalRoot = SysAllocString(pPath);
+
+    return true;
 }
 
 bool WINAPI GetLocalRoot()
@@ -137,6 +139,8 @@ bool WINAPI GetLocalRoot()
 
     gInitParams.LocalRoot = SysAllocString(Path.Left(lastSlash));
     gInitParams.Target = SysAllocString(Path.Mid(lastSlash));
+
+    return true;
 }
 
 bool WINAPI GetRunRoot()
@@ -150,6 +154,8 @@ bool WINAPI GetRunRoot()
     }
 
     gInitParams.RunRoot = SysAllocString(pPath);
+
+    return true;
 }
 
 bool WINAPI GetLoader(HINSTANCE hLoader)
@@ -171,6 +177,8 @@ bool WINAPI GetLoader(HINSTANCE hLoader)
     }
 
     gInitParams.Loader = SysAllocString(Path.Mid(lastSlash));
+
+    return true;
 }
 /**
  * @}
