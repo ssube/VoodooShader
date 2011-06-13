@@ -66,10 +66,13 @@ IUnknown * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 {
     IUnknown * D3D8Obj = VoodooDXCreateGeneric(sdkVersion, VSTR("d3d8.dll"), "Direct3DCreate8");
 
-    VoodooStartup();
-    VARIANT * v = PtrVariant(D3D8Obj);
-    gVoodooAdapter->SetProperty(L"Direct3DCreate8", v);
-    delete v;
+    if ( VoodooStartup() )
+    {
+        VARIANT * v = ToVariant(D3D8Obj);
+        gVoodooAdapter->SetProperty(L"D3D8Object", v);
+        D3D8Obj = V_UNKNOWN(v);
+        delete v;
+    }
 
     return D3D8Obj;
 }
@@ -77,12 +80,19 @@ IUnknown * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 // Direct3D 9
 IUnknown * WINAPI Voodoo3DCreate9(UINT sdkVersion)
 {
+    // Start D3D regularly
     IUnknown * D3D9Obj = VoodooDXCreateGeneric(sdkVersion, VSTR("d3d9.dll"), "Direct3DCreate9");
 
-    VoodooStartup();
-    VARIANT * v = PtrVariant(D3D9Obj);
-    gVoodooAdapter->SetProperty(L"Direct3DCreate9", v);
-    delete v;
+    // Start Voodoo
+    if ( VoodooStartup() )
+    {
+        // Send the D3D object to the Voodoo adapter, then send whatever is returned to the target.
+        // The adapter may replace the pointer to hook d3d at this point.
+        VARIANT * v = ToVariant(D3D9Obj);
+        gVoodooAdapter->SetProperty(L"D3D9Object", v);
+        D3D9Obj = V_UNKNOWN(v);
+        delete v;
+    }
 
     return D3D9Obj;
 }
@@ -113,7 +123,21 @@ HRESULT WINAPI VoodooInput8Create
         exit(1);
     }
 
-    return (*initFunc)(hinst, dwVersion, riidltf, ppvOut, punkOuter);
+    IUnknown * pDInput = NULL;
+    HRESULT hr = (*initFunc)(hinst, dwVersion, riidltf, (void**)&pDInput, punkOuter);
+
+    if ( SUCCEEDED(hr) && VoodooStartup() )
+    {
+        // Send the D3D object to the Voodoo adapter, then send whatever is returned to the target.
+        // The adapter may replace the pointer to hook d3d at this point.
+        VARIANT * v = ToVariant(pDInput);
+        gVoodooAdapter->SetProperty(L"DInput8Object", v);
+        pDInput = V_UNKNOWN(v);
+        delete v;
+    }
+
+    *ppvOut = pDInput;
+    return hr;
 }
 
 // DirectInput (unknown version)
@@ -148,7 +172,21 @@ HRESULT WINAPI VoodooInputCreateGeneric
         exit(1);
     }
 
-    return (*initFunc)(hinst, dwVersion, lplpDirectInput, punkOuter);
+    IUnknown * pDInput = NULL;
+    HRESULT hr = (*initFunc)(hinst, dwVersion, &pDInput, punkOuter);
+
+    if ( SUCCEEDED(hr) && VoodooStartup() )
+    {
+        // Send the D3D object to the Voodoo adapter, then send whatever is returned to the target.
+        // The adapter may replace the pointer to hook d3d at this point.
+        VARIANT * v = ToVariant(pDInput);
+        gVoodooAdapter->SetProperty(L"DInputObject", v);
+        pDInput = V_UNKNOWN(v);
+        delete v;
+    }
+
+    *lplpDirectInput = pDInput;
+    return hr;
 }
 
 HRESULT WINAPI VoodooInputCreateA
@@ -182,7 +220,7 @@ HRESULT WINAPI  VoodooSoundCreate8
     LPVOID pUnkOuter
 )
 {
-    typedef HRESULT (__stdcall * DSInitFunc)(LPCGUID, LPVOID*, LPVOID);
+    typedef HRESULT (WINAPI * DSInitFunc)(LPCGUID, LPVOID*, LPVOID);
 
     HMODULE baselib = LoadSystemLibrary(VSTR("dsound8.dll"));
 

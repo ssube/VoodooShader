@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Sat Jun 11 12:19:34 2011
+/* at Sun Jun 12 13:46:17 2011
  */
 /* Compiler settings for EHHook.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 

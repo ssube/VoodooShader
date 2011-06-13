@@ -24,19 +24,23 @@ void WINAPI ErrorMessage(LPTSTR pMsg, ...)
     MessageBox(NULL, Msg, VSTR("Voodoo Loader Error"), MB_OK|MB_ICONWARNING);
 }
 
-/**
- * Load a module from the system directory (uses absolute path to guarantee proper file).
- */
-VARIANT * PtrVariant(void * ptr)
+VARIANT * ToVariant(IUnknown * ptr)
 {
     VARIANT * v = new VARIANT();;
     VariantInit(v);
-    V_VT(v) = VT_BYREF;
-    V_BYREF(v) = ptr;
+    V_VT(v) = VT_UNKNOWN;
+    V_UNKNOWN(v) = ptr;
     return v;
 }
 
-HMODULE LoadSystemLibrary(const PTCHAR libname)
+/**
+ * Load a module from the system directory (uses absolute path to guarantee proper file).
+ *
+ * @param libname The filename (and optionally extension) of the file to load. This may contain a
+ *     path, but it will be interepreted relative to the system directory.
+ * @return A handle to the module if loaded or a null handle otherwise.
+ */
+HMODULE LoadSystemLibrary(const LPTSTR libname)
 {
     TCHAR Path[MAX_PATH];
 
@@ -47,8 +51,19 @@ HMODULE LoadSystemLibrary(const PTCHAR libname)
     return LoadLibrary(Path);
 }
 
+/**
+ * Creates and initializes the Voodoo core object, if one does not already exist. This triggers
+ * most of the loading process and must be called after CoInitialize.
+ * 
+ * @return True if the core was able to be created and initialized, false on errors.
+ **/
 bool WINAPI VoodooStartup()
 {
+    if ( gVoodooCore != NULL )
+    {
+        return false;
+    }
+
     HRESULT hr = CoCreateInstance(CLSID_VoodooCore, NULL, CLSCTX_INPROC_SERVER, IID_IVoodooCore, (void**)&gVoodooCore);
 
     if ( FAILED(hr) )
@@ -56,18 +71,31 @@ bool WINAPI VoodooStartup()
         ErrorMessage(VSTR("Unable to create Voodoo Core. CCI Error %X."), hr);
         return false;
     } else {
-        HRESULT hr = gVoodooCore->Initialize(gInitParams);
+        hr = gVoodooCore->Initialize(gInitParams);
 
         if ( FAILED(hr))
         {
             ErrorMessage(VSTR("Unable to create Voodoo Core. Init Error %X."), hr);
             return false;
         } else {
-            return true;
+            hr  = gVoodooCore->get_Adapter(&gVoodooAdapter);
+
+            if ( FAILED(hr))
+            {
+                ErrorMessage(VSTR("Unable to retrieve Voodoo Adapter. Error %X."), hr);
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 }
 
+/**
+ * Release the global Voodoo core, if it exists, and deallocate all global init parameter strings.
+ * 
+ * @return Always true.
+ **/
 bool WINAPI VoodooShutdown()
 {
     if ( gVoodooCore )
@@ -75,9 +103,22 @@ bool WINAPI VoodooShutdown()
         gVoodooCore->Release();
     }
 
+    SysFreeString(gInitParams.GlobalRoot);
+    SysFreeString(gInitParams.LocalRoot);
+    SysFreeString(gInitParams.RunRoot);
+    SysFreeString(gInitParams.Target);
+    SysFreeString(gInitParams.Loader);
+    SysFreeString(gInitParams.Config);
+
     return true;
 }
 
+/**
+ * Retrieve the global root path for Voodoo from the registry and set the global init params to use
+ * it.
+ * 
+ * @return Success of the operation.
+ **/
 bool WINAPI GetGlobalRoot()
 {
     HKEY pKey = NULL;

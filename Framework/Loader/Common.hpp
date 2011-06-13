@@ -36,7 +36,7 @@
 
 void WINAPI ErrorMessage(LPTSTR pMsg, ...);
 
-VARIANT * PtrVariant(void * ptr);
+VARIANT * ToVariant(IUnknown * ptr);
 HMODULE LoadSystemLibrary(const PTCHAR libname);
 
 bool WINAPI VoodooStartup();
