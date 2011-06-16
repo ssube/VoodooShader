@@ -42,8 +42,6 @@ using namespace ATL;
  * be run in order and forming the full effect. Techniques may be designed for a particular set of
  * hardware or feature level, and multiple techniques may be provided within a shader. Techniques
  * may have a target, which essentially acts as the output for the whole effect (final gather).
- * 
- * @sa @ref page_shaders_sec_tech
  **/
 
 /**

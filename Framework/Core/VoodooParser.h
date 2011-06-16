@@ -44,12 +44,12 @@ using namespace ATL;
  * A number of potentially useful features, including temporary variables and specialized rules for
  * path parsing, are available.
  * 
- * @sa @ref page_varsyntax
+ * @sa @ref page_vars_sec_syntax
  * @sa @ref ParseFlags
  **/
 
 /**
- * String/string map, functioning as a dictionary for variables. Keys are variable name.
+ * String/string map, functioning as a dictionary for variables. Keyed by variable name.
  */
 typedef CMap<CComBSTR, CComBSTR, CComBSTR, CComBSTR> Dictionary;
 
@@ -72,7 +72,8 @@ typedef CMap<CComBSTR, CComBSTR, CComBSTR, CComBSTR> Dictionary;
  *    
  * This object may be created externally (@tt CoCreateInstance) but will not feature logging in
  * that case. When created within Voodoo/Core (automatically performed by CVoodooCore on init), it
- * will be linked to an IVoodooLogger and can dump debug information on parsing.
+ * will be linked to an IVoodooLogger and can dump debug information on parsing. It is still safe
+ * to use this object without a core.
  */
 class ATL_NO_VTABLE CVoodooParser :
     public CComObjectRootEx<CComSingleThreadModel>,

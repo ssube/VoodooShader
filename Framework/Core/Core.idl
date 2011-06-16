@@ -421,7 +421,7 @@ interface IVoodooParameter : IDispatch
 
 // --------------------------------------------------
 // External/plugin interfaces.
-//  Only null implementations of these are provided.
+//  Simple or null implementations of these are provided within Voodoo/Core.
 // 
 [
     object,
@@ -529,8 +529,6 @@ interface IVoodooImage : IVoodooFile
 
 // --------------------------------------------------
 // Internal Voodoo/Core interfaces and coclasses.
-// These MUST NOT compile into external projects.
-// (this file should not be included externally)
 #ifdef VOODOO_INTERNAL
 [
     object,
@@ -640,7 +638,7 @@ library Voodoo_Core
         [default] interface IVoodooParameter;
     };
     // Plugin coclasses 
-    // (null implementations)
+    // (simple/null implementations)
     [        
         uuid(1d3d7faa-6f32-11e0-8ac0-005056c00000)    
     ]

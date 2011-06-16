@@ -52,8 +52,8 @@ namespace VoodooShader
             void SetGLRC(_In_opt_ HGLRC hglrc);
 
         private:
-            Core * mCore;
-            ILoggerRef mLogger;
+            IVoodooCore mCore;
+            IVoodooLogger mLogger;
 
             CGcontext mCgContext;
 

@@ -81,10 +81,7 @@ STDMETHODIMP CVoodooParser::Add(BSTR pName, BSTR pValue, DWORD Type)
     this->Parse(name, PF_VarName, &name);
     CComBSTR value(pValue);
 
-    if ( m_Logger )
-    {
-        LogFormat(m_Logger, LL_Debug|LL_Framework, VOODOO_CORE_NAME, VSTR("Adding variable \"%s\" with value \"%s\"."), name, value);
-    }
+    LogFormat(m_Logger, LL_Debug|LL_Framework, VOODOO_CORE_NAME, VSTR("Adding variable \"%s\" with value \"%s\"."), (LPWSTR)name, (LPWSTR)value);
 
     if ( Type == VT_System )
     {
@@ -101,31 +98,41 @@ STDMETHODIMP CVoodooParser::Add(BSTR pName, BSTR pValue, DWORD Type)
     } else {
         m_Variables.SetAt(name, value);
     }
+
     return S_OK;
 }
 
 STDMETHODIMP CVoodooParser::Remove(BSTR pName)
 {
-    /*ILoggerRef logger = m_Core->GetLogger();
-    if ( logger.get() )
-    {
-        m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
-    }*/
+    LogFormat(m_Logger, LL_Debug|LL_Framework, VOODOO_CORE_NAME, VSTR("Removing variable \"%s\"."), pName);
 
     CComBSTR name(pName);
-    this->Parse(name, PF_VarName, &name);
-
-    m_Variables.RemoveKey(name);
-    return S_OK;
+    if ( SUCCEEDED(this->Parse(name, PF_VarName, &name)) )
+    {
+        if ( m_Variables.RemoveKey(name) == TRUE )
+        {
+            return VSF_OK;
+        } else {
+            return VSFOK_NOT_FOUND;
+        }
+    } else {
+        return VSF_FAIL;
+    }
 }
 
 STDMETHODIMP CVoodooParser::Parse(BSTR pString, DWORD Flags, LPBSTR pParsed)
 {
     Dictionary parseState;
+
     CComBSTR input(pString);
+
     HRESULT hr = this->ParseRaw(&input, Flags, 0, &parseState);
-    input.CopyTo(pParsed);
-    return hr;
+    if ( SUCCEEDED(hr) )
+    {
+        return input.CopyTo(pParsed);
+    } else {
+        return hr;
+    }
 }
 
 STDMETHODIMP CVoodooParser::ParseRaw(LPBSTR pString, DWORD Flags, INT Depth, Dictionary * State)

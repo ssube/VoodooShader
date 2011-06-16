@@ -51,7 +51,7 @@ using namespace ATL;
  *     make additional stages available. Voodoo internally supports all stages up to OpenGL 4.0/
  *     DirectX 11.
  * 
- * @sa @ref page_shaders_sec_pass
+ * @sa @ref page_shaders_sec_stages
  **/
 
 /**
