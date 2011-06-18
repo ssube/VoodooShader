@@ -57,12 +57,12 @@ STDMETHODIMP_(ULONG) CVoodooCore::Release()
 
 STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 {
-    if ( Params.GlobalRoot ) { m_GlobalRoot.AppendBSTR(Params.GlobalRoot); }
-    if ( Params.LocalRoot  ) { m_LocalRoot.AppendBSTR (Params.LocalRoot ); }
-    if ( Params.RunRoot    ) { m_RunRoot.AppendBSTR   (Params.RunRoot   ); }
-    if ( Params.Target     ) { m_Target.AppendBSTR    (Params.Target    ); }
-    if ( Params.Loader     ) { m_Loader.AppendBSTR    (Params.Loader    ); }
-    if ( Params.Config     ) { m_ConfigFile.AppendBSTR(Params.Config    ); }
+    if ( Params.GlobalRoot ) { m_GlobalRoot = Params.GlobalRoot; }
+    if ( Params.LocalRoot  ) { m_LocalRoot  = Params.LocalRoot ; }
+    if ( Params.RunRoot    ) { m_RunRoot    = Params.RunRoot   ; }
+    if ( Params.Target     ) { m_Target     = Params.Target    ; }
+    if ( Params.Loader     ) { m_Loader     = Params.Loader    ; }
+    if ( Params.Config     ) { m_ConfigFile = Params.Config    ; }
 
     HRESULT hr = CoCreateInstance(__uuidof(DOMDocument60), NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&m_Config));
     if ( FAILED(hr) )
@@ -93,17 +93,6 @@ STDMETHODIMP CVoodooCore::Initialize(const InitParams Params)
 
                 if ( FAILED(LoadConfig(configPath)) )
                 {
-                    // May not be possible to handle well in COM.
-                    /*
-                    IXMLDOMParseError * pError = NULL;
-                    m_Config->get_parseError(&pError);
-                    CComBSTR fullError = VSTR("XML Error:\n");
-                    CComBSTR temp;
-                    pError->get_reason(&temp);
-                    fullError += temp;
-                    fullError += VSTR("\n");
-                    // Handle further
-                    */
                     return VSFERR_INVALID_CFG;
                 }
             }

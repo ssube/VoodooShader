@@ -44,7 +44,7 @@
  * 
  * When a variable is added to the parser, the name is immediately parsed using 
  * @p PF_Lowercase and the result is used as the actual name. This contrasts with values,
- * which are parsed when used.
+ * which are parsed when used. This also causes variable names to be @em case-insensitive.
  * 
  * @subsubsection page_vars_ssec_syntaxspec Special Characters
  * The ':' character indicates state variables, described below. 

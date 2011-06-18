@@ -43,30 +43,15 @@ BEGIN_COM_MAP(CWImage)
 END_COM_MAP()
 
 // IVoodooFile
-virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
-    /* [retval][out] */ LPBSTR pPath);
-
-virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
-    /* [in] */ DWORD Mode);
-
-virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close(void);
-
-virtual /* [id] */ HRESULT STDMETHODCALLTYPE Read( 
-    /* [out][in] */ int *Length,
-    /* [size_is][out] */ byte Buffer[  ]);
-
-virtual /* [id] */ HRESULT STDMETHODCALLTYPE Write( 
-    /* [in] */ int Length,
-    /* [size_is][in] */ byte Buffer[  ]);
+virtual HRESULT STDMETHODCALLTYPE get_Path(LPBSTR pPath);
+virtual HRESULT STDMETHODCALLTYPE Open(DWORD Mode);
+virtual HRESULT STDMETHODCALLTYPE Close(void);
+virtual HRESULT STDMETHODCALLTYPE Read(int * Length, byte Buffer[]);
+virtual HRESULT STDMETHODCALLTYPE Write(int Length, byte Buffer[]);
 
 // IVoodooImage
-virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Desc( 
-    /* [retval][out] */ TextureDesc *pDesc);
-
-virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
-    /* [in] */ TextureRegion Region,
-    /* [out][in] */ int *pSize,
-    /* [size_is][retval][out] */ byte ppBuffer[  ]);
+virtual HRESULT STDMETHODCALLTYPE get_Desc(TextureDesc * pDesc);
+virtual HRESULT STDMETHODCALLTYPE get_Data(TextureRegion Region, int * pSize, byte ppBuffer[]);
 
 public:
     ULONG m_Refrs;

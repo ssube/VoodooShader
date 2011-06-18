@@ -51,6 +51,10 @@ CWImage::~CWImage()
     {
         m_File.Close();
     }
+    if ( ilIsImage(m_Image) )
+    {
+        ilDeleteImage(m_Image);
+    }
 }
 
 STDMETHODIMP CWImage::get_Path
@@ -93,6 +97,10 @@ STDMETHODIMP CWImage::Open
 STDMETHODIMP CWImage::Close(void)
 {
     this->m_File.Close();
+    if ( ilIsImage(m_Image) )
+    {
+        ilDeleteImage(m_Image);
+    }
     return VSF_OK;
 }
 
@@ -103,6 +111,7 @@ STDMETHODIMP CWImage::Read
 )
 {
     if ( Length == NULL || Buffer == NULL ) return VSFERR_INVALID_ARG;
+    if ( !ilIsImage(m_Image) ) return VSFERR_NO_IMAGE;
 
     UINT tryLen = (*Length > 0) ? *Length : 0;
     UINT gotLen = this->m_File.Read(Buffer, tryLen);
