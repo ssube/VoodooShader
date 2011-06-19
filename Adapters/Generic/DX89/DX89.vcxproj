@@ -11,9 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{500C3802-95EE-4D5C-A5CA-133E531C80F9}</ProjectGuid>
+    <ProjectGuid>{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}</ProjectGuid>
     <Keyword>AtlProj</Keyword>
-    <ProjectName>Voodoo_EHHook</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -45,18 +44,14 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\Core;$(SolutionDir)\dependencies\EasyHook_2.6\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\dependencies\EasyHook_2.6\lib;$(LibraryPath)</LibraryPath>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <IncludePath>$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\Core;$(SolutionDir)\dependencies\EasyHook_2.6\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\dependencies\EasyHook_2.6\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -64,17 +59,16 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <HeaderFileName>EHHook_i.h</HeaderFileName>
-      <InterfaceIdentifierFileName>EHHook_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>EHHook_p.c</ProxyFileName>
+      <HeaderFileName>DX89_i.h</HeaderFileName>
+      <InterfaceIdentifierFileName>DX89_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>DX89_p.c</ProxyFileName>
       <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>$(TargetDir)Voodoo_EHHook.tlb</TypeLibraryName>
+      <TypeLibraryName>$(TargetDir)DX89.tlb</TypeLibraryName>
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
@@ -87,7 +81,7 @@
     </ResourceCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <ModuleDefinitionFile>.\EHHook.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\DX89.def</ModuleDefinitionFile>
       <AdditionalDependencies>comsvcs.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RegisterOutput>false</RegisterOutput>
@@ -104,11 +98,11 @@
       <MkTypLibCompatible>false</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <HeaderFileName>EHHook_i.h</HeaderFileName>
-      <InterfaceIdentifierFileName>EHHook_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>EHHook_p.c</ProxyFileName>
+      <HeaderFileName>DX89_i.h</HeaderFileName>
+      <InterfaceIdentifierFileName>DX89_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>DX89_p.c</ProxyFileName>
       <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>$(TargetDir)Voodoo_EHHook.tlb</TypeLibraryName>
+      <TypeLibraryName>$(TargetDir)DX89.tlb</TypeLibraryName>
       <DllDataFileName>
       </DllDataFileName>
       <ValidateAllParameters>true</ValidateAllParameters>
@@ -121,7 +115,7 @@
     </ResourceCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <ModuleDefinitionFile>.\EHHook.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\DX89.def</ModuleDefinitionFile>
       <AdditionalDependencies>comsvcs.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -139,9 +133,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="EHHook.cpp" />
-    <ClCompile Include="EHHookSystem.cpp" />
-    <ClCompile Include="EHHook_i.c">
+    <ClCompile Include="DX89.cpp" />
+    <ClCompile Include="DX89_i.c">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -149,6 +142,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GenericDX89.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -165,25 +159,25 @@
   <ItemGroup>
     <ClInclude Include="compreg.h" />
     <ClInclude Include="dllmain.h" />
-    <ClInclude Include="EHHookSystem.h" />
-    <ClInclude Include="EHHook_i.h" />
-    <ClInclude Include="Hook_Version.hpp" />
+    <ClInclude Include="DX89_i.h" />
+    <ClInclude Include="DX89_Module.h" />
+    <ClInclude Include="GenericDX89.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="xdlldata.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="EHHook.rc" />
+    <ResourceCompile Include="DX89.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="EHHook.def" />
-    <None Include="EHHook.rgs" />
-    <None Include="EHHookSystem.rgs" />
+    <None Include="DX89.def" />
+    <None Include="DX89.rgs" />
+    <None Include="GenericDX89.rgs" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="EHHook.idl" />
+    <Midl Include="DX89.idl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -111,7 +111,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE get_Light(int Index, LightStruct *pLight);
     virtual HRESULT STDMETHODCALLTYPE put_Light(int Index, LightStruct Light);
     virtual HRESULT STDMETHODCALLTYPE SetProperty(BSTR pName, VARIANT *pData);
-    virtual HRESULT STDMETHODCALLTYPE DrawGeometry(int Vertexes, SAFEARRAY *pVertexData);
+    virtual HRESULT STDMETHODCALLTYPE DrawGeometry(int Vertexes, VertexStruct pVertexData[]);
     virtual HRESULT STDMETHODCALLTYPE ApplyParameter(IVoodooParameter *pParameter);
     virtual HRESULT STDMETHODCALLTYPE DrawShader(IVoodooShader *pShader);
     virtual HRESULT STDMETHODCALLTYPE CreateTexture(BSTR pName, TextureDesc Description, IVoodooTexture **ppTexture);

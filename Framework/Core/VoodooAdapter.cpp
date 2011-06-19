@@ -177,7 +177,7 @@ STDMETHODIMP CVoodooAdapter::SetProperty(BSTR pName, VARIANT *pData)
     }
 }
 
-STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, SAFEARRAY *pVertexData)
+STDMETHODIMP CVoodooAdapter::DrawGeometry(int Vertexes, VertexStruct pVertexData[])
 {
     UNREFERENCED_PARAMETER(Vertexes);
     UNREFERENCED_PARAMETER(pVertexData);

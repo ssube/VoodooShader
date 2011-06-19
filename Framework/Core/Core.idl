@@ -298,6 +298,7 @@ interface IVoodooCore : IDispatch
     [id(18)] HRESULT GetStageTexture([in] EnumType Stage, [out, retval] IVoodooTexture ** ppTexture);
     [id(19)] HRESULT SetStageTexture([in] EnumType Stage, [in] IVoodooTexture * pTexture);
 };
+
 [
     object,
     uuid(1d3d7f87-6f32-11e0-8ac0-005056c00000),
@@ -440,7 +441,7 @@ interface IVoodooAdapter : IVoodooPlugin
     [propput, id(7)] HRESULT Target([in] IVoodooTexture * pTarget);
     [id(9)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Description, [out, retval] IVoodooTexture ** ppTexture);
     [id(10)] HRESULT LoadTexture([in] IVoodooImage * pImage, [in] TextureRegion Region, [out, retval] IVoodooTexture ** ppTexture);
-    [id(11)] HRESULT DrawGeometry([in] int Vertexes, [in] SAFEARRAY(VertexStruct) pVertexData);
+    [id(11)] HRESULT DrawGeometry([in] int Vertexes, [in, size_is(Vertexes)] VertexStruct pVertexData[*]);
     [id(12)] HRESULT DrawShader([in] IVoodooShader * pShader);
     [id(13)] HRESULT ApplyParameter([in] IVoodooParameter * pParameter);
     [id(14)] HRESULT SetProperty([in] BSTR pName, [in, out] VARIANT * pData);

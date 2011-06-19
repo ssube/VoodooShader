@@ -93,6 +93,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_WFileSystem", "Frame
 		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DX89", "Adapters\Generic\DX89\DX89.vcxproj", "{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Analysis|Any CPU = Debug_Analysis|Any CPU
@@ -473,6 +475,30 @@ Global
 		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Template|Win32.ActiveCfg = Release|Win32
 		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Template|Win32.Build.0 = Release|Win32
 		{52D4AFA6-F986-4362-9D2F-A04809464B54}.Template|x86.ActiveCfg = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug_Analysis|Any CPU.ActiveCfg = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug_Analysis|Mixed Platforms.ActiveCfg = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug_Analysis|Mixed Platforms.Build.0 = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug_Analysis|Win32.ActiveCfg = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug_Analysis|Win32.Build.0 = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug_Analysis|x86.ActiveCfg = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug|Win32.Build.0 = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Debug|x86.ActiveCfg = Debug|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Release|Any CPU.ActiveCfg = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Release|Win32.ActiveCfg = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Release|Win32.Build.0 = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Release|x86.ActiveCfg = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Template|Any CPU.ActiveCfg = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Template|Mixed Platforms.ActiveCfg = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Template|Mixed Platforms.Build.0 = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Template|Win32.ActiveCfg = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Template|Win32.Build.0 = Release|Win32
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2}.Template|x86.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -494,14 +520,15 @@ Global
 		{52D4AFA6-F986-4362-9D2F-A04809464B54} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 		{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
+		{8C762A2D-A4F6-487D-A4B6-F36EC8454DA2} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
 		{BFF5D1D1-CE35-4819-BC4D-7A06CEAFCB05} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
 		{4013F9BF-9367-405B-8005-025EABF878BD} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
 		{F0B829B9-0E64-47F0-8808-7E5A64EA96F6} = {9E41722B-FF31-4AA9-A64C-96B9AA175C30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"
