@@ -50,7 +50,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Testbed", "Utilities\Testbe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogViewer", "Utilities\LogViewer\LogViewer.csproj", "{82C4257D-3F4D-4F7D-A0B6-0282C044E7E7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Loader", "Framework\Loader\Voodoo_Loader.vcxproj", "{6234D300-FD30-4A04-A3A2-4739C5D9B95F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Inject", "Loaders\Inject\Voodoo_Inject.vcxproj", "{6234D300-FD30-4A04-A3A2-4739C5D9B95F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BC08F231-D53D-4D19-AF7E-9387521187BF} = {BC08F231-D53D-4D19-AF7E-9387521187BF}
 	EndProjectSection

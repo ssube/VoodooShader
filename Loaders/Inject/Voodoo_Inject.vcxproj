@@ -18,7 +18,7 @@
     <ProjectGuid>{6234D300-FD30-4A04-A3A2-4739C5D9B95F}</ProjectGuid>
     <RootNamespace>Gem_Redirect</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>Voodoo_Loader</ProjectName>
+    <ProjectName>Voodoo_Inject</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -171,16 +171,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Common.cpp" />
-    <ClCompile Include="Loader.cpp" />
+    <ClCompile Include="Inject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.hpp" />
-    <ClInclude Include="Loader.hpp" />
-    <ClInclude Include="Loader_Version.hpp" />
+    <ClInclude Include="Inject.hpp" />
+    <ClInclude Include="Inject_Version.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Loader_Version.rc" />
+    <ResourceCompile Include="Inject_Version.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="exports.def" />
