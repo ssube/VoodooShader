@@ -44,14 +44,16 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Framework\Core;N:\Code\Cg_July2010\include\;N:\Code\DX_June2010\Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>N:\Code\Cg_July2010\lib;N:\Code\DX_June2010\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Framework\Core;N:\Code\Cg_July2010\include\;N:\Code\DX_June2010\Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>N:\Code\Cg_July2010\lib;N:\Code\DX_June2010\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

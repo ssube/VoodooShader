@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Sat Jun 18 11:10:15 2011
+/* at Wed Jun 22 22:31:15 2011
  */
 /* Compiler settings for XmlLogger.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 

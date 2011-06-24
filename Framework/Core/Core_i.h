@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Sun Jun 19 17:17:59 2011
+/* at Wed Jun 22 22:30:39 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -2140,7 +2140,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawGeometry( 
             /* [in] */ int Vertexes,
-            /* [size_is][in] */ LightStruct pVertexData[  ]) = 0;
+            /* [size_is][in] */ VertexStruct pVertexData[  ]) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE DrawShader( 
             /* [in] */ IVoodooShader *pShader) = 0;
@@ -2257,7 +2257,7 @@ EXTERN_C const IID IID_IVoodooAdapter;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DrawGeometry )( 
             IVoodooAdapter * This,
             /* [in] */ int Vertexes,
-            /* [size_is][in] */ LightStruct pVertexData[  ]);
+            /* [size_is][in] */ VertexStruct pVertexData[  ]);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DrawShader )( 
             IVoodooAdapter * This,

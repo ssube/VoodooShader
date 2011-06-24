@@ -1,6 +1,6 @@
 
-#include "Loader.hpp"
-#include "Loader_Version.hpp"
+#include "Inject.hpp"
+#include "Inject_Version.hpp"
 
 BOOL WINAPI DllMain
 (

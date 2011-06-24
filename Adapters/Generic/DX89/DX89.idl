@@ -41,6 +41,7 @@ library DX89Lib
 	{
 		[default] interface IComponentRegistrar;
 	};
+
 	[		
 		uuid(B09FABF5-D8D4-4AA3-8A21-080F0693C0E3)		
 	]
