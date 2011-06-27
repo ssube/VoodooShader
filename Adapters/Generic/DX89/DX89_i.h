@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu Jun 23 22:08:42 2011
+/* at Sun Jun 26 21:27:36 2011
  */
 /* Compiler settings for DX89.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 

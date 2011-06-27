@@ -69,6 +69,21 @@
     <ClInclude Include="DX89_Module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IVoodoo3DDevice8.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3DSurface8.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3DTexture8.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MGE\FauxD3D8Header.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3D8.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX89.rc">
