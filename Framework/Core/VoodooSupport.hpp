@@ -34,6 +34,20 @@
 #include <atlstr.h>
 
 /**
+ * Formats and logs a message containing the current function, file, line and optionally
+ * parameteres.
+ *
+ * @param pLogger The IVoodooLogger to write to.
+ * @param Level The log level to use (a combination of @ref LogLevel flags).
+ * @param pModule The source module for this message.
+ * @param pMsg The custom message to print (will not be formatted).
+ * @return Results of the log call.
+ */
+
+#define LOGFUNC(pLogger, Level, pModule, pMsg) \
+    LogFormat(pLogger, Level, pModule, VSTR("Function %s (%s:%d). %s."), __FUNCSIG__, __FILE__, __LINE__, pMsg)
+
+/**
  * Writes a formatted message to the given logger. This function uses CString.FormatV internally,
  * so any formatting restrictions on that also apply here (it uses printf syntax). This formats the
  * message use a va_list before crossing module/process boundaries, providing safer memory 
@@ -45,6 +59,7 @@
  * @param pModule The source module for this message.
  * @param pMsg The format string to use.
  * @param ... The arguments to use for formatting.
+ * @return Results of the log call.
  */
 inline HRESULT WINAPI LogFormat(IVoodooLogger * pLogger, DWORD Level, LPTSTR pModule, LPTSTR pMsg, ...)
 {
@@ -54,12 +69,12 @@ inline HRESULT WINAPI LogFormat(IVoodooLogger * pLogger, DWORD Level, LPTSTR pMo
     CString module(pModule);
 
     va_list args;
-    va_start(args, pModule);
+    va_start(args, pMsg);
     fmtMsg.FormatV(pMsg, args);
     va_end(args);
 
     CComBSTR fmtBSTR(fmtMsg);
-    CComBSTR modBSTR(module);
+    CComBSTR modBSTR(pModule);
 
     return pLogger->Log(Level, pModule, fmtBSTR);
 }
