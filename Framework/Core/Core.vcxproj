@@ -217,7 +217,6 @@
   <ItemGroup>
     <None Include="Core.def" />
     <None Include="Core.rgs" />
-    <None Include="ReadMe.txt" />
     <None Include="VoodooAdapter.rgs" />
     <None Include="VoodooCore.rgs" />
     <None Include="VoodooFile.rgs" />
@@ -229,7 +228,7 @@
     <None Include="VoodooPass.rgs" />
     <None Include="VoodooShader.rgs" />
     <None Include="VoodooParser.rgs" />
-    <None Include="VoodooTechnique1.rgs" />
+    <None Include="VoodooTechnique.rgs" />
     <None Include="VoodooTexture.rgs" />
   </ItemGroup>
   <ItemGroup>
