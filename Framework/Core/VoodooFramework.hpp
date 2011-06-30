@@ -139,6 +139,9 @@ typedef interface IVoodooPlugin     IVoodooPlugin;
 #include "VoodooTypes.hpp"
 
 /* Cg types */
+#ifndef VSF_DONT_INCLUDE_CG
+#include <Cg/cg.h>
+#else
 #ifndef CG_VERSION_NUM
 typedef void * CGcontext;
 typedef void * CGprogram;
@@ -146,6 +149,7 @@ typedef void * CGparameter;
 typedef void * CGeffect;
 typedef void * CGtechnique;
 typedef void * CGpass;
+#endif
 #endif
 
 /* Smart pointers */

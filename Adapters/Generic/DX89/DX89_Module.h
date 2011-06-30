@@ -1,8 +1,13 @@
 
+#include <d3d9.h>
+#include <d3dx9.h>
+
 #include "Cg/cg.h"
 #include "Cg/cgD3D9.h"
 
-#include "VoodooFramework.hpp"
+#include "VoodooSupport.hpp"
+
+#include <atlsafe.h>
 
 #define VOODOO_DX89_MAX_LIGHTS 8
 

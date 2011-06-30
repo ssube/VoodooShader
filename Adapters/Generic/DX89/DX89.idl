@@ -6,7 +6,7 @@
 
 import "oaidl.idl";
 import "ocidl.idl";
-cpp_quote("#include \"DX89_Module.h\"")
+cpp_quote("#include \"VoodooFramework.hpp\"")
 
 [
 	object,

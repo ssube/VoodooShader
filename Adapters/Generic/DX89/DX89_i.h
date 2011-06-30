@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Sun Jun 26 21:27:36 2011
+/* at Wed Jun 29 22:09:41 2011
  */
 /* Compiler settings for DX89.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -87,7 +87,7 @@ extern "C"{
 /* interface __MIDL_itf_DX89_0000_0000 */
 /* [local] */ 
 
-#include "DX89_Module.h"
+#include "VoodooFramework.hpp"
 
 
 extern RPC_IF_HANDLE __MIDL_itf_DX89_0000_0000_v0_0_c_ifspec;

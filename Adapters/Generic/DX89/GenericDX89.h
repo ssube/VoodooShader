@@ -5,6 +5,8 @@
 #include "resource.h"       // main symbols
 #include <comsvcs.h>
 
+#include "DX89_Module.h"
+
 using namespace ATL;
 
 // CGenericDX89
@@ -68,9 +70,12 @@ private:
 
     // D3D and V3D objects/devices
     CComPtr<IVoodoo3D8> m_FakeObject;
-    CComPtr<IDirect3D8> m_RealObject;
+    CComPtr<IDirect3D9> m_RealObject;
     CComPtr<IVoodoo3DDevice8> m_FakeDevice;
-    CComPtr<IDirect3DDevice8> m_RealDevice;
+    CComPtr<IDirect3DDevice9> m_RealDevice;
+
+    // D3D9 objects
+    CComPtr<IDirect3DVertexDeclaration9> m_VertDecl;
 
     CComPtr<IVoodooPass> m_CurrentPass;
     CComPtr<IVoodooTexture> m_CurrentTarget;

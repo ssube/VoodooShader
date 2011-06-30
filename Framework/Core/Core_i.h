@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Jun 22 22:30:39 2011
+/* at Wed Jun 29 22:08:00 2011
  */
 /* Compiler settings for Core.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -591,7 +591,7 @@ EXTERN_C const IID IID_IVoodooCore;
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_CgContext( 
             /* [in] */ VARIANT CgContext) = 0;
         
-        virtual /* [id][vararg] */ HRESULT STDMETHODCALLTYPE CreateShader( 
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateShader( 
             /* [in] */ IVoodooFile *pFile,
             /* [in] */ SAFEARRAY * pArgs,
             /* [retval][out] */ IVoodooShader **ppShader) = 0;
@@ -714,7 +714,7 @@ EXTERN_C const IID IID_IVoodooCore;
             IVoodooCore * This,
             /* [in] */ VARIANT CgContext);
         
-        /* [id][vararg] */ HRESULT ( STDMETHODCALLTYPE *CreateShader )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateShader )( 
             IVoodooCore * This,
             /* [in] */ IVoodooFile *pFile,
             /* [in] */ SAFEARRAY * pArgs,

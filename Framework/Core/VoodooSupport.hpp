@@ -78,3 +78,41 @@ inline HRESULT WINAPI LogFormat(IVoodooLogger * pLogger, DWORD Level, LPTSTR pMo
 
     return pLogger->Log(Level, pModule, fmtBSTR);
 }
+
+/**
+ * Converts parameter types (@ref ParameterType) to parameter type categories (@ref ParameterCategory).
+ * Type categories usually require a single, but unique, code path.
+ **/
+inline ParameterCategory ToParameterCategory(ParameterType Type)
+{
+    switch ( Type )
+    {
+    case PT_Float1x1:
+    case PT_Float1x2:
+    case PT_Float1x3:
+    case PT_Float1x4:
+    case PT_Float2x1:
+    case PT_Float2x2:
+    case PT_Float2x3:
+    case PT_Float2x4:
+    case PT_Float3x1:
+    case PT_Float3x2:
+    case PT_Float3x3:
+    case PT_Float3x4:
+    case PT_Float4x1:
+    case PT_Float4x2:
+    case PT_Float4x3:
+    case PT_Float4x4:
+        return PC_Float;
+    case PT_Sampler1D:
+    case PT_Sampler2D:
+    case PT_Sampler3D:
+        return PC_Sampler;
+    case PT_Struct:
+        return PC_Struct;
+    case PT_Unknown:
+    case PT_Max:
+    default:
+        return PC_Unknown;
+    }
+}

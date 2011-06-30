@@ -288,7 +288,7 @@ interface IVoodooCore : IDispatch
     [propget, id(7)] HRESULT Config([out, retval] IUnknown ** ppConfig);
     [propget, id(8)] HRESULT CgContext([out, retval] VARIANT * pCgContext);
     [propput, id(8)] HRESULT CgContext([in] VARIANT CgContext);
-    [vararg, id(10)] HRESULT CreateShader([in] IVoodooFile * pFile, [in] SAFEARRAY(BSTR) pArgs, [out, retval] IVoodooShader ** ppShader);
+    [id(10)] HRESULT CreateShader([in] IVoodooFile * pFile, [in] SAFEARRAY(BSTR) pArgs, [out, retval] IVoodooShader ** ppShader);
     [id(11)] HRESULT CreateParameter([in] BSTR pName, [in] EnumType Type, [out, retval] IVoodooParameter ** ppParameter);
     [id(12)] HRESULT CreateTexture([in] BSTR pName, [in] TextureDesc Desc, [in] VARIANT Data, [out, retval] IVoodooTexture ** ppTexture);
     [id(13)] HRESULT GetParameter([in] BSTR pName, [out, retval] IVoodooParameter ** ppParameter);
