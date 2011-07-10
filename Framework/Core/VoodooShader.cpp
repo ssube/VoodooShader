@@ -22,7 +22,6 @@ CVoodooShader::~CVoodooShader()
 
 IVoodooShader * CVoodooShader::Create(IVoodooCore * pCore, IVoodooFile * pFile, SAFEARRAY * pArgs)
 {
-    //! @todo Make the pArgs field used. Will require conversion to cstrs
     UNREFERENCED_PARAMETER(pArgs);
 
     if ( pCore == NULL || pFile == NULL ) return NULL;
@@ -47,6 +46,7 @@ IVoodooShader * CVoodooShader::Create(IVoodooCore * pCore, IVoodooFile * pFile, 
         pFile->get_Path(&path);
         CW2A apath(path);
 
+        //! @todo Shader compiler args are not passed to the compiler. They need converted from SAFEARRAY<BSTR> to char[]*.
         CGeffect effect = cgCreateEffectFromFile(context, (LPSTR)apath, NULL);
 
         if ( effect == NULL || !cgIsEffect(effect) )
@@ -170,7 +170,7 @@ STDMETHODIMP CVoodooShader::put_DefaultTechnique(IVoodooTechnique * pTechnique)
         return E_INVALIDARG;
     } else {
         // Prevent cross-linking
-        IVoodooShader * shader = NULL;
+        CComPtr<IVoodooShader> shader;
         pTechnique->get_Shader(&shader);
         if ( shader != this )
         {
