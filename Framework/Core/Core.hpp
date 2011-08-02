@@ -78,96 +78,51 @@ namespace VoodooShader
          *
          * @note You can not call this function externally, you must call CreateCore() instead.
          */
-        Core
-        (
-            _In_ const char * globalroot,
-            _In_ const char * runroot
-        );
+        Core();
 
         /**
          * Releases all references to modules and objects held by the core, including shaders,
          * textures, parameters, etc. This may cause the destruction of objects and unloading
          * of modules. It should not invalidate loaded resources that are held in other locations.
          */
-        ~Core();
+        virtual ~Core();
 
-        /**
-         * Retrieve the build version for this Core. This is equivalent to the
-         * @p ModuleVersion function exported by addon modules. 
-         * 
-         * @note This may be used by modules to test for a minimum supported core version, but
-         *    version testing with this isn't foolproof. Checking the core revision should work for 
-         *    most things.
-         * 
-         * @return The core module's version info.
-         */
-        Version GetVersion();
-
-        /**
-         * Retrieves the base path this core was created with. 
-         * 
-         * @note This is not the Voodoo binary folder, but the main Voodoo framework folder as
-         *    indicated by the registry. Working from this path, you can locate the Voodoo binary 
-         *    folder (append "bin\") or resource folders. 
-         *       
-         * @note The path given always ends in a backslash, so appending a file or folder name
-         *    will create a valid path.
-         *       
-         * @return The core's base path.
-         */
-        String GetGlobalRoot();
-
-        /**
-         * 
-         */
-        String GetLocalRoot();
-
-        String GetRunRoot();
-
+        virtual Result Initialize(_In_ const InitParams pParams);
+        
         /**
          * Retrieves this core's variable parser.
          * 
          * @return A shared pointer to the parser (always valid).
          */
-        ParserRef GetParser();
-
-         /**
-          * Retrieves this core's module manager.
-          * 
-          * @note Whenever you need to load additional modules or use dynamically
-          *       loaded classes, load or create them through the module manager.
-          *       
-          * @return A shared pointer to the module manager (always valid).
-          */
-         ModuleManagerRef GetModuleManager();
+        virtual ParserRef GetParser();
 
         /**
          * Retrieves this core's IHookManager implementation.
          *        
          * @return A shared pointer to the hook manager or empty if none exists.
          */
-         IHookManagerRef GetHookManager();
+        virtual IHookManagerRef GetHookSystem();
 
          /**
           * Retrieves this core's IFileSystem implementation.
           * 
           * @return A shared pointer to the filesystem or empty if none exists.
           */
-         IFileSystemRef GetFileSystem();
+        virtual IFileSystemRef GetFileSystem();
 
         /**
          * Retrieve the IAdapter attached to this Core.
          *
          * @return A shared pointer to the adapter or empty if no adapter is attached.
          */
-        IAdapterRef GetAdapter();
-        
+        virtual IAdapterRef GetAdapter();
+
         /**
          * Retrieve the ILogger attached to this Core.
          *
          * @return A shared pointer to the logger or empty if no logger is attached.
          */
-        ILoggerRef GetLogger();
+        virtual ILoggerRef GetLogger();
 
         /**
          * Retrieve the Xml config document for this Core.
@@ -176,10 +131,8 @@ namespace VoodooShader
          *    as a <code>void *</code> so linking against the Core doesn't require the pugixml
          *    headers. To use this, simply cast it into the actual type.
          */
-        void * GetConfig();
-
-        void SetCgContext(_In_opt_ CGcontext context);
-
+        virtual void * GetConfig();
+        
         /**
          * Retrieve the Cg context associated with this Core.
          * 
@@ -189,8 +142,13 @@ namespace VoodooShader
          * @return The Cg context.
          */
         _Check_return_
-        CGcontext GetCgContext();
+        virtual CGcontext GetCgContext();
 
+        virtual void SetCgContext
+        (
+            _In_opt_ CGcontext * pContext
+        );
+        
         /**
          * Tries to compile a new shader effect from a file, or copies the effect if the
          * file has already been loaded.
@@ -199,10 +157,10 @@ namespace VoodooShader
          * @param args Optional arguments providing compiler directives, usually shader 
          *    model-specific definitions or preprocessor defines.
          */
-        ShaderRef CreateShader
+        virtual ShaderRef CreateShader
         (
-            _In_ String filename, 
-            _In_opt_ const char ** args
+            _In_ IFile * pFile, 
+            _In_opt_ char * pArgs[]
         );
 
         /**
@@ -220,12 +178,12 @@ namespace VoodooShader
          *    effect parameters and adjust only the global parameter (an easy way to manage system 
          *    time or such things).
          */
-        ParameterRef CreateParameter
+        virtual ParameterRef CreateParameter
         (
-            _In_ String name, 
-            _In_ ParameterType type
+            _In_ String Name, 
+            _In_ ParameterType Type
         );
-
+        
         /**
          * Registers a texture with this Core. Texture will not be used by the shader linker unless 
          * they have been registered with the core. 
@@ -241,10 +199,26 @@ namespace VoodooShader
          *    registered with a call to this function). This  method does not create a texture, it 
          *    merely notifies the Core one exists and returns a shared pointer to the metadata.
          */
-        TextureRef AddTexture
+        virtual TextureRef CreateTexture
         (
-            _In_ String name, 
-            _In_ void * data
+            _In_ String Name, 
+            _In_ TextureDesc Desc, 
+            _In_opt_ void * pData
+        );
+        
+        /**
+         * Retrieve a parameter by name.
+         *
+         * @param name The name to search for.
+         * @param type The type to verify. If a parameter with a matching name is found, the type 
+         *    will be checked. If this is PT_Unknown, any type parameter will be returned (only the 
+         *    name will be tested).
+         * @return A reference to the parameter, if one is found. An empty shared pointer otherwise.
+         */
+        virtual ParameterRef GetParameter
+        (
+            _In_ String Name, 
+            _In_ ParameterType Type
         );
 
         /**
@@ -257,11 +231,27 @@ namespace VoodooShader
          * @sa To create a texture, use IAdapter::CreateTexture()
          * @sa To register an existing texture with the core, use Core::AddTexture()
          */
-        TextureRef GetTexture
+        virtual TextureRef GetTexture
         (
-            _In_ String name
+            _In_ String Name
         );
 
+        virtual bool RemoveParameter
+        (
+            _In_ String Name
+        );
+
+        /**
+         * Removes a texture from the Core's texture map and unbinds it from any specialized 
+         * functions it may be attached to.
+         * 
+         * @param texture The texture to remove.
+         */
+        virtual bool RemoveTexture
+        (
+            _In_ String Name
+        );
+        
         /**
          * Retrieves a texture from the Core's texture map by function. Each specialized texture 
          * function may have a single texture bound to it for use by the shader linker.
@@ -272,51 +262,25 @@ namespace VoodooShader
          *         
          * @sa To bind a texture to one of the special functions, use Core::SetTexture()
          */
-        TextureRef GetTexture
+        virtual TextureRef GetStageTexture
         (
-            _In_ TextureType function
-        );
-
-        /**
-         * Retrieve a parameter by name.
-         *
-         * @param name The name to search for.
-         * @param type The type to verify. If a parameter with a matching name is found, the type 
-         *    will be checked. If this is PT_Unknown, any type parameter will be returned (only the 
-         *    name will be tested).
-         * @return A reference to the parameter, if one is found. An empty shared pointer otherwise.
-         */
-        ParameterRef GetParameter
-        (
-            _In_ String name, 
-            _In_ ParameterType type
+            _In_ TextureStage Stage
         );
 
         /**
          * Binds a texture to a specialized function for the shader linker. 
          *
-         * @param function The function to set.
-         * @param texture The texture to bind.
+         * @param Stage The texture stage to set.
+         * @param pTexture The texture to bind.
          *
          * @throws Exception if function is invalid or TT_Unknown.
          * @throws Exception if function is TT_Generic (all textures are generic by default, you 
          *    cannot set a texture to generic).
          */
-        void SetTexture
+        virtual void SetStageTexture
         (
-            _In_ TextureType function, 
-            _In_ TextureRef texture
-        );
-
-        /**
-         * Removes a texture from the Core's texture map and unbinds it from any specialized 
-         * functions it may be attached to.
-         * 
-         * @param texture The texture to remove.
-         */
-        void RemoveTexture
-        (
-            _In_ String texture
+            _In_ TextureStage Stage, 
+            _In_ TextureRef pTexture
         );
 
     private:
@@ -379,7 +343,7 @@ namespace VoodooShader
         /**
          * The current module manager.
          */
-        ModuleManagerRef mModManager;
+        PluginManagerRef mModManager;
 
         /**
          * The current variable parser.

@@ -18,6 +18,11 @@ namespace VoodooShader
         mModules.clear();
     }
 
+    bool ModuleManager::LoadPath( _In_ String path )
+    {
+        FindFirstFile("*.dll,*.exe", &)
+    }
+
     ModuleRef ModuleManager::LoadModule( _In_ String name )
     {
         ILoggerRef logger = mCore->GetLogger();

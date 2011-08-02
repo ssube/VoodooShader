@@ -31,6 +31,9 @@
     <ClCompile Include="Parser.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Plugins.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Voodoo_Core.hpp" />
@@ -99,6 +102,9 @@
     </ClInclude>
     <ClInclude Include="IAdapter.hpp">
       <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Plugins.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

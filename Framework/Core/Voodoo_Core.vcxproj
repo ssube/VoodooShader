@@ -234,6 +234,7 @@
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Plugins.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
@@ -256,6 +257,7 @@
     <ClInclude Include="Module.hpp" />
     <ClInclude Include="Parameter.hpp" />
     <ClInclude Include="Parser.hpp" />
+    <ClInclude Include="Plugins.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Texture.hpp" />
