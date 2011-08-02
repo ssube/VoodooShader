@@ -38,14 +38,14 @@ class IVoodoo3DTexture8
     : public IDirect3DTexture8
 {
 private:
-    IVoodoo3DDevice8 * mDevice;
-    IDirect3DTexture9 * mRealTexture;
+    IVoodoo3DDevice8 * m_Device;
+    IDirect3DTexture9 * m_RealTexture;
     String mName;
     TextureRef mVoodooTexture;
 
 public:
     IVoodoo3DTexture8(IVoodoo3DDevice8 * device, IDirect3DTexture9 * texture)
-        : mDevice(device), mRealTexture(texture), mName(gLastFilename)
+        : m_Device(device), m_RealTexture(texture), mName(gLastFilename)
     {
         VoodooLogger->Log
         (
@@ -75,7 +75,7 @@ public:
 
     inline IDirect3DTexture9 * RealTexture()
     {
-        return mRealTexture;
+        return m_RealTexture;
     }
 
     STDMETHOD(QueryInterface)
@@ -84,17 +84,17 @@ public:
         void ** ppvObj
     )
     {
-        return mRealTexture->QueryInterface(riid, ppvObj);
+        return m_RealTexture->QueryInterface(riid, ppvObj);
     }
 
     STDMETHOD_(ULONG,AddRef)()
     {
-        return mRealTexture->AddRef();
+        return m_RealTexture->AddRef();
     }
 
     STDMETHOD_(ULONG,Release)()
     {
-        ULONG refCount = mRealTexture->Release();
+        ULONG refCount = m_RealTexture->Release();
 
         if ( refCount == 0 )
         {
@@ -111,7 +111,7 @@ public:
          IDirect3DDevice8 ** ppDevice
     )
     {
-        (*ppDevice) = (IDirect3DDevice8*)mDevice;
+        (*ppDevice) = (IDirect3DDevice8*)m_Device;
         return D3D_OK;
     }
 
@@ -123,7 +123,7 @@ public:
         DWORD Flags
     )
     {
-        return mRealTexture->SetPrivateData(refguid, pData, SizeOfData, Flags);
+        return m_RealTexture->SetPrivateData(refguid, pData, SizeOfData, Flags);
     }
 
     STDMETHOD(GetPrivateData)
@@ -133,7 +133,7 @@ public:
         DWORD * pSizeOfData
     )
     {
-        return mRealTexture->GetPrivateData(refguid, pData, pSizeOfData);
+        return m_RealTexture->GetPrivateData(refguid, pData, pSizeOfData);
     }
 
     STDMETHOD(FreePrivateData)
@@ -141,7 +141,7 @@ public:
          REFGUID refguid
     )
     {
-        return mRealTexture->FreePrivateData(refguid);
+        return m_RealTexture->FreePrivateData(refguid);
     }
 
     STDMETHOD_(DWORD, SetPriority)
@@ -149,22 +149,22 @@ public:
          DWORD PriorityNew
     )
     {
-        return mRealTexture->SetPriority(PriorityNew);
+        return m_RealTexture->SetPriority(PriorityNew);
     }
 
     STDMETHOD_(DWORD, GetPriority)()
     {
-        return mRealTexture->GetPriority();
+        return m_RealTexture->GetPriority();
     }
 
     STDMETHOD_(void, PreLoad)()
     {
-        return mRealTexture->PreLoad();
+        return m_RealTexture->PreLoad();
     }
 
     STDMETHOD_(D3DRESOURCETYPE, GetType)()
     {
-        return mRealTexture->GetType();
+        return m_RealTexture->GetType();
     }
 
     STDMETHOD_(DWORD, SetLOD)
@@ -172,17 +172,17 @@ public:
          DWORD LODNew
     )
     {
-        return mRealTexture->SetLOD(LODNew);
+        return m_RealTexture->SetLOD(LODNew);
     }
 
     STDMETHOD_(DWORD, GetLOD)()
     {
-        return mRealTexture->GetLOD();
+        return m_RealTexture->GetLOD();
     }
 
     STDMETHOD_(DWORD, GetLevelCount)()
     {
-        return mRealTexture->GetLevelCount();
+        return m_RealTexture->GetLevelCount();
     }
 
     STDMETHOD(GetLevelDesc)
@@ -192,7 +192,7 @@ public:
     )
     {
         D3DSURFACE_DESC rDesc;
-        HRESULT hr = mRealTexture->GetLevelDesc(Level, &rDesc);
+        HRESULT hr = m_RealTexture->GetLevelDesc(Level, &rDesc);
         if ( SUCCEEDED(hr) )
         {
             memcpy(pDesc, &rDesc, sizeof(D3DSURFACE_DESC8));
@@ -208,10 +208,10 @@ public:
     )
     {
         IDirect3DSurface9 * rSurface;
-        HRESULT hr = mRealTexture->GetSurfaceLevel(level, &rSurface);
+        HRESULT hr = m_RealTexture->GetSurfaceLevel(level, &rSurface);
         if ( SUCCEEDED(hr) )
         {
-            IVoodoo3DSurface8 * newSurface = new IVoodoo3DSurface8(mDevice, rSurface);
+            IVoodoo3DSurface8 * newSurface = new IVoodoo3DSurface8(m_Device, rSurface);
             (*ppSurfaceLevel) = (IDirect3DSurface8*)newSurface;
         }
 
@@ -234,7 +234,7 @@ public:
         DWORD Flags
     )
     {
-        return mRealTexture->LockRect(Level, pLockedRect, pRect, Flags);
+        return m_RealTexture->LockRect(Level, pLockedRect, pRect, Flags);
     }
 
     STDMETHOD(UnlockRect)
@@ -242,7 +242,7 @@ public:
          UINT Level
     )
     {
-        return mRealTexture->UnlockRect(Level);
+        return m_RealTexture->UnlockRect(Level);
     }
 
     STDMETHOD(AddDirtyRect)
@@ -250,7 +250,7 @@ public:
          CONST RECT * pDirtyRect
     )
     {
-        return mRealTexture->AddDirtyRect(pDirtyRect);
+        return m_RealTexture->AddDirtyRect(pDirtyRect);
     }
 };
 

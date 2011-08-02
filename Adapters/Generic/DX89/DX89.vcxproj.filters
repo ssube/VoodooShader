@@ -17,6 +17,12 @@
       <UniqueIdentifier>{33274d36-a485-419e-a2eb-e54b9cdd3306}</UniqueIdentifier>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Header Files\IVoodoo3D">
+      <UniqueIdentifier>{9a909b5d-b6b7-4119-8ce6-c83fafaf4999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IVoodoo3D">
+      <UniqueIdentifier>{e4018da4-3d59-4bb0-86a4-51ffa99b54c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -39,6 +45,9 @@
     </ClCompile>
     <ClCompile Include="GenericDX89.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IVoodoo3D8.cpp">
+      <Filter>Source Files\IVoodoo3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,20 +78,20 @@
     <ClInclude Include="DX89_Module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IVoodoo3DDevice8.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IVoodoo3DSurface8.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IVoodoo3DTexture8.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MGE\FauxD3D8Header.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IVoodoo3D8.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\IVoodoo3D</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3DTexture8.hpp">
+      <Filter>Header Files\IVoodoo3D</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3DDevice8.hpp">
+      <Filter>Header Files\IVoodoo3D</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3DSurface8.hpp">
+      <Filter>Header Files\IVoodoo3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

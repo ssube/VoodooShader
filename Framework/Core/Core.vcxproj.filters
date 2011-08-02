@@ -181,7 +181,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
     <None Include="Core.rgs">
       <Filter>Resource Files</Filter>
     </None>
@@ -195,9 +194,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="VoodooParser.rgs">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="VoodooTechnique1.rgs">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="VoodooPass.rgs">
@@ -225,6 +221,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="VoodooHookSystem.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VoodooTechnique.rgs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

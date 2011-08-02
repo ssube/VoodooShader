@@ -43,8 +43,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>N:\Code\Cg_July2010\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>N:\Code\\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Code\Cg_July2010\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Code\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -53,8 +53,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>N:\Code\Cg_July2010\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>N:\Code\\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Code\Cg_July2010\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Code\Cg_July2010\lib\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>

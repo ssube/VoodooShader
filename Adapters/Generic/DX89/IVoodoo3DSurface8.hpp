@@ -22,40 +22,41 @@
 #ifndef VOODOO_DX89_SURFACE_HPP
 #define VOODOO_DX89_SURFACE_HPP
 
-#include "DX89_Module.hpp"
+#include "DX89_Module.h"
+#include "MGE/FauxD3D8Header.hpp"
 
 class IVoodoo3DSurface8
     : public IDirect3DSurface8
 {
-    IVoodoo3DDevice8 * mRealDevice;
-    IDirect3DSurface9 * mRealSurface;
+    IVoodoo3DDevice8 * m_Device;
+    IDirect3DSurface9 * m_RealSurface;
 
 public:
     IVoodoo3DSurface8(IVoodoo3DDevice8 * device, IDirect3DSurface9 * realSurface)
-        : mRealDevice(device), mRealSurface(realSurface)
+        : m_Device(device), m_RealSurface(realSurface)
     {
 
     }
 
     inline IDirect3DSurface9 * RealSurface()
     {
-        return mRealSurface;
+        return m_RealSurface;
     }
 
     /*** IUnknown methods ***/
     STDMETHOD(QueryInterface)(REFIID riid, void** ppvObj)
     {
-        return mRealSurface->QueryInterface(riid, ppvObj);
+        return m_RealSurface->QueryInterface(riid, ppvObj);
     }
 
     STDMETHOD_(ULONG,AddRef)()
     {
-        return mRealSurface->AddRef();
+        return m_RealSurface->AddRef();
     }
 
     STDMETHOD_(ULONG,Release)()
     {
-        ULONG refCount = mRealSurface->Release();
+        ULONG refCount = m_RealSurface->Release();
 
         if ( refCount == 0 )
         {
@@ -69,34 +70,34 @@ public:
     /*** IDirect3DSurface8 methods ***/
     STDMETHOD(GetDevice)(IDirect3DDevice8** ppDevice)
     {
-        (*ppDevice) = (IDirect3DDevice8*)VoodooDevice;
+        (*ppDevice) = (IDirect3DDevice8*)m_Device;
         return D3D_OK;
     }
 
     STDMETHOD(SetPrivateData)(REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags)
     {
-        return mRealSurface->SetPrivateData(refguid, pData, SizeOfData, Flags);
+        return m_RealSurface->SetPrivateData(refguid, pData, SizeOfData, Flags);
     }
 
     STDMETHOD(GetPrivateData)(REFGUID refguid,void* pData,DWORD* pSizeOfData)
     {
-        return mRealSurface->GetPrivateData(refguid, pData, pSizeOfData);
+        return m_RealSurface->GetPrivateData(refguid, pData, pSizeOfData);
     }
 
     STDMETHOD(FreePrivateData)(REFGUID refguid)
     {
-        return mRealSurface->FreePrivateData(refguid);
+        return m_RealSurface->FreePrivateData(refguid);
     }
 
     STDMETHOD(GetContainer)(REFIID riid,void** ppContainer)
     {
-        return mRealSurface->GetContainer(riid, ppContainer);
+        return m_RealSurface->GetContainer(riid, ppContainer);
     }
 
     STDMETHOD(GetDesc)(D3DSURFACE_DESC8 *pDesc)
     {
         D3DSURFACE_DESC9 rDesc;
-        HRESULT hr = mRealSurface->GetDesc(&rDesc);
+        HRESULT hr = m_RealSurface->GetDesc(&rDesc);
         if ( SUCCEEDED(hr) )
         {
             pDesc->Format = rDesc.Format;
@@ -114,12 +115,12 @@ public:
 
     STDMETHOD(LockRect)(D3DLOCKED_RECT* pLockedRect,CONST RECT* pRect,DWORD Flags)
     {
-        return mRealSurface->LockRect(pLockedRect, pRect, Flags);
+        return m_RealSurface->LockRect(pLockedRect, pRect, Flags);
     }
 
     STDMETHOD(UnlockRect)()
     {
-        return mRealSurface->UnlockRect();
+        return m_RealSurface->UnlockRect();
     }
 
 };

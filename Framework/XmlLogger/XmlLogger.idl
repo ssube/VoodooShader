@@ -6,6 +6,7 @@
 
 import "oaidl.idl";
 import "ocidl.idl";
+cpp_quote("#define VSF_DONT_INCLUDE_CG")
 cpp_quote("#include \"VoodooFramework.hpp\"")
 
 [

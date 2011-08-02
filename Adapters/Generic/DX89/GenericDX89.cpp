@@ -259,7 +259,7 @@ STDMETHODIMP CGenericDX89::ApplyParameter(IVoodooParameter *pParameter)
             float ScalarArray[16];
             ZeroMemory(ScalarArray, sizeof(float) * 16);
 
-            pParameter->get_ScalarValue(&ScalarSafeArray);
+            pParameter->get_ScalarValue(ScalarSafeArray.GetSafeArrayPtr());
             ULONG size = min(ScalarSafeArray.GetCount(), (ULONG)16);
 
             for ( ULONG i = 0; i < size; ++i )

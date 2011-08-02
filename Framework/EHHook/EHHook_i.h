@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Jun 22 22:31:15 2011
+/* at Sun Jul 24 22:03:31 2011
  */
 /* Compiler settings for EHHook.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -87,6 +87,7 @@ extern "C"{
 /* interface __MIDL_itf_EHHook_0000_0000 */
 /* [local] */ 
 
+#define VSF_DONT_INCLUDE_CG
 #include "VoodooFramework.hpp"
 
 

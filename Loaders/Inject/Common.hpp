@@ -27,6 +27,7 @@
 
 #include <atlstr.h>
 
+#define VSF_DONT_INCLUDE_CG
 #include "VoodooFramework.hpp"
 
 /**

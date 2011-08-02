@@ -11,6 +11,8 @@
 
 #define VOODOO_DX89_MAX_LIGHTS 8
 
+#include "MGE/FauxD3D8Header.hpp"
+
 class IVoodoo3D8;
 class IVoodoo3DDevice8;
 class IVoodoo3DTexture8;

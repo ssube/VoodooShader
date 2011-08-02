@@ -19,10 +19,8 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#include "DX89_Module.hpp"
-#include "DX89_Adapter.hpp"
-#include "DX89_Converter.hpp"
-
+#include "DX89_Module.h"
+#include "MGE/FauxD3D8Header.hpp"
 #include "IVoodoo3DDevice8.hpp"
 
 /**
