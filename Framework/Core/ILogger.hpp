@@ -44,14 +44,28 @@ namespace VoodooShader
          */
         virtual bool Open
         (
-            _In_ const char * filename,
-            _In_ bool append
+            _In_ String Filename,
+            _In_ bool Append
         ) = 0;
 
         /**
          * Closes the log file, if one is open.
          */
         virtual void Close() = 0;
+        
+        /**
+         * Immediately writes all pending data to disk.
+         *
+         * @note This is useful for catchable errors which may have fatal 
+         *        consequences (Exception calls this in case the exception is 
+         *        uncaught).
+         * @warning This may not (probably will not) be any good in case of a 
+         *        segfault or other crash. If you    need complete debug logging, 
+         *        call Logger::SetBufferSize(unsigned int) with a buffer size    of 0
+         *        and all logged messages <em>should</em> make it to disk, even 
+         *        during fatal crashes.
+         */
+        virtual void Dump() = 0;
 
         /**
          * Set the default minimum message level. Messages below this level will
@@ -64,32 +78,7 @@ namespace VoodooShader
             _In_ LogLevel level
         ) = 0;
 
-        /**
-         * Write a formatted timestamp to the log. The timestamp will have the 
-         * form <code>HHMMSS</code>. Leading zeros are guaranteed to be
-         * present, so the timestamp length is 6 chars.
-         *
-         * @note If the system time cannot be retrieved, an error stamp of
-         *          <code>000000</code> will be printed with an equal length.
-         */
-        virtual String LogTime() = 0;
-
-        /**
-         * Writes a formatted date to the log. The date will have the
-         * form <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present,
-         * so the date length is 8 chars.
-         *
-         * @note If the system time cannot be retrieved, an error stamp of
-         *          <code>00000000</code> will be printed with an equal length.
-         */
-        virtual String LogDate() = 0;
-
-        /**
-         * Writes a formatted tick to the log. The stamp will have the
-         * form <code>xxxxxxxxx</code>, with a potentially varying length. This
-         * records ticks (usually ms since system start).
-         */
-        virtual String LogTicks() = 0;
+        virtual LogLevel GetLogLevel() = 0;
 
         /**
          * Writes a module stamp to the log. This records the name and version
@@ -135,18 +124,34 @@ namespace VoodooShader
             _In_ unsigned int bytes
         ) = 0;
 
+        virtual int GetBufferSize() = 0;
+
+    private:
         /**
-         * Immediately writes all pending data to disk.
+         * Write a formatted timestamp to the log. The timestamp will have the 
+         * form <code>HHMMSS</code>. Leading zeros are guaranteed to be
+         * present, so the timestamp length is 6 chars.
          *
-         * @note This is useful for catchable errors which may have fatal 
-         *        consequences (Exception calls this in case the exception is 
-         *        uncaught).
-         * @warning This may not (probably will not) be any good in case of a 
-         *        segfault or other crash. If you    need complete debug logging, 
-         *        call Logger::SetBufferSize(unsigned int) with a buffer size    of 0
-         *        and all logged messages <em>should</em> make it to disk, even 
-         *        during fatal crashes.
+         * @note If the system time cannot be retrieved, an error stamp of
+         *          <code>000000</code> will be printed with an equal length.
          */
-        virtual void Dump() = 0;
+        virtual String LogTime() = 0;
+
+        /**
+         * Writes a formatted date to the log. The date will have the
+         * form <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present,
+         * so the date length is 8 chars.
+         *
+         * @note If the system time cannot be retrieved, an error stamp of
+         *          <code>00000000</code> will be printed with an equal length.
+         */
+        virtual String LogDate() = 0;
+
+        /**
+         * Writes a formatted tick to the log. The stamp will have the
+         * form <code>xxxxxxxxx</code>, with a potentially varying length. This
+         * records ticks (usually ms since system start).
+         */
+        virtual String LogTicks() = 0;
     };
 }

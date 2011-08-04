@@ -205,12 +205,12 @@ namespace VoodooShader
      */
     enum ParameterType
     {    
-        PT_Unknown      = 0x00,     /*!< Unknown parameter type */    
+        PT_Unknown      = 0x00,         /*!< Unknown parameter type */    
         // Floats
-        PT_Float1       = 0x11,     /*!< Single-component float vector */
-        PT_Float2       = 0x12,     /*!< Two-component float vector */
-        PT_Float3       = 0x13,     /*!< Three-component float vector */
-        PT_Float4       = 0x14,     /*!< Four-component float vector */
+        PT_Float1       = 0x11,         /*!< Single-component float vector */
+        PT_Float2       = 0x12,         /*!< Two-component float vector */
+        PT_Float3       = 0x13,         /*!< Three-component float vector */
+        PT_Float4       = 0x14,         /*!< Four-component float vector */
         PT_Float1x1     = 0x11,
         PT_Float1x2     = 0x12,
         PT_Float1x3     = 0x13,
@@ -228,9 +228,9 @@ namespace VoodooShader
         PT_Float4x3     = 0x43,
         PT_Float4x4     = 0x44,
         // Samplers
-        PT_Sampler1D    = 0x101,    /*!< One-dimensional sampler (for a 1D texture, see @ref texturetypes "texture types" for more info) */
-        PT_Sampler2D    = 0x102,    /*!< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info) */
-        PT_Sampler3D    = 0x103,    /*!< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info) */
+        PT_Sampler1D    = 0x101,        /*!< One-dimensional sampler (for a 1D texture, see @ref texturetypes "texture types" for more info) */
+        PT_Sampler2D    = 0x102,        /*!< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info) */
+        PT_Sampler3D    = 0x103,        /*!< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info) */
         // Structs
         PT_Struct       = 0x1000,
         // Max
@@ -239,29 +239,29 @@ namespace VoodooShader
 
     enum ParameterCategory
     {    
-        PC_Unknown      = 0x00,     /*!< Unknown parameter category */
-        PC_Float        = 0x01,     /*!< Float vector parameter (may have 1 to 4 components) */
-        PC_Sampler      = 0x02,     /*!< Sampler parameter (may sample 1D to 3D textures) */
+        PC_Unknown      = 0x00,         /*!< Unknown parameter category */
+        PC_Float        = 0x01,         /*!< Float vector parameter (may have 1 to 4 components) */
+        PC_Sampler      = 0x02,         /*!< Sampler parameter (may sample 1D to 3D textures) */
         PC_Struct       = 0x04,
         PC_Max          = 0x7FFFFFFF    /*!< Highest possible value, forcing dword type */   
     };
 
     enum ProgramStage
     {
-        PS_Unknown      = 0x00,     /*!< Unknown program stage */
-        PS_Vertex       = 0x01,     /*!< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
-        PS_Fragment     = 0x02,     /*!< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
-        PS_Geometry     = 0x03,     /*!< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
-        PS_Domain       = 0x04,     /*!< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
-        PS_Hull         = 0x05,     /*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
+        PS_Unknown      = 0x00,         /*!< Unknown program stage */
+        PS_Vertex       = 0x01,         /*!< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
+        PS_Fragment     = 0x02,         /*!< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
+        PS_Geometry     = 0x03,         /*!< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
+        PS_Domain       = 0x04,         /*!< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
+        PS_Hull         = 0x05,         /*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
         PS_Max          = 0x7FFFFFFF    /*!< Highest possible value, forcing dword type */ 
     };
 
-    enum TextureType
+    enum TextureStage
     {
-        TS_Unknown      = 0x00,     /*!< Unknown texture type */
-        TS_Shader       = 0x01,     /*!< Shader target texture */
-        TS_Pass         = 0x02,     /*!< Pass target texture */
+        TS_Unknown      = 0x00,         /*!< Unknown texture type */
+        TS_Shader       = 0x01,         /*!< Shader target texture */
+        TS_Pass         = 0x02,         /*!< Pass target texture */
         TS_Max          = 0x7FFFFFFF    /*!< Highest possible value, forcing dword type */  
     };
 
@@ -326,13 +326,13 @@ namespace VoodooShader
         VT_State        = 0x01,
         VT_System       = 0x10,
         VT_Max          = 0x7FFFFFFF
-    } VariableType;
+    };
     /**
      * @}
      */
 
     /**
-     * 
+     * Initialization parameters.
      */
     struct InitParams
     {

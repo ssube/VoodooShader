@@ -35,31 +35,6 @@
 namespace VoodooShader
 {
     /**
-     * Generic vertex format for use with IAdapter draw calls. This format is
-     * compatible with both OpenGL and DirectX.
-     *
-     * @note Because of the draw mechanism for adapters, most draws with
-     *        user-provided vertexes will not use vertex buffers of any sort. 
-     *        This can hurt performance if used heavily, so drawing through 
-     *        IAdapter::DrawQuad() should be avoided as much as possible.
-     *        Adapters may draw internally, of course, having full control over
-     *        the graphics API.
-     *
-     * @note This vertex format provides a float3 position and float2 texture
-     *        coordinate. For compatibility with Direct3D, a RHW value is also
-     *        included (the vertex format is D3DFVF_XYZRHW|D3DFVF_TEX1). OpenGL
-     *        adapters may ignore this winding value. The members of the vert are
-     *        ordered so that <code>&x</code> is a valid float3 with the position
-     *        and <code>&tu</code> is a valid float2 with the texture coordinate.
-     */
-    struct Vertex
-    {
-        float x, y, z;
-        float winding;
-        float tu, tv;
-    };
-
-    /**
      * Graphics adapter class, responsible for interfacing the Voodoo core with
      * a given graphics program. 
      *
@@ -97,7 +72,7 @@ namespace VoodooShader
          */
         virtual bool LoadPass
         (
-            _In_ Pass * pass
+            _In_ PassRef pass
         ) = 0;
 
         /**
@@ -134,7 +109,7 @@ namespace VoodooShader
          *       All parameters updates must be performed before this function returns
          *       and take effect for any draw calls coming after this call.
          */
-        virtual void BindPass
+        virtual void SetPass
         (
             _In_ PassRef pass
         ) = 0;
@@ -151,41 +126,45 @@ namespace VoodooShader
          *       unlikely to be reset until IAdapter::UnbindPass() is called and may affect other
          *       draw calls. This behavior may be desired, but should be noted.
          */
-        virtual void UnbindPass() = 0;
+        virtual PassRef GetPass()  = 0;
+
+        virtual void SetTarget() = 0;
+        virtual TextureRef GetTarget() = 0;
+        
+        /**
+         * Creates a named texture within the API and registers it with the Core. The various 
+         * texture parameters are specified here in an API-independent form.
+         *
+         * @param name The name of the texture, usually a fully-qualified name.
+         * @param desc Description of the texture, size and format.
+         * @return A shared pointer to the created texture.
+         *
+         * @note Only Voodoo texture formats are supported, API-specific formats
+         *       are not and <em>must</em> return errors.
+         * @note This must automatically register textures with the adapter's 
+         *       associated Core.
+         * @note This must create a texture that can either be rendered directly
+         *       into or that can have the backbuffer copied into it efficiently, 
+         *       depending on how the Adapter and API implement render-to-texture.
+         */
+        virtual TextureRef CreateTexture( _In_ String Name, _In_ TextureDesc Desc) = 0;
 
         /**
-         * Draws a quad to the screen.
-         *
-         * @param vertexData This must contain vertex data for 4 vertexes or be NULL.
-         *
-         * @note The provided vertexes must be ordered in a Z formation. This provides the
-         *       proper winding for two discrete triangles, which most APIs use for the actual
-         *       draw operation.
-         *        
-         * @note The draw operation must meet the following requirements:
-         * <ol>
-         *   <li>Depth and stencil buffers must not be written to, color buffers must.</li>
-         *   <li>Alpha testing, culling, depth testing and other states that could cull
-         *       portions of the quad must be disabled (the whole quad must be drawn).</li>
-         *   <li>Alpha blending and testing must be disabled.</li>
-         *   <li>Any render states modified <em>within this call</em> must be restored to their 
-         *       original state before the function returns.</li>
-         * </ol>
+         * Loads a named texture into the API and registers it with the Core. The texture source is
+         * provided here and all dimensions should be drawn from that, with as little conversion as
+         * possible.
+         * 
+         * @param image The image reference to load from.
          */
-        virtual void DrawQuad
-        (
-            _In_opt_count_c_(4) Vertex * vertexData
-        ) = 0;
-
+        virtual TextureRef LoadTexture(_In_ String Name, TextureRegion Region) = 0;
+        
         /**
-         * Downloads a parameter's value from system RAM to VRAM, verifying that the value on 
-         * the GPU (and in use) is the latest value set in the CPU memory buffer (all parameter 
-         * set commands operate on the system RAM buffer for speed and compatibility). 
+         * Draws geometry.
+         *
+         * @param Vertexes The number of vertexes to draw.
+         * @param pVertexData This must contain vertex data for the given number of verts.
          */
-        virtual void ApplyParameter
-        (
-            _In_ ParameterRef param
-        ) = 0;
+        virtual void DrawGeometry(int Vertexes, VertexStruct * pVertexData) = 0;
 
         /**
          * <p>
@@ -206,38 +185,18 @@ namespace VoodooShader
         ) = 0;
 
         /**
-         * Creates a named texture within the API and registers it with the Core. The various 
-         * texture parameters are specified here in an API-independent form.
-         *
-         * @param name The name of the texture, usually a fully-qualified name.
-         * @param desc Description of the texture, size and format.
-         * @return A shared pointer to the created texture.
-         *
-         * @note Only Voodoo texture formats are supported, API-specific formats
-         *       are not and <em>must</em> return errors.
-         * @note This must automatically register textures with the adapter's 
-         *       associated Core.
-         * @note This must create a texture that can either be rendered directly
-         *       into or that can have the backbuffer copied into it efficiently, 
-         *       depending on how the Adapter and API implement render-to-texture.
+         * Downloads a parameter's value from system RAM to VRAM, verifying that the value on 
+         * the GPU (and in use) is the latest value set in the CPU memory buffer (all parameter 
+         * set commands operate on the system RAM buffer for speed and compatibility). 
          */
-        virtual TextureRef CreateTexture
+        virtual void ApplyParameter
         (
-            _In_ String name, 
-            _In_ TextureDesc desc
+            _In_ ParameterRef param
         ) = 0;
 
-        /**
-         * Loads a named texture into the API and registers it with the Core. The texture source is
-         * provided here and all dimensions should be drawn from that, with as little conversion as
-         * possible.
-         * 
-         * @param image The image reference to load from.
-         */
-        virtual TextureRef LoadTexture
-        (
-            _In_ IImageRef image
-        ) = 0;
+
+        virtual void SetProperty(String Property, String Value) = 0;
+        virtual String GetProperty(String Property) = 0;
 
         /**
          * Connects a texture to a sampler-type parameter. This is performed 

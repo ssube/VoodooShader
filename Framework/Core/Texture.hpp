@@ -38,6 +38,7 @@ namespace VoodooShader
      * various other surfaces, including render targets or even the backbuffer.
      */
     class VOODOO_API Texture
+        : public IObject
     {
     public:
         Texture

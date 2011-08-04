@@ -42,8 +42,7 @@ namespace VoodooShader
     _Check_return_
     VOODOO_API Core * CreateCore
     (
-        _In_ const char * globalroot,
-        _In_ const char * runroot
+        _In_ InitParams *  initParams
     );
         
     /**
@@ -70,15 +69,13 @@ namespace VoodooShader
         /**
          * Create a new Voodoo Core and associated Cg context.
          *          
-         * @param globalroot The base path to use for this core. Acts as the root for all modules and
-         *    resources.
-         * @param runroot The local base path, used for some resources.
+         * @param initParams Setup parameters for this core.
          * @return A new core.
          * @throws std::exception in case of errors.
          *
          * @note You can not call this function externally, you must call CreateCore() instead.
          */
-        Core();
+        Core(_In_ InitParams * initParams);
 
         /**
          * Releases all references to modules and objects held by the core, including shaders,
@@ -86,8 +83,6 @@ namespace VoodooShader
          * of modules. It should not invalidate loaded resources that are held in other locations.
          */
         virtual ~Core();
-
-        virtual Result Initialize(_In_ const InitParams pParams);
         
         /**
          * Retrieves this core's variable parser.
@@ -101,7 +96,7 @@ namespace VoodooShader
          *        
          * @return A shared pointer to the hook manager or empty if none exists.
          */
-        virtual IHookManagerRef GetHookSystem();
+        virtual IHookManagerRef GetHookManager();
 
          /**
           * Retrieves this core's IFileSystem implementation.
@@ -144,9 +139,9 @@ namespace VoodooShader
         _Check_return_
         virtual CGcontext GetCgContext();
 
-        virtual void SetCgContext
+        virtual bool SetCgContext
         (
-            _In_opt_ CGcontext * pContext
+            _In_opt_ CGcontext Context
         );
         
         /**
@@ -159,8 +154,8 @@ namespace VoodooShader
          */
         virtual ShaderRef CreateShader
         (
-            _In_ IFile * pFile, 
-            _In_opt_ char * pArgs[]
+            _In_ String Filename, 
+            _In_opt_ const char ** ppArgs
         );
 
         /**
@@ -202,8 +197,7 @@ namespace VoodooShader
         virtual TextureRef CreateTexture
         (
             _In_ String Name, 
-            _In_ TextureDesc Desc, 
-            _In_opt_ void * pData
+            _In_ TextureDesc Desc
         );
         
         /**
@@ -303,79 +297,80 @@ namespace VoodooShader
 
     private:
         /**
-         * Base path this core was created with.
+         * Paths.
          */
-        String mGlobalRoot;
-        String mLocalRoot;
-        String mRunRoot;
-        String mTarget;
+        String m_GlobalRoot;
+        String m_LocalRoot;
+        String m_RunRoot;
+        String m_Target;
+        String m_Loader;
+        String m_Config;
 
         /**
          * Config file (actually a <code>pugi::xml_document *</code>, stored as void).
          */
-        void * mConfig;
+        void * m_ConfigFile;
 
         /**
          * Cg context used by this core.
          */
-        CGcontext mCgContext;
+        CGcontext m_CgContext;
 
         /**
          * The currently bound (active) IAdapter implementation.
          */
-        IAdapterRef mAdapter;
+        IAdapterRef m_Adapter;
 
         /**
          * The current ILogger implementation.
          */
-        ILoggerRef mLogger;
+        ILoggerRef m_Logger;
 
         /**
          * The current IHookManager implementation.
          */
-        IHookManagerRef mHooker;
+        IHookManagerRef m_HookManager;
 
         /**
          * The current IFileSystem implementation.
          */
-        IFileSystemRef mFileSystem;
+        IFileSystemRef m_FileSystem;
 
         /**
          * The current module manager.
          */
-        PluginManagerRef mModManager;
+        ModuleManagerRef m_ModuleManager;
 
         /**
          * The current variable parser.
          */
-        ParserRef mParser;
+        ParserRef m_Parser;
 
         /**
-         * Collection of all shaders created by this core, by name with
-         * shared pointers cached.
+         * Collection of all shaders created by this core.
          */
-        ShaderMap mShaders;
+        ShaderVector m_Shaders;
 
         /**
          * Collection of all usable textures.
          */
-        TextureMap mTextures;
+        TextureMap m_Textures;
 
         /**
          * Collection of all virtual parameters created by this core and
          * used by the Cg context.
          */
-        ParameterMap mParameters;
+        ParameterMap m_Parameters;
 
         /**
          * Default pass target texture for shader linker.
          */
-        TextureRef mLastPass;
+        TextureRef m_LastPass;
 
         /**
          * Default technique target for shader linker.
          */
-        TextureRef mLastShader;
+        TextureRef m_LastShader;
     };
     /**
      * @}

@@ -271,7 +271,7 @@ namespace VoodooShader
             return;
         } else {
             texName = cgGetStringAnnotationValue(atexName);
-            texName = mCore->GetParser()->ParseString(texName);
+            texName = mCore->GetParser()->Parse(texName);
         }
 
         // Check for a valid texture file

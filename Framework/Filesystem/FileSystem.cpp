@@ -62,16 +62,16 @@ namespace VoodooShader
             if ( SHGetFolderPath(NULL, CSIDL_COMMON_DOCUMENTS, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
             {
                 StringCchCatA(cvar, MAX_PATH, "\\My Games\\");
-                parser->AddVariable("allgames", cvar, true);
+                parser->Add("allgames", cvar, true);
             }
             if ( SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
             {
                 StringCchCatA(cvar, MAX_PATH, "\\My Games\\");
-                parser->AddVariable("mygames", cvar, true);
+                parser->Add("mygames", cvar, true);
             }
             if ( SHGetFolderPath(NULL, CSIDL_SYSTEM, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
             {
-                parser->AddVariable("systemroot", cvar, true);
+                parser->Add("systemroot", cvar, true);
             }
 
             // Init DevIL
@@ -106,7 +106,7 @@ namespace VoodooShader
 
         void FileSystem::AddDirectory(String name)
         {
-            String realname = mCore->GetParser()->ParseString(name);
+            String realname = mCore->GetParser()->Parse(name);
 
             size_t splitter = realname.find(';');
             while ( splitter != string::npos )
@@ -121,7 +121,7 @@ namespace VoodooShader
 
         void FileSystem::RemoveDirectory(String name)
         {
-            String realname = mCore->GetParser()->ParseString(name) + "\\";
+            String realname = mCore->GetParser()->Parse(name) + "\\";
 
             this->mDirectories.remove_if([&](String current){return (current == realname);});
         }
@@ -130,7 +130,7 @@ namespace VoodooShader
         {
             mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for raw file \"%s\".", name.c_str());
 
-            String filename = mCore->GetParser()->ParseString(name);
+            String filename = mCore->GetParser()->Parse(name);
             mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for parsed file \"%s\".", filename.c_str());
 
             // 
@@ -176,7 +176,7 @@ namespace VoodooShader
         {
             mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for raw image \"%s\".", name.c_str());
 
-            String filename = mCore->GetParser()->ParseString(name);
+            String filename = mCore->GetParser()->Parse(name);
             mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for parsed image \"%s\".", filename.c_str());
 
             // 

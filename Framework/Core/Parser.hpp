@@ -43,9 +43,6 @@ namespace VoodooShader
         Parser(_In_ Core * core);
         ~Parser();
 
-        String ToLower(_In_ String input);
-        String ToUpper(_In_ String input);
-
         /**
          * Adds a variable to the internal dictionary.
          * 
@@ -56,7 +53,7 @@ namespace VoodooShader
          * @param system Marks the variable as a system variable. These cannot be changed or
          *    removed.
          */
-        void AddVariable(_In_ String name, _In_ String value, _In_ bool system = false);
+        void Add(_In_ String Name, _In_ String Value, _In_ VariableType Type = VT_Normal);
 
         /**
          * Removes a variable from the internal dictionary.
@@ -64,7 +61,7 @@ namespace VoodooShader
          * @param name The variable name (may contain variables, they will be resolved
          *    immediately).
          */
-        void RemoveVariable(_In_ String name);
+        void Remove(_In_ String Name);
 
         /**
          * Parses a string, replacing any variables with their values. Variables are resolved when
@@ -72,19 +69,22 @@ namespace VoodooShader
          * 
          * @sa @ref varsyntax for details on how variables work.
          */
-        String ParseString(_In_ String input, _In_ ParseFlags flags = PF_None);
+        String Parse(_In_ String Input, _In_ ParseFlags Flags = PF_None);
 
-        static const int VarMaxDepth = 8;
+        static const int  VarMaxDepth   = 8;
         static const char VarDelimStart = '(';
         static const char VarDelimEnd   = ')';
         static const char VarDelimPre   = '$';
 
     private:
+        String ToLower(_In_ String Input);
+        String ToUpper(_In_ String Input);
+
         String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state);
 
-        Core * mCore;
-        Dictionary mVariables;
-        Dictionary mSysVariables;
+        Core * m_Core;
+        Dictionary m_Variables;
+        Dictionary m_SysVariables;
     };
     /**
      * @}
@@ -176,7 +176,7 @@ namespace VoodooShader
      * 
      * @note Repeated consecutive slashes will not cause errors with path parsing, although in some 
      *    locations they have special meanings. They may cause errors when using the string for 
-     *    other reasons; calling @ref Parser::ParseString() with the @ref PF_SingleSlash flag set 
+     *    other reasons; calling @ref Parser::Parse() with the @ref PF_SingleSlash flag set 
      *    will attempt to strip these.
      *    
      * Finally, state variables and suppression use a variation on the name syntax.
@@ -199,7 +199,7 @@ namespace VoodooShader
      * @section varssys System Variables
      * Some variables, typically built-ins, are marked as system variables. These may be added once
      * and may not be overwritten or later changed (all other variables may be changed by 
-     * overwriting the name). The @ref Parser::RemoveVariable() method does not remove system 
+     * overwriting the name). The @ref Parser::Remove() method does not remove system 
      * variables.
      *        
      * @section varsflags Flags

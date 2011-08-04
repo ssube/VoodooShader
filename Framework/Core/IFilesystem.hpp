@@ -45,23 +45,10 @@ namespace VoodooShader
         virtual ~IFileSystem() throw()
         { };
 
-        /**
-         * Get the name of this object's class. May be used for identification or validation
-         * purposes.
-         * 
-         * @note The returned string may be compared, but must not be deleted or modified.
-         */
-        virtual const char * GetObjectClass() = 0;
-
         virtual void AddDirectory(_In_ String path) = 0;
         virtual void RemoveDirectory(_In_ String path) = 0;
 
-        virtual IFileRef GetFile
-        (
-            _In_ String name
-        ) = 0;
-
-        virtual IImageRef GetImage
+        virtual IFileRef FindFile
         (
             _In_ String name
         ) = 0;
@@ -73,8 +60,6 @@ namespace VoodooShader
     public:
         ~IFile() throw()
         { };
-
-        virtual const char * GetObjectClass() = 0;
 
         virtual String GetPath() = 0;
 
@@ -88,26 +73,20 @@ namespace VoodooShader
         virtual int Read(_In_ int count, _In_opt_count_(count) void * buffer) = 0;
 
         virtual bool Write(_In_ int count, _In_opt_count_(count) void * buffer) = 0;
+
+        virtual IImageRef IsImage() = 0;
     };
 
     class IImage
-        : public IFile, public IObject
+        : public IFile
     {
     public:
         ~IImage() throw()
         { };
 
-        virtual String GetPath() = 0;
+        virtual TextureDesc GetIDesc() = 0;
 
-        virtual const char * GetObjectClass() = 0;
-
-        virtual TextureDesc GetImageDesc() = 0;
-
-        virtual size_t CopyImageData(_In_ TextureRegion desc, _In_opt_ void * buffer) = 0;
-
-        virtual void * GetImageData() = 0;
-
-        virtual void FreeImageData() = 0;
+        virtual size_t GetData(_In_ TextureRegion desc, _In_opt_ void * buffer) = 0;
     };
 }
 

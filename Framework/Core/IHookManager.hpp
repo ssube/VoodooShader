@@ -51,9 +51,9 @@ namespace VoodooShader
          *        things might happen. This is only a bother with member functions, but
          *        can be worked around relatively easily.
          */
-        virtual bool CreateHook
+        virtual bool Add
         (
-            _In_ std::string name, 
+            _In_ String name, 
             _In_ void * src, 
             _In_ void * dest
         ) = 0;
@@ -70,14 +70,14 @@ namespace VoodooShader
          *        the process to crash in rare cases. I'm not sure the reason, but it's
          *        not good. Until I replace EasyHook, be careful!
          */
-        virtual bool RemoveHook
+        virtual bool Remove
         (
-            _In_ std::string name
+            _In_ String name
         ) = 0;
         
         /**
          * Removes all hooks created with this HookManager.
          */
-        virtual void RemoveAllHooks() = 0;
+        virtual void RemoveAll() = 0;
     };
 }

@@ -52,6 +52,7 @@ namespace VoodooShader
      *          will be valid.
      */
     class VOODOO_API Shader
+        : public IObject
     {
     public:
         /**

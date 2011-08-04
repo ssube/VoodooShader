@@ -36,6 +36,7 @@ namespace VoodooShader
      * 
      */
     class VOODOO_API Parameter
+        : public IObject
     {
     public:
         /**
@@ -76,7 +77,17 @@ namespace VoodooShader
          * 
          * @returns The parameter's name.
          */
-        String GetName();
+        virtual String GetName();
+
+        virtual Core * GetCore();
+
+        /**
+         * Retrieves the type of this parameter. This specifies what type and how many data 
+         * components are used (one texture or 1-16 floats).
+         */
+        virtual ParameterType GetType();
+
+        virtual bool IsVirtual();
 
         /**
          * Retrieves the underlying Cg parameter object.
@@ -84,12 +95,6 @@ namespace VoodooShader
          * @returns The Cg parameter this object is bound to.
          */
         CGparameter GetCgParameter();
-
-        /**
-         * Retrieves the type of this parameter. This specifies what type and how many data 
-         * components are used (one texture or 1-16 floats).
-         */
-        ParameterType GetType();
 
         /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value 
@@ -101,7 +106,7 @@ namespace VoodooShader
          * @param param The parameter to bind to this one.
          * @throws Exception if called on an actual parameter.
          */
-        void Attach
+        void AttachParameter
         (
             _In_ ParameterRef param
         );

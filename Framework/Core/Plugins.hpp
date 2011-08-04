@@ -31,6 +31,7 @@ namespace VoodooShader
     class VOODOO_API PluginManager
     {
     public:
+        bool LoadFile(_In_ String file);
         bool LoadPath(_In_ String path);
 
         template<typename T, pT = std::shared_ptr<T>>

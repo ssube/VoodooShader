@@ -26,8 +26,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_OBJECT_HPP
-#define VOODOO_OBJECT_HPP
+#pragma once
 
 #include "Meta.hpp"
 #include "Module.hpp"
@@ -42,32 +41,12 @@ namespace VoodooShader
      */
     class IObject
     {
-        friend IObject * ModuleManager::CreateClass( _In_ String name );
-
     public:
-        /**
-         * Base virtual destructor for all object classes. This throws when called, and so
-         * must be overridden.
-         */
-        virtual ~IObject() throw()
-        { };
+        virtual String GetName() = 0;
 
         /**
-         * Get the name of this object's class. May be used for identification or validation
-         * purposes.
-         * 
-         * @note The returned string may be compared, but must not be deleted or modified.
+         * Get the core this object was associated with (or nullptr if no core).
          */
-        virtual const char * GetObjectClass() = 0;
-
-    private:
-        /**
-         * A shared pointer to the module this class is defined in. Keeping 
-         * this in the class forces the module to remain in memory until the last 
-         * class from it is destroyed. This prevents class methods from becoming invalid.
-         */
-        ModuleRef mSourceModule;
+        virtual Core * GetCore() = 0;
     };
 }
-
-#endif /*VOODOO_OBJECT_HPP*/

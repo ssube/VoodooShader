@@ -18,8 +18,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_MODULEMANAGER_HPP
-#define VOODOO_MODULEMANAGER_HPP
+#pragma once
 
 #include "Meta.hpp"
 
@@ -52,6 +51,11 @@ namespace VoodooShader
             _In_ String path
         );
 
+        bool LoadFile
+        (
+            _In_ String file
+        );
+
         /**
          * Tests to see if a class exists in the list provided by all loaded modules.
          */
@@ -64,16 +68,13 @@ namespace VoodooShader
          * Wraps ModuleManager::CreateClass to return a shared pointer of a
          * specific type. The type <em>must</em> be derived from IObject.
          */
-        template<typename T>
-        std::shared_ptr<T> CreateClass
-        (
-            _In_ String name
-        )
+        template<class T>
+        std::shared_ptr<T> CreateClass(_In_ String name)
         {
-            IObject * object = this->CreateRawClass(name);
+            IObject * object = this->CreateObject(name);
 
             return std::shared_ptr<T>((T*)object);
-        }
+        };
 
         /**
          * Create a new instance of the given class. This object will be created in a
@@ -84,10 +85,7 @@ namespace VoodooShader
          * @return New object or null if the class wasn't found or couldn't be created.
          */
         _Check_return_
-        IObject * CreateRawClass
-        (
-            _In_ String name
-        );
+        IObject * CreateObject(_In_ String name);
 
         /**
          * Finds the address of a function in a module. The module must be loaded into
@@ -176,5 +174,3 @@ namespace VoodooShader
      * @}
      */
 }
-
-#endif /*VOODOO_MODULEMANAGER_HPP*/

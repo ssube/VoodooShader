@@ -10,12 +10,6 @@
     <ClCompile Include="Exception.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="FullscreenManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Parameter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -55,13 +49,7 @@
     <ClInclude Include="Exception.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="FullscreenManager.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Includes.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialManager.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Meta.hpp">

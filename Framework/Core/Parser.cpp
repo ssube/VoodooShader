@@ -32,7 +32,7 @@ namespace VoodooShader
         return ret;
     }
 
-    void Parser::AddVariable(_In_ String name, _In_ String value, _In_ bool system)
+    void Parser::Add(_In_ String name, _In_ String value, _In_ bool system)
     {
         ILoggerRef logger = mCore->GetLogger();
         if ( logger.get() )
@@ -40,7 +40,7 @@ namespace VoodooShader
             logger->Log(LL_Debug, VOODOO_CORE_NAME, "Adding variable \"%s\" with value \"%s\".", name.c_str(), value.c_str());
         }
 
-        String finalname = this->ParseString(name, PF_VarName);
+        String finalname = this->Parse(name, PF_VarName);
 
         if ( !system )
         {
@@ -59,7 +59,7 @@ namespace VoodooShader
         }
     }
 
-    void Parser::RemoveVariable(_In_ String name)
+    void Parser::Remove(_In_ String name)
     {
         ILoggerRef logger = mCore->GetLogger();
         if ( logger.get() )
@@ -67,7 +67,7 @@ namespace VoodooShader
             mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
         }
 
-        String finalname = this->ParseString(name, PF_VarName);
+        String finalname = this->Parse(name, PF_VarName);
 
         Dictionary::iterator varIter = mVariables.find(finalname);
 
@@ -77,7 +77,7 @@ namespace VoodooShader
         }
     }
 
-    String Parser::ParseString(_In_ String input, _In_ ParseFlags flags)
+    String Parser::Parse(_In_ String input, _In_ ParseFlags flags)
     {
         Dictionary parseState;
 
