@@ -90,13 +90,6 @@ namespace VoodooShader
         virtual bool IsVirtual();
 
         /**
-         * Retrieves the underlying Cg parameter object.
-         * 
-         * @returns The Cg parameter this object is bound to.
-         */
-        CGparameter GetCgParameter();
-
-        /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value 
          * is changed.
          *
@@ -106,205 +99,50 @@ namespace VoodooShader
          * @param param The parameter to bind to this one.
          * @throws Exception if called on an actual parameter.
          */
-        void AttachParameter
+        virtual void AttachParameter
         (
             _In_ ParameterRef param
         );
 
-        /**
-         * Sets this parameter's texture source.
-         * 
-         * @warning Setting the wrong data type will not return any errors and will not invalidate 
-         *    the actual data, but is useless.
-         *          
-         * @sa Parameter::Set(float)
-         * @sa Parameter::Set(float,float)
-         * @sa Parameter::Set(float,float,float)
-         * @sa Parameter::Set(float,float,float,float)
-         */
-        void Set
-        (
-            _In_ TextureRef newTex
-        );
-        
-        /**
-         * Sets this parameter's first float component (r or x).
-         * 
-         * @warning Setting the wrong data type will not return any errors and will not invalidate 
-         *    the actual data, but is useless.
-         * 
-         * @sa Parameter::Set(TextureRef)
-         * @sa Parameter::Set(float,float)
-         * @sa Parameter::Set(float,float,float)
-         * @sa Parameter::Set(float,float,float,float)
-         */
-        void Set
-        (
-            _In_ float newX
-        );
-        
-        /**
-         * Sets this parameter's first two float components (rg or xy).
-         * 
-         * @warning Setting the wrong data type will not return any errors and will not invalidate 
-         *    the actual data, but is useless.
-         *          
-         * @sa Parameter::Set(TextureRef)
-         * @sa Parameter::Set(float)
-         * @sa Parameter::Set(float,float,float)
-         * @sa Parameter::Set(float,float,float,float)
-         */
-        void Set
-        (
-            _In_ float newX, 
-            _In_ float newY
-        );
-        
-        /**
-         * Sets this parameter's first three float components (rgb or xyz).
-         * 
-         * @warning Setting the wrong data type will not return any errors and will not invalidate 
-         *    the actual data, but is useless.
-         *          
-         * @sa Parameter::Set(TextureRef)
-         * @sa Parameter::Set(float)
-         * @sa Parameter::Set(float,float)
-         * @sa Parameter::Set(float,float,float,float)
-         */
-        void Set
-        (
-            _In_ float newX, 
-            _In_ float newY, 
-            _In_ float newZ
-        );
-        
-        /**
-         * Sets this parameter's first four float components (rgba or xyzw).
-         * 
-         * @warning Setting the wrong data type will not return any errors and will not invalidate 
-         *    the actual data, but is useless.
-         *          
-         * @sa Parameter::Set(TextureRef)
-         * @sa Parameter::Set(float)
-         * @sa Parameter::Set(float,float)
-         * @sa Parameter::Set(float,float,float)
-         */
-        void Set
-        (
-            _In_ float newX, 
-            _In_ float newY, 
-            _In_ float newZ, 
-            _In_ float newW
-        );
-        
-        /**
-         * Gets this parameter's texture source.
-         * 
-         * @sa Parameter::Get(float)
-         * @sa Parameter::Get(float,float)
-         * @sa Parameter::Get(float,float,float)
-         * @sa Parameter::Get(float,float,float,float)
-         */
-        void Get
-        (
-            _Out_ TextureRef & param
-        );
-        
-        /**
-         * Gets this parameter's texture source.
-         * 
-         * @sa Parameter::Get(TextureRef)
-         * @sa Parameter::Get(float,float)
-         * @sa Parameter::Get(float,float,float)
-         * @sa Parameter::Get(float,float,float,float)
-         */
-        void Get
-        (
-            _Out_ float & paramX
-        );
-        
-        /**
-         * Gets this parameter's texture source.
-         * 
-         * @sa Parameter::Get(TextureRef)
-         * @sa Parameter::Get(float)
-         * @sa Parameter::Get(float,float,float)
-         * @sa Parameter::Get(float,float,float,float)
-         */
-        void Get
-        (
-            _Out_ float & paramX, 
-            _Out_ float & paramY
-        );
-        
-        /**
-         * Gets this parameter's texture source.
-         * 
-         * @sa Parameter::Get(TextureRef)
-         * @sa Parameter::Get(float)
-         * @sa Parameter::Get(float,float)
-         * @sa Parameter::Get(float,float,float,float)
-         */
-        void Get
-        (
-            _Out_ float & paramX, 
-            _Out_ float & paramY, 
-            _Out_ float & paramZ
-        );
-        
-        /**
-         * Gets this parameter's texture source.
-         * 
-         * @sa @ref Parameter::Get(TextureRef)
-         * @sa @ref Parameter::Get(float)
-         * @sa @ref Parameter::Get(float,float)
-         * @sa @ref Parameter::Get(float,float,float)
-         */
-        void Get
-        (
-            _Out_ float & paramX, 
-            _Out_ float & paramY, 
-            _Out_ float & paramZ, 
-            _Out_ float & paramW
-        );
+        virtual int GetComponents();
 
         /**
          * Retrieves the texture source for this parameter.
          */
-        TextureRef GetTexture();
-
+        virtual TextureRef GetTexture();
+        virtual void SetTexture(TextureRef Texture);
+        
         /**
          * Retrieves the float buffer for this parameter. This contains all 16 float components, for 
          * all sizes (float1 to float4x4). Any component may be written to, but only the appropriate 
          * number will be sent to the Cg parameter.
          */
         _Ret_count_c_(16) 
-        float * GetFloat();
+        virtual float * GetScalar();
+
+        virtual void SetScalar(int Count, _In_count_(Count) float * Values);
+
+        virtual ShaderRef GetShader();
 
         /**
-         * Attempts to update the parameter value of the Cg parameter immediately.
+         * Retrieves the underlying Cg parameter object.
          * 
-         * @warning This does not work with samplers, only float-type parameters.
+         * @returns The Cg parameter this object is bound to.
          */
-        void ForceUpdate();
+        virtual CGparameter GetCgParameter();
 
     private:
-        Shader * mParent;
-        Core * mCore;
-        String mName;
+        Shader * m_Parent;
+        Core * m_Core;
+        String m_Name;
 
-        bool mVirtual;
-        CGparameter mParam;
-        ParameterType mType;
+        bool m_Virtual;
+        CGparameter m_Param;
+        ParameterType m_Type;
 
         // Value
-        TextureRef mValueTexture;
-
-        union
-        {
-            float mValueMatrix[4][4];
-            float mValueFloat[16];
-        };
+        TextureRef m_ValueTexture;
+        float m_ValueFloat[16];
     };
     /**
      * @}

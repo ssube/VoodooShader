@@ -77,23 +77,24 @@ namespace VoodooShader
         /**
          * Return a simple name (usually filename of source file) for this shader.
          */
-        String GetName();
+        virtual String GetName();
+
+        virtual Core * GetCore();
+
+        virtual int GetTechniqueCount();
 
         /**
-         * Set a technique from this shader to be used as the default technique.
-         * Some adapter functions simply retrieve the default technique to draw
-         * with. 
-         * 
-         * @param name The name of a technique within this shader to use.
+         * Retrieve a technique from the shader by name. Most cases should use
+         * the default technique, but some specific applications may want a
+         * particular technique. 
          *
-         * @note This takes a name and not a TechniqueRef to prevent cross-
-         *        linking shaders (which would be a Bad Thing, at best).
-         * 
-         * @throws Exception if the name is not a valid technique.
+         * @param name The technique name to find.
+         * @return A shared reference to the technique if it is found, an empty
+         *        shared reference otherwise.
          */
-        void SetDefaultTechnique
+        virtual TechniqueRef GetTechnique
         (
-            _In_ String name
+            _In_ int Index
         );
 
         /**
@@ -109,7 +110,24 @@ namespace VoodooShader
          *        count down with the most compatible and simplest technique last.
          *        The first valid technique found becomes the default.
          */
-        TechniqueRef GetDefaultTechnique();
+        virtual TechniqueRef GetDefaultTechnique();
+
+        /**
+         * Set a technique from this shader to be used as the default technique.
+         * Some adapter functions simply retrieve the default technique to draw
+         * with. 
+         * 
+         * @param name The name of a technique within this shader to use.
+         *
+         * @note This takes a name and not a TechniqueRef to prevent cross-
+         *        linking shaders (which would be a Bad Thing, at best).
+         * 
+         * @throws Exception if the name is not a valid technique.
+         */
+        virtual void SetDefaultTechnique
+        (
+            _In_ TechniqueRef Technique
+        );
 
         /**
          * Retrieve the number of effect-level parameters in this shader. These
@@ -130,41 +148,8 @@ namespace VoodooShader
          */
         ParameterRef GetParameter
         (
-            _In_ size_t index
+            _In_ size_t Index
         );
-
-        /**
-         * Retrieve a specific parameter from the shader. These may be modified
-         * at runtime and will automatically update Cg and the GPU with their
-         * values (in most cases).
-         *
-         * @param name The name of the parameter to retrieve.
-         * @return A shared reference to the parameter, or to NULL if it is not
-         *        found.
-         */
-        ParameterRef GetParameter
-        (
-            _In_ String name
-        );
-
-        /**
-         * Retrieve a technique from the shader by name. Most cases should use
-         * the default technique, but some specific applications may want a
-         * particular technique. 
-         *
-         * @param name The technique name to find.
-         * @return A shared reference to the technique if it is found, an empty
-         *        shared reference otherwise.
-         */
-        TechniqueRef GetTechnique
-        (
-            _In_ String name
-        );
-
-        /**
-         * Retrieve the Core this Shader is a child of.
-         */
-        Core * GetCore();
 
         /**
          * Retrieve the underlying Cg technique.
@@ -173,6 +158,7 @@ namespace VoodooShader
          */
         CGeffect GetCgEffect();
 
+    private:
         /**
          * Initialize delayed linking (or relinking) for this shader. This
          * function rebuilds the technique and pass structure, but <em>does not
@@ -181,7 +167,6 @@ namespace VoodooShader
          */
         void Link();
 
-    private:
         /**
          * Link a particular effect-level parameter against various core
          * elements (exact behavior depends on param type).
