@@ -23,8 +23,7 @@
 #define VOODOO_PARAMETER_HPP
 
 #include "Meta.hpp"
-
-#include "Texture.hpp"
+#include "IObject.hpp"
 
 namespace VoodooShader
 {
@@ -132,9 +131,10 @@ namespace VoodooShader
         virtual CGparameter GetCgParameter();
 
     private:
-        Shader * m_Parent;
-        Core * m_Core;
         String m_Name;
+        Core * m_Core;
+
+        ShaderRef m_Parent;
 
         bool m_Virtual;
         CGparameter m_Param;

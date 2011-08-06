@@ -68,13 +68,13 @@ namespace VoodooShader
             _In_ FileOpenMode mode
         ) = 0;
 
+        virtual IImageRef OpenImage() = 0;
+
         virtual bool Close() = 0;
 
         virtual int Read(_In_ int count, _In_opt_count_(count) void * buffer) = 0;
 
         virtual bool Write(_In_ int count, _In_opt_count_(count) void * buffer) = 0;
-
-        virtual IImageRef IsImage() = 0;
     };
 
     class IImage

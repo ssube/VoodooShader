@@ -105,9 +105,9 @@ namespace VoodooShader
         );
 
     private:
-        Core * mCore;
-        ModuleMap mModules;
-        ClassMap mClasses;
+        Core * m_Core;
+        ModuleMap m_Modules;
+        ClassMap m_Classes;
     };
 
     /**

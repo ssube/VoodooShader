@@ -23,6 +23,7 @@
 #define VOODOO_TEXTURE_HPP
 
 #include "Meta.hpp"
+#include "IObject.hpp"
 
 namespace VoodooShader
 {
@@ -47,6 +48,10 @@ namespace VoodooShader
             _In_opt_ void * texture = NULL
         );
 
+        virtual String GetName();
+
+        virtual Core * GetCore();
+
         template<typename T>
         _Check_return_
         inline T * GetData()
@@ -55,13 +60,15 @@ namespace VoodooShader
         };
 
         _Check_return_
-        void * GetData();
+        virtual void * GetData();
 
-        String GetName();
+        virtual TextureDesc GetDesc();
 
     private:
-        String mName;
-        void * mData;
+        String m_Name;
+        Core * m_Core;
+        void * m_Data;
+        TextureDesc m_Desc;
     };
     /**
      * @}

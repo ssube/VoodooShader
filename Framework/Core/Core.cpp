@@ -7,8 +7,6 @@
 
 #include "Converter.hpp"
 #include "Exception.hpp"
-#include "FullscreenManager.hpp"
-#include "MaterialManager.hpp"
 #include "Module.hpp"
 #include "Parameter.hpp"
 #include "Parser.hpp"
@@ -156,7 +154,7 @@ namespace VoodooShader
 
             // Make sure a logger was loaded
             m_Logger = m_ModuleManager->CreateClass<ILogger>(logClass);
-            if ( m_Logger.get() == NULL )
+            if ( m_Logger.get() == nullptr )
             {
                 throw std::exception("Unable to create Logger object (class not found).");
             }
@@ -175,19 +173,19 @@ namespace VoodooShader
 
             // Load less vital classes
             m_FileSystem = m_ModuleManager->CreateClass<IFileSystem>(fsClass);
-            if ( m_FileSystem.get() == NULL )
+            if ( m_FileSystem.get() == nullptr )
             {
                 throw std::exception("Unable to create FileSystem object.");
             }
 
             m_HookManager = m_ModuleManager->CreateClass<IHookManager>(hookClass);
-            if ( m_HookManager.get() == NULL )
+            if ( m_HookManager.get() == nullptr )
             {
                 throw std::exception("Unable to create HookManager object.");
             }
 
             m_Adapter = m_ModuleManager->CreateClass<IAdapter>(adpClass);
-            if ( m_Adapter.get() == NULL )
+            if ( m_Adapter.get() == nullptr )
             {
                 throw std::exception("Unable to create Adapter object.");
             }
@@ -208,16 +206,16 @@ namespace VoodooShader
 
     Core::~Core()
     {
-        this->SetCgContext(NULL);
+        this->SetCgContext(nullptr);
 
         // Destroy adapter (not sure what it depends on, so handle first)
-        this->m_Adapter = NULL;
+        this->m_Adapter = nullptr;
 
-        this->m_HookManager = NULL;
-        this->m_FileSystem = NULL;
-        this->m_Logger = NULL;
+        this->m_HookManager = nullptr;
+        this->m_FileSystem = nullptr;
+        this->m_Logger = nullptr;
 
-        this->m_ModuleManager = NULL;
+        this->m_ModuleManager = nullptr;
 
 #ifdef _DEBUG_FULL
         _CrtDumpMemoryLeaks();
@@ -293,7 +291,7 @@ namespace VoodooShader
         _In_opt_ const char ** ppArgs
     )
     {
-        IFileRef file = this->m_FileSystem->GetFile(Filename);
+        IFileRef file = this->m_FileSystem->FindFile(Filename);
         if ( file.get() == nullptr )
         {
             return nullptr;
@@ -347,7 +345,7 @@ namespace VoodooShader
         {
             Throw(VOODOO_CORE_NAME, "Trying to create a texture with a duplicate name.", this);
         } else {
-            TextureRef texture = m_Adapter->CreateTexture(Desc);
+            TextureRef texture = m_Adapter->CreateTexture(Name, Desc);
 
             this->m_Textures[Name] = texture;
 

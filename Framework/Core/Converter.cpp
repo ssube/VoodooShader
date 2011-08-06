@@ -9,23 +9,51 @@ namespace VoodooShader
     {
         switch ( pt )
         {
-        case (PT_Sampler1D):
-            return CG_SAMPLER1D;
-        case (PT_Sampler2D):
-            return CG_SAMPLER2D;
-        case (PT_Sampler3D):
-            return CG_SAMPLER3D;
-        case (PT_Float1):
+        // Vectors
+        case PT_Float1x1:
             return CG_FLOAT;
-        case (PT_Float2):
+        case PT_Float1x2:
             return CG_FLOAT2;
-        case (PT_Float3):
+        case PT_Float1x3:
             return CG_FLOAT3;
-        case (PT_Float4):
+        case PT_Float1x4:
             return CG_FLOAT4;
-        case (PT_Matrix):
+        case PT_Float2x1:
+            return CG_FLOAT2x1;
+        case PT_Float2x2:
+            return CG_FLOAT2x2;
+        case PT_Float2x3:
+            return CG_FLOAT2x3;
+        case PT_Float2x4:
+            return CG_FLOAT2x4;
+        case PT_Float3x1:
+            return CG_FLOAT3x1;
+        case PT_Float3x2:
+            return CG_FLOAT3x2;
+        case PT_Float3x3:
+            return CG_FLOAT3x3;
+        case PT_Float3x4:
+            return CG_FLOAT3x4;
+        case PT_Float4x1:
+            return CG_FLOAT4x1;
+        case PT_Float4x2:
+            return CG_FLOAT4x2;
+        case PT_Float4x3:
+            return CG_FLOAT4x3;
+        case PT_Float4x4:
             return CG_FLOAT4x4;
-        case (PT_Unknown):
+        // Samplers
+        case PT_Sampler1D:
+            return CG_SAMPLER1D;
+        case PT_Sampler2D:
+            return CG_SAMPLER2D;
+        case PT_Sampler3D:
+            return CG_SAMPLER3D;
+        // Structs
+        case PT_Struct:
+            return CG_STRUCT;
+        // Other
+        case PT_Unknown:
         default:
             return CG_UNKNOWN_TYPE;
         }

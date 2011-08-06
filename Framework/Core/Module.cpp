@@ -4,45 +4,70 @@
 #include "Exception.hpp"
 #include "ILogger.hpp"
 #include "IObject.hpp"
+#include "Parser.hpp"
 
 namespace VoodooShader
 {
     ModuleManager::ModuleManager( _In_ Core * core )
-        : mCore(core)
+        : m_Core(core)
     {
     }
 
     ModuleManager::~ModuleManager()
     {
-        mClasses.clear();
-        mModules.clear();
+        m_Classes.clear();
+        m_Modules.clear();
     }
 
     bool ModuleManager::LoadPath( _In_ String path )
     {
-        FindFirstFile("*.dll,*.exe", &)
-    }
+        String mask = m_Core->GetParser()->Parse(path) + "\\plugin_*";
 
-    ModuleRef ModuleManager::LoadModule( _In_ String name )
-    {
-        ILoggerRef logger = mCore->GetLogger();
+        WIN32_FIND_DATA findFile;
+        HANDLE searchHandle = FindFirstFile(mask.c_str(), &findFile);
 
-        // Build the full path
-        String path;
-
-        if ( name[0] == '.' )
+        if ( searchHandle == INVALID_HANDLE_VALUE )
         {
-            path = mCore->GetGlobalRoot() + "\\bin\\" + name.substr(2);
-        } else {
-            path = name;
+            DWORD error = GetLastError();
+            if ( error == ERROR_FILE_NOT_FOUND )
+            {
+                m_Core->GetLogger()->Log
+                (
+                    LL_Warning, VOODOO_CORE_NAME, "No plugin files found in directory %s.", path.c_str()
+                );
+
+                return false;
+            } else {
+                m_Core->GetLogger()->Log
+                (
+                    LL_Warning, VOODOO_CORE_NAME, "Error searching directory %s.", path.c_str()
+                );
+
+                return false;
+            }
         }
 
-        // Check for already loaded
-        ModuleMap::iterator moduleiter = mModules.find(path);
-
-        if ( moduleiter != mModules.end() )
+        do
         {
-            return moduleiter->second;
+            String module = findFile.cFileName;
+
+            this->LoadFile(module);
+        } while ( FindNextFile(searchHandle, &findFile) != 0 );
+
+        return true;
+    }
+
+    bool ModuleManager::LoadFile( _In_ String name )
+    {
+        ILoggerRef logger = m_Core->GetLogger();
+
+        // Build the full path
+        String path = m_Core->GetParser()->Parse(name);
+
+        // Check for already loaded
+        if ( m_Modules.find(path) != m_Modules.end() )
+        {
+            return true;
         }
 
         // Create struct and load functions
@@ -54,9 +79,7 @@ namespace VoodooShader
             {
                 logger->Log
                 (
-                    LL_Error,
-                    VOODOO_CORE_NAME,
-                    "Unable to load module %s.",
+                    LL_Error, VOODOO_CORE_NAME, "Unable to load module %s.",
                     path.c_str()
                 );
             }
@@ -65,7 +88,7 @@ namespace VoodooShader
         }
 
         ModuleRef module(rawmodule);
-        mModules[path] = module;
+        m_Modules[path] = module;
 
 		// Register classes from module
 		Version moduleversion = rawmodule->ModuleVersion();
@@ -86,40 +109,11 @@ namespace VoodooShader
 
             if ( classname )
             {
-                mClasses[classname] = ClassID(module, curClass);
+                m_Classes[classname] = ClassID(module, curClass);
             }
         }
 
         return module;
-    }
-
-    bool ModuleManager::UnloadModule( _In_ String name )
-    {
-        // Build the full path
-        String path;
-
-        if ( name[0] == '.' )
-        {
-            path = mCore->GetGlobalRoot() + "\\bin\\" + name.substr(2);
-        } else {
-            path = name;
-        }
-
-        ModuleMap::iterator modIter = mModules.find(path);
-        if ( modIter != mModules.end() )
-        {
-            ModuleRef mod = modIter->second;
-
-            mModules.erase(modIter);
-
-            if ( mod.use_count() == 1 )
-            {
-                mod = NULL;
-                return true;
-            }
-        }
-
-        return false;
     }
 
     void * ModuleManager::FindFunction( _In_ String module, _In_ String name )
@@ -136,15 +130,15 @@ namespace VoodooShader
 
     bool ModuleManager::ClassExists( _In_ String name )
     {
-        return ( mClasses.find(name) != mClasses.end() );
+        return ( m_Classes.find(name) != m_Classes.end() );
     }
 
-    IObject * ModuleManager::CreateClass( _In_ String name )
+    IObject * ModuleManager::CreateObject( _In_ String name )
     {
-        ILoggerRef logger = mCore->GetLogger();
-        ClassMap::iterator classiter = mClasses.find(name);
+        ILoggerRef logger = m_Core->GetLogger();
+        ClassMap::iterator classiter = m_Classes.find(name);
 
-        if ( classiter != mClasses.end() )
+        if ( classiter != m_Classes.end() )
         {
             ModuleRef module = classiter->second.first.lock();
             int number = classiter->second.second;
@@ -153,7 +147,7 @@ namespace VoodooShader
             {
                 try
                 {
-                    IObject * object = module->CreateClass(number, mCore);
+                    IObject * object = module->CreateClass(number, m_Core);
 
                     if ( object == NULL )
                     {
@@ -161,8 +155,6 @@ namespace VoodooShader
                         {
                             logger->Log(LL_Error, VOODOO_CORE_NAME, "Error creating instance of class %s.", name.c_str());
                         }
-                    } else {
-                        object->mSourceModule = module;
                     }
 
                     return object;

@@ -19,13 +19,9 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_SHADER_HPP
-#define VOODOO_SHADER_HPP
+#pragma once
 
 #include "Meta.hpp"
-
-#include "Parameter.hpp"
-#include "Texture.hpp"
 
 namespace VoodooShader
 {
@@ -64,15 +60,15 @@ namespace VoodooShader
          */
         Shader
         (
-            _In_ Core * parent, 
-            _In_ String filename, 
-            _In_opt_ const char ** args = NULL
+            _In_ Core * pParent, 
+            _In_ String Path, 
+            _In_opt_ const char ** ppArgs = NULL
         );
 
         /**
          * Destroys the shader, unlinking and cleaning up the effect and all techniques.
          */
-        ~Shader();
+        virtual ~Shader();
 
         /**
          * Return a simple name (usually filename of source file) for this shader.
@@ -81,7 +77,7 @@ namespace VoodooShader
 
         virtual Core * GetCore();
 
-        virtual int GetTechniqueCount();
+        virtual size_t GetTechniqueCount();
 
         /**
          * Retrieve a technique from the shader by name. Most cases should use
@@ -203,198 +199,17 @@ namespace VoodooShader
 
         void SetupTechniques();
 
-        Core * mCore;
-        String mName;
-        CGeffect mEffect;
+        String m_Name;
+        Core * m_Core;
 
-        TechniqueRef mDefaultTechnique;
-        TechniqueMap mTechniques;
-        ParameterVector mParameters;
+        TechniqueRef m_DefaultTechnique;
+        TechniqueMap m_Techniques;
+        ParameterVector m_Parameters;
+
+        CGeffect m_CgEffect;
     };
 
-    /**
-     * Contains a set of passes, designed to be used sequentially to create a 
-     * shader effect. Typically, a single technique will be used, although
-     * shaders may contain multiple techniques. Each technique may contain a
-     * number of passes and some technique-level metadata.
-     * 
-     * @note    All passes in a valid technique are guaranteed to be valid.
-     * 
-     * @warning While a Shader may contain a number of Techniques, not all
-     *          are guaranteed to be valid. Techniques are typically validated
-     *          when the Shader is created and loaded. 
-     */
-    class VOODOO_API Technique
-    {
-    public:
-        Technique
-        (
-            _In_ Shader * parent, 
-            _In_ CGtechnique cgTech
-        );
-
-        ~Technique();
-
-        /**
-         * Retrieve a fully qualified technique name (including shader name)
-         * from the technique.
-         *
-         * @return This technique's name
-         */
-        String GetName();
-
-        /**
-         * Retrieve the core this technique was compiled under.
-         *
-         * @return The core
-         */
-        Core * GetCore();
-
-        /**
-         * Retrieve the number of passes in this technique.
-         *
-         * @return The number of passes
-         */
-        size_t GetPassCount();
-
-        /**
-         * Retrieve a specific pass from this technique.
-         *
-         * @param index The pass number to retrieve
-         * @return A reference to the given pass
-         * @throws Exception if index is greater than the number of passes the
-         *        technique has (call Technique::GetPassCount() first to find the
-         *        number of passes)
-         */
-        PassRef GetPass
-        (
-            _In_ size_t index
-        );
-
-        /**
-         * Retrieve the technique's final target. This is the surface the
-         * technique expects the results of the final pass to end up in. The
-         * technique may render to scratch textures, but the final result should
-         * go into this texture (not, for example, the lastshader texture).
-         *
-         * @return A reference to the target texture
-         */
-        TextureRef GetTarget();
-
-        /**
-         * Retrieve the underlying Cg technique.
-         * 
-         * @return A pointer to the Cg technique.
-         */
-        CGtechnique GetCgTechnique();
-
-        void Link();
-
-    private:
-        Core * mCore;
-        Shader * mParent;
-        String mName;
-        PassVector mPasses;
-        CGtechnique mTechnique;
-        TextureRef mTarget;
-    };
-
-    /**
-     * Each Pass contains a single set of programs, each operating on a different
-     * stage of the render pipeline. 
-     * 
-     * @note    A Pass may contain programs for each stage. Valid stages vary by 
-     *          underlying API and version. In OpenGL and DirectX 9 and earlier,
-     *          stages may be left to the fixed-function pipeline by not specifying
-     *          any program to be used. Later APIs require the vertex and pixel
-     *          shaders to be specified in each pass.
-     * 
-     * @warning Some adapters may require programs to be provided for certain
-     *          stages.
-     */
-    class VOODOO_API Pass
-    {
-    public:
-        Pass
-        (
-            _In_ Technique * parent,
-            _In_ CGpass cgPass
-        );
-
-        ~Pass();
-
-        /**
-         * Retrieve the fully qualified pass name, including technique and
-         * shader name.
-         *
-         * @return The pass name
-         */
-        String GetName();
-
-        /**
-         * Retrieve the core this pass was compiled under.
-         *
-         * @return The core
-         */
-        Core * GetCore();
-
-        /**
-         * Retrieve the target this pass should render to. This will be a texture
-         * that has been registered with the core. The results of the shader
-         * program(s), when run, should end up <em>only</em> in this texture
-         * (scratch textures may be used, but the program should not write to a
-         * common texture such as lastpass).
-         *
-         * @return A reference to the target texture.
-         */
-        TextureRef GetTarget();
-
-        /**
-         * Retrieve a specific program stage from this pass. Each pass may have
-         * many programs, each program controls one stage of the render process.
-         * The most commonly used stages are the vertex and fragment stages,
-         * which are supported by almost all hardware. Geometry stages are also
-         * available, but not as well supported. D3D11 tessellation control 
-         * stages are not yet supported by the Voodoo Shader Framework.
-         *
-         * @param stage The stage to retrieve.
-         * @return The program corresponding to the desired stage, or NULL if
-         *        the pass has no program for that stage or an unsupported or
-         *        unknown stage is requested.
-         */
-        CGprogram GetProgram
-        (
-            _In_ ProgramStage stage
-        );
-
-        /**
-         * Retrieve the underlying Cg technique.
-         * 
-         * @return A pointer to the Cg technique.
-         */
-        CGpass GetCgPass();
-
-        void Link();
-
-    private:
-        Core * mCore;
-        Technique * mParent;
-
-        String mName;
-        TextureRef mTarget;
-        CGpass mPass;
-
-        CGprogram mGeometryProgram;
-        CGprogram mVertexProgram;
-        CGprogram mFragmentProgram;
-        CGprogram mDomainProgram;
-        CGprogram mHullProgram;
-
-        //! @todo Add full support for D3D11 tessellation programs
-    };
     /**
      * @}
      */
 }
-
-#endif /*VOODOO_SHADER_HPP*/

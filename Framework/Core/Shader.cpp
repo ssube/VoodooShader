@@ -6,111 +6,110 @@
 #include "Exception.hpp"
 #include "IFilesystem.hpp"
 #include "ILogger.hpp"
+#include "Parameter.hpp"
+#include "Technique.hpp"
 
 namespace VoodooShader
 {
-    Shader::Shader(Core * parent, String filename, const char ** args)
-        : mCore(parent), mName(filename), mDefaultTechnique()
+    Shader::Shader(Core * pParent, String Path, const char ** ppArgs)
+        : m_Name(Path), m_Core(pParent), m_DefaultTechnique(nullptr)
     {
-        CGcontext context = mCore->GetCgContext();
+        CGcontext context = m_Core->GetCgContext();
 
         if ( !context || !cgIsContext(context) )
         {
             throw std::exception("Unable to create parameter (core has no context).");
         }
 
-        IFileRef fileref = mCore->GetFileSystem()->GetFile(filename);
-
-        if ( !fileref.get() )
-        {
-            throw std::exception("Unable to find file.");
-        }
-
-        this->mEffect = cgCreateEffectFromFile
+        this->m_CgEffect = cgCreateEffectFromFile
         (
             context, 
-            fileref->GetPath().c_str(), 
-            args
+            Path.c_str(), 
+            ppArgs
         );
 
-        if ( !cgIsEffect(this->mEffect) )
+        if ( !cgIsEffect(this->m_CgEffect) )
         {
             throw std::exception("Failed to create shader.");
         } else {
-            cgSetEffectName(this->mEffect, this->mName.c_str());
+            cgSetEffectName(this->m_CgEffect, this->m_Name.c_str());
         }
     }
 
     Shader::~Shader()
     {
-        mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying shader %s.", mName.c_str());
+        m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying shader %s.", m_Name.c_str());
 
-        mDefaultTechnique = NULL;
-        mTechniques.clear();
-        mParameters.clear();
+        m_DefaultTechnique = nullptr;
+        m_Techniques.clear();
+        m_Parameters.clear();
 
-        if ( cgIsEffect(mEffect) )
+        if ( cgIsEffect(m_CgEffect) )
         {
-            cgDestroyEffect(mEffect);
+            cgDestroyEffect(m_CgEffect);
+        }
+    }
+
+    String Shader::GetName()
+    {
+        return m_Name;
+    }
+
+    Core * Shader::GetCore()
+    {
+        return m_Core;
+    }
+
+    size_t Shader::GetTechniqueCount()
+    {
+        return m_Techniques.size();
+    }
+
+    TechniqueRef Shader::GetTechnique(int Index)
+    {
+        if ( Index < m_Techniques.size() )
+        {
+            return m_Techniques[Index];
+        } else {
+            return nullptr;
         }
     }
 
     TechniqueRef Shader::GetDefaultTechnique()
     {
-        return this->mDefaultTechnique;
+        return m_DefaultTechnique;
+    }
+
+    void Shader::SetDefaultTechnique(TechniqueRef Technique)
+    {
+        m_DefaultTechnique = Technique;
     }
 
     size_t Shader::GetParameterCount()
     {
-        return mParameters.size();
+        return m_Parameters.size();
     }
 
-    ParameterRef Shader::GetParameter(_In_ size_t index)
+    ParameterRef Shader::GetParameter(_In_ size_t Index)
     {
-        if ( index < mParameters.size() )
+        if ( Index < m_Parameters.size() )
         {
-            return mParameters[index];
+            return m_Parameters[Index];
         } else {
-            return ParameterRef();
+            return nullptr;
         }
-    }
-
-    ParameterRef Shader::GetParameter(_In_ String name)
-    {
-        String fullname = this->GetName() + ":" + name;
-
-        for ( ParameterVector::iterator iparam = mParameters.begin(); iparam != mParameters.end(); ++iparam )
-        {
-            ParameterRef param = (*iparam);
-            if ( param->GetName() == fullname )
-            {
-                return param;
-            }
-        }
-
-        return ParameterRef();
-    }
-
-    String Shader::GetName()
-    {
-        return mName;
-    }
-
-    Core * Shader::GetCore()
-    {
-        return mCore;
     }
 
     void Shader::Link()
     {
         // Make sure it's a valid effect
-        if ( !cgIsEffect(mEffect) )
+        if ( !cgIsEffect(m_CgEffect) )
         {
             Throw(VOODOO_CORE_NAME, "Invalid effect.", mCore);
         }
 
         // Link parameters first
-        CGparameter cParam = cgGetFirstEffectParameter(this->mEffect);
+        CGparameter cParam = cgGetFirstEffectParameter(this->m_CgEffect);
 
         while ( cgIsParameter(cParam) )
         {
@@ -118,7 +117,7 @@ namespace VoodooShader
 
             this->LinkParameter(param);
 
-            this->mParameters.push_back(param);
+            this->m_Parameters.push_back(param);
 
             cParam = cgGetNextParameter(cParam);
         }
@@ -140,12 +139,12 @@ namespace VoodooShader
             const char * globalName = cgGetStringAnnotationValue(globalAnnotation);
             if ( globalName != NULL && strlen(globalName) > 0 )
             {
-                ParameterRef globalParam = mCore->GetParameter(globalName, type);
+                ParameterRef globalParam = m_Core->GetParameter(globalName, type);
                 if ( globalParam.get() )
                 {
-                    globalParam->Attach(param);
+                    globalParam->AttachParameter(param);
                 } else {
-                    mCore->GetLogger()->Log
+                    m_Core->GetLogger()->Log
                     (
                         LL_Warning,
                         VOODOO_CORE_NAME, 
@@ -154,7 +153,7 @@ namespace VoodooShader
                     );
                 }
             } else {
-                mCore->GetLogger()->Log
+                m_Core->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME, 
@@ -183,7 +182,7 @@ namespace VoodooShader
 
         if ( !cgIsAnnotation(textureAnnotation) || cgGetAnnotationType(textureAnnotation) != CG_STRING )
         {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Warning,
                 VOODOO_CORE_NAME,
@@ -197,7 +196,7 @@ namespace VoodooShader
         const char * textureName = cgGetStringAnnotationValue(textureAnnotation);
         if ( textureName == NULL || strlen(textureName) == 0 )
         {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Warning,
                 VOODOO_CORE_NAME,
@@ -209,13 +208,13 @@ namespace VoodooShader
         }
 
         // Try to get the texture first, otherwise pass to adapter
-        TextureRef texture = mCore->GetTexture(textureName);
+        TextureRef texture = m_Core->GetTexture(textureName);
                 
         if ( texture.get() )
         {
-            mCore->GetAdapter()->ConnectTexture(param, texture);
+            m_Core->GetAdapter()->ConnectTexture(param, texture);
         } else {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Warning,
                  VOODOO_CORE_NAME,
@@ -233,7 +232,7 @@ namespace VoodooShader
 
         if ( !cgIsParameter(parameter) )
         {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -246,7 +245,7 @@ namespace VoodooShader
         CGannotation atexName = cgGetNamedParameterAnnotation(parameter, "texture");
         if ( !cgIsAnnotation(atexName) || cgGetAnnotationType(atexName) != CG_STRING )
         {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -260,7 +259,7 @@ namespace VoodooShader
         String texName;
         if ( cgGetAnnotationType(atexName) != CG_STRING )
         {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -271,16 +270,22 @@ namespace VoodooShader
             return;
         } else {
             texName = cgGetStringAnnotationValue(atexName);
-            texName = mCore->GetParser()->Parse(texName);
+            texName = m_Core->GetParser()->Parse(texName);
         }
 
         // Check for a valid texture file
-        IImageRef texFile = mCore->GetFileSystem()->GetFile(texName);
+        IImageRef textureImage = nullptr;
+        IFileRef texFile = m_Core->GetFileSystem()->FindFile(texName);
         if ( texFile.get() )
         {
-            TextureRef tex = mCore->GetAdapter()->CreateTexture(texFile);
-            param->Set(tex);
-            return;
+            textureImage = texFile->OpenImage();
+
+            if ( textureImage.get() )
+            {
+                TextureRef tex = m_Core->GetAdapter()->CreateTexture(textureImage);
+                param->Set(tex);
+                return;
+            }
         }
 
         // No file, make blank texture
@@ -293,7 +298,7 @@ namespace VoodooShader
 
         if ( texSizeType ==  CG_INT1 )
         {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
              (
                 LL_Debug,
                 VOODOO_CORE_NAME,
@@ -305,7 +310,7 @@ namespace VoodooShader
             texDesc.Width = texDims[0];
             texDesc.Height = texDesc.Depth = 1;
         } else if ( texSizeType == CG_INT2 ) {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_CORE_NAME,
@@ -318,7 +323,7 @@ namespace VoodooShader
             texDesc.Height = texDims[1];
             texDesc.Depth = 1;
         } else if ( texSizeType == CG_INT3 ) {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_CORE_NAME,
@@ -331,7 +336,7 @@ namespace VoodooShader
             texDesc.Height = texDims[1];
             texDesc.Depth = texDims[2];
         } else if ( texSizeType == CG_INT4 ) {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -339,7 +344,7 @@ namespace VoodooShader
                 param->GetName().c_str()
             );        
         } else {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -352,7 +357,7 @@ namespace VoodooShader
 
         if ( cgGetAnnotationType(atexFormat) != CG_STRING )
         {
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
@@ -366,7 +371,7 @@ namespace VoodooShader
             texDesc.Format = Converter::ToTextureFormat(formatString);
         }
 
-        IAdapterRef adapter = mCore->GetAdapter();
+        IAdapterRef adapter = m_Core->GetAdapter();
         TextureRef texture = adapter->CreateTexture(texName, texDesc);
         param->Set(texture);
     }
@@ -374,14 +379,14 @@ namespace VoodooShader
 
     void Shader::SetupTechniques()
     {
-        CGtechnique cTech = cgGetFirstTechnique(mEffect);
+        CGtechnique cTech = cgGetFirstTechnique(m_CgEffect);
         while ( cgIsTechnique(cTech) )
         {
             CGbool valid = cgValidateTechnique(cTech);
 
             if ( valid == CG_TRUE )
             {
-                mCore->GetLogger()->Log
+                m_Core->GetLogger()->Log
                 (
                     LL_Debug,
                     VOODOO_CORE_NAME,
@@ -393,17 +398,17 @@ namespace VoodooShader
                 TechniqueRef tech(new Technique(this, cTech));
 
                 const char * techName = cgGetTechniqueName(cTech);
-                mTechniques[techName] = tech;
+                m_Techniques[techName] = tech;
 
                 // The first valid technique is the default one
-                if ( !mDefaultTechnique.get() )
+                if ( !m_DefaultTechnique.get() )
                 {
-                    this->mDefaultTechnique = tech;
+                    this->m_DefaultTechnique = tech;
                 }
 
                 tech->Link();
             } else {
-                mCore->GetLogger()->Log
+                m_Core->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
@@ -416,12 +421,26 @@ namespace VoodooShader
         }
     }
 
-    void Shader::SetDefaultTechnique(String name)
+    void Shader::SetDefaultTechnique(TechniqueRef Technique)
     {
+        if ( Technique.get() != nullptr )
+        {
+            if ( Technique->GetShader() == this )
+            {
+                m_DefaultTechnique = Technique;
+            } else {
+                m_Core->GetLogger()->Log
+                (
+                    LL_Error, VOODOO_CORE_NAME, 
+                    "Technique %s cannot be set as default for shader %s (not technique for this shader).",
+                    Technique->GetName(), this->GetName()
+                );
+            }
+        }
         TechniqueRef tech = this->GetTechnique(name);
         if ( tech.get() )
         {
-            this->mDefaultTechnique = tech;
+            this->m_DefaultTechnique = tech;
         } else {
             Throw(VOODOO_CORE_NAME, "Technique not found in shader.", mCore);
         }
