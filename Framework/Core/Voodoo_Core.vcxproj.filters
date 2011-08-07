@@ -25,6 +25,9 @@
     <ClCompile Include="Parser.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Pass.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Voodoo_Core.hpp" />

@@ -268,6 +268,8 @@ namespace VoodooShader
             m_Textures.clear();
             m_LastPass = nullptr;
             m_LastShader = nullptr;
+
+            return true;
         } else if ( m_CgContext != nullptr ) {
             m_Logger->Log
             (

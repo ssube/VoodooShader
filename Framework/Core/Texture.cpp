@@ -3,16 +3,26 @@
 namespace VoodooShader
 {
     Texture::Texture(String name, void * texture)
-        : mData(texture), mName(name)
+        : m_Name(name), m_Data(texture)
     { };
-
-    void * Texture::GetData()
-    {
-        return mData;
-    }
 
     String Texture::GetName()
     {
-        return mName;
+        return m_Name;
+    }
+
+    Core * Texture::GetCore()
+    {
+        return m_Core;
+    }
+
+    void * Texture::GetData()
+    {
+        return m_Data;
+    }
+
+    TextureDesc Texture::GetDesc()
+    {
+        return m_Desc;
     };
 }

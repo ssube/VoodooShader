@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_CORE_HPP
-#define VOODOO_CORE_HPP
+#pragma once
 
 #include "Meta.hpp"
 
@@ -376,5 +375,3 @@ namespace VoodooShader
      * @}
      */
 }
-
-#endif

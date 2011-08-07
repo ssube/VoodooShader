@@ -193,12 +193,16 @@ namespace VoodooShader
 
             Module * module = new Module(hmodule);
 
-            module->mModuleVersion = (VersionFunc) GetProcAddress(hmodule, "ModuleVersion");
-            module->mClassCount    = (CountFunc  ) GetProcAddress(hmodule, "ClassCount"   );
-            module->mClassInfo     = (InfoFunc   ) GetProcAddress(hmodule, "ClassInfo"    );
-            module->mClassCreate   = (CreateFunc ) GetProcAddress(hmodule, "ClassCreate"  );
+            module->m_ModuleVersion = (VersionFunc) GetProcAddress(hmodule, "ModuleVersion");
+            module->m_ClassCount    = (CountFunc  ) GetProcAddress(hmodule, "ClassCount"   );
+            module->m_ClassInfo     = (InfoFunc   ) GetProcAddress(hmodule, "ClassInfo"    );
+            module->m_ClassCreate   = (CreateFunc ) GetProcAddress(hmodule, "ClassCreate"  );
 
-            if ( !module->mModuleVersion || !module->mClassCount || !module->mClassInfo || !module->mClassCreate )
+            if ( module->m_ModuleVersion == nullptr || 
+                 module->m_ClassCount == nullptr || 
+                 module->m_ClassInfo == nullptr || 
+                 module->m_ClassCreate 
+               )
             {
                 FreeLibrary(hmodule);
                 delete module;
@@ -212,36 +216,36 @@ namespace VoodooShader
     }
 
     Module::Module(HMODULE hmodule)
-        : mOwned(true), mHandle(hmodule)
+        : m_Handle(hmodule)
     {
     }
 
     Module::~Module()
     {
-        if ( mHandle != INVALID_HANDLE_VALUE )
+        if ( m_Handle != INVALID_HANDLE_VALUE )
         {
-            FreeLibrary(mHandle);
-            mHandle = NULL;
+            FreeLibrary(m_Handle);
+            m_Handle = NULL;
         }
     }
 
     Version Module::ModuleVersion()
     {
-        return (*mModuleVersion)();
+        return (*m_ModuleVersion)();
     }
 
     int Module::ClassCount()
     {
-        return (*mClassCount)();
+        return (*m_ClassCount)();
     }
 
     const char * Module::ClassInfo( _In_ int number )
     {
-        return (*mClassInfo)(number);
+        return (*m_ClassInfo)(number);
     }
 
     IObject * Module::CreateClass(_In_ int number, _In_ Core * core)
     {
-        return (*mClassCreate)(number, core);
+        return (*m_ClassCreate)(number, core);
     }
 }

@@ -23,6 +23,8 @@
 
 #include "Meta.hpp"
 
+#include "IObject.hpp"
+
 namespace VoodooShader
 {
     /**
@@ -62,7 +64,7 @@ namespace VoodooShader
         (
             _In_ Core * pParent, 
             _In_ String Path, 
-            _In_opt_ const char ** ppArgs = NULL
+            _In_opt_ const char ** ppArgs = nullptr
         );
 
         /**
@@ -90,7 +92,7 @@ namespace VoodooShader
          */
         virtual TechniqueRef GetTechnique
         (
-            _In_ int Index
+            _In_ size_t Index
         );
 
         /**

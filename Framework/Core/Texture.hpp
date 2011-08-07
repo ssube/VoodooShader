@@ -19,8 +19,7 @@
  * developer at peachykeen@voodooshader.com
 \**************************************************************************************************/
 
-#ifndef VOODOO_TEXTURE_HPP
-#define VOODOO_TEXTURE_HPP
+#pragma once
 
 #include "Meta.hpp"
 #include "IObject.hpp"
@@ -45,8 +44,10 @@ namespace VoodooShader
         Texture
         (
             _In_ String name, 
-            _In_opt_ void * texture = NULL
+            _In_opt_ void * texture = nullptr
         );
+
+        virtual ~Texture();
 
         virtual String GetName();
 
@@ -74,5 +75,3 @@ namespace VoodooShader
      * @}
      */
 }
-
-#endif /*VOODOO_TEXTURE_HPP*/

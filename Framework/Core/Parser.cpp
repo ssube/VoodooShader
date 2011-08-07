@@ -10,12 +10,12 @@
 namespace VoodooShader
 {
     Parser::Parser(_In_ Core * core)
-        : mCore(core)
+        : m_Core(core)
     {    }
 
     Parser::~Parser()
     {
-        mVariables.clear();
+        m_Variables.clear();
     }
 
     String Parser::ToLower(_In_ String input)
@@ -34,7 +34,7 @@ namespace VoodooShader
 
     void Parser::Add(_In_ String name, _In_ String value, _In_ bool system)
     {
-        ILoggerRef logger = mCore->GetLogger();
+        ILoggerRef logger = m_Core->GetLogger();
         if ( logger.get() )
         {
             logger->Log(LL_Debug, VOODOO_CORE_NAME, "Adding variable \"%s\" with value \"%s\".", name.c_str(), value.c_str());
@@ -44,12 +44,12 @@ namespace VoodooShader
 
         if ( !system )
         {
-            mVariables[finalname] = value;
+            m_Variables[finalname] = value;
         } else {
-            Dictionary::iterator varIter = mSysVariables.find(finalname);
-            if ( varIter == mSysVariables.end() )
+            Dictionary::iterator varIter = m_SysVariables.find(finalname);
+            if ( varIter == m_SysVariables.end() )
             {
-                mSysVariables[finalname] = value;
+                m_SysVariables[finalname] = value;
             } else {
                 if ( logger.get() )
                 {
@@ -61,19 +61,19 @@ namespace VoodooShader
 
     void Parser::Remove(_In_ String name)
     {
-        ILoggerRef logger = mCore->GetLogger();
+        ILoggerRef logger = m_Core->GetLogger();
         if ( logger.get() )
         {
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
         }
 
         String finalname = this->Parse(name, PF_VarName);
 
-        Dictionary::iterator varIter = mVariables.find(finalname);
+        Dictionary::iterator varIter = m_Variables.find(finalname);
 
-        if ( varIter != mVariables.end() )
+        if ( varIter != m_Variables.end() )
         {
-            mVariables.erase(varIter);
+            m_Variables.erase(varIter);
         }
     }
 
@@ -88,10 +88,10 @@ namespace VoodooShader
     {
         using namespace std;
 
-        ILoggerRef logger = mCore->GetLogger();
+        ILoggerRef logger = m_Core->GetLogger();
         if ( logger.get() )
         {
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
         }
 
         if ( depth > Parser::VarMaxDepth || input.length() < 3 )
@@ -121,14 +121,32 @@ namespace VoodooShader
                 break;
             }
             
-            size_t startpos = iteration.find_last_of(Parser::VarDelimStart, endpos);
-            if ( startpos == string::npos || 
+            String varname = iteration.substr(endpos);
+            size_t startpos = iteration.find_last_of(Parser::VarDelimStart);
+            if ( startpos == String::npos ||  
                  startpos == 0 || 
                  iteration[startpos-1] != Parser::VarDelimPre 
                )
             {
                 // Stop parsing if no opening sequence is found, or there is no room for one
                 break;
+            }
+
+            varname = varname.substr(startpos+1);
+
+            if ( varname.length() < 1 )
+            {
+                String output = iteration.substr(0, startpos - 1);
+                output += iteration.substr(endpos + 1);
+                iteration = output;
+                continue;
+            }
+
+            // Handle state variables
+            size_t statepos = varname.find(':');
+            if ( statepos != String::npos )
+            {
+
             }
 
             size_t varnamelen = endpos - startpos - 1;
@@ -188,8 +206,8 @@ namespace VoodooShader
             bool foundvar = true;
             String varvalue;
 
-            Dictionary::iterator variter = mSysVariables.find(varname);
-            if ( variter != mSysVariables.end() )
+            Dictionary::iterator variter = m_SysVariables.find(varname);
+            if ( variter != m_SysVariables.end() )
             {
                 varvalue = variter->second;
             } else {
@@ -198,8 +216,8 @@ namespace VoodooShader
                 {
                     varvalue = variter->second;
                 } else {
-                    variter = mVariables.find(varname);
-                    if ( variter != mVariables.end() )
+                    variter = m_Variables.find(varname);
+                    if ( variter != m_Variables.end() )
                     {
                         varvalue = variter->second;
                     } else {

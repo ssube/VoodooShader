@@ -163,12 +163,11 @@ namespace VoodooShader
         );
 
      private:
-        bool mOwned;
-        HMODULE mHandle;
-        Functions::VersionFunc mModuleVersion;
-        Functions::CountFunc   mClassCount;
-        Functions::InfoFunc    mClassInfo;  
-        Functions::CreateFunc  mClassCreate;
+        HMODULE m_Handle;
+        Functions::VersionFunc m_ModuleVersion;
+        Functions::CountFunc   m_ClassCount;
+        Functions::InfoFunc    m_ClassInfo;  
+        Functions::CreateFunc  m_ClassCreate;
      };
     /**
      * @}

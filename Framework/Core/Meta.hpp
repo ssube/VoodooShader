@@ -92,25 +92,6 @@ namespace VoodooShader
     struct TextureDesc;
     struct Version;
 
-     /**
-      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, 
-      * particularly function, filename and line. These exceptions are also logged if possible 
-      * (requires a valid core to be given). The Exception class derives from std::exception, so 
-      * these are simple to handle.
-      */
-#define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
-
-    /**
-     * Function pointer types for module interfaces.
-     */
-    namespace Functions
-    {
-        typedef Int32        (*CountFunc  )();
-        typedef const char * (*InfoFunc   )(Int32);
-        typedef IObject *    (*CreateFunc )(Int32, Core *);
-        typedef Version      (*VersionFunc)();
-    };
-
     typedef std::shared_ptr<Module>             ModuleRef;
     typedef std::weak_ptr<Module>               ModulePtr;
     typedef std::shared_ptr<ModuleManager>      ModuleManagerRef;
@@ -129,11 +110,19 @@ namespace VoodooShader
     typedef std::weak_ptr<Texture>              TexturePtr;
 
     typedef std::shared_ptr<IAdapter>           IAdapterRef;
+    typedef std::weak_ptr<IAdapter>             IAdapterPtr;
     typedef std::shared_ptr<IFile>              IFileRef;
+    typedef std::weak_ptr<IFile>                IFilePtr;
     typedef std::shared_ptr<IFileSystem>        IFileSystemRef;
+    typedef std::weak_ptr<IFileSystem>          IFileSystemPtr;
     typedef std::shared_ptr<IHookManager>       IHookManagerRef;
+    typedef std::weak_ptr<IHookManager>         IHookManagerPtr;
     typedef std::shared_ptr<IImage>             IImageRef;
+    typedef std::weak_ptr<IImage>               IImagePtr;
     typedef std::shared_ptr<ILogger>            ILoggerRef;
+    typedef std::weak_ptr<ILogger>              ILoggerPtr;
+    typedef std::shared_ptr<IObject>            IObjectRef;
+    typedef std::weak_ptr<IObject>              IObjectPtr;
 
     /**
      * Collection types for most common objects. These provide
@@ -427,6 +416,25 @@ namespace VoodooShader
         float   Theta;
         float   Phi;
     };
+
+    /**
+     * Function pointer types for module interfaces.
+     */
+    namespace Functions
+    {
+        typedef Int32        (*CountFunc  )();
+        typedef const char * (*InfoFunc   )(Int32);
+        typedef IObjectPtr   (*CreateFunc )(Int32, Core *);
+        typedef Version      (*VersionFunc)();
+    };
+
+     /**
+      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, 
+      * particularly function, filename and line. These exceptions are also logged if possible 
+      * (requires a valid core to be given). The Exception class derives from std::exception, so 
+      * these are simple to handle.
+      */
+#define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
 };
 
 #endif /*VOODOO_META_HPP*/

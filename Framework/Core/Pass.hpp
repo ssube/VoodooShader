@@ -92,7 +92,7 @@ namespace VoodooShader
          * stages are not yet supported by the Voodoo Shader Framework.
          *
          * @param stage The stage to retrieve.
-         * @return The program corresponding to the desired stage, or NULL if
+         * @return The program corresponding to the desired stage, or null if
          *        the pass has no program for that stage or an unsupported or
          *        unknown stage is requested.
          */
@@ -111,18 +111,20 @@ namespace VoodooShader
     private:
         void Link();
 
-        Core * mCore;
-        Technique * mParent;
+        String m_Name;
+        Core * m_Core;
 
-        String mName;
-        TextureRef mTarget;
-        CGpass mPass;
+        TextureRef m_Target;
 
-        CGprogram mGeometryProgram;
-        CGprogram mVertexProgram;
-        CGprogram mFragmentProgram;
-        CGprogram mDomainProgram;
-        CGprogram mHullProgram;
+        TechniquePtr m_Parent;
+
+        CGpass m_Pass;
+
+        CGprogram m_GeometryProgram;
+        CGprogram m_VertexProgram;
+        CGprogram m_FragmentProgram;
+        CGprogram m_DomainProgram;
+        CGprogram m_HullProgram;
     };
 
     /**
