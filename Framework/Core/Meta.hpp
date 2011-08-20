@@ -424,7 +424,7 @@ namespace VoodooShader
     {
         typedef Int32        (*CountFunc  )();
         typedef const char * (*InfoFunc   )(Int32);
-        typedef IObjectPtr   (*CreateFunc )(Int32, Core *);
+        typedef IObjectRef   (*CreateFunc )(Int32, Core *);
         typedef Version      (*VersionFunc)();
     };
 
@@ -434,7 +434,7 @@ namespace VoodooShader
       * (requires a valid core to be given). The Exception class derives from std::exception, so 
       * these are simple to handle.
       */
-#define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
+    #define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
 };
 
 #endif /*VOODOO_META_HPP*/

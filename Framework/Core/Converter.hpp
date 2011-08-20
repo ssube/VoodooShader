@@ -77,6 +77,11 @@ namespace VoodooShader
             _In_ const char * format
         );
 
+        static int ToComponents
+        (
+            _In_ ParameterType type
+        );
+
         /**
          * Helper function to convert enum values into readable strings used in 
          * logging; this overload handles texture formats.

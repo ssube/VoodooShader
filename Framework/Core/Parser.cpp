@@ -32,7 +32,7 @@ namespace VoodooShader
         return ret;
     }
 
-    void Parser::Add(_In_ String name, _In_ String value, _In_ bool system)
+    void Parser::Add(_In_ String name, _In_ String value, _In_ VariableType Type)
     {
         ILoggerRef logger = m_Core->GetLogger();
         if ( logger.get() )
@@ -42,10 +42,8 @@ namespace VoodooShader
 
         String finalname = this->Parse(name, PF_VarName);
 
-        if ( !system )
+        if ( Type == VT_System )
         {
-            m_Variables[finalname] = value;
-        } else {
             Dictionary::iterator varIter = m_SysVariables.find(finalname);
             if ( varIter == m_SysVariables.end() )
             {
@@ -56,6 +54,8 @@ namespace VoodooShader
                     logger->Log(LL_Warning, VOODOO_CORE_NAME, "Unable to add duplicate system variable \"%s\".", finalname.c_str());
                 }
             }
+        } else {
+            m_Variables[finalname] = value;
         }
     }
 

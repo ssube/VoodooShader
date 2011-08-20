@@ -91,7 +91,7 @@ namespace VoodooShader
 
     int Parameter::GetComponents()
     {
-        return Converter::ComponentsIn(m_Type);
+        return Converter::ToComponents(m_Type);
     }
 
     TextureRef Parameter::GetTexture()

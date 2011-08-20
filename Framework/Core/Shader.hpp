@@ -205,7 +205,7 @@ namespace VoodooShader
         Core * m_Core;
 
         TechniqueRef m_DefaultTechnique;
-        TechniqueMap m_Techniques;
+        TechniqueVector m_Techniques;
         ParameterVector m_Parameters;
 
         CGeffect m_CgEffect;

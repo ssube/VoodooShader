@@ -425,7 +425,7 @@ namespace VoodooShader
     {
         if ( Technique.get() != nullptr )
         {
-            if ( Technique->GetShader() == this )
+            if ( Technique->GetShader().get() == this )
             {
                 m_DefaultTechnique = Technique;
             } else {
@@ -437,29 +437,21 @@ namespace VoodooShader
                 );
             }
         }
-        TechniqueRef tech = this->GetTechnique(name);
-        if ( tech.get() )
-        {
-            this->m_DefaultTechnique = tech;
-        } else {
-            Throw(VOODOO_CORE_NAME, "Technique not found in shader.", mCore);
-        }
     }
 
-    TechniqueRef Shader::GetTechnique(String name)
+    TechniqueRef Shader::GetTechnique(size_t index)
     {
-        TechniqueMap::iterator tech = m_Techniques.find(name);
-        if ( tech != m_Techniques.end() )
+        if ( m_Techniques.size() < index )
         {
-            return tech->second;
+            return m_Techniques[index];
         } else {
-            return TechniqueRef();
+            return nullptr;
         }
     }
 
     CGeffect Shader::GetCgEffect()
     {
-        return m_Effect;
+        return m_CgEffect;
     }
 
     Technique::Technique(ShaderPtr parent, CGtechnique cgTech)

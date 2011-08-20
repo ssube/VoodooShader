@@ -71,9 +71,9 @@ namespace VoodooShader
         }
 
         // Create struct and load functions
-        Module * rawmodule = Module::Load(path);
+        ModuleRef rawmodule = Module::Load(path);
 
-        if ( rawmodule == NULL )
+        if ( rawmodule == nullptr )
         {
             if ( logger.get() )
             {
@@ -84,7 +84,7 @@ namespace VoodooShader
                 );
             }
 
-            return NULL;
+            return nullptr;
         }
 
         ModuleRef module(rawmodule);
@@ -133,7 +133,7 @@ namespace VoodooShader
         return ( m_Classes.find(name) != m_Classes.end() );
     }
 
-    IObject * ModuleManager::CreateObject( _In_ String name )
+    IObjectRef ModuleManager::CreateObject( _In_ String name )
     {
         ILoggerRef logger = m_Core->GetLogger();
         ClassMap::iterator classiter = m_Classes.find(name);
@@ -147,9 +147,9 @@ namespace VoodooShader
             {
                 try
                 {
-                    IObject * object = module->CreateClass(number, m_Core);
+                    IObjectRef object = module->CreateClass(number, m_Core);
 
-                    if ( object == NULL )
+                    if ( object.get() == nullptr )
                     {
                         if ( logger.get() )
                         {
@@ -163,29 +163,29 @@ namespace VoodooShader
                     {
                         logger->Log(LL_Error, VOODOO_CORE_NAME, "Error creating class %s: %s", name.c_str(), exc.what());
                     }
-                    return NULL;
+                    return nullptr;
                 }
             } else {
                 if ( logger.get() )
                 {
                     logger->Log(LL_Error, VOODOO_CORE_NAME, "Unable to lock module (possibly unloaded) for class %s.", name.c_str());
                 }
-                return NULL;
+                return nullptr;
             }
         } else {
             if ( logger.get() )
             {
                  logger->Log(LL_Error, VOODOO_CORE_NAME, "Class %s not found.", name.c_str());
             }
-            return NULL;
+            return nullptr;
         }
     }
 
-    Module * Module::Load( _In_ String path )
+    ModuleRef Module::Load( _In_ String path )
     {
         // Load the module
         HMODULE hmodule = LoadLibraryEx(path.c_str(), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-
+       
         // First set of error checks
         if ( hmodule != NULL )
         {
@@ -206,12 +206,12 @@ namespace VoodooShader
             {
                 FreeLibrary(hmodule);
                 delete module;
-                return NULL;
+                return nullptr;
             } else {
-                return module;
+                return ModuleRef(module);
             }
         } else {
-            return NULL;
+            return nullptr;
         }
     }
 
@@ -244,7 +244,7 @@ namespace VoodooShader
         return (*m_ClassInfo)(number);
     }
 
-    IObject * Module::CreateClass(_In_ int number, _In_ Core * core)
+    IObjectRef Module::CreateClass(_In_ int number, _In_ Core * core)
     {
         return (*m_ClassCreate)(number, core);
     }

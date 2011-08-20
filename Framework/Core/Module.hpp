@@ -71,9 +71,11 @@ namespace VoodooShader
         template<class T>
         std::shared_ptr<T> CreateClass(_In_ String name)
         {
-            IObject * object = this->CreateObject(name);
+            IObjectRef object = this->CreateObject(name);
 
-            return std::shared_ptr<T>((T*)object);
+            std::shared_ptr<T> retval((T*)object.get());
+
+            return retval;
         };
 
         /**
@@ -85,7 +87,7 @@ namespace VoodooShader
          * @return New object or null if the class wasn't found or couldn't be created.
          */
         _Check_return_
-        IObject * CreateObject(_In_ String name);
+        IObjectRef CreateObject(_In_ String name);
 
         /**
          * Finds the address of a function in a module. The module must be loaded into
@@ -127,7 +129,7 @@ namespace VoodooShader
           *    dependencies. The underlying load mechanism is 
           *    <code>LoadLibraryEx(path, NULL, LOAD_WITH_ALTERED_SEARCH_PATH)</code>.
           */
-        static Module * Load
+        static ModuleRef Load
         (
             _In_ String path
         );
@@ -156,7 +158,7 @@ namespace VoodooShader
             _In_ int number
         );
 
-        IObject * CreateClass
+        IObjectRef CreateClass
         (
             _In_ int number,
             _In_ Core * core
