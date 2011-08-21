@@ -4,7 +4,10 @@ namespace VoodooShader
 {
     Texture::Texture(String name, void * texture)
         : m_Name(name), m_Data(texture)
-    { };
+    { }
+
+    Texture::~Texture()
+    { }
 
     String Texture::GetName()
     {
@@ -24,5 +27,5 @@ namespace VoodooShader
     TextureDesc Texture::GetDesc()
     {
         return m_Desc;
-    };
+    }
 }

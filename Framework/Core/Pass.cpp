@@ -7,18 +7,18 @@
 
 namespace VoodooShader
 {
-    Pass::Pass(Technique * parent, CGpass cgPass)
-        : m_Parent(parent), m_Pass(cgPass)
+    Pass::Pass(TechniquePtr parent, CGpass cgPass)
+        : m_Technique(parent), m_CgPass(cgPass)
     {
-        this->m_Core = m_Parent->GetCore();
+        this->m_Core = m_Technique.lock()->GetCore();
 
-        const char * passName = cgGetPassName(this->m_Pass);
+        const char * passName = cgGetPassName(this->m_CgPass);
         if ( passName )
         {
             this->m_Name = passName;
         } else {
             char nameBuffer[16];
-            _itoa_s((int)(&this->m_Pass), nameBuffer, 16, 16);
+            _itoa_s((int)(&this->m_CgPass), nameBuffer, 16, 16);
 
             this->m_Name = "pass_";
             this->m_Name += nameBuffer;
@@ -34,7 +34,7 @@ namespace VoodooShader
 
     String Pass::GetName()
     {
-        String name = m_Parent->GetName();
+        String name = m_Technique.lock()->GetName();
         name += "::";
         name += m_Name;
         return name;
@@ -70,21 +70,26 @@ namespace VoodooShader
         }
     }
 
+    TechniquePtr Pass::GetTechnique()
+    {
+        return m_Technique;
+    }
+
     CGpass Pass::GetCgPass()
     {
-        return m_Pass;
+        return m_CgPass;
     }
 
     void Pass::Link()
     {
-        this->m_VertexProgram   = cgGetPassProgram(this->m_Pass, CG_VERTEX_DOMAIN  );
-        this->m_FragmentProgram = cgGetPassProgram(this->m_Pass, CG_FRAGMENT_DOMAIN);
-        this->m_GeometryProgram = cgGetPassProgram(this->m_Pass, CG_GEOMETRY_DOMAIN);
-        this->m_DomainProgram   = cgGetPassProgram(this->m_Pass, CG_TESSELLATION_CONTROL_DOMAIN);
-        this->m_HullProgram     = cgGetPassProgram(this->m_Pass, CG_TESSELLATION_EVALUATION_DOMAIN);
+        this->m_VertexProgram   = cgGetPassProgram(this->m_CgPass, CG_VERTEX_DOMAIN  );
+        this->m_FragmentProgram = cgGetPassProgram(this->m_CgPass, CG_FRAGMENT_DOMAIN);
+        this->m_GeometryProgram = cgGetPassProgram(this->m_CgPass, CG_GEOMETRY_DOMAIN);
+        this->m_DomainProgram   = cgGetPassProgram(this->m_CgPass, CG_TESSELLATION_CONTROL_DOMAIN);
+        this->m_HullProgram     = cgGetPassProgram(this->m_CgPass, CG_TESSELLATION_EVALUATION_DOMAIN);
 
         this->m_Target = nullptr;
-        CGannotation targetAnnotation = cgGetNamedPassAnnotation(this->m_Pass, "target");
+        CGannotation targetAnnotation = cgGetNamedPassAnnotation(this->m_CgPass, "target");
         if ( cgIsAnnotation(targetAnnotation) )
         {
             if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )

@@ -84,14 +84,14 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <RunCodeAnalysis Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">true</RunCodeAnalysis>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\src</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\lib\</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\src</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\lib\</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\src</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\lib\</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\src</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\lib\</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32</LibraryPath>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
     <CodeAnalysisIgnoreGeneratedCode Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">false</CodeAnalysisIgnoreGeneratedCode>
@@ -234,6 +234,7 @@
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pass.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Technique.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>

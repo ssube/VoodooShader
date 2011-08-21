@@ -40,12 +40,12 @@ namespace VoodooShader
         _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
 #endif
 
-        m_GlobalRoot = initParams->GlobalRoot + "\\";
-        m_LocalRoot = initParams->LocalRoot + "\\";
-        m_RunRoot = initParams->RunRoot + "\\";
-        m_Target = initParams->Target;
-        m_Loader = initParams->Loader;
-        m_Config = initParams->Config;
+        m_GlobalRoot    = initParams->GlobalRoot    + "\\";
+        m_LocalRoot     = initParams->LocalRoot     + "\\";
+        m_RunRoot       = initParams->RunRoot       + "\\";
+        m_Target        = initParams->Target;
+        m_Loader        = initParams->Loader;
+        m_Config        = initParams->Config;
 
         // Set up the internal objects
         m_ModuleManager = ModuleManagerRef(new ModuleManager(this));
@@ -301,7 +301,7 @@ namespace VoodooShader
 
         String fullpath = file->GetPath();
 
-        ShaderRef shader(new Shader(this, fullpath, ppArgs));
+        ShaderRef shader = Shader::Create(this, fullpath, ppArgs);
 
         m_Logger->Log
         (

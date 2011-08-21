@@ -48,7 +48,7 @@ namespace VoodooShader
     public:
         Pass
         (
-            _In_ Technique * parent,
+            _In_ TechniquePtr parent,
             _In_ CGpass cgPass
         );
 
@@ -80,8 +80,7 @@ namespace VoodooShader
          */
         virtual TextureRef GetTarget();
 
-        virtual ShaderRef GetShader();
-        virtual TechniqueRef GetTechnique();
+        virtual TechniquePtr GetTechnique();
 
         /**
          * Retrieve a specific program stage from this pass. Each pass may have
@@ -116,9 +115,9 @@ namespace VoodooShader
 
         TextureRef m_Target;
 
-        TechniquePtr m_Parent;
+        TechniquePtr m_Technique;
 
-        CGpass m_Pass;
+        CGpass m_CgPass;
 
         CGprogram m_GeometryProgram;
         CGprogram m_VertexProgram;

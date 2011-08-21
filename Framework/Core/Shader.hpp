@@ -53,19 +53,7 @@ namespace VoodooShader
         : public IObject
     {
     public:
-        /**
-         * Create a shader from a file, passing options to the compiler.
-         * 
-         * @param parent The Core this Shader is created under.
-         * @param filename The file to use for source.
-         * @param args Optionals arguments to be passed to the compiler (last item in the array must be null).
-         */
-        Shader
-        (
-            _In_ Core * pParent, 
-            _In_ String Path, 
-            _In_opt_ const char ** ppArgs = nullptr
-        );
+        static ShaderRef Create(Core * parent, String Path, const char ** ppArgs = nullptr);
 
         /**
          * Destroys the shader, unlinking and cleaning up the effect and all techniques.
@@ -158,12 +146,27 @@ namespace VoodooShader
 
     private:
         /**
+         * Create a shader from a file, passing options to the compiler.
+         * 
+         * @param parent The Core this Shader is created under.
+         * @param filename The file to use for source.
+         * @param args Optionals arguments to be passed to the compiler (last item in the array must be null).
+         */
+        Shader
+        (
+            _In_ ShaderRef self, 
+            _In_ Core * pParent, 
+            _In_ String Path, 
+            _In_opt_ const char ** ppArgs = nullptr
+        );
+
+        /**
          * Initialize delayed linking (or relinking) for this shader. This
          * function rebuilds the technique and pass structure, but <em>does not
          * </em> reload or recompile the effect (Cg effects are handled by the
          * core).
          */
-        void Link();
+        void Link(_In_ ShaderRef self);
 
         /**
          * Link a particular effect-level parameter against various core
@@ -199,7 +202,7 @@ namespace VoodooShader
             _In_ ParameterRef param
         );
 
-        void SetupTechniques();
+        void SetupTechniques(ShaderRef self);
 
         String m_Name;
         Core * m_Core;

@@ -23,6 +23,8 @@
 
 #include "Meta.hpp"
 
+#include "IObject.hpp"
+
 namespace VoodooShader
 {
     /**
@@ -46,11 +48,7 @@ namespace VoodooShader
         : public IObject
     {
     public:
-        Technique
-        (
-            _In_ Shader * parent, 
-            _In_ CGtechnique cgTech
-        );
+        static TechniqueRef Create(ShaderRef parent, CGtechnique cgTech);
 
         virtual ~Technique();
 
@@ -84,7 +82,7 @@ namespace VoodooShader
          *
          * @return The number of passes
          */
-        virtual int GetPassCount();
+        virtual size_t GetPassCount();
 
         /**
          * Retrieve a specific pass from this technique.
@@ -100,7 +98,7 @@ namespace VoodooShader
             _In_ size_t index
         );
 
-        virtual ShaderRef GetShader();
+        virtual ShaderPtr GetShader();
 
         /**
          * Retrieve the underlying Cg technique.
@@ -110,7 +108,14 @@ namespace VoodooShader
         virtual CGtechnique GetCgTechnique();
 
     private:
-        void Link();
+        Technique
+        (
+            _In_ TechniqueRef & self, 
+            _In_ ShaderRef parent, 
+            _In_ CGtechnique cgTech
+        );
+
+        void Link(TechniquePtr self);
 
         String m_Name;
         Core * m_Core;
@@ -118,7 +123,7 @@ namespace VoodooShader
         TextureRef m_Target;
         PassVector m_Passes;
 
-        Shader * m_Shader;
+        ShaderPtr m_Shader;
         CGtechnique m_CgTechnique;
     };
 }

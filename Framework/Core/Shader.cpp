@@ -4,16 +4,25 @@
 #include "Converter.hpp"
 #include "Core.hpp"
 #include "Exception.hpp"
-#include "IFilesystem.hpp"
 #include "ILogger.hpp"
 #include "Parameter.hpp"
+#include "Parser.hpp"
 #include "Technique.hpp"
 
 namespace VoodooShader
 {
-    Shader::Shader(Core * pParent, String Path, const char ** ppArgs)
+    ShaderRef Shader::Create(Core * parent, String Path, const char ** ppArgs /* = nullptr */)
+    {
+        ShaderRef shader;
+        new Shader(shader, parent, Path, ppArgs);
+        return shader;
+    }
+
+    Shader::Shader(ShaderRef self, Core * pParent, String Path, const char ** ppArgs)
         : m_Name(Path), m_Core(pParent), m_DefaultTechnique(nullptr)
     {
+        self.reset(this);
+
         CGcontext context = m_Core->GetCgContext();
 
         if ( !context || !cgIsContext(context) )
@@ -34,6 +43,8 @@ namespace VoodooShader
         } else {
             cgSetEffectName(this->m_CgEffect, this->m_Name.c_str());
         }
+
+        this->Link(self);
     }
 
     Shader::~Shader()
@@ -82,7 +93,20 @@ namespace VoodooShader
 
     void Shader::SetDefaultTechnique(TechniqueRef Technique)
     {
-        m_DefaultTechnique = Technique;
+        if ( Technique.get() != nullptr )
+        {
+            if ( Technique->GetShader().lock().get() == this )
+            {
+                m_DefaultTechnique = Technique;
+            } else {
+                m_Core->GetLogger()->Log
+                    (
+                    LL_Error, VOODOO_CORE_NAME, 
+                    "Technique %s cannot be set as default for shader %s (not technique for this shader).",
+                    Technique->GetName(), this->GetName()
+                    );
+            }
+        }
     }
 
     size_t Shader::GetParameterCount()
@@ -100,7 +124,7 @@ namespace VoodooShader
         }
     }
 
-    void Shader::Link()
+    void Shader::Link(ShaderRef self)
     {
         // Make sure it's a valid effect
         if ( !cgIsEffect(m_CgEffect) )
@@ -122,7 +146,7 @@ namespace VoodooShader
             cParam = cgGetNextParameter(cParam);
         }
 
-        this->SetupTechniques();
+        this->SetupTechniques(self);
     }
 
     void Shader::LinkParameter(ParameterRef param)
@@ -274,18 +298,16 @@ namespace VoodooShader
         }
 
         // Check for a valid texture file
-        IImageRef textureImage = nullptr;
-        IFileRef texFile = m_Core->GetFileSystem()->FindFile(texName);
-        if ( texFile.get() )
-        {
-            textureImage = texFile->OpenImage();
+        TextureRegion texRegion;
+        /**
+         * @todo Load texture region info from the annotations.
+         */
 
-            if ( textureImage.get() )
-            {
-                TextureRef tex = m_Core->GetAdapter()->CreateTexture(texName, textureImage);
-                param->Set(tex);
-                return;
-            }
+        TextureRef tex = m_Core->GetAdapter()->LoadTexture(texName, texRegion);
+        if (tex.get())
+        {
+            param->SetTexture(tex);
+            return;
         }
 
         // No file, make blank texture
@@ -373,11 +395,11 @@ namespace VoodooShader
 
         IAdapterRef adapter = m_Core->GetAdapter();
         TextureRef texture = adapter->CreateTexture(texName, texDesc);
-        param->Set(texture);
+        param->SetTexture(texture);
     }
 
 
-    void Shader::SetupTechniques()
+    void Shader::SetupTechniques(ShaderRef self)
     {
         CGtechnique cTech = cgGetFirstTechnique(m_CgEffect);
         while ( cgIsTechnique(cTech) )
@@ -395,18 +417,17 @@ namespace VoodooShader
                 );
 
                 // Insert the technique into the map
-                TechniqueRef tech(new Technique(this, cTech));
+                TechniqueRef tech = Technique::Create(self, cTech);
 
-                const char * techName = cgGetTechniqueName(cTech);
-                m_Techniques[techName] = tech;
+                //std::string techName = cgGetTechniqueName(cTech);
+                //m_Techniques[techName] = tech;
+                m_Techniques.push_back(tech);
 
                 // The first valid technique is the default one
                 if ( !m_DefaultTechnique.get() )
                 {
                     this->m_DefaultTechnique = tech;
                 }
-
-                tech->Link();
             } else {
                 m_Core->GetLogger()->Log
                 (
@@ -421,164 +442,8 @@ namespace VoodooShader
         }
     }
 
-    void Shader::SetDefaultTechnique(TechniqueRef Technique)
-    {
-        if ( Technique.get() != nullptr )
-        {
-            if ( Technique->GetShader().get() == this )
-            {
-                m_DefaultTechnique = Technique;
-            } else {
-                m_Core->GetLogger()->Log
-                (
-                    LL_Error, VOODOO_CORE_NAME, 
-                    "Technique %s cannot be set as default for shader %s (not technique for this shader).",
-                    Technique->GetName(), this->GetName()
-                );
-            }
-        }
-    }
-
-    TechniqueRef Shader::GetTechnique(size_t index)
-    {
-        if ( m_Techniques.size() < index )
-        {
-            return m_Techniques[index];
-        } else {
-            return nullptr;
-        }
-    }
-
     CGeffect Shader::GetCgEffect()
     {
         return m_CgEffect;
-    }
-
-    Technique::Technique(ShaderPtr parent, CGtechnique cgTech)
-        : m_Parent(parent), m_Technique(cgTech)
-    {
-        this->m_Core = this->m_Parent->GetCore();
-
-        const char * techName = cgGetTechniqueName(this->m_Technique);
-        if ( techName )
-        {
-            this->m_Name = techName;
-        } else {
-            char nameBuffer[16];
-            sprintf_s(nameBuffer, "tech_%p", m_Technique);
-            this->m_Name = nameBuffer;
-        }
-    }
-
-    Technique::~Technique()
-    {
-        m_Target = NULL;
-        m_Passes.clear();
-    }
-
-    Core * Technique::GetCore()
-    {
-        return m_Core;
-    }
-
-    String Technique::GetName()
-    {
-        String name = m_Parent->GetName();
-        name += "::";
-        name += m_Name;
-        return name;
-    };
-
-    PassRef Technique::GetPass(size_t index)
-    {
-        if ( index < this->mPasses.size() )
-        {
-            return this->mPasses[index];
-        } else {
-            Throw(VOODOO_CORE_NAME, "Voodoo Core: Invalid pass index (> pass count).", mCore);
-        }
-    }
-
-    TextureRef Technique::GetTarget()
-    {
-        return mTarget;
-    }
-
-    size_t Technique::GetPassCount()
-    {
-        return this->mPasses.size();
-    }
-
-    CGtechnique Technique::GetCgTechnique()
-    {
-        return mTechnique;
-    }
-
-    void Technique::Link()
-    {
-        this->mTarget = TextureRef();
-
-        // Process the technique's target annotation
-        CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(this->mTechnique, "target");
-
-        if ( cgIsAnnotation(targetAnnotation) )
-        {
-            if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )
-            {
-                const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
-
-                this->mTarget = mCore->GetTexture(targetName);
-
-                if ( !this->mTarget.get() )
-                {
-                    mCore->GetLogger()->Log
-                    (
-                        LL_Warning,
-                        VOODOO_CORE_NAME,
-                        "Pass %s cannot find target %s.",
-                        this->GetName().c_str(), targetName
-                    );
-
-                    this->mTarget = mCore->GetTexture(TT_ShaderTarget);
-                }
-            } else {
-                mCore->GetLogger()->Log
-                (
-                    LL_Warning,
-                    VOODOO_CORE_NAME,
-                    "Pass %s has annotation \"target\" of invalid type.",
-                    this->GetName().c_str()
-                );
-
-                this->mTarget = mCore->GetTexture(TT_ShaderTarget);
-            }
-        } else {
-            mCore->GetLogger()->Log
-            (
-                LL_Debug,
-                VOODOO_CORE_NAME,
-                "Pass %s has no target annotation.",
-                this->GetName().c_str()
-            );
-
-            this->mTarget = mCore->GetTexture(TT_ShaderTarget);
-        }
-
-
-        this->mPasses.clear();
-
-        CGpass cPass = cgGetFirstPass(mTechnique);
-
-        while ( cgIsPass(cPass) )
-        {
-            // Insert the pass into the vector
-            PassRef pass(new Pass(this, cPass));
-
-            mPasses.push_back(pass);
-
-            pass->Link();
-
-            cPass = cgGetNextPass(cPass);
-        }
     }
 }

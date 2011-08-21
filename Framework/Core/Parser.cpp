@@ -132,25 +132,9 @@ namespace VoodooShader
                 break;
             }
 
-            varname = varname.substr(startpos+1);
+            varname = varname.substr(startpos + 1);
 
-            if ( varname.length() < 1 )
-            {
-                String output = iteration.substr(0, startpos - 1);
-                output += iteration.substr(endpos + 1);
-                iteration = output;
-                continue;
-            }
-
-            // Handle state variables
-            size_t statepos = varname.find(':');
-            if ( statepos != String::npos )
-            {
-
-            }
-
-            size_t varnamelen = endpos - startpos - 1;
-            if ( varnamelen == 0 )
+            if ( varname.length() == 0 )
             {
                 // Erase the variable sequence if it is the empty variable and restart the loop
                 stringstream output;
@@ -163,12 +147,9 @@ namespace VoodooShader
                 continue;
             }
 
-            // We may actually have a variable here. Get the name
-            String varname = iteration.substr(startpos + 1, varnamelen);
-
-            // Check for state variables
+            // Handle state variables
             size_t statepos = varname.find(':');
-            if ( statepos != string::npos )
+            if ( statepos != String::npos )
             {
                 // State set, handle
                 String newvalue = varname.substr(statepos + 1);
@@ -184,7 +165,7 @@ namespace VoodooShader
                 iteration = output.str();
 
                 continue;
-            } 
+            }
 
             // Handle variable flags
             bool supress = false;
@@ -258,7 +239,7 @@ namespace VoodooShader
             return this->ToLower(iteration);
         } 
         
-        if ( flags & PF_SlashFlags )
+        if ( flags & (PF_SingleSlash | PF_SlashOnly|PF_BackslashOnly) )
         {
             bool singleslash = ( flags & PF_SingleSlash );
             bool prevslash = false;
@@ -304,19 +285,16 @@ namespace VoodooShader
             iteration = output.str();
         }
 
-        if ( flags & PF_CaseFlags )
+        if ( flags & PF_Lowercase )
         {
-            if ( flags & PF_Lowercase )
-            {
-                iteration = this->ToLower(iteration);
-            } else if ( flags & PF_Uppercase ) {
-                iteration = this->ToUpper(iteration);
-            }
+            iteration = this->ToLower(iteration);
+        } else if ( flags & PF_Uppercase ) {
+            iteration = this->ToUpper(iteration);
         }
 
         if ( logger.get() )
         {
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
+            logger->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
         }
 
         return iteration;
