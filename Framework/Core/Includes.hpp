@@ -43,6 +43,4 @@
 #   define new DBG_NEW
 #endif
 
-#include "Cg/cg.h"
-
 #endif

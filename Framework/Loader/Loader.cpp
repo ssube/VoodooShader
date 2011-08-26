@@ -1,4 +1,5 @@
 
+#define VOODOO_NO_CG
 #include "Meta.hpp"
 #include "Loader.hpp"
 

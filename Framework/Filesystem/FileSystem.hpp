@@ -20,6 +20,7 @@
 \**************************************************************************************************/
 
 #define VOODOO_IMPORT
+#define VOODOO_NO_CG
 #include "Voodoo_Core.hpp"
 
 namespace VoodooShader
@@ -61,9 +62,10 @@ namespace VoodooShader
                 _In_ Core * core
             );
 
-            ~FileSystem();
+            virtual ~FileSystem();
 
-            const char * GetObjectClass();
+            virtual String GetName();
+            virtual Core * GetCore();
 
             /**
              * Add a directory to the search path. Directories are pushed to the front of the list, 
@@ -76,12 +78,12 @@ namespace VoodooShader
              *    treats the path variable. This (combined with env vars) allows regular-form
              *    environment vars to be added to the filesystem.
              */
-            void AddDirectory
+            virtual void AddDirectory
             (
                 _In_ String dir
             );
 
-            void RemoveDirectory
+            virtual void RemoveDirectory
             (
                 _In_ String dir
             );
@@ -99,19 +101,14 @@ namespace VoodooShader
              *    when the function enters, then appended to each stored path until a valid file is
              *    found.
              */
-            IFileRef GetFile
-            (
-                _In_ String name
-            );
-
-            IImageRef GetImage
+            virtual IFileRef FindFile
             (
                 _In_ String name
             );
 
         private:
-            StringList mDirectories;
-            Core * mCore;
+            StringList m_Directories;
+            Core * m_Core;
         };
 
         class File
@@ -129,16 +126,17 @@ namespace VoodooShader
                 _In_ String name
             );
 
-            ~File();
+            virtual ~File();
 
-            const char * GetObjectClass();
+            virtual String GetName();
+            virtual Core * GetCore();
 
             /**
              * Retrieves the path this File was created with. This may be relative or absolute.
              * 
              * @return Internal path.
              */
-            String GetPath();
+            virtual String GetPath();
 
             /**
              * Opens the file for read-write access. 
@@ -153,17 +151,19 @@ namespace VoodooShader
              *    working directory by the any module in the process. FileSystem::GetFile() uses an 
              *    absolute path in the constructor and is not susceptible to this.
              */
-            bool Open
+            virtual bool Open
             (
                 _In_ FileOpenMode mode
             );
+
+            virtual IImageRef OpenImage();
 
             /**
              * Closes the file, preventing further access.
              * 
              * @return Success of the operation
              */
-            bool Close();
+            virtual bool Close();
 
             /**
              * Reads a chunk of data from the file. The file must have been opened for reading 
@@ -177,7 +177,7 @@ namespace VoodooShader
              *    returned but the file position is unchanged. If @arg count is -1, this returns 
              *    the filesize remaining.
              */
-            int Read(_In_ int count, _In_opt_count_(count) void * buffer);
+            virtual int Read(_In_ int count, _In_opt_count_(count) void * buffer);
 
             /**
              * Writes a chunk of data to the file. The file must have been opened for writing.
@@ -189,12 +189,12 @@ namespace VoodooShader
              * @note If @p buffer is null, @p count zeros are written into the file. This is 
              *    useful for padding binary formats.
              */
-            bool Write(_In_ int count, _In_opt_count_(count) void * buffer);
+            virtual bool Write(_In_ int count, _In_opt_count_(count) void * buffer);
 
         private:
-            HANDLE mHandle;
-            String mName;
-            Core * mCore;
+            HANDLE m_Handle;
+            String m_Name;
+            Core * m_Core;
         };
 
         /**
@@ -212,9 +212,12 @@ namespace VoodooShader
 
             Image(Core * core, String name, unsigned int image);
 
-            ~Image();
+            virtual ~Image();
 
-            const char * GetObjectClass();
+            virtual String GetName();
+            virtual Core * GetCore();
+           
+            virtual String GetPath();
 
             /**
              * Retrieves texture format data from the image. The runtime can use this to set up a 
@@ -222,7 +225,7 @@ namespace VoodooShader
              * 
              * @return Texture information.
              */
-            TextureDesc GetImageDesc();
+            virtual TextureDesc GetDesc();
             
             /**
              * Retrieves a portion of the texture data from the image.
@@ -244,28 +247,14 @@ namespace VoodooShader
              * @warning If this function converts formats or copies a large region, it will be 
              *    slow. Avoid calling often.
              */
-            size_t CopyImageData(_In_ TextureRegion desc, _In_opt_ void * buffer);
-
-            /**
-             * Retrieves a pointer to the image data.
-             * 
-             * @return Pointer to the image data.
-             * 
-             * @warning The pointer provided <em>must not</em> be deleted. To free the data, call 
-             *    @ref Image::FreeImageData(). Only one image can be bound/accessed through this
-             *    method at a time, making it thread-unsafe. Using @ref Image::CopyImageData is
-             *    recommended for simple image access.
-             */
-            void * GetImageData();
-
-            void FreeImageData();
+            virtual size_t GetData(_In_ TextureRegion desc, _In_opt_ void * buffer);
 
         private:
-            Core * mCore;
-            ParserRef mParser;
-            String mName;
-            unsigned int mImage;
-            TextureDesc mDesc;
+            Core * m_Core;
+            ParserRef m_Parser;
+            String m_Name;
+            unsigned int m_Image;
+            TextureDesc m_Desc;
         };
     }
 }

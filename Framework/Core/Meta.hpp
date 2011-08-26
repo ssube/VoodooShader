@@ -32,6 +32,25 @@
 #pragma warning(disable:4251)
 
 #include "Includes.hpp"
+
+#ifndef VOODOO_NO_CG
+#include "Cg/cg.h"
+#else
+typedef int CGbool;
+typedef void * CGcontext;
+typedef void * CGprogram;
+typedef void * CGparameter;
+typedef void * CGobj;
+typedef void * CGbuffer;
+typedef void * CGeffect;
+typedef void * CGtechnique;
+typedef void * CGpass;
+typedef void * CGstate;
+typedef void * CGstateassignment;
+typedef void * CGannotation;
+typedef void * CGhandle;
+#endif
+
 #include "Version.hpp"
 
 namespace VoodooShader
@@ -290,8 +309,17 @@ namespace VoodooShader
         LL_Framework    = 0x80,
         LL_Internal     = 0x82,
         LL_Initial      = 0xFE,
+        LL_Severity     = 0x0F,
+        LL_Origin       = 0xF0,
         LL_All          = 0xFF,
         LL_Max          = 0x7FFFFFFF
+    };
+
+    enum LogFlags
+    {
+        LF_Unknown      = 0x00,
+        LF_Flush        = 0x01,
+        LF_Max          = 0x7FFFFFFF
     };
 
     /**

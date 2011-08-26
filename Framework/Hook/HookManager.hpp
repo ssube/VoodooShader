@@ -22,6 +22,7 @@
 #include <string>
 
 #define VOODOO_IMPORT
+#define VOODOO_NO_CG
 #include "Voodoo_Core.hpp"
 
 namespace VoodooShader
@@ -69,9 +70,10 @@ namespace VoodooShader
             /**
              * Removes all hooks and cleans up the HookManager.
              */
-            ~HookManager();
+            virtual ~HookManager();
 
-            const char * GetObjectClass();
+            virtual String GetName();
+            virtual Core * GetCore();
         
             /**
              * Install a hook at the specified function.
@@ -88,7 +90,7 @@ namespace VoodooShader
              *    things might happen. This is only a bother with member functions, but
              *    can be worked around relatively easily.
              */
-            bool CreateHook
+            bool Add
             (
                 _In_ std::string name, 
                 _In_ void * src, 
@@ -107,7 +109,7 @@ namespace VoodooShader
              *    the process to crash in rare cases. I'm not sure the reason, but it's
              *    not good. Until I replace EasyHook, be careful!
              */
-            bool RemoveHook
+            bool Remove
             (
                 _In_ std::string name
             );
@@ -115,13 +117,13 @@ namespace VoodooShader
             /**
              * Removes all hooks created with this HookManager.
              */
-            void RemoveAllHooks();
+            void RemoveAll();
 
         private:
-            Core * mCore;
-            HookMap mHooks;
-            unsigned long * mThreadIDs;
-            unsigned long mThreadCount;
+            Core * m_Core;
+            HookMap m_Hooks;
+            unsigned long * m_ThreadIDs;
+            unsigned long m_ThreadCount;
         };
         /**
          * @}

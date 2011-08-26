@@ -60,49 +60,54 @@ namespace VoodooShader
         }
 
         HookManager::HookManager(Core * core)
-            : mCore(core)
+            : m_Core(core)
         {
-            mHooks.clear();
+            m_Hooks.clear();
 
-            mThreadCount = 1;
+            m_ThreadCount = 1;
 
-            mThreadIDs = new ULONG[mThreadCount];
-            mThreadIDs[0] = 0;
+            m_ThreadIDs = new ULONG[m_ThreadCount];
+            m_ThreadIDs[0] = 0;
 
-            LhSetGlobalInclusiveACL(mThreadIDs, mThreadCount);
+            LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
 
-            mCore->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", mThreadCount);
+            m_Core->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", m_ThreadCount);
         }
 
         HookManager::~HookManager()
         {
-            this->RemoveAllHooks();
+            this->RemoveAll();
 
-            mCore->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
+            m_Core->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
 
-            delete mThreadIDs;
+            delete m_ThreadIDs;
         }
 
-        const char * HookManager::GetObjectClass()
+        String HookManager::GetName()
         {
             return "EHHookManager";
         }
 
-        bool HookManager::CreateHook(std::string name, void * src, void * dest)
+        Core * HookManager::GetCore()
         {
-            HookMap::iterator hook = mHooks.find(name);
+            return m_Core;
+        }
 
-            if ( hook != mHooks.end() )
+        bool HookManager::Add(String name, void * src, void * dest)
+        {
+            HookMap::iterator hook = m_Hooks.find(name);
+
+            if ( hook != m_Hooks.end() )
             {
                 Throw
                 (
                     VOODOO_HOOK_NAME, 
                     "Attempted to create a hook with a duplicate name.", 
-                    mCore
+                    m_Core
                 );
             }
 
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Debug, 
                 VOODOO_HOOK_NAME,
@@ -116,7 +121,7 @@ namespace VoodooShader
 
             if ( ( result != 0 ) || ( hookHandle == NULL ) )
             {
-                mCore->GetLogger()->Log
+                m_Core->GetLogger()->Log
                 (
                     LL_Error,
                     VOODOO_HOOK_NAME,
@@ -126,19 +131,19 @@ namespace VoodooShader
 
                 return false;
             } else {
-                LhSetInclusiveACL(mThreadIDs, mThreadCount, hookHandle);
+                LhSetInclusiveACL(m_ThreadIDs, m_ThreadCount, hookHandle);
 
-                mHooks[name] = hookHandle;
+                m_Hooks[name] = hookHandle;
 
                 return true;
             }
         }
 
-        bool HookManager::RemoveHook(std::string name)
+        bool HookManager::Remove(std::string name)
         {
-            HookMap::iterator hook = mHooks.find(name);
+            HookMap::iterator hook = m_Hooks.find(name);
 
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_HOOK_NAME,
@@ -146,7 +151,7 @@ namespace VoodooShader
                 name.c_str()
             );
 
-            if ( hook != mHooks.end() )
+            if ( hook != m_Hooks.end() )
             {
                 TRACED_HOOK_HANDLE tracedHandle = (TRACED_HOOK_HANDLE)hook->second;
 
@@ -155,7 +160,7 @@ namespace VoodooShader
 
                 if ( result != 0 )
                 {
-                    mCore->GetLogger()->Log
+                    m_Core->GetLogger()->Log
                     (
                         LL_Error,
                         VOODOO_HOOK_NAME,
@@ -165,7 +170,7 @@ namespace VoodooShader
 
                     return true;
                 } else {
-                    mHooks.erase(hook);
+                    m_Hooks.erase(hook);
 
                     return false;
                 }
@@ -174,17 +179,17 @@ namespace VoodooShader
                 (
                     VOODOO_HOOK_NAME,
                     "Trying to remove hook that does not exist.", 
-                    mCore
+                    m_Core
                 );
             }
         }
 
-        void HookManager::RemoveAllHooks()
+        void HookManager::RemoveAll()
         {
             LhUninstallAllHooks();
             LhWaitForPendingRemovals();
 
-            mHooks.clear();
+            m_Hooks.clear();
         }
     }
 }

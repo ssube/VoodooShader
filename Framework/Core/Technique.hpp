@@ -44,7 +44,7 @@ namespace VoodooShader
      *          are guaranteed to be valid. Techniques are typically validated
      *          when the Shader is created and loaded. 
      */
-    class VOODOO_API Technique
+    class Technique
         : public IObject
     {
     public:

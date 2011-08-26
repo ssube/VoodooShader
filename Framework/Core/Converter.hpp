@@ -39,6 +39,7 @@ namespace VoodooShader
     class VOODOO_API Converter
     {
     public:
+#ifndef VOODOO_NO_CG
         /**
          * Convert a Voodoo parameter type to the corresponding Cg runtime type.
          * This function should be used to convert between these two types, as 
@@ -66,6 +67,7 @@ namespace VoodooShader
         (
             _In_ CGtype pt
         );
+#endif
 
         static ParameterCategory ToParameterCategory
         (
@@ -111,7 +113,8 @@ namespace VoodooShader
         static const char * ToString
         (
             _In_ ParameterCategory cat
-        );    };
+        );    
+    };
     /**
      * @}
      */

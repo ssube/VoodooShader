@@ -33,7 +33,7 @@ namespace VoodooShader
      * Provides a clean framework for loading and unloading modules in core, as
      * well as retrieving symbols and modules from memory. 
      */
-    class VOODOO_API ModuleManager
+    class ModuleManager
     {
     public:
         ModuleManager
@@ -41,17 +41,17 @@ namespace VoodooShader
             _In_ Core * core
         );
 
-        ~ModuleManager();
+        virtual ~ModuleManager();
 
         /**
          * Loads a set of modules given a path.
          */
-        bool LoadPath
+        virtual bool LoadPath
         (
             _In_ String path
         );
 
-        bool LoadFile
+        virtual bool LoadFile
         (
             _In_ String file
         );
@@ -59,7 +59,7 @@ namespace VoodooShader
         /**
          * Tests to see if a class exists in the list provided by all loaded modules.
          */
-        bool ClassExists
+        virtual bool ClassExists
         (
             _In_ String name
         );
@@ -69,7 +69,7 @@ namespace VoodooShader
          * specific type. The type <em>must</em> be derived from IObject.
          */
         template<class T>
-        std::shared_ptr<T> CreateClass(_In_ String name)
+        inline std::shared_ptr<T> CreateClass(_In_ String name)
         {
             IObjectRef object = this->CreateObject(name);
 
@@ -87,7 +87,7 @@ namespace VoodooShader
          * @return New object or null if the class wasn't found or couldn't be created.
          */
         _Check_return_
-        IObjectRef CreateObject(_In_ String name);
+        virtual IObjectRef CreateObject(_In_ String name);
 
         /**
          * Finds the address of a function in a module. The module must be loaded into
@@ -100,7 +100,7 @@ namespace VoodooShader
          * @return The function's address if found, null otherwise.
          */
         _Check_return_
-        void * FindFunction
+        virtual void * FindFunction
         (
             _In_ String module,
             _In_ String name
@@ -116,7 +116,7 @@ namespace VoodooShader
      * Contains the handle to a loaded library and function pointers for
      * creation and destruction.
      */
-     class VOODOO_API Module
+     class Module
      {
      public:
          /**
@@ -139,26 +139,26 @@ namespace VoodooShader
             _In_ HMODULE hmodule
         );
 
-        ~Module();
+        virtual ~Module();
 
         /**
          * Get the current version of this module.
          * 
          * @return The version, including name and debug attribute.
          */
-        Version ModuleVersion();
+        virtual Version ModuleVersion();
         
         /**
          * Get the class count from this module.
          */
-        int ClassCount();
+        virtual int ClassCount();
 
-        const char * ClassInfo
+        virtual const char * ClassInfo
         (
             _In_ int number
         );
 
-        IObjectRef CreateClass
+        virtual IObjectRef CreateClass
         (
             _In_ int number,
             _In_ Core * core

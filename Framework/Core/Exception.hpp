@@ -62,18 +62,18 @@ namespace VoodooShader
             _In_ int line
         );
 
-        ~Exception();
+        virtual  ~Exception();
 
-        const char * what();
+        virtual const char * what();
 
     private:
-        Core * mCore;
-        String mModule;
-        String mMessage;
-        char * mFile;
-        char * mFunction;
-        int mLine;
-        char * mFmtMsg;
+        Core * m_Core;
+        String m_Module;
+        String m_Message;
+        char * m_File;
+        char * m_Function;
+        int m_Line;
+        char * m_FmtMsg;
     };
     /**
      * @}

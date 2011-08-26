@@ -37,11 +37,12 @@ namespace VoodooShader
      * This is used internally to handle file path resolution and Xml key
      * location.
      */
-    class VOODOO_API Parser
+    class Parser
     {
     public:
         Parser(_In_ Core * core);
-        ~Parser();
+
+        virtual ~Parser();
 
         /**
          * Adds a variable to the internal dictionary.
@@ -53,7 +54,7 @@ namespace VoodooShader
          * @param system Marks the variable as a system variable. These cannot be changed or
          *    removed.
          */
-        void Add(_In_ String Name, _In_ String Value, _In_ VariableType Type = VT_Normal);
+        virtual void Add(_In_ String Name, _In_ String Value, _In_ VariableType Type = VT_Normal);
 
         /**
          * Removes a variable from the internal dictionary.
@@ -61,7 +62,7 @@ namespace VoodooShader
          * @param name The variable name (may contain variables, they will be resolved
          *    immediately).
          */
-        void Remove(_In_ String Name);
+        virtual void Remove(_In_ String Name);
 
         /**
          * Parses a string, replacing any variables with their values. Variables are resolved when
@@ -69,7 +70,7 @@ namespace VoodooShader
          * 
          * @sa @ref varsyntax for details on how variables work.
          */
-        String Parse(_In_ String Input, _In_ ParseFlags Flags = PF_None);
+        virtual String Parse(_In_ String Input, _In_ ParseFlags Flags = PF_None);
 
         static const int  VarMaxDepth   = 8;
         static const char VarDelimStart = '(';

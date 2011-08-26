@@ -49,7 +49,7 @@ namespace VoodooShader
      *          compile without errors. This <em>does not</em> mean that all techniques
      *          will be valid.
      */
-    class VOODOO_API Shader
+    class Shader
         : public IObject
     {
     public:

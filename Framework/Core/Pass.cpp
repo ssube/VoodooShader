@@ -4,6 +4,7 @@
 #include "Core.hpp"
 #include "ILogger.hpp"
 #include "Technique.hpp"
+#include "Texture.hpp"
 
 namespace VoodooShader
 {

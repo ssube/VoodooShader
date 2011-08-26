@@ -11,10 +11,10 @@ namespace VoodooShader
         _In_ Core * core, 
         _In_ char * file, _In_ char * function, _In_ int line
     )
-        : std::exception(message), mFmtMsg(NULL),
-            mModule(module), mMessage(message), 
-            mCore(core), 
-            mFile(file), mFunction(function), mLine(line)
+        : std::exception(message), m_FmtMsg(NULL),
+            m_Module(module), m_Message(message), 
+            m_Core(core), 
+            m_File(file), m_Function(function), m_Line(line)
     {
         if ( core )
         {
@@ -38,10 +38,10 @@ namespace VoodooShader
         _In_ Core * core, 
         _In_ char * file, _In_ char * function, _In_ int line
     )
-        : std::exception(message.c_str()), mFmtMsg(NULL),
-            mModule(module), mMessage(message), 
-            mCore(core), 
-            mFile(file), mFunction(function), mLine(line)
+        : std::exception(message.c_str()), m_FmtMsg(NULL),
+            m_Module(module), m_Message(message), 
+            m_Core(core), 
+            m_File(file), m_Function(function), m_Line(line)
     {
         if ( core )
         {
@@ -61,28 +61,28 @@ namespace VoodooShader
 
     Exception::~Exception()
     {
-        if ( mFmtMsg )
+        if ( m_FmtMsg )
         {
-            delete mFmtMsg;
+            delete m_FmtMsg;
         }
     }
 
     const char * Exception::what()
     {
-        if ( mFmtMsg == NULL )
+        if ( m_FmtMsg == NULL )
         {
-            mFmtMsg = new char[1024];
-            ZeroMemory(mFmtMsg, 1024);
+            m_FmtMsg = new char[1024];
+            ZeroMemory(m_FmtMsg, 1024);
 
             sprintf_s
             (
-                mFmtMsg, 
+                m_FmtMsg, 
                 1024, 
                 "VoodooShader::Exception in module %s, file %s at %s (line %d): %s", 
-                mModule.c_str(), mFile, mFunction, mLine, mMessage.c_str()
+                m_Module.c_str(), m_File, m_Function, m_Line, m_Message.c_str()
             );
         }
 
-        return mFmtMsg;
+        return m_FmtMsg;
     }
 }

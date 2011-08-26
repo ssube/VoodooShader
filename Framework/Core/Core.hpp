@@ -25,10 +25,21 @@
 
 namespace VoodooShader
 {
+#ifndef VOODOO_NO_CG
     /**
      * @addtogroup VoodooCore
-     * @{
+     * @{.
+     *
+     * @author  Sean
+     * @date    8/21/2011
+     *
+     * @param   context         The context.
+     * @param   error           The error.
+     * @param [in,out]  core    If non-null, the core.
      */
+    void Voodoo_CgErrorHandler_Func(CGcontext context, CGerror error, void * core);
+#endif
+
     /**
      * Creates a new core. This function is exported and meant for use by the loader.
      * 
@@ -62,7 +73,7 @@ namespace VoodooShader
      * Core engine class for the Voodoo Shader Framework. Manages a variety of major functions and
      * contains a Cg context used by shaders.
      */
-    class VOODOO_API Core
+    class Core
     {
     public:
         /**
@@ -277,6 +288,10 @@ namespace VoodooShader
         );
 
     private:
+#ifndef VOODOO_NO_CG
+        friend void Voodoo_CgErrorHandler_Func(CGcontext context, CGerror error, void * core);
+#endif
+
         /**
          * Error handling callback for the Cg context. If an internal Cg error occurs, this function 
          * will be called with as much information as possible. While error recovery may not be 
@@ -287,11 +302,10 @@ namespace VoodooShader
          * @param core The core to use for error logging, if one was provided the Cg context
          *    during creation. This may be NULL.
          */
-        static void CgErrorHandler
+        void CgErrorHandler
         (
             _In_ CGcontext context, 
-            _In_ CGerror error, 
-            _In_opt_ void * core
+            _In_ int error
         );
 
     private:

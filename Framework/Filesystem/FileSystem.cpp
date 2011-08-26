@@ -27,7 +27,7 @@ namespace VoodooShader
 
         int API_ClassCount()
         {
-            return 3;
+            return 1;
         }
 
         const char * API_ClassInfo(int number)
@@ -51,34 +51,34 @@ namespace VoodooShader
         }
 
         FileSystem::FileSystem( _In_ Core * core )
-            : mCore(core)
+            : m_Core(core)
         {
             using namespace pugi;
 
             // Create builtin vars
-            ParserRef parser = mCore->GetParser();
+            ParserRef parser = m_Core->GetParser();
 
             char cvar[MAX_PATH];
             if ( SHGetFolderPath(NULL, CSIDL_COMMON_DOCUMENTS, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
             {
                 StringCchCatA(cvar, MAX_PATH, "\\My Games\\");
-                parser->Add("allgames", cvar, true);
+                parser->Add("allgames", cvar, VT_System);
             }
             if ( SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
             {
                 StringCchCatA(cvar, MAX_PATH, "\\My Games\\");
-                parser->Add("mygames", cvar, true);
+                parser->Add("mygames", cvar, VT_System);
             }
             if ( SHGetFolderPath(NULL, CSIDL_SYSTEM, NULL, SHGFP_TYPE_CURRENT, cvar) == S_OK )
             {
-                parser->Add("systemroot", cvar, true);
+                parser->Add("systemroot", cvar, VT_System);
             }
 
             // Init DevIL
             ilInit();
 
             // Load paths from the config
-            xml_document * config = (xml_document *)mCore->GetConfig();
+            xml_document * config = (xml_document *)m_Core->GetConfig();
             xpath_query pathsQuery("/VoodooConfig/WFileSystem/SearchPaths/Path");
             xpath_query pathValueQuery("./text()");
 
@@ -96,47 +96,53 @@ namespace VoodooShader
 
         FileSystem::~FileSystem()
         {
-            mDirectories.clear();
+            m_Directories.clear();
         }
 
-        const char * FileSystem::GetObjectClass()
+        String FileSystem::GetName()
         {
             return FileSystemName;
         }
 
+        Core * FileSystem::GetCore()
+        {
+            return m_Core;
+        }
+
         void FileSystem::AddDirectory(String name)
         {
-            String realname = mCore->GetParser()->Parse(name);
+            String realname = m_Core->GetParser()->Parse(name);
 
             size_t splitter = realname.find(';');
-            while ( splitter != string::npos )
+            while ( splitter != String::npos )
             {
                 String partname = realname.substr(0, splitter);
-                this->mDirectories.push_front(partname);
-                realname = realname.substr(splitter+1)
+                this->m_Directories.push_front(partname);
+                realname = realname.substr(splitter+1);
+                splitter = realname.find(';');
             }
 
-            this->mDirectories.push_front(realname);
+            this->m_Directories.push_front(realname);
         }
 
         void FileSystem::RemoveDirectory(String name)
         {
-            String realname = mCore->GetParser()->Parse(name) + "\\";
+            String realname = m_Core->GetParser()->Parse(name) + "\\";
 
-            this->mDirectories.remove_if([&](String current){return (current == realname);});
+            this->m_Directories.remove_if([&](String current){return (current == realname);});
         }
 
-        IFileRef FileSystem::GetFile(String name)
+        IFileRef FileSystem::FindFile(String name)
         {
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for raw file \"%s\".", name.c_str());
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for raw file \"%s\".", name.c_str());
 
-            String filename = mCore->GetParser()->Parse(name);
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for parsed file \"%s\".", filename.c_str());
+            String filename = m_Core->GetParser()->Parse(name);
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for parsed file \"%s\".", filename.c_str());
 
             // 
-            StringList::iterator curDir = mDirectories.begin();
+            StringList::iterator curDir = m_Directories.begin();
 
-            while ( curDir != mDirectories.end() )
+            while ( curDir != m_Directories.end() )
             {
                 // Try to find the file in each registered dir
                 String fullname = (*curDir) + ( "\\" + filename );
@@ -147,7 +153,7 @@ namespace VoodooShader
                 {
                     CloseHandle(file);
 
-                    mCore->GetLogger()->Log
+                    m_Core->GetLogger()->Log
                     (
                         LL_Debug,
                         VOODOO_CORE_NAME,
@@ -155,13 +161,13 @@ namespace VoodooShader
                         name.c_str(), (*curDir).c_str()
                     );
 
-                    return IFileRef(new File(mCore, fullname));
+                    return IFileRef(new File(m_Core, fullname));
                 }
 
                 ++curDir;
             }
 
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Warning,
                 VOODOO_CORE_NAME,
@@ -172,54 +178,8 @@ namespace VoodooShader
             return IFileRef();
         }
 
-        IImageRef FileSystem::GetImage(_In_ String name)
-        {
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for raw image \"%s\".", name.c_str());
-
-            String filename = mCore->GetParser()->Parse(name);
-            mCore->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, "Searching for parsed image \"%s\".", filename.c_str());
-
-            // 
-            StringList::iterator curDir = mDirectories.begin();
-
-            while ( curDir != mDirectories.end() )
-            {
-                // Try to find the file in each registered dir
-                String fullname = (*curDir) + filename;
-
-                HANDLE file = CreateFileA(fullname.c_str(), 0, 0, NULL, OPEN_EXISTING, NULL, NULL);
-
-                if ( file != INVALID_HANDLE_VALUE )
-                {
-                    CloseHandle(file);
-
-                    mCore->GetLogger()->Log
-                    (
-                        LL_Debug,
-                        VOODOO_CORE_NAME,
-                        "File %s found in directory %s.",
-                        name.c_str(), (*curDir).c_str()
-                    );
-
-                    return Image::Load(mCore, fullname);
-                }
-
-                ++curDir;
-            }
-
-            mCore->GetLogger()->Log
-            (
-                LL_Warning,
-                VOODOO_CORE_NAME,
-                "Unable to find file %s.", 
-                name.c_str()
-            );
-
-            return IImageRef();
-        }
-
         File::File(Core * core, String name)
-            : mName(name), mCore(core), mHandle(NULL)
+            : m_Name(name), m_Core(core), m_Handle(NULL)
         {    };
 
         File::~File()
@@ -227,14 +187,19 @@ namespace VoodooShader
             this->Close();
         }
 
-        const char * File::GetObjectClass()
+        String File::GetName()
         {
-            return "File";
+            return "WFile";
+        }
+
+        Core * File::GetCore()
+        {
+            return m_Core;
         }
 
         String File::GetPath()
         {
-            return mName;
+            return m_Name;
         }
 
         bool File::Open(FileOpenMode mode)
@@ -253,38 +218,43 @@ namespace VoodooShader
 
             if ( access == 0 )
             {
-                Throw(VOODOO_FILESYSTEM_NAME, "Attempted to open file with unknown mode.", mCore);
+                Throw(VOODOO_FILESYSTEM_NAME, "Attempted to open file with unknown mode.", m_Core);
             }
 
-            mCore->GetLogger()->Log
+            m_Core->GetLogger()->Log
             (
                 LL_Debug,
                 VOODOO_FILESYSTEM_NAME,
                 "Opening file %s with mode %u (underlying %u).",
-                mName.c_str(), mode, access
+                m_Name.c_str(), mode, access
             );
 
-            mHandle = CreateFileA(mName.c_str(), access, 0, NULL, OPEN_EXISTING, NULL, NULL);
+            m_Handle = CreateFileA(m_Name.c_str(), access, 0, NULL, OPEN_EXISTING, NULL, NULL);
 
-            if ( mHandle == INVALID_HANDLE_VALUE )
+            if ( m_Handle == INVALID_HANDLE_VALUE )
             {
-                mCore->GetLogger()->Log
+                m_Core->GetLogger()->Log
                 (
                     LL_Warning,
                     VOODOO_FILESYSTEM_NAME,
                     "Unable to open file %s.",
-                    mName.c_str()
+                    m_Name.c_str()
                 );
             }
 
-            return ( mHandle != INVALID_HANDLE_VALUE );
+            return ( m_Handle != INVALID_HANDLE_VALUE );
+        }
+
+        IImageRef File::OpenImage()
+        {
+            return Image::Load(m_Core, m_Name);
         }
 
         bool File::Close()
         {
-            if ( mHandle && mHandle != INVALID_HANDLE_VALUE )
+            if ( m_Handle && m_Handle != INVALID_HANDLE_VALUE )
             {
-                BOOL retval = CloseHandle(mHandle);
+                BOOL retval = CloseHandle(m_Handle);
                 return ( retval == TRUE );
             } else {
                 return false;
@@ -293,12 +263,12 @@ namespace VoodooShader
 
         int File::Read(_In_ int count, _In_opt_count_(count) void * buffer)
         {
-            if ( mHandle )
+            if ( m_Handle )
             {
                 DWORD readsize;
                 if ( count < 0 )
                 {
-                    readsize = GetFileSize(mHandle, NULL);
+                    readsize = GetFileSize(m_Handle, NULL);
 
                     if ( buffer == NULL )
                     {
@@ -309,7 +279,7 @@ namespace VoodooShader
                 }
 
                 DWORD retsize = 0;
-                BOOL success = ReadFile(mHandle, buffer, readsize, &retsize, NULL);
+                BOOL success = ReadFile(m_Handle, buffer, readsize, &retsize, NULL);
 
                 if ( success == 0 )
                 {
@@ -324,14 +294,14 @@ namespace VoodooShader
 
         bool File::Write(_In_ int count, _In_opt_count_(count) void * buffer )
         {
-            if ( mHandle )
+            if ( m_Handle )
             {
                 if ( buffer == NULL )
                 {
                     DWORD size = 0;
                     if ( count < 0 )
                     {
-                        Throw(VOODOO_FILESYSTEM_NAME, "Unable to write a negative number of null bytes.", mCore);
+                        Throw(VOODOO_FILESYSTEM_NAME, "Unable to write a negative number of null bytes.", m_Core);
                     } else {
                         size = (DWORD)count;
                     }
@@ -340,12 +310,12 @@ namespace VoodooShader
 
                     if ( buffer == NULL )
                     {
-                        Throw(VOODOO_FILESYSTEM_NAME, "Error allocating memory for null buffer.", mCore);
+                        Throw(VOODOO_FILESYSTEM_NAME, "Error allocating memory for null buffer.", m_Core);
                     }
 
                     memset(buffer, 0, size);
                     DWORD retsize = 0;
-                    BOOL success = WriteFile(mHandle, buffer, size, &retsize, NULL);
+                    BOOL success = WriteFile(m_Handle, buffer, size, &retsize, NULL);
 
                     free(buffer);
 
@@ -360,12 +330,12 @@ namespace VoodooShader
                 } else {
                     if ( count < 0 )
                     {
-                        Throw(VOODOO_FILESYSTEM_NAME, "Unable to write a negative nubber of bytes.", mCore);
+                        Throw(VOODOO_FILESYSTEM_NAME, "Unable to write a negative nubber of bytes.", m_Core);
                     }
 
                     DWORD size = (DWORD)count;
                     DWORD retsize = 0;
-                    BOOL success = 0; //WriteFile(mHandle, buffer, size, &retsize, NULL);
+                    BOOL success = 0; //WriteFile(m_Handle, buffer, size, &retsize, NULL);
 
                     if ( success == 0 )
                     {
@@ -399,13 +369,13 @@ namespace VoodooShader
         }
 
         Image::Image(Core * core, String name, ILuint image)
-            : mCore(core), mName(name), mImage(image)
+            : m_Core(core), m_Name(name), m_Image(image)
         {
-            mDesc.Width = ilGetInteger(IL_IMAGE_WIDTH);
-            mDesc.Height = ilGetInteger(IL_IMAGE_HEIGHT);
-            mDesc.Depth = ilGetInteger(IL_IMAGE_DEPTH);
-            mDesc.Mipmaps = false;
-            mDesc.Format = TF_Unknown;
+            m_Desc.Width = ilGetInteger(IL_IMAGE_WIDTH);
+            m_Desc.Height = ilGetInteger(IL_IMAGE_HEIGHT);
+            m_Desc.Depth = ilGetInteger(IL_IMAGE_DEPTH);
+            m_Desc.Mipmaps = false;
+            m_Desc.Format = TF_Unknown;
 
             ILint texFmt  = ilGetInteger(IL_IMAGE_FORMAT);
             ILint texType = ilGetInteger(IL_IMAGE_TYPE);
@@ -414,41 +384,51 @@ namespace VoodooShader
             {
                 if ( texType == IL_BYTE || texType == IL_UNSIGNED_BYTE )
                 {
-                    mDesc.Format = TF_RGB8;
+                    m_Desc.Format = TF_RGB8;
                 }
             } else if ( texFmt == IL_RGBA ) {
                 if ( texType == IL_BYTE || texType == IL_UNSIGNED_BYTE )
                 {
-                    mDesc.Format = TF_RGBA8;
+                    m_Desc.Format = TF_RGBA8;
                 } else if ( texType == IL_FLOAT ) {
-                    mDesc.Format = TF_RGBA16F;
+                    m_Desc.Format = TF_RGBA16F;
                 } else if ( texType == IL_DOUBLE ) {
-                    mDesc.Format = TF_RGBA32F;
+                    m_Desc.Format = TF_RGBA32F;
                 }
             }
 
-            if ( mDesc.Format == TF_Unknown )
+            if ( m_Desc.Format == TF_Unknown )
             {
-                mCore->GetLogger()->Log(LL_Warning, VOODOO_FILESYSTEM_NAME, "Unable to resolve format for image %s (%u).", name.c_str(), image);
+                m_Core->GetLogger()->Log(LL_Warning, VOODOO_FILESYSTEM_NAME, "Unable to resolve format for image %s (%u).", name.c_str(), image);
             }
         }
 
         Image::~Image()
         {
-            ilDeleteImage(mImage);
+            ilDeleteImage(m_Image);
         }
 
-        const char * Image::GetObjectClass()
+        String Image::GetName()
         {
-            return "Image";
+            return "WDevilImage";
         }
 
-        TextureDesc Image::GetImageDesc()
+        Core * Image::GetCore()
         {
-            return mDesc;
+            return m_Core;
         }
 
-        size_t Image::CopyImageData(TextureRegion desc, void * buffer)
+        String Image::GetPath()
+        {
+            return m_Name;
+        }
+
+        TextureDesc Image::GetDesc()
+        {
+            return m_Desc;
+        }
+
+        size_t Image::GetData(TextureRegion desc, void * buffer)
         {
             ILint ilFmt = 0;
             ILint ilType = 0;
@@ -474,7 +454,7 @@ namespace VoodooShader
                 break;
             case TF_Unknown:
             default:
-                Throw(VOODOO_FILESYSTEM_NAME, "Invalid texture format for data get.", mCore);
+                Throw(VOODOO_FILESYSTEM_NAME, "Invalid texture format for data get.", m_Core);
             }
 
             return ilCopyPixels
@@ -483,17 +463,6 @@ namespace VoodooShader
                 desc.Width, desc.Height, desc.Depth, 
                 ilFmt, ilType, buffer
             );
-        }
-
-        void * Image::GetImageData()
-        {
-            ilBindImage(mImage);
-            return ilGetData();
-        }
-
-        void Image::FreeImageData()
-        {
-            ilBindImage(0);
         }
     }
 }

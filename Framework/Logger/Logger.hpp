@@ -27,6 +27,7 @@
 #include <stdarg.h>
 
 #define VOODOO_IMPORT
+#define VOODOO_NO_CG
 #include "Voodoo_Core.hpp"
 
 // Hide the DLL-interface warning
@@ -91,7 +92,8 @@ namespace VoodooShader
              */
             ~XmlLogger();
 
-            const char * GetObjectClass();
+            virtual String GetName();
+            virtual Core * GetCore();
 
             /**
              * Opens a file for use by this Logger.
@@ -101,16 +103,30 @@ namespace VoodooShader
              * @param append Flag specifying the open mode; if true, any existing log is truncated.
              * @return Success of the open operation.
              */
-            bool Open
+            virtual bool Open
             (
-                _In_ const char * filename, 
+                _In_ String filename, 
                 _In_ bool append
             );
 
             /**
              * Closes the log file, if one is open.
              */
-            void Close();
+            virtual void Close();
+
+            /**
+             * Immediately writes all pending data to disk.
+             *
+             * @note This is useful for catchable errors which may have fatal 
+             *        consequences (Exception calls this in case the exception is 
+             *        uncaught).
+             * @warning This may not (probably will not) be any good in case of a 
+             *        segfault or other crash. If you need complete debug logging, 
+             *        call Logger::SetBufferSize(unsigned int) with a buffer size of 0
+             *        and all logged messages <em>should</em> make it to disk, even 
+             *        during fatal crashes.
+             */
+            virtual void Flush();
 
             /**
              * Set the default minimum message level. Messages below this level will
@@ -118,11 +134,60 @@ namespace VoodooShader
              *
              * @param level The minimum log level.
              */
-            void SetLogLevel
+            virtual void SetLogLevel
             (
                 _In_ LogLevel level
             );
 
+            virtual LogLevel GetLogLevel();
+
+            /**
+             * Writes a module stamp to the log. This records the name and version
+             * info for a select module (used to log what modules were present during
+             * a logging session).
+             * 
+             * @param module The module version info to log.
+             */
+            virtual void LogModule
+            (
+                _In_ Version module
+            );
+
+            /**
+             * Log a message, may be formatted with printf syntax.
+             *
+             * @param level The level for this message.
+             * @param module The logging module's name.
+             * @param msg The message format string.
+             * @param ... The parameters to insert.
+             *
+             * @warning This function has a maximum (formatted) message length of
+             *        4096 characters. This can be changed if it becomes an issue.
+             */
+            virtual void Log
+            (
+                _In_ LogLevel level,
+                _In_ const char * module,
+                _In_ _Printf_format_string_ const char * msg, 
+                ...
+            );
+
+            /**
+             * Sets the internal buffer to a given size.
+             *
+             * @param bytes The size.
+             * @note A size of 0 will force messages to be written directly to disk.
+             *        This may have a notable performance hit, but makes debug 
+             *        messages more likely to survive crashes.
+             */
+            virtual void SetFlags
+            (
+                _In_ LogFlags flags
+            );
+
+            virtual LogFlags GetFlags();
+
+        private:
             /**
              * Formats a timestamp for the log. The timestamp will have the 
              * form <code>HHMMSS</code>. Leading zeros are guaranteed to be
@@ -150,69 +215,11 @@ namespace VoodooShader
              */
             String LogTicks();
 
-            /**
-             * Writes a module stamp to the log. This records the name and version
-             * info for a select module (used to log what modules were present during
-             * a logging session).
-             * 
-             * @param module The module version info to log.
-             */
-            void LogModule
-            (
-                _In_ Version module
-            );
-
-            /**
-             * Log a message, may be formatted with printf syntax.
-             *
-             * @param level The level for this message.
-             * @param module The logging module's name.
-             * @param msg The message format string.
-             * @param ... The parameters to insert.
-             *
-             * @warning This function has a maximum (formatted) message length of
-             *        4096 characters. This can be changed if it becomes an issue.
-             */
-            void Log
-            (
-                _In_ LogLevel level,
-                _In_ const char * module,
-                _In_ _Printf_format_string_ const char * msg, 
-                ...
-            );
-
-            /**
-             * Sets the internal buffer to a given size.
-             *
-             * @param bytes The size.
-             * @note A size of 0 will force messages to be written directly to disk.
-             *        This may have a notable performance hit, but makes debug 
-             *        messages more likely to survive crashes.
-             */
-            void SetBufferSize
-            (
-                _In_ unsigned int bytes
-            );
-
-            /**
-             * Immediately writes all pending data to disk.
-             *
-             * @note This is useful for catchable errors which may have fatal 
-             *        consequences (Exception calls this in case the exception is 
-             *        uncaught).
-             * @warning This may not (probably will not) be any good in case of a 
-             *        segfault or other crash. If you need complete debug logging, 
-             *        call Logger::SetBufferSize(unsigned int) with a buffer size of 0
-             *        and all logged messages <em>should</em> make it to disk, even 
-             *        during fatal crashes.
-             */
-            void Dump();
-
-        private:
-            Core * mCore;
-            LogLevel mLogLevel;
-            std::fstream mLogFile;
-            tm * mLocalTime;
+            Core * m_Core;
+            LogLevel m_LogLevel;
+            std::fstream m_LogFile;
+            tm * m_LocalTime;
+            LogFlags m_Flags;
         };
         /**
          * @}

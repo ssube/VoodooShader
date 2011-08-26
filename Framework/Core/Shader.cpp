@@ -103,7 +103,7 @@ namespace VoodooShader
                     (
                     LL_Error, VOODOO_CORE_NAME, 
                     "Technique %s cannot be set as default for shader %s (not technique for this shader).",
-                    Technique->GetName(), this->GetName()
+                    Technique->GetName().c_str(), this->GetName().c_str()
                     );
             }
         }
@@ -313,7 +313,7 @@ namespace VoodooShader
         // No file, make blank texture
         CGannotation atexSize   = cgGetNamedParameterAnnotation(parameter, "size");
         CGannotation atexFormat = cgGetNamedParameterAnnotation(parameter, "format");
-        CGannotation atexColor  = cgGetNamedParameterAnnotation(parameter, "color");
+        //CGannotation atexColor  = cgGetNamedParameterAnnotation(parameter, "color");
 
         CGtype texSizeType = cgGetAnnotationType(atexSize);
         TextureDesc texDesc;

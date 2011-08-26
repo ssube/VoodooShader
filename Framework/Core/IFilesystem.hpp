@@ -78,13 +78,15 @@ namespace VoodooShader
     };
 
     class IImage
-        : public IFile
+        : public IObject
     {
     public:
         ~IImage() throw()
         { };
 
-        virtual TextureDesc GetIDesc() = 0;
+        virtual String GetPath() = 0;
+
+        virtual TextureDesc GetDesc() = 0;
 
         virtual size_t GetData(_In_ TextureRegion desc, _In_opt_ void * buffer) = 0;
     };

@@ -17,6 +17,15 @@
 
 namespace VoodooShader
 {
+    void Voodoo_CgErrorHandler_Func(CGcontext context, CGerror error, void * core)
+    {
+        Core * me = reinterpret_cast<Core*>(core);
+        if (me)
+        {    
+            me->CgErrorHandler(context, error);
+        }        
+    }
+
     Core * CreateCore(_In_ InitParams * initParams)
     {
         return new Core(initParams);
@@ -354,7 +363,7 @@ namespace VoodooShader
             m_Logger->Log
             (
                 LL_Debug, VOODOO_CORE_NAME, "Added texture %s with data %p, returning shared pointer to %p.", 
-                Name.c_str(), Desc, texture.get()
+                Name.c_str(), &Desc, texture.get()
             );
 
             return texture;
@@ -416,7 +425,7 @@ namespace VoodooShader
             m_Logger->Log
             (
                 LL_Debug, VOODOO_CORE_NAME, "Got parameter %s, erasing.", 
-                Name.c_str(), parameter->second.get()
+                Name.c_str()
             );
 
             this->m_Parameters.erase(parameter);
@@ -474,37 +483,33 @@ namespace VoodooShader
         }
     }
         
-    void Core::CgErrorHandler(CGcontext context, CGerror error, void * core)
+    void Core::CgErrorHandler(CGcontext context, int error)
     {
-        Core * me = reinterpret_cast<Core*>(core);
-        if ( me )
+        const char * errorString = error ? cgGetErrorString((CGerror)error) : NULL;
+
+        if (errorString)
         {
-            const char * errorString = error ? cgGetErrorString(error) : NULL;
-
-            if ( errorString )
+            this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
+            if (context && error != CG_INVALID_CONTEXT_HANDLE_ERROR)
             {
-                me->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
-                if ( context && error != CG_INVALID_CONTEXT_HANDLE_ERROR )
+                if (this->m_Adapter)
                 {
-                    if ( me->m_Adapter )
-                    {
-                        me->m_Adapter->HandleError(context, error, me);
-                    }
+                    this->m_Adapter->HandleError(context, error);
+                }
 
-                    // Print any compiler errors or other details we can find
-                    const char * listing = cgGetLastListing(context);
+                // Print any compiler errors or other details we can find
+                const char * listing = cgGetLastListing(context);
                     
-                    while ( listing )
-                    {
-                        me->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg error details: %s", listing);
-                        listing = cgGetLastListing(context);
-                    }
-                } else {
-                    me->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Invalid context for error, no further data available.");
+                while (listing)
+                {
+                    this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg error details: %s", listing);
+                    listing = cgGetLastListing(context);
                 }
             } else {
-                me->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported an unknown error (%d).", error);
-            }            
-        }
+                this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Invalid context for error, no further data available.");
+            }
+        } else {
+            this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported an unknown error (%d).", error);
+        }    
     }
 }

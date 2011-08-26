@@ -7,6 +7,7 @@
 #include "ILogger.hpp"
 #include "Pass.hpp"
 #include "Shader.hpp"
+#include "Texture.hpp"
 
 namespace VoodooShader
 {

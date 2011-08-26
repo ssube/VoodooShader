@@ -65,7 +65,7 @@ namespace VoodooShader
          *        and all logged messages <em>should</em> make it to disk, even 
          *        during fatal crashes.
          */
-        virtual void Dump() = 0;
+        virtual void Flush() = 0;
 
         /**
          * Set the default minimum message level. Messages below this level will
@@ -119,39 +119,11 @@ namespace VoodooShader
          *        This may have a notable performance hit, but makes debug 
          *        messages more likely to survive    crashes.
          */
-        virtual void SetBufferSize
+        virtual void SetFlags
         (
-            _In_ unsigned int bytes
+            _In_ LogFlags flush
         ) = 0;
 
-        virtual int GetBufferSize() = 0;
-
-    private:
-        /**
-         * Write a formatted timestamp to the log. The timestamp will have the 
-         * form <code>HHMMSS</code>. Leading zeros are guaranteed to be
-         * present, so the timestamp length is 6 chars.
-         *
-         * @note If the system time cannot be retrieved, an error stamp of
-         *          <code>000000</code> will be printed with an equal length.
-         */
-        virtual String LogTime() = 0;
-
-        /**
-         * Writes a formatted date to the log. The date will have the
-         * form <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present,
-         * so the date length is 8 chars.
-         *
-         * @note If the system time cannot be retrieved, an error stamp of
-         *          <code>00000000</code> will be printed with an equal length.
-         */
-        virtual String LogDate() = 0;
-
-        /**
-         * Writes a formatted tick to the log. The stamp will have the
-         * form <code>xxxxxxxxx</code>, with a potentially varying length. This
-         * records ticks (usually ms since system start).
-         */
-        virtual String LogTicks() = 0;
+        virtual LogFlags GetFlags() = 0;
     };
 }

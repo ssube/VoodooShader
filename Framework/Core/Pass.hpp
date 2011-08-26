@@ -34,16 +34,16 @@ namespace VoodooShader
      * Each Pass contains a single set of programs, each operating on a different
      * stage of the render pipeline. 
      * 
-     * @note    A Pass may contain programs for each stage. Valid stages vary by 
-     *          underlying API and version. In OpenGL and DirectX 9 and earlier,
-     *          stages may be left to the fixed-function pipeline by not specifying
-     *          any program to be used. Later APIs require the vertex and pixel
-     *          shaders to be specified in each pass.
+     * @note A Pass may contain programs for each stage. Valid stages vary by 
+     *    underlying API and version. In OpenGL and DirectX 9 and earlier,
+     *    stages may be left to the fixed-function pipeline by not specifying
+     *    any program to be used. Later APIs require the vertex and pixel
+     *    shaders to be specified in each pass.
      * 
      * @warning Some adapters may require programs to be provided for certain
-     *          stages.
+     *    stages.
      */
-    class VOODOO_API Pass
+    class Pass
     {
     public:
         Pass
@@ -92,8 +92,8 @@ namespace VoodooShader
          *
          * @param stage The stage to retrieve.
          * @return The program corresponding to the desired stage, or null if
-         *        the pass has no program for that stage or an unsupported or
-         *        unknown stage is requested.
+         *    the pass has no program for that stage or an unsupported or
+         *    unknown stage is requested.
          */
         virtual CGprogram GetProgram
         (

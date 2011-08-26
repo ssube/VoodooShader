@@ -238,8 +238,7 @@ namespace VoodooShader
         virtual void HandleError
         (
             _In_ CGcontext context, 
-            _In_ CGerror error, 
-            _In_ void * core
+            _In_ int error
         ) = 0;
     };
 }

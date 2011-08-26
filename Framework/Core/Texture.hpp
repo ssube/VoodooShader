@@ -37,7 +37,7 @@ namespace VoodooShader
      * within them to create the on-screen images. Textures may be used to represent
      * various other surfaces, including render targets or even the backbuffer.
      */
-    class VOODOO_API Texture
+    class Texture
         : public IObject
     {
     public:
@@ -48,6 +48,15 @@ namespace VoodooShader
         );
 
         virtual ~Texture();
+
+        /**
+         * Gets the name.
+         *
+         * @author  Sean
+         * @date    8/21/2011
+         *
+         * @return  The name.
+         */
 
         virtual String GetName();
 
@@ -60,9 +69,19 @@ namespace VoodooShader
             return reinterpret_cast<T*>(GetData());
         };
 
+        /**
+         * Gets the data.
+         *
+         * @return  null if it fails, else the data.
+         */
         _Check_return_
         virtual void * GetData();
 
+        /**
+         * Gets the texture description.
+         *
+         * @return  The description.
+         */
         virtual TextureDesc GetDesc();
 
     private:

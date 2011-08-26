@@ -34,7 +34,7 @@ namespace VoodooShader
     /**
      * 
      */
-    class VOODOO_API Parameter
+    class Parameter
         : public IObject
     {
     public:
@@ -65,7 +65,7 @@ namespace VoodooShader
             _In_ CGparameter param
         );
 
-        ~Parameter();
+        virtual ~Parameter();
 
         /**
          * Retrieves the fully-qualified parameter name. Virtual parameters will be of the form 
