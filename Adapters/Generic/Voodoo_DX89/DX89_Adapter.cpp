@@ -10,11 +10,11 @@ namespace VoodooShader
         LPDIRECT3DVERTEXBUFFER9 FSQuadVerts = NULL;
 
         Adapter::Adapter(Core * core, IDirect3DDevice9 * device)
-            : mCore(core), mDevice(device)
+                : mCore(core), mDevice(device)
         {
             assert(device);
 
-            if ( !core )
+            if (!core)
             {
                 core = VoodooShader::Core::Create();
             }
@@ -36,7 +36,9 @@ namespace VoodooShader
                     VOODOO_DX89_NAME,
                     "Core adapter set to this."
                 );
-            } catch ( std::exception & exc ) {
+            }
+            catch (std::exception & exc)
+            {
                 core->Log
                 (
                     LL_Error,
@@ -47,10 +49,12 @@ namespace VoodooShader
             }
 
             HRESULT hr = cgD3D9SetDevice(device);
-            if ( !SUCCEEDED(hr) )
+            if (!SUCCEEDED(hr))
             {
                 Throw(VOODOO_DX89_NAME, "Could not set Cg device.", core);
-            } else {
+            }
+            else
+            {
                 core->Log
                 (
                     LL_Debug,
@@ -69,7 +73,7 @@ namespace VoodooShader
             cgD3D9RegisterStates(core->GetCGContext());
 
             HRESULT errors = cgD3D9GetLastError();
-            if ( !SUCCEEDED(errors) )
+            if (!SUCCEEDED(errors))
             {
                 core->Log
                 (
@@ -78,7 +82,9 @@ namespace VoodooShader
                     "Errors setting Cg states: %s",
                     cgD3D9TranslateHRESULT(errors)
                 );
-            } else {
+            }
+            else
+            {
                 core->Log
                 (
                     LL_Debug,
@@ -103,8 +109,8 @@ namespace VoodooShader
             D3DVIEWPORT9 viewport;
             device->GetViewport(&viewport);
 
-            float fx = ( (float)viewport.Width  / 2 ) + 0.5f    ;/// 2;
-            float fy = ( (float)viewport.Height / 2 ) + 0.5f    ;/// 2;
+            float fx = ((float)viewport.Width  / 2) + 0.5f    ;  /// 2;
+            float fy = ((float)viewport.Height / 2) + 0.5f    ;  /// 2;
 
             mCore->Log
             (
@@ -115,9 +121,9 @@ namespace VoodooShader
             );
 
             hr = this->mDevice->CreateVertexBuffer(6 * sizeof(FSVert), 0, D3DFVF_CUSTOMVERTEX,
-                D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
+                                                   D3DPOOL_DEFAULT, &FSQuadVerts, NULL);
 
-            if ( FAILED(hr) )
+            if (FAILED(hr))
             {
                 mCore->Log
                 (
@@ -130,17 +136,29 @@ namespace VoodooShader
             FSVert g_Vertices[4];
             memset(g_Vertices, 0, sizeof(FSVert) * 4);
 
-            g_Vertices[0].x = -0.5f; g_Vertices[0].y = -0.5f; g_Vertices[0].z = 0.5f;
-            g_Vertices[1].x =    fx; g_Vertices[1].y = -0.5f; g_Vertices[1].z = 0.5f;
-            g_Vertices[2].x = -0.5f; g_Vertices[2].y =    fy; g_Vertices[2].z = 0.5f;
-            g_Vertices[3].x =    fx; g_Vertices[3].y =    fy; g_Vertices[3].z = 0.5f;
+            g_Vertices[0].x = -0.5f;
+            g_Vertices[0].y = -0.5f;
+            g_Vertices[0].z = 0.5f;
+            g_Vertices[1].x =    fx;
+            g_Vertices[1].y = -0.5f;
+            g_Vertices[1].z = 0.5f;
+            g_Vertices[2].x = -0.5f;
+            g_Vertices[2].y =    fy;
+            g_Vertices[2].z = 0.5f;
+            g_Vertices[3].x =    fx;
+            g_Vertices[3].y =    fy;
+            g_Vertices[3].z = 0.5f;
 
             g_Vertices[0].rhw = g_Vertices[1].rhw = g_Vertices[2].rhw = g_Vertices[3].rhw = 1.0f;
 
-            g_Vertices[0].tu = 0.0f; g_Vertices[0].tv = 0.0f;
-            g_Vertices[1].tu = 1.0f; g_Vertices[1].tv = 0.0f;
-            g_Vertices[2].tu = 0.0f; g_Vertices[2].tv = 1.0f;
-            g_Vertices[3].tu = 1.0f; g_Vertices[3].tv = 1.0f;
+            g_Vertices[0].tu = 0.0f;
+            g_Vertices[0].tv = 0.0f;
+            g_Vertices[1].tu = 1.0f;
+            g_Vertices[1].tv = 0.0f;
+            g_Vertices[2].tu = 0.0f;
+            g_Vertices[2].tv = 1.0f;
+            g_Vertices[3].tu = 1.0f;
+            g_Vertices[3].tv = 1.0f;
 
             void * pVertices;
             FSQuadVerts->Lock(0, sizeof(FSVert) * 4, &pVertices, 0);
@@ -166,10 +184,10 @@ namespace VoodooShader
 
             HRESULT hr = S_OK;
 
-            if ( cgIsProgram(vertProg) )
+            if (cgIsProgram(vertProg))
             {
                 hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
-                if ( !SUCCEEDED(hr) )
+                if (!SUCCEEDED(hr))
                 {
                     this->mCore->Log
                     (
@@ -183,10 +201,10 @@ namespace VoodooShader
                 }
             }
 
-            if ( cgIsProgram(fragProg) )
+            if (cgIsProgram(fragProg))
             {
                 hr = cgD3D9LoadProgram(fragProg, CG_TRUE, 0);
-                if ( !SUCCEEDED(hr) )
+                if (!SUCCEEDED(hr))
                 {
                     this->mCore->Log
                     (
@@ -217,11 +235,11 @@ namespace VoodooShader
             CGprogram vertProg = pass->GetProgram(PS_Vertex);
             CGprogram fragProg = pass->GetProgram(PS_Fragment);
 
-            if ( cgIsProgram(vertProg) )
+            if (cgIsProgram(vertProg))
             {
                 HRESULT hr = cgD3D9BindProgram(vertProg);
 
-                if ( !SUCCEEDED(hr) )
+                if (!SUCCEEDED(hr))
                 {
                     this->mCore->Log
                     (
@@ -232,18 +250,22 @@ namespace VoodooShader
                     );
 
                     return;
-                } else {
+                }
+                else
+                {
                     mBoundVP = vertProg;
                 }
-            } else {
+            }
+            else
+            {
                 mDevice->SetVertexShader(NULL);
             }
 
-            if ( cgIsProgram(fragProg) )
+            if (cgIsProgram(fragProg))
             {
                 HRESULT hr = cgD3D9BindProgram(fragProg);
 
-                if ( !SUCCEEDED(hr) )
+                if (!SUCCEEDED(hr))
                 {
                     this->mCore->Log
                     (
@@ -253,28 +275,32 @@ namespace VoodooShader
                         pass->Name().c_str(), cgD3D9TranslateHRESULT(hr)
                     );
 
-                    if ( cgIsProgram(vertProg) )
+                    if (cgIsProgram(vertProg))
                     {
                         cgD3D9UnbindProgram(vertProg);
                         mBoundVP = NULL;
                     }
                     return;
-                } else {
+                }
+                else
+                {
                     mBoundFP = fragProg;
                 }
-            } else {
+            }
+            else
+            {
                 mDevice->SetPixelShader(NULL);
             }
         }
 
         void Adapter::UnbindPass()
         {
-            if ( cgIsProgram(mBoundVP) )
+            if (cgIsProgram(mBoundVP))
             {
                 cgD3D9UnbindProgram(mBoundVP);
             }
 
-            if ( cgIsProgram(mBoundFP) )
+            if (cgIsProgram(mBoundFP))
             {
                 cgD3D9UnbindProgram(mBoundFP);
             }
@@ -302,14 +328,16 @@ namespace VoodooShader
             this->mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
             this->mDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
-            if ( !vertexData )
+            if (!vertexData)
             {
                 HRESULT hr = this->mDevice->BeginScene();
-                if ( SUCCEEDED(hr) )
+                if (SUCCEEDED(hr))
                 {
-                    this->mDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2); 
+                    this->mDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
                     this->mDevice->EndScene();
-                } else {
+                }
+                else
+                {
                     mCore->Log
                     (
                         LL_Info,
@@ -317,12 +345,14 @@ namespace VoodooShader
                         "Failed to draw quad."
                     );
                 }
-            } else {
+            }
+            else
+            {
                 HRESULT hr = this->mDevice->BeginScene();
-                if ( SUCCEEDED(hr) )
+                if (SUCCEEDED(hr))
                 {
                     hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
-                    if ( !SUCCEEDED(hr) )
+                    if (!SUCCEEDED(hr))
                     {
                         this->mCore->Log
                         (
@@ -349,7 +379,7 @@ namespace VoodooShader
 
         void Adapter::ApplyParameter(ParameterRef param)
         {
-            switch ( Converter::ToParameterCategory(param->GetType()) )
+            switch (Converter::ToParameterCategory(param->GetType()))
             {
             case PC_Float:
                 cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
@@ -371,7 +401,7 @@ namespace VoodooShader
 
         bool Adapter::ConnectTexture(ParameterRef param, TextureRef texture)
         {
-            if ( Converter::ToParameterCategory(param->GetType()) == PC_Sampler )
+            if (Converter::ToParameterCategory(param->GetType()) == PC_Sampler)
             {
                 param->Set(texture);
 
@@ -386,25 +416,29 @@ namespace VoodooShader
                     texture->Name().c_str(), param->Name().c_str()
                 );
                 return true;
-            } else {
+            }
+            else
+            {
                 Throw(VOODOO_DX89_NAME, "Invalid binding attempt, parameter is not a sampler.\n", this->mCore);
                 return false;
             }
         }
 
-        TextureRef Adapter::CreateTexture(std::string name, size_t width, size_t height, size_t depth, 
-            bool mipmaps, TextureFormat format)
+        TextureRef Adapter::CreateTexture(std::string name, size_t width, size_t height, size_t depth,
+                                          bool mipmaps, TextureFormat format)
         {
             IDirect3DTexture9 * tex = NULL;
             D3DFORMAT fmt = DX89_Converter::ToD3DFormat(format);
 
-            HRESULT hr = mDevice->CreateTexture(width, height, depth, 
-                D3DUSAGE_RENDERTARGET, fmt, D3DPOOL_DEFAULT, &tex, NULL);
-            if ( SUCCEEDED(hr) )
+            HRESULT hr = mDevice->CreateTexture(width, height, depth,
+                                                D3DUSAGE_RENDERTARGET, fmt, D3DPOOL_DEFAULT, &tex, NULL);
+            if (SUCCEEDED(hr))
             {
                 TextureRef texRef = mCore->CreateTexture(name, reinterpret_cast<void*>(tex));
                 return texRef;
-            } else {
+            }
+            else
+            {
                 const char * error = cgD3D9TranslateHRESULT(hr);
                 mCore->Log
                 (
@@ -421,7 +455,7 @@ namespace VoodooShader
         {
             Core * actualCore = reinterpret_cast<Core*>(core);
             actualCore->Log("Voodoo DX89: Cg error: %s\n",
-                cgD3D9TranslateCGerror(error));
+                            cgD3D9TranslateCGerror(error));
         }
     }
 }

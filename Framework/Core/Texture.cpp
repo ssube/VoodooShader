@@ -3,7 +3,7 @@
 namespace VoodooShader
 {
     Texture::Texture(String name, void * texture)
-        : m_Name(name), m_Data(texture)
+            : m_Name(name), m_Data(texture)
     { }
 
     Texture::~Texture()

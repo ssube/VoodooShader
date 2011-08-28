@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -33,19 +33,19 @@ namespace VoodooShader
      */
 
     /**
-     * Contains a set of passes, designed to be used sequentially to create a 
+     * Contains a set of passes, designed to be used sequentially to create a
      * shader effect. Typically, a single technique will be used, although
      * shaders may contain multiple techniques. Each technique may contain a
      * number of passes and some technique-level metadata.
-     * 
+     *
      * @note    All passes in a valid technique are guaranteed to be valid.
-     * 
+     *
      * @warning While a Shader may contain a number of Techniques, not all
      *          are guaranteed to be valid. Techniques are typically validated
-     *          when the Shader is created and loaded. 
+     *          when the Shader is created and loaded.
      */
     class Technique
-        : public IObject
+                : public IObject
     {
     public:
         static TechniqueRef Create(ShaderRef parent, CGtechnique cgTech);
@@ -102,7 +102,7 @@ namespace VoodooShader
 
         /**
          * Retrieve the underlying Cg technique.
-         * 
+         *
          * @return A pointer to the Cg technique.
          */
         virtual CGtechnique GetCgTechnique();
@@ -110,12 +110,12 @@ namespace VoodooShader
     private:
         Technique
         (
-            _In_ TechniqueRef & self, 
-            _In_ ShaderRef parent, 
+            _In_ TechniqueRef & self,
+            _In_ ShaderRef parent,
             _In_ CGtechnique cgTech
         );
 
-        void Link(TechniquePtr self);
+        void Link(TechniqueRef self);
 
         String m_Name;
         Core * m_Core;

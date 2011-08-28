@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -41,26 +41,30 @@ namespace VoodooShader
 
         const char * API_ClassInfo(_In_ int number)
         {
-            if ( number == 0 )
+            if (number == 0)
             {
                 return "EHHookManager";
-            } else {
+            }
+            else
+            {
                 return NULL;
             }
         }
 
         IObject * API_ClassCreate(_In_ int number, _In_ Core * core)
         {
-            if ( number == 0 )
+            if (number == 0)
             {
                 return new EasyHook::HookManager(core);
-            } else {
+            }
+            else
+            {
                 return NULL;
             }
         }
 
         HookManager::HookManager(Core * core)
-            : m_Core(core)
+                : m_Core(core)
         {
             m_Hooks.clear();
 
@@ -97,19 +101,19 @@ namespace VoodooShader
         {
             HookMap::iterator hook = m_Hooks.find(name);
 
-            if ( hook != m_Hooks.end() )
+            if (hook != m_Hooks.end())
             {
                 Throw
                 (
-                    VOODOO_HOOK_NAME, 
-                    "Attempted to create a hook with a duplicate name.", 
+                    VOODOO_HOOK_NAME,
+                    "Attempted to create a hook with a duplicate name.",
                     m_Core
                 );
             }
 
             m_Core->GetLogger()->Log
             (
-                LL_Debug, 
+                LL_Debug,
                 VOODOO_HOOK_NAME,
                 "Creating hook %s. Redirecting function %p to %p.",
                 name.c_str(), src, dest
@@ -119,7 +123,7 @@ namespace VoodooShader
 
             DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
 
-            if ( ( result != 0 ) || ( hookHandle == NULL ) )
+            if ((result != 0) || (hookHandle == NULL))
             {
                 m_Core->GetLogger()->Log
                 (
@@ -130,7 +134,9 @@ namespace VoodooShader
                 );
 
                 return false;
-            } else {
+            }
+            else
+            {
                 LhSetInclusiveACL(m_ThreadIDs, m_ThreadCount, hookHandle);
 
                 m_Hooks[name] = hookHandle;
@@ -151,14 +157,14 @@ namespace VoodooShader
                 name.c_str()
             );
 
-            if ( hook != m_Hooks.end() )
+            if (hook != m_Hooks.end())
             {
                 TRACED_HOOK_HANDLE tracedHandle = (TRACED_HOOK_HANDLE)hook->second;
 
                 DWORD result = LhUninstallHook(tracedHandle);
                 delete tracedHandle;
 
-                if ( result != 0 )
+                if (result != 0)
                 {
                     m_Core->GetLogger()->Log
                     (
@@ -169,16 +175,20 @@ namespace VoodooShader
                     );
 
                     return true;
-                } else {
+                }
+                else
+                {
                     m_Hooks.erase(hook);
 
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 Throw
                 (
                     VOODOO_HOOK_NAME,
-                    "Trying to remove hook that does not exist.", 
+                    "Trying to remove hook that does not exist.",
                     m_Core
                 );
             }

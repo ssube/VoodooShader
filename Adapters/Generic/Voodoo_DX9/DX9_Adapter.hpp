@@ -17,7 +17,7 @@ namespace VoodooShader
         LPDIRECT3DVERTEXBUFFER9 FSQuadVerts = NULL;
 
         class VOODOO_API_DX9 Adapter
-            : VoodooShader::Adapter
+                    : VoodooShader::Adapter
         {
 
         public:
@@ -35,8 +35,8 @@ namespace VoodooShader
             void ApplyParameter(ParameterRef param);
 
             bool ConnectTexture(ParameterRef param, TextureRef texture);
-            TextureRef CreateTexture(std::string name, size_t width, size_t height, size_t depth, 
-                bool mipmaps, TextureFormat format);
+            TextureRef CreateTexture(std::string name, size_t width, size_t height, size_t depth,
+                                     bool mipmaps, TextureFormat format);
 
             void HandleError(CGcontext context, CGerror error, void * core);
 

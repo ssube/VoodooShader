@@ -10,7 +10,7 @@
 namespace VoodooShader
 {
     Parser::Parser(_In_ Core * core)
-        : m_Core(core)
+            : m_Core(core)
     {    }
 
     Parser::~Parser()
@@ -35,26 +35,30 @@ namespace VoodooShader
     void Parser::Add(_In_ String name, _In_ String value, _In_ VariableType Type)
     {
         ILoggerRef logger = m_Core->GetLogger();
-        if ( logger.get() )
+        if (logger.get())
         {
             logger->Log(LL_Debug, VOODOO_CORE_NAME, "Adding variable \"%s\" with value \"%s\".", name.c_str(), value.c_str());
         }
 
         String finalname = this->Parse(name, PF_VarName);
 
-        if ( Type == VT_System )
+        if (Type == VT_System)
         {
             Dictionary::iterator varIter = m_SysVariables.find(finalname);
-            if ( varIter == m_SysVariables.end() )
+            if (varIter == m_SysVariables.end())
             {
                 m_SysVariables[finalname] = value;
-            } else {
-                if ( logger.get() )
+            }
+            else
+            {
+                if (logger.get())
                 {
                     logger->Log(LL_Warning, VOODOO_CORE_NAME, "Unable to add duplicate system variable \"%s\".", finalname.c_str());
                 }
             }
-        } else {
+        }
+        else
+        {
             m_Variables[finalname] = value;
         }
     }
@@ -62,7 +66,7 @@ namespace VoodooShader
     void Parser::Remove(_In_ String name)
     {
         ILoggerRef logger = m_Core->GetLogger();
-        if ( logger.get() )
+        if (logger.get())
         {
             m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
         }
@@ -71,7 +75,7 @@ namespace VoodooShader
 
         Dictionary::iterator varIter = m_Variables.find(finalname);
 
-        if ( varIter != m_Variables.end() )
+        if (varIter != m_Variables.end())
         {
             m_Variables.erase(varIter);
         }
@@ -89,12 +93,12 @@ namespace VoodooShader
         using namespace std;
 
         ILoggerRef logger = m_Core->GetLogger();
-        if ( logger.get() )
+        if (logger.get())
         {
             m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
         }
 
-        if ( depth > Parser::VarMaxDepth || input.length() < 3 )
+        if (depth > Parser::VarMaxDepth || input.length() < 3)
         {
             return input;
         }
@@ -104,28 +108,28 @@ namespace VoodooShader
 
         // Variable parsing loop
         bool loop = true;
-        while ( loop )
+        while (loop)
         {
             const size_t itlen = iteration.length();
-            if ( itlen < 3 )
+            if (itlen < 3)
             {
-                // Stop parsing if the string is too small to contain variables 
+                // Stop parsing if the string is too small to contain variables
                 // (this should never be hit the first loop)
                 break;
             }
 
             size_t endpos = iteration.find_first_of(Parser::VarDelimEnd);
-            if ( endpos == string::npos )
+            if (endpos == string::npos)
             {
                 // Stop parsing if no closing delimiter is found
                 break;
             }
-            
+
             String varname = iteration.substr(endpos);
             size_t startpos = iteration.find_last_of(Parser::VarDelimStart);
-            if ( startpos == String::npos ||  
-                 startpos == 0 || 
-                 iteration[startpos-1] != Parser::VarDelimPre 
+            if (startpos == String::npos ||
+                    startpos == 0 ||
+                    iteration[startpos-1] != Parser::VarDelimPre
                )
             {
                 // Stop parsing if no opening sequence is found, or there is no room for one
@@ -134,12 +138,12 @@ namespace VoodooShader
 
             varname = varname.substr(startpos + 1);
 
-            if ( varname.length() == 0 )
+            if (varname.length() == 0)
             {
                 // Erase the variable sequence if it is the empty variable and restart the loop
                 stringstream output;
                 output << iteration.substr(0, startpos - 1);
-                if ( endpos < itlen )
+                if (endpos < itlen)
                 {
                     output << iteration.substr(endpos + 1);
                 }
@@ -149,7 +153,7 @@ namespace VoodooShader
 
             // Handle state variables
             size_t statepos = varname.find(':');
-            if ( statepos != String::npos )
+            if (statepos != String::npos)
             {
                 // State set, handle
                 String newvalue = varname.substr(statepos + 1);
@@ -171,11 +175,13 @@ namespace VoodooShader
             bool supress = false;
             bool parse = true;
             // The length of varname is > 0, guaranteed in line 134
-            if ( varname[0] == '?' )
+            if (varname[0] == '?')
             {
                 supress = true;
                 varname = varname.substr(1);
-            } else if ( varname[0] == '!' ) {
+            }
+            else if (varname[0] == '!')
+            {
                 parse = false;
                 varname = varname.substr(1);
             }
@@ -188,30 +194,38 @@ namespace VoodooShader
             String varvalue;
 
             Dictionary::iterator variter = m_SysVariables.find(varname);
-            if ( variter != m_SysVariables.end() )
+            if (variter != m_SysVariables.end())
             {
                 varvalue = variter->second;
-            } else {
+            }
+            else
+            {
                 variter = state.find(varname);
-                if ( variter != state.end() )
+                if (variter != state.end())
                 {
                     varvalue = variter->second;
-                } else {
+                }
+                else
+                {
                     variter = m_Variables.find(varname);
-                    if ( variter != m_Variables.end() )
+                    if (variter != m_Variables.end())
                     {
                         varvalue = variter->second;
-                    } else {
+                    }
+                    else
+                    {
                         // Unrecognized variable, try env
                         size_t reqSize = 0;
                         getenv_s(&reqSize, NULL, 0, varname.c_str());
-                        if ( reqSize != 0 )
+                        if (reqSize != 0)
                         {
                             char * buffer = new char[reqSize];
                             getenv_s(&reqSize, buffer, reqSize, varname.c_str());
                             varvalue = buffer;
                             delete[] buffer;
-                        } else {
+                        }
+                        else
+                        {
                             foundvar = false;
                         }
                     }
@@ -220,10 +234,12 @@ namespace VoodooShader
 
             stringstream output;
             output << iteration.substr(0, startpos - 1);
-            if ( parse && varvalue.length() > 0 )
+            if (parse && varvalue.length() > 0)
             {
                 output << this->ParseStringRaw(varvalue, flags, ++depth, state);
-            } else if ( !foundvar && !supress ) {
+            }
+            else if (!foundvar && !supress)
+            {
                 output << "--badvar:" << varname << "--";
             }
             output << iteration.substr(endpos + 1);
@@ -232,24 +248,28 @@ namespace VoodooShader
         }
 
         // Handle slash replacement
-        if ( flags == PF_None )
+        if (flags == PF_None)
         {
             return iteration;
-        } else if ( flags == PF_VarName ) {
-            return this->ToLower(iteration);
-        } 
-        
-        if ( flags & (PF_SingleSlash | PF_SlashOnly|PF_BackslashOnly) )
+        }
+        else if (flags == PF_VarName)
         {
-            bool singleslash = ( flags & PF_SingleSlash );
+            return this->ToLower(iteration);
+        }
+
+        if (flags & (PF_SingleSlash | PF_SlashOnly|PF_BackslashOnly))
+        {
+            bool singleslash = (flags & PF_SingleSlash);
             bool prevslash = false;
             bool slashrewrite = false;
             char slashchar = ' ';
-            if ( flags & PF_SlashOnly )
+            if (flags & PF_SlashOnly)
             {
                 slashrewrite = true;
                 slashchar = '/';
-            } else if ( flags & PF_BackslashOnly ) {
+            }
+            else if (flags & PF_BackslashOnly)
+            {
                 slashrewrite = true;
                 slashchar = '\\';
             }
@@ -257,26 +277,28 @@ namespace VoodooShader
             stringstream output;
             size_t total = iteration.length();
             size_t cur = 0;
-            while ( cur < total )
+            while (cur < total)
             {
                 char inchar = iteration[cur];
                 ++cur;
 
-                if ( inchar == '/' || inchar == '\\' )
+                if (inchar == '/' || inchar == '\\')
                 {
-                    if ( slashrewrite )
+                    if (slashrewrite)
                     {
                         inchar = slashchar;
                     }
 
-                    if ( singleslash && prevslash )
+                    if (singleslash && prevslash)
                     {
                         continue;
                     }
 
                     prevslash = true;
                     output << inchar;
-                } else {
+                }
+                else
+                {
                     prevslash = false;
                     output << inchar;
                 }
@@ -285,14 +307,16 @@ namespace VoodooShader
             iteration = output.str();
         }
 
-        if ( flags & PF_Lowercase )
+        if (flags & PF_Lowercase)
         {
             iteration = this->ToLower(iteration);
-        } else if ( flags & PF_Uppercase ) {
+        }
+        else if (flags & PF_Uppercase)
+        {
             iteration = this->ToUpper(iteration);
         }
 
-        if ( logger.get() )
+        if (logger.get())
         {
             logger->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
         }

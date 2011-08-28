@@ -2,13 +2,16 @@
 #Voodoo-specific ignores
 [Bb]in
 [Bb]uild
-[Dd]ocs/doxygen
+[Dd]ocs/html
 doxylog
 CodeAnalyst
 [Tt]emplate
 *~
 *.swp
 *.tmp
+*.orig
+*.chm
+*.ipch
 Analysis/Yasca/Yasca-Report-*.html
 Resources/Installers/Output/*
 [Dd]ependencies/*/*

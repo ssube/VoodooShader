@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -32,16 +32,16 @@ static HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
  * The core Voodoo wrapper class for D3D8 devices. This class is responsible for processing,
  * translating and handling most API calls. Due to this, it must be as optimized as possible
  * (considering the circumstances) and should contain only tested code.
- * 
+ *
  * @note The various IVoodoo3D8 interfaces provide an application-opaque wrapper that actually
  *          implements a Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the
- *          IVoodoo3D9 interface set should be used.         
+ *          IVoodoo3D9 interface set should be used.
  */
-class IVoodoo3DDevice8 
-    : public IDirect3DDevice8
+class IVoodoo3DDevice8
+            : public IDirect3DDevice8
 {
     /**
-    * A pointer to the true underlying IDirect3DDevice9 object wrapped by this IVoodoo interface.            
+    * A pointer to the true underlying IDirect3DDevice9 object wrapped by this IVoodoo interface.
     */
     IDirect3DDevice9 * mRealDevice;
 
@@ -57,10 +57,10 @@ class IVoodoo3DDevice8
 
 public:
     /**
-    * The default, public constructor for IVoodoo3D objects.            
+    * The default, public constructor for IVoodoo3D objects.
     */
     IVoodoo3DDevice8(IDirect3DDevice9 * realDevice)
-        : mRealDevice(realDevice)
+            : mRealDevice(realDevice)
     {
         VoodooLogger->Log
         (
@@ -96,11 +96,13 @@ public:
     {
         ULONG refCount = mRealDevice->Release();
 
-        if ( refCount == 0 )
+        if (refCount == 0)
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return refCount;
         }
     }
@@ -270,7 +272,7 @@ public:
             pCaps, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             memcpy(pCaps, &rCaps, sizeof(D3DCAPS8));
         }
@@ -385,10 +387,10 @@ public:
     )
     {
         HRESULT hr = mRealDevice->CreateAdditionalSwapChain
-        (
-            (D3DPRESENT_PARAMETERS*)pPresentationParameters, 
-            (IDirect3DSwapChain9**)pSwapChain
-        );
+                     (
+                         (D3DPRESENT_PARAMETERS*)pPresentationParameters,
+                         (IDirect3DSwapChain9**)pSwapChain
+                     );
 
         VoodooLogger->Log
         (
@@ -459,7 +461,7 @@ public:
             BackBuffer, Type, *ppBackBuffer, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wBackbuffer = new IVoodoo3DSurface8(this, rBackbuffer);
             (*ppBackBuffer) = (IDirect3DSurface8*)wBackbuffer;
@@ -476,7 +478,7 @@ public:
         HRESULT hr = mRealDevice->GetRasterStatus(0, pRasterStatus);
 
         VoodooLogger->Log
-            (
+        (
             LL_Debug,
             VOODOO_DX89_NAME,
             "IVoodoo3DDevice8::GetRasterStatus(%p) == %d",
@@ -525,7 +527,7 @@ public:
 
     /**
      * Creates a texture in the IVoodoo runtime. The new texture must be registered with the core
-     * and, for shader purposes, we should attempt to create it as a render-target.            
+     * and, for shader purposes, we should attempt to create it as a render-target.
      */
     STDMETHOD(CreateTexture)
     (
@@ -544,24 +546,24 @@ public:
         // If not a render-target, attempt to create it as one
         bool rtt = true;
 
-        if ( !( Usage & D3DUSAGE_RENDERTARGET ) )
+        if (!(Usage & D3DUSAGE_RENDERTARGET))
         {
             hr = mRealDevice->CreateTexture
-            (
-                Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format, 
-                Pool, &rTexture, NULL
-            );
+                 (
+                     Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format,
+                     Pool, &rTexture, NULL
+                 );
         }
 
         // That failed, create as a standard texture
-        if ( FAILED(hr) )
+        if (FAILED(hr))
         {
             rtt = false;
             hr = mRealDevice->CreateTexture
-            (
-                Width, Height, Levels, Usage, Format, 
-                Pool, &rTexture, NULL
-            );
+                 (
+                     Width, Height, Levels, Usage, Format,
+                     Pool, &rTexture, NULL
+                 );
         }
 
         VoodooLogger->Log
@@ -573,7 +575,7 @@ public:
         );
 
         // One succeeded, the texture exists. We need to register it with the Voodoo core.
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             //! @todo Set up the core texture registration for Voodoo DX8.9 and track filenames somehow
             IVoodoo3DTexture8 * wTexture = new IVoodoo3DTexture8(this, rTexture);
@@ -598,10 +600,10 @@ public:
     {
         IDirect3DVolumeTexture9 * rTexture;
         HRESULT hr = mRealDevice->CreateVolumeTexture
-        (
-            Width, Height, Depth, Levels, Usage, Format,
-            Pool, &rTexture, NULL
-        );
+                     (
+                         Width, Height, Depth, Levels, Usage, Format,
+                         Pool, &rTexture, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -612,7 +614,7 @@ public:
         );
 
         //! @todo Set up the core volume texture registration for Voodoo DX8.9
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DTexture8 * wTexture = new IVoodoo3DTexture8(this, (IDirect3DTexture9*)rTexture);
             (*ppVolumeTexture) = (IDirect3DCubeTexture8*)wTexture;
@@ -633,10 +635,10 @@ public:
     {
         IDirect3DCubeTexture9 * rTexture;
         HRESULT hr = mRealDevice->CreateCubeTexture
-        (
-            EdgeLength, Levels, Usage, Format, Pool, 
-            &rTexture, NULL
-        );
+                     (
+                         EdgeLength, Levels, Usage, Format, Pool,
+                         &rTexture, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -646,7 +648,7 @@ public:
             EdgeLength, Levels, Usage, Format, Pool, *ppCubeTexture, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DTexture8 * wTexture = new IVoodoo3DTexture8(this, (IDirect3DTexture9*)rTexture);
             (*ppCubeTexture) = (IDirect3DCubeTexture8*)wTexture;
@@ -666,9 +668,9 @@ public:
     )
     {
         HRESULT hr = mRealDevice->CreateVertexBuffer
-        (
-            Length, Usage, FVF, Pool, (IDirect3DVertexBuffer9**)ppVertexBuffer, NULL
-        );
+                     (
+                         Length, Usage, FVF, Pool, (IDirect3DVertexBuffer9**)ppVertexBuffer, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -692,9 +694,9 @@ public:
     )
     {
         HRESULT hr = mRealDevice->CreateIndexBuffer
-        (
-            Length, Usage, Format, Pool, (IDirect3DIndexBuffer9**)ppIndexBuffer, NULL
-        );
+                     (
+                         Length, Usage, Format, Pool, (IDirect3DIndexBuffer9**)ppIndexBuffer, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -711,8 +713,8 @@ public:
     /**
      * This function creates a stand-alone render target surface in the original D3D8 and 9 setups.
      * For Voodoo's purposes, this should create a render target texture if at all possible, then
-     * retrieve the surface from that texture. 
-     * 
+     * retrieve the surface from that texture.
+     *
      * @todo Find a way to force CreateRenderTarget to make RT textures and find a way to name them.
      */
     STDMETHOD(CreateRenderTarget)
@@ -727,9 +729,9 @@ public:
     {
         IDirect3DSurface9 * rSurface;
         HRESULT hr = mRealDevice->CreateRenderTarget
-        (
-            Width, Height, Format, MultiSample, 0, Lockable, &rSurface, NULL
-        );
+                     (
+                         Width, Height, Format, MultiSample, 0, Lockable, &rSurface, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -739,7 +741,7 @@ public:
             Width, Height, Format, MultiSample, Lockable, *ppSurface, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wSurface = new IVoodoo3DSurface8(this, rSurface);
             (*ppSurface) = (IDirect3DSurface8*)wSurface;
@@ -761,9 +763,9 @@ public:
         IDirect3DSurface9 * rSurface;
 
         HRESULT hr = mRealDevice->CreateDepthStencilSurface
-        (
-            Width, Height, Format, MultiSample, 0, 0, &rSurface, NULL
-        );
+                     (
+                         Width, Height, Format, MultiSample, 0, 0, &rSurface, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -773,7 +775,7 @@ public:
             Width, Height, Format, MultiSample, *ppSurface, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wSurface = new IVoodoo3DSurface8(this, rSurface);
             (*ppSurface) = (IDirect3DSurface8*)wSurface;
@@ -785,7 +787,7 @@ public:
     /**
      * Creates a D3D8 image surface, a sort of placeholder surface. Because D3D9 has no equivalent,
      * this is redirected to CreateOffscreenPlainSurface at some point.
-     * 
+     *
      * @warning This uses a different call than the D3D8 original, and may not perform exactly the
      *             same. <em>(non-standard behavior)</em>
      * @todo Test the pool these should be created in. May be default, managed or sysmem, not sure yet.
@@ -801,9 +803,9 @@ public:
         IDirect3DSurface9 * rSurface;
 
         HRESULT hr = mRealDevice->CreateOffscreenPlainSurface
-        (
-            Width, Height, Format, D3DPOOL_DEFAULT, &rSurface, NULL
-        );
+                     (
+                         Width, Height, Format, D3DPOOL_DEFAULT, &rSurface, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -813,7 +815,7 @@ public:
             Width, Height, Format, *ppSurface, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wSurface = new IVoodoo3DSurface8(this, rSurface);
             (*ppSurface) = (IDirect3DSurface8*)wSurface;
@@ -827,8 +829,8 @@ public:
      * D3D9, it instead requires each texture to be stretched separately. It is, however, possible
      * to translate the call as D3D8 applies some very specific restrictions, including a lack of
      * stretching (means the rectangles must be the same dimensions, but at different points) and
-     * the same format and surface properties.         
-     * 
+     * the same format and surface properties.
+     *
      * @warning For testing purposes, this only copies the first given rectangle. This is easy
      *             enough to fix, but I want to do more testing first. <em>(non-standard behavior)</em>
      * @todo Test and then make this perform identical to the D3D8 version.
@@ -846,9 +848,9 @@ public:
         IVoodoo3DSurface8 * wDest = (IVoodoo3DSurface8*)pDestinationSurface;
 
         HRESULT hr = mRealDevice->StretchRect
-        (
-            wSource->RealSurface(), pSourceRectsArray, 
-            wDest->RealSurface(), pSourceRectsArray, D3DTEXF_NONE);
+                     (
+                         wSource->RealSurface(), pSourceRectsArray,
+                         wDest->RealSurface(), pSourceRectsArray, D3DTEXF_NONE);
 
         VoodooLogger->Log
         (
@@ -872,20 +874,20 @@ public:
         IVoodoo3DTexture8 * wDest = (IVoodoo3DTexture8*)pDestinationTexture;
 
         HRESULT hr = mRealDevice->UpdateTexture
-        (
-            wSource->RealTexture(), wDest->RealTexture()
-        );
+                     (
+                         wSource->RealTexture(), wDest->RealTexture()
+                     );
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::UpdateTexture(%d, %d) == %d\n",
-        pSourceTexture, pDestinationTexture, hr);
+                          pSourceTexture, pDestinationTexture, hr);
 #endif
 
         return hr;
     }
 
     /**
-     * Retrieves the front-buffer surface from the D3D8 device. D3D9 has no equivalent call (kinda).            
+     * Retrieves the front-buffer surface from the D3D8 device. D3D9 has no equivalent call (kinda).
      */
     STDMETHOD(GetFrontBuffer)
     (
@@ -894,7 +896,7 @@ public:
     {
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetFrontBuffer(%d) == UNUSED\n",
-        pDestSurface);
+                          pDestSurface);
 #endif
 
         return DefaultErrorCode;
@@ -918,7 +920,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetRenderTarget(%d, %d) == %d\n",
-        pRenderTarget, pNewZStencil, hr);
+                          pRenderTarget, pNewZStencil, hr);
 #endif
 
         return hr;
@@ -934,10 +936,10 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetRenderTarget(%d) == %d\n",
-        *ppRenderTarget, hr);
+                          *ppRenderTarget, hr);
 #endif
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wRenderTarget = new IVoodoo3DSurface8(this, rRenderTarget);
             (*ppRenderTarget) = (IDirect3DSurface8*)wRenderTarget;
@@ -957,10 +959,10 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetDepthStencilSurface(%d) == %d\n",
-        *ppZStencilSurface, hr);
+                          *ppZStencilSurface, hr);
 #endif
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wZStencilSurface = new IVoodoo3DSurface8(this, rZStencilSurface);
             (*ppZStencilSurface) = (IDirect3DSurface8*)wZStencilSurface;
@@ -975,7 +977,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::EndScene() == %d\n",
-        hr);
+                          hr);
 #endif
 
         return hr;
@@ -991,7 +993,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetTransform(%d, %d) == %d\n",
-        State, pMatrix, hr);
+                          State, pMatrix, hr);
 #endif
 
         return hr;
@@ -1008,7 +1010,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetTransform(%d, %d) == %d\n",
-        State, pMatrix, hr);
+                          State, pMatrix, hr);
 #endif
 
         return hr;
@@ -1025,7 +1027,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::MultiplyTransform(%d, %d) == %d\n",
-        State, pMatrix, hr);
+                          State, pMatrix, hr);
 #endif
 
         return hr;
@@ -1041,7 +1043,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetViewport(%d) == %d\n",
-        pViewport, hr);
+                          pViewport, hr);
 #endif
 
         return hr;
@@ -1057,7 +1059,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetViewport(%d) == %d\n",
-        pViewport, hr);
+                          pViewport, hr);
 #endif
 
         return hr;
@@ -1073,7 +1075,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetMaterial(%d) == %d\n",
-        pMaterial, hr);
+                          pMaterial, hr);
 #endif
 
         return hr;
@@ -1089,7 +1091,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetMaterial(%d) == %d\n",
-        pMaterial, hr);
+                          pMaterial, hr);
 #endif
 
         return hr;
@@ -1106,7 +1108,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetLight(%d, %d) == %d\n",
-        Index, Light, hr);
+                          Index, Light, hr);
 #endif
 
         return hr;
@@ -1123,7 +1125,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetLight(%d, %d) == %d\n",
-        Index, Light, hr);
+                          Index, Light, hr);
 #endif
 
         return hr;
@@ -1140,7 +1142,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::LightEnable(%d, %d) == %d\n",
-        Index, Enable, hr);
+                          Index, Enable, hr);
 #endif
 
         return hr;
@@ -1157,7 +1159,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetLightEnable(%d, %d) == %d\n",
-        Index, pEnable, hr);
+                          Index, pEnable, hr);
 #endif
 
         return hr;
@@ -1174,7 +1176,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetClipPlane(%d, %d) == %d\n",
-        Index, pPlane, hr);
+                          Index, pPlane, hr);
 #endif
 
         return hr;
@@ -1191,7 +1193,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetClipPlane(%d, %d) == %d\n",
-        Index, pPlane, hr);
+                          Index, pPlane, hr);
 #endif
 
         return hr;
@@ -1208,7 +1210,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetRenderState(%d, %d) == %d\n",
-        State, Value, hr);
+                          State, Value, hr);
 #endif
 
         return hr;
@@ -1225,7 +1227,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetRenderState(%d, %d) == %d\n",
-        State, pValue, hr);
+                          State, pValue, hr);
 #endif
 
         return hr;
@@ -1233,7 +1235,7 @@ public:
 
     /**
      * Due to differences between the D3D8 and D3D9 APIs, this function is currently non-
-     * functional.            
+     * functional.
      */
     STDMETHOD(EndStateBlock)
     (
@@ -1242,7 +1244,7 @@ public:
     {
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::EndStateBlock(%d) == UNUSED\n",
-            pToken);
+                          pToken);
 #endif
 
         return DefaultErrorCode;
@@ -1250,10 +1252,10 @@ public:
         /*
         HRESULT hr = mRealDevice->EndStateBlock(pToken);
 
-#ifdef _DEBUG
+        #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::EndStateBlock(%d) == %d\n",
         pToken, hr);
-#endif
+        #endif
 
         return hr;
         */
@@ -1261,7 +1263,7 @@ public:
 
 
     /**
-     * This function does not exist in the D3D9 API.            
+     * This function does not exist in the D3D9 API.
      */
     STDMETHOD(DeleteStateBlock)
     (
@@ -1270,7 +1272,7 @@ public:
     {
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeleteStateBlock(%d) == UNUSED\n",
-            Token);
+                          Token);
 #endif
 
         return DefaultErrorCode;
@@ -1278,10 +1280,10 @@ public:
         /*
         HRESULT hr = mRealDevice->DeleteStateBlock(Token);
 
-#ifdef _DEBUG
+        #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeleteStateBlock(%d) == %d\n",
         Token, hr);
-#endif
+        #endif
 
         return hr;
         */
@@ -1290,7 +1292,7 @@ public:
 
     /**
     * Due to differences between the D3D8 and D3D9 APIs, this function is currently non-
-    * functional.            
+    * functional.
     */
     STDMETHOD(CreateStateBlock)
     (
@@ -1300,7 +1302,7 @@ public:
     {
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateStateBlock(%d, %d) == UNUSED\n",
-            Type, pToken);
+                          Type, pToken);
 #endif
 
         return DefaultErrorCode;
@@ -1308,10 +1310,10 @@ public:
         /*
         HRESULT hr = mRealDevice->CreateStateBlock(Type, pToken);
 
-#ifdef _DEBUG
+        #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateStateBlock(%d, %d) == %d\n",
         Type, pToken, hr);
-#endif
+        #endif
 
         return hr;
         */
@@ -1327,7 +1329,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetClipStatus(%d) == %d\n",
-        pClipStatus, hr);
+                          pClipStatus, hr);
 #endif
 
         return hr;
@@ -1343,7 +1345,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetClipStatus(%d) == %d\n",
-        pClipStatus, hr);
+                          pClipStatus, hr);
 #endif
 
         return hr;
@@ -1361,10 +1363,10 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetTexture(%d, %d) == %d\n",
-        Stage, *ppTexture, hr);
+                          Stage, *ppTexture, hr);
 #endif
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DTexture8 * wTexture = new IVoodoo3DTexture8(this, (IDirect3DTexture9*)rTexture);
             (*ppTexture) = (IDirect3DBaseTexture8*)wTexture;
@@ -1382,17 +1384,19 @@ public:
     {
         HRESULT hr = D3D_OK;
 
-        if ( pTexture )
+        if (pTexture)
         {
             IVoodoo3DTexture8 * wTexture = (IVoodoo3DTexture8*)pTexture;
             hr = mRealDevice->SetTexture(Stage, (IDirect3DBaseTexture9*)wTexture->RealTexture());
-        } else {
+        }
+        else
+        {
             hr = mRealDevice->SetTexture(Stage, NULL);
         }
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetTexture(%d, %d) == %d\n",
-        Stage, pTexture, hr);
+                          Stage, pTexture, hr);
 #endif
 
         return hr;
@@ -1410,7 +1414,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetTextureStageState(%d, %d, %d) == %d\n",
-        Stage, Type, pValue, hr);
+                          Stage, Type, pValue, hr);
 #endif
 
         return hr;
@@ -1428,7 +1432,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetTextureStageState(%d, %d, %d) == %d\n",
-        Stage, Type, Value, hr);
+                          Stage, Type, Value, hr);
 #endif
 
         return hr;
@@ -1444,14 +1448,14 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::ValidateDevice(%d) == %d\n",
-        *pNumPasses, hr);
+                          *pNumPasses, hr);
 #endif
 
         return hr;
     }
 
     /**
-     * No D3D9 equivalent.            
+     * No D3D9 equivalent.
      */
     STDMETHOD(GetInfo)
     (
@@ -1464,7 +1468,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetInfo(%d, %d, %d) == UNUSED\n",
-        DevInfoID, pDevInfoStruct, DevInfoStructSize);
+                          DevInfoID, pDevInfoStruct, DevInfoStructSize);
 #endif
 
         return DefaultErrorCode;
@@ -1480,7 +1484,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetPaletteEntries(%d, %d) == %d\n",
-        PaletteNumber, pEntries, hr);
+                          PaletteNumber, pEntries, hr);
 #endif
 
         return hr;
@@ -1496,7 +1500,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetPaletteEntries(%d, %d) == %d\n",
-        PaletteNumber, pEntries, hr);
+                          PaletteNumber, pEntries, hr);
 #endif
 
         return hr;
@@ -1512,7 +1516,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetCurrentTexturePalette(%d) == %d\n",
-        PaletteNumber, hr);
+                          PaletteNumber, hr);
 #endif
 
         return hr;
@@ -1528,7 +1532,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetCurrentTexturePalette(%d) == %d\n",
-        *PaletteNumber, hr);
+                          *PaletteNumber, hr);
 #endif
 
         return hr;
@@ -1546,8 +1550,8 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawPrimitive(%d, %d, %d) == %d\n",
-        PrimitiveType, StartVertex, PrimitiveCount, 
-        hr);
+                          PrimitiveType, StartVertex, PrimitiveCount,
+                          hr);
 #endif
 
         return hr;
@@ -1567,8 +1571,8 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawIndexedPrimitive(%d, %d, %d, %d, %d) == %d\n",
-        PrimitiveType, minIndex, NumVertices, startIndex, primCount, 
-        hr);
+                          PrimitiveType, minIndex, NumVertices, startIndex, primCount,
+                          hr);
 #endif
 
         return hr;
@@ -1586,7 +1590,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawPrimitiveUP(%d, %d, %d, %d) == %d\n",
-        PrimitiveType, PrimitiveCount, pVertexStreamZeroData, VertexStreamZeroStride, hr);
+                          PrimitiveType, PrimitiveCount, pVertexStreamZeroData, VertexStreamZeroStride, hr);
 #endif
 
         return hr;
@@ -1605,16 +1609,16 @@ public:
     )
     {
         HRESULT hr = mRealDevice->DrawIndexedPrimitiveUP
-        (
-            PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, pIndexData, 
-            IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride
-        );
+                     (
+                         PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, pIndexData,
+                         IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride
+                     );
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawIndexedPrimitiveUP(%d, %d, %d, %d, %d, %d, %d, %d) == %d\n",
-        PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, 
-        pIndexData, IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride, 
-        hr);
+                          PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount,
+                          pIndexData, IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride,
+                          hr);
 #endif
 
         return hr;
@@ -1631,14 +1635,14 @@ public:
     )
     {
         HRESULT hr = mRealDevice->ProcessVertices
-        (
-            SrcStartIndex, DestIndex, VertexCount,(IDirect3DVertexBuffer9*)pDestBuffer, NULL, Flags
-        );
+                     (
+                         SrcStartIndex, DestIndex, VertexCount,(IDirect3DVertexBuffer9*)pDestBuffer, NULL, Flags
+                     );
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::ProcessVertices(%d, %d, %d, %d, %d) == %d\n",
-        SrcStartIndex, DestIndex, VertexCount, pDestBuffer, Flags, 
-        hr);
+                          SrcStartIndex, DestIndex, VertexCount, pDestBuffer, Flags,
+                          hr);
 #endif
 
         return hr;
@@ -1653,17 +1657,17 @@ public:
         DWORD Usage
     )
     {
-        //! @todo Set this up to keep a running log of shaders (probably a 
+        //! @todo Set this up to keep a running log of shaders (probably a
         //!            std::set<IDirect3DVertexShader9**>).
         HRESULT hr = mRealDevice->CreateVertexShader(pFunction, (IDirect3DVertexShader9**)pHandle);
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreateVertexShader(%d, %d, %d, %d) == %d\n",
-        pDeclaration, pFunction, pHandle, Usage, 
-        hr);
+                          pDeclaration, pFunction, pHandle, Usage,
+                          hr);
 #endif
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             mVertexShaders.insert(*pHandle);
         }
@@ -1680,17 +1684,19 @@ public:
         //! @todo Test the shader setup
         HRESULT hr = D3D_OK;
 
-        if ( mVertexShaders.find(Handle) == mVertexShaders.end() )
+        if (mVertexShaders.find(Handle) == mVertexShaders.end())
         {
             // Not a shader, FVF
             hr = mRealDevice->SetFVF(Handle);
-        } else {
+        }
+        else
+        {
             hr = mRealDevice->SetVertexShader((IDirect3DVertexShader9*)Handle);
         }
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetVertexShader(%d) == %d\n",
-        Handle, hr);
+                          Handle, hr);
 #endif
 
         return hr;
@@ -1707,14 +1713,14 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShader(%d) == D3D_OK\n",
-        pHandle);
+                          pHandle);
 #endif
 
         return D3D_OK;
     }
 
     /**
-     * D3D9 has no equivalent function.            
+     * D3D9 has no equivalent function.
      */
     STDMETHOD(DeleteVertexShader)
     (
@@ -1723,16 +1729,18 @@ public:
     {
         HRESULT hr = D3D_OK; //mRealDevice->DeleteVertexShader(DWORD Handle);
         std::set<DWORD>::iterator vShader = mVertexShaders.find(Handle);
-        if ( vShader != mVertexShaders.end() )
+        if (vShader != mVertexShaders.end())
         {
             mVertexShaders.erase(vShader);
-        } else {
+        }
+        else
+        {
             hr = D3DERR_INVALIDCALL;
         }
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeleteVertexShader(%d) == %d\n",
-        Handle, hr);
+                          Handle, hr);
 #endif
 
         return D3D_OK;
@@ -1749,7 +1757,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetVertexShaderConstant(%d, %d, %d) == %d\n",
-        Register, pConstantData, ConstantCount, hr);
+                          Register, pConstantData, ConstantCount, hr);
 #endif
 
         return hr;
@@ -1766,7 +1774,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShaderConstant(%d, %d, %d) == %d\n",
-        Register, pConstantData, ConstantCount, hr);
+                          Register, pConstantData, ConstantCount, hr);
 #endif
 
         return hr;
@@ -1782,7 +1790,7 @@ public:
     {
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShaderDeclaration(%d, %d, %d) == UNUSED\n",
-        Handle, pData, pSizeOfData);
+                          Handle, pData, pSizeOfData);
 #endif
 
         return DefaultErrorCode;
@@ -1800,7 +1808,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetVertexShaderFunction(%d, %d, %d) == UNUSED\n",
-        Handle, pData, pSizeOfData);
+                          Handle, pData, pSizeOfData);
 #endif
 
         return DefaultErrorCode;
@@ -1818,7 +1826,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetStreamSource(%d, %d, %d) == %d\n",
-        StreamNumber, pStreamData, Stride, hr);
+                          StreamNumber, pStreamData, Stride, hr);
 #endif
 
         return hr;
@@ -1837,7 +1845,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetStreamSource(%d, %d, %d) == %d\n",
-        StreamNumber, *ppStreamData, *pStride, hr);
+                          StreamNumber, *ppStreamData, *pStride, hr);
 #endif
 
         return hr;
@@ -1855,7 +1863,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetIndices(%d, %d) == %d\n",
-        pIndexData, BaseVertexIndex, hr);
+                          pIndexData, BaseVertexIndex, hr);
 #endif
 
         return hr;
@@ -1873,7 +1881,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetIndices(%d, %d) == %d\n",
-        *ppIndexData, *pBaseVertexIndex, hr);
+                          *ppIndexData, *pBaseVertexIndex, hr);
 #endif
 
         return hr;
@@ -1890,10 +1898,10 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::CreatePixelShader(%d, %d) == %d\n",
-        pFunction, *pHandle, hr);
+                          pFunction, *pHandle, hr);
 #endif
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             mPixelShaders.insert(*pHandle);
         }
@@ -1910,20 +1918,22 @@ public:
         //! @todo Test the shader setup
         HRESULT hr = D3D_OK;
 
-        if ( mPixelShaders.find(Handle) == mPixelShaders.end() )
+        if (mPixelShaders.find(Handle) == mPixelShaders.end())
         {
             //! @todo Check if this is write, D3D8 docs have nothing
             hr = mRealDevice->SetPixelShader(NULL);
-        } else {
+        }
+        else
+        {
             hr = mRealDevice->SetPixelShader((IDirect3DPixelShader9*)Handle);
         }
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetPixelShader(%d) == %d\n",
-            Handle, hr);
+                          Handle, hr);
 #endif
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             mCurrentPixelShader = Handle;
         }
@@ -1940,7 +1950,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetPixelShader(%d) == D3D_OK\n",
-        *pHandle);
+                          *pHandle);
 #endif
 
         return D3D_OK;
@@ -1953,16 +1963,18 @@ public:
     {
         HRESULT hr = D3D_OK; //mRealDevice->DeletePixelShader(DWORD Handle);
         std::set<DWORD>::iterator pShader = mPixelShaders.find(Handle);
-        if ( pShader != mPixelShaders.end() )
+        if (pShader != mPixelShaders.end())
         {
             mPixelShaders.erase(pShader);
-        } else {
+        }
+        else
+        {
             //hr = D3DERR_INVALIDCALL;
         }
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeletePixelShader(%d) == %d\n",
-        Handle, hr);
+                          Handle, hr);
 #endif
 
         return hr;
@@ -1980,7 +1992,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetPixelShaderConstant(%d, %d, %d) == %d\n",
-        Register, pConstantData, ConstantCount, hr);
+                          Register, pConstantData, ConstantCount, hr);
 #endif
 
         return hr;
@@ -1998,7 +2010,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetPixelShaderConstant(%d, %d, %d) == %d\n",
-        Register, pConstantData, ConstantCount, hr);
+                          Register, pConstantData, ConstantCount, hr);
 #endif
 
         return hr;
@@ -2016,7 +2028,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::GetPixelShaderFunction(%d, %d, %d) == UNUSED\n",
-        Handle, pData, pSizeOfData);
+                          Handle, pData, pSizeOfData);
 #endif
 
         return DefaultErrorCode;
@@ -2034,7 +2046,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawRectPatch(%d, %d, %d) == %d\n",
-        Handle, pNumSegs, pRectPatchInfo, hr);
+                          Handle, pNumSegs, pRectPatchInfo, hr);
 #endif
 
         return hr;
@@ -2052,7 +2064,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DrawTriPatch(%d, %d, %d) == %d\n",
-        Handle, pNumSegs, pTriPatchInfo, hr);
+                          Handle, pNumSegs, pTriPatchInfo, hr);
 #endif
 
         return hr;
@@ -2068,7 +2080,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::DeletePatch(%d) == %d\n",
-        Handle, hr);
+                          Handle, hr);
 #endif
 
         return hr;

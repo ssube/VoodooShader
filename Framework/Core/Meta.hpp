@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -74,7 +74,7 @@ namespace VoodooShader
      * These core classes are available to all Voodoo modules and addons, but use requires
      * linking against the core library. These provide most of the basic functions needed by
      * the framework.
-     * 
+     *
      * @addtogroup VoodooCore Voodoo/Core
      * @{
      */
@@ -90,7 +90,7 @@ namespace VoodooShader
     class Texture;
     class Shader;
 
-    /**  
+    /**
      * Interface classes, providing standard access to various dynamic
      * objects. These are not implemented within the core but are instead
      * dynamically linked at runtime. All are derived from IObject.
@@ -102,7 +102,7 @@ namespace VoodooShader
     class IHookManager;
     class IImage;
     class ILogger;
-    
+
     /**
      * Generic structs for passing simple data sets. Structs have no ctor
      * or dtor, nor methods; they should be created with the <code>{m,n,o}</code>
@@ -174,7 +174,7 @@ namespace VoodooShader
 
     // Module management types
     typedef std::map<String, ModuleRef>         ModuleMap; /*!< Provides a map of modules, keyed by name. */
-    typedef std::pair<ModulePtr, int>           ClassID;   /*!< Defines the necessary data to create 
+    typedef std::pair<ModulePtr, int>           ClassID;   /*!< Defines the necessary data to create
                                                                 a class (source module and class number). */
     typedef std::map<String, ClassID>           ClassMap;  /*!< Provides a map of classes, keyed by name. */
 
@@ -183,10 +183,10 @@ namespace VoodooShader
     typedef std::map<String, String>            Dictionary;
 
     /**
-     * Texture formats for use by @ref VoodooShader::Texture "Textures", describing the layout and size of the texture data. 
-     * These may not be  implemented by the underlying graphics API exactly as they are indicated  here, but the available 
-     * components and sizes are guaranteed to be equal to or greater than the indicated values. Further information on 
-     * texture formats and depth may be found on the @ref Textures "texture formats page". 
+     * Texture formats for use by @ref VoodooShader::Texture "Textures", describing the layout and size of the texture data.
+     * These may not be  implemented by the underlying graphics API exactly as they are indicated  here, but the available
+     * components and sizes are guaranteed to be equal to or greater than the indicated values. Further information on
+     * texture formats and depth may be found on the @ref Textures "texture formats page".
      */
     enum TextureFormat
     {
@@ -212,8 +212,8 @@ namespace VoodooShader
      * available across hardware, exposing most common variables.
      */
     enum ParameterType
-    {    
-        PT_Unknown      = 0x00,         /*!< Unknown parameter type */    
+    {
+        PT_Unknown      = 0x00,         /*!< Unknown parameter type */
         // Floats
         PT_Float1       = 0x11,         /*!< Single-component float vector */
         PT_Float2       = 0x12,         /*!< Two-component float vector */
@@ -246,12 +246,12 @@ namespace VoodooShader
     };
 
     enum ParameterCategory
-    {    
+    {
         PC_Unknown      = 0x00,         /*!< Unknown parameter category */
         PC_Float        = 0x01,         /*!< Float vector parameter (may have 1 to 4 components) */
         PC_Sampler      = 0x02,         /*!< Sampler parameter (may sample 1D to 3D textures) */
         PC_Struct       = 0x04,
-        PC_Max          = 0x7FFFFFFF    /*!< Highest possible value, forcing dword type */   
+        PC_Max          = 0x7FFFFFFF    /*!< Highest possible value, forcing dword type */
     };
 
     enum ProgramStage
@@ -262,7 +262,7 @@ namespace VoodooShader
         PS_Geometry     = 0x03,         /*!< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
         PS_Domain       = 0x04,         /*!< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
         PS_Hull         = 0x05,         /*!< Hull program stage (not always supported, see @ref programstages "program stages" for more info) */
-        PS_Max          = 0x7FFFFFFF    /*!< Highest possible value, forcing dword type */ 
+        PS_Max          = 0x7FFFFFFF    /*!< Highest possible value, forcing dword type */
     };
 
     enum TextureStage
@@ -270,7 +270,7 @@ namespace VoodooShader
         TS_Unknown      = 0x00,         /*!< Unknown texture type */
         TS_Shader       = 0x01,         /*!< Shader target texture */
         TS_Pass         = 0x02,         /*!< Pass target texture */
-        TS_Max          = 0x7FFFFFFF    /*!< Highest possible value, forcing dword type */  
+        TS_Max          = 0x7FFFFFFF    /*!< Highest possible value, forcing dword type */
     };
 
     enum FileOpenMode
@@ -292,7 +292,7 @@ namespace VoodooShader
      * @code
      * LogLevel maskedLevel = level & storedLevel;
      * if ( (maskedLevel & LL_Origin) && (maskedLevel & LL_Severity) )
-     * { 
+     * {
      *     // Log
      * @endcode
      */
@@ -379,7 +379,7 @@ namespace VoodooShader
      * an optional format the region should be set up as.
      */
     struct TextureRegion
-        : public TextureDesc
+                : public TextureDesc
     {
         int OffX;
         int OffY;
@@ -387,7 +387,7 @@ namespace VoodooShader
     };
 
     /**
-     * Describes the precise version of a particular library, including name, 
+     * Describes the precise version of a particular library, including name,
      * main version, revision and debug status.
      */
     struct Version
@@ -406,13 +406,13 @@ namespace VoodooShader
     };
 
     struct float3
-        : public float2
+                : public float2
     {
         float Z;
     };
 
     struct float4
-        : public float3
+                : public float3
     {
         float W;
     };
@@ -450,19 +450,19 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef Int32        (*CountFunc  )();
-        typedef const char * (*InfoFunc   )(Int32);
-        typedef IObjectRef   (*CreateFunc )(Int32, Core *);
-        typedef Version      (*VersionFunc)();
+        typedef Int32(*CountFunc)();
+        typedef const char * (*InfoFunc)(Int32);
+        typedef IObjectRef(*CreateFunc)(Int32, Core *);
+        typedef Version(*VersionFunc)();
     };
 
-     /**
-      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, 
-      * particularly function, filename and line. These exceptions are also logged if possible 
-      * (requires a valid core to be given). The Exception class derives from std::exception, so 
-      * these are simple to handle.
-      */
-    #define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
+    /**
+     * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info,
+     * particularly function, filename and line. These exceptions are also logged if possible
+     * (requires a valid core to be given). The Exception class derives from std::exception, so
+     * these are simple to handle.
+     */
+#define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
 };
 
 #endif /*VOODOO_META_HPP*/

@@ -1,13 +1,13 @@
 /**************************************************************************************************\
  * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
  * Copyright (c) 2010-2011 by Sean Sube
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -23,7 +23,7 @@ namespace VoodooShader
      * Defines the interface for a Logger class.
      */
     class ILogger
-        : public IObject
+                : public IObject
     {
     public:
         virtual ~ILogger() throw()
@@ -47,17 +47,17 @@ namespace VoodooShader
          * Closes the log file, if one is open.
          */
         virtual void Close() = 0;
-        
+
         /**
          * Immediately writes all pending data to disk.
          *
-         * @note This is useful for catchable errors which may have fatal 
-         *        consequences (Exception calls this in case the exception is 
+         * @note This is useful for catchable errors which may have fatal
+         *        consequences (Exception calls this in case the exception is
          *        uncaught).
-         * @warning This may not (probably will not) be any good in case of a 
-         *        segfault or other crash. If you    need complete debug logging, 
+         * @warning This may not (probably will not) be any good in case of a
+         *        segfault or other crash. If you    need complete debug logging,
          *        call Logger::SetBufferSize(unsigned int) with a buffer size    of 0
-         *        and all logged messages <em>should</em> make it to disk, even 
+         *        and all logged messages <em>should</em> make it to disk, even
          *        during fatal crashes.
          */
         virtual void Flush() = 0;
@@ -79,7 +79,7 @@ namespace VoodooShader
          * Writes a module stamp to the log. This records the name and version
          * info for a select module (used to log what modules were present during
          * a logging session).
-         * 
+         *
          * @param module The module version info to log.
          */
         virtual void LogModule
@@ -102,7 +102,7 @@ namespace VoodooShader
         (
             _In_ LogLevel level,
             _In_ const char * module,
-            _In_ _Printf_format_string_ const char * msg, 
+            _In_ _Printf_format_string_ const char * msg,
             ...
         ) = 0;
 
@@ -111,7 +111,7 @@ namespace VoodooShader
          *
          * @param bytes The size.
          * @note A size of 0 will force messages to be written directly to disk.
-         *        This may have a notable performance hit, but makes debug 
+         *        This may have a notable performance hit, but makes debug
          *        messages more likely to survive    crashes.
          */
         virtual void SetFlags

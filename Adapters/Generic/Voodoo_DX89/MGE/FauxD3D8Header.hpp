@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -20,7 +20,7 @@
 \**************************************************************************************************/
 
 // This file contains a good bit of code derived or copied from the Morrowind Graphics Extender (MGE)
-// project, originally created by Timeslip and worked on by a number of individuals. All code in the 
+// project, originally created by Timeslip and worked on by a number of individuals. All code in the
 // MGE project is licensed under the GNU GPL, v2 or later (the same license as this project).
 
 #ifndef VOODOO_DX89_FAUXD3D8HEADER_HPP
@@ -66,10 +66,11 @@ interface IDirect3DSurface8;
 #define D3DTSS_ADDRESSW       25
 
 //Object creation functions
-typedef IDirect3D8* (*D3DProc8)(UINT);
+typedef IDirect3D8*(*D3DProc8)(UINT);
 
 //DX8 structs
-typedef struct _D3DCAPS8 {
+typedef struct _D3DCAPS8
+{
     /* Device Info */
     D3DDEVTYPE  DeviceType;
     UINT    AdapterOrdinal;

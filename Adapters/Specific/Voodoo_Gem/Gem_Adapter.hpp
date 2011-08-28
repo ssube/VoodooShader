@@ -37,7 +37,7 @@ namespace VoodooShader
         };
 
         class Adapter
-            : public VoodooShader::IAdapter
+                    : public VoodooShader::IAdapter
         {
 
         public:
@@ -65,19 +65,19 @@ namespace VoodooShader
 
             bool ConnectTexture(ParameterRef param, TextureRef texture);
             TextureRef CreateTexture(String name, TextureDesc desc);
-            TextureRef LoadTexture( _In_ IImageRef image );
+            TextureRef LoadTexture(_In_ IImageRef image);
 
             void HandleError(CGcontext context, CGerror error, void * core);
 
             /**
              * Binds a Direct3D9 device to this adapter for use in various rendering
              * calls. Without a device, the adapter has no access to graphics.
-             * 
+             *
              * @param device The D3D device to bind (should be a valid device, <em>not</em>
              *        an IVoodoo3DDevice9 or any similar wrapped type).
-             *        
-             * @note When this method is called and a device has already been bound, all 
-             *       graphics resources are unloaded and freed. If the new device is not 
+             *
+             * @note When this method is called and a device has already been bound, all
+             *       graphics resources are unloaded and freed. If the new device is not
              *       null, new resources are allocated and filled.
              */
             void SetDevice
@@ -93,7 +93,7 @@ namespace VoodooShader
             CGpass mBoundPass;
 
             IDirect3DSurface9 * mRenderTarget;
-            
+
             LPDIRECT3DVERTEXBUFFER9 mQuadVerts;
         };
     };

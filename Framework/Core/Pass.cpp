@@ -8,16 +8,28 @@
 
 namespace VoodooShader
 {
-    Pass::Pass(TechniquePtr parent, CGpass cgPass)
-        : m_Technique(parent), m_CgPass(cgPass)
+    PassRef Pass::Create(TechniqueRef parent, CGpass cgPass)
     {
-        this->m_Core = m_Technique.lock()->GetCore();
+        PassRef pass;
+        new Pass(pass, parent, cgPass);
+        pass->Link();
+        return pass;
+    }
+
+    Pass::Pass(PassRef & self, TechniqueRef parent, CGpass cgPass)
+            : m_Technique(parent), m_CgPass(cgPass)
+    {
+        self.reset(this);
+
+        this->m_Core = parent->GetCore();
 
         const char * passName = cgGetPassName(this->m_CgPass);
-        if ( passName )
+        if (passName)
         {
             this->m_Name = passName;
-        } else {
+        }
+        else
+        {
             char nameBuffer[16];
             _itoa_s((int)(&this->m_CgPass), nameBuffer, 16, 16);
 
@@ -53,7 +65,7 @@ namespace VoodooShader
 
     CGprogram Pass::GetProgram(ProgramStage stage)
     {
-        switch ( stage )
+        switch (stage)
         {
         case PS_Vertex:
             return m_VertexProgram;
@@ -83,7 +95,7 @@ namespace VoodooShader
 
     void Pass::Link()
     {
-        this->m_VertexProgram   = cgGetPassProgram(this->m_CgPass, CG_VERTEX_DOMAIN  );
+        this->m_VertexProgram   = cgGetPassProgram(this->m_CgPass, CG_VERTEX_DOMAIN);
         this->m_FragmentProgram = cgGetPassProgram(this->m_CgPass, CG_FRAGMENT_DOMAIN);
         this->m_GeometryProgram = cgGetPassProgram(this->m_CgPass, CG_GEOMETRY_DOMAIN);
         this->m_DomainProgram   = cgGetPassProgram(this->m_CgPass, CG_TESSELLATION_CONTROL_DOMAIN);
@@ -91,25 +103,27 @@ namespace VoodooShader
 
         this->m_Target = nullptr;
         CGannotation targetAnnotation = cgGetNamedPassAnnotation(this->m_CgPass, "target");
-        if ( cgIsAnnotation(targetAnnotation) )
+        if (cgIsAnnotation(targetAnnotation))
         {
-            if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )
+            if (cgGetAnnotationType(targetAnnotation) == CG_STRING)
             {
                 const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
 
                 this->m_Target = m_Core->GetTexture(targetName);
 
-                if ( !this->m_Target.get() )
+                if (!this->m_Target.get())
                 {
                     m_Core->GetLogger()->Log
                     (
-                        LL_Warning, VOODOO_CORE_NAME, "Pass %s cannot find target %s.", 
+                        LL_Warning, VOODOO_CORE_NAME, "Pass %s cannot find target %s.",
                         this->GetName().c_str(), targetName
                     );
 
                     this->m_Target = m_Core->GetStageTexture(TS_Pass);
                 }
-            } else {
+            }
+            else
+            {
                 m_Core->GetLogger()->Log
                 (
                     LL_Warning, VOODOO_CORE_NAME, "Pass %s has annotation \"target\" of invalid type.",
@@ -118,10 +132,12 @@ namespace VoodooShader
 
                 this->m_Target = m_Core->GetStageTexture(TS_Pass);
             }
-        } else {
+        }
+        else
+        {
             m_Core->GetLogger()->Log
             (
-                LL_Debug, VOODOO_CORE_NAME, "Pass %s has no target annotation.", 
+                LL_Debug, VOODOO_CORE_NAME, "Pass %s has no target annotation.",
                 this->GetName().c_str()
             );
 
@@ -131,25 +147,29 @@ namespace VoodooShader
         // Load the programs
         IAdapterRef adapter = m_Core->GetAdapter();
 
-        if ( !adapter )
+        if (!adapter)
         {
             m_Core->GetLogger()->Log
             (
-                LL_Warning, VOODOO_CORE_NAME, "No adapter found, pass %s must be explicitly loaded later.", 
+                LL_Warning, VOODOO_CORE_NAME, "No adapter found, pass %s must be explicitly loaded later.",
                 this->GetName().c_str()
             );
-        } else {
-            if ( !adapter->LoadPass(PassRef(this)) )
+        }
+        else
+        {
+            if (!adapter->LoadPass(PassRef(this)))
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.", 
+                    LL_Error, VOODOO_CORE_NAME, "Failed to load pass %s.",
                     this->GetName().c_str()
                 );
-            } else {
+            }
+            else
+            {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.", 
+                    LL_Info, VOODOO_CORE_NAME, "Successfully loaded pass %s.",
                     this->GetName().c_str()
                 );
             }

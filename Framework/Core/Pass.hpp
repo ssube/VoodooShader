@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -32,23 +32,23 @@ namespace VoodooShader
 
     /**
      * Each Pass contains a single set of programs, each operating on a different
-     * stage of the render pipeline. 
-     * 
-     * @note A Pass may contain programs for each stage. Valid stages vary by 
+     * stage of the render pipeline.
+     *
+     * @note A Pass may contain programs for each stage. Valid stages vary by
      *    underlying API and version. In OpenGL and DirectX 9 and earlier,
      *    stages may be left to the fixed-function pipeline by not specifying
      *    any program to be used. Later APIs require the vertex and pixel
      *    shaders to be specified in each pass.
-     * 
+     *
      * @warning Some adapters may require programs to be provided for certain
      *    stages.
      */
     class Pass
     {
     public:
-        Pass
+        static PassRef Create
         (
-            _In_ TechniquePtr parent,
+            _In_ TechniqueRef parent,
             _In_ CGpass cgPass
         );
 
@@ -87,7 +87,7 @@ namespace VoodooShader
          * many programs, each program controls one stage of the render process.
          * The most commonly used stages are the vertex and fragment stages,
          * which are supported by almost all hardware. Geometry stages are also
-         * available, but not as well supported. D3D11 tessellation control 
+         * available, but not as well supported. D3D11 tessellation control
          * stages are not yet supported by the Voodoo Shader Framework.
          *
          * @param stage The stage to retrieve.
@@ -102,12 +102,19 @@ namespace VoodooShader
 
         /**
          * Retrieve the underlying Cg technique.
-         * 
+         *
          * @return A pointer to the Cg technique.
          */
         virtual CGpass GetCgPass();
 
     private:
+        Pass
+        (
+            _In_ PassRef & self,
+            _In_ TechniqueRef parent,
+            _In_ CGpass cgPass
+        );
+
         void Link();
 
         String m_Name;

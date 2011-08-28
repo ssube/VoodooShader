@@ -8,7 +8,7 @@ namespace VoodooShader
     namespace Frost
     {
         Adapter::Adapter(_In_ Core * core)
-            : mCore(core), mDC(NULL), mGLRC(NULL), mCgContext(NULL)
+                : mCore(core), mDC(NULL), mGLRC(NULL), mCgContext(NULL)
         {
             VoodooCore = mCore;
             VoodooLogger = mLogger = mCore->GetLogger();
@@ -16,23 +16,25 @@ namespace VoodooShader
 
             // Get the handles to the needed hook modules
             HMODULE procmodule = GetModuleHandle(NULL);
-            if ( procmodule )
+            if (procmodule)
             {
                 char procpath[MAX_PATH];
                 GetModuleFileName(procmodule, procpath, MAX_PATH);
-                
+
                 mLogger->Log(LL_Info, VOODOO_FROST_NAME, "Frost loaded into process \"%s\".", procpath);
 
                 char * pos = strrchr(procpath, '\\');
-                if ( pos != NULL )
+                if (pos != NULL)
                 {
-                    if ( strcmp(pos+1, "nwmain.exe") != 0 )
+                    if (strcmp(pos+1, "nwmain.exe") != 0)
                     {
                         mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "The process does not appear to be the engine. Frost will not run.");
                         return;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 mLogger->Log(LL_Error, VOODOO_FROST_NAME, "Unable to find target module. Frost will not run.");
 
                 return;
@@ -70,10 +72,12 @@ namespace VoodooShader
             success &= hooker->CreateHook(VOODOO_OGL_HOOK_PARAMS(glFogfv));
 
             // Check the results and handle
-            if ( success )
+            if (success)
             {
                 mLogger->Log(LL_Info, VOODOO_FROST_NAME, "OpenGL hooked successfully.");
-            } else {
+            }
+            else
+            {
                 mLogger->Log(LL_Error, VOODOO_FROST_NAME, "OpenGL hook procedure failed.");
                 return;
             }
@@ -93,21 +97,21 @@ namespace VoodooShader
         }
 
         // IAdapter
-        bool Adapter::LoadPass( _In_ Pass * pass )
+        bool Adapter::LoadPass(_In_ Pass * pass)
         {
             UNREFERENCED_PARAMETER(pass);
 
             return true;
         }
 
-        bool Adapter::UnloadPass( _In_ Pass * pass )
+        bool Adapter::UnloadPass(_In_ Pass * pass)
         {
             UNREFERENCED_PARAMETER(pass);
 
             return true;
         }
 
-        void Adapter::BindPass( _In_ PassRef pass )
+        void Adapter::BindPass(_In_ PassRef pass)
         {
             CGpass cgpass = pass->GetCgPass();
             cgSetPassState(cgpass);
@@ -122,7 +126,7 @@ namespace VoodooShader
 
         void Adapter::DrawQuad(Vertex * vertexData)
         {
-            if ( vertexData )
+            if (vertexData)
             {
                 glBegin(GL_QUADS);
                 glTexCoord2f(vertexData[0].tu, vertexData[0].tv);
@@ -134,7 +138,9 @@ namespace VoodooShader
                 glTexCoord2f(vertexData[3].tu, vertexData[3].tv);
                 glVertex3f(vertexData[3].x, vertexData[3].y, vertexData[3].z);
                 glEnd();
-            } else {
+            }
+            else
+            {
                 glBegin(GL_QUADS);
                 glTexCoord2f(0.0f, 1.0f);
                 glVertex2d(0.0f, 0.0f);
@@ -148,16 +154,16 @@ namespace VoodooShader
             }
         }
 
-        void Adapter::ApplyParameter( _In_ ParameterRef param )
+        void Adapter::ApplyParameter(_In_ ParameterRef param)
         {
             ParameterType pt = param->GetType();
             ParameterCategory pc = Converter::ToParameterCategory(pt);
             CGparameter cgparam = param->GetCgParameter();
 
-            if ( pc == PC_Float )
+            if (pc == PC_Float)
             {
                 float * values = param->GetFloat();
-                switch ( pt )
+                switch (pt)
                 {
                 case PT_Float1:
                     cgGLSetParameter1fv(cgparam, values);
@@ -172,17 +178,21 @@ namespace VoodooShader
                     cgGLSetParameter4fv(cgparam, values);
                     break;
                 }
-            } else if ( pc == PC_Sampler ) {
+            }
+            else if (pc == PC_Sampler)
+            {
                 GLuint textureID = (GLuint)param->GetTexture()->GetData();
                 cgGLSetupSampler(cgparam, textureID);
-            } else {
+            }
+            else
+            {
                 mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "Unable to apply parameter %s.", param->GetName().c_str());
             }
         }
 
-        void Adapter::DrawShader( _In_ ShaderRef shader )
+        void Adapter::DrawShader(_In_ ShaderRef shader)
         {
-            if ( shader.get() == NULL )
+            if (shader.get() == NULL)
             {
                 mLogger->Log(LL_Error, VOODOO_FROST_NAME, "Unable to draw null shader.");
                 return;
@@ -190,7 +200,7 @@ namespace VoodooShader
 
             TechniqueRef tech = shader->GetDefaultTechnique();
 
-            if ( tech.get() == NULL )
+            if (tech.get() == NULL)
             {
                 mLogger->Log(LL_Error, VOODOO_FROST_NAME, "No default technique given for shader %s.", shader->GetName().c_str());
                 return;
@@ -205,7 +215,7 @@ namespace VoodooShader
             glLoadIdentity();
 
             size_t passes = tech->GetPassCount();
-            for ( size_t curpass = 0; curpass < passes; ++curpass )
+            for (size_t curpass = 0; curpass < passes; ++curpass)
             {
                 PassRef pass = tech->GetPass(curpass);
 
@@ -214,7 +224,7 @@ namespace VoodooShader
                 this->UnbindPass();
 
                 TextureRef target = pass->GetTarget();
-                if ( target.get() )
+                if (target.get())
                 {
                     GLuint passtarget = (GLuint)target->GetData();
                     glBindTexture(GL_TEXTURE_2D, passtarget);
@@ -223,7 +233,7 @@ namespace VoodooShader
             }
 
             TextureRef target = tech->GetTarget();
-            if ( target.get() )
+            if (target.get())
             {
                 GLuint techtarget = (GLuint)target->GetData();
                 glBindTexture(GL_TEXTURE_2D, techtarget);
@@ -236,11 +246,11 @@ namespace VoodooShader
             glPopMatrix();
         }
 
-        TextureRef Adapter::CreateTexture( _In_ String name, _In_ TextureDesc desc )
+        TextureRef Adapter::CreateTexture(_In_ String name, _In_ TextureDesc desc)
         {
             GLuint texture;
             GLint texFmt, texIFmt, texType;
-            switch ( desc.Format )
+            switch (desc.Format)
             {
             case TF_RGBA8:
                 texFmt = GL_RGBA; //Frost::Converter::ToGLFormat(desc.Format);
@@ -279,7 +289,7 @@ namespace VoodooShader
 
             glGenTextures(1, &texture);
             GLenum error =  glGetError();
-            while ( error != GL_NO_ERROR )
+            while (error != GL_NO_ERROR)
             {
                 mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
                 error =  glGetError();
@@ -290,30 +300,32 @@ namespace VoodooShader
             glBindTexture(GL_TEXTURE_2D, 0);
 
             error =  glGetError();
-            while ( error != GL_NO_ERROR )
+            while (error != GL_NO_ERROR)
             {
                 mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
                 error =  glGetError();
             }
 
-            if ( glIsTexture(texture) )
+            if (glIsTexture(texture))
             {
                 mLogger->Log(LL_Debug, VOODOO_FROST_NAME, "OpenGL texture %u created successfully.", texture);
-            } else {
+            }
+            else
+            {
                 mLogger->Log(LL_Debug, VOODOO_FROST_NAME, "OpenGL create failed, returned texture %u.", texture);
             }
 
             return mCore->AddTexture(name, (void*)texture);
         }
 
-        bool Adapter::ConnectTexture( _In_ ParameterRef param, _In_ TextureRef texture )
+        bool Adapter::ConnectTexture(_In_ ParameterRef param, _In_ TextureRef texture)
         {
             param->Set(texture);
             cgGLSetupSampler(param->GetCgParameter(), (GLuint)texture->GetData());
             return true;
         }
 
-        void Adapter::HandleError( _In_ CGcontext context, _In_ CGerror error, _In_ void * core )
+        void Adapter::HandleError(_In_ CGcontext context, _In_ CGerror error, _In_ void * core)
         {
             UNREFERENCED_PARAMETER(context);
             UNREFERENCED_PARAMETER(core);
@@ -329,12 +341,12 @@ namespace VoodooShader
 
         void Adapter::SetGLRC(_In_opt_ HGLRC hglrc)
         {
-            if ( hglrc != NULL )
+            if (hglrc != NULL)
             {
                 // Init Cg
                 this->mCgContext = cgCreateContext();
 
-                if ( !cgIsContext(this->mCgContext) )
+                if (!cgIsContext(this->mCgContext))
                 {
                     throw std::exception("Unable to create Cg context.");
                 }
@@ -374,7 +386,9 @@ namespace VoodooShader
                 // Load shader
                 TestShader = mCore->CreateShader("test.cgfx", NULL);
                 TestShader->Link();
-            } else {
+            }
+            else
+            {
                 mCore->SetCgContext(NULL);
 
                 mTexLastPass = NULL;

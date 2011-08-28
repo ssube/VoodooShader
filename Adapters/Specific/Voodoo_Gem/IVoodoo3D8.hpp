@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -33,28 +33,28 @@
 using namespace VoodooShader;
 
 /**
- * The core Voodoo3D8 wrapper class for D3D8 objects. This class is responsible for the primary 
- * abstraction from D3D8 to D3D9. This class is responsible for creating devices, giving it control 
- * over what is returned to the engine.   
- * 
+ * The core Voodoo3D8 wrapper class for D3D8 objects. This class is responsible for the primary
+ * abstraction from D3D8 to D3D9. This class is responsible for creating devices, giving it control
+ * over what is returned to the engine.
+ *
  * @note The various IVoodoo3D8 interfaces provide an application-opaque wrapper that actually
  *          implements a Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the
- *          IVoodoo3D9 interface set should be used.         
+ *          IVoodoo3D9 interface set should be used.
  */
-class IVoodoo3D8 
-    : public IDirect3D8
+class IVoodoo3D8
+            : public IDirect3D8
 {
     /**
-     * A pointer to the true underlying IDirect3D9 object wrapped by this IVoodoo3D8 interface.            
+     * A pointer to the true underlying IDirect3D9 object wrapped by this IVoodoo3D8 interface.
      */
     IDirect3D9 * mRealObject;
 
 public:
     /**
-     * The default, public constructor for IVoodoo3D objects.            
+     * The default, public constructor for IVoodoo3D objects.
      */
     IVoodoo3D8(IDirect3D9 * realObject)
-        : mRealObject(realObject)
+            : mRealObject(realObject)
     {
 
     }
@@ -74,11 +74,13 @@ public:
     {
         ULONG refCount = mRealObject->Release();
 
-        if ( refCount == 0 )
+        if (refCount == 0)
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return refCount;
         }
     }
@@ -86,20 +88,20 @@ public:
     // IDirect3D8 methods
 
     /**
-     * Determines whether or not a depth-stencil format is compatible with a render target format in 
+     * Determines whether or not a depth-stencil format is compatible with a render target format in
      * a particular display mode.
      *
-     * @param Adapter Ordinal number denoting the display adapter to query. D3DADAPTER_DEFAULT is 
-     *                   always the primary display adapter. 
-     * @param DeviceType Member of the D3DDEVTYPE enumerated type, identifying the device type. 
-     * @param AdapterFormat Member of the D3DFORMAT enumerated type, identifying the format of the 
-     *                         display mode into which the adapter will be placed. 
-     * @param RenderTargetFormat Member of the D3DFORMAT enumerated type, identifying the format of 
+     * @param Adapter Ordinal number denoting the display adapter to query. D3DADAPTER_DEFAULT is
+     *                   always the primary display adapter.
+     * @param DeviceType Member of the D3DDEVTYPE enumerated type, identifying the device type.
+     * @param AdapterFormat Member of the D3DFORMAT enumerated type, identifying the format of the
+     *                         display mode into which the adapter will be placed.
+     * @param RenderTargetFormat Member of the D3DFORMAT enumerated type, identifying the format of
      *                              the render target surface to be tested.
-     * @param DepthStencilFormat Member of the D3DFORMAT enumerated type, identifying the format of 
-     *                              the depth-stencil surface to be tested. 
+     * @param DepthStencilFormat Member of the D3DFORMAT enumerated type, identifying the format of
+     *                              the depth-stencil surface to be tested.
      * @return D3D_OK if the format combination is valid, other values if invalid.
-     *             
+     *
      * @note Will log in debug builds.
      */
     STDMETHOD(CheckDepthStencilMatch)
@@ -114,8 +116,8 @@ public:
         HRESULT hr = mRealObject->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
 
         VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d",
-            Adapter, DeviceType, AdapterFormat, RenderTargetFormat, 
-            DepthStencilFormat, hr);
+                          Adapter, DeviceType, AdapterFormat, RenderTargetFormat,
+                          DepthStencilFormat, hr);
 
         return hr;
     }
@@ -133,15 +135,15 @@ public:
         HRESULT hr = mRealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 
         VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d",
-            Adapter, DeviceType, AdapterFormat, Usage, RType, 
-            CheckFormat, hr);
+                          Adapter, DeviceType, AdapterFormat, Usage, RType,
+                          CheckFormat, hr);
 
         return hr;
     }
 
     /**
      * @note Direct3D8 doesn't seem to support the concept of multisampling quality levels, or won't
-     *          recognize them in this function. They are not passed back because of this.            
+     *          recognize them in this function. They are not passed back because of this.
      */
     STDMETHOD(CheckDeviceMultiSampleType)
     (
@@ -156,11 +158,11 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d",
             Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, hr
-        );  
+        );
 
         return hr;
     }
@@ -178,8 +180,8 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::CheckDeviceType(%u, %u, %u, %u, %u) == %d",
             Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed, hr
         );
@@ -203,7 +205,7 @@ public:
         mpPresentationParameters.Flags = pPresentationParameters->Flags;
 
         //! @todo Included because it was in MGE, test if this is necessary.
-        if ( mpPresentationParameters.Flags & D3DPRESENTFLAG_LOCKABLE_BACKBUFFER )
+        if (mpPresentationParameters.Flags & D3DPRESENTFLAG_LOCKABLE_BACKBUFFER)
         {
             mpPresentationParameters.Flags ^= D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
         }
@@ -223,14 +225,14 @@ public:
         mpPresentationParameters.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 #ifdef _DEBUG
-        const char * textureType = 
+        const char * textureType =
             VoodooShader::Converter::ToString(
-            VoodooShader::Gem::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
+                VoodooShader::Gem::Gem_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
             );
 
         VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "Backbuffer parameters for new device: %u by %u (%u buffers), %s.",
-            mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight, 
-            mpPresentationParameters.BackBufferCount, textureType);
+                          mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight,
+                          mpPresentationParameters.BackBufferCount, textureType);
 #endif
 
         IDirect3DDevice9 * mRealDevice;
@@ -238,18 +240,20 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::CreateDevice(%d, %d, %p, %d, %p, %p) == %d",
             Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, mRealDevice, hr
         );
 
-        if ( !SUCCEEDED(hr) )
+        if (!SUCCEEDED(hr))
         {
             VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3D8::CreateDevice failed with error %d on adapter %d.",
-                hr, Adapter);
+                              hr, Adapter);
             return hr;
-        } else {
+        }
+        else
+        {
             // Succeeded, create a fake device and go from there
             gParams = mpPresentationParameters;
 
@@ -273,8 +277,8 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::EnumAdapterModes(%d, %d, %p) == %d",
             Adapter, Mode, pMode, hr
         );
@@ -288,8 +292,8 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::GetAdapterCount() == %d",
             r
         );
@@ -307,8 +311,8 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::GetAdapterDisplayMode(%d, %p) == %d",
             Adapter, pMode, hr
         );
@@ -319,7 +323,7 @@ public:
     }
 
     /**
-     * @note This function forcibly ignores WHQL levels            
+     * @note This function forcibly ignores WHQL levels
      */
     STDMETHOD(GetAdapterIdentifier)
     (
@@ -334,16 +338,16 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::GetAdapterIdentifier(%u, %u, %p) == %d",
             Adapter, Flags, pIdentifier, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             // Strings, so use copymemory instead of assignment
-            ::CopyMemory (pIdentifier, &realIdentifier, 1024);
+            ::CopyMemory(pIdentifier, &realIdentifier, 1024);
             pIdentifier->DeviceId            = realIdentifier.DeviceId;
             pIdentifier->DeviceIdentifier    = realIdentifier.DeviceIdentifier;
             pIdentifier->DriverVersion       = realIdentifier.DriverVersion;
@@ -365,8 +369,8 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::GetAdapterModeCount(%d) == %d",
             Adapter, r
         );
@@ -383,8 +387,8 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::GetAdapterMonitor(%u) == %p",
             Adapter, hm
         );
@@ -392,7 +396,7 @@ public:
         return hm;
     }
 
-    /**        
+    /**
      * @todo DX9 caps and DX8 caps have identical structure for sizeof(D3D8CAPS), but ::CopyMemory
      *          provides incorrect caps that usually result in a crash. Diagnose and correct.
      */
@@ -401,7 +405,7 @@ public:
         UINT Adapter,
         D3DDEVTYPE DeviceType,
         D3DCAPS8 * pCaps
-    ) 
+    )
     {
         *pCaps = d3d8Caps;
 
@@ -410,8 +414,8 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::GetDeviceCaps(%u, %u, %p) == %d",
             Adapter, DeviceType, pCaps, hr
         );
@@ -434,16 +438,16 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3D8::RegisterSoftwareDevice(%p) == %d",
             pInitializeFunction, hr
         );
 
         VoodooLogger->Log
         (
-            LL_Warning, 
-            VOODOO_GEM_NAME, 
+            LL_Warning,
+            VOODOO_GEM_NAME,
             "The application has registered a software device. This is illegal in DX8. Host application code should be"
             "examined for unusual behavior."
         );

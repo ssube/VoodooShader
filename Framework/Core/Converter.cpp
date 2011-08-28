@@ -7,9 +7,9 @@ namespace VoodooShader
         _In_ ParameterType pt
     )
     {
-        switch ( pt )
+        switch (pt)
         {
-        // Vectors
+            // Vectors
         case PT_Float1x1:
             return CG_FLOAT;
         case PT_Float1x2:
@@ -42,17 +42,17 @@ namespace VoodooShader
             return CG_FLOAT4x3;
         case PT_Float4x4:
             return CG_FLOAT4x4;
-        // Samplers
+            // Samplers
         case PT_Sampler1D:
             return CG_SAMPLER1D;
         case PT_Sampler2D:
             return CG_SAMPLER2D;
         case PT_Sampler3D:
             return CG_SAMPLER3D;
-        // Structs
+            // Structs
         case PT_Struct:
             return CG_STRUCT;
-        // Other
+            // Other
         case PT_Unknown:
         default:
             return CG_UNKNOWN_TYPE;
@@ -64,7 +64,7 @@ namespace VoodooShader
         _In_ CGtype pt
     )
     {
-        switch ( pt )
+        switch (pt)
         {
         case CG_SAMPLER1D:
             return PT_Sampler1D;
@@ -120,7 +120,7 @@ namespace VoodooShader
         _In_ ParameterType type
     )
     {
-        switch ( type )
+        switch (type)
         {
         case PT_Float1x1:
         case PT_Float1x2:
@@ -154,34 +154,36 @@ namespace VoodooShader
         _In_ const char * format
     )
     {
-        if ( _strnicmp(format, "TF_", 3) != 0 )
+        if (_strnicmp(format, "TF_", 3) != 0)
         {
             return TF_Unknown;
         }
 
         const char * formatBody = format + 3;
 
-        if ( formatBody[0] == 'D' )
+        if (formatBody[0] == 'D')
         {
             // Depth format
-            if ( _stricmp(formatBody, "D16") == 0 ) return TF_D16;
-            if ( _stricmp(formatBody, "D32") == 0 ) return TF_D32;
-        } else {
-            if ( _stricmp(formatBody, "RGB5"   ) == 0 ) return TF_RGB5;
-            if ( _stricmp(formatBody, "RGB5A1" ) == 0 ) return TF_RGB5A1;
-            if ( _stricmp(formatBody, "RGB8"   ) == 0 ) return TF_RGB8;
-            if ( _stricmp(formatBody, "RGBA8"  ) == 0 ) return TF_RGBA8;
-            if ( _stricmp(formatBody, "RGB10A2") == 0 ) return TF_RGB10A2;
-            if ( _stricmp(formatBody, "RGBA16F") == 0 ) return TF_RGBA16F;
-            if ( _stricmp(formatBody, "RGBA32F") == 0 ) return TF_RGBA32F;
+            if (_stricmp(formatBody, "D16") == 0) return TF_D16;
+            if (_stricmp(formatBody, "D32") == 0) return TF_D32;
+        }
+        else
+        {
+            if (_stricmp(formatBody, "RGB5") == 0) return TF_RGB5;
+            if (_stricmp(formatBody, "RGB5A1") == 0) return TF_RGB5A1;
+            if (_stricmp(formatBody, "RGB8") == 0) return TF_RGB8;
+            if (_stricmp(formatBody, "RGBA8") == 0) return TF_RGBA8;
+            if (_stricmp(formatBody, "RGB10A2") == 0) return TF_RGB10A2;
+            if (_stricmp(formatBody, "RGBA16F") == 0) return TF_RGBA16F;
+            if (_stricmp(formatBody, "RGBA32F") == 0) return TF_RGBA32F;
         }
 
         return TF_Unknown;
     }
 
-    int Converter::ToComponents( _In_ ParameterType type)
+    int Converter::ToComponents(_In_ ParameterType type)
     {
-        switch ( type )
+        switch (type)
         {
         case PT_Float1x1:
             return 1;
@@ -225,7 +227,7 @@ namespace VoodooShader
         _In_ TextureFormat tf
     )
     {
-        switch ( tf )
+        switch (tf)
         {
             CASESTRING(TF_RGB5);
             CASESTRING(TF_RGB5A1);
@@ -247,7 +249,7 @@ namespace VoodooShader
         _In_ ParameterType pt
     )
     {
-        switch ( pt )
+        switch (pt)
         {
             CASESTRING(PT_Sampler1D);
             CASESTRING(PT_Sampler2D);
@@ -280,7 +282,7 @@ namespace VoodooShader
         _In_ ParameterCategory cat
     )
     {
-        switch ( cat )
+        switch (cat)
         {
             CASESTRING(PC_Float);
             CASESTRING(PC_Sampler);

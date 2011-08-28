@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -35,7 +35,7 @@ using namespace VoodooShader;
  * internal IDirect3DTexture9 object.
  */
 class IVoodoo3DTexture8
-    : public IDirect3DTexture8
+            : public IDirect3DTexture8
 {
 private:
     IVoodoo3DDevice8 * mDevice;
@@ -45,24 +45,26 @@ private:
 
 public:
     IVoodoo3DTexture8(IVoodoo3DDevice8 * device, IDirect3DTexture9 * texture)
-        : mDevice(device), mRealTexture(texture), mName(gLastFilename)
+            : mDevice(device), mRealTexture(texture), mName(gLastFilename)
     {
         VoodooLogger->Log
         (
-            VoodooShader::LL_Debug, 
-            VOODOO_GEM_NAME, 
+            VoodooShader::LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DTexture8::IVoodoo3DTexture8(%p, %p) == %p",
             device, texture, this
         );
 
-        if ( gNextTexture )
+        if (gNextTexture)
         {
             gNextTexture = false;
 
             try
             {
                 mVoodooTexture = VoodooCore->AddTexture(mName, this);
-            } catch ( std::exception & exc ) {
+            }
+            catch (std::exception & exc)
+            {
                 UNREFERENCED_PARAMETER(exc);
             }
         }
@@ -80,7 +82,7 @@ public:
 
     STDMETHOD(QueryInterface)
     (
-         REFIID riid,
+        REFIID riid,
         void ** ppvObj
     )
     {
@@ -96,11 +98,13 @@ public:
     {
         ULONG refCount = mRealTexture->Release();
 
-        if ( refCount == 0 )
+        if (refCount == 0)
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return refCount;
         }
     }
@@ -108,7 +112,7 @@ public:
     // IDirect3DBaseTexture8 methods
     STDMETHOD(GetDevice)
     (
-         IDirect3DDevice8 ** ppDevice
+        IDirect3DDevice8 ** ppDevice
     )
     {
         (*ppDevice) = (IDirect3DDevice8*)mDevice;
@@ -117,7 +121,7 @@ public:
 
     STDMETHOD(SetPrivateData)
     (
-         REFGUID refguid,
+        REFGUID refguid,
         CONST void * pData,
         DWORD SizeOfData,
         DWORD Flags
@@ -128,7 +132,7 @@ public:
 
     STDMETHOD(GetPrivateData)
     (
-         REFGUID refguid,
+        REFGUID refguid,
         void * pData,
         DWORD * pSizeOfData
     )
@@ -138,7 +142,7 @@ public:
 
     STDMETHOD(FreePrivateData)
     (
-         REFGUID refguid
+        REFGUID refguid
     )
     {
         return mRealTexture->FreePrivateData(refguid);
@@ -146,7 +150,7 @@ public:
 
     STDMETHOD_(DWORD, SetPriority)
     (
-         DWORD PriorityNew
+        DWORD PriorityNew
     )
     {
         return mRealTexture->SetPriority(PriorityNew);
@@ -169,7 +173,7 @@ public:
 
     STDMETHOD_(DWORD, SetLOD)
     (
-         DWORD LODNew
+        DWORD LODNew
     )
     {
         return mRealTexture->SetLOD(LODNew);
@@ -187,13 +191,13 @@ public:
 
     STDMETHOD(GetLevelDesc)
     (
-         UINT Level,
+        UINT Level,
         D3DSURFACE_DESC8 * pDesc
     )
     {
         D3DSURFACE_DESC rDesc;
         HRESULT hr = mRealTexture->GetLevelDesc(Level, &rDesc);
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             memcpy(pDesc, &rDesc, sizeof(D3DSURFACE_DESC8));
         }
@@ -209,7 +213,7 @@ public:
     {
         IDirect3DSurface9 * rSurface;
         HRESULT hr = mRealTexture->GetSurfaceLevel(level, &rSurface);
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * newSurface = new IVoodoo3DSurface8(mDevice, rSurface);
             (*ppSurfaceLevel) = (IDirect3DSurface8*)newSurface;
@@ -217,8 +221,8 @@ public:
 
         VoodooLogger->Log
         (
-            VoodooShader::LL_Debug, 
-            VOODOO_GEM_NAME, 
+            VoodooShader::LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DTexture8::GetSurfaceLevel(%u, %p) == %d",
             level, *ppSurfaceLevel, hr
         );
@@ -228,7 +232,7 @@ public:
 
     STDMETHOD(LockRect)
     (
-         UINT Level,
+        UINT Level,
         D3DLOCKED_RECT * pLockedRect,
         CONST RECT * pRect,
         DWORD Flags
@@ -239,7 +243,7 @@ public:
 
     STDMETHOD(UnlockRect)
     (
-         UINT Level
+        UINT Level
     )
     {
         return mRealTexture->UnlockRect(Level);
@@ -247,7 +251,7 @@ public:
 
     STDMETHOD(AddDirtyRect)
     (
-         CONST RECT * pDirtyRect
+        CONST RECT * pDirtyRect
     )
     {
         return mRealTexture->AddDirtyRect(pDirtyRect);

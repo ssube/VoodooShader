@@ -40,7 +40,7 @@ using namespace VoodooShader;
  *          IVoodoo3D9 interface set should be used.
  */
 class IVoodoo3DDevice8
-    : public IDirect3DDevice8
+            : public IDirect3DDevice8
 {
     /**
     * A pointer to the true underlying IDirect3DDevice9 object wrapped by this IVoodoo interface.
@@ -67,7 +67,7 @@ public:
     * The default, public constructor for IVoodoo3D objects.
     */
     IVoodoo3DDevice8(IDirect3DDevice9 * realDevice, D3DPRESENT_PARAMETERS pp)
-        : mRealDevice(realDevice), mParams(pp), mRefCount(0)
+            : mRealDevice(realDevice), mParams(pp), mRefCount(0)
     {
         VoodooLogger->Log
         (
@@ -79,7 +79,7 @@ public:
 
         VoodooGem->SetDevice(realDevice);
 
-        if ( pp.hDeviceWindow != NULL )
+        if (pp.hDeviceWindow != NULL)
         {
             mWindow = pp.hDeviceWindow;
 
@@ -130,11 +130,13 @@ public:
         //ULONG refCount = mRealDevice->Release();
         --mRefCount;
 
-        if ( mRefCount == 0 )
+        if (mRefCount == 0)
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return mRefCount;
         }
     }
@@ -155,8 +157,8 @@ public:
 
         VoodooLogger->Log
         (
-            LL_Debug, 
-            VOODOO_GEM_NAME, 
+            LL_Debug,
+            VOODOO_GEM_NAME,
             "IVoodoo3DDevice8::BeginScene() == %d",
             hr
         );
@@ -169,7 +171,7 @@ public:
         HRESULT hr = mRealDevice->BeginStateBlock();
 
         VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::BeginStateBlock() == %d",
-            hr);
+                          hr);
 
         return hr;
     }
@@ -266,7 +268,7 @@ public:
         (*ppD3D8) = (IDirect3D8*)VoodooObject;
 
         VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetDirect3D(%p) == D3D_OK",
-        *ppD3D8);
+                          *ppD3D8);
 
         return D3D_OK;
     }
@@ -288,7 +290,7 @@ public:
             pCaps, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             memcpy(pCaps, &rCaps, sizeof(D3DCAPS8));
         }
@@ -305,7 +307,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetDisplayMode(%p) == %d",
-        pMode, hr);
+                          pMode, hr);
 #endif
 
         return hr;
@@ -320,7 +322,7 @@ public:
 
 #ifdef _DEBUG
         VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::GetCreationParameters(%p) == %d",
-        pParameters, hr);
+                          pParameters, hr);
 #endif
 
         return hr;
@@ -358,7 +360,7 @@ public:
         mRealDevice->SetCursorPosition(X, Y, Flags);
 
         VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetCursorPosition(%d, %d, %u)",
-        X, Y, Flags);
+                          X, Y, Flags);
     }
 
     STDMETHOD_(BOOL, ShowCursor)
@@ -369,7 +371,7 @@ public:
         BOOL show = mRealDevice->ShowCursor(bShow);
 
         VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::ShowCursor(%d) == %d",
-        bShow, show);
+                          bShow, show);
 
         return show;
     }
@@ -381,10 +383,10 @@ public:
     )
     {
         HRESULT hr = mRealDevice->CreateAdditionalSwapChain
-        (
-            (D3DPRESENT_PARAMETERS*)pPresentationParameters,
-            (IDirect3DSwapChain9**)pSwapChain
-        );
+                     (
+                         (D3DPRESENT_PARAMETERS*)pPresentationParameters,
+                         (IDirect3DSwapChain9**)pSwapChain
+                     );
 
         VoodooLogger->Log
         (
@@ -424,7 +426,7 @@ public:
     )
     {
         // Run the window check
-        if ( hDestWindowOverride != NULL && hDestWindowOverride != mWindow )
+        if (hDestWindowOverride != NULL && hDestWindowOverride != mWindow)
         {
             mWindow = hDestWindowOverride;
 
@@ -434,20 +436,20 @@ public:
             SetWindowTextA(hDestWindowOverride, title);
         }
 
-        if ( VoodooGem && testShader.get() )
+        if (VoodooGem && testShader.get())
         {
             HRESULT shr = mRealDevice->StretchRect(gBackbuffer.RawSurface, NULL, gThisFrame.RawSurface, NULL, D3DTEXF_NONE);
 
-            if ( FAILED(shr) )
+            if (FAILED(shr))
             {
                 VoodooLogger->Log(LL_Error, VOODOO_GEM_NAME, "Failed to stretch backbuffer to :thisframe texture (%u).", shr);
             }
-            
+
             VoodooGem->DrawShader(testShader);
 
             shr = mRealDevice->StretchRect(gLastShader.RawSurface, NULL, gBackbuffer.RawSurface, NULL, D3DTEXF_NONE);
 
-            if ( FAILED(shr) )
+            if (FAILED(shr))
             {
                 VoodooLogger->Log(LL_Error, VOODOO_GEM_NAME, "Failed to stretch :lastshader texture to backbuffer (%u).", shr);
             }
@@ -485,7 +487,7 @@ public:
             BackBuffer, Type, *ppBackBuffer, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wBackbuffer = new IVoodoo3DSurface8(this, rBackbuffer);
             (*ppBackBuffer) = (IDirect3DSurface8*)wBackbuffer;
@@ -570,31 +572,31 @@ public:
         // If not a render-target, attempt to create it as one
         bool rtt = true;
 
-        if ( !( Usage & D3DUSAGE_RENDERTARGET ) )
+        if (!(Usage & D3DUSAGE_RENDERTARGET))
         {
             hr = mRealDevice->CreateTexture
-            (
-                Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format,
-                Pool, &rTexture, NULL
-            );
+                 (
+                     Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format,
+                     Pool, &rTexture, NULL
+                 );
         }
 
         // That failed, create as a standard texture
-        if ( FAILED(hr) )
+        if (FAILED(hr))
         {
             VoodooLogger->Log
             (
-                LL_Warning, 
-                VOODOO_GEM_NAME, 
-                "Unable to create texture as a render target (%d).", 
+                LL_Warning,
+                VOODOO_GEM_NAME,
+                "Unable to create texture as a render target (%d).",
                 hr
             );
 
             rtt = false;
             hr = mRealDevice->CreateTexture
-            (
-                Width, Height, Levels, Usage, Format, Pool, &rTexture, NULL
-            );
+                 (
+                     Width, Height, Levels, Usage, Format, Pool, &rTexture, NULL
+                 );
         }
 
         VoodooLogger->Log
@@ -606,7 +608,7 @@ public:
         );
 
         // One succeeded, the texture exists. We need to register it with the Voodoo core.
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             //! @todo Set up the core texture registration for Voodoo Gem and track filenames, hook CreateFile
 
@@ -631,10 +633,10 @@ public:
     {
         IDirect3DVolumeTexture9 * rTexture;
         HRESULT hr = mRealDevice->CreateVolumeTexture
-        (
-            Width, Height, Depth, Levels, Usage, Format,
-            Pool, &rTexture, NULL
-        );
+                     (
+                         Width, Height, Depth, Levels, Usage, Format,
+                         Pool, &rTexture, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -645,7 +647,7 @@ public:
         );
 
         //! @todo Set up the core volume texture registration for Voodoo Gem
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DTexture8 * wTexture = new IVoodoo3DTexture8(this, (IDirect3DTexture9*)rTexture);
             (*ppVolumeTexture) = (IDirect3DVolumeTexture8*)wTexture;
@@ -666,10 +668,10 @@ public:
     {
         IDirect3DCubeTexture9 * rTexture;
         HRESULT hr = mRealDevice->CreateCubeTexture
-        (
-            EdgeLength, Levels, Usage, Format, Pool,
-            &rTexture, NULL
-        );
+                     (
+                         EdgeLength, Levels, Usage, Format, Pool,
+                         &rTexture, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -679,7 +681,7 @@ public:
             EdgeLength, Levels, Usage, Format, Pool, *ppCubeTexture, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DTexture8 * wTexture = new IVoodoo3DTexture8(this, (IDirect3DTexture9*)rTexture);
             (*ppCubeTexture) = (IDirect3DCubeTexture8*)wTexture;
@@ -698,9 +700,9 @@ public:
     )
     {
         HRESULT hr = mRealDevice->CreateVertexBuffer
-        (
-            Length, Usage, FVF, Pool, (IDirect3DVertexBuffer9**)ppVertexBuffer, NULL
-        );
+                     (
+                         Length, Usage, FVF, Pool, (IDirect3DVertexBuffer9**)ppVertexBuffer, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -723,9 +725,9 @@ public:
     )
     {
         HRESULT hr = mRealDevice->CreateIndexBuffer
-        (
-            Length, Usage, Format, Pool, (IDirect3DIndexBuffer9**)ppIndexBuffer, NULL
-        );
+                     (
+                         Length, Usage, Format, Pool, (IDirect3DIndexBuffer9**)ppIndexBuffer, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -757,9 +759,9 @@ public:
     {
         IDirect3DSurface9 * rSurface;
         HRESULT hr = mRealDevice->CreateRenderTarget
-        (
-            Width, Height, Format, MultiSample, 0, Lockable, &rSurface, NULL
-        );
+                     (
+                         Width, Height, Format, MultiSample, 0, Lockable, &rSurface, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -769,7 +771,7 @@ public:
             Width, Height, Format, MultiSample, Lockable, *ppSurface, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wSurface = new IVoodoo3DSurface8(this, rSurface);
             (*ppSurface) = (IDirect3DSurface8*)wSurface;
@@ -790,9 +792,9 @@ public:
         IDirect3DSurface9 * rSurface;
 
         HRESULT hr = mRealDevice->CreateDepthStencilSurface
-        (
-            Width, Height, Format, MultiSample, 0, 0, &rSurface, NULL
-        );
+                     (
+                         Width, Height, Format, MultiSample, 0, 0, &rSurface, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -802,7 +804,7 @@ public:
             Width, Height, Format, MultiSample, *ppSurface, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wSurface = new IVoodoo3DSurface8(this, rSurface);
             (*ppSurface) = (IDirect3DSurface8*)wSurface;
@@ -830,9 +832,9 @@ public:
         IDirect3DSurface9 * rSurface;
 
         HRESULT hr = mRealDevice->CreateOffscreenPlainSurface
-        (
-            Width, Height, Format, D3DPOOL_DEFAULT, &rSurface, NULL
-        );
+                     (
+                         Width, Height, Format, D3DPOOL_DEFAULT, &rSurface, NULL
+                     );
 
         VoodooLogger->Log
         (
@@ -842,7 +844,7 @@ public:
             Width, Height, Format, *ppSurface, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wSurface = new IVoodoo3DSurface8(this, rSurface);
             (*ppSurface) = (IDirect3DSurface8*)wSurface;
@@ -875,9 +877,9 @@ public:
         IVoodoo3DSurface8 * wDest = (IVoodoo3DSurface8*)pDestinationSurface;
 
         HRESULT hr = mRealDevice->StretchRect
-        (
-            wSource->RealSurface(), pSourceRectsArray,
-            wDest->RealSurface(), pSourceRectsArray, D3DTEXF_NONE);
+                     (
+                         wSource->RealSurface(), pSourceRectsArray,
+                         wDest->RealSurface(), pSourceRectsArray, D3DTEXF_NONE);
 
         VoodooLogger->Log
         (
@@ -900,9 +902,9 @@ public:
         IVoodoo3DTexture8 * wDest   = (IVoodoo3DTexture8*)pDestinationTexture;
 
         HRESULT hr = mRealDevice->UpdateTexture
-        (
-            wSource->RealTexture(), wDest->RealTexture()
-        );
+                     (
+                         wSource->RealTexture(), wDest->RealTexture()
+                     );
 
         VoodooLogger->Log
         (
@@ -948,7 +950,7 @@ public:
         IVoodoo3DSurface8 * wStencil    = (IVoodoo3DSurface8*)pNewZStencil;
 
         HRESULT hr  = mRealDevice->SetRenderTarget(0, wRender->RealSurface());
-                hr |= mRealDevice->SetDepthStencilSurface(wStencil->RealSurface());
+        hr |= mRealDevice->SetDepthStencilSurface(wStencil->RealSurface());
 
         VoodooLogger->Log
         (
@@ -977,7 +979,7 @@ public:
             *ppRenderTarget, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wRenderTarget = new IVoodoo3DSurface8(this, rRenderTarget);
             (*ppRenderTarget) = (IDirect3DSurface8*)wRenderTarget;
@@ -1002,7 +1004,7 @@ public:
             *ppZStencilSurface, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DSurface8 * wZStencilSurface = new IVoodoo3DSurface8(this, rZStencilSurface);
             (*ppZStencilSurface) = (IDirect3DSurface8*)wZStencilSurface;
@@ -1043,20 +1045,24 @@ public:
         );
 
         // Update cached matrices as necessary
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             D3DMATRIX * matrix = NULL;
 
-            if ( State == D3DTS_VIEW )
+            if (State == D3DTS_VIEW)
             {
                 matrix = (D3DMATRIX*) gMatrixView->GetFloat();
-            } else if ( State == D3DTS_PROJECTION ) {
+            }
+            else if (State == D3DTS_PROJECTION)
+            {
                 matrix = (D3DMATRIX*) gMatrixProj->GetFloat();
-            } else if ( State == D3DTS_WORLD ) {
+            }
+            else if (State == D3DTS_WORLD)
+            {
                 matrix = (D3DMATRIX*) gMatrixWorld->GetFloat();
             }
 
-            if ( matrix )
+            if (matrix)
             {
                 memcpy(matrix, pMatrix, sizeof(D3DMATRIX));
             }
@@ -1100,24 +1106,30 @@ public:
             State, pMatrix, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             D3DMATRIX * matrix = NULL;
 
-            if ( State == D3DTS_VIEW )
+            if (State == D3DTS_VIEW)
             {
                 matrix = (D3DMATRIX*) gMatrixView->GetFloat();
-            } else if ( State == D3DTS_PROJECTION ) {
+            }
+            else if (State == D3DTS_PROJECTION)
+            {
                 matrix = (D3DMATRIX*) gMatrixProj->GetFloat();
-            } else if ( State == D3DTS_WORLD ) {
+            }
+            else if (State == D3DTS_WORLD)
+            {
                 matrix = (D3DMATRIX*) gMatrixWorld->GetFloat();
             }
 
-            if ( matrix )
+            if (matrix)
             {
                 mRealDevice->GetTransform(State, matrix);
                 //matrix = D3DXMatrixMultiply(NULL, (const D3DXMATRIX*)matrix, pMatrix);
-            } else {
+            }
+            else
+            {
                 VoodooLogger->Log
                 (
                     LL_Info,
@@ -1469,7 +1481,7 @@ public:
             Stage, *ppTexture, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             IVoodoo3DTexture8 * wTexture = new IVoodoo3DTexture8(this, (IDirect3DTexture9*)rTexture);
             (*ppTexture) = (IDirect3DBaseTexture8*)wTexture;
@@ -1486,11 +1498,13 @@ public:
     {
         HRESULT hr = D3D_OK;
 
-        if ( pTexture )
+        if (pTexture)
         {
             IVoodoo3DTexture8 * wTexture = (IVoodoo3DTexture8*)pTexture;
             hr = mRealDevice->SetTexture(Stage, (IDirect3DBaseTexture9*)wTexture->RealTexture());
-        } else {
+        }
+        else
+        {
             hr = mRealDevice->SetTexture(Stage, NULL);
         }
 
@@ -1735,10 +1749,10 @@ public:
     )
     {
         HRESULT hr = mRealDevice->DrawIndexedPrimitiveUP
-        (
-            PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, pIndexData,
-            IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride
-        );
+                     (
+                         PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, pIndexData,
+                         IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride
+                     );
 
         VoodooLogger->Log
         (
@@ -1762,9 +1776,9 @@ public:
     )
     {
         HRESULT hr = mRealDevice->ProcessVertices
-        (
-            SrcStartIndex, DestIndex, VertexCount,(IDirect3DVertexBuffer9*)pDestBuffer, NULL, Flags
-        );
+                     (
+                         SrcStartIndex, DestIndex, VertexCount,(IDirect3DVertexBuffer9*)pDestBuffer, NULL, Flags
+                     );
 
         VoodooLogger->Log
         (
@@ -1795,7 +1809,7 @@ public:
             *pDeclaration, *pFunction, *pHandle, Usage, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             mVertexShaders.insert(*pHandle);
         }
@@ -1811,11 +1825,13 @@ public:
         //! @todo Test the shader handling further; appears to function properly
         HRESULT hr = D3D_OK;
 
-        if ( mVertexShaders.find(Handle) == mVertexShaders.end() )
+        if (mVertexShaders.find(Handle) == mVertexShaders.end())
         {
             // Not a shader, FVF
             hr = mRealDevice->SetFVF(Handle);
-        } else {
+        }
+        else
+        {
             hr = mRealDevice->SetVertexShader((IDirect3DVertexShader9*)Handle);
         }
 
@@ -1859,10 +1875,12 @@ public:
         HRESULT hr = D3D_OK;
 
         std::set<DWORD>::iterator vShader = mVertexShaders.find(Handle);
-        if ( vShader != mVertexShaders.end() )
+        if (vShader != mVertexShaders.end())
         {
             mVertexShaders.erase(vShader);
-        } else {
+        }
+        else
+        {
             hr = D3DERR_INVALIDCALL;
         }
 
@@ -2060,7 +2078,7 @@ public:
             pFunction, *pHandle, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             mPixelShaders.insert(*pHandle);
         }
@@ -2076,11 +2094,13 @@ public:
         //! @todo Test the shader setup
         HRESULT hr = D3D_OK;
 
-        if ( mPixelShaders.find(Handle) == mPixelShaders.end() )
+        if (mPixelShaders.find(Handle) == mPixelShaders.end())
         {
             //! @todo Check if this is write, D3D8 docs have nothing
             hr = mRealDevice->SetPixelShader(NULL);
-        } else {
+        }
+        else
+        {
             hr = mRealDevice->SetPixelShader((IDirect3DPixelShader9*)Handle);
         }
 
@@ -2092,7 +2112,7 @@ public:
             Handle, hr
         );
 
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             mCurrentPixelShader = Handle;
         }
@@ -2125,10 +2145,12 @@ public:
     {
         HRESULT hr = D3D_OK; //mRealDevice->DeletePixelShader(DWORD Handle);
         std::set<DWORD>::iterator pShader = mPixelShaders.find(Handle);
-        if ( pShader != mPixelShaders.end() )
+        if (pShader != mPixelShaders.end())
         {
             mPixelShaders.erase(pShader);
-        } else {
+        }
+        else
+        {
             //hr = D3DERR_INVALIDCALL;
         }
 

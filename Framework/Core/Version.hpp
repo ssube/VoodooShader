@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -41,7 +41,7 @@
     VOODOO_##token##_VERSION_MAJOR,\
     VOODOO_##token##_VERSION_MINOR,\
     VOODOO_##token##_VERSION_PATCH,\
-    VOODOO_##token##_VERSION_REV   
+    VOODOO_##token##_VERSION_REV
 
 /**
  * Creates a basic version string separated with periods.
@@ -92,7 +92,7 @@
 #define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR
 #define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR
 #define VOODOO_CORE_VERSION_PATCH       VOODOO_GLOBAL_VERSION_PATCH
-#define VOODOO_CORE_VERSION_REV         VOODOO_GLOBAL_VERSION_REV   
+#define VOODOO_CORE_VERSION_REV         VOODOO_GLOBAL_VERSION_REV
 //-----------------------------------------------------------------------------
 
 
@@ -103,7 +103,7 @@
 #define VOODOO_CG_VERSION_MAJOR         3
 #define VOODOO_CG_VERSION_MINOR         0
 #define VOODOO_CG_VERSION_PATCH         0
-#define VOODOO_CG_VERSION_REV           7   
+#define VOODOO_CG_VERSION_REV           7
 //  VC
 #define VOODOO_VC_NAME                  "MSVC"
 #define VOODOO_VC_PRETTYNAME            "Microsoft Visual C++"
@@ -111,6 +111,6 @@
 #define VOODOO_VC_VERSION_MINOR         0
 #define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER
 #define VOODOO_VC_VERSION_REV           _MSC_BUILD
-//----------------------------------------------------------------------------- 
+//-----------------------------------------------------------------------------
 
 #endif /*VOODOO_VERSION_HPP*/

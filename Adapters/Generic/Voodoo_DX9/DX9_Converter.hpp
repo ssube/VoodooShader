@@ -13,7 +13,7 @@ namespace VoodooShader
         public:
             static inline D3DFORMAT ToD3DFormat(TextureFormat tf)
             {
-                switch ( tf )
+                switch (tf)
                 {
                 case TF_RGB5:
                     return D3DFMT_X1R5G5B5;
@@ -41,7 +41,7 @@ namespace VoodooShader
 
             static inline TextureFormat ToTextureFormat(D3DFORMAT tf)
             {
-                switch ( tf )
+                switch (tf)
                 {
                 case D3DFMT_X1R5G5B5:
                     return TF_RGB5;

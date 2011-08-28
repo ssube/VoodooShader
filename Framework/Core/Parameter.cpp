@@ -9,29 +9,29 @@
 namespace VoodooShader
 {
     Parameter::Parameter(_In_ Core * core, _In_ String name, _In_ ParameterType type)
-        : m_Type(type), m_Parent(nullptr), m_Virtual(true), m_Core(core), m_Name(name)
-    { 
+            : m_Type(type), m_Parent(nullptr), m_Virtual(true), m_Core(core), m_Name(name)
+    {
         m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Creating a virtual parameter (%s, core %p) of type %s.", name.c_str(), core, Converter::ToString(type));
-        
+
         CGcontext context = m_Core->GetCgContext();
 
-        if ( !context || !cgIsContext(context) )
+        if (!context || !cgIsContext(context))
         {
             throw std::exception("Unable to create parameter (core has no context).");
         }
 
         m_Param = cgCreateParameter
-        (
-            context, 
-            Converter::ToCGType(m_Type)
-        );
+                  (
+                      context,
+                      Converter::ToCGType(m_Type)
+                  );
 
         memset(m_ValueFloat, 0, sizeof(float)*16);
         m_ValueTexture = TextureRef();
     }
 
     Parameter::Parameter(_In_ Shader * parent, _In_ CGparameter param)
-        : m_Parent(parent), m_Param(param), m_Virtual(false), m_Core(parent->GetCore())
+            : m_Parent(parent), m_Param(param), m_Virtual(false), m_Core(parent->GetCore())
     {
         m_Type = Converter::ToParameterType(cgGetParameterType(param));
         m_Name = cgGetParameterName(param);
@@ -44,7 +44,7 @@ namespace VoodooShader
     {
         m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying parameter %s.", m_Name.c_str());
 
-        if ( m_Virtual && cgIsParameter(m_Param) )
+        if (m_Virtual && cgIsParameter(m_Param))
         {
             cgDestroyParameter(m_Param);
         }
@@ -54,7 +54,7 @@ namespace VoodooShader
     {
         String name;
 
-        if ( m_Parent )
+        if (m_Parent)
         {
             name = this->m_Parent->GetName();
         }
@@ -81,7 +81,7 @@ namespace VoodooShader
 
     void Parameter::AttachParameter(ParameterRef param)
     {
-        if ( !this->m_Virtual )
+        if (!this->m_Virtual)
         {
             Throw(VOODOO_CORE_NAME, "Cannot attach to a non-virtual parameter.", m_Core);
         }
@@ -111,7 +111,7 @@ namespace VoodooShader
 
     void Parameter::SetScalar(int Count, _In_count_(Count) float * Values)
     {
-        if ( Values )
+        if (Values)
         {
             memcpy(m_ValueFloat, Values, min(16, Count) * sizeof(float));
         }

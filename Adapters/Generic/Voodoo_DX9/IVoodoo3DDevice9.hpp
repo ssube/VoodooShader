@@ -2,11 +2,11 @@
 
 #include "DX9_Module.hpp"
 
-class IVoodoo3DDevice9 
-    : public IDirect3DDevice9
+class IVoodoo3DDevice9
+            : public IDirect3DDevice9
 {
 private:
-    IDirect3DDevice9* mRealDevice;    
+    IDirect3DDevice9* mRealDevice;
     IDirect3D9* m_d3d;
 
 public:
@@ -30,7 +30,7 @@ public:
     STDMETHOD_(ULONG,Release)(THIS)
     {
         ULONG count = mRealDevice->Release();
-        if(0 == count)
+        if (0 == count)
             delete this;
 
         return count;
@@ -56,10 +56,10 @@ public:
     {
         // Let the device validate the incoming pointer for us
         HRESULT hr = mRealDevice->GetDirect3D(ppD3D9);
-        if(SUCCEEDED(hr))
+        if (SUCCEEDED(hr))
             *ppD3D9 = m_d3d;
 
-        return hr;    
+        return hr;
     }
 
     STDMETHOD(GetDeviceCaps)(THIS_ D3DCAPS9* pCaps)
@@ -122,13 +122,13 @@ public:
         //mRealDevice->GetRenderTarget(0, &rts);
 
         HRESULT hr = mRealDevice->StretchRect(backbufferSurf, NULL, surface_ThisFrame, NULL, D3DTEXF_NONE);
-        if ( FAILED(hr) )
+        if (FAILED(hr))
         {
             VoodooLogger->Log("Voodoo DX9: Failed to stretch backbuffer to scratch texture.\n");
         }
 
         hr = mRealDevice->SetRenderTarget(0, backbufferSurf);
-        if ( FAILED(hr) )
+        if (FAILED(hr))
         {
             VoodooLogger->Log("Voodoo DX9: Failed to set render target.\n");
         }

@@ -31,7 +31,7 @@ namespace VoodooShader
 
         IObject * API_ClassCreate
         (
-            _In_ int number, 
+            _In_ int number,
             _In_ Core * core
         );
     }

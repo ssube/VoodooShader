@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -38,7 +38,7 @@ namespace VoodooShader
      * linking stage. Shader file loading and compilation are handled internally,
      * the shader can be constructed from a file location or existing Cg effect
      * object.
-     * 
+     *
      * @note    Voodoo @ref Shader Shaders correspond to DirectX effects or a group
      *          of OpenGL programs.
      * @note    A shader may contain multiple @ref Technique techniques. See the
@@ -50,7 +50,7 @@ namespace VoodooShader
      *          will be valid.
      */
     class Shader
-        : public IObject
+                : public IObject
     {
     public:
         static ShaderRef Create(Core * parent, String Path, const char ** ppArgs = nullptr);
@@ -72,7 +72,7 @@ namespace VoodooShader
         /**
          * Retrieve a technique from the shader by name. Most cases should use
          * the default technique, but some specific applications may want a
-         * particular technique. 
+         * particular technique.
          *
          * @param name The technique name to find.
          * @return A shared reference to the technique if it is found, an empty
@@ -90,7 +90,7 @@ namespace VoodooShader
          * first technique to validate.
          *
          * @return A reference to the default technique.
-         * 
+         *
          * @note To influence the priority of techniques, simply place the most
          *        specific or least compatible first (often high-quality ones) and
          *        count down with the most compatible and simplest technique last.
@@ -101,13 +101,13 @@ namespace VoodooShader
         /**
          * Set a technique from this shader to be used as the default technique.
          * Some adapter functions simply retrieve the default technique to draw
-         * with. 
-         * 
+         * with.
+         *
          * @param name The name of a technique within this shader to use.
          *
          * @note This takes a name and not a TechniqueRef to prevent cross-
          *        linking shaders (which would be a Bad Thing, at best).
-         * 
+         *
          * @throws Exception if the name is not a valid technique.
          */
         virtual void SetDefaultTechnique
@@ -118,7 +118,7 @@ namespace VoodooShader
         /**
          * Retrieve the number of effect-level parameters in this shader. These
          * hold a single value for all passes.
-         * 
+         *
          * @return The parameter count.
          */
         size_t GetParameterCount();
@@ -139,7 +139,7 @@ namespace VoodooShader
 
         /**
          * Retrieve the underlying Cg technique.
-         * 
+         *
          * @return A pointer to the Cg technique.
          */
         CGeffect GetCgEffect();
@@ -147,16 +147,16 @@ namespace VoodooShader
     private:
         /**
          * Create a shader from a file, passing options to the compiler.
-         * 
+         *
          * @param parent The Core this Shader is created under.
          * @param filename The file to use for source.
          * @param args Optionals arguments to be passed to the compiler (last item in the array must be null).
          */
         Shader
         (
-            _In_ ShaderRef self, 
-            _In_ Core * pParent, 
-            _In_ String Path, 
+            _In_ ShaderRef self,
+            _In_ Core * pParent,
+            _In_ String Path,
             _In_opt_ const char ** ppArgs = nullptr
         );
 
@@ -182,7 +182,7 @@ namespace VoodooShader
         /**
          * Links a particular effect-level sampler against a core texture.
          * This generally should be called by Shader::LinkParameter().
-         * 
+         *
          * @param param The sampler to link.
          */
         void LinkSampler
@@ -194,7 +194,7 @@ namespace VoodooShader
          * Find texture information from a parameter and create a texture
          * based on that data. Calls Shader::LinkSampler() after texture
          * creation if appropriate.
-         * 
+         *
          * @param param The parameter to use.
          */
         void CreateParameterTexture

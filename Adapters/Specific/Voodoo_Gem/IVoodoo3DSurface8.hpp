@@ -29,14 +29,14 @@
 using namespace VoodooShader;
 
 class IVoodoo3DSurface8
-    : public IDirect3DSurface8
+            : public IDirect3DSurface8
 {
     IVoodoo3DDevice8 * mRealDevice;
     IDirect3DSurface9 * mRealSurface;
 
 public:
     IVoodoo3DSurface8(IVoodoo3DDevice8 * device, IDirect3DSurface9 * realSurface)
-        : mRealDevice(device), mRealSurface(realSurface)
+            : mRealDevice(device), mRealSurface(realSurface)
     {
         VoodooLogger->Log
         (
@@ -67,11 +67,13 @@ public:
     {
         ULONG refCount = mRealSurface->Release();
 
-        if ( refCount == 0 )
+        if (refCount == 0)
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return refCount;
         }
     }
@@ -107,7 +109,7 @@ public:
     {
         D3DSURFACE_DESC rDesc;
         HRESULT hr = mRealSurface->GetDesc(&rDesc);
-        if ( SUCCEEDED(hr) )
+        if (SUCCEEDED(hr))
         {
             pDesc->Format = rDesc.Format;
             pDesc->Type = rDesc.Type;

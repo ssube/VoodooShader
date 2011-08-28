@@ -31,28 +31,32 @@ namespace VoodooShader
         }
 
         const char * API_ClassInfo
-            (
+        (
             _In_ int number
-            )
+        )
         {
-            if ( number == 0 )
+            if (number == 0)
             {
                 return "Frost_Adapter";
-            } else {
+            }
+            else
+            {
                 return NULL;
             }
         }
 
         IObject * API_ClassCreate
-            (
-            _In_ int number, 
+        (
+            _In_ int number,
             _In_ Core * core
-            )
+        )
         {
-            if ( number == 0 )
+            if (number == 0)
             {
                 return new Frost::Adapter(core);
-            } else {
+            }
+            else
+            {
                 return NULL;
             }
         }

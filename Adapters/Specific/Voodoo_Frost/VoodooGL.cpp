@@ -12,9 +12,9 @@ using namespace VoodooShader;
 
 /**
  * Begins a draw operation and sets the expected vertex order.
- * 
+ *
  * @param mode Vertex order (GL_QUADS, etc)
- * 
+ *
  * @implements glBegin
  */
 void GLAPIENTRY vglBegin(GLenum mode)
@@ -41,10 +41,10 @@ void GLAPIENTRY vglBegin(GLenum mode)
 
 /**
  * Binds a texture to the given target for use in draw ops.
- * 
+ *
  * @param target The target to bind to (often GL_TEXTURE_2D).
  * @param texture The texture ID to be bound (must be a valid ID).
- * 
+ *
  * @note This function also binds material shaders as appropriate. If texture
  *       is linked to a Shader, the default technique will be retrieved and set
  *       as the active effect.
@@ -87,7 +87,7 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 
 void GLAPIENTRY vglClear(GLbitfield mask)
 {
-    if ( VoodooFrost && mask == MASK_HUD && glIsEnabled(GL_LIGHT0) )
+    if (VoodooFrost && mask == MASK_HUD && glIsEnabled(GL_LIGHT0))
     {
         GLint prevTexture = 0;
         glGetIntegerv(GL_TEXTURE_BINDING_2D, &prevTexture);
@@ -153,7 +153,7 @@ void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const G
 
 void GLAPIENTRY vglEnable(GLenum cap)
 {
-    if ( cap == GL_FOG && gFogMult > 0 ) return;
+    if (cap == GL_FOG && gFogMult > 0) return;
 
     VoodooLogger->Log
     (
@@ -193,9 +193,9 @@ void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
 
 void GLAPIENTRY vglFogf(GLenum pname, GLfloat param)
 {
-    if ( pname == GL_FOG_START )
+    if (pname == GL_FOG_START)
         param = param * gFogMult;
-    if ( pname == GL_FOG_END )
+    if (pname == GL_FOG_END)
         param = param * gFogMult;
 
     VoodooLogger->Log
@@ -252,13 +252,13 @@ HGLRC WINAPI vwglCreateContext(HDC hdc)
         "wglCreateContext(%p) == %p",
         hdc, result
     );
-    
+
     return result;
 }
 
 BOOL WINAPI vwglDeleteContext(HGLRC hglrc)
 {
-    if ( gSecondContext && gNwnWindow )
+    if (gSecondContext && gNwnWindow)
     {
         VoodooFrost->SetGLRC(NULL);
         gSecondContext = false;
@@ -304,12 +304,14 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
         hdc, hglrc, result
     );
 
-    if ( !gSecondContext )
+    if (!gSecondContext)
     {
         gSecondContext = true;
-    } else if ( !gFrostEnabled ) {
+    }
+    else if (!gFrostEnabled)
+    {
         GLenum glewStatus = glewInit();
-        if ( glewStatus != GLEW_OK )
+        if (glewStatus != GLEW_OK)
         {
             VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "Unable to initialize GLEW (code %u).", glewStatus);
 
@@ -319,7 +321,7 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
         gNwnWindow = WindowFromDC(hdc);
 
         char title[64];
-        if ( GetWindowTextA(gNwnWindow, title, 64) > 0 )
+        if (GetWindowTextA(gNwnWindow, title, 64) > 0)
         {
             strcat_s(title, " [ Voodoo Frost ]");
             SetWindowTextA(gNwnWindow, title);
@@ -330,8 +332,8 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 
         VoodooLogger->Log
         (
-            LL_Info, 
-            VOODOO_FROST_NAME, 
+            LL_Info,
+            VOODOO_FROST_NAME,
             "OpenGL driver information:&lt;br /&gt;\nVendor: %s&lt;br /&gt;\nRenderer: %s&lt;br /&gt;\nVersion: %s",
             glGetString(GL_VENDOR), glGetString(GL_RENDERER), glGetString(GL_VERSION)
         );

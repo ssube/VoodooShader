@@ -50,14 +50,14 @@ namespace VoodooShader
 
         IObject * API_ClassCreate
         (
-            _In_ int number, 
+            _In_ int number,
             _In_ Core * core
         );
     }
 }
 
 /**
- * Storage struct to hold associated Voodoo @ref Texture "Textures" and 
+ * Storage struct to hold associated Voodoo @ref Texture "Textures" and
  * API texture objects. The RawTexture and RawSurface fields can hold an
  * OpenGL FBO and texture or DirectX texture and surface.
  */
@@ -76,12 +76,12 @@ class IVoodoo3DTexture8;
 _Check_return_ void * WINAPI Gem_D3D8Create(_In_ UINT sdkVersion);
 __out HANDLE WINAPI Gem_CreateFileA
 (
-    __in LPCSTR lpFileName, 
-    __in DWORD dwDesiredAccess, 
-    __in DWORD dwShareMode, 
-    __in_opt LPSECURITY_ATTRIBUTES lpSecurityAttributes, 
-    __in DWORD dwCreationDisposition, 
-    __in DWORD dwFlagsAndAttributes, 
+    __in LPCSTR lpFileName,
+    __in DWORD dwDesiredAccess,
+    __in DWORD dwShareMode,
+    __in_opt LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+    __in DWORD dwCreationDisposition,
+    __in DWORD dwFlagsAndAttributes,
     __in_opt HANDLE hTemplateFile
 );
 

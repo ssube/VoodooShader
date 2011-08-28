@@ -35,42 +35,46 @@ namespace VoodooShader
             _In_ int number
         )
         {
-            if ( number == 0 )
+            if (number == 0)
             {
                 return XmlLoggerName;
-            } else {
+            }
+            else
+            {
                 return NULL;
             }
         }
 
         IObject * API_ClassCreate
         (
-            _In_ int number, 
+            _In_ int number,
             _In_ Core * core
         )
         {
-            if ( number == 0 )
+            if (number == 0)
             {
                 return new XmlLogger(core);
-            } else {
+            }
+            else
+            {
                 return NULL;
             }
         }
 
         XmlLogger::XmlLogger(_In_ Core * core)
-            : m_Core(core), m_LogLevel(LL_Initial)
+                : m_Core(core), m_LogLevel(LL_Initial)
         {
             this->m_LocalTime = new tm();
         }
 
         XmlLogger::~XmlLogger()
         {
-            if ( this->m_LogFile.is_open() )
+            if (this->m_LogFile.is_open())
             {
                 this->Close();
             }
 
-            if ( this->m_LocalTime )
+            if (this->m_LocalTime)
             {
                 delete this->m_LocalTime;
             }
@@ -89,16 +93,18 @@ namespace VoodooShader
 
         bool XmlLogger::Open(String filename, bool append)
         {
-            if ( this->m_LogFile.is_open() )
+            if (this->m_LogFile.is_open())
             {
                 this->Close();
             }
 
             unsigned int flags = ios_base::out;
-            if ( append )
+            if (append)
             {
                 flags |= ios_base::app;
-            } else {
+            }
+            else
+            {
                 flags |= ios_base::trunc;
             }
 
@@ -108,7 +114,7 @@ namespace VoodooShader
 
             this->m_LogFile.open(fullname, flags);
 
-            if ( this->m_LogFile.is_open() )
+            if (this->m_LogFile.is_open())
             {
 #ifdef _DEBUG
                 this->SetFlags(LF_Flush);
@@ -116,9 +122,9 @@ namespace VoodooShader
 
                 stringstream logMsg;
 
-                logMsg << "<?xml version='1.0'?>\n<VoodooLog "; 
-                logMsg << this->LogDate(); 
-                logMsg << this->LogTime(); 
+                logMsg << "<?xml version='1.0'?>\n<VoodooLog ";
+                logMsg << this->LogDate();
+                logMsg << this->LogTime();
                 logMsg << this->LogTicks();
                 logMsg << ">\n";
 
@@ -133,14 +139,16 @@ namespace VoodooShader
                 this->LogModule(loggerVersion);
 
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
 
         void XmlLogger::Close()
         {
-            if ( this->m_LogFile.is_open() )
+            if (this->m_LogFile.is_open())
             {
                 this->m_LogFile << "</VoodooLog>\n";
                 this->m_LogFile.close();
@@ -151,12 +159,14 @@ namespace VoodooShader
         {
             time_t now = time(NULL);
 
-            if ( localtime_s(this->m_LocalTime, &now) == 0 )
+            if (localtime_s(this->m_LocalTime, &now) == 0)
             {
                 stringstream stamp;
                 stamp << " time=\"" << put_time(m_LocalTime, "%H%M%S") << "\" ";
                 return stamp.str();
-            } else {
+            }
+            else
+            {
                 return String(" time=\"000000\" ");
             }
         }
@@ -165,12 +175,14 @@ namespace VoodooShader
         {
             time_t now = time(NULL);
 
-            if ( localtime_s(this->m_LocalTime, &now) == 0 )
+            if (localtime_s(this->m_LocalTime, &now) == 0)
             {
                 stringstream stamp;
                 stamp << " date=\"" << put_time(m_LocalTime, "%Y%m%d") << "\" ";
                 return stamp.str();
-            } else {
+            }
+            else
+            {
                 return String(" date=\"00000000\" ");
             }
         }
@@ -187,23 +199,26 @@ namespace VoodooShader
             Version version
         )
         {
-            if ( !this->m_LogFile.is_open() ) return;
+            if (!this->m_LogFile.is_open()) return;
 
             stringstream logMsg;
 
             logMsg << "    <Module name=\"" << version.Name << "\" " <<
-                " major=\"" << version.Major << "\" " <<
-                " minor=\"" << version.Minor << "\" " <<
-                " patch=\"" << version.Patch << "\" " <<
-                " rev=\"" << version.Rev << "\" " <<
-                " debug=\"" << version.Debug << "\" />\n";
+            " major=\"" << version.Major << "\" " <<
+            " minor=\"" << version.Minor << "\" " <<
+            " patch=\"" << version.Patch << "\" " <<
+            " rev=\"" << version.Rev << "\" " <<
+            " debug=\"" << version.Debug << "\" />\n";
 
 #ifdef _DEBUG
             cout << logMsg.str();
 #endif
             m_LogFile << logMsg.str();
 
-            if (m_Flags&LF_Flush) { m_LogFile << flush; }
+            if (m_Flags&LF_Flush)
+            {
+                m_LogFile << flush;
+            }
         }
 
         void XmlLogger::SetFlags(LogFlags flags)
@@ -230,10 +245,10 @@ namespace VoodooShader
         {
             va_list args;
 
-            if ( !this->m_LogFile.is_open() ) return;
+            if (!this->m_LogFile.is_open()) return;
 
-            LogLevel mask = (LogLevel)( level & m_LogLevel );
-            if ( !( mask & LL_Severity ) || !( mask & LL_Origin ) ) return;
+            LogLevel mask = (LogLevel)(level & m_LogLevel);
+            if (!(mask & LL_Severity) || !(mask & LL_Origin)) return;
 
             try
             {
@@ -258,7 +273,7 @@ namespace VoodooShader
                 logMsg << "</Message>\n";
 
 #ifdef _DEBUG
-                if ( level == LL_Internal || level & ( LL_Warning | LL_Error ) )
+                if (level == LL_Internal || level & (LL_Warning | LL_Error))
                 {
                     OutputDebugString(logMsg.str().c_str());
                 }
@@ -267,9 +282,14 @@ namespace VoodooShader
 #endif
                 m_LogFile << logMsg.str();
 
-                if (m_Flags&LF_Flush) { m_LogFile << flush; }
+                if (m_Flags&LF_Flush)
+                {
+                    m_LogFile << flush;
+                }
 
-            } catch ( std::exception exc ) {
+            }
+            catch (std::exception exc)
+            {
 #ifdef _DEBUG
                 OutputDebugString(exc.what());
 #else
@@ -280,7 +300,7 @@ namespace VoodooShader
 
         void XmlLogger::Flush()
         {
-            if ( this->m_LogFile.is_open() )
+            if (this->m_LogFile.is_open())
             {
                 this->m_LogFile.flush();
             }

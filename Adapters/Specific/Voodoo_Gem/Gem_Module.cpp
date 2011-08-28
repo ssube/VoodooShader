@@ -57,24 +57,28 @@ namespace VoodooShader
             _In_ int number
         )
         {
-            if ( number == 0 )
+            if (number == 0)
             {
                 return "Gem_Adapter";
-            } else {
+            }
+            else
+            {
                 return NULL;
             }
         }
 
         IObject * API_ClassCreate
         (
-            _In_ int number, 
+            _In_ int number,
             _In_ Core * core
         )
         {
-            if ( number == 0 )
+            if (number == 0)
             {
                 return new Gem::Adapter(core);
-            } else {
+            }
+            else
+            {
                 return NULL;
             }
         }
@@ -92,18 +96,18 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
     (
         LL_Info,
         VOODOO_GEM_NAME,
-        "Direct3DCreate8 called, SDK version: %u.", 
+        "Direct3DCreate8 called, SDK version: %u.",
         sdkVersion
     );
 
     //Load the real d3d8 dll and get device caps
     char Path[MAX_PATH];
-    GetSystemDirectoryA (Path, MAX_PATH);
-    strcat_s (Path, MAX_PATH, "\\d3d8.dll");
+    GetSystemDirectoryA(Path, MAX_PATH);
+    strcat_s(Path, MAX_PATH, "\\d3d8.dll");
 
     HMODULE d3ddll = LoadLibraryA(Path);
 
-    if ( d3ddll == NULL )
+    if (d3ddll == NULL)
     {
         VoodooLogger->Log
         (
@@ -118,32 +122,32 @@ void * WINAPI Gem_D3D8Create(UINT sdkVersion)
     typedef IDirect3D8 * (__stdcall * D3DFunc8)(UINT);
     D3DFunc8 d3d8func = (D3DFunc8)GetProcAddress(d3ddll, "Direct3DCreate8");
 
-    if (d3d8func == NULL) 
+    if (d3d8func == NULL)
     {
         VoodooLogger->Log
         (
-            LL_Error, 
-            VOODOO_GEM_NAME, 
+            LL_Error,
+            VOODOO_GEM_NAME,
             "Could not find D3D8 create true func."
-         );
+        );
 
         return 0;
     }
 
     IDirect3D8 * TempObject = (d3d8func)(sdkVersion);
     HRESULT hr = TempObject->GetDeviceCaps(0, D3DDEVTYPE_HAL, &d3d8Caps);
-    if (hr != D3D_OK) 
-    { 
+    if (hr != D3D_OK)
+    {
         VoodooLogger->Log
-            (
+        (
             LL_Error,
             VOODOO_GEM_NAME,
             "Could not get D3D8 caps."
-            );
+        );
     }
     TempObject->Release();
 
-    if ( d3ddll )
+    if (d3ddll)
     {
         FreeLibrary(d3ddll);
     }
@@ -160,12 +164,12 @@ std::tr1::regex imageformat(".*\\.(dds|tga|bmp|targa)");
 
 __out HANDLE WINAPI Gem_CreateFileA
 (
-    __in LPCSTR lpFileName, 
-    __in DWORD dwDesiredAccess, 
-    __in DWORD dwShareMode, 
-    __in_opt LPSECURITY_ATTRIBUTES lpSecurityAttributes, 
-    __in DWORD dwCreationDisposition, 
-    __in DWORD dwFlagsAndAttributes, 
+    __in LPCSTR lpFileName,
+    __in DWORD dwDesiredAccess,
+    __in DWORD dwShareMode,
+    __in_opt LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+    __in DWORD dwCreationDisposition,
+    __in DWORD dwFlagsAndAttributes,
     __in_opt HANDLE hTemplateFile
 )
 {
@@ -177,7 +181,9 @@ __out HANDLE WINAPI Gem_CreateFileA
     try
     {
         gNextTexture = std::tr1::regex_match(gLastFilename, imageformat);
-    } catch ( std::tr1::regex_error & error ) {
+    }
+    catch (std::tr1::regex_error & error)
+    {
         VoodooLogger->Log
         (
             LL_Error,
@@ -188,9 +194,9 @@ __out HANDLE WINAPI Gem_CreateFileA
         gNextTexture = false;
     }
 
-    if ( VoodooCore )
+    if (VoodooCore)
     {
-        LogLevel ll = ( file == INVALID_HANDLE_VALUE ) ? LL_Warning : LL_Info;
+        LogLevel ll = (file == INVALID_HANDLE_VALUE) ? LL_Warning : LL_Info;
 
         VoodooLogger->Log
         (

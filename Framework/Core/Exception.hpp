@@ -3,16 +3,16 @@
  * Copyright (c) 2010-2011 by Sean Sube
  *
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the 
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with this program; 
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301 US
  *
  * Support and more information may be found at http://www.voodooshader.com, or by contacting the
@@ -39,25 +39,25 @@ namespace VoodooShader
      *        with the Exception::what() method.
      */
     class VOODOO_API Exception
-        : public std::exception
+                : public std::exception
     {
     public:
         Exception
         (
-            _In_ char * module, 
-            _In_ char * message, 
-            _In_ Core * core, 
-            _In_ char * file, 
-            _In_ char * function, 
+            _In_ char * module,
+            _In_ char * message,
+            _In_ Core * core,
+            _In_ char * file,
+            _In_ char * function,
             _In_ int line
         );
 
         Exception
         (
             _In_ String module,
-            _In_ String message, 
-            _In_ Core * core, 
-            _In_ char * file, 
+            _In_ String message,
+            _In_ Core * core,
+            _In_ char * file,
             _In_ char * function,
             _In_ int line
         );

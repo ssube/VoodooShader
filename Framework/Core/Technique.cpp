@@ -15,19 +15,22 @@ namespace VoodooShader
     {
         TechniqueRef tech;
         new Technique(tech, parent, cgTech);
+        tech->Link(tech);
         return tech;
     }
 
     Technique::Technique(TechniqueRef & self, ShaderRef parent, CGtechnique cgTech)
-        : m_Shader(parent), m_Core(parent->GetCore()), m_CgTechnique(cgTech)
+            : m_Shader(parent), m_Core(parent->GetCore()), m_CgTechnique(cgTech)
     {
         self.reset(this);
 
         const char * techName = cgGetTechniqueName(this->m_CgTechnique);
-        if ( techName )
+        if (techName)
         {
             this->m_Name = techName;
-        } else {
+        }
+        else
+        {
             char nameBuffer[16];
             sprintf_s(nameBuffer, "tech_%p", m_CgTechnique);
             this->m_Name = nameBuffer;
@@ -55,10 +58,12 @@ namespace VoodooShader
 
     PassRef Technique::GetPass(size_t index)
     {
-        if ( index < this->m_Passes.size() )
+        if (index < this->m_Passes.size())
         {
             return this->m_Passes[index];
-        } else {
+        }
+        else
+        {
             Throw(VOODOO_CORE_NAME, "Voodoo Core: Invalid pass index (> pass count).", m_Core);
         }
     }
@@ -83,22 +88,22 @@ namespace VoodooShader
         return m_CgTechnique;
     }
 
-    void Technique::Link(TechniquePtr self)
+    void Technique::Link(TechniqueRef self)
     {
         this->m_Target = TextureRef();
 
         // Process the technique's target annotation
         CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(this->m_CgTechnique, "target");
 
-        if ( cgIsAnnotation(targetAnnotation) )
+        if (cgIsAnnotation(targetAnnotation))
         {
-            if ( cgGetAnnotationType(targetAnnotation) == CG_STRING )
+            if (cgGetAnnotationType(targetAnnotation) == CG_STRING)
             {
                 const char * targetName = cgGetStringAnnotationValue(targetAnnotation);
 
                 this->m_Target = m_Core->GetTexture(targetName);
 
-                if ( !this->m_Target.get() )
+                if (!this->m_Target.get())
                 {
                     m_Core->GetLogger()->Log
                     (
@@ -110,7 +115,9 @@ namespace VoodooShader
 
                     this->m_Target = m_Core->GetStageTexture(TS_Shader);
                 }
-            } else {
+            }
+            else
+            {
                 m_Core->GetLogger()->Log
                 (
                     LL_Warning,
@@ -121,7 +128,9 @@ namespace VoodooShader
 
                 this->m_Target = m_Core->GetStageTexture(TS_Shader);
             }
-        } else {
+        }
+        else
+        {
             m_Core->GetLogger()->Log
             (
                 LL_Debug,
@@ -138,10 +147,10 @@ namespace VoodooShader
 
         CGpass cPass = cgGetFirstPass(m_CgTechnique);
 
-        while ( cgIsPass(cPass) )
+        while (cgIsPass(cPass))
         {
             // Insert the pass into the vector
-            PassRef pass(new Pass(self, cPass));
+            PassRef pass(Pass::Create(self, cPass));
 
             m_Passes.push_back(pass);
 

@@ -19,28 +19,30 @@ namespace VoodooShader
     }
 
     Shader::Shader(ShaderRef self, Core * pParent, String Path, const char ** ppArgs)
-        : m_Name(Path), m_Core(pParent), m_DefaultTechnique(nullptr)
+            : m_Name(Path), m_Core(pParent), m_DefaultTechnique(nullptr)
     {
         self.reset(this);
 
         CGcontext context = m_Core->GetCgContext();
 
-        if ( !context || !cgIsContext(context) )
+        if (!context || !cgIsContext(context))
         {
             throw std::exception("Unable to create parameter (core has no context).");
         }
 
         this->m_CgEffect = cgCreateEffectFromFile
-        (
-            context, 
-            Path.c_str(), 
-            ppArgs
-        );
+                           (
+                               context,
+                               Path.c_str(),
+                               ppArgs
+                           );
 
-        if ( !cgIsEffect(this->m_CgEffect) )
+        if (!cgIsEffect(this->m_CgEffect))
         {
             throw std::exception("Failed to create shader.");
-        } else {
+        }
+        else
+        {
             cgSetEffectName(this->m_CgEffect, this->m_Name.c_str());
         }
 
@@ -55,7 +57,7 @@ namespace VoodooShader
         m_Techniques.clear();
         m_Parameters.clear();
 
-        if ( cgIsEffect(m_CgEffect) )
+        if (cgIsEffect(m_CgEffect))
         {
             cgDestroyEffect(m_CgEffect);
         }
@@ -78,10 +80,12 @@ namespace VoodooShader
 
     TechniqueRef Shader::GetTechnique(size_t Index)
     {
-        if ( Index < m_Techniques.size() )
+        if (Index < m_Techniques.size())
         {
             return m_Techniques[Index];
-        } else {
+        }
+        else
+        {
             return nullptr;
         }
     }
@@ -93,18 +97,20 @@ namespace VoodooShader
 
     void Shader::SetDefaultTechnique(TechniqueRef Technique)
     {
-        if ( Technique.get() != nullptr )
+        if (Technique.get() != nullptr)
         {
-            if ( Technique->GetShader().lock().get() == this )
+            if (Technique->GetShader().lock().get() == this)
             {
                 m_DefaultTechnique = Technique;
-            } else {
+            }
+            else
+            {
                 m_Core->GetLogger()->Log
-                    (
-                    LL_Error, VOODOO_CORE_NAME, 
+                (
+                    LL_Error, VOODOO_CORE_NAME,
                     "Technique %s cannot be set as default for shader %s (not technique for this shader).",
                     Technique->GetName().c_str(), this->GetName().c_str()
-                    );
+                );
             }
         }
     }
@@ -116,10 +122,12 @@ namespace VoodooShader
 
     ParameterRef Shader::GetParameter(_In_ size_t Index)
     {
-        if ( Index < m_Parameters.size() )
+        if (Index < m_Parameters.size())
         {
             return m_Parameters[Index];
-        } else {
+        }
+        else
+        {
             return nullptr;
         }
     }
@@ -127,7 +135,7 @@ namespace VoodooShader
     void Shader::Link(ShaderRef self)
     {
         // Make sure it's a valid effect
-        if ( !cgIsEffect(m_CgEffect) )
+        if (!cgIsEffect(m_CgEffect))
         {
             Throw(VOODOO_CORE_NAME, "Invalid effect.", m_Core);
         }
@@ -135,7 +143,7 @@ namespace VoodooShader
         // Link parameters first
         CGparameter cParam = cgGetFirstEffectParameter(this->m_CgEffect);
 
-        while ( cgIsParameter(cParam) )
+        while (cgIsParameter(cParam))
         {
             ParameterRef param(new Parameter(this, cParam));
 
@@ -151,36 +159,40 @@ namespace VoodooShader
 
     void Shader::LinkParameter(ParameterRef param)
     {
-        // Cache basic data for future use 
+        // Cache basic data for future use
         ParameterType type = param->GetType();
         CGparameter cgparam = param->GetCgParameter();
 
         // Check if it has a global link annotation
         CGannotation globalAnnotation = cgGetNamedParameterAnnotation(cgparam, "parameter");
 
-        if ( cgIsAnnotation(globalAnnotation) && cgGetAnnotationType(globalAnnotation) == CG_STRING )
+        if (cgIsAnnotation(globalAnnotation) && cgGetAnnotationType(globalAnnotation) == CG_STRING)
         {
             const char * globalName = cgGetStringAnnotationValue(globalAnnotation);
-            if ( globalName != NULL && strlen(globalName) > 0 )
+            if (globalName != NULL && strlen(globalName) > 0)
             {
                 ParameterRef globalParam = m_Core->GetParameter(globalName, type);
-                if ( globalParam.get() )
+                if (globalParam.get())
                 {
                     globalParam->AttachParameter(param);
-                } else {
+                }
+                else
+                {
                     m_Core->GetLogger()->Log
                     (
                         LL_Warning,
-                        VOODOO_CORE_NAME, 
+                        VOODOO_CORE_NAME,
                         "Unable to find global param %s for parameter %s.",
                         globalName, param->GetName().c_str()
                     );
                 }
-            } else {
+            }
+            else
+            {
                 m_Core->GetLogger()->Log
                 (
                     LL_Warning,
-                    VOODOO_CORE_NAME, 
+                    VOODOO_CORE_NAME,
                     "Unable to read global annotation for parameter %s.",
                     param->GetName().c_str()
                 );
@@ -191,7 +203,7 @@ namespace VoodooShader
 
         // If it's not linked to a global, it doesn't need linked unless it is
         // a sampler.
-        if (  Converter::ToParameterCategory(type) == PC_Sampler )
+        if (Converter::ToParameterCategory(type) == PC_Sampler)
         {
             this->LinkSampler(param);
         }
@@ -204,7 +216,7 @@ namespace VoodooShader
         // Link to a texture
         CGannotation textureAnnotation = cgGetNamedParameterAnnotation(cgparam, "texture");
 
-        if ( !cgIsAnnotation(textureAnnotation) || cgGetAnnotationType(textureAnnotation) != CG_STRING )
+        if (!cgIsAnnotation(textureAnnotation) || cgGetAnnotationType(textureAnnotation) != CG_STRING)
         {
             m_Core->GetLogger()->Log
             (
@@ -218,7 +230,7 @@ namespace VoodooShader
         }
 
         const char * textureName = cgGetStringAnnotationValue(textureAnnotation);
-        if ( textureName == NULL || strlen(textureName) == 0 )
+        if (textureName == NULL || strlen(textureName) == 0)
         {
             m_Core->GetLogger()->Log
             (
@@ -233,15 +245,17 @@ namespace VoodooShader
 
         // Try to get the texture first, otherwise pass to adapter
         TextureRef texture = m_Core->GetTexture(textureName);
-                
-        if ( texture.get() )
+
+        if (texture.get())
         {
             m_Core->GetAdapter()->ConnectTexture(param, texture);
-        } else {
+        }
+        else
+        {
             m_Core->GetLogger()->Log
             (
                 LL_Warning,
-                 VOODOO_CORE_NAME,
+                VOODOO_CORE_NAME,
                 "Could not find texture %s for parameter %s, attempting to load.",
                 textureName, param->GetName().c_str()
             );
@@ -254,7 +268,7 @@ namespace VoodooShader
     {
         CGparameter parameter = param->GetCgParameter();
 
-        if ( !cgIsParameter(parameter) )
+        if (!cgIsParameter(parameter))
         {
             m_Core->GetLogger()->Log
             (
@@ -267,7 +281,7 @@ namespace VoodooShader
         }
 
         CGannotation atexName = cgGetNamedParameterAnnotation(parameter, "texture");
-        if ( !cgIsAnnotation(atexName) || cgGetAnnotationType(atexName) != CG_STRING )
+        if (!cgIsAnnotation(atexName) || cgGetAnnotationType(atexName) != CG_STRING)
         {
             m_Core->GetLogger()->Log
             (
@@ -281,7 +295,7 @@ namespace VoodooShader
         }
 
         String texName;
-        if ( cgGetAnnotationType(atexName) != CG_STRING )
+        if (cgGetAnnotationType(atexName) != CG_STRING)
         {
             m_Core->GetLogger()->Log
             (
@@ -292,7 +306,9 @@ namespace VoodooShader
             );
 
             return;
-        } else {
+        }
+        else
+        {
             texName = cgGetStringAnnotationValue(atexName);
             texName = m_Core->GetParser()->Parse(texName);
         }
@@ -318,10 +334,10 @@ namespace VoodooShader
         CGtype texSizeType = cgGetAnnotationType(atexSize);
         TextureDesc texDesc;
 
-        if ( texSizeType ==  CG_INT1 )
+        if (texSizeType ==  CG_INT1)
         {
             m_Core->GetLogger()->Log
-             (
+            (
                 LL_Debug,
                 VOODOO_CORE_NAME,
                 "1-dimensional texture size found."
@@ -331,7 +347,9 @@ namespace VoodooShader
             const int * texDims = cgGetIntAnnotationValues(atexSize, &outCount);
             texDesc.Width = texDims[0];
             texDesc.Height = texDesc.Depth = 1;
-        } else if ( texSizeType == CG_INT2 ) {
+        }
+        else if (texSizeType == CG_INT2)
+        {
             m_Core->GetLogger()->Log
             (
                 LL_Debug,
@@ -344,7 +362,9 @@ namespace VoodooShader
             texDesc.Width = texDims[0];
             texDesc.Height = texDims[1];
             texDesc.Depth = 1;
-        } else if ( texSizeType == CG_INT3 ) {
+        }
+        else if (texSizeType == CG_INT3)
+        {
             m_Core->GetLogger()->Log
             (
                 LL_Debug,
@@ -357,15 +377,19 @@ namespace VoodooShader
             texDesc.Width = texDims[0];
             texDesc.Height = texDims[1];
             texDesc.Depth = texDims[2];
-        } else if ( texSizeType == CG_INT4 ) {
+        }
+        else if (texSizeType == CG_INT4)
+        {
             m_Core->GetLogger()->Log
             (
                 LL_Error,
                 VOODOO_CORE_NAME,
                 "4-dimensional texture size found. Creating quantum texture... (invalid type on %s).",
                 param->GetName().c_str()
-            );        
-        } else {
+            );
+        }
+        else
+        {
             m_Core->GetLogger()->Log
             (
                 LL_Error,
@@ -377,7 +401,7 @@ namespace VoodooShader
 
         texDesc.Mipmaps = false;
 
-        if ( cgGetAnnotationType(atexFormat) != CG_STRING )
+        if (cgGetAnnotationType(atexFormat) != CG_STRING)
         {
             m_Core->GetLogger()->Log
             (
@@ -388,7 +412,9 @@ namespace VoodooShader
             );
 
             return;
-        } else {
+        }
+        else
+        {
             const char * formatString = cgGetStringAnnotationValue(atexFormat);
             texDesc.Format = Converter::ToTextureFormat(formatString);
         }
@@ -402,11 +428,11 @@ namespace VoodooShader
     void Shader::SetupTechniques(ShaderRef self)
     {
         CGtechnique cTech = cgGetFirstTechnique(m_CgEffect);
-        while ( cgIsTechnique(cTech) )
+        while (cgIsTechnique(cTech))
         {
             CGbool valid = cgValidateTechnique(cTech);
 
-            if ( valid == CG_TRUE )
+            if (valid == CG_TRUE)
             {
                 m_Core->GetLogger()->Log
                 (
@@ -424,11 +450,13 @@ namespace VoodooShader
                 m_Techniques.push_back(tech);
 
                 // The first valid technique is the default one
-                if ( !m_DefaultTechnique.get() )
+                if (!m_DefaultTechnique.get())
                 {
                     this->m_DefaultTechnique = tech;
                 }
-            } else {
+            }
+            else
+            {
                 m_Core->GetLogger()->Log
                 (
                     LL_Warning,

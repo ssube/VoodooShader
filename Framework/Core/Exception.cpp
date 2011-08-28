@@ -7,24 +7,24 @@ namespace VoodooShader
 {
     Exception::Exception
     (
-        _In_ char * module, _In_ char * message, 
-        _In_ Core * core, 
+        _In_ char * module, _In_ char * message,
+        _In_ Core * core,
         _In_ char * file, _In_ char * function, _In_ int line
     )
-        : std::exception(message), m_FmtMsg(NULL),
-            m_Module(module), m_Message(message), 
-            m_Core(core), 
+            : std::exception(message), m_FmtMsg(NULL),
+            m_Module(module), m_Message(message),
+            m_Core(core),
             m_File(file), m_Function(function), m_Line(line)
     {
-        if ( core )
+        if (core)
         {
             ILoggerRef logger = core->GetLogger();
-            if ( logger.get() )
+            if (logger.get())
             {
                 logger->Log
                 (
-                    LL_Error, 
-                    module, 
+                    LL_Error,
+                    module,
                     "Exception in %s at %s (%d): %s",
                     file, function, line, message
                 );
@@ -34,24 +34,24 @@ namespace VoodooShader
 
     Exception::Exception
     (
-        _In_ String module, _In_ String message, 
-        _In_ Core * core, 
+        _In_ String module, _In_ String message,
+        _In_ Core * core,
         _In_ char * file, _In_ char * function, _In_ int line
     )
-        : std::exception(message.c_str()), m_FmtMsg(NULL),
-            m_Module(module), m_Message(message), 
-            m_Core(core), 
+            : std::exception(message.c_str()), m_FmtMsg(NULL),
+            m_Module(module), m_Message(message),
+            m_Core(core),
             m_File(file), m_Function(function), m_Line(line)
     {
-        if ( core )
+        if (core)
         {
             ILoggerRef logger = core->GetLogger();
-            if ( logger.get() )
+            if (logger.get())
             {
                 logger->Log
                 (
-                    LL_Error, 
-                    module.c_str(), 
+                    LL_Error,
+                    module.c_str(),
                     "Exception in %s at %s (%d): %s",
                     file, function, line, message.c_str()
                 );
@@ -61,7 +61,7 @@ namespace VoodooShader
 
     Exception::~Exception()
     {
-        if ( m_FmtMsg )
+        if (m_FmtMsg)
         {
             delete m_FmtMsg;
         }
@@ -69,16 +69,16 @@ namespace VoodooShader
 
     const char * Exception::what()
     {
-        if ( m_FmtMsg == NULL )
+        if (m_FmtMsg == NULL)
         {
             m_FmtMsg = new char[1024];
             ZeroMemory(m_FmtMsg, 1024);
 
             sprintf_s
             (
-                m_FmtMsg, 
-                1024, 
-                "VoodooShader::Exception in module %s, file %s at %s (line %d): %s", 
+                m_FmtMsg,
+                1024,
+                "VoodooShader::Exception in module %s, file %s at %s (line %d): %s",
                 m_Module.c_str(), m_File, m_Function, m_Line, m_Message.c_str()
             );
         }
