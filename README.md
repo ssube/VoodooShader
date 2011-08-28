@@ -1,6 +1,6 @@
 
 Voodoo Shader Framework
-v0.2.7.167
+v0.4.0.183
 
 = Contents:
 1. Summary

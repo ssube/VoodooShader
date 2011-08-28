@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Hook_Version.hpp">
+    <ClInclude Include="Loader.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="HookManager.hpp">
+    <ClInclude Include="Loader_Version.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -13,27 +13,27 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
-      <UniqueIdentifier>{be0517a3-130b-43b5-8865-a42850eedf04}</UniqueIdentifier>
+      <UniqueIdentifier>{f39b6039-25f0-43e4-8417-557497d4638f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources">
-      <UniqueIdentifier>{1b4fa46b-0736-4e35-b2fa-c001f8b85537}</UniqueIdentifier>
+      <UniqueIdentifier>{9e0319ed-3002-4a85-bbc1-629233e063a8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources">
-      <UniqueIdentifier>{9ed1564f-02e9-4130-8b4c-2bcda3c4c014}</UniqueIdentifier>
+      <UniqueIdentifier>{3a851f12-d294-4da5-a578-4a1e7f6d3e78}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HookManager.cpp">
+    <ClCompile Include="Loader.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Voodoo_Hook.def">
+    <None Include="exports.def">
       <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Voodoo_Hook.rc">
+    <ResourceCompile Include="Loader_Version.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
   </ItemGroup>

@@ -18,9 +18,6 @@ Timeslip, d4w, phal, krzymark, LizTail and the others who worked on MGE and the
 phal deserves a second mention for originally getting depth into MGE, the
     methods there influence the D3D8.9 adapters.
     
-Voodoo/Gem uses some code derived from the MGE project (the file 
-    MGE/FauxD3D8Header.hpp).
-    
     
 Names, brainstorming, suggestions and similar:
 
