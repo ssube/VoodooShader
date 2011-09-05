@@ -129,7 +129,7 @@ namespace VoodooShader
                 logMsg << ">\n";
 
 #ifdef _DEBUG
-                cout << logMsg.str();
+                //cout << logMsg.str();
 #endif
                 m_LogFile << logMsg.str();
 
@@ -211,7 +211,7 @@ namespace VoodooShader
             " debug=\"" << version.Debug << "\" />\n";
 
 #ifdef _DEBUG
-            cout << logMsg.str();
+            //cout << logMsg.str();
 #endif
             m_LogFile << logMsg.str();
 
@@ -278,7 +278,7 @@ namespace VoodooShader
                     OutputDebugString(logMsg.str().c_str());
                 }
 
-                cout << logMsg.str();
+                //cout << logMsg.str();
 #endif
                 m_LogFile << logMsg.str();
 

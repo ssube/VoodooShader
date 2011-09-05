@@ -24,15 +24,15 @@
 
     <Plugins>
         <!-- Plugins to be loaded. May be given as a path or single file. -->
-        <Path filter="Voodoo_(Filesystem|Hook|Logger|Core).dll">$(globalroot)</Path>
+        <File>$(globalroot)/Voodoo_Core.dll</File>
     </Plugins>
 
     <Core>
         <!-- Core classes. These are created during startup. -->
         <Class>
-            <Logger file="$(runroot)\Voodoo_$(adapter)" level="255">XmlLogger</Logger>
-            <HookManager>EHHookManager</HookManager>
-            <FileSystem>WFileSystem</FileSystem>
+            <Logger file="$(runroot)\Voodoo_$(adapter)" level="255">NullLogger</Logger>
+            <HookManager>NullHookManager</HookManager>
+            <FileSystem>NullFileSystem</FileSystem>
             <Adapter>$(adapter)Adapter</Adapter>
         </Class>
     </Core>

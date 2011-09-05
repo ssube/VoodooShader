@@ -29,9 +29,9 @@ namespace VoodooShader
         case 1:
             return "NullLogger";
         case 2:
-            return "NullFilesystem";
+            return "NullFileSystem";
         case 3:
-            return "NullHookmanager";
+            return "NullHookManager";
         default:
             return nullptr;
         }

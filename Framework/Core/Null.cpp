@@ -7,42 +7,9 @@ namespace VoodooShader
 {
     namespace VoodooNull
     {
-        NullLogger::NullLogger(Core * core)
-                : m_Core(core)
-        { }
-
-        NullLogger::~NullLogger() { }
-
-        Core * NullLogger::GetCore()
-        {
-            return m_Core;
-        }
-        String NullLogger::GetName()
-        {
-            return "NullLogger";
-        }
-
-        bool NullLogger::Open(_In_ String Filename, _In_ bool Append)
-        {
-            return false;
-        }
-        void NullLogger::Close() {}
-        void NullLogger::Flush() {}
-        void NullLogger::SetLogLevel(_In_ LogLevel level) {}
-        LogLevel NullLogger::GetLogLevel()
-        {
-            return LL_Unknown;
-        }
-        void NullLogger::LogModule(_In_ Version module) {}
-        void NullLogger::Log(_In_ LogLevel level, _In_ const char * module,  _In_ _Printf_format_string_ const char * msg, ...) {}
-        void NullLogger::SetFlags(_In_ LogFlags flush) {}
-        LogFlags NullLogger::GetFlags()
-        {
-            return LF_Unknown;
-        }
 
         NullAdapter::NullAdapter(Core * core)
-                : m_Core(core)
+            : m_Core(core)
         {}
 
         NullAdapter::~NullAdapter()
@@ -95,5 +62,63 @@ namespace VoodooShader
             return false;
         }
         void NullAdapter::HandleError(_In_ CGcontext context, _In_ int error) { }
+
+        NullLogger::NullLogger(Core * core)
+                : m_Core(core)
+        { }
+
+        NullLogger::~NullLogger() { }
+
+        Core * NullLogger::GetCore()
+        {
+            return m_Core;
+        }
+        String NullLogger::GetName()
+        {
+            return "NullLogger";
+        }
+
+        bool NullLogger::Open(_In_ String Filename, _In_ bool Append)
+        {
+            return false;
+        }
+        void NullLogger::Close() {}
+        void NullLogger::Flush() {}
+        void NullLogger::SetLogLevel(_In_ LogLevel level) {}
+        LogLevel NullLogger::GetLogLevel()
+        {
+            return LL_Unknown;
+        }
+        void NullLogger::LogModule(_In_ Version module) {}
+        void NullLogger::Log(_In_ LogLevel level, _In_ const char * module,  _In_ _Printf_format_string_ const char * msg, ...) {}
+        void NullLogger::SetFlags(_In_ LogFlags flush) {}
+        LogFlags NullLogger::GetFlags()
+        {
+            return LF_Unknown;
+        }
+
+        NullHookManager::NullHookManager(_In_ Core * core)
+            : m_Core(core)
+        { }
+        NullHookManager::~NullHookManager() { }
+
+        String NullHookManager::GetName() { return "NullHookManager"; }
+        Core * NullHookManager::GetCore() { return m_Core; }
+
+        bool NullHookManager::Add(_In_ String name, _In_ void * src,  _In_ void * dest) { return false; }
+        bool NullHookManager::Remove(_In_ String name) { return false; }
+        void NullHookManager::RemoveAll() { }
+
+        NullFileSystem::NullFileSystem(_In_ Core * core)
+            : m_Core(core)
+        { }
+        NullFileSystem::~NullFileSystem() { }
+
+        String NullFileSystem::GetName() { return "NullFileSystem"; }
+        Core * NullFileSystem::GetCore() { return m_Core; }
+
+        void NullFileSystem::AddDirectory(_In_ String dir) { }
+        void NullFileSystem::RemoveDirectory(_In_ String dir) {}
+        IFileRef NullFileSystem::FindFile(_In_ String name) { return nullptr; }
     }
 }

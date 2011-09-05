@@ -37,6 +37,41 @@ TEARDOWN(DefaultCore)
     DestroyCore(gpCore);
 }
 
+BEGIN_TESTF(Core_GetParser, DefaultCore)
+{
+    ParserRef parser = gpCore->GetParser();
+    WIN_ASSERT_NOT_NULL(parser.get(), "Core_GetParser: parser is null.");
+}
+END_TESTF
+
+BEGIN_TESTF(Core_GetHookManager, DefaultCore)
+{
+    IHookManagerRef hook = gpCore->GetHookManager();
+    WIN_ASSERT_NOT_NULL(hook.get(), "Core_GetHookManager: hook manager is null.");
+}
+END_TESTF
+
+BEGIN_TESTF(Core_GetFileSystem, DefaultCore)
+{
+    IFileSystemRef filesystem = gpCore->GetFileSystem();
+    WIN_ASSERT_NOT_NULL(filesystem.get(), "Core_GetFileSystem: filesystem is null.");
+}
+END_TESTF
+
+BEGIN_TESTF(Core_GetAdapter, DefaultCore)
+{
+    IAdapterRef adapter = gpCore->GetAdapter();
+    WIN_ASSERT_NOT_NULL(adapter.get(), "Core_GetAdapter: adapter is null.");
+}
+END_TESTF
+
+BEGIN_TESTF(Core_GetLogger, DefaultCore)
+{
+    ILoggerRef Logger = gpCore->GetLogger();
+    WIN_ASSERT_NOT_NULL(Logger.get(), "Core_GetLogger: logger is null.");
+}
+END_TESTF
+
 BEGIN_TESTF(Core_GetConfig, DefaultCore)
 {
     void * pConfig = gpCore->GetConfig();

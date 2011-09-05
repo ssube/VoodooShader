@@ -40,6 +40,36 @@ namespace VoodooShader
 {
     namespace VoodooNull
     {
+        class NullAdapter
+            : public IAdapter
+        {
+        public:
+            NullAdapter(Core * core);
+            virtual ~NullAdapter();
+
+            virtual Core * GetCore();
+            virtual String GetName();
+
+            virtual bool LoadPass(_In_ PassRef pass);
+            virtual bool UnloadPass(_In_ PassRef pass);
+            virtual void SetPass(_In_ PassRef pass);
+            virtual PassRef GetPass();
+            virtual void SetTarget(_In_ TextureRef target);
+            virtual TextureRef GetTarget();
+            virtual TextureRef CreateTexture(_In_ String Name, _In_ TextureDesc Desc);
+            virtual TextureRef LoadTexture(_In_ String Name, TextureRegion Region);
+            virtual void DrawGeometry(int Vertexes, VertexStruct * pVertexData);
+            virtual void DrawShader(_In_ ShaderRef shader);
+            virtual void ApplyParameter(_In_ ParameterRef param);
+            virtual void SetProperty(String Property, String Value);
+            virtual String GetProperty(String Property);
+            virtual bool ConnectTexture(_In_ ParameterRef param, _In_ TextureRef texture);
+            virtual void HandleError(_In_ CGcontext context, _In_ int error);
+
+        private:
+            Core * m_Core;
+        };
+
         class NullLogger
                     : public ILogger
         {
@@ -64,31 +94,37 @@ namespace VoodooShader
             Core * m_Core;
         };
 
-        class NullAdapter
-                    : public IAdapter
+        class NullHookManager
+                    : public IHookManager
         {
         public:
-            NullAdapter(Core * core);
-            virtual ~NullAdapter();
+            NullHookManager(_In_ Core * core);
+            virtual ~NullHookManager();
 
-            virtual Core * GetCore();
             virtual String GetName();
+            virtual Core * GetCore();
 
-            virtual bool LoadPass(_In_ PassRef pass);
-            virtual bool UnloadPass(_In_ PassRef pass);
-            virtual void SetPass(_In_ PassRef pass);
-            virtual PassRef GetPass();
-            virtual void SetTarget(_In_ TextureRef target);
-            virtual TextureRef GetTarget();
-            virtual TextureRef CreateTexture(_In_ String Name, _In_ TextureDesc Desc);
-            virtual TextureRef LoadTexture(_In_ String Name, TextureRegion Region);
-            virtual void DrawGeometry(int Vertexes, VertexStruct * pVertexData);
-            virtual void DrawShader(_In_ ShaderRef shader);
-            virtual void ApplyParameter(_In_ ParameterRef param);
-            virtual void SetProperty(String Property, String Value);
-            virtual String GetProperty(String Property);
-            virtual bool ConnectTexture(_In_ ParameterRef param, _In_ TextureRef texture);
-            virtual void HandleError(_In_ CGcontext context, _In_ int error);
+            bool Add(_In_ String name, _In_ void * src,  _In_ void * dest);
+            bool Remove(_In_ String name);
+            void RemoveAll();
+
+        private:
+            Core * m_Core;
+        };
+
+        class NullFileSystem
+                    : public IFileSystem
+        {
+        public:
+            NullFileSystem(_In_ Core * core);
+            virtual ~NullFileSystem();
+
+            virtual String GetName();
+            virtual Core * GetCore();
+
+            virtual void AddDirectory(_In_ String dir);
+            virtual void RemoveDirectory(_In_ String dir);
+            virtual IFileRef FindFile(_In_ String name);
 
         private:
             Core * m_Core;
