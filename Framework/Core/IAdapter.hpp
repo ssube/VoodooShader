@@ -81,7 +81,7 @@ namespace VoodooShader
          */
         virtual bool UnloadPass
         (
-            _In_ Pass * pass
+            _In_ PassRef pass
         ) = 0;
 
         /**
@@ -121,7 +121,11 @@ namespace VoodooShader
          */
         virtual PassRef GetPass()  = 0;
 
-        virtual void SetTarget() = 0;
+        virtual void SetTarget
+        (
+            _In_ TextureRef target
+        ) = 0;
+
         virtual TextureRef GetTarget() = 0;
 
         /**

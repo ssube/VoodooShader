@@ -13,7 +13,6 @@
              the var whose name matches $(target). Variable names are
              case insensitive, so these match all files with the name.
         -->
-        <Variable name="testcore.exe">$(adapter_class:TestCore)</Variable>
         <Variable name="morrowind.exe">$(adapter_class:Gem)</Variable>
         <Variable name="nwmain.exe">$(adapter_class:Frost)</Variable>
 
@@ -25,21 +24,17 @@
 
     <Plugins>
         <!-- Plugins to be loaded. May be given as a path or single file. -->
-        <Path filter="Voodoo_(Filesystem|Hook|Logger).dll">$(globalroot)</Path>
+        <Path filter="Voodoo_(Filesystem|Hook|Logger|Core).dll">$(globalroot)</Path>
     </Plugins>
 
     <Core>
         <!-- Core classes. These are created during startup. -->
         <Class>
-            <Logger>XmlLogger</Logger>
+            <Logger file="$(runroot)\Voodoo_$(adapter)" level="255">XmlLogger</Logger>
             <HookManager>EHHookManager</HookManager>
             <FileSystem>WFileSystem</FileSystem>
-            <Adapter>$(adapter)_Adapter</Adapter>
+            <Adapter>$(adapter)Adapter</Adapter>
         </Class>
-
-        <!-- Log filename. -->  
-        <LogFile>$(runroot)\Voodoo_$(adapter)</LogFile> 
-        <LogLevel>FF</LogLevel>
     </Core>
 
     <!-- Settings for the WFileSystem class. -->

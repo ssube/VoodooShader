@@ -452,10 +452,10 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef Int32 (VOODOO_CALL *CountFunc)();
+        typedef Int32(VOODOO_CALL *CountFunc)();
         typedef const char * (VOODOO_CALL *InfoFunc)(Int32);
         typedef IObject * (VOODOO_CALL *CreateFunc)(Int32, Core *);
-        typedef Version (VOODOO_CALL *VersionFunc)();
+        typedef Version(VOODOO_CALL *VersionFunc)();
     };
 
     /**

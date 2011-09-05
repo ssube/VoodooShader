@@ -163,13 +163,17 @@ namespace VoodooShader
             xpath_query fsQuery("/VoodooConfig/Core/Class/FileSystem/text()");
             xpath_query hookQuery("/VoodooConfig/Core/Class/HookManager/text()");
             xpath_query adpQuery("/VoodooConfig/Core/Class/Adapter/text()");
-            xpath_query logfQuery("/VoodooConfig/Core/Class/LogFile/text()");
+
+            xpath_query logfQuery("/VoodooConfig/Core/Class/Logger/@file");
+            xpath_query loglQuery("/VoodooConfig/Core/Class/Logger/@level");
 
             String logClass  = m_Parser->Parse(logQuery.evaluate_string(*config));
             String fsClass   = m_Parser->Parse(fsQuery.evaluate_string(*config));
             String hookClass = m_Parser->Parse(hookQuery.evaluate_string(*config));
             String adpClass  = m_Parser->Parse(adpQuery.evaluate_string(*config));
+
             String logFile   = m_Parser->Parse(logfQuery.evaluate_string(*config));
+            LogLevel logLevel = (LogLevel)(int)loglQuery.evaluate_number(*config);
 
             // Make sure a logger was loaded
             m_Logger = m_ModuleManager->CreateClass<ILogger>(logClass);
@@ -179,6 +183,7 @@ namespace VoodooShader
             }
 
             m_Logger->Open(logFile, false);
+            m_Logger->SetLogLevel(logLevel);
 
             // Log extended build information
             m_Logger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from \"%s\".", m_Config.c_str());

@@ -42,7 +42,8 @@ namespace VoodooShader
     {
         m_Target = nullptr;
 
-        m_Core->GetAdapter()->UnloadPass(this);
+        //! @todo Check if passes need to unload themselves from the adapter on dest.
+        //m_Core->GetAdapter()->UnloadPass(this);
     }
 
     String Pass::GetName()

@@ -1,4 +1,10 @@
 LIBRARY
+
 EXPORTS
 CreateCore=CreateCore
 DestroyCore=DestroyCore
+
+ModuleVersion=API_ModuleVersion
+ClassCount=API_ClassCount
+ClassInfo=API_ClassInfo
+ClassCreate=API_ClassCreate

@@ -45,7 +45,7 @@ namespace VoodooShader
 
         /**
          * Loads a set of modules given a path.
-         * 
+         *
          * @note Only loads DLLs from in the path.
          */
         virtual bool LoadPath

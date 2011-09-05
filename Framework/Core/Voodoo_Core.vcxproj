@@ -229,7 +229,9 @@
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Exception.cpp" />
+    <ClCompile Include="Exports.cpp" />
     <ClCompile Include="Module.cpp" />
+    <ClCompile Include="Null.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pass.cpp" />
@@ -238,6 +240,7 @@
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exports.hpp" />
     <ClInclude Include="IAdapter.hpp" />
     <ClInclude Include="Converter.hpp" />
     <ClInclude Include="Core.hpp" />
@@ -252,6 +255,7 @@
     <ClInclude Include="ILogger.hpp" />
     <ClInclude Include="Meta.hpp" />
     <ClInclude Include="Module.hpp" />
+    <ClInclude Include="Null.hpp" />
     <ClInclude Include="Parameter.hpp" />
     <ClInclude Include="Parser.hpp" />
     <ClInclude Include="Pass.hpp" />
