@@ -50,9 +50,9 @@ namespace VoodooShader
         case 1:
             return new VoodooNull::NullLogger(core);
         case 2:
-            //return new VoodooNull::NullFilesystem(core);
+            return new VoodooNull::NullFileSystem(core);
         case 3:
-            //return new VoodooNull::NullHookmanager(core);
+            return new VoodooNull::NullHookManager(core);
         default:
             return nullptr;
         }

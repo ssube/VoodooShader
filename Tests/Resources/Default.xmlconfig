@@ -13,13 +13,6 @@
              the var whose name matches $(target). Variable names are
              case insensitive, so these match all files with the name.
         -->
-        <Variable name="morrowind.exe">$(adapter_class:Gem)</Variable>
-        <Variable name="nwmain.exe">$(adapter_class:Frost)</Variable>
-
-        <!-- Null adapter class for all other targets. -->
-        <Variable name="adapter_class">Null</Variable>
-
-        <Variable name="adapter">$(?$(target))$(adapter_class)</Variable>
     </Variables>
 
     <Plugins>
@@ -30,10 +23,10 @@
     <Core>
         <!-- Core classes. These are created during startup. -->
         <Class>
-            <Logger file="$(runroot)\Voodoo_$(adapter)" level="255">NullLogger</Logger>
+            <Logger file="$(runroot)\Voodoo_Test" level="255">NullLogger</Logger>
             <HookManager>NullHookManager</HookManager>
             <FileSystem>NullFileSystem</FileSystem>
-            <Adapter>$(adapter)Adapter</Adapter>
+            <Adapter>NullAdapter</Adapter>
         </Class>
     </Core>
 

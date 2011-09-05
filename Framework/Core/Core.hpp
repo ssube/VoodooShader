@@ -149,6 +149,17 @@ namespace VoodooShader
         _Check_return_
         virtual CGcontext GetCgContext();
 
+        /**
+         * Sets the Cg context attached to the core.
+         *
+         * @author  Sean
+         * @date    9/4/2011
+         *
+         * @param   Context The Cg context to bind.
+         *
+         * @return  False if a context is already bound, true if no context is bound
+         *     or a context is being unbound.
+         */
         virtual bool SetCgContext
         (
             _In_opt_ CGcontext Context

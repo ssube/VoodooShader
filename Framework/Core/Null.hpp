@@ -41,7 +41,7 @@ namespace VoodooShader
     namespace VoodooNull
     {
         class NullAdapter
-            : public IAdapter
+                    : public IAdapter
         {
         public:
             NullAdapter(Core * core);

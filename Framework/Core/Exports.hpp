@@ -26,7 +26,7 @@
 namespace VoodooShader
 {
     /*
-     * Plugin exports. 
+     * Plugin exports.
      */
     Version VOODOO_CALL API_ModuleVersion();
 

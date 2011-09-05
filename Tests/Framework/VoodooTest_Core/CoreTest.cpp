@@ -78,3 +78,27 @@ BEGIN_TESTF(Core_GetConfig, DefaultCore)
     WIN_ASSERT_NOT_NULL(pConfig, "Core_GetConfig: pConfig is null.");
 }
 END_TESTF
+
+// Test covers:
+//     Core::GetCgContext
+//     Core::SetCgContext
+BEGIN_TESTF(Core_CgContext, DefaultCore)
+{
+    CGcontext inCg = (CGcontext*)0xFFFFFFFF;
+    WIN_ASSERT_TRUE(gpCore->SetCgContext(inCg), "Core_CgContext: SetCgContext(%p) returned false.", inCg);
+
+    CGcontext pCg = gpCore->GetCgContext();
+    WIN_ASSERT_EQUAL(inCg, pCg, "Core_CgContext: inCg != pCg.");
+
+    inCg = (CGcontext*)0x88888888;
+    WIN_ASSERT_FALSE(gpCore->SetCgContext(inCg), "Core_CgContext: SetCgContext(%p) allowed overwriting.", inCg);
+    
+    inCg = nullptr; 
+    WIN_ASSERT_TRUE(gpCore->SetCgContext(inCg), "Core_CgContext: SetCgContext(%p) returned false.", inCg);
+
+    pCg = gpCore->GetCgContext();
+    WIN_ASSERT_EQUAL(inCg, pCg, "Core_CgContext: inCg != pCg.");
+}
+END_TESTF
+
+
