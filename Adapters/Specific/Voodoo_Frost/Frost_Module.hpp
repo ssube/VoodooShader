@@ -3,7 +3,7 @@
 #define VOODOO_NWS_MODULE_HPP
 
 #define VOODOO_IMPORT
-#include "Voodoo_Core.hpp"
+#include "VoodooFramework.hpp"
 
 // GLEW OpenGL extensions
 #include <GL/glew.h>

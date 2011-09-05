@@ -20,7 +20,7 @@
 \**************************************************************************************************/
 
 #define VOODOO_IMPORT
-#include "Voodoo_Core.hpp"
+#include "VoodooFramework.hpp"
 
 #include <set>
 

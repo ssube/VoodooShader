@@ -28,7 +28,7 @@
 
 #define VOODOO_IMPORT
 #define VOODOO_NO_CG
-#include "Voodoo_Core.hpp"
+#include "VoodooFramework.hpp"
 
 // Hide the DLL-interface warning
 #pragma warning(disable:4251)
@@ -51,16 +51,16 @@ namespace VoodooShader
         /**
          * Return the module's version.
          */
-        Version API_ModuleVersion();
+        Version VOODOO_CALL API_ModuleVersion();
 
-        int API_ClassCount();
+        Int32 VOODOO_CALL API_ClassCount();
 
-        const char * API_ClassInfo
+        const char * VOODOO_CALL API_ClassInfo
         (
             _In_ int number
         );
 
-        IObject * API_ClassCreate
+        IObject * VOODOO_CALL API_ClassCreate
         (
             _In_ int number,
             _In_ Core * core

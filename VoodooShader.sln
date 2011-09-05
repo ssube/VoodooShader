@@ -85,6 +85,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Filesystem", "Framew
 		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{56BA7D8B-35C5-4F58-A45A-21CCC68232A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{874A9DE8-1B4B-4DFA-A095-CADA7AF0FB4C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VoodooTest_Core", "Tests\Framework\VoodooTest_Core\VoodooTest_Core.vcxproj", "{E4986B05-A425-45A3-92EB-24A10A3287AD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Analysis|Any CPU = Debug_Analysis|Any CPU
@@ -345,6 +354,30 @@ Global
 		{88003ADC-5DD3-4CF7-B636-9F7F16DECEB3}.Template|Win32.ActiveCfg = Release|Win32
 		{88003ADC-5DD3-4CF7-B636-9F7F16DECEB3}.Template|Win32.Build.0 = Release|Win32
 		{88003ADC-5DD3-4CF7-B636-9F7F16DECEB3}.Template|x86.ActiveCfg = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug_Analysis|Any CPU.ActiveCfg = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug_Analysis|Mixed Platforms.ActiveCfg = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug_Analysis|Mixed Platforms.Build.0 = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug_Analysis|Win32.ActiveCfg = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug_Analysis|Win32.Build.0 = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug_Analysis|x86.ActiveCfg = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug|Win32.Build.0 = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Debug|x86.ActiveCfg = Debug|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Release|Any CPU.ActiveCfg = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Release|Win32.ActiveCfg = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Release|Win32.Build.0 = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Release|x86.ActiveCfg = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Template|Any CPU.ActiveCfg = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Template|Mixed Platforms.ActiveCfg = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Template|Mixed Platforms.Build.0 = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Template|Win32.ActiveCfg = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Template|Win32.Build.0 = Release|Win32
+		{E4986B05-A425-45A3-92EB-24A10A3287AD}.Template|x86.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -364,6 +397,8 @@ Global
 		{88003ADC-5DD3-4CF7-B636-9F7F16DECEB3} = {2C578E80-5F76-4525-8D0B-F3FFD969918C}
 		{B6550BB7-3C25-4C46-A30D-8349AC3E4D8F} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
 		{758A3040-38D6-4573-8C1B-74B35ECCAA6E} = {32835D9A-A1C1-48F9-8588-C10837E18EF4}
+		{874A9DE8-1B4B-4DFA-A095-CADA7AF0FB4C} = {56BA7D8B-35C5-4F58-A45A-21CCC68232A0}
+		{E4986B05-A425-45A3-92EB-24A10A3287AD} = {874A9DE8-1B4B-4DFA-A095-CADA7AF0FB4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms

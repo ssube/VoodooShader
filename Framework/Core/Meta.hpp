@@ -23,10 +23,12 @@
 #define VOODOO_META_HPP
 
 #ifndef VOODOO_IMPORT
-#    define VOODOO_API __declspec(dllexport)
+#   define VOODOO_API __declspec(dllexport)
 #else
-#    define VOODOO_API __declspec(dllimport)
+#   define VOODOO_API __declspec(dllimport)
 #endif
+
+#define VOODOO_CALL __stdcall
 
 // Hide the DLL-interface warning
 #pragma warning(disable:4251)
@@ -450,10 +452,10 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef Int32(*CountFunc)();
-        typedef const char * (*InfoFunc)(Int32);
-        typedef IObjectRef(*CreateFunc)(Int32, Core *);
-        typedef Version(*VersionFunc)();
+        typedef Int32 (VOODOO_CALL *CountFunc)();
+        typedef const char * (VOODOO_CALL *InfoFunc)(Int32);
+        typedef IObject * (VOODOO_CALL *CreateFunc)(Int32, Core *);
+        typedef Version (VOODOO_CALL *VersionFunc)();
     };
 
     /**

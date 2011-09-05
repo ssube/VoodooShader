@@ -21,7 +21,7 @@
 
 #define VOODOO_IMPORT
 #define VOODOO_NO_CG
-#include "Voodoo_Core.hpp"
+#include "VoodooFramework.hpp"
 
 namespace VoodooShader
 {

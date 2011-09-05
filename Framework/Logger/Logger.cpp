@@ -19,18 +19,18 @@ namespace VoodooShader
         //const char * XmlLoggerName = "{B531CD82-F741-4926-9929-0619E1317502}";
         const char * XmlLoggerName = "XmlLogger";
 
-        Version API_ModuleVersion()
+        Version VOODOO_CALL API_ModuleVersion()
         {
             Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
             return moduleVersion;
         }
 
-        int API_ClassCount()
+        int VOODOO_CALL API_ClassCount()
         {
             return 1;
         }
 
-        const char * API_ClassInfo
+        const char * VOODOO_CALL API_ClassInfo
         (
             _In_ int number
         )
@@ -45,7 +45,7 @@ namespace VoodooShader
             }
         }
 
-        IObject * API_ClassCreate
+        IObject * VOODOO_CALL API_ClassCreate
         (
             _In_ int number,
             _In_ Core * core

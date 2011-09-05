@@ -60,6 +60,17 @@ namespace VoodooShader
         m_ModuleManager = ModuleManagerRef(new ModuleManager(this));
         m_Parser = ParserRef(new Parser(this));
 
+        // Load variables, built-in first
+        m_Parser->Add("globalroot", m_GlobalRoot, VT_System);
+        m_Parser->Add("localroot", m_LocalRoot, VT_System);
+        m_Parser->Add("runroot", m_RunRoot, VT_System);
+        m_Parser->Add("target", m_Target, VT_System);
+        m_Parser->Add("loader", m_Loader, VT_System);
+
+        m_Config = m_Parser->Parse(m_Config);
+
+        m_Parser->Add("config", m_Config, VT_System);
+
         try
         {
             xml_document * config = new xml_document();
@@ -67,20 +78,22 @@ namespace VoodooShader
             // Try loading the config file from each major location
             String ConfigPath = m_RunRoot + m_Config;
             xml_parse_result result = config->load_file(ConfigPath.c_str());
-
             if (!result)
             {
                 ConfigPath = m_LocalRoot + m_Config;
                 result = config->load_file(ConfigPath.c_str());
-
                 if (!result)
                 {
                     ConfigPath = m_GlobalRoot + m_Config;
                     result = config->load_file(ConfigPath.c_str());
-
                     if (!result)
                     {
-                        throw std::exception("Unable to find or parse config file.");
+                        ConfigPath = m_Config;
+                        result = config->load_file(ConfigPath.c_str());
+                        if (!result)
+                        {
+                            throw std::exception("Unable to find or parse config file.");
+                        }
                     }
                 }
             }
@@ -99,12 +112,6 @@ namespace VoodooShader
             // Create query for node text, used multiple times
             xpath_query nodeTextQuery("./text()");
 
-            // Load variables, built-in first
-            m_Parser->Add("globalroot", m_GlobalRoot, VT_System);
-            m_Parser->Add("localroot", m_LocalRoot, VT_System);
-            m_Parser->Add("runroot", m_RunRoot, VT_System);
-            m_Parser->Add("target", m_Target, VT_System);
-
             xpath_query varNodesQuery("/VoodooConfig/Variables/Variable");
             xpath_query varNodeNameQuery("./@name");
 
@@ -122,13 +129,16 @@ namespace VoodooShader
             // Load plugins
             {
                 xpath_query pluginQuery("/VoodooConfig/Plugins/Path");
+                xpath_query pluginPathFilterQuery("./@filter");
+
                 xpath_node_set pluginNodes = pluginQuery.evaluate_node_set(*config);
                 xpath_node_set::const_iterator pluginNodeIter = pluginNodes.begin();
                 while (pluginNodeIter != pluginNodes.end())
                 {
+                    String filter = pluginPathFilterQuery.evaluate_string(*pluginNodeIter);
                     String path = nodeTextQuery.evaluate_string(*pluginNodeIter);
-                    path = m_Parser->Parse(path);
-                    m_ModuleManager->LoadPath(path);
+
+                    m_ModuleManager->LoadPath(path, filter);
 
                     ++pluginNodeIter;
                 }
@@ -168,8 +178,10 @@ namespace VoodooShader
                 throw std::exception("Unable to create Logger object (class not found).");
             }
 
+            m_Logger->Open(logFile, false);
+
             // Log extended build information
-            m_Logger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from \"%s\".", ConfigPath.c_str());
+            m_Logger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from \"%s\".", m_Config.c_str());
             m_Logger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
             Version vfver = VOODOO_META_VERSION_STRUCT(CORE);

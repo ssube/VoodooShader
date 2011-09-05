@@ -125,8 +125,8 @@ namespace VoodooShader
                 break;
             }
 
-            String varname = iteration.substr(endpos);
-            size_t startpos = iteration.find_last_of(Parser::VarDelimStart);
+            String varname = iteration.substr(0, endpos);
+            size_t startpos = varname.find_last_of(Parser::VarDelimStart);
             if (startpos == String::npos ||
                     startpos == 0 ||
                     iteration[startpos-1] != Parser::VarDelimPre

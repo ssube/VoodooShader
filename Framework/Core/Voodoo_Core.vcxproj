@@ -260,7 +260,7 @@
     <ClInclude Include="Technique.hpp" />
     <ClInclude Include="Texture.hpp" />
     <ClInclude Include="Version.hpp" />
-    <ClInclude Include="Voodoo_Core.hpp" />
+    <ClInclude Include="VoodooFramework.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Core.rc" />

@@ -45,10 +45,13 @@ namespace VoodooShader
 
         /**
          * Loads a set of modules given a path.
+         * 
+         * @note Only loads DLLs from in the path.
          */
         virtual bool LoadPath
         (
-            _In_ String path
+            _In_ String path,
+            _In_ String filter
         );
 
         virtual bool LoadFile
@@ -71,9 +74,9 @@ namespace VoodooShader
         template<class T>
         inline std::shared_ptr<T> CreateClass(_In_ String name)
         {
-            IObjectRef object = this->CreateObject(name);
+            IObject * object = this->CreateObject(name);
 
-            std::shared_ptr<T> retval((T*)object.get());
+            std::shared_ptr<T> retval((T*)object);
 
             return retval;
         };
@@ -87,7 +90,7 @@ namespace VoodooShader
          * @return New object or null if the class wasn't found or couldn't be created.
          */
         _Check_return_
-        virtual IObjectRef CreateObject(_In_ String name);
+        virtual IObject * CreateObject(_In_ String name);
 
         /**
          * Finds the address of a function in a module. The module must be loaded into
@@ -158,7 +161,7 @@ namespace VoodooShader
             _In_ int number
         );
 
-        virtual IObjectRef CreateClass
+        virtual IObject * CreateClass
         (
             _In_ int number,
             _In_ Core * core

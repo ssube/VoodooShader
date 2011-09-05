@@ -33,7 +33,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Voodoo_Core.hpp" />
     <ClInclude Include="Docs_Code.hpp">
       <Filter>Docs</Filter>
     </ClInclude>
@@ -100,6 +99,7 @@
     <ClInclude Include="Pass.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="VoodooFramework.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">

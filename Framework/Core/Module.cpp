@@ -6,6 +6,8 @@
 #include "IObject.hpp"
 #include "Parser.hpp"
 
+#include <regex>
+
 namespace VoodooShader
 {
     ModuleManager::ModuleManager(_In_ Core * core)
@@ -19,9 +21,9 @@ namespace VoodooShader
         m_Modules.clear();
     }
 
-    bool ModuleManager::LoadPath(_In_ String path)
+    bool ModuleManager::LoadPath(_In_ String path, _In_ String filter)
     {
-        String mask = m_Core->GetParser()->Parse(path) + "\\plugin_*";
+        String mask = m_Core->GetParser()->Parse(path) + "\\*";
 
         WIN32_FIND_DATA findFile;
         HANDLE searchHandle = FindFirstFile(mask.c_str(), &findFile);
@@ -49,11 +51,16 @@ namespace VoodooShader
             }
         }
 
+        std::regex compfilter(filter);
+
         do
         {
             String module = findFile.cFileName;
 
-            this->LoadFile(module);
+            if (regex_match(module, compfilter))
+            {
+                this->LoadFile(module);
+            }
         }
         while (FindNextFile(searchHandle, &findFile) != 0);
 
@@ -138,7 +145,7 @@ namespace VoodooShader
         return (m_Classes.find(name) != m_Classes.end());
     }
 
-    IObjectRef ModuleManager::CreateObject(_In_ String name)
+    IObject * ModuleManager::CreateObject(_In_ String name)
     {
         ILoggerRef logger = m_Core->GetLogger();
         ClassMap::iterator classiter = m_Classes.find(name);
@@ -152,9 +159,9 @@ namespace VoodooShader
             {
                 try
                 {
-                    IObjectRef object = module->CreateClass(number, m_Core);
+                    IObject * object = module->CreateClass(number, m_Core);
 
-                    if (object.get() == nullptr)
+                    if (object == nullptr)
                     {
                         if (logger.get())
                         {
@@ -212,10 +219,10 @@ namespace VoodooShader
             if (module->m_ModuleVersion == nullptr ||
                     module->m_ClassCount == nullptr ||
                     module->m_ClassInfo == nullptr ||
-                    module->m_ClassCreate
+                    module->m_ClassCreate == nullptr
                )
             {
-                FreeLibrary(hmodule);
+                //FreeLibrary(hmodule);
                 delete module;
                 return nullptr;
             }
@@ -259,7 +266,7 @@ namespace VoodooShader
         return (*m_ClassInfo)(number);
     }
 
-    IObjectRef Module::CreateClass(_In_ int number, _In_ Core * core)
+    IObject * Module::CreateClass(_In_ int number, _In_ Core * core)
     {
         return (*m_ClassCreate)(number, core);
     }
