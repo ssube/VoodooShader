@@ -1,4 +1,5 @@
 
+
 #include "Frost_Module.hpp"
 #include "Frost_Adapter.hpp"
 
@@ -17,48 +18,68 @@ GLsizei gViewHeight = 0;
 
 namespace VoodooShader
 {
-    namespace Frost
-    {
-        Version API_ModuleVersion()
-        {
-            Version moduleVersion = VOODOO_META_VERSION_STRUCT(FROST);
-            return moduleVersion;
-        }
+ namespace Frost
+{
 
-        int API_ClassCount()
-        {
-            return 1;
-        }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ Version API_ModuleVersion(void)
+ {
 
-        const char * API_ClassInfo
-        (
-            _In_ int number
-        )
-        {
-            if (number == 0)
-            {
-                return "Frost_Adapter";
-            }
-            else
-            {
-                return NULL;
-            }
-        }
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  Version moduleVersion = VOODOO_META_VERSION_STRUCT(FROST);
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        IObject * API_ClassCreate
-        (
-            _In_ int number,
-            _In_ Core * core
-        )
-        {
-            if (number == 0)
-            {
-                return new Frost::Adapter(core);
-            }
-            else
-            {
-                return NULL;
-            }
-        }
-    }
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  return moduleVersion;
+ }
+
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ int API_ClassCount(void)
+ {
+  return 1;
+ }
+
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ const char *API_ClassInfo(_In_ int number)
+ {
+  if (number == 0)
+  {
+   return "Frost_Adapter";
+  }
+  else
+  {
+   return NULL;
+  }
+ }
+
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ IObject *API_ClassCreate(_In_ int number, _In_ Core *core)
+ {
+  if (number == 0)
+  {
+   return new Frost::Adapter(core);
+  }
+  else
+  {
+   return NULL;
+  }
+ }
+}
 }

@@ -25,7 +25,7 @@ namespace LogViewer
             }
             catch (System.Exception ex)
             {
-            	System.Windows.Forms.MessageBox.Show
+             System.Windows.Forms.MessageBox.Show
                 (
                     "Unable to compile XSL transform:\n" + ex.Message,
                     "XSL Error"
@@ -75,7 +75,7 @@ namespace LogViewer
                 }
                 catch (System.Exception ex)
                 {
-                	
+                 
                 }
             }
         }

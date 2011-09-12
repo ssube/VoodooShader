@@ -1,24 +1,18 @@
-/**************************************************************************************************\
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
- * Copyright (c) 2010-2011 by Sean Sube
- *
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with this program;
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA  02110-1301 US
- *
- * Support and more information may be found at http://www.voodooshader.com, or by contacting the
- * developer at peachykeen@voodooshader.com
-\**************************************************************************************************/
-
+/**
+ * \ This file is part of the Voodoo Shader Framework, a comprehensive shader
+ * support library. Copyright (c) 2010-2011 by Sean Sube This program is free software;
+ * you can redistribute it and/or modify it under the terms of the GNU General
+ * Public License as published by the Free Software Foundation;
+ * either version 2 of the License, or (at your option) any later version. This
+ * program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details. You
+ * should have received a copy of the GNU General Public License along with this program;
+ * if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth
+ * Floor, Boston, MA 02110-1301 US Support and more information may be found at
+ * http://www.voodooshader.com, or by contacting the developer at
+ * peachykeen@voodooshader.com \
+ */
 #include <easyhook.h>
 
 #include "HookManager.hpp"
@@ -26,180 +20,250 @@
 
 namespace VoodooShader
 {
-    namespace EasyHook
-    {
-        Version API_ModuleVersion()
-        {
-            Version moduleVersion = VOODOO_META_VERSION_STRUCT(HOOK);
-            return moduleVersion;
-        }
+ namespace EasyHook
+{
 
-        int API_ClassCount()
-        {
-            return 1;
-        }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ Version API_ModuleVersion(void)
+ {
 
-        const char * API_ClassInfo(_In_ int number)
-        {
-            if (number == 0)
-            {
-                return "EHHookManager";
-            }
-            else
-            {
-                return NULL;
-            }
-        }
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  Version moduleVersion = VOODOO_META_VERSION_STRUCT(HOOK);
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        IObject * API_ClassCreate(_In_ int number, _In_ Core * core)
-        {
-            if (number == 0)
-            {
-                return new EasyHook::HookManager(core);
-            }
-            else
-            {
-                return NULL;
-            }
-        }
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  return moduleVersion;
+ }
 
-        HookManager::HookManager(Core * core)
-                : m_Core(core)
-        {
-            m_Hooks.clear();
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ int API_ClassCount(void)
+ {
+  return 1;
+ }
 
-            m_ThreadCount = 1;
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ const char *API_ClassInfo(_In_ int number)
+ {
+  if (number == 0)
+  {
+   return "EHHookManager";
+  }
+  else
+  {
+   return NULL;
+  }
+ }
 
-            m_ThreadIDs = new ULONG[m_ThreadCount];
-            m_ThreadIDs[0] = 0;
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ IObject *API_ClassCreate(_In_ int number, _In_ Core *core)
+ {
+  if (number == 0)
+  {
+   return new EasyHook::HookManager(core);
+  }
+  else
+  {
+   return NULL;
+  }
+ }
 
-            LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ HookManager::HookManager(Core *core) :
+  m_Core(core)
+ {
+  m_Hooks.clear();
 
-            m_Core->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", m_ThreadCount);
-        }
+  m_ThreadCount = 1;
 
-        HookManager::~HookManager()
-        {
-            this->RemoveAll();
+  m_ThreadIDs = new ULONG[m_ThreadCount];
+  m_ThreadIDs[0] = 0;
 
-            m_Core->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
+  LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
 
-            delete m_ThreadIDs;
-        }
+  m_Core->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", m_ThreadCount);
+ }
 
-        String HookManager::GetName()
-        {
-            return "EHHookManager";
-        }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ HookManager::~HookManager(void)
+ {
+  this->RemoveAll();
 
-        Core * HookManager::GetCore()
-        {
-            return m_Core;
-        }
+  m_Core->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
 
-        bool HookManager::Add(String name, void * src, void * dest)
-        {
-            HookMap::iterator hook = m_Hooks.find(name);
+  delete m_ThreadIDs;
+ }
 
-            if (hook != m_Hooks.end())
-            {
-                Throw
-                (
-                    VOODOO_HOOK_NAME,
-                    "Attempted to create a hook with a duplicate name.",
-                    m_Core
-                );
-            }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ String HookManager::GetName(void)
+ {
+  return "EHHookManager";
+ }
 
-            m_Core->GetLogger()->Log
-            (
-                LL_Debug,
-                VOODOO_HOOK_NAME,
-                "Creating hook %s. Redirecting function %p to %p.",
-                name.c_str(), src, dest
-            );
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ Core *HookManager::GetCore(void)
+ {
+  return m_Core;
+ }
 
-            TRACED_HOOK_HANDLE hookHandle = new HOOK_TRACE_INFO();
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ bool HookManager::Add(String name, void *src, void *dest)
+ {
 
-            DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  HookMap::iterator hook = m_Hooks.find(name);
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-            if ((result != 0) || (hookHandle == NULL))
-            {
-                m_Core->GetLogger()->Log
-                (
-                    LL_Error,
-                    VOODOO_HOOK_NAME,
-                    "Error %u creating hook %s (%p, %p).",
-                    result, name.c_str(), src, dest
-                );
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  if (hook != m_Hooks.end())
+  {
+   Throw(VOODOO_HOOK_NAME, "Attempted to create a hook with a duplicate name.", m_Core);
+  }
 
-                return false;
-            }
-            else
-            {
-                LhSetInclusiveACL(m_ThreadIDs, m_ThreadCount, hookHandle);
+  m_Core->GetLogger()->Log
+   (
+    LL_Debug,
+    VOODOO_HOOK_NAME,
+    "Creating hook %s. Redirecting function %p to %p.",
+    name.c_str(),
+    src,
+    dest
+   );
 
-                m_Hooks[name] = hookHandle;
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  TRACED_HOOK_HANDLE hookHandle = new HOOK_TRACE_INFO();
+  DWORD result = LhInstallHook(src, dest, NULL, hookHandle);
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-                return true;
-            }
-        }
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  if ((result != 0) || (hookHandle == NULL))
+  {
+   m_Core->GetLogger()->Log
+    (
+     LL_Error,
+     VOODOO_HOOK_NAME,
+     "Error %u creating hook %s (%p, %p).",
+     result,
+     name.c_str(),
+     src,
+     dest
+    );
 
-        bool HookManager::Remove(std::string name)
-        {
-            HookMap::iterator hook = m_Hooks.find(name);
+   return false;
+  }
+  else
+  {
+   LhSetInclusiveACL(m_ThreadIDs, m_ThreadCount, hookHandle);
 
-            m_Core->GetLogger()->Log
-            (
-                LL_Debug,
-                VOODOO_HOOK_NAME,
-                "Removing hook %s.",
-                name.c_str()
-            );
+   m_Hooks[name] = hookHandle;
 
-            if (hook != m_Hooks.end())
-            {
-                TRACED_HOOK_HANDLE tracedHandle = (TRACED_HOOK_HANDLE)hook->second;
+   return true;
+  }
+ }
 
-                DWORD result = LhUninstallHook(tracedHandle);
-                delete tracedHandle;
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ bool HookManager::Remove(std::string name)
+ {
 
-                if (result != 0)
-                {
-                    m_Core->GetLogger()->Log
-                    (
-                        LL_Error,
-                        VOODOO_HOOK_NAME,
-                        "Error %u removing hook %s.",
-                        result, name.c_str()
-                    );
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  HookMap::iterator hook = m_Hooks.find(name);
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-                    return true;
-                }
-                else
-                {
-                    m_Hooks.erase(hook);
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  m_Core->GetLogger()->Log(LL_Debug, VOODOO_HOOK_NAME, "Removing hook %s.", name.c_str());
 
-                    return false;
-                }
-            }
-            else
-            {
-                Throw
-                (
-                    VOODOO_HOOK_NAME,
-                    "Trying to remove hook that does not exist.",
-                    m_Core
-                );
-            }
-        }
+  if (hook != m_Hooks.end())
+  {
 
-        void HookManager::RemoveAll()
-        {
-            LhUninstallAllHooks();
-            LhWaitForPendingRemovals();
+   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+   TRACED_HOOK_HANDLE tracedHandle = (TRACED_HOOK_HANDLE) hook->second;
+   DWORD result = LhUninstallHook(tracedHandle);
+   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-            m_Hooks.clear();
-        }
-    }
+   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+   delete tracedHandle;
+
+   if (result != 0)
+   {
+    m_Core->GetLogger()->Log
+     (
+      LL_Error,
+      VOODOO_HOOK_NAME,
+      "Error %u removing hook %s.",
+      result,
+      name.c_str()
+     );
+
+    return true;
+   }
+   else
+   {
+    m_Hooks.erase(hook);
+
+    return false;
+   }
+  }
+  else
+  {
+   Throw(VOODOO_HOOK_NAME, "Trying to remove hook that does not exist.", m_Core);
+  }
+ }
+
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ void HookManager::RemoveAll(void)
+ {
+  LhUninstallAllHooks();
+  LhWaitForPendingRemovals();
+
+  m_Hooks.clear();
+ }
+}
 }

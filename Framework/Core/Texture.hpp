@@ -1,96 +1,77 @@
-/**************************************************************************************************\
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
- * Copyright (c) 2010-2011 by Sean Sube
- *
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with this program;
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA  02110-1301 US
- *
- * Support and more information may be found at http://www.voodooshader.com, or by contacting the
- * developer at peachykeen@voodooshader.com
-\**************************************************************************************************/
-
+/**
+ * \ This file is part of the Voodoo Shader Framework, a comprehensive shader
+ * support library. Copyright (c) 2010-2011 by Sean Sube This program is free software;
+ * you can redistribute it and/or modify it under the terms of the GNU General
+ * Public License as published by the Free Software Foundation;
+ * either version 2 of the License, or (at your option) any later version. This
+ * program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details. You
+ * should have received a copy of the GNU General Public License along with this program;
+ * if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth
+ * Floor, Boston, MA 02110-1301 US Support and more information may be found at
+ * http://www.voodooshader.com, or by contacting the developer at
+ * peachykeen@voodooshader.com \ 
+ */
 #pragma once
-
 #include "Meta.hpp"
 #include "IObject.hpp"
 
 namespace VoodooShader
 {
-    /**
-     * @addtogroup VoodooCore
-     * @{
-     */
 
-    /**
-     * Contains a hardware texture, for use with Voodoo shaders and effects.
-     * These textures may usually be bound to parameters and shaders can sample pixels
-     * within them to create the on-screen images. Textures may be used to represent
-     * various other surfaces, including render targets or even the backbuffer.
-     */
-    class Texture
-                : public IObject
-    {
-    public:
-        Texture
-        (
-            _In_ String name,
-            _In_opt_ void * texture = nullptr
-        );
+ /**
+  ===================================================================================================================
+  * @addtogroup VoodooCore @{ ;
+  * Contains a hardware texture, for use with Voodoo shaders and effects. These textures may usually be bound to
+  * parameters and shaders can sample pixels within them to create the on-screen images. Textures may be used to
+  * represent various other surfaces, including render targets or even the backbuffer.
+  ===================================================================================================================
+  */
+ class Texture :
+  public IObject
+ {
 
-        virtual ~Texture();
+/**
+ -----------------------------------------------------------------------------------------------------------------------
+ *
+ -----------------------------------------------------------------------------------------------------------------------
+ */
+public:
+  Texture(_In_ String name, _In_opt_ void *texture = nullptr);
 
-        /**
-         * Gets the name.
-         *
-         * @author  Sean
-         * @date    8/21/2011
-         *
-         * @return  The name.
-         */
+  virtual ~Texture(void);
 
-        virtual String GetName();
+  /* Gets the name. @author Sean @date 8/21/2011 @return The name. */
+  virtual String GetName(void);
 
-        virtual Core * GetCore();
+  virtual Core *GetCore(void);
 
-        template<typename T>
-        _Check_return_
-        inline T * GetData()
-        {
-            return reinterpret_cast<T*>(GetData());
-        };
+  /**
+   ===============================================================================================================
+   *
+   ===============================================================================================================
+   */
+  template<typename T>
+  _Check_return_ inline T *GetData(void) { return reinterpret_cast < T * > (GetData()); };
 
-        /**
-         * Gets the data.
-         *
-         * @return  null if it fails, else the data.
-         */
-        _Check_return_
-        virtual void * GetData();
+  /* Gets the data. @return null if it fails, else the data. */
+  _Check_return_ virtual void *GetData(void);
 
-        /**
-         * Gets the texture description.
-         *
-         * @return  The description.
-         */
-        virtual TextureDesc GetDesc();
+  /* Gets the texture description. @return The description. */
+  virtual TextureDesc GetDesc(void);
 
-    private:
-        String m_Name;
-        Core * m_Core;
-        void * m_Data;
-        TextureDesc m_Desc;
-    };
-    /**
-     * @}
-     */
+/**
+ -----------------------------------------------------------------------------------------------------------------------
+ *
+ -----------------------------------------------------------------------------------------------------------------------
+ */
+private:
+  String m_Name;
+  Core *m_Core;
+  void *m_Data;
+  TextureDesc m_Desc;
+ };
+
+ /* @} */
 }

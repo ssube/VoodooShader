@@ -1,4 +1,5 @@
 
+
 #ifndef VOODOO_NWS_MODULE_HPP
 #define VOODOO_NWS_MODULE_HPP
 
@@ -16,27 +17,19 @@
 
 namespace VoodooShader
 {
-    namespace Frost
-    {
-        class Adapter;
+ namespace Frost
+{
+ class Adapter;
 
-        Version API_ModuleVersion();
+ Version API_ModuleVersion(void);
 
-        int API_ClassCount();
+ int API_ClassCount(void);
 
-        const char * API_ClassInfo
-        (
-            _In_ int number
-        );
+ const char *API_ClassInfo(_In_ int number);
 
-        IObject * API_ClassCreate
-        (
-            _In_ int number,
-            _In_ Core * core
-        );
-    }
+ IObject *API_ClassCreate(_In_ int number, _In_ Core *core);
 }
-
+}
 extern VoodooShader::Core * VoodooCore;
 extern VoodooShader::ILoggerRef VoodooLogger;
 extern VoodooShader::Frost::Adapter * VoodooFrost;
@@ -49,5 +42,4 @@ extern GLint gLastShader;
 extern GLint gLastPass;
 extern GLsizei gViewWidth;
 extern GLsizei gViewHeight;
-
-#endif /*VOODOO_NWS_MODULE_HPP*/
+#endif /* VOODOO_NWS_MODULE_HPP */

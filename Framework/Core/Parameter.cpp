@@ -8,122 +8,218 @@
 
 namespace VoodooShader
 {
-    Parameter::Parameter(_In_ Core * core, _In_ String name, _In_ ParameterType type)
-            : m_Type(type), m_Parent(nullptr), m_Virtual(true), m_Core(core), m_Name(name)
-    {
-        m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Creating a virtual parameter (%s, core %p) of type %s.", name.c_str(), core, Converter::ToString(type));
 
-        CGcontext context = m_Core->GetCgContext();
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ Parameter::Parameter(_In_ Core *core, _In_ String name, _In_ ParameterType type) :
+  m_Type(type),
+  m_Parent(nullptr),
+  m_Virtual(true),
+  m_Core(core),
+  m_Name(name)
+ {
+  m_Core->GetLogger()->Log
+   (
+    LL_Debug,
+    VOODOO_CORE_NAME,
+    "Creating a virtual parameter (%s, core %p) of type %s.",
+    name.c_str(),
+    core,
+    Converter::ToString(type)
+   );
 
-        if (!context || !cgIsContext(context))
-        {
-            throw std::exception("Unable to create parameter (core has no context).");
-        }
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  CGcontext context = m_Core->GetCgContext();
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        m_Param = cgCreateParameter
-                  (
-                      context,
-                      Converter::ToCGType(m_Type)
-                  );
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  if (!context || !cgIsContext(context))
+  {
+   throw std::exception("Unable to create parameter (core has no context).");
+  }
 
-        memset(m_ValueFloat, 0, sizeof(float)*16);
-        m_ValueTexture = TextureRef();
-    }
+  m_Param = cgCreateParameter(context, Converter::ToCGType(m_Type));
 
-    Parameter::Parameter(_In_ Shader * parent, _In_ CGparameter param)
-            : m_Parent(parent), m_Param(param), m_Virtual(false), m_Core(parent->GetCore())
-    {
-        m_Type = Converter::ToParameterType(cgGetParameterType(param));
-        m_Name = cgGetParameterName(param);
+  memset(m_ValueFloat, 0, sizeof(float) * 16);
+  m_ValueTexture = TextureRef();
+ }
 
-        memset(m_ValueFloat, 0, sizeof(float)*16);
-        m_ValueTexture = TextureRef();
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ Parameter::Parameter(_In_ Shader *parent, _In_ CGparameter param) :
+  m_Parent(parent),
+  m_Param(param),
+  m_Virtual(false),
+  m_Core(parent->GetCore())
+ {
+  m_Type = Converter::ToParameterType(cgGetParameterType(param));
+  m_Name = cgGetParameterName(param);
 
-    Parameter::~Parameter()
-    {
-        m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying parameter %s.", m_Name.c_str());
+  memset(m_ValueFloat, 0, sizeof(float) * 16);
+  m_ValueTexture = TextureRef();
+ }
 
-        if (m_Virtual && cgIsParameter(m_Param))
-        {
-            cgDestroyParameter(m_Param);
-        }
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ Parameter::~Parameter(void)
+ {
+  m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying parameter %s.", m_Name.c_str());
 
-    String Parameter::GetName()
-    {
-        String name;
+  if (m_Virtual && cgIsParameter(m_Param))
+  {
+   cgDestroyParameter(m_Param);
+  }
+ }
 
-        if (m_Parent)
-        {
-            name = this->m_Parent->GetName();
-        }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ String Parameter::GetName(void)
+ {
 
-        name += ":" + m_Name;
+  /*~~~~~~~~~*/
+  /*~~~~~~~~~*/
+  String name;
+  /*~~~~~~~~~*/
 
-        return name;
-    }
+  /*~~~~~~~~~*/
+  if (m_Parent)
+  {
+   name = this->m_Parent->GetName();
+  }
 
-    Core * Parameter::GetCore()
-    {
-        return m_Core;
-    }
+  name += ":" + m_Name;
 
-    ParameterType Parameter::GetType(void)
-    {
-        return m_Type;
-    }
+  return name;
+ }
 
-    bool Parameter::IsVirtual()
-    {
-        return m_Virtual;
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ Core *Parameter::GetCore(void)
+ {
+  return m_Core;
+ }
 
-    void Parameter::AttachParameter(ParameterRef param)
-    {
-        if (!this->m_Virtual)
-        {
-            Throw(VOODOO_CORE_NAME, "Cannot attach to a non-virtual parameter.", m_Core);
-        }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ ParameterType Parameter::GetType(void)
+ {
+  return m_Type;
+ }
 
-        cgConnectParameter(this->m_Param, param->GetCgParameter());
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ bool Parameter::IsVirtual(void)
+ {
+  return m_Virtual;
+ }
 
-    int Parameter::GetComponents()
-    {
-        return Converter::ToComponents(m_Type);
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ void Parameter::AttachParameter(ParameterRef param)
+ {
+  if (!this->m_Virtual)
+  {
+   Throw(VOODOO_CORE_NAME, "Cannot attach to a non-virtual parameter.", m_Core);
+  }
 
-    TextureRef Parameter::GetTexture()
-    {
-        return m_ValueTexture;
-    }
+  cgConnectParameter(this->m_Param, param->GetCgParameter());
+ }
 
-    void Parameter::SetTexture(TextureRef Texture)
-    {
-        m_ValueTexture = Texture;
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ int Parameter::GetComponents(void)
+ {
+  return Converter::ToComponents(m_Type);
+ }
 
-    float * Parameter::GetScalar()
-    {
-        return m_ValueFloat;
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ TextureRef Parameter::GetTexture(void)
+ {
+  return m_ValueTexture;
+ }
 
-    void Parameter::SetScalar(int Count, _In_count_(Count) float * Values)
-    {
-        if (Values)
-        {
-            memcpy(m_ValueFloat, Values, min(16, Count) * sizeof(float));
-        }
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ void Parameter::SetTexture(TextureRef Texture)
+ {
+  m_ValueTexture = Texture;
+ }
 
-    ShaderRef Parameter::GetShader()
-    {
-        return m_Parent;
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ float *Parameter::GetScalar(void)
+ {
+  return m_ValueFloat;
+ }
 
-    CGparameter Parameter::GetCgParameter()
-    {
-        return this->m_Param;
-    }
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ void Parameter::SetScalar(int Count, _In_count_(Count) float *Values)
+ {
+  if (Values)
+  {
+   memcpy(m_ValueFloat, Values, min(16, Count) * sizeof(float));
+  }
+ }
+
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ ShaderRef Parameter::GetShader(void)
+ {
+  return m_Parent;
+ }
+
+ /**
+  ===================================================================================================================
+  *
+  ===================================================================================================================
+  */
+ CGparameter Parameter::GetCgParameter(void)
+ {
+  return this->m_Param;
+ }
 }

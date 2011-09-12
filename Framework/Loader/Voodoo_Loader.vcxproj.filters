@@ -10,6 +10,9 @@
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="Common.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -24,6 +27,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Loader.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

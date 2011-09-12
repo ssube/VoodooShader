@@ -13,42 +13,30 @@
  * http://www.voodooshader.com, or by contacting the developer at
  * peachykeen@voodooshader.com \ 
  */
-#define VOODOO_IMPORT
+#include <stdio.h>
+#include <stdlib.h>
+
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+#define VOODOO_NO_CG
 #include "VoodooFramework.hpp"
 
-#include <set>
+/* @addtogroup VoodooLoader Voodoo/Loader @{ */
+void WINAPI ErrorMessage(LPTSTR pMsg, ...);
 
-#include <d3d9.h>
-#include <d3dx9.h>
-#include <d3dx9tex.h>
-#pragma comment(lib, "D3D9.lib")
-#pragma comment(lib, "D3dx9.lib")
-#include "Cg/cgD3D9.h"
-#pragma comment(lib, "cgD3D9.lib")
-#ifndef VOODOO_IMPORT_DX89
-#define VOODOO_API_DX89 __declspec(dllexport)
-#else
-#define VOODOO_API_DX89 __declspec(dllimport)
-#endif
-#include "MGE/FauxD3D8Header.hpp"
+HMODULE LoadSystemLibrary(const PTCHAR libname);
 
-class IVoodoo3D8;
-class IVoodoo3DDevice8;
-class IVoodoo3DSurface8;
+bool WINAPI VoodooStartup(void);
+bool WINAPI VoodooShutdown(void);
 
-extern D3DCAPS8 d3d8Caps;
+bool WINAPI GetLoader(HINSTANCE hLoader);
+bool WINAPI GetRunRoot(void);
+bool WINAPI GetLocalRoot(void);
+bool WINAPI GetGlobalRoot(void);
 
-extern VoodooShader::Core * VoodooCore;
-extern VoodooShader::Adapter * VoodooDX89;
+extern VoodooShader::Core * gVoodooCore;
+extern VoodooShader::IAdapterRef gVoodooAdapter;
+extern VoodooShader::InitParams gInitParams;
 
-extern IVoodoo3D8 *VoodooObject;
-extern IVoodoo3DDevice8 *VoodooDevice;
-
-extern VoodooShader::ShaderRef testShader;
-
-extern IDirect3DSurface9 *backbufferSurf;
-
-extern VoodooShader::TextureRef texture_ThisFrame;
-extern IDirect3DSurface9 *surface_ThisFrame;
-
-typedef IDirect3D8 * (__stdcall * D3DFunc8) (UINT);
+/* @} */

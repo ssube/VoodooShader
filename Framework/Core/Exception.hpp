@@ -1,70 +1,67 @@
-/**************************************************************************************************\
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library.
- * Copyright (c) 2010-2011 by Sean Sube
- *
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with this program;
- * if  not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA  02110-1301 US
- *
- * Support and more information may be found at http://www.voodooshader.com, or by contacting the
- * developer at peachykeen@voodooshader.com
-\**************************************************************************************************/
-
-#ifndef VOODOO_EXCEPTION_HPP
-#define VOODOO_EXCEPTION_HPP
-
+/**
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * 
+ * Copyright (c) 2010-2011 by Sean Sube 
+ * 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
+ * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
+ * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details. 
+ * 
+ * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
+ * 
+ * Support and more information may be found at 
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at 
+ *   peachykeen@voodooshader.com
+ */
+#pragma once
 #include "Meta.hpp"
 
 namespace VoodooShader
 {
     /**
-     * @addtogroup VoodooCore
+     * @addtogroup VoodooCore 
      * @{
      */
+
     /**
-     * Generic exception class for Voodoo applications. Combines a generic
-     * standard exception with extended error location data.
-     *
-     * @note If possible, thrown Exceptions will automatically log as much data
-     *        as they contain in a formatted way. You can retrieve this string
-     *        with the Exception::what() method.
+     * Generic exception class for Voodoo applications. Combines a generic standard exception with extended 
+     * error location data. 
+     * 
+     * @note If possible, thrown Exceptions will automatically log as much data as they contain in a 
+     *     formatted way. You can retrieve this string with the Exception::what() method (compatible 
+     *     with std::exception).
      */
-    class VOODOO_API Exception
-                : public std::exception
+    class VOODOO_API Exception :
+        public std::exception
     {
     public:
         Exception
         (
-            _In_ char * module,
-            _In_ char * message,
-            _In_ Core * core,
-            _In_ char * file,
-            _In_ char * function,
-            _In_ int line
+            _In_ char * Module,
+            _In_ char * Message,
+            _In_ Core * pCore,
+            _In_ char * File,
+            _In_ char * Function,
+            _In_ int Line
         );
 
         Exception
         (
-            _In_ String module,
-            _In_ String message,
-            _In_ Core * core,
-            _In_ char * file,
-            _In_ char * function,
-            _In_ int line
+            _In_ String Module,
+            _In_ String Message,
+            _In_ Core * pCore,
+            _In_ char * File,
+            _In_ char * Function,
+            _In_ int Line
         );
 
-        virtual  ~Exception();
+        virtual ~Exception(void);
 
-        virtual const char * what();
+        virtual const char * what(void);
 
     private:
         Core * m_Core;
@@ -75,9 +72,7 @@ namespace VoodooShader
         int m_Line;
         char * m_FmtMsg;
     };
-    /**
-     * @}
+    /** 
+     * @} 
      */
 }
-
-#endif

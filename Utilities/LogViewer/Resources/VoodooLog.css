@@ -21,120 +21,120 @@
 
 body
 {
-	background: #666666;
+ background: #666666;
 }
 
 table
 {
-	width: 100%;
+ width: 100%;
 }
 
 table tr
 {
-	background: #DDDDDD;
+ background: #DDDDDD;
 }
 
 table thead tr
 {
-	background: #AAAAAA;
+ background: #AAAAAA;
 }
 
 .section
 {
-	background: #CCCCCC;
-	padding: 4px;
-	width: 100%;
-	margin-bottom: 2px;
+ background: #CCCCCC;
+ padding: 4px;
+ width: 100%;
+ margin-bottom: 2px;
 }
 
 .section_title
 {
-	background: #DDDDDD;
-	font-weight: bold;
-	margin-bottom: 2px;
-	padding: 2px;
+ background: #DDDDDD;
+ font-weight: bold;
+ margin-bottom: 2px;
+ padding: 2px;
 }
 
 /* 0x00 - unknown */
 .level_0
 {
-	background: #D4C6DD;
-	color: #000000;
+ background: #D4C6DD;
+ color: #000000;
 }
 
 /* 0x10 - ext debug */
 .level_1
 {
-	background: #D0CFDF;
-	color: #000000;
+ background: #D0CFDF;
+ color: #000000;
 }
 
 /* 0x20 - debug */
 .level_2
 {
-	background: #CCDDE0;
-	color: #000000;
+ background: #CCDDE0;
+ color: #000000;
 }
 
 /* 0x30 - extended info */
 .level_3
 {
-	background: #CCDFCC;
-	color: #000000;
+ background: #CCDFCC;
+ color: #000000;
 }
 
 /* 0x40 - info */
 .level_4
 {
-	color: #000000;
+ color: #000000;
 }
 
 /* 0x50 - warning info */
 .level_5
 {
-	background: #ECE8AB;
-	color: #000000;
-	font-style: italic;
+ background: #ECE8AB;
+ color: #000000;
+ font-style: italic;
 }
 
 /* 0x60 - slight warning */
 .level_6
 {
-	background: #F5D89B;
-	color: #000000;
-	font-style: italic;
+ background: #F5D89B;
+ color: #000000;
+ font-style: italic;
 }
 
 /* 0x70 - mild warning */
 .level_7
 {
-	background: #FFCA8B;
-	color: #000000;
-	font-style: italic;
+ background: #FFCA8B;
+ color: #000000;
+ font-style: italic;
 }
 
 /* 0x80 - warning */
 .level_8
 {
-	background: #FFA87B;
-	color: #000000;
-	font-style: italic;
+ background: #FFA87B;
+ color: #000000;
+ font-style: italic;
 }
 
 /* 0x90 - slight error */
 .level_9
 {
-	background: #FF875B;
-	color: #000000;
-	font-style: italic;
+ background: #FF875B;
+ color: #000000;
+ font-style: italic;
 }
 
 /* 0xA0 - slight error */
 .level_10
 {
-	background: #FF664B;
-	color: #000000;
-	font-style: italic;
+ background: #FF664B;
+ color: #000000;
+ font-style: italic;
 }
 
 /* Error classes use more obvious formatting. */
@@ -142,47 +142,47 @@ table thead tr
 /* 0xB0 - slight error */
 .level_11
 {
-	background: #FF4444;
-	color: #222222;
-	font-weight: bold;
+ background: #FF4444;
+ color: #222222;
+ font-weight: bold;
 }
 
 /* 0xC0 - error */
 .level_12
 {
-	background: #EE3838;
-	color: #333333;
-	font-weight: bold;
+ background: #EE3838;
+ color: #333333;
+ font-weight: bold;
 }
 
 /* 0xD0 - slightly fatal error */
 .level_13
 {
-	background: #DD3030;
-	color: #DDDDDD;
-	font-weight: bold;
+ background: #DD3030;
+ color: #DDDDDD;
+ font-weight: bold;
 }
 
 /* 0xE0 - mildly fatal error */
 .level_14
 {
-	background: #BB2020;
-	color: #DDDDDD;
-	font-weight: bold;
+ background: #BB2020;
+ color: #DDDDDD;
+ font-weight: bold;
 }
 
 /* 0xF0 - fatal error */
 .level_15
 {
-	background: #881010;
-	color: #EEEEEE;
-	font-weight: bold;
+ background: #881010;
+ color: #EEEEEE;
+ font-weight: bold;
 }
 
 /* 0xFF - error of doom */
 .level_16
 {
-	background: #440000;
-	color: #FFFFFF;
-	font-weight: bold;
+ background: #440000;
+ color: #FFFFFF;
+ font-weight: bold;
 }
