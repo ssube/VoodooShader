@@ -1,484 +1,275 @@
+/**
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * 
+ * Copyright (c) 2010-2011 by Sean Sube 
+ * 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
+ * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
+ * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details. 
+ * 
+ * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
+ * 
+ * Support and more information may be found at 
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at 
+ *   peachykeen@voodooshader.com
+ */
 #include "Null.hpp"
 
-#include "Pass.hpp"
-#include "Texture.hpp"
+#include "IPass.hpp"
+#include "ITexture.hpp"
 
 namespace VoodooShader
 {
- namespace VoodooNull
-{
+    namespace VoodooNull
+    {
+        NullAdapter::NullAdapter(ICore *core) :
+            m_Core(core)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- NullAdapter::NullAdapter(Core *core) :
-  m_Core(core)
- { }
+        NullAdapter::~NullAdapter(void)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- NullAdapter::~NullAdapter(void)
- { }
+        ICore *NullAdapter::GetCore(void)
+        {
+            return m_Core;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- Core *NullAdapter::GetCore(void)
- {
-  return m_Core;
- }
+        String NullAdapter::ToString(void)
+        {
+            return "NullAdapter";
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- String NullAdapter::GetName(void)
- {
-  return "NullAdapter";
- }
+        bool NullAdapter::LoadPass(_In_ IPass* pass)
+        {
+            UNREFERENCED_PARAMETER(pass);
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- bool NullAdapter::LoadPass(_In_ PassRef pass)
- {
-  UNREFERENCED_PARAMETER(pass);
+            return false;
+        }
 
-  return false;
- }
+        bool NullAdapter::UnloadPass(_In_ IPass* pass)
+        {
+            UNREFERENCED_PARAMETER(pass);
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- bool NullAdapter::UnloadPass(_In_ PassRef pass)
- {
-  UNREFERENCED_PARAMETER(pass);
+            return false;
+        }
 
-  return false;
- }
+        void NullAdapter::SetPass(_In_ IPass* pass)
+        {
+            UNREFERENCED_PARAMETER(pass);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullAdapter::SetPass(_In_ PassRef pass)
- {
-  UNREFERENCED_PARAMETER(pass);
- }
+        IPass* NullAdapter::GetPass(void)
+        {
+            return nullptr;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- PassRef NullAdapter::GetPass(void)
- {
-  return nullptr;
- }
+        Bool NullAdapter::SetTarget(_In_ UInt32 index, _In_ ITexture* target)
+        {
+            UNREFERENCED_PARAMETER(index);
+            UNREFERENCED_PARAMETER(target);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullAdapter::SetTarget(_In_ TextureRef target)
- {
-  UNREFERENCED_PARAMETER(target);
- }
+        ITexture* NullAdapter::GetTarget(_In_ UInt32 index)
+        {
+            UNREFERENCED_PARAMETER(index);
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- TextureRef NullAdapter::GetTarget(void)
- {
-  return nullptr;
- }
+            return nullptr;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- TextureRef NullAdapter::CreateTexture(_In_ String Name, _In_ TextureDesc Desc)
- {
-  UNREFERENCED_PARAMETER(Name);
-  UNREFERENCED_PARAMETER(Desc);
+        ITexture* NullAdapter::CreateTexture(_In_ String Name, _In_ TextureDesc Desc)
+        {
+            UNREFERENCED_PARAMETER(Name);
+            UNREFERENCED_PARAMETER(Desc);
 
-  return nullptr;
- }
+            return nullptr;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- TextureRef NullAdapter::LoadTexture(_In_ String Name, TextureRegion Region)
- {
-  UNREFERENCED_PARAMETER(Name);
-  UNREFERENCED_PARAMETER(Region);
+        ITexture* NullAdapter::LoadTexture(_In_ String Name, TextureRegion Region)
+        {
+            UNREFERENCED_PARAMETER(Name);
+            UNREFERENCED_PARAMETER(Region);
 
-  return nullptr;
- }
+            return nullptr;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullAdapter::DrawGeometry(int Vertexes, VertexStruct *pVertexData)
- {
-  UNREFERENCED_PARAMETER(Vertexes);
-  UNREFERENCED_PARAMETER(pVertexData);
- }
+        void NullAdapter::DrawGeometry(int Vertexes, VertexStruct *pVertexData)
+        {
+            UNREFERENCED_PARAMETER(Vertexes);
+            UNREFERENCED_PARAMETER(pVertexData);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullAdapter::DrawShader(_In_ ShaderRef shader)
- {
-  UNREFERENCED_PARAMETER(shader);
- }
+        void NullAdapter::DrawShader(_In_ IShader* shader)
+        {
+            UNREFERENCED_PARAMETER(shader);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullAdapter::ApplyParameter(_In_ ParameterRef param)
- {
-  UNREFERENCED_PARAMETER(param);
- }
+        void NullAdapter::ApplyParameter(_In_ IParameter* param)
+        {
+            UNREFERENCED_PARAMETER(param);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullAdapter::SetProperty(String Property, String Value)
- {
-  UNREFERENCED_PARAMETER(Property);
-  UNREFERENCED_PARAMETER(Value);
- }
+        void NullAdapter::SetProperty(String Property, String Value)
+        {
+            UNREFERENCED_PARAMETER(Property);
+            UNREFERENCED_PARAMETER(Value);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- String NullAdapter::GetProperty(String Property)
- {
-  UNREFERENCED_PARAMETER(Property);
+        String NullAdapter::GetProperty(String Property)
+        {
+            UNREFERENCED_PARAMETER(Property);
 
-  return String();
- }
+            return String();
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- bool NullAdapter::ConnectTexture(_In_ ParameterRef param, _In_ TextureRef texture)
- {
-  UNREFERENCED_PARAMETER(param);
-  UNREFERENCED_PARAMETER(texture);
+        bool NullAdapter::ConnectTexture(_In_ IParameter* param, _In_ ITexture* texture)
+        {
+            UNREFERENCED_PARAMETER(param);
+            UNREFERENCED_PARAMETER(texture);
 
-  return false;
- }
+            return false;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullAdapter::HandleError(_In_ CGcontext context, _In_ int error)
- {
-  UNREFERENCED_PARAMETER(context);
-  UNREFERENCED_PARAMETER(error);
- }
+        void NullAdapter::HandleError(_In_ CGcontext context, _In_ int error)
+        {
+            UNREFERENCED_PARAMETER(context);
+            UNREFERENCED_PARAMETER(error);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- NullLogger::NullLogger(Core *core) :
-  m_Core(core)
- { }
+        NullLogger::NullLogger(ICore *core) 
+            : m_Core(core)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- NullLogger::~NullLogger(void)
- { }
+        NullLogger::~NullLogger(void)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- Core *NullLogger::GetCore(void)
- {
-  return m_Core;
- }
+        ICore *NullLogger::GetCore(void)
+        {
+            return m_Core;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- String NullLogger::GetName(void)
- {
-  return "NullLogger";
- }
+        String NullLogger::ToString(void)
+        {
+            return "NullLogger";
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- bool NullLogger::Open(_In_ String Filename, _In_ bool Append)
- {
-  UNREFERENCED_PARAMETER(Filename);
-  UNREFERENCED_PARAMETER(Append);
+        bool NullLogger::Open(_In_ String Filename, _In_ bool Append)
+        {
+            UNREFERENCED_PARAMETER(Filename);
+            UNREFERENCED_PARAMETER(Append);
 
-  return false;
- }
+            return false;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullLogger::Close(void)
- { }
+        void NullLogger::Close(void)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullLogger::Flush(void)
- { }
+        void NullLogger::Flush(void)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullLogger::SetLogLevel(_In_ LogLevel level)
- {
-  UNREFERENCED_PARAMETER(level);
- }
+        void NullLogger::SetLogLevel(_In_ LogLevel level)
+        {
+            UNREFERENCED_PARAMETER(level);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- LogLevel NullLogger::GetLogLevel(void)
- {
-  return LL_Unknown;
- }
+        LogLevel NullLogger::GetLogLevel(void)
+        {
+            return LL_Unknown;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullLogger::LogModule(_In_ Version module)
- {
-  UNREFERENCED_PARAMETER(module);
- }
+        void NullLogger::LogModule(_In_ Version module)
+        {
+            UNREFERENCED_PARAMETER(module);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullLogger::Log(_In_ LogLevel level, _In_ const char *module, _In_ _Printf_format_string_ const char *msg, ...)
- {
-  UNREFERENCED_PARAMETER(level);
-  UNREFERENCED_PARAMETER(module);
-  UNREFERENCED_PARAMETER(msg);
- }
+        void NullLogger::Log(_In_ LogLevel level, _In_ const char *module, _In_ _Printf_format_string_ const char *msg, ...)
+        {
+            UNREFERENCED_PARAMETER(level);
+            UNREFERENCED_PARAMETER(module);
+            UNREFERENCED_PARAMETER(msg);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullLogger::SetFlags(_In_ LogFlags flush)
- {
-  UNREFERENCED_PARAMETER(flush);
- }
+        void NullLogger::SetFlags(_In_ LogFlags flush)
+        {
+            UNREFERENCED_PARAMETER(flush);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- LogFlags NullLogger::GetFlags(void)
- {
-  return LF_Unknown;
- }
+        LogFlags NullLogger::GetFlags(void)
+        {
+            return LF_Unknown;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- NullHookManager::NullHookManager(_In_ Core *core) :
-  m_Core(core)
- { }
+        NullHookManager::NullHookManager(_In_ ICore *core) :
+        m_Core(core)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- NullHookManager::~NullHookManager(void)
- { }
+        NullHookManager::~NullHookManager(void)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- String NullHookManager::GetName(void)
- {
-  return "NullHookManager";
- }
+        String NullHookManager::ToString(void)
+        {
+            return "NullHookManager";
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- Core *NullHookManager::GetCore(void)
- {
-  return m_Core;
- }
+        ICore *NullHookManager::GetCore(void)
+        {
+            return m_Core;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- bool NullHookManager::Add(_In_ String name, _In_ void *src, _In_ void *dest)
- {
-  UNREFERENCED_PARAMETER(name);
-  UNREFERENCED_PARAMETER(src);
-  UNREFERENCED_PARAMETER(dest);
+        bool NullHookManager::Add(_In_ String name, _In_ void *src, _In_ void *dest)
+        {
+            UNREFERENCED_PARAMETER(name);
+            UNREFERENCED_PARAMETER(src);
+            UNREFERENCED_PARAMETER(dest);
 
-  return false;
- }
+            return false;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- bool NullHookManager::Remove(_In_ String name)
- {
-  UNREFERENCED_PARAMETER(name);
+        bool NullHookManager::Remove(_In_ String name)
+        {
+            UNREFERENCED_PARAMETER(name);
 
-  return false;
- }
+            return false;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullHookManager::RemoveAll(void)
- { }
+        void NullHookManager::RemoveAll(void)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- NullFileSystem::NullFileSystem(_In_ Core *core) :
-  m_Core(core)
- { }
+        NullFileSystem::NullFileSystem(_In_ ICore *core) :
+        m_Core(core)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- NullFileSystem::~NullFileSystem(void)
- { }
+        NullFileSystem::~NullFileSystem(void)
+        { }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- String NullFileSystem::GetName(void)
- {
-  return "NullFileSystem";
- }
+        String NullFileSystem::ToString(void)
+        {
+            return "NullFileSystem";
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- Core *NullFileSystem::GetCore(void)
- {
-  return m_Core;
- }
+        ICore *NullFileSystem::GetCore(void)
+        {
+            return m_Core;
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullFileSystem::AddDirectory(_In_ String dir)
- {
-  UNREFERENCED_PARAMETER(dir);
- }
+        void NullFileSystem::AddDirectory(_In_ String dir)
+        {
+            UNREFERENCED_PARAMETER(dir);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void NullFileSystem::RemoveDirectory(_In_ String dir)
- {
-  UNREFERENCED_PARAMETER(dir);
- }
+        void NullFileSystem::RemoveDirectory(_In_ String dir)
+        {
+            UNREFERENCED_PARAMETER(dir);
+        }
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- IFileRef NullFileSystem::FindFile(_In_ String name)
- {
-  UNREFERENCED_PARAMETER(name);
+        IFile* NullFileSystem::FindFile(_In_ String name)
+        {
+            UNREFERENCED_PARAMETER(name);
 
-  return nullptr;
- }
-}
+            return nullptr;
+        }
+    }
 }

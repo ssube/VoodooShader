@@ -45,7 +45,7 @@ namespace VoodooShader
   * @endcode Creates a new instance of the given class, bound to the provided Core.
   * For classes needing additional data, they can cache and/or use the core. @note
   * Class constructors @em may throw exceptions. The @ref ModuleManager will catch
-  * and log these when possible. When the class construction throws, null will be
+  * and log these when possible. When the class construction throws, nullptr will be
   * returned. @section moduleiobject IObject Interface Every class provided through
   * the above API @em must derive from the IObject interface and implement both
   * methods. @subsection moduleiobjectdtor Destructor @code virtual void
@@ -102,7 +102,7 @@ namespace VoodooShader
   * methods to handle a particular feature. The Core holds references to all
   * created parameters and shaders, but will release these in either of two cases:
   * @li The Core is destroyed (the destructor releases all resources, then destroys
-  * the adapter). @li @ref Core::SetCgContext() is called with null as the context,
+  * the adapter). @li @ref Core::SetCgContext() is called with nullptr as the context,
   * indicating that the cached context is to be cleared. This will drop the strong
   * references from the core and may free resources, if no other references are
   * held. @page voodoosystem How Voodoo Works Voodoo provides a framework for

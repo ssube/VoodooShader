@@ -1,834 +1,557 @@
-#include "Core.hpp"
-
-#include "IAdapter.hpp"
-#include "IFilesystem.hpp"
-#include "IHookManager.hpp"
-#include "ILogger.hpp"
+/**
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * 
+ * Copyright (c) 2010-2011 by Sean Sube 
+ * 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
+ * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
+ * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details. 
+ * 
+ * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
+ * 
+ * Support and more information may be found at 
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at 
+ *   peachykeen@voodooshader.com
+ */
 
 #include "Converter.hpp"
 #include "Exception.hpp"
-#include "Module.hpp"
-#include "Parameter.hpp"
-#include "Parser.hpp"
-#include "Shader.hpp"
-#include "Texture.hpp"
 
-#include "pugixml.hpp"
+#include "IAdapter.hpp"
+#include "ICore.hpp"
+#include "IFilesystem.hpp"
+#include "IHookManager.hpp"
+#include "ILogger.hpp"
+#include "IModule.hpp"
+#include "IParameter.hpp"
+#include "IParser.hpp"
+#include "IShader.hpp"
+#include "ITexture.hpp"
 
 namespace VoodooShader
 {
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void Voodoo_CgErrorHandler_Func(CGcontext context, CGerror error, void *core)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  Core *me = reinterpret_cast < Core * > (core);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  if (me)
-  {
-   me->CgErrorHandler(context, error);
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- Core *CreateCore(_In_ InitParams *initParams, bool CatchErrors)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~*/
-  Core *core = nullptr;
-  /*~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~*/
-  try
-  {
-   core = new Core(initParams);
-   return core;
-  }
-  catch(std::exception & exc)
-  {
-   if (!CatchErrors)
-   {
-    throw exc;
-   }
-   else
-   {
-    if (core)
+    void Voodoo_CgErrorHandler_Func(CGcontext Context, CGerror Error, void *pCore)
     {
-     delete core;
+        if (pCore)
+        {
+            ICore *pSrcCore = reinterpret_cast<ICore *>(pCore);
+            pSrcCore->CgErrorHandler(Context, Error);
+        }
     }
 
-    return nullptr;
-   }
-  }
- }
+    ICore * CreateCore(_In_ const InitParams * const pInitParams, Bool CatchErrors)
+    {
+        ICore *pCore = nullptr;
 
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- Core::Core(_In_ InitParams *initParams) :
-  m_Adapter(NULL),
-  m_HookManager(NULL),
-  m_Logger(NULL),
-  m_CgContext(NULL),
-  m_ConfigFile(NULL)
- {
+        try
+        {
+            pCore = new ICore(pInitParams);
+            return pCore;
+        }
+        catch(std::exception & exc)
+        {
+            if (!CatchErrors)
+            {
+                throw exc;
+            }
+            else
+            {
+                if (pCore)
+                {
+                    delete pCore;
+                }
 
-  /*~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~*/
-  using namespace pugi;
-  /*~~~~~~~~~~~~~~~~~*/
+                return nullptr;
+            }
+        }
+    }
 
-  /*~~~~~~~~~~~~~~~~~*/
-#ifdef _DEBUG_FULL
-  _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-  _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
-  _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
-  _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
-  _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
+    ICore::ICore(_In_ const InitParams * const pInitParams) 
+        : m_CgContext(nullptr), m_ConfigFile(nullptr)
+    {
+        using namespace pugi;
+
+        if (!pInitParams)
+        {
+            throw std::exception("No init parameters provided.");
+        }
+
+#ifdef VSF_DEBUG_MEMORY
+        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+        _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
+        _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
 #endif
-  m_GlobalRoot = initParams->GlobalRoot + "\\";
-  m_LocalRoot = initParams->LocalRoot + "\\";
-  m_RunRoot = initParams->RunRoot + "\\";
-  m_Target = initParams->Target;
-  m_Loader = initParams->Loader;
-  m_Config = initParams->Config;
 
-  // Set up the internal objects
-  m_ModuleManager = ModuleManagerRef(new ModuleManager(this));
-  m_Parser = ParserRef(new Parser(this));
+        // Set up the internal objects
+        m_ModuleManager = IModuleManagerRef(new IModuleManager(this));
+        m_Parser = IParserRef(new IParser(this));
 
-  // Load variables, built-in first
-  m_Parser->Add("globalroot", m_GlobalRoot, VT_System);
-  m_Parser->Add("localroot", m_LocalRoot, VT_System);
-  m_Parser->Add("runroot", m_RunRoot, VT_System);
-  m_Parser->Add("target", m_Target, VT_System);
-  m_Parser->Add("loader", m_Loader, VT_System);
+        // Load variables, built-in first
+        m_Parser->Add("globalroot", pInitParams->GlobalRoot + "\\", VT_System);
+        m_Parser->Add("localroot", pInitParams->LocalRoot + "\\", VT_System);
+        m_Parser->Add("runroot", pInitParams->RunRoot + "\\", VT_System);
+        m_Parser->Add("target", pInitParams->Target, VT_System);
+        m_Parser->Add("loader", pInitParams->Loader, VT_System);
 
-  m_Config = m_Parser->Parse(m_Config);
+        String Config = m_Parser->Parse(pInitParams->Config);
 
-  m_Parser->Add("config", m_Config, VT_System);
+        m_Parser->Add("config", Config, VT_System);
 
-  try
-  {
+        try
+        {
+            m_ConfigFile = new Xml::Document();
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   xml_document *config = new xml_document();
-   // Try loading the config file from each major location
-   String ConfigPath = m_RunRoot + m_Config;
-   xml_parse_result result = config->load_file(ConfigPath.c_str());
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+            // Try loading the config file from each major location
+            String ConfigPath = m_Parser->Parse("$(runroot)$(config)");
+            xml_parse_result result = m_ConfigFile->load_file(ConfigPath.c_str());
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   if (!result)
-   {
-    ConfigPath = m_LocalRoot + m_Config;
-    result = config->load_file(ConfigPath.c_str());
-    if (!result)
-    {
-     ConfigPath = m_GlobalRoot + m_Config;
-     result = config->load_file(ConfigPath.c_str());
-     if (!result)
-     {
-      ConfigPath = m_Config;
-      result = config->load_file(ConfigPath.c_str());
-      if (!result)
-      {
-       throw std::exception("Unable to find or parse config file.");
-      }
-     }
+            if (!result)
+            {
+                ConfigPath = m_Parser->Parse("$(localroot)$(config)");
+                result = m_ConfigFile->load_file(ConfigPath.c_str());
+                if (!result)
+                {
+                    ConfigPath = m_Parser->Parse("$(globalroot)$(config)");
+                    result = m_ConfigFile->load_file(ConfigPath.c_str());
+                    if (!result)
+                    {
+                        ConfigPath = m_Parser->Parse("$(config)");
+                        result = m_ConfigFile->load_file(ConfigPath.c_str());
+                        if (!result)
+                        {
+                            throw std::exception("Unable to find or parse config file.");
+                        }
+                    }
+                }
+            }
+
+            // Start setting things up
+            xml_node coreNode = m_ConfigFile->select_single_node("/VoodooConfig/ICore").node();
+            if (!coreNode)
+            {
+                throw std::exception("Could not find ICore node.");
+            }
+
+            // Create query for node text, used multiple times
+            xpath_query xpq_getName("./@name");
+            xpath_query xpq_getText("./text()");
+
+            // Load variables
+            {
+                xpath_query xpq_getVariables("/VoodooConfig/Variables/Variable");
+                xpath_node_set nodes = xpq_getVariables.evaluate_node_set(*config);
+                xpath_node_set::const_iterator iter = nodes.begin();
+
+                while (iter != nodes.end())
+                {
+                    String name = xpq_getName.evaluate_string(*iter);
+                    String value = xpq_getText.evaluate_string(*iter);
+
+                    m_Parser->Add(name, value);
+
+                    ++iter;
+                }
+            }
+
+            // Load plugins
+            {
+                xpath_query xpq_getPluginPaths("/VoodooConfig/Plugins/Path");
+                xpath_query xpq_getFilter("./@filter");
+                xpath_node_set nodes = xpq_getPluginPaths.evaluate_node_set(*config);
+                xpath_node_set::const_iterator iter = nodes.begin();
+
+                while (iter != nodes.end())
+                {
+                    String filter = m_Parser->Parse(xpq_getFilter.evaluate_string(*iter));
+                    String path = m_Parser->Parse(xpq_getText.evaluate_string(*iter));
+
+                    m_ModuleManager->LoadPath(path, filter);
+
+                    ++iter;
+                }
+            }
+
+            {
+                xpath_query xpq_getPluginFiles("/VoodooConfig/Plugins/File");
+                xpath_node_set nodes = xpq_getPluginFiles.evaluate_node_set(*config);
+                xpath_node_set::const_iterator iter = nodes.begin();
+
+                while (iter != nodes.end())
+                {
+                    String file = m_Parser->Parse(xpq_getText.evaluate_string(*iter));
+
+                    m_ModuleManager->LoadFile(file);
+
+                    ++iter;
+                }
+            }
+
+            // Lookup classes
+            xpath_query logQuery("/VoodooConfig/ICore/Class/Logger/text()");
+            xpath_query fsQuery("/VoodooConfig/ICore/Class/FileSystem/text()");
+            xpath_query hookQuery("/VoodooConfig/ICore/Class/HookManager/text()");
+            xpath_query adpQuery("/VoodooConfig/ICore/Class/Adapter/text()");
+            xpath_query logfQuery("/VoodooConfig/ICore/Class/Logger/@file");
+            xpath_query loglQuery("/VoodooConfig/ICore/Class/Logger/@level");
+            String logClass = m_Parser->Parse(logQuery.evaluate_string(*config));
+            String fsClass = m_Parser->Parse(fsQuery.evaluate_string(*config));
+            String hookClass = m_Parser->Parse(hookQuery.evaluate_string(*config));
+            String adpClass = m_Parser->Parse(adpQuery.evaluate_string(*config));
+            String logFile = m_Parser->Parse(logfQuery.evaluate_string(*config));
+            LogLevel logLevel = (LogLevel) (int) loglQuery.evaluate_number(*config);
+
+            // Make sure a logger was loaded
+            m_Logger = m_ModuleManager->CreateClass<ILogger>(logClass);
+            if (m_Logger.get() == nullptr)
+            {
+                throw std::exception("Unable to create Logger object (class not found).");
+            }
+
+            m_Logger->Open(logFile, false);
+            m_Logger->SetLogLevel(logLevel);
+
+            // Log extended build information
+            m_Logger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from '%s'.", Config.c_str());
+            m_Logger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
+
+            Version vfver = VOODOO_META_VERSION_STRUCT(CORE);
+            Version vsver = VOODOO_META_VERSION_STRUCT(VC);
+            Version cgver = VOODOO_META_VERSION_STRUCT(CG);
+
+            m_Logger->LogModule(vfver);
+            m_Logger->LogModule(vsver);
+            m_Logger->LogModule(cgver);
+
+            // Load less vital classes
+            m_FileSystem = m_ModuleManager->CreateClass<IFileSystem>(fsClass);
+            if (!m_FileSystem)
+            {
+                throw std::exception("Unable to create FileSystem object.");
+            }
+
+            m_HookManager = m_ModuleManager->CreateClass<IHookManager>(hookClass);
+            if (!m_HookManager)
+            {
+                throw std::exception("Unable to create HookManager object.");
+            }
+
+            m_Adapter = m_ModuleManager->CreateClass<IAdapter>(adpClass);
+            if (!m_Adapter)
+            {
+                throw std::exception("Unable to create Adapter object.");
+            }
+
+            // ICore done loading
+            m_Logger->Log(LL_Info, VOODOO_CORE_NAME, "ICore initialization complete.");
+
+            // Return
+        }
+        catch(std::exception & exc)
+        {
+            if (this->m_Logger.get())
+            {
+                m_Logger->Log(LL_Error, VOODOO_CORE_NAME, "Error during ICore creation: %s", exc.what());
+            }
+
+            throw exc;
+        }
     }
-   }
 
-   // Store the config file, in case modules need it
-   m_ConfigFile = (void *) config;
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   // Start setting things up
-   xml_node coreNode = config->select_single_node("/VoodooConfig/Core").node();
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   if (!coreNode)
-   {
-    throw std::exception("Could not find Core node.");
-   }
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   // Create query for node text, used multiple times
-   xpath_query nodeTextQuery("./text()");
-   xpath_query varNodesQuery("/VoodooConfig/Variables/Variable");
-   xpath_query varNodeNameQuery("./@name");
-   xpath_node_set varNodes = varNodesQuery.evaluate_node_set(*config);
-   xpath_node_set::const_iterator varNodeIter = varNodes.begin();
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   while (varNodeIter != varNodes.end())
-   {
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    String name = varNodeNameQuery.evaluate_string(*varNodeIter);
-    String value = nodeTextQuery.evaluate_string(*varNodeIter);
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    m_Parser->Add(name, value);
-
-    ++varNodeIter;
-   }
-
-   // Load plugins
-   {
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    xpath_query pluginQuery("/VoodooConfig/Plugins/Path");
-    xpath_query pluginPathFilterQuery("./@filter");
-    xpath_node_set pluginNodes = pluginQuery.evaluate_node_set(*config);
-    xpath_node_set::const_iterator pluginNodeIter = pluginNodes.begin();
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    while (pluginNodeIter != pluginNodes.end())
+    ICore::~ICore(void)
     {
+        this->SetCgContext(nullptr);
 
-     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-     String filter = pluginPathFilterQuery.evaluate_string(*pluginNodeIter);
-     String path = nodeTextQuery.evaluate_string(*pluginNodeIter);
-     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+        this->m_Adapter = nullptr;
+        this->m_HookManager = nullptr;
+        this->m_FileSystem = nullptr;
+        this->m_Logger = nullptr;
 
-     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-     m_ModuleManager->LoadPath(path, filter);
+        this->m_ModuleManager = nullptr;
 
-     ++pluginNodeIter;
-    }
-   }
-   {
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    xpath_query pluginQuery("/VoodooConfig/Plugins/File");
-    xpath_node_set pluginNodes = pluginQuery.evaluate_node_set(*config);
-    xpath_node_set::const_iterator pluginNodeIter = pluginNodes.begin();
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    while (pluginNodeIter != pluginNodes.end())
-    {
-
-     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-     String file = nodeTextQuery.evaluate_string(*pluginNodeIter);
-     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-     file = m_Parser->Parse(file);
-     m_ModuleManager->LoadFile(file);
-
-     ++pluginNodeIter;
-    }
-   }
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   // Lookup classes
-   xpath_query logQuery("/VoodooConfig/Core/Class/Logger/text()");
-   xpath_query fsQuery("/VoodooConfig/Core/Class/FileSystem/text()");
-   xpath_query hookQuery("/VoodooConfig/Core/Class/HookManager/text()");
-   xpath_query adpQuery("/VoodooConfig/Core/Class/Adapter/text()");
-   xpath_query logfQuery("/VoodooConfig/Core/Class/Logger/@file");
-   xpath_query loglQuery("/VoodooConfig/Core/Class/Logger/@level");
-   String logClass = m_Parser->Parse(logQuery.evaluate_string(*config));
-   String fsClass = m_Parser->Parse(fsQuery.evaluate_string(*config));
-   String hookClass = m_Parser->Parse(hookQuery.evaluate_string(*config));
-   String adpClass = m_Parser->Parse(adpQuery.evaluate_string(*config));
-   String logFile = m_Parser->Parse(logfQuery.evaluate_string(*config));
-   LogLevel logLevel = (LogLevel) (int) loglQuery.evaluate_number(*config);
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   // Make sure a logger was loaded
-   m_Logger = m_ModuleManager->CreateClass<ILogger> (logClass);
-   if (m_Logger.get() == nullptr)
-   {
-    throw std::exception("Unable to create Logger object (class not found).");
-   }
-
-   m_Logger->Open(logFile, false);
-   m_Logger->SetLogLevel(logLevel);
-
-   // Log extended build information
-   m_Logger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from \"%s\".", m_Config.c_str());
-   m_Logger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   Version vfver = VOODOO_META_VERSION_STRUCT(CORE);
-   Version vsver = VOODOO_META_VERSION_STRUCT(VC);
-   Version cgver = VOODOO_META_VERSION_STRUCT(CG);
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   m_Logger->LogModule(vfver);
-   m_Logger->LogModule(vsver);
-   m_Logger->LogModule(cgver);
-
-   // Load less vital classes
-   m_FileSystem = m_ModuleManager->CreateClass<IFileSystem> (fsClass);
-   if (m_FileSystem.get() == nullptr)
-   {
-    throw std::exception("Unable to create FileSystem object.");
-   }
-
-   m_HookManager = m_ModuleManager->CreateClass<IHookManager> (hookClass);
-   if (m_HookManager.get() == nullptr)
-   {
-    throw std::exception("Unable to create HookManager object.");
-   }
-
-   m_Adapter = m_ModuleManager->CreateClass<IAdapter> (adpClass);
-   if (m_Adapter.get() == nullptr)
-   {
-    throw std::exception("Unable to create Adapter object.");
-   }
-
-   // Core done loading
-   m_Logger->Log(LL_Info, VOODOO_CORE_NAME, "Core initialization complete.");
-
-   // Return
-  }
-  catch(std::exception & exc)
-  {
-   if (this->m_Logger.get())
-   {
-    m_Logger->Log(LL_Error, VOODOO_CORE_NAME, "Error during Core creation: %s", exc.what());
-   }
-
-   throw exc;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- Core::~Core(void)
- {
-  this->SetCgContext(nullptr);
-
-  this->m_Adapter = nullptr;
-  this->m_HookManager = nullptr;
-  this->m_FileSystem = nullptr;
-  this->m_Logger = nullptr;
-
-  this->m_ModuleManager = nullptr;
-
-#ifdef _DEBUG_FULL
-  _CrtDumpMemoryLeaks();
+#ifdef VSF_DEBUG_MEMORY
+        _CrtDumpMemoryLeaks();
 #endif
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- ParserRef Core::GetParser(void)
- {
-  return m_Parser;
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- IHookManagerRef Core::GetHookManager(void)
- {
-  return m_HookManager;
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- IFileSystemRef Core::GetFileSystem(void)
- {
-  return m_FileSystem;
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- IAdapterRef Core::GetAdapter(void)
- {
-  return m_Adapter;
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- ILoggerRef Core::GetLogger(void)
- {
-  return m_Logger;
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void *Core::GetConfig(void)
- {
-  return m_ConfigFile;
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- CGcontext Core::GetCgContext(void)
- {
-  return m_CgContext;
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- bool Core::SetCgContext(CGcontext Context)
- {
-  if (Context == nullptr)
-  {
-   m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Setting Cg context to null.");
-
-   m_Shaders.clear();
-   m_Parameters.clear();
-   m_Textures.clear();
-   m_LastPass = nullptr;
-   m_LastShader = nullptr;
-
-   return true;
-  }
-  else if (m_CgContext != nullptr)
-  {
-   m_Logger->Log
-    (
-     LL_Error,
-     VOODOO_CORE_NAME,
-     "Error: Attempting to set Cg context (%p) over existing context (%p).",
-     Context,
-     m_CgContext
-    );
-
-   return false;
-  }
-  else
-  {
-   m_CgContext = Context;
-
-   m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Set Cg context (%p).", Context);
-
-   return true;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- ShaderRef Core::CreateShader(_In_ String Filename, _In_opt_ const char **ppArgs)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  IFileRef file = this->m_FileSystem->FindFile(Filename);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  if (file.get() == nullptr)
-  {
-   return nullptr;
-  }
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  String fullpath = file->GetPath();
-  ShaderRef shader = Shader::Create(this, fullpath, ppArgs);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  m_Logger->Log
-   (
-    LL_Debug,
-    VOODOO_CORE_NAME,
-    "Created shader from %s, returning shared pointer to %p.",
-    fullpath.c_str(),
-    shader.get()
-   );
-
-  this->m_Shaders.push_back(shader);
-
-  return shader;
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- ParameterRef Core::CreateParameter(String Name, ParameterType Type)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  ParameterMap::iterator paramEntry = this->m_Parameters.find(Name);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  if (paramEntry != this->m_Parameters.end())
-  {
-   m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, "Trying to create a parameter with a duplicate name.");
-   return nullptr;
-  }
-  else
-  {
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   ParameterRef parameter(new Parameter(this, Name, Type));
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   m_Parameters[Name] = parameter;
-
-   m_Logger->Log
-    (
-     LL_Debug,
-     VOODOO_CORE_NAME,
-     "Created parameter named %s with type %s, returning shared pointer to %p.",
-     Name.c_str(),
-     Converter::ToString(Type),
-     parameter.get()
-    );
-
-   return parameter;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- TextureRef Core::CreateTexture(_In_ String Name, _In_ TextureDesc Desc)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  TextureMap::iterator textureEntry = this->m_Textures.find(Name);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  if (textureEntry != this->m_Textures.end())
-  {
-   m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, "Trying to create a texture with a duplicate name.");
-   return nullptr;
-  }
-  else
-  {
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   TextureRef texture = m_Adapter->CreateTexture(Name, Desc);
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   this->m_Textures[Name] = texture;
-
-   m_Logger->Log
-    (
-     LL_Debug,
-     VOODOO_CORE_NAME,
-     "Added texture %s with data %p, returning shared pointer to %p.",
-     Name.c_str(),
-     &Desc,
-     texture.get()
-    );
-
-   return texture;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- ParameterRef Core::GetParameter(String Name, ParameterType Type)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  ParameterMap::iterator parameter = this->m_Parameters.find(Name);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  if (parameter != this->m_Parameters.end())
-  {
-   m_Logger->Log
-    (
-     LL_Debug,
-     VOODOO_CORE_NAME,
-     "Got parameter %s, returning shared pointer to %p.",
-     Name.c_str(),
-     parameter->second.get()
-    );
-
-   if (Type == PT_Unknown)
-   {
-    return parameter->second;
-   }
-   else if (parameter->second->GetType() == Type)
-   {
-    return parameter->second;
-   }
-   else
-   {
-    return nullptr;
-   }
-  }
-  else
-  {
-   m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.c_str());
-
-   return nullptr;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- TextureRef Core::GetTexture(_In_ String Name)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  TextureMap::iterator textureEntry = this->m_Textures.find(Name);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  if (textureEntry != this->m_Textures.end())
-  {
-   m_Logger->Log
-    (
-     LL_Debug,
-     VOODOO_CORE_NAME,
-     "Got texture %s, returning shared pointer to %p.",
-     Name.c_str(),
-     textureEntry->second.get()
-    );
-
-   return textureEntry->second;
-  }
-  else
-  {
-   m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.c_str());
-
-   return nullptr;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- bool Core::RemoveParameter(_In_ String Name)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  ParameterMap::iterator parameter = this->m_Parameters.find(Name);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  if (parameter != this->m_Parameters.end())
-  {
-   m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got parameter %s, erasing.", Name.c_str());
-
-   this->m_Parameters.erase(parameter);
-   return true;
-  }
-  else
-  {
-   m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.c_str());
-
-   return false;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- bool Core::RemoveTexture(_In_ String Name)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  TextureMap::iterator texture = this->m_Textures.find(Name);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  if (texture != this->m_Textures.end())
-  {
-   m_Logger->Log
-    (
-     LL_Debug,
-     VOODOO_CORE_NAME,
-     "Got texture %s, returning shared pointer to %p.",
-     Name.c_str(),
-     texture->second.get()
-    );
-
-   this->m_Textures.erase(texture);
-   return true;
-  }
-  else
-  {
-   m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.c_str());
-
-   return false;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- TextureRef Core::GetStageTexture(_In_ TextureStage Stage)
- {
-  switch (Stage)
-  {
-  case TS_Shader:
-   return m_LastShader;
-
-  case TS_Pass:
-   return m_LastPass;
-
-  default:
-   return nullptr;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void Core::SetStageTexture(_In_ TextureStage Stage, _In_ TextureRef pTexture)
- {
-  switch (Stage)
-  {
-  case TS_Shader:
-   m_LastShader = pTexture;
-   break;
-
-  case TS_Pass:
-   m_LastPass = pTexture;
-   break;
-  }
- }
-
- /**
-  ===================================================================================================================
-  *
-  ===================================================================================================================
-  */
- void Core::CgErrorHandler(CGcontext context, int error)
- {
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  const char *errorString = error ? cgGetErrorString((CGerror) error) : NULL;
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  if (errorString)
-  {
-   this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
-   if (context && error != CG_INVALID_CONTEXT_HANDLE_ERROR)
-   {
-    if (this->m_Adapter)
-    {
-     this->m_Adapter->HandleError(context, error);
     }
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-    // Print any compiler errors or other details we can find
-    const char *listing = cgGetLastListing(context);
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    while (listing)
+    IParser* ICore::GetParser(void)
     {
-     this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg error details: %s", listing);
-     listing = cgGetLastListing(context);
+        return m_Parser;
     }
-   }
-   else
-   {
-    this->GetLogger()->Log
-     (
-      LL_Error,
-      VOODOO_CG_NAME,
-      "Invalid context for error, no further data available."
-     );
-   }
-  }
-  else
-  {
-   this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported an unknown error (%d).", error);
-  }
- }
+
+    IHookManager* ICore::GetHookManager(void)
+    {
+        return m_HookManager;
+    }
+
+    IFileSystem* ICore::GetFileSystem(void)
+    {
+        return m_FileSystem;
+    }
+
+    IAdapter* ICore::GetAdapter(void)
+    {
+        return m_Adapter;
+    }
+
+    ILogger* ICore::GetLogger(void)
+    {
+        return m_Logger;
+    }
+
+    XmlDocument ICore::GetConfig(void)
+    {
+        return m_ConfigFile;
+    }
+
+    CGcontext ICore::GetCgContext(void)
+    {
+        return m_CgContext;
+    }
+
+    bool ICore::SetCgContext(CGcontext Context)
+    {
+        if (Context == nullptr)
+        {
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Setting Cg context to nullptr.");
+
+            m_Shaders.clear();
+            m_Parameters.clear();
+            m_Textures.clear();
+            m_LastPass = nullptr;
+            m_LastShader = nullptr;
+
+            return true;
+        }
+        else if (m_CgContext != nullptr)
+        {
+            m_Logger->Log(LL_Error, VOODOO_CORE_NAME,
+                "Error: Attempting to set Cg context (%p) over existing context (%p).", Context, m_CgContext);
+
+            return false;
+        }
+        else
+        {
+            m_CgContext = Context;
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Set Cg context (%p).", Context);
+            return true;
+        }
+    }
+
+    IShader* ICore::CreateShader(_In_ String Filename, _In_opt_ const char **ppArgs)
+    {
+        IFile* file = this->m_FileSystem->FindFile(Filename);
+
+        if (!file)
+        {
+            return nullptr;
+        }
+
+        String fullpath = file->GetPath();
+        IShaderRef shader = IShader(this, fullpath, ppArgs);
+
+        m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Created shader from %s, returning shared pointer to %p.",
+            fullpath.c_str(), shader.get());
+
+        this->m_Shaders.push_back(shader);
+
+        return shader;
+    }
+
+    IParameter* ICore::CreateParameter(String Name, ParameterType Type)
+    {
+        ParameterMap::iterator paramEntry = this->m_Parameters.find(Name);
+
+        if (paramEntry != this->m_Parameters.end())
+        {
+            m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, "Trying to create a parameter with a duplicate name.");
+            return nullptr;
+        }
+        else
+        {
+            IParameter* parameter(new IParameter(this, Name, Type));
+
+            m_Parameters[Name] = parameter;
+
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, 
+                "Created parameter named %s with type %s, returning shared pointer to %p.", Name.c_str(),
+                Converter::ToString(Type), parameter);
+
+            return parameter;
+        }
+    }
+
+    ITexture* ICore::CreateTexture(_In_ String Name, _In_ TextureDesc Desc)
+    {
+        TextureMap::iterator textureEntry = this->m_Textures.find(Name);
+
+        if (textureEntry != this->m_Textures.end())
+        {
+            m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, "Trying to create a texture with a duplicate name.");
+            return nullptr;
+        }
+        else
+        {
+            ITexture* texture = m_Adapter->CreateTexture(Name, Desc);
+
+            this->m_Textures[Name] = texture;
+
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s, returning shared pointer to %p.",
+                Name.c_str(), texture);
+
+            return texture;
+        }
+    }
+
+    IParameter* ICore::GetParameter(String Name, ParameterType Type)
+    {
+        ParameterMap::iterator parameter = this->m_Parameters.find(Name);
+
+        if (parameter != this->m_Parameters.end())
+        {
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got parameter %s, returning shared pointer to %p.",
+                Name.c_str(), parameter->second);
+
+            if (Type == PT_Unknown)
+            {
+                return parameter->second;
+            }
+            else if (parameter->second->GetType() == Type)
+            {
+                return parameter->second;
+            }
+            else
+            {
+                return nullptr;
+            }
+        }
+        else
+        {
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.c_str());
+            return nullptr;
+        }
+    }
+
+    ITexture* ICore::GetTexture(_In_ String Name)
+    {
+        TextureMap::iterator textureEntry = this->m_Textures.find(Name);
+
+        if (textureEntry != this->m_Textures.end())
+        {
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", Name.c_str(),
+                textureEntry->second);
+
+            return textureEntry->second;
+        }
+        else
+        {
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.c_str());
+
+            return nullptr;
+        }
+    }
+
+    bool ICore::RemoveParameter(_In_ String Name)
+    {
+        ParameterMap::iterator parameter = this->m_Parameters.find(Name);
+
+        if (parameter != this->m_Parameters.end())
+        {
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got parameter %s, erasing.", Name.c_str());
+
+            this->m_Parameters.erase(parameter);
+            return true;
+        }
+        else
+        {
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.c_str());
+
+            return false;
+        }
+    }
+
+    bool ICore::RemoveTexture(_In_ String Name)
+    {
+        TextureMap::iterator texture = this->m_Textures.find(Name);
+
+        if (texture != this->m_Textures.end())
+        {
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", Name.c_str(),
+                texture->second);
+
+            this->m_Textures.erase(texture);
+            return true;
+        }
+        else
+        {
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.c_str());
+            return false;
+        }
+    }
+
+    ITexture * ICore::GetStageTexture(_In_ TextureStage Stage)
+    {
+        switch (Stage)
+        {
+        case TS_Shader:
+            return m_LastShader;
+        case TS_Pass:
+            return m_LastPass;
+        default:
+            return nullptr;
+        }
+    }
+
+    void ICore::SetStageTexture(_In_ TextureStage Stage, _In_ ITexture * const pTexture)
+    {
+        switch (Stage)
+        {
+        case TS_Shader:
+            m_LastShader = pTexture;
+            break;
+        case TS_Pass:
+            m_LastPass = pTexture;
+            break;
+        }
+    }
+
+    void ICore::CgErrorHandler(CGcontext context, int error)
+    {
+        const char *errorString = error ? cgGetErrorString((CGerror) error) : nullptr;
+
+        if (errorString)
+        {
+            this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
+            if (context && error != CG_INVALID_CONTEXT_HANDLE_ERROR)
+            {
+                if (this->m_Adapter)
+                {
+                    this->m_Adapter->HandleError(context, error);
+                }
+
+                // Print any compiler errors or other details we can find
+                const char *listing = cgGetLastListing(context);
+
+                while (listing)
+                {
+                    this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg error details: %s", listing);
+                    listing = cgGetLastListing(context);
+                }
+            }
+            else
+            {
+                this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, 
+                    "Invalid context for error, no further data available.");
+            }
+        }
+        else
+        {
+            this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported an unknown error (%d).", error);
+        }
+    }
 }

@@ -16,9 +16,11 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- */
+ **/
+
 #pragma once
-#include "Meta.hpp"
+
+#include "Includes.hpp"
 
 namespace VoodooShader
 {
@@ -28,12 +30,11 @@ namespace VoodooShader
      */
 
     /**
-     * Generic exception class for Voodoo applications. Combines a generic standard exception with extended 
-     * error location data. 
+     * Generic exception class for Voodoo applications. Combines a generic standard exception with extended error location 
+     * data. 
      * 
-     * @note If possible, thrown Exceptions will automatically log as much data as they contain in a 
-     *     formatted way. You can retrieve this string with the Exception::what() method (compatible 
-     *     with std::exception).
+     * @note If possible, thrown Exceptions will automatically log as much data as they contain in a formatted way. You can 
+     *      retrieve this string with the Exception::what() method (compatible with std::exception).
      */
     class VOODOO_API Exception :
         public std::exception
@@ -43,7 +44,7 @@ namespace VoodooShader
         (
             _In_ char * Module,
             _In_ char * Message,
-            _In_ Core * pCore,
+            _In_ ICore * pCore,
             _In_ char * File,
             _In_ char * Function,
             _In_ int Line
@@ -53,7 +54,7 @@ namespace VoodooShader
         (
             _In_ String Module,
             _In_ String Message,
-            _In_ Core * pCore,
+            _In_ ICore * pCore,
             _In_ char * File,
             _In_ char * Function,
             _In_ int Line
@@ -64,7 +65,7 @@ namespace VoodooShader
         virtual const char * what(void);
 
     private:
-        Core * m_Core;
+        ICore * m_Core;
         String m_Module;
         String m_Message;
         char * m_File;

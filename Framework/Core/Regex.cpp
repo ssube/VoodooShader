@@ -16,17 +16,58 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
-
+ */
 #pragma once
 
-#include "Includes.hpp"
+#include <regex>
+
+#include "Regex.hpp"
 
 namespace VoodooShader
 {
-    /* Plugin exports. */
-    Version      VOODOO_CALL API_ModuleVersion(void);
-    Int32        VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int Index);
-    IObject *    VOODOO_CALL API_ClassCreate(_In_ int Index, _In_ ICore * pCore);
+    class RegexImpl
+    {
+    public:
+        RegexImpl()
+            : m_Expr(), m_Regex()
+        { };
+
+        RegexImpl(String expr)
+            : m_Expr(expr), m_Regex(expr)
+        { };
+
+    public:
+        String m_Expr;
+        std::regex m_Regex;
+    };
+
+    Regex::Regex()
+    {
+        m_Impl = new RegexImpl();
+    }
+
+    Regex::Regex(String expr)
+    {
+        m_Impl = new RegexImpl(expr);
+    }
+
+    Regex::~Regex()
+    {
+        delete m_Impl;
+    }
+
+    void Regex::SetExpr(String expr)
+    {
+        m_Impl->m_Expr = expr;
+    }
+
+    String Regex::GetExpr()
+    {
+        return m_Impl->m_Expr;
+    }
+
+    Bool Regex::Match(String string)
+    {
+        return regex_match(string, m_Impl->m_Regex);
+    }
 }

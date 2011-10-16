@@ -16,17 +16,29 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
-
+ */
 #pragma once
 
 #include "Includes.hpp"
+#include "String.hpp"
 
 namespace VoodooShader
 {
-    /* Plugin exports. */
-    Version      VOODOO_CALL API_ModuleVersion(void);
-    Int32        VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int Index);
-    IObject *    VOODOO_CALL API_ClassCreate(_In_ int Index, _In_ ICore * pCore);
+    class RegexImpl;
+
+    class VOODOO_API Regex
+    {
+    public:
+        Regex();
+        Regex(String expr);
+        ~Regex();
+
+        void SetExpr(String expr);
+        String GetExpr();
+
+        Bool Match(String string);
+
+    private:
+        RegexImpl * m_Impl;
+    };
 }

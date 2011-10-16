@@ -7,9 +7,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Exception.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Parameter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -17,9 +14,6 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Module.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Converter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
@@ -37,6 +31,18 @@
     <ClCompile Include="Exports.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Converter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Regex.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Docs_Code.hpp">
@@ -48,68 +54,79 @@
     <ClInclude Include="Docs_Graphics.hpp">
       <Filter>Docs</Filter>
     </ClInclude>
-    <ClInclude Include="Converter.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Core.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Exception.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Includes.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Meta.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Parameter.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Version.hpp">
+    <ClInclude Include="Null.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Module.hpp">
+    <ClInclude Include="Exports.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Parser.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="IObject.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="ILogger.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IHookManager.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IFilesystem.hpp">
+    <ClInclude Include="ICore.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="IAdapter.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Technique.hpp">
+    <ClInclude Include="IFilesystem.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IHookManager.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogger.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IObject.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IModule.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IParameter.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IParser.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IPass.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IShader.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ITechnique.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ITexture.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooCore.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Pass.hpp">
+    <ClInclude Include="Includes.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="VoodooFramework.hpp" />
-    <ClInclude Include="Null.hpp">
+    <ClInclude Include="Converter.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Exports.hpp">
+    <ClInclude Include="Exception.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Reference.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Regex.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="String.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Version.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Xml.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -120,14 +137,14 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{a6f67f75-d805-4304-8d0c-9f73c712eeb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Interfaces">
-      <UniqueIdentifier>{d35396d6-ae0d-4592-a84a-6f0b2e158404}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{0aff68d5-58a6-4d05-a169-dc374fba27cf}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{5ef7e194-26d0-463f-b42c-88fc238d12bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Interfaces">
+      <UniqueIdentifier>{2e64883f-4fc7-42df-a288-15cef84ead71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

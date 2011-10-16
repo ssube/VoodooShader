@@ -16,13 +16,20 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- */
+ **/
 #pragma once
-#include "Meta.hpp"
+
+#include "Includes.hpp"
+#include "Reference.hpp"
+
+#include "IObject.hpp"
 
 namespace VoodooShader
 {
-    /* @addtogroup VoodooCore @{ */
+    /** 
+     * @addtogroup VoodooCore 
+     * @{ 
+     */
 
 #ifndef VOODOO_NO_CG
     /**
@@ -30,29 +37,29 @@ namespace VoodooShader
      * 
      * @param context The Cg context throwing the error. 
      * @param error   The error code. 
-     * @param core    If non-null, the core associated with the error
+     * @param core    If non-nullptr, the core associated with the error
      */
-    void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror Error, _In_opt_ void * pCore);
+    void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void * pCore);
 #endif
 
     /**
      * Creates a new core. This function is exported and meant for use by the loader.
      * 
      * @param pInitParams Setup parameters for this core. 
-     * @return            A new Core object.
+     * @return A new ICore object.
      * @throws std::exception in case of errors, if CatchErrors is false.
      */
     _Check_return_ 
-    Core * CreateCore(_In_ InitParams *pInitParams, _In_ bool CatchErrors = true);
+    ICore * CreateCore(_In_ const InitParams * const pInitParams, _In_ Bool catchErrors = true);
 
     /**
-     * Core engine class for the Voodoo Shader Framework. Provides centralized management and handling for
+     * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
      * shaders, textures, plugins and variable/configuration mechanics.
      */
-    class Core
+    class ICore
+        : public IObject
     {
     public:
-
         /**
          * Releases all references to modules and objects held by the core, including shaders, textures, 
          * parameters, etc. This may cause the destruction of objects and unloading of modules. 
@@ -60,58 +67,84 @@ namespace VoodooShader
          * @warning Resources associated with this core may be undefined or the underlying Cg objects 
          *     destroyed after the core is destroyed. They must not be used.
          */
-        virtual ~Core(void);
+        virtual ~ICore(void);
+        
+        /**
+         * Add a reference to this object.
+         * 
+         * @return The new reference count.
+         */
+        virtual Int32 AddRef(void) throw();
+
+        /**
+         * Release a reference from this object.
+         * 
+         * @return The new reference count.
+         */
+        virtual Int32 Release(void) throw();
+
+        /**
+         * Get the name of this object.
+         * 
+         * @return The name.
+         */
+        virtual String ToString(void) throw();
+
+        /** 
+         * Get the core this object was associated with. 
+         * 
+         * @return The core.
+         */
+        virtual ICore * GetCore(void) throw();
 
         /**
          * Retrieves this core's variable parser. 
          * 
          * @return A reference to the core's parser (always valid).
          */
-        virtual ParserRef GetParser(void);
+        virtual IParser * GetParser(void);
 
         /**
          * Retrieves this core's IHookManager implementation. 
          * 
          * @return A reference to the hook manager instance (always valid).
          */
-        virtual IHookManagerRef GetHookManager(void);
+        virtual IHookManager * GetHookManager(void);
 
         /**
          * Retrieves this core's IFileSystem implementation. 
          * 
          * @return A shared pointer to the filesystem instance (always valid).
          */
-        virtual IFileSystemRef GetFileSystem(void);
+        virtual IFileSystem * GetFileSystem(void);
 
         /**
-        * Retrieve the IAdapter attached to this Core. 
-        * 
-        * @return A reference to the adapter instance (always valid).
-        */
-        virtual IAdapterRef GetAdapter(void);
+         * Retrieve the IAdapter attached to this ICore. 
+         * 
+         * @return A reference to the adapter instance (always valid).
+         */
+        virtual IAdapter * GetAdapter(void);
 
         /**
-         * Retrieve the ILogger attached to this Core. 
+         * Retrieve the ILogger attached to this ICore. 
          * 
          * @return A reference to the logger instance (always valid).
          */
-        virtual ILoggerRef GetLogger(void);
+        virtual ILogger * GetLogger(void);
 
         /**
-         * Retrieve the Xml config document for this Core. 
+         * Retrieve the Xml config document for this ICore. 
          * 
-         * @note This is actually a <code>pugi::xml_document *</code>, but stored and provided as a 
-         *     <code>void *</code> so linking against the Core doesn't require the pugixml headers. To use 
-         *     this, simply cast it.
+         * @return A reference to the config.
          */
-        virtual void * GetConfig(void);
+        virtual XmlDocument GetConfig(void);
 
         /**
-         * Retrieve the Cg context associated with this Core. 
+         * Retrieve the Cg context associated with this ICore. 
          * 
          * @return The Cg context currently associated with the core.
          * 
-         * @note Each Voodoo Core is associated with a single Cg context. This context is used to create all
+         * @note Each Voodoo ICore is associated with a single Cg context. This context is used to create all
          *     @ref Shader shaders and most other graphics resources. 
          */
         _Check_return_ 
@@ -123,8 +156,8 @@ namespace VoodooShader
          * @param pContext The Cg context to bind. 
          * @return False if a context is already bound, true if no context is bound or a context is being 
          *     unbound.
-        */
-        virtual bool SetCgContext(_In_opt_ CGcontext pContext);
+         */
+        virtual Bool SetCgContext(_In_opt_ CGcontext pContext);
 
         /**
          * Loads and compiles an effect from file, using the current filesystem and search paths. 
@@ -133,7 +166,7 @@ namespace VoodooShader
          * @param ppArgs Optional arguments providing compiler directives, usually shader model specific 
          *     definitions or preprocessor defines.
          */
-        virtual ShaderRef CreateShader(_In_ String Filename, _In_opt_ const char ** ppArgs);
+        virtual IShader * CreateShader(_In_ String filename, _In_opt_ const char ** ppArgs);
 
         /**
          * Creates a global virtual parameter. This parameter exists in the Cg runtime, but is not a part of
@@ -150,10 +183,10 @@ namespace VoodooShader
          * @note This function is the only way to create global parameters. You can then attach effect 
          *     parameters to the global and any value changes will propagate down.
          */
-        virtual ParameterRef CreateParameter(_In_ String Name, _In_ ParameterType Type);
+        virtual IParameter * CreateParameter(_In_ String name, _In_ ParameterType type);
 
         /**
-         * Registers a texture with this Core. 
+         * Registers a texture with this ICore. 
          * 
          * Textures will not be used by the shader linker unless they have been registered with the core. 
          * 
@@ -164,56 +197,56 @@ namespace VoodooShader
          * @note This method calls IAdapter::CreateTexture() to handle the actual creation, then registers 
          *     the returned texture with the core and sets things up properly.
          */
-        virtual TextureRef CreateTexture(_In_ String Name, _In_ TextureDesc Desc);
+        virtual ITexture * CreateTexture(_In_ String name, _In_ const TextureDesc * pDesc);
 
         /**
          * Retrieve a parameter by name. 
          * 
          * @param Name The name to search for. 
          * @param Type The type to verify. 
-         * @return A reference to the parameter if found, null reference otherwise.
+         * @return A reference to the parameter if found, nullptr reference otherwise.
          * 
          * @note If a parameter with a matching name is found, the type will be checked. If @arg Type is
          *     PT_Unknown, any type parameter will be returned (only the name will be tested). 
          */
-        virtual ParameterRef GetParameter(_In_ String Name, _In_ ParameterType Type);
+        virtual IParameter * GetParameter(_In_ String name, _In_ ParameterType type);
 
         /**
-         * Retrieves a texture from the Core's texture map by name. 
+         * Retrieves a texture from the ICore's texture map by name. 
          * 
          * @param Name The texture name. 
          * @return A reference to the Texture if it exists, empty otherwise.
          */
-        virtual TextureRef GetTexture(_In_ String Name);
+        virtual ITexture * GetTexture(_In_ String name);
 
         /**
-         * Removes a virtual parameter from Core. If all references are released, the parameter is
+         * Removes a virtual parameter from ICore. If all references are released, the parameter is
          * destroyed.
          * 
          * @param Name The name of the parameter.
          * @return True if the parameter was found and removed, false if not found.
          */
-        virtual bool RemoveParameter(_In_ String Name);
+        virtual Bool RemoveParameter(_In_ String name);
 
         /**
-         * Removes a texture from the Core's texture map and unbinds it from any
+         * Removes a texture from the ICore's texture map and unbinds it from any
          * specialized functions it may be attached to. 
          * 
          * @param Name The name of texture to be removed.
          * @return True if the texture was found and removed, false if not.
          */
-        virtual bool RemoveTexture(_In_ String Name);
+        virtual Bool RemoveTexture(_In_ String name);
 
         /**
-         * Retrieves a texture from the Core's texture map by stage. Each specialized texture stage 
+         * Retrieves a texture from the ICore's texture map by stage. Each specialized texture stage 
          * may have a single texture bound to it for use by the shader linker. 
          * 
          * @param Stage The stage whose bound texture should be returned.
          * @return A reference to the Texture if one is bound, empty otherwise. 
          * 
-         * @sa To bind a texture to one of the special functions, use Core::SetStageTexture().
+         * @sa To bind a texture to one of the special functions, use ICore::SetStageTexture().
          */
-        virtual TextureRef GetStageTexture(_In_ TextureStage Stage);
+        virtual ITexture * GetStageTexture(_In_ const TextureStage atage);
 
         /**
          * Binds a texture to a specialized stage for the shader linker. 
@@ -221,17 +254,17 @@ namespace VoodooShader
          * @param Stage The texture stage to set.
          * @param pTexture The texture to bind. 
          */
-        virtual void SetStageTexture(_In_ TextureStage Stage, _In_ TextureRef pTexture);
+        virtual void SetStageTexture(_In_ const TextureStage stage, _In_ ITexture * const pTexture);
 
     private:
-        friend Core *CreateCore(_In_ InitParams *pInitParams);
+        friend ICore * CreateCore(_In_ const InitParams * const pInitParams, _In_ Bool catchErrors);
 
 #ifndef VOODOO_NO_CG
-        friend void Voodoo_CgErrorHandler_Func(CGcontext context, CGerror error, void *core);
+        friend void Voodoo_CgErrorHandler_Func(CGcontext pContext, CGerror error, void * pCore);
 #endif
 
         /**
-         * Create a new Voodoo Core and associated Cg context. 
+         * Create a new Voodoo ICore and associated Cg context. 
          * 
          * @param pInitParams Setup parameters for this core. 
          * @return A new core. 
@@ -239,68 +272,61 @@ namespace VoodooShader
          * 
          * @note To create a core, you must call CreateCore().
          */
-        Core(_In_ InitParams * pInitParams);
+        ICore(_In_ const InitParams * const pInitParams);
 
         /**
-         * Error handling callback for the Cg context. If an internal Cg error occurs,
-         * this function will be called with as much information as possible. While error
-         * recovery may not be possible, this does log the error in detail (if a pCore is
-         * provided). @param context The Cg context the error occurred in. @param error
-         * The error code. @param pCore The pCore to use for error logging, if one was
-         * provided the Cg context during creation. This may be NULL.
+         * Error handling callback for the Cg context. If an internal Cg error occurs, this function will be called with as 
+         * much information as possible. While error recovery may not be possible, this does log the error in detail (if a 
+         * pCore is provided).
+         * 
+         * @param context The Cg context the error occurred in. 
+         * @param error The error code.
          */
-        void CgErrorHandler(_In_ CGcontext context, _In_ int error);
+        void CgErrorHandler(_In_ CGcontext pContext, _In_ int error);
 
     private:
-        /* Paths. */
-        String m_GlobalRoot;
-        String m_LocalRoot;
-        String m_RunRoot;
-        String m_Target;
-        String m_Loader;
-        String m_Config;
+        Int32 m_Refs;
 
-        /* Config file (actually a <code>pugi::xml_document *</code>, stored as void). */
-        void * m_ConfigFile;
+        /** Config file. */
+        XmlDocument m_ConfigFile;
 
-        /* Cg context used by this pCore. */
+        /** Cg context used by this pCore. */
         CGcontext m_CgContext;
 
-        /* The currently bound (active) IAdapter implementation. */
+        /** The current IAdapter implementation. */
         IAdapterRef m_Adapter;
 
-        /* The current ILogger implementation. */
+        /** The current ILogger implementation. */
         ILoggerRef m_Logger;
 
-        /* The current IHookManager implementation. */
+        /** The current IHookManager implementation. */
         IHookManagerRef m_HookManager;
 
-        /* The current IFileSystem implementation. */
+        /** The current IFileSystem implementation. */
         IFileSystemRef m_FileSystem;
 
-        /* The current module manager. */
-        ModuleManagerRef m_ModuleManager;
+        /** The current module manager. */
+        IModuleManagerRef m_ModuleManager;
 
-        /* The current variable parser. */
-        ParserRef m_Parser;
+        /** The current variable parser. */
+        IParserRef m_Parser;
 
-        /* Collection of all shaders created by this pCore. */
+        /** Collection of all shaders created by this pCore. */
         ShaderVector m_Shaders;
-        
-        /* Collection of all usable textures. */
+
+        /** Collection of all usable textures. */
         TextureMap m_Textures;
-        
-        /**
-         * Collection of all virtual parameters created by this pCore and used by the Cg
-         * context.
-         */
+
+        /** Collection of all virtual parameters created by this pCore and used by the Cg context. */
         ParameterMap m_Parameters;
 
-        /* Default pass target texture for shader linker. */
-        TextureRef m_LastPass;
+        /** Default pass target texture for shader linker. */
+        ITextureRef m_LastPass;
 
-        /* Default technique target for shader linker. */
-        TextureRef m_LastShader;
+        /** Default technique target for shader linker. */
+        ITextureRef m_LastShader;
     };
-    /* @} */
+    /**
+     * @}
+     */
 }

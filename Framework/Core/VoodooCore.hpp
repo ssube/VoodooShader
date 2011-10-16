@@ -16,17 +16,23 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
-
+ */
 #pragma once
+
+#define VOODOO_IMPORT
 
 #include "Includes.hpp"
 
-namespace VoodooShader
-{
-    /* Plugin exports. */
-    Version      VOODOO_CALL API_ModuleVersion(void);
-    Int32        VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int Index);
-    IObject *    VOODOO_CALL API_ClassCreate(_In_ int Index, _In_ ICore * pCore);
-}
+#include "IAdapter.hpp"
+#include "ICore.hpp"
+#include "IFilesystem.hpp"
+#include "IHookManager.hpp"
+#include "ILogger.hpp"
+#include "IModule.hpp"
+#include "IObject.hpp"
+#include "IParameter.hpp"
+#include "IParser.hpp"
+#include "IPass.hpp"
+#include "IShader.hpp"
+#include "ITechnique.hpp"
+#include "ITexture.hpp"

@@ -27,25 +27,25 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>false</CLRSupport>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -84,14 +84,14 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <RunCodeAnalysis Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">true</RunCodeAnalysis>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\;$(SolutionDir)\Framework\;D:\Code\boost</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32;$(SolutionDir)\bin\$(Configuration)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\;$(SolutionDir)\Framework\;D:\Code\boost</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32;$(SolutionDir)\bin\$(Configuration)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\;$(SolutionDir)\Framework\;D:\Code\boost</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32;$(SolutionDir)\bin\$(Configuration)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(IncludePath);d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\;$(SolutionDir)\Framework\;D:\Code\boost</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(LibraryPath);d:\Code\Cg_July2010\lib\;d:\Code\pugixml-1.0\bin\x32;$(SolutionDir)\bin\$(Configuration)</LibraryPath>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
     <CodeAnalysisIgnoreGeneratedCode Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">false</CodeAnalysisIgnoreGeneratedCode>
@@ -235,36 +235,41 @@
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pass.cpp" />
+    <ClCompile Include="Regex.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="String.cpp" />
     <ClCompile Include="Technique.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Converter.hpp" />
+    <ClInclude Include="Exception.hpp" />
     <ClInclude Include="Exports.hpp" />
     <ClInclude Include="IAdapter.hpp" />
-    <ClInclude Include="Converter.hpp" />
-    <ClInclude Include="Core.hpp" />
+    <ClInclude Include="ICore.hpp" />
     <ClInclude Include="Docs_Code.hpp" />
     <ClInclude Include="Docs_Graphics.hpp" />
     <ClInclude Include="Docs_License.hpp" />
-    <ClInclude Include="Exception.hpp" />
     <ClInclude Include="IFilesystem.hpp" />
     <ClInclude Include="IHookManager.hpp" />
     <ClInclude Include="Includes.hpp" />
     <ClInclude Include="IObject.hpp" />
     <ClInclude Include="ILogger.hpp" />
-    <ClInclude Include="Meta.hpp" />
-    <ClInclude Include="Module.hpp" />
+    <ClInclude Include="IModule.hpp" />
     <ClInclude Include="Null.hpp" />
-    <ClInclude Include="Parameter.hpp" />
-    <ClInclude Include="Parser.hpp" />
-    <ClInclude Include="Pass.hpp" />
+    <ClInclude Include="IParameter.hpp" />
+    <ClInclude Include="IParser.hpp" />
+    <ClInclude Include="IPass.hpp" />
+    <ClInclude Include="Reference.hpp" />
+    <ClInclude Include="Regex.hpp" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Shader.hpp" />
-    <ClInclude Include="Technique.hpp" />
-    <ClInclude Include="Texture.hpp" />
+    <ClInclude Include="IShader.hpp" />
+    <ClInclude Include="ITechnique.hpp" />
+    <ClInclude Include="ITexture.hpp" />
+    <ClInclude Include="String.hpp" />
     <ClInclude Include="Version.hpp" />
-    <ClInclude Include="VoodooFramework.hpp" />
+    <ClInclude Include="VoodooCore.hpp" />
+    <ClInclude Include="Xml.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Core.rc" />

@@ -1,39 +1,31 @@
-#include "Pass.hpp"
+#include "IPass.hpp"
 
 #include "IAdapter.hpp"
 #include "Core.hpp"
 #include "ILogger.hpp"
-#include "Technique.hpp"
-#include "Texture.hpp"
+#include "ITechnique.hpp"
+#include "ITexture.hpp"
 
 namespace VoodooShader
 {
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- PassRef Pass::Create(TechniqueRef parent, CGpass cgPass)
+ IPass* IPass::Create(ITechnique* parent, CGpass cgPass)
  {
 
-  /*~~~~~~~~~*/
-  /*~~~~~~~~~*/
-  PassRef pass;
-  /*~~~~~~~~~*/
+  IPass* pass;
 
-  /*~~~~~~~~~*/
-  new Pass(pass, parent, cgPass);
+  new IPass(pass, parent, cgPass);
   pass->Link();
   return pass;
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- Pass::Pass(PassRef &self, TechniqueRef parent, CGpass cgPass) :
+ IPass::IPass(IPass* &self, ITechnique* parent, CGpass cgPass) :
   m_Technique(parent),
   m_CgPass(cgPass)
  {
@@ -41,12 +33,8 @@ namespace VoodooShader
 
   this->m_Core = parent->GetCore();
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   const char *passName = cgGetPassName(this->m_CgPass);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   if (passName)
   {
    this->m_Name = passName;
@@ -54,12 +42,8 @@ namespace VoodooShader
   else
   {
 
-   /*~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~*/
    char nameBuffer[16];
-   /*~~~~~~~~~~~~~~~~~~~*/
 
-   /*~~~~~~~~~~~~~~~~~~~*/
    _itoa_s((int) (&this->m_CgPass), nameBuffer, 16, 16);
 
    this->m_Name = "pass_";
@@ -68,11 +52,9 @@ namespace VoodooShader
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- Pass::~Pass(void)
+ IPass::~IPass(void)
  {
   m_Target = nullptr;
 
@@ -80,50 +62,38 @@ namespace VoodooShader
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- String Pass::GetName(void)
+ String IPass::ToString(void)
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   String name = m_Technique.lock()->GetName();
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   name += "::";
   name += m_Name;
   return name;
  };
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- Core *Pass::GetCore(void)
+ ICore *IPass::GetCore(void)
  {
   return m_Core;
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- TextureRef Pass::GetTarget(void)
+ ITexture* IPass::GetTarget(void)
  {
   return m_Target;
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- CGprogram Pass::GetProgram(ProgramStage stage)
+ CGprogram IPass::GetProgram(ProgramStage stage)
  {
   switch (stage)
   {
@@ -149,31 +119,25 @@ namespace VoodooShader
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- TechniquePtr Pass::GetTechnique(void)
+ ITechnique* IPass::GetTechnique(void)
  {
   return m_Technique;
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- CGpass Pass::GetCgPass(void)
+ CGpass IPass::GetCgPass(void)
  {
   return m_CgPass;
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- void Pass::Link(void)
+ void IPass::Link(void)
  {
   this->m_VertexProgram = cgGetPassProgram(this->m_CgPass, CG_VERTEX_DOMAIN);
   this->m_FragmentProgram = cgGetPassProgram(this->m_CgPass, CG_FRAGMENT_DOMAIN);
@@ -183,23 +147,15 @@ namespace VoodooShader
 
   this->m_Target = nullptr;
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   CGannotation targetAnnotation = cgGetNamedPassAnnotation(this->m_CgPass, "target");
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   if (cgIsAnnotation(targetAnnotation))
   {
    if (cgGetAnnotationType(targetAnnotation) == CG_STRING)
    {
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     const char *targetName = cgGetStringAnnotationValue(targetAnnotation);
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     this->m_Target = m_Core->GetTexture(targetName);
 
     if (!this->m_Target.get())
@@ -208,8 +164,8 @@ namespace VoodooShader
       (
        LL_Warning,
        VOODOO_CORE_NAME,
-       "Pass %s cannot find target %s.",
-       this->GetName().c_str(),
+       "IPass %s cannot find target %s.",
+       this->ToString().c_str(),
        targetName
       );
 
@@ -222,8 +178,8 @@ namespace VoodooShader
      (
       LL_Warning,
       VOODOO_CORE_NAME,
-      "Pass %s has annotation \"target\" of invalid type.",
-      this->GetName().c_str()
+      "IPass %s has annotation \"target\" of invalid type.",
+      this->ToString().c_str()
      );
 
     this->m_Target = m_Core->GetStageTexture(TS_Pass);
@@ -235,21 +191,17 @@ namespace VoodooShader
     (
      LL_Debug,
      VOODOO_CORE_NAME,
-     "Pass %s has no target annotation.",
-     this->GetName().c_str()
+     "IPass %s has no target annotation.",
+     this->ToString().c_str()
     );
 
    this->m_Target = m_Core->GetStageTexture(TS_Pass);
   }
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
   // Load the programs
-  IAdapterRef adapter = m_Core->GetAdapter();
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  IAdapter* adapter = m_Core->GetAdapter();
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   if (!adapter)
   {
    m_Core->GetLogger()->Log
@@ -257,19 +209,19 @@ namespace VoodooShader
      LL_Warning,
      VOODOO_CORE_NAME,
      "No adapter found, pass %s must be explicitly loaded later.",
-     this->GetName().c_str()
+     this->ToString().c_str()
     );
   }
   else
   {
-   if (!adapter->LoadPass(PassRef(this)))
+   if (!adapter->LoadPass(IPass*(this)))
    {
     m_Core->GetLogger()->Log
      (
       LL_Error,
       VOODOO_CORE_NAME,
       "Failed to load pass %s.",
-      this->GetName().c_str()
+      this->ToString().c_str()
      );
    }
    else
@@ -279,7 +231,7 @@ namespace VoodooShader
       LL_Info,
       VOODOO_CORE_NAME,
       "Successfully loaded pass %s.",
-      this->GetName().c_str()
+      this->ToString().c_str()
      );
    }
   }

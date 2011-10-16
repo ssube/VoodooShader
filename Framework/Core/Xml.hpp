@@ -16,17 +16,31 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
-
+ */
 #pragma once
 
 #include "Includes.hpp"
 
 namespace VoodooShader
 {
-    /* Plugin exports. */
-    Version      VOODOO_CALL API_ModuleVersion(void);
-    Int32        VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int Index);
-    IObject *    VOODOO_CALL API_ClassCreate(_In_ int Index, _In_ ICore * pCore);
+    namespace Xml
+    {
+        class VOODOO_API Document
+        {
+        public:
+            Document();
+
+            Bool Load(String file);
+
+            Node * GetSingleNode(String query);
+
+        private:
+
+        };
+
+        class VOODOO_API Node
+        {
+
+        };
+    }
 }

@@ -56,8 +56,8 @@ namespace VoodooShader
   * Global parameters are created by calling Core::CreateParameter(), then any
   * number of other parameters may be linked by calling Parameter::Attach() on the
   * global parameter and providing the effect parameter, like so: @code
-  * ParameterRef global = Core->CreateParameter("time", PT_Float);
-  * ParameterRef effect = Shader->GetParameter("time");
+  * IParameter* global = Core->CreateParameter("time", PT_Float);
+  * IParameter* effect = Shader->GetParameter("time");
   * global->Attach(effect);
   * @endcode Whenever the global parameter is set to a new value, all attached
   * parameters will also be updated. This mechanism is useful for things like
@@ -82,7 +82,7 @@ namespace VoodooShader
   * careful with that). If no target is specified in the technique or pass
   * annotations, the shader linker uses the texture currently bound to the core's
   * special textures. These may be set using Core::SetTexture(TextureType,
-  * TextureRef). Relinking a shader may change these targets. @page virtualparams
+  * ITexture*). Relinking a shader may change these targets. @page virtualparams
   * Parameters Voodoo supports two general varieties of parameter (virtual and
   * effect) and a number of specific data types. @section virtualparamsdiff Virtual
   * and Effect Parameters The primary difference between virtual params and effect
