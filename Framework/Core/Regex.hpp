@@ -33,10 +33,18 @@ namespace VoodooShader
         Regex(String expr);
         ~Regex();
 
+        // Expression handling
         void SetExpr(String expr);
-        String GetExpr();
+        String GetExpr() const;
 
-        Bool Match(String string);
+        // Match
+        Bool Match(const String & string) const;
+
+        // Find
+        Bool Find(const String & find) const;
+
+        // Replace
+        String Replace(const String & find, const String & replace) const;
 
     private:
         RegexImpl * m_Impl;

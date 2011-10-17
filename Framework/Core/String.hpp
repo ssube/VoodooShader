@@ -40,23 +40,23 @@ namespace VoodooShader
         String()
         {
             this->Init(nullptr);
-        }
-
-        String(char * str)
-        {
-            this->Init(str);
-        }
+        };
 
         String(const char * str)
         {
             this->Init(str);
-        }
+        };
+
+        String(const String & other)
+        {
+            this->Init(other.GetData());
+        };
 
 #ifdef _STRING_
-        String(std::string & str)
+        String(const std::string & str)
         {
             this->Init(str.c_str());
-        }
+        };
 #endif
 
         // Modify
@@ -65,9 +65,9 @@ namespace VoodooShader
         void Clear();
 
         // Part
-        String Left(UInt32 count);
-        String Mid(UInt32 start, UInt32 count);
-        String Right(UInt32 count);
+        String Left(UInt32 count) const;
+        String Mid(UInt32 start, UInt32 count) const;
+        String Right(UInt32 count) const;
 
         // Predicates
         Bool StartsWith(const char * str, Bool useCase = true) const;
@@ -93,13 +93,13 @@ namespace VoodooShader
         Bool IsEmpty() const;
         const char * GetData() const;
 
-        char GetAt(UInt32 pos);
+        char GetAt(UInt32 pos) const;
         char & operator[](UInt32 pos);
         void SetAt(UInt32 pos, char data);
 
         operator const char *() const;
 #ifdef _STRING_
-        operator std::string()
+        operator std::string() const
         {
             return std::string(this->GetData());
         };

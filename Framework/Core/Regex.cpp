@@ -19,6 +19,7 @@
  */
 #pragma once
 
+#include <string>
 #include <regex>
 
 #include "Regex.hpp"
@@ -37,8 +38,8 @@ namespace VoodooShader
         { };
 
     public:
-        String m_Expr;
         std::regex m_Regex;
+        String m_Expr;
     };
 
     Regex::Regex()
@@ -61,13 +62,23 @@ namespace VoodooShader
         m_Impl->m_Expr = expr;
     }
 
-    String Regex::GetExpr()
+    String Regex::GetExpr() const
     {
         return m_Impl->m_Expr;
     }
 
-    Bool Regex::Match(String string)
+    Bool Regex::Match(const String & string) const
     {
-        return regex_match(string, m_Impl->m_Regex);
+        return std::regex_match(string.GetData(), m_Impl->m_Regex);
+    }
+
+    Bool Regex::Find(const String & find) const
+    {
+        return std::regex_search(find.GetData(), m_Impl->m_Regex);
+    }
+
+    String Regex::Replace(const String & find, const String & replace) const
+    {
+        return std::regex_replace(static_cast<std::string>(find), m_Impl->m_Regex, static_cast<std::string>(replace));
     }
 }

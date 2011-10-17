@@ -47,7 +47,7 @@ namespace VoodooShader
             String SaveString();
 
             // Root
-            Node * GetRoot();
+            Node * GetRoot() const;
 
         private:
             DocumentImpl * m_Impl;
@@ -62,9 +62,9 @@ namespace VoodooShader
             ~Node();
 
             // Get/Set
-            String GetName();
+            String GetName() const;
             Bool SetName(const String & name);
-            String GetValue();
+            String GetValue() const;
             Bool SetValue(const String & value);
 
             // Attributes
@@ -72,16 +72,16 @@ namespace VoodooShader
             Attribute * GetLastAttribute();
 
             // Traversal
-            Node * GetParent();
-            Node * GetFirstChild();
-            Node * GetLastChild();
-            Node * GetNextSibling();
-            Node * GetPreviousSibling();
+            Node * GetParent() const;
+            Node * GetFirstChild() const;
+            Node * GetLastChild() const;
+            Node * GetNextSibling() const;
+            Node * GetPreviousSibling() const;
 
             // Named traversal
-            Node * GetChild(const String & name);
-            Node * GetNextSibling(const String & name);
-            Node * GetPreviousSibling(const String & name);
+            Node * GetChild(const String & name) const;
+            Node * GetNextSibling(const String & name) const;
+            Node * GetPreviousSibling(const String & name) const;
 
         private:
             Node();
@@ -98,24 +98,24 @@ namespace VoodooShader
             ~Attribute();
 
             // Name
-            String GetName();
+            String GetName() const;
             Bool SetName(const String & name);
 
             // Value
-            String GetString();
+            String GetString() const;
             Bool SetString(const String & value);
-            Int32 GetInt32();
+            Int32 GetInt32() const;
             Bool SetInt32(const Int32 & value);
-            UInt32 GetUInt32();
+            UInt32 GetUInt32() const;
             Bool SetUInt32(const UInt32 & value);
-            Float GetFloat();
+            Float GetFloat() const;
             Bool SetFloat(const Float & value);
-            Bool GetBool();
+            Bool GetBool() const;
             Bool SetBool(const Bool & value);
 
             // Traversal
-            Attribute * GetNextAttribute();
-            Attribute * GetPreviousAttribute();
+            Attribute * GetNextAttribute() const;
+            Attribute * GetPreviousAttribute() const;
 
         private:
             Attribute();

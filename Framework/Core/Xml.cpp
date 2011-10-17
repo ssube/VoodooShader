@@ -86,14 +86,14 @@ namespace VoodooShader
             return (m_Impl->m_Doc.load_buffer(string.GetData(), string.GetLength()));
         }
 
-        Node * Document::GetRoot()
+        Node * Document::GetRoot() const
         {
             Node * node = new Node();
             node->m_Impl->m_Node = m_Impl->m_Doc;
             return node;
         }
 
-        String Node::GetName()
+        String Node::GetName() const
         {
             return m_Impl->m_Node.name();
         }
@@ -103,7 +103,7 @@ namespace VoodooShader
             return m_Impl->m_Node.set_name(name.GetData());
         }
 
-        String Node::GetValue()
+        String Node::GetValue() const
         {
             return m_Impl->m_Node.value();
         }
@@ -147,7 +147,7 @@ namespace VoodooShader
             delete m_Impl;
         }
 
-        Node * Node::GetParent()
+        Node * Node::GetParent() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.parent();
@@ -159,7 +159,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetFirstChild()
+        Node * Node::GetFirstChild() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.first_child();
@@ -171,7 +171,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetLastChild()
+        Node * Node::GetLastChild() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.last_child();
@@ -183,7 +183,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetNextSibling()
+        Node * Node::GetNextSibling() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.next_sibling();
@@ -195,7 +195,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetPreviousSibling()
+        Node * Node::GetPreviousSibling() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.previous_sibling();
@@ -207,7 +207,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetChild(const String & name)
+        Node * Node::GetChild(const String & name) const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.child(name);
@@ -219,7 +219,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetNextSibling(const String & name)
+        Node * Node::GetNextSibling(const String & name) const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.next_sibling(name);
@@ -231,7 +231,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetPreviousSibling(const String & name)
+        Node * Node::GetPreviousSibling(const String & name) const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.previous_sibling(name);
@@ -253,7 +253,7 @@ namespace VoodooShader
             delete m_Impl;
         }
 
-        String Attribute::GetName()
+        String Attribute::GetName() const
         {
             return m_Impl->m_Attr.name();
         }
@@ -263,7 +263,7 @@ namespace VoodooShader
             return m_Impl->m_Attr.set_name(name.GetData());
         }
 
-        String Attribute::GetString()
+        String Attribute::GetString() const
         {
             return m_Impl->m_Attr.value();
         }
@@ -273,7 +273,7 @@ namespace VoodooShader
             return m_Impl->m_Attr.set_value(value.GetData());
         }
 
-        Int32 Attribute::GetInt32()
+        Int32 Attribute::GetInt32() const
         {
             return m_Impl->m_Attr.as_int();
         }
@@ -283,7 +283,7 @@ namespace VoodooShader
             return m_Impl->m_Attr.set_value(value);
         }
 
-        UInt32 Attribute::GetUInt32()
+        UInt32 Attribute::GetUInt32() const
         {
             return m_Impl->m_Attr.as_uint();
         }
@@ -293,7 +293,7 @@ namespace VoodooShader
             return m_Impl->m_Attr.set_value(value);
         }
 
-        Float Attribute::GetFloat()
+        Float Attribute::GetFloat() const
         {
             return static_cast<float>(m_Impl->m_Attr.as_double());
         }
@@ -303,7 +303,7 @@ namespace VoodooShader
             return m_Impl->m_Attr.set_value(value);
         }
 
-        Bool Attribute::GetBool()
+        Bool Attribute::GetBool() const
         {
             return m_Impl->m_Attr.as_bool();
         }
@@ -313,7 +313,7 @@ namespace VoodooShader
             return m_Impl->m_Attr.set_value(value);
         }
 
-        Attribute * Attribute::GetNextAttribute()
+        Attribute * Attribute::GetNextAttribute() const
         {
             Attribute * pAttr = nullptr;
             auto attr = m_Impl->m_Attr.next_attribute();
@@ -325,7 +325,7 @@ namespace VoodooShader
             return pAttr;
         }
 
-        Attribute * Attribute::GetPreviousAttribute()
+        Attribute * Attribute::GetPreviousAttribute() const
         {
             Attribute * pAttr = nullptr;
             auto attr = m_Impl->m_Attr.previous_attribute();
