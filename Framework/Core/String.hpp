@@ -70,14 +70,14 @@ namespace VoodooShader
         String Right(UInt32 count);
 
         // Predicates
-        Bool StartsWith(const char * str, Bool useCase = true);
-        Bool EndsWith(const char * str, Bool useCase = true);
-        Bool Contains(const char * str, Bool useCase = true);
-        Bool Compare(const char * str, Bool useCase = true);
+        Bool StartsWith(const char * str, Bool useCase = true) const;
+        Bool EndsWith(const char * str, Bool useCase = true) const;
+        Bool Contains(const char * str, Bool useCase = true) const;
+        Bool Compare(const char * str, Bool useCase = true) const;
 
         // Find
-        UInt32 Find(const char * str, Bool useCase = true);
-        UInt32 ReverseFind(const char * str, Bool useCase = true);
+        UInt32 Find(const char * str, Bool useCase = true) const;
+        UInt32 ReverseFind(const char * str, Bool useCase = true) const;
 
         // Replace
         void Replace(const char * find, const char * replace, Bool useCase = true);
@@ -89,15 +89,15 @@ namespace VoodooShader
         void AppendFormat(_Printf_format_string_ const char * fmt, ...);
 
         // Buffer info/access
-        UInt32 GetLength();
-        Bool IsEmpty();
-        const char * GetData();
+        UInt32 GetLength() const;
+        Bool IsEmpty() const;
+        const char * GetData() const;
 
         char GetAt(UInt32 pos);
         char & operator[](UInt32 pos);
         void SetAt(UInt32 pos, char data);
 
-        operator const char *();
+        operator const char *() const;
 #ifdef _STRING_
         operator std::string()
         {
@@ -109,9 +109,9 @@ namespace VoodooShader
         String operator+(const char * other);
         String & operator+=(const char * other);
 
-        Bool operator==(const char * other);
-        Bool operator!=(const char * other);
-        Bool operator<(const char * other);
+        Bool operator==(const char * other) const;
+        Bool operator!=(const char * other) const;
+        Bool operator<(const char * other) const;
 
     private:
         void Init(const char * str);

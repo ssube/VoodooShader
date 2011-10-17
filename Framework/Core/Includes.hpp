@@ -85,6 +85,7 @@ namespace VoodooShader
     {
         class Document;
         class Node;
+        class Attribute;
 
         namespace XPath
         {
@@ -102,9 +103,9 @@ namespace VoodooShader
     struct Version;
 
     /* Geometry-related structs */
-    struct float2;
-    struct float3;
-    struct float4;
+    struct Float2;
+    struct Float3;
+    struct Float4;
     struct VertexStruct;
     struct LightStruct;
 

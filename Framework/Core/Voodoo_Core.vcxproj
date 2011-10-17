@@ -240,6 +240,7 @@
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Technique.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Xml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Converter.hpp" />

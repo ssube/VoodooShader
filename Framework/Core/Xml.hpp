@@ -20,27 +20,107 @@
 #pragma once
 
 #include "Includes.hpp"
+#include "String.hpp"
 
 namespace VoodooShader
 {
     namespace Xml
     {
+        class DocumentImpl;
+        class NodeImpl;
+        class AttributeImpl;
+
         class VOODOO_API Document
         {
         public:
+            // Ctors
             Document();
+            ~Document();
 
-            Bool Load(String file);
+            // Loading
+            Bool LoadFile(IFile * pFile);
+            Bool LoadMemory(const void * pBuffer, UInt32 size);
+            Bool LoadString(const String & string);
 
-            Node * GetSingleNode(String query);
+            // Saving
+            Bool SaveFile(IFile * pFile);
+            String SaveString();
+
+            // Root
+            Node * GetRoot();
 
         private:
-
+            DocumentImpl * m_Impl;
         };
 
         class VOODOO_API Node
         {
+            friend class Document;
 
+        public:
+            // Ctors
+            ~Node();
+
+            // Get/Set
+            String GetName();
+            Bool SetName(const String & name);
+            String GetValue();
+            Bool SetValue(const String & value);
+
+            // Attributes
+            Attribute * GetFirstAttribute();
+            Attribute * GetLastAttribute();
+
+            // Traversal
+            Node * GetParent();
+            Node * GetFirstChild();
+            Node * GetLastChild();
+            Node * GetNextSibling();
+            Node * GetPreviousSibling();
+
+            // Named traversal
+            Node * GetChild(const String & name);
+            Node * GetNextSibling(const String & name);
+            Node * GetPreviousSibling(const String & name);
+
+        private:
+            Node();
+
+            NodeImpl * m_Impl;
+        };
+
+        class VOODOO_API Attribute
+        {
+            friend class Node;
+
+        public:
+            // *tors
+            ~Attribute();
+
+            // Name
+            String GetName();
+            Bool SetName(const String & name);
+
+            // Value
+            String GetString();
+            Bool SetString(const String & value);
+            Int32 GetInt32();
+            Bool SetInt32(const Int32 & value);
+            UInt32 GetUInt32();
+            Bool SetUInt32(const UInt32 & value);
+            Float GetFloat();
+            Bool SetFloat(const Float & value);
+            Bool GetBool();
+            Bool SetBool(const Bool & value);
+
+            // Traversal
+            Attribute * GetNextAttribute();
+            Attribute * GetPreviousAttribute();
+
+        private:
+            Attribute();
+
+            AttributeImpl * m_Impl;
         };
     }
 }
