@@ -86,11 +86,21 @@ namespace VoodooShader
             return (m_Impl->m_Doc.load_buffer(string.GetData(), string.GetLength()));
         }
 
-        Node * Document::GetRoot() const
+        Node Document::GetRoot() const
         {
-            Node * node = new Node();
-            node->m_Impl->m_Node = m_Impl->m_Doc;
+            Node node;
+            node.m_Impl->m_Node = m_Impl->m_Doc;
             return node;
+        }
+
+        Node::Node()
+        {
+            m_Impl = new NodeImpl();
+        }
+
+        Node::~Node()
+        {
+            delete m_Impl;
         }
 
         String Node::GetName() const
@@ -135,16 +145,6 @@ namespace VoodooShader
                 pAttr->m_Impl->m_Attr = attr;
             }
             return pAttr;
-        }
-
-        Node::Node()
-        {
-            m_Impl = new NodeImpl();
-        }
-
-        Node::~Node()
-        {
-            delete m_Impl;
         }
 
         Node * Node::GetParent() const

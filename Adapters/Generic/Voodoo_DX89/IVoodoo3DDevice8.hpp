@@ -23,13 +23,11 @@
 static HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 
 /**
- =======================================================================================================================
  * The core Voodoo wrapper class for D3D8 devices. This class is responsible for processing, translating and handling
  * most API calls. Due to this, it must be as optimized as possible (considering the circumstances) and should contain
  * only tested code. @note The various IVoodoo3D8 interfaces provide an application-opaque wrapper that actually
  * implements a Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the IVoodoo3D9 interface set
  * should be used.
- =======================================================================================================================
  */
 class IVoodoo3DDevice8 :
  public IDirect3DDevice8
@@ -52,16 +50,12 @@ class IVoodoo3DDevice8 :
  UINT mLastBaseIndex;
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 public:
 
  /**
-  ===================================================================================================================
   * The default, public constructor for IVoodoo3D objects.
-  ===================================================================================================================
   */
  IVoodoo3DDevice8(IDirect3DDevice9 *realDevice) :
  mRealDevice(realDevice)
@@ -336,14 +330,14 @@ public:
 
   if (!(Usage & D3DUSAGE_RENDERTARGET))
   {
-   hr = mRealDevice->CreateTexture(Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format, Pool, &rTexture, NULL);
+   hr = mRealDevice->CreateTexture(Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format, Pool, &rTexture, nullptr);
   }
 
   // That failed, create as a standard texture
   if (FAILED(hr))
   {
    rtt = false;
-   hr = mRealDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, &rTexture, NULL);
+   hr = mRealDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, &rTexture, nullptr);
   }
   VoodooLogger->Log
    (
@@ -376,7 +370,7 @@ public:
  {
   IDirect3DVolumeTexture9 *rTexture;
   HRESULT hr = mRealDevice->CreateVolumeTexture
-   (Width, Height, Depth, Levels, Usage, Format, Pool, &rTexture, NULL);
+   (Width, Height, Depth, Levels, Usage, Format, Pool, &rTexture, nullptr);
 
   VoodooLogger->Log
    (
@@ -403,7 +397,7 @@ public:
   )
  {
   IDirect3DCubeTexture9 *rTexture;
-  HRESULT hr = mRealDevice->CreateCubeTexture(EdgeLength, Levels, Usage, Format, Pool, &rTexture, NULL);
+  HRESULT hr = mRealDevice->CreateCubeTexture(EdgeLength, Levels, Usage, Format, Pool, &rTexture, nullptr);
 
   VoodooLogger->Log
    (
@@ -428,7 +422,7 @@ public:
   )
  {
   HRESULT hr = mRealDevice->CreateVertexBuffer
-   (Length, Usage, FVF, Pool, (IDirect3DVertexBuffer9 **) ppVertexBuffer, NULL);
+   (Length, Usage, FVF, Pool, (IDirect3DVertexBuffer9 **) ppVertexBuffer, nullptr);
 
   VoodooLogger->Log
    (
@@ -448,7 +442,7 @@ public:
   )
  {
   HRESULT hr = mRealDevice->CreateIndexBuffer
-   (Length, Usage, Format, Pool, (IDirect3DIndexBuffer9 **) ppIndexBuffer, NULL);
+   (Length, Usage, Format, Pool, (IDirect3DIndexBuffer9 **) ppIndexBuffer, nullptr);
 
   VoodooLogger->Log
    (
@@ -477,7 +471,7 @@ public:
   )
  {
   IDirect3DSurface9 *rSurface;
-  HRESULT hr = mRealDevice->CreateRenderTarget(Width, Height, Format, MultiSample, 0, Lockable, &rSurface, NULL);
+  HRESULT hr = mRealDevice->CreateRenderTarget(Width, Height, Format, MultiSample, 0, Lockable, &rSurface, nullptr);
 
   VoodooLogger->Log
    (
@@ -503,7 +497,7 @@ public:
  {
   IDirect3DSurface9 *rSurface;
 
-  HRESULT hr = mRealDevice->CreateDepthStencilSurface(Width, Height, Format, MultiSample, 0, 0, &rSurface, NULL);
+  HRESULT hr = mRealDevice->CreateDepthStencilSurface(Width, Height, Format, MultiSample, 0, 0, &rSurface, nullptr);
 
   VoodooLogger->Log
    (
@@ -530,7 +524,7 @@ public:
  {
   IDirect3DSurface9 *rSurface;
 
-  HRESULT hr = mRealDevice->CreateOffscreenPlainSurface(Width, Height, Format, D3DPOOL_DEFAULT, &rSurface, NULL);
+  HRESULT hr = mRealDevice->CreateOffscreenPlainSurface(Width, Height, Format, D3DPOOL_DEFAULT, &rSurface, nullptr);
 
   VoodooLogger->Log
    (
@@ -895,7 +889,7 @@ public:
   }
   else
   {
-   hr = mRealDevice->SetTexture(Stage, NULL);
+   hr = mRealDevice->SetTexture(Stage, nullptr);
   }
 #ifdef _DEBUG
   VoodooLogger->Log("Voodoo DX8.9: IVoodoo3DDevice8::SetTexture(%d, %d) == %d\n", Stage, pTexture, hr);
@@ -1077,7 +1071,7 @@ public:
   )
  {
   HRESULT hr = mRealDevice->ProcessVertices
-   (SrcStartIndex, DestIndex, VertexCount, (IDirect3DVertexBuffer9 *) pDestBuffer, NULL, Flags);
+   (SrcStartIndex, DestIndex, VertexCount, (IDirect3DVertexBuffer9 *) pDestBuffer, nullptr, Flags);
 
 #ifdef _DEBUG
   VoodooLogger->Log
@@ -1282,7 +1276,7 @@ public:
   {
 
    // ! @todo Check if this is write, D3D8 docs have nothing
-   hr = mRealDevice->SetPixelShader(NULL);
+   hr = mRealDevice->SetPixelShader(nullptr);
   }
   else
   {

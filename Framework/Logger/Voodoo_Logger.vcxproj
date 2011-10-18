@@ -22,18 +22,18 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -53,20 +53,20 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Framework\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Framework\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Framework\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -27,12 +27,10 @@
 using namespace VoodooShader;
 
 /**
- =======================================================================================================================
  * The core Voodoo3D8 wrapper class for D3D8 objects. This class is responsible for the primary abstraction from D3D8
  * to D3D9. This class is responsible for creating devices, giving it control over what is returned to the engine.
  * @note The various IVoodoo3D8 interfaces provide an application-opaque wrapper that actually implements a Direct3D
  * 8.9 layer (8 to 9 translation). For use with D3D9 applications, the IVoodoo3D9 interface set should be used.
- =======================================================================================================================
  */
 class IVoodoo3D8 :
  public IDirect3D8
@@ -45,16 +43,12 @@ class IVoodoo3D8 :
  IDirect3D9 *mRealObject;
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 public:
 
  /**
-  ===================================================================================================================
   * The default, public constructor for IVoodoo3D objects.
-  ===================================================================================================================
   */
  IVoodoo3D8(IDirect3D9 *realObject) :
  mRealObject(realObject)
@@ -153,7 +147,7 @@ public:
   )
  {
   HRESULT hr = mRealObject->CheckDeviceMultiSampleType
-   (Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
+   (Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, nullptr);
 
   VoodooLogger->Log
    (

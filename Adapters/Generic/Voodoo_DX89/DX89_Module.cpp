@@ -20,65 +20,51 @@
 #include "IVoodoo3DSurface8.hpp"
 #include "IVoodoo3DTexture8.hpp"
 
-VoodooShader::Core * VoodooCore = NULL;
-VoodooShader::Adapter * VoodooDX89 = NULL;
+VoodooShader::ICore * VoodooCore = nullptr;
+VoodooShader::Adapter * VoodooDX89 = nullptr;
 
 D3DCAPS8 d3d8Caps;
 
-IVoodoo3D8 *VoodooObject = NULL;
-IVoodoo3DDevice8 *VoodooDevice = NULL;
+IVoodoo3D8 *VoodooObject = nullptr;
+IVoodoo3DDevice8 *VoodooDevice = nullptr;
 
-IDirect3DSurface9 *backbufferSurf = NULL;
+IDirect3DSurface9 *backbufferSurf = nullptr;
 
 IDirect3DSurface9 *surface_ThisFrame;
-VoodooShader::TextureRef texture_ThisFrame;
+VoodooShader::ITexture* texture_ThisFrame;
 
-VoodooShader::ShaderRef testShader;
+VoodooShader::IShader* testShader;
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 VOODOO_API_DX89 void *__stdcall Voodoo3DCreate8(UINT version)
 {
 
  // Voodoo DX8.9 Init function
- VoodooCore = VoodooShader::Core::Create("Voodoo_GEM.log");
+ VoodooCore = VoodooShader::ICore::Create("Voodoo_GEM.log");
 
  VoodooLogger->Log("Voodoo GEM: Direct3DCreate8 called, SDK version: %d.\n", version);
 
- /*~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~*/
 
  // Load the real d3d8 dll and get device caps
  char Path[MAX_PATH];
- /*~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~*/
  GetSystemDirectoryA(Path, MAX_PATH);
  strcat_s(Path, MAX_PATH, "\\d3d8.dll");
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  HMODULE d3ddll = LoadLibraryA(Path);
  D3DFunc8 d3d8func = (D3DFunc8) GetProcAddress(d3ddll, "Direct3DCreate8");
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- if (d3d8func == NULL)
+ if (d3d8func == nullptr)
  {
   VoodooLogger->Log("Voodoo DX8.9: Could not find D3D8 create true func.\n");
   return 0;
  }
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  IDirect3D8 *TempObject = (d3d8func) (version);
  HRESULT hr = TempObject->GetDeviceCaps(0, D3DDEVTYPE_HAL, &d3d8Caps);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  if (hr != D3D_OK)
  {
   VoodooLogger->Log("Voodoo DX8.9: Could not get D3D8 caps.\n");
@@ -88,16 +74,12 @@ VOODOO_API_DX89 void *__stdcall Voodoo3DCreate8(UINT version)
 
  FreeLibrary(d3ddll);
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
  // Call DX9 to create a real device with the latest version
  IDirect3D9 *object = Direct3DCreate9(D3D_SDK_VERSION);
  // Turn it into a FakeObject and return it.
  IVoodoo3D8 *vObj = new IVoodoo3D8(object);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  VoodooObject = vObj;
  return vObj;
 }

@@ -27,13 +27,13 @@ namespace VoodooShader
 
  const char *API_ClassInfo(_In_ int number);
 
- IObject *API_ClassCreate(_In_ int number, _In_ Core *core);
+ IObject *API_ClassCreate(_In_ int number, _In_ ICore *core);
 }
 }
-extern VoodooShader::Core * VoodooCore;
-extern VoodooShader::ILoggerRef VoodooLogger;
+extern VoodooShader::ICore * VoodooCore;
+extern VoodooShader::ILogger* VoodooLogger;
 extern VoodooShader::Frost::Adapter * VoodooFrost;
-extern VoodooShader::ShaderRef TestShader;
+extern VoodooShader::IShader* TestShader;
 
 extern GLint gDepthTexture;
 extern GLint gThisFrame;

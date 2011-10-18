@@ -51,13 +51,13 @@ namespace VoodooShader
          * 
          * @return The name.
          */
-        virtual String ToString(void) throw() = 0;
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw() = 0;
+        virtual ICore * GetCore(void) const throw() = 0;
     };
 }

@@ -38,17 +38,17 @@ class IVoodoo3DSurface8;
 
 extern D3DCAPS8 d3d8Caps;
 
-extern VoodooShader::Core * VoodooCore;
+extern VoodooShader::ICore * VoodooCore;
 extern VoodooShader::Adapter * VoodooDX89;
 
 extern IVoodoo3D8 *VoodooObject;
 extern IVoodoo3DDevice8 *VoodooDevice;
 
-extern VoodooShader::ShaderRef testShader;
+extern VoodooShader::IShader* testShader;
 
 extern IDirect3DSurface9 *backbufferSurf;
 
-extern VoodooShader::TextureRef texture_ThisFrame;
+extern VoodooShader::ITexture* texture_ThisFrame;
 extern IDirect3DSurface9 *surface_ThisFrame;
 
 typedef IDirect3D8 * (__stdcall * D3DFunc8) (UINT);

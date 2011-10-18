@@ -3,10 +3,10 @@
 #include "Frost_Module.hpp"
 #include "Frost_Adapter.hpp"
 
-VoodooShader::Core * VoodooCore = NULL;
-VoodooShader::ILoggerRef VoodooLogger = NULL;
-VoodooShader::Frost::Adapter * VoodooFrost = NULL;
-VoodooShader::ShaderRef TestShader;
+VoodooShader::ICore * VoodooCore = nullptr;
+VoodooShader::ILogger* VoodooLogger = nullptr;
+VoodooShader::Frost::Adapter * VoodooFrost = nullptr;
+VoodooShader::IShader* TestShader;
 
 GLint gDepthTexture = 0;
 GLint gThisFrame = 0;
@@ -22,26 +22,18 @@ namespace VoodooShader
 {
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  Version API_ModuleVersion(void)
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   Version moduleVersion = VOODOO_META_VERSION_STRUCT(FROST);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   return moduleVersion;
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  int API_ClassCount(void)
  {
@@ -49,9 +41,7 @@ namespace VoodooShader
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  const char *API_ClassInfo(_In_ int number)
  {
@@ -61,16 +51,14 @@ namespace VoodooShader
   }
   else
   {
-   return NULL;
+   return nullptr;
   }
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- IObject *API_ClassCreate(_In_ int number, _In_ Core *core)
+ IObject *API_ClassCreate(_In_ int number, _In_ ICore *core)
  {
   if (number == 0)
   {
@@ -78,7 +66,7 @@ namespace VoodooShader
   }
   else
   {
-   return NULL;
+   return nullptr;
   }
  }
 }

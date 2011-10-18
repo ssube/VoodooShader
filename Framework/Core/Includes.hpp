@@ -89,10 +89,10 @@ namespace VoodooShader
 
         namespace XPath
         {
-            class Query;
-             
+            class Node;
             class NodeSet;
             class NodeSetIter;
+            class Query;
         }
     }
 

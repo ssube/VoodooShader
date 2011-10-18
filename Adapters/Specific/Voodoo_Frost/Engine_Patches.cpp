@@ -18,26 +18,20 @@
 using namespace VoodooShader;
 
 /**
- =======================================================================================================================
  * Applies a variation of the popular NWN camera hack to the engine in-memory. This technique is simpler to manipulate
  * and customize than the traditional byte-patcher. @todo Update this to use customizable settings when they're
  * implemented.
- =======================================================================================================================
  */
 void CameraHack(void)
 {
  VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Applying camera hack...");
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  float maxDist = 120.0f;
  float minDist = -0.2f;
  float angle = 1000.0f;
  DWORD oldProtect, finalProtect;
  BOOL lockStatus = VirtualProtect((PVOID) 0x004A9000, 0x1000, PAGE_EXECUTE_READWRITE, &oldProtect);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  if (lockStatus != 0)
  {
   memcpy((PVOID) 0x004A93ED, &minDist, sizeof(float));
@@ -53,12 +47,8 @@ void CameraHack(void)
  else
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   DWORD error = GetLastError();
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "Camera hack failed with code %u.", error);
  }
 }

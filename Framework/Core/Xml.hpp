@@ -47,7 +47,7 @@ namespace VoodooShader
             String SaveString();
 
             // Root
-            Node * GetRoot() const;
+            Node GetRoot() const;
 
         private:
             DocumentImpl * m_Impl;
@@ -68,20 +68,24 @@ namespace VoodooShader
             Bool SetValue(const String & value);
 
             // Attributes
-            Attribute * GetFirstAttribute();
-            Attribute * GetLastAttribute();
+            Attribute GetFirstAttribute();
+            Attribute GetLastAttribute();
 
             // Traversal
-            Node * GetParent() const;
-            Node * GetFirstChild() const;
-            Node * GetLastChild() const;
-            Node * GetNextSibling() const;
-            Node * GetPreviousSibling() const;
+            Node GetParent() const;
+            Node GetFirstChild() const;
+            Node GetLastChild() const;
+            Node GetNextSibling() const;
+            Node GetPreviousSibling() const;
 
             // Named traversal
-            Node * GetChild(const String & name) const;
-            Node * GetNextSibling(const String & name) const;
-            Node * GetPreviousSibling(const String & name) const;
+            Node GetChild(const String & name) const;
+            Node GetNextSibling(const String & name) const;
+            Node GetPreviousSibling(const String & name) const;
+
+            // XPath accessors
+            XPath::Node GetSingleNode(const String & expr) const;
+            XPath::NodeSet GetNodes(const String & expr) const;
 
         private:
             Node();
@@ -114,8 +118,8 @@ namespace VoodooShader
             Bool SetBool(const Bool & value);
 
             // Traversal
-            Attribute * GetNextAttribute() const;
-            Attribute * GetPreviousAttribute() const;
+            Attribute GetNextAttribute() const;
+            Attribute GetPreviousAttribute() const;
 
         private:
             Attribute();

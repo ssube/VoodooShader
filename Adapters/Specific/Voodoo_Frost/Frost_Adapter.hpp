@@ -24,27 +24,25 @@ namespace VoodooShader
  {
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 public:
-  Adapter(_In_ Core *core);
+  Adapter(_In_ ICore *core);
   ~ Adapter(void);
 
   // IObject methods
   const char *GetObjectClass(void);
 
   // IAdapter methods
-  bool LoadPass(_In_ Pass *pass);
-  bool UnloadPass(_In_ Pass *pass);
-  void BindPass(_In_ PassRef pass);
+  bool LoadPass(_In_ IPass *pass);
+  bool UnloadPass(_In_ IPass *pass);
+  void BindPass(_In_ IPass* pass);
   void UnbindPass(void);
   void DrawQuad(Vertex *vertexData);
-  void ApplyParameter(_In_ ParameterRef param);
-  void DrawShader(_In_ ShaderRef shader);
-  TextureRef CreateTexture(_In_ String name, _In_ TextureDesc desc);
-  bool ConnectTexture(_In_ ParameterRef param, _In_ TextureRef texture);
+  void ApplyParameter(_In_ IParameter* param);
+  void DrawShader(_In_ IShader* shader);
+  ITexture* CreateTexture(_In_ String name, _In_ TextureDesc desc);
+  bool ConnectTexture(_In_ IParameter* param, _In_ ITexture* texture);
   void HandleError(_In_ CGcontext context, _In_ CGerror error, _In_ void *core);
 
   // Frost-specific methods
@@ -52,13 +50,11 @@ public:
   void SetGLRC(_In_opt_ HGLRC hglrc);
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 private:
-  Core *mCore;
-  ILoggerRef mLogger;
+  ICore *mCore;
+  ILogger* mLogger;
 
   CGcontext mCgContext;
 
@@ -70,10 +66,10 @@ private:
 
   CGpass mLastPass;
 
-  TextureRef mTexDepthFrame;
-  TextureRef mTexThisFrame;
-  TextureRef mTexLastPass;
-  TextureRef mTexLastShader;
+  ITexture* mTexDepthFrame;
+  ITexture* mTexThisFrame;
+  ITexture* mTexLastPass;
+  ITexture* mTexLastShader;
  };
 }
 }

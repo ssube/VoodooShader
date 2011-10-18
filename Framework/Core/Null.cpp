@@ -156,7 +156,7 @@ namespace VoodooShader
             return "NullLogger";
         }
 
-        bool NullLogger::Open(_In_ String Filename, _In_ bool Append)
+        bool NullLogger::Open(_In_ const IFile * pFile, _In_ bool Append)
         {
             UNREFERENCED_PARAMETER(Filename);
             UNREFERENCED_PARAMETER(Append);

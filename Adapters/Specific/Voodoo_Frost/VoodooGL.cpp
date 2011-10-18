@@ -3,7 +3,7 @@
 #include "VoodooGL.hpp"
 #include "Frost_Adapter.hpp"
 
-HWND gNwnWindow = NULL;
+HWND gNwnWindow = nullptr;
 bool gSecondContext = false;
 bool gFrostEnabled = false;
 bool gDrawnGeometry = false;
@@ -12,10 +12,8 @@ float gFogMult = 99.0f;
 using namespace VoodooShader;
 
 /**
- =======================================================================================================================
  * Begins a draw operation and sets the expected vertex order. @param mode Vertex order (GL_QUADS, etc) @implements
  * glBegin
- =======================================================================================================================
  */
 void GLAPIENTRY vglBegin(GLenum mode)
 {
@@ -31,12 +29,10 @@ void GLAPIENTRY vglBegin(GLenum mode)
 }
 
 /**
- =======================================================================================================================
  * Binds a texture to the given target for use in draw ops. @param target The target to bind to (often GL_TEXTURE_2D).
  * @param texture The texture ID to be bound (must be a valid ID). @note This function also binds material shaders as
  * appropriate. If texture is linked to a Shader, the default technique will be retrieved and set as the active effect.
  * @implements glBindTexture
- =======================================================================================================================
  */
 void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 {
@@ -46,7 +42,7 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
   * if ( texture != 0 && texture != lastTexture ) { lastTexture = texture;
   * find Technique from Materials[texture] if ( Technique is valid ) { setup
   * variables on Technique get first Pass from Technique bind Pass gBoundPass =
-  * Pass } } else if ( gBoundPass ) { unbind gBoundPass gBoundPass = null }
+  * Pass } } else if ( gBoundPass ) { unbind gBoundPass gBoundPass = nullptr }
   */
  return glBindTexture(target, texture);
 }
@@ -55,21 +51,15 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 #define MASK_HUD (GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT)
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 void GLAPIENTRY vglClear(GLbitfield mask)
 {
  if (VoodooFrost && mask == MASK_HUD && glIsEnabled(GL_LIGHT0))
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~*/
   GLint prevTexture = 0;
-  /*~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~*/
   glGetIntegerv(GL_TEXTURE_BINDING_2D, &prevTexture);
 
   // If depth is enabled, cache that now
@@ -94,9 +84,7 @@ void GLAPIENTRY vglClear(GLbitfield mask)
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
 {
@@ -112,9 +100,7 @@ void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
 {
@@ -126,9 +112,7 @@ void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const G
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 void GLAPIENTRY vglEnable(GLenum cap)
 {
@@ -140,9 +124,7 @@ void GLAPIENTRY vglEnable(GLenum cap)
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 void GLAPIENTRY vglEnd(void)
 {
@@ -152,9 +134,7 @@ void GLAPIENTRY vglEnd(void)
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
 {
@@ -164,9 +144,7 @@ void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 void GLAPIENTRY vglFogf(GLenum pname, GLfloat param)
 {
@@ -188,9 +166,7 @@ const GLubyte * GLAPIENTRY vglGetString (GLenum name)
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
 {
@@ -205,81 +181,57 @@ void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 HGLRC WINAPI vwglCreateContext(HDC hdc)
 {
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  HGLRC result = wglCreateContext(hdc);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "wglCreateContext(%p) == %p", hdc, result);
 
  return result;
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 BOOL WINAPI vwglDeleteContext(HGLRC hglrc)
 {
  if (gSecondContext && gNwnWindow)
  {
-  VoodooFrost->SetGLRC(NULL);
+  VoodooFrost->SetGLRC(nullptr);
   gSecondContext = false;
  }
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  BOOL result = wglDeleteContext(hglrc);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "wglDeleteContext(%p) == %i", hglrc, result);
 
  return result;
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 PROC WINAPI vwglGetProcAddress(LPCSTR name)
 {
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  PROC result = wglGetProcAddress(name);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "wglGetProcAddress(%s) == %p", name, result);
 
  return result;
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 {
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  BOOL result = wglMakeCurrent(hdc, hglrc);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "wglMakeCurrent(%p, %p) == %i", hdc, hglrc, result);
 
  if (!gSecondContext)
@@ -289,12 +241,8 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
  else if (!gFrostEnabled)
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   GLenum glewStatus = glewInit();
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   if (glewStatus != GLEW_OK)
   {
    VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "Unable to initialize GLEW (code %u).", glewStatus);
@@ -304,12 +252,8 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 
   gNwnWindow = WindowFromDC(hdc);
 
-  /*~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~*/
   char title[64];
-  /*~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~*/
   if (GetWindowTextA(gNwnWindow, title, 64) > 0)
   {
    strcat_s(title, " [ Voodoo Frost ]");
@@ -329,12 +273,8 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
     glGetString(GL_VERSION)
    );
 
-  /*~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~*/
   GLint viewportInfo[4];
-  /*~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~*/
   glGetIntegerv(GL_VIEWPORT, viewportInfo);
   gViewWidth = viewportInfo[2];
   gViewHeight = viewportInfo[3];
@@ -346,19 +286,13 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
 {
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  BOOL result = wglSwapLayerBuffers(hdc, uint);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "wglSwapLayerBuffers(%p, %u) == %i", hdc, uint, result);
 
  // updateShaderVars()

@@ -20,6 +20,7 @@
 
 #include "Converter.hpp"
 #include "Exception.hpp"
+#include "Xml.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
@@ -73,8 +74,6 @@ namespace VoodooShader
     ICore::ICore(_In_ const InitParams * const pInitParams) 
         : m_CgContext(nullptr), m_ConfigFile(nullptr)
     {
-        using namespace pugi;
-
         if (!pInitParams)
         {
             throw std::exception("No init parameters provided.");
@@ -89,8 +88,8 @@ namespace VoodooShader
 #endif
 
         // Set up the internal objects
-        m_ModuleManager = IModuleManagerRef(new IModuleManager(this));
-        m_Parser = IParserRef(new IParser(this));
+        m_ModuleManager = new IModuleManager(this);
+        m_Parser = new IParser(this);
 
         // Load variables, built-in first
         m_Parser->Add("globalroot", pInitParams->GlobalRoot + "\\", VT_System);
@@ -109,20 +108,20 @@ namespace VoodooShader
 
             // Try loading the config file from each major location
             String ConfigPath = m_Parser->Parse("$(runroot)$(config)");
-            xml_parse_result result = m_ConfigFile->load_file(ConfigPath.c_str());
+            Bool result = m_ConfigFile->LoadFile(ConfigPath);
 
             if (!result)
             {
                 ConfigPath = m_Parser->Parse("$(localroot)$(config)");
-                result = m_ConfigFile->load_file(ConfigPath.c_str());
+                result = m_ConfigFile->LoadFile(ConfigPath);
                 if (!result)
                 {
                     ConfigPath = m_Parser->Parse("$(globalroot)$(config)");
-                    result = m_ConfigFile->load_file(ConfigPath.c_str());
+                    result = m_ConfigFile->LoadFile(ConfigPath);
                     if (!result)
                     {
                         ConfigPath = m_Parser->Parse("$(config)");
-                        result = m_ConfigFile->load_file(ConfigPath.c_str());
+                        result = m_ConfigFile->LoadFile(ConfigPath);
                         if (!result)
                         {
                             throw std::exception("Unable to find or parse config file.");
@@ -132,21 +131,22 @@ namespace VoodooShader
             }
 
             // Start setting things up
-            xml_node coreNode = m_ConfigFile->select_single_node("/VoodooConfig/ICore").node();
+            Xml::Node * configRoot = m_ConfigFile->GetRoot();
+            Xml::Node * coreNode = configRoot->GetSingleNode("/VoodooConfig/ICore");
             if (!coreNode)
             {
                 throw std::exception("Could not find ICore node.");
             }
 
             // Create query for node text, used multiple times
-            xpath_query xpq_getName("./@name");
-            xpath_query xpq_getText("./text()");
+            XPath::Query xpq_getName("./@name");
+            XPath::Query xpq_getText("./text()");
 
             // Load variables
             {
-                xpath_query xpq_getVariables("/VoodooConfig/Variables/Variable");
-                xpath_node_set nodes = xpq_getVariables.evaluate_node_set(*config);
-                xpath_node_set::const_iterator iter = nodes.begin();
+                XPath::Query xpq_getVariables("/VoodooConfig/Variables/Variable");
+                XPath::NodeSet nodes = xpq_getVariables.EvaluateNodeSet(configRoot);
+                XPath::NodeSetIter iter = nodes.begin();
 
                 while (iter != nodes.end())
                 {
@@ -343,7 +343,7 @@ namespace VoodooShader
         }
     }
 
-    IShader* ICore::CreateShader(_In_ String Filename, _In_opt_ const char **ppArgs)
+    IShader* ICore::CreateShader(_In_ const IFile * pFile, _In_opt_ const char **ppArgs)
     {
         IFile* file = this->m_FileSystem->FindFile(Filename);
 

@@ -38,19 +38,17 @@ namespace VoodooShader
 
  const char *API_ClassInfo(_In_ int number);
 
- IObject *API_ClassCreate(_In_ int number, _In_ Core *core);
+ IObject *API_ClassCreate(_In_ int number, _In_ ICore *core);
 }
 }
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  * Storage struct to hold associated Voodoo @ref Texture "Textures" and API texture objects. The RawTexture and
  * RawSurface fields can hold an OpenGL FBO and texture or DirectX texture and surface.
- -----------------------------------------------------------------------------------------------------------------------
  */
 struct TextureTuple
 {
- VoodooShader::TextureRef Texture;
+ VoodooShader::ITexture* Texture;
  LPDIRECT3DTEXTURE9 RawTexture;
  LPDIRECT3DSURFACE9 RawSurface;
 };
@@ -76,14 +74,14 @@ extern HRESULT DefaultErrorCode;
 
 extern D3DCAPS8 d3d8Caps;
 
-extern VoodooShader::Core * VoodooCore;
-extern VoodooShader::ILoggerRef VoodooLogger;
+extern VoodooShader::ICore * VoodooCore;
+extern VoodooShader::ILogger* VoodooLogger;
 extern VoodooShader::Gem::Adapter * VoodooGem;
 
 extern IVoodoo3D8 *VoodooObject;
 extern IVoodoo3DDevice8 *VoodooDevice;
 
-extern VoodooShader::ShaderRef testShader;
+extern VoodooShader::IShader* testShader;
 
 extern TextureTuple gBackbuffer;
 extern TextureTuple gScratch;
@@ -93,7 +91,7 @@ extern TextureTuple gLastShader;
 extern TextureTuple gLastPass;
 extern std::map<VoodooShader::String, TextureTuple> gTextures;
 
-extern VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;
+extern VoodooShader::IParameter* gMatrixView, gMatrixProj, gMatrixWorld;
 
 extern D3DPRESENT_PARAMETERS gParams;
 

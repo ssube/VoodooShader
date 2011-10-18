@@ -8,14 +8,12 @@ namespace VoodooShader
 {
  namespace DirectX89
 {
- LPDIRECT3DVERTEXBUFFER9 FSQuadVerts = NULL;
+ LPDIRECT3DVERTEXBUFFER9 FSQuadVerts = nullptr;
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- Adapter::Adapter(Core *core, IDirect3DDevice9 *device) :
+ Adapter::Adapter(ICore *core, IDirect3DDevice9 *device) :
   mCore(core),
   mDevice(device)
  {
@@ -23,7 +21,7 @@ namespace VoodooShader
 
   if (!core)
   {
-   core = VoodooShader::Core::Create();
+   core = VoodooShader::ICore::Create();
   }
 
   core->Log(LL_Info, VOODOO_DX89_NAME, "Starting adapter...");
@@ -32,19 +30,15 @@ namespace VoodooShader
   try
   {
    core->SetAdapter(reinterpret_cast < VoodooShader::Adapter * > (this));
-   core->Log(LL_Info, VOODOO_DX89_NAME, "Core adapter set to this.");
+   core->Log(LL_Info, VOODOO_DX89_NAME, "ICore adapter set to this.");
   }
   catch(std::exception & exc)
   {
    core->Log(LL_Error, VOODOO_DX89_NAME, "Error setting adapter on core: %s.", exc.what());
   }
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   HRESULT hr = cgD3D9SetDevice(device);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   if (!SUCCEEDED(hr))
   {
    Throw(VOODOO_DX89_NAME, "Could not set Cg device.", core);
@@ -62,12 +56,8 @@ namespace VoodooShader
 
   cgD3D9RegisterStates(core->GetCGContext());
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   HRESULT errors = cgD3D9GetLastError();
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   if (!SUCCEEDED(errors))
   {
    core->Log(LL_Errors, VOODOO_DX89_NAME, "Errors setting Cg states: %s", cgD3D9TranslateHRESULT(errors));
@@ -77,15 +67,11 @@ namespace VoodooShader
    core->Log(LL_Debug, VOODOO_DX89_NAME, "Cg states set successfully.");
   }
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
   // Setup profiles
   CGprofile bestFrag = cgD3D9GetLatestPixelProfile();
   CGprofile bestVert = cgD3D9GetLatestVertexProfile();
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   core->Log
    (
     LL_Info,
@@ -95,23 +81,16 @@ namespace VoodooShader
     cgGetProfileString(bestFrag)
    );
 
-  /*~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~*/
 
   // Get params
   D3DVIEWPORT9 viewport;
-  /*~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~*/
   device->GetViewport(&viewport);
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   float fx = ((float) viewport.Width / 2) + 0.5f; // 2;
                  ///
   float fy = ((float) viewport.Height / 2) + 0.5f; // 2;
                  ///
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   mCore->Log(LL_Info, VOODOO_DX89_NAME, "Prepping for %d by %d target.", fx, fy);
@@ -123,7 +102,7 @@ namespace VoodooShader
     D3DFVF_CUSTOMVERTEX,
     D3DPOOL_DEFAULT,
     &FSQuadVerts,
-    NULL
+    nullptr
    );
 
   if (FAILED(hr))
@@ -131,12 +110,8 @@ namespace VoodooShader
    mCore->Log(LL_Error, VOODOO_DX89_NAME, "Failed to create vertex buffer for fullscreen quad.");
   }
 
-  /*~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~*/
   FSVert g_Vertices[4];
-  /*~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~*/
   memset(g_Vertices, 0, sizeof(FSVert) * 4);
 
   g_Vertices[0].x = -0.5f;
@@ -163,12 +138,8 @@ namespace VoodooShader
   g_Vertices[3].tu = 1.0f;
   g_Vertices[3].tv = 1.0f;
 
-  /*~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~*/
   void *pVertices;
-  /*~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~*/
   FSQuadVerts->Lock(0, sizeof(FSVert) * 4, &pVertices, 0);
 
   memcpy(pVertices, g_Vertices, sizeof(FSVert) * 4);
@@ -177,39 +148,27 @@ namespace VoodooShader
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  Version Adapter::GetVersion(void)
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   Version version = { VOODOO_META_VERSION_CHAIN(DX89) };
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   return version;
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- bool Adapter::LoadPass(Pass *pass)
+ bool Adapter::LoadPass(IPass *pass)
  {
   assert(pass);
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   CGprogram vertProg = pass->GetProgram(PS_Vertex);
   CGprogram fragProg = pass->GetProgram(PS_Fragment);
   HRESULT hr = S_OK;
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   if (cgIsProgram(vertProg))
   {
    hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
@@ -220,7 +179,7 @@ namespace VoodooShader
       LL_Error,
       VOODOO_DX89_NAME,
       "Error loading vertex program from '%s': %s",
-      pass->GetName().c_str(),
+      pass->ToString().c_str(),
       cgD3D9TranslateHRESULT(hr)
      );
 
@@ -238,7 +197,7 @@ namespace VoodooShader
       LL_Error,
       VOODOO_DX89_NAME,
       "Error loading fragment program from '%s': %s",
-      pass->GetName().c_str(),
+      pass->ToString().c_str(),
       cgD3D9TranslateHRESULT(hr)
      );
 
@@ -246,37 +205,27 @@ namespace VoodooShader
    }
   }
 
-  this->mCore->Log(LL_Info, VOODOO_DX89_NAME, "Successfully loaded programs from '%s'.", pass->GetName().c_str());
+  this->mCore->Log(LL_Info, VOODOO_DX89_NAME, "Successfully loaded programs from '%s'.", pass->ToString().c_str());
 
   return true;
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- void Adapter::BindPass(PassRef pass)
+ void Adapter::BindPass(IPass* pass)
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
   // Both should be loaded and valid (if they exist and prepare was called)
   CGprogram vertProg = pass->GetProgram(PS_Vertex);
   CGprogram fragProg = pass->GetProgram(PS_Fragment);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   if (cgIsProgram(vertProg))
   {
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    HRESULT hr = cgD3D9BindProgram(vertProg);
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    if (!SUCCEEDED(hr))
    {
     this->mCore->Log
@@ -297,18 +246,14 @@ namespace VoodooShader
   }
   else
   {
-   mDevice->SetVertexShader(NULL);
+   mDevice->SetVertexShader(nullptr);
   }
 
   if (cgIsProgram(fragProg))
   {
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    HRESULT hr = cgD3D9BindProgram(fragProg);
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    if (!SUCCEEDED(hr))
    {
     this->mCore->Log
@@ -323,7 +268,7 @@ namespace VoodooShader
     if (cgIsProgram(vertProg))
     {
      cgD3D9UnbindProgram(vertProg);
-     mBoundVP = NULL;
+     mBoundVP = nullptr;
     }
 
     return;
@@ -335,14 +280,12 @@ namespace VoodooShader
   }
   else
   {
-   mDevice->SetPixelShader(NULL);
+   mDevice->SetPixelShader(nullptr);
   }
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  void Adapter::UnbindPass(void)
  {
@@ -356,26 +299,20 @@ namespace VoodooShader
    cgD3D9UnbindProgram(mBoundFP);
   }
 
-  mDevice->SetVertexShader(NULL);
-  mDevice->SetPixelShader(NULL);
+  mDevice->SetVertexShader(nullptr);
+  mDevice->SetPixelShader(nullptr);
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  void Adapter::DrawQuad(Vertex *vertexData)
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   IDirect3DVertexBuffer9 *sourceBuffer;
   UINT sourceOffset, sourceStride;
   DWORD sourceFVF, zEnabled, aEnabled, cullMode;
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   this->mDevice->GetStreamSource(0, &sourceBuffer, &sourceOffset, &sourceStride);
   this->mDevice->GetFVF(&sourceFVF);
   this->mDevice->GetRenderState(D3DRS_ZENABLE, &zEnabled);
@@ -391,12 +328,8 @@ namespace VoodooShader
   if (!vertexData)
   {
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    HRESULT hr = this->mDevice->BeginScene();
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    if (SUCCEEDED(hr))
    {
     this->mDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
@@ -410,12 +343,8 @@ namespace VoodooShader
   else
   {
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    HRESULT hr = this->mDevice->BeginScene();
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    if (SUCCEEDED(hr))
    {
     hr = this->mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertexData, sizeof(FSVert));
@@ -436,19 +365,15 @@ namespace VoodooShader
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- void Adapter::DrawShader(ShaderRef shader)
+ void Adapter::DrawShader(IShader* shader)
  { }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- void Adapter::ApplyParameter(ParameterRef param)
+ void Adapter::ApplyParameter(IParameter* param)
  {
   switch (Converter::ToParameterCategory(param->GetType()))
   {
@@ -473,23 +398,17 @@ namespace VoodooShader
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- bool Adapter::ConnectTexture(ParameterRef param, TextureRef texture)
+ bool Adapter::ConnectTexture(IParameter* param, ITexture* texture)
  {
   if (Converter::ToParameterCategory(param->GetType()) == PC_Sampler)
   {
    param->Set(texture);
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    IDirect3DTexture9 *texObj = (IDirect3DTexture9 *) texture->GetTexture();
    CGparameter texParam = param->GetParameter();
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    cgD3D9SetTextureParameter(texParam, texObj);
    mCore->Log
     (
@@ -509,11 +428,9 @@ namespace VoodooShader
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- TextureRef Adapter::CreateTexture
+ ITexture* Adapter::CreateTexture
 (
  std::string name,
  size_t width,
@@ -524,9 +441,7 @@ namespace VoodooShader
 )
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  IDirect3DTexture9 *tex = NULL;
+  IDirect3DTexture9 *tex = nullptr;
   D3DFORMAT fmt = DX89_Converter::ToD3DFormat(format);
   HRESULT hr = mDevice->CreateTexture
    (
@@ -537,50 +452,34 @@ namespace VoodooShader
     fmt,
     D3DPOOL_DEFAULT,
     &tex,
-    NULL
+    nullptr
    );
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   if (SUCCEEDED(hr))
   {
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   TextureRef texRef = mCore->CreateTexture(name, reinterpret_cast < void * > (tex));
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+   ITexture* texRef = mCore->CreateTexture(name, reinterpret_cast < void * > (tex));
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    return texRef;
   }
   else
   {
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    const char *error = cgD3D9TranslateHRESULT(hr);
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    mCore->Log(LL_Error, VOODOO_DX89_NAME, "Error creating texture %s: %s", name, error);
-   return TextureRef();
+   return ITexture*();
   }
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  void Adapter::HandleError(CGcontext context, CGerror error, void *core)
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  Core *actualCore = reinterpret_cast < Core * > (core);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  ICore *actualCore = reinterpret_cast < ICore * > (core);
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   actualCore->Log("Voodoo DX89: Cg error: %s\n", cgD3D9TranslateCGerror(error));
  }
 }

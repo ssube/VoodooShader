@@ -35,33 +35,31 @@ namespace VoodooShader
  {
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 public:
-  Adapter(_In_ Core *core);
+  Adapter(_In_ ICore *core);
 
   ~ Adapter(void);
 
   const char *GetObjectClass(void);
 
   // IAdapter methods
-  bool LoadPass(Pass *pass);
-  bool UnloadPass(Pass *pass);
+  bool LoadPass(IPass *pass);
+  bool UnloadPass(IPass *pass);
 
-  void BindPass(PassRef pass);
+  void BindPass(IPass* pass);
   void UnbindPass(void);
 
-  void DrawShader(ShaderRef shader);
+  void DrawShader(IShader* shader);
 
   void DrawQuad(Vertex *vertexData);
 
-  void ApplyParameter(ParameterRef param);
+  void ApplyParameter(IParameter* param);
 
-  bool ConnectTexture(ParameterRef param, TextureRef texture);
-  TextureRef CreateTexture(String name, TextureDesc desc);
-  TextureRef LoadTexture(_In_ IImageRef image);
+  bool ConnectTexture(IParameter* param, ITexture* texture);
+  ITexture* CreateTexture(String name, TextureDesc desc);
+  ITexture* LoadTexture(_In_ IImage* image);
 
   void HandleError(CGcontext context, CGerror error, void *core);
 
@@ -71,17 +69,15 @@ public:
    * device to bind (should be a valid device, <em>not</em> an IVoodoo3DDevice9 or
    * any similar wrapped type). @note When this method is called and a device has
    * already been bound, all graphics resources are unloaded and freed. If the new
-   * device is not null, new resources are allocated and filled.
+   * device is not nullptr, new resources are allocated and filled.
    */
   void SetDevice(_In_opt_ LPDIRECT3DDEVICE9 device);
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 private:
-  Core *mCore;
+  ICore *mCore;
   CGcontext mCgContext;
   LPDIRECT3DDEVICE9 mDevice;
 

@@ -111,9 +111,6 @@
     <ClInclude Include="Includes.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Reference.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Xml.hpp">
       <Filter>Headers\Utility</Filter>
     </ClInclude>
@@ -130,6 +127,9 @@
       <Filter>Headers\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Converter.hpp">
+      <Filter>Headers\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Reference.hpp">
       <Filter>Headers\Utility</Filter>
     </ClInclude>
   </ItemGroup>

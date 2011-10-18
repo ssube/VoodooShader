@@ -35,8 +35,8 @@ bool WINAPI GetRunRoot(void);
 bool WINAPI GetLocalRoot(void);
 bool WINAPI GetGlobalRoot(void);
 
-extern VoodooShader::Core * gVoodooCore;
-extern VoodooShader::IAdapterRef gVoodooAdapter;
+extern VoodooShader::ICore * gVoodooCore;
+extern VoodooShader::IAdapter* gVoodooAdapter;
 extern VoodooShader::InitParams gInitParams;
 
 /* @} */

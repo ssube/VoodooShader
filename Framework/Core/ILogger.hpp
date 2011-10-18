@@ -74,7 +74,7 @@ namespace VoodooShader
          * @param append Flag specifying the open mode; if true, any existing log is truncated. 
          * @return Success of the open operation.
          */
-        virtual bool Open(_In_ const String filename, _In_ Bool append) throw() = 0;
+        virtual bool Open(_In_ const IFile * pFile, _In_ Bool append) throw() = 0;
 
         /**
          * Closes the log file, if one is open. 

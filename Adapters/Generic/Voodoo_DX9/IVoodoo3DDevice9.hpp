@@ -6,26 +6,20 @@ class IVoodoo3DDevice9 :
 {
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 private:
  IDirect3DDevice9 *mRealDevice;
  IDirect3D9 *m_d3d;
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 public:
 
  /**
-  ===================================================================================================================
   * We need d3d so that we'd use a pointer to MyDirect3D9 instead of the original IDirect3D9 implementor in functions
   * like GetDirect3D9
-  ===================================================================================================================
   */
  IVoodoo3DDevice9(IDirect3D9 *d3d, IDirect3DDevice9 *device) :
  m_d3d(d3d),
@@ -129,7 +123,7 @@ public:
   // ;
   // mRealDevice->GetTexture(0, &tex);
   // mRealDevice->GetRenderTarget(0, &rts);
-  HRESULT hr = mRealDevice->StretchRect(backbufferSurf, NULL, surface_ThisFrame, NULL, D3DTEXF_NONE);
+  HRESULT hr = mRealDevice->StretchRect(backbufferSurf, nullptr, surface_ThisFrame, nullptr, D3DTEXF_NONE);
   if (FAILED(hr))
   {
    VoodooLogger->Log("Voodoo DX9: Failed to stretch backbuffer to scratch texture.\n");
@@ -139,12 +133,12 @@ public:
   {
    VoodooLogger->Log("Voodoo DX9: Failed to set render target.\n");
   }
-  VoodooShader::TechniqueRef tech = testShader->GetDefaultTechnique();
-  VoodooShader::PassRef pass = tech->GetPass(0);
+  VoodooShader::ITechnique* tech = testShader->GetDefaultTechnique();
+  VoodooShader::IPass* pass = tech->GetPass(0);
 
   VoodooDX9->BindPass(pass);
 
-  VoodooDX9->DrawQuad(NULL);
+  VoodooDX9->DrawQuad(nullptr);
 
   VoodooDX9->UnbindPass();
 

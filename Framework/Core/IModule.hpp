@@ -90,7 +90,7 @@ namespace VoodooShader
          * @note When the module is loaded, if an absolute path is provided, the module's directory is used in the search
          *     path for required DLLs. 
          */
-        virtual bool LoadFile(_In_ const String filename);
+        virtual bool LoadFile(_In_ const IFile * pFile);
 
         /**
          * Tests to see if a class exists in the list provided by all loaded modules. 

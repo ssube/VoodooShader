@@ -23,18 +23,18 @@
 class IVoodoo3D9;
 class IVoodoo3DDevice9;
 
-extern VoodooShader::Core * VoodooCore;
+extern VoodooShader::ICore * VoodooCore;
 extern VoodooShader::Adapter * VoodooDX9;
 
 extern IVoodoo3D9 *VoodooObject;
 extern IVoodoo3DDevice9 *VoodooDevice;
 
-extern VoodooShader::ShaderRef testShader;
+extern VoodooShader::IShader* testShader;
 
 extern IDirect3DSurface9 *backbufferSurf;
 
 extern IDirect3DSurface9 *surface_ThisFrame;
-extern VoodooShader::TextureRef texture_ThisFrame;
+extern VoodooShader::ITexture* texture_ThisFrame;
 
 typedef IDirect3D9 * (__stdcall * D3DFunc9) (UINT);
 #endif /* VOODOO_DX9_MODULE_HPP */

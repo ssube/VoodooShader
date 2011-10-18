@@ -78,7 +78,7 @@ namespace VoodooShader
             virtual ICore *GetCore(void);
             virtual String ToString(void);
 
-            virtual bool Open(_In_ String Filename, _In_ bool Append);
+            virtual bool Open(_In_ IFile * pFile, _In_ bool Append);
             virtual void Close(void);
             virtual void Flush(void);
             virtual void SetLogLevel(_In_ LogLevel level);

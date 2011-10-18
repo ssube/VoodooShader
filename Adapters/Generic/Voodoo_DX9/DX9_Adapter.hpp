@@ -15,26 +15,27 @@ namespace VoodooShader
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_TEX1)
 
- LPDIRECT3DVERTEXBUFFER9 FSQuadVerts = NULL;
+ LPDIRECT3DVERTEXBUFFER9 FSQuadVerts = nullptr;
 
-class VOODOO_API_DX9 Adapter : VoodooShader::Adapter
+class VOODOO_API_DX9 Adapter 
+    : VoodooShader::IAdapter
  {
 public:
-  Adapter(Core *core, IDirect3DDevice9 *device);
+  Adapter(ICore *core, IDirect3DDevice9 *device);
 
   Version GetVersion(void);
 
-  bool LoadPass(Pass *pass);
-  void BindPass(PassRef shader);
+  bool LoadPass(IPass *pass);
+  void BindPass(IPass* shader);
   void UnbindPass(void);
 
   void DrawQuad(Vertex *vertexData);
-  void DrawShader(ShaderRef shader);
+  void DrawShader(IShader* shader);
 
-  void ApplyParameter(ParameterRef param);
+  void ApplyParameter(IParameter* param);
 
-  bool ConnectTexture(ParameterRef param, TextureRef texture);
-  TextureRef CreateTexture
+  bool ConnectTexture(IParameter* param, ITexture* texture);
+  ITexture* CreateTexture
      (
       std::string name,
       size_t width,
@@ -47,12 +48,10 @@ public:
   void HandleError(CGcontext context, CGerror error, void *core);
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 private:
-  Core *mCore;
+  ICore *mCore;
   IDirect3DDevice9 *mDevice;
 
   CGprogram mBoundVP;

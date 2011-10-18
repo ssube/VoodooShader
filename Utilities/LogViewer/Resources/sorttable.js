@@ -48,7 +48,7 @@ sorttable = {
       table.insertBefore(the,table.firstChild);
     }
     // Safari doesn't support table.tHead, sigh
-    if (table.tHead == null) table.tHead = table.getElementsByTagName('thead')[0];
+    if (table.tHead == nullptr) table.tHead = table.getElementsByTagName('thead')[0];
     
     if (table.tHead.rows.length != 1) return; // can't cope with two header rows
     
@@ -63,7 +63,7 @@ sorttable = {
       }
     }
     if (sortbottomrows) {
-      if (table.tFoot == null) {
+      if (table.tFoot == nullptr) {
         // table doesn't have a tfoot. Create one.
         tfo = document.createElement('tfoot');
         table.appendChild(tfo);
@@ -206,7 +206,7 @@ sorttable = {
     hasInputs = (typeof node.getElementsByTagName == 'function') &&
                  node.getElementsByTagName('input').length;
     
-    if (node.getAttribute("sorttable_customkey") != null) {
+    if (node.getAttribute("sorttable_customkey") != nullptr) {
       return node.getAttribute("sorttable_customkey");
     }
     else if (typeof node.textContent != 'undefined' && !hasInputs) {

@@ -5,7 +5,7 @@
   /// <summary>
   /// Required designer variable.
   /// </summary>
-  private System.ComponentModel.IContainer components = null;
+  private System.ComponentModel.IContainer components = nullptr;
 
   /// <summary>
   /// Clean up any resources being used.
@@ -13,7 +13,7 @@
   /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
   protected override void Dispose(bool disposing)
   {
-   if (disposing && (components != null))
+   if (disposing && (components != nullptr))
    {
     components.Dispose();
    }

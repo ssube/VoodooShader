@@ -7,10 +7,10 @@
 
 HRESULT DefaultErrorCode = D3DERR_INVALIDCALL;
 
-VoodooShader::Core * VoodooCore = NULL;
-VoodooShader::ILoggerRef VoodooLogger = NULL;
-VoodooShader::IHookManager * VoodooHooker = NULL;
-VoodooShader::Gem::Adapter * VoodooGem = NULL;
+VoodooShader::ICore * VoodooCore = nullptr;
+VoodooShader::ILogger* VoodooLogger = nullptr;
+VoodooShader::IHookManager * VoodooHooker = nullptr;
+VoodooShader::Gem::Adapter * VoodooGem = nullptr;
 
 // ! @todo Shift most of these globals, except the core and adapter, into the
 // adapter (as members). ! This may work well with functions to set some of the
@@ -18,8 +18,8 @@ VoodooShader::Gem::Adapter * VoodooGem = NULL;
 // rethinking of parts of the system.
 D3DCAPS8 d3d8Caps;
 
-IVoodoo3D8 *VoodooObject = NULL;
-IVoodoo3DDevice8 *VoodooDevice = NULL;
+IVoodoo3D8 *VoodooObject = nullptr;
+IVoodoo3DDevice8 *VoodooDevice = nullptr;
 
 TextureTuple gBackbuffer;
 TextureTuple gScratch;
@@ -29,11 +29,11 @@ TextureTuple gLastShader;
 TextureTuple gLastPass;
 std::map<VoodooShader::String, TextureTuple> gTextures;
 
-VoodooShader::ParameterRef gMatrixView, gMatrixProj, gMatrixWorld;
+VoodooShader::IParameter* gMatrixView, gMatrixProj, gMatrixWorld;
 
 D3DPRESENT_PARAMETERS gParams;
 
-VoodooShader::ShaderRef testShader;
+VoodooShader::IShader* testShader;
 VoodooShader::String gLastFilename;
 bool gNextTexture = false;
 
@@ -43,26 +43,18 @@ namespace VoodooShader
 {
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  Version API_ModuleVersion(void)
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   Version moduleVersion = VOODOO_META_VERSION_STRUCT(GEM);
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   return moduleVersion;
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  int API_ClassCount(void)
  {
@@ -70,9 +62,7 @@ namespace VoodooShader
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
  const char *API_ClassInfo(_In_ int number)
  {
@@ -82,16 +72,14 @@ namespace VoodooShader
   }
   else
   {
-   return NULL;
+   return nullptr;
   }
  }
 
  /**
-  ===================================================================================================================
   *
-  ===================================================================================================================
   */
- IObject *API_ClassCreate(_In_ int number, _In_ Core *core)
+ IObject *API_ClassCreate(_In_ int number, _In_ ICore *core)
  {
   if (number == 0)
   {
@@ -99,16 +87,14 @@ namespace VoodooShader
   }
   else
   {
-   return NULL;
+   return nullptr;
   }
  }
 }
 }
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 void *WINAPI Gem_D3D8Create(UINT sdkVersion)
 {
@@ -119,51 +105,35 @@ void *WINAPI Gem_D3D8Create(UINT sdkVersion)
  // return fakeObject;
  VoodooLogger->Log(LL_Info, VOODOO_GEM_NAME, "Direct3DCreate8 called, SDK version: %u.", sdkVersion);
 
- /*~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~*/
 
  // Load the real d3d8 dll and get device caps
  char Path[MAX_PATH];
- /*~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~*/
  GetSystemDirectoryA(Path, MAX_PATH);
  strcat_s(Path, MAX_PATH, "\\d3d8.dll");
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  HMODULE d3ddll = LoadLibraryA(Path);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- if (d3ddll == NULL)
+ if (d3ddll == nullptr)
  {
   VoodooLogger->Log(LL_Error, VOODOO_GEM_NAME, "Could not load D3D8 library.");
 
-  return NULL;
+  return nullptr;
  }
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  typedef IDirect3D8 * (__stdcall * D3DFunc8) (UINT);
  D3DFunc8 d3d8func = (D3DFunc8) GetProcAddress(d3ddll, "Direct3DCreate8");
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- if (d3d8func == NULL)
+ if (d3d8func == nullptr)
  {
   VoodooLogger->Log(LL_Error, VOODOO_GEM_NAME, "Could not find D3D8 create true func.");
 
   return 0;
  }
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  IDirect3D8 *TempObject = (d3d8func) (sdkVersion);
  HRESULT hr = TempObject->GetDeviceCaps(0, D3DDEVTYPE_HAL, &d3d8Caps);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  if (hr != D3D_OK)
  {
   VoodooLogger->Log(LL_Error, VOODOO_GEM_NAME, "Could not get D3D8 caps.");
@@ -176,16 +146,12 @@ void *WINAPI Gem_D3D8Create(UINT sdkVersion)
   FreeLibrary(d3ddll);
  }
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
  // Call DX9 to create a real device with the latest version
  IDirect3D9 *object = Direct3DCreate9(D3D_SDK_VERSION);
  // Turn it into a FakeObject and return it.
  IVoodoo3D8 *vObj = new IVoodoo3D8(object);
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  VoodooObject = vObj;
  return vObj;
 }
@@ -193,9 +159,7 @@ void *WINAPI Gem_D3D8Create(UINT sdkVersion)
 std::tr1::regex imageformat(".*\\.(dds|tga|bmp|targa)");
 
 /**
- =======================================================================================================================
  *
- =======================================================================================================================
  */
 __out HANDLE WINAPI Gem_CreateFileA
 (
@@ -209,8 +173,6 @@ __out HANDLE WINAPI Gem_CreateFileA
 )
 {
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
  // StringCchCopyA(createFileName, MAX_PATH, lpFileName);
  HANDLE file = CreateFileA
@@ -223,9 +185,7 @@ __out HANDLE WINAPI Gem_CreateFileA
    dwFlagsAndAttributes,
    hTemplateFile
   );
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
- /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  gLastFilename = lpFileName;
 
  try
@@ -241,12 +201,8 @@ __out HANDLE WINAPI Gem_CreateFileA
  if (VoodooCore)
  {
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   LogLevel ll = (file == INVALID_HANDLE_VALUE) ? LL_Warning : LL_Info;
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   VoodooLogger->Log
    (
     ll,

@@ -36,32 +36,28 @@ namespace VoodooShader
 
  const char *API_ClassInfo(_In_ int number);
 
- IObject *API_ClassCreate(_In_ int number, _In_ Core *core);
+ IObject *API_ClassCreate(_In_ int number, _In_ ICore *core);
 
  /**
-  ===================================================================================================================
   * Handles function-level hooks, redirecting function calls into new locations.
-  ===================================================================================================================
   */
  class HookManager :
   public VoodooShader::IHookManager
  {
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 public:
 
   /* Creates a new HookManager bound to the current process. */
-  HookManager(_In_ Core *core);
+  HookManager(_In_ ICore *core);
 
   /* Removes all hooks and cleans up the HookManager. */
   virtual ~HookManager(void);
 
-  virtual String GetName(void);
-  virtual Core *GetCore(void);
+  virtual String ToString(void);
+  virtual ICore *GetCore(void);
 
   /**
    * Install a hook at the specified function. @param name The name for the hook.
@@ -89,12 +85,10 @@ public:
   void RemoveAll(void);
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 private:
-  Core *m_Core;
+  ICore *m_Core;
   HookMap m_Hooks;
   unsigned long *m_ThreadIDs;
   unsigned long m_ThreadCount;

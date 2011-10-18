@@ -23,8 +23,8 @@
 
 namespace VoodooShader
 {
-    class IFileSystem :
-        public IObject
+    class IFileSystem 
+        : public IObject
     {
     public:
         /**
@@ -60,14 +60,32 @@ namespace VoodooShader
          */
         virtual ICore * GetCore(void) throw() = 0;
 
+        /**
+         * Adds a directory to this file system's search path.
+         * 
+         * @param path The path to add (may include variables, will be parsed, may be absolute or relative).
+         * 
+         * @note This does not check for duplicates, so care should be taken not to add the same directory repeatedly.
+         *     Directory search order is important for file priority.
+         */
         virtual void AddDirectory(_In_ String path) = 0;
+
+        /**
+         * Removes a directory from the search path, following the same rules as adding (adding a string then removing the
+         * same string will always work).
+         * 
+         * @param path The path to remove.
+         */
         virtual void RemoveDirectory(_In_ String path) = 0;
 
-        virtual IFile * FindFile(_In_ String name) = 0;
+        /**
+         * 
+         */
+        virtual IFile * FindFile(_In_ String name, Bool mustExist = true) = 0;
     };
 
-    class IFile :
-        public IObject
+    class IFile 
+        : public IObject
     {
     public:
         ~IFile(void) throw() { };
@@ -91,30 +109,30 @@ namespace VoodooShader
          * 
          * @return The name.
          */
-        virtual String ToString(void) throw() = 0;
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw() = 0;
+        virtual ICore * GetCore(void) const throw() = 0;
 
-        virtual String GetPath(void) = 0;
+        virtual String GetPath(void) const throw() = 0;
 
-        virtual Bool Open(_In_ FileOpenMode mode) = 0;
+        virtual Bool Open(_In_ FileOpenMode mode) throw() = 0;
 
-        virtual IImage * OpenImage(void) = 0;
+        virtual Bool Close(void) throw() = 0;
 
-        virtual Bool Close(void) = 0;
+        virtual Int32 Read(_In_ Int32 size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
 
-        virtual Int32 Read(_In_ Int32 count, _In_opt_count_(count) void * pBuffer) = 0;
+        virtual Int32 Write(_In_ Int32 size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
 
-        virtual Bool Write(_In_ Int32 count, _In_opt_count_(count) void * pBuffer) = 0;
+        virtual IImage * OpenImage(void) const throw() = 0;
     };
 
-    class IImage :
-        public IObject
+    class IImage 
+        : public IObject
     {
     public:
         ~IImage(void) throw() { };
@@ -138,19 +156,19 @@ namespace VoodooShader
          * 
          * @return The name.
          */
-        virtual String ToString(void) throw() = 0;
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw() = 0;
+        virtual ICore * GetCore(void) const throw() = 0;
 
-        virtual String GetPath(void) = 0;
+        virtual String GetPath(void) const throw() = 0;
 
-        virtual TextureDesc GetDesc(void) = 0;
+        virtual TextureDesc GetDesc(void) const throw() = 0;
 
-        virtual Int32 GetData(_In_ TextureRegion desc, _In_opt_ void * pBuffer) = 0;
+        virtual Int32 GetData(_In_ TextureRegion desc, _In_ Int32 size, _In_opt_count_(size) void * const pBuffer) const throw() = 0;
     };
 }

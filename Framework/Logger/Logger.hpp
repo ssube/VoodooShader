@@ -44,23 +44,19 @@ namespace VoodooShader
 
  const char *VOODOO_CALL API_ClassInfo(_In_ int number);
 
- IObject * VOODOO_CALL API_ClassCreate(_In_ int number, _In_ Core * core);
+ IObject * VOODOO_CALL API_ClassCreate(_In_ int number, _In_ ICore * core);
 
  /**
-  ===================================================================================================================
   * Xml logger class, writes neatly formatted logs for use with the log viewer. Supports all Voodoo ILogger features and
   * debug logging (with no buffer). @warning If the logger isn't destroyed properly, the main tag of the log file won't
   * be closed and the log won't be valid.
-  ===================================================================================================================
   */
  class XmlLogger :
   public VoodooShader::ILogger
  {
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 public:
 
@@ -68,13 +64,13 @@ public:
    * Default constructor, opens a log file with the given name and mode. @param core
    * The core to bind this logger to.
    */
-  XmlLogger(_In_ Core *core);
+  XmlLogger(_In_ ICore *core);
 
   /* Default destructor, flushes and closes the log file (if open). */
   ~ XmlLogger(void);
 
-  virtual String GetName(void);
-  virtual Core *GetCore(void);
+  virtual String ToString(void);
+  virtual ICore *GetCore(void);
 
   /**
    * Opens a file for use by this Logger. @param filename The name of the file to
@@ -82,7 +78,7 @@ public:
    * the open mode;
    * if true, any existing log is truncated. @return Success of the open operation.
    */
-  virtual bool Open(_In_ String filename, _In_ bool append);
+  virtual bool Open(_In_ const IFile * pFile, _In_ bool append);
 
   /* Closes the log file, if one is open. */
   virtual void Close(void);
@@ -138,9 +134,7 @@ public:
   virtual LogFlags GetFlags(void);
 
 /**
- -----------------------------------------------------------------------------------------------------------------------
  *
- -----------------------------------------------------------------------------------------------------------------------
  */
 private:
 
@@ -167,7 +161,7 @@ private:
    */
   String LogTicks(void);
 
-  Core *m_Core;
+  ICore *m_Core;
   LogLevel m_LogLevel;
   std::fstream m_LogFile;
   tm *m_LocalTime;

@@ -137,7 +137,7 @@ namespace VoodooShader
          * 
          * @return A reference to the config.
          */
-        virtual XmlDocument GetConfig(void);
+        virtual Xml::Document * GetConfig(void);
 
         /**
          * Retrieve the Cg context associated with this ICore. 
@@ -157,7 +157,7 @@ namespace VoodooShader
          * @return False if a context is already bound, true if no context is bound or a context is being 
          *     unbound.
          */
-        virtual Bool SetCgContext(_In_opt_ CGcontext pContext);
+        virtual Bool SetCgContext(_In_opt_ CGcontext const pContext);
 
         /**
          * Loads and compiles an effect from file, using the current filesystem and search paths. 
@@ -166,7 +166,7 @@ namespace VoodooShader
          * @param ppArgs Optional arguments providing compiler directives, usually shader model specific 
          *     definitions or preprocessor defines.
          */
-        virtual IShader * CreateShader(_In_ String filename, _In_opt_ const char ** ppArgs);
+        virtual IShader * CreateShader(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs);
 
         /**
          * Creates a global virtual parameter. This parameter exists in the Cg runtime, but is not a part of
@@ -183,7 +183,7 @@ namespace VoodooShader
          * @note This function is the only way to create global parameters. You can then attach effect 
          *     parameters to the global and any value changes will propagate down.
          */
-        virtual IParameter * CreateParameter(_In_ String name, _In_ ParameterType type);
+        virtual IParameter * CreateParameter(_In_ const String & name, _In_ ParameterType type);
 
         /**
          * Registers a texture with this ICore. 
@@ -197,7 +197,7 @@ namespace VoodooShader
          * @note This method calls IAdapter::CreateTexture() to handle the actual creation, then registers 
          *     the returned texture with the core and sets things up properly.
          */
-        virtual ITexture * CreateTexture(_In_ String name, _In_ const TextureDesc * pDesc);
+        virtual ITexture * CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc);
 
         /**
          * Retrieve a parameter by name. 
@@ -209,7 +209,7 @@ namespace VoodooShader
          * @note If a parameter with a matching name is found, the type will be checked. If @arg Type is
          *     PT_Unknown, any type parameter will be returned (only the name will be tested). 
          */
-        virtual IParameter * GetParameter(_In_ String name, _In_ ParameterType type);
+        virtual IParameter * GetParameter(_In_ const String & name, _In_ ParameterType type);
 
         /**
          * Retrieves a texture from the ICore's texture map by name. 
@@ -217,7 +217,7 @@ namespace VoodooShader
          * @param Name The texture name. 
          * @return A reference to the Texture if it exists, empty otherwise.
          */
-        virtual ITexture * GetTexture(_In_ String name);
+        virtual ITexture * GetTexture(_In_ const String & name);
 
         /**
          * Removes a virtual parameter from ICore. If all references are released, the parameter is
@@ -226,7 +226,7 @@ namespace VoodooShader
          * @param Name The name of the parameter.
          * @return True if the parameter was found and removed, false if not found.
          */
-        virtual Bool RemoveParameter(_In_ String name);
+        virtual Bool RemoveParameter(_In_ const String & name);
 
         /**
          * Removes a texture from the ICore's texture map and unbinds it from any
@@ -235,18 +235,18 @@ namespace VoodooShader
          * @param Name The name of texture to be removed.
          * @return True if the texture was found and removed, false if not.
          */
-        virtual Bool RemoveTexture(_In_ String name);
+        virtual Bool RemoveTexture(_In_ const String & name);
 
         /**
          * Retrieves a texture from the ICore's texture map by stage. Each specialized texture stage 
          * may have a single texture bound to it for use by the shader linker. 
          * 
-         * @param Stage The stage whose bound texture should be returned.
+         * @param stage The stage whose bound texture should be returned.
          * @return A reference to the Texture if one is bound, empty otherwise. 
          * 
          * @sa To bind a texture to one of the special functions, use ICore::SetStageTexture().
          */
-        virtual ITexture * GetStageTexture(_In_ const TextureStage atage);
+        virtual ITexture * GetStageTexture(_In_ TextureStage stage);
 
         /**
          * Binds a texture to a specialized stage for the shader linker. 
@@ -254,7 +254,7 @@ namespace VoodooShader
          * @param Stage The texture stage to set.
          * @param pTexture The texture to bind. 
          */
-        virtual void SetStageTexture(_In_ const TextureStage stage, _In_ ITexture * const pTexture);
+        virtual void SetStageTexture(_In_ TextureStage stage, _In_ const ITexture * const pTexture);
 
     private:
         friend ICore * CreateCore(_In_ const InitParams * const pInitParams, _In_ Bool catchErrors);
@@ -288,7 +288,7 @@ namespace VoodooShader
         Int32 m_Refs;
 
         /** Config file. */
-        XmlDocument m_ConfigFile;
+        Xml::Document * m_ConfigFile;
 
         /** Cg context used by this pCore. */
         CGcontext m_CgContext;

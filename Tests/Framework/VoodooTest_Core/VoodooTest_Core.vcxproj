@@ -83,6 +83,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CoreTest.cpp" />
+    <ClCompile Include="DX9Test.cpp" />
+    <ClCompile Include="OGLTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
