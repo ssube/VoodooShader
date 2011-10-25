@@ -20,7 +20,6 @@
 #pragma once
 
 #include "Includes.hpp"
-#include "Reference.hpp"
 
 #include "IObject.hpp"
 
@@ -50,7 +49,7 @@ namespace VoodooShader
      * @throws std::exception in case of errors, if CatchErrors is false.
      */
     _Check_return_ 
-    ICore * CreateCore(_In_ const InitParams * const pInitParams, _In_ Bool catchErrors = true);
+    ICore * CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
 
     /**
      * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
@@ -74,70 +73,70 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw();
+        virtual int32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw();
+        virtual int32_t Release(void) const throw();
 
         /**
          * Get the name of this object.
          * 
          * @return The name.
          */
-        virtual String ToString(void) throw();
+        virtual String ToString(void) const throw();
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw();
+        virtual ICore * GetCore(void) const throw();
 
         /**
          * Retrieves this core's variable parser. 
          * 
          * @return A reference to the core's parser (always valid).
          */
-        virtual IParser * GetParser(void);
+        virtual IParser * GetParser(void) const;
 
         /**
          * Retrieves this core's IHookManager implementation. 
          * 
          * @return A reference to the hook manager instance (always valid).
          */
-        virtual IHookManager * GetHookManager(void);
+        virtual IHookManager * GetHookManager(void) const;
 
         /**
          * Retrieves this core's IFileSystem implementation. 
          * 
          * @return A shared pointer to the filesystem instance (always valid).
          */
-        virtual IFileSystem * GetFileSystem(void);
+        virtual IFileSystem * GetFileSystem(void) const;
 
         /**
          * Retrieve the IAdapter attached to this ICore. 
          * 
          * @return A reference to the adapter instance (always valid).
          */
-        virtual IAdapter * GetAdapter(void);
+        virtual IAdapter * GetAdapter(void) const;
 
         /**
          * Retrieve the ILogger attached to this ICore. 
          * 
          * @return A reference to the logger instance (always valid).
          */
-        virtual ILogger * GetLogger(void);
+        virtual ILogger * GetLogger(void) const;
 
         /**
          * Retrieve the Xml config document for this ICore. 
          * 
          * @return A reference to the config.
          */
-        virtual Xml::Document * GetConfig(void);
+        virtual Xml::Document * GetConfig(void) const;
 
         /**
          * Retrieve the Cg context associated with this ICore. 
@@ -148,7 +147,7 @@ namespace VoodooShader
          *     @ref Shader shaders and most other graphics resources. 
          */
         _Check_return_ 
-        virtual CGcontext GetCgContext(void);
+        virtual CGcontext GetCgContext(void) const;
 
         /**
          * Sets the Cg context attached to the core. 
@@ -157,7 +156,7 @@ namespace VoodooShader
          * @return False if a context is already bound, true if no context is bound or a context is being 
          *     unbound.
          */
-        virtual Bool SetCgContext(_In_opt_ CGcontext const pContext);
+        virtual bool SetCgContext(_In_opt_ CGcontext const pContext);
 
         /**
          * Loads and compiles an effect from file, using the current filesystem and search paths. 
@@ -209,7 +208,7 @@ namespace VoodooShader
          * @note If a parameter with a matching name is found, the type will be checked. If @arg Type is
          *     PT_Unknown, any type parameter will be returned (only the name will be tested). 
          */
-        virtual IParameter * GetParameter(_In_ const String & name, _In_ ParameterType type);
+        virtual IParameter * GetParameter(_In_ const String & name, _In_ ParameterType type) const;
 
         /**
          * Retrieves a texture from the ICore's texture map by name. 
@@ -217,7 +216,7 @@ namespace VoodooShader
          * @param Name The texture name. 
          * @return A reference to the Texture if it exists, empty otherwise.
          */
-        virtual ITexture * GetTexture(_In_ const String & name);
+        virtual ITexture * GetTexture(_In_ const String & name) const;
 
         /**
          * Removes a virtual parameter from ICore. If all references are released, the parameter is
@@ -226,7 +225,7 @@ namespace VoodooShader
          * @param Name The name of the parameter.
          * @return True if the parameter was found and removed, false if not found.
          */
-        virtual Bool RemoveParameter(_In_ const String & name);
+        virtual bool RemoveParameter(_In_ const String & name);
 
         /**
          * Removes a texture from the ICore's texture map and unbinds it from any
@@ -235,7 +234,7 @@ namespace VoodooShader
          * @param Name The name of texture to be removed.
          * @return True if the texture was found and removed, false if not.
          */
-        virtual Bool RemoveTexture(_In_ const String & name);
+        virtual bool RemoveTexture(_In_ const String & name);
 
         /**
          * Retrieves a texture from the ICore's texture map by stage. Each specialized texture stage 
@@ -246,7 +245,7 @@ namespace VoodooShader
          * 
          * @sa To bind a texture to one of the special functions, use ICore::SetStageTexture().
          */
-        virtual ITexture * GetStageTexture(_In_ TextureStage stage);
+        virtual ITexture * GetStageTexture(_In_ TextureStage stage) const;
 
         /**
          * Binds a texture to a specialized stage for the shader linker. 
@@ -257,7 +256,7 @@ namespace VoodooShader
         virtual void SetStageTexture(_In_ TextureStage stage, _In_ const ITexture * const pTexture);
 
     private:
-        friend ICore * CreateCore(_In_ const InitParams * const pInitParams, _In_ Bool catchErrors);
+        friend ICore * CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors);
 
 #ifndef VOODOO_NO_CG
         friend void Voodoo_CgErrorHandler_Func(CGcontext pContext, CGerror error, void * pCore);
@@ -282,10 +281,10 @@ namespace VoodooShader
          * @param context The Cg context the error occurred in. 
          * @param error The error code.
          */
-        void CgErrorHandler(_In_ CGcontext pContext, _In_ int error);
+        void CgErrorHandler(_In_ CGcontext pContext, _In_ int error) const;
 
     private:
-        Int32 m_Refs;
+        mutable int32_t m_Refs;
 
         /** Config file. */
         Xml::Document * m_ConfigFile;

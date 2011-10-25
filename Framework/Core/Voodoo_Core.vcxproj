@@ -261,7 +261,6 @@
     <ClInclude Include="IParameter.hpp" />
     <ClInclude Include="IParser.hpp" />
     <ClInclude Include="IPass.hpp" />
-    <ClInclude Include="Reference.hpp" />
     <ClInclude Include="Regex.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="IShader.hpp" />

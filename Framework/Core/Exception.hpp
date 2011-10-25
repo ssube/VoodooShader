@@ -16,7 +16,7 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
+ */
 
 #pragma once
 

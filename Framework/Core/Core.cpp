@@ -20,6 +20,7 @@
 
 #include "Converter.hpp"
 #include "Exception.hpp"
+#include "Version.hpp"
 #include "Xml.hpp"
 
 #include "IAdapter.hpp"
@@ -44,7 +45,7 @@ namespace VoodooShader
         }
     }
 
-    ICore * CreateCore(_In_ const InitParams * const pInitParams, Bool CatchErrors)
+    ICore * CreateCore(_In_ const InitParams * const pInitParams, bool CatchErrors)
     {
         ICore *pCore = nullptr;
 
@@ -92,9 +93,9 @@ namespace VoodooShader
         m_Parser = new IParser(this);
 
         // Load variables, built-in first
-        m_Parser->Add("globalroot", pInitParams->GlobalRoot + "\\", VT_System);
-        m_Parser->Add("localroot", pInitParams->LocalRoot + "\\", VT_System);
-        m_Parser->Add("runroot", pInitParams->RunRoot + "\\", VT_System);
+        m_Parser->Add("globalroot", pInitParams->GlobalRoot, VT_System);
+        m_Parser->Add("localroot", pInitParams->LocalRoot, VT_System);
+        m_Parser->Add("runroot", pInitParams->RunRoot, VT_System);
         m_Parser->Add("target", pInitParams->Target, VT_System);
         m_Parser->Add("loader", pInitParams->Loader, VT_System);
 
@@ -108,7 +109,7 @@ namespace VoodooShader
 
             // Try loading the config file from each major location
             String ConfigPath = m_Parser->Parse("$(runroot)$(config)");
-            Bool result = m_ConfigFile->LoadFile(ConfigPath);
+            bool result = m_ConfigFile->LoadFile(ConfigPath);
 
             if (!result)
             {
@@ -131,8 +132,8 @@ namespace VoodooShader
             }
 
             // Start setting things up
-            Xml::Node * configRoot = m_ConfigFile->GetRoot();
-            Xml::Node * coreNode = configRoot->GetSingleNode("/VoodooConfig/ICore");
+            Xml::Node configRoot = m_ConfigFile->GetRoot();
+            Xml::Node coreNode = configRoot.GetSingleNode("/VoodooConfig/ICore");
             if (!coreNode)
             {
                 throw std::exception("Could not find ICore node.");
@@ -163,7 +164,7 @@ namespace VoodooShader
             {
                 xpath_query xpq_getPluginPaths("/VoodooConfig/Plugins/Path");
                 xpath_query xpq_getFilter("./@filter");
-                xpath_node_set nodes = xpq_getPluginPaths.evaluate_node_set(*config);
+                xpath_node_set nodes = xpq_getPluginPaths.EvaluateNodeSet(*config);
                 xpath_node_set::const_iterator iter = nodes.begin();
 
                 while (iter != nodes.end())
@@ -217,7 +218,7 @@ namespace VoodooShader
             m_Logger->SetLogLevel(logLevel);
 
             // Log extended build information
-            m_Logger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from '%s'.", Config.c_str());
+            m_Logger->Log(LL_Info, VOODOO_CORE_NAME, "Config loaded from '%s'.", Config.GetData());
             m_Logger->Log(LL_Info, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
             Version vfver = VOODOO_META_VERSION_STRUCT(CORE);
@@ -279,29 +280,54 @@ namespace VoodooShader
 #endif
     }
 
+    int32_t ICore::AddRef()
+    {
+        return ++m_Refs;
+    }
+
+    int32_t ICore::Release()
+    {
+        int32_t count = --m_Refs;
+        if (count == 0)
+        {
+            delete this;
+        }
+        return count;
+    }
+
+    String ICore::ToString()
+    {
+        return "Core";
+    }
+
+    ICore * ICore::GetCore()
+    {
+        return nullptr;
+    }
+
     IParser* ICore::GetParser(void)
     {
-        return m_Parser;
+        return m_Parser.get();
     }
 
     IHookManager* ICore::GetHookManager(void)
     {
-        return m_HookManager;
+        return m_HookManager.get();
     }
 
     IFileSystem* ICore::GetFileSystem(void)
     {
-        return m_FileSystem;
+        return m_FileSystem.get();
     }
 
     IAdapter* ICore::GetAdapter(void)
     {
-        return m_Adapter;
+        return m_Adapter.get();
     }
 
     ILogger* ICore::GetLogger(void)
     {
-        return m_Logger;
+        return m_Logger.get();
     }
 
     XmlDocument ICore::GetConfig(void)
@@ -356,7 +382,7 @@ namespace VoodooShader
         IShaderRef shader = IShader(this, fullpath, ppArgs);
 
         m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Created shader from %s, returning shared pointer to %p.",
-            fullpath.c_str(), shader.get());
+            fullpath.GetData(), shader.get());
 
         this->m_Shaders.push_back(shader);
 
@@ -378,9 +404,12 @@ namespace VoodooShader
 
             m_Parameters[Name] = parameter;
 
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, 
-                "Created parameter named %s with type %s, returning shared pointer to %p.", Name.c_str(),
-                Converter::ToString(Type), parameter);
+            m_Logger->Log
+            (
+                LL_Debug, VOODOO_CORE_NAME, 
+                "Created parameter named %s with type %s, returning shared pointer to %p.", Name.GetData(),
+                Converter::ToString(Type), parameter
+            );
 
             return parameter;
         }
@@ -402,7 +431,7 @@ namespace VoodooShader
             this->m_Textures[Name] = texture;
 
             m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s, returning shared pointer to %p.",
-                Name.c_str(), texture);
+                Name.GetData(), texture);
 
             return texture;
         }
@@ -415,7 +444,7 @@ namespace VoodooShader
         if (parameter != this->m_Parameters.end())
         {
             m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got parameter %s, returning shared pointer to %p.",
-                Name.c_str(), parameter->second);
+                Name.GetData(), parameter->second);
 
             if (Type == PT_Unknown)
             {
@@ -432,7 +461,7 @@ namespace VoodooShader
         }
         else
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.c_str());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.GetData());
             return nullptr;
         }
     }
@@ -443,14 +472,14 @@ namespace VoodooShader
 
         if (textureEntry != this->m_Textures.end())
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", Name.c_str(),
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", Name.GetData(),
                 textureEntry->second);
 
             return textureEntry->second;
         }
         else
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.c_str());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.GetData());
 
             return nullptr;
         }
@@ -462,14 +491,14 @@ namespace VoodooShader
 
         if (parameter != this->m_Parameters.end())
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got parameter %s, erasing.", Name.c_str());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got parameter %s, erasing.", Name.GetData());
 
             this->m_Parameters.erase(parameter);
             return true;
         }
         else
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.c_str());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.GetData());
 
             return false;
         }
@@ -481,7 +510,7 @@ namespace VoodooShader
 
         if (texture != this->m_Textures.end())
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", Name.c_str(),
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", Name.GetData(),
                 texture->second);
 
             this->m_Textures.erase(texture);
@@ -489,7 +518,7 @@ namespace VoodooShader
         }
         else
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.c_str());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.GetData());
             return false;
         }
     }

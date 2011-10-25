@@ -21,6 +21,10 @@
 
 #include "Includes.hpp"
 
+#include "String.hpp"
+
+#include "IObject.hpp"
+
 namespace VoodooShader
 {
     /**
@@ -49,28 +53,28 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw();
+        virtual int32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw();
+        virtual int32_t Release(void) const throw();
 
         /**
          * Retrieve the fully qualified pass name, including technique and shader name.
          * 
          * @return The pass name
          */
-        virtual String ToString(void) throw();
+        virtual String ToString(void) const throw();
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw();
+        virtual ICore * GetCore(void) const throw();
 
         /**
          * Retrieve the target this pass should render to. This will be a texture that has been registered with the core. 
@@ -79,9 +83,9 @@ namespace VoodooShader
          * 
          * @return A reference to the target texture
          */
-        virtual ITexture * GetTarget(void) throw();
+        virtual ITexture * GetTarget(void) const throw();
 
-        virtual ITechnique * GetTechnique(void) throw();
+        virtual ITechnique * GetTechnique(void) const throw();
 
         /**
          * Retrieve a specific program stage from this pass. Each pass may have many programs, each program controls one 
@@ -92,25 +96,24 @@ namespace VoodooShader
          * @return The program corresponding to the desired stage, or nullptr if the pass has no program for that stage or an 
          *     unsupported or unknown stage is requested.
          */
-        virtual CGprogram GetProgram(_In_ ProgramStage stage) throw();
+        virtual CGprogram GetProgram(_In_ ProgramStage stage) const throw();
 
         /**
          * Retrieve the underlying Cg technique. 
          * 
          * @return A pointer to the Cg technique. 
          */
-        virtual CGpass GetCgPass(void) throw();
+        virtual CGpass GetCgPass(void) const throw();
 
     private:
         void Link(void);
 
-        Int32 m_Refs;
+        mutable int32_t m_Refs;
+        ICore * m_Core;
         String m_Name;
-        ICoreRef m_Core;
 
+        ITechnique * m_Technique;
         ITextureRef m_Target;
-
-        ITechniqueRef m_Technique;
 
         CGpass m_CgPass;
 

@@ -26,25 +26,20 @@ namespace VoodooShader
 {
     namespace Xml
     {
-        class DocumentImpl;
-        class NodeImpl;
-        class AttributeImpl;
-
         class VOODOO_API Document
         {
+            class DocumentImpl;
+
         public:
             // Ctors
             Document();
             ~Document();
 
             // Loading
-            Bool LoadFile(IFile * pFile);
-            Bool LoadMemory(const void * pBuffer, UInt32 size);
-            Bool LoadString(const String & string);
-
-            // Saving
-            Bool SaveFile(IFile * pFile);
-            String SaveString();
+            bool LoadFile(IFile * pFile);
+            bool LoadFile(const String & filename);
+            bool LoadMemory(const void * pBuffer, uint32_t size);
+            bool LoadString(const String & string);
 
             // Root
             Node GetRoot() const;
@@ -55,6 +50,7 @@ namespace VoodooShader
 
         class VOODOO_API Node
         {
+            class NodeImpl;
             friend class Document;
 
         public:
@@ -63,9 +59,7 @@ namespace VoodooShader
 
             // Get/Set
             String GetName() const;
-            Bool SetName(const String & name);
             String GetValue() const;
-            Bool SetValue(const String & value);
 
             // Attributes
             Attribute GetFirstAttribute();
@@ -95,6 +89,7 @@ namespace VoodooShader
 
         class VOODOO_API Attribute
         {
+            class AttributeImpl;
             friend class Node;
 
         public:
@@ -103,19 +98,13 @@ namespace VoodooShader
 
             // Name
             String GetName() const;
-            Bool SetName(const String & name);
 
             // Value
             String GetString() const;
-            Bool SetString(const String & value);
-            Int32 GetInt32() const;
-            Bool SetInt32(const Int32 & value);
-            UInt32 GetUInt32() const;
-            Bool SetUInt32(const UInt32 & value);
-            Float GetFloat() const;
-            Bool SetFloat(const Float & value);
-            Bool GetBool() const;
-            Bool SetBool(const Bool & value);
+            int32_t GetInt32() const;
+            uint32_t GetUInt32() const;
+            float GetFloat() const;
+            bool GetBool() const;
 
             // Traversal
             Attribute GetNextAttribute() const;

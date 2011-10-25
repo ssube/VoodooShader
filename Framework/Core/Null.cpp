@@ -26,142 +26,176 @@ namespace VoodooShader
 {
     namespace VoodooNull
     {
-        NullAdapter::NullAdapter(ICore *core) :
-            m_Core(core)
+        NullAdapter::NullAdapter(ICore * pCore) :
+            m_Core(pCore)
         { }
 
         NullAdapter::~NullAdapter(void)
         { }
 
-        ICore *NullAdapter::GetCore(void)
+        int32_t NullAdapter::AddRef() const
         {
-            return m_Core;
+            return ++m_Refs;
         }
 
-        String NullAdapter::ToString(void)
+        int32_t NullAdapter::Release() const
+        {
+            if (--m_Refs == 0)
+            {
+                delete this;
+                return 0;
+            } else {
+                return m_Refs;
+            }
+        }
+
+        String NullAdapter::ToString(void) const
         {
             return "NullAdapter";
         }
 
-        bool NullAdapter::LoadPass(_In_ IPass* pass)
+        ICore * NullAdapter::GetCore(void) const
         {
-            UNREFERENCED_PARAMETER(pass);
-
-            return false;
+            return m_Core;
         }
 
-        bool NullAdapter::UnloadPass(_In_ IPass* pass)
+        bool NullAdapter::LoadPass(_In_ IPass * pPass)
         {
-            UNREFERENCED_PARAMETER(pass);
+            UNREFERENCED_PARAMETER(pPass);
 
-            return false;
+            return true;
         }
 
-        void NullAdapter::SetPass(_In_ IPass* pass)
+        bool NullAdapter::UnloadPass(_In_ IPass * pPass)
         {
-            UNREFERENCED_PARAMETER(pass);
+            UNREFERENCED_PARAMETER(pPass);
+
+            return true;
         }
 
-        IPass* NullAdapter::GetPass(void)
+        void NullAdapter::SetPass(_In_ IPass * pPass)
+        {
+            UNREFERENCED_PARAMETER(pPass);
+        }
+
+        IPass * NullAdapter::GetPass(void) const
         {
             return nullptr;
         }
 
-        Bool NullAdapter::SetTarget(_In_ UInt32 index, _In_ ITexture* target)
+        bool NullAdapter::SetTarget(_In_ uint32_t index, _In_ ITexture * pTarget)
         {
             UNREFERENCED_PARAMETER(index);
-            UNREFERENCED_PARAMETER(target);
+            UNREFERENCED_PARAMETER(pTarget);
+
+            return true;
         }
 
-        ITexture* NullAdapter::GetTarget(_In_ UInt32 index)
+        ITexture * NullAdapter::GetTarget(_In_ uint32_t index) const
         {
             UNREFERENCED_PARAMETER(index);
 
             return nullptr;
         }
 
-        ITexture* NullAdapter::CreateTexture(_In_ String Name, _In_ TextureDesc Desc)
+        ITexture * NullAdapter::CreateTexture(_In_ const String & name, _In_ TextureDesc desc)
         {
-            UNREFERENCED_PARAMETER(Name);
-            UNREFERENCED_PARAMETER(Desc);
+            UNREFERENCED_PARAMETER(name);
+            UNREFERENCED_PARAMETER(desc);
 
             return nullptr;
         }
 
-        ITexture* NullAdapter::LoadTexture(_In_ String Name, TextureRegion Region)
+        ITexture * NullAdapter::LoadTexture(_In_ const String & name, TextureRegion region)
         {
-            UNREFERENCED_PARAMETER(Name);
-            UNREFERENCED_PARAMETER(Region);
+            UNREFERENCED_PARAMETER(name);
+            UNREFERENCED_PARAMETER(region);
 
             return nullptr;
         }
 
-        void NullAdapter::DrawGeometry(int Vertexes, VertexStruct *pVertexData)
+        void NullAdapter::DrawGeometry(int32_t count, const VertexStruct * const pVertexData)
         {
-            UNREFERENCED_PARAMETER(Vertexes);
+            UNREFERENCED_PARAMETER(count);
             UNREFERENCED_PARAMETER(pVertexData);
         }
 
-        void NullAdapter::DrawShader(_In_ IShader* shader)
+        void NullAdapter::DrawShader(_In_ IShader * const pShader)
         {
-            UNREFERENCED_PARAMETER(shader);
+            UNREFERENCED_PARAMETER(pShader);
         }
 
-        void NullAdapter::ApplyParameter(_In_ IParameter* param)
+        void NullAdapter::ApplyParameter(_In_ IParameter * const pParam)
         {
-            UNREFERENCED_PARAMETER(param);
+            UNREFERENCED_PARAMETER(pParam);
         }
 
-        void NullAdapter::SetProperty(String Property, String Value)
+        void NullAdapter::SetProperty(const String & property, const String & value)
         {
-            UNREFERENCED_PARAMETER(Property);
-            UNREFERENCED_PARAMETER(Value);
+            UNREFERENCED_PARAMETER(property);
+            UNREFERENCED_PARAMETER(value);
         }
 
-        String NullAdapter::GetProperty(String Property)
+        String NullAdapter::GetProperty(const String & property) const
         {
-            UNREFERENCED_PARAMETER(Property);
+            UNREFERENCED_PARAMETER(property);
 
             return String();
         }
 
-        bool NullAdapter::ConnectTexture(_In_ IParameter* param, _In_ ITexture* texture)
+        bool NullAdapter::ConnectTexture(_In_ IParameter * const pParam, _In_ ITexture * const pTexture)
         {
-            UNREFERENCED_PARAMETER(param);
-            UNREFERENCED_PARAMETER(texture);
+            UNREFERENCED_PARAMETER(pParam);
+            UNREFERENCED_PARAMETER(pTexture);
 
-            return false;
+            return true;
         }
 
-        void NullAdapter::HandleError(_In_ CGcontext context, _In_ int error)
+        void NullAdapter::HandleError(_In_ CGcontext pContext, _In_ int error)
         {
-            UNREFERENCED_PARAMETER(context);
+            UNREFERENCED_PARAMETER(pContext);
             UNREFERENCED_PARAMETER(error);
         }
 
-        NullLogger::NullLogger(ICore *core) 
-            : m_Core(core)
+        NullLogger::NullLogger(ICore * pCore) : 
+            m_Core(pCore)
         { }
 
         NullLogger::~NullLogger(void)
         { }
 
-        ICore *NullLogger::GetCore(void)
+        int32_t NullLogger::AddRef() const
         {
-            return m_Core;
+            return ++m_Refs;
         }
 
-        String NullLogger::ToString(void)
+        int32_t NullLogger::Release() const
+        {
+            if (--m_Refs == 0)
+            {
+                delete this;
+                return 0;
+            } else {
+                return m_Refs;
+            }
+        }
+
+        String NullLogger::ToString(void) const
         {
             return "NullLogger";
         }
 
-        bool NullLogger::Open(_In_ const IFile * pFile, _In_ bool Append)
+        ICore * NullLogger::GetCore(void) const
         {
-            UNREFERENCED_PARAMETER(Filename);
-            UNREFERENCED_PARAMETER(Append);
+            return m_Core;
+        }
 
-            return false;
+        bool NullLogger::Open(_In_ const IFile * pFile, _In_ bool append)
+        {
+            UNREFERENCED_PARAMETER(pFile);
+            UNREFERENCED_PARAMETER(append);
+
+            return true;
         }
 
         void NullLogger::Close(void)
@@ -175,7 +209,7 @@ namespace VoodooShader
             UNREFERENCED_PARAMETER(level);
         }
 
-        LogLevel NullLogger::GetLogLevel(void)
+        LogLevel NullLogger::GetLogLevel(void) const
         {
             return LL_Unknown;
         }
@@ -185,7 +219,7 @@ namespace VoodooShader
             UNREFERENCED_PARAMETER(module);
         }
 
-        void NullLogger::Log(_In_ LogLevel level, _In_ const char *module, _In_ _Printf_format_string_ const char *msg, ...)
+        void NullLogger::Log(_In_ LogLevel level, _In_ const String & module, _In_ _Printf_format_string_ const String & msg, ...)
         {
             UNREFERENCED_PARAMETER(level);
             UNREFERENCED_PARAMETER(module);
@@ -197,75 +231,107 @@ namespace VoodooShader
             UNREFERENCED_PARAMETER(flush);
         }
 
-        LogFlags NullLogger::GetFlags(void)
+        LogFlags NullLogger::GetFlags(void) const
         {
             return LF_Unknown;
         }
 
-        NullHookManager::NullHookManager(_In_ ICore *core) :
-        m_Core(core)
+        NullHookManager::NullHookManager(_In_ ICore * pCore) 
+            : m_Core(pCore)
         { }
 
         NullHookManager::~NullHookManager(void)
         { }
 
-        String NullHookManager::ToString(void)
+        int32_t NullHookManager::AddRef() const
+        {
+            return ++m_Refs;
+        }
+
+        int32_t NullHookManager::Release() const
+        {
+            if (--m_Refs == 0)
+            {
+                delete this;
+                return 0;
+            } else {
+                return m_Refs;
+            }
+        }
+
+        String NullHookManager::ToString(void) const
         {
             return "NullHookManager";
         }
 
-        ICore *NullHookManager::GetCore(void)
+        ICore * NullHookManager::GetCore(void) const
         {
             return m_Core;
         }
 
-        bool NullHookManager::Add(_In_ String name, _In_ void *src, _In_ void *dest)
+        bool NullHookManager::Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest)
         {
             UNREFERENCED_PARAMETER(name);
-            UNREFERENCED_PARAMETER(src);
-            UNREFERENCED_PARAMETER(dest);
+            UNREFERENCED_PARAMETER(pSrc);
+            UNREFERENCED_PARAMETER(pDest);
 
-            return false;
+            return true;
         }
 
-        bool NullHookManager::Remove(_In_ String name)
+        bool NullHookManager::Remove(_In_ const String & name)
         {
             UNREFERENCED_PARAMETER(name);
 
-            return false;
+            return true;
         }
 
         void NullHookManager::RemoveAll(void)
         { }
 
-        NullFileSystem::NullFileSystem(_In_ ICore *core) :
-        m_Core(core)
+        NullFileSystem::NullFileSystem(_In_ ICore * pCore) : 
+            m_Core(pCore)
         { }
 
         NullFileSystem::~NullFileSystem(void)
         { }
 
-        String NullFileSystem::ToString(void)
+        int32_t NullFileSystem::AddRef() const
+        {
+            return ++m_Refs;
+        }
+
+        int32_t NullFileSystem::Release() const
+        {
+            if (--m_Refs == 0)
+            {
+                delete this;
+                return 0;
+            } else {
+                return m_Refs;
+            }
+        }
+
+        String NullFileSystem::ToString(void) const
         {
             return "NullFileSystem";
         }
 
-        ICore *NullFileSystem::GetCore(void)
+        ICore * NullFileSystem::GetCore(void) const
         {
             return m_Core;
         }
 
-        void NullFileSystem::AddDirectory(_In_ String dir)
+        void NullFileSystem::AddPath(_In_ const String & dir)
         {
             UNREFERENCED_PARAMETER(dir);
         }
 
-        void NullFileSystem::RemoveDirectory(_In_ String dir)
+        void NullFileSystem::RemovePath(_In_ const String & dir)
         {
             UNREFERENCED_PARAMETER(dir);
         }
 
-        IFile* NullFileSystem::FindFile(_In_ String name)
+        IFile * NullFileSystem::FindFile(_In_ const String & name) const
         {
             UNREFERENCED_PARAMETER(name);
 

@@ -17,7 +17,6 @@
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
  */
-#pragma once
 
 #include <string>
 #include <regex>
@@ -26,15 +25,15 @@
 
 namespace VoodooShader
 {
-    class RegexImpl
+    class Regex::RegexImpl
     {
     public:
         RegexImpl()
-            : m_Expr(), m_Regex()
+            : m_Regex(), m_Expr()
         { };
 
         RegexImpl(String expr)
-            : m_Expr(expr), m_Regex(expr)
+            : m_Regex(expr), m_Expr(expr)
         { };
 
     public:
@@ -67,14 +66,14 @@ namespace VoodooShader
         return m_Impl->m_Expr;
     }
 
-    Bool Regex::Match(const String & string) const
+    bool Regex::Match(const String & string) const
     {
-        return std::regex_match(string.GetData(), m_Impl->m_Regex);
+        return std::regex_match(static_cast<std::string>(string), m_Impl->m_Regex);
     }
 
-    Bool Regex::Find(const String & find) const
+    bool Regex::Find(const String & find) const
     {
-        return std::regex_search(find.GetData(), m_Impl->m_Regex);
+        return std::regex_search(static_cast<std::string>(find), m_Impl->m_Regex);
     }
 
     String Regex::Replace(const String & find, const String & replace) const

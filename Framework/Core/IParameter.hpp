@@ -20,7 +20,8 @@
 #pragma once
 
 #include "Includes.hpp"
-#include "Utility/Reference.hpp"
+
+#include "String.hpp"
 
 #include "IObject.hpp"
 
@@ -57,14 +58,14 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw();
+        virtual int32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw();
+        virtual int32_t Release(void) const throw();
 
         /**
          * Retrieves the fully-qualified parameter name. Virtual parameters will be of the form <code>:param-name</code>, 
@@ -73,22 +74,22 @@ namespace VoodooShader
          * 
          * @returns The parameter's name.
          */
-        virtual String ToString(void) throw();
+        virtual String ToString(void) const throw();
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw();
+        virtual ICore * GetCore(void) const throw();
 
         /**
          * Retrieves the type of this parameter. This specifies what type and how many data components are used (one texture 
          * or 1-16 floats).
          */
-        virtual ParameterType GetType(void);
+        virtual ParameterType GetType(void) const;
 
-        virtual Bool IsVirtual(void);
+        virtual bool IsVirtual(void) const;
 
         /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value is changed. 
@@ -100,7 +101,7 @@ namespace VoodooShader
          *     actual parameters to virtual parameters. 
          *     
          */
-        virtual Bool AttachParameter(_In_opt_ IParameter * const pParam);
+        virtual bool AttachParameter(_In_opt_ IParameter * const pParam);
 
         /**
          * Get the component count for this parameter.
@@ -113,14 +114,14 @@ namespace VoodooShader
          *     @li For an array, this represents the number of elements in the array (2 for Light[2]).
          *     @li Structs and other types that do not also match one of the above will always return -1.
          */
-        virtual Int32 GetComponents(void);
+        virtual int32_t GetComponents(void) const;
 
         /** 
          * Retrieves the texture source for this parameter. 
          * 
          * @return The texture source, if this parameter has a texture.
          */
-        virtual ITexture * const GetTexture(void);
+        virtual ITexture * const GetTexture(void) const;
 
         virtual void SetTexture(_In_opt_ ITexture * const pTexture);
 
@@ -130,23 +131,23 @@ namespace VoodooShader
          * to, but only the appropriate number will be sent to the Cg parameter.
          */
         _Ret_count_c_(16)
-        virtual Float * const GetScalar(void);
+        virtual float * const GetScalar(void);
 
-        virtual void SetScalar(Int32 Count, _In_count_(Count) Float * const pValues);
+        virtual void SetScalar(int32_t Count, _In_count_(Count) float * const pValues);
 
-        virtual IShader * const GetShader(void);
+        virtual IShader * const GetShader(void) const;
 
         /**
          * Retrieves the underlying Cg parameter object.
          * 
          * @returns The Cg parameter this object is bound to.
          */
-        virtual CGparameter GetCgParameter(void);
+        virtual CGparameter GetCgParameter(void) const;
 
     private:
-        Int32 m_Refs;
+        mutable int32_t m_Refs;
         String m_Name;
-        ICoreRef m_Core;
+        ICore * m_Core;
 
         IShaderRef m_Shader;
 
@@ -156,7 +157,7 @@ namespace VoodooShader
 
         // Value
         ITextureRef m_ValueTexture;
-        float m_ValueFloat[16];
+        float m_Valuefloat[16];
     };
     /* @} */
 }

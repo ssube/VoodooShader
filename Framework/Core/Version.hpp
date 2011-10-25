@@ -26,10 +26,10 @@
 #define VOODOO_META__STRING(arg) #arg
 #define VOODOO_META_STRING(arg)  VOODOO_META__STRING(arg)
 #ifdef _DEBUG
-#define VOODOO_META_DEBUG_BOOL  true
+#define VOODOO_META_DEBUG_bool  true
 #define VOODOO_META_DEBUG_STRING " (DEBUG)"
 #else
-#define VOODOO_META_DEBUG_BOOL false
+#define VOODOO_META_DEBUG_bool false
 #define VOODOO_META_DEBUG_STRING
 #endif
 
@@ -61,7 +61,7 @@
 /**
  * Creates a Version structure with data for the given module.
  */
-#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }
+#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_bool }
 
 // Global defs
 #define VOODOO_GLOBAL_NAME              "Voodoo/Framework"

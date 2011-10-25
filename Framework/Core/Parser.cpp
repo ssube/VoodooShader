@@ -18,43 +18,54 @@
  *   peachykeen@voodooshader.com
  */
 
+#include <sstream>
+#include <iostream>
+
+#include "Version.hpp"
+
 #include "ICore.hpp"
 #include "ILogger.hpp"
 #include "IParser.hpp"
 
-#include <sstream>
-#include <iostream>
-
 namespace VoodooShader
 {
-    IParser::IParser(_In_ ICore *core) 
-        : m_Core(core)
+    IParser::IParser(_In_ ICore * pCore) : 
+        m_Core(pCore)
     { }
 
     IParser::~IParser(void)
     {
         m_Variables.clear();
+        m_SysVariables.clear();
     }
 
-    String IParser::ToLower(_In_ String input)
+    int32_t IParser::AddRef() const
     {
-
-        String ret = input;
-
-        std::transform(ret.begin(), ret.end(), ret.begin(), ::tolower);
-        return ret;
+        return ++m_Refs;
     }
 
-    String IParser::ToUpper(_In_ String input)
+    int32_t IParser::Release() const
     {
-
-        String ret = input;
-
-        std::transform(ret.begin(), ret.end(), ret.begin(), ::toupper);
-        return ret;
+        if (--m_Refs == 0)
+        {
+            delete this;
+            return 0;
+        } else {
+            return m_Refs;
+        }
     }
 
-    void IParser::Add(_In_ String name, _In_ String value, _In_ VariableType Type)
+    String IParser::ToString(void) const
+    {
+        return "Parser";
+    }
+
+    ICore * IParser::GetCore(void) const
+    {
+        return m_Core;
+    }
+
+    void IParser::Add(_In_ const String & name, _In_ const String & value, _In_ VariableType Type)
     {
 
         ILoggerRef logger = m_Core->GetLogger();
@@ -62,20 +73,19 @@ namespace VoodooShader
         if (logger)
         {
             logger->Log
-                (
+            (
                 LL_Debug,
                 VOODOO_CORE_NAME,
                 "Adding variable \"%s\" with value \"%s\".",
-                name.c_str(),
-                value.c_str()
-                );
+                name.GetData(),
+                value.GetData()
+            );
         }
 
         String finalname = this->Parse(name, PF_VarName);
 
         if (Type == VT_System)
         {
-
             Dictionary::iterator varIter = m_SysVariables.find(finalname);
 
             if (varIter == m_SysVariables.end())
@@ -87,12 +97,12 @@ namespace VoodooShader
                 if (logger)
                 {
                     logger->Log
-                        (
+                    (
                         LL_Warning,
                         VOODOO_CORE_NAME,
                         "Unable to add duplicate system variable \"%s\".",
-                        finalname.c_str()
-                        );
+                        finalname.GetData()
+                    );
                 }
             }
         }
@@ -102,14 +112,13 @@ namespace VoodooShader
         }
     }
 
-    void IParser::Remove(_In_ String name)
+    void IParser::Remove(_In_ const String & name)
     {
-
         ILoggerRef logger = m_Core->GetLogger();
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.c_str());
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.GetData());
         }
 
         String finalname = this->Parse(name, PF_VarName);
@@ -121,15 +130,14 @@ namespace VoodooShader
         }
     }
 
-    String IParser::Parse(_In_ String input, _In_ ParseFlags flags)
+    String IParser::Parse(_In_ String input, _In_ ParseFlags flags) const
     {
-
         Dictionary parseState;
 
         return this->ParseStringRaw(input, flags, 0, parseState);
     }
 
-    String IParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary &state)
+    String IParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state) const
     {
         using namespace std;
 
@@ -137,14 +145,13 @@ namespace VoodooShader
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.c_str(), flags);
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.GetData(), flags);
         }
 
-        if (depth > IParser::VarMaxDepth || input.length() < 3)
+        if (depth > IParser::VarMaxDepth || input.GetLength() < 3)
         {
             return input;
         }
-
 
         // Parse out any variables in the filename, first
         String iteration = input;
@@ -153,49 +160,43 @@ namespace VoodooShader
 
         while (loop)
         {
-
-            const size_t itlen = iteration.length();
+            const size_t itlen = iteration.GetLength();
 
             if (itlen < 3)
             {
-
                 // Stop parsing if the string is too small to contain variables (this should
                 // never be hit the first loop)
                 break;
             }
 
-            size_t endpos = iteration.find_first_of(IParser::VarDelimEnd);
+            size_t endpos = iteration.Find(IParser::VarDelimEnd);
 
             if (endpos == string::npos)
             {
-
                 // Stop parsing if no closing delimiter is found
                 break;
             }
 
-            String varname = iteration.substr(0, endpos);
-            size_t startpos = varname.find_last_of(IParser::VarDelimStart);
+            String varname = iteration.Substr(0, endpos);
+            size_t startpos = varname.ReverseFind(IParser::VarDelimStart);
 
-            if (startpos == String::npos || startpos == 0 || iteration[startpos - 1] != IParser::VarDelimPre)
+            if (startpos < 1 || iteration[startpos - 1] != IParser::VarDelimPre)
             {
-
                 // Stop parsing if no opening sequence is found, or there is no room for one
                 break;
             }
 
-            varname = varname.substr(startpos + 1);
+            varname = varname.Substr(startpos + 1);
 
-            if (varname.length() == 0)
+            if (varname.GetLength() == 0)
             {
-
-
                 // Erase the variable sequence if it is the empty variable and restart the loop
                 stringstream output;
 
-                output << iteration.substr(0, startpos - 1);
+                output << iteration.Substr(0, startpos - 1);
                 if (endpos < itlen)
                 {
-                    output << iteration.substr(endpos + 1);
+                    output << iteration.Substr(endpos + 1);
                 }
 
                 iteration = output.str();
@@ -204,88 +205,75 @@ namespace VoodooShader
 
 
             // Handle state variables
-            size_t statepos = varname.find(':');
+            size_t statepos = varname.Find(IParser::VarMarkerState);
 
-            if (statepos != String::npos)
+            if (statepos >= 0)
             {
-
                 // State set, handle
-                String newvalue = varname.substr(statepos + 1);
+                String newvalue = varname.Substr(statepos + 1);
 
                 newvalue = this->ParseStringRaw(newvalue, flags, ++depth, state);
 
-                varname = varname.substr(0, statepos);
+                varname = varname.Substr(0, statepos);
                 varname = this->ParseStringRaw(varname, PF_VarName, ++depth, state);
 
                 state[varname] = newvalue;
 
                 stringstream output;
 
-                output << iteration.substr(0, startpos - 1) << iteration.substr(endpos + 1);
+                output << iteration.Substr(0, startpos - 1) << iteration.Substr(endpos + 1);
                 iteration = output.str();
 
                 continue;
             }
 
-
             // Handle variable flags
             bool supress = false;
             bool parse = true;
 
-
-            // The length of varname is > 0, guaranteed in line 134
-            if (varname[0] == '?')
+            if (varname[0] == IParser::VarMarkerSupp)
             {
                 supress = true;
-                varname = varname.substr(1);
+                varname = varname.Substr(1);
             }
-            else if (varname[0] == '!')
+            else if (varname[0] == IParser::VarMarkerRaw)
             {
                 parse = false;
-                varname = varname.substr(1);
+                varname = varname.Substr(1);
             }
 
             // Properly format the variable name
             varname = this->ParseStringRaw(varname, PF_VarName, ++depth, state);
 
-
             // Lookup and replace the variable
             bool foundvar = true;
             String varvalue;
-            Dictionary::iterator variter = m_SysVariables.find(varname);
+            Dictionary::const_iterator variter = m_SysVariables.find(varname);
 
             if (variter != m_SysVariables.end())
             {
                 varvalue = variter->second;
-            }
-            else
-            {
+            } else {
                 variter = state.find(varname);
                 if (variter != state.end())
                 {
                     varvalue = variter->second;
-                }
-                else
-                {
+                } else {
                     variter = m_Variables.find(varname);
                     if (variter != m_Variables.end())
                     {
                         varvalue = variter->second;
-                    }
-                    else
-                    {
-
-
+                    } else {
                         // Unrecognized variable, try env
                         size_t reqSize = 0;
 
-                        getenv_s(&reqSize, nullptr, 0, varname.c_str());
+                        getenv_s(&reqSize, nullptr, 0, varname.GetData());
                         if (reqSize != 0)
                         {
 
                             char *buffer = new char[reqSize];
 
-                            getenv_s(&reqSize, buffer, reqSize, varname.c_str());
+                            getenv_s(&reqSize, buffer, reqSize, varname.GetData());
                             varvalue = buffer;
                             delete[] buffer;
                         }
@@ -299,8 +287,8 @@ namespace VoodooShader
 
             stringstream output;
 
-            output << iteration.substr(0, startpos - 1);
-            if (parse && varvalue.length() > 0)
+            output << iteration.Substr(0, startpos - 1);
+            if (parse && varvalue.GetLength() > 0)
             {
                 output << this->ParseStringRaw(varvalue, flags, ++depth, state);
             }
@@ -309,7 +297,7 @@ namespace VoodooShader
                 output << "--badvar:" << varname << "--";
             }
 
-            output << iteration.substr(endpos + 1);
+            output << iteration.Substr(endpos + 1);
 
             iteration = output.str();
         }
@@ -321,7 +309,8 @@ namespace VoodooShader
         }
         else if (flags == PF_VarName)
         {
-            return this->ToLower(iteration);
+            iteration.ToLower();
+            return iteration;
         }
 
         if (flags & (PF_SingleSlash | PF_SlashOnly | PF_BackslashOnly))
@@ -344,12 +333,11 @@ namespace VoodooShader
             }
 
             stringstream output;
-            size_t total = iteration.length();
+            size_t total = iteration.GetLength();
             size_t cur = 0;
 
             while (cur < total)
             {
-
                 char inchar = iteration[cur];
 
                 ++cur;
@@ -381,16 +369,14 @@ namespace VoodooShader
 
         if (flags & PF_Lowercase)
         {
-            iteration = this->ToLower(iteration);
-        }
-        else if (flags & PF_Uppercase)
-        {
-            iteration = this->ToUpper(iteration);
+            iteration.ToLower();
+        } else if (flags & PF_Uppercase) {
+            iteration.ToUpper();
         }
 
         if (logger)
         {
-            logger->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.c_str());
+            logger->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.GetData());
         }
 
         return iteration;

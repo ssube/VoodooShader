@@ -22,11 +22,13 @@
 
 #include "Includes.hpp"
 
+#include "String.hpp"
+
 namespace VoodooShader
 {
     /* Plugin exports. */
-    Version      VOODOO_CALL API_ModuleVersion(void);
-    Int32        VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int Index);
-    IObject *    VOODOO_CALL API_ClassCreate(_In_ int Index, _In_ ICore * pCore);
+    Version   VOODOO_CALL API_ModuleVersion(void);
+    int32_t   VOODOO_CALL API_ClassCount(void);
+    String    VOODOO_CALL API_ClassInfo(_In_ int32_t Index);
+    IObject * VOODOO_CALL API_ClassCreate(_In_ int32_t Index, _In_ ICore * pCore);
 }

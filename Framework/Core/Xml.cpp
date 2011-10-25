@@ -28,7 +28,7 @@ namespace VoodooShader
 {
     namespace Xml
     {
-        class DocumentImpl
+        class Document::DocumentImpl
         {
         public:
             DocumentImpl()
@@ -39,7 +39,7 @@ namespace VoodooShader
             pugi::xml_document m_Doc;
         };
 
-        class NodeImpl
+        class Node::NodeImpl
         {
         public:
             NodeImpl()
@@ -50,7 +50,7 @@ namespace VoodooShader
             pugi::xml_node m_Node;
         };
 
-        class AttributeImpl
+        class Attribute::AttributeImpl
         {
         public:
             AttributeImpl()
@@ -71,17 +71,22 @@ namespace VoodooShader
             delete m_Impl;
         }
 
-        Bool Document::LoadFile(IFile * pFile)
+        bool Document::LoadFile(IFile * pFile)
         {
             return (m_Impl->m_Doc.load_file(pFile->GetPath().GetData()));
         }
 
-        Bool Document::LoadMemory(const void * pBuffer, UInt32 size)
+        bool Document::LoadFile(const String & filename)
+        {
+            return (m_Impl->m_Doc.load_file(filename.GetData()));
+        }
+
+        bool Document::LoadMemory(const void * pBuffer, uint32_t size)
         {
             return (m_Impl->m_Doc.load_buffer(pBuffer, size));
         }
 
-        Bool Document::LoadString(const String & string)
+        bool Document::LoadString(const String & string)
         {
             return (m_Impl->m_Doc.load_buffer(string.GetData(), string.GetLength()));
         }
@@ -108,22 +113,12 @@ namespace VoodooShader
             return m_Impl->m_Node.name();
         }
 
-        Bool Node::SetName(const String & name)
-        {
-            return m_Impl->m_Node.set_name(name.GetData());
-        }
-
         String Node::GetValue() const
         {
             return m_Impl->m_Node.value();
         }
 
-        Bool Node::SetValue(const String & value)
-        {
-            return m_Impl->m_Node.set_value(value.GetData());
-        }
-
-        Attribute * Node::GetFirstAttribute()
+        Attribute Node::GetFirstAttribute()
         {
             Attribute * pAttr = nullptr;
             auto attr = m_Impl->m_Node.first_attribute();
@@ -135,7 +130,7 @@ namespace VoodooShader
             return pAttr;
         }
 
-        Attribute * Node::GetLastAttribute()
+        Attribute Node::GetLastAttribute()
         {
             Attribute * pAttr = nullptr;
             auto attr = m_Impl->m_Node.last_attribute();
@@ -147,7 +142,7 @@ namespace VoodooShader
             return pAttr;
         }
 
-        Node * Node::GetParent() const
+        Node Node::GetParent() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.parent();
@@ -159,7 +154,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetFirstChild() const
+        Node Node::GetFirstChild() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.first_child();
@@ -171,7 +166,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetLastChild() const
+        Node Node::GetLastChild() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.last_child();
@@ -183,7 +178,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetNextSibling() const
+        Node Node::GetNextSibling() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.next_sibling();
@@ -195,7 +190,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetPreviousSibling() const
+        Node Node::GetPreviousSibling() const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.previous_sibling();
@@ -207,7 +202,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetChild(const String & name) const
+        Node Node::GetChild(const String & name) const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.child(name);
@@ -219,7 +214,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetNextSibling(const String & name) const
+        Node Node::GetNextSibling(const String & name) const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.next_sibling(name);
@@ -231,7 +226,7 @@ namespace VoodooShader
             return pNode;
         }
 
-        Node * Node::GetPreviousSibling(const String & name) const
+        Node Node::GetPreviousSibling(const String & name) const
         {
             Node * pNode = nullptr;
             auto node = m_Impl->m_Node.previous_sibling(name);
@@ -258,59 +253,29 @@ namespace VoodooShader
             return m_Impl->m_Attr.name();
         }
 
-        Bool Attribute::SetName(const String & name)
-        {
-            return m_Impl->m_Attr.set_name(name.GetData());
-        }
-
         String Attribute::GetString() const
         {
             return m_Impl->m_Attr.value();
         }
 
-        Bool Attribute::SetString(const String & value)
-        {
-            return m_Impl->m_Attr.set_value(value.GetData());
-        }
-
-        Int32 Attribute::GetInt32() const
+        int32_t Attribute::GetInt32() const
         {
             return m_Impl->m_Attr.as_int();
         }
 
-        Bool Attribute::SetInt32(const Int32 & value)
-        {
-            return m_Impl->m_Attr.set_value(value);
-        }
-
-        UInt32 Attribute::GetUInt32() const
+        uint32_t Attribute::GetUInt32() const
         {
             return m_Impl->m_Attr.as_uint();
         }
 
-        Bool Attribute::SetUInt32(const UInt32 & value)
-        {
-            return m_Impl->m_Attr.set_value(value);
-        }
-
-        Float Attribute::GetFloat() const
+        float Attribute::GetFloat() const
         {
             return static_cast<float>(m_Impl->m_Attr.as_double());
         }
 
-        Bool Attribute::SetFloat(const Float & value)
-        {
-            return m_Impl->m_Attr.set_value(value);
-        }
-
-        Bool Attribute::GetBool() const
+        bool Attribute::GetBool() const
         {
             return m_Impl->m_Attr.as_bool();
-        }
-
-        Bool Attribute::SetBool(const Bool & value)
-        {
-            return m_Impl->m_Attr.set_value(value);
         }
 
         Attribute * Attribute::GetNextAttribute() const

@@ -16,12 +16,10 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
-
+ */
 #pragma once
 
 #include "Includes.hpp"
-#include "Utility/Reference.hpp"
 
 #include "IObject.hpp"
 
@@ -49,28 +47,28 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw();
+        virtual int32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw();
+        virtual int32_t Release(void) const throw();
 
         /**
          * Get the name of this object.
          * 
          * @return The name.
          */
-        virtual String ToString(void) throw();
+        virtual String ToString(void) const throw();
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw();
+        virtual ICore * GetCore(void) const throw();
 
         /**
          * Loads a set of modules from a given path. 
@@ -80,7 +78,7 @@ namespace VoodooShader
          * 
          * @note Only loads files whose filename matches the filter (standard regex match).
          */
-        virtual bool LoadPath(_In_ String path, _In_ String filter);
+        virtual bool LoadPath(_In_ const String & path, _In_ const String & filter);
 
         /**
          * Loads a single module, using an absolute or relative filename. 
@@ -95,23 +93,7 @@ namespace VoodooShader
         /**
          * Tests to see if a class exists in the list provided by all loaded modules. 
          */
-        virtual bool ClassExists(_In_ const String name);
-
-        /**
-         * Wraps IModuleManager::CreateClass to return a shared pointer of a specific type. 
-         * 
-         * @tparam T The type to return (must derive from IObject).
-         * @param Name The class name to create.
-         */
-        template<typename T>
-        inline Reference<T> CreateClass(_In_ String name)
-        {
-            IObject *object = this->CreateObject(name);
-
-            Reference<T> retval(dynamic_cast<T*>(object));
-
-            return retval;
-        };
+        virtual bool ClassExists(_In_ const String & name) const;
 
         /**
          * Create a new instance of the given class. This object will be created in a dynamic module and a pointer given.
@@ -119,7 +101,7 @@ namespace VoodooShader
          * @param name The class name to create. 
          * @return New object or nullptr if the class wasn't found or couldn't be created.
          */
-        _Check_return_ virtual IObject * CreateObject(_In_ String name);
+        _Check_return_ virtual IObject * CreateObject(_In_ const String & name) const;
 
         /**
          * Finds the address of a function in a module. The module must be loaded into the process and export the symbol, 
@@ -130,11 +112,11 @@ namespace VoodooShader
          * @param name The function name to find.
          * @return The function's address if found, nullptr otherwise.
          */
-        _Check_return_ virtual void * FindFunction(_In_ String module, _In_ String name);
+        _Check_return_ virtual void * FindFunction(_In_ const String & module, _In_ const String & name) const;
 
     private:
-        Int32 m_Refs;
-        ICoreRef m_Core;
+        mutable int32_t m_Refs;
+        ICore * m_Core;
         ModuleMap m_Modules;
         ClassMap m_Classes;
     };
@@ -167,45 +149,45 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw();
+        virtual int32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw();
+        virtual int32_t Release(void) const throw();
 
         /**
          * Get the name of this object.
          * 
          * @return The name.
          */
-        virtual String ToString(void) throw();
+        virtual String ToString(void) const throw();
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw();
+        virtual ICore * GetCore(void) const throw();
 
         /**
          * Get the current version of this module. @return The version, including name and
          * debug attribute.
          */
-        virtual Version ModuleVersion(void) throw();
+        virtual Version ModuleVersion(void) const throw();
 
         /** Get the class count from this module. */
-        virtual Int32 ClassCount(void);
+        virtual int32_t ClassCount(void) const;
 
-        virtual String ClassInfo(_In_ Int32 number);
+        virtual String ClassInfo(_In_ int32_t number) const;
 
-        virtual IObject * CreateClass(_In_ Int32 number, _In_ ICore * pCore);
+        virtual IObject * CreateClass(_In_ int32_t number, _In_ ICore * pCore);
 
     private:
+        mutable int32_t m_Refs;
         HMODULE m_Handle;
-        Int32 m_Refs;
         Functions::VersionFunc m_ModuleVersion;
         Functions::CountFunc m_ClassCount;
         Functions::InfoFunc m_ClassInfo;

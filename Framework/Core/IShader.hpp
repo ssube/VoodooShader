@@ -21,6 +21,8 @@
 
 #include "Includes.hpp"
 
+#include "String.hpp"
+
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -67,30 +69,30 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw();
+        virtual int32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw();
+        virtual int32_t Release(void) const throw();
 
         /**
          * Get the name (usually filename of source file) for this shader.
          * 
          * @return The name.
          */
-        virtual String ToString(void) throw();
+        virtual String ToString(void) const throw();
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw();
+        virtual ICore * GetCore(void) const throw();
 
-        virtual Int32 GetTechniqueCount(void) throw();
+        virtual int32_t GetTechniqueCount(void) const throw();
 
         /**
          * Retrieve a technique from the shader by name. Most cases should use the default technique, but some specific 
@@ -99,7 +101,7 @@ namespace VoodooShader
          * @param Index The index of the technique to get.
          * @return The technique, if it is found.
          */
-        virtual ITechnique * GetTechnique(_In_ Int32 Index) throw();
+        virtual ITechnique * GetTechnique(_In_ int32_t Index) const throw();
 
         /**
          * Retrieves the default technique from this shader. All drawing should be done with the default technique: it is
@@ -112,7 +114,7 @@ namespace VoodooShader
          *     high-quality ones) and count down with the most compatible and simplest technique last. The first valid 
          *     technique found becomes the default.
          */
-        virtual ITechnique * GetDefaultTechnique(void) throw();
+        virtual ITechnique * GetDefaultTechnique(void) const throw();
 
         /**
          * Set a technique from this shader to be used as the default technique. Some adapter functions simply retrieve the 
@@ -123,14 +125,14 @@ namespace VoodooShader
          * 
          * @note This validates that the technique belongs to this shader.
          */
-        virtual Bool SetDefaultTechnique(_In_ ITechnique * Technique) throw();
+        virtual bool SetDefaultTechnique(_In_ ITechnique * Technique) throw();
 
         /**
          * Retrieve the number of effect-level parameters in this shader. These hold a single value for all passes. 
          * 
          * @return The parameter count.
          */
-        Int32 GetParameterCount(void) throw();
+        int32_t GetParameterCount(void) const throw();
 
         /**
          * Retrieve a specific parameter from the shader. These may be modified at runtime and will automatically update Cg 
@@ -139,14 +141,14 @@ namespace VoodooShader
          * @param Index The index of the parameter to retrieve.
          * @return The parameter, if valid.
          */
-        IParameter * GetParameter(_In_ Int32 Index) throw();
+        IParameter * GetParameter(_In_ int32_t Index) const throw();
 
         /**
          * Retrieve the underlying Cg technique. 
          * 
          * @return A pointer to the Cg technique. 
          */
-        CGeffect GetCgEffect(void) throw();
+        CGeffect GetCgEffect(void) const throw();
 
     private:
         /**
@@ -181,9 +183,9 @@ namespace VoodooShader
          */
         void CreateParameterTexture(_In_ IParameter * pParam);
 
-        Int32 m_Refs;
+        mutable int32_t m_Refs;
         String m_Name;
-        ICoreRef m_Core;
+        ICore * m_Core;
 
         ITechniqueRef m_DefaultTechnique;
         TechniqueVector m_Techniques;

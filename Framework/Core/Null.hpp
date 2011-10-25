@@ -42,96 +42,108 @@ namespace VoodooShader
             public IAdapter
         {
         public:
-            NullAdapter(ICore *core);
+            NullAdapter(ICore * pCore);
             virtual ~NullAdapter(void);
 
-            virtual ICore *GetCore(void);
-            virtual String ToString(void);
+            virtual int32_t AddRef() const;
+            virtual int32_t Release() const;
+            virtual String ToString(void) const;
+            virtual ICore * GetCore(void) const;
 
-            virtual bool LoadPass(_In_ IPass* pass);
-            virtual bool UnloadPass(_In_ IPass* pass);
-            virtual void SetPass(_In_ IPass* pass);
-            virtual IPass* GetPass(void);
-            virtual Bool SetTarget(_In_ UInt32 index, _In_ ITexture* target);
-            virtual ITexture* GetTarget(_In_ UInt32 index);
-            virtual ITexture* CreateTexture(_In_ String Name, _In_ TextureDesc Desc);
-            virtual ITexture* LoadTexture(_In_ String Name, TextureRegion Region);
-            virtual void DrawGeometry(int Vertexes, VertexStruct *pVertexData);
-            virtual void DrawShader(_In_ IShader* shader);
-            virtual void ApplyParameter(_In_ IParameter* param);
-            virtual void SetProperty(String Property, String Value);
-            virtual String GetProperty(String Property);
-            virtual bool ConnectTexture(_In_ IParameter* param, _In_ ITexture* texture);
-            virtual void HandleError(_In_ CGcontext context, _In_ int error);
-
-        private:
-            ICore *m_Core;
-        };
-
-        class NullLogger :
-            public ILogger
-        {
-        public:
-            NullLogger(ICore *core);
-            virtual ~NullLogger(void);
-
-            virtual ICore *GetCore(void);
-            virtual String ToString(void);
-
-            virtual bool Open(_In_ IFile * pFile, _In_ bool Append);
-            virtual void Close(void);
-            virtual void Flush(void);
-            virtual void SetLogLevel(_In_ LogLevel level);
-            virtual LogLevel GetLogLevel(void);
-            virtual void LogModule(_In_ Version module);
-            virtual void Log
-            (
-                _In_ LogLevel level,
-                _In_ const char *module,
-                _In_ _Printf_format_string_ const char *msg,
-                ...
-            );
-            virtual void SetFlags(_In_ LogFlags flush);
-            virtual LogFlags GetFlags(void);
+            virtual bool LoadPass(_In_ IPass * const pPass);
+            virtual bool UnloadPass(_In_ IPass * const pPass);
+            virtual void SetPass(_In_ IPass * const pPass);
+            virtual IPass * GetPass(void) const;
+            virtual bool SetTarget(_In_ uint32_t index, _In_ ITexture * const pTarget);
+            virtual ITexture * GetTarget(_In_ uint32_t index) const;
+            virtual ITexture * CreateTexture(_In_ const String & name, _In_ TextureDesc desc);
+            virtual ITexture * LoadTexture(_In_ const String & name, TextureRegion region);
+            virtual void DrawGeometry(int32_t vertexes, const VertexStruct * const pVertexData);
+            virtual void DrawShader(_In_ IShader * const pShader);
+            virtual void ApplyParameter(_In_ IParameter * const pParam);
+            virtual void SetProperty(const String & property, const String & value);
+            virtual String GetProperty(const String & property) const;
+            virtual bool ConnectTexture(_In_ IParameter * pParam, _In_opt_ ITexture * pTexture);
+            virtual void HandleError(_In_ CGcontext pContext, _In_ int32_t error);
 
         private:
-            ICore *m_Core;
-        };
-
-        class NullHookManager :
-            public IHookManager
-        {
-        public:
-            NullHookManager(_In_ ICore *core);
-            virtual ~NullHookManager(void);
-
-            virtual String ToString(void);
-            virtual ICore *GetCore(void);
-
-            bool Add(_In_ String name, _In_ void *src, _In_ void *dest);
-            bool Remove(_In_ String name);
-            void RemoveAll(void);
-
-        private:
-            ICore *m_Core;
+            mutable int32_t m_Refs;
+            ICore * m_Core;
         };
 
         class NullFileSystem :
             public IFileSystem
         {
         public:
-            NullFileSystem(_In_ ICore *core);
+            NullFileSystem(_In_ ICore * pCore);
             virtual ~NullFileSystem(void);
 
-            virtual String ToString(void);
-            virtual ICore *GetCore(void);
+            virtual int32_t AddRef() const;
+            virtual int32_t Release() const;
+            virtual String ToString(void) const;
+            virtual ICore * GetCore(void) const;
 
-            virtual void AddDirectory(_In_ String dir);
-            virtual void RemoveDirectory(_In_ String dir);
-            virtual IFile* FindFile(_In_ String name);
+            virtual void AddPath(_In_ const String & dir);
+            virtual void RemovePath(_In_ const String & dir);
+            virtual IFile * FindFile(_In_ const String & name) const;
 
         private:
-            ICore *m_Core;
+            mutable int32_t m_Refs;
+            ICore * m_Core;
+        };
+
+        class NullHookManager :
+            public IHookManager
+        {
+        public:
+            NullHookManager(_In_ ICore * pCore);
+            virtual ~NullHookManager(void);
+
+            virtual int32_t AddRef() const;
+            virtual int32_t Release() const;
+            virtual String ToString(void) const;
+            virtual ICore * GetCore(void) const;
+
+            bool Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
+            bool Remove(_In_ const String & name);
+            void RemoveAll(void);
+
+        private:
+            mutable int32_t m_Refs;
+            ICore * m_Core;
+        };
+
+        class NullLogger :
+            public ILogger
+        {
+        public:
+            NullLogger(ICore * pCore);
+            virtual ~NullLogger(void);
+
+            virtual int32_t AddRef() const;
+            virtual int32_t Release() const;
+            virtual String ToString(void) const;
+            virtual ICore * GetCore(void) const;
+
+            virtual bool Open(_In_ const IFile * pFile, _In_ bool append);
+            virtual void Close(void);
+            virtual void Flush(void);
+            virtual void SetLogLevel(_In_ LogLevel level);
+            virtual LogLevel GetLogLevel(void) const;
+            virtual void LogModule(_In_ Version module);
+            virtual void Log
+            (
+                _In_ LogLevel level,
+                _In_ const String & module,
+                _In_ _Printf_format_string_ const String & msg,
+                ...
+            );
+            virtual void SetFlags(_In_ LogFlags flush);
+            virtual LogFlags GetFlags(void) const;
+
+        private:
+            mutable int32_t m_Refs;
+            ICore * m_Core;
         };
     }
 }

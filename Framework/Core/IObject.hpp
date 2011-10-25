@@ -29,6 +29,9 @@ namespace VoodooShader
      */
     class IObject
     {
+        friend void intrusive_ptr_add_ref(IObject * obj);
+        friend void intrusive_ptr_release(IObject * obj);
+
     public:
         virtual ~IObject(void) throw() {};
 
@@ -36,15 +39,19 @@ namespace VoodooShader
          * Add a reference to this object.
          * 
          * @return The new reference count.
+         * 
+         * @note This function is equivalent to COM's IUnknown::AddRef.
          */
-        virtual Int32 AddRef(void) throw() = 0;
+        virtual int32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
+         * 
+         * @note This function is equivalent to COM's IUnknown::Release.
          */
-        virtual Int32 Release(void) throw() = 0;
+        virtual int32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.

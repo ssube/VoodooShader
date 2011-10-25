@@ -19,7 +19,9 @@
  */
 
 #include "Exports.hpp"
+
 #include "Null.hpp"
+#include "Version.hpp"
 
 namespace VoodooShader
 {
@@ -30,12 +32,12 @@ namespace VoodooShader
         return coreVersion;
     }
 
-    Int32 VOODOO_CALL API_ClassCount(void)
+    int32_t VOODOO_CALL API_ClassCount(void)
     {
         return 4;
     }
 
-    const char *VOODOO_CALL API_ClassInfo (_In_ int number)
+    String VOODOO_CALL API_ClassInfo(_In_ int number)
     {
         switch (number)
         {
@@ -48,11 +50,11 @@ namespace VoodooShader
         case 3:
             return "NullHookManager";
         default:
-            return nullptr;
+            return String();
         }
     }
 
-    IObject * VOODOO_CALL API_ClassCreate (_In_ int number, _In_ ICore * core)
+    IObject * VOODOO_CALL API_ClassCreate(_In_ int number, _In_ ICore * core)
     {
         switch (number)
         {
@@ -67,5 +69,16 @@ namespace VoodooShader
         default:
             return nullptr;
         }
+    }
+
+    // Boost intptr funcs
+    void intrusive_ptr_add_ref(IObject * obj)
+    {
+        obj->AddRef();
+    }
+
+    void intrusive_ptr_release(IObject * obj)
+    {
+        obj->Release();
     }
 }

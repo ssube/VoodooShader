@@ -24,10 +24,10 @@
 
 namespace VoodooShader
 {
-    class RegexImpl;
-
     class VOODOO_API Regex
     {
+        class RegexImpl;
+
     public:
         Regex();
         Regex(String expr);
@@ -38,10 +38,10 @@ namespace VoodooShader
         String GetExpr() const;
 
         // Match
-        Bool Match(const String & string) const;
+        bool Match(const String & string) const;
 
         // Find
-        Bool Find(const String & find) const;
+        bool Find(const String & find) const;
 
         // Replace
         String Replace(const String & find, const String & replace) const;

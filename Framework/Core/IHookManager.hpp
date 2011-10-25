@@ -45,28 +45,28 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw() = 0;
+        virtual int32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw() = 0;
+        virtual int32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.
          * 
          * @return The name.
          */
-        virtual String ToString(void) throw() = 0;
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw() = 0;
+        virtual ICore * GetCore(void) const throw() = 0;
 
         /**
          * Install a single hook at the specified point. This will only affect the process(es) the HookManager is bound to. 
@@ -79,7 +79,7 @@ namespace VoodooShader
          * @warning The calling convention of pSrc and pDest must be identical, or bad things might happen. This is only a 
          *     bother with member functions but should be noted for all.
          */
-        virtual Bool Add(_In_ String name, _In_ void * pSrc, _In_ void * pDest) throw() = 0;
+        virtual bool Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest) throw() = 0;
 
         /**
          * Removes a single hook.
@@ -90,7 +90,7 @@ namespace VoodooShader
          * @warning <em>Do not</em>, under any circumstances, remove a hook while execution is passing through the 
          *     trampoline function. This can cause the process to crash. Until EasyHook is replaced, be careful!
          */
-        virtual Bool Remove(_In_ String name) throw() = 0;
+        virtual bool Remove(_In_ const String & name) throw() = 0;
 
         /**
          * Removes all hooks created with this HookManager. 

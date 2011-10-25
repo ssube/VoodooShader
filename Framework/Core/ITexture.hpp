@@ -21,6 +21,8 @@
 
 #include "Includes.hpp"
 
+#include "String.hpp"
+
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -38,7 +40,7 @@ namespace VoodooShader
         public IObject
     {
     public:
-        ITexture(_In_ String name, _In_opt_ void * texture = nullptr);
+        ITexture(_In_ String name, _In_opt_ void * pTexture = nullptr);
 
         virtual ~ITexture(void);
 
@@ -47,46 +49,42 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw();
+        virtual int32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw();
+        virtual int32_t Release(void) const throw();
 
         /** 
          * Gets the name.
          * 
          * @return The name. 
          */
-        virtual String ToString(void);
+        virtual String ToString(void) const;
 
-        virtual ICore * GetCore(void);
-
-        template<typename T>
-        _Check_return_ 
-        inline T * GetData(void) { return reinterpret_cast<T *>(GetData()); };
+        virtual ICore * GetCore(void) const;
 
         /** 
          * Gets the data. 
          * 
          * @return nullptr if it fails, else the data. 
          */
-        _Check_return_ virtual void * GetData(void);
+        _Check_return_ virtual void * GetData(void) const;
 
         /**
          * Gets the texture description. 
          * 
          * @return The description.
          */ 
-        virtual TextureDesc GetDesc(void);
+        virtual TextureDesc GetDesc(void) const;
 
     private:
-        Int32 m_Refs;
+        mutable int32_t m_Refs;
         String m_Name;
-        ICoreRef m_Core;
+        ICore * m_Core;
         void * m_Data;
         TextureDesc m_Desc;
     };

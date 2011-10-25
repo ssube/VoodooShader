@@ -23,6 +23,12 @@
 #include <list>
 #include <map>
 #include <vector>
+#include <cstdint>
+
+#ifndef VOODOO_NO_BOOST
+#include <boost/intrusive_ptr.hpp>
+#include <boost/uuid/uuid.hpp>
+#endif
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -63,23 +69,19 @@
 
 namespace VoodooShader
 {
-    /* Basic types */
-    typedef bool Bool;
-    typedef unsigned __int8 UInt8;
-    typedef __int8 Int8;
-    typedef unsigned __int16 UInt16;
-    typedef __int16 Int16;
-    typedef unsigned __int32 UInt32;
-    typedef __int32 Int32;
-    typedef unsigned __int64 UInt64;
-    typedef __int64 Int64;
-    typedef float Float;
-
     /* Custom basic types */
     class Exception;
-    template <typename T> class Reference;
-    class String;
     class Regex;
+    class String;
+
+#ifndef VOODOO_NO_BOOST
+    typedef boost::uuids::uuid Uuid;
+#else
+    typedef struct  
+    {
+        uint8_t data[16];
+    } Uuid;
+#endif
 
     namespace Xml
     {
@@ -103,9 +105,9 @@ namespace VoodooShader
     struct Version;
 
     /* Geometry-related structs */
-    struct Float2;
-    struct Float3;
-    struct Float4;
+    struct float2;
+    struct float3;
+    struct float4;
     struct VertexStruct;
     struct LightStruct;
 
@@ -128,22 +130,28 @@ namespace VoodooShader
     class ITexture;
 
     /* Reference typedefs */
-    typedef Reference<IAdapter> IAdapterRef;
-    typedef Reference<ICore> ICoreRef;
-    typedef Reference<IFile> IFileRef;
-    typedef Reference<IFileSystem> IFileSystemRef;
-    typedef Reference<IHookManager> IHookManagerRef;
-    typedef Reference<IImage> IImageRef;
-    typedef Reference<ILogger> ILoggerRef;
-    typedef Reference<IModule> IModuleRef;
-    typedef Reference<IModuleManager> IModuleManagerRef;
-    typedef Reference<IObject> IObjectRef;
-    typedef Reference<IParameter> IParameterRef;
-    typedef Reference<IParser> IParserRef;
-    typedef Reference<IPass> IPassRef;
-    typedef Reference<IShader> IShaderRef;
-    typedef Reference<ITechnique> ITechniqueRef;
-    typedef Reference<ITexture> ITextureRef;
+#ifndef VOODOO_NO_BOOST
+    // Boost intrusive_ptr functions
+    void VOODOO_API intrusive_ptr_add_ref(IObject * obj);
+    void VOODOO_API intrusive_ptr_release(IObject * obj);
+
+    typedef boost::intrusive_ptr<IAdapter> IAdapterRef;
+    typedef boost::intrusive_ptr<ICore> ICoreRef;
+    typedef boost::intrusive_ptr<IFile> IFileRef;
+    typedef boost::intrusive_ptr<IFileSystem> IFileSystemRef;
+    typedef boost::intrusive_ptr<IHookManager> IHookManagerRef;
+    typedef boost::intrusive_ptr<IImage> IImageRef;
+    typedef boost::intrusive_ptr<ILogger> ILoggerRef;
+    typedef boost::intrusive_ptr<IModule> IModuleRef;
+    typedef boost::intrusive_ptr<IModuleManager> IModuleManagerRef;
+    typedef boost::intrusive_ptr<IObject> IObjectRef;
+    typedef boost::intrusive_ptr<IParameter> IParameterRef;
+    typedef boost::intrusive_ptr<IParser> IParserRef;
+    typedef boost::intrusive_ptr<IPass> IPassRef;
+    typedef boost::intrusive_ptr<IShader> IShaderRef;
+    typedef boost::intrusive_ptr<ITechnique> ITechniqueRef;
+    typedef boost::intrusive_ptr<ITexture> ITextureRef;
+#endif
 
     /* Collections */
     typedef std::map<String, String> Dictionary;
@@ -163,7 +171,7 @@ namespace VoodooShader
     typedef std::list<ITextureRef> TextureList;
     typedef std::vector<ITextureRef> TextureVector;
     typedef std::map<String, IModuleRef> ModuleMap;
-    typedef std::pair<IModuleRef, Int32> ClassID;
+    typedef std::pair<IModuleRef, int32_t> ClassID;
     typedef std::map<String, ClassID> ClassMap;
     typedef std::map<ITextureRef, IShaderRef> MaterialMap;
 
@@ -184,7 +192,7 @@ namespace VoodooShader
         TF_RGBA8    = 0x104, /* !< 8 bit RGBA. Common texture format. */
         TF_RGB10A2  = 0x105, /* !< 10 bit RGB, 2 bit A */
 
-        // Float texture formats
+        // float texture formats
         TF_RGBA16F  = 0x201, /* !< Half-precision RGBA. HDR format. */
         TF_RGBA32F  = 0x202, /* !< Full-precision RGBA (float/single). HDR format. */
 
@@ -203,7 +211,7 @@ namespace VoodooShader
     enum ParameterType
     {
         PT_Unknown  = 0x00, /* !< Unknown parameter type */
-        // Floats
+        // floats
         PT_Float1   = 0x11, /* !< Single-component float vector */
         PT_Float2   = 0x12, /* !< Two-component float vector */
         PT_Float3   = 0x13, /* !< Three-component float vector */
@@ -240,7 +248,7 @@ namespace VoodooShader
     enum ParameterCategory
     {
         PC_Unknown      = 0x00, /* !< Unknown parameter category */
-        PC_Float        = 0x01, /* !< Float vector parameter (may have 1 to 4 components) */
+        PC_Float        = 0x01, /* !< float vector parameter (may have 1 to 4 components) */
         PC_Sampler      = 0x02, /* !< Sampler parameter (may sample 1D to 3D textures) */
         PC_Struct       = 0x04,
         PC_Max          = 0x7FFFFFFF /* !< Highest possible value, forcing dword type */
@@ -318,10 +326,10 @@ namespace VoodooShader
         LL_ModInfo      = 0x42,
         LL_ModWarn      = 0x44,
         LL_ModError     = 0x48,
-        LL_IntDebug     = 0x81,
-        LL_IntInfo      = 0x82,
-        LL_IntWarn      = 0x84,
-        LL_IntError     = 0x88,
+        LL_CoreDebug    = 0x81,
+        LL_CoreInfo     = 0x82,
+        LL_CoreWarn     = 0x84,
+        LL_CoreError    = 0x88,
         LL_Initial      = 0xFE,
         // Masks
         LL_Severity     = 0x0F,
@@ -381,11 +389,11 @@ namespace VoodooShader
      */
     struct TextureDesc
     {
-        Int32 Width;
-        Int32 Height;
-        Int32 Depth;
-        Bool Mipmaps;
-        Bool RenderTarget;
+        int32_t Width;
+        int32_t Height;
+        int32_t Depth;
+        bool Mipmaps;
+        bool RenderTarget;
         TextureFormat Format;
     };
 
@@ -396,9 +404,9 @@ namespace VoodooShader
     struct TextureRegion :
         public TextureDesc
     {
-        Int32 OffX;
-        Int32 OffY;
-        Int32 OffZ;
+        int32_t OffX;
+        int32_t OffY;
+        int32_t OffZ;
     };
 
     /**
@@ -407,28 +415,28 @@ namespace VoodooShader
     struct Version
     {
         const char * Name;
-        Int32 Major;
-        Int32 Minor;
-        Int32 Patch;
-        Int32 Rev;
-        Bool Debug;
+        int32_t Major;
+        int32_t Minor;
+        int32_t Patch;
+        int32_t Rev;
+        bool Debug;
     };
 
-    struct Float2
+    struct float2
     {
-        Float X, Y;
+        float X, Y;
     };
 
-    struct Float3 :
-        public Float2
+    struct float3 :
+        public float2
     {
-        Float Z;
+        float Z;
     };
 
-    struct Float4 :
-        public Float3
+    struct float4 :
+        public float3
     {
-        Float W;
+        float W;
     };
 
     /**
@@ -436,9 +444,9 @@ namespace VoodooShader
      */
     struct VertexStruct
     {
-        Float3 Position;
-        Float Winding;
-        Float2 TexCoord;
+        float3 Position;
+        float Winding;
+        float2 TexCoord;
     };
 
     /**
@@ -446,17 +454,17 @@ namespace VoodooShader
      */
     struct LightStruct
     {
-        Int32 Type;
-        Float4 Diffuse;
-        Float4 Specular;
-        Float4 Ambient;
-        Float3 Position;
-        Float3 Direction;
-        Float Range;
-        Float Falloff;
-        Float3 Attenuation;
-        Float Theta;
-        Float Phi;
+        int32_t Type;
+        float4 Diffuse;
+        float4 Specular;
+        float4 Ambient;
+        float3 Position;
+        float3 Direction;
+        float Range;
+        float Falloff;
+        float3 Attenuation;
+        float Theta;
+        float Phi;
     };
 
     /**
@@ -464,9 +472,9 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef std::function<Int32 (void)> CountFunc;
-        typedef std::function<String (Int32)> InfoFunc;
-        typedef std::function<IObject * (Int32, ICore *)> CreateFunc;
+        typedef std::function<int32_t (void)> CountFunc;
+        typedef std::function<String (int32_t)> InfoFunc;
+        typedef std::function<IObject * (int32_t, ICore *)> CreateFunc;
         typedef std::function<Version ()> VersionFunc;
     };
 

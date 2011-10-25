@@ -21,6 +21,8 @@
 
 #include "Includes.hpp"
 
+#include "String.hpp"
+
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -44,28 +46,28 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw();
+        virtual int32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw();
+        virtual int32_t Release(void) const throw();
 
         /**
          * Get the name of this object.
          * 
          * @return The name.
          */
-        virtual String GetName(void) throw();
+        virtual String ToString(void) const throw();
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw();
+        virtual ICore * GetCore(void) const throw();
 
         /**
          * Adds a variable to the internal dictionary. 
@@ -74,14 +76,14 @@ namespace VoodooShader
          * @param value The variable's value (may contain variables, they will be resolved when this variable is used).
          * @param system Marks the variable as a system variable. These cannot be changed or removed.
          */
-        virtual void Add(_In_ const String name, _In_ const String value, _In_ VariableType type = VT_Normal) throw();
+        virtual void Add(_In_ const String & name, _In_ const String & value, _In_ VariableType type = VT_Normal) throw();
 
         /**
          * Removes a variable from the internal dictionary. 
          * 
          * @param name The variable name (may contain variables, they will be resolved immediately).
          */
-        virtual void Remove(_In_ const String name) throw();
+        virtual void Remove(_In_ const String & name) throw();
 
         /**
          * Parses a string, replacing any variables with their values. Variables are resolved when found, so it is 
@@ -89,21 +91,21 @@ namespace VoodooShader
          *
          * @sa @ref varsyntax for details on how variables work
          */
-        virtual String Parse(_In_ String input, _In_ ParseFlags flags = PF_None) throw();
+        virtual String Parse(_In_ String input, _In_ ParseFlags flags = PF_None) const throw();
 
         static const int VarMaxDepth = 8;
-        static const char VarDelimStart = '(';
-        static const char VarDelimEnd = ')';
-        static const char VarDelimPre = '$';
+        static const char VarDelimPre    = '$';
+        static const char VarDelimStart  = '(';
+        static const char VarDelimEnd    = ')';
+        static const char VarMarkerState = ':';
+        static const char VarMarkerRaw   = '!';
+        static const char VarMarkerSupp  = '?';
 
     private:
-        String ToLower(_In_ String Input);
-        String ToUpper(_In_ String Input);
+        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state) const;
 
-        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary &state);
-
-        Int32 m_Refs;
-        ICoreRef m_Core;
+        mutable int32_t m_Refs;
+        ICore * m_Core;
         Dictionary m_Variables;
         Dictionary m_SysVariables;
     };

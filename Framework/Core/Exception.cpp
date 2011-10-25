@@ -20,6 +20,9 @@
 
 #include "Exception.hpp"
 
+#include "ICore.hpp"
+#include "ILogger.hpp"
+
 namespace VoodooShader
 {
     Exception::Exception
@@ -31,18 +34,18 @@ namespace VoodooShader
         _In_ char *function,
         _In_ int line
     ) :
-    std::exception(message),
-        m_FmtMsg(nullptr),
+        std::exception(message),
+        m_Core(core),
         m_Module(module),
         m_Message(message),
-        m_Core(core),
         m_File(file),
         m_Function(function),
-        m_Line(line)
+        m_Line(line),
+        m_FmtMsg(nullptr)
     {
         if (core)
         {
-            ILoggerRef logger(core->GetLogger());
+            ILoggerRef logger = core->GetLogger();
 
             if (logger)
             {
@@ -60,30 +63,30 @@ namespace VoodooShader
         _In_ char *function,
         _In_ int line
     ) :
-        std::exception(message.c_str()),
-            m_FmtMsg(nullptr),
+        std::exception(message.GetData()),
+            m_Core(core),
             m_Module(module),
             m_Message(message),
-            m_Core(core),
             m_File(file),
             m_Function(function),
-            m_Line(line)
+            m_Line(line),
+            m_FmtMsg(nullptr)
     {
         if (core)
         {
-            ILoggerRef logger(core->GetLogger());
+            ILoggerRef logger = core->GetLogger();
 
             if (logger)
             {
                 logger->Log
                 (
                     LL_Error,
-                    module.c_str(),
+                    module.GetData(),
                     "Exception in %s at %s (%d): %s",
                     file,
                     function,
                     line,
-                    message.c_str()
+                    message.GetData()
                 );
             }
         }
@@ -93,11 +96,11 @@ namespace VoodooShader
     {
         if (m_FmtMsg)
         {
-            delete m_FmtMsg;
+            delete[] m_FmtMsg;
         }
     }
 
-    const char *Exception::what(void)
+    const char * Exception::what(void)
     {
         if (m_FmtMsg == nullptr)
         {
@@ -109,11 +112,11 @@ namespace VoodooShader
                 m_FmtMsg,
                 1024,
                 "VoodooShader::Exception in module %s, file %s at %s (line %d): %s",
-                m_Module.c_str(),
+                m_Module.GetData(),
                 m_File,
                 m_Function,
                 m_Line,
-                m_Message.c_str()
+                m_Message.GetData()
             );
         }
 

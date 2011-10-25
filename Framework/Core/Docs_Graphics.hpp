@@ -153,7 +153,7 @@ namespace VoodooShader
   * <td>N/Y-ish<sup>2</sup>/N</td> <td>16</td> <td>R<sup>3</sup></td></tr>
   * <tr><td>@ref TF_D32</td> <td>D3DFMT_D32F</td> <td>GL_DEPTH_COMPONENT32</td>
   * <td>N/Y-ish<sup>2</sup>/N</td> <td>32</td> <td>R<sup>3</sup></td></tr> </table>
-  * <em><sup>1</sup>:</em> Floating-point texture formats (@ref TF_RGBA16F and @ref
+  * <em><sup>1</sup>:</em> floating-point texture formats (@ref TF_RGBA16F and @ref
   * TF_RGBA32F) may not be supported on all hardware. Any features requiring these
   * formats should provide an alternate render path for old hardware (quality may
   * suffer). <br /> <em><sup>2</sup>:</em> Depth textures suffer additional

@@ -23,6 +23,13 @@
 
 #include "Includes.hpp"
 
+#include "Converter.hpp"
+#include "Exception.hpp"
+#include "Regex.hpp"
+#include "String.hpp"
+#include "Version.hpp"
+#include "Xml.hpp"
+
 #include "IAdapter.hpp"
 #include "ICore.hpp"
 #include "IFilesystem.hpp"

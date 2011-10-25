@@ -42,28 +42,28 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual Int32 AddRef(void) throw() = 0;
+        virtual int32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual Int32 Release(void) throw() = 0;
+        virtual int32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.
          * 
          * @return The name.
          */
-        virtual String ToString(void) throw() = 0;
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) throw() = 0;
+        virtual ICore * GetCore(void) const throw() = 0;
 
         /**
          * Loads a pass in a manner that is compatible with the adapter's underlying API. For Cg-supported APIs, this may 
@@ -77,7 +77,7 @@ namespace VoodooShader
          *     guarantee is that if this call returns true, the pass may be bound to this adapter in the future. If this 
          *     returns false, the pass must not be bound.
          */
-        virtual Bool LoadPass(_In_ const IPass * const pPass) throw() = 0;
+        virtual bool LoadPass(_In_ IPass * const pPass) throw() = 0;
 
         /**
          * Unloads a pass from the adapter. 
@@ -87,7 +87,7 @@ namespace VoodooShader
          * @warning There is no guarantee what will occur within this function, but the pass given should @e never be bound 
          *     after being unloaded.
          */
-        virtual Bool UnloadPass(_In_ const IPass * const pPass) throw() = 0;
+        virtual bool UnloadPass(_In_ IPass * const pPass) throw() = 0;
 
         /**
          * Causes the adapter to load a pass for drawing. The adapter may choose which programs to bind and how to handle 
@@ -108,14 +108,14 @@ namespace VoodooShader
          * @note Adapters must restore all states when a pass is unbound to the exact previous state. The exact 
          *     implementation is left to the adapter, but DX provides some APIs to handle this rather well.
          */
-        virtual void SetPass(_In_opt_ const IPass * const pPass) throw() = 0;
+        virtual void SetPass(_In_opt_ IPass * const pPass) throw() = 0;
 
         /**
          * Get the currently bound pass.
          * 
          * @return The bound pass, or nullptr if none.
          */
-        virtual IPass * GetPass(void) throw() = 0;
+        virtual IPass * GetPass(void) const throw() = 0;
 
         /**
          * Sets a render target for the adapter.
@@ -128,7 +128,7 @@ namespace VoodooShader
          *     target. Most common formats should be supported, so long as all targets are the same format. Many cards allow 
          *     up to 4 targets. Anything beyond this should not be expected to be widely supported.
          */
-        virtual Bool SetTarget(_In_ UInt32 index, _In_opt_ const ITexture * const pTarget) throw() = 0;
+        virtual bool SetTarget(_In_ uint32_t index, _In_opt_ ITexture * const pTarget) throw() = 0;
 
         /**
          * Gets a render target from the adapter. 
@@ -136,7 +136,7 @@ namespace VoodooShader
          * @param Index The target index to get.
          * @returns The texture bound to the target, or nullptr if no bound texture.
          */
-        virtual ITexture * GetTarget(_In_ UInt32 index) throw() = 0;
+        virtual ITexture * GetTarget(_In_ uint32_t index) const throw() = 0;
 
         /**
          * Creates a named texture within the API and returns it for registration and handling. 
@@ -169,7 +169,7 @@ namespace VoodooShader
          * @param Vertexes The number of vertexes to draw. 
          * @param pVertexData This must contain vertex data for the given number of verts.
          */
-        virtual void DrawGeometry(_In_ Int32 vertexCount, _In_count_(vertexCount) const VertexStruct * const pVertexData) throw() = 0;
+        virtual void DrawGeometry(_In_ int32_t vertexCount, _In_count_(vertexCount) const VertexStruct * const pVertexData) throw() = 0;
 
         /**
          * Downloads a parameter's value from system RAM to VRAM, verifying that the value on the GPU (and in use) is the 
@@ -178,7 +178,7 @@ namespace VoodooShader
          * 
          * @param Parameter The parameter to apply.
          */
-        virtual void ApplyParameter(_In_ const IParameter * const pParameter) throw() = 0;
+        virtual void ApplyParameter(_In_ IParameter * const pParameter) throw() = 0;
 
         /**
          * Set a property on the adapter. 
@@ -191,7 +191,7 @@ namespace VoodooShader
          */
         virtual void SetProperty(const String & name, const String & value) throw() = 0;
 
-        virtual String GetProperty(const String & name) throw() = 0;
+        virtual String GetProperty(const String & name) const throw() = 0;
 
         /**
          * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses 
@@ -202,7 +202,7 @@ namespace VoodooShader
          * @param pTexture The texture to be bound. 
          * @return Whether or not the binding was successful
          */
-        virtual Bool ConnectTexture(_In_ const IParameter * const pParam, _In_ const ITexture * const pTexture) throw() = 0;
+        virtual bool ConnectTexture(_In_ IParameter * const pParam, _In_ ITexture * const pTexture) throw() = 0;
 
         /**
          * A generic error-handling callback provided to the Cg runtime. This will be called by Core::CgErrorHandler() in 
@@ -219,6 +219,6 @@ namespace VoodooShader
          *     returns nullptr. The Core error handler does just this, @e after the adapter's error handler returns. Thus, if 
          *     the adapter does not dump compiler listings, the core will.
          */
-        virtual void HandleError(_In_ CGcontext const pContext, _In_ Int32 error) throw() = 0;
+        virtual void HandleError(_In_ CGcontext const pContext, _In_ int32_t error) throw() = 0;
     };
 }

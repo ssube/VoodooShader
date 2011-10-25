@@ -129,9 +129,6 @@
     <ClInclude Include="Converter.hpp">
       <Filter>Headers\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Reference.hpp">
-      <Filter>Headers\Utility</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">
