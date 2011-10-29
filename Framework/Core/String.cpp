@@ -28,41 +28,170 @@ namespace VoodooShader
     class String::StringImpl
     {
     public:
-        StringImpl() : 
-          m_Str()
-        {};
-
-        StringImpl(const wchar_t * str) : 
-          m_Str(str)
-        {};
+        StringImpl() : m_Str() {};
+        StringImpl(const uint32_t size, const wchar_t ch) : m_Str(size, ch) {};
+        StringImpl(const wchar_t * str) : m_Str(str) {};
+        StringImpl(const uint32_t size, const wchar_t * str) : m_Str(str, size) {};
 
     public:
         std::wstring m_Str;
     };
 
-    void String::Init(const wchar_t * str)
+    String::String()
     {
-        if (str)
-        {
-            m_Impl = new StringImpl(str);
-        } else {
-            m_Impl = new StringImpl();
-        }
+        m_Impl = new StringImpl();
     }
 
-    void String::ToLower()
+    String::String(const wchar_t ch)
     {
-        return boost::to_lower(m_Impl->m_Str);
+        m_Impl = new StringImpl(1, ch);
     }
 
-    void String::ToUpper()
+    String::String(const wchar_t * str)
     {
-        return boost::to_upper(m_Impl->m_Str);
+        m_Impl = new StringImpl(str);
     }
 
-    void String::Clear()
+    String::String(const uint32_t size, const wchar_t ch)
     {
-        return m_Impl->m_Str.clear();
+        m_Impl = new StringImpl(size, ch);
+    }
+
+    String::String(const uint32_t size, const wchar_t * str)
+    {
+        m_Impl = new StringImpl(size, str);
+    }
+
+    String::~String()
+    {
+        delete m_Impl;
+        m_Impl = nullptr;
+    }
+
+    void String::CInit(const char * str)
+    {
+        int len = MultiByteToWideChar(CP_UTF8, NULL, str, -1, NULL, 0);
+        std::vector<wchar_t> wstr(len);
+        MultiByteToWideChar(CP_UTF8, NULL, str, -1, &wstr[0], len);
+        m_Impl = new StringImpl(&wstr[0]);
+    }
+
+    void String::WInit(const wchar_t * str)
+    {
+        if (m_Impl) delete m_Impl;
+        m_Impl = new StringImpl(str);
+    }
+
+    String & String::Append(const wchar_t ch)
+    {
+        m_Impl->m_Str.append(1, ch);
+        return (*this);
+    }
+
+    String & String::Append(const uint32_t size, const wchar_t ch)
+    {
+        m_Impl->m_Str.append(size, ch);
+        return (*this);
+    }
+
+    String & String::Append(const wchar_t * str)
+    {
+        m_Impl->m_Str.append(str);
+        return (*this);
+    }
+
+    String & String::Append(const uint32_t size, const wchar_t * str)
+    {
+        m_Impl->m_Str.append(str, size);
+        return (*this);
+    }
+
+    String & String::Append(const String & str)
+    {
+        m_Impl->m_Str.append(str.m_Impl->m_Str);
+        return (*this);
+    }
+
+    String & String::Assign(const wchar_t ch)
+    {
+        m_Impl->m_Str.assign(1, ch);
+        return (*this);
+    }
+
+    String & String::Assign(const uint32_t size, const wchar_t ch)
+    {
+        m_Impl->m_Str.assign(size, ch);
+        return (*this);
+    }
+
+    String & String::Assign(const wchar_t * str)
+    {
+        m_Impl->m_Str.assign(str);
+        return (*this);
+    }
+
+    String & String::Assign(const uint32_t size, const wchar_t * str)
+    {
+        m_Impl->m_Str.assign(str, size);
+        return (*this);
+    }
+
+    String & String::Assign(const String & str)
+    {
+        m_Impl->m_Str.assign(str.m_Impl->m_Str);
+        return (*this);
+    }
+
+    String & String::Clear()
+    {
+        m_Impl->m_Str.clear();
+        return (*this);
+    }
+
+    String & String::Prepend(const wchar_t ch)
+    {
+        m_Impl->m_Str = std::wstring(1, ch) + m_Impl->m_Str;
+        return (*this);
+    }
+
+    String & String::Prepend(const uint32_t size, const wchar_t ch)
+    {
+        m_Impl->m_Str = std::wstring(size, ch) + m_Impl->m_Str;
+        return (*this);
+    }
+
+    String & String::Prepend(const wchar_t * str)
+    {
+        m_Impl->m_Str = std::wstring(str) + m_Impl->m_Str;
+        return (*this);
+    }
+
+    String & String::Prepend(const uint32_t size, const wchar_t * str)
+    {
+        m_Impl->m_Str = std::wstring(str, size) + m_Impl->m_Str;
+        return (*this);
+    }
+
+    String & String::Prepend(const String & str)
+    {
+        m_Impl->m_Str = str.m_Impl->m_Str + m_Impl->m_Str;
+        return (*this);
+    }
+
+    String & String::Truncate(uint32_t size)
+    {
+        m_Impl->m_Str = m_Impl->m_Str.substr(size);
+        return (*this);
+    }
+
+    String String::ToLower() const
+    {
+        return String(boost::to_lower_copy(m_Impl->m_Str));
+    }
+
+    String String::ToUpper() const
+    {
+        return String(boost::to_upper_copy(m_Impl->m_Str));
     }
 
     String String::Left(uint32_t count) const
@@ -75,6 +204,11 @@ namespace VoodooShader
         }
     }
 
+    String String::Right(uint32_t count) const
+    {
+        return String(m_Impl->m_Str.substr(max(this->GetLength() - count, 0), count));
+    }
+
     String String::Substr(uint32_t start, uint32_t count) const
     {
         if (count == String::Npos)
@@ -85,72 +219,7 @@ namespace VoodooShader
         }
     }
 
-    String String::Right(uint32_t count) const
-    {
-        return String(m_Impl->m_Str.substr(max(this->GetLength() - count, 0), count));
-    }
-
-    bool String::StartsWith(const char ch, bool useCase) const
-    {
-        if (useCase)
-        {
-            return boost::starts_with(m_Impl->m_Str, ch);
-        } else {
-            return boost::istarts_with(m_Impl->m_Str, ch);
-        }
-    }
-
-    bool String::StartsWith(const char * str, bool useCase) const
-    {
-        if (useCase)
-        {
-            return boost::starts_with(m_Impl->m_Str, str);
-        } else {
-            return boost::istarts_with(m_Impl->m_Str, str);
-        }
-    }
-
-    bool String::EndsWith(const char ch, bool useCase) const
-    {
-        if (useCase)
-        {
-            return boost::ends_with(m_Impl->m_Str, ch);
-        } else {
-            return boost::iends_with(m_Impl->m_Str, ch);
-        }
-    }
-
-    bool String::EndsWith(const char * str, bool useCase) const
-    {
-        if (useCase)
-        {
-            return boost::ends_with(m_Impl->m_Str, str);
-        } else {
-            return boost::iends_with(m_Impl->m_Str, str);
-        }
-    }
-
-    bool String::Contains(const char ch, bool useCase) const
-    {
-        if (useCase)
-        {
-            return boost::contains(m_Impl->m_Str, ch);
-        } else {
-            return boost::icontains(m_Impl->m_Str, ch);
-        }
-    }
-
-    bool String::Contains(const char * str, bool useCase) const
-    {
-        if (useCase)
-        {
-            return boost::contains(m_Impl->m_Str, str);
-        } else {
-            return boost::icontains(m_Impl->m_Str, str);
-        }
-    }
-
-    bool String::Compare(const char ch, bool useCase) const
+    bool String::Compare(const wchar_t ch, bool useCase) const
     {
         if (useCase)
         {
@@ -160,7 +229,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::Compare(const char * str, bool useCase) const
+    bool String::Compare(const wchar_t * str, bool useCase) const
     {
         if (useCase)
         {
@@ -170,130 +239,259 @@ namespace VoodooShader
         }
     }
 
-    uint32_t String::Find(const char ch, bool useCase) const
+    bool String::Compare(const String & str, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::equals(m_Impl->m_Str, str.m_Impl->m_Str);
+        } else {
+            return boost::iequals(m_Impl->m_Str, str.m_Impl->m_Str);
+        }
+    }
+
+    bool String::StartsWith(const wchar_t ch, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::starts_with(m_Impl->m_Str, ch);
+        } else {
+            return boost::istarts_with(m_Impl->m_Str, ch);
+        }
+    }
+
+    bool String::StartsWith(const wchar_t * str, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::starts_with(m_Impl->m_Str, str);
+        } else {
+            return boost::istarts_with(m_Impl->m_Str, str);
+        }
+    }
+
+    bool String::StartsWith(const String & str, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::starts_with(m_Impl->m_Str, str.m_Impl->m_Str);
+        } else {
+            return boost::istarts_with(m_Impl->m_Str, str.m_Impl->m_Str);
+        }
+    }
+
+    bool String::EndsWith(const wchar_t ch, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::ends_with(m_Impl->m_Str, ch);
+        } else {
+            return boost::iends_with(m_Impl->m_Str, ch);
+        }
+    }
+
+    bool String::EndsWith(const wchar_t * str, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::ends_with(m_Impl->m_Str, str);
+        } else {
+            return boost::iends_with(m_Impl->m_Str, str);
+        }
+    }
+
+    bool String::EndsWith(const String & str, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::ends_with(m_Impl->m_Str, str.m_Impl->m_Str);
+        } else {
+            return boost::iends_with(m_Impl->m_Str, str.m_Impl->m_Str);
+        }
+    }
+
+    bool String::Contains(const wchar_t ch, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::contains(m_Impl->m_Str, ch);
+        } else {
+            return boost::icontains(m_Impl->m_Str, ch);
+        }
+    }
+
+    bool String::Contains(const wchar_t * str, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::contains(m_Impl->m_Str, str);
+        } else {
+            return boost::icontains(m_Impl->m_Str, str);
+        }
+    }
+
+    bool String::Contains(const String & str, bool useCase) const
+    {
+        if (useCase)
+        {
+            return boost::contains(m_Impl->m_Str, str.m_Impl->m_Str);
+        } else {
+            return boost::icontains(m_Impl->m_Str, str.m_Impl->m_Str);
+        }
+    }
+
+    uint32_t String::Find(const wchar_t ch, bool useCase) const
     {
         if (useCase)
         {
             return m_Impl->m_Str.find(ch);
         } else {
-            return boost::to_lower_copy(m_Impl->m_Str).find(boost::to_lower(ch));
+            std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
+            wchar_t lch = towlower(ch);
+            return lstr.find(lch);
         }
     }
 
-    uint32_t String::Find(const char * str, bool useCase) const
+    uint32_t String::Find(const wchar_t * str, bool useCase) const
     {
         if (useCase)
         {
             return m_Impl->m_Str.find(str);
         } else {
-            return boost::to_lower_copy(m_Impl->m_Str).find(boost::to_lower_copy(str));
+            std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
+            std::wstring lfstr(str); 
+            boost::to_lower(lfstr);
+            return lstr.find(lfstr);
         }
     }
 
-    uint32_t String::ReverseFind(const char ch, bool useCase) const
+    uint32_t String::Find(const String & str, bool useCase) const
     {
         if (useCase)
         {
-            return m_Impl->m_Str.rfind(ch);
+            return m_Impl->m_Str.find(str.m_Impl->m_Str);
         } else {
-            return boost::to_lower_copy(m_Impl->m_Str).rfind(boost::to_lower_copy(ch));
+            std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
+            std::wstring lfstr = boost::to_lower_copy(str.m_Impl->m_Str);
+            return lstr.find(lfstr);
         }
     }
 
-    uint32_t String::ReverseFind(const char * str, bool useCase) const
+    uint32_t String::ReverseFind(const wchar_t ch, bool useCase) const
     {
         if (useCase)
         {
-            return m_Impl->m_Str.rfind(str);
+            return m_Impl->m_Str.find(ch);
         } else {
-            return boost::to_lower_copy(m_Impl->m_Str).rfind(boost::to_lower_copy(str));
+            std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
+            wchar_t lch = towlower(ch);
+            return lstr.rfind(lch);
         }
     }
 
-    void String::Replace(const char cfind, const char creplace, bool useCase)
+    uint32_t String::ReverseFind(const wchar_t * str, bool useCase) const
     {
         if (useCase)
         {
-            return boost::replace_all(m_Impl->m_Str, cfind, creplace);
+            return m_Impl->m_Str.find(str);
         } else {
-            return boost::ireplace_all(m_Impl->m_Str, cfind, creplace);
+            std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
+            std::wstring lfstr(str); 
+            boost::to_lower(lfstr);
+            return lstr.rfind(lfstr);
         }
     }
 
-    void String::Replace(const char cfind, const char * replace, bool useCase)
+    uint32_t String::ReverseFind(const String & str, bool useCase) const
     {
         if (useCase)
         {
-            return boost::replace_all(m_Impl->m_Str, cfind, replace);
+            return m_Impl->m_Str.find(str.m_Impl->m_Str);
         } else {
-            return boost::ireplace_all(m_Impl->m_Str, cfind, replace);
+            std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
+            std::wstring lfstr = boost::to_lower_copy(str.m_Impl->m_Str);
+            return lstr.rfind(lfstr);
         }
     }
 
-    void String::Replace(const char * find, const char creplace, bool useCase)
+    String & String::Replace(const wchar_t fch, const wchar_t rch, bool useCase)
     {
         if (useCase)
         {
-            return boost::replace_all(m_Impl->m_Str, find, creplace);
+            boost::replace_all(m_Impl->m_Str, fch, rch);
         } else {
-            return boost::ireplace_all(m_Impl->m_Str, find, creplace);
+            boost::ireplace_all(m_Impl->m_Str, fch, rch);
         }
+        return (*this);
     }
 
-    void String::Replace(const char * find, const char * replace, bool useCase)
+    String & String::Replace(const wchar_t * fstr, const wchar_t * rstr, bool useCase)
     {
         if (useCase)
         {
-            return boost::replace_all(m_Impl->m_Str, find, replace);
+            boost::replace_all(m_Impl->m_Str, fstr, rstr);
         } else {
-            return boost::ireplace_all(m_Impl->m_Str, find, replace);
+            boost::ireplace_all(m_Impl->m_Str, fstr, rstr);
         }
+        return (*this);
     }
 
-    void String::Erase(const char cfind, bool useCase)
+    String & String::Replace(const String & fstr, const String & rstr, bool useCase)
     {
         if (useCase)
         {
-            return boost::erase_all(m_Impl->m_Str, cfind);
+            boost::replace_all(m_Impl->m_Str, fstr, rstr);
         } else {
-            return boost::ierase_all(m_Impl->m_Str, cfind);
+            boost::ireplace_all(m_Impl->m_Str, fstr, rstr);
         }
+        return (*this);
     }
 
-    void String::Erase(const char * find, bool useCase)
+    String & String::Remove(const wchar_t fch, bool useCase)
     {
         if (useCase)
         {
-            return boost::erase_all(m_Impl->m_Str, find);
+            boost::erase_all(m_Impl->m_Str, fch);
         } else {
-            return boost::ierase_all(m_Impl->m_Str, find);
+            boost::ierase_all(m_Impl->m_Str, fch);
         }
+        return (*this);
     }
 
-    String String::Format(const char * fmt, ...)
+    String & String::Remove(const wchar_t * fstr, bool useCase)
     {
-        va_list args;
-        va_start(args, fmt);
-        String str = String::FormatV(fmt, args);
-        va_end(args);
-
-        return str;
+        if (useCase)
+        {
+            boost::erase_all(m_Impl->m_Str, fstr);
+        } else {
+            boost::ierase_all(m_Impl->m_Str, fstr);
+        }
+        return (*this);
     }
 
-    String String::FormatV(const char * fmt, va_list args)
+    String & String::Remove(const String & fstr, bool useCase)
     {
-        char buffer[4096];
-        vsnprintf_s(buffer, 4095, fmt, args);
-        buffer[4095] = 0;
-        return String(buffer);
+        if (useCase)
+        {
+            boost::erase_all(m_Impl->m_Str, fstr);
+        } else {
+            boost::ierase_all(m_Impl->m_Str, fstr);
+        }
+        return (*this);
     }
 
-    void String::AppendFormat(_Printf_format_string_ const char * fmt, ...)
+    String String::FormatV(const wchar_t * fmt, va_list args)
     {
-        va_list args;
-        va_start(args, fmt);
-        (*this) += String::FormatV(fmt, args);
-        va_end(args);        
+        int bufsize = _vscwprintf(fmt, args) + 1;
+        std::vector<wchar_t> buffer(bufsize);
+
+        int len = _vsnwprintf_s(&buffer[0], len, len-1, fmt, args);
+
+        if (len == -1)
+        {
+            return String();
+        } else {
+            return String(buffer);
+        }
     }
 
     uint32_t String::GetLength() const
@@ -306,84 +504,46 @@ namespace VoodooShader
         return (this->GetLength() == 0);
     }
 
-    const char * String::GetData() const
-    {
-        return m_Impl->m_Str.c_str();
-    }
-
-    char String::GetAt(uint32_t pos) const
+    wchar_t String::GetAt(uint32_t pos) const
     {
         //! @todo Error checking on pos.
         return m_Impl->m_Str.at(pos);
     }
 
-    char & String::operator[](uint32_t pos)
+    wchar_t & String::operator[](uint32_t pos)
     {
         //! @todo Error checking on pos.
         return m_Impl->m_Str.at(pos);
     }
 
-    void String::SetAt(uint32_t pos, char data)
+    void String::SetAt(uint32_t pos, wchar_t data)
     {
         //! @todo Error checking on pos.
         m_Impl->m_Str[pos] = data;
     }
 
-    String::operator const char *() const
+    const wchar_t * String::GetData() const
     {
         return m_Impl->m_Str.c_str();
     }
 
-    String & String::operator=(const char cother)
+    bool String::operator<(const wchar_t * str) const
     {
-        m_Impl->m_Str = cother;
-        return (*this);
+        return (m_Impl->m_Str < str);
     }
 
-    String & String::operator=(const char * other)
+    bool String::operator<(const String & str) const
     {
-        m_Impl->m_Str = other;
-        return (*this);
+        return (m_Impl->m_Str < str.m_Impl->m_Str);
     }
 
-    const String String::operator+(const char cother) const
+    bool String::operator>(const wchar_t * str) const
     {
-        String str(this->GetData());
-        str += cother;
-        return str;
+        return (m_Impl->m_Str > str);
     }
 
-    const String String::operator+(const char * other) const
+    bool String::operator>(const String & str) const
     {
-        String str(this->GetData());
-        str += other;
-        return str;
-    }
-
-    String & String::operator+=(const char cother)
-    {
-        m_Impl->m_Str += cother;
-        return (*this);
-    }
-
-    String & String::operator+=(const char * other)
-    {
-        m_Impl->m_Str += other;
-        return (*this);
-    }
-
-    bool String::operator==(const char * other) const
-    {
-        return (m_Impl->m_Str == other);
-    }
-
-    bool String::operator!=(const char * other) const
-    {
-        return !(*this == other);
-    }
-
-    bool String::operator<(const char * other) const
-    {
-        return (m_Impl->m_Str < other);
+        return (m_Impl->m_Str > str.m_Impl->m_Str);
     }
 }
