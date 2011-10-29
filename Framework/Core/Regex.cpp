@@ -33,11 +33,11 @@ namespace VoodooShader
         { };
 
         RegexImpl(String expr)
-            : m_Regex(expr), m_Expr(expr)
+            : m_Regex(expr.GetData()), m_Expr(expr)
         { };
 
     public:
-        std::regex m_Regex;
+        std::wregex m_Regex;
         String m_Expr;
     };
 
@@ -68,16 +68,16 @@ namespace VoodooShader
 
     bool Regex::Match(const String & string) const
     {
-        return std::regex_match(static_cast<std::string>(string), m_Impl->m_Regex);
+        return std::regex_match(string.ToString(), m_Impl->m_Regex);
     }
 
     bool Regex::Find(const String & find) const
     {
-        return std::regex_search(static_cast<std::string>(find), m_Impl->m_Regex);
+        return std::regex_search(find.ToString(), m_Impl->m_Regex);
     }
 
     String Regex::Replace(const String & find, const String & replace) const
     {
-        return std::regex_replace(static_cast<std::string>(find), m_Impl->m_Regex, static_cast<std::string>(replace));
+        return std::regex_replace(find.ToString(), m_Impl->m_Regex, replace.ToString());
     }
 }

@@ -133,7 +133,7 @@ namespace VoodooShader
                 logger->Log(LL_Error, VOODOO_CORE_NAME, L"Unable to load module %s.", path.GetData());
             }
 
-            return nullptr;
+            return false;
         }
 
         IModule* module(rawmodule);
@@ -141,16 +141,16 @@ namespace VoodooShader
         m_Modules[path] = module;
 
         // Register classes from module
-        Version moduleversion = rawmodule->ModuleVersion();
+        const Version * moduleversion = rawmodule->ModuleVersion();
 
-        if (moduleversion.Debug != VOODOO_META_DEBUG_bool && logger.get())
+        if (moduleversion->Debug != VOODOO_META_DEBUG_bool && logger.get())
         {
             logger->Log
             (
                 LL_Warning,
                 VOODOO_CORE_NAME,
                 L"Debug build mismatch with module %s.",
-                moduleversion.Name
+                moduleversion->Name
             );
         }
 
@@ -163,7 +163,7 @@ namespace VoodooShader
 
         for (int curClass = 0; curClass < classCount; ++curClass)
         {
-            const char *classname = module->ClassInfo(curClass);
+            const char * classname = module->ClassInfo(curClass);
 
             if (classname)
             {
@@ -171,7 +171,7 @@ namespace VoodooShader
             }
         }
 
-        return module;
+        return true;
     }
 
     void * IModuleManager::FindFunction(_In_ const String & module, _In_ const String & name) const
@@ -180,7 +180,10 @@ namespace VoodooShader
 
         if (hmodule)
         {
-            return GetProcAddress(hmodule, name.GetData());
+            int32_t len = name.ToCharStr(0, nullptr);
+            std::vector<char> buffer(len);
+            len = name.ToCharStr(len, &buffer[0]);
+            return GetProcAddress(hmodule, &buffer[0]);
         }
         else
         {
@@ -239,9 +242,7 @@ namespace VoodooShader
 
                     return nullptr;
                 }
-            }
-            else
-            {
+            } else {
                 if (logger)
                 {
                     logger->Log
@@ -255,9 +256,7 @@ namespace VoodooShader
 
                 return nullptr;
             }
-        }
-        else
-        {
+        } else {
             if (logger)
             {
                 logger->Log(LL_Error, VOODOO_CORE_NAME, L"Class %s not found.", name.GetData());
@@ -275,13 +274,12 @@ namespace VoodooShader
         // First set of error checks
         if (hmodule != nullptr)
         {
-            using namespace VoodooShader:: Functions;
-            IModule *module = new IModule(hmodule);
+            IModule * module = new IModule(hmodule);
 
-            module->m_ModuleVersion = (VersionFunc) GetProcAddress(hmodule, "ModuleVersion");
-            module->m_ClassCount = (CountFunc) GetProcAddress(hmodule, "ClassCount");
-            module->m_ClassInfo = (InfoFunc) GetProcAddress(hmodule, "ClassInfo");
-            module->m_ClassCreate = (CreateFunc) GetProcAddress(hmodule, "ClassCreate");
+            module->m_ModuleVersion = static_cast<Functions::VersionFunc>(GetProcAddress(hmodule, "ModuleVersion"));
+            module->m_ClassCount = static_cast<Functions::CountFunc>(GetProcAddress(hmodule, "ClassCount"));
+            module->m_ClassInfo = static_cast<Functions::InfoFunc>(GetProcAddress(hmodule, "ClassInfo"));
+            module->m_ClassCreate = static_cast<Functions::CreateFunc>(GetProcAddress(hmodule, "ClassCreate"));
 
             if
             (
@@ -314,7 +312,7 @@ namespace VoodooShader
         }
     }
 
-    Version IModule::ModuleVersion(void) const
+    const Version * IModule::ModuleVersion(void) const
     {
         return m_ModuleVersion();
     }
@@ -324,7 +322,7 @@ namespace VoodooShader
         return m_ClassCount();
     }
 
-    String IModule::ClassInfo(_In_ int32_t number) const
+    const char * IModule::ClassInfo(_In_ int32_t number) const
     {
         return m_ClassInfo(number);
     }

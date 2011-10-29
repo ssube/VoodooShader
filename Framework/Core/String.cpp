@@ -68,6 +68,11 @@ namespace VoodooShader
         m_Impl = nullptr;
     }
 
+    int32_t String::ToCharStr(int32_t size, char * const pBuffer) const
+    {
+        return WideCharToMultiByte(CP_UTF8, NULL, m_Impl->m_Str.c_str(), -1, pBuffer, size, NULL, NULL);
+    }
+
     void String::CInit(const char * str)
     {
         int len = MultiByteToWideChar(CP_UTF8, NULL, str, -1, NULL, 0);
@@ -223,9 +228,9 @@ namespace VoodooShader
     {
         if (useCase)
         {
-            return boost::equals(m_Impl->m_Str, ch);
+            return boost::equals(m_Impl->m_Str, std::wstring(1, ch));
         } else {
-            return boost::iequals(m_Impl->m_Str, ch);
+            return boost::iequals(m_Impl->m_Str, std::wstring(1, ch));
         }
     }
 
@@ -253,9 +258,9 @@ namespace VoodooShader
     {
         if (useCase)
         {
-            return boost::starts_with(m_Impl->m_Str, ch);
+            return boost::starts_with(m_Impl->m_Str, std::wstring(1, ch));
         } else {
-            return boost::istarts_with(m_Impl->m_Str, ch);
+            return boost::istarts_with(m_Impl->m_Str, std::wstring(1, ch));
         }
     }
 
@@ -283,9 +288,9 @@ namespace VoodooShader
     {
         if (useCase)
         {
-            return boost::ends_with(m_Impl->m_Str, ch);
+            return boost::ends_with(m_Impl->m_Str, std::wstring(1, ch));
         } else {
-            return boost::iends_with(m_Impl->m_Str, ch);
+            return boost::iends_with(m_Impl->m_Str, std::wstring(1, ch));
         }
     }
 
@@ -313,9 +318,9 @@ namespace VoodooShader
     {
         if (useCase)
         {
-            return boost::contains(m_Impl->m_Str, ch);
+            return boost::contains(m_Impl->m_Str, std::wstring(1, ch));
         } else {
-            return boost::icontains(m_Impl->m_Str, ch);
+            return boost::icontains(m_Impl->m_Str, std::wstring(1, ch));
         }
     }
 
@@ -417,9 +422,9 @@ namespace VoodooShader
     {
         if (useCase)
         {
-            boost::replace_all(m_Impl->m_Str, fch, rch);
+            boost::replace_all(m_Impl->m_Str, std::wstring(1, fch), std::wstring(1, rch));
         } else {
-            boost::ireplace_all(m_Impl->m_Str, fch, rch);
+            boost::ireplace_all(m_Impl->m_Str, std::wstring(1, fch), std::wstring(1, rch));
         }
         return (*this);
     }
@@ -439,9 +444,9 @@ namespace VoodooShader
     {
         if (useCase)
         {
-            boost::replace_all(m_Impl->m_Str, fstr, rstr);
+            boost::replace_all(m_Impl->m_Str, fstr.m_Impl->m_Str, rstr.m_Impl->m_Str);
         } else {
-            boost::ireplace_all(m_Impl->m_Str, fstr, rstr);
+            boost::ireplace_all(m_Impl->m_Str, fstr.m_Impl->m_Str, rstr.m_Impl->m_Str);
         }
         return (*this);
     }
@@ -450,9 +455,9 @@ namespace VoodooShader
     {
         if (useCase)
         {
-            boost::erase_all(m_Impl->m_Str, fch);
+            boost::erase_all(m_Impl->m_Str, std::wstring(1, fch));
         } else {
-            boost::ierase_all(m_Impl->m_Str, fch);
+            boost::ierase_all(m_Impl->m_Str, std::wstring(1, fch));
         }
         return (*this);
     }
@@ -472,9 +477,9 @@ namespace VoodooShader
     {
         if (useCase)
         {
-            boost::erase_all(m_Impl->m_Str, fstr);
+            boost::erase_all(m_Impl->m_Str, fstr.m_Impl->m_Str);
         } else {
-            boost::ierase_all(m_Impl->m_Str, fstr);
+            boost::ierase_all(m_Impl->m_Str, fstr.m_Impl->m_Str);
         }
         return (*this);
     }
@@ -484,7 +489,7 @@ namespace VoodooShader
         int bufsize = _vscwprintf(fmt, args) + 1;
         std::vector<wchar_t> buffer(bufsize);
 
-        int len = _vsnwprintf_s(&buffer[0], len, len-1, fmt, args);
+        int len = _vsnwprintf_s(&buffer[0], bufsize, bufsize-1, fmt, args);
 
         if (len == -1)
         {

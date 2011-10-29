@@ -57,7 +57,7 @@ namespace VoodooShader
          * @param Path The file to use for source.
          * @param ppArgs Optionals arguments to be passed to the compiler (last item in the array must be nullptr).
          */
-        IShader(_In_ ICore * pParent, _In_ String Path, _In_opt_ const char ** ppArgs = nullptr);
+        IShader(_In_ ICore * pParent, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
 
         /**
          * Destroys the shader, unlinking and cleaning up the effect and all techniques. 

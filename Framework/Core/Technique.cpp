@@ -32,9 +32,6 @@
 
 namespace VoodooShader
 {
-    /**
-     *
-     */
     ITechnique::ITechnique(IShader * pShader, CGtechnique pCgTech) :
         m_Shader(pShader), m_Core(pShader->GetCore()), m_CgTechnique(pCgTech), m_Target(nullptr)
     {
@@ -48,9 +45,6 @@ namespace VoodooShader
         }
     }
 
-    /**
-     *
-     */
     ITechnique::~ITechnique(void)
     {
         m_Target = nullptr;
@@ -73,9 +67,6 @@ namespace VoodooShader
         }
     }
 
-    /**
-     *
-     */
     String ITechnique::ToString(void) const
     {
 
@@ -86,17 +77,11 @@ namespace VoodooShader
         return name;
     }
 
-    /**
-     *
-     */
     ICore * ITechnique::GetCore(void) const
     {
         return m_Core;
     }
 
-    /**
-     *
-     */
     IPass * ITechnique::GetPass(int32_t index) const
     {
         if (index < this->m_Passes.size())
@@ -108,42 +93,27 @@ namespace VoodooShader
         }
     }
 
-    /**
-     *
-     */
     ITexture * ITechnique::GetTarget(void) const
     {
         return m_Target.get();
     }
 
-    /**
-     *
-     */
     int32_t ITechnique::GetPassCount(void) const
     {
         return this->m_Passes.size();
     }
 
-    /**
-     *
-     */
     IShader * ITechnique::GetShader(void) const
     {
         return m_Shader;
     }
 
-    /**
-     *
-     */
     CGtechnique ITechnique::GetCgTechnique(void) const
     {
         return m_CgTechnique;
     }
 
-    /**
-     *
-     */
-    void ITechnique::Link(ITechnique * pSelf)
+    void ITechnique::Link()
     {
         // Process the technique's target annotation
         CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(this->m_CgTechnique, "target");

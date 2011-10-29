@@ -389,12 +389,12 @@ namespace VoodooShader
      */
     struct InitParams
     {
-        const char * GlobalRoot;
-        const char * LocalRoot;
-        const char * RunRoot;
-        const char * Target;
-        const char * Loader;
-        const char * Config;
+        const wchar_t * GlobalRoot;
+        const wchar_t * LocalRoot;
+        const wchar_t * RunRoot;
+        const wchar_t * Target;
+        const wchar_t * Loader;
+        const wchar_t * Config;
     };
 
     /**
@@ -427,7 +427,7 @@ namespace VoodooShader
      */
     struct Version
     {
-        const char * Name;
+        const wchar_t * Name;
         int32_t Major;
         int32_t Minor;
         int32_t Patch;
@@ -486,9 +486,9 @@ namespace VoodooShader
     namespace Functions
     {
         typedef std::function<int32_t (void)> CountFunc;
-        typedef std::function<String (int32_t)> InfoFunc;
+        typedef std::function<const char * (int32_t)> InfoFunc;
         typedef std::function<IObject * (int32_t, ICore *)> CreateFunc;
-        typedef std::function<Version ()> VersionFunc;
+        typedef std::function<const Version * (void)> VersionFunc;
     };
 
     /**

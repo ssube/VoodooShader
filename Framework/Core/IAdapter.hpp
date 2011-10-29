@@ -153,7 +153,7 @@ namespace VoodooShader
          * @warning You must not call this method directly; it should only be used via Core::CreateTexture(). This method 
          *     does not set up the texture for use with the core. 
          */
-        virtual ITexture * CreateTexture(_In_ const String & name, _In_ TextureDesc desc) throw() = 0;
+        virtual ITexture * CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc) throw() = 0;
 
         /**
          * Loads a named texture into the API and registers it with the Core. The texture source is provided here and all 

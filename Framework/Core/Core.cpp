@@ -77,7 +77,7 @@ namespace VoodooShader
     {
         if (!pInitParams)
         {
-            throw std::exception("No init parameters provided.");
+            Throw(VOODOO_CORE_NAME, "No init parameters provided.", nullptr);
         }
 
 #ifdef VSF_DEBUG_MEMORY
@@ -136,7 +136,7 @@ namespace VoodooShader
             Xml::Node coreNode = configRoot.GetSingleNode(L"/VoodooConfig/ICore");
             if (!coreNode)
             {
-                throw std::exception("Could not find ICore node.");
+                Throw(VOODOO_CORE_NAME, L"Could not find ICore node.", nullptr);
             }
 
             // Create query for node text, used multiple times
@@ -211,7 +211,7 @@ namespace VoodooShader
             m_Logger = m_ModuleManager->CreateClass<ILogger>(logClass);
             if (m_Logger.get() == nullptr)
             {
-                throw std::exception("Unable to create Logger object (class not found).");
+                Throw(VOODOO_CORE_NAME, "Unable to create Logger object (class not found).", nullptr);
             }
 
             m_Logger->Open(logFile, false);
@@ -233,19 +233,19 @@ namespace VoodooShader
             m_FileSystem = m_ModuleManager->CreateClass<IFileSystem>(fsClass);
             if (!m_FileSystem)
             {
-                throw std::exception("Unable to create FileSystem object.");
+                Throw(VOODOO_CORE_NAME, "Unable to create FileSystem object.", nullptr);
             }
 
             m_HookManager = m_ModuleManager->CreateClass<IHookManager>(hookClass);
             if (!m_HookManager)
             {
-                throw std::exception("Unable to create HookManager object.");
+                Throw(VOODOO_CORE_NAME, "Unable to create HookManager object.", nullptr);
             }
 
             m_Adapter = m_ModuleManager->CreateClass<IAdapter>(adpClass);
             if (!m_Adapter)
             {
-                throw std::exception("Unable to create Adapter object.");
+                Throw(VOODOO_CORE_NAME, "Unable to create Adapter object.", nullptr);
             }
 
             // ICore done loading
@@ -297,7 +297,7 @@ namespace VoodooShader
 
     String ICore::ToString() const
     {
-        return String(L"Voodoo_Core");
+        return L"Voodoo_Core";
     }
 
     ICore * ICore::GetCore() const
@@ -387,70 +387,70 @@ namespace VoodooShader
         return shader;
     }
 
-    IParameter* ICore::CreateParameter(String Name, ParameterType Type)
+    IParameter* ICore::CreateParameter(const String & name, ParameterType type)
     {
-        ParameterMap::iterator paramEntry = this->m_Parameters.find(Name);
+        ParameterMap::iterator paramEntry = this->m_Parameters.find(name);
 
         if (paramEntry != this->m_Parameters.end())
         {
-            m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, "Trying to create a parameter with a duplicate name.");
+            m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, L"Trying to create a parameter with a duplicate name.");
             return nullptr;
         }
         else
         {
-            IParameter* parameter(new IParameter(this, Name, Type));
+            IParameter* parameter(new IParameter(this, name, type));
 
-            m_Parameters[Name] = parameter;
+            m_Parameters[name] = parameter;
 
             m_Logger->Log
             (
                 LL_Debug, VOODOO_CORE_NAME, 
-                "Created parameter named %s with type %s, returning shared pointer to %p.", Name.GetData(),
-                Converter::ToString(Type), parameter
+                L"Created parameter named %s with type %s, returning shared pointer to %p.", name.GetData(),
+                Converter::ToString(type), parameter
             );
 
             return parameter;
         }
     }
 
-    ITexture* ICore::CreateTexture(_In_ String Name, _In_ TextureDesc Desc)
+    ITexture* ICore::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
     {
-        TextureMap::iterator textureEntry = this->m_Textures.find(Name);
+        TextureMap::iterator textureEntry = this->m_Textures.find(name);
 
         if (textureEntry != this->m_Textures.end())
         {
-            m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, "Trying to create a texture with a duplicate name.");
+            m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, L"Trying to create a texture with a duplicate name.");
             return nullptr;
         }
         else
         {
-            ITexture* texture = m_Adapter->CreateTexture(Name, Desc);
+            ITexture* texture = m_Adapter->CreateTexture(name, desc);
 
-            this->m_Textures[Name] = texture;
+            this->m_Textures[name] = texture;
 
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Added texture %s, returning shared pointer to %p.",
-                Name.GetData(), texture);
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Added texture %s, returning shared pointer to %p.",
+                name.GetData(), texture);
 
             return texture;
         }
     }
 
-    IParameter* ICore::GetParameter(String Name, ParameterType Type)
+    IParameter* ICore::GetParameter(const String & name, ParameterType type) const
     {
-        ParameterMap::iterator parameter = this->m_Parameters.find(Name);
+        ParameterMap::const_iterator parameter = m_Parameters.find(name);
 
         if (parameter != this->m_Parameters.end())
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got parameter %s, returning shared pointer to %p.",
-                Name.GetData(), parameter->second);
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got parameter %s, returning shared pointer to %p.",
+                name.GetData(), parameter->second);
 
-            if (Type == PT_Unknown)
+            if (type == PT_Unknown)
             {
-                return parameter->second;
+                return parameter->second.get();
             }
-            else if (parameter->second->GetType() == Type)
+            else if (parameter->second->GetType() == type)
             {
-                return parameter->second;
+                return parameter->second.get();
             }
             else
             {
@@ -459,25 +459,25 @@ namespace VoodooShader
         }
         else
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.GetData());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Unable to find parameter %s.", name.GetData());
             return nullptr;
         }
     }
 
-    ITexture* ICore::GetTexture(_In_ String Name)
+    ITexture * ICore::GetTexture(const String & name) const
     {
-        TextureMap::iterator textureEntry = this->m_Textures.find(Name);
+        TextureMap::const_iterator textureEntry = this->m_Textures.find(name);
 
         if (textureEntry != this->m_Textures.end())
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", Name.GetData(),
-                textureEntry->second);
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got texture %s, returning shared pointer to %p.", 
+                name.GetData(), textureEntry->second);
 
-            return textureEntry->second;
+            return textureEntry->second.get();
         }
         else
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.GetData());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Unable to find texture %s.", name.GetData());
 
             return nullptr;
         }

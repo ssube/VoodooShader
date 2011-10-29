@@ -106,7 +106,7 @@ namespace VoodooShader
          * 
          * @param module The module version info to log.
          */
-        virtual void LogModule(_In_ Version module) throw() = 0;
+        virtual void LogModule(_In_ const Version * pModule) throw() = 0;
 
         /**
          * Log a message, may be formatted with printf syntax. 

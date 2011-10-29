@@ -145,7 +145,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Parsing string \"%s\" (%X).", input.GetData(), flags);
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"Parsing string \"%s\" (%X).", input.GetData(), flags);
         }
 
         if (depth > IParser::VarMaxDepth || input.GetLength() < 3)
@@ -193,16 +193,15 @@ namespace VoodooShader
                 // Erase the variable sequence if it is the empty variable and restart the loop
                 wstringstream output;
 
-                output << iteration.Substr(0, startpos - 1);
+                output << iteration.Substr(0, startpos - 1).GetData();
                 if (endpos < itlen)
                 {
-                    output << iteration.Substr(endpos + 1);
+                    output << iteration.Substr(endpos + 1).GetData();
                 }
 
                 iteration = output.str();
                 continue;
             }
-
 
             // Handle state variables
             size_t statepos = varname.Find(IParser::VarMarkerState);
@@ -221,7 +220,7 @@ namespace VoodooShader
 
                 wstringstream output;
 
-                output << iteration.Substr(0, startpos - 1) << iteration.Substr(endpos + 1);
+                output << iteration.Substr(0, startpos - 1).GetData() << iteration.Substr(endpos + 1).GetData();
                 iteration = output.str();
 
                 continue;
@@ -267,18 +266,13 @@ namespace VoodooShader
                         // Unrecognized variable, try env
                         size_t reqSize = 0;
 
-                        getenv_s(&reqSize, nullptr, 0, varname.GetData());
+                        _wgetenv_s(&reqSize, nullptr, 0, varname.GetData());
                         if (reqSize != 0)
                         {
-
-                            char *buffer = new char[reqSize];
-
-                            getenv_s(&reqSize, buffer, reqSize, varname.GetData());
-                            varvalue = buffer;
-                            delete[] buffer;
-                        }
-                        else
-                        {
+                            std::vector<wchar_t> buffer(reqSize);
+                            _wgetenv_s(&reqSize, &buffer[0], reqSize, varname.GetData());
+                            varvalue = String(buffer);
+                        } else {
                             foundvar = false;
                         }
                     }
@@ -287,17 +281,17 @@ namespace VoodooShader
 
             wstringstream output;
 
-            output << iteration.Substr(0, startpos - 1);
+            output << iteration.Substr(0, startpos - 1).GetData();
             if (parse && varvalue.GetLength() > 0)
             {
-                output << this->ParseStringRaw(varvalue, flags, ++depth, state);
+                output << this->ParseStringRaw(varvalue, flags, ++depth, state).GetData();
             }
             else if (!foundvar && !supress)
             {
-                output << _T("--badvar:") << varname << _T("--");
+                output << L"--badvar:" << varname.GetData() << L"--";
             }
 
-            output << iteration.Substr(endpos + 1);
+            output << iteration.Substr(endpos + 1).GetData();
 
             iteration = output.str();
         }
@@ -319,17 +313,17 @@ namespace VoodooShader
             bool singleslash = (flags & PF_SingleSlash);
             bool prevslash = false;
             bool slashrewrite = false;
-            char slashchar = ' ';
+            char slashchar = L' ';
 
             if (flags & PF_SlashOnly)
             {
                 slashrewrite = true;
-                slashchar = '/';
+                slashchar = L'/';
             }
             else if (flags & PF_BackslashOnly)
             {
                 slashrewrite = true;
-                slashchar = '\\';
+                slashchar = L'\\';
             }
 
             wstringstream output;
@@ -338,11 +332,11 @@ namespace VoodooShader
 
             while (cur < total)
             {
-                char inchar = iteration[cur];
+                wchar_t inchar = iteration[cur];
 
                 ++cur;
 
-                if (inchar == '/' || inchar == '\\')
+                if (inchar == L'/' || inchar == L'\\')
                 {
                     if (slashrewrite)
                     {
@@ -376,7 +370,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            logger->Log(LL_Debug, VOODOO_CORE_NAME, "Returning string %s from parser.", iteration.GetData());
+            logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Returning string %s from parser.", iteration.GetData());
         }
 
         return iteration;

@@ -96,7 +96,8 @@ namespace VoodooShader
             name = this->m_Shader->ToString();
         }
 
-        name += ":" + m_Name;
+        name += L":";
+        name += m_Name;
 
         return name;
     }

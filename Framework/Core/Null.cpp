@@ -98,10 +98,10 @@ namespace VoodooShader
             return nullptr;
         }
 
-        ITexture * NullAdapter::CreateTexture(_In_ const String & name, _In_ TextureDesc desc)
+        ITexture * NullAdapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
         {
             UNREFERENCED_PARAMETER(name);
-            UNREFERENCED_PARAMETER(desc);
+            UNREFERENCED_PARAMETER(pDesc);
 
             return nullptr;
         }
@@ -151,7 +151,7 @@ namespace VoodooShader
             return true;
         }
 
-        void NullAdapter::HandleError(_In_ CGcontext pContext, _In_ int error)
+        void NullAdapter::HandleError(_In_ CGcontext const pContext, _In_ int error)
         {
             UNREFERENCED_PARAMETER(pContext);
             UNREFERENCED_PARAMETER(error);
@@ -182,7 +182,7 @@ namespace VoodooShader
 
         String NullLogger::ToString(void) const
         {
-            return "NullLogger";
+            return L"NullLogger";
         }
 
         ICore * NullLogger::GetCore(void) const
@@ -214,9 +214,9 @@ namespace VoodooShader
             return LL_Unknown;
         }
 
-        void NullLogger::LogModule(_In_ Version module)
+        void NullLogger::LogModule(_In_ const Version * pModule)
         {
-            UNREFERENCED_PARAMETER(module);
+            UNREFERENCED_PARAMETER(pModule);
         }
 
         void NullLogger::Log(_In_ LogLevel level, _In_ const String & module, _In_ _Printf_format_string_ const String & msg, ...)
@@ -261,7 +261,7 @@ namespace VoodooShader
 
         String NullHookManager::ToString(void) const
         {
-            return "NullHookManager";
+            return L"NullHookManager";
         }
 
         ICore * NullHookManager::GetCore(void) const
@@ -313,7 +313,7 @@ namespace VoodooShader
 
         String NullFileSystem::ToString(void) const
         {
-            return "NullFileSystem";
+            return L"NullFileSystem";
         }
 
         ICore * NullFileSystem::GetCore(void) const

@@ -37,18 +37,37 @@ namespace VoodooShader
 
     public:
         String();
+        // char ctors
+        String(const char ch);
+        String(const char * str);
+        String(const uint32_t size, const char ch);
+        String(const uint32_t size, const char * str);
+        // wchar_t ctors
         String(const wchar_t ch);
         String(const wchar_t * str);
         String(const uint32_t size, const wchar_t ch);
         String(const uint32_t size, const wchar_t * str);
-        String(const String & other);
+        // class ctors
+        String(const String & str);
+
 #ifdef _VECTOR_
+        String(const std::vector<char> & str)
+        {
+            this->CInit(&str[0]);
+        }
+
         String(const std::vector<wchar_t> & str)
         {
             this->WInit(&str[0]);
         }
 #endif
+
 #ifdef _STRING_
+        String(const std::string & str)
+        {
+            this->CInit(str.c_str());
+        }
+
         String(const std::wstring & str)
         {
             this->WInit(str.c_str());
@@ -57,10 +76,10 @@ namespace VoodooShader
 
         ~String();
 
-        // Conversion functions
-        static String CharToString(const char * str) { String vstr; vstr.CInit(str); };
+        // Convert
+        int32_t ToCharStr(int32_t size, _In_opt_count_(size) char * const pBuffer) const;
 #ifdef _STRING_
-        inline static String StdToString(const std::string & str) { return String::CharToString(str.c_str()); };
+        std::wstring ToString() const { return std::wstring(this->GetData()); };
 #endif
 
         // Modify
@@ -127,6 +146,7 @@ namespace VoodooShader
         { 
             return String::FormatV(fmt.GetData(), args); 
         };
+
         inline static String Format(_In_ _Printf_format_string_ const wchar_t * fmt, ...)
         {
             va_list args;
@@ -135,6 +155,7 @@ namespace VoodooShader
             va_end(args);
             return str;
         };
+
         inline static String Format(_Printf_format_string_ const String & fmt, ...)
         {
             va_list args;
@@ -143,6 +164,7 @@ namespace VoodooShader
             va_end(args);
             return str;
         };
+
         inline String & AppendFormat(_Printf_format_string_ const wchar_t * fmt, ...) 
         { 
             va_list args; 
@@ -151,6 +173,7 @@ namespace VoodooShader
             va_end(args); 
             return (*this); 
         };
+
         inline String & AppendFormat(_Printf_format_string_ const String & fmt, ...)
         { 
             va_list args; 
@@ -196,13 +219,6 @@ namespace VoodooShader
         inline bool operator<=(const String & str) const { return !(this->operator>(str.GetData())); };
         inline bool operator>=(const wchar_t * str) const { return !(this->operator<(str)); };
         inline bool operator>=(const String & str) const { return !(this->operator<(str.GetData())); };
-
-#ifdef _OSTREAM_
-        friend inline std::wostream & operator<<(std::wostream & stream, String & str)
-        {
-            return (stream << str.GetData());
-        }
-#endif
 
         static const uint32_t Npos = (uint32_t)-1;
 

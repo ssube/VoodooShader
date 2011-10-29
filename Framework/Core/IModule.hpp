@@ -176,12 +176,12 @@ namespace VoodooShader
          * Get the current version of this module. @return The version, including name and
          * debug attribute.
          */
-        virtual Version ModuleVersion(void) const throw();
+        virtual const Version * ModuleVersion(void) const throw();
 
         /** Get the class count from this module. */
         virtual int32_t ClassCount(void) const;
 
-        virtual String ClassInfo(_In_ int32_t number) const;
+        virtual const char * ClassInfo(_In_ int32_t number) const;
 
         virtual IObject * CreateClass(_In_ int32_t number, _In_ ICore * pCore);
 

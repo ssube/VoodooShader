@@ -109,7 +109,7 @@ namespace VoodooShader
         virtual CGtechnique GetCgTechnique(void) const throw();
 
     private:
-        void Link(ITechnique* self);
+        void Link();
 
         mutable int32_t m_Refs;
         String m_Name;
