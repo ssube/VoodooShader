@@ -23,14 +23,12 @@
 /**
  * Versioning functions
  */
-#define VOODOO_META__STRING(arg) #arg
-#define VOODOO_META_STRING(arg)  VOODOO_META__STRING(arg)
 #ifdef _DEBUG
-#define VOODOO_META_DEBUG_bool  true
-#define VOODOO_META_DEBUG_STRING " (DEBUG)"
+#   define VOODOO_META_DEBUG_bool  true
+#   define VOODOO_META_DEBUG_STRING L" (DEBUG)"
 #else
-#define VOODOO_META_DEBUG_bool false
-#define VOODOO_META_DEBUG_STRING
+#   define VOODOO_META_DEBUG_bool false
+#   define VOODOO_META_DEBUG_STRING
 #endif
 
 /**
@@ -44,16 +42,16 @@
  * Creates a basic version string separated with periods.
  */
 #define VOODOO_META_STRING_VERSION_BASIC(token) \
-    VOODOO_META_STRING(VOODOO_##token##_VERSION_MAJOR) "."\
-    VOODOO_META_STRING(VOODOO_##token##_VERSION_MINOR) "."\
-    VOODOO_META_STRING(VOODOO_##token##_VERSION_PATCH) "."\
+    VOODOO_META_STRING(VOODOO_##token##_VERSION_MAJOR) L"."\
+    VOODOO_META_STRING(VOODOO_##token##_VERSION_MINOR) L"."\
+    VOODOO_META_STRING(VOODOO_##token##_VERSION_PATCH) L"."\
     VOODOO_META_STRING(VOODOO_##token##_VERSION_REV) VOODOO_META_DEBUG_STRING
 
 /**
  * Creates an extended version string with the module's full name and version.
  */
 #define VOODOO_META_STRING_VERSION_FULL(token) \
-    VOODOO_##token##_PRETTYNAME " (version "VOODOO_META_STRING_VERSION_BASIC(token) ")"
+    VOODOO_##token##_PRETTYNAME L" (version "VOODOO_META_STRING_VERSION_BASIC(token) L")"
 
 #define VOODOO_META_STRING_NAME_BASIC(token) VOODOO_##token##_NAME VOODOO_META_DEBUG_STRING
 #define VOODOO_META_STRING_NAME_FULL(token)  VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING
@@ -64,37 +62,37 @@
 #define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_bool }
 
 // Global defs
-#define VOODOO_GLOBAL_NAME              "Voodoo/Framework"
-#define VOODOO_GLOBAL_PRETTYNAME        "Voodoo Shader Framework"
+#define VOODOO_GLOBAL_NAME              L"Voodoo/Framework"
+#define VOODOO_GLOBAL_PRETTYNAME        L"Voodoo Shader Framework"
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     4
 #define VOODOO_GLOBAL_VERSION_PATCH     0
 #define VOODOO_GLOBAL_VERSION_REV       247
-#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   "Copyright (c) 2010-2011 by Sean Sube"
-#define VOODOO_GLOBAL_COPYRIGHT_FULL    "Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&lt;br /&gt;\n" \
+#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   L"Copyright (c) 2010-2011 by Sean Sube"
+#define VOODOO_GLOBAL_COPYRIGHT_FULL    L"Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&lt;br /&gt;\n" \
     "The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\n" \
     "This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;\n" \
     "Please see the included license file for more details."
 
 // Core defs
-#define VOODOO_CORE_NAME                "Voodoo/Core"
-#define VOODOO_CORE_PRETTYNAME          "Voodoo Shader Framework Core"
+#define VOODOO_CORE_NAME                L"Voodoo/Core"
+#define VOODOO_CORE_PRETTYNAME          L"Voodoo Shader Framework Core"
 #define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR
 #define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR
 #define VOODOO_CORE_VERSION_PATCH       VOODOO_GLOBAL_VERSION_PATCH
 #define VOODOO_CORE_VERSION_REV         VOODOO_GLOBAL_VERSION_REV
 
 // External defs Cg
-#define VOODOO_CG_NAME                  "Cg"
-#define VOODOO_CG_PRETTYNAME            "nVidia Cg Toolkit (July 2010)"
+#define VOODOO_CG_NAME                  L"Cg"
+#define VOODOO_CG_PRETTYNAME            L"nVidia Cg Toolkit (July 2010)"
 #define VOODOO_CG_VERSION_MAJOR         3
 #define VOODOO_CG_VERSION_MINOR         0
 #define VOODOO_CG_VERSION_PATCH         0
 #define VOODOO_CG_VERSION_REV           7
 
 // VC
-#define VOODOO_VC_NAME                  "MSVC"
-#define VOODOO_VC_PRETTYNAME            "Microsoft Visual C++"
+#define VOODOO_VC_NAME                  L"MSVC"
+#define VOODOO_VC_PRETTYNAME            L"Microsoft Visual C++"
 #define VOODOO_VC_VERSION_MAJOR         _MSC_VER
 #define VOODOO_VC_VERSION_MINOR         0
 #define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER

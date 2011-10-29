@@ -27,8 +27,8 @@ namespace VoodooShader
 {
     Exception::Exception
     (
-        _In_ char *module,
-        _In_ char *message,
+        _In_ wchar_t * module,
+        _In_ wchar_t * message,
         _In_ ICore *core,
         _In_ char *file,
         _In_ char *function,
@@ -49,7 +49,7 @@ namespace VoodooShader
 
             if (logger)
             {
-                logger->Log(LL_Error, module, "Exception in %s at %s (%d): %s", file, function, line, message);
+                logger->Log(LL_Error, module, L"Exception in %s at %s (%d): %s", file, function, line, message);
             }
         }
     }

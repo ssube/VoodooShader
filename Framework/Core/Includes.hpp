@@ -19,6 +19,28 @@
  **/
 #pragma once
 
+#ifndef __cplusplus
+#   error Voodoo requires a C++ compiler, preferably Microsoft Visual C++ v10.
+#endif
+
+#ifndef _WIN32 
+#   error Voodoo must be built for the Win32 platform.
+#endif
+
+#ifdef _WIN64
+#   error Voodoo is not yet compatible with 64-bit systems.
+#endif
+
+#ifndef _UNICODE
+#   error Voodoo APIs require Unicode characterset enabled.
+#endif
+
+#define VOODOO_META_STRING_ARG(arg) L ## #arg
+#define VOODOO_META_STRING_STR(arg) L ## arg
+
+#define VOODOO_META_TOSTRING(arg)   VOODOO_META_STRING_ARG(arg)
+#define VOODOO_META_STRING(arg)     VOODOO_META_STRING_STR(arg)
+
 #include <functional>
 #include <list>
 #include <map>
@@ -26,20 +48,19 @@
 #include <cstdint>
 
 #ifndef VOODOO_NO_BOOST
-#include <boost/intrusive_ptr.hpp>
-#include <boost/uuid/uuid.hpp>
+#   include <boost/intrusive_ptr.hpp>
 #endif
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
 #ifdef VSF_DEBUG_MEMORY
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
+#   define _CRTDBG_MAP_ALLOC
+#   include <stdlib.h>
+#   include <crtdbg.h>
 
-#define DBG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DBG_NEW
+#   define DBG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#   define new DBG_NEW
 #endif
 
 #ifndef VOODOO_IMPORT
@@ -48,6 +69,7 @@
 #   define VOODOO_API __declspec(dllimport)
 #endif
 #define VOODOO_CALL __stdcall
+#define VOODOO_PUBLIC_CLASS VOODOO_API VOODOO_CALL
 
 #ifndef VOODOO_NO_CG
 #   include "Cg/cg.h"
@@ -73,15 +95,6 @@ namespace VoodooShader
     class Exception;
     class Regex;
     class String;
-
-#ifndef VOODOO_NO_BOOST
-    typedef boost::uuids::uuid Uuid;
-#else
-    typedef struct  
-    {
-        uint8_t data[16];
-    } Uuid;
-#endif
 
     namespace Xml
     {

@@ -41,7 +41,7 @@ namespace VoodooShader
         {
             this->m_Name = passName;
         } else {
-            this->m_Name = String::Format("pass_%p", this->m_CgPass);
+            this->m_Name = String::Format(L"pass_%p", this->m_CgPass);
         }
     }
 
@@ -71,37 +71,22 @@ namespace VoodooShader
         }
     }
 
-    /**
-     *
-     */
     String IPass::ToString(void) const
     {
-        String name = m_Technique->ToString();
-
-        name += "::";
-        name += m_Name;
+        String name = m_Technique->ToString() + L"::" + m_Name;
         return name;
     };
 
-    /**
-     *
-     */
     ICore * IPass::GetCore(void) const
     {
         return m_Core;
     }
 
-    /**
-     *
-     */
     ITexture * IPass::GetTarget(void) const
     {
         return m_Target.get();
     }
 
-    /**
-     *
-     */
     CGprogram IPass::GetProgram(ProgramStage stage) const
     {
         switch (stage)
@@ -122,25 +107,16 @@ namespace VoodooShader
         }
     }
 
-    /**
-     *
-     */
     ITechnique * IPass::GetTechnique(void) const
     {
         return m_Technique;
     }
 
-    /**
-     *
-     */
     CGpass IPass::GetCgPass(void) const
     {
         return m_CgPass;
     }
 
-    /**
-     *
-     */
     void IPass::Link(void)
     {
         this->m_VertexProgram = cgGetPassProgram(this->m_CgPass, CG_VERTEX_DOMAIN);
@@ -167,7 +143,7 @@ namespace VoodooShader
                     (
                         LL_Warning,
                         VOODOO_CORE_NAME,
-                        "IPass %s cannot find target %s.",
+                        L"IPass %s cannot find target %s.",
                         this->ToString().GetData(),
                         targetName
                     );
@@ -179,7 +155,7 @@ namespace VoodooShader
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
-                    "IPass %s has annotation \"target\" of invalid type.",
+                    L"IPass %s has annotation \"target\" of invalid type.",
                     this->ToString().GetData()
                 );
 
@@ -190,7 +166,7 @@ namespace VoodooShader
             (
                 LL_Debug,
                 VOODOO_CORE_NAME,
-                "IPass %s has no target annotation.",
+                L"IPass %s has no target annotation.",
                 this->ToString().GetData()
             );
 
@@ -207,7 +183,7 @@ namespace VoodooShader
             (
                 LL_Warning,
                 VOODOO_CORE_NAME,
-                "No adapter found, pass %s must be explicitly loaded later.",
+                L"No adapter found, pass %s must be explicitly loaded later.",
                 this->ToString().GetData()
             );
         }
@@ -219,7 +195,7 @@ namespace VoodooShader
                 (
                     LL_Error,
                     VOODOO_CORE_NAME,
-                    "Failed to load pass %s.",
+                    L"Failed to load pass %s.",
                     this->ToString().GetData()
                 );
             }
@@ -229,7 +205,7 @@ namespace VoodooShader
                 (
                     LL_Info,
                     VOODOO_CORE_NAME,
-                    "Successfully loaded pass %s.",
+                    L"Successfully loaded pass %s.",
                     this->ToString().GetData()
                 );
             }

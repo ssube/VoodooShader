@@ -58,7 +58,7 @@ namespace VoodooShader
 
     String IModuleManager::ToString() const
     {
-        return "ModuleManager";
+        return L"ModuleManager";
     }
 
     ICore * IModuleManager::GetCore() const
@@ -68,7 +68,7 @@ namespace VoodooShader
 
     bool IModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
     {
-        String mask = m_Core->GetParser()->Parse(path) + "\\*";
+        String mask = m_Core->GetParser()->Parse(path) + L"\\*";
         WIN32_FIND_DATA findFile;
         HANDLE searchHandle = FindFirstFile(filter.GetData(), &findFile);
 
@@ -82,15 +82,13 @@ namespace VoodooShader
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
-                    "No plugin files found in directory %s.",
+                    L"No plugin files found in directory %s.",
                     path.GetData()
                 );
 
                 return false;
-            }
-            else
-            {
-                m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, "Error searching directory %s.", path.GetData());
+            } else {
+                m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Error searching directory %s.", path.GetData());
 
                 return false;
             }
@@ -132,7 +130,7 @@ namespace VoodooShader
         {
             if (logger.get())
             {
-                logger->Log(LL_Error, VOODOO_CORE_NAME, "Unable to load module %s.", path.GetData());
+                logger->Log(LL_Error, VOODOO_CORE_NAME, L"Unable to load module %s.", path.GetData());
             }
 
             return nullptr;
@@ -151,7 +149,7 @@ namespace VoodooShader
             (
                 LL_Warning,
                 VOODOO_CORE_NAME,
-                "Debug build mismatch with module %s.",
+                L"Debug build mismatch with module %s.",
                 moduleversion.Name
             );
         }
@@ -219,7 +217,7 @@ namespace VoodooShader
                             (
                                 LL_Error,
                                 VOODOO_CORE_NAME,
-                                "Error creating instance of class %s.",
+                                L"Error creating instance of class %s.",
                                 name.GetData()
                             );
                         }
@@ -233,7 +231,7 @@ namespace VoodooShader
                         (
                             LL_Error,
                             VOODOO_CORE_NAME,
-                            "Error creating class %s: %s",
+                            L"Error creating class %s: %s",
                             name.GetData(),
                             exc.what()
                         );
@@ -250,7 +248,7 @@ namespace VoodooShader
                     (
                         LL_Error,
                         VOODOO_CORE_NAME,
-                        "Unable to lock module (possibly unloaded) for class %s.",
+                        L"Unable to lock module (possibly unloaded) for class %s.",
                         name.GetData()
                     );
                 }
@@ -262,7 +260,7 @@ namespace VoodooShader
         {
             if (logger)
             {
-                logger->Log(LL_Error, VOODOO_CORE_NAME, "Class %s not found.", name.GetData());
+                logger->Log(LL_Error, VOODOO_CORE_NAME, L"Class %s not found.", name.GetData());
             }
 
             return nullptr;

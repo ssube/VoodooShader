@@ -94,12 +94,12 @@ namespace VoodooShader
         virtual String Parse(_In_ String input, _In_ ParseFlags flags = PF_None) const throw();
 
         static const int VarMaxDepth = 8;
-        static const char VarDelimPre    = '$';
-        static const char VarDelimStart  = '(';
-        static const char VarDelimEnd    = ')';
-        static const char VarMarkerState = ':';
-        static const char VarMarkerRaw   = '!';
-        static const char VarMarkerSupp  = '?';
+        static const wchar_t VarDelimPre    = L'$';
+        static const wchar_t VarDelimStart  = L'(';
+        static const wchar_t VarDelimEnd    = L')';
+        static const wchar_t VarMarkerState = L':';
+        static const wchar_t VarMarkerRaw   = L'!';
+        static const wchar_t VarMarkerSupp  = L'?';
 
     private:
         String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state) const;

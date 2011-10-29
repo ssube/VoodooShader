@@ -43,8 +43,8 @@ namespace VoodooShader
     public:
         Exception
         (
-            _In_ char * Module,
-            _In_ char * Message,
+            _In_ wchar_t * Module,
+            _In_ wchar_t * Message,
             _In_ ICore * pCore,
             _In_ char * File,
             _In_ char * Function,

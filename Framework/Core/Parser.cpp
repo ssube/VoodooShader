@@ -191,7 +191,7 @@ namespace VoodooShader
             if (varname.GetLength() == 0)
             {
                 // Erase the variable sequence if it is the empty variable and restart the loop
-                stringstream output;
+                wstringstream output;
 
                 output << iteration.Substr(0, startpos - 1);
                 if (endpos < itlen)
@@ -207,7 +207,7 @@ namespace VoodooShader
             // Handle state variables
             size_t statepos = varname.Find(IParser::VarMarkerState);
 
-            if (statepos >= 0)
+            if (statepos != String::Npos)
             {
                 // State set, handle
                 String newvalue = varname.Substr(statepos + 1);
@@ -219,7 +219,7 @@ namespace VoodooShader
 
                 state[varname] = newvalue;
 
-                stringstream output;
+                wstringstream output;
 
                 output << iteration.Substr(0, startpos - 1) << iteration.Substr(endpos + 1);
                 iteration = output.str();
@@ -285,7 +285,7 @@ namespace VoodooShader
                 }
             }
 
-            stringstream output;
+            wstringstream output;
 
             output << iteration.Substr(0, startpos - 1);
             if (parse && varvalue.GetLength() > 0)
@@ -294,7 +294,7 @@ namespace VoodooShader
             }
             else if (!foundvar && !supress)
             {
-                output << "--badvar:" << varname << "--";
+                output << _T("--badvar:") << varname << _T("--");
             }
 
             output << iteration.Substr(endpos + 1);
@@ -332,7 +332,7 @@ namespace VoodooShader
                 slashchar = '\\';
             }
 
-            stringstream output;
+            wstringstream output;
             size_t total = iteration.GetLength();
             size_t cur = 0;
 
