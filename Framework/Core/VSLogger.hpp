@@ -36,12 +36,13 @@ namespace VoodooShader
         virtual uint32_t Release() const;
         virtual String ToString(void) const;
         virtual ICore * GetCore(void) const;
-
-        virtual bool Open(_In_ const IFile * pFile, _In_ bool append);
+        
+        virtual bool Open(_In_ const String & filename, _In_ const bool append) throw();
+        virtual bool Open(_In_ IFile * const pFile, _In_ const bool append) throw();
         virtual void Close(void);
         virtual void Flush(void);
-        virtual void SetLogLevel(_In_ LogLevel level);
-        virtual LogLevel GetLogLevel(void) const;
+        virtual void SetLogLevel(_In_ const LogLevel level);
+        virtual const LogLevel GetLogLevel(void) const;
         virtual void LogModule(_In_ const Version * pModule);
         virtual void Log
         (
@@ -50,8 +51,8 @@ namespace VoodooShader
             _In_ _Printf_format_string_ const String & msg,
             ...
         );
-        virtual void SetFlags(_In_ LogFlags flush);
-        virtual LogFlags GetFlags(void) const;
+        virtual void SetFlags(_In_ const LogFlags flush);
+        virtual const LogFlags GetFlags(void) const;
 
     private:
         mutable uint32_t m_Refs;

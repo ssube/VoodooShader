@@ -72,7 +72,16 @@ namespace VoodooShader
          * @param append Flag specifying the open mode; if true, any existing log is truncated. 
          * @return Success of the open operation.
          */
-        virtual bool Open(_In_ const IFile * pFile, _In_ bool append) throw() = 0;
+        virtual bool Open(_In_ const String & filename, _In_ const bool append) throw() = 0;
+        
+        /**
+         * Opens a file for use by this logger. 
+         * 
+         * @param pFile The file to open. 
+         * @param append Flag specifying the open mode; if true, any existing log is truncated. 
+         * @return Success of the open operation.
+         */
+        virtual bool Open(_In_ IFile * const pFile, _In_ const bool append) throw() = 0;
 
         /**
          * Closes the log file, if one is open. 
@@ -94,9 +103,9 @@ namespace VoodooShader
          * 
          * @param level The minimum log level.
          */
-        virtual void SetLogLevel(_In_ LogLevel level) throw() = 0;
+        virtual void SetLogLevel(_In_ const LogLevel level) throw() = 0;
 
-        virtual LogLevel GetLogLevel(void) const throw() = 0;
+        virtual const LogLevel GetLogLevel(void) const throw() = 0;
 
         /**
          * Writes a module stamp to the log. This records the name and version info for a select module (used to log what 
@@ -122,9 +131,9 @@ namespace VoodooShader
             ...
         ) throw() = 0;
 
-        virtual void SetFlags(_In_ LogFlags flags) throw() = 0;
+        virtual void SetFlags(_In_ const LogFlags flags) throw() = 0;
 
-        virtual LogFlags GetFlags(void) const throw() = 0;
+        virtual const LogFlags GetFlags(void) const throw() = 0;
     };
     
     /**

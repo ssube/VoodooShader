@@ -54,8 +54,16 @@ namespace VoodooShader
     {
         return m_Core;
     }
+    
+    bool VSLogger::Open(_In_ const String & filename, _In_ const bool append)
+    {
+        UNREFERENCED_PARAMETER(filename);
+        UNREFERENCED_PARAMETER(append);
 
-    bool VSLogger::Open(_In_ const IFile * pFile, _In_ bool append)
+        return true;
+    }
+
+    bool VSLogger::Open(_In_ IFile * const pFile, _In_ const bool append)
     {
         UNREFERENCED_PARAMETER(pFile);
         UNREFERENCED_PARAMETER(append);
@@ -69,12 +77,12 @@ namespace VoodooShader
     void VSLogger::Flush(void)
     { }
 
-    void VSLogger::SetLogLevel(_In_ LogLevel level)
+    void VSLogger::SetLogLevel(_In_ const LogLevel level)
     {
         UNREFERENCED_PARAMETER(level);
     }
 
-    LogLevel VSLogger::GetLogLevel(void) const
+    const LogLevel VSLogger::GetLogLevel(void) const
     {
         return LL_Unknown;
     }
@@ -91,12 +99,12 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(msg);
     }
 
-    void VSLogger::SetFlags(_In_ LogFlags flush)
+    void VSLogger::SetFlags(_In_ const LogFlags flush)
     {
         UNREFERENCED_PARAMETER(flush);
     }
 
-    LogFlags VSLogger::GetFlags(void) const
+    const LogFlags VSLogger::GetFlags(void) const
     {
         return LF_Unknown;
     }
