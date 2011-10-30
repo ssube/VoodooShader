@@ -1,99 +1,105 @@
 /**
- * \ This file is part of the Voodoo Shader Framework, a comprehensive shader
- * support library. Copyright (c) 2010-2011 by Sean Sube This program is free software;
- * you can redistribute it and/or modify it under the terms of the GNU General
- * Public License as published by the Free Software Foundation;
- * either version 2 of the License, or (at your option) any later version. This
- * program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE. See the GNU General Public License for more details. You
- * should have received a copy of the GNU General Public License along with this program;
- * if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth
- * Floor, Boston, MA 02110-1301 US Support and more information may be found at
- * http://www.voodooshader.com, or by contacting the developer at
- * peachykeen@voodooshader.com \ 
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * 
+ * Copyright (c) 2010-2011 by Sean Sube 
+ * 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
+ * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
+ * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details. 
+ * 
+ * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
+ * 
+ * Support and more information may be found at 
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at 
+ *   peachykeen@voodooshader.com
  */
-#include <string>
+#pragma once
+
+#include <easyhook.h>
 
 #define VOODOO_IMPORT
+#define VOODOO_NO_BOOST
 #define VOODOO_NO_CG
 #include "VoodooFramework.hpp"
 
 namespace VoodooShader
 {
- namespace EasyHook
-{
+    namespace EasyHook
+    {
+        /**
+         * Classes and functions related to the EasyHook-based implementation of IHookManager. 
+         * 
+         * @addtogroup VoodooEHHook Voodoo/EHHook @{
+         */
+        typedef std::map<String, TRACED_HOOK_HANDLE> HookMap;
 
- /**
-  * Classes and functions related to the EasyHook-based implementation of
-  * IHookManager. @addtogroup VoodooEHHook Voodoo/EHHook @{
-  */
- typedef std::map<std::string, void *> HookMap;
+        const Version * API_ModuleVersion(void);
+        const uint32_t API_ClassCount(void);
+        const char * API_ClassInfo(_In_ uint32_t number);
+        IObject * API_ClassCreate(_In_ uint32_t number, _In_ ICore * pCore);
 
- Version API_ModuleVersion(void);
+        /**
+         * Handles function-level hooks, redirecting function calls into new locations.
+         */
+        class VSEHHookManager :
+            public IHookManager
+        {
+        public:
+            /* Creates a new VSEHHookManager bound to the current process. */
+            VSEHHookManager(_In_ ICore * pCore);
 
- int API_ClassCount(void);
+            /* Removes all hooks and cleans up the VSEHHookManager. */
+            virtual ~VSEHHookManager(void);
 
- const char *API_ClassInfo(_In_ int number);
+            virtual uint32_t AddRef(void) const throw();
+            virtual uint32_t Release(void) const throw();
+            virtual String ToString(void) const throw();
+            virtual ICore * GetCore(void) const throw();
 
- IObject *API_ClassCreate(_In_ int number, _In_ ICore *core);
+            /**
+             * Install a hook at the specified function. 
+             * 
+             * @param name The name for the hook.
+             * @param src The point to install the hook at. 
+             * @param dest The function to redirect execution into. 
+             * @return The success of the hook installation.
+             * 
+             * @note The name is often the name of the function in src (&func) for simplicities sake. 
+             * 
+             * @warning The calling convention of src and dest must be identical, or bad things might happen. This is only a 
+             *      bother with member functions, but can be worked around relatively easily.
+             */
+            bool Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
 
- /**
-  * Handles function-level hooks, redirecting function calls into new locations.
-  */
- class HookManager :
-  public VoodooShader::IHookManager
- {
+            /**
+             * Removes a single hook. 
+             * 
+             * @param name The name of the hook to remove. 
+             * @return The success of the removal operation. 
+             * 
+             * @warning <em>Do not</em>, under any circumstances, remove a hook while execution is passing through the 
+             *      trampoline function. This will likely crash the process.
+             */
+            bool Remove(_In_ const String & name);
 
-/**
- *
- */
-public:
+            /**
+             * Removes all hooks created with this VSEHHookManager. 
+             */
+            void RemoveAll(void);
 
-  /* Creates a new HookManager bound to the current process. */
-  HookManager(_In_ ICore *core);
+        private:
+            mutable uint32_t m_Refs;
+            ICore * m_Core;
 
-  /* Removes all hooks and cleans up the HookManager. */
-  virtual ~HookManager(void);
+            HookMap m_Hooks;
 
-  virtual String ToString(void);
-  virtual ICore *GetCore(void);
-
-  /**
-   * Install a hook at the specified function. @param name The name for the hook.
-   * @param src The point to install the hook at. @param dest The function to
-   * redirect execution into. @return The success of the hook installation. @throws
-   * Exception if a hook with the same name already exists. @note The name is often
-   * the name of the function in src (&func) for simplicities sake. @warning The
-   * calling convention of src and dest must be identical, or bad things might
-   * happen. This is only a bother with member functions, but can be worked around
-   * relatively easily.
-   */
-  bool Add(_In_ std::string name, _In_ void *src, _In_ void *dest);
-
-  /**
-   * Removes a single hook. @param name The name of the hook to remove. @return The
-   * success of the removal operation. @throws Exception of the hook is not found.
-   * @warning <em>Do not</em>, under any circumstances, remove a hook while
-   * execution is passing through the trampoline function. This can cause the
-   * process to crash in rare cases. I'm not sure the reason, but it's not good.
-   * Until I replace EasyHook, be careful!
-   */
-  bool Remove(_In_ std::string name);
-
-  /* Removes all hooks created with this HookManager. */
-  void RemoveAll(void);
-
-/**
- *
- */
-private:
-  ICore *m_Core;
-  HookMap m_Hooks;
-  unsigned long *m_ThreadIDs;
-  unsigned long m_ThreadCount;
- };
-
- /* @} */
-};
+            unsigned long m_ThreadCount;
+            unsigned long * m_ThreadIDs;
+        };
+        /* @} */
+    };
 }
