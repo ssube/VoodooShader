@@ -53,19 +53,19 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath);$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath);$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Framework\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath);$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
