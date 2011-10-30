@@ -35,11 +35,14 @@
 #   error Voodoo APIs require Unicode characterset enabled.
 #endif
 
-#define VOODOO_META_STRING_ARG(arg) L ## #arg
-#define VOODOO_META_STRING_STR(arg) L ## arg
+#ifndef VOODOO_STRING_MACROS
+#   define VOODOO_STRING_MACROS
+#   define VOODOO_META_STRING_ARG(arg) L ## #arg
+#   define VOODOO_META_STRING_STR(arg) L ## arg
 
-#define VOODOO_META_TOSTRING(arg)   VOODOO_META_STRING_ARG(arg)
-#define VOODOO_META_STRING(arg)     VOODOO_META_STRING_STR(arg)
+#   define VOODOO_META_TOSTRING(arg)   VOODOO_META_STRING_ARG(arg)
+#   define VOODOO_META_STRING(arg)     VOODOO_META_STRING_STR(arg)
+#endif
 
 #include <functional>
 #include <list>

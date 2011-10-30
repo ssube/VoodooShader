@@ -144,7 +144,7 @@ namespace VoodooShader
         // Register classes from module
         const Version * moduleversion = rawmodule->ModuleVersion();
 
-        if (moduleversion->Debug != VOODOO_META_DEBUG_bool && logger.get())
+        if (moduleversion->Debug != VOODOO_META_DEBUG_BOOL && logger.get())
         {
             logger->Log
             (

@@ -20,14 +20,23 @@
 
 #pragma once
 
+#ifndef VOODOO_STRING_MACROS
+#   define VOODOO_STRING_MACROS
+#   define VOODOO_META_STRING_ARG(arg) L ## #arg
+#   define VOODOO_META_STRING_STR(arg) L ## arg
+
+#   define VOODOO_META_TOSTRING(arg)   VOODOO_META_STRING_ARG(arg)
+#   define VOODOO_META_STRING(arg)     VOODOO_META_STRING_STR(arg)
+#endif
+
 /**
  * Versioning functions
  */
 #ifdef _DEBUG
-#   define VOODOO_META_DEBUG_bool  true
+#   define VOODOO_META_DEBUG_BOOL   true
 #   define VOODOO_META_DEBUG_STRING L" (DEBUG)"
 #else
-#   define VOODOO_META_DEBUG_bool false
+#   define VOODOO_META_DEBUG_BOOL   false
 #   define VOODOO_META_DEBUG_STRING
 #endif
 
@@ -42,10 +51,10 @@
  * Creates a basic version string separated with periods.
  */
 #define VOODOO_META_STRING_VERSION_BASIC(token) \
-    VOODOO_META_STRING(VOODOO_##token##_VERSION_MAJOR) L"."\
-    VOODOO_META_STRING(VOODOO_##token##_VERSION_MINOR) L"."\
-    VOODOO_META_STRING(VOODOO_##token##_VERSION_PATCH) L"."\
-    VOODOO_META_STRING(VOODOO_##token##_VERSION_REV) VOODOO_META_DEBUG_STRING
+    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_MAJOR) L"."\
+    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_MINOR) L"."\
+    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_PATCH) L"."\
+    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_REV) VOODOO_META_DEBUG_STRING
 
 /**
  * Creates an extended version string with the module's full name and version.
@@ -59,7 +68,7 @@
 /**
  * Creates a Version structure with data for the given module.
  */
-#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_bool }
+#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }
 
 // Global defs
 #define VOODOO_GLOBAL_NAME              L"Voodoo/Framework"
