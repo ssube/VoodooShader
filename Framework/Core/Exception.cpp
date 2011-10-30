@@ -34,7 +34,6 @@ namespace VoodooShader
         _In_ char *function,
         _In_ int line
     ) :
-        std::exception(message),
         m_Core(core),
         m_Module(module),
         m_Message(message),
@@ -63,7 +62,6 @@ namespace VoodooShader
         _In_ char *function,
         _In_ int line
     ) :
-        std::exception(message.GetData()),
             m_Core(core),
             m_Module(module),
             m_Message(message),
