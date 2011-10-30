@@ -1,5 +1,5 @@
 /**
- * This file is part of the Voodoo IShader Framework, a comprehensive shader support library. 
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
  * 
  * Copyright (c) 2010-2011 by Sean Sube 
  * 
@@ -450,9 +450,9 @@ namespace VoodooShader
         }
         else
         {
-            const char *formatString = cgGetStringAnnotationValue(atexFormat);
+            String formatString = cgGetStringAnnotationValue(atexFormat);
 
-            texDesc.Format = Converter::ToTextureFormat(formatString);
+            texDesc.Format = Converter::ToTextureFormat(formatString.GetData());
         }
 
         IAdapterRef adapter = m_Core->GetAdapter();

@@ -1,5 +1,5 @@
 /**
- * This file is part of the Voodoo IShader Framework, a comprehensive shader support library. 
+ * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
  * 
  * Copyright (c) 2010-2011 by Sean Sube 
  * 

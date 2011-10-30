@@ -43,7 +43,7 @@ namespace VoodooShader
          * @param Type The internal parameter type. 
          * @return The corresponding Cg type, if one is known. 
          */
-        static CGtype ToCGType(_In_ ParameterType Type);
+        static CGtype ToCGType(_In_ ParameterType type);
 
         /**
          * Convert a Cg runtime type to the corresponding Voodoo parameter type. This function should be used to
@@ -53,12 +53,12 @@ namespace VoodooShader
          * @param Type The Cg type. 
          * @return The corresponding parameter type, if one is known.
          */
-        static ParameterType ToParameterType(_In_ CGtype Type);
+        static ParameterType ToParameterType(_In_ CGtype type);
 #endif
 
-        static ParameterCategory ToParameterCategory(_In_ ParameterType Type);
+        static ParameterCategory ToParameterCategory(_In_ ParameterType type);
 
-        static TextureFormat ToTextureFormat(_In_ const char * Format);
+        static TextureFormat ToTextureFormat(_In_ const wchar_t * format);
 
         static int ToComponents(_In_ ParameterType Type);
 
@@ -67,9 +67,9 @@ namespace VoodooShader
          * this overload handles texture formats. 
          * 
          * @param Format The texture format to find the name of. 
-         * @return A C-string with the name (usually identical to the identifier).
+         * @return A string with the name (usually identical to the identifier).
          */
-        static const char * ToString(_In_ TextureFormat Format);
+        static const wchar_t * ToString(_In_ TextureFormat Format);
 
         /**
          * Helper function to convert enum values into readable strings used in logging;
@@ -77,9 +77,9 @@ namespace VoodooShader
          * name of. @return A C-string with the name (usually identical to the
          * identifier).
          */
-        static const char * ToString(_In_ ParameterType Type);
+        static const wchar_t * ToString(_In_ ParameterType Type);
 
-        static const char * ToString(_In_ ParameterCategory Category);
+        static const wchar_t * ToString(_In_ ParameterCategory Category);
     };
     /* @} */
 }

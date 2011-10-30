@@ -6,70 +6,50 @@ namespace VoodooShader
     {
         switch (pt)
         {
-            // Vectors
+        // Vectors
         case PT_Float1x1:
             return CG_FLOAT;
-
         case PT_Float1x2:
             return CG_FLOAT2;
-
         case PT_Float1x3:
             return CG_FLOAT3;
-
         case PT_Float1x4:
             return CG_FLOAT4;
-
         case PT_Float2x1:
             return CG_FLOAT2x1;
-
         case PT_Float2x2:
             return CG_FLOAT2x2;
-
         case PT_Float2x3:
             return CG_FLOAT2x3;
-
         case PT_Float2x4:
             return CG_FLOAT2x4;
-
         case PT_Float3x1:
             return CG_FLOAT3x1;
-
         case PT_Float3x2:
             return CG_FLOAT3x2;
-
         case PT_Float3x3:
             return CG_FLOAT3x3;
-
         case PT_Float3x4:
             return CG_FLOAT3x4;
-
         case PT_Float4x1:
             return CG_FLOAT4x1;
-
         case PT_Float4x2:
             return CG_FLOAT4x2;
-
         case PT_Float4x3:
             return CG_FLOAT4x3;
-
         case PT_Float4x4:
             return CG_FLOAT4x4;
-
-            // Samplers
+        // Samplers
         case PT_Sampler1D:
             return CG_SAMPLER1D;
-
         case PT_Sampler2D:
             return CG_SAMPLER2D;
-
         case PT_Sampler3D:
             return CG_SAMPLER3D;
-
-            // Structs
+        // Structs
         case PT_Struct:
             return CG_STRUCT;
-
-            // Other
+        // Other
         case PT_Unknown:
         default:
             return CG_UNKNOWN_TYPE;
@@ -162,30 +142,30 @@ namespace VoodooShader
         }
     }
 
-    TextureFormat Converter::ToTextureFormat(_In_ const char *format)
+    TextureFormat Converter::ToTextureFormat(_In_ const wchar_t * format)
     {
-        if (_strnicmp(format, "TF_", 3) != 0)
+        if (_wcsnicmp(format, L"TF_", 3) != 0)
         {
             return TF_Unknown;
         }
 
-        const char * formatBody = format + 3;
+        const wchar_t * formatBody = format + 3;
 
-        if (formatBody[0] == 'D')
+        if (formatBody[0] == L'D')
         {
             // Depth format
-            if (_stricmp(formatBody, "D16") == 0) return TF_D16;
-            if (_stricmp(formatBody, "D32") == 0) return TF_D32;
+            if (_wcsnicmp(formatBody, L"D16", 3) == 0) return TF_D16;
+            if (_wcsnicmp(formatBody, L"D32", 3) == 0) return TF_D32;
         }
         else
         {
-            if (_stricmp(formatBody, "RGB5") == 0) return TF_RGB5;
-            if (_stricmp(formatBody, "RGB5A1") == 0) return TF_RGB5A1;
-            if (_stricmp(formatBody, "RGB8") == 0) return TF_RGB8;
-            if (_stricmp(formatBody, "RGBA8") == 0) return TF_RGBA8;
-            if (_stricmp(formatBody, "RGB10A2") == 0) return TF_RGB10A2;
-            if (_stricmp(formatBody, "RGBA16F") == 0) return TF_RGBA16F;
-            if (_stricmp(formatBody, "RGBA32F") == 0) return TF_RGBA32F;
+            if (_wcsnicmp(formatBody, L"RGB5", 4) == 0) return TF_RGB5;
+            if (_wcsnicmp(formatBody, L"RGB5A1", 6) == 0) return TF_RGB5A1;
+            if (_wcsnicmp(formatBody, L"RGB8", 4) == 0) return TF_RGB8;
+            if (_wcsnicmp(formatBody, L"RGBA8", 5) == 0) return TF_RGBA8;
+            if (_wcsnicmp(formatBody, L"RGB10A2", 7) == 0) return TF_RGB10A2;
+            if (_wcsnicmp(formatBody, L"RGBA16F", 7) == 0) return TF_RGBA16F;
+            if (_wcsnicmp(formatBody, L"RGBA32F", 7) == 0) return TF_RGBA32F;
         }
 
         return TF_Unknown;
@@ -233,9 +213,9 @@ namespace VoodooShader
 #define CASESTRING(x) \
     \
  case x: \
- return #x
+ return VOODOO_META_TOSTRING(x)
 
-    const char * Converter::ToString(_In_ TextureFormat tf)
+    const wchar_t * Converter::ToString(_In_ TextureFormat tf)
     {
         switch (tf)
         {
@@ -250,11 +230,11 @@ namespace VoodooShader
             CASESTRING(TF_D32);
         case TF_Unknown:
         default:
-            return "TF_Unknown";
+            return L"TF_Unknown";
         }
     }
 
-    const char * Converter::ToString(_In_ ParameterType pt)
+    const wchar_t * Converter::ToString(_In_ ParameterType pt)
     {
         switch (pt)
         {
@@ -280,11 +260,11 @@ namespace VoodooShader
             CASESTRING(PT_Struct);
         case PT_Unknown:
         default:
-            return "PT_Unknown";
+            return L"PT_Unknown";
         }
     }
 
-    const char * Converter::ToString(_In_ ParameterCategory cat)
+    const wchar_t * Converter::ToString(_In_ ParameterCategory cat)
     {
         switch (cat)
         {
@@ -293,7 +273,7 @@ namespace VoodooShader
             CASESTRING(PC_Struct);
         case PC_Unknown:
         default:
-            return "PC_Unknown";
+            return L"PC_Unknown";
         }
     }
 
