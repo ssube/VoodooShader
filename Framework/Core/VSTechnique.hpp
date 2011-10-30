@@ -51,8 +51,8 @@ namespace VoodooShader
         void Link();
 
         mutable uint32_t m_Refs;
-        String m_Name;
         ICore * m_Core;
+        String m_Name;
 
         ITextureRef m_Target;
         PassVector m_Passes;

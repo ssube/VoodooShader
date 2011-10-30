@@ -45,8 +45,9 @@ namespace VoodooShader
 
     private:
         mutable uint32_t m_Refs;
-        String m_Name;
         ICore * m_Core;
+        String m_Name;
+
         void * m_Data;
         TextureDesc m_Desc;
     };

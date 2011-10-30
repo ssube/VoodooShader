@@ -42,7 +42,7 @@ namespace VoodooShader
 
         if (!context || !cgIsContext(context))
         {
-            throw std::exception("Unable to create parameter (core has no context).");
+            Throw(VOODOO_CORE_NAME, L"Unable to create parameter (core has no context).", m_Core);
         }
         
         int32_t len = m_Name.ToCharStr(0, nullptr);
@@ -52,7 +52,7 @@ namespace VoodooShader
 
         if (!cgIsEffect(this->m_CgEffect))
         {
-            throw std::exception("Failed to create shader.");
+            Throw(VOODOO_CORE_NAME, L"Failed to create shader.", m_Core);
         }
         else
         {
@@ -68,7 +68,7 @@ namespace VoodooShader
 
     VSShader::~VSShader(void)
     {
-        m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying shader %s.", m_Name.GetData());
+        m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"Destroying shader %s.", m_Name.GetData());
 
         m_DefaultTechnique = nullptr;
         m_Techniques.clear();
@@ -98,7 +98,7 @@ namespace VoodooShader
 
     String VSShader::ToString(void) const
     {
-        return m_Name;
+        return String::Format(L"VSShader(%s)", m_Name.GetData());
     }
 
     ICore * VSShader::GetCore(void) const

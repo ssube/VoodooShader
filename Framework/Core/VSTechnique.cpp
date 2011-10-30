@@ -38,11 +38,12 @@ namespace VoodooShader
     {
         const char * techName = cgGetTechniqueName(this->m_CgTechnique);
 
+        this->m_Name = m_Shader->ToString() + L"::";
         if (techName)
         {
-            this->m_Name = techName;
+            this->m_Name += techName;
         } else {
-            this->m_Name = String::Format("tech_%p", m_CgTechnique);
+            this->m_Name += String::Format(L"tech_%p", m_CgTechnique);
         }
     }
 
@@ -70,12 +71,7 @@ namespace VoodooShader
 
     String VSTechnique::ToString(void) const
     {
-
-        String name = m_Shader->ToString();
-
-        name += "::";
-        name += m_Name;
-        return name;
+        return String::Format(L"VSTechnique(%s)", m_Name.GetData());
     }
 
     ICore * VSTechnique::GetCore(void) const
@@ -133,7 +129,7 @@ namespace VoodooShader
                     (
                         LL_Warning,
                         VOODOO_CORE_NAME,
-                        "IPass %s cannot find target %s.",
+                        L"IPass %s cannot find target %s.",
                         this->ToString().GetData(),
                         targetName
                     );
@@ -147,7 +143,7 @@ namespace VoodooShader
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
-                    "IPass %s has annotation \"target\" of invalid type.",
+                    L"IPass %s has annotation \"target\" of invalid type.",
                     this->ToString().GetData()
                 );
 
@@ -160,7 +156,7 @@ namespace VoodooShader
             (
                 LL_Debug,
                 VOODOO_CORE_NAME,
-                "IPass %s has no target annotation.",
+                L"IPass %s has no target annotation.",
                 this->ToString().GetData()
             );
 

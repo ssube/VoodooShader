@@ -47,7 +47,7 @@ namespace VoodooShader
 
     String VSAdapter::ToString(void) const
     {
-        return "VSAdapter";
+        return L"VSAdapter";
     }
 
     ICore * VSAdapter::GetCore(void) const

@@ -37,17 +37,15 @@ namespace VoodooShader
 
         const char * passName = cgGetPassName(this->m_CgPass);
 
+        m_Name = m_Technique->ToString() + L"::";
         if (passName)
         {
-            this->m_Name = passName;
+            this->m_Name += passName;
         } else {
-            this->m_Name = String::Format(L"pass_%p", this->m_CgPass);
+            this->m_Name += String::Format(L"pass_%p", this->m_CgPass);
         }
     }
 
-    /**
-     *
-     */
     VSPass::~VSPass(void)
     {
         m_Target = nullptr;
@@ -73,8 +71,7 @@ namespace VoodooShader
 
     String VSPass::ToString(void) const
     {
-        String name = m_Technique->ToString() + L"::" + m_Name;
-        return name;
+        return String::Format(L"VSPass(%s)", m_Name);
     };
 
     ICore * VSPass::GetCore(void) const

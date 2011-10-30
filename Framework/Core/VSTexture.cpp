@@ -47,7 +47,7 @@ namespace VoodooShader
 
     String VSTexture::ToString(void) const
     {
-        return m_Name;
+        return String::Format(L"VSTexture(%s)", m_Name.GetData());
     }
 
     ICore * VSTexture::GetCore(void) const

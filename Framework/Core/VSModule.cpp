@@ -59,7 +59,7 @@ namespace VoodooShader
 
     String VSModuleManager::ToString() const
     {
-        return L"ModuleManager";
+        return L"VSModuleManager";
     }
 
     ICore * VSModuleManager::GetCore() const

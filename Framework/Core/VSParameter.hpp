@@ -51,8 +51,8 @@ namespace VoodooShader
 
     private:
         mutable uint32_t m_Refs;
-        String m_Name;
         ICore * m_Core;
+        String m_Name;
 
         IShaderRef m_Shader;
 

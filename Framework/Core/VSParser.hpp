@@ -53,6 +53,7 @@ namespace VoodooShader
 
         mutable uint32_t m_Refs;
         ICore * m_Core;
+
         Dictionary m_Variables;
         Dictionary m_SysVariables;
     };

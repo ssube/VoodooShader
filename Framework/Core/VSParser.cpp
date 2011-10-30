@@ -57,7 +57,7 @@ namespace VoodooShader
 
     String VSParser::ToString(void) const
     {
-        return "Parser";
+        return L"VSParser";
     }
 
     ICore * VSParser::GetCore(void) const
@@ -76,7 +76,7 @@ namespace VoodooShader
             (
                 LL_Debug,
                 VOODOO_CORE_NAME,
-                "Adding variable \"%s\" with value \"%s\".",
+                L"Adding variable \"%s\" with value \"%s\".",
                 name.GetData(),
                 value.GetData()
             );
@@ -100,7 +100,7 @@ namespace VoodooShader
                     (
                         LL_Warning,
                         VOODOO_CORE_NAME,
-                        "Unable to add duplicate system variable \"%s\".",
+                        L"Unable to add duplicate system variable \"%s\".",
                         finalname.GetData()
                     );
                 }
@@ -118,7 +118,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Removing variable \"%s\".", name.GetData());
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"Removing variable \"%s\".", name.GetData());
         }
 
         String finalname = this->Parse(name, PF_VarName);

@@ -83,8 +83,8 @@ namespace VoodooShader
         void CreateParameterTexture(_In_ IParameter * pParam);
 
         mutable uint32_t m_Refs;
-        String m_Name;
         ICore * m_Core;
+        String m_Name;
 
         ITechniqueRef m_DefaultTechnique;
         TechniqueVector m_Techniques;

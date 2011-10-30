@@ -78,7 +78,7 @@ namespace VoodooShader
     {
         if (!pInitParams)
         {
-            Throw(VOODOO_CORE_NAME, "No init parameters provided.", nullptr);
+            Throw(VOODOO_CORE_NAME, L"No init parameters provided.", nullptr);
         }
 
 #ifdef VSF_DEBUG_MEMORY
@@ -126,7 +126,7 @@ namespace VoodooShader
                         result = m_ConfigFile->LoadFile(ConfigPath);
                         if (!result)
                         {
-                            throw std::exception("Unable to find or parse config file.");
+                            Throw(VOODOO_CORE_NAME, L"Unable to find or parse config file.", nullptr);
                         }
                     }
                 }
@@ -212,7 +212,7 @@ namespace VoodooShader
             m_Logger = m_ModuleManager->CreateClass<ILogger>(logClass);
             if (m_Logger.get() == nullptr)
             {
-                Throw(VOODOO_CORE_NAME, "Unable to create Logger object (class not found).", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Unable to create Logger object (class not found).", nullptr);
             }
 
             m_Logger->Open(logFile, false);
@@ -234,19 +234,19 @@ namespace VoodooShader
             m_FileSystem = m_ModuleManager->CreateClass<IFileSystem>(fsClass);
             if (!m_FileSystem)
             {
-                Throw(VOODOO_CORE_NAME, "Unable to create FileSystem object.", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Unable to create FileSystem object.", nullptr);
             }
 
             m_HookManager = m_ModuleManager->CreateClass<IHookManager>(hookClass);
             if (!m_HookManager)
             {
-                Throw(VOODOO_CORE_NAME, "Unable to create HookManager object.", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Unable to create HookManager object.", nullptr);
             }
 
             m_Adapter = m_ModuleManager->CreateClass<IAdapter>(adpClass);
             if (!m_Adapter)
             {
-                Throw(VOODOO_CORE_NAME, "Unable to create Adapter object.", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Unable to create Adapter object.", nullptr);
             }
 
             // ICore done loading
@@ -298,7 +298,7 @@ namespace VoodooShader
 
     String VSCore::ToString() const
     {
-        return L"Voodoo_Core";
+        return L"VSCore";
     }
 
     ICore * VSCore::GetCore() const
@@ -488,14 +488,14 @@ namespace VoodooShader
 
         if (parameter != this->m_Parameters.end())
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got parameter %s, erasing.", Name.GetData());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got parameter %s, erasing.", Name.GetData());
 
             this->m_Parameters.erase(parameter);
             return true;
         }
         else
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find parameter %s.", Name.GetData());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Unable to find parameter %s.", Name.GetData());
 
             return false;
         }
@@ -507,7 +507,7 @@ namespace VoodooShader
 
         if (texture != this->m_Textures.end())
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Got texture %s, returning shared pointer to %p.", Name.GetData(),
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got texture %s, returning shared pointer to %p.", Name.GetData(),
                 texture->second);
 
             this->m_Textures.erase(texture);
@@ -515,7 +515,7 @@ namespace VoodooShader
         }
         else
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, "Unable to find texture %s.", Name.GetData());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Unable to find texture %s.", Name.GetData());
             return false;
         }
     }
@@ -552,7 +552,7 @@ namespace VoodooShader
 
         if (errorString)
         {
-            this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported error: %s", errorString);
+            this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, L"Cg core reported error: %s", errorString);
             if (context && error != CG_INVALID_CONTEXT_HANDLE_ERROR)
             {
                 if (this->m_Adapter)
@@ -565,19 +565,19 @@ namespace VoodooShader
 
                 while (listing)
                 {
-                    this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg error details: %s", listing);
+                    this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, L"Cg error details: %s", listing);
                     listing = cgGetLastListing(context);
                 }
             }
             else
             {
                 this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, 
-                    "Invalid context for error, no further data available.");
+                    L"Invalid context for error, no further data available.");
             }
         }
         else
         {
-            this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, "Cg core reported an unknown error (%d).", error);
+            this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, L"Cg core reported an unknown error (%d).", error);
         }
     }
 }

@@ -31,7 +31,7 @@
 namespace VoodooShader
 {
     VSParameter::VSParameter(_In_ ICore * pCore, _In_ String name, _In_ ParameterType type) : 
-         m_Refs(0), m_Core(pCore), m_Name(name), m_Type(type), m_Shader(nullptr), m_Virtual(true)
+         m_Refs(0), m_Core(pCore), m_Type(type), m_Shader(nullptr), m_Virtual(true)
     {
         m_Core->GetLogger()->Log
         (
@@ -58,7 +58,7 @@ namespace VoodooShader
         m_Refs(0), m_Core(pShader->GetCore()), m_Shader(pShader), m_Param(pParam), m_Virtual(false)
     {
         m_Type = Converter::ToParameterType(cgGetParameterType(m_Param));
-        m_Name = cgGetParameterName(m_Param);
+        m_Name = this->m_Shader->ToString() + L"::" + cgGetParameterName(m_Param);
 
         memset(m_Valuefloat, 0, sizeof(float) * 16);
     }
@@ -91,17 +91,7 @@ namespace VoodooShader
 
     String VSParameter::ToString(void) const
     {
-        String name;
-
-        if (m_Shader)
-        {
-            name = this->m_Shader->ToString();
-        }
-
-        name += L":";
-        name += m_Name;
-
-        return name;
+        return String::Format(L"VSParameter(%s)", m_Name);
     }
 
     ICore * VSParameter::GetCore(void) const

@@ -48,7 +48,7 @@ namespace VoodooShader
 
             if (logger)
             {
-                logger->Log(LL_Error, module, L"Exception in %s at %s (%d): %s", file, function, line, message);
+                logger->Log(LL_Error, module, L"Exception in %S at %S (%d): %s", file, function, line, message);
             }
         }
     }
@@ -80,7 +80,7 @@ namespace VoodooShader
                 (
                     LL_Error,
                     module.GetData(),
-                    "Exception in %s at %s (%d): %s",
+                    L"Exception in %S at %S (%d): %s",
                     file,
                     function,
                     line,
@@ -109,7 +109,7 @@ namespace VoodooShader
             (
                 m_FmtMsg,
                 1024,
-                "VoodooShader::Exception in module %s, file %s at %s (line %d): %s",
+                "VoodooShader::Exception in module %s, file %S at %S (line %d): %s",
                 m_Module.GetData(),
                 m_File,
                 m_Function,
