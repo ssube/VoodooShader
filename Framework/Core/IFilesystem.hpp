@@ -79,7 +79,11 @@ namespace VoodooShader
         virtual bool RemovePath(_In_ const String & path) throw() = 0;
 
         /**
+         * Resolves a relative filename (usually just filename and extension, but may include directories) into an 
+         * absolute filename by searching the list of resource directories registered with this manager. 
          * 
+         * @param The file name to find.
+         * @return The file, if found.
          */
         virtual IFile * FindFile(_In_ const String & name) const throw() = 0;
     };
@@ -118,15 +122,18 @@ namespace VoodooShader
          */
         virtual ICore * GetCore(void) const throw() = 0;
 
+        /**
+         * Gets the absolute path of this file.
+         */
         virtual String GetPath(void) const throw() = 0;
 
         virtual bool Open(_In_ FileOpenMode mode) throw() = 0;
 
         virtual bool Close(void) throw() = 0;
 
-        virtual uint32_t Read(_In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
+        virtual int32_t Read(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
 
-        virtual uint32_t Write(_In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
+        virtual int32_t Write(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
 
         virtual IImage * OpenImage(void) const throw() = 0;
     };

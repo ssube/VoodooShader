@@ -109,12 +109,6 @@ namespace VoodooShader
          * @return The function's address if found, nullptr otherwise.
          */
         _Check_return_ virtual void * FindFunction(_In_ const String & module, _In_ const String & name) const;
-
-    private:
-        mutable uint32_t m_Refs;
-        ICore * m_Core;
-        ModuleMap m_Modules;
-        ClassMap m_Classes;
     };
 
     /**
@@ -166,14 +160,6 @@ namespace VoodooShader
         virtual const char * ClassInfo(_In_ const uint32_t number) const;
 
         virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore);
-
-    private:
-        mutable uint32_t m_Refs;
-        HMODULE m_Handle;
-        Functions::VersionFunc m_ModuleVersion;
-        Functions::CountFunc m_ClassCount;
-        Functions::InfoFunc m_ClassInfo;
-        Functions::CreateFunc m_ClassCreate;
     };
     /* @} */
 }

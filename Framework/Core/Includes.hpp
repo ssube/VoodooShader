@@ -167,6 +167,7 @@ namespace VoodooShader
 #endif
 
     /* Collections */
+#if !defined(VOODOO_NO_COLLECTIONS) && !defined(VOODOO_NO_BOOST)
     typedef std::map<String, String> Dictionary;
     typedef std::map<String, IShaderRef> ShaderMap;
     typedef std::list<IShaderRef> ShaderList;
@@ -187,6 +188,7 @@ namespace VoodooShader
     typedef std::pair<IModuleRef, uint32_t> ClassID;
     typedef std::map<String, ClassID> ClassMap;
     typedef std::map<ITextureRef, IShaderRef> MaterialMap;
+#endif
 
     /**
      * Texture formats for use by @ref VoodooShader::Texture "Textures", describing the layout and size of the texture data. 
