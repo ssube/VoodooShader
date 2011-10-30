@@ -25,26 +25,26 @@
 
 #include "ICore.hpp"
 #include "ILogger.hpp"
-#include "IParser.hpp"
+#include "VSParser.hpp"
 
 namespace VoodooShader
 {
-    IParser::IParser(_In_ ICore * pCore) : 
+    VSParser::VSParser(_In_ ICore * pCore) : 
         m_Core(pCore)
     { }
 
-    IParser::~IParser(void)
+    VSParser::~VSParser(void)
     {
         m_Variables.clear();
         m_SysVariables.clear();
     }
 
-    int32_t IParser::AddRef() const
+    uint32_t VSParser::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t IParser::Release() const
+    uint32_t VSParser::Release() const
     {
         if (--m_Refs == 0)
         {
@@ -55,17 +55,17 @@ namespace VoodooShader
         }
     }
 
-    String IParser::ToString(void) const
+    String VSParser::ToString(void) const
     {
         return "Parser";
     }
 
-    ICore * IParser::GetCore(void) const
+    ICore * VSParser::GetCore(void) const
     {
         return m_Core;
     }
 
-    void IParser::Add(_In_ const String & name, _In_ const String & value, _In_ VariableType Type)
+    void VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ VariableType Type)
     {
 
         ILoggerRef logger = m_Core->GetLogger();
@@ -112,7 +112,7 @@ namespace VoodooShader
         }
     }
 
-    void IParser::Remove(_In_ const String & name)
+    void VSParser::Remove(_In_ const String & name)
     {
         ILoggerRef logger = m_Core->GetLogger();
 
@@ -130,14 +130,14 @@ namespace VoodooShader
         }
     }
 
-    String IParser::Parse(_In_ String input, _In_ ParseFlags flags) const
+    String VSParser::Parse(_In_ String input, _In_ ParseFlags flags) const
     {
         Dictionary parseState;
 
         return this->ParseStringRaw(input, flags, 0, parseState);
     }
 
-    String IParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state) const
+    String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ Dictionary & state) const
     {
         using namespace std;
 
@@ -148,7 +148,7 @@ namespace VoodooShader
             m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"Parsing string \"%s\" (%X).", input.GetData(), flags);
         }
 
-        if (depth > IParser::VarMaxDepth || input.GetLength() < 3)
+        if (depth > VSParser::VarMaxDepth || input.GetLength() < 3)
         {
             return input;
         }
@@ -169,7 +169,7 @@ namespace VoodooShader
                 break;
             }
 
-            size_t endpos = iteration.Find(IParser::VarDelimEnd);
+            size_t endpos = iteration.Find(VSParser::VarDelimEnd);
 
             if (endpos == string::npos)
             {
@@ -178,9 +178,9 @@ namespace VoodooShader
             }
 
             String varname = iteration.Substr(0, endpos);
-            size_t startpos = varname.ReverseFind(IParser::VarDelimStart);
+            size_t startpos = varname.ReverseFind(VSParser::VarDelimStart);
 
-            if (startpos < 1 || iteration[startpos - 1] != IParser::VarDelimPre)
+            if (startpos < 1 || iteration[startpos - 1] != VSParser::VarDelimPre)
             {
                 // Stop parsing if no opening sequence is found, or there is no room for one
                 break;
@@ -204,7 +204,7 @@ namespace VoodooShader
             }
 
             // Handle state variables
-            size_t statepos = varname.Find(IParser::VarMarkerState);
+            size_t statepos = varname.Find(VSParser::VarMarkerState);
 
             if (statepos != String::Npos)
             {
@@ -230,12 +230,12 @@ namespace VoodooShader
             bool supress = false;
             bool parse = true;
 
-            if (varname[0] == IParser::VarMarkerSupp)
+            if (varname[0] == VSParser::VarMarkerSupp)
             {
                 supress = true;
                 varname = varname.Substr(1);
             }
-            else if (varname[0] == IParser::VarMarkerRaw)
+            else if (varname[0] == VSParser::VarMarkerRaw)
             {
                 parse = false;
                 varname = varname.Substr(1);

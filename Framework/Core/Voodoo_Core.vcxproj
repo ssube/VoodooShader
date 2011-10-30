@@ -278,6 +278,11 @@
     <ClInclude Include="String.hpp" />
     <ClInclude Include="Version.hpp" />
     <ClInclude Include="VoodooCore.hpp" />
+    <ClInclude Include="VSParser.hpp" />
+    <ClInclude Include="VSPass.hpp" />
+    <ClInclude Include="VSShader.hpp" />
+    <ClInclude Include="VSTechnique.hpp" />
+    <ClInclude Include="VSTexture.hpp" />
     <ClInclude Include="Xml.hpp" />
   </ItemGroup>
   <ItemGroup>

@@ -30,21 +30,21 @@ namespace VoodooShader
         /**
          * Base virtual destructor for all object classes. This throws when called, and so must be overridden.
          */
-        virtual ~IFileSystem(void) throw() { };
+        virtual ~IFileSystem(void) throw() {};
         
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw() = 0;
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw() = 0;
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.
@@ -95,14 +95,14 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw() = 0;
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw() = 0;
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.
@@ -124,9 +124,9 @@ namespace VoodooShader
 
         virtual bool Close(void) throw() = 0;
 
-        virtual int32_t Read(_In_ int32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
+        virtual uint32_t Read(_In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
 
-        virtual int32_t Write(_In_ int32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
+        virtual uint32_t Write(_In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
 
         virtual IImage * OpenImage(void) const throw() = 0;
     };
@@ -142,14 +142,14 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw() = 0;
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw() = 0;
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.
@@ -169,6 +169,6 @@ namespace VoodooShader
 
         virtual TextureDesc GetDesc(void) const throw() = 0;
 
-        virtual int32_t GetData(_In_ TextureRegion desc, _In_ int32_t size, _In_opt_count_(size) void * const pBuffer) const throw() = 0;
+        virtual uint32_t GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const throw() = 0;
     };
 }

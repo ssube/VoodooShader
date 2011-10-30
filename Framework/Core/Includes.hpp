@@ -184,7 +184,7 @@ namespace VoodooShader
     typedef std::list<ITextureRef> TextureList;
     typedef std::vector<ITextureRef> TextureVector;
     typedef std::map<String, IModuleRef> ModuleMap;
-    typedef std::pair<IModuleRef, int32_t> ClassID;
+    typedef std::pair<IModuleRef, uint32_t> ClassID;
     typedef std::map<String, ClassID> ClassMap;
     typedef std::map<ITextureRef, IShaderRef> MaterialMap;
 
@@ -474,10 +474,10 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef int32_t (__stdcall * CountFunc)();
-        typedef const char * (__stdcall * InfoFunc)(int32_t);
-        typedef IObject * (__stdcall * CreateFunc)(int32_t, ICore *);
         typedef const Version * (__stdcall * VersionFunc)();
+        typedef const uint32_t (__stdcall * CountFunc)();
+        typedef const char * (__stdcall * InfoFunc)(const uint32_t);
+        typedef IObject * (__stdcall * CreateFunc)(const uint32_t, ICore *);
     };
 
     /**

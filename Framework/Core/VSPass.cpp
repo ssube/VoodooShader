@@ -18,7 +18,7 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "IPass.hpp"
+#include "VSPass.hpp"
 
 #include "Version.hpp"
 
@@ -30,7 +30,7 @@
 
 namespace VoodooShader
 {
-    IPass::IPass(ITechnique * pTechnique, CGpass pCgPass) : 
+    VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) : 
         m_Technique(pTechnique), m_CgPass(pCgPass)
     {
         this->m_Core = m_Technique->GetCore();
@@ -48,19 +48,19 @@ namespace VoodooShader
     /**
      *
      */
-    IPass::~IPass(void)
+    VSPass::~VSPass(void)
     {
         m_Target = nullptr;
 
         // ! @todo Check if passes need to unload themselves from the adapter on dest. m_Core->GetAdapter()->UnloadPass(this);
     }
 
-    int32_t IPass::AddRef() const
+    uint32_t VSPass::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t IPass::Release() const
+    uint32_t VSPass::Release() const
     {
         if (--m_Refs == 0)
         {
@@ -71,23 +71,23 @@ namespace VoodooShader
         }
     }
 
-    String IPass::ToString(void) const
+    String VSPass::ToString(void) const
     {
         String name = m_Technique->ToString() + L"::" + m_Name;
         return name;
     };
 
-    ICore * IPass::GetCore(void) const
+    ICore * VSPass::GetCore(void) const
     {
         return m_Core;
     }
 
-    ITexture * IPass::GetTarget(void) const
+    ITexture * VSPass::GetTarget(void) const
     {
         return m_Target.get();
     }
 
-    CGprogram IPass::GetProgram(ProgramStage stage) const
+    CGprogram VSPass::GetProgram(ProgramStage stage) const
     {
         switch (stage)
         {
@@ -107,17 +107,17 @@ namespace VoodooShader
         }
     }
 
-    ITechnique * IPass::GetTechnique(void) const
+    ITechnique * VSPass::GetTechnique(void) const
     {
         return m_Technique;
     }
 
-    CGpass IPass::GetCgPass(void) const
+    CGpass VSPass::GetCgPass(void) const
     {
         return m_CgPass;
     }
 
-    void IPass::Link(void)
+    void VSPass::Link(void)
     {
         this->m_VertexProgram = cgGetPassProgram(this->m_CgPass, CG_VERTEX_DOMAIN);
         this->m_FragmentProgram = cgGetPassProgram(this->m_CgPass, CG_FRAGMENT_DOMAIN);

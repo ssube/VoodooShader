@@ -156,6 +156,21 @@
     <ClInclude Include="VSModule.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
+    <ClInclude Include="VSParser.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VSPass.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VSShader.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VSTechnique.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VSTexture.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">

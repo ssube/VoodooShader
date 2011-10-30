@@ -32,8 +32,8 @@ namespace VoodooShader
         VSAdapter(ICore * pCore);
         virtual ~VSAdapter(void);
 
-        virtual int32_t AddRef() const;
-        virtual int32_t Release() const;
+        virtual uint32_t AddRef() const;
+        virtual uint32_t Release() const;
         virtual String ToString(void) const;
         virtual ICore * GetCore(void) const;
 
@@ -41,20 +41,20 @@ namespace VoodooShader
         virtual bool UnloadPass(_In_ IPass * const pPass);
         virtual void SetPass(_In_opt_ IPass * const pPass);
         virtual IPass * GetPass(void) const;
-        virtual bool SetTarget(_In_ uint32_t index, _In_opt_ ITexture * const pTarget);
-        virtual ITexture * GetTarget(_In_ uint32_t index) const;
+        virtual bool SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
+        virtual ITexture * GetTarget(_In_ const uint32_t index) const;
         virtual ITexture * CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc);
         virtual ITexture * LoadTexture(_In_ const String & name, _In_opt_ const TextureRegion * pRegion);
-        virtual void DrawGeometry(_In_ int32_t count, _In_count_(count) const VertexStruct * const pVertexData);
+        virtual void DrawGeometry(_In_ uint32_t count, _In_count_(count) const VertexStruct * const pVertexData);
         virtual void DrawShader(_In_ IShader * const pShader);
         virtual void ApplyParameter(_In_ IParameter * const pParam);
         virtual void SetProperty(const String & property, const String & value);
         virtual String GetProperty(const String & property) const;
         virtual bool ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
-        virtual void HandleError(_In_opt_ CGcontext const pContext, _In_ int32_t error);
+        virtual void HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
 
     private:
-        mutable int32_t m_Refs;
+        mutable uint32_t m_Refs;
         ICore * m_Core;
     };
 }

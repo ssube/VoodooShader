@@ -25,57 +25,56 @@
 #include "Version.hpp"
 #include "Xml.hpp"
 
+#include "VSModule.hpp"
+#include "VSParameter.hpp"
+#include "VSParser.hpp"
+#include "VSShader.hpp"
+
 #include "IAdapter.hpp"
 #include "ICore.hpp"
 #include "IFilesystem.hpp"
 #include "IHookManager.hpp"
 #include "ILogger.hpp"
-#include "IModule.hpp"
-#include "IParameter.hpp"
-#include "IParser.hpp"
-#include "IShader.hpp"
 #include "ITexture.hpp"
 
 namespace VoodooShader
 {
-    void Voodoo_CgErrorHandler_Func(CGcontext Context, CGerror Error, void *pCore)
+    void Voodoo_CgErrorHandler_Func(CGcontext Context, CGerror Error, void * pCore)
     {
         if (pCore)
         {
-            ICore *pSrcCore = reinterpret_cast<ICore *>(pCore);
+            VSCore * pSrcCore = static_cast<VSCore *>(pCore);
             pSrcCore->CgErrorHandler(Context, Error);
         }
     }
 
-    ICore * CreateCore(_In_ const InitParams * const pInitParams, bool CatchErrors)
+    ICore * CreateCore(_In_ const InitParams * const pInitParams, bool catchErrors)
     {
-        ICore *pCore = nullptr;
+        ICore * pCore = nullptr;
 
-        try
+        if (!catchErrors)
         {
-            pCore = new ICore(pInitParams);
-            return pCore;
-        }
-        catch(std::exception & exc)
-        {
-            if (!CatchErrors)
+            pCore = new VSCore(pInitParams);
+        } else {
+            try
             {
-                throw exc;
-            }
-            else
-            {
+                pCore = new VSCore(pInitParams);
+            } catch(const std::exception & exc) {
+                UNREFERENCED_PARAMETER(exc);
+
                 if (pCore)
                 {
                     delete pCore;
+                    pCore = nullptr;
                 }
-
-                return nullptr;
             }
         }
+
+        return pCore;
     }
 
-    ICore::ICore(_In_ const InitParams * const pInitParams) 
-        : m_CgContext(nullptr), m_ConfigFile(nullptr)
+    VSCore::VSCore(_In_ const InitParams * const pInitParams) :
+        m_CgContext(nullptr), m_ConfigFile(nullptr)
     {
         if (!pInitParams)
         {
@@ -91,8 +90,8 @@ namespace VoodooShader
 #endif
 
         // Set up the internal objects
-        m_ModuleManager = new IModuleManager(this);
-        m_Parser = new IParser(this);
+        m_ModuleManager = new VSModuleManager(this);
+        m_Parser = new VSParser(this);
 
         // Load variables, built-in first
         m_Parser->Add(L"globalroot", pInitParams->GlobalRoot, VT_System);
@@ -266,7 +265,7 @@ namespace VoodooShader
         }
     }
 
-    ICore::~ICore(void)
+    VSCore::~VSCore(void)
     {
         this->SetCgContext(nullptr);
 
@@ -282,14 +281,14 @@ namespace VoodooShader
 #endif
     }
 
-    int32_t ICore::AddRef() const
+    uint32_t VSCore::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t ICore::Release() const
+    uint32_t VSCore::Release() const
     {
-        int32_t count = --m_Refs;
+        uint32_t count = --m_Refs;
         if (count == 0)
         {
             delete this;
@@ -297,52 +296,52 @@ namespace VoodooShader
         return count;
     }
 
-    String ICore::ToString() const
+    String VSCore::ToString() const
     {
         return L"Voodoo_Core";
     }
 
-    ICore * ICore::GetCore() const
+    ICore * VSCore::GetCore() const
     {
         return nullptr;
     }
 
-    IParser* ICore::GetParser(void) const
+    IParser* VSCore::GetParser(void) const
     {
         return m_Parser.get();
     }
 
-    IHookManager* ICore::GetHookManager(void) const
+    IHookManager* VSCore::GetHookManager(void) const
     {
         return m_HookManager.get();
     }
 
-    IFileSystem* ICore::GetFileSystem(void) const
+    IFileSystem* VSCore::GetFileSystem(void) const
     {
         return m_FileSystem.get();
     }
 
-    IAdapter* ICore::GetAdapter(void) const
+    IAdapter* VSCore::GetAdapter(void) const
     {
         return m_Adapter.get();
     }
 
-    ILogger* ICore::GetLogger(void) const
+    ILogger* VSCore::GetLogger(void) const
     {
         return m_Logger.get();
     }
 
-    XmlDocument ICore::GetConfig(void) const
+    XmlDocument VSCore::GetConfig(void) const
     {
         return m_ConfigFile;
     }
 
-    CGcontext ICore::GetCgContext(void) const
+    CGcontext VSCore::GetCgContext(void) const
     {
         return m_CgContext;
     }
 
-    bool ICore::SetCgContext(CGcontext Context)
+    bool VSCore::SetCgContext(CGcontext Context)
     {
         if (Context == nullptr)
         {
@@ -371,7 +370,7 @@ namespace VoodooShader
         }
     }
 
-    IShader* ICore::CreateShader(_In_ const IFile * pFile, _In_opt_ const char **ppArgs)
+    IShader * VSCore::CreateShader(_In_ const IFile * pFile, _In_opt_ const char **ppArgs) const
     {
         if (!pFile)
         {
@@ -379,17 +378,15 @@ namespace VoodooShader
         }
 
         String fullpath = pFile->GetPath();
-        IShaderRef shader = new IShader(this, fullpath, ppArgs);
+        IShaderRef shader = new VSShader(this, fullpath, ppArgs);
 
         m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Created shader from %s, returning shared pointer to %p.",
             fullpath.GetData(), shader.get());
 
-        this->m_Shaders.push_back(shader);
-
-        return shader;
+        return shader.get();
     }
 
-    IParameter* ICore::CreateParameter(const String & name, ParameterType type)
+    IParameter* VSCore::CreateParameter(const String & name, ParameterType type)
     {
         ParameterMap::iterator paramEntry = this->m_Parameters.find(name);
 
@@ -400,7 +397,7 @@ namespace VoodooShader
         }
         else
         {
-            IParameter* parameter(new IParameter(this, name, type));
+            IParameterRef parameter = new VSParameter(this, name, type);
 
             m_Parameters[name] = parameter;
 
@@ -411,11 +408,11 @@ namespace VoodooShader
                 Converter::ToString(type), parameter
             );
 
-            return parameter;
+            return parameter.get();
         }
     }
 
-    ITexture* ICore::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
+    ITexture* VSCore::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
     {
         TextureMap::iterator textureEntry = this->m_Textures.find(name);
 
@@ -426,7 +423,7 @@ namespace VoodooShader
         }
         else
         {
-            ITexture* texture = m_Adapter->CreateTexture(name, desc);
+            ITexture * texture = m_Adapter->CreateTexture(name, pDesc);
 
             this->m_Textures[name] = texture;
 
@@ -437,7 +434,7 @@ namespace VoodooShader
         }
     }
 
-    IParameter* ICore::GetParameter(const String & name, ParameterType type) const
+    IParameter* VSCore::GetParameter(const String & name, ParameterType type) const
     {
         ParameterMap::const_iterator parameter = m_Parameters.find(name);
 
@@ -466,7 +463,7 @@ namespace VoodooShader
         }
     }
 
-    ITexture * ICore::GetTexture(const String & name) const
+    ITexture * VSCore::GetTexture(const String & name) const
     {
         TextureMap::const_iterator textureEntry = this->m_Textures.find(name);
 
@@ -485,7 +482,7 @@ namespace VoodooShader
         }
     }
 
-    bool ICore::RemoveParameter(_In_ String Name)
+    bool VSCore::RemoveParameter(_In_ String Name)
     {
         ParameterMap::iterator parameter = this->m_Parameters.find(Name);
 
@@ -504,7 +501,7 @@ namespace VoodooShader
         }
     }
 
-    bool ICore::RemoveTexture(_In_ String Name)
+    bool VSCore::RemoveTexture(_In_ String Name)
     {
         TextureMap::iterator texture = this->m_Textures.find(Name);
 
@@ -523,7 +520,7 @@ namespace VoodooShader
         }
     }
 
-    ITexture * ICore::GetStageTexture(_In_ TextureStage Stage)
+    ITexture * VSCore::GetStageTexture(_In_ TextureStage Stage)
     {
         switch (Stage)
         {
@@ -536,7 +533,7 @@ namespace VoodooShader
         }
     }
 
-    void ICore::SetStageTexture(_In_ TextureStage Stage, _In_ ITexture * const pTexture)
+    void VSCore::SetStageTexture(_In_ TextureStage Stage, _In_ ITexture * const pTexture)
     {
         switch (Stage)
         {
@@ -549,7 +546,7 @@ namespace VoodooShader
         }
     }
 
-    void ICore::CgErrorHandler(CGcontext context, int error)
+    void VSCore::CgErrorHandler(CGcontext context, int error)
     {
         const char *errorString = error ? cgGetErrorString((CGerror) error) : nullptr;
 

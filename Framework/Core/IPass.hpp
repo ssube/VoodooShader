@@ -19,10 +19,6 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "String.hpp"
-
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -34,94 +30,75 @@ namespace VoodooShader
     /**
      * Each IPass contains a single set of programs, each operating on a different stage of the render pipeline. 
      * 
-     * @note A IPass may contain programs for each stage. Valid stages vary by underlying API and version. In OpenGL and
+     * @note A pass may contain programs for each stage. Valid stages vary by underlying API and version. In OpenGL and
      *     DirectX 9 and earlier, stages may be left to the fixed-function pipeline by not specifying any program to be 
      *     used. Later APIs require the vertex and pixel shaders to be specified in each pass. 
      * 
      * @warning Some adapters may require programs to be provided for certain stages.
      */
-    class IPass
-        : public IObject
+    class IPass : 
+        public IObject
     {
     public:
-        IPass(_In_ ITechnique* parent, _In_ CGpass cgPass);
-
-        virtual ~IPass(void);
+        virtual ~IPass(void) throw() {};
 
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Retrieve the fully qualified pass name, including technique and shader name.
          * 
          * @return The pass name
          */
-        virtual String ToString(void) const throw();
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw();
+        virtual ICore * GetCore(void) const throw() = 0;
 
         /**
-         * Retrieve the target this pass should render to. This will be a texture that has been registered with the core. 
-         * The results of the shader program(s), when run, should end up <em>only</em> in this texture (scratch textures may 
-         * be used, but the program should not write to a common texture such as lastpass). 
+         * Retrieve the target texture buffer this pass should render to. This must be a texture created with the render
+         * target flag set. 
          * 
-         * @return A reference to the target texture
+         * @return The target texture.
          */
-        virtual ITexture * GetTarget(void) const throw();
-
-        virtual ITechnique * GetTechnique(void) const throw();
+        virtual ITexture * GetTarget(void) const throw() = 0;
 
         /**
-         * Retrieve a specific program stage from this pass. Each pass may have many programs, each program controls one 
-         * stage of the render process. The most commonly used stages are the vertex and fragment stages, which are supported
-         * by almost all hardware. Geometry stages are also available, but not as well supported. 
+         * Retrieve the parent technique of this pass.
+         * 
+         * @return The parent technique.
+         */
+        virtual ITechnique * GetTechnique(void) const throw() = 0;
+
+        /**
+         * Retrieve a specific program stage from this pass.
          * 
          * @param stage The stage to retrieve. 
-         * @return The program corresponding to the desired stage, or nullptr if the pass has no program for that stage or an 
-         *     unsupported or unknown stage is requested.
+         * @return The program corresponding to the desired stage.
          */
-        virtual CGprogram GetProgram(_In_ ProgramStage stage) const throw();
+        virtual CGprogram GetProgram(_In_ const ProgramStage stage) const throw() = 0;
 
         /**
          * Retrieve the underlying Cg technique. 
          * 
          * @return A pointer to the Cg technique. 
          */
-        virtual CGpass GetCgPass(void) const throw();
-
-    private:
-        void Link(void);
-
-        mutable int32_t m_Refs;
-        ICore * m_Core;
-        String m_Name;
-
-        ITechnique * m_Technique;
-        ITextureRef m_Target;
-
-        CGpass m_CgPass;
-
-        CGprogram m_GeometryProgram;
-        CGprogram m_VertexProgram;
-        CGprogram m_FragmentProgram;
-        CGprogram m_DomainProgram;
-        CGprogram m_HullProgram;
+        virtual CGpass GetCgPass(void) const throw() = 0;
     };
     /* @} */
 }

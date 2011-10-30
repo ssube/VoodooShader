@@ -19,10 +19,6 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "String.hpp"
-
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -34,38 +30,21 @@ namespace VoodooShader
         public IObject
     {
     public:
-        /**
-         * Virtual parameter (context-level) constructor. This will create a named parameter in the Cg runtime and register 
-         * it in the given ICore, but the parameter will not exist in any effects. Virtual parameters are used to link many 
-         * effect-level params to a single data source. 
-         * 
-         * @sa See the @ref virtualparams "parameter documentation" for details.
-         */
-        IParameter(_In_opt_ ICore * const pCore, _In_ String name, _In_ const ParameterType type);
-
-        /**
-        * Creates a parameter from an actual parameter (shader-level). This parameter will update values in the IShader, but 
-        * is more limited in use. 
-        * 
-        * @sa See the @ref virtualparams "parameter documentation" for details
-        */
-        IParameter(_In_opt_ IShader * const pShader, _In_ const CGparameter pParam);
-
-        virtual ~IParameter(void);
+        virtual ~IParameter(void) throw() {};
 
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Retrieves the fully-qualified parameter name. Virtual parameters will be of the form <code>:param-name</code>, 
@@ -74,27 +53,27 @@ namespace VoodooShader
          * 
          * @returns The parameter's name.
          */
-        virtual String ToString(void) const throw();
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw();
+        virtual ICore * GetCore(void) const throw() = 0;
 
         /**
          * Retrieves the type of this parameter. This specifies what type and how many data components are used (one texture 
          * or 1-16 floats).
          */
-        virtual ParameterType GetType(void) const throw();
+        virtual ParameterType GetType(void) const throw() = 0;
 
         /** 
          * Checks if the parameter is virtual (belongs to the core only) or physical (from a shader).
          *
          * @return Virtual status.
          */
-        virtual bool IsVirtual(void) const throw();
+        virtual bool IsVirtual(void) const throw() = 0;
 
         /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value is changed. 
@@ -106,7 +85,7 @@ namespace VoodooShader
          *     actual parameters to virtual parameters. 
          *     
          */
-        virtual bool AttachParameter(_In_opt_ IParameter * const pParam) throw();
+        virtual bool AttachParameter(_In_opt_ IParameter * const pParam) throw() = 0;
 
         /**
          * Get the component count for this parameter.
@@ -119,50 +98,34 @@ namespace VoodooShader
          *     @li For an array, this represents the number of elements in the array (2 for Light[2]).
          *     @li Structs and other types that do not also match one of the above will always return -1.
          */
-        virtual int32_t GetComponents(void) const throw();
+        virtual const uint32_t GetComponents(void) const throw() = 0;
 
         /** 
          * Retrieves the texture source for this parameter. 
          * 
          * @return The texture source, if this parameter has a texture.
          */
-        virtual ITexture * GetTexture(void) const throw();
+        virtual ITexture * GetTexture(void) const throw() = 0;
 
-        virtual void SetTexture(_In_opt_ ITexture * const pTexture) throw();
+        virtual void SetTexture(_In_opt_ ITexture * const pTexture) throw() = 0;
 
         /**
          * Retrieves the float buffer for this parameter. This contains all 16 float
          * components, for all sizes (float1 to float4x4). Any component may be written
          * to, but only the appropriate number will be sent to the Cg parameter.
          */
-        _Ret_count_c_(16)
-        virtual float * const GetScalar(void) throw();
+        _Ret_count_c_(16) virtual float * const GetScalar(void) throw() = 0;
 
-        virtual void SetScalar(int32_t count, _In_count_(Count) float * const pValues) throw();
+        virtual void SetScalar(_In_ const uint32_t count, _In_count_(Count) float * const pValues) throw() = 0;
 
-        virtual IShader * const GetShader(void) const throw();
+        virtual IShader * const GetShader(void) const throw() = 0;
 
         /**
          * Retrieves the underlying Cg parameter object.
          * 
          * @returns The Cg parameter this object is bound to.
          */
-        virtual CGparameter GetCgParameter(void) const throw();
-
-    private:
-        mutable int32_t m_Refs;
-        String m_Name;
-        ICore * m_Core;
-
-        IShaderRef m_Shader;
-
-        bool m_Virtual;
-        CGparameter m_Param;
-        ParameterType m_Type;
-
-        // Value
-        ITextureRef m_ValueTexture;
-        float m_Valuefloat[16];
+        virtual CGparameter GetCgParameter(void) const throw() = 0;
     };
     /* @} */
 }

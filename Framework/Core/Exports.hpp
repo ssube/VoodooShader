@@ -17,7 +17,6 @@
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
  **/
-
 #pragma once
 
 #include "Includes.hpp"
@@ -33,12 +32,11 @@ namespace VoodooShader
      * @return A new ICore object.
      * @throws std::exception in case of errors, if CatchErrors is false.
      */
-    _Check_return_ 
-    ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
+    _Check_return_ ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
 
     /* Plugin exports. */
-    Version   VOODOO_CALL API_ModuleVersion(void);
-    int32_t   VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int32_t Index);
-    IObject * VOODOO_CALL API_ClassCreate(_In_ int32_t Index, _In_ ICore * pCore);
+    const Version * VOODOO_CALL API_ModuleVersion(void);
+    const uint32_t   VOODOO_CALL API_ClassCount(void);
+    const char *    VOODOO_CALL API_ClassInfo(_In_ const uint32_t Index);
+    IObject *       VOODOO_CALL API_ClassCreate(_In_ const uint32_t Index, _In_ ICore * pCore);
 }

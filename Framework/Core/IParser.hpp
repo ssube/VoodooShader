@@ -19,10 +19,6 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "String.hpp"
-
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -34,40 +30,39 @@ namespace VoodooShader
     /**
      * Provides extensive variable handling and string parsing.
      */
-    class IParser
+    class IParser :
+        public IObject
     {
     public:
-        IParser(_In_ ICore * const pCore) throw();
-
-        virtual ~IParser(void) throw();
+        virtual ~IParser(void) throw() {};
         
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.
          * 
          * @return The name.
          */
-        virtual String ToString(void) const throw();
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw();
+        virtual ICore * GetCore(void) const throw() = 0;
 
         /**
          * Adds a variable to the internal dictionary. 
@@ -76,14 +71,14 @@ namespace VoodooShader
          * @param value The variable's value (may contain variables, they will be resolved when this variable is used).
          * @param system Marks the variable as a system variable. These cannot be changed or removed.
          */
-        virtual void Add(_In_ const String & name, _In_ const String & value, _In_ VariableType type = VT_Normal) throw();
+        virtual void Add(_In_ const String & name, _In_ const String & value, _In_ VariableType type = VT_Normal) throw() = 0;
 
         /**
          * Removes a variable from the internal dictionary. 
          * 
          * @param name The variable name (may contain variables, they will be resolved immediately).
          */
-        virtual void Remove(_In_ const String & name) throw();
+        virtual void Remove(_In_ const String & name) throw() = 0;
 
         /**
          * Parses a string, replacing any variables with their values. Variables are resolved when found, so it is 
@@ -91,23 +86,7 @@ namespace VoodooShader
          *
          * @sa @ref varsyntax for details on how variables work
          */
-        virtual String Parse(_In_ String input, _In_ ParseFlags flags = PF_None) const throw();
-
-        static const int VarMaxDepth = 8;
-        static const wchar_t VarDelimPre    = L'$';
-        static const wchar_t VarDelimStart  = L'(';
-        static const wchar_t VarDelimEnd    = L')';
-        static const wchar_t VarMarkerState = L':';
-        static const wchar_t VarMarkerRaw   = L'!';
-        static const wchar_t VarMarkerSupp  = L'?';
-
-    private:
-        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ int depth, _In_ Dictionary & state) const;
-
-        mutable int32_t m_Refs;
-        ICore * m_Core;
-        Dictionary m_Variables;
-        Dictionary m_SysVariables;
+        virtual String Parse(_In_ String input, _In_ ParseFlags flags = PF_None) const throw() = 0;
     };
 
     /**

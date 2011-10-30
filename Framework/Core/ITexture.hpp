@@ -19,10 +19,6 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "String.hpp"
-
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -40,49 +36,47 @@ namespace VoodooShader
         public IObject
     {
     public:
-        ITexture(_In_ String name, _In_opt_ void * pTexture = nullptr);
-
-        virtual ~ITexture(void);
+        virtual ~ITexture(void) {};
 
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw() = 0;
 
         /** 
          * Gets the name.
          * 
          * @return The name. 
          */
-        virtual String ToString(void) const;
+        virtual String ToString(void) const throw() = 0;
 
-        virtual ICore * GetCore(void) const;
+        virtual ICore * GetCore(void) const throw() = 0;
 
         /** 
          * Gets the data. 
          * 
          * @return nullptr if it fails, else the data. 
          */
-        _Check_return_ virtual void * GetData(void) const;
+        _Check_return_ virtual void * GetData(void) const throw() = 0;
 
         /**
          * Gets the texture description. 
          * 
          * @return The description.
          */ 
-        virtual TextureDesc GetDesc(void) const;
+        virtual const TextureDesc * GetDesc(void) const throw() = 0;
 
     private:
-        mutable int32_t m_Refs;
+        mutable uint32_t m_Refs;
         String m_Name;
         ICore * m_Core;
         void * m_Data;

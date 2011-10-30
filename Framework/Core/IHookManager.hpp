@@ -19,8 +19,6 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -45,14 +43,14 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw() = 0;
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw() = 0;
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.

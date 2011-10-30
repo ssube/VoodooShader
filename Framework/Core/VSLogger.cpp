@@ -29,12 +29,12 @@ namespace VoodooShader
     VSLogger::~VSLogger(void)
     { }
 
-    int32_t VSLogger::AddRef() const
+    uint32_t VSLogger::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t VSLogger::Release() const
+    uint32_t VSLogger::Release() const
     {
         if (--m_Refs == 0)
         {

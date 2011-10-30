@@ -20,6 +20,7 @@
 #pragma once
 
 #include "Includes.hpp"
+#include "String.hpp"
 
 namespace VoodooShader
 {
@@ -29,9 +30,6 @@ namespace VoodooShader
      */
     class IObject
     {
-        friend void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
-        friend void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
-
     public:
         virtual ~IObject(void) throw() {};
 
@@ -42,7 +40,7 @@ namespace VoodooShader
          * 
          * @note This function is equivalent to COM's IUnknown::AddRef.
          */
-        virtual int32_t AddRef(void) const throw() = 0;
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
@@ -51,7 +49,7 @@ namespace VoodooShader
          * 
          * @note This function is equivalent to COM's IUnknown::Release.
          */
-        virtual int32_t Release(void) const throw() = 0;
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.

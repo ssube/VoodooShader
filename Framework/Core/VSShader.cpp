@@ -17,22 +17,25 @@
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
  */
-#include "IShader.hpp"
+
+#include "VSShader.hpp"
 
 #include "Converter.hpp"
 #include "Version.hpp"
+
+#include "VSParameter.hpp"
+#include "VSTechnique.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
 #include "Exception.hpp"
 #include "ILogger.hpp"
-#include "IParameter.hpp"
 #include "IParser.hpp"
-#include "ITechnique.hpp"
+#include "ITexture.hpp"
 
 namespace VoodooShader
 {
-    IShader::IShader(ICore * pCore, const String & path, const char ** ppArgs) :
+    VSShader::VSShader(ICore * pCore, const String & path, const char ** ppArgs) :
         m_Core(pCore), m_Name(path), m_DefaultTechnique(nullptr)
     {
         CGcontext context = m_Core->GetCgContext();
@@ -63,7 +66,7 @@ namespace VoodooShader
         this->Link();
     }
 
-    IShader::~IShader(void)
+    VSShader::~VSShader(void)
     {
         m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying shader %s.", m_Name.GetData());
 
@@ -77,12 +80,12 @@ namespace VoodooShader
         }
     }
 
-    int32_t IShader::AddRef() const
+    uint32_t VSShader::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t IShader::Release() const
+    uint32_t VSShader::Release() const
     {
         if (--m_Refs == 0)
         {
@@ -93,22 +96,22 @@ namespace VoodooShader
         }
     }
 
-    String IShader::ToString(void) const
+    String VSShader::ToString(void) const
     {
         return m_Name;
     }
 
-    ICore * IShader::GetCore(void) const
+    ICore * VSShader::GetCore(void) const
     {
         return m_Core;
     }
 
-    int32_t IShader::GetTechniqueCount(void) const
+    const uint32_t VSShader::GetTechniqueCount(void) const
     {
         return m_Techniques.size();
     }
 
-    ITechnique * IShader::GetTechnique(int32_t index) const
+    ITechnique * VSShader::GetTechnique(const uint32_t index) const
     {
         if (index < m_Techniques.size())
         {
@@ -120,18 +123,19 @@ namespace VoodooShader
         }
     }
 
-    ITechnique * IShader::GetDefaultTechnique(void) const
+    ITechnique * VSShader::GetDefaultTechnique(void) const
     {
         return m_DefaultTechnique.get();
     }
 
-    bool IShader::SetDefaultTechnique(ITechnique * pTechnique)
+    bool VSShader::SetDefaultTechnique(ITechnique * pTechnique)
     {
         if (pTechnique != nullptr)
         {
             if (pTechnique->GetShader() == this)
             {
                 m_DefaultTechnique = pTechnique;
+                return true;
             }
             else
             {
@@ -144,14 +148,16 @@ namespace VoodooShader
                 );
             }
         }
+
+        return false;
     }
 
-    int32_t IShader::GetParameterCount(void) const
+    const uint32_t VSShader::GetParameterCount(void) const
     {
         return m_Parameters.size();
     }
 
-    IParameter * IShader::GetParameter(_In_ int32_t index) const
+    IParameter * VSShader::GetParameter(_In_ const uint32_t index) const
     {
         if (index < m_Parameters.size())
         {
@@ -163,12 +169,17 @@ namespace VoodooShader
         }
     }
 
-    void IShader::Link()
+    CGeffect VSShader::GetCgEffect(void) const
+    {
+        return m_CgEffect;
+    }
+
+    void VSShader::Link()
     {
         // Make sure it's a valid effect
         if (!cgIsEffect(m_CgEffect))
         {
-            Throw(VOODOO_CORE_NAME, L"Invalid effect.", m_Core);
+            return;
         }
 
         // Link parameters first
@@ -176,7 +187,7 @@ namespace VoodooShader
 
         while (cgIsParameter(cParam))
         {
-            IParameter * pParam = new IParameter(this, cParam);
+            IParameter * pParam = new VSParameter(this, cParam);
 
             this->LinkParameter(pParam);
 
@@ -188,7 +199,7 @@ namespace VoodooShader
         this->SetupTechniques();
     }
 
-    void IShader::LinkParameter(IParameter * pParam)
+    void VSShader::LinkParameter(IParameter * pParam)
     {
         // Cache basic data for future use
         ParameterType type = pParam->GetType();
@@ -241,7 +252,7 @@ namespace VoodooShader
         }
     }
 
-    void IShader::LinkSampler(IParameter * pParam)
+    void VSShader::LinkSampler(IParameter * pParam)
     {
         IParameterRef param = pParam;
 
@@ -299,7 +310,7 @@ namespace VoodooShader
         }
     }
 
-    void IShader::CreateParameterTexture(_In_ IParameter * pParam)
+    void VSShader::CreateParameterTexture(_In_ IParameter * pParam)
     {
         IParameterRef param = pParam;
 
@@ -355,7 +366,7 @@ namespace VoodooShader
         // Check for a valid texture file
         TextureRegion texRegion;
         /* @todo Load texture region info from the annotations. */
-        ITextureRef pTex = m_Core->GetAdapter()->LoadTexture(texName, texRegion);
+        ITextureRef pTex = m_Core->GetAdapter()->LoadTexture(texName, &texRegion);
 
         if (pTex)
         {
@@ -450,7 +461,7 @@ namespace VoodooShader
         param->SetTexture(texture.get());
     }
 
-    void IShader::SetupTechniques()
+    void VSShader::SetupTechniques()
     {
         CGtechnique cTech = cgGetFirstTechnique(m_CgEffect);
 
@@ -469,7 +480,7 @@ namespace VoodooShader
                 );
 
                 // Insert the technique into the map
-                ITechniqueRef tech = new ITechnique(this, cTech);
+                ITechniqueRef tech = new VSTechnique(this, cTech);
 
                 m_Techniques.push_back(tech);
 
@@ -492,10 +503,5 @@ namespace VoodooShader
 
             cTech = cgGetNextTechnique(cTech);
         }
-    }
-
-    CGeffect IShader::GetCgEffect(void) const
-    {
-        return m_CgEffect;
     }
 }

@@ -18,6 +18,8 @@
  *   peachykeen@voodooshader.com
  */
 
+#include "VSModule.hpp"
+
 #include "Exception.hpp"
 #include "Regex.hpp"
 #include "Version.hpp"
@@ -25,30 +27,29 @@
 #include "ICore.hpp"
 #include "IFilesystem.hpp"
 #include "ILogger.hpp"
-#include "IModule.hpp"
 #include "IObject.hpp"
 #include "IParser.hpp"
 
 namespace VoodooShader
 {
-    IModuleManager::IModuleManager(_In_ ICore *core) :
+    VSModuleManager::VSModuleManager(_In_ ICore *core) :
         m_Core(core)
     { }
 
-    IModuleManager::~IModuleManager(void)
+    VSModuleManager::~VSModuleManager(void)
     {
         m_Classes.clear();
         m_Modules.clear();
     }
 
-    int32_t IModuleManager::AddRef() const
+    uint32_t VSModuleManager::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t IModuleManager::Release() const
+    uint32_t VSModuleManager::Release() const
     {
-        int32_t count = --m_Refs;
+        uint32_t count = --m_Refs;
         if (count == 0)
         {
             delete this;
@@ -56,17 +57,17 @@ namespace VoodooShader
         return count;
     }
 
-    String IModuleManager::ToString() const
+    String VSModuleManager::ToString() const
     {
         return L"ModuleManager";
     }
 
-    ICore * IModuleManager::GetCore() const
+    ICore * VSModuleManager::GetCore() const
     {
         return m_Core;
     }
 
-    bool IModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
+    bool VSModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
     {
         String mask = m_Core->GetParser()->Parse(path) + L"\\*";
         WIN32_FIND_DATA findFile;
@@ -110,7 +111,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool IModuleManager::LoadFile(_In_ const IFile * pFile)
+    bool VSModuleManager::LoadFile(_In_ const IFile * pFile)
     {
         ILoggerRef logger = m_Core->GetLogger();
 
@@ -124,7 +125,7 @@ namespace VoodooShader
         }
 
         // Create struct and load functions
-        IModule* rawmodule = IModule::Load(path);
+        IModule* rawmodule = VSModule::Load(path);
 
         if (rawmodule == nullptr)
         {
@@ -174,7 +175,7 @@ namespace VoodooShader
         return true;
     }
 
-    void * IModuleManager::FindFunction(_In_ const String & module, _In_ const String & name) const
+    void * VSModuleManager::FindFunction(_In_ const String & module, _In_ const String & name) const
     {
         HMODULE hmodule = GetModuleHandle(module.GetData());
 
@@ -191,7 +192,7 @@ namespace VoodooShader
         }
     }
 
-    bool IModuleManager::ClassExists(_In_ const String & name) const
+    bool VSModuleManager::ClassExists(_In_ const String & name) const
     {
         return (m_Classes.find(name) != m_Classes.end());
     }
@@ -266,7 +267,7 @@ namespace VoodooShader
         }
     }
 
-    IModule * IModule::Load(_In_ String path)
+    VSModule * VSModule::Load(_In_ String path)
     {
         // Load the module
         HMODULE hmodule = LoadLibraryEx(path.GetData(), nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
@@ -274,7 +275,7 @@ namespace VoodooShader
         // First set of error checks
         if (hmodule != nullptr)
         {
-            IModule * module = new IModule(hmodule);
+            VSModule * module = new VSModule(hmodule);
 
             module->m_ModuleVersion = reinterpret_cast<Functions::VersionFunc>(GetProcAddress(hmodule, "ModuleVersion"));
             module->m_ClassCount = reinterpret_cast<Functions::CountFunc>(GetProcAddress(hmodule, "ClassCount"));
@@ -299,11 +300,11 @@ namespace VoodooShader
         }
     }
 
-    IModule::IModule(HMODULE hmodule) 
-        : m_Handle(hmodule)
+    VSModule::VSModule(HMODULE hmodule) : 
+        m_Handle(hmodule)
     { }
 
-    IModule::~IModule(void)
+    VSModule::~VSModule(void)
     {
         if (m_Handle != INVALID_HANDLE_VALUE)
         {
@@ -312,22 +313,22 @@ namespace VoodooShader
         }
     }
 
-    const Version * IModule::ModuleVersion(void) const
+    const Version * VSModule::ModuleVersion(void) const
     {
         return m_ModuleVersion();
     }
 
-    int IModule::ClassCount(void) const
+    const uint32_t VSModule::ClassCount(void) const
     {
         return m_ClassCount();
     }
 
-    const char * IModule::ClassInfo(_In_ int32_t number) const
+    const char * VSModule::ClassInfo(_In_ const uint32_t number) const
     {
         return m_ClassInfo(number);
     }
 
-    IObject * IModule::CreateClass(_In_ int32_t number, _In_ ICore * pCore)
+    IObject * VSModule::CreateClass(_In_ const uint32_t number, _In_ ICore * const pCore)
     {
         return m_ClassCreate(number, pCore);
     }

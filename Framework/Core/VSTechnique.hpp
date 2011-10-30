@@ -19,49 +19,45 @@
  */
 #pragma once
 
-#include "IParameter.hpp"
+#include "ITechnique.hpp"
 
 namespace VoodooShader
 {
-    class VSParameter :
-        public IParameter
+     /**
+      * @addtogroup VoodooCore @{
+      */
+
+    class VSTechnique :
+        public ITechnique
     {
     public:
-        VSParameter(_In_opt_ ICore * const pCore, _In_ String name, _In_ const ParameterType type);
-        VSParameter(_In_opt_ IShader * const pShader, _In_ const CGparameter pParam);
+        VSTechnique(_In_ IShader * pShader, _In_ CGtechnique pCgTech);
 
-        virtual ~VSParameter(void);
+        virtual ~VSTechnique(void);
 
         virtual uint32_t AddRef(void) const throw();
         virtual uint32_t Release(void) const throw();
         virtual String ToString(void) const throw();
         virtual ICore * GetCore(void) const throw();
 
-        virtual ParameterType GetType(void) const throw();
-        virtual bool IsVirtual(void) const throw();
-        virtual bool AttachParameter(_In_opt_ IParameter * const pParam) throw();
-        virtual const uint32_t GetComponents(void) const throw();
-        virtual ITexture * GetTexture(void) const throw();
-        virtual void SetTexture(_In_opt_ ITexture * const pTexture) throw();
-        _Ret_count_c_(16) virtual float * const GetScalar(void) throw();
-        virtual void SetScalar(const uint32_t count, _In_count_(Count) float * const pValues) throw();
-        virtual IShader * const GetShader(void) const throw();
+        virtual ITexture * GetTarget(void) const throw();
+        virtual const uint32_t GetPassCount(void) const throw();
+        virtual IPass * GetPass(_In_ const uint32_t index) const throw();
+        virtual IShader * GetShader(void) const throw();
 
-        virtual CGparameter GetCgParameter(void) const throw();
+        virtual CGtechnique GetCgTechnique(void) const throw();
 
     private:
+        void Link();
+
         mutable uint32_t m_Refs;
         String m_Name;
         ICore * m_Core;
 
-        IShaderRef m_Shader;
+        ITextureRef m_Target;
+        PassVector m_Passes;
 
-        bool m_Virtual;
-        CGparameter m_Param;
-        ParameterType m_Type;
-
-        // Value
-        ITextureRef m_ValueTexture;
-        float m_Valuefloat[16];
+        IShader * m_Shader;
+        CGtechnique m_CgTechnique;
     };
 }

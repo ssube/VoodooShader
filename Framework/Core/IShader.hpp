@@ -19,10 +19,6 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "String.hpp"
-
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -51,48 +47,44 @@ namespace VoodooShader
     {
     public:
         /**
-         * Create a shader from a file, passing options to the compiler. 
-         * 
-         * @param pParent The ICore this shader is created under. 
-         * @param Path The file to use for source.
-         * @param ppArgs Optionals arguments to be passed to the compiler (last item in the array must be nullptr).
-         */
-        IShader(_In_ ICore * pParent, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
-
-        /**
          * Destroys the shader, unlinking and cleaning up the effect and all techniques. 
          */
-        virtual ~IShader(void);
+        virtual ~IShader(void) throw() {};
 
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name (usually filename of source file) for this shader.
          * 
          * @return The name.
          */
-        virtual String ToString(void) const throw();
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw();
+        virtual ICore * GetCore(void) const throw() = 0;
 
-        virtual int32_t GetTechniqueCount(void) const throw();
+        /**
+         * Get the number of validated techniques this shader contains.
+         * 
+         * @return The number of techniques.
+         */
+        virtual const uint32_t GetTechniqueCount(void) const throw() = 0;
 
         /**
          * Retrieve a technique from the shader by name. Most cases should use the default technique, but some specific 
@@ -101,7 +93,7 @@ namespace VoodooShader
          * @param Index The index of the technique to get.
          * @return The technique, if it is found.
          */
-        virtual ITechnique * GetTechnique(_In_ int32_t Index) const throw();
+        virtual ITechnique * GetTechnique(_In_ const uint32_t index) const throw() = 0;
 
         /**
          * Retrieves the default technique from this shader. All drawing should be done with the default technique: it is
@@ -114,7 +106,7 @@ namespace VoodooShader
          *     high-quality ones) and count down with the most compatible and simplest technique last. The first valid 
          *     technique found becomes the default.
          */
-        virtual ITechnique * GetDefaultTechnique(void) const throw();
+        virtual ITechnique * GetDefaultTechnique(void) const throw() = 0;
 
         /**
          * Set a technique from this shader to be used as the default technique. Some adapter functions simply retrieve the 
@@ -123,16 +115,16 @@ namespace VoodooShader
          * @param Technique The technique within this shader to use.
          * @return Success of the setting.
          * 
-         * @note This validates that the technique belongs to this shader.
+         * @note This will validate that the technique belongs to this shader.
          */
-        virtual bool SetDefaultTechnique(_In_ ITechnique * Technique) throw();
+        virtual bool SetDefaultTechnique(_In_ const ITechnique * const Technique) throw() = 0;
 
         /**
          * Retrieve the number of effect-level parameters in this shader. These hold a single value for all passes. 
          * 
          * @return The parameter count.
          */
-        int32_t GetParameterCount(void) const throw();
+        virtual const uint32_t GetParameterCount(void) const throw() = 0;
 
         /**
          * Retrieve a specific parameter from the shader. These may be modified at runtime and will automatically update Cg 
@@ -141,57 +133,14 @@ namespace VoodooShader
          * @param Index The index of the parameter to retrieve.
          * @return The parameter, if valid.
          */
-        IParameter * GetParameter(_In_ int32_t Index) const throw();
+        virtual IParameter * GetParameter(_In_ const uint32_t index) const throw() = 0;
 
         /**
          * Retrieve the underlying Cg technique. 
          * 
          * @return A pointer to the Cg technique. 
          */
-        CGeffect GetCgEffect(void) const throw();
-
-    private:
-        /**
-         * Initialize delayed linking (or relinking) for this shader. This function
-         * rebuilds the technique and pass structure, but <em>does not </em> reload or
-         * recompile the effect (Cg effects are handled by the core).
-         */
-        void Link();
-
-        void SetupTechniques();
-
-        /**
-         * Link a particular effect-level parameter against various core elements (exact
-         * behavior depends on param type). 
-         * 
-         * @param param The parameter to link.
-         */
-        void LinkParameter(_In_ IParameter * pParam);
-
-        /**
-         * Links a particular effect-level sampler against a core texture. This generally
-         * should be called by IShader::LinkParameter(). 
-         * 
-         * @param param The sampler to link
-         */
-        void LinkSampler(_In_ IParameter * pParam);
-
-        /**
-         * Find texture information from a parameter and create a texture based on that
-         * data. Calls IShader::LinkSampler() after texture creation if appropriate. @param
-         * param The parameter to use.
-         */
-        void CreateParameterTexture(_In_ IParameter * pParam);
-
-        mutable int32_t m_Refs;
-        String m_Name;
-        ICore * m_Core;
-
-        ITechniqueRef m_DefaultTechnique;
-        TechniqueVector m_Techniques;
-        ParameterVector m_Parameters;
-
-        CGeffect m_CgEffect;
+        virtual CGeffect GetCgEffect(void) const throw() = 0;
     };
     /* @} */
 }

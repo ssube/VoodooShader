@@ -29,12 +29,12 @@ namespace VoodooShader
     VSFileSystem::~VSFileSystem(void)
     { }
 
-    int32_t VSFileSystem::AddRef() const
+    uint32_t VSFileSystem::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t VSFileSystem::Release() const
+    uint32_t VSFileSystem::Release() const
     {
         if (--m_Refs == 0)
         {
@@ -55,14 +55,18 @@ namespace VoodooShader
         return m_Core;
     }
 
-    void VSFileSystem::AddPath(_In_ const String & dir)
+    bool VSFileSystem::AddPath(_In_ const String & dir)
     {
         UNREFERENCED_PARAMETER(dir);
+
+        return true;
     }
 
-    void VSFileSystem::RemovePath(_In_ const String & dir)
+    bool VSFileSystem::RemovePath(_In_ const String & dir)
     {
         UNREFERENCED_PARAMETER(dir);
+
+        return true;
     }
 
     IFile * VSFileSystem::FindFile(_In_ const String & name) const

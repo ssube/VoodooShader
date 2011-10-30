@@ -18,21 +18,22 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "ITechnique.hpp"
+#include "VSTechnique.hpp"
 
 #include "Exception.hpp"
 #include "Version.hpp"
 
+#include "VSPass.hpp"
+
 #include "IAdapter.hpp"
 #include "ICore.hpp"
 #include "ILogger.hpp"
-#include "IPass.hpp"
 #include "IShader.hpp"
 #include "ITexture.hpp"
 
 namespace VoodooShader
 {
-    ITechnique::ITechnique(IShader * pShader, CGtechnique pCgTech) :
+    VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
         m_Shader(pShader), m_Core(pShader->GetCore()), m_CgTechnique(pCgTech), m_Target(nullptr)
     {
         const char * techName = cgGetTechniqueName(this->m_CgTechnique);
@@ -45,18 +46,18 @@ namespace VoodooShader
         }
     }
 
-    ITechnique::~ITechnique(void)
+    VSTechnique::~VSTechnique(void)
     {
         m_Target = nullptr;
         m_Passes.clear();
     }
 
-    int32_t ITechnique::AddRef() const
+    uint32_t VSTechnique::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t ITechnique::Release() const
+    uint32_t VSTechnique::Release() const
     {
         if (--m_Refs == 0)
         {
@@ -67,7 +68,7 @@ namespace VoodooShader
         }
     }
 
-    String ITechnique::ToString(void) const
+    String VSTechnique::ToString(void) const
     {
 
         String name = m_Shader->ToString();
@@ -77,43 +78,42 @@ namespace VoodooShader
         return name;
     }
 
-    ICore * ITechnique::GetCore(void) const
+    ICore * VSTechnique::GetCore(void) const
     {
         return m_Core;
     }
 
-    IPass * ITechnique::GetPass(int32_t index) const
+    IPass * VSTechnique::GetPass(const uint32_t index) const
     {
         if (index < this->m_Passes.size())
         {
             return this->m_Passes[index].get();
         } else {
-            //Throw(VOODOO_CORE_NAME, "Voodoo ICore: Invalid pass index (> pass count).", m_Core);
             return nullptr;
         }
     }
 
-    ITexture * ITechnique::GetTarget(void) const
+    ITexture * VSTechnique::GetTarget(void) const
     {
         return m_Target.get();
     }
 
-    int32_t ITechnique::GetPassCount(void) const
+    const uint32_t VSTechnique::GetPassCount(void) const
     {
         return this->m_Passes.size();
     }
 
-    IShader * ITechnique::GetShader(void) const
+    IShader * VSTechnique::GetShader(void) const
     {
         return m_Shader;
     }
 
-    CGtechnique ITechnique::GetCgTechnique(void) const
+    CGtechnique VSTechnique::GetCgTechnique(void) const
     {
         return m_CgTechnique;
     }
 
-    void ITechnique::Link()
+    void VSTechnique::Link()
     {
         // Process the technique's target annotation
         CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(this->m_CgTechnique, "target");
@@ -174,7 +174,7 @@ namespace VoodooShader
         while (cgIsPass(cPass))
         {
             // Insert the pass into the vector
-            IPass * pass = new IPass(this, cPass);
+            IPass * pass = new VSPass(this, cPass);
 
             m_Passes.push_back(pass);
 

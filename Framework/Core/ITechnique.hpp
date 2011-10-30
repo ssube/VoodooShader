@@ -19,10 +19,6 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "String.hpp"
-
 #include "IObject.hpp"
 
 namespace VoodooShader
@@ -44,37 +40,35 @@ namespace VoodooShader
         public IObject
     {
     public:
-        ITechnique(_In_ IShader * pShader, _In_ CGtechnique pCgTech);
-
-        virtual ~ITechnique(void);
+        virtual ~ITechnique(void) {};
 
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Retrieve a fully qualified technique name (including shader name) from the technique. 
          * 
          * @return The name.
          */
-        virtual String ToString(void) const throw();
+        virtual String ToString(void) const throw() = 0;
 
         /** 
-         * Retrieve the core this technique was compiled under.. 
+         * Retrieve the core this technique was compiled under.
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw();
+        virtual ICore * GetCore(void) const throw() = 0;
 
         /**
          * Retrieve the technique's final target. This is the surface the technique expects the results of the final pass to 
@@ -83,13 +77,13 @@ namespace VoodooShader
          * 
          * @return A reference to the target texture
          */
-        virtual ITexture * GetTarget(void) const throw();
+        virtual ITexture * GetTarget(void) const throw() = 0;
 
         /* Retrieve the number of passes in this technique. 
          * 
          * @return The number of passes 
          */
-        virtual int32_t GetPassCount(void) const throw();
+        virtual const uint32_t GetPassCount(void) const throw() = 0;
 
         /**
          * Retrieve a specific pass from this technique. 
@@ -97,28 +91,20 @@ namespace VoodooShader
          * @param index The pass number to retrieve. 
          * @return A reference to the given pass. 
          */
-        virtual IPass * GetPass(_In_ int32_t index) const throw();
+        virtual IPass * GetPass(_In_ const uint32_t index) const throw() = 0;
 
-        virtual IShader * GetShader(void) const throw();
+        /**
+         * Retrieve the parent shader of this technique.
+         * 
+         * @return The parent shader.
+         */
+        virtual IShader * GetShader(void) const throw() = 0;
 
         /** 
          * Retrieve the underlying Cg technique. 
          * 
          * @return A pointer to the Cg technique. 
          */
-        virtual CGtechnique GetCgTechnique(void) const throw();
-
-    private:
-        void Link();
-
-        mutable int32_t m_Refs;
-        String m_Name;
-        ICore * m_Core;
-
-        ITextureRef m_Target;
-        PassVector m_Passes;
-
-        IShader * m_Shader;
-        CGtechnique m_CgTechnique;
+        virtual CGtechnique GetCgTechnique(void) const throw() = 0;
     };
 }

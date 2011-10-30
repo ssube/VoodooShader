@@ -19,9 +19,7 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "IObject.hpp"
+#include "IModule.hpp"
 
 namespace VoodooShader
 {
@@ -34,27 +32,27 @@ namespace VoodooShader
      * Provides a framework for loading and unloading modules in core, as well as retrieving symbols and modules 
      * from memory.
      */
-    class IModuleManager
-        : public IObject
+    class VSModuleManager : 
+        public IModuleManager
     {
     public:
-        IModuleManager(_In_ ICore * pCore);
+        VSModuleManager(_In_ ICore * pCore);
 
-        virtual ~IModuleManager(void);
+        virtual ~VSModuleManager(void);
         
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw();
 
         /**
          * Get the name of this object.
@@ -115,7 +113,7 @@ namespace VoodooShader
         _Check_return_ virtual void * FindFunction(_In_ const String & module, _In_ const String & name) const;
 
     private:
-        mutable int32_t m_Refs;
+        mutable uint32_t m_Refs;
         ICore * m_Core;
         ModuleMap m_Modules;
         ClassMap m_Classes;
@@ -124,8 +122,8 @@ namespace VoodooShader
     /**
      * Contains the handle to a loaded library and function pointers for creation and destruction.
      */
-    class IModule
-        : public IObject
+    class VSModule : 
+        public IModule
     {
     public:
         /**
@@ -138,25 +136,25 @@ namespace VoodooShader
          * @note If an absolute path is used, the directory portion will be searched for dependencies. The underlying 
          *     load mechanism is <code>LoadLibraryEx(path, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH)</code>.
          */
-        static IModule * Load(_In_ String path);
+        static VSModule * Load(_In_ String path);
 
-        IModule(_In_ HMODULE hmodule);
+        VSModule(_In_ HMODULE hmodule);
 
-        virtual ~IModule(void);
+        virtual ~VSModule(void);
         
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw();
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw();
 
         /**
          * Get the name of this object.
@@ -179,14 +177,14 @@ namespace VoodooShader
         virtual const Version * ModuleVersion(void) const throw();
 
         /** Get the class count from this module. */
-        virtual int32_t ClassCount(void) const;
+        virtual const uint32_t ClassCount(void) const;
 
-        virtual const char * ClassInfo(_In_ int32_t number) const;
+        virtual const char * ClassInfo(_In_ const uint32_t number) const;
 
-        virtual IObject * CreateClass(_In_ int32_t number, _In_ ICore * pCore);
+        virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore);
 
     private:
-        mutable int32_t m_Refs;
+        mutable uint32_t m_Refs;
         HMODULE m_Handle;
         Functions::VersionFunc m_ModuleVersion;
         Functions::CountFunc m_ClassCount;

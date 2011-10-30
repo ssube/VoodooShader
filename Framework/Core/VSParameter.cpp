@@ -26,6 +26,7 @@
 #include "ICore.hpp"
 #include "ILogger.hpp"
 #include "IShader.hpp"
+#include "ITexture.hpp"
 
 namespace VoodooShader
 {
@@ -44,7 +45,8 @@ namespace VoodooShader
 
         if (!context || !cgIsContext(context))
         {
-            Throw(VOODOO_CORE_NAME, L"Unable to create parameter (core has no context).");
+            //! @todo Get rid of this throw
+            Throw(VOODOO_CORE_NAME, L"Unable to create parameter (core has no context).", m_Core);
         }
 
         m_Param = cgCreateParameter(context, Converter::ToCGType(m_Type));
@@ -71,12 +73,12 @@ namespace VoodooShader
         }
     }
 
-    int32_t VSParameter::AddRef() const
+    uint32_t VSParameter::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t VSParameter::Release() const
+    uint32_t VSParameter::Release() const
     {
         if (--m_Refs == 0)
         {
@@ -121,7 +123,7 @@ namespace VoodooShader
     {
         if (!this->m_Virtual)
         {
-            //Throw(VOODOO_CORE_NAME, "Cannot attach to a non-virtual parameter.", m_Core);
+            m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Cannot attach to a non-virtual parameter (%s to %s).", pParam->ToString().GetData(), this->ToString().GetData());
             return false;
         }
 
@@ -130,12 +132,12 @@ namespace VoodooShader
         return true;
     }
 
-    int VSParameter::GetComponents(void) const
+    const uint32_t VSParameter::GetComponents(void) const
     {
         return Converter::ToComponents(m_Type);
     }
 
-    ITexture * const VSParameter::GetTexture(void) const
+    ITexture * VSParameter::GetTexture(void) const
     {
         return m_ValueTexture.get();
     }
@@ -150,11 +152,11 @@ namespace VoodooShader
         return m_Valuefloat;
     }
 
-    void VSParameter::SetScalar(int32_t count, float * pValues)
+    void VSParameter::SetScalar(const uint32_t count, float * pValues)
     {
         if (pValues && count > 0)
         {
-            memcpy(m_Valuefloat, Values, min(16, Count) * sizeof(float));
+            memcpy(m_Valuefloat, pValues, min(16, count) * sizeof(float));
         }
     }
 

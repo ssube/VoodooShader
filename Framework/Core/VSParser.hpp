@@ -19,30 +19,41 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "IFileSystem.hpp"
+#include "IParser.hpp"
 
 namespace VoodooShader
 {
-    class VSFileSystem :
-        public IFileSystem
+    class VSParser : 
+        public IParser
     {
     public:
-        VSFileSystem(_In_ ICore * pCore);
-        virtual ~VSFileSystem(void);
+        VSParser(_In_ ICore * const pCore) throw();
 
-        virtual uint32_t AddRef() const throw();
-        virtual uint32_t Release() const throw();
+        virtual ~VSParser(void) throw();
+        
+        virtual uint32_t AddRef(void) const throw();
+        virtual uint32_t Release(void) const throw();
         virtual String ToString(void) const throw();
         virtual ICore * GetCore(void) const throw();
 
-        virtual bool AddPath(_In_ const String & dir) throw();
-        virtual bool RemovePath(_In_ const String & dir) throw();
-        virtual IFile * FindFile(_In_ const String & name) const throw();
+        virtual void Add(_In_ const String & name, _In_ const String & value, _In_ VariableType type = VT_Normal) throw();
+        virtual void Remove(_In_ const String & name) throw();
+        virtual String Parse(_In_ String input, _In_ ParseFlags flags = PF_None) const throw();
+
+        static const uint32_t VarMaxDepth    = 8;
+        static const wchar_t VarDelimPre    = L'$';
+        static const wchar_t VarDelimStart  = L'(';
+        static const wchar_t VarDelimEnd    = L')';
+        static const wchar_t VarMarkerState = L':';
+        static const wchar_t VarMarkerRaw   = L'!';
+        static const wchar_t VarMarkerSupp  = L'?';
 
     private:
+        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ Dictionary & state) const;
+
         mutable uint32_t m_Refs;
         ICore * m_Core;
+        Dictionary m_Variables;
+        Dictionary m_SysVariables;
     };
 }

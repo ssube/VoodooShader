@@ -19,42 +19,45 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "ILogger.hpp"
+#include "IPass.hpp"
 
 namespace VoodooShader
 {
-    class VSLogger :
-        public ILogger
+    class VSPass :
+        public IPass
     {
     public:
-        VSLogger(ICore * pCore);
-        virtual ~VSLogger(void);
+        VSPass(_In_ ITechnique* parent, _In_ CGpass cgPass);
 
-        virtual uint32_t AddRef() const;
-        virtual uint32_t Release() const;
-        virtual String ToString(void) const;
-        virtual ICore * GetCore(void) const;
+        virtual ~VSPass(void);
 
-        virtual bool Open(_In_ const IFile * pFile, _In_ bool append);
-        virtual void Close(void);
-        virtual void Flush(void);
-        virtual void SetLogLevel(_In_ LogLevel level);
-        virtual LogLevel GetLogLevel(void) const;
-        virtual void LogModule(_In_ const Version * pModule);
-        virtual void Log
-        (
-            _In_ LogLevel level,
-            _In_ const String & module,
-            _In_ _Printf_format_string_ const String & msg,
-            ...
-        );
-        virtual void SetFlags(_In_ LogFlags flush);
-        virtual LogFlags GetFlags(void) const;
+        virtual uint32_t AddRef(void) const throw();
+        virtual uint32_t Release(void) const throw();
+        virtual String ToString(void) const throw();
+        virtual ICore * GetCore(void) const throw();
+
+        virtual ITexture * GetTarget(void) const throw();
+        virtual ITechnique * GetTechnique(void) const throw();
+        virtual CGprogram GetProgram(_In_ const ProgramStage stage) const throw();
+        virtual CGpass GetCgPass(void) const throw();
 
     private:
+        void Link(void);
+
         mutable uint32_t m_Refs;
         ICore * m_Core;
+        String m_Name;
+
+        ITechnique * m_Technique;
+        ITextureRef m_Target;
+
+        CGpass m_CgPass;
+
+        CGprogram m_GeometryProgram;
+        CGprogram m_VertexProgram;
+        CGprogram m_FragmentProgram;
+        CGprogram m_DomainProgram;
+        CGprogram m_HullProgram;
     };
+    /* @} */
 }

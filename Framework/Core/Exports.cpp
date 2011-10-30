@@ -20,58 +20,62 @@
 
 #include "Exports.hpp"
 
-#include "Null.hpp"
 #include "Version.hpp"
+
+#include "VSAdapter.hpp"
+#include "VSFileSystem.hpp"
+#include "VSHookManager.hpp"
+#include "VSLogger.hpp"
 
 namespace VoodooShader
 {
-    Version VOODOO_CALL API_ModuleVersion(void)
+    const Version * VOODOO_CALL API_ModuleVersion(void)
     {
-        Version coreVersion = VOODOO_META_VERSION_STRUCT(CORE);
+        static Version coreVersion = VOODOO_META_VERSION_STRUCT(CORE);
 
-        return coreVersion;
+        return &coreVersion;
     }
 
-    int32_t VOODOO_CALL API_ClassCount(void)
+    const uint32_t VOODOO_CALL API_ClassCount(void)
     {
         return 4;
     }
 
-    String VOODOO_CALL API_ClassInfo(_In_ int number)
+    const char * VOODOO_CALL API_ClassInfo(_In_ const uint32_t number)
     {
         switch (number)
         {
         case 0:
-            return "NullAdapter";
+            return "VSAdapter";
         case 1:
-            return "NullLogger";
+            return "VSFilesystem";
         case 2:
-            return "NullFileSystem";
+            return "VSHookManager";
         case 3:
-            return "NullHookManager";
-        default:
-            return String();
-        }
-    }
-
-    IObject * VOODOO_CALL API_ClassCreate(_In_ int number, _In_ ICore * core)
-    {
-        switch (number)
-        {
-        case 0:
-            return new VoodooNull::NullAdapter(core);
-        case 1:
-            return new VoodooNull::NullLogger(core);
-        case 2:
-            return new VoodooNull::NullFileSystem(core);
-        case 3:
-            return new VoodooNull::NullHookManager(core);
+            return "VSLogger";
         default:
             return nullptr;
         }
     }
 
-    // Boost intptr funcs
+    IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t number, _In_ ICore * core)
+    {
+        switch (number)
+        {
+        case 0:
+            return new VSAdapter(core);
+        case 1:
+            return new VSFileSystem(core);
+        case 2:
+            return new VSHookManager(core);
+        case 3:
+            return new VSLogger(core);
+        default:
+            return nullptr;
+        }
+    }
+
+    // Boost intrusive_ptr functions
     void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj)
     {
         obj->AddRef();

@@ -22,19 +22,19 @@
 
 namespace VoodooShader
 {
-    VSHookManager::VSHookManager(_In_ ICore * pCore) 
-        : m_Core(pCore)
+    VSHookManager::VSHookManager(_In_ ICore * pCore) : 
+        m_Core(pCore)
     { }
 
     VSHookManager::~VSHookManager(void)
     { }
 
-    int32_t VSHookManager::AddRef() const
+    uint32_t VSHookManager::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t VSHookManager::Release() const
+    uint32_t VSHookManager::Release() const
     {
         if (--m_Refs == 0)
         {

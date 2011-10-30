@@ -36,15 +36,17 @@ namespace VoodooShader
      * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
      * shaders, textures, plugins and variable/configuration mechanics.
      */
-    class VSCore
-        : public ICore
+    class VSCore : 
+        public ICore
     {
+        friend void Voodoo_CgErrorHandler_Func(CGcontext, CGerror, void *);
+
     public:
         VSCore(_In_ const InitParams * const pInitParams);
         virtual ~VSCore(void);
         
-        virtual int32_t AddRef(void) const throw();
-        virtual int32_t Release(void) const throw();
+        virtual uint32_t AddRef(void) const throw();
+        virtual uint32_t Release(void) const throw();
         virtual String ToString(void) const throw();
         virtual ICore * GetCore(void) const throw();
 
@@ -55,7 +57,7 @@ namespace VoodooShader
         virtual ILogger * GetLogger(void) const;
         virtual Xml::Document * GetConfig(void) const;
 
-        virtual IShader * CreateShader(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs);
+        virtual IShader * CreateShader(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs) const;
         virtual IParameter * CreateParameter(_In_ const String & name, _In_ ParameterType type);
         virtual ITexture * CreateTexture(_In_ const String & name, _In_ const TextureDesc * const pDesc);
         virtual IParameter * GetParameter(_In_ const String & name, _In_ ParameterType type) const;
@@ -73,7 +75,7 @@ namespace VoodooShader
         void CgErrorHandler(_In_ CGcontext pContext, _In_ int error) const;
 
     private:
-        mutable int32_t m_Refs;
+        mutable uint32_t m_Refs;
 
         /** Config file. */
         Xml::Document * m_ConfigFile;

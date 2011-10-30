@@ -32,8 +32,8 @@ namespace VoodooShader
         VSHookManager(_In_ ICore * pCore);
         virtual ~VSHookManager(void);
 
-        virtual int32_t AddRef() const;
-        virtual int32_t Release() const;
+        virtual uint32_t AddRef() const;
+        virtual uint32_t Release() const;
         virtual String ToString(void) const;
         virtual ICore * GetCore(void) const;
 
@@ -42,7 +42,7 @@ namespace VoodooShader
         void RemoveAll(void);
 
     private:
-        mutable int32_t m_Refs;
+        mutable uint32_t m_Refs;
         ICore * m_Core;
     };
 }

@@ -35,21 +35,21 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~IAdapter(void) throw() { };
+        virtual ~IAdapter(void) throw() {};
         
         /**
          * Add a reference to this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t AddRef(void) const throw() = 0;
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual int32_t Release(void) const throw() = 0;
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.
@@ -128,7 +128,7 @@ namespace VoodooShader
          *     target. Most common formats should be supported, so long as all targets are the same format. Many cards allow 
          *     up to 4 targets. Anything beyond this should not be expected to be widely supported.
          */
-        virtual bool SetTarget(_In_ uint32_t index, _In_opt_ ITexture * const pTarget) throw() = 0;
+        virtual bool SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget) throw() = 0;
 
         /**
          * Gets a render target from the adapter. 
@@ -136,7 +136,7 @@ namespace VoodooShader
          * @param Index The target index to get.
          * @returns The texture bound to the target, or nullptr if no bound texture.
          */
-        virtual ITexture * GetTarget(_In_ uint32_t index) const throw() = 0;
+        virtual ITexture * GetTarget(_In_ const uint32_t index) const throw() = 0;
 
         /**
          * Creates a named texture within the API and returns it for registration and handling. 
@@ -169,7 +169,7 @@ namespace VoodooShader
          * @param Vertexes The number of vertexes to draw. 
          * @param pVertexData This must contain vertex data for the given number of verts.
          */
-        virtual void DrawGeometry(_In_ int32_t count, _In_count_(count) const VertexStruct * const pVertexData) throw() = 0;
+        virtual void DrawGeometry(_In_ uint32_t count, _In_count_(count) const VertexStruct * const pVertexData) throw() = 0;
 
         /**
          * Downloads a parameter's value from system RAM to VRAM, verifying that the value on the GPU (and in use) is the 
@@ -226,6 +226,6 @@ namespace VoodooShader
          *     returns nullptr. The Core error handler does just this, @e after the adapter's error handler returns. Thus, if 
          *     the adapter does not dump compiler listings, the core will.
          */
-        virtual void HandleError(_In_ CGcontext const pContext, _In_ int32_t error) throw() = 0;
+        virtual void HandleError(_In_ CGcontext const pContext, _In_ uint32_t error) throw() = 0;
     };
 }

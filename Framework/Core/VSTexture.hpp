@@ -1,5 +1,5 @@
 /**
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * This file is part of the Voodoo IShader Framework, a comprehensive shader support library. 
  * 
  * Copyright (c) 2010-2011 by Sean Sube 
  * 
@@ -17,51 +17,38 @@
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
  */
+#pragma once
 
-#include "VSTexture.hpp"
+#include "ITexture.hpp"
 
 namespace VoodooShader
 {
-    VSTexture::VSTexture(String name, void * pTexture) :
-        m_Name(name), m_Data(pTexture)
-    { }
+    /**
+     * @addtogroup VoodooCore @{
+     */
 
-    VSTexture::~VSTexture(void)
-    { }
-
-    uint32_t VSTexture::AddRef() const
+    class VSTexture :
+        public ITexture
     {
-        return ++m_Refs;
-    }
+    public:
+        VSTexture(_In_ String name, _In_opt_ void * pTexture = nullptr);
 
-    uint32_t VSTexture::Release() const
-    {
-        if (--m_Refs == 0)
-        {
-            delete this;
-            return 0;
-        } else {
-            return m_Refs;
-        }
-    }
+        virtual ~VSTexture(void);
 
-    String VSTexture::ToString(void) const
-    {
-        return m_Name;
-    }
+        virtual uint32_t AddRef(void) const throw();
+        virtual uint32_t Release(void) const throw();
+        virtual String ToString(void) const;
+        virtual ICore * GetCore(void) const;
 
-    ICore * VSTexture::GetCore(void) const
-    {
-        return m_Core;
-    }
+        _Check_return_ virtual void * GetData(void) const;
+        virtual const TextureDesc * GetDesc(void) const;
 
-    void * VSTexture::GetData(void) const
-    {
-        return m_Data;
-    }
-
-    const TextureDesc * VSTexture::GetDesc(void) const
-    {
-        return &m_Desc;
-    }
+    private:
+        mutable uint32_t m_Refs;
+        String m_Name;
+        ICore * m_Core;
+        void * m_Data;
+        TextureDesc m_Desc;
+    };
+    /* @} */
 }
