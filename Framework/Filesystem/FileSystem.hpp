@@ -19,6 +19,9 @@
  */
 #pragma once
 
+#include "IL/il.h"
+#include "pugixml.hpp"
+
 #define VOODOO_IMPORT
 #define VOODOO_NO_BOOST
 #define VOODOO_NO_CG
@@ -110,7 +113,7 @@ namespace VoodooShader
             /**
              * Creates a file object from a path (usually an absolute path).
              */
-            VSWFile(_In_ ICore *core, _In_ String name);
+            VSWFile(_In_ ICore * pCore, _In_ const String & path);
 
             virtual ~VSWFile(void);
 
@@ -160,7 +163,7 @@ namespace VoodooShader
              * @note If @arg buffer is nullptr, the number of bytes that would have been read is returned but the file 
              *      position is unchanged. If @arg count is -1, this returns the filesize remaining
              */
-            virtual int32_t Read(_In_ const int32_t count, _In_opt_count_(count) void * pBuffer);
+            virtual int32_t Read(_In_ const int32_t count, _In_opt_count_(count) void * const pBuffer);
 
             /**
              * Writes a chunk of data to the file. The file must have been opened for writing.
@@ -172,14 +175,14 @@ namespace VoodooShader
              * @note If @p buffer is nullptr, @p count zeros are written into the file. This is useful for padding binary 
              *      formats.
              */
-            virtual int32_t Write(_In_ int32_t count, _In_opt_count_(count) void * pBuffer);
+            virtual int32_t Write(_In_ const int32_t count, _In_opt_count_(count) void * const pBuffer);
 
             virtual IImage * OpenImage(void) const;
 
         private:
             mutable uint32_t m_Refs;
             ICore * m_Core;
-            String m_Name;
+            String m_Path;
 
             HANDLE m_Handle;
         };
@@ -191,15 +194,15 @@ namespace VoodooShader
          * @todo Provide layer, cubemap and animation handling.
          * @todo Provide image saving. 
          */
-        class Image :
+        class VSWImage :
             public IImage
         {
         public:
-            static IImage * Load(ICore * pCore, const String & name);
+            static VSWImage * Load(ICore * pCore, const String & name);
 
-            Image(ICore *core, const String & name, unsigned int image);
+            VSWImage(ICore *core, const String & name, unsigned int image);
 
-            virtual ~Image(void);
+            virtual ~VSWImage(void);
 
             virtual uint32_t AddRef(void) const throw();
             virtual uint32_t Release(void) const throw();
@@ -214,7 +217,7 @@ namespace VoodooShader
              * 
              * @return Texture information.
              */
-            virtual TextureDesc GetDesc(void) const throw();
+            virtual const TextureDesc * GetDesc(void) const throw();
 
             /**
              * Retrieves a portion of the texture data from the image. 
@@ -232,7 +235,7 @@ namespace VoodooShader
              *      
              * @warning If this function converts formats or copies a large region, it will be slow. Avoid calling often.
              */
-            virtual size_t GetData(_In_ TextureRegion desc, _In_opt_ void *buffer) throw();
+            virtual uint32_t GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const throw();
 
         private:
             mutable uint32_t m_Refs;

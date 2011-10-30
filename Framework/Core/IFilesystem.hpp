@@ -174,7 +174,7 @@ namespace VoodooShader
 
         virtual String GetPath(void) const throw() = 0;
 
-        virtual TextureDesc GetDesc(void) const throw() = 0;
+        virtual const TextureDesc * GetDesc(void) const throw() = 0;
 
         virtual uint32_t GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const throw() = 0;
     };

@@ -197,7 +197,7 @@ namespace VoodooShader
         return (m_Classes.find(name) != m_Classes.end());
     }
 
-    IObject * IModuleManager::CreateObject(_In_ const String & name) const
+    IObject * VSModuleManager::CreateObject(_In_ const String & name) const
     {
         ILogger* logger = m_Core->GetLogger();
         ClassMap::const_iterator classiter = m_Classes.find(name);

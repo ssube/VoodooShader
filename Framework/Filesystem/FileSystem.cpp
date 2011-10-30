@@ -22,9 +22,6 @@
 
 #include "Filesystem_Version.hpp"
 
-#include "IL/il.h"
-#include "pugixml.hpp"
-
 // The MS shlobj header contains a few functions that cause errors in analysis under /W4 (and cause the build to fail 
 // under /WX). This disables the warning for only that header.
 #pragma warning(push)
@@ -75,28 +72,28 @@ namespace VoodooShader
         }
 
         VSWFileSystem::VSWFileSystem(_In_ ICore * pCore) :
-            m_Core(core)
+            m_Core(pCore)
         {
             using namespace pugi;
             // Create builtin vars
             IParser* parser = m_Core->GetParser();
-            char cvar[MAX_PATH];
+            wchar_t cvar[MAX_PATH];
 
             if (SHGetFolderPath(nullptr, CSIDL_COMMON_DOCUMENTS, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
             {
-                StringCchCatA(cvar, MAX_PATH, "\\My Games\\");
-                parser->Add("allgames", cvar, VT_System);
+                StringCchCat(cvar, MAX_PATH, L"\\My Games\\");
+                parser->Add(L"allgames", cvar, VT_System);
             }
 
             if (SHGetFolderPath(nullptr, CSIDL_PERSONAL, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
             {
-                StringCchCatA(cvar, MAX_PATH, "\\My Games\\");
-                parser->Add("mygames", cvar, VT_System);
+                StringCchCat(cvar, MAX_PATH, L"\\My Games\\");
+                parser->Add(L"mygames", cvar, VT_System);
             }
 
             if (SHGetFolderPath(nullptr, CSIDL_SYSTEM, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
             {
-                parser->Add("systemroot", cvar, VT_System);
+                parser->Add(L"systemroot", cvar, VT_System);
             }
 
             // Init DevIL
@@ -201,11 +198,8 @@ namespace VoodooShader
             {
                 // Try to find the file in each registered dir
                 String fullname = (*curDir) + L"\\" + filename;
-                int32_t bufsize = fullname.ToCharStr(0, nullptr);
-                std::vector<char> buffer(bufsize);
-                fullname.ToCharStr(bufsize, &buffer[0]);
 
-                HANDLE file = CreateFileA(&buffer[0], 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
+                HANDLE file = CreateFile(fullname.GetData(), 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 
                 if (file != INVALID_HANDLE_VALUE)
                 {
@@ -229,8 +223,8 @@ namespace VoodooShader
             return nullptr;
         }
 
-        VSWFile::VSWFile(ICore *core, String name) :
-            m_Name(name), m_Core(core), m_Handle(nullptr)
+        VSWFile::VSWFile(ICore * pCore, const String & path) :
+            m_Path(path), m_Core(pCore), m_Handle(nullptr)
         { };
 
         VSWFile::~VSWFile(void)
@@ -254,27 +248,23 @@ namespace VoodooShader
             }
         }
 
-        String VSWFile::ToString(void)
+        String VSWFile::ToString(void) const
         {
             return L"VSWFile";
         }
 
-        ICore * VSWFile::GetCore(void)
+        ICore * VSWFile::GetCore(void) const
         {
             return m_Core;
         }
 
-        String File::GetPath(void)
+        String VSWFile::GetPath(void) const
         {
-            return m_Name;
+            return m_Path;
         }
 
-        /**
-        *
-        */
-        bool File::Open(FileOpenMode mode)
+        bool VSWFile::Open(FileOpenMode mode)
         {
-
             DWORD access = 0;
 
             if (mode & FM_Read)
@@ -289,48 +279,42 @@ namespace VoodooShader
 
             if (access == 0)
             {
-                Throw(VOODOO_FILESYSTEM_NAME, "Attempted to open file with unknown mode.", m_Core);
+                m_Core->GetLogger()->Log
+                (
+                    LL_Warning, VOODOO_FILESYSTEM_NAME,
+                    L"Attempted to open file '%s' with unknown mode (%X).",
+                    m_Path.GetData(), mode
+                );
+                return false;
             }
 
             m_Core->GetLogger()->Log
-                (
-                LL_Debug,
-                VOODOO_FILESYSTEM_NAME,
-                "Opening file %s with mode %u (underlying %u).",
-                m_Name.GetData(),
-                mode,
-                access
-                );
+            (
+                LL_Debug, VOODOO_FILESYSTEM_NAME,
+                L"Opening file %s with mode %u (underlying %u).",
+                m_Path.GetData(), mode, access
+            );
 
-            m_Handle = CreateFileA(m_Name.GetData(), access, 0, nullptr, OPEN_EXISTING, nullptr, nullptr);
+            m_Handle = CreateFile(m_Path.GetData(), access, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 
             if (m_Handle == INVALID_HANDLE_VALUE)
             {
-                m_Core->GetLogger()->Log(LL_Warning, VOODOO_FILESYSTEM_NAME, "Unable to open file %s.", m_Name.GetData());
+                m_Core->GetLogger()->Log(LL_Warning, VOODOO_FILESYSTEM_NAME, L"Unable to open file %s.", m_Path.GetData());
             }
 
             return (m_Handle != INVALID_HANDLE_VALUE);
         }
 
-        /**
-        *
-        */
-        IImage* File::OpenImage(void)
+        IImage * VSWFile::OpenImage(void) const
         {
-            return Image::Load(m_Core, m_Name);
+            return VSWImage::Load(m_Core, m_Path);
         }
 
-        /**
-        *
-        */
-        bool File::Close(void)
+        bool VSWFile::Close(void)
         {
             if (m_Handle && m_Handle != INVALID_HANDLE_VALUE)
             {
-
-                bool retval = CloseHandle(m_Handle);
-
-                return (retval == TRUE);
+                return (CloseHandle(m_Handle) == TRUE);
             }
             else
             {
@@ -338,10 +322,7 @@ namespace VoodooShader
             }
         }
 
-        /**
-        *
-        */
-        int File::Read(_In_ int count, _In_opt_count_(count) void *buffer)
+        int VSWFile::Read(_In_ int count, _In_opt_count_(count) void *buffer)
         {
             if (m_Handle)
             {
@@ -363,7 +344,7 @@ namespace VoodooShader
                 }
 
                 DWORD retsize = 0;
-                bool success = ReadFile(m_Handle, buffer, readsize, &retsize, nullptr);
+                BOOL success = ReadFile(m_Handle, buffer, readsize, &retsize, nullptr);
 
                 if (success == 0)
                 {
@@ -371,23 +352,19 @@ namespace VoodooShader
                 }
                 else
                 {
-                    return (int) retsize;
+                    return retsize;
                 }
             }
 
             return 0;
         }
 
-        /**
-        *
-        */
-        bool File::Write(_In_ int count, _In_opt_count_(count) void *buffer)
+        int32_t VSWFile::Write(_In_ const int32_t count, _In_opt_count_(count) void * buffer)
         {
             if (m_Handle)
             {
                 if (buffer == nullptr)
                 {
-
                     DWORD size = 0;
 
                     if (count < 0)
@@ -409,7 +386,7 @@ namespace VoodooShader
                     memset(buffer, 0, size);
 
                     DWORD retsize = 0;
-                    bool success = WriteFile(m_Handle, buffer, size, &retsize, nullptr);
+                    BOOL success = WriteFile(m_Handle, buffer, size, &retsize, nullptr);
 
                     free(buffer);
 
@@ -435,11 +412,8 @@ namespace VoodooShader
 
                     DWORD size = (DWORD) count;
                     DWORD retsize = 0;
-                    bool success = 0; // WriteFile(m_Handle, buffer, size, &retsize,
-                    ///nullptr);
-                    ///
+                    BOOL success = WriteFile(m_Handle, buffer, size, &retsize, nullptr);
 
-                    //~~~~~~~~~~~~~~~~~~~~~~~~~
                     if (success == 0)
                     {
                         return false;
@@ -458,12 +432,8 @@ namespace VoodooShader
             return false;
         }
 
-        /**
-        *
-        */
-        IImage* Image::Load(Core *core, String name)
+        VSWImage * VSWImage::Load(ICore * pCore, const String & name)
         {
-
             ILuint image = ilGenImage();
 
             ilBindImage(image);
@@ -474,21 +444,16 @@ namespace VoodooShader
             {
                 ilBindImage(0);
                 ilDeleteImage(image);
-                return IImage*();
+                return nullptr;
             }
             else
             {
-                return IImage*(new Image(core, name, image));
+                return new VSWImage(pCore, name, image);
             }
         }
 
-        /**
-        *
-        */
-        Image::Image(ICore *core, String name, ILuint image) :
-        m_Core(core),
-            m_Name(name),
-            m_Image(image)
+        VSWImage::VSWImage(ICore * pCore, const String & name, ILuint image) :
+            m_Core(pCore), m_Name(name), m_Image(image)
         {
             m_Desc.Width = ilGetInteger(IL_IMAGE_WIDTH);
             m_Desc.Height = ilGetInteger(IL_IMAGE_HEIGHT);
@@ -525,106 +490,95 @@ namespace VoodooShader
             if (m_Desc.Format == TF_Unknown)
             {
                 m_Core->GetLogger()->Log
-                    (
-                    LL_Warning,
-                    VOODOO_FILESYSTEM_NAME,
+                (
+                    LL_Warning, VOODOO_FILESYSTEM_NAME,
                     "Unable to resolve format for image %s (%u).",
-                    name.GetData(),
-                    image
-                    );
+                    name.GetData(), image
+                );
             }
         }
 
-        /**
-        *
-        */
-        Image::~Image(void)
+        VSWImage::~VSWImage(void)
         {
             ilDeleteImage(m_Image);
         }
 
-        /**
-        *
-        */
-        String Image::ToString(void)
+        uint32_t VSWImage::AddRef() const
         {
-            return "WDevilImage";
+            return ++m_Refs;
         }
 
-        /**
-        *
-        */
-        ICore *Image::GetCore(void)
+        uint32_t VSWImage::Release() const
+        {
+            if (--m_Refs == 0)
+            {
+                delete this;
+                return 0;
+            } else {
+                return m_Refs;
+            }
+        }
+
+        String VSWImage::ToString(void) const
+        {
+            return L"VSWImage";
+        }
+
+        ICore * VSWImage::GetCore(void) const
         {
             return m_Core;
         }
 
-        /**
-        *
-        */
-        String Image::GetPath(void)
+        String VSWImage::GetPath(void) const
         {
             return m_Name;
         }
 
-        /**
-        *
-        */
-        TextureDesc Image::GetDesc(void)
+        const TextureDesc * VSWImage::GetDesc(void) const
         {
-            return m_Desc;
+            return &m_Desc;
         }
 
-        /**
-        *
-        */
-        size_t Image::GetData(TextureRegion desc, void *buffer)
+        uint32_t VSWImage::GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const throw()
         {
-
-            ILint ilFmt = 0;
-            ILint ilType = 0;
-
+            ILint ilFmt = 0, ilType = 0;
 
             // Convert TextureFormat to DevIL format
-            switch (desc.Format)
+            switch (pDesc->Format)
             {
             case TF_RGB8:
                 ilFmt = IL_RGB;
                 ilType = IL_UNSIGNED_BYTE;
                 break;
-
             case TF_RGBA8:
                 ilFmt = IL_RGBA;
                 ilType = IL_UNSIGNED_BYTE;
                 break;
-
             case TF_RGBA16F:
                 ilFmt = IL_RGBA;
                 ilType = IL_FLOAT;
                 break;
-
             case TF_RGBA32F:
                 ilFmt = IL_RGBA;
                 ilType = IL_DOUBLE;
                 break;
-
             case TF_Unknown:
             default:
-                Throw(VOODOO_FILESYSTEM_NAME, "Invalid texture format for data get.", m_Core);
+                m_Core->GetLogger()->Log
+                (
+                    LL_Warning, VOODOO_FILESYSTEM_NAME,
+                    "Invalid texture format for getting image data (%X).",
+                    pDesc->Format
+                );
+                return 0;
             }
 
             return ilCopyPixels
-                (
-                desc.OffX,
-                desc.OffY,
-                desc.OffZ,
-                desc.Width,
-                desc.Height,
-                desc.Depth,
-                ilFmt,
-                ilType,
-                buffer
-                );
+            (
+                pDesc->OffX, pDesc->OffY, pDesc->OffZ,
+                pDesc->Width, pDesc->Height, pDesc->Depth,
+                ilFmt, ilType, pBuffer
+            );
         }
     }
 }
