@@ -20,6 +20,7 @@
 
 #include "VSPass.hpp"
 
+#include "Exception.hpp"
 #include "Version.hpp"
 
 #include "IAdapter.hpp"
@@ -33,16 +34,21 @@ namespace VoodooShader
     VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) : 
         m_Technique(pTechnique), m_CgPass(pCgPass)
     {
-        this->m_Core = m_Technique->GetCore();
+        if (!m_Technique)
+        {
+            Throw(VOODOO_CORE_NAME, L"Cannot create a pass with no technique.", m_Core);
+        }
 
-        const char * passName = cgGetPassName(this->m_CgPass);
+        m_Core = m_Technique->GetCore();
+
+        const char * passName = cgGetPassName(m_CgPass);
 
         m_Name = m_Technique->GetName() + L"::";
         if (passName)
         {
-            this->m_Name += passName;
+            m_Name += passName;
         } else {
-            this->m_Name += String::Format(L"pass_%p", this->m_CgPass);
+            m_Name += String::Format(L"pass_%p", m_CgPass);
         }
     }
 
@@ -116,15 +122,15 @@ namespace VoodooShader
 
     void VSPass::Link(void)
     {
-        this->m_VertexProgram = cgGetPassProgram(this->m_CgPass, CG_VERTEX_DOMAIN);
-        this->m_FragmentProgram = cgGetPassProgram(this->m_CgPass, CG_FRAGMENT_DOMAIN);
-        this->m_GeometryProgram = cgGetPassProgram(this->m_CgPass, CG_GEOMETRY_DOMAIN);
-        this->m_DomainProgram = cgGetPassProgram(this->m_CgPass, CG_TESSELLATION_CONTROL_DOMAIN);
-        this->m_HullProgram = cgGetPassProgram(this->m_CgPass, CG_TESSELLATION_EVALUATION_DOMAIN);
+        m_VertexProgram = cgGetPassProgram(m_CgPass, CG_VERTEX_DOMAIN);
+        m_FragmentProgram = cgGetPassProgram(m_CgPass, CG_FRAGMENT_DOMAIN);
+        m_GeometryProgram = cgGetPassProgram(m_CgPass, CG_GEOMETRY_DOMAIN);
+        m_DomainProgram = cgGetPassProgram(m_CgPass, CG_TESSELLATION_CONTROL_DOMAIN);
+        m_HullProgram = cgGetPassProgram(m_CgPass, CG_TESSELLATION_EVALUATION_DOMAIN);
 
-        this->m_Target = nullptr;
+        m_Target = nullptr;
 
-        CGannotation targetAnnotation = cgGetNamedPassAnnotation(this->m_CgPass, "target");
+        CGannotation targetAnnotation = cgGetNamedPassAnnotation(m_CgPass, "target");
 
         if (cgIsAnnotation(targetAnnotation))
         {
@@ -132,9 +138,9 @@ namespace VoodooShader
             {
                 const char *targetName = cgGetStringAnnotationValue(targetAnnotation);
 
-                this->m_Target = m_Core->GetTexture(targetName);
+                m_Target = m_Core->GetTexture(targetName);
 
-                if (!this->m_Target.get())
+                if (!m_Target.get())
                 {
                     m_Core->GetLogger()->Log
                     (
@@ -145,7 +151,7 @@ namespace VoodooShader
                         targetName
                     );
 
-                    this->m_Target = m_Core->GetStageTexture(TS_Pass);
+                    m_Target = m_Core->GetStageTexture(TS_Pass);
                 }
             } else {
                 m_Core->GetLogger()->Log
@@ -156,7 +162,7 @@ namespace VoodooShader
                     this->ToString().GetData()
                 );
 
-                this->m_Target = m_Core->GetStageTexture(TS_Pass);
+                m_Target = m_Core->GetStageTexture(TS_Pass);
             }
         } else {
             m_Core->GetLogger()->Log
@@ -167,7 +173,7 @@ namespace VoodooShader
                 this->ToString().GetData()
             );
 
-            this->m_Target = m_Core->GetStageTexture(TS_Pass);
+            m_Target = m_Core->GetStageTexture(TS_Pass);
         }
 
 

@@ -58,7 +58,7 @@ namespace VoodooShader
         m_Refs(0), m_Core(pShader->GetCore()), m_Shader(pShader), m_Param(pParam), m_Virtual(false)
     {
         m_Type = Converter::ToParameterType(cgGetParameterType(m_Param));
-        m_Name = this->m_Shader->GetName() + L"::" + cgGetParameterName(m_Param);
+        m_Name = m_Shader->GetName() + L"::" + cgGetParameterName(m_Param);
 
         memset(m_Valuefloat, 0, sizeof(float) * 16);
     }
@@ -111,13 +111,13 @@ namespace VoodooShader
 
     bool VSParameter::AttachParameter(IParameter * pParam)
     {
-        if (!this->m_Virtual)
+        if (!m_Virtual)
         {
             m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Cannot attach to a non-virtual parameter (%s to %s).", pParam->ToString().GetData(), this->ToString().GetData());
             return false;
         }
 
-        cgConnectParameter(this->m_Param, pParam->GetCgParameter());
+        cgConnectParameter(m_Param, pParam->GetCgParameter());
 
         return true;
     }
@@ -157,6 +157,6 @@ namespace VoodooShader
 
     CGparameter VSParameter::GetCgParameter(void) const
     {
-        return this->m_Param;
+        return m_Param;
     }
 }

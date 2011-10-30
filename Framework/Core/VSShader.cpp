@@ -48,9 +48,9 @@ namespace VoodooShader
         int32_t len = m_Name.ToCharStr(0, nullptr);
         std::vector<char> buffer(len);
         path.ToCharStr(len, &buffer[0]);
-        this->m_CgEffect = cgCreateEffectFromFile(context, &buffer[0], ppArgs);
+        m_CgEffect = cgCreateEffectFromFile(context, &buffer[0], ppArgs);
 
-        if (!cgIsEffect(this->m_CgEffect))
+        if (!cgIsEffect(m_CgEffect))
         {
             Throw(VOODOO_CORE_NAME, L"Failed to create shader.", m_Core);
         }
@@ -60,7 +60,7 @@ namespace VoodooShader
             std::vector<char> buffer(len);
             m_Name.ToCharStr(len, &buffer[0]);
 
-            cgSetEffectName(this->m_CgEffect, &buffer[0]);
+            cgSetEffectName(m_CgEffect, &buffer[0]);
         }
 
         this->Link();
@@ -183,7 +183,7 @@ namespace VoodooShader
         }
 
         // Link parameters first
-        CGparameter cParam = cgGetFirstEffectParameter(this->m_CgEffect);
+        CGparameter cParam = cgGetFirstEffectParameter(m_CgEffect);
 
         while (cgIsParameter(cParam))
         {
@@ -191,7 +191,7 @@ namespace VoodooShader
 
             this->LinkParameter(pParam);
 
-            this->m_Parameters.push_back(pParam);
+            m_Parameters.push_back(pParam);
 
             cParam = cgGetNextParameter(cParam);
         }
@@ -487,7 +487,7 @@ namespace VoodooShader
                 // The first valid technique is the default one
                 if (!m_DefaultTechnique.get())
                 {
-                    this->m_DefaultTechnique = tech;
+                    m_DefaultTechnique = tech;
                 }
             }
             else

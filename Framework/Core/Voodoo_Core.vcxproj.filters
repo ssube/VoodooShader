@@ -111,9 +111,6 @@
     <ClInclude Include="ITexture.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="VoodooCore.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Includes.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -170,6 +167,9 @@
     </ClInclude>
     <ClInclude Include="VSTexture.hpp">
       <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooFramework.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

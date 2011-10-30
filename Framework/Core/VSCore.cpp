@@ -256,7 +256,7 @@ namespace VoodooShader
         }
         catch(std::exception & exc)
         {
-            if (this->m_Logger.get())
+            if (m_Logger.get())
             {
                 m_Logger->Log(LL_Error, VOODOO_CORE_NAME, L"Error during ICore creation: %s", exc.what());
             }
@@ -269,12 +269,12 @@ namespace VoodooShader
     {
         this->SetCgContext(nullptr);
 
-        this->m_Adapter = nullptr;
-        this->m_HookManager = nullptr;
-        this->m_FileSystem = nullptr;
-        this->m_Logger = nullptr;
+        m_Adapter = nullptr;
+        m_HookManager = nullptr;
+        m_FileSystem = nullptr;
+        m_Logger = nullptr;
 
-        this->m_ModuleManager = nullptr;
+        m_ModuleManager = nullptr;
 
 #ifdef VSF_DEBUG_MEMORY
         _CrtDumpMemoryLeaks();
@@ -388,9 +388,9 @@ namespace VoodooShader
 
     IParameter* VSCore::CreateParameter(const String & name, ParameterType type)
     {
-        ParameterMap::iterator paramEntry = this->m_Parameters.find(name);
+        ParameterMap::iterator paramEntry = m_Parameters.find(name);
 
-        if (paramEntry != this->m_Parameters.end())
+        if (paramEntry != m_Parameters.end())
         {
             m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, L"Trying to create a parameter with a duplicate name.");
             return nullptr;
@@ -414,9 +414,9 @@ namespace VoodooShader
 
     ITexture* VSCore::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
     {
-        TextureMap::iterator textureEntry = this->m_Textures.find(name);
+        TextureMap::iterator textureEntry = m_Textures.find(name);
 
-        if (textureEntry != this->m_Textures.end())
+        if (textureEntry != m_Textures.end())
         {
             m_Logger->Log(LL_Warning, VOODOO_CORE_NAME, L"Trying to create a texture with a duplicate name.");
             return nullptr;
@@ -425,7 +425,7 @@ namespace VoodooShader
         {
             ITexture * texture = m_Adapter->CreateTexture(name, pDesc);
 
-            this->m_Textures[name] = texture;
+            m_Textures[name] = texture;
 
             m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Added texture %s, returning shared pointer to %p.",
                 name.GetData(), texture);
@@ -438,7 +438,7 @@ namespace VoodooShader
     {
         ParameterMap::const_iterator parameter = m_Parameters.find(name);
 
-        if (parameter != this->m_Parameters.end())
+        if (parameter != m_Parameters.end())
         {
             m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got parameter %s, returning shared pointer to %p.",
                 name.GetData(), parameter->second);
@@ -465,9 +465,9 @@ namespace VoodooShader
 
     ITexture * VSCore::GetTexture(const String & name) const
     {
-        TextureMap::const_iterator textureEntry = this->m_Textures.find(name);
+        TextureMap::const_iterator textureEntry = m_Textures.find(name);
 
-        if (textureEntry != this->m_Textures.end())
+        if (textureEntry != m_Textures.end())
         {
             m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got texture %s, returning shared pointer to %p.", 
                 name.GetData(), textureEntry->second);
@@ -482,35 +482,35 @@ namespace VoodooShader
         }
     }
 
-    bool VSCore::RemoveParameter(_In_ String Name)
+    bool VSCore::RemoveParameter(_In_ const String & name)
     {
-        ParameterMap::iterator parameter = this->m_Parameters.find(Name);
+        ParameterMap::iterator parameter = m_Parameters.find(name);
 
-        if (parameter != this->m_Parameters.end())
+        if (parameter != m_Parameters.end())
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got parameter %s, erasing.", Name.GetData());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got parameter %s, erasing.", name.GetData());
 
-            this->m_Parameters.erase(parameter);
+            m_Parameters.erase(parameter);
             return true;
         }
         else
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Unable to find parameter %s.", Name.GetData());
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Unable to find parameter %s.", name.GetData());
 
             return false;
         }
     }
 
-    bool VSCore::RemoveTexture(_In_ String Name)
+    bool VSCore::RemoveTexture(_In_ const String & Name)
     {
-        TextureMap::iterator texture = this->m_Textures.find(Name);
+        TextureMap::iterator texture = m_Textures.find(Name);
 
-        if (texture != this->m_Textures.end())
+        if (texture != m_Textures.end())
         {
             m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got texture %s, returning shared pointer to %p.", Name.GetData(),
                 texture->second);
 
-            this->m_Textures.erase(texture);
+            m_Textures.erase(texture);
             return true;
         }
         else
@@ -520,14 +520,14 @@ namespace VoodooShader
         }
     }
 
-    ITexture * VSCore::GetStageTexture(_In_ TextureStage Stage)
+    ITexture * VSCore::GetStageTexture(_In_ const TextureStage stage) const
     {
-        switch (Stage)
+        switch (stage)
         {
         case TS_Shader:
-            return m_LastShader;
+            return m_LastShader.get();
         case TS_Pass:
-            return m_LastPass;
+            return m_LastPass.get();
         default:
             return nullptr;
         }
@@ -555,9 +555,9 @@ namespace VoodooShader
             this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, L"Cg core reported error: %s", errorString);
             if (context && error != CG_INVALID_CONTEXT_HANDLE_ERROR)
             {
-                if (this->m_Adapter)
+                if (m_Adapter)
                 {
-                    this->m_Adapter->HandleError(context, error);
+                    m_Adapter->HandleError(context, error);
                 }
 
                 // Print any compiler errors or other details we can find

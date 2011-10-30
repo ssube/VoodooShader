@@ -103,7 +103,7 @@ namespace VoodooShader
 
             if (compfilter.Match(module))
             {
-                IFile * modulefile = this->m_Core->GetFileSystem()->FindFile(module);
+                IFile * modulefile = m_Core->GetFileSystem()->FindFile(module);
                 this->LoadFile(modulefile);
             }
         } while (FindNextFile(searchHandle, &findFile) != 0);

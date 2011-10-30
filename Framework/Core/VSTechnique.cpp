@@ -36,14 +36,14 @@ namespace VoodooShader
     VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
         m_Shader(pShader), m_Core(pShader->GetCore()), m_CgTechnique(pCgTech), m_Target(nullptr)
     {
-        const char * techName = cgGetTechniqueName(this->m_CgTechnique);
+        const char * techName = cgGetTechniqueName(m_CgTechnique);
 
-        this->m_Name = m_Shader->GetName() + L"::";
+        m_Name = m_Shader->GetName() + L"::";
         if (techName)
         {
-            this->m_Name += techName;
+            m_Name += techName;
         } else {
-            this->m_Name += String::Format(L"tech_%p", m_CgTechnique);
+            m_Name += String::Format(L"tech_%p", m_CgTechnique);
         }
     }
 
@@ -81,9 +81,9 @@ namespace VoodooShader
 
     IPass * VSTechnique::GetPass(const uint32_t index) const
     {
-        if (index < this->m_Passes.size())
+        if (index < m_Passes.size())
         {
-            return this->m_Passes[index].get();
+            return m_Passes[index].get();
         } else {
             return nullptr;
         }
@@ -96,7 +96,7 @@ namespace VoodooShader
 
     const uint32_t VSTechnique::GetPassCount(void) const
     {
-        return this->m_Passes.size();
+        return m_Passes.size();
     }
 
     IShader * VSTechnique::GetShader(void) const
@@ -112,7 +112,7 @@ namespace VoodooShader
     void VSTechnique::Link()
     {
         // Process the technique's target annotation
-        CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(this->m_CgTechnique, "target");
+        CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(m_CgTechnique, "target");
 
         if (cgIsAnnotation(targetAnnotation))
         {
@@ -121,9 +121,9 @@ namespace VoodooShader
 
                 const char *targetName = cgGetStringAnnotationValue(targetAnnotation);
 
-                this->m_Target = m_Core->GetTexture(targetName);
+                m_Target = m_Core->GetTexture(targetName);
 
-                if (!this->m_Target.get())
+                if (!m_Target.get())
                 {
                     m_Core->GetLogger()->Log
                     (
@@ -134,7 +134,7 @@ namespace VoodooShader
                         targetName
                     );
 
-                    this->m_Target = m_Core->GetStageTexture(TS_Shader);
+                    m_Target = m_Core->GetStageTexture(TS_Shader);
                 }
             }
             else
@@ -147,7 +147,7 @@ namespace VoodooShader
                     this->ToString().GetData()
                 );
 
-                this->m_Target = m_Core->GetStageTexture(TS_Shader);
+                m_Target = m_Core->GetStageTexture(TS_Shader);
             }
         }
         else
@@ -160,10 +160,10 @@ namespace VoodooShader
                 this->ToString().GetData()
             );
 
-            this->m_Target = m_Core->GetStageTexture(TS_Shader);
+            m_Target = m_Core->GetStageTexture(TS_Shader);
         }
 
-        this->m_Passes.clear();
+        m_Passes.clear();
 
         CGpass cPass = cgGetFirstPass(m_CgTechnique);
 

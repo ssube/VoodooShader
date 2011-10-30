@@ -277,7 +277,7 @@
     <ClInclude Include="ITexture.hpp" />
     <ClInclude Include="String.hpp" />
     <ClInclude Include="Version.hpp" />
-    <ClInclude Include="VoodooCore.hpp" />
+    <ClInclude Include="VoodooFramework.hpp" />
     <ClInclude Include="VSParser.hpp" />
     <ClInclude Include="VSPass.hpp" />
     <ClInclude Include="VSShader.hpp" />
