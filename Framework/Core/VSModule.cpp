@@ -276,10 +276,10 @@ namespace VoodooShader
         {
             IModule * module = new IModule(hmodule);
 
-            module->m_ModuleVersion = static_cast<Functions::VersionFunc>(GetProcAddress(hmodule, "ModuleVersion"));
-            module->m_ClassCount = static_cast<Functions::CountFunc>(GetProcAddress(hmodule, "ClassCount"));
-            module->m_ClassInfo = static_cast<Functions::InfoFunc>(GetProcAddress(hmodule, "ClassInfo"));
-            module->m_ClassCreate = static_cast<Functions::CreateFunc>(GetProcAddress(hmodule, "ClassCreate"));
+            module->m_ModuleVersion = reinterpret_cast<Functions::VersionFunc>(GetProcAddress(hmodule, "ModuleVersion"));
+            module->m_ClassCount = reinterpret_cast<Functions::CountFunc>(GetProcAddress(hmodule, "ClassCount"));
+            module->m_ClassInfo = reinterpret_cast<Functions::InfoFunc>(GetProcAddress(hmodule, "ClassInfo"));
+            module->m_ClassCreate = reinterpret_cast<Functions::CreateFunc>(GetProcAddress(hmodule, "ClassCreate"));
 
             if
             (

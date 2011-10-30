@@ -115,5 +115,37 @@ namespace VoodooShader
 
             AttributeImpl * m_Impl;
         };
+
+        namespace XPath
+        {
+            class VOODOO_API Node
+            {
+                class NodeImpl;
+                friend class VoodooShader::Xml::Node;
+
+            public:
+            };
+
+            class VOODOO_API NodeSet
+            {
+                class NodeSetImpl;
+                friend class VoodooShader::Xml::Node;
+
+            public:
+
+            };
+
+            class VOODOO_API NodeSetIter
+            {
+                class NodeSetImpl;
+
+            };
+
+            class VOODOO_API Query
+            {
+                class NodeSetImpl;
+
+            };
+        }
     }
 }

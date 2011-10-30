@@ -68,7 +68,7 @@ namespace VoodooShader
          * @note This does not check for duplicates, so care should be taken not to add the same directory repeatedly.
          *     Directory search order is important for file priority.
          */
-        virtual void AddPath(_In_ const String & path) = 0;
+        virtual bool AddPath(_In_ const String & path) throw() = 0;
 
         /**
          * Removes a directory from the search path, following the same rules as adding (adding a string then removing the
@@ -76,12 +76,12 @@ namespace VoodooShader
          * 
          * @param path The path to remove.
          */
-        virtual void RemovePath(_In_ const String & path) = 0;
+        virtual bool RemovePath(_In_ const String & path) throw() = 0;
 
         /**
          * 
          */
-        virtual IFile * FindFile(_In_ const String & name) const = 0;
+        virtual IFile * FindFile(_In_ const String & name) const throw() = 0;
     };
 
     class IFile : 

@@ -69,7 +69,7 @@
 #   define VOODOO_API __declspec(dllimport)
 #endif
 #define VOODOO_CALL __stdcall
-#define VOODOO_PUBLIC_CLASS VOODOO_API VOODOO_CALL
+#define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALL
 
 #ifndef VOODOO_NO_CG
 #   include "Cg/cg.h"
@@ -145,8 +145,8 @@ namespace VoodooShader
     /* Reference typedefs */
 #ifndef VOODOO_NO_BOOST
     // Boost intrusive_ptr functions
-    void VOODOO_API intrusive_ptr_add_ref(IObject * obj);
-    void VOODOO_API intrusive_ptr_release(IObject * obj);
+    void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
+    void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
 
     typedef boost::intrusive_ptr<IAdapter> IAdapterRef;
     typedef boost::intrusive_ptr<ICore> ICoreRef;
@@ -196,25 +196,22 @@ namespace VoodooShader
      */
     enum TextureFormat
     {
-        TF_Unknown  = 0x0, /* !< Unknown texture format */
+        TF_Unknown  = 0x0,      /* !< Unknown texture format */
 
         // Backbuffer formats
-        TF_RGB5     = 0x101, /* !< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
-        TF_RGB5A1   = 0x102, /* !< 5 bit RGB, 1 bit alpha */
-        TF_RGB8     = 0x103, /* !< 8 bit RGB (8 bit X in DX). Most common backbuffer format, common texture format. */
-        TF_RGBA8    = 0x104, /* !< 8 bit RGBA. Common texture format. */
-        TF_RGB10A2  = 0x105, /* !< 10 bit RGB, 2 bit A */
-
+        TF_RGB5     = 0x101,    /* !< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
+        TF_RGB5A1   = 0x102,    /* !< 5 bit RGB, 1 bit alpha */
+        TF_RGB8     = 0x103,    /* !< 8 bit RGB (8 bit X in DX). Most common backbuffer format, common texture format. */
+        TF_RGBA8    = 0x104,    /* !< 8 bit RGBA. Common texture format. */
+        TF_RGB10A2  = 0x105,    /* !< 10 bit RGB, 2 bit A */
         // float texture formats
-        TF_RGBA16F  = 0x201, /* !< Half-precision RGBA. HDR format. */
-        TF_RGBA32F  = 0x202, /* !< Full-precision RGBA (float/single). HDR format. */
-
+        TF_RGBA16F  = 0x201,    /* !< Half-precision RGBA. HDR format. */
+        TF_RGBA32F  = 0x202,    /* !< Full-precision RGBA (float/single). HDR format. */
         // Depth-buffer formats
-        TF_D16      = 0x401, /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
-        TF_D32      = 0x402, /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
-
+        TF_D16      = 0x401,    /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
+        TF_D32      = 0x402,    /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
         // Max
-        TF_Max      = 0x7FFFFFFF /* !< Highest possible value, forcing dword type */
+        TF_Max      = 0x7FFFFFFF
     };
 
     /**
@@ -223,72 +220,64 @@ namespace VoodooShader
      */
     enum ParameterType
     {
-        PT_Unknown  = 0x00, /* !< Unknown parameter type */
+        PT_Unknown      = 0x00,     /* !< Unknown parameter type */
         // floats
-        PT_Float1   = 0x11, /* !< Single-component float vector */
-        PT_Float2   = 0x12, /* !< Two-component float vector */
-        PT_Float3   = 0x13, /* !< Three-component float vector */
-        PT_Float4   = 0x14, /* !< Four-component float vector */
-        PT_Float1x1 = 0x11,
-        PT_Float1x2 = 0x12,
-        PT_Float1x3 = 0x13,
-        PT_Float1x4 = 0x14,
-        PT_Float2x1 = 0x21,
-        PT_Float2x2 = 0x22,
-        PT_Float2x3 = 0x23,
-        PT_Float2x4 = 0x24,
-        PT_Float3x1 = 0x31,
-        PT_Float3x2 = 0x32,
-        PT_Float3x3 = 0x33,
-        PT_Float3x4 = 0x34,
-        PT_Float4x1 = 0x41,
-        PT_Float4x2 = 0x42,
-        PT_Float4x3 = 0x43,
-        PT_Float4x4 = 0x44,
+        PT_Float1       = 0x11,     /* !< Single-component float vector */
+        PT_Float2       = 0x12,     /* !< Two-component float vector */
+        PT_Float3       = 0x13,     /* !< Three-component float vector */
+        PT_Float4       = 0x14,     /* !< Four-component float vector */
+        PT_Float1x1     = 0x11,
+        PT_Float1x2     = 0x12,
+        PT_Float1x3     = 0x13,
+        PT_Float1x4     = 0x14,
+        PT_Float2x1     = 0x21,
+        PT_Float2x2     = 0x22,
+        PT_Float2x3     = 0x23,
+        PT_Float2x4     = 0x24,
+        PT_Float3x1     = 0x31,
+        PT_Float3x2     = 0x32,
+        PT_Float3x3     = 0x33,
+        PT_Float3x4     = 0x34,
+        PT_Float4x1     = 0x41,
+        PT_Float4x2     = 0x42,
+        PT_Float4x3     = 0x43,
+        PT_Float4x4     = 0x44,
         // Samplers
-        PT_Sampler1D = 0x101, /* !< One-dimensional sampler (for a 1D texture, see 
-                               *    @ref texturetypes "texture types" for more info) */
-        PT_Sampler2D = 0x102, /* !< Two-dimensional sampler (for a 2D texture, see 
-                               *    @ref texturetypes "texture types" for more info) */
-        PT_Sampler3D = 0x103, /* !< Three-dimensional sampler (for a 3D/volume texture, see 
-                               *    @ref texturetypes "texture types" for more info) */
+        PT_Sampler1D    = 0x101,    /* !< One-dimensional sampler (for a 1D texture, see @ref texturetypes "texture types" for more info) */
+        PT_Sampler2D    = 0x102,    /* !< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info) */
+        PT_Sampler3D    = 0x103,    /* !< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info) */
         // Structs
-        PT_Struct    = 0x1000,
+        PT_Struct       = 0x1000,
         // Max
-        PT_Max       = 0x7FFFFFFF /* !< Highest possible value, forcing dword type */
+        PT_Max          = 0x7FFFFFFF
     };
 
     enum ParameterCategory
     {
-        PC_Unknown      = 0x00, /* !< Unknown parameter category */
-        PC_Float        = 0x01, /* !< float vector parameter (may have 1 to 4 components) */
-        PC_Sampler      = 0x02, /* !< Sampler parameter (may sample 1D to 3D textures) */
+        PC_Unknown      = 0x00,     /* !< Unknown parameter category */
+        PC_Float        = 0x01,     /* !< float vector parameter (may have 1 to 4 components) */
+        PC_Sampler      = 0x02,     /* !< Sampler parameter (may sample 1D to 3D textures) */
         PC_Struct       = 0x04,
-        PC_Max          = 0x7FFFFFFF /* !< Highest possible value, forcing dword type */
+        PC_Max          = 0x7FFFFFFF
     };
 
     enum ProgramStage
     {
-        PS_Unknown      = 0x00, /* !< Unknown program stage */
-        PS_Vertex       = 0x01, /* !< Vertex program stage (usually supported, see 
-                                 *    @ref programstages "program stages" for more info) */
-        PS_Fragment     = 0x02, /* !< Fragment program stage (usually supported, see 
-                                 *    @ref programstages "program stages" for more info) */
-        PS_Geometry     = 0x03, /* !< Geometry program stage (sometimes supported, see 
-                                 *    @ref programstages "program stages" for more info) */
-        PS_Domain       = 0x04, /* !< Domain program stage (not always supported, see 
-                                 *    @ref programstages "program stages" for more info) */
-        PS_Hull         = 0x05, /* !< Hull program stage (not always supported, see 
-                                 *    @ref programstages "program stages" for more info) */  
-        PS_Max          = 0x7FFFFFFF /* !< Highest possible value, forcing dword type */
+        PS_Unknown      = 0x00,     /* !< Unknown program stage */
+        PS_Vertex       = 0x01,     /* !< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
+        PS_Fragment     = 0x02,     /* !< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
+        PS_Geometry     = 0x03,     /* !< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
+        PS_Domain       = 0x04,     /* !< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
+        PS_Hull         = 0x05,     /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info) */  
+        PS_Max          = 0x7FFFFFFF
     };
 
     enum TextureStage
     {
-        TS_Unknown      = 0x00, /* !< Unknown texture stage */
-        TS_Shader       = 0x01, /* !< Shader target texture */
-        TS_Pass         = 0x02, /* !< Pass target texture */
-        TS_Max          = 0x7FFFFFFF /* !< Highest possible value, forcing dword type */
+        TS_Unknown      = 0x00,     /* !< Unknown texture stage */
+        TS_Shader       = 0x01,     /* !< Shader target texture */
+        TS_Pass         = 0x02,     /* !< Pass target texture */
+        TS_Max          = 0x7FFFFFFF
     };
 
     enum FileOpenMode
@@ -485,10 +474,10 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef std::function<int32_t (void)> CountFunc;
-        typedef std::function<const char * (int32_t)> InfoFunc;
-        typedef std::function<IObject * (int32_t, ICore *)> CreateFunc;
-        typedef std::function<const Version * (void)> VersionFunc;
+        typedef int32_t (__stdcall * CountFunc)();
+        typedef const char * (__stdcall * InfoFunc)(int32_t);
+        typedef IObject * (__stdcall * CreateFunc)(int32_t, ICore *);
+        typedef const Version * (__stdcall * VersionFunc)();
     };
 
     /**

@@ -16,29 +16,59 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
+ */
 
-#pragma once
-
-#include "Includes.hpp"
-
-#include "String.hpp"
+#include "VSFilesystem.hpp"
 
 namespace VoodooShader
 {
-    /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     * 
-     * @param pInitParams Setup parameters for this core. 
-     * @return A new ICore object.
-     * @throws std::exception in case of errors, if CatchErrors is false.
-     */
-    _Check_return_ 
-    ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
+    VSFileSystem::VSFileSystem(_In_ ICore * pCore) : 
+        m_Core(pCore)
+    { }
 
-    /* Plugin exports. */
-    Version   VOODOO_CALL API_ModuleVersion(void);
-    int32_t   VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int32_t Index);
-    IObject * VOODOO_CALL API_ClassCreate(_In_ int32_t Index, _In_ ICore * pCore);
+    VSFileSystem::~VSFileSystem(void)
+    { }
+
+    int32_t VSFileSystem::AddRef() const
+    {
+        return ++m_Refs;
+    }
+
+    int32_t VSFileSystem::Release() const
+    {
+        if (--m_Refs == 0)
+        {
+            delete this;
+            return 0;
+        } else {
+            return m_Refs;
+        }
+    }
+
+    String VSFileSystem::ToString(void) const
+    {
+        return L"VSFileSystem";
+    }
+
+    ICore * VSFileSystem::GetCore(void) const
+    {
+        return m_Core;
+    }
+
+    void VSFileSystem::AddPath(_In_ const String & dir)
+    {
+        UNREFERENCED_PARAMETER(dir);
+    }
+
+    void VSFileSystem::RemovePath(_In_ const String & dir)
+    {
+        UNREFERENCED_PARAMETER(dir);
+    }
+
+    IFile * VSFileSystem::FindFile(_In_ const String & name) const
+    {
+        UNREFERENCED_PARAMETER(name);
+
+        return nullptr;
+    }
 }

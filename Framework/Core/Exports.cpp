@@ -72,12 +72,12 @@ namespace VoodooShader
     }
 
     // Boost intptr funcs
-    void intrusive_ptr_add_ref(IObject * obj)
+    void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj)
     {
         obj->AddRef();
     }
 
-    void intrusive_ptr_release(IObject * obj)
+    void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj)
     {
         obj->Release();
     }

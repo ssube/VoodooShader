@@ -30,27 +30,6 @@ namespace VoodooShader
      * @{ 
      */
 
-#ifndef VOODOO_NO_CG
-    /**
-     * Non-member function provided to Cg as an error handling callback. 
-     * 
-     * @param context The Cg context throwing the error. 
-     * @param error   The error code. 
-     * @param core    If non-nullptr, the core associated with the error
-     */
-    void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void * pCore);
-#endif
-
-    /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     * 
-     * @param pInitParams Setup parameters for this core. 
-     * @return A new ICore object.
-     * @throws std::exception in case of errors, if CatchErrors is false.
-     */
-    _Check_return_ 
-    ICore * CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
-
     /**
      * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
      * shaders, textures, plugins and variable/configuration mechanics.
@@ -254,76 +233,6 @@ namespace VoodooShader
          * @param pTexture The texture to bind. 
          */
         virtual void SetStageTexture(_In_ TextureStage stage, _In_ const ITexture * const pTexture);
-
-    private:
-        friend ICore * CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors);
-
-#ifndef VOODOO_NO_CG
-        friend void Voodoo_CgErrorHandler_Func(CGcontext pContext, CGerror error, void * pCore);
-#endif
-
-        /**
-         * Create a new Voodoo ICore and associated Cg context. 
-         * 
-         * @param pInitParams Setup parameters for this core. 
-         * @return A new core. 
-         * @throws std::exception in case of errors. 
-         * 
-         * @note To create a core, you must call CreateCore().
-         */
-        ICore(_In_ const InitParams * const pInitParams);
-
-        /**
-         * Error handling callback for the Cg context. If an internal Cg error occurs, this function will be called with as 
-         * much information as possible. While error recovery may not be possible, this does log the error in detail (if a 
-         * pCore is provided).
-         * 
-         * @param context The Cg context the error occurred in. 
-         * @param error The error code.
-         */
-        void CgErrorHandler(_In_ CGcontext pContext, _In_ int error) const;
-
-    private:
-        mutable int32_t m_Refs;
-
-        /** Config file. */
-        Xml::Document * m_ConfigFile;
-
-        /** Cg context used by this pCore. */
-        CGcontext m_CgContext;
-
-        /** The current IAdapter implementation. */
-        IAdapterRef m_Adapter;
-
-        /** The current ILogger implementation. */
-        ILoggerRef m_Logger;
-
-        /** The current IHookManager implementation. */
-        IHookManagerRef m_HookManager;
-
-        /** The current IFileSystem implementation. */
-        IFileSystemRef m_FileSystem;
-
-        /** The current module manager. */
-        IModuleManagerRef m_ModuleManager;
-
-        /** The current variable parser. */
-        IParserRef m_Parser;
-
-        /** Collection of all shaders created by this pCore. */
-        ShaderVector m_Shaders;
-
-        /** Collection of all usable textures. */
-        TextureMap m_Textures;
-
-        /** Collection of all virtual parameters created by this pCore and used by the Cg context. */
-        ParameterMap m_Parameters;
-
-        /** Default pass target texture for shader linker. */
-        ITextureRef m_LastPass;
-
-        /** Default technique target for shader linker. */
-        ITextureRef m_LastShader;
     };
     /**
      * @}

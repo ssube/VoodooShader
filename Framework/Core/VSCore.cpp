@@ -18,6 +18,8 @@
  *   peachykeen@voodooshader.com
  */
 
+#include "VSCore.hpp"
+
 #include "Converter.hpp"
 #include "Exception.hpp"
 #include "Version.hpp"

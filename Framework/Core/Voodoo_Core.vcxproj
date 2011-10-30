@@ -227,23 +227,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Converter.cpp" />
-    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="VSAdapter.cpp" />
+    <ClCompile Include="VSCore.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Exports.cpp" />
-    <ClCompile Include="Module.cpp" />
-    <ClCompile Include="Null.cpp" />
-    <ClCompile Include="Parameter.cpp" />
-    <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="Pass.cpp" />
+    <ClCompile Include="VSFilesystem.cpp" />
+    <ClCompile Include="VSHookManager.cpp" />
+    <ClCompile Include="VsModule.cpp" />
+    <ClCompile Include="VSLogger.cpp" />
+    <ClCompile Include="VSParameter.cpp" />
+    <ClCompile Include="VSParser.cpp" />
+    <ClCompile Include="VSPass.cpp" />
     <ClCompile Include="Regex.cpp" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="VSShader.cpp" />
     <ClCompile Include="String.cpp" />
-    <ClCompile Include="Technique.cpp" />
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="VSTechnique.cpp" />
+    <ClCompile Include="VSTexture.cpp" />
     <ClCompile Include="Xml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Converter.hpp" />
+    <ClInclude Include="VSAdapter.hpp" />
+    <ClInclude Include="VSCore.hpp" />
+    <ClInclude Include="VSFilesystem.hpp" />
+    <ClInclude Include="VSHookManager.hpp" />
+    <ClInclude Include="VSModule.hpp" />
+    <ClInclude Include="VSParameter.hpp" />
     <ClInclude Include="Exception.hpp" />
     <ClInclude Include="Exports.hpp" />
     <ClInclude Include="IAdapter.hpp" />
@@ -257,7 +266,7 @@
     <ClInclude Include="IObject.hpp" />
     <ClInclude Include="ILogger.hpp" />
     <ClInclude Include="IModule.hpp" />
-    <ClInclude Include="Null.hpp" />
+    <ClInclude Include="VSLogger.hpp" />
     <ClInclude Include="IParameter.hpp" />
     <ClInclude Include="IParser.hpp" />
     <ClInclude Include="IPass.hpp" />

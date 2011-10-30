@@ -161,7 +161,7 @@ namespace VoodooShader
          * 
          * @param Name The filename to load.
          */
-        virtual ITexture * LoadTexture(_In_ const String & name, _In_ TextureRegion region) throw() = 0;
+        virtual ITexture * LoadTexture(_In_ const String & name, _In_ const TextureRegion * pRegion) throw() = 0;
 
         /**
          * Draws geometry from system memory.
@@ -169,7 +169,7 @@ namespace VoodooShader
          * @param Vertexes The number of vertexes to draw. 
          * @param pVertexData This must contain vertex data for the given number of verts.
          */
-        virtual void DrawGeometry(_In_ int32_t vertexCount, _In_count_(vertexCount) const VertexStruct * const pVertexData) throw() = 0;
+        virtual void DrawGeometry(_In_ int32_t count, _In_count_(count) const VertexStruct * const pVertexData) throw() = 0;
 
         /**
          * Downloads a parameter's value from system RAM to VRAM, verifying that the value on the GPU (and in use) is the 
@@ -191,6 +191,13 @@ namespace VoodooShader
          */
         virtual void SetProperty(const String & name, const String & value) throw() = 0;
 
+        /**
+         * Get a property from the adapter.
+         *
+         * @param name The property to get.
+         *
+         * @return The value of the property (lexically cast to a string if necessary).
+         */
         virtual String GetProperty(const String & name) const throw() = 0;
 
         /**

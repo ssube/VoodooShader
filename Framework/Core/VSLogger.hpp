@@ -16,29 +16,45 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
-
+ */
 #pragma once
 
 #include "Includes.hpp"
 
-#include "String.hpp"
+#include "ILogger.hpp"
 
 namespace VoodooShader
 {
-    /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     * 
-     * @param pInitParams Setup parameters for this core. 
-     * @return A new ICore object.
-     * @throws std::exception in case of errors, if CatchErrors is false.
-     */
-    _Check_return_ 
-    ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
+    class VSLogger :
+        public ILogger
+    {
+    public:
+        VSLogger(ICore * pCore);
+        virtual ~VSLogger(void);
 
-    /* Plugin exports. */
-    Version   VOODOO_CALL API_ModuleVersion(void);
-    int32_t   VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int32_t Index);
-    IObject * VOODOO_CALL API_ClassCreate(_In_ int32_t Index, _In_ ICore * pCore);
+        virtual int32_t AddRef() const;
+        virtual int32_t Release() const;
+        virtual String ToString(void) const;
+        virtual ICore * GetCore(void) const;
+
+        virtual bool Open(_In_ const IFile * pFile, _In_ bool append);
+        virtual void Close(void);
+        virtual void Flush(void);
+        virtual void SetLogLevel(_In_ LogLevel level);
+        virtual LogLevel GetLogLevel(void) const;
+        virtual void LogModule(_In_ const Version * pModule);
+        virtual void Log
+        (
+            _In_ LogLevel level,
+            _In_ const String & module,
+            _In_ _Printf_format_string_ const String & msg,
+            ...
+        );
+        virtual void SetFlags(_In_ LogFlags flush);
+        virtual LogFlags GetFlags(void) const;
+
+    private:
+        mutable int32_t m_Refs;
+        ICore * m_Core;
+    };
 }

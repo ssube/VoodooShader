@@ -16,29 +16,61 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
+ */
 
-#pragma once
-
-#include "Includes.hpp"
-
-#include "String.hpp"
+#include "VSHookManager.hpp"
 
 namespace VoodooShader
 {
-    /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     * 
-     * @param pInitParams Setup parameters for this core. 
-     * @return A new ICore object.
-     * @throws std::exception in case of errors, if CatchErrors is false.
-     */
-    _Check_return_ 
-    ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
+    VSHookManager::VSHookManager(_In_ ICore * pCore) 
+        : m_Core(pCore)
+    { }
 
-    /* Plugin exports. */
-    Version   VOODOO_CALL API_ModuleVersion(void);
-    int32_t   VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int32_t Index);
-    IObject * VOODOO_CALL API_ClassCreate(_In_ int32_t Index, _In_ ICore * pCore);
+    VSHookManager::~VSHookManager(void)
+    { }
+
+    int32_t VSHookManager::AddRef() const
+    {
+        return ++m_Refs;
+    }
+
+    int32_t VSHookManager::Release() const
+    {
+        if (--m_Refs == 0)
+        {
+            delete this;
+            return 0;
+        } else {
+            return m_Refs;
+        }
+    }
+
+    String VSHookManager::ToString(void) const
+    {
+        return L"VSHookManager";
+    }
+
+    ICore * VSHookManager::GetCore(void) const
+    {
+        return m_Core;
+    }
+
+    bool VSHookManager::Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest)
+    {
+        UNREFERENCED_PARAMETER(name);
+        UNREFERENCED_PARAMETER(pSrc);
+        UNREFERENCED_PARAMETER(pDest);
+
+        return true;
+    }
+
+    bool VSHookManager::Remove(_In_ const String & name)
+    {
+        UNREFERENCED_PARAMETER(name);
+
+        return true;
+    }
+
+    void VSHookManager::RemoveAll(void)
+    { }
 }

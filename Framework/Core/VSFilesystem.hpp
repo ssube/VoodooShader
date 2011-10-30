@@ -16,29 +16,33 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
-
+ */
 #pragma once
 
 #include "Includes.hpp"
 
-#include "String.hpp"
+#include "IFilesystem.hpp"
 
 namespace VoodooShader
 {
-    /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     * 
-     * @param pInitParams Setup parameters for this core. 
-     * @return A new ICore object.
-     * @throws std::exception in case of errors, if CatchErrors is false.
-     */
-    _Check_return_ 
-    ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
+    class VSFileSystem :
+        public IFileSystem
+    {
+    public:
+        VSFileSystem(_In_ ICore * pCore);
+        virtual ~VSFileSystem(void);
 
-    /* Plugin exports. */
-    Version   VOODOO_CALL API_ModuleVersion(void);
-    int32_t   VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int32_t Index);
-    IObject * VOODOO_CALL API_ClassCreate(_In_ int32_t Index, _In_ ICore * pCore);
+        virtual int32_t AddRef() const throw();
+        virtual int32_t Release() const throw();
+        virtual String ToString(void) const throw();
+        virtual ICore * GetCore(void) const throw();
+
+        virtual bool AddPath(_In_ const String & dir) throw();
+        virtual bool RemovePath(_In_ const String & dir) throw();
+        virtual IFile * FindFile(_In_ const String & name) const throw();
+
+    private:
+        mutable int32_t m_Refs;
+        ICore * m_Core;
+    };
 }

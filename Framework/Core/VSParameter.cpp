@@ -17,7 +17,7 @@
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
  */
-#include "IParameter.hpp"
+#include "VSParameter.hpp"
 
 #include "Converter.hpp"
 #include "Exception.hpp"
@@ -29,14 +29,14 @@
 
 namespace VoodooShader
 {
-    IParameter::IParameter(_In_ ICore * pCore, _In_ String name, _In_ ParameterType type) : 
+    VSParameter::VSParameter(_In_ ICore * pCore, _In_ String name, _In_ ParameterType type) : 
          m_Refs(0), m_Core(pCore), m_Name(name), m_Type(type), m_Shader(nullptr), m_Virtual(true)
     {
         m_Core->GetLogger()->Log
         (
             LL_Debug,
             VOODOO_CORE_NAME,
-            "Creating a virtual parameter (%s, core %p) of type %s.",
+            L"Creating a virtual parameter (%s, core %p) of type %s.",
             name.GetData(), m_Core, Converter::ToString(type)
         );
 
@@ -44,7 +44,7 @@ namespace VoodooShader
 
         if (!context || !cgIsContext(context))
         {
-            throw std::exception("Unable to create parameter (core has no context).");
+            Throw(VOODOO_CORE_NAME, L"Unable to create parameter (core has no context).");
         }
 
         m_Param = cgCreateParameter(context, Converter::ToCGType(m_Type));
@@ -52,7 +52,7 @@ namespace VoodooShader
         memset(m_Valuefloat, 0, sizeof(float) * 16);
     }
 
-    IParameter::IParameter(_In_ IShader * pShader, _In_ CGparameter pParam) :
+    VSParameter::VSParameter(_In_ IShader * pShader, _In_ CGparameter pParam) :
         m_Refs(0), m_Core(pShader->GetCore()), m_Shader(pShader), m_Param(pParam), m_Virtual(false)
     {
         m_Type = Converter::ToParameterType(cgGetParameterType(m_Param));
@@ -61,9 +61,9 @@ namespace VoodooShader
         memset(m_Valuefloat, 0, sizeof(float) * 16);
     }
 
-    IParameter::~IParameter(void)
+    VSParameter::~VSParameter(void)
     {
-        m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, "Destroying parameter %s.", m_Name.GetData());
+        m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"Destroying parameter %s.", m_Name.GetData());
 
         if (m_Virtual && cgIsParameter(m_Param))
         {
@@ -71,12 +71,12 @@ namespace VoodooShader
         }
     }
 
-    int32_t IParameter::AddRef() const
+    int32_t VSParameter::AddRef() const
     {
         return ++m_Refs;
     }
 
-    int32_t IParameter::Release() const
+    int32_t VSParameter::Release() const
     {
         if (--m_Refs == 0)
         {
@@ -87,7 +87,7 @@ namespace VoodooShader
         }
     }
 
-    String IParameter::ToString(void) const
+    String VSParameter::ToString(void) const
     {
         String name;
 
@@ -102,22 +102,22 @@ namespace VoodooShader
         return name;
     }
 
-    ICore * IParameter::GetCore(void) const
+    ICore * VSParameter::GetCore(void) const
     {
         return m_Core;
     }
 
-    ParameterType IParameter::GetType(void) const
+    ParameterType VSParameter::GetType(void) const
     {
         return m_Type;
     }
 
-    bool IParameter::IsVirtual(void) const
+    bool VSParameter::IsVirtual(void) const
     {
         return m_Virtual;
     }
 
-    bool IParameter::AttachParameter(IParameter * pParam)
+    bool VSParameter::AttachParameter(IParameter * pParam)
     {
         if (!this->m_Virtual)
         {
@@ -126,42 +126,44 @@ namespace VoodooShader
         }
 
         cgConnectParameter(this->m_Param, pParam->GetCgParameter());
+
+        return true;
     }
 
-    int IParameter::GetComponents(void) const
+    int VSParameter::GetComponents(void) const
     {
         return Converter::ToComponents(m_Type);
     }
 
-    ITexture * const IParameter::GetTexture(void) const
+    ITexture * const VSParameter::GetTexture(void) const
     {
         return m_ValueTexture.get();
     }
 
-    void IParameter::SetTexture(ITexture* Texture)
+    void VSParameter::SetTexture(ITexture* Texture)
     {
         m_ValueTexture = Texture;
     }
 
-    float * const IParameter::GetScalar(void)
+    float * const VSParameter::GetScalar(void)
     {
         return m_Valuefloat;
     }
 
-    void IParameter::SetScalar(int Count, _In_count_(Count) float *Values)
+    void VSParameter::SetScalar(int32_t count, float * pValues)
     {
-        if (Values)
+        if (pValues && count > 0)
         {
             memcpy(m_Valuefloat, Values, min(16, Count) * sizeof(float));
         }
     }
 
-    IShader * const IParameter::GetShader(void) const
+    IShader * const VSParameter::GetShader(void) const
     {
         return m_Shader.get();
     }
 
-    CGparameter IParameter::GetCgParameter(void) const
+    CGparameter VSParameter::GetCgParameter(void) const
     {
         return this->m_Param;
     }

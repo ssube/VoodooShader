@@ -29,8 +29,8 @@ namespace VoodooShader
      */
     class IObject
     {
-        friend void intrusive_ptr_add_ref(IObject * obj);
-        friend void intrusive_ptr_release(IObject * obj);
+        friend void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
+        friend void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
 
     public:
         virtual ~IObject(void) throw() {};

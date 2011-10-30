@@ -16,29 +16,33 @@
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
-
+ */
 #pragma once
 
 #include "Includes.hpp"
 
-#include "String.hpp"
+#include "IHookManager.hpp"
 
 namespace VoodooShader
 {
-    /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     * 
-     * @param pInitParams Setup parameters for this core. 
-     * @return A new ICore object.
-     * @throws std::exception in case of errors, if CatchErrors is false.
-     */
-    _Check_return_ 
-    ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
+    class VSHookManager :
+        public IHookManager
+    {
+    public:
+        VSHookManager(_In_ ICore * pCore);
+        virtual ~VSHookManager(void);
 
-    /* Plugin exports. */
-    Version   VOODOO_CALL API_ModuleVersion(void);
-    int32_t   VOODOO_CALL API_ClassCount(void);
-    const char * VOODOO_CALL API_ClassInfo(_In_ int32_t Index);
-    IObject * VOODOO_CALL API_ClassCreate(_In_ int32_t Index, _In_ ICore * pCore);
+        virtual int32_t AddRef() const;
+        virtual int32_t Release() const;
+        virtual String ToString(void) const;
+        virtual ICore * GetCore(void) const;
+
+        bool Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
+        bool Remove(_In_ const String & name);
+        void RemoveAll(void);
+
+    private:
+        mutable int32_t m_Refs;
+        ICore * m_Core;
+    };
 }
