@@ -62,6 +62,8 @@ namespace VoodooShader
          */
         virtual ICore * GetCore(void) const throw() = 0;
 
+        virtual String GetName() const throw() = 0;
+
         /**
          * Retrieves the type of this parameter. This specifies what type and how many data components are used (one texture 
          * or 1-16 floats).

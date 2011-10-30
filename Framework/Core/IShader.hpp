@@ -79,6 +79,8 @@ namespace VoodooShader
          */
         virtual ICore * GetCore(void) const throw() = 0;
 
+        virtual String GetName() const throw() = 0;
+
         /**
          * Get the number of validated techniques this shader contains.
          * 

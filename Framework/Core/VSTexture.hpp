@@ -40,7 +40,8 @@ namespace VoodooShader
         virtual String ToString(void) const;
         virtual ICore * GetCore(void) const;
 
-        _Check_return_ virtual void * GetData(void) const;
+        virtual String GetName() const throw();
+        virtual void * GetData(void) const;
         virtual const TextureDesc * GetDesc(void) const;
 
     private:

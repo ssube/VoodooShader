@@ -70,6 +70,8 @@ namespace VoodooShader
          */
         virtual ICore * GetCore(void) const throw() = 0;
 
+        virtual String GetName() const throw() = 0;
+
         /**
          * Retrieve the target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set. 

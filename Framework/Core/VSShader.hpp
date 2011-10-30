@@ -41,6 +41,7 @@ namespace VoodooShader
         virtual String ToString(void) const throw();
         virtual ICore * GetCore(void) const throw();
 
+        virtual String GetName() const throw();
         virtual const uint32_t GetTechniqueCount(void) const throw();
         virtual ITechnique * GetTechnique(_In_ const uint32_t index) const throw();
         virtual ITechnique * GetDefaultTechnique(void) const throw();

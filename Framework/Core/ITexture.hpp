@@ -61,12 +61,14 @@ namespace VoodooShader
 
         virtual ICore * GetCore(void) const throw() = 0;
 
+        virtual String GetName() const throw() = 0;
+
         /** 
          * Gets the data. 
          * 
          * @return nullptr if it fails, else the data. 
          */
-        _Check_return_ virtual void * GetData(void) const throw() = 0;
+        virtual void * GetData(void) const throw() = 0;
 
         /**
          * Gets the texture description. 
@@ -74,13 +76,6 @@ namespace VoodooShader
          * @return The description.
          */ 
         virtual const TextureDesc * GetDesc(void) const throw() = 0;
-
-    private:
-        mutable uint32_t m_Refs;
-        String m_Name;
-        ICore * m_Core;
-        void * m_Data;
-        TextureDesc m_Desc;
     };
     /* @} */
 }

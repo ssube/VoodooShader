@@ -58,7 +58,7 @@ namespace VoodooShader
         m_Refs(0), m_Core(pShader->GetCore()), m_Shader(pShader), m_Param(pParam), m_Virtual(false)
     {
         m_Type = Converter::ToParameterType(cgGetParameterType(m_Param));
-        m_Name = this->m_Shader->ToString() + L"::" + cgGetParameterName(m_Param);
+        m_Name = this->m_Shader->GetName() + L"::" + cgGetParameterName(m_Param);
 
         memset(m_Valuefloat, 0, sizeof(float) * 16);
     }

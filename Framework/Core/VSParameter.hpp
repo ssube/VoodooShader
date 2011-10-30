@@ -37,6 +37,7 @@ namespace VoodooShader
         virtual String ToString(void) const throw();
         virtual ICore * GetCore(void) const throw();
 
+        virtual String GetName() const throw();
         virtual ParameterType GetType(void) const throw();
         virtual bool IsVirtual(void) const throw();
         virtual bool AttachParameter(_In_opt_ IParameter * const pParam) throw();

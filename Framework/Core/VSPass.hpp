@@ -36,6 +36,7 @@ namespace VoodooShader
         virtual String ToString(void) const throw();
         virtual ICore * GetCore(void) const throw();
 
+        virtual String GetName() const throw();
         virtual ITexture * GetTarget(void) const throw();
         virtual ITechnique * GetTechnique(void) const throw();
         virtual CGprogram GetProgram(_In_ const ProgramStage stage) const throw();

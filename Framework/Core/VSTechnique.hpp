@@ -40,6 +40,7 @@ namespace VoodooShader
         virtual String ToString(void) const throw();
         virtual ICore * GetCore(void) const throw();
 
+        virtual String GetName() const throw();
         virtual ITexture * GetTarget(void) const throw();
         virtual const uint32_t GetPassCount(void) const throw();
         virtual IPass * GetPass(_In_ const uint32_t index) const throw();

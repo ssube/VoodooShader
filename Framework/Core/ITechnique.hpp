@@ -70,6 +70,8 @@ namespace VoodooShader
          */
         virtual ICore * GetCore(void) const throw() = 0;
 
+        virtual String GetName() const throw() = 0;
+
         /**
          * Retrieve the technique's final target. This is the surface the technique expects the results of the final pass to 
          * end up in. The technique may render to scratch textures, but the final result should go into this texture (not, 
