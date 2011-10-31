@@ -90,6 +90,14 @@ namespace VoodooShader
         virtual bool AttachParameter(_In_opt_ IParameter * const pParam) throw() = 0;
 
         /**
+         * Detaches this parameter from its source (set with a call to IParameter::AttachParameter(IParameter * const)).
+         *
+         * @warning If called on a parameter that has other parameters bound to it (a source), it will disconnect all of
+         *      those. This breaks connections from either end, source or bound.
+         */
+        virtual bool DetachParameter() throw() = 0;
+
+        /**
          * Get the component count for this parameter.
          * 
          * @return The number of components.
@@ -118,7 +126,7 @@ namespace VoodooShader
          */
         _Ret_count_c_(16) virtual float * const GetScalar(void) throw() = 0;
 
-        virtual void SetScalar(_In_ const uint32_t count, _In_count_(Count) float * const pValues) throw() = 0;
+        virtual void SetScalar(_In_ const uint32_t count, _In_count_(count) float * const pValues) throw() = 0;
 
         virtual IShader * const GetShader(void) const throw() = 0;
 

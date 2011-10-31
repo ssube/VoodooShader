@@ -29,12 +29,12 @@ namespace VoodooShader
     (
         _In_ wchar_t * module,
         _In_ wchar_t * message,
-        _In_ ICore *core,
-        _In_ char *file,
-        _In_ char *function,
+        _In_opt_ ICore * pCore,
+        _In_ char * file,
+        _In_ char * function,
         _In_ int line
     ) :
-        m_Core(core),
+        m_Core(pCore),
         m_Module(module),
         m_Message(message),
         m_File(file),
@@ -42,9 +42,9 @@ namespace VoodooShader
         m_Line(line),
         m_FmtMsg(nullptr)
     {
-        if (core)
+        if (pCore)
         {
-            ILoggerRef logger = core->GetLogger();
+            ILoggerRef logger = pCore->GetLogger();
 
             if (logger)
             {
@@ -57,12 +57,12 @@ namespace VoodooShader
     (
         _In_ String module,
         _In_ String message,
-        _In_ ICore *core,
+        _In_opt_ ICore * pCore,
         _In_ char *file,
         _In_ char *function,
         _In_ int line
     ) :
-            m_Core(core),
+            m_Core(pCore),
             m_Module(module),
             m_Message(message),
             m_File(file),
@@ -70,9 +70,9 @@ namespace VoodooShader
             m_Line(line),
             m_FmtMsg(nullptr)
     {
-        if (core)
+        if (pCore)
         {
-            ILoggerRef logger = core->GetLogger();
+            ILoggerRef logger = pCore->GetLogger();
 
             if (logger)
             {
@@ -109,7 +109,7 @@ namespace VoodooShader
             (
                 m_FmtMsg,
                 1024,
-                "VoodooShader::Exception in module %s, file %S at %S (line %d): %s",
+                "VoodooShader::Exception in module %S, file %s at %s (line %d): %S",
                 m_Module.GetData(),
                 m_File,
                 m_Function,

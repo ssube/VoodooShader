@@ -91,7 +91,7 @@ namespace VoodooShader
 
     String VSParameter::ToString(void) const
     {
-        return String::Format(L"VSParameter(%s)", m_Name);
+        return String::Format(L"VSParameter(%s)", m_Name.GetData());
     }
 
     ICore * VSParameter::GetCore(void) const
@@ -116,13 +116,23 @@ namespace VoodooShader
 
     bool VSParameter::AttachParameter(IParameter * pParam)
     {
-        if (!m_Virtual)
+        if (!pParam)
+        {
+            return false;
+        } else if (!m_Virtual)
         {
             m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Cannot attach to a non-virtual parameter (%s to %s).", pParam->ToString().GetData(), this->ToString().GetData());
             return false;
         }
 
         cgConnectParameter(m_Param, pParam->GetCgParameter());
+
+        return true;
+    }
+
+    bool VSParameter::DetachParameter()
+    {
+        cgDisconnectParameter(m_Param);
 
         return true;
     }

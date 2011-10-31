@@ -40,12 +40,13 @@ namespace VoodooShader
         virtual String GetName() const throw();
         virtual ParameterType GetType(void) const throw();
         virtual bool IsVirtual(void) const throw();
-        virtual bool AttachParameter(_In_opt_ IParameter * const pParam) throw();
+        virtual bool AttachParameter(_In_ IParameter * const pParam) throw();
+        virtual bool DetachParameter() throw();
         virtual const uint32_t GetComponents(void) const throw();
         virtual ITexture * GetTexture(void) const throw();
         virtual void SetTexture(_In_opt_ ITexture * const pTexture) throw();
         _Ret_count_c_(16) virtual float * const GetScalar(void) throw();
-        virtual void SetScalar(const uint32_t count, _In_count_(Count) float * const pValues) throw();
+        virtual void SetScalar(const uint32_t count, _In_count_(count) float * const pValues) throw();
         virtual IShader * const GetShader(void) const throw();
 
         virtual CGparameter GetCgParameter(void) const throw();

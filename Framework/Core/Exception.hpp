@@ -45,7 +45,7 @@ namespace VoodooShader
         (
             _In_ wchar_t * Module,
             _In_ wchar_t * Message,
-            _In_ ICore * pCore,
+            _In_opt_ ICore * pCore,
             _In_ char * File,
             _In_ char * Function,
             _In_ int Line
@@ -55,7 +55,7 @@ namespace VoodooShader
         (
             _In_ String Module,
             _In_ String Message,
-            _In_ ICore * pCore,
+            _In_opt_ ICore * pCore,
             _In_ char * File,
             _In_ char * Function,
             _In_ int Line

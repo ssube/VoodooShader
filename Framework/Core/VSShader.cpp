@@ -35,7 +35,7 @@
 
 namespace VoodooShader
 {
-    VSShader::VSShader(_In_ ICore * const pCore, const String & path, const char ** ppArgs) :
+    VSShader::VSShader(_In_ ICore * const pCore, _In_ const String & path, _In_opt_ const char ** ppArgs) :
         m_Core(pCore), m_Name(path), m_DefaultTechnique(nullptr)
     {
         CGcontext context = m_Core->GetCgContext();
@@ -48,6 +48,7 @@ namespace VoodooShader
         int32_t len = m_Name.ToCharStr(0, nullptr);
         std::vector<char> buffer(len);
         path.ToCharStr(len, &buffer[0]);
+
         m_CgEffect = cgCreateEffectFromFile(context, &buffer[0], ppArgs);
 
         if (!cgIsEffect(m_CgEffect))
@@ -56,10 +57,6 @@ namespace VoodooShader
         }
         else
         {
-            int32_t len = m_Name.ToCharStr(0, nullptr);
-            std::vector<char> buffer(len);
-            m_Name.ToCharStr(len, &buffer[0]);
-
             cgSetEffectName(m_CgEffect, &buffer[0]);
         }
 
@@ -371,6 +368,8 @@ namespace VoodooShader
         // Check for a valid texture file
         TextureRegion texRegion;
         /* @todo Load texture region info from the annotations. */
+        ZeroMemory(&texRegion, sizeof(TextureRegion));
+
         ITextureRef pTex = m_Core->GetAdapter()->LoadTexture(texName, &texRegion);
 
         if (pTex)
