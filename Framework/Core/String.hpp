@@ -53,24 +53,24 @@ namespace VoodooShader
 #ifdef _VECTOR_
         String(const std::vector<char> & str)
         {
-            this->CInit(&str[0]);
+            this->CInit(0, &str[0]);
         }
 
         String(const std::vector<wchar_t> & str)
         {
-            this->WInit(&str[0]);
+            this->WInit(0, &str[0]);
         }
 #endif
 
 #ifdef _STRING_
         String(const std::string & str)
         {
-            this->CInit(str.c_str());
+            this->CInit(0, str.c_str());
         }
 
         String(const std::wstring & str)
         {
-            this->WInit(str.c_str());
+            this->WInit(0, str.c_str());
         };
 #endif
 
@@ -223,8 +223,8 @@ namespace VoodooShader
         static const uint32_t Npos = (uint32_t)-1;
 
     private:
-        void CInit(const char * str);
-        void WInit(const wchar_t * str);
+        void CInit(const uint32_t size, const char * str);
+        void WInit(const uint32_t size, const wchar_t * str);
 
         StringImpl * m_Impl;
     };

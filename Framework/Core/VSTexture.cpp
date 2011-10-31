@@ -55,6 +55,11 @@ namespace VoodooShader
         return m_Core;
     }
 
+    String VSTexture::GetName() const
+    {
+        return m_Name;
+    }
+
     void * VSTexture::GetData(void) const
     {
         return m_Data;

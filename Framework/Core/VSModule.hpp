@@ -54,9 +54,9 @@ namespace VoodooShader
         public IModule
     {
     public:
-        static VSModule * Load(_In_ String path);
+        static VSModule * Load(_In_ ICore * pCore, _In_ String path);
 
-        VSModule(_In_ HMODULE hmodule);
+        VSModule(_In_ ICore * pCore, _In_ HMODULE hmodule);
 
         virtual ~VSModule(void);
         
@@ -72,6 +72,8 @@ namespace VoodooShader
 
     private:
         mutable uint32_t m_Refs;
+        ICore * m_Core;
+
         HMODULE m_Handle;
         Functions::VersionFunc m_ModuleVersion;
         Functions::CountFunc m_ClassCount;

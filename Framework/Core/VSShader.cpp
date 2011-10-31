@@ -106,6 +106,11 @@ namespace VoodooShader
         return m_Core;
     }
 
+    String VSShader::GetName() const
+    {
+        return m_Name;
+    }
+
     const uint32_t VSShader::GetTechniqueCount(void) const
     {
         return m_Techniques.size();

@@ -79,6 +79,11 @@ namespace VoodooShader
         return m_Core;
     }
 
+    String VSTechnique::GetName() const
+    {
+        return m_Name;
+    }
+
     IPass * VSTechnique::GetPass(const uint32_t index) const
     {
         if (index < m_Passes.size())

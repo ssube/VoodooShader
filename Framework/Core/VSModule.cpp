@@ -122,7 +122,7 @@ namespace VoodooShader
         }
 
         // Create struct and load functions
-        IModule* rawmodule = VSModule::Load(filename);
+        IModule* rawmodule = VSModule::Load(m_Core, filename);
 
         if (rawmodule == nullptr)
         {
@@ -275,7 +275,7 @@ namespace VoodooShader
         }
     }
 
-    VSModule * VSModule::Load(_In_ String path)
+    VSModule * VSModule::Load(_In_ ICore * pCore, _In_ String path)
     {
         // Load the module
         HMODULE hmodule = LoadLibraryEx(path.GetData(), nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
@@ -283,7 +283,7 @@ namespace VoodooShader
         // First set of error checks
         if (hmodule != nullptr)
         {
-            VSModule * module = new VSModule(hmodule);
+            VSModule * module = new VSModule(pCore, hmodule);
 
             module->m_ModuleVersion = reinterpret_cast<Functions::VersionFunc>(GetProcAddress(hmodule, "ModuleVersion"));
             module->m_ClassCount = reinterpret_cast<Functions::CountFunc>(GetProcAddress(hmodule, "ClassCount"));
@@ -308,8 +308,8 @@ namespace VoodooShader
         }
     }
 
-    VSModule::VSModule(HMODULE hmodule) : 
-        m_Handle(hmodule)
+    VSModule::VSModule(_In_ ICore * pCore, HMODULE hmodule) : 
+        m_Core(pCore), m_Handle(hmodule)
     { }
 
     VSModule::~VSModule(void)
@@ -319,6 +319,31 @@ namespace VoodooShader
             FreeLibrary(m_Handle);
             m_Handle = nullptr;
         }
+    }
+
+    uint32_t VSModule::AddRef() const
+    {
+        return ++m_Refs;
+    }
+
+    uint32_t VSModule::Release() const
+    {
+        uint32_t count = --m_Refs;
+        if (count == 0)
+        {
+            delete this;
+        }
+        return count;
+    }
+
+    String VSModule::ToString() const
+    {
+        return L"VSModule";
+    }
+
+    ICore * VSModule::GetCore() const
+    {
+        return m_Core;
     }
 
     const Version * VSModule::ModuleVersion(void) const

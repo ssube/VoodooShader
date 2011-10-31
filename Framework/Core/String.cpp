@@ -32,6 +32,7 @@ namespace VoodooShader
         StringImpl(const uint32_t size, const wchar_t ch) : m_Str(size, ch) {};
         StringImpl(const wchar_t * str) : m_Str(str) {};
         StringImpl(const uint32_t size, const wchar_t * str) : m_Str(str, size) {};
+        StringImpl(const std::wstring & str) : m_Str(str) {};
 
     public:
         std::wstring m_Str;
@@ -40,6 +41,30 @@ namespace VoodooShader
     String::String()
     {
         m_Impl = new StringImpl();
+    }
+
+    String::String(const char ch)
+    {
+        wchar_t wch = 0;
+        mbtowc(&wch, &ch, 1);
+        m_Impl = new StringImpl(1, wch);
+    }
+
+    String::String(const char * str)
+    {
+        this->CInit(0, str);
+    }
+
+    String::String(const uint32_t size, const char ch)
+    {
+        wchar_t wch = 0;
+        mbtowc(&wch, &ch, 1);
+        m_Impl = new StringImpl(size, wch);
+    }
+
+    String::String(const uint32_t size, const char * str)
+    {
+        this->CInit(size, str);
     }
 
     String::String(const wchar_t ch)
@@ -62,6 +87,11 @@ namespace VoodooShader
         m_Impl = new StringImpl(size, str);
     }
 
+    String::String(const String & other)
+    {
+        m_Impl = new StringImpl(other.m_Impl->m_Str);
+    }
+
     String::~String()
     {
         delete m_Impl;
@@ -73,18 +103,30 @@ namespace VoodooShader
         return WideCharToMultiByte(CP_UTF8, NULL, m_Impl->m_Str.c_str(), -1, pBuffer, size, NULL, NULL);
     }
 
-    void String::CInit(const char * str)
+    void String::CInit(const uint32_t size, const char * str)
     {
         int len = MultiByteToWideChar(CP_UTF8, NULL, str, -1, NULL, 0);
         std::vector<wchar_t> wstr(len);
         MultiByteToWideChar(CP_UTF8, NULL, str, -1, &wstr[0], len);
-        m_Impl = new StringImpl(&wstr[0]);
+
+        if (m_Impl) delete m_Impl;
+        if (size == 0)
+        {
+            m_Impl = new StringImpl(&wstr[0]);
+        } else {
+            m_Impl = new StringImpl(size, &wstr[0]);
+        }
     }
 
-    void String::WInit(const wchar_t * str)
+    void String::WInit(const uint32_t size, const wchar_t * str)
     {
         if (m_Impl) delete m_Impl;
-        m_Impl = new StringImpl(str);
+        if (size == 0)
+        {
+            m_Impl = new StringImpl(str);
+        } else {
+            m_Impl = new StringImpl(size, str);
+        }
     }
 
     String & String::Append(const wchar_t ch)

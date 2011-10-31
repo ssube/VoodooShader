@@ -99,6 +99,11 @@ namespace VoodooShader
         return m_Core;
     }
 
+    String VSParameter::GetName() const
+    {
+        return m_Name;
+    }
+
     ParameterType VSParameter::GetType(void) const
     {
         return m_Type;

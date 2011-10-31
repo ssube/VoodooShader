@@ -85,6 +85,11 @@ namespace VoodooShader
         return m_Core;
     }
 
+    String VSPass::GetName() const
+    {
+        return m_Name;
+    }
+
     ITexture * VSPass::GetTarget(void) const
     {
         return m_Target.get();

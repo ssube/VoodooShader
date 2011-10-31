@@ -43,28 +43,28 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual uint32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual uint32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.
          * 
          * @return The name.
          */
-        virtual String ToString(void) const throw();
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw();
+        virtual ICore * GetCore(void) const throw() = 0;
 
         /**
          * Loads a set of modules from a given path. 
@@ -74,7 +74,7 @@ namespace VoodooShader
          * 
          * @note Only loads files whose filename matches the filter (standard regex match).
          */
-        virtual bool LoadPath(_In_ const String & path, _In_ const String & filter);
+        virtual bool LoadPath(_In_ const String & path, _In_ const String & filter) = 0;
 
         /**
          * Loads a single module, using an absolute or relative filename. 
@@ -84,14 +84,14 @@ namespace VoodooShader
          * @note When the module is loaded, if an absolute path is provided, the module's directory is used in the search
          *     path for required DLLs. 
          */
-        virtual bool LoadFile(_In_ const IFile * pFile);
+        virtual bool LoadFile(_In_ const IFile * pFile) = 0;
 
-        virtual bool LoadFile(_In_ const String & filename);
+        virtual bool LoadFile(_In_ const String & filename) = 0;
 
         /**
          * Tests to see if a class exists in the list provided by all loaded modules. 
          */
-        virtual bool ClassExists(_In_ const String & name) const;
+        virtual bool ClassExists(_In_ const String & name) const = 0;
 
         /**
          * Create a new instance of the given class. This object will be created in a dynamic module and a pointer given.
@@ -99,7 +99,7 @@ namespace VoodooShader
          * @param name The class name to create. 
          * @return New object or nullptr if the class wasn't found or couldn't be created.
          */
-        _Check_return_ virtual IObject * CreateObject(_In_ const String & name) const;
+        _Check_return_ virtual IObject * CreateObject(_In_ const String & name) const = 0;
 
         /**
          * Finds the address of a function in a module. The module must be loaded into the process and export the symbol, 
@@ -110,7 +110,7 @@ namespace VoodooShader
          * @param name The function name to find.
          * @return The function's address if found, nullptr otherwise.
          */
-        _Check_return_ virtual void * FindFunction(_In_ const String & module, _In_ const String & name) const;
+        _Check_return_ virtual void * FindFunction(_In_ const String & module, _In_ const String & name) const = 0;
     };
 
     /**
@@ -127,41 +127,41 @@ namespace VoodooShader
          * 
          * @return The new reference count.
          */
-        virtual uint32_t AddRef(void) const throw();
+        virtual uint32_t AddRef(void) const throw() = 0;
 
         /**
          * Release a reference from this object.
          * 
          * @return The new reference count.
          */
-        virtual uint32_t Release(void) const throw();
+        virtual uint32_t Release(void) const throw() = 0;
 
         /**
          * Get the name of this object.
          * 
          * @return The name.
          */
-        virtual String ToString(void) const throw();
+        virtual String ToString(void) const throw() = 0;
 
         /** 
          * Get the core this object was associated with. 
          * 
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw();
+        virtual ICore * GetCore(void) const throw() = 0;
 
         /**
          * Get the current version of this module. @return The version, including name and
          * debug attribute.
          */
-        virtual const Version * ModuleVersion(void) const throw();
+        virtual const Version * ModuleVersion(void) const throw() = 0;
 
         /** Get the class count from this module. */
-        virtual const uint32_t ClassCount(void) const;
+        virtual const uint32_t ClassCount(void) const = 0;
 
-        virtual const char * ClassInfo(_In_ const uint32_t number) const;
+        virtual const char * ClassInfo(_In_ const uint32_t number) const = 0;
 
-        virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore);
+        virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore) = 0;
     };
     /* @} */
 }
