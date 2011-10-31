@@ -52,22 +52,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath);d:\Code\pugixml-1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
-    <LibraryPath>$(LibraryPath);d:\Code\pugixml-1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
+    <IncludePath>$(IncludePath);$(SolutionDir)\dependencies\pugixml_1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)\dependencies\pugixml_1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib\unicode;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <IncludePath>$(IncludePath);d:\Code\pugixml-1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
-    <LibraryPath>$(LibraryPath);d:\Code\pugixml-1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
+    <IncludePath>$(IncludePath);$(SolutionDir)\dependencies\pugixml_1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)\dependencies\pugixml_1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib\unicode;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath);d:\Code\pugixml-1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
-    <LibraryPath>$(LibraryPath);d:\Code\pugixml-1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
+    <IncludePath>$(IncludePath);$(SolutionDir)\dependencies\pugixml_1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)\dependencies\pugixml_1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib\unicode;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

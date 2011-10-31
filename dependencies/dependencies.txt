@@ -11,3 +11,9 @@ http://www.microsoft.com, respectively.
 The dependencies are in a ZIP archive and must be extracted before use (having them loose greatly 
 increases the repo size). Win32 builds are included (DLL and LIB files) and the projects are set up 
 to use this dir for most dependencies.
+
+Included are:
+ - DevIL 1.7.8 (32-bit)
+ - EasyHook 2.6
+ - Glew 1.5.7
+ - pugixml 1.0 (32-bit)
