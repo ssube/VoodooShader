@@ -119,7 +119,7 @@ namespace VoodooShader
          * 
          * @note This will validate that the technique belongs to this shader.
          */
-        virtual bool SetDefaultTechnique(_In_ const ITechnique * const Technique) throw() = 0;
+        virtual bool SetDefaultTechnique(_In_ ITechnique * const Technique) throw() = 0;
 
         /**
          * Retrieve the number of effect-level parameters in this shader. These hold a single value for all passes. 

@@ -116,6 +116,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CallingConvention>
       </CallingConvention>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);cg.lib;pugixml_d.lib;</AdditionalDependencies>
@@ -243,7 +244,6 @@
     <ClCompile Include="String.cpp" />
     <ClCompile Include="VSTechnique.cpp" />
     <ClCompile Include="VSTexture.cpp" />
-    <ClCompile Include="Xml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Converter.hpp" />
@@ -283,7 +283,6 @@
     <ClInclude Include="VSShader.hpp" />
     <ClInclude Include="VSTechnique.hpp" />
     <ClInclude Include="VSTexture.hpp" />
-    <ClInclude Include="Xml.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Core.rc" />

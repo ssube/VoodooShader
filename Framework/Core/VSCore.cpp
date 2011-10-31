@@ -20,15 +20,11 @@
 
 #include "VSCore.hpp"
 
+#include <boost/lexical_cast.hpp>
+
 #include "Converter.hpp"
 #include "Exception.hpp"
 #include "Version.hpp"
-#include "Xml.hpp"
-
-#include "VSModule.hpp"
-#include "VSParameter.hpp"
-#include "VSParser.hpp"
-#include "VSShader.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
@@ -37,14 +33,19 @@
 #include "ILogger.hpp"
 #include "ITexture.hpp"
 
+#include "VSModule.hpp"
+#include "VSParameter.hpp"
+#include "VSParser.hpp"
+#include "VSShader.hpp"
+
 namespace VoodooShader
 {
-    void Voodoo_CgErrorHandler_Func(CGcontext Context, CGerror Error, void * pCore)
+    void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void * pCore)
     {
         if (pCore)
         {
             VSCore * pSrcCore = static_cast<VSCore *>(pCore);
-            pSrcCore->CgErrorHandler(Context, Error);
+            pSrcCore->CgErrorHandler(pContext, error);
         }
     }
 
@@ -106,24 +107,24 @@ namespace VoodooShader
 
         try
         {
-            m_ConfigFile = new Xml::Document();
+            m_ConfigFile = new pugi::xml_document();
 
             // Try loading the config file from each major location
-            String ConfigPath = m_Parser->Parse(L"$(runroot)$(config)");
-            bool result = m_ConfigFile->LoadFile(ConfigPath);
+            String configPath = m_Parser->Parse(L"$(runroot)$(config)");
+            bool result = m_ConfigFile->load_file(configPath.GetData());
 
             if (!result)
             {
-                ConfigPath = m_Parser->Parse(L"$(localroot)$(config)");
-                result = m_ConfigFile->LoadFile(ConfigPath);
+                configPath = m_Parser->Parse(L"$(localroot)$(config)");
+                result = m_ConfigFile->load_file(configPath.GetData());
                 if (!result)
                 {
-                    ConfigPath = m_Parser->Parse(L"$(globalroot)$(config)");
-                    result = m_ConfigFile->LoadFile(ConfigPath);
+                    configPath = m_Parser->Parse(L"$(globalroot)$(config)");
+                    result = m_ConfigFile->load_file(configPath.GetData());
                     if (!result)
                     {
-                        ConfigPath = m_Parser->Parse(L"$(config)");
-                        result = m_ConfigFile->LoadFile(ConfigPath);
+                        configPath = m_Parser->Parse(L"$(config)");
+                        result = m_ConfigFile->load_file(configPath.GetData());
                         if (!result)
                         {
                             Throw(VOODOO_CORE_NAME, L"Unable to find or parse config file.", nullptr);
@@ -133,27 +134,27 @@ namespace VoodooShader
             }
 
             // Start setting things up
-            Xml::Node configRoot = m_ConfigFile->GetRoot();
-            Xml::Node coreNode = configRoot.GetSingleNode(L"/VoodooConfig/ICore");
+            pugi::xml_node configRoot = static_cast<pugi::xml_node>(*m_ConfigFile);
+            pugi::xml_node coreNode = configRoot.select_single_node(L"/VoodooConfig/ICore").node();
             if (!coreNode)
             {
                 Throw(VOODOO_CORE_NAME, L"Could not find ICore node.", nullptr);
             }
 
             // Create query for node text, used multiple times
-            XPath::Query xpq_getName(L"./@name");
-            XPath::Query xpq_getText(L"./text()");
+            pugi::xpath_query xpq_getName(L"./@name");
+            pugi::xpath_query xpq_getText(L"./text()");
 
             // Load variables
             {
-                XPath::Query xpq_getVariables(L"/VoodooConfig/Variables/Variable");
-                XPath::NodeSet nodes = xpq_getVariables.EvaluateNodeSet(configRoot);
-                XPath::NodeSetIter iter = nodes.begin();
+                pugi::xpath_query xpq_getVariables(L"/VoodooConfig/Variables/Variable");
+                pugi::xpath_node_set nodes = xpq_getVariables.evaluate_node_set(configRoot);
+                pugi::xpath_node_set::const_iterator iter = nodes.begin();
 
                 while (iter != nodes.end())
                 {
-                    String name = xpq_getName.evaluate_string(*iter);
-                    String value = xpq_getText.evaluate_string(*iter);
+                    String name = xpq_getName.evaluate_string(*iter).c_str();
+                    String value = xpq_getText.evaluate_string(*iter).c_str();
 
                     m_Parser->Add(name, value);
 
@@ -163,15 +164,15 @@ namespace VoodooShader
 
             // Load plugins
             {
-                xpath_query xpq_getPluginPaths(L"/VoodooConfig/Plugins/Path");
-                xpath_query xpq_getFilter(L"./@filter");
-                xpath_node_set nodes = xpq_getPluginPaths.EvaluateNodeSet(*config);
-                xpath_node_set::const_iterator iter = nodes.begin();
+                pugi::xpath_query xpq_getPluginPaths(L"/VoodooConfig/Plugins/Path");
+                pugi::xpath_query xpq_getFilter(L"./@filter");
+                pugi::xpath_node_set nodes = xpq_getPluginPaths.evaluate_node_set(configRoot);
+                pugi::xpath_node_set::const_iterator iter = nodes.begin();
 
                 while (iter != nodes.end())
                 {
-                    String filter = m_Parser->Parse(xpq_getFilter.evaluate_string(*iter));
-                    String path = m_Parser->Parse(xpq_getText.evaluate_string(*iter));
+                    String filter = m_Parser->Parse(xpq_getFilter.evaluate_string(*iter).c_str());
+                    String path = m_Parser->Parse(xpq_getText.evaluate_string(*iter).c_str());
 
                     m_ModuleManager->LoadPath(path, filter);
 
@@ -180,13 +181,13 @@ namespace VoodooShader
             }
 
             {
-                xpath_query xpq_getPluginFiles(L"/VoodooConfig/Plugins/File");
-                xpath_node_set nodes = xpq_getPluginFiles.evaluate_node_set(*config);
-                xpath_node_set::const_iterator iter = nodes.begin();
+                pugi::xpath_query xpq_getPluginFiles(L"/VoodooConfig/Plugins/File");
+                pugi::xpath_node_set nodes = xpq_getPluginFiles.evaluate_node_set(configRoot);
+                pugi::xpath_node_set::const_iterator iter = nodes.begin();
 
                 while (iter != nodes.end())
                 {
-                    String file = m_Parser->Parse(xpq_getText.evaluate_string(*iter));
+                    String file = m_Parser->Parse(xpq_getText.evaluate_string(*iter).c_str());
 
                     m_ModuleManager->LoadFile(file);
 
@@ -195,21 +196,22 @@ namespace VoodooShader
             }
 
             // Lookup classes
-            xpath_query logQuery(L"/VoodooConfig/ICore/Class/Logger/text()");
-            xpath_query fsQuery(L"/VoodooConfig/ICore/Class/FileSystem/text()");
-            xpath_query hookQuery(L"/VoodooConfig/ICore/Class/HookManager/text()");
-            xpath_query adpQuery(L"/VoodooConfig/ICore/Class/Adapter/text()");
-            xpath_query logfQuery(L"/VoodooConfig/ICore/Class/Logger/@file");
-            xpath_query loglQuery(L"/VoodooConfig/ICore/Class/Logger/@level");
-            String logClass = m_Parser->Parse(logQuery.evaluate_string(*config));
-            String fsClass = m_Parser->Parse(fsQuery.evaluate_string(*config));
-            String hookClass = m_Parser->Parse(hookQuery.evaluate_string(*config));
-            String adpClass = m_Parser->Parse(adpQuery.evaluate_string(*config));
-            String logFile = m_Parser->Parse(logfQuery.evaluate_string(*config));
-            LogLevel logLevel = (LogLevel) (int) loglQuery.evaluate_number(*config);
+            pugi::xpath_query logQuery(L"/VoodooConfig/ICore/Class/Logger/text()");
+            pugi::xpath_query fsQuery(L"/VoodooConfig/ICore/Class/FileSystem/text()");
+            pugi::xpath_query hookQuery(L"/VoodooConfig/ICore/Class/HookManager/text()");
+            pugi::xpath_query adpQuery(L"/VoodooConfig/ICore/Class/Adapter/text()");
+            pugi::xpath_query logfQuery(L"/VoodooConfig/ICore/Class/Logger/@file");
+            pugi::xpath_query loglQuery(L"/VoodooConfig/ICore/Class/Logger/@level");
+            String logClass = m_Parser->Parse(logQuery.evaluate_string(configRoot).c_str());
+            String fsClass = m_Parser->Parse(fsQuery.evaluate_string(configRoot).c_str());
+            String hookClass = m_Parser->Parse(hookQuery.evaluate_string(configRoot).c_str());
+            String adpClass = m_Parser->Parse(adpQuery.evaluate_string(configRoot).c_str());
+            String logFile = m_Parser->Parse(logfQuery.evaluate_string(configRoot).c_str());
+
+            LogLevel logLevel = (LogLevel)boost::lexical_cast<int32_t>(loglQuery.evaluate_string(configRoot));
 
             // Make sure a logger was loaded
-            m_Logger = m_ModuleManager->CreateClass<ILogger>(logClass);
+            m_Logger = dynamic_cast<ILogger*>(m_ModuleManager->CreateObject(logClass));
             if (m_Logger.get() == nullptr)
             {
                 Throw(VOODOO_CORE_NAME, L"Unable to create Logger object (class not found).", nullptr);
@@ -226,24 +228,24 @@ namespace VoodooShader
             Version vsver = VOODOO_META_VERSION_STRUCT(VC);
             Version cgver = VOODOO_META_VERSION_STRUCT(CG);
 
-            m_Logger->LogModule(vfver);
-            m_Logger->LogModule(vsver);
-            m_Logger->LogModule(cgver);
+            m_Logger->LogModule(&vfver);
+            m_Logger->LogModule(&vsver);
+            m_Logger->LogModule(&cgver);
 
             // Load less vital classes
-            m_FileSystem = m_ModuleManager->CreateClass<IFileSystem>(fsClass);
+            m_FileSystem = dynamic_cast<IFileSystem*>(m_ModuleManager->CreateObject(fsClass));
             if (!m_FileSystem)
             {
                 Throw(VOODOO_CORE_NAME, L"Unable to create FileSystem object.", nullptr);
             }
 
-            m_HookManager = m_ModuleManager->CreateClass<IHookManager>(hookClass);
+            m_HookManager = dynamic_cast<IHookManager*>(m_ModuleManager->CreateObject(hookClass));
             if (!m_HookManager)
             {
                 Throw(VOODOO_CORE_NAME, L"Unable to create HookManager object.", nullptr);
             }
 
-            m_Adapter = m_ModuleManager->CreateClass<IAdapter>(adpClass);
+            m_Adapter = dynamic_cast<IAdapter*>(m_ModuleManager->CreateObject(adpClass));
             if (!m_Adapter)
             {
                 Throw(VOODOO_CORE_NAME, L"Unable to create Adapter object.", nullptr);
@@ -370,7 +372,7 @@ namespace VoodooShader
         }
     }
 
-    IShader * VSCore::CreateShader(_In_ const IFile * pFile, _In_opt_ const char **ppArgs) const
+    IShader * VSCore::CreateShader(_In_ const IFile * pFile, _In_opt_ const char **ppArgs)
     {
         if (!pFile)
         {
@@ -386,7 +388,7 @@ namespace VoodooShader
         return shader.get();
     }
 
-    IParameter* VSCore::CreateParameter(const String & name, ParameterType type)
+    IParameter * VSCore::CreateParameter(const String & name, const ParameterType type)
     {
         ParameterMap::iterator paramEntry = m_Parameters.find(name);
 
@@ -434,7 +436,7 @@ namespace VoodooShader
         }
     }
 
-    IParameter* VSCore::GetParameter(const String & name, ParameterType type) const
+    IParameter* VSCore::GetParameter(const String & name, const ParameterType type) const
     {
         ParameterMap::const_iterator parameter = m_Parameters.find(name);
 
@@ -533,7 +535,7 @@ namespace VoodooShader
         }
     }
 
-    void VSCore::SetStageTexture(_In_ TextureStage Stage, _In_ ITexture * const pTexture)
+    void VSCore::SetStageTexture(_In_ const TextureStage Stage, _In_ ITexture * const pTexture)
     {
         switch (Stage)
         {
@@ -546,7 +548,7 @@ namespace VoodooShader
         }
     }
 
-    void VSCore::CgErrorHandler(CGcontext context, int error)
+    void VSCore::CgErrorHandler(CGcontext context, int error) const 
     {
         const char *errorString = error ? cgGetErrorString((CGerror) error) : nullptr;
 

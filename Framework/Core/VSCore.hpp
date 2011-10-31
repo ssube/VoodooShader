@@ -55,18 +55,18 @@ namespace VoodooShader
         virtual IFileSystem * GetFileSystem(void) const;
         virtual IAdapter * GetAdapter(void) const;
         virtual ILogger * GetLogger(void) const;
-        virtual Xml::Document * GetConfig(void) const;
+        virtual XmlDocument GetConfig(void) const;
 
-        virtual IShader * CreateShader(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs) const;
-        virtual IParameter * CreateParameter(_In_ const String & name, _In_ ParameterType type);
+        virtual IShader * CreateShader(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs);
+        virtual IParameter * CreateParameter(_In_ const String & name, _In_ const ParameterType type);
         virtual ITexture * CreateTexture(_In_ const String & name, _In_ const TextureDesc * const pDesc);
-        virtual IParameter * GetParameter(_In_ const String & name, _In_ ParameterType type) const;
+        virtual IParameter * GetParameter(_In_ const String & name, _In_ const ParameterType type) const;
         virtual ITexture * GetTexture(_In_ const String & name) const;
         virtual bool RemoveParameter(_In_ const String & name);
         virtual bool RemoveTexture(_In_ const String & name);
 
-        virtual ITexture * GetStageTexture(_In_ TextureStage stage) const;
-        virtual void SetStageTexture(_In_ TextureStage stage, _In_ const ITexture * const pTexture);
+        virtual ITexture * GetStageTexture(_In_ const TextureStage stage) const;
+        virtual void SetStageTexture(_In_ const TextureStage stage, _In_ ITexture * const pTexture);
 
         _Check_return_ virtual CGcontext GetCgContext(void) const;
         virtual bool SetCgContext(_In_opt_ CGcontext const pContext);
@@ -78,7 +78,7 @@ namespace VoodooShader
         mutable uint32_t m_Refs;
 
         /** Config file. */
-        Xml::Document * m_ConfigFile;
+        XmlDocument m_ConfigFile;
 
         /** Cg context used by this pCore. */
         CGcontext m_CgContext;

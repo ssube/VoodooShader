@@ -110,28 +110,25 @@ namespace VoodooShader
 
         return true;
     }
-
-    bool VSModuleManager::LoadFile(_In_ const IFile * pFile)
+    
+    bool VSModuleManager::LoadFile(_In_ const String & filename)
     {
         ILoggerRef logger = m_Core->GetLogger();
 
-        // Build the full path
-        String path = pFile->GetPath();
-
         // Check for already loaded
-        if (m_Modules.find(path) != m_Modules.end())
+        if (m_Modules.find(filename) != m_Modules.end())
         {
             return true;
         }
 
         // Create struct and load functions
-        IModule* rawmodule = VSModule::Load(path);
+        IModule* rawmodule = VSModule::Load(filename);
 
         if (rawmodule == nullptr)
         {
             if (logger.get())
             {
-                logger->Log(LL_Error, VOODOO_CORE_NAME, L"Unable to load module %s.", path.GetData());
+                logger->Log(LL_Error, VOODOO_CORE_NAME, L"Unable to load module %s.", filename.GetData());
             }
 
             return false;
@@ -139,7 +136,7 @@ namespace VoodooShader
 
         IModule* module(rawmodule);
 
-        m_Modules[path] = module;
+        m_Modules[filename] = module;
 
         // Register classes from module
         const Version * moduleversion = rawmodule->ModuleVersion();
@@ -173,6 +170,17 @@ namespace VoodooShader
         }
 
         return true;
+    }
+
+
+    bool VSModuleManager::LoadFile(_In_ const IFile * pFile)
+    {
+        if (pFile)
+        {
+            return this->LoadFile(pFile->GetPath());
+        } else {
+            return nullptr;
+        }
     }
 
     void * VSModuleManager::FindFunction(_In_ const String & module, _In_ const String & name) const

@@ -113,7 +113,7 @@ namespace VoodooShader
          * 
          * @return A reference to the config.
          */
-        virtual Xml::Document * GetConfig(void) const throw() = 0;
+        virtual XmlDocument GetConfig(void) const throw() = 0;
 
         /**
          * Retrieve the Cg context associated with this ICore. 
@@ -141,7 +141,7 @@ namespace VoodooShader
          * @param ppArgs Optional arguments providing compiler directives, usually shader model specific 
          *     definitions or preprocessor defines.
          */
-        virtual IShader * CreateShader(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs) const throw() = 0;
+        virtual IShader * CreateShader(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs) throw() = 0;
 
         /**
          * Creates a global virtual parameter. This parameter exists in the Cg runtime, but is not a part of
@@ -158,7 +158,7 @@ namespace VoodooShader
          * @note This function is the only way to create global parameters. You can then attach effect 
          *     parameters to the global and any value changes will propagate down.
          */
-        virtual IParameter * CreateParameter(_In_ const String & name, _In_ ParameterType type) throw() = 0;
+        virtual IParameter * CreateParameter(_In_ const String & name, _In_ const ParameterType type) throw() = 0;
 
         /**
          * Registers a texture with this ICore. 
@@ -184,7 +184,7 @@ namespace VoodooShader
          * @note If a parameter with a matching name is found, the type will be checked. If @arg Type is
          *     PT_Unknown, any type parameter will be returned (only the name will be tested). 
          */
-        virtual IParameter * GetParameter(_In_ const String & name, _In_ ParameterType type) const throw() = 0;
+        virtual IParameter * GetParameter(_In_ const String & name, _In_ const ParameterType type) const throw() = 0;
 
         /**
          * Retrieves a texture from the ICore's texture map by name. 
@@ -221,7 +221,7 @@ namespace VoodooShader
          * 
          * @sa To bind a texture to one of the special functions, use ICore::SetStageTexture().
          */
-        virtual ITexture * GetStageTexture(_In_ TextureStage stage) const throw() = 0;
+        virtual ITexture * GetStageTexture(_In_ const TextureStage stage) const throw() = 0;
 
         /**
          * Binds a texture to a specialized stage for the shader linker. 
@@ -229,7 +229,7 @@ namespace VoodooShader
          * @param Stage The texture stage to set.
          * @param pTexture The texture to bind. 
          */
-        virtual void SetStageTexture(_In_ TextureStage stage, _In_ const ITexture * const pTexture) throw() = 0;
+        virtual void SetStageTexture(_In_ const TextureStage stage, _In_ ITexture * const pTexture) throw() = 0;
     };
     /**
      * @}

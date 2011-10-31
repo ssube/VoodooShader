@@ -38,6 +38,7 @@ namespace VoodooShader
 
         virtual bool LoadPath(_In_ const String & path, _In_ const String & filter);
         virtual bool LoadFile(_In_ const IFile * pFile);
+        virtual bool LoadFile(_In_ const String & filename);
         virtual bool ClassExists(_In_ const String & name) const;
         _Check_return_ virtual IObject * CreateObject(_In_ const String & name) const;
         _Check_return_ virtual void * FindFunction(_In_ const String & module, _In_ const String & name) const;

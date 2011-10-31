@@ -27,8 +27,8 @@ namespace VoodooShader
         public IParameter
     {
     public:
-        VSParameter(_In_opt_ ICore * const pCore, _In_ String name, _In_ const ParameterType type);
-        VSParameter(_In_opt_ IShader * const pShader, _In_ const CGparameter pParam);
+        VSParameter(_In_ ICore * const pCore, _In_ const String & name, _In_ const ParameterType type);
+        VSParameter(_In_ IShader * const pShader, _In_ const CGparameter pParam);
 
         virtual ~VSParameter(void);
 

@@ -44,11 +44,13 @@
 #   define VOODOO_META_STRING(arg)     VOODOO_META_STRING_STR(arg)
 #endif
 
-#include <functional>
-#include <list>
-#include <map>
-#include <vector>
 #include <cstdint>
+
+#ifndef VOODOO_NO_COLLECTIONS
+#   include <list>
+#   include <map>
+#   include <vector>
+#endif
 
 #ifndef VOODOO_NO_BOOST
 #   include <boost/intrusive_ptr.hpp>
@@ -92,6 +94,10 @@
     typedef void *CGhandle;
 #endif
 
+#ifndef VOODOO_NO_PUGIXML
+#   include "pugixml.hpp"
+#endif   
+
 namespace VoodooShader
 {
     /* Custom basic types */
@@ -99,20 +105,11 @@ namespace VoodooShader
     class Regex;
     class String;
 
-    namespace Xml
-    {
-        class Document;
-        class Node;
-        class Attribute;
-
-        namespace XPath
-        {
-            class Node;
-            class NodeSet;
-            class NodeSetIter;
-            class Query;
-        }
-    }
+#ifndef VOODOO_NO_PUGIXML
+    typedef pugi::xml_document * XmlDocument;
+#else
+    typedef void * XmlDocument;
+#endif 
 
     /* Basic structs */
     struct InitParams;
@@ -193,13 +190,15 @@ namespace VoodooShader
     typedef std::map<ITextureRef, IShaderRef> MaterialMap;
 #endif
 
+#pragma warning(push)
+#pragma warning(disable: 4480)
     /**
      * Texture formats for use by @ref VoodooShader::Texture "Textures", describing the layout and size of the texture data. 
      * These may not be implemented by the underlying graphics API exactly as they are indicated here, but the available 
      * components and sizes are guaranteed to be equal to or greater than the indicated values. Further information on 
      * texture formats and depth may be found on the @ref Textures "texture formats page".
      */
-    enum TextureFormat
+    enum TextureFormat : int32_t
     {
         TF_Unknown  = 0x0,      /* !< Unknown texture format */
 
@@ -223,7 +222,7 @@ namespace VoodooShader
      * Parameter types for use by @ref VoodooShader::Parameter "Parameters." These
      * types are available across hardware, exposing most common variables
      */
-    enum ParameterType
+    enum ParameterType : int32_t
     {
         PT_Unknown      = 0x00,     /* !< Unknown parameter type */
         // floats
@@ -257,7 +256,7 @@ namespace VoodooShader
         PT_Max          = 0x7FFFFFFF
     };
 
-    enum ParameterCategory
+    enum ParameterCategory : int32_t
     {
         PC_Unknown      = 0x00,     /* !< Unknown parameter category */
         PC_Float        = 0x01,     /* !< float vector parameter (may have 1 to 4 components) */
@@ -266,7 +265,7 @@ namespace VoodooShader
         PC_Max          = 0x7FFFFFFF
     };
 
-    enum ProgramStage
+    enum ProgramStage : int32_t
     {
         PS_Unknown      = 0x00,     /* !< Unknown program stage */
         PS_Vertex       = 0x01,     /* !< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
@@ -277,7 +276,7 @@ namespace VoodooShader
         PS_Max          = 0x7FFFFFFF
     };
 
-    enum TextureStage
+    enum TextureStage : int32_t
     {
         TS_Unknown      = 0x00,     /* !< Unknown texture stage */
         TS_Shader       = 0x01,     /* !< Shader target texture */
@@ -285,7 +284,7 @@ namespace VoodooShader
         TS_Max          = 0x7FFFFFFF
     };
 
-    enum FileOpenMode
+    enum FileOpenMode : int32_t
     {
         FM_Unknown      = 0x00,
         FM_Read         = 0x01,
@@ -309,7 +308,7 @@ namespace VoodooShader
      * }
      * @endcode
      */
-    enum LogLevel
+    enum LogLevel : int32_t
     {
         LL_Unknown      = 0x00,
         LL_Debug        = 0x01,
@@ -345,7 +344,7 @@ namespace VoodooShader
         LL_Max          = 0x7FFFFFFF
     };
 
-    enum LogFlags 
+    enum LogFlags  : int32_t
     { 
         LF_Unknown      = 0x00, 
         LF_Flush        = 0x01, 
@@ -355,7 +354,7 @@ namespace VoodooShader
     /**
      * String parsing flags. These modify the behavior of the string parser. 
      */
-    enum ParseFlags
+    enum ParseFlags : int32_t
     {
         PF_None         = 0x0000,
         PF_SingleSlash  = 0x0001,
@@ -367,13 +366,14 @@ namespace VoodooShader
         PF_Max          = 0x7FFFFFFF
     };
 
-    enum VariableType 
+    enum VariableType  : int32_t
     { 
         VT_Normal       = 0x00, 
         VT_State        = 0x01, 
         VT_System       = 0x10, 
         VT_Max          = 0x7FFFFFFF 
     };
+#pragma warning(pop)
     /**
      * @}
      */

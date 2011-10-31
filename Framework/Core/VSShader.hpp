@@ -32,7 +32,7 @@ namespace VoodooShader
         public IShader
     {
     public:
-        VSShader(_In_ ICore * pParent, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
+        VSShader(_In_ ICore * const pCore, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
 
         virtual ~VSShader(void);
 
@@ -45,7 +45,7 @@ namespace VoodooShader
         virtual const uint32_t GetTechniqueCount(void) const throw();
         virtual ITechnique * GetTechnique(_In_ const uint32_t index) const throw();
         virtual ITechnique * GetDefaultTechnique(void) const throw();
-        virtual bool SetDefaultTechnique(_In_ ITechnique * pTechnique) throw();
+        virtual bool SetDefaultTechnique(_In_ ITechnique * const pTechnique) throw();
         virtual const uint32_t GetParameterCount(void) const throw();
         virtual IParameter * GetParameter(_In_ const uint32_t index) const throw();
         virtual CGeffect GetCgEffect(void) const throw();

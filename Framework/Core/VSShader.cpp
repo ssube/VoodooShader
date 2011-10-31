@@ -23,9 +23,6 @@
 #include "Converter.hpp"
 #include "Version.hpp"
 
-#include "VSParameter.hpp"
-#include "VSTechnique.hpp"
-
 #include "IAdapter.hpp"
 #include "ICore.hpp"
 #include "Exception.hpp"
@@ -33,9 +30,12 @@
 #include "IParser.hpp"
 #include "ITexture.hpp"
 
+#include "VSParameter.hpp"
+#include "VSTechnique.hpp"
+
 namespace VoodooShader
 {
-    VSShader::VSShader(ICore * pCore, const String & path, const char ** ppArgs) :
+    VSShader::VSShader(_In_ ICore * const pCore, const String & path, const char ** ppArgs) :
         m_Core(pCore), m_Name(path), m_DefaultTechnique(nullptr)
     {
         CGcontext context = m_Core->GetCgContext();

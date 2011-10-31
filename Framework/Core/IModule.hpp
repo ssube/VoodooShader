@@ -86,6 +86,8 @@ namespace VoodooShader
          */
         virtual bool LoadFile(_In_ const IFile * pFile);
 
+        virtual bool LoadFile(_In_ const String & filename);
+
         /**
          * Tests to see if a class exists in the list provided by all loaded modules. 
          */
