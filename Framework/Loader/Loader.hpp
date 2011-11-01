@@ -26,9 +26,9 @@
  */
 typedef VoodooShader::ICore * (VOODOO_CALL * VoodooCreateFunc)(const VoodooShader::InitParams * const pInitParams, _In_ bool catchErrors);
 
-bool WINAPI DllMain(_In_ LPVOID handle, _In_ DWORD reason, _In_opt_ LPVOID reserved);
+BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
 
-bool WINAPI LoadVoodoo(void);
+bool WINAPI LoadVoodoo(HINSTANCE hLoader);
 bool WINAPI UnloadVoodoo(void);
 
 HMODULE WINAPI LoadSystemLibrary(const wchar_t * libname);

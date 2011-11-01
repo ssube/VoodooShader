@@ -31,7 +31,7 @@ VoodooShader::ICore * gVoodooCore = nullptr;
 VoodooShader::IAdapter * gVoodooAdapter = nullptr;
 VoodooShader::InitParams gInitParams;
 
-void WINAPI ErrorMessage(wchar_t * msg, ...)
+void WINAPI ErrorMessage(const wchar_t * msg, ...)
 {
     va_list args;
     va_start(args, msg);
@@ -39,7 +39,7 @@ void WINAPI ErrorMessage(wchar_t * msg, ...)
     int bufsize = _vscwprintf(msg, args) + 1;
     std::vector<wchar_t> buffer(bufsize);
 
-    int len = _vsnwprintf_s(&buffer[0], bufsize, bufsize-1, msg, args);
+    _vsnwprintf_s(&buffer[0], bufsize, bufsize-1, msg, args);
     
     va_end(args);
 
@@ -62,108 +62,5 @@ HMODULE WINAPI LoadSystemLibrary(const wchar_t * libname)
     StringCchCat(path, MAX_PATH, libname);
 
     return LoadLibrary(path);
-}
-
-/**
- * Retrieve the global root path for Voodoo from the registry and set the global init params to use it.
- * 
- * @return Success of the operation.
- */
-bool WINAPI GetGlobalRoot(void)
-{
-    HKEY pKey = nullptr;
-    TCHAR pPath[MAX_PATH];
-    LONG keyOpen = RegOpenKeyEx(HKEY_CURRENT_USER, L"SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &pKey);
-
-    if (keyOpen != ERROR_SUCCESS)
-    {
-        keyOpen = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &pKey);
-
-        if (keyOpen != ERROR_SUCCESS)
-        {
-            ErrorMessage(L"Unable to find Voodoo registry key. Error %u.", keyOpen);
-            return false;
-        }
-    }
-
-    // Key is open
-    DWORD valueType = REG_NONE;
-    DWORD valueSize = MAX_PATH;
-    LONG valueQuery = RegQueryValueEx(pKey, L"Path", nullptr, &valueType, (BYTE *) pPath, &valueSize);
-
-    if (valueQuery != ERROR_SUCCESS || valueType == REG_NONE)
-    {
-        ErrorMessage(L"Unable to retrieve path from registry. Error %u.", valueQuery);
-        return false;
-    }
-
-    gInitParams.GlobalRoot = SysAllocString(pPath);
-
-    return true;
-}
-
-bool WINAPI GetLocalRoot(void)
-{
-    HMODULE hModule = GetModuleHandle(nullptr);
-
-    if (hModule == nullptr)
-    {
-        ErrorMessage(L"Unable to retrieve target module.");
-        return false;
-    }
-
-    TCHAR pPath[MAX_PATH];
-
-    if (GetModuleFileName(hModule, pPath, MAX_PATH) == 0)
-    {
-        ErrorMessage(L"Unable to retrieve target path.");
-        return false;
-    }
-
-    CString Path = pPath;
-    int lastSlash = Path.ReverseFind(L'\\');
-
-    if (lastSlash == -1)
-    {
-        ErrorMessage(L"Voodoo Loader: Unable to parse target path.");
-        return false;
-    }
-
-    gInitParams.LocalRoot = SysAllocString(Path.Left(lastSlash));
-    gInitParams.Target = SysAllocString(Path.Mid(lastSlash));
-
-    return true;
-}
-
-bool WINAPI GetRunRoot(void)
-{
-    TCHAR pPath[MAX_PATH];
-
-    if (GetCurrentDirectory(MAX_PATH, pPath) == 0)
-    {
-        ErrorMessage(L"Voodoo Loader: Unable to retrieve current path.");
-        return false;
-    }
-
-    gInitParams.RunRoot = SysAllocString(pPath);
-
-    return true;
-}
-
-bool WINAPI GetLoader(HINSTANCE hLoader)
-{
-
-    CString Path = pPath;
-    int lastSlash = Path.ReverseFind(L'\\');
-
-    if (lastSlash == -1)
-    {
-        ErrorMessage(L"Voodoo Loader: Unable to parse loader path.");
-        return false;
-    }
-
-    gInitParams.Loader = SysAllocString(Path.Mid(lastSlash));
-
-    return true;
 }
 /* @} */

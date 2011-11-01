@@ -31,6 +31,20 @@ const VoodooShader::Version * API_ModuleVersion(void)
     return &module;
 }
 
+BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
+{
+    UNREFERENCED_PARAMETER(lpvReserved);
+
+    if (fdwReason == DLL_PROCESS_ATTACH)
+    {
+        return (BOOL)LoadVoodoo(hinstDLL);
+    }
+    else if (fdwReason == DLL_PROCESS_DETACH)
+    {
+        return (BOOL)UnloadVoodoo();
+    }
+}
+
 /**
  * Locate and load the Voodoo core, verify the functions and initialize the framework.
  */
@@ -173,21 +187,6 @@ bool WINAPI UnloadVoodoo(void)
     }
 }
 
-bool WINAPI DllMain(_In_ void *_HDllHandle, _In_ unsigned _Reason, _In_opt_ void *_Reserved)
-{
-    UNREFERENCED_PARAMETER(_HDllHandle);
-    UNREFERENCED_PARAMETER(_Reserved);
-
-    if (_Reason == DLL_PROCESS_ATTACH)
-    {
-        return (bool) LoadVoodoo();
-    }
-    else if (_Reason == DLL_PROCESS_DETACH)
-    {
-        return (bool) UnloadVoodoo();
-    }
-}
-
 /**
  * Most DirectX libraries use an identical loading function, with only the name varying. This function takes an SDK
  * version, library name and function name, loads and calls the proper init function.
@@ -303,12 +302,9 @@ HRESULT WINAPI VoodooInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplp
 /**
  * DirectSound 8
  */
-HRESULT VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter)
+HRESULT WINAPI VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter)
 {
-
     typedef HRESULT (__stdcall *DSInitFunc) (LPCGUID, LPVOID *, LPVOID);
-
-
 
     HMODULE baselib = LoadSystemLibrary(L"dsound8.dll");
 
