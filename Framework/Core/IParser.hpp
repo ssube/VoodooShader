@@ -24,7 +24,8 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup VoodooCore @{
+     * @addtogroup voodoo_framework_interfaces
+     * @{
      */
 
     /**

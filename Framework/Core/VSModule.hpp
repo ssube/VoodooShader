@@ -80,5 +80,4 @@ namespace VoodooShader
         Functions::InfoFunc m_ClassInfo;
         Functions::CreateFunc m_ClassCreate;
     };
-    /* @} */
 }

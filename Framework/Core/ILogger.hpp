@@ -23,9 +23,9 @@
 
 namespace VoodooShader
 {
-    /** 
-     * @addtogroup VoodooCore 
-     * @{ 
+    /**
+     * @addtogroup voodoo_framework_interfaces
+     * @{
      */
 
     /**
@@ -135,7 +135,6 @@ namespace VoodooShader
 
         virtual const LogFlags GetFlags(void) const throw() = 0;
     };
-    
     /**
      * @}
      */

@@ -52,5 +52,4 @@ namespace VoodooShader
         void * m_Data;
         TextureDesc m_Desc;
     };
-    /* @} */
 }

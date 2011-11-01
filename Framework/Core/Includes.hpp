@@ -125,6 +125,10 @@ namespace VoodooShader
     struct LightStruct;
 
     /* Interfaces */
+    /**
+     * @defgroup voodoo_framework_interfaces Voodoo Framework interfaces
+     * @{
+     */
     class IAdapter;
     class ICore;
     class IFile;
@@ -141,6 +145,9 @@ namespace VoodooShader
     class IShader;
     class ITechnique;
     class ITexture;
+    /**
+     * @}
+     */
 
     /* Reference typedefs */
 #ifndef VOODOO_NO_BOOST

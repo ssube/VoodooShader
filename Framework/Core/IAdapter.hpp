@@ -24,13 +24,18 @@
 namespace VoodooShader
 {
     /**
-    * Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API. 
-    * 
-    * @note This class should be implemented for a specific graphics application; some generic adapters are provided for 
-    *     major APIs, but in most cases application-specific behavior will make these only partially helpful. 
-    * 
-    * @sa See the @ref adapterspec "adapter specifications" for details on what is required of adapter modules and classes.
-    */
+     * @addtogroup voodoo_framework_interfaces
+     * @{
+     */
+
+    /**
+     * Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API. 
+     * 
+     * @note This class should be implemented for a specific graphics application; some generic adapters are provided for 
+     *     major APIs, but in most cases application-specific behavior will make these only partially helpful. 
+     * 
+     * @sa See the @ref adapterspec "adapter specifications" for details on what is required of adapter modules and classes.
+     */
     class IAdapter :
         public IObject
     {
@@ -228,4 +233,7 @@ namespace VoodooShader
          */
         virtual void HandleError(_In_ CGcontext const pContext, _In_ uint32_t error) throw() = 0;
     };
+    /**
+     * @}
+     */
 }

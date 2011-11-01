@@ -24,7 +24,7 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup VoodooCore 
+     * @addtogroup voodoo_framework_interfaces
      * @{
      */
 
@@ -144,5 +144,7 @@ namespace VoodooShader
          */
         virtual CGeffect GetCgEffect(void) const throw() = 0;
     };
-    /* @} */
+    /**
+     * @}
+     */
 }

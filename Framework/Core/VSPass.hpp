@@ -60,5 +60,4 @@ namespace VoodooShader
         CGprogram m_DomainProgram;
         CGprogram m_HullProgram;
     };
-    /* @} */
 }

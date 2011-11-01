@@ -23,6 +23,10 @@
 
 namespace VoodooShader
 {
+    /**
+     * @addtogroup voodoo_framework_interfaces
+     * @{
+     */
     class IFileSystem : 
         public IObject
     {
@@ -82,7 +86,7 @@ namespace VoodooShader
          * Resolves a relative filename (usually just filename and extension, but may include directories) into an 
          * absolute filename by searching the list of resource directories registered with this manager. 
          * 
-         * @param The file name to find.
+         * @param name The file name to find.
          * @return The file, if found.
          */
         virtual IFile * FindFile(_In_ const String & name) const throw() = 0;
@@ -178,4 +182,7 @@ namespace VoodooShader
 
         virtual uint32_t GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const throw() = 0;
     };
+    /**
+     * @}
+     */
 }

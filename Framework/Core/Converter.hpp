@@ -24,10 +24,6 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup VoodooCore @{
-     */
-
-    /**
      * Conversion helper class for Voodoo and Cg types. This class provides methods to convert various enums to
      * other types or retrieve readable names (for logging).
      */
@@ -81,5 +77,4 @@ namespace VoodooShader
 
         static const wchar_t * ToString(_In_ ParameterCategory Category);
     };
-    /* @} */
 }

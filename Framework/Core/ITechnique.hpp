@@ -23,19 +23,20 @@
 
 namespace VoodooShader
 {
- /**
-  * @addtogroup VoodooCore @{
-  */
+    /**
+     * @addtogroup voodoo_framework_interfaces
+     * @{
+     */
 
- /**
-  * Contains a set of passes, designed to be used sequentially to create a shader effect. Typically, a single technique
-  * will be used, although shaders may contain multiple techniques. Each technique may contain a number of passes and
-  * some technique-level metadata. 
-  * 
-  * @note All passes in a valid technique are guaranteed to be valid. 
-  * @warning While a shader may contain a number of techniques, not all are guaranteed to be valid. Techniques are 
-  *     typically validated when the Shader is created and loaded.
-  */
+    /**
+     * Contains a set of passes, designed to be used sequentially to create a shader effect. Typically, a single technique
+     * will be used, although shaders may contain multiple techniques. Each technique may contain a number of passes and
+     * some technique-level metadata. 
+     * 
+     * @note All passes in a valid technique are guaranteed to be valid. 
+     * @warning While a shader may contain a number of techniques, not all are guaranteed to be valid. Techniques are 
+     *     typically validated when the Shader is created and loaded.
+     */
     class ITechnique :
         public IObject
     {
@@ -109,4 +110,7 @@ namespace VoodooShader
          */
         virtual CGtechnique GetCgTechnique(void) const throw() = 0;
     };
+    /**
+     * @}
+     */
 }

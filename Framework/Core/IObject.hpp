@@ -25,6 +25,11 @@
 namespace VoodooShader
 {
     /**
+     * @addtogroup voodoo_framework_interfaces
+     * @{
+     */
+
+    /**
      * Defines a simple interface all Voodoo objects from dynamic modules must inherit. This interface handles 
      * destruction and identification of these objects. 
      */
@@ -65,4 +70,7 @@ namespace VoodooShader
          */
         virtual ICore * GetCore(void) const throw() = 0;
     };
+    /**
+     * @}
+     */
 }

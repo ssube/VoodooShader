@@ -93,5 +93,4 @@ namespace VoodooShader
 
         CGeffect m_CgEffect;
     };
-    /* @} */
 }

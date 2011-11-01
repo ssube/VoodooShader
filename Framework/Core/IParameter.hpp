@@ -24,8 +24,9 @@
 namespace VoodooShader
 {
     /**
-    * @addtogroup VoodooCore @{
-    */
+     * @addtogroup voodoo_framework_interfaces
+     * @{
+     */
     class IParameter :
         public IObject
     {
@@ -137,5 +138,7 @@ namespace VoodooShader
          */
         virtual CGparameter GetCgParameter(void) const throw() = 0;
     };
-    /* @} */
+    /**
+     * @}
+     */
 }

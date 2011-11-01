@@ -1,6 +1,6 @@
 
 # Voodoo Shader Framework
-## version 0.4.0.183 - alpha
+## version 0.4.1.282 - alpha
 
 #### Contents:
 1. Summary
@@ -8,28 +8,30 @@
 3. Adapters
 4. Running Voodoo
 5. Reporting Bugs
-6. Contact & Legal
-7. Resources
+6. Contact 
+7. Legal
 
 
 ### 1. Summary
 
-The Voodoo Shader Framework is a set of support libraries designed to provide extensive shader 
-integration into graphics applications, both before and after development.
+The Voodoo Shader Framework is a comprehensive graphics framework for adding and extending shaders 
+during development or after release. Voodoo works with both Direct3D and OpenGL, in games and other 
+applications.
 
 Voodoo uses a system of core modules and adapters to provide the widest compatibility and best
-performance possible across a wide range of applications and APIs. Voodoo supports both OpenGL and
-DirectX, using nVidia's Cg language. In addition, Voodoo provides a second processing step to
-provide shaders with easy access to other resources, especially textures.
+performance possible across a wide range of applications and APIs. This core framework remains 
+constant between target applications and adapters, providing a unified set of features and single 
+target for shaders.
 
-The Voodoo core and supported shaders remain constant between target applications and adapters,
-providing a unified set of features and single target for shaders.
+Voodoo supports both OpenGL and DirectX, from OGL1.1 and D3D8 to OGL4.0 and D3D11. Shaders are 
+developed cross-API using nVidia's Cg language, while Voodoo provides a second processing step to 
+provide shaders with easy access to other resources, especially textures.
 
 
 ### 2. Installation
 
 The Voodoo system function using a core-adapter model. The Voodoo core handles most functions, and
-game-specific adapters interface it with each game in detail. 
+program-specific adapters interface with each program in detail. 
 
 The Voodoo core comes in an install wizard to simplify installation. This wizard creates the
 registry keys Voodoo needs to function properly. To install the core, simply run this wizard and
@@ -72,20 +74,24 @@ to http://www.voodooshader.com and report the bug on the forum.
 A bug tracker for all Voodoo elements, including shaders and adapters, will be deployed soon.
 
 
-### 6. Contact & Legal
+### 6. Contact 
 
-To contact the developer of the Voodoo project, please post on the Voodoo forum at:
-    http://www.voodooshader.com
-or direct emails to:
-    peachykeen@voodooshader.com
+For help and support (or questions and comments), please post on the Voodoo forum or stop by the 
+IRC channel:
+ * http://www.voodooshader.com
+ * irc://irc.chatspike.net/voodoo
+ * http://webchat.chatspike.net/?randomnick=1&channels=voodoo&uio=MTE9MjM20f
+
+ To directly contact the developer, please send an email to:
+ * peachykeen@voodooshader.com
     
 Questions, comments, suggestions, reports, bugs, and almost anything else are welcome. If you have
 any interest in testing or contributing to Voodoo, please get in touch as soon as possible.
 
-You may also try to get in touch via the Bethesda Softworks forums or Bioware social boards, or on
-IRC (nick peachykeen on chatspike, freenode and nwn2source).
+If you would like a game or application supported by Voodoo, please get in touch with the title
+and as much information as you can. _Requests are very much welcome_.
 
-
+### 7. Legal
 
 Voodoo Shader Framework (c) 2010-2011 by Sean "peachykeen" Sube, All Rights Reserved.
 
@@ -96,18 +102,3 @@ more details.
 The Voodoo Shader Framework has absolutely no warranty, as described in the license document. Some
 support may be provided, at the developer's discretion; please use the above contact methods to get
 in touch.
-
-
-### 7. Resources
-
-This section has a few useful links for various Voodoo resources. Some of these may not have
-perfect uptime, if they are being moved or tweaked, but most should be relatively reliable.
-
-Main site & forums:
-    http://www.voodooshader.com
-    
-API documentation:
-    http://docs.voodooshader.com/core (replace the /core with a given module to find docs for that)
-    
-Bug tracker:
-    http://tracker.voodooshader.com (may be tied into the forum at some point)

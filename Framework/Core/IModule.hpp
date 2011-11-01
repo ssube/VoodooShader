@@ -24,7 +24,7 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup VoodooCore 
+     * @addtogroup voodoo_framework_interfaces
      * @{
      */
 
@@ -163,5 +163,7 @@ namespace VoodooShader
 
         virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore) = 0;
     };
-    /* @} */
+    /**
+     * @}
+     */
 }
