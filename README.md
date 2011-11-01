@@ -78,12 +78,14 @@ A bug tracker for all Voodoo elements, including shaders and adapters, will be d
 
 For help and support (or questions and comments), please post on the Voodoo forum or stop by the 
 IRC channel:
- * http://www.voodooshader.com
- * irc://irc.chatspike.net/voodoo
- * http://webchat.chatspike.net/?randomnick=1&channels=voodoo&uio=MTE9MjM20f
 
- To directly contact the developer, please send an email to:
- * peachykeen@voodooshader.com
+* http://www.voodooshader.com
+* irc://irc.chatspike.net/voodoo
+* http://webchat.chatspike.net/?randomnick=1&channels=voodoo&uio=MTE9MjM20f
+
+To directly contact the developer, please send an email to:
+
+* peachykeen@voodooshader.com
     
 Questions, comments, suggestions, reports, bugs, and almost anything else are welcome. If you have
 any interest in testing or contributing to Voodoo, please get in touch as soon as possible.
