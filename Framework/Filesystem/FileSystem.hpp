@@ -163,7 +163,7 @@ namespace VoodooShader
              * @note If @arg buffer is nullptr, the number of bytes that would have been read is returned but the file 
              *      position is unchanged. If @arg count is -1, this returns the filesize remaining
              */
-            virtual int32_t Read(_In_ const int32_t count, _In_opt_count_(count) void * const pBuffer);
+            virtual int32_t Read(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
 
             /**
              * Writes a chunk of data to the file. The file must have been opened for writing.
@@ -175,7 +175,7 @@ namespace VoodooShader
              * @note If @p buffer is nullptr, @p count zeros are written into the file. This is useful for padding binary 
              *      formats.
              */
-            virtual int32_t Write(_In_ const int32_t count, _In_opt_count_(count) void * const pBuffer);
+            virtual int32_t Write(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
 
             virtual IImage * OpenImage(void) const;
 

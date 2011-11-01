@@ -101,14 +101,14 @@ namespace VoodooShader
 
             // Load paths from the config
             xml_document *config = (xml_document *) m_Core->GetConfig();
-            xpath_query pathsQuery("/VoodooConfig/WFileSystem/SearchPaths/Path");
-            xpath_query pathValueQuery("./text()");
+            xpath_query pathsQuery(L"/VoodooConfig/WFileSystem/SearchPaths/Path");
+            xpath_query pathValueQuery(L"./text()");
             xpath_node_set pathNodes = pathsQuery.evaluate_node_set(*config);
             xpath_node_set::const_iterator pathIter = pathNodes.begin();
 
             while (pathIter != pathNodes.end())
             {
-                String path = pathValueQuery.evaluate_string(*pathIter);
+                String path = pathValueQuery.evaluate_string(*pathIter).c_str();
 
                 this->AddPath(path);
 
@@ -176,6 +176,8 @@ namespace VoodooShader
                     return (current == realname);
                 }
             );
+
+            return true;
         }
 
         IFile * VSWFileSystem::FindFile(const String & name) const
@@ -322,7 +324,7 @@ namespace VoodooShader
             }
         }
 
-        int VSWFile::Read(_In_ int count, _In_opt_count_(count) void *buffer)
+        int VSWFile::Read(_In_ int count, _In_opt_bytecount_(count) void *buffer)
         {
             if (m_Handle)
             {
@@ -359,7 +361,7 @@ namespace VoodooShader
             return 0;
         }
 
-        int32_t VSWFile::Write(_In_ const int32_t count, _In_opt_count_(count) void * buffer)
+        int32_t VSWFile::Write(_In_ const int32_t count, _In_opt_bytecount_(count) void * buffer)
         {
             if (m_Handle)
             {
@@ -541,6 +543,9 @@ namespace VoodooShader
 
         uint32_t VSWImage::GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const throw()
         {
+            //! @todo Add a buffer size check.
+            UNREFERENCED_PARAMETER(size);
+
             ILint ilFmt = 0, ilType = 0;
 
             // Convert TextureFormat to DevIL format
