@@ -17,17 +17,30 @@
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
  */
-#include "Version.hpp"
+#pragma once
 
-/**
- * @addtogroup VoodooLoader Voodoo/Loader @{ ;
- * Loader defs
+#include <stdio.h>
+#include <stdlib.h>
+
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+#define VOODOO_NO_BOOST
+#define VOODOO_NO_CG
+#define VOODOO_NO_PUGIXML
+#include "VoodooFramework.hpp"
+
+/** 
+ * @addtogroup VoodooLoader Voodoo/Loader @{ 
  */
-#define VOODOO_LOADER_NAME          L"Voodoo/Loader"
-#define VOODOO_LOADER_PRETTYNAME    L"Voodoo Dynamic Loader"
-#define VOODOO_LOADER_VERSION_MAJOR 0
-#define VOODOO_LOADER_VERSION_MINOR 4
-#define VOODOO_LOADER_VERSION_PATCH 0
-#define VOODOO_LOADER_VERSION_REV   VOODOO_GLOBAL_VERSION_REV
+void WINAPI ErrorMessage(const wchar_t * msg, ...);
 
-/* @} */
+HMODULE WINAPI LoadSystemLibrary(const wchar_t * libname);
+
+extern VoodooShader::ICore * gVoodooCore;
+extern VoodooShader::IAdapter * gVoodooAdapter;
+extern VoodooShader::InitParams gInitParams;
+
+/** 
+ * @} 
+ */

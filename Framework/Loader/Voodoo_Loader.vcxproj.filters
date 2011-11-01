@@ -10,7 +10,7 @@
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Common.hpp">
+    <ClInclude Include="Loader_Common.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
