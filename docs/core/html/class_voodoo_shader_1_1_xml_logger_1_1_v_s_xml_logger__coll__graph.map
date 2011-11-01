@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class." alt="" coords="1085,5,1243,32"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="857,36,1013,63"/>
+<area shape="rect" id="node29" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1091,56,1237,83"/>
+<area shape="rect" id="node8" title="STL class." alt="" coords="1114,157,1214,184"/>
+<area shape="rect" id="node10" title="STL class." alt="" coords="835,157,1034,184"/>
+<area shape="rect" id="node12" title="STL class." alt="" coords="597,157,784,184"/>
+<area shape="rect" id="node14" title="STL class." alt="" coords="365,127,545,153"/>
+<area shape="rect" id="node16" title="STL class." alt="" coords="157,151,312,177"/>
+<area shape="rect" id="node20" title="STL class." alt="" coords="363,177,547,204"/>
+<area shape="rect" id="node18" title="STL class." alt="" coords="6,151,106,177"/>
+</map>

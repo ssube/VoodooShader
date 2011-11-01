@@ -1,0 +1,18 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="VoodooShader::Regex::RegexImpl",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" m_Regex" ,fontname="Helvetica"];
+  Node2 [label="wregex",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" m_Expr" ,fontname="Helvetica"];
+  Node3 [label="VoodooShader::String",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_voodoo_shader_1_1_string.html",tooltip="Voodoo internal string class, providing constant and compiler-safe string passing between various mod..."];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" m_Impl" ,fontname="Helvetica"];
+  Node4 [label="VoodooShader::String::StringImpl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_voodoo_shader_1_1_string_1_1_string_impl.html"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" m_Str" ,fontname="Helvetica"];
+  Node5 [label="std::wstring",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip="STL class."];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="std::basic_string\< wchar_t \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip="STL class."];
+  Node7 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" Npos" ,fontname="Helvetica"];
+  Node7 [label="uint32_t",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}
