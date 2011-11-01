@@ -189,7 +189,7 @@ namespace VoodooShader
     this->mCore->Log
      (
       "Voodoo DX9: Error loading vertex program from '%s': %d.\n",
-      pass->ToString().c_str(),
+      pass->ToString().GetData(),
       hr
      );
     return false;
@@ -204,14 +204,14 @@ namespace VoodooShader
     this->mCore->Log
      (
       "Voodoo DX9: Error loading fragment program from '%s': %d.\n",
-      pass->ToString().c_str(),
+      pass->ToString().GetData(),
       hr
      );
     return false;
    }
   }
 
-  this->mCore->Log("Voodoo DX9: Successfully loaded programs from '%s'.\n", pass->ToString().c_str());
+  this->mCore->Log("Voodoo DX9: Successfully loaded programs from '%s'.\n", pass->ToString().GetData());
   return true;
  }
 
@@ -233,7 +233,7 @@ namespace VoodooShader
 
    if (!SUCCEEDED(hr))
    {
-    this->mCore->Log("Voodoo DX9: Error binding vertex program from '%s': %s.\n", pass->Name().c_str(), hr);
+    this->mCore->Log("Voodoo DX9: Error binding vertex program from '%s': %s.\n", pass->Name().GetData(), hr);
     return;
    }
    else
@@ -256,7 +256,7 @@ namespace VoodooShader
     this->mCore->Log
      (
       "Voodoo DX9: Error binding fragment program from '%s': %s.\n",
-      pass->Name().c_str(),
+      pass->Name().GetData(),
       cgD3D9TranslateHRESULT(hr)
      );
 
@@ -375,7 +375,7 @@ namespace VoodooShader
   switch (Converter::ToParameterCategory(param->GetType()))
   {
   case PC_Float:
-   cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
+   cgD3D9SetUniform(param->GetParameter(), param->Getfloat());
    break;
 
   case PC_Sampler:
@@ -384,7 +384,7 @@ namespace VoodooShader
 
   case PC_Unknown:
   default:
-   this->mCore->Log("Voodoo DX9: Unable to bind parameter %s of unknown type.", param->Name().c_str());
+   this->mCore->Log("Voodoo DX9: Unable to bind parameter %s of unknown type.", param->Name().GetData());
   }
  }
 
@@ -401,7 +401,7 @@ namespace VoodooShader
    CGparameter texParam = param->GetParameter();
 
    cgD3D9SetTextureParameter(texParam, texObj);
-   mCore->Log("Voodoo DX9: Bound texture %s to parameter %s.\n", texture->Name().c_str(), param->Name());
+   mCore->Log("Voodoo DX9: Bound texture %s to parameter %s.\n", texture->Name().GetData(), param->Name());
    return true;
   }
   else

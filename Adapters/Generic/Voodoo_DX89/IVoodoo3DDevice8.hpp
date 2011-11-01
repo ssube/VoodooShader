@@ -212,9 +212,9 @@ public:
 
   VoodooLogger->Log(LL_Debug, VOODOO_DX89_NAME, "IVoodoo3DDevice8::SetCursorPosition(%i, %i, %u)", X, Y, Flags);
  }
- STDMETHOD_ (BOOL, ShowCursor) (BOOL bShow)
+ STDMETHOD_ (bool, ShowCursor) (bool bShow)
  {
-  BOOL show = mRealDevice->ShowCursor(bShow);
+  bool show = mRealDevice->ShowCursor(bShow);
 
   VoodooLogger->Log(LL_Debug, VOODOO_DX89_NAME, "IVoodoo3DDevice8::ShowCursor(%i) == %d", bShow, show);
 
@@ -466,7 +466,7 @@ public:
    UINT Height,
    D3DFORMAT Format,
    D3DMULTISAMPLE_TYPE MultiSample,
-   BOOL Lockable,
+   bool Lockable,
    IDirect3DSurface8 **ppSurface
   )
  {
@@ -737,7 +737,7 @@ public:
 #endif
   return hr;
  }
- STDMETHOD (LightEnable) (DWORD Index, BOOL Enable)
+ STDMETHOD (LightEnable) (DWORD Index, bool Enable)
  {
   HRESULT hr = mRealDevice->LightEnable(Index, Enable);
 
@@ -746,7 +746,7 @@ public:
 #endif
   return hr;
  }
- STDMETHOD (GetLightEnable) (DWORD Index, BOOL *pEnable)
+ STDMETHOD (GetLightEnable) (DWORD Index, bool *pEnable)
  {
   HRESULT hr = mRealDevice->GetLightEnable(Index, pEnable);
 

@@ -179,7 +179,7 @@ namespace VoodooShader
       LL_Error,
       VOODOO_DX89_NAME,
       "Error loading vertex program from '%s': %s",
-      pass->ToString().c_str(),
+      pass->ToString().GetData(),
       cgD3D9TranslateHRESULT(hr)
      );
 
@@ -197,7 +197,7 @@ namespace VoodooShader
       LL_Error,
       VOODOO_DX89_NAME,
       "Error loading fragment program from '%s': %s",
-      pass->ToString().c_str(),
+      pass->ToString().GetData(),
       cgD3D9TranslateHRESULT(hr)
      );
 
@@ -205,7 +205,7 @@ namespace VoodooShader
    }
   }
 
-  this->mCore->Log(LL_Info, VOODOO_DX89_NAME, "Successfully loaded programs from '%s'.", pass->ToString().c_str());
+  this->mCore->Log(LL_Info, VOODOO_DX89_NAME, "Successfully loaded programs from '%s'.", pass->ToString().GetData());
 
   return true;
  }
@@ -233,7 +233,7 @@ namespace VoodooShader
       LL_Error,
       VOODOO_DX89_NAME,
       "Error binding vertex program from '%s': %s.",
-      pass->Name().c_str(),
+      pass->Name().GetData(),
       cgD3D9TranslateHRESULT(hr)
      );
 
@@ -261,7 +261,7 @@ namespace VoodooShader
       LL_Info,
       VOODOO_DX89_NAME,
       "Error binding fragment program from '%s': %s.",
-      pass->Name().c_str(),
+      pass->Name().GetData(),
       cgD3D9TranslateHRESULT(hr)
      );
 
@@ -378,7 +378,7 @@ namespace VoodooShader
   switch (Converter::ToParameterCategory(param->GetType()))
   {
   case PC_Float:
-   cgD3D9SetUniform(param->GetParameter(), param->GetFloat());
+   cgD3D9SetUniform(param->GetParameter(), param->Getfloat());
    break;
 
   case PC_Sampler:
@@ -392,7 +392,7 @@ namespace VoodooShader
      LL_Info,
      VOODOO_DX89_NAME,
      "Unable to bind parameter %s of unknown type.",
-     param->Name().c_str()
+     param->Name().GetData()
     );
   }
  }
@@ -415,8 +415,8 @@ namespace VoodooShader
      LL_Info,
      VOODOO_DX89_NAME,
      "Bound texture %s to parameter %s.",
-     texture->Name().c_str(),
-     param->Name().c_str()
+     texture->Name().GetData(),
+     param->Name().GetData()
     );
    return true;
   }

@@ -407,7 +407,7 @@ namespace VoodooShader
    return false;
   }
 
-  logger->Log(LL_Debug, VOODOO_GEM_NAME, "Successfully loaded programs from '%s'.", pass->ToString().c_str());
+  logger->Log(LL_Debug, VOODOO_GEM_NAME, "Successfully loaded programs from '%s'.", pass->ToString().GetData());
 
   return true;
  }
@@ -427,7 +427,7 @@ namespace VoodooShader
    return false;
   }
 
-  logger->Log(LL_Debug, VOODOO_GEM_NAME, "Unloading pass %s", pass->ToString().c_str());
+  logger->Log(LL_Debug, VOODOO_GEM_NAME, "Unloading pass %s", pass->ToString().GetData());
 
   return true;
  }
@@ -452,7 +452,7 @@ namespace VoodooShader
      LL_Error,
      VOODOO_GEM_NAME,
      "IPass %s contained invalid Cg pass (%p).",
-     pass->ToString().c_str(),
+     pass->ToString().GetData(),
      cgpass
     );
    return;
@@ -470,7 +470,7 @@ namespace VoodooShader
      VOODOO_GEM_NAME,
      "Cg error %u while binding pass \"%s\".",
      error,
-     pass->ToString().c_str()
+     pass->ToString().GetData()
     );
    error = cgGetError();
   }
@@ -513,7 +513,7 @@ namespace VoodooShader
      LL_Error,
      VOODOO_GEM_NAME,
      "Failed to retrieve render target for shader %s.",
-     shader->ToString().c_str()
+     shader->ToString().GetData()
     );
 
    return;
@@ -527,7 +527,7 @@ namespace VoodooShader
      LL_Error,
      VOODOO_GEM_NAME,
      "Failed to bind render target for shader %s.",
-     shader->ToString().c_str()
+     shader->ToString().GetData()
     );
 
    return;
@@ -567,8 +567,8 @@ namespace VoodooShader
        LL_Warning,
        VOODOO_GEM_NAME,
        "Failed to get target surface for pass %s (targeting texture %s).",
-       pass->ToString().c_str(),
-       passTarget->ToString().c_str()
+       pass->ToString().GetData(),
+       passTarget->ToString().GetData()
       );
     }
     else
@@ -582,7 +582,7 @@ namespace VoodooShader
         LL_Error,
         VOODOO_GEM_NAME,
         "Failed to copy results to target for pass %s.",
-        pass->ToString().c_str()
+        pass->ToString().GetData()
        );
      }
     }
@@ -597,7 +597,7 @@ namespace VoodooShader
       LL_Error,
       VOODOO_GEM_NAME,
       "Failed to copy results to target for pass %s (result %d).",
-      pass->ToString().c_str(),
+      pass->ToString().GetData(),
       hr
      );
    }
@@ -619,8 +619,8 @@ namespace VoodooShader
       LL_Warning,
       VOODOO_GEM_NAME,
       "Failed to get target surface for technique %s (targeting texture %s).",
-      tech->ToString().c_str(),
-      techTarget->ToString().c_str()
+      tech->ToString().GetData(),
+      techTarget->ToString().GetData()
      );
    }
    else
@@ -634,7 +634,7 @@ namespace VoodooShader
        LL_Error,
        VOODOO_GEM_NAME,
        "Failed to copy results to target for technique %s.",
-       tech->ToString().c_str()
+       tech->ToString().GetData()
       );
     }
    }
@@ -711,7 +711,7 @@ namespace VoodooShader
   */
  void Adapter::ApplyParameter(IParameter* param)
  {
-  mCore->GetLogger()->Log(LL_Debug, VOODOO_GEM_NAME, "Applying parameter %s.", param->ToString().c_str());
+  mCore->GetLogger()->Log(LL_Debug, VOODOO_GEM_NAME, "Applying parameter %s.", param->ToString().GetData());
 
 
   // ! @todo Find out if cgSetParameter or cgD3DSetUniform is better/faster and !
@@ -721,23 +721,23 @@ namespace VoodooShader
   switch (param->GetType())
   {
   case PT_Float1:
-   cgSetParameter1fv(cgparam, param->GetFloat());
+   cgSetParameter1fv(cgparam, param->Getfloat());
    break;
 
   case PT_Float2:
-   cgSetParameter2fv(cgparam, param->GetFloat());
+   cgSetParameter2fv(cgparam, param->Getfloat());
    break;
 
   case PT_Float3:
-   cgSetParameter3fv(cgparam, param->GetFloat());
+   cgSetParameter3fv(cgparam, param->Getfloat());
    break;
 
   case PT_Float4:
-   cgSetParameter4fv(cgparam, param->GetFloat());
+   cgSetParameter4fv(cgparam, param->Getfloat());
    break;
 
   case PT_Matrix:
-   cgSetMatrixParameterfc(cgparam, param->GetFloat());
+   cgSetMatrixParameterfc(cgparam, param->Getfloat());
    break;
 
   case PT_Sampler1D:
@@ -753,7 +753,7 @@ namespace VoodooShader
      LL_Error,
      VOODOO_GEM_NAME,
      "Unable to bind parameters %s (unknown type).",
-     param->ToString().c_str()
+     param->ToString().GetData()
     );
 
    break;
@@ -778,8 +778,8 @@ namespace VoodooShader
      LL_Debug,
      VOODOO_GEM_NAME,
      "Bound texture %s to parameter %s.",
-     texture->ToString().c_str(),
-     param->ToString().c_str()
+     texture->ToString().GetData(),
+     param->ToString().GetData()
     );
 
    return true;
@@ -822,7 +822,7 @@ namespace VoodooShader
 
    const char *error = cgD3D9TranslateHRESULT(hr);
 
-   mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Error creating texture %s: %s", name.c_str(), error);
+   mCore->GetLogger()->Log(LL_Error, VOODOO_GEM_NAME, "Error creating texture %s: %s", name.GetData(), error);
 
    return ITexture*();
   }

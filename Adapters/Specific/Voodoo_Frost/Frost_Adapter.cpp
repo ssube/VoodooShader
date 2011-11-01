@@ -207,7 +207,7 @@ namespace VoodooShader
   if (pc == PC_Float)
   {
 
-   float *values = param->GetFloat();
+   float *values = param->Getfloat();
 
    switch (pt)
    {
@@ -237,7 +237,7 @@ namespace VoodooShader
   }
   else
   {
-   mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "Unable to apply parameter %s.", param->ToString().c_str());
+   mLogger->Log(LL_Warning, VOODOO_FROST_NAME, "Unable to apply parameter %s.", param->ToString().GetData());
   }
  }
 
@@ -261,7 +261,7 @@ namespace VoodooShader
      LL_Error,
      VOODOO_FROST_NAME,
      "No default technique given for shader %s.",
-     shader->ToString().c_str()
+     shader->ToString().GetData()
     );
    return;
   }

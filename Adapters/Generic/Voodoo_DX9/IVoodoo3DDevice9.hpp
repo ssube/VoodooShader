@@ -85,7 +85,7 @@ public:
  {
   mRealDevice->SetCursorPosition(X, Y, Flags);
  }
- STDMETHOD_ (BOOL, ShowCursor) (THIS_ BOOL bShow)
+ STDMETHOD_ (bool, ShowCursor) (THIS_ bool bShow)
  {
   return mRealDevice->ShowCursor(bShow);
  }
@@ -160,7 +160,7 @@ public:
  {
   return mRealDevice->GetRasterStatus(iSwapChain, pRasterStatus);
  }
- STDMETHOD (SetDialogBoxMode) (THIS_ BOOL bEnableDialogs)
+ STDMETHOD (SetDialogBoxMode) (THIS_ bool bEnableDialogs)
  {
   return mRealDevice->SetDialogBoxMode(bEnableDialogs);
  }
@@ -245,7 +245,7 @@ public:
    D3DFORMAT Format,
    D3DMULTISAMPLE_TYPE MultiSample,
    DWORD MultisampleQuality,
-   BOOL Lockable,
+   bool Lockable,
    IDirect3DSurface9 **ppSurface,
    HANDLE * pSharedHandle
   )
@@ -259,7 +259,7 @@ public:
    D3DFORMAT Format,
    D3DMULTISAMPLE_TYPE MultiSample,
    DWORD MultisampleQuality,
-   BOOL Discard,
+   bool Discard,
    IDirect3DSurface9 **ppSurface,
    HANDLE * pSharedHandle
   )
@@ -383,11 +383,11 @@ public:
  {
   return mRealDevice->GetLight(Index, pLight);
  }
- STDMETHOD (LightEnable) (THIS_ DWORD Index, BOOL Enable)
+ STDMETHOD (LightEnable) (THIS_ DWORD Index, bool Enable)
  {
   return mRealDevice->LightEnable(Index, Enable);
  }
- STDMETHOD (GetLightEnable) (THIS_ DWORD Index, BOOL * pEnable)
+ STDMETHOD (GetLightEnable) (THIS_ DWORD Index, bool * pEnable)
  {
   return mRealDevice->GetLightEnable(Index, pEnable);
  }
@@ -479,11 +479,11 @@ public:
  {
   return mRealDevice->GetScissorRect(pRect);
  }
- STDMETHOD (SetSoftwareVertexProcessing) (THIS_ BOOL bSoftware)
+ STDMETHOD (SetSoftwareVertexProcessing) (THIS_ bool bSoftware)
  {
   return mRealDevice->SetSoftwareVertexProcessing(bSoftware);
  }
- STDMETHOD_ (BOOL, GetSoftwareVertexProcessing) (THIS)
+ STDMETHOD_ (bool, GetSoftwareVertexProcessing) (THIS)
  {
   return mRealDevice->GetSoftwareVertexProcessing();
  }
@@ -603,13 +603,13 @@ public:
  {
   return mRealDevice->GetVertexShaderConstantI(StartRegister, pConstantData, Vector4iCount);
  }
- STDMETHOD (SetVertexShaderConstantB) (THIS_ UINT StartRegister, CONST BOOL * pConstantData, UINT BoolCount)
+ STDMETHOD (SetVertexShaderConstantB) (THIS_ UINT StartRegister, CONST bool * pConstantData, UINT boolCount)
  {
-  return mRealDevice->SetVertexShaderConstantB(StartRegister, pConstantData, BoolCount);
+  return mRealDevice->SetVertexShaderConstantB(StartRegister, pConstantData, boolCount);
  }
- STDMETHOD (GetVertexShaderConstantB) (THIS_ UINT StartRegister, BOOL * pConstantData, UINT BoolCount)
+ STDMETHOD (GetVertexShaderConstantB) (THIS_ UINT StartRegister, bool * pConstantData, UINT boolCount)
  {
-  return mRealDevice->GetVertexShaderConstantB(StartRegister, pConstantData, BoolCount);
+  return mRealDevice->GetVertexShaderConstantB(StartRegister, pConstantData, boolCount);
  }
  STDMETHOD (SetStreamSource)
   (
@@ -675,13 +675,13 @@ public:
  {
   return mRealDevice->GetPixelShaderConstantI(StartRegister, pConstantData, Vector4iCount);
  }
- STDMETHOD (SetPixelShaderConstantB) (THIS_ UINT StartRegister, CONST BOOL * pConstantData, UINT BoolCount)
+ STDMETHOD (SetPixelShaderConstantB) (THIS_ UINT StartRegister, CONST bool * pConstantData, UINT boolCount)
  {
-  return mRealDevice->SetPixelShaderConstantB(StartRegister, pConstantData, BoolCount);
+  return mRealDevice->SetPixelShaderConstantB(StartRegister, pConstantData, boolCount);
  }
- STDMETHOD (GetPixelShaderConstantB) (THIS_ UINT StartRegister, BOOL * pConstantData, UINT BoolCount)
+ STDMETHOD (GetPixelShaderConstantB) (THIS_ UINT StartRegister, bool * pConstantData, UINT boolCount)
  {
-  return mRealDevice->GetPixelShaderConstantB(StartRegister, pConstantData, BoolCount);
+  return mRealDevice->GetPixelShaderConstantB(StartRegister, pConstantData, boolCount);
  }
  STDMETHOD (DrawRectPatch) (THIS_ UINT Handle, CONST float *pNumSegs, CONST D3DRECTPATCH_INFO * pRectPatchInfo)
  {

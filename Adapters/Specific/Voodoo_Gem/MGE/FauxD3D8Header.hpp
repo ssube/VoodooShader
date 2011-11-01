@@ -148,8 +148,8 @@ typedef struct _D3DPRESENT_PARAMETERS8_
 
  D3DSWAPEFFECT SwapEffect;
  HWND hDeviceWindow;
- BOOL Windowed;
- BOOL EnableAutoDepthStencil;
+ bool Windowed;
+ bool EnableAutoDepthStencil;
  D3DFORMAT AutoDepthStencilFormat;
  DWORD Flags;
 
@@ -369,7 +369,7 @@ DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
 
 
 
- STDMETHOD_ (BOOL, ShowCursor) (BOOL bShow) PURE;
+ STDMETHOD_ (bool, ShowCursor) (bool bShow) PURE;
 
 
 
@@ -427,7 +427,7 @@ DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
  STDMETHOD (CreateRenderTarget)
 
  (
-  UINT Width, UINT Height, D3DFORMAT Format, D3DMULTISAMPLE_TYPE MultiSample, BOOL Lockable, IDirect3DSurface8 **
+  UINT Width, UINT Height, D3DFORMAT Format, D3DMULTISAMPLE_TYPE MultiSample, bool Lockable, IDirect3DSurface8 **
    ppSurface
  ) PURE;
 
@@ -516,11 +516,11 @@ DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
 
 
 
- STDMETHOD (LightEnable) (DWORD Index, BOOL Enable) PURE;
+ STDMETHOD (LightEnable) (DWORD Index, bool Enable) PURE;
 
 
 
- STDMETHOD (GetLightEnable) (DWORD Index, BOOL * pEnable) PURE;
+ STDMETHOD (GetLightEnable) (DWORD Index, bool * pEnable) PURE;
 
 
 
@@ -771,7 +771,7 @@ DECLARE_INTERFACE_(IDirect3D8, IUnknown)
 
  STDMETHOD (CheckDeviceType)
 
- (UINT Adapter, D3DDEVTYPE CheckType, D3DFORMAT DisplayFormat, D3DFORMAT BackBufferFormat, BOOL Windowed) PURE;
+ (UINT Adapter, D3DDEVTYPE CheckType, D3DFORMAT DisplayFormat, D3DFORMAT BackBufferFormat, bool Windowed) PURE;
 
  STDMETHOD (CheckDeviceFormat)
 
@@ -782,7 +782,7 @@ DECLARE_INTERFACE_(IDirect3D8, IUnknown)
 
  STDMETHOD (CheckDeviceMultiSampleType)
 
- (UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SurfaceFormat, BOOL Windowed, D3DMULTISAMPLE_TYPE MultiSampleType) PURE;
+ (UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SurfaceFormat, bool Windowed, D3DMULTISAMPLE_TYPE MultiSampleType) PURE;
 
  STDMETHOD (CheckDepthStencilMatch)
 

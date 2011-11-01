@@ -100,7 +100,7 @@ public:
   D3DDEVTYPE DevType,
   D3DFORMAT AdapterFormat,
   D3DFORMAT BackBufferFormat,
-  BOOL bWindowed
+  bool bWindowed
  )
  {
   return m_d3d->CheckDeviceType(Adapter, DevType, AdapterFormat, BackBufferFormat, bWindowed);
@@ -130,7 +130,7 @@ public:
   UINT Adapter,
   D3DDEVTYPE DeviceType,
   D3DFORMAT SurfaceFormat,
-  BOOL Windowed,
+  bool Windowed,
   D3DMULTISAMPLE_TYPE MultiSampleType,
   DWORD *pQualityLevels
  )

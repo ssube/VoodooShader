@@ -260,9 +260,9 @@ public:
 
   VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::SetCursorPosition(%d, %d, %u)", X, Y, Flags);
  }
- STDMETHOD_ (BOOL, ShowCursor) (BOOL bShow)
+ STDMETHOD_ (bool, ShowCursor) (bool bShow)
  {
-  BOOL show = mRealDevice->ShowCursor(bShow);
+  bool show = mRealDevice->ShowCursor(bShow);
 
   VoodooLogger->Log(LL_Debug, VOODOO_GEM_NAME, "IVoodoo3DDevice8::ShowCursor(%d) == %d", bShow, show);
 
@@ -547,7 +547,7 @@ public:
    UINT Height,
    D3DFORMAT Format,
    D3DMULTISAMPLE_TYPE MultiSample,
-   BOOL Lockable,
+   bool Lockable,
    IDirect3DSurface8 **ppSurface
   )
  {
@@ -752,15 +752,15 @@ public:
 
    if (State == D3DTS_VIEW)
    {
-    matrix = (D3DMATRIX *) gMatrixView->GetFloat();
+    matrix = (D3DMATRIX *) gMatrixView->Getfloat();
    }
    else if (State == D3DTS_PROJECTION)
    {
-    matrix = (D3DMATRIX *) gMatrixProj->GetFloat();
+    matrix = (D3DMATRIX *) gMatrixProj->Getfloat();
    }
    else if (State == D3DTS_WORLD)
    {
-    matrix = (D3DMATRIX *) gMatrixWorld->GetFloat();
+    matrix = (D3DMATRIX *) gMatrixWorld->Getfloat();
    }
    if (matrix)
    {
@@ -789,15 +789,15 @@ public:
 
    if (State == D3DTS_VIEW)
    {
-    matrix = (D3DMATRIX *) gMatrixView->GetFloat();
+    matrix = (D3DMATRIX *) gMatrixView->Getfloat();
    }
    else if (State == D3DTS_PROJECTION)
    {
-    matrix = (D3DMATRIX *) gMatrixProj->GetFloat();
+    matrix = (D3DMATRIX *) gMatrixProj->Getfloat();
    }
    else if (State == D3DTS_WORLD)
    {
-    matrix = (D3DMATRIX *) gMatrixWorld->GetFloat();
+    matrix = (D3DMATRIX *) gMatrixWorld->Getfloat();
    }
    if (matrix)
    {
@@ -860,7 +860,7 @@ public:
 
   return hr;
  }
- STDMETHOD (LightEnable) (DWORD Index, BOOL Enable)
+ STDMETHOD (LightEnable) (DWORD Index, bool Enable)
  {
   HRESULT hr = mRealDevice->LightEnable(Index, Enable);
 
@@ -868,7 +868,7 @@ public:
 
   return hr;
  }
- STDMETHOD (GetLightEnable) (DWORD Index, BOOL *pEnable)
+ STDMETHOD (GetLightEnable) (DWORD Index, bool *pEnable)
  {
   HRESULT hr = mRealDevice->GetLightEnable(Index, pEnable);
 

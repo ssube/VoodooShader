@@ -196,7 +196,7 @@ HGLRC WINAPI vwglCreateContext(HDC hdc)
 /**
  *
  */
-BOOL WINAPI vwglDeleteContext(HGLRC hglrc)
+bool WINAPI vwglDeleteContext(HGLRC hglrc)
 {
  if (gSecondContext && gNwnWindow)
  {
@@ -204,7 +204,7 @@ BOOL WINAPI vwglDeleteContext(HGLRC hglrc)
   gSecondContext = false;
  }
 
- BOOL result = wglDeleteContext(hglrc);
+ bool result = wglDeleteContext(hglrc);
 
  VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "wglDeleteContext(%p) == %i", hglrc, result);
 
@@ -227,10 +227,10 @@ PROC WINAPI vwglGetProcAddress(LPCSTR name)
 /**
  *
  */
-BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
+bool WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 {
 
- BOOL result = wglMakeCurrent(hdc, hglrc);
+ bool result = wglMakeCurrent(hdc, hglrc);
 
  VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "wglMakeCurrent(%p, %p) == %i", hdc, hglrc, result);
 
@@ -288,10 +288,10 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 /**
  *
  */
-BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
+bool WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
 {
 
- BOOL result = wglSwapLayerBuffers(hdc, uint);
+ bool result = wglSwapLayerBuffers(hdc, uint);
 
  VoodooLogger->Log(LL_Debug, VOODOO_FROST_NAME, "wglSwapLayerBuffers(%p, %u) == %i", hdc, uint, result);
 

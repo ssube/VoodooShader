@@ -137,7 +137,7 @@ public:
    UINT Adapter,
    D3DDEVTYPE DeviceType,
    D3DFORMAT SurfaceFormat,
-   BOOL Windowed,
+   bool Windowed,
    D3DMULTISAMPLE_TYPE MultiSampleType
   )
  {
@@ -159,7 +159,7 @@ public:
    D3DDEVTYPE CheckType,
    D3DFORMAT DisplayFormat,
    D3DFORMAT BackBufferFormat,
-   BOOL Windowed
+   bool Windowed
   )
  {
   HRESULT hr = mRealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);

@@ -30,7 +30,7 @@ void CameraHack(void)
  float minDist = -0.2f;
  float angle = 1000.0f;
  DWORD oldProtect, finalProtect;
- BOOL lockStatus = VirtualProtect((PVOID) 0x004A9000, 0x1000, PAGE_EXECUTE_READWRITE, &oldProtect);
+ bool lockStatus = VirtualProtect((PVOID) 0x004A9000, 0x1000, PAGE_EXECUTE_READWRITE, &oldProtect);
 
  if (lockStatus != 0)
  {
