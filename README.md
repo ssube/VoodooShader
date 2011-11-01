@@ -1,8 +1,8 @@
 
-Voodoo Shader Framework
-v0.4.0.183
+# Voodoo Shader Framework
+## version 0.4.0.183 - alpha
 
-= Contents:
+#### Contents:
 1. Summary
 2. Installation
 3. Adapters
@@ -12,7 +12,7 @@ v0.4.0.183
 7. Resources
 
 
-= 1. Summary
+### 1. Summary
 
 The Voodoo Shader Framework is a set of support libraries designed to provide extensive shader 
 integration into graphics applications, both before and after development.
@@ -26,7 +26,7 @@ The Voodoo core and supported shaders remain constant between target application
 providing a unified set of features and single target for shaders.
 
 
-= 2. Installation
+### 2. Installation
 
 The Voodoo system function using a core-adapter model. The Voodoo core handles most functions, and
 game-specific adapters interface it with each game in detail. 
@@ -36,7 +36,7 @@ registry keys Voodoo needs to function properly. To install the core, simply run
 Voodoo will be installed to your system.
 
 
-= 3. Adapters
+### 3. Adapters
 
 After the Voodoo core is installed, you will need to install adapters for any game you want to use
 Voodoo in. Various adapters are available for a number of Direct3D 8, 9 and OpenGL games.
@@ -48,7 +48,7 @@ Adapters may or may not use install wizards. Each adapter will have documentatio
 and configure it. 
 
 
-= 4. Running Voodoo
+### 4. Running Voodoo
 
 The precise behavior of Voodoo depends on the adapter and game it is being used with, but the most
 common behavior is described here.
@@ -64,7 +64,7 @@ are capable of intercepting both DirectX and OpenGL calls and logging the times,
 results in some detail.
 
 
-= 5. Reporting Bugs
+### 5. Reporting Bugs
 
 Voodoo is in an alpha testing stage. It undoubtedly has bugs. If you run into a bug, please go 
 to http://www.voodooshader.com and report the bug on the forum.
@@ -72,7 +72,7 @@ to http://www.voodooshader.com and report the bug on the forum.
 A bug tracker for all Voodoo elements, including shaders and adapters, will be deployed soon.
 
 
-= 6. Contact & Legal
+### 6. Contact & Legal
 
 To contact the developer of the Voodoo project, please post on the Voodoo forum at:
     http://www.voodooshader.com
@@ -98,7 +98,7 @@ support may be provided, at the developer's discretion; please use the above con
 in touch.
 
 
-= 7. Resources
+### 7. Resources
 
 This section has a few useful links for various Voodoo resources. Some of these may not have
 perfect uptime, if they are being moved or tweaked, but most should be relatively reliable.
