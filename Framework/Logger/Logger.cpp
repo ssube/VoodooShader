@@ -193,7 +193,7 @@ namespace VoodooShader
             }
         }
 
-        void VSXmlLogger::LogModule(const Version * pVersion)
+        void VSXmlLogger::LogModule(const Version * const pVersion)
         {
             if (!this->m_LogFile.is_open()) return;
 
@@ -218,7 +218,7 @@ namespace VoodooShader
             }
         }
 
-        void VSXmlLogger::Log(LogLevel level, const String & module, const String & msg, ...)
+        void VSXmlLogger::Log(const LogLevel level, const String & module, const String & msg, ...)
         {
             va_list args;
 

@@ -27,6 +27,7 @@
 #define VOODOO_IMPORT
 #define VOODOO_NO_BOOST
 #define VOODOO_NO_CG
+#define VOODOO_NO_PUGIXML
 #include "VoodooFramework.hpp"
 
 namespace VoodooShader
@@ -116,7 +117,7 @@ namespace VoodooShader
              * 
              * @param module The module version info to log.
              */
-            virtual void LogModule(_In_ const Version * pModule) throw();
+            virtual void LogModule(_In_ const Version * const pModule) throw();
 
             /**
              * Log a message, may be formatted with printf syntax. @param level The level for this message. 
@@ -127,7 +128,7 @@ namespace VoodooShader
              */
             virtual void Log
             (
-                _In_ LogLevel level,
+                _In_ const LogLevel level,
                 _In_ const String & module,
                 _In_ _Printf_format_string_ const String & msg,
                 ...
