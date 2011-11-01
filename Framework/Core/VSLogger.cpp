@@ -87,12 +87,12 @@ namespace VoodooShader
         return LL_Unknown;
     }
 
-    void VSLogger::LogModule(_In_ const Version * pModule)
+    void VSLogger::LogModule(_In_ const Version * const pModule)
     {
         UNREFERENCED_PARAMETER(pModule);
     }
 
-    void VSLogger::Log(_In_ LogLevel level, _In_ const String & module, _In_ _Printf_format_string_ const String & msg, ...)
+    void VSLogger::Log(_In_ const LogLevel level, _In_ const String & module, _In_ _Printf_format_string_ const String & msg, ...)
     {
         UNREFERENCED_PARAMETER(level);
         UNREFERENCED_PARAMETER(module);

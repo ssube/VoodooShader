@@ -54,7 +54,7 @@ namespace VoodooShader
         public IModule
     {
     public:
-        static VSModule * Load(_In_ ICore * pCore, _In_ String path);
+        static VSModule * Load(_In_ ICore * const pCore, _In_ const String & path);
 
         VSModule(_In_ ICore * pCore, _In_ HMODULE hmodule);
 

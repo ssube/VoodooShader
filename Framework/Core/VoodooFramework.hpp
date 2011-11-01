@@ -28,7 +28,6 @@
 #include "Regex.hpp"
 #include "String.hpp"
 #include "Version.hpp"
-#include "Xml.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"

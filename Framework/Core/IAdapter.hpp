@@ -169,7 +169,7 @@ namespace VoodooShader
          * @param Vertexes The number of vertexes to draw. 
          * @param pVertexData This must contain vertex data for the given number of verts.
          */
-        virtual void DrawGeometry(_In_ uint32_t count, _In_count_(count) const VertexStruct * const pVertexData) throw() = 0;
+        virtual void DrawGeometry(_In_ const uint32_t count, _In_count_(count) const VertexStruct * const pVertexData) throw() = 0;
 
         /**
          * Downloads a parameter's value from system RAM to VRAM, verifying that the value on the GPU (and in use) is the 
@@ -189,7 +189,7 @@ namespace VoodooShader
          * @note Adapters may define the meaning of any properties not given in the core adapter specification. Adapters may
          *     require a specific format or form for properties.
          */
-        virtual void SetProperty(const String & name, const String & value) throw() = 0;
+        virtual void SetProperty(_In_ const String & name, _In_ const String & value) throw() = 0;
 
         /**
          * Get a property from the adapter.
@@ -198,7 +198,7 @@ namespace VoodooShader
          *
          * @return The value of the property (lexically cast to a string if necessary).
          */
-        virtual String GetProperty(const String & name) const throw() = 0;
+        virtual String GetProperty(_In_ const String & name) const throw() = 0;
 
         /**
          * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses 

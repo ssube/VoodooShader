@@ -43,10 +43,10 @@ namespace VoodooShader
         virtual void Flush(void);
         virtual void SetLogLevel(_In_ const LogLevel level);
         virtual const LogLevel GetLogLevel(void) const;
-        virtual void LogModule(_In_ const Version * pModule);
+        virtual void LogModule(_In_ const Version * const pModule);
         virtual void Log
         (
-            _In_ LogLevel level,
+            _In_ const LogLevel level,
             _In_ const String & module,
             _In_ _Printf_format_string_ const String & msg,
             ...

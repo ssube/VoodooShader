@@ -65,7 +65,7 @@ namespace VoodooShader
         return m_Core;
     }
 
-    void VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ VariableType Type)
+    void VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType Type)
     {
 
         ILoggerRef logger = m_Core->GetLogger();
@@ -130,7 +130,7 @@ namespace VoodooShader
         }
     }
 
-    String VSParser::Parse(_In_ String input, _In_ ParseFlags flags) const
+    String VSParser::Parse(_In_ const String & input, _In_ const ParseFlags flags) const
     {
         Dictionary parseState;
 

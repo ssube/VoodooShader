@@ -36,9 +36,9 @@ namespace VoodooShader
         virtual String ToString(void) const throw();
         virtual ICore * GetCore(void) const throw();
 
-        virtual void Add(_In_ const String & name, _In_ const String & value, _In_ VariableType type = VT_Normal) throw();
+        virtual void Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) throw();
         virtual void Remove(_In_ const String & name) throw();
-        virtual String Parse(_In_ String input, _In_ ParseFlags flags = PF_None) const throw();
+        virtual String Parse(_In_ const String & input, _In_ const ParseFlags flags = PF_None) const throw();
 
         static const uint32_t VarMaxDepth    = 8;
         static const wchar_t VarDelimPre    = L'$';

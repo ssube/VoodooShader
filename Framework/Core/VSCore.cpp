@@ -111,7 +111,7 @@ namespace VoodooShader
 
             // Try loading the config file from each major location
             String configPath = m_Parser->Parse(L"$(runroot)$(config)");
-            bool result = m_ConfigFile->load_file(configPath.GetData());
+            pugi::xml_parse_result result = m_ConfigFile->load_file(configPath.GetData());
 
             if (!result)
             {
@@ -127,7 +127,12 @@ namespace VoodooShader
                         result = m_ConfigFile->load_file(configPath.GetData());
                         if (!result)
                         {
-                            Throw(VOODOO_CORE_NAME, L"Unable to find or parse config file.", nullptr);
+                            configPath = m_Parser->Parse(L"$(config)");
+                            result = m_ConfigFile->load_file(configPath.GetData());
+                            if (!result)
+                            {
+                                Throw(VOODOO_CORE_NAME, L"Unable to find or parse config file.", nullptr);
+                            }
                         }
                     }
                 }

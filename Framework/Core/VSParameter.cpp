@@ -54,7 +54,7 @@ namespace VoodooShader
         memset(m_Valuefloat, 0, sizeof(float) * 16);
     }
 
-    VSParameter::VSParameter(_In_ IShader * const pShader, _In_ CGparameter pParam) :
+    VSParameter::VSParameter(_In_ IShader * const pShader, _In_ CGparameter const pParam) :
         m_Refs(0), m_Core(pShader->GetCore()), m_Shader(pShader), m_Param(pParam), m_Virtual(false)
     {
         m_Type = Converter::ToParameterType(cgGetParameterType(m_Param));
@@ -114,7 +114,7 @@ namespace VoodooShader
         return m_Virtual;
     }
 
-    bool VSParameter::AttachParameter(IParameter * pParam)
+    bool VSParameter::AttachParameter(IParameter * const pParam)
     {
         if (!pParam)
         {

@@ -32,7 +32,7 @@ namespace VoodooShader
         public IShader
     {
     public:
-        VSShader(_In_ ICore * const pCore, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
+        VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
 
         virtual ~VSShader(void);
 

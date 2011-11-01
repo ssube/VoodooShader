@@ -38,37 +38,37 @@ namespace VoodooShader
     public:
         String();
         // char ctors
-        String(const char ch);
-        String(const char * str);
-        String(const uint32_t size, const char ch);
-        String(const uint32_t size, const char * str);
+        String(_In_ const char ch);
+        String(_In_z_ const char * str);
+        String(_In_ const uint32_t size, _In_ const char ch);
+        String(_In_ const uint32_t size, _In_z_count_(size) const char * str);
         // wchar_t ctors
-        String(const wchar_t ch);
-        String(const wchar_t * str);
-        String(const uint32_t size, const wchar_t ch);
-        String(const uint32_t size, const wchar_t * str);
+        String(_In_ const wchar_t ch);
+        String(_In_z_ const wchar_t * str);
+        String(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
         // class ctors
-        String(const String & str);
+        String(_In_ const String & str);
 
 #ifdef _VECTOR_
-        String(const std::vector<char> & str)
+        String(_In_ const std::vector<char> & str)
         {
             this->CInit(0, &str[0]);
         }
 
-        String(const std::vector<wchar_t> & str)
+        String(_In_ const std::vector<wchar_t> & str)
         {
             this->WInit(0, &str[0]);
         }
 #endif
 
 #ifdef _STRING_
-        String(const std::string & str)
+        String(_In_ const std::string & str)
         {
             this->CInit(0, str.c_str());
         }
 
-        String(const std::wstring & str)
+        String(_In_ const std::wstring & str)
         {
             this->WInit(0, str.c_str());
         };
@@ -77,77 +77,77 @@ namespace VoodooShader
         ~String();
 
         // Convert
-        int32_t ToCharStr(int32_t size, _In_opt_count_(size) char * const pBuffer) const;
+        int32_t ToCharStr(_In_ int32_t size, _Inout_opt_count_(size) char * const pBuffer) const;
 #ifdef _STRING_
         std::wstring ToString() const { return std::wstring(this->GetData()); };
 #endif
 
         // Modify
-        String & Append(const wchar_t ch);
-        String & Append(const uint32_t size, const wchar_t ch);
-        String & Append(const wchar_t * str);
-        String & Append(const uint32_t size, const wchar_t * str);
-        String & Append(const String & str);
-        String & Assign(const wchar_t ch);
-        String & Assign(const uint32_t size, const wchar_t ch);
-        String & Assign(const wchar_t * str);
-        String & Assign(const uint32_t size, const wchar_t * str);
-        String & Assign(const String & str);
+        String & Append(_In_ const wchar_t ch);
+        String & Append(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String & Append(_In_ const wchar_t * str);
+        String & Append(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
+        String & Append(_In_ const String & str);
+        String & Assign(_In_ const wchar_t ch);
+        String & Assign(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String & Assign(_In_ const wchar_t * str);
+        String & Assign(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
+        String & Assign(_In_ const String & str);
         String & Clear();
-        String & Prepend(const wchar_t ch);
-        String & Prepend(const uint32_t size, const wchar_t ch);
-        String & Prepend(const wchar_t * str);
-        String & Prepend(const uint32_t size, const wchar_t * str);
-        String & Prepend(const String & str);
-        String & Truncate(uint32_t size);
+        String & Prepend(_In_ const wchar_t ch);
+        String & Prepend(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String & Prepend(_In_z_ const wchar_t * str);
+        String & Prepend(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
+        String & Prepend(_In_ const String & str);
+        String & Truncate(_In_ uint32_t size);
 
         // Copy
         String ToLower() const;
         String ToUpper() const;
 
         // Part
-        String Left(uint32_t count) const;
-        String Right(uint32_t count) const;
-        String Substr(uint32_t start, uint32_t count = String::Npos) const;
+        String Left(_In_ uint32_t count) const;
+        String Right(_In_ uint32_t count) const;
+        String Substr(_In_ uint32_t start, _In_ uint32_t count = String::Npos) const;
 
         // Predicates
-        bool Compare(const wchar_t ch, bool useCase = true) const;
-        bool Compare(const wchar_t * str, bool useCase = true) const;
-        bool Compare(const String & str, bool useCase = true) const;
-        bool StartsWith(const wchar_t ch, bool useCase = true) const;
-        bool StartsWith(const wchar_t * str, bool useCase = true) const;
-        bool StartsWith(const String & str, bool useCase = true) const;
-        bool EndsWith(const wchar_t ch, bool useCase = true) const;
-        bool EndsWith(const wchar_t * str, bool useCase = true) const;
-        bool EndsWith(const String & str, bool useCase = true) const;
-        bool Contains(const wchar_t ch, bool useCase = true) const;
-        bool Contains(const wchar_t * str, bool useCase = true) const;
-        bool Contains(const String & str, bool useCase = true) const;
+        bool Compare(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        bool Compare(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
+        bool Compare(_In_ const String & str, _In_ bool useCase = true) const;
+        bool StartsWith(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        bool StartsWith(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
+        bool StartsWith(_In_ const String & str, _In_ bool useCase = true) const;
+        bool EndsWith(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        bool EndsWith(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
+        bool EndsWith(_In_ const String & str, _In_ bool useCase = true) const;
+        bool Contains(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        bool Contains(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
+        bool Contains(_In_ const String & str, _In_ bool useCase = true) const;
 
         // Find
-        uint32_t Find(const wchar_t ch, bool useCase = true) const;
-        uint32_t Find(const wchar_t * str, bool useCase = true) const;
-        uint32_t Find(const String & str, bool useCase = true) const;
-        uint32_t ReverseFind(const wchar_t ch, bool useCase = true) const;
-        uint32_t ReverseFind(const wchar_t * str, bool useCase = true) const;
-        uint32_t ReverseFind(const String & str, bool useCase = true) const;
+        uint32_t Find(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        uint32_t Find(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
+        uint32_t Find(_In_ const String & str, _In_ bool useCase = true) const;
+        uint32_t ReverseFind(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        uint32_t ReverseFind(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
+        uint32_t ReverseFind(_In_ const String & str, _In_ bool useCase = true) const;
 
         // Replace
-        String & Replace(const wchar_t fch, const wchar_t rch, bool useCase = true);
-        String & Replace(const wchar_t * fstr, const wchar_t * rstr, bool useCase = true);
-        String & Replace(const String & fstr, const String & rstr, bool caseSensitive = true);
-        String & Remove(const wchar_t fch, bool useCase = true);
-        String & Remove(const wchar_t * fstr, bool useCase = true);
-        String & Remove(const String & fstr, bool useCase = true);
+        String & Replace(_In_ const wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase = true);
+        String & Replace(_In_z_ const wchar_t * fstr, _In_z_ const wchar_t * rstr, _In_ bool useCase = true);
+        String & Replace(_In_ const String & fstr, _In_ const String & rstr, _In_ bool caseSensitive = true);
+        String & Remove(_In_ const wchar_t fch, _In_ bool useCase = true);
+        String & Remove(_In_z_ const wchar_t * fstr, _In_ bool useCase = true);
+        String & Remove(_In_ const String & fstr, _In_ bool useCase = true);
 
         // Format
-        static String FormatV(const wchar_t * fmt, va_list args);
-        inline static String FormatV(const String & fmt, va_list args) 
+        static String FormatV(_In_z_ _Printf_format_string_ const wchar_t * fmt, _In_opt_ va_list args);
+        inline static String FormatV(_In_ _Printf_format_string_ const String & fmt, va_list args) 
         { 
             return String::FormatV(fmt.GetData(), args); 
         };
 
-        inline static String Format(_In_ _Printf_format_string_ const wchar_t * fmt, ...)
+        inline static String Format(_In_z_ _Printf_format_string_ const wchar_t * fmt, ...)
         {
             va_list args;
             va_start(args, fmt);
@@ -156,7 +156,7 @@ namespace VoodooShader
             return str;
         };
 
-        inline static String Format(_Printf_format_string_ const String & fmt, ...)
+        inline static String Format(_In_ _Printf_format_string_ const String & fmt, ...)
         {
             va_list args;
             va_start(args, fmt);
@@ -165,7 +165,7 @@ namespace VoodooShader
             return str;
         };
 
-        inline String & AppendFormat(_Printf_format_string_ const wchar_t * fmt, ...) 
+        inline String & AppendFormat(_In_z_ _Printf_format_string_ const wchar_t * fmt, ...) 
         { 
             va_list args; 
             va_start(args, fmt); 
@@ -174,7 +174,7 @@ namespace VoodooShader
             return (*this); 
         };
 
-        inline String & AppendFormat(_Printf_format_string_ const String & fmt, ...)
+        inline String & AppendFormat(_In_ _Printf_format_string_ const String & fmt, ...)
         { 
             va_list args; 
             va_start(args, fmt); 
@@ -187,44 +187,44 @@ namespace VoodooShader
         uint32_t GetLength() const;
         bool IsEmpty() const;
 
-        wchar_t GetAt(uint32_t pos) const;
-        wchar_t & operator[](uint32_t pos);
-        void SetAt(uint32_t pos, wchar_t data);
+        wchar_t GetAt(_In_ uint32_t pos) const;
+        wchar_t & operator[](_In_ uint32_t pos);
+        void SetAt(_In_ uint32_t pos, _In_ wchar_t data);
 
         const wchar_t * GetData() const;
 #ifdef _STRING_
         inline std::wstring ToStdString() const { return std::wstring(this->GetData()); };
 #endif
 
-        inline String & operator=(const wchar_t ch) { this->Assign(ch); return (*this); };
-        inline String & operator=(const wchar_t * str) { this->Assign(str); return (*this); };
-        inline String & operator=(const String & str) { this->Assign(str); return (*this); };
-        inline String & operator+=(const wchar_t ch) { this->Append(ch); return (*this); };
-        inline String & operator+=(const wchar_t * str) { this->Append(str); return (*this); };
-        inline String & operator+=(const String & str) { this->Append(str); return (*this); };
-        inline const String operator+(const wchar_t ch) const { String c = (*this); c += ch; return c; };
-        inline const String operator+(const wchar_t * str) const { String c = (*this); c += str; return c; };
-        inline const String operator+(const String & str) const { String c = (*this); c += str; return c; };
+        inline String & operator=(_In_ const wchar_t ch) { this->Assign(ch); return (*this); };
+        inline String & operator=(_In_z_ const wchar_t * str) { this->Assign(str); return (*this); };
+        inline String & operator=(_In_ const String & str) { this->Assign(str); return (*this); };
+        inline String & operator+=(_In_ const wchar_t ch) { this->Append(ch); return (*this); };
+        inline String & operator+=(_In_z_ const wchar_t * str) { this->Append(str); return (*this); };
+        inline String & operator+=(_In_ const String & str) { this->Append(str); return (*this); };
+        inline const String operator+(_In_ const wchar_t ch) const { String c = (*this); c += ch; return c; };
+        inline const String operator+(_In_z_ const wchar_t * str) const { String c = (*this); c += str; return c; };
+        inline const String operator+(_In_ const String & str) const { String c = (*this); c += str; return c; };
 
-        inline bool operator==(const wchar_t * str) const { return this->Compare(str); };
-        inline bool operator==(const String & str) const { return this->Compare(str.GetData()); };
-        inline bool operator!=(const wchar_t * str) const { return !(this->operator==(str)); };
-        inline bool operator!=(const String & str) const { return !(this->operator==(str.GetData())); };
+        inline bool operator==(_In_z_ const wchar_t * str) const { return this->Compare(str); };
+        inline bool operator==(_In_ const String & str) const { return this->Compare(str.GetData()); };
+        inline bool operator!=(_In_z_ const wchar_t * str) const { return !(this->operator==(str)); };
+        inline bool operator!=(_In_ const String & str) const { return !(this->operator==(str.GetData())); };
 
-        bool operator<(const wchar_t * str) const;
-        bool operator<(const String & str) const;
-        bool operator>(const wchar_t * str) const;
-        bool operator>(const String & str) const;
-        inline bool operator<=(const wchar_t * str) const { return !(this->operator>(str)); };
-        inline bool operator<=(const String & str) const { return !(this->operator>(str.GetData())); };
-        inline bool operator>=(const wchar_t * str) const { return !(this->operator<(str)); };
-        inline bool operator>=(const String & str) const { return !(this->operator<(str.GetData())); };
+        bool operator<(_In_z_ const wchar_t * str) const;
+        bool operator<(_In_ const String & str) const;
+        bool operator>(_In_z_ const wchar_t * str) const;
+        bool operator>(_In_ const String & str) const;
+        inline bool operator<=(_In_z_ const wchar_t * str) const { return !(this->operator>(str)); };
+        inline bool operator<=(_In_ const String & str) const { return !(this->operator>(str.GetData())); };
+        inline bool operator>=(_In_z_ const wchar_t * str) const { return !(this->operator<(str)); };
+        inline bool operator>=(_In_ const String & str) const { return !(this->operator<(str.GetData())); };
 
         static const uint32_t Npos = (uint32_t)-1;
 
     private:
-        void CInit(const uint32_t size, const char * str);
-        void WInit(const uint32_t size, const wchar_t * str);
+        void CInit(_In_ const uint32_t size, _In_z_count_(size) const char * str);
+        void WInit(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
 
         StringImpl * m_Impl;
     };

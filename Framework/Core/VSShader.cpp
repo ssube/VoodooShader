@@ -35,7 +35,8 @@
 
 namespace VoodooShader
 {
-    VSShader::VSShader(_In_ ICore * const pCore, _In_ const String & path, _In_opt_ const char ** ppArgs) :
+    //! @todo SAL fails if the input core here has an _In_ annotation. This needs fixed.
+    VSShader::VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & path, _In_opt_ const char ** ppArgs) :
         m_Core(pCore), m_Name(path), m_DefaultTechnique(nullptr)
     {
         CGcontext context = m_Core->GetCgContext();

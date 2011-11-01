@@ -71,7 +71,7 @@ namespace VoodooShader
          * @param value The variable's value (may contain variables, they will be resolved when this variable is used).
          * @param system Marks the variable as a system variable. These cannot be changed or removed.
          */
-        virtual void Add(_In_ const String & name, _In_ const String & value, _In_ VariableType type = VT_Normal) throw() = 0;
+        virtual void Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) throw() = 0;
 
         /**
          * Removes a variable from the internal dictionary. 
@@ -86,7 +86,7 @@ namespace VoodooShader
          *
          * @sa @ref varsyntax for details on how variables work
          */
-        virtual String Parse(_In_ String input, _In_ ParseFlags flags = PF_None) const throw() = 0;
+        virtual String Parse(_In_ const String & input, _In_ const ParseFlags flags = PF_None) const throw() = 0;
     };
 
     /**
