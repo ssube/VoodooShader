@@ -222,7 +222,8 @@ namespace VoodooShader
             /**
              * Retrieves a portion of the texture data from the image. 
              * 
-             * @param desc The region and format to be returned. 
+             * @param pDesc The region and format to be returned. 
+             * @param size The size of the buffer
              * @param buffer The memory for the return data to be placed in. Must already be allocated, or nullptr. 
              * @return The number of bytes retrieved (or, if @p buffer is nullptr, the number that would be retrieved).
              * 

@@ -26,9 +26,9 @@ namespace VoodooShader
     /**
      * Non-member function provided to Cg as an error handling callback. 
      * 
-     * @param context The Cg context throwing the error. 
-     * @param error   The error code. 
-     * @param core    If non-nullptr, the core associated with the error
+     * @param pContext The Cg context throwing the error. 
+     * @param error    The error code. 
+     * @param pCore    If non-nullptr, the core associated with the error
      */
     void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void * pCore);
 

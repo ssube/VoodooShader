@@ -128,8 +128,8 @@ namespace VoodooShader
      * @subsection varssyntexstate Variable States & Recursion 
      * Each parsing call creates a state block and uses a discrete depth counter. The depth counter handles recursion 
      * and operated very simply. Each time the parser encounters a string that requires parsing, the counter is
-     * incremented and passed on. This prevents more than @ref IParser::VarMaxDepth levels of recursion (8, by default)
-     * and infinite loops. When this limit is reached, variables will not be parsed.
+     * incremented and passed on. The recursion limit is implementation-defined, with VSParser using 8. When this limit is
+     * reached, variables will not be parsed, preventing infinite loops.
      * 
      * State blocks are somewhat more Cthulhic in their logic. When the parser is called, a state block is created and
      * passed on, similar to the depth counter. However, if a variable name containing a ':' character is encountered,

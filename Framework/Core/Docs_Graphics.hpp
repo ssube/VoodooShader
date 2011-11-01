@@ -192,7 +192,7 @@ namespace VoodooShader
       *     (quality may suffer).
       * <br/>
       * <em><sup>2</sup>:</em> Depth textures suffer additional restrictions when used with the DirectX 9 API. See the 
-      *     @ref depthbuffers "depth buffers" section for more information.
+      *     @ref voodoo_textures_depth "depth buffers" section for more information.
       * <br/>
       * <em><sup>3</sup>:</em> Depth textures do not map to components in all APIs. The most likely mapping is given, but 
       *     access is not guaranteed. 

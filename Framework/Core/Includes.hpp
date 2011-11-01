@@ -200,7 +200,7 @@ namespace VoodooShader
 #pragma warning(push)
 #pragma warning(disable: 4480)
     /**
-     * Texture formats for use by @ref VoodooShader::Texture "Textures", describing the layout and size of the texture data. 
+     * Texture formats for use by @ref VoodooShader::ITexture "Textures", describing the layout and size of the texture data. 
      * These may not be implemented by the underlying graphics API exactly as they are indicated here, but the available 
      * components and sizes are guaranteed to be equal to or greater than the indicated values. Further information on 
      * texture formats and depth may be found on the @ref Textures "texture formats page".
@@ -226,8 +226,8 @@ namespace VoodooShader
     };
 
     /**
-     * Parameter types for use by @ref VoodooShader::Parameter "Parameters." These
-     * types are available across hardware, exposing most common variables
+     * Parameter types valid for @ref VoodooShader::IParameter. These types are available across hardware, exposing most 
+     * common shader language types.
      */
     enum ParameterType : int32_t
     {

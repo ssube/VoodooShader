@@ -64,7 +64,7 @@ namespace VoodooShader
          * Link a particular effect-level parameter against various core elements (exact
          * behavior depends on param type). 
          * 
-         * @param param The parameter to link.
+         * @param pParam The parameter to link.
          */
         void LinkParameter(_In_ IParameter * pParam);
 
@@ -72,14 +72,15 @@ namespace VoodooShader
          * Links a particular effect-level sampler against a core texture. This generally
          * should be called by IShader::LinkParameter(). 
          * 
-         * @param param The sampler to link
+         * @param pParam The sampler to link
          */
         void LinkSampler(_In_ IParameter * pParam);
 
         /**
          * Find texture information from a parameter and create a texture based on that
-         * data. Calls IShader::LinkSampler() after texture creation if appropriate. @param
-         * param The parameter to use.
+         * data. Calls IShader::LinkSampler() after texture creation if appropriate. 
+         *
+         * @param pParam The parameter to use.
          */
         void CreateParameterTexture(_In_ IParameter * pParam);
 
