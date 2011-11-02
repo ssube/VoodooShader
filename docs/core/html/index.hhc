@@ -28,7 +28,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Name" value="License"><param name="Local" value="voodoo_license.html"><param name="ImageNumber" value="11"></OBJECT>
     <UL>
     </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Variables"><param name="Local" value="varsyntax.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Variables"><param name="Local" value="voodoo_vars.html"><param name="ImageNumber" value="11"></OBJECT>
     <UL>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Todo List"><param name="Local" value="todo.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -106,13 +106,16 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::String"><param name="Local" value="class_voodoo_shader_1_1_string.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo/WFileSystem @{"><param name="Local" value="group___voodoo_w_file_system.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo/WFileSystem @{"><param name="Local" value="group__voodoo__module__wfilsystem.html"><param name="ImageNumber" value="11"></OBJECT>
     <UL>
     </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo/EHHook @{;"><param name="Local" value="group___voodoo_e_h_hook.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo/EHHook @{"><param name="Local" value="group__voodoo__module__ehhook.html"><param name="ImageNumber" value="11"></OBJECT>
     <UL>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo/Loader @{"><param name="Local" value="group___voodoo_loader.html"><param name="ImageNumber" value="11"></OBJECT>
+    <UL>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo/Loader @{"><param name="Local" value="group__voodoo__module__loader.html"><param name="ImageNumber" value="11"></OBJECT>
     <UL>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo/XmlLogger @{;"><param name="Local" value="group___voodoo_xml_logger.html"><param name="ImageNumber" value="11"></OBJECT>

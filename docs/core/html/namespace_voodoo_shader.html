@@ -1358,7 +1358,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Texture formats for use by <a class="el" href="class_voodoo_shader_1_1_i_texture.html">Textures</a>, describing the layout and size of the texture data. </p>
-<p>These may not be implemented by the underlying graphics API exactly as they are indicated here, but the available components and sizes are guaranteed to be equal to or greater than the indicated values. Further information on texture formats and depth may be found on the texture formats page. </p>
+<p>These may not be implemented by the underlying graphics API exactly as they are indicated here, but the available components and sizes are guaranteed to be equal to or greater than the indicated values. Further information on texture formats and depth may be found on the <a class="el" href="voodoo_textures.html#voodoo_textures_formats">texture formats chart</a>. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
 <tr><td valign="top"><em><a class="anchor" id="ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d"></a><!-- doxytag: member="TF_Unknown" ref="ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d" args="" -->TF_Unknown</em>&nbsp;</td><td>
 </td></tr>
@@ -1561,13 +1561,14 @@ Functions</h2></td></tr>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">pInitParams</td><td>Setup parameters for this core. </td></tr>
+    <tr><td class="paramname">catchErrors</td><td>If true, all exceptions thrown by the core ctor are caught within the function. Otherwise, they are returned. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A new <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> object. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A new <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> object.</dd></dl>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::exception</td><td>in case of errors, if CatchErrors is false. </td></tr>
+    <tr><td class="paramname">std::exception</td><td>in case of errors, if catchErrors is false. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1690,7 +1691,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 1 2011 15:42:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 1 2011 22:54:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -116,8 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a technique from the shader by name.  <a href="#a5b6f26b3c23c9f1642bdcacf8f311ddf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#a2d1106e50c1d04e427c9b90f7b19f718">GetDefaultTechnique</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the default technique from this shader.  <a href="#a2d1106e50c1d04e427c9b90f7b19f718"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#af27fef9c04ff8e1958b0af16f6845629">SetDefaultTechnique</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *const Technique)=0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a technique from this shader to be used as the default technique.  <a href="#af27fef9c04ff8e1958b0af16f6845629"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#a56f6e470ee5dafd98357b2bcea145757">SetDefaultTechnique</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *const pTechnique)=0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a technique from this shader to be used as the default technique.  <a href="#a56f6e470ee5dafd98357b2bcea145757"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#abc4ba829be631285600160ab546c9119">GetParameterCount</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of effect-level parameters in this shader.  <a href="#abc4ba829be631285600160ab546c9119"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#a28c3e3449236f68a36dc8aca5e66964b">GetParameter</a> (_In_ const uint32_t index) const =0  throw ()</td></tr>
@@ -130,7 +130,7 @@ Public Member Functions</h2></td></tr>
 <p>Shaders contain significant linking and processing data, as well as the Voodoo-specific linking stage. <a class="el" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> file loading and compilation are handled internally, the shader can be constructed from a file location or existing Cg effect object.</p>
 <dl class="note"><dt><b>Note:</b></dt><dd>Shaders correspond to DirectX effects or a group of OpenGL programs. </dd>
 <dd>
-A shader may contain multiple Technique techniques. <a class="el" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> techniques must be separately validated, only techniques valid on the current hardware will be usable in the shader.</dd></dl>
+A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> techniques. <a class="el" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> techniques must be separately validated, only techniques valid on the current hardware will be usable in the shader.</dd></dl>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>For any technique in a shader to be valid, the entire shader must compile without errors. This <em>does not</em> mean that all techniques will be valid. </dd></dl>
 
 <p>Definition at line <a class="el" href="_i_shader_8hpp_source.html#l00045">45</a> of file <a class="el" href="_i_shader_8hpp_source.html">IShader.hpp</a>.</p>
@@ -288,7 +288,7 @@ A shader may contain multiple Technique techniques. <a class="el" href="class_vo
 <p>These may be modified at runtime and will automatically update Cg and the GPU with their value (in most cases).</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Index</td><td>The index of the parameter to retrieve. </td></tr>
+    <tr><td class="paramname">index</td><td>The index of the parameter to retrieve. </td></tr>
   </table>
   </dd>
 </dl>
@@ -340,7 +340,7 @@ A shader may contain multiple Technique techniques. <a class="el" href="class_vo
 <p>Most cases should use the default technique, but some specific applications may want a particular technique.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Index</td><td>The index of the technique to get. </td></tr>
+    <tr><td class="paramname">index</td><td>The index of the technique to get. </td></tr>
   </table>
   </dd>
 </dl>
@@ -396,7 +396,7 @@ A shader may contain multiple Technique techniques. <a class="el" href="class_vo
 
 </div>
 </div>
-<a class="anchor" id="af27fef9c04ff8e1958b0af16f6845629"></a><!-- doxytag: member="VoodooShader::IShader::SetDefaultTechnique" ref="af27fef9c04ff8e1958b0af16f6845629" args="(_In_ ITechnique *const Technique)=0" -->
+<a class="anchor" id="a56f6e470ee5dafd98357b2bcea145757"></a><!-- doxytag: member="VoodooShader::IShader::SetDefaultTechnique" ref="a56f6e470ee5dafd98357b2bcea145757" args="(_In_ ITechnique *const pTechnique)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -404,7 +404,7 @@ A shader may contain multiple Technique techniques. <a class="el" href="class_vo
           <td class="memname">virtual bool VoodooShader::IShader::SetDefaultTechnique </td>
           <td>(</td>
           <td class="paramtype">_In_ <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *const&#160;</td>
-          <td class="paramname"><em>Technique</em></td><td>)</td>
+          <td class="paramname"><em>pTechnique</em></td><td>)</td>
           <td>  throw ()<code> [pure virtual]</code></td>
         </tr>
       </table>
@@ -415,7 +415,7 @@ A shader may contain multiple Technique techniques. <a class="el" href="class_vo
 <p>Some adapter functions simply retrieve the default technique to draw with.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Technique</td><td>The technique within this shader to use. </td></tr>
+    <tr><td class="paramname">pTechnique</td><td>The technique within this shader to use. </td></tr>
   </table>
   </dd>
 </dl>
@@ -457,7 +457,7 @@ A shader may contain multiple Technique techniques. <a class="el" href="class_vo
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 1 2011 15:42:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 1 2011 22:54:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

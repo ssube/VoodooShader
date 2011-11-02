@@ -277,7 +277,7 @@ Variables</h2></td></tr>
 <p>These may be modified at runtime and will automatically update Cg and the GPU with their value (in most cases).</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Index</td><td>The index of the parameter to retrieve. </td></tr>
+    <tr><td class="paramname">index</td><td>The index of the parameter to retrieve. </td></tr>
   </table>
   </dd>
 </dl>
@@ -333,7 +333,7 @@ Variables</h2></td></tr>
 <p>Most cases should use the default technique, but some specific applications may want a particular technique.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Index</td><td>The index of the technique to get. </td></tr>
+    <tr><td class="paramname">index</td><td>The index of the technique to get. </td></tr>
   </table>
   </dd>
 </dl>
@@ -478,7 +478,7 @@ Variables</h2></td></tr>
           <td class="memname">bool VoodooShader::VSShader::SetDefaultTechnique </td>
           <td>(</td>
           <td class="paramtype">_In_ <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *const&#160;</td>
-          <td class="paramname"><em>Technique</em></td><td>)</td>
+          <td class="paramname"><em>pTechnique</em></td><td>)</td>
           <td>  throw ()<code> [virtual]</code></td>
         </tr>
       </table>
@@ -489,14 +489,14 @@ Variables</h2></td></tr>
 <p>Some adapter functions simply retrieve the default technique to draw with.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Technique</td><td>The technique within this shader to use. </td></tr>
+    <tr><td class="paramname">pTechnique</td><td>The technique within this shader to use. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the setting.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>This will validate that the technique belongs to this shader. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#af27fef9c04ff8e1958b0af16f6845629">VoodooShader::IShader</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a56f6e470ee5dafd98357b2bcea145757">VoodooShader::IShader</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00134">134</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
 
@@ -709,7 +709,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 1 2011 15:42:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 1 2011 22:54:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

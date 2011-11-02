@@ -88,11 +88,12 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_converter.html#a6a85295cf0dcc58da0a6d6776edc681f">ToParameterCategory</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a">ParameterType</a> type)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f">TextureFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_converter.html#aef7fda18ca1ddc967a3e2f00e7ba8d2f">ToTextureFormat</a> (_In_ const wchar_t *format)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_converter.html#a27447bbcd8a5d52ebda04335c034c818">ToComponents</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a">ParameterType</a> Type)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_converter.html#ab2cc047d3cf85a8a40ecf03137a867d1">ToString</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f">TextureFormat</a> Format)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to convert enum values into readable strings used in logging; this overload handles texture formats.  <a href="#ab2cc047d3cf85a8a40ecf03137a867d1"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_converter.html#a9acd31fc45242864a32991a05fbbe757">ToString</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a">ParameterType</a> Type)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to convert enum values into readable strings used in logging; this overload handles parameter types.  <a href="#a9acd31fc45242864a32991a05fbbe757"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_converter.html#a71e45f542407a7a45a4438b940f96145">ToString</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a> Category)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_converter.html#ab4ff8987e3e6bd3cec18ccb73febddf4">ToString</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f">TextureFormat</a> format)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to convert enum values into readable strings used in logging; this overload handles texture formats.  <a href="#ab4ff8987e3e6bd3cec18ccb73febddf4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_converter.html#a9f351e04bc307929bef2cce5cc443cb7">ToString</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a">ParameterType</a> type)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to convert enum values into readable strings used in logging; this overload handles parameter types.  <a href="#a9f351e04bc307929bef2cce5cc443cb7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_converter.html#a1a89169822a47e1785d3d774a6687452">ToString</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a> category)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to convert enum values into readable strings used in logging; this overload handles parameter types.  <a href="#a1a89169822a47e1785d3d774a6687452"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Conversion helper class for Voodoo and Cg types. </p>
@@ -119,7 +120,7 @@ Static Public Member Functions</h2></td></tr>
 <p>This function should be used to convert between these two types, as it allows for future types to be added or updated as necessary without changing any other code.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Type</td><td>The internal parameter type. </td></tr>
+    <tr><td class="paramname">type</td><td>The internal parameter type. </td></tr>
   </table>
   </dd>
 </dl>
@@ -186,7 +187,7 @@ Static Public Member Functions</h2></td></tr>
 <p>This function should be used to convert between these two types, as it allows for future types to be added or updated as necessary without changing any other code.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Type</td><td>The Cg type. </td></tr>
+    <tr><td class="paramname">type</td><td>The Cg type. </td></tr>
   </table>
   </dd>
 </dl>
@@ -196,7 +197,7 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab2cc047d3cf85a8a40ecf03137a867d1"></a><!-- doxytag: member="VoodooShader::Converter::ToString" ref="ab2cc047d3cf85a8a40ecf03137a867d1" args="(_In_ TextureFormat Format)" -->
+<a class="anchor" id="ab4ff8987e3e6bd3cec18ccb73febddf4"></a><!-- doxytag: member="VoodooShader::Converter::ToString" ref="ab4ff8987e3e6bd3cec18ccb73febddf4" args="(_In_ TextureFormat format)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -204,7 +205,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">const wchar_t * VoodooShader::Converter::ToString </td>
           <td>(</td>
           <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f">TextureFormat</a>&#160;</td>
-          <td class="paramname"><em>Format</em></td><td>)</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
           <td><code> [static]</code></td>
         </tr>
       </table>
@@ -214,7 +215,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Helper function to convert enum values into readable strings used in logging; this overload handles texture formats. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Format</td><td>The texture format to find the name of. </td></tr>
+    <tr><td class="paramname">format</td><td>The texture format to find the name of. </td></tr>
   </table>
   </dd>
 </dl>
@@ -224,7 +225,7 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9acd31fc45242864a32991a05fbbe757"></a><!-- doxytag: member="VoodooShader::Converter::ToString" ref="a9acd31fc45242864a32991a05fbbe757" args="(_In_ ParameterType Type)" -->
+<a class="anchor" id="a9f351e04bc307929bef2cce5cc443cb7"></a><!-- doxytag: member="VoodooShader::Converter::ToString" ref="a9f351e04bc307929bef2cce5cc443cb7" args="(_In_ ParameterType type)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -232,7 +233,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">const wchar_t * VoodooShader::Converter::ToString </td>
           <td>(</td>
           <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a">ParameterType</a>&#160;</td>
-          <td class="paramname"><em>Type</em></td><td>)</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
           <td><code> [static]</code></td>
         </tr>
       </table>
@@ -242,17 +243,17 @@ Static Public Member Functions</h2></td></tr>
 <p>Helper function to convert enum values into readable strings used in logging; this overload handles parameter types. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">pt</td><td>The parameter type to find the name of. </td></tr>
+    <tr><td class="paramname">type</td><td>The parameter type to find the name of. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A C-string with the name (usually identical to the identifier). </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A string with the name (usually identical to the identifier). </dd></dl>
 
 <p>Definition at line <a class="el" href="_converter_8cpp_source.html#l00237">237</a> of file <a class="el" href="_converter_8cpp_source.html">Converter.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a71e45f542407a7a45a4438b940f96145"></a><!-- doxytag: member="VoodooShader::Converter::ToString" ref="a71e45f542407a7a45a4438b940f96145" args="(_In_ ParameterCategory Category)" -->
+<a class="anchor" id="a1a89169822a47e1785d3d774a6687452"></a><!-- doxytag: member="VoodooShader::Converter::ToString" ref="a1a89169822a47e1785d3d774a6687452" args="(_In_ ParameterCategory category)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -260,12 +261,21 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">const wchar_t * VoodooShader::Converter::ToString </td>
           <td>(</td>
           <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a>&#160;</td>
-          <td class="paramname"><em>Category</em></td><td>)</td>
+          <td class="paramname"><em>category</em></td><td>)</td>
           <td><code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Helper function to convert enum values into readable strings used in logging; this overload handles parameter types. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">category</td><td>The parameter type to find the name of. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A string with the name (usually identical to the identifier). </dd></dl>
 
 <p>Definition at line <a class="el" href="_converter_8cpp_source.html#l00267">267</a> of file <a class="el" href="_converter_8cpp_source.html">Converter.cpp</a>.</p>
 
@@ -298,7 +308,7 @@ Static Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 1 2011 15:42:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 1 2011 22:54:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

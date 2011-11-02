@@ -112,6 +112,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a545b98442f1a1fc19f0b0f082f71d4a2">LoadFile</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *pFile)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a single module, using an absolute or relative filename.  <a href="#a545b98442f1a1fc19f0b0f082f71d4a2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#aea26f2fa7cbb390a307f737f9fc2710d">LoadFile</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;filename)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a single module, using an absolute or relative filename.  <a href="#aea26f2fa7cbb390a307f737f9fc2710d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#aca551c6d0ab9f56b0c00fc4aa7d147d1">ClassExists</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests to see if a class exists in the list provided by all loaded modules.  <a href="#aca551c6d0ab9f56b0c00fc4aa7d147d1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual _Check_return_ <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#aff5c0f4dab79cd2874c6041630fa18af">CreateObject</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name) const </td></tr>
@@ -208,6 +209,12 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Tests to see if a class exists in the list provided by all loaded modules. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The class name </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a2b03a92a52e04f5cf133446095376ced">VoodooShader::IModuleManager</a>.</p>
 
@@ -330,11 +337,11 @@ Private Attributes</h2></td></tr>
 <p>Loads a single module, using an absolute or relative filename. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Filename</td><td>The file to load, sent through the parser before use.</td></tr>
+    <tr><td class="paramname">pFile</td><td>The file to load, a file system reference.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>When the module is loaded, if an absolute path is provided, the module's directory is used in the search path for required DLLs. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This always uses the module's directory in the search path for required DLLs. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a2aa85f86a3af45063d221f25ea764996">VoodooShader::IModuleManager</a>.</p>
 
@@ -356,6 +363,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Loads a single module, using an absolute or relative filename. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>The file to load, sent through the parser before use.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>When the module is loaded, if an absolute path is provided, the module's directory is used in the search path for required DLLs. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a030518977bae7e64289b5cd91df59fc7">VoodooShader::IModuleManager</a>.</p>
 
@@ -391,8 +407,8 @@ Private Attributes</h2></td></tr>
 <p>Loads a set of modules from a given path. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Path</td><td>The path to load from (may be any Windows path type). Sent through the parser before use. </td></tr>
-    <tr><td class="paramname">Filter</td><td>A regex to filter filenames by.</td></tr>
+    <tr><td class="paramname">path</td><td>The path to load from (may be any Windows path type). Sent through the parser before use. </td></tr>
+    <tr><td class="paramname">filter</td><td>A regex to filter filenames by.</td></tr>
   </table>
   </dd>
 </dl>
@@ -521,7 +537,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 1 2011 15:42:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 1 2011 22:54:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

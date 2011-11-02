@@ -122,8 +122,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a render target from the adapter.  <a href="#acdac8f615c66a5683b59512d243d3802"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a01d002d132e0cbe55285c8cac5f29bf9">CreateTexture</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, _In_ const <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a> *pDesc)=0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a named texture within the API and returns it for registration and handling.  <a href="#a01d002d132e0cbe55285c8cac5f29bf9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#ab0574fc7797f0f9fe5c176e8a6acc65e">LoadTexture</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, _In_ const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> *pRegion)=0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a named texture into the API and registers it with the Core.  <a href="#ab0574fc7797f0f9fe5c176e8a6acc65e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#ae6ccad605f41cc1caf1513e1da547dcf">LoadTexture</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *const pFile, _In_ const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> *pRegion)=0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a named texture into the API and registers it with the Core.  <a href="#ae6ccad605f41cc1caf1513e1da547dcf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a772716af9e01759c759299f2b325fdb4">DrawGeometry</a> (_In_ const uint32_t count, _In_count_(count) const <a class="el" href="struct_voodoo_shader_1_1_vertex_struct.html">VertexStruct</a> *const pVertexData)=0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws geometry from system memory.  <a href="#a772716af9e01759c759299f2b325fdb4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#aaee32dc508bcffabedfb44c3c45f76eb">ApplyParameter</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> *const pParameter)=0  throw ()</td></tr>
@@ -140,9 +140,9 @@ Public Member Functions</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This class should be implemented for a specific graphics application; some generic adapters are provided for major APIs, but in most cases application-specific behavior will make these only partially helpful.</dd></dl>
-<dl class="see"><dt><b>See also:</b></dt><dd>See the adapter specifications for details on what is required of adapter modules and classes. </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd>See the <a class="el" href="voodoo_spec_adapter.html">adapter specifications</a> for details on what is required of adapter modules and classes. </dd></dl>
 
-<p>Definition at line <a class="el" href="_i_adapter_8hpp_source.html#l00039">39</a> of file <a class="el" href="_i_adapter_8hpp_source.html">IAdapter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_adapter_8hpp_source.html#l00040">40</a> of file <a class="el" href="_i_adapter_8hpp_source.html">IAdapter.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2d489a68b5da868effffc77d14f1a514"></a><!-- doxytag: member="VoodooShader::IAdapter::~IAdapter" ref="a2d489a68b5da868effffc77d14f1a514" args="(void)" -->
 <div class="memitem">
@@ -159,7 +159,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_i_adapter_8hpp_source.html#l00043">43</a> of file <a class="el" href="_i_adapter_8hpp_source.html">IAdapter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_adapter_8hpp_source.html#l00044">44</a> of file <a class="el" href="_i_adapter_8hpp_source.html">IAdapter.hpp</a>.</p>
 
 </div>
 </div>
@@ -206,7 +206,7 @@ Public Member Functions</h2></td></tr>
 <p>Downloads a parameter's value from system RAM to VRAM, verifying that the value on the GPU (and in use) is the latest value set in the CPU memory buffer (all parameter set commands operate on the system RAM buffer for speed and compatibility). </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Parameter</td><td>The parameter to apply. </td></tr>
+    <tr><td class="paramname">pParameter</td><td>The parameter to apply. </td></tr>
   </table>
   </dd>
 </dl>
@@ -282,11 +282,11 @@ Public Member Functions</h2></td></tr>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>The name of the texture, usually a fully-qualified name. </td></tr>
-    <tr><td class="paramname">desc</td><td>Description of the texture, size and format. </td></tr>
+    <tr><td class="paramname">pDesc</td><td>Description of the texture, size and format. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A shared pointer to the created texture.</dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the created texture if successful, nullptr otherwise.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>Only Voodoo texture formats are supported, API-specific formats are not and <em>must</em> return errors.</dd>
 <dd>
 This must create a texture that can either be rendered directly into or that can have the backbuffer copied into it efficiently, depending on how the adapter chooses to implement RTT.</dd></dl>
@@ -324,7 +324,7 @@ This must create a texture that can either be rendered directly into or that can
 <p>Draws geometry from system memory. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Vertexes</td><td>The number of vertexes to draw. </td></tr>
+    <tr><td class="paramname">count</td><td>The number of vertexes to draw. </td></tr>
     <tr><td class="paramname">pVertexData</td><td>This must contain vertex data for the given number of verts. </td></tr>
   </table>
   </dd>
@@ -426,7 +426,7 @@ This must create a texture that can either be rendered directly into or that can
 <p>Gets a render target from the adapter. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Index</td><td>The target index to get. </td></tr>
+    <tr><td class="paramname">index</td><td>The target index to get. </td></tr>
   </table>
   </dd>
 </dl>
@@ -466,7 +466,7 @@ This must create a texture that can either be rendered directly into or that can
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">pContext</td><td>The associated Cg context. </td></tr>
-    <tr><td class="paramname">Error</td><td>The error raised.</td></tr>
+    <tr><td class="paramname">error</td><td>The error raised.</td></tr>
   </table>
   </dd>
 </dl>
@@ -495,7 +495,7 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 <p>For Cg-supported APIs, this may use the appropriate module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc). This may involve additional compilation or linking. In some cases, the pass may not be specifically loaded and this may simply return true.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Pass</td><td>The pass to be loaded. </td></tr>
+    <tr><td class="paramname">pPass</td><td>The pass to be loaded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -506,15 +506,15 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 
 </div>
 </div>
-<a class="anchor" id="ab0574fc7797f0f9fe5c176e8a6acc65e"></a><!-- doxytag: member="VoodooShader::IAdapter::LoadTexture" ref="ab0574fc7797f0f9fe5c176e8a6acc65e" args="(_In_ const String &amp;name, _In_ const TextureRegion *pRegion)=0" -->
+<a class="anchor" id="ae6ccad605f41cc1caf1513e1da547dcf"></a><!-- doxytag: member="VoodooShader::IAdapter::LoadTexture" ref="ae6ccad605f41cc1caf1513e1da547dcf" args="(_In_ IFile *const pFile, _In_ const TextureRegion *pRegion)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a>* VoodooShader::IAdapter::LoadTexture </td>
           <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramtype">_In_ <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *const&#160;</td>
+          <td class="paramname"><em>pFile</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -535,10 +535,12 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 <p>The texture source is provided here and all dimensions should be drawn from that, with as little conversion as possible.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Name</td><td>The filename to load. </td></tr>
+    <tr><td class="paramname">pFile</td><td>The file to load. </td></tr>
+    <tr><td class="paramname">pRegion</td><td>The region of the file that should be used. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The texture, if successfully created. A nullptr otherwise. </dd></dl>
 
 </div>
 </div>
@@ -585,7 +587,7 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 <p>The adapter may choose which programs to bind and how to handle the binding, as well as managing any errors that may arise.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">pass</td><td>A shared pointer to the pass to be bound. If this is null, the adapter must unbind the last bound pass and reset all states.</td></tr>
+    <tr><td class="paramname">pPass</td><td>A shared pointer to the pass to be bound. If this is null, the adapter must unbind the last bound pass and reset all states.</td></tr>
   </table>
   </dd>
 </dl>
@@ -627,8 +629,8 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 <p>Set a property on the adapter. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Name</td><td>The property name to set. </td></tr>
-    <tr><td class="paramname">Value</td><td>The value to set the property to.</td></tr>
+    <tr><td class="paramname">name</td><td>The property name to set. </td></tr>
+    <tr><td class="paramname">value</td><td>The value to set the property to.</td></tr>
   </table>
   </dd>
 </dl>
@@ -666,8 +668,8 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 <p>Sets a render target for the adapter. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Index</td><td>Target index to set. </td></tr>
-    <tr><td class="paramname">Target</td><td>Texture to use as the render target. </td></tr>
+    <tr><td class="paramname">index</td><td>Target index to set. </td></tr>
+    <tr><td class="paramname">pTarget</td><td>Texture to use as the render target. </td></tr>
   </table>
   </dd>
 </dl>
@@ -720,7 +722,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 <p>Unloads a pass from the adapter. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Pass</td><td>The pass to unload.</td></tr>
+    <tr><td class="paramname">pPass</td><td>The pass to unload.</td></tr>
   </table>
   </dd>
 </dl>
@@ -737,7 +739,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 1 2011 15:42:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 1 2011 22:54:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
