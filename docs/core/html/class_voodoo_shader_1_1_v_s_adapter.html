@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.282</span>
+   &#160;<span id="projectnumber">0.4.1.287</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -121,7 +121,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a render target from the adapter.  <a href="#a55151160f15af7eba18984a33543fa17"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a82e6fc52ef706780fbcae82410ab7035">CreateTexture</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, _In_ const <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a> *pDesc)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a named texture within the API and returns it for registration and handling.  <a href="#a82e6fc52ef706780fbcae82410ab7035"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a8ffaea733b344c197ee59910c260722c">LoadTexture</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, _In_opt_ const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> *pRegion)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a34c61a60e48624870849cfb674406996">LoadTexture</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *const pFile, _In_opt_ const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> *pRegion)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ad94c767238153699729d039e98a2223f">DrawGeometry</a> (_In_ const uint32_t count, _In_count_(count) const <a class="el" href="struct_voodoo_shader_1_1_vertex_struct.html">VertexStruct</a> *const pVertexData)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws geometry from system memory.  <a href="#ad94c767238153699729d039e98a2223f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a1b07903b6397f9579455f97c48d2a9ae">DrawShader</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_shader.html">IShader</a> *const pShader)</td></tr>
@@ -615,15 +615,15 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 
 </div>
 </div>
-<a class="anchor" id="a8ffaea733b344c197ee59910c260722c"></a><!-- doxytag: member="VoodooShader::VSAdapter::LoadTexture" ref="a8ffaea733b344c197ee59910c260722c" args="(_In_ const String &amp;name, _In_opt_ const TextureRegion *pRegion)" -->
+<a class="anchor" id="a34c61a60e48624870849cfb674406996"></a><!-- doxytag: member="VoodooShader::VSAdapter::LoadTexture" ref="a34c61a60e48624870849cfb674406996" args="(_In_ IFile *const pFile, _In_opt_ const TextureRegion *pRegion)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> * VoodooShader::VSAdapter::LoadTexture </td>
           <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramtype">_In_ <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *const&#160;</td>
+          <td class="paramname"><em>pFile</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -916,7 +916,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 1 2011 22:54:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 2 2011 00:19:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

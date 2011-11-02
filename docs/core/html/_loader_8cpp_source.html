@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.282</span>
+   &#160;<span id="projectnumber">0.4.1.287</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -87,7 +87,7 @@
 <a name="l00037"></a>00037 
 <a name="l00038"></a>00038     <span class="keywordflow">if</span> (fdwReason == DLL_PROCESS_ATTACH)
 <a name="l00039"></a>00039     {
-<a name="l00040"></a>00040         <span class="keywordflow">return</span> (BOOL)<a class="code" href="_loader_8cpp.html#a6e13cd9b2e09027d8b6db0f29de6867a" title="Locate and load the Voodoo core, verify the functions and initialize the framework.">LoadVoodoo</a>(hinstDLL);
+<a name="l00040"></a>00040         <a class="code" href="_loader_8hpp.html#a8e33d7459d078ef97cb2ff1acb9455c6">gLoaderHandle</a> = hinstDLL;
 <a name="l00041"></a>00041     }
 <a name="l00042"></a>00042     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fdwReason == DLL_PROCESS_DETACH)
 <a name="l00043"></a>00043     {
@@ -95,7 +95,7 @@
 <a name="l00045"></a>00045     }
 <a name="l00046"></a>00046 }
 <a name="l00047"></a>00047 
-<a name="l00051"></a><a class="code" href="_loader_8hpp.html#a6e13cd9b2e09027d8b6db0f29de6867a">00051</a> <span class="keywordtype">bool</span> WINAPI <a class="code" href="_loader_8cpp.html#a6e13cd9b2e09027d8b6db0f29de6867a" title="Locate and load the Voodoo core, verify the functions and initialize the framework.">LoadVoodoo</a>(HINSTANCE hLoader)
+<a name="l00051"></a><a class="code" href="_loader_8hpp.html#ac2ff825b8e3e89fdf39d097d5c2964e5">00051</a> <span class="keywordtype">bool</span> WINAPI <a class="code" href="_loader_8cpp.html#ac2ff825b8e3e89fdf39d097d5c2964e5" title="Locate and load the Voodoo core, verify the functions and initialize the framework.">LoadVoodoo</a>()
 <a name="l00052"></a>00052 {
 <a name="l00053"></a>00053     <span class="keywordtype">wchar_t</span> pathGlobalRoot[MAX_PATH];
 <a name="l00054"></a>00054     <span class="keywordtype">wchar_t</span> pathLocalRoot[MAX_PATH];
@@ -112,7 +112,7 @@
 <a name="l00066"></a>00066     GetCurrentDirectory(MAX_PATH, pathRunRoot);
 <a name="l00067"></a>00067 
 <a name="l00068"></a>00068     <span class="comment">// Get the loader</span>
-<a name="l00069"></a>00069     <span class="keywordflow">if</span> (GetModuleFileName(hLoader, buffer, MAX_PATH) == 0)
+<a name="l00069"></a>00069     <span class="keywordflow">if</span> (GetModuleFileName(<a class="code" href="_loader_8hpp.html#a8e33d7459d078ef97cb2ff1acb9455c6">gLoaderHandle</a>, buffer, MAX_PATH) == 0)
 <a name="l00070"></a>00070     {
 <a name="l00071"></a>00071         <a class="code" href="_common_8cpp.html#ad65f6d99c7f32466161fa6c73b92f41c">ErrorMessage</a>(L<span class="stringliteral">&quot;Voodoo Loader: Unable to retrieve loader path.&quot;</span>);
 <a name="l00072"></a>00072         <span class="keywordflow">return</span> <span class="keyword">false</span>;
@@ -236,127 +236,142 @@
 <a name="l00194"></a><a class="code" href="_loader_8cpp.html#a88e53b2c84e402dcbb1752abce0b6ed6">00194</a> <span class="keywordtype">void</span> * WINAPI <a class="code" href="_loader_8cpp.html#a88e53b2c84e402dcbb1752abce0b6ed6" title="Most DirectX libraries use an identical loading function, with only the name varying.">VoodooDXCreateGeneric</a>(UINT sdkVersion, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * lib, <span class="keyword">const</span> <span class="keywordtype">char</span> * func)
 <a name="l00195"></a>00195 {
 <a name="l00196"></a>00196     <span class="keyword">typedef</span> <span class="keywordtype">void</span> * (WINAPI * DXInitFunc) (UINT);
-<a name="l00197"></a>00197     HMODULE baselib = <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(lib);
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199     <span class="keywordflow">if</span> (!baselib)
-<a name="l00200"></a>00200     {
-<a name="l00201"></a>00201         MessageBox(<span class="keyword">nullptr</span>, L<span class="stringliteral">&quot;Voodoo Loader: Unable to load system DLL.&quot;</span>, L<span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
-<a name="l00202"></a>00202         exit(1);
-<a name="l00203"></a>00203     }
-<a name="l00204"></a>00204 
-<a name="l00205"></a>00205     DXInitFunc initFunc = (DXInitFunc) GetProcAddress(baselib, func);
-<a name="l00206"></a>00206 
-<a name="l00207"></a>00207     <span class="keywordflow">if</span> (!initFunc)
-<a name="l00208"></a>00208     {
-<a name="l00209"></a>00209         MessageBox(<span class="keyword">nullptr</span>, L<span class="stringliteral">&quot;Voodoo Loader: Unable to find system EP.&quot;</span>, L<span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
-<a name="l00210"></a>00210         exit(1);
-<a name="l00211"></a>00211     }
-<a name="l00212"></a>00212 
-<a name="l00213"></a>00213     <span class="keywordflow">return</span> (*initFunc) (sdkVersion);
-<a name="l00214"></a>00214 }
-<a name="l00215"></a>00215 
-<a name="l00219"></a><a class="code" href="_loader_8hpp.html#aada23666fff5f234d4418619f1952145">00219</a> <span class="keywordtype">void</span> *WINAPI <a class="code" href="_loader_8cpp.html#aada23666fff5f234d4418619f1952145" title="Various adapter-loading entry points Direct3D 8.">Voodoo3DCreate8</a>(UINT sdkVersion)
-<a name="l00220"></a>00220 {
-<a name="l00221"></a>00221     <span class="keywordflow">return</span> <a class="code" href="_loader_8cpp.html#a88e53b2c84e402dcbb1752abce0b6ed6" title="Most DirectX libraries use an identical loading function, with only the name varying.">VoodooDXCreateGeneric</a>(sdkVersion, L<span class="stringliteral">&quot;d3d8.dll&quot;</span>, <span class="stringliteral">&quot;Direct3DCreate8&quot;</span>);
-<a name="l00222"></a>00222 }
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198     HMODULE baselib = <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(lib);
+<a name="l00199"></a>00199 
+<a name="l00200"></a>00200     <span class="keywordflow">if</span> (!baselib)
+<a name="l00201"></a>00201     {
+<a name="l00202"></a>00202         MessageBox(<span class="keyword">nullptr</span>, L<span class="stringliteral">&quot;Voodoo Loader: Unable to load system DLL.&quot;</span>, L<span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
+<a name="l00203"></a>00203         exit(1);
+<a name="l00204"></a>00204     }
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206     DXInitFunc initFunc = (DXInitFunc) GetProcAddress(baselib, func);
+<a name="l00207"></a>00207 
+<a name="l00208"></a>00208     <span class="keywordflow">if</span> (!initFunc)
+<a name="l00209"></a>00209     {
+<a name="l00210"></a>00210         MessageBox(<span class="keyword">nullptr</span>, L<span class="stringliteral">&quot;Voodoo Loader: Unable to find system EP.&quot;</span>, L<span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
+<a name="l00211"></a>00211         exit(1);
+<a name="l00212"></a>00212     }
+<a name="l00213"></a>00213 
+<a name="l00214"></a>00214     <span class="keywordflow">return</span> (*initFunc) (sdkVersion);
+<a name="l00215"></a>00215 }
+<a name="l00216"></a>00216 
+<a name="l00220"></a><a class="code" href="_loader_8hpp.html#aada23666fff5f234d4418619f1952145">00220</a> <span class="keywordtype">void</span> * WINAPI <a class="code" href="_loader_8cpp.html#aada23666fff5f234d4418619f1952145" title="Direct3D 8.">Voodoo3DCreate8</a>(UINT sdkVersion)
+<a name="l00221"></a>00221 {
+<a name="l00222"></a>00222     <span class="keywordtype">void</span> * pD3D8 = <a class="code" href="_loader_8cpp.html#a88e53b2c84e402dcbb1752abce0b6ed6" title="Most DirectX libraries use an identical loading function, with only the name varying.">VoodooDXCreateGeneric</a>(sdkVersion, L<span class="stringliteral">&quot;d3d8.dll&quot;</span>, <span class="stringliteral">&quot;Direct3DCreate8&quot;</span>);
 <a name="l00223"></a>00223 
-<a name="l00227"></a><a class="code" href="_loader_8hpp.html#a4fcf2b767d5945baa446fcc5fd588ab7">00227</a> <span class="keywordtype">void</span> *WINAPI <a class="code" href="_loader_8cpp.html#a4fcf2b767d5945baa446fcc5fd588ab7" title="Direct3D 9.">Voodoo3DCreate9</a>(UINT sdkVersion)
-<a name="l00228"></a>00228 {
-<a name="l00229"></a>00229     <span class="keywordflow">return</span> <a class="code" href="_loader_8cpp.html#a88e53b2c84e402dcbb1752abce0b6ed6" title="Most DirectX libraries use an identical loading function, with only the name varying.">VoodooDXCreateGeneric</a>(sdkVersion, L<span class="stringliteral">&quot;d3d9.dll&quot;</span>, <span class="stringliteral">&quot;Direct3DCreate9&quot;</span>);
+<a name="l00224"></a>00224     <span class="keywordflow">if</span> (<a class="code" href="_loader_8cpp.html#ac2ff825b8e3e89fdf39d097d5c2964e5" title="Locate and load the Voodoo core, verify the functions and initialize the framework.">LoadVoodoo</a>())
+<a name="l00225"></a>00225     {
+<a name="l00226"></a>00226         <span class="comment">//gVoodooCore-&gt;GetAdapter()-&gt;SetProperty(L&quot;D3D8_Object&quot;)</span>
+<a name="l00227"></a>00227     }
+<a name="l00228"></a>00228 
+<a name="l00229"></a>00229     <span class="keywordflow">return</span> pD3D8;
 <a name="l00230"></a>00230 }
 <a name="l00231"></a>00231 
-<a name="l00235"></a><a class="code" href="_loader_8hpp.html#a23bdc5a55ee9ef78807aecc66c2e9ce0">00235</a> HRESULT WINAPI <a class="code" href="_loader_8cpp.html#a23bdc5a55ee9ef78807aecc66c2e9ce0" title="DirectInput 8.">VoodooInput8Create</a>(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID *ppvOut, LPVOID punkOuter)
+<a name="l00235"></a><a class="code" href="_loader_8hpp.html#a4fcf2b767d5945baa446fcc5fd588ab7">00235</a> <span class="keywordtype">void</span> * WINAPI <a class="code" href="_loader_8cpp.html#a4fcf2b767d5945baa446fcc5fd588ab7" title="Direct3D 9.">Voodoo3DCreate9</a>(UINT sdkVersion)
 <a name="l00236"></a>00236 {
-<a name="l00237"></a>00237     <span class="keyword">typedef</span> HRESULT (WINAPI *DIInitFunc) (HINSTANCE, DWORD, REFIID, LPVOID *, LPVOID);
+<a name="l00237"></a>00237     <span class="keywordtype">void</span> * pD3D9 = <a class="code" href="_loader_8cpp.html#a88e53b2c84e402dcbb1752abce0b6ed6" title="Most DirectX libraries use an identical loading function, with only the name varying.">VoodooDXCreateGeneric</a>(sdkVersion, L<span class="stringliteral">&quot;d3d9.dll&quot;</span>, <span class="stringliteral">&quot;Direct3DCreate9&quot;</span>);
 <a name="l00238"></a>00238 
-<a name="l00239"></a>00239     HMODULE baselib = <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(L<span class="stringliteral">&quot;dinput8.dll&quot;</span>);
-<a name="l00240"></a>00240 
-<a name="l00241"></a>00241     <span class="keywordflow">if</span> (!baselib)
-<a name="l00242"></a>00242     {
-<a name="l00243"></a>00243         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to load system DLL.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
-<a name="l00244"></a>00244         exit(1);
-<a name="l00245"></a>00245     }
+<a name="l00239"></a>00239     <span class="keywordflow">if</span> (<a class="code" href="_loader_8cpp.html#ac2ff825b8e3e89fdf39d097d5c2964e5" title="Locate and load the Voodoo core, verify the functions and initialize the framework.">LoadVoodoo</a>())
+<a name="l00240"></a>00240     {
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242     }
+<a name="l00243"></a>00243 
+<a name="l00244"></a>00244     <span class="keywordflow">return</span> pD3D9;
+<a name="l00245"></a>00245 }
 <a name="l00246"></a>00246 
-<a name="l00247"></a>00247     DIInitFunc initFunc = (DIInitFunc) GetProcAddress(baselib, <span class="stringliteral">&quot;DirectInput8Create&quot;</span>);
-<a name="l00248"></a>00248 
-<a name="l00249"></a>00249     <span class="keywordflow">if</span> (!initFunc)
-<a name="l00250"></a>00250     {
-<a name="l00251"></a>00251         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to find system EP.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
-<a name="l00252"></a>00252         exit(1);
-<a name="l00253"></a>00253     }
-<a name="l00254"></a>00254 
-<a name="l00255"></a>00255     <span class="keywordflow">return</span> (*initFunc) (hinst, dwVersion, riidltf, ppvOut, punkOuter);
-<a name="l00256"></a>00256 }
-<a name="l00257"></a>00257 
-<a name="l00261"></a>00261 HRESULT WINAPI <a class="code" href="_loader_8cpp.html#af0ee8d4f7952e3944b128a74e7ea98ed" title="DirectInput (unknown version)">VoodooInputCreateGeneric</a>
-<a name="l00262"></a><a class="code" href="_loader_8hpp.html#af0ee8d4f7952e3944b128a74e7ea98ed">00262</a> (
-<a name="l00263"></a>00263     HINSTANCE hinst,
-<a name="l00264"></a>00264     DWORD dwVersion,
-<a name="l00265"></a>00265     LPVOID *lplpDirectInput,
-<a name="l00266"></a>00266     LPVOID punkOuter,
-<a name="l00267"></a>00267     <span class="keyword">const</span> <span class="keywordtype">char</span> * func
-<a name="l00268"></a>00268 )
-<a name="l00269"></a>00269 {
-<a name="l00270"></a>00270 
-<a name="l00271"></a>00271     <span class="keyword">typedef</span> HRESULT (WINAPI *DIInitFunc) (HINSTANCE, DWORD, LPVOID, LPVOID);
+<a name="l00250"></a><a class="code" href="_loader_8hpp.html#a23bdc5a55ee9ef78807aecc66c2e9ce0">00250</a> HRESULT WINAPI <a class="code" href="_loader_8cpp.html#a23bdc5a55ee9ef78807aecc66c2e9ce0" title="DirectInput 8.">VoodooInput8Create</a>(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID *ppvOut, LPVOID punkOuter)
+<a name="l00251"></a>00251 {
+<a name="l00252"></a>00252     <span class="keyword">typedef</span> HRESULT (WINAPI *DIInitFunc) (HINSTANCE, DWORD, REFIID, LPVOID *, LPVOID);
+<a name="l00253"></a>00253 
+<a name="l00254"></a>00254     HMODULE baselib = <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(L<span class="stringliteral">&quot;dinput8.dll&quot;</span>);
+<a name="l00255"></a>00255 
+<a name="l00256"></a>00256     <span class="keywordflow">if</span> (!baselib)
+<a name="l00257"></a>00257     {
+<a name="l00258"></a>00258         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to load system DLL.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
+<a name="l00259"></a>00259         exit(1);
+<a name="l00260"></a>00260     }
+<a name="l00261"></a>00261 
+<a name="l00262"></a>00262     DIInitFunc initFunc = (DIInitFunc) GetProcAddress(baselib, <span class="stringliteral">&quot;DirectInput8Create&quot;</span>);
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264     <span class="keywordflow">if</span> (!initFunc)
+<a name="l00265"></a>00265     {
+<a name="l00266"></a>00266         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to find system EP.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
+<a name="l00267"></a>00267         exit(1);
+<a name="l00268"></a>00268     }
+<a name="l00269"></a>00269 
+<a name="l00270"></a>00270     <span class="keywordflow">return</span> (*initFunc) (hinst, dwVersion, riidltf, ppvOut, punkOuter);
+<a name="l00271"></a>00271 }
 <a name="l00272"></a>00272 
-<a name="l00273"></a>00273     HMODULE baselib = <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(L<span class="stringliteral">&quot;dinput.dll&quot;</span>);
-<a name="l00274"></a>00274 
-<a name="l00275"></a>00275     <span class="keywordflow">if</span> (!baselib)
-<a name="l00276"></a>00276     {
-<a name="l00277"></a>00277         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to load system DLL.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
-<a name="l00278"></a>00278         exit(1);
-<a name="l00279"></a>00279     }
-<a name="l00280"></a>00280 
-<a name="l00281"></a>00281     DIInitFunc initFunc = (DIInitFunc) GetProcAddress(baselib, func);
-<a name="l00282"></a>00282 
-<a name="l00283"></a>00283     <span class="keywordflow">if</span> (!initFunc)
-<a name="l00284"></a>00284     {
-<a name="l00285"></a>00285         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to find system EP.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
-<a name="l00286"></a>00286         exit(1);
-<a name="l00287"></a>00287     }
-<a name="l00288"></a>00288 
-<a name="l00289"></a>00289     <span class="keywordflow">return</span> (*initFunc) (hinst, dwVersion, lplpDirectInput, punkOuter);
-<a name="l00290"></a>00290 }
-<a name="l00291"></a>00291 
-<a name="l00292"></a><a class="code" href="_loader_8hpp.html#a9d50d072f00e85187671de183e1975e1">00292</a> HRESULT WINAPI <a class="code" href="_loader_8cpp.html#a9d50d072f00e85187671de183e1975e1">VoodooInputCreateA</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplpDirectInput, LPVOID punkOuter)
-<a name="l00293"></a>00293 {
-<a name="l00294"></a>00294     <span class="keywordflow">return</span> <a class="code" href="_loader_8cpp.html#af0ee8d4f7952e3944b128a74e7ea98ed" title="DirectInput (unknown version)">VoodooInputCreateGeneric</a>(hinst, dwVersion, lplpDirectInput, punkOuter, <span class="stringliteral">&quot;DirectInputCreateA&quot;</span>);
-<a name="l00295"></a>00295 }
-<a name="l00296"></a>00296 
-<a name="l00297"></a><a class="code" href="_loader_8hpp.html#a686c309069e1f80edd5f694112e15bf1">00297</a> HRESULT WINAPI <a class="code" href="_loader_8cpp.html#a686c309069e1f80edd5f694112e15bf1">VoodooInputCreateW</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplpDirectInput, LPVOID punkOuter)
-<a name="l00298"></a>00298 {
-<a name="l00299"></a>00299     <span class="keywordflow">return</span> <a class="code" href="_loader_8cpp.html#af0ee8d4f7952e3944b128a74e7ea98ed" title="DirectInput (unknown version)">VoodooInputCreateGeneric</a>(hinst, dwVersion, lplpDirectInput, punkOuter, <span class="stringliteral">&quot;DirectInputCreateW&quot;</span>);
-<a name="l00300"></a>00300 }
-<a name="l00301"></a>00301 
-<a name="l00305"></a><a class="code" href="_loader_8hpp.html#ac31854cf7cc541b43c0e6e4703bbc8fc">00305</a> HRESULT WINAPI <a class="code" href="_loader_8cpp.html#ac31854cf7cc541b43c0e6e4703bbc8fc" title="DirectSound 8.">VoodooSoundCreate8</a>(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter)
-<a name="l00306"></a>00306 {
-<a name="l00307"></a>00307     <span class="keyword">typedef</span> HRESULT (__stdcall *DSInitFunc) (LPCGUID, LPVOID *, LPVOID);
-<a name="l00308"></a>00308 
-<a name="l00309"></a>00309     HMODULE baselib = <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(L<span class="stringliteral">&quot;dsound8.dll&quot;</span>);
-<a name="l00310"></a>00310 
-<a name="l00311"></a>00311     <span class="keywordflow">if</span> (!baselib)
-<a name="l00312"></a>00312     {
-<a name="l00313"></a>00313         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to load system DLL.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
-<a name="l00314"></a>00314         exit(1);
-<a name="l00315"></a>00315     }
+<a name="l00276"></a>00276 HRESULT WINAPI <a class="code" href="_loader_8cpp.html#af0ee8d4f7952e3944b128a74e7ea98ed" title="DirectInput (unknown version)">VoodooInputCreateGeneric</a>
+<a name="l00277"></a><a class="code" href="_loader_8hpp.html#af0ee8d4f7952e3944b128a74e7ea98ed">00277</a> (
+<a name="l00278"></a>00278     HINSTANCE hinst,
+<a name="l00279"></a>00279     DWORD dwVersion,
+<a name="l00280"></a>00280     LPVOID *lplpDirectInput,
+<a name="l00281"></a>00281     LPVOID punkOuter,
+<a name="l00282"></a>00282     <span class="keyword">const</span> <span class="keywordtype">char</span> * func
+<a name="l00283"></a>00283 )
+<a name="l00284"></a>00284 {
+<a name="l00285"></a>00285 
+<a name="l00286"></a>00286     <span class="keyword">typedef</span> HRESULT (WINAPI *DIInitFunc) (HINSTANCE, DWORD, LPVOID, LPVOID);
+<a name="l00287"></a>00287 
+<a name="l00288"></a>00288     HMODULE baselib = <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(L<span class="stringliteral">&quot;dinput.dll&quot;</span>);
+<a name="l00289"></a>00289 
+<a name="l00290"></a>00290     <span class="keywordflow">if</span> (!baselib)
+<a name="l00291"></a>00291     {
+<a name="l00292"></a>00292         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to load system DLL.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
+<a name="l00293"></a>00293         exit(1);
+<a name="l00294"></a>00294     }
+<a name="l00295"></a>00295 
+<a name="l00296"></a>00296     DIInitFunc initFunc = (DIInitFunc) GetProcAddress(baselib, func);
+<a name="l00297"></a>00297 
+<a name="l00298"></a>00298     <span class="keywordflow">if</span> (!initFunc)
+<a name="l00299"></a>00299     {
+<a name="l00300"></a>00300         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to find system EP.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
+<a name="l00301"></a>00301         exit(1);
+<a name="l00302"></a>00302     }
+<a name="l00303"></a>00303 
+<a name="l00304"></a>00304     <span class="keywordflow">return</span> (*initFunc) (hinst, dwVersion, lplpDirectInput, punkOuter);
+<a name="l00305"></a>00305 }
+<a name="l00306"></a>00306 
+<a name="l00307"></a><a class="code" href="_loader_8hpp.html#a9d50d072f00e85187671de183e1975e1">00307</a> HRESULT WINAPI <a class="code" href="_loader_8cpp.html#a9d50d072f00e85187671de183e1975e1">VoodooInputCreateA</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplpDirectInput, LPVOID punkOuter)
+<a name="l00308"></a>00308 {
+<a name="l00309"></a>00309     <span class="keywordflow">return</span> <a class="code" href="_loader_8cpp.html#af0ee8d4f7952e3944b128a74e7ea98ed" title="DirectInput (unknown version)">VoodooInputCreateGeneric</a>(hinst, dwVersion, lplpDirectInput, punkOuter, <span class="stringliteral">&quot;DirectInputCreateA&quot;</span>);
+<a name="l00310"></a>00310 }
+<a name="l00311"></a>00311 
+<a name="l00312"></a><a class="code" href="_loader_8hpp.html#a686c309069e1f80edd5f694112e15bf1">00312</a> HRESULT WINAPI <a class="code" href="_loader_8cpp.html#a686c309069e1f80edd5f694112e15bf1">VoodooInputCreateW</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplpDirectInput, LPVOID punkOuter)
+<a name="l00313"></a>00313 {
+<a name="l00314"></a>00314     <span class="keywordflow">return</span> <a class="code" href="_loader_8cpp.html#af0ee8d4f7952e3944b128a74e7ea98ed" title="DirectInput (unknown version)">VoodooInputCreateGeneric</a>(hinst, dwVersion, lplpDirectInput, punkOuter, <span class="stringliteral">&quot;DirectInputCreateW&quot;</span>);
+<a name="l00315"></a>00315 }
 <a name="l00316"></a>00316 
-<a name="l00317"></a>00317     DSInitFunc initFunc = (DSInitFunc) GetProcAddress(baselib, <span class="stringliteral">&quot;DirectSoundCreate8&quot;</span>);
-<a name="l00318"></a>00318 
-<a name="l00319"></a>00319     <span class="keywordflow">if</span> (!initFunc)
-<a name="l00320"></a>00320     {
-<a name="l00321"></a>00321         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to find system EP.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
-<a name="l00322"></a>00322         exit(1);
-<a name="l00323"></a>00323     }
-<a name="l00324"></a>00324 
-<a name="l00325"></a>00325     <span class="keywordflow">return</span> (*initFunc) (lpcGuidDevice, ppDS8, pUnkOuter);
-<a name="l00326"></a>00326 }
+<a name="l00320"></a><a class="code" href="_loader_8hpp.html#ac31854cf7cc541b43c0e6e4703bbc8fc">00320</a> HRESULT WINAPI <a class="code" href="_loader_8cpp.html#ac31854cf7cc541b43c0e6e4703bbc8fc" title="DirectSound 8.">VoodooSoundCreate8</a>(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter)
+<a name="l00321"></a>00321 {
+<a name="l00322"></a>00322     <span class="keyword">typedef</span> HRESULT (__stdcall *DSInitFunc) (LPCGUID, LPVOID *, LPVOID);
+<a name="l00323"></a>00323 
+<a name="l00324"></a>00324     HMODULE baselib = <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(L<span class="stringliteral">&quot;dsound8.dll&quot;</span>);
+<a name="l00325"></a>00325 
+<a name="l00326"></a>00326     <span class="keywordflow">if</span> (!baselib)
+<a name="l00327"></a>00327     {
+<a name="l00328"></a>00328         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to load system DLL.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
+<a name="l00329"></a>00329         exit(1);
+<a name="l00330"></a>00330     }
+<a name="l00331"></a>00331 
+<a name="l00332"></a>00332     DSInitFunc initFunc = (DSInitFunc) GetProcAddress(baselib, <span class="stringliteral">&quot;DirectSoundCreate8&quot;</span>);
+<a name="l00333"></a>00333 
+<a name="l00334"></a>00334     <span class="keywordflow">if</span> (!initFunc)
+<a name="l00335"></a>00335     {
+<a name="l00336"></a>00336         MessageBoxA(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Voodoo Loader: Unable to find system EP.&quot;</span>, <span class="stringliteral">&quot;Loader Error&quot;</span>, MB_ICONERROR | MB_OK);
+<a name="l00337"></a>00337         exit(1);
+<a name="l00338"></a>00338     }
+<a name="l00339"></a>00339 
+<a name="l00340"></a>00340     <span class="keywordflow">return</span> (*initFunc) (lpcGuidDevice, ppDS8, pUnkOuter);
+<a name="l00341"></a>00341 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 1 2011 22:54:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 2 2011 00:19:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
