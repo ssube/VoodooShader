@@ -203,7 +203,7 @@ namespace VoodooShader
      * Texture formats for use by @ref VoodooShader::ITexture "Textures", describing the layout and size of the texture data. 
      * These may not be implemented by the underlying graphics API exactly as they are indicated here, but the available 
      * components and sizes are guaranteed to be equal to or greater than the indicated values. Further information on 
-     * texture formats and depth may be found on the @ref Textures "texture formats page".
+     * texture formats and depth may be found on the @ref voodoo_textures_formats "texture formats chart".
      */
     enum TextureFormat : int32_t
     {

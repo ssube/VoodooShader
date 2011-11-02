@@ -111,7 +111,7 @@ namespace VoodooShader
          * Writes a module stamp to the log. This records the name and version info for a select module (used to log what 
          * modules were present during a logging session).
          * 
-         * @param module The module version info to log.
+         * @param pModule The module version info to log.
          */
         virtual void LogModule(_In_ const Version * const pModule) throw() = 0;
 

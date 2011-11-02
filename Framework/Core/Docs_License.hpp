@@ -111,7 +111,7 @@ namespace VoodooShader
      * @subsection voodoo_license_summary_contact Contact 
      * 
      * Questions about the Voodoo framework and its license terms should be directed to Sean Sube, at the email address
-     * <ahref="mailto:peachykeen@voodooshader.com">peachykeen@voodooshader.com</a>. Questions about other modules and their 
+     * &lt;ahref="mailto:peachykeen@voodooshader.com"&gt;peachykeen@voodooshader.com&lt;/a&gt;. Questions about other modules and their 
      * terms should be directed to the appropriate developers. Please check any documentation included in the modules for 
      * contact information.
      *
@@ -587,8 +587,8 @@ namespace VoodooShader
      * convey the exclusion of warranty; and each file should have at least
      * the "copyright" line and a pointer to where the full notice is found.
      * 
-     *     <one line to give the program's name and a brief idea of what it does.>
-     *     Copyright (C) <year>  <name of author>
+     *     &lt;one line to give the program's name and a brief idea of what it does.&gt;
+     *     Copyright (C) &lt;year&gt;  &lt;name of author&gt;
      * 
      *     This program is free software; you can redistribute it and/or modify
      *     it under the terms of the GNU General Public License as published by
@@ -627,7 +627,7 @@ namespace VoodooShader
      *     Yoyodyne, Inc., hereby disclaims all copyright interest in the program
      *     `Gnomovision' (which makes passes at compilers) written by James Hacker.
      * 
-     *     <signature of Ty Coon>, 1 April 1989
+     *     &lt;signature of Ty Coon&gt;, 1 April 1989
      *     Ty Coon, President of Vice
      * 
      * This General Public License does not permit incorporating your program into

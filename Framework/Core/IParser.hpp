@@ -70,7 +70,7 @@ namespace VoodooShader
          * 
          * @param name The variable name (may contain variables, they will be resolved immediately). 
          * @param value The variable's value (may contain variables, they will be resolved when this variable is used).
-         * @param system Marks the variable as a system variable. These cannot be changed or removed.
+         * @param type Flags for this of variable.
          */
         virtual void Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) throw() = 0;
 
@@ -85,7 +85,7 @@ namespace VoodooShader
          * Parses a string, replacing any variables with their values. Variables are resolved when found, so it is 
          * possible to have variables within variables and trigger recursion. 
          *
-         * @sa @ref varsyntax for details on how variables work
+         * @sa @ref voodoo_vars for details on how variables work
          */
         virtual String Parse(_In_ const String & input, _In_ const ParseFlags flags = PF_None) const throw() = 0;
     };
@@ -93,18 +93,18 @@ namespace VoodooShader
     /**
      * @} 
      * 
-     * @page varsyntax Variables 
+     * @page voodoo_vars Variables 
      * The Voodoo core provides a simple variable parser for use in path resolution or other string usage. The 
      * syntax and use of these variables is described in this page. 
      * 
-     * @section varssyntax Syntax 
+     * @section voodoo_vars_syntax Syntax 
      * Variables are used by inserting <code>\$(variable)</code> tokens into a string. Each variable will be removed 
      * and replaced with the value currently assigned to it. Variables are parsed when used, allowing delayed 
      * resolution and recursion. Variables are replaced innermost to outermost and left to right (see examples below). 
      * Four levels of priority are used in parsing. Builtin variables are searched first, then state variables, then 
      * regular variables, and finally environment variables supplied by the system. 
      * 
-     * @subsection varssyntaxnames Variable Names 
+     * @subsection voodoo_vars_syntax_names Variable Names 
      * Variable names may contain any characters but ':' and may start with any character but '?' or '!'. These 
      * characters have special meaning and will be stripped or will modify the name before it is used. Variable names 
      * may contain variables, which will be resolved using standard rules (this allows for variable variable names and
@@ -112,7 +112,7 @@ namespace VoodooShader
      * @p PF_Lowercase and the result is used as the actual name. This contrasts with values, which are parsed when 
      * used. 
      * 
-     * @subsubsection varssyntaxnamesspec Special Characters 
+     * @subsubsection voodoo_vars_syntax_names_spec Special Characters 
      * @li The ':' character indicates state variables, described below. 
      * @li The '?' character indicates optional variables, which are not replaced with an error note if they are not 
      *     found.
@@ -121,11 +121,11 @@ namespace VoodooShader
      *     recursion constraints. 
      * @li The remaining listed characters are reserved. 
      * 
-     * @subsection varssyntaxvalue Variable Values
+     * @subsection voodoo_vars_syntax_value Variable Values
      * Variable values may contain any characters and embedded variables. Values are parsed when used, using the 
      * current state and flags (in contrast to names, which are parsed when added). 
      * 
-     * @subsection varssyntexstate Variable States & Recursion 
+     * @subsection voodoo_vars_syntax_state Variable States & Recursion 
      * Each parsing call creates a state block and uses a discrete depth counter. The depth counter handles recursion 
      * and operated very simply. Each time the parser encounters a string that requires parsing, the counter is
      * incremented and passed on. The recursion limit is implementation-defined, with VSParser using 8. When this limit is
@@ -183,41 +183,38 @@ namespace VoodooShader
      * $($(target)_Adapter) = $(--badvar:test.exe--_Adapter) = --badvar:--badvar:test.exe--_Adapter-- 
      * @endcode 
      *
-     * @section varssys System Variables 
+     * @section voodoo_vars_sys System Variables 
      * Some variables, typically built-ins, are marked as system variables. These may be added once and may not be 
      * overwritten or later changed (all other variables may be changed by overwriting the name). The 
      * @ref IParser::Remove() method does not remove system variables. 
      * 
-     * @section varsflags Flags 
+     * @section voodoo_vars_flags Flags 
      * The variable parser provides a small set of flags to control parsing modes. 
      *
-     * @subsection varsflagssingleslash PF_SingleSlash 
+     * @subsection voodoo_vars_flags_slash_single PF_SingleSlash 
      * Removes repeated slashes, both forward and back. This processes each stage of the string before it is returned
      * up a level, and is typically very reliable (even if variables place new slashes).
      * 
-     * @subsection varsflagsslashtype PF_SlashOnly & PF_BackslashOnly 
+     * @subsection voodoo_vars_flags_slash_type PF_SlashOnly & PF_BackslashOnly 
      * Replaces all slashes with a single type (forward or back). This may be necessary; XPath syntax, for example, 
-     * uses forward slashes while Windows paths tend to prefer backslashes. 
+     * uses forward slashes while Windows paths tend to prefer backslashes. These may not be combined.
      * 
-     * @subsection varsflagscase PF_Lowercase & PF_Uppercase
+     * @subsection voodoo_vars_flags_case PF_Lowercase & PF_Uppercase
      * Transforms the string into a specific case. All alphabetic characters (a-z and A-Z) will be replaced with the 
      * given case. 
      * 
-     * @subsection varsflagsstateblock PF_RetainState 
-     * This flag has no effect 
-     * 
-     * @section varserror Errors 
+     * @section voodoo_vars_error Errors 
      * If a variable cannot be resolved, an error value will be used in place of the variable. This value is designed
      * to cause the path to fail in any operations. The error value will replace @p varname with 
      * <code>--badvar:varname--</code>. 
      * 
-     * @section varsbuiltin Built-In Variables 
+     * @section voodoo_vars_builtin Built-In Variables 
      * A small assortment of built-in variables are provided for use. These represent system or environment paths that
      * may be important. These will be marked here with a note of the earliest version of the framework in which they
      * are provided. Adapters and other modules may also add system variables, but these can never overwrite other 
      * system variables. 
      * 
-     * @subsection varsbuiltinlocal $(localroot) 
+     * @subsection voodoo_vars_builtin_local $(localroot) 
      * The local root path is the location of the target executable, that is, the program that Voodoo is loaded into. 
      * This is the absolute path to the file. This path is retrieved from the Windows API during startup. The value is
      * \\-terminated. 
@@ -228,7 +225,7 @@ namespace VoodooShader
      * $(localroot) = H:\Program\ 
      * @endcode 
      * 
-     * @subsection varsbuiltinglobal $(globalroot)
+     * @subsection voodoo_vars_builtin_global $(globalroot)
      * The global root path of Voodoo. This is the main Voodoo folder, containing most global resources and binaries. 
      * This path is retrieved from the registry by the Voodoo loader. The value is \\-terminated. 
      * 
@@ -237,13 +234,13 @@ namespace VoodooShader
      * $(globalroot)\bin\ = Voodoo binary path 
      * @endcode 
      * 
-     * @subsection varsbuiltinrun $(runroot) 
+     * @subsection voodoo_vars_builtin_run $(runroot) 
      * The running root of Voodoo. This is the directory that the target was started in (the startup working 
      * directory). This path is retrieved from the Windows API by the loader during startup. This is the most variable
      * of the builtin variables; it may change each run, depending on how the target is started. The value is
      * \\-terminated. 
      * 
-     * @subsection varsbuiltintarget $(target) 
+     * @subsection voodoo_vars_builtin_target $(target) 
      * The filename of the target application. This does not include the path (found in <code>\$(localroot)</code>), 
      * only the name. To help use this for variable varnames, this is forced to all lowercase. You can use it to change
      * the config settings based on the running executable, like so: 
@@ -263,7 +260,7 @@ namespace VoodooShader
      * 
      * The variable used in adapter (and so, the value) change depending on the value of target. 
      * 
-     * @section varsconfig Config Variables 
+     * @section voodoo_vars_config Config Variables 
      * When the core loads, it retrieves any variables from the config (using the XPath query 
      * "/VoodooConfig/Variables/Variable"). These variables must have a @p name attribute and text. They are added to 
      * the variable list, but not parsed until used. 
@@ -271,16 +268,12 @@ namespace VoodooShader
      * @note Variables with identical names will overwrite their previous value. The built-in variables cannot be
      *     overwritten. 
      *     
-     * @section varsenviron Environment Variables 
+     * @section voodoo_vars_environ Environment Variables 
      * If a variable name is given that cannot be found in the list of loaded and built-in variables, it will be 
      * assumed to be an environment variable. These variables are pulled directly from the process' environment and so 
      * are system-dependent. They may or may not be useful. 
      * 
      * @warning Care should be taken while using environment variables; config variables are much preferred. Environment 
      *    variables should only be used when sharing paths between applications or throughout the system is needed. 
-     */
-
-    /**
-     * @}
      */
 }

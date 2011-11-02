@@ -40,7 +40,7 @@ namespace VoodooShader
      *          @li <code>\$(allgames)</code> Shared (all user's) My Games folder. 
      *          @li <code>\$(systemroot)</code> System path (e.g., <code>C:\\Windows\\System32</code>) 
      *      
-     * @addtogroup VoodooWFileSystem Voodoo/WFileSystem @{
+     * @addtogroup voodoo_module_wfilesystem Voodoo/WFileSystem @{
      */
     namespace VoodooWFS
     {
@@ -157,7 +157,7 @@ namespace VoodooShader
              * fail. 
              * 
              * @param count The number of bytes to read, -1 for all. 
-             * @param buffer The buffer to be read into (may be nullptr, see notes).
+             * @param pBuffer The buffer to be read into (may be nullptr, see notes).
              * @return The number of bytes read. 
              * 
              * @note If @arg buffer is nullptr, the number of bytes that would have been read is returned but the file 
@@ -169,7 +169,7 @@ namespace VoodooShader
              * Writes a chunk of data to the file. The file must have been opened for writing.
              * 
              * @param count The number of bytes to write. 
-             * @param buffer The data to write.
+             * @param pBuffer The data to write.
              * @return Success of the write operation. 
              * 
              * @note If @p buffer is nullptr, @p count zeros are written into the file. This is useful for padding binary 
@@ -224,7 +224,7 @@ namespace VoodooShader
              * 
              * @param pDesc The region and format to be returned. 
              * @param size The size of the buffer
-             * @param buffer The memory for the return data to be placed in. Must already be allocated, or nullptr. 
+             * @param pBuffer The memory for the return data to be placed in. Must already be allocated, or nullptr. 
              * @return The number of bytes retrieved (or, if @p buffer is nullptr, the number that would be retrieved).
              * 
              * @warning Due to limitations in this library (or DevIL, not sure which), the only texture formats this function

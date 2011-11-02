@@ -287,9 +287,9 @@ namespace VoodooShader
       * <br /> 
       * <em><sup>3</sup>:</em> These formats are recommended for use and support most or all of the features Voodoo uses.
       * <br /> 
-      * <em><sup>4</sup>:</em> @ref VoodooWFileSystem does not yet support saving images. Support for these formats is 
-      *     provided directly by DevIL, including the ability to convert most internal formats. 
-      
+      * <em><sup>4</sup>:</em> @ref voodoo_module_wfilesystem does not yet support saving images. Support for these formats 
+      *     is provided directly by DevIL, including the ability to convert most internal formats. 
+      *
       * Questions regarding formats and support, as they apply to DevIL, should be directed to the developer of this fine 
       * library. Questions regarding Voodoo's support or use of DevIL, or that of any Voodoo module, should be directed to 
       * Voodoo or module developer(s). Some of these formats (GIF, for example) do not correspond to any internal Voodoo 

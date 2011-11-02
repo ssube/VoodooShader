@@ -69,7 +69,7 @@ namespace VoodooShader
         /**
          * Install a single hook at the specified point. This will only affect the process(es) the HookManager is bound to. 
          * 
-         * @param Name The name for the hook.
+         * @param name The name for the hook.
          * @param pSrc The point to install the hook at. 
          * @param pDest The function to redirect execution into. 
          * @return The success of the hook installation.  

@@ -52,7 +52,7 @@ PROJECT_LOGO           = D:/Code/VoodooShader/Docs/voodoo.png
 # If a relative path is entered, it will be relative to the location 
 # where doxygen was started. If left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = D:/Code/VoodooShader/Docs/
+OUTPUT_DIRECTORY       = D:/Code/VoodooShader_Pages/docs/core/
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 
 # 4096 sub-directories (in 2 levels) under the output directory of each output 
@@ -627,7 +627,7 @@ WARN_FORMAT            = "$file:$line: $text"
 # and error messages should be written. If left blank the output is written 
 # to stderr.
 
-WARN_LOGFILE           = M:\VoodooShader\Docs\doxylog
+WARN_LOGFILE           = D:\Code\VoodooShader\Docs\doxylog
 
 #---------------------------------------------------------------------------
 # configuration options related to the input files

@@ -102,9 +102,9 @@ namespace VoodooShader
         return nullptr;
     }
 
-    ITexture * VSAdapter::LoadTexture(const String & name, const TextureRegion * const pRegion)
+    ITexture * VSAdapter::LoadTexture(IFile * const pFile, const TextureRegion * const pRegion)
     {
-        UNREFERENCED_PARAMETER(name);
+        UNREFERENCED_PARAMETER(pFile);
         UNREFERENCED_PARAMETER(pRegion);
 
         return nullptr;

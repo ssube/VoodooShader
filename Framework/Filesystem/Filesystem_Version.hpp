@@ -22,7 +22,7 @@
 #include "Version.hpp"
 
 /**
- * @addtogroup VoodooWFileSystem @{;
+ * @addtogroup voodoo_module_wfilesystem @{
  * Filesystem defs
  */
 #define VOODOO_FILESYSTEM_NAME          L"Voodoo/WFileSystem"

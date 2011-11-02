@@ -57,6 +57,10 @@ namespace VoodooShader
         virtual uint32_t Release(void) const throw() = 0;
 
         /**
+         * 
+         */
+
+        /**
          * Get the name of this object.
          * 
          * @return The name.

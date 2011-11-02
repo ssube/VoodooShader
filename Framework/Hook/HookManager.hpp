@@ -34,7 +34,7 @@ namespace VoodooShader
         /**
          * Classes and functions related to the EasyHook-based implementation of IHookManager. 
          * 
-         * @addtogroup VoodooEHHook Voodoo/EHHook @{
+         * @addtogroup voodoo_module_ehhook Voodoo/EHHook @{
          */
         typedef std::map<String, TRACED_HOOK_HANDLE> HookMap;
 
@@ -65,13 +65,13 @@ namespace VoodooShader
              * Install a hook at the specified function. 
              * 
              * @param name The name for the hook.
-             * @param src The point to install the hook at. 
-             * @param dest The function to redirect execution into. 
+             * @param pSrc The point to install the hook at. 
+             * @param pDest The function to redirect execution into. 
              * @return The success of the hook installation.
              * 
-             * @note The name is often the name of the function in src (&func) for simplicities sake. 
+             * @note The name is often the name of the function in pSrc (&func) for simplicities sake. 
              * 
-             * @warning The calling convention of src and dest must be identical, or bad things might happen. This is only a 
+             * @warning The calling convention of pSrc and pDest must be identical, or bad things might happen. This is only a 
              *      bother with member functions, but can be worked around relatively easily.
              */
             bool Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);

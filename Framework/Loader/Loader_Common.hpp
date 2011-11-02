@@ -31,7 +31,7 @@
 #include "VoodooFramework.hpp"
 
 /** 
- * @addtogroup VoodooLoader Voodoo/Loader @{ 
+ * @addtogroup voodoo_module_loader @{ 
  */
 void WINAPI ErrorMessage(const wchar_t * msg, ...);
 

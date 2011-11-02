@@ -34,7 +34,8 @@ namespace VoodooShader
      * @note This class should be implemented for a specific graphics application; some generic adapters are provided for 
      *     major APIs, but in most cases application-specific behavior will make these only partially helpful. 
      * 
-     * @sa See the @ref adapterspec "adapter specifications" for details on what is required of adapter modules and classes.
+     * @sa See the @ref voodoo_spec_adapter "adapter specifications" for details on what is required of adapter modules and 
+     *      classes.
      */
     class IAdapter :
         public IObject
@@ -75,7 +76,7 @@ namespace VoodooShader
          * use the appropriate module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc). This may involve additional
          * compilation or linking. In some cases, the pass may not be specifically loaded and this may simply return true. 
          * 
-         * @param Pass The pass to be loaded.
+         * @param pPass The pass to be loaded.
          * @return Whether or not the pass was successfully loaded. 
          * 
          * @warning There is no guarantee what programs, if any, will be loaded or how this will be performed. The only
@@ -87,7 +88,7 @@ namespace VoodooShader
         /**
          * Unloads a pass from the adapter. 
          * 
-         * @param Pass The pass to unload. 
+         * @param pPass The pass to unload. 
          * 
          * @warning There is no guarantee what will occur within this function, but the pass given should @e never be bound 
          *     after being unloaded.
@@ -98,7 +99,7 @@ namespace VoodooShader
          * Causes the adapter to load a pass for drawing. The adapter may choose which programs to bind and how to handle 
          * the binding, as well as managing any errors that may arise. 
          * 
-         * @param pass A shared pointer to the pass to be bound. If this is null, the adapter must unbind the last bound
+         * @param pPass A shared pointer to the pass to be bound. If this is null, the adapter must unbind the last bound
          *     pass and reset all states.
          * 
          * @note Adapters may, at their discretion, bind some or even no programs to the true graphics API. An example of 
@@ -125,8 +126,8 @@ namespace VoodooShader
         /**
          * Sets a render target for the adapter.
          * 
-         * @param Index Target index to set. 
-         * @param Target Texture to use as the render target. 
+         * @param index Target index to set. 
+         * @param pTarget Texture to use as the render target. 
          * @return True if the target was successfully bound. 
          * 
          * @note Some texture formats, combinations of formats, textures and indices may be invalid for use as a render 
@@ -138,7 +139,7 @@ namespace VoodooShader
         /**
          * Gets a render target from the adapter. 
          * 
-         * @param Index The target index to get.
+         * @param index The target index to get.
          * @returns The texture bound to the target, or nullptr if no bound texture.
          */
         virtual ITexture * GetTarget(_In_ const uint32_t index) const throw() = 0;
@@ -147,8 +148,8 @@ namespace VoodooShader
          * Creates a named texture within the API and returns it for registration and handling. 
          *    
          * @param name The name of the texture, usually a fully-qualified name. 
-         * @param desc Description of the texture, size and format. 
-         * @return A shared pointer to the created texture. 
+         * @param pDesc Description of the texture, size and format. 
+         * @return A pointer to the created texture if successful, nullptr otherwise.
          * 
          * @note Only Voodoo texture formats are supported, API-specific formats are not and @e must return errors. 
          * 
@@ -164,14 +165,16 @@ namespace VoodooShader
          * Loads a named texture into the API and registers it with the Core. The texture source is provided here and all 
          * dimensions should be drawn from that, with as little conversion as possible. 
          * 
-         * @param Name The filename to load.
+         * @param pFile The file to load.
+         * @param pRegion The region of the file that should be used.
+         * @return The texture, if successfully created. A nullptr otherwise.
          */
-        virtual ITexture * LoadTexture(_In_ const String & name, _In_ const TextureRegion * pRegion) throw() = 0;
+        virtual ITexture * LoadTexture(_In_ IFile * const pFile, _In_ const TextureRegion * pRegion) throw() = 0;
 
         /**
          * Draws geometry from system memory.
          * 
-         * @param Vertexes The number of vertexes to draw. 
+         * @param count The number of vertexes to draw. 
          * @param pVertexData This must contain vertex data for the given number of verts.
          */
         virtual void DrawGeometry(_In_ const uint32_t count, _In_count_(count) const VertexStruct * const pVertexData) throw() = 0;
@@ -181,15 +184,15 @@ namespace VoodooShader
          * latest value set in the CPU memory buffer (all parameter set commands operate on the system RAM buffer for speed 
          * and compatibility). 
          * 
-         * @param Parameter The parameter to apply.
+         * @param pParameter The parameter to apply.
          */
         virtual void ApplyParameter(_In_ IParameter * const pParameter) throw() = 0;
 
         /**
          * Set a property on the adapter. 
          * 
-         * @param Name The property name to set. 
-         * @param Value The value to set the property to. 
+         * @param name The property name to set. 
+         * @param value The value to set the property to. 
          * 
          * @note Adapters may define the meaning of any properties not given in the core adapter specification. Adapters may
          *     require a specific format or form for properties.
@@ -222,7 +225,7 @@ namespace VoodooShader
          * necessary. 
          *     
          * @param pContext The associated Cg context. 
-         * @param Error The error raised. 
+         * @param error The error raised. 
          * 
          * @note Not all Cg errors will call this; the core performs error validation and handles all context-related errors
          *     internally, as well as logging what data it can find. Malformed errors will not be passed to the adapter.

@@ -69,8 +69,8 @@ namespace VoodooShader
         /**
          * Loads a set of modules from a given path. 
          * 
-         * @param Path The path to load from (may be any Windows path type). Sent through the parser before use.
-         * @param Filter A regex to filter filenames by. 
+         * @param path The path to load from (may be any Windows path type). Sent through the parser before use.
+         * @param filter A regex to filter filenames by. 
          * 
          * @note Only loads files whose filename matches the filter (standard regex match).
          */
@@ -79,17 +79,26 @@ namespace VoodooShader
         /**
          * Loads a single module, using an absolute or relative filename. 
          * 
-         * @param Filename The file to load, sent through the parser before use.
+         * @param pFile The file to load, a file system reference.
+         * 
+         * @note This always uses the module's directory in the search path for required DLLs. 
+         */
+        virtual bool LoadFile(_In_ const IFile * pFile) = 0;
+        
+        /**
+         * Loads a single module, using an absolute or relative filename. 
+         * 
+         * @param filename The file to load, sent through the parser before use.
          * 
          * @note When the module is loaded, if an absolute path is provided, the module's directory is used in the search
          *     path for required DLLs. 
          */
-        virtual bool LoadFile(_In_ const IFile * pFile) = 0;
-
         virtual bool LoadFile(_In_ const String & filename) = 0;
 
         /**
          * Tests to see if a class exists in the list provided by all loaded modules. 
+         * 
+         * @param name The class name
          */
         virtual bool ClassExists(_In_ const String & name) const = 0;
 

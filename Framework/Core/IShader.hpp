@@ -36,7 +36,7 @@ namespace VoodooShader
      * effect object. 
      *
      * @note Shaders correspond to DirectX effects or a group of OpenGL programs. 
-     * @note A shader may contain multiple @ref Technique techniques. IShader techniques must be separately validated, 
+     * @note A shader may contain multiple @ref ITechnique techniques. IShader techniques must be separately validated, 
      *     only techniques valid on the current hardware will be usable in the shader. 
      *     
      * @warning For any technique in a shader to be valid, the entire shader must compile without errors. This 
@@ -92,7 +92,7 @@ namespace VoodooShader
          * Retrieve a technique from the shader by name. Most cases should use the default technique, but some specific 
          * applications may want a particular technique.
          * 
-         * @param Index The index of the technique to get.
+         * @param index The index of the technique to get.
          * @return The technique, if it is found.
          */
         virtual ITechnique * GetTechnique(_In_ const uint32_t index) const throw() = 0;
@@ -114,12 +114,12 @@ namespace VoodooShader
          * Set a technique from this shader to be used as the default technique. Some adapter functions simply retrieve the 
          * default technique to draw with. 
          * 
-         * @param Technique The technique within this shader to use.
+         * @param pTechnique The technique within this shader to use.
          * @return Success of the setting.
          * 
          * @note This will validate that the technique belongs to this shader.
          */
-        virtual bool SetDefaultTechnique(_In_ ITechnique * const Technique) throw() = 0;
+        virtual bool SetDefaultTechnique(_In_ ITechnique * const pTechnique) throw() = 0;
 
         /**
          * Retrieve the number of effect-level parameters in this shader. These hold a single value for all passes. 
@@ -132,7 +132,7 @@ namespace VoodooShader
          * Retrieve a specific parameter from the shader. These may be modified at runtime and will automatically update Cg 
          * and the GPU with their value (in most cases).
          * 
-         * @param Index The index of the parameter to retrieve.
+         * @param index The index of the parameter to retrieve.
          * @return The parameter, if valid.
          */
         virtual IParameter * GetParameter(_In_ const uint32_t index) const throw() = 0;

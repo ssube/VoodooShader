@@ -21,11 +21,12 @@
 #include "VSShader.hpp"
 
 #include "Converter.hpp"
+#include "Exception.hpp"
 #include "Version.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
-#include "Exception.hpp"
+#include "IFilesystem.hpp"
 #include "ILogger.hpp"
 #include "IParser.hpp"
 #include "ITexture.hpp"
@@ -371,12 +372,20 @@ namespace VoodooShader
         /* @todo Load texture region info from the annotations. */
         ZeroMemory(&texRegion, sizeof(TextureRegion));
 
-        ITextureRef pTex = m_Core->GetAdapter()->LoadTexture(texName, &texRegion);
-
-        if (pTex)
+        IFile * texFile = m_Core->GetFileSystem()->FindFile(texName);
+        if (texFile)
         {
-            param->SetTexture(pTex.get());
-            return;
+            ITextureRef pTex = m_Core->GetAdapter()->LoadTexture(texFile, &texRegion);
+
+            if (pTex)
+            {
+                param->SetTexture(pTex.get());
+                return;
+            } else {
+                m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Adapter was unable to load texture from file '%s'.", texFile->GetPath().GetData());
+            }
+        } else {
+            m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Unable to find texture file '%s'.", texName.GetData());
         }
 
         // No file, make blank texture

@@ -22,7 +22,7 @@
 #include "Loader_Common.hpp"
 
 /**
- * @addtogroup VoodooLoader Voodoo/Loader @{ 
+ * @addtogroup voodoo_module_loader Voodoo/Loader @{ 
  */
 typedef VoodooShader::ICore * (VOODOO_CALL * VoodooCreateFunc)(const VoodooShader::InitParams * const pInitParams, _In_ bool catchErrors);
 

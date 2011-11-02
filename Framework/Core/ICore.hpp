@@ -121,7 +121,7 @@ namespace VoodooShader
          * @return The Cg context currently associated with the core.
          * 
          * @note Each Voodoo ICore is associated with a single Cg context. This context is used to create all
-         *     @ref Shader shaders and most other graphics resources. 
+         *     @ref IShader shaders and most other graphics resources. 
          */
         virtual CGcontext GetCgContext(void) const throw() = 0;
 
@@ -137,7 +137,7 @@ namespace VoodooShader
         /**
          * Loads and compiles an effect from file, using the current filesystem and search paths. 
          * 
-         * @param Filename The file to load and compile. May be an absolute or relative filename.
+         * @param pFile The file to load and compile. May be an absolute or relative filename.
          * @param ppArgs Optional arguments providing compiler directives, usually shader model specific 
          *     definitions or preprocessor defines.
          */
@@ -150,8 +150,8 @@ namespace VoodooShader
          * This is most useful for creating parameters that must be shared between programs. Only parameters
          * created with this function may be used in Parameter::Link(). 
          * 
-         * @param Name The name for this parameter. 
-         * @param Type The type of the parameter to create.
+         * @param name The name for this parameter. 
+         * @param type The type of the parameter to create.
          * 
          * @return A new parameter. 
          * 
@@ -165,8 +165,8 @@ namespace VoodooShader
          * 
          * Textures will not be used by the shader linker unless they have been registered with the core. 
          * 
-         * @param Name The texture name (must be unique). 
-         * @param Desc Information for the texture to be created.
+         * @param name The texture name (must be unique). 
+         * @param pDesc Information for the texture to be created.
          * @return A shared pointer to the newly created Texture object, if successful.
          * 
          * @note This method calls IAdapter::CreateTexture() to handle the actual creation, then registers 
@@ -177,8 +177,8 @@ namespace VoodooShader
         /**
          * Retrieve a parameter by name. 
          * 
-         * @param Name The name to search for. 
-         * @param Type The type to verify. 
+         * @param name The name to search for. 
+         * @param type The type to verify. 
          * @return A reference to the parameter if found, nullptr reference otherwise.
          * 
          * @note If a parameter with a matching name is found, the type will be checked. If @arg Type is
@@ -189,7 +189,7 @@ namespace VoodooShader
         /**
          * Retrieves a texture from the ICore's texture map by name. 
          * 
-         * @param Name The texture name. 
+         * @param name The texture name. 
          * @return A reference to the Texture if it exists, empty otherwise.
          */
         virtual ITexture * GetTexture(_In_ const String & name) const throw() = 0;
@@ -198,7 +198,7 @@ namespace VoodooShader
          * Removes a virtual parameter from ICore. If all references are released, the parameter is
          * destroyed.
          * 
-         * @param Name The name of the parameter.
+         * @param name The name of the parameter.
          * @return True if the parameter was found and removed, false if not found.
          */
         virtual bool RemoveParameter(_In_ const String & name) throw() = 0;
@@ -207,7 +207,7 @@ namespace VoodooShader
          * Removes a texture from the ICore's texture map and unbinds it from any
          * specialized functions it may be attached to. 
          * 
-         * @param Name The name of texture to be removed.
+         * @param name The name of texture to be removed.
          * @return True if the texture was found and removed, false if not.
          */
         virtual bool RemoveTexture(_In_ const String & name) throw() = 0;
@@ -226,7 +226,7 @@ namespace VoodooShader
         /**
          * Binds a texture to a specialized stage for the shader linker. 
          * 
-         * @param Stage The texture stage to set.
+         * @param stage The texture stage to set.
          * @param pTexture The texture to bind. 
          */
         virtual void SetStageTexture(_In_ const TextureStage stage, _In_ ITexture * const pTexture) throw() = 0;

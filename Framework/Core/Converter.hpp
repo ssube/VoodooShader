@@ -36,7 +36,7 @@ namespace VoodooShader
          * convert between these two types, as it allows for future types to be added or updated as necessary 
          * without changing any other code. 
          * 
-         * @param Type The internal parameter type. 
+         * @param type The internal parameter type. 
          * @return The corresponding Cg type, if one is known. 
          */
         static CGtype ToCGType(_In_ ParameterType type);
@@ -46,7 +46,7 @@ namespace VoodooShader
          * convert between these two types, as it allows for future types to be added or updated as necessary 
          * without changing any other code. 
          * 
-         * @param Type The Cg type. 
+         * @param type The Cg type. 
          * @return The corresponding parameter type, if one is known.
          */
         static ParameterType ToParameterType(_In_ CGtype type);
@@ -62,19 +62,27 @@ namespace VoodooShader
          * Helper function to convert enum values into readable strings used in logging;
          * this overload handles texture formats. 
          * 
-         * @param Format The texture format to find the name of. 
+         * @param format The texture format to find the name of. 
          * @return A string with the name (usually identical to the identifier).
          */
-        static const wchar_t * ToString(_In_ TextureFormat Format);
+        static const wchar_t * ToString(_In_ TextureFormat format);
 
         /**
          * Helper function to convert enum values into readable strings used in logging;
-         * this overload handles parameter types. @param pt The parameter type to find the
-         * name of. @return A C-string with the name (usually identical to the
-         * identifier).
+         * this overload handles parameter types. 
+         * 
+         * @param type The parameter type to find the name of. 
+         * @return A string with the name (usually identical to the identifier).
          */
-        static const wchar_t * ToString(_In_ ParameterType Type);
-
-        static const wchar_t * ToString(_In_ ParameterCategory Category);
+        static const wchar_t * ToString(_In_ ParameterType type);
+        
+        /**
+         * Helper function to convert enum values into readable strings used in logging;
+         * this overload handles parameter types. 
+         * 
+         * @param category The parameter type to find the name of. 
+         * @return A string with the name (usually identical to the identifier).
+         */
+        static const wchar_t * ToString(_In_ ParameterCategory category);
     };
 }

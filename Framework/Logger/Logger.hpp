@@ -60,8 +60,9 @@ namespace VoodooShader
         {
         public:
             /**
-             * Default constructor, opens a log file with the given name and mode. @param core
-             * The core to bind this logger to.
+             * Default constructor, opens a log file with the given name and mode. 
+             * 
+             * @param pCore The core to bind this logger to.
              */
             VSXmlLogger(_In_ ICore * pCore);
 
@@ -80,7 +81,7 @@ namespace VoodooShader
             /**
              * Opens a file for use by this Logger. 
              * 
-             * @param filename The name of the file to open (may contain an absolute or relative path). 
+             * @param pFile The name of the file to open (may contain an absolute or relative path). 
              * @param append Flag specifying the open mode; if true, any existing log is truncated. 
              * @return Success of the open operation.
              */
@@ -115,7 +116,7 @@ namespace VoodooShader
              * Writes a module stamp to the log. This records the name and version info for a select module (used to log 
              * what modules were present during a logging session).
              * 
-             * @param module The module version info to log.
+             * @param pModule The module version info to log.
              */
             virtual void LogModule(_In_ const Version * const pModule) throw();
 
