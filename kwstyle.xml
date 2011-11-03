@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Project>Voodoo Shader Framework</Project>
+<ProjectLogo></ProjectLogo>
+<KWStyleLogo>KWSTYleLogo</KWStyleLogo>
+<Description>
+<LineLength>100</LineLength>
+<DeclarationOrder>
+  <public>0</public>
+  <protected>1</protected>
+  <private>2</private>
+</DeclarationOrder>
+<Typedefs>
+  <regex>[A-Z]</regex>
+</Typedefs>
+<InternalVariables>
+  <regex>m_[A-Z]</regex>
+  <alignment>0</alignment>
+</InternalVariables>
+<Struct>
+  <regex>[A-Z]</regex>
+</Struct>
+<SemicolonSpace>0</SemicolonSpace>
+<EndOfFileNewLine>1</EndOfFileNewLine>
+<Tabs>1</Tabs>
+<Spaces>0</Spaces>
+<Comments>
+  <begin>/**</begin>
+  <middle> *</middle>
+  <end> */</end>
+  <emptyLineBeforeClass>true</emptyLineBeforeClass>
+    <checkMissingComments>true</checkMissingComments>
+</Comments>
+<Header>
+  <location></location>
+  <checkSpacesEndOfLine>true</checkSpacesEndOfLine>
+  <cvsFormat>true</cvsFormat>
+</Header>
+<Indent>
+ <type>SPACE</type>
+ <size>4</size>
+ <noHeader>true</noHeader>
+ <allowBlockLine>true</allowBlockLine>
+</Indent>
+<Namespace>VoodooShader</Namespace>
+<NameOfClass>
+  <name>[NameOfClass]</name>
+    <prefix></prefix>
+</NameOfClass>
+<EmptyLines>2</EmptyLines>
+<Template>T</Template>
+<Operator>
+  <spaceBefore>1</spaceBefore>
+  <spaceAfter>1</spaceAfter>
+</Operator>
+</Description>
+

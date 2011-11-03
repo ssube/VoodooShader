@@ -1,15 +1,15 @@
 /**
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * This file is part of the Voodoo Shader Framework. 
  * 
  * Copyright (c) 2010-2011 by Sean Sube 
  * 
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
- * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
- * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details. 
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details. 
  * 
- * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
  * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
  * 
  * Support and more information may be found at 
@@ -51,32 +51,10 @@ namespace VoodooShader
          */
         virtual ~IShader(void) throw() {};
 
-        /**
-         * Add a reference to this object.
-         * 
-         * @return The new reference count.
-         */
         virtual uint32_t AddRef(void) const throw() = 0;
-
-        /**
-         * Release a reference from this object.
-         * 
-         * @return The new reference count.
-         */
         virtual uint32_t Release(void) const throw() = 0;
-
-        /**
-         * Get the name (usually filename of source file) for this shader.
-         * 
-         * @return The name.
-         */
+        virtual bool CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
         virtual String ToString(void) const throw() = 0;
-
-        /** 
-         * Get the core this object was associated with. 
-         * 
-         * @return The core.
-         */
         virtual ICore * GetCore(void) const throw() = 0;
 
         virtual String GetName() const throw() = 0;

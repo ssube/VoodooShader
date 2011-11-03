@@ -1,15 +1,15 @@
 /**
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * This file is part of the Voodoo Shader Framework. 
  * 
  * Copyright (c) 2010-2011 by Sean Sube 
  * 
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
- * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
- * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details. 
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details. 
  * 
- * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
  * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
  * 
  * Support and more information may be found at 
@@ -55,6 +55,28 @@ namespace VoodooShader
             delete this;
         }
         return count;
+    }
+
+    bool VSModuleManager::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    {
+        if (!ppOut)
+        {
+            if (clsid.is_nil())
+            {
+                clsid = CLSID_VSModuleManager;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (clsid == IID_IObject || clsid == IID_IModuleManager || clsid == CLSID_VSModuleManager) {
+                *ppOut = this;
+                return true;
+            } else {
+                *ppOut = nullptr;
+                return false;
+            }
+        }
     }
 
     String VSModuleManager::ToString() const
@@ -161,11 +183,16 @@ namespace VoodooShader
 
         for (int curClass = 0; curClass < classCount; ++curClass)
         {
-            const char * classname = module->ClassInfo(curClass);
+            const wchar_t * name = nullptr;
+            const Uuid * clsid = module->ClassInfo(curClass, &name);
 
-            if (classname)
+            if (clsid)
             {
-                m_Classes[classname] = ClassID(module, curClass);
+                m_Classes[*clsid] = ClassID(module, curClass);
+                if (name)
+                {
+                    m_ClassNames.insert(std::pair<String, Uuid>(name, *clsid));
+                }
             }
         }
 
@@ -200,79 +227,80 @@ namespace VoodooShader
         }
     }
 
-    bool VSModuleManager::ClassExists(_In_ const String & name) const
+    bool VSModuleManager::ClassExists(_In_ const Uuid & clsid) const
     {
-        return (m_Classes.find(name) != m_Classes.end());
+        return (m_Classes.find(clsid) != m_Classes.end());
     }
 
-    IObject * VSModuleManager::CreateObject(_In_ const String & name) const
+    bool VSModuleManager::ClassExists(_In_ const String & name) const
+    {
+        Uuid clsid;
+        if (!name.ToUuid(&clsid))
+        {
+            ClassNameMap::const_iterator classiter = m_ClassNames.find(name);
+            if (classiter != m_ClassNames.end())
+            {
+                clsid = classiter->second;
+            } else {
+                return false;
+            }
+        }
+
+        return this->ClassExists(clsid);
+    }
+
+    IObject * VSModuleManager::CreateObject(_In_ const Uuid & clsid) const
     {
         ILogger* logger = m_Core->GetLogger();
-        ClassMap::const_iterator classiter = m_Classes.find(name);
+        ClassMap::const_iterator classiter = m_Classes.find(clsid);
 
         if (classiter != m_Classes.end())
         {
             IModuleRef module = classiter->second.first;
-            int number = classiter->second.second;
+            uint32_t index = classiter->second.second;
 
-            if (module)
+            IObject * object = module->CreateClass(index, m_Core);
+
+            if (object == nullptr)
             {
-                try
-                {
-                    IObject *object = module->CreateClass(number, m_Core);
-
-                    if (object == nullptr)
-                    {
-                        if (logger)
-                        {
-                            logger->Log
-                            (
-                                LL_Error,
-                                VOODOO_CORE_NAME,
-                                L"Error creating instance of class %s.",
-                                name.GetData()
-                            );
-                        }
-                    }
-
-                    return object;
-                } catch(const std::exception & exc) {
-                    if (logger)
-                    {
-                        logger->Log
-                        (
-                            LL_Error,
-                            VOODOO_CORE_NAME,
-                            L"Error creating class %s: %s",
-                            name.GetData(),
-                            exc.what()
-                        );
-                    }
-
-                    return nullptr;
-                }
-            } else {
                 if (logger)
                 {
                     logger->Log
                     (
                         LL_Error,
                         VOODOO_CORE_NAME,
-                        L"Unable to lock module (possibly unloaded) for class %s.",
-                        name.GetData()
+                        L"Error creating instance of class %s.",
+                        String(clsid).GetData()
                     );
                 }
-
-                return nullptr;
             }
+
+            return object;
         } else {
             if (logger)
             {
-                logger->Log(LL_Error, VOODOO_CORE_NAME, L"Class %s not found.", name.GetData());
+                logger->Log(LL_Error, VOODOO_CORE_NAME, L"Class %s not found.", String(clsid).GetData());
             }
 
             return nullptr;
         }
+    }
+
+    IObject * VSModuleManager::CreateObject(_In_ const String & name) const
+    {
+        Uuid clsid;
+        if (!name.ToUuid(&clsid))
+        {
+            ClassNameMap::const_iterator classiter = m_ClassNames.find(name);
+            if (classiter != m_ClassNames.end())
+            {
+                clsid = classiter->second;
+            } else {
+                return nullptr;
+            }
+        }
+
+        return this->CreateObject(clsid);
     }
 
     VSModule * VSModule::Load(_In_ ICore * const pCore, _In_ const String & path)
@@ -336,6 +364,28 @@ namespace VoodooShader
         return count;
     }
 
+    bool VSModule::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    {
+        if (!ppOut)
+        {
+            if (clsid.is_nil())
+            {
+                clsid = CLSID_VSModule;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (clsid == IID_IObject || clsid == IID_IModule || clsid == CLSID_VSModule) {
+                *ppOut = this;
+                return true;
+            } else {
+                *ppOut = nullptr;
+                return false;
+            }
+        }
+    }
+
     String VSModule::ToString() const
     {
         return L"VSModule";
@@ -356,9 +406,9 @@ namespace VoodooShader
         return m_ClassCount();
     }
 
-    const char * VSModule::ClassInfo(_In_ const uint32_t number) const
+    const Uuid * VSModule::ClassInfo(_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName) const
     {
-        return m_ClassInfo(number);
+        return m_ClassInfo(number, ppName);
     }
 
     IObject * VSModule::CreateClass(_In_ const uint32_t number, _In_ ICore * const pCore)

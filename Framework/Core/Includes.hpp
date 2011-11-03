@@ -1,24 +1,27 @@
 /**
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * This file is part of the Voodoo Shader Framework. 
  * 
  * Copyright (c) 2010-2011 by Sean Sube 
  * 
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
- * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
- * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details. 
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details. 
  * 
- * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
  * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
  * 
  * Support and more information may be found at 
  *   http://www.voodooshader.com
  * or by contacting the lead developer at 
  *   peachykeen@voodooshader.com
- **/
+ */
 #pragma once
 
+#include <functional>
+
+#ifndef VOODOO_NO_ERRORS
 #ifndef __cplusplus
 #   error Voodoo requires a C++ compiler, preferably Microsoft Visual C++ v10.
 #endif
@@ -33,6 +36,11 @@
 
 #ifndef _UNICODE
 #   error Voodoo APIs require Unicode characterset enabled.
+#endif
+#endif
+
+#ifndef _NATIVE_NULLPTR_SUPPORTED
+#   define nullptr NULL
 #endif
 
 #ifndef VOODOO_STRING_MACROS
@@ -54,10 +62,17 @@
 
 #ifndef VOODOO_NO_BOOST
 #   include <boost/intrusive_ptr.hpp>
+#   include <boost/uuid/uuid.hpp>
 #endif
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#ifndef EXTERN_C
+#   define EXTERN_C extern "C"
+#endif
+#ifndef DECLSPEC_SELECTANY
+#   define DECLSPEC_SELECTANY __declspec(selectany)
+#endif
 
 #ifdef VSF_DEBUG_MEMORY
 #   define _CRTDBG_MAP_ALLOC
@@ -111,6 +126,15 @@ namespace VoodooShader
     typedef void * XmlDocument;
 #endif 
 
+#ifndef VOODOO_NO_BOOST
+    typedef boost::uuids::uuid Uuid;
+#else
+    typedef struct
+    {
+        uint8_t data[16];
+    } Uuid;
+#endif
+
     /* Basic structs */
     struct InitParams;
     struct TextureDesc;
@@ -149,6 +173,28 @@ namespace VoodooShader
      * @}
      */
 
+    /* Uuids */
+#define DEFINE_UUID(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) EXTERN_C const Uuid DECLSPEC_SELECTANY name = {d0,d1,d2,d3,d4,d5,d6,d7,d8,d9,da,db,dc,dd,de,df}
+#define DEFINE_UUID_INTR(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) DEFINE_UUID(IID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)
+#define DEFINE_UUID_IMPL(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) DEFINE_UUID(CLSID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)
+
+    DEFINE_UUID_INTR(IObject,       0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IAdapter,      0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(ICore,         0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IFile,         0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IFileSystem,   0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IHookManager,  0x8c, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IImage,        0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(ILogger,       0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IModule,       0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IModuleManager,0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IParameter,    0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IParser,       0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IPass,         0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(IShader,       0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(ITechnique,    0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    DEFINE_UUID_INTR(ITexture,      0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+    
     /* Reference typedefs */
 #ifndef VOODOO_NO_BOOST
     // Boost intrusive_ptr functions
@@ -156,7 +202,6 @@ namespace VoodooShader
     void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
 
     typedef boost::intrusive_ptr<IAdapter> IAdapterRef;
-    typedef boost::intrusive_ptr<ICore> ICoreRef;
     typedef boost::intrusive_ptr<IFile> IFileRef;
     typedef boost::intrusive_ptr<IFileSystem> IFileSystemRef;
     typedef boost::intrusive_ptr<IHookManager> IHookManagerRef;
@@ -192,8 +237,9 @@ namespace VoodooShader
     typedef std::list<ITextureRef> TextureList;
     typedef std::vector<ITextureRef> TextureVector;
     typedef std::map<String, IModuleRef> ModuleMap;
-    typedef std::pair<IModuleRef, uint32_t> ClassID;
-    typedef std::map<String, ClassID> ClassMap;
+    typedef std::pair<IModuleRef, int32_t> ClassID;
+    typedef std::map<Uuid, ClassID> ClassMap;
+    typedef std::map<String, Uuid> ClassNameMap;
     typedef std::map<ITextureRef, IShaderRef> MaterialMap;
 #endif
 
@@ -488,8 +534,8 @@ namespace VoodooShader
     {
         typedef const Version * (__stdcall * VersionFunc)();
         typedef const uint32_t (__stdcall * CountFunc)();
-        typedef const char * (__stdcall * InfoFunc)(const uint32_t);
-        typedef IObject * (__stdcall * CreateFunc)(const uint32_t, ICore *);
+        typedef const Uuid * (__stdcall * InfoFunc)(_In_ const uint32_t, _Deref_out_opt_ const wchar_t **);
+        typedef IObject * (__stdcall * CreateFunc)(_In_ const uint32_t, _In_ ICore *);
     };
 
     /**

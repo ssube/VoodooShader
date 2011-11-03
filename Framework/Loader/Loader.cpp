@@ -1,15 +1,15 @@
 /**
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * This file is part of the Voodoo Shader Framework. 
  * 
  * Copyright (c) 2010-2011 by Sean Sube 
  * 
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
- * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
- * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details. 
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details. 
  * 
- * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
  * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
  * 
  * Support and more information may be found at 
@@ -37,7 +37,7 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
 
     if (fdwReason == DLL_PROCESS_ATTACH)
     {
-        return (BOOL)LoadVoodoo(hinstDLL);
+        gLoaderHandle = hinstDLL;
     }
     else if (fdwReason == DLL_PROCESS_DETACH)
     {
@@ -48,7 +48,7 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
 /**
  * Locate and load the Voodoo core, verify the functions and initialize the framework.
  */
-bool WINAPI LoadVoodoo(HINSTANCE hLoader)
+bool WINAPI LoadVoodoo()
 {
     wchar_t pathGlobalRoot[MAX_PATH];
     wchar_t pathLocalRoot[MAX_PATH];
@@ -66,7 +66,7 @@ bool WINAPI LoadVoodoo(HINSTANCE hLoader)
     GetCurrentDirectory(MAX_PATH, pathRunRoot);
 
     // Get the loader
-    if (GetModuleFileName(hLoader, buffer, MAX_PATH) == 0)
+    if (GetModuleFileName(gLoaderHandle, buffer, MAX_PATH) == 0)
     {
         ErrorMessage(L"Voodoo Loader: Unable to retrieve loader path.");
         return false;
@@ -194,6 +194,7 @@ bool WINAPI UnloadVoodoo(void)
 void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const wchar_t * lib, const char * func)
 {
     typedef void * (WINAPI * DXInitFunc) (UINT);
+
     HMODULE baselib = LoadSystemLibrary(lib);
 
     if (!baselib)
@@ -214,19 +215,33 @@ void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const wchar_t * lib, const 
 }
 
 /**
- * Various adapter-loading entry points Direct3D 8
+ * Direct3D 8
  */
-void *WINAPI Voodoo3DCreate8(UINT sdkVersion)
+void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
 {
-    return VoodooDXCreateGeneric(sdkVersion, L"d3d8.dll", "Direct3DCreate8");
+    void * pD3D8 = VoodooDXCreateGeneric(sdkVersion, L"d3d8.dll", "Direct3DCreate8");
+
+    if (LoadVoodoo())
+    {
+        //gVoodooCore->GetAdapter()->SetProperty(L"D3D8_Object")
+    }
+
+    return pD3D8;
 }
 
 /**
  * Direct3D 9
  */
-void *WINAPI Voodoo3DCreate9(UINT sdkVersion)
+void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
 {
-    return VoodooDXCreateGeneric(sdkVersion, L"d3d9.dll", "Direct3DCreate9");
+    void * pD3D9 = VoodooDXCreateGeneric(sdkVersion, L"d3d9.dll", "Direct3DCreate9");
+
+    if (LoadVoodoo())
+    {
+
+    }
+
+    return pD3D9;
 }
 
 /**

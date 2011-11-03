@@ -1,15 +1,15 @@
 /**
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * This file is part of the Voodoo Shader Framework. 
  * 
  * Copyright (c) 2010-2011 by Sean Sube 
  * 
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
- * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
- * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details. 
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details. 
  * 
- * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
  * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
  * 
  * Support and more information may be found at 
@@ -37,33 +37,11 @@ namespace VoodooShader
     {
     public:
         virtual ~IModuleManager(void) throw() {};
-        
-        /**
-         * Add a reference to this object.
-         * 
-         * @return The new reference count.
-         */
+
         virtual uint32_t AddRef(void) const throw() = 0;
-
-        /**
-         * Release a reference from this object.
-         * 
-         * @return The new reference count.
-         */
         virtual uint32_t Release(void) const throw() = 0;
-
-        /**
-         * Get the name of this object.
-         * 
-         * @return The name.
-         */
+        virtual bool CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
         virtual String ToString(void) const throw() = 0;
-
-        /** 
-         * Get the core this object was associated with. 
-         * 
-         * @return The core.
-         */
         virtual ICore * GetCore(void) const throw() = 0;
 
         /**
@@ -94,19 +72,45 @@ namespace VoodooShader
          *     path for required DLLs. 
          */
         virtual bool LoadFile(_In_ const String & filename) = 0;
-
+        
         /**
          * Tests to see if a class exists in the list provided by all loaded modules. 
          * 
-         * @param name The class name
+         * @param clsid The class UUID.
+         */
+        virtual bool ClassExists(_In_ const Uuid & clsid) const = 0;
+
+        /**
+         * Tests to see if a class exists in the list provided by all loaded modules.
+         * 
+         * This first attempts to convert the name string to a UUID (String::ToUuid()), and failing that, looks up the name
+         * in the internal map and checks for a corresponding UUID. The name lookup is imprecise, only the first-loaded
+         * class with a given name will be registered.
+         * 
+         * @param name The class name.
          */
         virtual bool ClassExists(_In_ const String & name) const = 0;
 
         /**
-         * Create a new instance of the given class. This object will be created in a dynamic module and a pointer given.
+        * Create a new instance of the given class, using specific class UUID. This requires a precise match and will fail
+        * if no class is available.
+        * 
+        * @param name The class UUID to create. 
+        * @return New object or nullptr if the class wasn't found or couldn't be created.
+         */
+        _Check_return_ virtual IObject * CreateObject(_In_ const Uuid & clsid) const = 0;
+
+        /**
+         * Create a new instance of the given class, using a class name or UUID in string form. 
          * 
-         * @param name The class name to create. 
+         * This first attempts to convert the name string to a UUID (String::ToUuid()), and failing that, looks up the name
+         * in the internal map and checks for a corresponding UUID. The name lookup is imprecise, only the first-loaded
+         * class with a given name will be registered.
+         * 
+         * @param name The class name or uuid to create. 
          * @return New object or nullptr if the class wasn't found or couldn't be created.
+         * 
+         * @sa @ref String::String(const Uuid &) for String to Uuid conversion rules.
          */
         _Check_return_ virtual IObject * CreateObject(_In_ const String & name) const = 0;
 
@@ -131,32 +135,10 @@ namespace VoodooShader
     public:
         virtual ~IModule(void) throw() {};
         
-        /**
-         * Add a reference to this object.
-         * 
-         * @return The new reference count.
-         */
         virtual uint32_t AddRef(void) const throw() = 0;
-
-        /**
-         * Release a reference from this object.
-         * 
-         * @return The new reference count.
-         */
         virtual uint32_t Release(void) const throw() = 0;
-
-        /**
-         * Get the name of this object.
-         * 
-         * @return The name.
-         */
+        virtual bool CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
         virtual String ToString(void) const throw() = 0;
-
-        /** 
-         * Get the core this object was associated with. 
-         * 
-         * @return The core.
-         */
         virtual ICore * GetCore(void) const throw() = 0;
 
         /**
@@ -168,7 +150,7 @@ namespace VoodooShader
         /** Get the class count from this module. */
         virtual const uint32_t ClassCount(void) const = 0;
 
-        virtual const char * ClassInfo(_In_ const uint32_t number) const = 0;
+        virtual const Uuid * ClassInfo(_In_ const uint32_t number, _Deref_out_ const wchar_t ** name) const = 0;
 
         virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore) = 0;
     };

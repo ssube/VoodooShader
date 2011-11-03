@@ -1,15 +1,15 @@
 /**
- * This file is part of the Voodoo Shader Framework, a comprehensive shader support library. 
+ * This file is part of the Voodoo Shader Framework. 
  * 
  * Copyright (c) 2010-2011 by Sean Sube 
  * 
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
- * Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
- * option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY 
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details. 
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details. 
  * 
- * You should have received a copy of the GNU General Public License along with this program; if not, write to 
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
  * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
  * 
  * Support and more information may be found at 
@@ -20,6 +20,8 @@
 
 #include <string>
 #include <boost/algorithm/string.hpp>
+#include <boost/uuid/string_generator.hpp>
+#include <boost/uuid/uuid_io.hpp>
 
 #include "String.hpp"
 
@@ -92,10 +94,34 @@ namespace VoodooShader
         m_Impl = new StringImpl(other.m_Impl->m_Str);
     }
 
+    String::String(const Uuid & uuid)
+    {
+        m_Impl = new StringImpl(boost::uuids::to_wstring(uuid));
+    }
+
     String::~String()
     {
         delete m_Impl;
         m_Impl = nullptr;
+    }
+
+    bool String::ToUuid(Uuid * pUuid) const
+    {
+        if (!pUuid)
+        {
+            return false;
+        }
+
+        try
+        {
+            boost::uuids::string_generator gen;
+            *pUuid = gen(m_Impl->m_Str);
+            return true;
+        } catch (const boost::exception & exc) {
+            UNREFERENCED_PARAMETER(exc);
+
+            return false;
+        }
     }
 
     int32_t String::ToCharStr(int32_t size, char * const pBuffer) const
