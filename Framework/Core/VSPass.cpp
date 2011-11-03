@@ -107,7 +107,7 @@ namespace VoodooShader
     String VSPass::ToString(void) const
     {
         return String::Format(L"VSPass(%s)", m_Name.GetData());
-    };
+    }
 
     ICore * VSPass::GetCore(void) const
     {

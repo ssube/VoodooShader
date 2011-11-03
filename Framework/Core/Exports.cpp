@@ -30,10 +30,14 @@
 namespace VoodooShader
 {
     static const Version coreVersion = VOODOO_META_VERSION_STRUCT(CORE);
-    static const Uuid clsid_vsa = CLSID_VSAdapter;
-    static const Uuid clsid_vsf = CLSID_VSFileSystem;
-    static const Uuid clsid_vsh = CLSID_VSHookManager;
-    static const Uuid clsid_vsl = CLSID_VSLogger;
+    static const wchar_t * name_VSAdapter = L"VSAdapter";
+    static const wchar_t * name_VSFileSystem = L"VSFileSystem";
+    static const wchar_t * name_VSHookManager = L"VSHookManager";
+    static const wchar_t * name_VSLogger = L"VSLogger";
+    static const Uuid clsid_VSAdapter = CLSID_VSAdapter;
+    static const Uuid clsid_VSFileSystem = CLSID_VSFileSystem;
+    static const Uuid clsid_VSHookManager = CLSID_VSHookManager;
+    static const Uuid clsid_VSLogger = CLSID_VSLogger;
 
     const Version * VOODOO_CALL API_ModuleVersion(void)
     {
@@ -50,19 +54,19 @@ namespace VoodooShader
         switch (number)
         {
         case 0:
-            *ppName = L"VSAdapter";
-            return &clsid_vsa;
+            if (ppName) *ppName = name_VSAdapter;
+            return &clsid_VSAdapter;
         case 1:
-            *ppName = L"VSFileSystem";
-            return &clsid_vsf;
+            if (ppName) *ppName = name_VSFileSystem;
+            return &clsid_VSFileSystem;
         case 2:
-            *ppName = L"VSHookManager";
-            return &clsid_vsh;
+            if (ppName) *ppName = name_VSHookManager;
+            return &clsid_VSHookManager;
         case 3:
-            *ppName = L"VSLogger";
-            return &clsid_vsl;
+            if (ppName) *ppName = name_VSLogger;
+            return &clsid_VSLogger;
         default:
-            *ppName = nullptr;
+            if (ppName) *ppName = nullptr;
             return nullptr;
         }
     }

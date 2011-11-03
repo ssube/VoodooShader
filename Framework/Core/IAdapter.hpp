@@ -51,8 +51,9 @@ namespace VoodooShader
 
         /**
          * Loads a pass in a manner that is compatible with the adapter's underlying API. For Cg-supported APIs, this may
-         * use the appropriate module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc). This may involve additional
-         * compilation or linking. In some cases, the pass may not be specifically loaded and this may simply return true.
+         * use the appropriate module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc). This may involve
+         * additional compilation or linking. In some cases, the pass may not be specifically loaded and this may simply
+         * return true.
          *
          * @param pPass The pass to be loaded.
          * @return Whether or not the pass was successfully loaded.
@@ -155,7 +156,11 @@ namespace VoodooShader
          * @param count The number of vertexes to draw.
          * @param pVertexData This must contain vertex data for the given number of verts.
          */
-        virtual void DrawGeometry(_In_ const uint32_t count, _In_count_(count) const VertexStruct * const pVertexData) throw() = 0;
+        virtual void DrawGeometry
+        (
+            _In_ const uint32_t count,
+            _In_count_(count) const VertexStruct * const pVertexData
+        ) throw() = 0;
 
         /**
          * Downloads a parameter's value from system RAM to VRAM, verifying that the value on the GPU (and in use) is the
@@ -209,8 +214,9 @@ namespace VoodooShader
          *     internally, as well as logging what data it can find. Malformed errors will not be passed to the adapter.
          *
          * @note In the case of compiler errors, the exact messages can be gotten by calling cgGetLastListing until it
-         *     returns nullptr. The Core error handler does just this, @e after the adapter's error handler returns. Thus, if
-         *     the adapter does not dump compiler listings, the core will.
+         *     returns nullptr. The Core error handler does just this, @e after the adapter's error handler returns. Thus,
+         *     if the adapter does not dump compiler listings, the core will. This is intended to ensure compilation errors
+         *     are noted, but provide the adapter a chance to handle and potentially correct them.
          */
         virtual void HandleError(_In_ CGcontext const pContext, _In_ uint32_t error) throw() = 0;
     };

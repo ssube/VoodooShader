@@ -94,19 +94,19 @@
 #ifndef VOODOO_NO_CG
 #   include "Cg/cg.h"
 #else
-    typedef int CGbool;
-    typedef void *CGcontext;
-    typedef void *CGprogram;
-    typedef void *CGparameter;
-    typedef void *CGobj;
-    typedef void *CGbuffer;
-    typedef void *CGeffect;
-    typedef void *CGtechnique;
-    typedef void *CGpass;
-    typedef void *CGstate;
-    typedef void *CGstateassignment;
-    typedef void *CGannotation;
-    typedef void *CGhandle;
+    typedef int    CGbool;
+    typedef void * CGcontext;
+    typedef void * CGprogram;
+    typedef void * CGparameter;
+    typedef void * CGobj;
+    typedef void * CGbuffer;
+    typedef void * CGeffect;
+    typedef void * CGtechnique;
+    typedef void * CGpass;
+    typedef void * CGstate;
+    typedef void * CGstateassignment;
+    typedef void * CGannotation;
+    typedef void * CGhandle;
 #endif
 
 #ifndef VOODOO_NO_PUGIXML
@@ -174,9 +174,12 @@ namespace VoodooShader
      */
 
     /* Uuids */
-#define DEFINE_UUID(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) EXTERN_C const Uuid DECLSPEC_SELECTANY name = {d0,d1,d2,d3,d4,d5,d6,d7,d8,d9,da,db,dc,dd,de,df}
-#define DEFINE_UUID_INTR(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) DEFINE_UUID(IID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)
-#define DEFINE_UUID_IMPL(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) DEFINE_UUID(CLSID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)
+#define DEFINE_UUID(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \
+    EXTERN_C const Uuid DECLSPEC_SELECTANY name = {d0,d1,d2,d3,d4,d5,d6,d7,d8,d9,da,db,dc,dd,de,df}
+#define DEFINE_UUID_INTR(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \
+    DEFINE_UUID(IID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)
+#define DEFINE_UUID_IMPL(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \
+    DEFINE_UUID(CLSID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)
 
     DEFINE_UUID_INTR(IObject,       0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
     DEFINE_UUID_INTR(IAdapter,      0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
@@ -201,54 +204,54 @@ namespace VoodooShader
     void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
     void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
 
-    typedef boost::intrusive_ptr<IAdapter> IAdapterRef;
-    typedef boost::intrusive_ptr<IFile> IFileRef;
-    typedef boost::intrusive_ptr<IFileSystem> IFileSystemRef;
-    typedef boost::intrusive_ptr<IHookManager> IHookManagerRef;
-    typedef boost::intrusive_ptr<IImage> IImageRef;
-    typedef boost::intrusive_ptr<ILogger> ILoggerRef;
-    typedef boost::intrusive_ptr<IModule> IModuleRef;
+    typedef boost::intrusive_ptr<IAdapter>       IAdapterRef;
+    typedef boost::intrusive_ptr<IFile>          IFileRef;
+    typedef boost::intrusive_ptr<IFileSystem>    IFileSystemRef;
+    typedef boost::intrusive_ptr<IHookManager>   IHookManagerRef;
+    typedef boost::intrusive_ptr<IImage>         IImageRef;
+    typedef boost::intrusive_ptr<ILogger>        ILoggerRef;
+    typedef boost::intrusive_ptr<IModule>        IModuleRef;
     typedef boost::intrusive_ptr<IModuleManager> IModuleManagerRef;
-    typedef boost::intrusive_ptr<IObject> IObjectRef;
-    typedef boost::intrusive_ptr<IParameter> IParameterRef;
-    typedef boost::intrusive_ptr<IParser> IParserRef;
-    typedef boost::intrusive_ptr<IPass> IPassRef;
-    typedef boost::intrusive_ptr<IShader> IShaderRef;
-    typedef boost::intrusive_ptr<ITechnique> ITechniqueRef;
-    typedef boost::intrusive_ptr<ITexture> ITextureRef;
+    typedef boost::intrusive_ptr<IObject>        IObjectRef;
+    typedef boost::intrusive_ptr<IParameter>     IParameterRef;
+    typedef boost::intrusive_ptr<IParser>        IParserRef;
+    typedef boost::intrusive_ptr<IPass>          IPassRef;
+    typedef boost::intrusive_ptr<IShader>        IShaderRef;
+    typedef boost::intrusive_ptr<ITechnique>     ITechniqueRef;
+    typedef boost::intrusive_ptr<ITexture>       ITextureRef;
 #endif
 
     /* Collections */
 #if !defined(VOODOO_NO_COLLECTIONS) && !defined(VOODOO_NO_BOOST)
-    typedef std::map<String, String> Dictionary;
-    typedef std::map<String, IShaderRef> ShaderMap;
-    typedef std::list<IShaderRef> ShaderList;
-    typedef std::vector<IShaderRef> ShaderVector;
-    typedef std::map<String, ITechniqueRef> TechniqueMap;
-    typedef std::list<ITechniqueRef> TechniqueList;
-    typedef std::vector<ITechniqueRef> TechniqueVector;
-    typedef std::map<String, IPassRef> PassMap;
-    typedef std::list<IPassRef> PassList;
-    typedef std::vector<IPassRef> PassVector;
-    typedef std::map<String, IParameterRef> ParameterMap;
-    typedef std::list<IParameterRef> ParameterList;
-    typedef std::vector<IParameterRef> ParameterVector;
-    typedef std::map<String, ITextureRef> TextureMap;
-    typedef std::list<ITextureRef> TextureList;
-    typedef std::vector<ITextureRef> TextureVector;
-    typedef std::map<String, IModuleRef> ModuleMap;
-    typedef std::pair<IModuleRef, int32_t> ClassID;
-    typedef std::map<Uuid, ClassID> ClassMap;
-    typedef std::map<String, Uuid> ClassNameMap;
-    typedef std::map<ITextureRef, IShaderRef> MaterialMap;
+    typedef std::map<String, String>             Dictionary;
+    typedef std::map<String, IShaderRef>         ShaderMap;
+    typedef std::list<IShaderRef>                ShaderList;
+    typedef std::vector<IShaderRef>              ShaderVector;
+    typedef std::map<String, ITechniqueRef>      TechniqueMap;
+    typedef std::list<ITechniqueRef>             TechniqueList;
+    typedef std::vector<ITechniqueRef>           TechniqueVector;
+    typedef std::map<String, IPassRef>           PassMap;
+    typedef std::list<IPassRef>                  PassList;
+    typedef std::vector<IPassRef>                PassVector;
+    typedef std::map<String, IParameterRef>      ParameterMap;
+    typedef std::list<IParameterRef>             ParameterList;
+    typedef std::vector<IParameterRef>           ParameterVector;
+    typedef std::map<String, ITextureRef>        TextureMap;
+    typedef std::list<ITextureRef>               TextureList;
+    typedef std::vector<ITextureRef>             TextureVector;
+    typedef std::map<String, IModuleRef>         ModuleMap;
+    typedef std::pair<IModuleRef, int32_t>       ClassID;
+    typedef std::map<Uuid, ClassID>              ClassMap;
+    typedef std::map<String, Uuid>               ClassNameMap;
+    typedef std::map<ITextureRef, IShaderRef>    MaterialMap;
 #endif
 
 #pragma warning(push)
 #pragma warning(disable: 4480)
     /**
-     * Texture formats for use by @ref VoodooShader::ITexture "Textures", describing the layout and size of the texture 
-     * data. These may not be implemented by the underlying graphics API exactly as they are indicated here, but the 
-     * available components and sizes are guaranteed to be equal to or greater than the indicated values. Further 
+     * Texture formats for use by @ref VoodooShader::ITexture "Textures", describing the layout and size of the texture
+     * data. These may not be implemented by the underlying graphics API exactly as they are indicated here, but the
+     * available components and sizes are guaranteed to be equal to or greater than the indicated values. Further
      * information on texture formats and depth may be found on the @ref voodoo_textures_formats "texture formats chart".
      */
     enum TextureFormat : int32_t
@@ -524,7 +527,7 @@ namespace VoodooShader
         typedef const uint32_t (__stdcall * CountFunc)();
         typedef const Uuid * (__stdcall * InfoFunc)(_In_ const uint32_t, _Deref_out_opt_ const wchar_t **);
         typedef IObject * (__stdcall * CreateFunc)(_In_ const uint32_t, _In_ ICore *);
-    };
+    }
 
     /**
      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, particularly function,

@@ -29,8 +29,8 @@ namespace VoodooShader
       * of how a piece of geometry is displayed.
       *
       * Each shader may have one or more techniques. A technique describes a full rendering process, and may have one or
-      * more passes. Each pass describes a particular way to render the given geometry, and may have multiple programs. Each p
-      * rogram controls a particular part of the render process. In addition, shaders, techniques and passes contain some
+      * more passes. Each pass describes a particular way to render the given geometry, and may have multiple programs. Each
+      * program controls a particular part of the render process. In addition, shaders, techniques and passes contain some
       * metadata used by the system to control how and where they are rendered. For any given piece of geometry, one
       * technique is in use and the geometry is drawn once with each pass of that technique.
       *

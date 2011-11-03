@@ -44,7 +44,6 @@ namespace VoodooShader
          */
         String();
 
-        // char ctors
         /**
          * Creates a string from the given character (one character, converted).
          * @param ch Character to use.
@@ -70,36 +69,40 @@ namespace VoodooShader
          * @param str The string to use.
          */
         String(_In_ const uint32_t size, _In_z_count_(size) const char * str);
-        // wchar_t ctors
+
         /**
          * Creates a string from the given character (one character).
          * @param ch Character to use.
          */
         String(_In_ const wchar_t ch);
+
         /**
          * Creates a string from a C-style wide string.
          * @param str String to use.
          */
         String(_In_z_ const wchar_t * str);
+
         /**
          * Creates a string from the given character (repeated).
          * @param size The number of characters.
          * @param ch The character to use.
          */
         String(_In_ const uint32_t size, _In_ const wchar_t ch);
+
         /**
          * Create a string from a C-style wide string.
          * @param size The number of characters to use.
          * @param str The string to use.
          */
         String(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
-        // class ctors
+
         /**
          * Creates a string from another String (copy constructor).
          * @param str The string to copy.
          * @note This does not provide a partial copy constructor, use <code>String(String.Left())</code>.
          */
         String(_In_ const String & str);
+
         /**
          * Creates a string from a Uuid, converting to a string. This takes the unbraced 8/2/2/2/12 format, like so:
          * @li @code hhhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh @endcode
@@ -127,11 +130,19 @@ namespace VoodooShader
 #endif
 
 #ifdef _STRING_
+        /**
+         * Create a string from a std::string (performs conversion).
+         * @param str The string to use.
+         */
         String(_In_ const std::string & str)
         {
             this->CInit(0, str.c_str());
         }
-
+        
+        /**
+         * Create a string from a std::wstring.
+         * @param str The string to use.
+         */
         String(_In_ const std::wstring & str)
         {
             this->WInit(0, str.c_str());
@@ -140,7 +151,6 @@ namespace VoodooShader
 
         ~String();
 
-        // Convert
         /**
          * Attempts to convert this String to a Uuid. The string must be of one of the following forms:
          * @li <code>{01234567-89ab-cdef-0123-456789abcdef}</code>
@@ -155,12 +165,31 @@ namespace VoodooShader
          * @return Success of conversion.
          */
         bool ToUuid(_Out_ Uuid * pUuid) const;
+
+        /**
+         * Attempts to convert this String to a character array. If size is 0 and pBuffer is null, this estimates the size
+         * of the buffer required and returns that; otherwise it converts the string and returns the number of bytes written
+         * to pBuffer.
+         * 
+         * @param size Size of buffer.
+         * @param pBuffer Buffer to write converted string to.
+         * @return Necessary buffer size or bytes converted.
+         */
         int32_t ToCharStr(_In_ int32_t size, _Inout_opt_count_(size) char * const pBuffer) const;
+
 #ifdef _STRING_
-        std::wstring ToString() const { return std::wstring(this->GetData()); };
+        /**
+         * Creates a std::wstring from this string.
+         * 
+         * @return Copied string.
+         */
+        std::wstring ToString() const
+        { 
+            return std::wstring(this->GetData()); 
+        };
 #endif
 
-        // Modify
+        /* Modify functions */
         String & Append(_In_ const wchar_t ch);
         String & Append(_In_ const uint32_t size, _In_ const wchar_t ch);
         String & Append(_In_ const wchar_t * str);

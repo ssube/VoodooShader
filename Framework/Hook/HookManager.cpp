@@ -27,40 +27,41 @@ namespace VoodooShader
 {
     namespace EasyHook
     {
-        const Version * API_ModuleVersion(void)
+        static const Version moduleVersion = VOODOO_META_VERSION_STRUCT(HOOK);
+        static const wchar_t * name_VSEHHookManager = L"VSEHHookManager";
+        static const Uuid clsid_VSEHHookManager = CLSID_VSEHHookManager;
+
+        const Version * VOODOO_CALL API_ModuleVersion(void)
         {
-            static Version moduleVersion = VOODOO_META_VERSION_STRUCT(HOOK);
 
             return &moduleVersion;
         }
 
-        const uint32_t API_ClassCount(void)
+        const uint32_t VOODOO_CALL API_ClassCount(void)
         {
             return 1;
         }
 
-        const char * API_ClassInfo(_In_ const uint32_t number)
+        const Uuid * VOODOO_CALL API_ClassInfo (_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName)
         {
             if (number == 0)
             {
-                return "EHHookManager";
+                if (ppName) *ppName = name_VSEHHookManager;
+                return &clsid_VSEHHookManager;
             }
-            else
-            {
-                return nullptr;
-            }
+
+            if (ppName) *ppName = nullptr;
+            return nullptr;
         }
 
-        IObject * API_ClassCreate(_In_ const uint32_t number, _In_ ICore *core)
+        IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t number, _In_ ICore *core)
         {
             if (number == 0)
             {
                 return new VSEHHookManager(core);
             }
-            else
-            {
-                return nullptr;
-            }
+
+            return nullptr;
         }
 
         VSEHHookManager::VSEHHookManager(ICore * pCore) :
@@ -209,7 +210,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Debug, VOODOO_HOOK_NAME, 
+                    LL_Debug, VOODOO_HOOK_NAME,
                     L"Trying to remove hook %s (does not exist).", name.GetData()
                 );
                 return false;
@@ -223,7 +224,7 @@ namespace VoodooShader
 
             std::for_each
             (
-                m_Hooks.begin(), m_Hooks.end(), 
+                m_Hooks.begin(), m_Hooks.end(),
                 [](std::pair<String, TRACED_HOOK_HANDLE> chook){delete chook.second;}
             );
 

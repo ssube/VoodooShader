@@ -22,7 +22,8 @@
 #include "Version.hpp"
 
 /**
- * @addtogroup voodoo_module_loader @{
+ * @addtogroup voodoo_module_loader
+ * @{
  * Loader defs
  */
 #define VOODOO_LOADER_NAME          L"Voodoo/Loader"

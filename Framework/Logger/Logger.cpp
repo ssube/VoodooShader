@@ -37,12 +37,12 @@ namespace VoodooShader
 {
     namespace XmlLogger
     {
-        const char * XmlLoggerName = "VSXmlLogger";
+        static const Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
+        const wchar_t * XmlLoggerName = L"VSXmlLogger";
+        static const Uuid clsid_vsa = CLSID_VSXmlLogger;
 
         const Version * VOODOO_CALL API_ModuleVersion(void)
         {
-            static Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
-
             return &moduleVersion;
         }
 
@@ -51,14 +51,16 @@ namespace VoodooShader
             return 1;
         }
 
-        const char * VOODOO_CALL API_ClassInfo (_In_ const uint32_t number)
+        const Uuid * VOODOO_CALL API_ClassInfo (_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName)
         {
             if (number == 0)
             {
-                return XmlLoggerName;
+                if (ppName) *ppName = XmlLoggerName;
+                return &CLSID_VSXmlLogger;
             }
             else
             {
+                if (ppName) *ppName = nullptr;
                 return nullptr;
             }
         }

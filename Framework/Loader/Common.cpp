@@ -64,5 +64,5 @@ HMODULE WINAPI LoadSystemLibrary(const wchar_t * libname)
     return LoadLibrary(path);
 }
 /**
- * @} 
+ * @}
  */

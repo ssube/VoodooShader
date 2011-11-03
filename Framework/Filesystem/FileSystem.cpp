@@ -34,32 +34,34 @@ namespace VoodooShader
 {
     namespace VoodooWFS
     {
-        const char * FileSystemName = "VSWFileSystem";
+        static const Version version = VOODOO_META_VERSION_STRUCT(FILESYSTEM);
+        static const wchar_t * name_VSWFileSystem = L"VSWFileSystem";
+        static const Uuid clsid_VSWFileSystem = CLSID_VSWFileSystem;
 
-        const Version * API_ModuleVersion(void)
+
+        const Version * VOODOO_CALL API_ModuleVersion(void)
         {
-            static Version version = VOODOO_META_VERSION_STRUCT(FILESYSTEM);
             return &version;
         }
 
-        uint32_t API_ClassCount(void)
+        const uint32_t VOODOO_CALL API_ClassCount(void)
         {
             return 1;
         }
 
-        const char * API_ClassInfo(const uint32_t number)
+        const Uuid * VOODOO_CALL API_ClassInfo (_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName)
         {
             if (number == 0)
             {
-                return FileSystemName;
+                if (ppName) *ppName = name_VSWFileSystem;
+                return &clsid_VSWFileSystem;
             }
-            else
-            {
-                return nullptr;
-            }
+
+            if (ppName) *ppName = nullptr;
+            return nullptr;
         }
 
-        IObject * API_ClassCreate(const uint32_t number, _In_ ICore * pCore)
+        IObject * VOODOO_CALL API_ClassCreate(const uint32_t number, _In_ ICore * pCore)
         {
             if (number == 0)
             {

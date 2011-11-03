@@ -22,7 +22,8 @@
 #include "Loader_Common.hpp"
 
 /**
- * @addtogroup voodoo_module_loader Voodoo/Loader @{
+ * @addtogroup voodoo_module_loader Voodoo/Loader 
+ * @{
  */
 HINSTANCE gLoaderHandle;
 
@@ -50,5 +51,5 @@ HRESULT WINAPI VoodooInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID * lpl
 HRESULT WINAPI VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter);
 
 /**
- * @} 
+ * @}
  */

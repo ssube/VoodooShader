@@ -45,18 +45,18 @@ namespace VoodooShader
          */
 
         const Version * VOODOO_CALL API_ModuleVersion(void);
-        const uint32_t VOODOO_CALL API_ClassCount(void);
-        const char * VOODOO_CALL API_ClassInfo(_In_ const uint32_t number);
-        IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t number, _In_ ICore * core);
+        const uint32_t  VOODOO_CALL API_ClassCount(void);
+        const Uuid *    VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Deref_out_opt_ const wchar_t ** ppName);
+        IObject *       VOODOO_CALL API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
 
         /* VSXmlLogger: e6f312b7-05af-11e1-9e05-005056c00008 */
         DEFINE_UUID_IMPL(VSXmlLogger, 0xB7, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
 
         /**
-         * Xml logger class, writes neatly formatted logs for use with the log viewer. Supports all Voodoo ILogger features 
+         * Xml logger class, writes neatly formatted logs for use with the log viewer. Supports all Voodoo ILogger features
          * and debug logging (with no buffer).
-         * 
-         * @warning If the logger isn't destroyed properly, the main tag of the log file won't be closed and the log won't 
+         *
+         * @warning If the logger isn't destroyed properly, the main tag of the log file won't be closed and the log won't
          *      be valid XML.
          */
         class VSXmlLogger :
@@ -178,8 +178,8 @@ namespace VoodooShader
             LogFlags m_Flags;
         };
 
-        /** 
-         * @} 
+        /**
+         * @}
          */
     }
 }

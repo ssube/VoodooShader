@@ -33,22 +33,23 @@ namespace VoodooShader
      * matching them to the Voodoo interfaces.
      *
      * @note This module exports 1 class, named @p WFileSystem (@ref VoodooWFS::VSWFileSystem) and provides implementations
-     *      of @ref IFileSystem (VSWFileSystem), @ref IFile (VSWFile) and @ref IImage (VSWImage). The following global 
+     *      of @ref IFileSystem (VSWFileSystem), @ref IFile (VSWFile) and @ref IImage (VSWImage). The following global
      *      variables are added when the filesystem object is created:
      *          @li <code>\$(mygames)</code> Current user's My Games folder.
      *          @li <code>\$(allgames)</code> Shared (all user's) My Games folder.
      *          @li <code>\$(systemroot)</code> System path (e.g., <code>C:\\Windows\\System32</code>)
      *
-     * @addtogroup voodoo_module_wfilesystem Voodoo/WFileSystem @{
+     * @addtogroup voodoo_module_wfilesystem Voodoo/WFileSystem
+     * @{
      */
     namespace VoodooWFS
     {
         typedef std::list<String> StringList;
 
-        const Version * API_ModuleVersion(void);
-        uint32_t API_ClassCount(void);
-        const char *API_ClassInfo(_In_ const uint32_t number);
-        IObject *API_ClassCreate(_In_ const uint32_t number, _In_ ICore * pCore);
+        const Version * VOODOO_CALL API_ModuleVersion(void);
+        const uint32_t  VOODOO_CALL API_ClassCount(void);
+        const Uuid *    VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Deref_out_opt_ const wchar_t ** ppName);
+        IObject *       VOODOO_CALL API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
 
         /* VSWFileSystem: e6f312b1-05af-11e1-9e05-005056c00008 */
         DEFINE_UUID_IMPL(VSWFileSystem, 0xB1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
@@ -83,7 +84,7 @@ namespace VoodooShader
             virtual bool AddPath(_In_ const String & path) throw();
 
             /**
-             * Removes a directory from the search path, following the same rules as adding (adding a string then removing 
+             * Removes a directory from the search path, following the same rules as adding (adding a string then removing
              * the same string will always work).
              *
              * @param path The path to remove.
@@ -249,8 +250,8 @@ namespace VoodooShader
              */
             virtual uint32_t GetData
             (
-                _In_ const TextureRegion * pDesc, 
-                _In_ const uint32_t size, 
+                _In_ const TextureRegion * pDesc,
+                _In_ const uint32_t size,
                 _In_opt_count_(size) void * const pBuffer
             ) const throw();
 
@@ -267,5 +268,5 @@ namespace VoodooShader
 }
 
 /**
- * @} 
+ * @}
  */
