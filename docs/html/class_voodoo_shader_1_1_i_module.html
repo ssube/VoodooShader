@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -114,7 +114,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current version of this module.  <a href="#a2c3dddf8874053dc20e92c8eda78873e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module.html#a8189cb8f2d037886d7e632a35359a086">ClassCount</a> (void) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the class count from this module.  <a href="#a8189cb8f2d037886d7e632a35359a086"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module.html#a665585e5fc8fcf08ecb48add0b9b2106">ClassInfo</a> (_In_ const uint32_t number, _Deref_out_ const wchar_t **name) const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module.html#abeb479c687a5578eb243ac0f7d6c9bcc">ClassInfo</a> (_In_ const uint32_t number, _Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *pUuid) const =0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module.html#a1ba1ddb5634127b8f5f7f06b552a0631">CreateClass</a> (_In_ const uint32_t number, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore)=0</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -230,12 +230,12 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a665585e5fc8fcf08ecb48add0b9b2106"></a><!-- doxytag: member="VoodooShader::IModule::ClassInfo" ref="a665585e5fc8fcf08ecb48add0b9b2106" args="(_In_ const uint32_t number, _Deref_out_ const wchar_t **name) const =0" -->
+<a class="anchor" id="abeb479c687a5578eb243ac0f7d6c9bcc"></a><!-- doxytag: member="VoodooShader::IModule::ClassInfo" ref="abeb479c687a5578eb243ac0f7d6c9bcc" args="(_In_ const uint32_t number, _Out_ Uuid *pUuid) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>* VoodooShader::IModule::ClassInfo </td>
+          <td class="memname">virtual const wchar_t* VoodooShader::IModule::ClassInfo </td>
           <td>(</td>
           <td class="paramtype">_In_ const uint32_t&#160;</td>
           <td class="paramname"><em>number</em>, </td>
@@ -243,8 +243,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_Deref_out_ const wchar_t **&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
+          <td class="paramtype">_Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *&#160;</td>
+          <td class="paramname"><em>pUuid</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -254,6 +254,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module.html#aa8ab83936c8af13141a259791c22ef73">VoodooShader::VSModule</a>.</p>
 
 </div>
 </div>
@@ -388,7 +390,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

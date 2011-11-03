@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -73,26 +73,26 @@
 <a name="l00023"></a>00023 <span class="preprocessor">#include &lt;vector&gt;</span>
 <a name="l00024"></a>00024 <span class="preprocessor">#include &lt;strsafe.h&gt;</span>
 <a name="l00025"></a>00025 
-<a name="l00030"></a><a class="code" href="_loader___common_8hpp.html#a518bfde4f315b3dad63c8180794477a3">00030</a> <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">VoodooShader::ICore</a> * <a class="code" href="_common_8cpp.html#a518bfde4f315b3dad63c8180794477a3">gVoodooCore</a> = <span class="keyword">nullptr</span>;
-<a name="l00031"></a><a class="code" href="_loader___common_8hpp.html#a29dcbec46d47f194a17e7d19b100284c">00031</a> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">VoodooShader::IAdapter</a> * <a class="code" href="_common_8cpp.html#a29dcbec46d47f194a17e7d19b100284c">gVoodooAdapter</a> = <span class="keyword">nullptr</span>;
-<a name="l00032"></a><a class="code" href="_loader___common_8hpp.html#a6c6a8752b0a7ab0e24e715c82646776e">00032</a> <a class="code" href="struct_voodoo_shader_1_1_init_params.html" title="Initialization parameters.">VoodooShader::InitParams</a> <a class="code" href="_common_8cpp.html#a6c6a8752b0a7ab0e24e715c82646776e">gInitParams</a>;
+<a name="l00030"></a><a class="code" href="group__voodoo__module__loader.html#ga518bfde4f315b3dad63c8180794477a3">00030</a> <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">VoodooShader::ICore</a> * <a class="code" href="group__voodoo__module__loader.html#ga518bfde4f315b3dad63c8180794477a3">gVoodooCore</a> = <span class="keyword">nullptr</span>;
+<a name="l00031"></a><a class="code" href="group__voodoo__module__loader.html#ga29dcbec46d47f194a17e7d19b100284c">00031</a> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">VoodooShader::IAdapter</a> * <a class="code" href="group__voodoo__module__loader.html#ga29dcbec46d47f194a17e7d19b100284c">gVoodooAdapter</a> = <span class="keyword">nullptr</span>;
+<a name="l00032"></a><a class="code" href="group__voodoo__module__loader.html#ga6c6a8752b0a7ab0e24e715c82646776e">00032</a> <a class="code" href="struct_voodoo_shader_1_1_init_params.html" title="Initialization parameters.">VoodooShader::InitParams</a> <a class="code" href="group__voodoo__module__loader.html#ga6c6a8752b0a7ab0e24e715c82646776e">gInitParams</a>;
 <a name="l00033"></a>00033 
-<a name="l00034"></a><a class="code" href="_loader___common_8hpp.html#ad65f6d99c7f32466161fa6c73b92f41c">00034</a> <span class="keywordtype">void</span> WINAPI <a class="code" href="_common_8cpp.html#ad65f6d99c7f32466161fa6c73b92f41c">ErrorMessage</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * msg, ...)
+<a name="l00034"></a><a class="code" href="group__voodoo__module__loader.html#gad65f6d99c7f32466161fa6c73b92f41c">00034</a> <span class="keywordtype">void</span> WINAPI <a class="code" href="group__voodoo__module__loader.html#gad65f6d99c7f32466161fa6c73b92f41c">ErrorMessage</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * msg, ...)
 <a name="l00035"></a>00035 {
 <a name="l00036"></a>00036     va_list args;
 <a name="l00037"></a>00037     va_start(args, msg);
-<a name="l00038"></a>00038     
+<a name="l00038"></a>00038 
 <a name="l00039"></a>00039     <span class="keywordtype">int</span> bufsize = _vscwprintf(msg, args) + 1;
 <a name="l00040"></a>00040     std::vector&lt;wchar_t&gt; buffer(bufsize);
 <a name="l00041"></a>00041 
 <a name="l00042"></a>00042     _vsnwprintf_s(&amp;buffer[0], bufsize, bufsize-1, msg, args);
-<a name="l00043"></a>00043     
+<a name="l00043"></a>00043 
 <a name="l00044"></a>00044     va_end(args);
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046     MessageBox(<span class="keyword">nullptr</span>, &amp;buffer[0], L<span class="stringliteral">&quot;Voodoo Loader Error&quot;</span>, MB_OK | MB_ICONWARNING);
 <a name="l00047"></a>00047 }
 <a name="l00048"></a>00048 
-<a name="l00056"></a><a class="code" href="_loader___common_8hpp.html#a08520fe9a81a3119394728e194e1419d">00056</a> HMODULE WINAPI <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * libname)
+<a name="l00056"></a><a class="code" href="group__voodoo__module__loader.html#ga08520fe9a81a3119394728e194e1419d">00056</a> HMODULE WINAPI <a class="code" href="group__voodoo__module__loader.html#ga08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * libname)
 <a name="l00057"></a>00057 {
 <a name="l00058"></a>00058     <span class="keywordtype">wchar_t</span> path[MAX_PATH];
 <a name="l00059"></a>00059 
@@ -102,13 +102,12 @@
 <a name="l00063"></a>00063 
 <a name="l00064"></a>00064     <span class="keywordflow">return</span> LoadLibrary(path);
 <a name="l00065"></a>00065 }
-<a name="l00066"></a>00066 <span class="comment">/* @} */</span>
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:08 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

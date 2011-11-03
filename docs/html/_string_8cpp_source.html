@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -90,61 +90,61 @@
 <a name="l00040"></a>00040         std::wstring <a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>;
 <a name="l00041"></a>00041     };
 <a name="l00042"></a>00042 
-<a name="l00043"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">00043</a>     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>()
+<a name="l00043"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">00043</a>     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>()
 <a name="l00044"></a>00044     {
 <a name="l00045"></a>00045         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a>();
 <a name="l00046"></a>00046     }
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> ch)
+<a name="l00048"></a>00048     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> ch)
 <a name="l00049"></a>00049     {
 <a name="l00050"></a>00050         <span class="keywordtype">wchar_t</span> wch = 0;
 <a name="l00051"></a>00051         mbtowc(&amp;wch, &amp;ch, 1);
 <a name="l00052"></a>00052         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> StringImpl(1, wch);
 <a name="l00053"></a>00053     }
 <a name="l00054"></a>00054 
-<a name="l00055"></a>00055     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * str)
+<a name="l00055"></a>00055     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * str)
 <a name="l00056"></a>00056     {
 <a name="l00057"></a>00057         this-&gt;<a class="code" href="class_voodoo_shader_1_1_string.html#a1642adfce02cc42e8f65adcbfd2b103c">CInit</a>(0, str);
 <a name="l00058"></a>00058     }
 <a name="l00059"></a>00059 
-<a name="l00060"></a>00060     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> uint32_t size, <span class="keyword">const</span> <span class="keywordtype">char</span> ch)
+<a name="l00060"></a>00060     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> uint32_t size, <span class="keyword">const</span> <span class="keywordtype">char</span> ch)
 <a name="l00061"></a>00061     {
 <a name="l00062"></a>00062         <span class="keywordtype">wchar_t</span> wch = 0;
 <a name="l00063"></a>00063         mbtowc(&amp;wch, &amp;ch, 1);
 <a name="l00064"></a>00064         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> StringImpl(size, wch);
 <a name="l00065"></a>00065     }
 <a name="l00066"></a>00066 
-<a name="l00067"></a>00067     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> uint32_t size, <span class="keyword">const</span> <span class="keywordtype">char</span> * str)
+<a name="l00067"></a>00067     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> uint32_t size, <span class="keyword">const</span> <span class="keywordtype">char</span> * str)
 <a name="l00068"></a>00068     {
 <a name="l00069"></a>00069         this-&gt;<a class="code" href="class_voodoo_shader_1_1_string.html#a1642adfce02cc42e8f65adcbfd2b103c">CInit</a>(size, str);
 <a name="l00070"></a>00070     }
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
+<a name="l00072"></a>00072     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
 <a name="l00073"></a>00073     {
 <a name="l00074"></a>00074         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> StringImpl(1, ch);
 <a name="l00075"></a>00075     }
 <a name="l00076"></a>00076 
-<a name="l00077"></a>00077     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
+<a name="l00077"></a>00077     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
 <a name="l00078"></a>00078     {
 <a name="l00079"></a>00079         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> StringImpl(str);
 <a name="l00080"></a>00080     }
 <a name="l00081"></a>00081 
-<a name="l00082"></a>00082     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> uint32_t size, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
+<a name="l00082"></a>00082     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> uint32_t size, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
 <a name="l00083"></a>00083     {
 <a name="l00084"></a>00084         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> StringImpl(size, ch);
 <a name="l00085"></a>00085     }
 <a name="l00086"></a>00086 
-<a name="l00087"></a>00087     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> uint32_t size, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
+<a name="l00087"></a>00087     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> uint32_t size, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
 <a name="l00088"></a>00088     {
 <a name="l00089"></a>00089         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> StringImpl(size, str);
 <a name="l00090"></a>00090     }
 <a name="l00091"></a>00091 
-<a name="l00092"></a>00092     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> String &amp; other)
+<a name="l00092"></a>00092     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> String &amp; other)
 <a name="l00093"></a>00093     {
 <a name="l00094"></a>00094         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> StringImpl(other.m_Impl-&gt;m_Str);
 <a name="l00095"></a>00095     }
 <a name="l00096"></a>00096 
-<a name="l00097"></a>00097     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String::String</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; uuid)
+<a name="l00097"></a>00097     <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; uuid)
 <a name="l00098"></a>00098     {
 <a name="l00099"></a>00099         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> StringImpl(boost::uuids::to_wstring(uuid));
 <a name="l00100"></a>00100     }
@@ -155,7 +155,7 @@
 <a name="l00105"></a>00105         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">nullptr</span>;
 <a name="l00106"></a>00106     }
 <a name="l00107"></a>00107 
-<a name="l00108"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ab314f632650d7c4b5c48cd340e95d6c9">00108</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#ab314f632650d7c4b5c48cd340e95d6c9">String::ToUuid</a>(<a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)<span class="keyword"> const</span>
+<a name="l00108"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ab314f632650d7c4b5c48cd340e95d6c9">00108</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#ab314f632650d7c4b5c48cd340e95d6c9" title="Attempts to convert this String to a Uuid.">String::ToUuid</a>(<a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)<span class="keyword"> const</span>
 <a name="l00109"></a>00109 <span class="keyword">    </span>{
 <a name="l00110"></a>00110         <span class="keywordflow">if</span> (!pUuid)
 <a name="l00111"></a>00111         {
@@ -174,7 +174,7 @@
 <a name="l00124"></a>00124         }
 <a name="l00125"></a>00125     }
 <a name="l00126"></a>00126 
-<a name="l00127"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a08d5841b26759cd9a4c05832f8a1cf42">00127</a>     int32_t <a class="code" href="class_voodoo_shader_1_1_string.html#a08d5841b26759cd9a4c05832f8a1cf42">String::ToCharStr</a>(int32_t size, <span class="keywordtype">char</span> * <span class="keyword">const</span> pBuffer)<span class="keyword"> const</span>
+<a name="l00127"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a08d5841b26759cd9a4c05832f8a1cf42">00127</a>     int32_t <a class="code" href="class_voodoo_shader_1_1_string.html#a08d5841b26759cd9a4c05832f8a1cf42" title="Attempts to convert this String to a character array.">String::ToCharStr</a>(int32_t size, <span class="keywordtype">char</span> * <span class="keyword">const</span> pBuffer)<span class="keyword"> const</span>
 <a name="l00128"></a>00128 <span class="keyword">    </span>{
 <a name="l00129"></a>00129         <span class="keywordflow">return</span> WideCharToMultiByte(CP_UTF8, NULL, <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.c_str(), -1, pBuffer, size, NULL, NULL);
 <a name="l00130"></a>00130     }
@@ -309,36 +309,36 @@
 <a name="l00259"></a>00259 
 <a name="l00260"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a9a7485bc203169dff80e75e9f62cc34f">00260</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_string.html#a9a7485bc203169dff80e75e9f62cc34f">String::ToLower</a>()<span class="keyword"> const</span>
 <a name="l00261"></a>00261 <span class="keyword">    </span>{
-<a name="l00262"></a>00262         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a>(boost::to_lower_copy(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>));
+<a name="l00262"></a>00262         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String</a>(boost::to_lower_copy(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>));
 <a name="l00263"></a>00263     }
 <a name="l00264"></a>00264 
 <a name="l00265"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a2a09fe20539293aebe1d43e583152e75">00265</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_string.html#a2a09fe20539293aebe1d43e583152e75">String::ToUpper</a>()<span class="keyword"> const</span>
 <a name="l00266"></a>00266 <span class="keyword">    </span>{
-<a name="l00267"></a>00267         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a>(boost::to_upper_copy(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>));
+<a name="l00267"></a>00267         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String</a>(boost::to_upper_copy(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>));
 <a name="l00268"></a>00268     }
 <a name="l00269"></a>00269 
 <a name="l00270"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a20e6f28f687e7f8341170550f51ca44c">00270</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_string.html#a20e6f28f687e7f8341170550f51ca44c">String::Left</a>(uint32_t count)<span class="keyword"> const</span>
 <a name="l00271"></a>00271 <span class="keyword">    </span>{
 <a name="l00272"></a>00272         <span class="keywordflow">if</span> (count == <a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">String::Npos</a>)
 <a name="l00273"></a>00273         {
-<a name="l00274"></a>00274             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(0, std::string::npos));
+<a name="l00274"></a>00274             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(0, std::string::npos));
 <a name="l00275"></a>00275         } <span class="keywordflow">else</span> {
-<a name="l00276"></a>00276             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(0, count));
+<a name="l00276"></a>00276             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(0, count));
 <a name="l00277"></a>00277         }
 <a name="l00278"></a>00278     }
 <a name="l00279"></a>00279 
 <a name="l00280"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ab465fc040378151ed0572e6195d49386">00280</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_string.html#ab465fc040378151ed0572e6195d49386">String::Right</a>(uint32_t count)<span class="keyword"> const</span>
 <a name="l00281"></a>00281 <span class="keyword">    </span>{
-<a name="l00282"></a>00282         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(max(this-&gt;<a class="code" href="class_voodoo_shader_1_1_string.html#a92f3b00c8de76b730d59d8b8f3f2b4f7">GetLength</a>() - count, 0), count));
+<a name="l00282"></a>00282         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(max(this-&gt;<a class="code" href="class_voodoo_shader_1_1_string.html#a92f3b00c8de76b730d59d8b8f3f2b4f7">GetLength</a>() - count, 0), count));
 <a name="l00283"></a>00283     }
 <a name="l00284"></a>00284 
 <a name="l00285"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a4f771cec21d0208db46a1af1a699ed34">00285</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_string.html#a4f771cec21d0208db46a1af1a699ed34">String::Substr</a>(uint32_t start, uint32_t count)<span class="keyword"> const</span>
 <a name="l00286"></a>00286 <span class="keyword">    </span>{
 <a name="l00287"></a>00287         <span class="keywordflow">if</span> (count == <a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">String::Npos</a>)
 <a name="l00288"></a>00288         {
-<a name="l00289"></a>00289             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(start, std::string::npos));
+<a name="l00289"></a>00289             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(start, std::string::npos));
 <a name="l00290"></a>00290         } <span class="keywordflow">else</span> {
-<a name="l00291"></a>00291             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(start, count));
+<a name="l00291"></a>00291             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String</a>(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.substr(start, count));
 <a name="l00292"></a>00292         }
 <a name="l00293"></a>00293     }
 <a name="l00294"></a>00294 
@@ -481,7 +481,7 @@
 <a name="l00431"></a>00431             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.find(str);
 <a name="l00432"></a>00432         } <span class="keywordflow">else</span> {
 <a name="l00433"></a>00433             std::wstring lstr = boost::to_lower_copy(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>);
-<a name="l00434"></a>00434             std::wstring lfstr(str); 
+<a name="l00434"></a>00434             std::wstring lfstr(str);
 <a name="l00435"></a>00435             boost::to_lower(lfstr);
 <a name="l00436"></a>00436             <span class="keywordflow">return</span> lstr.find(lfstr);
 <a name="l00437"></a>00437         }
@@ -518,7 +518,7 @@
 <a name="l00468"></a>00468             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.find(str);
 <a name="l00469"></a>00469         } <span class="keywordflow">else</span> {
 <a name="l00470"></a>00470             std::wstring lstr = boost::to_lower_copy(<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>);
-<a name="l00471"></a>00471             std::wstring lfstr(str); 
+<a name="l00471"></a>00471             std::wstring lfstr(str);
 <a name="l00472"></a>00472             boost::to_lower(lfstr);
 <a name="l00473"></a>00473             <span class="keywordflow">return</span> lstr.rfind(lfstr);
 <a name="l00474"></a>00474         }
@@ -611,9 +611,9 @@
 <a name="l00561"></a>00561 
 <a name="l00562"></a>00562         <span class="keywordflow">if</span> (len == -1)
 <a name="l00563"></a>00563         {
-<a name="l00564"></a>00564             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a>();
+<a name="l00564"></a>00564             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String</a>();
 <a name="l00565"></a>00565         } <span class="keywordflow">else</span> {
-<a name="l00566"></a>00566             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a>(buffer);
+<a name="l00566"></a>00566             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String</a>(buffer);
 <a name="l00567"></a>00567         }
 <a name="l00568"></a>00568     }
 <a name="l00569"></a>00569 
@@ -672,7 +672,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:08 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

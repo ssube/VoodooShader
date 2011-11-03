@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -74,7 +74,7 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00035"></a><a class="code" href="class_voodoo_shader_1_1_i_module_manager.html">00035</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_i_module_manager.html" title="Provides a framework for loading and unloading modules in core, as well as retrieving symbols and mod...">IModuleManager</a> : 
+<a name="l00035"></a><a class="code" href="class_voodoo_shader_1_1_i_module_manager.html">00035</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_i_module_manager.html" title="Provides a framework for loading and unloading modules in core, as well as retrieving symbols and mod...">IModuleManager</a> :
 <a name="l00036"></a>00036         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>
 <a name="l00037"></a>00037     {
 <a name="l00038"></a>00038     <span class="keyword">public</span>:
@@ -89,9 +89,9 @@
 <a name="l00055"></a>00055         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#ae97340aab1f104596079d765430e7b50" title="Loads a set of modules from a given path.">LoadPath</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; path, _In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; filter) = 0;
 <a name="l00056"></a>00056 
 <a name="l00064"></a>00064         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#a2aa85f86a3af45063d221f25ea764996" title="Loads a single module, using an absolute or relative filename.">LoadFile</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * pFile) = 0;
-<a name="l00065"></a>00065         
+<a name="l00065"></a>00065 
 <a name="l00074"></a>00074         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#a2aa85f86a3af45063d221f25ea764996" title="Loads a single module, using an absolute or relative filename.">LoadFile</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; filename) = 0;
-<a name="l00075"></a>00075         
+<a name="l00075"></a>00075 
 <a name="l00081"></a>00081         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#a43f2ce9affbcd3df55dea92f811bec69" title="Tests to see if a class exists in the list provided by all loaded modules.">ClassExists</a>(_In_ const <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid) const = 0;
 <a name="l00082"></a>00082 
 <a name="l00092"></a>00092         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#a43f2ce9affbcd3df55dea92f811bec69" title="Tests to see if a class exists in the list provided by all loaded modules.">ClassExists</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name) const = 0;
@@ -103,12 +103,12 @@
 <a name="l00126"></a>00126         _Check_return_ virtual <span class="keywordtype">void</span> * <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#a4e289e076030d5a8835144d5ce0264d5" title="Finds the address of a function in a module.">FindFunction</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; module, _In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name) const = 0;
 <a name="l00127"></a>00127     };
 <a name="l00128"></a>00128 
-<a name="l00132"></a><a class="code" href="class_voodoo_shader_1_1_i_module.html">00132</a>     class <a class="code" href="class_voodoo_shader_1_1_i_module.html" title="Contains the handle to a loaded library and function pointers for creation and destruction.">IModule</a> : 
+<a name="l00132"></a><a class="code" href="class_voodoo_shader_1_1_i_module.html">00132</a>     class <a class="code" href="class_voodoo_shader_1_1_i_module.html" title="Contains the handle to a loaded library and function pointers for creation and destruction.">IModule</a> :
 <a name="l00133"></a>00133         public <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>
 <a name="l00134"></a>00134     {
 <a name="l00135"></a>00135     <span class="keyword">public</span>:
 <a name="l00136"></a><a class="code" href="class_voodoo_shader_1_1_i_module.html#a18f10c40e7e641053150f7051aea73da">00136</a>         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_module.html#a18f10c40e7e641053150f7051aea73da">~IModule</a>(<span class="keywordtype">void</span>) throw() {};
-<a name="l00137"></a>00137         
+<a name="l00137"></a>00137 
 <a name="l00138"></a>00138         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#a8148d4f011c9754e4f0500760e968c34" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> throw() = 0;
 <a name="l00139"></a>00139         virtual uint32_t <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#aca1153699ef60e55afa95c1626960b61" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) const throw() = 0;
 <a name="l00140"></a>00140         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#a62b93fc92fa3ea649d98bd8f41403b89" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ const <span class="keywordtype">void</span> ** ppOut) const throw() = 0;
@@ -119,7 +119,7 @@
 <a name="l00149"></a>00149 
 <a name="l00151"></a>00151         virtual const uint32_t ClassCount(<span class="keywordtype">void</span>) const = 0;
 <a name="l00152"></a>00152 
-<a name="l00153"></a>00153         virtual const <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * ClassInfo(_In_ const uint32_t number, _Deref_out_ const <span class="keywordtype">wchar_t</span> ** name) const = 0;
+<a name="l00153"></a>00153         virtual const <span class="keywordtype">wchar_t</span> * ClassInfo(_In_ const uint32_t number, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid) const = 0;
 <a name="l00154"></a>00154 
 <a name="l00155"></a>00155         virtual IObject * CreateClass(_In_ const uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore) = 0;
 <a name="l00156"></a>00156     };
@@ -129,7 +129,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:08 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

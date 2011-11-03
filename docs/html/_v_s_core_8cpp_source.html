@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -99,7 +99,7 @@
 <a name="l00049"></a>00049         }
 <a name="l00050"></a>00050     }
 <a name="l00051"></a>00051 
-<a name="l00052"></a><a class="code" href="namespace_voodoo_shader.html#a0eb5af00e7b6f3321f76ceb71fb76043">00052</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="namespace_voodoo_shader.html#aad7636a55d1a88592e3e2d7ce42ec803" title="Creates a new core.">CreateCore</a>(_In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_init_params.html" title="Initialization parameters.">InitParams</a> * <span class="keyword">const</span> pInitParams, <span class="keywordtype">bool</span> catchErrors)
+<a name="l00052"></a><a class="code" href="namespace_voodoo_shader.html#ab0b3e5636e0f048c99604dfa430ffb50">00052</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#aad7636a55d1a88592e3e2d7ce42ec803" title="Creates a new core.">CreateCore</a>(_In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_init_params.html" title="Initialization parameters.">InitParams</a> * <span class="keyword">const</span> pInitParams, <span class="keywordtype">bool</span> catchErrors)
 <a name="l00053"></a>00053     {
 <a name="l00054"></a>00054         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore = <span class="keyword">nullptr</span>;
 <a name="l00055"></a>00055 
@@ -482,7 +482,7 @@
 <a name="l00432"></a>00432 
 <a name="l00433"></a>00433             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a4b122538e976d47ab84a5bda554efa64" title="The current ILogger implementation.">m_Logger</a>-&gt;Log
 <a name="l00434"></a>00434             (
-<a name="l00435"></a>00435                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, 
+<a name="l00435"></a>00435                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
 <a name="l00436"></a>00436                 L<span class="stringliteral">&quot;Created parameter named %s with type %s, returning shared pointer to %p.&quot;</span>, name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(),
 <a name="l00437"></a>00437                 <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a10c91a2bcc38b8f626ebca89761f482d" title="Get the name of this object.">Converter::ToString</a>(type), parameter
 <a name="l00438"></a>00438             );
@@ -548,7 +548,7 @@
 <a name="l00498"></a>00498 
 <a name="l00499"></a>00499         <span class="keywordflow">if</span> (textureEntry != <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a50baa9a705aad3f8246dc50aa54b056b" title="Collection of all usable textures.">m_Textures</a>.end())
 <a name="l00500"></a>00500         {
-<a name="l00501"></a>00501             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a4b122538e976d47ab84a5bda554efa64" title="The current ILogger implementation.">m_Logger</a>-&gt;Log(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Got texture %s, returning shared pointer to %p.&quot;</span>, 
+<a name="l00501"></a>00501             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a4b122538e976d47ab84a5bda554efa64" title="The current ILogger implementation.">m_Logger</a>-&gt;Log(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Got texture %s, returning shared pointer to %p.&quot;</span>,
 <a name="l00502"></a>00502                 name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), textureEntry-&gt;second);
 <a name="l00503"></a>00503 
 <a name="l00504"></a>00504             <span class="keywordflow">return</span> textureEntry-&gt;second.get();
@@ -625,7 +625,7 @@
 <a name="l00575"></a>00575         }
 <a name="l00576"></a>00576     }
 <a name="l00577"></a>00577 
-<a name="l00578"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a95838048961af48eb1cc6f26b6ef1ba4">00578</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a95838048961af48eb1cc6f26b6ef1ba4">VSCore::CgErrorHandler</a>(CGcontext context, <span class="keywordtype">int</span> error)<span class="keyword"> const </span>
+<a name="l00578"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a95838048961af48eb1cc6f26b6ef1ba4">00578</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a95838048961af48eb1cc6f26b6ef1ba4">VSCore::CgErrorHandler</a>(CGcontext context, <span class="keywordtype">int</span> error)<span class="keyword"> const</span>
 <a name="l00579"></a>00579 <span class="keyword">    </span>{
 <a name="l00580"></a>00580         <span class="keyword">const</span> <span class="keywordtype">char</span> *errorString = error ? cgGetErrorString((CGerror) error) : <span class="keyword">nullptr</span>;
 <a name="l00581"></a>00581 
@@ -650,7 +650,7 @@
 <a name="l00600"></a>00600             }
 <a name="l00601"></a>00601             <span class="keywordflow">else</span>
 <a name="l00602"></a>00602             {
-<a name="l00603"></a>00603                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a50e5f066810233e9235ead0365ff2dae" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>, <a class="code" href="_version_8hpp.html#a18c51df73ac22d0b5b08dc0b2d4ae18b">VOODOO_CG_NAME</a>, 
+<a name="l00603"></a>00603                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a50e5f066810233e9235ead0365ff2dae" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>, <a class="code" href="_version_8hpp.html#a18c51df73ac22d0b5b08dc0b2d4ae18b">VOODOO_CG_NAME</a>,
 <a name="l00604"></a>00604                     L<span class="stringliteral">&quot;Invalid context for error, no further data available.&quot;</span>);
 <a name="l00605"></a>00605             }
 <a name="l00606"></a>00606         }
@@ -665,7 +665,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:08 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

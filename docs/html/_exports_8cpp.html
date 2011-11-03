@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -96,25 +96,29 @@ Namespaces</h2></td></tr>
 <br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const Version *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a9b6d245084c35bece67dd6cb93ed474b">VoodooShader::API_ModuleVersion</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const uint32_t VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a262d76aa3e91afa876c8f64add584c6b">VoodooShader::API_ClassCount</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const Uuid *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ad57a6ef06ec46926589f855f72c9d3cc">VoodooShader::API_ClassInfo</a> (_In_ const uint32_t number, _Deref_out_opt_ const wchar_t **ppName)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">IObject *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ae0d10338924495c89d6645dc877b6629">VoodooShader::API_ClassCreate</a> (_In_ const uint32_t number, _In_ ICore *core)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const Version *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__loader.html#ga6e91003d4538bca758f1d233fc2111d8">VoodooShader::API_ModuleVersion</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const uint32_t VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__loader.html#ga1c1c7fa8e0849da76d3c77e9f37eed0d">VoodooShader::API_ClassCount</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const wchar_t *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__loader.html#gaaae017d08567b59bbab15a4769d6d2d2">VoodooShader::API_ClassInfo</a> (_In_ const uint32_t number, _Out_ Uuid *pUuid)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">IObject *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">VoodooShader::API_ClassCreate</a> (_In_ const uint32_t number, _In_ ICore *core)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">VoodooShader::intrusive_ptr_add_ref</a> (IObject *obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">VoodooShader::intrusive_ptr_release</a> (IObject *obj)</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const Version&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">VoodooShader::coreVersion</a> = VOODOO_META_VERSION_STRUCT(CORE)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a26a05864d4ca4f7e1d57b1adf84d2be0">VoodooShader::clsid_vsa</a> = CLSID_VSAdapter</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a58dd774dc74ac75b2fe559b1088127a6">VoodooShader::clsid_vsf</a> = CLSID_VSFileSystem</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a74efacb132f2bccd92616d765392c644">VoodooShader::clsid_vsh</a> = CLSID_VSHookManager</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a247598116fc8c6061aba70580652d74e">VoodooShader::clsid_vsl</a> = CLSID_VSLogger</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab2d8647ca760424077c4153e7b822d49">VoodooShader::name_VSAdapter</a> = &quot;VSAdapter&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3">VoodooShader::name_VSFileSystem</a> = &quot;VSFileSystem&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a517e2823e4941170d33d470dc9a457fa">VoodooShader::name_VSHookManager</a> = &quot;VSHookManager&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a0df8ba9654dcf427ca78fad1fa68f5d9">VoodooShader::name_VSLogger</a> = &quot;VSLogger&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a1a20ab66c06a132df1716f64d1715114">VoodooShader::clsid_VSAdapter</a> = CLSID_VSAdapter</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a045e1b7012b2b1221b4cd143d65d0808">VoodooShader::clsid_VSFileSystem</a> = CLSID_VSFileSystem</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">VoodooShader::clsid_VSHookManager</a> = CLSID_VSHookManager</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">VoodooShader::clsid_VSLogger</a> = CLSID_VSLogger</td></tr>
 </table>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:08 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

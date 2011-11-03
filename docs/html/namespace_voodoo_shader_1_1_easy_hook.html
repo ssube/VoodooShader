@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -66,7 +66,8 @@
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">VoodooShader::EasyHook Namespace Reference</div>  </div>
 </div>
@@ -79,155 +80,42 @@ Classes</h2></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, <br class="typebreak"/>
-TRACED_HOOK_HANDLE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#a1ece99ebf0836a5af70d9922c5409824">HookMap</a></td></tr>
+TRACED_HOOK_HANDLE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__ehhook.html#ga1ece99ebf0836a5af70d9922c5409824">HookMap</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#a93080eafd7736a46c7efab09522c3fb3">API_ModuleVersion</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#aa15999a0417b514afd2d4baa6d985bfb">API_ClassCount</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#ad24e5ae9c872322dc9e479f5c3f5d89c">API_ClassInfo</a> (_In_ const uint32_t number)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#aff2137d146e4bc96e91ab2b08077beb5">API_ClassCreate</a> (_In_ const uint32_t number, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *core)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#a7ea224fea3111237a0c38e77b326f336">API_ClassInfo</a> (_In_ uint32_t number)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#a1f3c4b5d389c871c44e0e4d83017b016">API_ClassCreate</a> (_In_ uint32_t number, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#a72a847931421353fcb236f2191cc2565">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html">VSEHHookManager</a>, 0xB5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__ehhook.html#gad137aa497ac1ee21eb38eaddc179f50c">API_ModuleVersion</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const uint32_t VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__ehhook.html#gaecdd5835e1668f8e010531ba01544370">API_ClassCount</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const wchar_t *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__ehhook.html#ga3fcb319e95b4ed3a02123b083a5b0fa0">API_ClassInfo</a> (_In_ const uint32_t index, _Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *pUuid)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__ehhook.html#ga9acdff47c4f125b40803ef4c803aa591">API_ClassCreate</a> (_In_ const uint32_t number, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *core)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__ehhook.html#ga72a847931421353fcb236f2191cc2565">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html">VSEHHookManager</a>, 0xB5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#afd1536e5cff48fb95786bc9c95bd8ae6">moduleVersion</a> = VOODOO_META_VERSION_STRUCT(HOOK)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#ae0c3da804f8ae4a25d8a879d8b5f3a04">name_VSEHHookManager</a> = &quot;VSEHHookManager&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#aaf970bb41492fcd93932a603ffede753">clsid_VSEHHookManager</a> = CLSID_VSEHHookManager</td></tr>
 </table>
-<hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="a1ece99ebf0836a5af70d9922c5409824"></a><!-- doxytag: member="VoodooShader::EasyHook::HookMap" ref="a1ece99ebf0836a5af70d9922c5409824" args="" -->
+<hr/><h2>Variable Documentation</h2>
+<a class="anchor" id="aaf970bb41492fcd93932a603ffede753"></a><!-- doxytag: member="VoodooShader::EasyHook::clsid_VSEHHookManager" ref="aaf970bb41492fcd93932a603ffede753" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, TRACED_HOOK_HANDLE&gt; <a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#a1ece99ebf0836a5af70d9922c5409824">VoodooShader::EasyHook::HookMap</a></td>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#aaf970bb41492fcd93932a603ffede753">VoodooShader::EasyHook::clsid_VSEHHookManager</a> = CLSID_VSEHHookManager<code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_hook_manager_8hpp_source.html#l00038">38</a> of file <a class="el" href="_hook_manager_8hpp_source.html">HookManager.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_hook_manager_8cpp_source.html#l00032">32</a> of file <a class="el" href="_hook_manager_8cpp_source.html">HookManager.cpp</a>.</p>
 
 </div>
 </div>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="aa15999a0417b514afd2d4baa6d985bfb"></a><!-- doxytag: member="VoodooShader::EasyHook::API_ClassCount" ref="aa15999a0417b514afd2d4baa6d985bfb" args="(void)" -->
+<a class="anchor" id="afd1536e5cff48fb95786bc9c95bd8ae6"></a><!-- doxytag: member="VoodooShader::EasyHook::moduleVersion" ref="afd1536e5cff48fb95786bc9c95bd8ae6" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint32_t VoodooShader::EasyHook::API_ClassCount </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_hook_manager_8cpp_source.html#l00037">37</a> of file <a class="el" href="_hook_manager_8cpp_source.html">HookManager.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1f3c4b5d389c871c44e0e4d83017b016"></a><!-- doxytag: member="VoodooShader::EasyHook::API_ClassCreate" ref="a1f3c4b5d389c871c44e0e4d83017b016" args="(_In_ uint32_t number, _In_ ICore *pCore)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>* VoodooShader::EasyHook::API_ClassCreate </td>
-          <td>(</td>
-          <td class="paramtype">_In_ uint32_t&#160;</td>
-          <td class="paramname"><em>number</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ ICore *&#160;</td>
-          <td class="paramname"><em>pCore</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aff2137d146e4bc96e91ab2b08077beb5"></a><!-- doxytag: member="VoodooShader::EasyHook::API_ClassCreate" ref="aff2137d146e4bc96e91ab2b08077beb5" args="(_In_ const uint32_t number, _In_ ICore *core)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>* VoodooShader::EasyHook::API_ClassCreate </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>number</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ ICore *&#160;</td>
-          <td class="paramname"><em>core</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_hook_manager_8cpp_source.html#l00054">54</a> of file <a class="el" href="_hook_manager_8cpp_source.html">HookManager.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7ea224fea3111237a0c38e77b326f336"></a><!-- doxytag: member="VoodooShader::EasyHook::API_ClassInfo" ref="a7ea224fea3111237a0c38e77b326f336" args="(_In_ uint32_t number)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* VoodooShader::EasyHook::API_ClassInfo </td>
-          <td>(</td>
-          <td class="paramtype">_In_ uint32_t&#160;</td>
-          <td class="paramname"><em>number</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad24e5ae9c872322dc9e479f5c3f5d89c"></a><!-- doxytag: member="VoodooShader::EasyHook::API_ClassInfo" ref="ad24e5ae9c872322dc9e479f5c3f5d89c" args="(_In_ const uint32_t number)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* VoodooShader::EasyHook::API_ClassInfo </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>number</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_hook_manager_8cpp_source.html#l00042">42</a> of file <a class="el" href="_hook_manager_8cpp_source.html">HookManager.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a93080eafd7736a46c7efab09522c3fb3"></a><!-- doxytag: member="VoodooShader::EasyHook::API_ModuleVersion" ref="a93080eafd7736a46c7efab09522c3fb3" args="(void)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> * VoodooShader::EasyHook::API_ModuleVersion </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> <a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#afd1536e5cff48fb95786bc9c95bd8ae6">VoodooShader::EasyHook::moduleVersion</a> = VOODOO_META_VERSION_STRUCT(HOOK)<code> [static]</code></td>
         </tr>
       </table>
 </div>
@@ -237,120 +125,18 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a72a847931421353fcb236f2191cc2565"></a><!-- doxytag: member="VoodooShader::EasyHook::DEFINE_UUID_IMPL" ref="a72a847931421353fcb236f2191cc2565" args="(VSEHHookManager, 0xB5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<a class="anchor" id="ae0c3da804f8ae4a25d8a879d8b5f3a04"></a><!-- doxytag: member="VoodooShader::EasyHook::name_VSEHHookManager" ref="ae0c3da804f8ae4a25d8a879d8b5f3a04" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VoodooShader::EasyHook::DEFINE_UUID_IMPL </td>
-          <td>(</td>
-          <td class="paramtype">VSEHHookManager&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xB5&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x12&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xF3&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xE6&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xAF&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x05&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xE1&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x11&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x9E&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x05&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x00&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x50&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x56&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xC0&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x00&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x08&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">const wchar_t* <a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html#ae0c3da804f8ae4a25d8a879d8b5f3a04">VoodooShader::EasyHook::name_VSEHHookManager</a> = &quot;VSEHHookManager&quot;<code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_hook_manager_8cpp_source.html#l00031">31</a> of file <a class="el" href="_hook_manager_8cpp_source.html">HookManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -358,7 +144,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -57,7 +57,7 @@
 <div class="contents">
 <div class="textblock"><p>Shaders are complete effects designed to be run on programmable graphics hardware.</p>
 <p>They control almost all aspects of how a piece of geometry is displayed.</p>
-<p>Each shader may have one or more techniques. A technique describes a full rendering process, and may have one or more passes. Each pass describes a particular way to render the given geometry, and may have multiple programs. Each p rogram controls a particular part of the render process. In addition, shaders, techniques and passes contain some metadata used by the system to control how and where they are rendered. For any given piece of geometry, one technique is in use and the geometry is drawn once with each pass of that technique.</p>
+<p>Each shader may have one or more techniques. A technique describes a full rendering process, and may have one or more passes. Each pass describes a particular way to render the given geometry, and may have multiple programs. Each program controls a particular part of the render process. In addition, shaders, techniques and passes contain some metadata used by the system to control how and where they are rendered. For any given piece of geometry, one technique is in use and the geometry is drawn once with each pass of that technique.</p>
 <h2><a class="anchor" id="voodoo_graphics_shaders_stages"></a>
 Program Stages</h2>
 <p>Each program is designed to control a single specific stage of the render pipeline, typically handling how a data type is transformed (geometry, vertex, fragment/pixel). The two most common stages, vertex and fragment, work with existing data and transform it. Both have been supported since OpenGL 1.4 and DirectX 8 in some form, and almost all systems today support both. Given Voodoo's focus, it is safe to assume both stages are supported (the exact level of support may vary, however).</p>
@@ -81,27 +81,27 @@ Shader Targets</h3>
 <div class="fragment"><pre class="fragment"> sampler2D diffuseSamp &lt; texture=<span class="stringliteral">&quot;buffer_diffuse&quot;</span>; &gt;;
  sampler2D specSamp &lt; texture=<span class="stringliteral">&quot;buffer_specular&quot;</span>; &gt;;
 
- technique dx9_high 
- { 
-     pass diffuse &lt; <span class="keywordtype">string</span> target=<span class="stringliteral">&quot;:buffer_diffuse&quot;</span>; &gt; 
-     { 
-         ... 
-     } 
-     pass spec &lt; <span class="keywordtype">string</span> target=<span class="stringliteral">&quot;:buffer_specular&quot;</span>; &gt; 
-     { 
-         ... 
-     } 
-     pass combine 
+ technique dx9_high
+ {
+     pass diffuse &lt; <span class="keywordtype">string</span> target=<span class="stringliteral">&quot;:buffer_diffuse&quot;</span>; &gt;
+     {
+         ...
+     }
+     pass spec &lt; <span class="keywordtype">string</span> target=<span class="stringliteral">&quot;:buffer_specular&quot;</span>; &gt;
+     {
+         ...
+     }
+     pass combine
      {
          <span class="keywordflow">return</span> ( diffuseSamp + specSamp );
      }
- } 
+ }
 </pre></div><p>This allows pass and technique output to be stored and later used, by other passes from the same effect or even by other effects. If no target is specified in the technique or pass annotations, the shader linker uses the texture currently bound to the core's stage textures. These may be set using <a class="el" href="class_voodoo_shader_1_1_i_core.html#a65aa3fb4c8b11981986f603a14ca42a6" title="Binds a texture to a specialized stage for the shader linker.">ICore::SetStageTexture()</a>. </p>
 </div></div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -99,28 +99,32 @@ Defines</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an extended version string with the module's full name and version.  <a href="#a88f0640c445644e608a3e8712ebc2aec"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a8b340c0ecc7d0e393b7119f45adebb3c">VOODOO_META_STRING_NAME_BASIC</a>(token)&#160;&#160;&#160;VOODOO_##token##_NAME VOODOO_META_DEBUG_STRING</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a9326f3191f5be34d582f98d8309361cc">VOODOO_META_STRING_NAME_FULL</a>(token)&#160;&#160;&#160;VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a4da9584ebd4a715e19b36471e0d85f3c">VOODOO_META_VERSION_STRUCT</a>(token)&#160;&#160;&#160;{ VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a4da9584ebd4a715e19b36471e0d85f3c">VOODOO_META_VERSION_STRUCT</a>(token)&#160;&#160;&#160;{ VOODOO_##token##_NAME, VOODOO_##token##_LIBID, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Version structure with data for the given module.  <a href="#a4da9584ebd4a715e19b36471e0d85f3c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a64a67e66ded049574a7470eba7a329db">VOODOO_GLOBAL_LIBID</a>&#160;&#160;&#160;{0xCA, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a87f428a69ce9e5baf772251c8e462fa9">VOODOO_GLOBAL_NAME</a>&#160;&#160;&#160;L&quot;Voodoo/Framework&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#ae4349561a4788d7b5845deed3d45b72a">VOODOO_GLOBAL_PRETTYNAME</a>&#160;&#160;&#160;L&quot;Voodoo Shader Framework&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#acbd5fcc009f70d2a24f03418af8d821e">VOODOO_GLOBAL_VERSION_MAJOR</a>&#160;&#160;&#160;0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#acd615012a7d35c22cbe2bed3fc6a85a6">VOODOO_GLOBAL_VERSION_MINOR</a>&#160;&#160;&#160;4</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#ae757f33d6accba924710b75207ddd73b">VOODOO_GLOBAL_VERSION_PATCH</a>&#160;&#160;&#160;1</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a0f5482f29200193a38abcde8fa162f07">VOODOO_GLOBAL_VERSION_REV</a>&#160;&#160;&#160;288</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#ae757f33d6accba924710b75207ddd73b">VOODOO_GLOBAL_VERSION_PATCH</a>&#160;&#160;&#160;2</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a0f5482f29200193a38abcde8fa162f07">VOODOO_GLOBAL_VERSION_REV</a>&#160;&#160;&#160;294</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#ae431daae79fd2c81113bd21cf452ecf6">VOODOO_GLOBAL_COPYRIGHT_BRIEF</a>&#160;&#160;&#160;L&quot;Copyright (c) 2010-2011 by Sean Sube&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a9951d1488ef5b6f7d477059b83c9dd7a">VOODOO_GLOBAL_COPYRIGHT_FULL</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#aebf72435c706413db27ce76dcfc8347a">VOODOO_CORE_LIBID</a>&#160;&#160;&#160;{0xCB, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>&#160;&#160;&#160;L&quot;Voodoo/Core&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a7e07f5f83787ec74dee7e9d50758567f">VOODOO_CORE_PRETTYNAME</a>&#160;&#160;&#160;L&quot;Voodoo Shader Framework Core&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a1fe51774faef815457b02265b70fa79c">VOODOO_CORE_VERSION_MAJOR</a>&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_MAJOR</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a3ad61654252d0dd109ad4bf61a1157f0">VOODOO_CORE_VERSION_MINOR</a>&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_MINOR</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a94055829fc305d8650ac3d16fe26ef08">VOODOO_CORE_VERSION_PATCH</a>&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_PATCH</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a182eb046e4bcf6f21469f65633e734d7">VOODOO_CORE_VERSION_REV</a>&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_REV</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a0b55580e6327ed4e131454e8c0e668d6">VOODOO_CG_LIBID</a>&#160;&#160;&#160;{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a18c51df73ac22d0b5b08dc0b2d4ae18b">VOODOO_CG_NAME</a>&#160;&#160;&#160;L&quot;Cg&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#ab64124bbd849e454fb7301524ee7c2bf">VOODOO_CG_PRETTYNAME</a>&#160;&#160;&#160;L&quot;nVidia Cg Toolkit (July 2010)&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a70561a91b7f4495ec7217895d395a274">VOODOO_CG_VERSION_MAJOR</a>&#160;&#160;&#160;3</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a24331ba6ffa35ae0ba3a1391cf4b2195">VOODOO_CG_VERSION_MINOR</a>&#160;&#160;&#160;0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a1bc3b7710a34291734ccde6646c1d46e">VOODOO_CG_VERSION_PATCH</a>&#160;&#160;&#160;0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#ade3b62fddc3084d074d14ee3ebe9e81a">VOODOO_CG_VERSION_REV</a>&#160;&#160;&#160;7</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a1d0e3b227cbe965960679856a5f36796">VOODOO_VC_LIBID</a>&#160;&#160;&#160;{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#a7e82fbd3ed1a079167317e3004c2f965">VOODOO_VC_NAME</a>&#160;&#160;&#160;L&quot;MSVC&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#ac2a871c721c36bee7ae5415439ce5f02">VOODOO_VC_PRETTYNAME</a>&#160;&#160;&#160;L&quot;Microsoft Visual C++&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#aebe91fc02d8db1e9fb8b3e90231c5192">VOODOO_VC_VERSION_MAJOR</a>&#160;&#160;&#160;_MSC_VER</td></tr>
@@ -129,6 +133,21 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_version_8hpp.html#aad2d04b304068fafd9983edbb8486116">VOODOO_VC_VERSION_REV</a>&#160;&#160;&#160;_MSC_BUILD</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
+<a class="anchor" id="a0b55580e6327ed4e131454e8c0e668d6"></a><!-- doxytag: member="Version.hpp::VOODOO_CG_LIBID" ref="a0b55580e6327ed4e131454e8c0e668d6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOODOO_CG_LIBID&#160;&#160;&#160;{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00096">96</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a18c51df73ac22d0b5b08dc0b2d4ae18b"></a><!-- doxytag: member="Version.hpp::VOODOO_CG_NAME" ref="a18c51df73ac22d0b5b08dc0b2d4ae18b" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -140,7 +159,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00094">94</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00097">97</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -155,7 +174,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00095">95</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00098">98</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -170,7 +189,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00096">96</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00099">99</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -185,7 +204,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00097">97</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00100">100</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -200,7 +219,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00098">98</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00101">101</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -215,7 +234,22 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00099">99</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00102">102</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aebf72435c706413db27ce76dcfc8347a"></a><!-- doxytag: member="Version.hpp::VOODOO_CORE_LIBID" ref="aebf72435c706413db27ce76dcfc8347a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOODOO_CORE_LIBID&#160;&#160;&#160;{0xCB, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00087">87</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -230,7 +264,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00086">86</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00088">88</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -245,7 +279,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00087">87</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00089">89</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -260,7 +294,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00088">88</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00090">90</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -275,7 +309,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00089">89</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00091">91</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -290,7 +324,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00090">90</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00092">92</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -305,7 +339,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00091">91</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00093">93</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -320,7 +354,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00079">79</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00080">80</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -339,7 +373,22 @@ Defines</h2></td></tr>
     L<span class="stringliteral">&quot;This is free software and you are welcome to redistribute it under certain conditions.&amp;lt;br /&amp;gt;\n&quot;</span> \
     L<span class="stringliteral">&quot;Please see the included license file for more details.&quot;</span>
 </pre></div>
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00080">80</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00081">81</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a64a67e66ded049574a7470eba7a329db"></a><!-- doxytag: member="Version.hpp::VOODOO_GLOBAL_LIBID" ref="a64a67e66ded049574a7470eba7a329db" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOODOO_GLOBAL_LIBID&#160;&#160;&#160;{0xCA, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00073">73</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -354,7 +403,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00073">73</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00074">74</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -369,7 +418,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00074">74</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00075">75</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -384,7 +433,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00075">75</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00076">76</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -399,7 +448,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00076">76</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00077">77</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -408,13 +457,13 @@ Defines</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define VOODOO_GLOBAL_VERSION_PATCH&#160;&#160;&#160;1</td>
+          <td class="memname">#define VOODOO_GLOBAL_VERSION_PATCH&#160;&#160;&#160;2</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00077">77</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00078">78</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -423,13 +472,13 @@ Defines</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define VOODOO_GLOBAL_VERSION_REV&#160;&#160;&#160;288</td>
+          <td class="memname">#define VOODOO_GLOBAL_VERSION_REV&#160;&#160;&#160;294</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00078">78</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00079">79</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -663,7 +712,7 @@ Defines</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">token</td><td>)</td>
-          <td>&#160;&#160;&#160;{ VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }</td>
+          <td>&#160;&#160;&#160;{ VOODOO_##token##_NAME, VOODOO_##token##_LIBID, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }</td>
         </tr>
       </table>
 </div>
@@ -672,6 +721,21 @@ Defines</h2></td></tr>
 <p>Creates a Version structure with data for the given module. </p>
 
 <p>Definition at line <a class="el" href="_version_8hpp_source.html#l00070">70</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1d0e3b227cbe965960679856a5f36796"></a><!-- doxytag: member="Version.hpp::VOODOO_VC_LIBID" ref="a1d0e3b227cbe965960679856a5f36796" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOODOO_VC_LIBID&#160;&#160;&#160;{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00105">105</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -686,7 +750,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00102">102</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00106">106</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -701,7 +765,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00103">103</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00107">107</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -716,7 +780,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00104">104</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00108">108</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -731,7 +795,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00105">105</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00109">109</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -746,7 +810,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00106">106</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00110">110</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -761,7 +825,7 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00107">107</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_version_8hpp_source.html#l00111">111</a> of file <a class="el" href="_version_8hpp_source.html">Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -769,7 +833,7 @@ Defines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:08 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

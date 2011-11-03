@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -153,6 +153,8 @@ Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
 &lt; <a class="el" href="class_voodoo_shader_1_1_i_adapter.html">IAdapter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaa1322e129d6c3e184517c9e91731c43">IAdapterRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
+&lt; <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3819644288a0d5cd83352580db3c8ac9">ICoreRef</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
 &lt; <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#abac24ed68ea822811fc10e184680ca01">IFileRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
 &lt; <a class="el" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaa9faf7fcf5b0b06c5b8d0e700702a5f">IFileSystemRef</a></td></tr>
@@ -232,9 +234,7 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa148285a8681d68a12b15a6e60c192220">TF_D16</a> =  0x401, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fad0414e285b3c5b13e7cb082bb02a127e">TF_D32</a> =  0x402, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa9dd651fbfff9ddb25b4a348307ae79ac">TF_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fad0414e285b3c5b13e7cb082bb02a127e">TF_D32</a> =  0x402
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Texture formats for use by <a class="el" href="class_voodoo_shader_1_1_i_texture.html">Textures</a>, describing the layout and size of the texture data.  <a href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f">More...</a><br/></td></tr>
@@ -287,9 +287,7 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134aa2fd1e92f95f6139b1a0d3f05296c7b54">PT_Sampler3D</a> =  0x103, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134aad3936cface3c7fb40a77ead405901dfb">PT_Struct</a> =  0x1000, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134aab0f890bb7027ad837a529980ea104217">PT_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134aad3936cface3c7fb40a77ead405901dfb">PT_Struct</a> =  0x1000
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter types valid for <a class="el" href="class_voodoo_shader_1_1_i_parameter.html">VoodooShader::IParameter</a>.  <a href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a">More...</a><br/></td></tr>
@@ -300,9 +298,7 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12da8368cf22ecf2f293378b66fc8319596a">PC_Sampler</a> =  0x02, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12da1644aac0c06bcb3a945fee923b8420b7">PC_Struct</a> =  0x04, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12dafd621d36c530b4765dd04b68b7c602f8">PC_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12da1644aac0c06bcb3a945fee923b8420b7">PC_Struct</a> =  0x04
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a> { <br/>
@@ -316,9 +312,7 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82a7eeff6ab667a2af5b89731c68c936a4c">PS_Domain</a> =  0x04, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82a9449138a5cd26365e03474631118ff6e">PS_Hull</a> =  0x05, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82afebd27d4379e7c09281e4bdc59835ed3">PS_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82a9449138a5cd26365e03474631118ff6e">PS_Hull</a> =  0x05
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55">TextureStage</a> { <br/>
@@ -326,9 +320,7 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55a1b49ece2d7812eef7b95ae26b0488cff">TS_Shader</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55ace31af68276d51480248cc254b1025ce">TS_Pass</a> =  0x02, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55af456188ee851fb81ea8d83b5995cb8f6">TS_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55ace31af68276d51480248cc254b1025ce">TS_Pass</a> =  0x02
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6">FileOpenMode</a> { <br/>
@@ -344,9 +336,7 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6a2634fed68636a1f94be817955bc78b7c">FM_OpenOnly</a> =  0x20, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6a07cc6e0af08e8a7f921dc73921c009bf">FM_AlwaysOpen</a> =  0x30, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6a09ec409e971200e8c37ce4b967108254">FM_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6a07cc6e0af08e8a7f921dc73921c009bf">FM_AlwaysOpen</a> =  0x30
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da">LogLevel</a> { <br/>
@@ -406,18 +396,14 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaf2a01460c9f479f78c32224847988fcf">LL_Origin</a> =  0xF0, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa834480aaf13f8b6e44beff5fbca7f7e4">LL_All</a> =  0xFF, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa8fb703f80335a34750321d0b7c1b0baa">LL_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa834480aaf13f8b6e44beff5fbca7f7e4">LL_All</a> =  0xFF
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Log message levels.  <a href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> { <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dcaea01e65182c757527cf31d15643ec214">LF_Unknown</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dcadd274aec934ff467ea7b5c743399909a">LF_Flush</a> =  0x01, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dca2f2bf99820aa771455afc613de716f11">LF_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dcadd274aec934ff467ea7b5c743399909a">LF_Flush</a> =  0x01
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce">ParseFlags</a> { <br/>
@@ -433,9 +419,7 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea255aac8554c171c4d14b35a344be75c9">PF_Uppercase</a> =  0x0020, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac9d7f4664f9e9a726c8e75c6788d6e9e">PF_VarName</a> =  0x0100, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea61e2b27dcd1a1240b81ada13b9347ad4">PF_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac9d7f4664f9e9a726c8e75c6788d6e9e">PF_VarName</a> =  0x0100
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">String parsing flags.  <a href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce">More...</a><br/></td></tr>
@@ -444,21 +428,17 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83ca98c13e4930cb75a7e732757fa0e72018">VT_State</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080">VT_System</a> =  0x10, 
-<br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83caa07c7ca3b357ac611e9a9416046bbf62">VT_Max</a> =  0x7FFFFFFF
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080">VT_System</a> =  0x10
 <br/>
  }</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a9b6d245084c35bece67dd6cb93ed474b">API_ModuleVersion</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const uint32_t VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a262d76aa3e91afa876c8f64add584c6b">API_ClassCount</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ad57a6ef06ec46926589f855f72c9d3cc">API_ClassInfo</a> (_In_ const uint32_t number, _Deref_out_opt_ const wchar_t **ppName)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ae0d10338924495c89d6645dc877b6629">API_ClassCreate</a> (_In_ const uint32_t number, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *core)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__loader.html#ga6e91003d4538bca758f1d233fc2111d8">API_ModuleVersion</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const uint32_t VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__loader.html#ga1c1c7fa8e0849da76d3c77e9f37eed0d">API_ClassCount</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const wchar_t *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__loader.html#gaaae017d08567b59bbab15a4769d6d2d2">API_ClassInfo</a> (_In_ const uint32_t number, _Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *pUuid)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">API_ClassCreate</a> (_In_ const uint32_t number, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *core)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">intrusive_ptr_add_ref</a> (<a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">intrusive_ptr_release</a> (<a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *obj)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">_Check_return_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aad7636a55d1a88592e3e2d7ce42ec803">CreateCore</a> (_In_ const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const pInitParams, _In_ bool catchErrors=true)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new core.  <a href="#aad7636a55d1a88592e3e2d7ce42ec803"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>, 0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a7b6e94074965391f627e0125fd6f9ab8">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_adapter.html">IAdapter</a>, 0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a8afcfc6157139a67c31a4f32695159fc">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>, 0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
@@ -475,10 +455,12 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a296bed5ecfc5488045a8ab805547d76c">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_shader.html">IShader</a>, 0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#adfc688eecd8000df3bdc6fb1d5b4c9e1">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a>, 0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab70b39323392a29293023c2293a7e07f">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a>, 0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">_Check_return_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aad7636a55d1a88592e3e2d7ce42ec803">CreateCore</a> (_In_ const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const pInitParams, _In_ bool catchErrors=true)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new core.  <a href="#aad7636a55d1a88592e3e2d7ce42ec803"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a98acb92430d896a47c93cd16bdc8b3f8">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html">VSAdapter</a>, 0x9A, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a9f19e9c590049efbbed929e8ffc43856">Voodoo_CgErrorHandler_Func</a> (_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void *pCore)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-member function provided to Cg as an error handling callback.  <a href="#a9f19e9c590049efbbed929e8ffc43856"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a0eb5af00e7b6f3321f76ceb71fb76043">CreateCore</a> (_In_ const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const pInitParams, bool catchErrors)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab0b3e5636e0f048c99604dfa430ffb50">CreateCore</a> (_In_ const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const pInitParams, bool catchErrors)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab79424cbf3c95b4a8be638aa6468cc8d">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_core.html">VSCore</a>, 0x9B, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab76f45a83880c7e031446b18e4987f49">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html">VSFileSystem</a>, 0x9C, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ad7cedafae65ecdee71753360656c1acf">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html">VSHookManager</a>, 0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
@@ -494,10 +476,14 @@ Functions</h2></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">coreVersion</a> = VOODOO_META_VERSION_STRUCT(CORE)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a26a05864d4ca4f7e1d57b1adf84d2be0">clsid_vsa</a> = CLSID_VSAdapter</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a58dd774dc74ac75b2fe559b1088127a6">clsid_vsf</a> = CLSID_VSFileSystem</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a74efacb132f2bccd92616d765392c644">clsid_vsh</a> = CLSID_VSHookManager</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a247598116fc8c6061aba70580652d74e">clsid_vsl</a> = CLSID_VSLogger</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab2d8647ca760424077c4153e7b822d49">name_VSAdapter</a> = &quot;VSAdapter&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3">name_VSFileSystem</a> = &quot;VSFileSystem&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a517e2823e4941170d33d470dc9a457fa">name_VSHookManager</a> = &quot;VSHookManager&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a0df8ba9654dcf427ca78fad1fa68f5d9">name_VSLogger</a> = &quot;VSLogger&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a1a20ab66c06a132df1716f64d1715114">clsid_VSAdapter</a> = CLSID_VSAdapter</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a045e1b7012b2b1221b4cd143d65d0808">clsid_VSFileSystem</a> = CLSID_VSFileSystem</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">clsid_VSHookManager</a> = CLSID_VSHookManager</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">clsid_VSLogger</a> = CLSID_VSLogger</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This file is part of the Voodoo Shader Framework. </p>
@@ -517,7 +503,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00240">240</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00246">246</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -532,7 +518,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00241">241</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00247">247</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -547,7 +533,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00242">242</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00248">248</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -562,7 +548,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00223">223</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00229">229</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -577,7 +563,22 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00204">204</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00209">209</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3819644288a0d5cd83352580db3c8ac9"></a><!-- doxytag: member="VoodooShader::ICoreRef" ref="a3819644288a0d5cd83352580db3c8ac9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef boost::intrusive_ptr&lt;<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a3819644288a0d5cd83352580db3c8ac9">VoodooShader::ICoreRef</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00210">210</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -592,7 +593,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00205">205</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00211">211</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -607,7 +608,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00206">206</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00212">212</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -622,7 +623,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00207">207</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00213">213</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -637,7 +638,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00208">208</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00214">214</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -652,7 +653,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00209">209</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00215">215</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -667,7 +668,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00211">211</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00217">217</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -682,7 +683,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00210">210</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00216">216</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -697,7 +698,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00212">212</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00218">218</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -712,7 +713,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00213">213</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00219">219</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -727,7 +728,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00214">214</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00220">220</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -742,7 +743,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00215">215</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00221">221</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -757,7 +758,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00216">216</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00222">222</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -772,7 +773,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00217">217</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00223">223</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -787,7 +788,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00218">218</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00224">224</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -802,7 +803,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00243">243</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00249">249</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -817,7 +818,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00239">239</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00245">245</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -832,7 +833,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00234">234</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00240">240</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -847,7 +848,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00233">233</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00239">239</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -862,7 +863,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00235">235</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00241">241</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -877,7 +878,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00231">231</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00237">237</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -892,7 +893,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00230">230</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00236">236</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -907,7 +908,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00232">232</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00238">238</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -922,7 +923,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00225">225</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00231">231</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -937,7 +938,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00224">224</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00230">230</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -952,7 +953,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00226">226</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00232">232</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -967,7 +968,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00228">228</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00234">234</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -982,7 +983,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00227">227</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00233">233</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -997,7 +998,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00229">229</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00235">235</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1012,7 +1013,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00237">237</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00243">243</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1027,7 +1028,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00236">236</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00242">242</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1042,7 +1043,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00238">238</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00244">244</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1102,13 +1103,11 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a980f04b17b862a238d6c9c7854b862b6a07cc6e0af08e8a7f921dc73921c009bf"></a><!-- doxytag: member="FM_AlwaysOpen" ref="a980f04b17b862a238d6c9c7854b862b6a07cc6e0af08e8a7f921dc73921c009bf" args="" -->FM_AlwaysOpen</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a980f04b17b862a238d6c9c7854b862b6a09ec409e971200e8c37ce4b967108254"></a><!-- doxytag: member="FM_Max" ref="a980f04b17b862a238d6c9c7854b862b6a09ec409e971200e8c37ce4b967108254" args="" -->FM_Max</em>&nbsp;</td><td>
-</td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00340">340</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00339">339</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1127,13 +1126,11 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="af35c8fe857d014d7345ef8c2266c79dcadd274aec934ff467ea7b5c743399909a"></a><!-- doxytag: member="LF_Flush" ref="af35c8fe857d014d7345ef8c2266c79dcadd274aec934ff467ea7b5c743399909a" args="" -->LF_Flush</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="af35c8fe857d014d7345ef8c2266c79dca2f2bf99820aa771455afc613de716f11"></a><!-- doxytag: member="LF_Max" ref="af35c8fe857d014d7345ef8c2266c79dca2f2bf99820aa771455afc613de716f11" args="" -->LF_Max</em>&nbsp;</td><td>
-</td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00400">400</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00397">397</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1151,8 +1148,8 @@ Variables</h2></td></tr>
 <p>Log message levels. </p>
 <p>These are set up to quickly filter based on various flags using binary logic. Flags are ORed together, with lower-priority flags having all higher-priority flags set. When checking a log call, the condition is: </p>
 <div class="fragment"><pre class="fragment"> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> maskedLevel = level &amp; storedLevel;
- <span class="keywordflow">if</span> ( (maskedLevel &amp; <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaf2a01460c9f479f78c32224847988fcf">LL_Origin</a>) &amp;&amp; (maskedLevel &amp; <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daab6c5487eabf7bd65f36a4d0302610751">LL_Severity</a>) ) 
- { 
+ <span class="keywordflow">if</span> ( (maskedLevel &amp; <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaf2a01460c9f479f78c32224847988fcf">LL_Origin</a>) &amp;&amp; (maskedLevel &amp; <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daab6c5487eabf7bd65f36a4d0302610751">LL_Severity</a>) )
+ {
      <span class="comment">// Log message</span>
  }
 </pre></div> <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
@@ -1214,13 +1211,11 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a3b6fdd898a776b73fcdb7fef61ee96daa834480aaf13f8b6e44beff5fbca7f7e4"></a><!-- doxytag: member="LL_All" ref="a3b6fdd898a776b73fcdb7fef61ee96daa834480aaf13f8b6e44beff5fbca7f7e4" args="" -->LL_All</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a3b6fdd898a776b73fcdb7fef61ee96daa8fb703f80335a34750321d0b7c1b0baa"></a><!-- doxytag: member="LL_Max" ref="a3b6fdd898a776b73fcdb7fef61ee96daa8fb703f80335a34750321d0b7c1b0baa" args="" -->LL_Max</em>&nbsp;</td><td>
-</td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00364">364</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00362">362</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1243,13 +1238,11 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a56d7d146822e8830cf490e2b9292b12da1644aac0c06bcb3a945fee923b8420b7"></a><!-- doxytag: member="PC_Struct" ref="a56d7d146822e8830cf490e2b9292b12da1644aac0c06bcb3a945fee923b8420b7" args="" -->PC_Struct</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a56d7d146822e8830cf490e2b9292b12dafd621d36c530b4765dd04b68b7c602f8"></a><!-- doxytag: member="PC_Max" ref="a56d7d146822e8830cf490e2b9292b12dafd621d36c530b4765dd04b68b7c602f8" args="" -->PC_Max</em>&nbsp;</td><td>
-</td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00312">312</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00314">314</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1317,13 +1310,11 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="ab90c3dbfe5ca792323089af903d1134aad3936cface3c7fb40a77ead405901dfb"></a><!-- doxytag: member="PT_Struct" ref="ab90c3dbfe5ca792323089af903d1134aad3936cface3c7fb40a77ead405901dfb" args="" -->PT_Struct</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ab90c3dbfe5ca792323089af903d1134aab0f890bb7027ad837a529980ea104217"></a><!-- doxytag: member="PT_Max" ref="ab90c3dbfe5ca792323089af903d1134aab0f890bb7027ad837a529980ea104217" args="" -->PT_Max</em>&nbsp;</td><td>
-</td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00278">278</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00282">282</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1355,13 +1346,11 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778ceac9d7f4664f9e9a726c8e75c6788d6e9e"></a><!-- doxytag: member="PF_VarName" ref="a97ffa79fd7512cffa1f0bce04ec778ceac9d7f4664f9e9a726c8e75c6788d6e9e" args="" -->PF_VarName</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cea61e2b27dcd1a1240b81ada13b9347ad4"></a><!-- doxytag: member="PF_Max" ref="a97ffa79fd7512cffa1f0bce04ec778cea61e2b27dcd1a1240b81ada13b9347ad4" args="" -->PF_Max</em>&nbsp;</td><td>
-</td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00410">410</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00406">406</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1388,13 +1377,11 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a0aaa128fef0ad63eafc60e11da58cb82a9449138a5cd26365e03474631118ff6e"></a><!-- doxytag: member="PS_Hull" ref="a0aaa128fef0ad63eafc60e11da58cb82a9449138a5cd26365e03474631118ff6e" args="" -->PS_Hull</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a0aaa128fef0ad63eafc60e11da58cb82afebd27d4379e7c09281e4bdc59835ed3"></a><!-- doxytag: member="PS_Max" ref="a0aaa128fef0ad63eafc60e11da58cb82afebd27d4379e7c09281e4bdc59835ed3" args="" -->PS_Max</em>&nbsp;</td><td>
-</td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00321">321</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00322">322</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1432,13 +1419,11 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="ac41ef674639cfb37461c1426a0d7669fad0414e285b3c5b13e7cb082bb02a127e"></a><!-- doxytag: member="TF_D32" ref="ac41ef674639cfb37461c1426a0d7669fad0414e285b3c5b13e7cb082bb02a127e" args="" -->TF_D32</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ac41ef674639cfb37461c1426a0d7669fa9dd651fbfff9ddb25b4a348307ae79ac"></a><!-- doxytag: member="TF_Max" ref="ac41ef674639cfb37461c1426a0d7669fa9dd651fbfff9ddb25b4a348307ae79ac" args="" -->TF_Max</em>&nbsp;</td><td>
-</td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00254">254</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00260">260</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1458,8 +1443,6 @@ Variables</h2></td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a557f6a3f9454eb519cd10323d082df55a1b49ece2d7812eef7b95ae26b0488cff"></a><!-- doxytag: member="TS_Shader" ref="a557f6a3f9454eb519cd10323d082df55a1b49ece2d7812eef7b95ae26b0488cff" args="" -->TS_Shader</em>&nbsp;</td><td>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a557f6a3f9454eb519cd10323d082df55ace31af68276d51480248cc254b1025ce"></a><!-- doxytag: member="TS_Pass" ref="a557f6a3f9454eb519cd10323d082df55ace31af68276d51480248cc254b1025ce" args="" -->TS_Pass</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a557f6a3f9454eb519cd10323d082df55af456188ee851fb81ea8d83b5995cb8f6"></a><!-- doxytag: member="TS_Max" ref="a557f6a3f9454eb519cd10323d082df55af456188ee851fb81ea8d83b5995cb8f6" args="" -->TS_Max</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
@@ -1486,51 +1469,30 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080"></a><!-- doxytag: member="VT_System" ref="a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080" args="" -->VT_System</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a0bdd161a02834f059ef7c545a757e83caa07c7ca3b357ac611e9a9416046bbf62"></a><!-- doxytag: member="VT_Max" ref="a0bdd161a02834f059ef7c545a757e83caa07c7ca3b357ac611e9a9416046bbf62" args="" -->VT_Max</em>&nbsp;</td><td>
-</td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00422">422</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00417">417</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a262d76aa3e91afa876c8f64add584c6b"></a><!-- doxytag: member="VoodooShader::API_ClassCount" ref="a262d76aa3e91afa876c8f64add584c6b" args="(void)" -->
+<a class="anchor" id="ab0b3e5636e0f048c99604dfa430ffb50"></a><!-- doxytag: member="VoodooShader::CreateCore" ref="ab0b3e5636e0f048c99604dfa430ffb50" args="(_In_ const InitParams *const pInitParams, bool catchErrors)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint32_t VOODOO_CALL VoodooShader::API_ClassCount </td>
+          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>* VOODOO_CALL VoodooShader::CreateCore </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00043">43</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae0d10338924495c89d6645dc877b6629"></a><!-- doxytag: member="VoodooShader::API_ClassCreate" ref="ae0d10338924495c89d6645dc877b6629" args="(_In_ const uint32_t number, _In_ ICore *core)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *VOODOO_CALL VoodooShader::API_ClassCreate </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>number</em>, </td>
+          <td class="paramtype">_In_ const InitParams *const&#160;</td>
+          <td class="paramname"><em>pInitParams</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ ICore *&#160;</td>
-          <td class="paramname"><em>core</em>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>catchErrors</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1541,55 +1503,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00070">70</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad57a6ef06ec46926589f855f72c9d3cc"></a><!-- doxytag: member="VoodooShader::API_ClassInfo" ref="ad57a6ef06ec46926589f855f72c9d3cc" args="(_In_ const uint32_t number, _Deref_out_opt_ const wchar_t **ppName)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *VOODOO_CALL VoodooShader::API_ClassInfo </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>number</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_Deref_out_opt_ const wchar_t **&#160;</td>
-          <td class="paramname"><em>ppName</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00048">48</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9b6d245084c35bece67dd6cb93ed474b"></a><!-- doxytag: member="VoodooShader::API_ModuleVersion" ref="a9b6d245084c35bece67dd6cb93ed474b" args="(void)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *VOODOO_CALL VoodooShader::API_ModuleVersion </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00038">38</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00052">52</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -1634,35 +1548,6 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a class="anchor" id="a0eb5af00e7b6f3321f76ceb71fb76043"></a><!-- doxytag: member="VoodooShader::CreateCore" ref="a0eb5af00e7b6f3321f76ceb71fb76043" args="(_In_ const InitParams *const pInitParams, bool catchErrors)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>* VoodooShader::CreateCore </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const InitParams *const&#160;</td>
-          <td class="paramname"><em>pInitParams</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>catchErrors</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00052">52</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -2602,20 +2487,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad7cedafae65ecdee71753360656c1acf"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="ad7cedafae65ecdee71753360656c1acf" args="(VSHookManager, 0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<a class="anchor" id="a1dea1b3692f87c44631c55d274149412"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="a1dea1b3692f87c44631c55d274149412" args="(VSLogger, 0x9E, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
           <td>(</td>
-          <td class="paramtype">VSHookManager&#160;</td>
+          <td class="paramtype">VSLogger&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">0x9D&#160;</td>
+          <td class="paramtype">0x9E&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -2836,20 +2721,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab76f45a83880c7e031446b18e4987f49"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="ab76f45a83880c7e031446b18e4987f49" args="(VSFileSystem, 0x9C, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<a class="anchor" id="ad7cedafae65ecdee71753360656c1acf"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="ad7cedafae65ecdee71753360656c1acf" args="(VSHookManager, 0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
           <td>(</td>
-          <td class="paramtype">VSFileSystem&#160;</td>
+          <td class="paramtype">VSHookManager&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">0x9C&#160;</td>
+          <td class="paramtype">0x9D&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -2953,20 +2838,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1dea1b3692f87c44631c55d274149412"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="a1dea1b3692f87c44631c55d274149412" args="(VSLogger, 0x9E, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<a class="anchor" id="ab76f45a83880c7e031446b18e4987f49"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="ab76f45a83880c7e031446b18e4987f49" args="(VSFileSystem, 0x9C, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
           <td>(</td>
-          <td class="paramtype">VSLogger&#160;</td>
+          <td class="paramtype">VSFileSystem&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramtype">0x9C&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -5074,7 +4959,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00088">88</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00096">96</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
@@ -5093,7 +4978,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00093">93</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00101">101</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
@@ -5143,63 +5028,63 @@ Variables</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Variable Documentation</h2>
-<a class="anchor" id="a26a05864d4ca4f7e1d57b1adf84d2be0"></a><!-- doxytag: member="VoodooShader::clsid_vsa" ref="a26a05864d4ca4f7e1d57b1adf84d2be0" args="" -->
+<a class="anchor" id="a1a20ab66c06a132df1716f64d1715114"></a><!-- doxytag: member="VoodooShader::clsid_VSAdapter" ref="a1a20ab66c06a132df1716f64d1715114" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a26a05864d4ca4f7e1d57b1adf84d2be0">VoodooShader::clsid_vsa</a> = CLSID_VSAdapter<code> [static]</code></td>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a1a20ab66c06a132df1716f64d1715114">VoodooShader::clsid_VSAdapter</a> = CLSID_VSAdapter<code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00033">33</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00037">37</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a58dd774dc74ac75b2fe559b1088127a6"></a><!-- doxytag: member="VoodooShader::clsid_vsf" ref="a58dd774dc74ac75b2fe559b1088127a6" args="" -->
+<a class="anchor" id="a045e1b7012b2b1221b4cd143d65d0808"></a><!-- doxytag: member="VoodooShader::clsid_VSFileSystem" ref="a045e1b7012b2b1221b4cd143d65d0808" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a58dd774dc74ac75b2fe559b1088127a6">VoodooShader::clsid_vsf</a> = CLSID_VSFileSystem<code> [static]</code></td>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a045e1b7012b2b1221b4cd143d65d0808">VoodooShader::clsid_VSFileSystem</a> = CLSID_VSFileSystem<code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00034">34</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00038">38</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a74efacb132f2bccd92616d765392c644"></a><!-- doxytag: member="VoodooShader::clsid_vsh" ref="a74efacb132f2bccd92616d765392c644" args="" -->
+<a class="anchor" id="a4183c65de586f47ceaa1f0c85f5b44c2"></a><!-- doxytag: member="VoodooShader::clsid_VSHookManager" ref="a4183c65de586f47ceaa1f0c85f5b44c2" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a74efacb132f2bccd92616d765392c644">VoodooShader::clsid_vsh</a> = CLSID_VSHookManager<code> [static]</code></td>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">VoodooShader::clsid_VSHookManager</a> = CLSID_VSHookManager<code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00035">35</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00039">39</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a247598116fc8c6061aba70580652d74e"></a><!-- doxytag: member="VoodooShader::clsid_vsl" ref="a247598116fc8c6061aba70580652d74e" args="" -->
+<a class="anchor" id="a1776c0e59dcc8c143a93cdf45a8ff457"></a><!-- doxytag: member="VoodooShader::clsid_VSLogger" ref="a1776c0e59dcc8c143a93cdf45a8ff457" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a247598116fc8c6061aba70580652d74e">VoodooShader::clsid_vsl</a> = CLSID_VSLogger<code> [static]</code></td>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">VoodooShader::clsid_VSLogger</a> = CLSID_VSLogger<code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00036">36</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00040">40</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
@@ -5218,11 +5103,71 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ab2d8647ca760424077c4153e7b822d49"></a><!-- doxytag: member="VoodooShader::name_VSAdapter" ref="ab2d8647ca760424077c4153e7b822d49" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wchar_t* <a class="el" href="namespace_voodoo_shader.html#ab2d8647ca760424077c4153e7b822d49">VoodooShader::name_VSAdapter</a> = &quot;VSAdapter&quot;<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00033">33</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7812cff33dd52ebc945d6bf118a4d6b3"></a><!-- doxytag: member="VoodooShader::name_VSFileSystem" ref="a7812cff33dd52ebc945d6bf118a4d6b3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wchar_t* <a class="el" href="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3">VoodooShader::name_VSFileSystem</a> = &quot;VSFileSystem&quot;<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00034">34</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a517e2823e4941170d33d470dc9a457fa"></a><!-- doxytag: member="VoodooShader::name_VSHookManager" ref="a517e2823e4941170d33d470dc9a457fa" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wchar_t* <a class="el" href="namespace_voodoo_shader.html#a517e2823e4941170d33d470dc9a457fa">VoodooShader::name_VSHookManager</a> = &quot;VSHookManager&quot;<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00035">35</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0df8ba9654dcf427ca78fad1fa68f5d9"></a><!-- doxytag: member="VoodooShader::name_VSLogger" ref="a0df8ba9654dcf427ca78fad1fa68f5d9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wchar_t* <a class="el" href="namespace_voodoo_shader.html#a0df8ba9654dcf427ca78fad1fa68f5d9">VoodooShader::name_VSLogger</a> = &quot;VSLogger&quot;<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00036">36</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

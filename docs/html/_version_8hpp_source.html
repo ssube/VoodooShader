@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -103,50 +103,54 @@
 <a name="l00064"></a><a class="code" href="_version_8hpp.html#a8b340c0ecc7d0e393b7119f45adebb3c">00064</a> <span class="preprocessor">#define VOODOO_META_STRING_NAME_BASIC(token) VOODOO_##token##_NAME VOODOO_META_DEBUG_STRING</span>
 <a name="l00065"></a><a class="code" href="_version_8hpp.html#a9326f3191f5be34d582f98d8309361cc">00065</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_META_STRING_NAME_FULL(token)  VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING</span>
 <a name="l00066"></a>00066 <span class="preprocessor"></span>
-<a name="l00070"></a><a class="code" href="_version_8hpp.html#a4da9584ebd4a715e19b36471e0d85f3c">00070</a> <span class="preprocessor">#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }</span>
+<a name="l00070"></a><a class="code" href="_version_8hpp.html#a4da9584ebd4a715e19b36471e0d85f3c">00070</a> <span class="preprocessor">#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_##token##_LIBID, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }</span>
 <a name="l00071"></a>00071 <span class="preprocessor"></span>
 <a name="l00072"></a>00072 <span class="comment">// Global defs</span>
-<a name="l00073"></a><a class="code" href="_version_8hpp.html#a87f428a69ce9e5baf772251c8e462fa9">00073</a> <span class="preprocessor">#define VOODOO_GLOBAL_NAME              L&quot;Voodoo/Framework&quot;</span>
-<a name="l00074"></a><a class="code" href="_version_8hpp.html#ae4349561a4788d7b5845deed3d45b72a">00074</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_PRETTYNAME        L&quot;Voodoo Shader Framework&quot;</span>
-<a name="l00075"></a><a class="code" href="_version_8hpp.html#acbd5fcc009f70d2a24f03418af8d821e">00075</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_VERSION_MAJOR     0</span>
-<a name="l00076"></a><a class="code" href="_version_8hpp.html#acd615012a7d35c22cbe2bed3fc6a85a6">00076</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_VERSION_MINOR     4</span>
-<a name="l00077"></a><a class="code" href="_version_8hpp.html#ae757f33d6accba924710b75207ddd73b">00077</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_VERSION_PATCH     1</span>
-<a name="l00078"></a><a class="code" href="_version_8hpp.html#a0f5482f29200193a38abcde8fa162f07">00078</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_VERSION_REV       288</span>
-<a name="l00079"></a><a class="code" href="_version_8hpp.html#ae431daae79fd2c81113bd21cf452ecf6">00079</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   L&quot;Copyright (c) 2010-2011 by Sean Sube&quot;</span>
-<a name="l00080"></a><a class="code" href="_version_8hpp.html#a9951d1488ef5b6f7d477059b83c9dd7a">00080</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_COPYRIGHT_FULL    L&quot;Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&amp;lt;br /&amp;gt;\n&quot; \</span>
-<a name="l00081"></a>00081 <span class="preprocessor">    L&quot;The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&amp;lt;br /&amp;gt;\n&quot; \</span>
-<a name="l00082"></a>00082 <span class="preprocessor">    L&quot;This is free software and you are welcome to redistribute it under certain conditions.&amp;lt;br /&amp;gt;\n&quot; \</span>
-<a name="l00083"></a>00083 <span class="preprocessor">    L&quot;Please see the included license file for more details.&quot;</span>
-<a name="l00084"></a>00084 <span class="preprocessor"></span>
-<a name="l00085"></a>00085 <span class="comment">// Core defs</span>
-<a name="l00086"></a><a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">00086</a> <span class="preprocessor">#define VOODOO_CORE_NAME                L&quot;Voodoo/Core&quot;</span>
-<a name="l00087"></a><a class="code" href="_version_8hpp.html#a7e07f5f83787ec74dee7e9d50758567f">00087</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_PRETTYNAME          L&quot;Voodoo Shader Framework Core&quot;</span>
-<a name="l00088"></a><a class="code" href="_version_8hpp.html#a1fe51774faef815457b02265b70fa79c">00088</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR</span>
-<a name="l00089"></a><a class="code" href="_version_8hpp.html#a3ad61654252d0dd109ad4bf61a1157f0">00089</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR</span>
-<a name="l00090"></a><a class="code" href="_version_8hpp.html#a94055829fc305d8650ac3d16fe26ef08">00090</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_VERSION_PATCH       VOODOO_GLOBAL_VERSION_PATCH</span>
-<a name="l00091"></a><a class="code" href="_version_8hpp.html#a182eb046e4bcf6f21469f65633e734d7">00091</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_VERSION_REV         VOODOO_GLOBAL_VERSION_REV</span>
-<a name="l00092"></a>00092 <span class="preprocessor"></span>
-<a name="l00093"></a>00093 <span class="comment">// External defs Cg</span>
-<a name="l00094"></a><a class="code" href="_version_8hpp.html#a18c51df73ac22d0b5b08dc0b2d4ae18b">00094</a> <span class="preprocessor">#define VOODOO_CG_NAME                  L&quot;Cg&quot;</span>
-<a name="l00095"></a><a class="code" href="_version_8hpp.html#ab64124bbd849e454fb7301524ee7c2bf">00095</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_PRETTYNAME            L&quot;nVidia Cg Toolkit (July 2010)&quot;</span>
-<a name="l00096"></a><a class="code" href="_version_8hpp.html#a70561a91b7f4495ec7217895d395a274">00096</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_MAJOR         3</span>
-<a name="l00097"></a><a class="code" href="_version_8hpp.html#a24331ba6ffa35ae0ba3a1391cf4b2195">00097</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_MINOR         0</span>
-<a name="l00098"></a><a class="code" href="_version_8hpp.html#a1bc3b7710a34291734ccde6646c1d46e">00098</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_PATCH         0</span>
-<a name="l00099"></a><a class="code" href="_version_8hpp.html#ade3b62fddc3084d074d14ee3ebe9e81a">00099</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_REV           7</span>
-<a name="l00100"></a>00100 <span class="preprocessor"></span>
-<a name="l00101"></a>00101 <span class="comment">// VC</span>
-<a name="l00102"></a><a class="code" href="_version_8hpp.html#a7e82fbd3ed1a079167317e3004c2f965">00102</a> <span class="preprocessor">#define VOODOO_VC_NAME                  L&quot;MSVC&quot;</span>
-<a name="l00103"></a><a class="code" href="_version_8hpp.html#ac2a871c721c36bee7ae5415439ce5f02">00103</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_PRETTYNAME            L&quot;Microsoft Visual C++&quot;</span>
-<a name="l00104"></a><a class="code" href="_version_8hpp.html#aebe91fc02d8db1e9fb8b3e90231c5192">00104</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_MAJOR         _MSC_VER</span>
-<a name="l00105"></a><a class="code" href="_version_8hpp.html#a64467844a30043d5acc356b3e2cf4e44">00105</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_MINOR         0</span>
-<a name="l00106"></a><a class="code" href="_version_8hpp.html#ae82cfe6941e30c243fa9e3d8ccca8b8b">00106</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER</span>
-<a name="l00107"></a><a class="code" href="_version_8hpp.html#aad2d04b304068fafd9983edbb8486116">00107</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_REV           _MSC_BUILD</span>
+<a name="l00073"></a><a class="code" href="_version_8hpp.html#a64a67e66ded049574a7470eba7a329db">00073</a> <span class="preprocessor">#define VOODOO_GLOBAL_LIBID             {0xCA, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</span>
+<a name="l00074"></a><a class="code" href="_version_8hpp.html#a87f428a69ce9e5baf772251c8e462fa9">00074</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_NAME              L&quot;Voodoo/Framework&quot;</span>
+<a name="l00075"></a><a class="code" href="_version_8hpp.html#ae4349561a4788d7b5845deed3d45b72a">00075</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_PRETTYNAME        L&quot;Voodoo Shader Framework&quot;</span>
+<a name="l00076"></a><a class="code" href="_version_8hpp.html#acbd5fcc009f70d2a24f03418af8d821e">00076</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_VERSION_MAJOR     0</span>
+<a name="l00077"></a><a class="code" href="_version_8hpp.html#acd615012a7d35c22cbe2bed3fc6a85a6">00077</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_VERSION_MINOR     4</span>
+<a name="l00078"></a><a class="code" href="_version_8hpp.html#ae757f33d6accba924710b75207ddd73b">00078</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_VERSION_PATCH     2</span>
+<a name="l00079"></a><a class="code" href="_version_8hpp.html#a0f5482f29200193a38abcde8fa162f07">00079</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_VERSION_REV       294</span>
+<a name="l00080"></a><a class="code" href="_version_8hpp.html#ae431daae79fd2c81113bd21cf452ecf6">00080</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   L&quot;Copyright (c) 2010-2011 by Sean Sube&quot;</span>
+<a name="l00081"></a><a class="code" href="_version_8hpp.html#a9951d1488ef5b6f7d477059b83c9dd7a">00081</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_COPYRIGHT_FULL    L&quot;Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&amp;lt;br /&amp;gt;\n&quot; \</span>
+<a name="l00082"></a>00082 <span class="preprocessor">    L&quot;The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&amp;lt;br /&amp;gt;\n&quot; \</span>
+<a name="l00083"></a>00083 <span class="preprocessor">    L&quot;This is free software and you are welcome to redistribute it under certain conditions.&amp;lt;br /&amp;gt;\n&quot; \</span>
+<a name="l00084"></a>00084 <span class="preprocessor">    L&quot;Please see the included license file for more details.&quot;</span>
+<a name="l00085"></a>00085 <span class="preprocessor"></span>
+<a name="l00086"></a>00086 <span class="comment">// Core defs</span>
+<a name="l00087"></a><a class="code" href="_version_8hpp.html#aebf72435c706413db27ce76dcfc8347a">00087</a> <span class="preprocessor">#define VOODOO_CORE_LIBID               {0xCB, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</span>
+<a name="l00088"></a><a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">00088</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_NAME                L&quot;Voodoo/Core&quot;</span>
+<a name="l00089"></a><a class="code" href="_version_8hpp.html#a7e07f5f83787ec74dee7e9d50758567f">00089</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_PRETTYNAME          L&quot;Voodoo Shader Framework Core&quot;</span>
+<a name="l00090"></a><a class="code" href="_version_8hpp.html#a1fe51774faef815457b02265b70fa79c">00090</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR</span>
+<a name="l00091"></a><a class="code" href="_version_8hpp.html#a3ad61654252d0dd109ad4bf61a1157f0">00091</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR</span>
+<a name="l00092"></a><a class="code" href="_version_8hpp.html#a94055829fc305d8650ac3d16fe26ef08">00092</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_VERSION_PATCH       VOODOO_GLOBAL_VERSION_PATCH</span>
+<a name="l00093"></a><a class="code" href="_version_8hpp.html#a182eb046e4bcf6f21469f65633e734d7">00093</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CORE_VERSION_REV         VOODOO_GLOBAL_VERSION_REV</span>
+<a name="l00094"></a>00094 <span class="preprocessor"></span>
+<a name="l00095"></a>00095 <span class="comment">// External defs Cg</span>
+<a name="l00096"></a><a class="code" href="_version_8hpp.html#a0b55580e6327ed4e131454e8c0e668d6">00096</a> <span class="preprocessor">#define VOODOO_CG_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</span>
+<a name="l00097"></a><a class="code" href="_version_8hpp.html#a18c51df73ac22d0b5b08dc0b2d4ae18b">00097</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_NAME                  L&quot;Cg&quot;</span>
+<a name="l00098"></a><a class="code" href="_version_8hpp.html#ab64124bbd849e454fb7301524ee7c2bf">00098</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_PRETTYNAME            L&quot;nVidia Cg Toolkit (July 2010)&quot;</span>
+<a name="l00099"></a><a class="code" href="_version_8hpp.html#a70561a91b7f4495ec7217895d395a274">00099</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_MAJOR         3</span>
+<a name="l00100"></a><a class="code" href="_version_8hpp.html#a24331ba6ffa35ae0ba3a1391cf4b2195">00100</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_MINOR         0</span>
+<a name="l00101"></a><a class="code" href="_version_8hpp.html#a1bc3b7710a34291734ccde6646c1d46e">00101</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_PATCH         0</span>
+<a name="l00102"></a><a class="code" href="_version_8hpp.html#ade3b62fddc3084d074d14ee3ebe9e81a">00102</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_REV           7</span>
+<a name="l00103"></a>00103 <span class="preprocessor"></span>
+<a name="l00104"></a>00104 <span class="comment">// VC</span>
+<a name="l00105"></a><a class="code" href="_version_8hpp.html#a1d0e3b227cbe965960679856a5f36796">00105</a> <span class="preprocessor">#define VOODOO_VC_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</span>
+<a name="l00106"></a><a class="code" href="_version_8hpp.html#a7e82fbd3ed1a079167317e3004c2f965">00106</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_NAME                  L&quot;MSVC&quot;</span>
+<a name="l00107"></a><a class="code" href="_version_8hpp.html#ac2a871c721c36bee7ae5415439ce5f02">00107</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_PRETTYNAME            L&quot;Microsoft Visual C++&quot;</span>
+<a name="l00108"></a><a class="code" href="_version_8hpp.html#aebe91fc02d8db1e9fb8b3e90231c5192">00108</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_MAJOR         _MSC_VER</span>
+<a name="l00109"></a><a class="code" href="_version_8hpp.html#a64467844a30043d5acc356b3e2cf4e44">00109</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_MINOR         0</span>
+<a name="l00110"></a><a class="code" href="_version_8hpp.html#ae82cfe6941e30c243fa9e3d8ccca8b8b">00110</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER</span>
+<a name="l00111"></a><a class="code" href="_version_8hpp.html#aad2d04b304068fafd9983edbb8486116">00111</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_REV           _MSC_BUILD</span>
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:08 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

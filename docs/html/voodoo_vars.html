@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -78,34 +78,34 @@ Variable Values</h3>
 Variable States &amp; Recursion</h3>
 <p>Each parsing call creates a state block and uses a discrete depth counter. The depth counter handles recursion and operated very simply. Each time the parser encounters a string that requires parsing, the counter is incremented and passed on. The recursion limit is implementation-defined, with <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html">VSParser</a> using 8. When this limit is reached, variables will not be parsed, preventing infinite loops.</p>
 <p>State blocks are somewhat more Cthulhic in their logic. When the parser is called, a state block is created and passed on, similar to the depth counter. However, if a variable name containing a ':' character is encountered, the state may change. The variable name in question will be split at the ':' into a new name and value, both of which will be parsed using the current state. The returned values will be inserted into the state block as a new variable (or to overwrite an existing state variable). State variable may then be used in future parsing. While intended for relatively simple dynamic strings, state variables can (with sufficient cleverness and masochism) be used to perform simple logic operations.</p>
-<dl class="user"><dt><b>Examples: </b></dt><dd><div class="fragment"><pre class="fragment"> localroot = M:\VoodooShader\ 
- gempath = M:\VoodooShader\Gem\ 
- resourcedir = \resources\ 
- 
- $(localroot)\subdir\file.png = M:\VoodooShader\\subdir\file.png 
- $(gempath)\shaders\test.cgfx = M:\VoodooShader\Gem\\shaders\test.cgfx 
- $(localroot)\$(resourcedir)\image.dds = M:\VoodooShader\\\resources\\image.dds 
+<dl class="user"><dt><b>Examples:</b></dt><dd><div class="fragment"><pre class="fragment"> localroot = M:\VoodooShader\
+ gempath = M:\VoodooShader\Gem\
+ resourcedir = \resources\
+
+ $(localroot)\subdir\file.png = M:\VoodooShader\\subdir\file.png
+ $(gempath)\shaders\test.cgfx = M:\VoodooShader\Gem\\shaders\test.cgfx
+ $(localroot)\$(resourcedir)\image.dds = M:\VoodooShader\\\resources\\image.dds
 </pre></div></dd></dl>
 <p>Variable names may also contain variables (as mentioned above). The syntax is identical, but the results are slightly more complex.</p>
-<dl class="user"><dt><b>Examples: (with PF_SingleSlash | PF_BackslashOnly) </b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\ 
+<dl class="user"><dt><b>Examples: (with PF_SingleSlash | PF_BackslashOnly)</b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\
  adapter = Frost
- Frost_respath = /resources/frost/ 
- 
+ Frost_respath = /resources/frost/
+
  $(basepath)/$($(adapter)_respath) = M:\VoodooShader\resources\frost\
 </pre></div></dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>Repeated consecutive slashes will not cause errors with path parsing, although in some locations they have special meanings. They may cause errors when using the string for other reasons; calling <a class="el" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca">IParser::Parse()</a> with the <a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceace32d7a938b81a9b48e2a91e14965106">PF_SingleSlash</a> flag set will attempt to strip these. Finally, state variables and suppression use a variation on the name syntax.</dd></dl>
-<dl class="user"><dt><b>Examples: </b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\ 
- game.exe = $(adapter:Gem) 
- Gem_Adapter = Voodoo_Gem.dll 
+<dl class="user"><dt><b>Examples:</b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\
+ game.exe = $(adapter:Gem)
+ Gem_Adapter = Voodoo_Gem.dll
  _Adapter = Voodoo_nullptr.dll
- 
- $(target) = game.exe 
+
+ $(target) = game.exe
  $(?$(target)_Adapter) = $(Gem_Adapter) = Voodoo_Gem.dll
- 
- $(target) = test.exe 
+
+ $(target) = test.exe
  $(?$(target)_Adapter) = $(_Adapter) = Voodoo_nullptr.dll
- 
- $($(target)_Adapter) = $(--badvar:test.exe--_Adapter) = --badvar:--badvar:test.exe--_Adapter-- 
+
+ $($(target)_Adapter) = $(--badvar:test.exe--_Adapter) = --badvar:--badvar:test.exe--_Adapter--
 </pre></div></dd></dl>
 <h2><a class="anchor" id="voodoo_vars_sys"></a>
 System Variables</h2>
@@ -131,13 +131,13 @@ Built-In Variables</h2>
 <h3><a class="anchor" id="voodoo_vars_builtin_local"></a>
 $(localroot)</h3>
 <p>The local root path is the location of the target executable, that is, the program that Voodoo is loaded into. This is the absolute path to the file. This path is retrieved from the Windows API during startup. The value is \-terminated.</p>
-<dl class="user"><dt><b>Example: </b></dt><dd><div class="fragment"><pre class="fragment"> TargetEXE = H:\Program\Program.exe
+<dl class="user"><dt><b>Example:</b></dt><dd><div class="fragment"><pre class="fragment"> TargetEXE = H:\Program\Program.exe
  $(localroot) = H:\Program\
 </pre></div></dd></dl>
 <h3><a class="anchor" id="voodoo_vars_builtin_global"></a>
 $(globalroot)</h3>
 <p>The global root path of Voodoo. This is the main Voodoo folder, containing most global resources and binaries. This path is retrieved from the registry by the Voodoo loader. The value is \-terminated.</p>
-<dl class="user"><dt><b>Example: </b></dt><dd><div class="fragment"><pre class="fragment"> $(globalroot)\bin\ = Voodoo binary path 
+<dl class="user"><dt><b>Example:</b></dt><dd><div class="fragment"><pre class="fragment"> $(globalroot)\bin\ = Voodoo binary path
 </pre></div></dd></dl>
 <h3><a class="anchor" id="voodoo_vars_builtin_run"></a>
 $(runroot)</h3>
@@ -145,14 +145,14 @@ $(runroot)</h3>
 <h3><a class="anchor" id="voodoo_vars_builtin_target"></a>
 $(target)</h3>
 <p>The filename of the target application. This does not include the path (found in <code>$(localroot)</code>), only the name. To help use this for variable varnames, this is forced to all lowercase. You can use it to change the config settings based on the running executable, like so:</p>
-<dl class="user"><dt><b>Example: Two adapter names, for different games. For this example, the running target is</b></dt><dd><code>nwmain.exe</code>. <div class="fragment"><pre class="fragment"> globalroot = M:\VoodooShader\ 
- target = nwmain.exe 
- morrowind.exe = Gem 
- nwmain.exe = Frost 
+<dl class="user"><dt><b>Example: Two adapter names, for different games. For this example, the running target is</b></dt><dd><code>nwmain.exe</code>. <div class="fragment"><pre class="fragment"> globalroot = M:\VoodooShader\
+ target = nwmain.exe
+ morrowind.exe = Gem
+ nwmain.exe = Frost
  adapter = $($(target))
- 
- $(adapter)_Adapter = Frost_Adapter 
- $(globalroot)\resources\$(adapter) = M:\VoodooShader\resources\Frost 
+
+ $(adapter)_Adapter = Frost_Adapter
+ $(globalroot)\resources\$(adapter) = M:\VoodooShader\resources\Frost
 </pre></div></dd></dl>
 <p>The variable used in adapter (and so, the value) change depending on the value of target.</p>
 <h2><a class="anchor" id="voodoo_vars_config"></a>
@@ -167,7 +167,7 @@ Environment Variables</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

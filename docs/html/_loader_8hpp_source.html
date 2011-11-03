@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.289</span>
+   &#160;<span id="projectnumber">0.4.1.293</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -72,38 +72,42 @@
 <a name="l00021"></a>00021 <span class="preprocessor"></span>
 <a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_loader___common_8hpp.html">Loader_Common.hpp</a>&quot;</span>
 <a name="l00023"></a>00023 
-<a name="l00027"></a><a class="code" href="_loader_8hpp.html#a8e33d7459d078ef97cb2ff1acb9455c6">00027</a> HINSTANCE <a class="code" href="_loader_8hpp.html#a8e33d7459d078ef97cb2ff1acb9455c6">gLoaderHandle</a>;
-<a name="l00028"></a>00028 
-<a name="l00029"></a><a class="code" href="_loader_8hpp.html#a8815837b5e2663e7f84e5f9d90a310fe">00029</a> <span class="keyword">typedef</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">VoodooShader::ICore</a> * (<a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> * <a class="code" href="_loader_8hpp.html#a8815837b5e2663e7f84e5f9d90a310fe">VoodooCreateFunc</a>)(<span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_init_params.html" title="Initialization parameters.">VoodooShader::InitParams</a> * <span class="keyword">const</span> pInitParams, _In_ <span class="keywordtype">bool</span> catchErrors);
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031 BOOL WINAPI <a class="code" href="_loader_8cpp.html#aeda8f872ae7aec23e3fa4786f777f9fc">DllMain</a>(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033 <span class="keywordtype">bool</span> WINAPI <a class="code" href="_loader_8cpp.html#ac2ff825b8e3e89fdf39d097d5c2964e5" title="Locate and load the Voodoo core, verify the functions and initialize the framework.">LoadVoodoo</a>();
-<a name="l00034"></a>00034 <span class="keywordtype">bool</span> WINAPI <a class="code" href="_loader_8cpp.html#a80693a139857916c45412ca9a51044e8">UnloadVoodoo</a>(<span class="keywordtype">void</span>);
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 HMODULE WINAPI <a class="code" href="_common_8cpp.html#a08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * libname);
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038 <span class="comment">// Direct3D create functions</span>
-<a name="l00039"></a>00039 <span class="keywordtype">void</span> * WINAPI <a class="code" href="_loader_8hpp.html#af63277a6b328d35653a5b4326c963f06">VoodooD3DCreateGeneric</a>(UINT sdkVersion, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * lib, <span class="keyword">const</span> <span class="keywordtype">char</span> * func);
-<a name="l00040"></a>00040 <span class="keywordtype">void</span> * WINAPI <a class="code" href="_loader_8cpp.html#aada23666fff5f234d4418619f1952145" title="Direct3D 8.">Voodoo3DCreate8</a>(UINT sdkVersion);
-<a name="l00041"></a>00041 <span class="keywordtype">void</span> * WINAPI <a class="code" href="_loader_8cpp.html#a4fcf2b767d5945baa446fcc5fd588ab7" title="Direct3D 9.">Voodoo3DCreate9</a>(UINT sdkVersion);
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="comment">// DirectInput create functions</span>
-<a name="l00044"></a>00044 HRESULT WINAPI <a class="code" href="_loader_8cpp.html#a23bdc5a55ee9ef78807aecc66c2e9ce0" title="DirectInput 8.">VoodooInput8Create</a>(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID * ppvOut, LPVOID punkOuter);
-<a name="l00045"></a>00045 HRESULT WINAPI <a class="code" href="_loader_8cpp.html#af0ee8d4f7952e3944b128a74e7ea98ed" title="DirectInput (unknown version)">VoodooInputCreateGeneric</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter, <span class="keyword">const</span> <span class="keywordtype">char</span> * func);
-<a name="l00046"></a>00046 HRESULT WINAPI <a class="code" href="_loader_8cpp.html#a9d50d072f00e85187671de183e1975e1">VoodooInputCreateA</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
-<a name="l00047"></a>00047 HRESULT WINAPI <a class="code" href="_loader_8cpp.html#a686c309069e1f80edd5f694112e15bf1">VoodooInputCreateW</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
+<a name="l00028"></a><a class="code" href="group__voodoo__module__loader.html#ga8e33d7459d078ef97cb2ff1acb9455c6">00028</a> HINSTANCE <a class="code" href="group__voodoo__module__loader.html#ga8e33d7459d078ef97cb2ff1acb9455c6">gLoaderHandle</a>;
+<a name="l00029"></a>00029 
+<a name="l00030"></a><a class="code" href="group__voodoo__module__loader.html#ga8815837b5e2663e7f84e5f9d90a310fe">00030</a> <span class="keyword">typedef</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">VoodooShader::ICore</a> * (<a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> * <a class="code" href="group__voodoo__module__loader.html#ga8815837b5e2663e7f84e5f9d90a310fe">VoodooCreateFunc</a>)(<span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_init_params.html" title="Initialization parameters.">VoodooShader::InitParams</a> * <span class="keyword">const</span> pInitParams, _In_ <span class="keywordtype">bool</span> catchErrors);
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032 <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">VoodooShader::Version</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__loader.html#ga6e91003d4538bca758f1d233fc2111d8">API_ModuleVersion</a>(<span class="keywordtype">void</span>);
+<a name="l00033"></a>00033 <span class="keyword">const</span> uint32_t  <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__loader.html#ga1c1c7fa8e0849da76d3c77e9f37eed0d">API_ClassCount</a>(<span class="keywordtype">void</span>);
+<a name="l00034"></a>00034 <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__loader.html#gaaae017d08567b59bbab15a4769d6d2d2">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t index, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">VoodooShader::Uuid</a> * pUuid);
+<a name="l00035"></a>00035 <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">VoodooShader::IObject</a> *       <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t index, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">VoodooShader::ICore</a> * pCore);
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037 BOOL WINAPI <a class="code" href="group__voodoo__module__loader.html#gaeda8f872ae7aec23e3fa4786f777f9fc">DllMain</a>(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="keywordtype">bool</span> WINAPI <a class="code" href="group__voodoo__module__loader.html#gac2ff825b8e3e89fdf39d097d5c2964e5" title="Locate and load the Voodoo core, verify the functions and initialize the framework.">LoadVoodoo</a>();
+<a name="l00040"></a>00040 <span class="keywordtype">bool</span> WINAPI <a class="code" href="group__voodoo__module__loader.html#ga80693a139857916c45412ca9a51044e8">UnloadVoodoo</a>(<span class="keywordtype">void</span>);
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 HMODULE WINAPI <a class="code" href="group__voodoo__module__loader.html#ga08520fe9a81a3119394728e194e1419d" title="Load a module from the system directory (uses absolute path to guarantee proper file).">LoadSystemLibrary</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * libname);
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="comment">// Direct3D create functions</span>
+<a name="l00045"></a>00045 <span class="keywordtype">void</span> * WINAPI <a class="code" href="group__voodoo__module__loader.html#gaf63277a6b328d35653a5b4326c963f06">VoodooD3DCreateGeneric</a>(UINT sdkVersion, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * lib, <span class="keyword">const</span> <span class="keywordtype">char</span> * func);
+<a name="l00046"></a>00046 <span class="keywordtype">void</span> * WINAPI <a class="code" href="group__voodoo__module__loader.html#gaada23666fff5f234d4418619f1952145" title="Direct3D 8.">Voodoo3DCreate8</a>(UINT sdkVersion);
+<a name="l00047"></a>00047 <span class="keywordtype">void</span> * WINAPI <a class="code" href="group__voodoo__module__loader.html#ga4fcf2b767d5945baa446fcc5fd588ab7" title="Direct3D 9.">Voodoo3DCreate9</a>(UINT sdkVersion);
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="comment">// DirectSound create functions</span>
-<a name="l00050"></a>00050 HRESULT WINAPI <a class="code" href="_loader_8cpp.html#ac31854cf7cc541b43c0e6e4703bbc8fc" title="DirectSound 8.">VoodooSoundCreate8</a>(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter);
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="comment">/* @} */</span>
+<a name="l00049"></a>00049 <span class="comment">// DirectInput create functions</span>
+<a name="l00050"></a>00050 HRESULT WINAPI <a class="code" href="group__voodoo__module__loader.html#ga23bdc5a55ee9ef78807aecc66c2e9ce0" title="DirectInput 8.">VoodooInput8Create</a>(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID * ppvOut, LPVOID punkOuter);
+<a name="l00051"></a>00051 HRESULT WINAPI <a class="code" href="group__voodoo__module__loader.html#gaf0ee8d4f7952e3944b128a74e7ea98ed" title="DirectInput (unknown version)">VoodooInputCreateGeneric</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter, <span class="keyword">const</span> <span class="keywordtype">char</span> * func);
+<a name="l00052"></a>00052 HRESULT WINAPI <a class="code" href="group__voodoo__module__loader.html#ga9d50d072f00e85187671de183e1975e1">VoodooInputCreateA</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
+<a name="l00053"></a>00053 HRESULT WINAPI <a class="code" href="group__voodoo__module__loader.html#ga686c309069e1f80edd5f694112e15bf1">VoodooInputCreateW</a>(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 <span class="comment">// DirectSound create functions</span>
+<a name="l00056"></a>00056 HRESULT WINAPI <a class="code" href="group__voodoo__module__loader.html#gac31854cf7cc541b43c0e6e4703bbc8fc" title="DirectSound 8.">VoodooSoundCreate8</a>(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter);
+<a name="l00057"></a>00057 
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 02:04:08 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
