@@ -1,20 +1,20 @@
 /**
- * This file is part of the Voodoo Shader Framework. 
- * 
- * Copyright (c) 2010-2011 by Sean Sube 
- * 
- * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
- * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
- * License for more details. 
- * 
- * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
- * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
- * 
- * Support and more information may be found at 
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
  *   http://www.voodooshader.com
- * or by contacting the lead developer at 
+ * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
 #pragma once
@@ -42,12 +42,12 @@ namespace VoodooShader
         virtual String GetName() const throw() = 0;
 
         /**
-         * Retrieves the type of this parameter. This specifies what type and how many data components are used (one texture 
+         * Retrieves the type of this parameter. This specifies what type and how many data components are used (one texture
          * or 1-16 floats).
          */
         virtual ParameterType GetType(void) const throw() = 0;
 
-        /** 
+        /**
          * Checks if the parameter is virtual (belongs to the core only) or physical (from a shader).
          *
          * @return Virtual status.
@@ -55,14 +55,14 @@ namespace VoodooShader
         virtual bool IsVirtual(void) const throw() = 0;
 
         /**
-         * Attaches a second parameter to this one, forcing the other to update whenever this value is changed. 
-         * 
+         * Attaches a second parameter to this one, forcing the other to update whenever this value is changed.
+         *
          * @param pParam The parameter to bind to this one.
          * @return Success of the bind.
-         * 
-         * @warning This @e cannot be used to bind one effect's parameter to another. It can only be used to bind 
-         *     actual parameters to virtual parameters. 
-         *     
+         *
+         * @warning This @e cannot be used to bind one effect's parameter to another. It can only be used to bind
+         *     actual parameters to virtual parameters.
+         *
          */
         virtual bool AttachParameter(_In_opt_ IParameter * const pParam) throw() = 0;
 
@@ -76,9 +76,9 @@ namespace VoodooShader
 
         /**
          * Get the component count for this parameter.
-         * 
+         *
          * @return The number of components.
-         * 
+         *
          * @note This will have different meanings depending on parameter type:
          *     @li For a texture, this represents the number of dimensions (2 for texture2D).
          *     @li For a vector or matrix, this represents the raw number of components (2 for float2, 4 for float2x2, etc).
@@ -87,9 +87,9 @@ namespace VoodooShader
          */
         virtual const uint32_t GetComponents(void) const throw() = 0;
 
-        /** 
-         * Retrieves the texture source for this parameter. 
-         * 
+        /**
+         * Retrieves the texture source for this parameter.
+         *
          * @return The texture source, if this parameter has a texture.
          */
         virtual ITexture * GetTexture(void) const throw() = 0;
@@ -109,7 +109,7 @@ namespace VoodooShader
 
         /**
          * Retrieves the underlying Cg parameter object.
-         * 
+         *
          * @returns The Cg parameter this object is bound to.
          */
         virtual CGparameter GetCgParameter(void) const throw() = 0;

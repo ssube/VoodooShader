@@ -1,20 +1,20 @@
 /**
- * This file is part of the Voodoo Shader Framework. 
- * 
- * Copyright (c) 2010-2011 by Sean Sube 
- * 
- * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
- * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
- * License for more details. 
- * 
- * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
- * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
- * 
- * Support and more information may be found at 
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
  *   http://www.voodooshader.com
- * or by contacting the lead developer at 
+ * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
 #pragma once
@@ -44,41 +44,41 @@ namespace VoodooShader
         virtual ICore * GetCore(void) const throw() = 0;
 
         /**
-         * Opens a file for use by this logger. 
-         * 
-         * @param filename The name of the file to open (may contain an absolute or relative path). 
-         * @param append Flag specifying the open mode; if true, any existing log is truncated. 
+         * Opens a file for use by this logger.
+         *
+         * @param filename The name of the file to open (may contain an absolute or relative path).
+         * @param append Flag specifying the open mode; if true, any existing log is truncated.
          * @return Success of the open operation.
          */
         virtual bool Open(_In_ const String & filename, _In_ const bool append) throw() = 0;
-        
+
         /**
-         * Opens a file for use by this logger. 
-         * 
-         * @param pFile The file to open. 
-         * @param append Flag specifying the open mode; if true, any existing log is truncated. 
+         * Opens a file for use by this logger.
+         *
+         * @param pFile The file to open.
+         * @param append Flag specifying the open mode; if true, any existing log is truncated.
          * @return Success of the open operation.
          */
         virtual bool Open(_In_ IFile * const pFile, _In_ const bool append) throw() = 0;
 
         /**
-         * Closes the log file, if one is open. 
+         * Closes the log file, if one is open.
          */
         virtual void Close(void) throw() = 0;
 
         /**
-         * Immediately writes all pending data to disk. @note This is useful for catchable errors which may have fatal 
-         * consequences (Exception calls this in case the exception is uncaught). 
-         * 
-         * @warning This may not (probably will not) be any good in case of a segfault or other crash. If you need complete 
-         *     debug logging, call Logger::SetBufferSize(int32_t) with a buffer size of 0 and all logged messages @e should 
+         * Immediately writes all pending data to disk. @note This is useful for catchable errors which may have fatal
+         * consequences (Exception calls this in case the exception is uncaught).
+         *
+         * @warning This may not (probably will not) be any good in case of a segfault or other crash. If you need complete
+         *     debug logging, call Logger::SetBufferSize(int32_t) with a buffer size of 0 and all logged messages @e should
          *     make it to disk, even during fatal crashes.
          */
         virtual void Flush(void) throw() = 0;
 
         /**
-         * Set the default minimum message level. Messages below this level will not be logged. 
-         * 
+         * Set the default minimum message level. Messages below this level will not be logged.
+         *
          * @param level The minimum log level.
          */
         virtual void SetLogLevel(_In_ const LogLevel level) throw() = 0;
@@ -86,19 +86,19 @@ namespace VoodooShader
         virtual const LogLevel GetLogLevel(void) const throw() = 0;
 
         /**
-         * Writes a module stamp to the log. This records the name and version info for a select module (used to log what 
+         * Writes a module stamp to the log. This records the name and version info for a select module (used to log what
          * modules were present during a logging session).
-         * 
+         *
          * @param pModule The module version info to log.
          */
         virtual void LogModule(_In_ const Version * const pModule) throw() = 0;
 
         /**
-         * Log a message, may be formatted with printf syntax. 
-         * 
-         * @param level The level for this message. 
-         * @param module The logging module's name. 
-         * @param msg The message format string. 
+         * Log a message, may be formatted with printf syntax.
+         *
+         * @param level The level for this message.
+         * @param module The logging module's name.
+         * @param msg The message format string.
          * @param ... The parameters to insert.
          */
         virtual void Log

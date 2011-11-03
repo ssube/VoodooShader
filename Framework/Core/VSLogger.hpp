@@ -1,20 +1,20 @@
 /**
- * This file is part of the Voodoo Shader Framework. 
- * 
- * Copyright (c) 2010-2011 by Sean Sube 
- * 
- * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
- * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
- * License for more details. 
- * 
- * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
- * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
- * 
- * Support and more information may be found at 
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
  *   http://www.voodooshader.com
- * or by contacting the lead developer at 
+ * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
 #pragma once
@@ -40,7 +40,7 @@ namespace VoodooShader
         virtual bool CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
         virtual String ToString(void) const throw();
         virtual ICore * GetCore(void) const throw();
-        
+
         virtual bool Open(_In_ const String & filename, _In_ const bool append) throw();
         virtual bool Open(_In_ IFile * const pFile, _In_ const bool append) throw();
         virtual void Close(void);

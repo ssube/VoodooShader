@@ -1,20 +1,20 @@
 /**
- * This file is part of the Voodoo Shader Framework. 
- * 
- * Copyright (c) 2010-2011 by Sean Sube 
- * 
- * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
- * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
- * License for more details. 
- * 
- * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
- * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
- * 
- * Support and more information may be found at 
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
  *   http://www.voodooshader.com
- * or by contacting the lead developer at 
+ * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
 #pragma once
@@ -23,15 +23,15 @@
 
 namespace VoodooShader
 {
-    /** 
-     * @addtogroup VoodooUtility 
-     * @{ 
+    /**
+     * @addtogroup VoodooUtility
+     * @{
      */
 
     /**
-     * Voodoo internal string class, providing constant and compiler-safe string passing between various modules. 
-     * 
-     * @warning This @b must use the MSVC wchar_t type, or bad things will happen. <b>GCC does not properly handle 
+     * Voodoo internal string class, providing constant and compiler-safe string passing between various modules.
+     *
+     * @warning This @b must use the MSVC wchar_t type, or bad things will happen. <b>GCC does not properly handle
      *      Unicode strings and will not provide valid inputs for these functions.</b>
      */
     class VOODOO_API String
@@ -146,11 +146,11 @@ namespace VoodooShader
          * @li <code>{01234567-89ab-cdef-0123-456789abcdef}</code>
          * @li <code>01234567-89ab-cdef-0123-456789abcdef</code>
          * @li <code>0123456789abcdef0123456789abcdef</code>
-         * 
+         *
          * The first format is preferred, and matches the COM-standard 4/2/2/2/12 format, supported by most tools and
          * common interfaces. Wherever possible, UUIDs should be embedded in code using the appropriate Voodoo macros to
          * avoid string conversion costs.
-         * 
+         *
          * @param pUuid Pointer to the Uuid to be filled, if conversion succeeds. If conversion fails, this is not modified.
          * @return Success of conversion.
          */
@@ -220,9 +220,9 @@ namespace VoodooShader
 
         // Format
         static String FormatV(_In_z_ _Printf_format_string_ const wchar_t * fmt, _In_opt_ va_list args);
-        inline static String FormatV(_In_ _Printf_format_string_ const String & fmt, va_list args) 
-        { 
-            return String::FormatV(fmt.GetData(), args); 
+        inline static String FormatV(_In_ _Printf_format_string_ const String & fmt, va_list args)
+        {
+            return String::FormatV(fmt.GetData(), args);
         };
 
         inline static String Format(_In_z_ _Printf_format_string_ const wchar_t * fmt, ...)
@@ -243,22 +243,22 @@ namespace VoodooShader
             return str;
         };
 
-        inline String & AppendFormat(_In_z_ _Printf_format_string_ const wchar_t * fmt, ...) 
-        { 
-            va_list args; 
-            va_start(args, fmt); 
-            this->Append(String::FormatV(fmt, args)); 
-            va_end(args); 
-            return (*this); 
+        inline String & AppendFormat(_In_z_ _Printf_format_string_ const wchar_t * fmt, ...)
+        {
+            va_list args;
+            va_start(args, fmt);
+            this->Append(String::FormatV(fmt, args));
+            va_end(args);
+            return (*this);
         };
 
         inline String & AppendFormat(_In_ _Printf_format_string_ const String & fmt, ...)
-        { 
-            va_list args; 
-            va_start(args, fmt); 
-            this->Append(String::FormatV(fmt.GetData(), args)); 
+        {
+            va_list args;
+            va_start(args, fmt);
+            this->Append(String::FormatV(fmt.GetData(), args));
             va_end(args);
-            return (*this); 
+            return (*this);
         };
 
         // Buffer info/access

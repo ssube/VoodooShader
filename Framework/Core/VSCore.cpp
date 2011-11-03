@@ -1,20 +1,20 @@
 /**
- * This file is part of the Voodoo Shader Framework. 
- * 
- * Copyright (c) 2010-2011 by Sean Sube 
- * 
- * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
- * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
- * License for more details. 
- * 
- * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
- * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
- * 
- * Support and more information may be found at 
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
  *   http://www.voodooshader.com
- * or by contacting the lead developer at 
+ * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
 
@@ -432,7 +432,7 @@ namespace VoodooShader
 
             m_Logger->Log
             (
-                LL_Debug, VOODOO_CORE_NAME, 
+                LL_Debug, VOODOO_CORE_NAME,
                 L"Created parameter named %s with type %s, returning shared pointer to %p.", name.GetData(),
                 Converter::ToString(type), parameter
             );
@@ -498,7 +498,7 @@ namespace VoodooShader
 
         if (textureEntry != m_Textures.end())
         {
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got texture %s, returning shared pointer to %p.", 
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Got texture %s, returning shared pointer to %p.",
                 name.GetData(), textureEntry->second);
 
             return textureEntry->second.get();
@@ -575,7 +575,7 @@ namespace VoodooShader
         }
     }
 
-    void VSCore::CgErrorHandler(CGcontext context, int error) const 
+    void VSCore::CgErrorHandler(CGcontext context, int error) const
     {
         const char *errorString = error ? cgGetErrorString((CGerror) error) : nullptr;
 
@@ -600,7 +600,7 @@ namespace VoodooShader
             }
             else
             {
-                this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME, 
+                this->GetLogger()->Log(LL_Error, VOODOO_CG_NAME,
                     L"Invalid context for error, no further data available.");
             }
         }

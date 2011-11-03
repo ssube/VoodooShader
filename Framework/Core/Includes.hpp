@@ -1,20 +1,20 @@
 /**
- * This file is part of the Voodoo Shader Framework. 
- * 
- * Copyright (c) 2010-2011 by Sean Sube 
- * 
- * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
- * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
- * License for more details. 
- * 
- * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
- * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
- * 
- * Support and more information may be found at 
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
  *   http://www.voodooshader.com
- * or by contacting the lead developer at 
+ * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
 #pragma once
@@ -26,7 +26,7 @@
 #   error Voodoo requires a C++ compiler, preferably Microsoft Visual C++ v10.
 #endif
 
-#ifndef _WIN32 
+#ifndef _WIN32
 #   error Voodoo must be built for the Win32 platform.
 #endif
 
@@ -111,7 +111,7 @@
 
 #ifndef VOODOO_NO_PUGIXML
 #   include "pugixml.hpp"
-#endif   
+#endif
 
 namespace VoodooShader
 {
@@ -124,7 +124,7 @@ namespace VoodooShader
     typedef pugi::xml_document * XmlDocument;
 #else
     typedef void * XmlDocument;
-#endif 
+#endif
 
 #ifndef VOODOO_NO_BOOST
     typedef boost::uuids::uuid Uuid;
@@ -194,7 +194,7 @@ namespace VoodooShader
     DEFINE_UUID_INTR(IShader,       0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
     DEFINE_UUID_INTR(ITechnique,    0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
     DEFINE_UUID_INTR(ITexture,      0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-    
+
     /* Reference typedefs */
 #ifndef VOODOO_NO_BOOST
     // Boost intrusive_ptr functions
@@ -246,10 +246,10 @@ namespace VoodooShader
 #pragma warning(push)
 #pragma warning(disable: 4480)
     /**
-     * Texture formats for use by @ref VoodooShader::ITexture "Textures", describing the layout and size of the texture data. 
-     * These may not be implemented by the underlying graphics API exactly as they are indicated here, but the available 
-     * components and sizes are guaranteed to be equal to or greater than the indicated values. Further information on 
-     * texture formats and depth may be found on the @ref voodoo_textures_formats "texture formats chart".
+     * Texture formats for use by @ref VoodooShader::ITexture "Textures", describing the layout and size of the texture 
+     * data. These may not be implemented by the underlying graphics API exactly as they are indicated here, but the 
+     * available components and sizes are guaranteed to be equal to or greater than the indicated values. Further 
+     * information on texture formats and depth may be found on the @ref voodoo_textures_formats "texture formats chart".
      */
     enum TextureFormat : int32_t
     {
@@ -266,13 +266,11 @@ namespace VoodooShader
         TF_RGBA32F  = 0x202,    /* !< Full-precision RGBA (float/single). HDR format. */
         // Depth-buffer formats
         TF_D16      = 0x401,    /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
-        TF_D32      = 0x402,    /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
-        // Max
-        TF_Max      = 0x7FFFFFFF
+        TF_D32      = 0x402     /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
     };
 
     /**
-     * Parameter types valid for @ref VoodooShader::IParameter. These types are available across hardware, exposing most 
+     * Parameter types valid for @ref VoodooShader::IParameter. These types are available across hardware, exposing most
      * common shader language types.
      */
     enum ParameterType : int32_t
@@ -304,9 +302,7 @@ namespace VoodooShader
         PT_Sampler2D    = 0x102,    /* !< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info) */
         PT_Sampler3D    = 0x103,    /* !< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info) */
         // Structs
-        PT_Struct       = 0x1000,
-        // Max
-        PT_Max          = 0x7FFFFFFF
+        PT_Struct       = 0x1000
     };
 
     enum ParameterCategory : int32_t
@@ -314,8 +310,7 @@ namespace VoodooShader
         PC_Unknown      = 0x00,     /* !< Unknown parameter category */
         PC_Float        = 0x01,     /* !< float vector parameter (may have 1 to 4 components) */
         PC_Sampler      = 0x02,     /* !< Sampler parameter (may sample 1D to 3D textures) */
-        PC_Struct       = 0x04,
-        PC_Max          = 0x7FFFFFFF
+        PC_Struct       = 0x04
     };
 
     enum ProgramStage : int32_t
@@ -325,16 +320,14 @@ namespace VoodooShader
         PS_Fragment     = 0x02,     /* !< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
         PS_Geometry     = 0x03,     /* !< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
         PS_Domain       = 0x04,     /* !< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
-        PS_Hull         = 0x05,     /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info) */  
-        PS_Max          = 0x7FFFFFFF
+        PS_Hull         = 0x05      /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info) */
     };
 
     enum TextureStage : int32_t
     {
         TS_Unknown      = 0x00,     /* !< Unknown texture stage */
         TS_Shader       = 0x01,     /* !< Shader target texture */
-        TS_Pass         = 0x02,     /* !< Pass target texture */
-        TS_Max          = 0x7FFFFFFF
+        TS_Pass         = 0x02      /* !< Pass target texture */
     };
 
     enum FileOpenMode : int32_t
@@ -345,18 +338,17 @@ namespace VoodooShader
         FM_ReadWrite    = 0x03,
         FM_CreateOnly   = 0x10,
         FM_OpenOnly     = 0x20,
-        FM_AlwaysOpen   = 0x30,
-        FM_Max          = 0x7FFFFFFF
+        FM_AlwaysOpen   = 0x30
     };
 
     /**
-     * Log message levels. These are set up to quickly filter based on various flags using binary logic. 
-     * Flags are ORed together, with lower-priority flags having all higher-priority flags set. When 
+     * Log message levels. These are set up to quickly filter based on various flags using binary logic.
+     * Flags are ORed together, with lower-priority flags having all higher-priority flags set. When
      * checking a log call, the condition is:
-     * @code 
+     * @code
      * LogLevel maskedLevel = level & storedLevel;
-     * if ( (maskedLevel & LL_Origin) && (maskedLevel & LL_Severity) ) 
-     * { 
+     * if ( (maskedLevel & LL_Origin) && (maskedLevel & LL_Severity) )
+     * {
      *     // Log message
      * }
      * @endcode
@@ -393,19 +385,17 @@ namespace VoodooShader
         // Masks
         LL_Severity     = 0x0F,
         LL_Origin       = 0xF0,
-        LL_All          = 0xFF,
-        LL_Max          = 0x7FFFFFFF
+        LL_All          = 0xFF
     };
 
     enum LogFlags  : int32_t
-    { 
-        LF_Unknown      = 0x00, 
-        LF_Flush        = 0x01, 
-        LF_Max          = 0x7FFFFFFF 
+    {
+        LF_Unknown      = 0x00,
+        LF_Flush        = 0x01
     };
 
     /**
-     * String parsing flags. These modify the behavior of the string parser. 
+     * String parsing flags. These modify the behavior of the string parser.
      */
     enum ParseFlags : int32_t
     {
@@ -415,16 +405,14 @@ namespace VoodooShader
         PF_BackslashOnly= 0x0004,
         PF_Lowercase    = 0x0010,
         PF_Uppercase    = 0x0020,
-        PF_VarName      = 0x0100,
-        PF_Max          = 0x7FFFFFFF
+        PF_VarName      = 0x0100
     };
 
     enum VariableType  : int32_t
-    { 
-        VT_Normal       = 0x00, 
-        VT_State        = 0x01, 
-        VT_System       = 0x10, 
-        VT_Max          = 0x7FFFFFFF 
+    {
+        VT_Normal       = 0x00,
+        VT_State        = 0x01,
+        VT_System       = 0x10
     };
 #pragma warning(pop)
     /**
@@ -449,11 +437,11 @@ namespace VoodooShader
      */
     struct TextureDesc
     {
-        int32_t Width;
-        int32_t Height;
-        int32_t Depth;
-        bool Mipmaps;
-        bool RenderTarget;
+        int32_t       Width;
+        int32_t       Height;
+        int32_t       Depth;
+        bool          Mipmaps;
+        bool          RenderTarget;
         TextureFormat Format;
     };
 
@@ -475,11 +463,11 @@ namespace VoodooShader
     struct Version
     {
         const wchar_t * Name;
-        int32_t Major;
-        int32_t Minor;
-        int32_t Patch;
-        int32_t Rev;
-        bool Debug;
+        int32_t         Major;
+        int32_t         Minor;
+        int32_t         Patch;
+        int32_t         Rev;
+        bool            Debug;
     };
 
     struct float2
@@ -505,7 +493,7 @@ namespace VoodooShader
     struct VertexStruct
     {
         float3 Position;
-        float Winding;
+        float  Winding;
         float2 TexCoord;
     };
 
@@ -515,20 +503,20 @@ namespace VoodooShader
     struct LightStruct
     {
         int32_t Type;
-        float4 Diffuse;
-        float4 Specular;
-        float4 Ambient;
-        float3 Position;
-        float3 Direction;
-        float Range;
-        float Falloff;
-        float3 Attenuation;
-        float Theta;
-        float Phi;
+        float4  Diffuse;
+        float4  Specular;
+        float4  Ambient;
+        float3  Position;
+        float3  Direction;
+        float   Range;
+        float   Falloff;
+        float3  Attenuation;
+        float   Theta;
+        float   Phi;
     };
 
     /**
-     * Function pointer types for module interfaces. 
+     * Function pointer types for module interfaces.
      */
     namespace Functions
     {

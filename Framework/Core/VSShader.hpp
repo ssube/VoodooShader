@@ -1,20 +1,20 @@
 /**
- * This file is part of the Voodoo Shader Framework. 
- * 
- * Copyright (c) 2010-2011 by Sean Sube 
- * 
- * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser 
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
- * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
- * License for more details. 
- * 
- * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to 
- * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US 
- * 
- * Support and more information may be found at 
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
  *   http://www.voodooshader.com
- * or by contacting the lead developer at 
+ * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
 #pragma once
@@ -60,23 +60,23 @@ namespace VoodooShader
 
         /**
          * Link a particular effect-level parameter against various core elements (exact
-         * behavior depends on param type). 
-         * 
+         * behavior depends on param type).
+         *
          * @param pParam The parameter to link.
          */
         void LinkParameter(_In_ IParameter * pParam);
 
         /**
          * Links a particular effect-level sampler against a core texture. This generally
-         * should be called by IShader::LinkParameter(). 
-         * 
+         * should be called by IShader::LinkParameter().
+         *
          * @param pParam The sampler to link
          */
         void LinkSampler(_In_ IParameter * pParam);
 
         /**
          * Find texture information from a parameter and create a texture based on that
-         * data. Calls IShader::LinkSampler() after texture creation if appropriate. 
+         * data. Calls IShader::LinkSampler() after texture creation if appropriate.
          *
          * @param pParam The parameter to use.
          */
