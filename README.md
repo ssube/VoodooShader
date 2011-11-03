@@ -1,6 +1,6 @@
 
 ## Voodoo Shader Framework
-### version 0.4.1.288 - alpha
+### version 0.4.2.294 - alpha
 -----
 
 #### Contents:
@@ -9,30 +9,30 @@
 3. Adapters
 4. Running Voodoo
 5. Reporting Bugs
-6. Contact 
+6. Contact
 7. Legal
 
 
 ### 1. Summary
 
-The Voodoo Shader Framework is a comprehensive graphics framework for adding and extending shaders 
-during development or after release. Voodoo works with both Direct3D and OpenGL, in games and other 
+The Voodoo Shader Framework is a comprehensive graphics framework for adding and extending shaders
+during development or after release. Voodoo works with both Direct3D and OpenGL, in games and other
 applications.
 
 Voodoo uses a system of core modules and adapters to provide the widest compatibility and best
-performance possible across a wide range of applications and APIs. This core framework remains 
-constant between target applications and adapters, providing a unified set of features and single 
+performance possible across a wide range of applications and APIs. This core framework remains
+constant between target applications and adapters, providing a unified set of features and single
 target for shaders.
 
-Voodoo supports both OpenGL and DirectX, from OGL1.1 and D3D8 to OGL4.0 and D3D11. Shaders are 
-developed cross-API using nVidia's Cg language, while Voodoo provides a second processing step to 
+Voodoo supports both OpenGL and DirectX, from OGL1.1 and D3D8 to OGL4.0 and D3D11. Shaders are
+developed cross-API using nVidia's Cg language, while Voodoo provides a second processing step to
 provide shaders with easy access to other resources, especially textures.
 
 
 ### 2. Installation
 
 The Voodoo system function using a core-adapter model. The Voodoo core handles most functions, and
-program-specific adapters interface with each program in detail. 
+program-specific adapters interface with each program in detail.
 
 The Voodoo core comes in an install wizard to simplify installation. This wizard creates the
 registry keys Voodoo needs to function properly. To install the core, simply run this wizard and
@@ -45,10 +45,11 @@ After the Voodoo core is installed, you will need to install adapters for any ga
 Voodoo in. Various adapters are available for a number of Direct3D 8, 9 and OpenGL games.
 
 Adapters can be found included with Voodoo or on the Voodoo Shader Framework site at:
-    http://www.voodooshader.com
+
+* http://www.voodooshader.com
 
 Adapters may or may not use install wizards. Each adapter will have documentation on how to install
-and configure it. 
+and configure it.
 
 
 ### 4. Running Voodoo
@@ -56,7 +57,7 @@ and configure it.
 The precise behavior of Voodoo depends on the adapter and game it is being used with, but the most
 common behavior is described here.
 
-Voodoo will automatically hook into the game on launch, if it is properly installed. The Voodoo 
+Voodoo will automatically hook into the game on launch, if it is properly installed. The Voodoo
 runtime will create a comprehensive log file in the game directory. Voodoo uses an XML configuration
 file, contained in the game directory, and may use other resources in the game directory or Voodoo
 root directory.
@@ -69,15 +70,15 @@ results in some detail.
 
 ### 5. Reporting Bugs
 
-Voodoo is in an alpha testing stage. It undoubtedly has bugs. If you run into a bug, please go 
+Voodoo is in an alpha testing stage. It undoubtedly has bugs. If you run into a bug, please go
 to http://www.voodooshader.com and report the bug on the forum.
 
 A bug tracker for all Voodoo elements, including shaders and adapters, will be deployed soon.
 
 
-### 6. Contact 
+### 6. Contact
 
-For help and support (or questions and comments), please post on the Voodoo forum or stop by the 
+For help and support (or questions and comments), please post on the Voodoo forum or stop by the
 IRC channel:
 
 * http://www.voodooshader.com
@@ -87,7 +88,7 @@ IRC channel:
 To directly contact the developer, please send an email to:
 
 * peachykeen@voodooshader.com
-    
+
 Questions, comments, suggestions, reports, bugs, and almost anything else are welcome. If you have
 any interest in testing or contributing to Voodoo, please get in touch as soon as possible.
 
@@ -98,7 +99,7 @@ and as much information as you can. _Requests are very much welcome_.
 
 Voodoo Shader Framework (c) 2010-2011 by Sean "peachykeen" Sube, All Rights Reserved.
 
-The Voodoo Shader Framework, all associated binary or object files and source code is released 
+The Voodoo Shader Framework, all associated binary or object files and source code is released
 under the terms and conditions of the GNU General Public License. See the included LICENSE file for
 more details.
 

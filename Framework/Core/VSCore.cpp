@@ -49,7 +49,7 @@ namespace VoodooShader
         }
     }
 
-    ICore * CreateCore(_In_ const InitParams * const pInitParams, bool catchErrors)
+    ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, bool catchErrors)
     {
         ICore * pCore = nullptr;
 

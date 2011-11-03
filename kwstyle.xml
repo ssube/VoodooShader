@@ -3,7 +3,7 @@
 <ProjectLogo></ProjectLogo>
 <KWStyleLogo>KWSTYleLogo</KWStyleLogo>
 <Description>
-<LineLength>100</LineLength>
+<LineLength>125</LineLength>
 <DeclarationOrder>
   <public>0</public>
   <protected>1</protected>
@@ -28,26 +28,19 @@
   <middle> *</middle>
   <end> */</end>
   <emptyLineBeforeClass>true</emptyLineBeforeClass>
-    <checkMissingComments>true</checkMissingComments>
+  <checkMissingComments>true</checkMissingComments>
 </Comments>
 <Header>
   <location></location>
   <checkSpacesEndOfLine>true</checkSpacesEndOfLine>
   <cvsFormat>true</cvsFormat>
 </Header>
-<Indent>
- <type>SPACE</type>
- <size>4</size>
- <noHeader>true</noHeader>
- <allowBlockLine>true</allowBlockLine>
-</Indent>
 <Namespace>VoodooShader</Namespace>
-<NameOfClass>
-  <name>[NameOfClass]</name>
-    <prefix></prefix>
-</NameOfClass>
 <EmptyLines>2</EmptyLines>
-<Template>T</Template>
+    <StatementPerLine>
+        <maxNumber>1</maxNumber>
+        <checkInline>true</checkInline>
+    </StatementPerLine>
 <Operator>
   <spaceBefore>1</spaceBefore>
   <spaceAfter>1</spaceAfter>

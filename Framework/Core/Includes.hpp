@@ -207,6 +207,7 @@ namespace VoodooShader
     void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
 
     typedef boost::intrusive_ptr<IAdapter>       IAdapterRef;
+    typedef boost::intrusive_ptr<ICore>          ICoreRef;
     typedef boost::intrusive_ptr<IFile>          IFileRef;
     typedef boost::intrusive_ptr<IFileSystem>    IFileSystemRef;
     typedef boost::intrusive_ptr<IHookManager>   IHookManagerRef;
@@ -526,11 +527,23 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef const Version * (__stdcall * VersionFunc)();
-        typedef const uint32_t (__stdcall * CountFunc)();
-        typedef const wchar_t * (__stdcall * InfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
-        typedef IObject * (__stdcall * CreateFunc)(_In_ const uint32_t, _In_ ICore *);
+        typedef const Version * (VOODOO_CALL * VersionFunc)();
+        typedef const uint32_t (VOODOO_CALL * CountFunc)();
+        typedef const wchar_t * (VOODOO_CALL * InfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
+        typedef IObject * (VOODOO_CALL * CreateFunc)(_In_ const uint32_t, _In_ ICore *);
     }
+
+    /**
+     * Creates a new core. This function is exported and meant for use by the loader.
+     *
+     * @param pInitParams Setup parameters for this core.
+     * @param catchErrors If true, all exceptions thrown by the core ctor are caught within the function. Otherwise, they
+     *      are returned.
+     * @return A new ICore object.
+     *
+     * @throws std::exception in case of errors, if catchErrors is false.
+     */
+    _Check_return_ ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
 
     /**
      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, particularly function,

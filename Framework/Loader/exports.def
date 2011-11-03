@@ -9,3 +9,6 @@ DirectInputCreateW = VoodooInputCreateW
 DirectSoundCreate8 = VoodooSoundCreate8
 
 ModuleVersion=API_ModuleVersion
+ClassCount=API_ClassCount
+ClassInfo=API_ClassInfo
+ClassCreate=API_ClassCreate
