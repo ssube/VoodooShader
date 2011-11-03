@@ -26,6 +26,8 @@
  * @{
  * Loader defs
  */
+/* Voodoo/Loader: c1516961-0652-11e1-b22e-005056c00008 */
+#define VOODOO_LOADER_LIBID         {0x61, 0x69, 0x51, 0xC1, 0x52, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
 #define VOODOO_LOADER_NAME          L"Voodoo/Loader"
 #define VOODOO_LOADER_PRETTYNAME    L"Voodoo Dynamic Loader"
 #define VOODOO_LOADER_VERSION_MAJOR 0

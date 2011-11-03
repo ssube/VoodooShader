@@ -77,7 +77,7 @@ namespace VoodooShader
 
         virtual const Version * ModuleVersion(void) const throw();
         virtual const uint32_t ClassCount(void) const;
-        virtual const Uuid * ClassInfo(_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName) const;
+        virtual const wchar_t * ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) const;
         virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore);
 
     private:

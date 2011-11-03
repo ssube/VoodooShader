@@ -25,6 +25,7 @@
  * @addtogroup voodoo_module_xmllogger
  * @{
  */
+#define VOODOO_LOGGER_LIBID         {0xCC, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
 #define VOODOO_LOGGER_NAME          L"Voodoo/XmlLogger"
 #define VOODOO_LOGGER_PRETTYNAME    L"Voodoo Xml Logger"
 #define VOODOO_LOGGER_VERSION_MAJOR 0

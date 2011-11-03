@@ -183,16 +183,13 @@ namespace VoodooShader
 
         for (int curClass = 0; curClass < classCount; ++curClass)
         {
-            const wchar_t * name = nullptr;
-            const Uuid * clsid = module->ClassInfo(curClass, &name);
+            Uuid clsid;
+            const wchar_t * name = module->ClassInfo(curClass, &clsid);
 
-            if (clsid)
+            if (name)
             {
-                m_Classes[*clsid] = ClassID(module, curClass);
-                if (name)
-                {
-                    m_ClassNames.insert(std::pair<String, Uuid>(name, *clsid));
-                }
+                m_Classes.insert(std::pair<Uuid, ClassID>(clsid, ClassID(module, curClass)));
+                m_ClassNames.insert(std::pair<String, Uuid>(name, clsid));
             }
         }
 
@@ -406,9 +403,9 @@ namespace VoodooShader
         return m_ClassCount();
     }
 
-    const Uuid * VSModule::ClassInfo(_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName) const
+    const wchar_t * VSModule::ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) const
     {
-        return m_ClassInfo(number, ppName);
+        return m_ClassInfo(number, pUuid);
     }
 
     IObject * VSModule::CreateClass(_In_ const uint32_t number, _In_ ICore * const pCore)

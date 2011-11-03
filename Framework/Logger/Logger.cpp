@@ -23,6 +23,8 @@
 #include <sstream>
 #include <iomanip>
 
+#include <boost/uuid/uuid_io.hpp>
+
 #include "Logger.hpp"
 
 #include "Logger_Version.hpp"
@@ -38,8 +40,8 @@ namespace VoodooShader
     namespace XmlLogger
     {
         static const Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
-        const wchar_t * XmlLoggerName = L"VSXmlLogger";
-        static const Uuid clsid_vsa = CLSID_VSXmlLogger;
+        const wchar_t * name_VSXmlLogger = L"VSXmlLogger";
+        static const Uuid clsid_VSXmlLogger = CLSID_VSXmlLogger;
 
         const Version * VOODOO_CALL API_ModuleVersion(void)
         {
@@ -51,18 +53,20 @@ namespace VoodooShader
             return 1;
         }
 
-        const Uuid * VOODOO_CALL API_ClassInfo (_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName)
+        const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
         {
-            if (number == 0)
+            if (!pUuid)
             {
-                if (ppName) *ppName = XmlLoggerName;
-                return &CLSID_VSXmlLogger;
-            }
-            else
-            {
-                if (ppName) *ppName = nullptr;
                 return nullptr;
             }
+
+            if (index == 0)
+            {
+                *pUuid = clsid_VSXmlLogger;
+                return name_VSXmlLogger;
+            }
+
+            return nullptr;
         }
 
         IObject * VOODOO_CALL API_ClassCreate (_In_ const uint32_t number, _In_ ICore * pCore)
@@ -136,7 +140,7 @@ namespace VoodooShader
 
         String VSXmlLogger::ToString(void) const
         {
-            return XmlLoggerName;
+            return name_VSXmlLogger;
         }
 
         ICore * VSXmlLogger::GetCore(void) const
@@ -224,7 +228,8 @@ namespace VoodooShader
             wstringstream logMsg;
 
             logMsg <<
-                "    <Module name=\"" << pVersion->Name << "\" " <<
+                "    <Module uuid=\"" << pVersion->LibID << "\" " <<
+                " name=\"" << pVersion->Name << "\" " <<
                 " major=\"" << pVersion->Major << "\" " <<
                 " minor=\"" << pVersion->Minor << "\" " <<
                 " patch=\"" << pVersion->Patch << "\" " <<

@@ -49,24 +49,28 @@ namespace VoodooShader
         return 4;
     }
 
-    const Uuid * VOODOO_CALL API_ClassInfo(_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName)
+    const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid)
     {
+        if (!pUuid)
+        {
+            return nullptr;
+        }
+
         switch (number)
         {
         case 0:
-            if (ppName) *ppName = name_VSAdapter;
-            return &clsid_VSAdapter;
+            *pUuid = clsid_VSAdapter;
+            return name_VSAdapter;
         case 1:
-            if (ppName) *ppName = name_VSFileSystem;
-            return &clsid_VSFileSystem;
+            *pUuid = clsid_VSFileSystem;
+            return name_VSFileSystem;
         case 2:
-            if (ppName) *ppName = name_VSHookManager;
-            return &clsid_VSHookManager;
+            *pUuid = clsid_VSHookManager;
+            return name_VSHookManager;
         case 3:
-            if (ppName) *ppName = name_VSLogger;
-            return &clsid_VSLogger;
+            *pUuid = clsid_VSLogger;
+            return name_VSLogger;
         default:
-            if (ppName) *ppName = nullptr;
             return nullptr;
         }
     }

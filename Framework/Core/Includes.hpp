@@ -180,6 +180,8 @@ namespace VoodooShader
     DEFINE_UUID(IID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)
 #define DEFINE_UUID_IMPL(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \
     DEFINE_UUID(CLSID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)
+#define DEFINE_UUID_LIB(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \
+    DEFINE_UUID(LIBID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)
 
     DEFINE_UUID_INTR(IObject,       0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
     DEFINE_UUID_INTR(IAdapter,      0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
@@ -466,6 +468,7 @@ namespace VoodooShader
     struct Version
     {
         const wchar_t * Name;
+        Uuid            LibID;
         int32_t         Major;
         int32_t         Minor;
         int32_t         Patch;
@@ -525,7 +528,7 @@ namespace VoodooShader
     {
         typedef const Version * (__stdcall * VersionFunc)();
         typedef const uint32_t (__stdcall * CountFunc)();
-        typedef const Uuid * (__stdcall * InfoFunc)(_In_ const uint32_t, _Deref_out_opt_ const wchar_t **);
+        typedef const wchar_t * (__stdcall * InfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
         typedef IObject * (__stdcall * CreateFunc)(_In_ const uint32_t, _In_ ICore *);
     }
 

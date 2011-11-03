@@ -150,7 +150,7 @@ namespace VoodooShader
         /** Get the class count from this module. */
         virtual const uint32_t ClassCount(void) const = 0;
 
-        virtual const Uuid * ClassInfo(_In_ const uint32_t number, _Deref_out_ const wchar_t ** name) const = 0;
+        virtual const wchar_t * ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) const = 0;
 
         virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore) = 0;
     };

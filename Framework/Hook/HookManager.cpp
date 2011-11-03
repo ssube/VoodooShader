@@ -42,15 +42,19 @@ namespace VoodooShader
             return 1;
         }
 
-        const Uuid * VOODOO_CALL API_ClassInfo (_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName)
+        const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
         {
-            if (number == 0)
+            if (!pUuid)
             {
-                if (ppName) *ppName = name_VSEHHookManager;
-                return &clsid_VSEHHookManager;
+                return nullptr;
             }
 
-            if (ppName) *ppName = nullptr;
+            if (index == 0)
+            {
+                *pUuid = clsid_VSEHHookManager;
+                return name_VSEHHookManager;
+            }
+
             return nullptr;
         }
 

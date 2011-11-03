@@ -67,9 +67,10 @@
 /**
  * Creates a Version structure with data for the given module.
  */
-#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }
+#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_##token##_LIBID, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }
 
 // Global defs
+#define VOODOO_GLOBAL_LIBID             {0xCA, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
 #define VOODOO_GLOBAL_NAME              L"Voodoo/Framework"
 #define VOODOO_GLOBAL_PRETTYNAME        L"Voodoo Shader Framework"
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
@@ -83,6 +84,7 @@
     L"Please see the included license file for more details."
 
 // Core defs
+#define VOODOO_CORE_LIBID               {0xCB, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
 #define VOODOO_CORE_NAME                L"Voodoo/Core"
 #define VOODOO_CORE_PRETTYNAME          L"Voodoo Shader Framework Core"
 #define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR
@@ -91,6 +93,7 @@
 #define VOODOO_CORE_VERSION_REV         VOODOO_GLOBAL_VERSION_REV
 
 // External defs Cg
+#define VOODOO_CG_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 #define VOODOO_CG_NAME                  L"Cg"
 #define VOODOO_CG_PRETTYNAME            L"nVidia Cg Toolkit (July 2010)"
 #define VOODOO_CG_VERSION_MAJOR         3
@@ -99,6 +102,7 @@
 #define VOODOO_CG_VERSION_REV           7
 
 // VC
+#define VOODOO_VC_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 #define VOODOO_VC_NAME                  L"MSVC"
 #define VOODOO_VC_PRETTYNAME            L"Microsoft Visual C++"
 #define VOODOO_VC_VERSION_MAJOR         _MSC_VER

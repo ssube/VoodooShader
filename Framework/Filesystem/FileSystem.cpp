@@ -49,21 +49,25 @@ namespace VoodooShader
             return 1;
         }
 
-        const Uuid * VOODOO_CALL API_ClassInfo (_In_ const uint32_t number, _Deref_out_opt_ const wchar_t ** ppName)
+        const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
         {
-            if (number == 0)
+            if (!pUuid)
             {
-                if (ppName) *ppName = name_VSWFileSystem;
-                return &clsid_VSWFileSystem;
+                return nullptr;
             }
 
-            if (ppName) *ppName = nullptr;
+            if (index == 0)
+            {
+                *pUuid = clsid_VSWFileSystem;
+                return name_VSWFileSystem;
+            }
+
             return nullptr;
         }
 
-        IObject * VOODOO_CALL API_ClassCreate(const uint32_t number, _In_ ICore * pCore)
+        IObject * VOODOO_CALL API_ClassCreate(const uint32_t index, _In_ ICore * pCore)
         {
-            if (number == 0)
+            if (index == 0)
             {
                 return new VSWFileSystem(pCore);
             }

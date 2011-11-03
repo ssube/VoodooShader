@@ -40,6 +40,6 @@ namespace VoodooShader
     /* Plugin exports. */
     const Version * VOODOO_CALL API_ModuleVersion(void);
     const uint32_t  VOODOO_CALL API_ClassCount(void);
-    const Uuid *    VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Deref_out_opt_ const wchar_t ** ppName);
+    const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
     IObject *       VOODOO_CALL API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
 }
