@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -62,7 +62,8 @@
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">VoodooShader Namespace Reference</div>  </div>
 </div>
@@ -148,10 +149,9 @@ Classes</h2></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef pugi::xml_document *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ac43f3a1ca019a9434e20660e4a15a05e">XmlDocument</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef boost::uuids::uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
 &lt; <a class="el" href="class_voodoo_shader_1_1_i_adapter.html">IAdapter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaa1322e129d6c3e184517c9e91731c43">IAdapterRef</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
-&lt; <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3819644288a0d5cd83352580db3c8ac9">ICoreRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
 &lt; <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#abac24ed68ea822811fc10e184680ca01">IFileRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
@@ -206,8 +206,9 @@ Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, <br class="typebreak"/>
 <a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a097b2176ce897e369195b5f5fb1572c0">ModuleMap</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; <a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a>, <br class="typebreak"/>
-uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ac15506b1816058a926ded6afa58ca105">ClassID</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, <a class="el" href="namespace_voodoo_shader.html#ac15506b1816058a926ded6afa58ca105">ClassID</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a5960c39b9bbcbf6bc1ec0f56ca702caa">ClassMap</a></td></tr>
+int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a191fb6d4faa3937aa2593b02ccf75a5b">ClassID</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>, <a class="el" href="namespace_voodoo_shader.html#a191fb6d4faa3937aa2593b02ccf75a5b">ClassID</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a4e64b441776953bc703310c8ad956c67">ClassMap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#abac1b9a62a9994da3415dc0e7f8f44de">ClassNameMap</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a>, <br class="typebreak"/>
 <a class="el" href="namespace_voodoo_shader.html#a58e3dd0a9a412da7d0f938a0782cdebd">IShaderRef</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a245635b57ed38aab9c5f2bfdf02e9c13">MaterialMap</a></td></tr>
 <tr><td colspan="2"><h2><a name="enum-members"></a>
@@ -452,15 +453,51 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a9b6d245084c35bece67dd6cb93ed474b">API_ModuleVersion</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const uint32_t VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a262d76aa3e91afa876c8f64add584c6b">API_ClassCount</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const char *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ac6fda5f2f39c2efea23c8b110b8c75c8">API_ClassInfo</a> (_In_ const uint32_t number)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ad57a6ef06ec46926589f855f72c9d3cc">API_ClassInfo</a> (_In_ const uint32_t number, _Deref_out_opt_ const wchar_t **ppName)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ae0d10338924495c89d6645dc877b6629">API_ClassCreate</a> (_In_ const uint32_t number, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *core)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">intrusive_ptr_add_ref</a> (<a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">intrusive_ptr_release</a> (<a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">_Check_return_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aad7636a55d1a88592e3e2d7ce42ec803">CreateCore</a> (_In_ const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const pInitParams, _In_ bool catchErrors=true)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new core.  <a href="#aad7636a55d1a88592e3e2d7ce42ec803"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>, 0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a7b6e94074965391f627e0125fd6f9ab8">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_adapter.html">IAdapter</a>, 0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a8afcfc6157139a67c31a4f32695159fc">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>, 0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a7985028a37b6cf2d17cece954aa07a5e">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a>, 0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a25880f2e106e4e6b19aa6da7dfc0c729">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a>, 0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a6c3d5ea2acfe0ce6fbf4dc6aeeea91b2">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html">IHookManager</a>, 0x8c, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a686145aaae4de43c452a0c46bc8c3c2c">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_image.html">IImage</a>, 0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaf56542b6f01e4af26c609793fb393ca">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_logger.html">ILogger</a>, 0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a500417991191716ceca4eade687b83be">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a>, 0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a8f190a295bf6e0907620623d0a658c71">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_module_manager.html">IModuleManager</a>, 0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#abf6fb04e9891f0645ff6539ab38241ea">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a>, 0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a8c61f9772e753da54d566b5ab08935e9">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_parser.html">IParser</a>, 0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a12216f09c584bcabb8e30cefed3cbbea">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a>, 0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a296bed5ecfc5488045a8ab805547d76c">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_shader.html">IShader</a>, 0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#adfc688eecd8000df3bdc6fb1d5b4c9e1">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a>, 0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab70b39323392a29293023c2293a7e07f">DEFINE_UUID_INTR</a> (<a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a>, 0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a98acb92430d896a47c93cd16bdc8b3f8">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html">VSAdapter</a>, 0x9A, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a9f19e9c590049efbbed929e8ffc43856">Voodoo_CgErrorHandler_Func</a> (_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void *pCore)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-member function provided to Cg as an error handling callback.  <a href="#a9f19e9c590049efbbed929e8ffc43856"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a0eb5af00e7b6f3321f76ceb71fb76043">CreateCore</a> (_In_ const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const pInitParams, bool catchErrors)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab79424cbf3c95b4a8be638aa6468cc8d">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_core.html">VSCore</a>, 0x9B, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab76f45a83880c7e031446b18e4987f49">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html">VSFileSystem</a>, 0x9C, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ad7cedafae65ecdee71753360656c1acf">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html">VSHookManager</a>, 0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a1dea1b3692f87c44631c55d274149412">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_logger.html">VSLogger</a>, 0x9E, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#acc15bd23715d2014958e4324425a151f">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html">VSModuleManager</a>, 0xA0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a4143781a7ca8238a4f31495f4458ec9d">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_module.html">VSModule</a>, 0x9F, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ac9062508f9d23aeeade9f5fb1ce1f6bf">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html">VSParameter</a>, 0xA1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a0b6e0c860439a0ebce1d331729be1767">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_parser.html">VSParser</a>, 0xA2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a70f9c2882d4e5e28aaca62e080ef4e15">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_pass.html">VSPass</a>, 0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a2d4c131616aab5bb1e323f077d836764">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_shader.html">VSShader</a>, 0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a037c90f8219ce57760196e607a159840">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_technique.html">VSTechnique</a>, 0xA5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ab4bae607fe771e092d6a4629df23c5b3">DEFINE_UUID_IMPL</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_texture.html">VSTexture</a>, 0xA6, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">coreVersion</a> = VOODOO_META_VERSION_STRUCT(CORE)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a26a05864d4ca4f7e1d57b1adf84d2be0">clsid_vsa</a> = CLSID_VSAdapter</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a58dd774dc74ac75b2fe559b1088127a6">clsid_vsf</a> = CLSID_VSFileSystem</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a74efacb132f2bccd92616d765392c644">clsid_vsh</a> = CLSID_VSHookManager</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a247598116fc8c6061aba70580652d74e">clsid_vsl</a> = CLSID_VSLogger</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This file is part of the Voodoo Shader Framework. </p>
@@ -469,33 +506,48 @@ Functions</h2></td></tr>
 <p>You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US</p>
 <p>Support and more information may be found at <a href="http://www.voodooshader.com">http://www.voodooshader.com</a> or by contacting the lead developer at <a href="mailto:peachykeen@voodooshader.com">peachykeen@voodooshader.com</a> </p>
 </div><hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="ac15506b1816058a926ded6afa58ca105"></a><!-- doxytag: member="VoodooShader::ClassID" ref="ac15506b1816058a926ded6afa58ca105" args="" -->
+<a class="anchor" id="a191fb6d4faa3937aa2593b02ccf75a5b"></a><!-- doxytag: member="VoodooShader::ClassID" ref="a191fb6d4faa3937aa2593b02ccf75a5b" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::pair&lt;<a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a>, uint32_t&gt; <a class="el" href="namespace_voodoo_shader.html#ac15506b1816058a926ded6afa58ca105">VoodooShader::ClassID</a></td>
+          <td class="memname">typedef std::pair&lt;<a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a>, int32_t&gt; <a class="el" href="namespace_voodoo_shader.html#a191fb6d4faa3937aa2593b02ccf75a5b">VoodooShader::ClassID</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00203">203</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00240">240</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a5960c39b9bbcbf6bc1ec0f56ca702caa"></a><!-- doxytag: member="VoodooShader::ClassMap" ref="a5960c39b9bbcbf6bc1ec0f56ca702caa" args="" -->
+<a class="anchor" id="a4e64b441776953bc703310c8ad956c67"></a><!-- doxytag: member="VoodooShader::ClassMap" ref="a4e64b441776953bc703310c8ad956c67" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, <a class="el" href="namespace_voodoo_shader.html#ac15506b1816058a926ded6afa58ca105">ClassID</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a5960c39b9bbcbf6bc1ec0f56ca702caa">VoodooShader::ClassMap</a></td>
+          <td class="memname">typedef std::map&lt;<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>, <a class="el" href="namespace_voodoo_shader.html#a191fb6d4faa3937aa2593b02ccf75a5b">ClassID</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a4e64b441776953bc703310c8ad956c67">VoodooShader::ClassMap</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00204">204</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00241">241</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abac1b9a62a9994da3415dc0e7f8f44de"></a><!-- doxytag: member="VoodooShader::ClassNameMap" ref="abac1b9a62a9994da3415dc0e7f8f44de" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::map&lt;<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&gt; <a class="el" href="namespace_voodoo_shader.html#abac1b9a62a9994da3415dc0e7f8f44de">VoodooShader::ClassNameMap</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00242">242</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -510,7 +562,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00186">186</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00223">223</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -525,22 +577,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00166">166</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3819644288a0d5cd83352580db3c8ac9"></a><!-- doxytag: member="VoodooShader::ICoreRef" ref="a3819644288a0d5cd83352580db3c8ac9" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef boost::intrusive_ptr&lt;<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a3819644288a0d5cd83352580db3c8ac9">VoodooShader::ICoreRef</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00167">167</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00204">204</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -555,7 +592,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00168">168</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00205">205</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -570,7 +607,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00169">169</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00206">206</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -585,7 +622,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00170">170</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00207">207</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -600,7 +637,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00171">171</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00208">208</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -615,7 +652,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00172">172</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00209">209</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -630,7 +667,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00174">174</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00211">211</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -645,7 +682,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00173">173</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00210">210</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -660,7 +697,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00175">175</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00212">212</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -675,7 +712,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00176">176</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00213">213</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -690,7 +727,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00177">177</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00214">214</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -705,7 +742,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00178">178</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00215">215</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -720,7 +757,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00179">179</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00216">216</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -735,7 +772,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00180">180</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00217">217</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -750,7 +787,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00181">181</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00218">218</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -765,7 +802,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00205">205</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00243">243</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -780,7 +817,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00202">202</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00239">239</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -795,7 +832,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00197">197</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00234">234</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -810,7 +847,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00196">196</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00233">233</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -825,7 +862,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00198">198</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00235">235</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -840,7 +877,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00194">194</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00231">231</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -855,7 +892,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00193">193</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00230">230</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -870,7 +907,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00195">195</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00232">232</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -885,7 +922,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00188">188</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00225">225</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -900,7 +937,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00187">187</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00224">224</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -915,7 +952,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00189">189</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00226">226</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -930,7 +967,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00191">191</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00228">228</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -945,7 +982,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00190">190</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00227">227</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -960,7 +997,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00192">192</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00229">229</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -975,7 +1012,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00200">200</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00237">237</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -990,7 +1027,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00199">199</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00236">236</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1005,7 +1042,22 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00201">201</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00238">238</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab57c2748ff90ac8bfd490f12ccc43cc5"></a><!-- doxytag: member="VoodooShader::Uuid" ref="ab57c2748ff90ac8bfd490f12ccc43cc5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef boost::uuids::uuid <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">VoodooShader::Uuid</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00130">130</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1020,7 +1072,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00114">114</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00121">121</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1056,7 +1108,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00302">302</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00340">340</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1081,7 +1133,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00362">362</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00400">400</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1168,7 +1220,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00326">326</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00364">364</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1197,7 +1249,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00274">274</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00312">312</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1271,7 +1323,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00240">240</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00278">278</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1309,7 +1361,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00372">372</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00410">410</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1342,7 +1394,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00283">283</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00321">321</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1386,7 +1438,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00216">216</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00254">254</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1413,7 +1465,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00294">294</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00332">332</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1440,7 +1492,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00384">384</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00422">422</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1460,7 +1512,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00039">39</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00043">43</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
@@ -1489,26 +1541,36 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00061">61</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00070">70</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac6fda5f2f39c2efea23c8b110b8c75c8"></a><!-- doxytag: member="VoodooShader::API_ClassInfo" ref="ac6fda5f2f39c2efea23c8b110b8c75c8" args="(_In_ const uint32_t number)" -->
+<a class="anchor" id="ad57a6ef06ec46926589f855f72c9d3cc"></a><!-- doxytag: member="VoodooShader::API_ClassInfo" ref="ad57a6ef06ec46926589f855f72c9d3cc" args="(_In_ const uint32_t number, _Deref_out_opt_ const wchar_t **ppName)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char *VOODOO_CALL VoodooShader::API_ClassInfo </td>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *VOODOO_CALL VoodooShader::API_ClassInfo </td>
           <td>(</td>
           <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>number</em></td><td>)</td>
+          <td class="paramname"><em>number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">_Deref_out_opt_ const wchar_t **&#160;</td>
+          <td class="paramname"><em>ppName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00044">44</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00048">48</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
@@ -1527,7 +1589,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00032">32</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00038">38</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
@@ -1604,6 +1666,3399 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac9062508f9d23aeeade9f5fb1ce1f6bf"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="ac9062508f9d23aeeade9f5fb1ce1f6bf" args="(VSParameter, 0xA1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSParameter&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xA1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0b6e0c860439a0ebce1d331729be1767"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="a0b6e0c860439a0ebce1d331729be1767" args="(VSParser, 0xA2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSParser&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xA2&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a70f9c2882d4e5e28aaca62e080ef4e15"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="a70f9c2882d4e5e28aaca62e080ef4e15" args="(VSPass, 0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSPass&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xA3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2d4c131616aab5bb1e323f077d836764"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="a2d4c131616aab5bb1e323f077d836764" args="(VSShader, 0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSShader&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xA4&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a037c90f8219ce57760196e607a159840"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="a037c90f8219ce57760196e607a159840" args="(VSTechnique, 0xA5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSTechnique&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xA5&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab4bae607fe771e092d6a4629df23c5b3"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="ab4bae607fe771e092d6a4629df23c5b3" args="(VSTexture, 0xA6, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSTexture&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xA6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab79424cbf3c95b4a8be638aa6468cc8d"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="ab79424cbf3c95b4a8be638aa6468cc8d" args="(VSCore, 0x9B, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSCore&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9B&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acc15bd23715d2014958e4324425a151f"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="acc15bd23715d2014958e4324425a151f" args="(VSModuleManager, 0xA0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSModuleManager&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xA0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad7cedafae65ecdee71753360656c1acf"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="ad7cedafae65ecdee71753360656c1acf" args="(VSHookManager, 0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSHookManager&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9D&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a98acb92430d896a47c93cd16bdc8b3f8"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="a98acb92430d896a47c93cd16bdc8b3f8" args="(VSAdapter, 0x9A, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSAdapter&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9A&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab76f45a83880c7e031446b18e4987f49"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="ab76f45a83880c7e031446b18e4987f49" args="(VSFileSystem, 0x9C, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSFileSystem&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9C&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1dea1b3692f87c44631c55d274149412"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="a1dea1b3692f87c44631c55d274149412" args="(VSLogger, 0x9E, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSLogger&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4143781a7ca8238a4f31495f4458ec9d"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_IMPL" ref="a4143781a7ca8238a4f31495f4458ec9d" args="(VSModule, 0x9F, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_IMPL </td>
+          <td>(</td>
+          <td class="paramtype">VSModule&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9F&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a88749d6a457b1895e0bb967fe48e305c"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a88749d6a457b1895e0bb967fe48e305c" args="(IObject, 0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IObject&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x87&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7b6e94074965391f627e0125fd6f9ab8"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a7b6e94074965391f627e0125fd6f9ab8" args="(IAdapter, 0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IAdapter&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x88&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8afcfc6157139a67c31a4f32695159fc"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a8afcfc6157139a67c31a4f32695159fc" args="(ICore, 0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">ICore&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x89&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7985028a37b6cf2d17cece954aa07a5e"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a7985028a37b6cf2d17cece954aa07a5e" args="(IFile, 0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IFile&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x8a&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a25880f2e106e4e6b19aa6da7dfc0c729"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a25880f2e106e4e6b19aa6da7dfc0c729" args="(IFileSystem, 0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IFileSystem&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x8b&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6c3d5ea2acfe0ce6fbf4dc6aeeea91b2"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a6c3d5ea2acfe0ce6fbf4dc6aeeea91b2" args="(IHookManager, 0x8c, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IHookManager&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x8c&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a686145aaae4de43c452a0c46bc8c3c2c"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a686145aaae4de43c452a0c46bc8c3c2c" args="(IImage, 0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IImage&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x8d&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaf56542b6f01e4af26c609793fb393ca"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="aaf56542b6f01e4af26c609793fb393ca" args="(ILogger, 0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">ILogger&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x8e&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a500417991191716ceca4eade687b83be"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a500417991191716ceca4eade687b83be" args="(IModule, 0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IModule&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x8f&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8f190a295bf6e0907620623d0a658c71"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a8f190a295bf6e0907620623d0a658c71" args="(IModuleManager, 0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IModuleManager&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x90&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abf6fb04e9891f0645ff6539ab38241ea"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="abf6fb04e9891f0645ff6539ab38241ea" args="(IParameter, 0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IParameter&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x91&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8c61f9772e753da54d566b5ab08935e9"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a8c61f9772e753da54d566b5ab08935e9" args="(IParser, 0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IParser&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x92&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a12216f09c584bcabb8e30cefed3cbbea"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a12216f09c584bcabb8e30cefed3cbbea" args="(IPass, 0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IPass&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x93&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a296bed5ecfc5488045a8ab805547d76c"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="a296bed5ecfc5488045a8ab805547d76c" args="(IShader, 0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">IShader&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x94&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adfc688eecd8000df3bdc6fb1d5b4c9e1"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="adfc688eecd8000df3bdc6fb1d5b4c9e1" args="(ITechnique, 0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">ITechnique&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x95&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab70b39323392a29293023c2293a7e07f"></a><!-- doxytag: member="VoodooShader::DEFINE_UUID_INTR" ref="ab70b39323392a29293023c2293a7e07f" args="(ITexture, 0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::DEFINE_UUID_INTR </td>
+          <td>(</td>
+          <td class="paramtype">ITexture&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x96&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x12&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xF3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE6&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xAF&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xE1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x11&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x9E&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x05&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x50&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x56&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0xC0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x00&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0x08&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a608640121a4bb206a93b899c44aeb828"></a><!-- doxytag: member="VoodooShader::intrusive_ptr_add_ref" ref="a608640121a4bb206a93b899c44aeb828" args="(IObject *obj)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1619,7 +5074,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00079">79</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00088">88</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
@@ -1638,7 +5093,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00084">84</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00093">93</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
@@ -1687,11 +5142,87 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<hr/><h2>Variable Documentation</h2>
+<a class="anchor" id="a26a05864d4ca4f7e1d57b1adf84d2be0"></a><!-- doxytag: member="VoodooShader::clsid_vsa" ref="a26a05864d4ca4f7e1d57b1adf84d2be0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a26a05864d4ca4f7e1d57b1adf84d2be0">VoodooShader::clsid_vsa</a> = CLSID_VSAdapter<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00033">33</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a58dd774dc74ac75b2fe559b1088127a6"></a><!-- doxytag: member="VoodooShader::clsid_vsf" ref="a58dd774dc74ac75b2fe559b1088127a6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a58dd774dc74ac75b2fe559b1088127a6">VoodooShader::clsid_vsf</a> = CLSID_VSFileSystem<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00034">34</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a74efacb132f2bccd92616d765392c644"></a><!-- doxytag: member="VoodooShader::clsid_vsh" ref="a74efacb132f2bccd92616d765392c644" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a74efacb132f2bccd92616d765392c644">VoodooShader::clsid_vsh</a> = CLSID_VSHookManager<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00035">35</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a247598116fc8c6061aba70580652d74e"></a><!-- doxytag: member="VoodooShader::clsid_vsl" ref="a247598116fc8c6061aba70580652d74e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="el" href="namespace_voodoo_shader.html#a247598116fc8c6061aba70580652d74e">VoodooShader::clsid_vsl</a> = CLSID_VSLogger<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00036">36</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5bf628ce859ed6575e4fcd36b73a96cc"></a><!-- doxytag: member="VoodooShader::coreVersion" ref="a5bf628ce859ed6575e4fcd36b73a96cc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> <a class="el" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">VoodooShader::coreVersion</a> = VOODOO_META_VERSION_STRUCT(CORE)<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00032">32</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

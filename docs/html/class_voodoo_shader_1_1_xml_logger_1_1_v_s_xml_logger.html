@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,7 +71,7 @@
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">VoodooShader::XmlLogger::VSXmlLogger Class Reference</div>  </div>
+<div class="title">VoodooShader::XmlLogger::VSXmlLogger Class Reference<div class="ingroups"><a class="el" href="group__voodoo__module__xmllogger.html">Voodoo/XmlLogger</a></div></div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="VoodooShader::XmlLogger::VSXmlLogger" --><!-- doxytag: inherits="VoodooShader::ILogger" -->
@@ -110,6 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a71879688048dd410ec26c1d74306e329"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a71c6bf561e264e4f47aefb9995612d69">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a71c6bf561e264e4f47aefb9995612d69"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a633e057cf91e2dafd4d5b83e9618cb8b">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a633e057cf91e2dafd4d5b83e9618cb8b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a979879c1a757b2604b0423f4ef63ea88">ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a979879c1a757b2604b0423f4ef63ea88"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a63dc76f38d0f6ae76dc48e526a7bb0e8">GetCore</a> (void) const   throw ()</td></tr>
@@ -153,7 +155,7 @@ Private Attributes</h2></td></tr>
 <p>Supports all Voodoo <a class="el" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a> features and debug logging (with no buffer). </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>If the logger isn't destroyed properly, the main tag of the log file won't be closed and the log won't be valid. </dd></dl>
 
-<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00058">58</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00060">60</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a99d8ada927b40fa510287a1eb5b1b1d2"></a><!-- doxytag: member="VoodooShader::XmlLogger::VSXmlLogger::VSXmlLogger" ref="a99d8ada927b40fa510287a1eb5b1b1d2" args="(_In_ ICore *pCore)" -->
 <div class="memitem">
@@ -220,11 +222,54 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#aecb0b94dd2259d623b8f2431198f8479">VoodooShader::ILogger</a>.</p>
 
 <p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00097">97</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a633e057cf91e2dafd4d5b83e9618cb8b"></a><!-- doxytag: member="VoodooShader::XmlLogger::VSXmlLogger::CheckedCast" ref="a633e057cf91e2dafd4d5b83e9618cb8b" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::XmlLogger::VSXmlLogger::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a117c294826ba17cf69f77b784629d293">VoodooShader::ILogger</a>.</p>
+
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00113">113</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -247,7 +292,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#aa51029bee28d08555500657d0bfc6e07">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00179">179</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00201">201</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -272,7 +317,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a5c8c45d23188a71c6baf6caa577125ca">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00188">188</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00210">210</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,7 +341,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#ab98eb60d00a47029224542bdfad4cd7e">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00118">118</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00140">140</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -317,7 +362,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a7746ae38981759e6f72088a125f3551d">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00282">282</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00304">304</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -338,7 +383,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a7da701aa27d6b86251a57a9531938957">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00292">292</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00314">314</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -392,7 +437,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00221">221</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00243">243</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -415,7 +460,7 @@ Private Attributes</h2></td></tr>
 <p>The date will have the form <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present, so the date length is 8 chars.</p>
 <dl class="note"><dt><b>Note:</b></dt><dd>If the system time cannot be retrieved, an equal-length error stamp of <code>00000000</code> will be returned. </dd></dl>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00314">314</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00336">336</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -445,7 +490,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#aae42b0f35f8b8628959d30c2c0b484fd">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00196">196</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00218">218</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -467,7 +512,7 @@ Private Attributes</h2></td></tr>
 <p>Formats the system's current tick count. </p>
 <p>The stamp will have the form <code>xxxxxxxxx</code>, with a potentially varying length. This records ticks, usually ms since system start. </p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00331">331</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00353">353</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -490,7 +535,7 @@ Private Attributes</h2></td></tr>
 <p>The timestamp will have the form <code>HHMMSS</code>. Leading zeros are guaranteed to be present, so the timestamp length is 6 chars.</p>
 <dl class="note"><dt><b>Note:</b></dt><dd>If the system time cannot be retrieved, an equal-length error stamp of <code>000000</code> will be returned. </dd></dl>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00297">297</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00319">319</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -531,7 +576,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#add52068ab034ce11b19fe719cdab6022">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00123">123</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00145">145</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -572,7 +617,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#ae7439e219911cb04997d0c366bd85ec7">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00268">268</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00312">312</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -592,7 +637,8 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a8ee17314c4e6248a6ed48e2a8208c556">VoodooShader::ILogger</a>.</p>
 
@@ -617,7 +663,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a24389561f792c21e90c8ea498bf897c3">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00277">277</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00299">299</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -647,7 +693,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#af08ddd1a318be3ce18d0e18aa352bebd">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00287">287</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00309">309</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -671,7 +717,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a512e1ec63c190b77d7868c0139425cde">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00113">113</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00135">135</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -687,7 +733,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00168">168</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00171">171</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -702,7 +748,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00173">173</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00176">176</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -717,7 +763,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00172">172</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00175">175</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -732,7 +778,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00171">171</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00174">174</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -747,7 +793,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00170">170</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00173">173</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -762,7 +808,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00167">167</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00170">170</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -775,7 +821,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

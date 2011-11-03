@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -98,6 +98,18 @@
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>DECLSPEC_SELECTANY
+: <a class="el" href="_includes_8hpp.html#a49f34a28ad59b6ba93c4208c240faae8">Includes.hpp</a>
+</li>
+<li>DEFINE_UUID
+: <a class="el" href="_includes_8hpp.html#ab427c430f482b5b1e2a0a5b6408b4065">Includes.hpp</a>
+</li>
+<li>DEFINE_UUID_IMPL
+: <a class="el" href="_includes_8hpp.html#a62a3a2d050dc1111c23c6792ceaf5dec">Includes.hpp</a>
+</li>
+<li>DEFINE_UUID_INTR
+: <a class="el" href="_includes_8hpp.html#a700b394957f205b7f784ea0e1cdbf61e">Includes.hpp</a>
+</li>
 <li>DllMain()
 : <a class="el" href="_loader_8cpp.html#aeda8f872ae7aec23e3fa4786f777f9fc">Loader.cpp</a>
 , <a class="el" href="_loader_8hpp.html#aeda8f872ae7aec23e3fa4786f777f9fc">Loader.hpp</a>
@@ -109,6 +121,9 @@
 <li>ErrorMessage()
 : <a class="el" href="_common_8cpp.html#ad65f6d99c7f32466161fa6c73b92f41c">Common.cpp</a>
 , <a class="el" href="_loader___common_8hpp.html#ad65f6d99c7f32466161fa6c73b92f41c">Loader_Common.hpp</a>
+</li>
+<li>EXTERN_C
+: <a class="el" href="_includes_8hpp.html#abbaccfbed35b945162c27ef6d3748e77">Includes.hpp</a>
 </li>
 </ul>
 
@@ -303,22 +318,22 @@
 : <a class="el" href="_loader___version_8hpp.html#ad3013b9f97d273d77e5c10cb9bbf59c5">Loader_Version.hpp</a>
 </li>
 <li>VOODOO_LOGGER_NAME
-: <a class="el" href="_logger___version_8hpp.html#aed5f040d6abd714329b7143fa69ed1f1">Logger_Version.hpp</a>
+: <a class="el" href="group__voodoo__module__xmllogger.html#gaed5f040d6abd714329b7143fa69ed1f1">Logger_Version.hpp</a>
 </li>
 <li>VOODOO_LOGGER_PRETTYNAME
-: <a class="el" href="_logger___version_8hpp.html#ab0027b0f9a1590ff7862bff3d7e4a801">Logger_Version.hpp</a>
+: <a class="el" href="group__voodoo__module__xmllogger.html#gab0027b0f9a1590ff7862bff3d7e4a801">Logger_Version.hpp</a>
 </li>
 <li>VOODOO_LOGGER_VERSION_MAJOR
-: <a class="el" href="_logger___version_8hpp.html#af74f7f8edda7e969198eddbb58a4002d">Logger_Version.hpp</a>
+: <a class="el" href="group__voodoo__module__xmllogger.html#gaf74f7f8edda7e969198eddbb58a4002d">Logger_Version.hpp</a>
 </li>
 <li>VOODOO_LOGGER_VERSION_MINOR
-: <a class="el" href="_logger___version_8hpp.html#a4f470b2d849e1cfc305217c689bfdbf0">Logger_Version.hpp</a>
+: <a class="el" href="group__voodoo__module__xmllogger.html#ga4f470b2d849e1cfc305217c689bfdbf0">Logger_Version.hpp</a>
 </li>
 <li>VOODOO_LOGGER_VERSION_PATCH
-: <a class="el" href="_logger___version_8hpp.html#aa1b524e75f5c061db327fc9f702a204d">Logger_Version.hpp</a>
+: <a class="el" href="group__voodoo__module__xmllogger.html#gaa1b524e75f5c061db327fc9f702a204d">Logger_Version.hpp</a>
 </li>
 <li>VOODOO_LOGGER_VERSION_REV
-: <a class="el" href="_logger___version_8hpp.html#a3986d5acc96e600150458c81e02f5a62">Logger_Version.hpp</a>
+: <a class="el" href="group__voodoo__module__xmllogger.html#ga3986d5acc96e600150458c81e02f5a62">Logger_Version.hpp</a>
 </li>
 <li>VOODOO_META_DEBUG_BOOL
 : <a class="el" href="_version_8hpp.html#a34d2053145e8e0a64a0a724202a4bbd3">Version.hpp</a>
@@ -341,8 +356,8 @@
 : <a class="el" href="_version_8hpp.html#a9326f3191f5be34d582f98d8309361cc">Version.hpp</a>
 </li>
 <li>VOODOO_META_STRING_STR
-: <a class="el" href="_version_8hpp.html#ac9b7cf3e4f6c1b123d676628a8386c42">Version.hpp</a>
-, <a class="el" href="_includes_8hpp.html#ac9b7cf3e4f6c1b123d676628a8386c42">Includes.hpp</a>
+: <a class="el" href="_includes_8hpp.html#ac9b7cf3e4f6c1b123d676628a8386c42">Includes.hpp</a>
+, <a class="el" href="_version_8hpp.html#ac9b7cf3e4f6c1b123d676628a8386c42">Version.hpp</a>
 </li>
 <li>VOODOO_META_STRING_VERSION_BASIC
 : <a class="el" href="_version_8hpp.html#ab49114cde1f841667808e61eddc0291f">Version.hpp</a>
@@ -361,21 +376,18 @@
 : <a class="el" href="_version_8hpp.html#a4da9584ebd4a715e19b36471e0d85f3c">Version.hpp</a>
 </li>
 <li>VOODOO_NO_BOOST
-: <a class="el" href="_file_system_8hpp.html#a028c8694cc2a1be4054bfa28ef0183fb">FileSystem.hpp</a>
-, <a class="el" href="_hook_manager_8hpp.html#a028c8694cc2a1be4054bfa28ef0183fb">HookManager.hpp</a>
-, <a class="el" href="_logger_8hpp.html#a028c8694cc2a1be4054bfa28ef0183fb">Logger.hpp</a>
-, <a class="el" href="_loader___common_8hpp.html#a028c8694cc2a1be4054bfa28ef0183fb">Loader_Common.hpp</a>
+: <a class="el" href="_loader___common_8hpp.html#a028c8694cc2a1be4054bfa28ef0183fb">Loader_Common.hpp</a>
 </li>
 <li>VOODOO_NO_CG
-: <a class="el" href="_hook_manager_8hpp.html#a13772837aa4287effbfcabf4163c16e0">HookManager.hpp</a>
+: <a class="el" href="_loader___common_8hpp.html#a13772837aa4287effbfcabf4163c16e0">Loader_Common.hpp</a>
 , <a class="el" href="_file_system_8hpp.html#a13772837aa4287effbfcabf4163c16e0">FileSystem.hpp</a>
+, <a class="el" href="_hook_manager_8hpp.html#a13772837aa4287effbfcabf4163c16e0">HookManager.hpp</a>
 , <a class="el" href="_logger_8hpp.html#a13772837aa4287effbfcabf4163c16e0">Logger.hpp</a>
-, <a class="el" href="_loader___common_8hpp.html#a13772837aa4287effbfcabf4163c16e0">Loader_Common.hpp</a>
 </li>
 <li>VOODOO_NO_PUGIXML
-: <a class="el" href="_loader___common_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9">Loader_Common.hpp</a>
+: <a class="el" href="_hook_manager_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9">HookManager.hpp</a>
+, <a class="el" href="_loader___common_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9">Loader_Common.hpp</a>
 , <a class="el" href="_logger_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9">Logger.hpp</a>
-, <a class="el" href="_hook_manager_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9">HookManager.hpp</a>
 </li>
 <li>VOODOO_PUBLIC_FUNC
 : <a class="el" href="_includes_8hpp.html#a5e73ef0ad4e5614cea6c0c7514ccafaf">Includes.hpp</a>
@@ -411,24 +423,24 @@
 : <a class="el" href="_loader_8cpp.html#a88e53b2c84e402dcbb1752abce0b6ed6">Loader.cpp</a>
 </li>
 <li>VoodooInput8Create()
-: <a class="el" href="_loader_8cpp.html#a23bdc5a55ee9ef78807aecc66c2e9ce0">Loader.cpp</a>
-, <a class="el" href="_loader_8hpp.html#a23bdc5a55ee9ef78807aecc66c2e9ce0">Loader.hpp</a>
+: <a class="el" href="_loader_8hpp.html#a23bdc5a55ee9ef78807aecc66c2e9ce0">Loader.hpp</a>
+, <a class="el" href="_loader_8cpp.html#a23bdc5a55ee9ef78807aecc66c2e9ce0">Loader.cpp</a>
 </li>
 <li>VoodooInputCreateA()
-: <a class="el" href="_loader_8cpp.html#a9d50d072f00e85187671de183e1975e1">Loader.cpp</a>
-, <a class="el" href="_loader_8hpp.html#a9d50d072f00e85187671de183e1975e1">Loader.hpp</a>
+: <a class="el" href="_loader_8hpp.html#a9d50d072f00e85187671de183e1975e1">Loader.hpp</a>
+, <a class="el" href="_loader_8cpp.html#a9d50d072f00e85187671de183e1975e1">Loader.cpp</a>
 </li>
 <li>VoodooInputCreateGeneric()
-: <a class="el" href="_loader_8cpp.html#af0ee8d4f7952e3944b128a74e7ea98ed">Loader.cpp</a>
-, <a class="el" href="_loader_8hpp.html#af0ee8d4f7952e3944b128a74e7ea98ed">Loader.hpp</a>
+: <a class="el" href="_loader_8hpp.html#af0ee8d4f7952e3944b128a74e7ea98ed">Loader.hpp</a>
+, <a class="el" href="_loader_8cpp.html#af0ee8d4f7952e3944b128a74e7ea98ed">Loader.cpp</a>
 </li>
 <li>VoodooInputCreateW()
-: <a class="el" href="_loader_8cpp.html#a686c309069e1f80edd5f694112e15bf1">Loader.cpp</a>
-, <a class="el" href="_loader_8hpp.html#a686c309069e1f80edd5f694112e15bf1">Loader.hpp</a>
+: <a class="el" href="_loader_8hpp.html#a686c309069e1f80edd5f694112e15bf1">Loader.hpp</a>
+, <a class="el" href="_loader_8cpp.html#a686c309069e1f80edd5f694112e15bf1">Loader.cpp</a>
 </li>
 <li>VoodooSoundCreate8()
-: <a class="el" href="_loader_8hpp.html#ac31854cf7cc541b43c0e6e4703bbc8fc">Loader.hpp</a>
-, <a class="el" href="_loader_8cpp.html#ac31854cf7cc541b43c0e6e4703bbc8fc">Loader.cpp</a>
+: <a class="el" href="_loader_8cpp.html#ac31854cf7cc541b43c0e6e4703bbc8fc">Loader.cpp</a>
+, <a class="el" href="_loader_8hpp.html#ac31854cf7cc541b43c0e6e4703bbc8fc">Loader.hpp</a>
 </li>
 </ul>
 
@@ -444,7 +456,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:10 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

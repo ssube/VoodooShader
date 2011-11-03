@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -104,10 +104,12 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a64103a5225370cb872611adf9bee7866"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#aeb81b7d273d5b9e71fb47d3ced79789b">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#aeb81b7d273d5b9e71fb47d3ced79789b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a7f2c133b80dd4ebbe949a51c7b1277fe">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a7f2c133b80dd4ebbe949a51c7b1277fe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a84d36b1a77dca1239dd272b90d5f8f11">ToString</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a fully qualified technique name (including shader name) from the technique.  <a href="#a84d36b1a77dca1239dd272b90d5f8f11"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a84d36b1a77dca1239dd272b90d5f8f11"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a6a41f187180c78e089367f4e9872e3ce">GetCore</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the core this technique was compiled under.  <a href="#a6a41f187180c78e089367f4e9872e3ce"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a6a41f187180c78e089367f4e9872e3ce"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#abd3d1488fbdfdc0151e77b030d49a3f1">GetName</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a3f7b41d168fc5f23f144710207104854">GetTarget</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the technique's final target.  <a href="#a3f7b41d168fc5f23f144710207104854"></a><br/></td></tr>
@@ -133,7 +135,7 @@ Private Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00029">29</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="afc8a0ad8d081844b8d63781ad3f18a2d"></a><!-- doxytag: member="VoodooShader::VSTechnique::VSTechnique" ref="afc8a0ad8d081844b8d63781ad3f18a2d" args="(_In_ IShader *pShader, _In_ CGtechnique pCgTech)" -->
 <div class="memitem">
@@ -200,11 +202,54 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a03227bdbae17e14423b4a7dee0a1b830">VoodooShader::ITechnique</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00056">56</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7f2c133b80dd4ebbe949a51c7b1277fe"></a><!-- doxytag: member="VoodooShader::VSTechnique::CheckedCast" ref="a7f2c133b80dd4ebbe949a51c7b1277fe" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSTechnique::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#aa7fc1f82902616c126ddbca9c485a400">VoodooShader::ITechnique</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00072">72</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -228,7 +273,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a0c8839c584f724cbbcf2d0209899c933">VoodooShader::ITechnique</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00112">112</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00134">134</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -247,12 +292,12 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Retrieve the core this technique was compiled under. </p>
+<p>Get the core this object was associated with. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The core. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a0c6739b1c96da54f97e1b08580a04165">VoodooShader::ITechnique</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00077">77</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00099">99</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -272,7 +317,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a2841d4f71e321a0392bbb9e99a2d88cf">VoodooShader::ITechnique</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00082">82</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00104">104</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -302,7 +347,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a828bf899cda0eb7ee71aeb385b416bb2">VoodooShader::ITechnique</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00087">87</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00109">109</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -323,7 +368,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#aa8f624b542dba97e7a52f615716a7eea">VoodooShader::ITechnique</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00102">102</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00124">124</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -347,7 +392,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#ac6ff7d752be81dd1081772d90e449898">VoodooShader::ITechnique</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00107">107</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00129">129</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -372,7 +417,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a40a6f3dd446051ab431e80ce562ba28e">VoodooShader::ITechnique</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00090">90</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00112">112</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +436,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00117">117</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00139">139</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -411,7 +456,8 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#aa11056c24f8988147a719915f98dbe42">VoodooShader::ITechnique</a>.</p>
 
@@ -434,12 +480,12 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Retrieve a fully qualified technique name (including shader name) from the technique. </p>
+<p>Get the name of this object. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The name. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#ae1e4cc57292b485afddc3c1dfb669934">VoodooShader::ITechnique</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00072">72</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00094">94</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -455,7 +501,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00062">62</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +516,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00054">54</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +531,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00056">56</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -500,7 +546,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -515,7 +561,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00054">54</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00053">53</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -530,7 +576,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00060">60</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -545,7 +591,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00057">57</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -558,7 +604,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

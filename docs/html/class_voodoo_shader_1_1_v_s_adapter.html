@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -99,13 +99,15 @@
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#afa43d15f29965bbeeb06b040d0203880">VSAdapter</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a5504da2da326f564b71af754ea85e59f">~VSAdapter</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ab331fd641457f5246310e1ce6195d028">AddRef</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#ab331fd641457f5246310e1ce6195d028"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#abbe28e41e2db21e9b78942407e8338c9">Release</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#abbe28e41e2db21e9b78942407e8338c9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#aee883c45c24fcdd9a263261456d0cae2">ToString</a> (void) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a49e0e0b0327b68c322d2609ee9f6942e">AddRef</a> (void) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a49e0e0b0327b68c322d2609ee9f6942e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a08793e190605dfb9e3a39357397d5af4">Release</a> (void) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a08793e190605dfb9e3a39357397d5af4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a3f69060f311f7b573f465279a36ba473">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a3f69060f311f7b573f465279a36ba473"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#aee883c45c24fcdd9a263261456d0cae2">ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#aee883c45c24fcdd9a263261456d0cae2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ad8e11e0d2854b244bf0f5237012d7a44">GetCore</a> (void) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ad8e11e0d2854b244bf0f5237012d7a44">GetCore</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#ad8e11e0d2854b244bf0f5237012d7a44"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ab9e4dbed2cb1a15e082c8fe4e572f892">LoadPass</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a> *const pPass)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a pass in a manner that is compatible with the adapter's underlying API.  <a href="#ab9e4dbed2cb1a15e082c8fe4e572f892"></a><br/></td></tr>
@@ -146,7 +148,7 @@ Private Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00028">28</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00031">31</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="afa43d15f29965bbeeb06b040d0203880"></a><!-- doxytag: member="VoodooShader::VSAdapter::VSAdapter" ref="afa43d15f29965bbeeb06b040d0203880" args="(ICore *pCore)" -->
 <div class="memitem">
@@ -187,22 +189,24 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ab331fd641457f5246310e1ce6195d028"></a><!-- doxytag: member="VoodooShader::VSAdapter::AddRef" ref="ab331fd641457f5246310e1ce6195d028" args="() const " -->
+<a class="anchor" id="a49e0e0b0327b68c322d2609ee9f6942e"></a><!-- doxytag: member="VoodooShader::VSAdapter::AddRef" ref="a49e0e0b0327b68c322d2609ee9f6942e" args="(void) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">uint32_t VoodooShader::VSAdapter::AddRef </td>
           <td>(</td>
+          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td> const<code> [virtual]</code></td>
+          <td> const  throw ()<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a48ffd3427dff18bf0c67874e8406d750">VoodooShader::IAdapter</a>.</p>
 
@@ -235,7 +239,49 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#aaee32dc508bcffabedfb44c3c45f76eb">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00124">124</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00146">146</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3f69060f311f7b573f465279a36ba473"></a><!-- doxytag: member="VoodooShader::VSAdapter::CheckedCast" ref="a3f69060f311f7b573f465279a36ba473" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSAdapter::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a5510585650fe1284abcda71cbec30915">VoodooShader::IAdapter</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -264,7 +310,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00142">142</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00164">164</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -385,7 +431,7 @@ This must create a texture that can either be rendered directly into or that can
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a772716af9e01759c759299f2b325fdb4">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00113">113</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00135">135</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -404,7 +450,7 @@ This must create a texture that can either be rendered directly into or that can
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00119">119</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00141">141</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -417,7 +463,7 @@ This must create a texture that can either be rendered directly into or that can
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td> const<code> [virtual]</code></td>
+          <td> const  throw ()<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -428,7 +474,7 @@ This must create a texture that can either be rendered directly into or that can
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a3138cc292627635d6cf7cbf35e11ae54">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00053">53</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00075">75</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -452,7 +498,7 @@ This must create a texture that can either be rendered directly into or that can
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#abb47a63f3eba1c46327e9494f0a8633f">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00077">77</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00099">99</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -482,7 +528,7 @@ This must create a texture that can either be rendered directly into or that can
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a90e9f7134950b09b14adaa104395a3e2">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00135">135</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00157">157</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -539,7 +585,7 @@ This must create a texture that can either be rendered directly into or that can
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00150">150</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00172">172</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -611,7 +657,7 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a90ded5afa3215c2bd2aeea66a75b8106">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00080">80</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -640,7 +686,7 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00105">105</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00127">127</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -682,22 +728,24 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 
 </div>
 </div>
-<a class="anchor" id="abbe28e41e2db21e9b78942407e8338c9"></a><!-- doxytag: member="VoodooShader::VSAdapter::Release" ref="abbe28e41e2db21e9b78942407e8338c9" args="() const " -->
+<a class="anchor" id="a08793e190605dfb9e3a39357397d5af4"></a><!-- doxytag: member="VoodooShader::VSAdapter::Release" ref="a08793e190605dfb9e3a39357397d5af4" args="(void) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">uint32_t VoodooShader::VSAdapter::Release </td>
           <td>(</td>
+          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td> const<code> [virtual]</code></td>
+          <td> const  throw ()<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#ad7b4952d8dce49d4bd7e4fb16ff10726">VoodooShader::IAdapter</a>.</p>
 
@@ -736,7 +784,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a9c1cfd2d82eff0e1f7c1f3e8411351fb">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00072">72</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00094">94</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -777,7 +825,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#abb94040d9709ab69e4f798134d6c7c87">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00129">129</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00151">151</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -819,7 +867,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#abd7b4f866887f268914b005383325092">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00082">82</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00104">104</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -832,7 +880,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td> const<code> [virtual]</code></td>
+          <td> const  throw ()<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -843,7 +891,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#abbf275f6889b60f2b323162d51b69b21">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00070">70</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -873,7 +921,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a2a5f9d02107b7521a2d1a0ad04ac8e5b">VoodooShader::IAdapter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00065">65</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00087">87</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -889,7 +937,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00062">62</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
 
 </div>
 </div>
@@ -904,7 +952,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00057">57</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
 
 </div>
 </div>
@@ -916,7 +964,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

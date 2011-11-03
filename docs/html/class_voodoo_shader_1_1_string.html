@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -108,7 +108,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a6a31877d4c52109903a7e1bccea074ba">String</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a30b9ad57d2bd2a5ffecbe0f60290f88b">String</a> (_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a8b30316dc8ae3d028fc70942c323b421">String</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a5e4c41d3eced781683221c8e879e3f5c">String</a> (_In_ const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;uuid)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a8d181a94e98b19af41ae68a481fa97f3">~String</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ab314f632650d7c4b5c48cd340e95d6c9">ToUuid</a> (_Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *pUuid) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a08d5841b26759cd9a4c05832f8a1cf42">ToCharStr</a> (_In_ int32_t size, _Inout_opt_count_(size) char *const pBuffer) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a8017e738fa769d74dc1c3793fb767e06">Append</a> (_In_ const wchar_t ch)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ab2f62b37917c9a4d921131104d5c2d3d">Append</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
@@ -221,7 +223,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00041">41</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00043">43</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -418,6 +420,23 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a5e4c41d3eced781683221c8e879e3f5c"></a><!-- doxytag: member="VoodooShader::String::String" ref="a5e4c41d3eced781683221c8e879e3f5c" args="(_In_ const Uuid &amp;uuid)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::String::String </td>
+          <td>(</td>
+          <td class="paramtype">_In_ const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>uuid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8d181a94e98b19af41ae68a481fa97f3"></a><!-- doxytag: member="VoodooShader::String::~String" ref="a8d181a94e98b19af41ae68a481fa97f3" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -432,7 +451,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00095">95</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00102">102</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -567,7 +586,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00168">168</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00170">170</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -596,7 +615,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00177">177</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00179">179</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -730,7 +749,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00106">106</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00132">132</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -748,7 +767,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00192">192</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00218">218</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1101,7 +1120,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00150">150</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00152">152</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1130,7 +1149,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00159">159</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00161">161</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1186,7 +1205,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00145">145</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00147">147</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1206,7 +1225,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00554">554</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00580">580</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1225,7 +1244,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00572">572</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00598">598</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1243,7 +1262,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00544">544</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00570">570</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1261,7 +1280,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00549">549</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00575">575</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1280,7 +1299,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00244">244</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00270">270</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1299,7 +1318,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00211">211</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00213">213</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1318,7 +1337,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00212">212</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00214">214</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1337,7 +1356,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00205">205</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00207">207</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1356,7 +1375,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00206">206</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00208">208</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1375,7 +1394,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00207">207</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00209">209</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1394,7 +1413,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00202">202</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00204">204</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1413,7 +1432,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00203">203</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00205">205</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1432,7 +1451,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00204">204</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00206">206</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1485,7 +1504,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00218">218</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00220">220</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1504,7 +1523,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00219">219</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00221">221</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1523,7 +1542,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00199">199</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00201">201</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1542,7 +1561,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00200">200</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00202">202</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1561,7 +1580,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00201">201</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00203">203</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1580,7 +1599,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00209">209</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00211">211</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1599,7 +1618,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00210">210</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00212">212</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1652,7 +1671,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00220">220</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00222">222</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1671,7 +1690,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00221">221</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00223">223</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1691,7 +1710,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00560">560</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00586">586</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2076,7 +2095,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00254">254</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00280">280</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2106,7 +2125,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00566">566</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00592">592</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2216,7 +2235,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00259">259</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00285">285</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2245,7 +2264,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00101">101</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00127">127</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2263,7 +2282,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00234">234</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00260">260</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2281,7 +2300,26 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00239">239</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00265">265</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab314f632650d7c4b5c48cd340e95d6c9"></a><!-- doxytag: member="VoodooShader::String::ToUuid" ref="ab314f632650d7c4b5c48cd340e95d6c9" args="(_Out_ Uuid *pUuid) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::String::ToUuid </td>
+          <td>(</td>
+          <td class="paramtype">_Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *&#160;</td>
+          <td class="paramname"><em>pUuid</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00108">108</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2300,7 +2338,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00228">228</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00254">254</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2329,7 +2367,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00121">121</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00147">147</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2345,7 +2383,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00229">229</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00231">231</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -2360,7 +2398,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00223">223</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00225">225</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -2372,7 +2410,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

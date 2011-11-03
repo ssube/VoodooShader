@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -77,8 +77,8 @@
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *(__stdcall *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#ad07f5c947da24c7bf262280c6021c05b">VersionFunc</a> )()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef const uint32_t(__stdcall *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#aa3e3bb52a3f6496fb3c09156e9979cc3">CountFunc</a> )()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef const char *(__stdcall *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a0c3eccedf39732bdb93364016b972855">InfoFunc</a> )(const uint32_t)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *(__stdcall *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a4cb0617859d6747964d26364a8fcda34">CreateFunc</a> )(const uint32_t, <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *(__stdcall *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#ae953c5bebe0e5f34aa7495720411e4d7">InfoFunc</a> )(_In_ const uint32_t, _Deref_out_opt_ const wchar_t **)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *(__stdcall *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a5e8d4a574a53f56f6603bf508d418208">CreateFunc</a> )(_In_ const uint32_t, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Function pointer types for module interfaces. </p>
@@ -94,37 +94,37 @@ Typedefs</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00498">498</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00536">536</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4cb0617859d6747964d26364a8fcda34"></a><!-- doxytag: member="VoodooShader::Functions::CreateFunc" ref="a4cb0617859d6747964d26364a8fcda34" args=")(const uint32_t, ICore *)" -->
+<a class="anchor" id="a5e8d4a574a53f56f6603bf508d418208"></a><!-- doxytag: member="VoodooShader::Functions::CreateFunc" ref="a5e8d4a574a53f56f6603bf508d418208" args=")(_In_ const uint32_t, _In_ ICore *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>*(__stdcall * <a class="el" href="namespace_voodoo_shader_1_1_functions.html#a4cb0617859d6747964d26364a8fcda34">VoodooShader::Functions::CreateFunc</a>)(const uint32_t, <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *)</td>
+          <td class="memname">typedef <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>*(__stdcall * <a class="el" href="namespace_voodoo_shader_1_1_functions.html#a5e8d4a574a53f56f6603bf508d418208">VoodooShader::Functions::CreateFunc</a>)(_In_ const uint32_t, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *)</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00500">500</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00538">538</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0c3eccedf39732bdb93364016b972855"></a><!-- doxytag: member="VoodooShader::Functions::InfoFunc" ref="a0c3eccedf39732bdb93364016b972855" args=")(const uint32_t)" -->
+<a class="anchor" id="ae953c5bebe0e5f34aa7495720411e4d7"></a><!-- doxytag: member="VoodooShader::Functions::InfoFunc" ref="ae953c5bebe0e5f34aa7495720411e4d7" args=")(_In_ const uint32_t, _Deref_out_opt_ const wchar_t **)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef const char*(__stdcall * <a class="el" href="namespace_voodoo_shader_1_1_functions.html#a0c3eccedf39732bdb93364016b972855">VoodooShader::Functions::InfoFunc</a>)(const uint32_t)</td>
+          <td class="memname">typedef const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>*(__stdcall * <a class="el" href="namespace_voodoo_shader_1_1_functions.html#ae953c5bebe0e5f34aa7495720411e4d7">VoodooShader::Functions::InfoFunc</a>)(_In_ const uint32_t, _Deref_out_opt_ const wchar_t **)</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00499">499</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00537">537</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -139,7 +139,7 @@ Typedefs</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00497">497</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00535">535</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -147,7 +147,7 @@ Typedefs</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

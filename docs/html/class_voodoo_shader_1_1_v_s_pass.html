@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -98,14 +98,16 @@
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a05813e54c1c814cd86b01f040ec8d949">VSPass</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *parent, _In_ CGpass cgPass)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a28966ef8b10a670ed7b782355c472bc6">VSPass</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *pTechnique, _In_ CGpass pCgPass)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a7ca31fbede7fb7822ffb8255cd372205">~VSPass</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a1fc42d4d6be94a69e530be0cd5d49869">AddRef</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a1fc42d4d6be94a69e530be0cd5d49869"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a63f5a66f5f01046fc58b9b6a74dcc9c0">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a63f5a66f5f01046fc58b9b6a74dcc9c0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#ad46246a809303831054d463dce4f9078">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#ad46246a809303831054d463dce4f9078"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a5fb910e3ff5502f10a47a18ff7e9ebea">ToString</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the fully qualified pass name, including technique and shader name.  <a href="#a5fb910e3ff5502f10a47a18ff7e9ebea"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a5fb910e3ff5502f10a47a18ff7e9ebea"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a6b34139f2f1add2894300458340deb8d">GetCore</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a6b34139f2f1add2894300458340deb8d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a9272e67b9d95445f676e3c99aa316f12">GetName</a> () const   throw ()</td></tr>
@@ -136,9 +138,9 @@ Private Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00026">26</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00029">29</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a05813e54c1c814cd86b01f040ec8d949"></a><!-- doxytag: member="VoodooShader::VSPass::VSPass" ref="a05813e54c1c814cd86b01f040ec8d949" args="(_In_ ITechnique *parent, _In_ CGpass cgPass)" -->
+<a class="anchor" id="a28966ef8b10a670ed7b782355c472bc6"></a><!-- doxytag: member="VoodooShader::VSPass::VSPass" ref="a28966ef8b10a670ed7b782355c472bc6" args="(_In_ ITechnique *pTechnique, _In_ CGpass pCgPass)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -146,13 +148,13 @@ Private Attributes</h2></td></tr>
           <td class="memname">VoodooShader::VSPass::VSPass </td>
           <td>(</td>
           <td class="paramtype">_In_ <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td>
-          <td class="paramname"><em>parent</em>, </td>
+          <td class="paramname"><em>pTechnique</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">_In_ CGpass&#160;</td>
-          <td class="paramname"><em>cgPass</em>&#160;</td>
+          <td class="paramname"><em>pCgPass</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -203,11 +205,54 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a3d0c097a0ce1906ab9040f7d197b425f">VoodooShader::IPass</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00062">62</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad46246a809303831054d463dce4f9078"></a><!-- doxytag: member="VoodooShader::VSPass::CheckedCast" ref="ad46246a809303831054d463dce4f9078" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSPass::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#ad91c75debf78d448e61e54cfbb4ab5b9">VoodooShader::IPass</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00078">78</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
 </div>
 </div>
@@ -231,7 +276,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a457c4fbb74060cd968ac815d2a52d825">VoodooShader::IPass</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00123">123</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00145">145</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
 </div>
 </div>
@@ -255,7 +300,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a96f9cde619ce797e26292c457de07232">VoodooShader::IPass</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00083">83</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00105">105</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
 </div>
 </div>
@@ -275,7 +320,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#ae069851b79c1aa17fc717c32f6582d4b">VoodooShader::IPass</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00088">88</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00110">110</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
 </div>
 </div>
@@ -305,7 +350,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a151f8c5fbf945041297aecde0dfd49c6">VoodooShader::IPass</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00098">98</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00120">120</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
 </div>
 </div>
@@ -330,7 +375,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#ac6dee310f2eacbb78d5b17f5f006c3c1">VoodooShader::IPass</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00093">93</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00115">115</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
 </div>
 </div>
@@ -354,7 +399,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#ac486dded81ef9c3d7ec8bc852cbd5826">VoodooShader::IPass</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00118">118</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00140">140</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
 </div>
 </div>
@@ -373,7 +418,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00128">128</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00150">150</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
 </div>
 </div>
@@ -393,7 +438,8 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a862b685f4cee16665f4e017f29fd3d3a">VoodooShader::IPass</a>.</p>
 
@@ -416,12 +462,12 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Retrieve the fully qualified pass name, including technique and shader name. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The pass name </dd></dl>
+<p>Get the name of this object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The name. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a3d44fee37e411571e16ec07dedbff19b">VoodooShader::IPass</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00078">78</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00100">100</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
 </div>
 </div>
@@ -437,7 +483,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -452,7 +498,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00049">49</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00052">52</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -467,7 +513,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00060">60</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00063">63</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -482,7 +528,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00062">62</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -497,7 +543,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00057">57</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00060">60</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -512,7 +558,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00064">64</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -527,7 +573,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00050">50</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00053">53</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -542,7 +588,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00051">51</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -557,7 +603,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00053">53</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00056">56</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -572,7 +618,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00052">52</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -587,7 +633,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -599,7 +645,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

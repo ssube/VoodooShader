@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -105,8 +105,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a7c599bf82f32b64748a9104df66cc559"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#a888bfbf3aa5abe7c8f02e56709615504">Release</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a888bfbf3aa5abe7c8f02e56709615504"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#aef35ecec1821f156ceca46975d7d8d31">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const =0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#aef35ecec1821f156ceca46975d7d8d31"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#a0e145d0df2358361177ac592f859da7e">ToString</a> (void) const =0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name (usually filename of source file) for this shader.  <a href="#a0e145d0df2358361177ac592f859da7e"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a0e145d0df2358361177ac592f859da7e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#a04a4f10ce6ec8bc452e19719f9c81358">GetCore</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a04a4f10ce6ec8bc452e19719f9c81358"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html#ab73e0b99693caf45f43c9f6efcb6ae7a">GetName</a> () const =0  throw ()</td></tr>
@@ -173,11 +175,54 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 <div class="memdoc">
 
 <p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#ga1fd3943ba7775c2e9ca63d5cfe08cc22">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a1fd3943ba7775c2e9ca63d5cfe08cc22">VoodooShader::VSShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aef35ecec1821f156ceca46975d7d8d31"></a><!-- doxytag: member="VoodooShader::IShader::CheckedCast" ref="aef35ecec1821f156ceca46975d7d8d31" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool VoodooShader::IShader::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#adee03553337e3c174cdfbbc0a305e9c5">VoodooShader::IObject</a>.</p>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a4d885b1de2004ffe522220f18f421581">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -199,7 +244,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 <p>Retrieve the underlying Cg technique. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the Cg technique. </dd></dl>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#gaf2152e04b1f2cbb249308d2ce647be85">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#af2152e04b1f2cbb249308d2ce647be85">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -223,7 +268,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#af516091c1429872656036f732664eea7">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#ga00666d4f0c2641993067fe427a542eef">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a00666d4f0c2641993067fe427a542eef">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -247,7 +292,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 <dl class="return"><dt><b>Returns:</b></dt><dd>A reference to the default technique.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>To influence the priority of techniques, simply place the most specific or least compatible first (often high-quality ones) and count down with the most compatible and simplest technique last. The first valid technique found becomes the default. </dd></dl>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#gab5ef103fdc17ea2e9fbb97daf619cb0c">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ab5ef103fdc17ea2e9fbb97daf619cb0c">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -265,7 +310,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#ga962fd62eccfeb8704a80d23d506e53ba">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a962fd62eccfeb8704a80d23d506e53ba">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -294,7 +339,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The parameter, if valid. </dd></dl>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#gafeae09bd87f6669b270c8c0fee89dd0c">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#afeae09bd87f6669b270c8c0fee89dd0c">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -317,7 +362,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 <p>These hold a single value for all passes.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The parameter count. </dd></dl>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#gacbae1a538a81ffcd57cf333df2102340">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#acbae1a538a81ffcd57cf333df2102340">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -346,7 +391,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The technique, if it is found. </dd></dl>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#gac177f67ad3436807993400f78ecddb34">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ac177f67ad3436807993400f78ecddb34">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -368,7 +413,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 <p>Get the number of validated techniques this shader contains. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The number of techniques. </dd></dl>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#ga06bb04b1027cc40c41a3c78cdbf318c7">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a06bb04b1027cc40c41a3c78cdbf318c7">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -388,11 +433,12 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 <div class="memdoc">
 
 <p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#af6323d5d999a565e2e201241b21aa1e1">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#ga2c3717699d7fd0f40dcfb076c33ff07a">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a2c3717699d7fd0f40dcfb076c33ff07a">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -422,7 +468,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the setting.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>This will validate that the technique belongs to this shader. </dd></dl>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#ga9b0f8d5989286d05d27dcf09521ed3ff">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a9b0f8d5989286d05d27dcf09521ed3ff">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -441,12 +487,12 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 </div>
 <div class="memdoc">
 
-<p>Get the name (usually filename of source file) for this shader. </p>
+<p>Get the name of this object. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The name. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#af756994294cf969499538b1c96f4c54a">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="group___voodoo_core.html#gaa2a23075fe7d734d9e0c05d320598b92">VoodooShader::VSShader</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#aa2a23075fe7d734d9e0c05d320598b92">VoodooShader::VSShader</a>.</p>
 
 </div>
 </div>
@@ -457,7 +503,7 @@ A shader may contain multiple <a class="el" href="class_voodoo_shader_1_1_i_tech
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

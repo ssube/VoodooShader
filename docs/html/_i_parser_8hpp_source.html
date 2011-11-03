@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -79,29 +79,27 @@
 <a name="l00036"></a>00036     {
 <a name="l00037"></a>00037     <span class="keyword">public</span>:
 <a name="l00038"></a><a class="code" href="class_voodoo_shader_1_1_i_parser.html#a378b3a64cb3ade9e83a82b83664c1c97">00038</a>         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a378b3a64cb3ade9e83a82b83664c1c97">~IParser</a>(<span class="keywordtype">void</span>) throw() {};
-<a name="l00039"></a>00039         
-<a name="l00045"></a>00045         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a49338701398c1431b2e9052bdfc9aadd" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> throw() = 0;
-<a name="l00046"></a>00046 
-<a name="l00052"></a>00052         virtual uint32_t <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a33405e5308b6da50a3a1d6b8ae11d818" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00053"></a>00053 
-<a name="l00059"></a>00059         virtual <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a55e2c2dedc5af97f25c966087b491cdd" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00060"></a>00060 
-<a name="l00066"></a>00066         virtual <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a459449482e231930ff4f55753429baa7" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00067"></a>00067 
-<a name="l00075"></a>00075         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a68a07fdf48b2297be3c4c7bd7871b8d2" title="Adds a variable to the internal dictionary.">Add</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name, _In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; value, _In_ const <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>) throw() = 0;
-<a name="l00076"></a>00076 
-<a name="l00082"></a>00082         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a9e6eedb7d2e47347e8f555a89b863454" title="Removes a variable from the internal dictionary.">Remove</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name) throw() = 0;
-<a name="l00083"></a>00083 
-<a name="l00090"></a>00090         virtual <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; input, _In_ const <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) const throw() = 0;
-<a name="l00091"></a>00091     };
-<a name="l00092"></a>00092 
-<a name="l00279"></a>00279 }
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a49338701398c1431b2e9052bdfc9aadd" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> throw() = 0;
+<a name="l00041"></a>00041         virtual uint32_t <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a33405e5308b6da50a3a1d6b8ae11d818" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00042"></a>00042         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a89f798ecd1fa68dcbeed0929a6545ccc" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ const <span class="keywordtype">void</span> ** ppOut) const throw() = 0;
+<a name="l00043"></a>00043         virtual <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a55e2c2dedc5af97f25c966087b491cdd" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00044"></a>00044         virtual <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a459449482e231930ff4f55753429baa7" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00045"></a>00045 
+<a name="l00053"></a>00053         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a68a07fdf48b2297be3c4c7bd7871b8d2" title="Adds a variable to the internal dictionary.">Add</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name, _In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; value, _In_ const <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>) throw() = 0;
+<a name="l00054"></a>00054 
+<a name="l00060"></a>00060         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a9e6eedb7d2e47347e8f555a89b863454" title="Removes a variable from the internal dictionary.">Remove</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name) throw() = 0;
+<a name="l00061"></a>00061 
+<a name="l00068"></a>00068         virtual <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; input, _In_ const <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) const throw() = 0;
+<a name="l00069"></a>00069     };
+<a name="l00070"></a>00070 
+<a name="l00257"></a>00257 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:53 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:08 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

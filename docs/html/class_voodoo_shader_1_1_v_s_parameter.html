@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -104,8 +104,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a7f2405a900f605d2a349f415d5748eb7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#a2cc012575b6738deb65fa021b5096221">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a2cc012575b6738deb65fa021b5096221"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#acee22c1d190c2a7bc310a0a13ea18388">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#acee22c1d190c2a7bc310a0a13ea18388"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#a3c218a4730ce7bb331cda767e86b872c">ToString</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the fully-qualified parameter name.  <a href="#a3c218a4730ce7bb331cda767e86b872c"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a3c218a4730ce7bb331cda767e86b872c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#af7c36f5305861c501c1544853812975b">GetCore</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#af7c36f5305861c501c1544853812975b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#a5603a55855819839e6eb0bf24172aa93">GetName</a> () const   throw ()</td></tr>
@@ -144,7 +146,7 @@ Private Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00026">26</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00029">29</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a5329d3b8de81090ff8486c73c082ec9d"></a><!-- doxytag: member="VoodooShader::VSParameter::VSParameter" ref="a5329d3b8de81090ff8486c73c082ec9d" args="(_In_ ICore *const pCore, _In_ const String &amp;name, _In_ const ParameterType type)" -->
 <div class="memitem">
@@ -269,7 +271,8 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a01571cec4b66d9181e2ddd9bfc586f70">VoodooShader::IParameter</a>.</p>
 
@@ -292,7 +295,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00118">118</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00140">140</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -323,6 +326,48 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="acee22c1d190c2a7bc310a0a13ea18388"></a><!-- doxytag: member="VoodooShader::VSParameter::CheckedCast" ref="acee22c1d190c2a7bc310a0a13ea18388" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSParameter::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a9bec840c04a2a07bfcab73d95508d2d3">VoodooShader::IParameter</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00093">93</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aa87ae9adb8927d21f0da8037018ffb93"></a><!-- doxytag: member="VoodooShader::VSParameter::DetachParameter" ref="aa87ae9adb8927d21f0da8037018ffb93" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -342,7 +387,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a56caa2747463cd58b245a08f5896dc60">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00134">134</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00156">156</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -366,7 +411,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a1071096cb89dae6e46292aa11cd4438d">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00174">174</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00196">196</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -397,7 +442,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#acd21819a76bb0535514ec990c7ef5107">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00141">141</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00163">163</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -421,7 +466,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a8dc52f1b0d01b0555c6cbe0e813bc62d">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00098">98</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00120">120</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -441,7 +486,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a0de009f00ded5bc0d4219ca938c8ffc0">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00103">103</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00125">125</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -462,7 +507,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a4b44fce1682c516ab2bdb68ba478f7dd">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00169">169</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00191">191</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -486,7 +531,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a0d83cf8cfcabaa51719a11cb717382b8">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00473">473</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00495">495</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -510,7 +555,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a38f3cc6b7c77281ea9491d312ce7f300">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00108">108</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00130">130</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -534,7 +579,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a5a651929e76159e458a91d240b3c2817">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00113">113</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00135">135</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -554,7 +599,8 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a41de500ad4e01536bfb67396c3b32f76">VoodooShader::IParameter</a>.</p>
 
@@ -587,7 +633,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00161">161</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00183">183</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -635,7 +681,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a08702594b2b944253b64760dcc12124f">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00151">151</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00173">173</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -654,13 +700,12 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Retrieves the fully-qualified parameter name. </p>
-<p>Virtual parameters will be of the form <code>:param-name</code>, while effect parameters will use <code>shader-name:param-name</code>. If the parameter is no longer valid, the value "invalid-param" will be used instead (usually illegal as the '-' character cannot be used in an identifier).</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The parameter's name. </dd></dl>
+<p>Get the name of this object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The name. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#ac21da698c710be1ad233cbadd94076a5">VoodooShader::IParameter</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00093">93</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00115">115</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
 
 </div>
 </div>
@@ -676,7 +721,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00056">56</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -691,7 +736,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00057">57</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00060">60</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -706,7 +751,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00062">62</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00065">65</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -721,7 +766,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -736,7 +781,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00062">62</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -751,7 +796,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00063">63</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00066">66</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -766,7 +811,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00067">67</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00070">70</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -781,7 +826,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00066">66</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00069">69</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -796,7 +841,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00064">64</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -809,7 +854,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

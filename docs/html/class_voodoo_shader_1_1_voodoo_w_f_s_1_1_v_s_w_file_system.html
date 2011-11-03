@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -107,6 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a7cf39ae8aba4a05be61354b9fc7d84c1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a0cda285e2d0711e0d87c6b6c2266e212">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a0cda285e2d0711e0d87c6b6c2266e212"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a873e34cf870f110942703935998b658c">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a873e34cf870f110942703935998b658c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a578e97ccd50858af9930c62df652ae2c">ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a578e97ccd50858af9930c62df652ae2c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#ad37523eacde0d596a2a820517acbd85b">GetCore</a> (void) const   throw ()</td></tr>
@@ -127,7 +129,7 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><p>Provides a unified file management system for loading shaders and other resources. </p>
 <p>This file system implementation is a thin wrapper for the Windows API, adding only a few nonstandard functions (directory searching and path variables). </p>
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00059">59</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00061">61</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a50bbe6a65369b2ff42dcf46eb26744c0"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFileSystem::VSWFileSystem" ref="a50bbe6a65369b2ff42dcf46eb26744c0" args="(_In_ ICore *core)" -->
 <div class="memitem">
@@ -191,7 +193,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#ad047b618782b617eadb58220a2dc4bd7">VoodooShader::IFileSystem</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00150">150</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00172">172</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -211,11 +213,54 @@ This function will split paths at the ';' character, similar to how Windows trea
 <div class="memdoc">
 
 <p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#adf9c0e9afa223cbb26a1f3c9a94c9a13">VoodooShader::IFileSystem</a>.</p>
 
 <p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00124">124</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a873e34cf870f110942703935998b658c"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFileSystem::CheckedCast" ref="a873e34cf870f110942703935998b658c" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VoodooWFS::VSWFileSystem::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a0b0550db38a00288c2a10608978d911e">VoodooShader::IFileSystem</a>.</p>
+
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00140">140</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -246,7 +291,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a64f646f3aa207f5a0a532bbf058a24a3">VoodooShader::IFileSystem</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00183">183</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00205">205</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -270,7 +315,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#ace752fe1279f70ee737195c4352f74a8">VoodooShader::IFileSystem</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00145">145</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00167">167</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -290,7 +335,8 @@ This function will split paths at the ';' character, similar to how Windows trea
 <div class="memdoc">
 
 <p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a773b92dc9e146409f2d7ac015ff2fbde">VoodooShader::IFileSystem</a>.</p>
 
@@ -323,7 +369,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a499922a092bfdcd60c3a7f980824fa76">VoodooShader::IFileSystem</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00169">169</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00191">191</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -347,7 +393,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a00a21fc703d662b916b1df042ba1b830">VoodooShader::IFileSystem</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00140">140</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00162">162</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -363,7 +409,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00104">104</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00107">107</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -378,7 +424,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00106">106</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00109">109</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -393,7 +439,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00103">103</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00106">106</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -405,7 +451,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

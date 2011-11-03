@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -103,9 +103,11 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a9b527b2078183fc41a19ad45409b10f4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#aa7993f4cdfeef3d4e54631a2b5877759">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#aa7993f4cdfeef3d4e54631a2b5877759"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#af1ad585439cd09734cdf0fcff0239ec6">ToString</a> (void) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name.  <a href="#af1ad585439cd09734cdf0fcff0239ec6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a040eb9fe92eb5c6bd245532b91b5effe">GetCore</a> (void) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a7ae09718f10ec97da3a1604c4115f2c5">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a7ae09718f10ec97da3a1604c4115f2c5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#af1ad585439cd09734cdf0fcff0239ec6">ToString</a> (void) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#af1ad585439cd09734cdf0fcff0239ec6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a040eb9fe92eb5c6bd245532b91b5effe">GetCore</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a040eb9fe92eb5c6bd245532b91b5effe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a8a5ab3e96a194c095a3807adda48c0b2">GetName</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a049526245692c24a00c8ae6e303ff99d">GetData</a> (void) const </td></tr>
@@ -122,7 +124,7 @@ Private Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00029">29</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a8832fcd3bbfc717c571d74ec54c6daf2"></a><!-- doxytag: member="VoodooShader::VSTexture::VSTexture" ref="a8832fcd3bbfc717c571d74ec54c6daf2" args="(_In_ String name, _In_opt_ void *pTexture=nullptr)" -->
 <div class="memitem">
@@ -189,11 +191,54 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a42724dc754afe20f87c40c9d594178ec">VoodooShader::ITexture</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00032">32</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7ae09718f10ec97da3a1604c4115f2c5"></a><!-- doxytag: member="VoodooShader::VSTexture::CheckedCast" ref="a7ae09718f10ec97da3a1604c4115f2c5" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSTexture::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a386e192bc5d3a0d23922425d5246a2e5">VoodooShader::ITexture</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
 
 </div>
 </div>
@@ -206,7 +251,7 @@ Private Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td> const<code> [virtual]</code></td>
+          <td> const  throw ()<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -217,7 +262,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a3db6e0d167da3896f8de4d1fc99dbb6b">VoodooShader::ITexture</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00053">53</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00075">75</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
 
 </div>
 </div>
@@ -241,7 +286,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#acb01fc18df9400c4d59879f0c80d2dd2">VoodooShader::ITexture</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00063">63</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00085">85</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +310,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#ac4781fe19b9594e280c9ed09c87d10e6">VoodooShader::ITexture</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00068">68</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00090">90</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
 
 </div>
 </div>
@@ -285,7 +330,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a049a0df0dfac079da78cd70780383d50">VoodooShader::ITexture</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00080">80</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
 
 </div>
 </div>
@@ -305,7 +350,8 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a88deadfb0cc6dd1c70467563d89adb5c">VoodooShader::ITexture</a>.</p>
 
@@ -322,18 +368,18 @@ Private Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td> const<code> [virtual]</code></td>
+          <td> const  throw ()<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Gets the name. </p>
+<p>Get the name of this object. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The name. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#ac192d3eb19aebdd77a1bbd89b169af3b">VoodooShader::ITexture</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00070">70</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
 
 </div>
 </div>
@@ -349,7 +395,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00049">49</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -364,7 +410,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00052">52</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00051">51</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -379,7 +425,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00053">53</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00052">52</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -394,7 +440,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00050">50</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00049">49</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -409,7 +455,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00047">47</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -421,7 +467,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -104,6 +104,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a48ffd3427dff18bf0c67874e8406d750"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#ad7b4952d8dce49d4bd7e4fb16ff10726">Release</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#ad7b4952d8dce49d4bd7e4fb16ff10726"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a5510585650fe1284abcda71cbec30915">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const =0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a5510585650fe1284abcda71cbec30915"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#abbf275f6889b60f2b323162d51b69b21">ToString</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#abbf275f6889b60f2b323162d51b69b21"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a3138cc292627635d6cf7cbf35e11ae54">GetCore</a> (void) const =0  throw ()</td></tr>
@@ -180,11 +182,12 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ab331fd641457f5246310e1ce6195d028">VoodooShader::VSAdapter</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a49e0e0b0327b68c322d2609ee9f6942e">VoodooShader::VSAdapter</a>.</p>
 
 </div>
 </div>
@@ -212,6 +215,48 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ad327a4e8d8c3f6aee467ea5b6845bb96">VoodooShader::VSAdapter</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5510585650fe1284abcda71cbec30915"></a><!-- doxytag: member="VoodooShader::IAdapter::CheckedCast" ref="a5510585650fe1284abcda71cbec30915" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool VoodooShader::IAdapter::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#adee03553337e3c174cdfbbc0a305e9c5">VoodooShader::IObject</a>.</p>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a3f69060f311f7b573f465279a36ba473">VoodooShader::VSAdapter</a>.</p>
 
 </div>
 </div>
@@ -560,11 +605,12 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 <div class="memdoc">
 
 <p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#af6323d5d999a565e2e201241b21aa1e1">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#abbe28e41e2db21e9b78942407e8338c9">VoodooShader::VSAdapter</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a08793e190605dfb9e3a39357397d5af4">VoodooShader::VSAdapter</a>.</p>
 
 </div>
 </div>
@@ -739,7 +785,7 @@ Adapters must restore all states when a pass is unbound to the exact previous st
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

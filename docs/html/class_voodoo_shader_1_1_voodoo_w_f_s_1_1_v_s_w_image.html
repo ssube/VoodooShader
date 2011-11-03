@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.288</span>
+   &#160;<span id="projectnumber">0.4.1.289</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -108,6 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#aa60e92dcbbc1bc96c8c4e1a3f1d000f6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a1e29d472d5bfa66fda53dda5ca369583">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a1e29d472d5bfa66fda53dda5ca369583"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a7bb2da42fac11287bcff4eed41095914">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a7bb2da42fac11287bcff4eed41095914"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a28ad1f7b61f3e3e81b41da3c47196bfc">ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a28ad1f7b61f3e3e81b41da3c47196bfc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a4bb1ee52dd5e5a874b78bace8abf50f0">GetCore</a> (void) const   throw ()</td></tr>
@@ -136,7 +138,7 @@ Private Attributes</h2></td></tr>
 <p class="enddd">Provide image saving. </p>
 </dd></dl>
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00197">197</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00207">207</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acd5d69f779fdff29c63864991ea23802"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWImage::VSWImage" ref="acd5d69f779fdff29c63864991ea23802" args="(ICore *core, const String &amp;name, unsigned int image)" -->
 <div class="memitem">
@@ -169,7 +171,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00457">457</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00501">501</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -188,7 +190,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00503">503</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00547">547</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -213,7 +215,49 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_image.html#a5157a050c047b4da5f051842216f56f7">VoodooShader::IImage</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00508">508</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00552">552</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7bb2da42fac11287bcff4eed41095914"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWImage::CheckedCast" ref="a7bb2da42fac11287bcff4eed41095914" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VoodooWFS::VSWImage::CheckedCast </td>
+          <td>(</td>
+          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#adee03553337e3c174cdfbbc0a305e9c5">VoodooShader::IObject</a>.</p>
+
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00568">568</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -237,7 +281,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_image.html#affe88df59e08652cbcf6e50692baf0f2">VoodooShader::IImage</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00529">529</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00595">595</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -289,7 +333,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_image.html#afc2e685d6a8e5110876a66910bd2d513">VoodooShader::IImage</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00544">544</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00610">610</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -314,7 +358,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_image.html#a34e82c2f9b13b58ad3469d76b6013a67">VoodooShader::IImage</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00539">539</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00605">605</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -335,7 +379,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_image.html#a49a318f9fec94c4dcd982eda298aa147">VoodooShader::IImage</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00534">534</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00600">600</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -364,7 +408,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00437">437</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00481">481</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -388,7 +432,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_image.html#adfbe315d16c6d8f2355db773e44b1521">VoodooShader::IImage</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00513">513</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00557">557</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -412,7 +456,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_image.html#afa99fd1d8f50f5a4a50732a22ed53122">VoodooShader::IImage</a>.</p>
 
-<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00524">524</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8cpp_source.html#l00590">590</a> of file <a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -428,7 +472,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00243">243</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00254">254</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -443,7 +487,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00248">248</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00259">259</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -458,7 +502,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00247">247</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00258">258</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -473,7 +517,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00244">244</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00255">255</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +532,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00246">246</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00257">257</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +547,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00242">242</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00253">253</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -515,7 +559,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 2 2011 15:10:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 3 2011 02:04:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

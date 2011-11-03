@@ -1,7 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_v_s_hook_manager_8hpp.html" title="VSHookManager.hpp" alt="" coords="282,80,427,107"/>
-<area shape="rect" id="node5" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="307,379,401,405"/>
-<area shape="rect" id="node25" href="$_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="341,155,472,181"/>
-<area shape="rect" id="node27" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="363,229,451,256"/>
-<area shape="rect" id="node30" href="$_string_8hpp.html" title="String.hpp" alt="" coords="393,304,473,331"/>
+<area shape="rect" id="node3" href="$_v_s_hook_manager_8hpp.html" title="VSHookManager.hpp" alt="" coords="346,80,491,107"/>
+<area shape="rect" id="node5" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="371,379,465,405"/>
+<area shape="rect" id="node27" href="$_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="405,155,536,181"/>
+<area shape="rect" id="node29" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="427,229,515,256"/>
+<area shape="rect" id="node32" href="$_string_8hpp.html" title="String.hpp" alt="" coords="457,304,537,331"/>
 </map>
