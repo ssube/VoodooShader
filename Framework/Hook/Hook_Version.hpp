@@ -22,7 +22,7 @@
 #include "Version.hpp"
 
 /**
- * @addtogroup voodoo_module_ehhook Voodoo/EHHook 
+ * @addtogroup voodoo_module_ehhook Voodoo/EHHook
  * @{
  * Logger defs
  */

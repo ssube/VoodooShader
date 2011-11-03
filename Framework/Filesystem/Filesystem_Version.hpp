@@ -22,7 +22,7 @@
 #include "Version.hpp"
 
 /**
- * @addtogroup voodoo_module_wfilesystem 
+ * @addtogroup voodoo_module_wfilesystem
  * @{
  * Filesystem defs
  */

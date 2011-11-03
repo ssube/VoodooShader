@@ -22,12 +22,17 @@
 #include "Loader_Common.hpp"
 
 /**
- * @addtogroup voodoo_module_loader Voodoo/Loader 
+ * @addtogroup voodoo_module_loader Voodoo/Loader
  * @{
  */
 HINSTANCE gLoaderHandle;
 
 typedef VoodooShader::ICore * (VOODOO_CALL * VoodooCreateFunc)(const VoodooShader::InitParams * const pInitParams, _In_ bool catchErrors);
+
+const VoodooShader::Version * VOODOO_CALL API_ModuleVersion(void);
+const uint32_t  VOODOO_CALL API_ClassCount(void);
+const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * pUuid);
+VoodooShader::IObject *       VOODOO_CALL API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
 

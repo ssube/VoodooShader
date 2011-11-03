@@ -33,7 +33,7 @@ namespace VoodooShader
         /**
          * Classes and functions related to the EasyHook-based implementation of IHookManager.
          *
-         * @addtogroup voodoo_module_ehhook Voodoo/EHHook 
+         * @addtogroup voodoo_module_ehhook Voodoo/EHHook
          * @{
          */
         typedef std::map<String, TRACED_HOOK_HANDLE> HookMap;

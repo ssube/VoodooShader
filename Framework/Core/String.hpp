@@ -138,7 +138,7 @@ namespace VoodooShader
         {
             this->CInit(0, str.c_str());
         }
-        
+
         /**
          * Create a string from a std::wstring.
          * @param str The string to use.
@@ -170,7 +170,7 @@ namespace VoodooShader
          * Attempts to convert this String to a character array. If size is 0 and pBuffer is null, this estimates the size
          * of the buffer required and returns that; otherwise it converts the string and returns the number of bytes written
          * to pBuffer.
-         * 
+         *
          * @param size Size of buffer.
          * @param pBuffer Buffer to write converted string to.
          * @return Necessary buffer size or bytes converted.
@@ -180,12 +180,12 @@ namespace VoodooShader
 #ifdef _STRING_
         /**
          * Creates a std::wstring from this string.
-         * 
+         *
          * @return Copied string.
          */
         std::wstring ToString() const
-        { 
-            return std::wstring(this->GetData()); 
+        {
+            return std::wstring(this->GetData());
         };
 #endif
 
@@ -299,33 +299,115 @@ namespace VoodooShader
         void SetAt(_In_ uint32_t pos, _In_ wchar_t data);
 
         const wchar_t * GetData() const;
+
 #ifdef _STRING_
-        inline std::wstring ToStdString() const { return std::wstring(this->GetData()); };
+        inline std::wstring ToStdString() const
+        {
+            return std::wstring(this->GetData());
+        };
 #endif
 
-        inline String & operator=(_In_ const wchar_t ch) { this->Assign(ch); return (*this); };
-        inline String & operator=(_In_z_ const wchar_t * str) { this->Assign(str); return (*this); };
-        inline String & operator=(_In_ const String & str) { this->Assign(str); return (*this); };
-        inline String & operator+=(_In_ const wchar_t ch) { this->Append(ch); return (*this); };
-        inline String & operator+=(_In_z_ const wchar_t * str) { this->Append(str); return (*this); };
-        inline String & operator+=(_In_ const String & str) { this->Append(str); return (*this); };
-        inline const String operator+(_In_ const wchar_t ch) const { String c = (*this); c += ch; return c; };
-        inline const String operator+(_In_z_ const wchar_t * str) const { String c = (*this); c += str; return c; };
-        inline const String operator+(_In_ const String & str) const { String c = (*this); c += str; return c; };
+        inline String & operator=(_In_ const wchar_t ch)
+        {
+            this->Assign(ch);
+            return (*this);
+        };
 
-        inline bool operator==(_In_z_ const wchar_t * str) const { return this->Compare(str); };
-        inline bool operator==(_In_ const String & str) const { return this->Compare(str.GetData()); };
-        inline bool operator!=(_In_z_ const wchar_t * str) const { return !(this->operator==(str)); };
-        inline bool operator!=(_In_ const String & str) const { return !(this->operator==(str.GetData())); };
+        inline String & operator=(_In_z_ const wchar_t * str)
+        {
+            this->Assign(str);
+            return (*this);
+        };
+
+        inline String & operator=(_In_ const String & str)
+        {
+            this->Assign(str);
+            return (*this);
+        };
+
+        inline String & operator+=(_In_ const wchar_t ch)
+        {
+            this->Append(ch);
+            return (*this);
+        };
+
+        inline String & operator+=(_In_z_ const wchar_t * str)
+        {
+            this->Append(str);
+            return (*this);
+        };
+
+        inline String & operator+=(_In_ const String & str)
+        {
+            this->Append(str);
+            return (*this);
+        };
+
+        inline const String operator+(_In_ const wchar_t ch) const
+        {
+            String c = (*this);
+            c += ch;
+            return c;
+        };
+
+        inline const String operator+(_In_z_ const wchar_t * str) const
+        {
+            String c = (*this);
+            c += str;
+            return c;
+        };
+
+        inline const String operator+(_In_ const String & str) const
+        {
+            String c = (*this);
+            c += str;
+            return c;
+        };
+
+        inline bool operator==(_In_z_ const wchar_t * str) const
+        {
+            return this->Compare(str);
+        };
+
+        inline bool operator==(_In_ const String & str) const
+        {
+            return this->Compare(str);
+        };
+
+        inline bool operator!=(_In_z_ const wchar_t * str) const
+        {
+            return !(this->operator==(str));
+        };
+
+        inline bool operator!=(_In_ const String & str) const
+        {
+            return !(this->operator==(str));
+        };
 
         bool operator<(_In_z_ const wchar_t * str) const;
         bool operator<(_In_ const String & str) const;
         bool operator>(_In_z_ const wchar_t * str) const;
         bool operator>(_In_ const String & str) const;
-        inline bool operator<=(_In_z_ const wchar_t * str) const { return !(this->operator>(str)); };
-        inline bool operator<=(_In_ const String & str) const { return !(this->operator>(str.GetData())); };
-        inline bool operator>=(_In_z_ const wchar_t * str) const { return !(this->operator<(str)); };
-        inline bool operator>=(_In_ const String & str) const { return !(this->operator<(str.GetData())); };
+
+        inline bool operator<=(_In_z_ const wchar_t * str) const
+        {
+            return !(this->operator>(str));
+        };
+
+        inline bool operator<=(_In_ const String & str) const
+        {
+            return !(this->operator>(str));
+        };
+
+        inline bool operator>=(_In_z_ const wchar_t * str) const
+        {
+            return !(this->operator<(str));
+        };
+
+        inline bool operator>=(_In_ const String & str) const
+        {
+            return !(this->operator<(str));
+        };
 
         static const uint32_t Npos = (uint32_t)-1;
 

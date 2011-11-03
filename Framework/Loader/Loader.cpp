@@ -24,11 +24,32 @@
 
 #include <string>
 
-const VoodooShader::Version * API_ModuleVersion(void)
-{
-    static VoodooShader::Version module = VOODOO_META_VERSION_STRUCT(LOADER);
+const VoodooShader::Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOADER);
 
-    return &module;
+const VoodooShader::Version * VOODOO_CALL API_ModuleVersion(void)
+{
+    return &moduleVersion;
+}
+
+const uint32_t VOODOO_CALL API_ClassCount(void)
+{
+    return 0;
+}
+
+const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * pUuid)
+{
+    UNREFERENCED_PARAMETER(index);
+    UNREFERENCED_PARAMETER(pUuid);
+
+    return nullptr;
+}
+
+VoodooShader::IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t number, _In_ VoodooShader::ICore *pCore)
+{
+    UNREFERENCED_PARAMETER(number);
+    UNREFERENCED_PARAMETER(pCore);
+
+    return nullptr;
 }
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
