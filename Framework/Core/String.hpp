@@ -30,36 +30,99 @@ namespace VoodooShader
 
     /**
      * Voodoo internal string class, providing constant and compiler-safe string passing between various modules. 
+     * 
+     * @warning This @b must use the MSVC wchar_t type, or bad things will happen. <b>GCC does not properly handle 
+     *      Unicode strings and will not provide valid inputs for these functions.</b>
      */
     class VOODOO_API String
     {
         class StringImpl;
 
     public:
+        /**
+         * Creates an empty string.
+         */
         String();
+
         // char ctors
+        /**
+         * Creates a string from the given character (one character, converted).
+         * @param ch Character to use.
+         */
         String(_In_ const char ch);
+
+        /**
+         * Creates a string from a C-style string (converted).
+         * @param str String to use.
+         */
         String(_In_z_ const char * str);
+
+        /**
+         * Creates a string from the given character (converted and repeated).
+         * @param size The number of characters.
+         * @param ch The character to use.
+         */
         String(_In_ const uint32_t size, _In_ const char ch);
+
+        /**
+         * Creates a string from a portion of the given string (taken from the beginning and converted).
+         * @param size The number of characters to use.
+         * @param str The string to use.
+         */
         String(_In_ const uint32_t size, _In_z_count_(size) const char * str);
         // wchar_t ctors
+        /**
+         * Creates a string from the given character (one character).
+         * @param ch Character to use.
+         */
         String(_In_ const wchar_t ch);
+        /**
+         * Creates a string from a C-style wide string.
+         * @param str String to use.
+         */
         String(_In_z_ const wchar_t * str);
+        /**
+         * Creates a string from the given character (repeated).
+         * @param size The number of characters.
+         * @param ch The character to use.
+         */
         String(_In_ const uint32_t size, _In_ const wchar_t ch);
+        /**
+         * Create a string from a C-style wide string.
+         * @param size The number of characters to use.
+         * @param str The string to use.
+         */
         String(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
         // class ctors
+        /**
+         * Creates a string from another String (copy constructor).
+         * @param str The string to copy.
+         * @note This does not provide a partial copy constructor, use <code>String(String.Left())</code>.
+         */
         String(_In_ const String & str);
+        /**
+         * Creates a string from a Uuid, converting to a string. This takes the unbraced 8/2/2/2/12 format, like so:
+         * @li @code hhhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh @endcode
+         */
         String(_In_ const Uuid & uuid);
 
 #ifdef _VECTOR_
-        String(_In_ const std::vector<char> & str)
+        /**
+         * Create a string from a vector, treating it as a character array (performs conversion).
+         * @param vec The vector to convert and use.
+         */
+        String(_In_ const std::vector<char> & vec)
         {
-            this->CInit(0, &str[0]);
+            this->CInit(0, &vec[0]);
         }
 
-        String(_In_ const std::vector<wchar_t> & str)
+        /**
+         * Create a string from a vector, treating it as a wide character array.
+         * @param vec The vector to use.
+         */
+        String(_In_ const std::vector<wchar_t> & vec)
         {
-            this->WInit(0, &str[0]);
+            this->WInit(0, &vec[0]);
         }
 #endif
 
@@ -78,6 +141,19 @@ namespace VoodooShader
         ~String();
 
         // Convert
+        /**
+         * Attempts to convert this String to a Uuid. The string must be of one of the following forms:
+         * @li <code>{01234567-89ab-cdef-0123-456789abcdef}</code>
+         * @li <code>01234567-89ab-cdef-0123-456789abcdef</code>
+         * @li <code>0123456789abcdef0123456789abcdef</code>
+         * 
+         * The first format is preferred, and matches the COM-standard 4/2/2/2/12 format, supported by most tools and
+         * common interfaces. Wherever possible, UUIDs should be embedded in code using the appropriate Voodoo macros to
+         * avoid string conversion costs.
+         * 
+         * @param pUuid Pointer to the Uuid to be filled, if conversion succeeds. If conversion fails, this is not modified.
+         * @return Success of conversion.
+         */
         bool ToUuid(_Out_ Uuid * pUuid) const;
         int32_t ToCharStr(_In_ int32_t size, _Inout_opt_count_(size) char * const pBuffer) const;
 #ifdef _STRING_
