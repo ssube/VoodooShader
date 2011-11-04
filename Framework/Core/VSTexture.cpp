@@ -57,13 +57,19 @@ namespace VoodooShader
                 return false;
             }
         } else {
-            if (clsid == IID_IObject || clsid == IID_ITexture || clsid == CLSID_VSTexture) {
-                *ppOut = this;
-                return true;
+            if (clsid == IID_IObject)
+            {
+                *ppOut = static_cast<const IObject*>(this);
+            } else if (clsid == IID_ITexture) {
+                *ppOut = static_cast<const ITexture*>(this);
+            } else if (clsid == CLSID_VSTexture) {
+                *ppOut = static_cast<const VSTexture*>(this);
             } else {
                 *ppOut = nullptr;
                 return false;
             }
+
+            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
         }
     }
 

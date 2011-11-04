@@ -69,13 +69,19 @@ namespace VoodooShader
                 return false;
             }
         } else {
-            if (clsid == IID_IObject || clsid == IID_IModuleManager || clsid == CLSID_VSModuleManager) {
-                *ppOut = this;
-                return true;
+            if (clsid == IID_IObject)
+            {
+                *ppOut = static_cast<const IObject*>(this);
+            } else if (clsid == IID_IModuleManager) {
+                *ppOut = static_cast<const IModuleManager*>(this);
+            } else if (clsid == CLSID_VSModuleManager) {
+                *ppOut = static_cast<const VSModuleManager*>(this);
             } else {
                 *ppOut = nullptr;
                 return false;
             }
+
+            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
         }
     }
 
@@ -373,13 +379,19 @@ namespace VoodooShader
                 return false;
             }
         } else {
-            if (clsid == IID_IObject || clsid == IID_IModule || clsid == CLSID_VSModule) {
-                *ppOut = this;
-                return true;
+            if (clsid == IID_IObject)
+            {
+                *ppOut = static_cast<const IObject*>(this);
+            } else if (clsid == IID_IModule) {
+                *ppOut = static_cast<const IModule*>(this);
+            } else if (clsid == CLSID_VSModule) {
+                *ppOut = static_cast<const VSModule*>(this);
             } else {
                 *ppOut = nullptr;
                 return false;
             }
+
+            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
         }
     }
 

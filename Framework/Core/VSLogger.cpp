@@ -57,13 +57,19 @@ namespace VoodooShader
                 return false;
             }
         } else {
-            if (clsid == IID_IObject || clsid == IID_ILogger || clsid == CLSID_VSLogger) {
-                *ppOut = this;
-                return true;
+            if (clsid == IID_IObject)
+            {
+                *ppOut = static_cast<const IObject*>(this);
+            } else if (clsid == IID_ILogger) {
+                *ppOut = static_cast<const ILogger*>(this);
+            } else if (clsid == CLSID_VSLogger) {
+                *ppOut = static_cast<const VSLogger*>(this);
             } else {
                 *ppOut = nullptr;
                 return false;
             }
+
+            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
         }
     }
 

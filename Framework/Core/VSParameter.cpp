@@ -102,13 +102,19 @@ namespace VoodooShader
                 return false;
             }
         } else {
-            if (clsid == IID_IObject || clsid == IID_IParameter || clsid == CLSID_VSParameter) {
-                *ppOut = this;
-                return true;
+            if (clsid == IID_IObject)
+            {
+                *ppOut = static_cast<const IObject*>(this);
+            } else if (clsid == IID_IParameter) {
+                *ppOut = static_cast<const IParameter*>(this);
+            } else if (clsid == CLSID_VSParameter) {
+                *ppOut = static_cast<const VSParameter*>(this);
             } else {
                 *ppOut = nullptr;
                 return false;
             }
+
+            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
         }
     }
 
