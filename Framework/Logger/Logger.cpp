@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of the Voodoo Shader Framework.
  *
  * Copyright (c) 2010-2011 by Sean Sube
@@ -206,7 +206,7 @@ namespace VoodooShader
             }
         }
 
-        bool VSXmlLogger::Open(IFile * const pFile, const bool append)
+        bool VSXmlLogger::Open(_In_ IFile *const pFile, _In_ const bool append)
         {
             return this->Open(pFile->GetPath(), append);
         }

@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of the Voodoo Shader Framework.
  *
  * Copyright (c) 2010-2011 by Sean Sube
@@ -95,7 +95,7 @@ namespace VoodooShader
         * Create a new instance of the given class, using specific class UUID. This requires a precise match and will fail
         * if no class is available.
         *
-        * @param name The class UUID to create.
+        * @param clsid The class UUID to create.
         * @return New object or nullptr if the class wasn't found or couldn't be created.
          */
         _Check_return_ virtual IObject * CreateObject(_In_ const Uuid & clsid) const = 0;

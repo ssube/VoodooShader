@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of the Voodoo Shader Framework.
  *
  * Copyright (c) 2010-2011 by Sean Sube
@@ -182,7 +182,7 @@ namespace VoodooShader
         m_ValueTexture = Texture;
     }
 
-    float * const VSParameter::GetScalar(void)
+    _Ret_count_c_(16) float * const VSParameter::GetScalar(void) throw()
     {
         return m_Valuefloat;
     }

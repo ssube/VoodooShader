@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of the Voodoo Shader Framework.
  *
  * Copyright (c) 2010-2011 by Sean Sube

@@ -35,7 +35,6 @@ SETUP(OGLCore)
     glutInitWindowPosition(0, 0);
     glutInitWindowSize(320, 320);
     gGlutWindow = glutCreateWindow("VoodooTest_Core::OGLTest");
-    glutShowWindow();
 
     gParams.Config = L"D:\\Code\\VoodooShader\\Tests\\Resources\\OpenGL.xmlconfig";
     gParams.GlobalRoot = gParams.LocalRoot = gParams.RunRoot = cwd;

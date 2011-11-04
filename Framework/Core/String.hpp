@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of the Voodoo Shader Framework.
  *
  * Copyright (c) 2010-2011 by Sean Sube
@@ -24,11 +24,14 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup VoodooUtility
+     * @addtogroup voodoo_utility Voodoo Utility
      * @{
      */
 
     /**
+     * @defgroup voodoo_utility_string Voodoo Strings
+     * @ingroup voodoo_utility
+     *
      * Voodoo internal string class, providing constant and compiler-safe string passing between various modules.
      *
      * @warning This @b must use the MSVC wchar_t type, or bad things will happen. <b>GCC does not properly handle
@@ -39,6 +42,12 @@ namespace VoodooShader
         class StringImpl;
 
     public:
+        /**
+         * @defgroup voodoo_utility_string_ctors String constructors
+         * @ingroup voodoo_utility_string
+         * @{
+         */
+
         /**
          * Creates an empty string.
          */
@@ -152,8 +161,17 @@ namespace VoodooShader
             this->WInit(0, str.c_str());
         };
 #endif
+        /**
+         * @}
+         */
 
         ~String();
+
+        /**
+         * @defgroup voodoo_utility_string_conv String conversion
+         * @ingroup voodoo_utility_string
+         * @{
+         */
 
         /**
          * Attempts to convert this String to a Uuid. The string must be of one of the following forms:
@@ -192,8 +210,15 @@ namespace VoodooShader
             return std::wstring(this->GetData());
         };
 #endif
-
-        /* Modify functions */
+        /**
+         * @}
+         */
+        
+        /**
+         * @defgroup voodoo_utility_string_mod String modification
+         * @ingroup voodoo_utility_string
+         * @{
+         */
         String & Append(_In_ const wchar_t ch);
         String & Append(_In_ const uint32_t size, _In_ const wchar_t ch);
         String & Append(_In_ const wchar_t * str);
@@ -211,17 +236,38 @@ namespace VoodooShader
         String & Prepend(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
         String & Prepend(_In_ const String & str);
         String & Truncate(_In_ uint32_t size);
-
-        // Copy
+        /**
+         * @}
+         */
+        
+        /**
+         * @defgroup voodoo_utility_string_case String case conversion
+         * @ingroup voodoo_utility_string
+         * @{
+         */
         String ToLower() const;
         String ToUpper() const;
-
-        // Part
+        /**
+         * @}
+         */
+        
+        /**
+         * @defgroup voodoo_utility_string_part String partial copy
+         * @ingroup voodoo_utility_string
+         * @{
+         */
         String Left(_In_ uint32_t count) const;
         String Right(_In_ uint32_t count) const;
         String Substr(_In_ uint32_t start, _In_ uint32_t count = String::Npos) const;
-
-        // Predicates
+        /**
+         * @}
+         */
+        
+        /**
+         * @defgroup voodoo_utility_string_pred String predicates
+         * @ingroup voodoo_utility_string
+         * @{
+         */
         bool Compare(_In_ const wchar_t ch, _In_ bool useCase = true) const;
         bool Compare(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         bool Compare(_In_ const String & str, _In_ bool useCase = true) const;
@@ -234,24 +280,40 @@ namespace VoodooShader
         bool Contains(_In_ const wchar_t ch, _In_ bool useCase = true) const;
         bool Contains(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         bool Contains(_In_ const String & str, _In_ bool useCase = true) const;
-
-        // Find
+        /**
+         * @}
+         */
+        
+        /**
+         * @defgroup voodoo_utility_string_find String find and replace
+         * @ingroup voodoo_utility_string
+         * @{
+         */
         uint32_t Find(_In_ const wchar_t ch, _In_ bool useCase = true) const;
         uint32_t Find(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         uint32_t Find(_In_ const String & str, _In_ bool useCase = true) const;
         uint32_t ReverseFind(_In_ const wchar_t ch, _In_ bool useCase = true) const;
         uint32_t ReverseFind(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         uint32_t ReverseFind(_In_ const String & str, _In_ bool useCase = true) const;
-
-        // Replace
+        
         String & Replace(_In_ const wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase = true);
         String & Replace(_In_z_ const wchar_t * fstr, _In_z_ const wchar_t * rstr, _In_ bool useCase = true);
         String & Replace(_In_ const String & fstr, _In_ const String & rstr, _In_ bool caseSensitive = true);
         String & Remove(_In_ const wchar_t fch, _In_ bool useCase = true);
         String & Remove(_In_z_ const wchar_t * fstr, _In_ bool useCase = true);
         String & Remove(_In_ const String & fstr, _In_ bool useCase = true);
-
-        // Format
+        /**
+         * @}
+         */
+        
+        /**
+         * @defgroup voodoo_utility_string_format String format
+         * @ingroup voodoo_utility_string
+         * Uses the system's wide-string printf to format these strings. This may vary between systems, precise details
+         * should be in the system documentation (<a href="http://msdn.microsoft.com/en-us/library/56e442dc.aspx">Windows
+         * details here</a>).
+         * @{
+         */
         static String FormatV(_In_z_ _Printf_format_string_ const wchar_t * fmt, _In_opt_ va_list args);
         inline static String FormatV(_In_ _Printf_format_string_ const String & fmt, va_list args)
         {
@@ -293,6 +355,9 @@ namespace VoodooShader
             va_end(args);
             return (*this);
         };
+        /**
+         * @}
+         */
 
         // Buffer info/access
         uint32_t GetLength() const;
