@@ -107,6 +107,7 @@ namespace VoodooShader
             }
 
             reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+            return true;
         }
     }
 
