@@ -421,7 +421,7 @@ namespace VoodooShader
 
     IShader * VSCore::CreateShader(_In_ const IFile * pFile, _In_opt_ const char **ppArgs)
     {
-        if (!pFile)
+        if (!pFile || !m_CgContext)
         {
             return nullptr;
         }
@@ -437,6 +437,11 @@ namespace VoodooShader
 
     IParameter * VSCore::CreateParameter(const String & name, const ParameterType type)
     {
+        if (!m_CgContext)
+        {
+            return nullptr;
+        }
+
         ParameterMap::iterator paramEntry = m_Parameters.find(name);
 
         if (paramEntry != m_Parameters.end())
@@ -463,6 +468,11 @@ namespace VoodooShader
 
     ITexture* VSCore::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
     {
+        if (!m_CgContext)
+        {
+            return nullptr;
+        }
+
         TextureMap::iterator textureEntry = m_Textures.find(name);
 
         if (textureEntry != m_Textures.end())
@@ -582,7 +592,7 @@ namespace VoodooShader
         }
     }
 
-    void VSCore::SetStageTexture(_In_ const TextureStage Stage, _In_ ITexture * const pTexture)
+    void VSCore::SetStageTexture(_In_ const TextureStage Stage, _In_opt_ ITexture * const pTexture)
     {
         switch (Stage)
         {
@@ -597,7 +607,7 @@ namespace VoodooShader
 
     void VSCore::CgErrorHandler(CGcontext context, int error) const
     {
-        const char *errorString = error ? cgGetErrorString((CGerror) error) : nullptr;
+        const char * errorString = error ? cgGetErrorString((CGerror) error) : nullptr;
 
         if (errorString)
         {

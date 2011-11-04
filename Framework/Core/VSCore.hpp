@@ -70,7 +70,7 @@ namespace VoodooShader
         virtual bool RemoveTexture(_In_ const String & name);
 
         virtual ITexture * GetStageTexture(_In_ const TextureStage stage) const;
-        virtual void SetStageTexture(_In_ const TextureStage stage, _In_ ITexture * const pTexture);
+        virtual void SetStageTexture(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture);
 
         _Check_return_ virtual CGcontext GetCgContext(void) const;
         virtual bool SetCgContext(_In_opt_ CGcontext const pContext);

@@ -68,7 +68,7 @@ namespace VoodooShader
         /**
          * Retrieves this core's IFileSystem implementation.
          *
-         * @return A shared pointer to the filesystem instance (always valid).
+         * @return A shared pointer to the file system instance (always valid).
          */
         virtual IFileSystem * GetFileSystem(void) const throw() = 0;
 
@@ -113,7 +113,7 @@ namespace VoodooShader
         virtual bool SetCgContext(_In_opt_ CGcontext const pContext) throw() = 0;
 
         /**
-         * Loads and compiles an effect from file, using the current filesystem and search paths.
+         * Loads and compiles an effect from file, using the current file system and search paths.
          *
          * @param pFile The file to load and compile. May be an absolute or relative filename.
          * @param ppArgs Optional arguments providing compiler directives, usually shader model specific
@@ -207,7 +207,7 @@ namespace VoodooShader
          * @param stage The texture stage to set.
          * @param pTexture The texture to bind.
          */
-        virtual void SetStageTexture(_In_ const TextureStage stage, _In_ ITexture * const pTexture) throw() = 0;
+        virtual void SetStageTexture(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture) throw() = 0;
     };
     /**
      * @}
