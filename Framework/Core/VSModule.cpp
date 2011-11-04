@@ -33,7 +33,7 @@
 namespace VoodooShader
 {
     VSModuleManager::VSModuleManager(_In_ ICore *core) :
-        m_Core(core)
+        m_Refs(0), m_Core(core)
     { }
 
     VSModuleManager::~VSModuleManager(void)
@@ -151,9 +151,9 @@ namespace VoodooShader
         }
 
         // Create struct and load functions
-        IModule* rawmodule = VSModule::Load(m_Core, filename);
+        IModuleRef module = VSModule::Load(m_Core, filename);
 
-        if (rawmodule == nullptr)
+        if (module == nullptr)
         {
             if (logger.get())
             {
@@ -163,12 +163,10 @@ namespace VoodooShader
             return false;
         }
 
-        IModule* module(rawmodule);
-
         m_Modules[filename] = module;
 
         // Register classes from module
-        const Version * moduleversion = rawmodule->ModuleVersion();
+        const Version * moduleversion = module->ModuleVersion();
 
         if (moduleversion->Debug != VOODOO_META_DEBUG_BOOL && logger.get())
         {
@@ -191,6 +189,8 @@ namespace VoodooShader
         for (int curClass = 0; curClass < classCount; ++curClass)
         {
             Uuid clsid;
+            ZeroMemory(&clsid, sizeof(Uuid));
+
             const wchar_t * name = module->ClassInfo(curClass, &clsid);
 
             if (name)
@@ -341,7 +341,7 @@ namespace VoodooShader
     }
 
     VSModule::VSModule(_In_ ICore * pCore, HMODULE hmodule) :
-        m_Core(pCore), m_Handle(hmodule)
+        m_Refs(0), m_Core(pCore), m_Handle(hmodule)
     { }
 
     VSModule::~VSModule(void)

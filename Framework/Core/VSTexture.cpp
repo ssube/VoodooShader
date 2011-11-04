@@ -23,7 +23,7 @@
 namespace VoodooShader
 {
     VSTexture::VSTexture(String name, void * pTexture) :
-        m_Name(name), m_Data(pTexture)
+        m_Refs(0), m_Name(name), m_Data(pTexture)
     { }
 
     VSTexture::~VSTexture(void)

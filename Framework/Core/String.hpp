@@ -114,7 +114,8 @@ namespace VoodooShader
          * Create a string from a vector, treating it as a character array (performs conversion).
          * @param vec The vector to convert and use.
          */
-        String(_In_ const std::vector<char> & vec)
+        String(_In_ const std::vector<char> & vec) :
+            m_Impl(nullptr)
         {
             this->CInit(0, &vec[0]);
         }
@@ -123,7 +124,8 @@ namespace VoodooShader
          * Create a string from a vector, treating it as a wide character array.
          * @param vec The vector to use.
          */
-        String(_In_ const std::vector<wchar_t> & vec)
+        String(_In_ const std::vector<wchar_t> & vec) :
+            m_Impl(nullptr)
         {
             this->WInit(0, &vec[0]);
         }
@@ -134,7 +136,8 @@ namespace VoodooShader
          * Create a string from a std::string (performs conversion).
          * @param str The string to use.
          */
-        String(_In_ const std::string & str)
+        String(_In_ const std::string & str) :
+            m_Impl(nullptr)
         {
             this->CInit(0, str.c_str());
         }
@@ -143,7 +146,8 @@ namespace VoodooShader
          * Create a string from a std::wstring.
          * @param str The string to use.
          */
-        String(_In_ const std::wstring & str)
+        String(_In_ const std::wstring & str) :
+            m_Impl(nullptr)
         {
             this->WInit(0, str.c_str());
         };

@@ -23,7 +23,7 @@
 namespace VoodooShader
 {
     VSFileSystem::VSFileSystem(_In_ ICore * pCore) :
-        m_Core(pCore)
+        m_Refs(0), m_Core(pCore)
     { }
 
     VSFileSystem::~VSFileSystem(void)

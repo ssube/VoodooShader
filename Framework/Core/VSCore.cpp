@@ -75,7 +75,7 @@ namespace VoodooShader
     }
 
     VSCore::VSCore(_In_ const InitParams * const pInitParams) :
-        m_CgContext(nullptr), m_ConfigFile(nullptr)
+        m_Refs(0), m_CgContext(nullptr), m_ConfigFile(nullptr)
     {
         if (!pInitParams)
         {
@@ -127,12 +127,7 @@ namespace VoodooShader
                         result = m_ConfigFile->load_file(configPath.GetData());
                         if (!result)
                         {
-                            configPath = m_Parser->Parse(L"$(config)");
-                            result = m_ConfigFile->load_file(configPath.GetData());
-                            if (!result)
-                            {
-                                Throw(VOODOO_CORE_NAME, L"Unable to find or parse config file.", nullptr);
-                            }
+                            Throw(VOODOO_CORE_NAME, L"Unable to find or parse config file.", nullptr);
                         }
                     }
                 }
@@ -140,7 +135,7 @@ namespace VoodooShader
 
             // Start setting things up
             pugi::xml_node configRoot = static_cast<pugi::xml_node>(*m_ConfigFile);
-            pugi::xml_node coreNode = configRoot.select_single_node(L"/VoodooConfig/ICore").node();
+            pugi::xml_node coreNode = configRoot.select_single_node(L"/VoodooConfig/Core").node();
             if (!coreNode)
             {
                 Throw(VOODOO_CORE_NAME, L"Could not find ICore node.", nullptr);
@@ -201,19 +196,25 @@ namespace VoodooShader
             }
 
             // Lookup classes
-            pugi::xpath_query logQuery(L"/VoodooConfig/ICore/Class/Logger/text()");
-            pugi::xpath_query fsQuery(L"/VoodooConfig/ICore/Class/FileSystem/text()");
-            pugi::xpath_query hookQuery(L"/VoodooConfig/ICore/Class/HookManager/text()");
-            pugi::xpath_query adpQuery(L"/VoodooConfig/ICore/Class/Adapter/text()");
-            pugi::xpath_query logfQuery(L"/VoodooConfig/ICore/Class/Logger/@file");
-            pugi::xpath_query loglQuery(L"/VoodooConfig/ICore/Class/Logger/@level");
+            pugi::xpath_query logQuery(L"/VoodooConfig/Core/Class/Logger/text()");
+            pugi::xpath_query fsQuery(L"/VoodooConfig/Core/Class/FileSystem/text()");
+            pugi::xpath_query hookQuery(L"/VoodooConfig/Core/Class/HookManager/text()");
+            pugi::xpath_query adpQuery(L"/VoodooConfig/Core/Class/Adapter/text()");
+            pugi::xpath_query logfQuery(L"/VoodooConfig/Core/Class/Logger/@file");
+            pugi::xpath_query loglQuery(L"/VoodooConfig/Core/Class/Logger/@level");
             String logClass = m_Parser->Parse(logQuery.evaluate_string(configRoot).c_str());
             String fsClass = m_Parser->Parse(fsQuery.evaluate_string(configRoot).c_str());
             String hookClass = m_Parser->Parse(hookQuery.evaluate_string(configRoot).c_str());
             String adpClass = m_Parser->Parse(adpQuery.evaluate_string(configRoot).c_str());
             String logFile = m_Parser->Parse(logfQuery.evaluate_string(configRoot).c_str());
-
-            LogLevel logLevel = (LogLevel)boost::lexical_cast<int32_t>(loglQuery.evaluate_string(configRoot));
+            
+            LogLevel logLevel = LL_Initial;
+            try
+            {
+                logLevel = (LogLevel)boost::lexical_cast<int32_t>(loglQuery.evaluate_string(configRoot));
+            } catch (const boost::bad_lexical_cast & exc) {
+                UNREFERENCED_PARAMETER(exc);
+            }
 
             // Make sure a logger was loaded
             m_Logger = dynamic_cast<ILogger*>(m_ModuleManager->CreateObject(logClass));

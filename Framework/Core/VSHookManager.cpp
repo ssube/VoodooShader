@@ -23,7 +23,7 @@
 namespace VoodooShader
 {
     VSHookManager::VSHookManager(_In_ ICore * pCore) :
-        m_Core(pCore)
+        m_Refs(0), m_Core(pCore)
     { }
 
     VSHookManager::~VSHookManager(void)

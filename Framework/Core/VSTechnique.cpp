@@ -34,7 +34,7 @@
 namespace VoodooShader
 {
     VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
-        m_Shader(pShader), m_Core(pShader->GetCore()), m_CgTechnique(pCgTech), m_Target(nullptr)
+        m_Refs(0), m_Shader(pShader), m_Core(pShader->GetCore()), m_CgTechnique(pCgTech), m_Target(nullptr)
     {
         const char * techName = cgGetTechniqueName(m_CgTechnique);
 

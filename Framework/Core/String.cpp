@@ -40,61 +40,72 @@ namespace VoodooShader
         std::wstring m_Str;
     };
 
-    String::String()
+    String::String() :
+        m_Impl(nullptr)
     {
         m_Impl = new StringImpl();
     }
 
-    String::String(const char ch)
+    String::String(const char ch) :
+        m_Impl(nullptr)
     {
         wchar_t wch = 0;
         mbtowc(&wch, &ch, 1);
         m_Impl = new StringImpl(1, wch);
     }
 
-    String::String(const char * str)
+    String::String(const char * str) :
+        m_Impl(nullptr)
     {
         this->CInit(0, str);
     }
 
-    String::String(const uint32_t size, const char ch)
+    String::String(const uint32_t size, const char ch) :
+        m_Impl(nullptr)
     {
         wchar_t wch = 0;
         mbtowc(&wch, &ch, 1);
         m_Impl = new StringImpl(size, wch);
     }
 
-    String::String(const uint32_t size, const char * str)
+    String::String(const uint32_t size, const char * str) :
+        m_Impl(nullptr)
     {
         this->CInit(size, str);
     }
 
-    String::String(const wchar_t ch)
+    String::String(const wchar_t ch) :
+        m_Impl(nullptr)
     {
         m_Impl = new StringImpl(1, ch);
     }
 
-    String::String(const wchar_t * str)
+    String::String(const wchar_t * str) :
+        m_Impl(nullptr)
     {
         m_Impl = new StringImpl(str);
     }
 
-    String::String(const uint32_t size, const wchar_t ch)
+    String::String(const uint32_t size, const wchar_t ch) :
+        m_Impl(nullptr)
     {
         m_Impl = new StringImpl(size, ch);
     }
 
-    String::String(const uint32_t size, const wchar_t * str)
+    String::String(const uint32_t size, const wchar_t * str) :
+        m_Impl(nullptr)
     {
         m_Impl = new StringImpl(size, str);
     }
 
-    String::String(const String & other)
+    String::String(const String & other) :
+        m_Impl(nullptr)
     {
         m_Impl = new StringImpl(other.m_Impl->m_Str);
     }
 
-    String::String(const Uuid & uuid)
+    String::String(const Uuid & uuid) :
+        m_Impl(nullptr)
     {
         m_Impl = new StringImpl(boost::uuids::to_wstring(uuid));
     }

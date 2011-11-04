@@ -23,7 +23,7 @@
 namespace VoodooShader
 {
     VSAdapter::VSAdapter(ICore * pCore) :
-        m_Core(pCore)
+        m_Refs(0), m_Core(pCore)
     { }
 
     VSAdapter::~VSAdapter(void)

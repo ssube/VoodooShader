@@ -23,7 +23,7 @@
 namespace VoodooShader
 {
     VSLogger::VSLogger(ICore * pCore) :
-        m_Core(pCore)
+        m_Refs(0), m_Core(pCore)
     { }
 
     VSLogger::~VSLogger(void)

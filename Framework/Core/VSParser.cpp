@@ -30,7 +30,7 @@
 namespace VoodooShader
 {
     VSParser::VSParser(_In_ ICore * pCore) :
-        m_Core(pCore)
+        m_Refs(0), m_Core(pCore)
     { }
 
     VSParser::~VSParser(void)
@@ -168,8 +168,6 @@ namespace VoodooShader
 
     String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ Dictionary & state) const
     {
-        using namespace std;
-
         ILoggerRef logger(m_Core->GetLogger());
 
         if (logger)
@@ -184,12 +182,13 @@ namespace VoodooShader
 
         // Parse out any variables in the filename, first
         String iteration = input;
+
         // Variable parsing loop
         bool loop = true;
 
         while (loop)
         {
-            const size_t itlen = iteration.GetLength();
+            const uint32_t itlen = iteration.GetLength();
 
             if (itlen < 3)
             {
@@ -198,16 +197,16 @@ namespace VoodooShader
                 break;
             }
 
-            size_t endpos = iteration.Find(VSParser::VarDelimEnd);
+            uint32_t endpos = iteration.Find(VSParser::VarDelimEnd);
 
-            if (endpos == string::npos)
+            if (endpos == String::Npos)
             {
                 // Stop parsing if no closing delimiter is found
                 break;
             }
 
             String varname = iteration.Substr(0, endpos);
-            size_t startpos = varname.ReverseFind(VSParser::VarDelimStart);
+            uint32_t startpos = varname.ReverseFind(VSParser::VarDelimStart);
 
             if (startpos < 1 || iteration[startpos - 1] != VSParser::VarDelimPre)
             {
@@ -220,7 +219,7 @@ namespace VoodooShader
             if (varname.GetLength() == 0)
             {
                 // Erase the variable sequence if it is the empty variable and restart the loop
-                wstringstream output;
+                std::wstringstream output;
 
                 output << iteration.Substr(0, startpos - 1).GetData();
                 if (endpos < itlen)
@@ -233,7 +232,7 @@ namespace VoodooShader
             }
 
             // Handle state variables
-            size_t statepos = varname.Find(VSParser::VarMarkerState);
+            uint32_t statepos = varname.Find(VSParser::VarMarkerState);
 
             if (statepos != String::Npos)
             {
@@ -247,7 +246,7 @@ namespace VoodooShader
 
                 state[varname] = newvalue;
 
-                wstringstream output;
+                std::wstringstream output;
 
                 output << iteration.Substr(0, startpos - 1).GetData() << iteration.Substr(endpos + 1).GetData();
                 iteration = output.str();
@@ -308,7 +307,7 @@ namespace VoodooShader
                 }
             }
 
-            wstringstream output;
+            std::wstringstream output;
 
             output << iteration.Substr(0, startpos - 1).GetData();
             if (parse && varvalue.GetLength() > 0)
@@ -332,13 +331,11 @@ namespace VoodooShader
         }
         else if (flags == PF_VarName)
         {
-            iteration.ToLower();
-            return iteration;
+            return iteration.ToLower();
         }
 
         if (flags & (PF_SingleSlash | PF_SlashOnly | PF_BackslashOnly))
         {
-
             bool singleslash = (flags & PF_SingleSlash);
             bool prevslash = false;
             bool slashrewrite = false;
@@ -355,7 +352,7 @@ namespace VoodooShader
                 slashchar = L'\\';
             }
 
-            wstringstream output;
+            std::wstringstream output;
             size_t total = iteration.GetLength();
             size_t cur = 0;
 
@@ -392,9 +389,9 @@ namespace VoodooShader
 
         if (flags & PF_Lowercase)
         {
-            iteration.ToLower();
+            iteration = iteration.ToLower();
         } else if (flags & PF_Uppercase) {
-            iteration.ToUpper();
+            iteration = iteration.ToUpper();
         }
 
         if (logger)

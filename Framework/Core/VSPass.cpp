@@ -32,7 +32,7 @@
 namespace VoodooShader
 {
     VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) :
-        m_Technique(pTechnique), m_CgPass(pCgPass)
+        m_Refs(0), m_Technique(pTechnique), m_CgPass(pCgPass)
     {
         if (!m_Technique)
         {
