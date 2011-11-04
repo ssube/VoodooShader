@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.293</span>
+   &#160;<span id="projectnumber">0.4.2.299</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -67,7 +67,25 @@
 <div class="title">Includes.hpp</div>  </div>
 </div>
 <div class="contents">
-<a href="_includes_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a href="_includes_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00003"></a>00003 <span class="comment"> *</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00005"></a>00005 <span class="comment"> *</span>
+<a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
+<a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
+<a name="l00008"></a>00008 <span class="comment"> * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without</span>
+<a name="l00009"></a>00009 <span class="comment"> * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<a name="l00010"></a>00010 <span class="comment"> * License for more details.</span>
+<a name="l00011"></a>00011 <span class="comment"> *</span>
+<a name="l00012"></a>00012 <span class="comment"> * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to</span>
+<a name="l00013"></a>00013 <span class="comment"> * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US</span>
+<a name="l00014"></a>00014 <span class="comment"> *</span>
+<a name="l00015"></a>00015 <span class="comment"> * Support and more information may be found at</span>
+<a name="l00016"></a>00016 <span class="comment"> *   http://www.voodooshader.com</span>
+<a name="l00017"></a>00017 <span class="comment"> * or by contacting the lead developer at</span>
+<a name="l00018"></a>00018 <span class="comment"> *   peachykeen@voodooshader.com</span>
+<a name="l00019"></a>00019 <span class="comment"> */</span>
 <a name="l00020"></a>00020 <span class="preprocessor">#pragma once</span>
 <a name="l00021"></a>00021 <span class="preprocessor"></span>
 <a name="l00022"></a>00022 <span class="preprocessor">#include &lt;functional&gt;</span>
@@ -169,7 +187,7 @@
 <a name="l00118"></a>00118     <span class="comment">/* Custom basic types */</span>
 <a name="l00119"></a>00119     <span class="keyword">class </span>Exception;
 <a name="l00120"></a>00120     <span class="keyword">class </span>Regex;
-<a name="l00121"></a><a class="code" href="namespace_voodoo_shader.html#ac43f3a1ca019a9434e20660e4a15a05e">00121</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>;
+<a name="l00121"></a><a class="code" href="namespace_voodoo_shader.html#ac43f3a1ca019a9434e20660e4a15a05e">00121</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_string.html">String</a>;
 <a name="l00122"></a>00122 
 <a name="l00123"></a>00123 <span class="preprocessor">#ifndef VOODOO_NO_PUGIXML</span>
 <a name="l00124"></a>00124 <span class="preprocessor"></span>    <span class="keyword">typedef</span> pugi::xml_document * <a class="code" href="namespace_voodoo_shader.html#ac43f3a1ca019a9434e20660e4a15a05e">XmlDocument</a>;
@@ -219,29 +237,29 @@
 <a name="l00176"></a>00176     <span class="comment">/* Uuids */</span>
 <a name="l00177"></a><a class="code" href="_includes_8hpp.html#ab427c430f482b5b1e2a0a5b6408b4065">00177</a> <span class="preprocessor">#define DEFINE_UUID(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \</span>
 <a name="l00178"></a>00178 <span class="preprocessor">    EXTERN_C const Uuid DECLSPEC_SELECTANY name = {d0,d1,d2,d3,d4,d5,d6,d7,d8,d9,da,db,dc,dd,de,df}</span>
-<a name="l00179"></a><a class="code" href="_includes_8hpp.html#a700b394957f205b7f784ea0e1cdbf61e">00179</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFINE_UUID_INTR(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \</span>
+<a name="l00179"></a><a class="code" href="_includes_8hpp.html#a864455f510b708e000c5823c0d7a90e2">00179</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFINE_IID(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \</span>
 <a name="l00180"></a>00180 <span class="preprocessor">    DEFINE_UUID(IID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)</span>
-<a name="l00181"></a><a class="code" href="_includes_8hpp.html#a62a3a2d050dc1111c23c6792ceaf5dec">00181</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFINE_UUID_IMPL(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \</span>
+<a name="l00181"></a><a class="code" href="_includes_8hpp.html#a15b641bec9acff8fa1ef7e9f65d7ebcf">00181</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFINE_CLSID(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \</span>
 <a name="l00182"></a>00182 <span class="preprocessor">    DEFINE_UUID(CLSID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)</span>
-<a name="l00183"></a><a class="code" href="_includes_8hpp.html#ac90ad53c69d8efbe89249278bb36393f">00183</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFINE_UUID_LIB(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \</span>
+<a name="l00183"></a><a class="code" href="_includes_8hpp.html#a8b1ba1e7182b6e7db0779191a9b76dd0">00183</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFINE_LIBID(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \</span>
 <a name="l00184"></a>00184 <span class="preprocessor">    DEFINE_UUID(LIBID_##name,  d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df)</span>
 <a name="l00185"></a>00185 <span class="preprocessor"></span>
-<a name="l00186"></a>00186     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IObject,       0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00187"></a>00187     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IAdapter,      0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00188"></a>00188     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(ICore,         0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00189"></a>00189     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IFile,         0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00190"></a>00190     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IFileSystem,   0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00191"></a>00191     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IHookManager,  0x8c, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00192"></a>00192     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IImage,        0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00193"></a>00193     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(ILogger,       0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00194"></a>00194     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IModule,       0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00195"></a>00195     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IModuleManager,0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00196"></a>00196     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IParameter,    0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00197"></a>00197     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IParser,       0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00198"></a>00198     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IPass,         0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00199"></a>00199     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(IShader,       0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00200"></a>00200     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(ITechnique,    0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
-<a name="l00201"></a>00201     <a class="code" href="namespace_voodoo_shader.html#a88749d6a457b1895e0bb967fe48e305c">DEFINE_UUID_INTR</a>(ITexture,      0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00186"></a>00186     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IObject,       0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00187"></a>00187     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IAdapter,      0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00188"></a>00188     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(ICore,         0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00189"></a>00189     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IFile,         0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00190"></a>00190     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IFileSystem,   0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00191"></a>00191     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IHookManager,  0x8c, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00192"></a>00192     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IImage,        0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00193"></a>00193     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(ILogger,       0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00194"></a>00194     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IModule,       0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00195"></a>00195     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IModuleManager,0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00196"></a>00196     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IParameter,    0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00197"></a>00197     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IParser,       0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00198"></a>00198     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IPass,         0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00199"></a>00199     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(IShader,       0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00200"></a>00200     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(ITechnique,    0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00201"></a>00201     <a class="code" href="namespace_voodoo_shader.html#ae09e95cc06a66b067d63268b87d39a79">DEFINE_IID</a>(ITexture,      0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
 <a name="l00202"></a>00202 
 <a name="l00203"></a>00203     <span class="comment">/* Reference typedefs */</span>
 <a name="l00204"></a>00204 <span class="preprocessor">#ifndef VOODOO_NO_BOOST</span>
@@ -536,7 +554,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 4 2011 15:15:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

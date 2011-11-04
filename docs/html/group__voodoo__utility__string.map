@@ -1,0 +1,11 @@
+<map id="structs" name="structs">
+<area shape="rect" id="node1" href="$group__voodoo__utility__string__format.html" title="Uses the system&#39;s wide&#45;string printf to format these strings." alt="" coords="347,5,443,32"/>
+<area shape="rect" id="node2" href="$group__voodoo__utility.html" title="Voodoo Utility" alt="" coords="6,183,109,209"/>
+<area shape="rect" id="node3" href="$group__voodoo__utility__string__case.html" title="String case conversion" alt="" coords="318,56,471,83"/>
+<area shape="rect" id="node4" href="$group__voodoo__utility__string__conv.html" title="String conversion" alt="" coords="334,107,455,133"/>
+<area shape="rect" id="node5" href="$group__voodoo__utility__string__mod.html" title="String modification" alt="" coords="330,157,459,184"/>
+<area shape="rect" id="node6" href="$group__voodoo__utility__string__part.html" title="String partial copy" alt="" coords="331,208,458,235"/>
+<area shape="rect" id="node7" href="$group__voodoo__utility__string__find.html" title="String find and replace" alt="" coords="319,259,470,285"/>
+<area shape="rect" id="node8" href="$group__voodoo__utility__string__pred.html" title="String predicates" alt="" coords="335,309,455,336"/>
+<area shape="rect" id="node9" href="$group__voodoo__utility__string__ctors.html" title="String constructors" alt="" coords="329,360,461,387"/>
+</map>

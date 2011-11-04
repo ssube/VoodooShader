@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.293</span>
+   &#160;<span id="projectnumber">0.4.2.299</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -73,13 +73,10 @@
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">VoodooShader::String Class Reference<div class="ingroups"><a class="el" href="group___voodoo_utility.html">VoodooUtility</a></div></div>  </div>
+<div class="title">VoodooShader::String Class Reference<div class="ingroups"><a class="el" href="group__voodoo__utility.html">Voodoo Utility</a></div></div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="VoodooShader::String" -->
-<p>Voodoo internal string class, providing constant and compiler-safe string passing between various modules.  
- <a href="class_voodoo_shader_1_1_string.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="_string_8hpp_source.html">String.hpp</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for VoodooShader::String:</div>
@@ -98,81 +95,81 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a799f5322d9efc12a1ee8515305cc2944">String</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty string.  <a href="#a799f5322d9efc12a1ee8515305cc2944"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a38a1a170c6eebf9b6c32efaeae87cba9">String</a> (_In_ const char ch)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from the given character (one character, converted).  <a href="#a38a1a170c6eebf9b6c32efaeae87cba9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a4c91c6e90f8acb003e3bdca2d5c07924">String</a> (_In_z_ const char *str)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from a C-style string (converted).  <a href="#a4c91c6e90f8acb003e3bdca2d5c07924"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a73661731a82c7359efc0d417b1b1812d">String</a> (_In_ const uint32_t size, _In_ const char ch)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from the given character (converted and repeated).  <a href="#a73661731a82c7359efc0d417b1b1812d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#abe2a00e7c0f8341c0c9ea62ed65bdd95">String</a> (_In_ const uint32_t size, _In_z_count_(size) const char *str)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from a portion of the given string (taken from the beginning and converted).  <a href="#abe2a00e7c0f8341c0c9ea62ed65bdd95"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a9f619dc8dabdbc3b44e7a7080b7d1c23">String</a> (_In_ const wchar_t ch)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from the given character (one character).  <a href="#a9f619dc8dabdbc3b44e7a7080b7d1c23"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a5df3afdd746724f78182c1e3369792d7">String</a> (_In_z_ const wchar_t *str)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from a C-style wide string.  <a href="#a5df3afdd746724f78182c1e3369792d7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a6a31877d4c52109903a7e1bccea074ba">String</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from the given character (repeated).  <a href="#a6a31877d4c52109903a7e1bccea074ba"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a30b9ad57d2bd2a5ffecbe0f60290f88b">String</a> (_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string from a C-style wide string.  <a href="#a30b9ad57d2bd2a5ffecbe0f60290f88b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a8b30316dc8ae3d028fc70942c323b421">String</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from another <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> (copy constructor).  <a href="#a8b30316dc8ae3d028fc70942c323b421"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a5e4c41d3eced781683221c8e879e3f5c">String</a> (_In_ const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;uuid)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from a Uuid, converting to a string.  <a href="#a5e4c41d3eced781683221c8e879e3f5c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga799f5322d9efc12a1ee8515305cc2944">String</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty string.  <a href="group__voodoo__utility__string__ctors.html#ga799f5322d9efc12a1ee8515305cc2944"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga38a1a170c6eebf9b6c32efaeae87cba9">String</a> (_In_ const char ch)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from the given character (one character, converted).  <a href="group__voodoo__utility__string__ctors.html#ga38a1a170c6eebf9b6c32efaeae87cba9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga4c91c6e90f8acb003e3bdca2d5c07924">String</a> (_In_z_ const char *str)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from a C-style string (converted).  <a href="group__voodoo__utility__string__ctors.html#ga4c91c6e90f8acb003e3bdca2d5c07924"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga73661731a82c7359efc0d417b1b1812d">String</a> (_In_ const uint32_t size, _In_ const char ch)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from the given character (converted and repeated).  <a href="group__voodoo__utility__string__ctors.html#ga73661731a82c7359efc0d417b1b1812d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#gabe2a00e7c0f8341c0c9ea62ed65bdd95">String</a> (_In_ const uint32_t size, _In_z_count_(size) const char *str)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from a portion of the given string (taken from the beginning and converted).  <a href="group__voodoo__utility__string__ctors.html#gabe2a00e7c0f8341c0c9ea62ed65bdd95"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga9f619dc8dabdbc3b44e7a7080b7d1c23">String</a> (_In_ const wchar_t ch)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from the given character (one character).  <a href="group__voodoo__utility__string__ctors.html#ga9f619dc8dabdbc3b44e7a7080b7d1c23"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga5df3afdd746724f78182c1e3369792d7">String</a> (_In_z_ const wchar_t *str)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from a C-style wide string.  <a href="group__voodoo__utility__string__ctors.html#ga5df3afdd746724f78182c1e3369792d7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga6a31877d4c52109903a7e1bccea074ba">String</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from the given character (repeated).  <a href="group__voodoo__utility__string__ctors.html#ga6a31877d4c52109903a7e1bccea074ba"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga30b9ad57d2bd2a5ffecbe0f60290f88b">String</a> (_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string from a C-style wide string.  <a href="group__voodoo__utility__string__ctors.html#ga30b9ad57d2bd2a5ffecbe0f60290f88b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga8b30316dc8ae3d028fc70942c323b421">String</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from another <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> (copy constructor).  <a href="group__voodoo__utility__string__ctors.html#ga8b30316dc8ae3d028fc70942c323b421"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__ctors.html#ga5e4c41d3eced781683221c8e879e3f5c">String</a> (_In_ const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;uuid)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a string from a Uuid, converting to a string.  <a href="group__voodoo__utility__string__ctors.html#ga5e4c41d3eced781683221c8e879e3f5c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a8d181a94e98b19af41ae68a481fa97f3">~String</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ab314f632650d7c4b5c48cd340e95d6c9">ToUuid</a> (_Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *pUuid) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to convert this <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to a Uuid.  <a href="#ab314f632650d7c4b5c48cd340e95d6c9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a08d5841b26759cd9a4c05832f8a1cf42">ToCharStr</a> (_In_ int32_t size, _Inout_opt_count_(size) char *const pBuffer) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to convert this <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to a character array.  <a href="#a08d5841b26759cd9a4c05832f8a1cf42"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a8017e738fa769d74dc1c3793fb767e06">Append</a> (_In_ const wchar_t ch)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ab2f62b37917c9a4d921131104d5c2d3d">Append</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ac2c6c250691048dc70a6b6465869f9a8">Append</a> (_In_ const wchar_t *str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#aa9905b51a46dc603ebcdfe54a464383c">Append</a> (_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a8bcffef752ecefcc914f6732f3c84d4c">Append</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a0c7394a7969dbe49e5d303f8568df8b3">Assign</a> (_In_ const wchar_t ch)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#acd2779f09702d562ffe0179185924b38">Assign</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a02fb06a3d526a3180c0de635aa4a2130">Assign</a> (_In_ const wchar_t *str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a65904fc32e090708c8fad9935f891f52">Assign</a> (_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#aa111893a822190b553f0aae303f8dd69">Assign</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a5b1f9313fcfd8fe1aa90ad4fa4e52368">Clear</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a300b6746a3e84af754b94a0006ac585c">Prepend</a> (_In_ const wchar_t ch)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a0d360a0e2a73d01c927644171de77281">Prepend</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#aef8f890e4f761dacfd3fbc7c6524b623">Prepend</a> (_In_z_ const wchar_t *str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ac66848b2c0b40f46613a3366f2bfe97e">Prepend</a> (_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a1a2a306bc8388b2ec2e05540697430c0">Prepend</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a9b18f5d85d84abf0ebdb90d9fbe21a13">Truncate</a> (_In_ uint32_t size)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a9a7485bc203169dff80e75e9f62cc34f">ToLower</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a2a09fe20539293aebe1d43e583152e75">ToUpper</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a20e6f28f687e7f8341170550f51ca44c">Left</a> (_In_ uint32_t count) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ab465fc040378151ed0572e6195d49386">Right</a> (_In_ uint32_t count) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a4f771cec21d0208db46a1af1a699ed34">Substr</a> (_In_ uint32_t start, _In_ uint32_t count=<a class="el" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">String::Npos</a>) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a30534316eb415f88fdfabdd4deb5f466">Compare</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a72e811afe07e857d017dfdc73c80a4f7">Compare</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ac451f366e364bac736bf90329b30ca8c">Compare</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a1f87845abcef05cf114f03654fe39ebf">StartsWith</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ae069b0ec7e5af7c0c742d70d7c4fc31d">StartsWith</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a9e0ad85850260f3d10aa589e9f21c946">StartsWith</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ad99beaced68853ab3dcd20a750de61a0">EndsWith</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#aa44f749b035330d2a2f9c3749e323441">EndsWith</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a41927eedcba21d19ff952b4fb127811c">EndsWith</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a88a71ccd6621e3eb42b2becefe408197">Contains</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#acc802a843cdd9a72e01e3f76750ca7d7">Contains</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#af7d6cd17ac5e653d0658031e361c48e2">Contains</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a392361e1c5055cf5b3b358e420b384d7">Find</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a3b421760d4dcf9a7eb5e74cce2b63ba2">Find</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a3dbcc0ca4bfd281b64c0291f6fb7c0cf">Find</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a5403bc23dc74edc5c07dc773ef41fb95">ReverseFind</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#af848a0a4401ff72fcf474d5a43359d61">ReverseFind</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a6a38dd3d3b5fbe21b507ad1e78c46082">ReverseFind</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a8c40702501ca6a85cfabd112c7a38d8c">Replace</a> (_In_ const wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#afa9bcc6424297b62cb1530d24dd6c0cf">Replace</a> (_In_z_ const wchar_t *fstr, _In_z_ const wchar_t *rstr, _In_ bool useCase=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a42a632659b7317ad14912449cd8737d6">Replace</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fstr, _In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;rstr, _In_ bool caseSensitive=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a619c6ce10afb624791c0c7c912360b2a">Remove</a> (_In_ const wchar_t fch, _In_ bool useCase=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a23a51d6f8c44b3383196dc76fe949e65">Remove</a> (_In_z_ const wchar_t *fstr, _In_ bool useCase=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ad14001010ada9385bf3f0b0c27fe6777">Remove</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fstr, _In_ bool useCase=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#af6d63d2a9b51084ed48950e2d9050232">AppendFormat</a> (_In_z_ _Printf_format_string_ const wchar_t *fmt,...)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a8ce509c7508837fa59392fef17021945">AppendFormat</a> (_In_ _Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fmt,...)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__conv.html#gab314f632650d7c4b5c48cd340e95d6c9">ToUuid</a> (_Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *pUuid) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to convert this <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> to a Uuid.  <a href="group__voodoo__utility__string__conv.html#gab314f632650d7c4b5c48cd340e95d6c9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__conv.html#ga08d5841b26759cd9a4c05832f8a1cf42">ToCharStr</a> (_In_ int32_t size, _Inout_opt_count_(size) char *const pBuffer) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to convert this <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> to a character array.  <a href="group__voodoo__utility__string__conv.html#ga08d5841b26759cd9a4c05832f8a1cf42"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga8017e738fa769d74dc1c3793fb767e06">Append</a> (_In_ const wchar_t ch)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#gab2f62b37917c9a4d921131104d5c2d3d">Append</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#gac2c6c250691048dc70a6b6465869f9a8">Append</a> (_In_ const wchar_t *str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#gaa9905b51a46dc603ebcdfe54a464383c">Append</a> (_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga8bcffef752ecefcc914f6732f3c84d4c">Append</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga0c7394a7969dbe49e5d303f8568df8b3">Assign</a> (_In_ const wchar_t ch)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#gacd2779f09702d562ffe0179185924b38">Assign</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga02fb06a3d526a3180c0de635aa4a2130">Assign</a> (_In_ const wchar_t *str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga65904fc32e090708c8fad9935f891f52">Assign</a> (_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#gaa111893a822190b553f0aae303f8dd69">Assign</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga5b1f9313fcfd8fe1aa90ad4fa4e52368">Clear</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga300b6746a3e84af754b94a0006ac585c">Prepend</a> (_In_ const wchar_t ch)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga0d360a0e2a73d01c927644171de77281">Prepend</a> (_In_ const uint32_t size, _In_ const wchar_t ch)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#gaef8f890e4f761dacfd3fbc7c6524b623">Prepend</a> (_In_z_ const wchar_t *str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#gac66848b2c0b40f46613a3366f2bfe97e">Prepend</a> (_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga1a2a306bc8388b2ec2e05540697430c0">Prepend</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__mod.html#ga9b18f5d85d84abf0ebdb90d9fbe21a13">Truncate</a> (_In_ uint32_t size)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__case.html#ga9a7485bc203169dff80e75e9f62cc34f">ToLower</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__case.html#ga2a09fe20539293aebe1d43e583152e75">ToUpper</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__part.html#ga20e6f28f687e7f8341170550f51ca44c">Left</a> (_In_ uint32_t count) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__part.html#gab465fc040378151ed0572e6195d49386">Right</a> (_In_ uint32_t count) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__part.html#ga4f771cec21d0208db46a1af1a699ed34">Substr</a> (_In_ uint32_t start, _In_ uint32_t count=<a class="el" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">String::Npos</a>) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#ga30534316eb415f88fdfabdd4deb5f466">Compare</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#ga72e811afe07e857d017dfdc73c80a4f7">Compare</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#gac451f366e364bac736bf90329b30ca8c">Compare</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#ga1f87845abcef05cf114f03654fe39ebf">StartsWith</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#gae069b0ec7e5af7c0c742d70d7c4fc31d">StartsWith</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#ga9e0ad85850260f3d10aa589e9f21c946">StartsWith</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#gad99beaced68853ab3dcd20a750de61a0">EndsWith</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#gaa44f749b035330d2a2f9c3749e323441">EndsWith</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#ga41927eedcba21d19ff952b4fb127811c">EndsWith</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#ga88a71ccd6621e3eb42b2becefe408197">Contains</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#gacc802a843cdd9a72e01e3f76750ca7d7">Contains</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__pred.html#gaf7d6cd17ac5e653d0658031e361c48e2">Contains</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#ga392361e1c5055cf5b3b358e420b384d7">Find</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#ga3b421760d4dcf9a7eb5e74cce2b63ba2">Find</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#ga3dbcc0ca4bfd281b64c0291f6fb7c0cf">Find</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#ga5403bc23dc74edc5c07dc773ef41fb95">ReverseFind</a> (_In_ const wchar_t ch, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#gaf848a0a4401ff72fcf474d5a43359d61">ReverseFind</a> (_In_z_ const wchar_t *str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#ga6a38dd3d3b5fbe21b507ad1e78c46082">ReverseFind</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str, _In_ bool useCase=true) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#ga8c40702501ca6a85cfabd112c7a38d8c">Replace</a> (_In_ const wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#gafa9bcc6424297b62cb1530d24dd6c0cf">Replace</a> (_In_z_ const wchar_t *fstr, _In_z_ const wchar_t *rstr, _In_ bool useCase=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#ga42a632659b7317ad14912449cd8737d6">Replace</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fstr, _In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;rstr, _In_ bool caseSensitive=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#ga619c6ce10afb624791c0c7c912360b2a">Remove</a> (_In_ const wchar_t fch, _In_ bool useCase=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#ga23a51d6f8c44b3383196dc76fe949e65">Remove</a> (_In_z_ const wchar_t *fstr, _In_ bool useCase=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__find.html#gad14001010ada9385bf3f0b0c27fe6777">Remove</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fstr, _In_ bool useCase=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__format.html#gaf6d63d2a9b51084ed48950e2d9050232">AppendFormat</a> (_In_z_ _Printf_format_string_ const wchar_t *fmt,...)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__format.html#ga8ce509c7508837fa59392fef17021945">AppendFormat</a> (_In_ _Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fmt,...)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a92f3b00c8de76b730d59d8b8f3f2b4f7">GetLength</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ac98fc77b4f87be637739ac44d6fea0b1">IsEmpty</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">wchar_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a0b3470c88ef994b0e1071e97f8b7df58">GetAt</a> (_In_ uint32_t pos) const </td></tr>
@@ -202,10 +199,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ac272d236134978e3221bb6e0dd1a485b">operator&gt;=</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;str) const </td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ae5bed9f0946772f062c84d36efc7df48">FormatV</a> (_In_z_ _Printf_format_string_ const wchar_t *fmt, _In_opt_ va_list args)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#ad43c9efc155208ff8b4a6d8cb2035e7e">FormatV</a> (_In_ _Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fmt, va_list args)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#aa60102c456cb8a63019f3cc8253605eb">Format</a> (_In_z_ _Printf_format_string_ const wchar_t *fmt,...)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#abbf3713e4292911cc4543f7796915216">Format</a> (_In_ _Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fmt,...)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__format.html#gae5bed9f0946772f062c84d36efc7df48">FormatV</a> (_In_z_ _Printf_format_string_ const wchar_t *fmt, _In_opt_ va_list args)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__format.html#gad43c9efc155208ff8b4a6d8cb2035e7e">FormatV</a> (_In_ _Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fmt, va_list args)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">Format</a> (_In_z_ _Printf_format_string_ const wchar_t *fmt,...)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__string__format.html#gabbf3713e4292911cc4543f7796915216">Format</a> (_In_ _Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;fmt,...)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">Npos</a> = (uint32_t)-1</td></tr>
@@ -218,325 +215,9 @@ Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Voodoo internal string class, providing constant and compiler-safe string passing between various modules. </p>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>This <b>must</b> use the MSVC wchar_t type, or bad things will happen. <b>GCC does not properly handle Unicode strings and will not provide valid inputs for these functions.</b> </dd></dl>
-
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00037">37</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00040">40</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a799f5322d9efc12a1ee8515305cc2944"></a><!-- doxytag: member="VoodooShader::String::String" ref="a799f5322d9efc12a1ee8515305cc2944" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates an empty string. </p>
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00043">43</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a38a1a170c6eebf9b6c32efaeae87cba9"></a><!-- doxytag: member="VoodooShader::String::String" ref="a38a1a170c6eebf9b6c32efaeae87cba9" args="(_In_ const char ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const char&#160;</td>
-          <td class="paramname"><em>ch</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a string from the given character (one character, converted). </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ch</td><td>Character to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a4c91c6e90f8acb003e3bdca2d5c07924"></a><!-- doxytag: member="VoodooShader::String::String" ref="a4c91c6e90f8acb003e3bdca2d5c07924" args="(_In_z_ const char *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const char *&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a string from a C-style string (converted). </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">str</td><td><a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a73661731a82c7359efc0d417b1b1812d"></a><!-- doxytag: member="VoodooShader::String::String" ref="a73661731a82c7359efc0d417b1b1812d" args="(_In_ const uint32_t size, _In_ const char ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ const char&#160;</td>
-          <td class="paramname"><em>ch</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a string from the given character (converted and repeated). </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">size</td><td>The number of characters. </td></tr>
-    <tr><td class="paramname">ch</td><td>The character to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="abe2a00e7c0f8341c0c9ea62ed65bdd95"></a><!-- doxytag: member="VoodooShader::String::String" ref="abe2a00e7c0f8341c0c9ea62ed65bdd95" args="(_In_ const uint32_t size, _In_z_count_(size) const char *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_z_count_(size) const char *&#160;</td>
-          <td class="paramname"><em>str</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a string from a portion of the given string (taken from the beginning and converted). </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">size</td><td>The number of characters to use. </td></tr>
-    <tr><td class="paramname">str</td><td>The string to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a9f619dc8dabdbc3b44e7a7080b7d1c23"></a><!-- doxytag: member="VoodooShader::String::String" ref="a9f619dc8dabdbc3b44e7a7080b7d1c23" args="(_In_ const wchar_t ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a string from the given character (one character). </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ch</td><td>Character to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a5df3afdd746724f78182c1e3369792d7"></a><!-- doxytag: member="VoodooShader::String::String" ref="a5df3afdd746724f78182c1e3369792d7" args="(_In_z_ const wchar_t *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a string from a C-style wide string. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">str</td><td><a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a6a31877d4c52109903a7e1bccea074ba"></a><!-- doxytag: member="VoodooShader::String::String" ref="a6a31877d4c52109903a7e1bccea074ba" args="(_In_ const uint32_t size, _In_ const wchar_t ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a string from the given character (repeated). </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">size</td><td>The number of characters. </td></tr>
-    <tr><td class="paramname">ch</td><td>The character to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a30b9ad57d2bd2a5ffecbe0f60290f88b"></a><!-- doxytag: member="VoodooShader::String::String" ref="a30b9ad57d2bd2a5ffecbe0f60290f88b" args="(_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_z_count_(size) const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a string from a C-style wide string. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">size</td><td>The number of characters to use. </td></tr>
-    <tr><td class="paramname">str</td><td>The string to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a8b30316dc8ae3d028fc70942c323b421"></a><!-- doxytag: member="VoodooShader::String::String" ref="a8b30316dc8ae3d028fc70942c323b421" args="(_In_ const String &amp;str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a string from another <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> (copy constructor). </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">str</td><td>The string to copy. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This does not provide a partial copy constructor, use <code><a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(<a class="el" href="class_voodoo_shader_1_1_string.html#a20e6f28f687e7f8341170550f51ca44c">String.Left()</a>)</code>. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a5e4c41d3eced781683221c8e879e3f5c"></a><!-- doxytag: member="VoodooShader::String::String" ref="a5e4c41d3eced781683221c8e879e3f5c" args="(_In_ const Uuid &amp;uuid)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::String::String </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>uuid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a string from a Uuid, converting to a string. </p>
-<p>This takes the unbraced 8/2/2/2/12 format, like so: </p>
-<ul>
-<li><div class="fragment"><pre class="fragment"> hhhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh 
-</pre></div> </li>
-</ul>
-
-</div>
-</div>
 <a class="anchor" id="a8d181a94e98b19af41ae68a481fa97f3"></a><!-- doxytag: member="VoodooShader::String::~String" ref="a8d181a94e98b19af41ae68a481fa97f3" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -551,279 +232,11 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00102">102</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00113">113</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a8017e738fa769d74dc1c3793fb767e06"></a><!-- doxytag: member="VoodooShader::String::Append" ref="a8017e738fa769d74dc1c3793fb767e06" args="(_In_ const wchar_t ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Append </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab2f62b37917c9a4d921131104d5c2d3d"></a><!-- doxytag: member="VoodooShader::String::Append" ref="ab2f62b37917c9a4d921131104d5c2d3d" args="(_In_ const uint32_t size, _In_ const wchar_t ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Append </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac2c6c250691048dc70a6b6465869f9a8"></a><!-- doxytag: member="VoodooShader::String::Append" ref="ac2c6c250691048dc70a6b6465869f9a8" args="(_In_ const wchar_t *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Append </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa9905b51a46dc603ebcdfe54a464383c"></a><!-- doxytag: member="VoodooShader::String::Append" ref="aa9905b51a46dc603ebcdfe54a464383c" args="(_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Append </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_z_count_(size) const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8bcffef752ecefcc914f6732f3c84d4c"></a><!-- doxytag: member="VoodooShader::String::Append" ref="a8bcffef752ecefcc914f6732f3c84d4c" args="(_In_ const String &amp;str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Append </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af6d63d2a9b51084ed48950e2d9050232"></a><!-- doxytag: member="VoodooShader::String::AppendFormat" ref="af6d63d2a9b51084ed48950e2d9050232" args="(_In_z_ _Printf_format_string_ const wchar_t *fmt,...)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::AppendFormat </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ _Printf_format_string_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>fmt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00275">275</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8ce509c7508837fa59392fef17021945"></a><!-- doxytag: member="VoodooShader::String::AppendFormat" ref="a8ce509c7508837fa59392fef17021945" args="(_In_ _Printf_format_string_ const String &amp;fmt,...)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::AppendFormat </td>
-          <td>(</td>
-          <td class="paramtype">_In_ _Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>fmt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00284">284</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0c7394a7969dbe49e5d303f8568df8b3"></a><!-- doxytag: member="VoodooShader::String::Assign" ref="a0c7394a7969dbe49e5d303f8568df8b3" args="(_In_ const wchar_t ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Assign </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acd2779f09702d562ffe0179185924b38"></a><!-- doxytag: member="VoodooShader::String::Assign" ref="acd2779f09702d562ffe0179185924b38" args="(_In_ const uint32_t size, _In_ const wchar_t ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Assign </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a02fb06a3d526a3180c0de635aa4a2130"></a><!-- doxytag: member="VoodooShader::String::Assign" ref="a02fb06a3d526a3180c0de635aa4a2130" args="(_In_ const wchar_t *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Assign </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a65904fc32e090708c8fad9935f891f52"></a><!-- doxytag: member="VoodooShader::String::Assign" ref="a65904fc32e090708c8fad9935f891f52" args="(_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Assign </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_z_count_(size) const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa111893a822190b553f0aae303f8dd69"></a><!-- doxytag: member="VoodooShader::String::Assign" ref="aa111893a822190b553f0aae303f8dd69" args="(_In_ const String &amp;str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Assign </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a1642adfce02cc42e8f65adcbfd2b103c"></a><!-- doxytag: member="VoodooShader::String::CInit" ref="a1642adfce02cc42e8f65adcbfd2b103c" args="(_In_ const uint32_t size, _In_z_count_(size) const char *str)" -->
 <div class="memitem">
 <div class="memproto">
@@ -849,463 +262,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00132">132</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5b1f9313fcfd8fe1aa90ad4fa4e52368"></a><!-- doxytag: member="VoodooShader::String::Clear" ref="a5b1f9313fcfd8fe1aa90ad4fa4e52368" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp; VoodooShader::String::Clear </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00218">218</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a30534316eb415f88fdfabdd4deb5f466"></a><!-- doxytag: member="VoodooShader::String::Compare" ref="a30534316eb415f88fdfabdd4deb5f466" args="(_In_ const wchar_t ch, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::Compare </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a72e811afe07e857d017dfdc73c80a4f7"></a><!-- doxytag: member="VoodooShader::String::Compare" ref="a72e811afe07e857d017dfdc73c80a4f7" args="(_In_z_ const wchar_t *str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::Compare </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac451f366e364bac736bf90329b30ca8c"></a><!-- doxytag: member="VoodooShader::String::Compare" ref="ac451f366e364bac736bf90329b30ca8c" args="(_In_ const String &amp;str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::Compare </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a88a71ccd6621e3eb42b2becefe408197"></a><!-- doxytag: member="VoodooShader::String::Contains" ref="a88a71ccd6621e3eb42b2becefe408197" args="(_In_ const wchar_t ch, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::Contains </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acc802a843cdd9a72e01e3f76750ca7d7"></a><!-- doxytag: member="VoodooShader::String::Contains" ref="acc802a843cdd9a72e01e3f76750ca7d7" args="(_In_z_ const wchar_t *str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::Contains </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af7d6cd17ac5e653d0658031e361c48e2"></a><!-- doxytag: member="VoodooShader::String::Contains" ref="af7d6cd17ac5e653d0658031e361c48e2" args="(_In_ const String &amp;str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::Contains </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad99beaced68853ab3dcd20a750de61a0"></a><!-- doxytag: member="VoodooShader::String::EndsWith" ref="ad99beaced68853ab3dcd20a750de61a0" args="(_In_ const wchar_t ch, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::EndsWith </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa44f749b035330d2a2f9c3749e323441"></a><!-- doxytag: member="VoodooShader::String::EndsWith" ref="aa44f749b035330d2a2f9c3749e323441" args="(_In_z_ const wchar_t *str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::EndsWith </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a41927eedcba21d19ff952b4fb127811c"></a><!-- doxytag: member="VoodooShader::String::EndsWith" ref="a41927eedcba21d19ff952b4fb127811c" args="(_In_ const String &amp;str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::EndsWith </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a392361e1c5055cf5b3b358e420b384d7"></a><!-- doxytag: member="VoodooShader::String::Find" ref="a392361e1c5055cf5b3b358e420b384d7" args="(_In_ const wchar_t ch, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t VoodooShader::String::Find </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3b421760d4dcf9a7eb5e74cce2b63ba2"></a><!-- doxytag: member="VoodooShader::String::Find" ref="a3b421760d4dcf9a7eb5e74cce2b63ba2" args="(_In_z_ const wchar_t *str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t VoodooShader::String::Find </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3dbcc0ca4bfd281b64c0291f6fb7c0cf"></a><!-- doxytag: member="VoodooShader::String::Find" ref="a3dbcc0ca4bfd281b64c0291f6fb7c0cf" args="(_In_ const String &amp;str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t VoodooShader::String::Find </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa60102c456cb8a63019f3cc8253605eb"></a><!-- doxytag: member="VoodooShader::String::Format" ref="aa60102c456cb8a63019f3cc8253605eb" args="(_In_z_ _Printf_format_string_ const wchar_t *fmt,...)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::String::Format </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ _Printf_format_string_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>fmt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00257">257</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="abbf3713e4292911cc4543f7796915216"></a><!-- doxytag: member="VoodooShader::String::Format" ref="abbf3713e4292911cc4543f7796915216" args="(_In_ _Printf_format_string_ const String &amp;fmt,...)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::String::Format </td>
-          <td>(</td>
-          <td class="paramtype">_In_ _Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>fmt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00266">266</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae5bed9f0946772f062c84d36efc7df48"></a><!-- doxytag: member="VoodooShader::String::FormatV" ref="ae5bed9f0946772f062c84d36efc7df48" args="(_In_z_ _Printf_format_string_ const wchar_t *fmt, _In_opt_ va_list args)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::String::FormatV </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ _Printf_format_string_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>fmt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_opt_ va_list&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad43c9efc155208ff8b4a6d8cb2035e7e"></a><!-- doxytag: member="VoodooShader::String::FormatV" ref="ad43c9efc155208ff8b4a6d8cb2035e7e" args="(_In_ _Printf_format_string_ const String &amp;fmt, va_list args)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::String::FormatV </td>
-          <td>(</td>
-          <td class="paramtype">_In_ _Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>fmt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">va_list&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00252">252</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00143">143</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1325,7 +282,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00580">580</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00591">591</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1344,7 +301,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00598">598</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00609">609</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1362,7 +319,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00570">570</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00581">581</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1380,26 +337,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00575">575</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a20e6f28f687e7f8341170550f51ca44c"></a><!-- doxytag: member="VoodooShader::String::Left" ref="a20e6f28f687e7f8341170550f51ca44c" args="(_In_ uint32_t count) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::String::Left </td>
-          <td>(</td>
-          <td class="paramtype">_In_ uint32_t&#160;</td>
-          <td class="paramname"><em>count</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00270">270</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00586">586</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -1418,7 +356,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00377">377</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00446">446</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1437,7 +375,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00382">382</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00451">451</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1456,7 +394,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00346">346</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00415">415</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1475,7 +413,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00353">353</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00422">422</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1494,7 +432,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00360">360</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00429">429</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1513,7 +451,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00328">328</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00397">397</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1532,7 +470,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00334">334</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00403">403</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1551,7 +489,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00340">340</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00409">409</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1604,7 +542,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00392">392</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00461">461</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1623,7 +561,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00397">397</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00466">466</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1642,7 +580,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00310">310</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00379">379</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1661,7 +599,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00316">316</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00385">385</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1680,7 +618,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00322">322</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00391">391</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1699,7 +637,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00367">367</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00436">436</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1718,7 +656,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00372">372</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00441">441</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1771,7 +709,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00402">402</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00471">471</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1790,7 +728,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00407">407</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00476">476</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1810,392 +748,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00586">586</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a300b6746a3e84af754b94a0006ac585c"></a><!-- doxytag: member="VoodooShader::String::Prepend" ref="a300b6746a3e84af754b94a0006ac585c" args="(_In_ const wchar_t ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Prepend </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0d360a0e2a73d01c927644171de77281"></a><!-- doxytag: member="VoodooShader::String::Prepend" ref="a0d360a0e2a73d01c927644171de77281" args="(_In_ const uint32_t size, _In_ const wchar_t ch)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Prepend </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aef8f890e4f761dacfd3fbc7c6524b623"></a><!-- doxytag: member="VoodooShader::String::Prepend" ref="aef8f890e4f761dacfd3fbc7c6524b623" args="(_In_z_ const wchar_t *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Prepend </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac66848b2c0b40f46613a3366f2bfe97e"></a><!-- doxytag: member="VoodooShader::String::Prepend" ref="ac66848b2c0b40f46613a3366f2bfe97e" args="(_In_ const uint32_t size, _In_z_count_(size) const wchar_t *str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Prepend </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_z_count_(size) const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1a2a306bc8388b2ec2e05540697430c0"></a><!-- doxytag: member="VoodooShader::String::Prepend" ref="a1a2a306bc8388b2ec2e05540697430c0" args="(_In_ const String &amp;str)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Prepend </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a619c6ce10afb624791c0c7c912360b2a"></a><!-- doxytag: member="VoodooShader::String::Remove" ref="a619c6ce10afb624791c0c7c912360b2a" args="(_In_ const wchar_t fch, _In_ bool useCase=true)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Remove </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>fch</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a23a51d6f8c44b3383196dc76fe949e65"></a><!-- doxytag: member="VoodooShader::String::Remove" ref="a23a51d6f8c44b3383196dc76fe949e65" args="(_In_z_ const wchar_t *fstr, _In_ bool useCase=true)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Remove </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>fstr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad14001010ada9385bf3f0b0c27fe6777"></a><!-- doxytag: member="VoodooShader::String::Remove" ref="ad14001010ada9385bf3f0b0c27fe6777" args="(_In_ const String &amp;fstr, _In_ bool useCase=true)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Remove </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>fstr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8c40702501ca6a85cfabd112c7a38d8c"></a><!-- doxytag: member="VoodooShader::String::Replace" ref="a8c40702501ca6a85cfabd112c7a38d8c" args="(_In_ const wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase=true)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Replace </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>fch</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>rch</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afa9bcc6424297b62cb1530d24dd6c0cf"></a><!-- doxytag: member="VoodooShader::String::Replace" ref="afa9bcc6424297b62cb1530d24dd6c0cf" args="(_In_z_ const wchar_t *fstr, _In_z_ const wchar_t *rstr, _In_ bool useCase=true)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Replace </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>fstr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>rstr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a42a632659b7317ad14912449cd8737d6"></a><!-- doxytag: member="VoodooShader::String::Replace" ref="a42a632659b7317ad14912449cd8737d6" args="(_In_ const String &amp;fstr, _In_ const String &amp;rstr, _In_ bool caseSensitive=true)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&amp; VoodooShader::String::Replace </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>fstr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>rstr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>caseSensitive</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5403bc23dc74edc5c07dc773ef41fb95"></a><!-- doxytag: member="VoodooShader::String::ReverseFind" ref="a5403bc23dc74edc5c07dc773ef41fb95" args="(_In_ const wchar_t ch, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t VoodooShader::String::ReverseFind </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af848a0a4401ff72fcf474d5a43359d61"></a><!-- doxytag: member="VoodooShader::String::ReverseFind" ref="af848a0a4401ff72fcf474d5a43359d61" args="(_In_z_ const wchar_t *str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t VoodooShader::String::ReverseFind </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6a38dd3d3b5fbe21b507ad1e78c46082"></a><!-- doxytag: member="VoodooShader::String::ReverseFind" ref="a6a38dd3d3b5fbe21b507ad1e78c46082" args="(_In_ const String &amp;str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t VoodooShader::String::ReverseFind </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab465fc040378151ed0572e6195d49386"></a><!-- doxytag: member="VoodooShader::String::Right" ref="ab465fc040378151ed0572e6195d49386" args="(_In_ uint32_t count) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::String::Right </td>
-          <td>(</td>
-          <td class="paramtype">_In_ uint32_t&#160;</td>
-          <td class="paramname"><em>count</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00280">280</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00597">597</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2225,247 +778,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00592">592</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1f87845abcef05cf114f03654fe39ebf"></a><!-- doxytag: member="VoodooShader::String::StartsWith" ref="a1f87845abcef05cf114f03654fe39ebf" args="(_In_ const wchar_t ch, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::StartsWith </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const wchar_t&#160;</td>
-          <td class="paramname"><em>ch</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae069b0ec7e5af7c0c742d70d7c4fc31d"></a><!-- doxytag: member="VoodooShader::String::StartsWith" ref="ae069b0ec7e5af7c0c742d70d7c4fc31d" args="(_In_z_ const wchar_t *str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::StartsWith </td>
-          <td>(</td>
-          <td class="paramtype">_In_z_ const wchar_t *&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9e0ad85850260f3d10aa589e9f21c946"></a><!-- doxytag: member="VoodooShader::String::StartsWith" ref="a9e0ad85850260f3d10aa589e9f21c946" args="(_In_ const String &amp;str, _In_ bool useCase=true) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::StartsWith </td>
-          <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ bool&#160;</td>
-          <td class="paramname"><em>useCase</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4f771cec21d0208db46a1af1a699ed34"></a><!-- doxytag: member="VoodooShader::String::Substr" ref="a4f771cec21d0208db46a1af1a699ed34" args="(_In_ uint32_t start, _In_ uint32_t count=String::Npos) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::String::Substr </td>
-          <td>(</td>
-          <td class="paramtype">_In_ uint32_t&#160;</td>
-          <td class="paramname"><em>start</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_ uint32_t&#160;</td>
-          <td class="paramname"><em>count</em> = <code><a class="el" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">String::Npos</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00285">285</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a08d5841b26759cd9a4c05832f8a1cf42"></a><!-- doxytag: member="VoodooShader::String::ToCharStr" ref="a08d5841b26759cd9a4c05832f8a1cf42" args="(_In_ int32_t size, _Inout_opt_count_(size) char *const pBuffer) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t VoodooShader::String::ToCharStr </td>
-          <td>(</td>
-          <td class="paramtype">_In_ int32_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_Inout_opt_count_(size) char *const&#160;</td>
-          <td class="paramname"><em>pBuffer</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Attempts to convert this <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to a character array. </p>
-<p>If size is 0 and pBuffer is null, this estimates the size of the buffer required and returns that; otherwise it converts the string and returns the number of bytes written to pBuffer.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">size</td><td>Size of buffer. </td></tr>
-    <tr><td class="paramname">pBuffer</td><td>Buffer to write converted string to. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Necessary buffer size or bytes converted. </dd></dl>
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00127">127</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9a7485bc203169dff80e75e9f62cc34f"></a><!-- doxytag: member="VoodooShader::String::ToLower" ref="a9a7485bc203169dff80e75e9f62cc34f" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::String::ToLower </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00260">260</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2a09fe20539293aebe1d43e583152e75"></a><!-- doxytag: member="VoodooShader::String::ToUpper" ref="a2a09fe20539293aebe1d43e583152e75" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::String::ToUpper </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00265">265</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab314f632650d7c4b5c48cd340e95d6c9"></a><!-- doxytag: member="VoodooShader::String::ToUuid" ref="ab314f632650d7c4b5c48cd340e95d6c9" args="(_Out_ Uuid *pUuid) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::String::ToUuid </td>
-          <td>(</td>
-          <td class="paramtype">_Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *&#160;</td>
-          <td class="paramname"><em>pUuid</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Attempts to convert this <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to a Uuid. </p>
-<p>The string must be of one of the following forms: </p>
-<ul>
-<li><code>{01234567-89ab-cdef-0123-456789abcdef}</code> </li>
-<li><code>01234567-89ab-cdef-0123-456789abcdef</code> </li>
-<li><code>0123456789abcdef0123456789abcdef</code></li>
-</ul>
-<p>The first format is preferred, and matches the COM-standard 4/2/2/2/12 format, supported by most tools and common interfaces. Wherever possible, UUIDs should be embedded in code using the appropriate Voodoo macros to avoid string conversion costs.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pUuid</td><td>Pointer to the Uuid to be filled, if conversion succeeds. If conversion fails, this is not modified. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of conversion. </dd></dl>
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00108">108</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9b18f5d85d84abf0ebdb90d9fbe21a13"></a><!-- doxytag: member="VoodooShader::String::Truncate" ref="a9b18f5d85d84abf0ebdb90d9fbe21a13" args="(_In_ uint32_t size)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp; VoodooShader::String::Truncate </td>
-          <td>(</td>
-          <td class="paramtype">_In_ uint32_t&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00254">254</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00603">603</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2494,7 +807,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00147">147</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8cpp_source.html#l00158">158</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
 </div>
 </div>
@@ -2510,7 +823,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00418">418</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00487">487</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -2525,7 +838,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00412">412</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00481">481</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -2537,7 +850,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 18:09:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 4 2011 15:15:36 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

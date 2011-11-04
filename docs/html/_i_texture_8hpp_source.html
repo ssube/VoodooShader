@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.293</span>
+   &#160;<span id="projectnumber">0.4.2.299</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -67,7 +67,25 @@
 <div class="title">ITexture.hpp</div>  </div>
 </div>
 <div class="contents">
-<a href="_i_texture_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a href="_i_texture_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00003"></a>00003 <span class="comment"> *</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00005"></a>00005 <span class="comment"> *</span>
+<a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
+<a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
+<a name="l00008"></a>00008 <span class="comment"> * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without</span>
+<a name="l00009"></a>00009 <span class="comment"> * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<a name="l00010"></a>00010 <span class="comment"> * License for more details.</span>
+<a name="l00011"></a>00011 <span class="comment"> *</span>
+<a name="l00012"></a>00012 <span class="comment"> * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to</span>
+<a name="l00013"></a>00013 <span class="comment"> * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US</span>
+<a name="l00014"></a>00014 <span class="comment"> *</span>
+<a name="l00015"></a>00015 <span class="comment"> * Support and more information may be found at</span>
+<a name="l00016"></a>00016 <span class="comment"> *   http://www.voodooshader.com</span>
+<a name="l00017"></a>00017 <span class="comment"> * or by contacting the lead developer at</span>
+<a name="l00018"></a>00018 <span class="comment"> *   peachykeen@voodooshader.com</span>
+<a name="l00019"></a>00019 <span class="comment"> */</span>
 <a name="l00020"></a>00020 <span class="preprocessor">#pragma once</span>
 <a name="l00021"></a>00021 <span class="preprocessor"></span>
 <a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_i_object_8hpp.html">IObject.hpp</a>&quot;</span>
@@ -83,10 +101,10 @@
 <a name="l00042"></a>00042         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_texture.html#a42724dc754afe20f87c40c9d594178ec" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> throw() = 0;
 <a name="l00043"></a>00043         virtual uint32_t <a class="code" href="class_voodoo_shader_1_1_i_texture.html#a88deadfb0cc6dd1c70467563d89adb5c" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) const throw() = 0;
 <a name="l00044"></a>00044         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_texture.html#a386e192bc5d3a0d23922425d5246a2e5" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ const <span class="keywordtype">void</span> ** ppOut) const throw() = 0;
-<a name="l00045"></a>00045         virtual <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_i_texture.html#ac192d3eb19aebdd77a1bbd89b169af3b" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00045"></a>00045         virtual <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_i_texture.html#ac192d3eb19aebdd77a1bbd89b169af3b" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) const throw() = 0;
 <a name="l00046"></a>00046         virtual <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_i_texture.html#a3db6e0d167da3896f8de4d1fc99dbb6b" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) const throw() = 0;
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048         virtual <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_i_texture.html#a049a0df0dfac079da78cd70780383d50">GetName</a>() const throw() = 0;
+<a name="l00048"></a>00048         virtual <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_i_texture.html#a049a0df0dfac079da78cd70780383d50">GetName</a>() const throw() = 0;
 <a name="l00049"></a>00049 
 <a name="l00055"></a>00055         virtual <span class="keywordtype">void</span> * <a class="code" href="class_voodoo_shader_1_1_i_texture.html#acb01fc18df9400c4d59879f0c80d2dd2" title="Gets the data.">GetData</a>(<span class="keywordtype">void</span>) const throw() = 0;
 <a name="l00056"></a>00056 
@@ -98,7 +116,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 4 2011 15:15:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

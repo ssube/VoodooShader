@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.293</span>
+   &#160;<span id="projectnumber">0.4.2.299</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -67,7 +67,25 @@
 <div class="title">VSParser.hpp</div>  </div>
 </div>
 <div class="contents">
-<a href="_v_s_parser_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a href="_v_s_parser_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00003"></a>00003 <span class="comment"> *</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00005"></a>00005 <span class="comment"> *</span>
+<a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
+<a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
+<a name="l00008"></a>00008 <span class="comment"> * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without</span>
+<a name="l00009"></a>00009 <span class="comment"> * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<a name="l00010"></a>00010 <span class="comment"> * License for more details.</span>
+<a name="l00011"></a>00011 <span class="comment"> *</span>
+<a name="l00012"></a>00012 <span class="comment"> * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to</span>
+<a name="l00013"></a>00013 <span class="comment"> * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US</span>
+<a name="l00014"></a>00014 <span class="comment"> *</span>
+<a name="l00015"></a>00015 <span class="comment"> * Support and more information may be found at</span>
+<a name="l00016"></a>00016 <span class="comment"> *   http://www.voodooshader.com</span>
+<a name="l00017"></a>00017 <span class="comment"> * or by contacting the lead developer at</span>
+<a name="l00018"></a>00018 <span class="comment"> *   peachykeen@voodooshader.com</span>
+<a name="l00019"></a>00019 <span class="comment"> */</span>
 <a name="l00020"></a>00020 <span class="preprocessor">#pragma once</span>
 <a name="l00021"></a>00021 <span class="preprocessor"></span>
 <a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_i_parser_8hpp.html">IParser.hpp</a>&quot;</span>
@@ -75,7 +93,7 @@
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
 <a name="l00026"></a>00026     <span class="comment">/* VSParser: e6f312a2-05af-11e1-9e05-005056c00008 */</span>
-<a name="l00027"></a>00027     <a class="code" href="namespace_voodoo_shader.html#a98acb92430d896a47c93cd16bdc8b3f8">DEFINE_UUID_IMPL</a>(VSParser, 0xA2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00027"></a>00027     <a class="code" href="namespace_voodoo_shader.html#a0de97d7ac39e3fc4db0b5003cb6d8438">DEFINE_CLSID</a>(VSParser, 0xA2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
 <a name="l00028"></a>00028 
 <a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html">00029</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html">VSParser</a> :
 <a name="l00030"></a>00030         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>
@@ -87,12 +105,12 @@
 <a name="l00036"></a>00036         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#adce115444a8c6c220210629e73eca3e6" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00037"></a>00037         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a8df7cb6118874d0a27c8bc492829ebbd" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00038"></a>00038         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af874a2e4770c01fd54017918ad201d12" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00039"></a>00039         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af172675890795a3b270a229cd4584bbd" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00039"></a>00039         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af172675890795a3b270a229cd4584bbd" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00040"></a>00040         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#abb5de799ac889c0d4a1967413a6b2274" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00041"></a>00041 
-<a name="l00042"></a>00042         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a9ab223abf8eb304ee56949eebac1ff65" title="Adds a variable to the internal dictionary.">Add</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; value, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>) <span class="keywordflow">throw</span>();
-<a name="l00043"></a>00043         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#ac9ec59b35109e48db57f1b1a74aacfed" title="Removes a variable from the internal dictionary.">Remove</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name) <span class="keywordflow">throw</span>();
-<a name="l00044"></a>00044         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a3f0a96691b6d63ec6947922e35275f01" title="Parses a string, replacing any variables with their values.">Parse</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00042"></a>00042         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a9ab223abf8eb304ee56949eebac1ff65" title="Adds a variable to the internal dictionary.">Add</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; value, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>) <span class="keywordflow">throw</span>();
+<a name="l00043"></a>00043         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#ac9ec59b35109e48db57f1b1a74aacfed" title="Removes a variable from the internal dictionary.">Remove</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) <span class="keywordflow">throw</span>();
+<a name="l00044"></a>00044         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a3f0a96691b6d63ec6947922e35275f01" title="Parses a string, replacing any variables with their values.">Parse</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00045"></a>00045 
 <a name="l00046"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a368b2f3418cb6e261acea0292b2a08cd">00046</a>         <span class="keyword">static</span> <span class="keyword">const</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a368b2f3418cb6e261acea0292b2a08cd">VarMaxDepth</a>    = 8;
 <a name="l00047"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a638c78f10c0f3ecc428f746ef3e4a73c">00047</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a638c78f10c0f3ecc428f746ef3e4a73c">VarDelimPre</a>    = L<span class="charliteral">&#39;$&#39;</span>;
@@ -103,7 +121,7 @@
 <a name="l00052"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a060082b229894dc9e205ecb50215bfa4">00052</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a060082b229894dc9e205ecb50215bfa4">VarMarkerSupp</a>  = L<span class="charliteral">&#39;?&#39;</span>;
 <a name="l00053"></a>00053 
 <a name="l00054"></a>00054     <span class="keyword">private</span>:
-<a name="l00055"></a>00055         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af66dd42a8a6f67a95412b63c1f714a88">ParseStringRaw</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> input, _In_ <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags, _In_ uint32_t depth, _In_ <a class="code" href="namespace_voodoo_shader.html#ab233b988f3f2fc0bb99d9a043f7618bf">Dictionary</a> &amp; state) <span class="keyword">const</span>;
+<a name="l00055"></a>00055         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af66dd42a8a6f67a95412b63c1f714a88">ParseStringRaw</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> input, _In_ <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags, _In_ uint32_t depth, _In_ <a class="code" href="namespace_voodoo_shader.html#ab233b988f3f2fc0bb99d9a043f7618bf">Dictionary</a> &amp; state) <span class="keyword">const</span>;
 <a name="l00056"></a>00056 
 <a name="l00057"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a67f32dd3cd64cb90629a7b6ef3ab1dd0">00057</a>         <span class="keyword">mutable</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a67f32dd3cd64cb90629a7b6ef3ab1dd0">m_Refs</a>;
 <a name="l00058"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">00058</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>;
@@ -117,7 +135,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 4 2011 15:15:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

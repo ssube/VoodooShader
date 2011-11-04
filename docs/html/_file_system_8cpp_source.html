@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.293</span>
+   &#160;<span id="projectnumber">0.4.2.299</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -67,7 +67,26 @@
 <div class="title">FileSystem.cpp</div>  </div>
 </div>
 <div class="contents">
-<a href="_file_system_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a href="_file_system_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00003"></a>00003 <span class="comment"> *</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00005"></a>00005 <span class="comment"> *</span>
+<a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
+<a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
+<a name="l00008"></a>00008 <span class="comment"> * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without</span>
+<a name="l00009"></a>00009 <span class="comment"> * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<a name="l00010"></a>00010 <span class="comment"> * License for more details.</span>
+<a name="l00011"></a>00011 <span class="comment"> *</span>
+<a name="l00012"></a>00012 <span class="comment"> * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to</span>
+<a name="l00013"></a>00013 <span class="comment"> * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US</span>
+<a name="l00014"></a>00014 <span class="comment"> *</span>
+<a name="l00015"></a>00015 <span class="comment"> * Support and more information may be found at</span>
+<a name="l00016"></a>00016 <span class="comment"> *   http://www.voodooshader.com</span>
+<a name="l00017"></a>00017 <span class="comment"> * or by contacting the lead developer at</span>
+<a name="l00018"></a>00018 <span class="comment"> *   peachykeen@voodooshader.com</span>
+<a name="l00019"></a>00019 <span class="comment"> */</span>
+<a name="l00020"></a>00020 
 <a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_file_system_8hpp.html">FileSystem.hpp</a>&quot;</span>
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_filesystem___version_8hpp.html">Filesystem_Version.hpp</a>&quot;</span>
@@ -164,7 +183,7 @@
 <a name="l00114"></a>00114 
 <a name="l00115"></a>00115             <span class="keywordflow">while</span> (pathIter != pathNodes.end())
 <a name="l00116"></a>00116             {
-<a name="l00117"></a>00117                 <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> path = pathValueQuery.evaluate_string(*pathIter).c_str();
+<a name="l00117"></a>00117                 <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> path = pathValueQuery.evaluate_string(*pathIter).c_str();
 <a name="l00118"></a>00118 
 <a name="l00119"></a>00119                 this-&gt;<a class="code" href="group__voodoo__module__wfilesystem.html#ga8542996a32507e2635d5b5849c585ee8" title="Add a directory to the search path.">AddPath</a>(path);
 <a name="l00120"></a>00120 
@@ -205,515 +224,536 @@
 <a name="l00155"></a>00155                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00156"></a>00156                 }
 <a name="l00157"></a>00157             } <span class="keywordflow">else</span> {
-<a name="l00158"></a>00158                 <span class="keywordflow">if</span> (clsid == IID_IObject || clsid == IID_IFileSystem || clsid == CLSID_VSWFileSystem) {
-<a name="l00159"></a>00159                     *ppOut = <span class="keyword">this</span>;
-<a name="l00160"></a>00160                     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00161"></a>00161                 } <span class="keywordflow">else</span> {
-<a name="l00162"></a>00162                     *ppOut = <span class="keyword">nullptr</span>;
-<a name="l00163"></a>00163                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00164"></a>00164                 }
-<a name="l00165"></a>00165             }
-<a name="l00166"></a>00166         }
-<a name="l00167"></a>00167 
-<a name="l00168"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga578e97ccd50858af9930c62df652ae2c">00168</a>         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga578e97ccd50858af9930c62df652ae2c" title="Get the name of this object.">VSWFileSystem::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00169"></a>00169 <span class="keyword">        </span>{
-<a name="l00170"></a>00170             <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSWFileSystem&quot;</span>;
-<a name="l00171"></a>00171         }
-<a name="l00172"></a>00172 
-<a name="l00173"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gad37523eacde0d596a2a820517acbd85b">00173</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gad37523eacde0d596a2a820517acbd85b" title="Get the core this object was associated with.">VSWFileSystem::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00174"></a>00174 <span class="keyword">        </span>{
-<a name="l00175"></a>00175             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>;
-<a name="l00176"></a>00176         }
-<a name="l00177"></a>00177 
-<a name="l00178"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga8542996a32507e2635d5b5849c585ee8">00178</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga8542996a32507e2635d5b5849c585ee8" title="Add a directory to the search path.">VSWFileSystem::AddPath</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name)
-<a name="l00179"></a>00179         {
-<a name="l00180"></a>00180             <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> realname = <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a7e7f204ee1798e7990c10c8e841acde4" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(name);
-<a name="l00181"></a>00181             <span class="keywordtype">size_t</span> splitter = realname.<a class="code" href="class_voodoo_shader_1_1_string.html#a392361e1c5055cf5b3b358e420b384d7">Find</a>(L<span class="charliteral">&#39;;&#39;</span>);
-<a name="l00182"></a>00182 
-<a name="l00183"></a>00183             <span class="keywordflow">while</span> (splitter != <a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">String::Npos</a>)
-<a name="l00184"></a>00184             {
-<a name="l00185"></a>00185                 <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> partname = realname.<a class="code" href="class_voodoo_shader_1_1_string.html#a4f771cec21d0208db46a1af1a699ed34">Substr</a>(0, splitter);
-<a name="l00186"></a>00186 
-<a name="l00187"></a>00187                 this-&gt;<a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.push_front(partname);
-<a name="l00188"></a>00188                 realname = realname.<a class="code" href="class_voodoo_shader_1_1_string.html#a4f771cec21d0208db46a1af1a699ed34">Substr</a>(splitter + 1);
-<a name="l00189"></a>00189                 splitter = realname.<a class="code" href="class_voodoo_shader_1_1_string.html#a392361e1c5055cf5b3b358e420b384d7">Find</a>(L<span class="charliteral">&#39;;&#39;</span>);
-<a name="l00190"></a>00190             }
-<a name="l00191"></a>00191 
-<a name="l00192"></a>00192             this-&gt;<a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.push_front(realname);
+<a name="l00158"></a>00158                 <span class="keywordflow">if</span> (clsid == IID_IObject)
+<a name="l00159"></a>00159                 {
+<a name="l00160"></a>00160                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00161"></a>00161                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IFileSystem) {
+<a name="l00162"></a>00162                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00163"></a>00163                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSWFileSystem) {
+<a name="l00164"></a>00164                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html" title="Provides a unified file management system for loading shaders and other resources.">VSWFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00165"></a>00165                 } <span class="keywordflow">else</span> {
+<a name="l00166"></a>00166                     *ppOut = <span class="keyword">nullptr</span>;
+<a name="l00167"></a>00167                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00168"></a>00168                 }
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170                 <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">AddRef</a>();
+<a name="l00171"></a>00171                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00172"></a>00172             }
+<a name="l00173"></a>00173         }
+<a name="l00174"></a>00174 
+<a name="l00175"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga578e97ccd50858af9930c62df652ae2c">00175</a>         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga578e97ccd50858af9930c62df652ae2c" title="Get the name of this object.">VSWFileSystem::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00176"></a>00176 <span class="keyword">        </span>{
+<a name="l00177"></a>00177             <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSWFileSystem&quot;</span>;
+<a name="l00178"></a>00178         }
+<a name="l00179"></a>00179 
+<a name="l00180"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gad37523eacde0d596a2a820517acbd85b">00180</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gad37523eacde0d596a2a820517acbd85b" title="Get the core this object was associated with.">VSWFileSystem::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00181"></a>00181 <span class="keyword">        </span>{
+<a name="l00182"></a>00182             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>;
+<a name="l00183"></a>00183         }
+<a name="l00184"></a>00184 
+<a name="l00185"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga8542996a32507e2635d5b5849c585ee8">00185</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga8542996a32507e2635d5b5849c585ee8" title="Add a directory to the search path.">VSWFileSystem::AddPath</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)
+<a name="l00186"></a>00186         {
+<a name="l00187"></a>00187             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> realname = <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a7e7f204ee1798e7990c10c8e841acde4" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(name);
+<a name="l00188"></a>00188             <span class="keywordtype">size_t</span> splitter = realname.<a class="code" href="group__voodoo__utility__string__find.html#ga392361e1c5055cf5b3b358e420b384d7">Find</a>(L<span class="charliteral">&#39;;&#39;</span>);
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190             <span class="keywordflow">while</span> (splitter != <a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">String::Npos</a>)
+<a name="l00191"></a>00191             {
+<a name="l00192"></a>00192                 <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> partname = realname.<a class="code" href="group__voodoo__utility__string__part.html#ga4f771cec21d0208db46a1af1a699ed34">Substr</a>(0, splitter);
 <a name="l00193"></a>00193 
-<a name="l00194"></a>00194             <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00195"></a>00195         }
-<a name="l00196"></a>00196 
-<a name="l00197"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga2e748a330ec132ebe1072f455f7dcda8">00197</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga2e748a330ec132ebe1072f455f7dcda8" title="Removes a directory from the search path, following the same rules as adding (adding a string then re...">VSWFileSystem::RemovePath</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name)
-<a name="l00198"></a>00198         {
-<a name="l00199"></a>00199             <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> realname = <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a7e7f204ee1798e7990c10c8e841acde4" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(name) + L<span class="stringliteral">&quot;\\&quot;</span>;
+<a name="l00194"></a>00194                 this-&gt;<a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.push_front(partname);
+<a name="l00195"></a>00195                 realname = realname.<a class="code" href="group__voodoo__utility__string__part.html#ga4f771cec21d0208db46a1af1a699ed34">Substr</a>(splitter + 1);
+<a name="l00196"></a>00196                 splitter = realname.<a class="code" href="group__voodoo__utility__string__find.html#ga392361e1c5055cf5b3b358e420b384d7">Find</a>(L<span class="charliteral">&#39;;&#39;</span>);
+<a name="l00197"></a>00197             }
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199             this-&gt;<a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.push_front(realname);
 <a name="l00200"></a>00200 
-<a name="l00201"></a>00201             this-&gt;<a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.remove_if(
-<a name="l00202"></a>00202                 [&amp;](<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; current)
-<a name="l00203"></a>00203                 {
-<a name="l00204"></a>00204                     <span class="keywordflow">return</span> (current == realname);
-<a name="l00205"></a>00205                 }
-<a name="l00206"></a>00206             );
+<a name="l00201"></a>00201             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00202"></a>00202         }
+<a name="l00203"></a>00203 
+<a name="l00204"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga2e748a330ec132ebe1072f455f7dcda8">00204</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga2e748a330ec132ebe1072f455f7dcda8" title="Removes a directory from the search path, following the same rules as adding (adding a string then re...">VSWFileSystem::RemovePath</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)
+<a name="l00205"></a>00205         {
+<a name="l00206"></a>00206             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> realname = <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a7e7f204ee1798e7990c10c8e841acde4" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(name) + L<span class="stringliteral">&quot;\\&quot;</span>;
 <a name="l00207"></a>00207 
-<a name="l00208"></a>00208             <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00209"></a>00209         }
-<a name="l00210"></a>00210 
-<a name="l00211"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaed61365ceaa0cab187360d6b5c839b0e">00211</a>         <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gaed61365ceaa0cab187360d6b5c839b0e" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">VSWFileSystem::FindFile</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name)<span class="keyword"> const</span>
-<a name="l00212"></a>00212 <span class="keyword">        </span>{
-<a name="l00213"></a>00213             <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, L<span class="stringliteral">&quot;Searching for raw file \&quot;%s\&quot;.&quot;</span>, name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00208"></a>00208             this-&gt;<a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.remove_if(
+<a name="l00209"></a>00209                 [&amp;](<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; current)
+<a name="l00210"></a>00210                 {
+<a name="l00211"></a>00211                     <span class="keywordflow">return</span> (current == realname);
+<a name="l00212"></a>00212                 }
+<a name="l00213"></a>00213             );
 <a name="l00214"></a>00214 
-<a name="l00215"></a>00215             <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> filename = <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a7e7f204ee1798e7990c10c8e841acde4" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(name);
-<a name="l00216"></a>00216 
-<a name="l00217"></a>00217             <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
-<a name="l00218"></a>00218             (
-<a name="l00219"></a>00219                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>,
-<a name="l00220"></a>00220                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
-<a name="l00221"></a>00221                 L<span class="stringliteral">&quot;Searching for parsed file \&quot;%s\&quot;.&quot;</span>,
-<a name="l00222"></a>00222                 filename.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>()
-<a name="l00223"></a>00223             );
-<a name="l00224"></a>00224 
-<a name="l00225"></a>00225             StringList::const_iterator curDir = <a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.begin();
-<a name="l00226"></a>00226 
-<a name="l00227"></a>00227             <span class="keywordflow">while</span> (curDir != <a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.end())
-<a name="l00228"></a>00228             {
-<a name="l00229"></a>00229                 <span class="comment">// Try to find the file in each registered dir</span>
-<a name="l00230"></a>00230                 <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> fullname = (*curDir) + L<span class="stringliteral">&quot;\\&quot;</span> + filename;
+<a name="l00215"></a>00215             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00216"></a>00216         }
+<a name="l00217"></a>00217 
+<a name="l00218"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaed61365ceaa0cab187360d6b5c839b0e">00218</a>         <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gaed61365ceaa0cab187360d6b5c839b0e" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">VSWFileSystem::FindFile</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)<span class="keyword"> const</span>
+<a name="l00219"></a>00219 <span class="keyword">        </span>{
+<a name="l00220"></a>00220             <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, L<span class="stringliteral">&quot;Searching for raw file \&quot;%s\&quot;.&quot;</span>, name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> filename = <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a7e7f204ee1798e7990c10c8e841acde4" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(name);
+<a name="l00223"></a>00223 
+<a name="l00224"></a>00224             <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00225"></a>00225             (
+<a name="l00226"></a>00226                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>,
+<a name="l00227"></a>00227                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
+<a name="l00228"></a>00228                 L<span class="stringliteral">&quot;Searching for parsed file \&quot;%s\&quot;.&quot;</span>,
+<a name="l00229"></a>00229                 filename.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>()
+<a name="l00230"></a>00230             );
 <a name="l00231"></a>00231 
-<a name="l00232"></a>00232                 HANDLE file = CreateFile(fullname.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), 0, 0, <span class="keyword">nullptr</span>, OPEN_EXISTING, 0, <span class="keyword">nullptr</span>);
+<a name="l00232"></a>00232             StringList::const_iterator curDir = <a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.begin();
 <a name="l00233"></a>00233 
-<a name="l00234"></a>00234                 <span class="keywordflow">if</span> (file != INVALID_HANDLE_VALUE)
-<a name="l00235"></a>00235                 {
-<a name="l00236"></a>00236                     CloseHandle(file);
-<a name="l00237"></a>00237 
-<a name="l00238"></a>00238                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
-<a name="l00239"></a>00239                     (
-<a name="l00240"></a>00240                         <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
-<a name="l00241"></a>00241                         L<span class="stringliteral">&quot;File %s found in directory %s.&quot;</span>,
-<a name="l00242"></a>00242                         name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), (*curDir).GetData()
-<a name="l00243"></a>00243                     );
+<a name="l00234"></a>00234             <span class="keywordflow">while</span> (curDir != <a class="code" href="group__voodoo__module__wfilesystem.html#gad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>.end())
+<a name="l00235"></a>00235             {
+<a name="l00236"></a>00236                 <span class="comment">// Try to find the file in each registered dir</span>
+<a name="l00237"></a>00237                 <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> fullname = (*curDir) + L<span class="stringliteral">&quot;\\&quot;</span> + filename;
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239                 HANDLE file = CreateFile(fullname.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), 0, 0, <span class="keyword">nullptr</span>, OPEN_EXISTING, 0, <span class="keyword">nullptr</span>);
+<a name="l00240"></a>00240 
+<a name="l00241"></a>00241                 <span class="keywordflow">if</span> (file != INVALID_HANDLE_VALUE)
+<a name="l00242"></a>00242                 {
+<a name="l00243"></a>00243                     CloseHandle(file);
 <a name="l00244"></a>00244 
-<a name="l00245"></a>00245                     <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html">VSWFile</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>, fullname);
-<a name="l00246"></a>00246                 }
-<a name="l00247"></a>00247 
-<a name="l00248"></a>00248                 ++curDir;
-<a name="l00249"></a>00249             }
-<a name="l00250"></a>00250 
-<a name="l00251"></a>00251             <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, <span class="stringliteral">&quot;Unable to find file %s.&quot;</span>, name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
-<a name="l00252"></a>00252 
-<a name="l00253"></a>00253             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
-<a name="l00254"></a>00254         }
-<a name="l00255"></a>00255 
-<a name="l00256"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gae2476aa30e2d1b8e5357a3690d651f5a">00256</a>         <a class="code" href="group__voodoo__module__wfilesystem.html#gae2476aa30e2d1b8e5357a3690d651f5a" title="Creates a file object from a path (usually an absolute path).">VSWFile::VSWFile</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; path) :
-<a name="l00257"></a>00257             m_Path(path), <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>(pCore), m_Handle(<a class="code" href="_includes_8hpp.html#ab979d9d4b4923f7c54d6caa6e1a61936" title="This file is part of the Voodoo Shader Framework.">nullptr</a>)
-<a name="l00258"></a>00258         { };
+<a name="l00245"></a>00245                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00246"></a>00246                     (
+<a name="l00247"></a>00247                         <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
+<a name="l00248"></a>00248                         L<span class="stringliteral">&quot;File %s found in directory %s.&quot;</span>,
+<a name="l00249"></a>00249                         name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), (*curDir).GetData()
+<a name="l00250"></a>00250                     );
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252                     <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html">VSWFile</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>, fullname);
+<a name="l00253"></a>00253                 }
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255                 ++curDir;
+<a name="l00256"></a>00256             }
+<a name="l00257"></a>00257 
+<a name="l00258"></a>00258             <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, <span class="stringliteral">&quot;Unable to find file %s.&quot;</span>, name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00259"></a>00259 
-<a name="l00260"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga58d49dfe14a7b2e8068e06e7231a0309">00260</a>         <a class="code" href="group__voodoo__module__wfilesystem.html#ga58d49dfe14a7b2e8068e06e7231a0309">VSWFile::~VSWFile</a>(<span class="keywordtype">void</span>)
-<a name="l00261"></a>00261         {
-<a name="l00262"></a>00262             this-&gt;<a class="code" href="group__voodoo__module__wfilesystem.html#ga6e0ce6eb8ebef715b30de42c32b82070" title="Closes the file, preventing further access.">Close</a>();
-<a name="l00263"></a>00263         }
-<a name="l00264"></a>00264 
-<a name="l00265"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gadbb7fad5494989a4c4776a176a23f83a">00265</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#gadbb7fad5494989a4c4776a176a23f83a" title="Add a reference to this object.">VSWFile::AddRef</a>()<span class="keyword"> const</span>
-<a name="l00266"></a>00266 <span class="keyword">        </span>{
-<a name="l00267"></a>00267             <span class="keywordflow">return</span> ++<a class="code" href="group__voodoo__module__wfilesystem.html#ga3fc85936fc8b8d540e4179d1993e46e4">m_Refs</a>;
-<a name="l00268"></a>00268         }
-<a name="l00269"></a>00269 
-<a name="l00270"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga7975b97ec842812c652ed84d793967cc">00270</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#ga7975b97ec842812c652ed84d793967cc" title="Release a reference from this object.">VSWFile::Release</a>()<span class="keyword"> const</span>
-<a name="l00271"></a>00271 <span class="keyword">        </span>{
-<a name="l00272"></a>00272             <span class="keywordflow">if</span> (--<a class="code" href="group__voodoo__module__wfilesystem.html#ga3fc85936fc8b8d540e4179d1993e46e4">m_Refs</a> == 0)
-<a name="l00273"></a>00273             {
-<a name="l00274"></a>00274                 <span class="keyword">delete</span> <span class="keyword">this</span>;
-<a name="l00275"></a>00275                 <span class="keywordflow">return</span> 0;
-<a name="l00276"></a>00276             } <span class="keywordflow">else</span> {
-<a name="l00277"></a>00277                 <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga3fc85936fc8b8d540e4179d1993e46e4">m_Refs</a>;
-<a name="l00278"></a>00278             }
-<a name="l00279"></a>00279         }
-<a name="l00280"></a>00280 
-<a name="l00281"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga1600b45f95c2ca32da0baed1d4566710">00281</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga1600b45f95c2ca32da0baed1d4566710" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWFile::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
-<a name="l00282"></a>00282 <span class="keyword">        </span>{
-<a name="l00283"></a>00283             <span class="keywordflow">if</span> (!ppOut)
-<a name="l00284"></a>00284             {
-<a name="l00285"></a>00285                 <span class="keywordflow">if</span> (clsid.is_nil())
-<a name="l00286"></a>00286                 {
-<a name="l00287"></a>00287                     clsid = CLSID_VSWFile;
-<a name="l00288"></a>00288                     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00289"></a>00289                 } <span class="keywordflow">else</span> {
-<a name="l00290"></a>00290                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00291"></a>00291                 }
-<a name="l00292"></a>00292             } <span class="keywordflow">else</span> {
-<a name="l00293"></a>00293                 <span class="keywordflow">if</span> (clsid == IID_IObject || clsid == IID_IFile || clsid == CLSID_VSWFile) {
-<a name="l00294"></a>00294                     *ppOut = <span class="keyword">this</span>;
+<a name="l00260"></a>00260             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
+<a name="l00261"></a>00261         }
+<a name="l00262"></a>00262 
+<a name="l00263"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gae2476aa30e2d1b8e5357a3690d651f5a">00263</a>         <a class="code" href="group__voodoo__module__wfilesystem.html#gae2476aa30e2d1b8e5357a3690d651f5a" title="Creates a file object from a path (usually an absolute path).">VSWFile::VSWFile</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path) :
+<a name="l00264"></a>00264             m_Path(path), <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>(pCore), m_Handle(<a class="code" href="_includes_8hpp.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>)
+<a name="l00265"></a>00265         { };
+<a name="l00266"></a>00266 
+<a name="l00267"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga58d49dfe14a7b2e8068e06e7231a0309">00267</a>         <a class="code" href="group__voodoo__module__wfilesystem.html#ga58d49dfe14a7b2e8068e06e7231a0309">VSWFile::~VSWFile</a>(<span class="keywordtype">void</span>)
+<a name="l00268"></a>00268         {
+<a name="l00269"></a>00269             this-&gt;<a class="code" href="group__voodoo__module__wfilesystem.html#ga6e0ce6eb8ebef715b30de42c32b82070" title="Closes the file, preventing further access.">Close</a>();
+<a name="l00270"></a>00270         }
+<a name="l00271"></a>00271 
+<a name="l00272"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gadbb7fad5494989a4c4776a176a23f83a">00272</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#gadbb7fad5494989a4c4776a176a23f83a" title="Add a reference to this object.">VSWFile::AddRef</a>()<span class="keyword"> const</span>
+<a name="l00273"></a>00273 <span class="keyword">        </span>{
+<a name="l00274"></a>00274             <span class="keywordflow">return</span> ++<a class="code" href="group__voodoo__module__wfilesystem.html#ga3fc85936fc8b8d540e4179d1993e46e4">m_Refs</a>;
+<a name="l00275"></a>00275         }
+<a name="l00276"></a>00276 
+<a name="l00277"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga7975b97ec842812c652ed84d793967cc">00277</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#ga7975b97ec842812c652ed84d793967cc" title="Release a reference from this object.">VSWFile::Release</a>()<span class="keyword"> const</span>
+<a name="l00278"></a>00278 <span class="keyword">        </span>{
+<a name="l00279"></a>00279             <span class="keywordflow">if</span> (--<a class="code" href="group__voodoo__module__wfilesystem.html#ga3fc85936fc8b8d540e4179d1993e46e4">m_Refs</a> == 0)
+<a name="l00280"></a>00280             {
+<a name="l00281"></a>00281                 <span class="keyword">delete</span> <span class="keyword">this</span>;
+<a name="l00282"></a>00282                 <span class="keywordflow">return</span> 0;
+<a name="l00283"></a>00283             } <span class="keywordflow">else</span> {
+<a name="l00284"></a>00284                 <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga3fc85936fc8b8d540e4179d1993e46e4">m_Refs</a>;
+<a name="l00285"></a>00285             }
+<a name="l00286"></a>00286         }
+<a name="l00287"></a>00287 
+<a name="l00288"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga1600b45f95c2ca32da0baed1d4566710">00288</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga1600b45f95c2ca32da0baed1d4566710" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWFile::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00289"></a>00289 <span class="keyword">        </span>{
+<a name="l00290"></a>00290             <span class="keywordflow">if</span> (!ppOut)
+<a name="l00291"></a>00291             {
+<a name="l00292"></a>00292                 <span class="keywordflow">if</span> (clsid.is_nil())
+<a name="l00293"></a>00293                 {
+<a name="l00294"></a>00294                     clsid = CLSID_VSWFile;
 <a name="l00295"></a>00295                     <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00296"></a>00296                 } <span class="keywordflow">else</span> {
-<a name="l00297"></a>00297                     *ppOut = <span class="keyword">nullptr</span>;
-<a name="l00298"></a>00298                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00299"></a>00299                 }
-<a name="l00300"></a>00300             }
-<a name="l00301"></a>00301         }
-<a name="l00302"></a>00302 
-<a name="l00303"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaaa0b357098d2a6644d4bfc57d70eef86">00303</a>         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#gaaa0b357098d2a6644d4bfc57d70eef86" title="Get the name of this object.">VSWFile::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00304"></a>00304 <span class="keyword">        </span>{
-<a name="l00305"></a>00305             <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSWFile&quot;</span>;
-<a name="l00306"></a>00306         }
-<a name="l00307"></a>00307 
-<a name="l00308"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga56cd8f326a4020a7f885f164e705f25f">00308</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#ga56cd8f326a4020a7f885f164e705f25f" title="Get the core this object was associated with.">VSWFile::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00309"></a>00309 <span class="keyword">        </span>{
-<a name="l00310"></a>00310             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>;
-<a name="l00311"></a>00311         }
-<a name="l00312"></a>00312 
-<a name="l00313"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gae02521b6643cf4d1456d4c23a83b948c">00313</a>         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#gae02521b6643cf4d1456d4c23a83b948c" title="Retrieves this file&#39;s absolute path.">VSWFile::GetPath</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00314"></a>00314 <span class="keyword">        </span>{
-<a name="l00315"></a>00315             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>;
-<a name="l00316"></a>00316         }
-<a name="l00317"></a>00317 
-<a name="l00318"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#aa98406f1e2dfe978d5fa8a82864fa87f">00318</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga8b6aa0dda24d1c2a9d0566e9316fafb8" title="Opens the file for read-write access.">VSWFile::Open</a>(<a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6">FileOpenMode</a> mode)
-<a name="l00319"></a>00319         {
-<a name="l00320"></a>00320             DWORD access = 0;
+<a name="l00297"></a>00297                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00298"></a>00298                 }
+<a name="l00299"></a>00299             } <span class="keywordflow">else</span> {
+<a name="l00300"></a>00300                 <span class="keywordflow">if</span> (clsid == IID_IObject)
+<a name="l00301"></a>00301                 {
+<a name="l00302"></a>00302                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00303"></a>00303                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IFile) {
+<a name="l00304"></a>00304                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00305"></a>00305                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSWFile) {
+<a name="l00306"></a>00306                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html">VSWFile</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00307"></a>00307                 } <span class="keywordflow">else</span> {
+<a name="l00308"></a>00308                     *ppOut = <span class="keyword">nullptr</span>;
+<a name="l00309"></a>00309                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00310"></a>00310                 }
+<a name="l00311"></a>00311 
+<a name="l00312"></a>00312                 <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">AddRef</a>();
+<a name="l00313"></a>00313                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00314"></a>00314             }
+<a name="l00315"></a>00315         }
+<a name="l00316"></a>00316 
+<a name="l00317"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaaa0b357098d2a6644d4bfc57d70eef86">00317</a>         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#gaaa0b357098d2a6644d4bfc57d70eef86" title="Get the name of this object.">VSWFile::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00318"></a>00318 <span class="keyword">        </span>{
+<a name="l00319"></a>00319             <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSWFile&quot;</span>;
+<a name="l00320"></a>00320         }
 <a name="l00321"></a>00321 
-<a name="l00322"></a>00322             <span class="keywordflow">if</span> (mode &amp; <a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6ab09754be56a0d83a09859c38a045118e">FM_Read</a>)
-<a name="l00323"></a>00323             {
-<a name="l00324"></a>00324                 access |= GENERIC_READ;
-<a name="l00325"></a>00325             }
+<a name="l00322"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga56cd8f326a4020a7f885f164e705f25f">00322</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#ga56cd8f326a4020a7f885f164e705f25f" title="Get the core this object was associated with.">VSWFile::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00323"></a>00323 <span class="keyword">        </span>{
+<a name="l00324"></a>00324             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>;
+<a name="l00325"></a>00325         }
 <a name="l00326"></a>00326 
-<a name="l00327"></a>00327             <span class="keywordflow">if</span> (mode &amp; <a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6aac7fb74ef9280fae9613a6cb0fd755cb">FM_Write</a>)
-<a name="l00328"></a>00328             {
-<a name="l00329"></a>00329                 access |= GENERIC_WRITE;
-<a name="l00330"></a>00330             }
+<a name="l00327"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gae02521b6643cf4d1456d4c23a83b948c">00327</a>         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#gae02521b6643cf4d1456d4c23a83b948c" title="Retrieves this file&#39;s absolute path.">VSWFile::GetPath</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00328"></a>00328 <span class="keyword">        </span>{
+<a name="l00329"></a>00329             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>;
+<a name="l00330"></a>00330         }
 <a name="l00331"></a>00331 
-<a name="l00332"></a>00332             <span class="keywordflow">if</span> (access == 0)
-<a name="l00333"></a>00333             {
-<a name="l00334"></a>00334                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
-<a name="l00335"></a>00335                 (
-<a name="l00336"></a>00336                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
-<a name="l00337"></a>00337                     L<span class="stringliteral">&quot;Attempted to open file &#39;%s&#39; with unknown mode (%X).&quot;</span>,
-<a name="l00338"></a>00338                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), mode
-<a name="l00339"></a>00339                 );
-<a name="l00340"></a>00340                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00341"></a>00341             }
-<a name="l00342"></a>00342 
-<a name="l00343"></a>00343             <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
-<a name="l00344"></a>00344             (
-<a name="l00345"></a>00345                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
-<a name="l00346"></a>00346                 L<span class="stringliteral">&quot;Opening file %s with mode %u (underlying %u).&quot;</span>,
-<a name="l00347"></a>00347                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), mode, access
-<a name="l00348"></a>00348             );
-<a name="l00349"></a>00349 
-<a name="l00350"></a>00350             <a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> = CreateFile(<a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), access, 0, <span class="keyword">nullptr</span>, OPEN_EXISTING, 0, <span class="keyword">nullptr</span>);
-<a name="l00351"></a>00351 
-<a name="l00352"></a>00352             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> == INVALID_HANDLE_VALUE)
-<a name="l00353"></a>00353             {
-<a name="l00354"></a>00354                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, L<span class="stringliteral">&quot;Unable to open file %s.&quot;</span>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00332"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#acb389581187623d21c4162def1551b19">00332</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga8b6aa0dda24d1c2a9d0566e9316fafb8" title="Opens the file for read-write access.">VSWFile::Open</a>(<a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6">FileOpenMode</a> mode)
+<a name="l00333"></a>00333         {
+<a name="l00334"></a>00334             DWORD access = 0;
+<a name="l00335"></a>00335 
+<a name="l00336"></a>00336             <span class="keywordflow">if</span> (mode &amp; <a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6ab09754be56a0d83a09859c38a045118e">FM_Read</a>)
+<a name="l00337"></a>00337             {
+<a name="l00338"></a>00338                 access |= GENERIC_READ;
+<a name="l00339"></a>00339             }
+<a name="l00340"></a>00340 
+<a name="l00341"></a>00341             <span class="keywordflow">if</span> (mode &amp; <a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6aac7fb74ef9280fae9613a6cb0fd755cb">FM_Write</a>)
+<a name="l00342"></a>00342             {
+<a name="l00343"></a>00343                 access |= GENERIC_WRITE;
+<a name="l00344"></a>00344             }
+<a name="l00345"></a>00345 
+<a name="l00346"></a>00346             <span class="keywordflow">if</span> (access == 0)
+<a name="l00347"></a>00347             {
+<a name="l00348"></a>00348                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00349"></a>00349                 (
+<a name="l00350"></a>00350                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
+<a name="l00351"></a>00351                     L<span class="stringliteral">&quot;Attempted to open file &#39;%s&#39; with unknown mode (%X).&quot;</span>,
+<a name="l00352"></a>00352                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), mode
+<a name="l00353"></a>00353                 );
+<a name="l00354"></a>00354                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00355"></a>00355             }
 <a name="l00356"></a>00356 
-<a name="l00357"></a>00357             <span class="keywordflow">return</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> != INVALID_HANDLE_VALUE);
-<a name="l00358"></a>00358         }
-<a name="l00359"></a>00359 
-<a name="l00360"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">00360</a>         <a class="code" href="class_voodoo_shader_1_1_i_image.html">IImage</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">VSWFile::OpenImage</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00361"></a>00361 <span class="keyword">        </span>{
-<a name="l00362"></a>00362             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">VSWImage::Load</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>);
-<a name="l00363"></a>00363         }
-<a name="l00364"></a>00364 
-<a name="l00365"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga6e0ce6eb8ebef715b30de42c32b82070">00365</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga6e0ce6eb8ebef715b30de42c32b82070" title="Closes the file, preventing further access.">VSWFile::Close</a>(<span class="keywordtype">void</span>)
-<a name="l00366"></a>00366         {
-<a name="l00367"></a>00367             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> &amp;&amp; <a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> != INVALID_HANDLE_VALUE)
-<a name="l00368"></a>00368             {
-<a name="l00369"></a>00369                 <span class="keywordflow">return</span> (CloseHandle(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>) == TRUE);
-<a name="l00370"></a>00370             }
-<a name="l00371"></a>00371             <span class="keywordflow">else</span>
-<a name="l00372"></a>00372             {
-<a name="l00373"></a>00373                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00374"></a>00374             }
-<a name="l00375"></a>00375         }
-<a name="l00376"></a>00376 
-<a name="l00377"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga12f3a610f30023116d5ac514aa515037">00377</a>         <span class="keywordtype">int</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga12f3a610f30023116d5ac514aa515037" title="Reads a chunk of data from the file.">VSWFile::Read</a>(_In_ <span class="keywordtype">int</span> count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> *buffer)
-<a name="l00378"></a>00378         {
-<a name="l00379"></a>00379             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>)
-<a name="l00380"></a>00380             {
-<a name="l00381"></a>00381 
-<a name="l00382"></a>00382                 DWORD readsize;
-<a name="l00383"></a>00383 
-<a name="l00384"></a>00384                 <span class="keywordflow">if</span> (count &lt; 0)
-<a name="l00385"></a>00385                 {
-<a name="l00386"></a>00386                     readsize = GetFileSize(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>, <span class="keyword">nullptr</span>);
-<a name="l00387"></a>00387 
-<a name="l00388"></a>00388                     <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>)
-<a name="l00389"></a>00389                     {
-<a name="l00390"></a>00390                         <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) readsize;
-<a name="l00391"></a>00391                     }
-<a name="l00392"></a>00392                 }
-<a name="l00393"></a>00393                 <span class="keywordflow">else</span>
-<a name="l00394"></a>00394                 {
-<a name="l00395"></a>00395                     readsize = (DWORD) count;
-<a name="l00396"></a>00396                 }
+<a name="l00357"></a>00357             <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00358"></a>00358             (
+<a name="l00359"></a>00359                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
+<a name="l00360"></a>00360                 L<span class="stringliteral">&quot;Opening file %s with mode %u (underlying %u).&quot;</span>,
+<a name="l00361"></a>00361                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), mode, access
+<a name="l00362"></a>00362             );
+<a name="l00363"></a>00363 
+<a name="l00364"></a>00364             <a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> = CreateFile(<a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), access, 0, <span class="keyword">nullptr</span>, OPEN_EXISTING, 0, <span class="keyword">nullptr</span>);
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> == INVALID_HANDLE_VALUE)
+<a name="l00367"></a>00367             {
+<a name="l00368"></a>00368                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, L<span class="stringliteral">&quot;Unable to open file %s.&quot;</span>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00369"></a>00369             }
+<a name="l00370"></a>00370 
+<a name="l00371"></a>00371             <span class="keywordflow">return</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> != INVALID_HANDLE_VALUE);
+<a name="l00372"></a>00372         }
+<a name="l00373"></a>00373 
+<a name="l00374"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">00374</a>         <a class="code" href="class_voodoo_shader_1_1_i_image.html">IImage</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">VSWFile::OpenImage</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00375"></a>00375 <span class="keyword">        </span>{
+<a name="l00376"></a>00376             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">VSWImage::Load</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>);
+<a name="l00377"></a>00377         }
+<a name="l00378"></a>00378 
+<a name="l00379"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga6e0ce6eb8ebef715b30de42c32b82070">00379</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga6e0ce6eb8ebef715b30de42c32b82070" title="Closes the file, preventing further access.">VSWFile::Close</a>(<span class="keywordtype">void</span>)
+<a name="l00380"></a>00380         {
+<a name="l00381"></a>00381             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> &amp;&amp; <a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> != INVALID_HANDLE_VALUE)
+<a name="l00382"></a>00382             {
+<a name="l00383"></a>00383                 <span class="keywordflow">return</span> (CloseHandle(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>) == TRUE);
+<a name="l00384"></a>00384             }
+<a name="l00385"></a>00385             <span class="keywordflow">else</span>
+<a name="l00386"></a>00386             {
+<a name="l00387"></a>00387                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00388"></a>00388             }
+<a name="l00389"></a>00389         }
+<a name="l00390"></a>00390 
+<a name="l00391"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga12f3a610f30023116d5ac514aa515037">00391</a>         <span class="keywordtype">int</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga12f3a610f30023116d5ac514aa515037" title="Reads a chunk of data from the file.">VSWFile::Read</a>(_In_ <span class="keywordtype">int</span> count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> *buffer)
+<a name="l00392"></a>00392         {
+<a name="l00393"></a>00393             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>)
+<a name="l00394"></a>00394             {
+<a name="l00395"></a>00395 
+<a name="l00396"></a>00396                 DWORD readsize;
 <a name="l00397"></a>00397 
-<a name="l00398"></a>00398                 DWORD retsize = 0;
-<a name="l00399"></a>00399                 BOOL success = ReadFile(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>, buffer, readsize, &amp;retsize, <span class="keyword">nullptr</span>);
-<a name="l00400"></a>00400 
-<a name="l00401"></a>00401                 <span class="keywordflow">if</span> (success == 0)
-<a name="l00402"></a>00402                 {
-<a name="l00403"></a>00403                     <span class="keywordflow">return</span> 0;
-<a name="l00404"></a>00404                 }
-<a name="l00405"></a>00405                 <span class="keywordflow">else</span>
-<a name="l00406"></a>00406                 {
-<a name="l00407"></a>00407                     <span class="keywordflow">return</span> retsize;
-<a name="l00408"></a>00408                 }
-<a name="l00409"></a>00409             }
-<a name="l00410"></a>00410 
-<a name="l00411"></a>00411             <span class="keywordflow">return</span> 0;
-<a name="l00412"></a>00412         }
-<a name="l00413"></a>00413 
-<a name="l00414"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gadec1c9d8cd17e21c2348142779898e1b">00414</a>         int32_t <a class="code" href="group__voodoo__module__wfilesystem.html#gadec1c9d8cd17e21c2348142779898e1b" title="Writes a chunk of data to the file.">VSWFile::Write</a>(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * buffer)
-<a name="l00415"></a>00415         {
-<a name="l00416"></a>00416             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>)
-<a name="l00417"></a>00417             {
-<a name="l00418"></a>00418                 <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>)
-<a name="l00419"></a>00419                 {
-<a name="l00420"></a>00420                     DWORD size = 0;
-<a name="l00421"></a>00421 
-<a name="l00422"></a>00422                     <span class="keywordflow">if</span> (count &lt; 0)
-<a name="l00423"></a>00423                     {
-<a name="l00424"></a>00424                         <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, <span class="stringliteral">&quot;Unable to write a negative number of nullptr bytes.&quot;</span>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>);
-<a name="l00425"></a>00425                     }
-<a name="l00426"></a>00426                     <span class="keywordflow">else</span>
-<a name="l00427"></a>00427                     {
-<a name="l00428"></a>00428                         size = (DWORD) count;
-<a name="l00429"></a>00429                     }
-<a name="l00430"></a>00430 
-<a name="l00431"></a>00431                     buffer = malloc(size);
-<a name="l00432"></a>00432 
-<a name="l00433"></a>00433                     <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>)
-<a name="l00434"></a>00434                     {
-<a name="l00435"></a>00435                         <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, <span class="stringliteral">&quot;Error allocating memory for nullptr buffer.&quot;</span>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>);
-<a name="l00436"></a>00436                     }
-<a name="l00437"></a>00437 
-<a name="l00438"></a>00438                     memset(buffer, 0, size);
-<a name="l00439"></a>00439 
-<a name="l00440"></a>00440                     DWORD retsize = 0;
-<a name="l00441"></a>00441                     BOOL success = WriteFile(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>, buffer, size, &amp;retsize, <span class="keyword">nullptr</span>);
-<a name="l00442"></a>00442 
-<a name="l00443"></a>00443                     free(buffer);
+<a name="l00398"></a>00398                 <span class="keywordflow">if</span> (count &lt; 0)
+<a name="l00399"></a>00399                 {
+<a name="l00400"></a>00400                     readsize = GetFileSize(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>, <span class="keyword">nullptr</span>);
+<a name="l00401"></a>00401 
+<a name="l00402"></a>00402                     <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>)
+<a name="l00403"></a>00403                     {
+<a name="l00404"></a>00404                         <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) readsize;
+<a name="l00405"></a>00405                     }
+<a name="l00406"></a>00406                 }
+<a name="l00407"></a>00407                 <span class="keywordflow">else</span>
+<a name="l00408"></a>00408                 {
+<a name="l00409"></a>00409                     readsize = (DWORD) count;
+<a name="l00410"></a>00410                 }
+<a name="l00411"></a>00411 
+<a name="l00412"></a>00412                 DWORD retsize = 0;
+<a name="l00413"></a>00413                 BOOL success = ReadFile(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>, buffer, readsize, &amp;retsize, <span class="keyword">nullptr</span>);
+<a name="l00414"></a>00414 
+<a name="l00415"></a>00415                 <span class="keywordflow">if</span> (success == 0)
+<a name="l00416"></a>00416                 {
+<a name="l00417"></a>00417                     <span class="keywordflow">return</span> 0;
+<a name="l00418"></a>00418                 }
+<a name="l00419"></a>00419                 <span class="keywordflow">else</span>
+<a name="l00420"></a>00420                 {
+<a name="l00421"></a>00421                     <span class="keywordflow">return</span> retsize;
+<a name="l00422"></a>00422                 }
+<a name="l00423"></a>00423             }
+<a name="l00424"></a>00424 
+<a name="l00425"></a>00425             <span class="keywordflow">return</span> 0;
+<a name="l00426"></a>00426         }
+<a name="l00427"></a>00427 
+<a name="l00428"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gadec1c9d8cd17e21c2348142779898e1b">00428</a>         int32_t <a class="code" href="group__voodoo__module__wfilesystem.html#gadec1c9d8cd17e21c2348142779898e1b" title="Writes a chunk of data to the file.">VSWFile::Write</a>(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * buffer)
+<a name="l00429"></a>00429         {
+<a name="l00430"></a>00430             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>)
+<a name="l00431"></a>00431             {
+<a name="l00432"></a>00432                 <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>)
+<a name="l00433"></a>00433                 {
+<a name="l00434"></a>00434                     DWORD size = 0;
+<a name="l00435"></a>00435 
+<a name="l00436"></a>00436                     <span class="keywordflow">if</span> (count &lt; 0)
+<a name="l00437"></a>00437                     {
+<a name="l00438"></a>00438                         <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, <span class="stringliteral">&quot;Unable to write a negative number of nullptr bytes.&quot;</span>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>);
+<a name="l00439"></a>00439                     }
+<a name="l00440"></a>00440                     <span class="keywordflow">else</span>
+<a name="l00441"></a>00441                     {
+<a name="l00442"></a>00442                         size = (DWORD) count;
+<a name="l00443"></a>00443                     }
 <a name="l00444"></a>00444 
-<a name="l00445"></a>00445                     <span class="keywordflow">if</span> (success == 0)
-<a name="l00446"></a>00446                     {
-<a name="l00447"></a>00447                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00448"></a>00448                     }
-<a name="l00449"></a>00449                     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (retsize != size)
-<a name="l00450"></a>00450                     {
-<a name="l00451"></a>00451                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00452"></a>00452                     }
-<a name="l00453"></a>00453                     <span class="keywordflow">else</span>
-<a name="l00454"></a>00454                     {
-<a name="l00455"></a>00455                         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00456"></a>00456                     }
-<a name="l00457"></a>00457                 }
-<a name="l00458"></a>00458                 <span class="keywordflow">else</span>
-<a name="l00459"></a>00459                 {
-<a name="l00460"></a>00460                     <span class="keywordflow">if</span> (count &lt; 0)
-<a name="l00461"></a>00461                     {
-<a name="l00462"></a>00462                         <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, <span class="stringliteral">&quot;Unable to write a negative nubber of bytes.&quot;</span>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>);
-<a name="l00463"></a>00463                     }
-<a name="l00464"></a>00464 
-<a name="l00465"></a>00465                     DWORD size = (DWORD) count;
-<a name="l00466"></a>00466                     DWORD retsize = 0;
-<a name="l00467"></a>00467                     BOOL success = WriteFile(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>, buffer, size, &amp;retsize, <span class="keyword">nullptr</span>);
-<a name="l00468"></a>00468 
-<a name="l00469"></a>00469                     <span class="keywordflow">if</span> (success == 0)
-<a name="l00470"></a>00470                     {
-<a name="l00471"></a>00471                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00472"></a>00472                     }
-<a name="l00473"></a>00473                     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (retsize != size)
-<a name="l00474"></a>00474                     {
-<a name="l00475"></a>00475                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00476"></a>00476                     }
-<a name="l00477"></a>00477                     <span class="keywordflow">else</span>
-<a name="l00478"></a>00478                     {
-<a name="l00479"></a>00479                         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00480"></a>00480                     }
-<a name="l00481"></a>00481                 }
-<a name="l00482"></a>00482             }
-<a name="l00483"></a>00483 
-<a name="l00484"></a>00484             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00485"></a>00485         }
-<a name="l00486"></a>00486 
-<a name="l00487"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">00487</a>         <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library.">VSWImage</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">VSWImage::Load</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name)
-<a name="l00488"></a>00488         {
-<a name="l00489"></a>00489             ILuint image = ilGenImage();
-<a name="l00490"></a>00490 
-<a name="l00491"></a>00491             ilBindImage(image);
-<a name="l00492"></a>00492 
-<a name="l00493"></a>00493             ILboolean loaded = ilLoadImage(name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
-<a name="l00494"></a>00494 
-<a name="l00495"></a>00495             <span class="keywordflow">if</span> (loaded == IL_FALSE)
-<a name="l00496"></a>00496             {
-<a name="l00497"></a>00497                 ilBindImage(0);
-<a name="l00498"></a>00498                 ilDeleteImage(image);
-<a name="l00499"></a>00499                 <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
-<a name="l00500"></a>00500             }
-<a name="l00501"></a>00501             <span class="keywordflow">else</span>
-<a name="l00502"></a>00502             {
-<a name="l00503"></a>00503                 <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">VSWImage</a>(pCore, name, image);
-<a name="l00504"></a>00504             }
-<a name="l00505"></a>00505         }
+<a name="l00445"></a>00445                     buffer = malloc(size);
+<a name="l00446"></a>00446 
+<a name="l00447"></a>00447                     <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>)
+<a name="l00448"></a>00448                     {
+<a name="l00449"></a>00449                         <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, <span class="stringliteral">&quot;Error allocating memory for nullptr buffer.&quot;</span>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>);
+<a name="l00450"></a>00450                     }
+<a name="l00451"></a>00451 
+<a name="l00452"></a>00452                     memset(buffer, 0, size);
+<a name="l00453"></a>00453 
+<a name="l00454"></a>00454                     DWORD retsize = 0;
+<a name="l00455"></a>00455                     BOOL success = WriteFile(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>, buffer, size, &amp;retsize, <span class="keyword">nullptr</span>);
+<a name="l00456"></a>00456 
+<a name="l00457"></a>00457                     free(buffer);
+<a name="l00458"></a>00458 
+<a name="l00459"></a>00459                     <span class="keywordflow">if</span> (success == 0)
+<a name="l00460"></a>00460                     {
+<a name="l00461"></a>00461                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00462"></a>00462                     }
+<a name="l00463"></a>00463                     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (retsize != size)
+<a name="l00464"></a>00464                     {
+<a name="l00465"></a>00465                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00466"></a>00466                     }
+<a name="l00467"></a>00467                     <span class="keywordflow">else</span>
+<a name="l00468"></a>00468                     {
+<a name="l00469"></a>00469                         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00470"></a>00470                     }
+<a name="l00471"></a>00471                 }
+<a name="l00472"></a>00472                 <span class="keywordflow">else</span>
+<a name="l00473"></a>00473                 {
+<a name="l00474"></a>00474                     <span class="keywordflow">if</span> (count &lt; 0)
+<a name="l00475"></a>00475                     {
+<a name="l00476"></a>00476                         <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, <span class="stringliteral">&quot;Unable to write a negative nubber of bytes.&quot;</span>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>);
+<a name="l00477"></a>00477                     }
+<a name="l00478"></a>00478 
+<a name="l00479"></a>00479                     DWORD size = (DWORD) count;
+<a name="l00480"></a>00480                     DWORD retsize = 0;
+<a name="l00481"></a>00481                     BOOL success = WriteFile(<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a>, buffer, size, &amp;retsize, <span class="keyword">nullptr</span>);
+<a name="l00482"></a>00482 
+<a name="l00483"></a>00483                     <span class="keywordflow">if</span> (success == 0)
+<a name="l00484"></a>00484                     {
+<a name="l00485"></a>00485                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00486"></a>00486                     }
+<a name="l00487"></a>00487                     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (retsize != size)
+<a name="l00488"></a>00488                     {
+<a name="l00489"></a>00489                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00490"></a>00490                     }
+<a name="l00491"></a>00491                     <span class="keywordflow">else</span>
+<a name="l00492"></a>00492                     {
+<a name="l00493"></a>00493                         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00494"></a>00494                     }
+<a name="l00495"></a>00495                 }
+<a name="l00496"></a>00496             }
+<a name="l00497"></a>00497 
+<a name="l00498"></a>00498             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00499"></a>00499         }
+<a name="l00500"></a>00500 
+<a name="l00501"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">00501</a>         <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library.">VSWImage</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">VSWImage::Load</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)
+<a name="l00502"></a>00502         {
+<a name="l00503"></a>00503             ILuint image = ilGenImage();
+<a name="l00504"></a>00504 
+<a name="l00505"></a>00505             ilBindImage(image);
 <a name="l00506"></a>00506 
-<a name="l00507"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">00507</a>         <a class="code" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">VSWImage::VSWImage</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name, ILuint image) :
-<a name="l00508"></a>00508             m_Core(pCore), m_Name(name), m_Image(image)
-<a name="l00509"></a>00509         {
-<a name="l00510"></a>00510             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#ad70504fb7c6eeb7551690e2ee8db0aa0">Width</a> = ilGetInteger(IL_IMAGE_WIDTH);
-<a name="l00511"></a>00511             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#a389abe582f537bded9c4831e464ef63b">Height</a> = ilGetInteger(IL_IMAGE_HEIGHT);
-<a name="l00512"></a>00512             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#a442b310459c76709e7ff464a5c0c513f">Depth</a> = ilGetInteger(IL_IMAGE_DEPTH);
-<a name="l00513"></a>00513             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#a90bc18530b540bf4bcaee85d25dae08c">Mipmaps</a> = <span class="keyword">false</span>;
-<a name="l00514"></a>00514             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>;
-<a name="l00515"></a>00515 
-<a name="l00516"></a>00516             ILint texFmt = ilGetInteger(IL_IMAGE_FORMAT);
-<a name="l00517"></a>00517             ILint texType = ilGetInteger(IL_IMAGE_TYPE);
-<a name="l00518"></a>00518 
-<a name="l00519"></a>00519             <span class="keywordflow">if</span> (texFmt == IL_RGB)
-<a name="l00520"></a>00520             {
-<a name="l00521"></a>00521                 <span class="keywordflow">if</span> (texType == IL_BYTE || texType == IL_UNSIGNED_BYTE)
-<a name="l00522"></a>00522                 {
-<a name="l00523"></a>00523                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fac1b6e1b557d9e1dbcc89eccaee9f5202">TF_RGB8</a>;
-<a name="l00524"></a>00524                 }
-<a name="l00525"></a>00525             }
-<a name="l00526"></a>00526             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (texFmt == IL_RGBA)
-<a name="l00527"></a>00527             {
-<a name="l00528"></a>00528                 <span class="keywordflow">if</span> (texType == IL_BYTE || texType == IL_UNSIGNED_BYTE)
-<a name="l00529"></a>00529                 {
-<a name="l00530"></a>00530                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa92dc956ba9db9012612e53baf3a341a5">TF_RGBA8</a>;
-<a name="l00531"></a>00531                 }
-<a name="l00532"></a>00532                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (texType == IL_FLOAT)
-<a name="l00533"></a>00533                 {
-<a name="l00534"></a>00534                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669faaee75e702ccb0eccdfe2a6bc2a144f80">TF_RGBA16F</a>;
-<a name="l00535"></a>00535                 }
-<a name="l00536"></a>00536                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (texType == IL_DOUBLE)
-<a name="l00537"></a>00537                 {
-<a name="l00538"></a>00538                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa4b7fc08dfa228fc2a361188e1dba25b7">TF_RGBA32F</a>;
-<a name="l00539"></a>00539                 }
-<a name="l00540"></a>00540             }
-<a name="l00541"></a>00541 
-<a name="l00542"></a>00542             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> == <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>)
-<a name="l00543"></a>00543             {
-<a name="l00544"></a>00544                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga85be6f129caf9164ac5241b89fe4f498">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
-<a name="l00545"></a>00545                 (
-<a name="l00546"></a>00546                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
-<a name="l00547"></a>00547                     <span class="stringliteral">&quot;Unable to resolve format for image %s (%u).&quot;</span>,
-<a name="l00548"></a>00548                     name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), image
-<a name="l00549"></a>00549                 );
-<a name="l00550"></a>00550             }
-<a name="l00551"></a>00551         }
-<a name="l00552"></a>00552 
-<a name="l00553"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gadaa973bf9b0016d6e8df49e9a2b97de3">00553</a>         <a class="code" href="group__voodoo__module__wfilesystem.html#gadaa973bf9b0016d6e8df49e9a2b97de3">VSWImage::~VSWImage</a>(<span class="keywordtype">void</span>)
-<a name="l00554"></a>00554         {
-<a name="l00555"></a>00555             ilDeleteImage(<a class="code" href="group__voodoo__module__wfilesystem.html#ga0ffb4af3f42edc1265ccbed02fc22235">m_Image</a>);
-<a name="l00556"></a>00556         }
-<a name="l00557"></a>00557 
-<a name="l00558"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaa60e92dcbbc1bc96c8c4e1a3f1d000f6">00558</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#gaa60e92dcbbc1bc96c8c4e1a3f1d000f6" title="Add a reference to this object.">VSWImage::AddRef</a>()<span class="keyword"> const</span>
-<a name="l00559"></a>00559 <span class="keyword">        </span>{
-<a name="l00560"></a>00560             <span class="keywordflow">return</span> ++<a class="code" href="group__voodoo__module__wfilesystem.html#ga71b051f1d1e6afe1a20233e9b4fdc587">m_Refs</a>;
-<a name="l00561"></a>00561         }
-<a name="l00562"></a>00562 
-<a name="l00563"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga1e29d472d5bfa66fda53dda5ca369583">00563</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#ga1e29d472d5bfa66fda53dda5ca369583" title="Release a reference from this object.">VSWImage::Release</a>()<span class="keyword"> const</span>
-<a name="l00564"></a>00564 <span class="keyword">        </span>{
-<a name="l00565"></a>00565             <span class="keywordflow">if</span> (--<a class="code" href="group__voodoo__module__wfilesystem.html#ga71b051f1d1e6afe1a20233e9b4fdc587">m_Refs</a> == 0)
-<a name="l00566"></a>00566             {
-<a name="l00567"></a>00567                 <span class="keyword">delete</span> <span class="keyword">this</span>;
-<a name="l00568"></a>00568                 <span class="keywordflow">return</span> 0;
-<a name="l00569"></a>00569             } <span class="keywordflow">else</span> {
-<a name="l00570"></a>00570                 <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga71b051f1d1e6afe1a20233e9b4fdc587">m_Refs</a>;
-<a name="l00571"></a>00571             }
-<a name="l00572"></a>00572         }
-<a name="l00573"></a>00573 
-<a name="l00574"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga7bb2da42fac11287bcff4eed41095914">00574</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga7bb2da42fac11287bcff4eed41095914" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWImage::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
-<a name="l00575"></a>00575 <span class="keyword">        </span>{
-<a name="l00576"></a>00576             <span class="keywordflow">if</span> (!ppOut)
-<a name="l00577"></a>00577             {
-<a name="l00578"></a>00578                 <span class="keywordflow">if</span> (clsid.is_nil())
-<a name="l00579"></a>00579                 {
-<a name="l00580"></a>00580                     clsid = CLSID_VSWImage;
-<a name="l00581"></a>00581                     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00582"></a>00582                 } <span class="keywordflow">else</span> {
-<a name="l00583"></a>00583                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00584"></a>00584                 }
-<a name="l00585"></a>00585             } <span class="keywordflow">else</span> {
-<a name="l00586"></a>00586                 <span class="keywordflow">if</span> (clsid == IID_IObject || clsid == IID_IImage || clsid == CLSID_VSWImage) {
-<a name="l00587"></a>00587                     *ppOut = <span class="keyword">this</span>;
-<a name="l00588"></a>00588                     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00589"></a>00589                 } <span class="keywordflow">else</span> {
-<a name="l00590"></a>00590                     *ppOut = <span class="keyword">nullptr</span>;
-<a name="l00591"></a>00591                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00592"></a>00592                 }
-<a name="l00593"></a>00593             }
-<a name="l00594"></a>00594         }
-<a name="l00595"></a>00595 
-<a name="l00596"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga28ad1f7b61f3e3e81b41da3c47196bfc">00596</a>         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga28ad1f7b61f3e3e81b41da3c47196bfc" title="Get the name of this object.">VSWImage::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00597"></a>00597 <span class="keyword">        </span>{
-<a name="l00598"></a>00598             <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSWImage&quot;</span>;
-<a name="l00599"></a>00599         }
-<a name="l00600"></a>00600 
-<a name="l00601"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga4bb1ee52dd5e5a874b78bace8abf50f0">00601</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#ga4bb1ee52dd5e5a874b78bace8abf50f0" title="Get the core this object was associated with.">VSWImage::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00602"></a>00602 <span class="keyword">        </span>{
-<a name="l00603"></a>00603             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga85be6f129caf9164ac5241b89fe4f498">m_Core</a>;
-<a name="l00604"></a>00604         }
-<a name="l00605"></a>00605 
-<a name="l00606"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga3eda2df44210e73f5270c8979421c9da">00606</a>         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga3eda2df44210e73f5270c8979421c9da">VSWImage::GetPath</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00607"></a>00607 <span class="keyword">        </span>{
-<a name="l00608"></a>00608             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga6abf0e09716ab3f52ed112ceb6bcdd6c">m_Name</a>;
-<a name="l00609"></a>00609         }
-<a name="l00610"></a>00610 
-<a name="l00611"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gad9fa9145e2095f580989597e40962824">00611</a>         <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gad9fa9145e2095f580989597e40962824" title="Retrieves texture format data from the image.">VSWImage::GetDesc</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00612"></a>00612 <span class="keyword">        </span>{
-<a name="l00613"></a>00613             <span class="keywordflow">return</span> &amp;<a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>;
-<a name="l00614"></a>00614         }
-<a name="l00615"></a>00615 
-<a name="l00616"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga1fe9ee3db31dfb21550d744b3f36d2b7">00616</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#ga1fe9ee3db31dfb21550d744b3f36d2b7" title="Retrieves a portion of the texture data from the image.">VSWImage::GetData</a>(_In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> * pDesc, _In_ <span class="keyword">const</span> uint32_t size, _In_opt_count_(size) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l00617"></a>00617         {
-<a name="l00619"></a>00619             UNREFERENCED_PARAMETER(size);
-<a name="l00620"></a>00620 
-<a name="l00621"></a>00621             ILint ilFmt = 0, ilType = 0;
-<a name="l00622"></a>00622 
-<a name="l00623"></a>00623             <span class="comment">// Convert TextureFormat to DevIL format</span>
-<a name="l00624"></a>00624             <span class="keywordflow">switch</span> (pDesc-&gt;Format)
-<a name="l00625"></a>00625             {
-<a name="l00626"></a>00626             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fac1b6e1b557d9e1dbcc89eccaee9f5202">TF_RGB8</a>:
-<a name="l00627"></a>00627                 ilFmt = IL_RGB;
-<a name="l00628"></a>00628                 ilType = IL_UNSIGNED_BYTE;
-<a name="l00629"></a>00629                 <span class="keywordflow">break</span>;
-<a name="l00630"></a>00630             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa92dc956ba9db9012612e53baf3a341a5">TF_RGBA8</a>:
-<a name="l00631"></a>00631                 ilFmt = IL_RGBA;
-<a name="l00632"></a>00632                 ilType = IL_UNSIGNED_BYTE;
-<a name="l00633"></a>00633                 <span class="keywordflow">break</span>;
-<a name="l00634"></a>00634             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669faaee75e702ccb0eccdfe2a6bc2a144f80">TF_RGBA16F</a>:
-<a name="l00635"></a>00635                 ilFmt = IL_RGBA;
-<a name="l00636"></a>00636                 ilType = IL_FLOAT;
-<a name="l00637"></a>00637                 <span class="keywordflow">break</span>;
-<a name="l00638"></a>00638             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa4b7fc08dfa228fc2a361188e1dba25b7">TF_RGBA32F</a>:
-<a name="l00639"></a>00639                 ilFmt = IL_RGBA;
-<a name="l00640"></a>00640                 ilType = IL_DOUBLE;
-<a name="l00641"></a>00641                 <span class="keywordflow">break</span>;
-<a name="l00642"></a>00642             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>:
-<a name="l00643"></a>00643             <span class="keywordflow">default</span>:
-<a name="l00644"></a>00644                 m_Core-&gt;GetLogger()-&gt;Log
-<a name="l00645"></a>00645                 (
-<a name="l00646"></a>00646                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
-<a name="l00647"></a>00647                     <span class="stringliteral">&quot;Invalid texture format for getting image data (%X).&quot;</span>,
-<a name="l00648"></a>00648                     pDesc-&gt;Format
-<a name="l00649"></a>00649                 );
-<a name="l00650"></a>00650                 <span class="keywordflow">return</span> 0;
-<a name="l00651"></a>00651             }
-<a name="l00652"></a>00652 
-<a name="l00653"></a>00653             <span class="keywordflow">return</span> ilCopyPixels
-<a name="l00654"></a>00654             (
-<a name="l00655"></a>00655                 pDesc-&gt;OffX, pDesc-&gt;OffY, pDesc-&gt;OffZ,
-<a name="l00656"></a>00656                 pDesc-&gt;Width, pDesc-&gt;Height, pDesc-&gt;Depth,
-<a name="l00657"></a>00657                 ilFmt, ilType, pBuffer
-<a name="l00658"></a>00658             );
-<a name="l00659"></a>00659         }
-<a name="l00660"></a>00660     }
-<a name="l00661"></a>00661 }
+<a name="l00507"></a>00507             ILboolean loaded = ilLoadImage(name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00508"></a>00508 
+<a name="l00509"></a>00509             <span class="keywordflow">if</span> (loaded == IL_FALSE)
+<a name="l00510"></a>00510             {
+<a name="l00511"></a>00511                 ilBindImage(0);
+<a name="l00512"></a>00512                 ilDeleteImage(image);
+<a name="l00513"></a>00513                 <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
+<a name="l00514"></a>00514             }
+<a name="l00515"></a>00515             <span class="keywordflow">else</span>
+<a name="l00516"></a>00516             {
+<a name="l00517"></a>00517                 <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">VSWImage</a>(pCore, name, image);
+<a name="l00518"></a>00518             }
+<a name="l00519"></a>00519         }
+<a name="l00520"></a>00520 
+<a name="l00521"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">00521</a>         <a class="code" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">VSWImage::VSWImage</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, ILuint image) :
+<a name="l00522"></a>00522             m_Core(pCore), m_Name(name), m_Image(image)
+<a name="l00523"></a>00523         {
+<a name="l00524"></a>00524             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#ad70504fb7c6eeb7551690e2ee8db0aa0">Width</a> = ilGetInteger(IL_IMAGE_WIDTH);
+<a name="l00525"></a>00525             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#a389abe582f537bded9c4831e464ef63b">Height</a> = ilGetInteger(IL_IMAGE_HEIGHT);
+<a name="l00526"></a>00526             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#a442b310459c76709e7ff464a5c0c513f">Depth</a> = ilGetInteger(IL_IMAGE_DEPTH);
+<a name="l00527"></a>00527             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#a90bc18530b540bf4bcaee85d25dae08c">Mipmaps</a> = <span class="keyword">false</span>;
+<a name="l00528"></a>00528             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>;
+<a name="l00529"></a>00529 
+<a name="l00530"></a>00530             ILint texFmt = ilGetInteger(IL_IMAGE_FORMAT);
+<a name="l00531"></a>00531             ILint texType = ilGetInteger(IL_IMAGE_TYPE);
+<a name="l00532"></a>00532 
+<a name="l00533"></a>00533             <span class="keywordflow">if</span> (texFmt == IL_RGB)
+<a name="l00534"></a>00534             {
+<a name="l00535"></a>00535                 <span class="keywordflow">if</span> (texType == IL_BYTE || texType == IL_UNSIGNED_BYTE)
+<a name="l00536"></a>00536                 {
+<a name="l00537"></a>00537                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fac1b6e1b557d9e1dbcc89eccaee9f5202">TF_RGB8</a>;
+<a name="l00538"></a>00538                 }
+<a name="l00539"></a>00539             }
+<a name="l00540"></a>00540             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (texFmt == IL_RGBA)
+<a name="l00541"></a>00541             {
+<a name="l00542"></a>00542                 <span class="keywordflow">if</span> (texType == IL_BYTE || texType == IL_UNSIGNED_BYTE)
+<a name="l00543"></a>00543                 {
+<a name="l00544"></a>00544                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa92dc956ba9db9012612e53baf3a341a5">TF_RGBA8</a>;
+<a name="l00545"></a>00545                 }
+<a name="l00546"></a>00546                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (texType == IL_FLOAT)
+<a name="l00547"></a>00547                 {
+<a name="l00548"></a>00548                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669faaee75e702ccb0eccdfe2a6bc2a144f80">TF_RGBA16F</a>;
+<a name="l00549"></a>00549                 }
+<a name="l00550"></a>00550                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (texType == IL_DOUBLE)
+<a name="l00551"></a>00551                 {
+<a name="l00552"></a>00552                     <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa4b7fc08dfa228fc2a361188e1dba25b7">TF_RGBA32F</a>;
+<a name="l00553"></a>00553                 }
+<a name="l00554"></a>00554             }
+<a name="l00555"></a>00555 
+<a name="l00556"></a>00556             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> == <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>)
+<a name="l00557"></a>00557             {
+<a name="l00558"></a>00558                 <a class="code" href="group__voodoo__module__wfilesystem.html#ga85be6f129caf9164ac5241b89fe4f498">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00559"></a>00559                 (
+<a name="l00560"></a>00560                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
+<a name="l00561"></a>00561                     <span class="stringliteral">&quot;Unable to resolve format for image %s (%u).&quot;</span>,
+<a name="l00562"></a>00562                     name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(), image
+<a name="l00563"></a>00563                 );
+<a name="l00564"></a>00564             }
+<a name="l00565"></a>00565         }
+<a name="l00566"></a>00566 
+<a name="l00567"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gadaa973bf9b0016d6e8df49e9a2b97de3">00567</a>         <a class="code" href="group__voodoo__module__wfilesystem.html#gadaa973bf9b0016d6e8df49e9a2b97de3">VSWImage::~VSWImage</a>(<span class="keywordtype">void</span>)
+<a name="l00568"></a>00568         {
+<a name="l00569"></a>00569             ilDeleteImage(<a class="code" href="group__voodoo__module__wfilesystem.html#ga0ffb4af3f42edc1265ccbed02fc22235">m_Image</a>);
+<a name="l00570"></a>00570         }
+<a name="l00571"></a>00571 
+<a name="l00572"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaa60e92dcbbc1bc96c8c4e1a3f1d000f6">00572</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#gaa60e92dcbbc1bc96c8c4e1a3f1d000f6" title="Add a reference to this object.">VSWImage::AddRef</a>()<span class="keyword"> const</span>
+<a name="l00573"></a>00573 <span class="keyword">        </span>{
+<a name="l00574"></a>00574             <span class="keywordflow">return</span> ++<a class="code" href="group__voodoo__module__wfilesystem.html#ga71b051f1d1e6afe1a20233e9b4fdc587">m_Refs</a>;
+<a name="l00575"></a>00575         }
+<a name="l00576"></a>00576 
+<a name="l00577"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga1e29d472d5bfa66fda53dda5ca369583">00577</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#ga1e29d472d5bfa66fda53dda5ca369583" title="Release a reference from this object.">VSWImage::Release</a>()<span class="keyword"> const</span>
+<a name="l00578"></a>00578 <span class="keyword">        </span>{
+<a name="l00579"></a>00579             <span class="keywordflow">if</span> (--<a class="code" href="group__voodoo__module__wfilesystem.html#ga71b051f1d1e6afe1a20233e9b4fdc587">m_Refs</a> == 0)
+<a name="l00580"></a>00580             {
+<a name="l00581"></a>00581                 <span class="keyword">delete</span> <span class="keyword">this</span>;
+<a name="l00582"></a>00582                 <span class="keywordflow">return</span> 0;
+<a name="l00583"></a>00583             } <span class="keywordflow">else</span> {
+<a name="l00584"></a>00584                 <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga71b051f1d1e6afe1a20233e9b4fdc587">m_Refs</a>;
+<a name="l00585"></a>00585             }
+<a name="l00586"></a>00586         }
+<a name="l00587"></a>00587 
+<a name="l00588"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga7bb2da42fac11287bcff4eed41095914">00588</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga7bb2da42fac11287bcff4eed41095914" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWImage::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00589"></a>00589 <span class="keyword">        </span>{
+<a name="l00590"></a>00590             <span class="keywordflow">if</span> (!ppOut)
+<a name="l00591"></a>00591             {
+<a name="l00592"></a>00592                 <span class="keywordflow">if</span> (clsid.is_nil())
+<a name="l00593"></a>00593                 {
+<a name="l00594"></a>00594                     clsid = CLSID_VSWImage;
+<a name="l00595"></a>00595                     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00596"></a>00596                 } <span class="keywordflow">else</span> {
+<a name="l00597"></a>00597                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00598"></a>00598                 }
+<a name="l00599"></a>00599             } <span class="keywordflow">else</span> {
+<a name="l00600"></a>00600                 <span class="keywordflow">if</span> (clsid == IID_IObject)
+<a name="l00601"></a>00601                 {
+<a name="l00602"></a>00602                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00603"></a>00603                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IImage) {
+<a name="l00604"></a>00604                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_image.html">IImage</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00605"></a>00605                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSWImage) {
+<a name="l00606"></a>00606                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library.">VSWImage</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00607"></a>00607                 } <span class="keywordflow">else</span> {
+<a name="l00608"></a>00608                     *ppOut = <span class="keyword">nullptr</span>;
+<a name="l00609"></a>00609                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00610"></a>00610                 }
+<a name="l00611"></a>00611 
+<a name="l00612"></a>00612                 <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">AddRef</a>();
+<a name="l00613"></a>00613                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00614"></a>00614             }
+<a name="l00615"></a>00615         }
+<a name="l00616"></a>00616 
+<a name="l00617"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga28ad1f7b61f3e3e81b41da3c47196bfc">00617</a>         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga28ad1f7b61f3e3e81b41da3c47196bfc" title="Get the name of this object.">VSWImage::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00618"></a>00618 <span class="keyword">        </span>{
+<a name="l00619"></a>00619             <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSWImage&quot;</span>;
+<a name="l00620"></a>00620         }
+<a name="l00621"></a>00621 
+<a name="l00622"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga4bb1ee52dd5e5a874b78bace8abf50f0">00622</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#ga4bb1ee52dd5e5a874b78bace8abf50f0" title="Get the core this object was associated with.">VSWImage::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00623"></a>00623 <span class="keyword">        </span>{
+<a name="l00624"></a>00624             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga85be6f129caf9164ac5241b89fe4f498">m_Core</a>;
+<a name="l00625"></a>00625         }
+<a name="l00626"></a>00626 
+<a name="l00627"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga3eda2df44210e73f5270c8979421c9da">00627</a>         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga3eda2df44210e73f5270c8979421c9da">VSWImage::GetPath</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00628"></a>00628 <span class="keyword">        </span>{
+<a name="l00629"></a>00629             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga6abf0e09716ab3f52ed112ceb6bcdd6c">m_Name</a>;
+<a name="l00630"></a>00630         }
+<a name="l00631"></a>00631 
+<a name="l00632"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gad9fa9145e2095f580989597e40962824">00632</a>         <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gad9fa9145e2095f580989597e40962824" title="Retrieves texture format data from the image.">VSWImage::GetDesc</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00633"></a>00633 <span class="keyword">        </span>{
+<a name="l00634"></a>00634             <span class="keywordflow">return</span> &amp;<a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>;
+<a name="l00635"></a>00635         }
+<a name="l00636"></a>00636 
+<a name="l00637"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga1fe9ee3db31dfb21550d744b3f36d2b7">00637</a>         uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#ga1fe9ee3db31dfb21550d744b3f36d2b7" title="Retrieves a portion of the texture data from the image.">VSWImage::GetData</a>(_In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> * pDesc, _In_ <span class="keyword">const</span> uint32_t size, _In_opt_count_(size) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00638"></a>00638         {
+<a name="l00640"></a>00640             UNREFERENCED_PARAMETER(size);
+<a name="l00641"></a>00641 
+<a name="l00642"></a>00642             ILint ilFmt = 0, ilType = 0;
+<a name="l00643"></a>00643 
+<a name="l00644"></a>00644             <span class="comment">// Convert TextureFormat to DevIL format</span>
+<a name="l00645"></a>00645             <span class="keywordflow">switch</span> (pDesc-&gt;Format)
+<a name="l00646"></a>00646             {
+<a name="l00647"></a>00647             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fac1b6e1b557d9e1dbcc89eccaee9f5202">TF_RGB8</a>:
+<a name="l00648"></a>00648                 ilFmt = IL_RGB;
+<a name="l00649"></a>00649                 ilType = IL_UNSIGNED_BYTE;
+<a name="l00650"></a>00650                 <span class="keywordflow">break</span>;
+<a name="l00651"></a>00651             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa92dc956ba9db9012612e53baf3a341a5">TF_RGBA8</a>:
+<a name="l00652"></a>00652                 ilFmt = IL_RGBA;
+<a name="l00653"></a>00653                 ilType = IL_UNSIGNED_BYTE;
+<a name="l00654"></a>00654                 <span class="keywordflow">break</span>;
+<a name="l00655"></a>00655             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669faaee75e702ccb0eccdfe2a6bc2a144f80">TF_RGBA16F</a>:
+<a name="l00656"></a>00656                 ilFmt = IL_RGBA;
+<a name="l00657"></a>00657                 ilType = IL_FLOAT;
+<a name="l00658"></a>00658                 <span class="keywordflow">break</span>;
+<a name="l00659"></a>00659             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa4b7fc08dfa228fc2a361188e1dba25b7">TF_RGBA32F</a>:
+<a name="l00660"></a>00660                 ilFmt = IL_RGBA;
+<a name="l00661"></a>00661                 ilType = IL_DOUBLE;
+<a name="l00662"></a>00662                 <span class="keywordflow">break</span>;
+<a name="l00663"></a>00663             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>:
+<a name="l00664"></a>00664             <span class="keywordflow">default</span>:
+<a name="l00665"></a>00665                 m_Core-&gt;GetLogger()-&gt;Log
+<a name="l00666"></a>00666                 (
+<a name="l00667"></a>00667                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
+<a name="l00668"></a>00668                     <span class="stringliteral">&quot;Invalid texture format for getting image data (%X).&quot;</span>,
+<a name="l00669"></a>00669                     pDesc-&gt;Format
+<a name="l00670"></a>00670                 );
+<a name="l00671"></a>00671                 <span class="keywordflow">return</span> 0;
+<a name="l00672"></a>00672             }
+<a name="l00673"></a>00673 
+<a name="l00674"></a>00674             <span class="keywordflow">return</span> ilCopyPixels
+<a name="l00675"></a>00675             (
+<a name="l00676"></a>00676                 pDesc-&gt;OffX, pDesc-&gt;OffY, pDesc-&gt;OffZ,
+<a name="l00677"></a>00677                 pDesc-&gt;Width, pDesc-&gt;Height, pDesc-&gt;Depth,
+<a name="l00678"></a>00678                 ilFmt, ilType, pBuffer
+<a name="l00679"></a>00679             );
+<a name="l00680"></a>00680         }
+<a name="l00681"></a>00681     }
+<a name="l00682"></a>00682 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 4 2011 15:15:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

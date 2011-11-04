@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.293</span>
+   &#160;<span id="projectnumber">0.4.2.299</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -90,7 +90,7 @@
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_v_s_module_manager__coll__graph.png" border="0" usemap="#_voodoo_shader_1_1_v_s_module_manager_coll__map" alt="Collaboration graph"/></div>
 <map name="_voodoo_shader_1_1_v_s_module_manager_coll__map" id="_voodoo_shader_1_1_v_s_module_manager_coll__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_module_manager.html" title="Provides a framework for loading and unloading modules in core, as well as retrieving symbols and mod..." alt="" coords="997,59,1208,85"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="734,12,890,39"/><area shape="rect" id="node26" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1030,5,1175,32"/><area shape="rect" id="node17" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="737,247,887,273"/><area shape="rect" id="node19" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,247,637,273"/><area shape="rect" id="node21" title="STL class." alt="" coords="243,247,333,273"/><area shape="rect" id="node23" title="STL class." alt="" coords="5,247,192,273"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_module_manager.html" title="Provides a framework for loading and unloading modules in core, as well as retrieving symbols and mod..." alt="" coords="997,59,1208,85"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="734,12,890,39"/><area shape="rect" id="node26" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1030,5,1175,32"/><area shape="rect" id="node17" href="class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="737,247,887,273"/><area shape="rect" id="node19" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,247,637,273"/><area shape="rect" id="node21" title="STL class." alt="" coords="243,247,333,273"/><area shape="rect" id="node23" title="STL class." alt="" coords="5,247,192,273"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_v_s_module_manager-members.html">List of all members.</a></p>
@@ -268,7 +268,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a43f2ce9affbcd3df55dea92f811bec69">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00227">227</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00234">234</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -288,7 +288,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Tests to see if a class exists in the list provided by all loaded modules. </p>
-<p>This first attempts to convert the name string to a UUID (<a class="el" href="class_voodoo_shader_1_1_string.html#ab314f632650d7c4b5c48cd340e95d6c9" title="Attempts to convert this String to a Uuid.">String::ToUuid()</a>), and failing that, looks up the name in the internal map and checks for a corresponding UUID. The name lookup is imprecise, only the first-loaded class with a given name will be registered.</p>
+<p>This first attempts to convert the name string to a UUID (<a class="el" href="group__voodoo__utility__string__conv.html#gab314f632650d7c4b5c48cd340e95d6c9" title="Attempts to convert this String to a Uuid.">String::ToUuid()</a>), and failing that, looks up the name in the internal map and checks for a corresponding UUID. The name lookup is imprecise, only the first-loaded class with a given name will be registered.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>The class name. </td></tr>
@@ -298,7 +298,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a2b03a92a52e04f5cf133446095376ced">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00232">232</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00239">239</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -321,7 +321,7 @@ Private Attributes</h2></td></tr>
 <p>This requires a precise match and will fail if no class is available.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>The class UUID to create. </td></tr>
+    <tr><td class="paramname">clsid</td><td>The class UUID to create. </td></tr>
   </table>
   </dd>
 </dl>
@@ -329,7 +329,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#aea0748c9599ce0198f4481d2e95efa95">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00249">249</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00256">256</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -349,7 +349,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Create a new instance of the given class, using a class name or UUID in string form. </p>
-<p>This first attempts to convert the name string to a UUID (<a class="el" href="class_voodoo_shader_1_1_string.html#ab314f632650d7c4b5c48cd340e95d6c9" title="Attempts to convert this String to a Uuid.">String::ToUuid()</a>), and failing that, looks up the name in the internal map and checks for a corresponding UUID. The name lookup is imprecise, only the first-loaded class with a given name will be registered.</p>
+<p>This first attempts to convert the name string to a UUID (<a class="el" href="group__voodoo__utility__string__conv.html#gab314f632650d7c4b5c48cd340e95d6c9" title="Attempts to convert this String to a Uuid.">String::ToUuid()</a>), and failing that, looks up the name in the internal map and checks for a corresponding UUID. The name lookup is imprecise, only the first-loaded class with a given name will be registered.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>The class name or uuid to create. </td></tr>
@@ -357,11 +357,11 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>New object or nullptr if the class wasn't found or couldn't be created.</dd></dl>
-<dl class="see"><dt><b>See also:</b></dt><dd>String::String(const Uuid &amp;) for <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> conversion rules. </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd>String::String(const Uuid &amp;) for <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> to <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> conversion rules. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ac1cbeb82e62a2214f81e4cff8ac94612">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00286">286</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00293">293</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -403,7 +403,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a4e289e076030d5a8835144d5ce0264d5">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00210">210</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00217">217</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -427,7 +427,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ace3e66aabf61e8cf988c29bf6508fe60">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00087">87</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00094">94</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -457,7 +457,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a2aa85f86a3af45063d221f25ea764996">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00200">200</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00207">207</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -487,7 +487,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a030518977bae7e64289b5cd91df59fc7">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00136">136</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00143">143</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -528,7 +528,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ae97340aab1f104596079d765430e7b50">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00092">92</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00099">99</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -577,7 +577,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a64ab124d1462f7d052653263dfb3e37f">VoodooShader::IModuleManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00082">82</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_module_8cpp_source.html#l00089">89</a> of file <a class="el" href="_v_s_module_8cpp_source.html">VSModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -665,7 +665,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 18:09:55 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 4 2011 15:15:36 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

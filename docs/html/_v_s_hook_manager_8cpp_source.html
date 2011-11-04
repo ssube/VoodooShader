@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.1.293</span>
+   &#160;<span id="projectnumber">0.4.2.299</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -67,13 +67,32 @@
 <div class="title">VSHookManager.cpp</div>  </div>
 </div>
 <div class="contents">
-<a href="_v_s_hook_manager_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a href="_v_s_hook_manager_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00003"></a>00003 <span class="comment"> *</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00005"></a>00005 <span class="comment"> *</span>
+<a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
+<a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
+<a name="l00008"></a>00008 <span class="comment"> * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without</span>
+<a name="l00009"></a>00009 <span class="comment"> * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<a name="l00010"></a>00010 <span class="comment"> * License for more details.</span>
+<a name="l00011"></a>00011 <span class="comment"> *</span>
+<a name="l00012"></a>00012 <span class="comment"> * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to</span>
+<a name="l00013"></a>00013 <span class="comment"> * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US</span>
+<a name="l00014"></a>00014 <span class="comment"> *</span>
+<a name="l00015"></a>00015 <span class="comment"> * Support and more information may be found at</span>
+<a name="l00016"></a>00016 <span class="comment"> *   http://www.voodooshader.com</span>
+<a name="l00017"></a>00017 <span class="comment"> * or by contacting the lead developer at</span>
+<a name="l00018"></a>00018 <span class="comment"> *   peachykeen@voodooshader.com</span>
+<a name="l00019"></a>00019 <span class="comment"> */</span>
+<a name="l00020"></a>00020 
 <a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_hook_manager_8hpp.html">VSHookManager.hpp</a>&quot;</span>
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <span class="keyword">namespace </span>VoodooShader
 <a name="l00024"></a>00024 {
 <a name="l00025"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ab66b09f615c2483ed54e45724a94b8e1">00025</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ab66b09f615c2483ed54e45724a94b8e1">VSHookManager::VSHookManager</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore) :
-<a name="l00026"></a>00026         m_Core(pCore)
+<a name="l00026"></a>00026         m_Refs(0), m_Core(pCore)
 <a name="l00027"></a>00027     { }
 <a name="l00028"></a>00028 
 <a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0994f6fa93cee74c25317f6e390ec9e7">00029</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0994f6fa93cee74c25317f6e390ec9e7">VSHookManager::~VSHookManager</a>(<span class="keywordtype">void</span>)
@@ -107,51 +126,58 @@
 <a name="l00057"></a>00057                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00058"></a>00058             }
 <a name="l00059"></a>00059         } <span class="keywordflow">else</span> {
-<a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == IID_IObject || clsid == IID_IHookManager || clsid == CLSID_VSHookManager) {
-<a name="l00061"></a>00061                 *ppOut = <span class="keyword">this</span>;
-<a name="l00062"></a>00062                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00063"></a>00063             } <span class="keywordflow">else</span> {
-<a name="l00064"></a>00064                 *ppOut = <span class="keyword">nullptr</span>;
-<a name="l00065"></a>00065                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00066"></a>00066             }
-<a name="l00067"></a>00067         }
-<a name="l00068"></a>00068     }
-<a name="l00069"></a>00069 
-<a name="l00070"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0b821e5d76546403e7200417239eec25">00070</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0b821e5d76546403e7200417239eec25" title="Get the name of this object.">VSHookManager::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00071"></a>00071 <span class="keyword">    </span>{
-<a name="l00072"></a>00072         <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSHookManager&quot;</span>;
-<a name="l00073"></a>00073     }
-<a name="l00074"></a>00074 
-<a name="l00075"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0526e72a67f7495e4449778f5b0befae">00075</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0526e72a67f7495e4449778f5b0befae" title="Get the core this object was associated with.">VSHookManager::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00076"></a>00076 <span class="keyword">    </span>{
-<a name="l00077"></a>00077         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ad9356d6877ef39c1b8bd69122b96a190">m_Core</a>;
-<a name="l00078"></a>00078     }
-<a name="l00079"></a>00079 
-<a name="l00080"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a60645d5ecab50f1aaff75f24d4007543">00080</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a60645d5ecab50f1aaff75f24d4007543" title="Install a single hook at the specified point.">VSHookManager::Add</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name, _In_ <span class="keywordtype">void</span> * pSrc, _In_ <span class="keywordtype">void</span> * pDest)
-<a name="l00081"></a>00081     {
-<a name="l00082"></a>00082         UNREFERENCED_PARAMETER(name);
-<a name="l00083"></a>00083         UNREFERENCED_PARAMETER(pSrc);
-<a name="l00084"></a>00084         UNREFERENCED_PARAMETER(pDest);
-<a name="l00085"></a>00085 
-<a name="l00086"></a>00086         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00087"></a>00087     }
-<a name="l00088"></a>00088 
-<a name="l00089"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7f143129ab12b5980a7954140c018389">00089</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7f143129ab12b5980a7954140c018389" title="Removes a single hook.">VSHookManager::Remove</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name)
-<a name="l00090"></a>00090     {
-<a name="l00091"></a>00091         UNREFERENCED_PARAMETER(name);
+<a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == IID_IObject)
+<a name="l00061"></a>00061             {
+<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IHookManager) {
+<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function-level hooks, redirecting existing functions and calls int...">IHookManager</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSHookManager) {
+<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html">VSHookManager</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00067"></a>00067             } <span class="keywordflow">else</span> {
+<a name="l00068"></a>00068                 *ppOut = <span class="keyword">nullptr</span>;
+<a name="l00069"></a>00069                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00070"></a>00070             }
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">AddRef</a>();
+<a name="l00073"></a>00073             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00074"></a>00074         }
+<a name="l00075"></a>00075     }
+<a name="l00076"></a>00076 
+<a name="l00077"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0b821e5d76546403e7200417239eec25">00077</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0b821e5d76546403e7200417239eec25" title="Get the name of this object.">VSHookManager::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00078"></a>00078 <span class="keyword">    </span>{
+<a name="l00079"></a>00079         <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSHookManager&quot;</span>;
+<a name="l00080"></a>00080     }
+<a name="l00081"></a>00081 
+<a name="l00082"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0526e72a67f7495e4449778f5b0befae">00082</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a0526e72a67f7495e4449778f5b0befae" title="Get the core this object was associated with.">VSHookManager::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00083"></a>00083 <span class="keyword">    </span>{
+<a name="l00084"></a>00084         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ad9356d6877ef39c1b8bd69122b96a190">m_Core</a>;
+<a name="l00085"></a>00085     }
+<a name="l00086"></a>00086 
+<a name="l00087"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a60645d5ecab50f1aaff75f24d4007543">00087</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a60645d5ecab50f1aaff75f24d4007543" title="Install a single hook at the specified point.">VSHookManager::Add</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keywordtype">void</span> * pSrc, _In_ <span class="keywordtype">void</span> * pDest)
+<a name="l00088"></a>00088     {
+<a name="l00089"></a>00089         UNREFERENCED_PARAMETER(name);
+<a name="l00090"></a>00090         UNREFERENCED_PARAMETER(pSrc);
+<a name="l00091"></a>00091         UNREFERENCED_PARAMETER(pDest);
 <a name="l00092"></a>00092 
 <a name="l00093"></a>00093         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00094"></a>00094     }
 <a name="l00095"></a>00095 
-<a name="l00096"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aa4de41faa2ea89a3320da58d8cd3cd2c">00096</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aa4de41faa2ea89a3320da58d8cd3cd2c" title="Removes all hooks created with this HookManager.">VSHookManager::RemoveAll</a>(<span class="keywordtype">void</span>)
-<a name="l00097"></a>00097     { }
-<a name="l00098"></a>00098 }
+<a name="l00096"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7f143129ab12b5980a7954140c018389">00096</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7f143129ab12b5980a7954140c018389" title="Removes a single hook.">VSHookManager::Remove</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)
+<a name="l00097"></a>00097     {
+<a name="l00098"></a>00098         UNREFERENCED_PARAMETER(name);
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00101"></a>00101     }
+<a name="l00102"></a>00102 
+<a name="l00103"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aa4de41faa2ea89a3320da58d8cd3cd2c">00103</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aa4de41faa2ea89a3320da58d8cd3cd2c" title="Removes all hooks created with this HookManager.">VSHookManager::RemoveAll</a>(<span class="keywordtype">void</span>)
+<a name="l00104"></a>00104     { }
+<a name="l00105"></a>00105 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2011 18:09:54 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 4 2011 15:15:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

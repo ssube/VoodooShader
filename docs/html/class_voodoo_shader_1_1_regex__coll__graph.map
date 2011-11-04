@@ -1,6 +1,6 @@
 <map id="G" name="G">
 <area shape="rect" id="node2" href="$class_voodoo_shader_1_1_regex_1_1_regex_impl.html" title="VoodooShader::Regex::RegexImpl" alt="" coords="31,355,252,381"/>
-<area shape="rect" id="node6" href="$class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="143,264,292,291"/>
+<area shape="rect" id="node6" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="143,264,292,291"/>
 <area shape="rect" id="node8" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="5,173,219,200"/>
 <area shape="rect" id="node10" title="STL class." alt="" coords="67,83,156,109"/>
 <area shape="rect" id="node12" title="STL class." alt="" coords="19,5,205,32"/>

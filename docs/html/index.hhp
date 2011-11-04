@@ -170,8 +170,17 @@ voodoo_license.html
 voodoo_vars.html
 todo.html
 group__voodoo__framework__interfaces.html
+group__voodoo__utility__string.html
+group__voodoo__utility__string__ctors.html
+group__voodoo__utility__string__conv.html
+group__voodoo__utility__string__mod.html
+group__voodoo__utility__string__case.html
+group__voodoo__utility__string__part.html
+group__voodoo__utility__string__pred.html
+group__voodoo__utility__string__find.html
+group__voodoo__utility__string__format.html
 group___voodoo_core.html
-group___voodoo_utility.html
+group__voodoo__utility.html
 group__voodoo__module__wfilesystem.html
 group__voodoo__module__ehhook.html
 group___voodoo_loader.html
@@ -333,6 +342,7 @@ namespace_voodoo_shader_1_1_xml_logger.html
 class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html
 class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger-members.html
 namespacemembers.html
+namespacemembers_0x61.html
 namespacemembers_0x63.html
 namespacemembers_0x64.html
 namespacemembers_0x66.html
