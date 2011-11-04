@@ -76,7 +76,7 @@
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     4
 #define VOODOO_GLOBAL_VERSION_PATCH     2
-#define VOODOO_GLOBAL_VERSION_REV       294
+#define VOODOO_GLOBAL_VERSION_REV       296
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   L"Copyright (c) 2010-2011 by Sean Sube"
 #define VOODOO_GLOBAL_COPYRIGHT_FULL    L"Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&lt;br /&gt;\n" \
     L"The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\n" \

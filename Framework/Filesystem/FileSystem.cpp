@@ -155,13 +155,19 @@ namespace VoodooShader
                     return false;
                 }
             } else {
-                if (clsid == IID_IObject || clsid == IID_IFileSystem || clsid == CLSID_VSWFileSystem) {
-                    *ppOut = this;
-                    return true;
+                if (clsid == IID_IObject)
+                {
+                    *ppOut = static_cast<const IObject*>(this);
+                } else if (clsid == IID_IFileSystem) {
+                    *ppOut = static_cast<const IFileSystem*>(this);
+                } else if (clsid == CLSID_VSWFileSystem) {
+                    *ppOut = static_cast<const VSWFileSystem*>(this);
                 } else {
                     *ppOut = nullptr;
                     return false;
                 }
+
+                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
             }
         }
 
@@ -290,13 +296,19 @@ namespace VoodooShader
                     return false;
                 }
             } else {
-                if (clsid == IID_IObject || clsid == IID_IFile || clsid == CLSID_VSWFile) {
-                    *ppOut = this;
-                    return true;
+                if (clsid == IID_IObject)
+                {
+                    *ppOut = static_cast<const IObject*>(this);
+                } else if (clsid == IID_IFile) {
+                    *ppOut = static_cast<const IFile*>(this);
+                } else if (clsid == CLSID_VSWFile) {
+                    *ppOut = static_cast<const VSWFile*>(this);
                 } else {
                     *ppOut = nullptr;
                     return false;
                 }
+
+                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
             }
         }
 
@@ -583,13 +595,19 @@ namespace VoodooShader
                     return false;
                 }
             } else {
-                if (clsid == IID_IObject || clsid == IID_IImage || clsid == CLSID_VSWImage) {
-                    *ppOut = this;
-                    return true;
+                if (clsid == IID_IObject)
+                {
+                    *ppOut = static_cast<const IObject*>(this);
+                } else if (clsid == IID_IImage) {
+                    *ppOut = static_cast<const IImage*>(this);
+                } else if (clsid == CLSID_VSWImage) {
+                    *ppOut = static_cast<const VSWImage*>(this);
                 } else {
                     *ppOut = nullptr;
                     return false;
                 }
+
+                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
             }
         }
 
