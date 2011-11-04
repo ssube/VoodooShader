@@ -105,9 +105,6 @@ namespace VoodooShader
         /** The current variable parser. */
         IParserRef m_Parser;
 
-        /** Collection of all shaders created by this pCore. */
-        ShaderVector m_Shaders;
-
         /** Collection of all usable textures. */
         TextureMap m_Textures;
 

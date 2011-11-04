@@ -40,14 +40,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\;D:\Code\WinUnit\Include;$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\bin\$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\bin\$(Configuration);D:\Code\Cg_July2010\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\;D:\Code\WinUnit\Include;$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\bin\$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\bin\$(Configuration);D:\Code\Cg_July2010\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -58,6 +58,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;VOODOOTEST_CORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Code\boost;D:\Code\Cg_July2010\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -73,6 +74,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;VOODOOTEST_CORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Code\boost;D:\Code\Cg_July2010\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -85,6 +87,7 @@
     <ClCompile Include="CoreTest.cpp" />
     <ClCompile Include="DX9Test.cpp" />
     <ClCompile Include="OGLTest.cpp" />
+    <ClCompile Include="StringTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

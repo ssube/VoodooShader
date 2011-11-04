@@ -277,12 +277,23 @@ namespace VoodooShader
     {
         this->SetCgContext(nullptr);
 
+        m_LastPass = nullptr;
+        m_LastShader = nullptr;
+
+        m_Parameters.clear();
+        m_Textures.clear();
+
         m_Adapter = nullptr;
         m_HookManager = nullptr;
         m_FileSystem = nullptr;
         m_Logger = nullptr;
 
         m_ModuleManager = nullptr;
+
+        if (m_ConfigFile) 
+        {
+            delete m_ConfigFile;
+        }
 
 #ifdef VSF_DEBUG_MEMORY
         _CrtDumpMemoryLeaks();
@@ -378,31 +389,32 @@ namespace VoodooShader
         return m_CgContext;
     }
 
-    bool VSCore::SetCgContext(CGcontext Context)
+    bool VSCore::SetCgContext(CGcontext pContext)
     {
-        if (Context == nullptr)
+        if (pContext == nullptr)
         {
             m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Setting Cg context to nullptr.");
 
-            m_Shaders.clear();
             m_Parameters.clear();
             m_Textures.clear();
             m_LastPass = nullptr;
             m_LastShader = nullptr;
+
+            m_CgContext = pContext;
 
             return true;
         }
         else if (m_CgContext != nullptr)
         {
             m_Logger->Log(LL_Error, VOODOO_CORE_NAME,
-                L"Error: Attempting to set Cg context (%p) over existing context (%p).", Context, m_CgContext);
+                L"Error: Attempting to set Cg context (%p) over existing context (%p).", pContext, m_CgContext);
 
             return false;
         }
         else
         {
-            m_CgContext = Context;
-            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Set Cg context (%p).", Context);
+            m_CgContext = pContext;
+            m_Logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Set Cg context (%p).", pContext);
             return true;
         }
     }

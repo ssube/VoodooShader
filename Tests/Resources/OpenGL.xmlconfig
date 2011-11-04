@@ -18,6 +18,7 @@
     <Plugins>
         <!-- Plugins to be loaded. May be given as a path or single file. -->
         <File>$(globalroot)/Voodoo_Core.dll</File>
+        <File>$(globalroot)/Voodoo_WFileSystem.dll</File>
     </Plugins>
 
     <Core>
@@ -25,7 +26,7 @@
         <Class>
             <Logger file="$(runroot)\Voodoo_Test" level="255">VSLogger</Logger>
             <HookManager>VSHookManager</HookManager>
-            <FileSystem>VSFileSystem</FileSystem>
+            <FileSystem>VSWFileSystem</FileSystem>
             <Adapter>VSAdapter</Adapter>
         </Class>
     </Core>
