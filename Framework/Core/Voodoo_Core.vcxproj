@@ -71,7 +71,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);cg.lib;pugixml_d.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);cg.lib;shell32.lib;shlwapi.lib;pugixml_d.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
     </Link>
@@ -92,7 +92,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);cg.lib;pugixml_d.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);cg.lib;shell32.lib;shlwapi.lib;pugixml_d.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
     </Link>
@@ -113,7 +113,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);cg.lib;pugixml.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);cg.lib;shell32.lib;shlwapi.lib;pugixml.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
     </Link>

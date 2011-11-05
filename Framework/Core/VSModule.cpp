@@ -20,6 +20,8 @@
 
 #include "VSModule.hpp"
 
+#include "shlwapi.h"
+
 #include "Exception.hpp"
 #include "Regex.hpp"
 #include "Version.hpp"
@@ -99,8 +101,9 @@ namespace VoodooShader
     bool VSModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
     {
         String mask = m_Core->GetParser()->Parse(path) + L"\\*";
+
         WIN32_FIND_DATA findFile;
-        HANDLE searchHandle = FindFirstFile(filter.GetData(), &findFile);
+        HANDLE searchHandle = FindFirstFile(mask.GetData(), &findFile);
 
         if (searchHandle == INVALID_HANDLE_VALUE)
         {
@@ -112,7 +115,7 @@ namespace VoodooShader
                 (
                     LL_Warning,
                     VOODOO_CORE_NAME,
-                    L"No plugin files found in directory %s.",
+                    L"No files found in directory %s.",
                     path.GetData()
                 );
 
@@ -143,6 +146,14 @@ namespace VoodooShader
     bool VSModuleManager::LoadFile(_In_ const String & filename)
     {
         ILoggerRef logger = m_Core->GetLogger();
+
+        String name = m_Core->GetParser()->Parse(filename);
+
+        // Check for relative
+        if (PathIsRelative(name.GetData()))
+        {
+            name = m_Core->GetParser()->Parse(String(L"$(globalroot)\\bin\\") + name, PF_PathCanon);
+        }
 
         // Check for already loaded
         if (m_Modules.find(filename) != m_Modules.end())

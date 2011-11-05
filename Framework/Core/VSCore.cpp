@@ -22,6 +22,8 @@
 
 #include <boost/lexical_cast.hpp>
 
+#include "shellapi.h"
+
 #include "Converter.hpp"
 #include "Exception.hpp"
 #include "Version.hpp"
@@ -101,8 +103,20 @@ namespace VoodooShader
         m_Parser->Add(L"target", pInitParams->Target, VT_System);
         m_Parser->Add(L"loader", pInitParams->Loader, VT_System);
 
-        String Config = m_Parser->Parse(pInitParams->Config);
+        // Command line
+        LPWSTR cmdline = GetCommandLine();
+        m_Parser->Add(L"cmdline", cmdline, VT_System);
 
+        int cmdargc = 0;
+        LPWSTR * cmdargv = CommandLineToArgvW(cmdline, &cmdargc);
+        m_Parser->Add("cmd_count", String::Format("%d", cmdargc), VT_System);
+        for (int i = 0; i < cmdargc; ++i)
+        {
+            m_Parser->Add(String::Format("cmd_%d"), cmdargv[i], VT_System);
+        }
+
+        // Load the config
+        String Config = m_Parser->Parse(pInitParams->Config);
         m_Parser->Add(L"config", Config, VT_System);
 
         try
@@ -110,16 +124,16 @@ namespace VoodooShader
             m_ConfigFile = new pugi::xml_document();
 
             // Try loading the config file from each major location
-            String configPath = m_Parser->Parse(L"$(runroot)$(config)");
+            String configPath = m_Parser->Parse(L"$(runroot)\\$(config)", PF_PathCanon);
             pugi::xml_parse_result result = m_ConfigFile->load_file(configPath.GetData());
 
             if (!result)
             {
-                configPath = m_Parser->Parse(L"$(localroot)$(config)");
+                configPath = m_Parser->Parse(L"$(localroot)\\$(config)");
                 result = m_ConfigFile->load_file(configPath.GetData());
                 if (!result)
                 {
-                    configPath = m_Parser->Parse(L"$(globalroot)$(config)");
+                    configPath = m_Parser->Parse(L"$(globalroot)\\$(config)");
                     result = m_ConfigFile->load_file(configPath.GetData());
                     if (!result)
                     {
@@ -258,7 +272,7 @@ namespace VoodooShader
             }
 
             // ICore done loading
-            m_Logger->Log(LL_Info, VOODOO_CORE_NAME, L"ICore initialization complete.");
+            m_Logger->Log(LL_Info, VOODOO_CORE_NAME, L"Core initialization complete.");
 
             // Return
         }
@@ -266,7 +280,7 @@ namespace VoodooShader
         {
             if (m_Logger.get())
             {
-                m_Logger->Log(LL_Error, VOODOO_CORE_NAME, L"Error during ICore creation: %s", exc.what());
+                m_Logger->Log(LL_Error, VOODOO_CORE_NAME, L"Error during Core creation: %s", exc.what());
             }
 
             throw exc;

@@ -21,6 +21,8 @@
 #include <sstream>
 #include <iostream>
 
+#include "shlwapi.h"
+
 #include "Version.hpp"
 
 #include "ICore.hpp"
@@ -111,7 +113,7 @@ namespace VoodooShader
             );
         }
 
-        String finalname = this->Parse(name, PF_VarName);
+        String finalname = this->Parse(name);
 
         if (Type == VT_System)
         {
@@ -150,7 +152,7 @@ namespace VoodooShader
             m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"Removing variable \"%s\".", name.GetData());
         }
 
-        String finalname = this->Parse(name, PF_VarName);
+        String finalname = this->Parse(name, PF_None);
         Dictionary::iterator varIter = m_Variables.find(finalname);
 
         if (varIter != m_Variables.end())
@@ -242,7 +244,7 @@ namespace VoodooShader
                 newvalue = this->ParseStringRaw(newvalue, flags, ++depth, state);
 
                 varname = varname.Substr(0, statepos);
-                varname = this->ParseStringRaw(varname, PF_VarName, ++depth, state);
+                varname = this->ParseStringRaw(varname, PF_None, ++depth, state);
 
                 state[varname] = newvalue;
 
@@ -270,7 +272,7 @@ namespace VoodooShader
             }
 
             // Properly format the variable name
-            varname = this->ParseStringRaw(varname, PF_VarName, ++depth, state);
+            varname = this->ParseStringRaw(varname, PF_None, ++depth, state).ToLower();
 
             // Lookup and replace the variable
             bool foundvar = true;
@@ -329,24 +331,25 @@ namespace VoodooShader
         {
             return iteration;
         }
-        else if (flags == PF_VarName)
-        {
-            return iteration.ToLower();
-        }
 
-        if (flags & (PF_SingleSlash | PF_SlashOnly | PF_BackslashOnly))
+        if (flags & PF_SlashFlags)
         {
-            bool singleslash = (flags & PF_SingleSlash);
+            bool singleslash = (flags & PF_SlashSingle);
             bool prevslash = false;
             bool slashrewrite = false;
             char slashchar = L' ';
+
+            if (flags & PF_SlashTrail)
+            {
+                iteration += L"\\";
+            }
 
             if (flags & PF_SlashOnly)
             {
                 slashrewrite = true;
                 slashchar = L'/';
             }
-            else if (flags & PF_BackslashOnly)
+            else if (flags & PF_SlashBack)
             {
                 slashrewrite = true;
                 slashchar = L'\\';
@@ -387,11 +390,44 @@ namespace VoodooShader
             iteration = output.str();
         }
 
-        if (flags & PF_Lowercase)
+        if (flags & PF_PathFlags)
         {
-            iteration = iteration.ToLower();
-        } else if (flags & PF_Uppercase) {
-            iteration = iteration.ToUpper();
+            if (flags & PF_PathCanon)
+            {
+                LPWSTR buffer = new TCHAR[MAX_PATH];
+                if (PathCanonicalize(buffer, iteration.GetData()) == TRUE)
+                {
+                    iteration = buffer;
+                }
+                delete[] buffer;
+            }
+
+            if (flags & PF_PathRoot)
+            {
+                LPWSTR buffer = new TCHAR[MAX_PATH];
+                CopyMemory(buffer, iteration.GetData(), iteration.GetLength());
+
+                if (PathStripToRoot(buffer) == TRUE)
+                {
+                    iteration = buffer;
+                }
+
+                delete[] buffer;
+            } else if (flags & PF_PathOnly) {
+                LPWSTR buffer = new TCHAR[iteration.GetLength()];
+                CopyMemory(buffer, iteration.GetData(), iteration.GetLength());
+
+                if (PathRemoveFileSpec(buffer) != 0)
+                {
+                    iteration = buffer;
+                }
+
+                delete[] buffer;
+            } else if (flags & PF_PathFile) {
+                iteration = PathFindFileName(iteration.GetData());
+            } else if (flags & PF_PathExt) {
+                iteration = PathFindExtension(iteration.GetData());
+            }
         }
 
         if (logger)

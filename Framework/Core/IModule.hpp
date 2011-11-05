@@ -67,9 +67,26 @@ namespace VoodooShader
          * Loads a single module, using an absolute or relative filename.
          *
          * @param filename The file to load, sent through the parser before use.
+         * 
+         * @note If a relative path is provided, this will canonicalize that path relative to Voodoo's global root. For
+         *      example, the call will be loaded as:
+         *      @code 
+         *      Call: IModuleManager->LoadFile("../Library.dll");
+         *      Absolute: Canonicalize("$(globalroot)\\bin\\../Library.dll");
+         *      Parsed: Canonicalize("C:\\Voodoo\\bin\\../Library.dll");
+         *      Final: "C:\\Voodoo\\Library.dll";
+         *      @code 
+         *      Among other things, this guarantees an absolute path for use when searching for dependencies.
          *
-         * @note When the module is loaded, if an absolute path is provided, the module's directory is used in the search
-         *     path for required DLLs.
+         * @note The module's directory is used in the search path for required DLLs. The search path, through this method,
+         *      is:
+         *      @li The directory given with the filename, or Voodoo's global root if a relative path was given.
+         *      @li The current directory.
+         *      @li The system directory.
+         *      @li The 16-bit system directory.
+         *      @li The Windows directory.
+         *      @li All directories listed in the PATH environment variable, in order.
+         *            
          */
         virtual bool LoadFile(_In_ const String & filename) = 0;
 
@@ -77,6 +94,7 @@ namespace VoodooShader
          * Tests to see if a class exists in the list provided by all loaded modules.
          *
          * @param clsid The class UUID.
+         * @return Existence of the class.
          */
         virtual bool ClassExists(_In_ const Uuid & clsid) const = 0;
 
@@ -88,6 +106,7 @@ namespace VoodooShader
          * class with a given name will be registered.
          *
          * @param name The class name.
+         * @return Existence of the class.
          */
         virtual bool ClassExists(_In_ const String & name) const = 0;
 

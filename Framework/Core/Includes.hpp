@@ -405,13 +405,21 @@ namespace VoodooShader
      */
     enum ParseFlags : int32_t
     {
-        PF_None         = 0x0000,
-        PF_SingleSlash  = 0x0001,
-        PF_SlashOnly    = 0x0002,
-        PF_BackslashOnly= 0x0004,
-        PF_Lowercase    = 0x0010,
-        PF_Uppercase    = 0x0020,
-        PF_VarName      = 0x0100
+        PF_None         = 0x00,
+
+        PF_SlashSingle  = 0x01,
+        PF_SlashOnly    = 0x02,
+        PF_SlashBack    = 0x04,
+        PF_SlashTrail   = 0x08,
+
+        PF_PathRoot     = 0x001000,
+        PF_PathOnly     = 0x002000,
+        PF_PathFile     = 0x004000,
+        PF_PathExt      = 0x008000,
+        PF_PathCanon    = 0x010000,
+
+        PF_SlashFlags   = 0x0000000F,
+        PF_PathFlags    = 0x000FF000,
     };
 
     enum VariableType  : int32_t
