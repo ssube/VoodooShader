@@ -46,12 +46,12 @@ namespace VoodooShader
 
     uint32_t VSModuleManager::AddRef() const
     {
-        return ++m_Refs;
+        return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VSModuleManager::Release() const
     {
-        uint32_t count = --m_Refs;
+        uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
         {
             delete this;
@@ -147,22 +147,22 @@ namespace VoodooShader
     {
         ILoggerRef logger = m_Core->GetLogger();
 
-        String name = m_Core->GetParser()->Parse(filename);
+        String fullname = m_Core->GetParser()->Parse(filename);
 
         // Check for relative
-        if (PathIsRelative(name.GetData()))
+        if (PathIsRelative(fullname.GetData()))
         {
-            name = m_Core->GetParser()->Parse(String(L"$(globalroot)\\bin\\") + name, PF_PathCanon);
+            fullname = m_Core->GetParser()->Parse(String(L"$(globalroot)\\bin\\") + fullname, PF_PathCanon);
         }
 
         // Check for already loaded
-        if (m_Modules.find(filename) != m_Modules.end())
+        if (m_Modules.find(fullname) != m_Modules.end())
         {
             return true;
         }
 
         // Create struct and load functions
-        IModuleRef module = VSModule::Load(m_Core, filename);
+        IModuleRef module = VSModule::Load(m_Core, fullname);
 
         if (module == nullptr)
         {
@@ -174,7 +174,7 @@ namespace VoodooShader
             return false;
         }
 
-        m_Modules[filename] = module;
+        m_Modules[fullname] = module;
 
         // Register classes from module
         const Version * moduleversion = module->ModuleVersion();
@@ -202,12 +202,12 @@ namespace VoodooShader
             Uuid clsid;
             ZeroMemory(&clsid, sizeof(Uuid));
 
-            const wchar_t * name = module->ClassInfo(curClass, &clsid);
+            const wchar_t * classname = module->ClassInfo(curClass, &clsid);
 
-            if (name)
+            if (classname)
             {
                 m_Classes.insert(std::pair<Uuid, ClassID>(clsid, ClassID(module, curClass)));
-                m_ClassNames.insert(std::pair<String, Uuid>(name, clsid));
+                m_ClassNames.insert(std::pair<String, Uuid>(classname, clsid));
             }
         }
 
@@ -366,12 +366,12 @@ namespace VoodooShader
 
     uint32_t VSModule::AddRef() const
     {
-        return ++m_Refs;
+        return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VSModule::Release() const
     {
-        uint32_t count = --m_Refs;
+        uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
         {
             delete this;

@@ -173,6 +173,15 @@ namespace VoodooShader
      * @}
      */
 
+    /* Refcount handlers */
+#ifdef _DEBUG
+#   define SAFE_INCREMENT(x) InterlockedIncrement(&x)
+#   define SAFE_DECREMENT(x) InterlockedDecrement(&x)
+#else
+#   define SAFE_INCREMENT(x) ++x
+#   define SAFE_DECREMENT(x) --x
+#endif
+
     /* Uuids */
 #define DEFINE_UUID(name, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, da, db, dc, dd, de, df) \
     EXTERN_C const Uuid DECLSPEC_SELECTANY name = {d0,d1,d2,d3,d4,d5,d6,d7,d8,d9,da,db,dc,dd,de,df}

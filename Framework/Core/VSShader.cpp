@@ -81,12 +81,12 @@ namespace VoodooShader
 
     uint32_t VSShader::AddRef() const
     {
-        return ++m_Refs;
+        return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VSShader::Release() const
     {
-        if (--m_Refs == 0)
+        if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
             return 0;

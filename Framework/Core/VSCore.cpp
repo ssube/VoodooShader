@@ -316,12 +316,12 @@ namespace VoodooShader
 
     uint32_t VSCore::AddRef() const
     {
-        return ++m_Refs;
+        return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VSCore::Release() const
     {
-        uint32_t count = --m_Refs;
+        uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
         {
             delete this;

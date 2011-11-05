@@ -68,12 +68,12 @@ namespace VoodooShader
 
     uint32_t VSPass::AddRef() const
     {
-        return ++m_Refs;
+        return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VSPass::Release() const
     {
-        if (--m_Refs == 0)
+        if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
             return 0;

@@ -129,12 +129,12 @@ namespace VoodooShader
 
         uint32_t VSWFileSystem::AddRef() const
         {
-            return ++m_Refs;
+            return SAFE_INCREMENT(m_Refs);
         }
 
         uint32_t VSWFileSystem::Release() const
         {
-            if (--m_Refs == 0)
+            if (SAFE_DECREMENT(m_Refs) == 0)
             {
                 delete this;
                 return 0;
@@ -271,12 +271,12 @@ namespace VoodooShader
 
         uint32_t VSWFile::AddRef() const
         {
-            return ++m_Refs;
+            return SAFE_INCREMENT(m_Refs);
         }
 
         uint32_t VSWFile::Release() const
         {
-            if (--m_Refs == 0)
+            if (SAFE_DECREMENT(m_Refs) == 0)
             {
                 delete this;
                 return 0;
@@ -571,12 +571,12 @@ namespace VoodooShader
 
         uint32_t VSWImage::AddRef() const
         {
-            return ++m_Refs;
+            return SAFE_INCREMENT(m_Refs);
         }
 
         uint32_t VSWImage::Release() const
         {
-            if (--m_Refs == 0)
+            if (SAFE_DECREMENT(m_Refs) == 0)
             {
                 delete this;
                 return 0;
