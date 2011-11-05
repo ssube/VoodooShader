@@ -416,10 +416,11 @@ namespace VoodooShader
     {
         PF_None         = 0x00,
 
-        PF_SlashSingle  = 0x01,
-        PF_SlashOnly    = 0x02,
-        PF_SlashBack    = 0x04,
-        PF_SlashTrail   = 0x08,
+        PF_SlashSingle  = 0x0001,
+        PF_SlashDouble  = 0x0002,
+        PF_SlashOnly    = 0x0004,
+        PF_SlashBack    = 0x0008,
+        PF_SlashTrail   = 0x0010,
 
         PF_PathRoot     = 0x001000,
         PF_PathOnly     = 0x002000,
@@ -427,7 +428,7 @@ namespace VoodooShader
         PF_PathExt      = 0x008000,
         PF_PathCanon    = 0x010000,
 
-        PF_SlashFlags   = 0x0000000F,
+        PF_SlashFlags   = 0x0000001F,
         PF_PathFlags    = 0x000FF000,
     };
 

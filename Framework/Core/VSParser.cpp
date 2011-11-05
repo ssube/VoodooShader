@@ -335,6 +335,7 @@ namespace VoodooShader
         if (flags & PF_SlashFlags)
         {
             bool singleslash = (flags & PF_SlashSingle);
+            bool doubleslash = (flags & PF_SlashDouble);
             bool prevslash = false;
             bool slashrewrite = false;
             char slashchar = L' ';
@@ -361,9 +362,7 @@ namespace VoodooShader
 
             while (cur < total)
             {
-                wchar_t inchar = iteration[cur];
-
-                ++cur;
+                wchar_t inchar = iteration[cur++];
 
                 if (inchar == L'/' || inchar == L'\\')
                 {
@@ -379,6 +378,10 @@ namespace VoodooShader
 
                     prevslash = true;
                     output << inchar;
+                    if (doubleslash)
+                    {
+                        output << inchar;
+                    }
                 }
                 else
                 {
