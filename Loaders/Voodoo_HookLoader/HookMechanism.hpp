@@ -19,27 +19,35 @@
  */
 #pragma once
 
+#include <vector>
+
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
-struct SingleHook
-{
-    const char * symbol;
-    void * func;
-};
+#include "easyhook.h"
 
 struct ModuleHooks
 {
     TCHAR * name;
-    SingleHook hooks[];
+    const char * symbol;
+    void * func;
 };
 
 extern HINSTANCE gHookLoader;
 extern HHOOK gGlobalHook;
 
 extern HMODULE gEH_Module;
-extern std::function<NTSTATUS (void*, void*, void*, TRACED_HOOK_HANDLE)> gEH_Install;
-extern std::function<NTSTATUS (TRACED_HOOK_HANDLE)> gEH_Uninstall;
+
+typedef NTSTATUS (__stdcall * func_EH_Install)(void*, void*, void*, TRACED_HOOK_HANDLE);
+typedef NTSTATUS (__stdcall * func_EH_Uninstall)(TRACED_HOOK_HANDLE);
+typedef NTSTATUS (__stdcall * func_EH_UninstallAll)();
+typedef NTSTATUS (__stdcall * func_EH_SetACL)(ULONG*,ULONG,TRACED_HOOK_HANDLE);
+typedef NTSTATUS (__stdcall * func_EH_SetGlobalACL)(ULONG*,ULONG);
+extern func_EH_Install gEH_Install;
+extern func_EH_Uninstall gEH_Uninstall;
+extern func_EH_UninstallAll gEH_UninstallAll;
+extern func_EH_SetACL gEH_SetACL;
+extern func_EH_SetGlobalACL gEH_SetGlobalACL;
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
 
@@ -53,7 +61,10 @@ bool WINAPI IsDllLoaded(_In_z_ LPTSTR name);
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc);
 bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol);
 
-int WINAPI HookList(_In_z_ ModuleHooks * hooks);
+int WINAPI InstallHookList(_In_ ModuleHooks * hooks);
+
+bool WINAPI LoadEasyHook();
+bool WINAPI UnloadEasyHook();
 
 // Voodoo module functions
 /*

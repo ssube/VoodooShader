@@ -18,15 +18,9 @@
     <ClInclude Include="HookMechanism.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="apihijack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HookMechanism.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="apihijack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

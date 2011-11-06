@@ -21,11 +21,30 @@
 #include "HookMechanism.hpp"
 
 #include <map>
+#include <fstream>
 
 HINSTANCE gHookLoader = nullptr;
 HHOOK gGlobalHook = nullptr;
 
 std::map<FARPROC, TRACED_HOOK_HANDLE> gHooks;
+
+HMODULE gEH_Module;
+func_EH_Install gEH_Install;
+func_EH_Uninstall gEH_Uninstall;
+func_EH_UninstallAll gEH_UninstallAll;
+func_EH_SetACL gEH_SetACL;
+func_EH_SetGlobalACL gEH_SetGlobalACL;
+
+ULONG threadList[] = {0};
+
+ModuleHooks hookList[] =
+{
+    { L"d3d8.dll", "Direct3DCreate8", nullptr },
+    { L"d3d9.dll", "Direct3DCreate9", nullptr },
+};
+
+std::wfstream fout;
+TCHAR moduleName[MAX_PATH];
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
 {
@@ -47,6 +66,14 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
     {
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     } else {
+        if (!fout.is_open())
+        {
+            fout.open("D:\\Hook.log");
+            GetModuleFileName(GetModuleHandle(NULL), moduleName, MAX_PATH);
+        } else {
+            fout << moduleName << L": GlobalHookCb(" << nCode << "," << wParam << ", " << lParam << ");";
+        }
+
         if (nCode == HCBT_CREATEWND)
         {
             MessageBox(NULL, L"Voodoo Hook triggered: HCBT_CREATEWND", L"Voodoo Hook", MB_OK);
@@ -88,7 +115,7 @@ bool WINAPI RemoveGlobalHook()
 bool WINAPI IsDllLoaded(_In_z_ LPTSTR name)
 {
     HMODULE module = GetModuleHandle(name);
-    return (module);
+    return (module != NULL);
 }
 
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc)
@@ -101,12 +128,14 @@ bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFun
 
     if (gHooks.find(offset) != gHooks.end()) return false;
 
+    if (!gEH_Install && LoadEasyHook()) return false;
+
     TRACED_HOOK_HANDLE tracer = new HOOK_TRACE_INFO();
     DWORD result = gEH_Install(offset, pFunc, nullptr, tracer);
 
     if (result)
     {
-        LhSetInclusiveACL(m_ThreadIDs, m_ThreadCount, tracer);
+        gEH_SetACL(threadList, 1, tracer);
         gHooks[offset] = tracer;
         return true;
     } else {
@@ -122,7 +151,7 @@ bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol)
     FARPROC offset = GetProcAddress(module, symbol);
     if (!offset) return false;
 
-    std::map<FARPROC, std::unique_ptr<TRACED_HOOK_HANDLE>>::iterator hook = gHooks.find(offset);
+    std::map<FARPROC, TRACED_HOOK_HANDLE>::iterator hook = gHooks.find(offset);
     if (hook == gHooks.end()) return false;
 
     DWORD result = gEH_Uninstall(hook->second);
@@ -137,7 +166,7 @@ bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol)
     }
 }
 
-int WINAPI HookList(_In_z_ ModuleHooks * hooks)
+int WINAPI InstallHookList(_In_z_ ModuleHooks * hooks)
 {
     if (!hooks)
     {
@@ -145,11 +174,14 @@ int WINAPI HookList(_In_z_ ModuleHooks * hooks)
     }
 
     int success = 0;
-    for (int i = 0; hooks[i].name; ++i)
+    TCHAR * module = nullptr;
+
+    for (int i = 0; hooks[i].name || hooks[i].symbol; ++i)
     {
-        for (int j = 0; hooks[i].hooks[j].symbol; ++j)
+        if (hooks[i].name) module = hooks[i].name;
+        if (module)
         {
-            if (InstallDllHook(hooks[i].name, hooks[i].hooks[j].symbol, hooks[i].hooks[j].func))
+            if (InstallDllHook(hooks[i].name, hooks[i].symbol, hooks[i].func))
             {
                 ++success;
             }
@@ -157,4 +189,36 @@ int WINAPI HookList(_In_z_ ModuleHooks * hooks)
     }
 
     return success;
+}
+
+bool WINAPI LoadEasyHook()
+{
+    gEH_Module = LoadLibrary(L"EasyHook.dll");
+
+    if (gEH_Module == NULL) return false;
+
+    gEH_Install = (func_EH_Install)GetProcAddress(gEH_Module, "_LhInstallHook@16");
+    gEH_Uninstall = (func_EH_Uninstall)GetProcAddress(gEH_Module, "_LhUninstallHook@4");
+    gEH_UninstallAll = (func_EH_UninstallAll)GetProcAddress(gEH_Module, "_LhUninstallAllHooks@0");
+    gEH_SetACL = (func_EH_SetACL)GetProcAddress(gEH_Module, "_LhSetInclusiveACL@12");
+    gEH_SetGlobalACL = (func_EH_SetGlobalACL)GetProcAddress(gEH_Module, "_LhSetGlobalInclusiveACL@8");
+
+    if (!gEH_SetACL || !gEH_SetGlobalACL || !gEH_Install || !gEH_Uninstall)
+    {
+        FreeLibrary(gEH_Module);
+        return false;
+    }
+
+    gEH_SetGlobalACL(threadList, 1);
+
+    return true;
+}
+
+bool WINAPI UnloadEasyHook()
+{
+    gEH_UninstallAll();
+
+    FreeLibrary(gEH_Module);
+
+    return true;
 }
