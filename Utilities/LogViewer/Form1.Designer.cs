@@ -40,12 +40,12 @@
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // toolStripContainer1
-            // 
-            // 
+            //
+            //
             // toolStripContainer1.ContentPanel
-            // 
+            //
             this.toolStripContainer1.ContentPanel.Controls.Add(this.mainBrowser);
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(792, 548);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -54,13 +54,13 @@
             this.toolStripContainer1.Size = new System.Drawing.Size(792, 573);
             this.toolStripContainer1.TabIndex = 0;
             this.toolStripContainer1.Text = "toolStripContainer1";
-            // 
+            //
             // toolStripContainer1.TopToolStripPanel
-            // 
+            //
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
-            // 
+            //
             // mainBrowser
-            // 
+            //
             this.mainBrowser.AllowWebBrowserDrop = false;
             this.mainBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainBrowser.Location = new System.Drawing.Point(0, 0);
@@ -69,9 +69,9 @@
             this.mainBrowser.Size = new System.Drawing.Size(792, 548);
             this.mainBrowser.TabIndex = 0;
             this.mainBrowser.Url = new System.Uri("", System.UriKind.Relative);
-            // 
+            //
             // toolStrip1
-            // 
+            //
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
@@ -80,40 +80,40 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(188, 25);
             this.toolStrip1.TabIndex = 0;
-            // 
+            //
             // toolStripButton1
-            // 
+            //
             this.toolStripButton1.Image = global::LogViewer.Properties.Resources.OpenFile;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(84, 22);
             this.toolStripButton1.Text = "Open Log";
             this.toolStripButton1.Click += new System.EventHandler(this.openLog);
-            // 
+            //
             // openFileDialog1
-            // 
+            //
             this.openFileDialog1.DefaultExt = "xmllog";
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "XML Log File|*.xmllog|XML File|*.xml|All Files|*";
             this.openFileDialog1.Title = "Open Voodoo XML Log";
-            // 
+            //
             // toolStripButton2
-            // 
+            //
             this.toolStripButton2.Image = global::LogViewer.Properties.Resources.saveHS;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(94, 22);
             this.toolStripButton2.Text = "Save HTML";
             this.toolStripButton2.Click += new System.EventHandler(this.saveHTML);
-            // 
+            //
             // saveFileDialog1
-            // 
+            //
             this.saveFileDialog1.DefaultExt = "html";
             this.saveFileDialog1.Filter = "HTML File|*.html|All Files|*";
             this.saveFileDialog1.Title = "Save HTML Log";
-            // 
+            //
             // mainwindow
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 573);

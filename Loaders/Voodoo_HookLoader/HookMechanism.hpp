@@ -37,6 +37,10 @@ struct ModuleHooks
 extern HINSTANCE gHookLoader;
 extern HHOOK gGlobalHook;
 
+extern HMODULE gEH_Module;
+extern std::function<NTSTATUS (void*, void*, void*, TRACED_HOOK_HANDLE)> gEH_Install;
+extern std::function<NTSTATUS (TRACED_HOOK_HANDLE)> gEH_Uninstall;
+
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
 
 LRESULT CALLBACK GlobalHookCb(__in  int nCode, __in  WPARAM wParam, __in  LPARAM lParam);

@@ -27,9 +27,9 @@ namespace VoodooUuid
                 } else {
                     guid = Guid.NewGuid();
                 }
-                
+
                 Console.WriteLine("UUID {0}: {1}", i, guid);
-                
+
                 uuids += String.Format("/* {0} */\nDEFINE_UUID(uuid_{1}", guid, i);
                 byte[] bytes = guid.ToByteArray();
                 foreach (byte b in bytes)

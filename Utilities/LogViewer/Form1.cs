@@ -31,7 +31,7 @@ namespace LogViewer
                     "XSL Error"
                 );
             }
-            
+
             mTempFile = mBasePath + "temp.html";
             mDefaultPage = new Uri(mBasePath + "default.html", UriKind.Absolute);
             mTempPage = new Uri(mTempFile, UriKind.Absolute);
@@ -75,7 +75,7 @@ namespace LogViewer
                 }
                 catch (System.Exception ex)
                 {
-                 
+
                 }
             }
         }

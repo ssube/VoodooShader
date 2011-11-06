@@ -334,8 +334,8 @@ namespace VoodooShader
 
         if (flags & PF_SlashFlags)
         {
-            bool singleslash = (flags & PF_SlashSingle);
-            bool doubleslash = (flags & PF_SlashDouble);
+            bool singleslash = (flags & PF_SlashSingle) == PF_SlashSingle;
+            bool doubleslash = (flags & PF_SlashDouble) == PF_SlashDouble;
             bool prevslash = false;
             bool slashrewrite = false;
             char slashchar = L' ';

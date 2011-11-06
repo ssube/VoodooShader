@@ -87,6 +87,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_HookLoader", "Loader
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoodooUuid", "Utilities\VoodooUuid\VoodooUuid.csproj", "{42FC952B-5AF0-4E29-92E7-2E570B9C8E54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoodooGUI", "Utilities\VoodooGUI\VoodooGUI.csproj", "{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Analysis|Any CPU = Debug_Analysis|Any CPU
@@ -337,6 +339,24 @@ Global
 		{42FC952B-5AF0-4E29-92E7-2E570B9C8E54}.Release|Win32.ActiveCfg = Release|x86
 		{42FC952B-5AF0-4E29-92E7-2E570B9C8E54}.Release|x86.ActiveCfg = Release|x86
 		{42FC952B-5AF0-4E29-92E7-2E570B9C8E54}.Release|x86.Build.0 = Release|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug_Analysis|Any CPU.ActiveCfg = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug_Analysis|Mixed Platforms.ActiveCfg = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug_Analysis|Mixed Platforms.Build.0 = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug_Analysis|Win32.ActiveCfg = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug_Analysis|x86.ActiveCfg = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug_Analysis|x86.Build.0 = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug|Win32.ActiveCfg = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug|x86.ActiveCfg = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Debug|x86.Build.0 = Debug|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Release|Any CPU.ActiveCfg = Release|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Release|Mixed Platforms.Build.0 = Release|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Release|Win32.ActiveCfg = Release|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Release|x86.ActiveCfg = Release|x86
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -344,6 +364,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{82C4257D-3F4D-4F7D-A0B6-0282C044E7E7} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
 		{42FC952B-5AF0-4E29-92E7-2E570B9C8E54} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
+		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
 		{817469ED-FCBA-4C43-A6B9-EE19FB4685D1} = {6F835D16-DF88-4950-A9AA-422CBEB3F3CF}
 		{32835D9A-A1C1-48F9-8588-C10837E18EF4} = {6F835D16-DF88-4950-A9AA-422CBEB3F3CF}
 		{98903591-D205-49ED-AE60-44BDD620D16E} = {817469ED-FCBA-4C43-A6B9-EE19FB4685D1}
@@ -362,9 +383,9 @@ Global
 		{B91FB76A-9A30-4341-A843-63CD4B5325AE} = {B139D769-4776-43F5-8781-57414C65622A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

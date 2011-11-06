@@ -38,6 +38,7 @@
               <tr>
                 <th>Order</th>
                 <th>Name</th>
+                <th>Uuid</th>
                 <th>Major</th>
                 <th>Minor</th>
                 <th>Patch</th>
@@ -52,6 +53,9 @@
                 </td>
                 <td>
                   <xsl:value-of select="@name" />
+                </td>
+                <td>
+                  <xsl:value-of select="@uuid" />
                 </td>
                 <td>
                   <xsl:value-of select="@major" />

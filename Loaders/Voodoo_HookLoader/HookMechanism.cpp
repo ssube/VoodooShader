@@ -102,7 +102,7 @@ bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFun
     if (gHooks.find(offset) != gHooks.end()) return false;
 
     TRACED_HOOK_HANDLE tracer = new HOOK_TRACE_INFO();
-    DWORD result = LhInstallHook(offset, pFunc, nullptr, tracer);
+    DWORD result = gEH_Install(offset, pFunc, nullptr, tracer);
 
     if (result)
     {
@@ -122,10 +122,10 @@ bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol)
     FARPROC offset = GetProcAddress(module, symbol);
     if (!offset) return false;
 
-    std::map<FARPROC, TRACED_HOOK_HANDLE>::iterator hook = gHooks.find(offset);
+    std::map<FARPROC, std::unique_ptr<TRACED_HOOK_HANDLE>>::iterator hook = gHooks.find(offset);
     if (hook == gHooks.end()) return false;
 
-    DWORD result = LhUninstallHook(hook->second);
+    DWORD result = gEH_Uninstall(hook->second);
 
     if (result)
     {
@@ -149,7 +149,7 @@ int WINAPI HookList(_In_z_ ModuleHooks * hooks)
     {
         for (int j = 0; hooks[i].hooks[j].symbol; ++j)
         {
-            if (HookDllFunction(hooks[i].name, hooks[i].hooks[j].symbol, hooks[i].hooks[j].func))
+            if (InstallDllHook(hooks[i].name, hooks[i].hooks[j].symbol, hooks[i].hooks[j].func))
             {
                 ++success;
             }
