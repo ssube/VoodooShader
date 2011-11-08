@@ -16,6 +16,7 @@ namespace VoodooGUI
         List<String> errors;
         List<KeyValuePair<String, String>> results;
         Dictionary<String, String> search;
+        int currentDirs;
 
         public ScanForm()
         {
@@ -30,6 +31,9 @@ namespace VoodooGUI
             errors = new List<String>();
             results = new List<KeyValuePair<String, String>>();
 
+            // Estimate scan size
+            progressBar1.Maximum = EstimateScan();
+
             // Basic counter
             worker = new BackgroundWorker();
             worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
@@ -37,6 +41,31 @@ namespace VoodooGUI
             worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
             worker.WorkerReportsProgress = true;
             worker.RunWorkerAsync(search);
+        }
+
+        int EstimateScan()
+        {
+            int count = 0;
+            foreach (DriveInfo drive in DriveInfo.GetDrives())
+            {
+                try
+                {
+                    foreach (DirectoryInfo innerdir in drive.RootDirectory.GetDirectories())
+                    {
+                        try
+                        {
+                            count += innerdir.GetDirectories().Length;
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return count;
         }
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -49,7 +78,7 @@ namespace VoodooGUI
             }
             textBox2.Lines = errors.ToArray();
 
-            MessageBox.Show(String.Format("Scanned {0} files found in {1} seconds, found {2} results.", info.Key, info.Value.TotalSeconds, results.Count));
+            MessageBox.Show(String.Format("Scanned {0} files in {1} seconds, found {2} results.", info.Key, info.Value.TotalSeconds, results.Count));
         }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
@@ -60,7 +89,7 @@ namespace VoodooGUI
             {
                 try
                 {
-                    CountDir(ref count, drive.RootDirectory, e);
+                    CountDir(ref count, drive.RootDirectory, 0, e);
                 }
                 catch (Exception exc)
                 {
@@ -74,20 +103,25 @@ namespace VoodooGUI
         {
             if (e.ProgressPercentage == 0)
             {
-                textBox1.Text = String.Format("Scanned {0} files, found {1} results.", (Int64)e.UserState, results.Count);
+                progressBar1.Value = ++currentDirs;
             }
             else if (e.ProgressPercentage == 1)
             {
+                textBox1.Text = String.Format("Scanned {0} files, found {1} results.", e.UserState, results.Count);
+            } 
+            else if (e.ProgressPercentage == 2)
+            {
                 errors.Add((String)e.UserState);
             }
-            else if (e.ProgressPercentage == 2)
+            else if (e.ProgressPercentage == 3)
             {
                 results.Add((KeyValuePair<String, String>)e.UserState);
             }
         }
 
-        private Int64 CountDir(ref Int64 count, DirectoryInfo dir, DoWorkEventArgs e)
+        private Int64 CountDir(ref Int64 count, DirectoryInfo dir, int level, DoWorkEventArgs e)
         {
+            ++level;
             FileInfo[] files = dir.GetFiles();
 
             foreach (FileInfo file in files)
@@ -95,23 +129,25 @@ namespace VoodooGUI
                 String name;
                 if (((Dictionary<String, String>)e.Argument).TryGetValue(file.Name.ToLower(), out name))
                 {
-                    worker.ReportProgress(2, new KeyValuePair<String,String>(name, file.FullName));
+                    worker.ReportProgress(3, new KeyValuePair<String,String>(name, file.FullName));
                 }
             }
 
             count += files.LongLength;
-            worker.ReportProgress(0, count);
+            if (level < 6) { worker.ReportProgress(1, count); }
 
             foreach (DirectoryInfo innerdir in dir.GetDirectories())
             {
                 try
                 {
-                    CountDir(ref count, innerdir, e);
+                    CountDir(ref count, innerdir, level, e);
                 }
                 catch (Exception exc)
                 {
-                    worker.ReportProgress(1, exc.Message);
+                    worker.ReportProgress(2, exc.Message);
                 }
+
+                if (level == 2) { worker.ReportProgress(0); }
             }
 
             return count;
