@@ -25,6 +25,7 @@ namespace VoodooRegedit
 
     public partial class VSRegEdit : Form
     {
+        VoodooRegistry m_Registry;
         public TreeNode RootNode;
 
         public VSRegEdit()
@@ -83,25 +84,9 @@ namespace VoodooRegedit
             }
             else
             {
-                LoadRegistryKey(ref voodooRoot, ref RootNode);
+                m_Registry = VoodooRegistry.FromRegistryKey(voodooRoot);
+                m_RegistryTree.Nodes.Add(m_Registry.ToTreeNode());
             }
-
-            // Do basic key checks
-            TreeNode[] checkResults;
-            if ((checkResults = RootNode.Nodes.Find("Modules", false)) == null || checkResults.Length == 0)
-            {
-                AddNodeTo(RootNode, "Modules");
-            }
-            if ((checkResults = RootNode.Nodes.Find("Classes", false)) == null || checkResults.Length == 0)
-            {
-                AddNodeTo(RootNode, "Classes");
-            }
-            if ((checkResults = RootNode.Nodes.Find("Hooks", false)) == null || checkResults.Length == 0)
-            {
-                AddNodeTo(RootNode, "Hooks");
-            }
-
-            m_RegistryTree.Nodes.Add(RootNode);
         }
 
         public void ExportRegistry(object sender, EventArgs e)
@@ -138,30 +123,6 @@ namespace VoodooRegedit
             SaveRegistryKey(voodooRoot, treeRoot);
 
             ImportRegistry(null, null);
-        }
-
-        public void LoadRegistryKey(ref RegistryKey key, ref TreeNode node)
-        {
-            String[] valnames = key.GetValueNames();
-            List<KeyRow> rows = new List<KeyRow>(key.ValueCount);
-
-            for (int i = 0; i < key.ValueCount; ++i)
-            {
-                String valvalue = Convert.ToString(key.GetValue(valnames[i]));
-                String valtype = Convert.ToString(key.GetValueKind(valnames[i]));
-                KeyRow row = new KeyRow(valnames[i], valtype, valvalue);
-                rows.Add(row);
-            }
-
-            node.Tag = rows;
-
-            foreach (String subkeyname in key.GetSubKeyNames())
-            {
-                TreeNode subnode = AddNodeTo(node, subkeyname);
-                RegistryKey subkey = key.OpenSubKey(subkeyname);
-
-                LoadRegistryKey(ref subkey, ref subnode);
-            }
         }
 
         public void SaveRegistryKey(RegistryKey key, TreeNode node)
@@ -204,24 +165,25 @@ namespace VoodooRegedit
         private void SelectNode(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode node = m_RegistryTree.SelectedNode;
+
             if (node != null && m_KeyGrid.Rows.Count > 0)
             {
-                List<KeyRow> rows = new List<KeyRow>(m_KeyGrid.Rows.Count);
+                Dictionary<String, String> props = new Dictionary<String, String>(m_KeyGrid.Rows.Count);
                 foreach (DataGridViewRow row in m_KeyGrid.Rows)
                 {
-                    rows.Add(new KeyRow(row.Cells[0].Value as String, row.Cells[1].Value as String, row.Cells[2].Value as String));
+                    props.Add(row.Cells[0].Value as String, row.Cells[1].Value as String);
                 }
 
-                node.Tag = rows;
+                (node.Tag as VoodooElement).Properties = props;
             }
 
             m_KeyGrid.Rows.Clear();
 
             if (e.Node.Tag != null)
             {
-                foreach (KeyRow row in e.Node.Tag as List<KeyRow>)
+                foreach (KeyValuePair<String, String> prop in (e.Node.Tag as VoodooElement).Properties)
                 {
-                    m_KeyGrid.Rows.Add(row.Name, row.Type, row.Value);
+                    m_KeyGrid.Rows.Add(prop.Key, prop.Value);
                 }
             }
         }
