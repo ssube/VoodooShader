@@ -18,13 +18,8 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "HookMechanism.hpp"
-
 #include <map>
 #include <fstream>
-
-HINSTANCE gHookLoader = nullptr;
-HHOOK gGlobalHook = nullptr;
 
 std::map<FARPROC, TRACED_HOOK_HANDLE> gHooks;
 
@@ -45,78 +40,6 @@ ModuleHooks hookList[] =
 
 std::wfstream fout;
 TCHAR moduleName[MAX_PATH];
-
-BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
-{
-    UNREFERENCED_PARAMETER(lpvReserved);
-
-    DisableThreadLibraryCalls(hinstDLL);
-
-    if (fdwReason == DLL_PROCESS_ATTACH)
-    {
-        gHookLoader = hinstDLL;
-    }
-
-    return TRUE;
-}
-
-LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lParam)
-{
-    if (nCode < 0)
-    {
-        return CallNextHookEx(NULL, nCode, wParam, lParam);
-    } else {
-        if (!fout.is_open())
-        {
-            fout.open("D:\\Hook.log");
-            GetModuleFileName(GetModuleHandle(NULL), moduleName, MAX_PATH);
-        } else {
-            fout << moduleName << L": GlobalHookCb(" << nCode << "," << wParam << ", " << lParam << ");";
-        }
-
-        if (nCode == HCBT_CREATEWND)
-        {
-            MessageBox(NULL, L"Voodoo Hook triggered: HCBT_CREATEWND", L"Voodoo Hook", MB_OK);
-        } else if (nCode == HCBT_DESTROYWND) {
-            MessageBox(NULL, L"Voodoo Hook triggered: HCBT_DESTROYWND", L"Voodoo Hook", MB_OK);
-        }
-
-        return CallNextHookEx(NULL, nCode, wParam, lParam);
-    }
-}
-
-bool WINAPI InstallGlobalHook()
-{
-    gGlobalHook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
-    if (!gGlobalHook)
-    {
-        DWORD error = GetLastError();
-        return false;
-    }
-
-    return true;
-}
-
-bool WINAPI RemoveGlobalHook()
-{
-    if (gGlobalHook)
-    {
-        BOOL success = UnhookWindowsHookEx(gGlobalHook);
-        if (success == 0)
-        {
-            DWORD error = GetLastError();
-            return false;
-        }
-    }
-
-    return true;
-}
-
-bool WINAPI IsDllLoaded(_In_z_ LPTSTR name)
-{
-    HMODULE module = GetModuleHandle(name);
-    return (module != NULL);
-}
 
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc)
 {

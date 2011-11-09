@@ -13,6 +13,9 @@
     <ClInclude Include="Loader_Common.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="FunctionIntercept.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -30,6 +33,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Common.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionIntercept.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

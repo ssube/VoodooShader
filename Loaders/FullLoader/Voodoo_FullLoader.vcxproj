@@ -18,7 +18,7 @@
     <ProjectGuid>{6234D300-FD30-4A04-A3A2-4739C5D9B95F}</ProjectGuid>
     <RootNamespace>Gem_Redirect</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>Voodoo_Loader</ProjectName>
+    <ProjectName>Voodoo_FullLoader</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -85,9 +85,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Common.cpp" />
+    <ClCompile Include="FunctionIntercept.cpp" />
     <ClCompile Include="Loader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FunctionIntercept.hpp" />
     <ClInclude Include="Loader_Common.hpp" />
     <ClInclude Include="Loader.hpp" />
     <ClInclude Include="Loader_Version.hpp" />

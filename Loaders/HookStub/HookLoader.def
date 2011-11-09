@@ -3,3 +3,7 @@ LIBRARY
 EXPORTS
 InstallGlobalHook = InstallGlobalHook
 RemoveGlobalHook = RemoveGlobalHook
+
+AddModule = AddModule
+RemoveModule = RemoveModule
+RemoveAllModules = RemoveAllModules

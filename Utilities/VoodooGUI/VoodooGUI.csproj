@@ -47,6 +47,12 @@
     <Compile Include="ConfigEdit.Designer.cs">
       <DependentUpon>ConfigEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="HookWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HookWizard.Designer.cs">
+      <DependentUpon>HookWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,9 @@
     </Compile>
     <EmbeddedResource Include="ConfigEdit.resx">
       <DependentUpon>ConfigEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HookWizard.resx">
+      <DependentUpon>HookWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
