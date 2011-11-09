@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Security.Principal;
+using VoodooNetClasses;
 
 namespace VoodooRegedit
 {
@@ -313,15 +314,15 @@ namespace VoodooRegedit
 
                         for (UInt32 i = 0; i < module.Count; ++i)
                         {
-                            Pair<Guid, String> classinfo = module[i];
+                            ClassInfo classinfo = module[i];
 
                             List<KeyRow> classdata = new List<KeyRow>();
 
                             classdata.Add(new KeyRow("Module", "String", Convert.ToString(version.LibID)));
-                            classdata.Add(new KeyRow("Name", "String", classinfo.Second));
+                            classdata.Add(new KeyRow("Name", "String", classinfo.Name));
                             classesNode.Tag = classdata;
 
-                            AddNodeTo(classesNode, Convert.ToString(classinfo.First)).Tag = classdata;
+                            AddNodeTo(classesNode, Convert.ToString(classinfo.ClsID)).Tag = classdata;
                         }
 
                         // Add module to the list

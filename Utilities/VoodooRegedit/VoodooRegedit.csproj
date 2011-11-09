@@ -35,10 +35,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KeyEdit.cs">
@@ -47,7 +45,6 @@
     <Compile Include="KeyEdit.Designer.cs">
       <DependentUpon>KeyEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="NativeModule.cs" />
     <Compile Include="VSRegEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +117,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\computer-network.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VoodooNetClasses\VoodooNetClasses.csproj">
+      <Project>{455FAD6F-58B6-41FF-AA04-6DB9168A234C}</Project>
+      <Name>VoodooNetClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
