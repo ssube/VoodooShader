@@ -150,5 +150,19 @@ namespace VoodooRegedit.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap table_delete_row {
+            get {
+                object obj = ResourceManager.GetObject("table-delete-row", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap table_insert_row {
+            get {
+                object obj = ResourceManager.GetObject("table-insert-row", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -121,32 +121,26 @@
   <data name="key--plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\key--plus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="node-delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\node-delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="key--pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\key--pencil.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="application-import" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\application-import.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="node-design" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\node-design.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="key--minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\key--minus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="computer-network" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\computer-network.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="node-insert-child" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\node-insert-child.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="application-import" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application-import.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="key--pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\key--pencil.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="node-insert-next" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\node-insert-next.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="key--minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\key--minus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="database-import" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\database-import.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="node-insert" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\node-insert.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="node-insert-previous" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\node-insert-previous.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,8 +148,20 @@
   <data name="database-export" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\database-export.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="node-delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\node-delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="node-insert-next" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\node-insert-next.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="node-insert" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\node-insert.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="computer-network" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\computer-network.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="table-insert-row" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\table-insert-row.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="table-delete-row" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\table-delete-row.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

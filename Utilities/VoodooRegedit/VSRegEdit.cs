@@ -85,106 +85,65 @@ namespace VoodooRegedit
             else
             {
                 m_Registry = VoodooRegistry.FromRegistryKey(voodooRoot);
-                m_RegistryTree.Nodes.Add(m_Registry.ToTreeNode());
+                RootNode = m_Registry.ToTreeNode();
+                m_RegistryTree.Nodes.Add(RootNode);
             }
         }
 
         public void ExportRegistry(object sender, EventArgs e)
         {
-            // Make sure any table changes get committed
-            TreeNode node = m_RegistryTree.SelectedNode;
-            if (node != null && m_KeyGrid.Rows.Count > 0)
-            {
-                List<KeyRow> rows = new List<KeyRow>(m_KeyGrid.Rows.Count);
-                foreach (DataGridViewRow row in m_KeyGrid.Rows)
-                {
-                    rows.Add(new KeyRow(row.Cells[0].Value as String, row.Cells[1].Value as String, row.Cells[2].Value as String));
-                }
-
-                node.Tag = rows;
-            }
+            SyncRows();
 
             // Actually export to the registry
-            TreeNode treeRoot = m_RegistryTree.Nodes[0];
+            m_Registry = VoodooRegistry.FromTreeNode(RootNode);
 
-            RegistryKey hive = Registry.CurrentUser;
+            RegistryKey voodooRoot;
             if (menu_Button_Hive.Checked)
             {
-                hive = Registry.LocalMachine;
+                voodooRoot = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\VoodooShader", true);
+            } else {
+                voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader", true);
             }
 
-            RegistryKey voodooRoot = hive.OpenSubKey(@"SOFTWARE\VoodooShader");
-            if (voodooRoot != null)
-            {
-                hive.DeleteSubKeyTree(@"SOFTWARE\VoodooShader");
-            }
-            voodooRoot = hive.CreateSubKey(@"SOFTWARE\VoodooShader");
-
-            SaveRegistryKey(voodooRoot, treeRoot);
+            m_Registry.ToRegistryKey(voodooRoot);
 
             ImportRegistry(null, null);
         }
 
-        public void SaveRegistryKey(RegistryKey key, TreeNode node)
+        private void SelectNode(object sender, TreeViewCancelEventArgs e)
         {
-            if (node.Tag != null)
-            {
-                foreach (KeyRow row in node.Tag as List<KeyRow>)
-                {
-                    RegistryValueKind type = RegistryValueKind.String;
-                    try { type = (RegistryValueKind)Enum.Parse(typeof(RegistryValueKind), row.Type as String, true); }
-                    catch (Exception) {  }
-
-                    try
-                    {
-                        key.SetValue(row.Name, row.Value, type);
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageBox.Show(String.Format("Error setting value {0} in {1}:\n {2}", row.Name, key.Name, exc.Message));
-                    }
-                }
-            }
-
-            foreach (TreeNode subnode in node.Nodes)
-            {
-                RegistryKey subkey = key.CreateSubKey(subnode.Text);
-                if (subkey != null)
-                {
-                    subkey = key.CreateSubKey(subnode.Text);
-                    if (subkey == null)
-                    {
-                        MessageBox.Show(String.Format("Unable to create key \"{0}\".", subnode.FullPath), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    SaveRegistryKey(subkey, subnode);
-                }
-            }
-        }
-
-        private void SelectNode(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeNode node = m_RegistryTree.SelectedNode;
-
-            if (node != null && m_KeyGrid.Rows.Count > 0)
-            {
-                Dictionary<String, String> props = new Dictionary<String, String>(m_KeyGrid.Rows.Count);
-                foreach (DataGridViewRow row in m_KeyGrid.Rows)
-                {
-                    props.Add(row.Cells[0].Value as String, row.Cells[1].Value as String);
-                }
-
-                (node.Tag as VoodooElement).Properties = props;
-            }
+            SyncRows();
 
             m_KeyGrid.Rows.Clear();
 
             if (e.Node.Tag != null)
             {
-                foreach (KeyValuePair<String, String> prop in (e.Node.Tag as VoodooElement).Properties)
+                foreach (KeyValuePair<String, String> prop in e.Node.Tag as Dictionary<String, String>)
                 {
                     m_KeyGrid.Rows.Add(prop.Key, prop.Value);
                 }
+            }
+        }
+
+        private void SyncRows()
+        {
+            if (m_KeyGrid.IsCurrentCellDirty)
+            {
+                m_KeyGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+
+            TreeNode node = m_RegistryTree.SelectedNode;
+
+            if (node != null)
+            {
+                Dictionary<String, String> props = new Dictionary<String, String>(m_KeyGrid.Rows.Count);
+
+                foreach (DataGridViewRow row in m_KeyGrid.Rows)
+                {
+                    props.Add(row.Cells[0].Value as String, row.Cells[1].Value as String);
+                }
+
+                node.Tag = props;
             }
         }
 
@@ -271,39 +230,42 @@ namespace VoodooRegedit
                     {
                         NativeModule module = new NativeModule(moduleFile);
                         ModuleVersion version = module.Version;
+                        String libid = Convert.ToString(version.LibID);
 
-                        TreeNode classesNode = m_RegistryTree.Nodes[0].Nodes.Find("Classes", false)[0];
+                        // Add module
+                        TreeNode modulesNode = m_RegistryTree.Nodes[0].Nodes["modules"];
+
+                        Dictionary<String, String> moduledata = new Dictionary<String, String>();
+
+                        moduledata.Add("modulePath", moduleFile);
+                        moduledata.Add("configPath", String.Empty);
+                        moduledata.Add("remotePath", String.Empty);
+                        moduledata.Add("name", version.Name);
+
+                        AddNodeTo(modulesNode, libid).Tag = moduledata;
+
+                        // Add classes
+                        TreeNode classesNode = m_RegistryTree.Nodes[0].Nodes["classes"];
 
                         for (UInt32 i = 0; i < module.Count; ++i)
                         {
                             ClassInfo classinfo = module[i];
 
-                            List<KeyRow> classdata = new List<KeyRow>();
+                            Dictionary<String, String> classdata = new Dictionary<String, String>();
 
-                            classdata.Add(new KeyRow("Module", "String", Convert.ToString(version.LibID)));
-                            classdata.Add(new KeyRow("Name", "String", classinfo.Name));
-                            classesNode.Tag = classdata;
+                            classdata.Add("module", libid);
+                            classdata.Add("name", classinfo.Name);
 
                             AddNodeTo(classesNode, Convert.ToString(classinfo.ClsID)).Tag = classdata;
                         }
-
-                        // Add module to the list
-                        TreeNode modulesNode = m_RegistryTree.Nodes[0].Nodes.Find("Modules", false)[0];
-
-                        List<KeyRow> moduledata = new List<KeyRow>();
-
-                        moduledata.Add(new KeyRow("ModulePath", "String", moduleFile));
-                        moduledata.Add(new KeyRow("ConfigPath", "String", String.Empty));
-                        moduledata.Add(new KeyRow("RemotePath", "String", String.Empty));
-                        moduledata.Add(new KeyRow("Name", "String", version.Name));
-
-                        AddNodeTo(modulesNode, Convert.ToString(version.LibID)).Tag = moduledata;
                     }
                     catch (System.Exception ex)
                     {
                         MessageBox.Show("Unable to load module:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+
+                m_Registry = VoodooRegistry.FromTreeNode(RootNode);
             }
         }
     }
