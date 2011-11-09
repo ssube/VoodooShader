@@ -60,6 +60,13 @@ namespace VoodooRegedit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap application_import {
+            get {
+                object obj = ResourceManager.GetObject("application-import", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap database_export {
             get {
                 object obj = ResourceManager.GetObject("database-export", resourceCulture);

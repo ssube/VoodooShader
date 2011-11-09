@@ -51,6 +51,21 @@ namespace VoodooRegedit
                 LoadRegistryKey(ref voodooRoot, ref RootNode);
             }
 
+            // Do basic key checks
+            TreeNode[] checkResults;
+            if ((checkResults = RootNode.Nodes.Find("Modules", false)) == null || checkResults.Length == 0)
+            {
+                AddNodeTo(RootNode, "Modules");
+            }
+            if ((checkResults = RootNode.Nodes.Find("Classes", false)) == null || checkResults.Length == 0)
+            {
+                AddNodeTo(RootNode, "Classes");
+            }
+            if ((checkResults = RootNode.Nodes.Find("Hooks", false)) == null || checkResults.Length == 0)
+            {
+                AddNodeTo(RootNode, "Hooks");
+            }
+
             m_RegistryTree.Nodes.Add(RootNode);
         }
 
@@ -101,12 +116,10 @@ namespace VoodooRegedit
 
             foreach (String subkeyname in key.GetSubKeyNames())
             {
-                TreeNode subnode = new TreeNode(subkeyname);
+                TreeNode subnode = AddNodeTo(node, subkeyname);
                 RegistryKey subkey = key.OpenSubKey(subkeyname);
 
                 LoadRegistryKey(ref subkey, ref subnode);
-
-                node.Nodes.Add(subnode);
             }
         }
 
@@ -205,14 +218,19 @@ namespace VoodooRegedit
             }
         }
 
-        private void AddNodeTo(TreeNode parent)
+        private TreeNode AddNodeTo(TreeNode parent, String text = null)
         {
-            KeyEdit dialog = new KeyEdit();
-
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (text == null)
             {
-                parent.Nodes.Add(dialog.Value);
+                KeyEdit dialog = new KeyEdit();
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    text = dialog.Value;
+                }
             }
+
+            return parent.Nodes.Add(text, text);
         }
 
         private void Menu_Node_Remove(object sender, EventArgs e)
@@ -234,6 +252,51 @@ namespace VoodooRegedit
             if (m_KeyGrid.SelectedRows != null && m_KeyGrid.SelectedRows.Count > 0)
             {
                 m_KeyGrid.Rows.Remove(m_KeyGrid.SelectedRows[0]);
+            }
+        }
+
+        private void Menu_Module_Import(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                String moduleFile = openFileDialog1.FileName;
+
+                try
+                {
+                    NativeModule module = new NativeModule(moduleFile);
+                    ModuleVersion version = module.Version;
+
+                    TreeNode classesNode = m_RegistryTree.Nodes[0].Nodes.Find("Classes", false)[0];
+
+                    for (UInt32 i = 0; i < module.Count; ++i)
+                    {
+                        Pair<Guid, String> classinfo = module[i];
+
+                        List<KeyRow> classdata = new List<KeyRow>();
+
+                        classdata.Add(new KeyRow("Module", "String", Convert.ToString(version.LibID)));
+                        classdata.Add(new KeyRow("Name", "String", classinfo.Second));
+                        classesNode.Tag = classdata;
+
+                        AddNodeTo(classesNode, Convert.ToString(classinfo.First)).Tag = classdata;
+                    }
+
+                    // Add module to the list
+                    TreeNode modulesNode = m_RegistryTree.Nodes[0].Nodes.Find("Modules", false)[0];
+
+                    List<KeyRow> moduledata = new List<KeyRow>();
+
+                    moduledata.Add(new KeyRow("ModulePath", "String", moduleFile));
+                    moduledata.Add(new KeyRow("ConfigPath", "String", String.Empty));
+                    moduledata.Add(new KeyRow("RemotePath", "String", String.Empty));
+                    moduledata.Add(new KeyRow("Name", "String", version.Name));
+
+                    AddNodeTo(modulesNode, Convert.ToString(version.LibID)).Tag = moduledata;
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("Unable to load module:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
