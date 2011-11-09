@@ -67,6 +67,13 @@ namespace VoodooRegedit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap computer_network {
+            get {
+                object obj = ResourceManager.GetObject("computer-network", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap database_export {
             get {
                 object obj = ResourceManager.GetObject("database-export", resourceCulture);

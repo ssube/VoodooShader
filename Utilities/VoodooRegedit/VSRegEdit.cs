@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using System.Security.Principal;
 
 namespace VoodooRegedit
 {
@@ -28,6 +29,33 @@ namespace VoodooRegedit
         public VSRegEdit()
         {
             InitializeComponent();
+
+            if (!IsUserAdministrator())
+            {
+                menu_Button_Hive.Enabled = false;
+            }
+        }
+
+        public bool IsUserAdministrator()
+        {
+            //bool value to hold our return value
+            bool isAdmin;
+            try
+            {
+                //get the currently logged in user
+                WindowsIdentity user = WindowsIdentity.GetCurrent();
+                WindowsPrincipal principal = new WindowsPrincipal(user);
+                isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                isAdmin = false;
+            }
+            catch (Exception)
+            {
+                isAdmin = false;
+            }
+            return isAdmin;
         }
 
         public void ImportRegistry(object sender, EventArgs e)
@@ -36,10 +64,16 @@ namespace VoodooRegedit
 
             RootNode = new TreeNode("Voodoo Registry Root");
 
-            RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader");
+            RegistryKey hive = Registry.CurrentUser;
+            if (menu_Button_Hive.Checked)
+            {
+                hive = Registry.LocalMachine;
+            }
+
+            RegistryKey voodooRoot = hive.OpenSubKey(@"SOFTWARE\VoodooShader");
             if (voodooRoot == null)
             {
-                voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
+                voodooRoot = hive.CreateSubKey(@"SOFTWARE\VoodooShader");
                 if (voodooRoot == null)
                 {
                     MessageBox.Show("Unable to open or create Voodoo root key.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -87,12 +121,18 @@ namespace VoodooRegedit
             // Actually export to the registry
             TreeNode treeRoot = m_RegistryTree.Nodes[0];
 
-            RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader");
+            RegistryKey hive = Registry.CurrentUser;
+            if (menu_Button_Hive.Checked)
+            {
+                hive = Registry.LocalMachine;
+            }
+
+            RegistryKey voodooRoot = hive.OpenSubKey(@"SOFTWARE\VoodooShader");
             if (voodooRoot != null)
             {
-                Registry.CurrentUser.DeleteSubKeyTree(@"SOFTWARE\VoodooShader");
+                hive.DeleteSubKeyTree(@"SOFTWARE\VoodooShader");
             }
-            voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
+            voodooRoot = hive.CreateSubKey(@"SOFTWARE\VoodooShader");
 
             SaveRegistryKey(voodooRoot, treeRoot);
 
@@ -259,43 +299,47 @@ namespace VoodooRegedit
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                String moduleFile = openFileDialog1.FileName;
 
-                try
+                String[] files = openFileDialog1.FileNames;
+
+                foreach (String moduleFile in files)
                 {
-                    NativeModule module = new NativeModule(moduleFile);
-                    ModuleVersion version = module.Version;
-
-                    TreeNode classesNode = m_RegistryTree.Nodes[0].Nodes.Find("Classes", false)[0];
-
-                    for (UInt32 i = 0; i < module.Count; ++i)
+                    try
                     {
-                        Pair<Guid, String> classinfo = module[i];
+                        NativeModule module = new NativeModule(moduleFile);
+                        ModuleVersion version = module.Version;
 
-                        List<KeyRow> classdata = new List<KeyRow>();
+                        TreeNode classesNode = m_RegistryTree.Nodes[0].Nodes.Find("Classes", false)[0];
 
-                        classdata.Add(new KeyRow("Module", "String", Convert.ToString(version.LibID)));
-                        classdata.Add(new KeyRow("Name", "String", classinfo.Second));
-                        classesNode.Tag = classdata;
+                        for (UInt32 i = 0; i < module.Count; ++i)
+                        {
+                            Pair<Guid, String> classinfo = module[i];
 
-                        AddNodeTo(classesNode, Convert.ToString(classinfo.First)).Tag = classdata;
+                            List<KeyRow> classdata = new List<KeyRow>();
+
+                            classdata.Add(new KeyRow("Module", "String", Convert.ToString(version.LibID)));
+                            classdata.Add(new KeyRow("Name", "String", classinfo.Second));
+                            classesNode.Tag = classdata;
+
+                            AddNodeTo(classesNode, Convert.ToString(classinfo.First)).Tag = classdata;
+                        }
+
+                        // Add module to the list
+                        TreeNode modulesNode = m_RegistryTree.Nodes[0].Nodes.Find("Modules", false)[0];
+
+                        List<KeyRow> moduledata = new List<KeyRow>();
+
+                        moduledata.Add(new KeyRow("ModulePath", "String", moduleFile));
+                        moduledata.Add(new KeyRow("ConfigPath", "String", String.Empty));
+                        moduledata.Add(new KeyRow("RemotePath", "String", String.Empty));
+                        moduledata.Add(new KeyRow("Name", "String", version.Name));
+
+                        AddNodeTo(modulesNode, Convert.ToString(version.LibID)).Tag = moduledata;
                     }
-
-                    // Add module to the list
-                    TreeNode modulesNode = m_RegistryTree.Nodes[0].Nodes.Find("Modules", false)[0];
-
-                    List<KeyRow> moduledata = new List<KeyRow>();
-
-                    moduledata.Add(new KeyRow("ModulePath", "String", moduleFile));
-                    moduledata.Add(new KeyRow("ConfigPath", "String", String.Empty));
-                    moduledata.Add(new KeyRow("RemotePath", "String", String.Empty));
-                    moduledata.Add(new KeyRow("Name", "String", version.Name));
-
-                    AddNodeTo(modulesNode, Convert.ToString(version.LibID)).Tag = moduledata;
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show("Unable to load module:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    catch (System.Exception ex)
+                    {
+                        MessageBox.Show("Unable to load module:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

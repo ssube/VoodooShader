@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.m_RegistryTree = new System.Windows.Forms.TreeView();
@@ -40,6 +40,8 @@
             this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.menu_Button_Hive = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
@@ -49,7 +51,6 @@
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -108,8 +109,8 @@
             // 
             this.m_KeyGrid.AllowUserToAddRows = false;
             this.m_KeyGrid.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.m_KeyGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.m_KeyGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.m_KeyGrid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.m_KeyGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.m_KeyGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -129,6 +130,7 @@
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menu_Button_Hive,
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripSeparator1,
@@ -143,7 +145,7 @@
             this.toolStripButton8});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(237, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(291, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // toolStripSeparator1
@@ -177,6 +179,23 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "DLL Plugins (*.dll)|*.dll|Code Modules|*.dll,*.exe|All Files|*";
+            this.openFileDialog1.Multiselect = true;
+            this.openFileDialog1.RestoreDirectory = true;
+            this.openFileDialog1.SupportMultiDottedExtensions = true;
+            // 
+            // menu_Button_Hive
+            // 
+            this.menu_Button_Hive.CheckOnClick = true;
+            this.menu_Button_Hive.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.menu_Button_Hive.Image = global::VoodooRegedit.Properties.Resources.computer_network;
+            this.menu_Button_Hive.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.menu_Button_Hive.Name = "menu_Button_Hive";
+            this.menu_Button_Hive.Size = new System.Drawing.Size(23, 22);
+            this.menu_Button_Hive.Text = "Use Machine Hive";
             // 
             // toolStripButton1
             // 
@@ -245,7 +264,7 @@
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton7.Text = "Add Key";
+            this.toolStripButton7.Text = "Add Value";
             this.toolStripButton7.Click += new System.EventHandler(this.Menu_Key_Add);
             // 
             // toolStripButton3
@@ -255,7 +274,7 @@
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "Remove Key";
+            this.toolStripButton3.Text = "Remove Value";
             // 
             // toolStripButton8
             // 
@@ -266,10 +285,6 @@
             this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton8.Text = "Import Module";
             this.toolStripButton8.Click += new System.EventHandler(this.Menu_Module_Import);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // VSRegEdit
             // 
@@ -317,6 +332,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripButton menu_Button_Hive;
     }
 }
 
