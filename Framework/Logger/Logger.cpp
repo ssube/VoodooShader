@@ -236,12 +236,13 @@ namespace VoodooShader
 
             logMsg <<
                 "    <Module uuid=\"" << pVersion->LibID << "\" " <<
-                " name=\"" << pVersion->Name << "\" " <<
                 " major=\"" << pVersion->Major << "\" " <<
                 " minor=\"" << pVersion->Minor << "\" " <<
                 " patch=\"" << pVersion->Patch << "\" " <<
-                " rev=\""   << pVersion->Rev << "\" " <<
-                " debug=\"" << pVersion->Debug << "\" />\n";
+                " build=\""   << pVersion->Build << "\" " <<
+                " debug=\"" << pVersion->Debug << "\" " <<
+                " name=\"" << pVersion->Name << "\" " <<
+                " name=\"" << pVersion->RevID << "\" />\n";
 
 #ifdef VSF_DEBUG_CONSOLE
             cout << logMsg.str();
