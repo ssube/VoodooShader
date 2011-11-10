@@ -40,14 +40,16 @@ namespace VoodooNetClasses
     [StructLayout(LayoutKind.Sequential)]
     public struct ModuleVersion
     {
-        [MarshalAs(UnmanagedType.LPWStr)]
-        public string Name;
         public Guid LibID;
         public Int32 Major;
         public Int32 Minor;
         public Int32 Patch;
-        public Int32 Rev;
+        public Int32 Build;
         public bool Debug;
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string Name;
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string GitID;
     };
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]

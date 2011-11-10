@@ -486,13 +486,14 @@ namespace VoodooShader
      */
     struct Version
     {
-        const wchar_t * Name;
         Uuid            LibID;
         int32_t         Major;
         int32_t         Minor;
         int32_t         Patch;
-        int32_t         Rev;
+        int32_t         Build;
         bool            Debug;
+        const wchar_t * Name;
+        const wchar_t * RevID;
     };
 
     struct float2

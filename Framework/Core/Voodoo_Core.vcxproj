@@ -79,6 +79,9 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(SolutionDir)\ "</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">
     <CustomBuildStep>
@@ -100,6 +103,9 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(SolutionDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
@@ -121,6 +127,9 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(SolutionDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Converter.cpp" />
@@ -143,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Converter.hpp" />
+    <ClInclude Include="Version_Build.hpp" />
     <ClInclude Include="VSAdapter.hpp" />
     <ClInclude Include="VSCore.hpp" />
     <ClInclude Include="VSFilesystem.hpp" />
@@ -191,7 +201,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.Increment.TimeStamp" />
+      <UserProperties BuildVersion_BuildVersioningStyle="" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

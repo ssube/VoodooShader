@@ -165,6 +165,9 @@
     <ClInclude Include="Version.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Version_Build.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">

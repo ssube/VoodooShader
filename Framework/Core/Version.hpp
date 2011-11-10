@@ -44,7 +44,7 @@
  */
 #define VOODOO_META_VERSION_CHAIN(token) \
     VOODOO_##token##_VERSION_MAJOR, VOODOO_##token##_VERSION_MINOR, VOODOO_##token##_VERSION_PATCH, \
-    VOODOO_##token##_VERSION_REV
+    VOODOO_##token##_VERSION_BUILD
 
 /**
  * Creates a basic version string separated with periods.
@@ -53,7 +53,7 @@
     VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_MAJOR) L"."\
     VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_MINOR) L"."\
     VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_PATCH) L"."\
-    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_REV) VOODOO_META_DEBUG_STRING
+    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_BUILD) VOODOO_META_DEBUG_STRING
 
 /**
  * Creates an extended version string with the module's full name and version.
@@ -67,7 +67,10 @@
 /**
  * Creates a Version structure with data for the given module.
  */
-#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_NAME, VOODOO_##token##_LIBID, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL }
+#define VOODOO_META_VERSION_STRUCT(token) { VOODOO_##token##_LIBID, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL, VOODOO_##token##_NAME, VOODOO_##token##_GITID }
+
+// Include build info
+#include "Version_Build.hpp"
 
 // Global defs
 #define VOODOO_GLOBAL_LIBID             {0xCA, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
@@ -76,7 +79,6 @@
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     4
 #define VOODOO_GLOBAL_VERSION_PATCH     2
-#define VOODOO_GLOBAL_VERSION_REV       318
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   L"Copyright (c) 2010-2011 by Sean Sube"
 #define VOODOO_GLOBAL_COPYRIGHT_FULL    L"Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&lt;br /&gt;\n" \
     L"The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\n" \
@@ -90,7 +92,8 @@
 #define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR
 #define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR
 #define VOODOO_CORE_VERSION_PATCH       VOODOO_GLOBAL_VERSION_PATCH
-#define VOODOO_CORE_VERSION_REV         VOODOO_GLOBAL_VERSION_REV
+#define VOODOO_CORE_VERSION_BUILD       VOODOO_GLOBAL_VERSION_BUILD
+#define VOODOO_CORE_GITID               VOODOO_GLOBAL_GITID
 
 // External defs Cg
 #define VOODOO_CG_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
@@ -99,7 +102,8 @@
 #define VOODOO_CG_VERSION_MAJOR         3
 #define VOODOO_CG_VERSION_MINOR         0
 #define VOODOO_CG_VERSION_PATCH         0
-#define VOODOO_CG_VERSION_REV           7
+#define VOODOO_CG_VERSION_BUILD         7
+#define VOODOO_CG_GITID                 L""
 
 // VC
 #define VOODOO_VC_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
@@ -108,4 +112,5 @@
 #define VOODOO_VC_VERSION_MAJOR         _MSC_VER
 #define VOODOO_VC_VERSION_MINOR         0
 #define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER
-#define VOODOO_VC_VERSION_REV           _MSC_BUILD
+#define VOODOO_VC_VERSION_BUILD         _MSC_BUILD
+#define VOODOO_VC_GITID                 L""
