@@ -86,7 +86,7 @@ namespace VoodooGUI
         {
             m_RemoveAllHooks();
 
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in cHook_Table.Rows)
             {
                 bool active = (bool)row.Cells[0].Value;
                 if (active)
@@ -95,6 +95,30 @@ namespace VoodooGUI
                     m_AddHook(target);
                 }
             }
+        }
+
+        private void Form_OnResize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Hide(); 
+                
+                cTrayIcon.BalloonTipTitle = "Voodoo UI Hidden";
+                cTrayIcon.BalloonTipText = "Voodoo will remain active and hooks will be loaded while the UI is hidden.";
+                cTrayIcon.ShowBalloonTip(5000);
+            }
+        }
+
+        private void Notify_OnDblClick(object sender, EventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void Notify_OnClick(object sender, EventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
         }
     }
 }

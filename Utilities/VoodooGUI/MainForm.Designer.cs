@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cHook_Table = new System.Windows.Forms.DataGridView();
             this.col_Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_Icon = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,26 +51,27 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.cMenu = new System.Windows.Forms.ToolStrip();
+            this.cMenu_Hook_Add = new System.Windows.Forms.ToolStripButton();
+            this.cMenu_Hook_Remove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.menu_FindGames = new System.Windows.Forms.ToolStripButton();
+            this.cMenu_Hook_Wizard = new System.Windows.Forms.ToolStripButton();
+            this.cMenu_FindGames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.cMenu_Downloads = new System.Windows.Forms.ToolStripButton();
+            this.cTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cHook_Table)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.cMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -78,93 +80,76 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 537);
-            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
+            resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(784, 562);
-            this.toolStripContainer1.TabIndex = 0;
-            this.toolStripContainer1.Text = "toolStripContainer1";
             // 
             // toolStripContainer1.TopToolStripPanel
             // 
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.cMenu);
             // 
             // splitContainer1
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
+            this.splitContainer1.Panel1.Controls.Add(this.cHook_Table);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.splitContainer1.Size = new System.Drawing.Size(784, 537);
-            this.splitContainer1.SplitterDistance = 476;
-            this.splitContainer1.TabIndex = 0;
+            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             // 
-            // dataGridView1
+            // cHook_Table
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cHook_Table.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.cHook_Table.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cHook_Table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.cHook_Table.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Active,
             this.col_Icon,
             this.col_Name,
             this.col_Target});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(474, 535);
-            this.dataGridView1.TabIndex = 0;
+            resources.ApplyResources(this.cHook_Table, "cHook_Table");
+            this.cHook_Table.Name = "cHook_Table";
+            this.cHook_Table.ReadOnly = true;
+            this.cHook_Table.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.cHook_Table.RowHeadersVisible = false;
             // 
             // col_Active
             // 
             this.col_Active.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.col_Active.HeaderText = "Active";
+            resources.ApplyResources(this.col_Active, "col_Active");
             this.col_Active.Name = "col_Active";
             this.col_Active.ReadOnly = true;
-            this.col_Active.Width = 43;
             // 
             // col_Icon
             // 
             this.col_Icon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.col_Icon.HeaderText = "";
+            resources.ApplyResources(this.col_Icon, "col_Icon");
             this.col_Icon.Name = "col_Icon";
             this.col_Icon.ReadOnly = true;
-            this.col_Icon.ToolTipText = "Target Icon";
-            this.col_Icon.Width = 21;
             // 
             // col_Name
             // 
             this.col_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Name.HeaderText = "Name";
+            resources.ApplyResources(this.col_Name, "col_Name");
             this.col_Name.Name = "col_Name";
             this.col_Name.ReadOnly = true;
             // 
             // col_Target
             // 
             this.col_Target.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Target.HeaderText = "Target";
+            resources.ApplyResources(this.col_Target, "col_Target");
             this.col_Target.Name = "col_Target";
             this.col_Target.ReadOnly = true;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.button2, 2, 2);
@@ -176,269 +161,171 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(294, 527);
-            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 64);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 32);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Config:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 32);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 32);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Target:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button2
             // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(257, 67);
+            resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(34, 26);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "...";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(53, 70);
+            resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(198, 20);
-            this.textBox2.TabIndex = 2;
             // 
             // button1
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(257, 35);
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(34, 26);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // listBox1
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.listBox1, 3);
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.listBox1, "listBox1");
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Items.AddRange(new object[] {
-            "* Core",
-            "* Filesystem",
-            "* HookManager",
-            "* Adapter_Gem",
-            "* Adapter_Frost"});
-            this.listBox1.Location = new System.Drawing.Point(3, 123);
+            resources.GetString("listBox1.Items"),
+            resources.GetString("listBox1.Items1"),
+            resources.GetString("listBox1.Items2"),
+            resources.GetString("listBox1.Items3"),
+            resources.GetString("listBox1.Items4")});
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(288, 361);
-            this.listBox1.TabIndex = 4;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 3);
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.button3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.button4, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 487);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(294, 40);
-            this.tableLayoutPanel2.TabIndex = 5;
             // 
             // button3
             // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(3, 3);
+            resources.ApplyResources(this.button3, "button3");
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(141, 34);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Save Hook";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Location = new System.Drawing.Point(150, 3);
+            resources.ApplyResources(this.button4, "button4");
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(141, 34);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "Edit Config";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // textBox3
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.textBox3, "textBox3");
             this.tableLayoutPanel1.SetColumnSpan(this.textBox3, 2);
-            this.textBox3.Location = new System.Drawing.Point(53, 6);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(238, 20);
-            this.textBox3.TabIndex = 6;
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(53, 38);
+            resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(198, 20);
-            this.textBox1.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
+            resources.ApplyResources(this.label1, "label1");
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 96);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(288, 24);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Plugins in this config:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 0);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 32);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Name:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // toolStrip1
+            // cMenu
             // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
+            resources.ApplyResources(this.cMenu, "cMenu");
+            this.cMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMenu_Hook_Add,
+            this.cMenu_Hook_Remove,
             this.toolStripSeparator1,
-            this.toolStripButton3,
-            this.menu_FindGames,
+            this.cMenu_Hook_Wizard,
+            this.cMenu_FindGames,
             this.toolStripSeparator2,
             this.toolStripButton6,
             this.toolStripButton5,
-            this.toolStripButton4});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(784, 25);
-            this.toolStrip1.Stretch = true;
-            this.toolStrip1.TabIndex = 0;
+            this.cMenu_Downloads});
+            this.cMenu.Name = "cMenu";
+            this.cMenu.Stretch = true;
             // 
-            // toolStripButton1
+            // cMenu_Hook_Add
             // 
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(81, 22);
-            this.toolStripButton1.Text = "Add Hook";
-            this.toolStripButton1.Click += new System.EventHandler(this.Menu_Hook_Add);
+            resources.ApplyResources(this.cMenu_Hook_Add, "cMenu_Hook_Add");
+            this.cMenu_Hook_Add.Name = "cMenu_Hook_Add";
+            this.cMenu_Hook_Add.Click += new System.EventHandler(this.Menu_Hook_Add);
             // 
-            // toolStripButton2
+            // cMenu_Hook_Remove
             // 
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(102, 22);
-            this.toolStripButton2.Text = "Remove Hook";
-            this.toolStripButton2.Click += new System.EventHandler(this.Menu_Hook_Remove);
+            resources.ApplyResources(this.cMenu_Hook_Remove, "cMenu_Hook_Remove");
+            this.cMenu_Hook_Remove.Name = "cMenu_Hook_Remove";
+            this.cMenu_Hook_Remove.Click += new System.EventHandler(this.Menu_Hook_Remove);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
-            // toolStripButton3
+            // cMenu_Hook_Wizard
             // 
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(95, 22);
-            this.toolStripButton3.Text = "Hook Wizard";
-            this.toolStripButton3.ToolTipText = "Automatically set up a hook";
+            resources.ApplyResources(this.cMenu_Hook_Wizard, "cMenu_Hook_Wizard");
+            this.cMenu_Hook_Wizard.Name = "cMenu_Hook_Wizard";
             // 
-            // menu_FindGames
+            // cMenu_FindGames
             // 
-            this.menu_FindGames.Image = ((System.Drawing.Image)(resources.GetObject("menu_FindGames.Image")));
-            this.menu_FindGames.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.menu_FindGames.Name = "menu_FindGames";
-            this.menu_FindGames.Size = new System.Drawing.Size(89, 22);
-            this.menu_FindGames.Text = "Find Games";
-            this.menu_FindGames.ToolTipText = "Scan for supported games";
-            this.menu_FindGames.Click += new System.EventHandler(this.SearchSupported);
+            resources.ApplyResources(this.cMenu_FindGames, "cMenu_FindGames");
+            this.cMenu_FindGames.Name = "cMenu_FindGames";
+            this.cMenu_FindGames.Click += new System.EventHandler(this.SearchSupported);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // toolStripButton6
             // 
             this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.toolStripButton6, "toolStripButton6");
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton6.Text = "About";
             // 
             // toolStripButton5
             // 
             this.toolStripButton5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.toolStripButton5, "toolStripButton5");
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "Options";
             // 
-            // toolStripButton4
+            // cMenu_Downloads
             // 
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(86, 22);
-            this.toolStripButton4.Text = "Downloads";
-            this.toolStripButton4.ToolTipText = "Voodoo Downloads and Updates";
+            resources.ApplyResources(this.cMenu_Downloads, "cMenu_Downloads");
+            this.cMenu_Downloads.Name = "cMenu_Downloads";
+            // 
+            // cTrayIcon
+            // 
+            this.cTrayIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            resources.ApplyResources(this.cTrayIcon, "cTrayIcon");
+            this.cTrayIcon.Click += new System.EventHandler(this.Notify_OnClick);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.toolStripContainer1);
-            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "MainForm";
-            this.Text = "Voodoo UI";
+            this.Resize += new System.EventHandler(this.Form_OnResize);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
@@ -447,12 +334,12 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cHook_Table)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.cMenu.ResumeLayout(false);
+            this.cMenu.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -460,9 +347,9 @@
         #endregion
 
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStrip cMenu;
+        private System.Windows.Forms.ToolStripButton cMenu_Hook_Add;
+        private System.Windows.Forms.ToolStripButton cMenu_Hook_Remove;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button button1;
@@ -478,18 +365,19 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton menu_FindGames;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripButton cMenu_Hook_Wizard;
+        private System.Windows.Forms.ToolStripButton cMenu_FindGames;
+        private System.Windows.Forms.DataGridView cHook_Table;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_Active;
         private System.Windows.Forms.DataGridViewImageColumn col_Icon;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Target;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton cMenu_Downloads;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.NotifyIcon cTrayIcon;
 
     }
 }

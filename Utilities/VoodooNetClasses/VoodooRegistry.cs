@@ -276,7 +276,10 @@ namespace VoodooNetClasses
                 foreach (TreeNode moduleNode in modulesNode.Nodes)
                 {
                     Guid libid = new Guid(moduleNode.Name);
-                    vreg.m_Modules.Add(libid, new VoodooModule(libid, moduleNode.Tag as Dictionary<String, String>));
+                    if (!vreg.m_Modules.ContainsKey(libid))
+                    {
+                        vreg.m_Modules.Add(libid, new VoodooModule(libid, moduleNode.Tag as Dictionary<String, String>));
+                    }
                 }
             }
 
@@ -286,7 +289,10 @@ namespace VoodooNetClasses
                 foreach (TreeNode classNode in classesNode.Nodes)
                 {
                     Guid clsid = new Guid(classNode.Name);
-                    vreg.m_Classes.Add(clsid, new VoodooClass(clsid, classNode.Tag as Dictionary<String, String>));
+                    if (!vreg.m_Classes.ContainsKey(clsid))
+                    {
+                        vreg.m_Classes.Add(clsid, new VoodooClass(clsid, classNode.Tag as Dictionary<String, String>));
+                    }
                 }
             }
 
@@ -295,7 +301,10 @@ namespace VoodooNetClasses
             {
                 foreach (TreeNode hookNode in hooksNode.Nodes)
                 {
-                    vreg.m_Hooks.Add(hookNode.Name, new VoodooHook(hookNode.Name, hookNode.Tag as Dictionary<String, String>));
+                    if (!vreg.m_Hooks.ContainsKey(hookNode.Name))
+                    {
+                        vreg.m_Hooks.Add(hookNode.Name, new VoodooHook(hookNode.Name, hookNode.Tag as Dictionary<String, String>));
+                    }
                 }
             }
 
@@ -331,7 +340,7 @@ namespace VoodooNetClasses
 
                 foreach (KeyValuePair<String, String> prop in modulePair.Value.Properties)
                 {
-                    moduleKey.SetValue(prop.Key, prop.Value);
+                    moduleKey.SetValue(prop.Key, prop.Value, RegistryValueKind.String);
                 }
             }
 
@@ -342,7 +351,7 @@ namespace VoodooNetClasses
 
                 foreach (KeyValuePair<String, String> prop in classPair.Value.Properties)
                 {
-                    classKey.SetValue(prop.Key, prop.Value);
+                    classKey.SetValue(prop.Key, prop.Value, RegistryValueKind.String);
                 }
             }
 
@@ -353,7 +362,7 @@ namespace VoodooNetClasses
 
                 foreach (KeyValuePair<String, String> prop in hookPair.Value.Properties)
                 {
-                    hookKey.SetValue(prop.Key, prop.Value);
+                    hookKey.SetValue(prop.Key, prop.Value, RegistryValueKind.String);
                 }
             }
         }

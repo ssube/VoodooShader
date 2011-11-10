@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VoodooGUI")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Voodoo UI")]
+[assembly: AssemblyDescription("Voodoo Shader Framework GUI")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VoodooGUI")]
+[assembly: AssemblyProduct("Voodoo UI")]
 [assembly: AssemblyCopyright("Copyright ©  2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

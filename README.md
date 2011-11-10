@@ -1,6 +1,6 @@
 
 ## Voodoo Shader Framework
-### version 0.4.2.305 - alpha
+### version 0.4.2.317 - alpha
 -----
 
 #### Contents:

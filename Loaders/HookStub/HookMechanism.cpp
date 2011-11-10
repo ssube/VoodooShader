@@ -62,10 +62,10 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
             TCHAR filePath[MAX_PATH];
             ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\processes.log"), filePath, MAX_PATH);
 
-            FILE * pf = _tfopen(filePath, TEXT("a"));
-            if (pf)
+            FILE * pf =nullptr;
+            if (_tfopen_s(&pf, filePath, TEXT("a")) == 0)
             {
-                _ftprintf(pf, TEXT("%s\n"), moduleName);
+                _ftprintf_s(pf, TEXT("%s\n"), moduleName);
                 fclose(pf);
             }
 
@@ -78,11 +78,14 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
 
 bool WINAPI InstallGlobalHook()
 {
-    gGlobalHook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
     if (!gGlobalHook)
     {
-        DWORD error = GetLastError();
-        return false;
+        gGlobalHook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
+        if (!gGlobalHook)
+        {
+            DWORD error = GetLastError();
+            return false;
+        }
     }
 
     /*

@@ -140,7 +140,9 @@ namespace VoodooRegedit
 
                 foreach (DataGridViewRow row in m_KeyGrid.Rows)
                 {
-                    props.Add(row.Cells[0].Value as String, row.Cells[1].Value as String);
+                    String name = row.Cells[0].Value as String; if (name == null) { name = String.Empty; }
+                    String value = row.Cells[1].Value as String; if (value == null) { value = String.Empty; }
+                    props.Add(name, value);
                 }
 
                 node.Tag = props;
