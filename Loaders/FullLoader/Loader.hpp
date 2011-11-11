@@ -19,12 +19,29 @@
  */
 #pragma once
 
-#include "Loader_Common.hpp"
+#include <stdio.h>
+#include <stdlib.h>
+
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+#define VOODOO_NO_BOOST
+#define VOODOO_NO_CG
+#define VOODOO_NO_PUGIXML
+#include "VoodooFramework.hpp"
 
 /**
  * @addtogroup voodoo_module_loader Voodoo/Loader
  * @{
  */
+void WINAPI ErrorMessage(const wchar_t * msg, ...);
+
+HMODULE WINAPI LoadSystemLibrary(const wchar_t * libname);
+
+extern VoodooShader::ICore * gVoodooCore;
+extern VoodooShader::IAdapter * gVoodooAdapter;
+extern VoodooShader::InitParams gInitParams;
+
 HINSTANCE gLoaderHandle;
 
 typedef VoodooShader::ICore * (VOODOO_CALL * VoodooCreateFunc)(const VoodooShader::InitParams * const pInitParams, _In_ bool catchErrors);
@@ -40,21 +57,6 @@ bool WINAPI LoadVoodoo();
 bool WINAPI UnloadVoodoo(void);
 
 HMODULE WINAPI LoadSystemLibrary(const wchar_t * libname);
-
-// Direct3D create functions
-void * WINAPI VoodooD3DCreateGeneric(UINT sdkVersion, const wchar_t * lib, const char * func);
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion);
-void * WINAPI Voodoo3DCreate9(UINT sdkVersion);
-
-// DirectInput create functions
-HRESULT WINAPI VoodooInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID * ppvOut, LPVOID punkOuter);
-HRESULT WINAPI VoodooInputCreateGeneric(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter, const char * func);
-HRESULT WINAPI VoodooInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
-HRESULT WINAPI VoodooInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
-
-// DirectSound create functions
-HRESULT WINAPI VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter);
-
 /**
  * @}
  */

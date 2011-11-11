@@ -17,23 +17,30 @@ namespace VoodooBuild
             Int32 buildCount = 0;
 
             String[] lines = null;
+            DateTime lastRun = new DateTime(0);
 
             try
             {
                 if (File.Exists(buildFile))
                 {
                     lines = File.ReadAllLines(buildFile);
-                    if (lines.Length > 0)
+                    if (lines.Length == 3)
                     {
+                        String lastTime = lines[0].Substring(3);
+                        lastRun = Convert.ToDateTime(lastTime);
+
                         Regex buildCountExpr = new Regex(@"\#define VOODOO_GLOBAL_VERSION_BUILD (?<count>[0-9]+)");
-                        String buildLine = buildCountExpr.Match(lines[0]).Groups["count"].Value;
+                        String buildLine = buildCountExpr.Match(lines[1]).Groups["count"].Value;
                         buildCount = Convert.ToInt32(buildLine);
                     }
                 }
             }
             catch (Exception) {  }
 
-            ++buildCount;
+            if ((DateTime.Now - lastRun).TotalHours > 1)
+            {
+                ++buildCount;
+            }
 
             Process p = new Process();
             p.StartInfo.UseShellExecute = false;
@@ -44,11 +51,12 @@ namespace VoodooBuild
             String gitDesc = p.StandardOutput.ReadToEnd();
             p.WaitForExit();
 
-            Console.Write("Build number: "+buildCount+"\nGit ID: "+gitDesc);
+            Console.Write("Time since last counted build: {0}\nBuild number: {1}\nGit ID: {2}", DateTime.Now - lastRun, buildCount, gitDesc);
 
-            lines = new String[2];
-            lines[0] = String.Format("#define VOODOO_GLOBAL_VERSION_BUILD {0}", buildCount);
-            lines[1] = String.Format("#define VOODOO_GLOBAL_GITID VOODOO_META_STRING(\"{0}\")", gitDesc.TrimEnd('\n'));
+            lines = new String[3];
+            lines[0] = String.Format("// {0}", DateTime.Now);
+            lines[1] = String.Format("#define VOODOO_GLOBAL_VERSION_BUILD {0}", buildCount);
+            lines[2] = String.Format("#define VOODOO_GLOBAL_GITID VOODOO_META_STRING(\"{0}\")", gitDesc.TrimEnd('\n'));
             File.WriteAllLines(buildFile, lines);
         }
     }

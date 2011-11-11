@@ -10,10 +10,10 @@
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Loader_Common.hpp">
+    <ClInclude Include="FunctionIntercept.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="FunctionIntercept.hpp">
+    <ClInclude Include="ExportLoadpoints.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

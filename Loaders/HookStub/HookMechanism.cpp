@@ -83,7 +83,7 @@ bool WINAPI InstallGlobalHook()
         gGlobalHook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
         if (!gGlobalHook)
         {
-            DWORD error = GetLastError();
+            //DWORD error = GetLastError();
             return false;
         }
     }
@@ -108,7 +108,7 @@ bool WINAPI RemoveGlobalHook()
         BOOL success = UnhookWindowsHookEx(gGlobalHook);
         if (success == 0)
         {
-            DWORD error = GetLastError();
+            //DWORD error = GetLastError();
             return false;
         }
     }
