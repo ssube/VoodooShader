@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="Uuid">
+        <xs:restriction base="xs:string">
+            <xs:pattern
+                value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}">
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="VoodooManifest">
+        <xs:complexType>
+            <xs:all>
+                <xs:element maxOccurs="1" name="Package">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element name="Name" type="xs:string" />
+                            <xs:element name="PackID" type="Uuid" />
+                            <xs:element name="Version" type="xs:string" />
+                            <xs:element name="Date" type="xs:date" />
+                            <xs:element name="Manifest" type="xs:string" />
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Modules">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="Module">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="Name" type="xs:string" />
+                                        <xs:element name="LibID" type="Uuid" />
+                                        <xs:element name="PackID" type="Uuid" />
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Classes">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="Class">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="Name" type="xs:string" />
+                                        <xs:element name="ClsID" type="Uuid" />
+                                        <xs:element name="LibID" type="Uuid" />
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Defaults">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="Default">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="Name" type="xs:string" />
+                                        <xs:element name="Filter" type="xs:string" />
+                                        <xs:element name="Config" type="xs:string" />
+                                        <xs:element name="Packages">
+                                            <xs:complexType>
+                                                <xs:all>
+                                                    <xs:element name="Package" type="Uuid" />
+                                                </xs:all>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Files">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="Version">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="Delete" />
+                                        <xs:element maxOccurs="unbounded" name="Replace" />
+                                        <xs:element maxOccurs="unbounded" name="Create" />                                   
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:string" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Messages">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="Language">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="Pre" type="xs:string" />
+                                        <xs:element name="Post" type="xs:string" />
+                                    </xs:all>
+                                    <xs:attribute name="id" type="xs:language" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+            <xs:attribute name="type" type="xs:string" use="required" />
+            <xs:attribute name="name" type="xs:string" use="required" />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

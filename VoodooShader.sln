@@ -102,7 +102,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{6570AF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XML", "XML", "{487C384B-0E7D-4E24-A99F-8E3C8E3EDA4A}"
 	ProjectSection(SolutionItems) = preProject
-		applicationList.xml = applicationList.xml
+		Server\Xml\applicationList.xml = Server\Xml\applicationList.xml
+		Server\Xml\ExampleRemoteManifest.xml = Server\Xml\ExampleRemoteManifest.xml
+		Server\Xml\PackageManifest.xsd = Server\Xml\PackageManifest.xsd
+		Server\Xml\RemoteManifest.xsd = Server\Xml\RemoteManifest.xsd
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoodooRegedit", "Utilities\VoodooRegedit\VoodooRegedit.csproj", "{017F6E17-511C-4E6C-9083-E76DA6F19006}"
