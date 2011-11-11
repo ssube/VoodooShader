@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug_Analysis|Win32">
-      <Configuration>Debug_Analysis</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -24,10 +20,6 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
@@ -40,10 +32,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\VoodooProperties.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\VoodooProperties.props" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\VoodooProperties.props" />
@@ -53,25 +41,11 @@
     <IncludePath>$(IncludePath);D:\Code\boost;$(SolutionDir)\dependencies\pugixml_1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
     <LibraryPath>$(LibraryPath);$(SolutionDir)\dependencies\pugixml_1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib\unicode;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">
-    <IncludePath>$(IncludePath);D:\Code\boost;$(SolutionDir)\dependencies\pugixml_1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)\dependencies\pugixml_1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib\unicode;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(IncludePath);D:\Code\boost;$(SolutionDir)\dependencies\pugixml_1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
     <LibraryPath>$(LibraryPath);$(SolutionDir)\dependencies\pugixml_1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib\unicode;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Link>
-      <ModuleDefinitionFile>Voodoo_Filesystem.def</ModuleDefinitionFile>
-      <AdditionalDependencies>Voodoo_Core.lib;DevIL.lib;pugixml_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <ResourceCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
-    </ResourceCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Analysis|Win32'">
     <Link>
       <ModuleDefinitionFile>Voodoo_Filesystem.def</ModuleDefinitionFile>
       <AdditionalDependencies>Voodoo_Core.lib;DevIL.lib;pugixml_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>

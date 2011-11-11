@@ -176,11 +176,18 @@ namespace VoodooShader
          *
          * @param name The property name to set.
          * @param value The value to set the property to.
+         * @return True if any value was changed.
          *
          * @note Adapters may define the meaning of any properties not given in the core adapter specification. Adapters may
          *     require a specific format or form for properties.
+         *     
+         * @note To allow for significant variations in property setups and allow for use outside of the framework
+         *      (particularly from the loader), this function takes the name as a basic string and a variant for the value.
+         *     
+         * @warning Adapters <b>may</b> change values stored in the variant given. However, they must return true if so, and
+         *      must verify the type is correct.
          */
-        virtual void SetProperty(_In_ const String & name, _In_ const String & value) throw() = 0;
+        virtual bool SetProperty(_In_ const wchar_t * name, _In_ Variant & value) throw() = 0;
 
         /**
          * Get a property from the adapter.
@@ -189,7 +196,7 @@ namespace VoodooShader
          *
          * @return The value of the property (lexically cast to a string if necessary).
          */
-        virtual String GetProperty(_In_ const String & name) const throw() = 0;
+        virtual Variant GetProperty(_In_ const wchar_t * name) const throw() = 0;
 
         /**
          * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses

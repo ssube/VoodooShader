@@ -155,17 +155,21 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(pParam);
     }
 
-    void VSAdapter::SetProperty(const String & property, const String & value)
+    bool VSAdapter::SetProperty(const wchar_t * name, Variant & value)
     {
-        UNREFERENCED_PARAMETER(property);
+        UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);
+
+        return false;
     }
 
-    String VSAdapter::GetProperty(const String & property) const
+    Variant VSAdapter::GetProperty(const wchar_t * name) const
     {
-        UNREFERENCED_PARAMETER(property);
+        UNREFERENCED_PARAMETER(name);
 
-        return String();
+        Variant ret = {UT_None, nullptr};
+
+        return ret;
     }
 
     bool VSAdapter::ConnectTexture(IParameter * const pParam, ITexture * const pTexture)

@@ -438,6 +438,25 @@ namespace VoodooShader
         VT_State        = 0x01,
         VT_System       = 0x10
     };
+
+    enum UnionType : int32_t
+    {
+        UT_Unknown      = 0x00,
+        UT_None         = 0x01,
+        UT_Bool         = 0x02,
+        UT_Int8         = 0x03,
+        UT_UInt8        = 0x04,
+        UT_Int16        = 0x05,
+        UT_UInt16       = 0x06,
+        UT_Int32        = 0x07,
+        UT_UInt32       = 0x08,
+        UT_Float        = 0x09,
+        UT_Double       = 0x0A,
+        UT_Uuid         = 0x0B,
+        UT_String       = 0x0C,
+        UT_IObject      = 0x0D,
+        UT_PVoid        = 0x0E,
+    };
 #pragma warning(pop)
     /**
      * @}
@@ -494,6 +513,30 @@ namespace VoodooShader
         bool            Debug;
         const wchar_t * Name;
         const wchar_t * RevID;
+    };
+
+    /**
+     * Property variant type.
+     */
+    struct Variant
+    {
+        UnionType Type;
+        union
+        {
+            bool        VBool;
+            int8_t      VInt8;
+            uint8_t     VUInt8;
+            int16_t     VInt16;
+            uint16_t    VUInt16;
+            int32_t     VInt32;
+            uint32_t    VUInt32;
+            float       VFloat;
+            double      VDouble;
+            Uuid *      VUuid;
+            String *    VString;
+            IObject *   VIObject;
+            void *      VPVoid;
+        };
     };
 
     struct float2

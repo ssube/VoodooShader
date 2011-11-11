@@ -240,9 +240,10 @@ namespace VoodooShader
                 " minor=\"" << pVersion->Minor << "\" " <<
                 " patch=\"" << pVersion->Patch << "\" " <<
                 " build=\""   << pVersion->Build << "\" " <<
-                " debug=\"" << pVersion->Debug << "\" " <<
-                " name=\"" << pVersion->Name << "\" " <<
-                " name=\"" << pVersion->RevID << "\" />\n";
+                " debug=\"" << pVersion->Debug << "\" ";
+            if (pVersion->Name) logMsg << " name=\"" << pVersion->Name << "\" ";
+            if (pVersion->RevID) logMsg << " name=\"" << pVersion->RevID << "\" ";
+            logMsg << " />\n";
 
 #ifdef VSF_DEBUG_CONSOLE
             cout << logMsg.str();
