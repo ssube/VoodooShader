@@ -93,6 +93,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ScanForm.resx">
       <DependentUpon>ScanForm.cs</DependentUpon>
@@ -111,6 +112,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\drive-download.png" />
+    <None Include="Resources\drive--minus.png" />
+    <None Include="Resources\application-browser.png" />
     <Content Include="voodoo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
