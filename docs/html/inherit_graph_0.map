@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$class_voodoo_shader_1_1_converter.html" title="Conversion helper class for Voodoo and Cg types." alt="" coords="6,5,175,32"/>
+<area shape="rect" id="node1" href="$class_i_module.html" title="IModule" alt="" coords="5,5,72,32"/>
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_v_s_module.html" title="VoodooShader::VSModule" alt="" coords="121,5,295,32"/>
 </map>

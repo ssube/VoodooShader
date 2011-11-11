@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.299</span>
+   &#160;<span id="projectnumber">0.4.2.317</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -68,7 +68,7 @@
 </div>
 <div class="contents">
 <a href="_v_s_core_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
 <a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
@@ -119,7 +119,7 @@
 <a name="l00061"></a>00061         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a50e5f066810233e9235ead0365ff2dae" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;
 <a name="l00062"></a>00062         <span class="keyword">virtual</span> <a class="code" href="namespace_voodoo_shader.html#ac43f3a1ca019a9434e20660e4a15a05e">XmlDocument</a> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a06d89ae1fa21d917140c223a12a74155" title="Retrieve the Xml config document for this ICore.">GetConfig</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;
 <a name="l00063"></a>00063 
-<a name="l00064"></a>00064         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a31e8a6bcc832f712b7cc72c531d3a445" title="Loads and compiles an effect from file, using the current filesystem and search paths.">CreateShader</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * <span class="keyword">const</span> pFile, _In_opt_ <span class="keyword">const</span> <span class="keywordtype">char</span> ** ppArgs);
+<a name="l00064"></a>00064         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a31e8a6bcc832f712b7cc72c531d3a445" title="Loads and compiles an effect from file, using the current file system and search paths.">CreateShader</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * <span class="keyword">const</span> pFile, _In_opt_ <span class="keyword">const</span> <span class="keywordtype">char</span> ** ppArgs);
 <a name="l00065"></a>00065         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#aaec9a7c4f81072fd1800e1418b16f3ad" title="Creates a global virtual parameter.">CreateParameter</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type);
 <a name="l00066"></a>00066         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a0869605da5147764c9a2f5b1cd49e3b4" title="Registers a texture with this ICore.">CreateTexture</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * <span class="keyword">const</span> pDesc);
 <a name="l00067"></a>00067         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a36bd8d66889dfab008ad0bf9c7bc5563" title="Retrieve a parameter by name.">GetParameter</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type) <span class="keyword">const</span>;
@@ -128,7 +128,7 @@
 <a name="l00070"></a>00070         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a8bbf8509334a957e20c49e37f0b47fca" title="Removes a texture from the ICore&#39;s texture map and unbinds it from any specialized functions it may b...">RemoveTexture</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name);
 <a name="l00071"></a>00071 
 <a name="l00072"></a>00072         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a4644581b8d0d83d9d5ef5a05ca39dafb" title="Retrieves a texture from the ICore&#39;s texture map by stage.">GetStageTexture</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55">TextureStage</a> stage) <span class="keyword">const</span>;
-<a name="l00073"></a>00073         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#ad251b0bff653ac7ed370b04d39e13e56" title="Binds a texture to a specialized stage for the shader linker.">SetStageTexture</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55">TextureStage</a> stage, _In_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture);
+<a name="l00073"></a>00073         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a8eab205ee0b0273417ad7a385766454b" title="Binds a texture to a specialized stage for the shader linker.">SetStageTexture</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55">TextureStage</a> stage, _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture);
 <a name="l00074"></a>00074 
 <a name="l00075"></a>00075         _Check_return_ <span class="keyword">virtual</span> CGcontext <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a3e55234291f6bd9e48619f48a12bf601" title="Retrieve the Cg context associated with this ICore.">GetCgContext</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;
 <a name="l00076"></a>00076         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a2130d739184455def08216021653b368" title="Sets the Cg context attached to the core.">SetCgContext</a>(_In_opt_ CGcontext <span class="keyword">const</span> pContext);
@@ -169,7 +169,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 4 2011 15:15:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 11 2011 01:26:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

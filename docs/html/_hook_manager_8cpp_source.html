@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.299</span>
+   &#160;<span id="projectnumber">0.4.2.317</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -68,7 +68,7 @@
 </div>
 <div class="contents">
 <a href="_hook_manager_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
 <a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
@@ -161,13 +161,13 @@
 <a name="l00092"></a>00092 
 <a name="l00093"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a38a99ef26213a551cec65f3df636aae2">00093</a>         uint32_t <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a38a99ef26213a551cec65f3df636aae2" title="Add a reference to this object.">VSEHHookManager::AddRef</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
 <a name="l00094"></a>00094 <span class="keyword">        </span>{
-<a name="l00095"></a>00095             <span class="keywordflow">return</span> ++<a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a832983566ed865d1eeb3e9949e29e8f7">m_Refs</a>;
+<a name="l00095"></a>00095             <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a832983566ed865d1eeb3e9949e29e8f7">m_Refs</a>);
 <a name="l00096"></a>00096         }
 <a name="l00097"></a>00097 
 <a name="l00098"></a>00098 
 <a name="l00099"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#abd7bf823dd2b92ee3eeb75e1d59ddecc">00099</a>         uint32_t <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#abd7bf823dd2b92ee3eeb75e1d59ddecc" title="Release a reference from this object.">VSEHHookManager::Release</a>()<span class="keyword"> const</span>
 <a name="l00100"></a>00100 <span class="keyword">        </span>{
-<a name="l00101"></a>00101             <span class="keywordflow">if</span> (--<a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a832983566ed865d1eeb3e9949e29e8f7">m_Refs</a> == 0)
+<a name="l00101"></a>00101             <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a832983566ed865d1eeb3e9949e29e8f7">m_Refs</a>) == 0)
 <a name="l00102"></a>00102             {
 <a name="l00103"></a>00103                 <span class="keyword">delete</span> <span class="keyword">this</span>;
 <a name="l00104"></a>00104                 <span class="keywordflow">return</span> 0;
@@ -317,7 +317,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 4 2011 15:15:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 11 2011 01:26:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

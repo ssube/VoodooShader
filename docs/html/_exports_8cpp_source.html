@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.299</span>
+   &#160;<span id="projectnumber">0.4.2.317</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -68,7 +68,7 @@
 </div>
 <div class="contents">
 <a href="_exports_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
 <a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
@@ -108,17 +108,17 @@
 <a name="l00039"></a><a class="code" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">00039</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">clsid_VSHookManager</a> = CLSID_VSHookManager;
 <a name="l00040"></a><a class="code" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">00040</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">clsid_VSLogger</a> = CLSID_VSLogger;
 <a name="l00041"></a>00041 
-<a name="l00042"></a><a class="code" href="group__voodoo__module__loader.html#ga6e91003d4538bca758f1d233fc2111d8">00042</a>     <span class="keyword">const</span> Version * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__loader.html#ga6e91003d4538bca758f1d233fc2111d8">API_ModuleVersion</a>(<span class="keywordtype">void</span>)
+<a name="l00042"></a><a class="code" href="namespace_voodoo_shader.html#a9b6d245084c35bece67dd6cb93ed474b">00042</a>     <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#a9b6d245084c35bece67dd6cb93ed474b">API_ModuleVersion</a>(<span class="keywordtype">void</span>)
 <a name="l00043"></a>00043     {
 <a name="l00044"></a>00044         <span class="keywordflow">return</span> &amp;<a class="code" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">coreVersion</a>;
 <a name="l00045"></a>00045     }
 <a name="l00046"></a>00046 
-<a name="l00047"></a><a class="code" href="group__voodoo__module__loader.html#ga1c1c7fa8e0849da76d3c77e9f37eed0d">00047</a>     <span class="keyword">const</span> uint32_t <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__loader.html#ga1c1c7fa8e0849da76d3c77e9f37eed0d">API_ClassCount</a>(<span class="keywordtype">void</span>)
+<a name="l00047"></a><a class="code" href="namespace_voodoo_shader.html#a262d76aa3e91afa876c8f64add584c6b">00047</a>     <span class="keyword">const</span> uint32_t <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#a262d76aa3e91afa876c8f64add584c6b">API_ClassCount</a>(<span class="keywordtype">void</span>)
 <a name="l00048"></a>00048     {
 <a name="l00049"></a>00049         <span class="keywordflow">return</span> 4;
 <a name="l00050"></a>00050     }
 <a name="l00051"></a>00051 
-<a name="l00052"></a><a class="code" href="group__voodoo__module__loader.html#gaaae017d08567b59bbab15a4769d6d2d2">00052</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__loader.html#gaaae017d08567b59bbab15a4769d6d2d2">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t number, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
+<a name="l00052"></a><a class="code" href="namespace_voodoo_shader.html#aa630db1259d2f43d88c8b54e40ca0da0">00052</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#aa630db1259d2f43d88c8b54e40ca0da0">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t number, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
 <a name="l00053"></a>00053     {
 <a name="l00054"></a>00054         <span class="keywordflow">if</span> (!pUuid)
 <a name="l00055"></a>00055         {
@@ -144,18 +144,18 @@
 <a name="l00075"></a>00075         }
 <a name="l00076"></a>00076     }
 <a name="l00077"></a>00077 
-<a name="l00078"></a><a class="code" href="group__voodoo__module__loader.html#ga5f2abb805f4dea50f9e14e8e2b995dae">00078</a>     IObject * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t number, _In_ ICore * core)
+<a name="l00078"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">00078</a>     <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * core)
 <a name="l00079"></a>00079     {
 <a name="l00080"></a>00080         <span class="keywordflow">switch</span> (number)
 <a name="l00081"></a>00081         {
 <a name="l00082"></a>00082         <span class="keywordflow">case</span> 0:
-<a name="l00083"></a>00083             <span class="keywordflow">return</span> <span class="keyword">new</span> VSAdapter(core);
+<a name="l00083"></a>00083             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html">VSAdapter</a>(core);
 <a name="l00084"></a>00084         <span class="keywordflow">case</span> 1:
-<a name="l00085"></a>00085             <span class="keywordflow">return</span> <span class="keyword">new</span> VSFileSystem(core);
+<a name="l00085"></a>00085             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html">VSFileSystem</a>(core);
 <a name="l00086"></a>00086         <span class="keywordflow">case</span> 2:
-<a name="l00087"></a>00087             <span class="keywordflow">return</span> <span class="keyword">new</span> VSHookManager(core);
+<a name="l00087"></a>00087             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html">VSHookManager</a>(core);
 <a name="l00088"></a>00088         <span class="keywordflow">case</span> 3:
-<a name="l00089"></a>00089             <span class="keywordflow">return</span> <span class="keyword">new</span> VSLogger(core);
+<a name="l00089"></a>00089             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_logger.html">VSLogger</a>(core);
 <a name="l00090"></a>00090         <span class="keywordflow">default</span>:
 <a name="l00091"></a>00091             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
 <a name="l00092"></a>00092         }
@@ -177,7 +177,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 4 2011 15:15:34 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 11 2011 01:26:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

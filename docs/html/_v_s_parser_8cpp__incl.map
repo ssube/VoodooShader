@@ -1,10 +1,11 @@
 <map id="G" name="G">
-<area shape="rect" id="node7" href="$_version_8hpp.html" title="Version.hpp" alt="" coords="240,80,331,107"/>
-<area shape="rect" id="node9" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="272,155,349,181"/>
-<area shape="rect" id="node38" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="374,155,463,181"/>
-<area shape="rect" id="node41" href="$_v_s_parser_8hpp.html" title="VSParser.hpp" alt="" coords="469,80,571,107"/>
-<area shape="rect" id="node11" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="375,229,463,256"/>
-<area shape="rect" id="node13" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="371,379,465,405"/>
-<area shape="rect" id="node35" href="$_string_8hpp.html" title="String.hpp" alt="" coords="418,304,499,331"/>
-<area shape="rect" id="node43" href="$_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="488,155,576,181"/>
+<area shape="rect" id="node9" href="$_version_8hpp.html" title="Version.hpp" alt="" coords="296,80,387,107"/>
+<area shape="rect" id="node13" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="371,155,448,181"/>
+<area shape="rect" id="node42" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="473,155,561,181"/>
+<area shape="rect" id="node45" href="$_v_s_parser_8hpp.html" title="VSParser.hpp" alt="" coords="567,80,669,107"/>
+<area shape="rect" id="node11" href="$_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="219,155,345,181"/>
+<area shape="rect" id="node15" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="473,229,561,256"/>
+<area shape="rect" id="node17" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="470,379,564,405"/>
+<area shape="rect" id="node39" href="$_string_8hpp.html" title="String.hpp" alt="" coords="517,304,597,331"/>
+<area shape="rect" id="node47" href="$_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="587,155,675,181"/>
 </map>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.299</span>
+   &#160;<span id="projectnumber">0.4.2.317</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -68,7 +68,7 @@
 </div>
 <div class="contents">
 <a href="_i_core_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
 <a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
@@ -120,7 +120,7 @@
 <a name="l00105"></a>00105 
 <a name="l00113"></a>00113         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html#a2ba400e458eac0c593525b7871ab4ceb" title="Sets the Cg context attached to the core.">SetCgContext</a>(_In_opt_ CGcontext const pContext) throw() = 0;
 <a name="l00114"></a>00114 
-<a name="l00122"></a>00122         virtual <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <a class="code" href="class_voodoo_shader_1_1_i_core.html#a0c407cfcaab0a837e1ae14677bd85a75" title="Loads and compiles an effect from file, using the current filesystem and search paths.">CreateShader</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * const pFile, _In_opt_ const <span class="keywordtype">char</span> ** ppArgs) throw() = 0;
+<a name="l00122"></a>00122         virtual <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <a class="code" href="class_voodoo_shader_1_1_i_core.html#a0c407cfcaab0a837e1ae14677bd85a75" title="Loads and compiles an effect from file, using the current file system and search paths.">CreateShader</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * const pFile, _In_opt_ const <span class="keywordtype">char</span> ** ppArgs) throw() = 0;
 <a name="l00123"></a>00123 
 <a name="l00139"></a>00139         virtual <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_i_core.html#a3000aab65446fa2673c2844b6bf9f827" title="Creates a global virtual parameter.">CreateParameter</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ const <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type) throw() = 0;
 <a name="l00140"></a>00140 
@@ -136,7 +136,7 @@
 <a name="l00192"></a>00192 
 <a name="l00202"></a>00202         virtual <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_i_core.html#a813df6da561f1c3a2489ca377d74a6f8" title="Retrieves a texture from the ICore&#39;s texture map by stage.">GetStageTexture</a>(_In_ const <a class="code" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55">TextureStage</a> stage) const throw() = 0;
 <a name="l00203"></a>00203 
-<a name="l00210"></a>00210         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html#a65aa3fb4c8b11981986f603a14ca42a6" title="Binds a texture to a specialized stage for the shader linker.">SetStageTexture</a>(_In_ const <a class="code" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55">TextureStage</a> stage, _In_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * const pTexture) throw() = 0;
+<a name="l00210"></a>00210         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html#a186ccad06c1333825ba6a1327022e99e" title="Binds a texture to a specialized stage for the shader linker.">SetStageTexture</a>(_In_ const <a class="code" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55">TextureStage</a> stage, _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * const pTexture) throw() = 0;
 <a name="l00211"></a>00211     };
 <a name="l00215"></a>00215 }
 </pre></div></div>
@@ -144,7 +144,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 4 2011 15:15:34 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 11 2011 01:26:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

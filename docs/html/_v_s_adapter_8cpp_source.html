@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.299</span>
+   &#160;<span id="projectnumber">0.4.2.317</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -68,7 +68,7 @@
 </div>
 <div class="contents">
 <a href="_v_s_adapter_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> * This File is part of the Voodoo Shader Framework.</span>
+<a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
 <a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
@@ -100,12 +100,12 @@
 <a name="l00031"></a>00031 
 <a name="l00032"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a49e0e0b0327b68c322d2609ee9f6942e">00032</a>     uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a49e0e0b0327b68c322d2609ee9f6942e" title="Add a reference to this object.">VSAdapter::AddRef</a>()<span class="keyword"> const</span>
 <a name="l00033"></a>00033 <span class="keyword">    </span>{
-<a name="l00034"></a>00034         <span class="keywordflow">return</span> ++<a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a5a92be04c7b7c4fdb99c1ad8886ddfc5">m_Refs</a>;
+<a name="l00034"></a>00034         <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a5a92be04c7b7c4fdb99c1ad8886ddfc5">m_Refs</a>);
 <a name="l00035"></a>00035     }
 <a name="l00036"></a>00036 
 <a name="l00037"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a08793e190605dfb9e3a39357397d5af4">00037</a>     uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a08793e190605dfb9e3a39357397d5af4" title="Release a reference from this object.">VSAdapter::Release</a>()<span class="keyword"> const</span>
 <a name="l00038"></a>00038 <span class="keyword">    </span>{
-<a name="l00039"></a>00039         <span class="keywordflow">if</span> (--<a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a5a92be04c7b7c4fdb99c1ad8886ddfc5">m_Refs</a> == 0)
+<a name="l00039"></a>00039         <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a5a92be04c7b7c4fdb99c1ad8886ddfc5">m_Refs</a>) == 0)
 <a name="l00040"></a>00040         {
 <a name="l00041"></a>00041             <span class="keyword">delete</span> <span class="keyword">this</span>;
 <a name="l00042"></a>00042             <span class="keywordflow">return</span> 0;
@@ -224,39 +224,43 @@
 <a name="l00155"></a>00155         UNREFERENCED_PARAMETER(pParam);
 <a name="l00156"></a>00156     }
 <a name="l00157"></a>00157 
-<a name="l00158"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a3371294568f1132dae4d8d0717a0f3ab">00158</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a3371294568f1132dae4d8d0717a0f3ab" title="Set a property on the adapter.">VSAdapter::SetProperty</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; property, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; value)
+<a name="l00158"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a8541a278fa8c85b0629e67ec9338f326">00158</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a8541a278fa8c85b0629e67ec9338f326" title="Set a property on the adapter.">VSAdapter::SetProperty</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name, <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> &amp; value)
 <a name="l00159"></a>00159     {
-<a name="l00160"></a>00160         UNREFERENCED_PARAMETER(property);
+<a name="l00160"></a>00160         UNREFERENCED_PARAMETER(name);
 <a name="l00161"></a>00161         UNREFERENCED_PARAMETER(value);
-<a name="l00162"></a>00162     }
-<a name="l00163"></a>00163 
-<a name="l00164"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a02678dd681e8d48271696cb52abff95a">00164</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a02678dd681e8d48271696cb52abff95a" title="Get a property from the adapter.">VSAdapter::GetProperty</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; property)<span class="keyword"> const</span>
-<a name="l00165"></a>00165 <span class="keyword">    </span>{
-<a name="l00166"></a>00166         UNREFERENCED_PARAMETER(property);
-<a name="l00167"></a>00167 
-<a name="l00168"></a>00168         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>();
-<a name="l00169"></a>00169     }
-<a name="l00170"></a>00170 
-<a name="l00171"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a7171d7317e96561d3b8e8628a3701297">00171</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a7171d7317e96561d3b8e8628a3701297">VSAdapter::ConnectTexture</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <span class="keyword">const</span> pParam, <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture)
-<a name="l00172"></a>00172     {
-<a name="l00173"></a>00173         UNREFERENCED_PARAMETER(pParam);
-<a name="l00174"></a>00174         UNREFERENCED_PARAMETER(pTexture);
-<a name="l00175"></a>00175 
-<a name="l00176"></a>00176         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00177"></a>00177     }
-<a name="l00178"></a>00178 
-<a name="l00179"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a232c8e3251ba8ecabd163f33812129a0">00179</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a232c8e3251ba8ecabd163f33812129a0">VSAdapter::HandleError</a>(CGcontext <span class="keyword">const</span> pContext, <span class="keyword">const</span> uint32_t error)
-<a name="l00180"></a>00180     {
-<a name="l00181"></a>00181         UNREFERENCED_PARAMETER(pContext);
-<a name="l00182"></a>00182         UNREFERENCED_PARAMETER(error);
-<a name="l00183"></a>00183     }
-<a name="l00184"></a>00184 }
+<a name="l00162"></a>00162 
+<a name="l00163"></a>00163         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00164"></a>00164     }
+<a name="l00165"></a>00165 
+<a name="l00166"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#aaecef202f16f871187c94be5267c7707">00166</a>     <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#aaecef202f16f871187c94be5267c7707" title="Get a property from the adapter.">VSAdapter::GetProperty</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name)<span class="keyword"> const</span>
+<a name="l00167"></a>00167 <span class="keyword">    </span>{
+<a name="l00168"></a>00168         UNREFERENCED_PARAMETER(name);
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170         <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> ret = {<a class="code" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6">UT_None</a>, <span class="keyword">nullptr</span>};
+<a name="l00171"></a>00171 
+<a name="l00172"></a>00172         <span class="keywordflow">return</span> ret;
+<a name="l00173"></a>00173     }
+<a name="l00174"></a>00174 
+<a name="l00175"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a7171d7317e96561d3b8e8628a3701297">00175</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a7171d7317e96561d3b8e8628a3701297">VSAdapter::ConnectTexture</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <span class="keyword">const</span> pParam, <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture)
+<a name="l00176"></a>00176     {
+<a name="l00177"></a>00177         UNREFERENCED_PARAMETER(pParam);
+<a name="l00178"></a>00178         UNREFERENCED_PARAMETER(pTexture);
+<a name="l00179"></a>00179 
+<a name="l00180"></a>00180         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00181"></a>00181     }
+<a name="l00182"></a>00182 
+<a name="l00183"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a232c8e3251ba8ecabd163f33812129a0">00183</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a232c8e3251ba8ecabd163f33812129a0">VSAdapter::HandleError</a>(CGcontext <span class="keyword">const</span> pContext, <span class="keyword">const</span> uint32_t error)
+<a name="l00184"></a>00184     {
+<a name="l00185"></a>00185         UNREFERENCED_PARAMETER(pContext);
+<a name="l00186"></a>00186         UNREFERENCED_PARAMETER(error);
+<a name="l00187"></a>00187     }
+<a name="l00188"></a>00188 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 4 2011 15:15:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 11 2011 01:26:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

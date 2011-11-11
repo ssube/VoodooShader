@@ -1,18 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_voodoo_framework_8hpp.html" title="D:/Code/VoodooShader/Framework/Core/VoodooFramework.hpp" alt="" coords="813,80,1208,107"/>
-<area shape="rect" id="node25" href="$_v_s_shader_8hpp.html" title="D:/Code/VoodooShader/Framework/Core/VSShader.hpp" alt="" coords="1587,80,1932,107"/>
-<area shape="rect" id="node31" href="$_v_s_parameter_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSParameter.cpp" alt="" coords="1957,80,2320,107"/>
-<area shape="rect" id="node33" href="$_v_s_technique_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSTechnique.cpp" alt="" coords="2345,80,2708,107"/>
-<area shape="rect" id="node5" href="$_file_system_8hpp.html" title="D:/Code/VoodooShader/Framework/Filesystem/FileSystem.hpp" alt="" coords="5,155,395,181"/>
-<area shape="rect" id="node9" href="$_hook_manager_8hpp.html" title="D:/Code/VoodooShader/Framework/Hook/HookManager.hpp" alt="" coords="419,155,788,181"/>
-<area shape="rect" id="node13" href="$_loader___common_8hpp.html" title="D:/Code/VoodooShader/Framework/Loader/Loader_Common.hpp" alt="" coords="813,155,1208,181"/>
-<area shape="rect" id="node21" href="$_logger_8hpp.html" title="D:/Code/VoodooShader/Framework/Logger/Logger.hpp" alt="" coords="1233,155,1569,181"/>
-<area shape="rect" id="node7" href="$_file_system_8cpp.html" title="D:/Code/VoodooShader/Framework/Filesystem/FileSystem.cpp" alt="" coords="5,229,395,256"/>
-<area shape="rect" id="node11" href="$_hook_manager_8cpp.html" title="D:/Code/VoodooShader/Framework/Hook/HookManager.cpp" alt="" coords="419,229,788,256"/>
-<area shape="rect" id="node15" href="$_common_8cpp.html" title="D:/Code/VoodooShader/Framework/Loader/Common.cpp" alt="" coords="813,229,1163,256"/>
-<area shape="rect" id="node17" href="$_loader_8hpp.html" title="D:/Code/VoodooShader/Framework/Loader/Loader.hpp" alt="" coords="1187,229,1524,256"/>
-<area shape="rect" id="node19" href="$_loader_8cpp.html" title="D:/Code/VoodooShader/Framework/Loader/Loader.cpp" alt="" coords="1187,304,1524,331"/>
-<area shape="rect" id="node23" href="$_logger_8cpp.html" title="D:/Code/VoodooShader/Framework/Logger/Logger.cpp" alt="" coords="1549,229,1885,256"/>
-<area shape="rect" id="node27" href="$_v_s_core_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSCore.cpp" alt="" coords="1595,155,1925,181"/>
-<area shape="rect" id="node29" href="$_v_s_shader_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSShader.cpp" alt="" coords="1950,155,2295,181"/>
+<area shape="rect" id="node3" href="$_v_s_shader_8hpp.html" title="D:/Code/VoodooShader/Framework/Core/VSShader.hpp" alt="" coords="179,80,524,107"/>
+<area shape="rect" id="node9" href="$_v_s_parameter_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSParameter.cpp" alt="" coords="549,80,912,107"/>
+<area shape="rect" id="node11" href="$_v_s_technique_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSTechnique.cpp" alt="" coords="937,80,1300,107"/>
+<area shape="rect" id="node5" href="$_v_s_core_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSCore.cpp" alt="" coords="5,155,336,181"/>
+<area shape="rect" id="node7" href="$_v_s_shader_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSShader.cpp" alt="" coords="361,155,705,181"/>
 </map>

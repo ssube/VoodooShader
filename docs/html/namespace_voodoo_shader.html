@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.299</span>
+   &#160;<span id="projectnumber">0.4.2.317</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -94,10 +94,6 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the interface for handling function-level hooks, redirecting existing functions and calls into new locations.  <a href="class_voodoo_shader_1_1_i_hook_manager.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html">ILogger</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the interface for a Logger class.  <a href="class_voodoo_shader_1_1_i_logger.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html">IModuleManager</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a framework for loading and unloading modules in core, as well as retrieving symbols and modules from memory.  <a href="class_voodoo_shader_1_1_i_module_manager.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the handle to a loaded library and function pointers for creation and destruction.  <a href="class_voodoo_shader_1_1_i_module.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization parameters.  <a href="struct_voodoo_shader_1_1_init_params.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a></td></tr>
@@ -106,6 +102,8 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a portion of a texture.  <a href="struct_voodoo_shader_1_1_texture_region.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes the precise version of a particular library, including name, main version, revision and debug status.  <a href="struct_voodoo_shader_1_1_version.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_voodoo_shader_1_1_variant.html">Variant</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Property variant type.  <a href="struct_voodoo_shader_1_1_variant.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_voodoo_shader_1_1float2.html">float2</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_voodoo_shader_1_1float3.html">float3</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_voodoo_shader_1_1float4.html">float4</a></td></tr>
@@ -161,9 +159,9 @@ Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
 &lt; <a class="el" href="class_voodoo_shader_1_1_i_logger.html">ILogger</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
-&lt; <a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a></td></tr>
+&lt; <a class="el" href="class_i_module.html">IModule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
-&lt; <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html">IModuleManager</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3fdb003455025cb3d3e56d7afcbb7e73">IModuleManagerRef</a></td></tr>
+&lt; <a class="el" href="class_i_module_manager.html">IModuleManager</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3fdb003455025cb3d3e56d7afcbb7e73">IModuleManagerRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
 &lt; <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#adb1e29e50a55690336179fa4322d34f7">IObjectRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
@@ -403,19 +401,31 @@ Enumerations</h2></td></tr>
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce">ParseFlags</a> { <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a> =  0x0000, 
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceace32d7a938b81a9b48e2a91e14965106">PF_SingleSlash</a> =  0x0001, 
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceaa78a4407cdd79e08686c5aaad7be7efb">PF_SlashSingle</a> =  0x0001, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea0f69e857efd4a92bca1e94d2de537073">PF_SlashOnly</a> =  0x0002, 
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead47b2072407d71f047b8cae324372813">PF_SlashDouble</a> =  0x0002, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceaffb9ba486b89145f4eb21ad4967e3c5a">PF_BackslashOnly</a> =  0x0004, 
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea0f69e857efd4a92bca1e94d2de537073">PF_SlashOnly</a> =  0x0004, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea621c75758a20a286e4e5d9a9180945d8">PF_Lowercase</a> =  0x0010, 
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea15832efb070341111685bf18f35e584b">PF_SlashBack</a> =  0x0008, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea255aac8554c171c4d14b35a344be75c9">PF_Uppercase</a> =  0x0020, 
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea51bf6e2e467f5901dfca1a77c163cf3a">PF_SlashTrail</a> =  0x0010, 
 <br/>
-&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac9d7f4664f9e9a726c8e75c6788d6e9e">PF_VarName</a> =  0x0100
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead2979a8fddbaadcb49d4cdcc394af8d7">PF_PathRoot</a> =  0x001000, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceaa038c9b013d068094fc78a49e721ec53">PF_PathOnly</a> =  0x002000, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceae50d0d85d903e4643cc3ab6217ca3ef4">PF_PathFile</a> =  0x004000, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea7e7b535ca42e5becf896e0a5d5e84d7d">PF_PathExt</a> =  0x008000, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">PF_PathCanon</a> =  0x010000, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea6957dd0a1b95da8e812981e32093aff2">PF_SlashFlags</a> =  0x0000001F, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cea25b0f723039b4e3c96771a68ece3a791">PF_PathFlags</a> =  0x000FF000
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">String parsing flags.  <a href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce">More...</a><br/></td></tr>
@@ -427,11 +437,43 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080">VT_System</a> =  0x10
 <br/>
  }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151">UnionType</a> { <br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a6b798469f5bf4813cb28e035cdc9fdfb">UT_Unknown</a> =  0x00, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6">UT_None</a> =  0x01, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a45db36583894626403cfbb73dca0d2c9">UT_Bool</a> =  0x02, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a3e626f891b0d589b76f73fca69245a70">UT_Int8</a> =  0x03, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151af52eadd997c590eb5a26d816377ed99b">UT_UInt8</a> =  0x04, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a7d47a41bfdde9c5ede3a48458754f182">UT_Int16</a> =  0x05, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a23f6a2a0f49b684102bafbc0b9e57107">UT_UInt16</a> =  0x06, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151aaad28e35d48efa3bd3b4296dfd525b12">UT_Int32</a> =  0x07, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151ab13ec0daf2702ee5ca89023e834c36b8">UT_UInt32</a> =  0x08, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151aa48f4e751daec87ccd981d1f4948244c">UT_Float</a> =  0x09, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a07824be3c29358d637eaee261634353e">UT_Double</a> =  0x0A, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a82e30c5976865ca806c2a7e0090db544">UT_Uuid</a> =  0x0B, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a2260f1147d1f93bbd095711d1fb3ca61">UT_String</a> =  0x0C, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a254c6c137d63f077af38019dbced07a9">UT_IObject</a> =  0x0D, 
+<br/>
+&#160;&#160;<a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a000f2a36acde6524ab963f65c841cc7c">UT_PVoid</a> =  0x0E
+<br/>
+ }</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__loader.html#ga6e91003d4538bca758f1d233fc2111d8">API_ModuleVersion</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const uint32_t VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__loader.html#ga1c1c7fa8e0849da76d3c77e9f37eed0d">API_ClassCount</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const wchar_t *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__loader.html#gaaae017d08567b59bbab15a4769d6d2d2">API_ClassInfo</a> (_In_ const uint32_t number, _Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *pUuid)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a9b6d245084c35bece67dd6cb93ed474b">API_ModuleVersion</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const uint32_t VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a262d76aa3e91afa876c8f64add584c6b">API_ClassCount</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const wchar_t *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aa630db1259d2f43d88c8b54e40ca0da0">API_ClassInfo</a> (_In_ const uint32_t number, _Out_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *pUuid)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">API_ClassCreate</a> (_In_ const uint32_t number, _In_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *core)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">intrusive_ptr_add_ref</a> (<a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">intrusive_ptr_release</a> (<a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *obj)</td></tr>
@@ -443,8 +485,8 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a4722149d606b572eaa0e21fc918d0f47">DEFINE_IID</a> (<a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html">IHookManager</a>, 0x8c, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#af52f3743f8a04c75b87363939e623f58">DEFINE_IID</a> (<a class="el" href="class_voodoo_shader_1_1_i_image.html">IImage</a>, 0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a152ebb778e9bd0f0560364f32836f1b2">DEFINE_IID</a> (<a class="el" href="class_voodoo_shader_1_1_i_logger.html">ILogger</a>, 0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aecd8c7125773ae74c1d50902fd1e1959">DEFINE_IID</a> (<a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a>, 0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a186e55fddab2dd146bca31b4f8dc4a5b">DEFINE_IID</a> (<a class="el" href="class_voodoo_shader_1_1_i_module_manager.html">IModuleManager</a>, 0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aecd8c7125773ae74c1d50902fd1e1959">DEFINE_IID</a> (<a class="el" href="class_i_module.html">IModule</a>, 0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a186e55fddab2dd146bca31b4f8dc4a5b">DEFINE_IID</a> (<a class="el" href="class_i_module_manager.html">IModuleManager</a>, 0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aeffbffc66ba7386839108fcc4e10f982">DEFINE_IID</a> (<a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a>, 0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a1c5cc72690450a56119cfe69789759bd">DEFINE_IID</a> (<a class="el" href="class_voodoo_shader_1_1_i_parser.html">IParser</a>, 0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a0fe7c81eb937c1fb0cf1d5b18efdc518">DEFINE_IID</a> (<a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a>, 0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
@@ -494,7 +536,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00246">246</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00255">255</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -509,7 +551,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00247">247</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00256">256</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -524,7 +566,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00248">248</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00257">257</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -539,7 +581,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00229">229</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00238">238</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -554,7 +596,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00209">209</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00218">218</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -569,7 +611,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00210">210</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00219">219</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -584,7 +626,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00211">211</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00220">220</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -599,7 +641,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00212">212</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00221">221</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -614,7 +656,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00213">213</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00222">222</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -629,7 +671,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00214">214</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00223">223</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -644,7 +686,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00215">215</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00224">224</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -653,13 +695,13 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::intrusive_ptr&lt;<a class="el" href="class_voodoo_shader_1_1_i_module_manager.html">IModuleManager</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a3fdb003455025cb3d3e56d7afcbb7e73">VoodooShader::IModuleManagerRef</a></td>
+          <td class="memname">typedef boost::intrusive_ptr&lt;<a class="el" href="class_i_module_manager.html">IModuleManager</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a3fdb003455025cb3d3e56d7afcbb7e73">VoodooShader::IModuleManagerRef</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00217">217</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00226">226</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -668,13 +710,13 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::intrusive_ptr&lt;<a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">VoodooShader::IModuleRef</a></td>
+          <td class="memname">typedef boost::intrusive_ptr&lt;<a class="el" href="class_i_module.html">IModule</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">VoodooShader::IModuleRef</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00216">216</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00225">225</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -689,7 +731,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00218">218</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00227">227</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -704,7 +746,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00219">219</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00228">228</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -719,7 +761,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00220">220</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00229">229</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -734,7 +776,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00221">221</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00230">230</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -749,7 +791,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00222">222</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00231">231</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -764,7 +806,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00223">223</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00232">232</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -779,7 +821,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00224">224</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00233">233</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -794,7 +836,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00249">249</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00258">258</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -809,7 +851,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00245">245</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00254">254</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -824,7 +866,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00240">240</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00249">249</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -839,7 +881,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00239">239</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00248">248</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -854,7 +896,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00241">241</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00250">250</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -869,7 +911,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00237">237</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00246">246</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -884,7 +926,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00236">236</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00245">245</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -899,7 +941,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00238">238</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00247">247</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -914,7 +956,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00231">231</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00240">240</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -929,7 +971,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00230">230</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00239">239</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -944,7 +986,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00232">232</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00241">241</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -959,7 +1001,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00234">234</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00243">243</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -974,7 +1016,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00233">233</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00242">242</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -989,7 +1031,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00235">235</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00244">244</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1004,7 +1046,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00243">243</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00252">252</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1019,7 +1061,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00242">242</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00251">251</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1034,7 +1076,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00244">244</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00253">253</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1098,7 +1140,7 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00339">339</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00348">348</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1121,7 +1163,7 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00397">397</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00406">406</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1206,7 +1248,7 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00362">362</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00371">371</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1233,7 +1275,7 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00314">314</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00323">323</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1305,7 +1347,7 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00282">282</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00291">291</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1325,23 +1367,35 @@ Variables</h2></td></tr>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
 <tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91"></a><!-- doxytag: member="PF_None" ref="a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91" args="" -->PF_None</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778ceace32d7a938b81a9b48e2a91e14965106"></a><!-- doxytag: member="PF_SingleSlash" ref="a97ffa79fd7512cffa1f0bce04ec778ceace32d7a938b81a9b48e2a91e14965106" args="" -->PF_SingleSlash</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778ceaa78a4407cdd79e08686c5aaad7be7efb"></a><!-- doxytag: member="PF_SlashSingle" ref="a97ffa79fd7512cffa1f0bce04ec778ceaa78a4407cdd79e08686c5aaad7be7efb" args="" -->PF_SlashSingle</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cead47b2072407d71f047b8cae324372813"></a><!-- doxytag: member="PF_SlashDouble" ref="a97ffa79fd7512cffa1f0bce04ec778cead47b2072407d71f047b8cae324372813" args="" -->PF_SlashDouble</em>&nbsp;</td><td>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cea0f69e857efd4a92bca1e94d2de537073"></a><!-- doxytag: member="PF_SlashOnly" ref="a97ffa79fd7512cffa1f0bce04ec778cea0f69e857efd4a92bca1e94d2de537073" args="" -->PF_SlashOnly</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778ceaffb9ba486b89145f4eb21ad4967e3c5a"></a><!-- doxytag: member="PF_BackslashOnly" ref="a97ffa79fd7512cffa1f0bce04ec778ceaffb9ba486b89145f4eb21ad4967e3c5a" args="" -->PF_BackslashOnly</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cea15832efb070341111685bf18f35e584b"></a><!-- doxytag: member="PF_SlashBack" ref="a97ffa79fd7512cffa1f0bce04ec778cea15832efb070341111685bf18f35e584b" args="" -->PF_SlashBack</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cea621c75758a20a286e4e5d9a9180945d8"></a><!-- doxytag: member="PF_Lowercase" ref="a97ffa79fd7512cffa1f0bce04ec778cea621c75758a20a286e4e5d9a9180945d8" args="" -->PF_Lowercase</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cea51bf6e2e467f5901dfca1a77c163cf3a"></a><!-- doxytag: member="PF_SlashTrail" ref="a97ffa79fd7512cffa1f0bce04ec778cea51bf6e2e467f5901dfca1a77c163cf3a" args="" -->PF_SlashTrail</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cea255aac8554c171c4d14b35a344be75c9"></a><!-- doxytag: member="PF_Uppercase" ref="a97ffa79fd7512cffa1f0bce04ec778cea255aac8554c171c4d14b35a344be75c9" args="" -->PF_Uppercase</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cead2979a8fddbaadcb49d4cdcc394af8d7"></a><!-- doxytag: member="PF_PathRoot" ref="a97ffa79fd7512cffa1f0bce04ec778cead2979a8fddbaadcb49d4cdcc394af8d7" args="" -->PF_PathRoot</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778ceac9d7f4664f9e9a726c8e75c6788d6e9e"></a><!-- doxytag: member="PF_VarName" ref="a97ffa79fd7512cffa1f0bce04ec778ceac9d7f4664f9e9a726c8e75c6788d6e9e" args="" -->PF_VarName</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778ceaa038c9b013d068094fc78a49e721ec53"></a><!-- doxytag: member="PF_PathOnly" ref="a97ffa79fd7512cffa1f0bce04ec778ceaa038c9b013d068094fc78a49e721ec53" args="" -->PF_PathOnly</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778ceae50d0d85d903e4643cc3ab6217ca3ef4"></a><!-- doxytag: member="PF_PathFile" ref="a97ffa79fd7512cffa1f0bce04ec778ceae50d0d85d903e4643cc3ab6217ca3ef4" args="" -->PF_PathFile</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cea7e7b535ca42e5becf896e0a5d5e84d7d"></a><!-- doxytag: member="PF_PathExt" ref="a97ffa79fd7512cffa1f0bce04ec778cea7e7b535ca42e5becf896e0a5d5e84d7d" args="" -->PF_PathExt</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7"></a><!-- doxytag: member="PF_PathCanon" ref="a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7" args="" -->PF_PathCanon</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cea6957dd0a1b95da8e812981e32093aff2"></a><!-- doxytag: member="PF_SlashFlags" ref="a97ffa79fd7512cffa1f0bce04ec778cea6957dd0a1b95da8e812981e32093aff2" args="" -->PF_SlashFlags</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a97ffa79fd7512cffa1f0bce04ec778cea25b0f723039b4e3c96771a68ece3a791"></a><!-- doxytag: member="PF_PathFlags" ref="a97ffa79fd7512cffa1f0bce04ec778cea25b0f723039b4e3c96771a68ece3a791" args="" -->PF_PathFlags</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00406">406</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00415">415</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1372,7 +1426,7 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00322">322</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00331">331</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1414,7 +1468,7 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00260">260</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00269">269</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1439,7 +1493,56 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00332">332</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00341">341</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2453ad76d4f673b6a3016377f007c151"></a><!-- doxytag: member="VoodooShader::UnionType" ref="a2453ad76d4f673b6a3016377f007c151" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151">VoodooShader::UnionType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a6b798469f5bf4813cb28e035cdc9fdfb"></a><!-- doxytag: member="UT_Unknown" ref="a2453ad76d4f673b6a3016377f007c151a6b798469f5bf4813cb28e035cdc9fdfb" args="" -->UT_Unknown</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6"></a><!-- doxytag: member="UT_None" ref="a2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6" args="" -->UT_None</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a45db36583894626403cfbb73dca0d2c9"></a><!-- doxytag: member="UT_Bool" ref="a2453ad76d4f673b6a3016377f007c151a45db36583894626403cfbb73dca0d2c9" args="" -->UT_Bool</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a3e626f891b0d589b76f73fca69245a70"></a><!-- doxytag: member="UT_Int8" ref="a2453ad76d4f673b6a3016377f007c151a3e626f891b0d589b76f73fca69245a70" args="" -->UT_Int8</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151af52eadd997c590eb5a26d816377ed99b"></a><!-- doxytag: member="UT_UInt8" ref="a2453ad76d4f673b6a3016377f007c151af52eadd997c590eb5a26d816377ed99b" args="" -->UT_UInt8</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a7d47a41bfdde9c5ede3a48458754f182"></a><!-- doxytag: member="UT_Int16" ref="a2453ad76d4f673b6a3016377f007c151a7d47a41bfdde9c5ede3a48458754f182" args="" -->UT_Int16</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a23f6a2a0f49b684102bafbc0b9e57107"></a><!-- doxytag: member="UT_UInt16" ref="a2453ad76d4f673b6a3016377f007c151a23f6a2a0f49b684102bafbc0b9e57107" args="" -->UT_UInt16</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151aaad28e35d48efa3bd3b4296dfd525b12"></a><!-- doxytag: member="UT_Int32" ref="a2453ad76d4f673b6a3016377f007c151aaad28e35d48efa3bd3b4296dfd525b12" args="" -->UT_Int32</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151ab13ec0daf2702ee5ca89023e834c36b8"></a><!-- doxytag: member="UT_UInt32" ref="a2453ad76d4f673b6a3016377f007c151ab13ec0daf2702ee5ca89023e834c36b8" args="" -->UT_UInt32</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151aa48f4e751daec87ccd981d1f4948244c"></a><!-- doxytag: member="UT_Float" ref="a2453ad76d4f673b6a3016377f007c151aa48f4e751daec87ccd981d1f4948244c" args="" -->UT_Float</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a07824be3c29358d637eaee261634353e"></a><!-- doxytag: member="UT_Double" ref="a2453ad76d4f673b6a3016377f007c151a07824be3c29358d637eaee261634353e" args="" -->UT_Double</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a82e30c5976865ca806c2a7e0090db544"></a><!-- doxytag: member="UT_Uuid" ref="a2453ad76d4f673b6a3016377f007c151a82e30c5976865ca806c2a7e0090db544" args="" -->UT_Uuid</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a2260f1147d1f93bbd095711d1fb3ca61"></a><!-- doxytag: member="UT_String" ref="a2453ad76d4f673b6a3016377f007c151a2260f1147d1f93bbd095711d1fb3ca61" args="" -->UT_String</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a254c6c137d63f077af38019dbced07a9"></a><!-- doxytag: member="UT_IObject" ref="a2453ad76d4f673b6a3016377f007c151a254c6c137d63f077af38019dbced07a9" args="" -->UT_IObject</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a2453ad76d4f673b6a3016377f007c151a000f2a36acde6524ab963f65c841cc7c"></a><!-- doxytag: member="UT_PVoid" ref="a2453ad76d4f673b6a3016377f007c151a000f2a36acde6524ab963f65c841cc7c" args="" -->UT_PVoid</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00442">442</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1464,7 +1567,7 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00417">417</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00435">435</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -1485,6 +1588,73 @@ Variables</h2></td></tr>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="_v_s_parameter_8cpp_source.html#l00185">185</a> of file <a class="el" href="_v_s_parameter_8cpp_source.html">VSParameter.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a262d76aa3e91afa876c8f64add584c6b"></a><!-- doxytag: member="VoodooShader::API_ClassCount" ref="a262d76aa3e91afa876c8f64add584c6b" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint32_t VOODOO_CALL VoodooShader::API_ClassCount </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00047">47</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa630db1259d2f43d88c8b54e40ca0da0"></a><!-- doxytag: member="VoodooShader::API_ClassInfo" ref="aa630db1259d2f43d88c8b54e40ca0da0" args="(_In_ const uint32_t number, _Out_ Uuid *pUuid)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wchar_t *VOODOO_CALL VoodooShader::API_ClassInfo </td>
+          <td>(</td>
+          <td class="paramtype">_In_ const uint32_t&#160;</td>
+          <td class="paramname"><em>number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Out_ Uuid *&#160;</td>
+          <td class="paramname"><em>pUuid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00052">52</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9b6d245084c35bece67dd6cb93ed474b"></a><!-- doxytag: member="VoodooShader::API_ModuleVersion" ref="a9b6d245084c35bece67dd6cb93ed474b" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *VOODOO_CALL VoodooShader::API_ModuleVersion </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exports_8cpp_source.html#l00042">42</a> of file <a class="el" href="_exports_8cpp_source.html">Exports.cpp</a>.</p>
 
 </div>
 </div>
@@ -1513,7 +1683,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00052">52</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00054">54</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -4025,7 +4195,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">VoodooShader::DEFINE_IID </td>
           <td>(</td>
-          <td class="paramtype">IModule&#160;</td>
+          <td class="paramtype"><a class="el" href="class_i_module.html">IModule</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -4142,7 +4312,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">VoodooShader::DEFINE_IID </td>
           <td>(</td>
-          <td class="paramtype">IModuleManager&#160;</td>
+          <td class="paramtype"><a class="el" href="class_i_module_manager.html">IModuleManager</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -5033,7 +5203,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00043">43</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00045">45</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -5177,7 +5347,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 4 2011 15:15:36 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 11 2011 01:26:36 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

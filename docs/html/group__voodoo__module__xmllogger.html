@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.299</span>
+   &#160;<span id="projectnumber">0.4.2.317</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -75,7 +75,8 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#gaf74f7f8edda7e969198eddbb58a4002d">VOODOO_LOGGER_VERSION_MAJOR</a>&#160;&#160;&#160;0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga4f470b2d849e1cfc305217c689bfdbf0">VOODOO_LOGGER_VERSION_MINOR</a>&#160;&#160;&#160;4</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#gaa1b524e75f5c061db327fc9f702a204d">VOODOO_LOGGER_VERSION_PATCH</a>&#160;&#160;&#160;0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga3986d5acc96e600150458c81e02f5a62">VOODOO_LOGGER_VERSION_REV</a>&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_REV</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga9c33775e9a566d327282ae9fc16e024d">VOODOO_LOGGER_VERSION_BUILD</a>&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_BUILD</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga5c3668bdee5fc2d8b2f8aa0609bd9aad">VOODOO_LOGGER_GITID</a>&#160;&#160;&#160;VOODOO_GLOBAL_GITID</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const Version *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga915a57bf07536d13bca4ac31c999d54e">VoodooShader::XmlLogger::API_ModuleVersion</a> (void)</td></tr>
@@ -89,6 +90,21 @@ Functions</h2></td></tr>
 <p>These logs can be opened with the standard log viewer and support all features.</p>
 <dl class="note"><dt><b>Note:</b></dt><dd>In debug builds, this logger also prints all messages to cout. If a debugger is attached, warnings and errors are printed to its output window. </dd></dl>
 <hr/><h2>Define Documentation</h2>
+<a class="anchor" id="ga5c3668bdee5fc2d8b2f8aa0609bd9aad"></a><!-- doxytag: member="Logger_Version.hpp::VOODOO_LOGGER_GITID" ref="ga5c3668bdee5fc2d8b2f8aa0609bd9aad" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOODOO_LOGGER_GITID&#160;&#160;&#160;VOODOO_GLOBAL_GITID</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_logger___version_8hpp_source.html#l00035">35</a> of file <a class="el" href="_logger___version_8hpp_source.html">Logger_Version.hpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="gac62a9585402526846fc9dec5b7809a3b"></a><!-- doxytag: member="Logger_Version.hpp::VOODOO_LOGGER_LIBID" ref="gac62a9585402526846fc9dec5b7809a3b" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -134,6 +150,21 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga9c33775e9a566d327282ae9fc16e024d"></a><!-- doxytag: member="Logger_Version.hpp::VOODOO_LOGGER_VERSION_BUILD" ref="ga9c33775e9a566d327282ae9fc16e024d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOODOO_LOGGER_VERSION_BUILD&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_BUILD</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_logger___version_8hpp_source.html#l00034">34</a> of file <a class="el" href="_logger___version_8hpp_source.html">Logger_Version.hpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="gaf74f7f8edda7e969198eddbb58a4002d"></a><!-- doxytag: member="Logger_Version.hpp::VOODOO_LOGGER_VERSION_MAJOR" ref="gaf74f7f8edda7e969198eddbb58a4002d" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -176,21 +207,6 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="_logger___version_8hpp_source.html#l00033">33</a> of file <a class="el" href="_logger___version_8hpp_source.html">Logger_Version.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga3986d5acc96e600150458c81e02f5a62"></a><!-- doxytag: member="Logger_Version.hpp::VOODOO_LOGGER_VERSION_REV" ref="ga3986d5acc96e600150458c81e02f5a62" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOODOO_LOGGER_VERSION_REV&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_REV</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_logger___version_8hpp_source.html#l00034">34</a> of file <a class="el" href="_logger___version_8hpp_source.html">Logger_Version.hpp</a>.</p>
 
 </div>
 </div>
@@ -412,7 +428,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 4 2011 15:15:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 11 2011 01:26:36 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
