@@ -12,6 +12,11 @@
             <xs:pattern value="(create|replace|remove)" />
         </xs:restriction>
     </xs:simpleType>
+    <xs:simpleType name="ManifestType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(remote|package)" />
+        </xs:restriction>
+    </xs:simpleType>
     <xs:element name="VoodooManifest">
         <xs:complexType>
             <xs:all>
@@ -56,29 +61,6 @@
                                                                 <xs:element name="Name" type="xs:string" />
                                                                 <xs:element name="ClsID" type="Uuid" />
                                                                 <xs:element name="LibID" type="Uuid" />
-                                                            </xs:all>
-                                                            <xs:attribute name="action" type="ActionType" />
-                                                        </xs:complexType>
-                                                    </xs:element>
-                                                </xs:sequence>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element minOccurs="0" name="Defaults">
-                                            <xs:complexType>
-                                                <xs:sequence>
-                                                    <xs:element maxOccurs="unbounded" name="Default">
-                                                        <xs:complexType>
-                                                            <xs:all>
-                                                                <xs:element name="Name" type="xs:string" />
-                                                                <xs:element name="Filter" type="xs:string" />
-                                                                <xs:element name="Config" type="xs:string" />
-                                                                <xs:element name="Packages">
-                                                                    <xs:complexType>
-                                                                        <xs:all>
-                                                                            <xs:element name="Package" type="Uuid" />
-                                                                        </xs:all>
-                                                                    </xs:complexType>
-                                                                </xs:element>
                                                             </xs:all>
                                                             <xs:attribute name="action" type="ActionType" />
                                                         </xs:complexType>
@@ -139,7 +121,7 @@
                     </xs:complexType>
                 </xs:element>
             </xs:all>
-            <xs:attribute name="type" type="xs:string" use="required" />
+            <xs:attribute name="type" type="ManifestType" use="required" />
         </xs:complexType>
     </xs:element>
 </xs:schema>
