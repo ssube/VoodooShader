@@ -3,85 +3,119 @@
     <xs:simpleType name="Uuid">
         <xs:restriction base="xs:string">
             <xs:pattern
-                value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}">
+                value="[\{]{0,1}[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}[\}]{0,1}">
             </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ActionType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(create|replace|remove)" />
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="VoodooManifest">
         <xs:complexType>
             <xs:all>
-                <xs:element maxOccurs="1" name="Package">
+                <xs:element name="Package">
                     <xs:complexType>
                         <xs:all>
                             <xs:element name="Name" type="xs:string" />
                             <xs:element name="PackID" type="Uuid" />
                             <xs:element name="Version" type="xs:string" />
                             <xs:element name="Date" type="xs:date" />
-                            <xs:element name="Manifest" type="xs:string" />
                         </xs:all>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="Modules">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element maxOccurs="unbounded" name="Module">
-                                <xs:complexType>
-                                    <xs:all>
-                                        <xs:element name="Name" type="xs:string" />
-                                        <xs:element name="LibID" type="Uuid" />
-                                        <xs:element name="PackID" type="Uuid" />
-                                    </xs:all>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Classes">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element maxOccurs="unbounded" name="Class">
-                                <xs:complexType>
-                                    <xs:all>
-                                        <xs:element name="Name" type="xs:string" />
-                                        <xs:element name="ClsID" type="Uuid" />
-                                        <xs:element name="LibID" type="Uuid" />
-                                    </xs:all>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Defaults">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element maxOccurs="unbounded" name="Default">
-                                <xs:complexType>
-                                    <xs:all>
-                                        <xs:element name="Name" type="xs:string" />
-                                        <xs:element name="Filter" type="xs:string" />
-                                        <xs:element name="Config" type="xs:string" />
-                                        <xs:element name="Packages">
-                                            <xs:complexType>
-                                                <xs:all>
-                                                    <xs:element name="Package" type="Uuid" />
-                                                </xs:all>
-                                            </xs:complexType>
-                                        </xs:element>
-                                    </xs:all>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Files">
+                <xs:element name="Versions">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element maxOccurs="unbounded" name="Version">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element maxOccurs="unbounded" name="Delete" />
-                                        <xs:element maxOccurs="unbounded" name="Replace" />
-                                        <xs:element maxOccurs="unbounded" name="Create" />                                   
+                                        <xs:element minOccurs="0" name="Modules">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element maxOccurs="unbounded" name="Module">
+                                                        <xs:complexType>
+                                                            <xs:all>
+                                                                <xs:element name="Name" type="xs:string" />
+                                                                <xs:element name="LibID" type="Uuid" />
+                                                                <xs:element name="PackID" type="Uuid" />
+                                                            </xs:all>
+                                                            <xs:attribute name="action" type="ActionType" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="Classes">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element maxOccurs="unbounded" name="Class">
+                                                        <xs:complexType>
+                                                            <xs:all>
+                                                                <xs:element name="Name" type="xs:string" />
+                                                                <xs:element name="ClsID" type="Uuid" />
+                                                                <xs:element name="LibID" type="Uuid" />
+                                                            </xs:all>
+                                                            <xs:attribute name="action" type="ActionType" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="Defaults">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element maxOccurs="unbounded" name="Default">
+                                                        <xs:complexType>
+                                                            <xs:all>
+                                                                <xs:element name="Name" type="xs:string" />
+                                                                <xs:element name="Filter" type="xs:string" />
+                                                                <xs:element name="Config" type="xs:string" />
+                                                                <xs:element name="Packages">
+                                                                    <xs:complexType>
+                                                                        <xs:all>
+                                                                            <xs:element name="Package" type="Uuid" />
+                                                                        </xs:all>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:all>
+                                                            <xs:attribute name="action" type="ActionType" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="Files">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element maxOccurs="unbounded" name="File">
+                                                        <xs:complexType>
+                                                            <xs:simpleContent>
+                                                                <xs:extension base="xs:string">
+                                                                    <xs:attribute name="action" type="ActionType" />
+                                                                </xs:extension>
+                                                            </xs:simpleContent>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="Messages">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element maxOccurs="unbounded" name="Language">
+                                                        <xs:complexType>
+                                                            <xs:all>
+                                                                <xs:element minOccurs="0" name="Pre" type="xs:string" />
+                                                                <xs:element minOccurs="0" name="Post" type="xs:string" />
+                                                            </xs:all>
+                                                            <xs:attribute name="id" type="xs:language" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
                                     </xs:sequence>
                                     <xs:attribute name="id" type="xs:string" use="required" />
                                 </xs:complexType>
@@ -106,7 +140,6 @@
                 </xs:element>
             </xs:all>
             <xs:attribute name="type" type="xs:string" use="required" />
-            <xs:attribute name="name" type="xs:string" use="required" />
         </xs:complexType>
     </xs:element>
 </xs:schema>
