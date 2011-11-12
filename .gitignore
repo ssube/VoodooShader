@@ -17,6 +17,7 @@ Resources/Installers/Output/*
 [Dd]ependencies/*/*
 [Dd]ebug
 [Rr]elease
+kwstyle.html/*
 
 #Temp ignore for CMake files (until system is ready)
 CMakeLists.txt

@@ -164,5 +164,19 @@ namespace VoodooRegedit.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap tag_export {
+            get {
+                object obj = ResourceManager.GetObject("tag-export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tag_import {
+            get {
+                object obj = ResourceManager.GetObject("tag-import", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

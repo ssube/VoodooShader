@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VoodooNetClasses")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Voodoo .Net Classes")]
+[assembly: AssemblyDescription("Voodoo Shader Framework .Net Support Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VoodooNetClasses")]
-[assembly: AssemblyCopyright("Copyright ©  2011")]
+[assembly: AssemblyProduct("Voodoo Shader Framework")]
+[assembly: AssemblyCopyright("Copyright ©  2010-2011 by Sean Sube")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

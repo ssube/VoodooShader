@@ -23,14 +23,44 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using System.ComponentModel;
 
 namespace VoodooNetClasses
 {
+    public class VoodooProperty : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public String m_Name, m_Value;
+
+        public VoodooProperty(String n, String v)
+        {
+            m_Name = n; m_Value = v;
+        }
+
+        public String Name
+        {
+            get { return m_Name; }
+            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
+        }
+
+        public String Value
+        {
+            get { return m_Value; }
+            set { m_Value = value; this.NotifyPropertyChanged("Value"); }
+        }
+
+        private void NotifyPropertyChanged(String name)
+        {
+            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
+        }
+    }
+
     public class VoodooElement
     {
-        protected Dictionary<String, String> m_Props;
+        protected List<VoodooProperty> m_Props;
 
-        public Dictionary<String, String> Properties
+        public List<VoodooProperty> Properties
         {
             get { return m_Props; }
             set { m_Props = value; }
@@ -38,7 +68,25 @@ namespace VoodooNetClasses
 
         public VoodooElement()
         {
-            m_Props = new Dictionary<string, string>();
+            m_Props = new List<VoodooProperty>();
+        }
+    }
+
+    public class VoodooPackage : VoodooElement
+    {
+        Guid m_PACKID;
+
+        public VoodooPackage(Guid packid, List<VoodooProperty> props)
+            : base()
+        {
+            m_PACKID = packid;
+            m_Props = props;
+        }
+
+        public Guid PACKID
+        {
+            get { return m_PACKID; }
+            set { m_PACKID = value; }
         }
     }
 
@@ -46,7 +94,7 @@ namespace VoodooNetClasses
     {
         Guid m_LIBID;
 
-        public VoodooModule(Guid libid, Dictionary<String, String> props)
+        public VoodooModule(Guid libid, List<VoodooProperty> props)
             : base()
         {
             m_LIBID = libid;
@@ -58,31 +106,13 @@ namespace VoodooNetClasses
             get { return m_LIBID; }
             set { m_LIBID = value; } 
         }
-
-        public String Path
-        {
-            get { return m_Props["modulepath"]; }
-            set { m_Props["modulepath"] = value; } 
-        }
-
-        public String Config
-        {
-            get { return m_Props["configpath"]; }
-            set { m_Props["configpath"] = value; } 
-        }
-
-        public String Remote
-        {
-            get { return m_Props["remotepath"]; }
-            set { m_Props["remotepath"] = value; } 
-        }
     }
 
     public class VoodooClass : VoodooElement
     {
         Guid m_CLSID;
 
-        public VoodooClass(Guid clsid, Dictionary<String, String> props)
+        public VoodooClass(Guid clsid, List<VoodooProperty> props)
             : base()
         {
             m_CLSID = clsid;
@@ -94,25 +124,13 @@ namespace VoodooNetClasses
             get { return m_CLSID; }
             set { m_CLSID = value; } 
         }
-
-        public Guid LIBID
-        {
-            get { return new Guid(m_Props["libid"]); }
-            set { m_Props["libid"] = Convert.ToString(value); } 
-        }
-
-        public String Name
-        {
-            get { return m_Props["name"]; }
-            set { m_Props["name"] = value; } 
-        }
     }
 
     public class VoodooHook : VoodooElement
     {
         String m_ID;
 
-        public VoodooHook(String id, Dictionary<String, String> props)
+        public VoodooHook(String id, List<VoodooProperty> props)
             : base()
         {
             m_ID = id;
@@ -124,31 +142,25 @@ namespace VoodooNetClasses
             get { return m_ID; }
             set { m_ID = value; }
         }
-
-        public String Name 
-        { 
-            get { return m_Props["name"]; } 
-            set { m_Props["name"] = value; } 
-        }
-
-        public String Target 
-        {
-            get { return m_Props["target"]; }
-            set { m_Props["target"] = value; } 
-        }
-
-        public String Config 
-        {
-            get { return m_Props["config"]; }
-            set { m_Props["config"] = value; } 
-        }
     }
 
     public class VoodooRegistry : VoodooElement
     {
+        private List<String> m_Remotes;
+        private Dictionary<Guid, VoodooPackage> m_Packages;
         private Dictionary<Guid, VoodooModule> m_Modules;
         private Dictionary<Guid, VoodooClass> m_Classes;
         private Dictionary<String, VoodooHook> m_Hooks;
+
+        public List<String> Remotes
+        {
+            get { return m_Remotes; }
+        }
+
+        public Dictionary<Guid, VoodooPackage> Packages
+        {
+            get { return m_Packages; }
+        }
 
         public Dictionary<Guid, VoodooModule> Modules
         {
@@ -165,14 +177,10 @@ namespace VoodooNetClasses
             get { return m_Hooks; }
         }
 
-        public String Path
-        {
-            get { return m_Props["path"]; }
-            set { m_Props["path"] = value; }
-        }
-
         public VoodooRegistry() : base()
         {
+            m_Remotes = new List<string>();
+            m_Packages = new Dictionary<Guid, VoodooPackage>();
             m_Modules = new Dictionary<Guid, VoodooModule>();
             m_Classes = new Dictionary<Guid, VoodooClass>();
             m_Hooks = new Dictionary<String, VoodooHook>();
@@ -189,7 +197,38 @@ namespace VoodooNetClasses
 
             foreach (String propName in root.GetValueNames())
             {
-                vreg.m_Props.Add(propName.ToLower(), Convert.ToString(root.GetValue(propName)));
+                vreg.m_Props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(root.GetValue(propName))));
+            }
+
+            RegistryKey remotesKey = root.OpenSubKey("remotes");
+            if (remotesKey != null)
+            {
+                foreach (String remoteID in remotesKey.GetValueNames())
+                {
+                    vreg.m_Remotes.Add(Convert.ToString(remotesKey.GetValue(remoteID)));
+                }
+            }
+
+            RegistryKey packagesKey = root.OpenSubKey("packages");
+            if (packagesKey != null)
+            {
+                foreach (String packageKeyName in packagesKey.GetSubKeyNames())
+                {
+                    RegistryKey packageKey = packagesKey.OpenSubKey(packageKeyName);
+                    if (packageKey != null)
+                    {
+                        Guid libid = new Guid(packageKeyName);
+
+                        List<VoodooProperty> props = new List<VoodooProperty>(packageKey.ValueCount);
+
+                        foreach (String propName in packageKey.GetValueNames())
+                        {
+                            props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(packageKey.GetValue(propName))));
+                        }
+
+                        vreg.m_Packages.Add(libid, new VoodooPackage(libid, props));
+                    }
+                }
             }
 
             RegistryKey modulesKey = root.OpenSubKey("modules");
@@ -202,11 +241,11 @@ namespace VoodooNetClasses
                     {
                         Guid libid = new Guid(moduleKeyName);
 
-                        Dictionary<String, String> props = new Dictionary<String, String>(moduleKey.ValueCount);
+                        List<VoodooProperty> props = new List<VoodooProperty>(moduleKey.ValueCount);
 
                         foreach (String propName in moduleKey.GetValueNames())
                         {
-                            props.Add(propName.ToLower(), Convert.ToString(moduleKey.GetValue(propName)));
+                            props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(moduleKey.GetValue(propName))));
                         }
 
                         vreg.m_Modules.Add(libid, new VoodooModule(libid, props));
@@ -224,11 +263,11 @@ namespace VoodooNetClasses
                     {
                         Guid clsid = new Guid(classKeyName);
 
-                        Dictionary<String, String> props = new Dictionary<String, String>(classKey.ValueCount);
+                        List<VoodooProperty> props = new List<VoodooProperty>(classKey.ValueCount);
 
                         foreach (String propName in classKey.GetValueNames())
                         {
-                            props.Add(propName.ToLower(), Convert.ToString(classKey.GetValue(propName)));
+                            props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(classKey.GetValue(propName))));
                         }
 
                         vreg.m_Classes.Add(clsid, new VoodooClass(clsid, props));
@@ -244,11 +283,11 @@ namespace VoodooNetClasses
                     RegistryKey hookKey = classesKey.OpenSubKey(hookKeyName);
                     if (hookKey != null)
                     {
-                        Dictionary<String, String> props = new Dictionary<String, String>(hookKey.ValueCount);
+                        List<VoodooProperty> props = new List<VoodooProperty>(hookKey.ValueCount);
 
                         foreach (String propName in hookKey.GetValueNames())
                         {
-                            props.Add(propName.ToLower(), Convert.ToString(hookKey.GetValue(propName)));
+                            props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(hookKey.GetValue(propName))));
                         }
 
                         vreg.m_Hooks.Add(hookKeyName, new VoodooHook(hookKeyName, props));
@@ -268,7 +307,26 @@ namespace VoodooNetClasses
 
             VoodooRegistry vreg = new VoodooRegistry();
 
-            vreg.m_Props = node.Tag as Dictionary<String, String>;
+            vreg.m_Props = node.Tag as List<VoodooProperty>;
+
+            TreeNode remotesNode = node.Nodes["remotes"];
+            if (remotesNode != null)
+            {
+                vreg.m_Remotes = remotesNode.Tag as List<String>;
+            }
+
+            TreeNode packagesNode = node.Nodes["packages"];
+            if (packagesNode != null)
+            {
+                foreach (TreeNode packageNode in packagesNode.Nodes)
+                {
+                    Guid libid = new Guid(packageNode.Name);
+                    if (!vreg.m_Packages.ContainsKey(libid))
+                    {
+                        vreg.m_Packages.Add(libid, new VoodooPackage(libid, packageNode.Tag as List<VoodooProperty>));
+                    }
+                }
+            }
 
             TreeNode modulesNode = node.Nodes["modules"];
             if (modulesNode != null)
@@ -278,7 +336,7 @@ namespace VoodooNetClasses
                     Guid libid = new Guid(moduleNode.Name);
                     if (!vreg.m_Modules.ContainsKey(libid))
                     {
-                        vreg.m_Modules.Add(libid, new VoodooModule(libid, moduleNode.Tag as Dictionary<String, String>));
+                        vreg.m_Modules.Add(libid, new VoodooModule(libid, moduleNode.Tag as List<VoodooProperty>));
                     }
                 }
             }
@@ -291,7 +349,7 @@ namespace VoodooNetClasses
                     Guid clsid = new Guid(classNode.Name);
                     if (!vreg.m_Classes.ContainsKey(clsid))
                     {
-                        vreg.m_Classes.Add(clsid, new VoodooClass(clsid, classNode.Tag as Dictionary<String, String>));
+                        vreg.m_Classes.Add(clsid, new VoodooClass(clsid, classNode.Tag as List<VoodooProperty>));
                     }
                 }
             }
@@ -303,7 +361,7 @@ namespace VoodooNetClasses
                 {
                     if (!vreg.m_Hooks.ContainsKey(hookNode.Name))
                     {
-                        vreg.m_Hooks.Add(hookNode.Name, new VoodooHook(hookNode.Name, hookNode.Tag as Dictionary<String, String>));
+                        vreg.m_Hooks.Add(hookNode.Name, new VoodooHook(hookNode.Name, hookNode.Tag as List<VoodooProperty>));
                     }
                 }
             }
@@ -328,9 +386,27 @@ namespace VoodooNetClasses
                 root.DeleteValue(val);
             }
 
-            foreach (KeyValuePair<String, String> prop in m_Props)
+            foreach (VoodooProperty prop in m_Props)
             {
-                root.SetValue(prop.Key, prop.Value);
+                root.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
+            }
+
+            RegistryKey remotesKey = root.CreateSubKey("remotes");
+            int counter = 0;
+            foreach (String remote in m_Remotes)
+            {
+                remotesKey.SetValue(Convert.ToString(counter++), remote, RegistryValueKind.String);
+            }
+
+            RegistryKey packagesKey = root.CreateSubKey("packages");
+            foreach (KeyValuePair<Guid, VoodooPackage> packagePair in m_Packages)
+            {
+                RegistryKey packageKey = packagesKey.CreateSubKey(Convert.ToString(packagePair.Key));
+
+                foreach (VoodooProperty prop in packagePair.Value.Properties)
+                {
+                    packageKey.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
+                }
             }
 
             RegistryKey modulesKey = root.CreateSubKey("modules");
@@ -338,9 +414,9 @@ namespace VoodooNetClasses
             {
                 RegistryKey moduleKey = modulesKey.CreateSubKey(Convert.ToString(modulePair.Key));
 
-                foreach (KeyValuePair<String, String> prop in modulePair.Value.Properties)
+                foreach (VoodooProperty prop in modulePair.Value.Properties)
                 {
-                    moduleKey.SetValue(prop.Key, prop.Value, RegistryValueKind.String);
+                    moduleKey.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
                 }
             }
 
@@ -349,9 +425,9 @@ namespace VoodooNetClasses
             {
                 RegistryKey classKey = classesKey.CreateSubKey(Convert.ToString(classPair.Key));
 
-                foreach (KeyValuePair<String, String> prop in classPair.Value.Properties)
+                foreach (VoodooProperty prop in classPair.Value.Properties)
                 {
-                    classKey.SetValue(prop.Key, prop.Value, RegistryValueKind.String);
+                    classKey.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
                 }
             }
 
@@ -360,9 +436,9 @@ namespace VoodooNetClasses
             {
                 RegistryKey hookKey = hooksKey.CreateSubKey(hookPair.Key);
 
-                foreach (KeyValuePair<String, String> prop in hookPair.Value.Properties)
+                foreach (VoodooProperty prop in hookPair.Value.Properties)
                 {
-                    hookKey.SetValue(prop.Key, prop.Value, RegistryValueKind.String);
+                    hookKey.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
                 }
             }
         }
@@ -371,6 +447,16 @@ namespace VoodooNetClasses
         {
             TreeNode node = new TreeNode("Voodoo Registry");
             node.Tag = m_Props;
+
+            TreeNode remotesNode = node.Nodes.Add("remotes", "Remotes");
+            remotesNode.Tag = m_Remotes;
+
+            TreeNode packagesNode = node.Nodes.Add("packages", "Packages");
+            foreach (KeyValuePair<Guid, VoodooPackage> vpackage in m_Packages)
+            {
+                String name = Convert.ToString(vpackage.Key);
+                packagesNode.Nodes.Add(name, name).Tag = vpackage.Value.Properties;
+            }
 
             TreeNode modulesNode = node.Nodes.Add("modules", "Modules");
             foreach (KeyValuePair<Guid, VoodooModule> vmodule in m_Modules)
@@ -447,9 +533,9 @@ namespace VoodooNetClasses
 
         public bool AddHook(VoodooHook vhook)
         {
-            if (!m_Hooks.ContainsKey(vhook.Name))
+            if (!m_Hooks.ContainsKey(vhook.ID))
             {
-                m_Hooks.Add(vhook.Name, vhook);
+                m_Hooks.Add(vhook.ID, vhook);
                 return true;
             }
             else

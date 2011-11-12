@@ -92,8 +92,6 @@ namespace VoodooRegedit
 
         public void ExportRegistry(object sender, EventArgs e)
         {
-            SyncRows();
-
             // Actually export to the registry
             m_Registry = VoodooRegistry.FromTreeNode(RootNode);
 
@@ -112,41 +110,8 @@ namespace VoodooRegedit
 
         private void SelectNode(object sender, TreeViewCancelEventArgs e)
         {
-            SyncRows();
-
-            m_KeyGrid.Rows.Clear();
-
-            if (e.Node.Tag != null)
-            {
-                foreach (KeyValuePair<String, String> prop in e.Node.Tag as Dictionary<String, String>)
-                {
-                    m_KeyGrid.Rows.Add(prop.Key, prop.Value);
-                }
-            }
-        }
-
-        private void SyncRows()
-        {
-            if (m_KeyGrid.IsCurrentCellDirty)
-            {
-                m_KeyGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-
-            TreeNode node = m_RegistryTree.SelectedNode;
-
-            if (node != null)
-            {
-                Dictionary<String, String> props = new Dictionary<String, String>(m_KeyGrid.Rows.Count);
-
-                foreach (DataGridViewRow row in m_KeyGrid.Rows)
-                {
-                    String name = row.Cells[0].Value as String; if (name == null) { name = String.Empty; }
-                    String value = row.Cells[1].Value as String; if (value == null) { value = String.Empty; }
-                    props.Add(name, value);
-                }
-
-                node.Tag = props;
-            }
+            m_KeyGrid.AutoGenerateColumns = true;
+            m_KeyGrid.DataSource = e.Node.Tag;
         }
 
         private void Menu_Node_Edit(object sender, EventArgs e)
@@ -223,8 +188,9 @@ namespace VoodooRegedit
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-
                 String[] files = openFileDialog1.FileNames;
+
+                m_Registry = VoodooRegistry.FromTreeNode(RootNode);
 
                 foreach (String moduleFile in files)
                 {
@@ -235,31 +201,30 @@ namespace VoodooRegedit
                         String libid = Convert.ToString(version.LibID);
 
                         // Add module
-                        TreeNode modulesNode = m_RegistryTree.Nodes[0].Nodes["modules"];
 
-                        Dictionary<String, String> moduledata = new Dictionary<String, String>();
+                        List<VoodooProperty> moduledata = new List<VoodooProperty>(4);
 
-                        moduledata.Add("modulePath", moduleFile);
-                        moduledata.Add("configPath", String.Empty);
-                        moduledata.Add("remotePath", String.Empty);
-                        moduledata.Add("name", version.Name);
+                        moduledata.Add(new VoodooProperty("modulePath", moduleFile));
+                        moduledata.Add(new VoodooProperty("configPath", String.Empty));
+                        moduledata.Add(new VoodooProperty("remotePath", String.Empty));
+                        moduledata.Add(new VoodooProperty("name", version.Name));
 
-                        AddNodeTo(modulesNode, libid).Tag = moduledata;
+                        m_Registry.AddModule(new VoodooModule(version.LibID, moduledata));
 
                         // Add classes
-                        TreeNode classesNode = m_RegistryTree.Nodes[0].Nodes["classes"];
-
                         for (UInt32 i = 0; i < module.Count; ++i)
                         {
                             ClassInfo classinfo = module[i];
 
-                            Dictionary<String, String> classdata = new Dictionary<String, String>();
+                            List<VoodooProperty> classdata = new List<VoodooProperty>(2);
 
-                            classdata.Add("module", libid);
-                            classdata.Add("name", classinfo.Name);
+                            classdata.Add(new VoodooProperty("module", libid));
+                            classdata.Add(new VoodooProperty("name", classinfo.Name));
 
-                            AddNodeTo(classesNode, Convert.ToString(classinfo.ClsID)).Tag = classdata;
+                            m_Registry.AddClass(new VoodooClass(classinfo.ClsID, classdata));
                         }
+
+                        // Export again
                     }
                     catch (System.Exception ex)
                     {
@@ -267,8 +232,13 @@ namespace VoodooRegedit
                     }
                 }
 
-                m_Registry = VoodooRegistry.FromTreeNode(RootNode);
+                m_RegistryTree.Nodes[0] = RootNode = m_Registry.ToTreeNode();
             }
+        }
+
+        private void Menu_Xml_Import(object sender, EventArgs e)
+        {
+
         }
     }
 }

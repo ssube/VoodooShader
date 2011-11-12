@@ -134,12 +134,16 @@
     <None Include="Resources\table-delete-row.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\tag-import.png" />
+    <None Include="Resources\tag-export.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="voodoo-reg.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
