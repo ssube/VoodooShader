@@ -22,7 +22,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-LRESULT CALLBACK GlobalHookCb(__in  int nCode, __in  WPARAM wParam, __in  LPARAM lParam);
+LRESULT CALLBACK GlobalHookCb(_In_  int nCode, _In_  WPARAM wParam, _In_  LPARAM lParam);
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
 
@@ -37,3 +37,6 @@ bool WINAPI RemoveAllModules();
 /* Internal functions */
 bool WINAPI IsDllLoaded(_In_z_ LPTSTR name);
 bool WINAPI IsAnyDllLoaded(_In_z_ LPTSTR name[]);
+
+bool WINAPI SearchHooks(_In_z_ TCHAR * moduleName);
+bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key);

@@ -63,6 +63,7 @@
 
 #define VOODOO_META_STRING_NAME_BASIC(token) VOODOO_##token##_NAME VOODOO_META_DEBUG_STRING
 #define VOODOO_META_STRING_NAME_FULL(token)  VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING
+#define VOODOO_META_STRING_GITID(token)      VOODOO_##token##_GITID VOODOO_META_DEBUG_STRING
 
 /**
  * Creates a Version structure with data for the given module.

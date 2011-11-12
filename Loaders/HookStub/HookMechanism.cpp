@@ -56,20 +56,23 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
     } else {
         if (logOnce)
         {
+            logOnce = false;
+
             TCHAR moduleName[MAX_PATH];
             GetModuleFileName(GetModuleHandle(NULL), moduleName, MAX_PATH);
 
             TCHAR filePath[MAX_PATH];
             ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\processes.log"), filePath, MAX_PATH);
 
-            FILE * pf =nullptr;
+            std::wstring str = moduleName;
+            bool doHook = (gHooks.find(str) != gHooks.end());
+
+            FILE * pf = nullptr;
             if (_tfopen_s(&pf, filePath, TEXT("a")) == 0)
             {
-                _ftprintf_s(pf, TEXT("%s\n"), moduleName);
+                _ftprintf_s(pf, TEXT("%s = %s\n"), moduleName, ((doHook)?TEXT("true"):TEXT("false")));
                 fclose(pf);
             }
-
-            logOnce = false;
         }
 
         return CallNextHookEx(NULL, nCode, wParam, lParam);
@@ -153,5 +156,60 @@ bool WINAPI IsAnyDllLoaded(_In_z_ LPTSTR name[])
     {
         if (IsDllLoaded(name[i++])) return true;
     }
+    return false;
+}
+
+#define MAX_KEY_LENGTH 255
+
+bool WINAPI SearchHooks(_In_z_ TCHAR * moduleName)
+{
+    HKEY hookRoot = nullptr;
+
+    if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader\\Hooks"), 0, KEY_READ, &hookRoot) == ERROR_SUCCESS && hookRoot != nullptr)
+    {
+        SearchHooksInKey(moduleName, hookRoot);
+        RegCloseKey(hookRoot);
+    }
+
+    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("Software\\VoodooShader\\Hooks"), 0, KEY_READ, &hookRoot) == ERROR_SUCCESS && hookRoot != nullptr)
+    {
+        SearchHooksInKey(moduleName, hookRoot);
+        RegCloseKey(hookRoot);
+    }
+
+    return false;
+}
+
+bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key)
+{
+    DWORD index = 0, nameSize = MAX_KEY_LENGTH;
+    TCHAR hookID[MAX_KEY_LENGTH];
+
+    while (RegEnumKeyEx(key, index++, hookID, &nameSize, NULL, NULL, NULL, NULL) == ERROR_SUCCESS)
+    {
+        HKEY hookKey = nullptr;
+
+        if (RegOpenKeyEx(key, hookID, 0, KEY_READ, &hookKey) == ERROR_SUCCESS)
+        {
+            DWORD valueType = 0, valueSize = 1024;
+            TCHAR valueBuffer[1024];
+
+            if (RegQueryValueEx(hookKey, TEXT("target"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
+            {
+                OutputDebugString(moduleName);
+                if (_tcscmp(moduleName, valueBuffer) == 0)
+                {
+                    OutputDebugString(TEXT(" == "));
+                } else {
+                    OutputDebugString(TEXT(" != "));
+                }
+                OutputDebugString(valueBuffer);
+                OutputDebugString(TEXT("\n"));
+            }
+
+            RegCloseKey(hookKey);
+        }
+    }
+
     return false;
 }
