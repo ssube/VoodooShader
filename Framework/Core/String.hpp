@@ -317,14 +317,14 @@ namespace VoodooShader
         static String FormatV(_In_z_ _Printf_format_string_ const wchar_t * fmt, _In_opt_ va_list args);
         inline static String FormatV(_In_ _Printf_format_string_ const String & fmt, va_list args)
         {
-            return String::FormatV(fmt.GetData(), args);
+            return FormatV(fmt.GetData(), args);
         };
 
         inline static String Format(_In_z_ _Printf_format_string_ const wchar_t * fmt, ...)
         {
             va_list args;
             va_start(args, fmt);
-            String str = String::FormatV(fmt, args);
+            String str = FormatV(fmt, args);
             va_end(args);
             return str;
         };
@@ -333,7 +333,7 @@ namespace VoodooShader
         {
             va_list args;
             va_start(args, fmt);
-            String str = String::FormatV(fmt.GetData(), args);
+            String str = FormatV(fmt.GetData(), args);
             va_end(args);
             return str;
         };

@@ -23,16 +23,10 @@
 #include <tchar.h>
 #include <stdio.h>
 
-#include <set>
-#include <string>
-
 HINSTANCE gHookLoader = nullptr;
 HHOOK gGlobalHook = nullptr;
-bool logOnce = true;
+unsigned int gLoadOnce = 1;
 HANDLE gSharedMemory;
-
-typedef std::set<std::wstring> HookSet;
-HookSet gHooks;
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
 {
@@ -54,24 +48,26 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
     {
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     } else {
-        if (logOnce)
+        if (nCode == HCBT_CREATEWND)
         {
-            logOnce = false;
-
-            TCHAR moduleName[MAX_PATH];
-            GetModuleFileName(GetModuleHandle(NULL), moduleName, MAX_PATH);
-
-            TCHAR filePath[MAX_PATH];
-            ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\processes.log"), filePath, MAX_PATH);
-
-            std::wstring str = moduleName;
-            bool doHook = (gHooks.find(str) != gHooks.end());
-
-            FILE * pf = nullptr;
-            if (_tfopen_s(&pf, filePath, TEXT("a")) == 0)
+            if (InterlockedCompareExchange(&gLoadOnce, 0, 1) == 1)
             {
-                _ftprintf_s(pf, TEXT("%s = %s\n"), moduleName, ((doHook)?TEXT("true"):TEXT("false")));
-                fclose(pf);
+                gLoadOnce = false;
+
+                TCHAR moduleName[MAX_PATH];
+                GetModuleFileName(GetModuleHandle(NULL), moduleName, MAX_PATH);
+
+                TCHAR filePath[MAX_PATH];
+                ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\processes.log"), filePath, MAX_PATH);
+
+                bool doHook = SearchHooks(moduleName);
+
+                FILE * pf = nullptr;
+                if (_tfopen_s(&pf, filePath, TEXT("a")) == 0)
+                {
+                    _ftprintf_s(pf, TEXT("%s = %s\n"), moduleName, ((doHook)?TEXT("true"):TEXT("false")));
+                    fclose(pf);
+                }
             }
         }
 
@@ -86,20 +82,16 @@ bool WINAPI InstallGlobalHook()
         gGlobalHook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
         if (!gGlobalHook)
         {
-            //DWORD error = GetLastError();
+            DWORD error = GetLastError();
+
+            TCHAR buffer[1024];
+            if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER, 0, error, LANG_USER_DEFAULT, buffer, 1024, NULL) > 0)
+            {
+                MessageBox(NULL, buffer, TEXT("Voodoo Stub Error (IGH)"), MB_OK);
+            }
             return false;
         }
     }
-
-    /*
-    gSharedMemory = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, sizeof(void*), TEXT("Global\\VoodooHookObject"));
-    if (gSharedMemory == NULL)
-    {
-        return false;
-    }
-
-    LPVOID pBuffer = MapViewOfFile(gSharedMemory, FILE_MAP_ALL_ACCESS, 0, 0, BUF_SIZE);
-    */
 
     return true;
 }
@@ -111,52 +103,19 @@ bool WINAPI RemoveGlobalHook()
         BOOL success = UnhookWindowsHookEx(gGlobalHook);
         if (success == 0)
         {
-            //DWORD error = GetLastError();
+            DWORD error = GetLastError();
+
+            TCHAR buffer[1024];
+            if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER, 0, error, LANG_USER_DEFAULT, buffer, 1024, NULL) > 0)
+            {
+                MessageBox(NULL, buffer, TEXT("Voodoo Stub Error (RGH)"), MB_OK);
+            }
+
             return false;
         }
     }
 
     return true;
-}
-
-bool WINAPI AddModule(_In_z_ LPTSTR name)
-{
-    std::pair<HookSet::iterator, bool> insertPoint = gHooks.insert(name);
-    return (insertPoint.second);
-}
-
-bool WINAPI RemoveModule(_In_z_ LPTSTR name)
-{
-    HookSet::iterator iter = gHooks.find(name);
-    if (iter != gHooks.end())
-    {
-        gHooks.erase(iter);
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool WINAPI RemoveAllModules()
-{
-    gHooks.clear();
-    return true;
-}
-
-bool WINAPI IsDllLoaded(_In_z_ LPTSTR name)
-{
-    HMODULE module = GetModuleHandle(name);
-    return (module != NULL);
-}
-
-bool WINAPI IsAnyDllLoaded(_In_z_ LPTSTR name[])
-{
-    int i = 0;
-    while (name[i])
-    {
-        if (IsDllLoaded(name[i++])) return true;
-    }
-    return false;
 }
 
 #define MAX_KEY_LENGTH 255

@@ -23,6 +23,11 @@
 
 #include "Regex.hpp"
 
+using std::wregex;
+using std::regex_match;
+using std::regex_search;
+using std::regex_replace;
+
 namespace VoodooShader
 {
     class Regex::RegexImpl
@@ -33,11 +38,11 @@ namespace VoodooShader
         { };
 
         RegexImpl(String expr)
-            : m_Regex(expr.GetData()), m_Expr(expr)
+            : m_Regex(expr.GetData(), wregex::ECMAScript), m_Expr(expr)
         { };
 
     public:
-        std::wregex m_Regex;
+        wregex m_Regex;
         String m_Expr;
     };
 
@@ -68,16 +73,16 @@ namespace VoodooShader
 
     bool Regex::Match(const String & string) const
     {
-        return std::regex_match(string.ToString(), m_Impl->m_Regex);
+        return regex_match(string.ToString(), m_Impl->m_Regex);
     }
 
     bool Regex::Find(const String & find) const
     {
-        return std::regex_search(find.ToString(), m_Impl->m_Regex);
+        return regex_search(find.ToString(), m_Impl->m_Regex);
     }
 
     String Regex::Replace(const String & find, const String & replace) const
     {
-        return std::regex_replace(find.ToString(), m_Impl->m_Regex, replace.ToString());
+        return regex_replace(find.ToString(), m_Impl->m_Regex, replace.ToString());
     }
 }

@@ -30,13 +30,6 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
 bool WINAPI InstallGlobalHook();
 bool WINAPI RemoveGlobalHook();
 
-bool WINAPI AddModule(_In_z_ LPTSTR name);
-bool WINAPI RemoveModule(_In_z_ LPTSTR name);
-bool WINAPI RemoveAllModules();
-
 /* Internal functions */
-bool WINAPI IsDllLoaded(_In_z_ LPTSTR name);
-bool WINAPI IsAnyDllLoaded(_In_z_ LPTSTR name[]);
-
 bool WINAPI SearchHooks(_In_z_ TCHAR * moduleName);
 bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key);

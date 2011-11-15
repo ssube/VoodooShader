@@ -70,7 +70,6 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "BuildID", VOODOO_META_STRING_GITID(CORE)
             VALUE "FileDescription", VOODOO_META_STRING_NAME_FULL(CORE)
             VALUE "FileVersion", VOODOO_META_STRING_VERSION_BASIC(CORE)
             VALUE "InternalName", VOODOO_META_STRING_NAME_BASIC(CORE)
@@ -78,6 +77,7 @@ BEGIN
             VALUE "OriginalFilename", "Voodoo_Core.dll"
             VALUE "ProductName", VOODOO_META_STRING_NAME_FULL(GLOBAL)
             VALUE "ProductVersion", VOODOO_META_STRING_VERSION_BASIC(GLOBAL)
+            VALUE "BuildID", VOODOO_META_STRING_GITID(CORE)
         END
     END
     BLOCK "VarFileInfo"

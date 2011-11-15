@@ -77,7 +77,7 @@ namespace VoodooShader
     }
 
     VSCore::VSCore(_In_ const InitParams * const pInitParams) :
-        m_Refs(0), m_CgContext(nullptr), m_ConfigFile(nullptr)
+        m_Refs(0), m_ConfigFile(nullptr), m_CgContext(nullptr)
     {
         if (!pInitParams)
         {
