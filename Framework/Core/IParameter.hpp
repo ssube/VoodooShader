@@ -81,7 +81,7 @@ namespace VoodooShader
          *
          * @note This will have different meanings depending on parameter type:
          *     @li For a texture, this represents the number of dimensions (2 for texture2D).
-         *     @li For a vector or matrix, this represents the raw number of components (2 for float2, 4 for float2x2, etc).
+         *     @li For a vector or matrix, this represents the raw number of components (2 for Float2, 4 for Float2x2, etc).
          *     @li For an array, this represents the number of elements in the array (2 for Light[2]).
          *     @li Structs and other types that do not also match one of the above will always return -1.
          */
@@ -98,7 +98,7 @@ namespace VoodooShader
 
         /**
          * Retrieves the float buffer for this parameter. This contains all 16 float
-         * components, for all sizes (float1 to float4x4). Any component may be written
+         * components, for all sizes (float1 to Float4x4). Any component may be written
          * to, but only the appropriate number will be sent to the Cg parameter.
          */
         _Ret_count_c_(16) virtual float * const GetScalar(void) throw() = 0;

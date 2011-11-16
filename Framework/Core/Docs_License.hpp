@@ -128,11 +128,11 @@ namespace VoodooShader
      *
      * Any trademarks or company names used in this documentation or the Voodoo framework are the property of their
      * respective owner(s). This includes nVidia, Cg, Windows and any other such content.
-     * 
+     *
      * @section voodoo_license_fugueicons Fugue icons License
-     * 
-     * Some icons are taken from <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>'s Fugue icon packs. All 
-     * rights reserved. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 
+     *
+     * Some icons are taken from <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>'s Fugue icon packs. All
+     * rights reserved. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution
      * 3.0 license</a>.
      *
      * @section voodoo_license_pugixml pugixml License

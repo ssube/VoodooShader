@@ -139,10 +139,11 @@ namespace VoodooShader
         return nullptr;
     }
 
-    void VSAdapter::DrawGeometry(const uint32_t count, const VertexStruct * const pVertexData)
+    void VSAdapter::DrawGeometry(const uint32_t count, const VertexStruct * const pVertexData, const VertexFlags flags)
     {
         UNREFERENCED_PARAMETER(count);
         UNREFERENCED_PARAMETER(pVertexData);
+        UNREFERENCED_PARAMETER(flags);
     }
 
     void VSAdapter::DrawShader(IShader * const pShader)

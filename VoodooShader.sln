@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{093207D3-D
 	ProjectSection(SolutionItems) = preProject
 		CREDITS.md = CREDITS.md
 		Docs\Doxyfile = Docs\Doxyfile
-		kwstyle.xml = kwstyle.xml
 		LICENSE = LICENSE
 		README.md = README.md
 		voodoo_uuids.md = voodoo_uuids.md
@@ -390,9 +389,9 @@ Global
 		{23A55269-F7A0-48AF-9392-6A3CA217BE37} = {487C384B-0E7D-4E24-A99F-8E3C8E3EDA4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

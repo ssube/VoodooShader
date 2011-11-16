@@ -155,11 +155,13 @@ namespace VoodooShader
          *
          * @param count The number of vertexes to draw.
          * @param pVertexData This must contain vertex data for the given number of verts.
+         * @param flags Vertex flags for this data set, particularly whether the verts are pretransformed.
          */
         virtual void DrawGeometry
         (
             _In_ const uint32_t count,
-            _In_count_(count) const VertexStruct * const pVertexData
+            _In_count_(count) const VertexStruct * const pVertexData,
+            _In_ const VertexFlags flags = VF_Transformed
         ) throw() = 0;
 
         /**
@@ -180,10 +182,10 @@ namespace VoodooShader
          *
          * @note Adapters may define the meaning of any properties not given in the core adapter specification. Adapters may
          *     require a specific format or form for properties.
-         *     
+         *
          * @note To allow for significant variations in property setups and allow for use outside of the framework
          *      (particularly from the loader), this function takes the name as a basic string and a variant for the value.
-         *     
+         *
          * @warning Adapters <b>may</b> change values stored in the variant given. However, they must return true if so, and
          *      must verify the type is correct.
          */
