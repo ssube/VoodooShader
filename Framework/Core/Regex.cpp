@@ -42,7 +42,6 @@ namespace VoodooShader
 
     public:
         boost::wregex m_Regex;
-        String m_Expr;
     };
 
     class RegexMatch::RegexMatchImpl
@@ -65,7 +64,7 @@ namespace VoodooShader
         m_Impl = new RegexImpl();
     }
 
-    Regex::Regex(String expr)
+    Regex::Regex(const String & expr)
     {
         m_Impl = new RegexImpl(expr);
     }
@@ -75,14 +74,14 @@ namespace VoodooShader
         delete m_Impl;
     }
 
-    void Regex::SetExpr(String expr)
+    void Regex::SetExpr(const String & expr)
     {
-        m_Impl->m_Expr = expr;
+        m_Impl->m_Regex.set_expression(expr.ToString());
     }
 
     String Regex::GetExpr() const
     {
-        return m_Impl->m_Expr;
+        return String(m_Impl->m_Regex.str());
     }
 
     RegexMatch Regex::Match(const String & string) const

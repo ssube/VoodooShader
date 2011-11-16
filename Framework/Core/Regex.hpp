@@ -36,10 +36,6 @@ namespace VoodooShader
      * Voodoo internal regex class, providing constant and compiler-safe regex handling between modules. This internally
      * uses <a href="http://www.boost.org/doc/libs/1_48_0/libs/regex/doc/html/index.html">Boost.Regex</a> in extended-syntax
      * mode for both expressions and match formatting.
-     *
-     * @warning This @b must use the MSVC wchar_t type, or bad things will happen. <b>GCC does not properly handle
-     *      Unicode strings and will not provide valid inputs for these functions.</b>
-     *
      */
     class VOODOO_API Regex
     {
@@ -51,9 +47,18 @@ namespace VoodooShader
          * @ingroup voodoo_utility_regex
          * @{
          */
-        Regex();
 
-        Regex(String expr);
+        /**
+         * Creates an empty regular expression.
+         */
+        Regex();
+        
+        /**
+         * Creates a regular expression from the given string, using extended syntax.
+         *
+         * @param expr The string to use.
+         */
+        Regex(const String & expr);
         /**
          * @}
          */
@@ -65,25 +70,53 @@ namespace VoodooShader
          * @ingroup voodoo_utility_regex
          * @{
          */
-        void SetExpr(String expr) throw();
 
+        /**
+         * Sets the internal expression and recompiles.
+         *
+         * @param expr The string to use.
+         */
+        void SetExpr(const String & expr) throw();
+
+        /**
+         * Retrieve the current expression.
+         *
+         * @return The expression string.
+         */
         String GetExpr() const throw();
+
         /**
          * @}
          * 
          * @addtogroup voodoo_utility_regex_expr Regex expression
          * @ingroup voodoo_utility_regex
          * @{
+         */
+
+        /**
+         * Attempt to match the given string against the stored expression.
+         *
+         * @param string The string to search.
+         * @return A RegexMatch for all match groups.
          */
         RegexMatch Match(const String & string) const throw();
+
         /**
          * @}
          * 
          * @addtogroup voodoo_utility_regex_expr Regex expression
          * @ingroup voodoo_utility_regex
          * @{
+         */
+        
+        /**
+         * Test if the given string is matched by the expression.
+         *
+         * @param find The string to search.
+         * @return True if the expression matches the string in full.
          */
         bool Find(const String & find) const throw();
+
         /**
          * @}
          * 
@@ -91,7 +124,17 @@ namespace VoodooShader
          * @ingroup voodoo_utility_regex
          * @{
          */
+        
+        /**
+         * Perform a find and replace on all segments which this regex matches. Matches are replaced using the same rules as
+         * RegexMatch::Replace().
+         *
+         * @param find The string to search.
+         * @param replace The replace format string.
+         * @return A copy of find with all matches replaced.
+         */
         String Replace(const String & find, const String & replace) const throw();
+
         /**
          * @}
          */
@@ -99,7 +142,14 @@ namespace VoodooShader
     private:
         RegexImpl * m_Impl;
     };
-
+    
+    /**
+     * @addtogroup voodoo_utility_regex Voodoo Regex
+     * @ingroup voodoo_utility
+     * 
+     * Voodoo internal regex match class, encapsulating matches found by @ref Regex. This class provides methods to read
+     * each match group, or use them as arguments to a formatted string.
+     */
     class VOODOO_API RegexMatch
     {
         class RegexMatchImpl;
@@ -145,6 +195,7 @@ namespace VoodooShader
 
         RegexMatchImpl * m_Impl;
     };
+
     /**
      * @}
      */
