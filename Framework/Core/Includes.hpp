@@ -540,7 +540,7 @@ namespace VoodooShader
             String *    VString;
             IObject *   VIObject;
             void *      VPVoid;
-        };
+        } Value;
     };
 
     struct Float2
@@ -561,7 +561,7 @@ namespace VoodooShader
     };
 
     /**
-     * Standard vertex structure. 
+     * Standard vertex structure.
      */
     struct VertexStruct
     {

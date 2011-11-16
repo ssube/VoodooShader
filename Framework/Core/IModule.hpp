@@ -67,15 +67,15 @@ namespace VoodooShader
          * Loads a single module, using an absolute or relative filename.
          *
          * @param filename The file to load, sent through the parser before use.
-         * 
+         *
          * @note If a relative path is provided, this will canonicalize that path relative to Voodoo's global root. For
          *      example, the call will be loaded as:
-         *      @code 
+         *      @code
          *      Call: IModuleManager->LoadFile("../Library.dll");
          *      Absolute: Canonicalize("$(globalroot)\\bin\\../Library.dll");
          *      Parsed: Canonicalize("C:\\Voodoo\\bin\\../Library.dll");
          *      Final: "C:\\Voodoo\\Library.dll";
-         *      @code 
+         *      @code
          *      Among other things, this guarantees an absolute path for use when searching for dependencies.
          *
          * @note The module's directory is used in the search path for required DLLs. The search path, through this method,
@@ -86,7 +86,7 @@ namespace VoodooShader
          *      @li The 16-bit system directory.
          *      @li The Windows directory.
          *      @li All directories listed in the PATH environment variable, in order.
-         *            
+         *
          */
         virtual bool LoadFile(_In_ const String & filename) = 0;
 

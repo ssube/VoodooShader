@@ -32,7 +32,7 @@ namespace VoodooShader
     /**
      * @addtogroup voodoo_utility_regex Voodoo Regex
      * @ingroup voodoo_utility
-     * 
+     *
      * Voodoo internal regex class, providing constant and compiler-safe regex handling between modules. This internally
      * uses <a href="http://www.boost.org/doc/libs/1_48_0/libs/regex/doc/html/index.html">Boost.Regex</a> in extended-syntax
      * mode for both expressions and match formatting.
@@ -87,7 +87,7 @@ namespace VoodooShader
 
         /**
          * @}
-         * 
+         *
          * @addtogroup voodoo_utility_regex_expr Regex expression
          * @ingroup voodoo_utility_regex
          * @{
@@ -103,7 +103,7 @@ namespace VoodooShader
 
         /**
          * @}
-         * 
+         *
          * @addtogroup voodoo_utility_regex_expr Regex expression
          * @ingroup voodoo_utility_regex
          * @{
@@ -119,7 +119,7 @@ namespace VoodooShader
 
         /**
          * @}
-         * 
+         *
          * @addtogroup voodoo_utility_regex_expr Regex expression
          * @ingroup voodoo_utility_regex
          * @{
@@ -146,7 +146,7 @@ namespace VoodooShader
     /**
      * @addtogroup voodoo_utility_regex Voodoo Regex
      * @ingroup voodoo_utility
-     * 
+     *
      * Voodoo internal regex match class, encapsulating matches found by @ref Regex. This class provides methods to read
      * each match group, or use them as arguments to a formatted string.
      */
@@ -162,21 +162,21 @@ namespace VoodooShader
 
         /**
          * Gets the number of submatches in this match.
-         * 
+         *
          * @return Total number of matches.
          */
         uint32_t GetCount() const throw();
 
         /**
          * Check if any matches were found.
-         * 
+         *
          * @return True if any matches are contained.
          */
         bool IsEmpty() const throw();
 
         /**
          * Retrieve a particular match within this group.
-         * 
+         *
          * @return The specified submatch.
          */
         String GetMatch(uint32_t index) const throw();
@@ -184,7 +184,7 @@ namespace VoodooShader
         /**
          * Formats the found submatches into an output string. This uses the <code>$0</code> syntax to perform formatting,
          * all other text is copied.
-         * 
+         *
          * @param fmt The format string to use.
          * @return A formatted copy using the submatches.
          */

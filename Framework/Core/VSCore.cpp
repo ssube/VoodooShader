@@ -304,7 +304,7 @@ namespace VoodooShader
 
         m_ModuleManager = nullptr;
 
-        if (m_ConfigFile) 
+        if (m_ConfigFile)
         {
             delete m_ConfigFile;
         }
