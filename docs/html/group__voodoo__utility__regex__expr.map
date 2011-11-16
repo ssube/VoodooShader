@@ -1,4 +1,3 @@
 <map id="structs" name="structs">
-<area shape="rect" id="node1" href="$group__voodoo__utility.html" title="Voodoo Utility" alt="" coords="7,5,110,32"/>
-<area shape="rect" id="node2" href="$group__voodoo__utility__regex.html" title="Voodoo Regex" alt="" coords="5,56,112,83"/>
+<area shape="rect" id="node1" href="$group__voodoo__utility__regex.html" title="Voodoo internal regex class, providing constant and compiler&#45;safe regex handling between modules..." alt="" coords="5,5,112,32"/>
 </map>

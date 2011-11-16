@@ -19,12 +19,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-35-g6e01306</span>
+   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -92,299 +92,299 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00040"></a><a class="code" href="class_voodoo_shader_1_1_string.html">00040</a>     <span class="keyword">class </span><a class="code" href="_includes_8hpp.html#a64a3622e4b9bb13e6e7a451bfaa84a48">VOODOO_API</a> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>
-<a name="l00041"></a>00041     {
-<a name="l00042"></a>00042         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a>;
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044     <span class="keyword">public</span>:
-<a name="l00054"></a>00054         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>();
-<a name="l00055"></a>00055 
-<a name="l00060"></a>00060         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">char</span> ch);
-<a name="l00061"></a>00061 
-<a name="l00066"></a>00066         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_z_ <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
-<a name="l00067"></a>00067 
-<a name="l00073"></a>00073         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">char</span> ch);
-<a name="l00074"></a>00074 
-<a name="l00080"></a>00080         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
-<a name="l00081"></a>00081 
-<a name="l00086"></a>00086         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00087"></a>00087 
-<a name="l00092"></a>00092         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00093"></a>00093 
-<a name="l00099"></a>00099         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00100"></a>00100 
-<a name="l00106"></a>00106         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00107"></a>00107 
-<a name="l00113"></a>00113         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str);
-<a name="l00114"></a>00114 
-<a name="l00119"></a>00119         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; uuid);
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121 <span class="preprocessor">#ifdef _VECTOR_</span>
-<a name="l00122"></a>00122 <span class="preprocessor"></span>
-<a name="l00126"></a>00126         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> std::vector&lt;char&gt; &amp; vec) :
-<a name="l00127"></a>00127             m_Impl(<span class="keyword">nullptr</span>)
-<a name="l00128"></a>00128         {
-<a name="l00129"></a>00129             this-&gt;CInit(0, &amp;vec[0]);
-<a name="l00130"></a>00130         }
-<a name="l00131"></a>00131 
-<a name="l00136"></a>00136         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> std::vector&lt;wchar_t&gt; &amp; vec) :
-<a name="l00137"></a>00137             m_Impl(<span class="keyword">nullptr</span>)
-<a name="l00138"></a>00138         {
-<a name="l00139"></a>00139             this-&gt;WInit(0, &amp;vec[0]);
-<a name="l00140"></a>00140         }
-<a name="l00141"></a>00141 <span class="preprocessor">#endif</span>
-<a name="l00142"></a>00142 <span class="preprocessor"></span>
-<a name="l00143"></a>00143 <span class="preprocessor">#ifdef _STRING_</span>
-<a name="l00144"></a>00144 <span class="preprocessor"></span>
-<a name="l00148"></a>00148         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> std::string &amp; str) :
-<a name="l00149"></a>00149             m_Impl(<span class="keyword">nullptr</span>)
-<a name="l00150"></a>00150         {
-<a name="l00151"></a>00151             this-&gt;CInit(0, str.c_str());
-<a name="l00152"></a>00152         }
-<a name="l00153"></a>00153 
-<a name="l00158"></a>00158         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> std::wstring &amp; str) :
-<a name="l00159"></a>00159             m_Impl(<span class="keyword">nullptr</span>)
-<a name="l00160"></a>00160         {
-<a name="l00161"></a>00161             this-&gt;WInit(0, str.c_str());
-<a name="l00162"></a>00162         };
-<a name="l00163"></a>00163 <span class="preprocessor">#endif</span>
-<a name="l00164"></a>00164 <span class="preprocessor"></span>
-<a name="l00168"></a>00168         ~<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>();
-<a name="l00169"></a>00169 
-<a name="l00189"></a>00189         <span class="keywordtype">bool</span> ToUuid(_Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid) <span class="keyword">const</span>;
-<a name="l00190"></a>00190 
-<a name="l00200"></a>00200         int32_t ToCharStr(_In_ int32_t size, _Inout_opt_count_(size) <span class="keywordtype">char</span> * <span class="keyword">const</span> pBuffer) <span class="keyword">const</span>;
-<a name="l00201"></a>00201 
-<a name="l00202"></a>00202 <span class="preprocessor">#ifdef _STRING_</span>
-<a name="l00203"></a>00203 <span class="preprocessor"></span>
-<a name="l00208"></a>00208         std::wstring ToString()<span class="keyword"> const</span>
-<a name="l00209"></a>00209 <span class="keyword">        </span>{
-<a name="l00210"></a>00210             <span class="keywordflow">return</span> std::wstring(this-&gt;GetData());
-<a name="l00211"></a>00211         };
-<a name="l00212"></a>00212 <span class="preprocessor">#endif</span>
-<a name="l00213"></a>00213 <span class="preprocessor"></span>
-<a name="l00222"></a>00222         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00223"></a>00223         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00224"></a>00224         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00225"></a>00225         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00226"></a>00226         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str);
-<a name="l00227"></a>00227         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00228"></a>00228         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00229"></a>00229         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00230"></a>00230         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00231"></a>00231         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str);
-<a name="l00232"></a>00232         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Clear();
-<a name="l00233"></a>00233         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00234"></a>00234         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00235"></a>00235         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00236"></a>00236         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00237"></a>00237         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str);
-<a name="l00238"></a>00238         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Truncate(_In_ uint32_t size);
-<a name="l00248"></a>00248         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> ToLower() <span class="keyword">const</span>;
-<a name="l00249"></a>00249         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> ToUpper() <span class="keyword">const</span>;
-<a name="l00259"></a>00259         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Left(_In_ uint32_t count) <span class="keyword">const</span>;
-<a name="l00260"></a>00260         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Right(_In_ uint32_t count) <span class="keyword">const</span>;
-<a name="l00261"></a>00261         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Substr(_In_ uint32_t start, _In_ uint32_t count = <a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">String::Npos</a>) <span class="keyword">const</span>;
-<a name="l00271"></a>00271         <span class="keywordtype">bool</span> Compare(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00272"></a>00272         <span class="keywordtype">bool</span> Compare(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00273"></a>00273         <span class="keywordtype">bool</span> Compare(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00274"></a>00274         <span class="keywordtype">bool</span> StartsWith(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00275"></a>00275         <span class="keywordtype">bool</span> StartsWith(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00276"></a>00276         <span class="keywordtype">bool</span> StartsWith(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00277"></a>00277         <span class="keywordtype">bool</span> EndsWith(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00278"></a>00278         <span class="keywordtype">bool</span> EndsWith(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00279"></a>00279         <span class="keywordtype">bool</span> EndsWith(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00280"></a>00280         <span class="keywordtype">bool</span> Contains(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00281"></a>00281         <span class="keywordtype">bool</span> Contains(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00282"></a>00282         <span class="keywordtype">bool</span> Contains(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00292"></a>00292         uint32_t Find(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00293"></a>00293         uint32_t Find(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00294"></a>00294         uint32_t Find(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00295"></a>00295         uint32_t ReverseFind(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00296"></a>00296         uint32_t ReverseFind(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00297"></a>00297         uint32_t ReverseFind(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00298"></a>00298         
-<a name="l00299"></a>00299         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Replace(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> fch, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> rch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00300"></a>00300         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Replace(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, _In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * rstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00301"></a>00301         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Replace(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fstr, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; rstr, _In_ <span class="keywordtype">bool</span> caseSensitive = <span class="keyword">true</span>);
-<a name="l00302"></a>00302         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Remove(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> fch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00303"></a>00303         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Remove(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00304"></a>00304         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Remove(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00317"></a>00317         <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> FormatV(_In_z_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, _In_opt_ va_list args);
-<a name="l00318"></a><a class="code" href="group__voodoo__utility__string__format.html#gad43c9efc155208ff8b4a6d8cb2035e7e">00318</a>         <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> FormatV(_In_ _Printf_format_string_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fmt, va_list args)
-<a name="l00319"></a>00319         {
-<a name="l00320"></a>00320             <span class="keywordflow">return</span> FormatV(fmt.GetData(), args);
-<a name="l00321"></a>00321         };
-<a name="l00322"></a>00322 
-<a name="l00323"></a><a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">00323</a>         <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Format(_In_z_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, ...)
-<a name="l00324"></a>00324         {
-<a name="l00325"></a>00325             va_list args;
-<a name="l00326"></a>00326             va_start(args, fmt);
-<a name="l00327"></a>00327             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> str = FormatV(fmt, args);
-<a name="l00328"></a>00328             va_end(args);
-<a name="l00329"></a>00329             <span class="keywordflow">return</span> str;
-<a name="l00330"></a>00330         };
-<a name="l00331"></a>00331 
-<a name="l00332"></a><a class="code" href="group__voodoo__utility__string__format.html#gabbf3713e4292911cc4543f7796915216">00332</a>         <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Format(_In_ _Printf_format_string_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fmt, ...)
-<a name="l00333"></a>00333         {
-<a name="l00334"></a>00334             va_list args;
-<a name="l00335"></a>00335             va_start(args, fmt);
-<a name="l00336"></a>00336             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> str = FormatV(fmt.GetData(), args);
-<a name="l00337"></a>00337             va_end(args);
-<a name="l00338"></a>00338             <span class="keywordflow">return</span> str;
-<a name="l00339"></a>00339         };
-<a name="l00340"></a>00340 
-<a name="l00341"></a><a class="code" href="group__voodoo__utility__string__format.html#gaf6d63d2a9b51084ed48950e2d9050232">00341</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; AppendFormat(_In_z_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, ...)
-<a name="l00342"></a>00342         {
-<a name="l00343"></a>00343             va_list args;
-<a name="l00344"></a>00344             va_start(args, fmt);
-<a name="l00345"></a>00345             this-&gt;Append(<a class="code" href="group__voodoo__utility__string__format.html#gae5bed9f0946772f062c84d36efc7df48">String::FormatV</a>(fmt, args));
-<a name="l00346"></a>00346             va_end(args);
-<a name="l00347"></a>00347             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00348"></a>00348         };
-<a name="l00349"></a>00349 
-<a name="l00350"></a><a class="code" href="group__voodoo__utility__string__format.html#ga8ce509c7508837fa59392fef17021945">00350</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; AppendFormat(_In_ _Printf_format_string_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fmt, ...)
-<a name="l00351"></a>00351         {
-<a name="l00352"></a>00352             va_list args;
-<a name="l00353"></a>00353             va_start(args, fmt);
-<a name="l00354"></a>00354             this-&gt;Append(<a class="code" href="group__voodoo__utility__string__format.html#gae5bed9f0946772f062c84d36efc7df48">String::FormatV</a>(fmt.GetData(), args));
-<a name="l00355"></a>00355             va_end(args);
-<a name="l00356"></a>00356             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00357"></a>00357         };
-<a name="l00362"></a>00362         <span class="comment">// Buffer info/access</span>
-<a name="l00363"></a>00363         uint32_t GetLength() <span class="keyword">const</span>;
-<a name="l00364"></a>00364         <span class="keywordtype">bool</span> IsEmpty() <span class="keyword">const</span>;
-<a name="l00365"></a>00365 
-<a name="l00366"></a>00366         <span class="keywordtype">wchar_t</span> GetAt(_In_ uint32_t pos) <span class="keyword">const</span>;
-<a name="l00367"></a>00367         <span class="keywordtype">wchar_t</span> &amp; operator[](_In_ uint32_t pos);
-<a name="l00368"></a>00368         <span class="keywordtype">void</span> SetAt(_In_ uint32_t pos, _In_ <span class="keywordtype">wchar_t</span> data);
-<a name="l00369"></a>00369 
-<a name="l00370"></a>00370         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * GetData() <span class="keyword">const</span>;
-<a name="l00371"></a>00371 
-<a name="l00372"></a>00372 <span class="preprocessor">#ifdef _STRING_</span>
-<a name="l00373"></a>00373 <span class="preprocessor"></span>        <span class="keyword">inline</span> std::wstring ToStdString()<span class="keyword"> const</span>
-<a name="l00374"></a>00374 <span class="keyword">        </span>{
-<a name="l00375"></a>00375             <span class="keywordflow">return</span> std::wstring(this-&gt;GetData());
-<a name="l00376"></a>00376         };
-<a name="l00377"></a>00377 <span class="preprocessor">#endif</span>
-<a name="l00378"></a>00378 <span class="preprocessor"></span>
-<a name="l00379"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a9d4f0e6645ffe3ec2a7ed118111ba359">00379</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator=(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
-<a name="l00380"></a>00380         {
-<a name="l00381"></a>00381             this-&gt;Assign(ch);
-<a name="l00382"></a>00382             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00383"></a>00383         };
-<a name="l00384"></a>00384 
-<a name="l00385"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a5c4ce21221b2f1c707cd709305f72a37">00385</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
-<a name="l00386"></a>00386         {
-<a name="l00387"></a>00387             this-&gt;Assign(str);
-<a name="l00388"></a>00388             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00389"></a>00389         };
-<a name="l00390"></a>00390 
-<a name="l00391"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a87b902110c8d034b36247bb0ab54a55e">00391</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)
-<a name="l00392"></a>00392         {
-<a name="l00393"></a>00393             this-&gt;Assign(str);
-<a name="l00394"></a>00394             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00395"></a>00395         };
-<a name="l00396"></a>00396 
-<a name="l00397"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a711cd1e78848cabcbefd208e81ace608">00397</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator+=(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
-<a name="l00398"></a>00398         {
-<a name="l00399"></a>00399             this-&gt;Append(ch);
-<a name="l00400"></a>00400             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00401"></a>00401         };
-<a name="l00402"></a>00402 
-<a name="l00403"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a35dcdcaa76a2b48f49066f52d7550341">00403</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator+=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
-<a name="l00404"></a>00404         {
-<a name="l00405"></a>00405             this-&gt;Append(str);
-<a name="l00406"></a>00406             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00407"></a>00407         };
-<a name="l00408"></a>00408 
-<a name="l00409"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a37bdfddd7e8a8c0cf124f89ae3737eb1">00409</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator+=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)
-<a name="l00410"></a>00410         {
-<a name="l00411"></a>00411             this-&gt;Append(str);
-<a name="l00412"></a>00412             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00413"></a>00413         };
-<a name="l00414"></a>00414 
-<a name="l00415"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a0ea232961c21800089419464c7e1f958">00415</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> operator+(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)<span class="keyword"> const</span>
-<a name="l00416"></a>00416 <span class="keyword">        </span>{
-<a name="l00417"></a>00417             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> c = (*this);
-<a name="l00418"></a>00418             c += ch;
-<a name="l00419"></a>00419             <span class="keywordflow">return</span> c;
-<a name="l00420"></a>00420         };
-<a name="l00421"></a>00421 
-<a name="l00422"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ad119b50b77df1e97e2fd3e08687688e4">00422</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> operator+(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
-<a name="l00423"></a>00423 <span class="keyword">        </span>{
-<a name="l00424"></a>00424             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> c = (*this);
-<a name="l00425"></a>00425             c += str;
-<a name="l00426"></a>00426             <span class="keywordflow">return</span> c;
-<a name="l00427"></a>00427         };
-<a name="l00428"></a>00428 
-<a name="l00429"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a7722f3e6e68bdd932a4d5a5c669cce97">00429</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> operator+(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
-<a name="l00430"></a>00430 <span class="keyword">        </span>{
-<a name="l00431"></a>00431             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> c = (*this);
-<a name="l00432"></a>00432             c += str;
-<a name="l00433"></a>00433             <span class="keywordflow">return</span> c;
-<a name="l00434"></a>00434         };
-<a name="l00435"></a>00435 
-<a name="l00436"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a08c49544ee7c453453d0a07c2aa25bad">00436</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator==(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
-<a name="l00437"></a>00437 <span class="keyword">        </span>{
-<a name="l00438"></a>00438             <span class="keywordflow">return</span> this-&gt;Compare(str);
-<a name="l00439"></a>00439         };
-<a name="l00440"></a>00440 
-<a name="l00441"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ac99e7102818ba6e1c52cb810f11033f6">00441</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator==(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
-<a name="l00442"></a>00442 <span class="keyword">        </span>{
-<a name="l00443"></a>00443             <span class="keywordflow">return</span> this-&gt;Compare(str);
-<a name="l00444"></a>00444         };
-<a name="l00445"></a>00445 
-<a name="l00446"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a05548ba447a3ae5e30f7d30815cf0b6f">00446</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator!=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
-<a name="l00447"></a>00447 <span class="keyword">        </span>{
-<a name="l00448"></a>00448             <span class="keywordflow">return</span> !(this-&gt;operator==(str));
-<a name="l00449"></a>00449         };
-<a name="l00450"></a>00450 
-<a name="l00451"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a6fff76fd32809157cdf1af16ab7104a4">00451</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator!=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
-<a name="l00452"></a>00452 <span class="keyword">        </span>{
-<a name="l00453"></a>00453             <span class="keywordflow">return</span> !(this-&gt;operator==(str));
-<a name="l00454"></a>00454         };
-<a name="l00455"></a>00455 
-<a name="l00456"></a>00456         <span class="keywordtype">bool</span> operator&lt;(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) <span class="keyword">const</span>;
-<a name="l00457"></a>00457         <span class="keywordtype">bool</span> operator&lt;(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str) <span class="keyword">const</span>;
-<a name="l00458"></a>00458         <span class="keywordtype">bool</span> operator&gt;(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) <span class="keyword">const</span>;
-<a name="l00459"></a>00459         <span class="keywordtype">bool</span> operator&gt;(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str) <span class="keyword">const</span>;
-<a name="l00460"></a>00460 
-<a name="l00461"></a><a class="code" href="class_voodoo_shader_1_1_string.html#af5dd8f6c443ac419b805cff58dcdd611">00461</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&lt;=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
-<a name="l00462"></a>00462 <span class="keyword">        </span>{
-<a name="l00463"></a>00463             <span class="keywordflow">return</span> !(this-&gt;operator&gt;(str));
-<a name="l00464"></a>00464         };
-<a name="l00465"></a>00465 
-<a name="l00466"></a><a class="code" href="class_voodoo_shader_1_1_string.html#aa26cb817943b8d6b231879c4ebc8cbc4">00466</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&lt;=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
-<a name="l00467"></a>00467 <span class="keyword">        </span>{
-<a name="l00468"></a>00468             <span class="keywordflow">return</span> !(this-&gt;operator&gt;(str));
-<a name="l00469"></a>00469         };
-<a name="l00470"></a>00470 
-<a name="l00471"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a21c318160b525186e11bdb271418f197">00471</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&gt;=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
-<a name="l00472"></a>00472 <span class="keyword">        </span>{
-<a name="l00473"></a>00473             <span class="keywordflow">return</span> !(this-&gt;operator&lt;(str));
-<a name="l00474"></a>00474         };
-<a name="l00475"></a>00475 
-<a name="l00476"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ac272d236134978e3221bb6e0dd1a485b">00476</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&gt;=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
-<a name="l00477"></a>00477 <span class="keyword">        </span>{
-<a name="l00478"></a>00478             <span class="keywordflow">return</span> !(this-&gt;operator&lt;(str));
-<a name="l00479"></a>00479         };
-<a name="l00480"></a>00480 
-<a name="l00481"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">00481</a>         <span class="keyword">static</span> <span class="keyword">const</span> uint32_t Npos = (uint32_t)-1;
-<a name="l00482"></a>00482 
-<a name="l00483"></a>00483     <span class="keyword">private</span>:
-<a name="l00484"></a>00484         <span class="keywordtype">void</span> CInit(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
-<a name="l00485"></a>00485         <span class="keywordtype">void</span> WInit(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00486"></a>00486 
-<a name="l00487"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">00487</a>         <a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a> * <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>;
-<a name="l00488"></a>00488     };
-<a name="l00492"></a>00492 }
+<a name="l00039"></a><a class="code" href="class_voodoo_shader_1_1_string.html">00039</a>     <span class="keyword">class </span><a class="code" href="_includes_8hpp.html#a64a3622e4b9bb13e6e7a451bfaa84a48">VOODOO_API</a> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>
+<a name="l00040"></a>00040     {
+<a name="l00041"></a>00041         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a>;
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     <span class="keyword">public</span>:
+<a name="l00053"></a>00053         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>();
+<a name="l00054"></a>00054 
+<a name="l00059"></a>00059         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">char</span> ch);
+<a name="l00060"></a>00060 
+<a name="l00065"></a>00065         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_z_ <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
+<a name="l00066"></a>00066 
+<a name="l00072"></a>00072         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">char</span> ch);
+<a name="l00073"></a>00073 
+<a name="l00079"></a>00079         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
+<a name="l00080"></a>00080 
+<a name="l00085"></a>00085         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00086"></a>00086 
+<a name="l00091"></a>00091         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00092"></a>00092 
+<a name="l00098"></a>00098         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00099"></a>00099 
+<a name="l00105"></a>00105         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00106"></a>00106 
+<a name="l00112"></a>00112         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str);
+<a name="l00113"></a>00113 
+<a name="l00118"></a>00118         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; uuid);
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120 <span class="preprocessor">#ifdef _VECTOR_</span>
+<a name="l00121"></a>00121 <span class="preprocessor"></span>
+<a name="l00125"></a>00125         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> std::vector&lt;char&gt; &amp; vec) :
+<a name="l00126"></a>00126             m_Impl(<span class="keyword">nullptr</span>)
+<a name="l00127"></a>00127         {
+<a name="l00128"></a>00128             this-&gt;CInit(0, &amp;vec[0]);
+<a name="l00129"></a>00129         }
+<a name="l00130"></a>00130 
+<a name="l00135"></a>00135         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> std::vector&lt;wchar_t&gt; &amp; vec) :
+<a name="l00136"></a>00136             m_Impl(<span class="keyword">nullptr</span>)
+<a name="l00137"></a>00137         {
+<a name="l00138"></a>00138             this-&gt;WInit(0, &amp;vec[0]);
+<a name="l00139"></a>00139         }
+<a name="l00140"></a>00140 <span class="preprocessor">#endif</span>
+<a name="l00141"></a>00141 <span class="preprocessor"></span>
+<a name="l00142"></a>00142 <span class="preprocessor">#ifdef _STRING_</span>
+<a name="l00143"></a>00143 <span class="preprocessor"></span>
+<a name="l00147"></a>00147         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> std::string &amp; str) :
+<a name="l00148"></a>00148             m_Impl(<span class="keyword">nullptr</span>)
+<a name="l00149"></a>00149         {
+<a name="l00150"></a>00150             this-&gt;CInit(0, str.c_str());
+<a name="l00151"></a>00151         }
+<a name="l00152"></a>00152 
+<a name="l00157"></a>00157         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(_In_ <span class="keyword">const</span> std::wstring &amp; str) :
+<a name="l00158"></a>00158             m_Impl(<span class="keyword">nullptr</span>)
+<a name="l00159"></a>00159         {
+<a name="l00160"></a>00160             this-&gt;WInit(0, str.c_str());
+<a name="l00161"></a>00161         };
+<a name="l00162"></a>00162 <span class="preprocessor">#endif</span>
+<a name="l00163"></a>00163 <span class="preprocessor"></span>
+<a name="l00167"></a>00167         ~<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>();
+<a name="l00168"></a>00168 
+<a name="l00188"></a>00188         <span class="keywordtype">bool</span> ToUuid(_Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid) <span class="keyword">const</span>;
+<a name="l00189"></a>00189 
+<a name="l00199"></a>00199         int32_t ToCharStr(_In_ int32_t size, _Inout_opt_count_(size) <span class="keywordtype">char</span> * <span class="keyword">const</span> pBuffer) <span class="keyword">const</span>;
+<a name="l00200"></a>00200 
+<a name="l00201"></a>00201 <span class="preprocessor">#ifdef _STRING_</span>
+<a name="l00202"></a>00202 <span class="preprocessor"></span>
+<a name="l00207"></a>00207         std::wstring ToString()<span class="keyword"> const</span>
+<a name="l00208"></a>00208 <span class="keyword">        </span>{
+<a name="l00209"></a>00209             <span class="keywordflow">return</span> std::wstring(this-&gt;GetData());
+<a name="l00210"></a>00210         };
+<a name="l00211"></a>00211 <span class="preprocessor">#endif</span>
+<a name="l00212"></a>00212 <span class="preprocessor"></span>
+<a name="l00221"></a>00221         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00222"></a>00222         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00223"></a>00223         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00224"></a>00224         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00225"></a>00225         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Append(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str);
+<a name="l00226"></a>00226         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00227"></a>00227         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00228"></a>00228         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00229"></a>00229         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00230"></a>00230         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str);
+<a name="l00231"></a>00231         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Clear();
+<a name="l00232"></a>00232         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00233"></a>00233         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00234"></a>00234         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00235"></a>00235         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00236"></a>00236         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str);
+<a name="l00237"></a>00237         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Truncate(_In_ uint32_t size);
+<a name="l00247"></a>00247         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> ToLower() <span class="keyword">const</span>;
+<a name="l00248"></a>00248         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> ToUpper() <span class="keyword">const</span>;
+<a name="l00258"></a>00258         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Left(_In_ uint32_t count) <span class="keyword">const</span>;
+<a name="l00259"></a>00259         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Right(_In_ uint32_t count) <span class="keyword">const</span>;
+<a name="l00260"></a>00260         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Substr(_In_ uint32_t start, _In_ uint32_t count = <a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">String::Npos</a>) <span class="keyword">const</span>;
+<a name="l00270"></a>00270         <span class="keywordtype">bool</span> Compare(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00271"></a>00271         <span class="keywordtype">bool</span> Compare(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00272"></a>00272         <span class="keywordtype">bool</span> Compare(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00273"></a>00273         <span class="keywordtype">bool</span> StartsWith(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00274"></a>00274         <span class="keywordtype">bool</span> StartsWith(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00275"></a>00275         <span class="keywordtype">bool</span> StartsWith(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00276"></a>00276         <span class="keywordtype">bool</span> EndsWith(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00277"></a>00277         <span class="keywordtype">bool</span> EndsWith(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00278"></a>00278         <span class="keywordtype">bool</span> EndsWith(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00279"></a>00279         <span class="keywordtype">bool</span> Contains(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00280"></a>00280         <span class="keywordtype">bool</span> Contains(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00281"></a>00281         <span class="keywordtype">bool</span> Contains(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00291"></a>00291         uint32_t Find(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00292"></a>00292         uint32_t Find(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00293"></a>00293         uint32_t Find(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00294"></a>00294         uint32_t ReverseFind(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00295"></a>00295         uint32_t ReverseFind(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00296"></a>00296         uint32_t ReverseFind(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00297"></a>00297         
+<a name="l00298"></a>00298         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Replace(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> fch, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> rch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00299"></a>00299         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Replace(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, _In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * rstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00300"></a>00300         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Replace(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fstr, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; rstr, _In_ <span class="keywordtype">bool</span> caseSensitive = <span class="keyword">true</span>);
+<a name="l00301"></a>00301         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Remove(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> fch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00302"></a>00302         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Remove(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00303"></a>00303         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; Remove(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00316"></a>00316         <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> FormatV(_In_z_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, _In_opt_ va_list args);
+<a name="l00317"></a><a class="code" href="group__voodoo__utility__string__format.html#gad43c9efc155208ff8b4a6d8cb2035e7e">00317</a>         <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> FormatV(_In_ _Printf_format_string_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fmt, va_list args)
+<a name="l00318"></a>00318         {
+<a name="l00319"></a>00319             <span class="keywordflow">return</span> FormatV(fmt.GetData(), args);
+<a name="l00320"></a>00320         };
+<a name="l00321"></a>00321 
+<a name="l00322"></a><a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">00322</a>         <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Format(_In_z_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, ...)
+<a name="l00323"></a>00323         {
+<a name="l00324"></a>00324             va_list args;
+<a name="l00325"></a>00325             va_start(args, fmt);
+<a name="l00326"></a>00326             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> str = FormatV(fmt, args);
+<a name="l00327"></a>00327             va_end(args);
+<a name="l00328"></a>00328             <span class="keywordflow">return</span> str;
+<a name="l00329"></a>00329         };
+<a name="l00330"></a>00330 
+<a name="l00331"></a><a class="code" href="group__voodoo__utility__string__format.html#gabbf3713e4292911cc4543f7796915216">00331</a>         <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Format(_In_ _Printf_format_string_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fmt, ...)
+<a name="l00332"></a>00332         {
+<a name="l00333"></a>00333             va_list args;
+<a name="l00334"></a>00334             va_start(args, fmt);
+<a name="l00335"></a>00335             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> str = FormatV(fmt.GetData(), args);
+<a name="l00336"></a>00336             va_end(args);
+<a name="l00337"></a>00337             <span class="keywordflow">return</span> str;
+<a name="l00338"></a>00338         };
+<a name="l00339"></a>00339 
+<a name="l00340"></a><a class="code" href="group__voodoo__utility__string__format.html#gaf6d63d2a9b51084ed48950e2d9050232">00340</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; AppendFormat(_In_z_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, ...)
+<a name="l00341"></a>00341         {
+<a name="l00342"></a>00342             va_list args;
+<a name="l00343"></a>00343             va_start(args, fmt);
+<a name="l00344"></a>00344             this-&gt;Append(<a class="code" href="group__voodoo__utility__string__format.html#gae5bed9f0946772f062c84d36efc7df48">String::FormatV</a>(fmt, args));
+<a name="l00345"></a>00345             va_end(args);
+<a name="l00346"></a>00346             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00347"></a>00347         };
+<a name="l00348"></a>00348 
+<a name="l00349"></a><a class="code" href="group__voodoo__utility__string__format.html#ga8ce509c7508837fa59392fef17021945">00349</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; AppendFormat(_In_ _Printf_format_string_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fmt, ...)
+<a name="l00350"></a>00350         {
+<a name="l00351"></a>00351             va_list args;
+<a name="l00352"></a>00352             va_start(args, fmt);
+<a name="l00353"></a>00353             this-&gt;Append(<a class="code" href="group__voodoo__utility__string__format.html#gae5bed9f0946772f062c84d36efc7df48">String::FormatV</a>(fmt.GetData(), args));
+<a name="l00354"></a>00354             va_end(args);
+<a name="l00355"></a>00355             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00356"></a>00356         };
+<a name="l00361"></a>00361         <span class="comment">// Buffer info/access</span>
+<a name="l00362"></a>00362         uint32_t GetLength() <span class="keyword">const</span>;
+<a name="l00363"></a>00363         <span class="keywordtype">bool</span> IsEmpty() <span class="keyword">const</span>;
+<a name="l00364"></a>00364 
+<a name="l00365"></a>00365         <span class="keywordtype">wchar_t</span> GetAt(_In_ uint32_t pos) <span class="keyword">const</span>;
+<a name="l00366"></a>00366         <span class="keywordtype">wchar_t</span> &amp; operator[](_In_ uint32_t pos);
+<a name="l00367"></a>00367         <span class="keywordtype">void</span> SetAt(_In_ uint32_t pos, _In_ <span class="keywordtype">wchar_t</span> data);
+<a name="l00368"></a>00368 
+<a name="l00369"></a>00369         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * GetData() <span class="keyword">const</span>;
+<a name="l00370"></a>00370 
+<a name="l00371"></a>00371 <span class="preprocessor">#ifdef _STRING_</span>
+<a name="l00372"></a>00372 <span class="preprocessor"></span>        <span class="keyword">inline</span> std::wstring ToStdString()<span class="keyword"> const</span>
+<a name="l00373"></a>00373 <span class="keyword">        </span>{
+<a name="l00374"></a>00374             <span class="keywordflow">return</span> std::wstring(this-&gt;GetData());
+<a name="l00375"></a>00375         };
+<a name="l00376"></a>00376 <span class="preprocessor">#endif</span>
+<a name="l00377"></a>00377 <span class="preprocessor"></span>
+<a name="l00378"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a9d4f0e6645ffe3ec2a7ed118111ba359">00378</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator=(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
+<a name="l00379"></a>00379         {
+<a name="l00380"></a>00380             this-&gt;Assign(ch);
+<a name="l00381"></a>00381             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00382"></a>00382         };
+<a name="l00383"></a>00383 
+<a name="l00384"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a5c4ce21221b2f1c707cd709305f72a37">00384</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
+<a name="l00385"></a>00385         {
+<a name="l00386"></a>00386             this-&gt;Assign(str);
+<a name="l00387"></a>00387             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00388"></a>00388         };
+<a name="l00389"></a>00389 
+<a name="l00390"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a87b902110c8d034b36247bb0ab54a55e">00390</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)
+<a name="l00391"></a>00391         {
+<a name="l00392"></a>00392             this-&gt;Assign(str);
+<a name="l00393"></a>00393             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00394"></a>00394         };
+<a name="l00395"></a>00395 
+<a name="l00396"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a711cd1e78848cabcbefd208e81ace608">00396</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator+=(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
+<a name="l00397"></a>00397         {
+<a name="l00398"></a>00398             this-&gt;Append(ch);
+<a name="l00399"></a>00399             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00400"></a>00400         };
+<a name="l00401"></a>00401 
+<a name="l00402"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a35dcdcaa76a2b48f49066f52d7550341">00402</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator+=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
+<a name="l00403"></a>00403         {
+<a name="l00404"></a>00404             this-&gt;Append(str);
+<a name="l00405"></a>00405             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00406"></a>00406         };
+<a name="l00407"></a>00407 
+<a name="l00408"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a37bdfddd7e8a8c0cf124f89ae3737eb1">00408</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; operator+=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)
+<a name="l00409"></a>00409         {
+<a name="l00410"></a>00410             this-&gt;Append(str);
+<a name="l00411"></a>00411             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00412"></a>00412         };
+<a name="l00413"></a>00413 
+<a name="l00414"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a0ea232961c21800089419464c7e1f958">00414</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> operator+(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)<span class="keyword"> const</span>
+<a name="l00415"></a>00415 <span class="keyword">        </span>{
+<a name="l00416"></a>00416             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> c = (*this);
+<a name="l00417"></a>00417             c += ch;
+<a name="l00418"></a>00418             <span class="keywordflow">return</span> c;
+<a name="l00419"></a>00419         };
+<a name="l00420"></a>00420 
+<a name="l00421"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ad119b50b77df1e97e2fd3e08687688e4">00421</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> operator+(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00422"></a>00422 <span class="keyword">        </span>{
+<a name="l00423"></a>00423             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> c = (*this);
+<a name="l00424"></a>00424             c += str;
+<a name="l00425"></a>00425             <span class="keywordflow">return</span> c;
+<a name="l00426"></a>00426         };
+<a name="l00427"></a>00427 
+<a name="l00428"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a7722f3e6e68bdd932a4d5a5c669cce97">00428</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> operator+(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00429"></a>00429 <span class="keyword">        </span>{
+<a name="l00430"></a>00430             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> c = (*this);
+<a name="l00431"></a>00431             c += str;
+<a name="l00432"></a>00432             <span class="keywordflow">return</span> c;
+<a name="l00433"></a>00433         };
+<a name="l00434"></a>00434 
+<a name="l00435"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a08c49544ee7c453453d0a07c2aa25bad">00435</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator==(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00436"></a>00436 <span class="keyword">        </span>{
+<a name="l00437"></a>00437             <span class="keywordflow">return</span> this-&gt;Compare(str);
+<a name="l00438"></a>00438         };
+<a name="l00439"></a>00439 
+<a name="l00440"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ac99e7102818ba6e1c52cb810f11033f6">00440</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator==(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00441"></a>00441 <span class="keyword">        </span>{
+<a name="l00442"></a>00442             <span class="keywordflow">return</span> this-&gt;Compare(str);
+<a name="l00443"></a>00443         };
+<a name="l00444"></a>00444 
+<a name="l00445"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a05548ba447a3ae5e30f7d30815cf0b6f">00445</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator!=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00446"></a>00446 <span class="keyword">        </span>{
+<a name="l00447"></a>00447             <span class="keywordflow">return</span> !(this-&gt;operator==(str));
+<a name="l00448"></a>00448         };
+<a name="l00449"></a>00449 
+<a name="l00450"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a6fff76fd32809157cdf1af16ab7104a4">00450</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator!=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00451"></a>00451 <span class="keyword">        </span>{
+<a name="l00452"></a>00452             <span class="keywordflow">return</span> !(this-&gt;operator==(str));
+<a name="l00453"></a>00453         };
+<a name="l00454"></a>00454 
+<a name="l00455"></a>00455         <span class="keywordtype">bool</span> operator&lt;(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) <span class="keyword">const</span>;
+<a name="l00456"></a>00456         <span class="keywordtype">bool</span> operator&lt;(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str) <span class="keyword">const</span>;
+<a name="l00457"></a>00457         <span class="keywordtype">bool</span> operator&gt;(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) <span class="keyword">const</span>;
+<a name="l00458"></a>00458         <span class="keywordtype">bool</span> operator&gt;(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str) <span class="keyword">const</span>;
+<a name="l00459"></a>00459 
+<a name="l00460"></a><a class="code" href="class_voodoo_shader_1_1_string.html#af5dd8f6c443ac419b805cff58dcdd611">00460</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&lt;=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00461"></a>00461 <span class="keyword">        </span>{
+<a name="l00462"></a>00462             <span class="keywordflow">return</span> !(this-&gt;operator&gt;(str));
+<a name="l00463"></a>00463         };
+<a name="l00464"></a>00464 
+<a name="l00465"></a><a class="code" href="class_voodoo_shader_1_1_string.html#aa26cb817943b8d6b231879c4ebc8cbc4">00465</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&lt;=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00466"></a>00466 <span class="keyword">        </span>{
+<a name="l00467"></a>00467             <span class="keywordflow">return</span> !(this-&gt;operator&gt;(str));
+<a name="l00468"></a>00468         };
+<a name="l00469"></a>00469 
+<a name="l00470"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a21c318160b525186e11bdb271418f197">00470</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&gt;=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00471"></a>00471 <span class="keyword">        </span>{
+<a name="l00472"></a>00472             <span class="keywordflow">return</span> !(this-&gt;operator&lt;(str));
+<a name="l00473"></a>00473         };
+<a name="l00474"></a>00474 
+<a name="l00475"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ac272d236134978e3221bb6e0dd1a485b">00475</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&gt;=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00476"></a>00476 <span class="keyword">        </span>{
+<a name="l00477"></a>00477             <span class="keywordflow">return</span> !(this-&gt;operator&lt;(str));
+<a name="l00478"></a>00478         };
+<a name="l00479"></a>00479 
+<a name="l00480"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">00480</a>         <span class="keyword">static</span> <span class="keyword">const</span> uint32_t Npos = (uint32_t)-1;
+<a name="l00481"></a>00481 
+<a name="l00482"></a>00482     <span class="keyword">private</span>:
+<a name="l00483"></a>00483         <span class="keywordtype">void</span> CInit(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
+<a name="l00484"></a>00484         <span class="keywordtype">void</span> WInit(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00485"></a>00485 
+<a name="l00486"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">00486</a>         <a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a> * <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>;
+<a name="l00487"></a>00487     };
+<a name="l00491"></a>00491 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 15 2011 23:26:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 16 2011 00:32:25 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
