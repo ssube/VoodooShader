@@ -24,29 +24,122 @@
 
 namespace VoodooShader
 {
+    /**
+     * @addtogroup voodoo_utility Voodoo Utility
+     * @{
+     */
+    
+    /**
+     * @addtogroup voodoo_utility_regex Voodoo Regex
+     * @ingroup voodoo_utility
+     * @{
+     */
+
     class VOODOO_API Regex
     {
         class RegexImpl;
 
     public:
+        /**
+         * @addtogroup voodoo_utility_regex_ctor Regex constructors
+         * @ingroup voodoo_utility_regex
+         * @{
+         */
         Regex();
+
         Regex(String expr);
+        /**
+         * @}
+         */
+
         ~Regex();
+        
+        /**
+         * @addtogroup voodoo_utility_regex_expr Regex expression
+         * @ingroup voodoo_utility_regex
+         * @{
+         */
+        void SetExpr(String expr) throw();
 
-        // Expression handling
-        void SetExpr(String expr);
-        String GetExpr() const;
-
-        // Match
-        bool Match(const String & string) const;
-
-        // Find
-        bool Find(const String & find) const;
-
-        // Replace
-        String Replace(const String & find, const String & replace) const;
+        String GetExpr() const throw();
+        /**
+         * @}
+         * 
+         * @addtogroup voodoo_utility_regex_expr Regex expression
+         * @ingroup voodoo_utility_regex
+         * @{
+         */
+        RegexMatch Match(const String & string) const throw();
+        /**
+         * @}
+         * 
+         * @addtogroup voodoo_utility_regex_expr Regex expression
+         * @ingroup voodoo_utility_regex
+         * @{
+         */
+        bool Find(const String & find) const throw();
+        /**
+         * @}
+         * 
+         * @addtogroup voodoo_utility_regex_expr Regex expression
+         * @ingroup voodoo_utility_regex
+         * @{
+         */
+        String Replace(const String & find, const String & replace) const throw();
+        /**
+         * @}
+         */
 
     private:
         RegexImpl * m_Impl;
     };
+
+    class VOODOO_API RegexMatch
+    {
+        class RegexMatchImpl;
+        friend class Regex;
+
+    public:
+        RegexMatch(const RegexMatch & other);
+
+        ~RegexMatch();
+
+        /**
+         * Gets the number of submatches in this match.
+         * 
+         * @return Total number of matches.
+         */
+        uint32_t GetCount() const throw();
+
+        /**
+         * Check if any matches were found.
+         * 
+         * @return True if any matches are contained.
+         */
+        bool IsEmpty() const throw();
+
+        /**
+         * Retrieve a particular match within this group.
+         * 
+         * @return The specified submatch.
+         */
+        String GetMatch(uint32_t index) const throw();
+
+        /**
+         * Formats the found submatches into an output string. This uses the <code>$0</code> syntax to perform formatting,
+         * all other text is copied.
+         * 
+         * @param fmt The format string to use.
+         * @return A formatted copy using the submatches.
+         */
+        String Format(const String & fmt) const throw();
+
+    private:
+        RegexMatch();
+
+        RegexMatchImpl * m_Impl;
+    };
+    /**
+     * @}
+     */
 }

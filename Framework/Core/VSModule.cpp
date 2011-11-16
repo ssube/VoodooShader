@@ -133,7 +133,7 @@ namespace VoodooShader
         {
             String module = findFile.cFileName;
 
-            if (compfilter.Match(module))
+            if (compfilter.Find(module))
             {
                 IFile * modulefile = m_Core->GetFileSystem()->FindFile(module);
                 this->LoadFile(modulefile);

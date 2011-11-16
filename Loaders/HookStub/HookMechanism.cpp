@@ -144,7 +144,7 @@ bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key)
     DWORD index = 0, nameSize = MAX_KEY_LENGTH;
     TCHAR hookID[MAX_KEY_LENGTH];
 
-    while (RegEnumKeyEx(key, index++, hookID, &nameSize, NULL, NULL, NULL, NULL) == ERROR_SUCCESS)
+    while (RegEnumKeyEx(key, index++, hookID, &nameSize, NULL, NULL, NULL, NULL) == ERROR_SUCCESS && nameSize > 0)
     {
         HKEY hookKey = nullptr;
 
@@ -168,6 +168,8 @@ bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key)
 
             RegCloseKey(hookKey);
         }
+
+        nameSize = MAX_KEY_LENGTH;
     }
 
     return false;

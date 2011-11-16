@@ -29,7 +29,7 @@ namespace VoodooShader
      */
 
     /**
-     * @defgroup voodoo_utility_string Voodoo Strings
+     * @addtogroup voodoo_utility_string Voodoo Strings
      * @ingroup voodoo_utility
      *
      * Voodoo internal string class, providing constant and compiler-safe string passing between various modules.
@@ -43,7 +43,7 @@ namespace VoodooShader
 
     public:
         /**
-         * @defgroup voodoo_utility_string_ctors String constructors
+         * @addtogroup voodoo_utility_string_ctors String constructors
          * @ingroup voodoo_utility_string
          * @{
          */
@@ -168,7 +168,7 @@ namespace VoodooShader
         ~String();
 
         /**
-         * @defgroup voodoo_utility_string_conv String conversion
+         * @addtogroup voodoo_utility_string_conv String conversion
          * @ingroup voodoo_utility_string
          * @{
          */
@@ -215,7 +215,7 @@ namespace VoodooShader
          */
         
         /**
-         * @defgroup voodoo_utility_string_mod String modification
+         * @addtogroup voodoo_utility_string_mod String modification
          * @ingroup voodoo_utility_string
          * @{
          */
@@ -241,7 +241,7 @@ namespace VoodooShader
          */
         
         /**
-         * @defgroup voodoo_utility_string_case String case conversion
+         * @addtogroup voodoo_utility_string_case String case conversion
          * @ingroup voodoo_utility_string
          * @{
          */
@@ -252,7 +252,7 @@ namespace VoodooShader
          */
         
         /**
-         * @defgroup voodoo_utility_string_part String partial copy
+         * @addtogroup voodoo_utility_string_part String partial copy
          * @ingroup voodoo_utility_string
          * @{
          */
@@ -264,7 +264,7 @@ namespace VoodooShader
          */
         
         /**
-         * @defgroup voodoo_utility_string_pred String predicates
+         * @addtogroup voodoo_utility_string_pred String predicates
          * @ingroup voodoo_utility_string
          * @{
          */
@@ -285,7 +285,7 @@ namespace VoodooShader
          */
         
         /**
-         * @defgroup voodoo_utility_string_find String find and replace
+         * @addtogroup voodoo_utility_string_find String find and replace
          * @ingroup voodoo_utility_string
          * @{
          */
@@ -307,7 +307,7 @@ namespace VoodooShader
          */
         
         /**
-         * @defgroup voodoo_utility_string_format String format
+         * @addtogroup voodoo_utility_string_format String format
          * @ingroup voodoo_utility_string
          * Uses the system's wide-string printf to format these strings. This may vary between systems, precise details
          * should be in the system documentation (<a href="http://msdn.microsoft.com/en-us/library/56e442dc.aspx">Windows

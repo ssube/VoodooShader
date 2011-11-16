@@ -568,7 +568,7 @@ namespace VoodooShader
         int bufsize = _vscwprintf(fmt, args) + 1;
         std::vector<wchar_t> buffer(bufsize);
 
-        int len = _vsnwprintf_s(&buffer[0], bufsize, bufsize-1, fmt, args);
+        int len = _vsnwprintf_s(&buffer[0], bufsize, bufsize, fmt, args);
 
         if (len == -1)
         {
@@ -597,7 +597,7 @@ namespace VoodooShader
     wchar_t & String::operator[](uint32_t pos)
     {
         //! @todo Error checking on pos.
-        return m_Impl->m_Str.at(pos);
+        return m_Impl->m_Str[pos];
     }
 
     void String::SetAt(uint32_t pos, wchar_t data)

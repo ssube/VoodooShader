@@ -19,14 +19,13 @@
  */
 
 #include <string>
-#include <regex>
 
 #include "Regex.hpp"
 
-using std::wregex;
-using std::regex_match;
-using std::regex_search;
-using std::regex_replace;
+#pragma warning(push)
+#pragma warning(disable: 6334 6011)
+#include <boost/regex.hpp>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -38,12 +37,27 @@ namespace VoodooShader
         { };
 
         RegexImpl(String expr)
-            : m_Regex(expr.GetData(), wregex::ECMAScript), m_Expr(expr)
+            : m_Regex(expr.GetData(), boost::regex::ECMAScript), m_Expr(expr)
         { };
 
     public:
-        wregex m_Regex;
+        boost::wregex m_Regex;
         String m_Expr;
+    };
+
+    class RegexMatch::RegexMatchImpl
+    {
+    public:
+        RegexMatchImpl()
+            : m_Match()
+        { };
+
+        RegexMatchImpl(boost::wsmatch & match)
+            : m_Match(match)
+        { };
+
+    public:
+        boost::wsmatch m_Match;
     };
 
     Regex::Regex()
@@ -71,18 +85,61 @@ namespace VoodooShader
         return m_Impl->m_Expr;
     }
 
-    bool Regex::Match(const String & string) const
+    RegexMatch Regex::Match(const String & string) const
     {
-        return regex_match(string.ToString(), m_Impl->m_Regex);
+        RegexMatch match;
+        boost::wsmatch mr;
+
+        if (boost::regex_match(string.ToStdString(), mr, m_Impl->m_Regex))
+        {
+            match.m_Impl->m_Match = mr;
+        }
+            
+        return match;
     }
 
     bool Regex::Find(const String & find) const
     {
-        return regex_search(find.ToString(), m_Impl->m_Regex);
+        return boost::regex_search(find.ToStdString(), m_Impl->m_Regex);
     }
 
     String Regex::Replace(const String & find, const String & replace) const
     {
-        return regex_replace(find.ToString(), m_Impl->m_Regex, replace.ToString());
+        return boost::regex_replace(find.ToStdString(), m_Impl->m_Regex, replace.ToStdString());
+    }
+
+    RegexMatch::RegexMatch()
+    {
+        m_Impl = new RegexMatchImpl();
+    }
+
+    RegexMatch::RegexMatch(const RegexMatch & other)
+    {
+        m_Impl = new RegexMatchImpl(other.m_Impl->m_Match);
+    }
+
+    RegexMatch::~RegexMatch()
+    {
+        delete m_Impl;
+    }
+
+    uint32_t RegexMatch::GetCount() const
+    {
+        return m_Impl->m_Match.size();
+    }
+
+    bool RegexMatch::IsEmpty() const
+    {
+        return m_Impl->m_Match.empty();
+    }
+
+    String RegexMatch::GetMatch(uint32_t index) const
+    {
+        return m_Impl->m_Match[index];
+    }
+
+    String RegexMatch::Format(const String & fmt) const
+    {
+        return m_Impl->m_Match.format(fmt.ToStdString(), boost::format_all);
     }
 }

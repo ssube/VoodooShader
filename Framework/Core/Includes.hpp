@@ -118,6 +118,7 @@ namespace VoodooShader
     /* Custom basic types */
     class Exception;
     class Regex;
+    class RegexMatch;
     class String;
 
 #ifndef VOODOO_NO_PUGIXML
