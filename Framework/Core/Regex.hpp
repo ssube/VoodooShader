@@ -32,9 +32,15 @@ namespace VoodooShader
     /**
      * @addtogroup voodoo_utility_regex Voodoo Regex
      * @ingroup voodoo_utility
-     * @{
+     * 
+     * Voodoo internal regex class, providing constant and compiler-safe regex handling between modules. This internally
+     * uses <a href="http://www.boost.org/doc/libs/1_48_0/libs/regex/doc/html/index.html">Boost.Regex</a> in extended-syntax
+     * mode for both expressions and match formatting.
+     *
+     * @warning This @b must use the MSVC wchar_t type, or bad things will happen. <b>GCC does not properly handle
+     *      Unicode strings and will not provide valid inputs for these functions.</b>
+     *
      */
-
     class VOODOO_API Regex
     {
         class RegexImpl;

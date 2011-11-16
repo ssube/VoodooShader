@@ -34,8 +34,7 @@ namespace VoodooShader
      *
      * Voodoo internal string class, providing constant and compiler-safe string passing between various modules.
      *
-     * @warning This @b must use the MSVC wchar_t type, or bad things will happen. <b>GCC does not properly handle
-     *      Unicode strings and will not provide valid inputs for these functions.</b>
+     * @warning This @b must use a 16-bit wchar_t type for all parameters.
      */
     class VOODOO_API String
     {

@@ -37,7 +37,7 @@ namespace VoodooShader
         { };
 
         RegexImpl(String expr)
-            : m_Regex(expr.GetData(), boost::regex::ECMAScript), m_Expr(expr)
+            : m_Regex(expr.GetData(), boost::regex::extended), m_Expr(expr)
         { };
 
     public:
