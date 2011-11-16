@@ -33,11 +33,11 @@ namespace VoodooShader
     {
     public:
         RegexImpl()
-            : m_Regex(), m_Expr()
+            : m_Regex()
         { };
 
         RegexImpl(String expr)
-            : m_Regex(expr.GetData(), boost::regex::extended), m_Expr(expr)
+            : m_Regex(expr.GetData(), boost::regex::extended)
         { };
 
     public:
