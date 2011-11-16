@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.317</span>
+   &#160;<span id="projectnumber">framework-4.2-35-g6e01306</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -213,14 +213,14 @@
 <a name="l00317"></a>00317         <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> FormatV(_In_z_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, _In_opt_ va_list args);
 <a name="l00318"></a><a class="code" href="group__voodoo__utility__string__format.html#gad43c9efc155208ff8b4a6d8cb2035e7e">00318</a>         <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> FormatV(_In_ _Printf_format_string_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fmt, va_list args)
 <a name="l00319"></a>00319         {
-<a name="l00320"></a>00320             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__utility__string__format.html#gae5bed9f0946772f062c84d36efc7df48">String::FormatV</a>(fmt.GetData(), args);
+<a name="l00320"></a>00320             <span class="keywordflow">return</span> FormatV(fmt.GetData(), args);
 <a name="l00321"></a>00321         };
 <a name="l00322"></a>00322 
 <a name="l00323"></a><a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">00323</a>         <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> Format(_In_z_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, ...)
 <a name="l00324"></a>00324         {
 <a name="l00325"></a>00325             va_list args;
 <a name="l00326"></a>00326             va_start(args, fmt);
-<a name="l00327"></a>00327             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> str = <a class="code" href="group__voodoo__utility__string__format.html#gae5bed9f0946772f062c84d36efc7df48">String::FormatV</a>(fmt, args);
+<a name="l00327"></a>00327             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> str = FormatV(fmt, args);
 <a name="l00328"></a>00328             va_end(args);
 <a name="l00329"></a>00329             <span class="keywordflow">return</span> str;
 <a name="l00330"></a>00330         };
@@ -229,7 +229,7 @@
 <a name="l00333"></a>00333         {
 <a name="l00334"></a>00334             va_list args;
 <a name="l00335"></a>00335             va_start(args, fmt);
-<a name="l00336"></a>00336             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> str = <a class="code" href="group__voodoo__utility__string__format.html#gae5bed9f0946772f062c84d36efc7df48">String::FormatV</a>(fmt.GetData(), args);
+<a name="l00336"></a>00336             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> str = FormatV(fmt.GetData(), args);
 <a name="l00337"></a>00337             va_end(args);
 <a name="l00338"></a>00338             <span class="keywordflow">return</span> str;
 <a name="l00339"></a>00339         };
@@ -384,7 +384,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 11 2011 01:26:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 15 2011 23:26:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

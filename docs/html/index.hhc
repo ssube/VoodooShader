@@ -66,6 +66,52 @@
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo Utility"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo Regex"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Regex constructors"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Regex"><param name="Local" value="group__voodoo__utility__regex__ctor.html#ga1856f2b4450d38cd957cf96b0fc0541e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Regex"><param name="Local" value="group__voodoo__utility__regex__ctor.html#ga17365fcfc0fb3e26d361d42f3591d782"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Regex expression"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Find"><param name="Local" value="group__voodoo__utility__regex__expr.html#ga05d0fe89740187f7a4302044cb6d107e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="GetExpr"><param name="Local" value="group__voodoo__utility__regex__expr.html#ga8d43d2967dc7f676244b9e0d1f91dd41"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Match"><param name="Local" value="group__voodoo__utility__regex__expr.html#ga1482d4ac4dae5d4dedf30ff320547ee0"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Replace"><param name="Local" value="group__voodoo__utility__regex__expr.html#gabdf7ddb415680172fbd7fb4ad93fc00f"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="SetExpr"><param name="Local" value="group__voodoo__utility__regex__expr.html#ga7ea4fc2b78e6cf3e70ab573fc7f891fc"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Regex"><param name="Local" value="class_voodoo_shader_1_1_regex.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::RegexMatch"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Regex constructors"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Regex"><param name="Local" value="group__voodoo__utility__regex__ctor.html#ga1856f2b4450d38cd957cf96b0fc0541e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Regex"><param name="Local" value="group__voodoo__utility__regex__ctor.html#ga17365fcfc0fb3e26d361d42f3591d782"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Regex expression"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Find"><param name="Local" value="group__voodoo__utility__regex__expr.html#ga05d0fe89740187f7a4302044cb6d107e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="GetExpr"><param name="Local" value="group__voodoo__utility__regex__expr.html#ga8d43d2967dc7f676244b9e0d1f91dd41"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Match"><param name="Local" value="group__voodoo__utility__regex__expr.html#ga1482d4ac4dae5d4dedf30ff320547ee0"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Replace"><param name="Local" value="group__voodoo__utility__regex__expr.html#gabdf7ddb415680172fbd7fb4ad93fc00f"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="SetExpr"><param name="Local" value="group__voodoo__utility__regex__expr.html#ga7ea4fc2b78e6cf3e70ab573fc7f891fc"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo Strings"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="String constructors"><param name="ImageNumber" value="1"></OBJECT>
@@ -181,6 +227,22 @@
           <LI><OBJECT type="text/sitemap"><param name="Name" value="FormatV"><param name="Local" value="group__voodoo__utility__string__format.html#gad43c9efc155208ff8b4a6d8cb2035e7e"><param name="ImageNumber" value="11"></OBJECT>
           </UL>
         </UL>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Format"><param name="Local" value="group__voodoo__utility.html#ga81d2e7db4e9d2be728e93ea538c44049"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetCount"><param name="Local" value="group__voodoo__utility.html#ga3ea38e6e56ec208d9494c54da5af240b"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetMatch"><param name="Local" value="group__voodoo__utility.html#ga4472d36ba4aff9404165525404e8cf33"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="IsEmpty"><param name="Local" value="group__voodoo__utility.html#gaeef54e6675bf8a2c781a76f272e3e877"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="RegexMatch"><param name="Local" value="group__voodoo__utility.html#gaab4a75dadcdeceea1b498ac80e77d7ca"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="RegexMatch"><param name="Local" value="group__voodoo__utility.html#gacce9cabc578e940dd9f492a637470563"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Regex"><param name="Local" value="group__voodoo__utility.html#ga1be90dc1cc4f28febfa5c5bd4c29ab5a"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~RegexMatch"><param name="Local" value="group__voodoo__utility.html#ga5b4844858a37f43d9579419fd9c78810"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Variables"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Impl"><param name="Local" value="group__voodoo__utility.html#ga9dc154b70093b5e49825d616cfaaad21"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Impl"><param name="Local" value="group__voodoo__utility.html#ga6972356d6b5b01ea240014a13342a39d"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
@@ -359,6 +421,8 @@
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::LightStruct"><param name="Local" value="struct_voodoo_shader_1_1_light_struct.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Regex"><param name="Local" value="class_voodoo_shader_1_1_regex.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Regex::RegexImpl"><param name="Local" value="class_voodoo_shader_1_1_regex_1_1_regex_impl.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::RegexMatch"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::RegexMatch::RegexMatchImpl"><param name="Local" value="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::String"><param name="Local" value="class_voodoo_shader_1_1_string.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::String::StringImpl"><param name="Local" value="class_voodoo_shader_1_1_string_1_1_string_impl.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::TextureDesc"><param name="Local" value="struct_voodoo_shader_1_1_texture_desc.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -467,6 +531,8 @@
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::LightStruct"><param name="Local" value="struct_voodoo_shader_1_1_light_struct.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Regex"><param name="Local" value="class_voodoo_shader_1_1_regex.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Regex::RegexImpl"><param name="Local" value="class_voodoo_shader_1_1_regex_1_1_regex_impl.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::RegexMatch"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::RegexMatch::RegexMatchImpl"><param name="Local" value="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::String"><param name="Local" value="class_voodoo_shader_1_1_string.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::String::StringImpl"><param name="Local" value="class_voodoo_shader_1_1_string_1_1_string_impl.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::TextureDesc"><param name="ImageNumber" value="1"></OBJECT>

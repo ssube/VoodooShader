@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="143,264,292,291"/>
-<area shape="rect" id="node6" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="5,173,219,200"/>
-<area shape="rect" id="node8" title="STL class." alt="" coords="67,83,156,109"/>
-<area shape="rect" id="node10" title="STL class." alt="" coords="19,5,205,32"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="161,264,311,291"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="5,173,219,200"/>
+<area shape="rect" id="node6" title="STL class." alt="" coords="67,83,156,109"/>
+<area shape="rect" id="node8" title="STL class." alt="" coords="19,5,205,32"/>
 </map>

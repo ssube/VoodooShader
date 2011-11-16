@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.317</span>
+   &#160;<span id="projectnumber">framework-4.2-35-g6e01306</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -637,7 +637,7 @@
 <a name="l00568"></a>00568         <span class="keywordtype">int</span> bufsize = _vscwprintf(fmt, args) + 1;
 <a name="l00569"></a>00569         std::vector&lt;wchar_t&gt; buffer(bufsize);
 <a name="l00570"></a>00570 
-<a name="l00571"></a>00571         <span class="keywordtype">int</span> len = _vsnwprintf_s(&amp;buffer[0], bufsize, bufsize-1, fmt, args);
+<a name="l00571"></a>00571         <span class="keywordtype">int</span> len = _vsnwprintf_s(&amp;buffer[0], bufsize, bufsize, fmt, args);
 <a name="l00572"></a>00572 
 <a name="l00573"></a>00573         <span class="keywordflow">if</span> (len == -1)
 <a name="l00574"></a>00574         {
@@ -664,7 +664,7 @@
 <a name="l00596"></a>00596 
 <a name="l00597"></a><a class="code" href="class_voodoo_shader_1_1_string.html#af3d33a0f4c65e6f8be2910ef9cb46470">00597</a>     <span class="keywordtype">wchar_t</span> &amp; <a class="code" href="class_voodoo_shader_1_1_string.html#af3d33a0f4c65e6f8be2910ef9cb46470">String::operator[]</a>(uint32_t pos)
 <a name="l00598"></a>00598     {
-<a name="l00600"></a>00600         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.at(pos);
+<a name="l00600"></a>00600         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>[pos];
 <a name="l00601"></a>00601     }
 <a name="l00602"></a>00602 
 <a name="l00603"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ac2498de8dc15eff823b3cb4460638e91">00603</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_string.html#ac2498de8dc15eff823b3cb4460638e91">String::SetAt</a>(uint32_t pos, <span class="keywordtype">wchar_t</span> data)
@@ -702,7 +702,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 11 2011 01:26:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 15 2011 23:26:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

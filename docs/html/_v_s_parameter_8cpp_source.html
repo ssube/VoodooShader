@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">0.4.2.317</span>
+   &#160;<span id="projectnumber">framework-4.2-35-g6e01306</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -101,7 +101,7 @@
 <a name="l00032"></a>00032 <span class="keyword">namespace </span>VoodooShader
 <a name="l00033"></a>00033 {
 <a name="l00034"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a5329d3b8de81090ff8486c73c082ec9d">00034</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a5329d3b8de81090ff8486c73c082ec9d">VSParameter::VSParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <span class="keyword">const</span> pCore, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type) :
-<a name="l00035"></a>00035          m_Refs(0), m_Core(pCore), m_Type(type), m_Shader(<a class="code" href="_includes_8hpp.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>), m_Virtual(true)
+<a name="l00035"></a>00035          m_Refs(0), m_Core(pCore), m_Shader(<a class="code" href="_includes_8hpp.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>), m_Virtual(true), m_Type(type)
 <a name="l00036"></a>00036     {
 <a name="l00037"></a>00037         <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a3bd8ed51a422810eaa7e748e2185babc">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00038"></a>00038         (
@@ -124,7 +124,7 @@
 <a name="l00056"></a>00056     }
 <a name="l00057"></a>00057 
 <a name="l00058"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a0aecf527628cabb0a8c01487331763a0">00058</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a5329d3b8de81090ff8486c73c082ec9d">VSParameter::VSParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <span class="keyword">const</span> pShader, _In_ CGparameter <span class="keyword">const</span> pParam) :
-<a name="l00059"></a>00059         m_Refs(0), m_Core(pShader-&gt;GetCore()), m_Shader(pShader), m_Param(pParam), m_Virtual(false)
+<a name="l00059"></a>00059         m_Refs(0), m_Core(pShader-&gt;GetCore()), m_Shader(pShader), m_Virtual(false), m_Param(pParam)
 <a name="l00060"></a>00060     {
 <a name="l00061"></a>00061         <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a05f3a65a19acfb311688a52026596866">m_Type</a> = <a class="code" href="class_voodoo_shader_1_1_converter.html#a038ec4a1ac231c5bb5c3756f081b0de8" title="Convert a Cg runtime type to the corresponding Voodoo parameter type.">Converter::ToParameterType</a>(cgGetParameterType(<a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#ad17297d7b448b2faa5d08d4804eec560">m_Param</a>));
 <a name="l00062"></a>00062         <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#ae1fe8ffce8611bc5417478a6eb27948b">m_Name</a> = <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a892dfd277ab66e5d75f4f24ca0c1e4de">m_Shader</a>-&gt;GetName() + L<span class="stringliteral">&quot;::&quot;</span> + cgGetParameterName(<a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#ad17297d7b448b2faa5d08d4804eec560">m_Param</a>);
@@ -278,7 +278,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 11 2011 01:26:35 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 15 2011 23:26:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
