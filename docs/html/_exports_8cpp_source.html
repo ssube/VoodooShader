@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -118,7 +118,7 @@
 <a name="l00049"></a>00049         <span class="keywordflow">return</span> 4;
 <a name="l00050"></a>00050     }
 <a name="l00051"></a>00051 
-<a name="l00052"></a><a class="code" href="namespace_voodoo_shader.html#aa630db1259d2f43d88c8b54e40ca0da0">00052</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#aa630db1259d2f43d88c8b54e40ca0da0">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t number, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
+<a name="l00052"></a><a class="code" href="namespace_voodoo_shader.html#a7e55e28415ec0d178a731eb6ee15d368">00052</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#a7e55e28415ec0d178a731eb6ee15d368">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t number, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
 <a name="l00053"></a>00053     {
 <a name="l00054"></a>00054         <span class="keywordflow">if</span> (!pUuid)
 <a name="l00055"></a>00055         {
@@ -144,18 +144,18 @@
 <a name="l00075"></a>00075         }
 <a name="l00076"></a>00076     }
 <a name="l00077"></a>00077 
-<a name="l00078"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">00078</a>     <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * core)
+<a name="l00078"></a><a class="code" href="namespace_voodoo_shader.html#a83f782b0c88a9eb815b3cacc0ca8cb23">00078</a>     <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#a83f782b0c88a9eb815b3cacc0ca8cb23">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * core)
 <a name="l00079"></a>00079     {
 <a name="l00080"></a>00080         <span class="keywordflow">switch</span> (number)
 <a name="l00081"></a>00081         {
 <a name="l00082"></a>00082         <span class="keywordflow">case</span> 0:
-<a name="l00083"></a>00083             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html">VSAdapter</a>(core);
+<a name="l00083"></a>00083             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html" title="Voodoo Shader null adapter implementation.">VSAdapter</a>(core);
 <a name="l00084"></a>00084         <span class="keywordflow">case</span> 1:
-<a name="l00085"></a>00085             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html">VSFileSystem</a>(core);
+<a name="l00085"></a>00085             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html" title="Voodoo Shader null file system implementation.">VSFileSystem</a>(core);
 <a name="l00086"></a>00086         <span class="keywordflow">case</span> 2:
-<a name="l00087"></a>00087             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html">VSHookManager</a>(core);
+<a name="l00087"></a>00087             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html" title="Voodoo Shader null hook manager implementation.">VSHookManager</a>(core);
 <a name="l00088"></a>00088         <span class="keywordflow">case</span> 3:
-<a name="l00089"></a>00089             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_logger.html">VSLogger</a>(core);
+<a name="l00089"></a>00089             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_logger.html" title="Voodoo Shader null logger implementation.">VSLogger</a>(core);
 <a name="l00090"></a>00090         <span class="keywordflow">default</span>:
 <a name="l00091"></a>00091             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
 <a name="l00092"></a>00092         }
@@ -177,7 +177,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:24 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

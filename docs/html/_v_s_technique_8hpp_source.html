@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -93,25 +93,25 @@
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
 <a name="l00026"></a>00026     <span class="comment">/* VSTechnique: e6f312a5-05af-11e1-9e05-005056c00008 */</span>
-<a name="l00027"></a>00027     <a class="code" href="namespace_voodoo_shader.html#a0de97d7ac39e3fc4db0b5003cb6d8438">DEFINE_CLSID</a>(VSTechnique, 0xA5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00027"></a>00027     <a class="code" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(VSTechnique) = {0xA5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00028"></a>00028 
 <a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_technique.html">00029</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_v_s_technique.html">VSTechnique</a> :
 <a name="l00030"></a>00030         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a>
 <a name="l00031"></a>00031     {
 <a name="l00032"></a>00032     <span class="keyword">public</span>:
-<a name="l00033"></a>00033         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#afc8a0ad8d081844b8d63781ad3f18a2d">VSTechnique</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * pShader, _In_ CGtechnique pCgTech);
+<a name="l00033"></a>00033         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a196ae697aec2ed1d790efff6e5b1866f">VSTechnique</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * pShader, _In_ CGtechnique pCgTech);
 <a name="l00034"></a>00034         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#aba4d9ace8238b9606bc5670cccc50c6e">~VSTechnique</a>(<span class="keywordtype">void</span>);
 <a name="l00035"></a>00035 
 <a name="l00036"></a>00036         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a64103a5225370cb872611adf9bee7866" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00037"></a>00037         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#aeb81b7d273d5b9e71fb47d3ced79789b" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00038"></a>00038         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a7f2c133b80dd4ebbe949a51c7b1277fe" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00038"></a>00038         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a195a95ae2fa9d3ced6eedd51486c3d5f" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00039"></a>00039         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a84d36b1a77dca1239dd272b90d5f8f11" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00040"></a>00040         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a6a41f187180c78e089367f4e9872e3ce" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00041"></a>00041 
 <a name="l00042"></a>00042         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#abd3d1488fbdfdc0151e77b030d49a3f1">GetName</a>() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00043"></a>00043         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a3f7b41d168fc5f23f144710207104854" title="Retrieve the technique&#39;s final target.">GetTarget</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00044"></a>00044         <span class="keyword">virtual</span> <span class="keyword">const</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a38b11c64c17022469999496b6e4617a6">GetPassCount</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00045"></a>00045         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a8bb11355990113fb7c890f2591899c34" title="Retrieve a specific pass from this technique.">GetPass</a>(_In_ <span class="keyword">const</span> uint32_t index) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00045"></a>00045         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a77e399a44c993b39a46a398e7bf9dea9" title="Retrieve a specific pass from this technique.">GetPass</a>(_In_ <span class="keyword">const</span> uint32_t index) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00046"></a>00046         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a238548556055e07df2ad4f9dcac1d793" title="Retrieve the parent shader of this technique.">GetShader</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00047"></a>00047 
 <a name="l00048"></a>00048         <span class="keyword">virtual</span> CGtechnique <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ac96605e7a5953b974b23e6c09b5be15b" title="Retrieve the underlying Cg technique.">GetCgTechnique</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
@@ -135,7 +135,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:25 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -100,8 +100,8 @@
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#acc052a35bbb619bd20090dd06da514a3">Exception</a> (_In_ wchar_t *Module, _In_ wchar_t *Message, _In_opt_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore, _In_ char *File, _In_ char *Function, _In_ int Line)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#aca31fff2e3fd62ebd23e81cbb5ba2140">Exception</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> Module, _In_ <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> Message, _In_opt_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore, _In_ char *File, _In_ char *Function, _In_ int Line)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#acefef6f6741d896d718f8870a9cdee3d">Exception</a> (wchar_t *Module, wchar_t *Message, <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore, char *File, char *Function, int Line)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#a77da0c136e19848625ef5da7eecd2eb8">Exception</a> (<a class="el" href="class_voodoo_shader_1_1_string.html">String</a> Module, <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> Message, <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore, char *File, char *Function, int Line)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#a416434c95350932271da2f2980ebf299">~Exception</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#a8eb4a3f1ee7d2fc4895979804c90ea3a">what</a> (void)</td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
@@ -121,44 +121,44 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_exception_8hpp_source.html#l00039">39</a> of file <a class="el" href="_exception_8hpp_source.html">Exception.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="acc052a35bbb619bd20090dd06da514a3"></a><!-- doxytag: member="VoodooShader::Exception::Exception" ref="acc052a35bbb619bd20090dd06da514a3" args="(_In_ wchar_t *Module, _In_ wchar_t *Message, _In_opt_ ICore *pCore, _In_ char *File, _In_ char *Function, _In_ int Line)" -->
+<a class="anchor" id="acefef6f6741d896d718f8870a9cdee3d"></a><!-- doxytag: member="VoodooShader::Exception::Exception" ref="acefef6f6741d896d718f8870a9cdee3d" args="(wchar_t *Module, wchar_t *Message, ICore *pCore, char *File, char *Function, int Line)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">VoodooShader::Exception::Exception </td>
           <td>(</td>
-          <td class="paramtype">_In_ wchar_t *&#160;</td>
+          <td class="paramtype">wchar_t *&#160;</td>
           <td class="paramname"><em>Module</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ wchar_t *&#160;</td>
+          <td class="paramtype">wchar_t *&#160;</td>
           <td class="paramname"><em>Message</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_opt_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td>
           <td class="paramname"><em>pCore</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ char *&#160;</td>
+          <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>File</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ char *&#160;</td>
+          <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>Function</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ int&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>Line</em>&#160;</td>
         </tr>
         <tr>
@@ -174,44 +174,44 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aca31fff2e3fd62ebd23e81cbb5ba2140"></a><!-- doxytag: member="VoodooShader::Exception::Exception" ref="aca31fff2e3fd62ebd23e81cbb5ba2140" args="(_In_ String Module, _In_ String Message, _In_opt_ ICore *pCore, _In_ char *File, _In_ char *Function, _In_ int Line)" -->
+<a class="anchor" id="a77da0c136e19848625ef5da7eecd2eb8"></a><!-- doxytag: member="VoodooShader::Exception::Exception" ref="a77da0c136e19848625ef5da7eecd2eb8" args="(String Module, String Message, ICore *pCore, char *File, char *Function, int Line)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">VoodooShader::Exception::Exception </td>
           <td>(</td>
-          <td class="paramtype">_In_ <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td>
           <td class="paramname"><em>Module</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td>
           <td class="paramname"><em>Message</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_opt_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td>
           <td class="paramname"><em>pCore</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ char *&#160;</td>
+          <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>File</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ char *&#160;</td>
+          <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>Function</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ int&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>Line</em>&#160;</td>
         </tr>
         <tr>
@@ -380,7 +380,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:25 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:28 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

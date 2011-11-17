@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -93,25 +93,25 @@
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
 <a name="l00026"></a>00026     <span class="comment">/* VSPass: e6f312a3-05af-11e1-9e05-005056c00008 */</span>
-<a name="l00027"></a>00027     <a class="code" href="namespace_voodoo_shader.html#a0de97d7ac39e3fc4db0b5003cb6d8438">DEFINE_CLSID</a>(VSPass, 0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08);
+<a name="l00027"></a>00027     <a class="code" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(VSPass) = {0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00028"></a>00028 
 <a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html">00029</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html">VSPass</a> :
 <a name="l00030"></a>00030         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a>
 <a name="l00031"></a>00031     {
 <a name="l00032"></a>00032     <span class="keyword">public</span>:
-<a name="l00033"></a>00033         <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a28966ef8b10a670ed7b782355c472bc6">VSPass</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a> * pTechnique, _In_ CGpass pCgPass);
+<a name="l00033"></a>00033         <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a7e933776597f7e1616d609322f9b98f8">VSPass</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a> * pTechnique, _In_ CGpass pCgPass);
 <a name="l00034"></a>00034         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a7ca31fbede7fb7822ffb8255cd372205">~VSPass</a>(<span class="keywordtype">void</span>);
 <a name="l00035"></a>00035 
 <a name="l00036"></a>00036         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a1fc42d4d6be94a69e530be0cd5d49869" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00037"></a>00037         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a63f5a66f5f01046fc58b9b6a74dcc9c0" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00038"></a>00038         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#ad46246a809303831054d463dce4f9078" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00038"></a>00038         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a525df6924412b95a97e4db9feefbeab8" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00039"></a>00039         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a5fb910e3ff5502f10a47a18ff7e9ebea" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00040"></a>00040         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a6b34139f2f1add2894300458340deb8d" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00041"></a>00041 
 <a name="l00042"></a>00042         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a9272e67b9d95445f676e3c99aa316f12">GetName</a>() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00043"></a>00043         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a6d2b25745684a744a852bd584e3925e4" title="Retrieve the target texture buffer this pass should render to.">GetTarget</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00044"></a>00044         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a6bae76d4ee6e1c75478ac113b7728b6f" title="Retrieve the parent technique of this pass.">GetTechnique</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00045"></a>00045         <span class="keyword">virtual</span> CGprogram <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a580615cb66047c85fc0954ed18a5414a" title="Retrieve a specific program stage from this pass.">GetProgram</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a> stage) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00045"></a>00045         <span class="keyword">virtual</span> CGprogram <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a275671f580dd3c9992107bae41f322be" title="Retrieve a specific program stage from this pass.">GetProgram</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a> stage) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00046"></a>00046         <span class="keyword">virtual</span> CGpass <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#ac3202d09827fc108b1a4c1fc0a075832" title="Retrieve the underlying Cg technique.">GetCgPass</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00047"></a>00047 
 <a name="l00048"></a>00048     <span class="keyword">private</span>:
@@ -138,7 +138,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:25 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

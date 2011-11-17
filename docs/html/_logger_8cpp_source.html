@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -122,7 +122,7 @@
 <a name="l00053"></a>00053             <span class="keywordflow">return</span> 1;
 <a name="l00054"></a>00054         }
 <a name="l00055"></a>00055 
-<a name="l00056"></a><a class="code" href="group__voodoo__module__xmllogger.html#gaa4617b494bf5680d0a7c5502edd58200">00056</a>         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#aa630db1259d2f43d88c8b54e40ca0da0">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t index, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
+<a name="l00056"></a><a class="code" href="group__voodoo__module__xmllogger.html#gafe718876d1b10e9d9f3f0fa28dcb12ef">00056</a>         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#a7e55e28415ec0d178a731eb6ee15d368">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t index, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
 <a name="l00057"></a>00057         {
 <a name="l00058"></a>00058             <span class="keywordflow">if</span> (!pUuid)
 <a name="l00059"></a>00059             {
@@ -138,7 +138,7 @@
 <a name="l00069"></a>00069             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
 <a name="l00070"></a>00070         }
 <a name="l00071"></a>00071 
-<a name="l00072"></a><a class="code" href="group__voodoo__module__xmllogger.html#ga6b6b20b394a959efb56323e13bb270f6">00072</a>         <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__wfilesystem.html#ga142d9cc8002a257032378d86f1c8dea7">API_ClassCreate</a> (_In_ <span class="keyword">const</span> uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore)
+<a name="l00072"></a><a class="code" href="group__voodoo__module__xmllogger.html#gafa59234b5108ca107fbcbf3cc8bef96c">00072</a>         <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#a83f782b0c88a9eb815b3cacc0ca8cb23">API_ClassCreate</a> (_In_ <span class="keyword">const</span> uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore)
 <a name="l00073"></a>00073         {
 <a name="l00074"></a>00074             <span class="keywordflow">if</span> (number == 0)
 <a name="l00075"></a>00075             {
@@ -150,7 +150,7 @@
 <a name="l00081"></a>00081             }
 <a name="l00082"></a>00082         }
 <a name="l00083"></a>00083 
-<a name="l00084"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a99d8ada927b40fa510287a1eb5b1b1d2">00084</a>         VSXmlLogger::VSXmlLogger(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore) :
+<a name="l00084"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a9d2e5549ade25e5f9cccfeaa02b62d37">00084</a>         VSXmlLogger::VSXmlLogger(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore) :
 <a name="l00085"></a>00085             m_Core(pCore), m_LogLevel(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daafeed1bf97ad62e2982bb7ea8da1d939a">LL_Initial</a>)
 <a name="l00086"></a>00086         {
 <a name="l00087"></a>00087             this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a3f39e3f5c916fb927533d981d0f40562">m_LocalTime</a> = <span class="keyword">new</span> tm();
@@ -185,7 +185,7 @@
 <a name="l00116"></a>00116             }
 <a name="l00117"></a>00117         }
 <a name="l00118"></a>00118 
-<a name="l00119"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a633e057cf91e2dafd4d5b83e9618cb8b">00119</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a633e057cf91e2dafd4d5b83e9618cb8b" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSXmlLogger::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00119"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a6d64b5f7df894dcba1024de654941d5a">00119</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a6d64b5f7df894dcba1024de654941d5a" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSXmlLogger::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
 <a name="l00120"></a>00120 <span class="keyword">        </span>{
 <a name="l00121"></a>00121             <span class="keywordflow">if</span> (!ppOut)
 <a name="l00122"></a>00122             {
@@ -224,7 +224,7 @@
 <a name="l00155"></a>00155             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a67a603c4b7e237d23ecf18bdf527e864">m_Core</a>;
 <a name="l00156"></a>00156         }
 <a name="l00157"></a>00157 
-<a name="l00158"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a3768e6b4fb4e563d0b3cfb9d6ed7e16d">00158</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a3768e6b4fb4e563d0b3cfb9d6ed7e16d" title="Opens a file for use by this logger.">VSXmlLogger::Open</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; filename, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
+<a name="l00158"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a8d1947d35e5ce1df0f30a60db6715b5b">00158</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a8d1947d35e5ce1df0f30a60db6715b5b" title="Opens a file for use by this logger.">VSXmlLogger::Open</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; filename, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
 <a name="l00159"></a>00159         {
 <a name="l00160"></a>00160             <span class="keywordflow">if</span> (this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a2953ef04a3a9ae8114258ca8ac9455f6">m_LogFile</a>.is_open())
 <a name="l00161"></a>00161             {
@@ -247,7 +247,7 @@
 <a name="l00178"></a>00178             <span class="keywordflow">if</span> (this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a2953ef04a3a9ae8114258ca8ac9455f6">m_LogFile</a>.is_open())
 <a name="l00179"></a>00179             {
 <a name="l00180"></a>00180 <span class="preprocessor">#ifdef _DEBUG</span>
-<a name="l00181"></a>00181 <span class="preprocessor"></span>                this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a8d9f8a26edddedbc88bada843c11aa3a">SetFlags</a>(<a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dcadd274aec934ff467ea7b5c743399909a">LF_Flush</a>);
+<a name="l00181"></a>00181 <span class="preprocessor"></span>                this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ad672a50a8c3e9a2a36dcd450dc38b7a1">SetFlags</a>(<a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dcadd274aec934ff467ea7b5c743399909a">LF_Flush</a>);
 <a name="l00182"></a>00182 <span class="preprocessor">#endif</span>
 <a name="l00183"></a>00183 <span class="preprocessor"></span>
 <a name="l00184"></a>00184                 wstringstream logMsg;
@@ -263,9 +263,9 @@
 <a name="l00194"></a>00194 <span class="preprocessor">#endif</span>
 <a name="l00195"></a>00195 <span class="preprocessor"></span>                <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a2953ef04a3a9ae8114258ca8ac9455f6">m_LogFile</a> &lt;&lt; logMsg.str();
 <a name="l00196"></a>00196 
-<a name="l00197"></a>00197                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a71947be68fe3d270e15f2ddaccbe4c4a" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaf38b6ab75c151a62d89e452a44bae6eb">LL_ModInfo</a>, <a class="code" href="group__voodoo__module__xmllogger.html#gaed5f040d6abd714329b7143fa69ed1f1">VOODOO_LOGGER_NAME</a>, L<span class="stringliteral">&quot;Log file opened by VSXmlLogger::Open.&quot;</span>);
+<a name="l00197"></a>00197                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#aa0cecdcda51b6c61e53dd27a96ffdd5b" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaf38b6ab75c151a62d89e452a44bae6eb">LL_ModInfo</a>, <a class="code" href="group__voodoo__module__xmllogger.html#gaed5f040d6abd714329b7143fa69ed1f1">VOODOO_LOGGER_NAME</a>, L<span class="stringliteral">&quot;Log file opened by VSXmlLogger::Open.&quot;</span>);
 <a name="l00198"></a>00198 
-<a name="l00199"></a>00199                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a3b61192bf2217a7d8cc43c737828ee13" title="Writes a module stamp to the log.">LogModule</a>(<a class="code" href="group__voodoo__module__xmllogger.html#ga915a57bf07536d13bca4ac31c999d54e">API_ModuleVersion</a>());
+<a name="l00199"></a>00199                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a78508c2017f5c2c2d4f25719613ba7bf" title="Writes a module stamp to the log.">LogModule</a>(<a class="code" href="group__voodoo__module__xmllogger.html#ga915a57bf07536d13bca4ac31c999d54e">API_ModuleVersion</a>());
 <a name="l00200"></a>00200 
 <a name="l00201"></a>00201                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00202"></a>00202             }
@@ -275,9 +275,9 @@
 <a name="l00206"></a>00206             }
 <a name="l00207"></a>00207         }
 <a name="l00208"></a>00208 
-<a name="l00209"></a>00209         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a3768e6b4fb4e563d0b3cfb9d6ed7e16d" title="Opens a file for use by this logger.">VSXmlLogger::Open</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *<span class="keyword">const</span> pFile, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
+<a name="l00209"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a55249f79c0a027a8df21df8e1c88a375">00209</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a8d1947d35e5ce1df0f30a60db6715b5b" title="Opens a file for use by this logger.">VSXmlLogger::Open</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *<span class="keyword">const</span> pFile, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
 <a name="l00210"></a>00210         {
-<a name="l00211"></a>00211             <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a3768e6b4fb4e563d0b3cfb9d6ed7e16d" title="Opens a file for use by this logger.">Open</a>(pFile-&gt;GetPath(), append);
+<a name="l00211"></a>00211             <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a8d1947d35e5ce1df0f30a60db6715b5b" title="Opens a file for use by this logger.">Open</a>(pFile-&gt;GetPath(), append);
 <a name="l00212"></a>00212         }
 <a name="l00213"></a>00213 
 <a name="l00214"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a465bce6929a4f8038e86e64e3ce7134d">00214</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a465bce6929a4f8038e86e64e3ce7134d" title="Closes the log file, if one is open.">VSXmlLogger::Close</a>(<span class="keywordtype">void</span>)
@@ -297,7 +297,7 @@
 <a name="l00228"></a>00228             }
 <a name="l00229"></a>00229         }
 <a name="l00230"></a>00230 
-<a name="l00231"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a3b61192bf2217a7d8cc43c737828ee13">00231</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a3b61192bf2217a7d8cc43c737828ee13" title="Writes a module stamp to the log.">VSXmlLogger::LogModule</a>(<span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <span class="keyword">const</span> pVersion)
+<a name="l00231"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a78508c2017f5c2c2d4f25719613ba7bf">00231</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a78508c2017f5c2c2d4f25719613ba7bf" title="Writes a module stamp to the log.">VSXmlLogger::LogModule</a>(<span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <span class="keyword">const</span> pVersion)
 <a name="l00232"></a>00232         {
 <a name="l00233"></a>00233             <span class="keywordflow">if</span> (!this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a2953ef04a3a9ae8114258ca8ac9455f6">m_LogFile</a>.is_open()) <span class="keywordflow">return</span>;
 <a name="l00234"></a>00234 
@@ -325,7 +325,7 @@
 <a name="l00256"></a>00256             }
 <a name="l00257"></a>00257         }
 <a name="l00258"></a>00258 
-<a name="l00259"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a71947be68fe3d270e15f2ddaccbe4c4a">00259</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a71947be68fe3d270e15f2ddaccbe4c4a" title="Log a message, may be formatted with printf syntax.">VSXmlLogger::Log</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; module, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; msg, ...)
+<a name="l00259"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#aa0cecdcda51b6c61e53dd27a96ffdd5b">00259</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#aa0cecdcda51b6c61e53dd27a96ffdd5b" title="Log a message, may be formatted with printf syntax.">VSXmlLogger::Log</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; module, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; msg, ...)
 <a name="l00260"></a>00260         {
 <a name="l00261"></a>00261             va_list args;
 <a name="l00262"></a>00262 
@@ -338,7 +338,7 @@
 <a name="l00269"></a>00269             <span class="keywordflow">try</span>
 <a name="l00270"></a>00270             {
 <a name="l00271"></a>00271                 va_start(args, msg);
-<a name="l00272"></a>00272                 <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> fmtmsg = <a class="code" href="group__voodoo__utility__string__format.html#gae5bed9f0946772f062c84d36efc7df48">String::FormatV</a>(msg, args);
+<a name="l00272"></a>00272                 <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> fmtmsg = <a class="code" href="group__voodoo__utility__string__format.html#gaf19f157a14862373fc38c6070aabd1a1">String::FormatV</a>(msg, args);
 <a name="l00273"></a>00273                 va_end(args);
 <a name="l00274"></a>00274 
 <a name="l00275"></a>00275                 <span class="comment">// Format the message in memory to prevent partial messages from being dumped</span>
@@ -381,7 +381,7 @@
 <a name="l00312"></a>00312 <span class="preprocessor"></span>            }
 <a name="l00313"></a>00313         }
 <a name="l00314"></a>00314 
-<a name="l00315"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a8d9f8a26edddedbc88bada843c11aa3a">00315</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a8d9f8a26edddedbc88bada843c11aa3a">VSXmlLogger::SetFlags</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> flags)
+<a name="l00315"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ad672a50a8c3e9a2a36dcd450dc38b7a1">00315</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ad672a50a8c3e9a2a36dcd450dc38b7a1">VSXmlLogger::SetFlags</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> flags)
 <a name="l00316"></a>00316         {
 <a name="l00317"></a>00317             <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a19d7c406fd3d584a876530e3ec774bed">m_Flags</a> = flags;
 <a name="l00318"></a>00318         }
@@ -391,7 +391,7 @@
 <a name="l00322"></a>00322             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a19d7c406fd3d584a876530e3ec774bed">m_Flags</a>;
 <a name="l00323"></a>00323         }
 <a name="l00324"></a>00324 
-<a name="l00325"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a760b6b21b4b48e62f21c87cafd39a640">00325</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a760b6b21b4b48e62f21c87cafd39a640" title="Set the default minimum message level.">VSXmlLogger::SetLogLevel</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level)
+<a name="l00325"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a945ad57956548aa1a5141b39168d4a47">00325</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a945ad57956548aa1a5141b39168d4a47" title="Set the default minimum message level.">VSXmlLogger::SetLogLevel</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level)
 <a name="l00326"></a>00326         {
 <a name="l00327"></a>00327             <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a42954080a7d741783061042cbb2c2092">m_LogLevel</a> = level;
 <a name="l00328"></a>00328         }
@@ -446,7 +446,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:25 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

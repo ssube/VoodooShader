@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -81,9 +81,9 @@ Defines</h2></td></tr>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const Version *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga915a57bf07536d13bca4ac31c999d54e">VoodooShader::XmlLogger::API_ModuleVersion</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const uint32_t VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga21364a5b445ad47e5081b1e1613b5560">VoodooShader::XmlLogger::API_ClassCount</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const wchar_t *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#gaa4617b494bf5680d0a7c5502edd58200">VoodooShader::XmlLogger::API_ClassInfo</a> (_In_ const uint32_t index, _Out_ Uuid *pUuid)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">IObject *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga6b6b20b394a959efb56323e13bb270f6">VoodooShader::XmlLogger::API_ClassCreate</a> (_In_ const uint32_t number, _In_ ICore *pCore)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga67b1c6ba7d7fcb04c81665ce8549ebbf">VoodooShader::XmlLogger::DEFINE_CLSID</a> (VSXmlLogger, 0xB7, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const wchar_t *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#gafe718876d1b10e9d9f3f0fa28dcb12ef">VoodooShader::XmlLogger::API_ClassInfo</a> (const uint32_t index, Uuid *pUuid)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">IObject *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#gafa59234b5108ca107fbcbf3cc8bef96c">VoodooShader::XmlLogger::API_ClassCreate</a> (const uint32_t number, ICore *pCore)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga0378f532810d4c6dfcddc2058acff8d0">VoodooShader::XmlLogger::__declspec</a> (selectany) CLSID_VSXmlLogger</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Provides a simple implementation of <a class="el" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a>, printing a neatly-formatted Xml log. </p>
@@ -211,6 +211,23 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ga0378f532810d4c6dfcddc2058acff8d0"></a><!-- doxytag: member="VoodooShader::XmlLogger::__declspec" ref="ga0378f532810d4c6dfcddc2058acff8d0" args="(selectany) CLSID_VSXmlLogger" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Uuid VoodooShader::XmlLogger::__declspec </td>
+          <td>(</td>
+          <td class="paramtype">selectany&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ga21364a5b445ad47e5081b1e1613b5560"></a><!-- doxytag: member="VoodooShader::XmlLogger::API_ClassCount" ref="ga21364a5b445ad47e5081b1e1613b5560" args="(void)" -->
 <div class="memitem">
 <div class="memproto">
@@ -230,20 +247,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga6b6b20b394a959efb56323e13bb270f6"></a><!-- doxytag: member="VoodooShader::XmlLogger::API_ClassCreate" ref="ga6b6b20b394a959efb56323e13bb270f6" args="(_In_ const uint32_t number, _In_ ICore *pCore)" -->
+<a class="anchor" id="gafa59234b5108ca107fbcbf3cc8bef96c"></a><!-- doxytag: member="VoodooShader::XmlLogger::API_ClassCreate" ref="gafa59234b5108ca107fbcbf3cc8bef96c" args="(const uint32_t number, ICore *pCore)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">IObject *VOODOO_CALL VoodooShader::XmlLogger::API_ClassCreate </td>
           <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
+          <td class="paramtype">const uint32_t&#160;</td>
           <td class="paramname"><em>number</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ ICore *&#160;</td>
+          <td class="paramtype">ICore *&#160;</td>
           <td class="paramname"><em>pCore</em>&#160;</td>
         </tr>
         <tr>
@@ -259,20 +276,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaa4617b494bf5680d0a7c5502edd58200"></a><!-- doxytag: member="VoodooShader::XmlLogger::API_ClassInfo" ref="gaa4617b494bf5680d0a7c5502edd58200" args="(_In_ const uint32_t index, _Out_ Uuid *pUuid)" -->
+<a class="anchor" id="gafe718876d1b10e9d9f3f0fa28dcb12ef"></a><!-- doxytag: member="VoodooShader::XmlLogger::API_ClassInfo" ref="gafe718876d1b10e9d9f3f0fa28dcb12ef" args="(const uint32_t index, Uuid *pUuid)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">const wchar_t *VOODOO_CALL VoodooShader::XmlLogger::API_ClassInfo </td>
           <td>(</td>
-          <td class="paramtype">_In_ const uint32_t&#160;</td>
+          <td class="paramtype">const uint32_t&#160;</td>
           <td class="paramname"><em>index</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_Out_ Uuid *&#160;</td>
+          <td class="paramtype">Uuid *&#160;</td>
           <td class="paramname"><em>pUuid</em>&#160;</td>
         </tr>
         <tr>
@@ -307,128 +324,11 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga67b1c6ba7d7fcb04c81665ce8549ebbf"></a><!-- doxytag: member="VoodooShader::XmlLogger::DEFINE_CLSID" ref="ga67b1c6ba7d7fcb04c81665ce8549ebbf" args="(VSXmlLogger, 0xB7, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::XmlLogger::DEFINE_CLSID </td>
-          <td>(</td>
-          <td class="paramtype">VSXmlLogger&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xB7&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x12&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xF3&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xE6&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xAF&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x05&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xE1&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x11&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x9E&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x05&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x00&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x50&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x56&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0xC0&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x00&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0x08&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:25 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:28 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

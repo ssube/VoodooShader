@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -104,18 +104,18 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a49338701398c1431b2e9052bdfc9aadd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#a33405e5308b6da50a3a1d6b8ae11d818">Release</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a33405e5308b6da50a3a1d6b8ae11d818"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#a89f798ecd1fa68dcbeed0929a6545ccc">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const =0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a89f798ecd1fa68dcbeed0929a6545ccc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#aa655c4d80aee57de0877e3ff278730ec">CheckedCast</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#aa655c4d80aee57de0877e3ff278730ec"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#a55e2c2dedc5af97f25c966087b491cdd">ToString</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a55e2c2dedc5af97f25c966087b491cdd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#a459449482e231930ff4f55753429baa7">GetCore</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a459449482e231930ff4f55753429baa7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#a68a07fdf48b2297be3c4c7bd7871b8d2">Add</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, _In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;value, _In_ const <a class="el" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type=VT_Normal)=0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a variable to the internal dictionary.  <a href="#a68a07fdf48b2297be3c4c7bd7871b8d2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#a9e6eedb7d2e47347e8f555a89b863454">Remove</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name)=0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a variable from the internal dictionary.  <a href="#a9e6eedb7d2e47347e8f555a89b863454"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca">Parse</a> (_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;input, _In_ const <a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce">ParseFlags</a> flags=PF_None) const =0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a string, replacing any variables with their values.  <a href="#ac935b390f702d094c55a963d68fc52ca"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#a629e6d1c5ce270b7873bfae3d78b024f">Add</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;value, const <a class="el" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type=VT_Normal)=0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a variable to the internal dictionary.  <a href="#a629e6d1c5ce270b7873bfae3d78b024f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#a9e626cc6bd961e559fb62f0fdf708494">Remove</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name)=0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a variable from the internal dictionary.  <a href="#a9e626cc6bd961e559fb62f0fdf708494"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807">Parse</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;input, const <a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce">ParseFlags</a> flags=PF_None) const =0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a string, replacing any variables with their values.  <a href="#a441d18325c9ea9ac5f1a80c8674c2807"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Provides extensive variable handling and string parsing. </p>
@@ -142,26 +142,26 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a68a07fdf48b2297be3c4c7bd7871b8d2"></a><!-- doxytag: member="VoodooShader::IParser::Add" ref="a68a07fdf48b2297be3c4c7bd7871b8d2" args="(_In_ const String &amp;name, _In_ const String &amp;value, _In_ const VariableType type=VT_Normal)=0" -->
+<a class="anchor" id="a629e6d1c5ce270b7873bfae3d78b024f"></a><!-- doxytag: member="VoodooShader::IParser::Add" ref="a629e6d1c5ce270b7873bfae3d78b024f" args="(const String &amp;name, const String &amp;value, const VariableType type=VT_Normal)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual void VoodooShader::IParser::Add </td>
           <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>value</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ const <a class="el" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a>&#160;</td>
           <td class="paramname"><em>type</em> = <code>VT_Normal</code>&#160;</td>
         </tr>
         <tr>
@@ -183,7 +183,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#a9ab223abf8eb304ee56949eebac1ff65">VoodooShader::VSParser</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#a6d59e504021c344b1af99974e47f508e">VoodooShader::VSParser</a>.</p>
 
 </div>
 </div>
@@ -212,20 +212,20 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a89f798ecd1fa68dcbeed0929a6545ccc"></a><!-- doxytag: member="VoodooShader::IParser::CheckedCast" ref="a89f798ecd1fa68dcbeed0929a6545ccc" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const =0" -->
+<a class="anchor" id="aa655c4d80aee57de0877e3ff278730ec"></a><!-- doxytag: member="VoodooShader::IParser::CheckedCast" ref="aa655c4d80aee57de0877e3ff278730ec" args="(Uuid &amp;clsid, const void **ppOut) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual bool VoodooShader::IParser::CheckedCast </td>
           <td>(</td>
-          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
           <td class="paramname"><em>clsid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramtype">const void **&#160;</td>
           <td class="paramname"><em>ppOut</em>&#160;</td>
         </tr>
         <tr>
@@ -248,9 +248,9 @@ Public Member Functions</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#adee03553337e3c174cdfbbc0a305e9c5">VoodooShader::IObject</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#ab191f586ec090a8df77381b84d452a25">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#af874a2e4770c01fd54017918ad201d12">VoodooShader::VSParser</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#a33d87a9d89b9bfb0164bb73f4f764fb8">VoodooShader::VSParser</a>.</p>
 
 </div>
 </div>
@@ -278,20 +278,20 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac935b390f702d094c55a963d68fc52ca"></a><!-- doxytag: member="VoodooShader::IParser::Parse" ref="ac935b390f702d094c55a963d68fc52ca" args="(_In_ const String &amp;input, _In_ const ParseFlags flags=PF_None) const =0" -->
+<a class="anchor" id="a441d18325c9ea9ac5f1a80c8674c2807"></a><!-- doxytag: member="VoodooShader::IParser::Parse" ref="a441d18325c9ea9ac5f1a80c8674c2807" args="(const String &amp;input, const ParseFlags flags=PF_None) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::IParser::Parse </td>
           <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ const <a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce">ParseFlags</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce">ParseFlags</a>&#160;</td>
           <td class="paramname"><em>flags</em> = <code>PF_None</code>&#160;</td>
         </tr>
         <tr>
@@ -307,7 +307,7 @@ Public Member Functions</h2></td></tr>
 <p>Variables are resolved when found, so it is possible to have variables within variables and trigger recursion.</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="voodoo_vars.html">Variables</a> for details on how variables work </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#a3f0a96691b6d63ec6947922e35275f01">VoodooShader::VSParser</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#aa44f867485c29de0541ea2e265b1ed0c">VoodooShader::VSParser</a>.</p>
 
 </div>
 </div>
@@ -336,14 +336,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9e6eedb7d2e47347e8f555a89b863454"></a><!-- doxytag: member="VoodooShader::IParser::Remove" ref="a9e6eedb7d2e47347e8f555a89b863454" args="(_In_ const String &amp;name)=0" -->
+<a class="anchor" id="a9e626cc6bd961e559fb62f0fdf708494"></a><!-- doxytag: member="VoodooShader::IParser::Remove" ref="a9e626cc6bd961e559fb62f0fdf708494" args="(const String &amp;name)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual void VoodooShader::IParser::Remove </td>
           <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
           <td>  throw ()<code> [pure virtual]</code></td>
         </tr>
@@ -359,7 +359,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#ac9ec59b35109e48db57f1b1a74aacfed">VoodooShader::VSParser</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#aad66047560415174566cf0029e12790a">VoodooShader::VSParser</a>.</p>
 
 </div>
 </div>
@@ -394,7 +394,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:26 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:28 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

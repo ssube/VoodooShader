@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -100,15 +100,15 @@
 <a name="l00039"></a>00039 
 <a name="l00040"></a>00040         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a49338701398c1431b2e9052bdfc9aadd" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> throw() = 0;
 <a name="l00041"></a>00041         virtual uint32_t <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a33405e5308b6da50a3a1d6b8ae11d818" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00042"></a>00042         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a89f798ecd1fa68dcbeed0929a6545ccc" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ const <span class="keywordtype">void</span> ** ppOut) const throw() = 0;
+<a name="l00042"></a>00042         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#aa655c4d80aee57de0877e3ff278730ec" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ const <span class="keywordtype">void</span> ** ppOut) const throw() = 0;
 <a name="l00043"></a>00043         virtual <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a55e2c2dedc5af97f25c966087b491cdd" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) const throw() = 0;
 <a name="l00044"></a>00044         virtual <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a459449482e231930ff4f55753429baa7" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) const throw() = 0;
 <a name="l00045"></a>00045 
-<a name="l00053"></a>00053         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a68a07fdf48b2297be3c4c7bd7871b8d2" title="Adds a variable to the internal dictionary.">Add</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; value, _In_ const <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>) throw() = 0;
+<a name="l00053"></a>00053         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a629e6d1c5ce270b7873bfae3d78b024f" title="Adds a variable to the internal dictionary.">Add</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; value, _In_ const <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>) throw() = 0;
 <a name="l00054"></a>00054 
-<a name="l00060"></a>00060         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a9e6eedb7d2e47347e8f555a89b863454" title="Removes a variable from the internal dictionary.">Remove</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) throw() = 0;
+<a name="l00060"></a>00060         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a9e626cc6bd961e559fb62f0fdf708494" title="Removes a variable from the internal dictionary.">Remove</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) throw() = 0;
 <a name="l00061"></a>00061 
-<a name="l00068"></a>00068         virtual <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; input, _In_ const <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) const throw() = 0;
+<a name="l00068"></a>00068         virtual <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values.">Parse</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; input, _In_ const <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) const throw() = 0;
 <a name="l00069"></a>00069     };
 <a name="l00070"></a>00070 
 <a name="l00257"></a>00257 }
@@ -117,7 +117,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:24 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

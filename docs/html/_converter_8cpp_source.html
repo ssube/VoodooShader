@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -91,7 +91,7 @@
 <a name="l00022"></a>00022 
 <a name="l00023"></a><a class="code" href="namespace_voodoo_shader.html">00023</a> <span class="keyword">namespace </span>VoodooShader
 <a name="l00024"></a>00024 {
-<a name="l00025"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#ad9d53d7ec85dcb896181b040a4054490">00025</a>     CGtype <a class="code" href="class_voodoo_shader_1_1_converter.html#ad9d53d7ec85dcb896181b040a4054490" title="Convert a Voodoo parameter type to the corresponding Cg runtime type.">Converter::ToCGType</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> pt)
+<a name="l00025"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a5e992675ee0d6a5474ded1b9d4c51785">00025</a>     CGtype <a class="code" href="class_voodoo_shader_1_1_converter.html#a5e992675ee0d6a5474ded1b9d4c51785" title="Convert a Voodoo parameter type to the corresponding Cg runtime type.">Converter::ToCGType</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> pt)
 <a name="l00026"></a>00026     {
 <a name="l00027"></a>00027         <span class="keywordflow">switch</span> (pt)
 <a name="l00028"></a>00028         {
@@ -145,7 +145,7 @@
 <a name="l00076"></a>00076         }
 <a name="l00077"></a>00077     }
 <a name="l00078"></a>00078 
-<a name="l00079"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a038ec4a1ac231c5bb5c3756f081b0de8">00079</a>     <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> <a class="code" href="class_voodoo_shader_1_1_converter.html#a038ec4a1ac231c5bb5c3756f081b0de8" title="Convert a Cg runtime type to the corresponding Voodoo parameter type.">Converter::ToParameterType</a>(_In_ CGtype pt)
+<a name="l00079"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a53a34e583afc600543a83a8525e9e3a7">00079</a>     <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> <a class="code" href="class_voodoo_shader_1_1_converter.html#a53a34e583afc600543a83a8525e9e3a7" title="Convert a Cg runtime type to the corresponding Voodoo parameter type.">Converter::ToParameterType</a>(_In_ CGtype pt)
 <a name="l00080"></a>00080     {
 <a name="l00081"></a>00081         <span class="keywordflow">switch</span> (pt)
 <a name="l00082"></a>00082         {
@@ -200,7 +200,7 @@
 <a name="l00131"></a>00131         }
 <a name="l00132"></a>00132     }
 <a name="l00133"></a>00133 
-<a name="l00134"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a6a85295cf0dcc58da0a6d6776edc681f">00134</a>     <a class="code" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a> <a class="code" href="class_voodoo_shader_1_1_converter.html#a6a85295cf0dcc58da0a6d6776edc681f">Converter::ToParameterCategory</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type)
+<a name="l00134"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#ac1eea36bf7f07779489d6353af8b4dc2">00134</a>     <a class="code" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a> <a class="code" href="class_voodoo_shader_1_1_converter.html#ac1eea36bf7f07779489d6353af8b4dc2">Converter::ToParameterCategory</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type)
 <a name="l00135"></a>00135     {
 <a name="l00136"></a>00136         <span class="keywordflow">switch</span> (type)
 <a name="l00137"></a>00137         {
@@ -231,7 +231,7 @@
 <a name="l00162"></a>00162         }
 <a name="l00163"></a>00163     }
 <a name="l00164"></a>00164 
-<a name="l00165"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#aef7fda18ca1ddc967a3e2f00e7ba8d2f">00165</a>     <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f" title="Texture formats for use by Textures, describing the layout and size of the texture data...">TextureFormat</a> <a class="code" href="class_voodoo_shader_1_1_converter.html#aef7fda18ca1ddc967a3e2f00e7ba8d2f">Converter::ToTextureFormat</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * format)
+<a name="l00165"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#ae0ce0481e276127ea94bd3a994b06e74">00165</a>     <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f" title="Texture formats for use by Textures, describing the layout and size of the texture data...">TextureFormat</a> <a class="code" href="class_voodoo_shader_1_1_converter.html#ae0ce0481e276127ea94bd3a994b06e74">Converter::ToTextureFormat</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * format)
 <a name="l00166"></a>00166     {
 <a name="l00167"></a>00167         <span class="keywordflow">if</span> (_wcsnicmp(format, L<span class="stringliteral">&quot;TF_&quot;</span>, 3) != 0)
 <a name="l00168"></a>00168         {
@@ -260,7 +260,7 @@
 <a name="l00191"></a>00191         <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>;
 <a name="l00192"></a>00192     }
 <a name="l00193"></a>00193 
-<a name="l00194"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a27447bbcd8a5d52ebda04335c034c818">00194</a>     <span class="keywordtype">int</span> <a class="code" href="class_voodoo_shader_1_1_converter.html#a27447bbcd8a5d52ebda04335c034c818">Converter::ToComponents</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type)
+<a name="l00194"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#ab96151c93f795651bcf108b1ed12433c">00194</a>     <span class="keywordtype">int</span> <a class="code" href="class_voodoo_shader_1_1_converter.html#ab96151c93f795651bcf108b1ed12433c">Converter::ToComponents</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type)
 <a name="l00195"></a>00195     {
 <a name="l00196"></a>00196         <span class="keywordflow">switch</span> (type)
 <a name="l00197"></a>00197         {
@@ -304,7 +304,7 @@
 <a name="l00235"></a>00235 <span class="preprocessor"> case x: \</span>
 <a name="l00236"></a>00236 <span class="preprocessor"> return VOODOO_META_TOSTRING(x)</span>
 <a name="l00237"></a>00237 <span class="preprocessor"></span>
-<a name="l00238"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#ab4ff8987e3e6bd3cec18ccb73febddf4">00238</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="class_voodoo_shader_1_1_converter.html#ab4ff8987e3e6bd3cec18ccb73febddf4" title="Helper function to convert enum values into readable strings used in logging; this overload handles t...">Converter::ToString</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f" title="Texture formats for use by Textures, describing the layout and size of the texture data...">TextureFormat</a> tf)
+<a name="l00238"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a03186236d55cd563e1e8de0111cc4d68">00238</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="class_voodoo_shader_1_1_converter.html#a03186236d55cd563e1e8de0111cc4d68" title="Helper function to convert enum values into readable strings used in logging; this overload handles t...">Converter::ToString</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f" title="Texture formats for use by Textures, describing the layout and size of the texture data...">TextureFormat</a> tf)
 <a name="l00239"></a>00239     {
 <a name="l00240"></a>00240         <span class="keywordflow">switch</span> (tf)
 <a name="l00241"></a>00241         {
@@ -323,7 +323,7 @@
 <a name="l00254"></a>00254         }
 <a name="l00255"></a>00255     }
 <a name="l00256"></a>00256 
-<a name="l00257"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a9f351e04bc307929bef2cce5cc443cb7">00257</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="class_voodoo_shader_1_1_converter.html#ab4ff8987e3e6bd3cec18ccb73febddf4" title="Helper function to convert enum values into readable strings used in logging; this overload handles t...">Converter::ToString</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> pt)
+<a name="l00257"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a4b3e537b5e1e737e1801fff9400808b9">00257</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="class_voodoo_shader_1_1_converter.html#a03186236d55cd563e1e8de0111cc4d68" title="Helper function to convert enum values into readable strings used in logging; this overload handles t...">Converter::ToString</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> pt)
 <a name="l00258"></a>00258     {
 <a name="l00259"></a>00259         <span class="keywordflow">switch</span> (pt)
 <a name="l00260"></a>00260         {
@@ -353,7 +353,7 @@
 <a name="l00284"></a>00284         }
 <a name="l00285"></a>00285     }
 <a name="l00286"></a>00286 
-<a name="l00287"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a1a89169822a47e1785d3d774a6687452">00287</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="class_voodoo_shader_1_1_converter.html#ab4ff8987e3e6bd3cec18ccb73febddf4" title="Helper function to convert enum values into readable strings used in logging; this overload handles t...">Converter::ToString</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a> cat)
+<a name="l00287"></a><a class="code" href="class_voodoo_shader_1_1_converter.html#a5e368911c6ae1efbaf8cf032fb08ee2f">00287</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="class_voodoo_shader_1_1_converter.html#a03186236d55cd563e1e8de0111cc4d68" title="Helper function to convert enum values into readable strings used in logging; this overload handles t...">Converter::ToString</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a> cat)
 <a name="l00288"></a>00288     {
 <a name="l00289"></a>00289         <span class="keywordflow">switch</span> (cat)
 <a name="l00290"></a>00290         {
@@ -373,7 +373,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:24 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

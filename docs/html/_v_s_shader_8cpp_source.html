@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -105,7 +105,7 @@
 <a name="l00036"></a>00036 
 <a name="l00037"></a>00037 <span class="keyword">namespace </span>VoodooShader
 <a name="l00038"></a>00038 {
-<a name="l00040"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a38df59bba4601c0a3ef94e14f5f2b67e">00040</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a38df59bba4601c0a3ef94e14f5f2b67e">VSShader::VSShader</a>(_Pre_notnull_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <span class="keyword">const</span> pCore, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path, _In_opt_ <span class="keyword">const</span> <span class="keywordtype">char</span> ** ppArgs) :
+<a name="l00040"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ab9a107b8e757d91b8e8e5f51c2e6c8e5">00040</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ab9a107b8e757d91b8e8e5f51c2e6c8e5">VSShader::VSShader</a>(_Pre_notnull_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <span class="keyword">const</span> pCore, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path, _In_opt_ <span class="keyword">const</span> <span class="keywordtype">char</span> ** ppArgs) :
 <a name="l00041"></a>00041         m_Refs(0), m_Core(pCore), m_Name(path), m_DefaultTechnique(<a class="code" href="_includes_8hpp.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>)
 <a name="l00042"></a>00042     {
 <a name="l00043"></a>00043         CGcontext context = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a3582274c1eaa490abded6834d5278c8d" title="Retrieve the Cg context associated with this ICore.">GetCgContext</a>();
@@ -115,7 +115,7 @@
 <a name="l00047"></a>00047             <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Unable to create parameter (core has no context).&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>);
 <a name="l00048"></a>00048         }
 <a name="l00049"></a>00049 
-<a name="l00050"></a>00050         int32_t len = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a0b4151ab3010014d9705931f43001eb1">m_Name</a>.<a class="code" href="group__voodoo__utility__string__conv.html#ga08d5841b26759cd9a4c05832f8a1cf42" title="Attempts to convert this String to a character array.">ToCharStr</a>(0, <span class="keyword">nullptr</span>);
+<a name="l00050"></a>00050         int32_t len = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a0b4151ab3010014d9705931f43001eb1">m_Name</a>.<a class="code" href="group__voodoo__utility__string__conv.html#ga128f49140f98be5b27b45fa8845ce2c4" title="Attempts to convert this String to a character array.">ToCharStr</a>(0, <span class="keyword">nullptr</span>);
 <a name="l00051"></a>00051         std::vector&lt;char&gt; buffer(len);
 <a name="l00052"></a>00052         path.ToCharStr(len, &amp;buffer[0]);
 <a name="l00053"></a>00053 
@@ -135,7 +135,7 @@
 <a name="l00067"></a>00067 
 <a name="l00068"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a69bfcd3b42c392c1c0b645f973770c2c">00068</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a69bfcd3b42c392c1c0b645f973770c2c">VSShader::~VSShader</a>(<span class="keywordtype">void</span>)
 <a name="l00069"></a>00069     {
-<a name="l00070"></a>00070         <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Destroying shader %s.&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a0b4151ab3010014d9705931f43001eb1">m_Name</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00070"></a>00070         <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Destroying shader %s.&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a0b4151ab3010014d9705931f43001eb1">m_Name</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00071"></a>00071 
 <a name="l00072"></a>00072         <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a60693ff691e839d04ce004cc52fba2f2">m_DefaultTechnique</a> = <span class="keyword">nullptr</span>;
 <a name="l00073"></a>00073         <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a692f8b99f39c952fbd7bb91554944cd7">m_Techniques</a>.clear();
@@ -163,7 +163,7 @@
 <a name="l00095"></a>00095         }
 <a name="l00096"></a>00096     }
 <a name="l00097"></a>00097 
-<a name="l00098"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a4d885b1de2004ffe522220f18f421581">00098</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a4d885b1de2004ffe522220f18f421581" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSShader::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00098"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a723307298a5d43c7a2619a8a051b5a43">00098</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a723307298a5d43c7a2619a8a051b5a43" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSShader::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
 <a name="l00099"></a>00099 <span class="keyword">    </span>{
 <a name="l00100"></a>00100         <span class="keywordflow">if</span> (!ppOut)
 <a name="l00101"></a>00101         {
@@ -212,7 +212,7 @@
 <a name="l00144"></a>00144         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a692f8b99f39c952fbd7bb91554944cd7">m_Techniques</a>.size();
 <a name="l00145"></a>00145     }
 <a name="l00146"></a>00146 
-<a name="l00147"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ac177f67ad3436807993400f78ecddb34">00147</a>     <a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ac177f67ad3436807993400f78ecddb34" title="Retrieve a technique from the shader by name.">VSShader::GetTechnique</a>(<span class="keyword">const</span> uint32_t index)<span class="keyword"> const</span>
+<a name="l00147"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#aa05c2e20d67a26db5f48fea97cf20c3e">00147</a>     <a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#aa05c2e20d67a26db5f48fea97cf20c3e" title="Retrieve a technique from the shader by name.">VSShader::GetTechnique</a>(<span class="keyword">const</span> uint32_t index)<span class="keyword"> const</span>
 <a name="l00148"></a>00148 <span class="keyword">    </span>{
 <a name="l00149"></a>00149         <span class="keywordflow">if</span> (index &lt; <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a692f8b99f39c952fbd7bb91554944cd7">m_Techniques</a>.size())
 <a name="l00150"></a>00150         {
@@ -229,7 +229,7 @@
 <a name="l00161"></a>00161         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a60693ff691e839d04ce004cc52fba2f2">m_DefaultTechnique</a>.get();
 <a name="l00162"></a>00162     }
 <a name="l00163"></a>00163 
-<a name="l00164"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a9b0f8d5989286d05d27dcf09521ed3ff">00164</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a9b0f8d5989286d05d27dcf09521ed3ff" title="Set a technique from this shader to be used as the default technique.">VSShader::SetDefaultTechnique</a>(<a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a> * pTechnique)
+<a name="l00164"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#aca4f12e0841dec85a85a5d97b1a1baff">00164</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#aca4f12e0841dec85a85a5d97b1a1baff" title="Set a technique from this shader to be used as the default technique.">VSShader::SetDefaultTechnique</a>(<a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a> * pTechnique)
 <a name="l00165"></a>00165     {
 <a name="l00166"></a>00166         <span class="keywordflow">if</span> (pTechnique != <span class="keyword">nullptr</span>)
 <a name="l00167"></a>00167         {
@@ -240,7 +240,7 @@
 <a name="l00172"></a>00172             }
 <a name="l00173"></a>00173             <span class="keywordflow">else</span>
 <a name="l00174"></a>00174             {
-<a name="l00175"></a>00175                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00175"></a>00175                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00176"></a>00176                 (
 <a name="l00177"></a>00177                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>,
 <a name="l00178"></a>00178                     <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -258,7 +258,7 @@
 <a name="l00190"></a>00190         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a711dfb923ec6bc5dc7200bfd49e16b7d">m_Parameters</a>.size();
 <a name="l00191"></a>00191     }
 <a name="l00192"></a>00192 
-<a name="l00193"></a>00193     <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#afeae09bd87f6669b270c8c0fee89dd0c" title="Retrieve a specific parameter from the shader.">VSShader::GetParameter</a>(_In_ <span class="keyword">const</span> uint32_t index)<span class="keyword"> const</span>
+<a name="l00193"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a1ed5046288c176e059aa2f59481d4846">00193</a>     <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a1ed5046288c176e059aa2f59481d4846" title="Retrieve a specific parameter from the shader.">VSShader::GetParameter</a>(_In_ <span class="keyword">const</span> uint32_t index)<span class="keyword"> const</span>
 <a name="l00194"></a>00194 <span class="keyword">    </span>{
 <a name="l00195"></a>00195         <span class="keywordflow">if</span> (index &lt; <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a711dfb923ec6bc5dc7200bfd49e16b7d">m_Parameters</a>.size())
 <a name="l00196"></a>00196         {
@@ -290,7 +290,7 @@
 <a name="l00222"></a>00222         {
 <a name="l00223"></a>00223             <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html">VSParameter</a>(<span class="keyword">this</span>, cParam);
 <a name="l00224"></a>00224 
-<a name="l00225"></a>00225             this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#af6ba532509de40c1d88a563f16455e6d" title="Link a particular effect-level parameter against various core elements (exact behavior depends on par...">LinkParameter</a>(pParam);
+<a name="l00225"></a>00225             this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259" title="Link a particular effect-level parameter against various core elements (exact behavior depends on par...">LinkParameter</a>(pParam);
 <a name="l00226"></a>00226 
 <a name="l00227"></a>00227             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a711dfb923ec6bc5dc7200bfd49e16b7d">m_Parameters</a>.push_back(pParam);
 <a name="l00228"></a>00228 
@@ -300,7 +300,7 @@
 <a name="l00232"></a>00232         this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a84f428096f38dba9663c2f8643f98876">SetupTechniques</a>();
 <a name="l00233"></a>00233     }
 <a name="l00234"></a>00234 
-<a name="l00235"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#af6ba532509de40c1d88a563f16455e6d">00235</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#af6ba532509de40c1d88a563f16455e6d" title="Link a particular effect-level parameter against various core elements (exact behavior depends on par...">VSShader::LinkParameter</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam)
+<a name="l00235"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259">00235</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259" title="Link a particular effect-level parameter against various core elements (exact behavior depends on par...">VSShader::LinkParameter</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam)
 <a name="l00236"></a>00236     {
 <a name="l00237"></a>00237         <span class="comment">// Cache basic data for future use</span>
 <a name="l00238"></a>00238         <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type = pParam-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a38f3cc6b7c77281ea9491d312ce7f300" title="Retrieves the type of this parameter.">GetType</a>();
@@ -315,15 +315,15 @@
 <a name="l00247"></a>00247 
 <a name="l00248"></a>00248             <span class="keywordflow">if</span> (globalName != <span class="keyword">nullptr</span> &amp;&amp; strlen(globalName) &gt; 0)
 <a name="l00249"></a>00249             {
-<a name="l00250"></a>00250                 <a class="code" href="namespace_voodoo_shader.html#a00140beeb24a7a48c6127041947b6e35">IParameterRef</a> globalParam = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a7c48fdceaf927952aaf5be060ae83f3f" title="Retrieve a parameter by name.">GetParameter</a>(globalName, type);
+<a name="l00250"></a>00250                 <a class="code" href="namespace_voodoo_shader.html#a00140beeb24a7a48c6127041947b6e35">IParameterRef</a> globalParam = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a96f9076f4ff9b9512e8d9001f252548f" title="Retrieve a parameter by name.">GetParameter</a>(globalName, type);
 <a name="l00251"></a>00251 
 <a name="l00252"></a>00252                 <span class="keywordflow">if</span> (globalParam)
 <a name="l00253"></a>00253                 {
-<a name="l00254"></a>00254                     globalParam-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a385949a5e8496c7bb443b2553e265395" title="Attaches a second parameter to this one, forcing the other to update whenever this value is changed...">AttachParameter</a>(pParam);
+<a name="l00254"></a>00254                     globalParam-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parameter.html#afbf4b72a60adce2f697d2723abd5c329" title="Attaches a second parameter to this one, forcing the other to update whenever this value is changed...">AttachParameter</a>(pParam);
 <a name="l00255"></a>00255                 }
 <a name="l00256"></a>00256                 <span class="keywordflow">else</span>
 <a name="l00257"></a>00257                 {
-<a name="l00258"></a>00258                     <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00258"></a>00258                     <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00259"></a>00259                     (
 <a name="l00260"></a>00260                         <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>,
 <a name="l00261"></a>00261                         <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -334,7 +334,7 @@
 <a name="l00266"></a>00266             }
 <a name="l00267"></a>00267             <span class="keywordflow">else</span>
 <a name="l00268"></a>00268             {
-<a name="l00269"></a>00269                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00269"></a>00269                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00270"></a>00270                 (
 <a name="l00271"></a>00271                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>,
 <a name="l00272"></a>00272                     <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -347,13 +347,13 @@
 <a name="l00279"></a>00279         }
 <a name="l00280"></a>00280 
 <a name="l00281"></a>00281         <span class="comment">// If it&#39;s not linked to a global, it doesn&#39;t need linked unless it is a sampler.</span>
-<a name="l00282"></a>00282         <span class="keywordflow">if</span> (<a class="code" href="class_voodoo_shader_1_1_converter.html#a6a85295cf0dcc58da0a6d6776edc681f">Converter::ToParameterCategory</a>(type) == <a class="code" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12da8368cf22ecf2f293378b66fc8319596a">PC_Sampler</a>)
+<a name="l00282"></a>00282         <span class="keywordflow">if</span> (<a class="code" href="class_voodoo_shader_1_1_converter.html#ac1eea36bf7f07779489d6353af8b4dc2">Converter::ToParameterCategory</a>(type) == <a class="code" href="namespace_voodoo_shader.html#a56d7d146822e8830cf490e2b9292b12da8368cf22ecf2f293378b66fc8319596a">PC_Sampler</a>)
 <a name="l00283"></a>00283         {
-<a name="l00284"></a>00284             this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a6afc4861dc1b3b9be8f40058cb3f3e51" title="Links a particular effect-level sampler against a core texture.">LinkSampler</a>(pParam);
+<a name="l00284"></a>00284             this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7" title="Links a particular effect-level sampler against a core texture.">LinkSampler</a>(pParam);
 <a name="l00285"></a>00285         }
 <a name="l00286"></a>00286     }
 <a name="l00287"></a>00287 
-<a name="l00288"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a6afc4861dc1b3b9be8f40058cb3f3e51">00288</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a6afc4861dc1b3b9be8f40058cb3f3e51" title="Links a particular effect-level sampler against a core texture.">VSShader::LinkSampler</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam)
+<a name="l00288"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7">00288</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7" title="Links a particular effect-level sampler against a core texture.">VSShader::LinkSampler</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam)
 <a name="l00289"></a>00289     {
 <a name="l00290"></a>00290         <a class="code" href="namespace_voodoo_shader.html#a00140beeb24a7a48c6127041947b6e35">IParameterRef</a> param = pParam;
 <a name="l00291"></a>00291 
@@ -363,7 +363,7 @@
 <a name="l00295"></a>00295 
 <a name="l00296"></a>00296         <span class="keywordflow">if</span> (!cgIsAnnotation(textureAnnotation) || cgGetAnnotationType(textureAnnotation) != CG_STRING)
 <a name="l00297"></a>00297         {
-<a name="l00298"></a>00298             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00298"></a>00298             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00299"></a>00299             (
 <a name="l00300"></a>00300                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>,
 <a name="l00301"></a>00301                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -378,7 +378,7 @@
 <a name="l00310"></a>00310 
 <a name="l00311"></a>00311         <span class="keywordflow">if</span> (textureName == <span class="keyword">nullptr</span> || strlen(textureName) == 0)
 <a name="l00312"></a>00312         {
-<a name="l00313"></a>00313             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00313"></a>00313             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00314"></a>00314                 (
 <a name="l00315"></a>00315                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>,
 <a name="l00316"></a>00316                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -390,15 +390,15 @@
 <a name="l00322"></a>00322         }
 <a name="l00323"></a>00323 
 <a name="l00324"></a>00324         <span class="comment">// Try to get the texture first, otherwise pass to adapter</span>
-<a name="l00325"></a>00325         <a class="code" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a> texture = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a2f6c10b2461fcc9201c58bbecaf44fea" title="Retrieves a texture from the ICore&#39;s texture map by name.">GetTexture</a>(textureName);
+<a name="l00325"></a>00325         <a class="code" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a> texture = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a8ff79b85773192eda84c66ccfdc42cf5" title="Retrieves a texture from the ICore&#39;s texture map by name.">GetTexture</a>(textureName);
 <a name="l00326"></a>00326 
 <a name="l00327"></a>00327         <span class="keywordflow">if</span> (texture)
 <a name="l00328"></a>00328         {
-<a name="l00329"></a>00329             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#afc735445d241d2afd55518089340fba9" title="Retrieve the IAdapter attached to this ICore.">GetAdapter</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a2b9fa2f1f31f7b948e3dcc96d10b1912" title="Connects a texture to a sampler-type parameter.">ConnectTexture</a>(param.get(), texture.get());
+<a name="l00329"></a>00329             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#afc735445d241d2afd55518089340fba9" title="Retrieve the IAdapter attached to this ICore.">GetAdapter</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_adapter.html#afbeea9d49b7730b90cf1356cb72bb132" title="Connects a texture to a sampler-type parameter.">ConnectTexture</a>(param.get(), texture.get());
 <a name="l00330"></a>00330         }
 <a name="l00331"></a>00331         <span class="keywordflow">else</span>
 <a name="l00332"></a>00332         {
-<a name="l00333"></a>00333             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00333"></a>00333             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00334"></a>00334             (
 <a name="l00335"></a>00335                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>,
 <a name="l00336"></a>00336                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -407,11 +407,11 @@
 <a name="l00339"></a>00339                 param-&gt;ToString().GetData()
 <a name="l00340"></a>00340             );
 <a name="l00341"></a>00341 
-<a name="l00342"></a>00342             this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a6d2f0ef03acb1b70b6d0360ec69d9155" title="Find texture information from a parameter and create a texture based on that data.">CreateParameterTexture</a>(param.get());
+<a name="l00342"></a>00342             this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6" title="Find texture information from a parameter and create a texture based on that data.">CreateParameterTexture</a>(param.get());
 <a name="l00343"></a>00343         }
 <a name="l00344"></a>00344     }
 <a name="l00345"></a>00345 
-<a name="l00346"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a6d2f0ef03acb1b70b6d0360ec69d9155">00346</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a6d2f0ef03acb1b70b6d0360ec69d9155" title="Find texture information from a parameter and create a texture based on that data.">VSShader::CreateParameterTexture</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam)
+<a name="l00346"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6">00346</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6" title="Find texture information from a parameter and create a texture based on that data.">VSShader::CreateParameterTexture</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam)
 <a name="l00347"></a>00347     {
 <a name="l00348"></a>00348         <a class="code" href="namespace_voodoo_shader.html#a00140beeb24a7a48c6127041947b6e35">IParameterRef</a> param = pParam;
 <a name="l00349"></a>00349 
@@ -419,7 +419,7 @@
 <a name="l00351"></a>00351 
 <a name="l00352"></a>00352         <span class="keywordflow">if</span> (!cgIsParameter(parameter))
 <a name="l00353"></a>00353         {
-<a name="l00354"></a>00354             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00354"></a>00354             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00355"></a>00355             (
 <a name="l00356"></a>00356                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>,
 <a name="l00357"></a>00357                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -433,7 +433,7 @@
 <a name="l00365"></a>00365 
 <a name="l00366"></a>00366         <span class="keywordflow">if</span> (!cgIsAnnotation(atexName) || cgGetAnnotationType(atexName) != CG_STRING)
 <a name="l00367"></a>00367         {
-<a name="l00368"></a>00368             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00368"></a>00368             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00369"></a>00369             (
 <a name="l00370"></a>00370                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>,
 <a name="l00371"></a>00371                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -448,7 +448,7 @@
 <a name="l00380"></a>00380 
 <a name="l00381"></a>00381         <span class="keywordflow">if</span> (cgGetAnnotationType(atexName) != CG_STRING)
 <a name="l00382"></a>00382         {
-<a name="l00383"></a>00383             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00383"></a>00383             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00384"></a>00384             (
 <a name="l00385"></a>00385                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>,
 <a name="l00386"></a>00386                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -461,7 +461,7 @@
 <a name="l00393"></a>00393         <span class="keywordflow">else</span>
 <a name="l00394"></a>00394         {
 <a name="l00395"></a>00395             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> rawname = <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(cgGetStringAnnotationValue(atexName));
-<a name="l00396"></a>00396             texName = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a7e7f204ee1798e7990c10c8e841acde4" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#ac935b390f702d094c55a963d68fc52ca" title="Parses a string, replacing any variables with their values.">Parse</a>(rawname);
+<a name="l00396"></a>00396             texName = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a7e7f204ee1798e7990c10c8e841acde4" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values.">Parse</a>(rawname);
 <a name="l00397"></a>00397         }
 <a name="l00398"></a>00398 
 <a name="l00399"></a>00399         <span class="comment">// Check for a valid texture file</span>
@@ -469,20 +469,20 @@
 <a name="l00401"></a>00401         <span class="comment">/* @todo Load texture region info from the annotations. */</span>
 <a name="l00402"></a>00402         ZeroMemory(&amp;texRegion, <span class="keyword">sizeof</span>(<a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a>));
 <a name="l00403"></a>00403 
-<a name="l00404"></a>00404         <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * texFile = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a1b0839e7ad2b1c900e428faf80215863" title="Retrieves this core&#39;s IFileSystem implementation.">GetFileSystem</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_file_system.html#a64f646f3aa207f5a0a532bbf058a24a3" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">FindFile</a>(texName);
+<a name="l00404"></a>00404         <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * texFile = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a1b0839e7ad2b1c900e428faf80215863" title="Retrieves this core&#39;s IFileSystem implementation.">GetFileSystem</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_file_system.html#abd68ab3a0d35cad6017fc7e46fca7db7" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">FindFile</a>(texName);
 <a name="l00405"></a>00405         <span class="keywordflow">if</span> (texFile)
 <a name="l00406"></a>00406         {
-<a name="l00407"></a>00407             <a class="code" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a> pTex = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#afc735445d241d2afd55518089340fba9" title="Retrieve the IAdapter attached to this ICore.">GetAdapter</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ae6ccad605f41cc1caf1513e1da547dcf" title="Loads a named texture into the API and registers it with the Core.">LoadTexture</a>(texFile, &amp;texRegion);
+<a name="l00407"></a>00407             <a class="code" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a> pTex = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#afc735445d241d2afd55518089340fba9" title="Retrieve the IAdapter attached to this ICore.">GetAdapter</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a4c9f285589133fd78942a3b205afddb2" title="Loads a named texture into the API and registers it with the Core.">LoadTexture</a>(texFile, &amp;texRegion);
 <a name="l00408"></a>00408 
 <a name="l00409"></a>00409             <span class="keywordflow">if</span> (pTex)
 <a name="l00410"></a>00410             {
 <a name="l00411"></a>00411                 param-&gt;SetTexture(pTex.get());
 <a name="l00412"></a>00412                 <span class="keywordflow">return</span>;
 <a name="l00413"></a>00413             } <span class="keywordflow">else</span> {
-<a name="l00414"></a>00414                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Adapter was unable to load texture from file &#39;%s&#39;.&quot;</span>, texFile-&gt;<a class="code" href="class_voodoo_shader_1_1_i_file.html#ae5a48bd31d18068c6f491746988dd286" title="Gets the absolute path of this file.">GetPath</a>().<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00414"></a>00414                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Adapter was unable to load texture from file &#39;%s&#39;.&quot;</span>, texFile-&gt;<a class="code" href="class_voodoo_shader_1_1_i_file.html#ae5a48bd31d18068c6f491746988dd286" title="Gets the absolute path of this file.">GetPath</a>().<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00415"></a>00415             }
 <a name="l00416"></a>00416         } <span class="keywordflow">else</span> {
-<a name="l00417"></a>00417             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Unable to find texture file &#39;%s&#39;.&quot;</span>, texName.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00417"></a>00417             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Unable to find texture file &#39;%s&#39;.&quot;</span>, texName.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00418"></a>00418         }
 <a name="l00419"></a>00419 
 <a name="l00420"></a>00420         <span class="comment">// No file, make blank texture</span>
@@ -494,7 +494,7 @@
 <a name="l00426"></a>00426 
 <a name="l00427"></a>00427         <span class="keywordflow">if</span> (texSizeType == CG_INT1)
 <a name="l00428"></a>00428         {
-<a name="l00429"></a>00429             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;1-dimensional texture size found.&quot;</span>);
+<a name="l00429"></a>00429             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;1-dimensional texture size found.&quot;</span>);
 <a name="l00430"></a>00430 
 <a name="l00431"></a>00431             <span class="keywordtype">int</span> outCount;
 <a name="l00432"></a>00432             <span class="keyword">const</span> <span class="keywordtype">int</span> *texDims = cgGetIntAnnotationValues(atexSize, &amp;outCount);
@@ -504,7 +504,7 @@
 <a name="l00436"></a>00436         }
 <a name="l00437"></a>00437         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (texSizeType == CG_INT2)
 <a name="l00438"></a>00438         {
-<a name="l00439"></a>00439             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;2-dimensional texture size found.&quot;</span>);
+<a name="l00439"></a>00439             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;2-dimensional texture size found.&quot;</span>);
 <a name="l00440"></a>00440 
 <a name="l00441"></a>00441             <span class="keywordtype">int</span> outCount;
 <a name="l00442"></a>00442             <span class="keyword">const</span> <span class="keywordtype">int</span> *texDims = cgGetIntAnnotationValues(atexSize, &amp;outCount);
@@ -515,7 +515,7 @@
 <a name="l00447"></a>00447         }
 <a name="l00448"></a>00448         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (texSizeType == CG_INT3)
 <a name="l00449"></a>00449         {
-<a name="l00450"></a>00450             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;3-dimensional texture size found.&quot;</span>);
+<a name="l00450"></a>00450             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;3-dimensional texture size found.&quot;</span>);
 <a name="l00451"></a>00451 
 <a name="l00452"></a>00452             <span class="keywordtype">int</span> outCount;
 <a name="l00453"></a>00453             <span class="keyword">const</span> <span class="keywordtype">int</span> *texDims = cgGetIntAnnotationValues(atexSize, &amp;outCount);
@@ -526,7 +526,7 @@
 <a name="l00458"></a>00458         }
 <a name="l00459"></a>00459         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (texSizeType == CG_INT4)
 <a name="l00460"></a>00460         {
-<a name="l00461"></a>00461             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00461"></a>00461             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00462"></a>00462             (
 <a name="l00463"></a>00463                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>,
 <a name="l00464"></a>00464                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -536,7 +536,7 @@
 <a name="l00468"></a>00468         }
 <a name="l00469"></a>00469         <span class="keywordflow">else</span>
 <a name="l00470"></a>00470         {
-<a name="l00471"></a>00471             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00471"></a>00471             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00472"></a>00472             (
 <a name="l00473"></a>00473                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>,
 <a name="l00474"></a>00474                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -549,7 +549,7 @@
 <a name="l00481"></a>00481 
 <a name="l00482"></a>00482         <span class="keywordflow">if</span> (cgGetAnnotationType(atexFormat) != CG_STRING)
 <a name="l00483"></a>00483         {
-<a name="l00484"></a>00484             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00484"></a>00484             <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00485"></a>00485             (
 <a name="l00486"></a>00486                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>,
 <a name="l00487"></a>00487                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -563,11 +563,11 @@
 <a name="l00495"></a>00495         {
 <a name="l00496"></a>00496             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> formatString = cgGetStringAnnotationValue(atexFormat);
 <a name="l00497"></a>00497 
-<a name="l00498"></a>00498             texDesc.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="class_voodoo_shader_1_1_converter.html#aef7fda18ca1ddc967a3e2f00e7ba8d2f">Converter::ToTextureFormat</a>(formatString.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00498"></a>00498             texDesc.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="class_voodoo_shader_1_1_converter.html#ae0ce0481e276127ea94bd3a994b06e74">Converter::ToTextureFormat</a>(formatString.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00499"></a>00499         }
 <a name="l00500"></a>00500 
 <a name="l00501"></a>00501         <a class="code" href="namespace_voodoo_shader.html#aaa1322e129d6c3e184517c9e91731c43">IAdapterRef</a> adapter = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#afc735445d241d2afd55518089340fba9" title="Retrieve the IAdapter attached to this ICore.">GetAdapter</a>();
-<a name="l00502"></a>00502         <a class="code" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a> texture = adapter-&gt;<a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a01d002d132e0cbe55285c8cac5f29bf9" title="Creates a named texture within the API and returns it for registration and handling.">CreateTexture</a>(texName, &amp;texDesc);
+<a name="l00502"></a>00502         <a class="code" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a> texture = adapter-&gt;<a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ab3d2f5db241d8d3e704e071e0fa031a3" title="Creates a named texture within the API and returns it for registration and handling.">CreateTexture</a>(texName, &amp;texDesc);
 <a name="l00503"></a>00503 
 <a name="l00504"></a>00504         param-&gt;SetTexture(texture.get());
 <a name="l00505"></a>00505     }
@@ -582,7 +582,7 @@
 <a name="l00514"></a>00514 
 <a name="l00515"></a>00515             <span class="keywordflow">if</span> (valid == CG_TRUE)
 <a name="l00516"></a>00516             {
-<a name="l00517"></a>00517                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00517"></a>00517                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00518"></a>00518                 (
 <a name="l00519"></a>00519                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>,
 <a name="l00520"></a>00520                     <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -603,7 +603,7 @@
 <a name="l00535"></a>00535             }
 <a name="l00536"></a>00536             <span class="keywordflow">else</span>
 <a name="l00537"></a>00537             {
-<a name="l00538"></a>00538                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00538"></a>00538                 <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00539"></a>00539                 (
 <a name="l00540"></a>00540                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>,
 <a name="l00541"></a>00541                     <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -621,7 +621,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:25 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

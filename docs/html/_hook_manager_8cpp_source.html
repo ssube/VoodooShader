@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -111,7 +111,7 @@
 <a name="l00042"></a>00042             <span class="keywordflow">return</span> 1;
 <a name="l00043"></a>00043         }
 <a name="l00044"></a>00044 
-<a name="l00045"></a><a class="code" href="group__voodoo__module__ehhook.html#ga3fcb319e95b4ed3a02123b083a5b0fa0">00045</a>         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__ehhook.html#ga3fcb319e95b4ed3a02123b083a5b0fa0">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t index, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
+<a name="l00045"></a><a class="code" href="group__voodoo__module__ehhook.html#ga250ae416c6c77755b71fb5c1504b6184">00045</a>         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__ehhook.html#ga250ae416c6c77755b71fb5c1504b6184">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t index, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
 <a name="l00046"></a>00046         {
 <a name="l00047"></a>00047             <span class="keywordflow">if</span> (!pUuid)
 <a name="l00048"></a>00048             {
@@ -127,7 +127,7 @@
 <a name="l00058"></a>00058             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
 <a name="l00059"></a>00059         }
 <a name="l00060"></a>00060 
-<a name="l00061"></a><a class="code" href="group__voodoo__module__ehhook.html#ga9acdff47c4f125b40803ef4c803aa591">00061</a>         <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__ehhook.html#ga9acdff47c4f125b40803ef4c803aa591">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *core)
+<a name="l00061"></a><a class="code" href="group__voodoo__module__ehhook.html#ga5a32547034a606c4a04106a211eb7ba2">00061</a>         <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="group__voodoo__module__ehhook.html#ga5a32547034a606c4a04106a211eb7ba2">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *core)
 <a name="l00062"></a>00062         {
 <a name="l00063"></a>00063             <span class="keywordflow">if</span> (number == 0)
 <a name="l00064"></a>00064             {
@@ -137,7 +137,7 @@
 <a name="l00068"></a>00068             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
 <a name="l00069"></a>00069         }
 <a name="l00070"></a>00070 
-<a name="l00071"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#afe2ea386d06878da2f4751e15d74da4f">00071</a>         <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#afe2ea386d06878da2f4751e15d74da4f">VSEHHookManager::VSEHHookManager</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore) :
+<a name="l00071"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a29e0e7b76012eca5420f7b71a7d7fd9d">00071</a>         <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a29e0e7b76012eca5420f7b71a7d7fd9d">VSEHHookManager::VSEHHookManager</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore) :
 <a name="l00072"></a>00072             m_Core(pCore)
 <a name="l00073"></a>00073         {
 <a name="l00074"></a>00074             <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#abfb245755be6dea8478a5ac2780f94a9">m_ThreadCount</a> = 1;
@@ -147,14 +147,14 @@
 <a name="l00078"></a>00078 
 <a name="l00079"></a>00079             LhSetGlobalInclusiveACL(<a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#af018c0cc07b056c54de58ed33bfff15b">m_ThreadIDs</a>, <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#abfb245755be6dea8478a5ac2780f94a9">m_ThreadCount</a>);
 <a name="l00080"></a>00080 
-<a name="l00081"></a>00081             <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa78a935f62fca37891ebc6a65a42a47af">LL_Info</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>, <span class="stringliteral">&quot;Created hook manager.&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#abfb245755be6dea8478a5ac2780f94a9">m_ThreadCount</a>);
+<a name="l00081"></a>00081             <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa78a935f62fca37891ebc6a65a42a47af">LL_Info</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>, <span class="stringliteral">&quot;Created hook manager.&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#abfb245755be6dea8478a5ac2780f94a9">m_ThreadCount</a>);
 <a name="l00082"></a>00082         }
 <a name="l00083"></a>00083 
 <a name="l00084"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aed65248a0d6c3760a95dd3b2444d06f7">00084</a>         <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aed65248a0d6c3760a95dd3b2444d06f7">VSEHHookManager::~VSEHHookManager</a>(<span class="keywordtype">void</span>)
 <a name="l00085"></a>00085         {
 <a name="l00086"></a>00086             this-&gt;<a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a9338d7ccdcbe738848ef0da83c0d196c" title="Removes all hooks created with this VSEHHookManager.">RemoveAll</a>();
 <a name="l00087"></a>00087 
-<a name="l00088"></a>00088             <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa78a935f62fca37891ebc6a65a42a47af">LL_Info</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>, <span class="stringliteral">&quot;Destroying hook manager.&quot;</span>);
+<a name="l00088"></a>00088             <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa78a935f62fca37891ebc6a65a42a47af">LL_Info</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>, <span class="stringliteral">&quot;Destroying hook manager.&quot;</span>);
 <a name="l00089"></a>00089 
 <a name="l00090"></a>00090             <span class="keyword">delete</span>[] <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#af018c0cc07b056c54de58ed33bfff15b">m_ThreadIDs</a>;
 <a name="l00091"></a>00091         }
@@ -176,7 +176,7 @@
 <a name="l00107"></a>00107             }
 <a name="l00108"></a>00108         }
 <a name="l00109"></a>00109 
-<a name="l00110"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a729d74d9fdd0e6d2adec8688fa506f7a">00110</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a729d74d9fdd0e6d2adec8688fa506f7a" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSEHHookManager::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00110"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ac920ff9ed693d10451337ecb5bbe722b">00110</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ac920ff9ed693d10451337ecb5bbe722b" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSEHHookManager::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
 <a name="l00111"></a>00111 <span class="keyword">        </span>{
 <a name="l00112"></a>00112             <span class="keywordflow">if</span> (!ppOut)
 <a name="l00113"></a>00113             {
@@ -215,7 +215,7 @@
 <a name="l00146"></a>00146             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>;
 <a name="l00147"></a>00147         }
 <a name="l00148"></a>00148 
-<a name="l00149"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aa3769b5eab3aaa6105fa854b50194765">00149</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aa3769b5eab3aaa6105fa854b50194765" title="Install a hook at the specified function.">VSEHHookManager::Add</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, <span class="keywordtype">void</span> * pSrc, <span class="keywordtype">void</span> * pDest)
+<a name="l00149"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a0e705782508bfb033e8f6af9a1e9d69b">00149</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a0e705782508bfb033e8f6af9a1e9d69b" title="Install a hook at the specified function.">VSEHHookManager::Add</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, <span class="keywordtype">void</span> * pSrc, <span class="keywordtype">void</span> * pDest)
 <a name="l00150"></a>00150         {
 <a name="l00151"></a>00151             HookMap::iterator hook = <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a67a0afd73fcf19ad743a9bb75d5e3e4b">m_Hooks</a>.find(name);
 <a name="l00152"></a>00152 
@@ -224,7 +224,7 @@
 <a name="l00155"></a>00155                 <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>, <span class="stringliteral">&quot;Attempted to create a hook with a duplicate name.&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>);
 <a name="l00156"></a>00156             }
 <a name="l00157"></a>00157 
-<a name="l00158"></a>00158             <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00158"></a>00158             <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00159"></a>00159             (
 <a name="l00160"></a>00160                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>,
 <a name="l00161"></a>00161                 <span class="stringliteral">&quot;Creating hook %s. Redirecting function %p to %p.&quot;</span>,
@@ -236,7 +236,7 @@
 <a name="l00167"></a>00167 
 <a name="l00168"></a>00168             <span class="keywordflow">if</span> (result &amp;&amp; hookHandle)
 <a name="l00169"></a>00169             {
-<a name="l00170"></a>00170                 <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00170"></a>00170                 <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00171"></a>00171                 (
 <a name="l00172"></a>00172                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>,
 <a name="l00173"></a>00173                     <span class="stringliteral">&quot;Error %u creating hook %s (%p, %p).&quot;</span>,
@@ -255,11 +255,11 @@
 <a name="l00186"></a>00186             }
 <a name="l00187"></a>00187         }
 <a name="l00188"></a>00188 
-<a name="l00189"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae6bdb9551eb4f39cd53973799f3b3d96">00189</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae6bdb9551eb4f39cd53973799f3b3d96" title="Removes a single hook.">VSEHHookManager::Remove</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)
+<a name="l00189"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aa9f3a068eb9d766f66c5f62a9999cdf4">00189</a>         <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aa9f3a068eb9d766f66c5f62a9999cdf4" title="Removes a single hook.">VSEHHookManager::Remove</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)
 <a name="l00190"></a>00190         {
 <a name="l00191"></a>00191             HookMap::iterator hook = <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a67a0afd73fcf19ad743a9bb75d5e3e4b">m_Hooks</a>.find(name);
 <a name="l00192"></a>00192 
-<a name="l00193"></a>00193             <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>, L<span class="stringliteral">&quot;Removing hook %s.&quot;</span>, name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00193"></a>00193             <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>, L<span class="stringliteral">&quot;Removing hook %s.&quot;</span>, name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00194"></a>00194 
 <a name="l00195"></a>00195             <span class="keywordflow">if</span> (hook != <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a67a0afd73fcf19ad743a9bb75d5e3e4b">m_Hooks</a>.end())
 <a name="l00196"></a>00196             {
@@ -270,7 +270,7 @@
 <a name="l00201"></a>00201 
 <a name="l00202"></a>00202                 <span class="keywordflow">if</span> (result != 0)
 <a name="l00203"></a>00203                 {
-<a name="l00204"></a>00204                     <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00204"></a>00204                     <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00205"></a>00205                     (
 <a name="l00206"></a>00206                         <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>,
 <a name="l00207"></a>00207                         <span class="stringliteral">&quot;Error %u removing hook %s.&quot;</span>,
@@ -288,7 +288,7 @@
 <a name="l00219"></a>00219             }
 <a name="l00220"></a>00220             <span class="keywordflow">else</span>
 <a name="l00221"></a>00221             {
-<a name="l00222"></a>00222                 <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#af7e75c7c3567c0318acc1ce93d8fbb7c" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00222"></a>00222                 <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00223"></a>00223                 (
 <a name="l00224"></a>00224                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893">VOODOO_HOOK_NAME</a>,
 <a name="l00225"></a>00225                     L<span class="stringliteral">&quot;Trying to remove hook %s (does not exist).&quot;</span>, name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>()
@@ -317,7 +317,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:25 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

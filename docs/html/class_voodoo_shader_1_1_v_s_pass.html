@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-38-gfc17b14</span>
+   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -98,14 +98,14 @@
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a28966ef8b10a670ed7b782355c472bc6">VSPass</a> (_In_ <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *pTechnique, _In_ CGpass pCgPass)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a7e933776597f7e1616d609322f9b98f8">VSPass</a> (<a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *pTechnique, CGpass pCgPass)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a7ca31fbede7fb7822ffb8255cd372205">~VSPass</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a1fc42d4d6be94a69e530be0cd5d49869">AddRef</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a1fc42d4d6be94a69e530be0cd5d49869"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a63f5a66f5f01046fc58b9b6a74dcc9c0">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a63f5a66f5f01046fc58b9b6a74dcc9c0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#ad46246a809303831054d463dce4f9078">CheckedCast</a> (_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, _Deref_out_opt_ const void **ppOut) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#ad46246a809303831054d463dce4f9078"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a525df6924412b95a97e4db9feefbeab8">CheckedCast</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a525df6924412b95a97e4db9feefbeab8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a5fb910e3ff5502f10a47a18ff7e9ebea">ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a5fb910e3ff5502f10a47a18ff7e9ebea"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a6b34139f2f1add2894300458340deb8d">GetCore</a> (void) const   throw ()</td></tr>
@@ -115,8 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the target texture buffer this pass should render to.  <a href="#a6d2b25745684a744a852bd584e3925e4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a6bae76d4ee6e1c75478ac113b7728b6f">GetTechnique</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the parent technique of this pass.  <a href="#a6bae76d4ee6e1c75478ac113b7728b6f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual CGprogram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a580615cb66047c85fc0954ed18a5414a">GetProgram</a> (_In_ const <a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a> stage) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a specific program stage from this pass.  <a href="#a580615cb66047c85fc0954ed18a5414a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual CGprogram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a275671f580dd3c9992107bae41f322be">GetProgram</a> (const <a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a> stage) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a specific program stage from this pass.  <a href="#a275671f580dd3c9992107bae41f322be"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual CGpass&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#ac3202d09827fc108b1a4c1fc0a075832">GetCgPass</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the underlying Cg technique.  <a href="#ac3202d09827fc108b1a4c1fc0a075832"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pri-methods"></a>
@@ -140,20 +140,20 @@ Private Attributes</h2></td></tr>
 <div class="textblock">
 <p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00029">29</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a28966ef8b10a670ed7b782355c472bc6"></a><!-- doxytag: member="VoodooShader::VSPass::VSPass" ref="a28966ef8b10a670ed7b782355c472bc6" args="(_In_ ITechnique *pTechnique, _In_ CGpass pCgPass)" -->
+<a class="anchor" id="a7e933776597f7e1616d609322f9b98f8"></a><!-- doxytag: member="VoodooShader::VSPass::VSPass" ref="a7e933776597f7e1616d609322f9b98f8" args="(ITechnique *pTechnique, CGpass pCgPass)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">VoodooShader::VSPass::VSPass </td>
           <td>(</td>
-          <td class="paramtype">_In_ <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td>
           <td class="paramname"><em>pTechnique</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_ CGpass&#160;</td>
+          <td class="paramtype">CGpass&#160;</td>
           <td class="paramname"><em>pCgPass</em>&#160;</td>
         </tr>
         <tr>
@@ -214,20 +214,20 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad46246a809303831054d463dce4f9078"></a><!-- doxytag: member="VoodooShader::VSPass::CheckedCast" ref="ad46246a809303831054d463dce4f9078" args="(_In_ Uuid &amp;clsid, _Deref_out_opt_ const void **ppOut) const " -->
+<a class="anchor" id="a525df6924412b95a97e4db9feefbeab8"></a><!-- doxytag: member="VoodooShader::VSPass::CheckedCast" ref="a525df6924412b95a97e4db9feefbeab8" args="(Uuid &amp;clsid, const void **ppOut) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool VoodooShader::VSPass::CheckedCast </td>
           <td>(</td>
-          <td class="paramtype">_In_ <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
           <td class="paramname"><em>clsid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_Deref_out_opt_ const void **&#160;</td>
+          <td class="paramtype">const void **&#160;</td>
           <td class="paramname"><em>ppOut</em>&#160;</td>
         </tr>
         <tr>
@@ -250,7 +250,7 @@ Private Attributes</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#ad91c75debf78d448e61e54cfbb4ab5b9">VoodooShader::IPass</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a7fa66772889eb4e9c9ee60113d28e682">VoodooShader::IPass</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00085">85</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
@@ -324,14 +324,14 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a580615cb66047c85fc0954ed18a5414a"></a><!-- doxytag: member="VoodooShader::VSPass::GetProgram" ref="a580615cb66047c85fc0954ed18a5414a" args="(_In_ const ProgramStage stage) const " -->
+<a class="anchor" id="a275671f580dd3c9992107bae41f322be"></a><!-- doxytag: member="VoodooShader::VSPass::GetProgram" ref="a275671f580dd3c9992107bae41f322be" args="(const ProgramStage stage) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">CGprogram VoodooShader::VSPass::GetProgram </td>
           <td>(</td>
-          <td class="paramtype">_In_ const <a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a>&#160;</td>
           <td class="paramname"><em>stage</em></td><td>)</td>
           <td> const  throw ()<code> [virtual]</code></td>
         </tr>
@@ -348,7 +348,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The program corresponding to the desired stage. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a151f8c5fbf945041297aecde0dfd49c6">VoodooShader::IPass</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a9539b6bc7eb39e0e19125383b3782fde">VoodooShader::IPass</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00134">134</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
@@ -645,7 +645,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2011 00:32:26 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 17 2011 02:37:29 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
