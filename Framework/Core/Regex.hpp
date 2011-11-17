@@ -36,6 +36,8 @@ namespace VoodooShader
      * Voodoo internal regex class, providing constant and compiler-safe regex handling between modules. This internally
      * uses <a href="http://www.boost.org/doc/libs/1_48_0/libs/regex/doc/html/index.html">Boost.Regex</a> in extended-syntax
      * mode for both expressions and match formatting.
+     * 
+     * @related String
      */
     class VOODOO_API Regex
     {

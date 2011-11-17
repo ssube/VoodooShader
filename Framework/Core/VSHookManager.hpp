@@ -25,9 +25,25 @@
 
 namespace VoodooShader
 {
-    /* VSHookManager: e6f3129d-05af-11e1-9e05-005056c00008 */
-    DEFINE_CLSID(VSHookManager) = {0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+    /**
+     * @addtogroup voodoo_core_null Null Implementations
+     * @ingroup voodoo_core
+     * 
+     * @{
+     */
 
+    /**
+     * @addtogroup voodoo_uuids 
+     */
+    DEFINE_CLSID(VSHookManager) = {0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+    
+    /**
+     * Voodoo Shader null hook manager implementation. Returns true or nullptr for methods as necessary, does not install
+     * any hooks. Does not perform logging or parameter validation.
+     * 
+     * @par CLSID:
+     *      e6f3129d-05af-11e1-9e05-005056c00008
+     */
     class VSHookManager :
         public IHookManager
     {
@@ -49,4 +65,7 @@ namespace VoodooShader
         mutable uint32_t m_Refs;
         ICore * m_Core;
     };
+    /**
+     * @}
+     */
 }
