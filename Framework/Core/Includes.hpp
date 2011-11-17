@@ -19,8 +19,6 @@
  */
 #pragma once
 
-#include <functional>
-
 #ifndef VOODOO_NO_ERRORS
 #ifndef __cplusplus
 #   error Voodoo requires a C++ compiler, preferably Microsoft Visual C++ v10.
@@ -45,11 +43,12 @@
 
 #ifndef VOODOO_STRING_MACROS
 #   define VOODOO_STRING_MACROS
-#   define VOODOO_META_STRING_ARG(arg) L ## #arg
-#   define VOODOO_META_STRING_STR(arg) L ## arg
+#   define VOODOO_META_STRING_ARG(arg)  L ## #arg
+#   define VOODOO_META_STRING_STR(arg)  L ## arg
 
-#   define VOODOO_META_TOSTRING(arg)   VOODOO_META_STRING_ARG(arg)
-#   define VOODOO_META_STRING(arg)     VOODOO_META_STRING_STR(arg)
+#   define VOODOO_META_TOSTRING(arg)    VOODOO_META_STRING_ARG(arg)
+#   define VOODOO_META_STRING(arg)      VOODOO_META_STRING_STR(arg)
+#   define VSTR(arg)                    VOODOO_META_STRING_STR(arg)
 #endif
 
 #include <cstdint>
@@ -622,5 +621,5 @@ namespace VoodooShader
      * filename and line. These exceptions are also logged if possible (requires a valid core to be given). The Exception
      * class derives from std::exception, so these are simple to handle.
      */
-#   define Throw(module, msg, core) throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)
+#   define Throw(module, msg, core) throw Exception(module, msg, core, VSTR(__FILE__), VSTR(__FUNCTION__), __LINE__)
 }

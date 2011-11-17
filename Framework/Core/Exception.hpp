@@ -25,7 +25,7 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup VoodooCore
+     * @addtogroup voodoo_utility Voodoo Utility
      * @{
      */
 
@@ -42,22 +42,22 @@ namespace VoodooShader
     public:
         Exception
         (
-            _In_ wchar_t * Module,
-            _In_ wchar_t * Message,
+            _In_ wchar_t * module,
+            _In_ wchar_t * message,
             _In_opt_ ICore * pCore,
-            _In_ char * File,
-            _In_ char * Function,
-            _In_ int Line
+            _In_z_ wchar_t * file,
+            _In_z_ wchar_t * function,
+            _In_ int line
         );
 
         Exception
         (
-            _In_ String Module,
+            _In_ String module,
             _In_ String Message,
             _In_opt_ ICore * pCore,
-            _In_ char * File,
-            _In_ char * Function,
-            _In_ int Line
+            _In_z_ wchar_t * file,
+            _In_z_ wchar_t * function,
+            _In_ int line
         );
 
         virtual ~Exception(void);
@@ -68,8 +68,8 @@ namespace VoodooShader
         ICore * m_Core;
         String m_Module;
         String m_Message;
-        char * m_File;
-        char * m_Function;
+        wchar_t * m_File;
+        wchar_t * m_Function;
         int m_Line;
         char * m_FmtMsg;
     };

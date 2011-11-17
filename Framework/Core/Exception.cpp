@@ -30,8 +30,8 @@ namespace VoodooShader
         _In_ wchar_t * module,
         _In_ wchar_t * message,
         _In_opt_ ICore * pCore,
-        _In_ char * file,
-        _In_ char * function,
+        _In_z_ wchar_t * file,
+        _In_z_ wchar_t * function,
         _In_ int line
     ) :
         m_Core(pCore),
@@ -58,8 +58,8 @@ namespace VoodooShader
         _In_ String module,
         _In_ String message,
         _In_opt_ ICore * pCore,
-        _In_ char *file,
-        _In_ char *function,
+        _In_z_ wchar_t * file,
+        _In_z_ wchar_t * function,
         _In_ int line
     ) :
             m_Core(pCore),
@@ -102,14 +102,25 @@ namespace VoodooShader
     {
         if (m_FmtMsg == nullptr)
         {
-            m_FmtMsg = new char[1024];
-            ZeroMemory(m_FmtMsg, 1024);
+            int bufsize = _scprintf
+            (
+                "VoodooShader::Exception in module %S, file %S at %S (line %d): %S",
+                m_Module.GetData(),
+                m_File,
+                m_Function,
+                m_Line,
+                m_Message.GetData()
+            );
+
+            assert(bufsize < 1024); // Large exception message
+
+            m_FmtMsg = new char[bufsize];
 
             sprintf_s
             (
                 m_FmtMsg,
-                1024,
-                "VoodooShader::Exception in module %S, file %s at %s (line %d): %S",
+                bufsize,
+                "VoodooShader::Exception in module %S, file %S at %S (line %d): %S",
                 m_Module.GetData(),
                 m_File,
                 m_Function,
