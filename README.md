@@ -1,9 +1,8 @@
-
-## Voodoo Shader Framework
-### version 0.4.2.317 - alpha
+# Voodoo Shader Framework
+## version 0.4.2 - alpha
 -----
 
-#### Contents:
+### Contents:
 1. Summary
 2. Installation
 3. Modules & Adapters
@@ -11,7 +10,7 @@
 5. Reporting Bugs
 6. Contact
 7. Legal
-
+-----
 
 ### 1. Summary
 
@@ -52,16 +51,16 @@ apply. Make sure you read all documentation carefully and don't use modules from
 
 ### 4. Running Voodoo
 
-The precise behavior of Voodoo depends on the adapter and game it is being used with, but the most common behavior is 
-described here.
+Voodoo has two major modes of operation.
 
-Voodoo will automatically hook into the game on launch, if it is properly installed. The Voodoo runtime will create a 
-comprehensive log file in the game directory. Voodoo uses an XML configuration file, contained in the game directory, and 
-may use other resources in the game directory or Voodoo root directory.
+The primary and preferred mode is for the Voodoo UI to be running. This will automatically load into any applications for
+which a hook is present and active. Hooks may be managed within the UI.
 
-Debug builds will perform significant logging, potentially slowing the game down but providing much information. Voodoo 
-debug modules may be used in addition to traditional video API debuggers; they are capable of intercepting both DirectX and 
-OpenGL calls and logging the times, parameters and results in some detail.
+The secondary method is to drop the Voodoo intercept DLL into the game directory. This is significantly more limited, but 
+does not require the UI to be running. Hooks must still be defined for the application.
+
+Once the game has been hooked, Voodoo will automatically load itself and all plugins given in the config file. Behavior
+after this depends on the modules used.
 
 
 ### 5. Reporting Bugs
@@ -71,8 +70,8 @@ at:
 
 * http://tracker.voodooshader.com
 
-Any information that can be included, especially a log, is beneficial. Logs should be posted at 
-[github:gist](https://gist.github.com/) if possible.
+Any information that can be included, especially a log, is beneficial. Full logs should be posted at 
+[github:gist](https://gist.github.com/) whenever possible and linked in the bug report.
 
 
 ### 6. Contact
