@@ -25,6 +25,9 @@
 
 namespace VoodooShader
 {
+    const wchar_t * ExceptionLogMsg = L"Exception in %S at %S (%d): %s";
+    const char * ExceptionFmtMsg = "VoodooShader::Exception in module %S, file %S at %S (line %d): %S";
+
     Exception::Exception
     (
         _In_ wchar_t * module,
@@ -48,7 +51,7 @@ namespace VoodooShader
 
             if (logger)
             {
-                logger->Log(LL_Error, module, L"Exception in %S at %S (%d): %s", file, function, line, message);
+                logger->Log(LL_Error, module, ExceptionLogMsg, file, function, line, message);
             }
         }
     }
@@ -80,7 +83,7 @@ namespace VoodooShader
                 (
                     LL_Error,
                     module.GetData(),
-                    L"Exception in %S at %S (%d): %s",
+                    ExceptionLogMsg,
                     file,
                     function,
                     line,
@@ -104,7 +107,7 @@ namespace VoodooShader
         {
             int bufsize = _scprintf
             (
-                "VoodooShader::Exception in module %S, file %S at %S (line %d): %S",
+                ExceptionFmtMsg,
                 m_Module.GetData(),
                 m_File,
                 m_Function,
@@ -120,7 +123,7 @@ namespace VoodooShader
             (
                 m_FmtMsg,
                 bufsize,
-                "VoodooShader::Exception in module %S, file %S at %S (line %d): %S",
+                ExceptionFmtMsg,
                 m_Module.GetData(),
                 m_File,
                 m_Function,
