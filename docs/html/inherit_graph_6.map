@@ -2,12 +2,12 @@
 <area shape="rect" id="node1" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="6,411,162,437"/>
 <area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API..." alt="" coords="229,12,392,39"/>
 <area shape="rect" id="node7" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="238,69,383,96"/>
-<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_i_file.html" title="VoodooShader::IFile" alt="" coords="241,132,380,159"/>
-<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_i_file_system.html" title="VoodooShader::IFileSystem" alt="" coords="219,208,403,235"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access." alt="" coords="241,132,380,159"/>
+<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access." alt="" coords="219,208,403,235"/>
 <area shape="rect" id="node21" href="$class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function&#45;level hooks, redirecting existing functions and calls int..." alt="" coords="211,309,410,336"/>
-<area shape="rect" id="node27" href="$class_voodoo_shader_1_1_i_image.html" title="VoodooShader::IImage" alt="" coords="234,360,387,387"/>
-<area shape="rect" id="node31" href="$class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class." alt="" coords="232,411,389,437"/>
-<area shape="rect" id="node37" href="$class_voodoo_shader_1_1_i_parameter.html" title="VoodooShader::IParameter" alt="" coords="221,463,400,489"/>
+<area shape="rect" id="node27" href="$class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access." alt="" coords="234,360,387,387"/>
+<area shape="rect" id="node31" href="$class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level&#45;filtered messages." alt="" coords="232,411,389,437"/>
+<area shape="rect" id="node37" href="$class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)..." alt="" coords="221,463,400,489"/>
 <area shape="rect" id="node41" href="$class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing." alt="" coords="233,515,389,541"/>
 <area shape="rect" id="node45" href="$class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel..." alt="" coords="237,568,385,595"/>
 <area shape="rect" id="node49" href="$class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="231,625,390,652"/>

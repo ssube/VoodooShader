@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -110,7 +110,7 @@
 <a name="l00055"></a>00055         <a class="code" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html" title="Provides a unified file management system for loading shaders and other resources.">VSWFileSystem</a>) = {0xB1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00056"></a>00056 
 <a name="l00062"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html">00062</a>         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html" title="Provides a unified file management system for loading shaders and other resources.">VSWFileSystem</a> :
-<a name="l00063"></a>00063             <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a>
+<a name="l00063"></a>00063             <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a>
 <a name="l00064"></a>00064         {
 <a name="l00065"></a>00065         <span class="keyword">public</span>:
 <a name="l00066"></a>00066             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1496330a828b0df2d9a120c115582257">VSWFileSystem</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *core);
@@ -127,7 +127,7 @@
 <a name="l00085"></a>00085 
 <a name="l00092"></a>00092             <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#gaabd861d7a1925a4bb9032d2a57308041" title="Removes a directory from the search path, following the same rules as adding (adding a string then re...">RemovePath</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path) <span class="keywordflow">throw</span>();
 <a name="l00093"></a>00093 
-<a name="l00104"></a>00104             <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gac034739454fca4c328c34c9f3ce3a1d1" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">FindFile</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00104"></a>00104             <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gac034739454fca4c328c34c9f3ce3a1d1" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">FindFile</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00105"></a>00105 
 <a name="l00106"></a>00106         <span class="keyword">private</span>:
 <a name="l00107"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga9799becbd7a6650667690f453d69c4a5">00107</a>             <span class="keyword">mutable</span> uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#ga9799becbd7a6650667690f453d69c4a5">m_Refs</a>;
@@ -140,7 +140,7 @@
 <a name="l00114"></a>00114         <a class="code" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html">VSWFile</a>) = {0xB0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00115"></a>00115 
 <a name="l00116"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html">00116</a>         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html">VSWFile</a> :
-<a name="l00117"></a>00117             <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a>
+<a name="l00117"></a>00117             <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a>
 <a name="l00118"></a>00118         {
 <a name="l00119"></a>00119         <span class="keyword">public</span>:
 <a name="l00123"></a>00123             <a class="code" href="group__voodoo__module__wfilesystem.html#ga454b93a28d3e46aaa74582cea965496e" title="Creates a file object from a path (usually an absolute path).">VSWFile</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path);
@@ -163,7 +163,7 @@
 <a name="l00175"></a>00175 
 <a name="l00186"></a>00186             <span class="keyword">virtual</span> int32_t <a class="code" href="group__voodoo__module__wfilesystem.html#ga97a2a01f66cc30811448340e869f7e35" title="Writes a chunk of data to the file.">Write</a>(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer);
 <a name="l00187"></a>00187 
-<a name="l00188"></a>00188             <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_image.html">IImage</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">OpenImage</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;
+<a name="l00188"></a>00188             <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">OpenImage</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;
 <a name="l00189"></a>00189 
 <a name="l00190"></a>00190         <span class="keyword">private</span>:
 <a name="l00191"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga3fc85936fc8b8d540e4179d1993e46e4">00191</a>             <span class="keyword">mutable</span> uint32_t <a class="code" href="group__voodoo__module__wfilesystem.html#ga3fc85936fc8b8d540e4179d1993e46e4">m_Refs</a>;
@@ -177,7 +177,7 @@
 <a name="l00199"></a>00199         <a class="code" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library.">VSWImage</a>) = {0xB2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00200"></a>00200 
 <a name="l00208"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html">00208</a>         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library.">VSWImage</a> :
-<a name="l00209"></a>00209             <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_image.html">IImage</a>
+<a name="l00209"></a>00209             <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a>
 <a name="l00210"></a>00210         {
 <a name="l00211"></a>00211         <span class="keyword">public</span>:
 <a name="l00212"></a>00212             <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library.">VSWImage</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">Load</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name);
@@ -220,7 +220,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

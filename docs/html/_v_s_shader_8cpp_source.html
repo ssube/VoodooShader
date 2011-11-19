@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -258,7 +258,7 @@
 <a name="l00190"></a>00190         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a711dfb923ec6bc5dc7200bfd49e16b7d">m_Parameters</a>.size();
 <a name="l00191"></a>00191     }
 <a name="l00192"></a>00192 
-<a name="l00193"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a1ed5046288c176e059aa2f59481d4846">00193</a>     <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a1ed5046288c176e059aa2f59481d4846" title="Retrieve a specific parameter from the shader.">VSShader::GetParameter</a>(_In_ <span class="keyword">const</span> uint32_t index)<span class="keyword"> const</span>
+<a name="l00193"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a1ed5046288c176e059aa2f59481d4846">00193</a>     <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a1ed5046288c176e059aa2f59481d4846" title="Retrieve a specific parameter from the shader.">VSShader::GetParameter</a>(_In_ <span class="keyword">const</span> uint32_t index)<span class="keyword"> const</span>
 <a name="l00194"></a>00194 <span class="keyword">    </span>{
 <a name="l00195"></a>00195         <span class="keywordflow">if</span> (index &lt; <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a711dfb923ec6bc5dc7200bfd49e16b7d">m_Parameters</a>.size())
 <a name="l00196"></a>00196         {
@@ -288,7 +288,7 @@
 <a name="l00220"></a>00220 
 <a name="l00221"></a>00221         <span class="keywordflow">while</span> (cgIsParameter(cParam))
 <a name="l00222"></a>00222         {
-<a name="l00223"></a>00223             <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html">VSParameter</a>(<span class="keyword">this</span>, cParam);
+<a name="l00223"></a>00223             <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * pParam = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html">VSParameter</a>(<span class="keyword">this</span>, cParam);
 <a name="l00224"></a>00224 
 <a name="l00225"></a>00225             this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259" title="Link a particular effect-level parameter against various core elements (exact behavior depends on par...">LinkParameter</a>(pParam);
 <a name="l00226"></a>00226 
@@ -300,7 +300,7 @@
 <a name="l00232"></a>00232         this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a84f428096f38dba9663c2f8643f98876">SetupTechniques</a>();
 <a name="l00233"></a>00233     }
 <a name="l00234"></a>00234 
-<a name="l00235"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259">00235</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259" title="Link a particular effect-level parameter against various core elements (exact behavior depends on par...">VSShader::LinkParameter</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam)
+<a name="l00235"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259">00235</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259" title="Link a particular effect-level parameter against various core elements (exact behavior depends on par...">VSShader::LinkParameter</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * pParam)
 <a name="l00236"></a>00236     {
 <a name="l00237"></a>00237         <span class="comment">// Cache basic data for future use</span>
 <a name="l00238"></a>00238         <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type = pParam-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a38f3cc6b7c77281ea9491d312ce7f300" title="Retrieves the type of this parameter.">GetType</a>();
@@ -353,7 +353,7 @@
 <a name="l00285"></a>00285         }
 <a name="l00286"></a>00286     }
 <a name="l00287"></a>00287 
-<a name="l00288"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7">00288</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7" title="Links a particular effect-level sampler against a core texture.">VSShader::LinkSampler</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam)
+<a name="l00288"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7">00288</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7" title="Links a particular effect-level sampler against a core texture.">VSShader::LinkSampler</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * pParam)
 <a name="l00289"></a>00289     {
 <a name="l00290"></a>00290         <a class="code" href="namespace_voodoo_shader.html#a00140beeb24a7a48c6127041947b6e35">IParameterRef</a> param = pParam;
 <a name="l00291"></a>00291 
@@ -411,7 +411,7 @@
 <a name="l00343"></a>00343         }
 <a name="l00344"></a>00344     }
 <a name="l00345"></a>00345 
-<a name="l00346"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6">00346</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6" title="Find texture information from a parameter and create a texture based on that data.">VSShader::CreateParameterTexture</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * pParam)
+<a name="l00346"></a><a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6">00346</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6" title="Find texture information from a parameter and create a texture based on that data.">VSShader::CreateParameterTexture</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * pParam)
 <a name="l00347"></a>00347     {
 <a name="l00348"></a>00348         <a class="code" href="namespace_voodoo_shader.html#a00140beeb24a7a48c6127041947b6e35">IParameterRef</a> param = pParam;
 <a name="l00349"></a>00349 
@@ -469,7 +469,7 @@
 <a name="l00401"></a>00401         <span class="comment">/* @todo Load texture region info from the annotations. */</span>
 <a name="l00402"></a>00402         ZeroMemory(&amp;texRegion, <span class="keyword">sizeof</span>(<a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a>));
 <a name="l00403"></a>00403 
-<a name="l00404"></a>00404         <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * texFile = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a1b0839e7ad2b1c900e428faf80215863" title="Retrieves this core&#39;s IFileSystem implementation.">GetFileSystem</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_file_system.html#abd68ab3a0d35cad6017fc7e46fca7db7" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">FindFile</a>(texName);
+<a name="l00404"></a>00404         <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * texFile = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a1b0839e7ad2b1c900e428faf80215863" title="Retrieves this core&#39;s IFileSystem implementation.">GetFileSystem</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_file_system.html#abd68ab3a0d35cad6017fc7e46fca7db7" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">FindFile</a>(texName);
 <a name="l00405"></a>00405         <span class="keywordflow">if</span> (texFile)
 <a name="l00406"></a>00406         {
 <a name="l00407"></a>00407             <a class="code" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a> pTex = <a class="code" href="class_voodoo_shader_1_1_v_s_shader.html#a73f8f613f8f39fbe48e2ff408c35383e">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#afc735445d241d2afd55518089340fba9" title="Retrieve the IAdapter attached to this ICore.">GetAdapter</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a4c9f285589133fd78942a3b205afddb2" title="Loads a named texture into the API and registers it with the Core.">LoadTexture</a>(texFile, &amp;texRegion);
@@ -621,7 +621,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

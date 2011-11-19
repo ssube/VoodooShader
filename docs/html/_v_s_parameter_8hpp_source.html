@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -96,7 +96,7 @@
 <a name="l00027"></a>00027     <a class="code" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(VSParameter) = {0xA1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00028"></a>00028 
 <a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html">00029</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html">VSParameter</a> :
-<a name="l00030"></a>00030         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a>
+<a name="l00030"></a>00030         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a>
 <a name="l00031"></a>00031     {
 <a name="l00032"></a>00032     <span class="keyword">public</span>:
 <a name="l00033"></a>00033         <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a74e2ff28f33742fd017cf922cf0ef086">VSParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <span class="keyword">const</span> pCore, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type);
@@ -112,7 +112,7 @@
 <a name="l00043"></a>00043         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a5603a55855819839e6eb0bf24172aa93">GetName</a>() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00044"></a>00044         <span class="keyword">virtual</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#acaca928917c54980adde55daa9598bf2" title="Retrieves the type of this parameter.">GetType</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00045"></a>00045         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#af1af4ada671bc9de464174c08e0b1b35" title="Checks if the parameter is virtual (belongs to the core only) or physical (from a shader)...">IsVirtual</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00046"></a>00046         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a20086ac1bda156a38ed61243118c506d" title="Attaches a second parameter to this one, forcing the other to update whenever this value is changed...">AttachParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <span class="keyword">const</span> pParam) <span class="keywordflow">throw</span>();
+<a name="l00046"></a>00046         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a20086ac1bda156a38ed61243118c506d" title="Attaches a second parameter to this one, forcing the other to update whenever this value is changed...">AttachParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <span class="keyword">const</span> pParam) <span class="keywordflow">throw</span>();
 <a name="l00047"></a>00047         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#aa87ae9adb8927d21f0da8037018ffb93" title="Detaches this parameter from its source (set with a call to IParameter::AttachParameter(IParameter * ...">DetachParameter</a>() <span class="keywordflow">throw</span>();
 <a name="l00048"></a>00048         <span class="keyword">virtual</span> <span class="keyword">const</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#aae915ee2ea6f949936fb3f17030b62c9" title="Get the component count for this parameter.">GetComponents</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00049"></a>00049         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#af02055e6cc5d8aef2d03a403f14c25ad" title="Retrieves the texture source for this parameter.">GetTexture</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
@@ -144,7 +144,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

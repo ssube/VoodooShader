@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -130,7 +130,7 @@
 <a name="l00061"></a>00061             {
 <a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IFileSystem) {
-<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSFileSystem) {
 <a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html" title="Voodoo Shader null file system implementation.">VSFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00067"></a>00067             } <span class="keywordflow">else</span> {
@@ -167,7 +167,7 @@
 <a name="l00098"></a>00098         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00099"></a>00099     }
 <a name="l00100"></a>00100 
-<a name="l00101"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a8c26455831eaa9f533465d9fb1a44638">00101</a>     <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a8c26455831eaa9f533465d9fb1a44638" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">VSFileSystem::FindFile</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)<span class="keyword"> const</span>
+<a name="l00101"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a8c26455831eaa9f533465d9fb1a44638">00101</a>     <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a8c26455831eaa9f533465d9fb1a44638" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">VSFileSystem::FindFile</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)<span class="keyword"> const</span>
 <a name="l00102"></a>00102 <span class="keyword">    </span>{
 <a name="l00103"></a>00103         UNREFERENCED_PARAMETER(name);
 <a name="l00104"></a>00104 
@@ -179,7 +179,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

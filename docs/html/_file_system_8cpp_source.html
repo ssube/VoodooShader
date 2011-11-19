@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -228,7 +228,7 @@
 <a name="l00159"></a>00159                 {
 <a name="l00160"></a>00160                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00161"></a>00161                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IFileSystem) {
-<a name="l00162"></a>00162                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00162"></a>00162                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00163"></a>00163                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSWFileSystem) {
 <a name="l00164"></a>00164                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html" title="Provides a unified file management system for loading shaders and other resources.">VSWFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00165"></a>00165                 } <span class="keywordflow">else</span> {
@@ -284,7 +284,7 @@
 <a name="l00215"></a>00215             <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00216"></a>00216         }
 <a name="l00217"></a>00217 
-<a name="l00218"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gac034739454fca4c328c34c9f3ce3a1d1">00218</a>         <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gac034739454fca4c328c34c9f3ce3a1d1" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">VSWFileSystem::FindFile</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)<span class="keyword"> const</span>
+<a name="l00218"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gac034739454fca4c328c34c9f3ce3a1d1">00218</a>         <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gac034739454fca4c328c34c9f3ce3a1d1" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">VSWFileSystem::FindFile</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)<span class="keyword"> const</span>
 <a name="l00219"></a>00219 <span class="keyword">        </span>{
 <a name="l00220"></a>00220             <a class="code" href="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">LL_Debug</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>, L<span class="stringliteral">&quot;Searching for raw file \&quot;%s\&quot;.&quot;</span>, name.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00221"></a>00221 
@@ -370,7 +370,7 @@
 <a name="l00301"></a>00301                 {
 <a name="l00302"></a>00302                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00303"></a>00303                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IFile) {
-<a name="l00304"></a>00304                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00304"></a>00304                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00305"></a>00305                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSWFile) {
 <a name="l00306"></a>00306                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html">VSWFile</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00307"></a>00307                 } <span class="keywordflow">else</span> {
@@ -440,7 +440,7 @@
 <a name="l00371"></a>00371             <span class="keywordflow">return</span> (<a class="code" href="group__voodoo__module__wfilesystem.html#ga104b71886d3447b1843806bffbb281c8">m_Handle</a> != INVALID_HANDLE_VALUE);
 <a name="l00372"></a>00372         }
 <a name="l00373"></a>00373 
-<a name="l00374"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">00374</a>         <a class="code" href="class_voodoo_shader_1_1_i_image.html">IImage</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">VSWFile::OpenImage</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00374"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">00374</a>         <a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> * <a class="code" href="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17">VSWFile::OpenImage</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
 <a name="l00375"></a>00375 <span class="keyword">        </span>{
 <a name="l00376"></a>00376             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">VSWImage::Load</a>(<a class="code" href="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga417860d4ba326b8d95856ac50d720752">m_Path</a>);
 <a name="l00377"></a>00377         }
@@ -670,7 +670,7 @@
 <a name="l00601"></a>00601                 {
 <a name="l00602"></a>00602                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00603"></a>00603                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IImage) {
-<a name="l00604"></a>00604                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_image.html">IImage</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00604"></a>00604                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00605"></a>00605                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSWImage) {
 <a name="l00606"></a>00606                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library.">VSWImage</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00607"></a>00607                 } <span class="keywordflow">else</span> {
@@ -753,7 +753,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

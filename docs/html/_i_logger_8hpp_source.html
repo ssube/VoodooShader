@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -92,51 +92,53 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00034"></a><a class="code" href="class_voodoo_shader_1_1_i_logger.html">00034</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a> :
-<a name="l00035"></a>00035         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>
-<a name="l00036"></a>00036     {
-<a name="l00037"></a>00037     <span class="keyword">public</span>:
-<a name="l00038"></a><a class="code" href="class_voodoo_shader_1_1_i_logger.html#aeac20a2773682f23c2fe37a23f78f786">00038</a>         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#aeac20a2773682f23c2fe37a23f78f786">~ILogger</a>(<span class="keywordtype">void</span>) throw() {};
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_logger.html#aecb0b94dd2259d623b8f2431198f8479" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> throw() = 0;
-<a name="l00041"></a>00041         virtual uint32_t <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a8ee17314c4e6248a6ed48e2a8208c556" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00042"></a>00042         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a86de46fb375841cccbf907044d8ca389" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ const <span class="keywordtype">void</span> ** ppOut) const throw() = 0;
-<a name="l00043"></a>00043         virtual <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a512e1ec63c190b77d7868c0139425cde" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00044"></a>00044         virtual <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_i_logger.html#ab98eb60d00a47029224542bdfad4cd7e" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00045"></a>00045 
-<a name="l00053"></a>00053         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7ff4b2ef9fbbbf0691a6b081e841ae51" title="Opens a file for use by this logger.">Open</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; filename, _In_ const <span class="keywordtype">bool</span> append) throw() = 0;
-<a name="l00054"></a>00054 
-<a name="l00062"></a>00062         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7ff4b2ef9fbbbf0691a6b081e841ae51" title="Opens a file for use by this logger.">Open</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * const pFile, _In_ const <span class="keywordtype">bool</span> append) throw() = 0;
-<a name="l00063"></a>00063 
-<a name="l00067"></a>00067         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#aa51029bee28d08555500657d0bfc6e07" title="Closes the log file, if one is open.">Close</a>(<span class="keywordtype">void</span>) throw() = 0;
-<a name="l00068"></a>00068 
-<a name="l00077"></a>00077         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a5c8c45d23188a71c6baf6caa577125ca" title="Immediately writes all pending data to disk.">Flush</a>(<span class="keywordtype">void</span>) throw() = 0;
-<a name="l00078"></a>00078 
-<a name="l00084"></a>00084         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#af27341782c82928ee435c133b53d286e" title="Set the default minimum message level.">SetLogLevel</a>(_In_ const <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level) throw() = 0;
-<a name="l00085"></a>00085 
-<a name="l00086"></a>00086         virtual const <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7da701aa27d6b86251a57a9531938957">GetLogLevel</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00087"></a>00087 
-<a name="l00094"></a>00094         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a2d3d49830b66c017a2db69e61b1e03d8" title="Writes a module stamp to the log.">LogModule</a>(_In_ const <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * const pModule) throw() = 0;
+<a name="l00034"></a>00034     <a class="code" href="group__voodoo__uuids.html#ga1e664b7c83bc0a98c02c41aeca3af536">DEFINE_IID</a>(ILogger) = {0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+<a name="l00035"></a>00035 
+<a name="l00042"></a><a class="code" href="class_voodoo_shader_1_1_i_logger.html">00042</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a> :
+<a name="l00043"></a>00043         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>
+<a name="l00044"></a>00044     {
+<a name="l00045"></a>00045     <span class="keyword">public</span>:
+<a name="l00046"></a><a class="code" href="class_voodoo_shader_1_1_i_logger.html#aeac20a2773682f23c2fe37a23f78f786">00046</a>         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#aeac20a2773682f23c2fe37a23f78f786">~ILogger</a>(<span class="keywordtype">void</span>) throw() {};
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_logger.html#aecb0b94dd2259d623b8f2431198f8479" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> throw() = 0;
+<a name="l00049"></a>00049         virtual uint32_t <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a8ee17314c4e6248a6ed48e2a8208c556" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00050"></a>00050         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a86de46fb375841cccbf907044d8ca389" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ const <span class="keywordtype">void</span> ** ppOut) const throw() = 0;
+<a name="l00051"></a>00051         virtual <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a512e1ec63c190b77d7868c0139425cde" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00052"></a>00052         virtual <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_i_logger.html#ab98eb60d00a47029224542bdfad4cd7e" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00053"></a>00053 
+<a name="l00061"></a>00061         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7ff4b2ef9fbbbf0691a6b081e841ae51" title="Opens a file for use by this logger.">Open</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; filename, _In_ const <span class="keywordtype">bool</span> append) throw() = 0;
+<a name="l00062"></a>00062 
+<a name="l00070"></a>00070         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7ff4b2ef9fbbbf0691a6b081e841ae51" title="Opens a file for use by this logger.">Open</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * const pFile, _In_ const <span class="keywordtype">bool</span> append) throw() = 0;
+<a name="l00071"></a>00071 
+<a name="l00075"></a>00075         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#aa51029bee28d08555500657d0bfc6e07" title="Closes the log file, if one is open.">Close</a>(<span class="keywordtype">void</span>) throw() = 0;
+<a name="l00076"></a>00076 
+<a name="l00085"></a>00085         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a5c8c45d23188a71c6baf6caa577125ca" title="Immediately writes all pending data to disk.">Flush</a>(<span class="keywordtype">void</span>) throw() = 0;
+<a name="l00086"></a>00086 
+<a name="l00092"></a>00092         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#af27341782c82928ee435c133b53d286e" title="Set the default minimum message level.">SetLogLevel</a>(_In_ const <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level) throw() = 0;
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094         virtual const <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7da701aa27d6b86251a57a9531938957">GetLogLevel</a>(<span class="keywordtype">void</span>) const throw() = 0;
 <a name="l00095"></a>00095 
-<a name="l00104"></a>00104         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
-<a name="l00105"></a>00105         (
-<a name="l00106"></a>00106             _In_ const <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level,
-<a name="l00107"></a>00107             _In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; module,
-<a name="l00108"></a>00108             _In_ _Printf_format_string_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; msg,
-<a name="l00109"></a>00109             ...
-<a name="l00110"></a>00110         ) throw() = 0;
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a55681df40b536bff31de040d08201655">SetFlags</a>(_In_ const <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> flags) throw() = 0;
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114         virtual const <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7746ae38981759e6f72088a125f3551d">GetFlags</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00115"></a>00115     };
-<a name="l00119"></a>00119 }
+<a name="l00102"></a>00102         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a2d3d49830b66c017a2db69e61b1e03d8" title="Writes a module stamp to the log.">LogModule</a>(_In_ const <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * const pModule) throw() = 0;
+<a name="l00103"></a>00103 
+<a name="l00112"></a>00112         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00113"></a>00113         (
+<a name="l00114"></a>00114             _In_ const <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level,
+<a name="l00115"></a>00115             _In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; module,
+<a name="l00116"></a>00116             _In_ _Printf_format_string_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; msg,
+<a name="l00117"></a>00117             ...
+<a name="l00118"></a>00118         ) throw() = 0;
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a55681df40b536bff31de040d08201655">SetFlags</a>(_In_ const <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> flags) throw() = 0;
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122         virtual const <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7746ae38981759e6f72088a125f3551d">GetFlags</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00123"></a>00123     };
+<a name="l00127"></a>00127 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:00 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

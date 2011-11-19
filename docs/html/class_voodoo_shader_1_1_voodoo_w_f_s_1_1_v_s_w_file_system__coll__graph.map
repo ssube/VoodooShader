@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_file_system.html" title="VoodooShader::IFileSystem" alt="" coords="5,355,189,381"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access." alt="" coords="5,355,189,381"/>
 <area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="174,264,329,291"/>
 <area shape="rect" id="node19" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="214,355,359,381"/>
 <area shape="rect" id="node8" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="364,264,513,291"/>

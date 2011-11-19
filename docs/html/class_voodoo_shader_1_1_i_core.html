@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -116,11 +116,11 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html">IHookManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_core.html#a2bbcb49027fd0ea5521bb45aa9035f37">GetHookManager</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves this core's <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function-level hooks, redirecting existing functions and calls int...">IHookManager</a> implementation.  <a href="#a2bbcb49027fd0ea5521bb45aa9035f37"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_core.html#a1b0839e7ad2b1c900e428faf80215863">GetFileSystem</a> (void) const =0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves this core's <a class="el" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a> implementation.  <a href="#a1b0839e7ad2b1c900e428faf80215863"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves this core's <a class="el" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a> implementation.  <a href="#a1b0839e7ad2b1c900e428faf80215863"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_adapter.html">IAdapter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_core.html#afc735445d241d2afd55518089340fba9">GetAdapter</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the <a class="el" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a> attached to this <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>.  <a href="#afc735445d241d2afd55518089340fba9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_logger.html">ILogger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82">GetLogger</a> (void) const =0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the <a class="el" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a> attached to this <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>.  <a href="#abffd2e3463412b6a15ae075f25657f82"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the <a class="el" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a> attached to this <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>.  <a href="#abffd2e3463412b6a15ae075f25657f82"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_voodoo_shader.html#ac43f3a1ca019a9434e20660e4a15a05e">XmlDocument</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_core.html#a3a15102170f8c7f3b7a1cc82c553582c">GetConfig</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the Xml config document for this <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>.  <a href="#a3a15102170f8c7f3b7a1cc82c553582c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual CGcontext&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_core.html#a3582274c1eaa490abded6834d5278c8d">GetCgContext</a> (void) const =0  throw ()</td></tr>
@@ -148,9 +148,10 @@ Public Member Functions</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> engine class for the Voodoo Shader Framework. </p>
-<p>Provides centralized management and handling for shaders, textures, plugins and variable/configuration mechanics. </p>
+<p>Provides centralized management and handling for shaders, textures, plugins and variable/configuration mechanics.</p>
+<dl class="user"><dt><b>IID</b></dt><dd>e6f31289-05af-11e1-9e05-005056c00008 </dd></dl>
 
-<p>Definition at line <a class="el" href="_i_core_8hpp_source.html#l00035">35</a> of file <a class="el" href="_i_core_8hpp_source.html">ICore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_core_8hpp_source.html#l00043">43</a> of file <a class="el" href="_i_core_8hpp_source.html">ICore.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acd0d59031984c06c42c03154ddad5c67"></a><!-- doxytag: member="VoodooShader::ICore::~ICore" ref="acd0d59031984c06c42c03154ddad5c67" args="(void)" -->
 <div class="memitem">
@@ -171,7 +172,7 @@ Public Member Functions</h2></td></tr>
 <p>This may cause the destruction of objects and unloading of modules.</p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>Resources associated with this core may be undefined or the underlying Cg objects destroyed after the core is destroyed. They must not be used. </dd></dl>
 
-<p>Definition at line <a class="el" href="_i_core_8hpp_source.html#l00046">46</a> of file <a class="el" href="_i_core_8hpp_source.html">ICore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_core_8hpp_source.html#l00054">54</a> of file <a class="el" href="_i_core_8hpp_source.html">ICore.hpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +471,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Retrieves this core's <a class="el" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a> implementation. </p>
+<p>Retrieves this core's <a class="el" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a> implementation. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A shared pointer to the file system instance (always valid). </dd></dl>
 
 <p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a97e8944eb6ab4308a213cf40cfce6000">VoodooShader::VSCore</a>.</p>
@@ -514,7 +515,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Retrieve the <a class="el" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a> attached to this <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>. </p>
+<p>Retrieve the <a class="el" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a> attached to this <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A reference to the logger instance (always valid). </dd></dl>
 
 <p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a50e5f066810233e9235ead0365ff2dae">VoodooShader::VSCore</a>.</p>
@@ -823,7 +824,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:28 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

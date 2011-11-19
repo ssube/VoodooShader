@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -74,8 +74,7 @@
 <div class="title">Includes.hpp File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &lt;functional&gt;</code><br/>
-<code>#include &lt;cstdint&gt;</code><br/>
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br/>
 <code>#include &lt;list&gt;</code><br/>
 <code>#include &lt;map&gt;</code><br/>
 <code>#include &lt;vector&gt;</code><br/>
@@ -136,11 +135,13 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#ac9b7cf3e4f6c1b123d676628a8386c42">VOODOO_META_STRING_STR</a>(arg)&#160;&#160;&#160;L ## arg</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a9cb70e4baff06e7ddb2cd0ae62ccb47a">VOODOO_META_TOSTRING</a>(arg)&#160;&#160;&#160;VOODOO_META_STRING_ARG(arg)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a2140c5a374226696ae7822f3a2fb5f0e">VOODOO_META_STRING</a>(arg)&#160;&#160;&#160;VOODOO_META_STRING_STR(arg)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a808b14dfee87b12b149106d22957e950">VSTR</a>(arg)&#160;&#160;&#160;VOODOO_META_STRING_STR(arg)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#ac7bef5d85e3dcd73eef56ad39ffc84a9">WIN32_LEAN_AND_MEAN</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#abbaccfbed35b945162c27ef6d3748e77">EXTERN_C</a>&#160;&#160;&#160;extern &quot;C&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a49f34a28ad59b6ba93c4208c240faae8">DECLSPEC_SELECTANY</a>&#160;&#160;&#160;__declspec(selectany)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a64a3622e4b9bb13e6e7a451bfaa84a48">VOODOO_API</a>&#160;&#160;&#160;__declspec(dllexport)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a>&#160;&#160;&#160;__stdcall</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#afe317ddfdac600129c931fd07858cd8d">VOODOO_CALL_METHOD</a>&#160;&#160;&#160;__stdcall</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a5e73ef0ad4e5614cea6c0c7514ccafaf">VOODOO_PUBLIC_FUNC</a>&#160;&#160;&#160;VOODOO_API VOODOO_CALL</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(x)&#160;&#160;&#160;++x</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(x)&#160;&#160;&#160;--x</td></tr>
@@ -148,7 +149,7 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__uuids.html#ga1e664b7c83bc0a98c02c41aeca3af536">DEFINE_IID</a>(name)&#160;&#160;&#160;DEFINE_UUID(IID_##name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(name)&#160;&#160;&#160;DEFINE_UUID(CLSID_##name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__uuids.html#ga68b2f7d53dc16d20132080c4bc26b90e">DEFINE_LIBID</a>(name)&#160;&#160;&#160;DEFINE_UUID(LIBID_##name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38">Throw</a>(module, msg, core)&#160;&#160;&#160;throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38">Throw</a>(module, msg, core)&#160;&#160;&#160;throw Exception(module, msg, core, VSTR(__FILE__), VSTR(__FUNCTION__), __LINE__)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to throw Voodoo <a class="el" href="class_voodoo_shader_1_1_exception.html">exceptions</a> with extended debug info, particularly function, filename and line.  <a href="#a091b737d9aeea07d84a2c465beee6d38"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -494,7 +495,6 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__uuids.html#gaf61de15a931830cf3b7bc7c7a5feca7e">VoodooShader::__declspec</a> (selectany) IID_IObject = {0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">VoodooShader::intrusive_ptr_add_ref</a> (IObject *obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">VoodooShader::intrusive_ptr_release</a> (IObject *obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">_Check_return_ ICore *VOODOO_CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aa05f7b01b3feddf2c75baf95b97ed6cc">VoodooShader::CreateCore</a> (const InitParams *const pInitParams, bool catchErrors=true)</td></tr>
@@ -512,7 +512,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00074">74</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00075">75</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -542,7 +542,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00043">43</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00041">41</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -561,7 +561,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00184">184</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00188">188</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -580,7 +580,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00183">183</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00187">187</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -609,7 +609,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;throw Exception(module, msg, core, __FILE__, __FUNCTION__, __LINE__)</td>
+          <td></td><td>&#160;&#160;&#160;throw Exception(module, msg, core, VSTR(__FILE__), VSTR(__FUNCTION__), __LINE__)</td>
         </tr>
       </table>
 </div>
@@ -618,7 +618,7 @@ Functions</h2></td></tr>
 <p>Macro to throw Voodoo <a class="el" href="class_voodoo_shader_1_1_exception.html">exceptions</a> with extended debug info, particularly function, filename and line. </p>
 <p>These exceptions are also logged if possible (requires a valid core to be given). The Exception class derives from std::exception, so these are simple to handle. </p>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00625">625</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00612">612</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -633,7 +633,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00087">87</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00088">88</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -648,7 +648,22 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00091">91</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00093">93</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afe317ddfdac600129c931fd07858cd8d"></a><!-- doxytag: member="Includes.hpp::VOODOO_CALL_METHOD" ref="afe317ddfdac600129c931fd07858cd8d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOODOO_CALL_METHOD&#160;&#160;&#160;__stdcall</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00094">94</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -667,7 +682,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00052">52</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00050">50</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -686,7 +701,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00048">48</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00046">46</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -705,7 +720,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00049">49</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00047">47</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -724,7 +739,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00051">51</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00049">49</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -739,7 +754,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00092">92</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00096">96</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -754,7 +769,26 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00047">47</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00045">45</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a808b14dfee87b12b149106d22957e950"></a><!-- doxytag: member="Includes.hpp::VSTR" ref="a808b14dfee87b12b149106d22957e950" args="(arg)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VSTR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">arg</td><td>)</td>
+          <td>&#160;&#160;&#160;VOODOO_META_STRING_STR(arg)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00051">51</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -769,7 +803,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00068">68</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00067">67</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -777,7 +811,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

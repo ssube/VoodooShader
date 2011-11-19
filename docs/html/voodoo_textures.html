@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -104,7 +104,7 @@ Depth Buffers</h2>
 <p>For an adapter to be considered fully Voodoo compatible, it must supply realtime depth data to a shader-readable texture. How this is performed is left to the discretion of the adapter, as it varies greatly between old D3D versions and OpenGL or newer D3D. This data should be stored such that greater distances are represented by higher values and the distance should be (if possible) not normalized (not bounded by <code></code>(0-1)). When possible, it is recommended that the depth information be stored in a 32-bit floating point component. Depth data must be accessible to shaders from the R channel of the depth texture. At this time, the GBA components of the texture are considered undefined, but reserved for future use. Depending on implementation, they may contain depth data, uninitialized memory, or other data. They should not be used. As DirectX 9 does not usually allow <a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fad0414e285b3c5b13e7cb082bb02a127e">TF_D32</a> textures to be read, this may require rendering to a second target and using a <a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa4b7fc08dfa228fc2a361188e1dba25b7">TF_RGBA32F</a> texture. Two-pass or two-target rendering can both meet this requirement neatly. Using two passes is slower but more compatible, so this should be made an option if possible.</p>
 <h2><a class="anchor" id="voodoo_textures_loading"></a>
 Texture Loading</h2>
-<p>Texture loading is implemented through an <a class="el" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a> callback, so Voodoo textures can be created with a variety of options or using any number of functions. To simplify getting texture data into memory in the first place, the Voodoo filesystem library includes specialized <a class="el" href="class_voodoo_shader_1_1_i_image.html">IImage</a> classes. These use DevIL as the loading library, so support a ridiculous number of formats. Among the most useful formats are DDS, PNG and TGA, all supporting high resolutions and transparency. Other formats may not be as suitable; JPEG and BMP for example are very lossy and large, respectively.</p>
+<p>Texture loading is implemented through an <a class="el" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a> callback, so Voodoo textures can be created with a variety of options or using any number of functions. To simplify getting texture data into memory in the first place, the Voodoo filesystem library includes specialized <a class="el" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> classes. These use DevIL as the loading library, so support a ridiculous number of formats. Among the most useful formats are DDS, PNG and TGA, all supporting high resolutions and transparency. Other formats may not be as suitable; JPEG and BMP for example are very lossy and large, respectively.</p>
 <h2><a class="anchor" id="voodoo_textures_fileformats"></a>
 Supported File Formats</h2>
 <p>Below is provided a full list of the file formats Voodoo/Filesystem is capable of loading and saving (via DevIL). This list is taken from the DevIL documentation.</p>
@@ -210,7 +210,7 @@ Supported File Formats</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:28 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

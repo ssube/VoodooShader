@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -174,7 +174,7 @@
 <a name="l00106"></a>00106             {
 <a name="l00107"></a>00107                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00108"></a>00108             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IParameter) {
-<a name="l00109"></a>00109                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00109"></a>00109                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00110"></a>00110             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSParameter) {
 <a name="l00111"></a>00111                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html">VSParameter</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00112"></a>00112             } <span class="keywordflow">else</span> {
@@ -212,7 +212,7 @@
 <a name="l00144"></a>00144         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a35d888736a34360b045095f227887746">m_Virtual</a>;
 <a name="l00145"></a>00145     }
 <a name="l00146"></a>00146 
-<a name="l00147"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a20086ac1bda156a38ed61243118c506d">00147</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a20086ac1bda156a38ed61243118c506d" title="Attaches a second parameter to this one, forcing the other to update whenever this value is changed...">VSParameter::AttachParameter</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <span class="keyword">const</span> pParam)
+<a name="l00147"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a20086ac1bda156a38ed61243118c506d">00147</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a20086ac1bda156a38ed61243118c506d" title="Attaches a second parameter to this one, forcing the other to update whenever this value is changed...">VSParameter::AttachParameter</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <span class="keyword">const</span> pParam)
 <a name="l00148"></a>00148     {
 <a name="l00149"></a>00149         <span class="keywordflow">if</span> (!pParam)
 <a name="l00150"></a>00150         {
@@ -278,7 +278,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

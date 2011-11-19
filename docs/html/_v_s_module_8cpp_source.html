@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -204,7 +204,7 @@
 <a name="l00135"></a>00135 
 <a name="l00136"></a>00136             <span class="keywordflow">if</span> (compfilter.<a class="code" href="group__voodoo__utility__regex__expr.html#ga05d0fe89740187f7a4302044cb6d107e" title="Test if the given string is matched by the expression.">Find</a>(module))
 <a name="l00137"></a>00137             {
-<a name="l00138"></a>00138                 <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * modulefile = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a1b0839e7ad2b1c900e428faf80215863" title="Retrieves this core&#39;s IFileSystem implementation.">GetFileSystem</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_file_system.html#abd68ab3a0d35cad6017fc7e46fca7db7" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">FindFile</a>(module);
+<a name="l00138"></a>00138                 <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * modulefile = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a1b0839e7ad2b1c900e428faf80215863" title="Retrieves this core&#39;s IFileSystem implementation.">GetFileSystem</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_file_system.html#abd68ab3a0d35cad6017fc7e46fca7db7" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">FindFile</a>(module);
 <a name="l00139"></a>00139                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#aaff215bd1d3d66364bc482409a56bfd5">LoadFile</a>(modulefile);
 <a name="l00140"></a>00140             }
 <a name="l00141"></a>00141         } <span class="keywordflow">while</span> (FindNextFile(searchHandle, &amp;findFile) != 0);
@@ -284,7 +284,7 @@
 <a name="l00215"></a>00215     }
 <a name="l00216"></a>00216 
 <a name="l00217"></a>00217 
-<a name="l00218"></a><a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#aaff215bd1d3d66364bc482409a56bfd5">00218</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#aaff215bd1d3d66364bc482409a56bfd5">VSModuleManager::LoadFile</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * pFile)
+<a name="l00218"></a><a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#aaff215bd1d3d66364bc482409a56bfd5">00218</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#aaff215bd1d3d66364bc482409a56bfd5">VSModuleManager::LoadFile</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * pFile)
 <a name="l00219"></a>00219     {
 <a name="l00220"></a>00220         <span class="keywordflow">if</span> (pFile)
 <a name="l00221"></a>00221         {
@@ -335,7 +335,7 @@
 <a name="l00266"></a>00266 
 <a name="l00267"></a><a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#a8a3597e2976a353a7381ed121243b4a1">00267</a>     <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#a8a3597e2976a353a7381ed121243b4a1">VSModuleManager::CreateObject</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid)<span class="keyword"> const</span>
 <a name="l00268"></a>00268 <span class="keyword">    </span>{
-<a name="l00269"></a>00269         <a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a>* logger = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>();
+<a name="l00269"></a>00269         <a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a>* logger = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>();
 <a name="l00270"></a>00270         ClassMap::const_iterator classiter = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#a4992e609451524ef7a4004336d46ecdf">m_Classes</a>.find(clsid);
 <a name="l00271"></a>00271 
 <a name="l00272"></a>00272         <span class="keywordflow">if</span> (classiter != <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#a4992e609451524ef7a4004336d46ecdf">m_Classes</a>.end())
@@ -512,7 +512,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

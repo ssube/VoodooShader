@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -97,7 +97,7 @@
 <a name="l00038"></a>00038     <a class="code" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(VSLogger) = {0x9E, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00039"></a>00039 
 <a name="l00046"></a><a class="code" href="class_voodoo_shader_1_1_v_s_logger.html">00046</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_v_s_logger.html" title="Voodoo Shader null logger implementation.">VSLogger</a> :
-<a name="l00047"></a>00047         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a>
+<a name="l00047"></a>00047         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a>
 <a name="l00048"></a>00048     {
 <a name="l00049"></a>00049     <span class="keyword">public</span>:
 <a name="l00050"></a>00050         <a class="code" href="group__voodoo__core__null.html#ga46924c49e4f7071efe7fdfa53d9d3de8">VSLogger</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore);
@@ -110,7 +110,7 @@
 <a name="l00057"></a>00057         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="group__voodoo__core__null.html#ga3cb796cc6de1cf871887cf04202c1432" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00058"></a>00058 
 <a name="l00059"></a>00059         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce" title="Opens a file for use by this logger.">Open</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; filename, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append) <span class="keywordflow">throw</span>();
-<a name="l00060"></a>00060         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce" title="Opens a file for use by this logger.">Open</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * <span class="keyword">const</span> pFile, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append) <span class="keywordflow">throw</span>();
+<a name="l00060"></a>00060         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce" title="Opens a file for use by this logger.">Open</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * <span class="keyword">const</span> pFile, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append) <span class="keywordflow">throw</span>();
 <a name="l00061"></a>00061         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="group__voodoo__core__null.html#gaab24836c314b666b9ebf78f2883c7095" title="Closes the log file, if one is open.">Close</a>(<span class="keywordtype">void</span>);
 <a name="l00062"></a>00062         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="group__voodoo__core__null.html#gad52cd0b018621336c81a82c37b1b0a22" title="Immediately writes all pending data to disk.">Flush</a>(<span class="keywordtype">void</span>);
 <a name="l00063"></a>00063         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="group__voodoo__core__null.html#ga9473ee15cea26e7e0190a1ec343986ae" title="Set the default minimum message level.">SetLogLevel</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level);
@@ -136,7 +136,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

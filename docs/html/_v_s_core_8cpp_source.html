@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -300,7 +300,7 @@
 <a name="l00231"></a>00231             }
 <a name="l00232"></a>00232 
 <a name="l00233"></a>00233             <span class="comment">// Make sure a logger was loaded</span>
-<a name="l00234"></a>00234             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a4b122538e976d47ab84a5bda554efa64" title="The current ILogger implementation.">m_Logger</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#ac656d9d6b97ce2ae9d16e993f04ca0d1" title="The current module manager.">m_ModuleManager</a>-&gt;CreateObject(logClass));
+<a name="l00234"></a>00234             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a4b122538e976d47ab84a5bda554efa64" title="The current ILogger implementation.">m_Logger</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#ac656d9d6b97ce2ae9d16e993f04ca0d1" title="The current module manager.">m_ModuleManager</a>-&gt;CreateObject(logClass));
 <a name="l00235"></a>00235             <span class="keywordflow">if</span> (<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a4b122538e976d47ab84a5bda554efa64" title="The current ILogger implementation.">m_Logger</a>.get() == <span class="keyword">nullptr</span>)
 <a name="l00236"></a>00236             {
 <a name="l00237"></a>00237                 <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Unable to create Logger object (class not found).&quot;</span>, <span class="keyword">nullptr</span>);
@@ -322,7 +322,7 @@
 <a name="l00253"></a>00253             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a4b122538e976d47ab84a5bda554efa64" title="The current ILogger implementation.">m_Logger</a>-&gt;LogModule(&amp;cgver);
 <a name="l00254"></a>00254 
 <a name="l00255"></a>00255             <span class="comment">// Load less vital classes</span>
-<a name="l00256"></a>00256             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#af6837cfeefcb83c5bf8dc0538e5c7cb3" title="The current IFileSystem implementation.">m_FileSystem</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#ac656d9d6b97ce2ae9d16e993f04ca0d1" title="The current module manager.">m_ModuleManager</a>-&gt;CreateObject(fsClass));
+<a name="l00256"></a>00256             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#af6837cfeefcb83c5bf8dc0538e5c7cb3" title="The current IFileSystem implementation.">m_FileSystem</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#ac656d9d6b97ce2ae9d16e993f04ca0d1" title="The current module manager.">m_ModuleManager</a>-&gt;CreateObject(fsClass));
 <a name="l00257"></a>00257             <span class="keywordflow">if</span> (!<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#af6837cfeefcb83c5bf8dc0538e5c7cb3" title="The current IFileSystem implementation.">m_FileSystem</a>)
 <a name="l00258"></a>00258             {
 <a name="l00259"></a>00259                 <a class="code" href="_includes_8hpp.html#a091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Unable to create FileSystem object.&quot;</span>, <span class="keyword">nullptr</span>);
@@ -447,7 +447,7 @@
 <a name="l00378"></a>00378         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a3ab2063157ac9b3af4d5794700667feb" title="The current IHookManager implementation.">m_HookManager</a>.get();
 <a name="l00379"></a>00379     }
 <a name="l00380"></a>00380 
-<a name="l00381"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a97e8944eb6ab4308a213cf40cfce6000">00381</a>     <a class="code" href="class_voodoo_shader_1_1_i_file_system.html">IFileSystem</a>* <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a97e8944eb6ab4308a213cf40cfce6000" title="Retrieves this core&#39;s IFileSystem implementation.">VSCore::GetFileSystem</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00381"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a97e8944eb6ab4308a213cf40cfce6000">00381</a>     <a class="code" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a>* <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a97e8944eb6ab4308a213cf40cfce6000" title="Retrieves this core&#39;s IFileSystem implementation.">VSCore::GetFileSystem</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
 <a name="l00382"></a>00382 <span class="keyword">    </span>{
 <a name="l00383"></a>00383         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#af6837cfeefcb83c5bf8dc0538e5c7cb3" title="The current IFileSystem implementation.">m_FileSystem</a>.get();
 <a name="l00384"></a>00384     }
@@ -457,7 +457,7 @@
 <a name="l00388"></a>00388         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a5842e8837b47d03862223f00e7a709cb" title="The current IAdapter implementation.">m_Adapter</a>.get();
 <a name="l00389"></a>00389     }
 <a name="l00390"></a>00390 
-<a name="l00391"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a50e5f066810233e9235ead0365ff2dae">00391</a>     <a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a>* <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a50e5f066810233e9235ead0365ff2dae" title="Retrieve the ILogger attached to this ICore.">VSCore::GetLogger</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00391"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a50e5f066810233e9235ead0365ff2dae">00391</a>     <a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a>* <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a50e5f066810233e9235ead0365ff2dae" title="Retrieve the ILogger attached to this ICore.">VSCore::GetLogger</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
 <a name="l00392"></a>00392 <span class="keyword">    </span>{
 <a name="l00393"></a>00393         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a4b122538e976d47ab84a5bda554efa64" title="The current ILogger implementation.">m_Logger</a>.get();
 <a name="l00394"></a>00394     }
@@ -502,7 +502,7 @@
 <a name="l00433"></a>00433         }
 <a name="l00434"></a>00434     }
 <a name="l00435"></a>00435 
-<a name="l00436"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a39a89dc2aa1c912bd456954ef04d4919">00436</a>     <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a39a89dc2aa1c912bd456954ef04d4919" title="Loads and compiles an effect from file, using the current file system and search paths.">VSCore::CreateShader</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * pFile, _In_opt_ <span class="keyword">const</span> <span class="keywordtype">char</span> **ppArgs)
+<a name="l00436"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a39a89dc2aa1c912bd456954ef04d4919">00436</a>     <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a39a89dc2aa1c912bd456954ef04d4919" title="Loads and compiles an effect from file, using the current file system and search paths.">VSCore::CreateShader</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * pFile, _In_opt_ <span class="keyword">const</span> <span class="keywordtype">char</span> **ppArgs)
 <a name="l00437"></a>00437     {
 <a name="l00438"></a>00438         <span class="keywordflow">if</span> (!pFile || !<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a6bdcbd251a646749c7ba0ceebec42a9f" title="Cg context used by this pCore.">m_CgContext</a>)
 <a name="l00439"></a>00439         {
@@ -518,7 +518,7 @@
 <a name="l00449"></a>00449         <span class="keywordflow">return</span> shader.get();
 <a name="l00450"></a>00450     }
 <a name="l00451"></a>00451 
-<a name="l00452"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a9836c5d2f1c260054ed2985e1ac77e3f">00452</a>     <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a9836c5d2f1c260054ed2985e1ac77e3f" title="Creates a global virtual parameter.">VSCore::CreateParameter</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type)
+<a name="l00452"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a9836c5d2f1c260054ed2985e1ac77e3f">00452</a>     <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a9836c5d2f1c260054ed2985e1ac77e3f" title="Creates a global virtual parameter.">VSCore::CreateParameter</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type)
 <a name="l00453"></a>00453     {
 <a name="l00454"></a>00454         <span class="keywordflow">if</span> (!<a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a6bdcbd251a646749c7ba0ceebec42a9f" title="Cg context used by this pCore.">m_CgContext</a>)
 <a name="l00455"></a>00455         {
@@ -576,7 +576,7 @@
 <a name="l00507"></a>00507         }
 <a name="l00508"></a>00508     }
 <a name="l00509"></a>00509 
-<a name="l00510"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a5be79af042a2c08b09ca0044094b088e">00510</a>     <a class="code" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a>* <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a5be79af042a2c08b09ca0044094b088e" title="Retrieve a parameter by name.">VSCore::GetParameter</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type)<span class="keyword"> const</span>
+<a name="l00510"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a5be79af042a2c08b09ca0044094b088e">00510</a>     <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a>* <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a5be79af042a2c08b09ca0044094b088e" title="Retrieve a parameter by name.">VSCore::GetParameter</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type)<span class="keyword"> const</span>
 <a name="l00511"></a>00511 <span class="keyword">    </span>{
 <a name="l00512"></a>00512         ParameterMap::const_iterator parameter = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a797b83aa178c415cc13b4bde180ae27c" title="Collection of all virtual parameters created by this pCore and used by the Cg context.">m_Parameters</a>.find(name);
 <a name="l00513"></a>00513 
@@ -728,7 +728,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

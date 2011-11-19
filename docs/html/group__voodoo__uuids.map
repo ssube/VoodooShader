@@ -1,3 +1,4 @@
 <map id="structs" name="structs">
-<area shape="rect" id="node1" href="$group__voodoo__core__null.html" title="Null Implementations" alt="" coords="6,5,149,32"/>
+<area shape="rect" id="node1" href="$group__voodoo__framework__interfaces.html" title="Voodoo Framework interfaces" alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node2" href="$group__voodoo__core__null.html" title="Null Implementations" alt="" coords="31,56,174,83"/>
 </map>

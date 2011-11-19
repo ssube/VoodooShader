@@ -161,7 +161,6 @@ voodoo_vars.html
 todo.html
 group__voodoo__framework__interfaces.html
 group__voodoo__uuids.html
-group___voodoo_core.html
 group__voodoo__utility.html
 group__voodoo__utility__regex.html
 group__voodoo__utility__regex__ctor.html
@@ -341,6 +340,7 @@ namespacemembers.html
 namespacemembers_0x61.html
 namespacemembers_0x63.html
 namespacemembers_0x64.html
+namespacemembers_0x65.html
 namespacemembers_0x66.html
 namespacemembers_0x68.html
 namespacemembers_0x69.html

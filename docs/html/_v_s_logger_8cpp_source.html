@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-42-g5a07080</span>
+   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -130,7 +130,7 @@
 <a name="l00061"></a>00061             {
 <a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_ILogger) {
-<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Defines the interface for a Logger class.">ILogger</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSLogger) {
 <a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_logger.html" title="Voodoo Shader null logger implementation.">VSLogger</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00067"></a>00067             } <span class="keywordflow">else</span> {
@@ -161,7 +161,7 @@
 <a name="l00092"></a>00092         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00093"></a>00093     }
 <a name="l00094"></a>00094 
-<a name="l00095"></a><a class="code" href="group__voodoo__core__null.html#gacbebb063d6ac5b61e3fbc66eacbb6f21">00095</a>     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce" title="Opens a file for use by this logger.">VSLogger::Open</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html">IFile</a> * <span class="keyword">const</span> pFile, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
+<a name="l00095"></a><a class="code" href="group__voodoo__core__null.html#gacbebb063d6ac5b61e3fbc66eacbb6f21">00095</a>     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce" title="Opens a file for use by this logger.">VSLogger::Open</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * <span class="keyword">const</span> pFile, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
 <a name="l00096"></a>00096     {
 <a name="l00097"></a>00097         UNREFERENCED_PARAMETER(pFile);
 <a name="l00098"></a>00098         UNREFERENCED_PARAMETER(append);
@@ -217,7 +217,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 17 2011 02:37:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
