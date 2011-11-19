@@ -59,7 +59,7 @@ namespace VoodooShader
         return count;
     }
 
-    bool VSModuleManager::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VSModuleManager::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
     {
         if (!ppOut)
         {
@@ -379,7 +379,7 @@ namespace VoodooShader
         return count;
     }
 
-    bool VSModule::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VSModule::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
     {
         if (!ppOut)
         {

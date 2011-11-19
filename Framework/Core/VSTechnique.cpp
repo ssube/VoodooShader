@@ -69,7 +69,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSTechnique::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VSTechnique::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
     {
         if (!ppOut)
         {

@@ -51,7 +51,7 @@ namespace VoodooShader
 
         virtual uint32_t AddRef(void) const throw() = 0;
         virtual uint32_t Release(void) const throw() = 0;
-        virtual bool CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
+        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
         virtual String ToString(void) const throw() = 0;
         virtual ICore * GetCore(void) const throw() = 0;
 

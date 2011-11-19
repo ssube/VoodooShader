@@ -45,7 +45,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSAdapter::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VSAdapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
     {
         if (!ppOut)
         {

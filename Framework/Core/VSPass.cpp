@@ -82,7 +82,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSPass::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VSPass::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
     {
         if (!ppOut)
         {

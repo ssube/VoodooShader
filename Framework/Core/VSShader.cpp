@@ -36,7 +36,7 @@
 
 namespace VoodooShader
 {
-    //! @todo SAL fails if the input core here has an _In_ annotation. This needs fixed.
+    //! @todo PREfast fails if the input core here has an _In_ annotation. This needs fixed.
     VSShader::VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & path, _In_opt_ const char ** ppArgs) :
         m_Refs(0), m_Core(pCore), m_Name(path), m_DefaultTechnique(nullptr)
     {
@@ -95,7 +95,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSShader::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VSShader::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
     {
         if (!ppOut)
         {

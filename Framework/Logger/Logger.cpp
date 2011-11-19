@@ -116,7 +116,7 @@ namespace VoodooShader
             }
         }
 
-        bool VSXmlLogger::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        bool VSXmlLogger::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
         {
             if (!ppOut)
             {

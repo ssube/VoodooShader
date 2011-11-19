@@ -74,7 +74,7 @@ namespace VoodooShader
          * @note If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this
          *      class implements.
          */
-        virtual bool CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
+        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
 
         /**
          * Get the name of this object.

@@ -45,7 +45,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSTexture::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VSTexture::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
     {
         if (!ppOut)
         {

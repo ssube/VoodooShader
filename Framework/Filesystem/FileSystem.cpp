@@ -143,7 +143,7 @@ namespace VoodooShader
             }
         }
 
-        bool VSWFileSystem::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        bool VSWFileSystem::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
         {
             if (!ppOut)
             {
@@ -285,7 +285,7 @@ namespace VoodooShader
             }
         }
 
-        bool VSWFile::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        bool VSWFile::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
         {
             if (!ppOut)
             {
@@ -585,7 +585,7 @@ namespace VoodooShader
             }
         }
 
-        bool VSWImage::CheckedCast(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        bool VSWImage::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
         {
             if (!ppOut)
             {
