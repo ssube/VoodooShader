@@ -27,6 +27,11 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
+    
+    /**
+     * @addtogroup voodoo_uuids 
+     */
+    DEFINE_IID(ITechnique) = {0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Contains a set of passes, designed to be used sequentially to create a shader effect. Typically, a single technique
@@ -36,6 +41,9 @@ namespace VoodooShader
      * @note All passes in a valid technique are guaranteed to be valid.
      * @warning While a shader may contain a number of techniques, not all are guaranteed to be valid. Techniques are
      *     typically validated when the Shader is created and loaded.
+     *      
+     * @par IID
+     *      e6f31295-05af-11e1-9e05-005056c00008
      */
     class ITechnique :
         public IObject

@@ -27,6 +27,11 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
+    
+    /**
+     * @addtogroup voodoo_uuids 
+     */
+    DEFINE_IID(IPass) = {0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Each IPass contains a single set of programs, each operating on a different stage of the render pipeline.
@@ -36,6 +41,9 @@ namespace VoodooShader
      *     used. Later APIs require the vertex and pixel shaders to be specified in each pass.
      *
      * @warning Some adapters may require programs to be provided for certain stages.
+     *      
+     * @par IID
+     *      e6f31293-05af-11e1-9e05-005056c00008
      */
     class IPass :
         public IObject

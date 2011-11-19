@@ -27,6 +27,18 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
+
+    /**
+     * @addtogroup voodoo_uuids 
+     */
+    DEFINE_IID(IParameter) = {0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+    
+    /**
+     * Provides access to shader parameters, with attach/detach and value set (for most data types).
+     *      
+     * @par IID
+     *      e6f31291-05af-11e1-9e05-005056c00008
+     */
     class IParameter :
         public IObject
     {

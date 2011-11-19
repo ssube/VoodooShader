@@ -27,11 +27,19 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
+    
+    /**
+     * @addtogroup voodoo_uuids 
+     */
+    DEFINE_IID(ITexture) = {0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Contains a hardware texture, for use with Voodoo shaders and effects. These textures may usually be bound to
      * parameters and shaders can sample pixels within them to create the on-screen images. Textures may be used to
      * represent various other surfaces, including render targets or even the backbuffer.
+     *      
+     * @par IID
+     *      e6f31296-05af-11e1-9e05-005056c00008
      */
     class ITexture :
         public IObject

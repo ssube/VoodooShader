@@ -27,6 +27,11 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
+    
+    /**
+     * @addtogroup voodoo_uuids 
+     */
+    DEFINE_IID(IAdapter) = {0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API.
@@ -36,6 +41,9 @@ namespace VoodooShader
      *
      * @sa See the @ref voodoo_spec_adapter "adapter specifications" for details on what is required of adapter modules and
      *      classes.
+     *      
+     * @par IID
+     *      e6f31288-05af-11e1-9e05-005056c00008
      */
     class IAdapter :
         public IObject

@@ -29,8 +29,16 @@ namespace VoodooShader
      */
 
     /**
+     * @addtogroup voodoo_uuids
+     */
+    DEFINE_IID(ICore) = {0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+
+    /**
      * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
      * shaders, textures, plugins and variable/configuration mechanics.
+     * 
+     * @par IID
+     *      e6f31289-05af-11e1-9e05-005056c00008
      */
     class ICore :
         public IObject

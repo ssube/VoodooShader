@@ -27,6 +27,19 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
+    
+    /**
+     * @addtogroup voodoo_uuids 
+     */
+    DEFINE_IID(IFileSystem) = {0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+
+    /**
+     * Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even
+     * network access. Currently provides a readonly filesystem.
+     * 
+     * @par IID
+     *      e6f31288-05af-11e1-9e05-005056c00008
+     */
     class IFileSystem :
         public IObject
     {
@@ -69,7 +82,18 @@ namespace VoodooShader
          */
         virtual IFile * FindFile(_In_ const String & name) const throw() = 0;
     };
+    
+    /**
+     * @addtogroup voodoo_uuids 
+     */
+    DEFINE_IID(IFile) = {0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
+    /**
+     * Provides abstraction to a single file, for basic access.
+     *      
+     * @par IID
+     *      e6f3128a-05af-11e1-9e05-005056c00008
+     */
     class IFile :
         public IObject
     {
@@ -119,7 +143,18 @@ namespace VoodooShader
 
         virtual IImage * OpenImage(void) const throw() = 0;
     };
-
+    
+    /**
+     * @addtogroup voodoo_uuids 
+     */
+    DEFINE_IID(IImage) = {0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+    
+    /**
+     * Provides abstraction to an image for specialized access.
+     *      
+     * @par IID
+     *      e6f3128d-05af-11e1-9e05-005056c00008
+     */
     class IImage :
         public IObject
     {
