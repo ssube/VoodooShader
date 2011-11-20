@@ -521,9 +521,9 @@ namespace VoodooShader
         VSWImage::VSWImage(ICore * pCore, const String & name, ILuint image) :
             m_Core(pCore), m_Name(name), m_Image(image)
         {
-            m_Desc.Width = ilGetInteger(IL_IMAGE_WIDTH);
-            m_Desc.Height = ilGetInteger(IL_IMAGE_HEIGHT);
-            m_Desc.Depth = ilGetInteger(IL_IMAGE_DEPTH);
+            m_Desc.Size.X = ilGetInteger(IL_IMAGE_WIDTH);
+            m_Desc.Size.Y = ilGetInteger(IL_IMAGE_HEIGHT);
+            m_Desc.Size.Z = ilGetInteger(IL_IMAGE_DEPTH);
             m_Desc.Mipmaps = false;
             m_Desc.Format = TF_Unknown;
 
@@ -673,8 +673,8 @@ namespace VoodooShader
 
             return ilCopyPixels
             (
-                pDesc->OffX, pDesc->OffY, pDesc->OffZ,
-                pDesc->Width, pDesc->Height, pDesc->Depth,
+                pDesc->Origin.X, pDesc->Origin.Y, pDesc->Origin.Z,
+                pDesc->Size.X, pDesc->Size.Y, pDesc->Size.Z,
                 ilFmt, ilType, pBuffer
             );
         }

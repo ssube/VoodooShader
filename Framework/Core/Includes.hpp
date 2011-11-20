@@ -147,10 +147,6 @@ namespace VoodooShader
     struct Version;
 
     /* Geometry-related structs */
-    typedef float Float1;
-    struct Float2;
-    struct Float3;
-    struct Float4;
     struct VertexStruct;
     struct LightStruct;
 
@@ -473,31 +469,6 @@ namespace VoodooShader
     };
 
     /**
-     * Describes a texture, including size and format.
-     */
-    struct TextureDesc
-    {
-        int32_t       Width;
-        int32_t       Height;
-        int32_t       Depth;
-        bool          Mipmaps;
-        bool          RenderTarget;
-        TextureFormat Format;
-    };
-
-    /**
-     * Describes a portion of a texture. This defines a cube region and provides an optional format the region should be
-     * set up as.
-     */
-    struct TextureRegion :
-        public TextureDesc
-    {
-        int32_t OffX;
-        int32_t OffY;
-        int32_t OffZ;
-    };
-
-    /**
      * Describes the precise version of a particular library, including name, main version, revision and debug status.
      */
     struct Version
@@ -536,21 +507,55 @@ namespace VoodooShader
         } Value;
     };
 
-    struct Float2
+    template <typename ValType>
+    struct Vector2
     {
-        float X, Y;
+        ValType X, Y;
     };
 
-    struct Float3 :
-        public Float2
+    template <typename ValType>
+    struct Vector3 : 
+        public Vector2<ValType>
     {
-        float Z;
+        ValType Z;
     };
 
-    struct Float4 :
-        public Float3
+    template <typename ValType>
+    struct Vector4 : 
+        public Vector3<ValType>
     {
-        float W;
+        ValType W;
+    };
+
+    typedef Vector2<float> Float2;
+    typedef Vector3<float> Float3;
+    typedef Vector4<float> Float4;
+    typedef Vector2<int32_t> Int2;
+    typedef Vector3<int32_t> Int3;
+    typedef Vector4<int32_t> Int4;
+    typedef Vector2<uint32_t> UInt2;
+    typedef Vector3<uint32_t> UInt3;
+    typedef Vector4<uint32_t> UInt4;
+
+    /**
+     * Describes a texture, including size and format.
+     */
+    struct TextureDesc
+    {
+        UInt3         Size;
+        bool          Mipmaps;
+        bool          RenderTarget;
+        TextureFormat Format;
+    };
+
+    /**
+     * Describes a portion of a texture. This defines a cube region and provides an optional format the region should be
+     * set up as.
+     */
+    struct TextureRegion :
+        public TextureDesc
+    {
+        UInt3 Origin;
     };
 
     /**

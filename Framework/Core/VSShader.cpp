@@ -398,86 +398,145 @@ namespace VoodooShader
 
         // Check for a valid texture file
         TextureRegion texRegion;
-        /* @todo Load texture region info from the annotations. */
         ZeroMemory(&texRegion, sizeof(TextureRegion));
 
-        IFile * texFile = m_Core->GetFileSystem()->FindFile(texName);
-        if (texFile)
-        {
-            ITextureRef pTex = m_Core->GetAdapter()->LoadTexture(texFile, &texRegion);
+        /* @todo Load texture region info from the annotations. */
+        CGannotation atexSize = cgGetNamedParameterAnnotation(parameter, "size");
+        CGannotation atexOrigin = cgGetNamedParameterAnnotation(parameter, "origin");
+        CGannotation atexFormat = cgGetNamedParameterAnnotation(parameter, "format");
+        CGannotation atexMips = cgGetNamedParameterAnnotation(parameter, "mipmaps");
+        CGannotation atexTarget = cgGetNamedParameterAnnotation(parameter, "target");
 
-            if (pTex)
+        // CGannotation atexColor = cgGetNamedParameterAnnotation(parameter, "color");
+        if (cgIsAnnotation(atexSize))
+        {
+            CGtype sizeType = cgGetAnnotationType(atexSize);
+
+            int outCount;
+            const int * texSize = cgGetIntAnnotationValues(atexSize, &outCount);
+
+            switch (sizeType)
             {
-                param->SetTexture(pTex.get());
-                return;
-            } else {
-                m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Adapter was unable to load texture from file '%s'.", texFile->GetPath().GetData());
+            case CG_INT:
+                {
+                    m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"1-dimensional texture size found.");
+
+                    texRegion.Size.X = texSize[0];
+                    texRegion.Size.Y = texRegion.Size.Z = 1;
+                }
+            case CG_INT2:
+                {
+                    m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"2-dimensional texture size found.");
+
+
+                    texRegion.Size.X = texSize[0];
+                    texRegion.Size.Y = texSize[1];
+                    texRegion.Size.Z = 1;
+                }
+            case CG_INT3:
+                {
+                    m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"3-dimensional texture size found.");
+
+                    texRegion.Size.X = texSize[0];
+                    texRegion.Size.Y = texSize[1];
+                    texRegion.Size.Z = texSize[2];
+                }
+            case CG_INT4:
+                {
+                    m_Core->GetLogger()->Log
+                        (
+                        LL_Error,
+                        VOODOO_CORE_NAME,
+                        L"4-dimensional texture size found. Creating quantum texture... (invalid type on %s).",
+                        param->ToString().GetData()
+                        );
+                }
+            default:
+                {
+                    m_Core->GetLogger()->Log
+                        (
+                        LL_Error,
+                        VOODOO_CORE_NAME,
+                        L"Invalid texture size annotation type for parameter %s.",
+                        param->ToString().GetData()
+                        );
+                }
             }
         } else {
-            m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Unable to find texture file '%s'.", texName.GetData());
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"No texture size found.");
+            texRegion.Size.X = texRegion.Size.Y = texRegion.Size.Z = (uint32_t)-1;
         }
 
-        // No file, make blank texture
-        CGannotation atexSize = cgGetNamedParameterAnnotation(parameter, "size");
-        CGannotation atexFormat = cgGetNamedParameterAnnotation(parameter, "format");
-        // CGannotation atexColor = cgGetNamedParameterAnnotation(parameter, "color");
-        CGtype texSizeType = cgGetAnnotationType(atexSize);
-        TextureDesc texDesc;
-
-        if (texSizeType == CG_INT1)
+        if (cgIsAnnotation(atexOrigin))
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"1-dimensional texture size found.");
+            CGtype originType = cgGetAnnotationType(atexOrigin);
 
             int outCount;
-            const int *texDims = cgGetIntAnnotationValues(atexSize, &outCount);
+            const int * texOrigin = cgGetIntAnnotationValues(atexSize, &outCount);
 
-            texDesc.Width = texDims[0];
-            texDesc.Height = texDesc.Depth = 1;
+            switch (originType)
+            {
+            case CG_INT:
+                {
+                    m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"1-dimensional texture origin found.");
+
+                    texRegion.Origin.X = texOrigin[0];
+                    texRegion.Origin.Y = texRegion.Size.Z = 1;
+                }
+            case CG_INT2:
+                {
+                    m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"2-dimensional texture origin found.");
+
+
+                    texRegion.Origin.X = texOrigin[0];
+                    texRegion.Origin.Y = texOrigin[1];
+                    texRegion.Origin.Z = 1;
+                }
+            case CG_INT3:
+                {
+                    m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"3-dimensional texture origin found.");
+
+                    texRegion.Origin.X = texOrigin[0];
+                    texRegion.Origin.Y = texOrigin[1];
+                    texRegion.Origin.Z = texOrigin[2];
+                }
+            default:
+                {
+                    m_Core->GetLogger()->Log
+                        (
+                        LL_Error,
+                        VOODOO_CORE_NAME,
+                        L"Invalid texture size annotation type for parameter %s.",
+                        param->ToString().GetData()
+                        );
+                }
+            }
+        } else {
+            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"No texture origin found.");
+            texRegion.Origin.X = texRegion.Origin.Y = texRegion.Origin.Z = (uint32_t)-1;
         }
-        else if (texSizeType == CG_INT2)
+
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"2-dimensional texture size found.");
-
-            int outCount;
-            const int *texDims = cgGetIntAnnotationValues(atexSize, &outCount);
-
-            texDesc.Width = texDims[0];
-            texDesc.Height = texDims[1];
-            texDesc.Depth = 1;
+            int outCount = 0;
+            const CGbool * boolVals = cgGetBoolAnnotationValues(atexMips, &outCount);
+            if (boolVals && outCount > 0)
+            {
+                texRegion.Mipmaps = boolVals[0] == 1;
+            } else {
+                texRegion.Mipmaps = false;
+            }
         }
-        else if (texSizeType == CG_INT3)
+
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"3-dimensional texture size found.");
-
-            int outCount;
-            const int *texDims = cgGetIntAnnotationValues(atexSize, &outCount);
-
-            texDesc.Width = texDims[0];
-            texDesc.Height = texDims[1];
-            texDesc.Depth = texDims[2];
+            int outCount = 0;
+            const CGbool * boolVals = cgGetBoolAnnotationValues(atexTarget, &outCount);
+            if (boolVals && outCount > 0)
+            {
+                texRegion.RenderTarget = boolVals[0] == 1;
+            } else {
+                texRegion.RenderTarget = false;
+            }
         }
-        else if (texSizeType == CG_INT4)
-        {
-            m_Core->GetLogger()->Log
-            (
-                LL_Error,
-                VOODOO_CORE_NAME,
-                L"4-dimensional texture size found. Creating quantum texture... (invalid type on %s).",
-                param->ToString().GetData()
-            );
-        }
-        else
-        {
-            m_Core->GetLogger()->Log
-            (
-                LL_Error,
-                VOODOO_CORE_NAME,
-                L"Invalid texture size annotation type for parameter %s.",
-                param->ToString().GetData()
-            );
-        }
-
-        texDesc.Mipmaps = false;
 
         if (cgGetAnnotationType(atexFormat) != CG_STRING)
         {
@@ -495,11 +554,31 @@ namespace VoodooShader
         {
             String formatString = cgGetStringAnnotationValue(atexFormat);
 
-            texDesc.Format = Converter::ToTextureFormat(formatString.GetData());
+            texRegion.Format = Converter::ToTextureFormat(formatString.GetData());
         }
 
+        // Attempt to load the texture from a file
         IAdapterRef adapter = m_Core->GetAdapter();
-        ITextureRef texture = adapter->CreateTexture(texName, &texDesc);
+        ITextureRef texture = nullptr;
+
+        IFile * texFile = m_Core->GetFileSystem()->FindFile(texName);
+        if (texFile)
+        {
+            texture = adapter->LoadTexture(texFile, &texRegion);
+
+            if (!texture)
+            {
+                m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Adapter was unable to load texture from file '%s'.", texFile->GetPath().GetData());
+            }
+        } else {
+            m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Unable to find texture file '%s'.", texName.GetData());
+        }
+
+        // No file, make blank texture
+        if (!texture)
+        {
+            texture = adapter->CreateTexture(texName, (TextureDesc*)&texRegion);
+        }
 
         param->SetTexture(texture.get());
     }
