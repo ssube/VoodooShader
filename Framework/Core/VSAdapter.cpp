@@ -143,7 +143,7 @@ namespace VoodooShader
         return false;
     }
 
-    bool VSAdapter::DrawGeometry(const uint32_t count, const VertexStruct * const pVertexData, const VertexFlags flags)
+    bool VSAdapter::DrawGeometry(const uint32_t count, VertexStruct * const pVertexData, const VertexFlags flags)
     {
         UNREFERENCED_PARAMETER(count);
         UNREFERENCED_PARAMETER(pVertexData);

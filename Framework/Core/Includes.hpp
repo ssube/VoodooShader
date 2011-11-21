@@ -449,6 +449,7 @@ namespace VoodooShader
     {
         VF_None         = 0x00,
         VF_Transformed  = 0x01,
+        VF_Buffer       = 0x02,
     };
 #pragma warning(pop)
     /**

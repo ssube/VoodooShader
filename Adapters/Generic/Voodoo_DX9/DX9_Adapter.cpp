@@ -351,10 +351,10 @@ namespace VoodooShader
                     if (flags & VF_Buffer)
                     {
                         IDirect3DVertexBuffer9 * vbuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pVertexData);
-                        m_Device->SetStreamSource(0, vbuffer, 0, sizeof(Vertex));
+                        m_Device->SetStreamSource(0, vbuffer, 0, sizeof(VertexStruct));
                         m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, count);
                     } else {
-                        m_Device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, count, pVertexData, sizeof(Vertex));
+                        m_Device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, count, pVertexData, sizeof(VertexStruct));
                     }
 
                     m_Device->EndScene();
@@ -428,12 +428,12 @@ namespace VoodooShader
                 CGparameter texParam = pParam->GetCgParameter();
 
                 cgD3D9SetTextureParameter(texParam, texObj);
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Bound texture %s to parameter %s.\n", pTexture->GetName().GetData(), pParam->GetName().GetData());
+                m_Core->GetLogger()->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Bound texture %s to parameter %s.\n", pTexture->GetName().GetData(), pParam->GetName().GetData());
                 return true;
             }
             else
             {
-                Throw("Voodoo DX9: Invalid binding attempt, parameter is not a sampler.\n", this->mCore);
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Invalid texture binding, parameter %s is not a sampler.\n", pParam->GetName().GetData());
                 return false;
             }
         }
