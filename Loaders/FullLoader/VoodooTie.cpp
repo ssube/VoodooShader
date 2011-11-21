@@ -20,6 +20,8 @@
 
 #include "VoodooTie.hpp"
 
+#include "SysAPIHandler.hpp"
+
 #include "Loader_Version.hpp"
 
 #include <string>
@@ -63,6 +65,8 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
 
     if (fdwReason == DLL_PROCESS_ATTACH)
     {
+        DisableThreadLibraryCalls(hinstDLL);
+
         gLoaderHandle = hinstDLL;
     }
     else if (fdwReason == DLL_PROCESS_DETACH)

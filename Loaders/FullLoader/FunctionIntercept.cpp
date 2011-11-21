@@ -20,6 +20,8 @@
 
 #include "FunctionIntercept.hpp"
 
+#include "VoodooTie.hpp"
+
 #include <map>
 
 std::map<FARPROC, TRACED_HOOK_HANDLE> gHooks;
