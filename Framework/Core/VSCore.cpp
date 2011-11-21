@@ -20,13 +20,10 @@
 
 #include "VSCore.hpp"
 
-#include <boost/lexical_cast.hpp>
-
-#include "shellapi.h"
-
-#include "Converter.hpp"
-#include "Exception.hpp"
-#include "Version.hpp"
+#include "VSModule.hpp"
+#include "VSParameter.hpp"
+#include "VSParser.hpp"
+#include "VSShader.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
@@ -35,10 +32,13 @@
 #include "ILogger.hpp"
 #include "ITexture.hpp"
 
-#include "VSModule.hpp"
-#include "VSParameter.hpp"
-#include "VSParser.hpp"
-#include "VSShader.hpp"
+#include "Converter.hpp"
+#include "Exception.hpp"
+#include "Version.hpp"
+
+#include "shellapi.h"
+
+#include <boost/lexical_cast.hpp>
 
 namespace VoodooShader
 {

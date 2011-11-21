@@ -20,6 +20,7 @@
 #pragma once
 
 #include "Includes.hpp"
+
 #include "String.hpp"
 
 namespace VoodooShader

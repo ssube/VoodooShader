@@ -19,8 +19,6 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
 #include "ILogger.hpp"
 
 namespace VoodooShader

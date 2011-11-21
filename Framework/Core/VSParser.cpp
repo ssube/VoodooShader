@@ -18,16 +18,17 @@
  *   peachykeen@voodooshader.com
  */
 
-#include <sstream>
-#include <iostream>
-
-#include "shlwapi.h"
-
-#include "Version.hpp"
+#include "VSParser.hpp"
 
 #include "ICore.hpp"
 #include "ILogger.hpp"
-#include "VSParser.hpp"
+
+#include "Version.hpp"
+
+#include "shlwapi.h"
+
+#include <sstream>
+#include <iostream>
 
 namespace VoodooShader
 {

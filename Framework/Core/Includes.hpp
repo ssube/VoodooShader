@@ -176,7 +176,7 @@ namespace VoodooShader
      */
 
     /* Refcount handlers */
-#ifdef _DEBUG
+#ifdef VOODOO_THREAD_SAFE
 #   define SAFE_INCREMENT(x) InterlockedIncrement(&x)
 #   define SAFE_DECREMENT(x) InterlockedDecrement(&x)
 #else

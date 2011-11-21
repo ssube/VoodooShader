@@ -20,9 +20,8 @@
 
 #include "VSShader.hpp"
 
-#include "Converter.hpp"
-#include "Exception.hpp"
-#include "Version.hpp"
+#include "VSParameter.hpp"
+#include "VSTechnique.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
@@ -31,8 +30,9 @@
 #include "IParser.hpp"
 #include "ITexture.hpp"
 
-#include "VSParameter.hpp"
-#include "VSTechnique.hpp"
+#include "Converter.hpp"
+#include "Exception.hpp"
+#include "Version.hpp"
 
 namespace VoodooShader
 {

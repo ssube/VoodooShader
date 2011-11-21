@@ -20,14 +20,14 @@
 
 #include "VSPass.hpp"
 
-#include "Exception.hpp"
-#include "Version.hpp"
-
 #include "IAdapter.hpp"
 #include "ICore.hpp"
 #include "ILogger.hpp"
 #include "ITechnique.hpp"
 #include "ITexture.hpp"
+
+#include "Exception.hpp"
+#include "Version.hpp"
 
 namespace VoodooShader
 {

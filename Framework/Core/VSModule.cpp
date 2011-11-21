@@ -20,17 +20,17 @@
 
 #include "VSModule.hpp"
 
-#include "shlwapi.h"
-
-#include "Exception.hpp"
-#include "Regex.hpp"
-#include "Version.hpp"
-
 #include "ICore.hpp"
 #include "IFilesystem.hpp"
 #include "ILogger.hpp"
 #include "IObject.hpp"
 #include "IParser.hpp"
+
+#include "Exception.hpp"
+#include "Regex.hpp"
+#include "Version.hpp"
+
+#include "shlwapi.h"
 
 namespace VoodooShader
 {

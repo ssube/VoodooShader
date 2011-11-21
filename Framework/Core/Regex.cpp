@@ -20,12 +20,12 @@
 
 #include <string>
 
-#include "Regex.hpp"
-
 #pragma warning(push)
 #pragma warning(disable: 6334 6011)
 #include <boost/regex.hpp>
 #pragma warning(pop)
+
+#include "Regex.hpp"
 
 namespace VoodooShader
 {

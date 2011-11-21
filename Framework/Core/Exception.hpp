@@ -19,8 +19,9 @@
  */
 #pragma once
 
-#include "Includes.hpp"
 #include "String.hpp"
+
+#include "Includes.hpp"
 
 namespace VoodooShader
 {
