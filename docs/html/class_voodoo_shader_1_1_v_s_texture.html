@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
+   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -112,6 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a8a5ab3e96a194c095a3807adda48c0b2">GetName</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a049526245692c24a00c8ae6e303ff99d">GetData</a> (void) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the data.  <a href="#a049526245692c24a00c8ae6e303ff99d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a24cf8837aa923a2dccf6ae28dfb2b82c">SetData</a> (void *pData)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the texture data.  <a href="#a24cf8837aa923a2dccf6ae28dfb2b82c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#ad4f82103d7e51531c74216fe41820447">GetDesc</a> (void) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the texture description.  <a href="#ad4f82103d7e51531c74216fe41820447"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
@@ -269,7 +271,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#ac4781fe19b9594e280c9ed09c87d10e6">VoodooShader::ITexture</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00097">97</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00104">104</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
 
 </div>
 </div>
@@ -360,6 +362,36 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a24cf8837aa923a2dccf6ae28dfb2b82c"></a><!-- doxytag: member="VoodooShader::VSTexture::SetData" ref="a24cf8837aa923a2dccf6ae28dfb2b82c" args="(void *pData)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * VoodooShader::VSTexture::SetData </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>pData</em></td><td>)</td>
+          <td>  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the texture data. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pData</td><td>The new data value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The previous data value. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#acf20b12660fbb8ae4484670e93c03d74">VoodooShader::ITexture</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_texture_8cpp_source.html#l00097">97</a> of file <a class="el" href="_v_s_texture_8cpp_source.html">VSTexture.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="af1ad585439cd09734cdf0fcff0239ec6"></a><!-- doxytag: member="VoodooShader::VSTexture::ToString" ref="af1ad585439cd09734cdf0fcff0239ec6" args="(void) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -396,7 +428,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00054">54</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -411,7 +443,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00057">57</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -426,7 +458,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -441,7 +473,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00056">56</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -456,7 +488,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00053">53</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_texture_8hpp_source.html#l00054">54</a> of file <a class="el" href="_v_s_texture_8hpp_source.html">VSTexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -468,7 +500,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 02:07:29 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 05:58:45 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

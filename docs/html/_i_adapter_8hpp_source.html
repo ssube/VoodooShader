@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
+   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -110,42 +110,42 @@
 <a name="l00074"></a>00074 
 <a name="l00083"></a>00083         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a375a5350eccbe23b1dd2baeca44c99d8" title="Unloads a pass from the adapter.">UnloadPass</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * const pPass) throw() = 0;
 <a name="l00084"></a>00084 
-<a name="l00104"></a>00104         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a226d5087bdf419c3a51dd9e14ff0cb76" title="Causes the adapter to load a pass for drawing.">SetPass</a>(_In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * const pPass) throw() = 0;
-<a name="l00105"></a>00105 
-<a name="l00111"></a>00111         virtual <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#abb47a63f3eba1c46327e9494f0a8633f" title="Get the currently bound pass.">GetPass</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00112"></a>00112 
-<a name="l00124"></a>00124         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ac7dd70ac5deed2700aa722b9df424b98" title="Sets a render target for the adapter.">SetTarget</a>(_In_ const uint32_t index, _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * const pTarget) throw() = 0;
-<a name="l00125"></a>00125 
-<a name="l00132"></a>00132         virtual <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a0fe2d85fccd7efd49173be4b7b1dff1a" title="Gets a render target from the adapter.">GetTarget</a>(_In_ const uint32_t index) const throw() = 0;
-<a name="l00133"></a>00133 
-<a name="l00149"></a>00149         virtual <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ab3d2f5db241d8d3e704e071e0fa031a3" title="Creates a named texture within the API and returns it for registration and handling.">CreateTexture</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ const <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * pDesc) throw() = 0;
-<a name="l00150"></a>00150 
-<a name="l00159"></a>00159         virtual <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a4c9f285589133fd78942a3b205afddb2" title="Loads a named texture into the API and registers it with the Core.">LoadTexture</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * const pFile, _In_ const <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> * pRegion) throw() = 0;
-<a name="l00160"></a>00160 
-<a name="l00168"></a>00168         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a007fb7a894e1bf1f6e5720bfe61ff6cb" title="Draws geometry from system memory.">DrawGeometry</a>
-<a name="l00169"></a>00169         (
-<a name="l00170"></a>00170             _In_ const uint32_t count,
-<a name="l00171"></a>00171             _In_count_(count) const <a class="code" href="struct_voodoo_shader_1_1_vertex_struct.html" title="Standard vertex structure.">VertexStruct</a> * const pVertexData,
-<a name="l00172"></a>00172             _In_ const <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89a3612089a43a2cbaeb4102ad75e59a56b">VF_Transformed</a>
-<a name="l00173"></a>00173         ) throw() = 0;
-<a name="l00174"></a>00174 
-<a name="l00182"></a>00182         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a35e2cf4e0dde9fc40670281d6893bd2e" title="Downloads a parameter&#39;s value from system RAM to VRAM, verifying that the value on the GPU (and in us...">ApplyParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * const pParameter) throw() = 0;
-<a name="l00183"></a>00183 
-<a name="l00200"></a>00200         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#abb29feeca630b1376468268424b8da42" title="Set a property on the adapter.">SetProperty</a>(_In_ const <span class="keywordtype">wchar_t</span> * name, _In_ <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> &amp; value) throw() = 0;
-<a name="l00201"></a>00201 
-<a name="l00209"></a>00209         virtual <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a163460e1054f069b392e09fe7c6daca4" title="Get a property from the adapter.">GetProperty</a>(_In_ const <span class="keywordtype">wchar_t</span> * name) const throw() = 0;
-<a name="l00210"></a>00210 
-<a name="l00220"></a>00220         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#afbeea9d49b7730b90cf1356cb72bb132" title="Connects a texture to a sampler-type parameter.">ConnectTexture</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * const pParam, _In_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * const pTexture) throw() = 0;
-<a name="l00221"></a>00221 
-<a name="l00238"></a>00238         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ad64cbd7117d062dd188b15b4740bac65" title="A generic error-handling callback provided to the Cg runtime.">HandleError</a>(_In_ CGcontext const pContext, _In_ uint32_t error) throw() = 0;
-<a name="l00239"></a>00239     };
-<a name="l00243"></a>00243 }
+<a name="l00105"></a>00105         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a2cae6a47b1abb997e756df86755411f6" title="Causes the adapter to load a pass for drawing.">SetPass</a>(_In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * const pPass) throw() = 0;
+<a name="l00106"></a>00106 
+<a name="l00112"></a>00112         virtual <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#abb47a63f3eba1c46327e9494f0a8633f" title="Get the currently bound pass.">GetPass</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00113"></a>00113 
+<a name="l00125"></a>00125         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ac7dd70ac5deed2700aa722b9df424b98" title="Sets a render target for the adapter.">SetTarget</a>(_In_ const uint32_t index, _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * const pTarget) throw() = 0;
+<a name="l00126"></a>00126 
+<a name="l00133"></a>00133         virtual <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a0fe2d85fccd7efd49173be4b7b1dff1a" title="Gets a render target from the adapter.">GetTarget</a>(_In_ const uint32_t index) const throw() = 0;
+<a name="l00134"></a>00134 
+<a name="l00151"></a>00151         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ac196ad9f459f071215b79088d601045e" title="Creates a texture within the adapter and binds it to a texture.">CreateTexture</a>(_In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ const <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * pDesc, _Inout_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * const pTexture) throw() = 0;
+<a name="l00152"></a>00152 
+<a name="l00161"></a>00161         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a073b3355d1b07d10e23911b545624059" title="Loads a named texture into the API and registers it with the Core.">LoadTexture</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * const pFile, _In_ const <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> * pRegion, _Inout_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * const pTexture) throw() = 0;
+<a name="l00162"></a>00162 
+<a name="l00171"></a>00171         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a42d55ec45d26bb070a9eb6e3d6687850" title="Draws geometry from system memory.">DrawGeometry</a>
+<a name="l00172"></a>00172         (
+<a name="l00173"></a>00173             _In_ const uint32_t count,
+<a name="l00174"></a>00174             _In_count_(count) const <a class="code" href="struct_voodoo_shader_1_1_vertex_struct.html" title="Standard vertex structure.">VertexStruct</a> * const pVertexData,
+<a name="l00175"></a>00175             _In_ const <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89a3612089a43a2cbaeb4102ad75e59a56b">VF_Transformed</a>
+<a name="l00176"></a>00176         ) throw() = 0;
+<a name="l00177"></a>00177 
+<a name="l00185"></a>00185         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a070636dedd224ec2761f6dec7748108d" title="Downloads a parameter&#39;s value from system RAM to VRAM, verifying that the value on the GPU (and in us...">ApplyParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * const pParameter) throw() = 0;
+<a name="l00186"></a>00186 
+<a name="l00203"></a>00203         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#abb29feeca630b1376468268424b8da42" title="Set a property on the adapter.">SetProperty</a>(_In_ const <span class="keywordtype">wchar_t</span> * name, _In_ <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> &amp; value) throw() = 0;
+<a name="l00204"></a>00204 
+<a name="l00212"></a>00212         virtual <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a163460e1054f069b392e09fe7c6daca4" title="Get a property from the adapter.">GetProperty</a>(_In_ const <span class="keywordtype">wchar_t</span> * name) const throw() = 0;
+<a name="l00213"></a>00213 
+<a name="l00223"></a>00223         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#afbeea9d49b7730b90cf1356cb72bb132" title="Connects a texture to a sampler-type parameter.">ConnectTexture</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * const pParam, _In_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * const pTexture) throw() = 0;
+<a name="l00224"></a>00224 
+<a name="l00242"></a>00242         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#acfdcc7b601d93366d406923f1f707aca" title="A generic error-handling callback provided to the Cg runtime.">HandleError</a>(_In_ CGcontext const pContext, _In_ uint32_t error) throw() = 0;
+<a name="l00243"></a>00243     };
+<a name="l00247"></a>00247 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 02:07:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 05:58:44 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

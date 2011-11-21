@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
+   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -113,6 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a049a0df0dfac079da78cd70780383d50">GetName</a> () const =0  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_texture.html#acb01fc18df9400c4d59879f0c80d2dd2">GetData</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the data.  <a href="#acb01fc18df9400c4d59879f0c80d2dd2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_texture.html#acf20b12660fbb8ae4484670e93c03d74">SetData</a> (void *pData)=0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the texture data.  <a href="#acf20b12660fbb8ae4484670e93c03d74"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_texture.html#ac4781fe19b9594e280c9ed09c87d10e6">GetDesc</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the texture description.  <a href="#ac4781fe19b9594e280c9ed09c87d10e6"></a><br/></td></tr>
 </table>
@@ -321,6 +323,34 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="acf20b12660fbb8ae4484670e93c03d74"></a><!-- doxytag: member="VoodooShader::ITexture::SetData" ref="acf20b12660fbb8ae4484670e93c03d74" args="(void *pData)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void* VoodooShader::ITexture::SetData </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>pData</em></td><td>)</td>
+          <td>  throw ()<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the texture data. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pData</td><td>The new data value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The previous data value. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a24cf8837aa923a2dccf6ae28dfb2b82c">VoodooShader::VSTexture</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ac192d3eb19aebdd77a1bbd89b169af3b"></a><!-- doxytag: member="VoodooShader::ITexture::ToString" ref="ac192d3eb19aebdd77a1bbd89b169af3b" args="(void) const =0" -->
 <div class="memitem">
 <div class="memproto">
@@ -352,7 +382,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 02:07:28 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 05:58:45 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

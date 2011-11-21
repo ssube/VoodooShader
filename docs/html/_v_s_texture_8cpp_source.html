@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
+   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -163,17 +163,24 @@
 <a name="l00094"></a>00094         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5d55e7a77a7ad4291246c3992ca29579">m_Data</a>;
 <a name="l00095"></a>00095     }
 <a name="l00096"></a>00096 
-<a name="l00097"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#ad4f82103d7e51531c74216fe41820447">00097</a>     <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#ad4f82103d7e51531c74216fe41820447" title="Gets the texture description.">VSTexture::GetDesc</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00098"></a>00098 <span class="keyword">    </span>{
-<a name="l00099"></a>00099         <span class="keywordflow">return</span> &amp;<a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a55c4b97271907af570ee65a715d748d1">m_Desc</a>;
-<a name="l00100"></a>00100     }
-<a name="l00101"></a>00101 }
+<a name="l00097"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a24cf8837aa923a2dccf6ae28dfb2b82c">00097</a>     <span class="keywordtype">void</span> * <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a24cf8837aa923a2dccf6ae28dfb2b82c" title="Set the texture data.">VSTexture::SetData</a>(_In_ <span class="keywordtype">void</span> * pData) <span class="keywordflow">throw</span>()
+<a name="l00098"></a>00098     {
+<a name="l00099"></a>00099         <span class="keywordtype">void</span> * oldData = m_Data;
+<a name="l00100"></a>00100         m_Data = pData;
+<a name="l00101"></a>00101         <span class="keywordflow">return</span> oldData;
+<a name="l00102"></a>00102     }
+<a name="l00103"></a>00103 
+<a name="l00104"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#ad4f82103d7e51531c74216fe41820447">00104</a>     <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#ad4f82103d7e51531c74216fe41820447" title="Gets the texture description.">VSTexture::GetDesc</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00105"></a>00105 <span class="keyword">    </span>{
+<a name="l00106"></a>00106         <span class="keywordflow">return</span> &amp;<a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a55c4b97271907af570ee65a715d748d1">m_Desc</a>;
+<a name="l00107"></a>00107     }
+<a name="l00108"></a>00108 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 02:07:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 05:58:44 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
