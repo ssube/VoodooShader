@@ -37,9 +37,16 @@ namespace VoodooBuild
             }
             catch (Exception) {  }
 
+            String timestamp;
+
             if ((DateTime.Now - lastRun).TotalHours > 1)
             {
                 ++buildCount;
+                timestamp = String.Format("// {0}", DateTime.Now);
+            }
+            else
+            {
+                timestamp = lines[0];
             }
 
             Process p = new Process();
@@ -54,7 +61,7 @@ namespace VoodooBuild
             Console.Write("Time since last counted build: {0}\nBuild number: {1}\nGit ID: {2}", DateTime.Now - lastRun, buildCount, gitDesc);
 
             lines = new String[3];
-            lines[0] = String.Format("// {0}", DateTime.Now);
+            lines[0] = timestamp;
             lines[1] = String.Format("#define VOODOO_GLOBAL_VERSION_BUILD {0}", buildCount);
             lines[2] = String.Format("#define VOODOO_GLOBAL_GITID VOODOO_META_STRING(\"{0}\")", gitDesc.TrimEnd('\n'));
             File.WriteAllLines(buildFile, lines);
