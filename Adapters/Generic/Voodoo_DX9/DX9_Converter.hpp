@@ -3,7 +3,7 @@
 #ifndef VOODOO_DX9_CONVERTER_HPP
 #define VOODOO_DX9_CONVERTER_HPP
 
-#include "../Framework/Meta.hpp"
+#include "Includes.hpp"
 
 namespace VoodooShader
 {

@@ -35,7 +35,7 @@ class IVoodoo3D9;
 class IVoodoo3DDevice9;
 
 extern VoodooShader::ICore * gpVoodooCore;
-extern VoodooShader::Adapter * VoodooDX9;
+extern VoodooShader::IAdapter * VoodooDX9;
 
 extern IVoodoo3D9 *VoodooObject;
 extern IVoodoo3DDevice9 *VoodooDevice;

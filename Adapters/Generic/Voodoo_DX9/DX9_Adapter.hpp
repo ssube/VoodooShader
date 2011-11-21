@@ -48,24 +48,23 @@ namespace VoodooShader
 
             virtual bool LoadPass(_In_ IPass * const pPass);
             virtual bool UnloadPass(_In_ IPass * const pPass);
-            virtual void SetPass(_In_opt_ IPass * const pPass);
+            virtual bool SetPass(_In_opt_ IPass * const pPass);
             virtual IPass * GetPass(void) const;
             virtual bool SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
             virtual ITexture * GetTarget(_In_ const uint32_t index) const;
-            virtual ITexture * CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc);
-            virtual ITexture * LoadTexture(_In_ IFile * const pFile, _In_opt_ const TextureRegion * pRegion);
-            virtual void DrawGeometry
+            virtual bool CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture);
+            virtual bool LoadTexture(_In_ IFile * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture);
+            virtual bool DrawGeometry
             (
                 _In_ const uint32_t count, 
                 _In_count_(count) const VertexStruct * const pVertexData, 
                 _In_ const VertexFlags flags
             );
-            virtual void DrawShader(_In_ IShader * const pShader);
-            virtual void ApplyParameter(_In_ IParameter * const pParam);
+            virtual bool ApplyParameter(_In_ IParameter * const pParam);
             virtual bool SetProperty(_In_ const wchar_t * name, _In_ Variant & value);
             virtual Variant GetProperty(_In_ const wchar_t * property) const;
             virtual bool ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
-            virtual void HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
+            virtual bool HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
 
             virtual bool SetDXDevice(IDirect3DDevice9 * pDevice);
 

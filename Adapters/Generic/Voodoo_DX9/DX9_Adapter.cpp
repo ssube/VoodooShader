@@ -198,7 +198,7 @@ namespace VoodooShader
             }
         }
 
-        void DX9Adapter::SetPass(_In_opt_ IPass * const pPass)
+        bool DX9Adapter::SetPass(_In_opt_ IPass * const pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -282,7 +282,7 @@ namespace VoodooShader
             return m_RenderTarget[index].get();
         }
 
-        void * DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
+        bool DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture)
         {
             IDirect3DTexture9 * tex = nullptr;
             D3DFORMAT fmt = DX9_Converter::ToD3DFormat(pDesc->Format);
@@ -301,7 +301,7 @@ namespace VoodooShader
 
             if (SUCCEEDED(hr))
             {
-                return texRef;
+                pTexture->SetData(reinterpret_cast<void*>(tex));
             }
             else
             {
@@ -313,15 +313,14 @@ namespace VoodooShader
         }
 
         ITexture * DX9Adapter::LoadTexture(_In_ IFile * const pFile, _In_opt_ const TextureRegion * pRegion);
-        void DX9Adapter::DrawGeometry
+        bool DX9Adapter::DrawGeometry
         (
             _In_ const uint32_t count, 
             _In_count_(count) const VertexStruct * const pVertexData, 
             _In_ const VertexFlags flags
         );
-        void DX9Adapter::DrawShader(_In_ IShader * const pShader);
 
-        void DX9Adapter::ApplyParameter(_In_ IParameter * const pParam)
+        bool DX9Adapter::ApplyParameter(_In_ IParameter * const pParam)
         {
             if (!pParam)
             {
@@ -348,7 +347,7 @@ namespace VoodooShader
         bool DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant & value);
         Variant DX9Adapter::GetProperty(_In_ const wchar_t * property) const;
         bool DX9Adapter::ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
-        void DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
+        bool DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
 
         bool DX9Adapter::SetDXDevice(IDirect3DDevice9 * pDevice)
         {
