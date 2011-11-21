@@ -76,7 +76,7 @@ namespace VoodooShader
 
     String VSFileSystem::ToString(void) const
     {
-        return L"VSFileSystem";
+        return L"VSFileSystem()";
     }
 
     ICore * VSFileSystem::GetCore(void) const

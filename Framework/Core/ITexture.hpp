@@ -63,6 +63,14 @@ namespace VoodooShader
         virtual void * GetData(void) const throw() = 0;
 
         /**
+         * Set the texture data.
+         *
+         * @param pData The new data value.
+         * @return The previous data value.
+         */
+        virtual void * SetData(_In_ void * pData) throw() = 0;
+
+        /**
          * Gets the texture description.
          *
          * @return The description.

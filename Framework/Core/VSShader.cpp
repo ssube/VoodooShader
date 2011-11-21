@@ -22,6 +22,7 @@
 
 #include "VSParameter.hpp"
 #include "VSTechnique.hpp"
+#include "VSTexture.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
@@ -564,7 +565,8 @@ namespace VoodooShader
         IFile * texFile = m_Core->GetFileSystem()->FindFile(texName);
         if (texFile)
         {
-            texture = adapter->LoadTexture(texFile, &texRegion);
+            texture = new VSTexture(texFile->GetPath(), nullptr);
+            adapter->LoadTexture(texFile, &texRegion, texture.get());
 
             if (!texture)
             {
@@ -577,7 +579,8 @@ namespace VoodooShader
         // No file, make blank texture
         if (!texture)
         {
-            texture = adapter->CreateTexture(texName, (TextureDesc*)&texRegion);
+            texture = new VSTexture(texName, nullptr);
+            adapter->CreateTexture(texName, (TextureDesc*)&texRegion, texture.get());
         }
 
         param->SetTexture(texture.get());

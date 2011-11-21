@@ -76,7 +76,7 @@ namespace VoodooShader
 
     String VSHookManager::ToString(void) const
     {
-        return L"VSHookManager";
+        return L"VSHookManager()";
     }
 
     ICore * VSHookManager::GetCore(void) const

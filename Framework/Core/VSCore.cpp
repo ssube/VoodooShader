@@ -24,6 +24,7 @@
 #include "VSParameter.hpp"
 #include "VSParser.hpp"
 #include "VSShader.hpp"
+#include "VSTexture.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
@@ -360,7 +361,7 @@ namespace VoodooShader
 
     String VSCore::ToString() const
     {
-        return L"VSCore";
+        return L"VSCore()";
     }
 
     ICore * VSCore::GetCore() const
@@ -496,7 +497,9 @@ namespace VoodooShader
         }
         else
         {
-            ITexture * texture = m_Adapter->CreateTexture(name, pDesc);
+            ITexture * texture = new VSTexture(name, nullptr);
+
+            m_Adapter->CreateTexture(name, pDesc, texture);
 
             m_Textures[name] = texture;
 

@@ -94,6 +94,13 @@ namespace VoodooShader
         return m_Data;
     }
 
+    void * VSTexture::SetData(_In_ void * pData) throw()
+    {
+        void * oldData = m_Data;
+        m_Data = pData;
+        return oldData;
+    }
+
     const TextureDesc * VSTexture::GetDesc(void) const
     {
         return &m_Desc;

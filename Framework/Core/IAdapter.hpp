@@ -88,6 +88,7 @@ namespace VoodooShader
          *
          * @param pPass A shared pointer to the pass to be bound. If this is null, the adapter must unbind the last bound
          *     pass and reset all states.
+         * @return Success of the binding operation.
          *
          * @note Adapters may, at their discretion, bind some or even no programs to the true graphics API. An example of
          *     this is the Direct3D 9 adapter, which binds only vertex and fragment programs, ignoring any geometry, domain
@@ -101,7 +102,7 @@ namespace VoodooShader
          * @note Adapters must restore all states when a pass is unbound to the exact previous state. The exact
          *     implementation is left to the adapter, but DX provides some APIs to handle this rather well.
          */
-        virtual void SetPass(_In_opt_ IPass * const pPass) throw() = 0;
+        virtual bool SetPass(_In_opt_ IPass * const pPass) throw() = 0;
 
         /**
          * Get the currently bound pass.
@@ -132,21 +133,22 @@ namespace VoodooShader
         virtual ITexture * GetTarget(_In_ const uint32_t index) const throw() = 0;
 
         /**
-         * Creates a named texture within the API and returns it for registration and handling.
+         * Creates a texture within the adapter and binds it to a texture.
          *
          * @param name The name of the texture, usually a fully-qualified name.
          * @param pDesc Description of the texture, size and format.
-         * @return A pointer to the created texture if successful, nullptr otherwise.
+         * @param pTexture The texture the new adapter texture should be bound to.
+         * @return Success of the create and bind.
          *
-         * @note Only Voodoo texture formats are supported, API-specific formats are not and @e must return errors.
+         * @note Only Voodoo texture formats are supported, API-specific formats are not and @b must return errors.
          *
          * @note This must create a texture that can either be rendered directly into or that can have the backbuffer copied
          *     into it efficiently, depending on how the adapter chooses to implement RTT.
          *
-         * @warning You must not call this method directly; it should only be used via Core::CreateTexture(). This method
+         * @warning You should not call this method directly; it should only be used via Core::CreateTexture(). This method
          *     does not set up the texture for use with the core.
          */
-        virtual ITexture * CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc) throw() = 0;
+        virtual bool CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture) throw() = 0;
 
         /**
          * Loads a named texture into the API and registers it with the Core. The texture source is provided here and all
@@ -156,7 +158,7 @@ namespace VoodooShader
          * @param pRegion The region of the file that should be used.
          * @return The texture, if successfully created. A nullptr otherwise.
          */
-        virtual ITexture * LoadTexture(_In_ IFile * const pFile, _In_ const TextureRegion * pRegion) throw() = 0;
+        virtual bool LoadTexture(_In_ IFile * const pFile, _In_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture) throw() = 0;
 
         /**
          * Draws geometry from system memory.
@@ -164,8 +166,9 @@ namespace VoodooShader
          * @param count The number of vertexes to draw.
          * @param pVertexData This must contain vertex data for the given number of verts.
          * @param flags Vertex flags for this data set, particularly whether the verts are pretransformed.
+         * @return Success of the draw operation.
          */
-        virtual void DrawGeometry
+        virtual bool DrawGeometry
         (
             _In_ const uint32_t count,
             _In_count_(count) const VertexStruct * const pVertexData,
@@ -179,7 +182,7 @@ namespace VoodooShader
          *
          * @param pParameter The parameter to apply.
          */
-        virtual void ApplyParameter(_In_ IParameter * const pParameter) throw() = 0;
+        virtual bool ApplyParameter(_In_ IParameter * const pParameter) throw() = 0;
 
         /**
          * Set a property on the adapter.
@@ -226,6 +229,7 @@ namespace VoodooShader
          *
          * @param pContext The associated Cg context.
          * @param error The error raised.
+         * @return True if the adapter has successfully handled the error internally.
          *
          * @note Not all Cg errors will call this; the core performs error validation and handles all context-related errors
          *     internally, as well as logging what data it can find. Malformed errors will not be passed to the adapter.
@@ -235,7 +239,7 @@ namespace VoodooShader
          *     if the adapter does not dump compiler listings, the core will. This is intended to ensure compilation errors
          *     are noted, but provide the adapter a chance to handle and potentially correct them.
          */
-        virtual void HandleError(_In_ CGcontext const pContext, _In_ uint32_t error) throw() = 0;
+        virtual bool HandleError(_In_ CGcontext const pContext, _In_ uint32_t error) throw() = 0;
     };
     /**
      * @}

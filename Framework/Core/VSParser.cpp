@@ -90,7 +90,7 @@ namespace VoodooShader
 
     String VSParser::ToString(void) const
     {
-        return L"VSParser";
+        return L"VSParser()";
     }
 
     ICore * VSParser::GetCore(void) const

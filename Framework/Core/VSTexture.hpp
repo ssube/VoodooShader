@@ -47,6 +47,7 @@ namespace VoodooShader
 
         virtual String GetName() const throw();
         virtual void * GetData(void) const;
+        virtual void * SetData(_In_ void * pData) throw();
         virtual const TextureDesc * GetDesc(void) const;
 
     private:

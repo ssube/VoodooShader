@@ -76,7 +76,7 @@ namespace VoodooShader
 
     String VSAdapter::ToString(void) const
     {
-        return L"VSAdapter";
+        return L"VSAdapter()";
     }
 
     ICore * VSAdapter::GetCore(void) const
@@ -98,9 +98,11 @@ namespace VoodooShader
         return true;
     }
 
-    void VSAdapter::SetPass(IPass * pPass)
+    bool VSAdapter::SetPass(IPass * pPass)
     {
         UNREFERENCED_PARAMETER(pPass);
+
+        return true;
     }
 
     IPass * VSAdapter::GetPass(void) const
@@ -123,37 +125,38 @@ namespace VoodooShader
         return nullptr;
     }
 
-    ITexture * VSAdapter::CreateTexture(const String & name, const TextureDesc * const pDesc)
+    bool VSAdapter::CreateTexture(const String & name, const TextureDesc * const pDesc, ITexture * const pTexture)
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(pDesc);
+        UNREFERENCED_PARAMETER(pTexture);
 
-        return nullptr;
+        return false;
     }
 
-    ITexture * VSAdapter::LoadTexture(IFile * const pFile, const TextureRegion * const pRegion)
+    bool VSAdapter::LoadTexture(IFile * const pFile, const TextureRegion * const pRegion, ITexture * const pTexture)
     {
         UNREFERENCED_PARAMETER(pFile);
         UNREFERENCED_PARAMETER(pRegion);
+        UNREFERENCED_PARAMETER(pTexture);
 
-        return nullptr;
+        return false;
     }
 
-    void VSAdapter::DrawGeometry(const uint32_t count, const VertexStruct * const pVertexData, const VertexFlags flags)
+    bool VSAdapter::DrawGeometry(const uint32_t count, const VertexStruct * const pVertexData, const VertexFlags flags)
     {
         UNREFERENCED_PARAMETER(count);
         UNREFERENCED_PARAMETER(pVertexData);
         UNREFERENCED_PARAMETER(flags);
+
+        return true;
     }
 
-    void VSAdapter::DrawShader(IShader * const pShader)
-    {
-        UNREFERENCED_PARAMETER(pShader);
-    }
-
-    void VSAdapter::ApplyParameter(IParameter * const pParam)
+    bool VSAdapter::ApplyParameter(IParameter * const pParam)
     {
         UNREFERENCED_PARAMETER(pParam);
+
+        return true;
     }
 
     bool VSAdapter::SetProperty(const wchar_t * name, Variant & value)
@@ -161,7 +164,7 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);
 
-        return false;
+        return true;
     }
 
     Variant VSAdapter::GetProperty(const wchar_t * name) const
@@ -181,9 +184,11 @@ namespace VoodooShader
         return true;
     }
 
-    void VSAdapter::HandleError(CGcontext const pContext, const uint32_t error)
+    bool VSAdapter::HandleError(CGcontext const pContext, const uint32_t error)
     {
         UNREFERENCED_PARAMETER(pContext);
         UNREFERENCED_PARAMETER(error);
+
+        return true;
     }
 }

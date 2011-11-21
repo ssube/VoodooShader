@@ -76,7 +76,7 @@ namespace VoodooShader
 
     String VSLogger::ToString(void) const
     {
-        return L"VSLogger";
+        return L"VSLogger()";
     }
 
     ICore * VSLogger::GetCore(void) const
