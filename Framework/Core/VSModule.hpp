@@ -23,9 +23,15 @@
 
 namespace VoodooShader
 {
-    /* VSModuleManager: e6f312a0-05af-11e1-9e05-005056c00008 */
+    /**
+     * @addtogroup voodoo_uuids 
+     */
     DEFINE_CLSID(VSModuleManager) = {0xA0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
+    /**
+     * @par CLSID
+     *      e6f312a0-05af-11e1-9e05-005056c00008
+     */
     class VSModuleManager :
         public IModuleManager
     {
@@ -57,10 +63,15 @@ namespace VoodooShader
         ClassNameMap m_ClassNames;
     };
 
-
-    /* VSModule: e6f3129f-05af-11e1-9e05-005056c00008 */
+    /**
+     * @addtogroup voodoo_uuids 
+     */
     DEFINE_CLSID(VSModule) = {0x9F, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-
+    
+    /**
+     * @par CLSID
+     *      e6f3129f-05af-11e1-9e05-005056c00008
+     */
     class VSModule :
         public IModule
     {

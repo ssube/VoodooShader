@@ -21,6 +21,14 @@
 
 #include "Includes.hpp"
 
+#ifndef VOODOO_NO_STDSTRING
+#include <string>
+#endif
+
+#ifndef VOODOO_NO_COLLECTIONS
+#include <vector>
+#endif
+
 namespace VoodooShader
 {
     /**
@@ -113,7 +121,10 @@ namespace VoodooShader
 
         /**
          * Creates a string from a Uuid, converting to a string. This takes the unbraced 8/2/2/2/12 format, like so:
-         * @li @code hhhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh @endcode
+         * 
+         * @code 01234567-89ab-cdef-0123-456789abcdef @endcode
+         * 
+         * This is considered the standard form for Voodoo UUIDs, and is used in the registry and most other locations.
          */
         String(_In_ const Uuid & uuid);
 

@@ -18,10 +18,6 @@
  *   peachykeen@voodooshader.com
  */
 
-#include <string>
-#include <sstream>
-#include <iostream>
-
 #include "VSParser.hpp"
 
 #include "ICore.hpp"
@@ -30,6 +26,10 @@
 #include "Version.hpp"
 
 #include "shlwapi.h"
+
+#include <string>
+#include <sstream>
+#include <iostream>
 
 namespace VoodooShader
 {
