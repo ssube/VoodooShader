@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
+   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -106,8 +106,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#aaddf58568ede9d6dec8b6b6883564c8b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#aff837df4eee0072b803eceef5c734607">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#aff837df4eee0072b803eceef5c734607"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a2154b1fe12e80a312a91cf4bfed5d60f">CheckedCast</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a2154b1fe12e80a312a91cf4bfed5d60f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a0ac4783faa27b8965084b82f1c757f24">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a0ac4783faa27b8965084b82f1c757f24"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#affd2e200c59471267494804a766a3e69">ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#affd2e200c59471267494804a766a3e69"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a159de384be7af91d1a06357e2c689587">GetCore</a> (void) const   throw ()</td></tr>
@@ -128,7 +128,7 @@ Private Attributes</h2></td></tr>
 <p>Returns true/nullptr as needed. <em>Does not have associated <a class="el" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> or <a class="el" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> implementations, as they will never be returned.</em></p>
 <dl class="user"><dt><b>CLSID:</b></dt><dd>e6f3129c-05af-11e1-9e05-005056c00008 </dd></dl>
 
-<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00047">47</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00045">45</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2cd4da81fcdcf326038cfbb50fba1b57"></a><!-- doxytag: member="VoodooShader::VSFileSystem::VSFileSystem" ref="a2cd4da81fcdcf326038cfbb50fba1b57" args="(ICore *pCore)" -->
 <div class="memitem">
@@ -224,48 +224,6 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2154b1fe12e80a312a91cf4bfed5d60f"></a><!-- doxytag: member="VoodooShader::VSFileSystem::CheckedCast" ref="a2154b1fe12e80a312a91cf4bfed5d60f" args="(Uuid &amp;clsid, const void **ppOut) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::VSFileSystem::CheckedCast </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>clsid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void **&#160;</td>
-          <td class="paramname"><em>ppOut</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
-    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#af6b42ff045fc4bd199d5add70c0c2b4f">VoodooShader::IFileSystem</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_filesystem_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_filesystem_8cpp_source.html">VSFilesystem.cpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a8c26455831eaa9f533465d9fb1a44638"></a><!-- doxytag: member="VoodooShader::VSFileSystem::FindFile" ref="a8c26455831eaa9f533465d9fb1a44638" args="(const String &amp;name) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -317,6 +275,48 @@ Private Attributes</h2></td></tr>
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#ace752fe1279f70ee737195c4352f74a8">VoodooShader::IFileSystem</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_filesystem_8cpp_source.html#l00082">82</a> of file <a class="el" href="_v_s_filesystem_8cpp_source.html">VSFilesystem.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0ac4783faa27b8965084b82f1c757f24"></a><!-- doxytag: member="VoodooShader::VSFileSystem::QueryInterface" ref="a0ac4783faa27b8965084b82f1c757f24" args="(Uuid &amp;clsid, const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSFileSystem::QueryInterface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a379b573b9837077f9684e83e2dd89de5">VoodooShader::IFileSystem</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_filesystem_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_filesystem_8cpp_source.html">VSFilesystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -410,7 +410,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00066">66</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00064">64</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -425,7 +425,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00065">65</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00063">63</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -437,7 +437,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 19 2011 00:58:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 02:07:28 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

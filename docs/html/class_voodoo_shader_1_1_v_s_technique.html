@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
+   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -104,8 +104,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a64103a5225370cb872611adf9bee7866"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#aeb81b7d273d5b9e71fb47d3ced79789b">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#aeb81b7d273d5b9e71fb47d3ced79789b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a195a95ae2fa9d3ced6eedd51486c3d5f">CheckedCast</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a195a95ae2fa9d3ced6eedd51486c3d5f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a12d70c01545129091e1bf2dc4d9e4308">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a12d70c01545129091e1bf2dc4d9e4308"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a84d36b1a77dca1239dd272b90d5f8f11">ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a84d36b1a77dca1239dd272b90d5f8f11"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a6a41f187180c78e089367f4e9872e3ce">GetCore</a> (void) const   throw ()</td></tr>
@@ -134,8 +134,9 @@ Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">CGtechnique&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a39a84eb02e058e539f1d85f8df1f1666">m_CgTechnique</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00029">29</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<div class="textblock"><dl class="user"><dt><b>CLSID</b></dt><dd>e6f312a5-05af-11e1-9e05-005056c00008 </dd></dl>
+
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00035">35</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a196ae697aec2ed1d790efff6e5b1866f"></a><!-- doxytag: member="VoodooShader::VSTechnique::VSTechnique" ref="a196ae697aec2ed1d790efff6e5b1866f" args="(IShader *pShader, CGtechnique pCgTech)" -->
 <div class="memitem">
@@ -208,48 +209,6 @@ Private Attributes</h2></td></tr>
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a03227bdbae17e14423b4a7dee0a1b830">VoodooShader::ITechnique</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00056">56</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a195a95ae2fa9d3ced6eedd51486c3d5f"></a><!-- doxytag: member="VoodooShader::VSTechnique::CheckedCast" ref="a195a95ae2fa9d3ced6eedd51486c3d5f" args="(Uuid &amp;clsid, const void **ppOut) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::VSTechnique::CheckedCast </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>clsid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void **&#160;</td>
-          <td class="paramname"><em>ppOut</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
-    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a5d48d72263141a2deb270f8fe0264a63">VoodooShader::ITechnique</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00072">72</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
 
 </div>
 </div>
@@ -440,6 +399,48 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a12d70c01545129091e1bf2dc4d9e4308"></a><!-- doxytag: member="VoodooShader::VSTechnique::QueryInterface" ref="a12d70c01545129091e1bf2dc4d9e4308" args="(Uuid &amp;clsid, const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSTechnique::QueryInterface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a47dd2a7beb77603ae4da092d6165b009">VoodooShader::ITechnique</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_technique_8cpp_source.html#l00072">72</a> of file <a class="el" href="_v_s_technique_8cpp_source.html">VSTechnique.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aeb81b7d273d5b9e71fb47d3ced79789b"></a><!-- doxytag: member="VoodooShader::VSTechnique::Release" ref="aeb81b7d273d5b9e71fb47d3ced79789b" args="(void) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -501,7 +502,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00067">67</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -516,7 +517,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00054">54</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00060">60</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -531,7 +532,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -546,7 +547,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00064">64</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -561,7 +562,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00053">53</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -576,7 +577,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00060">60</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00066">66</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -591,7 +592,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00057">57</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00063">63</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -603,7 +604,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 19 2011 00:58:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 02:07:29 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

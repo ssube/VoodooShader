@@ -1,8 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_exception_8hpp.html" title="Exception.hpp" alt="" coords="259,155,364,181"/>
-<area shape="rect" id="node28" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="349,80,427,107"/>
-<area shape="rect" id="node34" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="451,80,540,107"/>
-<area shape="rect" id="node5" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="334,304,428,331"/>
-<area shape="rect" id="node25" href="$_string_8hpp.html" title="String.hpp" alt="" coords="341,229,421,256"/>
-<area shape="rect" id="node30" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="407,155,495,181"/>
+<area shape="rect" id="node3" href="$_exception_8hpp.html" title="Exception.hpp" alt="" coords="687,155,792,181"/>
+<area shape="rect" id="node31" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="625,80,703,107"/>
+<area shape="rect" id="node37" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="511,80,600,107"/>
+<area shape="rect" id="node5" href="$_string_8hpp.html" title="String.hpp" alt="" coords="702,229,783,256"/>
+<area shape="rect" id="node7" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="589,304,683,331"/>
+<area shape="rect" id="node33" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="571,155,659,181"/>
 </map>

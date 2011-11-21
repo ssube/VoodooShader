@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
+   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -107,8 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a38a99ef26213a551cec65f3df636aae2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#abd7bf823dd2b92ee3eeb75e1d59ddecc">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#abd7bf823dd2b92ee3eeb75e1d59ddecc"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ac920ff9ed693d10451337ecb5bbe722b">CheckedCast</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#ac920ff9ed693d10451337ecb5bbe722b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aed79a0f89329506bb3eb857cf0a487ed">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#aed79a0f89329506bb3eb857cf0a487ed"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a27eb9e71492aac4cc95648e09c969010">ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a27eb9e71492aac4cc95648e09c969010"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a99af88f8b38054264bfc2328b4a007bd">GetCore</a> (void) const   throw ()</td></tr>
@@ -246,12 +246,36 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac920ff9ed693d10451337ecb5bbe722b"></a><!-- doxytag: member="VoodooShader::EasyHook::VSEHHookManager::CheckedCast" ref="ac920ff9ed693d10451337ecb5bbe722b" args="(Uuid &amp;clsid, const void **ppOut) const " -->
+<a class="anchor" id="a99af88f8b38054264bfc2328b4a007bd"></a><!-- doxytag: member="VoodooShader::EasyHook::VSEHHookManager::GetCore" ref="a99af88f8b38054264bfc2328b4a007bd" args="(void) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool VoodooShader::EasyHook::VSEHHookManager::CheckedCast </td>
+          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> * VoodooShader::EasyHook::VSEHHookManager::GetCore </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the core this object was associated with. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The core. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a4726aa3edcbd926d4b4a38bf8e4e979e">VoodooShader::IHookManager</a>.</p>
+
+<p>Definition at line <a class="el" href="_hook_manager_8cpp_source.html#l00144">144</a> of file <a class="el" href="_hook_manager_8cpp_source.html">HookManager.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aed79a0f89329506bb3eb857cf0a487ed"></a><!-- doxytag: member="VoodooShader::EasyHook::VSEHHookManager::QueryInterface" ref="aed79a0f89329506bb3eb857cf0a487ed" args="(Uuid &amp;clsid, const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::EasyHook::VSEHHookManager::QueryInterface </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
           <td class="paramname"><em>clsid</em>, </td>
@@ -282,33 +306,9 @@ Private Attributes</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#ab3cc64aace192c504135f27dabcfc6a8">VoodooShader::IHookManager</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a6f95c53b0880ef095645ea08f5723d31">VoodooShader::IHookManager</a>.</p>
 
 <p>Definition at line <a class="el" href="_hook_manager_8cpp_source.html#l00110">110</a> of file <a class="el" href="_hook_manager_8cpp_source.html">HookManager.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a99af88f8b38054264bfc2328b4a007bd"></a><!-- doxytag: member="VoodooShader::EasyHook::VSEHHookManager::GetCore" ref="a99af88f8b38054264bfc2328b4a007bd" args="(void) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> * VoodooShader::EasyHook::VSEHHookManager::GetCore </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the core this object was associated with. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The core. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a4726aa3edcbd926d4b4a38bf8e4e979e">VoodooShader::IHookManager</a>.</p>
-
-<p>Definition at line <a class="el" href="_hook_manager_8cpp_source.html#l00144">144</a> of file <a class="el" href="_hook_manager_8cpp_source.html">HookManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -499,7 +499,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 19 2011 00:58:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 02:07:29 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

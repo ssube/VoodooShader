@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node6" href="$struct_voodoo_shader_1_1_float3.html" title="VoodooShader::Float3" alt="" coords="86,216,236,243"/>
-<area shape="rect" id="node8" href="$struct_voodoo_shader_1_1_float2.html" title="VoodooShader::Float2" alt="" coords="103,109,253,136"/>
-<area shape="rect" id="node12" href="$struct_voodoo_shader_1_1_float4.html" title="VoodooShader::Float4" alt="" coords="189,319,339,345"/>
+<area shape="rect" id="node4" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; float \&gt;" alt="" coords="43,319,251,345"/>
+<area shape="rect" id="node6" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; float \&gt;" alt="" coords="172,216,380,243"/>
+<area shape="rect" id="node8" href="$struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; float \&gt;" alt="" coords="211,109,419,136"/>
 </map>

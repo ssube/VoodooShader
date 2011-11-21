@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
+   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -212,7 +212,7 @@
 <a name="l00143"></a>00143             }
 <a name="l00144"></a>00144         }
 <a name="l00145"></a>00145 
-<a name="l00146"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gae9c5563dc8b7c08833bc89a16ab594f6">00146</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#gae9c5563dc8b7c08833bc89a16ab594f6" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWFileSystem::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00146"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga5e903aac656e58698ba89bd70793eb19">00146</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e903aac656e58698ba89bd70793eb19" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWFileSystem::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
 <a name="l00147"></a>00147 <span class="keyword">        </span>{
 <a name="l00148"></a>00148             <span class="keywordflow">if</span> (!ppOut)
 <a name="l00149"></a>00149             {
@@ -354,7 +354,7 @@
 <a name="l00285"></a>00285             }
 <a name="l00286"></a>00286         }
 <a name="l00287"></a>00287 
-<a name="l00288"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga95fe01d45f2918480931bf7bdfe09e40">00288</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga95fe01d45f2918480931bf7bdfe09e40" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWFile::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00288"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga18f5e77380badc09bc45f1777ba99540">00288</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga18f5e77380badc09bc45f1777ba99540" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWFile::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
 <a name="l00289"></a>00289 <span class="keyword">        </span>{
 <a name="l00290"></a>00290             <span class="keywordflow">if</span> (!ppOut)
 <a name="l00291"></a>00291             {
@@ -590,9 +590,9 @@
 <a name="l00521"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">00521</a>         <a class="code" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">VSWImage::VSWImage</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, ILuint image) :
 <a name="l00522"></a>00522             m_Core(pCore), m_Name(name), m_Image(image)
 <a name="l00523"></a>00523         {
-<a name="l00524"></a>00524             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#ad70504fb7c6eeb7551690e2ee8db0aa0">Width</a> = ilGetInteger(IL_IMAGE_WIDTH);
-<a name="l00525"></a>00525             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#a389abe582f537bded9c4831e464ef63b">Height</a> = ilGetInteger(IL_IMAGE_HEIGHT);
-<a name="l00526"></a>00526             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#a442b310459c76709e7ff464a5c0c513f">Depth</a> = ilGetInteger(IL_IMAGE_DEPTH);
+<a name="l00524"></a>00524             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#ade8cc0f93d5fe3f67ffe7f7990b7e57f">Size</a>.<a class="code" href="struct_voodoo_shader_1_1_vector2.html#a470bd61b97131676e45094a93135fddc">X</a> = ilGetInteger(IL_IMAGE_WIDTH);
+<a name="l00525"></a>00525             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#ade8cc0f93d5fe3f67ffe7f7990b7e57f">Size</a>.<a class="code" href="struct_voodoo_shader_1_1_vector2.html#aeb73d8110ca32cc5f5290624cfbf1a71">Y</a> = ilGetInteger(IL_IMAGE_HEIGHT);
+<a name="l00526"></a>00526             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#ade8cc0f93d5fe3f67ffe7f7990b7e57f">Size</a>.<a class="code" href="struct_voodoo_shader_1_1_vector3.html#aee6f1af8474ea714881a3f47006950ed">Z</a> = ilGetInteger(IL_IMAGE_DEPTH);
 <a name="l00527"></a>00527             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#a90bc18530b540bf4bcaee85d25dae08c">Mipmaps</a> = <span class="keyword">false</span>;
 <a name="l00528"></a>00528             <a class="code" href="group__voodoo__module__wfilesystem.html#ga1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> = <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>;
 <a name="l00529"></a>00529 
@@ -654,7 +654,7 @@
 <a name="l00585"></a>00585             }
 <a name="l00586"></a>00586         }
 <a name="l00587"></a>00587 
-<a name="l00588"></a><a class="code" href="group__voodoo__module__wfilesystem.html#gaeb1ba7a179f6bbda9ba4a4e030b642b2">00588</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#gaeb1ba7a179f6bbda9ba4a4e030b642b2" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWImage::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00588"></a><a class="code" href="group__voodoo__module__wfilesystem.html#ga35603c7551cae514b94357b647baf910">00588</a>         <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__module__wfilesystem.html#ga35603c7551cae514b94357b647baf910" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSWImage::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
 <a name="l00589"></a>00589 <span class="keyword">        </span>{
 <a name="l00590"></a>00590             <span class="keywordflow">if</span> (!ppOut)
 <a name="l00591"></a>00591             {
@@ -741,8 +741,8 @@
 <a name="l00673"></a>00673 
 <a name="l00674"></a>00674             <span class="keywordflow">return</span> ilCopyPixels
 <a name="l00675"></a>00675             (
-<a name="l00676"></a>00676                 pDesc-&gt;OffX, pDesc-&gt;OffY, pDesc-&gt;OffZ,
-<a name="l00677"></a>00677                 pDesc-&gt;Width, pDesc-&gt;Height, pDesc-&gt;Depth,
+<a name="l00676"></a>00676                 pDesc-&gt;Origin.X, pDesc-&gt;Origin.Y, pDesc-&gt;Origin.Z,
+<a name="l00677"></a>00677                 pDesc-&gt;Size.X, pDesc-&gt;Size.Y, pDesc-&gt;Size.Z,
 <a name="l00678"></a>00678                 ilFmt, ilType, pBuffer
 <a name="l00679"></a>00679             );
 <a name="l00680"></a>00680         }
@@ -753,7 +753,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 02:07:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

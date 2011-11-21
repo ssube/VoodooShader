@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
+   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -89,18 +89,18 @@
 <a name="l00020"></a>00020 
 <a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_parameter_8hpp.html">VSParameter.hpp</a>&quot;</span>
 <a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_converter_8hpp.html">Converter.hpp</a>&quot;</span>
-<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;<a class="code" href="_exception_8hpp.html">Exception.hpp</a>&quot;</span>
-<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="_version_8hpp.html">Version.hpp</a>&quot;</span>
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;<a class="code" href="_i_core_8hpp.html">ICore.hpp</a>&quot;</span>
-<a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="_i_logger_8hpp.html">ILogger.hpp</a>&quot;</span>
-<a name="l00029"></a>00029 <span class="preprocessor">#include &quot;<a class="code" href="_i_shader_8hpp.html">IShader.hpp</a>&quot;</span>
-<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="_i_texture_8hpp.html">ITexture.hpp</a>&quot;</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_i_core_8hpp.html">ICore.hpp</a>&quot;</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;<a class="code" href="_i_logger_8hpp.html">ILogger.hpp</a>&quot;</span>
+<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="_i_shader_8hpp.html">IShader.hpp</a>&quot;</span>
+<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="_i_texture_8hpp.html">ITexture.hpp</a>&quot;</span>
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="_converter_8hpp.html">Converter.hpp</a>&quot;</span>
+<a name="l00029"></a>00029 <span class="preprocessor">#include &quot;<a class="code" href="_exception_8hpp.html">Exception.hpp</a>&quot;</span>
+<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="_version_8hpp.html">Version.hpp</a>&quot;</span>
 <a name="l00031"></a>00031 
 <a name="l00032"></a>00032 <span class="keyword">namespace </span>VoodooShader
 <a name="l00033"></a>00033 {
-<a name="l00034"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a74e2ff28f33742fd017cf922cf0ef086">00034</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a74e2ff28f33742fd017cf922cf0ef086">VSParameter::VSParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <span class="keyword">const</span> pCore, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type) :
+<a name="l00034"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a8426d648749031f459f94d90e933a02a">00034</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a8426d648749031f459f94d90e933a02a">VSParameter::VSParameter</a>(_Pre_notnull_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <span class="keyword">const</span> pCore, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type) :
 <a name="l00035"></a>00035          m_Refs(0), m_Core(pCore), m_Shader(<a class="code" href="_includes_8hpp.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>), m_Virtual(true), m_Type(type)
 <a name="l00036"></a>00036     {
 <a name="l00037"></a>00037         <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a3bd8ed51a422810eaa7e748e2185babc">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
@@ -123,7 +123,7 @@
 <a name="l00055"></a>00055         memset(<a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a2e697d90aba3cfe1c9fd277ffa5007ea">m_Valuefloat</a>, 0, <span class="keyword">sizeof</span>(<span class="keywordtype">float</span>) * 16);
 <a name="l00056"></a>00056     }
 <a name="l00057"></a>00057 
-<a name="l00058"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#ae5f07a51e252ca148ef2340e21c1cf52">00058</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a74e2ff28f33742fd017cf922cf0ef086">VSParameter::VSParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <span class="keyword">const</span> pShader, _In_ CGparameter <span class="keyword">const</span> pParam) :
+<a name="l00058"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#ae5f07a51e252ca148ef2340e21c1cf52">00058</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a8426d648749031f459f94d90e933a02a">VSParameter::VSParameter</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * <span class="keyword">const</span> pShader, _In_ CGparameter <span class="keyword">const</span> pParam) :
 <a name="l00059"></a>00059         m_Refs(0), m_Core(pShader-&gt;GetCore()), m_Shader(pShader), m_Virtual(false), m_Param(pParam)
 <a name="l00060"></a>00060     {
 <a name="l00061"></a>00061         <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a05f3a65a19acfb311688a52026596866">m_Type</a> = <a class="code" href="class_voodoo_shader_1_1_converter.html#a53a34e583afc600543a83a8525e9e3a7" title="Convert a Cg runtime type to the corresponding Voodoo parameter type.">Converter::ToParameterType</a>(cgGetParameterType(<a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#ad17297d7b448b2faa5d08d4804eec560">m_Param</a>));
@@ -158,7 +158,7 @@
 <a name="l00090"></a>00090         }
 <a name="l00091"></a>00091     }
 <a name="l00092"></a>00092 
-<a name="l00093"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a1593cfd340817003b4f36bc86e074f8f">00093</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a1593cfd340817003b4f36bc86e074f8f" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSParameter::CheckedCast</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00093"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a9c00e428740a1cded711e22a89d23f76">00093</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parameter.html#a9c00e428740a1cded711e22a89d23f76" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSParameter::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
 <a name="l00094"></a>00094 <span class="keyword">    </span>{
 <a name="l00095"></a>00095         <span class="keywordflow">if</span> (!ppOut)
 <a name="l00096"></a>00096         {
@@ -278,7 +278,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 02:07:27 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

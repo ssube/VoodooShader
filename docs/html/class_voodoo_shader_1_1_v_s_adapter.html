@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
+   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -106,8 +106,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a49e0e0b0327b68c322d2609ee9f6942e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a08793e190605dfb9e3a39357397d5af4">Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a08793e190605dfb9e3a39357397d5af4"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a6b515a49d965c18f99c7511da665c910">CheckedCast</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a6b515a49d965c18f99c7511da665c910"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a07d77f6322854e09ddaae062952a4dcb">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a07d77f6322854e09ddaae062952a4dcb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#aee883c45c24fcdd9a263261456d0cae2">ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#aee883c45c24fcdd9a263261456d0cae2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ad8e11e0d2854b244bf0f5237012d7a44">GetCore</a> (void) const   throw ()</td></tr>
@@ -151,7 +151,7 @@ Private Attributes</h2></td></tr>
 <p>Requires no graphics API and does not call core methods, simply returning true or nullptr for methods. Does not perform logging or parameter validation.</p>
 <dl class="user"><dt><b>CLSID:</b></dt><dd>e6f3129a-05af-11e1-9e05-005056c00008 </dd></dl>
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00047">47</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00045">45</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="afa43d15f29965bbeeb06b040d0203880"></a><!-- doxytag: member="VoodooShader::VSAdapter::VSAdapter" ref="afa43d15f29965bbeeb06b040d0203880" args="(ICore *pCore)" -->
 <div class="memitem">
@@ -243,48 +243,6 @@ Private Attributes</h2></td></tr>
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a35e2cf4e0dde9fc40670281d6893bd2e">VoodooShader::IAdapter</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00154">154</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a6b515a49d965c18f99c7511da665c910"></a><!-- doxytag: member="VoodooShader::VSAdapter::CheckedCast" ref="a6b515a49d965c18f99c7511da665c910" args="(Uuid &amp;clsid, const void **ppOut) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::VSAdapter::CheckedCast </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>clsid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void **&#160;</td>
-          <td class="paramname"><em>ppOut</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
-    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a53faf58d9d812966e7b9ee174210dea8">VoodooShader::IAdapter</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
 </div>
 </div>
@@ -667,6 +625,48 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 
 </div>
 </div>
+<a class="anchor" id="a07d77f6322854e09ddaae062952a4dcb"></a><!-- doxytag: member="VoodooShader::VSAdapter::QueryInterface" ref="a07d77f6322854e09ddaae062952a4dcb" args="(Uuid &amp;clsid, const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSAdapter::QueryInterface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a6d9fc0bd180053cd3c8f3543c67b6f5c">VoodooShader::IAdapter</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a08793e190605dfb9e3a39357397d5af4"></a><!-- doxytag: member="VoodooShader::VSAdapter::Release" ref="a08793e190605dfb9e3a39357397d5af4" args="(void) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -880,7 +880,7 @@ To allow for significant variations in property setups and allow for use outside
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00083">83</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00081">81</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
 
 </div>
 </div>
@@ -895,7 +895,7 @@ To allow for significant variations in property setups and allow for use outside
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00082">82</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00080">80</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
 
 </div>
 </div>
@@ -907,7 +907,7 @@ To allow for significant variations in property setups and allow for use outside
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 19 2011 00:58:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 02:07:28 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

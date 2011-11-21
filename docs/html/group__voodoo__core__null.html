@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-45-gf07bdb6</span>
+   &#160;<span id="projectnumber">framework-4.2-53-gb76ee14</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -92,8 +92,8 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#ga217ada3375589031753eb9f78b99791a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga4b337b777e327ee58b7bd835f4a69287">VoodooShader::VSLogger::Release</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#ga4b337b777e327ee58b7bd835f4a69287"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga4beffb2eab6b0bafb0c7ac06ec225f5b">VoodooShader::VSLogger::CheckedCast</a> (Uuid &amp;clsid, const void **ppOut) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#ga4beffb2eab6b0bafb0c7ac06ec225f5b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga7d3d6c990f20c9c6b200eb3db1643f50">VoodooShader::VSLogger::QueryInterface</a> (Uuid &amp;clsid, const void **ppOut) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#ga7d3d6c990f20c9c6b200eb3db1643f50"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gad79fcfd44f65dfab96939d49e7772d1e">VoodooShader::VSLogger::ToString</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#gad79fcfd44f65dfab96939d49e7772d1e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual ICore *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga3cb796cc6de1cf871887cf04202c1432">VoodooShader::VSLogger::GetCore</a> (void) const   throw ()</td></tr>
@@ -143,48 +143,6 @@ Variables</h2></td></tr>
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#aecb0b94dd2259d623b8f2431198f8479">VoodooShader::ILogger</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_logger_8cpp_source.html#l00032">32</a> of file <a class="el" href="_v_s_logger_8cpp_source.html">VSLogger.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga4beffb2eab6b0bafb0c7ac06ec225f5b"></a><!-- doxytag: member="VoodooShader::VSLogger::CheckedCast" ref="ga4beffb2eab6b0bafb0c7ac06ec225f5b" args="(Uuid &amp;clsid, const void **ppOut) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::VSLogger::CheckedCast </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>clsid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void **&#160;</td>
-          <td class="paramname"><em>ppOut</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
-    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a86de46fb375841cccbf907044d8ca389">VoodooShader::ILogger</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_logger_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_logger_8cpp_source.html">VSLogger.cpp</a>.</p>
 
 </div>
 </div>
@@ -468,6 +426,48 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga7d3d6c990f20c9c6b200eb3db1643f50"></a><!-- doxytag: member="VoodooShader::VSLogger::QueryInterface" ref="ga7d3d6c990f20c9c6b200eb3db1643f50" args="(Uuid &amp;clsid, const void **ppOut) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSLogger::QueryInterface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>clsid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void **&#160;</td>
+          <td class="paramname"><em>ppOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a20618af0e9b7786bb309ad409628c792">VoodooShader::ILogger</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_logger_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_logger_8cpp_source.html">VSLogger.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga4b337b777e327ee58b7bd835f4a69287"></a><!-- doxytag: member="VoodooShader::VSLogger::Release" ref="ga4b337b777e327ee58b7bd835f4a69287" args="(void) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -618,7 +618,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_logger_8hpp_source.html#l00078">78</a> of file <a class="el" href="_v_s_logger_8hpp_source.html">VSLogger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_logger_8hpp_source.html#l00076">76</a> of file <a class="el" href="_v_s_logger_8hpp_source.html">VSLogger.hpp</a>.</p>
 
 </div>
 </div>
@@ -633,7 +633,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_logger_8hpp_source.html#l00077">77</a> of file <a class="el" href="_v_s_logger_8hpp_source.html">VSLogger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_logger_8hpp_source.html#l00075">75</a> of file <a class="el" href="_v_s_logger_8hpp_source.html">VSLogger.hpp</a>.</p>
 
 </div>
 </div>
@@ -641,7 +641,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 19 2011 00:58:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2011 02:07:28 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
