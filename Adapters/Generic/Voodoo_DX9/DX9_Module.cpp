@@ -7,7 +7,7 @@
 #include "IVoodoo3D9.hpp"
 #include "IVoodoo3DDevice9.hpp"
 
-VoodooShader::ICore * VoodooCore = nullptr;
+VoodooShader::ICore * gpVoodooCore = nullptr;
 VoodooShader::Adapter * VoodooDX9 = nullptr;
 
 IVoodoo3D9 *VoodooObject = nullptr;
@@ -63,49 +63,8 @@ namespace VoodooShader
   }
 
   // ifdef _DEBUG
-  cgD3D9EnableDebugTracing(CG_TRUE);
-
-  // endif
-  cgD3D9SetManageTextureParameters(core->GetCGContext(), CG_TRUE);
-
-  cgD3D9RegisterStates(core->GetCGContext());
-
-  HRESULT errors = cgD3D9GetLastError();
-
-  if (!SUCCEEDED(errors))
-  {
-   core->Log("Voodoo DX9: Errors setting Cg states.\n");
-  }
-  else
-  {
-   core->Log("Voodoo DX9: Cg states set successfully.\n");
-  }
 
 
-  // Setup profiles
-  CGprofile bestFrag = cgD3D9GetLatestPixelProfile();
-  CGprofile bestVert = cgD3D9GetLatestVertexProfile();
-
-  core->Log
-   (
-    "Voodoo DX9: Detected the following profiles:\n\tVertex: %s\n\tFragment: %s\n",
-    cgGetProfileString(bestVert),
-    cgGetProfileString(bestFrag)
-   );
-
-
-  // Get params
-  D3DVIEWPORT9 viewport;
-
-  device->GetViewport(&viewport);
-
-  float fx = (viewport.Width / 2) + 0.5; // 2;
-               ///
-  float fy = (viewport.Height / 2) + 0.5; // 2;
-               ///
-
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  mCore->Log("Voodoo DX9: Prepping for %d by %d target.\n", fx, fy);
 
   hr = this->mDevice->CreateVertexBuffer
    (
@@ -162,57 +121,8 @@ namespace VoodooShader
  /**
   *
   */
- Version Adapter::GetVersion(void)
- {
-
-  Version version = { VOODOO_META_VERSION_CHAIN(DX9) };
-
-  return version;
- }
-
- /**
-  *
-  */
  bool Adapter::LoadPass(IPass *pass)
  {
-  assert(pass);
-
-  CGprogram vertProg = pass->GetProgram(PS_Vertex);
-  CGprogram fragProg = pass->GetProgram(PS_Fragment);
-  HRESULT hr = S_OK;
-
-  if (cgIsProgram(vertProg))
-  {
-   hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
-   if (!SUCCEEDED(hr))
-   {
-    this->mCore->Log
-     (
-      "Voodoo DX9: Error loading vertex program from '%s': %d.\n",
-      pass->ToString().GetData(),
-      hr
-     );
-    return false;
-   }
-  }
-
-  if (cgIsProgram(fragProg))
-  {
-   hr = cgD3D9LoadProgram(fragProg, CG_TRUE, 0);
-   if (!SUCCEEDED(hr))
-   {
-    this->mCore->Log
-     (
-      "Voodoo DX9: Error loading fragment program from '%s': %d.\n",
-      pass->ToString().GetData(),
-      hr
-     );
-    return false;
-   }
-  }
-
-  this->mCore->Log("Voodoo DX9: Successfully loaded programs from '%s'.\n", pass->ToString().GetData());
-  return true;
  }
 
  /**
@@ -222,61 +132,6 @@ namespace VoodooShader
  {
 
 
-  // Both should be loaded and valid (if they exist and prepare was called)
-  CGprogram vertProg = pass->GetProgram(PS_Vertex);
-  CGprogram fragProg = pass->GetProgram(PS_Fragment);
-
-  if (cgIsProgram(vertProg))
-  {
-
-   HRESULT hr = cgD3D9BindProgram(vertProg);
-
-   if (!SUCCEEDED(hr))
-   {
-    this->mCore->Log("Voodoo DX9: Error binding vertex program from '%s': %s.\n", pass->Name().GetData(), hr);
-    return;
-   }
-   else
-   {
-    mBoundVP = vertProg;
-   }
-  }
-  else
-  {
-   mDevice->SetVertexShader(nullptr);
-  }
-
-  if (cgIsProgram(fragProg))
-  {
-
-   HRESULT hr = cgD3D9BindProgram(fragProg);
-
-   if (!SUCCEEDED(hr))
-   {
-    this->mCore->Log
-     (
-      "Voodoo DX9: Error binding fragment program from '%s': %s.\n",
-      pass->Name().GetData(),
-      cgD3D9TranslateHRESULT(hr)
-     );
-
-    if (cgIsProgram(vertProg))
-    {
-     cgD3D9UnbindProgram(vertProg);
-     mBoundVP = nullptr;
-    }
-
-    return;
-   }
-   else
-   {
-    mBoundFP = fragProg;
-   }
-  }
-  else
-  {
-   mDevice->SetPixelShader(nullptr);
-  }
  }
 
  /**
@@ -372,20 +227,6 @@ namespace VoodooShader
   */
  void Adapter::ApplyParameter(IParameter* param)
  {
-  switch (Converter::ToParameterCategory(param->GetType()))
-  {
-  case PC_Float:
-   cgD3D9SetUniform(param->GetParameter(), param->Getfloat());
-   break;
-
-  case PC_Sampler:
-   cgD3D9SetTextureParameter(param->GetParameter(), (IDirect3DTexture9 *) param->GetTexture()->GetData());
-   break;
-
-  case PC_Unknown:
-  default:
-   this->mCore->Log("Voodoo DX9: Unable to bind parameter %s of unknown type.", param->Name().GetData());
-  }
  }
 
  /**
@@ -476,7 +317,7 @@ VOODOO_API_DX9 void *__stdcall Voodoo3DCreate9(UINT version)
 {
 
  // Voodoo DX9 Init function
- VoodooCore = VoodooShader::ICore::Create("Voodoo_DX9.log");
+ gpVoodooCore = VoodooShader::ICore::Create("Voodoo_DX9.log");
 
  VoodooLogger->Log("Voodoo DX9: Direct3DCreate9 called, SDK version: %d.\n", version);
 

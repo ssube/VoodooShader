@@ -225,7 +225,7 @@ public:
 
    // Return our device
    *ppReturnedDeviceInterface = new IVoodoo3DDevice9(this, realDevice);
-   VoodooDX9 = (VoodooShader::Adapter *) new VoodooShader::DirectX9::Adapter(VoodooCore, realDevice);
+   VoodooDX9 = (VoodooShader::Adapter *) new VoodooShader::DirectX9::Adapter(gpVoodooCore, realDevice);
 
    HRESULT hrt = realDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &backbufferSurf);
 
@@ -265,7 +265,7 @@ public:
 
    try
    {
-    testShader = VoodooCore->CreateShader("test.cgfx", nullptr);
+    testShader = gpVoodooCore->CreateShader("test.cgfx", nullptr);
     testShader->Link();
    }
    catch(std::exception & exc)

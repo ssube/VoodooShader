@@ -1,18 +1,29 @@
-
-
-#ifndef VOODOO_DX9_MODULE_HPP
-#define VOODOO_DX9_MODULE_HPP
-
-#define VOODOO_IMPORT
-#include "VoodooFramework.hpp"
+/*
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at
+ *   peachykeen@voodooshader.com
+ */
+#pragma once
 
 #include "D3D9.h"
 #include "Cg/cgD3D9.h"
 
-// ifdef _DEBUG # pragma comment(lib, "cgD3D9d.lib") #else
 #pragma comment(lib, "cgD3D9.lib")
 
-// endif
 #ifndef VOODOO_IMPORT_DX9
 #define VOODOO_API_DX9 __declspec(dllexport)
 #else
@@ -23,7 +34,7 @@
 class IVoodoo3D9;
 class IVoodoo3DDevice9;
 
-extern VoodooShader::ICore * VoodooCore;
+extern VoodooShader::ICore * gpVoodooCore;
 extern VoodooShader::Adapter * VoodooDX9;
 
 extern IVoodoo3D9 *VoodooObject;
@@ -37,4 +48,3 @@ extern IDirect3DSurface9 *surface_ThisFrame;
 extern VoodooShader::ITexture* texture_ThisFrame;
 
 typedef IDirect3D9 * (__stdcall * D3DFunc9) (UINT);
-#endif /* VOODOO_DX9_MODULE_HPP */
