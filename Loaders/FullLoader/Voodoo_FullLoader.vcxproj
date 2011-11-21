@@ -40,8 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)\Dependencies\EasyHook_2.6\include;$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)\Dependencies\EasyHook_2.6\include;$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LibraryPath);$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LibraryPath);$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
   </PropertyGroup>
@@ -62,16 +62,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="ExportLoadpoints.cpp" />
+    <ClCompile Include="SysAPIHandler.cpp" />
     <ClCompile Include="FunctionIntercept.cpp" />
-    <ClCompile Include="Loader.cpp" />
+    <ClCompile Include="VoodooTie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExportLoadpoints.hpp" />
     <ClInclude Include="FunctionIntercept.hpp" />
-    <ClInclude Include="Loader.hpp" />
+    <ClInclude Include="VoodooTie.hpp" />
     <ClInclude Include="Loader_Version.hpp" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SysAPIHandler.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Loader_Version.rc" />

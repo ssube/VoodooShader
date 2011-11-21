@@ -22,8 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include "SysAPIHandler.hpp"
 
 #define VOODOO_NO_BOOST
 #define VOODOO_NO_CG
@@ -34,15 +33,11 @@
  * @addtogroup voodoo_module_loader Voodoo/Loader
  * @{
  */
-void WINAPI ErrorMessage(const wchar_t * msg, ...);
-
-HMODULE WINAPI LoadSystemLibrary(const wchar_t * libname);
-
 extern VoodooShader::ICore * gVoodooCore;
 extern VoodooShader::IAdapter * gVoodooAdapter;
 extern VoodooShader::InitParams gInitParams;
 
-HINSTANCE gLoaderHandle;
+extern HINSTANCE gLoaderHandle;
 
 typedef VoodooShader::ICore * (VOODOO_CALL * VoodooCreateFunc)(const VoodooShader::InitParams * const pInitParams, _In_ bool catchErrors);
 
@@ -55,8 +50,6 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
 
 bool WINAPI LoadVoodoo();
 bool WINAPI UnloadVoodoo(void);
-
-HMODULE WINAPI LoadSystemLibrary(const wchar_t * libname);
 /**
  * @}
  */

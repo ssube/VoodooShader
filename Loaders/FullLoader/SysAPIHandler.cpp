@@ -18,32 +18,28 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "Loader_Common.hpp"
+#include "SysAPIHandler.hpp"
 
 #include <vector>
+#include <tchar.h>
 #include <strsafe.h>
 
 /**
  * @addtogroup VoodooLoader Voodoo/Loader @{
  */
-
-VoodooShader::ICore * gVoodooCore = nullptr;
-VoodooShader::IAdapter * gVoodooAdapter = nullptr;
-VoodooShader::InitParams gInitParams;
-
-void WINAPI ErrorMessage(const wchar_t * msg, ...)
+void WINAPI ErrorMessage(const LPTSTR msg, ...)
 {
     va_list args;
     va_start(args, msg);
 
-    int bufsize = _vscwprintf(msg, args) + 1;
-    std::vector<wchar_t> buffer(bufsize);
+    int bufsize = _vsctprintf(msg, args) + 1;
+    std::vector<TCHAR> buffer(bufsize);
 
-    _vsnwprintf_s(&buffer[0], bufsize, bufsize-1, msg, args);
+    _vsntprintf_s(&buffer[0], bufsize, bufsize-1, msg, args);
 
     va_end(args);
 
-    MessageBox(nullptr, &buffer[0], L"Voodoo Loader Error", MB_OK | MB_ICONWARNING);
+    MessageBox(nullptr, &buffer[0], TEXT("Voodoo Loader Error"), MB_OK | MB_ICONWARNING);
 }
 
 /**
@@ -53,12 +49,12 @@ void WINAPI ErrorMessage(const wchar_t * msg, ...)
  *     interpreted relative to the system directory.
  * @return A handle to the module if loaded or a nullptr handle otherwise.
  */
-HMODULE WINAPI LoadSystemLibrary(const wchar_t * libname)
+HMODULE WINAPI LoadSystemLibrary(const LPTSTR libname)
 {
-    wchar_t path[MAX_PATH];
+    TCHAR path[MAX_PATH];
 
     GetSystemDirectory(path, MAX_PATH);
-    StringCchCat(path, MAX_PATH, L"\\");
+    StringCchCat(path, MAX_PATH, TEXT("\\"));
     StringCchCat(path, MAX_PATH, libname);
 
     return LoadLibrary(path);

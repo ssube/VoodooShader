@@ -18,11 +18,16 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "Loader.hpp"
+#include "VoodooTie.hpp"
 
 #include "Loader_Version.hpp"
 
 #include <string>
+
+VoodooShader::ICore * gVoodooCore = nullptr;
+VoodooShader::IAdapter * gVoodooAdapter = nullptr;
+VoodooShader::InitParams gInitParams;
+HINSTANCE gLoaderHandle = nullptr;
 
 const VoodooShader::Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOADER);
 
@@ -206,157 +211,4 @@ bool WINAPI UnloadVoodoo(void)
     } else {
         return false;
     }
-}
-
-/**
- * Most DirectX libraries use an identical loading function, with only the name varying. This function takes an SDK
- * version, library name and function name, loads and calls the proper init function.
- */
-void * WINAPI VoodooDXCreateGeneric(UINT sdkVersion, const wchar_t * lib, const char * func)
-{
-    typedef void * (WINAPI * DXInitFunc) (UINT);
-
-    HMODULE baselib = LoadSystemLibrary(lib);
-
-    if (!baselib)
-    {
-        MessageBox(nullptr, L"Voodoo Loader: Unable to load system DLL.", L"Loader Error", MB_ICONERROR | MB_OK);
-        exit(1);
-    }
-
-    DXInitFunc initFunc = (DXInitFunc) GetProcAddress(baselib, func);
-
-    if (!initFunc)
-    {
-        MessageBox(nullptr, L"Voodoo Loader: Unable to find system EP.", L"Loader Error", MB_ICONERROR | MB_OK);
-        exit(1);
-    }
-
-    return (*initFunc) (sdkVersion);
-}
-
-/**
- * Direct3D 8
- */
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
-{
-    void * pD3D8 = VoodooDXCreateGeneric(sdkVersion, L"d3d8.dll", "Direct3DCreate8");
-
-    if (LoadVoodoo())
-    {
-        //gVoodooCore->GetAdapter()->SetProperty(L"D3D8_Object")
-    }
-
-    return pD3D8;
-}
-
-/**
- * Direct3D 9
- */
-void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
-{
-    void * pD3D9 = VoodooDXCreateGeneric(sdkVersion, L"d3d9.dll", "Direct3DCreate9");
-
-    if (LoadVoodoo())
-    {
-
-    }
-
-    return pD3D9;
-}
-
-/**
- * DirectInput 8
- */
-HRESULT WINAPI VoodooInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID *ppvOut, LPVOID punkOuter)
-{
-    typedef HRESULT (WINAPI *DIInitFunc) (HINSTANCE, DWORD, REFIID, LPVOID *, LPVOID);
-
-    HMODULE baselib = LoadSystemLibrary(L"dinput8.dll");
-
-    if (!baselib)
-    {
-        MessageBoxA(nullptr, "Voodoo Loader: Unable to load system DLL.", "Loader Error", MB_ICONERROR | MB_OK);
-        exit(1);
-    }
-
-    DIInitFunc initFunc = (DIInitFunc) GetProcAddress(baselib, "DirectInput8Create");
-
-    if (!initFunc)
-    {
-        MessageBoxA(nullptr, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR | MB_OK);
-        exit(1);
-    }
-
-    return (*initFunc) (hinst, dwVersion, riidltf, ppvOut, punkOuter);
-}
-
-/**
- * DirectInput (unknown version)
- */
-HRESULT WINAPI VoodooInputCreateGeneric
-(
-    HINSTANCE hinst,
-    DWORD dwVersion,
-    LPVOID *lplpDirectInput,
-    LPVOID punkOuter,
-    const char * func
-)
-{
-
-    typedef HRESULT (WINAPI *DIInitFunc) (HINSTANCE, DWORD, LPVOID, LPVOID);
-
-    HMODULE baselib = LoadSystemLibrary(L"dinput.dll");
-
-    if (!baselib)
-    {
-        MessageBoxA(nullptr, "Voodoo Loader: Unable to load system DLL.", "Loader Error", MB_ICONERROR | MB_OK);
-        exit(1);
-    }
-
-    DIInitFunc initFunc = (DIInitFunc) GetProcAddress(baselib, func);
-
-    if (!initFunc)
-    {
-        MessageBoxA(nullptr, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR | MB_OK);
-        exit(1);
-    }
-
-    return (*initFunc) (hinst, dwVersion, lplpDirectInput, punkOuter);
-}
-
-HRESULT WINAPI VoodooInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplpDirectInput, LPVOID punkOuter)
-{
-    return VoodooInputCreateGeneric(hinst, dwVersion, lplpDirectInput, punkOuter, "DirectInputCreateA");
-}
-
-HRESULT WINAPI VoodooInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplpDirectInput, LPVOID punkOuter)
-{
-    return VoodooInputCreateGeneric(hinst, dwVersion, lplpDirectInput, punkOuter, "DirectInputCreateW");
-}
-
-/**
- * DirectSound 8
- */
-HRESULT WINAPI VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter)
-{
-    typedef HRESULT (__stdcall *DSInitFunc) (LPCGUID, LPVOID *, LPVOID);
-
-    HMODULE baselib = LoadSystemLibrary(L"dsound8.dll");
-
-    if (!baselib)
-    {
-        MessageBoxA(nullptr, "Voodoo Loader: Unable to load system DLL.", "Loader Error", MB_ICONERROR | MB_OK);
-        exit(1);
-    }
-
-    DSInitFunc initFunc = (DSInitFunc) GetProcAddress(baselib, "DirectSoundCreate8");
-
-    if (!initFunc)
-    {
-        MessageBoxA(nullptr, "Voodoo Loader: Unable to find system EP.", "Loader Error", MB_ICONERROR | MB_OK);
-        exit(1);
-    }
-
-    return (*initFunc) (lpcGuidDevice, ppDS8, pUnkOuter);
 }

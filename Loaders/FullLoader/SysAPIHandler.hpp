@@ -22,16 +22,8 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-// Direct3D create functions
-void * WINAPI VoodooD3DCreateGeneric(UINT sdkVersion, const wchar_t * lib, const char * func);
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion);
-void * WINAPI Voodoo3DCreate9(UINT sdkVersion);
+void WINAPI ErrorMessage(const LPTSTR msg, ...);
 
-// DirectInput create functions
-HRESULT WINAPI VoodooInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID * ppvOut, LPVOID punkOuter);
-HRESULT WINAPI VoodooInputCreateGeneric(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter, const char * func);
-HRESULT WINAPI VoodooInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
-HRESULT WINAPI VoodooInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
+HMODULE WINAPI LoadSystemLibrary(const LPTSTR libname);
 
-// DirectSound create functions
-HRESULT WINAPI VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter);
+bool WINAPI IsDllLoaded(_In_z_ LPTSTR name);

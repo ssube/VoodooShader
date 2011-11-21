@@ -21,6 +21,8 @@
 
 #include "easyhook.h"
 
+#include "SysAPIHandler.hpp"
+
 struct ModuleHooks
 {
     TCHAR * name;
@@ -41,12 +43,10 @@ extern func_EH_UninstallAll gEH_UninstallAll;
 extern func_EH_SetACL gEH_SetACL;
 extern func_EH_SetGlobalACL gEH_SetGlobalACL;
 
-bool WINAPI IsDllLoaded(_In_z_ LPTSTR name);
-
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc);
 bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol);
 
-int WINAPI InstallHookList(_In_ ModuleHooks * hooks);
+int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHooks * hooks);
 
 bool WINAPI LoadEasyHook();
 bool WINAPI UnloadEasyHook();

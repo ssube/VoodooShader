@@ -18,8 +18,9 @@
  *   peachykeen@voodooshader.com
  */
 
+#include "FunctionIntercept.hpp"
+
 #include <map>
-#include <fstream>
 
 std::map<FARPROC, TRACED_HOOK_HANDLE> gHooks;
 
@@ -38,7 +39,6 @@ ModuleHooks hookList[] =
     { L"d3d9.dll", "Direct3DCreate9", nullptr },
 };
 
-std::wfstream fout;
 TCHAR moduleName[MAX_PATH];
 
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc)
@@ -89,7 +89,7 @@ bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol)
     }
 }
 
-int WINAPI InstallHookList(_In_z_ ModuleHooks * hooks)
+int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHooks * hooks)
 {
     if (!hooks)
     {
@@ -99,7 +99,7 @@ int WINAPI InstallHookList(_In_z_ ModuleHooks * hooks)
     int success = 0;
     TCHAR * module = nullptr;
 
-    for (int i = 0; hooks[i].name || hooks[i].symbol; ++i)
+    for (int i = 0; i < hookCount; ++i)
     {
         if (hooks[i].name) module = hooks[i].name;
         if (module)
@@ -116,7 +116,7 @@ int WINAPI InstallHookList(_In_z_ ModuleHooks * hooks)
 
 bool WINAPI LoadEasyHook()
 {
-    gEH_Module = LoadLibrary(L"EasyHook.dll");
+    gEH_Module = LoadLibrary(TEXT("EasyHook.dll"));
 
     if (gEH_Module == NULL) return false;
 
@@ -139,9 +139,15 @@ bool WINAPI LoadEasyHook()
 
 bool WINAPI UnloadEasyHook()
 {
-    gEH_UninstallAll();
+    if (gEH_Module)
+    {
+        gEH_UninstallAll();
 
-    FreeLibrary(gEH_Module);
+        FreeLibrary(gEH_Module);
 
-    return true;
+        return true;
+    } else {
+        return false;
+    }
+
 }

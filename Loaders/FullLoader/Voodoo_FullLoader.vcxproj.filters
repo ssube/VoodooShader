@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Loader.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Loader_Version.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -14,6 +11,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="ExportLoadpoints.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SysAPIHandler.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooTie.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,13 +32,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Loader.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Common.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="FunctionIntercept.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="VoodooTie.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SysAPIHandler.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportLoadpoints.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
