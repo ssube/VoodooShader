@@ -208,12 +208,14 @@ namespace VoodooShader
                 {
                     cgResetPassState(m_BoundPass->GetCgPass());
                 }
-                return;
+                return false;
             }
 
             m_BoundPass = pPass;
 
             cgSetPassState(m_BoundPass->GetCgPass());
+
+            return true;
         }
 
         IPass * DX9Adapter::GetPass(void) const
@@ -325,7 +327,7 @@ namespace VoodooShader
             if (!pParam)
             {
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Attempting to apply null parameter.");
-                return;
+                return false;
             }
 
             IParameterRef param(pParam);
@@ -341,13 +343,55 @@ namespace VoodooShader
             case PC_Unknown:
             default:
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Unable to bind parameter %s of unknown type.", param->GetName().GetData());
+                return false;
+            }
+
+            return true;
+        }
+
+        bool DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant & value)
+        {
+            String strname(name);
+
+            if (strname != L"D3D9Device")
+            {
+                return false;
+            } else if (value.Type != UT_PVoid) {
+                // Invalid type
+            } else {
+                IDirect3DDevice9 * inDevice = reinterpret_cast<IDirect3DDevice9 * >(value.Value.VPVoid);
+                return this->SetDXDevice(inDevice);
             }
         }
 
-        bool DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant & value);
-        Variant DX9Adapter::GetProperty(_In_ const wchar_t * property) const;
-        bool DX9Adapter::ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
-        bool DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
+        Variant DX9Adapter::GetProperty(_In_ const wchar_t * property) const
+        {
+            Variant retVar = {UT_None, nullptr};
+            return retVar;
+        }
+
+        bool DX9Adapter::ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture)
+        {
+            if (Converter::ToParameterCategory(pParam->GetType()) == PC_Sampler)
+            {
+                IDirect3DTexture9 * texObj = reinterpret_cast<IDirect3DTexture9 *>(pTexture->GetData());
+                CGparameter texParam = pParam->GetCgParameter();
+
+                cgD3D9SetTextureParameter(texParam, texObj);
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Bound texture %s to parameter %s.\n", pTexture->GetName().GetData(), pParam->GetName().GetData());
+                return true;
+            }
+            else
+            {
+                Throw("Voodoo DX9: Invalid binding attempt, parameter is not a sampler.\n", this->mCore);
+                return false;
+            }
+        }
+
+        bool DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error)
+        {
+            return false;
+        }
 
         bool DX9Adapter::SetDXDevice(IDirect3DDevice9 * pDevice)
         {

@@ -234,22 +234,6 @@ namespace VoodooShader
   */
  bool Adapter::ConnectTexture(IParameter* param, ITexture* texture)
  {
-  if (Converter::ToParameterCategory(param->GetType()) == PC_Sampler)
-  {
-   param->Set(texture);
-
-   IDirect3DTexture9 *texObj = (IDirect3DTexture9 *) texture->GetTexture();
-   CGparameter texParam = param->GetParameter();
-
-   cgD3D9SetTextureParameter(texParam, texObj);
-   mCore->Log("Voodoo DX9: Bound texture %s to parameter %s.\n", texture->Name().GetData(), param->Name());
-   return true;
-  }
-  else
-  {
-   Throw("Voodoo DX9: Invalid binding attempt, parameter is not a sampler.\n", this->mCore);
-   return false;
-  }
  }
 
  /**
