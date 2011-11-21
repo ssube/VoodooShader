@@ -20,6 +20,7 @@
 
 #include "DX9_Adapter.hpp"
 
+#include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
 
 namespace VoodooShader
@@ -314,13 +315,62 @@ namespace VoodooShader
             }
         }
 
-        ITexture * DX9Adapter::LoadTexture(_In_ IFile * const pFile, _In_opt_ const TextureRegion * pRegion);
+        bool DX9Adapter::LoadTexture(_In_ IFile * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
+        {
+            return this->CreateTexture(pFile->GetPath(), reinterpret_cast<const TextureDesc *>(pRegion), pTexture);
+        }
+
         bool DX9Adapter::DrawGeometry
         (
             _In_ const uint32_t count, 
-            _In_count_(count) const VertexStruct * const pVertexData, 
+            _In_count_(count) VertexStruct * const pVertexData, 
             _In_ const VertexFlags flags
-        );
+        )
+        { 
+            IDirect3DVertexBuffer9 * sourceBuffer;
+            UINT sourceOffset, sourceStride;
+            DWORD sourceFVF, zEnabled, aEnabled, cullMode;
+
+            m_Device->GetStreamSource(0, &sourceBuffer, &sourceOffset, &sourceStride);
+            m_Device->GetFVF(&sourceFVF);
+            m_Device->GetRenderState(D3DRS_ZENABLE, &zEnabled);
+            m_Device->GetRenderState(D3DRS_ALPHABLENDENABLE, &aEnabled);
+            m_Device->GetRenderState(D3DRS_CULLMODE, &cullMode);
+
+            m_Device->SetFVF(D3DFVF_CUSTOMVERTEX);
+            m_Device->SetRenderState(D3DRS_ZENABLE, FALSE);
+            m_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+            m_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+            if (pVertexData)
+            {
+                HRESULT hr = m_Device->BeginScene();
+
+                if (SUCCEEDED(hr))
+                {
+                    if (flags & VF_Buffer)
+                    {
+                        IDirect3DVertexBuffer9 * vbuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pVertexData);
+                        m_Device->SetStreamSource(0, vbuffer, 0, sizeof(Vertex));
+                        m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, count);
+                    } else {
+                        m_Device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, count, pVertexData, sizeof(Vertex));
+                    }
+
+                    m_Device->EndScene();
+                }
+                else
+                {
+                    m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to draw geometry.");
+                }
+            }
+
+            m_Device->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);
+            m_Device->SetFVF(sourceFVF);
+            m_Device->SetRenderState(D3DRS_ZENABLE, zEnabled);
+            m_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
+            m_Device->SetRenderState(D3DRS_CULLMODE, cullMode);
+        }
 
         bool DX9Adapter::ApplyParameter(_In_ IParameter * const pParam)
         {

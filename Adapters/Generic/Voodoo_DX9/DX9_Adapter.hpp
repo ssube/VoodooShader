@@ -57,7 +57,7 @@ namespace VoodooShader
             virtual bool DrawGeometry
             (
                 _In_ const uint32_t count, 
-                _In_count_(count) const VertexStruct * const pVertexData, 
+                _In_count_(count) VertexStruct * const pVertexData, 
                 _In_ const VertexFlags flags
             );
             virtual bool ApplyParameter(_In_ IParameter * const pParam);
