@@ -20,6 +20,7 @@
 
 #include "VSParameter.hpp"
 
+#include "IAdapter.hpp"
 #include "ICore.hpp"
 #include "ILogger.hpp"
 #include "IShader.hpp"
@@ -177,9 +178,14 @@ namespace VoodooShader
         return m_ValueTexture.get();
     }
 
-    void VSParameter::SetTexture(ITexture* Texture)
+    void VSParameter::SetTexture(ITexture * pTexture)
     {
-        m_ValueTexture = Texture;
+        m_ValueTexture = pTexture;
+
+        if (pTexture)
+        {
+            m_Core->GetAdapter()->ConnectTexture(this, pTexture);
+        }
     }
 
     _Ret_count_c_(16) float * const VSParameter::GetScalar(void) throw()

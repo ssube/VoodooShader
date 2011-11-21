@@ -1,5 +1,6 @@
-# Voodoo Shader Framework
-## version 0.4.2 - alpha
+## Voodoo Shader Framework
+### version 0.4.2 - alpha
+
 -----
 
 ### Contents:
@@ -10,6 +11,7 @@
 5. Reporting Bugs
 6. Contact
 7. Legal
+
 -----
 
 ### 1. Summary
@@ -85,15 +87,16 @@ To directly contact the developer, please send an email to:
 
 * [peachykeen@voodooshader.com](mailto:peachykeen@voodooshader.com)
 
-Questions, comments, suggestions, reports, bugs, and almost anything else are welcome. If you have
-any interest in testing or contributing to Voodoo, please get in touch as soon as possible.
+Questions, comments, suggestions, reports, bugs, and almost anything else are welcome.
 
-If you would like a game or application supported by Voodoo, please get in touch with the title
-and as much information as you can. _Requests are very much welcome_.
+If you would like a game or application supported by Voodoo, please file a request issue with the title and as much 
+information as you can.
+
+If you have any interest in helping test or contributing code to Voodoo, please get in touch by email or irc.
 
 ### 7. Legal
 
-Voodoo Shader Framework (c) 2010-2011 by Sean Sube, All Rights Reserved.
+Voodoo Shader Framework &copy; 2010-2011 by Sean Sube, All Rights Reserved.
 
 The Voodoo Shader Framework, all associated binary or object files and source code is released under the terms and 
 conditions of the GNU Lesser General Public License, version 3. See the included LICENSE file for more details.
