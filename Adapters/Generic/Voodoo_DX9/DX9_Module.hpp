@@ -46,13 +46,13 @@ namespace VoodooShader
 }
 
 extern VoodooShader::ICore * gpVoodooCore;
-extern VoodooShader::IAdapter * gpVoodooAdapter;
 
 extern VoodooShader::VoodooDX9::IVoodoo3D9 *VoodooObject;
 extern VoodooShader::VoodooDX9::IVoodoo3DDevice9 *VoodooDevice;
 
-extern VoodooShader::IShader* testShader;
+extern VoodooShader::IShader * testShader;
 
+extern IDirect3DVertexBuffer9 * gpFSQuadVerts;
 extern IDirect3DSurface9 *backbufferSurf;
 
 extern IDirect3DSurface9 *surface_ThisFrame;

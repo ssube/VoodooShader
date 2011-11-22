@@ -529,13 +529,6 @@ namespace VoodooShader
                 cgGetProfileString(bestFrag)
             );
 
-            // Get params
-            D3DVIEWPORT9 viewport;
-
-            m_Device->GetViewport(&viewport);
-
-            logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Prepping for %d by %d target.", viewport.Width, viewport.Height);
-
             // Create vertex declaration
             D3DVERTEXELEMENT9 vertDeclElems[] =
             {
@@ -560,6 +553,66 @@ namespace VoodooShader
             if (!SUCCEEDED(errors))
             {
                 logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Unable to create transformed vertex declaration.");
+            }
+
+            // Get params
+            D3DVIEWPORT9 viewport;
+
+            m_Device->GetViewport(&viewport);
+
+            float fx = (viewport.Width  / 2) + 0.5f;
+            float fy = (viewport.Height / 2) + 0.5f;
+
+            logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Prepping for %d by %d target.", viewport.Width, viewport.Height);
+
+            // Create fullscreen vbuffer
+            errors = m_Device->CreateVertexBuffer
+            (
+                6 * sizeof(VertexStruct), 0, 0, D3DPOOL_DEFAULT, &gpFSQuadVerts, nullptr
+            );
+
+            if (FAILED(errors))
+            {
+                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to create vertex buffer.");
+            }
+
+            VertexStruct fsVertData[4];
+
+            ZeroMemory(fsVertData, sizeof(VertexStruct) * 4);
+
+            fsVertData[0].Position.X = -0.5f;
+            fsVertData[0].Position.Y = -0.5f;
+            fsVertData[0].Position.Z =  0.5f;
+            fsVertData[1].Position.X =    fx;
+            fsVertData[1].Position.Y = -0.5f;
+            fsVertData[1].Position.Z =  0.5f;
+            fsVertData[2].Position.X = -0.5f;
+            fsVertData[2].Position.Y =    fy;
+            fsVertData[2].Position.Z =  0.5f;
+            fsVertData[3].Position.X =    fx;
+            fsVertData[3].Position.Y =    fy;
+            fsVertData[3].Position.Z =  0.5f;
+
+            fsVertData[0].TexCoord[0].X = 0.0f;
+            fsVertData[0].TexCoord[0].Y = 0.0f;
+            fsVertData[1].TexCoord[0].X = 1.0f;
+            fsVertData[1].TexCoord[0].Y = 0.0f;
+            fsVertData[2].TexCoord[0].X = 0.0f;
+            fsVertData[2].TexCoord[0].Y = 1.0f;
+            fsVertData[3].TexCoord[0].X = 1.0f;
+            fsVertData[3].TexCoord[0].Y = 1.0f;
+
+            VertexStruct * pVertices = nullptr;
+            errors = gpFSQuadVerts->Lock(0, sizeof(VertexStruct) * 6, (void**)&pVertices, 0);
+
+            if (FAILED(errors))
+            {
+                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to lock vertex buffer to fsquad.");
+            } else {
+                memcpy(pVertices,   fsVertData,   sizeof(VertexStruct) * 3);
+                memcpy(pVertices+3, fsVertData+1, sizeof(VertexStruct) * 3);
+
+                gpFSQuadVerts->Unlock();
             }
 
             return true;

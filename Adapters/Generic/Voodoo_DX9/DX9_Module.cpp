@@ -28,70 +28,13 @@ VoodooShader::ICore * gpVoodooCore = nullptr;
 VoodooShader::VoodooDX9::IVoodoo3D9 * VoodooObject = nullptr;
 VoodooShader::VoodooDX9::IVoodoo3DDevice9 * VoodooDevice = nullptr;
 
+VoodooShader::IShader* testShader;
+
+IDirect3DVertexBuffer9 * gpFSQuadVerts = nullptr;
 IDirect3DSurface9 *backbufferSurf = nullptr;
 
 IDirect3DSurface9 *surface_ThisFrame = nullptr;
 VoodooShader::ITexture* texture_ThisFrame;
-
-VoodooShader::IShader* testShader;
-/*
-
-namespace VoodooShader
-{
- namespace DirectX9
-{
-
-  hr = this->mDevice->CreateVertexBuffer
-   (
-    6 * sizeof(FSVert),
-    0,
-    D3DFVF_CUSTOMVERTEX,
-    D3DPOOL_DEFAULT,
-    &FSQuadVerts,
-    nullptr
-   );
-
-  if (FAILED(hr))
-  {
-   mCore->Log("Voodoo DX9: Failed to create vertex buffer.\n");
-  }
-
-  FSVert g_Vertices[4];
-
-  memset(g_Vertices, 0, sizeof(FSVert) * 4);
-
-  g_Vertices[0].x = -0.5f;
-  g_Vertices[0].y = -0.5f;
-  g_Vertices[0].z = 0.5f;
-  g_Vertices[1].x = fx;
-  g_Vertices[1].y = -0.5f;
-  g_Vertices[1].z = 0.5f;
-  g_Vertices[2].x = -0.5f;
-  g_Vertices[2].y = fy;
-  g_Vertices[2].z = 0.5f;
-  g_Vertices[3].x = fx;
-  g_Vertices[3].y = fy;
-  g_Vertices[3].z = 0.5f;
-
-  g_Vertices[0].rhw = g_Vertices[1].rhw = g_Vertices[2].rhw = g_Vertices[3].rhw = 1.0f;
-
-  g_Vertices[0].tu = 0.0f;
-  g_Vertices[0].tv = 0.0f;
-  g_Vertices[1].tu = 1.0f;
-  g_Vertices[1].tv = 0.0f;
-  g_Vertices[2].tu = 0.0f;
-  g_Vertices[2].tv = 1.0f;
-  g_Vertices[3].tu = 1.0f;
-  g_Vertices[3].tv = 1.0f;
-
-  void *pVertices;
-
-  FSQuadVerts->Lock(0, sizeof(FSVert) * 4, &pVertices, 0);
-
-  memcpy(pVertices, g_Vertices, sizeof(FSVert) * 4);
-
-  FSQuadVerts->Unlock();
- }*/
 
 const VoodooShader::Version * VOODOO_CALL API_VersionFunc()
 {
