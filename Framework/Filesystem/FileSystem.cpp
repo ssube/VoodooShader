@@ -217,7 +217,7 @@ namespace VoodooShader
 
         IFile * VSWFileSystem::FindFile(const String & name) const
         {
-            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FILESYSTEM_NAME, L"Searching for raw file \"%s\".", name.GetData());
+            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FILESYSTEM_NAME, L"Searching for raw file '%s'.", name.GetData());
 
             String filename = m_Core->GetParser()->Parse(name);
 
@@ -225,7 +225,7 @@ namespace VoodooShader
             (
                 LL_ModDebug,
                 VOODOO_FILESYSTEM_NAME,
-                L"Searching for parsed file \"%s\".",
+                L"Searching for parsed file '%s'.",
                 filename.GetData()
             );
 
@@ -252,7 +252,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->Log
                     (
                         LL_ModDebug, VOODOO_CORE_NAME,
-                        L"File %s found in directory %s.",
+                        L"File '%s' found in directory '%s'.",
                         name.GetData(), (*curDir).GetData()
                     );
 
@@ -262,7 +262,7 @@ namespace VoodooShader
                 ++curDir;
             }
 
-            m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_CORE_NAME, L"Unable to find file %s.", name.GetData());
+            m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_CORE_NAME, L"Unable to find file '%s'.", name.GetData());
 
             return nullptr;
         }

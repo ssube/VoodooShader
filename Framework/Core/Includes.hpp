@@ -20,21 +20,21 @@
 #pragma once
 
 #ifndef VOODOO_NO_COMPILER_CHECKS
-#ifndef __cplusplus
-#   error Voodoo requires a C++ compiler, preferably Microsoft Visual C++ 10 or better.
-#endif
+#   ifndef __cplusplus
+#      error Voodoo requires a C++ compiler, preferably Microsoft Visual C++ 10 or better.
+#   endif
 
-#ifndef _WIN32
-#   error Voodoo must be built for the Win32 platform.
-#endif
+#   ifndef _WIN32
+#      error Voodoo must be built for the Win32 platform.
+#   endif
 
-#ifdef _WIN64
-#   error Voodoo is not yet compatible with 64-bit systems.
-#endif
+#   ifdef _WIN64
+#       error Voodoo is not yet compatible with 64-bit systems.
+#   endif
 
-#ifndef _UNICODE
-#   error Voodoo APIs require Unicode characterset enabled.
-#endif
+#   ifndef _UNICODE
+#       error Voodoo APIs require Unicode characterset enabled.
+#   endif
 #endif
 
 #ifndef _NATIVE_NULLPTR_SUPPORTED
@@ -75,7 +75,9 @@
 #   define DECLSPEC_SELECTANY __declspec(selectany)
 #endif
 
-#ifdef VSF_DEBUG_MEMORY
+// Extended memory debug routines.
+// This will enable a lot of in-depth logging for a lot of memory data and will have a major speed hit.
+#ifdef VOODOO_DEBUG_MEMORY
 #   define _CRTDBG_MAP_ALLOC
 #   include <stdlib.h>
 #   include <crtdbg.h>
@@ -383,7 +385,7 @@ namespace VoodooShader
         LL_CoreInfo     = 0x82,
         LL_CoreWarn     = 0x84,
         LL_CoreError    = 0x88,
-        LL_Initial      = 0xFE,
+        LL_Initial      = 0xFC,
         // Masks
         LL_Severity     = 0x0F,
         LL_Origin       = 0xF0,

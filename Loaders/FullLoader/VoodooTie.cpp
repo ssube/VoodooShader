@@ -69,11 +69,6 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
 
         gLoaderHandle = hinstDLL;
     }
-    else if (fdwReason == DLL_PROCESS_DETACH)
-    {
-        UnloadVoodoo();
-        //return (BOOL)UnloadVoodoo();
-    }
 
     return TRUE;
 }
@@ -210,6 +205,8 @@ bool WINAPI LoadVoodoo()
 
         gVoodooCore = nullptr;
     }
+
+    if (gVoodooCore) gVoodooCore->AddRef();
 
     return (gVoodooCore != nullptr);
 }

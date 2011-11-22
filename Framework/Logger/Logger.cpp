@@ -82,9 +82,8 @@ namespace VoodooShader
         }
 
         VSXmlLogger::VSXmlLogger(_In_ ICore * pCore) :
-            m_Core(pCore), m_LogLevel(LL_Initial)
+            m_Core(pCore), m_LogLevel(LL_Initial), m_LocalTime(new tm())
         {
-            this->m_LocalTime = new tm();
         }
 
         VSXmlLogger::~VSXmlLogger(void)
@@ -92,11 +91,6 @@ namespace VoodooShader
             if (this->m_LogFile.is_open())
             {
                 this->Close();
-            }
-
-            if (this->m_LocalTime)
-            {
-                delete this->m_LocalTime;
             }
         }
 
@@ -245,12 +239,14 @@ namespace VoodooShader
             if (pVersion->RevID) logMsg << " revid=\"" << pVersion->RevID << "\" ";
             logMsg << " />\n";
 
-#ifdef VSF_DEBUG_CONSOLE
+#ifdef VOODOO_DEBUG_CONSOLE
             cout << logMsg.str();
 #endif
             m_LogFile << logMsg.str();
 
+#ifndef _DEBUG
             if (m_Flags & LF_Flush)
+#endif
             {
                 m_LogFile << flush;
             }
@@ -261,8 +257,8 @@ namespace VoodooShader
             if (!this->m_LogFile.is_open()) return;
 
             LogLevel mask = (LogLevel) (level & m_LogLevel);
-
-            if (!(mask & LL_Severity) || !(mask & LL_Origin)) return;
+            UNREFERENCED_PARAMETER(mask);
+            //if (!(mask & LL_Severity) || !(mask & LL_Origin)) return;
 
             va_list args;
 
@@ -292,20 +288,18 @@ namespace VoodooShader
                 {
                     OutputDebugString(logMsg.str().c_str());
                 }
-#   ifdef VSF_DEBUG_CONSOLE
+#   ifdef VOODOO_DEBUG_CONSOLE
                 cout << logMsg.str();
 #   endif
 #endif
                 m_LogFile << logMsg.str();
 
-#ifdef _DEBUG
-                m_LogFile << endl;
-#else
+#ifndef _DEBUG
                 if (m_Flags & LF_Flush)
-                {
-                    m_LogFile << endl;
-                }
 #endif
+                {
+                    m_LogFile << flush;
+                }
             }
             catch(const std::exception & exc)
             {
@@ -341,11 +335,11 @@ namespace VoodooShader
         {
             time_t now = time(nullptr);
 
-            if (localtime_s(this->m_LocalTime, &now) == 0)
+            if (localtime_s(this->m_LocalTime.get(), &now) == 0)
             {
                 wstringstream stamp;
 
-                stamp << L" time=\"" << put_time(m_LocalTime, L"%H%M%S") << L"\" ";
+                stamp << L" time=\"" << put_time(m_LocalTime.get(), L"%H%M%S") << L"\" ";
                 return stamp.str();
             }
             else
@@ -358,11 +352,11 @@ namespace VoodooShader
         {
             time_t now = time(nullptr);
 
-            if (localtime_s(this->m_LocalTime, &now) == 0)
+            if (localtime_s(this->m_LocalTime.get(), &now) == 0)
             {
                 wstringstream stamp;
 
-                stamp << L" date=\"" << put_time(m_LocalTime, L"%Y%m%d") << L"\" ";
+                stamp << L" date=\"" << put_time(m_LocalTime.get(), L"%Y%m%d") << L"\" ";
                 return stamp.str();
             }
             else

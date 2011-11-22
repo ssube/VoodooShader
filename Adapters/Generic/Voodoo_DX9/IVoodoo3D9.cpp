@@ -256,7 +256,7 @@ namespace VoodooShader
 
                 try
                 {
-                    IFile * shaderFile = gpVoodooCore->GetFileSystem()->FindFile(L"text.cgfx");
+                    IFile * shaderFile = gpVoodooCore->GetFileSystem()->FindFile(L"test.cgfx");
                     if (shaderFile)
                     {
                         testShader = gpVoodooCore->CreateShader(shaderFile, nullptr);

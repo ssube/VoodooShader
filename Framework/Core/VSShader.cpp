@@ -221,9 +221,9 @@ namespace VoodooShader
 
         while (cgIsParameter(cParam))
         {
-            IParameter * pParam = new VSParameter(this, cParam);
+            IParameterRef pParam = new VSParameter(this, cParam);
 
-            this->LinkParameter(pParam);
+            this->LinkParameter(pParam.get());
 
             m_Parameters.push_back(pParam);
 
@@ -235,12 +235,14 @@ namespace VoodooShader
 
     void VSShader::LinkParameter(IParameter * pParam)
     {
+        IParameterRef param = pParam;
+
         // Cache basic data for future use
-        ParameterType type = pParam->GetType();
-        CGparameter cgparam = pParam->GetCgParameter();
+        ParameterType type = param->GetType();
+        CGparameter cgparam = param->GetCgParameter();
 
         // Check if it has a global link annotation
-        CGannotation globalAnnotation = cgGetNamedParameterAnnotation(cgparam, "parameter");
+        CGannotation globalAnnotation = cgGetNamedParameterAnnotation(cgparam, "source");
 
         if (cgIsAnnotation(globalAnnotation) && cgGetAnnotationType(globalAnnotation) == CG_STRING)
         {
@@ -252,7 +254,7 @@ namespace VoodooShader
 
                 if (globalParam)
                 {
-                    globalParam->AttachParameter(pParam);
+                    globalParam->AttachParameter(param.get());
                 }
                 else
                 {
@@ -261,7 +263,7 @@ namespace VoodooShader
                         LL_CoreWarn,
                         VOODOO_CORE_NAME,
                         L"Unable to find global param %S for parameter %s.",
-                        globalName, pParam->ToString().GetData()
+                        globalName, param->ToString().GetData()
                     );
                 }
             }
@@ -272,7 +274,7 @@ namespace VoodooShader
                     LL_CoreWarn,
                     VOODOO_CORE_NAME,
                     L"Unable to read global annotation for parameter %s.",
-                    pParam->ToString().GetData()
+                    param->ToString().GetData()
                 );
             }
 
@@ -282,7 +284,7 @@ namespace VoodooShader
         // If it's not linked to a global, it doesn't need linked unless it is a sampler.
         if (Converter::ToParameterCategory(type) == PC_Sampler)
         {
-            this->LinkSampler(pParam);
+            this->LinkSampler(param.get());
         }
     }
 

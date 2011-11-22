@@ -20,12 +20,14 @@
 
 #include "Exports.hpp"
 
-#include "Version.hpp"
-
 #include "VSAdapter.hpp"
 #include "VSFileSystem.hpp"
 #include "VSHookManager.hpp"
 #include "VSLogger.hpp"
+
+#include "ICore.hpp"
+
+#include "Version.hpp"
 
 namespace VoodooShader
 {
@@ -99,7 +101,7 @@ namespace VoodooShader
         uint32_t refs = obj->AddRef();
         if (obj && obj->GetCore() && obj->GetCore()->GetLogger())
         {
-            obj->GetCore()->GetLogger()->Log(LL_CoreError, L"VOODOO_DEBUG_MEMORY", "intrusive_ptr_add_ref(%X) = %d", obj, refs);
+            obj->GetCore()->GetLogger()->Log(LL_CoreError, L"VOODOO_DEBUG_MEMORY", L"intrusive_ptr_add_ref(%p) = %d", obj, refs);
         }
 #else
         obj->AddRef();
@@ -113,7 +115,7 @@ namespace VoodooShader
         {
             obj->AddRef();
             uint32_t refs = obj->Release() - 1;
-            obj->GetCore()->GetLogger()->Log(LL_CoreError, L"VOODOO_DEBUG_MEMORY", "intrusive_ptr_release(%X) = %d", obj, refs);
+            obj->GetCore()->GetLogger()->Log(LL_CoreError, L"VOODOO_DEBUG_MEMORY", L"intrusive_ptr_release(%p) = %d", obj, refs);
         }
 #else
         obj->Release();
