@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
+   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -180,9 +180,9 @@
 <a name="l00111"></a>00111 
 <a name="l00112"></a>00112             <span class="keywordflow">if</span> (error == ERROR_FILE_NOT_FOUND)
 <a name="l00113"></a>00113             {
-<a name="l00114"></a>00114                 <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00114"></a>00114                 <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00115"></a>00115                 (
-<a name="l00116"></a>00116                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>,
+<a name="l00116"></a>00116                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa375468e182c0cec3dd68417f34cfa6fc">LL_CoreWarn</a>,
 <a name="l00117"></a>00117                     <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
 <a name="l00118"></a>00118                     L<span class="stringliteral">&quot;No files found in directory %s.&quot;</span>,
 <a name="l00119"></a>00119                     path.GetData()
@@ -190,7 +190,7 @@
 <a name="l00121"></a>00121 
 <a name="l00122"></a>00122                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00123"></a>00123             } <span class="keywordflow">else</span> {
-<a name="l00124"></a>00124                 <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Error searching directory %s.&quot;</span>, path.GetData());
+<a name="l00124"></a>00124                 <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa375468e182c0cec3dd68417f34cfa6fc">LL_CoreWarn</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Error searching directory %s.&quot;</span>, path.GetData());
 <a name="l00125"></a>00125 
 <a name="l00126"></a>00126                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00127"></a>00127             }
@@ -237,7 +237,7 @@
 <a name="l00168"></a>00168         {
 <a name="l00169"></a>00169             <span class="keywordflow">if</span> (logger.get())
 <a name="l00170"></a>00170             {
-<a name="l00171"></a>00171                 logger-&gt;Log(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Unable to load module %s.&quot;</span>, filename.GetData());
+<a name="l00171"></a>00171                 logger-&gt;Log(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b">LL_CoreError</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Unable to load module %s.&quot;</span>, filename.GetData());
 <a name="l00172"></a>00172             }
 <a name="l00173"></a>00173 
 <a name="l00174"></a>00174             <span class="keywordflow">return</span> <span class="keyword">false</span>;
@@ -252,7 +252,7 @@
 <a name="l00183"></a>00183         {
 <a name="l00184"></a>00184             logger-&gt;Log
 <a name="l00185"></a>00185             (
-<a name="l00186"></a>00186                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">LL_Warning</a>,
+<a name="l00186"></a>00186                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa375468e182c0cec3dd68417f34cfa6fc">LL_CoreWarn</a>,
 <a name="l00187"></a>00187                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
 <a name="l00188"></a>00188                 L<span class="stringliteral">&quot;Debug build mismatch with module %s.&quot;</span>,
 <a name="l00189"></a>00189                 moduleversion-&gt;<a class="code" href="struct_voodoo_shader_1_1_version.html#adbfa0e0b684b01715eef589f3dcd6933">Name</a>
@@ -349,9 +349,9 @@
 <a name="l00280"></a>00280             {
 <a name="l00281"></a>00281                 <span class="keywordflow">if</span> (logger)
 <a name="l00282"></a>00282                 {
-<a name="l00283"></a>00283                     logger-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00283"></a>00283                     logger-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00284"></a>00284                     (
-<a name="l00285"></a>00285                         <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>,
+<a name="l00285"></a>00285                         <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b">LL_CoreError</a>,
 <a name="l00286"></a>00286                         <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
 <a name="l00287"></a>00287                         L<span class="stringliteral">&quot;Error creating instance of class %s.&quot;</span>,
 <a name="l00288"></a>00288                         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(clsid).GetData()
@@ -363,7 +363,7 @@
 <a name="l00294"></a>00294         } <span class="keywordflow">else</span> {
 <a name="l00295"></a>00295             <span class="keywordflow">if</span> (logger)
 <a name="l00296"></a>00296             {
-<a name="l00297"></a>00297                 logger-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">LL_Error</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Class %s not found.&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(clsid).GetData());
+<a name="l00297"></a>00297                 logger-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b">LL_CoreError</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Class %s not found.&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(clsid).GetData());
 <a name="l00298"></a>00298             }
 <a name="l00299"></a>00299 
 <a name="l00300"></a>00300             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
@@ -512,7 +512,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 05:58:44 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 22 2011 06:49:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

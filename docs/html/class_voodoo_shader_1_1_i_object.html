@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
+   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -208,7 +208,9 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
+<dd>
+If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
 <p>Implemented in <a class="el" href="group__voodoo__module__wfilesystem.html#ga35603c7551cae514b94357b647baf910">VoodooShader::VoodooWFS::VSWImage</a>, <a class="el" href="group__voodoo__module__wfilesystem.html#ga18f5e77380badc09bc45f1777ba99540">VoodooShader::VoodooWFS::VSWFile</a>, <a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a37fa0c5fb33e7dc9bbb37197d83d69b5">VoodooShader::XmlLogger::VSXmlLogger</a>, <a class="el" href="group__voodoo__module__wfilesystem.html#ga5e903aac656e58698ba89bd70793eb19">VoodooShader::VoodooWFS::VSWFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aed79a0f89329506bb3eb857cf0a487ed">VoodooShader::EasyHook::VSEHHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#a0a36ba4f69f6e62e44c5dcca23067d6d">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a1ccb571985c23135d0e9439870684b3d">VoodooShader::VSCore</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a7f9bbcfee0103a366b5614a887f40427">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a6d9fc0bd180053cd3c8f3543c67b6f5c">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a7a17e1b6830c201d0ca31eebaea7833a">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a47dd2a7beb77603ae4da092d6165b009">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a379b573b9837077f9684e83e2dd89de5">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a07d77f6322854e09ddaae062952a4dcb">VoodooShader::VSAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a0ac4783faa27b8965084b82f1c757f24">VoodooShader::VSFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ae20261b9e945cf0d4e027fd8a156d6a3">VoodooShader::VSHookManager</a>, <a class="el" href="group__voodoo__core__null.html#ga7d3d6c990f20c9c6b200eb3db1643f50">VoodooShader::VSLogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a31d0dee2abdbd2751f8f45ea3785c6b0">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a6f95c53b0880ef095645ea08f5723d31">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a20618af0e9b7786bb309ad409628c792">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#ab70e57cf2697100bc014c8b21dd9a7fc">VoodooShader::IParameter</a>, <a class="el" href="class_voodoo_shader_1_1_i_parser.html#abeee9bd5dd6088e7c94b56b45328c5d2">VoodooShader::IParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#a9c00e428740a1cded711e22a89d23f76">VoodooShader::VSParameter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3e280e3f1372f532a7afd429ed374fd6">VoodooShader::VSShader</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#a74828c7d1f1c7070be66320218661f2a">VoodooShader::VSParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#abca04774e7b3bd3bb1ef7229210a5f20">VoodooShader::VSPass</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a12d70c01545129091e1bf2dc4d9e4308">VoodooShader::VSTechnique</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_texture.html#a3b27d79acd285bf9e498a8107ba7a034">VoodooShader::VSTexture</a>.</p>
 
@@ -266,7 +268,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 05:58:45 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 22 2011 06:49:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

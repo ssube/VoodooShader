@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
+   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -329,7 +329,9 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
+<dd>
+If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a31d0dee2abdbd2751f8f45ea3785c6b0">VoodooShader::ITexture</a>.</p>
 
@@ -500,7 +502,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 05:58:45 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 22 2011 06:49:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

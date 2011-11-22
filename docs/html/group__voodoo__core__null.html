@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
+   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -111,8 +111,8 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual const LogLevel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga688c29318e8f5eac6b10fe873e0ca387">VoodooShader::VSLogger::GetLogLevel</a> (void) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga192ab51c19a983596c31facb90f77202">VoodooShader::VSLogger::LogModule</a> (const Version *const pModule)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a module stamp to the log.  <a href="#ga192ab51c19a983596c31facb90f77202"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga2cce47c214ba83b2d2840a213a6cfe84">VoodooShader::VSLogger::Log</a> (const LogLevel level, const String &amp;module, _Printf_format_string_ const String &amp;msg,...)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Log a message, may be formatted with printf syntax.  <a href="#ga2cce47c214ba83b2d2840a213a6cfe84"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga06b5825a89372bf6631b98a696efaf27">VoodooShader::VSLogger::Log</a> (const LogLevel level, const wchar_t *source, _Printf_format_string_ const wchar_t *format,...)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Log a message, may be formatted with printf syntax.  <a href="#ga06b5825a89372bf6631b98a696efaf27"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga78e3a53866f4ab92b546ad6619f5d09d">VoodooShader::VSLogger::SetFlags</a> (const LogFlags flush)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual const LogFlags&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga6c701c17fd9ac9185e3200fa460b33a1">VoodooShader::VSLogger::GetFlags</a> (void) const </td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
@@ -235,7 +235,7 @@ Variables</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a7746ae38981759e6f72088a125f3551d">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_logger_8cpp_source.html#l00141">141</a> of file <a class="el" href="_v_s_logger_8cpp_source.html">VSLogger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_logger_8cpp_source.html#l00142">142</a> of file <a class="el" href="_v_s_logger_8cpp_source.html">VSLogger.cpp</a>.</p>
 
 </div>
 </div>
@@ -260,7 +260,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga2cce47c214ba83b2d2840a213a6cfe84"></a><!-- doxytag: member="VoodooShader::VSLogger::Log" ref="ga2cce47c214ba83b2d2840a213a6cfe84" args="(const LogLevel level, const String &amp;module, _Printf_format_string_ const String &amp;msg,...)" -->
+<a class="anchor" id="ga06b5825a89372bf6631b98a696efaf27"></a><!-- doxytag: member="VoodooShader::VSLogger::Log" ref="ga06b5825a89372bf6631b98a696efaf27" args="(const LogLevel level, const wchar_t *source, _Printf_format_string_ const wchar_t *format,...)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -273,14 +273,14 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>module</em>, </td>
+          <td class="paramtype">const wchar_t *&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_Printf_format_string_ const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>msg</em>, </td>
+          <td class="paramtype">_Printf_format_string_ const wchar_t *&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -301,14 +301,14 @@ Variables</h2></td></tr>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">level</td><td>The level for this message. </td></tr>
-    <tr><td class="paramname">module</td><td>The logging module's name. </td></tr>
+    <tr><td class="paramname">source</td><td>The source of the log message, usually the calling module's name. </td></tr>
     <tr><td class="paramname">msg</td><td>The message format string. </td></tr>
     <tr><td class="paramname">...</td><td>The parameters to insert. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca">VoodooShader::ILogger</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e">VoodooShader::ILogger</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_logger_8cpp_source.html#l00125">125</a> of file <a class="el" href="_v_s_logger_8cpp_source.html">VSLogger.cpp</a>.</p>
 
@@ -460,7 +460,9 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
+<dd>
+If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a20618af0e9b7786bb309ad409628c792">VoodooShader::ILogger</a>.</p>
 
@@ -510,7 +512,7 @@ Variables</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a55681df40b536bff31de040d08201655">VoodooShader::ILogger</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_logger_8cpp_source.html#l00136">136</a> of file <a class="el" href="_v_s_logger_8cpp_source.html">VSLogger.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_logger_8cpp_source.html#l00137">137</a> of file <a class="el" href="_v_s_logger_8cpp_source.html">VSLogger.cpp</a>.</p>
 
 </div>
 </div>
@@ -641,7 +643,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 05:58:45 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 22 2011 06:49:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

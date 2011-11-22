@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
+   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -114,20 +114,20 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a pass in a manner that is compatible with the adapter's underlying API.  <a href="#a78ef790d6fa03b0abd4b43d1d2602915"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a375a5350eccbe23b1dd2baeca44c99d8">UnloadPass</a> (<a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a> *const pPass)=0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Unloads a pass from the adapter.  <a href="#a375a5350eccbe23b1dd2baeca44c99d8"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a2cae6a47b1abb997e756df86755411f6">SetPass</a> (<a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a> *const pPass)=0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Causes the adapter to load a pass for drawing.  <a href="#a2cae6a47b1abb997e756df86755411f6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#aa7a1c79be652417cbf6f554c964d9eca">SetPass</a> (<a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a> *const pPass=nullptr)=0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Causes the adapter to load a pass for drawing.  <a href="#aa7a1c79be652417cbf6f554c964d9eca"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#abb47a63f3eba1c46327e9494f0a8633f">GetPass</a> (void) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the currently bound pass.  <a href="#abb47a63f3eba1c46327e9494f0a8633f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#ac7dd70ac5deed2700aa722b9df424b98">SetTarget</a> (const uint32_t index, <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const pTarget)=0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a render target for the adapter.  <a href="#ac7dd70ac5deed2700aa722b9df424b98"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a4bb845db9ba362ced25c6dfc7652bd55">SetTarget</a> (const uint32_t index, <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const pTarget=nullptr)=0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a render target for the adapter.  <a href="#a4bb845db9ba362ced25c6dfc7652bd55"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a0fe2d85fccd7efd49173be4b7b1dff1a">GetTarget</a> (const uint32_t index) const =0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a render target from the adapter.  <a href="#a0fe2d85fccd7efd49173be4b7b1dff1a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#ac196ad9f459f071215b79088d601045e">CreateTexture</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, const <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a> *pDesc, _Inout_ <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const pTexture)=0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a texture within the adapter and binds it to a texture.  <a href="#ac196ad9f459f071215b79088d601045e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a073b3355d1b07d10e23911b545624059">LoadTexture</a> (<a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *const pFile, const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> *pRegion, _Inout_ <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const pTexture)=0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a named texture into the API and registers it with the Core.  <a href="#a073b3355d1b07d10e23911b545624059"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a42d55ec45d26bb070a9eb6e3d6687850">DrawGeometry</a> (const uint32_t count, const <a class="el" href="struct_voodoo_shader_1_1_vertex_struct.html">VertexStruct</a> *const pVertexData, const <a class="el" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags=VF_Transformed)=0  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws geometry from system memory.  <a href="#a42d55ec45d26bb070a9eb6e3d6687850"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a02f581c22fb14ced285d90fcfa0dc8d0">LoadTexture</a> (<a class="el" href="class_voodoo_shader_1_1_i_image.html">IImage</a> *const pImage, const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> *pRegion, _Inout_ <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const pTexture)=0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a named texture into the API and registers it with the Core.  <a href="#a02f581c22fb14ced285d90fcfa0dc8d0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#af7a887d67f4748011880ec6031b514f1">DrawGeometry</a> (const uint32_t count, <a class="el" href="struct_voodoo_shader_1_1_vertex_struct.html">VertexStruct</a> *const pVertexData, const <a class="el" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags=VF_Transformed)=0  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws geometry from system memory.  <a href="#af7a887d67f4748011880ec6031b514f1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a070636dedd224ec2761f6dec7748108d">ApplyParameter</a> (<a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> *const pParameter)=0  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Downloads a parameter's value from system RAM to VRAM, verifying that the value on the GPU (and in use) is the latest value set in the CPU memory buffer (all parameter set commands operate on the system RAM buffer for speed and compatibility).  <a href="#a070636dedd224ec2761f6dec7748108d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html#abb29feeca630b1376468268424b8da42">SetProperty</a> (const wchar_t *name, <a class="el" href="struct_voodoo_shader_1_1_variant.html">Variant</a> &amp;value)=0  throw ()</td></tr>
@@ -309,7 +309,7 @@ This must create a texture that can either be rendered directly into or that can
 
 </div>
 </div>
-<a class="anchor" id="a42d55ec45d26bb070a9eb6e3d6687850"></a><!-- doxytag: member="VoodooShader::IAdapter::DrawGeometry" ref="a42d55ec45d26bb070a9eb6e3d6687850" args="(const uint32_t count, const VertexStruct *const pVertexData, const VertexFlags flags=VF_Transformed)=0" -->
+<a class="anchor" id="af7a887d67f4748011880ec6031b514f1"></a><!-- doxytag: member="VoodooShader::IAdapter::DrawGeometry" ref="af7a887d67f4748011880ec6031b514f1" args="(const uint32_t count, VertexStruct *const pVertexData, const VertexFlags flags=VF_Transformed)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -322,7 +322,7 @@ This must create a texture that can either be rendered directly into or that can
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_voodoo_shader_1_1_vertex_struct.html">VertexStruct</a> *const&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_voodoo_shader_1_1_vertex_struct.html">VertexStruct</a> *const&#160;</td>
           <td class="paramname"><em>pVertexData</em>, </td>
         </tr>
         <tr>
@@ -351,7 +351,7 @@ This must create a texture that can either be rendered directly into or that can
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the draw operation. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ac0e464c40db1a0709fca9f3c1c0163ca">VoodooShader::VSAdapter</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#af1d394c49403991f3d75a257fa4b7da8">VoodooShader::VSAdapter</a>.</p>
 
 </div>
 </div>
@@ -530,15 +530,15 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 
 </div>
 </div>
-<a class="anchor" id="a073b3355d1b07d10e23911b545624059"></a><!-- doxytag: member="VoodooShader::IAdapter::LoadTexture" ref="a073b3355d1b07d10e23911b545624059" args="(IFile *const pFile, const TextureRegion *pRegion, _Inout_ ITexture *const pTexture)=0" -->
+<a class="anchor" id="a02f581c22fb14ced285d90fcfa0dc8d0"></a><!-- doxytag: member="VoodooShader::IAdapter::LoadTexture" ref="a02f581c22fb14ced285d90fcfa0dc8d0" args="(IImage *const pImage, const TextureRegion *pRegion, _Inout_ ITexture *const pTexture)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual bool VoodooShader::IAdapter::LoadTexture </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *const&#160;</td>
-          <td class="paramname"><em>pFile</em>, </td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_image.html">IImage</a> *const&#160;</td>
+          <td class="paramname"><em>pImage</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -565,14 +565,14 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 <p>The texture source is provided here and all dimensions should be drawn from that, with as little conversion as possible.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">pFile</td><td>The file to load. </td></tr>
+    <tr><td class="paramname">pImage</td><td>The image to load. </td></tr>
     <tr><td class="paramname">pRegion</td><td>The region of the file that should be used. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The texture, if successfully created. A nullptr otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a19de435b36a9fd525b8938c2c31bc383">VoodooShader::VSAdapter</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a9524d721613f8d70f3adbac33f6eff8d">VoodooShader::VSAdapter</a>.</p>
 
 </div>
 </div>
@@ -610,7 +610,9 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
+<dd>
+If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a24b2f4989b0a5ef2b05df7b8af1e8cfd">VoodooShader::IObject</a>.</p>
 
@@ -643,7 +645,7 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 
 </div>
 </div>
-<a class="anchor" id="a2cae6a47b1abb997e756df86755411f6"></a><!-- doxytag: member="VoodooShader::IAdapter::SetPass" ref="a2cae6a47b1abb997e756df86755411f6" args="(IPass *const pPass)=0" -->
+<a class="anchor" id="aa7a1c79be652417cbf6f554c964d9eca"></a><!-- doxytag: member="VoodooShader::IAdapter::SetPass" ref="aa7a1c79be652417cbf6f554c964d9eca" args="(IPass *const pPass=nullptr)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -651,7 +653,7 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
           <td class="memname">virtual bool VoodooShader::IAdapter::SetPass </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a> *const&#160;</td>
-          <td class="paramname"><em>pPass</em></td><td>)</td>
+          <td class="paramname"><em>pPass</em> = <code>nullptr</code></td><td>)</td>
           <td>  throw ()<code> [pure virtual]</code></td>
         </tr>
       </table>
@@ -720,7 +722,7 @@ To allow for significant variations in property setups and allow for use outside
 
 </div>
 </div>
-<a class="anchor" id="ac7dd70ac5deed2700aa722b9df424b98"></a><!-- doxytag: member="VoodooShader::IAdapter::SetTarget" ref="ac7dd70ac5deed2700aa722b9df424b98" args="(const uint32_t index, ITexture *const pTarget)=0" -->
+<a class="anchor" id="a4bb845db9ba362ced25c6dfc7652bd55"></a><!-- doxytag: member="VoodooShader::IAdapter::SetTarget" ref="a4bb845db9ba362ced25c6dfc7652bd55" args="(const uint32_t index, ITexture *const pTarget=nullptr)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -734,7 +736,7 @@ To allow for significant variations in property setups and allow for use outside
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const&#160;</td>
-          <td class="paramname"><em>pTarget</em>&#160;</td>
+          <td class="paramname"><em>pTarget</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -819,7 +821,7 @@ To allow for significant variations in property setups and allow for use outside
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 05:58:45 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 22 2011 06:49:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

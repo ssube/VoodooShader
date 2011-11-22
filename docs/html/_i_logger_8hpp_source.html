@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
+   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -120,11 +120,11 @@
 <a name="l00095"></a>00095 
 <a name="l00102"></a>00102         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a2d3d49830b66c017a2db69e61b1e03d8" title="Writes a module stamp to the log.">LogModule</a>(_In_ const <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * const pModule) throw() = 0;
 <a name="l00103"></a>00103 
-<a name="l00112"></a>00112         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a7f4460b311aa6d44f497379dac6254ca" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00112"></a>00112         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00113"></a>00113         (
 <a name="l00114"></a>00114             _In_ const <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level,
-<a name="l00115"></a>00115             _In_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; module,
-<a name="l00116"></a>00116             _In_ _Printf_format_string_ const <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; msg,
+<a name="l00115"></a>00115             _In_ const <span class="keywordtype">wchar_t</span> * source,
+<a name="l00116"></a>00116             _In_ _Printf_format_string_ const <span class="keywordtype">wchar_t</span> * format,
 <a name="l00117"></a>00117             ...
 <a name="l00118"></a>00118         ) throw() = 0;
 <a name="l00119"></a>00119 
@@ -138,7 +138,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 05:58:44 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 22 2011 06:49:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

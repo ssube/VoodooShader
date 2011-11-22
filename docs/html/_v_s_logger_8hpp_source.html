@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
+   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -114,11 +114,11 @@
 <a name="l00061"></a>00061         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="group__voodoo__core__null.html#ga9473ee15cea26e7e0190a1ec343986ae" title="Set the default minimum message level.">SetLogLevel</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level);
 <a name="l00062"></a>00062         <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> <a class="code" href="group__voodoo__core__null.html#ga688c29318e8f5eac6b10fe873e0ca387">GetLogLevel</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;
 <a name="l00063"></a>00063         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="group__voodoo__core__null.html#ga192ab51c19a983596c31facb90f77202" title="Writes a module stamp to the log.">LogModule</a>(_In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <span class="keyword">const</span> pModule);
-<a name="l00064"></a>00064         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="group__voodoo__core__null.html#ga2cce47c214ba83b2d2840a213a6cfe84" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00064"></a>00064         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="group__voodoo__core__null.html#ga06b5825a89372bf6631b98a696efaf27" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00065"></a>00065         (
 <a name="l00066"></a>00066             _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level,
-<a name="l00067"></a>00067             _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; module,
-<a name="l00068"></a>00068             _In_ _Printf_format_string_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; msg,
+<a name="l00067"></a>00067             _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * source,
+<a name="l00068"></a>00068             _In_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * format,
 <a name="l00069"></a>00069             ...
 <a name="l00070"></a>00070         );
 <a name="l00071"></a>00071         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="group__voodoo__core__null.html#ga78e3a53866f4ab92b546ad6619f5d09d">SetFlags</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> flush);
@@ -134,7 +134,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 05:58:44 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 22 2011 06:49:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

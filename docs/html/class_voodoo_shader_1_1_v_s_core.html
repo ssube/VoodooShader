@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-56-g28a8d51</span>
+   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -102,7 +102,7 @@
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a7908b160e56fc900a81aeb4cee1d7fd8">VSCore</a> (const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const pInitParams)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a72a2d291a46574f8942ff0f05785be7a">VSCore</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_core.html#aafef4f3a7c8f6fe8d6a9c6dc418835ca">~VSCore</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a354c010ce7a1d00a04bd280552c7db8e">AddRef</a> (void) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a354c010ce7a1d00a04bd280552c7db8e"></a><br/></td></tr>
@@ -148,6 +148,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the Cg context associated with this <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>.  <a href="#a3e55234291f6bd9e48619f48a12bf601"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_core.html#ae01235c6a73156c56caf0b9aac0ce1a5">SetCgContext</a> (CGcontext const pContext)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Cg context attached to the core.  <a href="#ae01235c6a73156c56caf0b9aac0ce1a5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a5b65b1624e11d024cf07a99704bb649f">Initialize</a> (const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const pInitParams)</td></tr>
 <tr><td colspan="2"><h2><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a4bdc371258e61f274331915ce61311fe">CgErrorHandler</a> (CGcontext pContext, int error) const </td></tr>
@@ -190,15 +191,14 @@ Friends</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00047">47</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a7908b160e56fc900a81aeb4cee1d7fd8"></a><!-- doxytag: member="VoodooShader::VSCore::VSCore" ref="a7908b160e56fc900a81aeb4cee1d7fd8" args="(const InitParams *const pInitParams)" -->
+<a class="anchor" id="a72a2d291a46574f8942ff0f05785be7a"></a><!-- doxytag: member="VoodooShader::VSCore::VSCore" ref="a72a2d291a46574f8942ff0f05785be7a" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">VoodooShader::VSCore::VSCore </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const&#160;</td>
-          <td class="paramname"><em>pInitParams</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -224,7 +224,7 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00291">291</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00299">299</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -250,7 +250,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a2b641b15822e4745c26301e4b067e3a8">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00318">318</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00326">326</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -279,7 +279,7 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00625">625</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00633">633</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -323,7 +323,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#ad4f6208c5a06829f20f561eeb71e52a3">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00453">453</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00461">461</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -363,7 +363,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a64600b66e9ac1733495636a80594f038">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00437">437</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00445">445</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -430,7 +430,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#afc735445d241d2afd55518089340fba9">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00387">387</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00395">395</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -455,7 +455,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a3582274c1eaa490abded6834d5278c8d">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00402">402</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00410">410</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -479,7 +479,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a3a15102170f8c7f3b7a1cc82c553582c">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00397">397</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00405">405</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +503,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a367c97020c9a39678fb3126e89cff8d3">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00367">367</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00375">375</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -527,7 +527,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a1b0839e7ad2b1c900e428faf80215863">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00382">382</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00390">390</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -551,7 +551,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a2bbcb49027fd0ea5521bb45aa9035f37">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00377">377</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00385">385</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -575,7 +575,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00392">392</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00400">400</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -620,7 +620,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a96f9076f4ff9b9512e8d9001f252548f">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00513">513</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00521">521</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -644,7 +644,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a7e7f204ee1798e7990c10c8e841acde4">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00372">372</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00380">380</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -676,7 +676,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a3d8670b7d4e66222ef78e566c28273ed">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00599">599</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00607">607</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -706,7 +706,26 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a8ff79b85773192eda84c66ccfdc42cf5">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00542">542</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00550">550</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5b65b1624e11d024cf07a99704bb649f"></a><!-- doxytag: member="VoodooShader::VSCore::Initialize" ref="a5b65b1624e11d024cf07a99704bb649f" args="(const InitParams *const pInitParams)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VoodooShader::VSCore::Initialize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const&#160;</td>
+          <td class="paramname"><em>pInitParams</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00097">97</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -744,11 +763,13 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this class implements. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
+<dd>
+If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a0a36ba4f69f6e62e44c5dcca23067d6d">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00333">333</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00341">341</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -773,7 +794,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a0c04001d8727ca3a21b84f851602dbcf">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00323">323</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00331">331</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -804,7 +825,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a38147069cb00a8a7c0b46c5506327d4b">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00561">561</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00569">569</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -834,7 +855,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a3723cf03c1ff50aed1b8117e9648640b">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00580">580</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00588">588</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -864,7 +885,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#ab85c046cc9902edf5e5d8fe07b9907b9">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00407">407</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00415">415</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -904,7 +925,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a37e7e6c1639f88cf6f60df66ba11b090">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00612">612</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00620">620</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -928,7 +949,7 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_core.html#a83cb34678490da59e27ebc41024708d8">VoodooShader::ICore</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00362">362</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00370">370</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
 </div>
 </div>
@@ -992,7 +1013,7 @@ Friends</h2></td></tr>
 
 <p>The current <a class="el" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a> implementation. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00096">96</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00098">98</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1009,7 +1030,7 @@ Friends</h2></td></tr>
 
 <p>Cg context used by this pCore. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00093">93</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00095">95</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1026,7 +1047,7 @@ Friends</h2></td></tr>
 
 <p>Config file. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00090">90</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00092">92</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1064,7 @@ Friends</h2></td></tr>
 
 <p>The current <a class="el" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a> implementation. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00105">105</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00107">107</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1060,7 +1081,7 @@ Friends</h2></td></tr>
 
 <p>The current <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function-level hooks, redirecting existing functions and calls int...">IHookManager</a> implementation. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00102">102</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00104">104</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1077,7 +1098,7 @@ Friends</h2></td></tr>
 
 <p>Default pass target texture for shader linker. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00120">120</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00122">122</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1094,7 +1115,7 @@ Friends</h2></td></tr>
 
 <p>Default technique target for shader linker. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00123">123</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00125">125</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1111,7 +1132,7 @@ Friends</h2></td></tr>
 
 <p>The current <a class="el" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a> implementation. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00099">99</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00101">101</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1128,7 +1149,7 @@ Friends</h2></td></tr>
 
 <p>The current module manager. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00108">108</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00110">110</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1145,7 +1166,7 @@ Friends</h2></td></tr>
 
 <p>Collection of all virtual parameters created by this pCore and used by the Cg context. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00117">117</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00119">119</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1162,7 +1183,7 @@ Friends</h2></td></tr>
 
 <p>The current variable parser. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00111">111</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00113">113</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1177,7 +1198,7 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00087">87</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00089">89</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1194,7 +1215,7 @@ Friends</h2></td></tr>
 
 <p>Collection of all usable textures. </p>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00114">114</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00116">116</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -1207,7 +1228,7 @@ Friends</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 21 2011 05:58:45 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 22 2011 06:49:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
