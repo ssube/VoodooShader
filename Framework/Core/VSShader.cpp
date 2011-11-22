@@ -565,12 +565,18 @@ namespace VoodooShader
         IFile * texFile = m_Core->GetFileSystem()->FindFile(texName);
         if (texFile)
         {
-            texture = new VSTexture(texFile->GetPath(), nullptr);
-            adapter->LoadTexture(texFile, &texRegion, texture.get());
-
-            if (!texture)
+            IImage * texImage = texFile->OpenImage();
+            if (texImage)
             {
-                m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Adapter was unable to load texture from file '%s'.", texFile->GetPath().GetData());
+                texture = new VSTexture(texFile->GetPath(), nullptr);
+                adapter->LoadTexture(texImage, &texRegion, texture.get());
+
+                if (!texture)
+                {
+                    m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Adapter was unable to load texture from file '%s'.", texFile->GetPath().GetData());
+                }
+            } else {
+                m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"File '%s' is not a valid image.", texFile->GetPath().GetData());
             }
         } else {
             m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Unable to find texture file '%s'.", texName.GetData());

@@ -72,8 +72,9 @@ namespace VoodooShader
          * @param ppOut A pointer to the new interface, passed as <code>void**</code>.
          * @return Success of the cast or uuid-fill.
          *
-         * @note If ppOut is a nullptr and clsid is a null Uuid (all zeros), clsid will be filled with the interface this
-         *      class implements.
+         * @note If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID.
+         * @note If ppOut is nullptr and clsid is @em not a null Uuid, this will simply check if the Uuid is allowed without
+         *      performing a cast.
          */
         virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
 

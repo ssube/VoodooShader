@@ -20,10 +20,8 @@
 
 #include "DX9_Module.hpp"
 
+#include "DX9_Adapter.hpp"
 #include "DX9_Version.hpp"
-
-#include "IVoodoo3D9.hpp"
-#include "IVoodoo3DDevice9.hpp"
 
 VoodooShader::ICore * gpVoodooCore = nullptr;
 
@@ -121,7 +119,7 @@ VoodooShader::IObject * CreateFunc(_In_ const uint32_t index, _In_ VoodooShader:
 {
     if (index == 0)
     {
-        return new DX9Adapter(pCore);
+        return new VoodooShader::VoodooDX9::DX9Adapter(pCore);
     } else {
         return nullptr;
     }
