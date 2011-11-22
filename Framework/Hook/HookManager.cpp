@@ -78,14 +78,14 @@ namespace VoodooShader
 
             LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
 
-            m_Core->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Created hook manager.", m_ThreadCount);
+            m_Core->GetLogger()->Log(LL_ModInfo, VOODOO_HOOK_NAME, L"Created hook manager.");
         }
 
         VSEHHookManager::~VSEHHookManager(void)
         {
             this->RemoveAll();
 
-            m_Core->GetLogger()->Log(LL_Info, VOODOO_HOOK_NAME, "Destroying hook manager.");
+            m_Core->GetLogger()->Log(LL_ModInfo, VOODOO_HOOK_NAME, L"Destroying hook manager.");
 
             delete[] m_ThreadIDs;
         }
@@ -152,13 +152,13 @@ namespace VoodooShader
 
             if (hook != m_Hooks.end())
             {
-                Throw(VOODOO_HOOK_NAME, "Attempted to create a hook with a duplicate name.", m_Core);
+                Throw(VOODOO_HOOK_NAME, L"Attempted to create a hook with a duplicate name.", m_Core);
             }
 
             m_Core->GetLogger()->Log
             (
-                LL_Debug, VOODOO_HOOK_NAME,
-                "Creating hook %s. Redirecting function %p to %p.",
+                LL_ModDebug, VOODOO_HOOK_NAME,
+                L"Creating hook %s. Redirecting function %p to %p.",
                 name.GetData(), pSrc, pDest
             );
 
@@ -169,8 +169,8 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Error, VOODOO_HOOK_NAME,
-                    "Error %u creating hook %s (%p, %p).",
+                    LL_ModError, VOODOO_HOOK_NAME,
+                    L"Error %u creating hook %s (%p, %p).",
                     result, name.GetData(), pSrc, pDest
                 );
 
@@ -190,7 +190,7 @@ namespace VoodooShader
         {
             HookMap::iterator hook = m_Hooks.find(name);
 
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_HOOK_NAME, L"Removing hook %s.", name.GetData());
+            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_HOOK_NAME, L"Removing hook %s.", name.GetData());
 
             if (hook != m_Hooks.end())
             {
@@ -203,8 +203,8 @@ namespace VoodooShader
                 {
                     m_Core->GetLogger()->Log
                     (
-                        LL_Error, VOODOO_HOOK_NAME,
-                        "Error %u removing hook %s.",
+                        LL_ModError, VOODOO_HOOK_NAME,
+                        L"Error %u removing hook %s.",
                         result, name.GetData()
                     );
 
@@ -221,7 +221,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Debug, VOODOO_HOOK_NAME,
+                    LL_ModDebug, VOODOO_HOOK_NAME,
                     L"Trying to remove hook %s (does not exist).", name.GetData()
                 );
                 return false;

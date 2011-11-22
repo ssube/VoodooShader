@@ -130,8 +130,8 @@ namespace VoodooShader
     )
     {
         UNREFERENCED_PARAMETER(level);
-        UNREFERENCED_PARAMETER(module);
-        UNREFERENCED_PARAMETER(msg);
+        UNREFERENCED_PARAMETER(source);
+        UNREFERENCED_PARAMETER(format);
     }
 
     void VSLogger::SetFlags(_In_ const LogFlags flush)

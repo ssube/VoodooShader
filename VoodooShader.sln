@@ -119,6 +119,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{23A5
 		Server\Xml\example\ExampleRemoteManifest.xml = Server\Xml\example\ExampleRemoteManifest.xml
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VoodooTest_DX9", "Tests\Scenarios\VoodooTest_DX9\VoodooTest_DX9.vcxproj", "{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -357,6 +359,18 @@ Global
 		{16385453-ABDD-487B-B407-89A0406A2B44}.Release|Win32.ActiveCfg = Release|Win32
 		{16385453-ABDD-487B-B407-89A0406A2B44}.Release|Win32.Build.0 = Release|Win32
 		{16385453-ABDD-487B-B407-89A0406A2B44}.Release|x86.ActiveCfg = Release|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Debug|Win32.Build.0 = Debug|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Debug|x86.ActiveCfg = Debug|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Release|Any CPU.ActiveCfg = Release|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Release|Win32.ActiveCfg = Release|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Release|Win32.Build.0 = Release|Win32
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Release|x86.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -384,14 +398,15 @@ Global
 		{B91FB76A-9A30-4341-A843-63CD4B5325AE} = {B139D769-4776-43F5-8781-57414C65622A}
 		{874A9DE8-1B4B-4DFA-A095-CADA7AF0FB4C} = {56BA7D8B-35C5-4F58-A45A-21CCC68232A0}
 		{16385453-ABDD-487B-B407-89A0406A2B44} = {56BA7D8B-35C5-4F58-A45A-21CCC68232A0}
+		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443} = {56BA7D8B-35C5-4F58-A45A-21CCC68232A0}
 		{E4986B05-A425-45A3-92EB-24A10A3287AD} = {874A9DE8-1B4B-4DFA-A095-CADA7AF0FB4C}
 		{487C384B-0E7D-4E24-A99F-8E3C8E3EDA4A} = {6570AF71-066B-4A34-94CC-AA6E38AB20E5}
 		{23A55269-F7A0-48AF-9392-6A3CA217BE37} = {487C384B-0E7D-4E24-A99F-8E3C8E3EDA4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

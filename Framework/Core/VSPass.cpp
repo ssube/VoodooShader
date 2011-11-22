@@ -185,9 +185,9 @@ namespace VoodooShader
                 {
                     m_Core->GetLogger()->Log
                     (
-                        LL_Warning,
+                        LL_CoreWarn,
                         VOODOO_CORE_NAME,
-                        L"IPass %s cannot find target %s.",
+                        L"IPass %s cannot find target %S.",
                         this->ToString().GetData(),
                         targetName
                     );
@@ -197,7 +197,7 @@ namespace VoodooShader
             } else {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Warning,
+                    LL_CoreWarn,
                     VOODOO_CORE_NAME,
                     L"IPass %s has annotation \"target\" of invalid type.",
                     this->ToString().GetData()
@@ -208,7 +208,7 @@ namespace VoodooShader
         } else {
             m_Core->GetLogger()->Log
             (
-                LL_Debug,
+                LL_CoreDebug,
                 VOODOO_CORE_NAME,
                 L"IPass %s has no target annotation.",
                 this->ToString().GetData()
@@ -225,7 +225,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->Log
             (
-                LL_Warning,
+                LL_CoreWarn,
                 VOODOO_CORE_NAME,
                 L"No adapter found, pass %s must be explicitly loaded later.",
                 this->ToString().GetData()
@@ -237,7 +237,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Error,
+                    LL_CoreError,
                     VOODOO_CORE_NAME,
                     L"Failed to load pass %s.",
                     this->ToString().GetData()
@@ -247,7 +247,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Info,
+                    LL_CoreInfo,
                     VOODOO_CORE_NAME,
                     L"Successfully loaded pass %s.",
                     this->ToString().GetData()

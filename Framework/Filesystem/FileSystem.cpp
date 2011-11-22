@@ -107,7 +107,7 @@ namespace VoodooShader
 
             // Load paths from the config
             xml_document *config = (xml_document *) m_Core->GetConfig();
-            xpath_query pathsQuery(L"/VoodooConfig/WFileSystem/SearchPaths/Path");
+            xpath_query pathsQuery(L"/VoodooConfig/VSWFileSystem/SearchPaths/Path");
             xpath_query pathValueQuery(L"./text()");
             xpath_node_set pathNodes = pathsQuery.evaluate_node_set(*config);
             xpath_node_set::const_iterator pathIter = pathNodes.begin();
@@ -217,13 +217,13 @@ namespace VoodooShader
 
         IFile * VSWFileSystem::FindFile(const String & name) const
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_FILESYSTEM_NAME, L"Searching for raw file \"%s\".", name.GetData());
+            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FILESYSTEM_NAME, L"Searching for raw file \"%s\".", name.GetData());
 
             String filename = m_Core->GetParser()->Parse(name);
 
             m_Core->GetLogger()->Log
             (
-                LL_Debug,
+                LL_ModDebug,
                 VOODOO_FILESYSTEM_NAME,
                 L"Searching for parsed file \"%s\".",
                 filename.GetData()
@@ -236,6 +236,13 @@ namespace VoodooShader
                 // Try to find the file in each registered dir
                 String fullname = (*curDir) + L"\\" + filename;
 
+                m_Core->GetLogger()->Log
+                (
+                    LL_ModDebug, VOODOO_CORE_NAME,
+                    L"Checking file '%s'.",
+                    fullname.GetData()
+                );
+
                 HANDLE file = CreateFile(fullname.GetData(), 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 
                 if (file != INVALID_HANDLE_VALUE)
@@ -244,7 +251,7 @@ namespace VoodooShader
 
                     m_Core->GetLogger()->Log
                     (
-                        LL_Debug, VOODOO_CORE_NAME,
+                        LL_ModDebug, VOODOO_CORE_NAME,
                         L"File %s found in directory %s.",
                         name.GetData(), (*curDir).GetData()
                     );
@@ -255,7 +262,7 @@ namespace VoodooShader
                 ++curDir;
             }
 
-            m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, "Unable to find file %s.", name.GetData());
+            m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_CORE_NAME, L"Unable to find file %s.", name.GetData());
 
             return nullptr;
         }
@@ -347,7 +354,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Warning, VOODOO_FILESYSTEM_NAME,
+                    LL_ModWarn, VOODOO_FILESYSTEM_NAME,
                     L"Attempted to open file '%s' with unknown mode (%X).",
                     m_Path.GetData(), mode
                 );
@@ -356,7 +363,7 @@ namespace VoodooShader
 
             m_Core->GetLogger()->Log
             (
-                LL_Debug, VOODOO_FILESYSTEM_NAME,
+                LL_ModDebug, VOODOO_FILESYSTEM_NAME,
                 L"Opening file %s with mode %u (underlying %u).",
                 m_Path.GetData(), mode, access
             );
@@ -365,7 +372,7 @@ namespace VoodooShader
 
             if (m_Handle == INVALID_HANDLE_VALUE)
             {
-                m_Core->GetLogger()->Log(LL_Warning, VOODOO_FILESYSTEM_NAME, L"Unable to open file %s.", m_Path.GetData());
+                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FILESYSTEM_NAME, L"Unable to open file %s.", m_Path.GetData());
             }
 
             return (m_Handle != INVALID_HANDLE_VALUE);
@@ -435,7 +442,7 @@ namespace VoodooShader
 
                     if (count < 0)
                     {
-                        Throw(VOODOO_FILESYSTEM_NAME, "Unable to write a negative number of nullptr bytes.", m_Core);
+                        Throw(VOODOO_FILESYSTEM_NAME, L"Unable to write a negative number of nullptr bytes.", m_Core);
                     }
                     else
                     {
@@ -446,7 +453,7 @@ namespace VoodooShader
 
                     if (buffer == nullptr)
                     {
-                        Throw(VOODOO_FILESYSTEM_NAME, "Error allocating memory for nullptr buffer.", m_Core);
+                        Throw(VOODOO_FILESYSTEM_NAME, L"Error allocating memory for nullptr buffer.", m_Core);
                     }
 
                     memset(buffer, 0, size);
@@ -473,7 +480,7 @@ namespace VoodooShader
                 {
                     if (count < 0)
                     {
-                        Throw(VOODOO_FILESYSTEM_NAME, "Unable to write a negative nubber of bytes.", m_Core);
+                        Throw(VOODOO_FILESYSTEM_NAME, L"Unable to write a negative nubber of bytes.", m_Core);
                     }
 
                     DWORD size = (DWORD) count;
@@ -557,8 +564,8 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Warning, VOODOO_FILESYSTEM_NAME,
-                    "Unable to resolve format for image %s (%u).",
+                    LL_ModWarn, VOODOO_FILESYSTEM_NAME,
+                    L"Unable to resolve format for image %s (%u).",
                     name.GetData(), image
                 );
             }
@@ -664,8 +671,8 @@ namespace VoodooShader
             default:
                 m_Core->GetLogger()->Log
                 (
-                    LL_Warning, VOODOO_FILESYSTEM_NAME,
-                    "Invalid texture format for getting image data (%X).",
+                    LL_ModWarn, VOODOO_FILESYSTEM_NAME,
+                    L"Invalid texture format for getting image data (%X).",
                     pDesc->Format
                 );
                 return 0;

@@ -113,7 +113,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Warning,
+                    LL_CoreWarn,
                     VOODOO_CORE_NAME,
                     L"No files found in directory %s.",
                     path.GetData()
@@ -121,7 +121,7 @@ namespace VoodooShader
 
                 return false;
             } else {
-                m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Error searching directory %s.", path.GetData());
+                m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, L"Error searching directory %s.", path.GetData());
 
                 return false;
             }
@@ -168,7 +168,7 @@ namespace VoodooShader
         {
             if (logger.get())
             {
-                logger->Log(LL_Error, VOODOO_CORE_NAME, L"Unable to load module %s.", filename.GetData());
+                logger->Log(LL_CoreError, VOODOO_CORE_NAME, L"Unable to load module %s.", filename.GetData());
             }
 
             return false;
@@ -183,7 +183,7 @@ namespace VoodooShader
         {
             logger->Log
             (
-                LL_Warning,
+                LL_CoreWarn,
                 VOODOO_CORE_NAME,
                 L"Debug build mismatch with module %s.",
                 moduleversion->Name
@@ -282,7 +282,7 @@ namespace VoodooShader
                 {
                     logger->Log
                     (
-                        LL_Error,
+                        LL_CoreError,
                         VOODOO_CORE_NAME,
                         L"Error creating instance of class %s.",
                         String(clsid).GetData()
@@ -294,7 +294,7 @@ namespace VoodooShader
         } else {
             if (logger)
             {
-                logger->Log(LL_Error, VOODOO_CORE_NAME, L"Class %s not found.", String(clsid).GetData());
+                logger->Log(LL_CoreError, VOODOO_CORE_NAME, L"Class %s not found.", String(clsid).GetData());
             }
 
             return nullptr;

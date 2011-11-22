@@ -100,14 +100,13 @@ namespace VoodooShader
 
     void VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType Type)
     {
-
         ILoggerRef logger = m_Core->GetLogger();
 
         if (logger)
         {
             logger->Log
             (
-                LL_Debug,
+                LL_CoreDebug,
                 VOODOO_CORE_NAME,
                 L"Adding variable \"%s\" with value \"%s\".",
                 name.GetData(),
@@ -131,7 +130,7 @@ namespace VoodooShader
                 {
                     logger->Log
                     (
-                        LL_Warning,
+                        LL_CoreWarn,
                         VOODOO_CORE_NAME,
                         L"Unable to add duplicate system variable \"%s\".",
                         finalname.GetData()
@@ -151,7 +150,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"Removing variable \"%s\".", name.GetData());
+            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Removing variable \"%s\".", name.GetData());
         }
 
         String finalname = this->Parse(name, PF_None);
@@ -176,7 +175,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"Parsing string \"%s\" (%X).", input.GetData(), flags);
+            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Parsing string \"%s\" (%X).", input.GetData(), flags);
         }
 
         if (depth > VSParser::VarMaxDepth || input.GetLength() < 3)
@@ -437,7 +436,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            logger->Log(LL_Debug, VOODOO_CORE_NAME, L"Returning string %s from parser.", iteration.GetData());
+            logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Returning string %s from parser.", iteration.GetData());
         }
 
         return iteration;

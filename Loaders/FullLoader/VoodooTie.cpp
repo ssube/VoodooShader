@@ -71,8 +71,11 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
     }
     else if (fdwReason == DLL_PROCESS_DETACH)
     {
-        return (BOOL)UnloadVoodoo();
+        UnloadVoodoo();
+        //return (BOOL)UnloadVoodoo();
     }
+
+    return TRUE;
 }
 
 /**
@@ -80,12 +83,13 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
  */
 bool WINAPI LoadVoodoo()
 {
+    wchar_t pathConfig[MAX_PATH];
     wchar_t pathGlobalRoot[MAX_PATH];
+    wchar_t pathLoader[MAX_PATH];
     wchar_t pathLocalRoot[MAX_PATH];
     wchar_t pathRunRoot[MAX_PATH];
     wchar_t pathTarget[MAX_PATH];
-    wchar_t pathLoader[MAX_PATH];
-    wchar_t pathConfig[MAX_PATH];
+
     wchar_t pathCoreLib[MAX_PATH];
     TCHAR buffer[MAX_PATH];
 
@@ -136,7 +140,7 @@ bool WINAPI LoadVoodoo()
         return false;
     }
 
-    std::wstring targetModule = targetPath.substr(pos);
+    std::wstring targetModule = targetPath.substr(pos+1);
     targetPath = targetPath.substr(0, pos);
     wcscpy_s(pathTarget, targetModule.c_str());
     wcscpy_s(pathLocalRoot, targetPath.c_str());
@@ -151,34 +155,33 @@ bool WINAPI LoadVoodoo()
 
         if (keyOpen != ERROR_SUCCESS)
         {
-            MessageBox
-            (
-                nullptr, L"Voodoo Loader: Unable to find Voodoo registry key.", L"Loader Error", MB_ICONERROR | MB_OK
-            );
+            ErrorMessage(L"Voodoo Loader: Unable to find Voodoo registry key.");
             return false;
         }
     }
 
     DWORD valueType = REG_NONE, valueSize = MAX_PATH;
-    LONG valueQuery = RegQueryValueEx(keyVoodoo, L"Path", nullptr, &valueType, (BYTE *)pathGlobalRoot, &valueSize);
+    LONG valueQuery = RegQueryValueEx(keyVoodoo, L"path", nullptr, &valueType, (BYTE *)pathGlobalRoot, &valueSize);
 
     if (valueQuery != ERROR_SUCCESS || valueType == REG_NONE)
     {
-        MessageBox
+        ErrorMessage
         (
-            nullptr, L"Voodoo Loader: Unable to retrieve path from registry.", L"Loader Error", MB_ICONERROR | MB_OK
+            L"Voodoo Loader: Unable to retrieve Voodoo root from the registry (error %d).", valueQuery
         );
         return false;
     }
 
+    HMODULE coreLibrary = nullptr;
+        
     wcscpy_s(pathCoreLib, pathGlobalRoot);
-    wcscpy_s(pathCoreLib, L"\\bin\\Voodoo_Core.dll");
+    wcscat_s(pathCoreLib, L"\\bin\\Voodoo_Core.dll");
 
-    HMODULE coreLibrary = LoadLibraryEx(pathCoreLib, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
+    coreLibrary = LoadLibraryEx(pathCoreLib, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
 
     if (!coreLibrary)
     {
-        MessageBox(nullptr, L"Voodoo Loader: Unable to load core DLL.", L"Loader Error", MB_ICONERROR | MB_OK);
+        ErrorMessage(L"Voodoo Loader: Unable to load core DLL.");
         return false;
     }
 
@@ -186,9 +189,16 @@ bool WINAPI LoadVoodoo()
 
     if (createFunc == nullptr)
     {
-        MessageBox(nullptr, L"Voodoo Loader: Unable to find core create function.", L"Loader Error", MB_ICONERROR | MB_OK);
+        ErrorMessage(L"Voodoo Loader: Unable to find core create function.");
         return false;
     }
+
+    gInitParams.Config = pathConfig;
+    gInitParams.GlobalRoot = pathGlobalRoot;
+    gInitParams.Loader = pathLoader;
+    gInitParams.LocalRoot = pathLocalRoot;
+    gInitParams.RunRoot = pathRunRoot;
+    gInitParams.Target = pathTarget;
 
     try
     {
@@ -196,10 +206,7 @@ bool WINAPI LoadVoodoo()
     }
     catch(const std::exception & exc)
     {
-        wchar_t message[1024];
-        wsprintf(message, L"Error details: %S", exc.what());
-
-        MessageBox(nullptr, message, L"Loader Error", MB_ICONERROR | MB_OK);
+        ErrorMessage(L"Error details: %S", exc.what());
 
         gVoodooCore = nullptr;
     }
@@ -213,6 +220,6 @@ bool WINAPI UnloadVoodoo(void)
     {
         return (gVoodooCore->Release() == 0);
     } else {
-        return false;
+        return true;
     }
 }

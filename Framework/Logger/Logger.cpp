@@ -288,7 +288,7 @@ namespace VoodooShader
                 logMsg << "</Message>\n";
 
 #ifdef _DEBUG
-                if (level & (LL_Warning | LL_Error))
+                if (level & (LL_ModWarn | LL_ModError))
                 {
                     OutputDebugString(logMsg.str().c_str());
                 }
@@ -298,10 +298,14 @@ namespace VoodooShader
 #endif
                 m_LogFile << logMsg.str();
 
+#ifdef _DEBUG
+                m_LogFile << endl;
+#else
                 if (m_Flags & LF_Flush)
                 {
-                    m_LogFile << flush;
+                    m_LogFile << endl;
                 }
+#endif
             }
             catch(const std::exception & exc)
             {

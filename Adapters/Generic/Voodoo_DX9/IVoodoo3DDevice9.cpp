@@ -138,7 +138,7 @@ namespace VoodooShader
             CONST RGNDATA * pDirtyRegion
         )
         {
-            if (gpVoodooCore)
+            if (gpVoodooCore && testShader)
             {
                 ILoggerRef logger = gpVoodooCore->GetLogger();
                 IAdapterRef adapter = gpVoodooCore->GetAdapter();

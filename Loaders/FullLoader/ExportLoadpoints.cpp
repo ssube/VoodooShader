@@ -62,6 +62,7 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
     if (LoadVoodoo())
     {
         VoodooShader::Variant D3DObj;
+        D3DObj.Type = VoodooShader::UT_PVoid;
         D3DObj.Value.VPVoid = pD3D8;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D8", D3DObj);
@@ -85,6 +86,7 @@ void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
     if (LoadVoodoo())
     {
         VoodooShader::Variant D3DObj;
+        D3DObj.Type = VoodooShader::UT_PVoid;
         D3DObj.Value.VPVoid = pD3D9;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9", D3DObj);
@@ -127,6 +129,7 @@ HRESULT WINAPI VoodooInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID riidl
     if (SUCCEEDED(result) && LoadVoodoo())
     {
         VoodooShader::Variant DIObj;
+        DIObj.Type = VoodooShader::UT_PVoid;
         DIObj.Value.VPVoid = i8obj;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirectInput8", DIObj);
@@ -182,6 +185,7 @@ HRESULT WINAPI VoodooInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplp
     if (SUCCEEDED(result) && LoadVoodoo())
     {
         VoodooShader::Variant DIObj;
+        DIObj.Type = VoodooShader::UT_PVoid;
         DIObj.Value.VPVoid = iaobj;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputA", DIObj);
@@ -204,6 +208,7 @@ HRESULT WINAPI VoodooInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplp
     if (SUCCEEDED(result) && LoadVoodoo())
     {
         VoodooShader::Variant DIObj;
+        DIObj.Type = VoodooShader::UT_PVoid;
         DIObj.Value.VPVoid = iwobj;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputW", DIObj);
@@ -247,6 +252,7 @@ HRESULT WINAPI VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID 
     if (SUCCEEDED(result) && LoadVoodoo())
     {
         VoodooShader::Variant DSObj;
+        DSObj.Type = VoodooShader::UT_PVoid;
         DSObj.Value.VPVoid = s8obj;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirectSound8", DSObj);

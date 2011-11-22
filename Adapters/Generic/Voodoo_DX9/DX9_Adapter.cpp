@@ -125,7 +125,7 @@ namespace VoodooShader
                     logger->Log
                     (
                         LL_ModError, VOODOO_DX9_NAME, 
-                        "Error loading vertex program from '%s': %d.\n",
+                        L"Error loading vertex program from '%s': %d.\n",
                         pass->GetName().GetData(),
                         hr
                     );
@@ -142,7 +142,7 @@ namespace VoodooShader
                     logger->Log
                     (
                         LL_ModError, VOODOO_DX9_NAME,
-                        "Error loading fragment program from '%s': %d.\n",
+                        L"Error loading fragment program from '%s': %d.\n",
                         pass->GetName().GetData(),
                         hr
                     );
@@ -150,7 +150,7 @@ namespace VoodooShader
                 }
             }
 
-            logger->Log(LL_ModError, VOODOO_DX9_NAME, "Successfully loaded programs from '%s'.", pass->GetName().GetData());
+            logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Successfully loaded programs from '%s'.", pass->GetName().GetData());
             return true;
         }
 
@@ -178,7 +178,7 @@ namespace VoodooShader
                     logger->Log
                         (
                         LL_ModError, VOODOO_DX9_NAME, 
-                        "Error loading vertex program from '%s': %d.\n",
+                        L"Error loading vertex program from '%s': %d.\n",
                         pass->GetName().GetData(),
                         hr
                         );
@@ -195,7 +195,7 @@ namespace VoodooShader
                     logger->Log
                         (
                         LL_ModError, VOODOO_DX9_NAME,
-                        "Error loading fragment program from '%s': %d.\n",
+                        L"Error loading fragment program from '%s': %d.\n",
                         pass->GetName().GetData(),
                         hr
                         );

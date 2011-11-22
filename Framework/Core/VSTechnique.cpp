@@ -161,9 +161,9 @@ namespace VoodooShader
                 {
                     m_Core->GetLogger()->Log
                     (
-                        LL_Warning,
+                        LL_CoreWarn,
                         VOODOO_CORE_NAME,
-                        L"IPass %s cannot find target %s.",
+                        L"IPass %s cannot find target %S.",
                         this->ToString().GetData(),
                         targetName
                     );
@@ -175,7 +175,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->Log
                 (
-                    LL_Warning,
+                    LL_CoreWarn,
                     VOODOO_CORE_NAME,
                     L"IPass %s has annotation \"target\" of invalid type.",
                     this->ToString().GetData()
@@ -188,7 +188,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->Log
             (
-                LL_Debug,
+                LL_CoreDebug,
                 VOODOO_CORE_NAME,
                 L"IPass %s has no target annotation.",
                 this->ToString().GetData()

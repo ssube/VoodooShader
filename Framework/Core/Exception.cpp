@@ -51,7 +51,7 @@ namespace VoodooShader
 
             if (logger)
             {
-                logger->Log(LL_Error, module, ExceptionLogMsg, file, function, line, message);
+                logger->Log(LL_CoreError, module, ExceptionLogMsg, file, function, line, message);
             }
         }
     }
@@ -81,7 +81,7 @@ namespace VoodooShader
             {
                 logger->Log
                 (
-                    LL_Error,
+                    LL_CoreError,
                     module.GetData(),
                     ExceptionLogMsg,
                     file,

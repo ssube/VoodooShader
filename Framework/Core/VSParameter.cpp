@@ -37,7 +37,7 @@ namespace VoodooShader
     {
         m_Core->GetLogger()->Log
         (
-            LL_Debug,
+            LL_CoreDebug,
             VOODOO_CORE_NAME,
             L"Creating a virtual parameter (%s, core %p) of type %s.",
             name.GetData(), m_Core, Converter::ToString(type)
@@ -67,7 +67,7 @@ namespace VoodooShader
 
     VSParameter::~VSParameter(void)
     {
-        m_Core->GetLogger()->Log(LL_Debug, VOODOO_CORE_NAME, L"Destroying parameter %s.", m_Name.GetData());
+        m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Destroying parameter %s.", m_Name.GetData());
 
         if (m_Virtual && cgIsParameter(m_Param))
         {
@@ -152,7 +152,7 @@ namespace VoodooShader
             return false;
         } else if (!m_Virtual)
         {
-            m_Core->GetLogger()->Log(LL_Warning, VOODOO_CORE_NAME, L"Cannot attach to a non-virtual parameter (%s to %s).", pParam->ToString().GetData(), this->ToString().GetData());
+            m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, L"Cannot attach to a non-virtual parameter (%s to %s).", pParam->ToString().GetData(), this->ToString().GetData());
             return false;
         }
 
