@@ -134,7 +134,7 @@ namespace VoodooShader
         return false;
     }
 
-    bool VSAdapter::LoadTexture(IFile * const pFile, const TextureRegion * const pRegion, ITexture * const pTexture)
+    bool VSAdapter::LoadTexture(IImage * const pFile, const TextureRegion * const pRegion, ITexture * const pTexture)
     {
         UNREFERENCED_PARAMETER(pFile);
         UNREFERENCED_PARAMETER(pRegion);

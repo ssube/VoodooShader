@@ -62,7 +62,7 @@ namespace VoodooShader
         virtual bool SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
         virtual ITexture * GetTarget(_In_ const uint32_t index) const;
         virtual bool CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture);
-        virtual bool LoadTexture(_In_ IFile * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture);
+        virtual bool LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture);
         virtual bool DrawGeometry
         (
             _In_ const uint32_t count, 

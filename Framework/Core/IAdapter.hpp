@@ -154,11 +154,11 @@ namespace VoodooShader
          * Loads a named texture into the API and registers it with the Core. The texture source is provided here and all
          * dimensions should be drawn from that, with as little conversion as possible.
          *
-         * @param pFile The file to load.
+         * @param pImage The image to load.
          * @param pRegion The region of the file that should be used.
          * @return The texture, if successfully created. A nullptr otherwise.
          */
-        virtual bool LoadTexture(_In_ IFile * const pFile, _In_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture) throw() = 0;
+        virtual bool LoadTexture(_In_ IImage * const pImage, _In_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture) throw() = 0;
 
         /**
          * Draws geometry from system memory.

@@ -566,7 +566,7 @@ namespace VoodooShader
     {
         Float4 Position;
         Float4 Color;
-        Float4 TexCoord;
+        Float4 TexCoord[2];
     };
 
     /**

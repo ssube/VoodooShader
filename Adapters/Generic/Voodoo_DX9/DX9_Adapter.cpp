@@ -315,8 +315,9 @@ namespace VoodooShader
             }
         }
 
-        bool DX9Adapter::LoadTexture(_In_ IFile * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
+        bool DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
         {
+            //! @todom Load texture data into memory.
             return this->CreateTexture(pFile->GetPath(), reinterpret_cast<const TextureDesc *>(pRegion), pTexture);
         }
 
@@ -449,6 +450,7 @@ namespace VoodooShader
 
         bool DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error)
         {
+            //! @todo Handle errors as needed.
             return false;
         }
 
