@@ -19,9 +19,13 @@
  */
 #pragma once
 
-#include "D3D9.h"
-#include "Cg/cgD3D9.h"
+#define VOODOO_IMPORT
+#define VOODOO_NO_PUGIXML
+#include "VoodooFramework.hpp"
 
+#include "D3D9.h"
+
+#include "Cg/cgD3D9.h"
 #pragma comment(lib, "cgD3D9.lib")
 
 #ifndef VOODOO_IMPORT_DX9
@@ -29,16 +33,23 @@
 #else
 #define VOODOO_API_DX9 __declspec(dllimport)
 #endif
-#include "DX9_Adapter.hpp"
 
-class IVoodoo3D9;
-class IVoodoo3DDevice9;
+namespace VoodooShader
+{
+    namespace VoodooDX9
+    {
+        class DX9Adapter;
+
+        class IVoodoo3D9;
+        class IVoodoo3DDevice9;
+    }
+}
 
 extern VoodooShader::ICore * gpVoodooCore;
 extern VoodooShader::IAdapter * VoodooDX9;
 
-extern IVoodoo3D9 *VoodooObject;
-extern IVoodoo3DDevice9 *VoodooDevice;
+extern VoodooShader::VoodooDX9::IVoodoo3D9 *VoodooObject;
+extern VoodooShader::VoodooDX9::IVoodoo3DDevice9 *VoodooDevice;
 
 extern VoodooShader::IShader* testShader;
 

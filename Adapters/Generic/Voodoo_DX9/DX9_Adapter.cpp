@@ -330,14 +330,22 @@ namespace VoodooShader
             IDirect3DVertexBuffer9 * sourceBuffer;
             UINT sourceOffset, sourceStride;
             DWORD sourceFVF, zEnabled, aEnabled, cullMode;
+            IDirect3DVertexDeclaration9 * sourceDecl;
 
             m_Device->GetStreamSource(0, &sourceBuffer, &sourceOffset, &sourceStride);
+            m_Device->GetVertexDeclaration(&sourceDecl);
             m_Device->GetFVF(&sourceFVF);
             m_Device->GetRenderState(D3DRS_ZENABLE, &zEnabled);
             m_Device->GetRenderState(D3DRS_ALPHABLENDENABLE, &aEnabled);
             m_Device->GetRenderState(D3DRS_CULLMODE, &cullMode);
 
-            m_Device->SetFVF(D3DFVF_CUSTOMVERTEX);
+            if (flags & VF_Transformed)
+            {
+                m_Device->SetVertexDeclaration(m_VertDeclT);
+            } else {
+                m_Device->SetVertexDeclaration(m_VertDecl);
+            }
+            m_Device->SetFVF(0);
             m_Device->SetRenderState(D3DRS_ZENABLE, FALSE);
             m_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
             m_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
@@ -366,6 +374,7 @@ namespace VoodooShader
             }
 
             m_Device->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);
+            m_Device->SetVertexDeclaration(sourceDecl);
             m_Device->SetFVF(sourceFVF);
             m_Device->SetRenderState(D3DRS_ZENABLE, zEnabled);
             m_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
@@ -449,17 +458,13 @@ namespace VoodooShader
             {
                 return true;
             }
-            else if (pDevice == nullptr)
+            else if (pDevice == nullptr || (pDevice && m_Device))
             {
-                if (m_Device)
-                {
-                    m_Device->Release();
-                }
-                return true;
-            }
-            else if (m_Device)
-            {
-                m_Device->Release();
+                if (m_Device) m_Device->Release();
+                if (m_VertDecl) m_VertDecl->Release();
+                if (m_VertDeclT) m_VertDeclT->Release();
+
+                if (!pDevice) return true;
             }
 
             m_Device = pDevice;
@@ -514,6 +519,32 @@ namespace VoodooShader
             m_Device->GetViewport(&viewport);
 
             logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Prepping for %d by %d target.", viewport.Width, viewport.Height);
+
+            // Create vertex declaration
+            D3DVERTEXELEMENT9 vertDeclElems[] =
+            {
+                { 0,  0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+                { 0, 16, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
+                { 0, 32, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+                { 0, 48, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+                D3DDECL_END
+            };
+
+            errors = m_Device->CreateVertexDeclaration(vertDeclElems, &m_VertDecl);
+
+            if (!SUCCEEDED(errors))
+            {
+                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Unable to create standard vertex declaration.");
+            }
+
+            vertDeclElems[0].Usage = D3DDECLUSAGE_POSITIONT;
+
+            errors = m_Device->CreateVertexDeclaration(vertDeclElems, &m_VertDeclT);
+
+            if (!SUCCEEDED(errors))
+            {
+                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Unable to create transformed vertex declaration.");
+            }
         }
     }
 }

@@ -19,13 +19,7 @@
  */
 #pragma once
 
-#define VOODOO_IMPORT
-#define VOODOO_NO_PUGIXML
-#include "VoodooFramework.hpp"
-
-#include "Cg/cgD3D9.h"
-
-#include "D3D9.h"
+#include "DX9_Module.hpp"
 
 namespace VoodooShader
 {
@@ -74,6 +68,7 @@ namespace VoodooShader
 
             IDirect3DDevice9 * m_Device;
             IDirect3DVertexDeclaration9 * m_VertDecl;
+            IDirect3DVertexDeclaration9 * m_VertDeclT;
 
             IPassRef m_BoundPass;
 

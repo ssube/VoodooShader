@@ -25,47 +25,6 @@ namespace VoodooShader
  namespace DirectX9
 {
 
- /**
-  *
-  */
- Adapter::Adapter(ICore *core, IDirect3DDevice9 *device) :
-  mCore(core),
-  mDevice(device)
- {
-  assert(device);
-
-  if (!core)
-  {
-   core = VoodooShader::ICore::Create();
-  }
-
-  core->Log("Voodoo DX9: Starting adapter...\n");
-
-  try
-  {
-   core->SetAdapter(reinterpret_cast < VoodooShader::Adapter * > (this));
-   core->Log("Voodoo DX9: ICore adapter set to this.\n");
-  }
-  catch(std::exception & exc)
-  {
-   core->Log("Voodoo DX9: Error setting adapter on core: %s.\n", exc.what());
-  }
-
-  HRESULT hr = cgD3D9SetDevice(device);
-
-  if (!SUCCEEDED(hr))
-  {
-   Throw("Voodoo DX9: Could not set Cg device.", core);
-  }
-  else
-  {
-   core->Log("Voodoo DX9: Set Cg device.\n");
-  }
-
-  // ifdef _DEBUG
-
-
-
   hr = this->mDevice->CreateVertexBuffer
    (
     6 * sizeof(FSVert),
