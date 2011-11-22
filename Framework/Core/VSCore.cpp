@@ -54,15 +54,15 @@ namespace VoodooShader
 
     ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, bool catchErrors)
     {
-        ICore * pCore = nullptr;
+        VSCore * pCore = new VSCore();
 
         if (!catchErrors)
         {
-            pCore = new VSCore(pInitParams);
+            pCore->Initialize(pInitParams);
         } else {
             try
             {
-                pCore = new VSCore(pInitParams);
+                pCore->Initialize(pInitParams);
             } catch(const std::exception & exc) {
                 UNREFERENCED_PARAMETER(exc);
 
@@ -77,13 +77,9 @@ namespace VoodooShader
         return pCore;
     }
 
-    VSCore::VSCore(_In_ const InitParams * const pInitParams) :
+    VSCore::VSCore() :
         m_Refs(0), m_ConfigFile(nullptr), m_CgContext(nullptr)
-    {
-        if (!pInitParams)
-        {
-            Throw(VOODOO_CORE_NAME, L"No init parameters provided.", nullptr);
-        }
+    { 
 
 #ifdef VSF_DEBUG_MEMORY
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -96,6 +92,14 @@ namespace VoodooShader
         // Set up the internal objects
         m_ModuleManager = new VSModuleManager(this);
         m_Parser = new VSParser(this);
+    };
+
+    bool VSCore::Initialize(_In_ const InitParams * const pInitParams)
+    {
+        if (!pInitParams)
+        {
+            Throw(VOODOO_CORE_NAME, L"No init parameters provided.", nullptr);
+        }
 
         // Load variables, built-in first
         m_Parser->Add(L"globalroot", pInitParams->GlobalRoot, VT_System);
@@ -186,8 +190,8 @@ namespace VoodooShader
 
                 while (iter != nodes.end())
                 {
-                    String filter = m_Parser->Parse(xpq_getFilter.evaluate_string(*iter).c_str());
-                    String path = m_Parser->Parse(xpq_getText.evaluate_string(*iter).c_str());
+                    String filter = xpq_getFilter.evaluate_string(*iter);
+                    String path = xpq_getText.evaluate_string(*iter);
 
                     m_ModuleManager->LoadPath(path, filter);
 
@@ -202,7 +206,7 @@ namespace VoodooShader
 
                 while (iter != nodes.end())
                 {
-                    String file = m_Parser->Parse(xpq_getText.evaluate_string(*iter).c_str());
+                    String file = xpq_getText.evaluate_string(*iter);
 
                     m_ModuleManager->LoadFile(file);
 
@@ -215,27 +219,29 @@ namespace VoodooShader
             pugi::xpath_query fsQuery(L"/VoodooConfig/Core/Class/FileSystem/text()");
             pugi::xpath_query hookQuery(L"/VoodooConfig/Core/Class/HookManager/text()");
             pugi::xpath_query adpQuery(L"/VoodooConfig/Core/Class/Adapter/text()");
-            pugi::xpath_query logfQuery(L"/VoodooConfig/Core/Class/Logger/@file");
-            pugi::xpath_query loglQuery(L"/VoodooConfig/Core/Class/Logger/@level");
             String logClass = m_Parser->Parse(logQuery.evaluate_string(configRoot).c_str());
             String fsClass = m_Parser->Parse(fsQuery.evaluate_string(configRoot).c_str());
             String hookClass = m_Parser->Parse(hookQuery.evaluate_string(configRoot).c_str());
             String adpClass = m_Parser->Parse(adpQuery.evaluate_string(configRoot).c_str());
-            String logFile = m_Parser->Parse(logfQuery.evaluate_string(configRoot).c_str());
-            
-            LogLevel logLevel = LL_Initial;
-            try
-            {
-                logLevel = (LogLevel)boost::lexical_cast<int32_t>(loglQuery.evaluate_string(configRoot));
-            } catch (const boost::bad_lexical_cast & exc) {
-                UNREFERENCED_PARAMETER(exc);
-            }
 
             // Make sure a logger was loaded
             m_Logger = dynamic_cast<ILogger*>(m_ModuleManager->CreateObject(logClass));
             if (m_Logger.get() == nullptr)
             {
                 Throw(VOODOO_CORE_NAME, L"Unable to create Logger object (class not found).", nullptr);
+            }
+
+            pugi::xpath_query logfQuery(L"/VoodooConfig/Logger/File/text()");
+            pugi::xpath_query loglQuery(L"/VoodooConfig/Logger/Level/text()");
+
+            String logFile = m_Parser->Parse(logfQuery.evaluate_string(configRoot).c_str());
+
+            LogLevel logLevel = LL_Initial;
+            try
+            {
+                logLevel = (LogLevel)boost::lexical_cast<int32_t>(loglQuery.evaluate_string(configRoot));
+            } catch (const boost::bad_lexical_cast & exc) {
+                UNREFERENCED_PARAMETER(exc);
             }
 
             m_Logger->Open(logFile, false);
@@ -286,6 +292,8 @@ namespace VoodooShader
 
             throw exc;
         }
+
+        return true;
     }
 
     VSCore::~VSCore(void)

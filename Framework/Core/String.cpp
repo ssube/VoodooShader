@@ -32,8 +32,14 @@ namespace VoodooShader
     public:
         StringImpl() : m_Str() {};
         StringImpl(const uint32_t size, const wchar_t ch) : m_Str(size, ch) {};
-        StringImpl(const wchar_t * str) : m_Str(str) {};
-        StringImpl(const uint32_t size, const wchar_t * str) : m_Str(str, size) {};
+        StringImpl(const wchar_t * str) 
+        {
+            if (str) m_Str = (str);
+        };
+        StringImpl(const uint32_t size, const wchar_t * str)
+        {
+            if (str) m_Str = std::wstring(str, size);
+        };
         StringImpl(const std::wstring & str) : m_Str(str) {};
 
     public:
@@ -142,23 +148,33 @@ namespace VoodooShader
 
     void String::CInit(const uint32_t size, const char * str)
     {
-        int len = MultiByteToWideChar(CP_UTF8, NULL, str, -1, NULL, 0);
-        std::vector<wchar_t> wstr(len);
-        MultiByteToWideChar(CP_UTF8, NULL, str, -1, &wstr[0], len);
-
         if (m_Impl) delete m_Impl;
-        if (size == 0)
+
+        if (str == nullptr)
         {
-            m_Impl = new StringImpl(&wstr[0]);
+            m_Impl = new StringImpl();
         } else {
-            m_Impl = new StringImpl(size, &wstr[0]);
+            int len = MultiByteToWideChar(CP_UTF8, NULL, str, -1, NULL, 0);
+            std::vector<wchar_t> wstr(len);
+            MultiByteToWideChar(CP_UTF8, NULL, str, -1, &wstr[0], len);
+
+            if (size == 0)
+            {
+                m_Impl = new StringImpl(&wstr[0]);
+            } else {
+                m_Impl = new StringImpl(size, &wstr[0]);
+            }
         }
     }
 
     void String::WInit(const uint32_t size, const wchar_t * str)
     {
         if (m_Impl) delete m_Impl;
-        if (size == 0)
+
+        if (str == nullptr)
+        {
+            m_Impl = new StringImpl();
+        } else if (size == 0)
         {
             m_Impl = new StringImpl(str);
         } else {

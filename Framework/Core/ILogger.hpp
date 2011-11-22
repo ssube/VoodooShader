@@ -105,15 +105,15 @@ namespace VoodooShader
          * Log a message, may be formatted with printf syntax.
          *
          * @param level The level for this message.
-         * @param module The logging module's name.
+         * @param source The source of the log message, usually the calling module's name.
          * @param msg The message format string.
          * @param ... The parameters to insert.
          */
         virtual void Log
         (
             _In_ const LogLevel level,
-            _In_ const String & module,
-            _In_ _Printf_format_string_ const String & msg,
+            _In_ const wchar_t * source,
+            _In_ _Printf_format_string_ const wchar_t * format,
             ...
         ) throw() = 0;
 

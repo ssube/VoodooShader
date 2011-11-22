@@ -50,7 +50,7 @@ namespace VoodooShader
         friend void Voodoo_CgErrorHandler_Func(CGcontext, CGerror, void *);
 
     public:
-        VSCore(_In_ const InitParams * const pInitParams);
+        VSCore();
         virtual ~VSCore(void);
 
         virtual uint32_t AddRef(void) const throw();
@@ -79,6 +79,8 @@ namespace VoodooShader
 
         _Check_return_ virtual CGcontext GetCgContext(void) const;
         virtual bool SetCgContext(_In_opt_ CGcontext const pContext);
+
+        bool Initialize(_In_ const InitParams * const pInitParams);
 
     private:
         void CgErrorHandler(_In_ CGcontext pContext, _In_ int error) const;

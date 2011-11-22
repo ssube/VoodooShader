@@ -135,8 +135,8 @@ namespace VoodooShader
             virtual void Log
             (
                 _In_ const LogLevel level,
-                _In_ const String & module,
-                _In_ _Printf_format_string_ const String & msg,
+                _In_ const wchar_t * source,
+                _In_ _Printf_format_string_ const wchar_t * format,
                 ...
             ) throw();
 

@@ -242,7 +242,7 @@ namespace VoodooShader
                 " build=\""   << pVersion->Build << "\" " <<
                 " debug=\"" << pVersion->Debug << "\" ";
             if (pVersion->Name) logMsg << " name=\"" << pVersion->Name << "\" ";
-            if (pVersion->RevID) logMsg << " name=\"" << pVersion->RevID << "\" ";
+            if (pVersion->RevID) logMsg << " revid=\"" << pVersion->RevID << "\" ";
             logMsg << " />\n";
 
 #ifdef VSF_DEBUG_CONSOLE
@@ -256,22 +256,22 @@ namespace VoodooShader
             }
         }
 
-        void VSXmlLogger::Log(const LogLevel level, const String & module, const String & msg, ...)
+        void VSXmlLogger::Log(const LogLevel level, const wchar_t * source, const wchar_t * format, ...)
         {
-            va_list args;
-
             if (!this->m_LogFile.is_open()) return;
 
             LogLevel mask = (LogLevel) (level & m_LogLevel);
 
             if (!(mask & LL_Severity) || !(mask & LL_Origin)) return;
 
+            va_list args;
+
+            va_start(args, format);
+            String fmtmsg = String::FormatV(format, args);
+            va_end(args);
+
             try
             {
-                va_start(args, msg);
-                String fmtmsg = String::FormatV(msg, args);
-                va_end(args);
-
                 // Format the message in memory to prevent partial messages from being dumped
                 wstringstream logMsg;
 
@@ -280,8 +280,9 @@ namespace VoodooShader
                 logMsg << "\" ";
                 logMsg << this->LogTime().GetData();
                 logMsg << this->LogTicks().GetData();
-                logMsg << " source=\"";
-                logMsg << module.GetData();
+                
+                if (source) logMsg << " source=\"" << source;
+
                 logMsg << "\">";
                 logMsg << fmtmsg.GetData();
                 logMsg << "</Message>\n";
