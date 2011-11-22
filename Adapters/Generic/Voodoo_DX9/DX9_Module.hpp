@@ -46,7 +46,7 @@ namespace VoodooShader
 }
 
 extern VoodooShader::ICore * gpVoodooCore;
-extern VoodooShader::IAdapter * VoodooDX9;
+extern VoodooShader::IAdapter * gpVoodooAdapter;
 
 extern VoodooShader::VoodooDX9::IVoodoo3D9 *VoodooObject;
 extern VoodooShader::VoodooDX9::IVoodoo3DDevice9 *VoodooDevice;

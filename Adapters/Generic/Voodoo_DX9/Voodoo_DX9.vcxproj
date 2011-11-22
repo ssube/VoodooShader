@@ -120,6 +120,8 @@
   <ItemGroup>
     <ClCompile Include="DX9_Adapter.cpp" />
     <ClCompile Include="DX9_Module.cpp" />
+    <ClCompile Include="IVoodoo3D9.cpp" />
+    <ClCompile Include="IVoodoo3DDevice9.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp" />

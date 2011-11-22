@@ -413,14 +413,18 @@ namespace VoodooShader
         {
             String strname(name);
 
-            if (strname != L"D3D9Device")
+            if (strname != L"IDirect3D9")
             {
                 return false;
             } else if (value.Type != UT_PVoid) {
                 // Invalid type
+                return false;
             } else {
-                IDirect3DDevice9 * inDevice = reinterpret_cast<IDirect3DDevice9 * >(value.Value.VPVoid);
-                return this->SetDXDevice(inDevice);
+                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value.Value.VPVoid);
+
+                IVoodoo3D9 * fakeObj = new IVoodoo3D9(origObj);
+
+                value.Value.VPVoid = fakeObj;
             }
         }
 

@@ -102,7 +102,7 @@ namespace VoodooShader
          * @note Adapters must restore all states when a pass is unbound to the exact previous state. The exact
          *     implementation is left to the adapter, but DX provides some APIs to handle this rather well.
          */
-        virtual bool SetPass(_In_opt_ IPass * const pPass) throw() = 0;
+        virtual bool SetPass(_In_opt_ IPass * const pPass = nullptr) throw() = 0;
 
         /**
          * Get the currently bound pass.
@@ -122,7 +122,7 @@ namespace VoodooShader
          *     target. Most common formats should be supported, so long as all targets are the same format. Many cards allow
          *     up to 4 targets. Anything beyond this should not be expected to be widely supported.
          */
-        virtual bool SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget) throw() = 0;
+        virtual bool SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget = nullptr) throw() = 0;
 
         /**
          * Gets a render target from the adapter.
