@@ -36,18 +36,18 @@ IDirect3DSurface9 *backbufferSurf = nullptr;
 IDirect3DSurface9 *surface_ThisFrame = nullptr;
 VoodooShader::ITexture* texture_ThisFrame;
 
-const VoodooShader::Version * VOODOO_CALL API_VersionFunc()
+const VoodooShader::Version * VOODOO_CALL API_ModuleVersion()
 {
     static const VoodooShader::Version dx9version = VOODOO_META_VERSION_STRUCT(DX9);
     return &dx9version;
 }
 
-const uint32_t VOODOO_CALL API_CountFunc()
+const uint32_t VOODOO_CALL API_ClassCount()
 {
     return 1;
 }
 
-const wchar_t * VOODOO_CALL API_InfoFunc(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid)
+const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid)
 {
     if (!refid)
     {
@@ -63,7 +63,7 @@ const wchar_t * VOODOO_CALL API_InfoFunc(_In_ const uint32_t index, _Out_ Voodoo
     }
 }
 
-VoodooShader::IObject * VOODOO_CALL API_CreateFunc(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore)
+VoodooShader::IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore)
 {
     if (index == 0)
     {

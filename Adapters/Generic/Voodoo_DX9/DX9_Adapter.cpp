@@ -30,8 +30,11 @@ namespace VoodooShader
     namespace VoodooDX9
     {
         DX9Adapter::DX9Adapter(ICore * pCore) :
-            m_Refs(0), m_Core(pCore)
+            m_Refs(0), m_Core(pCore), 
+            m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr), m_BoundPass(nullptr)
         { 
+            m_RenderTarget[0] = m_RenderTarget[1] = m_RenderTarget[2] = m_RenderTarget[3] = nullptr;
+            gpVoodooCore = pCore;
         };
 
         DX9Adapter::~DX9Adapter()
@@ -521,12 +524,14 @@ namespace VoodooShader
             CGprofile bestFrag = cgD3D9GetLatestPixelProfile();
             CGprofile bestVert = cgD3D9GetLatestVertexProfile();
 
+            const char * bestVertStr = cgGetProfileString(bestVert);
+            const char * bestFragStr = cgGetProfileString(bestFrag);
+
             logger->Log
             (
                 LL_ModInfo, VOODOO_DX9_NAME,
                 L"Detected the following profiles:\nVertex: %S\nFragment: %S",
-                cgGetProfileString(bestVert),
-                cgGetProfileString(bestFrag)
+                bestVertStr, bestFragStr
             );
 
             // Create vertex declaration

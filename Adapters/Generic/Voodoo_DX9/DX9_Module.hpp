@@ -60,7 +60,7 @@ extern VoodooShader::ITexture* texture_ThisFrame;
 
 typedef IDirect3D9 * (__stdcall * D3DFunc9) (UINT);
 
-const VoodooShader::Version * VOODOO_CALL API_VersionFunc();
-const uint32_t VOODOO_CALL API_CountFunc();
-const wchar_t * VOODOO_CALL API_InfoFunc(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid);
-VoodooShader::IObject * VOODOO_CALL API_CreateFunc(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);
+const VoodooShader::Version * VOODOO_CALL API_ModuleVersion();
+const uint32_t VOODOO_CALL API_ClassCount();
+const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid);
+VoodooShader::IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);
