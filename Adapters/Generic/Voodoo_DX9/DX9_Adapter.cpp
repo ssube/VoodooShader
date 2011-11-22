@@ -23,6 +23,8 @@
 #include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
 
+#include "IVoodoo3D9.hpp"
+
 namespace VoodooShader
 {
     namespace VoodooDX9
@@ -197,6 +199,8 @@ namespace VoodooShader
                     return false;
                 }
             }
+
+            return true;
         }
 
         bool DX9Adapter::SetPass(_In_opt_ IPass * const pPass)
@@ -313,6 +317,8 @@ namespace VoodooShader
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Error creating texture %s: %s", name, error);
                 return nullptr;
             }
+
+            return true;
         }
 
         bool DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
@@ -380,6 +386,8 @@ namespace VoodooShader
             m_Device->SetRenderState(D3DRS_ZENABLE, zEnabled);
             m_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
             m_Device->SetRenderState(D3DRS_CULLMODE, cullMode);
+
+            return true;
         }
 
         bool DX9Adapter::ApplyParameter(_In_ IParameter * const pParam)
@@ -425,6 +433,8 @@ namespace VoodooShader
                 IVoodoo3D9 * fakeObj = new IVoodoo3D9(origObj);
 
                 value.Value.VPVoid = fakeObj;
+
+                return true;
             }
         }
 
@@ -551,6 +561,8 @@ namespace VoodooShader
             {
                 logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Unable to create transformed vertex declaration.");
             }
+
+            return true;
         }
     }
 }

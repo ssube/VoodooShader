@@ -27,8 +27,8 @@ namespace VoodooShader
     {
         DEFINE_CLSID(DX9Adapter) = {0xC1, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
-        class DX9Adapter
-            : VoodooShader::IAdapter
+        class DX9Adapter : 
+            public VoodooShader::IAdapter
         {
         public:
             DX9Adapter(ICore * pCore);

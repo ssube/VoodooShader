@@ -1,7 +1,7 @@
 LIBRARY
 
 EXPORTS
-ModuleVersion=API_ModuleVersion
-ClassCount=API_ClassCount
-ClassInfo=API_ClassInfo
-ClassCreate=API_ClassCreate
+API_ModuleVersion=ModuleVersion
+API_ClassCount=ClassCount
+API_ClassInfo=ClassInfo
+API_ClassCreate=ClassCreate

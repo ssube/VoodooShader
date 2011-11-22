@@ -103,7 +103,7 @@ namespace VoodooShader
             D3DDEVTYPE DevType,
             D3DFORMAT AdapterFormat,
             D3DFORMAT BackBufferFormat,
-            bool bWindowed
+            BOOL bWindowed
         )
         {
             return m_RealObj->CheckDeviceType(Adapter, DevType, AdapterFormat, BackBufferFormat, bWindowed);
@@ -127,7 +127,7 @@ namespace VoodooShader
             UINT Adapter,
             D3DDEVTYPE DeviceType,
             D3DFORMAT SurfaceFormat,
-            bool Windowed,
+            BOOL Windowed,
             D3DMULTISAMPLE_TYPE MultiSampleType,
             DWORD *pQualityLevels
         )

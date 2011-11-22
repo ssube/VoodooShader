@@ -54,7 +54,7 @@ namespace VoodooShader
                 D3DDEVTYPE DevType,
                 D3DFORMAT AdapterFormat,
                 D3DFORMAT BackBufferFormat,
-                bool bWindowed
+                BOOL bWindowed
             );
             HRESULT STDMETHODCALLTYPE CheckDeviceFormat
             (
@@ -70,7 +70,7 @@ namespace VoodooShader
                 UINT Adapter,
                 D3DDEVTYPE DeviceType,
                 D3DFORMAT SurfaceFormat,
-                bool Windowed,
+                BOOL Windowed,
                 D3DMULTISAMPLE_TYPE MultiSampleType,
                 DWORD *pQualityLevels
             );

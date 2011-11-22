@@ -75,18 +75,18 @@ namespace VoodooShader
         }
     }
 
-    IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t number, _In_ ICore * core)
+    IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t number, _In_ ICore * pCore)
     {
         switch (number)
         {
         case 0:
-            return new VSAdapter(core);
+            return new VSAdapter(pCore);
         case 1:
-            return new VSFileSystem(core);
+            return new VSFileSystem(pCore);
         case 2:
-            return new VSHookManager(core);
+            return new VSHookManager(pCore);
         case 3:
-            return new VSLogger(core);
+            return new VSLogger(pCore);
         default:
             return nullptr;
         }
