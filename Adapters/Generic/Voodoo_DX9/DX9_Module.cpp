@@ -1,17 +1,34 @@
-
+/*
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at
+ *   peachykeen@voodooshader.com
+ */
 
 #include "DX9_Module.hpp"
-#include "DX9_Converter.hpp"
+
 #include "DX9_Version.hpp"
 
 #include "IVoodoo3D9.hpp"
 #include "IVoodoo3DDevice9.hpp"
 
 VoodooShader::ICore * gpVoodooCore = nullptr;
-VoodooShader::Adapter * VoodooDX9 = nullptr;
 
-IVoodoo3D9 *VoodooObject = nullptr;
-IVoodoo3DDevice9 *VoodooDevice = nullptr;
+VoodooShader::VoodooDX9::IVoodoo3D9 * VoodooObject = nullptr;
+VoodooShader::VoodooDX9::IVoodoo3DDevice9 * VoodooDevice = nullptr;
 
 IDirect3DSurface9 *backbufferSurf = nullptr;
 
@@ -19,6 +36,7 @@ IDirect3DSurface9 *surface_ThisFrame = nullptr;
 VoodooShader::ITexture* texture_ThisFrame;
 
 VoodooShader::IShader* testShader;
+/*
 
 namespace VoodooShader
 {
@@ -75,50 +93,36 @@ namespace VoodooShader
   memcpy(pVertices, g_Vertices, sizeof(FSVert) * 4);
 
   FSQuadVerts->Unlock();
- }
+ }*/
 
-/**
- *
- */
-VOODOO_API_DX9 void *__stdcall Voodoo3DCreate9(UINT version)
+const VoodooShader::Version * VersionFunc()
 {
-
- // Voodoo DX9 Init function
- gpVoodooCore = VoodooShader::ICore::Create("Voodoo_DX9.log");
-
- VoodooLogger->Log("Voodoo DX9: Direct3DCreate9 called, SDK version: %d.\n", version);
-
-
- // Load the real d3d8 dll and get device caps
- char Path[MAX_PATH];
-
- GetSystemDirectoryA(Path, MAX_PATH);
- strcat_s(Path, MAX_PATH, "\\d3d9.dll");
-
- HMODULE d3ddll = LoadLibraryA(Path);
- D3DFunc9 d3d9func = (D3DFunc9) GetProcAddress(d3ddll, "Direct3DCreate9");
-
- if (!d3d9func)
- {
-  VoodooLogger->Log("Voodoo DX9: Could not find D3D9 create true func.\n");
-  return 0;
- }
-
-
- // Call DX9 to create a real device with the latest version
- IDirect3D9 *object = (d3d9func) (D3D_SDK_VERSION);
-
- if (!object)
- {
-  VoodooLogger->Log("Voodoo DX9: Direct3DCreate9 returned nullptr.\n");
- }
-
-
- // Turn it into a FakeObject and return it.
- IVoodoo3D9 *vObj = new IVoodoo3D9(object);
-
- VoodooObject = vObj;
- return vObj;
+    static const VoodooShader::Version dx9version = VOODOO_META_VERSION_STRUCT(DX9);
+    return &dx9version;
 }
 
-#pragma comment(linker, "/export:Direct3DCreate9=?Voodoo3DCreate9@@YGPAXI@Z")
+const uint32_t CountFunc()
+{
+    return 1;
+}
+
+const wchar_t * InfoFunc(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid)
+{
+    if (index == 0)
+    {
+        refid = CLSID_DX9Adapter;
+        return L"DX9Adapter";
+    } else {
+        return nullptr;
+    }
+}
+
+VoodooShader::IObject * CreateFunc(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore)
+{
+    if (index == 0)
+    {
+        return new DX9Adapter(pCore);
+    } else {
+        return nullptr;
+    }
+}

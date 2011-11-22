@@ -19,7 +19,12 @@
  */
 #pragma once
 
+#include "IVoodoo3D9.hpp"
+
 #include "IVoodoo3DDevice9.hpp"
+
+#include "DX9_Adapter.hpp"
+#include "DX9_Version.hpp"
 
 namespace VoodooShader
 {
@@ -205,8 +210,9 @@ namespace VoodooShader
                 // Return our device
                 *ppReturnedDeviceInterface = new IVoodoo3DDevice9(this, realDevice);
 
+                Uuid adapterID = CLSID_DX9Adapter;
                 DX9Adapter * pDXAdapter = nullptr;
-                if (pDXAdapter->QueryInterface(CLSID_DX9Adapter, &pDXAdapter) && pDXAdapter)
+                if (gpVoodooCore->GetAdapter()->QueryInterface(adapterID, (const void**)&pDXAdapter) && pDXAdapter)
                 {
                     pDXAdapter->SetDXDevice(realDevice);
                 }
@@ -250,7 +256,11 @@ namespace VoodooShader
 
                 try
                 {
-                    testShader = gpVoodooCore->CreateShader("test.cgfx", nullptr);
+                    IFile * shaderFile = gpVoodooCore->GetFileSystem()->FindFile(L"text.cgfx");
+                    if (shaderFile)
+                    {
+                        testShader = gpVoodooCore->CreateShader(shaderFile, nullptr);
+                    }
                 }
                 catch(std::exception & exc)
                 {

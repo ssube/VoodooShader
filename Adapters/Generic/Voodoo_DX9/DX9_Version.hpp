@@ -21,6 +21,8 @@
 
 #include "Version.hpp"
 
+#define VOODOO_DX9_LIBID            {0xC0, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
+
 // DX9 defs
 #define VOODOO_DX9_NAME             L"Voodoo/_DX9"
 #define VOODOO_DX9_PRETTYNAME       L"Voodoo/Generic (DX9)"
@@ -28,4 +30,4 @@
 #define VOODOO_DX9_VERSION_MINOR    4
 #define VOODOO_DX9_VERSION_PATCH    0
 #define VOODOO_DX9_VERSION_BUILD    VOODOO_GLOBAL_VERSION_BUILD
-#define VOODOO_LOGGER_GITID         VOODOO_GLOBAL_GITID
+#define VOODOO_DX9_GITID            VOODOO_GLOBAL_GITID

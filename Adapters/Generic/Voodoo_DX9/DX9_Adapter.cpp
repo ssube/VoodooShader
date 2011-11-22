@@ -533,7 +533,7 @@ namespace VoodooShader
                 { 0, 16, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
                 { 0, 32, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
                 { 0, 48, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
-                D3DDECL_END
+                D3DDECL_END()
             };
 
             errors = m_Device->CreateVertexDeclaration(vertDeclElems, &m_VertDecl);
