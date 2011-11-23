@@ -479,7 +479,6 @@ namespace VoodooShader
             }
             else if (pDevice == nullptr || (pDevice && m_Device))
             {
-                if (m_Device) m_Device->Release();
                 if (m_VertDecl) m_VertDecl->Release();
                 if (m_VertDeclT) m_VertDeclT->Release();
 
@@ -487,10 +486,15 @@ namespace VoodooShader
             }
 
             m_Device = pDevice;
-            m_Device->AddRef();
 
             ILoggerRef logger = m_Core->GetLogger();
             CGcontext context = m_Core->GetCgContext();
+
+            if (!cgIsContext(context))
+            {
+                context = cgCreateContext();
+                m_Core->SetCgContext(context);
+            }
 
             HRESULT errors = cgD3D9SetDevice(m_Device);
 

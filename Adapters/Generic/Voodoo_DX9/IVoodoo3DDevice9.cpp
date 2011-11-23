@@ -31,6 +31,10 @@ namespace VoodooShader
             m_d3d(pVoodooObject), mRealDevice(pRealDevice)
         { };
 
+        IVoodoo3DDevice9::~IVoodoo3DDevice9()
+        {
+        }
+
         /* IUnknown methods */
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::QueryInterface(THIS_ REFIID riid, void **ppvObj)
         {
@@ -45,7 +49,23 @@ namespace VoodooShader
         ULONG STDMETHODCALLTYPE IVoodoo3DDevice9::Release(THIS)
         {
             ULONG count = mRealDevice->Release();
-            if (0 == count) delete this;
+
+            if (count == 0)
+            {
+                if (gpVoodooCore)
+                {
+                    Uuid clsid = CLSID_DX9Adapter;
+                    DX9Adapter * dx9a = nullptr;
+                    if (gpVoodooCore->GetAdapter()->QueryInterface(clsid, (void**)&dx9a) && dx9a)
+                    {
+                        dx9a->SetDXDevice(nullptr);
+                        dx9a->Release();
+                    }
+                    gpVoodooCore->Release();
+                }
+
+                delete this;
+            }
 
             return count;
         }

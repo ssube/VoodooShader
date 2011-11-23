@@ -1,16 +1,6 @@
 ## Voodoo Shader Framework
 ### version 0.4.2 - alpha
-
------
-
-### Contents:
-1. Summary
-2. Installation
-3. Modules & Adapters
-4. Running Voodoo
-5. Reporting Bugs
-6. Contact
-7. Legal
+#### [VoodooShader.com](http://www.voodooshader.com)
 
 -----
 
@@ -23,9 +13,8 @@ Voodoo uses a system of core modules and adapters to provide the widest compatib
 wide range of applications and APIs. This core framework remains constant between target applications and adapters,
  providing a unified set of features and single target for shaders.
 
-Voodoo supports both OpenGL and DirectX, from OGL1.1 and D3D8 to OGL4.0 and D3D11. Shaders are developed cross-API using
-nVidia's Cg language, while Voodoo provides a second processing step to provide shaders with easy access to other resources, 
-especially textures.
+Voodoo supports both OpenGL and DirectX, from older versions to the latest release. Shaders are developed using the Cg 
+language, allowing a single shader to run on nearly all graphics systems.
 
 
 ### 2. Installation
@@ -70,7 +59,7 @@ after this depends on the modules used.
 Voodoo is in an alpha testing stage. It undoubtedly has bugs. If you run into a bug, please add a report to the bug tracker
 at:
 
-* http://tracker.voodooshader.com
+* [http://tracker.voodooshader.com](http://tracker.voodooshader.com)
 
 Any information that can be included, especially a log, is beneficial. Full logs should be posted at 
 [github:gist](https://gist.github.com/) whenever possible and linked in the bug report.
@@ -80,7 +69,7 @@ Any information that can be included, especially a log, is beneficial. Full logs
 
 For help and support (or questions and comments), please post on the Voodoo forum or stop by the IRC channel:
 
-* http://forum.voodooshader.com
+* [http://forum.voodooshader.com](http://forum.voodooshader.com)
 * [irc://irc.chatspike.net/voodoo](irc://irc.chatspike.net/voodoo)
 
 To directly contact the developer, please send an email to:

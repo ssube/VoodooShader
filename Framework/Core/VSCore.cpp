@@ -239,7 +239,8 @@ namespace VoodooShader
             LogLevel logLevel = LL_Initial;
             try
             {
-                logLevel = (LogLevel)boost::lexical_cast<int32_t>(loglQuery.evaluate_string(configRoot));
+                std::wstring levelString = loglQuery.evaluate_string(configRoot);
+                logLevel = (LogLevel)boost::lexical_cast<int32_t>(levelString);
             } catch (const boost::bad_lexical_cast & exc) {
                 UNREFERENCED_PARAMETER(exc);
             }
