@@ -56,7 +56,7 @@ namespace VoodooShader
                 {
                     Uuid clsid = CLSID_DX9Adapter;
                     DX9Adapter * dx9a = nullptr;
-                    if (gpVoodooCore->GetAdapter()->QueryInterface(clsid, (void**)&dx9a) && dx9a)
+                    if (gpVoodooCore->GetAdapter()->QueryInterface(clsid, (const void**)&dx9a) && dx9a)
                     {
                         dx9a->SetDXDevice(nullptr);
                         dx9a->Release();

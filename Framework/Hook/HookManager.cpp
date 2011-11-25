@@ -152,7 +152,14 @@ namespace VoodooShader
 
             if (hook != m_Hooks.end())
             {
-                Throw(VOODOO_HOOK_NAME, L"Attempted to create a hook with a duplicate name.", m_Core);
+                m_Core->GetLogger()->Log
+                (
+                    LL_ModError, VOODOO_HOOK_NAME,
+                    L"Attempted to create a hook with a duplicate name (%s).",
+                    name.GetData()
+                );
+
+                return false;
             }
 
             m_Core->GetLogger()->Log

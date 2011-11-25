@@ -221,11 +221,22 @@ namespace VoodooShader
 
         while (cgIsParameter(cParam))
         {
-            IParameterRef pParam = new VSParameter(this, cParam);
+            try
+            {
+                IParameterRef pParam = new VSParameter(this, cParam);
 
-            this->LinkParameter(pParam.get());
+                this->LinkParameter(pParam.get());
 
-            m_Parameters.push_back(pParam);
+                m_Parameters.push_back(pParam);
+            } catch (const std::exception & exc) {
+                const char * name = cgGetParameterName(cParam);
+
+                m_Core->GetLogger()->Log
+                    (
+                    LL_CoreDebug, VOODOO_CORE_NAME,
+                    L"Error creating linking parameter '%S': %S", name, exc.what()
+                    );
+            }
 
             cParam = cgGetNextParameter(cParam);
         }

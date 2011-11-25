@@ -204,9 +204,20 @@ namespace VoodooShader
         while (cgIsPass(cPass))
         {
             // Insert the pass into the vector
-            IPass * pass = new VSPass(this, cPass);
+            try
+            {
+                IPass * pass = new VSPass(this, cPass);
 
-            m_Passes.push_back(pass);
+                m_Passes.push_back(pass);
+            } catch (const std::exception & exc) {
+                const char * name = cgGetPassName(cPass);
+
+                m_Core->GetLogger()->Log
+                (
+                    LL_CoreDebug, VOODOO_CORE_NAME,
+                    L"Error creating linking pass '%S': %S", name, exc.what()
+                );
+            }
 
             cPass = cgGetNextPass(cPass);
         }

@@ -284,7 +284,7 @@ namespace VoodooShader
 
             // Return
         }
-        catch(std::exception & exc)
+        catch(const std::exception & exc)
         {
             if (m_Logger.get())
             {
@@ -451,10 +451,23 @@ namespace VoodooShader
         }
 
         String fullpath = pFile->GetPath();
-        IShaderRef shader = new VSShader(this, fullpath, ppArgs);
 
-        m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Created shader from %s, returning shared pointer to %p.",
-            fullpath.GetData(), shader.get());
+        IShaderRef shader = nullptr;
+
+        try
+        {
+
+            IShaderRef shader = new VSShader(this, fullpath, ppArgs); 
+
+            m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Created shader from %s, returning shared pointer to %p.",
+                fullpath.GetData(), shader.get());
+        }
+        catch (const std::exception & exc)
+        {   
+            m_Logger->Log(LL_CoreError, VOODOO_CORE_NAME, L"Error creating shader from %s: %S",
+                fullpath.GetData(), exc.what());
+        }
+
 
         return shader.get();
     }
@@ -475,16 +488,28 @@ namespace VoodooShader
         }
         else
         {
-            IParameterRef parameter = new VSParameter(this, name, type);
+            IParameterRef parameter = nullptr;
 
-            m_Parameters[name] = parameter;
+            try
+            {
+                IParameterRef parameter = new VSParameter(this, name, type);
 
-            m_Logger->Log
-            (
-                LL_CoreDebug, VOODOO_CORE_NAME,
-                L"Created parameter named %s with type %s, returning shared pointer to %p.", name.GetData(),
-                Converter::ToString(type), parameter.get()
-            );
+                m_Parameters[name] = parameter;
+
+                m_Logger->Log
+                (
+                    LL_CoreDebug, VOODOO_CORE_NAME,
+                    L"Created parameter named %s with type %s, returning shared pointer to %p.", name.GetData(),
+                    Converter::ToString(type), parameter.get()
+                );
+            } catch (const std::exception & exc) {
+                m_Logger->Log
+                (
+                    LL_CoreDebug, VOODOO_CORE_NAME,
+                    L"Error creating parameter %s with type %s: %S", name.GetData(),
+                    Converter::ToString(type), exc.what()
+                );
+            }
 
             return parameter.get();
         }

@@ -442,7 +442,12 @@ namespace VoodooShader
 
                     if (count < 0)
                     {
-                        Throw(VOODOO_FILESYSTEM_NAME, L"Unable to write a negative number of nullptr bytes.", m_Core);
+                        m_Core->GetLogger()->Log
+                        (
+                            LL_ModError, VOODOO_FILESYSTEM_NAME, 
+                            L"Unable to write a negative number of nullptr bytes."
+                        );
+                        return 0;
                     }
                     else
                     {
@@ -453,7 +458,12 @@ namespace VoodooShader
 
                     if (buffer == nullptr)
                     {
-                        Throw(VOODOO_FILESYSTEM_NAME, L"Error allocating memory for nullptr buffer.", m_Core);
+                        m_Core->GetLogger()->Log
+                        (
+                            LL_ModError, VOODOO_FILESYSTEM_NAME, 
+                            L"Error allocating memory for nullptr buffer."
+                        );
+                        return 0;
                     }
 
                     memset(buffer, 0, size);
@@ -480,7 +490,12 @@ namespace VoodooShader
                 {
                     if (count < 0)
                     {
-                        Throw(VOODOO_FILESYSTEM_NAME, L"Unable to write a negative nubber of bytes.", m_Core);
+                        m_Core->GetLogger()->Log
+                        (
+                            LL_ModError, VOODOO_FILESYSTEM_NAME, 
+                            L"Unable to write a negative number of bytes."
+                        );
+                        return 0;
                     }
 
                     DWORD size = (DWORD) count;
