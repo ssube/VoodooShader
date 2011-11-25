@@ -54,27 +54,24 @@ namespace VoodooShader
 
     ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, bool catchErrors)
     {
-        VSCore * pCore = new VSCore();
+        boost::intrusive_ptr<VSCore> pCore = nullptr;
 
-        if (!catchErrors)
+        try
         {
+            pCore = new VSCore();
             pCore->Initialize(pInitParams);
-        } else {
-            try
-            {
-                pCore->Initialize(pInitParams);
-            } catch(const std::exception & exc) {
-                UNREFERENCED_PARAMETER(exc);
+        } catch(const std::exception & exc) {
+            UNREFERENCED_PARAMETER(exc);
 
-                if (pCore)
-                {
-                    delete pCore;
-                    pCore = nullptr;
-                }
+            pCore = nullptr;
+
+            if (!catchErrors)
+            {
+                throw exc;
             }
         }
 
-        return pCore;
+        return pCore.get();
     }
 
     VSCore::VSCore() :
@@ -108,7 +105,7 @@ namespace VoodooShader
         m_Parser->Add(L"target", pInitParams->Target, VT_System);
         m_Parser->Add(L"loader", pInitParams->Loader, VT_System);
 
-        // Command line
+        // Command line processing
         LPWSTR cmdline = GetCommandLine();
         m_Parser->Add(L"cmdline", cmdline, VT_System);
 
@@ -157,7 +154,7 @@ namespace VoodooShader
             pugi::xml_node coreNode = configRoot.select_single_node(L"/VoodooConfig/Core").node();
             if (!coreNode)
             {
-                Throw(VOODOO_CORE_NAME, L"Could not find ICore node.", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Could not find core config node.", nullptr);
             }
 
             // Create query for node text, used multiple times
@@ -228,19 +225,19 @@ namespace VoodooShader
             m_Logger = dynamic_cast<ILogger*>(m_ModuleManager->CreateObject(logClass));
             if (m_Logger.get() == nullptr)
             {
-                Throw(VOODOO_CORE_NAME, L"Unable to create Logger object (class not found).", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Unable to create logger.", nullptr);
             }
 
             pugi::xpath_query logfQuery(L"/VoodooConfig/Logger/File/text()");
             pugi::xpath_query loglQuery(L"/VoodooConfig/Logger/Level/text()");
 
-            String logFile = m_Parser->Parse(logfQuery.evaluate_string(configRoot).c_str());
+            String logFile  = m_Parser->Parse(logfQuery.evaluate_string(configRoot).c_str());
+            String logLevelStr = m_Parser->Parse(loglQuery.evaluate_string(configRoot).c_str());
 
             LogLevel logLevel = LL_Initial;
             try
             {
-                std::wstring levelString = loglQuery.evaluate_string(configRoot);
-                logLevel = (LogLevel)boost::lexical_cast<int32_t>(levelString);
+                logLevel = (LogLevel)boost::lexical_cast<int32_t>(logLevelStr.GetData());
             } catch (const boost::bad_lexical_cast & exc) {
                 UNREFERENCED_PARAMETER(exc);
             }
@@ -264,19 +261,19 @@ namespace VoodooShader
             m_FileSystem = dynamic_cast<IFileSystem*>(m_ModuleManager->CreateObject(fsClass));
             if (!m_FileSystem)
             {
-                Throw(VOODOO_CORE_NAME, L"Unable to create FileSystem object.", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Unable to create file system.", nullptr);
             }
 
             m_HookManager = dynamic_cast<IHookManager*>(m_ModuleManager->CreateObject(hookClass));
             if (!m_HookManager)
             {
-                Throw(VOODOO_CORE_NAME, L"Unable to create HookManager object.", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Unable to create hook manager.", nullptr);
             }
 
             m_Adapter = dynamic_cast<IAdapter*>(m_ModuleManager->CreateObject(adpClass));
             if (!m_Adapter)
             {
-                Throw(VOODOO_CORE_NAME, L"Unable to create Adapter object.", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Unable to create adapter.", nullptr);
             }
 
             // ICore done loading
@@ -456,8 +453,7 @@ namespace VoodooShader
 
         try
         {
-
-            IShaderRef shader = new VSShader(this, fullpath, ppArgs); 
+            shader = new VSShader(this, fullpath, ppArgs); 
 
             m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Created shader from %s, returning shared pointer to %p.",
                 fullpath.GetData(), shader.get());
@@ -492,7 +488,7 @@ namespace VoodooShader
 
             try
             {
-                IParameterRef parameter = new VSParameter(this, name, type);
+                parameter = new VSParameter(this, name, type);
 
                 m_Parameters[name] = parameter;
 
@@ -515,7 +511,7 @@ namespace VoodooShader
         }
     }
 
-    ITexture* VSCore::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
+    ITexture * VSCore::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
     {
         if (!m_CgContext)
         {
@@ -544,7 +540,7 @@ namespace VoodooShader
         }
     }
 
-    IParameter* VSCore::GetParameter(const String & name, const ParameterType type) const
+    IParameter * VSCore::GetParameter(const String & name, const ParameterType type) const
     {
         ParameterMap::const_iterator parameter = m_Parameters.find(name);
 
