@@ -48,6 +48,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;DX9_MODULE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

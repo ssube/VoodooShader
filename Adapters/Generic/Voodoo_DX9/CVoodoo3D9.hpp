@@ -29,7 +29,7 @@ namespace VoodooShader
             public IDirect3D9
         {
         public:
-            CVoodoo3D9(IDirect3D9 * pD3D);
+            CVoodoo3D9(UINT sdkVersion, IDirect3D9 * pD3D);
             virtual STDMETHODCALLTYPE ~CVoodoo3D9();
 
             /**
@@ -102,6 +102,7 @@ namespace VoodooShader
             );
 
         private:
+            UINT m_SdkVersion;
             IDirect3D9 * m_RealObject;
         };
     }

@@ -84,7 +84,7 @@ namespace VoodooShader
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::GetDesc(D3DSURFACE_DESC8 * pDesc)
         {
-            D3DSURFACE_DESC9 rDesc;
+            D3DSURFACE_DESC rDesc;
             HRESULT hr = m_RealSurface->GetDesc(&rDesc);
             if (SUCCEEDED(hr))
             {

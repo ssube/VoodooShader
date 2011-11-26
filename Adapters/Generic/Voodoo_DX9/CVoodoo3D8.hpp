@@ -39,7 +39,7 @@ namespace VoodooShader
             public IDirect3D8
         {
         public:
-            CVoodoo3D8(IDirect3D9 * pRealObj);
+            CVoodoo3D8(UINT sdkVersion, IDirect3D9 * pRealObj);
             virtual STDMETHODCALLTYPE ~CVoodoo3D8();
 
             // IUnknown methods
@@ -113,6 +113,7 @@ namespace VoodooShader
             STDMETHOD(RegisterSoftwareDevice)(void *pInitializeFunction);
 
         private:
+            UINT m_SdkVersion;
             IDirect3D9 * m_RealObject;
         };
     }

@@ -66,6 +66,7 @@ namespace VoodooShader
             mutable uint32_t m_Refs;
             ICore * m_Core;
 
+            UINT m_SdkVersion;
             IDirect3DDevice9 * m_Device;
             IDirect3DVertexDeclaration9 * m_VertDecl;
             IDirect3DVertexDeclaration9 * m_VertDeclT;

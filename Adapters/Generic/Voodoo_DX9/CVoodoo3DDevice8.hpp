@@ -66,7 +66,7 @@ namespace VoodooShader
             STDMETHOD(GetDisplayMode) (D3DDISPLAYMODE *pMode);
             STDMETHOD(GetCreationParameters) (D3DDEVICE_CREATION_PARAMETERS *pParameters);
             STDMETHOD(SetCursorProperties) (UINT XHotSpot, UINT YHotSpot, IDirect3DSurface8 *pCursorBitmap);
-            STDMETHOD_(void, SetCursorPosition) (int X, int Y, DWORD Flags);
+            STDMETHOD_(void, SetCursorPosition) (UINT X, UINT Y, DWORD Flags);
             STDMETHOD_(BOOL, ShowCursor) (BOOL bShow);
             STDMETHOD(CreateAdditionalSwapChain)
             (

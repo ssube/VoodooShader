@@ -23,6 +23,7 @@
 #include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
 
+#include "CVoodoo3D8.hpp"
 #include "CVoodoo3D9.hpp"
 
 namespace VoodooShader
@@ -31,7 +32,8 @@ namespace VoodooShader
     {
         DX9Adapter::DX9Adapter(ICore * pCore) :
             m_Refs(0), m_Core(pCore), 
-            m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr), m_BoundPass(nullptr)
+            m_SdkVersion(D3D_SDK_VERSION), m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr), 
+            m_BoundPass(nullptr)
         { 
             m_RenderTarget[0] = m_RenderTarget[1] = m_RenderTarget[2] = m_RenderTarget[3] = nullptr;
 
@@ -431,28 +433,44 @@ namespace VoodooShader
         {
             String strname(name);
 
-            if (strname != L"IDirect3D9")
+            if (strname == L"SdkVersion" && value.Type == UT_UInt32)
             {
-                return false;
-            } else if (value.Type != UT_PVoid) {
-                // Invalid type
-                return false;
-            } else {
+                m_SdkVersion = value.Value.VUInt32;
+                return true;
+            } else if (strname == L"IDirect3D8" && value.Type == UT_PVoid) {
+                using VoodooShader::VoodooDX8::CVoodoo3D8;
+
                 IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value.Value.VPVoid);
 
-                CVoodoo3D9 * fakeObj = new CVoodoo3D9(origObj);
+                CVoodoo3D8 * fakeObj = new CVoodoo3D8(m_SdkVersion, origObj);
+
+                value.Value.VPVoid = fakeObj;
+
+                return true;
+            } else if (strname == L"IDirect3D9" && value.Type == UT_PVoid) {
+                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value.Value.VPVoid);
+
+                CVoodoo3D9 * fakeObj = new CVoodoo3D9(m_SdkVersion, origObj);
 
                 value.Value.VPVoid = fakeObj;
 
                 return true;
             }
+
+            return false;
         }
 
         Variant DX9Adapter::GetProperty(_In_ const wchar_t * property) CONST
         {
-            UNREFERENCED_PARAMETER(property);
-
+            String strname(property);
             Variant retVar = {UT_None, nullptr};
+
+            if (strname == L"SdkVersion")
+            {
+                retVar.Type = UT_UInt32;
+                retVar.Value.VUInt32 = m_SdkVersion;
+            }
+
             return retVar;
         }
 

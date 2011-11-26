@@ -192,7 +192,7 @@ namespace VoodooShader
             return hr;
         }
 
-        void STDMETHODCALLTYPE CVoodoo3DDevice8::SetCursorPosition(int X, int Y, DWORD Flags)
+        void STDMETHODCALLTYPE CVoodoo3DDevice8::SetCursorPosition(UINT X, UINT Y, DWORD Flags)
         {
             m_RealDevice->SetCursorPosition(X, Y, Flags);
 
@@ -316,7 +316,7 @@ namespace VoodooShader
             IDirect3DTexture8 **ppTexture
         )
         {
-            IDirect3DTexture9 *rTexture;
+            IDirect3DTexture9 * rTexture = nullptr;
             HRESULT hr = D3DERR_INVALIDCALL;
 
             // If not a render-target, attempt to create it as one
@@ -342,7 +342,6 @@ namespace VoodooShader
             // One succeeded, the texture exists. We need to register it with the Voodoo core.
             if (SUCCEEDED(hr))
             {
-
                 // ! @todo Set up the core texture registration for Voodoo DX8.9 and track
                 // filenames somehow
                 CVoodoo3DTexture8 *wTexture = new CVoodoo3DTexture8(this, rTexture);
@@ -582,7 +581,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->UpdateTexture(wSource->RealTexture(), wDest->RealTexture());
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::UpdateTexture(%d, %d) == %d", pSourceTexture, pDestinationTexture, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::UpdateTexture(%p, %p) == %d", pSourceTexture, pDestinationTexture, hr);
 #endif
             return hr;
         }
@@ -594,7 +593,7 @@ namespace VoodooShader
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::GetFrontBuffer(IDirect3DSurface8 *pDestSurface)
         {
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetFrontBuffer(%d) == UNUSED", pDestSurface);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetFrontBuffer(%p) == UNUSED", pDestSurface);
 #endif
             return D3DERR_INVALIDCALL;
         }
@@ -613,7 +612,7 @@ namespace VoodooShader
             hr |= m_RealDevice->SetDepthStencilSurface(wStencil->RealSurface());
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetRenderTarget(%d, %d) == %d", pRenderTarget, pNewZStencil, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetRenderTarget(%p, %p) == %d", pRenderTarget, pNewZStencil, hr);
 #endif
             return hr;
         }
@@ -624,7 +623,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetRenderTarget(0, &rRenderTarget);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetRenderTarget(%d) == %d", *ppRenderTarget, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetRenderTarget(%p) == %d", *ppRenderTarget, hr);
 #endif
             if (SUCCEEDED(hr))
             {
@@ -640,7 +639,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetDepthStencilSurface(&rZStencilSurface);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetDepthStencilSurface(%d) == %d", *ppZStencilSurface, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetDepthStencilSurface(%p) == %d", *ppZStencilSurface, hr);
 #endif
             if (SUCCEEDED(hr))
             {
@@ -665,7 +664,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->SetTransform(State, pMatrix);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetTransform(%d, %d) == %d", State, pMatrix, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetTransform(%d, %p) == %d", State, pMatrix, hr);
 #endif
             return hr;
         }
@@ -675,7 +674,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetTransform(State, pMatrix);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetTransform(%d, %d) == %d", State, pMatrix, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetTransform(%d, %p) == %d", State, pMatrix, hr);
 #endif
             return hr;
         }
@@ -685,7 +684,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->MultiplyTransform(State, pMatrix);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::MultiplyTransform(%d, %d) == %d", State, pMatrix, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::MultiplyTransform(%d, %p) == %d", State, pMatrix, hr);
 #endif
             return hr;
         }
@@ -695,7 +694,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->SetViewport((CONST D3DVIEWPORT9 *) pViewport);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetViewport(%d) == %d", pViewport, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetViewport(%p) == %d", pViewport, hr);
 #endif
             return hr;
         }
@@ -705,7 +704,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetViewport((D3DVIEWPORT9 *) pViewport);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetViewport(%d) == %d", pViewport, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetViewport(%p) == %d", pViewport, hr);
 #endif
             return hr;
         }
@@ -715,7 +714,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->SetMaterial((CONST D3DMATERIAL9 *) pMaterial);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetMaterial(%d) == %d", pMaterial, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetMaterial(%p) == %d", pMaterial, hr);
 #endif
             return hr;
         }
@@ -725,7 +724,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetMaterial((D3DMATERIAL9 *) pMaterial);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetMaterial(%d) == %d", pMaterial, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetMaterial(%p) == %d", pMaterial, hr);
 #endif
             return hr;
         }
@@ -735,7 +734,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->SetLight(Index, (CONST D3DLIGHT9 *) Light);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetLight(%d, %d) == %d", Index, Light, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetLight(%d, %p) == %d", Index, Light, hr);
 #endif
             return hr;
         }
@@ -745,7 +744,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetLight(Index, (D3DLIGHT9 *) Light);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetLight(%d, %d) == %d", Index, Light, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetLight(%d, %p) == %d", Index, Light, hr);
 #endif
             return hr;
         }
@@ -765,7 +764,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetLightEnable(Index, pEnable);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetLightEnable(%d, %d) == %d", Index, pEnable, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetLightEnable(%d, %p) == %d", Index, pEnable, hr);
 #endif
             return hr;
         }
@@ -775,7 +774,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->SetClipPlane(Index, pPlane);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetClipPlane(%d, %d) == %d", Index, pPlane, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetClipPlane(%d, %p) == %d", Index, pPlane, hr);
 #endif
             return hr;
         }
@@ -785,7 +784,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetClipPlane(Index, pPlane);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetClipPlane(%d, %d) == %d", Index, pPlane, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetClipPlane(%d, %p) == %d", Index, pPlane, hr);
 #endif
             return hr;
         }
@@ -805,7 +804,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetRenderState(State, pValue);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetRenderState(%d, %d) == %d", State, pValue, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetRenderState(%d, %p) == %d", State, pValue, hr);
 #endif
             return hr;
         }
@@ -816,7 +815,7 @@ namespace VoodooShader
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::EndStateBlock(DWORD *pToken)
         {
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::EndStateBlock(%d) == UNUSED", pToken);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::EndStateBlock(%p) == UNUSED", pToken);
 #endif
             return D3DERR_INVALIDCALL;
 
@@ -851,7 +850,7 @@ namespace VoodooShader
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::CreateStateBlock(D3DSTATEBLOCKTYPE Type, DWORD *pToken)
         {
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::CreateStateBlock(%d, %d) == UNUSED", Type, pToken);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::CreateStateBlock(%d, %p) == UNUSED", Type, pToken);
 #endif
             return D3DERR_INVALIDCALL;
 
@@ -867,7 +866,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->SetClipStatus((CONST D3DCLIPSTATUS9 *) pClipStatus);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetClipStatus(%d) == %d", pClipStatus, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetClipStatus(%p) == %d", pClipStatus, hr);
 #endif
             return hr;
         }
@@ -876,7 +875,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetClipStatus((D3DCLIPSTATUS9 *) pClipStatus);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetClipStatus(%d) == %d", pClipStatus, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetClipStatus(%p) == %d", pClipStatus, hr);
 #endif
             return hr;
         }
@@ -886,7 +885,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetTexture(Stage, &rTexture);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetTexture(%d, %d) == %d", Stage, *ppTexture, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetTexture(%d, %p) == %d", Stage, *ppTexture, hr);
 #endif
             if (SUCCEEDED(hr))
             {
@@ -909,7 +908,7 @@ namespace VoodooShader
                 hr = m_RealDevice->SetTexture(Stage, nullptr);
             }
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetTexture(%d, %d) == %d", Stage, pTexture, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetTexture(%d, %p) == %d", Stage, pTexture, hr);
 #endif
             return hr;
         }
@@ -918,7 +917,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetTextureStageState(Stage, Type, pValue);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetTextureStageState(%d, %d, %d) == %d", Stage, Type, pValue, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetTextureStageState(%d, %d, %p) == %d", Stage, Type, pValue, hr);
 #endif
             return hr;
         }
@@ -949,7 +948,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetInfo(%d, %d, %d) == UNUSED", DevInfoID, pDevInfoStruct,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetInfo(%d, %p, %d) == UNUSED", DevInfoID, pDevInfoStruct,
                 DevInfoStructSize
                 );
 #endif
@@ -960,7 +959,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->SetPaletteEntries(PaletteNumber, pEntries);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetPaletteEntries(%d, %d) == %d", PaletteNumber, pEntries, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetPaletteEntries(%d, %p) == %d", PaletteNumber, pEntries, hr);
 #endif
             return hr;
         }
@@ -969,7 +968,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->GetPaletteEntries(PaletteNumber, pEntries);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetPaletteEntries(%d, %d) == %d", PaletteNumber, pEntries, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetPaletteEntries(%d, %p) == %d", PaletteNumber, pEntries, hr);
 #endif
             return hr;
         }
@@ -1041,7 +1040,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::DrawPrimitiveUP(%d, %d, %d, %d) == %d", PrimitiveType, PrimitiveCount,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::DrawPrimitiveUP(%d, %d, %p, %d) == %d", PrimitiveType, PrimitiveCount,
                 pVertexStreamZeroData, VertexStreamZeroStride, hr
                 );
 #endif
@@ -1068,7 +1067,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::DrawIndexedPrimitiveUP(%d, %d, %d, %d, %d, %d, %d, %d) == %d",
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::DrawIndexedPrimitiveUP(%d, %d, %d, %d, %p, %d, %p, %d) == %d",
                 PrimitiveType, MinVertexIndex, NumVertexIndices, PrimitiveCount, pIndexData, IndexDataFormat,
                 pVertexStreamZeroData, VertexStreamZeroStride, hr
                 );
@@ -1092,7 +1091,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::ProcessVertices(%d, %d, %d, %d, %d) == %d", SrcStartIndex, DestIndex,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::ProcessVertices(%d, %d, %d, %p, %d) == %d", SrcStartIndex, DestIndex,
                 VertexCount, pDestBuffer, Flags, hr
                 );
 #endif
@@ -1108,7 +1107,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::CreateVertexShader(%d, %d, %d, %d) == %d", pDeclaration, pFunction,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::CreateVertexShader(%p, %p, %p, %d) == %d", pDeclaration, pFunction,
                 pHandle, Usage, hr
                 );
 #endif
@@ -1146,7 +1145,7 @@ namespace VoodooShader
             (*pHandle) = m_CurrentVertexShader;
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetVertexShader(%d) == D3D_OK", pHandle);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetVertexShader(%p) == D3D_OK", pHandle);
 #endif
             return D3D_OK;
         }
@@ -1178,7 +1177,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetVertexShaderConstant(%d, %d, %d) == %d", Register, pConstantData,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetVertexShaderConstant(%d, %p, %d) == %d", Register, pConstantData,
                 ConstantCount, hr
                 );
 #endif
@@ -1191,7 +1190,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetVertexShaderConstant(%d, %d, %d) == %d", Register, pConstantData,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetVertexShaderConstant(%d, %p, %d) == %d", Register, pConstantData,
                 ConstantCount, hr
                 );
 #endif
@@ -1202,8 +1201,8 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetVertexShaderDeclaration(%d, %d, %d) == UNUSED", Handle, pData,
-                pSizeOfData
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetVertexShaderDeclaration(%d, %p, %d) == UNUSED", Handle, pData,
+                *pSizeOfData
                 );
 #endif
             return D3DERR_INVALIDCALL;
@@ -1215,8 +1214,8 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetVertexShaderFunction(%d, %d, %d) == UNUSED", Handle, pData,
-                pSizeOfData
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetVertexShaderFunction(%d, %p, %d) == UNUSED", Handle, pData,
+                *pSizeOfData
                 );
 #endif
             return D3DERR_INVALIDCALL;
@@ -1228,7 +1227,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetStreamSource(%d, %d, %d) == %d", StreamNumber, pStreamData, Stride,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetStreamSource(%d, %p, %d) == %d", StreamNumber, pStreamData, Stride,
                 hr
                 );
 #endif
@@ -1243,7 +1242,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetStreamSource(%d, %d, %d) == %d", StreamNumber, *ppStreamData, *
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetStreamSource(%d, %p, %d) == %d", StreamNumber, *ppStreamData, *
                 pStride, hr
                 );
 #endif
@@ -1255,7 +1254,7 @@ namespace VoodooShader
             m_LastBaseIndex = BaseVertexIndex;
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetIndices(%d, %d) == %d", pIndexData, BaseVertexIndex, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetIndices(%p, %d) == %d", pIndexData, BaseVertexIndex, hr);
 #endif
             return hr;
         }
@@ -1265,7 +1264,7 @@ namespace VoodooShader
             (*pBaseVertexIndex) = m_LastBaseIndex;
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetIndices(%d, %d) == %d", *ppIndexData, *pBaseVertexIndex, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetIndices(%p, %d) == %d", *ppIndexData, *pBaseVertexIndex, hr);
 #endif
             return hr;
         }
@@ -1274,7 +1273,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->CreatePixelShader(pFunction, (IDirect3DPixelShader9 **) pHandle);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::CreatePixelShader(%d, %d) == %d", pFunction, *pHandle, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::CreatePixelShader(%p, %d) == %d", pFunction, *pHandle, hr);
 #endif
             if (SUCCEEDED(hr))
             {
@@ -1343,7 +1342,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetPixelShaderConstant(%d, %d, %d) == %d", Register, pConstantData,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::SetPixelShaderConstant(%d, %p, %d) == %d", Register, pConstantData,
                 ConstantCount, hr
                 );
 #endif
@@ -1356,7 +1355,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetPixelShaderConstant(%d, %d, %d) == %d", Register, pConstantData,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetPixelShaderConstant(%d, %p, %d) == %d", Register, pConstantData,
                 ConstantCount, hr
                 );
 #endif
@@ -1369,7 +1368,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetPixelShaderFunction(%d, %d, %d) == UNUSED", Handle, pData,
+                LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::GetPixelShaderFunction(%d, %p, %p) == UNUSED", Handle, pData,
                 pSizeOfData
                 );
 #endif
@@ -1380,7 +1379,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->DrawRectPatch(Handle, pNumSegs, pRectPatchInfo);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::DrawRectPatch(%d, %d, %d) == %d", Handle, pNumSegs, pRectPatchInfo, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::DrawRectPatch(%d, %p, %p) == %d", Handle, pNumSegs, pRectPatchInfo, hr);
 #endif
             return hr;
         }
@@ -1389,7 +1388,7 @@ namespace VoodooShader
             HRESULT hr = m_RealDevice->DrawTriPatch(Handle, pNumSegs, pTriPatchInfo);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::DrawTriPatch(%d, %d, %d) == %d", Handle, pNumSegs, pTriPatchInfo, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3DDevice8::DrawTriPatch(%d, %p, %p) == %d", Handle, pNumSegs, pTriPatchInfo, hr);
 #endif
             return hr;
         }

@@ -22,6 +22,7 @@
 
 #include "CVoodoo3DDevice8.hpp"
 
+#include "DX9_Adapter.hpp"
 #include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
 
@@ -32,19 +33,26 @@ namespace VoodooShader
         /**
         * The default, public constructor for CVoodoo3D objects.
         */
-        CVoodoo3D8::CVoodoo3D8(IDirect3D9 *realObject) :
-            m_RealObject(realObject)
+        CVoodoo3D8::CVoodoo3D8(UINT sdkVersion, IDirect3D9 * pRealObject) :
+            m_SdkVersion(sdkVersion), m_RealObject(pRealObject)
         { }
+
+        CVoodoo3D8::~CVoodoo3D8()
+        {
+
+        }
 
         // IUnknown methods
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::QueryInterface(REFIID riid, void **ppvObj)
         {
             return m_RealObject->QueryInterface(riid, ppvObj);
         }
+
         ULONG STDMETHODCALLTYPE CVoodoo3D8::AddRef()
         {
             return m_RealObject->AddRef();
         }
+
         ULONG STDMETHODCALLTYPE CVoodoo3D8::Release()
         {
             ULONG refCount = m_RealObject->Release();
@@ -157,7 +165,7 @@ namespace VoodooShader
             IDirect3DDevice8 **ppReturnedDeviceInterface
             )
         {
-            D3DPRESENT_PARAMETERS9 mpPresentationParameters;
+            D3DPRESENT_PARAMETERS mpPresentationParameters;
 
             mpPresentationParameters.Flags = pPresentationParameters->Flags;
 
@@ -180,24 +188,25 @@ namespace VoodooShader
             mpPresentationParameters.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 #ifdef _DEBUG
-            const char *textureType = VoodooShader::Converter::ToString
-                (VoodooShader::DirectX89::DX89_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat));
+            const wchar_t * textureType = VoodooShader::Converter::ToString
+                (VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat));
+
             gpVoodooLogger->Log
-                (
+            (
                 LL_ModInfo, VOODOO_DX9_NAME, L"Backbuffer parameters for new device: %d by %d (%d buffers), %s.",
                 mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight,
                 mpPresentationParameters.BackBufferCount, textureType
-                );
+            );
 #endif
-            IDirect3DDevice9 *m_RealDevice;
-            HRESULT hr = m_RealObject->CreateDevice
-                (Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &m_RealDevice);
+
+            IDirect3DDevice9 * pRealDevice;
+            HRESULT hr = m_RealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &pRealDevice);
 
 #ifdef _DEBUG
             gpVoodooLogger->Log
                 (
-                LL_ModInfo, VOODOO_DX9_NAME, L"CVoodoo3D8::CreateDevice(%d, %d, %d, %d, %d, %d) == %d", Adapter, DeviceType,
-                hFocusWindow, BehaviorFlags, &mpPresentationParameters, m_RealDevice, hr
+                LL_ModInfo, VOODOO_DX9_NAME, L"CVoodoo3D8::CreateDevice(%d, %d, %p, %d, %p, %p) == %d", Adapter, DeviceType,
+                hFocusWindow, BehaviorFlags, &mpPresentationParameters, pRealDevice, hr
                 );
 #endif
             if (!SUCCEEDED(hr))
@@ -207,15 +216,17 @@ namespace VoodooShader
             }
             else
             {
-
                 // Succeeded, create a fake device and go from there
-                CVoodoo3DDevice8 * m_FakeDevice = new CVoodoo3DDevice8(m_RealDevice);
-                VoodooDevice = m_FakeDevice;
+                *ppReturnedDeviceInterface = new CVoodoo3DDevice8(pRealDevice);
 
-                gpVoodooDX89 = (VoodooShader::Adapter *) new VoodooShader::DirectX89::Adapter(gpVoodooCore, m_RealDevice);
-                (*ppReturnedDeviceInterface) = (IDirect3DDevice8 *) m_FakeDevice;
+                Uuid adapterID = VoodooShader::VoodooDX9::CLSID_DX9Adapter;
+                VoodooShader::VoodooDX9::DX9Adapter * pDXAdapter = nullptr;
+                if (gpVoodooCore->GetAdapter()->QueryInterface(adapterID, (const void**)&pDXAdapter) && pDXAdapter)
+                {
+                    pDXAdapter->SetDXDevice(pRealDevice);
+                }
 
-                HRESULT hrt = m_RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &backbufferSurf);
+                HRESULT hrt = pRealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &backbufferSurf);
 
                 if (SUCCEEDED(hrt))
                 {
@@ -226,15 +237,20 @@ namespace VoodooShader
                     gpVoodooLogger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to retrieve backbuffer surface.");
                 }
 
-                texture_ThisFrame = gpVoodooDX89->CreateTexture
-                (
-                    ":thisframe", pPresentationParameters->BackBufferWidth, pPresentationParameters->BackBufferHeight, 1,
-                    true, VoodooShader::TF_RGB8
-                );
+                TextureDesc backbufferDesc;
+                ZeroMemory(&backbufferDesc, sizeof(TextureDesc));
+                backbufferDesc.Size.X = pPresentationParameters->BackBufferWidth;
+                backbufferDesc.Size.Y = pPresentationParameters->BackBufferHeight;
+                backbufferDesc.Size.Z = 0;
+                backbufferDesc.Mipmaps = true;
+                backbufferDesc.RenderTarget = true;
+                backbufferDesc.Format = VoodooShader::TF_RGB8;
 
-                if (texture_ThisFrame.get())
+                texture_ThisFrame = gpVoodooCore->CreateTexture(L":thisframe", &backbufferDesc);
+
+                if (texture_ThisFrame)
                 {
-                    IDirect3DTexture9 *texture = (IDirect3DTexture9 *) texture_ThisFrame->GetTexture();
+                    IDirect3DTexture9 * texture = (IDirect3DTexture9 *)texture_ThisFrame->GetData();
                     hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
                     if (SUCCEEDED(hrt))
                     {
@@ -245,15 +261,17 @@ namespace VoodooShader
                         gpVoodooLogger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to cache :thisframe surface.");
                     }
                 }
+
                 try
                 {
-                    testShader = gpVoodooCore->CreateShader("test.cgfx", nullptr);
-                    testShader->Link();
+                    IFileRef shaderfile = gpVoodooCore->GetFileSystem()->FindFile(L"test.cgfx");
+                    testShader = gpVoodooCore->CreateShader(shaderfile.get(), nullptr);
                 }
                 catch(std::exception & exc)
                 {
-                    gpVoodooLogger->Log(LL_ModError, VOODOO_DX9_NAME, L"Error loading shader: %s", exc.what());
+                    gpVoodooLogger->Log(LL_ModError, VOODOO_DX9_NAME, L"Error loading shader: %S", exc.what());
                 }
+
                 return hr;
             }
         }
@@ -263,19 +281,19 @@ namespace VoodooShader
             HRESULT hr = m_RealObject->EnumAdapterModes(Adapter, D3DFMT_X8R8G8B8, Mode, pMode);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::EnumAdapterModes(%d, %d, %d) == %d", Adapter, Mode, pMode, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::EnumAdapterModes(%d, %d, %p) == %d", Adapter, Mode, pMode, hr);
 #endif
             return hr;
         }
 
         UINT STDMETHODCALLTYPE CVoodoo3D8::GetAdapterCount()
         {
-            UINT r = m_RealObject->GetAdapterCount();
+            UINT count = m_RealObject->GetAdapterCount();
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::GetAdapterCount() == %d", r);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::GetAdapterCount() == %d", count);
 #endif
-            return r;
+            return count;
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::GetAdapterDisplayMode(UINT Adapter, D3DDISPLAYMODE * pMode)
@@ -283,7 +301,7 @@ namespace VoodooShader
             HRESULT hr = m_RealObject->GetAdapterDisplayMode(Adapter, pMode);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::GetAdapterDisplayMode(%d, %d) == %d", Adapter, pMode, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::GetAdapterDisplayMode(%d, %p) == %d", Adapter, pMode, hr);
 #endif
             pMode->Format = D3DFMT_X8R8G8B8;
 
@@ -297,7 +315,7 @@ namespace VoodooShader
             HRESULT hr = m_RealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::GetAdapterIdentifier(%d, %d, %d) == %d", Adapter, Flags, pIdentifier, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::GetAdapterIdentifier(%d, %d, %p) == %d", Adapter, Flags, pIdentifier, hr);
 #endif
             if (SUCCEEDED(hr))
             {
@@ -329,32 +347,51 @@ namespace VoodooShader
             HMONITOR hm = m_RealObject->GetAdapterMonitor(Adapter);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::GetAdapterMonitor(%d) == %d", Adapter, hm);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::GetAdapterMonitor(%d) == %p", Adapter, hm);
 #endif
             return hm;
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::GetDeviceCaps(UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS8 * pCaps)
         {
-            *pCaps = d3d8Caps;
+            static D3DCAPS8 d3d8caps;
+            static bool d3d8caps_fetched = false;
 
-            D3DCAPS9 realCaps;
-            HRESULT hr = m_RealObject->GetDeviceCaps(Adapter, DeviceType, &realCaps);
-
-#ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::GetDeviceCaps(%d, %d, %d) == %d", Adapter, DeviceType, pCaps, hr);
-#endif
-            int same = memcmp(pCaps, &realCaps, sizeof(D3DCAPS8));
-
-            if (same == 0)
+            if (!d3d8caps_fetched)
             {
-                gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"D3D8 and 9 caps are identical.");
+                TCHAR d3d8Path[MAX_PATH];
+
+                GetSystemDirectory(d3d8Path, MAX_PATH);
+                wcscat_s(d3d8Path, MAX_PATH, TEXT("\\d3d8.dll"));
+
+                HMODULE d3d8module = LoadLibrary(d3d8Path);
+                if (d3d8module)
+                {
+                    typedef IDirect3D8 * (WINAPI * d3d8createtype)(UINT);
+
+                    d3d8createtype d3d8create = (d3d8createtype)GetProcAddress(d3d8module, "Direct3DCreate8");
+                    if (d3d8create)
+                    {
+                        IDirect3D8 * pDev8 = d3d8create(m_SdkVersion);
+                        if (pDev8)
+                        { 
+                            HRESULT hr = pDev8->GetDeviceCaps(Adapter, DeviceType, &d3d8caps);
+                            if (SUCCEEDED(hr))
+                            {
+                                d3d8caps_fetched = true;
+                            }
+                        }
+                    }
+                }
             }
-            else
+
+            *pCaps = d3d8caps;
+            if (!d3d8caps_fetched)
             {
-                gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"Caps differ.");
+                return D3DERR_NOTAVAILABLE;
+            } else {
+                return D3D_OK;
             }
-            return D3D_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::RegisterSoftwareDevice(void *pInitializeFunction)
@@ -362,7 +399,7 @@ namespace VoodooShader
             HRESULT hr = m_RealObject->RegisterSoftwareDevice(pInitializeFunction);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::RegisterSoftwareDevice(%d) == %d", pInitializeFunction, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::RegisterSoftwareDevice(%p) == %d", pInitializeFunction, hr);
 #else
             gpVoodooLogger->Log(LL_ModWarning, VOODOO_DX9_NAME, L"The application has registered a software device with D3D8, illegal behavior.");
 #endif

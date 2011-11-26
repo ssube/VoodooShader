@@ -30,8 +30,8 @@ namespace VoodooShader
 {
     namespace VoodooDX9
     {
-        CVoodoo3D9::CVoodoo3D9(IDirect3D9 * pD3D) :
-            m_RealObject(pD3D)
+        CVoodoo3D9::CVoodoo3D9(UINT sdkVersion, IDirect3D9 * pD3D) :
+            m_SdkVersion(sdkVersion), m_RealObject(pD3D)
         { }
 
         CVoodoo3D9::~CVoodoo3D9()
@@ -233,7 +233,7 @@ namespace VoodooShader
                 TextureDesc bufferTextureDesc;
                 bufferTextureDesc.Size.X = pPresentationParameters->BackBufferWidth;
                 bufferTextureDesc.Size.Y = pPresentationParameters->BackBufferHeight;
-                bufferTextureDesc.Size.Z = 1;
+                bufferTextureDesc.Size.Z = 0;
                 bufferTextureDesc.Format = TF_RGBA8;
                 bufferTextureDesc.Mipmaps = true;
                 bufferTextureDesc.RenderTarget = true;

@@ -34,7 +34,6 @@ typedef D3DCLIPSTATUS9 D3DCLIPSTATUS8;
 #define IDirect3DIndexBuffer8 void
 #define IDirect3DVertexBuffer8 void
 #define IDirect3DSwapChain8  void
-#define IDirect3DBaseTexture8 IDirect3DTexture8
 #define IDirect3DVolumeTexture8 void
 #define IDirect3DCubeTexture8 void
 
