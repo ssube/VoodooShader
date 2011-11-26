@@ -130,7 +130,7 @@ namespace VoodooShader
         Regex compfilter;
         if (filter.IsEmpty())
         {
-            compfilter.SetExpr(L".*\.dll");
+            compfilter.SetExpr(L".*\\.dll");
         } else {
             compfilter.SetExpr(filter);
         }
