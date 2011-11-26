@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore." alt="" coords="387,5,600,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="400,56,587,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_i_parameter.html#aee70aff83a671b72b9e6eb0d7ed63343" title="Get the name of this object." alt="" coords="376,107,611,133"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="683,157,888,184"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_v_s_parameter.html#afb1f716534ab918da707ca74e8ac84b6" title="Get the name of this object." alt="" coords="369,208,618,235"/>
+<area shape="rect" id="node16" href="$class_voodoo_shader_1_1_i_parameter.html#af400c5ebbf7c132f1b0e049023816cdc" title="Retrieves the underlying Cg parameter object." alt="" coords="352,259,635,285"/>
+<area shape="rect" id="node13" href="$group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb" title="VoodooShader::String::Format" alt="" coords="686,208,885,235"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ab1200fb653ffcbcc450552d1cccab151" title="Closes the log file, if one is open." alt="" coords="370,5,673,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ad672a50a8c3e9a2a36dcd450dc38b7a1" title="VoodooShader::XmlLogger::VSXmlLogger::SetFlags" alt="" coords="361,56,682,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a7c91adfa1e03e77b216dba5042c16eb7" title="Formats a date for the log." alt="" coords="363,107,680,133"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="795,157,1000,184"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#aeebae8425ba973ac7c97368080adda5d" title="Formats a timestamp for the log." alt="" coords="738,208,1057,235"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ad9e868156fb41333908fae9138bb8230" title="Formats the system&#39;s current tick count." alt="" coords="737,309,1058,336"/>
+<area shape="rect" id="node17" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a10901a52fb6f53c52043942fd9b4df3b" title="Log a message, may be formatted with printf syntax." alt="" coords="376,259,667,285"/>
+<area shape="rect" id="node24" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a78508c2017f5c2c2d4f25719613ba7bf" title="Writes a module stamp to the log." alt="" coords="355,360,687,387"/>
+<area shape="rect" id="node26" href="$group__voodoo__module__xmllogger.html#ga052640155aad0d3d6464764e4df90afd" title="VoodooShader::XmlLogger::API_ModuleVersion" alt="" coords="373,411,670,437"/>
+<area shape="rect" id="node15" href="$group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb" title="VoodooShader::String::Format" alt="" coords="1107,309,1306,336"/>
+<area shape="rect" id="node19" href="$group__voodoo__utility__string__format.html#gaf19f157a14862373fc38c6070aabd1a1" title="VoodooShader::String::FormatV" alt="" coords="794,259,1001,285"/>
+</map>

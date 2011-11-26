@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_core.html#a0625fa5c3a31a57f07831af4ca62679c" title="Retrieves this core&#39;s variable parser." alt="" coords="854,5,1066,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_core.html#adeb70776a1f058b5b5069dd09ea50535" title="Retrieve the Xml config document for this ICore." alt="" coords="524,56,735,83"/>
+<area shape="rect" id="node7" href="$group__voodoo__module__wfilesystem.html#gaf50d200f10d74688d4c7c765ac6a148c" title="Add a directory to the search path." alt="" coords="453,107,805,133"/>
+<area shape="rect" id="node10" href="$class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values." alt="" coords="861,56,1059,83"/>
+<area shape="rect" id="node12" href="$group__voodoo__utility__string__find.html#gaa17a786c594e28c8d1f701e4305bd288" title="VoodooShader::String::Find" alt="" coords="869,107,1051,133"/>
+<area shape="rect" id="node14" href="$group__voodoo__utility__string__part.html#gab3d0052d81f6261c897227c3d435a6c6" title="VoodooShader::String::Substr" alt="" coords="863,157,1057,184"/>
+<area shape="rect" id="node16" href="$group__voodoo__utility__string__ctors.html#ga799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string." alt="" coords="1115,157,1306,184"/>
+</map>

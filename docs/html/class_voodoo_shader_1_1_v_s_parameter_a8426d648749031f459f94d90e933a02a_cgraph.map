@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore." alt="" coords="352,5,565,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="365,56,552,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_v_s_parameter.html#afb1f716534ab918da707ca74e8ac84b6" title="Get the name of this object." alt="" coords="334,107,583,133"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_i_core.html#af5d95132cb8f8d2c73f3982dc4dbf956" title="Retrieve the Cg context associated with this ICore." alt="" coords="341,157,576,184"/>
+<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_converter.html#a5e992675ee0d6a5474ded1b9d4c51785" title="Convert a Voodoo parameter type to the corresponding Cg runtime type." alt="" coords="339,208,578,235"/>
+<area shape="rect" id="node9" href="$group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb" title="VoodooShader::String::Format" alt="" coords="635,81,834,108"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="632,132,837,159"/>
+</map>

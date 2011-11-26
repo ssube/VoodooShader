@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_shader.html#adf100f848b4324cbafd75085d36bd2a9" title="VoodooShader::IShader::GetName" alt="" coords="331,5,554,32"/>
+<area shape="rect" id="node5" href="$group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb" title="VoodooShader::String::Format" alt="" coords="905,132,1103,159"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_v_s_technique.html#a24b9741f7703f139d55f8e4780c448b3" title="VoodooShader::VSTechnique::Link" alt="" coords="331,183,555,209"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_i_core.html#a3d95f3988fd6c684aae5fdf9b10dc58c" title="Retrieves a texture from the ICore&#39;s texture map by name." alt="" coords="619,107,837,133"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_i_core.html#a8bb7e0f11989b9156d214d55dbdcdc90" title="Retrieve the ILogger attached to this ICore." alt="" coords="621,157,835,184"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="635,208,821,235"/>
+<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_v_s_technique.html#a2338faa90520c123f82b35f1c67eda92" title="Get the name of this object." alt="" coords="604,259,852,285"/>
+<area shape="rect" id="node20" href="$class_voodoo_shader_1_1_i_core.html#ab393bfc23a0761b7a6ba49ea3f454bb5" title="Retrieves a texture from the ICore&#39;s texture map by stage." alt="" coords="603,309,853,336"/>
+<area shape="rect" id="node18" href="$class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="901,259,1107,285"/>
+</map>

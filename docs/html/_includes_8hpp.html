@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
+   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -89,8 +89,6 @@
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_includes_8hpp__incl.png" border="0" usemap="#_d_1_2_code_2_voodoo_shader_2_framework_2_core_2_includes_8hpp" alt=""/></div>
-<map name="_d_1_2_code_2_voodoo_shader_2_framework_2_core_2_includes_8hpp" id="_d_1_2_code_2_voodoo_shader_2_framework_2_core_2_includes_8hpp">
-</map>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
@@ -144,6 +142,8 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a>&#160;&#160;&#160;VOODOO_CALLTYPE</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(type, name)&#160;&#160;&#160;virtual DECLSPEC_NOTHROW type VOODOO_CALLTYPE name</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(name)&#160;&#160;&#160;VOODOO_METHODCALL_(bool, name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#aa501b7717dd46771215aca8e0f17904c">VOODOO_INTERFACE_</a>(iname)&#160;&#160;&#160;class DECLSPEC_NOVTABLE iname</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a26de8d28ff5aaebe3ced239b816b6c3f">VOODOO_INTERFACE</a>(iname, ibase)&#160;&#160;&#160;VOODOO_INTERFACE_(iname) : public ibase</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a5e73ef0ad4e5614cea6c0c7514ccafaf">VOODOO_PUBLIC_FUNC</a>&#160;&#160;&#160;VOODOO_API VOODOO_CALLTYPE</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(x)&#160;&#160;&#160;++x</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(x)&#160;&#160;&#160;--x</td></tr>
@@ -229,12 +229,10 @@ IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <tr><td class="memItemLeft" align="right" valign="top">typedef Vector2&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a293130e59e7255b8fc2b32e58a284f15">VoodooShader::UInt2</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef Vector3&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3634f04627c43f7bba23d25a2ecba5a6">VoodooShader::UInt3</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef Vector4&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a9f2cba9a9e76c4a0f9aab334adf0dd12">VoodooShader::UInt4</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef const Version <br class="typebreak"/>
-*(VOODOO_CALLTYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a26278442e30d1aec50061cef3e9d5e76">VoodooShader::Functions::VersionFunc</a> )()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef const uint32_t(VOODOO_CALLTYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a24a1bfa9cf215f8e2114cde996c018bb">VoodooShader::Functions::CountFunc</a> )()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef const wchar_t <br class="typebreak"/>
-*(VOODOO_CALLTYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a57e833235eee4ca0101510eb544f5db0">VoodooShader::Functions::InfoFunc</a> )(const uint32_t, Uuid *)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef IObject *(VOODOO_CALLTYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a7081ee6d87a468fc3e8b683cb483aacd">VoodooShader::Functions::CreateFunc</a> )(const uint32_t, ICore *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef const Version *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a3fd620021c838540b159517835934036">VoodooShader::Functions::VersionFunc</a> )()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef const uint32_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#aaad09a43815aba856ebfc5628646905d">VoodooShader::Functions::CountFunc</a> )()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef const wchar_t *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a17fc743520d7a9a9df18644d0dcea7d6">VoodooShader::Functions::InfoFunc</a> )(const uint32_t, Uuid *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef IObject *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_functions.html#a2b28df7bf1408d66a6e3dcafd7a78040">VoodooShader::Functions::CreateFunc</a> )(const uint32_t, ICore *)</td></tr>
 <tr><td colspan="2"><h2><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669f">VoodooShader::TextureFormat</a> { <br/>
@@ -507,11 +505,10 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">VoodooShader::intrusive_ptr_add_ref</a> (IObject *obj)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void VOODOO_PUBLIC_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">VoodooShader::intrusive_ptr_release</a> (IObject *obj)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">_Check_return_ ICore <br class="typebreak"/>
-*VOODOO_CALLTYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#ae7e63328d305898952a1d4390ec3920b">VoodooShader::CreateCore</a> (const InitParams *const pInitParams, bool catchErrors=true)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new core.  <a href="#ae7e63328d305898952a1d4390ec3920b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void VOODOO_API VOODOO_CALLTYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aa9f5fd2db677cf48cd432cd458d84dca">VoodooShader::intrusive_ptr_add_ref</a> (IObject *obj)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void VOODOO_API VOODOO_CALLTYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aea103157e023cfb4887c769a76463e52">VoodooShader::intrusive_ptr_release</a> (IObject *obj)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ICore *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a231325ead4f836647a5c650656504b7b">VoodooShader::CreateCore</a> (const InitParams *const pInitParams, bool catchErrors=true)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new core.  <a href="#a231325ead4f836647a5c650656504b7b"></a><br/></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ab979d9d4b4923f7c54d6caa6e1a61936"></a><!-- doxytag: member="Includes.hpp::nullptr" ref="ab979d9d4b4923f7c54d6caa6e1a61936" args="" -->
@@ -544,7 +541,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00197">197</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00204">204</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -563,7 +560,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00196">196</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00203">203</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -601,7 +598,7 @@ Functions</h2></td></tr>
 <p>Macro to throw Voodoo <a class="el" href="class_voodoo_shader_1_1_exception.html">exceptions</a> with extended debug info, particularly function, filename and line. </p>
 <p>These exceptions are also logged if possible (requires a valid core to be given). The Exception class derives from std::exception, so these are simple to handle. </p>
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00631">631</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00638">638</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -616,7 +613,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00098">98</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00102">102</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -631,7 +628,55 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00103">103</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00107">107</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a26de8d28ff5aaebe3ced239b816b6c3f"></a><!-- doxytag: member="Includes.hpp::VOODOO_INTERFACE" ref="a26de8d28ff5aaebe3ced239b816b6c3f" args="(iname, ibase)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOODOO_INTERFACE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">iname, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ibase&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;VOODOO_INTERFACE_(iname) : public ibase</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00114">114</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa501b7717dd46771215aca8e0f17904c"></a><!-- doxytag: member="Includes.hpp::VOODOO_INTERFACE_" ref="aa501b7717dd46771215aca8e0f17904c" args="(iname)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOODOO_INTERFACE_</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">iname</td><td>)</td>
+          <td>&#160;&#160;&#160;class DECLSPEC_NOVTABLE iname</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00113">113</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +771,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00107">107</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00111">111</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -755,7 +800,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00106">106</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00110">110</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -770,7 +815,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00104">104</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00108">108</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -785,7 +830,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00109">109</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00116">116</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -842,7 +887,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 02:22:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 12:34:58 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

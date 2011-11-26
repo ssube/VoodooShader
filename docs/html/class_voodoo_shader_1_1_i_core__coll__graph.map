@@ -1,7 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="491,44,647,71"/>
-<area shape="rect" id="node21" href="$class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="825,88,986,115"/>
-<area shape="rect" id="node8" href="$struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="811,189,999,216"/>
-<area shape="rect" id="node10" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="454,165,685,192"/>
-<area shape="rect" id="node12" href="$struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; uint32_t \&gt;" alt="" coords="137,212,367,239"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="5,5,160,32"/>
 </map>

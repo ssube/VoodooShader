@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_v_s_core.html#a5b65b1624e11d024cf07a99704bb649f" title="Initializes the core, loading the config file and all required modules and creating objects..." alt="" coords="307,5,522,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_v_s_parameter.html#afb1f716534ab918da707ca74e8ac84b6" title="Get the name of this object." alt="" coords="290,56,539,83"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_v_s_pass.html#a7e933776597f7e1616d609322f9b98f8" title="VoodooShader::VSPass::VSPass" alt="" coords="1015,132,1233,159"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_v_s_pass.html#afc4ad34a485288583b71f24c2cd6a24b" title="Get the name of this object." alt="" coords="305,157,524,184"/>
+<area shape="rect" id="node18" href="$class_voodoo_shader_1_1_v_s_shader.html#afb519607cdbd44fe5e5dd84504c76701" title="Get the name of this object." alt="" coords="299,208,530,235"/>
+<area shape="rect" id="node22" href="$class_voodoo_shader_1_1_v_s_technique.html#a196ae697aec2ed1d790efff6e5b1866f" title="VoodooShader::VSTechnique::VSTechnique" alt="" coords="985,297,1263,324"/>
+<area shape="rect" id="node24" href="$class_voodoo_shader_1_1_v_s_technique.html#abe437ebb2ef086715a045664a863e423" title="Get the name of this object." alt="" coords="291,309,539,336"/>
+<area shape="rect" id="node29" href="$class_voodoo_shader_1_1_v_s_texture.html#a753f217a141883d0f285e3d3d739d091" title="Get the name of this object." alt="" coords="299,360,531,387"/>
+<area shape="rect" id="node31" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ad9e868156fb41333908fae9138bb8230" title="Formats the system&#39;s current tick count." alt="" coords="254,411,575,437"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_v_s_parameter.html#a8426d648749031f459f94d90e933a02a" title="VoodooShader::VSParameter::VSParameter" alt="" coords="635,5,914,32"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_v_s_parameter.html#a20086ac1bda156a38ed61243118c506d" title="Attaches a second parameter to this one, forcing the other to update whenever this value is changed..." alt="" coords="625,56,924,83"/>
+<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_v_s_pass.html#a3739d68ea6d718429666ec75a84c65f3" title="VoodooShader::VSPass::Link" alt="" coords="677,157,872,184"/>
+<area shape="rect" id="node20" href="$class_voodoo_shader_1_1_v_s_shader.html#aca4f12e0841dec85a85a5d97b1a1baff" title="Set a technique from this shader to be used as the default technique." alt="" coords="624,208,925,235"/>
+<area shape="rect" id="node26" href="$class_voodoo_shader_1_1_v_s_technique.html#a24b9741f7703f139d55f8e4780c448b3" title="VoodooShader::VSTechnique::Link" alt="" coords="663,309,887,336"/>
+<area shape="rect" id="node33" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a8d1947d35e5ce1df0f30a60db6715b5b" title="Opens a file for use by this logger." alt="" coords="974,373,1274,400"/>
+<area shape="rect" id="node37" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a10901a52fb6f53c52043942fd9b4df3b" title="Log a message, may be formatted with printf syntax." alt="" coords="629,411,920,437"/>
+<area shape="rect" id="node35" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a55249f79c0a027a8df21df8e1c88a375" title="Opens a file for use by this Logger." alt="" coords="1323,373,1623,400"/>
+</map>

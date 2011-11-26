@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_core.html#a0625fa5c3a31a57f07831af4ca62679c" title="Retrieves this core&#39;s variable parser." alt="" coords="430,5,642,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values." alt="" coords="437,56,635,83"/>
+</map>

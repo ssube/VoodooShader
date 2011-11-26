@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
+   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -91,96 +91,101 @@
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <span class="keyword">namespace </span>VoodooShader
 <a name="l00024"></a>00024 {
-<a name="l00025"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a6dc73e7117dd3b33da71d70bce56b253">00025</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a6dc73e7117dd3b33da71d70bce56b253">VSTexture::VSTexture</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a> name, <span class="keywordtype">void</span> * pTexture) :
-<a name="l00026"></a>00026         m_Refs(0), m_Name(name), m_Data(pTexture)
-<a name="l00027"></a>00027     { }
-<a name="l00028"></a>00028 
-<a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5101a787f4c1c53b5acc241661c1552a">00029</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5101a787f4c1c53b5acc241661c1552a">VSTexture::~VSTexture</a>()
-<a name="l00030"></a>00030     { }
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSTexture::AddRef() CONST
-<a name="l00033"></a>00033     {
-<a name="l00034"></a>00034         <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#acadcddd2cfd010aed4c409723de29a0a">m_Refs</a>);
-<a name="l00035"></a>00035     }
+<a name="l00025"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a57f2993f5e41efda7edc650d90a512be">00025</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a57f2993f5e41efda7edc650d90a512be">VSTexture::VSTexture</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> name, _In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * pDesc, <span class="keywordtype">void</span> * pTexture) :
+<a name="l00026"></a>00026         m_Refs(0), m_Core(pCore), m_Name(name), m_Data(pTexture)
+<a name="l00027"></a>00027     {
+<a name="l00028"></a>00028         <span class="keywordflow">if</span> (pDesc)
+<a name="l00029"></a>00029         {
+<a name="l00030"></a>00030             <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a55c4b97271907af570ee65a715d748d1">m_Desc</a> = *pDesc;
+<a name="l00031"></a>00031         }
+<a name="l00032"></a>00032     }
+<a name="l00033"></a>00033 
+<a name="l00034"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5101a787f4c1c53b5acc241661c1552a">00034</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5101a787f4c1c53b5acc241661c1552a">VSTexture::~VSTexture</a>()
+<a name="l00035"></a>00035     { }
 <a name="l00036"></a>00036 
-<a name="l00037"></a>00037     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSTexture::Release() CONST
+<a name="l00037"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5d2281857b56c52c6a57c0acf751da00">00037</a>     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5d2281857b56c52c6a57c0acf751da00" title="Add a reference to this object.">VSTexture::AddRef</a>() CONST
 <a name="l00038"></a>00038     {
-<a name="l00039"></a>00039         <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#acadcddd2cfd010aed4c409723de29a0a">m_Refs</a>) == 0)
-<a name="l00040"></a>00040         {
-<a name="l00041"></a>00041             <span class="keyword">delete</span> <span class="keyword">this</span>;
-<a name="l00042"></a>00042             <span class="keywordflow">return</span> 0;
-<a name="l00043"></a>00043         } <span class="keywordflow">else</span> {
-<a name="l00044"></a>00044             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#acadcddd2cfd010aed4c409723de29a0a">m_Refs</a>;
-<a name="l00045"></a>00045         }
-<a name="l00046"></a>00046     }
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSTexture::QueryInterface(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
-<a name="l00049"></a>00049     {
-<a name="l00050"></a>00050         <span class="keywordflow">if</span> (!ppOut)
-<a name="l00051"></a>00051         {
-<a name="l00052"></a>00052             <span class="keywordflow">if</span> (clsid.is_nil())
-<a name="l00053"></a>00053             {
-<a name="l00054"></a>00054                 clsid = IID_ITexture;
-<a name="l00055"></a>00055                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00056"></a>00056             } <span class="keywordflow">else</span> {
-<a name="l00057"></a>00057                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00058"></a>00058             }
-<a name="l00059"></a>00059         } <span class="keywordflow">else</span> {
-<a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == IID_IObject)
-<a name="l00061"></a>00061             {
-<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_ITexture) {
-<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>ITexture*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSTexture) {
-<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>VSTexture*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00067"></a>00067             } <span class="keywordflow">else</span> {
-<a name="l00068"></a>00068                 *ppOut = <span class="keyword">nullptr</span>;
-<a name="l00069"></a>00069                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00070"></a>00070             }
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(*ppOut)-&gt;AddRef();
-<a name="l00073"></a>00073             <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00074"></a>00074         }
-<a name="l00075"></a>00075     }
+<a name="l00039"></a>00039         <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#acadcddd2cfd010aed4c409723de29a0a">m_Refs</a>);
+<a name="l00040"></a>00040     }
+<a name="l00041"></a>00041 
+<a name="l00042"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a9d50a855606a8641a8ba252ef7ab9672">00042</a>     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a9d50a855606a8641a8ba252ef7ab9672" title="Release a reference from this object.">VSTexture::Release</a>() CONST
+<a name="l00043"></a>00043     {
+<a name="l00044"></a>00044         <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#acadcddd2cfd010aed4c409723de29a0a">m_Refs</a>) == 0)
+<a name="l00045"></a>00045         {
+<a name="l00046"></a>00046             <span class="keyword">delete</span> <span class="keyword">this</span>;
+<a name="l00047"></a>00047             <span class="keywordflow">return</span> 0;
+<a name="l00048"></a>00048         } <span class="keywordflow">else</span> {
+<a name="l00049"></a>00049             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#acadcddd2cfd010aed4c409723de29a0a">m_Refs</a>;
+<a name="l00050"></a>00050         }
+<a name="l00051"></a>00051     }
+<a name="l00052"></a>00052 
+<a name="l00053"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a3b27d79acd285bf9e498a8107ba7a034">00053</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a3b27d79acd285bf9e498a8107ba7a034" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSTexture::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
+<a name="l00054"></a>00054     {
+<a name="l00055"></a>00055         <span class="keywordflow">if</span> (!ppOut)
+<a name="l00056"></a>00056         {
+<a name="l00057"></a>00057             <span class="keywordflow">if</span> (clsid.is_nil())
+<a name="l00058"></a>00058             {
+<a name="l00059"></a>00059                 clsid = <a class="code" href="group__voodoo__framework__interfaces.html#gaa98e9fe0b83957213195757fdd8ffbab">IID_ITexture</a>;
+<a name="l00060"></a>00060                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00061"></a>00061             } <span class="keywordflow">else</span> {
+<a name="l00062"></a>00062                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00063"></a>00063             }
+<a name="l00064"></a>00064         } <span class="keywordflow">else</span> {
+<a name="l00065"></a>00065             <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817">IID_IObject</a>)
+<a name="l00066"></a>00066             {
+<a name="l00067"></a>00067                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00068"></a>00068             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#gaa98e9fe0b83957213195757fdd8ffbab">IID_ITexture</a>) {
+<a name="l00069"></a>00069                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00070"></a>00070             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="namespace_voodoo_shader.html#a0a73af449bd661db69d1b2eec9fdbdcc">CLSID_VSTexture</a>) {
+<a name="l00071"></a>00071                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html">VSTexture</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00072"></a>00072             } <span class="keywordflow">else</span> {
+<a name="l00073"></a>00073                 *ppOut = <span class="keyword">nullptr</span>;
+<a name="l00074"></a>00074                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00075"></a>00075             }
 <a name="l00076"></a>00076 
-<a name="l00077"></a>00077     String <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSTexture::ToString() CONST
-<a name="l00078"></a>00078     {
-<a name="l00079"></a>00079         <span class="keywordflow">return</span> <a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">String::Format</a>(L<span class="stringliteral">&quot;VSTexture(%s)&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a42fccebfe157902d7e280ab0a775b820">m_Name</a>.GetData());
+<a name="l00077"></a>00077             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de" title="Add a reference to this object.">AddRef</a>();
+<a name="l00078"></a>00078             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00079"></a>00079         }
 <a name="l00080"></a>00080     }
 <a name="l00081"></a>00081 
-<a name="l00082"></a>00082     ICore * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSTexture::GetCore() CONST
+<a name="l00082"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a753f217a141883d0f285e3d3d739d091">00082</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a753f217a141883d0f285e3d3d739d091" title="Get the name of this object.">VSTexture::ToString</a>() CONST
 <a name="l00083"></a>00083     {
-<a name="l00084"></a>00084         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a529d1baeb811b94ed5c8481321b2027f">m_Core</a>;
+<a name="l00084"></a>00084         <span class="keywordflow">return</span> <a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">String::Format</a>(L<span class="stringliteral">&quot;VSTexture(%s)&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a42fccebfe157902d7e280ab0a775b820">m_Name</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00085"></a>00085     }
 <a name="l00086"></a>00086 
-<a name="l00087"></a>00087     String <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSTexture::GetName() CONST
+<a name="l00087"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a2b714f5912c66e1a2a48e1e566afb4b9">00087</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a2b714f5912c66e1a2a48e1e566afb4b9" title="Get the core this object was associated with.">VSTexture::GetCore</a>() CONST
 <a name="l00088"></a>00088     {
-<a name="l00089"></a>00089         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a42fccebfe157902d7e280ab0a775b820">m_Name</a>;
+<a name="l00089"></a>00089         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a529d1baeb811b94ed5c8481321b2027f">m_Core</a>;
 <a name="l00090"></a>00090     }
 <a name="l00091"></a>00091 
-<a name="l00092"></a>00092     <span class="keywordtype">void</span> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSTexture::GetData() CONST
+<a name="l00092"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a8a5ab3e96a194c095a3807adda48c0b2">00092</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a8a5ab3e96a194c095a3807adda48c0b2">VSTexture::GetName</a>() CONST
 <a name="l00093"></a>00093     {
-<a name="l00094"></a>00094         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5d55e7a77a7ad4291246c3992ca29579">m_Data</a>;
+<a name="l00094"></a>00094         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a42fccebfe157902d7e280ab0a775b820">m_Name</a>;
 <a name="l00095"></a>00095     }
 <a name="l00096"></a>00096 
-<a name="l00097"></a>00097     <span class="keywordtype">void</span> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSTexture::SetData(_In_ <span class="keywordtype">void</span> * pData) 
+<a name="l00097"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#adbd3340d3f8dc09cb5167c96ed9f1107">00097</a>     <span class="keywordtype">void</span> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#adbd3340d3f8dc09cb5167c96ed9f1107" title="Gets the data.">VSTexture::GetData</a>() CONST
 <a name="l00098"></a>00098     {
-<a name="l00099"></a>00099         <span class="keywordtype">void</span> * oldData = <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5d55e7a77a7ad4291246c3992ca29579">m_Data</a>;
-<a name="l00100"></a>00100         <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5d55e7a77a7ad4291246c3992ca29579">m_Data</a> = pData;
-<a name="l00101"></a>00101         <span class="keywordflow">return</span> oldData;
-<a name="l00102"></a>00102     }
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104     <span class="keyword">const</span> TextureDesc * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSTexture::GetDesc() CONST
-<a name="l00105"></a>00105     {
-<a name="l00106"></a>00106         <span class="keywordflow">return</span> &amp;<a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a55c4b97271907af570ee65a715d748d1">m_Desc</a>;
+<a name="l00099"></a>00099         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5d55e7a77a7ad4291246c3992ca29579">m_Data</a>;
+<a name="l00100"></a>00100     }
+<a name="l00101"></a>00101 
+<a name="l00102"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a24cf8837aa923a2dccf6ae28dfb2b82c">00102</a>     <span class="keywordtype">void</span> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a24cf8837aa923a2dccf6ae28dfb2b82c" title="Set the texture data.">VSTexture::SetData</a>(_In_ <span class="keywordtype">void</span> * pData) 
+<a name="l00103"></a>00103     {
+<a name="l00104"></a>00104         <span class="keywordtype">void</span> * oldData = <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5d55e7a77a7ad4291246c3992ca29579">m_Data</a>;
+<a name="l00105"></a>00105         <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a5d55e7a77a7ad4291246c3992ca29579">m_Data</a> = pData;
+<a name="l00106"></a>00106         <span class="keywordflow">return</span> oldData;
 <a name="l00107"></a>00107     }
-<a name="l00108"></a>00108 }
+<a name="l00108"></a>00108 
+<a name="l00109"></a><a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#af8b6cc00887c1c5cb0e7392307f4c7af">00109</a>     <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#af8b6cc00887c1c5cb0e7392307f4c7af" title="Gets the texture description.">VSTexture::GetDesc</a>() CONST
+<a name="l00110"></a>00110     {
+<a name="l00111"></a>00111         <span class="keywordflow">return</span> &amp;<a class="code" href="class_voodoo_shader_1_1_v_s_texture.html#a55c4b97271907af570ee65a715d748d1">m_Desc</a>;
+<a name="l00112"></a>00112     }
+<a name="l00113"></a>00113 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 12:34:57 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a51b86ab45088e640e7396de68d3dd266" title="Default destructor, flushes and closes the log file (if open)." alt="" coords="357,5,712,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a8d1947d35e5ce1df0f30a60db6715b5b" title="Opens a file for use by this logger." alt="" coords="385,56,685,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a55249f79c0a027a8df21df8e1c88a375" title="Opens a file for use by this Logger." alt="" coords="761,56,1061,83"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$group__voodoo__utility__string__format.html#gaf19f157a14862373fc38c6070aabd1a1" title="VoodooShader::String::FormatV" alt="" coords="402,5,609,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#aeebae8425ba973ac7c97368080adda5d" title="Formats a timestamp for the log." alt="" coords="346,56,665,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="403,107,608,133"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ad9e868156fb41333908fae9138bb8230" title="Formats the system&#39;s current tick count." alt="" coords="345,157,666,184"/>
+<area shape="rect" id="node11" href="$group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb" title="VoodooShader::String::Format" alt="" coords="715,157,914,184"/>
+</map>

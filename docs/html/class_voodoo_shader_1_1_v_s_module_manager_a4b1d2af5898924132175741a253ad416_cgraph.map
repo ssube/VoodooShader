@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_core.html#a0625fa5c3a31a57f07831af4ca62679c" title="Retrieves this core&#39;s variable parser." alt="" coords="377,5,589,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values." alt="" coords="383,56,582,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="380,107,585,133"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore." alt="" coords="376,157,589,184"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="389,208,576,235"/>
+<area shape="rect" id="node13" href="$group__voodoo__utility__regex__expr.html#gaef2ecd204ac773064788c585c31f0b89" title="Sets the internal expression and recompiles." alt="" coords="379,259,586,285"/>
+<area shape="rect" id="node15" href="$group__voodoo__utility__regex__expr.html#ga05d0fe89740187f7a4302044cb6d107e" title="Test if the given string is matched by the expression." alt="" coords="390,309,575,336"/>
+<area shape="rect" id="node17" href="$class_voodoo_shader_1_1_i_core.html#af293ccac94e57dca12e9eb995f93dff5" title="Retrieves this core&#39;s IFileSystem implementation." alt="" coords="363,360,603,387"/>
+<area shape="rect" id="node19" href="$class_voodoo_shader_1_1_i_file_system.html#abd68ab3a0d35cad6017fc7e46fca7db7" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ..." alt="" coords="363,411,602,437"/>
+<area shape="rect" id="node21" href="$class_voodoo_shader_1_1_v_s_module_manager.html#aaff215bd1d3d66364bc482409a56bfd5" title="VoodooShader::VSModuleManager::LoadFile" alt="" coords="341,461,624,488"/>
+</map>

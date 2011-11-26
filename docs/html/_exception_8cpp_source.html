@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
+   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -94,7 +94,7 @@
 <a name="l00025"></a>00025 
 <a name="l00026"></a>00026 <span class="keyword">namespace </span>VoodooShader
 <a name="l00027"></a>00027 {
-<a name="l00028"></a><a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">00028</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a> = L<span class="stringliteral">&quot;Exception in %S at %S (%d): %s&quot;</span>;
+<a name="l00028"></a><a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">00028</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a> = L<span class="stringliteral">&quot;Exception in file %s at %s (line %d): %s&quot;</span>;
 <a name="l00029"></a><a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">00029</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">ExceptionFmtMsg</a> = <span class="stringliteral">&quot;VoodooShader::Exception in module %S, file %S at %S (line %d): %S&quot;</span>;
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031     <a class="code" href="class_voodoo_shader_1_1_exception.html#a791d1604d57c3afa568f36d17e2d8add">Exception::Exception</a>
@@ -178,45 +178,48 @@
 <a name="l00109"></a>00109     {
 <a name="l00110"></a>00110         <span class="keywordflow">if</span> (<a class="code" href="class_voodoo_shader_1_1_exception.html#a33e6b7d0a393b7e5762ce9ccc5a6895e">m_FmtMsg</a> == <span class="keyword">nullptr</span>)
 <a name="l00111"></a>00111         {
-<a name="l00112"></a>00112             <span class="keywordtype">int</span> bufsize = _scprintf
-<a name="l00113"></a>00113             (
-<a name="l00114"></a>00114                 <a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">ExceptionFmtMsg</a>,
-<a name="l00115"></a>00115                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a1b82f00b5a51c0351909555ec28895c1">m_Module</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(),
-<a name="l00116"></a>00116                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a91d3827329c033e6a5eb3b0dc1359d71">m_File</a>,
-<a name="l00117"></a>00117                 <a class="code" href="class_voodoo_shader_1_1_exception.html#aa72b507d8b9440e755cb83058dc9fe07">m_Function</a>,
-<a name="l00118"></a>00118                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a411fef7070400a4084fff646f96e4f3d">m_Line</a>,
-<a name="l00119"></a>00119                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a2fc55a530793271d314efe3f9b3504d6">m_Message</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>()
-<a name="l00120"></a>00120             );
-<a name="l00121"></a>00121 
-<a name="l00122"></a>00122             assert(bufsize &lt; 1024); <span class="comment">// Large exception message</span>
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124             <a class="code" href="class_voodoo_shader_1_1_exception.html#a33e6b7d0a393b7e5762ce9ccc5a6895e">m_FmtMsg</a> = <span class="keyword">new</span> <span class="keywordtype">char</span>[bufsize];
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126             sprintf_s
-<a name="l00127"></a>00127             (
-<a name="l00128"></a>00128                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a33e6b7d0a393b7e5762ce9ccc5a6895e">m_FmtMsg</a>,
-<a name="l00129"></a>00129                 bufsize,
-<a name="l00130"></a>00130                 <a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">ExceptionFmtMsg</a>,
-<a name="l00131"></a>00131                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a1b82f00b5a51c0351909555ec28895c1">m_Module</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>(),
-<a name="l00132"></a>00132                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a91d3827329c033e6a5eb3b0dc1359d71">m_File</a>,
-<a name="l00133"></a>00133                 <a class="code" href="class_voodoo_shader_1_1_exception.html#aa72b507d8b9440e755cb83058dc9fe07">m_Function</a>,
-<a name="l00134"></a>00134                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a411fef7070400a4084fff646f96e4f3d">m_Line</a>,
-<a name="l00135"></a>00135                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a2fc55a530793271d314efe3f9b3504d6">m_Message</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>()
-<a name="l00136"></a>00136             );
-<a name="l00137"></a>00137         }
-<a name="l00138"></a>00138     }
-<a name="l00139"></a>00139 
-<a name="l00140"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">00140</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">Exception::what</a>()<span class="keyword"> const</span>
-<a name="l00141"></a>00141 <span class="keyword">    </span>{
-<a name="l00142"></a>00142         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_exception.html#a33e6b7d0a393b7e5762ce9ccc5a6895e">m_FmtMsg</a>;
-<a name="l00143"></a>00143     }
-<a name="l00144"></a>00144 }
+<a name="l00112"></a>00112             <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * module = <a class="code" href="class_voodoo_shader_1_1_exception.html#a1b82f00b5a51c0351909555ec28895c1">m_Module</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>();
+<a name="l00113"></a>00113             <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * msg = <a class="code" href="class_voodoo_shader_1_1_exception.html#a2fc55a530793271d314efe3f9b3504d6">m_Message</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>();
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115             <span class="keywordtype">int</span> bufsize = _scprintf
+<a name="l00116"></a>00116             (
+<a name="l00117"></a>00117                 <a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">ExceptionFmtMsg</a>,
+<a name="l00118"></a>00118                 module,
+<a name="l00119"></a>00119                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a91d3827329c033e6a5eb3b0dc1359d71">m_File</a>,
+<a name="l00120"></a>00120                 <a class="code" href="class_voodoo_shader_1_1_exception.html#aa72b507d8b9440e755cb83058dc9fe07">m_Function</a>,
+<a name="l00121"></a>00121                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a411fef7070400a4084fff646f96e4f3d">m_Line</a>,
+<a name="l00122"></a>00122                 msg
+<a name="l00123"></a>00123             ) + 1;
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125             assert(bufsize &lt; 1024); <span class="comment">// Large exception message</span>
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127             <a class="code" href="class_voodoo_shader_1_1_exception.html#a33e6b7d0a393b7e5762ce9ccc5a6895e">m_FmtMsg</a> = <span class="keyword">new</span> <span class="keywordtype">char</span>[bufsize];
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129             sprintf_s
+<a name="l00130"></a>00130             (
+<a name="l00131"></a>00131                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a33e6b7d0a393b7e5762ce9ccc5a6895e">m_FmtMsg</a>,
+<a name="l00132"></a>00132                 bufsize,
+<a name="l00133"></a>00133                 <a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">ExceptionFmtMsg</a>,
+<a name="l00134"></a>00134                 module,
+<a name="l00135"></a>00135                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a91d3827329c033e6a5eb3b0dc1359d71">m_File</a>,
+<a name="l00136"></a>00136                 <a class="code" href="class_voodoo_shader_1_1_exception.html#aa72b507d8b9440e755cb83058dc9fe07">m_Function</a>,
+<a name="l00137"></a>00137                 <a class="code" href="class_voodoo_shader_1_1_exception.html#a411fef7070400a4084fff646f96e4f3d">m_Line</a>,
+<a name="l00138"></a>00138                 msg
+<a name="l00139"></a>00139             );
+<a name="l00140"></a>00140         }
+<a name="l00141"></a>00141     }
+<a name="l00142"></a>00142 
+<a name="l00143"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">00143</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">Exception::what</a>()<span class="keyword"> const</span>
+<a name="l00144"></a>00144 <span class="keyword">    </span>{
+<a name="l00145"></a>00145         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_exception.html#a33e6b7d0a393b7e5762ce9ccc5a6895e">m_FmtMsg</a>;
+<a name="l00146"></a>00146     }
+<a name="l00147"></a>00147 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 12:34:57 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

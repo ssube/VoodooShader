@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
+   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -98,12 +98,12 @@
 <a name="l00029"></a><a class="code" href="group__voodoo__core__null.html#ga7de6e6ac8928891a1165aff7651415b4">00029</a>     <a class="code" href="group__voodoo__core__null.html#ga7de6e6ac8928891a1165aff7651415b4">VSLogger::~VSLogger</a>()
 <a name="l00030"></a>00030     { }
 <a name="l00031"></a>00031 
-<a name="l00032"></a>00032     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::AddRef() CONST
+<a name="l00032"></a><a class="code" href="group__voodoo__core__null.html#gadbcf1491070681b84065b3a0b597723f">00032</a>     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#gadbcf1491070681b84065b3a0b597723f" title="Add a reference to this object.">VSLogger::AddRef</a>() CONST
 <a name="l00033"></a>00033     {
 <a name="l00034"></a>00034         <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(<a class="code" href="group__voodoo__core__null.html#ga1042ee947501c36ab95adad27f635dd6">m_Refs</a>);
 <a name="l00035"></a>00035     }
 <a name="l00036"></a>00036 
-<a name="l00037"></a>00037     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::Release() CONST
+<a name="l00037"></a><a class="code" href="group__voodoo__core__null.html#ga087eb84d0ce5f8ce6909edd8dad8bb95">00037</a>     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga087eb84d0ce5f8ce6909edd8dad8bb95" title="Release a reference from this object.">VSLogger::Release</a>() CONST
 <a name="l00038"></a>00038     {
 <a name="l00039"></a>00039         <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(<a class="code" href="group__voodoo__core__null.html#ga1042ee947501c36ab95adad27f635dd6">m_Refs</a>) == 0)
 <a name="l00040"></a>00040         {
@@ -114,46 +114,46 @@
 <a name="l00045"></a>00045         }
 <a name="l00046"></a>00046     }
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::QueryInterface(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
+<a name="l00048"></a><a class="code" href="group__voodoo__core__null.html#ga7d3d6c990f20c9c6b200eb3db1643f50">00048</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga7d3d6c990f20c9c6b200eb3db1643f50" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSLogger::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
 <a name="l00049"></a>00049     {
 <a name="l00050"></a>00050         <span class="keywordflow">if</span> (!ppOut)
 <a name="l00051"></a>00051         {
 <a name="l00052"></a>00052             <span class="keywordflow">if</span> (clsid.is_nil())
 <a name="l00053"></a>00053             {
-<a name="l00054"></a>00054                 clsid = CLSID_VSLogger;
+<a name="l00054"></a>00054                 clsid = <a class="code" href="group__voodoo__core__null.html#ga2d7b113233ee4385e0c32010b36433c7">CLSID_VSLogger</a>;
 <a name="l00055"></a>00055                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00056"></a>00056             } <span class="keywordflow">else</span> {
 <a name="l00057"></a>00057                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00058"></a>00058             }
 <a name="l00059"></a>00059         } <span class="keywordflow">else</span> {
-<a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == IID_IObject)
+<a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817">IID_IObject</a>)
 <a name="l00061"></a>00061             {
-<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_ILogger) {
-<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>ILogger*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSLogger) {
-<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>VSLogger*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#gaca11032ec6621cdd20a1cd242d9c9e18">IID_ILogger</a>) {
+<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__core__null.html#ga2d7b113233ee4385e0c32010b36433c7">CLSID_VSLogger</a>) {
+<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_logger.html" title="Voodoo Shader null logger implementation.">VSLogger</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00067"></a>00067             } <span class="keywordflow">else</span> {
 <a name="l00068"></a>00068                 *ppOut = <span class="keyword">nullptr</span>;
 <a name="l00069"></a>00069                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00070"></a>00070             }
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(*ppOut)-&gt;AddRef();
+<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de" title="Add a reference to this object.">AddRef</a>();
 <a name="l00073"></a>00073             <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00074"></a>00074         }
 <a name="l00075"></a>00075     }
 <a name="l00076"></a>00076 
-<a name="l00077"></a>00077     String <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::ToString() CONST
+<a name="l00077"></a><a class="code" href="group__voodoo__core__null.html#gaeb505074404490d2f3ef02421764c0c1">00077</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#gaeb505074404490d2f3ef02421764c0c1" title="Get the name of this object.">VSLogger::ToString</a>() CONST
 <a name="l00078"></a>00078     {
 <a name="l00079"></a>00079         <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSLogger()&quot;</span>;
 <a name="l00080"></a>00080     }
 <a name="l00081"></a>00081 
-<a name="l00082"></a>00082     ICore * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::GetCore() CONST
+<a name="l00082"></a><a class="code" href="group__voodoo__core__null.html#ga748415c90f2cbeb57bdf121859284a6c">00082</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga748415c90f2cbeb57bdf121859284a6c" title="Get the core this object was associated with.">VSLogger::GetCore</a>() CONST
 <a name="l00083"></a>00083     {
 <a name="l00084"></a>00084         <span class="keywordflow">return</span> <a class="code" href="group__voodoo__core__null.html#ga9608a7141d1b5062b0fa5c53754156a9">m_Core</a>;
 <a name="l00085"></a>00085     }
 <a name="l00086"></a>00086 
-<a name="l00087"></a>00087     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::Open(_In_ <span class="keyword">const</span> String &amp; filename, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
+<a name="l00087"></a><a class="code" href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce">00087</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce" title="Opens a file for use by this logger.">VSLogger::Open</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; filename, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
 <a name="l00088"></a>00088     {
 <a name="l00089"></a>00089         UNREFERENCED_PARAMETER(filename);
 <a name="l00090"></a>00090         UNREFERENCED_PARAMETER(append);
@@ -161,7 +161,7 @@
 <a name="l00092"></a>00092         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00093"></a>00093     }
 <a name="l00094"></a>00094 
-<a name="l00095"></a>00095     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::Open(_In_ IFile * <span class="keyword">const</span> pFile, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
+<a name="l00095"></a><a class="code" href="group__voodoo__core__null.html#gacbebb063d6ac5b61e3fbc66eacbb6f21">00095</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce" title="Opens a file for use by this logger.">VSLogger::Open</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * <span class="keyword">const</span> pFile, _In_ <span class="keyword">const</span> <span class="keywordtype">bool</span> append)
 <a name="l00096"></a>00096     {
 <a name="l00097"></a>00097         UNREFERENCED_PARAMETER(pFile);
 <a name="l00098"></a>00098         UNREFERENCED_PARAMETER(append);
@@ -169,29 +169,29 @@
 <a name="l00100"></a>00100         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00101"></a>00101     }
 <a name="l00102"></a>00102 
-<a name="l00103"></a>00103     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::Close()
+<a name="l00103"></a><a class="code" href="group__voodoo__core__null.html#ga651668a775dc47cdcc925c004d150e1f">00103</a>     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga651668a775dc47cdcc925c004d150e1f" title="Closes the log file, if one is open.">VSLogger::Close</a>()
 <a name="l00104"></a>00104     { }
 <a name="l00105"></a>00105 
-<a name="l00106"></a>00106     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::Flush()
+<a name="l00106"></a><a class="code" href="group__voodoo__core__null.html#ga224f3ad0c66acd932a382caf99235dab">00106</a>     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga224f3ad0c66acd932a382caf99235dab" title="Immediately writes all pending data to disk.">VSLogger::Flush</a>()
 <a name="l00107"></a>00107     { }
 <a name="l00108"></a>00108 
-<a name="l00109"></a>00109     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::SetLogLevel(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level)
+<a name="l00109"></a><a class="code" href="group__voodoo__core__null.html#ga9473ee15cea26e7e0190a1ec343986ae">00109</a>     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga9473ee15cea26e7e0190a1ec343986ae" title="Set the default minimum message level.">VSLogger::SetLogLevel</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level)
 <a name="l00110"></a>00110     {
 <a name="l00111"></a>00111         UNREFERENCED_PARAMETER(level);
 <a name="l00112"></a>00112     }
 <a name="l00113"></a>00113 
-<a name="l00114"></a>00114     <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::GetLogLevel() CONST
+<a name="l00114"></a><a class="code" href="group__voodoo__core__null.html#ga06518f54f173ad0f0d7d6f86de8cdb2f">00114</a>     <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga06518f54f173ad0f0d7d6f86de8cdb2f">VSLogger::GetLogLevel</a>() CONST
 <a name="l00115"></a>00115     {
 <a name="l00116"></a>00116         <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa838f450aaaec6ffbfc01d7d706b9277a">LL_Unknown</a>;
 <a name="l00117"></a>00117     }
 <a name="l00118"></a>00118 
-<a name="l00119"></a>00119     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::LogModule(_In_ <span class="keyword">const</span> Version * <span class="keyword">const</span> pModule)
+<a name="l00119"></a><a class="code" href="group__voodoo__core__null.html#ga192ab51c19a983596c31facb90f77202">00119</a>     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga192ab51c19a983596c31facb90f77202" title="Writes a module stamp to the log.">VSLogger::LogModule</a>(_In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <span class="keyword">const</span> pModule)
 <a name="l00120"></a>00120     {
 <a name="l00121"></a>00121         UNREFERENCED_PARAMETER(pModule);
 <a name="l00122"></a>00122     }
 <a name="l00123"></a>00123 
-<a name="l00124"></a>00124     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga0ea699ac9dbeec04bb95cc8b1c379973" title="Log a message, may be formatted with printf syntax.">VSLogger::Log</a>
-<a name="l00125"></a><a class="code" href="group__voodoo__core__null.html#ga0ea699ac9dbeec04bb95cc8b1c379973">00125</a>     (
+<a name="l00124"></a>00124     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga06b5825a89372bf6631b98a696efaf27" title="Log a message, may be formatted with printf syntax.">VSLogger::Log</a>
+<a name="l00125"></a><a class="code" href="group__voodoo__core__null.html#ga06b5825a89372bf6631b98a696efaf27">00125</a>     (
 <a name="l00126"></a>00126         _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level,
 <a name="l00127"></a>00127         _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * source,
 <a name="l00128"></a>00128         _In_ _Printf_format_string_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * format, 
@@ -203,12 +203,12 @@
 <a name="l00134"></a>00134         UNREFERENCED_PARAMETER(format);
 <a name="l00135"></a>00135     }
 <a name="l00136"></a>00136 
-<a name="l00137"></a>00137     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::SetFlags(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> flush)
+<a name="l00137"></a><a class="code" href="group__voodoo__core__null.html#ga78e3a53866f4ab92b546ad6619f5d09d">00137</a>     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#ga78e3a53866f4ab92b546ad6619f5d09d">VSLogger::SetFlags</a>(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> flush)
 <a name="l00138"></a>00138     {
 <a name="l00139"></a>00139         UNREFERENCED_PARAMETER(flush);
 <a name="l00140"></a>00140     }
 <a name="l00141"></a>00141 
-<a name="l00142"></a>00142     <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSLogger::GetFlags() CONST
+<a name="l00142"></a><a class="code" href="group__voodoo__core__null.html#gaad8ebd6fbeef413bef1341ae0040486c">00142</a>     <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="group__voodoo__core__null.html#gaad8ebd6fbeef413bef1341ae0040486c">VSLogger::GetFlags</a>() CONST
 <a name="l00143"></a>00143     {
 <a name="l00144"></a>00144         <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dcaea01e65182c757527cf31d15643ec214">LF_Unknown</a>;
 <a name="l00145"></a>00145     }
@@ -218,7 +218,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 12:34:57 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

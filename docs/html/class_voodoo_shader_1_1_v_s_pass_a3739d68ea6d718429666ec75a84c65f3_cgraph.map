@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_core.html#a8ff79b85773192eda84c66ccfdc42cf5" title="Retrieves a texture from the ICore&#39;s texture map by name." alt="" coords="265,5,482,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore." alt="" coords="267,56,480,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="280,107,467,133"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_v_s_pass.html#afc4ad34a485288583b71f24c2cd6a24b" title="Get the name of this object." alt="" coords="264,157,483,184"/>
+<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_i_core.html#a3d8670b7d4e66222ef78e566c28273ed" title="Retrieves a texture from the ICore&#39;s texture map by stage." alt="" coords="248,208,499,235"/>
+<area shape="rect" id="node17" href="$class_voodoo_shader_1_1_i_core.html#af6521bfdb13b17ddc6f6285451fae603" title="Retrieve the IAdapter attached to this ICore." alt="" coords="264,259,483,285"/>
+<area shape="rect" id="node19" href="$class_voodoo_shader_1_1_i_adapter.html#a78ef790d6fa03b0abd4b43d1d2602915" title="Loads a pass in a manner that is compatible with the adapter&#39;s underlying API." alt="" coords="259,309,488,336"/>
+<area shape="rect" id="node11" href="$group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb" title="VoodooShader::String::Format" alt="" coords="550,132,749,159"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="547,183,752,209"/>
+</map>

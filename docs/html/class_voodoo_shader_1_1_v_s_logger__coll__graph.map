@@ -1,9 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level&#45;filtered messages." alt="" coords="827,252,984,279"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="491,359,647,385"/>
-<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1105,381,1250,408"/>
-<area shape="rect" id="node31" href="$class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="825,353,986,380"/>
-<area shape="rect" id="node20" href="$struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="811,139,999,165"/>
-<area shape="rect" id="node22" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="454,24,685,51"/>
-<area shape="rect" id="node24" href="$struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; uint32_t \&gt;" alt="" coords="137,69,367,96"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level&#45;filtered messages." alt="" coords="5,83,163,109"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="111,5,267,32"/>
+<area shape="rect" id="node8" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="187,83,332,109"/>
 </map>

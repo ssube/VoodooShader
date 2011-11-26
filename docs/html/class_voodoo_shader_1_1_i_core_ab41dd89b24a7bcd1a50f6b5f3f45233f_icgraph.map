@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_v_s_module_manager.html#af7140f7b3dde24aeb84cade5248db78f" title="VoodooShader::VSModuleManager::LoadPath" alt="" coords="311,5,599,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_v_s_module_manager.html#a6f8581d4cc4bff908c5310ebea5fa69f" title="VoodooShader::VSModuleManager::LoadFile" alt="" coords="313,56,596,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6" title="Find texture information from a parameter and create a texture based on that data." alt="" coords="293,107,616,133"/>
+<area shape="rect" id="node17" href="$group__voodoo__module__wfilesystem.html#ga1496330a828b0df2d9a120c115582257" title="VoodooShader::VoodooWFS::VSWFileSystem::VSWFileSystem" alt="" coords="691,183,1090,209"/>
+<area shape="rect" id="node19" href="$group__voodoo__module__wfilesystem.html#gaf50d200f10d74688d4c7c765ac6a148c" title="Add a directory to the search path." alt="" coords="279,208,631,235"/>
+<area shape="rect" id="node22" href="$group__voodoo__module__wfilesystem.html#gaabd861d7a1925a4bb9032d2a57308041" title="Removes a directory from the search path, following the same rules as adding (adding a string then re..." alt="" coords="267,259,642,285"/>
+<area shape="rect" id="node24" href="$group__voodoo__module__wfilesystem.html#gac034739454fca4c328c34c9f3ce3a1d1" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ..." alt="" coords="281,309,629,336"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7" title="Links a particular effect&#45;level sampler against a core texture." alt="" coords="763,107,1018,133"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259" title="Link a particular effect&#45;level parameter against various core elements (exact behavior depends on par..." alt="" coords="1139,107,1405,133"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_v_s_shader.html#a140d5e50bf3ebf4bbb741b6fd4554b75" title="Initialize delayed linking (or relinking) for this shader." alt="" coords="1454,107,1661,133"/>
+<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_v_s_shader.html#ab9a107b8e757d91b8e8e5f51c2e6c8e5" title="VoodooShader::VSShader::VSShader" alt="" coords="1710,107,1951,133"/>
+</map>

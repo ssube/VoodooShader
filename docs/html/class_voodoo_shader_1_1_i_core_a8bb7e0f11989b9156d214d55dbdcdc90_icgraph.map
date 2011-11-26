@@ -1,0 +1,34 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$namespace_voodoo_shader.html#aa9f5fd2db677cf48cd432cd458d84dca" title="VoodooShader::intrusive_ptr_add_ref" alt="" coords="366,5,599,32"/>
+<area shape="rect" id="node5" href="$namespace_voodoo_shader.html#aea103157e023cfb4887c769a76463e52" title="VoodooShader::intrusive_ptr_release" alt="" coords="366,56,599,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_v_s_module_manager.html#af7140f7b3dde24aeb84cade5248db78f" title="VoodooShader::VSModuleManager::LoadPath" alt="" coords="339,107,627,133"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_v_s_module_manager.html#a6f8581d4cc4bff908c5310ebea5fa69f" title="VoodooShader::VSModuleManager::LoadFile" alt="" coords="341,157,624,184"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_v_s_parameter.html#a8426d648749031f459f94d90e933a02a" title="VoodooShader::VSParameter::VSParameter" alt="" coords="343,208,622,235"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_v_s_parameter.html#a7dd4fcdb1202834d70dbd4d981864958" title="VoodooShader::VSParameter::~VSParameter" alt="" coords="339,259,626,285"/>
+<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_v_s_parameter.html#a7f0a4a96b9d7b04ffae8de0d1efeeac2" title="Attaches a second parameter to this one, forcing the other to update whenever this value is changed..." alt="" coords="333,309,632,336"/>
+<area shape="rect" id="node17" href="$class_voodoo_shader_1_1_v_s_parser.html#ae7a8e2401b10c0722a06283d9aa2bbcd" title="Adds a variable to the internal dictionary." alt="" coords="381,360,584,387"/>
+<area shape="rect" id="node19" href="$class_voodoo_shader_1_1_v_s_parser.html#af269cf6a93bf03ae5f5a13df34943bfe" title="Removes a variable from the internal dictionary." alt="" coords="370,411,595,437"/>
+<area shape="rect" id="node21" href="$class_voodoo_shader_1_1_v_s_pass.html#a3739d68ea6d718429666ec75a84c65f3" title="VoodooShader::VSPass::Link" alt="" coords="385,461,580,488"/>
+<area shape="rect" id="node25" href="$class_voodoo_shader_1_1_v_s_shader.html#a9de1fc55c4cb5a3da6e6784bd550b5e9" title="VoodooShader::VSShader::~VSShader" alt="" coords="358,512,607,539"/>
+<area shape="rect" id="node27" href="$class_voodoo_shader_1_1_v_s_shader.html#ae4706ff8ccb91fadfaf6e8a7916b82b5" title="Set a technique from this shader to be used as the default technique." alt="" coords="332,563,633,589"/>
+<area shape="rect" id="node29" href="$class_voodoo_shader_1_1_v_s_shader.html#a140d5e50bf3ebf4bbb741b6fd4554b75" title="Initialize delayed linking (or relinking) for this shader." alt="" coords="1465,689,1671,716"/>
+<area shape="rect" id="node33" href="$class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259" title="Link a particular effect&#45;level parameter against various core elements (exact behavior depends on par..." alt="" coords="1121,689,1388,716"/>
+<area shape="rect" id="node36" href="$class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7" title="Links a particular effect&#45;level sampler against a core texture." alt="" coords="769,715,1023,741"/>
+<area shape="rect" id="node39" href="$class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6" title="Find texture information from a parameter and create a texture based on that data." alt="" coords="321,765,644,792"/>
+<area shape="rect" id="node42" href="$class_voodoo_shader_1_1_v_s_shader.html#a84f428096f38dba9663c2f8643f98876" title="VoodooShader::VSShader::SetupTechniques" alt="" coords="1113,765,1396,792"/>
+<area shape="rect" id="node45" href="$class_voodoo_shader_1_1_v_s_technique.html#a24b9741f7703f139d55f8e4780c448b3" title="VoodooShader::VSTechnique::Link" alt="" coords="371,867,595,893"/>
+<area shape="rect" id="node49" href="$group__voodoo__module__wfilesystem.html#gac034739454fca4c328c34c9f3ce3a1d1" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ..." alt="" coords="309,917,657,944"/>
+<area shape="rect" id="node51" href="$group__voodoo__module__wfilesystem.html#gabeb0d99e67982a1d5d31ba76120110ff" title="Opens the file for read&#45;write access." alt="" coords="339,968,627,995"/>
+<area shape="rect" id="node53" href="$group__voodoo__module__wfilesystem.html#ga97a2a01f66cc30811448340e869f7e35" title="Writes a chunk of data to the file." alt="" coords="339,1019,627,1045"/>
+<area shape="rect" id="node55" href="$group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802" title="VoodooShader::VoodooWFS::VSWImage::VSWImage" alt="" coords="314,1069,651,1096"/>
+<area shape="rect" id="node61" href="$group__voodoo__module__wfilesystem.html#ga6fbd849da9e8c8be77a0185f3ce4b269" title="Retrieves a portion of the texture data from the image." alt="" coords="323,1120,642,1147"/>
+<area shape="rect" id="node63" href="$class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a29e0e7b76012eca5420f7b71a7d7fd9d" title="VoodooShader::EasyHook::VSEHHookManager::VSEHHookManager" alt="" coords="271,1171,694,1197"/>
+<area shape="rect" id="node65" href="$class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae255f19678d0c764fa33cd200af72e66" title="VoodooShader::EasyHook::VSEHHookManager::~VSEHHookManager" alt="" coords="267,1221,698,1248"/>
+<area shape="rect" id="node67" href="$class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a0e705782508bfb033e8f6af9a1e9d69b" title="Install a hook at the specified function." alt="" coords="317,1272,648,1299"/>
+<area shape="rect" id="node69" href="$class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aa9f3a068eb9d766f66c5f62a9999cdf4" title="Removes a single hook." alt="" coords="306,1323,659,1349"/>
+<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_v_s_pass.html#a71bde7464aed931f4b990eab6edd7da0" title="VoodooShader::VSPass::VSPass" alt="" coords="787,461,1005,488"/>
+<area shape="rect" id="node31" href="$class_voodoo_shader_1_1_v_s_shader.html#ab9a107b8e757d91b8e8e5f51c2e6c8e5" title="VoodooShader::VSShader::VSShader" alt="" coords="1721,689,1962,716"/>
+<area shape="rect" id="node47" href="$class_voodoo_shader_1_1_v_s_technique.html#a555c140740acf0f5ce3115218ed4ff65" title="VoodooShader::VSTechnique::VSTechnique" alt="" coords="757,867,1035,893"/>
+<area shape="rect" id="node57" href="$group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d" title="VoodooShader::VoodooWFS::VSWImage::Load" alt="" coords="747,1069,1045,1096"/>
+<area shape="rect" id="node59" href="$group__voodoo__module__wfilesystem.html#gac67f00a7e6a95d3da16fd17a72a5ae22" title="VoodooShader::VoodooWFS::VSWFile::OpenImage" alt="" coords="1093,1069,1416,1096"/>
+</map>

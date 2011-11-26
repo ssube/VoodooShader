@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
+   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -93,7 +93,7 @@ Variable States &amp; Recursion</h3>
 
  $(basepath)/$($(adapter)_respath) = M:\VoodooShader\resources\frost\
 </pre></div></dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>Repeated consecutive slashes will not cause errors with path parsing, although in some locations they have special meanings. They may cause errors when using the string for other reasons; calling IParser::Parse() with the PF_SingleSlash flag set will attempt to strip these. Finally, state variables and suppression use a variation on the name syntax.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>Repeated consecutive slashes will not cause errors with path parsing, although in some locations they have special meanings. They may cause errors when using the string for other reasons; calling <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807">IParser::Parse()</a> with the PF_SingleSlash flag set will attempt to strip these. Finally, state variables and suppression use a variation on the name syntax.</dd></dl>
 <dl class="user"><dt><b>Examples:</b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\
  game.exe = $(adapter:Gem)
  Gem_Adapter = Voodoo_Gem.dll
@@ -109,7 +109,7 @@ Variable States &amp; Recursion</h3>
 </pre></div></dd></dl>
 <h2><a class="anchor" id="voodoo_vars_sys"></a>
 System Variables</h2>
-<p>Some variables, typically built-ins, are marked as system variables. These may be added once and may not be overwritten or later changed (all other variables may be changed by overwriting the name). The IParser::Remove() method does not remove system variables.</p>
+<p>Some variables, typically built-ins, are marked as system variables. These may be added once and may not be overwritten or later changed (all other variables may be changed by overwriting the name). The <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a9e626cc6bd961e559fb62f0fdf708494">IParser::Remove()</a> method does not remove system variables.</p>
 <h2><a class="anchor" id="voodoo_vars_flags"></a>
 Flags</h2>
 <p>The variable parser provides a small set of flags to control parsing modes.</p>
@@ -167,7 +167,7 @@ Environment Variables</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 02:22:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 12:34:58 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

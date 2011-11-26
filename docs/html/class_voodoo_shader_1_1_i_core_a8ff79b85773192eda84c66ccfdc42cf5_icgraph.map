@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_v_s_pass.html#a3739d68ea6d718429666ec75a84c65f3" title="VoodooShader::VSPass::Link" alt="" coords="303,5,497,32"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_v_s_shader.html#a8b5f83115e89e5d6483a7f6156db00a7" title="Links a particular effect&#45;level sampler against a core texture." alt="" coords="273,56,527,83"/>
+<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_v_s_technique.html#a24b9741f7703f139d55f8e4780c448b3" title="VoodooShader::VSTechnique::Link" alt="" coords="288,107,512,133"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_v_s_pass.html#a7e933776597f7e1616d609322f9b98f8" title="VoodooShader::VSPass::VSPass" alt="" coords="605,5,824,32"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_v_s_shader.html#a7850e38afe62b10591584ecaf7683259" title="Link a particular effect&#45;level parameter against various core elements (exact behavior depends on par..." alt="" coords="581,56,848,83"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_v_s_shader.html#a140d5e50bf3ebf4bbb741b6fd4554b75" title="Initialize delayed linking (or relinking) for this shader." alt="" coords="902,56,1109,83"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_v_s_shader.html#ab9a107b8e757d91b8e8e5f51c2e6c8e5" title="VoodooShader::VSShader::VSShader" alt="" coords="1158,56,1399,83"/>
+<area shape="rect" id="node17" href="$class_voodoo_shader_1_1_v_s_technique.html#a196ae697aec2ed1d790efff6e5b1866f" title="VoodooShader::VSTechnique::VSTechnique" alt="" coords="576,107,853,133"/>
+</map>

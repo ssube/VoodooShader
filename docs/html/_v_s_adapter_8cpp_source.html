@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
+   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -98,12 +98,12 @@
 <a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#af54c95427ba179bc06c79d0dca53b927">00029</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#af54c95427ba179bc06c79d0dca53b927">VSAdapter::~VSAdapter</a>()
 <a name="l00030"></a>00030     { }
 <a name="l00031"></a>00031 
-<a name="l00032"></a>00032     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::AddRef() CONST
+<a name="l00032"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#ab331fd641457f5246310e1ce6195d028">00032</a>     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#ab331fd641457f5246310e1ce6195d028" title="Add a reference to this object.">VSAdapter::AddRef</a>() CONST
 <a name="l00033"></a>00033     {
 <a name="l00034"></a>00034         <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a5a92be04c7b7c4fdb99c1ad8886ddfc5">m_Refs</a>);
 <a name="l00035"></a>00035     }
 <a name="l00036"></a>00036 
-<a name="l00037"></a>00037     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::Release() CONST
+<a name="l00037"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#abbe28e41e2db21e9b78942407e8338c9">00037</a>     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#abbe28e41e2db21e9b78942407e8338c9" title="Release a reference from this object.">VSAdapter::Release</a>() CONST
 <a name="l00038"></a>00038     {
 <a name="l00039"></a>00039         <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a5a92be04c7b7c4fdb99c1ad8886ddfc5">m_Refs</a>) == 0)
 <a name="l00040"></a>00040         {
@@ -114,72 +114,72 @@
 <a name="l00045"></a>00045         }
 <a name="l00046"></a>00046     }
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::QueryInterface(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
+<a name="l00048"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a07d77f6322854e09ddaae062952a4dcb">00048</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a07d77f6322854e09ddaae062952a4dcb" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSAdapter::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
 <a name="l00049"></a>00049     {
 <a name="l00050"></a>00050         <span class="keywordflow">if</span> (!ppOut)
 <a name="l00051"></a>00051         {
 <a name="l00052"></a>00052             <span class="keywordflow">if</span> (clsid.is_nil())
 <a name="l00053"></a>00053             {
-<a name="l00054"></a>00054                 clsid = CLSID_VSAdapter;
+<a name="l00054"></a>00054                 clsid = <a class="code" href="group__voodoo__core__null.html#gada167b759468c4c18906493bbfa7a452">CLSID_VSAdapter</a>;
 <a name="l00055"></a>00055                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00056"></a>00056             } <span class="keywordflow">else</span> {
 <a name="l00057"></a>00057                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00058"></a>00058             }
 <a name="l00059"></a>00059         } <span class="keywordflow">else</span> {
-<a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == IID_IObject)
+<a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817">IID_IObject</a>)
 <a name="l00061"></a>00061             {
-<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IAdapter) {
-<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IAdapter*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSAdapter) {
-<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>VSAdapter*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga42738af6f1d3f616067ab307013aa8cf">IID_IAdapter</a>) {
+<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__core__null.html#gada167b759468c4c18906493bbfa7a452">CLSID_VSAdapter</a>) {
+<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html" title="Voodoo Shader null adapter implementation.">VSAdapter</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00067"></a>00067             } <span class="keywordflow">else</span> {
 <a name="l00068"></a>00068                 *ppOut = <span class="keyword">nullptr</span>;
 <a name="l00069"></a>00069                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00070"></a>00070             }
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(*ppOut)-&gt;AddRef();
+<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de" title="Add a reference to this object.">AddRef</a>();
 <a name="l00073"></a>00073             <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00074"></a>00074         }
 <a name="l00075"></a>00075     }
 <a name="l00076"></a>00076 
-<a name="l00077"></a>00077     String <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::ToString() CONST
+<a name="l00077"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a6542c4a942e8ee2f01223f171cd47fc7">00077</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a6542c4a942e8ee2f01223f171cd47fc7" title="Get the name of this object.">VSAdapter::ToString</a>() CONST
 <a name="l00078"></a>00078     {
 <a name="l00079"></a>00079         <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSAdapter()&quot;</span>;
 <a name="l00080"></a>00080     }
 <a name="l00081"></a>00081 
-<a name="l00082"></a>00082     ICore * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::GetCore() CONST
+<a name="l00082"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#af26f341b8e63fd3a3433e650e8008210">00082</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#af26f341b8e63fd3a3433e650e8008210" title="Get the core this object was associated with.">VSAdapter::GetCore</a>() CONST
 <a name="l00083"></a>00083     {
 <a name="l00084"></a>00084         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a56f317fe4431158704f8677dea4170d0">m_Core</a>;
 <a name="l00085"></a>00085     }
 <a name="l00086"></a>00086 
-<a name="l00087"></a>00087     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::LoadPass(IPass * pPass)
+<a name="l00087"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a5d0e231ac5329004064237db90759c23">00087</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a5d0e231ac5329004064237db90759c23" title="Loads a pass in a manner that is compatible with the adapter&#39;s underlying API.">VSAdapter::LoadPass</a>(<a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * pPass)
 <a name="l00088"></a>00088     {
 <a name="l00089"></a>00089         UNREFERENCED_PARAMETER(pPass);
 <a name="l00090"></a>00090 
 <a name="l00091"></a>00091         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00092"></a>00092     }
 <a name="l00093"></a>00093 
-<a name="l00094"></a>00094     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::UnloadPass(IPass * pPass)
+<a name="l00094"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#ad1bbf4b0a91c9d44ecf78aa262d26e28">00094</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#ad1bbf4b0a91c9d44ecf78aa262d26e28" title="Unloads a pass from the adapter.">VSAdapter::UnloadPass</a>(<a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * pPass)
 <a name="l00095"></a>00095     {
 <a name="l00096"></a>00096         UNREFERENCED_PARAMETER(pPass);
 <a name="l00097"></a>00097 
 <a name="l00098"></a>00098         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00099"></a>00099     }
 <a name="l00100"></a>00100 
-<a name="l00101"></a>00101     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::SetPass(IPass * pPass)
+<a name="l00101"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a9b3a2d7782e437da22ed115c1dc8036d">00101</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a9b3a2d7782e437da22ed115c1dc8036d" title="Causes the adapter to load a pass for drawing.">VSAdapter::SetPass</a>(<a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * pPass)
 <a name="l00102"></a>00102     {
 <a name="l00103"></a>00103         UNREFERENCED_PARAMETER(pPass);
 <a name="l00104"></a>00104 
 <a name="l00105"></a>00105         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00106"></a>00106     }
 <a name="l00107"></a>00107 
-<a name="l00108"></a>00108     IPass * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::GetPass() CONST
+<a name="l00108"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a3d4551c5db4546d1017a0c8a027f9731">00108</a>     <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a3d4551c5db4546d1017a0c8a027f9731" title="Get the currently bound pass.">VSAdapter::GetPass</a>() CONST
 <a name="l00109"></a>00109     {
 <a name="l00110"></a>00110         <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
 <a name="l00111"></a>00111     }
 <a name="l00112"></a>00112 
-<a name="l00113"></a>00113     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::SetTarget(<span class="keyword">const</span> uint32_t index, ITexture * pTarget)
+<a name="l00113"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a67ece45d823fc474f7502c5fae4f56bc">00113</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a67ece45d823fc474f7502c5fae4f56bc" title="Sets a render target for the adapter.">VSAdapter::SetTarget</a>(<span class="keyword">const</span> uint32_t index, <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * pTarget)
 <a name="l00114"></a>00114     {
 <a name="l00115"></a>00115         UNREFERENCED_PARAMETER(index);
 <a name="l00116"></a>00116         UNREFERENCED_PARAMETER(pTarget);
@@ -187,14 +187,14 @@
 <a name="l00118"></a>00118         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00119"></a>00119     }
 <a name="l00120"></a>00120 
-<a name="l00121"></a>00121     ITexture * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::GetTarget(<span class="keyword">const</span> uint32_t index) CONST
+<a name="l00121"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#abf3c6d7395421fd5157b6e8ebf61578d">00121</a>     <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#abf3c6d7395421fd5157b6e8ebf61578d" title="Gets a render target from the adapter.">VSAdapter::GetTarget</a>(<span class="keyword">const</span> uint32_t index) CONST
 <a name="l00122"></a>00122     {
 <a name="l00123"></a>00123         UNREFERENCED_PARAMETER(index);
 <a name="l00124"></a>00124 
 <a name="l00125"></a>00125         <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
 <a name="l00126"></a>00126     }
 <a name="l00127"></a>00127 
-<a name="l00128"></a>00128     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::CreateTexture(<span class="keyword">const</span> String &amp; name, <span class="keyword">const</span> TextureDesc * <span class="keyword">const</span> pDesc, ITexture * <span class="keyword">const</span> pTexture)
+<a name="l00128"></a><a class="code" href="class_voodoo_shader_1_1_v_s_core.html#ae696b56a606a216a4203bad9cc5d5462">00128</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a6d614c91b9e363605cf7728abfae201b" title="Creates a texture within the adapter and binds it to a texture.">VSAdapter::CreateTexture</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * <span class="keyword">const</span> pDesc, <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture)
 <a name="l00129"></a>00129     {
 <a name="l00130"></a>00130         UNREFERENCED_PARAMETER(name);
 <a name="l00131"></a>00131         UNREFERENCED_PARAMETER(pDesc);
@@ -203,7 +203,7 @@
 <a name="l00134"></a>00134         <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00135"></a>00135     }
 <a name="l00136"></a>00136 
-<a name="l00137"></a>00137     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::LoadTexture(IImage * <span class="keyword">const</span> pFile, <span class="keyword">const</span> TextureRegion * <span class="keyword">const</span> pRegion, ITexture * <span class="keyword">const</span> pTexture)
+<a name="l00137"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a9524d721613f8d70f3adbac33f6eff8d">00137</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a9524d721613f8d70f3adbac33f6eff8d" title="Loads a named texture into the API and registers it with the Core.">VSAdapter::LoadTexture</a>(<a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> * <span class="keyword">const</span> pFile, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> * <span class="keyword">const</span> pRegion, <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture)
 <a name="l00138"></a>00138     {
 <a name="l00139"></a>00139         UNREFERENCED_PARAMETER(pFile);
 <a name="l00140"></a>00140         UNREFERENCED_PARAMETER(pRegion);
@@ -212,7 +212,7 @@
 <a name="l00143"></a>00143         <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00144"></a>00144     }
 <a name="l00145"></a>00145 
-<a name="l00146"></a>00146     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::DrawGeometry(<span class="keyword">const</span> uint32_t count, VertexStruct * <span class="keyword">const</span> pVertexData, <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags)
+<a name="l00146"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#af1d394c49403991f3d75a257fa4b7da8">00146</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#af1d394c49403991f3d75a257fa4b7da8" title="Draws geometry from system memory.">VSAdapter::DrawGeometry</a>(<span class="keyword">const</span> uint32_t count, <a class="code" href="struct_voodoo_shader_1_1_vertex_struct.html" title="Standard vertex structure.">VertexStruct</a> * <span class="keyword">const</span> pVertexData, <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags)
 <a name="l00147"></a>00147     {
 <a name="l00148"></a>00148         UNREFERENCED_PARAMETER(count);
 <a name="l00149"></a>00149         UNREFERENCED_PARAMETER(pVertexData);
@@ -221,14 +221,14 @@
 <a name="l00152"></a>00152         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00153"></a>00153     }
 <a name="l00154"></a>00154 
-<a name="l00155"></a>00155     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::ApplyParameter(IParameter * <span class="keyword">const</span> pParam)
+<a name="l00155"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#aae0acbbc5af97b29c0305ec0153a425b">00155</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#aae0acbbc5af97b29c0305ec0153a425b" title="Downloads a parameter&#39;s value from system RAM to VRAM, verifying that the value on the GPU (and in us...">VSAdapter::ApplyParameter</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <span class="keyword">const</span> pParam)
 <a name="l00156"></a>00156     {
 <a name="l00157"></a>00157         UNREFERENCED_PARAMETER(pParam);
 <a name="l00158"></a>00158 
 <a name="l00159"></a>00159         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00160"></a>00160     }
 <a name="l00161"></a>00161 
-<a name="l00162"></a>00162     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::SetProperty(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name, Variant &amp; value)
+<a name="l00162"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#aacb24ddfe8490d66b31bd2bfdf174adf">00162</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#aacb24ddfe8490d66b31bd2bfdf174adf" title="Set a property on the adapter.">VSAdapter::SetProperty</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name, <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> &amp; value)
 <a name="l00163"></a>00163     {
 <a name="l00164"></a>00164         UNREFERENCED_PARAMETER(name);
 <a name="l00165"></a>00165         UNREFERENCED_PARAMETER(value);
@@ -236,16 +236,16 @@
 <a name="l00167"></a>00167         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00168"></a>00168     }
 <a name="l00169"></a>00169 
-<a name="l00170"></a>00170     Variant <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::GetProperty(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name) CONST
+<a name="l00170"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#ae1e4a082b17db1887007268fdd524801">00170</a>     <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#ae1e4a082b17db1887007268fdd524801" title="Get a property from the adapter.">VSAdapter::GetProperty</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name) CONST
 <a name="l00171"></a>00171     {
 <a name="l00172"></a>00172         UNREFERENCED_PARAMETER(name);
 <a name="l00173"></a>00173 
-<a name="l00174"></a>00174         Variant ret = {<a class="code" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6">UT_None</a>, <span class="keyword">nullptr</span>};
+<a name="l00174"></a>00174         <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> ret = {<a class="code" href="namespace_voodoo_shader.html#a2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6">UT_None</a>, <span class="keyword">nullptr</span>};
 <a name="l00175"></a>00175 
 <a name="l00176"></a>00176         <span class="keywordflow">return</span> ret;
 <a name="l00177"></a>00177     }
 <a name="l00178"></a>00178 
-<a name="l00179"></a>00179     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::ConnectTexture(IParameter * <span class="keyword">const</span> pParam, ITexture * <span class="keyword">const</span> pTexture)
+<a name="l00179"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a308e75fd46d4a6b62450a743f3ddaa94">00179</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a308e75fd46d4a6b62450a743f3ddaa94" title="Connects a texture to a sampler-type parameter.">VSAdapter::ConnectTexture</a>(<a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <span class="keyword">const</span> pParam, <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture)
 <a name="l00180"></a>00180     {
 <a name="l00181"></a>00181         UNREFERENCED_PARAMETER(pParam);
 <a name="l00182"></a>00182         UNREFERENCED_PARAMETER(pTexture);
@@ -253,7 +253,7 @@
 <a name="l00184"></a>00184         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00185"></a>00185     }
 <a name="l00186"></a>00186 
-<a name="l00187"></a>00187     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSAdapter::HandleError(CGcontext <span class="keyword">const</span> pContext, <span class="keyword">const</span> uint32_t error)
+<a name="l00187"></a><a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a6788ef28839817992f8d2dffab7f40e8">00187</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html#a6788ef28839817992f8d2dffab7f40e8" title="A generic error-handling callback provided to the Cg runtime.">VSAdapter::HandleError</a>(CGcontext <span class="keyword">const</span> pContext, <span class="keyword">const</span> uint32_t error)
 <a name="l00188"></a>00188     {
 <a name="l00189"></a>00189         UNREFERENCED_PARAMETER(pContext);
 <a name="l00190"></a>00190         UNREFERENCED_PARAMETER(error);
@@ -266,7 +266,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 12:34:57 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

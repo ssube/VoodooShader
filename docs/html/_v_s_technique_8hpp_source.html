@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
+   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -92,28 +92,28 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00029"></a>00029     <a class="code" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(VSTechnique) = {0xA5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+<a name="l00029"></a><a class="code" href="namespace_voodoo_shader.html#a0a4ec702859db3e8273a1f989930fc06">00029</a>     <a class="code" href="group__voodoo__uuids.html#ga4078f7f061ec04768f65d943d7c3bcb4">DEFINE_CLSID</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_technique.html">VSTechnique</a>) = {0xA5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00030"></a>00030     
 <a name="l00035"></a><a class="code" href="class_voodoo_shader_1_1_v_s_technique.html">00035</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_v_s_technique.html">VSTechnique</a> :
 <a name="l00036"></a>00036         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a>
 <a name="l00037"></a>00037     {
 <a name="l00038"></a>00038     <span class="keyword">public</span>:
-<a name="l00039"></a>00039         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a57cfb82a164e9e65f896e38cb31a3cb1">VSTechnique</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * pShader, _In_ CGtechnique pCgTech);
-<a name="l00040"></a>00040         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ac20db56b0e069ccc12fb84d670c630fd">~VSTechnique</a>();
+<a name="l00039"></a>00039         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a196ae697aec2ed1d790efff6e5b1866f">VSTechnique</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * pShader, _In_ CGtechnique pCgTech);
+<a name="l00040"></a>00040         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a9f9cb525c320702455c75bb12d99adea">~VSTechnique</a>();
 <a name="l00041"></a>00041 
-<a name="l00042"></a>00042         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, AddRef)() CONST;
-<a name="l00043"></a>00043         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, Release)() CONST;
-<a name="l00044"></a><a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a6b10f51d67d01b7be0bdf25e14d97db9">00044</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
-<a name="l00045"></a>00045         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
-<a name="l00046"></a>00046         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
+<a name="l00042"></a>00042         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(uint32_t, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ac113ac60174ba5816360fdda4a4a0ec6" title="Add a reference to this object.">AddRef</a>)() CONST;
+<a name="l00043"></a>00043         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(uint32_t, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a8bb505e7912023f3a2204dc54317ffd3" title="Release a reference from this object.">Release</a>)() CONST;
+<a name="l00044"></a>00044         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a12d70c01545129091e1bf2dc4d9e4308" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">QueryInterface</a>)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
+<a name="l00045"></a>00045         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#abe437ebb2ef086715a045664a863e423" title="Get the name of this object.">ToString</a>)() CONST;
+<a name="l00046"></a>00046         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a56770a50154a74dff7047dadc11d694a" title="Get the core this object was associated with.">GetCore</a>)() CONST;
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, GetName)() CONST;
-<a name="l00049"></a>00049         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> *, GetTarget)() CONST;
-<a name="l00050"></a>00050         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<span class="keyword">const</span> uint32_t, GetPassCount)() CONST;
-<a name="l00051"></a>00051         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> *, GetPass)(_In_ <span class="keyword">const</span> uint32_t index) CONST;
-<a name="l00052"></a>00052         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> *, GetShader)() CONST;
+<a name="l00048"></a>00048         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#abd3d1488fbdfdc0151e77b030d49a3f1">GetName</a>)() CONST;
+<a name="l00049"></a>00049         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> *, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a6e8b1d5d3ad21dbdab83823431809eb3" title="Retrieve the technique&#39;s final target.">GetTarget</a>)() CONST;
+<a name="l00050"></a>00050         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<span class="keyword">const</span> uint32_t, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a6e13c1d1dcf0ab5c2050c11ab410b103">GetPassCount</a>)() CONST;
+<a name="l00051"></a>00051         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> *, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a77e399a44c993b39a46a398e7bf9dea9" title="Retrieve a specific pass from this technique.">GetPass</a>)(_In_ <span class="keyword">const</span> uint32_t index) CONST;
+<a name="l00052"></a>00052         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> *, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#acf9c4a7d6a7fe6f2ff42cc54a3b5809a" title="Retrieve the parent shader of this technique.">GetShader</a>)() CONST;
 <a name="l00053"></a>00053 
-<a name="l00054"></a>00054         <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#ab20b75d4617e4d7d5edb882101fd0826" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(CGtechnique, GetCgTechnique)() CONST;
+<a name="l00054"></a>00054         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(CGtechnique, <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#affb27a3e44ed5249bee202cf96953f32" title="Retrieve the underlying Cg technique.">GetCgTechnique</a>)() CONST;
 <a name="l00055"></a>00055 
 <a name="l00056"></a>00056     <span class="keyword">private</span>:
 <a name="l00057"></a>00057         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_technique.html#a24b9741f7703f139d55f8e4780c448b3">Link</a>();
@@ -134,7 +134,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 12:34:57 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

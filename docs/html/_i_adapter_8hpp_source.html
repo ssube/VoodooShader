@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
+   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -92,58 +92,57 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00034"></a>00034     <a class="code" href="group__voodoo__uuids.html#ga1e664b7c83bc0a98c02c41aeca3af536">DEFINE_IID</a>(IAdapter) = {0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+<a name="l00034"></a><a class="code" href="group__voodoo__framework__interfaces.html#ga42738af6f1d3f616067ab307013aa8cf">00034</a>     <a class="code" href="group__voodoo__uuids.html#ga1e664b7c83bc0a98c02c41aeca3af536">DEFINE_IID</a>(<a class="code" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a>) = {0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00035"></a>00035 
-<a name="l00048"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html">00048</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a> :
-<a name="l00049"></a>00049         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>
-<a name="l00050"></a>00050     {
-<a name="l00051"></a>00051     <span class="keyword">public</span>:
-<a name="l00052"></a>00052         <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a046e85875af730fd0480ff8d8577de6a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, AddRef)() CONST PURE;
-<a name="l00053"></a>00053         <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a046e85875af730fd0480ff8d8577de6a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, Release)() CONST PURE;
-<a name="l00054"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a84d443cafd32534f5fe1a0d4afa3cfc6">00054</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST PURE;
-<a name="l00055"></a>00055         <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a046e85875af730fd0480ff8d8577de6a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST PURE;
-<a name="l00056"></a>00056         <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a046e85875af730fd0480ff8d8577de6a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST PURE;
-<a name="l00057"></a>00057 
-<a name="l00071"></a>00071         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(LoadPass)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <span class="keyword">const</span> pPass) PURE;
-<a name="l00072"></a>00072 
-<a name="l00081"></a>00081         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(UnloadPass)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <span class="keyword">const</span> pPass) PURE;
-<a name="l00082"></a>00082 
-<a name="l00103"></a>00103         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(SetPass)(_In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <span class="keyword">const</span> pPass = <span class="keyword">nullptr</span>) PURE;
-<a name="l00104"></a>00104 
-<a name="l00110"></a>00110         <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a046e85875af730fd0480ff8d8577de6a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> *, GetPass)() CONST PURE;
-<a name="l00111"></a>00111 
-<a name="l00123"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a45b50e2cb12fb546f179957bc97fa813">00123</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(SetTarget)(_In_ <span class="keyword">const</span> uint32_t index, _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a45b50e2cb12fb546f179957bc97fa813">pTarget</a> = <span class="keyword">nullptr</span>) PURE;
-<a name="l00124"></a>00124 
-<a name="l00131"></a>00131         <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a046e85875af730fd0480ff8d8577de6a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> *, GetTarget)(_In_ <span class="keyword">const</span> uint32_t index) CONST PURE;
-<a name="l00132"></a>00132 
-<a name="l00149"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ac251c05750ac9404e8b6ba46449b11d5">00149</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(CreateTexture)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a1f8dbf4caeece7377c01bfedf798c89e">pDesc</a>, _Inout_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ac251c05750ac9404e8b6ba46449b11d5">pTexture</a>) PURE;
-<a name="l00150"></a>00150 
-<a name="l00159"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a0e59448c6594d21d556923ce24ea0679">00159</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(LoadTexture)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> * <span class="keyword">const</span> pImage, _In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#af6530a3afd224b1017bba217cb346e62">pRegion</a>, _Inout_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a0e59448c6594d21d556923ce24ea0679">pTexture</a>) PURE;
-<a name="l00160"></a>00160 
-<a name="l00169"></a>00169         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(DrawGeometry)
-<a name="l00170"></a>00170         (
-<a name="l00171"></a>00171             _In_ <span class="keyword">const</span> uint32_t count,
-<a name="l00172"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a83de079b00959147bc7e3becab0e3585">00172</a>             _In_count_(count) <a class="code" href="struct_voodoo_shader_1_1_vertex_struct.html" title="Standard vertex structure.">VertexStruct</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a84d443cafd32534f5fe1a0d4afa3cfc6">const</a> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a83de079b00959147bc7e3becab0e3585">pVertexData</a>,
-<a name="l00173"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a040350e9b651d7f9ea8cf408e1bf83bd">00173</a>             _In_ <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a84d443cafd32534f5fe1a0d4afa3cfc6">const</a> <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a040350e9b651d7f9ea8cf408e1bf83bd">flags</a> = <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89a3612089a43a2cbaeb4102ad75e59a56b">VF_Transformed</a>
-<a name="l00174"></a>00174         ) PURE;
-<a name="l00175"></a>00175 
-<a name="l00183"></a>00183         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(ApplyParameter)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a84d443cafd32534f5fe1a0d4afa3cfc6">const</a> pParameter) PURE;
-<a name="l00184"></a>00184 
-<a name="l00201"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a1a49caed0f31bfd12965319a4d4e11ea">00201</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(SetProperty)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a84d443cafd32534f5fe1a0d4afa3cfc6">const</a> <span class="keywordtype">wchar_t</span> * name, _In_ <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> &amp; <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a1a49caed0f31bfd12965319a4d4e11ea">value</a>) PURE;
-<a name="l00202"></a>00202 
-<a name="l00210"></a>00210         <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a046e85875af730fd0480ff8d8577de6a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a>, GetProperty)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a84d443cafd32534f5fe1a0d4afa3cfc6">const</a> <span class="keywordtype">wchar_t</span> * name) CONST PURE;
-<a name="l00211"></a>00211 
-<a name="l00221"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a0e3f5c5cb8d0dc8e6390993ab858eead">00221</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(ConnectTexture)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a84d443cafd32534f5fe1a0d4afa3cfc6">const</a> pParam, _In_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a84d443cafd32534f5fe1a0d4afa3cfc6">const</a> <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#ac251c05750ac9404e8b6ba46449b11d5">pTexture</a>) PURE;
-<a name="l00222"></a>00222 
-<a name="l00240"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a26eb511cf3046ef6e39dbd7d14b57dea">00240</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(HandleError)(_In_ CGcontext <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a84d443cafd32534f5fe1a0d4afa3cfc6">const</a> pContext, _In_ uint32_t <a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a26eb511cf3046ef6e39dbd7d14b57dea">error</a>) PURE;
-<a name="l00241"></a>00241     };
-<a name="l00245"></a>00245 }
+<a name="l00048"></a><a class="code" href="class_voodoo_shader_1_1_i_adapter.html">00048</a>     <a class="code" href="_includes_8hpp.html#a26de8d28ff5aaebe3ced239b816b6c3f">VOODOO_INTERFACE</a>(<a class="code" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a>, <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>)
+<a name="l00049"></a>00049     {
+<a name="l00050"></a>00050     <span class="keyword">public</span>:
+<a name="l00051"></a>00051         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(uint32_t, AddRef)() CONST PURE;
+<a name="l00052"></a>00052         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(uint32_t, Release)() CONST PURE;
+<a name="l00053"></a>00053         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST PURE;
+<a name="l00054"></a>00054         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST PURE;
+<a name="l00055"></a>00055         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST PURE;
+<a name="l00056"></a>00056 
+<a name="l00070"></a>00070         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(LoadPass)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <span class="keyword">const</span> pPass) PURE;
+<a name="l00071"></a>00071 
+<a name="l00080"></a>00080         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(UnloadPass)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <span class="keyword">const</span> pPass) PURE;
+<a name="l00081"></a>00081 
+<a name="l00102"></a>00102         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(SetPass)(_In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> * <span class="keyword">const</span> pPass = <span class="keyword">nullptr</span>) PURE;
+<a name="l00103"></a>00103 
+<a name="l00109"></a>00109         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> *, GetPass)() CONST PURE;
+<a name="l00110"></a>00110 
+<a name="l00122"></a>00122         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(SetTarget)(_In_ <span class="keyword">const</span> uint32_t index, _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTarget = <span class="keyword">nullptr</span>) PURE;
+<a name="l00123"></a>00123 
+<a name="l00130"></a>00130         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> *, GetTarget)(_In_ <span class="keyword">const</span> uint32_t index) CONST PURE;
+<a name="l00131"></a>00131 
+<a name="l00148"></a>00148         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(CreateTexture)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> * pDesc, _Inout_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture) PURE;
+<a name="l00149"></a>00149 
+<a name="l00158"></a>00158         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(LoadTexture)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> * <span class="keyword">const</span> pImage, _In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> * pRegion, _Inout_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture) PURE;
+<a name="l00159"></a>00159 
+<a name="l00168"></a>00168         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(DrawGeometry)
+<a name="l00169"></a>00169         (
+<a name="l00170"></a>00170             _In_ <span class="keyword">const</span> uint32_t count,
+<a name="l00171"></a>00171             _In_count_(count) <a class="code" href="struct_voodoo_shader_1_1_vertex_struct.html" title="Standard vertex structure.">VertexStruct</a> * <span class="keyword">const</span> pVertexData,
+<a name="l00172"></a>00172             _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89a3612089a43a2cbaeb4102ad75e59a56b">VF_Transformed</a>
+<a name="l00173"></a>00173         ) PURE;
+<a name="l00174"></a>00174 
+<a name="l00182"></a>00182         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(ApplyParameter)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <span class="keyword">const</span> pParameter) PURE;
+<a name="l00183"></a>00183 
+<a name="l00200"></a>00200         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(SetProperty)(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name, _In_ <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> &amp; value) PURE;
+<a name="l00201"></a>00201 
+<a name="l00209"></a>00209         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a>, GetProperty)(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name) CONST PURE;
+<a name="l00210"></a>00210 
+<a name="l00220"></a>00220         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(ConnectTexture)(_In_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <span class="keyword">const</span> pParam, _In_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture) PURE;
+<a name="l00221"></a>00221 
+<a name="l00239"></a>00239         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(HandleError)(_In_ CGcontext <span class="keyword">const</span> pContext, _In_ uint32_t error) PURE;
+<a name="l00240"></a>00240     };
+<a name="l00244"></a>00244 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 12:34:57 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

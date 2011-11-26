@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_core.html#a8bb7e0f11989b9156d214d55dbdcdc90" title="Retrieve the ILogger attached to this ICore." alt="" coords="336,5,549,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_core.html#ab41dd89b24a7bcd1a50f6b5f3f45233f" title="Retrieves this core&#39;s variable parser." alt="" coords="337,56,549,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_i_parser.html#afafa5b0729d1546a68a35a72fa8e5dbd" title="Parses a string, replacing any variables with their values." alt="" coords="343,107,542,133"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="340,157,545,184"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_v_s_module.html#a8ca80c6fecbe61f47410915ed9fbbad8" title="VoodooShader::VSModule::Load" alt="" coords="337,208,548,235"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_v_s_module.html#a7c269ec740bbed3e38332e6bb5065345" title="VoodooShader::VSModule::VSModule" alt="" coords="597,208,840,235"/>
+</map>

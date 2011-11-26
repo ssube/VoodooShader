@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de" title="Add a reference to this object." alt="" coords="291,5,498,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_object.html#ac04f1b9452f6e8269b77b12df8fa1bc9" title="Get the core this object was associated with." alt="" coords="289,56,501,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore." alt="" coords="288,107,501,133"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="301,157,488,184"/>
+</map>

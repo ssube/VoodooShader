@@ -1,9 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function&#45;level hooks, redirecting existing functions and calls int..." alt="" coords="1105,199,1303,225"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="491,291,647,317"/>
-<area shape="rect" id="node18" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1131,435,1277,461"/>
-<area shape="rect" id="node35" href="$class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="825,308,986,335"/>
-<area shape="rect" id="node25" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="454,587,685,613"/>
-<area shape="rect" id="node27" href="$struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; uint32_t \&gt;" alt="" coords="137,637,367,664"/>
-<area shape="rect" id="node23" href="$struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="811,612,999,639"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function&#45;level hooks, redirecting existing functions and calls int..." alt="" coords="5,83,203,109"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="143,5,299,32"/>
+<area shape="rect" id="node8" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="227,83,372,109"/>
 </map>

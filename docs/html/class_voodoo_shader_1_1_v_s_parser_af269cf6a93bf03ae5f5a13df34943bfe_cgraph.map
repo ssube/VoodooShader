@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_core.html#a8bb7e0f11989b9156d214d55dbdcdc90" title="Retrieve the ILogger attached to this ICore." alt="" coords="280,5,493,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="293,56,480,83"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_v_s_parser.html#ad57343a4184a063b04c129c5160b9cf7" title="Parses a string, replacing any variables with their values." alt="" coords="280,107,493,133"/>
+</map>

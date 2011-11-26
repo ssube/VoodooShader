@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
+   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -92,32 +92,31 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00034"></a>00034     <a class="code" href="group__voodoo__uuids.html#ga1e664b7c83bc0a98c02c41aeca3af536">DEFINE_IID</a>(IParser) = {0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
+<a name="l00034"></a><a class="code" href="group__voodoo__framework__interfaces.html#ga87fc2a608dadaa1f57b48bbd5fa29d4c">00034</a>     <a class="code" href="group__voodoo__uuids.html#ga1e664b7c83bc0a98c02c41aeca3af536">DEFINE_IID</a>(<a class="code" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>) = {0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 <a name="l00035"></a>00035 
-<a name="l00042"></a><a class="code" href="class_voodoo_shader_1_1_i_parser.html">00042</a>     <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a> :
-<a name="l00043"></a>00043         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>
-<a name="l00044"></a>00044     {
-<a name="l00045"></a>00045     <span class="keyword">public</span>:
-<a name="l00046"></a>00046         <a class="code" href="class_voodoo_shader_1_1_i_parser.html#aacb112415890ac2104c7a736308a7f3a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, AddRef)() CONST PURE;
-<a name="l00047"></a>00047         <a class="code" href="class_voodoo_shader_1_1_i_parser.html#aacb112415890ac2104c7a736308a7f3a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, Release)() CONST PURE;
-<a name="l00048"></a><a class="code" href="class_voodoo_shader_1_1_i_parser.html#ad4494297f42d8739fc3261dfadda5493">00048</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST PURE;
-<a name="l00049"></a>00049         <a class="code" href="class_voodoo_shader_1_1_i_parser.html#aacb112415890ac2104c7a736308a7f3a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST PURE;
-<a name="l00050"></a>00050         <a class="code" href="class_voodoo_shader_1_1_i_parser.html#aacb112415890ac2104c7a736308a7f3a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST PURE;
-<a name="l00051"></a>00051 
-<a name="l00059"></a><a class="code" href="class_voodoo_shader_1_1_i_parser.html#a837a3ba16734e33b5b2c00ca43d314fa">00059</a>         <a class="code" href="class_voodoo_shader_1_1_i_parser.html#aacb112415890ac2104c7a736308a7f3a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<span class="keywordtype">void</span>, Add)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a837a3ba16734e33b5b2c00ca43d314fa">value</a>, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#afabe881a6f06e39ffcbb0539e48c03ea">type</a> = <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>) PURE;
-<a name="l00060"></a>00060 
-<a name="l00066"></a>00066         <a class="code" href="class_voodoo_shader_1_1_i_parser.html#aacb112415890ac2104c7a736308a7f3a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<span class="keywordtype">void</span>, Remove)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) PURE;
-<a name="l00067"></a>00067 
-<a name="l00074"></a><a class="code" href="class_voodoo_shader_1_1_i_parser.html#a2dd0f1b5a89220fe01867c44f545bca3">00074</a>         <a class="code" href="class_voodoo_shader_1_1_i_parser.html#aacb112415890ac2104c7a736308a7f3a" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, Parse)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> <a class="code" href="class_voodoo_shader_1_1_i_parser.html#a2dd0f1b5a89220fe01867c44f545bca3">flags</a> = <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) CONST PURE;
-<a name="l00075"></a>00075     };
-<a name="l00076"></a>00076 
-<a name="l00263"></a>00263 }
+<a name="l00042"></a><a class="code" href="class_voodoo_shader_1_1_i_parser.html">00042</a>     <a class="code" href="_includes_8hpp.html#a26de8d28ff5aaebe3ced239b816b6c3f">VOODOO_INTERFACE</a>(<a class="code" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>, <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>)
+<a name="l00043"></a>00043     {
+<a name="l00044"></a>00044     <span class="keyword">public</span>:
+<a name="l00045"></a>00045         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(uint32_t, AddRef)() CONST PURE;
+<a name="l00046"></a>00046         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(uint32_t, Release)() CONST PURE;
+<a name="l00047"></a>00047         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST PURE;
+<a name="l00048"></a>00048         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST PURE;
+<a name="l00049"></a>00049         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST PURE;
+<a name="l00050"></a>00050 
+<a name="l00058"></a>00058         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<span class="keywordtype">void</span>, Add)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; value, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>) PURE;
+<a name="l00059"></a>00059 
+<a name="l00065"></a>00065         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<span class="keywordtype">void</span>, Remove)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) PURE;
+<a name="l00066"></a>00066 
+<a name="l00073"></a>00073         <a class="code" href="_includes_8hpp.html#a98929b8c6064db00a694693e5dbf47fb">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, Parse)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) CONST PURE;
+<a name="l00074"></a>00074     };
+<a name="l00075"></a>00075 
+<a name="l00262"></a>00262 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 12:34:57 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

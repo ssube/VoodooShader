@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_parameter.html#af400c5ebbf7c132f1b0e049023816cdc" title="Retrieves the underlying Cg parameter object." alt="" coords="329,5,612,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore." alt="" coords="711,31,924,57"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="724,81,911,108"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_i_core.html#a8ff79b85773192eda84c66ccfdc42cf5" title="Retrieves a texture from the ICore&#39;s texture map by name." alt="" coords="362,284,579,311"/>
+<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_i_core.html#af6521bfdb13b17ddc6f6285451fae603" title="Retrieve the IAdapter attached to this ICore." alt="" coords="708,132,927,159"/>
+<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_i_adapter.html#afbeea9d49b7730b90cf1356cb72bb132" title="Connects a texture to a sampler&#45;type parameter." alt="" coords="339,335,602,361"/>
+<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_v_s_shader.html#ab4aba9d242067935cdf05a83d0b0c2b6" title="Find texture information from a parameter and create a texture based on that data." alt="" coords="309,233,632,260"/>
+<area shape="rect" id="node19" href="$class_voodoo_shader_1_1_i_core.html#a0625fa5c3a31a57f07831af4ca62679c" title="Retrieves this core&#39;s variable parser." alt="" coords="711,183,923,209"/>
+<area shape="rect" id="node21" href="$class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values." alt="" coords="718,233,917,260"/>
+<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_converter.html#ae0ce0481e276127ea94bd3a994b06e74" title="VoodooShader::Converter::ToTextureFormat" alt="" coords="680,284,955,311"/>
+<area shape="rect" id="node25" href="$class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="715,335,920,361"/>
+<area shape="rect" id="node28" href="$class_voodoo_shader_1_1_i_core.html#a7b123df03e640ce142f6e8a4b2bbb5cc" title="Registers a texture with this ICore." alt="" coords="700,385,935,412"/>
+<area shape="rect" id="node30" href="$class_voodoo_shader_1_1_i_core.html#af293ccac94e57dca12e9eb995f93dff5" title="Retrieves this core&#39;s IFileSystem implementation." alt="" coords="697,436,937,463"/>
+<area shape="rect" id="node32" href="$class_voodoo_shader_1_1_i_file_system.html#abd68ab3a0d35cad6017fc7e46fca7db7" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ..." alt="" coords="698,487,937,513"/>
+<area shape="rect" id="node34" href="$class_voodoo_shader_1_1_i_file.html#a4511d42e3edfaf473230df7cd3f13306" title="VoodooShader::IFile::OpenImage" alt="" coords="711,537,924,564"/>
+<area shape="rect" id="node36" href="$class_voodoo_shader_1_1_i_file.html#a9a1096643c5efb37d10ba39b63ef4f59" title="Gets the absolute path of this file." alt="" coords="720,588,915,615"/>
+</map>
