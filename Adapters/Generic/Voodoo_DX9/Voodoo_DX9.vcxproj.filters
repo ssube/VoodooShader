@@ -16,6 +16,15 @@
     <ClCompile Include="IVoodoo3D8.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="IVoodoo3DDevice8.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="IVoodoo3DTexture8.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="IVoodoo3DSurface8.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp">

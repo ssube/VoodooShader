@@ -77,7 +77,10 @@
     <ClCompile Include="DX9_Module.cpp" />
     <ClCompile Include="IVoodoo3D8.cpp" />
     <ClCompile Include="IVoodoo3D9.cpp" />
+    <ClCompile Include="IVoodoo3DDevice8.cpp" />
     <ClCompile Include="IVoodoo3DDevice9.cpp" />
+    <ClCompile Include="IVoodoo3DTexture8.cpp" />
+    <ClCompile Include="IVoodoo3DSurface8.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp" />
