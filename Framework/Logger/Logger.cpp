@@ -43,17 +43,17 @@ namespace VoodooShader
         const wchar_t * name_VSXmlLogger = L"VSXmlLogger";
         static const Uuid clsid_VSXmlLogger = CLSID_VSXmlLogger;
 
-        const Version * VOODOO_CALL API_ModuleVersion(void)
+        const Version * VOODOO_CALLTYPE API_ModuleVersion()
         {
             return &moduleVersion;
         }
 
-        const uint32_t VOODOO_CALL API_ClassCount(void)
+        const uint32_t VOODOO_CALLTYPE API_ClassCount()
         {
             return 1;
         }
 
-        const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
+        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
         {
             if (!pUuid)
             {
@@ -69,7 +69,7 @@ namespace VoodooShader
             return nullptr;
         }
 
-        IObject * VOODOO_CALL API_ClassCreate (_In_ const uint32_t number, _In_ ICore * pCore)
+        IObject * VOODOO_CALLTYPE API_ClassCreate (_In_ const uint32_t number, _In_ ICore * pCore)
         {
             if (number == 0)
             {
@@ -86,7 +86,7 @@ namespace VoodooShader
         {
         }
 
-        VSXmlLogger::~VSXmlLogger(void)
+        VSXmlLogger::~VSXmlLogger()
         {
             if (this->m_LogFile.is_open())
             {
@@ -139,12 +139,12 @@ namespace VoodooShader
             }
         }
 
-        String VSXmlLogger::ToString(void) const
+        String VSXmlLogger::ToString() const
         {
             return name_VSXmlLogger;
         }
 
-        ICore * VSXmlLogger::GetCore(void) const
+        ICore * VSXmlLogger::GetCore() const
         {
             return m_Core;
         }
@@ -205,7 +205,7 @@ namespace VoodooShader
             return this->Open(pFile->GetPath(), append);
         }
 
-        void VSXmlLogger::Close(void)
+        void VSXmlLogger::Close()
         {
             if (this->m_LogFile.is_open())
             {
@@ -214,7 +214,7 @@ namespace VoodooShader
             }
         }
 
-        void VSXmlLogger::Flush(void)
+        void VSXmlLogger::Flush()
         {
             if (this->m_LogFile.is_open())
             {
@@ -316,7 +316,7 @@ namespace VoodooShader
             m_Flags = flags;
         }
 
-        const LogFlags VSXmlLogger::GetFlags(void) const
+        const LogFlags VSXmlLogger::GetFlags() const
         {
             return m_Flags;
         }
@@ -326,12 +326,12 @@ namespace VoodooShader
             m_LogLevel = level;
         }
 
-        const LogLevel VSXmlLogger::GetLogLevel(void) const
+        const LogLevel VSXmlLogger::GetLogLevel() const
         {
             return m_LogLevel;
         }
 
-        String VSXmlLogger::LogTime(void) const
+        String VSXmlLogger::LogTime() const
         {
             time_t now = time(nullptr);
 
@@ -348,7 +348,7 @@ namespace VoodooShader
             }
         }
 
-        String VSXmlLogger::LogDate(void) const
+        String VSXmlLogger::LogDate() const
         {
             time_t now = time(nullptr);
 
@@ -365,7 +365,7 @@ namespace VoodooShader
             }
         }
 
-        String VSXmlLogger::LogTicks(void) const
+        String VSXmlLogger::LogTicks() const
         {
             return String::Format(L" ticks=\"%d\" ", GetTickCount());
         }

@@ -44,10 +44,10 @@ namespace VoodooShader
          * @{
          */
 
-        const Version * VOODOO_CALL API_ModuleVersion(void);
-        const uint32_t  VOODOO_CALL API_ClassCount(void);
-        const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
-        IObject *       VOODOO_CALL API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
+        const Version * VOODOO_CALLTYPE API_ModuleVersion();
+        const uint32_t  VOODOO_CALLTYPE API_ClassCount();
+        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
+        IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
 
         /* VSXmlLogger: e6f312b7-05af-11e1-9e05-005056c00008 */
         DEFINE_CLSID(VSXmlLogger) = {0xB7, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
@@ -73,15 +73,15 @@ namespace VoodooShader
             /**
              * Default destructor, flushes and closes the log file (if open).
              */
-            virtual ~VSXmlLogger(void);
+            virtual ~VSXmlLogger();
 
-            virtual uint32_t AddRef(void) const throw();
-            virtual uint32_t Release(void) const throw();
-            virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-            virtual String ToString(void) const throw();
-            virtual ICore * GetCore(void) const throw();
+            VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+            VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+            VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHODCALL_(String, ToString)() CONST;
+            VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
-            virtual bool Open(_In_ const String & filename, _In_ const bool append) throw();
+            VOODOO_METHODCALL(Open)(_In_ const String & filename, _In_ const bool append) ;
 
             /**
              * Opens a file for use by this Logger.
@@ -90,12 +90,12 @@ namespace VoodooShader
              * @param append Flag specifying the open mode; if true, any existing log is truncated.
              * @return Success of the open operation.
              */
-            virtual bool Open(_In_ IFile * const pFile, _In_ const bool append) throw();
+            VOODOO_METHODCALL(Open)(_In_ IFile * const pFile, _In_ const bool append) ;
 
             /**
              * Closes the log file, if one is open.
              */
-            virtual void Close(void) throw();
+            VOODOO_METHODCALL_(void, Close)() ;
 
             /**
              * Immediately writes all pending data to disk.
@@ -107,15 +107,15 @@ namespace VoodooShader
              *      complete debug logging, call Logger::SetBufferSize(unsigned int) with a buffer size of 0 and all logged
              *      messages @em should make it to disk, even during fatal crashes
              */
-            virtual void Flush(void) throw();
+            VOODOO_METHODCALL_(void, Flush)() ;
 
             /**
              * Set the default minimum message level. Messages below this level will not be
              * logged. @param level The minimum log level.
              */
-            virtual void SetLogLevel(_In_ const LogLevel level) throw();
+            VOODOO_METHODCALL_(void, SetLogLevel)(_In_ const LogLevel level) ;
 
-            virtual const LogLevel GetLogLevel(void) const throw();
+            VOODOO_METHODCALL_(const LogLevel, GetLogLevel)() CONST;
 
             /**
              * Writes a module stamp to the log. This records the name and version info for a select module (used to log
@@ -123,7 +123,7 @@ namespace VoodooShader
              *
              * @param pModule The module version info to log.
              */
-            virtual void LogModule(_In_ const Version * const pModule) throw();
+            VOODOO_METHODCALL_(void, LogModule)(_In_ const Version * const pModule) ;
 
             /**
              * Log a message, may be formatted with printf syntax. @param level The level for this message.
@@ -132,17 +132,17 @@ namespace VoodooShader
              * @param msg The message format string.
              * @param ... The parameters to insert.
              */
-            virtual void Log
+            VOODOO_METHODCALL_(void, Log)
             (
                 _In_ const LogLevel level,
                 _In_ const wchar_t * source,
                 _In_ _Printf_format_string_ const wchar_t * format,
                 ...
-            ) throw();
+            ) ;
 
-            virtual void SetFlags(_In_ const LogFlags flags);
+            VOODOO_METHODCALL_(void, SetFlags)(_In_ const LogFlags flags);
 
-            virtual const LogFlags GetFlags(void) const throw();
+            VOODOO_METHODCALL_(const LogFlags, GetFlags)() CONST;
 
         private:
             /**
@@ -152,7 +152,7 @@ namespace VoodooShader
              * @note If the system time cannot be retrieved, an equal-length error stamp of <code>000000</code> will be
              *      returned.
              */
-            String LogTime(void) const;
+            String LogTime() const;
 
             /**
              * Formats a date for the log. The date will have the form <code>YYYYMMDD</code>. Leading zeros are guaranteed
@@ -161,13 +161,13 @@ namespace VoodooShader
              * @note If the system time cannot be retrieved, an equal-length error stamp of <code>00000000</code> will be
              *      returned.
              */
-            String LogDate(void) const;
+            String LogDate() const;
 
             /**
              * Formats the system's current tick count. The stamp will have the form <code>xxxxxxxxx</code>, with a
              * potentially varying length. This records ticks, usually ms since system start.
              */
-            String LogTicks(void) const;
+            String LogTicks() const;
 
             mutable uint32_t m_Refs;
             ICore * m_Core;

@@ -38,10 +38,10 @@ namespace VoodooShader
          */
         typedef std::map<String, TRACED_HOOK_HANDLE> HookMap;
 
-        const Version * VOODOO_CALL API_ModuleVersion(void);
-        const uint32_t  VOODOO_CALL API_ClassCount(void);
-        const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
-        IObject *       VOODOO_CALL API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
+        const Version * VOODOO_CALLTYPE API_ModuleVersion();
+        const uint32_t  VOODOO_CALLTYPE API_ClassCount();
+        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
+        IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
 
         /* VSEHHookManager: e6f312b5-05af-11e1-9e05-005056c00008 */
         DEFINE_CLSID(VSEHHookManager) = {0xB5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
@@ -57,13 +57,13 @@ namespace VoodooShader
             VSEHHookManager(_In_ ICore * pCore);
 
             /* Removes all hooks and cleans up the VSEHHookManager. */
-            virtual ~VSEHHookManager(void);
+            virtual ~VSEHHookManager();
 
-            virtual uint32_t AddRef(void) const throw();
-            virtual uint32_t Release(void) const throw();
-            virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-            virtual String ToString(void) const throw();
-            virtual ICore * GetCore(void) const throw();
+            VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+            VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+            VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHODCALL_(String, ToString)() CONST;
+            VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
             /**
              * Install a hook at the specified function.
@@ -78,7 +78,7 @@ namespace VoodooShader
              * @warning The calling convention of pSrc and pDest must be identical, or bad things might happen. This is only
              *      a bother with member functions, but can be worked around relatively easily.
              */
-            bool Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
+            VOODOO_METHODCALL(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
 
             /**
              * Removes a single hook.
@@ -89,12 +89,12 @@ namespace VoodooShader
              * @warning <em>Do not</em>, under any circumstances, remove a hook while execution is passing through the
              *      trampoline function. This will likely crash the process.
              */
-            bool Remove(_In_ const String & name);
+            VOODOO_METHODCALL(Remove)(_In_ const String & name);
 
             /**
              * Removes all hooks created with this VSEHHookManager.
              */
-            void RemoveAll(void);
+            VOODOO_METHODCALL(RemoveAll)();
 
         private:
             mutable uint32_t m_Refs;

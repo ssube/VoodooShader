@@ -39,17 +39,17 @@ namespace VoodooShader
         static const Uuid clsid_VSWFileSystem = CLSID_VSWFileSystem;
 
 
-        const Version * VOODOO_CALL API_ModuleVersion(void)
+        const Version * VOODOO_CALLTYPE API_ModuleVersion()
         {
             return &version;
         }
 
-        const uint32_t VOODOO_CALL API_ClassCount(void)
+        const uint32_t VOODOO_CALLTYPE API_ClassCount()
         {
             return 1;
         }
 
-        const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
+        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
         {
             if (!pUuid)
             {
@@ -65,7 +65,7 @@ namespace VoodooShader
             return nullptr;
         }
 
-        IObject * VOODOO_CALL API_ClassCreate(const uint32_t index, _In_ ICore * pCore)
+        IObject * VOODOO_CALLTYPE API_ClassCreate(const uint32_t index, _In_ ICore * pCore)
         {
             if (index == 0)
             {
@@ -122,7 +122,7 @@ namespace VoodooShader
             }
         }
 
-        VSWFileSystem::~VSWFileSystem(void)
+        VSWFileSystem::~VSWFileSystem()
         {
             m_Directories.clear();
         }
@@ -172,12 +172,12 @@ namespace VoodooShader
             }
         }
 
-        String VSWFileSystem::ToString(void) const
+        String VSWFileSystem::ToString() const
         {
             return L"VSWFileSystem";
         }
 
-        ICore * VSWFileSystem::GetCore(void) const
+        ICore * VSWFileSystem::GetCore() const
         {
             return m_Core;
         }
@@ -271,7 +271,7 @@ namespace VoodooShader
             m_Path(path), m_Core(pCore), m_Handle(nullptr)
         { };
 
-        VSWFile::~VSWFile(void)
+        VSWFile::~VSWFile()
         {
             this->Close();
         }
@@ -321,17 +321,17 @@ namespace VoodooShader
             }
         }
 
-        String VSWFile::ToString(void) const
+        String VSWFile::ToString() const
         {
             return L"VSWFile";
         }
 
-        ICore * VSWFile::GetCore(void) const
+        ICore * VSWFile::GetCore() const
         {
             return m_Core;
         }
 
-        String VSWFile::GetPath(void) const
+        String VSWFile::GetPath() const
         {
             return m_Path;
         }
@@ -378,12 +378,12 @@ namespace VoodooShader
             return (m_Handle != INVALID_HANDLE_VALUE);
         }
 
-        IImage * VSWFile::OpenImage(void) const
+        IImage * VSWFile::OpenImage() const
         {
             return VSWImage::Load(m_Core, m_Path);
         }
 
-        bool VSWFile::Close(void)
+        bool VSWFile::Close()
         {
             if (m_Handle && m_Handle != INVALID_HANDLE_VALUE)
             {
@@ -586,7 +586,7 @@ namespace VoodooShader
             }
         }
 
-        VSWImage::~VSWImage(void)
+        VSWImage::~VSWImage()
         {
             ilDeleteImage(m_Image);
         }
@@ -636,27 +636,27 @@ namespace VoodooShader
             }
         }
 
-        String VSWImage::ToString(void) const
+        String VSWImage::ToString() const
         {
             return L"VSWImage";
         }
 
-        ICore * VSWImage::GetCore(void) const
+        ICore * VSWImage::GetCore() const
         {
             return m_Core;
         }
 
-        String VSWImage::GetPath(void) const
+        String VSWImage::GetPath() const
         {
             return m_Name;
         }
 
-        const TextureDesc * VSWImage::GetDesc(void) const
+        const TextureDesc * VSWImage::GetDesc() const
         {
             return &m_Desc;
         }
 
-        uint32_t VSWImage::GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const throw()
+        uint32_t VSWImage::GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const 
         {
             //! @todo Add a buffer size check.
             UNREFERENCED_PARAMETER(size);

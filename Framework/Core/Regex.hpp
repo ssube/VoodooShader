@@ -168,21 +168,21 @@ namespace VoodooShader
          *
          * @return Total number of matches.
          */
-        uint32_t GetCount() CONST;
+        uint32_t GetCount() const;
 
         /**
          * Check if any matches were found.
          *
          * @return True if any matches are contained.
          */
-        bool IsEmpty() CONST;
+        bool IsEmpty() const;
 
         /**
          * Retrieve a particular match within this group.
          *
          * @return The specified submatch.
          */
-        String GetMatch(uint32_t index) CONST;
+        String GetMatch(uint32_t index) const;
 
         /**
          * Formats the found submatches into an output string. This uses the <code>$0</code> syntax to perform formatting,
@@ -191,7 +191,7 @@ namespace VoodooShader
          * @param fmt The format string to use.
          * @return A formatted copy using the submatches.
          */
-        String Format(const String & fmt) CONST;
+        String Format(const String & fmt) const;
 
     private:
         RegexMatch();

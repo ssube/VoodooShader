@@ -31,18 +31,18 @@ namespace VoodooShader
         static const wchar_t * name_VSEHHookManager = L"VSEHHookManager";
         static const Uuid clsid_VSEHHookManager = CLSID_VSEHHookManager;
 
-        const Version * VOODOO_CALL API_ModuleVersion(void)
+        const Version * VOODOO_CALLTYPE API_ModuleVersion()
         {
 
             return &moduleVersion;
         }
 
-        const uint32_t VOODOO_CALL API_ClassCount(void)
+        const uint32_t VOODOO_CALLTYPE API_ClassCount()
         {
             return 1;
         }
 
-        const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
+        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
         {
             if (!pUuid)
             {
@@ -58,7 +58,7 @@ namespace VoodooShader
             return nullptr;
         }
 
-        IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t number, _In_ ICore *core)
+        IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t number, _In_ ICore *core)
         {
             if (number == 0)
             {
@@ -81,7 +81,7 @@ namespace VoodooShader
             m_Core->GetLogger()->Log(LL_ModInfo, VOODOO_HOOK_NAME, L"Created hook manager.");
         }
 
-        VSEHHookManager::~VSEHHookManager(void)
+        VSEHHookManager::~VSEHHookManager()
         {
             this->RemoveAll();
 
@@ -90,7 +90,7 @@ namespace VoodooShader
             delete[] m_ThreadIDs;
         }
 
-        uint32_t VSEHHookManager::AddRef(void) const
+        uint32_t VSEHHookManager::AddRef() const
         {
             return SAFE_INCREMENT(m_Refs);
         }
@@ -136,12 +136,12 @@ namespace VoodooShader
             }
         }
 
-        String VSEHHookManager::ToString(void) const
+        String VSEHHookManager::ToString() const
         {
             return L"VSEHHookManager";
         }
 
-        ICore * VSEHHookManager::GetCore(void) const
+        ICore * VSEHHookManager::GetCore() const
         {
             return m_Core;
         }
@@ -235,7 +235,7 @@ namespace VoodooShader
             }
         }
 
-        void VSEHHookManager::RemoveAll(void)
+        bool VSEHHookManager::RemoveAll()
         {
             LhUninstallAllHooks();
             LhWaitForPendingRemovals();
@@ -247,6 +247,8 @@ namespace VoodooShader
             );
 
             m_Hooks.clear();
+
+            return true;
         }
     }
 }

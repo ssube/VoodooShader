@@ -40,14 +40,26 @@ namespace VoodooLogViewer
 
             for (int i = 1; i < args.Length; ++i)
             {
-                String tempFile = Path.Combine(resourceDir, Path.GetRandomFileName());
+                try
+                {
+                    String tempFile = Path.Combine(resourceDir, Path.GetRandomFileName());
+                    Console.Write("Processing file '{0}' to '{1}'... ", args[i], tempFile);
 
-                xslTransform.Transform(args[i], tempFile);
+                    xslTransform.Transform(args[i], tempFile);
+                    Console.WriteLine("succeeded.");
 
-                ProcessStartInfo startParams = new ProcessStartInfo(tempFile);
-                startParams.UseShellExecute = true;
+                    if (i == 1)
+                    {
+                        ProcessStartInfo startParams = new ProcessStartInfo(tempFile);
+                        startParams.UseShellExecute = true;
 
-                Process.Start(startParams);
+                        Process.Start(startParams);
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("failed to convert log {0}: {1}", i, exc.Message);
+                }
             }
         }
     }

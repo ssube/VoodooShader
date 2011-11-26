@@ -33,17 +33,17 @@ HINSTANCE gLoaderHandle = nullptr;
 
 const VoodooShader::Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOADER);
 
-const VoodooShader::Version * VOODOO_CALL API_ModuleVersion(void)
+const VoodooShader::Version * VOODOO_CALLTYPE API_ModuleVersion()
 {
     return &moduleVersion;
 }
 
-const uint32_t VOODOO_CALL API_ClassCount(void)
+const uint32_t VOODOO_CALLTYPE API_ClassCount()
 {
     return 0;
 }
 
-const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * pUuid)
+const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * pUuid)
 {
     UNREFERENCED_PARAMETER(index);
     UNREFERENCED_PARAMETER(pUuid);
@@ -51,7 +51,7 @@ const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ Voodo
     return nullptr;
 }
 
-VoodooShader::IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t number, _In_ VoodooShader::ICore *pCore)
+VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t number, _In_ VoodooShader::ICore *pCore)
 {
     UNREFERENCED_PARAMETER(number);
     UNREFERENCED_PARAMETER(pCore);
@@ -211,7 +211,7 @@ bool WINAPI LoadVoodoo()
     return (gVoodooCore != nullptr);
 }
 
-bool WINAPI UnloadVoodoo(void)
+bool WINAPI UnloadVoodoo()
 {
     if (gVoodooCore)
     {
