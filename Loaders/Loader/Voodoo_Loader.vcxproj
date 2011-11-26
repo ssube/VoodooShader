@@ -14,7 +14,7 @@
     <ProjectGuid>{6234D300-FD30-4A04-A3A2-4739C5D9B95F}</ProjectGuid>
     <RootNamespace>Gem_Redirect</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>Voodoo_FullLoader</ProjectName>
+    <ProjectName>Voodoo_Loader</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -50,7 +50,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Voodoo_Loader.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -58,7 +58,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Voodoo_Loader.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -76,17 +76,12 @@
     <ClInclude Include="SysAPIHandler.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Loader_Version.rc" />
+    <ResourceCompile Include="Voodoo_Loader.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="exports.def" />
+    <None Include="Voodoo_Loader.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>

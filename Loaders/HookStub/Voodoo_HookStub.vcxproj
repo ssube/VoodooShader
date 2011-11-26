@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Link>
-      <ModuleDefinitionFile>HookLoader.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Voodoo_HookStub.def</ModuleDefinitionFile>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
@@ -54,7 +54,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Link>
-      <ModuleDefinitionFile>HookLoader.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Voodoo_HookStub.def</ModuleDefinitionFile>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
@@ -69,7 +69,7 @@
     <ClCompile Include="HookMechanism.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="HookLoader.def" />
+    <None Include="Voodoo_HookStub.def" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_HookStub.rc" />
@@ -77,9 +77,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>

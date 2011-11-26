@@ -46,12 +46,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="exports.def">
+    <None Include="Voodoo_Loader.def">
       <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Loader_Version.rc">
+    <ResourceCompile Include="Voodoo_Loader.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
   </ItemGroup>

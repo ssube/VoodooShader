@@ -31,13 +31,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="HookLoader.def">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="Voodoo_HookStub.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Voodoo_HookStub.def">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
