@@ -45,8 +45,7 @@ namespace VoodooShader
      * @par IID
      *      e6f31295-05af-11e1-9e05-005056c00008
      */
-    class ITechnique :
-        public IObject
+    VOODOO_INTERFACE(ITechnique, IObject)
     {
     public:
         VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;

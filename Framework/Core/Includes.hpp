@@ -83,6 +83,10 @@
 #   define DECLSPEC_SELECTANY __declspec(selectany)
 #endif
 
+#ifndef DECLSPEC_NOVTABLE
+#   define DECLSPEC_NOVTABLE __declspec(novtable)
+#endif
+
 // Extended memory debug routines.
 // This will enable a lot of in-depth logging for a lot of memory data and will have a major speed hit.
 #ifdef VOODOO_DEBUG_MEMORY
@@ -105,6 +109,9 @@
 
 #define VOODOO_METHODCALL_(type, name) virtual DECLSPEC_NOTHROW type VOODOO_CALLTYPE name
 #define VOODOO_METHODCALL(name) VOODOO_METHODCALL_(bool, name)
+
+#define VOODOO_INTERFACE_(iname) class DECLSPEC_NOVTABLE iname
+#define VOODOO_INTERFACE(iname, ibase) VOODOO_INTERFACE_(iname) : public ibase
 
 #define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALLTYPE
 

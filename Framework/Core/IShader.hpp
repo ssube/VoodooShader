@@ -43,8 +43,7 @@ namespace VoodooShader
      * @warning For any technique in a shader to be valid, the entire shader must compile without errors. This
      *     <em>does not</em> mean that all techniques will be valid.
      */
-    class IShader :
-        public IObject
+    VOODOO_INTERFACE(IShader, IObject)
     {
     public:
         VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;

@@ -40,8 +40,7 @@ namespace VoodooShader
      * @par IID
      *      e6f3128c-05af-11e1-9e05-005056c00008
      */
-    class IHookManager :
-        public IObject
+    VOODOO_INTERFACE(IHookManager, IObject)
     {
     public:
         VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;

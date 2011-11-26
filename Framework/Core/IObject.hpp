@@ -42,7 +42,7 @@ namespace VoodooShader
      * @par IID
      *      e6f31287-05af-11e1-9e05-005056c00008
      */
-    class IObject
+    VOODOO_INTERFACE_(IObject)
     {
     public:
         /**

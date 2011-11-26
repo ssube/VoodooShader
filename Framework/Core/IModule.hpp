@@ -40,8 +40,7 @@ namespace VoodooShader
      * @par IID
      *      e6f31290-05af-11e1-9e05-005056c00008
      */
-    class IModuleManager :
-        public IObject
+    VOODOO_INTERFACE(IModuleManager, IObject)
     {
     public:
         virtual ~IModuleManager()  {};
@@ -164,8 +163,7 @@ namespace VoodooShader
      * @par IID
      *      e6f3128f-05af-11e1-9e05-005056c00008
      */
-    class IModule :
-        public IObject
+    VOODOO_INTERFACE(IModule, IObject)
     {
     public:
         VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;

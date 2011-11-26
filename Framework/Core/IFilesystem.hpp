@@ -40,8 +40,7 @@ namespace VoodooShader
      * @par IID
      *      e6f31288-05af-11e1-9e05-005056c00008
      */
-    class IFileSystem :
-        public IObject
+    VOODOO_INTERFACE(IFileSystem, IObject)
     {
     public:
         VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
@@ -89,8 +88,7 @@ namespace VoodooShader
      * @par IID
      *      e6f3128a-05af-11e1-9e05-005056c00008
      */
-    class IFile :
-        public IObject
+    VOODOO_INTERFACE(IFile, IObject)
     {
     public:
         ~IFile()  { };
@@ -150,8 +148,7 @@ namespace VoodooShader
      * @par IID
      *      e6f3128d-05af-11e1-9e05-005056c00008
      */
-    class IImage :
-        public IObject
+    VOODOO_INTERFACE(IImage, IObject)
     {
     public:
         ~IImage()  { };
