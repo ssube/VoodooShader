@@ -1,7 +1,7 @@
 <map id="G" name="G">
 <area shape="rect" id="node10" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="734,208,890,235"/>
-<area shape="rect" id="node24" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="737,473,887,500"/>
-<area shape="rect" id="node26" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,492,637,519"/>
-<area shape="rect" id="node28" title="STL class." alt="" coords="243,492,333,519"/>
-<area shape="rect" id="node30" title="STL class." alt="" coords="5,492,192,519"/>
+<area shape="rect" id="node26" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="737,473,887,500"/>
+<area shape="rect" id="node28" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,492,637,519"/>
+<area shape="rect" id="node30" title="STL class." alt="" coords="243,492,333,519"/>
+<area shape="rect" id="node32" title="STL class." alt="" coords="5,492,192,519"/>
 </map>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -67,6 +67,7 @@
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
@@ -91,40 +92,43 @@
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_v_s_shader__coll__graph.png" border="0" usemap="#_voodoo_shader_1_1_v_s_shader_coll__map" alt="Collaboration graph"/></div>
 <map name="_voodoo_shader_1_1_v_s_shader_coll__map" id="_voodoo_shader_1_1_v_s_shader_coll__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="759,5,918,32"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="451,52,607,79"/><area shape="rect" id="node29" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="766,56,911,83"/><area shape="rect" id="node20" href="class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="764,321,913,348"/><area shape="rect" id="node22" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,340,637,367"/><area shape="rect" id="node24" title="STL class." alt="" coords="243,340,333,367"/><area shape="rect" id="node26" title="STL class." alt="" coords="5,340,192,367"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="839,75,998,101"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="491,123,647,149"/><area shape="rect" id="node33" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1155,309,1301,336"/><area shape="rect" id="node50" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="838,185,999,212"/><area shape="rect" id="node24" href="class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="1153,540,1303,567"/><area shape="rect" id="node40" href="struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="454,377,685,404"/><area shape="rect" id="node42" href="struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; uint32_t \&gt;" alt="" coords="137,439,367,465"/><area shape="rect" id="node26" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="811,540,1026,567"/><area shape="rect" id="node28" title="STL class." alt="" coords="525,540,614,567"/><area shape="rect" id="node30" title="STL class." alt="" coords="159,540,345,567"/><area shape="rect" id="node38" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="825,337,1013,364"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_v_s_shader-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ab9a107b8e757d91b8e8e5f51c2e6c8e5">VSShader</a> (_Pre_notnull_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *const pCore, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;Path, const char **ppArgs=nullptr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a69bfcd3b42c392c1c0b645f973770c2c">~VSShader</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a1fd3943ba7775c2e9ca63d5cfe08cc22">AddRef</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a1fd3943ba7775c2e9ca63d5cfe08cc22"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a2c3717699d7fd0f40dcfb076c33ff07a">Release</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a2c3717699d7fd0f40dcfb076c33ff07a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3e280e3f1372f532a7afd429ed374fd6">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a3e280e3f1372f532a7afd429ed374fd6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#aa2a23075fe7d734d9e0c05d320598b92">ToString</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#aa2a23075fe7d734d9e0c05d320598b92"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a00666d4f0c2641993067fe427a542eef">GetCore</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a00666d4f0c2641993067fe427a542eef"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a962fd62eccfeb8704a80d23d506e53ba">GetName</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a06bb04b1027cc40c41a3c78cdbf318c7">GetTechniqueCount</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of validated techniques this shader contains.  <a href="#a06bb04b1027cc40c41a3c78cdbf318c7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#aa05c2e20d67a26db5f48fea97cf20c3e">GetTechnique</a> (const uint32_t index) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a technique from the shader by name.  <a href="#aa05c2e20d67a26db5f48fea97cf20c3e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ab5ef103fdc17ea2e9fbb97daf619cb0c">GetDefaultTechnique</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the default technique from this shader.  <a href="#ab5ef103fdc17ea2e9fbb97daf619cb0c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#aca4f12e0841dec85a85a5d97b1a1baff">SetDefaultTechnique</a> (<a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *const pTechnique)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a technique from this shader to be used as the default technique.  <a href="#aca4f12e0841dec85a85a5d97b1a1baff"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#acbae1a538a81ffcd57cf333df2102340">GetParameterCount</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of effect-level parameters in this shader.  <a href="#acbae1a538a81ffcd57cf333df2102340"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a1ed5046288c176e059aa2f59481d4846">GetParameter</a> (const uint32_t index) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a specific parameter from the shader.  <a href="#a1ed5046288c176e059aa2f59481d4846"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual CGeffect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#af2152e04b1f2cbb249308d2ce647be85">GetCgEffect</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the underlying Cg technique.  <a href="#af2152e04b1f2cbb249308d2ce647be85"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ab9a107b8e757d91b8e8e5f51c2e6c8e5">VSShader</a> (_Pre_notnull_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *<a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> pCore, <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;Path, <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> char **ppArgs=nullptr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a9de1fc55c4cb5a3da6e6784bd550b5e9">~VSShader</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a1c1a713ead771f7c8234b0ae863bff1d">VOODOO_METHODCALL_</a> (uint32_t, AddRef)() <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a1c1a713ead771f7c8234b0ae863bff1d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a6d5c47ab6c9a804a6bfd6f7df19eaa30">VOODOO_METHODCALL_</a> (uint32_t, Release)() <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a6d5c47ab6c9a804a6bfd6f7df19eaa30"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a04aaff1c45f73082e1f01a5e281392bf">__declspec</a> (nothrow) bool __stdcall QueryInterface(<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a04aaff1c45f73082e1f01a5e281392bf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a9e5d9d22c0d7b706569449475d5c3b2f">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="#a9e5d9d22c0d7b706569449475d5c3b2f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ab0a4d870e63f8a3743c99742d092f6e0">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *, GetCore)() <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#ab0a4d870e63f8a3743c99742d092f6e0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a42c8a8b10d93dcbccd6fbc3f197a86cd">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, GetName)() <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a6910690092f9f48508451dc9ec76661b">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> uint32_t, GetTechniqueCount)() <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of validated techniques this shader contains.  <a href="#a6910690092f9f48508451dc9ec76661b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ac7e04a607442ee905ea7d59bdf16983e">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *, GetTechnique)(<a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> uint32_t index) <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a technique from the shader by name.  <a href="#ac7e04a607442ee905ea7d59bdf16983e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a146384b136921195e8edb0647174e6e6">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *, GetDefaultTechnique)() <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the default technique from this shader.  <a href="#a146384b136921195e8edb0647174e6e6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a567484d77a6995e7fd0358f1f26f933b">__declspec</a> (nothrow) bool __stdcall SetDefaultTechnique(<a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *<a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> pTechnique)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a technique from this shader to be used as the default technique.  <a href="#a567484d77a6995e7fd0358f1f26f933b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#add1561ae3bafef58399e247fbe1b63a1">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> uint32_t, GetParameterCount)() <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of effect-level parameters in this shader.  <a href="#add1561ae3bafef58399e247fbe1b63a1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a1d69504b1b1e87e54ff469d524987e3e">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> *, GetParameter)(<a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> uint32_t index) <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a specific parameter from the shader.  <a href="#a1d69504b1b1e87e54ff469d524987e3e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a02d3d3116fa890942d46ce94dc2d81f0">VOODOO_METHODCALL_</a> (CGeffect, GetCgEffect)() <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the underlying Cg technique.  <a href="#a02d3d3116fa890942d46ce94dc2d81f0"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> void **ppOut&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a></td></tr>
 <tr><td colspan="2"><h2><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a140d5e50bf3ebf4bbb741b6fd4554b75">Link</a> ()</td></tr>
@@ -158,19 +162,19 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">VoodooShader::VSShader::VSShader </td>
           <td>(</td>
-          <td class="paramtype">_Pre_notnull_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *const&#160;</td>
+          <td class="paramtype">_Pre_notnull_ <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *<a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a>&#160;</td>
           <td class="paramname"><em>pCore</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>path</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char **&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> char **&#160;</td>
           <td class="paramname"><em>ppArgs</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
@@ -187,14 +191,13 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a69bfcd3b42c392c1c0b645f973770c2c"></a><!-- doxytag: member="VoodooShader::VSShader::~VSShader" ref="a69bfcd3b42c392c1c0b645f973770c2c" args="(void)" -->
+<a class="anchor" id="a9de1fc55c4cb5a3da6e6784bd550b5e9"></a><!-- doxytag: member="VoodooShader::VSShader::~VSShader" ref="a9de1fc55c4cb5a3da6e6784bd550b5e9" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">VoodooShader::VSShader::~VSShader </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [virtual]</code></td>
         </tr>
@@ -207,28 +210,65 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a1fd3943ba7775c2e9ca63d5cfe08cc22"></a><!-- doxytag: member="VoodooShader::VSShader::AddRef" ref="a1fd3943ba7775c2e9ca63d5cfe08cc22" args="(void) const " -->
+<a class="anchor" id="a04aaff1c45f73082e1f01a5e281392bf"></a><!-- doxytag: member="VoodooShader::VSShader::__declspec" ref="a04aaff1c45f73082e1f01a5e281392bf" args="(nothrow) bool __stdcall QueryInterface(Uuid &amp;clsid" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t VoodooShader::VSShader::AddRef </td>
+          <td class="memname">virtual VoodooShader::VSShader::__declspec </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
+          <td class="paramtype">nothrow&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
+<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
+<dd>
+If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a7c599bf82f32b64748a9104df66cc559">VoodooShader::IShader</a>.</p>
+<p>Reimplemented from <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a22c14e67a7dc296b7942f232f8f0e032">VoodooShader::IShader</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00083">83</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a567484d77a6995e7fd0358f1f26f933b"></a><!-- doxytag: member="VoodooShader::VSShader::__declspec" ref="a567484d77a6995e7fd0358f1f26f933b" args="(nothrow) bool __stdcall SetDefaultTechnique(ITechnique *const pTechnique)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual VoodooShader::VSShader::__declspec </td>
+          <td>(</td>
+          <td class="paramtype">nothrow&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set a technique from this shader to be used as the default technique. </p>
+<p>Some adapter functions simply retrieve the default technique to draw with.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pTechnique</td><td>The technique within this shader to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the setting.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This will validate that the technique belongs to this shader. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a2bc63fe774e8aead9d3f1f09fce55f5e">VoodooShader::IShader</a>.</p>
 
 </div>
 </div>
@@ -256,212 +296,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00347">347</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af2152e04b1f2cbb249308d2ce647be85"></a><!-- doxytag: member="VoodooShader::VSShader::GetCgEffect" ref="af2152e04b1f2cbb249308d2ce647be85" args="(void) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">CGeffect VoodooShader::VSShader::GetCgEffect </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Retrieve the underlying Cg technique. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the Cg technique. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a8953cee6d5bbea6edba0316c253c58d2">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00206">206</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a00666d4f0c2641993067fe427a542eef"></a><!-- doxytag: member="VoodooShader::VSShader::GetCore" ref="a00666d4f0c2641993067fe427a542eef" args="(void) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> * VoodooShader::VSShader::GetCore </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the core this object was associated with. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The core. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a04a4f10ce6ec8bc452e19719f9c81358">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00133">133</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab5ef103fdc17ea2e9fbb97daf619cb0c"></a><!-- doxytag: member="VoodooShader::VSShader::GetDefaultTechnique" ref="ab5ef103fdc17ea2e9fbb97daf619cb0c" args="(void) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> * VoodooShader::VSShader::GetDefaultTechnique </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Retrieves the default technique from this shader. </p>
-<p>All drawing should be done with the default technique: it is guaranteed to be valid for the current shader profiles and API. The default technique is the first technique to validate.</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A reference to the default technique.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>To influence the priority of techniques, simply place the most specific or least compatible first (often high-quality ones) and count down with the most compatible and simplest technique last. The first valid technique found becomes the default. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a2d1106e50c1d04e427c9b90f7b19f718">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00160">160</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a962fd62eccfeb8704a80d23d506e53ba"></a><!-- doxytag: member="VoodooShader::VSShader::GetName" ref="a962fd62eccfeb8704a80d23d506e53ba" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::VSShader::GetName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#ab73e0b99693caf45f43c9f6efcb6ae7a">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00138">138</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1ed5046288c176e059aa2f59481d4846"></a><!-- doxytag: member="VoodooShader::VSShader::GetParameter" ref="a1ed5046288c176e059aa2f59481d4846" args="(const uint32_t index) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> * VoodooShader::VSShader::GetParameter </td>
-          <td>(</td>
-          <td class="paramtype">const uint32_t&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Retrieve a specific parameter from the shader. </p>
-<p>These may be modified at runtime and will automatically update Cg and the GPU with their value (in most cases).</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">index</td><td>The index of the parameter to retrieve. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The parameter, if valid. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a9d9c8ae78b30a72a86a434b049f3fd79">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00194">194</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acbae1a538a81ffcd57cf333df2102340"></a><!-- doxytag: member="VoodooShader::VSShader::GetParameterCount" ref="acbae1a538a81ffcd57cf333df2102340" args="(void) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint32_t VoodooShader::VSShader::GetParameterCount </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Retrieve the number of effect-level parameters in this shader. </p>
-<p>These hold a single value for all passes.</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The parameter count. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#abc4ba829be631285600160ab546c9119">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00189">189</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa05c2e20d67a26db5f48fea97cf20c3e"></a><!-- doxytag: member="VoodooShader::VSShader::GetTechnique" ref="aa05c2e20d67a26db5f48fea97cf20c3e" args="(const uint32_t index) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> * VoodooShader::VSShader::GetTechnique </td>
-          <td>(</td>
-          <td class="paramtype">const uint32_t&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Retrieve a technique from the shader by name. </p>
-<p>Most cases should use the default technique, but some specific applications may want a particular technique.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">index</td><td>The index of the technique to get. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The technique, if it is found. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#ab18882681017a81c8c2e2d4e12694642">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00148">148</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a06bb04b1027cc40c41a3c78cdbf318c7"></a><!-- doxytag: member="VoodooShader::VSShader::GetTechniqueCount" ref="a06bb04b1027cc40c41a3c78cdbf318c7" args="(void) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint32_t VoodooShader::VSShader::GetTechniqueCount </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the number of validated techniques this shader contains. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The number of techniques. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a0609e9cad9ecd18acf4ac3f84b4aac63">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00143">143</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00360">360</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
 
 </div>
 </div>
@@ -472,7 +307,6 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void VoodooShader::VSShader::Link </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [private]</code></td>
         </tr>
@@ -510,7 +344,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00236">236</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00247">247</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
 
 </div>
 </div>
@@ -538,108 +372,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00289">289</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3e280e3f1372f532a7afd429ed374fd6"></a><!-- doxytag: member="VoodooShader::VSShader::QueryInterface" ref="a3e280e3f1372f532a7afd429ed374fd6" args="(Uuid &amp;clsid, const void **ppOut) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::VSShader::QueryInterface </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>clsid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void **&#160;</td>
-          <td class="paramname"><em>ppOut</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
-    <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
-<dd>
-If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a7f9bbcfee0103a366b5614a887f40427">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00099">99</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2c3717699d7fd0f40dcfb076c33ff07a"></a><!-- doxytag: member="VoodooShader::VSShader::Release" ref="a2c3717699d7fd0f40dcfb076c33ff07a" args="(void) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t VoodooShader::VSShader::Release </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a888bfbf3aa5abe7c8f02e56709615504">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00088">88</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aca4f12e0841dec85a85a5d97b1a1baff"></a><!-- doxytag: member="VoodooShader::VSShader::SetDefaultTechnique" ref="aca4f12e0841dec85a85a5d97b1a1baff" args="(ITechnique *const pTechnique)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VoodooShader::VSShader::SetDefaultTechnique </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *const&#160;</td>
-          <td class="paramname"><em>pTechnique</em></td><td>)</td>
-          <td>  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set a technique from this shader to be used as the default technique. </p>
-<p>Some adapter functions simply retrieve the default technique to draw with.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pTechnique</td><td>The technique within this shader to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the setting.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This will validate that the technique belongs to this shader. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#adce277de38f7803ed38c84af6cab45bc">VoodooShader::IShader</a>.</p>
-
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00165">165</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00302">302</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
 
 </div>
 </div>
@@ -657,20 +390,96 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00595">595</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00608">608</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa2a23075fe7d734d9e0c05d320598b92"></a><!-- doxytag: member="VoodooShader::VSShader::ToString" ref="aa2a23075fe7d734d9e0c05d320598b92" args="(void) const " -->
+<a class="anchor" id="a1c1a713ead771f7c8234b0ae863bff1d"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="a1c1a713ead771f7c8234b0ae863bff1d" args="(uint32_t, AddRef)() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::VSShader::ToString </td>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AddRef&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Add a reference to this object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a76ef1151e6ee7ee514ab8a6726580a18">VoodooShader::IShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6d5c47ab6c9a804a6bfd6f7df19eaa30"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="a6d5c47ab6c9a804a6bfd6f7df19eaa30" args="(uint32_t, Release)() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Release&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Release a reference from this object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a8138aa275a003d9f1c6ea348084eaa2b">VoodooShader::IShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9e5d9d22c0d7b706569449475d5c3b2f"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="a9e5d9d22c0d7b706569449475d5c3b2f" args="(String, ToString)() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ToString&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -679,13 +488,298 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <p>Get the name of this object. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The name. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a0e145d0df2358361177ac592f859da7e">VoodooShader::IShader</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#ae308246fbcdd6e7daa3ca319ef9d32f3">VoodooShader::IShader</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_shader_8cpp_source.html#l00128">128</a> of file <a class="el" href="_v_s_shader_8cpp_source.html">VSShader.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="ab0a4d870e63f8a3743c99742d092f6e0"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="ab0a4d870e63f8a3743c99742d092f6e0" args="(ICore *, GetCore)() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GetCore&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the core this object was associated with. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The core. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a4052e1ae9b8aee8a4c0d214b3a4bdeb6">VoodooShader::IShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a42c8a8b10d93dcbccd6fbc3f197a86cd"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="a42c8a8b10d93dcbccd6fbc3f197a86cd" args="(String, GetName)() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GetName&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#ad66136da0c456ec5091f985b3d512ce6">VoodooShader::IShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6910690092f9f48508451dc9ec76661b"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="a6910690092f9f48508451dc9ec76661b" args="(const uint32_t, GetTechniqueCount)() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> uint32_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GetTechniqueCount&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the number of validated techniques this shader contains. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The number of techniques. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#acab21f6ca6dff956fddddf2f622a5fed">VoodooShader::IShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac7e04a607442ee905ea7d59bdf16983e"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="ac7e04a607442ee905ea7d59bdf16983e" args="(ITechnique *, GetTechnique)(const uint32_t index) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GetTechnique&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve a technique from the shader by name. </p>
+<p>Most cases should use the default technique, but some specific applications may want a particular technique.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the technique to get. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The technique, if it is found. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a53a4eaadbb57197229931f91fdc5493f">VoodooShader::IShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a146384b136921195e8edb0647174e6e6"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="a146384b136921195e8edb0647174e6e6" args="(ITechnique *, GetDefaultTechnique)() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GetDefaultTechnique&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieves the default technique from this shader. </p>
+<p>All drawing should be done with the default technique: it is guaranteed to be valid for the current shader profiles and API. The default technique is the first technique to validate.</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A reference to the default technique.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>To influence the priority of techniques, simply place the most specific or least compatible first (often high-quality ones) and count down with the most compatible and simplest technique last. The first valid technique found becomes the default. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a4de40c5ba81e29836fb04a2b5be4e84c">VoodooShader::IShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="add1561ae3bafef58399e247fbe1b63a1"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="add1561ae3bafef58399e247fbe1b63a1" args="(const uint32_t, GetParameterCount)() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> uint32_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GetParameterCount&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the number of effect-level parameters in this shader. </p>
+<p>These hold a single value for all passes.</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The parameter count. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a4bb2bbd5fb85a9ba4ba7a462fb7584e5">VoodooShader::IShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1d69504b1b1e87e54ff469d524987e3e"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="a1d69504b1b1e87e54ff469d524987e3e" args="(IParameter *, GetParameter)(const uint32_t index) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GetParameter&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve a specific parameter from the shader. </p>
+<p>These may be modified at runtime and will automatically update Cg and the GPU with their value (in most cases).</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the parameter to retrieve. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The parameter, if valid. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#abf119aa0ccc7b464d472c84e0b3d8cfb">VoodooShader::IShader</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a02d3d3116fa890942d46ce94dc2d81f0"></a><!-- doxytag: member="VoodooShader::VSShader::VOODOO_METHODCALL_" ref="a02d3d3116fa890942d46ce94dc2d81f0" args="(CGeffect, GetCgEffect)() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::VSShader::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype">CGeffect&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GetCgEffect&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the underlying Cg technique. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the Cg technique. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_shader.html#aa62ba9fa417e46625e439bbc9ffb9745">VoodooShader::IShader</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a3ff6374327f892a794d119451f06111e"></a><!-- doxytag: member="VoodooShader::VSShader::const" ref="a3ff6374327f892a794d119451f06111e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">const</a> void** ppOut <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a3ff6374327f892a794d119451f06111e">VoodooShader::VSShader::const</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a6658a19a54930592d951a8f1fa4e741a">VoodooShader::IShader</a>.</p>
+
+<p>Definition at line <a class="el" href="_v_s_shader_8hpp_source.html#l00045">45</a> of file <a class="el" href="_v_s_shader_8hpp_source.html">VSShader.hpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="acc3f752f28260ae9ab5883c468203a5c"></a><!-- doxytag: member="VoodooShader::VSShader::m_CgEffect" ref="acc3f752f28260ae9ab5883c468203a5c" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -799,7 +893,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

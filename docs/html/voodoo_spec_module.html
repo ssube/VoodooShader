@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -70,37 +70,94 @@ ClassCount</h3>
 </pre></div><p>Returns the total number of classes provided by this module. Any class that needs to be created by other code must be listed in this function and the next.</p>
 <h3><a class="anchor" id="voodoo_spec_module_exports_info"></a>
 ClassInfo</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">const</span> <span class="keywordtype">char</span> * ClassInfo(<span class="keyword">const</span> uint32_t index); 
-</pre></div><p>Returns the name of the given class. This is used to register the classes in the core ModuleManager when the module is loaded.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Decide whether to change these into GUIDs.</dd></dl>
+<div class="fragment"><pre class="fragment"> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * ClassInfo(<span class="keyword">const</span> uint32_t index, <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid); 
+</pre></div><p>Returns the name and CLSID of the given class. This is used to register the classes in the core ModuleManager when the module is loaded. The return value is a pointer to the class name or nullptr if the index is invalid, and the clsid parameter is filled with the CLSID or unchanged if the index is invalid.</p>
 <h3><a class="anchor" id="voodoo_spec_module_exports_create"></a>
 ClassCreate</h3>
 <div class="fragment"><pre class="fragment"> IObject * ClassCreate(<span class="keyword">const</span> uint32_t index, ICore * pCore); 
 </pre></div><p>Creates a new instance of the given class, bound to the provided Core. For classes needing additional data, they can cache and/or use the core.</p>
-<dl class="note"><dt><b>Note:</b></dt><dd>Class constructors <em>may</em> throw exceptions, but these must be caught within the create function and must not propogate between modules (this can cause crashes). If an error occurs, nullptr should be returned.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>Class constructors <em>may</em> throw exceptions, but these must be caught within the create function and must not propagate between modules (this can cause crashes). If an error occurs, nullptr must be returned.</dd></dl>
 <h2><a class="anchor" id="voodoo_spec_iobject"></a>
 IObject Interface</h2>
 <p>Every class used in Voodoo <em>must</em> derive from the <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> interface. The methods provided are vital for object lifetime management and garbage collection. This is performed in a manner very much like COM, with each object managing reference count internally.</p>
 <p>Every object, except one which implements <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>, must hold a non-incremented reference to its parent. This allows tracking up without causing circular references. The object may both temporarily increment the reference, when it needs a short-term guarantee of validity, or pass the reference (where it may be incremented).</p>
 <h3><a class="anchor" id="voodoo_spec_iobject_addref"></a>
 IObject::AddRef</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">IObject::AddRef</a>() <span class="keyword">const</span> throw() 
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> uint32_t IObject::AddRef() const  
 </pre></div><p>Increments the internal reference count by 1 and returns the new count. No other effects should be caused.</p>
 <h3><a class="anchor" id="voodoo_spec_iobject_release"></a>
 IObject::Release</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_object.html#af6323d5d999a565e2e201241b21aa1e1" title="Release a reference from this object.">IObject::Release</a>() <span class="keyword">const</span> throw() 
-</pre></div><p>Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object should be deleted internally (<code>delete this;</code>). This provides correct memory allocation and deallocation, safe from compiler or module bondaries.</p>
-<h3><a class="anchor" id="voodoo_spec_iobject_tostring"></a>
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> uint32_t IObject::Release() const  
+</pre></div><p>Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object should be deleted internally (<code>delete this;</code>). This provides correct memory allocation and deallocation, safe from compiler or module boundaries.</p>
+<h3><a class="anchor" id="voodoo_spec_iobject_query"></a>
+IObject::QueryInterface</h3>
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> <span class="keywordtype">bool</span> IObject::QueryInterface(<a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; refid, <span class="keywordtype">void</span> ** ppOut) <span class="keyword">const</span>  
+</pre></div><p>Queries the object for a particular interface.</p>
+<p>If refid is an IID and the object implements the interface passed in refid or if refid is the object's CLSID, it must place a pointer to itself providing that interface into ppOut and return true. The pointer must evaluate equal to any other pointer to the same object, regardless of interface. The object's reference count must be incremented in this case, using the returned pointer.</p>
+<p>If ppOut is a nullptr and refid is a null Uuid (all zeroes), refid must be filled must the object's CLSID and the method must return true. The object's reference count must not change in this case.</p>
+<p>If the object does not implement the class or interface in refid, or refid and ppOut are not both null, it must return false. The object's reference count must not change in this case.</p>
+<p>All IObject-derived classes must provide interfaces for <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>, their parent interface, and their class. Calls to QueryInterface must be symmetric (if </p>
+<div class="fragment"><pre class="fragment"> QI(A)-&gt;B 
+</pre></div><p> succeeds, then </p>
+<div class="fragment"><pre class="fragment"> QI(QI(A)-&gt;B)-&gt;A 
+</pre></div><p> must as well), transitive (if </p>
+<div class="fragment"><pre class="fragment"> QI(QI(A)-&gt;B)-&gt;C 
+</pre></div><p> succeeds, then </p>
+<div class="fragment"><pre class="fragment"> QI(A)-&gt;C 
+</pre></div><p> must as well), and reflexive ( </p>
+<div class="fragment"><pre class="fragment"> QI(A)-&gt;A 
+</pre></div><p> must always succeed).</p>
+<p>This is not to say that all objects of type </p>
+<div class="fragment"><pre class="fragment"> A 
+</pre></div><p> must behave the same; these guarantees must hold for an object within itself throughout its lifetime. Two objects of type </p>
+<div class="fragment"><pre class="fragment"> A 
+</pre></div><p> may be unable to provide an interface based on internal conditions (for example, if </p>
+<div class="fragment"><pre class="fragment"> A1 
+</pre></div><p> is an <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> queried from an <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> and </p>
+<div class="fragment"><pre class="fragment"> A2 
+</pre></div><p> is an <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> queried from an <a class="el" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>, </p>
+<div class="fragment"><pre class="fragment"> A2 
+</pre></div><p> will not be able to provide an interface to <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>, but must be able to do so for <a class="el" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>).</p>
+<p>For <a class="el" href="class_voodoo_shader_1_1_v_s_core.html" title="ICore engine class for the Voodoo Shader Framework.">VSCore</a> (which implements <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> and <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>) an example QueryInterface may be:</p>
+<div class="fragment"><pre class="fragment"> <span class="keywordflow">if</span> (!ppOut)
+ {
+     <span class="keywordflow">if</span> (clsid.is_nil())
+     {
+         clsid = IID_ICore;
+         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+     } <span class="keywordflow">else</span> {
+         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+     }
+ } <span class="keywordflow">else</span> {
+     <span class="keywordflow">if</span> (clsid == IID_IObject)
+     {
+         *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_ICore) {
+         *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>ICore*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSCore) {
+         *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>VSCore*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+     } <span class="keywordflow">else</span> {
+         *ppOut = <span class="keyword">nullptr</span>;
+         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+     }
+     <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(*ppOut)-&gt;AddRef();
+     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+ }
+</pre></div><h3><a class="anchor" id="voodoo_spec_iobject_tostring"></a>
 IObject::ToString</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> String <a class="code" href="class_voodoo_shader_1_1_i_object.html#af756994294cf969499538b1c96f4c54a" title="Get the name of this object.">IObject::ToString</a>() <span class="keyword">const</span> throw() 
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> String IObject::ToString() const  
 </pre></div><p>Returns a formatted string made up of the object's type <em>name</em> (not necessarily UUID) and optionally some data. This string must follow the form:</p>
 <div class="fragment"><pre class="fragment"> ImplName()
  ImplName(Data, Data)
-</pre></div><p>If no data is provided, the data section inside the parantheses must be empty but the parantheses must be present.</p>
+</pre></div><p>If no data is provided, the data section inside the parentheses must be empty but the parentheses must be present.</p>
 <h3><a class="anchor" id="voodoo_spec_iobject_getcore"></a>
 IObject::GetCore</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> ICore * <a class="code" href="class_voodoo_shader_1_1_i_object.html#af516091c1429872656036f732664eea7" title="Get the core this object was associated with.">IObject::GetCore</a>() <span class="keyword">const</span> throw() 
-</pre></div><p>Returns a <em>non-incremented</em> refernce to the object's parent core. This should be stored internally, usually set at construction.</p>
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> ICore * IObject::GetCore() const  
+</pre></div><p>Returns a <em>non-incremented</em> reference to the object's parent core. This should be stored internally, usually set at construction.</p>
+<h3><a class="anchor" id="voodoo_spec_module_throw"></a>
+voodoo_spec_module_throw</h3>
+<p><b>No method or function in a class or interface derived from <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> may throw exceptions.</b> If error reporting is necessary, an error value should be returned. This is a necessary safety precaution, as modules may be created with different compilers or languages and it may not be possible to safely propagate exceptions.</p>
+<p>Methods which call other functions which may throw, such as standard library ones, must catch and handle any potential exception and prevent it from propagating.</p>
 <h2><a class="anchor" id="voodoo_spec_module_docs"></a>
 Documentation</h2>
 <p>It is generally recommended that module creators provide full documentation for modules, including class names and the interfaces provided.</p>
@@ -109,7 +166,7 @@ Documentation</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

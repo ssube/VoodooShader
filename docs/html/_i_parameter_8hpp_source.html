@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -98,45 +98,43 @@
 <a name="l00043"></a>00043         <span class="keyword">public</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>
 <a name="l00044"></a>00044     {
 <a name="l00045"></a>00045     <span class="keyword">public</span>:
-<a name="l00046"></a><a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a34d1148d69589afadab9413f316491e8">00046</a>         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a34d1148d69589afadab9413f316491e8">~IParameter</a>(<span class="keywordtype">void</span>) throw() {};
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a01571cec4b66d9181e2ddd9bfc586f70" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> throw() = 0;
-<a name="l00049"></a>00049         virtual uint32_t <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a41de500ad4e01536bfb67396c3b32f76" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00050"></a>00050         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#ab70e57cf2697100bc014c8b21dd9a7fc" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ const <span class="keywordtype">void</span> ** ppOut) const throw() = 0;
-<a name="l00051"></a>00051         virtual <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#ac21da698c710be1ad233cbadd94076a5" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00052"></a>00052         virtual <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a8dc52f1b0d01b0555c6cbe0e813bc62d" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00046"></a>00046         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, AddRef)() CONST PURE;
+<a name="l00047"></a>00047         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, Release)() CONST PURE;
+<a name="l00048"></a><a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a3cc5015dbd7d905c6047d843191e7c25">00048</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST PURE;
+<a name="l00049"></a>00049         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST PURE;
+<a name="l00050"></a>00050         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST PURE;
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, GetName)() CONST PURE;
 <a name="l00053"></a>00053 
-<a name="l00054"></a>00054         virtual <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a0de009f00ded5bc0d4219ca938c8ffc0">GetName</a>() const throw() = 0;
-<a name="l00055"></a>00055 
-<a name="l00060"></a>00060         virtual <a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a38f3cc6b7c77281ea9491d312ce7f300" title="Retrieves the type of this parameter.">GetType</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00061"></a>00061 
-<a name="l00067"></a>00067         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5a651929e76159e458a91d240b3c2817" title="Checks if the parameter is virtual (belongs to the core only) or physical (from a shader)...">IsVirtual</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00068"></a>00068 
-<a name="l00079"></a>00079         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#afbf4b72a60adce2f697d2723abd5c329" title="Attaches a second parameter to this one, forcing the other to update whenever this value is changed...">AttachParameter</a>(_In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * const pParam) throw() = 0;
-<a name="l00080"></a>00080 
-<a name="l00087"></a>00087         virtual <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a56caa2747463cd58b245a08f5896dc60" title="Detaches this parameter from its source (set with a call to IParameter::AttachParameter(IParameter * ...">DetachParameter</a>() throw() = 0;
-<a name="l00088"></a>00088 
-<a name="l00100"></a>00100         virtual const uint32_t <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#acd21819a76bb0535514ec990c7ef5107" title="Get the component count for this parameter.">GetComponents</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00101"></a>00101 
-<a name="l00107"></a>00107         virtual <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a0d83cf8cfcabaa51719a11cb717382b8" title="Retrieves the texture source for this parameter.">GetTexture</a>(<span class="keywordtype">void</span>) const throw() = 0;
+<a name="l00058"></a>00058         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="namespace_voodoo_shader.html#ab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a>, GetType)() CONST PURE;
+<a name="l00059"></a>00059 
+<a name="l00065"></a>00065         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(IsVirtual)() CONST PURE;
+<a name="l00066"></a>00066 
+<a name="l00077"></a>00077         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(AttachParameter)(_In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)...">IParameter</a> * <span class="keyword">const</span> pParam) PURE;
+<a name="l00078"></a>00078 
+<a name="l00085"></a>00085         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(DetachParameter)() PURE;
+<a name="l00086"></a>00086 
+<a name="l00098"></a>00098         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<span class="keyword">const</span> uint32_t, GetComponents)() CONST PURE;
+<a name="l00099"></a>00099 
+<a name="l00105"></a>00105         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> *, GetTexture)() CONST PURE;
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<span class="keywordtype">void</span>, SetTexture)(_In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * <span class="keyword">const</span> pTexture) PURE;
 <a name="l00108"></a>00108 
-<a name="l00109"></a>00109         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a6ec8b09663a42742e1dd71323def6353">SetTexture</a>(_In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a> * const pTexture) throw() = 0;
-<a name="l00110"></a>00110 
-<a name="l00116"></a>00116         _Ret_count_c_(16) virtual <span class="keywordtype">float</span> * const <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a9f4ddef8861132209fb2cacdcdf329dd" title="Retrieves the float buffer for this parameter.">GetScalar</a>(<span class="keywordtype">void</span>) throw() = 0;
+<a name="l00114"></a>00114         _Ret_count_c_(16) <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<span class="keywordtype">float</span> * <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a3cc5015dbd7d905c6047d843191e7c25">const</a>, GetScalar)() PURE;
+<a name="l00115"></a>00115 
+<a name="l00116"></a><a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a9c7cc09709229c0859a7cf63df7e6945">00116</a>         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<span class="keywordtype">void</span>, SetScalar)(_In_ const uint32_t count, _In_count_(count) <span class="keywordtype">float</span> * const <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a9c7cc09709229c0859a7cf63df7e6945">pValues</a>) PURE;
 <a name="l00117"></a>00117 
-<a name="l00118"></a>00118         virtual <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a9ab5b6498ecfc15175262c5c517831ab">SetScalar</a>(_In_ const uint32_t count, _In_count_(count) <span class="keywordtype">float</span> * const pValues) throw() = 0;
+<a name="l00118"></a>00118         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * const, GetShader)() CONST PURE;
 <a name="l00119"></a>00119 
-<a name="l00120"></a>00120         virtual <a class="code" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata.">IShader</a> * const <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a4b44fce1682c516ab2bdb68ba478f7dd">GetShader</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00121"></a>00121 
-<a name="l00127"></a>00127         virtual CGparameter <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a1071096cb89dae6e46292aa11cd4438d" title="Retrieves the underlying Cg parameter object.">GetCgParameter</a>(<span class="keywordtype">void</span>) const throw() = 0;
-<a name="l00128"></a>00128     };
-<a name="l00132"></a>00132 }
+<a name="l00125"></a>00125         <a class="code" href="class_voodoo_shader_1_1_i_parameter.html#a5cb58a9e1ba74b1b00949cf2011b81c9" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(CGparameter, GetCgParameter)() CONST PURE;
+<a name="l00126"></a>00126     };
+<a name="l00130"></a>00130 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

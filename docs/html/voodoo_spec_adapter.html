@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -62,14 +62,14 @@
 <h2><a class="anchor" id="voodoo_spec_adapter_cg"></a>
 Cg Context</h2>
 <dl class="attention"><dt><b>Attention:</b></dt><dd>Due to varying needs between adapters regarding the management, and destruction, of the Cg context, <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> now exposes methods to get and set the active context and no longer creates a context of its own. This allows more flexibility within adapters, but is a breaking change. Adapters compiled for earlier versions will find themselves without a context at all. </dd></dl>
-<dl class="since"><dt><b>Since:</b></dt><dd>0.2.5.151</dd></dl>
+<dl class="since"><dt><b>Since:</b></dt><dd>0.2</dd></dl>
 <p>This can avoid some crashes with certain adapters due to context lifespan, and allows adapters to handle cleanup. If at all possible, the Cg context should be created in the adapter's constructor and destroyed in the adapter's destructor, but this is left up to the discretion of the adapter.</p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>Adapters may not create any shaders or parameters until they have provided the core with a valid context. Errors will be returned if this is attempted. To fully support Voodoo features, adapter's must not directly use the context when the core provides methods to handle a particular feature. </dd></dl>
 </div></div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

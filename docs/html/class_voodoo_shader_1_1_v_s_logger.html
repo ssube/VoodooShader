@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -67,6 +67,7 @@
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">VoodooShader::VSLogger Class Reference<div class="ingroups"><a class="el" href="group__voodoo__core__null.html">Null Implementations</a></div></div>  </div>
@@ -93,7 +94,7 @@
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_v_s_logger__coll__graph.png" border="0" usemap="#_voodoo_shader_1_1_v_s_logger_coll__map" alt="Collaboration graph"/></div>
 <map name="_voodoo_shader_1_1_v_s_logger_coll__map" id="_voodoo_shader_1_1_v_s_logger_coll__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level&#45;filtered messages." alt="" coords="5,83,163,109"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="111,5,267,32"/><area shape="rect" id="node8" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="187,83,332,109"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level&#45;filtered messages." alt="" coords="827,252,984,279"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="491,359,647,385"/><area shape="rect" id="node15" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1105,381,1250,408"/><area shape="rect" id="node31" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="825,353,986,380"/><area shape="rect" id="node20" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="811,139,999,165"/><area shape="rect" id="node22" href="struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="454,24,685,51"/><area shape="rect" id="node24" href="struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; uint32_t \&gt;" alt="" coords="137,69,367,96"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_v_s_logger-members.html">List of all members.</a></p>
@@ -101,34 +102,38 @@
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga46924c49e4f7071efe7fdfa53d9d3de8">VSLogger</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga042c918ae2c22c61ac56f35daab8be49">~VSLogger</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga217ada3375589031753eb9f78b99791a">AddRef</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="group__voodoo__core__null.html#ga217ada3375589031753eb9f78b99791a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga4b337b777e327ee58b7bd835f4a69287">Release</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="group__voodoo__core__null.html#ga4b337b777e327ee58b7bd835f4a69287"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga7d3d6c990f20c9c6b200eb3db1643f50">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="group__voodoo__core__null.html#ga7d3d6c990f20c9c6b200eb3db1643f50"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gad79fcfd44f65dfab96939d49e7772d1e">ToString</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="group__voodoo__core__null.html#gad79fcfd44f65dfab96939d49e7772d1e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga3cb796cc6de1cf871887cf04202c1432">GetCore</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="group__voodoo__core__null.html#ga3cb796cc6de1cf871887cf04202c1432"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce">Open</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;filename, const bool append)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file for use by this logger.  <a href="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gacbebb063d6ac5b61e3fbc66eacbb6f21">Open</a> (<a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *const pFile, const bool append)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file for use by this logger.  <a href="group__voodoo__core__null.html#gacbebb063d6ac5b61e3fbc66eacbb6f21"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gaab24836c314b666b9ebf78f2883c7095">Close</a> (void)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the log file, if one is open.  <a href="group__voodoo__core__null.html#gaab24836c314b666b9ebf78f2883c7095"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gad52cd0b018621336c81a82c37b1b0a22">Flush</a> (void)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Immediately writes all pending data to disk.  <a href="group__voodoo__core__null.html#gad52cd0b018621336c81a82c37b1b0a22"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga9473ee15cea26e7e0190a1ec343986ae">SetLogLevel</a> (const <a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da">LogLevel</a> level)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the default minimum message level.  <a href="group__voodoo__core__null.html#ga9473ee15cea26e7e0190a1ec343986ae"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da">LogLevel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga688c29318e8f5eac6b10fe873e0ca387">GetLogLevel</a> (void) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga192ab51c19a983596c31facb90f77202">LogModule</a> (const <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *const pModule)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a module stamp to the log.  <a href="group__voodoo__core__null.html#ga192ab51c19a983596c31facb90f77202"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga06b5825a89372bf6631b98a696efaf27">Log</a> (const <a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da">LogLevel</a> level, const wchar_t *source, _Printf_format_string_ const wchar_t *format,...)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Log a message, may be formatted with printf syntax.  <a href="group__voodoo__core__null.html#ga06b5825a89372bf6631b98a696efaf27"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga78e3a53866f4ab92b546ad6619f5d09d">SetFlags</a> (const <a class="el" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> flush)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga6c701c17fd9ac9185e3200fa460b33a1">GetFlags</a> (void) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga7de6e6ac8928891a1165aff7651415b4">~VSLogger</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga327c4e2b48660f265920778d065bd629">VOODOO_METHODCALL_</a> (uint32_t, AddRef)() <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="group__voodoo__core__null.html#ga327c4e2b48660f265920778d065bd629"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gacfcffdc9df28af8d290dae0b4b702ed6">VOODOO_METHODCALL_</a> (uint32_t, Release)() <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="group__voodoo__core__null.html#gacfcffdc9df28af8d290dae0b4b702ed6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga8c1c3e5d444d94fb2470e04bfe0f5bf1">__declspec</a> (nothrow) bool __stdcall QueryInterface(<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="group__voodoo__core__null.html#ga8c1c3e5d444d94fb2470e04bfe0f5bf1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga4f590399471be4fdd255dfdc4ab24540">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="group__voodoo__core__null.html#ga4f590399471be4fdd255dfdc4ab24540"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga9caf17b471d8b8bfb4641f0c2a4a3167">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *, GetCore)() <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="group__voodoo__core__null.html#ga9caf17b471d8b8bfb4641f0c2a4a3167"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gaacef99f46ba267e32e690e9b6a2f74bc">__declspec</a> (nothrow) bool __stdcall Open(<a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;filename</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file for use by this logger.  <a href="group__voodoo__core__null.html#gaacef99f46ba267e32e690e9b6a2f74bc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#gaacef99f46ba267e32e690e9b6a2f74bc">__declspec</a> (nothrow) bool __stdcall Open(<a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *<a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> pFile</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file for use by this logger.  <a href="#gaacef99f46ba267e32e690e9b6a2f74bc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga50ecb3e01436a6445143493750ec0d4e">VOODOO_METHODCALL_</a> (void, Close)()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the log file, if one is open.  <a href="group__voodoo__core__null.html#ga50ecb3e01436a6445143493750ec0d4e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga95e67a2b9214d7b1a7ab041258467cdd">VOODOO_METHODCALL_</a> (void, Flush)()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Immediately writes all pending data to disk.  <a href="group__voodoo__core__null.html#ga95e67a2b9214d7b1a7ab041258467cdd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga4d52698f74717533f6de49c4ae435f7a">VOODOO_METHODCALL_</a> (void, SetLogLevel)(<a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> <a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da">LogLevel</a> level)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the default minimum message level.  <a href="group__voodoo__core__null.html#ga4d52698f74717533f6de49c4ae435f7a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga4df3604685f8dbc493473dc21f2db81a">VOODOO_METHODCALL_</a> (<a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> <a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da">LogLevel</a>, GetLogLevel)() <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga021100c78e6bb1490d194c0b0978d113">VOODOO_METHODCALL_</a> (void, LogModule)(<a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> *<a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> pModule)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a module stamp to the log.  <a href="group__voodoo__core__null.html#ga021100c78e6bb1490d194c0b0978d113"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga0ea699ac9dbeec04bb95cc8b1c379973">Log</a> (<a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> <a class="el" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da">LogLevel</a> level, <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> wchar_t *source, _Printf_format_string_ <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> wchar_t *format,...)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Log a message, may be formatted with printf syntax.  <a href="group__voodoo__core__null.html#ga0ea699ac9dbeec04bb95cc8b1c379973"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gaa61ab96de77da445417f10ac5363d521">VOODOO_METHODCALL_</a> (void, SetFlags)(<a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> <a class="el" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a> flush)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gad9ea229e21723658dc36b25343a397d9">VOODOO_METHODCALL_</a> (<a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> <a class="el" href="namespace_voodoo_shader.html#af35c8fe857d014d7345ef8c2266c79dc">LogFlags</a>, GetFlags)() <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> </td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> void **ppOut&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0">const</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga43ad2d2964a06b509caba59c0cc6b8e6">append</a></td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga1042ee947501c36ab95adad27f635dd6">m_Refs</a></td></tr>
@@ -140,7 +145,37 @@ Private Attributes</h2></td></tr>
 <dl class="user"><dt><b>CLSID:</b></dt><dd>e6f3129e-05af-11e1-9e05-005056c00008 </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_logger_8hpp_source.html#l00044">44</a> of file <a class="el" href="_v_s_logger_8hpp_source.html">VSLogger.hpp</a>.</p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="gaacef99f46ba267e32e690e9b6a2f74bc"></a><!-- doxytag: member="VoodooShader::VSLogger::__declspec" ref="gaacef99f46ba267e32e690e9b6a2f74bc" args="(nothrow) bool __stdcall Open(IFile *const pFile" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual VoodooShader::VSLogger::__declspec </td>
+          <td>(</td>
+          <td class="paramtype">nothrow&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Opens a file for use by this logger. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>The name of the file to open (may contain an absolute or relative path). </td></tr>
+    <tr><td class="paramname">append</td><td>Flag specifying the open mode; if true, any existing log is truncated. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the open operation. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a252c738f1145e570e152fa8d1f0d9259">VoodooShader::ILogger</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/Code/VoodooShader/Framework/Core/<a class="el" href="_v_s_logger_8hpp_source.html">VSLogger.hpp</a></li>
 <li>D:/Code/VoodooShader/Framework/Core/<a class="el" href="_v_s_logger_8cpp_source.html">VSLogger.cpp</a></li>
 </ul>
@@ -148,7 +183,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

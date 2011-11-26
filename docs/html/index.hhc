@@ -51,7 +51,7 @@
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__framework__interfaces.html#gaca52bd38fbd22623185228e7745e0437"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__framework__interfaces.html#ga9bf83b45781c67809f4344bc72a84bf8"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
@@ -233,26 +233,27 @@
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="AddRef"><param name="Local" value="group__voodoo__core__null.html#ga217ada3375589031753eb9f78b99791a"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Close"><param name="Local" value="group__voodoo__core__null.html#gaab24836c314b666b9ebf78f2883c7095"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Flush"><param name="Local" value="group__voodoo__core__null.html#gad52cd0b018621336c81a82c37b1b0a22"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetCore"><param name="Local" value="group__voodoo__core__null.html#ga3cb796cc6de1cf871887cf04202c1432"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetFlags"><param name="Local" value="group__voodoo__core__null.html#ga6c701c17fd9ac9185e3200fa460b33a1"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetLogLevel"><param name="Local" value="group__voodoo__core__null.html#ga688c29318e8f5eac6b10fe873e0ca387"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Log"><param name="Local" value="group__voodoo__core__null.html#ga06b5825a89372bf6631b98a696efaf27"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="LogModule"><param name="Local" value="group__voodoo__core__null.html#ga192ab51c19a983596c31facb90f77202"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Open"><param name="Local" value="group__voodoo__core__null.html#gab09f9f874330673588bab4c1f2b716ce"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Open"><param name="Local" value="group__voodoo__core__null.html#gacbebb063d6ac5b61e3fbc66eacbb6f21"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="QueryInterface"><param name="Local" value="group__voodoo__core__null.html#ga7d3d6c990f20c9c6b200eb3db1643f50"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Release"><param name="Local" value="group__voodoo__core__null.html#ga4b337b777e327ee58b7bd835f4a69287"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="SetFlags"><param name="Local" value="group__voodoo__core__null.html#ga78e3a53866f4ab92b546ad6619f5d09d"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="SetLogLevel"><param name="Local" value="group__voodoo__core__null.html#ga9473ee15cea26e7e0190a1ec343986ae"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="ToString"><param name="Local" value="group__voodoo__core__null.html#gad79fcfd44f65dfab96939d49e7772d1e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__core__null.html#ga8c1c3e5d444d94fb2470e04bfe0f5bf1"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__core__null.html#gaacef99f46ba267e32e690e9b6a2f74bc"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Log"><param name="Local" value="group__voodoo__core__null.html#ga0ea699ac9dbeec04bb95cc8b1c379973"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#ga327c4e2b48660f265920778d065bd629"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#gacfcffdc9df28af8d290dae0b4b702ed6"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#ga4f590399471be4fdd255dfdc4ab24540"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#ga9caf17b471d8b8bfb4641f0c2a4a3167"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#ga50ecb3e01436a6445143493750ec0d4e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#ga95e67a2b9214d7b1a7ab041258467cdd"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#ga4d52698f74717533f6de49c4ae435f7a"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#ga4df3604685f8dbc493473dc21f2db81a"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#ga021100c78e6bb1490d194c0b0978d113"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#gaa61ab96de77da445417f10ac5363d521"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__core__null.html#gad9ea229e21723658dc36b25343a397d9"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSLogger"><param name="Local" value="group__voodoo__core__null.html#ga46924c49e4f7071efe7fdfa53d9d3de8"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="~VSLogger"><param name="Local" value="group__voodoo__core__null.html#ga042c918ae2c22c61ac56f35daab8be49"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~VSLogger"><param name="Local" value="group__voodoo__core__null.html#ga7de6e6ac8928891a1165aff7651415b4"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Variables"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="append"><param name="Local" value="group__voodoo__core__null.html#ga43ad2d2964a06b509caba59c0cc6b8e6"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="const"><param name="Local" value="group__voodoo__core__null.html#ga42018cb841a51d9e7a5c8714bf54a7b0"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Core"><param name="Local" value="group__voodoo__core__null.html#ga9608a7141d1b5062b0fa5c53754156a9"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Refs"><param name="Local" value="group__voodoo__core__null.html#ga1042ee947501c36ab95adad27f635dd6"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
@@ -283,48 +284,49 @@
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga8c3a7ab4d3c8724be21fb5b24f1c5680"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="AddPath"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaf50d200f10d74688d4c7c765ac6a148c"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="AddRef"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga7cf39ae8aba4a05be61354b9fc7d84c1"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="AddRef"><param name="Local" value="group__voodoo__module__wfilesystem.html#gadbb7fad5494989a4c4776a176a23f83a"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="AddRef"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaa60e92dcbbc1bc96c8c4e1a3f1d000f6"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCount"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga63274f66b7937d92fc5f33ff6835eae3"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCreate"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga070709cf8006b61dda031fac3159019c"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassInfo"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga0f03e5bb0cc45e87db57f8fd89f79916"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ModuleVersion"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga89cb6ffb2ca6c423ff173dad281bcda6"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Close"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga6e0ce6eb8ebef715b30de42c32b82070"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="FindFile"><param name="Local" value="group__voodoo__module__wfilesystem.html#gac034739454fca4c328c34c9f3ce3a1d1"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetCore"><param name="Local" value="group__voodoo__module__wfilesystem.html#gad37523eacde0d596a2a820517acbd85b"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetCore"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga56cd8f326a4020a7f885f164e705f25f"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetCore"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga4bb1ee52dd5e5a874b78bace8abf50f0"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetData"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga6fbd849da9e8c8be77a0185f3ce4b269"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetDesc"><param name="Local" value="group__voodoo__module__wfilesystem.html#gad9fa9145e2095f580989597e40962824"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetPath"><param name="Local" value="group__voodoo__module__wfilesystem.html#gae02521b6643cf4d1456d4c23a83b948c"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetPath"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga3eda2df44210e73f5270c8979421c9da"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__wfilesystem.html#gadb71d76cba7a4a5818a3c32d51a6aa8d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaf68415102040e0ed189538c8d7ba7120"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga60d0fdf2c6311976a3792907b1aaf836"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaf3d305505b78a6e1ce6770f688e2b6ea"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga9da750e3d481fcb898d5ec6624055132"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="_In_opt_bytecount_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga9351d0099708dd7e62319a28a6a88568"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="_In_opt_count_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga9ba96d905e033b05b9ddb7a5392a5801"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCount"><param name="Local" value="group__voodoo__module__wfilesystem.html#gacf63522c339bbedfb3de75cedd0bd78d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCreate"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga3029fd43e93e31d9e7c547e9d3abc8bd"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassInfo"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga834f70cfe57d40e7cefff773fc71ede1"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ModuleVersion"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga616b53048c7717df814360292c49dcd4"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Load"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Open"><param name="Local" value="group__voodoo__module__wfilesystem.html#gabeb0d99e67982a1d5d31ba76120110ff"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="OpenImage"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaedc95153a5ff58203b0d522be1cc1e17"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="QueryInterface"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga5e903aac656e58698ba89bd70793eb19"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="QueryInterface"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga18f5e77380badc09bc45f1777ba99540"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="QueryInterface"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga35603c7551cae514b94357b647baf910"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Read"><param name="Local" value="group__voodoo__module__wfilesystem.html#gae590fef38120fd7452c6fc7a78e30709"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Release"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga0cda285e2d0711e0d87c6b6c2266e212"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Release"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga7975b97ec842812c652ed84d793967cc"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Release"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga1e29d472d5bfa66fda53dda5ca369583"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="RemovePath"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaabd861d7a1925a4bb9032d2a57308041"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="ToString"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga578e97ccd50858af9930c62df652ae2c"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="ToString"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaaa0b357098d2a6644d4bfc57d70eef86"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="ToString"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga28ad1f7b61f3e3e81b41da3c47196bfc"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga24f5a6a9eb3e4d22f1f66ab8deacdebe"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga30ee7e3b193fc05410e521b7bb568ee0"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#gadb3d8f766f299045a369890e8abf728d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga3b773edf13210d4ed39189ae08fc7ec2"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga0bd5bbe70ea25a56f7827a86eba22bf5"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaa08ead56f3072e25297a9606f446d0df"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga1052798f58b3f0147d4e70eea6c253b2"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga23a86f156df9f62c0fea6eaca704536c"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#gac3e3903372914005d65403c62fe485a2"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#gafd98948a29016ac379f54a62c26637f5"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga594f0bddeea448f4dd989ce1b4b5f231"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga647a0332d88f6426160635b935440e75"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga79a9edef22a7830e9158833732b50412"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaeae9e0f0c32467f3da366a66d7920139"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#gabf86d679eb59617e55ceff50d913b4db"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga2623138a8176a7f44041972b56ed51f7"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga08d85aabb9194831bbcba7317de4940d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga55984e7064baf7824152001dfb5f1678"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_METHODCALL_"><param name="Local" value="group__voodoo__module__wfilesystem.html#gabd263d63b44569152b434ac697b62fde"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSWFile"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga454b93a28d3e46aaa74582cea965496e"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSWFileSystem"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga1496330a828b0df2d9a120c115582257"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSWImage"><param name="Local" value="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Write"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga97a2a01f66cc30811448340e869f7e35"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="~VSWFile"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga58d49dfe14a7b2e8068e06e7231a0309"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="~VSWFileSystem"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaeca8dc9782f686712859b21f6f1146ff"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="~VSWImage"><param name="Local" value="group__voodoo__module__wfilesystem.html#gadaa973bf9b0016d6e8df49e9a2b97de3"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~VSWFile"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaf7d7e939d5fb1ada1cc9d447bf335d82"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~VSWFileSystem"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga923b63be9f58b742bef4cc7425279269"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~VSWImage"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga755c42f09237789cf89180d172c69ddc"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Variables"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="const"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga5a808d73d58b2b65fb544bd919087657"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="const"><param name="Local" value="group__voodoo__module__wfilesystem.html#gad3446ca040d22f7ea7025182f565c783"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="const"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Core"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga8af43eea353aaa393b198d7d20eb3cd8"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Core"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga2725a45bfa7ca7ae981eaf40dc34af2b"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Core"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga85be6f129caf9164ac5241b89fe4f498"><param name="ImageNumber" value="11"></OBJECT>
@@ -338,6 +340,8 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Refs"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga9799becbd7a6650667690f453d69c4a5"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Refs"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga3fc85936fc8b8d540e4179d1993e46e4"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Refs"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga71b051f1d1e6afe1a20233e9b4fdc587"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="pDesc"><param name="Local" value="group__voodoo__module__wfilesystem.html#gaeddeba4fe66e708069638199fc6d52e7"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="size"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga755763ea4871e24c01c42601a7e38b3d"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Namespaces"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
@@ -369,11 +373,11 @@
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__ehhook.html#ga0087b3634fac057d97baea7acb20c41a"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCount"><param name="Local" value="group__voodoo__module__ehhook.html#gaecdd5835e1668f8e010531ba01544370"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCreate"><param name="Local" value="group__voodoo__module__ehhook.html#ga5a32547034a606c4a04106a211eb7ba2"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassInfo"><param name="Local" value="group__voodoo__module__ehhook.html#ga250ae416c6c77755b71fb5c1504b6184"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ModuleVersion"><param name="Local" value="group__voodoo__module__ehhook.html#gad137aa497ac1ee21eb38eaddc179f50c"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__ehhook.html#ga4952fe1d381cbdcb0aadba52582f8c05"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCount"><param name="Local" value="group__voodoo__module__ehhook.html#gafc415826d9bb5d469f33fa99c69581f2"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCreate"><param name="Local" value="group__voodoo__module__ehhook.html#ga9b4f7d0077000ffb58b40adf39072422"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassInfo"><param name="Local" value="group__voodoo__module__ehhook.html#gae8b1a014600949a8e2c8c61f93fa248e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ModuleVersion"><param name="Local" value="group__voodoo__module__ehhook.html#gacd1b58c7b702a4b6df33e2cc85537a69"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
@@ -395,11 +399,11 @@
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__xmllogger.html#ga0378f532810d4c6dfcddc2058acff8d0"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCount"><param name="Local" value="group__voodoo__module__xmllogger.html#ga21364a5b445ad47e5081b1e1613b5560"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCreate"><param name="Local" value="group__voodoo__module__xmllogger.html#gafa59234b5108ca107fbcbf3cc8bef96c"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassInfo"><param name="Local" value="group__voodoo__module__xmllogger.html#gafe718876d1b10e9d9f3f0fa28dcb12ef"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ModuleVersion"><param name="Local" value="group__voodoo__module__xmllogger.html#ga915a57bf07536d13bca4ac31c999d54e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="__declspec"><param name="Local" value="group__voodoo__module__xmllogger.html#ga632e989d72e807b5465ed56eb789d8db"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCount"><param name="Local" value="group__voodoo__module__xmllogger.html#gab634dc66f6865eaec366b8f60bbdfc08"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCreate"><param name="Local" value="group__voodoo__module__xmllogger.html#ga2b8fa510887892ae4bd026102776bad4"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassInfo"><param name="Local" value="group__voodoo__module__xmllogger.html#ga057b2001e60cedcc30681361693d6282"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ModuleVersion"><param name="Local" value="group__voodoo__module__xmllogger.html#ga5a8513c11ef96e5b5a1688a92dd07d74"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
@@ -570,9 +574,6 @@
   <UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Converter.cpp"><param name="Local" value="_converter_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Converter.hpp"><param name="Local" value="_converter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Docs_Code.hpp"><param name="Local" value="_docs___code_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Docs_Graphics.hpp"><param name="Local" value="_docs___graphics_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Docs_License.hpp"><param name="Local" value="_docs___license_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Exception.cpp"><param name="Local" value="_exception_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Exception.hpp"><param name="Local" value="_exception_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Exports.cpp"><param name="Local" value="_exports_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -644,9 +645,6 @@
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Converter.cpp"><param name="Local" value="_converter_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Converter.hpp"><param name="Local" value="_converter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Docs_Code.hpp"><param name="Local" value="_docs___code_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Docs_Graphics.hpp"><param name="Local" value="_docs___graphics_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Docs_License.hpp"><param name="Local" value="_docs___license_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Exception.cpp"><param name="Local" value="_exception_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Exception.hpp"><param name="Local" value="_exception_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Exports.cpp"><param name="Local" value="_exports_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>

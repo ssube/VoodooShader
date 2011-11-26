@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -99,17 +99,17 @@
 <a name="l00047"></a>00047     {
 <a name="l00048"></a>00048     <span class="keyword">public</span>:
 <a name="l00049"></a>00049         <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a2cd4da81fcdcf326038cfbb50fba1b57">VSFileSystem</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore);
-<a name="l00050"></a>00050         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a579c76589696d3886d1ebce60aa08d83">~VSFileSystem</a>(<span class="keywordtype">void</span>);
+<a name="l00050"></a>00050         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a677e82ddbc4e54ef47535895c4dcb0d6">~VSFileSystem</a>();
 <a name="l00051"></a>00051 
-<a name="l00052"></a>00052         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#aaddf58568ede9d6dec8b6b6883564c8b" title="Add a reference to this object.">AddRef</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00053"></a>00053         <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#aff837df4eee0072b803eceef5c734607" title="Release a reference from this object.">Release</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00054"></a>00054         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a0ac4783faa27b8965084b82f1c757f24" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00055"></a>00055         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#affd2e200c59471267494804a766a3e69" title="Get the name of this object.">ToString</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00056"></a>00056         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a159de384be7af91d1a06357e2c689587" title="Get the core this object was associated with.">GetCore</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00052"></a>00052         <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a34fbc4352cca41ed69828ad6303ff69e" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, AddRef)() CONST;
+<a name="l00053"></a>00053         <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a34fbc4352cca41ed69828ad6303ff69e" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(uint32_t, Release)() CONST;
+<a name="l00054"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#ab47349dc2f3c5be71071dcb09a5ae351">00054</a>         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
+<a name="l00055"></a>00055         <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a34fbc4352cca41ed69828ad6303ff69e" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
+<a name="l00056"></a>00056         <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a34fbc4352cca41ed69828ad6303ff69e" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
 <a name="l00057"></a>00057 
-<a name="l00058"></a>00058         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a6882c784f822b8789ae3d384e75a55a6" title="Adds a directory to this file system&#39;s search path.">AddPath</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; dir) <span class="keywordflow">throw</span>();
-<a name="l00059"></a>00059         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a625c4550c3acf9876d5063e9b69d484f" title="Removes a directory from the search path, following the same rules as adding (adding a string then re...">RemovePath</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; dir) <span class="keywordflow">throw</span>();
-<a name="l00060"></a>00060         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a8c26455831eaa9f533465d9fb1a44638" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">FindFile</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00058"></a>00058         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(AddPath)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; dir) ;
+<a name="l00059"></a>00059         <a class="code" href="_includes_8hpp.html#a6166c787c34302393036b8261404bd36">VOODOO_METHODCALL</a>(RemovePath)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; dir) ;
+<a name="l00060"></a>00060         <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a34fbc4352cca41ed69828ad6303ff69e" title="Add a reference to this object.">VOODOO_METHODCALL_</a>(<a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> *, FindFile)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) CONST;
 <a name="l00061"></a>00061 
 <a name="l00062"></a>00062     <span class="keyword">private</span>:
 <a name="l00063"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a49f7b533f8efd40241e5da80aca42e83">00063</a>         <span class="keyword">mutable</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a49f7b533f8efd40241e5da80aca42e83">m_Refs</a>;
@@ -121,7 +121,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

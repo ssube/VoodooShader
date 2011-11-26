@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -89,112 +89,114 @@
 <a name="l00020"></a>00020 
 <a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_exports_8hpp.html">Exports.hpp</a>&quot;</span>
 <a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_version_8hpp.html">Version.hpp</a>&quot;</span>
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_adapter_8hpp.html">VSAdapter.hpp</a>&quot;</span>
-<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_filesystem_8hpp.html">VSFileSystem.hpp</a>&quot;</span>
-<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_hook_manager_8hpp.html">VSHookManager.hpp</a>&quot;</span>
-<a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_logger_8hpp.html">VSLogger.hpp</a>&quot;</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_adapter_8hpp.html">VSAdapter.hpp</a>&quot;</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_filesystem_8hpp.html">VSFileSystem.hpp</a>&quot;</span>
+<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_hook_manager_8hpp.html">VSHookManager.hpp</a>&quot;</span>
+<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="_v_s_logger_8hpp.html">VSLogger.hpp</a>&quot;</span>
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="_i_core_8hpp.html">ICore.hpp</a>&quot;</span>
 <a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <span class="keyword">namespace </span>VoodooShader
-<a name="l00031"></a>00031 {
-<a name="l00032"></a><a class="code" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">00032</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> <a class="code" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">coreVersion</a> = <a class="code" href="_version_8hpp.html#a4da9584ebd4a715e19b36471e0d85f3c" title="Creates a Version structure with data for the given module.">VOODOO_META_VERSION_STRUCT</a>(CORE);
-<a name="l00033"></a><a class="code" href="namespace_voodoo_shader.html#ab2d8647ca760424077c4153e7b822d49">00033</a>     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#ab2d8647ca760424077c4153e7b822d49">name_VSAdapter</a> = L<span class="stringliteral">&quot;VSAdapter&quot;</span>;
-<a name="l00034"></a><a class="code" href="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3">00034</a>     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3">name_VSFileSystem</a> = L<span class="stringliteral">&quot;VSFileSystem&quot;</span>;
-<a name="l00035"></a><a class="code" href="namespace_voodoo_shader.html#a517e2823e4941170d33d470dc9a457fa">00035</a>     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a517e2823e4941170d33d470dc9a457fa">name_VSHookManager</a> = L<span class="stringliteral">&quot;VSHookManager&quot;</span>;
-<a name="l00036"></a><a class="code" href="namespace_voodoo_shader.html#a0df8ba9654dcf427ca78fad1fa68f5d9">00036</a>     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a0df8ba9654dcf427ca78fad1fa68f5d9">name_VSLogger</a> = L<span class="stringliteral">&quot;VSLogger&quot;</span>;
-<a name="l00037"></a><a class="code" href="namespace_voodoo_shader.html#a1a20ab66c06a132df1716f64d1715114">00037</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a1a20ab66c06a132df1716f64d1715114">clsid_VSAdapter</a> = CLSID_VSAdapter;
-<a name="l00038"></a><a class="code" href="namespace_voodoo_shader.html#a045e1b7012b2b1221b4cd143d65d0808">00038</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a045e1b7012b2b1221b4cd143d65d0808">clsid_VSFileSystem</a> = CLSID_VSFileSystem;
-<a name="l00039"></a><a class="code" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">00039</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">clsid_VSHookManager</a> = CLSID_VSHookManager;
-<a name="l00040"></a><a class="code" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">00040</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">clsid_VSLogger</a> = CLSID_VSLogger;
-<a name="l00041"></a>00041 
-<a name="l00042"></a><a class="code" href="namespace_voodoo_shader.html#a9b6d245084c35bece67dd6cb93ed474b">00042</a>     <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#a9b6d245084c35bece67dd6cb93ed474b">API_ModuleVersion</a>(<span class="keywordtype">void</span>)
-<a name="l00043"></a>00043     {
-<a name="l00044"></a>00044         <span class="keywordflow">return</span> &amp;<a class="code" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">coreVersion</a>;
-<a name="l00045"></a>00045     }
-<a name="l00046"></a>00046 
-<a name="l00047"></a><a class="code" href="namespace_voodoo_shader.html#a262d76aa3e91afa876c8f64add584c6b">00047</a>     <span class="keyword">const</span> uint32_t <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#a262d76aa3e91afa876c8f64add584c6b">API_ClassCount</a>(<span class="keywordtype">void</span>)
-<a name="l00048"></a>00048     {
-<a name="l00049"></a>00049         <span class="keywordflow">return</span> 4;
-<a name="l00050"></a>00050     }
-<a name="l00051"></a>00051 
-<a name="l00052"></a><a class="code" href="namespace_voodoo_shader.html#a7e55e28415ec0d178a731eb6ee15d368">00052</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#a7e55e28415ec0d178a731eb6ee15d368">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t number, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
-<a name="l00053"></a>00053     {
-<a name="l00054"></a>00054         <span class="keywordflow">if</span> (!pUuid)
-<a name="l00055"></a>00055         {
-<a name="l00056"></a>00056             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
-<a name="l00057"></a>00057         }
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059         <span class="keywordflow">switch</span> (number)
-<a name="l00060"></a>00060         {
-<a name="l00061"></a>00061         <span class="keywordflow">case</span> 0:
-<a name="l00062"></a>00062             *pUuid = <a class="code" href="namespace_voodoo_shader.html#a1a20ab66c06a132df1716f64d1715114">clsid_VSAdapter</a>;
-<a name="l00063"></a>00063             <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#ab2d8647ca760424077c4153e7b822d49">name_VSAdapter</a>;
-<a name="l00064"></a>00064         <span class="keywordflow">case</span> 1:
-<a name="l00065"></a>00065             *pUuid = <a class="code" href="namespace_voodoo_shader.html#a045e1b7012b2b1221b4cd143d65d0808">clsid_VSFileSystem</a>;
-<a name="l00066"></a>00066             <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3">name_VSFileSystem</a>;
-<a name="l00067"></a>00067         <span class="keywordflow">case</span> 2:
-<a name="l00068"></a>00068             *pUuid = <a class="code" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">clsid_VSHookManager</a>;
-<a name="l00069"></a>00069             <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#a517e2823e4941170d33d470dc9a457fa">name_VSHookManager</a>;
-<a name="l00070"></a>00070         <span class="keywordflow">case</span> 3:
-<a name="l00071"></a>00071             *pUuid = <a class="code" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">clsid_VSLogger</a>;
-<a name="l00072"></a>00072             <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#a0df8ba9654dcf427ca78fad1fa68f5d9">name_VSLogger</a>;
-<a name="l00073"></a>00073         <span class="keywordflow">default</span>:
-<a name="l00074"></a>00074             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
-<a name="l00075"></a>00075         }
-<a name="l00076"></a>00076     }
-<a name="l00077"></a>00077 
-<a name="l00078"></a><a class="code" href="namespace_voodoo_shader.html#ab4b4a18d59b239f60a22ecc88d7cd31a">00078</a>     <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="_includes_8hpp.html#ac4109cffacdb4511d17c7af76ca1f280">VOODOO_CALL</a> <a class="code" href="namespace_voodoo_shader.html#ab4b4a18d59b239f60a22ecc88d7cd31a">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore)
-<a name="l00079"></a>00079     {
-<a name="l00080"></a>00080         <span class="keywordflow">switch</span> (number)
-<a name="l00081"></a>00081         {
-<a name="l00082"></a>00082         <span class="keywordflow">case</span> 0:
-<a name="l00083"></a>00083             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html" title="Voodoo Shader null adapter implementation.">VSAdapter</a>(pCore);
-<a name="l00084"></a>00084         <span class="keywordflow">case</span> 1:
-<a name="l00085"></a>00085             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html" title="Voodoo Shader null file system implementation.">VSFileSystem</a>(pCore);
-<a name="l00086"></a>00086         <span class="keywordflow">case</span> 2:
-<a name="l00087"></a>00087             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html" title="Voodoo Shader null hook manager implementation.">VSHookManager</a>(pCore);
-<a name="l00088"></a>00088         <span class="keywordflow">case</span> 3:
-<a name="l00089"></a>00089             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_logger.html" title="Voodoo Shader null logger implementation.">VSLogger</a>(pCore);
-<a name="l00090"></a>00090         <span class="keywordflow">default</span>:
-<a name="l00091"></a>00091             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
-<a name="l00092"></a>00092         }
-<a name="l00093"></a>00093     }
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095     <span class="comment">// Boost intrusive_ptr functions</span>
-<a name="l00096"></a><a class="code" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">00096</a>     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#a5e73ef0ad4e5614cea6c0c7514ccafaf">VOODOO_PUBLIC_FUNC</a> <a class="code" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">intrusive_ptr_add_ref</a>(<a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * obj)
-<a name="l00097"></a>00097     {
-<a name="l00098"></a>00098 <span class="preprocessor">#ifdef VOODOO_DEBUG_MEMORY</span>
-<a name="l00099"></a>00099 <span class="preprocessor"></span>        uint32_t refs = obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">AddRef</a>();
-<a name="l00100"></a>00100         <span class="keywordflow">if</span> (obj &amp;&amp; obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#af516091c1429872656036f732664eea7" title="Get the core this object was associated with.">GetCore</a>() &amp;&amp; obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#af516091c1429872656036f732664eea7" title="Get the core this object was associated with.">GetCore</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>())
-<a name="l00101"></a>00101         {
-<a name="l00102"></a>00102             obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#af516091c1429872656036f732664eea7" title="Get the core this object was associated with.">GetCore</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b">LL_CoreError</a>, L<span class="stringliteral">&quot;VOODOO_DEBUG_MEMORY&quot;</span>, <span class="stringliteral">&quot;intrusive_ptr_add_ref(%X) = %d&quot;</span>, obj, refs);
-<a name="l00103"></a>00103         }
-<a name="l00104"></a>00104 <span class="preprocessor">#else</span>
-<a name="l00105"></a>00105 <span class="preprocessor"></span>        obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">AddRef</a>();
-<a name="l00106"></a>00106 <span class="preprocessor">#endif</span>
-<a name="l00107"></a>00107 <span class="preprocessor"></span>    }
-<a name="l00108"></a>00108 
-<a name="l00109"></a><a class="code" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">00109</a>     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#a5e73ef0ad4e5614cea6c0c7514ccafaf">VOODOO_PUBLIC_FUNC</a> <a class="code" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">intrusive_ptr_release</a>(<a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * obj)
-<a name="l00110"></a>00110     {
-<a name="l00111"></a>00111 <span class="preprocessor">#ifdef VOODOO_DEBUG_MEMORY</span>
-<a name="l00112"></a>00112 <span class="preprocessor"></span>        <span class="keywordflow">if</span> (obj &amp;&amp; obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#af516091c1429872656036f732664eea7" title="Get the core this object was associated with.">GetCore</a>() &amp;&amp; obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#af516091c1429872656036f732664eea7" title="Get the core this object was associated with.">GetCore</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>())
-<a name="l00113"></a>00113         {
-<a name="l00114"></a>00114             obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">AddRef</a>();
-<a name="l00115"></a>00115             uint32_t refs = obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#af6323d5d999a565e2e201241b21aa1e1" title="Release a reference from this object.">Release</a>() - 1;
-<a name="l00116"></a>00116             obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#af516091c1429872656036f732664eea7" title="Get the core this object was associated with.">GetCore</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b">LL_CoreError</a>, L<span class="stringliteral">&quot;VOODOO_DEBUG_MEMORY&quot;</span>, <span class="stringliteral">&quot;intrusive_ptr_release(%X) = %d&quot;</span>, obj, refs);
-<a name="l00117"></a>00117         }
-<a name="l00118"></a>00118 <span class="preprocessor">#else</span>
-<a name="l00119"></a>00119 <span class="preprocessor"></span>        obj-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#af6323d5d999a565e2e201241b21aa1e1" title="Release a reference from this object.">Release</a>();
-<a name="l00120"></a>00120 <span class="preprocessor">#endif</span>
-<a name="l00121"></a>00121 <span class="preprocessor"></span>    }
-<a name="l00122"></a>00122 }
+<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="_version_8hpp.html">Version.hpp</a>&quot;</span>
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032 <span class="keyword">namespace </span>VoodooShader
+<a name="l00033"></a>00033 {
+<a name="l00034"></a><a class="code" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">00034</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> <a class="code" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">coreVersion</a> = <a class="code" href="_version_8hpp.html#a4da9584ebd4a715e19b36471e0d85f3c" title="Creates a Version structure with data for the given module.">VOODOO_META_VERSION_STRUCT</a>(CORE);
+<a name="l00035"></a><a class="code" href="namespace_voodoo_shader.html#ab2d8647ca760424077c4153e7b822d49">00035</a>     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#ab2d8647ca760424077c4153e7b822d49">name_VSAdapter</a> = L<span class="stringliteral">&quot;VSAdapter&quot;</span>;
+<a name="l00036"></a><a class="code" href="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3">00036</a>     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3">name_VSFileSystem</a> = L<span class="stringliteral">&quot;VSFileSystem&quot;</span>;
+<a name="l00037"></a><a class="code" href="namespace_voodoo_shader.html#a517e2823e4941170d33d470dc9a457fa">00037</a>     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a517e2823e4941170d33d470dc9a457fa">name_VSHookManager</a> = L<span class="stringliteral">&quot;VSHookManager&quot;</span>;
+<a name="l00038"></a><a class="code" href="namespace_voodoo_shader.html#a0df8ba9654dcf427ca78fad1fa68f5d9">00038</a>     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a0df8ba9654dcf427ca78fad1fa68f5d9">name_VSLogger</a> = L<span class="stringliteral">&quot;VSLogger&quot;</span>;
+<a name="l00039"></a><a class="code" href="namespace_voodoo_shader.html#a1a20ab66c06a132df1716f64d1715114">00039</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a1a20ab66c06a132df1716f64d1715114">clsid_VSAdapter</a> = CLSID_VSAdapter;
+<a name="l00040"></a><a class="code" href="namespace_voodoo_shader.html#a045e1b7012b2b1221b4cd143d65d0808">00040</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a045e1b7012b2b1221b4cd143d65d0808">clsid_VSFileSystem</a> = CLSID_VSFileSystem;
+<a name="l00041"></a><a class="code" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">00041</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">clsid_VSHookManager</a> = CLSID_VSHookManager;
+<a name="l00042"></a><a class="code" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">00042</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> <a class="code" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">clsid_VSLogger</a> = CLSID_VSLogger;
+<a name="l00043"></a>00043 
+<a name="l00044"></a><a class="code" href="namespace_voodoo_shader.html#a2ae313d145a61aad88cbe114a51586f1">00044</a>     <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader.html#a2ae313d145a61aad88cbe114a51586f1">API_ModuleVersion</a>()
+<a name="l00045"></a>00045     {
+<a name="l00046"></a>00046         <span class="keywordflow">return</span> &amp;<a class="code" href="namespace_voodoo_shader.html#a5bf628ce859ed6575e4fcd36b73a96cc">coreVersion</a>;
+<a name="l00047"></a>00047     }
+<a name="l00048"></a>00048 
+<a name="l00049"></a><a class="code" href="namespace_voodoo_shader.html#a63d571e87213f3e6901529bb81e39b6e">00049</a>     <span class="keyword">const</span> uint32_t <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader.html#a63d571e87213f3e6901529bb81e39b6e">API_ClassCount</a>()
+<a name="l00050"></a>00050     {
+<a name="l00051"></a>00051         <span class="keywordflow">return</span> 4;
+<a name="l00052"></a>00052     }
+<a name="l00053"></a>00053 
+<a name="l00054"></a><a class="code" href="namespace_voodoo_shader.html#a599989abad2d39f8702b38b9fbb8a9cb">00054</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader.html#a599989abad2d39f8702b38b9fbb8a9cb">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t number, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid)
+<a name="l00055"></a>00055     {
+<a name="l00056"></a>00056         <span class="keywordflow">if</span> (!pUuid)
+<a name="l00057"></a>00057         {
+<a name="l00058"></a>00058             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
+<a name="l00059"></a>00059         }
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061         <span class="keywordflow">switch</span> (number)
+<a name="l00062"></a>00062         {
+<a name="l00063"></a>00063         <span class="keywordflow">case</span> 0:
+<a name="l00064"></a>00064             *pUuid = <a class="code" href="namespace_voodoo_shader.html#a1a20ab66c06a132df1716f64d1715114">clsid_VSAdapter</a>;
+<a name="l00065"></a>00065             <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#ab2d8647ca760424077c4153e7b822d49">name_VSAdapter</a>;
+<a name="l00066"></a>00066         <span class="keywordflow">case</span> 1:
+<a name="l00067"></a>00067             *pUuid = <a class="code" href="namespace_voodoo_shader.html#a045e1b7012b2b1221b4cd143d65d0808">clsid_VSFileSystem</a>;
+<a name="l00068"></a>00068             <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3">name_VSFileSystem</a>;
+<a name="l00069"></a>00069         <span class="keywordflow">case</span> 2:
+<a name="l00070"></a>00070             *pUuid = <a class="code" href="namespace_voodoo_shader.html#a4183c65de586f47ceaa1f0c85f5b44c2">clsid_VSHookManager</a>;
+<a name="l00071"></a>00071             <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#a517e2823e4941170d33d470dc9a457fa">name_VSHookManager</a>;
+<a name="l00072"></a>00072         <span class="keywordflow">case</span> 3:
+<a name="l00073"></a>00073             *pUuid = <a class="code" href="namespace_voodoo_shader.html#a1776c0e59dcc8c143a93cdf45a8ff457">clsid_VSLogger</a>;
+<a name="l00074"></a>00074             <span class="keywordflow">return</span> <a class="code" href="namespace_voodoo_shader.html#a0df8ba9654dcf427ca78fad1fa68f5d9">name_VSLogger</a>;
+<a name="l00075"></a>00075         <span class="keywordflow">default</span>:
+<a name="l00076"></a>00076             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
+<a name="l00077"></a>00077         }
+<a name="l00078"></a>00078     }
+<a name="l00079"></a>00079 
+<a name="l00080"></a><a class="code" href="namespace_voodoo_shader.html#a964207283b17daf66bf94bed0bd62ee8">00080</a>     <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader.html#a964207283b17daf66bf94bed0bd62ee8">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t number, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore)
+<a name="l00081"></a>00081     {
+<a name="l00082"></a>00082         <span class="keywordflow">switch</span> (number)
+<a name="l00083"></a>00083         {
+<a name="l00084"></a>00084         <span class="keywordflow">case</span> 0:
+<a name="l00085"></a>00085             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_adapter.html" title="Voodoo Shader null adapter implementation.">VSAdapter</a>(pCore);
+<a name="l00086"></a>00086         <span class="keywordflow">case</span> 1:
+<a name="l00087"></a>00087             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html" title="Voodoo Shader null file system implementation.">VSFileSystem</a>(pCore);
+<a name="l00088"></a>00088         <span class="keywordflow">case</span> 2:
+<a name="l00089"></a>00089             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html" title="Voodoo Shader null hook manager implementation.">VSHookManager</a>(pCore);
+<a name="l00090"></a>00090         <span class="keywordflow">case</span> 3:
+<a name="l00091"></a>00091             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_v_s_logger.html" title="Voodoo Shader null logger implementation.">VSLogger</a>(pCore);
+<a name="l00092"></a>00092         <span class="keywordflow">default</span>:
+<a name="l00093"></a>00093             <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
+<a name="l00094"></a>00094         }
+<a name="l00095"></a>00095     }
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097     <span class="comment">// Boost intrusive_ptr functions</span>
+<a name="l00098"></a><a class="code" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">00098</a>     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#a5e73ef0ad4e5614cea6c0c7514ccafaf">VOODOO_PUBLIC_FUNC</a> <a class="code" href="namespace_voodoo_shader.html#a608640121a4bb206a93b899c44aeb828">intrusive_ptr_add_ref</a>(<a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * obj)
+<a name="l00099"></a>00099     {
+<a name="l00100"></a>00100 <span class="preprocessor">#ifdef VOODOO_DEBUG_MEMORY</span>
+<a name="l00101"></a>00101 <span class="preprocessor"></span>        uint32_t refs = obj-&gt;AddRef();
+<a name="l00102"></a>00102         <span class="keywordflow">if</span> (obj &amp;&amp; obj-&gt;GetCore() &amp;&amp; obj-&gt;GetCore()-&gt;GetLogger())
+<a name="l00103"></a>00103         {
+<a name="l00104"></a>00104             obj-&gt;GetCore()-&gt;GetLogger()-&gt;Log(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b">LL_CoreError</a>, L<span class="stringliteral">&quot;VOODOO_DEBUG_MEMORY&quot;</span>, L<span class="stringliteral">&quot;intrusive_ptr_add_ref(%p) = %d&quot;</span>, obj, refs);
+<a name="l00105"></a>00105         }
+<a name="l00106"></a>00106 <span class="preprocessor">#else</span>
+<a name="l00107"></a>00107 <span class="preprocessor"></span>        obj-&gt;AddRef();
+<a name="l00108"></a>00108 <span class="preprocessor">#endif</span>
+<a name="l00109"></a>00109 <span class="preprocessor"></span>    }
+<a name="l00110"></a>00110 
+<a name="l00111"></a><a class="code" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">00111</a>     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#a5e73ef0ad4e5614cea6c0c7514ccafaf">VOODOO_PUBLIC_FUNC</a> <a class="code" href="namespace_voodoo_shader.html#aaa4ff3690b2b11a5a7faee0039a4c6db">intrusive_ptr_release</a>(<a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * obj)
+<a name="l00112"></a>00112     {
+<a name="l00113"></a>00113 <span class="preprocessor">#ifdef VOODOO_DEBUG_MEMORY</span>
+<a name="l00114"></a>00114 <span class="preprocessor"></span>        <span class="keywordflow">if</span> (obj &amp;&amp; obj-&gt;GetCore() &amp;&amp; obj-&gt;GetCore()-&gt;GetLogger())
+<a name="l00115"></a>00115         {
+<a name="l00116"></a>00116             obj-&gt;AddRef();
+<a name="l00117"></a>00117             uint32_t refs = obj-&gt;Release() - 1;
+<a name="l00118"></a>00118             obj-&gt;GetCore()-&gt;GetLogger()-&gt;Log(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b">LL_CoreError</a>, L<span class="stringliteral">&quot;VOODOO_DEBUG_MEMORY&quot;</span>, L<span class="stringliteral">&quot;intrusive_ptr_release(%p) = %d&quot;</span>, obj, refs);
+<a name="l00119"></a>00119         }
+<a name="l00120"></a>00120 <span class="preprocessor">#else</span>
+<a name="l00121"></a>00121 <span class="preprocessor"></span>        obj-&gt;Release();
+<a name="l00122"></a>00122 <span class="preprocessor">#endif</span>
+<a name="l00123"></a>00123 <span class="preprocessor"></span>    }
+<a name="l00124"></a>00124 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

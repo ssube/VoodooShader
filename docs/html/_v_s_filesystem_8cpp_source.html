@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -95,16 +95,16 @@
 <a name="l00026"></a>00026         m_Refs(0), m_Core(pCore)
 <a name="l00027"></a>00027     { }
 <a name="l00028"></a>00028 
-<a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a579c76589696d3886d1ebce60aa08d83">00029</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a579c76589696d3886d1ebce60aa08d83">VSFileSystem::~VSFileSystem</a>(<span class="keywordtype">void</span>)
+<a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a677e82ddbc4e54ef47535895c4dcb0d6">00029</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a677e82ddbc4e54ef47535895c4dcb0d6">VSFileSystem::~VSFileSystem</a>()
 <a name="l00030"></a>00030     { }
 <a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#aaddf58568ede9d6dec8b6b6883564c8b">00032</a>     uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#aaddf58568ede9d6dec8b6b6883564c8b" title="Add a reference to this object.">VSFileSystem::AddRef</a>()<span class="keyword"> const</span>
-<a name="l00033"></a>00033 <span class="keyword">    </span>{
+<a name="l00032"></a>00032     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSFileSystem::AddRef() CONST
+<a name="l00033"></a>00033     {
 <a name="l00034"></a>00034         <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a49f7b533f8efd40241e5da80aca42e83">m_Refs</a>);
 <a name="l00035"></a>00035     }
 <a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#aff837df4eee0072b803eceef5c734607">00037</a>     uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#aff837df4eee0072b803eceef5c734607" title="Release a reference from this object.">VSFileSystem::Release</a>()<span class="keyword"> const</span>
-<a name="l00038"></a>00038 <span class="keyword">    </span>{
+<a name="l00037"></a>00037     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSFileSystem::Release() CONST
+<a name="l00038"></a>00038     {
 <a name="l00039"></a>00039         <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a49f7b533f8efd40241e5da80aca42e83">m_Refs</a>) == 0)
 <a name="l00040"></a>00040         {
 <a name="l00041"></a>00041             <span class="keyword">delete</span> <span class="keyword">this</span>;
@@ -114,8 +114,8 @@
 <a name="l00045"></a>00045         }
 <a name="l00046"></a>00046     }
 <a name="l00047"></a>00047 
-<a name="l00048"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a0ac4783faa27b8965084b82f1c757f24">00048</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a0ac4783faa27b8965084b82f1c757f24" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSFileSystem::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
-<a name="l00049"></a>00049 <span class="keyword">    </span>{
+<a name="l00048"></a>00048     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSFileSystem::QueryInterface(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
+<a name="l00049"></a>00049     {
 <a name="l00050"></a>00050         <span class="keywordflow">if</span> (!ppOut)
 <a name="l00051"></a>00051         {
 <a name="l00052"></a>00052             <span class="keywordflow">if</span> (clsid.is_nil())
@@ -128,47 +128,47 @@
 <a name="l00059"></a>00059         } <span class="keywordflow">else</span> {
 <a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == IID_IObject)
 <a name="l00061"></a>00061             {
-<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IFileSystem) {
-<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IFileSystem*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSFileSystem) {
-<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html" title="Voodoo Shader null file system implementation.">VSFileSystem</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>VSFileSystem*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00067"></a>00067             } <span class="keywordflow">else</span> {
 <a name="l00068"></a>00068                 *ppOut = <span class="keyword">nullptr</span>;
 <a name="l00069"></a>00069                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00070"></a>00070             }
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">AddRef</a>();
+<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(*ppOut)-&gt;AddRef();
 <a name="l00073"></a>00073             <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00074"></a>00074         }
 <a name="l00075"></a>00075     }
 <a name="l00076"></a>00076 
-<a name="l00077"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#affd2e200c59471267494804a766a3e69">00077</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#affd2e200c59471267494804a766a3e69" title="Get the name of this object.">VSFileSystem::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00078"></a>00078 <span class="keyword">    </span>{
+<a name="l00077"></a>00077     String <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSFileSystem::ToString() CONST
+<a name="l00078"></a>00078     {
 <a name="l00079"></a>00079         <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSFileSystem()&quot;</span>;
 <a name="l00080"></a>00080     }
 <a name="l00081"></a>00081 
-<a name="l00082"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a159de384be7af91d1a06357e2c689587">00082</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a159de384be7af91d1a06357e2c689587" title="Get the core this object was associated with.">VSFileSystem::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00083"></a>00083 <span class="keyword">    </span>{
+<a name="l00082"></a>00082     ICore * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSFileSystem::GetCore() CONST
+<a name="l00083"></a>00083     {
 <a name="l00084"></a>00084         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#aaea4f3ea6900655d0f687899e14426be">m_Core</a>;
 <a name="l00085"></a>00085     }
 <a name="l00086"></a>00086 
-<a name="l00087"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a6882c784f822b8789ae3d384e75a55a6">00087</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a6882c784f822b8789ae3d384e75a55a6" title="Adds a directory to this file system&#39;s search path.">VSFileSystem::AddPath</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; dir)
+<a name="l00087"></a>00087     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSFileSystem::AddPath(_In_ <span class="keyword">const</span> String &amp; dir)
 <a name="l00088"></a>00088     {
 <a name="l00089"></a>00089         UNREFERENCED_PARAMETER(dir);
 <a name="l00090"></a>00090 
 <a name="l00091"></a>00091         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00092"></a>00092     }
 <a name="l00093"></a>00093 
-<a name="l00094"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a625c4550c3acf9876d5063e9b69d484f">00094</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a625c4550c3acf9876d5063e9b69d484f" title="Removes a directory from the search path, following the same rules as adding (adding a string then re...">VSFileSystem::RemovePath</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; dir)
+<a name="l00094"></a>00094     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSFileSystem::RemovePath(_In_ <span class="keyword">const</span> String &amp; dir)
 <a name="l00095"></a>00095     {
 <a name="l00096"></a>00096         UNREFERENCED_PARAMETER(dir);
 <a name="l00097"></a>00097 
 <a name="l00098"></a>00098         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00099"></a>00099     }
 <a name="l00100"></a>00100 
-<a name="l00101"></a><a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a8c26455831eaa9f533465d9fb1a44638">00101</a>     <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_file_system.html#a8c26455831eaa9f533465d9fb1a44638" title="Resolves a relative filename (usually just filename and extension, but may include directories) into ...">VSFileSystem::FindFile</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)<span class="keyword"> const</span>
-<a name="l00102"></a>00102 <span class="keyword">    </span>{
+<a name="l00101"></a>00101     IFile * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSFileSystem::FindFile(_In_ <span class="keyword">const</span> String &amp; name) CONST
+<a name="l00102"></a>00102     {
 <a name="l00103"></a>00103         UNREFERENCED_PARAMETER(name);
 <a name="l00104"></a>00104 
 <a name="l00105"></a>00105         <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;
@@ -179,7 +179,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

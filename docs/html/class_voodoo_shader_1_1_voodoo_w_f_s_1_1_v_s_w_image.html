@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -69,6 +69,7 @@
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">VoodooShader::VoodooWFS::VSWImage Class Reference<div class="ingroups"><a class="el" href="group__voodoo__module__wfilesystem.html">Voodoo/WFileSystem</a></div></div>  </div>
@@ -95,33 +96,39 @@
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image__coll__graph.png" border="0" usemap="#_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image_coll__map" alt="Collaboration graph"/></div>
 <map name="_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image_coll__map" id="_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image_coll__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access." alt="" coords="949,5,1102,32"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="611,37,767,64"/><area shape="rect" id="node6" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing." alt="" coords="947,57,1103,84"/><area shape="rect" id="node34" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="953,111,1098,137"/><area shape="rect" id="node9" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="931,165,1119,192"/><area shape="rect" id="node11" href="struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="574,211,805,237"/><area shape="rect" id="node13" href="struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; uint32_t \&gt;" alt="" coords="254,156,485,183"/><area shape="rect" id="node25" href="class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="951,331,1100,357"/><area shape="rect" id="node27" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="582,381,797,408"/><area shape="rect" id="node29" title="STL class." alt="" coords="325,381,414,408"/><area shape="rect" id="node31" title="STL class." alt="" coords="5,381,192,408"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access." alt="" coords="1125,475,1278,501"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="787,349,943,376"/><area shape="rect" id="node10" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing." alt="" coords="1123,120,1279,147"/><area shape="rect" id="node46" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1430,348,1575,375"/><area shape="rect" id="node52" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="1121,221,1282,248"/><area shape="rect" id="node16" href="class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="791,415,940,441"/><area shape="rect" id="node27" href="struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="750,595,981,621"/><area shape="rect" id="node29" href="struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; uint32_t \&gt;" alt="" coords="422,543,653,569"/><area shape="rect" id="node18" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="430,379,645,405"/><area shape="rect" id="node20" title="STL class." alt="" coords="243,379,333,405"/><area shape="rect" id="node22" title="STL class." alt="" coords="5,379,192,405"/><area shape="rect" id="node25" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="1107,660,1295,687"/><area shape="rect" id="node37" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture." alt="" coords="1403,597,1602,624"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">VSWImage</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *core, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, unsigned int image)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#gadaa973bf9b0016d6e8df49e9a2b97de3">~VSWImage</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#gaa60e92dcbbc1bc96c8c4e1a3f1d000f6">AddRef</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="group__voodoo__module__wfilesystem.html#gaa60e92dcbbc1bc96c8c4e1a3f1d000f6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga1e29d472d5bfa66fda53dda5ca369583">Release</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="group__voodoo__module__wfilesystem.html#ga1e29d472d5bfa66fda53dda5ca369583"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga35603c7551cae514b94357b647baf910">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="group__voodoo__module__wfilesystem.html#ga35603c7551cae514b94357b647baf910"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga28ad1f7b61f3e3e81b41da3c47196bfc">ToString</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="group__voodoo__module__wfilesystem.html#ga28ad1f7b61f3e3e81b41da3c47196bfc"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga4bb1ee52dd5e5a874b78bace8abf50f0">GetCore</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="group__voodoo__module__wfilesystem.html#ga4bb1ee52dd5e5a874b78bace8abf50f0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga3eda2df44210e73f5270c8979421c9da">GetPath</a> (void) const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#gad9fa9145e2095f580989597e40962824">GetDesc</a> (void) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves texture format data from the image.  <a href="group__voodoo__module__wfilesystem.html#gad9fa9145e2095f580989597e40962824"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga6fbd849da9e8c8be77a0185f3ce4b269">GetData</a> (const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> *pDesc, const uint32_t size, _In_opt_count_(size) void *const pBuffer) const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a portion of the texture data from the image.  <a href="group__voodoo__module__wfilesystem.html#ga6fbd849da9e8c8be77a0185f3ce4b269"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#gacd5d69f779fdff29c63864991ea23802">VSWImage</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *core, <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, unsigned int image)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga755c42f09237789cf89180d172c69ddc">~VSWImage</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#gaeae9e0f0c32467f3da366a66d7920139">VOODOO_METHODCALL_</a> (uint32_t, AddRef)() <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="group__voodoo__module__wfilesystem.html#gaeae9e0f0c32467f3da366a66d7920139"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#gabf86d679eb59617e55ceff50d913b4db">VOODOO_METHODCALL_</a> (uint32_t, Release)() <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="group__voodoo__module__wfilesystem.html#gabf86d679eb59617e55ceff50d913b4db"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga9da750e3d481fcb898d5ec6624055132">__declspec</a> (nothrow) bool __stdcall QueryInterface(<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="group__voodoo__module__wfilesystem.html#ga9da750e3d481fcb898d5ec6624055132"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga2623138a8176a7f44041972b56ed51f7">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this object.  <a href="group__voodoo__module__wfilesystem.html#ga2623138a8176a7f44041972b56ed51f7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga08d85aabb9194831bbcba7317de4940d">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *, GetCore)() <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="group__voodoo__module__wfilesystem.html#ga08d85aabb9194831bbcba7317de4940d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga55984e7064baf7824152001dfb5f1678">VOODOO_METHODCALL_</a> (<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, GetPath)() <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#gabd263d63b44569152b434ac697b62fde">VOODOO_METHODCALL_</a> (<a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a> *, GetDesc)() <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves texture format data from the image.  <a href="group__voodoo__module__wfilesystem.html#gabd263d63b44569152b434ac697b62fde"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga9ba96d905e033b05b9ddb7a5392a5801">_In_opt_count_</a> (<a class="el" href="group__voodoo__module__wfilesystem.html#ga755763ea4871e24c01c42601a7e38b3d">size</a>) void *<a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> pBuffer) <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#a2c95b1f4ee16de9b30d6ad325088302e">VOODOO_METHODCALL_</a> (uint32_t, GetData)(<a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> *<a class="el" href="group__voodoo__module__wfilesystem.html#gaeddeba4fe66e708069638199fc6d52e7">pDesc</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html">VSWImage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">Load</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html">VSWImage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga185ce54fc81b360ef06f88deaf63964d">Load</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore, <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name)</td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> void **ppOut&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#gaeddeba4fe66e708069638199fc6d52e7">pDesc</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a portion of the texture data from the image.  <a href="group__voodoo__module__wfilesystem.html#gaeddeba4fe66e708069638199fc6d52e7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> <a class="el" href="group__voodoo__module__wfilesystem.html#ga25a2f14e5d247eb96597d5432ddce6c1">const</a> uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga755763ea4871e24c01c42601a7e38b3d">size</a></td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__wfilesystem.html#ga71b051f1d1e6afe1a20233e9b4fdc587">m_Refs</a></td></tr>
@@ -139,7 +146,35 @@ Private Attributes</h2></td></tr>
 </dd></dl>
 
 <p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00208">208</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a2c95b1f4ee16de9b30d6ad325088302e"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWImage::VOODOO_METHODCALL_" ref="a2c95b1f4ee16de9b30d6ad325088302e" args="(uint32_t, GetData)(const TextureRegion *pDesc" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VoodooShader::IImage::VOODOO_METHODCALL_ </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GetData&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/Code/VoodooShader/Framework/Filesystem/<a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a></li>
 <li>D:/Code/VoodooShader/Framework/Filesystem/<a class="el" href="_file_system_8cpp_source.html">FileSystem.cpp</a></li>
 </ul>
@@ -147,7 +182,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-72-g17078d9</span>
+   &#160;<span id="projectnumber">framework-4.2-87-g30300eb</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -102,23 +102,23 @@
 <a name="l00033"></a>00033 
 <a name="l00034"></a>00034 <span class="keyword">namespace </span>VoodooShader
 <a name="l00035"></a>00035 {
-<a name="l00036"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aec76e49edd5dc773163f93b7add70c5a">00036</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aec76e49edd5dc773163f93b7add70c5a">VSParser::VSParser</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore) :
+<a name="l00036"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aff572873ce6d42ebbbd40adceb4d7b9f">00036</a>     <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aff572873ce6d42ebbbd40adceb4d7b9f">VSParser::VSParser</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore) :
 <a name="l00037"></a>00037         m_Refs(0), m_Core(pCore)
 <a name="l00038"></a>00038     { }
 <a name="l00039"></a>00039 
-<a name="l00040"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a9ae3f1ca032c9e55b518e259a9f421d1">00040</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a9ae3f1ca032c9e55b518e259a9f421d1">VSParser::~VSParser</a>(<span class="keywordtype">void</span>)
+<a name="l00040"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a7647860aaad8b540253f0322255932fb">00040</a>     <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a7647860aaad8b540253f0322255932fb">VSParser::~VSParser</a>()
 <a name="l00041"></a>00041     {
 <a name="l00042"></a>00042         <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a728b38bbff231448fc29c68d72d0687d">m_Variables</a>.clear();
 <a name="l00043"></a>00043         <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a84cd74abbe34a812eab1daac77d247a0">m_SysVariables</a>.clear();
 <a name="l00044"></a>00044     }
 <a name="l00045"></a>00045 
-<a name="l00046"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#adce115444a8c6c220210629e73eca3e6">00046</a>     uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#adce115444a8c6c220210629e73eca3e6" title="Add a reference to this object.">VSParser::AddRef</a>()<span class="keyword"> const</span>
-<a name="l00047"></a>00047 <span class="keyword">    </span>{
+<a name="l00046"></a>00046     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSParser::AddRef() CONST
+<a name="l00047"></a>00047     {
 <a name="l00048"></a>00048         <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a67f32dd3cd64cb90629a7b6ef3ab1dd0">m_Refs</a>);
 <a name="l00049"></a>00049     }
 <a name="l00050"></a>00050 
-<a name="l00051"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a8df7cb6118874d0a27c8bc492829ebbd">00051</a>     uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a8df7cb6118874d0a27c8bc492829ebbd" title="Release a reference from this object.">VSParser::Release</a>()<span class="keyword"> const</span>
-<a name="l00052"></a>00052 <span class="keyword">    </span>{
+<a name="l00051"></a>00051     uint32_t <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSParser::Release() CONST
+<a name="l00052"></a>00052     {
 <a name="l00053"></a>00053         <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a67f32dd3cd64cb90629a7b6ef3ab1dd0">m_Refs</a>) == 0)
 <a name="l00054"></a>00054         {
 <a name="l00055"></a>00055             <span class="keyword">delete</span> <span class="keyword">this</span>;
@@ -128,8 +128,8 @@
 <a name="l00059"></a>00059         }
 <a name="l00060"></a>00060     }
 <a name="l00061"></a>00061 
-<a name="l00062"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a74828c7d1f1c7070be66320218661f2a">00062</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a74828c7d1f1c7070be66320218661f2a" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSParser::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
-<a name="l00063"></a>00063 <span class="keyword">    </span>{
+<a name="l00062"></a>00062     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSParser::QueryInterface(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
+<a name="l00063"></a>00063     {
 <a name="l00064"></a>00064         <span class="keywordflow">if</span> (!ppOut)
 <a name="l00065"></a>00065         {
 <a name="l00066"></a>00066             <span class="keywordflow">if</span> (clsid.is_nil())
@@ -142,38 +142,38 @@
 <a name="l00073"></a>00073         } <span class="keywordflow">else</span> {
 <a name="l00074"></a>00074             <span class="keywordflow">if</span> (clsid == IID_IObject)
 <a name="l00075"></a>00075             {
-<a name="l00076"></a>00076                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00076"></a>00076                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00077"></a>00077             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == IID_IParser) {
-<a name="l00078"></a>00078                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00078"></a>00078                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IParser*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00079"></a>00079             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSParser) {
-<a name="l00080"></a>00080                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html">VSParser</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00080"></a>00080                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>VSParser*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00081"></a>00081             } <span class="keywordflow">else</span> {
 <a name="l00082"></a>00082                 *ppOut = <span class="keyword">nullptr</span>;
 <a name="l00083"></a>00083                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00084"></a>00084             }
 <a name="l00085"></a>00085 
-<a name="l00086"></a>00086             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a9f559817ef146aeba69415672e7c4b33" title="Add a reference to this object.">AddRef</a>();
+<a name="l00086"></a>00086             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(*ppOut)-&gt;AddRef();
 <a name="l00087"></a>00087             <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00088"></a>00088         }
 <a name="l00089"></a>00089     }
 <a name="l00090"></a>00090 
-<a name="l00091"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af172675890795a3b270a229cd4584bbd">00091</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af172675890795a3b270a229cd4584bbd" title="Get the name of this object.">VSParser::ToString</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00092"></a>00092 <span class="keyword">    </span>{
+<a name="l00091"></a>00091     String <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSParser::ToString() CONST
+<a name="l00092"></a>00092     {
 <a name="l00093"></a>00093         <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSParser()&quot;</span>;
 <a name="l00094"></a>00094     }
 <a name="l00095"></a>00095 
-<a name="l00096"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#abb5de799ac889c0d4a1967413a6b2274">00096</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#abb5de799ac889c0d4a1967413a6b2274" title="Get the core this object was associated with.">VSParser::GetCore</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00097"></a>00097 <span class="keyword">    </span>{
+<a name="l00096"></a>00096     ICore * <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSParser::GetCore() CONST
+<a name="l00097"></a>00097     {
 <a name="l00098"></a>00098         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>;
 <a name="l00099"></a>00099     }
 <a name="l00100"></a>00100 
-<a name="l00101"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a6d59e504021c344b1af99974e47f508e">00101</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a6d59e504021c344b1af99974e47f508e" title="Adds a variable to the internal dictionary.">VSParser::Add</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; value, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> Type)
+<a name="l00101"></a>00101     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSParser::Add(_In_ <span class="keyword">const</span> String &amp; name, _In_ <span class="keyword">const</span> String &amp; value, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> Type)
 <a name="l00102"></a>00102     {
-<a name="l00103"></a>00103         <a class="code" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>();
+<a name="l00103"></a>00103         <a class="code" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>-&gt;GetLogger();
 <a name="l00104"></a>00104 
 <a name="l00105"></a>00105         <span class="keywordflow">if</span> (logger)
 <a name="l00106"></a>00106         {
-<a name="l00107"></a>00107             logger-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00107"></a>00107             logger-&gt;Log
 <a name="l00108"></a>00108             (
 <a name="l00109"></a>00109                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa6de8f5e5091e63eac05776ecae8ea8d8">LL_CoreDebug</a>,
 <a name="l00110"></a>00110                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -183,7 +183,7 @@
 <a name="l00114"></a>00114             );
 <a name="l00115"></a>00115         }
 <a name="l00116"></a>00116 
-<a name="l00117"></a>00117         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> finalname = this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aa44f867485c29de0541ea2e265b1ed0c" title="Parses a string, replacing any variables with their values.">Parse</a>(name);
+<a name="l00117"></a>00117         String finalname = this-&gt;Parse(name);
 <a name="l00118"></a>00118 
 <a name="l00119"></a>00119         <span class="keywordflow">if</span> (Type == <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080">VT_System</a>)
 <a name="l00120"></a>00120         {
@@ -191,7 +191,7 @@
 <a name="l00122"></a>00122 
 <a name="l00123"></a>00123             <span class="keywordflow">if</span> (varIter == <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a84cd74abbe34a812eab1daac77d247a0">m_SysVariables</a>.end())
 <a name="l00124"></a>00124             {
-<a name="l00125"></a>00125                 <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a84cd74abbe34a812eab1daac77d247a0">m_SysVariables</a>[finalname] = value;
+<a name="l00125"></a>00125                 <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a84cd74abbe34a812eab1daac77d247a0">m_SysVariables</a>[finalname] = <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a49020abe4a6abbc03ca9a7cc035e8564">value</a>;
 <a name="l00126"></a>00126             }
 <a name="l00127"></a>00127             <span class="keywordflow">else</span>
 <a name="l00128"></a>00128             {
@@ -202,27 +202,27 @@
 <a name="l00133"></a>00133                         <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa375468e182c0cec3dd68417f34cfa6fc">LL_CoreWarn</a>,
 <a name="l00134"></a>00134                         <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
 <a name="l00135"></a>00135                         L<span class="stringliteral">&quot;Unable to add duplicate system variable \&quot;%s\&quot;.&quot;</span>,
-<a name="l00136"></a>00136                         finalname.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>()
+<a name="l00136"></a>00136                         finalname.GetData()
 <a name="l00137"></a>00137                     );
 <a name="l00138"></a>00138                 }
 <a name="l00139"></a>00139             }
 <a name="l00140"></a>00140         }
 <a name="l00141"></a>00141         <span class="keywordflow">else</span>
 <a name="l00142"></a>00142         {
-<a name="l00143"></a>00143             <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a728b38bbff231448fc29c68d72d0687d">m_Variables</a>[finalname] = value;
+<a name="l00143"></a>00143             <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a728b38bbff231448fc29c68d72d0687d">m_Variables</a>[finalname] = <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a49020abe4a6abbc03ca9a7cc035e8564">value</a>;
 <a name="l00144"></a>00144         }
 <a name="l00145"></a>00145     }
 <a name="l00146"></a>00146 
-<a name="l00147"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aad66047560415174566cf0029e12790a">00147</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aad66047560415174566cf0029e12790a" title="Removes a variable from the internal dictionary.">VSParser::Remove</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)
+<a name="l00147"></a>00147     <span class="keywordtype">void</span> <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSParser::Remove(_In_ <span class="keyword">const</span> String &amp; name)
 <a name="l00148"></a>00148     {
-<a name="l00149"></a>00149         <a class="code" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>();
+<a name="l00149"></a>00149         <a class="code" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>-&gt;GetLogger();
 <a name="l00150"></a>00150 
 <a name="l00151"></a>00151         <span class="keywordflow">if</span> (logger)
 <a name="l00152"></a>00152         {
-<a name="l00153"></a>00153             <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa6de8f5e5091e63eac05776ecae8ea8d8">LL_CoreDebug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Removing variable \&quot;%s\&quot;.&quot;</span>, name.GetData());
+<a name="l00153"></a>00153             <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>-&gt;GetLogger()-&gt;Log(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa6de8f5e5091e63eac05776ecae8ea8d8">LL_CoreDebug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Removing variable \&quot;%s\&quot;.&quot;</span>, name.GetData());
 <a name="l00154"></a>00154         }
 <a name="l00155"></a>00155 
-<a name="l00156"></a>00156         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> finalname = this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aa44f867485c29de0541ea2e265b1ed0c" title="Parses a string, replacing any variables with their values.">Parse</a>(name, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>);
+<a name="l00156"></a>00156         String finalname = this-&gt;Parse(name, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>);
 <a name="l00157"></a>00157         Dictionary::iterator varIter = <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a728b38bbff231448fc29c68d72d0687d">m_Variables</a>.find(finalname);
 <a name="l00158"></a>00158 
 <a name="l00159"></a>00159         <span class="keywordflow">if</span> (varIter != <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a728b38bbff231448fc29c68d72d0687d">m_Variables</a>.end())
@@ -231,20 +231,20 @@
 <a name="l00162"></a>00162         }
 <a name="l00163"></a>00163     }
 <a name="l00164"></a>00164 
-<a name="l00165"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aa44f867485c29de0541ea2e265b1ed0c">00165</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#aa44f867485c29de0541ea2e265b1ed0c" title="Parses a string, replacing any variables with their values.">VSParser::Parse</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags)<span class="keyword"> const</span>
-<a name="l00166"></a>00166 <span class="keyword">    </span>{
+<a name="l00165"></a>00165     String <a class="code" href="_includes_8hpp.html#ac07c01dff8d7c9cf88a3724a1abb0150">VOODOO_METHODCALLTYPE</a> VSParser::Parse(_In_ <span class="keyword">const</span> String &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags) CONST
+<a name="l00166"></a>00166     {
 <a name="l00167"></a>00167         <a class="code" href="namespace_voodoo_shader.html#ab233b988f3f2fc0bb99d9a043f7618bf">Dictionary</a> parseState;
 <a name="l00168"></a>00168 
-<a name="l00169"></a>00169         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a1cabbdd2d52200091bd04cc702c75f6b">ParseStringRaw</a>(input, flags, 0, parseState);
+<a name="l00169"></a>00169         <span class="keywordflow">return</span> this-&gt;ParseStringRaw(input, flags, 0, parseState);
 <a name="l00170"></a>00170     }
 <a name="l00171"></a>00171 
-<a name="l00172"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a1cabbdd2d52200091bd04cc702c75f6b">00172</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a1cabbdd2d52200091bd04cc702c75f6b">VSParser::ParseStringRaw</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> input, _In_ <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags, _In_ uint32_t depth, _In_ <a class="code" href="namespace_voodoo_shader.html#ab233b988f3f2fc0bb99d9a043f7618bf">Dictionary</a> &amp; state)<span class="keyword"> const</span>
-<a name="l00173"></a>00173 <span class="keyword">    </span>{
-<a name="l00174"></a>00174         <a class="code" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger(<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>());
+<a name="l00172"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a1cabbdd2d52200091bd04cc702c75f6b">00172</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a1cabbdd2d52200091bd04cc702c75f6b">VSParser::ParseStringRaw</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> input, _In_ <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags, _In_ uint32_t depth, _In_ <a class="code" href="namespace_voodoo_shader.html#ab233b988f3f2fc0bb99d9a043f7618bf">Dictionary</a> &amp; state) CONST
+<a name="l00173"></a>00173     {
+<a name="l00174"></a>00174         <a class="code" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger(m_Core-&gt;GetLogger());
 <a name="l00175"></a>00175 
 <a name="l00176"></a>00176         <span class="keywordflow">if</span> (logger)
 <a name="l00177"></a>00177         {
-<a name="l00178"></a>00178             <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#abffd2e3463412b6a15ae075f25657f82" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa6de8f5e5091e63eac05776ecae8ea8d8">LL_CoreDebug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Parsing string \&quot;%s\&quot; (%X).&quot;</span>, input.GetData(), flags);
+<a name="l00178"></a>00178             m_Core-&gt;GetLogger()-&gt;Log(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa6de8f5e5091e63eac05776ecae8ea8d8">LL_CoreDebug</a>, <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Parsing string \&quot;%s\&quot; (%X).&quot;</span>, input.GetData(), flags);
 <a name="l00179"></a>00179         }
 <a name="l00180"></a>00180 
 <a name="l00181"></a>00181         <span class="keywordflow">if</span> (depth &gt; <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a368b2f3418cb6e261acea0292b2a08cd">VSParser::VarMaxDepth</a> || input.GetLength() &lt; 3)
@@ -311,10 +311,10 @@
 <a name="l00242"></a>00242                 <span class="comment">// State set, handle</span>
 <a name="l00243"></a>00243                 <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> newvalue = varname.<a class="code" href="group__voodoo__utility__string__part.html#gab3d0052d81f6261c897227c3d435a6c6">Substr</a>(statepos + 1);
 <a name="l00244"></a>00244 
-<a name="l00245"></a>00245                 newvalue = this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a1cabbdd2d52200091bd04cc702c75f6b">ParseStringRaw</a>(newvalue, flags, ++depth, state);
+<a name="l00245"></a>00245                 newvalue = this-&gt;ParseStringRaw(newvalue, flags, ++depth, state);
 <a name="l00246"></a>00246 
 <a name="l00247"></a>00247                 varname = varname.<a class="code" href="group__voodoo__utility__string__part.html#gab3d0052d81f6261c897227c3d435a6c6">Substr</a>(0, statepos);
-<a name="l00248"></a>00248                 varname = this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a1cabbdd2d52200091bd04cc702c75f6b">ParseStringRaw</a>(varname, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>, ++depth, state);
+<a name="l00248"></a>00248                 varname = this-&gt;ParseStringRaw(varname, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>, ++depth, state);
 <a name="l00249"></a>00249 
 <a name="l00250"></a>00250                 state[varname] = newvalue;
 <a name="l00251"></a>00251 
@@ -342,14 +342,14 @@
 <a name="l00273"></a>00273             }
 <a name="l00274"></a>00274 
 <a name="l00275"></a>00275             <span class="comment">// Properly format the variable name</span>
-<a name="l00276"></a>00276             varname = this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a1cabbdd2d52200091bd04cc702c75f6b">ParseStringRaw</a>(varname, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>, ++depth, state).<a class="code" href="group__voodoo__utility__string__case.html#ga9a7485bc203169dff80e75e9f62cc34f">ToLower</a>();
+<a name="l00276"></a>00276             varname = this-&gt;ParseStringRaw(varname, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>, ++depth, state).<a class="code" href="group__voodoo__utility__string__case.html#ga9a7485bc203169dff80e75e9f62cc34f">ToLower</a>();
 <a name="l00277"></a>00277 
 <a name="l00278"></a>00278             <span class="comment">// Lookup and replace the variable</span>
 <a name="l00279"></a>00279             <span class="keywordtype">bool</span> foundvar = <span class="keyword">true</span>;
 <a name="l00280"></a>00280             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> varvalue;
-<a name="l00281"></a>00281             Dictionary::const_iterator variter = <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a84cd74abbe34a812eab1daac77d247a0">m_SysVariables</a>.find(varname);
+<a name="l00281"></a>00281             Dictionary::const_iterator variter = m_SysVariables.find(varname);
 <a name="l00282"></a>00282 
-<a name="l00283"></a>00283             <span class="keywordflow">if</span> (variter != <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a84cd74abbe34a812eab1daac77d247a0">m_SysVariables</a>.end())
+<a name="l00283"></a>00283             <span class="keywordflow">if</span> (variter != m_SysVariables.end())
 <a name="l00284"></a>00284             {
 <a name="l00285"></a>00285                 varvalue = variter-&gt;second;
 <a name="l00286"></a>00286             } <span class="keywordflow">else</span> {
@@ -358,8 +358,8 @@
 <a name="l00289"></a>00289                 {
 <a name="l00290"></a>00290                     varvalue = variter-&gt;second;
 <a name="l00291"></a>00291                 } <span class="keywordflow">else</span> {
-<a name="l00292"></a>00292                     variter = <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a728b38bbff231448fc29c68d72d0687d">m_Variables</a>.find(varname);
-<a name="l00293"></a>00293                     <span class="keywordflow">if</span> (variter != <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a728b38bbff231448fc29c68d72d0687d">m_Variables</a>.end())
+<a name="l00292"></a>00292                     variter = m_Variables.find(varname);
+<a name="l00293"></a>00293                     <span class="keywordflow">if</span> (variter != m_Variables.end())
 <a name="l00294"></a>00294                     {
 <a name="l00295"></a>00295                         varvalue = variter-&gt;second;
 <a name="l00296"></a>00296                     } <span class="keywordflow">else</span> {
@@ -384,7 +384,7 @@
 <a name="l00315"></a>00315             output &lt;&lt; iteration.<a class="code" href="group__voodoo__utility__string__part.html#gab3d0052d81f6261c897227c3d435a6c6">Substr</a>(0, startpos - 1).<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>();
 <a name="l00316"></a>00316             <span class="keywordflow">if</span> (parse &amp;&amp; varvalue.<a class="code" href="class_voodoo_shader_1_1_string.html#a92f3b00c8de76b730d59d8b8f3f2b4f7">GetLength</a>() &gt; 0)
 <a name="l00317"></a>00317             {
-<a name="l00318"></a>00318                 output &lt;&lt; this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a1cabbdd2d52200091bd04cc702c75f6b">ParseStringRaw</a>(varvalue, flags, ++depth, state).<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>();
+<a name="l00318"></a>00318                 output &lt;&lt; this-&gt;ParseStringRaw(varvalue, flags, ++depth, state).GetData();
 <a name="l00319"></a>00319             }
 <a name="l00320"></a>00320             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!foundvar &amp;&amp; !supress)
 <a name="l00321"></a>00321             {
@@ -516,7 +516,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 22 2011 06:49:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2011 02:22:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

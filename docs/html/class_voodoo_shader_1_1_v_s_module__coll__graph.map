@@ -1,6 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_i_module.html" title="IModule" alt="" coords="300,5,367,32"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="6,73,162,100"/>
-<area shape="rect" id="node18" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="261,119,406,145"/>
-<area shape="rect" id="node8" href="$struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status." alt="" coords="254,229,413,256"/>
+<area shape="rect" id="node2" href="$class_i_module.html" title="IModule" alt="" coords="1189,228,1256,255"/>
+<area shape="rect" id="node6" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="491,455,647,481"/>
+<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1150,531,1295,557"/>
+<area shape="rect" id="node39" href="$class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="833,404,994,431"/>
+<area shape="rect" id="node30" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="454,288,685,315"/>
+<area shape="rect" id="node32" href="$struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; uint32_t \&gt;" alt="" coords="137,288,367,315"/>
+<area shape="rect" id="node13" href="$struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status." alt="" coords="834,143,993,169"/>
+<area shape="rect" id="node28" href="$struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="819,316,1007,343"/>
 </map>
