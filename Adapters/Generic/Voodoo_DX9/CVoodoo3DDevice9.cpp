@@ -180,8 +180,8 @@ namespace VoodooShader
                     logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to set render target.");
                 }
 
-                VoodooShader::ITechnique* tech = testShader->GetDefaultTechnique();
-                VoodooShader::IPass* pass = tech->GetPass(0);
+                VoodooShader::ITechniqueRef tech = testShader->GetDefaultTechnique();
+                VoodooShader::IPassRef pass = tech->GetPass(0);
 
                 adapter->SetPass(pass);
 

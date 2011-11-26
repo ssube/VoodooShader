@@ -63,7 +63,9 @@ namespace VoodooShader
             cgSetEffectName(m_CgEffect, &buffer[0]);
         }
 
+        ++this->m_Refs;
         this->Link();
+        --this->m_Refs;
     }
 
     VSShader::~VSShader()

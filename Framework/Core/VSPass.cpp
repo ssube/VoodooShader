@@ -50,8 +50,10 @@ namespace VoodooShader
         } else {
             m_Name += String::Format(L"pass_%p", m_CgPass);
         }
-
+        
+        ++this->m_Refs;
         this->Link();
+        --this->m_Refs;
     }
 
     VOODOO_METHODCALLTYPE VSPass::~VSPass()

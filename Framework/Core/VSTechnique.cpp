@@ -45,8 +45,10 @@ namespace VoodooShader
         } else {
             m_Name += String::Format(L"tech_%p", m_CgTechnique);
         }
-
+        
+        ++this->m_Refs;
         this->Link();
+        --this->m_Refs;
     }
 
     VOODOO_METHODCALLTYPE VSTechnique::~VSTechnique()
@@ -208,7 +210,7 @@ namespace VoodooShader
             // Insert the pass into the vector
             try
             {
-                IPass * pass = new VSPass(this, cPass);
+                IPassRef pass = new VSPass(this, cPass);
 
                 m_Passes.push_back(pass);
             } catch (const std::exception & exc) {
