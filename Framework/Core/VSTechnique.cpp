@@ -45,6 +45,8 @@ namespace VoodooShader
         } else {
             m_Name += String::Format(L"tech_%p", m_CgTechnique);
         }
+
+        this->Link();
     }
 
     VOODOO_METHODCALLTYPE VSTechnique::~VSTechnique()
