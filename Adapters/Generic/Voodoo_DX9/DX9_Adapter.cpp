@@ -317,7 +317,7 @@ namespace VoodooShader
             {
                 const char * error = cgD3D9TranslateHRESULT(hr);
 
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Error creating texture %s: %s", name, error);
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Error creating texture %s: %S", name.GetData(), error);
                 return nullptr;
             }
 
@@ -327,7 +327,12 @@ namespace VoodooShader
         bool DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
         {
             //! @todom Load texture data into memory.
-            return this->CreateTexture(pFile->GetPath(), reinterpret_cast<const TextureDesc *>(pRegion), pTexture);
+            if (pRegion)
+            {
+                return this->CreateTexture(pFile->GetPath(), reinterpret_cast<const TextureDesc *>(pRegion), pTexture);
+            } else {
+                return false;
+            }
         }
 
         bool DX9Adapter::DrawGeometry
@@ -443,30 +448,53 @@ namespace VoodooShader
 
         Variant DX9Adapter::GetProperty(_In_ const wchar_t * property) const
         {
+            UNREFERENCED_PARAMETER(property);
+
             Variant retVar = {UT_None, nullptr};
             return retVar;
         }
 
         bool DX9Adapter::ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture)
         {
-            if (Converter::ToParameterCategory(pParam->GetType()) == PC_Sampler)
+            if (!pParam)
             {
-                IDirect3DTexture9 * texObj = reinterpret_cast<IDirect3DTexture9 *>(pTexture->GetData());
+                return false;
+            }
+            else if (Converter::ToParameterCategory(pParam->GetType()) == PC_Sampler)
+            {
+                IDirect3DTexture9 * texObj = nullptr;
+
+                if (pTexture)
+                {
+                    texObj = reinterpret_cast<IDirect3DTexture9 *>(pTexture->GetData());
+                    m_Core->GetLogger()->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Binding texture %s to parameter %s.", pTexture->GetName().GetData(), pParam->GetName().GetData());
+                } else {
+                    m_Core->GetLogger()->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Binding null texture to parameter %s.", pParam->GetName().GetData());
+                }
+
                 CGparameter texParam = pParam->GetCgParameter();
 
-                cgD3D9SetTextureParameter(texParam, texObj);
-                m_Core->GetLogger()->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Bound texture %s to parameter %s.\n", pTexture->GetName().GetData(), pParam->GetName().GetData());
-                return true;
+                if (cgIsParameter(texParam))
+                {
+                    cgD3D9SetTextureParameter(texParam, texObj);
+                    return true;
+                } else {
+
+                }
+
             }
             else
             {
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Invalid texture binding, parameter %s is not a sampler.\n", pParam->GetName().GetData());
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Invalid texture binding, parameter %s is not a sampler.", pParam->GetName().GetData());
                 return false;
             }
         }
 
         bool DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error)
         {
+            UNREFERENCED_PARAMETER(pContext);
+            UNREFERENCED_PARAMETER(error);
+
             //! @todo Handle errors as needed.
             return false;
         }

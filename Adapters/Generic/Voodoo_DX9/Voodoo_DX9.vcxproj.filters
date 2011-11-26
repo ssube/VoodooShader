@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DX9_Adapter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DX9_Module.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="IVoodoo3D9.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="IVoodoo3DDevice9.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DX9_Adapter.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DX9_Converter.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DX9_Module.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DX9_Version.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3D9.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3DDevice9.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{601f9044-5431-4ad9-bebf-9d9cfa3fe867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{548d2ac9-a900-49d9-832c-421996072154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{f6c9bb64-0b54-495e-9a3a-7126a5101697}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Voodoo_DX9.def">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Voodoo_DX9.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

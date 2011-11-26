@@ -185,7 +185,7 @@ namespace VoodooShader
 
                 adapter->SetPass(pass);
 
-                adapter->DrawGeometry(4, nullptr);
+                adapter->DrawGeometry(4, (VertexStruct*)gpFSQuadVerts, VF_Buffer);
 
                 adapter->SetPass();
             }
