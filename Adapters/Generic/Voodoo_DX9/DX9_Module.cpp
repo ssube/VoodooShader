@@ -23,10 +23,8 @@
 #include "DX9_Adapter.hpp"
 #include "DX9_Version.hpp"
 
-VoodooShader::ICore * gpVoodooCore = nullptr;
-
-VoodooShader::VoodooDX9::IVoodoo3D9 * VoodooObject = nullptr;
-VoodooShader::VoodooDX9::IVoodoo3DDevice9 * VoodooDevice = nullptr;
+VoodooShader::ICoreRef gpVoodooCore = nullptr;
+VoodooShader::ILoggerRef gpVoodooLogger = nullptr;
 
 VoodooShader::IShader* testShader;
 

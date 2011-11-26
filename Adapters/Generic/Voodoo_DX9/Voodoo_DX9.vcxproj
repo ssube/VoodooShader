@@ -75,25 +75,25 @@
   <ItemGroup>
     <ClCompile Include="DX9_Adapter.cpp" />
     <ClCompile Include="DX9_Module.cpp" />
-    <ClCompile Include="IVoodoo3D8.cpp" />
-    <ClCompile Include="IVoodoo3D9.cpp" />
-    <ClCompile Include="IVoodoo3DDevice8.cpp" />
-    <ClCompile Include="IVoodoo3DDevice9.cpp" />
-    <ClCompile Include="IVoodoo3DTexture8.cpp" />
-    <ClCompile Include="IVoodoo3DSurface8.cpp" />
+    <ClCompile Include="CVoodoo3D8.cpp" />
+    <ClCompile Include="CVoodoo3D9.cpp" />
+    <ClCompile Include="CVoodoo3DDevice8.cpp" />
+    <ClCompile Include="CVoodoo3DDevice9.cpp" />
+    <ClCompile Include="CVoodoo3DTexture8.cpp" />
+    <ClCompile Include="CVoodoo3DSurface8.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp" />
     <ClInclude Include="DX9_Converter.hpp" />
     <ClInclude Include="DX9_Module.hpp" />
     <ClInclude Include="DX9_Version.hpp" />
-    <ClInclude Include="DX8_Defs.hpp" />
-    <ClInclude Include="IVoodoo3D8.hpp" />
-    <ClInclude Include="IVoodoo3D9.hpp" />
-    <ClInclude Include="IVoodoo3DDevice8.hpp" />
-    <ClInclude Include="IVoodoo3DDevice9.hpp" />
-    <ClInclude Include="IVoodoo3DSurface8.hpp" />
-    <ClInclude Include="IVoodoo3DTexture8.hpp" />
+    <ClInclude Include="DX8_ThinHeader.hpp" />
+    <ClInclude Include="CVoodoo3D8.hpp" />
+    <ClInclude Include="CVoodoo3D9.hpp" />
+    <ClInclude Include="CVoodoo3DDevice8.hpp" />
+    <ClInclude Include="CVoodoo3DDevice9.hpp" />
+    <ClInclude Include="CVoodoo3DSurface8.hpp" />
+    <ClInclude Include="CVoodoo3DTexture8.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

@@ -25,12 +25,12 @@ namespace VoodooShader
 {
     namespace VoodooDX9
     {
-        class IVoodoo3DDevice9 :
+        class CVoodoo3DDevice9 :
             public IDirect3DDevice9
         {
         public:
-            IVoodoo3DDevice9(IDirect3D9 * pVoodooObject, IDirect3DDevice9 * pRealDevice);
-            virtual ~IVoodoo3DDevice9();
+            CVoodoo3DDevice9(IDirect3D9 * pVoodooObject, IDirect3DDevice9 * pRealDevice);
+            virtual ~CVoodoo3DDevice9();
 
             /* IUnknown methods */
             STDMETHOD(QueryInterface)(THIS_ REFIID riid, void **ppvObj);

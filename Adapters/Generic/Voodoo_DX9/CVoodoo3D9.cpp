@@ -19,9 +19,9 @@
  */
 #pragma once
 
-#include "IVoodoo3D9.hpp"
+#include "CVoodoo3D9.hpp"
 
-#include "IVoodoo3DDevice9.hpp"
+#include "CVoodoo3DDevice9.hpp"
 
 #include "DX9_Adapter.hpp"
 #include "DX9_Version.hpp"
@@ -30,31 +30,31 @@ namespace VoodooShader
 {
     namespace VoodooDX9
     {
-        IVoodoo3D9::IVoodoo3D9(IDirect3D9 * pD3D) :
-            m_RealObj(pD3D)
+        CVoodoo3D9::CVoodoo3D9(IDirect3D9 * pD3D) :
+            m_RealObject(pD3D)
         { }
 
-        IVoodoo3D9::~IVoodoo3D9()
+        CVoodoo3D9::~CVoodoo3D9()
         {
-            m_RealObj = nullptr;
+            m_RealObject = nullptr;
         }
 
         /**
          * IUnknown methods
          */
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::QueryInterface(REFIID riid, void **ppvObj)
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::QueryInterface(REFIID riid, void **ppvObj)
         { 
-            return m_RealObj->QueryInterface(riid, ppvObj);
+            return m_RealObject->QueryInterface(riid, ppvObj);
         }
 
-        ULONG STDMETHODCALLTYPE IVoodoo3D9::AddRef() 
+        ULONG STDMETHODCALLTYPE CVoodoo3D9::AddRef() 
         { 
-            return m_RealObj->AddRef(); 
+            return m_RealObject->AddRef(); 
         }
 
-        ULONG STDMETHODCALLTYPE IVoodoo3D9::Release()
+        ULONG STDMETHODCALLTYPE CVoodoo3D9::Release()
         {
-            ULONG count = m_RealObj->Release();
+            ULONG count = m_RealObject->Release();
 
             if (count == 0)
             {
@@ -67,37 +67,37 @@ namespace VoodooShader
         /**
          * IDirect3D9 methods
          */
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::RegisterSoftwareDevice(void * pInitializeFunction)
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::RegisterSoftwareDevice(void * pInitializeFunction)
         {
-            return m_RealObj->RegisterSoftwareDevice(pInitializeFunction);
+            return m_RealObject->RegisterSoftwareDevice(pInitializeFunction);
         }
 
-        UINT STDMETHODCALLTYPE IVoodoo3D9::GetAdapterCount() 
+        UINT STDMETHODCALLTYPE CVoodoo3D9::GetAdapterCount() 
         { 
-            return m_RealObj->GetAdapterCount(); 
+            return m_RealObject->GetAdapterCount(); 
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::GetAdapterIdentifier(UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER9 *pIdentifier)
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::GetAdapterIdentifier(UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER9 *pIdentifier)
         {
-            return m_RealObj->GetAdapterIdentifier(Adapter, Flags, pIdentifier);
+            return m_RealObject->GetAdapterIdentifier(Adapter, Flags, pIdentifier);
         }
 
-        UINT STDMETHODCALLTYPE IVoodoo3D9::GetAdapterModeCount(UINT Adapter, D3DFORMAT Format)
+        UINT STDMETHODCALLTYPE CVoodoo3D9::GetAdapterModeCount(UINT Adapter, D3DFORMAT Format)
         {
-            return m_RealObj->GetAdapterModeCount(Adapter, Format);
+            return m_RealObject->GetAdapterModeCount(Adapter, Format);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::EnumAdapterModes(UINT Adapter, D3DFORMAT Format, UINT Mode, D3DDISPLAYMODE *pMode)
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::EnumAdapterModes(UINT Adapter, D3DFORMAT Format, UINT Mode, D3DDISPLAYMODE *pMode)
         {
-            return m_RealObj->EnumAdapterModes(Adapter, Format, Mode, pMode);
+            return m_RealObject->EnumAdapterModes(Adapter, Format, Mode, pMode);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::GetAdapterDisplayMode(UINT Adapter, D3DDISPLAYMODE *pMode)
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::GetAdapterDisplayMode(UINT Adapter, D3DDISPLAYMODE *pMode)
         {
-            return m_RealObj->GetAdapterDisplayMode(Adapter, pMode);
+            return m_RealObject->GetAdapterDisplayMode(Adapter, pMode);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::CheckDeviceType
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::CheckDeviceType
         (
             UINT Adapter,
             D3DDEVTYPE DevType,
@@ -106,10 +106,10 @@ namespace VoodooShader
             BOOL bWindowed
         )
         {
-            return m_RealObj->CheckDeviceType(Adapter, DevType, AdapterFormat, BackBufferFormat, bWindowed);
+            return m_RealObject->CheckDeviceType(Adapter, DevType, AdapterFormat, BackBufferFormat, bWindowed);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::CheckDeviceFormat
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::CheckDeviceFormat
         (
             UINT Adapter,
             D3DDEVTYPE DeviceType,
@@ -119,10 +119,10 @@ namespace VoodooShader
             D3DFORMAT CheckFormat
         )
         {
-            return m_RealObj->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
+            return m_RealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::CheckDeviceMultiSampleType
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::CheckDeviceMultiSampleType
         (
             UINT Adapter,
             D3DDEVTYPE DeviceType,
@@ -132,7 +132,7 @@ namespace VoodooShader
             DWORD *pQualityLevels
         )
         {
-            return m_RealObj->CheckDeviceMultiSampleType
+            return m_RealObject->CheckDeviceMultiSampleType
             (
                 Adapter,
                 DeviceType,
@@ -143,7 +143,7 @@ namespace VoodooShader
             );
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::CheckDepthStencilMatch
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::CheckDepthStencilMatch
         (
             UINT Adapter,
             D3DDEVTYPE DeviceType,
@@ -152,7 +152,7 @@ namespace VoodooShader
             D3DFORMAT DepthStencilFormat
         )
         {
-            return m_RealObj->CheckDepthStencilMatch
+            return m_RealObject->CheckDepthStencilMatch
             (
                 Adapter,
                 DeviceType,
@@ -162,7 +162,7 @@ namespace VoodooShader
             );
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::CheckDeviceFormatConversion
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::CheckDeviceFormatConversion
         (
             UINT Adapter,
             D3DDEVTYPE DeviceType,
@@ -170,20 +170,20 @@ namespace VoodooShader
             D3DFORMAT TargetFormat
         )
         {
-            return m_RealObj->CheckDeviceFormatConversion(Adapter, DeviceType, SourceFormat, TargetFormat);
+            return m_RealObject->CheckDeviceFormatConversion(Adapter, DeviceType, SourceFormat, TargetFormat);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::GetDeviceCaps(UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS9 *pCaps)
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::GetDeviceCaps(UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS9 *pCaps)
         {
-            return m_RealObj->GetDeviceCaps(Adapter, DeviceType, pCaps);
+            return m_RealObject->GetDeviceCaps(Adapter, DeviceType, pCaps);
         }
 
-        HMONITOR STDMETHODCALLTYPE IVoodoo3D9::GetAdapterMonitor(UINT Adapter)  
+        HMONITOR STDMETHODCALLTYPE CVoodoo3D9::GetAdapterMonitor(UINT Adapter)  
         { 
-            return m_RealObj->GetAdapterMonitor(Adapter); 
+            return m_RealObject->GetAdapterMonitor(Adapter); 
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3D9::CreateDevice
+        HRESULT STDMETHODCALLTYPE CVoodoo3D9::CreateDevice
         (
             UINT Adapter,
             D3DDEVTYPE DeviceType,
@@ -195,7 +195,7 @@ namespace VoodooShader
         {
             IDirect3DDevice9 * realDevice = nullptr;
 
-            HRESULT hr = m_RealObj->CreateDevice
+            HRESULT hr = m_RealObject->CreateDevice
             (
                 Adapter,
                 DeviceType,
@@ -208,7 +208,7 @@ namespace VoodooShader
             if (SUCCEEDED(hr))
             {
                 // Return our device
-                *ppReturnedDeviceInterface = new IVoodoo3DDevice9(this, realDevice);
+                *ppReturnedDeviceInterface = new CVoodoo3DDevice9(this, realDevice);
 
                 Uuid adapterID = CLSID_DX9Adapter;
                 DX9Adapter * pDXAdapter = nullptr;

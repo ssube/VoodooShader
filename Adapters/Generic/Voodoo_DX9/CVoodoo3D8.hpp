@@ -21,7 +21,7 @@
 
 #include "DX9_Module.hpp"
 
-#include "DX8_Defs.hpp"
+#include "DX8_ThinHeader.hpp"
 
 namespace VoodooShader
 {
@@ -32,15 +32,15 @@ namespace VoodooShader
          * D3D8 to D3D9. This class is responsible for creating devices, giving it control over what is returned to the 
          * engine.
          * 
-         * @note The various IVoodoo3D8 interfaces provide an application-opaque wrapper that actually implements a Direct3D
-         *      8.9 layer (8 to 9 translation). For use with D3D9 applications, the IVoodoo3D9 interface set should be used.
+         * @note The various CVoodoo3D8 interfaces provide an application-opaque wrapper that actually implements a Direct3D
+         *      8.9 layer (8 to 9 translation). For use with D3D9 applications, the CVoodoo3D9 interface set should be used.
          */
-        class IVoodoo3D8 :
+        class CVoodoo3D8 :
             public IDirect3D8
         {
         public:
-            IVoodoo3D8(IDirect3D9 * pRealObj);
-            virtual STDMETHODCALLTYPE ~IVoodoo3D8();
+            CVoodoo3D8(IDirect3D9 * pRealObj);
+            virtual STDMETHODCALLTYPE ~CVoodoo3D8();
 
             // IUnknown methods
             STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
@@ -67,7 +67,7 @@ namespace VoodooShader
             );
             /**
              * @note Direct3D8 doesn't seem to support the concept of multisampling quality levels, or won't recognize them 
-             * in this function. They are not passed back because of this.
+             *      in this function. They are not passed back because of this.
              */
             STDMETHOD(CheckDeviceMultiSampleType)
             (
@@ -104,10 +104,16 @@ namespace VoodooShader
             STDMETHOD_(UINT, GetAdapterModeCount)(UINT Adapter);
             STDMETHOD_(HMONITOR, GetAdapterMonitor)(UINT Adapter);
             STDMETHOD(GetDeviceCaps)(UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS8 * pCaps);
+            /**
+             * This is a legacy function to register a software renderer into the DX8 system; however, the DX8 docs state 
+             * that it is unsupported. The DX9 reintroduces support for it. Since the Voodoo CVoodoo3D8 layer targets DX9,
+             * the function is callable and will target the appropriate DX9 function. It will log a warning message, due to 
+             * technically being illegal.
+             */
             STDMETHOD(RegisterSoftwareDevice)(void *pInitializeFunction);
 
         private:
-            IDirect3D9 * m_RealObj;
+            IDirect3D9 * m_RealObject;
         };
     }
 }

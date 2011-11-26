@@ -19,30 +19,30 @@
  */
 #pragma once
 
-#include "DX89_Module.hpp"
+#include "CVoodoo3DSurface8.hpp"
+
+#include "DX9_Version.hpp"
 
 namespace VoodooShader
 {
     namespace VoodooDX8
     {
-        IVoodoo3DSurface8(IVoodoo3DDevice8 *device, IDirect3DSurface9 *realSurface) :
-            mRealDevice(device), mRealSurface(realSurface)
+        CVoodoo3DSurface8::CVoodoo3DSurface8(CVoodoo3DDevice8 * pDevice, IDirect3DSurface9 * pRealSurface) :
+            m_RealDevice(pDevice), m_RealSurface(pRealSurface)
         { }
 
-        inline IDirect3DSurface9 *RealSurface() { return mRealSurface; }
-
         /* IUnknown methods */
-        HRESULT STDMETHODCALLTYPE IVoodoo3DSurface8::QueryInterface(REFIID riid, void **ppvObj)
+        HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::QueryInterface(REFIID riid, void **ppvObj)
         {
-            return mRealSurface->QueryInterface(riid, ppvObj);
+            return m_RealSurface->QueryInterface(riid, ppvObj);
         }
-        ULONG STDMETHODCALLTYPE IVoodoo3DSurface8::AddRef()
+        ULONG STDMETHODCALLTYPE CVoodoo3DSurface8::AddRef()
         {
-            return mRealSurface->AddRef();
+            return m_RealSurface->AddRef();
         }
-        ULONG STDMETHODCALLTYPE IVoodoo3DSurface8::Release()
+        ULONG STDMETHODCALLTYPE CVoodoo3DSurface8::Release()
         {
-            ULONG refCount = mRealSurface->Release();
+            ULONG refCount = m_RealSurface->Release();
 
             if (refCount == 0)
             {
@@ -56,36 +56,36 @@ namespace VoodooShader
         }
 
         /* IDirect3DSurface8 methods */
-        HRESULT STDMETHODCALLTYPE IVoodoo3DSurface8::GetDevice(IDirect3DDevice8 **ppDevice)
+        HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::GetDevice(IDirect3DDevice8 **ppDevice)
         {
-            (*ppDevice) = (IDirect3DDevice8 *) VoodooDevice;
+            (*ppDevice) = (IDirect3DDevice8 *)m_RealDevice;
             return D3D_OK;
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3DSurface8::SetPrivateData(REFGUID refguid, CONST void *pData, DWORD SizeOfData, DWORD Flags)
+        HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::SetPrivateData(REFGUID refguid, CONST void *pData, DWORD SizeOfData, DWORD Flags)
         {
-            return mRealSurface->SetPrivateData(refguid, pData, SizeOfData, Flags);
+            return m_RealSurface->SetPrivateData(refguid, pData, SizeOfData, Flags);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3DSurface8::GetPrivateData(REFGUID refguid, void *pData, DWORD * pSizeOfData)
+        HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::GetPrivateData(REFGUID refguid, void *pData, DWORD * pSizeOfData)
         {
-            return mRealSurface->GetPrivateData(refguid, pData, pSizeOfData);
+            return m_RealSurface->GetPrivateData(refguid, pData, pSizeOfData);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3DSurface8::FreePrivateData(REFGUID refguid)
+        HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::FreePrivateData(REFGUID refguid)
         {
-            return mRealSurface->FreePrivateData(refguid);
+            return m_RealSurface->FreePrivateData(refguid);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3DSurface8::GetContainer(REFIID riid, void **ppContainer)
+        HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::GetContainer(REFIID riid, void **ppContainer)
         {
-            return mRealSurface->GetContainer(riid, ppContainer);
+            return m_RealSurface->GetContainer(riid, ppContainer);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3DSurface8::GetDesc(D3DSURFACE_DESC8 * pDesc)
+        HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::GetDesc(D3DSURFACE_DESC8 * pDesc)
         {
             D3DSURFACE_DESC9 rDesc;
-            HRESULT hr = mRealSurface->GetDesc(&rDesc);
+            HRESULT hr = m_RealSurface->GetDesc(&rDesc);
             if (SUCCEEDED(hr))
             {
                 pDesc->Format = rDesc.Format;
@@ -100,14 +100,14 @@ namespace VoodooShader
             return hr;
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3DSurface8::LockRect(D3DLOCKED_RECT * pLockedRect, CONST RECT * pRect, DWORD Flags)
+        HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::LockRect(D3DLOCKED_RECT * pLockedRect, CONST RECT * pRect, DWORD Flags)
         {
-            return mRealSurface->LockRect(pLockedRect, pRect, Flags);
+            return m_RealSurface->LockRect(pLockedRect, pRect, Flags);
         }
 
-        HRESULT STDMETHODCALLTYPE IVoodoo3DSurface8::UnlockRect()
+        HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::UnlockRect()
         {
-            return mRealSurface->UnlockRect();
+            return m_RealSurface->UnlockRect();
         }
     }
 }

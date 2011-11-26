@@ -66,12 +66,11 @@ typedef IDirect3D8 * (*D3DProc8) (UINT);
 */
 typedef struct _D3DCAPS8
 {
-
     /* Device Info */
     D3DDEVTYPE DeviceType;
     UINT AdapterOrdinal;
 
-    /* Caps from DX7 Draw */
+    /* Caps from DDraw 7 */
     DWORD Caps;
     DWORD Caps2;
     DWORD Caps3;
@@ -164,8 +163,8 @@ typedef struct _D3DPRESENT_PARAMETERS8_
 
     D3DSWAPEFFECT SwapEffect;
     HWND hDeviceWindow;
-    bool Windowed;
-    bool EnableAutoDepthStencil;
+    BOOL Windowed;
+    BOOL EnableAutoDepthStencil;
     D3DFORMAT AutoDepthStencilFormat;
     DWORD Flags;
 
@@ -187,9 +186,6 @@ typedef struct _D3DSURFACE_DESC8
     UINT Height;
 } D3DSURFACE_DESC8;
 
-/**
-* DX8 interface declerations
-*/
 DECLARE_INTERFACE_(IDirect3DSurface8, IUnknown)
 {
     /* IUnknown methods */
@@ -208,9 +204,6 @@ DECLARE_INTERFACE_(IDirect3DSurface8, IUnknown)
     STDMETHOD (UnlockRect) () PURE;
 };
 
-/**
-*
-*/
 DECLARE_INTERFACE_(IDirect3DTexture8, IUnknown)
 {
     /* IUnknown methods */
@@ -237,9 +230,6 @@ DECLARE_INTERFACE_(IDirect3DTexture8, IUnknown)
     STDMETHOD (AddDirtyRect) (CONST RECT * pDirtyRect) PURE;
 };
 
-/**
-*
-*/
 DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
 {
     /* IUnknown methods */
@@ -257,7 +247,7 @@ DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
     STDMETHOD (GetCreationParameters) (D3DDEVICE_CREATION_PARAMETERS * pParameters) PURE;
     STDMETHOD (SetCursorProperties) (UINT XHotSpot, UINT YHotSpot, IDirect3DSurface8 * pCursorBitmap) PURE;
     STDMETHOD_ (void, SetCursorPosition) (int X, int Y, DWORD Flags) PURE;
-    STDMETHOD_ (bool, ShowCursor) (bool bShow) PURE;
+    STDMETHOD_ (BOOL, ShowCursor) (BOOL bShow) PURE;
     STDMETHOD (CreateAdditionalSwapChain)(D3DPRESENT_PARAMETERS8 * pPresentationParameters, IDirect3DSwapChain8 **pSwapChain) PURE;
     STDMETHOD (Reset) (D3DPRESENT_PARAMETERS8 * pPresentationParameters) PURE;
     STDMETHOD (Present)(CONST RECT * pSourceRect, CONST RECT * pDestRect, HWND hDestWindowOverride, CONST RGNDATA * pDirtyRegion) PURE;
@@ -276,7 +266,7 @@ DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
     STDMETHOD (CreateIndexBuffer) (UINT Length, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool, IDirect3DIndexBuffer8 **ppIndexBuffer) PURE;
     STDMETHOD (CreateRenderTarget)
     (
-        UINT Width, UINT Height, D3DFORMAT Format, D3DMULTISAMPLE_TYPE MultiSample, bool Lockable, IDirect3DSurface8 **
+        UINT Width, UINT Height, D3DFORMAT Format, D3DMULTISAMPLE_TYPE MultiSample, BOOL Lockable, IDirect3DSurface8 **
         ppSurface
     ) PURE;
     STDMETHOD (CreateDepthStencilSurface) (UINT Width, UINT Height, D3DFORMAT Format, D3DMULTISAMPLE_TYPE MultiSample, IDirect3DSurface8 **ppSurface) PURE;
@@ -305,8 +295,8 @@ DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
     STDMETHOD (GetMaterial) (D3DMATERIAL9 * pMaterial) PURE;
     STDMETHOD (SetLight) (DWORD Index, CONST D3DLIGHT9 *) PURE;
     STDMETHOD (GetLight) (DWORD Index, D3DLIGHT9 *) PURE;
-    STDMETHOD (LightEnable) (DWORD Index, bool Enable) PURE;
-    STDMETHOD (GetLightEnable) (DWORD Index, bool * pEnable) PURE;
+    STDMETHOD (LightEnable) (DWORD Index, BOOL Enable) PURE;
+    STDMETHOD (GetLightEnable) (DWORD Index, BOOL * pEnable) PURE;
     STDMETHOD (SetClipPlane) (DWORD Index, CONST float *pPlane) PURE; 
     STDMETHOD (GetClipPlane) (DWORD Index, float *pPlane) PURE;
     STDMETHOD (SetRenderState) (D3DRENDERSTATETYPE State, DWORD Value) PURE;
@@ -362,9 +352,6 @@ DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
     STDMETHOD (DeletePatch) (UINT Handle) PURE;
 };
 
-/**
-*
-*/
 DECLARE_INTERFACE_(IDirect3D8, IUnknown)
 {
     /* IUnknown methods */
@@ -379,13 +366,13 @@ DECLARE_INTERFACE_(IDirect3D8, IUnknown)
     STDMETHOD_ (UINT, GetAdapterModeCount) (UINT Adapter) PURE;
     STDMETHOD (EnumAdapterModes) (UINT Adapter, UINT Mode, D3DDISPLAYMODE * pMode) PURE;
     STDMETHOD (GetAdapterDisplayMode) (UINT Adapter, D3DDISPLAYMODE * pMode) PURE;
-    STDMETHOD (CheckDeviceType) (UINT Adapter, D3DDEVTYPE CheckType, D3DFORMAT DisplayFormat, D3DFORMAT BackBufferFormat, bool Windowed) PURE;
+    STDMETHOD (CheckDeviceType) (UINT Adapter, D3DDEVTYPE CheckType, D3DFORMAT DisplayFormat, D3DFORMAT BackBufferFormat, BOOL Windowed) PURE;
     STDMETHOD (CheckDeviceFormat)
         (
         UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, DWORD Usage, D3DRESOURCETYPE RType, D3DFORMAT
         CheckFormat
         ) PURE;
-    STDMETHOD (CheckDeviceMultiSampleType) (UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SurfaceFormat, bool Windowed, D3DMULTISAMPLE_TYPE MultiSampleType) PURE;
+    STDMETHOD (CheckDeviceMultiSampleType) (UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SurfaceFormat, BOOL Windowed, D3DMULTISAMPLE_TYPE MultiSampleType) PURE;
     STDMETHOD (CheckDepthStencilMatch)
         (
         UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, D3DFORMAT RenderTargetFormat, D3DFORMAT

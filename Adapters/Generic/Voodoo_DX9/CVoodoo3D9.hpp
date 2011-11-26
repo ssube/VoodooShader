@@ -25,12 +25,12 @@ namespace VoodooShader
 {
     namespace VoodooDX9
     {
-        class IVoodoo3D9 :
+        class CVoodoo3D9 :
             public IDirect3D9
         {
         public:
-            IVoodoo3D9(IDirect3D9 * pD3D);
-            virtual STDMETHODCALLTYPE ~IVoodoo3D9();
+            CVoodoo3D9(IDirect3D9 * pD3D);
+            virtual STDMETHODCALLTYPE ~CVoodoo3D9();
 
             /**
             * IUnknown methods
@@ -102,7 +102,7 @@ namespace VoodooShader
             );
 
         private:
-            IDirect3D9 * m_RealObj;
+            IDirect3D9 * m_RealObject;
         };
     }
 }

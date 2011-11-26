@@ -19,38 +19,50 @@
  */
 #pragma once
 
-#include "DX89_Module.hpp"
+#include "DX9_Module.hpp"
+
+#include "DX8_ThinHeader.hpp"
 
 namespace VoodooShader
 {
     namespace VoodooDX8
     {
-        class IVoodoo3DSurface8 :
-            public IDirect3DSurface8
+        /**
+         * Implements a thin wrapper around D3D8 textures to make them compatible with the Voodoo API. This internally
+         * translates all calls into appropriate D3D9 calls and keeps a pointer to the internal IDirect3DTexture9 object.
+         */
+        class CVoodoo3DTexture8 :
+            public IDirect3DTexture8
         {
         public:
-            IVoodoo3DSurface8(IVoodoo3DDevice8 *device, IDirect3DSurface9 *realSurface);
+            CVoodoo3DTexture8(CVoodoo3DDevice8 * pDevice, IDirect3DTexture9 * pTexture);
 
-            inline IDirect3DSurface9 *RealSurface() { return mRealSurface; }
-
-            /* IUnknown methods */
+            inline IDirect3DTexture9 *RealTexture() { return m_RealTexture; }
             STDMETHOD(QueryInterface)(REFIID riid, void **ppvObj);
             STDMETHOD_(ULONG, AddRef)();
             STDMETHOD_(ULONG, Release)();
 
-            /* IDirect3DSurface8 methods */
+            // IDirect3DBaseTexture8 methods
             STDMETHOD(GetDevice)(IDirect3DDevice8 **ppDevice);
             STDMETHOD(SetPrivateData)(REFGUID refguid, CONST void *pData, DWORD SizeOfData, DWORD Flags);
             STDMETHOD(GetPrivateData)(REFGUID refguid, void *pData, DWORD * pSizeOfData);
             STDMETHOD(FreePrivateData)(REFGUID refguid);
-            STDMETHOD(GetContainer)(REFIID riid, void **ppContainer);
-            STDMETHOD(GetDesc)(D3DSURFACE_DESC8 * pDesc);
-            STDMETHOD(LockRect)(D3DLOCKED_RECT * pLockedRect, CONST RECT * pRect, DWORD Flags);
-            STDMETHOD(UnlockRect)();
+            STDMETHOD_(DWORD, SetPriority)(DWORD PriorityNew);
+            STDMETHOD_(DWORD, GetPriority)();
+            STDMETHOD_(void, PreLoad)();
+            STDMETHOD_(D3DRESOURCETYPE, GetType)();
+            STDMETHOD_(DWORD, SetLOD)(DWORD LODNew);
+            STDMETHOD_(DWORD, GetLOD)();
+            STDMETHOD_(DWORD, GetLevelCount)();
+            STDMETHOD(GetLevelDesc)(UINT Level, D3DSURFACE_DESC8 * pDesc);
+            STDMETHOD(GetSurfaceLevel)(UINT Level, IDirect3DSurface8 **ppSurfaceLevel);
+            STDMETHOD(LockRect)(UINT Level, D3DLOCKED_RECT * pLockedRect, CONST RECT * pRect, DWORD Flags);
+            STDMETHOD(UnlockRect)(UINT Level);
+            STDMETHOD(AddDirtyRect)(CONST RECT * pDirtyRect);
 
         private:
-            IVoodoo3DDevice8 * mRealDevice;
-            IDirect3DSurface9 * mRealSurface;
+            CVoodoo3DDevice8 * m_Device;
+            IDirect3DTexture9 * m_RealTexture;
         };
     }
 }

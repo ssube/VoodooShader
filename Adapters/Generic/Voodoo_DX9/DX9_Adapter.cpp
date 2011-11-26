@@ -23,7 +23,7 @@
 #include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
 
-#include "IVoodoo3D9.hpp"
+#include "CVoodoo3D9.hpp"
 
 namespace VoodooShader
 {
@@ -34,7 +34,9 @@ namespace VoodooShader
             m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr), m_BoundPass(nullptr)
         { 
             m_RenderTarget[0] = m_RenderTarget[1] = m_RenderTarget[2] = m_RenderTarget[3] = nullptr;
-            gpVoodooCore = pCore;
+
+            gpVoodooCore = m_Core;
+            gpVoodooLogger = gpVoodooCore->GetLogger();
         };
 
         DX9Adapter::~DX9Adapter()
@@ -125,7 +127,7 @@ namespace VoodooShader
                     logger->Log
                     (
                         LL_ModError, VOODOO_DX9_NAME, 
-                        L"Error loading vertex program from '%s': %d.\n",
+                        L"Error loading vertex program from '%s': %d.",
                         pass->GetName().GetData(),
                         hr
                     );
@@ -142,7 +144,7 @@ namespace VoodooShader
                     logger->Log
                     (
                         LL_ModError, VOODOO_DX9_NAME,
-                        L"Error loading fragment program from '%s': %d.\n",
+                        L"Error loading fragment program from '%s': %d.",
                         pass->GetName().GetData(),
                         hr
                     );
@@ -178,7 +180,7 @@ namespace VoodooShader
                     logger->Log
                         (
                         LL_ModError, VOODOO_DX9_NAME, 
-                        L"Error loading vertex program from '%s': %d.\n",
+                        L"Error loading vertex program from '%s': %d.",
                         pass->GetName().GetData(),
                         hr
                         );
@@ -195,7 +197,7 @@ namespace VoodooShader
                     logger->Log
                         (
                         LL_ModError, VOODOO_DX9_NAME,
-                        L"Error loading fragment program from '%s': %d.\n",
+                        L"Error loading fragment program from '%s': %d.",
                         pass->GetName().GetData(),
                         hr
                         );
@@ -438,7 +440,7 @@ namespace VoodooShader
             } else {
                 IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value.Value.VPVoid);
 
-                IVoodoo3D9 * fakeObj = new IVoodoo3D9(origObj);
+                CVoodoo3D9 * fakeObj = new CVoodoo3D9(origObj);
 
                 value.Value.VPVoid = fakeObj;
 

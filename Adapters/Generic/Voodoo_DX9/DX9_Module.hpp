@@ -38,25 +38,23 @@ namespace VoodooShader
 {
     namespace VoodooDX8
     {
-        class IVoodoo3D8;
-        class IVoodoo3DDevice8;
-        class IVoodoo3DTexture8;
-        class IVoodoo3DSurface8;
+        class CVoodoo3D8;
+        class CVoodoo3DDevice8;
+        class CVoodoo3DTexture8;
+        class CVoodoo3DSurface8;
     }
 
     namespace VoodooDX9
     {
         class DX9Adapter;
 
-        class IVoodoo3D9;
-        class IVoodoo3DDevice9;
+        class CVoodoo3D9;
+        class CVoodoo3DDevice9;
     }
 }
 
-extern VoodooShader::ICore * gpVoodooCore;
-
-extern VoodooShader::VoodooDX9::IVoodoo3D9 *VoodooObject;
-extern VoodooShader::VoodooDX9::IVoodoo3DDevice9 *VoodooDevice;
+extern VoodooShader::ICoreRef gpVoodooCore;
+extern VoodooShader::ILoggerRef gpVoodooLogger;
 
 extern VoodooShader::IShader * testShader;
 
