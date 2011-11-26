@@ -239,7 +239,7 @@ namespace VoodooShader
             {
                 logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Attempting to set null render target %d.", index);
                 return false;
-            } else if (index > 4) {
+            } else if (index > 3) {
                 logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Invalid render target index %d.", index);
                 return false;
             }
@@ -283,7 +283,7 @@ namespace VoodooShader
 
         ITexture * DX9Adapter::GetTarget(_In_ const uint32_t index) const
         {
-            if (index > 4) 
+            if (index > 3) 
             {
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Invalid render target index %d.", index);
                 return false;
@@ -474,14 +474,8 @@ namespace VoodooShader
 
                 CGparameter texParam = pParam->GetCgParameter();
 
-                if (cgIsParameter(texParam))
-                {
-                    cgD3D9SetTextureParameter(texParam, texObj);
-                    return true;
-                } else {
-
-                }
-
+                cgD3D9SetTextureParameter(texParam, texObj);
+                return true;
             }
             else
             {
