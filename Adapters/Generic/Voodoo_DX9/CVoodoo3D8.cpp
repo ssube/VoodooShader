@@ -401,7 +401,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"CVoodoo3D8::RegisterSoftwareDevice(%p) == %d", pInitializeFunction, hr);
 #else
-            gpVoodooLogger->Log(LL_ModWarning, VOODOO_DX9_NAME, L"The application has registered a software device with D3D8, illegal behavior.");
+            gpVoodooLogger->Log(LL_ModWarn, VOODOO_DX9_NAME, L"The application has registered a software device with D3D8, illegal behavior.");
 #endif
 
             return hr;

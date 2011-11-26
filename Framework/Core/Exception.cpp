@@ -25,7 +25,7 @@
 
 namespace VoodooShader
 {
-    const wchar_t * ExceptionLogMsg = L"Exception in %S at %S (%d): %s";
+    const wchar_t * ExceptionLogMsg = L"Exception in file %s at %s (line %d): %s";
     const char * ExceptionFmtMsg = "VoodooShader::Exception in module %S, file %S at %S (line %d): %S";
 
     Exception::Exception
@@ -109,15 +109,18 @@ namespace VoodooShader
     {
         if (m_FmtMsg == nullptr)
         {
+            const wchar_t * module = m_Module.GetData();
+            const wchar_t * msg = m_Message.GetData();
+
             int bufsize = _scprintf
             (
                 ExceptionFmtMsg,
-                m_Module.GetData(),
+                module,
                 m_File,
                 m_Function,
                 m_Line,
-                m_Message.GetData()
-            );
+                msg
+            ) + 1;
 
             assert(bufsize < 1024); // Large exception message
 
@@ -128,11 +131,11 @@ namespace VoodooShader
                 m_FmtMsg,
                 bufsize,
                 ExceptionFmtMsg,
-                m_Module.GetData(),
+                module,
                 m_File,
                 m_Function,
                 m_Line,
-                m_Message.GetData()
+                msg
             );
         }
     }

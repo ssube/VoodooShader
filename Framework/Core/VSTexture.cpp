@@ -22,9 +22,14 @@
 
 namespace VoodooShader
 {
-    VSTexture::VSTexture(String name, void * pTexture) :
-        m_Refs(0), m_Name(name), m_Data(pTexture)
-    { }
+    VSTexture::VSTexture(ICore * pCore, String name, _In_ const TextureDesc * pDesc, void * pTexture) :
+        m_Refs(0), m_Core(pCore), m_Name(name), m_Data(pTexture)
+    {
+        if (pDesc)
+        {
+            m_Desc = *pDesc;
+        }
+    }
 
     VSTexture::~VSTexture()
     { }

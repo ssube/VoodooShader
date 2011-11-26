@@ -180,12 +180,12 @@ namespace VoodooShader
                 if (!SUCCEEDED(hr))
                 {
                     logger->Log
-                        (
+                    (
                         LL_ModError, VOODOO_DX9_NAME, 
                         L"Error loading vertex program from '%s': %d.",
                         pass->GetName().GetData(),
                         hr
-                        );
+                    );
 
                     return false;
                 }
@@ -197,12 +197,11 @@ namespace VoodooShader
                 if (!SUCCEEDED(hr))
                 {
                     logger->Log
-                        (
+                    (
                         LL_ModError, VOODOO_DX9_NAME,
                         L"Error loading fragment program from '%s': %d.",
-                        pass->GetName().GetData(),
-                        hr
-                        );
+                        pass->GetName().GetData(), hr
+                    );
                     return false;
                 }
             }
@@ -213,19 +212,18 @@ namespace VoodooShader
         bool DX9Adapter::SetPass(_In_opt_ IPass * const pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
-
-            if (!pPass)
+            
+            if (m_BoundPass)
             {
-                if (m_BoundPass)
-                {
-                    cgResetPassState(m_BoundPass->GetCgPass());
-                }
-                return false;
+                cgResetPassState(m_BoundPass->GetCgPass());
             }
 
             m_BoundPass = pPass;
 
-            cgSetPassState(m_BoundPass->GetCgPass());
+            if (m_BoundPass)
+            {
+                cgSetPassState(m_BoundPass->GetCgPass());
+            }
 
             return true;
         }
@@ -346,6 +344,12 @@ namespace VoodooShader
             _In_ const VertexFlags flags
         )
         { 
+            if (!pVertexData)
+            {
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"No geometry given to draw.");
+                return false;
+            }
+
             IDirect3DVertexBuffer9 * sourceBuffer;
             UINT sourceOffset, sourceStride;
             DWORD sourceFVF, zEnabled, aEnabled, cullMode;
@@ -357,7 +361,8 @@ namespace VoodooShader
             m_Device->GetRenderState(D3DRS_ZENABLE, &zEnabled);
             m_Device->GetRenderState(D3DRS_ALPHABLENDENABLE, &aEnabled);
             m_Device->GetRenderState(D3DRS_CULLMODE, &cullMode);
-
+            
+            m_Device->SetStreamSource(0, nullptr, 0, 0);
             if (flags & VF_Transformed)
             {
                 m_Device->SetVertexDeclaration(m_VertDeclT);
@@ -369,27 +374,24 @@ namespace VoodooShader
             m_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
             m_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
-            if (pVertexData)
+            HRESULT hr = m_Device->BeginScene();
+
+            if (SUCCEEDED(hr))
             {
-                HRESULT hr = m_Device->BeginScene();
-
-                if (SUCCEEDED(hr))
+                if (flags & VF_Buffer)
                 {
-                    if (flags & VF_Buffer)
-                    {
-                        IDirect3DVertexBuffer9 * vbuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pVertexData);
-                        m_Device->SetStreamSource(0, vbuffer, 0, sizeof(VertexStruct));
-                        m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, count);
-                    } else {
-                        m_Device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, count, pVertexData, sizeof(VertexStruct));
-                    }
+                    IDirect3DVertexBuffer9 * vbuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pVertexData);
+                    m_Device->SetStreamSource(0, vbuffer, 0, sizeof(VertexStruct));
+                    m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, count);
+                } else {
+                    m_Device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, count, pVertexData, sizeof(VertexStruct));
+                }
 
-                    m_Device->EndScene();
-                }
-                else
-                {
-                    m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to draw geometry.");
-                }
+                m_Device->EndScene();
+            }
+            else
+            {
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to draw geometry.");
             }
 
             m_Device->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);

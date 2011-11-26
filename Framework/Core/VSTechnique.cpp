@@ -167,7 +167,7 @@ namespace VoodooShader
                     (
                         LL_CoreWarn,
                         VOODOO_CORE_NAME,
-                        L"IPass %s cannot find target %S.",
+                        L"Technique %s cannot find target %S.",
                         this->ToString().GetData(),
                         targetName
                     );
@@ -181,7 +181,7 @@ namespace VoodooShader
                 (
                     LL_CoreWarn,
                     VOODOO_CORE_NAME,
-                    L"IPass %s has annotation \"target\" of invalid type.",
+                    L"Technique %s has annotation \"target\" of invalid type.",
                     this->ToString().GetData()
                 );
 
@@ -194,7 +194,7 @@ namespace VoodooShader
             (
                 LL_CoreDebug,
                 VOODOO_CORE_NAME,
-                L"IPass %s has no target annotation.",
+                L"Technique %s has no target annotation.",
                 this->ToString().GetData()
             );
 
@@ -219,7 +219,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->Log
                 (
                     LL_CoreDebug, VOODOO_CORE_NAME,
-                    L"Error creating linking pass '%S': %S", name, exc.what()
+                    L"Error linking pass '%S': %S", name, exc.what()
                 );
             }
 

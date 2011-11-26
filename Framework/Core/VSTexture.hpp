@@ -36,7 +36,7 @@ namespace VoodooShader
         public ITexture
     {
     public:
-        VSTexture(_In_ String name, _In_opt_ void * pTexture = nullptr);
+        VSTexture(_In_ ICore * pCore, _In_ String name, _In_ const TextureDesc * pDesc, _In_opt_ void * pTexture = nullptr);
         virtual ~VSTexture();
 
         VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;

@@ -203,7 +203,7 @@ namespace VoodooShader
 
     IShader * const VOODOO_METHODCALLTYPE VSParameter::GetShader() CONST
     {
-        return m_Shader.get();
+        return m_Shader;
     }
 
     CGparameter VOODOO_METHODCALLTYPE VSParameter::GetCgParameter() CONST

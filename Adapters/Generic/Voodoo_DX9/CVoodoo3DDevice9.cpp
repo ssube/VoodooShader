@@ -174,24 +174,22 @@ namespace VoodooShader
                     logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to stretch backbuffer to scratch texture.");
                 }
 
-                hr = m_RealDevice->SetRenderTarget(0, backbufferSurf);
+                /*hr = m_RealDevice->SetRenderTarget(0, backbufferSurf);
                 if (FAILED(hr))
                 {
                     logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to set render target.");
-                }
+                }*/
 
                 VoodooShader::ITechniqueRef tech = testShader->GetDefaultTechnique();
                 VoodooShader::IPassRef pass = tech->GetPass(0);
 
-                adapter->SetPass(pass);
+                adapter->SetPass(pass.get());
 
-                adapter->DrawGeometry(4, (VertexStruct*)gpFSQuadVerts, VF_Buffer);
+                adapter->DrawGeometry(4, (VertexStruct*)gpFSQuadVerts, (VertexFlags)(VF_Buffer|VF_Transformed));
 
                 adapter->SetPass();
             }
 
-            // m_RealDevice->SetRenderTarget(0, rts);
-            // m_RealDevice->SetTexture(0, tex);
             return m_RealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
         }
 

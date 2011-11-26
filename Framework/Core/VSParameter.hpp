@@ -65,7 +65,7 @@ namespace VoodooShader
         ICore * m_Core;
         String m_Name;
 
-        IShaderRef m_Shader;
+        IShader * m_Shader;
 
         bool m_Virtual;
         CGparameter m_Param;
