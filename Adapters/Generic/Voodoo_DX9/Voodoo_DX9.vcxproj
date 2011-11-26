@@ -28,14 +28,14 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-    <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
-        <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-        <Import Project="..\..\..\VoodooProperties.props" />
-    </ImportGroup>
-    <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
-        <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-        <Import Project="..\..\..\VoodooProperties.props" />
-    </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\VoodooProperties.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\VoodooProperties.props" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
@@ -75,6 +75,7 @@
   <ItemGroup>
     <ClCompile Include="DX9_Adapter.cpp" />
     <ClCompile Include="DX9_Module.cpp" />
+    <ClCompile Include="IVoodoo3D8.cpp" />
     <ClCompile Include="IVoodoo3D9.cpp" />
     <ClCompile Include="IVoodoo3DDevice9.cpp" />
   </ItemGroup>
@@ -83,8 +84,13 @@
     <ClInclude Include="DX9_Converter.hpp" />
     <ClInclude Include="DX9_Module.hpp" />
     <ClInclude Include="DX9_Version.hpp" />
+    <ClInclude Include="FauxD3D8Header.hpp" />
+    <ClInclude Include="IVoodoo3D8.hpp" />
     <ClInclude Include="IVoodoo3D9.hpp" />
+    <ClInclude Include="IVoodoo3DDevice8.hpp" />
     <ClInclude Include="IVoodoo3DDevice9.hpp" />
+    <ClInclude Include="IVoodoo3DSurface8.hpp" />
+    <ClInclude Include="IVoodoo3DTexture8.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

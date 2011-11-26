@@ -13,6 +13,9 @@
     <ClCompile Include="IVoodoo3DDevice9.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="IVoodoo3D8.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp">
@@ -35,6 +38,21 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3D8.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3DDevice8.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3DSurface8.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IVoodoo3DTexture8.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="FauxD3D8Header.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,7 @@ namespace VoodooShader
     namespace VoodooDX9
     {
         IVoodoo3DDevice9::IVoodoo3DDevice9(IDirect3D9 * pVoodooObject, IDirect3DDevice9 * pRealDevice) :
-            m_d3d(pVoodooObject), mRealDevice(pRealDevice)
+            m_ParentObj(pVoodooObject), m_RealDevice(pRealDevice)
         { };
 
         IVoodoo3DDevice9::~IVoodoo3DDevice9()
@@ -38,17 +38,17 @@ namespace VoodooShader
         /* IUnknown methods */
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::QueryInterface(THIS_ REFIID riid, void **ppvObj)
         {
-            return mRealDevice->QueryInterface(riid, ppvObj);
+            return m_RealDevice->QueryInterface(riid, ppvObj);
         }
 
         ULONG STDMETHODCALLTYPE IVoodoo3DDevice9::AddRef(THIS)
         {
-            return mRealDevice->AddRef();
+            return m_RealDevice->AddRef();
         }
 
         ULONG STDMETHODCALLTYPE IVoodoo3DDevice9::Release(THIS)
         {
-            ULONG count = mRealDevice->Release();
+            ULONG count = m_RealDevice->Release();
 
             if (count == 0)
             {
@@ -73,57 +73,57 @@ namespace VoodooShader
         /* IDirect3DDevice9 methods */
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::TestCooperativeLevel (THIS)
         {
-            return mRealDevice->TestCooperativeLevel();
+            return m_RealDevice->TestCooperativeLevel();
         }
 
         UINT STDMETHODCALLTYPE IVoodoo3DDevice9::GetAvailableTextureMem(THIS)
         {
-            return mRealDevice->GetAvailableTextureMem();
+            return m_RealDevice->GetAvailableTextureMem();
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::EvictManagedResources(THIS)
         {
-            return mRealDevice->EvictManagedResources();
+            return m_RealDevice->EvictManagedResources();
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetDirect3D(THIS_ IDirect3D9 **ppD3D9)
         {
 
             // Let the device validate the incoming pointer for us
-            HRESULT hr = mRealDevice->GetDirect3D(ppD3D9);
-            if (SUCCEEDED(hr)) *ppD3D9 = m_d3d;
+            HRESULT hr = m_RealDevice->GetDirect3D(ppD3D9);
+            if (SUCCEEDED(hr)) *ppD3D9 = m_ParentObj;
 
             return hr;
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetDeviceCaps(THIS_ D3DCAPS9 * pCaps)
         {
-            return mRealDevice->GetDeviceCaps(pCaps);
+            return m_RealDevice->GetDeviceCaps(pCaps);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetDisplayMode(THIS_ UINT iSwapChain, D3DDISPLAYMODE * pMode)
         {
-            return mRealDevice->GetDisplayMode(iSwapChain, pMode);
+            return m_RealDevice->GetDisplayMode(iSwapChain, pMode);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetCreationParameters(THIS_ D3DDEVICE_CREATION_PARAMETERS * pParameters)
         {
-            return mRealDevice->GetCreationParameters(pParameters);
+            return m_RealDevice->GetCreationParameters(pParameters);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetCursorProperties(THIS_ UINT XHotSpot, UINT YHotSpot, IDirect3DSurface9 * pCursorBitmap)
         {
-            return mRealDevice->SetCursorProperties(XHotSpot, YHotSpot, pCursorBitmap);
+            return m_RealDevice->SetCursorProperties(XHotSpot, YHotSpot, pCursorBitmap);
         }
 
         void STDMETHODCALLTYPE IVoodoo3DDevice9::SetCursorPosition(THIS_ int X, int Y, DWORD Flags)
         {
-            mRealDevice->SetCursorPosition(X, Y, Flags);
+            m_RealDevice->SetCursorPosition(X, Y, Flags);
         }
 
         BOOL STDMETHODCALLTYPE IVoodoo3DDevice9::ShowCursor(THIS_ BOOL bShow)
         {
-            return mRealDevice->ShowCursor(bShow);
+            return m_RealDevice->ShowCursor(bShow);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateAdditionalSwapChain
@@ -132,22 +132,22 @@ namespace VoodooShader
             IDirect3DSwapChain9 **pSwapChain
             )
         {
-            return mRealDevice->CreateAdditionalSwapChain(pPresentationParameters, pSwapChain);
+            return m_RealDevice->CreateAdditionalSwapChain(pPresentationParameters, pSwapChain);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetSwapChain(THIS_ UINT iSwapChain, IDirect3DSwapChain9 **pSwapChain)
         {
-            return mRealDevice->GetSwapChain(iSwapChain, pSwapChain);
+            return m_RealDevice->GetSwapChain(iSwapChain, pSwapChain);
         }
 
         UINT STDMETHODCALLTYPE IVoodoo3DDevice9::GetNumberOfSwapChains(THIS)
         {
-            return mRealDevice->GetNumberOfSwapChains();
+            return m_RealDevice->GetNumberOfSwapChains();
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::Reset(THIS_ D3DPRESENT_PARAMETERS * pPresentationParameters)
         {
-            return mRealDevice->Reset(pPresentationParameters);
+            return m_RealDevice->Reset(pPresentationParameters);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::Present
@@ -166,15 +166,15 @@ namespace VoodooShader
                 // IDirect3DBaseTexture9 * tex;
                 // IDirect3DSurface9 * rts;
                 // ;
-                // mRealDevice->GetTexture(0, &tex);
-                // mRealDevice->GetRenderTarget(0, &rts);
-                HRESULT hr = mRealDevice->StretchRect(backbufferSurf, nullptr, surface_ThisFrame, nullptr, D3DTEXF_NONE);
+                // m_RealDevice->GetTexture(0, &tex);
+                // m_RealDevice->GetRenderTarget(0, &rts);
+                HRESULT hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_ThisFrame, nullptr, D3DTEXF_NONE);
                 if (FAILED(hr))
                 {
                     logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to stretch backbuffer to scratch texture.");
                 }
 
-                hr = mRealDevice->SetRenderTarget(0, backbufferSurf);
+                hr = m_RealDevice->SetRenderTarget(0, backbufferSurf);
                 if (FAILED(hr))
                 {
                     logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to set render target.");
@@ -190,9 +190,9 @@ namespace VoodooShader
                 adapter->SetPass();
             }
 
-            // mRealDevice->SetRenderTarget(0, rts);
-            // mRealDevice->SetTexture(0, tex);
-            return mRealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
+            // m_RealDevice->SetRenderTarget(0, rts);
+            // m_RealDevice->SetTexture(0, tex);
+            return m_RealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetBackBuffer
@@ -203,27 +203,27 @@ namespace VoodooShader
             IDirect3DSurface9 **ppBackBuffer
         )
         {
-            return mRealDevice->GetBackBuffer(iSwapChain, iBackBuffer, Type, ppBackBuffer);
+            return m_RealDevice->GetBackBuffer(iSwapChain, iBackBuffer, Type, ppBackBuffer);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetRasterStatus(THIS_ UINT iSwapChain, D3DRASTER_STATUS * pRasterStatus)
         {
-            return mRealDevice->GetRasterStatus(iSwapChain, pRasterStatus);
+            return m_RealDevice->GetRasterStatus(iSwapChain, pRasterStatus);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetDialogBoxMode(THIS_ BOOL bEnableDialogs)
         {
-            return mRealDevice->SetDialogBoxMode(bEnableDialogs);
+            return m_RealDevice->SetDialogBoxMode(bEnableDialogs);
         }
 
         void STDMETHODCALLTYPE IVoodoo3DDevice9::SetGammaRamp(THIS_ UINT iSwapChain, DWORD Flags, CONST D3DGAMMARAMP * pRamp)
         {
-            return mRealDevice->SetGammaRamp(iSwapChain, Flags, pRamp);
+            return m_RealDevice->SetGammaRamp(iSwapChain, Flags, pRamp);
         }
 
         void STDMETHODCALLTYPE IVoodoo3DDevice9::GetGammaRamp(THIS_ UINT iSwapChain, D3DGAMMARAMP * pRamp)
         {
-            return mRealDevice->GetGammaRamp(iSwapChain, pRamp);
+            return m_RealDevice->GetGammaRamp(iSwapChain, pRamp);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateTexture
@@ -238,7 +238,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
         )
         {
-            return mRealDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, ppTexture, pSharedHandle);
+            return m_RealDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, ppTexture, pSharedHandle);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateVolumeTexture
@@ -254,7 +254,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
             )
         {
-            return mRealDevice->CreateVolumeTexture(Width, Height, Depth, Levels, Usage, Format, Pool, ppVolumeTexture, pSharedHandle);
+            return m_RealDevice->CreateVolumeTexture(Width, Height, Depth, Levels, Usage, Format, Pool, ppVolumeTexture, pSharedHandle);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateCubeTexture
@@ -268,7 +268,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
         )
         {
-            return mRealDevice->CreateCubeTexture(EdgeLength, Levels, Usage, Format, Pool, ppCubeTexture, pSharedHandle);
+            return m_RealDevice->CreateCubeTexture(EdgeLength, Levels, Usage, Format, Pool, ppCubeTexture, pSharedHandle);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateVertexBuffer
@@ -281,7 +281,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
         )
         {
-            return mRealDevice->CreateVertexBuffer(Length, Usage, FVF, Pool, ppVertexBuffer, pSharedHandle);
+            return m_RealDevice->CreateVertexBuffer(Length, Usage, FVF, Pool, ppVertexBuffer, pSharedHandle);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateIndexBuffer
@@ -294,7 +294,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
         )
         {
-            return mRealDevice->CreateIndexBuffer(Length, Usage, Format, Pool, ppIndexBuffer, pSharedHandle);
+            return m_RealDevice->CreateIndexBuffer(Length, Usage, Format, Pool, ppIndexBuffer, pSharedHandle);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateRenderTarget
@@ -309,7 +309,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
             )
         {
-            return mRealDevice->CreateRenderTarget(Width, Height, Format, MultiSample, MultisampleQuality, Lockable, ppSurface, pSharedHandle);
+            return m_RealDevice->CreateRenderTarget(Width, Height, Format, MultiSample, MultisampleQuality, Lockable, ppSurface, pSharedHandle);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateDepthStencilSurface
@@ -324,7 +324,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
         )
         {
-            return mRealDevice->CreateDepthStencilSurface(Width, Height, Format, MultiSample, MultisampleQuality, Discard, ppSurface, pSharedHandle);
+            return m_RealDevice->CreateDepthStencilSurface(Width, Height, Format, MultiSample, MultisampleQuality, Discard, ppSurface, pSharedHandle);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::UpdateSurface
@@ -335,7 +335,7 @@ namespace VoodooShader
             CONST POINT * pDestPoint
         )
         {
-            return mRealDevice->UpdateSurface(pSourceSurface, pSourceRect, pDestinationSurface, pDestPoint);
+            return m_RealDevice->UpdateSurface(pSourceSurface, pSourceRect, pDestinationSurface, pDestPoint);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::UpdateTexture
@@ -344,17 +344,17 @@ namespace VoodooShader
             IDirect3DBaseTexture9 * pDestinationTexture
         )
         {
-            return mRealDevice->UpdateTexture(pSourceTexture, pDestinationTexture);
+            return m_RealDevice->UpdateTexture(pSourceTexture, pDestinationTexture);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetRenderTargetData(THIS_ IDirect3DSurface9 * pRenderTarget, IDirect3DSurface9 * pDestSurface)
         {
-            return mRealDevice->GetRenderTargetData(pRenderTarget, pDestSurface);
+            return m_RealDevice->GetRenderTargetData(pRenderTarget, pDestSurface);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetFrontBufferData(THIS_ UINT iSwapChain, IDirect3DSurface9 * pDestSurface)
         {
-            return mRealDevice->GetFrontBufferData(iSwapChain, pDestSurface);
+            return m_RealDevice->GetFrontBufferData(iSwapChain, pDestSurface);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::StretchRect
@@ -366,12 +366,12 @@ namespace VoodooShader
             D3DTEXTUREFILTERTYPE Filter
             )
         {
-            return mRealDevice->StretchRect(pSourceSurface, pSourceRect, pDestSurface, pDestRect, Filter);
+            return m_RealDevice->StretchRect(pSourceSurface, pSourceRect, pDestSurface, pDestRect, Filter);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::ColorFill(THIS_ IDirect3DSurface9 * pSurface, CONST RECT * pRect, D3DCOLOR color)
         {
-            return mRealDevice->ColorFill(pSurface, pRect, color);
+            return m_RealDevice->ColorFill(pSurface, pRect, color);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateOffscreenPlainSurface
@@ -384,231 +384,231 @@ namespace VoodooShader
             HANDLE * pSharedHandle
             )
         {
-            return mRealDevice->CreateOffscreenPlainSurface(Width, Height, Format, Pool, ppSurface, pSharedHandle);
+            return m_RealDevice->CreateOffscreenPlainSurface(Width, Height, Format, Pool, ppSurface, pSharedHandle);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetRenderTarget(THIS_ DWORD RenderTargetIndex, IDirect3DSurface9 * pRenderTarget)
         {
-            return mRealDevice->SetRenderTarget(RenderTargetIndex, pRenderTarget);
+            return m_RealDevice->SetRenderTarget(RenderTargetIndex, pRenderTarget);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetRenderTarget(THIS_ DWORD RenderTargetIndex, IDirect3DSurface9 **ppRenderTarget)
         {
-            return mRealDevice->GetRenderTarget(RenderTargetIndex, ppRenderTarget);
+            return m_RealDevice->GetRenderTarget(RenderTargetIndex, ppRenderTarget);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetDepthStencilSurface(THIS_ IDirect3DSurface9 * pNewZStencil)
         {
-            return mRealDevice->SetDepthStencilSurface(pNewZStencil);
+            return m_RealDevice->SetDepthStencilSurface(pNewZStencil);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetDepthStencilSurface(THIS_ IDirect3DSurface9 **ppZStencilSurface)
         {
-            return mRealDevice->GetDepthStencilSurface(ppZStencilSurface);
+            return m_RealDevice->GetDepthStencilSurface(ppZStencilSurface);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::BeginScene(THIS)
         {
-            return mRealDevice->BeginScene();
+            return m_RealDevice->BeginScene();
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::EndScene(THIS)
         {
-            return mRealDevice->EndScene();
+            return m_RealDevice->EndScene();
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::Clear(THIS_ DWORD Count, CONST D3DRECT * pRects, DWORD Flags, D3DCOLOR Color, float Z, DWORD Stencil)
         {
-            return mRealDevice->Clear(Count, pRects, Flags, Color, Z, Stencil);
+            return m_RealDevice->Clear(Count, pRects, Flags, Color, Z, Stencil);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetTransform(THIS_ D3DTRANSFORMSTATETYPE State, CONST D3DMATRIX * pMatrix)
         {
-            return mRealDevice->SetTransform(State, pMatrix);
+            return m_RealDevice->SetTransform(State, pMatrix);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetTransform(THIS_ D3DTRANSFORMSTATETYPE State, D3DMATRIX * pMatrix)
         {
-            return mRealDevice->GetTransform(State, pMatrix);
+            return m_RealDevice->GetTransform(State, pMatrix);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::MultiplyTransform(THIS_ D3DTRANSFORMSTATETYPE State, CONST D3DMATRIX * pMatrix)
         {
-            return mRealDevice->MultiplyTransform(State, pMatrix);
+            return m_RealDevice->MultiplyTransform(State, pMatrix);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetViewport(THIS_ CONST D3DVIEWPORT9 * pViewport)
         {
-            return mRealDevice->SetViewport(pViewport);
+            return m_RealDevice->SetViewport(pViewport);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetViewport(THIS_ D3DVIEWPORT9 * pViewport)
         {
-            return mRealDevice->GetViewport(pViewport);
+            return m_RealDevice->GetViewport(pViewport);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetMaterial(THIS_ CONST D3DMATERIAL9 * pMaterial)
         {
-            return mRealDevice->SetMaterial(pMaterial);
+            return m_RealDevice->SetMaterial(pMaterial);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetMaterial(THIS_ D3DMATERIAL9 * pMaterial)
         {
-            return mRealDevice->GetMaterial(pMaterial);
+            return m_RealDevice->GetMaterial(pMaterial);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetLight(THIS_ DWORD Index, CONST D3DLIGHT9 * pLight)
         {
-            return mRealDevice->SetLight(Index, pLight);
+            return m_RealDevice->SetLight(Index, pLight);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetLight(THIS_ DWORD Index, D3DLIGHT9 * pLight)
         {
-            return mRealDevice->GetLight(Index, pLight);
+            return m_RealDevice->GetLight(Index, pLight);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::LightEnable(THIS_ DWORD Index, BOOL Enable)
         {
-            return mRealDevice->LightEnable(Index, Enable);
+            return m_RealDevice->LightEnable(Index, Enable);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetLightEnable(THIS_ DWORD Index, BOOL * pEnable)
         {
-            return mRealDevice->GetLightEnable(Index, pEnable);
+            return m_RealDevice->GetLightEnable(Index, pEnable);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetClipPlane(THIS_ DWORD Index, CONST float *pPlane)
         {
-            return mRealDevice->SetClipPlane(Index, pPlane);
+            return m_RealDevice->SetClipPlane(Index, pPlane);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetClipPlane(THIS_ DWORD Index, float *pPlane)
         {
-            return mRealDevice->GetClipPlane(Index, pPlane);
+            return m_RealDevice->GetClipPlane(Index, pPlane);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetRenderState(THIS_ D3DRENDERSTATETYPE State, DWORD Value)
         {
-            return mRealDevice->SetRenderState(State, Value);
+            return m_RealDevice->SetRenderState(State, Value);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetRenderState(THIS_ D3DRENDERSTATETYPE State, DWORD * pValue)
         {
-            return mRealDevice->GetRenderState(State, pValue);
+            return m_RealDevice->GetRenderState(State, pValue);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateStateBlock(THIS_ D3DSTATEBLOCKTYPE Type, IDirect3DStateBlock9 **ppSB)
         {
-            return mRealDevice->CreateStateBlock(Type, ppSB);
+            return m_RealDevice->CreateStateBlock(Type, ppSB);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::BeginStateBlock(THIS)
         {
-            return mRealDevice->BeginStateBlock();
+            return m_RealDevice->BeginStateBlock();
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::EndStateBlock(THIS_ IDirect3DStateBlock9 **ppSB)
         {
-            return mRealDevice->EndStateBlock(ppSB);
+            return m_RealDevice->EndStateBlock(ppSB);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetClipStatus(THIS_ CONST D3DCLIPSTATUS9 * pClipStatus)
         {
-            return mRealDevice->SetClipStatus(pClipStatus);
+            return m_RealDevice->SetClipStatus(pClipStatus);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetClipStatus(THIS_ D3DCLIPSTATUS9 * pClipStatus)
         {
-            return mRealDevice->GetClipStatus(pClipStatus);
+            return m_RealDevice->GetClipStatus(pClipStatus);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetTexture(THIS_ DWORD Stage, IDirect3DBaseTexture9 **ppTexture)
         {
-            return mRealDevice->GetTexture(Stage, ppTexture);
+            return m_RealDevice->GetTexture(Stage, ppTexture);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetTexture(THIS_ DWORD Stage, IDirect3DBaseTexture9 * pTexture)
         {
-            return mRealDevice->SetTexture(Stage, pTexture);
+            return m_RealDevice->SetTexture(Stage, pTexture);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetTextureStageState(THIS_ DWORD Stage, D3DTEXTURESTAGESTATETYPE Type, DWORD * pValue)
         {
-            return mRealDevice->GetTextureStageState(Stage, Type, pValue);
+            return m_RealDevice->GetTextureStageState(Stage, Type, pValue);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetTextureStageState(THIS_ DWORD Stage, D3DTEXTURESTAGESTATETYPE Type, DWORD Value)
         {
-            return mRealDevice->SetTextureStageState(Stage, Type, Value);
+            return m_RealDevice->SetTextureStageState(Stage, Type, Value);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetSamplerState(THIS_ DWORD Sampler, D3DSAMPLERSTATETYPE Type, DWORD * pValue)
         {
-            return mRealDevice->GetSamplerState(Sampler, Type, pValue);
+            return m_RealDevice->GetSamplerState(Sampler, Type, pValue);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetSamplerState(THIS_ DWORD Sampler, D3DSAMPLERSTATETYPE Type, DWORD Value)
         {
-            return mRealDevice->SetSamplerState(Sampler, Type, Value);
+            return m_RealDevice->SetSamplerState(Sampler, Type, Value);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::ValidateDevice(THIS_ DWORD * pNumPasses)
         {
-            return mRealDevice->ValidateDevice(pNumPasses);
+            return m_RealDevice->ValidateDevice(pNumPasses);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetPaletteEntries(THIS_ UINT PaletteNumber, CONST PALETTEENTRY * pEntries)
         {
-            return mRealDevice->SetPaletteEntries(PaletteNumber, pEntries);
+            return m_RealDevice->SetPaletteEntries(PaletteNumber, pEntries);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetPaletteEntries(THIS_ UINT PaletteNumber, PALETTEENTRY * pEntries)
         {
-            return mRealDevice->GetPaletteEntries(PaletteNumber, pEntries);
+            return m_RealDevice->GetPaletteEntries(PaletteNumber, pEntries);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetCurrentTexturePalette(THIS_ UINT PaletteNumber)
         {
-            return mRealDevice->SetCurrentTexturePalette(PaletteNumber);
+            return m_RealDevice->SetCurrentTexturePalette(PaletteNumber);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetCurrentTexturePalette(THIS_ UINT * PaletteNumber)
         {
-            return mRealDevice->GetCurrentTexturePalette(PaletteNumber);
+            return m_RealDevice->GetCurrentTexturePalette(PaletteNumber);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetScissorRect(THIS_ CONST RECT * pRect)
         {
-            return mRealDevice->SetScissorRect(pRect);
+            return m_RealDevice->SetScissorRect(pRect);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetScissorRect(THIS_ RECT * pRect)
         {
-            return mRealDevice->GetScissorRect(pRect);
+            return m_RealDevice->GetScissorRect(pRect);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetSoftwareVertexProcessing(THIS_ BOOL bSoftware)
         {
-            return mRealDevice->SetSoftwareVertexProcessing(bSoftware);
+            return m_RealDevice->SetSoftwareVertexProcessing(bSoftware);
         }
 
         BOOL STDMETHODCALLTYPE IVoodoo3DDevice9::GetSoftwareVertexProcessing(THIS)
         {
-            return mRealDevice->GetSoftwareVertexProcessing();
+            return m_RealDevice->GetSoftwareVertexProcessing();
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetNPatchMode(THIS_ float nSegments)
         {
-            return mRealDevice->SetNPatchMode(nSegments);
+            return m_RealDevice->SetNPatchMode(nSegments);
         }
 
         float STDMETHODCALLTYPE IVoodoo3DDevice9::GetNPatchMode(THIS)
         {
-            return mRealDevice->GetNPatchMode();
+            return m_RealDevice->GetNPatchMode();
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::DrawPrimitive(THIS_ D3DPRIMITIVETYPE PrimitiveType, UINT StartVertex, UINT PrimitiveCount)
         {
-            return mRealDevice->DrawPrimitive(PrimitiveType, StartVertex, PrimitiveCount);
+            return m_RealDevice->DrawPrimitive(PrimitiveType, StartVertex, PrimitiveCount);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::DrawIndexedPrimitive
@@ -621,7 +621,7 @@ namespace VoodooShader
             UINT primCount
             )
         {
-            return mRealDevice->DrawIndexedPrimitive(PrimitiveType, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
+            return m_RealDevice->DrawIndexedPrimitive(PrimitiveType, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::DrawPrimitiveUP
@@ -632,7 +632,7 @@ namespace VoodooShader
             UINT VertexStreamZeroStride
             )
         {
-            return mRealDevice->DrawPrimitiveUP(PrimitiveType, PrimitiveCount, pVertexStreamZeroData, VertexStreamZeroStride);
+            return m_RealDevice->DrawPrimitiveUP(PrimitiveType, PrimitiveCount, pVertexStreamZeroData, VertexStreamZeroStride);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::DrawIndexedPrimitiveUP
@@ -647,7 +647,7 @@ namespace VoodooShader
             UINT VertexStreamZeroStride
             )
         {
-            return mRealDevice->DrawIndexedPrimitiveUP
+            return m_RealDevice->DrawIndexedPrimitiveUP
                 (
                 PrimitiveType, MinVertexIndex, NumVertices, PrimitiveCount, pIndexData, IndexDataFormat,
                 pVertexStreamZeroData, VertexStreamZeroStride
@@ -664,7 +664,7 @@ namespace VoodooShader
             DWORD Flags
             )
         {
-            return mRealDevice->ProcessVertices(SrcStartIndex, DestIndex, VertexCount, pDestBuffer, pVertexDecl, Flags);
+            return m_RealDevice->ProcessVertices(SrcStartIndex, DestIndex, VertexCount, pDestBuffer, pVertexDecl, Flags);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateVertexDeclaration
@@ -673,68 +673,68 @@ namespace VoodooShader
             IDirect3DVertexDeclaration9 **ppDecl
             )
         {
-            return mRealDevice->CreateVertexDeclaration(pVertexElements, ppDecl);
+            return m_RealDevice->CreateVertexDeclaration(pVertexElements, ppDecl);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetVertexDeclaration(THIS_ IDirect3DVertexDeclaration9 * pDecl)
         {
-            return mRealDevice->SetVertexDeclaration(pDecl);
+            return m_RealDevice->SetVertexDeclaration(pDecl);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetVertexDeclaration(THIS_ IDirect3DVertexDeclaration9 **ppDecl)
         {
-            return mRealDevice->GetVertexDeclaration(ppDecl);
+            return m_RealDevice->GetVertexDeclaration(ppDecl);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetFVF(THIS_ DWORD FVF)
         {
-            return mRealDevice->SetFVF(FVF);
+            return m_RealDevice->SetFVF(FVF);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetFVF(THIS_ DWORD * pFVF)
         {
-            return mRealDevice->GetFVF(pFVF);
+            return m_RealDevice->GetFVF(pFVF);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateVertexShader(THIS_ CONST DWORD * pFunction, IDirect3DVertexShader9 **ppShader)
         {
-            return mRealDevice->CreateVertexShader(pFunction, ppShader);
+            return m_RealDevice->CreateVertexShader(pFunction, ppShader);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetVertexShader(THIS_ IDirect3DVertexShader9 * pShader)
         {
-            return mRealDevice->SetVertexShader(pShader);
+            return m_RealDevice->SetVertexShader(pShader);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetVertexShader(THIS_ IDirect3DVertexShader9 **ppShader)
         {
-            return mRealDevice->GetVertexShader(ppShader);
+            return m_RealDevice->GetVertexShader(ppShader);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetVertexShaderConstantF(THIS_ UINT StartRegister, CONST float *pConstantData, UINT Vector4fCount)
         {
-            return mRealDevice->SetVertexShaderConstantF(StartRegister, pConstantData, Vector4fCount);
+            return m_RealDevice->SetVertexShaderConstantF(StartRegister, pConstantData, Vector4fCount);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetVertexShaderConstantF(THIS_ UINT StartRegister, float *pConstantData, UINT Vector4fCount)
         {
-            return mRealDevice->GetVertexShaderConstantF(StartRegister, pConstantData, Vector4fCount);
+            return m_RealDevice->GetVertexShaderConstantF(StartRegister, pConstantData, Vector4fCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetVertexShaderConstantI(THIS_ UINT StartRegister, CONST int *pConstantData, UINT Vector4iCount)
         {
-            return mRealDevice->SetVertexShaderConstantI(StartRegister, pConstantData, Vector4iCount);
+            return m_RealDevice->SetVertexShaderConstantI(StartRegister, pConstantData, Vector4iCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetVertexShaderConstantI(THIS_ UINT StartRegister, int *pConstantData, UINT Vector4iCount)
         {
-            return mRealDevice->GetVertexShaderConstantI(StartRegister, pConstantData, Vector4iCount);
+            return m_RealDevice->GetVertexShaderConstantI(StartRegister, pConstantData, Vector4iCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetVertexShaderConstantB(THIS_ UINT StartRegister, CONST BOOL * pConstantData, UINT boolCount)
         {
-            return mRealDevice->SetVertexShaderConstantB(StartRegister, pConstantData, boolCount);
+            return m_RealDevice->SetVertexShaderConstantB(StartRegister, pConstantData, boolCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetVertexShaderConstantB(THIS_ UINT StartRegister, BOOL * pConstantData, UINT boolCount)
         {
-            return mRealDevice->GetVertexShaderConstantB(StartRegister, pConstantData, boolCount);
+            return m_RealDevice->GetVertexShaderConstantB(StartRegister, pConstantData, boolCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetStreamSource
             (
@@ -744,7 +744,7 @@ namespace VoodooShader
             UINT Stride
             )
         {
-            return mRealDevice->SetStreamSource(StreamNumber, pStreamData, OffsetInBytes, Stride);
+            return m_RealDevice->SetStreamSource(StreamNumber, pStreamData, OffsetInBytes, Stride);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetStreamSource
             (
@@ -754,76 +754,76 @@ namespace VoodooShader
             UINT * pStride
             )
         {
-            return mRealDevice->GetStreamSource(StreamNumber, ppStreamData, pOffsetInBytes, pStride);
+            return m_RealDevice->GetStreamSource(StreamNumber, ppStreamData, pOffsetInBytes, pStride);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetStreamSourceFreq(THIS_ UINT StreamNumber, UINT Setting)
         {
-            return mRealDevice->SetStreamSourceFreq(StreamNumber, Setting);
+            return m_RealDevice->SetStreamSourceFreq(StreamNumber, Setting);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetStreamSourceFreq(THIS_ UINT StreamNumber, UINT * pSetting)
         {
-            return mRealDevice->GetStreamSourceFreq(StreamNumber, pSetting);
+            return m_RealDevice->GetStreamSourceFreq(StreamNumber, pSetting);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetIndices(THIS_ IDirect3DIndexBuffer9 * pIndexData)
         {
-            return mRealDevice->SetIndices(pIndexData);
+            return m_RealDevice->SetIndices(pIndexData);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetIndices(THIS_ IDirect3DIndexBuffer9 **ppIndexData)
         {
-            return mRealDevice->GetIndices(ppIndexData);
+            return m_RealDevice->GetIndices(ppIndexData);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreatePixelShader(THIS_ CONST DWORD * pFunction, IDirect3DPixelShader9 **ppShader)
         {
-            return mRealDevice->CreatePixelShader(pFunction, ppShader);
+            return m_RealDevice->CreatePixelShader(pFunction, ppShader);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetPixelShader(THIS_ IDirect3DPixelShader9 * pShader)
         {
-            return mRealDevice->SetPixelShader(pShader);
+            return m_RealDevice->SetPixelShader(pShader);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetPixelShader(THIS_ IDirect3DPixelShader9 **ppShader)
         {
-            return mRealDevice->GetPixelShader(ppShader);
+            return m_RealDevice->GetPixelShader(ppShader);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetPixelShaderConstantF(THIS_ UINT StartRegister, CONST float *pConstantData, UINT Vector4fCount)
         {
-            return mRealDevice->SetPixelShaderConstantF(StartRegister, pConstantData, Vector4fCount);
+            return m_RealDevice->SetPixelShaderConstantF(StartRegister, pConstantData, Vector4fCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetPixelShaderConstantF (THIS_ UINT StartRegister, float *pConstantData, UINT Vector4fCount)
         {
-            return mRealDevice->GetPixelShaderConstantF(StartRegister, pConstantData, Vector4fCount);
+            return m_RealDevice->GetPixelShaderConstantF(StartRegister, pConstantData, Vector4fCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetPixelShaderConstantI(THIS_ UINT StartRegister, CONST int *pConstantData, UINT Vector4iCount)
         {
-            return mRealDevice->SetPixelShaderConstantI(StartRegister, pConstantData, Vector4iCount);
+            return m_RealDevice->SetPixelShaderConstantI(StartRegister, pConstantData, Vector4iCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetPixelShaderConstantI(THIS_ UINT StartRegister, int *pConstantData, UINT Vector4iCount)
         {
-            return mRealDevice->GetPixelShaderConstantI(StartRegister, pConstantData, Vector4iCount);
+            return m_RealDevice->GetPixelShaderConstantI(StartRegister, pConstantData, Vector4iCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::SetPixelShaderConstantB(THIS_ UINT StartRegister, CONST BOOL * pConstantData, UINT boolCount)
         {
-            return mRealDevice->SetPixelShaderConstantB(StartRegister, pConstantData, boolCount);
+            return m_RealDevice->SetPixelShaderConstantB(StartRegister, pConstantData, boolCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::GetPixelShaderConstantB(THIS_ UINT StartRegister, BOOL * pConstantData, UINT boolCount)
         {
-            return mRealDevice->GetPixelShaderConstantB(StartRegister, pConstantData, boolCount);
+            return m_RealDevice->GetPixelShaderConstantB(StartRegister, pConstantData, boolCount);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::DrawRectPatch(THIS_ UINT Handle, CONST float *pNumSegs, CONST D3DRECTPATCH_INFO * pRectPatchInfo)
         {
-            return mRealDevice->DrawRectPatch(Handle, pNumSegs, pRectPatchInfo);
+            return m_RealDevice->DrawRectPatch(Handle, pNumSegs, pRectPatchInfo);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::DrawTriPatch(THIS_ UINT Handle, CONST float *pNumSegs, CONST D3DTRIPATCH_INFO * pTriPatchInfo)
         {
-            return mRealDevice->DrawTriPatch(Handle, pNumSegs, pTriPatchInfo);
+            return m_RealDevice->DrawTriPatch(Handle, pNumSegs, pTriPatchInfo);
         }
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::DeletePatch(THIS_ UINT Handle)
         {
-            return mRealDevice->DeletePatch(Handle);
+            return m_RealDevice->DeletePatch(Handle);
         }
 
         HRESULT STDMETHODCALLTYPE IVoodoo3DDevice9::CreateQuery(THIS_ D3DQUERYTYPE Type, IDirect3DQuery9 **ppQuery)
         {
-            return mRealDevice->CreateQuery(Type, ppQuery);
+            return m_RealDevice->CreateQuery(Type, ppQuery);
         }
     }
 }

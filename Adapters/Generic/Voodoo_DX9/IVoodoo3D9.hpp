@@ -19,7 +19,7 @@
  */
 #pragma once
 
-#include "IVoodoo3DDevice9.hpp"
+#include "DX9_Module.hpp"
 
 namespace VoodooShader
 {
@@ -30,12 +30,12 @@ namespace VoodooShader
         {
         public:
             IVoodoo3D9(IDirect3D9 * pD3D);
-            STDMETHODCALLTYPE ~IVoodoo3D9();
+            virtual STDMETHODCALLTYPE ~IVoodoo3D9();
 
             /**
             * IUnknown methods
             */
-            HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void **ppvObj);
+            STDMETHOD(QueryInterface)(THIS_ REFIID riid, void **ppvObj);
             ULONG STDMETHODCALLTYPE AddRef(void);
             ULONG STDMETHODCALLTYPE Release(void);
 
