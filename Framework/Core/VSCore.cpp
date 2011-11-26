@@ -441,6 +441,7 @@ namespace VoodooShader
         else
         {
             m_CgContext = pContext;
+            cgSetErrorHandler(Voodoo_CgErrorHandler_Func, this);
             m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Set Cg context (%p).", pContext);
             return true;
         }

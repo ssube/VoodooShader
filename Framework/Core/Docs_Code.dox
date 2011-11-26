@@ -109,15 +109,15 @@ namespace VoodooShader
       * return false. The object's reference count must not change in this case.
       * 
       * All IObject-derived classes must provide interfaces for IObject, their parent interface, and their class. Calls to
-      * QueryInterface must be symmetric (if @code QI(A)->B @endcode succeeds, then @code QI(QI(A)->B)->A @endcode must as 
-      * well), transitive (if @code QI(QI(A)->B)->C @endcode succeeds, then @code QI(A)->C @endcode must as well), and 
-      * reflexive (@code QI(A)->A @endcode must always succeed). 
+      * QueryInterface must be symmetric (if <tt>QI(A)->B</tt> succeeds, then <tt>QI(QI(A)->B)->A</tt> must as well), 
+      * transitive (if <tt>QI(QI(A)->B)->C</tt> succeeds, then <tt>QI(A)->C</tt> must as well), and reflexive 
+      * (<tt>QI(A)->A</tt> must always succeed). 
       * 
-      * This is not to say that all objects of type @code A @endcode must behave the same; these guarantees must hold for an
-      * object within itself throughout its lifetime. Two objects of type @code A @endcode may be unable to provide an 
-      * interface based on internal conditions (for example, if @code A1 @endcode is an IObject queried from an ICore and 
-      * @code A2 @endcode is an IObject queried from an IParser, @code A2 @endcode will not be able to provide an interface 
-      * to ICore, but must be able to do so for IParser).
+      * This is not to say that all objects of type <tt>A</tt> must behave the same; these guarantees must hold for an
+      * object within itself throughout its lifetime. Two objects of type <tt>A</tt> may be unable to provide an interface 
+      * based on internal conditions (for example, if <tt>A1</tt> is an IObject queried from an ICore and <tt>A2</tt> is an 
+      * IObject queried from an IParser, <tt>A2</tt> will not be able to provide an interface to ICore, but must be able to 
+      * do so for IParser).
       * 
       * For VSCore (which implements ICore and IObject) an example QueryInterface may be:
       * 
@@ -167,13 +167,14 @@ namespace VoodooShader
       * Returns a <em>non-incremented</em> reference to the object's parent core. This should be stored internally, usually
       * set at construction.
       * 
-      * @subsection voodoo_spec_module_throw 
+      * @subsection voodoo_spec_module_throw throw()
       * <b>No method or function in a class or interface derived from IObject may throw exceptions.</b> If error reporting 
       * is necessary, an error value should be returned. This is a necessary safety precaution, as modules may be created
       * with different compilers or languages and it may not be possible to safely propagate exceptions. 
       * 
       * Methods which call other functions which may throw, such as standard library ones, must catch and handle any
-      * potential exception and prevent it from propagating.
+      * potential exception and prevent it from propagating. Constructors may throw, and all calls to <tt>new</tt> should be
+      * wrapped in try/catch blocks to handle both exceptions from the ctor and various other exceptions (such as memory).
       *
       * @section voodoo_spec_module_docs Documentation
       *

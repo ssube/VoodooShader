@@ -32,7 +32,7 @@ PROJECT_NAME           = "Voodoo Shader Framework"
 # This could be handy for archiving the generated documentation or 
 # if some version control system is used.
 
-PROJECT_NUMBER         = framework-4.2-87-g30300eb
+PROJECT_NUMBER         = framework-4.2-91-gf65a5d7
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description 
 # for a project that appears at the top of each page and should give viewer 
@@ -1493,7 +1493,13 @@ PREDEFINED             = _In_= \
                          _In_opt_= \
                          _In_count_(x)= \
                          _In_z_count_(x)= \
-                         _Ret_count_c_(x)=
+                         _Ret_count_c_(x)= \
+                         DECLSPEC_NOTHROW= \
+                         DECLSPEC_NOVTABLE= \
+                         DECLSPEC_SELECTANY= \
+                         _Check_return_= \
+                         VOODOO_METHODCALLTYPE= \
+                         VOODOO_CALLTYPE=
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then 
 # this tag can be used to specify a list of macro names that should be expanded. 
@@ -1508,17 +1514,14 @@ EXPAND_AS_DEFINED      = DEFINE_LIBID \
                          SAFE_INCREMENT \
                          SAFE_DECREMENT \
                          VOODOO_METHODCALL \
-                         DECLSPEC_NOTHROW \
-                         DECLSPEC_SELECTANY \
                          PURE \
                          CONST \
                          PURE \
                          VOODOO_INTERFACE_ \
                          VOODOO_INTERFACE \
                          VOODOO_METHODCALL_ \
-                         VOODOO_METHODCALLTYPE \
-                         VOODOO_CALLTYPE \
-                         DECLSPEC_NOVTABLE
+                         VOODOO_PUBLIC_FUNC \
+                         EXTERN_C
 
 # If the SKIP_FUNCTION_MACROS tag is set to YES (the default) then 
 # doxygen's preprocessor will remove all references to function-like macros 
@@ -1660,7 +1663,7 @@ UML_LOOK               = NO
 # If set to YES, the inheritance and collaboration graphs will show the 
 # relations between templates and their instances.
 
-TEMPLATE_RELATIONS     = NO
+TEMPLATE_RELATIONS     = YES
 
 # If the ENABLE_PREPROCESSING, SEARCH_INCLUDES, INCLUDE_GRAPH, and HAVE_DOT 
 # tags are set to YES then doxygen will generate a graph for each documented 
@@ -1682,7 +1685,7 @@ INCLUDED_BY_GRAPH      = YES
 # the time of a run. So in most cases it will be better to enable call graphs 
 # for selected functions only using the \callgraph command.
 
-CALL_GRAPH             = NO
+CALL_GRAPH             = YES
 
 # If the CALLER_GRAPH and HAVE_DOT tags are set to YES then 
 # doxygen will generate a caller dependency graph for every global function 
@@ -1690,7 +1693,7 @@ CALL_GRAPH             = NO
 # the time of a run. So in most cases it will be better to enable caller 
 # graphs for selected functions only using the \callergraph command.
 
-CALLER_GRAPH           = NO
+CALLER_GRAPH           = YES
 
 # If the GRAPHICAL_HIERARCHY and HAVE_DOT tags are set to YES then doxygen 
 # will generate a graphical hierarchy of all classes instead of a textual one.
@@ -1719,7 +1722,7 @@ DOT_IMAGE_FORMAT       = png
 # need to set HTML_FILE_EXTENSION to xhtml in order to make the SVG files 
 # visible. Older versions of IE do not have SVG support.
 
-INTERACTIVE_SVG        = YES
+INTERACTIVE_SVG        = NO
 
 # The tag DOT_PATH can be used to specify the path where the dot tool can be 
 # found. If left blank, it is assumed the dot tool can be found in the path.
@@ -1764,7 +1767,7 @@ MAX_DOT_GRAPH_DEPTH    = 0
 # enabling this option may lead to badly anti-aliased labels on the edges of 
 # a graph (i.e. they become hard to read).
 
-DOT_TRANSPARENT        = NO
+DOT_TRANSPARENT        = YES
 
 # Set the DOT_MULTI_TARGETS tag to YES allow dot to generate multiple output 
 # files in one run (i.e. multiple -o and -T options on the command line). This 
