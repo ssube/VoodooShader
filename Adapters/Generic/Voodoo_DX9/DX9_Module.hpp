@@ -36,6 +36,14 @@
 
 namespace VoodooShader
 {
+    namespace VoodooDX8
+    {
+        class IVoodoo3D8;
+        class IVoodoo3DDevice8;
+        class IVoodoo3DTexture8;
+        class IVoodoo3DSurface8;
+    }
+
     namespace VoodooDX9
     {
         class DX9Adapter;
@@ -60,7 +68,7 @@ extern VoodooShader::ITexture* texture_ThisFrame;
 
 typedef IDirect3D9 * (__stdcall * D3DFunc9) (UINT);
 
-const VoodooShader::Version * VOODOO_CALL API_ModuleVersion();
-const uint32_t VOODOO_CALL API_ClassCount();
-const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid);
-VoodooShader::IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);
+const VoodooShader::Version * VOODOO_CALLTYPE API_ModuleVersion();
+const uint32_t VOODOO_CALLTYPE API_ClassCount();
+const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid);
+VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);

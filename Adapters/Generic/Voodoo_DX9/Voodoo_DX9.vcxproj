@@ -84,7 +84,7 @@
     <ClInclude Include="DX9_Converter.hpp" />
     <ClInclude Include="DX9_Module.hpp" />
     <ClInclude Include="DX9_Version.hpp" />
-    <ClInclude Include="FauxD3D8Header.hpp" />
+    <ClInclude Include="DX8_Defs.hpp" />
     <ClInclude Include="IVoodoo3D8.hpp" />
     <ClInclude Include="IVoodoo3D9.hpp" />
     <ClInclude Include="IVoodoo3DDevice8.hpp" />

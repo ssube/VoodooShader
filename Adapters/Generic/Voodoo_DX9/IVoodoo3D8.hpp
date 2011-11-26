@@ -21,6 +21,8 @@
 
 #include "DX9_Module.hpp"
 
+#include "DX8_Defs.hpp"
+
 namespace VoodooShader
 {
     namespace VoodooDX8

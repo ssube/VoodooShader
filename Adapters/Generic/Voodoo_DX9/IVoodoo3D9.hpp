@@ -36,14 +36,14 @@ namespace VoodooShader
             * IUnknown methods
             */
             STDMETHOD(QueryInterface)(THIS_ REFIID riid, void **ppvObj);
-            ULONG STDMETHODCALLTYPE AddRef(void);
-            ULONG STDMETHODCALLTYPE Release(void);
+            ULONG STDMETHODCALLTYPE AddRef();
+            ULONG STDMETHODCALLTYPE Release();
 
             /**
              * IDirect3D9 methods
              */
             HRESULT STDMETHODCALLTYPE RegisterSoftwareDevice(void * pInitializeFunction);
-            UINT STDMETHODCALLTYPE GetAdapterCount(void);
+            UINT STDMETHODCALLTYPE GetAdapterCount();
             HRESULT STDMETHODCALLTYPE GetAdapterIdentifier(UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER9 *pIdentifier);
             UINT STDMETHODCALLTYPE GetAdapterModeCount(UINT Adapter, D3DFORMAT Format);
             HRESULT STDMETHODCALLTYPE EnumAdapterModes(UINT Adapter, D3DFORMAT Format, UINT Mode, D3DDISPLAYMODE *pMode);

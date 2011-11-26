@@ -20,9 +20,9 @@
 
 #include "IVoodoo3D8.hpp"
 
-#include "DX89_Module.hpp"
-#include "DX89_Adapter.hpp"
-#include "DX89_Converter.hpp"
+#include "DX9_Module.hpp"
+#include "DX9_Adapter.hpp"
+#include "DX9_Converter.hpp"
 
 #include "IVoodoo3DDevice8.hpp"
 

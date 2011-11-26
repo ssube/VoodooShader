@@ -40,7 +40,7 @@ public:
  /**
   *
   */
- inline IDirect3DSurface9 *RealSurface(void) { return mRealSurface; }
+ inline IDirect3DSurface9 *RealSurface() { return mRealSurface; }
 
  /* IUnknown methods */
  STDMETHOD (QueryInterface) (REFIID riid, void **ppvObj)

@@ -51,7 +51,7 @@
     <ClInclude Include="IVoodoo3DTexture8.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="FauxD3D8Header.hpp">
+    <ClInclude Include="DX8_Defs.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

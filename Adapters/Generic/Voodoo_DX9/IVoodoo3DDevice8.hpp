@@ -16,7 +16,8 @@
 #ifndef VOODOO_DX89_DEVICE_HPP
 #define VOODOO_DX89_DEVICE_HPP
 
-#include "DX89_Module.hpp"
+#include "DX9_Module.hpp"
+
 #include "IVoodoo3DSurface8.hpp"
 #include "IVoodoo3DTexture8.hpp"
 

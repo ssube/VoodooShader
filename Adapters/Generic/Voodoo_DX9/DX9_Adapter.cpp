@@ -45,12 +45,12 @@ namespace VoodooShader
             }
         }
 
-        uint32_t DX9Adapter::AddRef(void) const throw()
+        uint32_t DX9Adapter::AddRef() const 
         {
             return SAFE_INCREMENT(m_Refs);
         }
 
-        uint32_t DX9Adapter::Release(void) const throw()
+        uint32_t DX9Adapter::Release() const 
         {
             uint32_t value = SAFE_DECREMENT(m_Refs);
 
@@ -62,7 +62,7 @@ namespace VoodooShader
             return value;
         }
 
-        bool DX9Adapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw()
+        bool DX9Adapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const 
         {
             if (!ppOut)
             {
@@ -91,12 +91,12 @@ namespace VoodooShader
             }
         }
 
-        String DX9Adapter::ToString(void) const throw()
+        String DX9Adapter::ToString() const 
         {
             return L"DX9Adapter()";
         }
 
-        ICore * DX9Adapter::GetCore(void) const throw()
+        ICore * DX9Adapter::GetCore() const 
         {
             return m_Core;
         }
@@ -226,7 +226,7 @@ namespace VoodooShader
             return true;
         }
 
-        IPass * DX9Adapter::GetPass(void) const
+        IPass * DX9Adapter::GetPass() CONST
         {
             return m_BoundPass.get();
         }
@@ -281,7 +281,7 @@ namespace VoodooShader
             return false;
         }
 
-        ITexture * DX9Adapter::GetTarget(_In_ const uint32_t index) const
+        ITexture * DX9Adapter::GetTarget(_In_ const uint32_t index) CONST
         {
             if (index > 3) 
             {
@@ -446,7 +446,7 @@ namespace VoodooShader
             }
         }
 
-        Variant DX9Adapter::GetProperty(_In_ const wchar_t * property) const
+        Variant DX9Adapter::GetProperty(_In_ const wchar_t * property) CONST
         {
             UNREFERENCED_PARAMETER(property);
 

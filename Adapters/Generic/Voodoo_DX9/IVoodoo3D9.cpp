@@ -47,12 +47,12 @@ namespace VoodooShader
             return m_RealObj->QueryInterface(riid, ppvObj);
         }
 
-        ULONG STDMETHODCALLTYPE IVoodoo3D9::AddRef(void) 
+        ULONG STDMETHODCALLTYPE IVoodoo3D9::AddRef() 
         { 
             return m_RealObj->AddRef(); 
         }
 
-        ULONG STDMETHODCALLTYPE IVoodoo3D9::Release(void)
+        ULONG STDMETHODCALLTYPE IVoodoo3D9::Release()
         {
             ULONG count = m_RealObj->Release();
 
@@ -72,7 +72,7 @@ namespace VoodooShader
             return m_RealObj->RegisterSoftwareDevice(pInitializeFunction);
         }
 
-        UINT STDMETHODCALLTYPE IVoodoo3D9::GetAdapterCount(void) 
+        UINT STDMETHODCALLTYPE IVoodoo3D9::GetAdapterCount() 
         { 
             return m_RealObj->GetAdapterCount(); 
         }

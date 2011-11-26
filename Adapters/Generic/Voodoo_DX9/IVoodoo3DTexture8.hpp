@@ -60,7 +60,7 @@ public:
  /**
   *
   */
- inline IDirect3DTexture9 *RealTexture(void) { return mRealTexture; }
+ inline IDirect3DTexture9 *RealTexture() { return mRealTexture; }
  STDMETHOD (QueryInterface) (REFIID riid, void **ppvObj)
  {
   return mRealTexture->QueryInterface(riid, ppvObj);
