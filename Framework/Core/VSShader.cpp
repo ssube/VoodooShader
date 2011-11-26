@@ -66,7 +66,7 @@ namespace VoodooShader
         this->Link();
     }
 
-    VSShader::~VSShader(void)
+    VSShader::~VSShader()
     {
         m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Destroying shader %s.", m_Name.GetData());
 
@@ -80,12 +80,12 @@ namespace VoodooShader
         }
     }
 
-    uint32_t VSShader::AddRef() const
+    uint32_t VOODOO_METHODCALLTYPE VSShader::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VSShader::Release() const
+    uint32_t VOODOO_METHODCALLTYPE VSShader::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -96,7 +96,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSShader::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VOODOO_METHODCALLTYPE VSShader::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -125,27 +125,27 @@ namespace VoodooShader
         }
     }
 
-    String VSShader::ToString(void) const
+    String VOODOO_METHODCALLTYPE VSShader::ToString() CONST
     {
         return String::Format(L"VSShader(%s)", m_Name.GetData());
     }
 
-    ICore * VSShader::GetCore(void) const
+    ICore * VOODOO_METHODCALLTYPE VSShader::GetCore() CONST
     {
         return m_Core;
     }
 
-    String VSShader::GetName() const
+    String VOODOO_METHODCALLTYPE VSShader::GetName() CONST
     {
         return m_Name;
     }
 
-    const uint32_t VSShader::GetTechniqueCount(void) const
+    const uint32_t VOODOO_METHODCALLTYPE VSShader::GetTechniqueCount() CONST
     {
         return m_Techniques.size();
     }
 
-    ITechnique * VSShader::GetTechnique(const uint32_t index) const
+    ITechnique * VOODOO_METHODCALLTYPE VSShader::GetTechnique(const uint32_t index) CONST
     {
         if (index < m_Techniques.size())
         {
@@ -157,12 +157,12 @@ namespace VoodooShader
         }
     }
 
-    ITechnique * VSShader::GetDefaultTechnique(void) const
+    ITechnique * VOODOO_METHODCALLTYPE VSShader::GetDefaultTechnique() CONST
     {
         return m_DefaultTechnique.get();
     }
 
-    bool VSShader::SetDefaultTechnique(ITechnique * pTechnique)
+    bool VOODOO_METHODCALLTYPE VSShader::SetDefaultTechnique(ITechnique * pTechnique)
     {
         if (pTechnique != nullptr)
         {
@@ -186,12 +186,12 @@ namespace VoodooShader
         return false;
     }
 
-    const uint32_t VSShader::GetParameterCount(void) const
+    const uint32_t VOODOO_METHODCALLTYPE VSShader::GetParameterCount() CONST
     {
         return m_Parameters.size();
     }
 
-    IParameter * VSShader::GetParameter(_In_ const uint32_t index) const
+    IParameter * VOODOO_METHODCALLTYPE VSShader::GetParameter(_In_ const uint32_t index) CONST
     {
         if (index < m_Parameters.size())
         {
@@ -203,7 +203,7 @@ namespace VoodooShader
         }
     }
 
-    CGeffect VSShader::GetCgEffect(void) const
+    CGeffect VOODOO_METHODCALLTYPE VSShader::GetCgEffect() CONST
     {
         return m_CgEffect;
     }

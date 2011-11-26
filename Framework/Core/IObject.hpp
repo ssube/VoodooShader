@@ -45,8 +45,6 @@ namespace VoodooShader
     class IObject
     {
     public:
-        virtual ~IObject(void) throw() {};
-
         /**
          * Add a reference to this object.
          *
@@ -54,7 +52,7 @@ namespace VoodooShader
          *
          * @note This function is equivalent to COM's IUnknown::AddRef.
          */
-        virtual uint32_t AddRef(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
 
         /**
          * Release a reference from this object.
@@ -63,7 +61,7 @@ namespace VoodooShader
          *
          * @note This function is equivalent to COM's IUnknown::Release.
          */
-        virtual uint32_t Release(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
 
         /**
          * Performs type checking internally, then provides a pointer to this object with the desired interface if possible.
@@ -76,21 +74,21 @@ namespace VoodooShader
          * @note If ppOut is nullptr and clsid is @em not a null Uuid, this will simply check if the Uuid is allowed without
          *      performing a cast.
          */
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
 
         /**
          * Get the name of this object.
          *
          * @return The name.
          */
-        virtual String ToString(void) const throw() = 0;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
 
         /**
          * Get the core this object was associated with.
          *
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
     };
     /**
      * @}

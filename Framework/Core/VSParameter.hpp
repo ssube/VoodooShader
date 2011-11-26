@@ -38,27 +38,27 @@ namespace VoodooShader
     public:
         VSParameter(_Pre_notnull_ ICore * const pCore, _In_ const String & name, _In_ const ParameterType type);
         VSParameter(_In_ IShader * const pShader, _In_ CGparameter const pParam);
-        virtual ~VSParameter(void);
+        virtual ~VSParameter();
 
-        virtual uint32_t AddRef(void) const throw();
-        virtual uint32_t Release(void) const throw();
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-        virtual String ToString(void) const throw();
-        virtual ICore * GetCore(void) const throw();
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHODCALL_(String, ToString)() CONST;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
-        virtual String GetName() const throw();
-        virtual ParameterType GetType(void) const throw();
-        virtual bool IsVirtual(void) const throw();
-        virtual bool AttachParameter(_In_ IParameter * const pParam) throw();
-        virtual bool DetachParameter() throw();
-        virtual const uint32_t GetComponents(void) const throw();
-        virtual ITexture * GetTexture(void) const throw();
-        virtual void SetTexture(_In_opt_ ITexture * const pTexture) throw();
-        _Ret_count_c_(16) virtual float * const GetScalar(void) throw();
-        virtual void SetScalar(const uint32_t count, _In_count_(count) float * const pValues) throw();
-        virtual IShader * const GetShader(void) const throw();
+        VOODOO_METHODCALL_(String, GetName)() CONST;
+        VOODOO_METHODCALL_(ParameterType, GetType)() CONST;
+        VOODOO_METHODCALL(IsVirtual)() CONST;
+        VOODOO_METHODCALL(AttachParameter)(_In_ IParameter * const pParam) ;
+        VOODOO_METHODCALL(DetachParameter)() ;
+        VOODOO_METHODCALL_(const uint32_t, GetComponents)() CONST;
+        VOODOO_METHODCALL_(ITexture *, GetTexture)() CONST;
+        VOODOO_METHODCALL_(void, SetTexture)(_In_opt_ ITexture * const pTexture) ;
+        _Ret_count_c_(16) VOODOO_METHODCALL_(float * const, GetScalar)() ;
+        VOODOO_METHODCALL_(void, SetScalar)(const uint32_t count, _In_count_(count) float * const pValues) ;
+        VOODOO_METHODCALL_(IShader * const, GetShader)() CONST;
 
-        virtual CGparameter GetCgParameter(void) const throw();
+        VOODOO_METHODCALL_(CGparameter, GetCgParameter)() CONST;
 
     private:
         mutable uint32_t m_Refs;

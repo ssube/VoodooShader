@@ -43,13 +43,11 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~ILogger(void) throw() {};
-
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Opens a file for use by this logger.
@@ -58,7 +56,7 @@ namespace VoodooShader
          * @param append Flag specifying the open mode; if true, any existing log is truncated.
          * @return Success of the open operation.
          */
-        virtual bool Open(_In_ const String & filename, _In_ const bool append) throw() = 0;
+        VOODOO_METHODCALL(Open)(_In_ const String & filename, _In_ const bool append) PURE;
 
         /**
          * Opens a file for use by this logger.
@@ -67,12 +65,12 @@ namespace VoodooShader
          * @param append Flag specifying the open mode; if true, any existing log is truncated.
          * @return Success of the open operation.
          */
-        virtual bool Open(_In_ IFile * const pFile, _In_ const bool append) throw() = 0;
+        VOODOO_METHODCALL(Open)(_In_ IFile * const pFile, _In_ const bool append) PURE;
 
         /**
          * Closes the log file, if one is open.
          */
-        virtual void Close(void) throw() = 0;
+        VOODOO_METHODCALL_(void, Close)() PURE;
 
         /**
          * Immediately writes all pending data to disk. @note This is useful for catchable errors which may have fatal
@@ -82,16 +80,16 @@ namespace VoodooShader
          *     debug logging, call Logger::SetBufferSize(int32_t) with a buffer size of 0 and all logged messages @e should
          *     make it to disk, even during fatal crashes.
          */
-        virtual void Flush(void) throw() = 0;
+        VOODOO_METHODCALL_(void, Flush)() PURE;
 
         /**
          * Set the default minimum message level. Messages below this level will not be logged.
          *
          * @param level The minimum log level.
          */
-        virtual void SetLogLevel(_In_ const LogLevel level) throw() = 0;
+        VOODOO_METHODCALL_(void, SetLogLevel)(_In_ const LogLevel level) PURE;
 
-        virtual const LogLevel GetLogLevel(void) const throw() = 0;
+        VOODOO_METHODCALL_(const LogLevel, GetLogLevel)() CONST PURE;
 
         /**
          * Writes a module stamp to the log. This records the name and version info for a select module (used to log what
@@ -99,7 +97,7 @@ namespace VoodooShader
          *
          * @param pModule The module version info to log.
          */
-        virtual void LogModule(_In_ const Version * const pModule) throw() = 0;
+        VOODOO_METHODCALL_(void, LogModule)(_In_ const Version * const pModule) PURE;
 
         /**
          * Log a message, may be formatted with printf syntax.
@@ -115,11 +113,11 @@ namespace VoodooShader
             _In_ const wchar_t * source,
             _In_ _Printf_format_string_ const wchar_t * format,
             ...
-        ) throw() = 0;
+        ) PURE;
 
-        virtual void SetFlags(_In_ const LogFlags flags) throw() = 0;
+        VOODOO_METHODCALL_(void, SetFlags)(_In_ const LogFlags flags) PURE;
 
-        virtual const LogFlags GetFlags(void) const throw() = 0;
+        VOODOO_METHODCALL_(const LogFlags, GetFlags)() CONST PURE;
     };
     /**
      * @}

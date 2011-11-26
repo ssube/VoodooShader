@@ -47,33 +47,33 @@ namespace VoodooShader
     {
     public:
         VSAdapter(ICore * pCore);
-        virtual ~VSAdapter(void);
+        virtual ~VSAdapter();
 
-        virtual uint32_t AddRef(void) const throw();
-        virtual uint32_t Release(void) const throw();
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-        virtual String ToString(void) const throw();
-        virtual ICore * GetCore(void) const throw();
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHODCALL_(String, ToString)() CONST;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
-        virtual bool LoadPass(_In_ IPass * const pPass);
-        virtual bool UnloadPass(_In_ IPass * const pPass);
-        virtual bool SetPass(_In_opt_ IPass * const pPass);
-        virtual IPass * GetPass(void) const;
-        virtual bool SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
-        virtual ITexture * GetTarget(_In_ const uint32_t index) const;
-        virtual bool CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture);
-        virtual bool LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture);
-        virtual bool DrawGeometry
+        VOODOO_METHODCALL(LoadPass)(_In_ IPass * const pPass);
+        VOODOO_METHODCALL(UnloadPass)(_In_ IPass * const pPass);
+        VOODOO_METHODCALL(SetPass)(_In_opt_ IPass * const pPass);
+        VOODOO_METHODCALL_(IPass *, GetPass)() const;
+        VOODOO_METHODCALL(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
+        VOODOO_METHODCALL_(ITexture *, GetTarget)(_In_ const uint32_t index) const;
+        VOODOO_METHODCALL(CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture);
+        VOODOO_METHODCALL(LoadTexture)(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture);
+        VOODOO_METHODCALL(DrawGeometry)
         (
             _In_ const uint32_t count, 
             _In_count_(count) VertexStruct * const pVertexData, 
             _In_ const VertexFlags flags
         );
-        virtual bool ApplyParameter(_In_ IParameter * const pParam);
-        virtual bool SetProperty(_In_ const wchar_t * name, _In_ Variant & value);
-        virtual Variant GetProperty(_In_ const wchar_t * property) const;
-        virtual bool ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
-        virtual bool HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
+        VOODOO_METHODCALL(ApplyParameter)(_In_ IParameter * const pParam);
+        VOODOO_METHODCALL(SetProperty)(_In_ const wchar_t * name, _In_ Variant & value);
+        VOODOO_METHODCALL_(Variant, GetProperty)(_In_ const wchar_t * property) const;
+        VOODOO_METHODCALL(ConnectTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
+        VOODOO_METHODCALL(HandleError)(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
 
     private:
         mutable uint32_t m_Refs;

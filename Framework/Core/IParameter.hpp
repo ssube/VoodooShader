@@ -43,28 +43,26 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~IParameter(void) throw() {};
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
-
-        virtual String GetName() const throw() = 0;
+        VOODOO_METHODCALL_(String, GetName)() CONST PURE;
 
         /**
          * Retrieves the type of this parameter. This specifies what type and how many data components are used (one texture
          * or 1-16 floats).
          */
-        virtual ParameterType GetType(void) const throw() = 0;
+        VOODOO_METHODCALL_(ParameterType, GetType)() CONST PURE;
 
         /**
          * Checks if the parameter is virtual (belongs to the core only) or physical (from a shader).
          *
          * @return Virtual status.
          */
-        virtual bool IsVirtual(void) const throw() = 0;
+        VOODOO_METHODCALL(IsVirtual)() CONST PURE;
 
         /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value is changed.
@@ -76,7 +74,7 @@ namespace VoodooShader
          *     actual parameters to virtual parameters.
          *
          */
-        virtual bool AttachParameter(_In_opt_ IParameter * const pParam) throw() = 0;
+        VOODOO_METHODCALL(AttachParameter)(_In_opt_ IParameter * const pParam) PURE;
 
         /**
          * Detaches this parameter from its source (set with a call to IParameter::AttachParameter(IParameter * const)).
@@ -84,7 +82,7 @@ namespace VoodooShader
          * @warning If called on a parameter that has other parameters bound to it (a source), it will disconnect all of
          *      those. This breaks connections from either end, source or bound.
          */
-        virtual bool DetachParameter() throw() = 0;
+        VOODOO_METHODCALL(DetachParameter)() PURE;
 
         /**
          * Get the component count for this parameter.
@@ -97,34 +95,34 @@ namespace VoodooShader
          *     @li For an array, this represents the number of elements in the array (2 for Light[2]).
          *     @li Structs and other types that do not also match one of the above will always return -1.
          */
-        virtual const uint32_t GetComponents(void) const throw() = 0;
+        VOODOO_METHODCALL_(const uint32_t, GetComponents)() CONST PURE;
 
         /**
          * Retrieves the texture source for this parameter.
          *
          * @return The texture source, if this parameter has a texture.
          */
-        virtual ITexture * GetTexture(void) const throw() = 0;
+        VOODOO_METHODCALL_(ITexture *, GetTexture)() CONST PURE;
 
-        virtual void SetTexture(_In_opt_ ITexture * const pTexture) throw() = 0;
+        VOODOO_METHODCALL_(void, SetTexture)(_In_opt_ ITexture * const pTexture) PURE;
 
         /**
          * Retrieves the float buffer for this parameter. This contains all 16 float
          * components, for all sizes (float1 to Float4x4). Any component may be written
          * to, but only the appropriate number will be sent to the Cg parameter.
          */
-        _Ret_count_c_(16) virtual float * const GetScalar(void) throw() = 0;
+        _Ret_count_c_(16) VOODOO_METHODCALL_(float * const, GetScalar)() PURE;
 
-        virtual void SetScalar(_In_ const uint32_t count, _In_count_(count) float * const pValues) throw() = 0;
+        VOODOO_METHODCALL_(void, SetScalar)(_In_ const uint32_t count, _In_count_(count) float * const pValues) PURE;
 
-        virtual IShader * const GetShader(void) const throw() = 0;
+        VOODOO_METHODCALL_(IShader * const, GetShader)() CONST PURE;
 
         /**
          * Retrieves the underlying Cg parameter object.
          *
          * @returns The Cg parameter this object is bound to.
          */
-        virtual CGparameter GetCgParameter(void) const throw() = 0;
+        VOODOO_METHODCALL_(CGparameter, GetCgParameter)() CONST PURE;
     };
     /**
      * @}

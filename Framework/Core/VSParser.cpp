@@ -33,22 +33,22 @@
 
 namespace VoodooShader
 {
-    VSParser::VSParser(_In_ ICore * pCore) :
+    VOODOO_METHODCALLTYPE VSParser::VSParser(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     { }
 
-    VSParser::~VSParser(void)
+    VOODOO_METHODCALLTYPE VSParser::~VSParser()
     {
         m_Variables.clear();
         m_SysVariables.clear();
     }
 
-    uint32_t VSParser::AddRef() const
+    uint32_t VOODOO_METHODCALLTYPE VSParser::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VSParser::Release() const
+    uint32_t VOODOO_METHODCALLTYPE VSParser::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -59,7 +59,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSParser::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VOODOO_METHODCALLTYPE VSParser::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -88,17 +88,17 @@ namespace VoodooShader
         }
     }
 
-    String VSParser::ToString(void) const
+    String VOODOO_METHODCALLTYPE VSParser::ToString() CONST
     {
         return L"VSParser()";
     }
 
-    ICore * VSParser::GetCore(void) const
+    ICore * VOODOO_METHODCALLTYPE VSParser::GetCore() CONST
     {
         return m_Core;
     }
 
-    void VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType Type)
+    void VOODOO_METHODCALLTYPE VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType Type)
     {
         ILoggerRef logger = m_Core->GetLogger();
 
@@ -144,7 +144,7 @@ namespace VoodooShader
         }
     }
 
-    void VSParser::Remove(_In_ const String & name)
+    void VOODOO_METHODCALLTYPE VSParser::Remove(_In_ const String & name)
     {
         ILoggerRef logger = m_Core->GetLogger();
 
@@ -162,14 +162,14 @@ namespace VoodooShader
         }
     }
 
-    String VSParser::Parse(_In_ const String & input, _In_ const ParseFlags flags) const
+    String VOODOO_METHODCALLTYPE VSParser::Parse(_In_ const String & input, _In_ const ParseFlags flags) CONST
     {
         Dictionary parseState;
 
         return this->ParseStringRaw(input, flags, 0, parseState);
     }
 
-    String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ Dictionary & state) const
+    String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ Dictionary & state) CONST
     {
         ILoggerRef logger(m_Core->GetLogger());
 

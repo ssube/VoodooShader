@@ -47,25 +47,20 @@ namespace VoodooShader
         public IObject
     {
     public:
-        /**
-         * Destroys the shader, unlinking and cleaning up the effect and all techniques.
-         */
-        virtual ~IShader(void) throw() {};
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
-
-        virtual String GetName() const throw() = 0;
+        VOODOO_METHODCALL_(String, GetName)() CONST PURE;
 
         /**
          * Get the number of validated techniques this shader contains.
          *
          * @return The number of techniques.
          */
-        virtual const uint32_t GetTechniqueCount(void) const throw() = 0;
+        VOODOO_METHODCALL_(const uint32_t, GetTechniqueCount)() CONST PURE;
 
         /**
          * Retrieve a technique from the shader by name. Most cases should use the default technique, but some specific
@@ -74,7 +69,7 @@ namespace VoodooShader
          * @param index The index of the technique to get.
          * @return The technique, if it is found.
          */
-        virtual ITechnique * GetTechnique(_In_ const uint32_t index) const throw() = 0;
+        VOODOO_METHODCALL_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST PURE;
 
         /**
          * Retrieves the default technique from this shader. All drawing should be done with the default technique: it is
@@ -87,7 +82,7 @@ namespace VoodooShader
          *     high-quality ones) and count down with the most compatible and simplest technique last. The first valid
          *     technique found becomes the default.
          */
-        virtual ITechnique * GetDefaultTechnique(void) const throw() = 0;
+        VOODOO_METHODCALL_(ITechnique *, GetDefaultTechnique)() CONST PURE;
 
         /**
          * Set a technique from this shader to be used as the default technique. Some adapter functions simply retrieve the
@@ -98,14 +93,14 @@ namespace VoodooShader
          *
          * @note This will validate that the technique belongs to this shader.
          */
-        virtual bool SetDefaultTechnique(_In_ ITechnique * const pTechnique) throw() = 0;
+        VOODOO_METHODCALL(SetDefaultTechnique)(_In_ ITechnique * const pTechnique) PURE;
 
         /**
          * Retrieve the number of effect-level parameters in this shader. These hold a single value for all passes.
          *
          * @return The parameter count.
          */
-        virtual const uint32_t GetParameterCount(void) const throw() = 0;
+        VOODOO_METHODCALL_(const uint32_t, GetParameterCount)() CONST PURE;
 
         /**
          * Retrieve a specific parameter from the shader. These may be modified at runtime and will automatically update Cg
@@ -114,14 +109,14 @@ namespace VoodooShader
          * @param index The index of the parameter to retrieve.
          * @return The parameter, if valid.
          */
-        virtual IParameter * GetParameter(_In_ const uint32_t index) const throw() = 0;
+        VOODOO_METHODCALL_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST PURE;
 
         /**
          * Retrieve the underlying Cg technique.
          *
          * @return A pointer to the Cg technique.
          */
-        virtual CGeffect GetCgEffect(void) const throw() = 0;
+        VOODOO_METHODCALL_(CGeffect, GetCgEffect)() CONST PURE;
     };
     /**
      * @}

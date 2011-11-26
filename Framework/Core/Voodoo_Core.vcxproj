@@ -105,9 +105,9 @@
     <ClInclude Include="Exports.hpp" />
     <ClInclude Include="IAdapter.hpp" />
     <ClInclude Include="ICore.hpp" />
-    <ClInclude Include="Docs_Code.hpp" />
-    <ClInclude Include="Docs_Graphics.hpp" />
-    <ClInclude Include="Docs_License.hpp" />
+    <ClInclude Include="Docs_Code.dox" />
+    <ClInclude Include="Docs_Graphics.dox" />
+    <ClInclude Include="Docs_License.dox" />
     <ClInclude Include="IFilesystem.hpp" />
     <ClInclude Include="IHookManager.hpp" />
     <ClInclude Include="Includes.hpp" />

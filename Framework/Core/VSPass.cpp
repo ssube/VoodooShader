@@ -31,7 +31,7 @@
 
 namespace VoodooShader
 {
-    VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) :
+    VOODOO_METHODCALLTYPE VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) :
         m_Refs(0), m_Technique(pTechnique), m_CgPass(pCgPass)
     {
         if (!m_Technique)
@@ -52,7 +52,7 @@ namespace VoodooShader
         }
     }
 
-    VSPass::~VSPass(void)
+    VOODOO_METHODCALLTYPE VSPass::~VSPass()
     {
         if (m_Core)
         {
@@ -66,12 +66,12 @@ namespace VoodooShader
         m_Target = nullptr;
     }
 
-    uint32_t VSPass::AddRef() const
+    uint32_t VOODOO_METHODCALLTYPE VSPass::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VSPass::Release() const
+    uint32_t VOODOO_METHODCALLTYPE VSPass::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -82,7 +82,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSPass::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VOODOO_METHODCALLTYPE VSPass::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -111,27 +111,27 @@ namespace VoodooShader
         }
     }
 
-    String VSPass::ToString(void) const
+    String VOODOO_METHODCALLTYPE VSPass::ToString() CONST
     {
         return String::Format(L"VSPass(%s)", m_Name.GetData());
     }
 
-    ICore * VSPass::GetCore(void) const
+    ICore * VOODOO_METHODCALLTYPE VSPass::GetCore() CONST
     {
         return m_Core;
     }
 
-    String VSPass::GetName() const
+    String VOODOO_METHODCALLTYPE VSPass::GetName() CONST
     {
         return m_Name;
     }
 
-    ITexture * VSPass::GetTarget(void) const
+    ITexture * VOODOO_METHODCALLTYPE VSPass::GetTarget() CONST
     {
         return m_Target.get();
     }
 
-    CGprogram VSPass::GetProgram(ProgramStage stage) const
+    CGprogram VOODOO_METHODCALLTYPE VSPass::GetProgram(ProgramStage stage) CONST
     {
         switch (stage)
         {
@@ -151,17 +151,17 @@ namespace VoodooShader
         }
     }
 
-    ITechnique * VSPass::GetTechnique(void) const
+    ITechnique * VOODOO_METHODCALLTYPE VSPass::GetTechnique() CONST
     {
         return m_Technique;
     }
 
-    CGpass VSPass::GetCgPass(void) const
+    CGpass VOODOO_METHODCALLTYPE VSPass::GetCgPass() CONST
     {
         return m_CgPass;
     }
 
-    void VSPass::Link(void)
+    void VSPass::Link()
     {
         m_VertexProgram = cgGetPassProgram(m_CgPass, CG_VERTEX_DOMAIN);
         m_FragmentProgram = cgGetPassProgram(m_CgPass, CG_FRAGMENT_DOMAIN);

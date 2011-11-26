@@ -49,15 +49,13 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~IPass(void) throw() {};
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
-
-        virtual String GetName() const throw() = 0;
+        VOODOO_METHODCALL_(String, GetName)() CONST PURE;
 
         /**
          * Retrieve the target texture buffer this pass should render to. This must be a texture created with the render
@@ -65,14 +63,14 @@ namespace VoodooShader
          *
          * @return The target texture.
          */
-        virtual ITexture * GetTarget(void) const throw() = 0;
+        VOODOO_METHODCALL_(ITexture *, GetTarget)() CONST PURE;
 
         /**
          * Retrieve the parent technique of this pass.
          *
          * @return The parent technique.
          */
-        virtual ITechnique * GetTechnique(void) const throw() = 0;
+        VOODOO_METHODCALL_(ITechnique *, GetTechnique)() CONST PURE;
 
         /**
          * Retrieve a specific program stage from this pass.
@@ -80,14 +78,14 @@ namespace VoodooShader
          * @param stage The stage to retrieve.
          * @return The program corresponding to the desired stage.
          */
-        virtual CGprogram GetProgram(_In_ const ProgramStage stage) const throw() = 0;
+        VOODOO_METHODCALL_(CGprogram, GetProgram)(_In_ const ProgramStage stage) CONST PURE;
 
         /**
          * Retrieve the underlying Cg technique.
          *
          * @return A pointer to the Cg technique.
          */
-        virtual CGpass GetCgPass(void) const throw() = 0;
+        VOODOO_METHODCALL_(CGpass, GetCgPass)() CONST PURE;
     };
     /**
      * @}

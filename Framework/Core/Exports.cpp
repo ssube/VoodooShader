@@ -41,17 +41,17 @@ namespace VoodooShader
     static const Uuid clsid_VSHookManager = CLSID_VSHookManager;
     static const Uuid clsid_VSLogger = CLSID_VSLogger;
 
-    const Version * VOODOO_CALL API_ModuleVersion(void)
+    const Version * VOODOO_CALLTYPE API_ModuleVersion()
     {
         return &coreVersion;
     }
 
-    const uint32_t VOODOO_CALL API_ClassCount(void)
+    const uint32_t VOODOO_CALLTYPE API_ClassCount()
     {
         return 4;
     }
 
-    const wchar_t * VOODOO_CALL API_ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid)
+    const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid)
     {
         if (!pUuid)
         {
@@ -77,7 +77,7 @@ namespace VoodooShader
         }
     }
 
-    IObject * VOODOO_CALL API_ClassCreate(_In_ const uint32_t number, _In_ ICore * pCore)
+    IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t number, _In_ ICore * pCore)
     {
         switch (number)
         {

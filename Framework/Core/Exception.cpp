@@ -54,6 +54,8 @@ namespace VoodooShader
                 logger->Log(LL_CoreError, module, ExceptionLogMsg, file, function, line, message);
             }
         }
+
+        this->Init();
     }
 
     Exception::Exception
@@ -91,9 +93,11 @@ namespace VoodooShader
                 );
             }
         }
+
+        this->Init();
     }
 
-    Exception::~Exception(void)
+    Exception::~Exception()
     {
         if (m_FmtMsg)
         {
@@ -101,7 +105,7 @@ namespace VoodooShader
         }
     }
 
-    const char * Exception::what(void)
+    void Exception::Init()
     {
         if (m_FmtMsg == nullptr)
         {
@@ -131,7 +135,10 @@ namespace VoodooShader
                 m_Message.GetData()
             );
         }
+    }
 
+    const char * Exception::what() const
+    {
         return m_FmtMsg;
     }
 }

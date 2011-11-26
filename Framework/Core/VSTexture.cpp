@@ -26,15 +26,15 @@ namespace VoodooShader
         m_Refs(0), m_Name(name), m_Data(pTexture)
     { }
 
-    VSTexture::~VSTexture(void)
+    VSTexture::~VSTexture()
     { }
 
-    uint32_t VSTexture::AddRef() const
+    uint32_t VOODOO_METHODCALLTYPE VSTexture::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VSTexture::Release() const
+    uint32_t VOODOO_METHODCALLTYPE VSTexture::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -45,7 +45,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSTexture::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VOODOO_METHODCALLTYPE VSTexture::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -74,34 +74,34 @@ namespace VoodooShader
         }
     }
 
-    String VSTexture::ToString(void) const
+    String VOODOO_METHODCALLTYPE VSTexture::ToString() CONST
     {
         return String::Format(L"VSTexture(%s)", m_Name.GetData());
     }
 
-    ICore * VSTexture::GetCore(void) const
+    ICore * VOODOO_METHODCALLTYPE VSTexture::GetCore() CONST
     {
         return m_Core;
     }
 
-    String VSTexture::GetName() const
+    String VOODOO_METHODCALLTYPE VSTexture::GetName() CONST
     {
         return m_Name;
     }
 
-    void * VSTexture::GetData(void) const
+    void * VOODOO_METHODCALLTYPE VSTexture::GetData() CONST
     {
         return m_Data;
     }
 
-    void * VSTexture::SetData(_In_ void * pData) throw()
+    void * VOODOO_METHODCALLTYPE VSTexture::SetData(_In_ void * pData) 
     {
         void * oldData = m_Data;
         m_Data = pData;
         return oldData;
     }
 
-    const TextureDesc * VSTexture::GetDesc(void) const
+    const TextureDesc * VOODOO_METHODCALLTYPE VSTexture::GetDesc() CONST
     {
         return &m_Desc;
     }

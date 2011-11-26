@@ -44,13 +44,11 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~IHookManager(void) throw() {};
-
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Install a single hook at the specified point. This will only affect the process(es) the HookManager is bound to.
@@ -63,7 +61,7 @@ namespace VoodooShader
          * @warning The calling convention of pSrc and pDest must be identical, or bad things might happen. This is only a
          *     bother with member functions but should be noted for all.
          */
-        virtual bool Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest) throw() = 0;
+        VOODOO_METHODCALL(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest) PURE;
 
         /**
          * Removes a single hook.
@@ -74,12 +72,12 @@ namespace VoodooShader
          * @warning <em>Do not</em>, under any circumstances, remove a hook while execution is passing through the
          *     trampoline function. This can cause the process to crash. Until EasyHook is replaced, be careful!
          */
-        virtual bool Remove(_In_ const String & name) throw() = 0;
+        VOODOO_METHODCALL(Remove)(_In_ const String & name) PURE;
 
         /**
          * Removes all hooks created with this HookManager.
          */
-        virtual void RemoveAll(void) throw() = 0;
+        VOODOO_METHODCALL(RemoveAll)() PURE;
     };
     /**
      * @}

@@ -61,9 +61,11 @@ namespace VoodooShader
             _In_ int line
         );
 
-        virtual ~Exception(void);
+        virtual ~Exception();
 
-        virtual const char * what(void);
+        void Init();
+
+        virtual const char * what() const;
 
     private:
         ICore * m_Core;

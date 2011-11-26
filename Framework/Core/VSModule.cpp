@@ -38,18 +38,18 @@ namespace VoodooShader
         m_Refs(0), m_Core(core)
     { }
 
-    VSModuleManager::~VSModuleManager(void)
+    VSModuleManager::~VSModuleManager()
     {
         m_Classes.clear();
         m_Modules.clear();
     }
 
-    uint32_t VSModuleManager::AddRef() const
+    uint32_t VOODOO_METHODCALLTYPE VSModuleManager::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VSModuleManager::Release() const
+    uint32_t VOODOO_METHODCALLTYPE VSModuleManager::Release() CONST
     {
         uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
@@ -59,7 +59,7 @@ namespace VoodooShader
         return count;
     }
 
-    bool VSModuleManager::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VOODOO_METHODCALLTYPE VSModuleManager::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -88,17 +88,17 @@ namespace VoodooShader
         }
     }
 
-    String VSModuleManager::ToString() const
+    String VOODOO_METHODCALLTYPE VSModuleManager::ToString() CONST
     {
         return L"VSModuleManager()";
     }
 
-    ICore * VSModuleManager::GetCore() const
+    ICore * VOODOO_METHODCALLTYPE VSModuleManager::GetCore() CONST
     {
         return m_Core;
     }
 
-    bool VSModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
+    bool VOODOO_METHODCALLTYPE VSModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
     {
         String mask = m_Core->GetParser()->Parse(path) + L"\\*";
 
@@ -149,7 +149,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VSModuleManager::LoadFile(_In_ const String & filename)
+    bool VOODOO_METHODCALLTYPE VSModuleManager::LoadFile(_In_ const String & filename)
     {
         ILoggerRef logger = m_Core->GetLogger();
 
@@ -221,7 +221,7 @@ namespace VoodooShader
     }
 
 
-    bool VSModuleManager::LoadFile(_In_ const IFile * pFile)
+    bool VOODOO_METHODCALLTYPE VSModuleManager::LoadFile(_In_ const IFile * pFile)
     {
         if (pFile)
         {
@@ -231,7 +231,7 @@ namespace VoodooShader
         }
     }
 
-    void * VSModuleManager::FindFunction(_In_ const String & module, _In_ const String & name) const
+    void * VOODOO_METHODCALLTYPE VSModuleManager::FindFunction(_In_ const String & module, _In_ const String & name) CONST
     {
         HMODULE hmodule = GetModuleHandle(module.GetData());
 
@@ -248,12 +248,12 @@ namespace VoodooShader
         }
     }
 
-    bool VSModuleManager::ClassExists(_In_ const Uuid & clsid) const
+    bool VOODOO_METHODCALLTYPE VSModuleManager::ClassExists(_In_ const Uuid & clsid) CONST
     {
         return (m_Classes.find(clsid) != m_Classes.end());
     }
 
-    bool VSModuleManager::ClassExists(_In_ const String & name) const
+    bool VOODOO_METHODCALLTYPE VSModuleManager::ClassExists(_In_ const String & name) CONST
     {
         Uuid clsid;
         if (!name.ToUuid(&clsid))
@@ -270,7 +270,7 @@ namespace VoodooShader
         return this->ClassExists(clsid);
     }
 
-    IObject * VSModuleManager::CreateObject(_In_ const Uuid & clsid) const
+    IObject * VOODOO_METHODCALLTYPE VSModuleManager::CreateObject(_In_ const Uuid & clsid) CONST
     {
         ILogger* logger = m_Core->GetLogger();
         ClassMap::const_iterator classiter = m_Classes.find(clsid);
@@ -307,7 +307,7 @@ namespace VoodooShader
         }
     }
 
-    IObject * VSModuleManager::CreateObject(_In_ const String & name) const
+    IObject * VOODOO_METHODCALLTYPE VSModuleManager::CreateObject(_In_ const String & name) CONST
     {
         Uuid clsid;
         if (!name.ToUuid(&clsid))
@@ -357,11 +357,11 @@ namespace VoodooShader
         }
     }
 
-    VSModule::VSModule(_In_ ICore * pCore, HMODULE hmodule) :
+    VOODOO_METHODCALLTYPE VSModule::VSModule(_In_ ICore * pCore, HMODULE hmodule) :
         m_Refs(0), m_Core(pCore), m_Handle(hmodule)
     { }
 
-    VSModule::~VSModule(void)
+    VOODOO_METHODCALLTYPE VSModule::~VSModule()
     {
         if (m_Handle != INVALID_HANDLE_VALUE)
         {
@@ -370,12 +370,12 @@ namespace VoodooShader
         }
     }
 
-    uint32_t VSModule::AddRef() const
+    uint32_t VOODOO_METHODCALLTYPE VSModule::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VSModule::Release() const
+    uint32_t VOODOO_METHODCALLTYPE VSModule::Release() CONST
     {
         uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
@@ -385,7 +385,7 @@ namespace VoodooShader
         return count;
     }
 
-    bool VSModule::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VOODOO_METHODCALLTYPE VSModule::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -414,32 +414,32 @@ namespace VoodooShader
         }
     }
 
-    String VSModule::ToString() const
+    String VOODOO_METHODCALLTYPE VSModule::ToString() CONST
     {
         return L"VSModule()";
     }
 
-    ICore * VSModule::GetCore() const
+    ICore * VOODOO_METHODCALLTYPE VSModule::GetCore() CONST
     {
         return m_Core;
     }
 
-    const Version * VSModule::ModuleVersion(void) const
+    const Version * VOODOO_METHODCALLTYPE VSModule::ModuleVersion() CONST
     {
         return m_ModuleVersion();
     }
 
-    const uint32_t VSModule::ClassCount(void) const
+    const uint32_t VOODOO_METHODCALLTYPE VSModule::ClassCount() CONST
     {
         return m_ClassCount();
     }
 
-    const wchar_t * VSModule::ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) const
+    const wchar_t * VOODOO_METHODCALLTYPE VSModule::ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST
     {
         return m_ClassInfo(number, pUuid);
     }
 
-    IObject * VSModule::CreateClass(_In_ const uint32_t number, _In_ ICore * const pCore)
+    IObject * VOODOO_METHODCALLTYPE VSModule::CreateClass(_In_ const uint32_t number, _In_ ICore * const pCore) CONST
     {
         return m_ClassCreate(number, pCore);
     }

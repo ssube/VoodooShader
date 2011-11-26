@@ -81,19 +81,19 @@ namespace VoodooShader
       * needs a short-term guarantee of validity, or pass the reference (where it may be incremented).
       *
       * @subsection voodoo_spec_iobject_addref IObject::AddRef
-      * @code virtual uint32_t IObject::AddRef() const throw() @endcode
+      * @code virtual uint32_t IObject::AddRef() const  @endcode
       *
       * Increments the internal reference count by 1 and returns the new count. No other effects should be caused.
       *
       * @subsection voodoo_spec_iobject_release IObject::Release
-      * @code virtual uint32_t IObject::Release() const throw() @endcode
+      * @code virtual uint32_t IObject::Release() const  @endcode
       *
       * Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object should be
       * deleted internally (<tt>delete this;</tt>). This provides correct memory allocation and deallocation, safe from
       * compiler or module boundaries.
       * 
       * @subsection voodoo_spec_iobject_query IObject::QueryInterface
-      * @code virtual bool IObject::QueryInterface(Uuid & refid, void ** ppOut) const throw() @endcode
+      * @code virtual bool IObject::QueryInterface(Uuid & refid, void ** ppOut) const  @endcode
       * 
       * Queries the object for a particular interface. 
       * 
@@ -149,7 +149,7 @@ namespace VoodooShader
       * @endcode
       *
       * @subsection voodoo_spec_iobject_tostring IObject::ToString
-      * @code virtual String IObject::ToString() const throw() @endcode
+      * @code virtual String IObject::ToString() const  @endcode
       *
       * Returns a formatted string made up of the object's type <em>name</em> (not necessarily UUID) and optionally some
       * data. This string must follow the form:
@@ -162,12 +162,12 @@ namespace VoodooShader
       * If no data is provided, the data section inside the parentheses must be empty but the parentheses must be present.
       *
       * @subsection voodoo_spec_iobject_getcore IObject::GetCore
-      * @code virtual ICore * IObject::GetCore() const throw() @endcode
+      * @code virtual ICore * IObject::GetCore() const  @endcode
       *
       * Returns a <em>non-incremented</em> reference to the object's parent core. This should be stored internally, usually
       * set at construction.
       * 
-      * @subsection voodoo_spec_module_throw throw()
+      * @subsection voodoo_spec_module_throw 
       * <b>No method or function in a class or interface derived from IObject may throw exceptions.</b> If error reporting 
       * is necessary, an error value should be returned. This is a necessary safety precaution, as modules may be created
       * with different compilers or languages and it may not be possible to safely propagate exceptions. 

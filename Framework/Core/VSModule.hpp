@@ -37,22 +37,22 @@ namespace VoodooShader
     {
     public:
         VSModuleManager(_In_ ICore * pCore);
-        virtual ~VSModuleManager(void);
+        virtual ~VSModuleManager();
 
-        virtual uint32_t AddRef(void) const throw();
-        virtual uint32_t Release(void) const throw();
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-        virtual String ToString(void) const throw();
-        virtual ICore * GetCore(void) const throw();
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHODCALL_(String, ToString)() CONST;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
-        virtual bool LoadPath(_In_ const String & path, _In_ const String & filter);
-        virtual bool LoadFile(_In_ const IFile * pFile);
-        virtual bool LoadFile(_In_ const String & filename);
-        virtual bool ClassExists(_In_ const Uuid & clsid) const;
-        virtual bool ClassExists(_In_ const String & name) const;
-        _Check_return_ virtual IObject * CreateObject(_In_ const Uuid & clsid) const;
-        _Check_return_ virtual IObject * CreateObject(_In_ const String & name) const;
-        _Check_return_ virtual void * FindFunction(_In_ const String & module, _In_ const String & name) const;
+        VOODOO_METHODCALL(LoadPath)(_In_ const String & path, _In_ const String & filter);
+        VOODOO_METHODCALL(LoadFile)(_In_ const IFile * pFile);
+        VOODOO_METHODCALL(LoadFile)(_In_ const String & filename);
+        VOODOO_METHODCALL(ClassExists)(_In_ const Uuid & clsid) const;
+        VOODOO_METHODCALL(ClassExists)(_In_ const String & name) const;
+        _Check_return_ VOODOO_METHODCALL_(IObject *, CreateObject)(_In_ const Uuid & clsid) const;
+        _Check_return_ VOODOO_METHODCALL_(IObject *, CreateObject)(_In_ const String & name) const;
+        _Check_return_ VOODOO_METHODCALL_(void *, FindFunction)(_In_ const String & module, _In_ const String & name) const;
 
     private:
         mutable uint32_t m_Refs;
@@ -79,18 +79,18 @@ namespace VoodooShader
         static VSModule * Load(_In_ ICore * const pCore, _In_ const String & path);
 
         VSModule(_In_ ICore * pCore, _In_ HMODULE hmodule);
-        virtual ~VSModule(void);
+        virtual ~VSModule();
 
-        virtual uint32_t AddRef(void) const throw();
-        virtual uint32_t Release(void) const throw();
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-        virtual String ToString(void) const throw();
-        virtual ICore * GetCore(void) const throw();
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHODCALL_(String, ToString)() CONST;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
-        virtual const Version * ModuleVersion(void) const throw();
-        virtual const uint32_t ClassCount(void) const;
-        virtual const wchar_t * ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) const;
-        virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore);
+        VOODOO_METHODCALL_(const Version *, ModuleVersion)() CONST;
+        VOODOO_METHODCALL_(const uint32_t, ClassCount)() CONST;
+        VOODOO_METHODCALL_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST;
+        VOODOO_METHODCALL_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST;
 
     private:
         mutable uint32_t m_Refs;

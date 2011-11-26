@@ -38,22 +38,22 @@ namespace VoodooShader
     {
     public:
         VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
-        virtual ~VSShader(void);
+        virtual ~VSShader();
 
-        virtual uint32_t AddRef(void) const throw();
-        virtual uint32_t Release(void) const throw();
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-        virtual String ToString(void) const throw();
-        virtual ICore * GetCore(void) const throw();
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHODCALL_(String, ToString)() CONST;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
-        virtual String GetName() const throw();
-        virtual const uint32_t GetTechniqueCount(void) const throw();
-        virtual ITechnique * GetTechnique(_In_ const uint32_t index) const throw();
-        virtual ITechnique * GetDefaultTechnique(void) const throw();
-        virtual bool SetDefaultTechnique(_In_ ITechnique * const pTechnique) throw();
-        virtual const uint32_t GetParameterCount(void) const throw();
-        virtual IParameter * GetParameter(_In_ const uint32_t index) const throw();
-        virtual CGeffect GetCgEffect(void) const throw();
+        VOODOO_METHODCALL_(String, GetName)() CONST;
+        VOODOO_METHODCALL_(const uint32_t, GetTechniqueCount)() CONST;
+        VOODOO_METHODCALL_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
+        VOODOO_METHODCALL_(ITechnique *, GetDefaultTechnique)() CONST;
+        VOODOO_METHODCALL(SetDefaultTechnique)(_In_ ITechnique * const pTechnique) ;
+        VOODOO_METHODCALL_(const uint32_t, GetParameterCount)() CONST;
+        VOODOO_METHODCALL_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
+        VOODOO_METHODCALL_(CGeffect, GetCgEffect)() CONST;
 
     private:
         /**

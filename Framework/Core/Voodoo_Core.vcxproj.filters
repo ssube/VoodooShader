@@ -54,15 +54,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Docs_Code.hpp">
-      <Filter>Docs</Filter>
-    </ClInclude>
-    <ClInclude Include="Docs_License.hpp">
-      <Filter>Docs</Filter>
-    </ClInclude>
-    <ClInclude Include="Docs_Graphics.hpp">
-      <Filter>Docs</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
@@ -167,6 +158,15 @@
     </ClInclude>
     <ClInclude Include="Version_Build.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs_Code.dox">
+      <Filter>Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs_Graphics.dox">
+      <Filter>Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs_License.dox">
+      <Filter>Docs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

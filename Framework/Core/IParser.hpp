@@ -43,13 +43,11 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~IParser(void) throw() {};
-
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Adds a variable to the internal dictionary.
@@ -58,14 +56,14 @@ namespace VoodooShader
          * @param value The variable's value (may contain variables, they will be resolved when this variable is used).
          * @param type Flags for this of variable.
          */
-        virtual void Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) throw() = 0;
+        VOODOO_METHODCALL_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) PURE;
 
         /**
          * Removes a variable from the internal dictionary.
          *
          * @param name The variable name (may contain variables, they will be resolved immediately).
          */
-        virtual void Remove(_In_ const String & name) throw() = 0;
+        VOODOO_METHODCALL_(void, Remove)(_In_ const String & name) PURE;
 
         /**
          * Parses a string, replacing any variables with their values. Variables are resolved when found, so it is
@@ -73,7 +71,7 @@ namespace VoodooShader
          *
          * @sa @ref voodoo_vars for details on how variables work
          */
-        virtual String Parse(_In_ const String & input, _In_ const ParseFlags flags = PF_None) const throw() = 0;
+        VOODOO_METHODCALL_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = PF_None) CONST PURE;
     };
 
     /**

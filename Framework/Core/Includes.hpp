@@ -67,8 +67,16 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-#ifndef EXTERN_C
-#   define EXTERN_C extern "C"
+#ifndef PURE
+#   define PURE = 0
+#endif
+
+#ifndef CONST
+#   define CONST const
+#endif
+
+#ifndef DECLSPEC_NOTHROW
+#   define DECLSPEC_NOTHROW __declspec(nothrow)
 #endif
 
 #ifndef DECLSPEC_SELECTANY
@@ -92,10 +100,13 @@
 #   define VOODOO_API __declspec(dllimport)
 #endif
 
-#define VOODOO_CALL __stdcall
-#define VOODOO_CALL_METHOD __stdcall
+#define VOODOO_CALLTYPE __stdcall
+#define VOODOO_METHODCALLTYPE VOODOO_CALLTYPE
 
-#define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALL
+#define VOODOO_METHODCALL_(type, name) virtual DECLSPEC_NOTHROW type VOODOO_CALLTYPE name
+#define VOODOO_METHODCALL(name) VOODOO_METHODCALL_(bool, name)
+
+#define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALLTYPE
 
 #ifndef VOODOO_NO_CG
 #   include "Cg/cg.h"
@@ -190,7 +201,7 @@ namespace VoodooShader
      * @defgroup voodoo_uuids Voodoo UUIDs
      * @{
      */
-#define DEFINE_UUID(name)     EXTERN_C const Uuid DECLSPEC_SELECTANY name
+#define DEFINE_UUID(name)     EXTERN_C CONST Uuid DECLSPEC_SELECTANY name
 #define DEFINE_IID(name)      DEFINE_UUID(IID_##name)
 #define DEFINE_CLSID(name)    DEFINE_UUID(CLSID_##name)
 #define DEFINE_LIBID(name)    DEFINE_UUID(LIBID_##name)
@@ -594,10 +605,10 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef const Version * (VOODOO_CALL * VersionFunc)();
-        typedef const uint32_t (VOODOO_CALL * CountFunc)();
-        typedef const wchar_t * (VOODOO_CALL * InfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
-        typedef IObject * (VOODOO_CALL * CreateFunc)(_In_ const uint32_t, _In_ ICore *);
+        typedef const Version * (VOODOO_CALLTYPE * VersionFunc)();
+        typedef const uint32_t (VOODOO_CALLTYPE * CountFunc)();
+        typedef const wchar_t * (VOODOO_CALLTYPE * InfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
+        typedef IObject * (VOODOO_CALLTYPE * CreateFunc)(_In_ const uint32_t, _In_ ICore *);
     }
 
     /**
@@ -610,7 +621,7 @@ namespace VoodooShader
      *
      * @throws std::exception in case of errors, if catchErrors is false.
      */
-    _Check_return_ ICore * VOODOO_CALL CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
+    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
 
     /**
      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, particularly function,

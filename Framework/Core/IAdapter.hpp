@@ -49,13 +49,11 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~IAdapter(void) throw() {};
-
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Loads a pass in a manner that is compatible with the adapter's underlying API. For Cg-supported APIs, this may
@@ -70,7 +68,7 @@ namespace VoodooShader
          *     guarantee is that if this call returns true, the pass may be bound to this adapter in the future. If this
          *     returns false, the pass must not be bound.
          */
-        virtual bool LoadPass(_In_ IPass * const pPass) throw() = 0;
+        VOODOO_METHODCALL(LoadPass)(_In_ IPass * const pPass) PURE;
 
         /**
          * Unloads a pass from the adapter.
@@ -80,7 +78,7 @@ namespace VoodooShader
          * @warning There is no guarantee what will occur within this function, but the pass given should @e never be bound
          *     after being unloaded.
          */
-        virtual bool UnloadPass(_In_ IPass * const pPass) throw() = 0;
+        VOODOO_METHODCALL(UnloadPass)(_In_ IPass * const pPass) PURE;
 
         /**
          * Causes the adapter to load a pass for drawing. The adapter may choose which programs to bind and how to handle
@@ -102,14 +100,14 @@ namespace VoodooShader
          * @note Adapters must restore all states when a pass is unbound to the exact previous state. The exact
          *     implementation is left to the adapter, but DX provides some APIs to handle this rather well.
          */
-        virtual bool SetPass(_In_opt_ IPass * const pPass = nullptr) throw() = 0;
+        VOODOO_METHODCALL(SetPass)(_In_opt_ IPass * const pPass = nullptr) PURE;
 
         /**
          * Get the currently bound pass.
          *
          * @return The bound pass, or nullptr if none.
          */
-        virtual IPass * GetPass(void) const throw() = 0;
+        VOODOO_METHODCALL_(IPass *, GetPass)() CONST PURE;
 
         /**
          * Sets a render target for the adapter.
@@ -122,7 +120,7 @@ namespace VoodooShader
          *     target. Most common formats should be supported, so long as all targets are the same format. Many cards allow
          *     up to 4 targets. Anything beyond this should not be expected to be widely supported.
          */
-        virtual bool SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget = nullptr) throw() = 0;
+        VOODOO_METHODCALL(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget = nullptr) PURE;
 
         /**
          * Gets a render target from the adapter.
@@ -130,7 +128,7 @@ namespace VoodooShader
          * @param index The target index to get.
          * @returns The texture bound to the target, or nullptr if no bound texture.
          */
-        virtual ITexture * GetTarget(_In_ const uint32_t index) const throw() = 0;
+        VOODOO_METHODCALL_(ITexture *, GetTarget)(_In_ const uint32_t index) CONST PURE;
 
         /**
          * Creates a texture within the adapter and binds it to a texture.
@@ -148,7 +146,7 @@ namespace VoodooShader
          * @warning You should not call this method directly; it should only be used via Core::CreateTexture(). This method
          *     does not set up the texture for use with the core.
          */
-        virtual bool CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture) throw() = 0;
+        VOODOO_METHODCALL(CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture) PURE;
 
         /**
          * Loads a named texture into the API and registers it with the Core. The texture source is provided here and all
@@ -158,7 +156,7 @@ namespace VoodooShader
          * @param pRegion The region of the file that should be used.
          * @return The texture, if successfully created. A nullptr otherwise.
          */
-        virtual bool LoadTexture(_In_ IImage * const pImage, _In_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture) throw() = 0;
+        VOODOO_METHODCALL(LoadTexture)(_In_ IImage * const pImage, _In_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture) PURE;
 
         /**
          * Draws geometry from system memory.
@@ -168,12 +166,12 @@ namespace VoodooShader
          * @param flags Vertex flags for this data set, particularly whether the verts are pretransformed.
          * @return Success of the draw operation.
          */
-        virtual bool DrawGeometry
+        VOODOO_METHODCALL(DrawGeometry)
         (
             _In_ const uint32_t count,
             _In_count_(count) VertexStruct * const pVertexData,
             _In_ const VertexFlags flags = VF_Transformed
-        ) throw() = 0;
+        ) PURE;
 
         /**
          * Downloads a parameter's value from system RAM to VRAM, verifying that the value on the GPU (and in use) is the
@@ -182,7 +180,7 @@ namespace VoodooShader
          *
          * @param pParameter The parameter to apply.
          */
-        virtual bool ApplyParameter(_In_ IParameter * const pParameter) throw() = 0;
+        VOODOO_METHODCALL(ApplyParameter)(_In_ IParameter * const pParameter) PURE;
 
         /**
          * Set a property on the adapter.
@@ -200,7 +198,7 @@ namespace VoodooShader
          * @warning Adapters <b>may</b> change values stored in the variant given. However, they must return true if so, and
          *      must verify the type is correct.
          */
-        virtual bool SetProperty(_In_ const wchar_t * name, _In_ Variant & value) throw() = 0;
+        VOODOO_METHODCALL(SetProperty)(_In_ const wchar_t * name, _In_ Variant & value) PURE;
 
         /**
          * Get a property from the adapter.
@@ -209,7 +207,7 @@ namespace VoodooShader
          *
          * @return The value of the property (lexically cast to a string if necessary).
          */
-        virtual Variant GetProperty(_In_ const wchar_t * name) const throw() = 0;
+        VOODOO_METHODCALL_(Variant, GetProperty)(_In_ const wchar_t * name) CONST PURE;
 
         /**
          * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses
@@ -220,7 +218,7 @@ namespace VoodooShader
          * @param pTexture The texture to be bound.
          * @return Whether or not the binding was successful
          */
-        virtual bool ConnectTexture(_In_ IParameter * const pParam, _In_ ITexture * const pTexture) throw() = 0;
+        VOODOO_METHODCALL(ConnectTexture)(_In_ IParameter * const pParam, _In_ ITexture * const pTexture) PURE;
 
         /**
          * A generic error-handling callback provided to the Cg runtime. This will be called by Core::CgErrorHandler() in
@@ -239,7 +237,7 @@ namespace VoodooShader
          *     if the adapter does not dump compiler listings, the core will. This is intended to ensure compilation errors
          *     are noted, but provide the adapter a chance to handle and potentially correct them.
          */
-        virtual bool HandleError(_In_ CGcontext const pContext, _In_ uint32_t error) throw() = 0;
+        VOODOO_METHODCALL(HandleError)(_In_ CGcontext const pContext, _In_ uint32_t error) PURE;
     };
     /**
      * @}

@@ -45,22 +45,20 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~ITexture(void) {};
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
-
-        virtual String GetName() const throw() = 0;
+        VOODOO_METHODCALL_(String, GetName)() CONST PURE;
 
         /**
          * Gets the data.
          *
          * @return nullptr if it fails, else the data.
          */
-        virtual void * GetData(void) const throw() = 0;
+        VOODOO_METHODCALL_(void *, GetData)() CONST PURE;
 
         /**
          * Set the texture data.
@@ -68,14 +66,14 @@ namespace VoodooShader
          * @param pData The new data value.
          * @return The previous data value.
          */
-        virtual void * SetData(_In_ void * pData) throw() = 0;
+        VOODOO_METHODCALL_(void *, SetData)(_In_ void * pData) PURE;
 
         /**
          * Gets the texture description.
          *
          * @return The description.
          */
-        virtual const TextureDesc * GetDesc(void) const throw() = 0;
+        VOODOO_METHODCALL_(const TextureDesc *, GetDesc)() CONST PURE;
     };
     /**
      * @}

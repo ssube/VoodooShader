@@ -51,36 +51,35 @@ namespace VoodooShader
 
     public:
         VSCore();
-        virtual ~VSCore(void);
+        virtual ~VSCore();
 
-        virtual uint32_t AddRef(void) const throw();
-        virtual uint32_t Release(void) const throw();
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-        virtual String ToString(void) const throw();
-        virtual ICore * GetCore(void) const throw();
-
-        virtual IParser * GetParser(void) const;
-        virtual IHookManager * GetHookManager(void) const;
-        virtual IFileSystem * GetFileSystem(void) const;
-        virtual IAdapter * GetAdapter(void) const;
-        virtual ILogger * GetLogger(void) const;
-        virtual XmlDocument GetConfig(void) const;
-
-        virtual IShader * CreateShader(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs);
-        virtual IParameter * CreateParameter(_In_ const String & name, _In_ const ParameterType type);
-        virtual ITexture * CreateTexture(_In_ const String & name, _In_ const TextureDesc * const pDesc);
-        virtual IParameter * GetParameter(_In_ const String & name, _In_ const ParameterType type) const;
-        virtual ITexture * GetTexture(_In_ const String & name) const;
-        virtual bool RemoveParameter(_In_ const String & name);
-        virtual bool RemoveTexture(_In_ const String & name);
-
-        virtual ITexture * GetStageTexture(_In_ const TextureStage stage) const;
-        virtual void SetStageTexture(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture);
-
-        _Check_return_ virtual CGcontext GetCgContext(void) const;
-        virtual bool SetCgContext(_In_opt_ CGcontext const pContext);
-
-        bool Initialize(_In_ const InitParams * const pInitParams);
+        // IObject
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHODCALL_(String, ToString)() CONST;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+        
+        // ICore
+        VOODOO_METHODCALL(Initialize)(_In_ const InitParams * const pInitParams);
+        VOODOO_METHODCALL(Reset)();
+        VOODOO_METHODCALL_(IParser *, GetParser)() CONST;
+        VOODOO_METHODCALL_(IHookManager *, GetHookManager)() CONST;
+        VOODOO_METHODCALL_(IFileSystem *, GetFileSystem)() CONST;
+        VOODOO_METHODCALL_(IAdapter *, GetAdapter)() CONST;
+        VOODOO_METHODCALL_(ILogger *, GetLogger)() CONST;
+        VOODOO_METHODCALL_(XmlDocument, GetConfig)() CONST;
+        VOODOO_METHODCALL_(IShader *, CreateShader)(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs);
+        VOODOO_METHODCALL_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterType type);
+        VOODOO_METHODCALL_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc * const pDesc);
+        VOODOO_METHODCALL_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterType type) CONST;
+        VOODOO_METHODCALL_(ITexture *, GetTexture)(_In_ const String & name) CONST;
+        VOODOO_METHODCALL(RemoveParameter)(_In_ const String & name);
+        VOODOO_METHODCALL(RemoveTexture)(_In_ const String & name);
+        VOODOO_METHODCALL_(ITexture *, GetStageTexture)(_In_ const TextureStage stage) CONST;
+        VOODOO_METHODCALL_(void, SetStageTexture)(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture);
+        _Check_return_ VOODOO_METHODCALL_(CGcontext, GetCgContext)() CONST;
+        VOODOO_METHODCALL(SetCgContext)(_In_opt_ CGcontext const pContext);
 
     private:
         void CgErrorHandler(_In_ CGcontext pContext, _In_ int error) const;

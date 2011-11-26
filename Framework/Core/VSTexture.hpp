@@ -37,18 +37,18 @@ namespace VoodooShader
     {
     public:
         VSTexture(_In_ String name, _In_opt_ void * pTexture = nullptr);
-        virtual ~VSTexture(void);
+        virtual ~VSTexture();
 
-        virtual uint32_t AddRef(void) const throw();
-        virtual uint32_t Release(void) const throw();
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-        virtual String ToString(void) const throw();
-        virtual ICore * GetCore(void) const throw();
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHODCALL_(String, ToString)() CONST;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
-        virtual String GetName() const throw();
-        virtual void * GetData(void) const;
-        virtual void * SetData(_In_ void * pData) throw();
-        virtual const TextureDesc * GetDesc(void) const;
+        VOODOO_METHODCALL_(String, GetName)() CONST;
+        VOODOO_METHODCALL_(void *, GetData)() const;
+        VOODOO_METHODCALL_(void *, SetData)(_In_ void * pData) ;
+        VOODOO_METHODCALL_(const TextureDesc *, GetDesc)() const;
 
     private:
         mutable uint32_t m_Refs;

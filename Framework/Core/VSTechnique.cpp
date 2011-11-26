@@ -33,7 +33,7 @@
 
 namespace VoodooShader
 {
-    VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
+    VOODOO_METHODCALLTYPE VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
         m_Refs(0), m_Shader(pShader), m_Core(pShader->GetCore()), m_CgTechnique(pCgTech), m_Target(nullptr)
     {
         const char * techName = cgGetTechniqueName(m_CgTechnique);
@@ -47,18 +47,18 @@ namespace VoodooShader
         }
     }
 
-    VSTechnique::~VSTechnique(void)
+    VOODOO_METHODCALLTYPE VSTechnique::~VSTechnique()
     {
         m_Target = nullptr;
         m_Passes.clear();
     }
 
-    uint32_t VSTechnique::AddRef() const
+    uint32_t VOODOO_METHODCALLTYPE VSTechnique::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VSTechnique::Release() const
+    uint32_t VOODOO_METHODCALLTYPE VSTechnique::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -69,7 +69,7 @@ namespace VoodooShader
         }
     }
 
-    bool VSTechnique::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+    bool VOODOO_METHODCALLTYPE VSTechnique::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -98,22 +98,22 @@ namespace VoodooShader
         }
     }
 
-    String VSTechnique::ToString(void) const
+    String VOODOO_METHODCALLTYPE VSTechnique::ToString() CONST
     {
         return String::Format(L"VSTechnique(%s)", m_Name.GetData());
     }
 
-    ICore * VSTechnique::GetCore(void) const
+    ICore * VOODOO_METHODCALLTYPE VSTechnique::GetCore() CONST
     {
         return m_Core;
     }
 
-    String VSTechnique::GetName() const
+    String VOODOO_METHODCALLTYPE VSTechnique::GetName() CONST
     {
         return m_Name;
     }
 
-    IPass * VSTechnique::GetPass(const uint32_t index) const
+    IPass * VOODOO_METHODCALLTYPE VSTechnique::GetPass(const uint32_t index) CONST
     {
         if (index < m_Passes.size())
         {
@@ -123,22 +123,22 @@ namespace VoodooShader
         }
     }
 
-    ITexture * VSTechnique::GetTarget(void) const
+    ITexture * VOODOO_METHODCALLTYPE VSTechnique::GetTarget() CONST
     {
         return m_Target.get();
     }
 
-    const uint32_t VSTechnique::GetPassCount(void) const
+    const uint32_t VOODOO_METHODCALLTYPE VSTechnique::GetPassCount() CONST
     {
         return m_Passes.size();
     }
 
-    IShader * VSTechnique::GetShader(void) const
+    IShader * VOODOO_METHODCALLTYPE VSTechnique::GetShader() CONST
     {
         return m_Shader;
     }
 
-    CGtechnique VSTechnique::GetCgTechnique(void) const
+    CGtechnique VOODOO_METHODCALLTYPE VSTechnique::GetCgTechnique() CONST
     {
         return m_CgTechnique;
     }

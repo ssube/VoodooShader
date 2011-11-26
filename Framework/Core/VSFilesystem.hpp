@@ -47,17 +47,17 @@ namespace VoodooShader
     {
     public:
         VSFileSystem(_In_ ICore * pCore);
-        virtual ~VSFileSystem(void);
+        virtual ~VSFileSystem();
 
-        virtual uint32_t AddRef(void) const throw();
-        virtual uint32_t Release(void) const throw();
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-        virtual String ToString(void) const throw();
-        virtual ICore * GetCore(void) const throw();
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHODCALL_(String, ToString)() CONST;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
-        virtual bool AddPath(_In_ const String & dir) throw();
-        virtual bool RemovePath(_In_ const String & dir) throw();
-        virtual IFile * FindFile(_In_ const String & name) const throw();
+        VOODOO_METHODCALL(AddPath)(_In_ const String & dir) ;
+        VOODOO_METHODCALL(RemovePath)(_In_ const String & dir) ;
+        VOODOO_METHODCALL_(IFile *, FindFile)(_In_ const String & name) CONST;
 
     private:
         mutable uint32_t m_Refs;

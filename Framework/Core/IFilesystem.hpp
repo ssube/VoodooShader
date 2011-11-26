@@ -44,16 +44,11 @@ namespace VoodooShader
         public IObject
     {
     public:
-        /**
-         * Base virtual destructor for all object classes. This throws when called, and so must be overridden.
-         */
-        virtual ~IFileSystem(void) throw() {};
-
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Adds a directory to this file system's search path.
@@ -63,7 +58,7 @@ namespace VoodooShader
          * @note This does not check for duplicates, so care should be taken not to add the same directory repeatedly.
          *     Directory search order is important for file priority.
          */
-        virtual bool AddPath(_In_ const String & path) throw() = 0;
+        VOODOO_METHODCALL(AddPath)(_In_ const String & path) PURE;
 
         /**
          * Removes a directory from the search path, following the same rules as adding (adding a string then removing the
@@ -71,7 +66,7 @@ namespace VoodooShader
          *
          * @param path The path to remove.
          */
-        virtual bool RemovePath(_In_ const String & path) throw() = 0;
+        VOODOO_METHODCALL(RemovePath)(_In_ const String & path) PURE;
 
         /**
          * Resolves a relative filename (usually just filename and extension, but may include directories) into an
@@ -80,7 +75,7 @@ namespace VoodooShader
          * @param name The file name to find.
          * @return The file, if found.
          */
-        virtual IFile * FindFile(_In_ const String & name) const throw() = 0;
+        VOODOO_METHODCALL_(IFile *, FindFile)(_In_ const String & name) CONST PURE;
     };
     
     /**
@@ -98,50 +93,50 @@ namespace VoodooShader
         public IObject
     {
     public:
-        ~IFile(void) throw() { };
+        ~IFile()  { };
 
         /**
          * Add a reference to this object.
          *
          * @return The new reference count.
          */
-        virtual uint32_t AddRef(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
 
         /**
          * Release a reference from this object.
          *
          * @return The new reference count.
          */
-        virtual uint32_t Release(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
 
         /**
          * Get the name of this object.
          *
          * @return The name.
          */
-        virtual String ToString(void) const throw() = 0;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
 
         /**
          * Get the core this object was associated with.
          *
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Gets the absolute path of this file.
          */
-        virtual String GetPath(void) const throw() = 0;
+        VOODOO_METHODCALL_(String, GetPath)() CONST PURE;
 
-        virtual bool Open(_In_ FileOpenMode mode) throw() = 0;
+        VOODOO_METHODCALL(Open)(_In_ FileOpenMode mode) PURE;
 
-        virtual bool Close(void) throw() = 0;
+        VOODOO_METHODCALL(Close)() PURE;
 
-        virtual int32_t Read(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
+        VOODOO_METHODCALL_(int32_t, Read)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
 
-        virtual int32_t Write(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) throw() = 0;
+        VOODOO_METHODCALL_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
 
-        virtual IImage * OpenImage(void) const throw() = 0;
+        VOODOO_METHODCALL_(IImage *, OpenImage)() CONST PURE;
     };
     
     /**
@@ -159,41 +154,41 @@ namespace VoodooShader
         public IObject
     {
     public:
-        ~IImage(void) throw() { };
+        ~IImage()  { };
 
         /**
          * Add a reference to this object.
          *
          * @return The new reference count.
          */
-        virtual uint32_t AddRef(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
 
         /**
          * Release a reference from this object.
          *
          * @return The new reference count.
          */
-        virtual uint32_t Release(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
 
         /**
          * Get the name of this object.
          *
          * @return The name.
          */
-        virtual String ToString(void) const throw() = 0;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
 
         /**
          * Get the core this object was associated with.
          *
          * @return The core.
          */
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
-        virtual String GetPath(void) const throw() = 0;
+        VOODOO_METHODCALL_(String, GetPath)() CONST PURE;
 
-        virtual const TextureDesc * GetDesc(void) const throw() = 0;
+        VOODOO_METHODCALL_(const TextureDesc *, GetDesc)() CONST PURE;
 
-        virtual uint32_t GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, GetData)(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) CONST PURE;
     };
     /**
      * @}

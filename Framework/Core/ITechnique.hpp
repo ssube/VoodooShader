@@ -49,15 +49,13 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~ITechnique(void) {};
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
-
-        virtual String GetName() const throw() = 0;
+        VOODOO_METHODCALL_(String, GetName)() CONST PURE;
 
         /**
          * Retrieve the technique's final target. This is the surface the technique expects the results of the final pass to
@@ -66,13 +64,13 @@ namespace VoodooShader
          *
          * @return A reference to the target texture
          */
-        virtual ITexture * GetTarget(void) const throw() = 0;
+        VOODOO_METHODCALL_(ITexture *, GetTarget)() CONST PURE;
 
         /* Retrieve the number of passes in this technique.
          *
          * @return The number of passes
          */
-        virtual const uint32_t GetPassCount(void) const throw() = 0;
+        VOODOO_METHODCALL_(const uint32_t, GetPassCount)() CONST PURE;
 
         /**
          * Retrieve a specific pass from this technique.
@@ -80,21 +78,21 @@ namespace VoodooShader
          * @param index The pass number to retrieve.
          * @return A reference to the given pass.
          */
-        virtual IPass * GetPass(_In_ const uint32_t index) const throw() = 0;
+        VOODOO_METHODCALL_(IPass *, GetPass)(_In_ const uint32_t index) CONST PURE;
 
         /**
          * Retrieve the parent shader of this technique.
          *
          * @return The parent shader.
          */
-        virtual IShader * GetShader(void) const throw() = 0;
+        VOODOO_METHODCALL_(IShader *, GetShader)() CONST PURE;
 
         /**
          * Retrieve the underlying Cg technique.
          *
          * @return A pointer to the Cg technique.
          */
-        virtual CGtechnique GetCgTechnique(void) const throw() = 0;
+        VOODOO_METHODCALL_(CGtechnique, GetCgTechnique)() CONST PURE;
     };
     /**
      * @}

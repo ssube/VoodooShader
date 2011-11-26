@@ -46,21 +46,21 @@ namespace VoodooShader
     {
     public:
         VSLogger(ICore * pCore);
-        virtual ~VSLogger(void);
+        virtual ~VSLogger();
 
-        virtual uint32_t AddRef(void) const throw();
-        virtual uint32_t Release(void) const throw();
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw();
-        virtual String ToString(void) const throw();
-        virtual ICore * GetCore(void) const throw();
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHODCALL_(String, ToString)() CONST;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
 
-        virtual bool Open(_In_ const String & filename, _In_ const bool append) throw();
-        virtual bool Open(_In_ IFile * const pFile, _In_ const bool append) throw();
-        virtual void Close(void);
-        virtual void Flush(void);
-        virtual void SetLogLevel(_In_ const LogLevel level);
-        virtual const LogLevel GetLogLevel(void) const;
-        virtual void LogModule(_In_ const Version * const pModule);
+        VOODOO_METHODCALL(Open)(_In_ const String & filename, _In_ const bool append) ;
+        VOODOO_METHODCALL(Open)(_In_ IFile * const pFile, _In_ const bool append) ;
+        VOODOO_METHODCALL_(void, Close)();
+        VOODOO_METHODCALL_(void, Flush)();
+        VOODOO_METHODCALL_(void, SetLogLevel)(_In_ const LogLevel level);
+        VOODOO_METHODCALL_(const LogLevel, GetLogLevel)() const;
+        VOODOO_METHODCALL_(void, LogModule)(_In_ const Version * const pModule);
         virtual void Log
         (
             _In_ const LogLevel level,
@@ -68,8 +68,8 @@ namespace VoodooShader
             _In_ _Printf_format_string_ const wchar_t * format,
             ...
         );
-        virtual void SetFlags(_In_ const LogFlags flush);
-        virtual const LogFlags GetFlags(void) const;
+        VOODOO_METHODCALL_(void, SetFlags)(_In_ const LogFlags flush);
+        VOODOO_METHODCALL_(const LogFlags, GetFlags)() const;
 
     private:
         mutable uint32_t m_Refs;

@@ -44,13 +44,13 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~IModuleManager(void) throw() {};
+        virtual ~IModuleManager()  {};
 
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Loads a set of modules from a given path.
@@ -60,7 +60,7 @@ namespace VoodooShader
          *
          * @note Only loads files whose filename matches the filter (standard regex match).
          */
-        virtual bool LoadPath(_In_ const String & path, _In_ const String & filter) = 0;
+        VOODOO_METHODCALL(LoadPath)(_In_ const String & path, _In_ const String & filter) PURE;
 
         /**
          * Loads a single module, using an absolute or relative filename.
@@ -69,7 +69,7 @@ namespace VoodooShader
          *
          * @note This always uses the module's directory in the search path for required DLLs.
          */
-        virtual bool LoadFile(_In_ const IFile * pFile) = 0;
+        VOODOO_METHODCALL(LoadFile)(_In_ const IFile * pFile) PURE;
 
         /**
          * Loads a single module, using an absolute or relative filename.
@@ -96,7 +96,7 @@ namespace VoodooShader
          *      @li All directories listed in the PATH environment variable, in order.
          *
          */
-        virtual bool LoadFile(_In_ const String & filename) = 0;
+        VOODOO_METHODCALL(LoadFile)(_In_ const String & filename) PURE;
 
         /**
          * Tests to see if a class exists in the list provided by all loaded modules.
@@ -104,7 +104,7 @@ namespace VoodooShader
          * @param clsid The class UUID.
          * @return Existence of the class.
          */
-        virtual bool ClassExists(_In_ const Uuid & clsid) const = 0;
+        VOODOO_METHODCALL(ClassExists)(_In_ const Uuid & clsid) CONST PURE;
 
         /**
          * Tests to see if a class exists in the list provided by all loaded modules.
@@ -116,7 +116,7 @@ namespace VoodooShader
          * @param name The class name.
          * @return Existence of the class.
          */
-        virtual bool ClassExists(_In_ const String & name) const = 0;
+        VOODOO_METHODCALL(ClassExists)(_In_ const String & name) CONST PURE;
 
         /**
         * Create a new instance of the given class, using specific class UUID. This requires a precise match and will fail
@@ -125,7 +125,7 @@ namespace VoodooShader
         * @param clsid The class UUID to create.
         * @return New object or nullptr if the class wasn't found or couldn't be created.
          */
-        _Check_return_ virtual IObject * CreateObject(_In_ const Uuid & clsid) const = 0;
+        _Check_return_ VOODOO_METHODCALL_(IObject *, CreateObject)(_In_ const Uuid & clsid) CONST PURE;
 
         /**
          * Create a new instance of the given class, using a class name or UUID in string form.
@@ -139,7 +139,7 @@ namespace VoodooShader
          *
          * @sa @ref String::String(const Uuid &) for String to Uuid conversion rules.
          */
-        _Check_return_ virtual IObject * CreateObject(_In_ const String & name) const = 0;
+        _Check_return_ VOODOO_METHODCALL_(IObject *, CreateObject)(_In_ const String & name) CONST PURE;
 
         /**
          * Finds the address of a function in a module. The module must be loaded into the process and export the symbol,
@@ -150,7 +150,7 @@ namespace VoodooShader
          * @param name The function name to find.
          * @return The function's address if found, nullptr otherwise.
          */
-        _Check_return_ virtual void * FindFunction(_In_ const String & module, _In_ const String & name) const = 0;
+        _Check_return_ VOODOO_METHODCALL_(void *, FindFunction)(_In_ const String & module, _In_ const String & name) CONST PURE;
     };
     
     /**
@@ -168,26 +168,24 @@ namespace VoodooShader
         public IObject
     {
     public:
-        virtual ~IModule(void) throw() {};
-
-        virtual uint32_t AddRef(void) const throw() = 0;
-        virtual uint32_t Release(void) const throw() = 0;
-        virtual bool QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const throw() = 0;
-        virtual String ToString(void) const throw() = 0;
-        virtual ICore * GetCore(void) const throw() = 0;
+        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
+        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Get the current version of this module. @return The version, including name and
          * debug attribute.
          */
-        virtual const Version * ModuleVersion(void) const throw() = 0;
+        VOODOO_METHODCALL_(const Version *, ModuleVersion)() CONST PURE;
 
         /** Get the class count from this module. */
-        virtual const uint32_t ClassCount(void) const = 0;
+        VOODOO_METHODCALL_(const uint32_t, ClassCount)() CONST PURE;
 
-        virtual const wchar_t * ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) const = 0;
+        VOODOO_METHODCALL_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST PURE;
 
-        virtual IObject * CreateClass(_In_ const uint32_t number, _In_ ICore * pCore) = 0;
+        VOODOO_METHODCALL_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST PURE;
     };
     /**
      * @}

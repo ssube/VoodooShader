@@ -79,14 +79,14 @@ namespace VoodooShader
          *
          * @param expr The string to use.
          */
-        void SetExpr(const String & expr) throw();
+        void SetExpr(const String & expr) ;
 
         /**
          * Retrieve the current expression.
          *
          * @return The expression string.
          */
-        String GetExpr() const throw();
+        String GetExpr() CONST;
 
         /**
          * @}
@@ -102,7 +102,7 @@ namespace VoodooShader
          * @param string The string to search.
          * @return A RegexMatch for all match groups.
          */
-        RegexMatch Match(const String & string) const throw();
+        RegexMatch Match(const String & string) CONST;
 
         /**
          * @}
@@ -118,7 +118,7 @@ namespace VoodooShader
          * @param find The string to search.
          * @return True if the expression matches the string in full.
          */
-        bool Find(const String & find) const throw();
+        bool Find(const String & find) CONST;
 
         /**
          * @}
@@ -136,7 +136,7 @@ namespace VoodooShader
          * @param replace The replace format string.
          * @return A copy of find with all matches replaced.
          */
-        String Replace(const String & find, const String & replace) const throw();
+        String Replace(const String & find, const String & replace) CONST;
 
         /**
          * @}
@@ -168,21 +168,21 @@ namespace VoodooShader
          *
          * @return Total number of matches.
          */
-        uint32_t GetCount() const throw();
+        uint32_t GetCount() CONST;
 
         /**
          * Check if any matches were found.
          *
          * @return True if any matches are contained.
          */
-        bool IsEmpty() const throw();
+        bool IsEmpty() CONST;
 
         /**
          * Retrieve a particular match within this group.
          *
          * @return The specified submatch.
          */
-        String GetMatch(uint32_t index) const throw();
+        String GetMatch(uint32_t index) CONST;
 
         /**
          * Formats the found submatches into an output string. This uses the <code>$0</code> syntax to perform formatting,
@@ -191,7 +191,7 @@ namespace VoodooShader
          * @param fmt The format string to use.
          * @return A formatted copy using the submatches.
          */
-        String Format(const String & fmt) const throw();
+        String Format(const String & fmt) CONST;
 
     private:
         RegexMatch();
