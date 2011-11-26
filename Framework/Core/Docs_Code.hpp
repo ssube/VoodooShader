@@ -53,12 +53,12 @@ namespace VoodooShader
       *
       * @subsection voodoo_spec_module_exports_info ClassInfo
       *
-      * @code const char * ClassInfo(const uint32_t index); @endcode
+      * @code const wchar_t * ClassInfo(const uint32_t index, Uuid & clsid); @endcode
       *
-      * Returns the name of the given class. This is used to register the classes in the core ModuleManager when the module
-      * is loaded.
-      *
-      * @todo Decide whether to change these into GUIDs.
+      * Returns the name and CLSID of the given class. This is used to register the classes in the core ModuleManager when 
+      * the module is loaded. The return value is a pointer to the class name or nullptr if the index is invalid, and the
+      * clsid parameter is filled with the CLSID or unchanged if the index is invalid.
+      * 
       *
       * @subsection voodoo_spec_module_exports_create ClassCreate
       *
@@ -68,7 +68,7 @@ namespace VoodooShader
       * cache and/or use the core.
       *
       * @note Class constructors @em may throw exceptions, but these must be caught within the create function and must not
-      *     propogate between modules (this can cause crashes). If an error occurs, nullptr should be returned.
+      *     propagate between modules (this can cause crashes). If an error occurs, nullptr must be returned.
       *
       * @section voodoo_spec_iobject IObject Interface
       *
@@ -90,7 +90,63 @@ namespace VoodooShader
       *
       * Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object should be
       * deleted internally (<tt>delete this;</tt>). This provides correct memory allocation and deallocation, safe from
-      * compiler or module bondaries.
+      * compiler or module boundaries.
+      * 
+      * @subsection voodoo_spec_iobject_query IObject::QueryInterface
+      * @code virtual bool IObject::QueryInterface(Uuid & refid, void ** ppOut) const throw() @endcode
+      * 
+      * Queries the object for a particular interface. 
+      * 
+      * If refid is an IID and the object implements the interface passed in refid or if refid is the object's CLSID, it
+      * must place a pointer to itself providing that interface into ppOut and return true. The pointer must evaluate equal
+      * to any other pointer to the same object, regardless of interface. The object's reference count must be incremented 
+      * in this case, using the returned pointer.
+      * 
+      * If ppOut is a nullptr and refid is a null Uuid (all zeroes), refid must be filled must the object's CLSID and the 
+      * method must return true. The object's reference count must not change in this case.
+      * 
+      * If the object does not implement the class or interface in refid, or refid and ppOut are not both null, it must
+      * return false. The object's reference count must not change in this case.
+      * 
+      * All IObject-derived classes must provide interfaces for IObject, their parent interface, and their class. Calls to
+      * QueryInterface must be symmetric (if @code QI(A)->B @endcode succeeds, then @code QI(QI(A)->B)->A @endcode must as 
+      * well), transitive (if @code QI(QI(A)->B)->C @endcode succeeds, then @code QI(A)->C @endcode must as well), and 
+      * reflexive (@code QI(A)->A @endcode must always succeed). 
+      * 
+      * This is not to say that all objects of type @code A @endcode must behave the same; these guarantees must hold for an
+      * object within itself throughout its lifetime. Two objects of type @code A @endcode may be unable to provide an 
+      * interface based on internal conditions (for example, if @code A1 @endcode is an IObject queried from an ICore and 
+      * @code A2 @endcode is an IObject queried from an IParser, @code A2 @endcode will not be able to provide an interface 
+      * to ICore, but must be able to do so for IParser).
+      * 
+      * For VSCore (which implements ICore and IObject) an example QueryInterface may be:
+      * 
+      * @code
+      * if (!ppOut)
+      * {
+      *     if (clsid.is_nil())
+      *     {
+      *         clsid = IID_ICore;
+      *         return true;
+      *     } else {
+      *         return false;
+      *     }
+      * } else {
+      *     if (clsid == IID_IObject)
+      *     {
+      *         *ppOut = static_cast<const IObject*>(this);
+      *     } else if (clsid == IID_ICore) {
+      *         *ppOut = static_cast<const ICore*>(this);
+      *     } else if (clsid == CLSID_VSCore) {
+      *         *ppOut = static_cast<const VSCore*>(this);
+      *     } else {
+      *         *ppOut = nullptr;
+      *         return false;
+      *     }
+      *     reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+      *     return true;
+      * }
+      * @endcode
       *
       * @subsection voodoo_spec_iobject_tostring IObject::ToString
       * @code virtual String IObject::ToString() const throw() @endcode
@@ -103,13 +159,21 @@ namespace VoodooShader
       * ImplName(Data, Data)
       * @endcode
       *
-      * If no data is provided, the data section inside the parantheses must be empty but the parantheses must be present.
+      * If no data is provided, the data section inside the parentheses must be empty but the parentheses must be present.
       *
       * @subsection voodoo_spec_iobject_getcore IObject::GetCore
       * @code virtual ICore * IObject::GetCore() const throw() @endcode
       *
-      * Returns a <em>non-incremented</em> refernce to the object's parent core. This should be stored internally, usually
+      * Returns a <em>non-incremented</em> reference to the object's parent core. This should be stored internally, usually
       * set at construction.
+      * 
+      * @subsection voodoo_spec_module_throw throw()
+      * <b>No method or function in a class or interface derived from IObject may throw exceptions.</b> If error reporting 
+      * is necessary, an error value should be returned. This is a necessary safety precaution, as modules may be created
+      * with different compilers or languages and it may not be possible to safely propagate exceptions. 
+      * 
+      * Methods which call other functions which may throw, such as standard library ones, must catch and handle any
+      * potential exception and prevent it from propagating.
       *
       * @section voodoo_spec_module_docs Documentation
       *
@@ -143,7 +207,7 @@ namespace VoodooShader
       *     ICore now exposes methods to get and set the active context and no longer creates a context of its own. This
       *     allows more flexibility within adapters, but is a breaking change. Adapters compiled for earlier versions will
       *     find themselves without a context at all.
-      * @since 0.2.5.151
+      * @since 0.2
       *
       * This can avoid some crashes with certain adapters due to context lifespan, and allows adapters to handle cleanup. If
       * at all possible, the Cg context should be created in the adapter's constructor and destroyed in the adapter's
