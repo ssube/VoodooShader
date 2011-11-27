@@ -148,12 +148,16 @@ namespace VoodooShader
         VOODOO_METHODCALL(CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture) PURE;
 
         /**
-         * Loads a named texture into the API and registers it with the Core. The texture source is provided here and all
-         * dimensions should be drawn from that, with as little conversion as possible.
+         * Loads a texture data from an image into an existing texture. The texture format the texture was created with and
+         * format of the image given must match. Texture size is bounded by the texture, as are mipmap and render target
+         * settings. Texture origin is determined by the region provided here.
          *
          * @param pImage The image to load.
          * @param pRegion The region of the file that should be used.
          * @return The texture, if successfully created. A nullptr otherwise.
+         *
+         * @note As TextureRegion derives from TextureDesc, it may be simpler to use the same struct for both this and the
+         *      call to IAdapter::CreateTexture().
          */
         VOODOO_METHODCALL(LoadTexture)(_In_ IImage * const pImage, _In_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture) PURE;
 
@@ -203,10 +207,11 @@ namespace VoodooShader
          * Get a property from the adapter.
          *
          * @param name The property to get.
+         * @param value Value of the property, if it exists. Variant is unchanged otherwise.
          *
-         * @return The value of the property (lexically cast to a string if necessary).
+         * @return Success of the property get.
          */
-        VOODOO_METHODCALL_(Variant, GetProperty)(_In_ const wchar_t * name) CONST PURE;
+        VOODOO_METHODCALL(GetProperty)(_In_ const wchar_t * name, _Out_ Variant & value) CONST PURE;
 
         /**
          * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses

@@ -154,7 +154,7 @@ namespace VoodooShader
                 }
             }
 
-            logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Successfully loaded programs from '%s'.", pass->GetName().GetData());
+            logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Successfully loaded programs from '%s'.", pass->GetName().GetData());
             return true;
         }
 
@@ -462,18 +462,18 @@ namespace VoodooShader
             return false;
         }
 
-        Variant DX9Adapter::GetProperty(_In_ const wchar_t * property) CONST
+        bool DX9Adapter::GetProperty(_In_ const wchar_t * name, _In_ Variant & value) CONST
         {
-            String strname(property);
-            Variant retVar = {UT_None, nullptr};
+            String strname(name);
 
             if (strname == L"SdkVersion")
             {
-                retVar.Type = UT_UInt32;
-                retVar.Value.VUInt32 = m_SdkVersion;
+                value.Type = UT_UInt32;
+                value.Value.VUInt32 = m_SdkVersion;
+                return true;
             }
 
-            return retVar;
+            return false;
         }
 
         bool DX9Adapter::ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture)

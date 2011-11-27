@@ -56,7 +56,7 @@ namespace VoodooShader
             );
             VOODOO_METHODCALL(ApplyParameter)(_In_ IParameter * const pParam);
             VOODOO_METHODCALL(SetProperty)(_In_ const wchar_t * name, _In_ Variant & value);
-            VOODOO_METHODCALL_(Variant, GetProperty)(_In_ const wchar_t * property) const;
+            VOODOO_METHODCALL(GetProperty)(_In_ const wchar_t * name, _In_ Variant & value) const;
             VOODOO_METHODCALL(ConnectTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
             VOODOO_METHODCALL(HandleError)(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
 

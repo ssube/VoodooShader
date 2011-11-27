@@ -63,9 +63,9 @@ namespace VoodooShader
      * @section voodoo_main_quality Testing and Code Quality
      *
      * The Voodoo framework covers an immense scope and tackles an intriguing and often complex task. To maximize stability,
-     * speed and code quality, all code within the Voodoo Shader Framework must meet @ref voodoo_quality "a set of
-     * quality-control standards" and be fully tested before release. Tests are carried out within specialized test suits
-     * and target applications.
+     * speed and code quality, all code within the Voodoo Shader Framework must meet @ref voodoo_quality 
+     * "a set of quality-control standards" and be fully tested before release. Tests are carried out within specialized 
+     * test suites and target applications.
      *
      * @section voodoo_main_logs Logs and Debugging
      *

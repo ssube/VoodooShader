@@ -12,7 +12,7 @@ namespace VoodooLogViewer
     {
         static void Main(string[] args)
         {
-            if (args.Length < 2)
+            if (args.Length < 1)
             {
                 Console.WriteLine
                 (
@@ -25,12 +25,19 @@ namespace VoodooLogViewer
             }
 
             String resourceDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase) + @"\Resources\";
+            if (resourceDir.StartsWith("file:\\"))
+            {
+                resourceDir = resourceDir.Substring(6);
+            }
             
             XslCompiledTransform xslTransform;
             try
             {
+                XsltSettings settings = new XsltSettings();
+                settings.EnableScript = true;
+
                 xslTransform = new XslCompiledTransform(true);
-                xslTransform.Load(resourceDir + "VoodooXmlLog.xsl");
+                xslTransform.Load(resourceDir + "VoodooXmlLog.xsl", settings, new XmlUrlResolver());
             }
             catch (System.Exception exc)
             {
@@ -38,11 +45,11 @@ namespace VoodooLogViewer
                 return;
             }
 
-            for (int i = 1; i < args.Length; ++i)
+            for (int i = 0; i < args.Length; ++i)
             {
                 try
                 {
-                    String tempFile = Path.Combine(resourceDir, Path.GetRandomFileName());
+                    String tempFile = resourceDir + Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + ".html";
                     Console.Write("Processing file '{0}' to '{1}'... ", args[i], tempFile);
 
                     xslTransform.Transform(args[i], tempFile);

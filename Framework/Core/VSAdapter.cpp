@@ -167,13 +167,12 @@ namespace VoodooShader
         return true;
     }
 
-    Variant VOODOO_METHODCALLTYPE VSAdapter::GetProperty(const wchar_t * name) CONST
+    bool VOODOO_METHODCALLTYPE VSAdapter::GetProperty(const wchar_t * name, Variant & value) CONST
     {
         UNREFERENCED_PARAMETER(name);
+        UNREFERENCED_PARAMETER(value);
 
-        Variant ret = {UT_None, nullptr};
-
-        return ret;
+        return false;
     }
 
     bool VOODOO_METHODCALLTYPE VSAdapter::ConnectTexture(IParameter * const pParam, ITexture * const pTexture)

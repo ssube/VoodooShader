@@ -177,8 +177,8 @@ namespace VoodooShader
          * @param type The type to verify.
          * @return A reference to the parameter if found, nullptr reference otherwise.
          *
-         * @note If a parameter with a matching name is found, the type will be checked. If @arg Type is
-         *     PT_Unknown, any type parameter will be returned (only the name will be tested).
+         * @note If a parameter with a matching name is found, the type will be checked. If Type is PT_Unknown, any type 
+         *      parameter will be returned (only the name will be tested).
          */
         VOODOO_METHODCALL_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterType type) CONST PURE;
 

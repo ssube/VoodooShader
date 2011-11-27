@@ -58,9 +58,9 @@ namespace VoodooShader
         VOODOO_METHODCALL(LoadPass)(_In_ IPass * const pPass);
         VOODOO_METHODCALL(UnloadPass)(_In_ IPass * const pPass);
         VOODOO_METHODCALL(SetPass)(_In_opt_ IPass * const pPass);
-        VOODOO_METHODCALL_(IPass *, GetPass)() const;
+        VOODOO_METHODCALL_(IPass *, GetPass)() CONST;
         VOODOO_METHODCALL(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
-        VOODOO_METHODCALL_(ITexture *, GetTarget)(_In_ const uint32_t index) const;
+        VOODOO_METHODCALL_(ITexture *, GetTarget)(_In_ const uint32_t index) CONST;
         VOODOO_METHODCALL(CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture);
         VOODOO_METHODCALL(LoadTexture)(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture);
         VOODOO_METHODCALL(DrawGeometry)
@@ -71,7 +71,7 @@ namespace VoodooShader
         );
         VOODOO_METHODCALL(ApplyParameter)(_In_ IParameter * const pParam);
         VOODOO_METHODCALL(SetProperty)(_In_ const wchar_t * name, _In_ Variant & value);
-        VOODOO_METHODCALL_(Variant, GetProperty)(_In_ const wchar_t * property) const;
+        VOODOO_METHODCALL(GetProperty)(_In_ const wchar_t * name, _In_ Variant & value) CONST;
         VOODOO_METHODCALL(ConnectTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
         VOODOO_METHODCALL(HandleError)(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
 
