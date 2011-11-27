@@ -30,83 +30,6 @@ namespace VoodooShader
 {
     namespace VoodooDX9
     {
-        struct FSVert
-        {
-            float x, y, z, rhw;  // The transformed(screen space) position for the vertex.
-            float tu, tv;        // Texture coordinates
-        };
-
-#define FSVERT_VFV (D3DFVF_XYZRHW | D3DFVF_TEX1)
-
-        //IDirect3DVertexDeclaration9 * g_VDecl;
-        
-        IDirect3DVertexBuffer9 * g_Verts;
-
-        void TestCreate(IDirect3DDevice9 * mDevice, float fx, float fy)
-        {
-            UNREFERENCED_PARAMETER(fx);
-            UNREFERENCED_PARAMETER(fy);
-
-            /*D3DVERTEXELEMENT9 VertElems[] =
-            {
-                {0,  0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0},
-                {0, 12, D3DDECLTYPE_UBYTE4, D3DDECLMETHOD_DEFAULT,     D3DDECLUSAGE_COLOR, 0},
-                {0, 16, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT,  D3DDECLUSAGE_TEXCOORD, 0},
-                D3DDECL_END()
-            };
-
-            HRESULT hr = mDevice->CreateVertexDeclaration(VertElems, &g_VDecl);*/
-
-            FSVert verts[6] =
-            {
-                {150,400,0.5,1,0,1},
-                {150,100,0.5,1,0,0},
-                {450,100,0.5,1,1,0},
-                {150,400,0.5,1,0,1},
-                {450,100,0.5,1,1,0},
-                {450,400,0.5,1,1,1}
-            };
-
-            HRESULT hr = mDevice->CreateVertexBuffer(sizeof(verts), D3DUSAGE_WRITEONLY, FSVERT_VFV, D3DPOOL_DEFAULT, &g_Verts, NULL);
-
-            void * pVerts;
-            hr = g_Verts->Lock(0, 0, &pVerts, 0);
-            memcpy(pVerts, verts, sizeof(verts));
-            hr = g_Verts->Unlock();
-        }
-
-        void TestDraw(IDirect3DDevice9 * mDevice, IDirect3DStateBlock9 * pCleanState)
-        {
-            HRESULT hr;
-
-            IDirect3DStateBlock9 * deviceState = nullptr;
-            hr = mDevice->CreateStateBlock(D3DSBT_ALL, &deviceState);
-
-            hr = pCleanState->Apply();
-
-            hr = mDevice->SetStreamSource(0, g_Verts, 0, sizeof(FSVert)); assert(SUCCEEDED(hr));
-            hr = mDevice->SetFVF(FSVERT_VFV); assert(SUCCEEDED(hr));
-            hr = mDevice->SetRenderState(D3DRS_CLIPPING, FALSE); assert(SUCCEEDED(hr));
-            hr = mDevice->SetRenderState(D3DRS_ZENABLE, FALSE); assert(SUCCEEDED(hr));
-            hr = mDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS); assert(SUCCEEDED(hr));
-            hr = mDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE); assert(SUCCEEDED(hr));
-
-            hr = mDevice->BeginScene(); assert(SUCCEEDED(hr));
-
-            if (SUCCEEDED(hr))
-            {
-                hr = mDevice->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 2); assert(SUCCEEDED(hr));
-                hr = mDevice->EndScene(); assert(SUCCEEDED(hr));
-            }
-            else
-            {
-                gpVoodooCore->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Voodoo DX9: Failed to draw quad.\n");
-            }
-
-            hr = deviceState->Apply();
-            hr = deviceState->Release();
-        }
-
         DX9Adapter::DX9Adapter(ICore * pCore) :
             m_Refs(0), m_Core(pCore), 
             m_SdkVersion(D3D_SDK_VERSION), m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr), 
@@ -446,72 +369,71 @@ namespace VoodooShader
             _In_ const VertexFlags flags
         )
         { 
-            UNREFERENCED_PARAMETER(count);
-            UNREFERENCED_PARAMETER(pVertexData);
-            UNREFERENCED_PARAMETER(flags);
-
-            TestDraw(m_Device, m_CleanState);
-
-            return true;
-
-            /*if (!pVertexData)
+            if (!pVertexData)
             {
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"No geometry given to draw.");
                 return false;
             }
 
-            IDirect3DVertexBuffer9 * sourceBuffer;
-            UINT sourceOffset, sourceStride;
-            DWORD sourceFVF, zEnabled, aEnabled, cullMode;
-            IDirect3DVertexDeclaration9 * sourceDecl;
+            HRESULT hr;
 
-            m_Device->GetStreamSource(0, &sourceBuffer, &sourceOffset, &sourceStride);
-            m_Device->GetVertexDeclaration(&sourceDecl);
-            m_Device->GetFVF(&sourceFVF);
-            m_Device->GetRenderState(D3DRS_ZENABLE, &zEnabled);
-            m_Device->GetRenderState(D3DRS_ALPHABLENDENABLE, &aEnabled);
-            m_Device->GetRenderState(D3DRS_CULLMODE, &cullMode);
+            IDirect3DStateBlock9 * deviceState = nullptr;
+            hr = m_Device->CreateStateBlock(D3DSBT_ALL, &deviceState);
+
+            hr = m_CleanState->Apply();
             
-            m_Device->SetStreamSource(0, nullptr, 0, 0);
+            // Set the necessary states
+            hr = m_Device->SetRenderState(D3DRS_CLIPPING, FALSE);
+            hr = m_Device->SetRenderState(D3DRS_ZENABLE, FALSE);
+            hr = m_Device->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
+            hr = m_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
             if (flags & VF_Transformed)
             {
                 m_Device->SetVertexDeclaration(m_VertDeclT);
             } else {
                 m_Device->SetVertexDeclaration(m_VertDecl);
             }
-            m_Device->SetFVF(0);
-            m_Device->SetRenderState(D3DRS_ZENABLE, FALSE);
-            m_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-            m_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
-            HRESULT hr = m_Device->BeginScene();
-
-            if (SUCCEEDED(hr))
+            if (flags & VF_Buffer)
             {
-                if (flags & VF_Buffer)
+                IDirect3DVertexBuffer9 * pVertexBuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pVertexData);
+
+                hr = m_Device->SetStreamSource(0, pVertexBuffer, 0, sizeof(VertexStruct));
+
+                hr = m_Device->BeginScene();
+
+                if (SUCCEEDED(hr))
                 {
-                    IDirect3DVertexBuffer9 * vbuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pVertexData);
-                    m_Device->SetStreamSource(0, vbuffer, 0, sizeof(VertexStruct));
-                    m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, count);
-                } else {
-                    m_Device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, count, pVertexData, sizeof(VertexStruct));
+                    hr = m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, count);
+                    hr = m_Device->EndScene();
                 }
+                else
+                {
+                    gpVoodooCore->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to draw quad.");
+                    hr = deviceState->Release();
+                    return false;
+                }
+            } else {
+                hr = m_Device->BeginScene();
 
-                m_Device->EndScene();
+                if (SUCCEEDED(hr))
+                {
+                    hr = m_Device->DrawPrimitiveUP(D3DPT_TRIANGLELIST, count, pVertexData, sizeof(VertexStruct));
+                    hr = m_Device->EndScene();
+                }
+                else
+                {
+                    gpVoodooCore->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to draw quad.");
+                    hr = deviceState->Release();
+                    return false;
+                }
             }
-            else
-            {
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to draw geometry.");
-            }
 
-            m_Device->SetStreamSource(0, sourceBuffer, sourceOffset, sourceStride);
-            m_Device->SetVertexDeclaration(sourceDecl);
-            m_Device->SetFVF(sourceFVF);
-            m_Device->SetRenderState(D3DRS_ZENABLE, zEnabled);
-            m_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
-            m_Device->SetRenderState(D3DRS_CULLMODE, cullMode);
+            hr = deviceState->Apply();
+            hr = deviceState->Release();
 
-            return true;*/
+            return true;
         }
 
         bool DX9Adapter::ApplyParameter(_In_ IParameter * const pParam)
@@ -730,8 +652,6 @@ namespace VoodooShader
 
             logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Prepping for %d by %d target.", viewport.Width, viewport.Height);
 
-            TestCreate(m_Device, fx, fy);
-
             // Get buffers
             if (!SUCCEEDED(m_Device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[0]))) { m_BackBuffer[0] = nullptr; }
             //if (!SUCCEEDED(m_Device->GetBackBuffer(0, 1, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[1]))) { m_BackBuffer[1] = nullptr; }
@@ -739,9 +659,20 @@ namespace VoodooShader
             //if (!SUCCEEDED(m_Device->GetBackBuffer(0, 3, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[3]))) { m_BackBuffer[3] = nullptr; }
 
             // Create fullscreen vbuffer
+            VertexStruct fsVertData[6] =
+            {
+                //POSITION                    COLOR                     TEXCOORD0                 TEXCOORD1
+                {{-0.5f,    fy, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{-0.5f, -0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx, -0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{-0.5f,    fy, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx, -0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx,    fy, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+            };
+
             errors = m_Device->CreateVertexBuffer
             (
-                6 * sizeof(VertexStruct), 0, 0, D3DPOOL_DEFAULT, &gpFSQuadVerts, nullptr
+                sizeof(fsVertData), D3DUSAGE_WRITEONLY, NULL, D3DPOOL_DEFAULT, &gpFSQuadVerts, NULL
             );
 
             if (FAILED(errors))
@@ -749,42 +680,14 @@ namespace VoodooShader
                 logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to create vertex buffer.");
             }
 
-            VertexStruct fsVertData[4];
-
-            ZeroMemory(fsVertData, sizeof(VertexStruct) * 4);
-
-            fsVertData[0].Position.X = -0.5f;
-            fsVertData[0].Position.Y = -0.5f;
-            fsVertData[0].Position.Z =  0.5f;
-            fsVertData[1].Position.X =    fx;
-            fsVertData[1].Position.Y = -0.5f;
-            fsVertData[1].Position.Z =  0.5f;
-            fsVertData[2].Position.X = -0.5f;
-            fsVertData[2].Position.Y =    fy;
-            fsVertData[2].Position.Z =  0.5f;
-            fsVertData[3].Position.X =    fx;
-            fsVertData[3].Position.Y =    fy;
-            fsVertData[3].Position.Z =  0.5f;
-
-            fsVertData[0].TexCoord[0].X = 0.0f;
-            fsVertData[0].TexCoord[0].Y = 0.0f;
-            fsVertData[1].TexCoord[0].X = 1.0f;
-            fsVertData[1].TexCoord[0].Y = 0.0f;
-            fsVertData[2].TexCoord[0].X = 0.0f;
-            fsVertData[2].TexCoord[0].Y = 1.0f;
-            fsVertData[3].TexCoord[0].X = 1.0f;
-            fsVertData[3].TexCoord[0].Y = 1.0f;
-
             VertexStruct * pVertices = nullptr;
-            errors = gpFSQuadVerts->Lock(0, sizeof(VertexStruct) * 6, (void**)&pVertices, 0);
+            errors = gpFSQuadVerts->Lock(0, 0, (void**)&pVertices, 0);
 
             if (FAILED(errors))
             {
                 logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to lock vertex buffer to fsquad.");
             } else {
-                memcpy(pVertices,   fsVertData,   sizeof(VertexStruct) * 3);
-                memcpy(pVertices+3, fsVertData+1, sizeof(VertexStruct) * 3);
-
+                memcpy(pVertices, fsVertData, sizeof(fsVertData));
                 gpFSQuadVerts->Unlock();
             }
 

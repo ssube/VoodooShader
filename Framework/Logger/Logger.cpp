@@ -258,7 +258,7 @@ namespace VoodooShader
 
             LogLevel mask = (LogLevel) (level & m_LogLevel);
             UNREFERENCED_PARAMETER(mask);
-            //if (!(mask & LL_Severity) || !(mask & LL_Origin)) return;
+            if (!(mask & LL_Severity) || !(mask & LL_Origin)) return;
 
             va_list args;
 

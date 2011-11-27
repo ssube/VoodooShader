@@ -535,17 +535,15 @@ namespace VoodooShader
     };
 
     template <typename ValType>
-    struct Vector3 : 
-        public Vector2<ValType>
+    struct Vector3
     {
-        ValType Z;
+        ValType X, Y, Z;
     };
 
     template <typename ValType>
-    struct Vector4 : 
-        public Vector3<ValType>
+    struct Vector4
     {
-        ValType W;
+        ValType X, Y, Z, W;
     };
 
     typedef Vector2<float> Float2;
