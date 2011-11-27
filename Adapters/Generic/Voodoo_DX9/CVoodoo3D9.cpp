@@ -24,6 +24,7 @@
 #include "CVoodoo3DDevice9.hpp"
 
 #include "DX9_Adapter.hpp"
+#include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
 
 namespace VoodooShader
@@ -219,7 +220,7 @@ namespace VoodooShader
 
                 ILoggerRef logger = gpVoodooCore->GetLogger();
 
-                HRESULT hrt = realDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &backbufferSurf);
+                HRESULT hrt = realDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backbufferSurf);
 
                 if (SUCCEEDED(hrt))
                 {
@@ -234,7 +235,7 @@ namespace VoodooShader
                 bufferTextureDesc.Size.X = pPresentationParameters->BackBufferWidth;
                 bufferTextureDesc.Size.Y = pPresentationParameters->BackBufferHeight;
                 bufferTextureDesc.Size.Z = 0;
-                bufferTextureDesc.Format = TF_RGBA8;
+                bufferTextureDesc.Format = VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(pPresentationParameters->BackBufferFormat);
                 bufferTextureDesc.Mipmaps = true;
                 bufferTextureDesc.RenderTarget = true;
 

@@ -30,6 +30,83 @@ namespace VoodooShader
 {
     namespace VoodooDX9
     {
+        struct FSVert
+        {
+            float x, y, z, rhw;  // The transformed(screen space) position for the vertex.
+            float tu, tv;        // Texture coordinates
+        };
+
+#define FSVERT_VFV (D3DFVF_XYZRHW | D3DFVF_TEX1)
+
+        //IDirect3DVertexDeclaration9 * g_VDecl;
+        
+        IDirect3DVertexBuffer9 * g_Verts;
+
+        void TestCreate(IDirect3DDevice9 * mDevice, float fx, float fy)
+        {
+            UNREFERENCED_PARAMETER(fx);
+            UNREFERENCED_PARAMETER(fy);
+
+            /*D3DVERTEXELEMENT9 VertElems[] =
+            {
+                {0,  0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0},
+                {0, 12, D3DDECLTYPE_UBYTE4, D3DDECLMETHOD_DEFAULT,     D3DDECLUSAGE_COLOR, 0},
+                {0, 16, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT,  D3DDECLUSAGE_TEXCOORD, 0},
+                D3DDECL_END()
+            };
+
+            HRESULT hr = mDevice->CreateVertexDeclaration(VertElems, &g_VDecl);*/
+
+            FSVert verts[6] =
+            {
+                {150,400,0.5,1,0,1},
+                {150,100,0.5,1,0,0},
+                {450,100,0.5,1,1,0},
+                {150,400,0.5,1,0,1},
+                {450,100,0.5,1,1,0},
+                {450,400,0.5,1,1,1}
+            };
+
+            HRESULT hr = mDevice->CreateVertexBuffer(sizeof(verts), D3DUSAGE_WRITEONLY, FSVERT_VFV, D3DPOOL_DEFAULT, &g_Verts, NULL);
+
+            void * pVerts;
+            hr = g_Verts->Lock(0, 0, &pVerts, 0);
+            memcpy(pVerts, verts, sizeof(verts));
+            hr = g_Verts->Unlock();
+        }
+
+        void TestDraw(IDirect3DDevice9 * mDevice, IDirect3DStateBlock9 * pCleanState)
+        {
+            HRESULT hr;
+
+            IDirect3DStateBlock9 * deviceState = nullptr;
+            hr = mDevice->CreateStateBlock(D3DSBT_ALL, &deviceState);
+
+            hr = pCleanState->Apply();
+
+            hr = mDevice->SetStreamSource(0, g_Verts, 0, sizeof(FSVert)); assert(SUCCEEDED(hr));
+            hr = mDevice->SetFVF(FSVERT_VFV); assert(SUCCEEDED(hr));
+            hr = mDevice->SetRenderState(D3DRS_CLIPPING, FALSE); assert(SUCCEEDED(hr));
+            hr = mDevice->SetRenderState(D3DRS_ZENABLE, FALSE); assert(SUCCEEDED(hr));
+            hr = mDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS); assert(SUCCEEDED(hr));
+            hr = mDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE); assert(SUCCEEDED(hr));
+
+            hr = mDevice->BeginScene(); assert(SUCCEEDED(hr));
+
+            if (SUCCEEDED(hr))
+            {
+                hr = mDevice->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 2); assert(SUCCEEDED(hr));
+                hr = mDevice->EndScene(); assert(SUCCEEDED(hr));
+            }
+            else
+            {
+                gpVoodooCore->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Voodoo DX9: Failed to draw quad.\n");
+            }
+
+            hr = deviceState->Apply();
+            hr = deviceState->Release();
+        }
+
         DX9Adapter::DX9Adapter(ICore * pCore) :
             m_Refs(0), m_Core(pCore), 
             m_SdkVersion(D3D_SDK_VERSION), m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr), 
@@ -211,6 +288,9 @@ namespace VoodooShader
 
         bool DX9Adapter::SetPass(_In_opt_ IPass * const pPass)
         {
+            /*UNREFERENCED_PARAMETER(pPass);
+            return true;*/
+
             ILoggerRef logger = m_Core->GetLogger();
             
             if (m_BoundPass)
@@ -223,6 +303,9 @@ namespace VoodooShader
             if (m_BoundPass)
             {
                 cgSetPassState(m_BoundPass->GetCgPass());
+
+                // Bind render targets
+                this->SetTarget(0, m_BoundPass->GetTarget());
             }
 
             return true;
@@ -237,50 +320,70 @@ namespace VoodooShader
         {
             ILoggerRef logger = m_Core->GetLogger();
 
-            if (!pTarget)
-            {
-                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Attempting to set null render target %d.", index);
-                return false;
-            } else if (index > 3) {
+            if (index > 3) {
                 logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Invalid render target index %d.", index);
                 return false;
             }
 
             m_RenderTarget[index] = pTarget;
 
-            IDirect3DTexture9 * pD3D9Tex = reinterpret_cast<IDirect3DTexture9*>(pTarget->GetData());
+            HRESULT result;
 
-            if (!pD3D9Tex)
+            if (!pTarget)
             {
-                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Attempting to bind texture '%s' to render target %d, null data.", pTarget->GetName().GetData(), index);
-                return false;
-            }
+                result = m_Device->SetRenderTarget(index, m_BackBuffer[index]);
 
-            pD3D9Tex->AddRef();
-
-            IDirect3DSurface9 * pD3D9Surf = nullptr;
-            HRESULT result = pD3D9Tex->GetSurfaceLevel(0, &pD3D9Surf);
-            if (!SUCCEEDED(result))
-            {
-                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to get surface of texture '%s', data %p: %d", pTarget->GetName().GetData(), pD3D9Tex, result);
-                pD3D9Tex->Release();
-                return false;
-            }
-
-            result = m_Device->SetRenderTarget(index, pD3D9Surf);
-            if (!SUCCEEDED(result))
-            {
-                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Device failed to bind texture '%s' to render target %d: %d", pTarget->GetName().GetData(), index, result);
-                pD3D9Tex->Release();
-                return false;
+                if (SUCCEEDED(result))
+                {
+                    logger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"Bound null texture to render target %d: %d", index, result);
+                    return true;
+                } else {
+                    logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Device failed to bind null texture to render target %d: %d", index, result);
+                    return false;
+                }
             } else {
-                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Bound texture '%s' to render target %d: %d", pTarget->GetName().GetData(), index, result);
+                IDirect3DTexture9 * pD3D9Tex = reinterpret_cast<IDirect3DTexture9*>(pTarget->GetData());
+
+                if (!pD3D9Tex)
+                {
+                    result = m_Device->SetRenderTarget(index, nullptr);
+                    if (SUCCEEDED(result))
+                    {
+                        logger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"Bound null texture data to render target %d: %d", index, result);
+                        return true;
+                    } else {
+                        logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Device failed to bind null texture data to render target %d: %d", index, result);
+                        return false;
+                    }
+                }
+
+                pD3D9Tex->AddRef();
+
+                IDirect3DSurface9 * pD3D9Surf = nullptr;
+                result = pD3D9Tex->GetSurfaceLevel(0, &pD3D9Surf);
+
+                if (!SUCCEEDED(result))
+                {
+                    logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to get surface of texture '%s', data %p: %d", pTarget->GetName().GetData(), pD3D9Tex, result);
+                    pD3D9Surf->Release();
+                    pD3D9Tex->Release();
+                    return false;
+                }
+
+                result = m_Device->SetRenderTarget(index, pD3D9Surf);
+                
+                pD3D9Surf->Release();
+                pD3D9Tex->Release();
+
+                if (!SUCCEEDED(result))
+                {
+                    logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Device failed to bind texture '%s' to render target %d: %d", pTarget->GetName().GetData(), index, result);
+                    return false;
+                } else {
+                    logger->Log(LL_ModDebug, VOODOO_DX9_NAME, L"Bound texture '%s' to render target %d: %d", pTarget->GetName().GetData(), index, result);
+                    return true;
+                }
             }
-
-            pD3D9Surf->Release();
-            pD3D9Tex->Release();
-
-            return false;
         }
 
         ITexture * DX9Adapter::GetTarget(_In_ const uint32_t index) CONST
@@ -303,8 +406,8 @@ namespace VoodooShader
             (
                 pDesc->Size.X,
                 pDesc->Size.Y,
-                pDesc->Mipmaps?0:1,
-                D3DUSAGE_RENDERTARGET,
+                pDesc->Mipmaps ? 0 : 1,
+                pDesc->RenderTarget ? D3DUSAGE_RENDERTARGET : 0,
                 fmt,
                 D3DPOOL_DEFAULT,
                 &tex,
@@ -314,22 +417,21 @@ namespace VoodooShader
             if (SUCCEEDED(hr))
             {
                 pTexture->SetData(reinterpret_cast<void*>(tex));
+                return true;
             }
             else
             {
                 const char * error = cgD3D9TranslateHRESULT(hr);
 
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Error creating texture %s: %S", name.GetData(), error);
-                return nullptr;
+                return false;
             }
-
-            return true;
         }
 
         bool DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
         {
             //! @todom Load texture data into memory.
-            if (pRegion)
+            if (pFile && pRegion)
             {
                 return this->CreateTexture(pFile->GetPath(), reinterpret_cast<const TextureDesc *>(pRegion), pTexture);
             } else {
@@ -344,7 +446,15 @@ namespace VoodooShader
             _In_ const VertexFlags flags
         )
         { 
-            if (!pVertexData)
+            UNREFERENCED_PARAMETER(count);
+            UNREFERENCED_PARAMETER(pVertexData);
+            UNREFERENCED_PARAMETER(flags);
+
+            TestDraw(m_Device, m_CleanState);
+
+            return true;
+
+            /*if (!pVertexData)
             {
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"No geometry given to draw.");
                 return false;
@@ -401,7 +511,7 @@ namespace VoodooShader
             m_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, aEnabled);
             m_Device->SetRenderState(D3DRS_CULLMODE, cullMode);
 
-            return true;
+            return true;*/
         }
 
         bool DX9Adapter::ApplyParameter(_In_ IParameter * const pParam)
@@ -531,6 +641,8 @@ namespace VoodooShader
 
             m_Device = pDevice;
 
+            HRESULT errors = m_Device->CreateStateBlock(D3DSBT_ALL, &m_CleanState);
+
             ILoggerRef logger = m_Core->GetLogger();
             CGcontext context = m_Core->GetCgContext();
 
@@ -540,7 +652,7 @@ namespace VoodooShader
                 m_Core->SetCgContext(context);
             }
 
-            HRESULT errors = cgD3D9SetDevice(m_Device);
+            errors = cgD3D9SetDevice(m_Device);
 
             if (!SUCCEEDED(errors))
             {
@@ -617,6 +729,14 @@ namespace VoodooShader
             float fy = (viewport.Height / 2) + 0.5f;
 
             logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Prepping for %d by %d target.", viewport.Width, viewport.Height);
+
+            TestCreate(m_Device, fx, fy);
+
+            // Get buffers
+            if (!SUCCEEDED(m_Device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[0]))) { m_BackBuffer[0] = nullptr; }
+            //if (!SUCCEEDED(m_Device->GetBackBuffer(0, 1, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[1]))) { m_BackBuffer[1] = nullptr; }
+            //if (!SUCCEEDED(m_Device->GetBackBuffer(0, 2, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[2]))) { m_BackBuffer[2] = nullptr; }
+            //if (!SUCCEEDED(m_Device->GetBackBuffer(0, 3, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[3]))) { m_BackBuffer[3] = nullptr; }
 
             // Create fullscreen vbuffer
             errors = m_Device->CreateVertexBuffer
