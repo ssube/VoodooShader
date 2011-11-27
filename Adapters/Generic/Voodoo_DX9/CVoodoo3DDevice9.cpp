@@ -180,14 +180,14 @@ namespace VoodooShader
                     logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to set render target.");
                 }*/
 
-                //VoodooShader::ITechniqueRef tech = testShader->GetDefaultTechnique();
-                //VoodooShader::IPassRef pass = tech->GetPass(0);
+                VoodooShader::ITechniqueRef tech = testShader->GetDefaultTechnique();
+                VoodooShader::IPassRef pass = tech->GetPass(0);
 
-                //adapter->SetPass(pass.get());
+                adapter->SetPass(pass.get());
 
                 adapter->DrawGeometry(2, (VertexStruct*)gpFSQuadVerts, (VertexFlags)(VF_Buffer|VF_Transformed));
 
-                //adapter->SetPass();
+                adapter->ResetPass(pass.get());
             }
 
             return m_RealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);

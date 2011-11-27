@@ -209,27 +209,33 @@ namespace VoodooShader
             return true;
         }
 
-        bool DX9Adapter::SetPass(_In_opt_ IPass * const pPass)
+        bool DX9Adapter::SetPass(_In_ IPass * const pPass)
         {
-            /*UNREFERENCED_PARAMETER(pPass);
-            return true;*/
-
             ILoggerRef logger = m_Core->GetLogger();
-            
-            if (m_BoundPass)
+
+            if (!pPass)
             {
-                cgResetPassState(m_BoundPass->GetCgPass());
+                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Unable to set null pass.");
+                return false;
+            }
+
+            if (m_BoundPass && m_BoundPass != pPass)
+            {
+                logger->Log(LL_ModWarn, VOODOO_DX9_NAME, L"Setting pass without resetting previously bound pass.");
             }
 
             m_BoundPass = pPass;
 
-            if (m_BoundPass)
-            {
-                cgSetPassState(m_BoundPass->GetCgPass());
+            //cgSetPassState(m_BoundPass->GetCgPass());
+            CGprogram vprog = m_BoundPass->GetProgram(PS_Vertex);
+            CGprogram fprog = m_BoundPass->GetProgram(PS_Fragment);
 
-                // Bind render targets
-                this->SetTarget(0, m_BoundPass->GetTarget());
-            }
+            HRESULT hr;
+            if (cgIsProgram(vprog)) hr = cgD3D9BindProgram(vprog);
+            if (cgIsProgram(fprog)) hr = cgD3D9BindProgram(fprog);
+
+            // Bind render targets
+            //this->SetTarget(0, m_BoundPass->GetTarget());
 
             return true;
         }
@@ -237,6 +243,32 @@ namespace VoodooShader
         IPass * DX9Adapter::GetPass() CONST
         {
             return m_BoundPass.get();
+        }
+
+        bool DX9Adapter::ResetPass(_In_ IPass * pPass)
+        {
+            ILoggerRef logger = m_Core->GetLogger();
+
+            if (!pPass)
+            {
+                logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Unable to reset null pass.");
+                return false;
+            }
+
+            if (m_BoundPass && m_BoundPass != pPass)
+            {
+                logger->Log(LL_ModWarn, VOODOO_DX9_NAME, L"Resetting pass different than the previously bound pass.");
+            }
+
+            //cgResetPassState(m_BoundPass->GetCgPass());
+            CGprogram vprog = pPass->GetProgram(PS_Vertex);
+            CGprogram fprog = pPass->GetProgram(PS_Fragment);
+
+            HRESULT hr;
+            if (cgIsProgram(vprog)) hr = cgD3D9UnbindProgram(vprog);
+            if (cgIsProgram(fprog)) hr = cgD3D9UnbindProgram(fprog);
+
+            m_BoundPass = nullptr;
         }
 
         bool DX9Adapter::SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget)
@@ -612,7 +644,7 @@ namespace VoodooShader
             logger->Log
             (
                 LL_ModInfo, VOODOO_DX9_NAME,
-                L"Detected the following profiles:\nVertex: %S\nFragment: %S",
+                L"Detected latest profiles with %S as vertex and %S as fragment.",
                 bestVertStr, bestFragStr
             );
 
@@ -661,13 +693,13 @@ namespace VoodooShader
             // Create fullscreen vbuffer
             VertexStruct fsVertData[6] =
             {
-                //POSITION                    COLOR                     TEXCOORD0                 TEXCOORD1
-                {{-0.5f,    fy, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{-0.5f, -0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{   fx, -0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{-0.5f,    fy, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{   fx, -0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{   fx,    fy, 0.5f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+            //   POSITION                    COLOR                      TEXCOORD[0]               TEXCOORD[1]
+                {{-0.5f,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{-0.5f, -0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx, -0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{-0.5f,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx, -0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
             };
 
             errors = m_Device->CreateVertexBuffer

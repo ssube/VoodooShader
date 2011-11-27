@@ -42,8 +42,9 @@ namespace VoodooShader
 
             VOODOO_METHODCALL(LoadPass)(_In_ IPass * const pPass);
             VOODOO_METHODCALL(UnloadPass)(_In_ IPass * const pPass);
-            VOODOO_METHODCALL(SetPass)(_In_opt_ IPass * const pPass);
+            VOODOO_METHODCALL(SetPass)(_In_ IPass * const pPass);
             VOODOO_METHODCALL_(IPass *, GetPass)() CONST;
+            VOODOO_METHODCALL(ResetPass)(_In_ IPass * const pPass);
             VOODOO_METHODCALL(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
             VOODOO_METHODCALL_(ITexture *, GetTarget)(_In_ const uint32_t index) CONST;
             VOODOO_METHODCALL(CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture);

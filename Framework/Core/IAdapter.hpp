@@ -83,8 +83,7 @@ namespace VoodooShader
          * Causes the adapter to load a pass for drawing. The adapter may choose which programs to bind and how to handle
          * the binding, as well as managing any errors that may arise.
          *
-         * @param pPass A shared pointer to the pass to be bound. If this is null, the adapter must unbind the last bound
-         *     pass and reset all states.
+         * @param pPass A shared pointer to the pass to be bound.
          * @return Success of the binding operation.
          *
          * @note Adapters may, at their discretion, bind some or even no programs to the true graphics API. An example of
@@ -96,10 +95,9 @@ namespace VoodooShader
          *     updates must be performed before this function returns and take effect for any draw calls coming after this
          *     call.
          *
-         * @note Adapters must restore all states when a pass is unbound to the exact previous state. The exact
-         *     implementation is left to the adapter, but DX provides some APIs to handle this rather well.
+         * @note Each call to SetPass should have a corresponding call to ResetPass.
          */
-        VOODOO_METHODCALL(SetPass)(_In_opt_ IPass * const pPass = nullptr) PURE;
+        VOODOO_METHODCALL(SetPass)(_In_ IPass * const pPass) PURE;
 
         /**
          * Get the currently bound pass.
@@ -107,6 +105,11 @@ namespace VoodooShader
          * @return The bound pass, or nullptr if none.
          */
         VOODOO_METHODCALL_(IPass *, GetPass)() CONST PURE;
+
+        /**
+         * Resets the state of the adapter and unbinds the pass.
+         */
+        VOODOO_METHODCALL(ResetPass)(_In_ IPass * const pPass) PURE;
 
         /**
          * Sets a render target for the adapter.

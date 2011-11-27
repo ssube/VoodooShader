@@ -110,6 +110,13 @@ namespace VoodooShader
         return nullptr;
     }
 
+    bool VOODOO_METHODCALLTYPE VSAdapter::ResetPass(IPass * pPass)
+    {
+        UNREFERENCED_PARAMETER(pPass);
+
+        return true;
+    }
+
     bool VOODOO_METHODCALLTYPE VSAdapter::SetTarget(const uint32_t index, ITexture * pTarget)
     {
         UNREFERENCED_PARAMETER(index);
