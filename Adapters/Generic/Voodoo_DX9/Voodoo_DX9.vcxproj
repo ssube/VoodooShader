@@ -39,10 +39,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Code\boost;D:\Code\DX_June2010\Include;D:\Code\Cg_July2010\include\;$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Code\DX_June2010\Lib\x86;D:\Code\Cg_July2010\lib;$(SolutionDir)\bin\$(Configuration)\;$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Code\boost;D:\Code\DX_June2010\Include;D:\Code\Cg_July2010\include\;$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Code\DX_June2010\Lib\x86;D:\Code\Cg_July2010\lib;$(SolutionDir)\bin\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Code\boost;D:\Code\DX_June2010\Include;D:\Code\CgToolkit\include\;$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Code\DX_June2010\Lib\x86;D:\Code\CgToolkit\lib;$(SolutionDir)\bin\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Code\boost;D:\Code\DX_June2010\Include;D:\Code\CgToolkit\include\;$(SolutionDir)\Framework\Core;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Code\DX_June2010\Lib\x86;D:\Code\CgToolkit\lib;$(SolutionDir)\bin\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

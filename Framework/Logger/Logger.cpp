@@ -18,20 +18,21 @@
  *   peachykeen@voodooshader.com
  */
 
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <iomanip>
-
-#include <boost/uuid/uuid_io.hpp>
-
 #include "Logger.hpp"
 
 #include "Logger_Version.hpp"
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <strsafe.h>
+
+#pragma warning(push)
+#pragma warning(disable: 6246)
+#include <boost/uuid/uuid_io.hpp>
+#pragma warning(pop)
+
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 

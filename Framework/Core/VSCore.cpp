@@ -674,10 +674,9 @@ namespace VoodooShader
                     // Print any compiler errors or other details we can find
                     const char *listing = cgGetLastListing(context);
 
-                    while (listing)
+                    if (listing)
                     {
                         this->GetLogger()->Log(LL_CoreError, VOODOO_CG_NAME, L"Cg error details: %S", listing);
-                        listing = cgGetLastListing(context);
                     }
                 }
                 else

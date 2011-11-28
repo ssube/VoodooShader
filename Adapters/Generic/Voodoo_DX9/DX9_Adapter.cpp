@@ -224,18 +224,24 @@ namespace VoodooShader
                 logger->Log(LL_ModWarn, VOODOO_DX9_NAME, L"Setting pass without resetting previously bound pass.");
             }
 
-            m_BoundPass = pPass;
+            cgSetPassState(pPass->GetCgPass());
+            /*HRESULT hr;
 
-            //cgSetPassState(m_BoundPass->GetCgPass());
-            CGprogram vprog = m_BoundPass->GetProgram(PS_Vertex);
-            CGprogram fprog = m_BoundPass->GetProgram(PS_Fragment);
+            CGprogram vp = pPass->GetProgram(PS_Vertex);
+            CGprogram fp = pPass->GetProgram(PS_Fragment);
 
-            HRESULT hr;
-            if (cgIsProgram(vprog)) hr = cgD3D9BindProgram(vprog);
-            if (cgIsProgram(fprog)) hr = cgD3D9BindProgram(fprog);
+            hr = cgD3D9BindProgram(vp);
+            hr = cgD3D9BindProgram(fp);*/
+
+            CGerror cgerr = cgGetError();
+            assert(cgerr == CG_NO_ERROR);
+            HRESULT cgd3derr = cgD3D9GetLastError();
+            assert(cgd3derr == D3D_OK);
 
             // Bind render targets
             //this->SetTarget(0, m_BoundPass->GetTarget());
+
+            m_BoundPass = pPass;
 
             return true;
         }
@@ -260,15 +266,23 @@ namespace VoodooShader
                 logger->Log(LL_ModWarn, VOODOO_DX9_NAME, L"Resetting pass different than the previously bound pass.");
             }
 
-            //cgResetPassState(m_BoundPass->GetCgPass());
-            CGprogram vprog = pPass->GetProgram(PS_Vertex);
-            CGprogram fprog = pPass->GetProgram(PS_Fragment);
+            cgResetPassState(pPass->GetCgPass());
+            /*HRESULT hr;
 
-            HRESULT hr;
-            if (cgIsProgram(vprog)) hr = cgD3D9UnbindProgram(vprog);
-            if (cgIsProgram(fprog)) hr = cgD3D9UnbindProgram(fprog);
+            CGprogram vp = pPass->GetProgram(PS_Vertex);
+            CGprogram fp = pPass->GetProgram(PS_Fragment);
+
+            hr = cgD3D9BindProgram(vp);
+            hr = cgD3D9BindProgram(fp);*/
+
+            CGerror cgerr = cgGetError();
+            assert(cgerr == CG_NO_ERROR);
+            HRESULT cgd3derr = cgD3D9GetLastError();
+            assert(cgd3derr == D3D_OK);
 
             m_BoundPass = nullptr;
+
+            return true;
         }
 
         bool DX9Adapter::SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget)
@@ -573,9 +587,16 @@ namespace VoodooShader
         bool DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error)
         {
             UNREFERENCED_PARAMETER(pContext);
-            UNREFERENCED_PARAMETER(error);
 
-            //! @todo Handle errors as needed.
+            CGerror ecode = (CGerror)error;
+
+            if (ecode == cgD3D9DebugTrace)
+            {
+                const char * emsg = cgD3D9TranslateCGerror(ecode);
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"D3D9 Debug %d: %S", ecode, emsg);
+                return true;
+            }
+
             return false;
         }
 
@@ -617,11 +638,11 @@ namespace VoodooShader
                 logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Cg D3D9 device set successfully.");
             }
 
+            cgD3D9RegisterStates(context);
+
             cgD3D9EnableDebugTracing(CG_TRUE);
 
             cgD3D9SetManageTextureParameters(context, CG_TRUE);
-
-            cgD3D9RegisterStates(context);
 
             errors = cgD3D9GetLastError();
 
