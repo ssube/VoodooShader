@@ -225,13 +225,6 @@ namespace VoodooShader
             }
 
             cgSetPassState(pPass->GetCgPass());
-            /*HRESULT hr;
-
-            CGprogram vp = pPass->GetProgram(PS_Vertex);
-            CGprogram fp = pPass->GetProgram(PS_Fragment);
-
-            hr = cgD3D9BindProgram(vp);
-            hr = cgD3D9BindProgram(fp);*/
 
             CGerror cgerr = cgGetError();
             assert(cgerr == CG_NO_ERROR);
@@ -267,13 +260,6 @@ namespace VoodooShader
             }
 
             cgResetPassState(pPass->GetCgPass());
-            /*HRESULT hr;
-
-            CGprogram vp = pPass->GetProgram(PS_Vertex);
-            CGprogram fp = pPass->GetProgram(PS_Fragment);
-
-            hr = cgD3D9BindProgram(vp);
-            hr = cgD3D9BindProgram(fp);*/
 
             CGerror cgerr = cgGetError();
             assert(cgerr == CG_NO_ERROR);
@@ -707,20 +693,17 @@ namespace VoodooShader
 
             // Get buffers
             if (!SUCCEEDED(m_Device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[0]))) { m_BackBuffer[0] = nullptr; }
-            //if (!SUCCEEDED(m_Device->GetBackBuffer(0, 1, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[1]))) { m_BackBuffer[1] = nullptr; }
-            //if (!SUCCEEDED(m_Device->GetBackBuffer(0, 2, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[2]))) { m_BackBuffer[2] = nullptr; }
-            //if (!SUCCEEDED(m_Device->GetBackBuffer(0, 3, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[3]))) { m_BackBuffer[3] = nullptr; }
 
             // Create fullscreen vbuffer
             VertexStruct fsVertData[6] =
             {
             //   POSITION                    COLOR                      TEXCOORD[0]               TEXCOORD[1]
-                {{-0.5f,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{-0.5f, -0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{   fx, -0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{-0.5f,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{   fx, -0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{   fx,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{-0.5f,    fy, 0.5f, 0.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{-0.5f, -0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx, -0.5f, 0.5f, 0.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{-0.5f,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx, -0.5f, 0.5f, 0.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
             };
 
             errors = m_Device->CreateVertexBuffer

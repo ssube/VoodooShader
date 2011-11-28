@@ -54,24 +54,27 @@ namespace VoodooShader
 
     ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams, bool catchErrors)
     {
-        boost::intrusive_ptr<VSCore> pCore = nullptr;
+        static VSCore * pCore = nullptr;
 
-        try
+        if (!pCore)
         {
-            pCore = new VSCore();
-            pCore->Initialize(pInitParams);
-        } catch(const std::exception & exc) {
-            UNREFERENCED_PARAMETER(exc);
-
-            pCore = nullptr;
-
-            if (!catchErrors)
+            try
             {
-                throw exc;
+                pCore = new VSCore();
+                pCore->Initialize(pInitParams);
+            } catch(const std::exception & exc) {
+                UNREFERENCED_PARAMETER(exc);
+
+                pCore = nullptr;
+
+                if (!catchErrors)
+                {
+                    throw exc;
+                }
             }
         }
 
-        return pCore.get();
+        return pCore;
     }
 
     VSCore::VSCore() :
