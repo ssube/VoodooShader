@@ -26,22 +26,14 @@ namespace VoodooShader
 {
     namespace VoodooDX9
     {
-        DX9Texture::DX9Texture(ICore * pCore, String name, IDirect3DTexture9 * pTexture) :
+        DX9Texture::DX9Texture(ICore * pCore, String name, IDirect3DBaseTexture9 * pTexture) :
             m_Refs(0), m_Core(pCore), m_Name(name), m_Texture(pTexture)
         {
             if (pTexture)
             {
                 m_Texture->AddRef();
 
-                D3DSURFACE_DESC desc;
-                m_Texture->GetLevelDesc(0, &desc);
-
-                m_Desc.Size.X = desc.Width;
-                m_Desc.Size.Y = desc.Height;
-                m_Desc.Size.Z = 0;
-                m_Desc.Mipmaps = m_Texture->GetLevelCount() > 1;
-                m_Desc.RenderTarget = desc.Usage == D3DUSAGE_RENDERTARGET;
-                m_Desc.Format = DX9_Converter::ToTextureFormat(desc.Format);
+                this->GetTexDesc();
             }
         }
 
@@ -122,12 +114,54 @@ namespace VoodooShader
         {
             void * oldData = m_Texture;
             m_Texture = reinterpret_cast<IDirect3DBaseTexture9*>(pData);
+            this->GetTexDesc();
             return oldData;
         }
 
         const TextureDesc * VOODOO_METHODCALLTYPE DX9Texture::GetDesc() CONST
         {
             return &m_Desc;
+        }
+
+        void DX9Texture::GetTexDesc()
+        {
+            ZeroMemory(&m_Desc, sizeof(TextureDesc));
+
+            if (!m_Texture) return;
+
+            m_Desc.Mipmaps = m_Texture->GetLevelCount() > 1;
+
+            // Test for 2D texture
+            IDirect3DTexture9 * pTex = nullptr;
+            if (SUCCEEDED(m_Texture->QueryInterface(IID_IDirect3DTexture9, (void**)&pTex)))
+            {
+                D3DSURFACE_DESC desc;
+                pTex->GetLevelDesc(0, &desc);
+
+                m_Desc.Size.X = desc.Width;
+                m_Desc.Size.Y = desc.Height;
+                m_Desc.Size.Z = 0;
+                m_Desc.RenderTarget = desc.Usage == D3DUSAGE_RENDERTARGET;
+                m_Desc.Format = DX9_Converter::ToTextureFormat(desc.Format);
+
+                pTex->Release();
+            }
+
+            // Test for 3D texture
+            IDirect3DVolumeTexture9 * pVTex = nullptr;
+            if (SUCCEEDED(m_Texture->QueryInterface(IID_IDirect3DVolumeTexture9, (void**)&pVTex)))
+            {
+                D3DVOLUME_DESC desc;
+                pVTex->GetLevelDesc(0, &desc);
+
+                m_Desc.Size.X = desc.Width;
+                m_Desc.Size.Y = desc.Height;
+                m_Desc.Size.Z = desc.Depth;
+                m_Desc.RenderTarget = desc.Usage == D3DUSAGE_RENDERTARGET;
+                m_Desc.Format = DX9_Converter::ToTextureFormat(desc.Format);
+
+                pTex->Release();
+            }
         }
     }
 }

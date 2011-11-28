@@ -21,6 +21,7 @@
 #include "DX9_Adapter.hpp"
 
 #include "DX9_Converter.hpp"
+#include "DX9_Texture.hpp"
 #include "DX9_Version.hpp"
 
 #include "CVoodoo3D8.hpp"
@@ -371,8 +372,8 @@ namespace VoodooShader
 
             if (SUCCEEDED(hr))
             {
-                //pTexture->SetData(reinterpret_cast<void*>(tex));
-                return nullptr;
+                ITexture * pTex = new DX9Texture(m_Core, name, tex);
+                return pTex;
             }
             else
             {
