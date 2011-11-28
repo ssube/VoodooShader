@@ -20,21 +20,38 @@
 
 #include "DX9_Texture.hpp"
 
+#include "DX9_Converter.hpp"
+
 namespace VoodooShader
 {
     namespace VoodooDX9
     {
-        DX9Texture::DX9Texture(ICore * pCore, String name, _In_ const TextureDesc * pDesc, void * pTexture) :
-            m_Refs(0), m_Core(pCore), m_Name(name), m_Texture(reinterpret_cast<IDirect3DBaseTexture9*>(pTexture))
+        DX9Texture::DX9Texture(ICore * pCore, String name, IDirect3DTexture9 * pTexture) :
+            m_Refs(0), m_Core(pCore), m_Name(name), m_Texture(pTexture)
         {
-            if (pDesc)
+            if (pTexture)
             {
-                m_Desc = *pDesc;
+                m_Texture->AddRef();
+
+                D3DSURFACE_DESC desc;
+                m_Texture->GetLevelDesc(0, &desc);
+
+                m_Desc.Size.X = desc.Width;
+                m_Desc.Size.Y = desc.Height;
+                m_Desc.Size.Z = 0;
+                m_Desc.Mipmaps = m_Texture->GetLevelCount() > 1;
+                m_Desc.RenderTarget = desc.Usage == D3DUSAGE_RENDERTARGET;
+                m_Desc.Format = DX9_Converter::ToTextureFormat(desc.Format);
             }
         }
 
         DX9Texture::~DX9Texture()
-        { }
+        {
+            if (m_Texture)
+            {
+                m_Texture->Release();
+            }
+        }
 
         uint32_t VOODOO_METHODCALLTYPE DX9Texture::AddRef() CONST
         {
