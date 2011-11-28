@@ -22,7 +22,6 @@
 
 #include "VSParameter.hpp"
 #include "VSTechnique.hpp"
-#include "VSTexture.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"

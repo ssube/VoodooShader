@@ -164,15 +164,21 @@ namespace VoodooShader
         /**
          * Draws geometry from system memory.
          *
-         * @param count The number of vertexes to draw.
-         * @param pVertexData This must contain vertex data for the given number of verts.
+         * @param offset A parameter with adapter-defined meaning, may be first vertex offset.
+         * @param count A parameter with adapter-defined meaning, may be number of vertexes.
+         * @param pData A pointer to the data to be used for vertexes, may be an adapter or buffer of VertexStructs.
          * @param flags Vertex flags for this data set, particularly whether the verts are pretransformed.
          * @return Success of the draw operation.
+         * 
+         * @note If VF_Buffer is set in flags, pData must be a buffer of some type. Otherwise, pData must be an array of
+         *      VertexStructs. If VF_Transformed is set, the vertex data should be interpreted as being pretransformed;
+         *      otherwise it should be taken as raw vertexes.
          */
         VOODOO_METHODCALL(DrawGeometry)
         (
+            _In_ const uint32_t offset,
             _In_ const uint32_t count,
-            _In_count_(count) VertexStruct * const pVertexData,
+            _In_ void * const pData,
             _In_ const VertexFlags flags = VF_Transformed
         ) PURE;
 
@@ -189,7 +195,7 @@ namespace VoodooShader
          * Set a property on the adapter.
          *
          * @param name The property name to set.
-         * @param value The value to set the property to.
+         * @param pValue The value to set the property to.
          * @return True if any value was changed.
          *
          * @note Adapters may define the meaning of any properties not given in the core adapter specification. Adapters may
@@ -198,20 +204,19 @@ namespace VoodooShader
          * @note To allow for significant variations in property setups and allow for use outside of the framework
          *      (particularly from the loader), this function takes the name as a basic string and a variant for the value.
          *
-         * @warning Adapters may change values stored in the variant given. However, they must return true if so, and
-         *      must verify the type is correct.
+         * @warning Adapters may change values stored in the variant given, but must not change the type.
          */
-        VOODOO_METHODCALL(SetProperty)(_In_ const wchar_t * name, _In_ Variant & value) PURE;
+        VOODOO_METHODCALL(SetProperty)(_In_ const wchar_t * name, _In_ Variant * const pValue) PURE;
 
         /**
          * Get a property from the adapter.
          *
          * @param name The property to get.
-         * @param value Value of the property, if it exists. Variant is unchanged otherwise.
+         * @param pValue Value of the property, if it exists. Variant is unchanged otherwise.
          *
          * @return Success of the property get.
          */
-        VOODOO_METHODCALL(GetProperty)(_In_ const wchar_t * name, _Out_ Variant & value) CONST PURE;
+        VOODOO_METHODCALL(GetProperty)(_In_ const wchar_t * name, _Out_ Variant * const value) CONST PURE;
 
         /**
          * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses

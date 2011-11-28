@@ -132,13 +132,12 @@ namespace VoodooShader
         return nullptr;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::CreateTexture(const String & name, const TextureDesc * const pDesc, ITexture * const pTexture)
+    ITexture * VOODOO_METHODCALLTYPE VSAdapter::CreateTexture(const String & name, const TextureDesc * const pDesc)
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(pDesc);
-        UNREFERENCED_PARAMETER(pTexture);
 
-        return false;
+        return nullptr;
     }
 
     bool VOODOO_METHODCALLTYPE VSAdapter::LoadTexture(IImage * const pFile, const TextureRegion * const pRegion, ITexture * const pTexture)
@@ -150,10 +149,11 @@ namespace VoodooShader
         return false;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::DrawGeometry(const uint32_t count, VertexStruct * const pVertexData, const VertexFlags flags)
+    bool VOODOO_METHODCALLTYPE VSAdapter::DrawGeometry(const uint32_t offset, const uint32_t count, void * const pData, const VertexFlags flags)
     {
+        UNREFERENCED_PARAMETER(offset);
         UNREFERENCED_PARAMETER(count);
-        UNREFERENCED_PARAMETER(pVertexData);
+        UNREFERENCED_PARAMETER(pData);
         UNREFERENCED_PARAMETER(flags);
 
         return true;
@@ -166,7 +166,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::SetProperty(const wchar_t * name, Variant & value)
+    bool VOODOO_METHODCALLTYPE VSAdapter::SetProperty(const wchar_t * name, Variant * const value)
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);
@@ -174,7 +174,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::GetProperty(const wchar_t * name, Variant & value) CONST
+    bool VOODOO_METHODCALLTYPE VSAdapter::GetProperty(const wchar_t * name, Variant * const value) CONST
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);

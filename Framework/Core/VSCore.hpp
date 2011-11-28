@@ -82,7 +82,7 @@ namespace VoodooShader
         VOODOO_METHODCALL(SetCgContext)(_In_opt_ CGcontext const pContext);
 
     private:
-        void CgErrorHandler(_In_ CGcontext pContext, _In_ int error) const;
+        void CgErrorHandler(_In_ CGcontext pContext, _In_ CGerror error) const;
 
     private:
         mutable uint32_t m_Refs;

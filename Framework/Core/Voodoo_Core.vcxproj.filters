@@ -16,9 +16,6 @@
     <ClCompile Include="Regex.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="VSTexture.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
     <ClCompile Include="VSTechnique.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
@@ -145,9 +142,6 @@
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
     <ClInclude Include="VSTechnique.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
-    <ClInclude Include="VSTexture.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
     <ClInclude Include="VoodooFramework.hpp">

@@ -352,7 +352,7 @@ namespace VoodooShader
             return m_RenderTarget[index].get();
         }
 
-        bool DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture)
+        ITexture * DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
         {
             IDirect3DTexture9 * tex = nullptr;
             D3DFORMAT fmt = DX9_Converter::ToD3DFormat(pDesc->Format);
@@ -371,37 +371,37 @@ namespace VoodooShader
 
             if (SUCCEEDED(hr))
             {
-                pTexture->SetData(reinterpret_cast<void*>(tex));
-                return true;
+                //pTexture->SetData(reinterpret_cast<void*>(tex));
+                return nullptr;
             }
             else
             {
                 const char * error = cgD3D9TranslateHRESULT(hr);
 
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Error creating texture %s: %S", name.GetData(), error);
-                return false;
+                return nullptr;
             }
         }
 
         bool DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
         {
-            //! @todom Load texture data into memory.
-            if (pFile && pRegion)
-            {
-                return this->CreateTexture(pFile->GetPath(), reinterpret_cast<const TextureDesc *>(pRegion), pTexture);
-            } else {
-                return false;
-            }
+            UNREFERENCED_PARAMETER(pFile);
+            UNREFERENCED_PARAMETER(pRegion);
+            UNREFERENCED_PARAMETER(pTexture);
+
+            //! @todo Load texture data into memory.
+            return false;
         }
 
         bool DX9Adapter::DrawGeometry
         (
+            _In_ const uint32_t offset,
             _In_ const uint32_t count, 
-            _In_count_(count) VertexStruct * const pVertexData, 
+            _In_ void * const pData, 
             _In_ const VertexFlags flags
         )
         { 
-            if (!pVertexData)
+            if (!pData)
             {
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"No geometry given to draw.");
                 return false;
@@ -429,7 +429,7 @@ namespace VoodooShader
 
             if (flags & VF_Buffer)
             {
-                IDirect3DVertexBuffer9 * pVertexBuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pVertexData);
+                IDirect3DVertexBuffer9 * pVertexBuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pData);
 
                 hr = m_Device->SetStreamSource(0, pVertexBuffer, 0, sizeof(VertexStruct));
 
@@ -437,7 +437,7 @@ namespace VoodooShader
 
                 if (SUCCEEDED(hr))
                 {
-                    hr = m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, count);
+                    hr = m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, offset, count);
                     hr = m_Device->EndScene();
                 }
                 else
@@ -451,7 +451,7 @@ namespace VoodooShader
 
                 if (SUCCEEDED(hr))
                 {
-                    hr = m_Device->DrawPrimitiveUP(D3DPT_TRIANGLELIST, count, pVertexData, sizeof(VertexStruct));
+                    hr = m_Device->DrawPrimitiveUP(D3DPT_TRIANGLELIST, count, pData, sizeof(VertexStruct));
                     hr = m_Device->EndScene();
                 }
                 else
@@ -495,30 +495,30 @@ namespace VoodooShader
             return true;
         }
 
-        bool DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant & value)
+        bool DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant * const value)
         {
             String strname(name);
 
-            if (strname == L"SdkVersion" && value.Type == UT_UInt32)
+            if (strname == L"SdkVersion" && value->Type == UT_UInt32)
             {
-                m_SdkVersion = value.Value.VUInt32;
+                m_SdkVersion = value->Value.VUInt32;
                 return true;
-            } else if (strname == L"IDirect3D8" && value.Type == UT_PVoid) {
+            } else if (strname == L"IDirect3D8" && value->Type == UT_PVoid) {
                 using VoodooShader::VoodooDX8::CVoodoo3D8;
 
-                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value.Value.VPVoid);
+                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->Value.VPVoid);
 
                 CVoodoo3D8 * fakeObj = new CVoodoo3D8(m_SdkVersion, origObj);
 
-                value.Value.VPVoid = fakeObj;
+                value->Value.VPVoid = fakeObj;
 
                 return true;
-            } else if (strname == L"IDirect3D9" && value.Type == UT_PVoid) {
-                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value.Value.VPVoid);
+            } else if (strname == L"IDirect3D9" && value->Type == UT_PVoid) {
+                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->Value.VPVoid);
 
                 CVoodoo3D9 * fakeObj = new CVoodoo3D9(m_SdkVersion, origObj);
 
-                value.Value.VPVoid = fakeObj;
+                value->Value.VPVoid = fakeObj;
 
                 return true;
             }
@@ -526,14 +526,14 @@ namespace VoodooShader
             return false;
         }
 
-        bool DX9Adapter::GetProperty(_In_ const wchar_t * name, _In_ Variant & value) CONST
+        bool DX9Adapter::GetProperty(_In_ const wchar_t * name, _In_ Variant * const value) CONST
         {
             String strname(name);
 
             if (strname == L"SdkVersion")
             {
-                value.Type = UT_UInt32;
-                value.Value.VUInt32 = m_SdkVersion;
+                value->Type = UT_UInt32;
+                value->Value.VUInt32 = m_SdkVersion;
                 return true;
             }
 

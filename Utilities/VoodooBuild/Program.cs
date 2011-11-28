@@ -63,7 +63,7 @@ namespace VoodooBuild
             lines = new String[3];
             lines[0] = timestamp;
             lines[1] = String.Format("#define VOODOO_GLOBAL_VERSION_BUILD {0}", buildCount);
-            lines[2] = String.Format("#define VOODOO_GLOBAL_GITID VOODOO_META_STRING(\"{0}\")", gitDesc.TrimEnd('\n'));
+            lines[2] = String.Format("#define VOODOO_GLOBAL_VERSION_ID VOODOO_META_STRING(\"{0}\")", gitDesc.TrimEnd('\n'));
             File.WriteAllLines(buildFile, lines);
         }
     }

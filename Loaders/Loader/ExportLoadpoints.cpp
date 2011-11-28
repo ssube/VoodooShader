@@ -65,7 +65,7 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
         D3DObj.Type = VoodooShader::UT_PVoid;
         D3DObj.Value.VPVoid = pD3D8;
 
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D8", D3DObj);
+        gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D8", &D3DObj);
 
         if (D3DObj.Value.VPVoid != pD3D8)
         {
@@ -89,7 +89,7 @@ void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
         D3DObj.Type = VoodooShader::UT_PVoid;
         D3DObj.Value.VPVoid = pD3D9;
 
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9", D3DObj);
+        gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9", &D3DObj);
 
         if (D3DObj.Value.VPVoid != pD3D9)
         {
@@ -132,7 +132,7 @@ HRESULT WINAPI VoodooInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID riidl
         DIObj.Type = VoodooShader::UT_PVoid;
         DIObj.Value.VPVoid = i8obj;
 
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirectInput8", DIObj);
+        gVoodooCore->GetAdapter()->SetProperty(L"IDirectInput8", &DIObj);
 
         if (DIObj.Value.VPVoid != i8obj)
         {
@@ -188,7 +188,7 @@ HRESULT WINAPI VoodooInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplp
         DIObj.Type = VoodooShader::UT_PVoid;
         DIObj.Value.VPVoid = iaobj;
 
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputA", DIObj);
+        gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputA", &DIObj);
 
         if (DIObj.Value.VPVoid != iaobj)
         {
@@ -211,7 +211,7 @@ HRESULT WINAPI VoodooInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplp
         DIObj.Type = VoodooShader::UT_PVoid;
         DIObj.Value.VPVoid = iwobj;
 
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputW", DIObj);
+        gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputW", &DIObj);
 
         if (DIObj.Value.VPVoid != iwobj)
         {
@@ -255,7 +255,7 @@ HRESULT WINAPI VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID 
         DSObj.Type = VoodooShader::UT_PVoid;
         DSObj.Value.VPVoid = s8obj;
 
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirectSound8", DSObj);
+        gVoodooCore->GetAdapter()->SetProperty(L"IDirectSound8", &DSObj);
 
         if (DSObj.Value.VPVoid != s8obj)
         {

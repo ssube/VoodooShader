@@ -82,7 +82,7 @@
     <ClCompile Include="CVoodoo3DDevice9.cpp" />
     <ClCompile Include="CVoodoo3DTexture8.cpp" />
     <ClCompile Include="CVoodoo3DSurface8.cpp" />
-    <ClCompile Include="DX_Exports.cpp" />
+    <ClCompile Include="DX9_Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp" />
@@ -97,6 +97,7 @@
     <ClInclude Include="CVoodoo3DSurface8.hpp" />
     <ClInclude Include="CVoodoo3DTexture8.hpp" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="DX9_Texture.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_DX9.rc" />

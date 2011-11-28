@@ -24,7 +24,6 @@
 #include "VSParameter.hpp"
 #include "VSParser.hpp"
 #include "VSShader.hpp"
-#include "VSTexture.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
@@ -538,16 +537,13 @@ namespace VoodooShader
         }
         else
         {
-            ITexture * texture = new VSTexture(this, name, pDesc, nullptr);
-
-            m_Adapter->CreateTexture(name, pDesc, texture);
+            ITextureRef texture = m_Adapter->CreateTexture(name, pDesc);            
 
             m_Textures[name] = texture;
 
-            m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Added texture %s, returning shared pointer to %p.",
-                name.GetData(), texture);
+            m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Created texture '%s'.", name.GetData());
 
-            return texture;
+            return texture.get();
         }
     }
 
@@ -663,11 +659,11 @@ namespace VoodooShader
         }
     }
 
-    void VSCore::CgErrorHandler(CGcontext context, int error) CONST
+    void VSCore::CgErrorHandler(CGcontext context, CGerror error) CONST
     {        
         if (!m_Adapter || !m_Adapter->HandleError(context, error))
         {
-            const char * errorString = error ? cgGetErrorString((CGerror) error) : nullptr;
+            const char * errorString = error ? cgGetErrorString(error) : nullptr;
 
             if (errorString)
             {

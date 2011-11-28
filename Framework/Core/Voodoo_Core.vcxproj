@@ -91,7 +91,6 @@
     <ClCompile Include="VSShader.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="VSTechnique.cpp" />
-    <ClCompile Include="VSTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Converter.hpp" />
@@ -131,7 +130,6 @@
     <ClInclude Include="VSPass.hpp" />
     <ClInclude Include="VSShader.hpp" />
     <ClInclude Include="VSTechnique.hpp" />
-    <ClInclude Include="VSTexture.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Core.rc" />
