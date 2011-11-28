@@ -33,7 +33,7 @@ namespace VoodooShader
          * engine.
          * 
          * @note The various CVoodoo3D8 interfaces provide an application-opaque wrapper that actually implements a Direct3D
-         *      8.9 layer (8 to 9 translation). For use with D3D9 applications, the CVoodoo3D9 interface set should be used.
+         *      8.9 layer (8 to 9 translation). For use with D3D9 applications, the CVoodoo3D9 interface set must be used.
          */
         class CVoodoo3D8 :
             public IDirect3D8

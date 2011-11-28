@@ -36,7 +36,7 @@ namespace VoodooShader
     /**
      * Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API.
      *
-     * @note This class should be implemented for a specific graphics application; some generic adapters are provided for
+     * @note This class should be implemented for each specific graphics application; some generic adapters are provided for
      *     major APIs, but in most cases application-specific behavior will make these only partially helpful.
      *
      * @sa See the @ref voodoo_spec_adapter "adapter specifications" for details on what is required of adapter modules and
@@ -63,9 +63,9 @@ namespace VoodooShader
          * @param pPass The pass to be loaded.
          * @return Whether or not the pass was successfully loaded.
          *
-         * @warning There is no guarantee what programs, if any, will be loaded or how this will be performed. The only
-         *     guarantee is that if this call returns true, the pass may be bound to this adapter in the future. If this
-         *     returns false, the pass must not be bound.
+         * @warning The adapter may load any combination of programs from the given pass and may ignore the remainder. If 
+         *      this call returns true, the pass may be bound to this adapter in the future. If this returns false, the pass
+         *      may be unable to be bound.
          */
         VOODOO_METHODCALL(LoadPass)(_In_ IPass * const pPass) PURE;
 
@@ -74,8 +74,7 @@ namespace VoodooShader
          *
          * @param pPass The pass to unload.
          *
-         * @warning There is no guarantee what will occur within this function, but the pass given should @e never be bound
-         *     after being unloaded.
+         * @warning A pass given should not be bound after being unloaded.
          */
         VOODOO_METHODCALL(UnloadPass)(_In_ IPass * const pPass) PURE;
 
@@ -90,10 +89,10 @@ namespace VoodooShader
          *     this is the Direct3D 9 adapter, which binds only vertex and fragment programs, ignoring any geometry, domain
          *     or hull programs.
          *
-         * @note The Adapter may implement passes using deferred parameters; if so it @e must update all pass parameters,
-         *     virtual first and actual parameters second (to make sure virtual param values get propagated). All parameters
-         *     updates must be performed before this function returns and take effect for any draw calls coming after this
-         *     call.
+         * @note The Adapter may implement passes using deferred parameters; if so it must update all relevant parameters
+         *      before binding the pass. Virtual parameters must be updated before actual, to guarantee propagation. All 
+         *      parameters updates must be performed before this function returns and take effect for any draw calls coming 
+         *      after this call.
          *
          * @note Each call to SetPass should have a corresponding call to ResetPass.
          */
@@ -119,8 +118,7 @@ namespace VoodooShader
          * @return True if the target was successfully bound.
          *
          * @note Some texture formats, combinations of formats, textures and indices may be invalid for use as a render
-         *     target. Most common formats should be supported, so long as all targets are the same format. Many cards allow
-         *     up to 4 targets. Anything beyond this should not be expected to be widely supported.
+         *     target. Many cards allow up to 4 targets, but most do not allow mixing formats.
          */
         VOODOO_METHODCALL(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget = nullptr) PURE;
 
@@ -133,22 +131,21 @@ namespace VoodooShader
         VOODOO_METHODCALL_(ITexture *, GetTarget)(_In_ const uint32_t index) CONST PURE;
 
         /**
-         * Creates a texture within the adapter and binds it to a texture.
+         * Creates a texture within the adapter.
          *
          * @param name The name of the texture, usually a fully-qualified name.
          * @param pDesc Description of the texture, size and format.
-         * @param pTexture The texture the new adapter texture should be bound to.
-         * @return Success of the create and bind.
+         * @return The texture created, if successful; a nullptr otherwise.
          *
          * @note Only Voodoo texture formats are supported, API-specific formats are not and @b must return errors.
          *
-         * @note This must create a texture that can either be rendered directly into or that can have the backbuffer copied
-         *     into it efficiently, depending on how the adapter chooses to implement RTT.
+         * @note If pDesc's RenderTarget flag is true, this must create a texture that can be rendered directly into or that 
+         *      have the backbuffer copied efficiently into it, depending on how the adapter chooses to implement RTT.
          *
          * @warning You should not call this method directly; it should only be used via Core::CreateTexture(). This method
          *     does not set up the texture for use with the core.
          */
-        VOODOO_METHODCALL(CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc, _Inout_ ITexture * const pTexture) PURE;
+        VOODOO_METHODCALL_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc) PURE;
 
         /**
          * Loads a texture data from an image into an existing texture. The texture format the texture was created with and
@@ -156,7 +153,7 @@ namespace VoodooShader
          * settings. Texture origin is determined by the region provided here.
          *
          * @param pImage The image to load.
-         * @param pRegion The region of the file that should be used.
+         * @param pRegion The region of the file that will be used.
          * @return The texture, if successfully created. A nullptr otherwise.
          *
          * @note As TextureRegion derives from TextureDesc, it may be simpler to use the same struct for both this and the
@@ -201,7 +198,7 @@ namespace VoodooShader
          * @note To allow for significant variations in property setups and allow for use outside of the framework
          *      (particularly from the loader), this function takes the name as a basic string and a variant for the value.
          *
-         * @warning Adapters <b>may</b> change values stored in the variant given. However, they must return true if so, and
+         * @warning Adapters may change values stored in the variant given. However, they must return true if so, and
          *      must verify the type is correct.
          */
         VOODOO_METHODCALL(SetProperty)(_In_ const wchar_t * name, _In_ Variant & value) PURE;
@@ -219,7 +216,7 @@ namespace VoodooShader
         /**
          * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses
          * Cg-provided functions (in OpenGL, cgGLSetTextureParameter). The parameter and texture should be connected for the
-         * duration of the shader's life or until the parameter is bound to a different texture.
+         * duration of the shader's life or until a different texture is bound to the parameter.
          *
          * @param pParam The parameter to bind to (must be a sampler type).
          * @param pTexture The texture to be bound.

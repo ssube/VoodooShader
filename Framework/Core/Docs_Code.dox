@@ -34,8 +34,8 @@ namespace VoodooShader
       * @section voodoo_spec_module_exports Module Exports
       *
       * Each Voodoo module must export a set of 4 functions. These are used by the core to load and query the module's
-      * version and what classes it provides. All these functions must be exported by name only, no mangling or decoration
-      * of any kind.
+      * version and what classes it provides. All these functions must be exported by name only, with no mangling or 
+      * decoration of any kind.
       *
       * @subsection voodoo_spec_module_exports_version ModuleVersion
       *
@@ -48,8 +48,9 @@ namespace VoodooShader
       *
       * @code const uint32_t ClassCount(); @endcode
       *
-      * Returns the total number of classes provided by this module. Any class that needs to be created by other code must
-      * be listed in this function and the next.
+      * Returns the total number of classes that may be created by this module. 
+      *
+      * @note Any class provided by this module that may be created externally must be listed by this function.
       *
       * @subsection voodoo_spec_module_exports_info ClassInfo
       *
@@ -58,7 +59,9 @@ namespace VoodooShader
       * Returns the name and CLSID of the given class. This is used to register the classes in the core ModuleManager when 
       * the module is loaded. The return value is a pointer to the class name or nullptr if the index is invalid, and the
       * clsid parameter is filled with the CLSID or unchanged if the index is invalid.
-      * 
+      *
+      * @note Any class provided by this module that may be created externally must be listed by this function and
+      *     and ClassInfo, using the same index.
       *
       * @subsection voodoo_spec_module_exports_create ClassCreate
       *
@@ -69,6 +72,9 @@ namespace VoodooShader
       *
       * @note Class constructors @em may throw exceptions, but these must be caught within the create function and must not
       *     propagate between modules (this can cause crashes). If an error occurs, nullptr must be returned.
+      *
+      * @note Any class provided by this module that may be created externally must be listed by this function and
+      *     and ClassInfo, using the same index.
       *
       * @section voodoo_spec_iobject IObject Interface
       *
@@ -83,24 +89,27 @@ namespace VoodooShader
       * @subsection voodoo_spec_iobject_addref IObject::AddRef
       * @code virtual uint32_t IObject::AddRef() const  @endcode
       *
-      * Increments the internal reference count by 1 and returns the new count. No other effects should be caused.
+      * Increments the internal reference count by 1 and returns the new count, no other effects shall be caused.
       *
       * @subsection voodoo_spec_iobject_release IObject::Release
       * @code virtual uint32_t IObject::Release() const  @endcode
       *
-      * Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object should be
-      * deleted internally (<tt>delete this;</tt>). This provides correct memory allocation and deallocation, safe from
-      * compiler or module boundaries.
+      * Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object must be
+      * deleted (<tt>delete this;</tt>), no other effects shall be caused. This guarantees correct memory allocation and 
+      * deallocation, safe from compiler or module boundaries.
+      *
+      * @note As AddRef and Release require no other effects, it may be necessary to provide initialization and/or reset
+      *     functions. This additionally helps provide safer setup/teardown, outside of process startup and termination.
       * 
       * @subsection voodoo_spec_iobject_query IObject::QueryInterface
       * @code virtual bool IObject::QueryInterface(Uuid & refid, void ** ppOut) const  @endcode
       * 
       * Queries the object for a particular interface. 
       * 
-      * If refid is an IID and the object implements the interface passed in refid or if refid is the object's CLSID, it
-      * must place a pointer to itself providing that interface into ppOut and return true. The pointer must evaluate equal
-      * to any other pointer to the same object, regardless of interface. The object's reference count must be incremented 
-      * in this case, using the returned pointer.
+      * If refid is a not-null IID and the object implements the interface passed in refid or if refid is the object's 
+      * CLSID, it must place a pointer to itself providing that interface into ppOut and return true. The pointer must 
+      * evaluate equal to any other pointer to the same object, regardless of interface. The object's reference count must 
+      * be incremented, from the pointer to be returned.
       * 
       * If ppOut is a nullptr and refid is a null Uuid (all zeroes), refid must be filled must the object's CLSID and the 
       * method must return true. The object's reference count must not change in this case.
@@ -108,13 +117,13 @@ namespace VoodooShader
       * If the object does not implement the class or interface in refid, or refid and ppOut are not both null, it must
       * return false. The object's reference count must not change in this case.
       * 
-      * All IObject-derived classes must provide interfaces for IObject, their parent interface, and their class. Calls to
-      * QueryInterface must be symmetric (if <tt>QI(A)->B</tt> succeeds, then <tt>QI(QI(A)->B)->A</tt> must as well), 
+      * All IObject-derived classes must provide interfaces for IObject, their parent interface(s), and their class. Calls 
+      * to QueryInterface must be symmetric (if <tt>QI(A)->B</tt> succeeds, then <tt>QI(QI(A)->B)->A</tt> must as well), 
       * transitive (if <tt>QI(QI(A)->B)->C</tt> succeeds, then <tt>QI(A)->C</tt> must as well), and reflexive 
       * (<tt>QI(A)->A</tt> must always succeed). 
       * 
-      * This is not to say that all objects of type <tt>A</tt> must behave the same; these guarantees must hold for an
-      * object within itself throughout its lifetime. Two objects of type <tt>A</tt> may be unable to provide an interface 
+      * This is not to say that all objects of type <tt>A</tt> must behave the same; these guarantees must hold for any
+      * single object throughout its lifetime. Two objects of type <tt>A</tt> may be unable to provide an interface 
       * based on internal conditions (for example, if <tt>A1</tt> is an IObject queried from an ICore and <tt>A2</tt> is an 
       * IObject queried from an IParser, <tt>A2</tt> will not be able to provide an interface to ICore, but must be able to 
       * do so for IParser).
@@ -151,8 +160,8 @@ namespace VoodooShader
       * @subsection voodoo_spec_iobject_tostring IObject::ToString
       * @code virtual String IObject::ToString() const  @endcode
       *
-      * Returns a formatted string made up of the object's type <em>name</em> (not necessarily UUID) and optionally some
-      * data. This string must follow the form:
+      * Returns a formatted string made up of the object's type <em>name</em> (which may be the object's CLSID, although
+      * this is not recommended) and optionally some data. This string must follow the form:
       *
       * @code
       * ImplName()
@@ -160,30 +169,31 @@ namespace VoodooShader
       * @endcode
       *
       * If no data is provided, the data section inside the parentheses must be empty but the parentheses must be present.
+      * If data is provided, it must be in a <tt>(key: value[, ...])</tt> form with all colons and commas escaped. 
       *
       * @subsection voodoo_spec_iobject_getcore IObject::GetCore
       * @code virtual ICore * IObject::GetCore() const  @endcode
       *
-      * Returns a <em>non-incremented</em> reference to the object's parent core. This should be stored internally, usually
-      * set at construction.
+      * Returns a reference to the object's parent core.
       * 
       * @subsection voodoo_spec_module_throw throw()
-      * <b>No method or function in a class or interface derived from IObject may throw exceptions.</b> If error reporting 
-      * is necessary, an error value should be returned. This is a necessary safety precaution, as modules may be created
-      * with different compilers or languages and it may not be possible to safely propagate exceptions. 
+      * <b>Methods and functions in any class or interface derived from IObject shall not throw exceptions or allow them to
+      * propogate out from the function.</b> If error reporting is necessary, an error value should be returned and the
+      * exception logged. This is a necessary safety precaution, as modules may be created with different compilers or 
+      * languages and it may not be possible to safely pass exceptions. 
       * 
-      * Methods which call other functions which may throw, such as standard library ones, must catch and handle any
+      * Methods which call other functions that may throw (such as standard library functions) must catch and handle any
       * potential exception and prevent it from propagating. Constructors may throw, and all calls to <tt>new</tt> should be
       * wrapped in try/catch blocks to handle both exceptions from the ctor and various other exceptions (such as memory).
       *
       * @section voodoo_spec_module_docs Documentation
       *
-      * It is generally recommended that module creators provide full documentation for modules, including class names and
-      * the interfaces provided.
+      * If possible, module creators should provide full documentation for modules, including class names and interfaces 
+      * implemented from each.
       *
-      * The Voodoo project offers hosting for this documentation on the Github project. Modules may request a wiki page and
-      * space for doxygen-generated documents, which will be fully linked into the main project. Modules not wishing to be
-      * on the main project may instead request a link to other documentation.
+      * The Voodoo project offers hosting for this documentation on the Github project site. Modules may request a wiki page 
+      * and space for doxygen-generated documents, which will be fully linked into the main project. Modules not wishing to 
+      * be on the main project may instead request a link to other documentation.
       *
       * @page voodoo_spec_adapter Adapter Specifications
       *
@@ -214,9 +224,9 @@ namespace VoodooShader
       * at all possible, the Cg context should be created in the adapter's constructor and destroyed in the adapter's
       * destructor, but this is left up to the discretion of the adapter.
       *
-      * @warning Adapters may not create any shaders or parameters until they have provided the core with a valid context.
+      * @warning Adapters must not create any shaders or parameters until they have provided the core with a valid context.
       *     Errors will be returned if this is attempted. To fully support Voodoo features, adapter's must not directly use
-      *     the context when the core provides methods to handle a particular feature.
+      *     the context where the core provides methods to handle a particular feature.
       *
       * @page voodoo_quality Quality (Code and Testing)
       *
@@ -280,8 +290,11 @@ namespace VoodooShader
       * requirements. This documentation is generated with the doxygen tool and provided in a number of formats, notably on
       * the web at the Github project pages.
       *
-      * To make sure documentation is sufficiently complete, the framework must produce no errors or warnings from code
+      * To make sure documentation is sufficiently complete, the framework should produce no errors or warnings from code
       * during doxygen generation. This performs basic checks, such as requiring every object and function be documented
       * with details for each parameter.
+      *
+      * The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", 
+      * and "OPTIONAL" in the documentation are to be interpreted as described in RFC 2119.
       */
 }

@@ -25,6 +25,9 @@
     <ClCompile Include="CVoodoo3DSurface8.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="DX_Exports.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp">

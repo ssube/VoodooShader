@@ -210,11 +210,11 @@ namespace VoodooShader
       * For an adapter to be considered fully Voodoo compatible, it must supply realtime depth data to a shader-readable
       * texture. How this is performed is left to the discretion of the adapter, as it varies greatly between old D3D
       * versions and OpenGL or newer D3D. This data should be stored such that greater distances are represented by higher
-      * values and the distance should be (if possible) not normalized (not bounded by @p (0-1)). When possible, it is
+      * values and, if possible, the distance should not be normalized (not bounded by @p (0-1)). When possible, it is
       * recommended that the depth information be stored in a 32-bit floating point component. Depth data must be accessible
       * to shaders from the R channel of the depth texture. At this time, the GBA components of the texture are considered
       * undefined, but reserved for future use. Depending on implementation, they may contain depth data, uninitialized
-      * memory, or other data. They should not be used. As DirectX 9 does not usually allow @ref TF_D32 textures to be read,
+      * memory, or other data and must not be used. As DirectX 9 does not usually allow @ref TF_D32 textures to be read,
       * this may require rendering to a second target and using a @ref TF_RGBA32F texture. Two-pass or two-target rendering
       * can both meet this requirement neatly. Using two passes is slower but more compatible, so this should be made an
       * option if possible.

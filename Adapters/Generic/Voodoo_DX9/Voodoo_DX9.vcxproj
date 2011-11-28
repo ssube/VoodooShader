@@ -82,6 +82,7 @@
     <ClCompile Include="CVoodoo3DDevice9.cpp" />
     <ClCompile Include="CVoodoo3DTexture8.cpp" />
     <ClCompile Include="CVoodoo3DSurface8.cpp" />
+    <ClCompile Include="DX_Exports.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp" />

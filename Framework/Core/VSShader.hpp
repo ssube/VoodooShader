@@ -57,33 +57,30 @@ namespace VoodooShader
 
     private:
         /**
-         * Initialize delayed linking (or relinking) for this shader. This function
-         * rebuilds the technique and pass structure, but <em>does not </em> reload or
-         * recompile the effect (Cg effects are handled by the core).
+         * Initialize delayed linking (or relinking) for this shader. This function rebuilds the technique and pass 
+         * structure, but <em>does not </em> reload or recompile the effect (Cg effects are handled by the core).
          */
         void Link();
 
         void SetupTechniques();
 
         /**
-         * Link a particular effect-level parameter against various core elements (exact
-         * behavior depends on param type).
+         * Link a particular effect-level parameter against various core elements (exact behavior depends on param type).
          *
          * @param pParam The parameter to link.
          */
         void LinkParameter(_In_ IParameter * pParam);
 
         /**
-         * Links a particular effect-level sampler against a core texture. This generally
-         * should be called by IShader::LinkParameter().
+         * Links a particular effect-level sampler against a core texture. This should be called by IShader::LinkParameter().
          *
          * @param pParam The sampler to link
          */
         void LinkSampler(_In_ IParameter * pParam);
 
         /**
-         * Find texture information from a parameter and create a texture based on that
-         * data. Calls IShader::LinkSampler() after texture creation if appropriate.
+         * Find texture information from a parameter and create a texture based on that data. Calls IShader::LinkSampler() 
+         * after texture creation if appropriate.
          *
          * @param pParam The parameter to use.
          */

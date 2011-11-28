@@ -31,11 +31,11 @@ namespace VoodooShader
     {
         /**
          * The core Voodoo wrapper class for D3D8 devices. This class is responsible for processing, translating and 
-         * handling most API calls. Due to this, it must be as optimized as possible (considering the circumstances) and 
-         * should contain only tested code. 
+         * handling most API calls. Due to this, it should be as optimized as possible (considering the circumstances) and 
+         * must contain only tested code. 
          *
          * @note The various CVoodoo3D8 interfaces provide an application-opaque wrapper that actually implements a 
-         *      Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the CVoodoo3D9 interface set should 
+         *      Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the CVoodoo3D9 interface set must 
          *      be used.
          */
         class CVoodoo3DDevice8 :
@@ -87,10 +87,9 @@ namespace VoodooShader
             STDMETHOD_ (void, GetGammaRamp) (D3DGAMMARAMP * pRamp);
 
             /**
-            * Creates a texture in the IVoodoo runtime. The new texture must be registered
-            * with the core and, for shader purposes, we should attempt to create it as a
-            * render-target.
-            */
+             * Creates a texture in the IVoodoo runtime. The new texture must be registered with the core and, for shader 
+             * purposes, we should attempt to create it as a render-target.
+             */
             STDMETHOD(CreateTexture)
             (
                 UINT Width,
@@ -139,12 +138,12 @@ namespace VoodooShader
             );
 
             /**
-            * This function creates a stand-alone render target surface in the original D3D8
-            * and 9 setups. For Voodoo's purposes, this should create a render target texture
-            * if at all possible, then retrieve the surface from that texture. @todo Find a
-            * way to force CreateRenderTarget to make RT textures and find a way to name
-            * them.
-            */
+             * This function creates a stand-alone render target surface in the original D3D8 and 9 setups. For Voodoo's 
+             * purposes, this should create a render target texture if at all possible, then retrieve the surface from that 
+             * texture. 
+             * 
+             * @todo Find a way to force CreateRenderTarget to make RT textures and find a way to name them. 
+             */
             STDMETHOD(CreateRenderTarget)
             (
                 UINT Width,
