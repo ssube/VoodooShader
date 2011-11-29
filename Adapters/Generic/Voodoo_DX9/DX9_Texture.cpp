@@ -45,12 +45,12 @@ namespace VoodooShader
             }
         }
 
-        uint32_t VOODOO_METHODCALLTYPE DX9Texture::AddRef() CONST
+        uint32_t VOODOO_METHODTYPE DX9Texture::AddRef() CONST
         {
             return SAFE_INCREMENT(m_Refs);
         }
 
-        uint32_t VOODOO_METHODCALLTYPE DX9Texture::Release() CONST
+        uint32_t VOODOO_METHODTYPE DX9Texture::Release() CONST
         {
             if (SAFE_DECREMENT(m_Refs) == 0)
             {
@@ -61,7 +61,7 @@ namespace VoodooShader
             }
         }
 
-        bool VOODOO_METHODCALLTYPE DX9Texture::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+        bool VOODOO_METHODTYPE DX9Texture::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
         {
             if (!ppOut)
             {
@@ -90,27 +90,27 @@ namespace VoodooShader
             }
         }
 
-        String VOODOO_METHODCALLTYPE DX9Texture::ToString() CONST
+        String VOODOO_METHODTYPE DX9Texture::ToString() CONST
         {
             return String::Format(L"DX9Texture(%s)", m_Name.GetData());
         }
 
-        ICore * VOODOO_METHODCALLTYPE DX9Texture::GetCore() CONST
+        ICore * VOODOO_METHODTYPE DX9Texture::GetCore() CONST
         {
             return m_Core;
         }
 
-        String VOODOO_METHODCALLTYPE DX9Texture::GetName() CONST
+        String VOODOO_METHODTYPE DX9Texture::GetName() CONST
         {
             return m_Name;
         }
 
-        void * VOODOO_METHODCALLTYPE DX9Texture::GetData() CONST
+        void * VOODOO_METHODTYPE DX9Texture::GetData() CONST
         {
             return m_Texture;
         }
 
-        void * VOODOO_METHODCALLTYPE DX9Texture::SetData(_In_ void * pData) 
+        void * VOODOO_METHODTYPE DX9Texture::SetData(_In_ void * pData) 
         {
             void * oldData = m_Texture;
             m_Texture = reinterpret_cast<IDirect3DBaseTexture9*>(pData);
@@ -118,7 +118,7 @@ namespace VoodooShader
             return oldData;
         }
 
-        const TextureDesc * VOODOO_METHODCALLTYPE DX9Texture::GetDesc() CONST
+        const TextureDesc * VOODOO_METHODTYPE DX9Texture::GetDesc() CONST
         {
             return &m_Desc;
         }

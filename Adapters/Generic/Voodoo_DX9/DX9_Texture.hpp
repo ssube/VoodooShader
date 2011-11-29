@@ -24,33 +24,27 @@
 namespace VoodooShader
 {
     namespace VoodooDX9
-    {
-        /**
-         * @addtogroup voodoo_uuids 
-         */
-        DEFINE_CLSID(DX9Texture) = {0xC2, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-    
+    {    
         /**
          * @par CLSID
          *      f84ac3c2-073f-11e1-83d4-005056c00008
          */
-        class DX9Texture :
-            public ITexture
+        VOODOO_CLASS(DX9Texture, ITexture, {0xC2, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
         {
         public:
             DX9Texture(_In_ ICore * pCore, _In_ String name, _In_ IDirect3DBaseTexture9 * pTexture);
             virtual ~DX9Texture();
 
-            VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
-            VOODOO_METHODCALL_(uint32_t, Release)() CONST;
-            VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
-            VOODOO_METHODCALL_(String, ToString)() CONST;
-            VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+            VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+            VOODOO_METHOD_(uint32_t, Release)() CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHOD_(String, ToString)() CONST;
+            VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-            VOODOO_METHODCALL_(String, GetName)() CONST;
-            VOODOO_METHODCALL_(void *, GetData)() CONST;
-            VOODOO_METHODCALL_(void *, SetData)(_In_ void * pData) ;
-            VOODOO_METHODCALL_(const TextureDesc *, GetDesc)() CONST;
+            VOODOO_METHOD_(String, GetName)() CONST;
+            VOODOO_METHOD_(void *, GetData)() CONST;
+            VOODOO_METHOD_(void *, SetData)(_In_ void * pData) ;
+            VOODOO_METHOD_(const TextureDesc *, GetDesc)() CONST;
 
         private:
             void GetTexDesc();

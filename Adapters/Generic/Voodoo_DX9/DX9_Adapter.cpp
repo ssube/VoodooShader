@@ -34,10 +34,8 @@ namespace VoodooShader
         DX9Adapter::DX9Adapter(ICore * pCore) :
             m_Refs(0), m_Core(pCore), 
             m_SdkVersion(D3D_SDK_VERSION), m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr), 
-            m_BoundPass(nullptr)
+            m_BoundPass(nullptr), m_BackBuffer(nullptr)
         { 
-            m_RenderTarget[0] = m_RenderTarget[1] = m_RenderTarget[2] = m_RenderTarget[3] = nullptr;
-
             gpVoodooCore = m_Core;
             gpVoodooLogger = gpVoodooCore->GetLogger();
         };
@@ -287,7 +285,12 @@ namespace VoodooShader
 
             if (!pTarget)
             {
-                result = m_Device->SetRenderTarget(index, m_BackBuffer[index]);
+                if (index == 0)
+                {
+                    result = m_Device->SetRenderTarget(index, m_BackBuffer);
+                } else {
+                    result = m_Device->SetRenderTarget(index, nullptr);
+                }
 
                 if (SUCCEEDED(result))
                 {
@@ -693,7 +696,7 @@ namespace VoodooShader
             logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Prepping for %d by %d target.", viewport.Width, viewport.Height);
 
             // Get buffers
-            if (!SUCCEEDED(m_Device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer[0]))) { m_BackBuffer[0] = nullptr; }
+            if (!SUCCEEDED(m_Device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer))) { m_BackBuffer = nullptr; }
 
             // Create fullscreen vbuffer
             VertexStruct fsVertData[6] =
