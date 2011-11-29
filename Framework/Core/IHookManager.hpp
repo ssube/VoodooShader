@@ -31,7 +31,7 @@ namespace VoodooShader
     /**
      * Defines the interface for handling function-level hooks, redirecting existing functions and calls into new
      * locations. Each Core owns a HookManager implementation.
-     * 
+     *
      * @par IID
      *      e6f3128c-05af-11e1-9e05-005056c00008
      */

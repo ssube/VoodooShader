@@ -26,13 +26,13 @@ namespace VoodooShader
     /**
      * @addtogroup voodoo_core_null Null Implementations
      * @ingroup voodoo_core
-     * 
+     *
      * @{
      */
 
     /**
      * Voodoo Shader null logger implementation. Does not format or log messages or access any files.
-     * 
+     *
      * @par CLSID:
      *      e6f3129e-05af-11e1-9e05-005056c00008
      */
@@ -48,8 +48,8 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD(Open)(_In_ const String & filename, _In_ const bool append) ;
-        VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append) ;
+        VOODOO_METHOD(Open)(_In_ const String & filename, _In_ const bool append);
+        VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append);
         VOODOO_METHOD_(void, Close)();
         VOODOO_METHOD_(void, Flush)();
         VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level);

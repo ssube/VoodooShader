@@ -45,7 +45,7 @@ namespace VoodooShader
         } else {
             m_Name += String::Format(L"tech_%p", m_CgTechnique);
         }
-        
+
         ++this->m_Refs;
         this->Link();
         --this->m_Refs;

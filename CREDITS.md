@@ -1,6 +1,6 @@
 ## Voodoo Shader Credits
 
-This file is an attempt to recognize everyone who helped with or contributed to the Voodoo Shader project in any way. I will 
+This file is an attempt to recognize everyone who helped with or contributed to the Voodoo Shader project in any way. I will
 try to note everyone and their contribution, in no particular order, but if I make any mistakes, please let me know.
 
 
@@ -27,7 +27,7 @@ try to note everyone and their contribution, in no particular order, but if I ma
   used. Some of them were awesome though.
 
 ### Various other contributions:
-* Knots, Lusit, and the other SFN and #morrowind folks for general discussion and suggestions and making sure progress was 
+* Knots, Lusit, and the other SFN and #morrowind folks for general discussion and suggestions and making sure progress was
   being made.
 * Wolf from the Great House Fliggerty forums for being one of the first to request a many-game shader app.
 * shadeMe for working with me to convert trueBloom to OBGE, a task that showed why this sort of thing was needed.

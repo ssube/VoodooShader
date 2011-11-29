@@ -93,7 +93,7 @@ namespace VoodooShader
         {
             match.m_Impl->m_Match = mr;
         }
-            
+
         return match;
     }
 

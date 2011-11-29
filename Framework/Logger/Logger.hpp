@@ -52,7 +52,7 @@ namespace VoodooShader
         /**
          * Xml logger class, writes neatly formatted logs for use with the log viewer. Supports all Voodoo ILogger features
          * and debug logging (with no buffer).
-         * 
+         *
          * @par CLSID
          *      e6f312b7-05af-11e1-9e05-005056c00008
          *
@@ -80,8 +80,7 @@ namespace VoodooShader
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-            VOODOO_METHOD(Open)(_In_ const String & filename, _In_ const bool append) ;
-
+            VOODOO_METHOD(Open)(_In_ const String & filename, _In_ const bool append);
             /**
              * Opens a file for use by this Logger.
              *
@@ -89,13 +88,11 @@ namespace VoodooShader
              * @param append Flag specifying the open mode; if true, any existing log is truncated.
              * @return Success of the open operation.
              */
-            VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append) ;
-
+            VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append);
             /**
              * Closes the log file, if one is open.
              */
-            VOODOO_METHOD_(void, Close)() ;
-
+            VOODOO_METHOD_(void, Close)();
             /**
              * Immediately writes all pending data to disk.
              *
@@ -106,24 +103,20 @@ namespace VoodooShader
              *      complete debug logging, call Logger::SetBufferSize(unsigned int) with a buffer size of 0 and all logged
              *      messages @em should make it to disk, even during fatal crashes
              */
-            VOODOO_METHOD_(void, Flush)() ;
-
+            VOODOO_METHOD_(void, Flush)();
             /**
              * Set the default minimum message level. Messages below this level will not be
              * logged. @param level The minimum log level.
              */
-            VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level) ;
-
+            VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level);
             VOODOO_METHOD_(const LogLevel, GetLogLevel)() CONST;
-
             /**
              * Writes a module stamp to the log. This records the name and version info for a select module (used to log
              * what modules were present during a logging session).
              *
              * @param pModule The module version info to log.
              */
-            VOODOO_METHOD_(void, LogModule)(_In_ const Version * const pModule) ;
-
+            VOODOO_METHOD_(void, LogModule)(_In_ const Version * const pModule);
             /**
              * Log a message, may be formatted with printf syntax. @param level The level for this message.
              *
@@ -137,10 +130,8 @@ namespace VoodooShader
                 _In_ const wchar_t * source,
                 _In_ _Printf_format_string_ const wchar_t * format,
                 ...
-            ) ;
-
+            );
             VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags);
-
             VOODOO_METHOD_(const LogFlags, GetFlags)() CONST;
 
         private:

@@ -31,7 +31,7 @@ namespace VoodooShader
     /**
      * Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even
      * network access. Currently provides a readonly filesystem.
-     * 
+     *
      * @par IID
      *      e6f31288-05af-11e1-9e05-005056c00008
      */
@@ -72,7 +72,7 @@ namespace VoodooShader
 
     /**
      * Provides abstraction to a single file, for basic access.
-     *      
+     *
      * @par IID
      *      e6f3128a-05af-11e1-9e05-005056c00008
      */
@@ -95,10 +95,10 @@ namespace VoodooShader
         VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
         VOODOO_METHOD_(IImage *, OpenImage)() CONST PURE;
     };
-    
+
     /**
      * Provides abstraction to an image for specialized access.
-     *      
+     *
      * @par IID
      *      e6f3128d-05af-11e1-9e05-005056c00008
      */

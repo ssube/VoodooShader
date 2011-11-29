@@ -36,7 +36,7 @@ namespace VoodooShader
      * @note All passes in a valid technique are guaranteed to be valid.
      * @warning While a shader may contain a number of techniques, not all are guaranteed to be valid. Techniques are
      *     typically validated when the Shader is created and loaded.
-     *      
+     *
      * @par IID
      *      e6f31295-05af-11e1-9e05-005056c00008
      */

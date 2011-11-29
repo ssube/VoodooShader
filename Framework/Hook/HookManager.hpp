@@ -45,7 +45,7 @@ namespace VoodooShader
 
         /**
          * Handles function-level hooks, redirecting function calls into new locations.
-         * 
+         *
          * @par CLSID
          *      e6f312b5-05af-11e1-9e05-005056c00008
          */

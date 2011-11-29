@@ -108,7 +108,7 @@ namespace VoodooGUI
             else if (e.ProgressPercentage == 1)
             {
                 textBox1.Text = String.Format("Scanned {0} files, found {1} results.", e.UserState, results.Count);
-            } 
+            }
             else if (e.ProgressPercentage == 2)
             {
                 errors.Add((String)e.UserState);

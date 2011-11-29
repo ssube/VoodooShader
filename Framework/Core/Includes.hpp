@@ -551,15 +551,15 @@ namespace VoodooShader
         ValType X, Y, Z, W;
     };
 
-    typedef Vector2<float> Float2;
-    typedef Vector3<float> Float3;
-    typedef Vector4<float> Float4;
-    typedef Vector2<int32_t> Int2;
-    typedef Vector3<int32_t> Int3;
-    typedef Vector4<int32_t> Int4;
-    typedef Vector2<uint32_t> UInt2;
-    typedef Vector3<uint32_t> UInt3;
-    typedef Vector4<uint32_t> UInt4;
+    typedef Vector2<float>      Float2;
+    typedef Vector3<float>      Float3;
+    typedef Vector4<float>      Float4;
+    typedef Vector2<int32_t>    Int2;
+    typedef Vector3<int32_t>    Int3;
+    typedef Vector4<int32_t>    Int4;
+    typedef Vector2<uint32_t>   UInt2;
+    typedef Vector3<uint32_t>   UInt3;
+    typedef Vector4<uint32_t>   UInt4;
 
     /**
      * Describes a texture, including size and format.

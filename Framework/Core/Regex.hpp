@@ -29,7 +29,7 @@ namespace VoodooShader
      * @addtogroup voodoo_utility Voodoo Utility
      * @{
      */
-    
+
     /**
      * @addtogroup voodoo_utility_regex Voodoo Regex
      * @ingroup voodoo_utility
@@ -37,7 +37,7 @@ namespace VoodooShader
      * Voodoo internal regex class, providing constant and compiler-safe regex handling between modules. This internally
      * uses <a href="http://www.boost.org/doc/libs/1_48_0/libs/regex/doc/html/index.html">Boost.Regex</a> in extended-syntax
      * mode for both expressions and match formatting.
-     * 
+     *
      * @related String
      */
     class VOODOO_API Regex
@@ -55,7 +55,7 @@ namespace VoodooShader
          * Creates an empty regular expression.
          */
         Regex();
-        
+
         /**
          * Creates a regular expression from the given string, using extended syntax.
          *
@@ -67,7 +67,7 @@ namespace VoodooShader
          */
 
         ~Regex();
-        
+
         /**
          * @addtogroup voodoo_utility_regex_expr Regex expression
          * @ingroup voodoo_utility_regex
@@ -79,7 +79,7 @@ namespace VoodooShader
          *
          * @param expr The string to use.
          */
-        void SetExpr(const String & expr) ;
+        void SetExpr(const String & expr);
 
         /**
          * Retrieve the current expression.
@@ -111,7 +111,7 @@ namespace VoodooShader
          * @ingroup voodoo_utility_regex
          * @{
          */
-        
+
         /**
          * Test if the given string is matched by the expression.
          *
@@ -127,7 +127,7 @@ namespace VoodooShader
          * @ingroup voodoo_utility_regex
          * @{
          */
-        
+
         /**
          * Perform a find and replace on all segments which this regex matches. Matches are replaced using the same rules as
          * RegexMatch::Replace().
@@ -145,7 +145,7 @@ namespace VoodooShader
     private:
         RegexImpl * m_Impl;
     };
-    
+
     /**
      * @addtogroup voodoo_utility_regex Voodoo Regex
      * @ingroup voodoo_utility

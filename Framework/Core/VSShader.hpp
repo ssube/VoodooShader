@@ -22,7 +22,7 @@
 #include "IShader.hpp"
 
 namespace VoodooShader
-{    
+{
     /**
      * @par CLSID
      *      e6f312a4-05af-11e1-9e05-005056c00008
@@ -43,14 +43,14 @@ namespace VoodooShader
         VOODOO_METHOD_(const uint32_t, GetTechniqueCount)() CONST;
         VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
         VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST;
-        VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique) ;
+        VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique);
         VOODOO_METHOD_(const uint32_t, GetParameterCount)() CONST;
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
         VOODOO_METHOD_(CGeffect, GetCgEffect)() CONST;
 
     private:
         /**
-         * Initialize delayed linking (or relinking) for this shader. This function rebuilds the technique and pass 
+         * Initialize delayed linking (or relinking) for this shader. This function rebuilds the technique and pass
          * structure, but <em>does not </em> reload or recompile the effect (Cg effects are handled by the core).
          */
         void Link();
@@ -72,7 +72,7 @@ namespace VoodooShader
         void LinkSampler(_In_ IParameter * pParam);
 
         /**
-         * Find texture information from a parameter and create a texture based on that data. Calls IShader::LinkSampler() 
+         * Find texture information from a parameter and create a texture based on that data. Calls IShader::LinkSampler()
          * after texture creation if appropriate.
          *
          * @param pParam The parameter to use.

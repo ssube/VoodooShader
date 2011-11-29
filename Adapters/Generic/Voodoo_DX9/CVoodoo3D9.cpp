@@ -44,13 +44,13 @@ namespace VoodooShader
          * IUnknown methods
          */
         HRESULT STDMETHODCALLTYPE CVoodoo3D9::QueryInterface(REFIID riid, void **ppvObj)
-        { 
+        {
             return m_RealObject->QueryInterface(riid, ppvObj);
         }
 
-        ULONG STDMETHODCALLTYPE CVoodoo3D9::AddRef() 
-        { 
-            return m_RealObject->AddRef(); 
+        ULONG STDMETHODCALLTYPE CVoodoo3D9::AddRef()
+        {
+            return m_RealObject->AddRef();
         }
 
         ULONG STDMETHODCALLTYPE CVoodoo3D9::Release()
@@ -73,9 +73,9 @@ namespace VoodooShader
             return m_RealObject->RegisterSoftwareDevice(pInitializeFunction);
         }
 
-        UINT STDMETHODCALLTYPE CVoodoo3D9::GetAdapterCount() 
-        { 
-            return m_RealObject->GetAdapterCount(); 
+        UINT STDMETHODCALLTYPE CVoodoo3D9::GetAdapterCount()
+        {
+            return m_RealObject->GetAdapterCount();
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D9::GetAdapterIdentifier(UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER9 *pIdentifier)
@@ -179,9 +179,9 @@ namespace VoodooShader
             return m_RealObject->GetDeviceCaps(Adapter, DeviceType, pCaps);
         }
 
-        HMONITOR STDMETHODCALLTYPE CVoodoo3D9::GetAdapterMonitor(UINT Adapter)  
-        { 
-            return m_RealObject->GetAdapterMonitor(Adapter); 
+        HMONITOR STDMETHODCALLTYPE CVoodoo3D9::GetAdapterMonitor(UINT Adapter)
+        {
+            return m_RealObject->GetAdapterMonitor(Adapter);
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D9::CreateDevice

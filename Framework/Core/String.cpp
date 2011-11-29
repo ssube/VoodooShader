@@ -32,7 +32,7 @@ namespace VoodooShader
     public:
         StringImpl() : m_Str() {};
         StringImpl(const uint32_t size, const wchar_t ch) : m_Str(size, ch) {};
-        StringImpl(const wchar_t * str) 
+        StringImpl(const wchar_t * str)
         {
             if (str) m_Str = (str);
         };

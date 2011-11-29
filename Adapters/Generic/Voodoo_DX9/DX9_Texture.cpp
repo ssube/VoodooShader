@@ -110,7 +110,7 @@ namespace VoodooShader
             return m_Texture;
         }
 
-        void * VOODOO_METHODTYPE DX9Texture::SetData(_In_ void * pData) 
+        void * VOODOO_METHODTYPE DX9Texture::SetData(_In_ void * pData)
         {
             void * oldData = m_Texture;
             m_Texture = reinterpret_cast<IDirect3DBaseTexture9*>(pData);

@@ -20,7 +20,7 @@ namespace
     InitParams gParams;
     int gGlutWindow;
     CGcontext gCgContext;
-} 
+}
 
 FIXTURE(OGLCore);
 

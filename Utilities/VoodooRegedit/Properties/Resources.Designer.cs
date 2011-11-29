@@ -10,8 +10,8 @@
 
 namespace VoodooRegedit.Properties {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +23,15 @@ namespace VoodooRegedit.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +45,7 @@ namespace VoodooRegedit.Properties {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,119 +59,119 @@ namespace VoodooRegedit.Properties {
                 resourceCulture = value;
             }
         }
-        
+
         internal static System.Drawing.Bitmap application_import {
             get {
                 object obj = ResourceManager.GetObject("application-import", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap computer_network {
             get {
                 object obj = ResourceManager.GetObject("computer-network", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap database_export {
             get {
                 object obj = ResourceManager.GetObject("database-export", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap database_import {
             get {
                 object obj = ResourceManager.GetObject("database-import", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap key__minus {
             get {
                 object obj = ResourceManager.GetObject("key--minus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap key__pencil {
             get {
                 object obj = ResourceManager.GetObject("key--pencil", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap key__plus {
             get {
                 object obj = ResourceManager.GetObject("key--plus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap node_delete {
             get {
                 object obj = ResourceManager.GetObject("node-delete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap node_design {
             get {
                 object obj = ResourceManager.GetObject("node-design", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap node_insert {
             get {
                 object obj = ResourceManager.GetObject("node-insert", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap node_insert_child {
             get {
                 object obj = ResourceManager.GetObject("node-insert-child", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap node_insert_next {
             get {
                 object obj = ResourceManager.GetObject("node-insert-next", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap node_insert_previous {
             get {
                 object obj = ResourceManager.GetObject("node-insert-previous", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap table_delete_row {
             get {
                 object obj = ResourceManager.GetObject("table-delete-row", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap table_insert_row {
             get {
                 object obj = ResourceManager.GetObject("table-insert-row", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap tag_export {
             get {
                 object obj = ResourceManager.GetObject("tag-export", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         internal static System.Drawing.Bitmap tag_import {
             get {
                 object obj = ResourceManager.GetObject("tag-import", resourceCulture);

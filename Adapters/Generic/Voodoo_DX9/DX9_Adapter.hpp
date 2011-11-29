@@ -49,8 +49,8 @@ namespace VoodooShader
             VOODOO_METHOD(DrawGeometry)
                 (
                 _In_ const uint32_t offset,
-                _In_ const uint32_t count, 
-                _In_ void * const pData, 
+                _In_ const uint32_t count,
+                _In_ void * const pData,
                 _In_ const VertexFlags flags
                 );
             VOODOO_METHOD(ApplyParameter)(_In_ IParameter * const pParam);

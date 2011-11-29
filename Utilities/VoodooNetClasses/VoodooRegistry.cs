@@ -104,7 +104,7 @@ namespace VoodooNetClasses
         public Guid LIBID
         {
             get { return m_LIBID; }
-            set { m_LIBID = value; } 
+            set { m_LIBID = value; }
         }
     }
 
@@ -122,7 +122,7 @@ namespace VoodooNetClasses
         public Guid CLSID
         {
             get { return m_CLSID; }
-            set { m_CLSID = value; } 
+            set { m_CLSID = value; }
         }
     }
 

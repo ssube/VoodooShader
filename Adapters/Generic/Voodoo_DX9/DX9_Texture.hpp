@@ -24,7 +24,7 @@
 namespace VoodooShader
 {
     namespace VoodooDX9
-    {    
+    {
         /**
          * @par CLSID
          *      f84ac3c2-073f-11e1-83d4-005056c00008
@@ -43,7 +43,7 @@ namespace VoodooShader
 
             VOODOO_METHOD_(String, GetName)() CONST;
             VOODOO_METHOD_(void *, GetData)() CONST;
-            VOODOO_METHOD_(void *, SetData)(_In_ void * pData) ;
+            VOODOO_METHOD_(void *, SetData)(_In_ void * pData);
             VOODOO_METHOD_(const TextureDesc *, GetDesc)() CONST;
 
         private:

@@ -168,7 +168,7 @@ bool WINAPI LoadVoodoo()
     }
 
     HMODULE coreLibrary = nullptr;
-        
+
     wcscpy_s(pathCoreLib, pathGlobalRoot);
     wcscat_s(pathCoreLib, L"\\bin\\Voodoo_Core.dll");
 

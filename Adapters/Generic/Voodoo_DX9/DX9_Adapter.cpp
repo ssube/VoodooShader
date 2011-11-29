@@ -32,10 +32,10 @@ namespace VoodooShader
     namespace VoodooDX9
     {
         DX9Adapter::DX9Adapter(ICore * pCore) :
-            m_Refs(0), m_Core(pCore), 
-            m_SdkVersion(D3D_SDK_VERSION), m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr), 
+            m_Refs(0), m_Core(pCore),
+            m_SdkVersion(D3D_SDK_VERSION), m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr),
             m_BoundPass(nullptr), m_BackBuffer(nullptr)
-        { 
+        {
             gpVoodooCore = m_Core;
             gpVoodooLogger = gpVoodooCore->GetLogger();
         };
@@ -48,12 +48,12 @@ namespace VoodooShader
             }
         }
 
-        uint32_t DX9Adapter::AddRef() const 
+        uint32_t DX9Adapter::AddRef() const
         {
             return SAFE_INCREMENT(m_Refs);
         }
 
-        uint32_t DX9Adapter::Release() const 
+        uint32_t DX9Adapter::Release() const
         {
             uint32_t value = SAFE_DECREMENT(m_Refs);
 
@@ -65,7 +65,7 @@ namespace VoodooShader
             return value;
         }
 
-        bool DX9Adapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const 
+        bool DX9Adapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
         {
             if (!ppOut)
             {
@@ -94,12 +94,12 @@ namespace VoodooShader
             }
         }
 
-        String DX9Adapter::ToString() const 
+        String DX9Adapter::ToString() const
         {
             return L"DX9Adapter()";
         }
 
-        ICore * DX9Adapter::GetCore() const 
+        ICore * DX9Adapter::GetCore() const
         {
             return m_Core;
         }
@@ -115,7 +115,7 @@ namespace VoodooShader
             }
 
             IPassRef pass(pPass);
-            
+
             CGprogram vertProg = pass->GetProgram(PS_Vertex);
             CGprogram fragProg = pass->GetProgram(PS_Fragment);
             HRESULT hr = S_OK;
@@ -127,7 +127,7 @@ namespace VoodooShader
                 {
                     logger->Log
                     (
-                        LL_ModError, VOODOO_DX9_NAME, 
+                        LL_ModError, VOODOO_DX9_NAME,
                         L"Error loading vertex program from '%s': %d.",
                         pass->GetName().GetData(),
                         hr
@@ -180,7 +180,7 @@ namespace VoodooShader
                 {
                     logger->Log
                     (
-                        LL_ModError, VOODOO_DX9_NAME, 
+                        LL_ModError, VOODOO_DX9_NAME,
                         L"Error loading vertex program from '%s': %d.",
                         pass->GetName().GetData(),
                         hr
@@ -330,7 +330,7 @@ namespace VoodooShader
                 }
 
                 result = m_Device->SetRenderTarget(index, pD3D9Surf);
-                
+
                 pD3D9Surf->Release();
                 pD3D9Tex->Release();
 
@@ -347,7 +347,7 @@ namespace VoodooShader
 
         ITexture * DX9Adapter::GetTarget(_In_ const uint32_t index) CONST
         {
-            if (index > 3) 
+            if (index > 3)
             {
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Invalid render target index %d.", index);
                 return false;
@@ -400,11 +400,11 @@ namespace VoodooShader
         bool DX9Adapter::DrawGeometry
         (
             _In_ const uint32_t offset,
-            _In_ const uint32_t count, 
-            _In_ void * const pData, 
+            _In_ const uint32_t count,
+            _In_ void * const pData,
             _In_ const VertexFlags flags
         )
-        { 
+        {
             if (!pData)
             {
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"No geometry given to draw.");
@@ -417,7 +417,7 @@ namespace VoodooShader
             hr = m_Device->CreateStateBlock(D3DSBT_ALL, &deviceState);
 
             hr = m_CleanState->Apply();
-            
+
             // Set the necessary states
             hr = m_Device->SetRenderState(D3DRS_CLIPPING, FALSE);
             hr = m_Device->SetRenderState(D3DRS_ZENABLE, FALSE);

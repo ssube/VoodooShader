@@ -36,7 +36,7 @@ namespace VoodooShader
      *     used. Later APIs require the vertex and pixel shaders to be specified in each pass.
      *
      * @warning Some adapters may require programs to be provided for certain stages.
-     *      
+     *
      * @par IID
      *      e6f31293-05af-11e1-9e05-005056c00008
      */

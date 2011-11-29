@@ -444,7 +444,7 @@ namespace VoodooShader
                     {
                         m_Core->GetLogger()->Log
                         (
-                            LL_ModError, VOODOO_FILESYSTEM_NAME, 
+                            LL_ModError, VOODOO_FILESYSTEM_NAME,
                             L"Unable to write a negative number of nullptr bytes."
                         );
                         return 0;
@@ -460,7 +460,7 @@ namespace VoodooShader
                     {
                         m_Core->GetLogger()->Log
                         (
-                            LL_ModError, VOODOO_FILESYSTEM_NAME, 
+                            LL_ModError, VOODOO_FILESYSTEM_NAME,
                             L"Error allocating memory for nullptr buffer."
                         );
                         return 0;
@@ -492,7 +492,7 @@ namespace VoodooShader
                     {
                         m_Core->GetLogger()->Log
                         (
-                            LL_ModError, VOODOO_FILESYSTEM_NAME, 
+                            LL_ModError, VOODOO_FILESYSTEM_NAME,
                             L"Unable to write a negative number of bytes."
                         );
                         return 0;
@@ -656,7 +656,7 @@ namespace VoodooShader
             return &m_Desc;
         }
 
-        uint32_t VSWImage::GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const 
+        uint32_t VSWImage::GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const
         {
             //! @todo Add a buffer size check.
             UNREFERENCED_PARAMETER(size);

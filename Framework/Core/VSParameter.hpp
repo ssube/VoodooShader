@@ -22,7 +22,7 @@
 #include "IParameter.hpp"
 
 namespace VoodooShader
-{    
+{
     /**
      * @par CLSID
      *      e6f312a1-05af-11e1-9e05-005056c00008
@@ -43,13 +43,13 @@ namespace VoodooShader
         VOODOO_METHOD_(String, GetName)() CONST;
         VOODOO_METHOD_(ParameterType, GetType)() CONST;
         VOODOO_METHOD(IsVirtual)() CONST;
-        VOODOO_METHOD(AttachParameter)(_In_ IParameter * const pParam) ;
-        VOODOO_METHOD(DetachParameter)() ;
+        VOODOO_METHOD(AttachParameter)(_In_ IParameter * const pParam);
+        VOODOO_METHOD(DetachParameter)();
         VOODOO_METHOD_(const uint32_t, GetComponents)() CONST;
         VOODOO_METHOD_(ITexture *, GetTexture)() CONST;
-        VOODOO_METHOD_(void, SetTexture)(_In_opt_ ITexture * const pTexture) ;
-        _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetScalar)() ;
-        VOODOO_METHOD_(void, SetScalar)(const uint32_t count, _In_count_(count) float * const pValues) ;
+        VOODOO_METHOD_(void, SetTexture)(_In_opt_ ITexture * const pTexture);
+        _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetScalar)();
+        VOODOO_METHOD_(void, SetScalar)(const uint32_t count, _In_count_(count) float * const pValues);
         VOODOO_METHOD_(IShader * const, GetShader)() CONST;
 
         VOODOO_METHOD_(CGparameter, GetCgParameter)() CONST;

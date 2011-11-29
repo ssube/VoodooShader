@@ -78,7 +78,7 @@ namespace VoodooShader
 
     VSCore::VSCore() :
         m_Refs(0), m_ConfigFile(nullptr), m_CgContext(nullptr)
-    { 
+    {
 
 #ifdef VOODOO_DEBUG_MEMORY
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -466,10 +466,10 @@ namespace VoodooShader
             m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Successfully created shader from '%s'.", fullpath.GetData());
         }
         catch (const std::exception & exc)
-        {   
+        {
             m_Logger->Log
             (
-                LL_CoreError, VOODOO_CORE_NAME, 
+                LL_CoreError, VOODOO_CORE_NAME,
                 L"Error creating shader from '%s': %S",
                 fullpath.GetData(), exc.what()
             );
@@ -537,7 +537,7 @@ namespace VoodooShader
         }
         else
         {
-            ITextureRef texture = m_Adapter->CreateTexture(name, pDesc);            
+            ITextureRef texture = m_Adapter->CreateTexture(name, pDesc);
 
             m_Textures[name] = texture;
 
@@ -660,7 +660,7 @@ namespace VoodooShader
     }
 
     void VSCore::CgErrorHandler(CGcontext context, CGerror error) CONST
-    {        
+    {
         if (!m_Adapter || !m_Adapter->HandleError(context, error))
         {
             const char * errorString = error ? cgGetErrorString(error) : nullptr;

@@ -31,7 +31,7 @@ namespace VoodooShader
     /**
      * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
      * shaders, textures, plugins and variable/configuration mechanics.
-     * 
+     *
      * @par IID
      *      e6f31289-05af-11e1-9e05-005056c00008
      */
@@ -43,7 +43,7 @@ namespace VoodooShader
         VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
-        
+
         /**
          * Initializes the core, loading the config file and all required modules and creating objects.
          *
@@ -52,7 +52,7 @@ namespace VoodooShader
          */
         _Check_return_ VOODOO_METHOD(Initialize)(_In_ const InitParams * const pInitParams) PURE;
         /**
-         * Cleans up all modules and objects, as much as possible. Invalidates all objects created by this core. This method 
+         * Cleans up all modules and objects, as much as possible. Invalidates all objects created by this core. This method
          * provides an early cleanup (in cases where process-termination cleanup may cause crashes). If successful, this
          * core may be reinitialized.
          *
@@ -159,7 +159,7 @@ namespace VoodooShader
          * @param type The type to verify.
          * @return A reference to the parameter if found, nullptr reference otherwise.
          *
-         * @note If a parameter with a matching name is found, the type will be checked. If Type is PT_Unknown, any type 
+         * @note If a parameter with a matching name is found, the type will be checked. If Type is PT_Unknown, any type
          *      parameter will be returned (only the name will be tested).
          */
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterType type) CONST PURE;

@@ -10,7 +10,7 @@ namespace
 {
     ICore * gpCore;
     InitParams gParams;
-} 
+}
 
 FIXTURE(DefaultCore);
 
@@ -40,36 +40,36 @@ BEGIN_TESTF(Core_GetParser, DefaultCore)
     IParser* parser = gpCore->GetParser();
     WIN_ASSERT_NOT_NULL(parser, L"Core_GetParser: parser is nullptr.");
 }
-END_TESTF; 
-    
+END_TESTF;
+
 BEGIN_TESTF(Core_GetHookManager, DefaultCore)
 {
     IHookManager* pHookManager = gpCore->GetHookManager();
     WIN_ASSERT_NOT_NULL(pHookManager, L"Core_GetHookManager: hook manager is nullptr.");
 }
 END_TESTF;
-    
+
 BEGIN_TESTF(Core_GetFileSystem, DefaultCore)
 {
     IFileSystem* pFilesystem = gpCore->GetFileSystem();
     WIN_ASSERT_NOT_NULL(pFilesystem, L"Core_GetFileSystem: filesystem is nullptr.");
 }
 END_TESTF;
-    
+
 BEGIN_TESTF(Core_GetAdapter, DefaultCore)
 {
     IAdapter* pAdapter = gpCore->GetAdapter();
     WIN_ASSERT_NOT_NULL(pAdapter, L"Core_GetAdapter: adapter is nullptr.");
 }
 END_TESTF;
-    
+
 BEGIN_TESTF(Core_GetLogger, DefaultCore)
 {
     ILogger* pLogger = gpCore->GetLogger();
     WIN_ASSERT_NOT_NULL(pLogger, L"Core_GetLogger: logger is nullptr.");
 }
-END_TESTF;    
-    
+END_TESTF;
+
 BEGIN_TESTF(Core_GetConfig, DefaultCore)
 {
     void *pConfig = gpCore->GetConfig();

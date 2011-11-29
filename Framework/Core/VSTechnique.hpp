@@ -22,7 +22,7 @@
 #include "ITechnique.hpp"
 
 namespace VoodooShader
-{    
+{
     /**
      * @par CLSID
      *      e6f312a5-05af-11e1-9e05-005056c00008

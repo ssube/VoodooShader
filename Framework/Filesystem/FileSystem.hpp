@@ -55,7 +55,7 @@ namespace VoodooShader
          * Provides a unified file management system for loading shaders and other resources. This file system
          * implementation is a thin wrapper for the Windows API, adding only a few nonstandard functions (directory
          * searching and path variables).
-         * 
+         *
          * @par CLSID
          *      e6f312b1-05af-11e1-9e05-005056c00008
          */
@@ -200,7 +200,7 @@ namespace VoodooShader
          *
          * @par CLSID
          *      e6f312b2-05af-11e1-9e05-005056c00008
-         *      
+         *
          * @todo Provide layer, cubemap and animation handling.
          * @todo Provide image saving.
          */

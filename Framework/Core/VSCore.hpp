@@ -35,7 +35,7 @@ namespace VoodooShader
     /**
      * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
      * shaders, textures, plugins and variable/configuration mechanics.
-     * 
+     *
      * @par CLSID
      *      e6f3129b-05af-11e1-9e05-005056c00008
      */
@@ -53,7 +53,7 @@ namespace VoodooShader
         VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
-        
+
         // ICore
         VOODOO_METHOD(Initialize)(_In_ const InitParams * const pInitParams);
         VOODOO_METHOD(Reset)();

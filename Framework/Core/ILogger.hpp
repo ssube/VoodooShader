@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * Provides structured and formatted logging for module listing and level-filtered messages.
-     * 
+     *
      * @par IID
      *      e6f3128e-05af-11e1-9e05-005056c00008
      */

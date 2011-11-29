@@ -27,10 +27,10 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
-    
+
     /**
      * Provides access to shader parameters, with attach/detach and value set (for most data types).
-     *      
+     *
      * @par IID
      *      e6f31291-05af-11e1-9e05-005056c00008
      */

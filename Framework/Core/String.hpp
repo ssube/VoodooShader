@@ -121,9 +121,9 @@ namespace VoodooShader
 
         /**
          * Creates a string from a Uuid, converting to a string. This takes the unbraced 8/2/2/2/12 format, like so:
-         * 
+         *
          * @code 01234567-89ab-cdef-0123-456789abcdef @endcode
-         * 
+         *
          * This is considered the standard form for Voodoo UUIDs, and is used in the registry and most other locations.
          */
         String(_In_ const Uuid & uuid);
@@ -223,7 +223,7 @@ namespace VoodooShader
         /**
          * @}
          */
-        
+
         /**
          * @addtogroup voodoo_utility_string_mod String modification
          * @ingroup voodoo_utility_string
@@ -249,7 +249,7 @@ namespace VoodooShader
         /**
          * @}
          */
-        
+
         /**
          * @addtogroup voodoo_utility_string_case String case conversion
          * @ingroup voodoo_utility_string
@@ -260,7 +260,7 @@ namespace VoodooShader
         /**
          * @}
          */
-        
+
         /**
          * @addtogroup voodoo_utility_string_part String partial copy
          * @ingroup voodoo_utility_string
@@ -272,7 +272,7 @@ namespace VoodooShader
         /**
          * @}
          */
-        
+
         /**
          * @addtogroup voodoo_utility_string_pred String predicates
          * @ingroup voodoo_utility_string
@@ -293,7 +293,7 @@ namespace VoodooShader
         /**
          * @}
          */
-        
+
         /**
          * @addtogroup voodoo_utility_string_find String find and replace
          * @ingroup voodoo_utility_string
@@ -305,7 +305,7 @@ namespace VoodooShader
         uint32_t ReverseFind(_In_ const wchar_t ch, _In_ bool useCase = true) const;
         uint32_t ReverseFind(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         uint32_t ReverseFind(_In_ const String & str, _In_ bool useCase = true) const;
-        
+
         String & Replace(_In_ const wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase = true);
         String & Replace(_In_z_ const wchar_t * fstr, _In_z_ const wchar_t * rstr, _In_ bool useCase = true);
         String & Replace(_In_ const String & fstr, _In_ const String & rstr, _In_ bool caseSensitive = true);
@@ -315,7 +315,7 @@ namespace VoodooShader
         /**
          * @}
          */
-        
+
         /**
          * @addtogroup voodoo_utility_string_format String format
          * @ingroup voodoo_utility_string

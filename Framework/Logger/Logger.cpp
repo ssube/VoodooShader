@@ -277,7 +277,7 @@ namespace VoodooShader
                 logMsg << "\" ";
                 logMsg << this->LogTime().GetData();
                 logMsg << this->LogTicks().GetData();
-                
+
                 if (source) logMsg << " source=\"" << source;
 
                 logMsg << "\">";

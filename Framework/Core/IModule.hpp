@@ -31,7 +31,7 @@ namespace VoodooShader
     /**
      * Provides a framework for loading and unloading modules in core, as well as retrieving symbols and modules
      * from memory.
-     * 
+     *
      * @par IID
      *      e6f31290-05af-11e1-9e05-005056c00008
      */
@@ -142,7 +142,7 @@ namespace VoodooShader
 
     /**
      * Contains the handle to a loaded library and function pointers for creation and destruction.
-     * 
+     *
      * @par IID
      *      e6f3128f-05af-11e1-9e05-005056c00008
      */

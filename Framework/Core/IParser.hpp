@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * Provides extensive variable handling and string parsing.
-     *      
+     *
      * @par IID
      *      e6f31292-05af-11e1-9e05-005056c00008
      */

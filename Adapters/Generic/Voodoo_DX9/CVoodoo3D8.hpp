@@ -26,12 +26,12 @@
 namespace VoodooShader
 {
     namespace VoodooDX8
-    {  
+    {
         /**
-         * The core Voodoo3D8 wrapper class for D3D8 objects. This class is responsible for the primary abstraction from 
-         * D3D8 to D3D9. This class is responsible for creating devices, giving it control over what is returned to the 
+         * The core Voodoo3D8 wrapper class for D3D8 objects. This class is responsible for the primary abstraction from
+         * D3D8 to D3D9. This class is responsible for creating devices, giving it control over what is returned to the
          * engine.
-         * 
+         *
          * @note The various CVoodoo3D8 interfaces provide an application-opaque wrapper that actually implements a Direct3D
          *      8.9 layer (8 to 9 translation). For use with D3D9 applications, the CVoodoo3D9 interface set must be used.
          */
@@ -66,7 +66,7 @@ namespace VoodooShader
                 D3DFORMAT CheckFormat
             );
             /**
-             * @note Direct3D8 doesn't seem to support the concept of multisampling quality levels, or won't recognize them 
+             * @note Direct3D8 doesn't seem to support the concept of multisampling quality levels, or won't recognize them
              *      in this function. They are not passed back because of this.
              */
             STDMETHOD(CheckDeviceMultiSampleType)
@@ -98,16 +98,16 @@ namespace VoodooShader
             STDMETHOD_(UINT, GetAdapterCount)();
             STDMETHOD(GetAdapterDisplayMode)(UINT Adapter, D3DDISPLAYMODE * pMode);
             /**
-             * @note This function forcibly ignores WHQL levels 
+             * @note This function forcibly ignores WHQL levels
              */
             STDMETHOD(GetAdapterIdentifier)(UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER8 * pIdentifier);
             STDMETHOD_(UINT, GetAdapterModeCount)(UINT Adapter);
             STDMETHOD_(HMONITOR, GetAdapterMonitor)(UINT Adapter);
             STDMETHOD(GetDeviceCaps)(UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS8 * pCaps);
             /**
-             * This is a legacy function to register a software renderer into the DX8 system; however, the DX8 docs state 
+             * This is a legacy function to register a software renderer into the DX8 system; however, the DX8 docs state
              * that it is unsupported. The DX9 reintroduces support for it. Since the Voodoo CVoodoo3D8 layer targets DX9,
-             * the function is callable and will target the appropriate DX9 function. It will log a warning message, due to 
+             * the function is callable and will target the appropriate DX9 function. It will log a warning message, due to
              * technically being illegal.
              */
             STDMETHOD(RegisterSoftwareDevice)(void *pInitializeFunction);

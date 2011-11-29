@@ -73,38 +73,38 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.cMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // toolStripContainer1
-            // 
-            // 
+            //
+            //
             // toolStripContainer1.ContentPanel
-            // 
+            //
             this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
             resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
             resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
             this.toolStripContainer1.Name = "toolStripContainer1";
-            // 
+            //
             // toolStripContainer1.TopToolStripPanel
-            // 
+            //
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.cMenu);
-            // 
+            //
             // splitContainer1
-            // 
+            //
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.splitContainer1.Name = "splitContainer1";
-            // 
+            //
             // splitContainer1.Panel1
-            // 
+            //
             this.splitContainer1.Panel1.Controls.Add(this.cHook_Table);
-            // 
+            //
             // splitContainer1.Panel2
-            // 
+            //
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
-            // 
+            //
             // cHook_Table
-            // 
+            //
             this.cHook_Table.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.cHook_Table.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cHook_Table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -118,37 +118,37 @@
             this.cHook_Table.ReadOnly = true;
             this.cHook_Table.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.cHook_Table.RowHeadersVisible = false;
-            // 
+            //
             // col_Active
-            // 
+            //
             this.col_Active.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             resources.ApplyResources(this.col_Active, "col_Active");
             this.col_Active.Name = "col_Active";
             this.col_Active.ReadOnly = true;
-            // 
+            //
             // col_Icon
-            // 
+            //
             this.col_Icon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.col_Icon, "col_Icon");
             this.col_Icon.Name = "col_Icon";
             this.col_Icon.ReadOnly = true;
-            // 
+            //
             // col_Name
-            // 
+            //
             this.col_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.col_Name, "col_Name");
             this.col_Name.Name = "col_Name";
             this.col_Name.ReadOnly = true;
-            // 
+            //
             // col_Target
-            // 
+            //
             this.col_Target.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.col_Target, "col_Target");
             this.col_Target.Name = "col_Target";
             this.col_Target.ReadOnly = true;
-            // 
+            //
             // tableLayoutPanel1
-            // 
+            //
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
@@ -162,36 +162,36 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
+            //
             // label4
-            // 
+            //
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            // 
+            //
             // label3
-            // 
+            //
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            // 
+            //
             // button2
-            // 
+            //
             resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            // 
+            //
             // textBox2
-            // 
+            //
             resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.Name = "textBox2";
-            // 
+            //
             // button1
-            // 
+            //
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            // 
+            //
             // listBox1
-            // 
+            //
             this.tableLayoutPanel1.SetColumnSpan(this.listBox1, 3);
             resources.ApplyResources(this.listBox1, "listBox1");
             this.listBox1.FormattingEnabled = true;
@@ -202,51 +202,51 @@
             resources.GetString("listBox1.Items3"),
             resources.GetString("listBox1.Items4")});
             this.listBox1.Name = "listBox1";
-            // 
+            //
             // tableLayoutPanel2
-            // 
+            //
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 3);
             this.tableLayoutPanel2.Controls.Add(this.button3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.button4, 1, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
+            //
             // button3
-            // 
+            //
             resources.ApplyResources(this.button3, "button3");
             this.button3.Name = "button3";
             this.button3.UseVisualStyleBackColor = true;
-            // 
+            //
             // button4
-            // 
+            //
             resources.ApplyResources(this.button4, "button4");
             this.button4.Name = "button4";
             this.button4.UseVisualStyleBackColor = true;
-            // 
+            //
             // textBox3
-            // 
+            //
             resources.ApplyResources(this.textBox3, "textBox3");
             this.tableLayoutPanel1.SetColumnSpan(this.textBox3, 2);
             this.textBox3.Name = "textBox3";
-            // 
+            //
             // textBox1
-            // 
+            //
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
-            // 
+            //
             // label1
-            // 
+            //
             resources.ApplyResources(this.label1, "label1");
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Name = "label1";
-            // 
+            //
             // label2
-            // 
+            //
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            // 
+            //
             // cMenu
-            // 
+            //
             resources.ApplyResources(this.cMenu, "cMenu");
             this.cMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMenu_Hook_Add,
@@ -260,67 +260,67 @@
             this.cMenu_Downloads});
             this.cMenu.Name = "cMenu";
             this.cMenu.Stretch = true;
-            // 
+            //
             // cMenu_Hook_Add
-            // 
+            //
             resources.ApplyResources(this.cMenu_Hook_Add, "cMenu_Hook_Add");
             this.cMenu_Hook_Add.Name = "cMenu_Hook_Add";
             this.cMenu_Hook_Add.Click += new System.EventHandler(this.Menu_Hook_Add);
-            // 
+            //
             // cMenu_Hook_Remove
-            // 
+            //
             resources.ApplyResources(this.cMenu_Hook_Remove, "cMenu_Hook_Remove");
             this.cMenu_Hook_Remove.Name = "cMenu_Hook_Remove";
             this.cMenu_Hook_Remove.Click += new System.EventHandler(this.Menu_Hook_Remove);
-            // 
+            //
             // toolStripSeparator1
-            // 
+            //
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            // 
+            //
             // cMenu_Hook_Wizard
-            // 
+            //
             resources.ApplyResources(this.cMenu_Hook_Wizard, "cMenu_Hook_Wizard");
             this.cMenu_Hook_Wizard.Name = "cMenu_Hook_Wizard";
-            // 
+            //
             // cMenu_FindGames
-            // 
+            //
             resources.ApplyResources(this.cMenu_FindGames, "cMenu_FindGames");
             this.cMenu_FindGames.Name = "cMenu_FindGames";
             this.cMenu_FindGames.Click += new System.EventHandler(this.SearchSupported);
-            // 
+            //
             // toolStripSeparator2
-            // 
+            //
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
+            //
             // toolStripButton6
-            // 
+            //
             this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButton6, "toolStripButton6");
             this.toolStripButton6.Name = "toolStripButton6";
-            // 
+            //
             // toolStripButton5
-            // 
+            //
             this.toolStripButton5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButton5, "toolStripButton5");
             this.toolStripButton5.Name = "toolStripButton5";
-            // 
+            //
             // cMenu_Downloads
-            // 
+            //
             resources.ApplyResources(this.cMenu_Downloads, "cMenu_Downloads");
             this.cMenu_Downloads.Name = "cMenu_Downloads";
-            // 
+            //
             // cTrayIcon
-            // 
+            //
             this.cTrayIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             resources.ApplyResources(this.cTrayIcon, "cTrayIcon");
             this.cTrayIcon.Click += new System.EventHandler(this.Notify_OnClick);
-            // 
+            //
             // MainForm
-            // 
+            //
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.toolStripContainer1);

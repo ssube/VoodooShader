@@ -29,7 +29,7 @@
 namespace VoodooShader
 {
     namespace VoodooDX8
-    {  
+    {
         /**
         * The default, public constructor for CVoodoo3D objects.
         */
@@ -374,7 +374,7 @@ namespace VoodooShader
                     {
                         IDirect3D8 * pDev8 = d3d8create(m_SdkVersion);
                         if (pDev8)
-                        { 
+                        {
                             HRESULT hr = pDev8->GetDeviceCaps(Adapter, DeviceType, &d3d8caps);
                             if (SUCCEEDED(hr))
                             {

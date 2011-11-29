@@ -29,7 +29,7 @@ namespace VoodooLogViewer
             {
                 resourceDir = resourceDir.Substring(6);
             }
-            
+
             XslCompiledTransform xslTransform;
             try
             {

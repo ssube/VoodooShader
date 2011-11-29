@@ -125,7 +125,7 @@ namespace VoodooShader
     (
         _In_ const LogLevel level,
         _In_ const wchar_t * source,
-        _In_ _Printf_format_string_ const wchar_t * format, 
+        _In_ _Printf_format_string_ const wchar_t * format,
         ...
     )
     {

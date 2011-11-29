@@ -188,7 +188,7 @@ namespace VoodooShader
         }
     }
 
-    _Ret_count_c_(16) float * const VOODOO_METHODTYPE VSParameter::GetScalar() 
+    _Ret_count_c_(16) float * const VOODOO_METHODTYPE VSParameter::GetScalar()
     {
         return m_Valuefloat;
     }

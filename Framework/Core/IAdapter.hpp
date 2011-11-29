@@ -36,7 +36,7 @@ namespace VoodooShader
      *
      * @sa See the @ref voodoo_spec_adapter "adapter specifications" for details on what is required of adapter modules and
      *      classes.
-     *      
+     *
      * @par IID
      *      e6f31288-05af-11e1-9e05-005056c00008
      */
@@ -58,7 +58,7 @@ namespace VoodooShader
          * @param pPass The pass to be loaded.
          * @return Whether or not the pass was successfully loaded.
          *
-         * @warning The adapter may load any combination of programs from the given pass and may ignore the remainder. If 
+         * @warning The adapter may load any combination of programs from the given pass and may ignore the remainder. If
          *      this call returns true, the pass may be bound to this adapter in the future. If this returns false, the pass
          *      may be unable to be bound.
          */
@@ -83,8 +83,8 @@ namespace VoodooShader
          *     or hull programs.
          *
          * @note The Adapter may implement passes using deferred parameters; if so it must update all relevant parameters
-         *      before binding the pass. Virtual parameters must be updated before actual, to guarantee propagation. All 
-         *      parameters updates must be performed before this function returns and take effect for any draw calls coming 
+         *      before binding the pass. Virtual parameters must be updated before actual, to guarantee propagation. All
+         *      parameters updates must be performed before this function returns and take effect for any draw calls coming
          *      after this call.
          *
          * @note Each call to SetPass should have a corresponding call to ResetPass.
@@ -127,7 +127,7 @@ namespace VoodooShader
          *
          * @note Only Voodoo texture formats are supported, API-specific formats are not and @b must return errors.
          *
-         * @note If pDesc's RenderTarget flag is true, this must create a texture that can be rendered directly into or that 
+         * @note If pDesc's RenderTarget flag is true, this must create a texture that can be rendered directly into or that
          *      have the backbuffer copied efficiently into it, depending on how the adapter chooses to implement RTT.
          *
          * @warning You should not call this method directly; it should only be used via Core::CreateTexture(). This method
@@ -155,7 +155,7 @@ namespace VoodooShader
          * @param pData A pointer to the data to be used for vertexes, may be an adapter or buffer of VertexStructs.
          * @param flags Vertex flags for this data set, particularly whether the verts are pretransformed.
          * @return Success of the draw operation.
-         * 
+         *
          * @note If VF_Buffer is set in flags, pData must be a buffer of some type. Otherwise, pData must be an array of
          *      VertexStructs. If VF_Transformed is set, the vertex data should be interpreted as being pretransformed;
          *      otherwise it should be taken as raw vertexes.

@@ -29,7 +29,7 @@ namespace VoodooShader
      *
      * @{
      */
-    
+
     /**
      * Voodoo Shader null hook manager implementation. Returns true or nullptr for methods as necessary, does not install
      * any hooks. Does not perform logging or parameter validation.

@@ -6,20 +6,20 @@
 
 ### 1. Summary
 
-The Voodoo Shader Framework is a comprehensive graphics framework for adding and extending shaders during development or 
+The Voodoo Shader Framework is a comprehensive graphics framework for adding and extending shaders during development or
 after release. Voodoo works with both Direct3D and OpenGL, in games and other applications.
 
-Voodoo uses a system of core modules and adapters to provide the widest compatibility and best performance possible across a 
+Voodoo uses a system of core modules and adapters to provide the widest compatibility and best performance possible across a
 wide range of applications and APIs. This core framework remains constant between target applications and adapters,
  providing a unified set of features and single target for shaders.
 
-Voodoo supports both OpenGL and DirectX, from older versions to the latest release. Shaders are developed using the Cg 
+Voodoo supports both OpenGL and DirectX, from older versions to the latest release. Shaders are developed using the Cg
 language, allowing a single shader to run on nearly all graphics systems.
 
 
 ### 2. Installation
 
-The Voodoo system function using a core-and-adapter model. The Voodoo core handles most vital functions, and 
+The Voodoo system function using a core-and-adapter model. The Voodoo core handles most vital functions, and
 program-specific adapters interface with each program in detail. The core and all bundled basic plugins are refered to as
 the Voodoo framework (it is possible to use the core without any framework plugins, but they are recommended).
 
@@ -47,7 +47,7 @@ Voodoo has two major modes of operation.
 The primary and preferred mode is for the Voodoo UI to be running. This will automatically load into any applications for
 which a hook is present and active. Hooks may be managed within the UI.
 
-The secondary method is to drop the Voodoo intercept DLL into the game directory. This is significantly more limited, but 
+The secondary method is to drop the Voodoo intercept DLL into the game directory. This is significantly more limited, but
 does not require the UI to be running. Hooks must still be defined for the application.
 
 Once the game has been hooked, Voodoo will automatically load itself and all plugins given in the config file. Behavior
@@ -61,7 +61,7 @@ at:
 
 * [http://tracker.voodooshader.com](http://tracker.voodooshader.com)
 
-Any information that can be included, especially a log, is beneficial. Full logs should be posted at 
+Any information that can be included, especially a log, is beneficial. Full logs should be posted at
 [github:gist](https://gist.github.com/) whenever possible and linked in the bug report.
 
 
@@ -78,7 +78,7 @@ To directly contact the developer, please send an email to:
 
 Questions, comments, suggestions, reports, bugs, and almost anything else are welcome.
 
-If you would like a game or application supported by Voodoo, please file a request issue with the title and as much 
+If you would like a game or application supported by Voodoo, please file a request issue with the title and as much
 information as you can.
 
 If you have any interest in helping test or contributing code to Voodoo, please get in touch by email or irc.
@@ -87,8 +87,8 @@ If you have any interest in helping test or contributing code to Voodoo, please 
 
 Voodoo Shader Framework &copy; 2010-2011 by Sean Sube, All Rights Reserved.
 
-The Voodoo Shader Framework, all associated binary or object files and source code is released under the terms and 
+The Voodoo Shader Framework, all associated binary or object files and source code is released under the terms and
 conditions of the GNU Lesser General Public License, version 3. See the included LICENSE file for more details.
 
-The Voodoo Shader Framework has absolutely no warranty, as described in the license document. Some support may be provided, 
+The Voodoo Shader Framework has absolutely no warranty, as described in the license document. Some support may be provided,
 at the developer's discretion; please use the above contact methods to get in touch.

@@ -56,7 +56,7 @@ namespace VoodooShader
         ClassMap m_Classes;
         ClassNameMap m_ClassNames;
     };
-    
+
     /**
      * @par CLSID
      *      e6f3129f-05af-11e1-9e05-005056c00008
