@@ -1,5 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_v_s_logger.html" title="Voodoo Shader null logger implementation." alt="" coords="5,155,176,181"/>
-<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html" title="Xml logger class, writes neatly formatted logs for use with the log viewer." alt="" coords="201,155,463,181"/>
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="133,5,288,32"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="6,5,161,32"/>
 </map>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
+   &#160;<span id="projectnumber">framework-4.2-105-g5b48d83</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -73,9 +73,6 @@
 </div>
 <div class="contents">
 <!-- doxytag: class="VoodooShader::VSFileSystem" --><!-- doxytag: inherits="VoodooShader::IFileSystem" -->
-<p>Voodoo Shader null file system implementation.  
- <a href="class_voodoo_shader_1_1_v_s_file_system.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for VoodooShader::VSFileSystem:</div>
@@ -84,7 +81,7 @@
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_v_s_file_system__inherit__graph.png" border="0" usemap="#_voodoo_shader_1_1_v_s_file_system_inherit__map" alt="Inheritance graph"/></div>
 <map name="_voodoo_shader_1_1_v_s_file_system_inherit__map" id="_voodoo_shader_1_1_v_s_file_system_inherit__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access." alt="" coords="12,80,196,107"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="26,5,181,32"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_file_system.html" title="VoodooShader::IFileSystem" alt="" coords="12,80,196,107"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="26,5,181,32"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for VoodooShader::VSFileSystem:</div>
@@ -93,7 +90,7 @@
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_v_s_file_system__coll__graph.png" border="0" usemap="#_voodoo_shader_1_1_v_s_file_system_coll__map" alt="Collaboration graph"/></div>
 <map name="_voodoo_shader_1_1_v_s_file_system_coll__map" id="_voodoo_shader_1_1_v_s_file_system_coll__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access." alt="" coords="5,83,189,109"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="133,5,288,32"/><area shape="rect" id="node8" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="214,83,359,109"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_file_system.html" title="VoodooShader::IFileSystem" alt="" coords="5,83,189,109"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="133,5,288,32"/><area shape="rect" id="node8" href="class_voodoo_shader_1_1_i_core.html" title="VoodooShader::ICore" alt="" coords="214,83,359,109"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_v_s_file_system-members.html">List of all members.</a></p>
@@ -124,11 +121,8 @@ Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#aaea4f3ea6900655d0f687899e14426be">m_Core</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Voodoo Shader null file system implementation. </p>
-<p>Returns true/nullptr as needed. <em>Does not have associated <a class="el" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> or <a class="el" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> implementations, as they will never be returned.</em></p>
-<dl class="user"><dt><b>CLSID:</b></dt><dd>e6f3129c-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00045">45</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00040">40</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2cd4da81fcdcf326038cfbb50fba1b57"></a><!-- doxytag: member="VoodooShader::VSFileSystem::VSFileSystem" ref="a2cd4da81fcdcf326038cfbb50fba1b57" args="(ICore *pCore)" -->
 <div class="memitem">
@@ -317,17 +311,6 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 <p>Definition at line <a class="el" href="_v_s_filesystem_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_filesystem_8cpp_source.html">VSFilesystem.cpp</a>.</p>
 
-<p><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="class_voodoo_shader_1_1_v_s_file_system_a0ac4783faa27b8965084b82f1c757f24_cgraph.png" border="0" usemap="#class_voodoo_shader_1_1_v_s_file_system_a0ac4783faa27b8965084b82f1c757f24_cgraph" alt=""/></div>
-<map name="class_voodoo_shader_1_1_v_s_file_system_a0ac4783faa27b8965084b82f1c757f24_cgraph" id="class_voodoo_shader_1_1_v_s_file_system_a0ac4783faa27b8965084b82f1c757f24_cgraph">
-<area shape="rect" id="node3" href="class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de" title="Add a reference to this object." alt="" coords="345,5,551,32"/></map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="aa705ef6eba116b6fafeae29f8f28bca8"></a><!-- doxytag: member="VoodooShader::VSFileSystem::Release" ref="aa705ef6eba116b6fafeae29f8f28bca8" args="() const " -->
@@ -418,7 +401,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00064">64</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -433,7 +416,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00063">63</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00057">57</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -445,7 +428,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 12:34:59 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 28 2011 18:55:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

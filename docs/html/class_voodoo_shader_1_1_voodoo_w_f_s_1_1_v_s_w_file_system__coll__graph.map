@@ -1,7 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access." alt="" coords="175,355,359,381"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="83,264,239,291"/>
-<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="5,355,149,381"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_file_system.html" title="VoodooShader::IFileSystem" alt="" coords="175,355,359,381"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="83,264,239,291"/>
+<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_i_core.html" title="VoodooShader::ICore" alt="" coords="5,355,149,381"/>
 <area shape="rect" id="node8" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="447,264,596,291"/>
 <area shape="rect" id="node10" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="447,173,661,200"/>
 <area shape="rect" id="node12" title="STL class." alt="" coords="510,83,599,109"/>

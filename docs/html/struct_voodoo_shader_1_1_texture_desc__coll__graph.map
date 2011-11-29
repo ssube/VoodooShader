@@ -1,6 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="41,304,271,331"/>
-<area shape="rect" id="node4" href="$struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; uint32_t \&gt;" alt="" coords="41,213,271,240"/>
-<area shape="rect" id="node8" href="$struct_voodoo_shader_1_1_vector2.html" title="VoodooShader::Vector2\&lt; ValType \&gt;" alt="" coords="131,109,361,136"/>
-<area shape="rect" id="node13" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; ValType \&gt;" alt="" coords="295,213,525,240"/>
+<area shape="rect" id="node2" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="5,245,235,272"/>
+<area shape="rect" id="node6" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; ValType \&gt;" alt="" coords="157,125,387,152"/>
 </map>

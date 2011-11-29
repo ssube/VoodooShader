@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
+   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -65,22 +65,20 @@
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Defines</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">Logger.cpp File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
+<div class="textblock"><code>#include &quot;<a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_logger___version_8hpp_source.html">Logger_Version.hpp</a>&quot;</code><br/>
+<code>#include &lt;strsafe.h&gt;</code><br/>
+<code>#include &lt;boost/uuid/uuid_io.hpp&gt;</code><br/>
+<code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;string&gt;</code><br/>
 <code>#include &lt;sstream&gt;</code><br/>
 <code>#include &lt;iomanip&gt;</code><br/>
-<code>#include &lt;boost/uuid/uuid_io.hpp&gt;</code><br/>
-<code>#include &quot;<a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="_logger___version_8hpp_source.html">Logger_Version.hpp</a>&quot;</code><br/>
-<code>#include &lt;windows.h&gt;</code><br/>
-<code>#include &lt;strsafe.h&gt;</code><br/>
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for Logger.cpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -88,7 +86,7 @@
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_logger_8cpp__incl.png" border="0" usemap="#_d_1_2_code_2_voodoo_shader_2_framework_2_logger_2_logger_8cpp" alt=""/></div>
 <map name="_d_1_2_code_2_voodoo_shader_2_framework_2_logger_2_logger_8cpp" id="_d_1_2_code_2_voodoo_shader_2_framework_2_logger_2_logger_8cpp">
-<area shape="rect" id="node13" href="_logger_8hpp.html" title="Logger.hpp" alt="" coords="1307,80,1393,107"/><area shape="rect" id="node86" href="_logger___version_8hpp.html" title="Logger_Version.hpp" alt="" coords="1201,155,1337,181"/><area shape="rect" id="node23" href="_voodoo_framework_8hpp.html" title="VoodooFramework.hpp" alt="" coords="652,155,807,181"/><area shape="rect" id="node25" href="_includes_8hpp.html" title="Includes.hpp" alt="" coords="535,453,629,480"/><area shape="rect" id="node45" href="_converter_8hpp.html" title="Converter.hpp" alt="" coords="1025,379,1127,405"/><area shape="rect" id="node48" href="_exception_8hpp.html" title="Exception.hpp" alt="" coords="210,304,315,331"/><area shape="rect" id="node50" href="_string_8hpp.html" title="String.hpp" alt="" coords="247,379,328,405"/><area shape="rect" id="node56" href="_regex_8hpp.html" title="Regex.hpp" alt="" coords="339,304,423,331"/><area shape="rect" id="node61" href="_version_8hpp.html" title="Version.hpp" alt="" coords="1221,229,1312,256"/><area shape="rect" id="node65" href="_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="305,229,399,256"/><area shape="rect" id="node71" href="_i_core_8hpp.html" title="ICore.hpp" alt="" coords="424,229,501,256"/><area shape="rect" id="node74" href="_i_filesystem_8hpp.html" title="IFilesystem.hpp" alt="" coords="525,229,640,256"/><area shape="rect" id="node77" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="664,229,795,256"/><area shape="rect" id="node80" href="_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="819,229,908,256"/><area shape="rect" id="node83" href="_i_module_8hpp.html" title="IModule.hpp" alt="" coords="933,229,1024,256"/><area shape="rect" id="node63" href="_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="1203,304,1329,331"/><area shape="rect" id="node67" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="539,304,627,331"/></map>
+<area shape="rect" id="node3" href="_logger_8hpp.html" title="Logger.hpp" alt="" coords="938,80,1024,107"/><area shape="rect" id="node77" href="_logger___version_8hpp.html" title="Logger_Version.hpp" alt="" coords="1173,155,1309,181"/><area shape="rect" id="node13" href="_voodoo_framework_8hpp.html" title="VoodooFramework.hpp" alt="" coords="641,155,796,181"/><area shape="rect" id="node15" href="_includes_8hpp.html" title="Includes.hpp" alt="" coords="479,453,573,480"/><area shape="rect" id="node35" href="_converter_8hpp.html" title="Converter.hpp" alt="" coords="312,379,413,405"/><area shape="rect" id="node38" href="_exception_8hpp.html" title="Exception.hpp" alt="" coords="790,304,895,331"/><area shape="rect" id="node40" href="_string_8hpp.html" title="String.hpp" alt="" coords="802,379,883,405"/><area shape="rect" id="node47" href="_regex_8hpp.html" title="Regex.hpp" alt="" coords="485,304,568,331"/><area shape="rect" id="node52" href="_version_8hpp.html" title="Version.hpp" alt="" coords="1196,229,1287,256"/><area shape="rect" id="node56" href="_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="962,229,1056,256"/><area shape="rect" id="node62" href="_i_core_8hpp.html" title="ICore.hpp" alt="" coords="337,229,415,256"/><area shape="rect" id="node65" href="_i_filesystem_8hpp.html" title="IFilesystem.hpp" alt="" coords="439,229,553,256"/><area shape="rect" id="node68" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="577,229,708,256"/><area shape="rect" id="node71" href="_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="733,229,821,256"/><area shape="rect" id="node74" href="_i_module_8hpp.html" title="IModule.hpp" alt="" coords="846,229,937,256"/><area shape="rect" id="node54" href="_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="1183,304,1309,331"/><area shape="rect" id="node58" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="667,304,755,331"/></map>
 </div>
 </div>
 <p><a href="_logger_8cpp_source.html">Go to the source code of this file.</a></p>
@@ -97,9 +95,6 @@
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html">VoodooShader</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_xml_logger.html">VoodooShader::XmlLogger</a></td></tr>
-<tr><td colspan="2"><h2><a name="define-members"></a>
-Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8cpp.html#ac7bef5d85e3dcd73eef56ad39ffc84a9">WIN32_LEAN_AND_MEAN</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const Version *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga052640155aad0d3d6464764e4df90afd">VoodooShader::XmlLogger::API_ModuleVersion</a> ()</td></tr>
@@ -112,27 +107,11 @@ Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_xml_logger.html#a5d70d30b87000c758e20dbadae07fb3c">VoodooShader::XmlLogger::name_VSXmlLogger</a> = &quot;VSXmlLogger&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_xml_logger.html#a947b63cd9281529add24d6fcabc2c58c">VoodooShader::XmlLogger::clsid_VSXmlLogger</a> = CLSID_VSXmlLogger</td></tr>
 </table>
-<hr/><h2>Define Documentation</h2>
-<a class="anchor" id="ac7bef5d85e3dcd73eef56ad39ffc84a9"></a><!-- doxytag: member="Logger.cpp::WIN32_LEAN_AND_MEAN" ref="ac7bef5d85e3dcd73eef56ad39ffc84a9" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define WIN32_LEAN_AND_MEAN</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00032">32</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
-
-</div>
-</div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 12:34:58 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

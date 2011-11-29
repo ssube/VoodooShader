@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access." alt="" coords="59,80,212,107"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="58,5,213,32"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_image.html" title="VoodooShader::IImage" alt="" coords="59,80,212,107"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="58,5,213,32"/>
 </map>

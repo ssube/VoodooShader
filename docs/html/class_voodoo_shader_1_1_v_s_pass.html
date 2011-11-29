@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
+   &#160;<span id="projectnumber">framework-4.2-105-g5b48d83</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -82,7 +82,7 @@
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_v_s_pass__inherit__graph.png" border="0" usemap="#_voodoo_shader_1_1_v_s_pass_inherit__map" alt="Inheritance graph"/></div>
 <map name="_voodoo_shader_1_1_v_s_pass_inherit__map" id="_voodoo_shader_1_1_v_s_pass_inherit__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel..." alt="" coords="13,80,160,107"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="9,5,164,32"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_pass.html" title="VoodooShader::IPass" alt="" coords="13,80,160,107"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="9,5,164,32"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for VoodooShader::VSPass:</div>
@@ -91,7 +91,7 @@
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_v_s_pass__coll__graph.png" border="0" usemap="#_voodoo_shader_1_1_v_s_pass_coll__map" alt="Collaboration graph"/></div>
 <map name="_voodoo_shader_1_1_v_s_pass_coll__map" id="_voodoo_shader_1_1_v_s_pass_coll__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel..." alt="" coords="749,5,897,32"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="451,56,607,83"/><area shape="rect" id="node10" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect." alt="" coords="734,56,911,83"/><area shape="rect" id="node24" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="750,107,895,133"/><area shape="rect" id="node15" href="class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="748,271,897,297"/><area shape="rect" id="node17" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,289,637,316"/><area shape="rect" id="node19" title="STL class." alt="" coords="243,289,333,316"/><area shape="rect" id="node21" title="STL class." alt="" coords="5,289,192,316"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_pass.html" title="VoodooShader::IPass" alt="" coords="749,5,897,32"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="451,56,607,83"/><area shape="rect" id="node10" href="class_voodoo_shader_1_1_i_technique.html" title="VoodooShader::ITechnique" alt="" coords="734,56,911,83"/><area shape="rect" id="node24" href="class_voodoo_shader_1_1_i_core.html" title="VoodooShader::ICore" alt="" coords="750,107,895,133"/><area shape="rect" id="node15" href="class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="748,271,897,297"/><area shape="rect" id="node17" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,289,637,316"/><area shape="rect" id="node19" title="STL class." alt="" coords="243,289,333,316"/><area shape="rect" id="node21" title="STL class." alt="" coords="5,289,192,316"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_v_s_pass-members.html">List of all members.</a></p>
@@ -137,9 +137,8 @@ Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">CGprogram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a39cab097609483cdf4324ce4f964d320">m_HullProgram</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><dl class="user"><dt><b>CLSID</b></dt><dd>e6f312a3-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00035">35</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a7e933776597f7e1616d609322f9b98f8"></a><!-- doxytag: member="VoodooShader::VSPass::VSPass" ref="a7e933776597f7e1616d609322f9b98f8" args="(ITechnique *pTechnique, CGpass pCgPass)" -->
 <div class="memitem">
@@ -168,17 +167,6 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00034">34</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
-<p><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="class_voodoo_shader_1_1_v_s_pass_a7e933776597f7e1616d609322f9b98f8_cgraph.png" border="0" usemap="#class_voodoo_shader_1_1_v_s_pass_a7e933776597f7e1616d609322f9b98f8_cgraph" alt=""/></div>
-<map name="class_voodoo_shader_1_1_v_s_pass_a7e933776597f7e1616d609322f9b98f8_cgraph" id="class_voodoo_shader_1_1_v_s_pass_a7e933776597f7e1616d609322f9b98f8_cgraph">
-<area shape="rect" id="node3" href="class_voodoo_shader_1_1_i_technique.html#a0a8f6aa58601631886f2815625d11dc9" title="Get the core this object was associated with." alt="" coords="275,5,509,32"/><area shape="rect" id="node5" href="class_voodoo_shader_1_1_i_technique.html#a2841d4f71e321a0392bbb9e99a2d88cf" title="VoodooShader::ITechnique::GetName" alt="" coords="272,56,512,83"/><area shape="rect" id="node7" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb" title="VoodooShader::String::Format" alt="" coords="862,183,1061,209"/><area shape="rect" id="node9" href="class_voodoo_shader_1_1_v_s_pass.html#a3739d68ea6d718429666ec75a84c65f3" title="VoodooShader::VSPass::Link" alt="" coords="295,284,489,311"/><area shape="rect" id="node11" href="class_voodoo_shader_1_1_i_core.html#a8ff79b85773192eda84c66ccfdc42cf5" title="Retrieves a texture from the ICore&#39;s texture map by name." alt="" coords="577,157,794,184"/><area shape="rect" id="node13" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore." alt="" coords="579,208,792,235"/><area shape="rect" id="node15" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="592,259,779,285"/><area shape="rect" id="node17" href="class_voodoo_shader_1_1_v_s_pass.html#afc4ad34a485288583b71f24c2cd6a24b" title="Get the name of this object." alt="" coords="576,309,795,336"/><area shape="rect" id="node22" href="class_voodoo_shader_1_1_i_core.html#a3d8670b7d4e66222ef78e566c28273ed" title="Retrieves a texture from the ICore&#39;s texture map by stage." alt="" coords="560,360,811,387"/><area shape="rect" id="node24" href="class_voodoo_shader_1_1_i_core.html#af6521bfdb13b17ddc6f6285451fae603" title="Retrieve the IAdapter attached to this ICore." alt="" coords="576,411,795,437"/><area shape="rect" id="node26" href="class_voodoo_shader_1_1_i_adapter.html#a78ef790d6fa03b0abd4b43d1d2602915" title="Loads a pass in a manner that is compatible with the adapter&#39;s underlying API." alt="" coords="571,461,800,488"/><area shape="rect" id="node20" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="859,309,1064,336"/></map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="aea7a83d4f55b0a94be0e45d53071b84b"></a><!-- doxytag: member="VoodooShader::VSPass::~VSPass" ref="aea7a83d4f55b0a94be0e45d53071b84b" args="()" -->
@@ -196,17 +184,6 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
-
-<p><div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="class_voodoo_shader_1_1_v_s_pass_aea7a83d4f55b0a94be0e45d53071b84b_cgraph.png" border="0" usemap="#class_voodoo_shader_1_1_v_s_pass_aea7a83d4f55b0a94be0e45d53071b84b_cgraph" alt=""/></div>
-<map name="class_voodoo_shader_1_1_v_s_pass_aea7a83d4f55b0a94be0e45d53071b84b_cgraph" id="class_voodoo_shader_1_1_v_s_pass_aea7a83d4f55b0a94be0e45d53071b84b_cgraph">
-<area shape="rect" id="node3" href="class_voodoo_shader_1_1_i_core.html#af6521bfdb13b17ddc6f6285451fae603" title="Retrieve the IAdapter attached to this ICore." alt="" coords="292,5,511,32"/><area shape="rect" id="node5" href="class_voodoo_shader_1_1_i_adapter.html#a375a5350eccbe23b1dd2baeca44c99d8" title="Unloads a pass from the adapter." alt="" coords="281,56,522,83"/></map>
-</div>
-</p>
 
 </div>
 </div>
@@ -394,28 +371,6 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00168">168</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
-<p><div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="class_voodoo_shader_1_1_v_s_pass_a3739d68ea6d718429666ec75a84c65f3_cgraph.png" border="0" usemap="#class_voodoo_shader_1_1_v_s_pass_a3739d68ea6d718429666ec75a84c65f3_cgraph" alt=""/></div>
-<map name="class_voodoo_shader_1_1_v_s_pass_a3739d68ea6d718429666ec75a84c65f3_cgraph" id="class_voodoo_shader_1_1_v_s_pass_a3739d68ea6d718429666ec75a84c65f3_cgraph">
-<area shape="rect" id="node3" href="class_voodoo_shader_1_1_i_core.html#a8ff79b85773192eda84c66ccfdc42cf5" title="Retrieves a texture from the ICore&#39;s texture map by name." alt="" coords="265,5,482,32"/><area shape="rect" id="node5" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore." alt="" coords="267,56,480,83"/><area shape="rect" id="node7" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax." alt="" coords="280,107,467,133"/><area shape="rect" id="node9" href="class_voodoo_shader_1_1_v_s_pass.html#afc4ad34a485288583b71f24c2cd6a24b" title="Get the name of this object." alt="" coords="264,157,483,184"/><area shape="rect" id="node15" href="class_voodoo_shader_1_1_i_core.html#a3d8670b7d4e66222ef78e566c28273ed" title="Retrieves a texture from the ICore&#39;s texture map by stage." alt="" coords="248,208,499,235"/><area shape="rect" id="node17" href="class_voodoo_shader_1_1_i_core.html#af6521bfdb13b17ddc6f6285451fae603" title="Retrieve the IAdapter attached to this ICore." alt="" coords="264,259,483,285"/><area shape="rect" id="node19" href="class_voodoo_shader_1_1_i_adapter.html#a78ef790d6fa03b0abd4b43d1d2602915" title="Loads a pass in a manner that is compatible with the adapter&#39;s underlying API." alt="" coords="259,309,488,336"/><area shape="rect" id="node11" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb" title="VoodooShader::String::Format" alt="" coords="550,132,749,159"/><area shape="rect" id="node13" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="547,183,752,209"/></map>
-</div>
-</p>
-
-<p><div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="class_voodoo_shader_1_1_v_s_pass_a3739d68ea6d718429666ec75a84c65f3_icgraph.png" border="0" usemap="#class_voodoo_shader_1_1_v_s_pass_a3739d68ea6d718429666ec75a84c65f3_icgraph" alt=""/></div>
-<map name="class_voodoo_shader_1_1_v_s_pass_a3739d68ea6d718429666ec75a84c65f3_icgraph" id="class_voodoo_shader_1_1_v_s_pass_a3739d68ea6d718429666ec75a84c65f3_icgraph">
-<area shape="rect" id="node3" href="class_voodoo_shader_1_1_v_s_pass.html#a7e933776597f7e1616d609322f9b98f8" title="VoodooShader::VSPass::VSPass" alt="" coords="248,5,467,32"/></map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="abca04774e7b3bd3bb1ef7229210a5f20"></a><!-- doxytag: member="VoodooShader::VSPass::QueryInterface" ref="abca04774e7b3bd3bb1ef7229210a5f20" args="(Uuid &amp;clsid, const void **ppOut) const " -->
@@ -459,17 +414,6 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a7a17e1b6830c201d0ca31eebaea7833a">VoodooShader::IPass</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00089">89</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
-
-<p><div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="class_voodoo_shader_1_1_v_s_pass_abca04774e7b3bd3bb1ef7229210a5f20_cgraph.png" border="0" usemap="#class_voodoo_shader_1_1_v_s_pass_abca04774e7b3bd3bb1ef7229210a5f20_cgraph" alt=""/></div>
-<map name="class_voodoo_shader_1_1_v_s_pass_abca04774e7b3bd3bb1ef7229210a5f20_cgraph" id="class_voodoo_shader_1_1_v_s_pass_abca04774e7b3bd3bb1ef7229210a5f20_cgraph">
-<area shape="rect" id="node3" href="class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de" title="Add a reference to this object." alt="" coords="310,5,517,32"/></map>
-</div>
-</p>
 
 </div>
 </div>
@@ -518,28 +462,6 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 <p>Definition at line <a class="el" href="_v_s_pass_8cpp_source.html#l00118">118</a> of file <a class="el" href="_v_s_pass_8cpp_source.html">VSPass.cpp</a>.</p>
 
-<p><div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="class_voodoo_shader_1_1_v_s_pass_afc4ad34a485288583b71f24c2cd6a24b_cgraph.png" border="0" usemap="#class_voodoo_shader_1_1_v_s_pass_afc4ad34a485288583b71f24c2cd6a24b_cgraph" alt=""/></div>
-<map name="class_voodoo_shader_1_1_v_s_pass_afc4ad34a485288583b71f24c2cd6a24b_cgraph" id="class_voodoo_shader_1_1_v_s_pass_afc4ad34a485288583b71f24c2cd6a24b_cgraph">
-<area shape="rect" id="node3" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb" title="VoodooShader::String::Format" alt="" coords="275,5,474,32"/><area shape="rect" id="node5" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="VoodooShader::String::GetData" alt="" coords="272,56,477,83"/></map>
-</div>
-</p>
-
-<p><div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="class_voodoo_shader_1_1_v_s_pass_afc4ad34a485288583b71f24c2cd6a24b_icgraph.png" border="0" usemap="#class_voodoo_shader_1_1_v_s_pass_afc4ad34a485288583b71f24c2cd6a24b_icgraph" alt=""/></div>
-<map name="class_voodoo_shader_1_1_v_s_pass_afc4ad34a485288583b71f24c2cd6a24b_icgraph" id="class_voodoo_shader_1_1_v_s_pass_afc4ad34a485288583b71f24c2cd6a24b_icgraph">
-<area shape="rect" id="node3" href="class_voodoo_shader_1_1_v_s_pass.html#a3739d68ea6d718429666ec75a84c65f3" title="VoodooShader::VSPass::Link" alt="" coords="272,5,467,32"/><area shape="rect" id="node5" href="class_voodoo_shader_1_1_v_s_pass.html#a7e933776597f7e1616d609322f9b98f8" title="VoodooShader::VSPass::VSPass" alt="" coords="515,5,733,32"/></map>
-</div>
-</p>
-
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -554,7 +476,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00064">64</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -569,7 +491,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00058">58</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00052">52</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -584,7 +506,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00069">69</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00063">63</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -599,7 +521,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00068">68</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00062">62</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -614,7 +536,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00066">66</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00060">60</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -629,7 +551,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00070">70</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00064">64</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -644,7 +566,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00053">53</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -659,7 +581,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00057">57</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00051">51</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -674,7 +596,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00062">62</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00056">56</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -689,7 +611,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -704,7 +626,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00067">67</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
 </div>
 </div>
@@ -716,7 +638,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 12:34:59 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 28 2011 18:55:09 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

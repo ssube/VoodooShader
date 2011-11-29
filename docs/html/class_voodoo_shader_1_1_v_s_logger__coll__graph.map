@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level&#45;filtered messages." alt="" coords="5,83,163,109"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="111,5,267,32"/>
-<area shape="rect" id="node8" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="187,83,332,109"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_logger.html" title="VoodooShader::ILogger" alt="" coords="5,83,163,109"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="111,5,267,32"/>
+<area shape="rect" id="node8" href="$class_voodoo_shader_1_1_i_core.html" title="VoodooShader::ICore" alt="" coords="187,83,332,109"/>
 </map>

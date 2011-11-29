@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-95-gcc3d93e</span>
+   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -70,7 +70,7 @@ Shader System</h2>
 <p>In addition to the standard Cg compiler, Voodoo adds a few additional features to the shader system:</p>
 <h3><a class="anchor" id="voodoo_graphics_shaders_system_parameters"></a>
 Shader Parameters</h3>
-<p>Voodoo provides a system to link effect-level parameters to application or system-level variables. This provides an easy way to provide data to shaders and is capable of linking many parameters from various effects to the same global parameter. Effect parameters may only be linked to global parameters. Global parameters are created by calling <a class="el" href="class_voodoo_shader_1_1_i_core.html#ad4f6208c5a06829f20f561eeb71e52a3" title="Creates a global virtual parameter.">ICore::CreateParameter()</a>, then any number of other parameters may be linked by calling IParameter::Attach() on the global parameter and providing the effect parameter, like so:</p>
+<p>Voodoo provides a system to link effect-level parameters to application or system-level variables. This provides an easy way to provide data to shaders and is capable of linking many parameters from various effects to the same global parameter. Effect parameters may only be linked to global parameters. Global parameters are created by calling ICore::CreateParameter(), then any number of other parameters may be linked by calling IParameter::Attach() on the global parameter and providing the effect parameter, like so:</p>
 <div class="fragment"><pre class="fragment"> IParameter * global = core-&gt;CreateParameter(<span class="stringliteral">&quot;time&quot;</span>, PT_Float);
  IParameter * effect = shader-&gt;GetParameter(<span class="stringliteral">&quot;time&quot;</span>);
  global-&gt;Attach(effect);
@@ -96,12 +96,12 @@ Shader Targets</h3>
          <span class="keywordflow">return</span> ( diffuseSamp + specSamp );
      }
  }
-</pre></div><p>This allows pass and technique output to be stored and later used, by other passes from the same effect or even by other effects. If no target is specified in the technique or pass annotations, the shader linker uses the texture currently bound to the core's stage textures. These may be set using <a class="el" href="class_voodoo_shader_1_1_i_core.html#a37e7e6c1639f88cf6f60df66ba11b090" title="Binds a texture to a specialized stage for the shader linker.">ICore::SetStageTexture()</a>. </p>
+</pre></div><p>This allows pass and technique output to be stored and later used, by other passes from the same effect or even by other effects. If no target is specified in the technique or pass annotations, the shader linker uses the texture currently bound to the core's stage textures. These may be set using ICore::SetStageTexture(). </p>
 </div></div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2011 12:34:58 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
