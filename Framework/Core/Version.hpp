@@ -93,8 +93,8 @@
 #define VOODOO_GLOBAL_NAME              VSTR("Voodoo/Framework")
 #define VOODOO_GLOBAL_PRETTYNAME        VSTR("Voodoo Shader Framework")
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
-#define VOODOO_GLOBAL_VERSION_MINOR     4
-#define VOODOO_GLOBAL_VERSION_PATCH     2
+#define VOODOO_GLOBAL_VERSION_MINOR     5
+#define VOODOO_GLOBAL_VERSION_PATCH     0
 #include "Version_Build.hpp"
 
 // Core defs
