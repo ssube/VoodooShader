@@ -76,6 +76,14 @@ namespace VoodooShader
         int m_Line;
         char * m_FmtMsg;
     };
+
+    /**
+     * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, particularly function,
+     * filename and line. These exceptions are also logged if possible (requires a valid core to be given). The Exception
+     * class derives from std::exception, so these are simple to handle.
+     */
+#   define Throw(module, msg, core) throw Exception(module, msg, core, VSTR(__FILE__), VSTR(__FUNCTION__), __LINE__)
+
     /**
      * @}
      */

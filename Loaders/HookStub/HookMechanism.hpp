@@ -33,3 +33,6 @@ bool WINAPI RemoveGlobalHook();
 /* Internal functions */
 bool WINAPI SearchHooks(_In_z_ TCHAR * moduleName);
 bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key);
+
+/* Run the full load process */
+bool WINAPI LoadFullLoader();

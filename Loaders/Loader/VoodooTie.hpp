@@ -39,8 +39,7 @@ extern VoodooShader::IAdapter * gVoodooAdapter;
 extern VoodooShader::InitParams gInitParams;
 
 extern HINSTANCE gLoaderHandle;
-
-typedef VoodooShader::ICore * (VOODOO_CALLTYPE * VoodooCreateFunc)(_In_ const VoodooShader::InitParams * const pInitParams, _In_ bool catchErrors);
+extern TCHAR gVoodooPath[MAX_PATH];
 
 const VoodooShader::Version *   VOODOO_CALLTYPE API_ModuleVersion();
 const uint32_t                  VOODOO_CALLTYPE API_ClassCount();
@@ -48,6 +47,8 @@ const wchar_t *                 VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_
 VoodooShader::IObject *         VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
+
+bool WINAPI GetVoodooPath();
 
 bool WINAPI LoadVoodoo();
 bool WINAPI UnloadVoodoo();

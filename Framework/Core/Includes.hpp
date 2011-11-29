@@ -98,10 +98,6 @@
 #   define new DBG_NEW
 #endif
 
-#ifndef VOODOO_MACRO_PROTECT
-#   define VOODOO_MACRO_PROTECT(...) __VA_ARGS__
-#endif
-
 #ifndef VOODOO_IMPORT
 #   define VOODOO_API __declspec(dllexport)
 #else
@@ -615,28 +611,10 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef const Version * (VOODOO_CALLTYPE * VersionFunc)();
-        typedef const uint32_t (VOODOO_CALLTYPE * CountFunc)();
-        typedef const wchar_t * (VOODOO_CALLTYPE * InfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
-        typedef IObject * (VOODOO_CALLTYPE * CreateFunc)(_In_ const uint32_t, _In_ ICore *);
+        typedef const Version * (VOODOO_CALLTYPE * ModuleVersionFunc)();
+        typedef const uint32_t  (VOODOO_CALLTYPE * ModuleCountFunc)();
+        typedef const wchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
+        typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(_In_ const uint32_t, _In_ ICore *);
+        typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)(_In_ const InitParams * const);
     }
-
-    /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     *
-     * @param pInitParams Setup parameters for this core.
-     * @param catchErrors If true, all exceptions thrown by the core ctor are caught within the function. Otherwise, they
-     *      are returned.
-     * @return A new ICore object.
-     *
-     * @throws std::exception in case of errors, if catchErrors is false.
-     */
-    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams, _In_ bool catchErrors = true);
-
-    /**
-     * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, particularly function,
-     * filename and line. These exceptions are also logged if possible (requires a valid core to be given). The Exception
-     * class derives from std::exception, so these are simple to handle.
-     */
-#   define Throw(module, msg, core) throw Exception(module, msg, core, VSTR(__FILE__), VSTR(__FUNCTION__), __LINE__)
 }

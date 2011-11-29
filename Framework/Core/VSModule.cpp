@@ -334,10 +334,10 @@ namespace VoodooShader
         {
             VSModule * module = new VSModule(pCore, hmodule);
 
-            module->m_ModuleVersion = reinterpret_cast<Functions::VersionFunc>(GetProcAddress(hmodule, "ModuleVersion"));
-            module->m_ClassCount = reinterpret_cast<Functions::CountFunc>(GetProcAddress(hmodule, "ClassCount"));
-            module->m_ClassInfo = reinterpret_cast<Functions::InfoFunc>(GetProcAddress(hmodule, "ClassInfo"));
-            module->m_ClassCreate = reinterpret_cast<Functions::CreateFunc>(GetProcAddress(hmodule, "ClassCreate"));
+            module->m_ModuleVersion = reinterpret_cast<Functions::ModuleVersionFunc>(GetProcAddress(hmodule, "ModuleVersion"));
+            module->m_ClassCount = reinterpret_cast<Functions::ModuleCountFunc>(GetProcAddress(hmodule, "ClassCount"));
+            module->m_ClassInfo = reinterpret_cast<Functions::ModuleInfoFunc>(GetProcAddress(hmodule, "ClassInfo"));
+            module->m_ClassCreate = reinterpret_cast<Functions::ModuleCreateFunc>(GetProcAddress(hmodule, "ClassCreate"));
 
             if
             (

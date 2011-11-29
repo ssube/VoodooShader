@@ -85,9 +85,9 @@ namespace VoodooShader
         ICore * m_Core;
 
         HMODULE m_Handle;
-        Functions::VersionFunc m_ModuleVersion;
-        Functions::CountFunc m_ClassCount;
-        Functions::InfoFunc m_ClassInfo;
-        Functions::CreateFunc m_ClassCreate;
+        Functions::ModuleVersionFunc m_ModuleVersion;
+        Functions::ModuleCountFunc m_ClassCount;
+        Functions::ModuleInfoFunc m_ClassInfo;
+        Functions::ModuleCreateFunc m_ClassCreate;
     };
 }

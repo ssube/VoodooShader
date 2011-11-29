@@ -51,7 +51,7 @@ namespace VoodooShader
         }
     }
 
-    ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams, bool catchErrors)
+    ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams)
     {
         static VSCore * pCore = nullptr;
 
@@ -63,13 +63,7 @@ namespace VoodooShader
                 pCore->Initialize(pInitParams);
             } catch(const std::exception & exc) {
                 UNREFERENCED_PARAMETER(exc);
-
                 pCore = nullptr;
-
-                if (!catchErrors)
-                {
-                    throw exc;
-                }
             }
         }
 
@@ -81,7 +75,7 @@ namespace VoodooShader
     {
 
 #ifdef VOODOO_DEBUG_MEMORY
-        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRT0DBG_LEAK_CHECK_DF);
         _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
         _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
         _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);

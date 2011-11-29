@@ -38,16 +38,19 @@ typedef NTSTATUS (__stdcall * func_EH_Uninstall)(TRACED_HOOK_HANDLE);
 typedef NTSTATUS (__stdcall * func_EH_UninstallAll)();
 typedef NTSTATUS (__stdcall * func_EH_SetACL)(ULONG*,ULONG,TRACED_HOOK_HANDLE);
 typedef NTSTATUS (__stdcall * func_EH_SetGlobalACL)(ULONG*,ULONG);
+typedef PWCHAR (__stdcall * func_EH_GetLastErrorString)();
 extern func_EH_Install gEH_Install;
 extern func_EH_Uninstall gEH_Uninstall;
 extern func_EH_UninstallAll gEH_UninstallAll;
 extern func_EH_SetACL gEH_SetACL;
 extern func_EH_SetGlobalACL gEH_SetGlobalACL;
+extern func_EH_GetLastErrorString gEH_GetLastErrorString;
 
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc);
 bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol);
 
 int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHooks * hooks);
+int WINAPI InstallKnownHooks();
 
 bool WINAPI LoadEasyHook();
 bool WINAPI UnloadEasyHook();

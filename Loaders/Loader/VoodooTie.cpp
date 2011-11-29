@@ -30,6 +30,7 @@ VoodooShader::ICore * gVoodooCore = nullptr;
 VoodooShader::IAdapter * gVoodooAdapter = nullptr;
 VoodooShader::InitParams gInitParams;
 HINSTANCE gLoaderHandle = nullptr;
+TCHAR gVoodooPath[MAX_PATH] = {0};
 
 const VoodooShader::Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOADER);
 
@@ -73,13 +74,52 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
     return TRUE;
 }
 
+bool WINAPI GetVoodooPath()
+{
+    if (gVoodooPath[0] != 0) return true;
+
+    bool result = false;
+    HKEY rootPath = nullptr;
+
+    if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader"), 0, KEY_READ, &rootPath) == ERROR_SUCCESS && rootPath != nullptr)
+    {
+        DWORD valueType = 0, valueSize = MAX_PATH;
+
+        if (RegQueryValueEx(rootPath, TEXT("path"), NULL, &valueType, (BYTE*)gVoodooPath, &valueSize) == ERROR_SUCCESS)
+        {
+            OutputDebugString(gVoodooPath);
+            OutputDebugString(TEXT("\n"));
+            result = true;
+        }
+
+        RegCloseKey(rootPath);
+        if (result) return result;
+    }
+
+    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("Software\\VoodooShader"), 0, KEY_READ, &rootPath) == ERROR_SUCCESS && rootPath != nullptr)
+    {
+        DWORD valueType = 0, valueSize = MAX_PATH;
+
+        if (RegQueryValueEx(rootPath, TEXT("path"), NULL, &valueType, (BYTE*)gVoodooPath, &valueSize) == ERROR_SUCCESS)
+        {
+            OutputDebugString(gVoodooPath);
+            OutputDebugString(TEXT("\n"));
+            result = true;
+        }
+
+        RegCloseKey(rootPath);
+        if (result) return result;
+    }
+
+    return result;
+}
+
 /**
  * Locate and load the Voodoo core, verify the functions and initialize the framework.
  */
 bool WINAPI LoadVoodoo()
 {
     wchar_t pathConfig[MAX_PATH];
-    wchar_t pathGlobalRoot[MAX_PATH];
     wchar_t pathLoader[MAX_PATH];
     wchar_t pathLocalRoot[MAX_PATH];
     wchar_t pathRunRoot[MAX_PATH];
@@ -141,35 +181,11 @@ bool WINAPI LoadVoodoo()
     wcscpy_s(pathLocalRoot, targetPath.c_str());
 
     // Get the global root
-    HKEY keyVoodoo = nullptr;
-    LONG keyOpen = RegOpenKeyEx(HKEY_CURRENT_USER, L"SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &keyVoodoo);
-
-    if (keyOpen != ERROR_SUCCESS)
-    {
-        keyOpen = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"SOFTWARE\\VoodooShader", 0, KEY_QUERY_VALUE, &keyVoodoo);
-
-        if (keyOpen != ERROR_SUCCESS)
-        {
-            ErrorMessage(L"Voodoo Loader: Unable to find Voodoo registry key.");
-            return false;
-        }
-    }
-
-    DWORD valueType = REG_NONE, valueSize = MAX_PATH;
-    LONG valueQuery = RegQueryValueEx(keyVoodoo, L"path", nullptr, &valueType, (BYTE *)pathGlobalRoot, &valueSize);
-
-    if (valueQuery != ERROR_SUCCESS || valueType == REG_NONE)
-    {
-        ErrorMessage
-        (
-            L"Voodoo Loader: Unable to retrieve Voodoo root from the registry (error %d).", valueQuery
-        );
-        return false;
-    }
+    GetVoodooPath();
 
     HMODULE coreLibrary = nullptr;
 
-    wcscpy_s(pathCoreLib, pathGlobalRoot);
+    wcscpy_s(pathCoreLib, gVoodooPath);
     wcscat_s(pathCoreLib, L"\\bin\\Voodoo_Core.dll");
 
     coreLibrary = LoadLibraryEx(pathCoreLib, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
@@ -180,7 +196,7 @@ bool WINAPI LoadVoodoo()
         return false;
     }
 
-    VoodooCreateFunc createFunc = (VoodooCreateFunc)GetProcAddress(coreLibrary, "CreateCore");
+    VoodooShader::Functions::CoreCreateFunc createFunc = (VoodooShader::Functions::CoreCreateFunc)GetProcAddress(coreLibrary, "CreateCore");
 
     if (createFunc == nullptr)
     {
@@ -189,7 +205,7 @@ bool WINAPI LoadVoodoo()
     }
 
     gInitParams.Config = pathConfig;
-    gInitParams.GlobalRoot = pathGlobalRoot;
+    gInitParams.GlobalRoot = gVoodooPath;
     gInitParams.Loader = pathLoader;
     gInitParams.LocalRoot = pathLocalRoot;
     gInitParams.RunRoot = pathRunRoot;
@@ -197,7 +213,7 @@ bool WINAPI LoadVoodoo()
 
     try
     {
-        gVoodooCore = createFunc(&gInitParams, false);
+        gVoodooCore = createFunc(&gInitParams);
     }
     catch(const std::exception & exc)
     {

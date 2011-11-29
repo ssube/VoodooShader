@@ -20,8 +20,11 @@
 
 #include "FunctionIntercept.hpp"
 
+#include "ExportLoadpoints.hpp"
+#include "SysAPIHandler.hpp"
 #include "VoodooTie.hpp"
 
+#include <strsafe.h>
 #include <map>
 
 std::map<FARPROC, TRACED_HOOK_HANDLE> gHooks;
@@ -32,13 +35,15 @@ func_EH_Uninstall gEH_Uninstall;
 func_EH_UninstallAll gEH_UninstallAll;
 func_EH_SetACL gEH_SetACL;
 func_EH_SetGlobalACL gEH_SetGlobalACL;
+func_EH_GetLastErrorString gEH_GetLastErrorString;
 
 ULONG threadList[] = {0};
 
 ModuleHooks hookList[] =
 {
-    { L"d3d8.dll", "Direct3DCreate8", nullptr },
-    { L"d3d9.dll", "Direct3DCreate9", nullptr },
+    { L"d3d8.dll",  "Direct3DCreate8",  &Voodoo3DCreate8 },
+    { L"d3d9.dll",  "Direct3DCreate9",  &Voodoo3DCreate9 },
+    { nullptr,      nullptr,            nullptr }
 };
 
 TCHAR moduleName[MAX_PATH];
@@ -53,7 +58,7 @@ bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFun
 
     if (gHooks.find(offset) != gHooks.end()) return false;
 
-    if (!gEH_Install && LoadEasyHook()) return false;
+    if (!gEH_Install && !LoadEasyHook()) return false;
 
     TRACED_HOOK_HANDLE tracer = new HOOK_TRACE_INFO();
     DWORD result = gEH_Install(offset, pFunc, nullptr, tracer);
@@ -64,6 +69,8 @@ bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFun
         gHooks[offset] = tracer;
         return true;
     } else {
+        PWCHAR estr = gEH_GetLastErrorString();
+        ErrorMessage(TEXT("EasyHook Error: %s"), estr);
         return false;
     }
 }
@@ -116,9 +123,20 @@ int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHooks
     return success;
 }
 
+int WINAPI InstallKnownHooks()
+{
+    return InstallHookList(2, hookList);
+}
+
 bool WINAPI LoadEasyHook()
 {
-    gEH_Module = LoadLibrary(TEXT("EasyHook.dll"));
+    if (!GetVoodooPath()) return false;
+    if (gEH_Module) return true;
+
+    TCHAR ehPath[MAX_PATH];
+    StringCchCopy(ehPath, MAX_PATH, gVoodooPath);
+    StringCchCat(ehPath, MAX_PATH, TEXT("\\bin\\EasyHook32.dll"));
+    gEH_Module = LoadLibrary(ehPath);
 
     if (gEH_Module == NULL) return false;
 
@@ -127,8 +145,9 @@ bool WINAPI LoadEasyHook()
     gEH_UninstallAll = (func_EH_UninstallAll)GetProcAddress(gEH_Module, "_LhUninstallAllHooks@0");
     gEH_SetACL = (func_EH_SetACL)GetProcAddress(gEH_Module, "_LhSetInclusiveACL@12");
     gEH_SetGlobalACL = (func_EH_SetGlobalACL)GetProcAddress(gEH_Module, "_LhSetGlobalInclusiveACL@8");
+    gEH_GetLastErrorString = (func_EH_GetLastErrorString)GetProcAddress(gEH_Module, "_RtlGetLastErrorString@0");
 
-    if (!gEH_SetACL || !gEH_SetGlobalACL || !gEH_Install || !gEH_Uninstall)
+    if (!gEH_SetACL || !gEH_SetGlobalACL || !gEH_Install || !gEH_Uninstall || !gEH_UninstallAll || !gEH_GetLastErrorString)
     {
         FreeLibrary(gEH_Module);
         return false;

@@ -26,7 +26,8 @@
 HINSTANCE gHookLoader = nullptr;
 HHOOK gGlobalHook = nullptr;
 unsigned int gLoadOnce = 1;
-HANDLE gSharedMemory;
+HMODULE gFullLoader;
+TCHAR gFilePath[MAX_PATH];
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
 {
@@ -57,16 +58,20 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
                 TCHAR moduleName[MAX_PATH];
                 GetModuleFileName(GetModuleHandle(NULL), moduleName, MAX_PATH);
 
-                TCHAR filePath[MAX_PATH];
-                ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\processes.log"), filePath, MAX_PATH);
+                ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\processes.log"), gFilePath, MAX_PATH);
 
                 bool doHook = SearchHooks(moduleName);
 
                 FILE * pf = nullptr;
-                if (_tfopen_s(&pf, filePath, TEXT("a")) == 0)
+                if (_tfopen_s(&pf, gFilePath, TEXT("a")) == 0)
                 {
                     _ftprintf_s(pf, TEXT("%s = %s\n"), moduleName, ((doHook)?TEXT("true"):TEXT("false")));
                     fclose(pf);
+                }
+
+                if (doHook)
+                {
+                    LoadFullLoader();
                 }
             }
         }
@@ -126,14 +131,16 @@ bool WINAPI SearchHooks(_In_z_ TCHAR * moduleName)
 
     if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader\\Hooks"), 0, KEY_READ, &hookRoot) == ERROR_SUCCESS && hookRoot != nullptr)
     {
-        SearchHooksInKey(moduleName, hookRoot);
+        bool found = SearchHooksInKey(moduleName, hookRoot);
         RegCloseKey(hookRoot);
+        if (found) return found;
     }
 
     if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("Software\\VoodooShader\\Hooks"), 0, KEY_READ, &hookRoot) == ERROR_SUCCESS && hookRoot != nullptr)
     {
-        SearchHooksInKey(moduleName, hookRoot);
+        bool found = SearchHooksInKey(moduleName, hookRoot);
         RegCloseKey(hookRoot);
+        if (found) return found;
     }
 
     return false;
@@ -150,27 +157,66 @@ bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key)
 
         if (RegOpenKeyEx(key, hookID, 0, KEY_READ, &hookKey) == ERROR_SUCCESS)
         {
+            bool found = false;
             DWORD valueType = 0, valueSize = 1024;
             TCHAR valueBuffer[1024];
 
             if (RegQueryValueEx(hookKey, TEXT("target"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
             {
-                OutputDebugString(moduleName);
-                if (_tcscmp(moduleName, valueBuffer) == 0)
+                FILE * pf = nullptr;
+                if (_tfopen_s(&pf, gFilePath, TEXT("a")) == 0)
                 {
-                    OutputDebugString(TEXT(" == "));
-                } else {
-                    OutputDebugString(TEXT(" != "));
+                    found = _tcscmp(moduleName, valueBuffer) == 0;
+                    const TCHAR * match = TEXT("!=");
+                    if (found)
+                    {
+                        match = TEXT(" == ");
+
+                    }
+                    _ftprintf_s(pf, TEXT("%s %s %s\n"), moduleName, match, valueBuffer);
+                    fclose(pf);
                 }
-                OutputDebugString(valueBuffer);
-                OutputDebugString(TEXT("\n"));
             }
 
             RegCloseKey(hookKey);
+
+            if (found) return found;
         }
 
         nameSize = MAX_KEY_LENGTH;
     }
 
     return false;
+}
+
+bool WINAPI LoadFullLoader()
+{
+    int result = 0;
+    HKEY rootPath = nullptr;
+
+    if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader"), 0, KEY_READ, &rootPath) == ERROR_SUCCESS && rootPath != nullptr)
+    {
+        DWORD valueType = 0, valueSize = 1024;
+        TCHAR valueBuffer[1024];
+
+        if (RegQueryValueEx(rootPath, TEXT("path"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
+        {
+            OutputDebugString(valueBuffer);
+            OutputDebugString(TEXT("\n"));
+
+            _tcscat(valueBuffer, TEXT("\\bin\\Voodoo_Loader.dll"));
+
+            gFullLoader = LoadLibrary(valueBuffer);
+
+            if (gFullLoader)
+            {
+                FARPROC hookFunc = GetProcAddress(gFullLoader, "InstallKnownHooks");
+                result = hookFunc();
+            }
+        }
+
+        RegCloseKey(rootPath);
+    }
+
+    return result > 0;
 }
