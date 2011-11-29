@@ -29,12 +29,12 @@ namespace VoodooShader
     VSLogger::~VSLogger()
     { }
 
-    uint32_t VOODOO_METHODCALLTYPE VSLogger::AddRef() CONST
+    uint32_t VOODOO_METHODTYPE VSLogger::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VOODOO_METHODCALLTYPE VSLogger::Release() CONST
+    uint32_t VOODOO_METHODTYPE VSLogger::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -45,7 +45,7 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODCALLTYPE VSLogger::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+    bool VOODOO_METHODTYPE VSLogger::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -74,17 +74,17 @@ namespace VoodooShader
         }
     }
 
-    String VOODOO_METHODCALLTYPE VSLogger::ToString() CONST
+    String VOODOO_METHODTYPE VSLogger::ToString() CONST
     {
         return L"VSLogger()";
     }
 
-    ICore * VOODOO_METHODCALLTYPE VSLogger::GetCore() CONST
+    ICore * VOODOO_METHODTYPE VSLogger::GetCore() CONST
     {
         return m_Core;
     }
 
-    bool VOODOO_METHODCALLTYPE VSLogger::Open(_In_ const String & filename, _In_ const bool append)
+    bool VOODOO_METHODTYPE VSLogger::Open(_In_ const String & filename, _In_ const bool append)
     {
         UNREFERENCED_PARAMETER(filename);
         UNREFERENCED_PARAMETER(append);
@@ -92,7 +92,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSLogger::Open(_In_ IFile * const pFile, _In_ const bool append)
+    bool VOODOO_METHODTYPE VSLogger::Open(_In_ IFile * const pFile, _In_ const bool append)
     {
         UNREFERENCED_PARAMETER(pFile);
         UNREFERENCED_PARAMETER(append);
@@ -100,28 +100,28 @@ namespace VoodooShader
         return true;
     }
 
-    void VOODOO_METHODCALLTYPE VSLogger::Close()
+    void VOODOO_METHODTYPE VSLogger::Close()
     { }
 
-    void VOODOO_METHODCALLTYPE VSLogger::Flush()
+    void VOODOO_METHODTYPE VSLogger::Flush()
     { }
 
-    void VOODOO_METHODCALLTYPE VSLogger::SetLogLevel(_In_ const LogLevel level)
+    void VOODOO_METHODTYPE VSLogger::SetLogLevel(_In_ const LogLevel level)
     {
         UNREFERENCED_PARAMETER(level);
     }
 
-    const LogLevel VOODOO_METHODCALLTYPE VSLogger::GetLogLevel() CONST
+    const LogLevel VOODOO_METHODTYPE VSLogger::GetLogLevel() CONST
     {
         return LL_Unknown;
     }
 
-    void VOODOO_METHODCALLTYPE VSLogger::LogModule(_In_ const Version * const pModule)
+    void VOODOO_METHODTYPE VSLogger::LogModule(_In_ const Version * const pModule)
     {
         UNREFERENCED_PARAMETER(pModule);
     }
 
-    void VOODOO_METHODCALLTYPE VSLogger::Log
+    void VOODOO_METHODTYPE VSLogger::Log
     (
         _In_ const LogLevel level,
         _In_ const wchar_t * source,
@@ -134,12 +134,12 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(format);
     }
 
-    void VOODOO_METHODCALLTYPE VSLogger::SetFlags(_In_ const LogFlags flush)
+    void VOODOO_METHODTYPE VSLogger::SetFlags(_In_ const LogFlags flush)
     {
         UNREFERENCED_PARAMETER(flush);
     }
 
-    const LogFlags VOODOO_METHODCALLTYPE VSLogger::GetFlags() CONST
+    const LogFlags VOODOO_METHODTYPE VSLogger::GetFlags() CONST
     {
         return LF_Unknown;
     }

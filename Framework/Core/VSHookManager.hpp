@@ -26,38 +26,32 @@ namespace VoodooShader
     /**
      * @addtogroup voodoo_core_null Null Implementations
      * @ingroup voodoo_core
-     * 
+     *
      * @{
      */
-
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_CLSID(VSHookManager) = {0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
     
     /**
      * Voodoo Shader null hook manager implementation. Returns true or nullptr for methods as necessary, does not install
      * any hooks. Does not perform logging or parameter validation.
-     * 
+     *
      * @par CLSID:
      *      e6f3129d-05af-11e1-9e05-005056c00008
      */
-    class VSHookManager :
-        public IHookManager
+    VOODOO_CLASS(VSHookManager, IHookManager, {0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         VSHookManager(_In_ ICore * pCore);
         virtual ~VSHookManager();
 
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
-        VOODOO_METHODCALL_(String, ToString)() CONST;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+        VOODOO_METHOD_(uint32_t, Release)() CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD_(String, ToString)() CONST;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHODCALL(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
-        VOODOO_METHODCALL(Remove)(_In_ const String & name);
-        VOODOO_METHODCALL(RemoveAll)();
+        VOODOO_METHOD(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
+        VOODOO_METHOD(Remove)(_In_ const String & name);
+        VOODOO_METHOD(RemoveAll)();
 
     private:
         mutable uint32_t m_Refs;

@@ -27,11 +27,6 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
-    
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_IID(IHookManager) = {0x8c, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Defines the interface for handling function-level hooks, redirecting existing functions and calls into new
@@ -40,14 +35,14 @@ namespace VoodooShader
      * @par IID
      *      e6f3128c-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IHookManager, IObject)
+    VOODOO_INTERFACE(IHookManager, IObject, {0x8c, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Install a single hook at the specified point. This will only affect the process(es) the HookManager is bound to.
@@ -60,8 +55,7 @@ namespace VoodooShader
          * @warning The calling convention of pSrc and pDest must be identical, or bad things might happen. This is only a
          *     bother with member functions but should be noted for all.
          */
-        VOODOO_METHODCALL(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest) PURE;
-
+        VOODOO_METHOD(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest) PURE;
         /**
          * Removes a single hook.
          *
@@ -71,12 +65,11 @@ namespace VoodooShader
          * @warning <em>Do not</em>, under any circumstances, remove a hook while execution is passing through the
          *     trampoline function. This can cause the process to crash. Until EasyHook is replaced, be careful!
          */
-        VOODOO_METHODCALL(Remove)(_In_ const String & name) PURE;
-
+        VOODOO_METHOD(Remove)(_In_ const String & name) PURE;
         /**
          * Removes all hooks created with this HookManager.
          */
-        VOODOO_METHODCALL(RemoveAll)() PURE;
+        VOODOO_METHOD(RemoveAll)() PURE;
     };
     /**
      * @}

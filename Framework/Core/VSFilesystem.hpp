@@ -31,33 +31,27 @@ namespace VoodooShader
      */
 
     /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_CLSID(VSFileSystem) = {0x9C, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-
-    /**
      * Voodoo Shader null file system implementation. Returns true/nullptr as needed. <em>Does not have associated IFile or
      * IImage implementations, as they will never be returned.</em>
      * 
      * @par CLSID:
      *      e6f3129c-05af-11e1-9e05-005056c00008 
      */
-    class VSFileSystem :
-        public IFileSystem
+    VOODOO_CLASS(VSFileSystem, IFileSystem, {0x9C, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         VSFileSystem(_In_ ICore * pCore);
         virtual ~VSFileSystem();
 
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
-        VOODOO_METHODCALL_(String, ToString)() CONST;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+        VOODOO_METHOD_(uint32_t, Release)() CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD_(String, ToString)() CONST;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHODCALL(AddPath)(_In_ const String & dir) ;
-        VOODOO_METHODCALL(RemovePath)(_In_ const String & dir) ;
-        VOODOO_METHODCALL_(IFile *, FindFile)(_In_ const String & name) CONST;
+        VOODOO_METHOD(AddPath)(_In_ const String & dir) ;
+        VOODOO_METHOD(RemovePath)(_In_ const String & dir) ;
+        VOODOO_METHOD_(IFile *, FindFile)(_In_ const String & name) CONST;
 
     private:
         mutable uint32_t m_Refs;

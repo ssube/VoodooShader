@@ -24,12 +24,6 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup voodoo_framework_interfaces
-     * @{
-     */
-
-    DEFINE_IID(IShader)       = {0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-    /**
      * Complete shader class, managing techniques, passes and metadata.
      *
      * Shaders contain significant linking and processing data, as well as the Voodoo-specific linking stage. IShader file
@@ -43,24 +37,22 @@ namespace VoodooShader
      * @warning For any technique in a shader to be valid, the entire shader must compile without errors. This
      *     <em>does not</em> mean that all techniques will be valid.
      */
-    VOODOO_INTERFACE(IShader, IObject)
+    VOODOO_INTERFACE(IShader, IObject, {0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
 
-        VOODOO_METHODCALL_(String, GetName)() CONST PURE;
-
+        VOODOO_METHOD_(String, GetName)() CONST PURE;
         /**
          * Get the number of validated techniques this shader contains.
          *
          * @return The number of techniques.
          */
-        VOODOO_METHODCALL_(const uint32_t, GetTechniqueCount)() CONST PURE;
-
+        VOODOO_METHOD_(const uint32_t, GetTechniqueCount)() CONST PURE;
         /**
          * Retrieve a technique from the shader by name. Most cases should use the default technique, but some specific
          * applications may want a particular technique.
@@ -68,8 +60,7 @@ namespace VoodooShader
          * @param index The index of the technique to get.
          * @return The technique, if it is found.
          */
-        VOODOO_METHODCALL_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST PURE;
-
+        VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST PURE;
         /**
          * Retrieves the default technique from this shader. All drawing should be done with the default technique: it is
          * guaranteed to be valid for the current shader profiles and API. The default technique is the first technique
@@ -81,8 +72,7 @@ namespace VoodooShader
          *     high-quality ones) and count down with the most compatible and simplest technique last. The first valid
          *     technique found becomes the default.
          */
-        VOODOO_METHODCALL_(ITechnique *, GetDefaultTechnique)() CONST PURE;
-
+        VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST PURE;
         /**
          * Set a technique from this shader to be used as the default technique. Some adapter functions simply retrieve the
          * default technique to draw with.
@@ -92,15 +82,13 @@ namespace VoodooShader
          *
          * @note This will validate that the technique belongs to this shader.
          */
-        VOODOO_METHODCALL(SetDefaultTechnique)(_In_ ITechnique * const pTechnique) PURE;
-
+        VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique) PURE;
         /**
          * Retrieve the number of effect-level parameters in this shader. These hold a single value for all passes.
          *
          * @return The parameter count.
          */
-        VOODOO_METHODCALL_(const uint32_t, GetParameterCount)() CONST PURE;
-
+        VOODOO_METHOD_(const uint32_t, GetParameterCount)() CONST PURE;
         /**
          * Retrieve a specific parameter from the shader. These may be modified at runtime and will automatically update Cg
          * and the GPU with their value (in most cases).
@@ -108,14 +96,13 @@ namespace VoodooShader
          * @param index The index of the parameter to retrieve.
          * @return The parameter, if valid.
          */
-        VOODOO_METHODCALL_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST PURE;
-
+        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST PURE;
         /**
          * Retrieve the underlying Cg technique.
          *
          * @return A pointer to the Cg technique.
          */
-        VOODOO_METHODCALL_(CGeffect, GetCgEffect)() CONST PURE;
+        VOODOO_METHOD_(CGeffect, GetCgEffect)() CONST PURE;
     };
     /**
      * @}

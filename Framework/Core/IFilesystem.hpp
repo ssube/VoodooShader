@@ -27,11 +27,6 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
-    
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_IID(IFileSystem) = {0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even
@@ -40,14 +35,14 @@ namespace VoodooShader
      * @par IID
      *      e6f31288-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IFileSystem, IObject)
+    VOODOO_INTERFACE(IFileSystem, IObject, {0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Adds a directory to this file system's search path.
@@ -57,16 +52,14 @@ namespace VoodooShader
          * @note This does not check for duplicates, so care should be taken not to add the same directory repeatedly.
          *     Directory search order is important for file priority.
          */
-        VOODOO_METHODCALL(AddPath)(_In_ const String & path) PURE;
-
+        VOODOO_METHOD(AddPath)(_In_ const String & path) PURE;
         /**
          * Removes a directory from the search path, following the same rules as adding (adding a string then removing the
          * same string will always work).
          *
          * @param path The path to remove.
          */
-        VOODOO_METHODCALL(RemovePath)(_In_ const String & path) PURE;
-
+        VOODOO_METHOD(RemovePath)(_In_ const String & path) PURE;
         /**
          * Resolves a relative filename (usually just filename and extension, but may include directories) into an
          * absolute filename by searching the list of resource directories registered with this manager.
@@ -74,13 +67,8 @@ namespace VoodooShader
          * @param name The file name to find.
          * @return The file, if found.
          */
-        VOODOO_METHODCALL_(IFile *, FindFile)(_In_ const String & name) CONST PURE;
+        VOODOO_METHOD_(IFile *, FindFile)(_In_ const String & name) CONST PURE;
     };
-    
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_IID(IFile) = {0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Provides abstraction to a single file, for basic access.
@@ -88,59 +76,25 @@ namespace VoodooShader
      * @par IID
      *      e6f3128a-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IFile, IObject)
+    VOODOO_INTERFACE(IFile, IObject, {0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
-        ~IFile()  { };
-
-        /**
-         * Add a reference to this object.
-         *
-         * @return The new reference count.
-         */
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-
-        /**
-         * Release a reference from this object.
-         *
-         * @return The new reference count.
-         */
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-
-        /**
-         * Get the name of this object.
-         *
-         * @return The name.
-         */
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-
-        /**
-         * Get the core this object was associated with.
-         *
-         * @return The core.
-         */
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Gets the absolute path of this file.
          */
-        VOODOO_METHODCALL_(String, GetPath)() CONST PURE;
-
-        VOODOO_METHODCALL(Open)(_In_ FileOpenMode mode) PURE;
-
-        VOODOO_METHODCALL(Close)() PURE;
-
-        VOODOO_METHODCALL_(int32_t, Read)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
-
-        VOODOO_METHODCALL_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
-
-        VOODOO_METHODCALL_(IImage *, OpenImage)() CONST PURE;
+        VOODOO_METHOD_(String, GetPath)() CONST PURE;
+        VOODOO_METHOD(Open)(_In_ FileOpenMode mode) PURE;
+        VOODOO_METHOD(Close)() PURE;
+        VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
+        VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
+        VOODOO_METHOD_(IImage *, OpenImage)() CONST PURE;
     };
-    
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_IID(IImage) = {0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
     
     /**
      * Provides abstraction to an image for specialized access.
@@ -148,44 +102,18 @@ namespace VoodooShader
      * @par IID
      *      e6f3128d-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IImage, IObject)
+    VOODOO_INTERFACE(IImage, IObject, {0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
-        ~IImage()  { };
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
 
-        /**
-         * Add a reference to this object.
-         *
-         * @return The new reference count.
-         */
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-
-        /**
-         * Release a reference from this object.
-         *
-         * @return The new reference count.
-         */
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-
-        /**
-         * Get the name of this object.
-         *
-         * @return The name.
-         */
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-
-        /**
-         * Get the core this object was associated with.
-         *
-         * @return The core.
-         */
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
-
-        VOODOO_METHODCALL_(String, GetPath)() CONST PURE;
-
-        VOODOO_METHODCALL_(const TextureDesc *, GetDesc)() CONST PURE;
-
-        VOODOO_METHODCALL_(uint32_t, GetData)(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) CONST PURE;
+        VOODOO_METHOD_(String, GetPath)() CONST PURE;
+        VOODOO_METHOD_(const TextureDesc *, GetDesc)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, GetData)(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) CONST PURE;
     };
     /**
      * @}

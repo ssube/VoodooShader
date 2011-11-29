@@ -51,27 +51,26 @@ namespace VoodooShader
         const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
         IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
 
-        /* VSWFileSystem: e6f312b1-05af-11e1-9e05-005056c00008 */
-        DEFINE_CLSID(VSWFileSystem) = {0xB1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-
         /**
          * Provides a unified file management system for loading shaders and other resources. This file system
          * implementation is a thin wrapper for the Windows API, adding only a few nonstandard functions (directory
          * searching and path variables).
+         * 
+         * @par CLSID
+         *      e6f312b1-05af-11e1-9e05-005056c00008
          */
-        class VSWFileSystem :
-            public IFileSystem
+        VOODOO_CLASS(VSWFileSystem, IFileSystem, {0xB1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
         {
         public:
             VSWFileSystem(_In_ ICore *core);
 
             virtual ~VSWFileSystem();
 
-            VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
-            VOODOO_METHODCALL_(uint32_t, Release)() CONST;
-            VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
-            VOODOO_METHODCALL_(String, ToString)() CONST;
-            VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+            VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+            VOODOO_METHOD_(uint32_t, Release)() CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHOD_(String, ToString)() CONST;
+            VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             /**
              * Add a directory to the search path. Directories are pushed to the front of the list, which is searched in
@@ -81,7 +80,7 @@ namespace VoodooShader
              * @note This function will split paths at the ';' character, similar to how Windows treats the path variable.
              *      This (combined with env vars) allows regular-form environment vars to be added to the file system.
              */
-            VOODOO_METHODCALL(AddPath)(_In_ const String & path);
+            VOODOO_METHOD(AddPath)(_In_ const String & path);
 
             /**
              * Removes a directory from the search path, following the same rules as adding (adding a string then removing
@@ -89,7 +88,7 @@ namespace VoodooShader
              *
              * @param path The path to remove.
              */
-            VOODOO_METHODCALL(RemovePath)(_In_ const String & path);
+            VOODOO_METHOD(RemovePath)(_In_ const String & path);
 
             /**
              * Resolves a relative filename (usually just filename and extension, but may include directories) into an
@@ -101,7 +100,7 @@ namespace VoodooShader
              * @note This functions uses Parser::ParseString() on the path. It is evaluated once when the function enters,
              *      then appended to each stored path until a valid file is found.
              */
-            VOODOO_METHODCALL_(IFile *, FindFile)(_In_ const String & name) CONST;
+            VOODOO_METHOD_(IFile *, FindFile)(_In_ const String & name) CONST;
 
         private:
             mutable uint32_t m_Refs;
@@ -110,11 +109,11 @@ namespace VoodooShader
             StringList m_Directories;
         };
 
-        /* VSWFile: e6f312b0-05af-11e1-9e05-005056c00008 */
-        DEFINE_CLSID(VSWFile) = {0xB0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-
-        class VSWFile :
-            public IFile
+        /**
+         * @par CLSID
+         *      e6f312b0-05af-11e1-9e05-005056c00008
+         */
+        VOODOO_CLASS(VSWFile, IFile, {0xB0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
         {
         public:
             /**
@@ -124,18 +123,18 @@ namespace VoodooShader
 
             virtual ~VSWFile();
 
-            VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
-            VOODOO_METHODCALL_(uint32_t, Release)() CONST;
-            VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
-            VOODOO_METHODCALL_(String, ToString)() CONST;
-            VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+            VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+            VOODOO_METHOD_(uint32_t, Release)() CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHOD_(String, ToString)() CONST;
+            VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             /**
              * Retrieves this file's absolute path.
              *
              * @return Internal path.
              */
-            VOODOO_METHODCALL_(String, GetPath)() CONST;
+            VOODOO_METHOD_(String, GetPath)() CONST;
 
             /**
              * Opens the file for read-write access.
@@ -151,14 +150,14 @@ namespace VoodooShader
              *      any module in the process. VSWFileSystem::GetFile() uses an absolute path in the constructor and is not
              *      susceptible to this.
              */
-            VOODOO_METHODCALL(Open)(_In_ FileOpenMode mode);
+            VOODOO_METHOD(Open)(_In_ FileOpenMode mode);
 
             /**
              * Closes the file, preventing further access.
              *
              * @return Success of the operation
              */
-            VOODOO_METHODCALL(Close)();
+            VOODOO_METHOD(Close)();
 
             /**
              * Reads a chunk of data from the file. The file must have been opened for reading previously, or this call will
@@ -171,7 +170,7 @@ namespace VoodooShader
              * @note If @arg buffer is nullptr, the number of bytes that would have been read is returned but the file
              *      position is unchanged. If @arg count is -1, this returns the filesize remaining
              */
-            VOODOO_METHODCALL_(int32_t, Read)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
+            VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
 
             /**
              * Writes a chunk of data to the file. The file must have been opened for writing.
@@ -183,9 +182,9 @@ namespace VoodooShader
              * @note If @p buffer is nullptr, @p count zeros are written into the file. This is useful for padding binary
              *      formats.
              */
-            VOODOO_METHODCALL_(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
+            VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
 
-            VOODOO_METHODCALL_(IImage *, OpenImage)() CONST;
+            VOODOO_METHOD_(IImage *, OpenImage)() CONST;
 
         private:
             mutable uint32_t m_Refs;
@@ -195,18 +194,17 @@ namespace VoodooShader
             HANDLE m_Handle;
         };
 
-        /* VSWImage: e6f312b2-05af-11e1-9e05-005056c00008 */
-        DEFINE_CLSID(VSWImage) = {0xB2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-
         /**
          * Provides image loading, using the DevIL library. This class provides internal loading and conversion, and can
          * manage 1-3 dimensional images (regular textures and volumes).
          *
+         * @par CLSID
+         *      e6f312b2-05af-11e1-9e05-005056c00008
+         *      
          * @todo Provide layer, cubemap and animation handling.
          * @todo Provide image saving.
          */
-        class VSWImage :
-            public IImage
+        VOODOO_CLASS(VSWImage, IImage, {0xB2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
         {
         public:
             static VSWImage * Load(ICore * pCore, const String & name);
@@ -215,13 +213,13 @@ namespace VoodooShader
 
             virtual ~VSWImage();
 
-            VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
-            VOODOO_METHODCALL_(uint32_t, Release)() CONST;
-            VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
-            VOODOO_METHODCALL_(String, ToString)() CONST;
-            VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+            VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+            VOODOO_METHOD_(uint32_t, Release)() CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHOD_(String, ToString)() CONST;
+            VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-            VOODOO_METHODCALL_(String, GetPath)() CONST;
+            VOODOO_METHOD_(String, GetPath)() CONST;
 
             /**
              * Retrieves texture format data from the image. The runtime can use this to set up a texture or decide if it
@@ -229,7 +227,7 @@ namespace VoodooShader
              *
              * @return Texture information.
              */
-            VOODOO_METHODCALL_(const TextureDesc *, GetDesc)() CONST;
+            VOODOO_METHOD_(const TextureDesc *, GetDesc)() CONST;
 
             /**
              * Retrieves a portion of the texture data from the image.
@@ -248,7 +246,7 @@ namespace VoodooShader
              *
              * @warning If this function converts formats or copies a large region, it will be slow. Avoid calling often.
              */
-            VOODOO_METHODCALL_(uint32_t, GetData)
+            VOODOO_METHOD_(uint32_t, GetData)
             (
                 _In_ const TextureRegion * pDesc,
                 _In_ const uint32_t size,
@@ -265,8 +263,7 @@ namespace VoodooShader
             TextureDesc m_Desc;
         };
     }
+    /**
+     * @}
+     */
 }
-
-/**
- * @}
- */

@@ -32,7 +32,7 @@ PROJECT_NAME           = "Voodoo Shader Framework"
 # This could be handy for archiving the generated documentation or 
 # if some version control system is used.
 
-PROJECT_NUMBER         = framework-4.2-99-g61686e9
+PROJECT_NUMBER         = framework-4.2-105-g5b48d83
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description 
 # for a project that appears at the top of each page and should give viewer 
@@ -1498,7 +1498,7 @@ PREDEFINED             = _In_= \
                          DECLSPEC_NOVTABLE= \
                          DECLSPEC_SELECTANY= \
                          _Check_return_= \
-                         VOODOO_METHODCALLTYPE= \
+                         VOODOO_METHODTYPE= \
                          VOODOO_CALLTYPE=
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then 
@@ -1513,15 +1513,16 @@ EXPAND_AS_DEFINED      = DEFINE_LIBID \
                          DEFINE_UUID \
                          SAFE_INCREMENT \
                          SAFE_DECREMENT \
-                         VOODOO_METHODCALL \
+                         VOODOO_METHOD \
                          PURE \
                          CONST \
                          PURE \
                          VOODOO_INTERFACE_ \
                          VOODOO_INTERFACE \
-                         VOODOO_METHODCALL_ \
+                         VOODOO_METHOD_ \
                          VOODOO_PUBLIC_FUNC \
-                         EXTERN_C
+                         EXTERN_C \
+                         VOODOO_CLASS
 
 # If the SKIP_FUNCTION_MACROS tag is set to YES (the default) then 
 # doxygen's preprocessor will remove all references to function-like macros 

@@ -29,11 +29,6 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
-    
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_IID(IObject) = {0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Defines a simple interface all Voodoo objects from dynamic modules must inherit. This interface handles
@@ -42,7 +37,7 @@ namespace VoodooShader
      * @par IID
      *      e6f31287-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE_(IObject)
+    VOODOO_INTERFACE_(IObject, {0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         /**
@@ -52,8 +47,7 @@ namespace VoodooShader
          *
          * @note This function is equivalent to COM's IUnknown::AddRef.
          */
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         /**
          * Release a reference from this object.
          *
@@ -61,8 +55,7 @@ namespace VoodooShader
          *
          * @note This function is equivalent to COM's IUnknown::Release.
          */
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
         /**
          * Performs type checking internally, then provides a pointer to this object with the desired interface if possible.
          *
@@ -74,21 +67,19 @@ namespace VoodooShader
          * @note If ppOut is nullptr and clsid is @em not a null Uuid, this will simply check if the Uuid is allowed without
          *      performing a cast.
          */
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
         /**
-         * Get the name of this object.
+         * Get a string identifying this object. This must follow the form given in @ref voodoo_spec_iobject_tostring.
          *
-         * @return The name.
+         * @return The identifier.
          */
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
         /**
          * Get the core this object was associated with.
          *
          * @return The core.
          */
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
     };
     /**
      * @}

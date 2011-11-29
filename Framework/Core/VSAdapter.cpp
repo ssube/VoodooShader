@@ -29,12 +29,12 @@ namespace VoodooShader
     VSAdapter::~VSAdapter()
     { }
 
-    uint32_t VOODOO_METHODCALLTYPE VSAdapter::AddRef() CONST
+    uint32_t VOODOO_METHODTYPE VSAdapter::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VOODOO_METHODCALLTYPE VSAdapter::Release() CONST
+    uint32_t VOODOO_METHODTYPE VSAdapter::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -45,7 +45,7 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+    bool VOODOO_METHODTYPE VSAdapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -74,50 +74,50 @@ namespace VoodooShader
         }
     }
 
-    String VOODOO_METHODCALLTYPE VSAdapter::ToString() CONST
+    String VOODOO_METHODTYPE VSAdapter::ToString() CONST
     {
         return L"VSAdapter()";
     }
 
-    ICore * VOODOO_METHODCALLTYPE VSAdapter::GetCore() CONST
+    ICore * VOODOO_METHODTYPE VSAdapter::GetCore() CONST
     {
         return m_Core;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::LoadPass(IPass * pPass)
+    bool VOODOO_METHODTYPE VSAdapter::LoadPass(IPass * pPass)
     {
         UNREFERENCED_PARAMETER(pPass);
 
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::UnloadPass(IPass * pPass)
+    bool VOODOO_METHODTYPE VSAdapter::UnloadPass(IPass * pPass)
     {
         UNREFERENCED_PARAMETER(pPass);
 
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::SetPass(IPass * pPass)
+    bool VOODOO_METHODTYPE VSAdapter::SetPass(IPass * pPass)
     {
         UNREFERENCED_PARAMETER(pPass);
 
         return true;
     }
 
-    IPass * VOODOO_METHODCALLTYPE VSAdapter::GetPass() CONST
+    IPass * VOODOO_METHODTYPE VSAdapter::GetPass() CONST
     {
         return nullptr;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::ResetPass(IPass * pPass)
+    bool VOODOO_METHODTYPE VSAdapter::ResetPass(IPass * pPass)
     {
         UNREFERENCED_PARAMETER(pPass);
 
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::SetTarget(const uint32_t index, ITexture * pTarget)
+    bool VOODOO_METHODTYPE VSAdapter::SetTarget(const uint32_t index, ITexture * pTarget)
     {
         UNREFERENCED_PARAMETER(index);
         UNREFERENCED_PARAMETER(pTarget);
@@ -125,14 +125,14 @@ namespace VoodooShader
         return true;
     }
 
-    ITexture * VOODOO_METHODCALLTYPE VSAdapter::GetTarget(const uint32_t index) CONST
+    ITexture * VOODOO_METHODTYPE VSAdapter::GetTarget(const uint32_t index) CONST
     {
         UNREFERENCED_PARAMETER(index);
 
         return nullptr;
     }
 
-    ITexture * VOODOO_METHODCALLTYPE VSAdapter::CreateTexture(const String & name, const TextureDesc * const pDesc)
+    ITexture * VOODOO_METHODTYPE VSAdapter::CreateTexture(const String & name, const TextureDesc * const pDesc)
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(pDesc);
@@ -140,7 +140,7 @@ namespace VoodooShader
         return nullptr;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::LoadTexture(IImage * const pFile, const TextureRegion * const pRegion, ITexture * const pTexture)
+    bool VOODOO_METHODTYPE VSAdapter::LoadTexture(IImage * const pFile, const TextureRegion * const pRegion, ITexture * const pTexture)
     {
         UNREFERENCED_PARAMETER(pFile);
         UNREFERENCED_PARAMETER(pRegion);
@@ -149,7 +149,7 @@ namespace VoodooShader
         return false;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::DrawGeometry(const uint32_t offset, const uint32_t count, void * const pData, const VertexFlags flags)
+    bool VOODOO_METHODTYPE VSAdapter::DrawGeometry(const uint32_t offset, const uint32_t count, void * const pData, const VertexFlags flags)
     {
         UNREFERENCED_PARAMETER(offset);
         UNREFERENCED_PARAMETER(count);
@@ -159,14 +159,14 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::ApplyParameter(IParameter * const pParam)
+    bool VOODOO_METHODTYPE VSAdapter::ApplyParameter(IParameter * const pParam)
     {
         UNREFERENCED_PARAMETER(pParam);
 
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::SetProperty(const wchar_t * name, Variant * const value)
+    bool VOODOO_METHODTYPE VSAdapter::SetProperty(const wchar_t * name, Variant * const value)
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);
@@ -174,7 +174,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::GetProperty(const wchar_t * name, Variant * const value) CONST
+    bool VOODOO_METHODTYPE VSAdapter::GetProperty(const wchar_t * name, Variant * const value) CONST
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);
@@ -182,7 +182,7 @@ namespace VoodooShader
         return false;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::ConnectTexture(IParameter * const pParam, ITexture * const pTexture)
+    bool VOODOO_METHODTYPE VSAdapter::ConnectTexture(IParameter * const pParam, ITexture * const pTexture)
     {
         UNREFERENCED_PARAMETER(pParam);
         UNREFERENCED_PARAMETER(pTexture);
@@ -190,7 +190,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSAdapter::HandleError(CGcontext const pContext, const uint32_t error)
+    bool VOODOO_METHODTYPE VSAdapter::HandleError(CGcontext const pContext, const uint32_t error)
     {
         UNREFERENCED_PARAMETER(pContext);
         UNREFERENCED_PARAMETER(error);

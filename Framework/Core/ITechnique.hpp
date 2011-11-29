@@ -27,11 +27,6 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
-    
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_IID(ITechnique) = {0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Contains a set of passes, designed to be used sequentially to create a shader effect. Typically, a single technique
@@ -45,17 +40,16 @@ namespace VoodooShader
      * @par IID
      *      e6f31295-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(ITechnique, IObject)
+    VOODOO_INTERFACE(ITechnique, IObject, {0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
 
-        VOODOO_METHODCALL_(String, GetName)() CONST PURE;
-
+        VOODOO_METHOD_(String, GetName)() CONST PURE;
         /**
          * Retrieve the technique's final target. This is the surface the technique expects the results of the final pass to
          * end up in. The technique may render to scratch textures, but the final result should go into this texture (not,
@@ -63,35 +57,31 @@ namespace VoodooShader
          *
          * @return A reference to the target texture
          */
-        VOODOO_METHODCALL_(ITexture *, GetTarget)() CONST PURE;
-
+        VOODOO_METHOD_(ITexture *, GetTarget)() CONST PURE;
         /* Retrieve the number of passes in this technique.
          *
          * @return The number of passes
          */
-        VOODOO_METHODCALL_(const uint32_t, GetPassCount)() CONST PURE;
-
+        VOODOO_METHOD_(const uint32_t, GetPassCount)() CONST PURE;
         /**
          * Retrieve a specific pass from this technique.
          *
          * @param index The pass number to retrieve.
          * @return A reference to the given pass.
          */
-        VOODOO_METHODCALL_(IPass *, GetPass)(_In_ const uint32_t index) CONST PURE;
-
+        VOODOO_METHOD_(IPass *, GetPass)(_In_ const uint32_t index) CONST PURE;
         /**
          * Retrieve the parent shader of this technique.
          *
          * @return The parent shader.
          */
-        VOODOO_METHODCALL_(IShader *, GetShader)() CONST PURE;
-
+        VOODOO_METHOD_(IShader *, GetShader)() CONST PURE;
         /**
          * Retrieve the underlying Cg technique.
          *
          * @return A pointer to the Cg technique.
          */
-        VOODOO_METHODCALL_(CGtechnique, GetCgTechnique)() CONST PURE;
+        VOODOO_METHOD_(CGtechnique, GetCgTechnique)() CONST PURE;
     };
     /**
      * @}

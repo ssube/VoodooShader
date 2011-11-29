@@ -27,11 +27,6 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
-    
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_IID(IPass) = {0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Each IPass contains a single set of programs, each operating on a different stage of the render pipeline.
@@ -45,46 +40,42 @@ namespace VoodooShader
      * @par IID
      *      e6f31293-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IPass, IObject)
+    VOODOO_INTERFACE(IPass, IObject, {0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
 
-        VOODOO_METHODCALL_(String, GetName)() CONST PURE;
-
+        VOODOO_METHOD_(String, GetName)() CONST PURE;
         /**
          * Retrieve the target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
          *
          * @return The target texture.
          */
-        VOODOO_METHODCALL_(ITexture *, GetTarget)() CONST PURE;
-
+        VOODOO_METHOD_(ITexture *, GetTarget)() CONST PURE;
         /**
          * Retrieve the parent technique of this pass.
          *
          * @return The parent technique.
          */
-        VOODOO_METHODCALL_(ITechnique *, GetTechnique)() CONST PURE;
-
+        VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST PURE;
         /**
          * Retrieve a specific program stage from this pass.
          *
          * @param stage The stage to retrieve.
          * @return The program corresponding to the desired stage.
          */
-        VOODOO_METHODCALL_(CGprogram, GetProgram)(_In_ const ProgramStage stage) CONST PURE;
-
+        VOODOO_METHOD_(CGprogram, GetProgram)(_In_ const ProgramStage stage) CONST PURE;
         /**
          * Retrieve the underlying Cg technique.
          *
          * @return A pointer to the Cg technique.
          */
-        VOODOO_METHODCALL_(CGpass, GetCgPass)() CONST PURE;
+        VOODOO_METHOD_(CGpass, GetCgPass)() CONST PURE;
     };
     /**
      * @}

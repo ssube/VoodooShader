@@ -22,34 +22,28 @@
 #include "IPass.hpp"
 
 namespace VoodooShader
-{
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_CLSID(VSPass) = {0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-    
+{    
     /**
      * @par CLSID
      *      e6f312a3-05af-11e1-9e05-005056c00008
      */
-    class VSPass :
-        public IPass
+    VOODOO_CLASS(VSPass, IPass, {0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         VSPass(_In_ ITechnique * pTechnique, _In_ CGpass pCgPass);
         virtual ~VSPass();
 
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
-        VOODOO_METHODCALL_(String, ToString)() CONST;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+        VOODOO_METHOD_(uint32_t, Release)() CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD_(String, ToString)() CONST;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHODCALL_(String, GetName)() CONST;
-        VOODOO_METHODCALL_(ITexture *, GetTarget)() CONST;
-        VOODOO_METHODCALL_(ITechnique *, GetTechnique)() CONST;
-        VOODOO_METHODCALL_(CGprogram, GetProgram)(_In_ const ProgramStage stage) CONST;
-        VOODOO_METHODCALL_(CGpass, GetCgPass)() CONST;
+        VOODOO_METHOD_(String, GetName)() CONST;
+        VOODOO_METHOD_(ITexture *, GetTarget)() CONST;
+        VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST;
+        VOODOO_METHOD_(CGprogram, GetProgram)(_In_ const ProgramStage stage) CONST;
+        VOODOO_METHOD_(CGpass, GetCgPass)() CONST;
 
     private:
         void Link();

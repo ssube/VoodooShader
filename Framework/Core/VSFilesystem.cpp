@@ -29,12 +29,12 @@ namespace VoodooShader
     VSFileSystem::~VSFileSystem()
     { }
 
-    uint32_t VOODOO_METHODCALLTYPE VSFileSystem::AddRef() CONST
+    uint32_t VOODOO_METHODTYPE VSFileSystem::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VOODOO_METHODCALLTYPE VSFileSystem::Release() CONST
+    uint32_t VOODOO_METHODTYPE VSFileSystem::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -45,7 +45,7 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODCALLTYPE VSFileSystem::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+    bool VOODOO_METHODTYPE VSFileSystem::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -74,31 +74,31 @@ namespace VoodooShader
         }
     }
 
-    String VOODOO_METHODCALLTYPE VSFileSystem::ToString() CONST
+    String VOODOO_METHODTYPE VSFileSystem::ToString() CONST
     {
         return L"VSFileSystem()";
     }
 
-    ICore * VOODOO_METHODCALLTYPE VSFileSystem::GetCore() CONST
+    ICore * VOODOO_METHODTYPE VSFileSystem::GetCore() CONST
     {
         return m_Core;
     }
 
-    bool VOODOO_METHODCALLTYPE VSFileSystem::AddPath(_In_ const String & dir)
+    bool VOODOO_METHODTYPE VSFileSystem::AddPath(_In_ const String & dir)
     {
         UNREFERENCED_PARAMETER(dir);
 
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSFileSystem::RemovePath(_In_ const String & dir)
+    bool VOODOO_METHODTYPE VSFileSystem::RemovePath(_In_ const String & dir)
     {
         UNREFERENCED_PARAMETER(dir);
 
         return true;
     }
 
-    IFile * VOODOO_METHODCALLTYPE VSFileSystem::FindFile(_In_ const String & name) CONST
+    IFile * VOODOO_METHODTYPE VSFileSystem::FindFile(_In_ const String & name) CONST
     {
         UNREFERENCED_PARAMETER(name);
 

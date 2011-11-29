@@ -65,7 +65,7 @@ namespace VoodooShader
         memset(m_Valuefloat, 0, sizeof(float) * 16);
     }
 
-    VOODOO_METHODCALLTYPE VSParameter::~VSParameter()
+    VOODOO_METHODTYPE VSParameter::~VSParameter()
     {
         m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Destroying parameter %s.", m_Name.GetData());
 
@@ -75,12 +75,12 @@ namespace VoodooShader
         }
     }
 
-    uint32_t VOODOO_METHODCALLTYPE VSParameter::AddRef() CONST
+    uint32_t VOODOO_METHODTYPE VSParameter::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VOODOO_METHODCALLTYPE VSParameter::Release() CONST
+    uint32_t VOODOO_METHODTYPE VSParameter::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -91,7 +91,7 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODCALLTYPE VSParameter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+    bool VOODOO_METHODTYPE VSParameter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -120,32 +120,32 @@ namespace VoodooShader
         }
     }
 
-    String VOODOO_METHODCALLTYPE VSParameter::ToString() CONST
+    String VOODOO_METHODTYPE VSParameter::ToString() CONST
     {
         return String::Format(L"VSParameter(%s)", m_Name.GetData());
     }
 
-    ICore * VOODOO_METHODCALLTYPE VSParameter::GetCore() CONST
+    ICore * VOODOO_METHODTYPE VSParameter::GetCore() CONST
     {
         return m_Core;
     }
 
-    String VOODOO_METHODCALLTYPE VSParameter::GetName() CONST
+    String VOODOO_METHODTYPE VSParameter::GetName() CONST
     {
         return m_Name;
     }
 
-    ParameterType VOODOO_METHODCALLTYPE VSParameter::GetType() CONST
+    ParameterType VOODOO_METHODTYPE VSParameter::GetType() CONST
     {
         return m_Type;
     }
 
-    bool VOODOO_METHODCALLTYPE VSParameter::IsVirtual() CONST
+    bool VOODOO_METHODTYPE VSParameter::IsVirtual() CONST
     {
         return m_Virtual;
     }
 
-    bool VOODOO_METHODCALLTYPE VSParameter::AttachParameter(IParameter * const pParam)
+    bool VOODOO_METHODTYPE VSParameter::AttachParameter(IParameter * const pParam)
     {
         if (!pParam)
         {
@@ -161,24 +161,24 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSParameter::DetachParameter()
+    bool VOODOO_METHODTYPE VSParameter::DetachParameter()
     {
         cgDisconnectParameter(m_Param);
 
         return true;
     }
 
-    const uint32_t VOODOO_METHODCALLTYPE VSParameter::GetComponents() CONST
+    const uint32_t VOODOO_METHODTYPE VSParameter::GetComponents() CONST
     {
         return Converter::ToComponents(m_Type);
     }
 
-    ITexture * VOODOO_METHODCALLTYPE VSParameter::GetTexture() CONST
+    ITexture * VOODOO_METHODTYPE VSParameter::GetTexture() CONST
     {
         return m_ValueTexture.get();
     }
 
-    void VOODOO_METHODCALLTYPE VSParameter::SetTexture(ITexture * pTexture)
+    void VOODOO_METHODTYPE VSParameter::SetTexture(ITexture * pTexture)
     {
         m_ValueTexture = pTexture;
 
@@ -188,12 +188,12 @@ namespace VoodooShader
         }
     }
 
-    _Ret_count_c_(16) float * const VOODOO_METHODCALLTYPE VSParameter::GetScalar() 
+    _Ret_count_c_(16) float * const VOODOO_METHODTYPE VSParameter::GetScalar() 
     {
         return m_Valuefloat;
     }
 
-    void VOODOO_METHODCALLTYPE VSParameter::SetScalar(const uint32_t count, float * pValues)
+    void VOODOO_METHODTYPE VSParameter::SetScalar(const uint32_t count, float * pValues)
     {
         if (pValues && count > 0)
         {
@@ -201,12 +201,12 @@ namespace VoodooShader
         }
     }
 
-    IShader * const VOODOO_METHODCALLTYPE VSParameter::GetShader() CONST
+    IShader * const VOODOO_METHODTYPE VSParameter::GetShader() CONST
     {
         return m_Shader;
     }
 
-    CGparameter VOODOO_METHODCALLTYPE VSParameter::GetCgParameter() CONST
+    CGparameter VOODOO_METHODTYPE VSParameter::GetCgParameter() CONST
     {
         return m_Param;
     }

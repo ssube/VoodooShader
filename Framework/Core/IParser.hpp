@@ -27,11 +27,6 @@ namespace VoodooShader
      * @addtogroup voodoo_framework_interfaces
      * @{
      */
-    
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_IID(IParser) = {0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 
     /**
      * Provides extensive variable handling and string parsing.
@@ -39,14 +34,14 @@ namespace VoodooShader
      * @par IID
      *      e6f31292-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IParser, IObject)
+    VOODOO_INTERFACE(IParser, IObject, {0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
 
         /**
          * Adds a variable to the internal dictionary.
@@ -55,22 +50,20 @@ namespace VoodooShader
          * @param value The variable's value (may contain variables, they will be resolved when this variable is used).
          * @param type Flags for this of variable.
          */
-        VOODOO_METHODCALL_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) PURE;
-
+        VOODOO_METHOD_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) PURE;
         /**
          * Removes a variable from the internal dictionary.
          *
          * @param name The variable name (may contain variables, they will be resolved immediately).
          */
-        VOODOO_METHODCALL_(void, Remove)(_In_ const String & name) PURE;
-
+        VOODOO_METHOD_(void, Remove)(_In_ const String & name) PURE;
         /**
          * Parses a string, replacing any variables with their values. Variables are resolved when found, so it is
          * possible to have variables within variables and trigger recursion.
          *
          * @sa @ref voodoo_vars for details on how variables work
          */
-        VOODOO_METHODCALL_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = PF_None) CONST PURE;
+        VOODOO_METHOD_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = PF_None) CONST PURE;
     };
 
     /**

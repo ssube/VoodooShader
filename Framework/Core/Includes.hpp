@@ -98,20 +98,25 @@
 #   define new DBG_NEW
 #endif
 
+#ifndef VOODOO_MACRO_PROTECT
+#   define VOODOO_MACRO_PROTECT(...) __VA_ARGS__
+#endif
+
 #ifndef VOODOO_IMPORT
 #   define VOODOO_API __declspec(dllexport)
 #else
 #   define VOODOO_API __declspec(dllimport)
 #endif
 
-#define VOODOO_CALLTYPE __stdcall
-#define VOODOO_METHODCALLTYPE VOODOO_CALLTYPE
+#define VOODOO_CALLTYPE     __stdcall
+#define VOODOO_METHODTYPE   VOODOO_CALLTYPE
 
-#define VOODOO_METHODCALL_(type, name) virtual DECLSPEC_NOTHROW type VOODOO_CALLTYPE name
-#define VOODOO_METHODCALL(name) VOODOO_METHODCALL_(bool, name)
+#define VOODOO_METHOD_(type, name)  virtual DECLSPEC_NOTHROW type VOODOO_CALLTYPE name
+#define VOODOO_METHOD(name)         VOODOO_METHOD_(bool, name)
 
-#define VOODOO_INTERFACE_(iname) class DECLSPEC_NOVTABLE iname
-#define VOODOO_INTERFACE(iname, ibase) VOODOO_INTERFACE_(iname) : public ibase
+#define VOODOO_INTERFACE_(iname, ...)       DEFINE_IID(iname) = __VA_ARGS__; class DECLSPEC_NOVTABLE iname
+#define VOODOO_INTERFACE(iname, ibase, ...) VOODOO_INTERFACE_(iname, __VA_ARGS__) : public ibase
+#define VOODOO_CLASS(iname, ibase, ...)     DEFINE_CLSID(iname) = __VA_ARGS__; class iname : public ibase
 
 #define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALLTYPE
 
@@ -364,9 +369,9 @@ namespace VoodooShader
     };
 
     /**
-     * Log message levels. These are set up to quickly filter based on various flags using binary logic.
-     * Flags are ORed together, with lower-priority flags having all higher-priority flags set. When
-     * checking a log call, the condition is:
+     * Log message levels. These are set up to quickly filter messages based on severity and source. Each message must have
+     * a severity and source bit set, which the logger tests against its internal filter, like so:
+
      * @code
      * LogLevel maskedLevel = level & storedLevel;
      * if ( (maskedLevel & LL_Origin) && (maskedLevel & LL_Severity) )

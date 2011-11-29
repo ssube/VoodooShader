@@ -29,25 +29,20 @@ namespace VoodooShader
      */
 
     /**
-     * @addtogroup voodoo_uuids
-     */
-    DEFINE_IID(ICore) = {0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-
-    /**
      * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
      * shaders, textures, plugins and variable/configuration mechanics.
      * 
      * @par IID
      *      e6f31289-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(ICore, IObject)
+    VOODOO_INTERFACE(ICore, IObject, {0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST PURE;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-        VOODOO_METHODCALL_(String, ToString)() CONST PURE;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD_(String, ToString)() CONST PURE;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         
         /**
          * Initializes the core, loading the config file and all required modules and creating objects.
@@ -55,8 +50,7 @@ namespace VoodooShader
          * @param pInitParams Parameters to be used during the initialization process.
          * @return Success of the initialization.
          */
-        VOODOO_METHODCALL(Initialize)(_In_ const InitParams * const pInitParams) PURE;
-
+        _Check_return_ VOODOO_METHOD(Initialize)(_In_ const InitParams * const pInitParams) PURE;
         /**
          * Cleans up all modules and objects, as much as possible. Invalidates all objects created by this core. This method 
          * provides an early cleanup (in cases where process-termination cleanup may cause crashes). If successful, this
@@ -67,50 +61,43 @@ namespace VoodooShader
          * @warning If this method fails, this core is in an undefined state and must be destroyed. All resources created
          *      from it are considered invalid.
          */
-        _Check_return_ VOODOO_METHODCALL(Reset)() PURE;
-
+        _Check_return_ VOODOO_METHOD(Reset)() PURE;
         /**
          * Retrieves this core's variable parser.
          *
          * @return A reference to the core's parser (always valid).
          */
-        VOODOO_METHODCALL_(IParser *, GetParser)() CONST PURE;
-
+        VOODOO_METHOD_(IParser *, GetParser)() CONST PURE;
         /**
          * Retrieves this core's IHookManager implementation.
          *
          * @return A reference to the hook manager instance (always valid).
          */
-        VOODOO_METHODCALL_(IHookManager *, GetHookManager)() CONST PURE;
-
+        VOODOO_METHOD_(IHookManager *, GetHookManager)() CONST PURE;
         /**
          * Retrieves this core's IFileSystem implementation.
          *
          * @return A shared pointer to the file system instance (always valid).
          */
-        VOODOO_METHODCALL_(IFileSystem *, GetFileSystem)() CONST PURE;
-
+        VOODOO_METHOD_(IFileSystem *, GetFileSystem)() CONST PURE;
         /**
          * Retrieve the IAdapter attached to this ICore.
          *
          * @return A reference to the adapter instance (always valid).
          */
-        VOODOO_METHODCALL_(IAdapter *, GetAdapter)() CONST PURE;
-
+        VOODOO_METHOD_(IAdapter *, GetAdapter)() CONST PURE;
         /**
          * Retrieve the ILogger attached to this ICore.
          *
          * @return A reference to the logger instance (always valid).
          */
-        VOODOO_METHODCALL_(ILogger *, GetLogger)() CONST PURE;
-
+        VOODOO_METHOD_(ILogger *, GetLogger)() CONST PURE;
         /**
          * Retrieve the Xml config document for this ICore.
          *
          * @return A reference to the config.
          */
-        VOODOO_METHODCALL_(XmlDocument, GetConfig)() CONST PURE;
-
+        VOODOO_METHOD_(XmlDocument, GetConfig)() CONST PURE;
         /**
          * Retrieve the Cg context associated with this ICore.
          *
@@ -119,8 +106,7 @@ namespace VoodooShader
          * @note Each Voodoo ICore is associated with a single Cg context. This context is used to create all
          *     @ref IShader shaders and most other graphics resources.
          */
-        VOODOO_METHODCALL_(CGcontext, GetCgContext)() CONST PURE;
-
+        VOODOO_METHOD_(CGcontext, GetCgContext)() CONST PURE;
         /**
          * Sets the Cg context attached to the core.
          *
@@ -128,8 +114,7 @@ namespace VoodooShader
          * @return False if a context is already bound, true if no context is bound or a context is being
          *     unbound.
          */
-        VOODOO_METHODCALL(SetCgContext)(_In_opt_ CGcontext const pContext) PURE;
-
+        VOODOO_METHOD(SetCgContext)(_In_opt_ CGcontext const pContext) PURE;
         /**
          * Loads and compiles an effect from file, using the current file system and search paths.
          *
@@ -137,8 +122,7 @@ namespace VoodooShader
          * @param ppArgs Optional arguments providing compiler directives, usually shader model specific
          *     definitions or preprocessor defines.
          */
-        VOODOO_METHODCALL_(IShader *, CreateShader)(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs) PURE;
-
+        VOODOO_METHOD_(IShader *, CreateShader)(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs) PURE;
         /**
          * Creates a global virtual parameter. This parameter exists in the Cg runtime, but is not a part of
          * any shader or program.
@@ -154,8 +138,7 @@ namespace VoodooShader
          * @note This function is the only way to create global parameters. You can then attach effect
          *     parameters to the global and any value changes will propagate down.
          */
-        VOODOO_METHODCALL_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterType type) PURE;
-
+        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterType type) PURE;
         /**
          * Registers a texture with this ICore.
          *
@@ -168,8 +151,7 @@ namespace VoodooShader
          * @note This method calls IAdapter::CreateTexture() to handle the actual creation, then registers
          *     the returned texture with the core and sets things up properly.
          */
-        VOODOO_METHODCALL_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc * const pDesc) PURE;
-
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc * const pDesc) PURE;
         /**
          * Retrieve a parameter by name.
          *
@@ -180,16 +162,14 @@ namespace VoodooShader
          * @note If a parameter with a matching name is found, the type will be checked. If Type is PT_Unknown, any type 
          *      parameter will be returned (only the name will be tested).
          */
-        VOODOO_METHODCALL_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterType type) CONST PURE;
-
+        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterType type) CONST PURE;
         /**
          * Retrieves a texture from the ICore's texture map by name.
          *
          * @param name The texture name.
          * @return A reference to the Texture if it exists, empty otherwise.
          */
-        VOODOO_METHODCALL_(ITexture *, GetTexture)(_In_ const String & name) CONST PURE;
-
+        VOODOO_METHOD_(ITexture *, GetTexture)(_In_ const String & name) CONST PURE;
         /**
          * Removes a virtual parameter from ICore. If all references are released, the parameter is
          * destroyed.
@@ -197,8 +177,7 @@ namespace VoodooShader
          * @param name The name of the parameter.
          * @return True if the parameter was found and removed, false if not found.
          */
-        VOODOO_METHODCALL(RemoveParameter)(_In_ const String & name) PURE;
-
+        VOODOO_METHOD(RemoveParameter)(_In_ const String & name) PURE;
         /**
          * Removes a texture from the ICore's texture map and unbinds it from any
          * specialized functions it may be attached to.
@@ -206,8 +185,7 @@ namespace VoodooShader
          * @param name The name of texture to be removed.
          * @return True if the texture was found and removed, false if not.
          */
-        VOODOO_METHODCALL(RemoveTexture)(_In_ const String & name) PURE;
-
+        VOODOO_METHOD(RemoveTexture)(_In_ const String & name) PURE;
         /**
          * Retrieves a texture from the ICore's texture map by stage. Each specialized texture stage
          * may have a single texture bound to it for use by the shader linker.
@@ -217,15 +195,14 @@ namespace VoodooShader
          *
          * @sa To bind a texture to one of the special functions, use ICore::SetStageTexture().
          */
-        VOODOO_METHODCALL_(ITexture *, GetStageTexture)(_In_ const TextureStage stage) CONST PURE;
-
+        VOODOO_METHOD_(ITexture *, GetStageTexture)(_In_ const TextureStage stage) CONST PURE;
         /**
          * Binds a texture to a specialized stage for the shader linker.
          *
          * @param stage The texture stage to set.
          * @param pTexture The texture to bind.
          */
-        VOODOO_METHODCALL_(void, SetStageTexture)(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture) PURE;
+        VOODOO_METHOD_(void, SetStageTexture)(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture) PURE;
     };
     /**
      * @}

@@ -22,32 +22,26 @@
 #include "IParser.hpp"
 
 namespace VoodooShader
-{
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    DEFINE_CLSID(VSParser) = {0xA2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-    
+{    
     /**
      * @par CLSID
      *      e6f312a2-05af-11e1-9e05-005056c00008
      */
-    class VSParser :
-        public IParser
+    VOODOO_CLASS(VSParser, IParser, {0xA2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         VSParser(_In_ ICore * const pCore) ;
         virtual ~VSParser() ;
 
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
-        VOODOO_METHODCALL_(String, ToString)() CONST;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+        VOODOO_METHOD_(uint32_t, Release)() CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD_(String, ToString)() CONST;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHODCALL_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) ;
-        VOODOO_METHODCALL_(void, Remove)(_In_ const String & name) ;
-        VOODOO_METHODCALL_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = PF_None) CONST;
+        VOODOO_METHOD_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) ;
+        VOODOO_METHOD_(void, Remove)(_In_ const String & name) ;
+        VOODOO_METHOD_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = PF_None) CONST;
 
         static const uint32_t VarMaxDepth    = 8;
         static const wchar_t VarDelimPre    = L'$';

@@ -22,38 +22,31 @@
 #include "IShader.hpp"
 
 namespace VoodooShader
-{
-    /**
-     * @addtogroup voodoo_uuids 
-     */
-    /* VSShader: e6f312a4-05af-11e1-9e05-005056c00008 */
-    DEFINE_CLSID(VSShader) = {0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-    
+{    
     /**
      * @par CLSID
      *      e6f312a4-05af-11e1-9e05-005056c00008
      */
-    class VSShader :
-        public IShader
+    VOODOO_CLASS(VSShader, IShader, {0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
         virtual ~VSShader();
 
-        VOODOO_METHODCALL_(uint32_t, AddRef)() CONST;
-        VOODOO_METHODCALL_(uint32_t, Release)() CONST;
-        VOODOO_METHODCALL(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
-        VOODOO_METHODCALL_(String, ToString)() CONST;
-        VOODOO_METHODCALL_(ICore *, GetCore)() CONST;
+        VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+        VOODOO_METHOD_(uint32_t, Release)() CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD_(String, ToString)() CONST;
+        VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHODCALL_(String, GetName)() CONST;
-        VOODOO_METHODCALL_(const uint32_t, GetTechniqueCount)() CONST;
-        VOODOO_METHODCALL_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
-        VOODOO_METHODCALL_(ITechnique *, GetDefaultTechnique)() CONST;
-        VOODOO_METHODCALL(SetDefaultTechnique)(_In_ ITechnique * const pTechnique) ;
-        VOODOO_METHODCALL_(const uint32_t, GetParameterCount)() CONST;
-        VOODOO_METHODCALL_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
-        VOODOO_METHODCALL_(CGeffect, GetCgEffect)() CONST;
+        VOODOO_METHOD_(String, GetName)() CONST;
+        VOODOO_METHOD_(const uint32_t, GetTechniqueCount)() CONST;
+        VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
+        VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST;
+        VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique) ;
+        VOODOO_METHOD_(const uint32_t, GetParameterCount)() CONST;
+        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
+        VOODOO_METHOD_(CGeffect, GetCgEffect)() CONST;
 
     private:
         /**

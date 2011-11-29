@@ -29,12 +29,12 @@ namespace VoodooShader
     VSHookManager::~VSHookManager()
     { }
 
-    uint32_t VOODOO_METHODCALLTYPE VSHookManager::AddRef() CONST
+    uint32_t VOODOO_METHODTYPE VSHookManager::AddRef() CONST
     {
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VOODOO_METHODCALLTYPE VSHookManager::Release() CONST
+    uint32_t VOODOO_METHODTYPE VSHookManager::Release() CONST
     {
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -45,7 +45,7 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODCALLTYPE VSHookManager::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+    bool VOODOO_METHODTYPE VSHookManager::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         if (!ppOut)
         {
@@ -74,17 +74,17 @@ namespace VoodooShader
         }
     }
 
-    String VOODOO_METHODCALLTYPE VSHookManager::ToString() CONST
+    String VOODOO_METHODTYPE VSHookManager::ToString() CONST
     {
         return L"VSHookManager()";
     }
 
-    ICore * VOODOO_METHODCALLTYPE VSHookManager::GetCore() CONST
+    ICore * VOODOO_METHODTYPE VSHookManager::GetCore() CONST
     {
         return m_Core;
     }
 
-    bool VOODOO_METHODCALLTYPE VSHookManager::Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest)
+    bool VOODOO_METHODTYPE VSHookManager::Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest)
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(pSrc);
@@ -93,14 +93,14 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSHookManager::Remove(_In_ const String & name)
+    bool VOODOO_METHODTYPE VSHookManager::Remove(_In_ const String & name)
     {
         UNREFERENCED_PARAMETER(name);
 
         return true;
     }
 
-    bool VOODOO_METHODCALLTYPE VSHookManager::RemoveAll()
+    bool VOODOO_METHODTYPE VSHookManager::RemoveAll()
     {
         return true;
     }
