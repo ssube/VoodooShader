@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{093207D3-D
 		LICENSE = LICENSE
 		README.md = README.md
 		voodoo_uuids.md = voodoo_uuids.md
+		VoodooPaths.props = VoodooPaths.props
 		VoodooProperties.props = VoodooProperties.props
 	EndProjectSection
 EndProject
@@ -94,6 +95,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{6570AF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XML", "XML", "{487C384B-0E7D-4E24-A99F-8E3C8E3EDA4A}"
 	ProjectSection(SolutionItems) = preProject
+		Server\Xml\ConfigManifest.xsd = Server\Xml\ConfigManifest.xsd
 		Server\Xml\PackageManifest.xsd = Server\Xml\PackageManifest.xsd
 		Server\Xml\RemoteManifest.xsd = Server\Xml\RemoteManifest.xsd
 	EndProjectSection
@@ -384,9 +386,9 @@ Global
 		{23A55269-F7A0-48AF-9392-6A3CA217BE37} = {487C384B-0E7D-4E24-A99F-8E3C8E3EDA4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

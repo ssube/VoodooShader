@@ -20,10 +20,11 @@ namespace VoodooGUI
         [DllImport("kernel32.dll")]
         private static extern bool FreeLibrary(IntPtr hModule);
 
-        private delegate bool InstallGlobalHook();
-        private delegate bool RemoveGlobalHook();
+        private delegate IntPtr InstallGlobalHook();
+        private delegate void RemoveGlobalHook(IntPtr hHook);
 
         private IntPtr m_NativeModule;
+        private IntPtr m_GlobalHook;
 
         private InstallGlobalHook m_InstallFunc;
         private RemoveGlobalHook m_RemoveFunc;
@@ -37,6 +38,7 @@ namespace VoodooGUI
             {
                 m_InstallFunc = (InstallGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "InstallGlobalHook"), typeof(InstallGlobalHook));
                 m_RemoveFunc = (RemoveGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "RemoveGlobalHook"), typeof(RemoveGlobalHook));
+                Menu_Hook_Enable(null, null);
             }
         }
 
@@ -62,12 +64,10 @@ namespace VoodooGUI
 
         private void Menu_Hook_Add(object sender, EventArgs e)
         {
-            m_InstallFunc();
         }
 
         private void Menu_Hook_Remove(object sender, EventArgs e)
         {
-            m_RemoveFunc();
         }
 
         private void SyncHookList()
@@ -105,6 +105,29 @@ namespace VoodooGUI
         {
             Show();
             WindowState = FormWindowState.Normal;
+        }
+
+        private void Menu_Hook_Enable(object sender, EventArgs e)
+        {
+            if (m_InstallFunc != null)
+            {
+                m_GlobalHook = m_InstallFunc();
+                if (m_GlobalHook != IntPtr.Zero)
+                {
+                    cMenu_Hook_Off.Visible = false;
+                    cMenu_Hook_On.Visible = true;
+                }
+            }
+        }
+
+        private void Menu_Hook_Disable(object sender, EventArgs e)
+        {
+            if (m_RemoveFunc != null)
+            {
+                m_RemoveFunc(m_GlobalHook);
+                cMenu_Hook_Off.Visible = true;
+                cMenu_Hook_On.Visible = false;
+            }
         }
     }
 }

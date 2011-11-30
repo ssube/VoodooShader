@@ -550,6 +550,12 @@ namespace VoodooShader
     typedef Vector2<float>      Float2;
     typedef Vector3<float>      Float3;
     typedef Vector4<float>      Float4;
+    typedef Vector2<int8_t>     Byte2;
+    typedef Vector3<int8_t>     Byte3;
+    typedef Vector4<int8_t>     Byte4;
+    typedef Vector2<uint8_t>    UByte2;
+    typedef Vector3<uint8_t>    UByte3;
+    typedef Vector4<uint8_t>    UByte4;
     typedef Vector2<int32_t>    Int2;
     typedef Vector3<int32_t>    Int3;
     typedef Vector4<int32_t>    Int4;
@@ -583,9 +589,9 @@ namespace VoodooShader
      */
     struct VertexStruct
     {
-        Float4 Position;
-        Float4 Color;
-        Float4 TexCoord[2];
+        Float4  Position;
+        UByte4  Color;
+        Float4  TexCoord[2];
     };
 
     /**

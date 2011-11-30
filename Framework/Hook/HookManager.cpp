@@ -18,10 +18,15 @@
  *   peachykeen@voodooshader.com
  */
 
-#include <algorithm>
-
 #include "HookManager.hpp"
 #include "Hook_Version.hpp"
+
+#pragma warning(push)
+#pragma warning(disable: 4005)
+#include <ntstatus.h>
+#pragma warning(pop)
+
+#include <algorithm>
 
 namespace VoodooShader
 {
@@ -172,7 +177,7 @@ namespace VoodooShader
             TRACED_HOOK_HANDLE hookHandle = new HOOK_TRACE_INFO();
             DWORD result = LhInstallHook(pSrc, pDest, nullptr, hookHandle);
 
-            if (result && hookHandle)
+            if (result == STATUS_NOT_SUPPORTED || result == STATUS_NO_MEMORY || result == STATUS_INSUFFICIENT_RESOURCES)
             {
                 m_Core->GetLogger()->Log
                 (

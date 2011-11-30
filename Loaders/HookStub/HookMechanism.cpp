@@ -24,7 +24,6 @@
 #include <stdio.h>
 
 HINSTANCE gHookLoader = nullptr;
-HHOOK gGlobalHook = nullptr;
 unsigned int gLoadOnce = 1;
 HMODULE gFullLoader;
 TCHAR gFilePath[MAX_PATH];
@@ -80,32 +79,30 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
     }
 }
 
-bool WINAPI InstallGlobalHook()
+HHOOK WINAPI InstallGlobalHook()
 {
-    if (!gGlobalHook)
-    {
-        gGlobalHook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
-        if (!gGlobalHook)
-        {
-            DWORD error = GetLastError();
+    HHOOK hook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
 
-            TCHAR buffer[1024];
-            if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER, 0, error, LANG_USER_DEFAULT, buffer, 1024, NULL) > 0)
-            {
-                MessageBox(NULL, buffer, TEXT("Voodoo Stub Error (IGH)"), MB_OK);
-            }
-            return false;
+    if (!hook)
+    {
+        DWORD error = GetLastError();
+
+        TCHAR buffer[1024];
+        if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER, 0, error, LANG_USER_DEFAULT, buffer, 1024, NULL) > 0)
+        {
+            MessageBox(NULL, buffer, TEXT("Voodoo Stub Error (IGH)"), MB_OK);
         }
+        return false;
     }
 
-    return true;
+    return hook;
 }
 
-bool WINAPI RemoveGlobalHook()
+void WINAPI RemoveGlobalHook(HHOOK hook)
 {
-    if (gGlobalHook)
+    if (hook)
     {
-        BOOL success = UnhookWindowsHookEx(gGlobalHook);
+        BOOL success = UnhookWindowsHookEx(hook);
         if (success == 0)
         {
             DWORD error = GetLastError();
@@ -115,12 +112,8 @@ bool WINAPI RemoveGlobalHook()
             {
                 MessageBox(NULL, buffer, TEXT("Voodoo Stub Error (RGH)"), MB_OK);
             }
-
-            return false;
         }
     }
-
-    return true;
 }
 
 #define MAX_KEY_LENGTH 255

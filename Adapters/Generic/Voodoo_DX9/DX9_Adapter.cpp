@@ -659,9 +659,9 @@ namespace VoodooShader
             D3DVERTEXELEMENT9 vertDeclElems[] =
             {
                 { 0,  0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-                { 0, 16, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
-                { 0, 32, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
-                { 0, 48, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+                { 0, 16, D3DDECLTYPE_UBYTE4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
+                { 0, 20, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+                { 0, 36, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
                 D3DDECL_END()
             };
 
@@ -697,13 +697,13 @@ namespace VoodooShader
             // Create fullscreen vbuffer
             VertexStruct fsVertData[6] =
             {
-            //   POSITION                    COLOR                      TEXCOORD[0]               TEXCOORD[1]
-                {{-0.5f,    fy, 0.5f, 0.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{-0.5f, -0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{   fx, -0.5f, 0.5f, 0.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{-0.5f,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{   fx, -0.5f, 0.5f, 0.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{   fx,    fy, 0.5f, 0.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+            //    POSITION                    COLOR                  TEXCOORD[0]               TEXCOORD[1]
+                {{-0.5f,    fy, 0.5f, 1.0f}, {255, 255,   0,   0}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{-0.5f, -0.5f, 0.5f, 1.0f}, {255,   0, 255,   0}, {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx, -0.5f, 0.5f, 1.0f}, {255,   0,   0, 255}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{-0.5f,    fy, 0.5f, 1.0f}, {255, 255,   0, 255}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx, -0.5f, 0.5f, 1.0f}, {255,   0,   0, 255}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{   fx,    fy, 0.5f, 1.0f}, {255, 255,   0, 255}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
             };
 
             errors = m_Device->CreateVertexBuffer

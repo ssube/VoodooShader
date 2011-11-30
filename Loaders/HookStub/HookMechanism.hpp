@@ -27,8 +27,8 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
 
 /* Public functions */
-bool WINAPI InstallGlobalHook();
-bool WINAPI RemoveGlobalHook();
+HHOOK WINAPI InstallGlobalHook();
+void WINAPI RemoveGlobalHook();
 
 /* Internal functions */
 bool WINAPI SearchHooks(_In_z_ TCHAR * moduleName);

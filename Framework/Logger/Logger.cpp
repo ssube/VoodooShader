@@ -178,11 +178,11 @@ namespace VoodooShader
 
                 wstringstream logMsg;
 
-                logMsg << "<?xml version='1.0'?>\n<VoodooLog ";
+                logMsg << L"<?xml version='1.0'?>\n<VoodooLog ";
                 logMsg << this->LogDate().GetData();
                 logMsg << this->LogTime().GetData();
                 logMsg << this->LogTicks().GetData();
-                logMsg << ">\n";
+                logMsg << L">\n";
 
 #ifdef _DEBUG
                 std::wcout << logMsg.str();
@@ -230,15 +230,17 @@ namespace VoodooShader
             wstringstream logMsg;
 
             logMsg <<
-                "    <Module uuid=\"" << pVersion->LibID << "\" " <<
-                " major=\"" << pVersion->Major << "\" " <<
-                " minor=\"" << pVersion->Minor << "\" " <<
-                " patch=\"" << pVersion->Patch << "\" " <<
-                " build=\""   << pVersion->Build << "\" " <<
-                " debug=\"" << pVersion->Debug << "\" ";
-            if (pVersion->Name) logMsg << " name=\"" << pVersion->Name << "\" ";
-            if (pVersion->RevID) logMsg << " revid=\"" << pVersion->RevID << "\" ";
-            logMsg << " />\n";
+                L"    <Module uuid=\"" << pVersion->LibID << L"\" " <<
+                L" major=\"" << pVersion->Major << L"\" " <<
+                L" minor=\"" << pVersion->Minor << L"\" " <<
+                L" patch=\"" << pVersion->Patch << L"\" " <<
+                L" build=\""   << pVersion->Build << L"\" " <<
+                L" debug=\"" << pVersion->Debug << L"\" ";
+
+            if (pVersion->Name) logMsg << L" name=\"" << pVersion->Name << L"\" ";
+            if (pVersion->RevID) logMsg << L" revid=\"" << pVersion->RevID << L"\" ";
+
+            logMsg << L" />\n";
 
 #ifdef VOODOO_DEBUG_CONSOLE
             cout << logMsg.str();
