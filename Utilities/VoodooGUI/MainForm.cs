@@ -125,8 +125,17 @@ namespace VoodooGUI
             if (m_RemoveFunc != null)
             {
                 m_RemoveFunc(m_GlobalHook);
+                m_GlobalHook = IntPtr.Zero;
                 cMenu_Hook_Off.Visible = true;
                 cMenu_Hook_On.Visible = false;
+            }
+        }
+
+        private void MainForm_Close(object sender, FormClosedEventArgs e)
+        {
+            if (m_GlobalHook != IntPtr.Zero)
+            {
+                Menu_Hook_Disable(null, null);
             }
         }
     }

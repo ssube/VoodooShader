@@ -70,5 +70,22 @@ namespace VoodooShader
 
             ITextureRef m_RenderTarget[4];
         };
+
+        /**
+         * @page voodoo_dx9 Voodoo/_DX9 Info
+         *
+         * @section voodoo_dx9_props DX9Adapter Properties
+         *
+         * @par SdkVersion : UT_UInt32
+         *      Actual SDK version for use constructing the devices, applies to DX9 and DX8.9 devices.
+         *
+         * @par IDirect3D8 : UT_PVoid
+         *      Original D3D8 object. Will be used to create a CVoodoo3D8 wrapper, which will be returned in the variant.
+         *      This is used to provide the initial wrapper for the DX8.9 system.
+         *
+         * @par IDirect3D9 : UT_PVoid
+         *      Original D3D9 object. Will be used to create a CVoodoo3D9 wrapper, which will be returned in the variant.
+         *      This is used to provide the initial wrapper for the DX9 system.
+         */
     };
 }
