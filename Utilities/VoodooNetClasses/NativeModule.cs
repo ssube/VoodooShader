@@ -53,21 +53,21 @@ namespace VoodooNetClasses
     };
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    delegate IntPtr NativeModule_VersionFunc();
+    delegate IntPtr NativeModule_ModuleVersionFunc();
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    delegate UInt32 NativeModule_CountFunc();
+    delegate UInt32 NativeModule_ModuleCountFunc();
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    delegate IntPtr NativeModule_InfoFunc(UInt32 index, out Guid clsid);
+    delegate IntPtr NativeModule_ModuleInfoFunc(UInt32 index, out Guid clsid);
 
     public class NativeModule
     {
         private IntPtr m_Module;
 
-        private NativeModule_VersionFunc m_VersionFunc;
-        private NativeModule_CountFunc m_CountFunc;
-        private NativeModule_InfoFunc m_InfoFunc;
+        private NativeModule_ModuleVersionFunc m_ModuleVersionFunc;
+        private NativeModule_ModuleCountFunc m_ModuleCountFunc;
+        private NativeModule_ModuleInfoFunc m_ModuleInfoFunc;
 
         private ModuleVersion m_Version;
         private UInt32 m_Count;
@@ -97,30 +97,30 @@ namespace VoodooNetClasses
             }
 
             IntPtr fptr = GetProcAddress(m_Module, "ModuleVersion");
-            m_VersionFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_VersionFunc)) as NativeModule_VersionFunc;
+            m_ModuleVersionFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_ModuleVersionFunc)) as NativeModule_ModuleVersionFunc;
 
             fptr = GetProcAddress(m_Module, "ClassCount");
-            m_CountFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_CountFunc)) as NativeModule_CountFunc;
+            m_ModuleCountFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_ModuleCountFunc)) as NativeModule_ModuleCountFunc;
 
             fptr = GetProcAddress(m_Module, "ClassInfo");
-            m_InfoFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_InfoFunc)) as NativeModule_InfoFunc;
+            m_ModuleInfoFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_ModuleInfoFunc)) as NativeModule_ModuleInfoFunc;
 
-            if (m_VersionFunc == null || m_CountFunc == null || m_InfoFunc == null)
+            if (m_ModuleVersionFunc == null || m_ModuleCountFunc == null || m_ModuleInfoFunc == null)
             {
                 throw new Exception("Not a native Voodoo module.");
             }
 
-            IntPtr versionptr = m_VersionFunc();
+            IntPtr versionptr = m_ModuleVersionFunc();
             m_Version = (ModuleVersion)Marshal.PtrToStructure(versionptr, typeof(ModuleVersion));
 
-            m_Count = m_CountFunc();
+            m_Count = m_ModuleCountFunc();
 
             m_Classes = new Dictionary<UInt32, ClassInfo>();
 
             for (UInt32 i = 0; i < m_Count; ++i)
             {
                 Guid tclsid = Guid.Empty;
-                IntPtr nameptr = m_InfoFunc(i, out tclsid);
+                IntPtr nameptr = m_ModuleInfoFunc(i, out tclsid);
                 if (nameptr != null)
                 {
                     String tname = Marshal.PtrToStringUni(nameptr);

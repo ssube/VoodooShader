@@ -23,18 +23,10 @@ namespace VoodooGUI
         private delegate bool InstallGlobalHook();
         private delegate bool RemoveGlobalHook();
 
-        private delegate bool AddModuleHook([MarshalAs(UnmanagedType.LPWStr)] String name);
-        private delegate bool RemoveModuleHook([MarshalAs(UnmanagedType.LPWStr)] String name);
-        private delegate bool RemoveAllModuleHooks();
-
         private IntPtr m_NativeModule;
 
         private InstallGlobalHook m_InstallFunc;
         private RemoveGlobalHook m_RemoveFunc;
-
-        private AddModuleHook m_AddHook;
-        private RemoveModuleHook m_RemoveHook;
-        private RemoveAllModuleHooks m_RemoveAllHooks;
 
         public MainForm()
         {
@@ -45,10 +37,6 @@ namespace VoodooGUI
             {
                 m_InstallFunc = (InstallGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "InstallGlobalHook"), typeof(InstallGlobalHook));
                 m_RemoveFunc = (RemoveGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "RemoveGlobalHook"), typeof(RemoveGlobalHook));
-
-                m_AddHook = (AddModuleHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "AddModule"), typeof(AddModuleHook));
-                m_RemoveHook = (RemoveModuleHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "RemoveModule"), typeof(RemoveModuleHook));
-                m_RemoveAllHooks = (RemoveAllModuleHooks)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "RemoveAllModules"), typeof(RemoveAllModuleHooks));
             }
         }
 
@@ -84,15 +72,13 @@ namespace VoodooGUI
 
         private void SyncHookList()
         {
-            m_RemoveAllHooks();
-
             foreach (DataGridViewRow row in cHook_Table.Rows)
             {
                 bool active = (bool)row.Cells[0].Value;
                 if (active)
                 {
                     String target = (String)row.Cells[3].Value;
-                    m_AddHook(target);
+                    //m_AddHook(target);
                 }
             }
         }

@@ -31,19 +31,21 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\VoodooProperties.props" />
+    <Import Project="..\..\VoodooPaths.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\VoodooProperties.props" />
+    <Import Project="..\..\VoodooPaths.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Code\boost;$(SolutionDir)\Framework\Core;$(SolutionDir)\dependencies\EasyHook_2.6\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\dependencies\EasyHook_2.6\lib;$(SolutionDir)\bin\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(BoostInclude);$(EasyHookInclude);$(CoreInclude);$(IncludePath)</IncludePath>
+    <LibraryPath>$(EasyHookLib);$(CoreLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\Code\boost;$(SolutionDir)\Framework\Core;$(SolutionDir)\dependencies\EasyHook_2.6\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\dependencies\EasyHook_2.6\lib;$(SolutionDir)\bin\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(BoostInclude);$(EasyHookInclude);$(CoreInclude);$(IncludePath)</IncludePath>
+    <LibraryPath>$(EasyHookLib);$(CoreLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Link>

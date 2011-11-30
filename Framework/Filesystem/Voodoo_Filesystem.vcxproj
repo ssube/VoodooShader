@@ -31,19 +31,21 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\VoodooProperties.props" />
+    <Import Project="..\..\VoodooPaths.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\VoodooProperties.props" />
+    <Import Project="..\..\VoodooPaths.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(IncludePath);D:\Code\boost;$(SolutionDir)\dependencies\pugixml_1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)\dependencies\pugixml_1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib\unicode;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
+    <IncludePath>$(BoostInclude);$(DevILInclude);$(PugiXmlInclude);$(CoreInclude);$(IncludePath)</IncludePath>
+    <LibraryPath>$(PugiXmlLib);$(DevILLib);$(CoreLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(IncludePath);D:\Code\boost;$(SolutionDir)\dependencies\pugixml_1.0\include\;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include;$(SolutionDir)\Framework\Core</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)\dependencies\pugixml_1.0\bin\x32;$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib\unicode;$(SolutionDir)\bin\$(Configuration)\</LibraryPath>
+    <IncludePath>$(BoostInclude);$(DevILInclude);$(PugiXmlInclude);$(CoreInclude);$(IncludePath)</IncludePath>
+    <LibraryPath>$(PugiXmlLib);$(DevILLib);$(CoreLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Link>
