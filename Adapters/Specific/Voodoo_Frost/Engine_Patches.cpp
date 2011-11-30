@@ -1,17 +1,21 @@
-/**
- * \ This file is part of the Voodoo Shader Framework, a comprehensive shader
- * support library. Copyright (c) 2010-2011 by Sean Sube This program is free software;
- * you can redistribute it and/or modify it under the terms of the GNU General
- * Public License as published by the Free Software Foundation;
- * either version 2 of the License, or (at your option) any later version. This
- * program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE. See the GNU General Public License for more details. You
- * should have received a copy of the GNU General Public License along with this program;
- * if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth
- * Floor, Boston, MA 02110-1301 US Support and more information may be found at
- * http://www.voodooshader.com, or by contacting the developer at
- * peachykeen@voodooshader.com \ 
+/*
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at
+ *   peachykeen@voodooshader.com
  */
 #include "Frost_Module.hpp"
 
@@ -19,36 +23,39 @@ using namespace VoodooShader;
 
 /**
  * Applies a variation of the popular NWN camera hack to the engine in-memory. This technique is simpler to manipulate
- * and customize than the traditional byte-patcher. @todo Update this to use customizable settings when they're
- * implemented.
+ * and customize than the traditional byte-patcher.
+ * 
+ * @todo Update this to use customizable settings when they're implemented.
  */
 void CameraHack(void)
 {
- VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Applying camera hack...");
+    ILoggerRef logger = gpVoodooCore->GetLogger();
 
- float maxDist = 120.0f;
- float minDist = -0.2f;
- float angle = 1000.0f;
- DWORD oldProtect, finalProtect;
- bool lockStatus = VirtualProtect((PVOID) 0x004A9000, 0x1000, PAGE_EXECUTE_READWRITE, &oldProtect);
+    logger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Applying camera hack...");
 
- if (lockStatus != 0)
- {
-  memcpy((PVOID) 0x004A93ED, &minDist, sizeof(float));
-  memcpy((PVOID) 0x004A93F7, &maxDist, sizeof(float));
-  memcpy((PVOID) 0x004A940B, &angle, sizeof(float));
-  memcpy((PVOID) 0x004A9695, &maxDist, sizeof(float));
-  memcpy((PVOID) 0x004A968B, &minDist, sizeof(float));
+    float maxDist   = 120.0f;
+    float minDist   = -0.2f;
+    float angle     = 1000.0f;
 
-  VirtualProtect((PVOID) 0x004A9000, 0x1000, oldProtect, &finalProtect);
+    DWORD oldProtect, finalProtect;
+    BOOL lockStatus = VirtualProtect((PVOID) 0x004A9000, 0x1000, PAGE_EXECUTE_READWRITE, &oldProtect);
 
-  VoodooLogger->Log(LL_Info, VOODOO_FROST_NAME, "Camera hack successfully applied.");
- }
- else
- {
+    if (lockStatus != 0)
+    {
+        memcpy((PVOID) 0x004A93ED, &minDist, sizeof(float));
+        memcpy((PVOID) 0x004A93F7, &maxDist, sizeof(float));
+        memcpy((PVOID) 0x004A940B, &angle,   sizeof(float));
+        memcpy((PVOID) 0x004A968B, &minDist, sizeof(float));
+        memcpy((PVOID) 0x004A9695, &maxDist, sizeof(float));
 
-  DWORD error = GetLastError();
+        VirtualProtect((PVOID) 0x004A9000, 0x1000, oldProtect, &finalProtect);
 
-  VoodooLogger->Log(LL_Error, VOODOO_FROST_NAME, "Camera hack failed with code %u.", error);
- }
+        logger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Camera hack successfully applied.");
+    }
+    else
+    {
+        DWORD error = GetLastError();
+
+        logger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Camera hack failed with code %u.", error);
+    }
 }

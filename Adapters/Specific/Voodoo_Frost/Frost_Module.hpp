@@ -1,7 +1,23 @@
-
-
-#ifndef VOODOO_NWS_MODULE_HPP
-#define VOODOO_NWS_MODULE_HPP
+/*
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at
+ *   peachykeen@voodooshader.com
+ */
+#pragma once
 
 #define VOODOO_IMPORT
 #include "VoodooFramework.hpp"
@@ -17,23 +33,20 @@
 
 namespace VoodooShader
 {
- namespace Frost
-{
- class Adapter;
+    namespace Frost
+    {
+        class FrostAdapter;
+        class FrostTexture;
 
- Version API_ModuleVersion(void);
-
- int API_ClassCount(void);
-
- const char *API_ClassInfo(_In_ int number);
-
- IObject *API_ClassCreate(_In_ int number, _In_ ICore *core);
+        Version API_ModuleVersion(void);
+        uint32_t API_ClassCount(void);
+        const wchar_t * API_ClassInfo(_In_ uint32_t index, Uuid & clsid);
+        IObject * API_ClassCreate(_In_ uint32_t index, _In_ ICore * pCore);
+    }
 }
-}
-extern VoodooShader::ICore * VoodooCore;
-extern VoodooShader::ILogger* VoodooLogger;
-extern VoodooShader::Frost::Adapter * VoodooFrost;
-extern VoodooShader::IShader* TestShader;
+
+extern VoodooShader::ICore * gpVoodooCore;
+extern VoodooShader::IShader * gpTestShader;
 
 extern GLint gDepthTexture;
 extern GLint gThisFrame;
@@ -42,4 +55,3 @@ extern GLint gLastShader;
 extern GLint gLastPass;
 extern GLsizei gViewWidth;
 extern GLsizei gViewHeight;
-#endif /* VOODOO_NWS_MODULE_HPP */
