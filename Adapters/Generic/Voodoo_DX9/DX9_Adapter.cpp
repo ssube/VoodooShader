@@ -212,6 +212,9 @@ namespace VoodooShader
         {
             ILoggerRef logger = m_Core->GetLogger();
 
+            HRESULT hr = m_Device->CreateStateBlock(D3DSBT_ALL, &m_PassState);
+            hr = m_CleanState->Apply();
+
             if (!pPass)
             {
                 logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Unable to set null pass.");
@@ -266,6 +269,9 @@ namespace VoodooShader
             assert(cgd3derr == D3D_OK);
 
             m_BoundPass = nullptr;
+
+            HRESULT hr = m_PassState->Apply();
+            hr = m_PassState->Release();
 
             return true;
         }
@@ -413,11 +419,6 @@ namespace VoodooShader
 
             HRESULT hr;
 
-            IDirect3DStateBlock9 * deviceState = nullptr;
-            hr = m_Device->CreateStateBlock(D3DSBT_ALL, &deviceState);
-
-            hr = m_CleanState->Apply();
-
             // Set the necessary states
             hr = m_Device->SetRenderState(D3DRS_CLIPPING, FALSE);
             hr = m_Device->SetRenderState(D3DRS_ZENABLE, FALSE);
@@ -447,7 +448,6 @@ namespace VoodooShader
                 else
                 {
                     gpVoodooCore->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to draw quad.");
-                    hr = deviceState->Release();
                     return false;
                 }
             } else {
@@ -461,13 +461,9 @@ namespace VoodooShader
                 else
                 {
                     gpVoodooCore->GetLogger()->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to draw quad.");
-                    hr = deviceState->Release();
                     return false;
                 }
             }
-
-            hr = deviceState->Apply();
-            hr = deviceState->Release();
 
             return true;
         }

@@ -70,7 +70,7 @@ namespace VoodooShader
             IDirect3DVertexDeclaration9 * m_VertDecl;
             IDirect3DVertexDeclaration9 * m_VertDeclT;
             IDirect3DSurface9 * m_BackBuffer;
-            IDirect3DStateBlock9 * m_CleanState;
+            IDirect3DStateBlock9 * m_CleanState, * m_PassState;
 
             IPassRef m_BoundPass;
 

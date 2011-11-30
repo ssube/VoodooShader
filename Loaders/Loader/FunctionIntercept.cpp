@@ -29,21 +29,17 @@
 
 std::map<FARPROC, TRACED_HOOK_HANDLE> gHooks;
 
-HMODULE gEH_Module;
-func_EH_Install gEH_Install;
-func_EH_Uninstall gEH_Uninstall;
-func_EH_UninstallAll gEH_UninstallAll;
-func_EH_SetACL gEH_SetACL;
-func_EH_SetGlobalACL gEH_SetGlobalACL;
-func_EH_GetLastErrorString gEH_GetLastErrorString;
-
 ULONG threadList[] = {0};
 
 ModuleHooks hookList[] =
 {
-    { L"d3d8.dll",  "Direct3DCreate8",  &Voodoo3DCreate8 },
-    { L"d3d9.dll",  "Direct3DCreate9",  &Voodoo3DCreate9 },
-    { nullptr,      nullptr,            nullptr }
+    { L"d3d8.dll",      "Direct3DCreate8",      &Voodoo3DCreate8 },
+    { L"d3d9.dll",      "Direct3DCreate9",      &Voodoo3DCreate9 },
+    { L"dinput8.dll",   "DirectInput8Create",   &VoodooInput8Create },
+    { L"dinput.dll",    "DirectInputCreateA",   &VoodooInputCreateA },
+    { L"dinput.dll",    "DirectInputCreateW",   &VoodooInputCreateW },
+    { L"dsound8.dll",   "DirectSoundCreate8",   &VoodooSoundCreate8 },
+    { nullptr,          nullptr,                nullptr }
 };
 
 TCHAR moduleName[MAX_PATH];
@@ -58,18 +54,16 @@ bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFun
 
     if (gHooks.find(offset) != gHooks.end()) return false;
 
-    if (!gEH_Install && !LoadEasyHook()) return false;
-
     TRACED_HOOK_HANDLE tracer = new HOOK_TRACE_INFO();
-    DWORD result = gEH_Install(offset, pFunc, nullptr, tracer);
+    NTSTATUS result = LhInstallHook(offset, pFunc, nullptr, tracer);
 
-    if (result)
+    if (result != STATUS_NO_MEMORY && result != 0xC00000BB && result != 0xC000009A)
     {
-        gEH_SetACL(threadList, 1, tracer);
+        LhSetInclusiveACL(threadList, 1, tracer);
         gHooks[offset] = tracer;
         return true;
     } else {
-        PWCHAR estr = gEH_GetLastErrorString();
+        PWCHAR estr = RtlGetLastErrorString();
         ErrorMessage(TEXT("EasyHook Error: %s"), estr);
         return false;
     }
@@ -86,7 +80,7 @@ bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol)
     std::map<FARPROC, TRACED_HOOK_HANDLE>::iterator hook = gHooks.find(offset);
     if (hook == gHooks.end()) return false;
 
-    DWORD result = gEH_Uninstall(hook->second);
+    NTSTATUS result = LhUninstallHook(hook->second);
 
     if (result)
     {
@@ -130,45 +124,14 @@ int WINAPI InstallKnownHooks()
 
 bool WINAPI LoadEasyHook()
 {
-    if (!GetVoodooPath()) return false;
-    if (gEH_Module) return true;
-
-    TCHAR ehPath[MAX_PATH];
-    StringCchCopy(ehPath, MAX_PATH, gVoodooPath);
-    StringCchCat(ehPath, MAX_PATH, TEXT("\\bin\\EasyHook32.dll"));
-    gEH_Module = LoadLibrary(ehPath);
-
-    if (gEH_Module == NULL) return false;
-
-    gEH_Install = (func_EH_Install)GetProcAddress(gEH_Module, "_LhInstallHook@16");
-    gEH_Uninstall = (func_EH_Uninstall)GetProcAddress(gEH_Module, "_LhUninstallHook@4");
-    gEH_UninstallAll = (func_EH_UninstallAll)GetProcAddress(gEH_Module, "_LhUninstallAllHooks@0");
-    gEH_SetACL = (func_EH_SetACL)GetProcAddress(gEH_Module, "_LhSetInclusiveACL@12");
-    gEH_SetGlobalACL = (func_EH_SetGlobalACL)GetProcAddress(gEH_Module, "_LhSetGlobalInclusiveACL@8");
-    gEH_GetLastErrorString = (func_EH_GetLastErrorString)GetProcAddress(gEH_Module, "_RtlGetLastErrorString@0");
-
-    if (!gEH_SetACL || !gEH_SetGlobalACL || !gEH_Install || !gEH_Uninstall || !gEH_UninstallAll || !gEH_GetLastErrorString)
-    {
-        FreeLibrary(gEH_Module);
-        return false;
-    }
-
-    gEH_SetGlobalACL(threadList, 1);
+    LhSetGlobalInclusiveACL(threadList, 1);
 
     return true;
 }
 
 bool WINAPI UnloadEasyHook()
 {
-    if (gEH_Module)
-    {
-        gEH_UninstallAll();
+    LhUninstallAllHooks();
 
-        FreeLibrary(gEH_Module);
-
-        return true;
-    } else {
-        return false;
-    }
-
+    return true;
 }

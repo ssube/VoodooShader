@@ -206,7 +206,7 @@ bool WINAPI LoadFullLoader()
 
             _tcscat(valueBuffer, TEXT("\\bin\\Voodoo_Loader.dll"));
 
-            gFullLoader = LoadLibrary(valueBuffer);
+            gFullLoader = LoadLibraryEx(valueBuffer, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 
             if (gFullLoader)
             {
