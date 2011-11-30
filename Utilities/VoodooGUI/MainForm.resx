@@ -480,16 +480,16 @@
   <data name="cMenu_Hook_Off.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIiSURBVDhPrZJLSBtRFIavo2gEDY6PJAiuhICUuFAkewM+
-        Fj4XYp2CW4Uuuy10ZwPddOGmD9suGh/RWiSKoHQqWiiliR2EtCUPaKakaRaBFmayGk7PP8QhgeCqFz5y
-        5pzz//eemyvE/14RIXq3hbi7I0SEuagQQQ61G/fbEmJqr7VVvQwG9aKiGH9XV60/KyvW76UlIzEyoqOG
-        nromr7nwtqMjXlAU89fyMumKUgNyPxcXzX23O47eGpNnfLQtl0v9sbBgfp+bI6yvMzM1IPdtdpZS09Nm
-        pLlZhcYx2eD5PgwN6drkpC2+Xp9GRwlUr8vxcTodGNChcQyeCLF5NTZmqMEgRfv77f5yuUyFQoGy2Syl
-        UinKZDL0VJbppcdDMb/fgMYxWOfb/jIxYZ0MD9Px4CC96OqiRCJBmqZRMpmkdDpNGyx+VWG3r8+CxjF4
-        zB+fQyHr0O+naHc37XBjtTiXy9m5a/Z9Pgsax+ARH0cNBIxYZyfF6ojz+TwVi0W7Bt7IsgGNY/AQD6en
-        J3fG81XvvMfNAOJSqWTzDvfgcunQOAZh/kvCkqS+93rNAz4FZj7gxo8VEEOM3xO32ww3NKjQ1LyF+/w4
-        1hob4+eybB6xiYZRqjji+IzFa5IUR2/d1zjPhXvs/rylRT9vbzeuZNkCiJFDDT31xE2c9DK3+FyhkBAP
-        bgsRvcM3DRAjhxr3BBgfA42zJI7aGA+D2W4CG6EXGvEPA1tsjaDrqX4AAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIGSURBVDhPrZM9aBNxGMZLFUdxKagdPKp0s4OCHRw6xCYV
+        1LjZDpKURISCbi4OTrVBBx1F0KHFyY9BHTKJCoaqEL3Ua5qcqfm8Xry73gVz18slRx//b6BHD65OHvzg
+        5fkKhLuBgf/9xFIyl1zQUsm7Gp9Y0CyCbtLI++fvXbldjifma+qztIH1Rhe2s92HbtLIo0zgSGTue3z2
+        zppTqm/BdV30ej0fpJFHGcr6RsZj77nw9YxaLP9Bp9PB2asfYdu2D9LIowxlqeONnIy+Td1/KsCyLLDb
+        o91ug9itUebeE4G0lDdwfPI5n11V0Gq1YJomToRfBCKKP5HLreDDcgnU8QZGQi+tTcOErutQFAX1uoSR
+        c698lEq/wPMrfdYKZVDHGxiNpK1N3YQkycjnRQhCAaNTaR+k7ZAvVEEdb2AsmuE/8wpEsYpisYKxy5lA
+        yCPefaqCOt7AmelV9idKqNUUjM/kPWRZB7Fbq1SamH9UBXW8gYlYmTs/t6Fmf7ShaSYmZiWoqolGw+hD
+        N2nkLWcNUJY6vndhMmnEZ27pzjfBhmF00WzaPgzDwdfcFqZZhrKBb+Opi6/j0Zu6+nDJYuEuJNmFtOHi
+        S87Bg0UTl27oKmX2+h72M2N4iJsKn77w5nEo8VsIXdOtPuwmbYiLRFjmGONA0MggEw8yDjOO7sERph9i
+        7NsZ+At1nfHzIzXTXgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="cMenu_Hook_Off.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -500,6 +500,9 @@
   </data>
   <data name="cMenu_Hook_Off.Text" xml:space="preserve">
     <value>Hook Disabled</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="cMenu_Hook_Add.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -13322,6 +13325,12 @@
   </data>
   <data name="&gt;&gt;cMenu_Hook_Off.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

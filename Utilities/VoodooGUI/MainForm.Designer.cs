@@ -64,6 +64,7 @@
             this.cTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.cMenu_Hook_On = new System.Windows.Forms.ToolStripButton();
             this.cMenu_Hook_Off = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -253,6 +254,7 @@
             this.cMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMenu_Hook_On,
             this.cMenu_Hook_Off,
+            this.toolStripSeparator3,
             this.cMenu_Hook_Add,
             this.cMenu_Hook_Remove,
             this.toolStripSeparator1,
@@ -337,6 +339,11 @@
             this.cMenu_Hook_Off.Name = "cMenu_Hook_Off";
             this.cMenu_Hook_Off.Click += new System.EventHandler(this.Menu_Hook_Enable);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -398,6 +405,7 @@
         private System.Windows.Forms.NotifyIcon cTrayIcon;
         private System.Windows.Forms.ToolStripButton cMenu_Hook_On;
         private System.Windows.Forms.ToolStripButton cMenu_Hook_Off;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 
     }
 }
