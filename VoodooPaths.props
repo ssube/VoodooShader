@@ -19,50 +19,50 @@
     <CoreLib>$(SolutionDir)\bin\$(Configuration)\</CoreLib>
   </PropertyGroup>
   <ItemGroup>
-    <BuildMacro Include="BoostPath">
-      <Value>$(BoostPath)</Value>
+    <BuildMacro Include="BoostInclude">
+      <Value>$(BoostInclude)</Value>
     </BuildMacro>
     <BuildMacro Include="BoostLib">
       <Value>$(BoostLib)</Value>
     </BuildMacro>
-    <BuildMacro Include="CgPath">
-      <Value>$(CgPath)</Value>
+    <BuildMacro Include="CgInclude">
+      <Value>$(CgInclude)</Value>
     </BuildMacro>
     <BuildMacro Include="CgLib">
       <Value>$(CgLib)</Value>
     </BuildMacro>
-    <BuildMacro Include="DXPath">
-      <Value>$(DXPath)</Value>
+    <BuildMacro Include="DXInclude">
+      <Value>$(DXInclude)</Value>
     </BuildMacro>
     <BuildMacro Include="DXLib">
       <Value>$(DXLib)</Value>
     </BuildMacro>
-    <BuildMacro Include="DevILPath">
-      <Value>$(DevILPath)</Value>
+    <BuildMacro Include="DevILInclude">
+      <Value>$(DevILInclude)</Value>
     </BuildMacro>
     <BuildMacro Include="DevILLib">
       <Value>$(DevILLib)</Value>
     </BuildMacro>
-    <BuildMacro Include="EasyHookPath">
-      <Value>$(EasyHookPath)</Value>
+    <BuildMacro Include="EasyHookInclude">
+      <Value>$(EasyHookInclude)</Value>
     </BuildMacro>
     <BuildMacro Include="EasyHookLib">
       <Value>$(EasyHookLib)</Value>
     </BuildMacro>
-    <BuildMacro Include="GlewPath">
-      <Value>$(GlewPath)</Value>
+    <BuildMacro Include="GlewInclude">
+      <Value>$(GlewInclude)</Value>
     </BuildMacro>
     <BuildMacro Include="GlewLib">
       <Value>$(GlewLib)</Value>
     </BuildMacro>
-    <BuildMacro Include="PugiXmlPath">
-      <Value>$(PugiXmlPath)</Value>
+    <BuildMacro Include="PugiXmlInclude">
+      <Value>$(PugiXmlInclude)</Value>
     </BuildMacro>
     <BuildMacro Include="PugiXmlLib">
       <Value>$(PugiXmlLib)</Value>
     </BuildMacro>
-    <BuildMacro Include="CorePath">
-      <Value>$(CorePath)</Value>
+    <BuildMacro Include="CoreInclude">
+      <Value>$(CoreInclude)</Value>
     </BuildMacro>
     <BuildMacro Include="CoreLib">
       <Value>$(CoreLib)</Value>
