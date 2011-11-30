@@ -501,24 +501,24 @@ namespace VoodooShader
 
             if (strname == L"SdkVersion" && value->Type == UT_UInt32)
             {
-                m_SdkVersion = value->Value.VUInt32;
+                m_SdkVersion = value->VUInt32;
                 return true;
             } else if (strname == L"IDirect3D8" && value->Type == UT_PVoid) {
                 using VoodooShader::VoodooDX8::CVoodoo3D8;
 
-                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->Value.VPVoid);
+                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->VPVoid);
 
                 CVoodoo3D8 * fakeObj = new CVoodoo3D8(m_SdkVersion, origObj);
 
-                value->Value.VPVoid = fakeObj;
+                value->VPVoid = fakeObj;
 
                 return true;
             } else if (strname == L"IDirect3D9" && value->Type == UT_PVoid) {
-                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->Value.VPVoid);
+                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->VPVoid);
 
                 CVoodoo3D9 * fakeObj = new CVoodoo3D9(m_SdkVersion, origObj);
 
-                value->Value.VPVoid = fakeObj;
+                value->VPVoid = fakeObj;
 
                 return true;
             }
@@ -533,7 +533,7 @@ namespace VoodooShader
             if (strname == L"SdkVersion")
             {
                 value->Type = UT_UInt32;
-                value->Value.VUInt32 = m_SdkVersion;
+                value->VUInt32 = m_SdkVersion;
                 return true;
             }
 

@@ -526,7 +526,7 @@ namespace VoodooShader
             String *    VString;
             IObject *   VIObject;
             void *      VPVoid;
-        } Value;
+        };
     };
 
     template <typename ValType>

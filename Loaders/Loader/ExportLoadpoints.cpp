@@ -63,13 +63,13 @@ void * WINAPI Voodoo3DCreate8(UINT sdkVersion)
     {
         VoodooShader::Variant D3DObj;
         D3DObj.Type = VoodooShader::UT_PVoid;
-        D3DObj.Value.VPVoid = pD3D8;
+        D3DObj.VPVoid = pD3D8;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D8", &D3DObj);
 
-        if (D3DObj.Value.VPVoid != pD3D8)
+        if (D3DObj.VPVoid != pD3D8)
         {
-            pD3D8 = D3DObj.Value.VPVoid;
+            pD3D8 = D3DObj.VPVoid;
         }
     }
 
@@ -87,13 +87,13 @@ void * WINAPI Voodoo3DCreate9(UINT sdkVersion)
     {
         VoodooShader::Variant D3DObj;
         D3DObj.Type = VoodooShader::UT_PVoid;
-        D3DObj.Value.VPVoid = pD3D9;
+        D3DObj.VPVoid = pD3D9;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9", &D3DObj);
 
-        if (D3DObj.Value.VPVoid != pD3D9)
+        if (D3DObj.VPVoid != pD3D9)
         {
-            pD3D9 = D3DObj.Value.VPVoid;
+            pD3D9 = D3DObj.VPVoid;
         }
     }
 
@@ -130,13 +130,13 @@ HRESULT WINAPI VoodooInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID riidl
     {
         VoodooShader::Variant DIObj;
         DIObj.Type = VoodooShader::UT_PVoid;
-        DIObj.Value.VPVoid = i8obj;
+        DIObj.VPVoid = i8obj;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirectInput8", &DIObj);
 
-        if (DIObj.Value.VPVoid != i8obj)
+        if (DIObj.VPVoid != i8obj)
         {
-            i8obj = DIObj.Value.VPVoid;
+            i8obj = DIObj.VPVoid;
         }
     }
 
@@ -186,13 +186,13 @@ HRESULT WINAPI VoodooInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplp
     {
         VoodooShader::Variant DIObj;
         DIObj.Type = VoodooShader::UT_PVoid;
-        DIObj.Value.VPVoid = iaobj;
+        DIObj.VPVoid = iaobj;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputA", &DIObj);
 
-        if (DIObj.Value.VPVoid != iaobj)
+        if (DIObj.VPVoid != iaobj)
         {
-            iaobj = DIObj.Value.VPVoid;
+            iaobj = DIObj.VPVoid;
         }
     }
 
@@ -209,13 +209,13 @@ HRESULT WINAPI VoodooInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID *lplp
     {
         VoodooShader::Variant DIObj;
         DIObj.Type = VoodooShader::UT_PVoid;
-        DIObj.Value.VPVoid = iwobj;
+        DIObj.VPVoid = iwobj;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputW", &DIObj);
 
-        if (DIObj.Value.VPVoid != iwobj)
+        if (DIObj.VPVoid != iwobj)
         {
-            iwobj = DIObj.Value.VPVoid;
+            iwobj = DIObj.VPVoid;
         }
     }
 
@@ -253,13 +253,13 @@ HRESULT WINAPI VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID 
     {
         VoodooShader::Variant DSObj;
         DSObj.Type = VoodooShader::UT_PVoid;
-        DSObj.Value.VPVoid = s8obj;
+        DSObj.VPVoid = s8obj;
 
         gVoodooCore->GetAdapter()->SetProperty(L"IDirectSound8", &DSObj);
 
-        if (DSObj.Value.VPVoid != s8obj)
+        if (DSObj.VPVoid != s8obj)
         {
-            s8obj = DSObj.Value.VPVoid;
+            s8obj = DSObj.VPVoid;
         }
     }
 
