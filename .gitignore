@@ -13,11 +13,14 @@ CodeAnalyst
 *.chm
 *.ipch
 Analysis/Yasca/Yasca-Report-*.html
+Analysis/kwstyle/output/*
 Resources/Installers/Output/*
 [Dd]ependencies/*/*
 [Dd]ebug
 [Rr]elease
-kwstyle.html/*
+
+#Build version file
+Framework/Core/Version_Build.hpp
 
 #Temp ignore for CMake files (until system is ready)
 CMakeLists.txt
@@ -50,3 +53,4 @@ Thumbs.db
 obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
+Framework/Core/Version_Build.hpp
