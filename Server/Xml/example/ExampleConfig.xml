@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<VoodooConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.voodooshader.com/manifests/ConfigManifest.xsd">
+<VoodooConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://www.voodooshader.com/manifests/ConfigManifest.xsd">
     <Global>
         <Variables>
             <Variable name="adapter">VSAdapter</Variable>

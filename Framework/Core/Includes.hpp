@@ -107,7 +107,7 @@
 #define VOODOO_CALLTYPE     __stdcall
 #define VOODOO_METHODTYPE   VOODOO_CALLTYPE
 
-#define VOODOO_METHOD_(type, name)  virtual DECLSPEC_NOTHROW type VOODOO_CALLTYPE name
+#define VOODOO_METHOD_(type, name)  virtual DECLSPEC_NOTHROW type VOODOO_METHODTYPE name
 #define VOODOO_METHOD(name)         VOODOO_METHOD_(bool, name)
 
 #define VOODOO_INTERFACE_(iname, ...)       DEFINE_IID(iname) = __VA_ARGS__; class DECLSPEC_NOVTABLE iname

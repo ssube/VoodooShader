@@ -1,3 +1,22 @@
+/*
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at
+ *   peachykeen@voodooshader.com
+ */
 #include "Frost_Adapter.hpp"
 #include "VoodooGL.hpp"
 
@@ -14,43 +33,10 @@ namespace VoodooShader
 
             ILoggerRef logger = m_Core->GetLogger();
 
-            // Get the handles to the needed hook modules
-            HMODULE procmodule = GetModuleHandle(nullptr);
-
-            if (procmodule)
-            {
-                char procpath[MAX_PATH];
-
-                GetModuleFileName(procmodule, procpath, MAX_PATH);
-
-                logger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Frost loaded into process \"%s\".", procpath);
-
-                char *pos = strrchr(procpath, '\\');
-
-                if (pos != nullptr)
-                {
-                    if (strcmp(pos + 1, "nwmain.exe") != 0)
-                    {
-                        logger->Log
-                            (
-                            LL_Mod,
-                            VOODOO_FROST_NAME,
-                            "The process does not appear to be the engine. Frost will not run."
-                            );
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                logger->Log(LL_ModError, VOODOO_FROST_NAME, "Unable to find target module. Frost will not run.");
-
-                return;
-            }
-
+            // Hook OpenGL functions
             logger->Log(LL_ModDebug, VOODOO_FROST_NAME, "Beginning OpenGL hook procedure.");
 
-            IHookManager* hooker = m_Core->GetHookManager();
+            IHookManagerRef hooker = m_Core->GetHookManager();
             bool success = true;
             
             // System-related
@@ -93,227 +79,126 @@ namespace VoodooShader
             logger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Frost adapter initialized.");
         }
 
-        /**
-        *
-        */
         FrostAdapter::~FrostAdapter(void)
         {
 
             // mLogger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Frost adapter shutdown.");
         }
 
-        /**
-        * IObject
-        */
-        const char *FrostAdapter::GetObjectClass(void)
+        uint32_t VOODOO_METHODTYPE FrostAdapter::AddRef() const
         {
-            return "Frost_Adapter";
+            return SAFE_INCREMENT(m_Refs);
         }
 
-        /**
-        * IAdapter
-        */
-        bool FrostAdapter::LoadPass(_In_ IPass *pass)
+        uint32_t VOODOO_METHODTYPE FrostAdapter::Release() const
+        {
+            uint32_t value = SAFE_DECREMENT(m_Refs);
+
+            if (value == 0)
+            {
+                delete this;
+            }
+
+            return value;
+        }
+
+        bool VOODOO_METHODTYPE FrostAdapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        {
+            if (!ppOut)
+            {
+                if (clsid.is_nil())
+                {
+                    clsid = CLSID_FrostAdapter;
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if (clsid == IID_IObject)
+                {
+                    *ppOut = static_cast<const IObject*>(this);
+                } else if (clsid == IID_IAdapter) {
+                    *ppOut = static_cast<const IAdapter*>(this);
+                } else if (clsid == CLSID_FrostAdapter) {
+                    *ppOut = static_cast<const FrostAdapter*>(this);
+                } else {
+                    *ppOut = nullptr;
+                    return false;
+                }
+
+                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+                return true;
+            }
+        }
+
+        String VOODOO_METHODTYPE FrostAdapter::ToString() const
+        {
+            return L"FrostAdapter()";
+        }
+
+        ICore * VOODOO_METHODTYPE FrostAdapter::GetCore() const
+        {
+            return m_Core;
+        }
+
+        bool VOODOO_METHODTYPE FrostAdapter::LoadPass(_In_ IPass *pass)
         {
             UNREFERENCED_PARAMETER(pass);
 
             return true;
         }
 
-        /**
-        *
-        */
-        bool FrostAdapter::UnloadPass(_In_ IPass *pass)
+        bool VOODOO_METHODTYPE FrostAdapter::UnloadPass(_In_ IPass *pass)
         {
             UNREFERENCED_PARAMETER(pass);
 
             return true;
         }
 
-        /**
-        *
-        */
-        void FrostAdapter::BindPass(_In_ IPass* pass)
+        bool VOODOO_METHODTYPE FrostAdapter::SetPass(_In_ IPass * pPass)
         {
+            if (!pPass)
+            {
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to bind null pass.");
+                return false;
+            }
 
-            CGpass cgpass = pass->GetCgPass();
+            CGpass cgpass = pPass->GetCgPass();
 
             cgSetPassState(cgpass);
 
-            mLastPass = cgpass;
+            m_BoundPass = pPass;
         }
 
-        /**
-        *
-        */
-        void FrostAdapter::UnbindPass(void)
+        IPass * VOODOO_METHODTYPE FrostAdapter::GetPass() CONST
         {
-            cgResetPassState(mLastPass);
+            return m_BoundPass.get();
         }
 
-        /**
-        *
-        */
-        void FrostAdapter::DrawQuad(Vertex *vertexData)
+        bool VOODOO_METHODTYPE FrostAdapter::ResetPass(_In_ IPass * pPass)
         {
-            if (vertexData)
-            {
-                glBegin(GL_QUADS);
-                glTexCoord2f(vertexData[0].tu, vertexData[0].tv);
-                glVertex3f(vertexData[0].x, vertexData[0].y, vertexData[0].z);
-                glTexCoord2f(vertexData[1].tu, vertexData[1].tv);
-                glVertex3f(vertexData[1].x, vertexData[1].y, vertexData[1].z);
-                glTexCoord2f(vertexData[2].tu, vertexData[0].tv);
-                glVertex3f(vertexData[2].x, vertexData[2].y, vertexData[2].z);
-                glTexCoord2f(vertexData[3].tu, vertexData[3].tv);
-                glVertex3f(vertexData[3].x, vertexData[3].y, vertexData[3].z);
-                glEnd();
-            }
-            else
-            {
-                glBegin(GL_QUADS);
-                glTexCoord2f(0.0f, 1.0f);
-                glVertex2d(0.0f, 0.0f);
-                glTexCoord2f(0.0f, 0.0f);
-                glVertex2d(0.0f, 250.0f);
-                glTexCoord2f(1.0f, 0.0f);
-                glVertex2d(250.0f, 250.0f);
-                glTexCoord2f(1.0f, 1.0f);
-                glVertex2d(250.0f, 0.0f);
-                glEnd();
-            }
+            cgResetPassState(pPass);
         }
 
-        /**
-        *
-        */
-        void FrostAdapter::ApplyParameter(_In_ IParameter* param)
+        bool VOODOO_METHODTYPE FrostAdapter::SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget)
         {
-
-            ParameterType pt = param->GetType();
-            ParameterCategory pc = Converter::ToParameterCategory(pt);
-            CGparameter cgparam = param->GetCgParameter();
-
-            if (pc == PC_Float)
-            {
-
-                float *values = param->Getfloat();
-
-                switch (pt)
-                {
-                case PT_Float1:
-                    cgGLSetParameter1fv(cgparam, values);
-                    break;
-
-                case PT_Float2:
-                    cgGLSetParameter2fv(cgparam, values);
-                    break;
-
-                case PT_Float3:
-                    cgGLSetParameter3fv(cgparam, values);
-                    break;
-
-                case PT_Float4:
-                    cgGLSetParameter4fv(cgparam, values);
-                    break;
-                }
-            }
-            else if (pc == PC_Sampler)
-            {
-
-                GLuint textureID = (GLuint) param->GetTexture()->GetData();
-
-                cgGLSetupSampler(cgparam, textureID);
-            }
-            else
-            {
-                mLogger->Log(LL_Mod, VOODOO_FROST_NAME, "Unable to apply parameter %s.", param->ToString().GetData());
-            }
+            // Set render target (somewhat complex for OGL)
+            return true;
         }
 
-        /**
-        *
-        */
-        void FrostAdapter::DrawShader(_In_ IShader* shader)
+        ITexture * VOODOO_METHODTYPE FrostAdapter::GetTarget(uint32_t index) CONST
         {
-            if (shader.get() == nullptr)
-            {
-                mLogger->Log(LL_ModError, VOODOO_FROST_NAME, "Unable to draw nullptr shader.");
-                return;
-            }
-
-            ITechnique* tech = shader->GetDefaultTechnique();
-
-            if (tech.get() == nullptr)
-            {
-                mLogger->Log
-                    (
-                    LL_ModError,
-                    VOODOO_FROST_NAME,
-                    "No default technique given for shader %s.",
-                    shader->ToString().GetData()
-                    );
-                return;
-            }
-
-            glMatrixMode(GL_PROJECTION);
-            glPushMatrix();
-            glLoadIdentity();
-            glOrtho(0, 250.0, 250.0, 0, -1, 1);
-            glMatrixMode(GL_MODELVIEW);
-            glPushMatrix();
-            glLoadIdentity();
-
-            size_t passes = tech->GetPassCount();
-
-            for (size_t curpass = 0; curpass < passes; ++curpass)
-            {
-
-                IPass* pass = tech->GetPass(curpass);
-
-                this->BindPass(pass);
-                this->DrawQuad(nullptr);
-                this->UnbindPass();
-
-                ITexture* target = pass->GetTarget();
-
-                if (target.get())
-                {
-
-                    GLuint passtarget = (GLuint) target->GetData();
-
-                    glBindTexture(GL_TEXTURE_2D, passtarget);
-                    glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
-                }
-            }
-
-            ITexture* target = tech->GetTarget();
-
-            if (target.get())
-            {
-
-                GLuint techtarget = (GLuint) target->GetData();
-
-                glBindTexture(GL_TEXTURE_2D, techtarget);
-                glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
-            }
-
-            glMatrixMode(GL_PROJECTION);
-            glPopMatrix();
-            glMatrixMode(GL_MODELVIEW);
-            glPopMatrix();
+            // Set render target (somewhat complex for OGL)
+            return nullptr;
         }
 
-        /**
-        *
-        */
-        ITexture* FrostAdapter::CreateTexture(_In_ String name, _In_ TextureDesc desc)
+        ITexture * VOODOO_METHODTYPE FrostAdapter::CreateTexture(_In_ const String & name, _In_ TextureDesc * pDesc)
         {
 
             GLuint texture;
             GLint texFmt, texIFmt, texType;
 
-            switch (desc.Format)
+            switch (pDesc->Format)
             {
             case TF_RGBA8:
                 texFmt = GL_RGBA; // Frost::Converter::ToGLFormat(desc.Format);
@@ -354,7 +239,7 @@ namespace VoodooShader
 
             case TF_Unknown:
             default:
-                Throw(VOODOO_FROST_NAME, "Unable to resolve texture format.", mCore);
+                Throw(VOODOO_FROST_NAME, L"Unable to resolve texture format.", m_Core);
             }
 
             glGenTextures(1, &texture);
@@ -363,52 +248,203 @@ namespace VoodooShader
 
             while (error != GL_NO_ERROR)
             {
-                mLogger->Log(LL_ModWarn, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
+                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"OpenGL returned error %u: %s", error, glGetString(error));
                 error = glGetError();
             }
 
             glBindTexture(GL_TEXTURE_2D, texture);
-            glTexImage2D(GL_TEXTURE_2D, 0, texIFmt, desc.Width, desc.Height, 0, texFmt, texType, nullptr);
+            glTexImage2D(GL_TEXTURE_2D, 0, texIFmt, pDesc->Size.X, pDesc->Size.Y, 0, texFmt, texType, nullptr);
             glBindTexture(GL_TEXTURE_2D, 0);
 
             error = glGetError();
             while (error != GL_NO_ERROR)
             {
-                mLogger->Log(LL_ModWarn, VOODOO_FROST_NAME, "OpenGL returned error %u: %s", error, glGetString(error));
+                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"OpenGL returned error %u: %s", error, glGetString(error));
                 error = glGetError();
             }
 
             if (glIsTexture(texture))
             {
-                mLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "OpenGL texture %u created successfully.", texture);
+                m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"OpenGL texture %u created successfully.", texture);
             }
             else
             {
-                mLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "OpenGL create failed, returned texture %u.", texture);
+                m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"OpenGL create failed, returned texture %u.", texture);
             }
 
-            return mCore->AddTexture(name, (void *) texture);
+            return new FrostTexture(name, pDesc, texture);
         }
 
-        /**
-        *
-        */
-        bool FrostAdapter::ConnectTexture(_In_ IParameter* param, _In_ ITexture* texture)
+        bool VOODOO_METHODTYPE FrostAdapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
         {
-            param->Set(texture);
-            cgGLSetupSampler(param->GetCgParameter(), (GLuint) texture->GetData());
+            return false;
+        }
+
+        bool VOODOO_METHODTYPE FrostAdapter::DrawGeometry(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags)
+        {
+            if (pData)
+            {
+                VertexStruct * pVerts = reinterpret_cast<VertexStruct*>(pData);
+                
+                glBegin(GL_QUADS);
+                for (uint32_t v = offset; v < offset + count; ++v)
+                {
+                    glTexCoord3f(pVerts[v].TexCoord[0].X, pVerts[v].TexCoord[0].Y, pVerts[v].TexCoord[0].Z);
+                    glVertex3f(pVerts[v].Position.X, pVerts[v].Position.Y, pVerts[v].Position.Z);
+                }
+                glEnd();
+            }
+            else
+            {
+                glBegin(GL_QUADS);
+                glTexCoord2f(0.0f, 1.0f);
+                glVertex2d(0.0f, 0.0f);
+                glTexCoord2f(0.0f, 0.0f);
+                glVertex2d(0.0f, 250.0f);
+                glTexCoord2f(1.0f, 0.0f);
+                glVertex2d(250.0f, 250.0f);
+                glTexCoord2f(1.0f, 1.0f);
+                glVertex2d(250.0f, 0.0f);
+                glEnd();
+            }
+
             return true;
         }
 
-        /**
-        *
-        */
-        void FrostAdapter::HandleError(_In_ CGcontext context, _In_ CGerror error, _In_ void *core)
+        bool VOODOO_METHODTYPE FrostAdapter::ApplyParameter(_In_ IParameter * pParam)
         {
-            UNREFERENCED_PARAMETER(context);
-            UNREFERENCED_PARAMETER(core);
+            ParameterType pt = pParam->GetType();
+            ParameterCategory pc = Converter::ToParameterCategory(pt);
+            CGparameter cgparam = pParam->GetCgParameter();
 
-            mLogger->Log(LL_ModError, VOODOO_FROST_NAME, "Received Cg error %u: %s", error, cgGetErrorString(error));
+            if (pc == PC_Float)
+            {
+                float * values = pParam->GetScalar();
+
+                switch (pt)
+                {
+                case PT_Float1:
+                    cgGLSetParameter1fv(cgparam, values);
+                    break;
+
+                case PT_Float2:
+                    cgGLSetParameter2fv(cgparam, values);
+                    break;
+
+                case PT_Float3:
+                    cgGLSetParameter3fv(cgparam, values);
+                    break;
+
+                case PT_Float4:
+                    cgGLSetParameter4fv(cgparam, values);
+                    break;
+                }
+            }
+            else if (pc == PC_Sampler)
+            {
+
+                GLuint textureID = (GLuint) pParam->GetTexture()->GetData();
+
+                cgGLSetupSampler(cgparam, textureID);
+            }
+            else
+            {
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to apply parameter %s.", pParam->ToString().GetData());
+            }
+        }
+
+        bool VOODOO_METHODTYPE FrostAdapter::SetProperty(const wchar_t * name, Variant * pValue)
+        {
+            return false;
+        }
+
+        bool VOODOO_METHODTYPE FrostAdapter::GetProperty(const wchar_t * name, Variant * pValue) const
+        {
+            return false;
+        }
+
+        bool VOODOO_METHODTYPE FrostAdapter::ConnectTexture(_In_ IParameter* pParam, _In_ ITexture* pTexture)
+        {
+            pParam->SetTexture(pTexture);
+            cgGLSetupSampler(pParam->GetCgParameter(), (GLuint) pTexture->GetData());
+            return true;
+        }
+
+        bool VOODOO_METHODTYPE FrostAdapter::HandleError(CGcontext pContext, uint32_t error)
+        {
+            UNREFERENCED_PARAMETER(pContext);
+            UNREFERENCED_PARAMETER(error);
+
+            return false;
+        }
+
+        void FrostAdapter::DrawShader(_In_ IShader* shader)
+        {
+            if (!shader)
+            {
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, "Unable to draw nullptr shader.");
+                return;
+            }
+
+            ITechniqueRef tech = shader->GetDefaultTechnique();
+
+            if (tech.get() == nullptr)
+            {
+                m_Core->GetLogger()->Log
+                    (
+                    LL_ModError,
+                    VOODOO_FROST_NAME,
+                    "No default technique given for shader %s.",
+                    shader->ToString().GetData()
+                    );
+                return;
+            }
+
+            glMatrixMode(GL_PROJECTION);
+            glPushMatrix();
+            glLoadIdentity();
+            glOrtho(0, 250.0, 250.0, 0, -1, 1);
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+            glLoadIdentity();
+
+            size_t passes = tech->GetPassCount();
+
+            for (size_t curpass = 0; curpass < passes; ++curpass)
+            {
+                IPassRef pass = tech->GetPass(curpass);
+
+                this->BindPass(pass);
+                this->DrawQuad(nullptr);
+                this->UnbindPass();
+
+                ITextureRef target = pass->GetTarget();
+
+                if (target.get())
+                {
+
+                    GLuint passtarget = (GLuint) target->GetData();
+
+                    glBindTexture(GL_TEXTURE_2D, passtarget);
+                    glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
+                }
+            }
+
+            ITextureRef target = tech->GetTarget();
+
+            if (target.get())
+            {
+
+                GLuint techtarget = (GLuint) target->GetData();
+
+                glBindTexture(GL_TEXTURE_2D, techtarget);
+                glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
+            }
+
+            glMatrixMode(GL_PROJECTION);
+            glPopMatrix();
+            glMatrixMode(GL_MODELVIEW);
+            glPopMatrix();
         }
 
         /**
@@ -416,7 +452,7 @@ namespace VoodooShader
         */
         void FrostAdapter::SetDC(_In_opt_ HDC hdc)
         {
-            mDC = hdc;
+            m_DC = hdc;
         }
 
         /**
@@ -424,6 +460,8 @@ namespace VoodooShader
         */
         void FrostAdapter::SetGLRC(_In_opt_ HGLRC hglrc)
         {
+            m_GLRC = hglrc;
+
             if (hglrc != nullptr)
             {
                 // Init Cg
@@ -453,8 +491,8 @@ namespace VoodooShader
                 m_TexLastPass = this->CreateTexture(":lastpass", desc);
                 m_TexLastShader = this->CreateTexture(":lastshader", desc);
 
-                m_Core->SetStageTexture(TT_ShaderTarget, m_TexLastShader);
-                m_Core->SetStageTexture(TT_PassTarget, m_TexLastPass);
+                m_Core->SetStageTexture(TS_ShaderTarget, m_TexLastShader);
+                m_Core->SetStageTexture(TS_PassTarget, m_TexLastPass);
 
                 gDepthTexture = (GLint) m_TexDepthFrame->GetData();
                 gThisFrame = (GLint) m_TexThisFrame->GetData();
@@ -466,16 +504,14 @@ namespace VoodooShader
             }
             else
             {
-                mCore->SetCgContext(nullptr);
+                m_Core->SetCgContext(nullptr);
 
-                mTexLastPass = nullptr;
-                mTexLastShader = nullptr;
+                m_TexLastPass = nullptr;
+                m_TexLastShader = nullptr;
 
-                TestShader = nullptr;
-                cgDestroyContext(mCgContext);
+                gpTestShader = nullptr;
+                cgDestroyContext(m_CgContext);
             }
-
-            mGLRC = hglrc;
         }
     }
 }

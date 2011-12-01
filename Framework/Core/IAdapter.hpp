@@ -160,13 +160,7 @@ namespace VoodooShader
          *      VertexStructs. If VF_Transformed is set, the vertex data should be interpreted as being pretransformed;
          *      otherwise it should be taken as raw vertexes.
          */
-        VOODOO_METHOD(DrawGeometry)
-        (
-            _In_ const uint32_t offset,
-            _In_ const uint32_t count,
-            _In_ void * const pData,
-            _In_ const VertexFlags flags
-        ) PURE;
+        VOODOO_METHOD(DrawGeometry)(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags) PURE;
         /**
          * Downloads a parameter's value from system RAM to VRAM, verifying that the value on the GPU (and in use) is the
          * latest value set in the CPU memory buffer (all parameter set commands operate on the system RAM buffer for speed
@@ -199,7 +193,7 @@ namespace VoodooShader
          *
          * @return Success of the property get.
          */
-        VOODOO_METHOD(GetProperty)(_In_ const wchar_t * name, _Out_ Variant * const value) CONST PURE;
+        VOODOO_METHOD(GetProperty)(_In_ const wchar_t * name, _Out_ Variant * const pValue) CONST PURE;
         /**
          * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses
          * Cg-provided functions (in OpenGL, cgGLSetTextureParameter). The parameter and texture should be connected for the
