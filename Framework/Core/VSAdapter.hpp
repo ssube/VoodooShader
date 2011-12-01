@@ -56,15 +56,9 @@ namespace VoodooShader
         VOODOO_METHOD(ResetPass)(_In_ IPass * const pPass);
         VOODOO_METHOD(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
         VOODOO_METHOD_(ITexture *, GetTarget)(_In_ const uint32_t index) CONST;
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc);
-        VOODOO_METHOD(LoadTexture)(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture);
-        VOODOO_METHOD(DrawGeometry)
-        (
-            _In_ const uint32_t offset,
-            _In_ const uint32_t count,
-            _In_ void * const pData,
-            _In_ const VertexFlags flags
-        );
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc pDesc);
+        VOODOO_METHOD(LoadTexture)(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture);
+        VOODOO_METHOD(DrawGeometry)(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags);
         VOODOO_METHOD(ApplyParameter)(_In_ IParameter * const pParam);
         VOODOO_METHOD(SetProperty)(_In_ const wchar_t * name, _In_ Variant * const value);
         VOODOO_METHOD(GetProperty)(_In_ const wchar_t * name, _In_ Variant * const value) CONST;

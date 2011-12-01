@@ -563,7 +563,7 @@ namespace VoodooShader
 
         // Attempt to load the texture from a file
         IAdapterRef adapter = m_Core->GetAdapter();
-        ITextureRef texture = m_Core->CreateTexture(texName, (TextureDesc*)&texRegion);
+        ITextureRef texture = m_Core->CreateTexture(texName, (TextureDesc)texRegion);
 
         IFile * texFile = m_Core->GetFileSystem()->FindFile(texName);
         if (texFile)
@@ -571,7 +571,7 @@ namespace VoodooShader
             IImage * texImage = texFile->OpenImage();
             if (texImage)
             {
-                adapter->LoadTexture(texImage, &texRegion, texture.get());
+                adapter->LoadTexture(texImage, texRegion, texture.get());
 
                 if (!texture)
                 {

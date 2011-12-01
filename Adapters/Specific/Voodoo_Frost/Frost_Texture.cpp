@@ -112,7 +112,7 @@ namespace VoodooShader
 
         const TextureDesc VOODOO_METHODTYPE FrostTexture::GetDesc() CONST
         {
-            return &m_Desc;
+            return m_Desc;
         }
 
         void FrostTexture::GetTexDesc()

@@ -651,12 +651,12 @@ namespace VoodooShader
             return m_Name;
         }
 
-        const TextureDesc * VSWImage::GetDesc() const
+        const TextureDesc VSWImage::GetDesc() const
         {
-            return &m_Desc;
+            return m_Desc;
         }
 
-        uint32_t VSWImage::GetData(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const
+        uint32_t VSWImage::GetData(_In_ const TextureRegion pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) const
         {
             //! @todo Add a buffer size check.
             UNREFERENCED_PARAMETER(size);
@@ -664,7 +664,7 @@ namespace VoodooShader
             ILint ilFmt = 0, ilType = 0;
 
             // Convert TextureFormat to DevIL format
-            switch (pDesc->Format)
+            switch (pDesc.Format)
             {
             case TF_RGB8:
                 ilFmt = IL_RGB;
@@ -688,15 +688,15 @@ namespace VoodooShader
                 (
                     LL_ModWarn, VOODOO_FILESYSTEM_NAME,
                     L"Invalid texture format for getting image data (%X).",
-                    pDesc->Format
+                    pDesc.Format
                 );
                 return 0;
             }
 
             return ilCopyPixels
             (
-                pDesc->Origin.X, pDesc->Origin.Y, pDesc->Origin.Z,
-                pDesc->Size.X, pDesc->Size.Y, pDesc->Size.Z,
+                pDesc.Origin.X, pDesc.Origin.Y, pDesc.Origin.Z,
+                pDesc.Size.X, pDesc.Size.Y, pDesc.Size.Z,
                 ilFmt, ilType, pBuffer
             );
         }

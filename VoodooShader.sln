@@ -110,6 +110,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VoodooTest_OpenGL", "Tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{23A55269-F7A0-48AF-9392-6A3CA217BE37}"
 	ProjectSection(SolutionItems) = preProject
+		Server\Xml\example\ExampleConfig.xml = Server\Xml\example\ExampleConfig.xml
 		Server\Xml\example\ExamplePackageManifest.xml = Server\Xml\example\ExamplePackageManifest.xml
 		Server\Xml\example\ExampleRemoteManifest.xml = Server\Xml\example\ExampleRemoteManifest.xml
 	EndProjectSection

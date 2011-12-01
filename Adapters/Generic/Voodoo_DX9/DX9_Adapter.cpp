@@ -362,17 +362,17 @@ namespace VoodooShader
             return m_RenderTarget[index].get();
         }
 
-        ITexture * DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
+        ITexture * DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
         {
             IDirect3DTexture9 * tex = nullptr;
-            D3DFORMAT fmt = DX9_Converter::ToD3DFormat(pDesc->Format);
+            D3DFORMAT fmt = DX9_Converter::ToD3DFormat(pDesc.Format);
 
             HRESULT hr = m_Device->CreateTexture
             (
-                pDesc->Size.X,
-                pDesc->Size.Y,
-                pDesc->Mipmaps ? 0 : 1,
-                pDesc->RenderTarget ? D3DUSAGE_RENDERTARGET : 0,
+                pDesc.Size.X,
+                pDesc.Size.Y,
+                pDesc.Mipmaps ? 0 : 1,
+                pDesc.RenderTarget ? D3DUSAGE_RENDERTARGET : 0,
                 fmt,
                 D3DPOOL_DEFAULT,
                 &tex,
@@ -393,7 +393,7 @@ namespace VoodooShader
             }
         }
 
-        bool DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
+        bool DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
         {
             UNREFERENCED_PARAMETER(pFile);
             UNREFERENCED_PARAMETER(pRegion);

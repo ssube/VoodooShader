@@ -133,7 +133,7 @@ namespace VoodooShader
          * @warning You should not call this method directly; it should only be used via Core::CreateTexture(). This method
          *     does not set up the texture for use with the core.
          */
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc) PURE;
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc pDesc) PURE;
         /**
          * Loads a texture data from an image into an existing texture. The texture format the texture was created with and
          * format of the image given must match. Texture size is bounded by the texture, as are mipmap and render target
@@ -146,7 +146,7 @@ namespace VoodooShader
          * @note As TextureRegion derives from TextureDesc, it may be simpler to use the same struct for both this and the
          *      call to IAdapter::CreateTexture().
          */
-        VOODOO_METHOD(LoadTexture)(_In_ IImage * const pImage, _In_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture) PURE;
+        VOODOO_METHOD(LoadTexture)(_In_ IImage * const pImage, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture) PURE;
         /**
          * Draws geometry from system memory.
          *

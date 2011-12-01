@@ -112,8 +112,8 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
 
         VOODOO_METHOD_(String, GetPath)() CONST PURE;
-        VOODOO_METHOD_(const TextureDesc *, GetDesc)() CONST PURE;
-        VOODOO_METHOD_(uint32_t, GetData)(_In_ const TextureRegion * pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) CONST PURE;
+        VOODOO_METHOD_(const TextureDesc, GetDesc)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, GetData)(_In_ const TextureRegion pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) CONST PURE;
     };
     /**
      * @}

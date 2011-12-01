@@ -205,7 +205,7 @@ namespace VoodooShader
             GLuint texture;
             GLint texFmt, texIFmt, texType;
 
-            switch (pDesc->Format)
+            switch (pDesc.Format)
             {
             case TF_RGBA8:
                 texFmt = GL_RGBA; // Frost::Converter::ToGLFormat(desc.Format);
@@ -259,7 +259,7 @@ namespace VoodooShader
             }
 
             glBindTexture(GL_TEXTURE_2D, texture);
-            glTexImage2D(GL_TEXTURE_2D, 0, texIFmt, pDesc->Size.X, pDesc->Size.Y, 0, texFmt, texType, nullptr);
+            glTexImage2D(GL_TEXTURE_2D, 0, texIFmt, pDesc.Size.X, pDesc.Size.Y, 0, texFmt, texType, nullptr);
             glBindTexture(GL_TEXTURE_2D, 0);
 
             error = glGetError();
@@ -281,7 +281,7 @@ namespace VoodooShader
             return new FrostTexture(m_Core, name, texture);
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
+        bool VOODOO_METHODTYPE FrostAdapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
         {
             UNREFERENCED_PARAMETER(pFile);
             UNREFERENCED_PARAMETER(pRegion);
@@ -507,10 +507,10 @@ namespace VoodooShader
                 // Setup resources
                 TextureDesc desc = { {256, 256, 0}, false, true, TF_RGBA8};
 
-                m_TexDepthFrame = this->CreateTexture(L":depthframe", &desc);
-                m_TexThisFrame = this->CreateTexture(L":thisframe", &desc);
-                m_TexLastPass = this->CreateTexture(L":lastpass", &desc);
-                m_TexLastShader = this->CreateTexture(L":lastshader", &desc);
+                m_TexDepthFrame = this->CreateTexture(L":depthframe", desc);
+                m_TexThisFrame = this->CreateTexture(L":thisframe", desc);
+                m_TexLastPass = this->CreateTexture(L":lastpass", desc);
+                m_TexLastShader = this->CreateTexture(L":lastshader", desc);
 
                 m_Core->SetStageTexture(TS_Shader, m_TexLastShader.get());
                 m_Core->SetStageTexture(TS_Pass, m_TexLastPass.get());

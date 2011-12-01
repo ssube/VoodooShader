@@ -77,7 +77,7 @@ namespace VoodooShader
         VOODOO_METHOD_(XmlDocument, GetConfig)() CONST;
         VOODOO_METHOD_(IShader *, CreateShader)(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs);
         VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterType type);
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc * const pDesc);
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc Desc);
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterType type) CONST;
         VOODOO_METHOD_(ITexture *, GetTexture)(_In_ const String & name) CONST;
         VOODOO_METHOD(RemoveParameter)(_In_ const String & name);

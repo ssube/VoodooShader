@@ -239,7 +239,7 @@ namespace VoodooShader
                 bufferTextureDesc.Mipmaps = true;
                 bufferTextureDesc.RenderTarget = true;
 
-                texture_ThisFrame = gpVoodooCore->CreateTexture(L":thisframe", &bufferTextureDesc);
+                texture_ThisFrame = gpVoodooCore->CreateTexture(L":thisframe", bufferTextureDesc);
                 if (texture_ThisFrame)
                 {
                     IDirect3DTexture9 * texture = reinterpret_cast<IDirect3DTexture9 *>(texture_ThisFrame->GetData());

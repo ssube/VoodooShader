@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Security.Principal;
 using VoodooNetClasses;
+using VoodooNetClasses.VoodooRegistry;
 
 namespace VoodooRegedit
 {

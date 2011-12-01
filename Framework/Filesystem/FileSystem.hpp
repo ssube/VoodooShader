@@ -227,7 +227,7 @@ namespace VoodooShader
              *
              * @return Texture information.
              */
-            VOODOO_METHOD_(const TextureDesc *, GetDesc)() CONST;
+            VOODOO_METHOD_(const TextureDesc, GetDesc)() CONST;
 
             /**
              * Retrieves a portion of the texture data from the image.
@@ -248,7 +248,7 @@ namespace VoodooShader
              */
             VOODOO_METHOD_(uint32_t, GetData)
             (
-                _In_ const TextureRegion * pDesc,
+                _In_ const TextureRegion pDesc,
                 _In_ const uint32_t size,
                 _In_opt_count_(size) void * const pBuffer
             ) CONST;

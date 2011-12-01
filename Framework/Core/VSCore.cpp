@@ -515,7 +515,7 @@ namespace VoodooShader
         }
     }
 
-    ITexture * VOODOO_METHODTYPE VSCore::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
+    ITexture * VOODOO_METHODTYPE VSCore::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
     {
         if (!m_CgContext)
         {

@@ -92,7 +92,7 @@ namespace VoodooNetClasses
                 hookKey.SetValue("Active", hook.Active);
                 hookKey.SetValue("Name", hook.Name);
                 hookKey.SetValue("Target", hook.Target);
-                hookKey.SetValue("config", hook.Config);
+                hookKey.SetValue("Config", hook.Config);
             }
         }
 

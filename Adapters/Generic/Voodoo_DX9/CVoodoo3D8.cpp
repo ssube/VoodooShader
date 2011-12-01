@@ -246,7 +246,7 @@ namespace VoodooShader
                 backbufferDesc.RenderTarget = true;
                 backbufferDesc.Format = VoodooShader::TF_RGB8;
 
-                texture_ThisFrame = gpVoodooCore->CreateTexture(L":thisframe", &backbufferDesc);
+                texture_ThisFrame = gpVoodooCore->CreateTexture(L":thisframe", backbufferDesc);
 
                 if (texture_ThisFrame)
                 {

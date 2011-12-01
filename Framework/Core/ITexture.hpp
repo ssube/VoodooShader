@@ -64,7 +64,7 @@ namespace VoodooShader
          *
          * @return The description.
          */
-        VOODOO_METHOD_(const TextureDesc *, GetDesc)() CONST PURE;
+        VOODOO_METHOD_(const TextureDesc, GetDesc)() CONST PURE;
     };
     /**
      * @}

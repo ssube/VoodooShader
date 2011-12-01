@@ -134,7 +134,7 @@ namespace VoodooGUI
             }
 
             count += files.LongLength;
-            if (level < 6) { worker.ReportProgress(1, count); }
+            if (level < 10) { worker.ReportProgress(1, count); }
 
             foreach (DirectoryInfo innerdir in dir.GetDirectories())
             {
