@@ -31,7 +31,7 @@ void CameraHack(void)
 {
     ILoggerRef logger = gpVoodooCore->GetLogger();
 
-    logger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Applying camera hack...");
+    logger->Log(LL_ModInfo, VOODOO_FROST_NAME, L"Applying camera hack...");
 
     float maxDist   = 120.0f;
     float minDist   = -0.2f;
@@ -50,12 +50,12 @@ void CameraHack(void)
 
         VirtualProtect((PVOID) 0x004A9000, 0x1000, oldProtect, &finalProtect);
 
-        logger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Camera hack successfully applied.");
+        logger->Log(LL_ModInfo, VOODOO_FROST_NAME, L"Camera hack successfully applied.");
     }
     else
     {
         DWORD error = GetLastError();
 
-        logger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Camera hack failed with code %u.", error);
+        logger->Log(LL_ModInfo, VOODOO_FROST_NAME, L"Camera hack failed with code %u.", error);
     }
 }

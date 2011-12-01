@@ -19,6 +19,7 @@
  */
 
 #include "VoodooGL.hpp"
+
 #include "Frost_Adapter.hpp"
 
 HWND gNwnWindow = nullptr;
@@ -107,7 +108,7 @@ void GLAPIENTRY vglClear(GLbitfield mask)
         glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, gViewWidth, gViewHeight, 0);
 
         // Do shaders
-        VoodooFrost->DrawShader(gpTestShader);
+        reinterpret_cast<VoodooShader::Frost::FrostAdapter*>(gpVoodooCore->GetAdapter())->DrawShader(gpTestShader);
     }
 
     gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glClear(%u)", mask);
@@ -171,7 +172,7 @@ const GLubyte * GLAPIENTRY vglGetString (GLenum name)
 {
     const GLubyte *result = glGetString(name);
 
-    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glGetString(%u) == %s", name, result);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glGetString(%u) == %S", name, result);
 
     return result;
 }
@@ -196,7 +197,7 @@ HGLRC WINAPI vwglCreateContext(HDC hdc)
     return result;
 }
 
-bool WINAPI vwglDeleteContext(HGLRC hglrc)
+BOOL WINAPI vwglDeleteContext(HGLRC hglrc)
 {
     if (gSecondContext && gNwnWindow)
     {
@@ -204,7 +205,7 @@ bool WINAPI vwglDeleteContext(HGLRC hglrc)
         gSecondContext = false;
     }
 
-    bool result = wglDeleteContext(hglrc);
+    BOOL result = wglDeleteContext(hglrc);
 
     gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglDeleteContext(%p) == %i", hglrc, result);
 
@@ -215,14 +216,14 @@ PROC WINAPI vwglGetProcAddress(LPCSTR name)
 {
     PROC result = wglGetProcAddress(name);
 
-    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglGetProcAddress(%s) == %p", name, result);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglGetProcAddress(%S) == %p", name, result);
 
     return result;
 }
 
-bool WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
+BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 {
-    bool result = wglMakeCurrent(hdc, hglrc);
+    BOOL result = wglMakeCurrent(hdc, hglrc);
 
     gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglMakeCurrent(%p, %p) == %i", hdc, hglrc, result);
 
@@ -250,12 +251,13 @@ bool WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
             strcat_s(title, " [ Voodoo Frost ]");
             SetWindowTextA(gNwnWindow, title);
         }
-
-        //gpVoodooCore->GetAdapter()->SetDC(hdc);
-        //VoodooFrost->SetGLRC(hglrc);
+        
+        Frost::FrostAdapter * adapter = reinterpret_cast<VoodooShader::Frost::FrostAdapter*>(gpVoodooCore->GetAdapter());
+        adapter->SetDC(hdc);
+        adapter->SetGLRC(hglrc);
 
         gpVoodooCore->GetLogger()->Log(LL_ModInfo, VOODOO_FROST_NAME,
-            L"OpenGL driver information:&lt;br /&gt;\nVendor: %s&lt;br /&gt;\nRenderer: %s&lt;br /&gt;\nVersion: %s",
+            L"OpenGL driver information:&lt;br /&gt;\nVendor: %S&lt;br /&gt;\nRenderer: %S&lt;br /&gt;\nVersion: %S",
             glGetString(GL_VENDOR), glGetString(GL_RENDERER), glGetString(GL_VERSION));
 
         GLint viewportInfo[4];
@@ -270,9 +272,9 @@ bool WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
     return result;
 }
 
-bool WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
+BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
 {
-    bool result = wglSwapLayerBuffers(hdc, uint);
+    BOOL result = wglSwapLayerBuffers(hdc, uint);
 
     gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglSwapLayerBuffers(%p, %u) == %i", hdc, uint, result);
 

@@ -35,7 +35,7 @@ const GLubyte * GLAPIENTRY vglGetString(GLenum name);
 void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height);
 
 HGLRC WINAPI vwglCreateContext(HDC hdc);
-bool WINAPI vwglDeleteContext(HGLRC hglrc);
-bool WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc);
+BOOL WINAPI vwglDeleteContext(HGLRC hglrc);
+BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc);
 PROC WINAPI vwglGetProcAddress(LPCSTR name);
-bool WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint);
+BOOL WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint);

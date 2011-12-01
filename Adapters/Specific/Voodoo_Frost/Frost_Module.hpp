@@ -39,7 +39,7 @@ namespace VoodooShader
         class FrostAdapter;
         class FrostTexture;
 
-        Version API_ModuleVersion(void);
+        const Version * API_ModuleVersion(void);
         uint32_t API_ClassCount(void);
         const wchar_t * API_ClassInfo(_In_ uint32_t index, Uuid & clsid);
         IObject * API_ClassCreate(_In_ uint32_t index, _In_ ICore * pCore);

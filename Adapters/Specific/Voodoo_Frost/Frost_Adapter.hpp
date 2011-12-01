@@ -53,8 +53,9 @@ namespace VoodooShader
             VOODOO_METHOD(ConnectTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
             VOODOO_METHOD(HandleError)(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
 
-            void DrawShader(IShader * pShader);
-
+            void DrawShader(_In_ IShader * pShader);
+            void SetDC(_In_opt_ HDC hdc);
+            void SetGLRC(_In_opt_ HGLRC hglrc);
 
         private:
             mutable uint32_t m_Refs;
