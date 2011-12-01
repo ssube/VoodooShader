@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using VoodooNetClasses;
 
 namespace VoodooGUI
 {
@@ -29,9 +30,15 @@ namespace VoodooGUI
         private InstallGlobalHook m_InstallFunc;
         private RemoveGlobalHook m_RemoveFunc;
 
+        private HookList m_Hooks;
+
         public MainForm()
         {
             InitializeComponent();
+
+            m_Hooks = new HookList();
+            cHook_Table.AutoGenerateColumns = false;
+            cHook_Table.DataSource = m_Hooks.List;
 
             m_NativeModule = LoadLibrary("Voodoo_HookStub.dll");
             if (m_NativeModule != IntPtr.Zero)
@@ -90,7 +97,7 @@ namespace VoodooGUI
                 Hide();
 
                 cTrayIcon.BalloonTipTitle = "Voodoo UI Hidden";
-                cTrayIcon.BalloonTipText = "Voodoo will remain active and hooks will be loaded while the UI is hidden.";
+                cTrayIcon.BalloonTipText = "Voodoo will remain active and will be loaded by hooks while the UI is hidden.";
                 cTrayIcon.ShowBalloonTip(5000);
             }
         }
@@ -137,6 +144,16 @@ namespace VoodooGUI
             {
                 Menu_Hook_Disable(null, null);
             }
+        }
+
+        private void HookTable_Selection(object sender, EventArgs e)
+        {
+            UpdateHookDetails();
+        }
+
+        private void UpdateHookDetails()
+        {
+
         }
     }
 }

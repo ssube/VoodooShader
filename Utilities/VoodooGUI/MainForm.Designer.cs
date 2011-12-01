@@ -33,10 +33,6 @@
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.cHook_Table = new System.Windows.Forms.DataGridView();
-            this.col_Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.col_Icon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Target = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,6 +48,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cMenu = new System.Windows.Forms.ToolStrip();
+            this.cMenu_Hook_On = new System.Windows.Forms.ToolStripButton();
+            this.cMenu_Hook_Off = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMenu_Hook_Add = new System.Windows.Forms.ToolStripButton();
             this.cMenu_Hook_Remove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -62,9 +61,9 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.cMenu_Downloads = new System.Windows.Forms.ToolStripButton();
             this.cTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.cMenu_Hook_On = new System.Windows.Forms.ToolStripButton();
-            this.cMenu_Hook_Off = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.col_Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Target = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -113,7 +112,6 @@
             this.cHook_Table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cHook_Table.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Active,
-            this.col_Icon,
             this.col_Name,
             this.col_Target});
             resources.ApplyResources(this.cHook_Table, "cHook_Table");
@@ -121,34 +119,7 @@
             this.cHook_Table.ReadOnly = true;
             this.cHook_Table.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.cHook_Table.RowHeadersVisible = false;
-            // 
-            // col_Active
-            // 
-            this.col_Active.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            resources.ApplyResources(this.col_Active, "col_Active");
-            this.col_Active.Name = "col_Active";
-            this.col_Active.ReadOnly = true;
-            // 
-            // col_Icon
-            // 
-            this.col_Icon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.col_Icon, "col_Icon");
-            this.col_Icon.Name = "col_Icon";
-            this.col_Icon.ReadOnly = true;
-            // 
-            // col_Name
-            // 
-            this.col_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.col_Name, "col_Name");
-            this.col_Name.Name = "col_Name";
-            this.col_Name.ReadOnly = true;
-            // 
-            // col_Target
-            // 
-            this.col_Target.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.col_Target, "col_Target");
-            this.col_Target.Name = "col_Target";
-            this.col_Target.ReadOnly = true;
+            this.cHook_Table.SelectionChanged += new System.EventHandler(this.HookTable_Selection);
             // 
             // tableLayoutPanel1
             // 
@@ -198,12 +169,6 @@
             this.tableLayoutPanel1.SetColumnSpan(this.listBox1, 3);
             resources.ApplyResources(this.listBox1, "listBox1");
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            resources.GetString("listBox1.Items"),
-            resources.GetString("listBox1.Items1"),
-            resources.GetString("listBox1.Items2"),
-            resources.GetString("listBox1.Items3"),
-            resources.GetString("listBox1.Items4")});
             this.listBox1.Name = "listBox1";
             // 
             // tableLayoutPanel2
@@ -267,6 +232,25 @@
             this.cMenu.Name = "cMenu";
             this.cMenu.Stretch = true;
             // 
+            // cMenu_Hook_On
+            // 
+            this.cMenu_Hook_On.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.cMenu_Hook_On, "cMenu_Hook_On");
+            this.cMenu_Hook_On.Name = "cMenu_Hook_On";
+            this.cMenu_Hook_On.Click += new System.EventHandler(this.Menu_Hook_Disable);
+            // 
+            // cMenu_Hook_Off
+            // 
+            this.cMenu_Hook_Off.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.cMenu_Hook_Off, "cMenu_Hook_Off");
+            this.cMenu_Hook_Off.Name = "cMenu_Hook_Off";
+            this.cMenu_Hook_Off.Click += new System.EventHandler(this.Menu_Hook_Enable);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
             // cMenu_Hook_Add
             // 
             resources.ApplyResources(this.cMenu_Hook_Add, "cMenu_Hook_Add");
@@ -325,24 +309,29 @@
             resources.ApplyResources(this.cTrayIcon, "cTrayIcon");
             this.cTrayIcon.Click += new System.EventHandler(this.Notify_OnClick);
             // 
-            // cMenu_Hook_On
+            // col_Active
             // 
-            this.cMenu_Hook_On.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.cMenu_Hook_On, "cMenu_Hook_On");
-            this.cMenu_Hook_On.Name = "cMenu_Hook_On";
-            this.cMenu_Hook_On.Click += new System.EventHandler(this.Menu_Hook_Disable);
+            this.col_Active.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.col_Active.DataPropertyName = "Active";
+            resources.ApplyResources(this.col_Active, "col_Active");
+            this.col_Active.Name = "col_Active";
+            this.col_Active.ReadOnly = true;
             // 
-            // cMenu_Hook_Off
+            // col_Name
             // 
-            this.cMenu_Hook_Off.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.cMenu_Hook_Off, "cMenu_Hook_Off");
-            this.cMenu_Hook_Off.Name = "cMenu_Hook_Off";
-            this.cMenu_Hook_Off.Click += new System.EventHandler(this.Menu_Hook_Enable);
+            this.col_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Name.DataPropertyName = "Name";
+            resources.ApplyResources(this.col_Name, "col_Name");
+            this.col_Name.Name = "col_Name";
+            this.col_Name.ReadOnly = true;
             // 
-            // toolStripSeparator3
+            // col_Target
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            this.col_Target.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Target.DataPropertyName = "Target";
+            resources.ApplyResources(this.col_Target, "col_Target");
+            this.col_Target.Name = "col_Target";
+            this.col_Target.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -394,10 +383,6 @@
         private System.Windows.Forms.ToolStripButton cMenu_Hook_Wizard;
         private System.Windows.Forms.ToolStripButton cMenu_FindGames;
         private System.Windows.Forms.DataGridView cHook_Table;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn col_Active;
-        private System.Windows.Forms.DataGridViewImageColumn col_Icon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_Target;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton cMenu_Downloads;
@@ -407,6 +392,9 @@
         private System.Windows.Forms.ToolStripButton cMenu_Hook_On;
         private System.Windows.Forms.ToolStripButton cMenu_Hook_Off;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn col_Active;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Target;
 
     }
 }
