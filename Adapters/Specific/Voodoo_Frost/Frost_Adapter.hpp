@@ -23,12 +23,12 @@
 
 namespace VoodooShader
 {
-    namespace Frost
+    namespace VoodooFrost
     {
         VOODOO_CLASS(FrostAdapter, IAdapter, {0xD1, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
         {
         public:
-            FrostAdapter(ICore * pCore);
+            FrostAdapter(_In_ ICore * pCore);
             virtual ~FrostAdapter();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -44,8 +44,8 @@ namespace VoodooShader
             VOODOO_METHOD(ResetPass)(_In_ IPass * const pPass);
             VOODOO_METHOD(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
             VOODOO_METHOD_(ITexture *, GetTarget)(_In_ const uint32_t index) CONST;
-            VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc * pDesc);
-            VOODOO_METHOD(LoadTexture)(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture);
+            VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc pDesc);
+            VOODOO_METHOD(LoadTexture)(_In_ IImage * const pFile, _In_opt_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture);
             VOODOO_METHOD(DrawGeometry)(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags);
             VOODOO_METHOD(ApplyParameter)(_In_ IParameter * const pParam);
             VOODOO_METHOD(SetProperty)(_In_ const wchar_t * name, _In_ Variant * const value);

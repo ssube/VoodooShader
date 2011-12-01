@@ -17,14 +17,18 @@
  * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
+
 #include "Frost_Adapter.hpp"
+
+#include "Frost_Texture.hpp"
+
 #include "VoodooGL.hpp"
 
 #define VOODOO_OGL_HOOK_PARAMS(x) #x, &x, &v##x
 
 namespace VoodooShader
 {
-    namespace Frost
+    namespace VoodooFrost
     {
         FrostAdapter::FrostAdapter(_In_ ICore * pCore) :
             m_Core(pCore), m_DC(nullptr), m_GLRC(nullptr)
@@ -196,7 +200,7 @@ namespace VoodooShader
             return nullptr;
         }
 
-        ITexture * VOODOO_METHODTYPE FrostAdapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
+        ITexture * VOODOO_METHODTYPE FrostAdapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
         {
             GLuint texture;
             GLint texFmt, texIFmt, texType;
@@ -240,7 +244,7 @@ namespace VoodooShader
                 break;
             case TF_Unknown:
             default:
-                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"Unable to resolve texture format.", m_Core);
+                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"Unable to resolve texture format.");
                 return false;
             }
 
@@ -250,7 +254,7 @@ namespace VoodooShader
 
             while (error != GL_NO_ERROR)
             {
-                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"OpenGL returned error %u: %s", error, glGetString(error));
+                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"OpenGL returned error %u: %S", error, glGetString(error));
                 error = glGetError();
             }
 
@@ -261,7 +265,7 @@ namespace VoodooShader
             error = glGetError();
             while (error != GL_NO_ERROR)
             {
-                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"OpenGL returned error %u: %s", error, glGetString(error));
+                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"OpenGL returned error %u: %S", error, glGetString(error));
                 error = glGetError();
             }
 
@@ -274,16 +278,22 @@ namespace VoodooShader
                 m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"OpenGL create failed, returned texture %u.", texture);
             }
 
-            return new FrostTexture(name, pDesc, texture);
+            return new FrostTexture(m_Core, name, texture);
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion * pRegion, _Inout_ ITexture * const pTexture)
+        bool VOODOO_METHODTYPE FrostAdapter::LoadTexture(_In_ IImage * const pFile, _In_opt_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
         {
+            UNREFERENCED_PARAMETER(pFile);
+            UNREFERENCED_PARAMETER(pRegion);
+            UNREFERENCED_PARAMETER(pTexture);
+
             return false;
         }
 
         bool VOODOO_METHODTYPE FrostAdapter::DrawGeometry(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags)
         {
+            UNREFERENCED_PARAMETER(flags);
+
             if (pData)
             {
                 VertexStruct * pVerts = reinterpret_cast<VertexStruct*>(pData);
@@ -357,15 +367,21 @@ namespace VoodooShader
 
         bool VOODOO_METHODTYPE FrostAdapter::SetProperty(const wchar_t * name, Variant * pValue)
         {
+            UNREFERENCED_PARAMETER(name);
+            UNREFERENCED_PARAMETER(pValue);
+
             return false;
         }
 
         bool VOODOO_METHODTYPE FrostAdapter::GetProperty(const wchar_t * name, Variant * pValue) const
         {
+            UNREFERENCED_PARAMETER(name);
+            UNREFERENCED_PARAMETER(pValue);
+
             return false;
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::ConnectTexture(_In_ IParameter* pParam, _In_ ITexture* pTexture)
+        bool VOODOO_METHODTYPE FrostAdapter::ConnectTexture(_In_ IParameter* const pParam, _In_opt_ ITexture* const pTexture)
         {
             pParam->SetTexture(pTexture);
             cgGLSetupSampler(pParam->GetCgParameter(), (GLuint) pTexture->GetData());

@@ -108,7 +108,7 @@ void GLAPIENTRY vglClear(GLbitfield mask)
         glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, gViewWidth, gViewHeight, 0);
 
         // Do shaders
-        reinterpret_cast<VoodooShader::Frost::FrostAdapter*>(gpVoodooCore->GetAdapter())->DrawShader(gpTestShader);
+        reinterpret_cast<VoodooShader::VoodooFrost::FrostAdapter*>(gpVoodooCore->GetAdapter())->DrawShader(gpTestShader);
     }
 
     gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glClear(%u)", mask);
@@ -252,7 +252,7 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
             SetWindowTextA(gNwnWindow, title);
         }
         
-        Frost::FrostAdapter * adapter = reinterpret_cast<VoodooShader::Frost::FrostAdapter*>(gpVoodooCore->GetAdapter());
+        VoodooFrost::FrostAdapter * adapter = reinterpret_cast<VoodooShader::VoodooFrost::FrostAdapter*>(gpVoodooCore->GetAdapter());
         adapter->SetDC(hdc);
         adapter->SetGLRC(hglrc);
 

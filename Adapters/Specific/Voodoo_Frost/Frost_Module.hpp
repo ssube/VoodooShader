@@ -34,7 +34,7 @@
 
 namespace VoodooShader
 {
-    namespace Frost
+    namespace VoodooFrost
     {
         class FrostAdapter;
         class FrostTexture;

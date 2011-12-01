@@ -34,7 +34,7 @@ GLsizei gViewHeight = 0;
 
 namespace VoodooShader
 {
-    namespace Frost
+    namespace VoodooFrost
     {
         const Version * API_ModuleVersion(void)
         {
