@@ -42,7 +42,7 @@ void GLAPIENTRY vglBegin(GLenum mode)
      * gThisFrame.DrawnGeometry = true if ( mode == GL_QUADS &&
      * !glIsEnabled(GL_LIGHTING) ) gThisFrame.DrawnShadows = true materials.unbind()
      */
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glBegin(%u)", mode);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glBegin(%u)", mode);
 
     return glBegin(mode);
 }
@@ -58,7 +58,7 @@ void GLAPIENTRY vglBegin(GLenum mode)
  */
 void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 {
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glBindTexture(%u, %u)", target, texture);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glBindTexture(%u, %u)", target, texture);
 
     /**
      * Pseudocode for the material system:
@@ -88,7 +88,7 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 
 void GLAPIENTRY vglClear(GLbitfield mask)
 {
-    if (VoodooFrost && mask == MASK_HUD && glIsEnabled(GL_LIGHT0))
+    if (mask == MASK_HUD && glIsEnabled(GL_LIGHT0))
     {
         GLint prevTexture = 0;
 
@@ -107,10 +107,10 @@ void GLAPIENTRY vglClear(GLbitfield mask)
         glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, gViewWidth, gViewHeight, 0);
 
         // Do shaders
-        VoodooFrost->DrawShader(TestShader);
+        VoodooFrost->DrawShader(gpTestShader);
     }
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glClear(%u)", mask);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glClear(%u)", mask);
 
     return glClear(mask);
 }
@@ -120,7 +120,7 @@ void GLAPIENTRY vglDeleteTextures(GLsizei n, const GLuint *textures)
     /**
      * for ( GLsizei i = 0; i < n; ++i ) gMaterials.remove(i);
      */
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glDeleteTextures(%i, %p)", n, textures);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glDeleteTextures(%i, %p)", n, textures);
 
     return glDeleteTextures(n, textures);
 }
@@ -129,7 +129,7 @@ void GLAPIENTRY vglDrawElements(GLenum mode, GLsizei count, GLenum type, const G
 {
     gDrawnGeometry = true;
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glDrawElements(%u, %i, %u, %p)", mode, count, type, indices);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glDrawElements(%u, %i, %u, %p)", mode, count, type, indices);
 
     return glDrawElements(mode, count, type, indices);
 }
@@ -138,21 +138,21 @@ void GLAPIENTRY vglEnable(GLenum cap)
 {
     if (cap == GL_FOG && gFogMult > 0) return;
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glEnable(%u)", cap);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glEnable(%u)", cap);
 
     return glEnable(cap);
 }
 
 void GLAPIENTRY vglEnd(void)
 {
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glEnd()");
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glEnd()");
 
     return glEnd();
 }
 
 void GLAPIENTRY vglFogfv(GLenum pname, const GLfloat *params)
 {
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glFogfv(%u, %p)", pname, params);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glFogfv(%u, %p)", pname, params);
 
     return glFogfv(pname, params);
 }
@@ -162,7 +162,7 @@ void GLAPIENTRY vglFogf(GLenum pname, GLfloat param)
     if (pname == GL_FOG_START) param = param * gFogMult;
     if (pname == GL_FOG_END) param = param * gFogMult;
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glFogf(%u, %f)", pname, param);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glFogf(%u, %f)", pname, param);
 
     return glFogf(pname, param);
 }
@@ -171,7 +171,7 @@ const GLubyte * GLAPIENTRY vglGetString (GLenum name)
 {
     const GLubyte *result = glGetString(name);
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glGetString(%u) == %s", name, result);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glGetString(%u) == %s", name, result);
 
     return result;
 }
@@ -182,7 +182,7 @@ void GLAPIENTRY vglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
     gViewWidth = width;
     gViewHeight = height;
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "glViewport(%i, %i, %i, %i)", x, y, width, height);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"glViewport(%i, %i, %i, %i)", x, y, width, height);
 
     return glViewport(x, y, width, height);
 }
@@ -191,7 +191,7 @@ HGLRC WINAPI vwglCreateContext(HDC hdc)
 {
     HGLRC result = wglCreateContext(hdc);
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "wglCreateContext(%p) == %p", hdc, result);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglCreateContext(%p) == %p", hdc, result);
 
     return result;
 }
@@ -200,13 +200,13 @@ bool WINAPI vwglDeleteContext(HGLRC hglrc)
 {
     if (gSecondContext && gNwnWindow)
     {
-        VoodooFrost->SetGLRC(nullptr);
+        //VoodooFrost->SetGLRC(nullptr);
         gSecondContext = false;
     }
 
     bool result = wglDeleteContext(hglrc);
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "wglDeleteContext(%p) == %i", hglrc, result);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglDeleteContext(%p) == %i", hglrc, result);
 
     return result;
 }
@@ -215,17 +215,16 @@ PROC WINAPI vwglGetProcAddress(LPCSTR name)
 {
     PROC result = wglGetProcAddress(name);
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "wglGetProcAddress(%s) == %p", name, result);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglGetProcAddress(%s) == %p", name, result);
 
     return result;
 }
 
 bool WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 {
-
     bool result = wglMakeCurrent(hdc, hglrc);
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglMakeCurrent(%p, %p) == %i", hdc, hglrc, result);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglMakeCurrent(%p, %p) == %i", hdc, hglrc, result);
 
     if (!gSecondContext)
     {
@@ -237,7 +236,7 @@ bool WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
 
         if (glewStatus != GLEW_OK)
         {
-            VoodooLogger->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to initialize GLEW (code %u).", glewStatus);
+            gpVoodooCore->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to initialize GLEW (code %u).", glewStatus);
 
             return result;
         }
@@ -252,10 +251,10 @@ bool WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
             SetWindowTextA(gNwnWindow, title);
         }
 
-        VoodooFrost->SetDC(hdc);
-        VoodooFrost->SetGLRC(hglrc);
+        //gpVoodooCore->GetAdapter()->SetDC(hdc);
+        //VoodooFrost->SetGLRC(hglrc);
 
-        VoodooLogger->Log(LL_ModInfo, VOODOO_FROST_NAME,
+        gpVoodooCore->GetLogger()->Log(LL_ModInfo, VOODOO_FROST_NAME,
             L"OpenGL driver information:&lt;br /&gt;\nVendor: %s&lt;br /&gt;\nRenderer: %s&lt;br /&gt;\nVersion: %s",
             glGetString(GL_VENDOR), glGetString(GL_RENDERER), glGetString(GL_VERSION));
 
@@ -275,7 +274,7 @@ bool WINAPI vwglSwapLayerBuffers(HDC hdc, UINT uint)
 {
     bool result = wglSwapLayerBuffers(hdc, uint);
 
-    VoodooLogger->Log(LL_ModDebug, VOODOO_FROST_NAME, "wglSwapLayerBuffers(%p, %u) == %i", hdc, uint, result);
+    gpVoodooCore->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"wglSwapLayerBuffers(%p, %u) == %i", hdc, uint, result);
 
     // updateShaderVars()
     gDrawnGeometry = false;

@@ -20,6 +20,7 @@
 #pragma once
 
 #define VOODOO_IMPORT
+#define VOODOO_NO_PUGIXML
 #include "VoodooFramework.hpp"
 
 // GLEW OpenGL extensions

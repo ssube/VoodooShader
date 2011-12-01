@@ -177,7 +177,7 @@ namespace VoodooShader
 
         bool VOODOO_METHODTYPE FrostAdapter::ResetPass(_In_ IPass * pPass)
         {
-            cgResetPassState(pPass);
+            cgResetPassState(pPass->GetCgPass());
         }
 
         bool VOODOO_METHODTYPE FrostAdapter::SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget)
@@ -192,7 +192,7 @@ namespace VoodooShader
             return nullptr;
         }
 
-        ITexture * VOODOO_METHODTYPE FrostAdapter::CreateTexture(_In_ const String & name, _In_ TextureDesc * pDesc)
+        ITexture * VOODOO_METHODTYPE FrostAdapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc * pDesc)
         {
 
             GLuint texture;
