@@ -1,12 +1,22 @@
 LIBRARY
 
 EXPORTS
-Direct3DCreate8 = Voodoo3DCreate8
-Direct3DCreate9 = Voodoo3DCreate9
-DirectInput8Create = VoodooInput8Create
-DirectInputCreateA = VoodooInputCreateA
-DirectInputCreateW = VoodooInputCreateW
-DirectSoundCreate8 = VoodooSoundCreate8
+Direct3DCreate8 = VSDirect3DCreate8
+
+D3DPERF_EndEvent = VSD3DPERF_EndEvent
+D3DPERF_GetStatus = VSD3DPERF_GetStatus
+D3DPERF_QueryRepeatFrame = VSD3DPERF_QueryRepeatFrame
+D3DPERF_SetMarker = VSD3DPERF_SetMarker
+D3DPERF_SetOptions = VSD3DPERF_SetOptions
+D3DPERF_SetRegion = VSD3DPERF_SetRegion
+Direct3DCreate9 = VSDirect3DCreate9
+Direct3DCreate9Ex = VSDirect3DCreate9Ex
+
+DirectInput8Create = VSDirectInput8Create
+DirectInputCreateA = VSDirectInputCreateA
+DirectInputCreateW = VSDirectInputCreateW
+
+DirectSoundCreate8 = VSDirectSoundCreate8
 
 ModuleVersion=API_ModuleVersion
 ClassCount=API_ClassCount

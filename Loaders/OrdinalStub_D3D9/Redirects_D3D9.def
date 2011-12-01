@@ -1,0 +1,17 @@
+LIBRARY
+
+EXPORTS
+Direct3DShaderValidatorCreate9 = Voodoo_Loader.Direct3DShaderValidatorCreate9
+PSGPError = Voodoo_Loader.PSGPError
+PSGPSampleTexture = Voodoo_Loader.PSGPSampleTexture
+D3DPERF_BeginEvent = Voodoo_Loader.D3DPERF_BeginEvent
+D3DPERF_EndEvent = Voodoo_Loader.D3DPERF_EndEvent
+D3DPERF_GetStatus = Voodoo_Loader.D3DPERF_GetStatus
+D3DPERF_QueryRepeatFrame = Voodoo_Loader.D3DPERF_QueryRepeatFrame
+D3DPERF_SetMarker = Voodoo_Loader.D3DPERF_SetMarker
+D3DPERF_SetOptions = Voodoo_Loader.D3DPERF_SetOptions
+D3DPERF_SetRegion = Voodoo_Loader.D3DPERF_SetRegion
+DebugSetLevel = Voodoo_Loader.DebugSetLevel
+DebugSetMute = Voodoo_Loader.DebugSetMute
+Direct3DCreate9 = Voodoo_Loader.Direct3DCreate9
+Direct3DCreate9Ex = Voodoo_Loader.Direct3DCreate9Ex

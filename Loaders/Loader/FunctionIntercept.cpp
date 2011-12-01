@@ -31,14 +31,16 @@ std::map<FARPROC, TRACED_HOOK_HANDLE> gHooks;
 
 ULONG threadList[] = {0};
 
-ModuleHooks hookList[] =
+ModuleHook hookList[] =
 {
-    { L"d3d8.dll",      "Direct3DCreate8",      &Voodoo3DCreate8 },
-    { L"d3d9.dll",      "Direct3DCreate9",      &Voodoo3DCreate9 },
-    { L"dinput8.dll",   "DirectInput8Create",   &VoodooInput8Create },
-    { L"dinput.dll",    "DirectInputCreateA",   &VoodooInputCreateA },
-    { L"dinput.dll",    "DirectInputCreateW",   &VoodooInputCreateW },
-    { L"dsound8.dll",   "DirectSoundCreate8",   &VoodooSoundCreate8 },
+    { L"d3d8.dll",      "Direct3DCreate8",      &VSDirect3DCreate8 },
+    { L"d3d9.dll",      "Direct3DCreate9",      &VSDirect3DCreate9 },
+    { L"d3d9.dll",      "Direct3DCreate9Ex",    &VSDirect3DCreate9Ex },
+    { L"d3d10.dll",     "D3D10CreateDevice",    &VSD3D10CreateDevice },
+    { L"dinput8.dll",   "DirectInput8Create",   &VSDirectInput8Create },
+    { L"dinput.dll",    "DirectInputCreateA",   &VSDirectInputCreateA },
+    { L"dinput.dll",    "DirectInputCreateW",   &VSDirectInputCreateW },
+    { L"dsound8.dll",   "DirectSoundCreate8",   &VSDirectSoundCreate8 },
     { nullptr,          nullptr,                nullptr }
 };
 
@@ -92,7 +94,7 @@ bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol)
     }
 }
 
-int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHooks * hooks)
+int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHook * hooks)
 {
     if (!hooks)
     {
@@ -119,7 +121,7 @@ int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHooks
 
 int WINAPI InstallKnownHooks()
 {
-    return InstallHookList(2, hookList);
+    return InstallHookList(sizeof(hookList) / sizeof(ModuleHook), hookList);
 }
 
 bool WINAPI LoadEasyHook()

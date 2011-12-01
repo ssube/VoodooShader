@@ -41,7 +41,19 @@
     <ClCompile Include="SysAPIHandler.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="ExportLoadpoints.cpp">
+    <ClCompile Include="Exports_D3D9.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Exports_D3D8.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Exports_D3D10.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Exports_DInput.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Exports_DSound8.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

@@ -25,5 +25,6 @@
 void WINAPI ErrorMessage(const LPTSTR msg, ...);
 
 HMODULE WINAPI LoadSystemLibrary(const LPTSTR libname);
+void * WINAPI FindFunction(const LPTSTR libname, const LPCSTR funcname, HMODULE * pModule);
 
 bool WINAPI IsDllLoaded(_In_z_ LPTSTR name);

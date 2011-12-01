@@ -24,7 +24,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-struct ModuleHooks
+struct ModuleHook
 {
     TCHAR * name;
     const char * symbol;
@@ -34,7 +34,7 @@ struct ModuleHooks
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc);
 bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol);
 
-int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHooks * hooks);
+int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHook * hooks);
 int WINAPI InstallKnownHooks();
 
 bool WINAPI LoadEasyHook();

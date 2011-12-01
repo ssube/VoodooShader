@@ -73,9 +73,9 @@ BEGIN
             VALUE "CompanyName", VOODOO_META_STRING_AUTHOR(DX9)
             VALUE "FileDescription", VOODOO_META_STRING_NAME_FULL(DX9)
             VALUE "FileVersion", VOODOO_META_STRING_VERSION_FULL(DX9)
-            VALUE "InternalName", "Voodoo_DX9"
+            VALUE "InternalName", VOODOO_META_STRING_NAME_INTERNAL
             VALUE "LegalCopyright", VOODOO_GLOBAL_COPYRIGHT_BRIEF
-            VALUE "OriginalFilename", "Voodoo_DX9.dll"
+            VALUE "OriginalFilename", VOODOO_META_STRING_NAME_TARGET
             VALUE "ProductName", VOODOO_META_STRING_NAME_FULL(GLOBAL)
             VALUE "ProductVersion", VOODOO_META_STRING_VERSION_FULL(GLOBAL)
         END

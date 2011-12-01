@@ -72,9 +72,9 @@ BEGIN
         BEGIN
             VALUE "FileDescription", VOODOO_META_STRING_NAME_FULL(FROST)
             VALUE "FileVersion", VOODOO_META_STRING_VERSION_BASIC(FROST)
-            VALUE "InternalName", VOODOO_META_STRING_NAME_BASIC(FROST)
+            VALUE "InternalName", VOODOO_META_STRING_NAME_INTERNAL
             VALUE "LegalCopyright", VOODOO_GLOBAL_COPYRIGHT_BRIEF
-            VALUE "OriginalFilename", "Voodoo_Frost.dll"
+            VALUE "OriginalFilename", VOODOO_META_STRING_NAME_TARGET
             VALUE "ProductName", VOODOO_META_STRING_NAME_FULL(GLOBAL)
             VALUE "ProductVersion", VOODOO_META_STRING_VERSION_BASIC(GLOBAL)
         END

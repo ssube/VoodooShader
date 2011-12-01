@@ -66,7 +66,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ExportLoadpoints.cpp" />
+    <ClCompile Include="Exports_D3D10.cpp" />
+    <ClCompile Include="Exports_D3D8.cpp" />
+    <ClCompile Include="Exports_D3D9.cpp" />
+    <ClCompile Include="Exports_DInput.cpp" />
+    <ClCompile Include="Exports_DSound8.cpp" />
     <ClCompile Include="SysAPIHandler.cpp" />
     <ClCompile Include="FunctionIntercept.cpp" />
     <ClCompile Include="VoodooTie.cpp" />

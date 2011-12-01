@@ -22,16 +22,29 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-// Direct3D create functions
-void * WINAPI VoodooD3DCreateGeneric(UINT sdkVersion, const wchar_t * lib, const char * func);
-void * WINAPI Voodoo3DCreate8(UINT sdkVersion);
-void * WINAPI Voodoo3DCreate9(UINT sdkVersion);
+// Direct3D8 Exports
+void * WINAPI VSDirect3DCreate8(UINT sdkVersion);
 
-// DirectInput create functions
-HRESULT WINAPI VoodooInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID * ppvOut, LPVOID punkOuter);
-HRESULT WINAPI VoodooInputCreateGeneric(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter, const char * func);
-HRESULT WINAPI VoodooInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
-HRESULT WINAPI VoodooInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
+// Direct3D9 Exports
+int WINAPI VSD3DPERF_BeginEvent(DWORD col, LPCWSTR wszName);
+int WINAPI VSD3DPERF_EndEvent();
+void WINAPI VSD3DPERF_SetMarker(DWORD col, LPCWSTR wszName);
+void WINAPI VSD3DPERF_SetRegion(DWORD col, LPCWSTR wszName);
+BOOL WINAPI VSD3DPERF_QueryRepeatFrame();
+void WINAPI VSD3DPERF_SetOptions(DWORD dwOptions);
+DWORD WINAPI VSD3DPERF_GetStatus();
+LPVOID WINAPI VSDirect3DCreate9(UINT SDKVersion);
+HRESULT WINAPI VSDirect3DCreate9Ex(UINT SDKVersion, LPVOID * dx);
 
-// DirectSound create functions
-HRESULT WINAPI VoodooSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter);
+// Direct3D10 Exports
+HRESULT WINAPI VSD3D10CreateDevice(LPVOID pAdapter, DWORD DriverType, HMODULE Software, UINT Flags, UINT SDKVersion, LPVOID *ppDevice);
+HRESULT WINAPI VSD3D10CreateDeviceAndSwapChain(LPVOID pAdapter, DWORD DriverType, HMODULE Software, UINT Flags, UINT SDKVersion, LPVOID pSwapChainDesc, LPVOID *ppSwapChain, LPVOID *ppDevice);
+HRESULT WINAPI VSD3D10CreateBlob(SIZE_T NumBytes, LPVOID *ppBuffer);
+
+// DirectInput Exports
+HRESULT WINAPI VSDirectInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID * ppvOut, LPVOID punkOuter);
+HRESULT WINAPI VSDirectInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
+HRESULT WINAPI VSDirectInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter);
+
+// DirectSound Exports
+HRESULT WINAPI VSDirectSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter);

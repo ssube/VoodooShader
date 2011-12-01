@@ -59,6 +59,16 @@ HMODULE WINAPI LoadSystemLibrary(const LPTSTR libname)
 
     return LoadLibrary(path);
 }
+
+void * WINAPI FindFunction(const LPTSTR libname, const LPCSTR funcname, HMODULE * pModule)
+{
+    if (*pModule == nullptr)
+    {
+        *pModule = LoadSystemLibrary(libname);
+    }
+
+    return GetProcAddress(*pModule, funcname);
+}
 /**
  * @}
  */
