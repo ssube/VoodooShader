@@ -18,3 +18,4 @@ Included are:
  - EasyHook 2.6
  - Glew 1.5.7
  - pugixml 1.0 (32-bit)
+ - NDesk.Options 0.2.1
