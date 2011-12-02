@@ -86,6 +86,7 @@
     <ClCompile Include="VSHookManager.cpp" />
     <ClCompile Include="VSModule.cpp" />
     <ClCompile Include="VSLogger.cpp" />
+    <ClCompile Include="VSModuleManager.cpp" />
     <ClCompile Include="VSParameter.cpp" />
     <ClCompile Include="VSParser.cpp" />
     <ClCompile Include="VSPass.cpp" />
@@ -96,12 +97,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Converter.hpp" />
+    <ClInclude Include="IFile.hpp" />
+    <ClInclude Include="IImage.hpp" />
+    <ClInclude Include="IModuleManager.hpp" />
     <ClInclude Include="Version_Build.hpp" />
     <ClInclude Include="VSAdapter.hpp" />
     <ClInclude Include="VSCore.hpp" />
     <ClInclude Include="VSFilesystem.hpp" />
     <ClInclude Include="VSHookManager.hpp" />
     <ClInclude Include="VSModule.hpp" />
+    <ClInclude Include="VSModuleManager.hpp" />
     <ClInclude Include="VSParameter.hpp" />
     <ClInclude Include="Exception.hpp" />
     <ClInclude Include="Exports.hpp" />

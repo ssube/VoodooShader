@@ -243,7 +243,9 @@ namespace VoodooShader
 
     /* Collections */
 #if !defined(VOODOO_NO_COLLECTIONS) && !defined(VOODOO_NO_BOOST)
-    typedef std::map<String, String>             Dictionary;
+    typedef std::map<String, String>             StringMap;
+    typedef std::list<String>                    StringList;
+    typedef std::vector<String>                  StringVector;
     typedef std::map<String, IShaderRef>         ShaderMap;
     typedef std::list<IShaderRef>                ShaderList;
     typedef std::vector<IShaderRef>              ShaderVector;
@@ -260,9 +262,13 @@ namespace VoodooShader
     typedef std::list<ITextureRef>               TextureList;
     typedef std::vector<ITextureRef>             TextureVector;
     typedef std::map<String, IModuleRef>         ModuleMap;
+
+    typedef StringMap                            Dictionary;
+
     typedef std::pair<IModuleRef, int32_t>       ClassID;
     typedef std::map<Uuid, ClassID>              ClassMap;
     typedef std::map<String, Uuid>               ClassNameMap;
+
     typedef std::map<ITextureRef, IShaderRef>    MaterialMap;
 #endif
 
@@ -276,7 +282,7 @@ namespace VoodooShader
      */
     enum TextureFormat : uint32_t
     {
-        TF_Unknown  = 0x0,      /* !< Unknown texture format */
+        TF_Unknown  = 0x0,      /* !< Unknown texture format. */
 
         // Backbuffer formats
         TF_RGB5     = 0x101,    /* !< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
@@ -298,12 +304,12 @@ namespace VoodooShader
      */
     enum ParameterType : uint32_t
     {
-        PT_Unknown      = 0x00,     /* !< Unknown parameter type */
+        PT_Unknown      = 0x00,     /* !< Unknown parameter type. */
         // floats
-        PT_Float1       = 0x11,     /* !< Single-component float vector */
-        PT_Float2       = 0x12,     /* !< Two-component float vector */
-        PT_Float3       = 0x13,     /* !< Three-component float vector */
-        PT_Float4       = 0x14,     /* !< Four-component float vector */
+        PT_Float1       = 0x11,     /* !< Single-component float vector. */
+        PT_Float2       = 0x12,     /* !< Two-component float vector. */
+        PT_Float3       = 0x13,     /* !< Three-component float vector. */
+        PT_Float4       = 0x14,     /* !< Four-component float vector. */
         PT_Float1x1     = 0x11,
         PT_Float1x2     = 0x12,
         PT_Float1x3     = 0x13,
@@ -321,47 +327,82 @@ namespace VoodooShader
         PT_Float4x3     = 0x43,
         PT_Float4x4     = 0x44,
         // Samplers
-        PT_Sampler1D    = 0x101,    /* !< One-dimensional sampler (for a 1D texture, see @ref texturetypes "texture types" for more info) */
-        PT_Sampler2D    = 0x102,    /* !< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info) */
-        PT_Sampler3D    = 0x103,    /* !< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info) */
+        PT_Sampler1D    = 0x101,    /* !< One-dimensional sampler (for a 1D texture, see @ref texturetypes "texture types" for more info). */
+        PT_Sampler2D    = 0x102,    /* !< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info). */
+        PT_Sampler3D    = 0x103,    /* !< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info). */
         // Structs
         PT_Struct       = 0x1000
     };
 
     enum ParameterCategory : uint32_t
     {
-        PC_Unknown      = 0x00,     /* !< Unknown parameter category */
-        PC_Float        = 0x01,     /* !< float vector parameter (may have 1 to 4 components) */
-        PC_Sampler      = 0x02,     /* !< Sampler parameter (may sample 1D to 3D textures) */
+        PC_Unknown      = 0x00,     /* !< Unknown parameter category. */
+        PC_Float        = 0x01,     /* !< float vector parameter (may have 1 to 4 components). */
+        PC_Sampler      = 0x02,     /* !< Sampler parameter (may sample 1D to 3D textures). */
         PC_Struct       = 0x04
     };
 
     enum ProgramStage : uint32_t
     {
         PS_Unknown      = 0x00,     /* !< Unknown program stage */
-        PS_Vertex       = 0x01,     /* !< Vertex program stage (usually supported, see @ref programstages "program stages" for more info) */
-        PS_Fragment     = 0x02,     /* !< Fragment program stage (usually supported, see @ref programstages "program stages" for more info) */
-        PS_Geometry     = 0x03,     /* !< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info) */
-        PS_Domain       = 0x04,     /* !< Domain program stage (not always supported, see @ref programstages "program stages" for more info) */
-        PS_Hull         = 0x05      /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info) */
+        PS_Vertex       = 0x01,     /* !< Vertex program stage (usually supported, see @ref programstages "program stages" for more info). */
+        PS_Fragment     = 0x02,     /* !< Fragment program stage (usually supported, see @ref programstages "program stages" for more info). */
+        PS_Geometry     = 0x03,     /* !< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info). */
+        PS_Domain       = 0x04,     /* !< Domain program stage (not always supported, see @ref programstages "program stages" for more info). */
+        PS_Hull         = 0x05      /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info). */
     };
 
     enum TextureStage : uint32_t
     {
-        TS_Unknown      = 0x00,     /* !< Unknown texture stage */
-        TS_Shader       = 0x01,     /* !< Shader target texture */
-        TS_Pass         = 0x02      /* !< Pass target texture */
+        TS_Unknown      = 0x00,     /* !< Unknown texture stage. */
+        TS_Shader       = 0x01,     /* !< Shader target texture. */
+        TS_Pass         = 0x02      /* !< Pass target texture. */
     };
 
+    /**
+     * File stream type for seek and get operations.
+     */
+    enum StreamType : uint32_t
+    {
+        ST_Unknown      = 0x00,
+        ST_Get          = 0x01,
+        ST_Put          = 0x02
+    };
+
+    /**
+     * File seek offset modes.
+     */
+    enum SeekMode : uint32_t
+    {
+        SM_Unknown      = 0x00,
+        SM_Begin        = 0x01,     /* !< Seek relative to the beginning of the file (an absolute offset). */
+        SM_Current      = 0x02,     /* !< Seek relative to the current position (forward or back). */
+        SM_End          = 0x03      /* !< Seek relative to the end of the file. */
+    };
+
+    /**
+     * File find modes.
+     */
+    enum GetFileMode : uint32_t
+    {
+        FF_Unknown      = 0x00,
+        FF_CreateOnly   = 0x01,     /* !< Create the file in the first possible directory, or fail if it already exists. */
+        FF_OpenOnly     = 0x02,     /* !< Open the file, or fail if it does not exist. */
+        FF_AlwaysOpen   = 0x03,     /* !< Open the file if it exists, or create it if it does not. */
+    };
+
+    /**
+     * File open access modes.
+     */
     enum FileOpenMode : uint32_t
     {
-        FM_Unknown      = 0x00,
-        FM_Read         = 0x01,
-        FM_Write        = 0x02,
-        FM_ReadWrite    = 0x03,
-        FM_CreateOnly   = 0x10,
-        FM_OpenOnly     = 0x20,
-        FM_AlwaysOpen   = 0x30
+        FO_Unknown      = 0x00,
+        FO_Read         = 0x01,     /* !< Read-only access. */
+        FO_Write        = 0x02,     /* !< Write-only access. */
+        FO_ReadWrite    = 0x03,     /* !< Read/write access. */
+        FO_Ate          = 0x10,     /* !< Set position to the end of the file (if not set, position defaults to the beginning). */
+        FO_Append       = 0x20,     /* !< Write operations are performed at the end of the file. Not compatible with FM_Read. */
+        FO_Truncate     = 0x40,     /* !< If the file existed, all contents are erased. Not compatible with FM_CreateOnly. */
     };
 
     /**

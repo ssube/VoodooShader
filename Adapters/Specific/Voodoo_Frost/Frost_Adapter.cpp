@@ -521,7 +521,7 @@ namespace VoodooShader
                 gLastShader = (GLint) m_TexLastShader->GetData();
 
                 // Load shader
-                IFile * shaderFile = m_Core->GetFileSystem()->FindFile(L"test.cgfx");
+                IFile * shaderFile = m_Core->GetFileSystem()->GetFile(L"test.cgfx");
                 gpTestShader = m_Core->CreateShader(shaderFile, nullptr);
             }
             else

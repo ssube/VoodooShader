@@ -49,6 +49,9 @@
     <ClCompile Include="VSLogger.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
+    <ClCompile Include="VSModuleManager.cpp">
+      <Filter>Source\Implementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -161,6 +164,18 @@
     </ClInclude>
     <ClInclude Include="Docs_License.dox">
       <Filter>Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="IFile.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IImage.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IModuleManager.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="VSModuleManager.hpp">
+      <Filter>Headers\Implementations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

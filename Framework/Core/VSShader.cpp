@@ -25,6 +25,7 @@
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
+#include "IFile.hpp"
 #include "IFilesystem.hpp"
 #include "ILogger.hpp"
 #include "IParser.hpp"
@@ -565,7 +566,7 @@ namespace VoodooShader
         IAdapterRef adapter = m_Core->GetAdapter();
         ITextureRef texture = m_Core->CreateTexture(texName, (TextureDesc)texRegion);
 
-        IFile * texFile = m_Core->GetFileSystem()->FindFile(texName);
+        IFile * texFile = m_Core->GetFileSystem()->GetFile(texName);
         if (texFile)
         {
             IImage * texImage = texFile->OpenImage();

@@ -29,6 +29,8 @@ namespace VoodooShader
      */
 
     /**
+     * @class ILogger
+     * 
      * Provides structured and formatted logging for module listing and level-filtered messages.
      *
      * @par IID
@@ -46,7 +48,7 @@ namespace VoodooShader
         /**
          * Opens a file for use by this logger.
          *
-         * @param filename The name of the file to open (may contain an absolute or relative path).
+         * @param filename The name of the file to open (may contain an absolute or relative path, will be parsed).
          * @param append Flag specifying the open mode; if true, any existing log is truncated.
          * @return Success of the open operation.
          */
@@ -78,6 +80,11 @@ namespace VoodooShader
          * @param level The minimum log level.
          */
         VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level) PURE;
+        /**
+         * Get the current log level.
+         * 
+         * @return The log level.
+         */
         VOODOO_METHOD_(const LogLevel, GetLogLevel)() CONST PURE;
         /**
          * Writes a module stamp to the log. This records the name and version info for a select module (used to log what
@@ -101,7 +108,17 @@ namespace VoodooShader
             _In_ _Printf_format_string_ const wchar_t * format,
             ...
         ) PURE;
+        /**
+         * Set log flags, controls handling of the file (flush after message, formatting, etc).
+         * 
+         * @param flags New flag settings.
+         */
         VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags) PURE;
+        /**
+         * Get the current log flags.
+         * 
+         * @return Current flags.
+         */
         VOODOO_METHOD_(const LogFlags, GetFlags)() CONST PURE;
     };
     /**

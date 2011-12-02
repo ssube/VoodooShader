@@ -96,7 +96,7 @@
 #define VOODOO_GLOBAL_PRETTYNAME        VSTR("Voodoo Shader Framework")
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     5
-#define VOODOO_GLOBAL_VERSION_PATCH     0
+#define VOODOO_GLOBAL_VERSION_PATCH     1
 #include "Version_Build.hpp"
 
 // Core defs
@@ -119,7 +119,7 @@
 #define VOODOO_CG_VERSION_MINOR         0
 #define VOODOO_CG_VERSION_PATCH         0
 #define VOODOO_CG_VERSION_BUILD         16
-#define VOODOO_CG_VERSION_ID                 VSTR("")
+#define VOODOO_CG_VERSION_ID            VSTR("")
 
 // VC
 #define VOODOO_VC_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
@@ -130,4 +130,4 @@
 #define VOODOO_VC_VERSION_MINOR         0
 #define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER
 #define VOODOO_VC_VERSION_BUILD         _MSC_BUILD
-#define VOODOO_VC_VERSION_ID                 VSTR("")
+#define VOODOO_VC_VERSION_ID            VSTR("")

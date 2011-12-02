@@ -31,10 +31,13 @@
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
+#include "IFile.hpp"
 #include "IFilesystem.hpp"
 #include "IHookManager.hpp"
+#include "IImage.hpp"
 #include "ILogger.hpp"
 #include "IModule.hpp"
+#include "IModuleManager.hpp"
 #include "IObject.hpp"
 #include "IParameter.hpp"
 #include "IParser.hpp"

@@ -29,6 +29,8 @@ namespace VoodooShader
      */
 
     /**
+     * @class IAdapter
+     *
      * Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API.
      *
      * @note This class should be implemented for each specific graphics application; some generic adapters are provided for

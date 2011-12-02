@@ -29,6 +29,8 @@ namespace VoodooShader
      */
 
     /**
+     * @class IHookManager
+     * 
      * Defines the interface for handling function-level hooks, redirecting existing functions and calls into new
      * locations. Each Core owns a HookManager implementation.
      *
@@ -60,14 +62,16 @@ namespace VoodooShader
          * Removes a single hook.
          *
          * @param name The name of the hook to remove.
-         * @return The success of the removal operation.
+         * @return Success of the removal operation.
          *
          * @warning <em>Do not</em>, under any circumstances, remove a hook while execution is passing through the
          *     trampoline function. This can cause the process to crash. Until EasyHook is replaced, be careful!
          */
         VOODOO_METHOD(Remove)(_In_ const String & name) PURE;
         /**
-         * Removes all hooks created with this HookManager.
+         * Removes all hooks created by this hook manager.
+         * 
+         * @return Success of the removal operation.
          */
         VOODOO_METHOD(RemoveAll)() PURE;
     };

@@ -26,7 +26,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileSystem.cpp">
+    <ClCompile Include="WFile.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="WFileSystem.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="WImage.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="WFileImpl.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

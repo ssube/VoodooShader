@@ -29,6 +29,8 @@ namespace VoodooShader
      */
 
     /**
+     * @class IFileSystem
+     * 
      * Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even
      * network access. Currently provides a readonly filesystem.
      *
@@ -62,58 +64,14 @@ namespace VoodooShader
         VOODOO_METHOD(RemovePath)(_In_ const String & path) PURE;
         /**
          * Resolves a relative filename (usually just filename and extension, but may include directories) into an
-         * absolute filename by searching the list of resource directories registered with this manager.
+         * absolute filename by searching the list of resource directories registered with this manager. Depending on the
+         * mode given, the file may be opened or created.
          *
          * @param name The file name to find.
+         * @param mode The file mode to use.
          * @return The file, if found.
          */
-        VOODOO_METHOD_(IFile *, FindFile)(_In_ const String & name) CONST PURE;
-    };
-
-    /**
-     * Provides abstraction to a single file, for basic access.
-     *
-     * @par IID
-     *      e6f3128a-05af-11e1-9e05-005056c00008
-     */
-    VOODOO_INTERFACE(IFile, IObject, {0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
-    {
-    public:
-        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
-        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-        VOODOO_METHOD_(String, ToString)() CONST PURE;
-        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
-
-        /**
-         * Gets the absolute path of this file.
-         */
-        VOODOO_METHOD_(String, GetPath)() CONST PURE;
-        VOODOO_METHOD(Open)(_In_ FileOpenMode mode) PURE;
-        VOODOO_METHOD(Close)() PURE;
-        VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
-        VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
-        VOODOO_METHOD_(IImage *, OpenImage)() CONST PURE;
-    };
-
-    /**
-     * Provides abstraction to an image for specialized access.
-     *
-     * @par IID
-     *      e6f3128d-05af-11e1-9e05-005056c00008
-     */
-    VOODOO_INTERFACE(IImage, IObject, {0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
-    {
-    public:
-        VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
-        VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
-        VOODOO_METHOD_(String, ToString)() CONST PURE;
-        VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
-
-        VOODOO_METHOD_(String, GetPath)() CONST PURE;
-        VOODOO_METHOD_(const TextureDesc, GetDesc)() CONST PURE;
-        VOODOO_METHOD_(uint32_t, GetData)(_In_ const TextureRegion pDesc, _In_ const uint32_t size, _In_opt_count_(size) void * const pBuffer) CONST PURE;
+        VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, _In_ const GetFileMode mode = FF_OpenOnly) CONST PURE;
     };
     /**
      * @}

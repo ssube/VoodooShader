@@ -31,25 +31,26 @@
 
 namespace VoodooShader
 {
+    /**
+     * Provides a simple implementation of ILogger, printing a neatly-formatted Xml log. These logs can be opened with
+     * the standard log viewer and support all features.
+     *
+     * @note In debug builds, this logger also prints all messages to cout. If a debugger is attached, warnings and
+     *      errors are printed to its output window.
+     *
+     * @addtogroup voodoo_module_xmllogger Voodoo/XmlLogger
+     * @{
+     */
     namespace XmlLogger
     {
-        /**
-         * Provides a simple implementation of ILogger, printing a neatly-formatted Xml log. These logs can be opened with
-         * the standard log viewer and support all features.
-         *
-         * @note In debug builds, this logger also prints all messages to cout. If a debugger is attached, warnings and
-         *      errors are printed to its output window.
-         *
-         * @addtogroup voodoo_module_xmllogger Voodoo/XmlLogger
-         * @{
-         */
-
         const Version * VOODOO_CALLTYPE API_ModuleVersion();
         const uint32_t  VOODOO_CALLTYPE API_ClassCount();
         const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
         IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
 
         /**
+         * @class VSXmlLogger
+         * 
          * Xml logger class, writes neatly formatted logs for use with the log viewer. Supports all Voodoo ILogger features
          * and debug logging (with no buffer).
          *
@@ -105,8 +106,9 @@ namespace VoodooShader
              */
             VOODOO_METHOD_(void, Flush)();
             /**
-             * Set the default minimum message level. Messages below this level will not be
-             * logged. @param level The minimum log level.
+             * Set the default minimum message level. Messages below this level will not be logged. 
+             * 
+             * @param level The minimum log level.
              */
             VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level);
             VOODOO_METHOD_(const LogLevel, GetLogLevel)() CONST;
@@ -120,17 +122,11 @@ namespace VoodooShader
             /**
              * Log a message, may be formatted with printf syntax. @param level The level for this message.
              *
-             * @param module The logging module's name.
-             * @param msg The message format string.
+             * @param source The logging module's name.
+             * @param format The message format string.
              * @param ... The parameters to insert.
              */
-            VOODOO_METHOD_(void, Log)
-            (
-                _In_ const LogLevel level,
-                _In_ const wchar_t * source,
-                _In_ _Printf_format_string_ const wchar_t * format,
-                ...
-            );
+            VOODOO_METHOD_(void, Log)(_In_ const LogLevel level, _In_ const wchar_t * source, _In_ _Printf_format_string_ const wchar_t * format, ...);
             VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags);
             VOODOO_METHOD_(const LogFlags, GetFlags)() CONST;
 
@@ -143,7 +139,6 @@ namespace VoodooShader
              *      returned.
              */
             String LogTime() const;
-
             /**
              * Formats a date for the log. The date will have the form <code>YYYYMMDD</code>. Leading zeros are guaranteed
              * to be present, so the date length is 8 chars.
@@ -152,7 +147,6 @@ namespace VoodooShader
              *      returned.
              */
             String LogDate() const;
-
             /**
              * Formats the system's current tick count. The stamp will have the form <code>xxxxxxxxx</code>, with a
              * potentially varying length. This records ticks, usually ms since system start.
@@ -167,9 +161,8 @@ namespace VoodooShader
             std::unique_ptr<tm> m_LocalTime;
             LogFlags m_Flags;
         };
-
-        /**
-         * @}
-         */
     }
+    /**
+     * @}
+     */
 }

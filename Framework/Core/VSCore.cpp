@@ -20,13 +20,14 @@
 
 #include "VSCore.hpp"
 
-#include "VSModule.hpp"
+#include "VSModuleManager.hpp"
 #include "VSParameter.hpp"
 #include "VSParser.hpp"
 #include "VSShader.hpp"
 
 #include "IAdapter.hpp"
 #include "ICore.hpp"
+#include "IFile.hpp"
 #include "IFilesystem.hpp"
 #include "IHookManager.hpp"
 #include "ILogger.hpp"

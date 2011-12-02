@@ -29,6 +29,8 @@ namespace VoodooShader
      */
 
     /**
+     * @class ICore
+     *
      * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
      * shaders, textures, plugins and variable/configuration mechanics.
      *

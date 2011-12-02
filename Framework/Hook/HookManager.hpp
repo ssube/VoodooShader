@@ -28,14 +28,14 @@
 
 namespace VoodooShader
 {
+    /**
+     * Classes and functions related to the EasyHook-based implementation of IHookManager.
+     *
+     * @addtogroup voodoo_module_ehhook Voodoo/EHHook
+     * @{
+     */
     namespace EasyHook
     {
-        /**
-         * Classes and functions related to the EasyHook-based implementation of IHookManager.
-         *
-         * @addtogroup voodoo_module_ehhook Voodoo/EHHook
-         * @{
-         */
         typedef std::map<String, TRACED_HOOK_HANDLE> HookMap;
 
         const Version * VOODOO_CALLTYPE API_ModuleVersion();
@@ -44,6 +44,8 @@ namespace VoodooShader
         IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
 
         /**
+         * @class VSEHHookManager
+         * 
          * Handles function-level hooks, redirecting function calls into new locations.
          *
          * @par CLSID
@@ -104,8 +106,8 @@ namespace VoodooShader
             unsigned long m_ThreadCount;
             unsigned long * m_ThreadIDs;
         };
-        /**
-         * @}
-         */
     }
+    /**
+     * @}
+     */
 }

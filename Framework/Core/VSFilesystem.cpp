@@ -98,9 +98,10 @@ namespace VoodooShader
         return true;
     }
 
-    IFile * VOODOO_METHODTYPE VSFileSystem::FindFile(_In_ const String & name) CONST
+    IFile * VOODOO_METHODTYPE VSFileSystem::GetFile(_In_ const String & name, const GetFileMode mode) CONST
     {
         UNREFERENCED_PARAMETER(name);
+        UNREFERENCED_PARAMETER(mode);
 
         return nullptr;
     }
