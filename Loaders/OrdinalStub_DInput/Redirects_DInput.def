@@ -1,7 +1,6 @@
 LIBRARY
 
 EXPORTS
-ValidatePixelShader = Voodoo_Loader.ValidatePixelShader
-ValidateVertexShader = Voodoo_Loader.ValidateVertexShader
-DebugSetMute = Voodoo_Loader.DebugSetMute
-Direct3DCreate8 = Voodoo_Loader.Direct3DCreate8
+DirectInputCreateA = Voodoo_Loader.DirectInputCreateA@1
+DirectInputCreateEx = Voodoo_Loader.DirectInputCreateEx@2
+DirectInputCreateW = Voodoo_Loader.DirectInputCreateW@3

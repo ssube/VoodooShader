@@ -20,15 +20,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OSD3D8_Version.hpp">
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="OSDInput_Version.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="OrdinalStub_D3D8.rc">
+    <ResourceCompile Include="OrdinalStub_DInput.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

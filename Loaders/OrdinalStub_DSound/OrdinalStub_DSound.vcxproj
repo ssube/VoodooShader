@@ -14,11 +14,11 @@
     <None Include="Redirects_DSound.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OSD3D8_Version.hpp" />
+    <ClInclude Include="OSDSound_Version.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="OrdinalStub_D3D8.rc" />
+    <ResourceCompile Include="OrdinalStub_DSound.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2926C432-2331-44EE-A57B-CC79577FADB0}</ProjectGuid>
@@ -50,7 +50,12 @@
     <Import Project="..\..\VoodooPaths.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(CoreInclude);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(CoreInclude);$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -58,9 +63,12 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Redirects_D3D8.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Redirects_DSound.def</ModuleDefinitionFile>
       <NoEntryPoint>true</NoEntryPoint>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(CoreInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -73,9 +81,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ModuleDefinitionFile>Redirects_D3D8.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Redirects_DSound.def</ModuleDefinitionFile>
       <NoEntryPoint>true</NoEntryPoint>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(CoreInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

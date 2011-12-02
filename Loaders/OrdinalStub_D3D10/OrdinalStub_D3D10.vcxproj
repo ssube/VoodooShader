@@ -14,11 +14,11 @@
     <None Include="Redirects_D3D10.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OSD3D8_Version.hpp" />
+    <ClInclude Include="OSD3D10_Version.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="OrdinalStub_D3D8.rc" />
+    <ResourceCompile Include="OrdinalStub_D3D10.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A4B1A15A-8254-4CB0-97CA-63887A6B457B}</ProjectGuid>
@@ -58,9 +58,12 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Redirects_D3D8.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Redirects_D3D10.def</ModuleDefinitionFile>
       <NoEntryPoint>true</NoEntryPoint>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(CoreInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -73,9 +76,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ModuleDefinitionFile>Redirects_D3D8.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Redirects_D3D10.def</ModuleDefinitionFile>
       <NoEntryPoint>true</NoEntryPoint>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(CoreInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

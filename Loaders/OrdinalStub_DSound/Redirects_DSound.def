@@ -1,7 +1,13 @@
 LIBRARY
 
 EXPORTS
-ValidatePixelShader = Voodoo_Loader.ValidatePixelShader
-ValidateVertexShader = Voodoo_Loader.ValidateVertexShader
-DebugSetMute = Voodoo_Loader.DebugSetMute
-Direct3DCreate8 = Voodoo_Loader.Direct3DCreate8
+DirectSoundCreate = Voodoo_Loader.DirectSoundCreate@1
+DirectSoundEnumerateA = Voodoo_Loader.DirectSoundEnumerateA@2
+DirectSoundEnumerateW = Voodoo_Loader.DirectSoundEnumerateW@3
+DirectSoundCaptureCreate = Voodoo_Loader.DirectSoundCaptureCreate@6
+DirectSoundCaptureEnumerateA = Voodoo_Loader.DirectSoundCaptureEnumerateA@7
+DirectSoundCaptureEnumerateW = Voodoo_Loader.DirectSoundCaptureEnumerateW@8
+GetDeviceID = Voodoo_Loader.GetDeviceID@9
+DirectSoundFullDuplexCreate = Voodoo_Loader.DirectSoundFullDuplexCreate@A
+DirectSoundCreate8 = Voodoo_Loader.DirectSoundCreate8@B
+DirectSoundCaptureCreate8 = Voodoo_Loader.DirectSoundCaptureCreate8@C
