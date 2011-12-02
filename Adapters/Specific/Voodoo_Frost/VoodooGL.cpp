@@ -31,8 +31,8 @@ float gFogMult = 99.0f;
 using namespace VoodooShader;
 
 /**
- * Begins a draw operation and sets the expected vertex order. 
- * 
+ * Begins a draw operation and sets the expected vertex order.
+ *
  * @param mode Vertex order (GL_QUADS, etc).
  */
 void GLAPIENTRY vglBegin(GLenum mode)
@@ -49,12 +49,12 @@ void GLAPIENTRY vglBegin(GLenum mode)
 }
 
 /**
- * Binds a texture to the given target for use in draw ops. 
- * 
+ * Binds a texture to the given target for use in draw ops.
+ *
  * @param target The target to bind to (often GL_TEXTURE_2D).
- * @param texture The texture ID to be bound (must be a valid ID). 
- * 
- * @note This function also binds material shaders as appropriate. If texture is linked to a Shader, the default technique 
+ * @param texture The texture ID to be bound (must be a valid ID).
+ *
+ * @note This function also binds material shaders as appropriate. If texture is linked to a Shader, the default technique
  *       will be retrieved and set as the active effect.
  */
 void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
@@ -63,22 +63,22 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
 
     /**
      * Pseudocode for the material system:
-     * 
+     *
      * if ( texture != 0 && texture != lastTexture )
-     * { 
+     * {
      *      lastTexture = texture;
-     *      find Technique from Materials[texture] 
-     *      
-     *      if ( Technique is valid ) 
-     *      { 
-     *          setup variables on Technique 
-     *          get first Pass from Technique 
-     *          bind Pass 
-     *          gBoundPass = Pass 
-     *      } 
-     *  } else if ( gBoundPass ) { 
-     *      unbind gBoundPass 
-     *      gBoundPass = nullptr 
+     *      find Technique from Materials[texture]
+     *
+     *      if ( Technique is valid )
+     *      {
+     *          setup variables on Technique
+     *          get first Pass from Technique
+     *          bind Pass
+     *          gBoundPass = Pass
+     *      }
+     *  } else if ( gBoundPass ) {
+     *      unbind gBoundPass
+     *      gBoundPass = nullptr
      *  }
      */
     return glBindTexture(target, texture);
@@ -251,7 +251,7 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
             strcat_s(title, " [ Voodoo Frost ]");
             SetWindowTextA(gNwnWindow, title);
         }
-        
+
         VoodooFrost::FrostAdapter * adapter = reinterpret_cast<VoodooShader::VoodooFrost::FrostAdapter*>(gpVoodooCore->GetAdapter());
         adapter->SetDC(hdc);
         adapter->SetGLRC(hglrc);

@@ -66,7 +66,7 @@ namespace VoodooShader
 
         /**
          * class VSWFileSystem
-         * 
+         *
          * Provides a unified file management system for loading shaders and other resources. This file system
          * implementation is a thin wrapper for the Windows API, adding only a few nonstandard functions (directory
          * searching and path variables).
@@ -87,29 +87,8 @@ namespace VoodooShader
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-            /**
-             * Add a directory to the search path. Directories are pushed to the front of the list, which is searched in
-             * order (last added has highest priority).
-             *
-             */
             VOODOO_METHOD(AddPath)(_In_ const String & path);
-            /**
-             * Removes a directory from the search path, following the same rules as adding (adding a string then removing
-             * the same string will always work).
-             *
-             * @param path The path to remove.
-             */
             VOODOO_METHOD(RemovePath)(_In_ const String & path);
-            /**
-             * Resolves a relative filename (usually just filename and extension, but may include directories) into an
-             * absolute filename by searching the list of resource directories registered with this manager.
-             *
-             * @param name The filename to search for.
-             * @return If the file is found, a reference to an unopened file object is returned.
-             *
-             * @note This functions uses Parser::ParseString() on the path. It is evaluated once when the function enters,
-             *      then appended to each stored path until a valid file is found.
-             */
             VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, _In_ const GetFileMode mode) CONST;
 
         private:
@@ -126,7 +105,7 @@ namespace VoodooShader
 
         /**
          * @class VSWFile
-         * 
+         *
          * @par CLSID
          *      e6f312b0-05af-11e1-9e05-005056c00008
          */
@@ -165,7 +144,7 @@ namespace VoodooShader
 
         /**
          * @class VSWImage
-         * 
+         *
          * Provides image loading, using the DevIL library. This class provides internal loading and conversion, and can
          * manage 1-3 dimensional images (regular textures and volumes).
          *
@@ -197,11 +176,10 @@ namespace VoodooShader
             VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
             /**
              * Effectively acts as a nop, returning this.
-             * 
+             *
              * @return This object.
              */
             VOODOO_METHOD_(IImage *, OpenImage)() CONST;
-
             VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;
             /**
              * Retrieves a portion of the texture data from the image.

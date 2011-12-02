@@ -204,11 +204,11 @@ namespace VoodooShader
       * behavior rules and perform exactly as expected by the core, and only one adapter object is created at a time.
       *
       * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter itself. The adapter
-      * must provide at least one implementation each of IAdapter and ITexture. 
+      * must provide at least one implementation each of IAdapter and ITexture.
       *
-      * It is recommended that the adapter name be of the form <tt>[Name]Adapter</tt> and each supporting class use 
-      * <tt>[Name]classname</tt>, to easily identify them. If the adapter or module is part of the framework, the name 
-      * scheme extends to the module's name (<tt>Voodoo/[Name]</tt>) and filename (<tt>Voodoo_[Name].dll</tt>). Each 
+      * It is recommended that the adapter name be of the form <tt>[Name]Adapter</tt> and each supporting class use
+      * <tt>[Name]classname</tt>, to easily identify them. If the adapter or module is part of the framework, the name
+      * scheme extends to the module's name (<tt>Voodoo/[Name]</tt>) and filename (<tt>Voodoo_[Name].dll</tt>). Each
       * framework Voodoo adapter is given a short one word somewhat-game-related name.
       *
       * For further details on the behavior required of adapters, please refer to the IAdapter interface documentation.

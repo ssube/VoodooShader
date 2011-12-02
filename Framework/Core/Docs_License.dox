@@ -40,8 +40,8 @@ namespace VoodooShader
      *
      * @subsection voodoo_license_summary_eula Application EULAs
      *
-     * Portions of the Voodoo Shader Framework may be designed to operate aware of other applications, which may be licensed 
-     * under different terms than the framework. Claims have been made that Voodoo is then bound by the terms of these 
+     * Portions of the Voodoo Shader Framework may be designed to operate aware of other applications, which may be licensed
+     * under different terms than the framework. Claims have been made that Voodoo is then bound by the terms of these
      * target applications, is owned by the author of these applications, or has no license terms. These are not true and in
      * no way change the license terms Voodoo is released under. Unless a signed document stating otherwise is given by the
      * owner of the Voodoo Shader Framework, the terms and conditions given in the GNU Lesser General Public License are
@@ -163,7 +163,7 @@ namespace VoodooShader
      *
      * The above copyright notice and this permission notice shall be
      * included in all copies or substantial portions of the Software.
-     * 
+     *
      * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
      * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
      * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND

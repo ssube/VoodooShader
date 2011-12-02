@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class IParameter
-     * 
+     *
      * Provides access to shader parameters, with attach/detach and value set (for most data types).
      *
      * @par IID

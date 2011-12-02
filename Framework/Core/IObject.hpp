@@ -32,7 +32,7 @@ namespace VoodooShader
 
     /**
      * @class IObject
-     * 
+     *
      * Defines a simple interface all Voodoo objects from dynamic modules must inherit. This interface handles
      * destruction and identification of these objects.
      *

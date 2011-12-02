@@ -175,10 +175,10 @@ namespace VoodooShader
 
             // Start setting things up
             pugi::xml_node configRoot = static_cast<pugi::xml_node>(*m_ConfigFile);
-            pugi::xml_node coreNode = configRoot.select_single_node(L"/VoodooConfig/Core").node();
-            if (!coreNode)
+            pugi::xml_node globalNode = configRoot.select_single_node(L"/VoodooConfig/Global").node();
+            if (!globalNode)
             {
-                Throw(VOODOO_CORE_NAME, L"Could not find core config node.", nullptr);
+                Throw(VOODOO_CORE_NAME, L"Could not find global config node.", nullptr);
             }
 
             // Create query for node text, used multiple times
@@ -187,8 +187,8 @@ namespace VoodooShader
 
             // Load variables
             {
-                pugi::xpath_query xpq_getVariables(L"/VoodooConfig/Variables/Variable");
-                pugi::xpath_node_set nodes = xpq_getVariables.evaluate_node_set(configRoot);
+                pugi::xpath_query xpq_getVariables(L"./Variables/Variable");
+                pugi::xpath_node_set nodes = xpq_getVariables.evaluate_node_set(globalNode);
                 pugi::xpath_node_set::const_iterator iter = nodes.begin();
 
                 while (iter != nodes.end())
@@ -204,9 +204,9 @@ namespace VoodooShader
 
             // Load plugins
             {
-                pugi::xpath_query xpq_getPluginPaths(L"/VoodooConfig/Plugins/Path");
+                pugi::xpath_query xpq_getPluginPaths(L"./Plugins/Path");
                 pugi::xpath_query xpq_getFilter(L"./@filter");
-                pugi::xpath_node_set nodes = xpq_getPluginPaths.evaluate_node_set(configRoot);
+                pugi::xpath_node_set nodes = xpq_getPluginPaths.evaluate_node_set(globalNode);
                 pugi::xpath_node_set::const_iterator iter = nodes.begin();
 
                 while (iter != nodes.end())
@@ -221,8 +221,8 @@ namespace VoodooShader
             }
 
             {
-                pugi::xpath_query xpq_getPluginFiles(L"/VoodooConfig/Plugins/File");
-                pugi::xpath_node_set nodes = xpq_getPluginFiles.evaluate_node_set(configRoot);
+                pugi::xpath_query xpq_getPluginFiles(L"./Plugins/File");
+                pugi::xpath_node_set nodes = xpq_getPluginFiles.evaluate_node_set(globalNode);
                 pugi::xpath_node_set::const_iterator iter = nodes.begin();
 
                 while (iter != nodes.end())
@@ -236,10 +236,10 @@ namespace VoodooShader
             }
 
             // Lookup classes
-            pugi::xpath_query logQuery(L"/VoodooConfig/Core/Class/Logger/text()");
-            pugi::xpath_query fsQuery(L"/VoodooConfig/Core/Class/FileSystem/text()");
-            pugi::xpath_query hookQuery(L"/VoodooConfig/Core/Class/HookManager/text()");
-            pugi::xpath_query adpQuery(L"/VoodooConfig/Core/Class/Adapter/text()");
+            pugi::xpath_query logQuery(L"./Classes/Logger/text()");
+            pugi::xpath_query fsQuery(L"./Classes/FileSystem/text()");
+            pugi::xpath_query hookQuery(L"./Classes/HookManager/text()");
+            pugi::xpath_query adpQuery(L"./Classes/Adapter/text()");
             String logClass = m_Parser->Parse(logQuery.evaluate_string(configRoot).c_str());
             String fsClass = m_Parser->Parse(fsQuery.evaluate_string(configRoot).c_str());
             String hookClass = m_Parser->Parse(hookQuery.evaluate_string(configRoot).c_str());
@@ -252,8 +252,8 @@ namespace VoodooShader
                 Throw(VOODOO_CORE_NAME, L"Unable to create logger.", nullptr);
             }
 
-            pugi::xpath_query logfQuery(L"/VoodooConfig/Logger/File/text()");
-            pugi::xpath_query loglQuery(L"/VoodooConfig/Logger/Level/text()");
+            pugi::xpath_query logfQuery(L"./Log/File/text()");
+            pugi::xpath_query loglQuery(L"./Log/Level/text()");
 
             String logFile  = m_Parser->Parse(logfQuery.evaluate_string(configRoot).c_str());
             String logLevelStr = m_Parser->Parse(loglQuery.evaluate_string(configRoot).c_str());

@@ -16,7 +16,7 @@ namespace VoodooNetClasses
         public VoodooHook(bool a, String n, String t, String c)
         {
             m_Active = a;
-            m_Name = n; 
+            m_Name = n;
             m_Target = t;
             m_Config = c;
         }

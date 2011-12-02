@@ -50,7 +50,7 @@ namespace VoodooShader
 
         /**
          * @class VSXmlLogger
-         * 
+         *
          * Xml logger class, writes neatly formatted logs for use with the log viewer. Supports all Voodoo ILogger features
          * and debug logging (with no buffer).
          *
@@ -106,8 +106,8 @@ namespace VoodooShader
              */
             VOODOO_METHOD_(void, Flush)();
             /**
-             * Set the default minimum message level. Messages below this level will not be logged. 
-             * 
+             * Set the default minimum message level. Messages below this level will not be logged.
+             *
              * @param level The minimum log level.
              */
             VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level);

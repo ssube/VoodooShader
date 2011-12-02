@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class IShader
-     * 
+     *
      * Complete shader class, managing techniques, passes and metadata.
      *
      * Shaders contain significant linking and processing data, as well as the Voodoo-specific linking stage. IShader file

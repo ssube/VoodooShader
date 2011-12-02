@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class IImage
-     * 
+     *
      * Provides abstraction to an image for specialized access.
      *
      * @par IID
@@ -44,7 +44,7 @@ namespace VoodooShader
         VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
-        
+
         VOODOO_METHOD_(String, GetPath)() CONST PURE;
         VOODOO_METHOD(Open)(_In_ FileOpenMode mode) PURE;
         VOODOO_METHOD(Close)() PURE;
@@ -56,15 +56,15 @@ namespace VoodooShader
 
         /**
          * Get the texture description.
-         * 
+         *
          * @return The texture description.
          */
         VOODOO_METHOD_(TextureDesc, GetDesc)() CONST PURE;
         /**
-         * Get texture data for the given texture region. This must perform an internal size check and verifies that the 
-         * buffer size is large enough before copying any data, so it is not possible to fill the buffer with part of a 
+         * Get texture data for the given texture region. This must perform an internal size check and verifies that the
+         * buffer size is large enough before copying any data, so it is not possible to fill the buffer with part of a
          * larger region.
-         * 
+         *
          * @param desc The texture region to copy.
          * @param size The buffer size in bytes.
          * @param pBuffer The buffer to copy into, must be allocated.

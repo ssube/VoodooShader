@@ -42,7 +42,7 @@ Type_DirectSoundCreate8 gFunc_DirectSoundCreate8;
 HRESULT WINAPI VSDirectSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOID pUnkOuter)
 {
     VOODOO_DEBUGBREAK;
-    
+
     if (!gFunc_DirectSoundCreate8)
     {
         gFunc_DirectSoundCreate8 = (Type_DirectSoundCreate8)FindFunction(TEXT("dsound8.dll"), "DirectSoundCreate8", &gModule_DS8);

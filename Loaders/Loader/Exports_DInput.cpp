@@ -47,7 +47,7 @@ Type_DirectInputCreate gFunc_Type_DirectInputCreateW;
 HRESULT WINAPI VSDirectInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID * ppvOut, LPVOID punkOuter)
 {
     VOODOO_DEBUGBREAK;
-    
+
     if (!gFunc_DirectInput8Create)
     {
         gFunc_DirectInput8Create = (Type_DirectInput8Create)FindFunction(TEXT("dinput8.dll"), "DirectInput8Create", &gModule_DInput8);
@@ -80,7 +80,7 @@ HRESULT WINAPI VSDirectInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID rii
 HRESULT WINAPI VSDirectInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter)
 {
     VOODOO_DEBUGBREAK;
-    
+
     if (!gFunc_Type_DirectInputCreateA)
     {
         gFunc_Type_DirectInputCreateA = (Type_DirectInputCreate)FindFunction(TEXT("dinput8.dll"), "DirectInputCreateA", &gModule_DInput8);
@@ -110,7 +110,7 @@ HRESULT WINAPI VSDirectInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * l
 HRESULT WINAPI VSDirectInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID * lplpDirectInput, LPVOID punkOuter)
 {
     VOODOO_DEBUGBREAK;
-    
+
     if (!gFunc_Type_DirectInputCreateW)
     {
         gFunc_Type_DirectInputCreateW = (Type_DirectInputCreate)FindFunction(TEXT("dinput8.dll"), "DirectInputCreateW", &gModule_DInput8);

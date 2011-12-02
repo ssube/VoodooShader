@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class IPass
-     * 
+     *
      * Each IPass contains a single set of programs, each operating on a different stage of the render pipeline.
      *
      * @note A pass may contain programs for each stage. Valid stages vary by underlying API and version. In OpenGL and

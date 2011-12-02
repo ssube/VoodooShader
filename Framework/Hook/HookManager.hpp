@@ -45,7 +45,7 @@ namespace VoodooShader
 
         /**
          * @class VSEHHookManager
-         * 
+         *
          * Handles function-level hooks, redirecting function calls into new locations.
          *
          * @par CLSID

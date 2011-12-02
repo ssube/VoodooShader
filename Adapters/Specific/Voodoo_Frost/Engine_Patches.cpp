@@ -24,7 +24,7 @@ using namespace VoodooShader;
 /**
  * Applies a variation of the popular NWN camera hack to the engine in-memory. This technique is simpler to manipulate
  * and customize than the traditional byte-patcher.
- * 
+ *
  * @todo Update this to use customizable settings when they're implemented.
  */
 void CameraHack(void)

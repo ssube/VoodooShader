@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class IModuleManager
-     * 
+     *
      * Provides a framework for loading and unloading modules in core, as well as retrieving symbols and modules
      * from memory.
      *

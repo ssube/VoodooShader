@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class IFileSystem
-     * 
+     *
      * Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even
      * network access. Currently provides a readonly filesystem.
      *
@@ -55,7 +55,7 @@ namespace VoodooShader
          *     Directory search order is important for file priority.
          *
          * @note This function uses Parser::ParseString() for all paths. Variables are evaluated when the path is added.
-         * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This 
+         * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This
          *      combined with parser environment access allows regular-form environment vars to be added to the file system.
          */
         VOODOO_METHOD(AddPath)(_In_ const String & path) PURE;
@@ -66,7 +66,7 @@ namespace VoodooShader
          * @param path The path to remove.
          *
          * @note This function must Parser::ParseString() for all paths. Variables are evaluated when the path is added.
-         * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This 
+         * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This
          *      combined with parser environment access allows regular-form environment vars to be added to the file system.
          */
         VOODOO_METHOD(RemovePath)(_In_ const String & path) PURE;

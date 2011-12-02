@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class ITechnique
-     * 
+     *
      * Contains a set of passes, designed to be used sequentially to create a shader effect. Typically, a single technique
      * will be used, although shaders may contain multiple techniques. Each technique may contain a number of passes and
      * some technique-level metadata.

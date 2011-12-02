@@ -116,7 +116,7 @@ namespace VoodooShader
             if (stream == ST_Get)
             {
                 m_File.seekg(offset, dir);
-            } 
+            }
             else if (stream == ST_Put)
             {
                 m_File.seekp(offset, dir);
@@ -130,7 +130,7 @@ namespace VoodooShader
             if (stream == ST_Get)
             {
                 return (int32_t)m_File.tellg();
-            } 
+            }
             else if (stream == ST_Put)
             {
                 return (int32_t)m_File.tellp();

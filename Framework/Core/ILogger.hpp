@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class ILogger
-     * 
+     *
      * Provides structured and formatted logging for module listing and level-filtered messages.
      *
      * @par IID
@@ -82,7 +82,7 @@ namespace VoodooShader
         VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level) PURE;
         /**
          * Get the current log level.
-         * 
+         *
          * @return The log level.
          */
         VOODOO_METHOD_(const LogLevel, GetLogLevel)() CONST PURE;
@@ -110,13 +110,13 @@ namespace VoodooShader
         ) PURE;
         /**
          * Set log flags, controls handling of the file (flush after message, formatting, etc).
-         * 
+         *
          * @param flags New flag settings.
          */
         VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags) PURE;
         /**
          * Get the current log flags.
-         * 
+         *
          * @return Current flags.
          */
         VOODOO_METHOD_(const LogFlags, GetFlags)() CONST PURE;

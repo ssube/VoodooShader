@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class IHookManager
-     * 
+     *
      * Defines the interface for handling function-level hooks, redirecting existing functions and calls into new
      * locations. Each Core owns a HookManager implementation.
      *
@@ -70,7 +70,7 @@ namespace VoodooShader
         VOODOO_METHOD(Remove)(_In_ const String & name) PURE;
         /**
          * Removes all hooks created by this hook manager.
-         * 
+         *
          * @return Success of the removal operation.
          */
         VOODOO_METHOD(RemoveAll)() PURE;

@@ -10,7 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{093207D3-DF56-4F72-BD00-ACACD9476FA8}"
 	ProjectSection(SolutionItems) = preProject
 		CREDITS.md = CREDITS.md
-		Docs\Doxyfile = Docs\Doxyfile
+		doxyfile = doxyfile
 		LICENSE = LICENSE
 		README.md = README.md
 		voodoo_uuids.md = voodoo_uuids.md
@@ -91,15 +91,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoodooGUI", "Utilities\Vood
 		{455FAD6F-58B6-41FF-AA04-6DB9168A234C} = {455FAD6F-58B6-41FF-AA04-6DB9168A234C}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{6570AF71-066B-4A34-94CC-AA6E38AB20E5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XML", "XML", "{487C384B-0E7D-4E24-A99F-8E3C8E3EDA4A}"
-	ProjectSection(SolutionItems) = preProject
-		Server\Xml\ConfigManifest.xsd = Server\Xml\ConfigManifest.xsd
-		Server\Xml\PackageManifest.xsd = Server\Xml\PackageManifest.xsd
-		Server\Xml\RemoteManifest.xsd = Server\Xml\RemoteManifest.xsd
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoodooRegedit", "Utilities\VoodooRegedit\VoodooRegedit.csproj", "{017F6E17-511C-4E6C-9083-E76DA6F19006}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoodooNetClasses", "Utilities\VoodooNetClasses\VoodooNetClasses.csproj", "{455FAD6F-58B6-41FF-AA04-6DB9168A234C}"
@@ -107,13 +98,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoodooBuild", "Utilities\VoodooBuild\VoodooBuild.csproj", "{81E84B93-71DB-448A-B478-274AE1B484B2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VoodooTest_OpenGL", "Tests\Scenarios\VoodooTest_OpenGL\VoodooTest_OpenGL.vcxproj", "{16385453-ABDD-487B-B407-89A0406A2B44}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{23A55269-F7A0-48AF-9392-6A3CA217BE37}"
-	ProjectSection(SolutionItems) = preProject
-		Server\Xml\example\ExampleConfig.xml = Server\Xml\example\ExampleConfig.xml
-		Server\Xml\example\ExamplePackageManifest.xml = Server\Xml\example\ExamplePackageManifest.xml
-		Server\Xml\example\ExampleRemoteManifest.xml = Server\Xml\example\ExampleRemoteManifest.xml
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VoodooTest_DX9", "Tests\Scenarios\VoodooTest_DX9\VoodooTest_DX9.vcxproj", "{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}"
 EndProject
@@ -470,19 +454,17 @@ Global
 		{16385453-ABDD-487B-B407-89A0406A2B44} = {56BA7D8B-35C5-4F58-A45A-21CCC68232A0}
 		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443} = {56BA7D8B-35C5-4F58-A45A-21CCC68232A0}
 		{E4986B05-A425-45A3-92EB-24A10A3287AD} = {874A9DE8-1B4B-4DFA-A095-CADA7AF0FB4C}
-		{487C384B-0E7D-4E24-A99F-8E3C8E3EDA4A} = {6570AF71-066B-4A34-94CC-AA6E38AB20E5}
-		{23A55269-F7A0-48AF-9392-6A3CA217BE37} = {487C384B-0E7D-4E24-A99F-8E3C8E3EDA4A}
-		{A4B1A15A-8254-4CB0-97CA-63887A6B457B} = {D2126EFA-F09F-41ED-A414-5B1CD881D073}
-		{A31F62C0-2AA1-4B89-82D1-1DEADDC448D7} = {D2126EFA-F09F-41ED-A414-5B1CD881D073}
 		{57888F27-9731-4374-84C0-5AAA45F02251} = {D2126EFA-F09F-41ED-A414-5B1CD881D073}
+		{A4B1A15A-8254-4CB0-97CA-63887A6B457B} = {D2126EFA-F09F-41ED-A414-5B1CD881D073}
 		{77915AE5-9816-4B4F-8C04-F56D043F5CF8} = {D2126EFA-F09F-41ED-A414-5B1CD881D073}
 		{CB432F7C-61CD-4C8B-93E1-5D4185B8EA9D} = {D2126EFA-F09F-41ED-A414-5B1CD881D073}
 		{2926C432-2331-44EE-A57B-CC79577FADB0} = {D2126EFA-F09F-41ED-A414-5B1CD881D073}
+		{A31F62C0-2AA1-4B89-82D1-1DEADDC448D7} = {D2126EFA-F09F-41ED-A414-5B1CD881D073}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
-		AMDCaPersistentStartup = Voodoo_Gem
 		AMDCaProjectFile = M:\VoodooShader\CodeAnalyst\VoodooShader.caw
+		AMDCaPersistentStartup = Voodoo_Gem
+		AMDCaPersistentConfig = Debug_Analysis|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(CppDepend) = preSolution
 		Project = ".\Analysis\CppDepend\Core.xml"

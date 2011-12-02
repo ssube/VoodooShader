@@ -42,7 +42,7 @@ namespace VoodooShader
 
             IHookManagerRef hooker = m_Core->GetHookManager();
             bool success = true;
-            
+
             // System-related
             success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glGetString));
             success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glViewport));
@@ -297,7 +297,7 @@ namespace VoodooShader
             if (pData)
             {
                 VertexStruct * pVerts = reinterpret_cast<VertexStruct*>(pData);
-                
+
                 glBegin(GL_QUADS);
                 for (uint32_t v = offset; v < offset + count; ++v)
                 {

@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class IFile
-     * 
+     *
      * Provides abstraction to a single file, for basic access.
      *
      * @par IID
@@ -51,20 +51,20 @@ namespace VoodooShader
         VOODOO_METHOD_(String, GetPath)() CONST PURE;
         /**
          * Open the file with the given access mode.
-         * 
+         *
          * @param mode Desired access mode.
          * @return Success of file open.
          */
         VOODOO_METHOD(Open)(_In_ FileOpenMode mode) PURE;
         /**
          * Close the file if it is open.
-         * 
+         *
          * @return Success of file close.
          */
         VOODOO_METHOD(Close)() PURE;
         /**
          * Seek to the given position in the file.
-         * 
+         *
          * @param stream The stream to move.
          * @param mode The seek mode to use.
          * @param offset The offset to seek to.
@@ -73,7 +73,7 @@ namespace VoodooShader
         VOODOO_METHOD(Seek)(_In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset) PURE;
         /**
          * Get the position of the given stream.
-         * 
+         *
          * @param stream The stream to check.
          * @return The current position, or -1 on error.
          */
@@ -81,7 +81,7 @@ namespace VoodooShader
         /**
          * Read the given number of bytes from the file, starting at the current position. The file must have been opened
          * for reading previously or this call will fail.
-         * 
+         *
          * @param size The number of bytes to read.
          * @param pBuffer A buffer of size bytes, allocated by the caller (will be filled with data).
          * @return The number of bytes read, or -1 on error.
@@ -92,20 +92,20 @@ namespace VoodooShader
         VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
         /**
          * Write the given number of bytes to the file, starting at the current position.
-         * 
+         *
          * @param size The number of bytes to write.
          * @param pBuffer A buffer containing the data to write.
          * @return The number of bytes written, or -1 on error.
-         * 
+         *
          * @note If @p buffer is nullptr, @p count zeros are written into the file. This is useful for padding binary
          *      formats.
          */
         VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
         /**
          * Attempt to open the file as an image. This first validates the format; if no suitable image codec is found, it
-         * will fail. If the file appears to be an image, it will be opened and an IImage interface to the underlying file 
+         * will fail. If the file appears to be an image, it will be opened and an IImage interface to the underlying file
          * provided (@em not an IImage to this IFile).
-         * 
+         *
          * @return Image object if successful, nullptr otherwise.
          */
         VOODOO_METHOD_(IImage *, OpenImage)() CONST PURE;

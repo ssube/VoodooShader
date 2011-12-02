@@ -30,7 +30,7 @@ namespace VoodooShader
 
     /**
      * @class IModule
-     * 
+     *
      * Contains the handle to a loaded library and function pointers for creation and destruction.
      *
      * @par IID
