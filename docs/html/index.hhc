@@ -48,10 +48,12 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_IHookManager"><param name="Local" value="group__voodoo__framework__interfaces.html#ga883d95d0c83b89aaba5f4af425748c1e"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_IImage"><param name="Local" value="group__voodoo__framework__interfaces.html#gaaaf4d9dc04301324ce1a7f60d370883c"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_ILogger"><param name="Local" value="group__voodoo__framework__interfaces.html#gaca11032ec6621cdd20a1cd242d9c9e18"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_IModule"><param name="Local" value="group__voodoo__framework__interfaces.html#gaab89fdeca94c9c4f7b237729b707c51e"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_IObject"><param name="Local" value="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_IParameter"><param name="Local" value="group__voodoo__framework__interfaces.html#gab5e3bcc2e2cf1bccfbe5752cde45bada"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_IParser"><param name="Local" value="group__voodoo__framework__interfaces.html#ga87fc2a608dadaa1f57b48bbd5fa29d4c"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_IPass"><param name="Local" value="group__voodoo__framework__interfaces.html#gaa3efc59ba5eac917d4b6b1adae0ce192"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_IShader"><param name="Local" value="group__voodoo__framework__interfaces.html#gaec9b596ec85df707b2418aa64e990458"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_ITechnique"><param name="Local" value="group__voodoo__framework__interfaces.html#ga28056687c5094eaf2ae5d6aea19365ac"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IID_ITexture"><param name="Local" value="group__voodoo__framework__interfaces.html#gaa98e9fe0b83957213195757fdd8ffbab"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
@@ -59,15 +61,17 @@
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IAdapter"><param name="Local" value="class_voodoo_shader_1_1_i_adapter.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ICore"><param name="Local" value="class_voodoo_shader_1_1_i_core.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IFileSystem"><param name="Local" value="class_voodoo_shader_1_1_i_file_system.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IFile"><param name="Local" value="class_voodoo_shader_1_1_i_file.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IImage"><param name="Local" value="class_voodoo_shader_1_1_i_image.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IFileSystem"><param name="Local" value="class_voodoo_shader_1_1_i_file_system.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IHookManager"><param name="Local" value="class_voodoo_shader_1_1_i_hook_manager.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IImage"><param name="Local" value="class_voodoo_shader_1_1_i_image.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ILogger"><param name="Local" value="class_voodoo_shader_1_1_i_logger.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IModule"><param name="Local" value="class_voodoo_shader_1_1_i_module.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IObject"><param name="Local" value="class_voodoo_shader_1_1_i_object.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IParameter"><param name="Local" value="class_voodoo_shader_1_1_i_parameter.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IParser"><param name="Local" value="class_voodoo_shader_1_1_i_parser.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IPass"><param name="Local" value="class_voodoo_shader_1_1_i_pass.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IShader"><param name="Local" value="class_voodoo_shader_1_1_i_shader.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ITechnique"><param name="Local" value="class_voodoo_shader_1_1_i_technique.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ITexture"><param name="Local" value="class_voodoo_shader_1_1_i_texture.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
@@ -222,6 +226,10 @@
           </UL>
         </UL>
       </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Defines"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Throw"><param name="Local" value="group__voodoo__utility.html#ga091b737d9aeea07d84a2c465beee6d38"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Exception"><param name="Local" value="class_voodoo_shader_1_1_exception.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -234,10 +242,39 @@
     <UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_CLASS"><param name="Local" value="group__voodoo__core__null.html#ga0a9dc64dcffd3103c05894a5ca66ebab"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_CLASS"><param name="Local" value="group__voodoo__core__null.html#ga1d8f39632d178324bc1b7552708ed11f"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_CLASS"><param name="Local" value="group__voodoo__core__null.html#gac2844c65e31074337c08b220f70b0c10"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_CLASS"><param name="Local" value="group__voodoo__core__null.html#ga455a1cd7409632d9324428850018fcc4"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="AddRef"><param name="Local" value="group__voodoo__core__null.html#ga23d12eaae8d34b0f733cb64663f5f4cd"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Close"><param name="Local" value="group__voodoo__core__null.html#ga7780a2f7213452d6e4d970135fb195df"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Flush"><param name="Local" value="group__voodoo__core__null.html#ga5e9843910cd6fe3e211747b212d2fc27"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetCore"><param name="Local" value="group__voodoo__core__null.html#gaddee5d231a79bb67f21e97b73c22c158"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetFlags"><param name="Local" value="group__voodoo__core__null.html#ga17c9def0a9269c3e5dd219690330eb84"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="GetLogLevel"><param name="Local" value="group__voodoo__core__null.html#ga240213dd0f1aa8ea856fcfee582bb11f"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Log"><param name="Local" value="group__voodoo__core__null.html#ga166c2f312d90e0df566d5dfada0a1717"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="LogModule"><param name="Local" value="group__voodoo__core__null.html#gad2a52c8e2f8afde601e8637df55a94ed"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Open"><param name="Local" value="group__voodoo__core__null.html#ga48fe68dbd47e5ace6e7a2710c146072d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Open"><param name="Local" value="group__voodoo__core__null.html#ga7113715d28d135b84f6808050a3623bd"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="QueryInterface"><param name="Local" value="group__voodoo__core__null.html#gabfaf856f1597de56179ce47028bef653"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Release"><param name="Local" value="group__voodoo__core__null.html#gad76429fa4c3bc42226a48ecf59be9351"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="SetFlags"><param name="Local" value="group__voodoo__core__null.html#ga8a31f88acef712fae12acac1b35d350d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="SetLogLevel"><param name="Local" value="group__voodoo__core__null.html#gae9dc85bcab7a5d589364490b9a09fca1"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="ToString"><param name="Local" value="group__voodoo__core__null.html#ga0250d2f5782274f7ce1a2c092ec8fcd9"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VSLogger"><param name="Local" value="group__voodoo__core__null.html#ga46924c49e4f7071efe7fdfa53d9d3de8"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~VSLogger"><param name="Local" value="group__voodoo__core__null.html#ga7de6e6ac8928891a1165aff7651415b4"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Variables"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="CLSID_VSAdapter"><param name="Local" value="group__voodoo__core__null.html#gada167b759468c4c18906493bbfa7a452"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="CLSID_VSFileSystem"><param name="Local" value="group__voodoo__core__null.html#ga3d89f32e4a60fb1a015c99bfc4538203"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="CLSID_VSHookManager"><param name="Local" value="group__voodoo__core__null.html#ga7c948212c3d1566d96cac701ad95f430"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="CLSID_VSLogger"><param name="Local" value="group__voodoo__core__null.html#ga2d7b113233ee4385e0c32010b36433c7"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Core"><param name="Local" value="group__voodoo__core__null.html#ga9608a7141d1b5062b0fa5c53754156a9"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="m_Refs"><param name="Local" value="group__voodoo__core__null.html#ga1042ee947501c36ab95adad27f635dd6"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSAdapter"><param name="Local" value="class_voodoo_shader_1_1_v_s_adapter.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSFileSystem"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSHookManager"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSLogger"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo/WFileSystem"><param name="ImageNumber" value="1"></OBJECT>
@@ -273,17 +310,9 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_HOOK_VERSION_MINOR"><param name="Local" value="group__voodoo__module__ehhook.html#ga38946f1cf6a9930ea67ff5861ddca32f"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_HOOK_VERSION_PATCH"><param name="Local" value="group__voodoo__module__ehhook.html#ga644c2974616601b649ffde7ae6e4c36c"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="Typedefs"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Namespaces"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="HookMap"><param name="Local" value="group__voodoo__module__ehhook.html#ga1ece99ebf0836a5af70d9922c5409824"><param name="ImageNumber" value="11"></OBJECT>
-      </UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
-      <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCount"><param name="Local" value="group__voodoo__module__ehhook.html#ga65a1f42e4ddc732d381c2c15c01bd451"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCreate"><param name="Local" value="group__voodoo__module__ehhook.html#gae5b449a0df06633ca9b63a1016ec2d31"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassInfo"><param name="Local" value="group__voodoo__module__ehhook.html#gae99b845a110539b943449b868d4d12ee"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ModuleVersion"><param name="Local" value="group__voodoo__module__ehhook.html#gabcf87a179f84eeb5e5f4d55ac803d4ae"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_CLASS"><param name="Local" value="group__voodoo__module__ehhook.html#ga5ffd9981817afbdc5e1c87ff4c0813cf"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::EasyHook"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo/XmlLogger"><param name="ImageNumber" value="1"></OBJECT>
@@ -300,13 +329,9 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_LOGGER_VERSION_MINOR"><param name="Local" value="group__voodoo__module__xmllogger.html#ga4f470b2d849e1cfc305217c689bfdbf0"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_LOGGER_VERSION_PATCH"><param name="Local" value="group__voodoo__module__xmllogger.html#gaa1b524e75f5c061db327fc9f702a204d"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Namespaces"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCount"><param name="Local" value="group__voodoo__module__xmllogger.html#gaa376280850da89afd1db03d7a7b5b05b"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassCreate"><param name="Local" value="group__voodoo__module__xmllogger.html#ga3454ead5354533a1c821968e814567cb"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ClassInfo"><param name="Local" value="group__voodoo__module__xmllogger.html#ga07f4c121cbfad3e9c0c7a3b5a98ad5e0"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="API_ModuleVersion"><param name="Local" value="group__voodoo__module__xmllogger.html#ga052640155aad0d3d6464764e4df90afd"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="VOODOO_CLASS"><param name="Local" value="group__voodoo__module__xmllogger.html#ga05bab7914907160f88b81198608dadd3"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::XmlLogger"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     </UL>
   </UL>
@@ -321,6 +346,8 @@
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IHookManager"><param name="Local" value="class_voodoo_shader_1_1_i_hook_manager.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IImage"><param name="Local" value="class_voodoo_shader_1_1_i_image.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ILogger"><param name="Local" value="class_voodoo_shader_1_1_i_logger.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IModule"><param name="Local" value="class_voodoo_shader_1_1_i_module.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="IModuleManager"><param name="Local" value="class_i_module_manager.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::InitParams"><param name="Local" value="struct_voodoo_shader_1_1_init_params.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IObject"><param name="Local" value="class_voodoo_shader_1_1_i_object.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IParameter"><param name="Local" value="class_voodoo_shader_1_1_i_parameter.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -344,27 +371,92 @@
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Vector4< ValType >"><param name="Local" value="struct_voodoo_shader_1_1_vector4.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Version"><param name="Local" value="struct_voodoo_shader_1_1_version.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VertexStruct"><param name="Local" value="struct_voodoo_shader_1_1_vertex_struct.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSAdapter"><param name="Local" value="class_voodoo_shader_1_1_v_s_adapter.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSCore"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::EasyHook::VSEHHookManager"><param name="Local" value="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSFileSystem"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSHookManager"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSLogger"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSModule"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSModuleManager"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSParameter"><param name="Local" value="class_voodoo_shader_1_1_v_s_parameter.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSParser"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSPass"><param name="Local" value="class_voodoo_shader_1_1_v_s_pass.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSShader"><param name="Local" value="class_voodoo_shader_1_1_v_s_shader.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSTechnique"><param name="Local" value="class_voodoo_shader_1_1_v_s_technique.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VoodooWFS::VSWFile"><param name="Local" value="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VoodooWFS::VSWFileImpl"><param name="Local" value="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VoodooWFS::VSWFileSystem"><param name="Local" value="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VoodooWFS::VSWImage"><param name="Local" value="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::XmlLogger::VSXmlLogger"><param name="Local" value="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html"><param name="ImageNumber" value="11"></OBJECT>
   </UL>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Index"><param name="ImageNumber" value="1"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Hierarchy"><param name="ImageNumber" value="1"></OBJECT>
   <UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Converter"><param name="Local" value="class_voodoo_shader_1_1_converter.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Exception"><param name="Local" value="class_voodoo_shader_1_1_exception.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="IModuleManager"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSModuleManager"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::InitParams"><param name="Local" value="struct_voodoo_shader_1_1_init_params.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IObject"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IAdapter"><param name="Local" value="class_voodoo_shader_1_1_i_adapter.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ICore"><param name="Local" value="class_voodoo_shader_1_1_i_core.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IFile"><param name="Local" value="class_voodoo_shader_1_1_i_file.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IFileSystem"><param name="Local" value="class_voodoo_shader_1_1_i_file_system.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IHookManager"><param name="Local" value="class_voodoo_shader_1_1_i_hook_manager.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IImage"><param name="Local" value="class_voodoo_shader_1_1_i_image.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ILogger"><param name="Local" value="class_voodoo_shader_1_1_i_logger.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IParameter"><param name="Local" value="class_voodoo_shader_1_1_i_parameter.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IParser"><param name="Local" value="class_voodoo_shader_1_1_i_parser.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IPass"><param name="Local" value="class_voodoo_shader_1_1_i_pass.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IShader"><param name="Local" value="class_voodoo_shader_1_1_i_shader.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ITechnique"><param name="Local" value="class_voodoo_shader_1_1_i_technique.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IAdapter"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSAdapter"><param name="Local" value="class_voodoo_shader_1_1_v_s_adapter.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ICore"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSCore"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IFile"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IImage"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VoodooWFS::VSWImage"><param name="Local" value="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VoodooWFS::VSWFile"><param name="Local" value="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IFileSystem"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VoodooWFS::VSWFileSystem"><param name="Local" value="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSFileSystem"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IHookManager"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::EasyHook::VSEHHookManager"><param name="Local" value="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSHookManager"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ILogger"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSLogger"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::XmlLogger::VSXmlLogger"><param name="Local" value="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IModule"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSModule"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IParameter"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSParameter"><param name="Local" value="class_voodoo_shader_1_1_v_s_parameter.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IParser"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSParser"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IPass"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSPass"><param name="Local" value="class_voodoo_shader_1_1_v_s_pass.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IShader"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSShader"><param name="Local" value="class_voodoo_shader_1_1_v_s_shader.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ITechnique"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VSTechnique"><param name="Local" value="class_voodoo_shader_1_1_v_s_technique.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ITexture"><param name="Local" value="class_voodoo_shader_1_1_i_texture.html"><param name="ImageNumber" value="11"></OBJECT>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::LightStruct"><param name="Local" value="struct_voodoo_shader_1_1_light_struct.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -384,6 +476,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Vector4< ValType >"><param name="Local" value="struct_voodoo_shader_1_1_vector4.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Version"><param name="Local" value="struct_voodoo_shader_1_1_version.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VertexStruct"><param name="Local" value="struct_voodoo_shader_1_1_vertex_struct.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::VoodooWFS::VSWFileImpl"><param name="Local" value="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html"><param name="ImageNumber" value="11"></OBJECT>
   </UL>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Members"><param name="Local" value="functions.html"><param name="ImageNumber" value="11"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Namespace List"><param name="ImageNumber" value="1"></OBJECT>
@@ -397,68 +490,76 @@
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Namespace Members"><param name="Local" value="namespacemembers.html"><param name="ImageNumber" value="11"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="File List"><param name="ImageNumber" value="1"></OBJECT>
   <UL>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Converter.cpp"><param name="Local" value="_converter_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Converter.hpp"><param name="Local" value="_converter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Exception.cpp"><param name="Local" value="_exception_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Exception.hpp"><param name="Local" value="_exception_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Exports.cpp"><param name="Local" value="_exports_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Exports.hpp"><param name="Local" value="_exports_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/IAdapter.hpp"><param name="Local" value="_i_adapter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/ICore.hpp"><param name="Local" value="_i_core_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/IFilesystem.hpp"><param name="Local" value="_i_filesystem_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/IHookManager.hpp"><param name="Local" value="_i_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/ILogger.hpp"><param name="Local" value="_i_logger_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/IModule.hpp"><param name="Local" value="_i_module_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Includes.hpp"><param name="Local" value="_includes_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/IObject.hpp"><param name="Local" value="_i_object_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/IParameter.hpp"><param name="Local" value="_i_parameter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/IParser.hpp"><param name="Local" value="_i_parser_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/IPass.hpp"><param name="Local" value="_i_pass_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/IShader.hpp"><param name="Local" value="_i_shader_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/ITechnique.hpp"><param name="Local" value="_i_technique_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/ITexture.hpp"><param name="Local" value="_i_texture_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Regex.cpp"><param name="Local" value="_regex_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Regex.hpp"><param name="Local" value="_regex_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/resource.h"><param name="Local" value="_core_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/String.cpp"><param name="Local" value="_string_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/String.hpp"><param name="Local" value="_string_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Version.hpp"><param name="Local" value="_version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/Version_Build.hpp"><param name="Local" value="_version___build_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VoodooFramework.hpp"><param name="Local" value="_voodoo_framework_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSAdapter.cpp"><param name="Local" value="_v_s_adapter_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSAdapter.hpp"><param name="Local" value="_v_s_adapter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSCore.cpp"><param name="Local" value="_v_s_core_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSCore.hpp"><param name="Local" value="_v_s_core_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSFilesystem.cpp"><param name="Local" value="_v_s_filesystem_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSFilesystem.hpp"><param name="Local" value="_v_s_filesystem_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSHookManager.cpp"><param name="Local" value="_v_s_hook_manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSHookManager.hpp"><param name="Local" value="_v_s_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSLogger.cpp"><param name="Local" value="_v_s_logger_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSLogger.hpp"><param name="Local" value="_v_s_logger_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSModule.cpp"><param name="Local" value="_v_s_module_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSModule.hpp"><param name="Local" value="_v_s_module_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSParameter.cpp"><param name="Local" value="_v_s_parameter_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSParameter.hpp"><param name="Local" value="_v_s_parameter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSParser.cpp"><param name="Local" value="_v_s_parser_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSParser.hpp"><param name="Local" value="_v_s_parser_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSPass.cpp"><param name="Local" value="_v_s_pass_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSPass.hpp"><param name="Local" value="_v_s_pass_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSShader.cpp"><param name="Local" value="_v_s_shader_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSShader.hpp"><param name="Local" value="_v_s_shader_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSTechnique.cpp"><param name="Local" value="_v_s_technique_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Core/VSTechnique.hpp"><param name="Local" value="_v_s_technique_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Filesystem/FileSystem.cpp"><param name="Local" value="_file_system_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Filesystem/FileSystem.hpp"><param name="Local" value="_file_system_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Filesystem/Filesystem_Version.hpp"><param name="Local" value="_filesystem___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Filesystem/resource.h"><param name="Local" value="_filesystem_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Hook/Hook_Version.hpp"><param name="Local" value="_hook___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Hook/HookManager.cpp"><param name="Local" value="_hook_manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Hook/HookManager.hpp"><param name="Local" value="_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Hook/resource.h"><param name="Local" value="_hook_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Logger/Logger.cpp"><param name="Local" value="_logger_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Logger/Logger.hpp"><param name="Local" value="_logger_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Logger/Logger_Version.hpp"><param name="Local" value="_logger___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="D:/Code/VoodooShader/Framework/Logger/resource.h"><param name="Local" value="_logger_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Converter.cpp"><param name="Local" value="_converter_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Converter.hpp"><param name="Local" value="_converter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Exception.cpp"><param name="Local" value="_exception_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Exception.hpp"><param name="Local" value="_exception_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Exports.cpp"><param name="Local" value="_exports_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Exports.hpp"><param name="Local" value="_exports_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IAdapter.hpp"><param name="Local" value="_i_adapter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/ICore.hpp"><param name="Local" value="_i_core_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IFile.hpp"><param name="Local" value="_i_file_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IFileSystem.hpp"><param name="Local" value="_i_file_system_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IHookManager.hpp"><param name="Local" value="_i_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IImage.hpp"><param name="Local" value="_i_image_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/ILogger.hpp"><param name="Local" value="_i_logger_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IModule.hpp"><param name="Local" value="_i_module_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IModuleManager.hpp"><param name="Local" value="_i_module_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Includes.hpp"><param name="Local" value="_includes_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IObject.hpp"><param name="Local" value="_i_object_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IParameter.hpp"><param name="Local" value="_i_parameter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IParser.hpp"><param name="Local" value="_i_parser_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IPass.hpp"><param name="Local" value="_i_pass_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/IShader.hpp"><param name="Local" value="_i_shader_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/ITechnique.hpp"><param name="Local" value="_i_technique_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/ITexture.hpp"><param name="Local" value="_i_texture_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Regex.cpp"><param name="Local" value="_regex_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Regex.hpp"><param name="Local" value="_regex_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/resource.h"><param name="Local" value="_core_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/String.cpp"><param name="Local" value="_string_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/String.hpp"><param name="Local" value="_string_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Version.hpp"><param name="Local" value="_version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Version_Build.hpp"><param name="Local" value="_version___build_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VoodooFramework.hpp"><param name="Local" value="_voodoo_framework_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSAdapter.cpp"><param name="Local" value="_v_s_adapter_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSAdapter.hpp"><param name="Local" value="_v_s_adapter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSCore.cpp"><param name="Local" value="_v_s_core_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSCore.hpp"><param name="Local" value="_v_s_core_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSFilesystem.cpp"><param name="Local" value="_v_s_filesystem_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSFilesystem.hpp"><param name="Local" value="_v_s_filesystem_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSHookManager.cpp"><param name="Local" value="_v_s_hook_manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSHookManager.hpp"><param name="Local" value="_v_s_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSLogger.cpp"><param name="Local" value="_v_s_logger_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSLogger.hpp"><param name="Local" value="_v_s_logger_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSModule.cpp"><param name="Local" value="_v_s_module_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSModule.hpp"><param name="Local" value="_v_s_module_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSModuleManager.cpp"><param name="Local" value="_v_s_module_manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSModuleManager.hpp"><param name="Local" value="_v_s_module_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSParameter.cpp"><param name="Local" value="_v_s_parameter_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSParameter.hpp"><param name="Local" value="_v_s_parameter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSParser.cpp"><param name="Local" value="_v_s_parser_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSParser.hpp"><param name="Local" value="_v_s_parser_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSPass.cpp"><param name="Local" value="_v_s_pass_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSPass.hpp"><param name="Local" value="_v_s_pass_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSShader.cpp"><param name="Local" value="_v_s_shader_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSShader.hpp"><param name="Local" value="_v_s_shader_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSTechnique.cpp"><param name="Local" value="_v_s_technique_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSTechnique.hpp"><param name="Local" value="_v_s_technique_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/FileSystem.hpp"><param name="Local" value="_file_system_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/Filesystem_Version.hpp"><param name="Local" value="_filesystem___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/resource.h"><param name="Local" value="_filesystem_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/WFile.cpp"><param name="Local" value="_w_file_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/WFileImpl.cpp"><param name="Local" value="_w_file_impl_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/WFileSystem.cpp"><param name="Local" value="_w_file_system_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/WImage.cpp"><param name="Local" value="_w_image_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Hook/Hook_Version.hpp"><param name="Local" value="_hook___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Hook/HookManager.cpp"><param name="Local" value="_hook_manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Hook/HookManager.hpp"><param name="Local" value="_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Hook/resource.h"><param name="Local" value="_hook_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Logger/Logger.cpp"><param name="Local" value="_logger_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Logger/Logger.hpp"><param name="Local" value="_logger_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Logger/Logger_Version.hpp"><param name="Local" value="_logger___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Logger/resource.h"><param name="Local" value="_logger_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
   </UL>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Directories"><param name="ImageNumber" value="1"></OBJECT>
   <UL>
@@ -474,10 +575,13 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Exports.hpp"><param name="Local" value="_exports_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IAdapter.hpp"><param name="Local" value="_i_adapter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="ICore.hpp"><param name="Local" value="_i_core_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="IFilesystem.hpp"><param name="Local" value="_i_filesystem_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="IFile.hpp"><param name="Local" value="_i_file_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="IFileSystem.hpp"><param name="Local" value="_i_file_system_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IHookManager.hpp"><param name="Local" value="_i_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="IImage.hpp"><param name="Local" value="_i_image_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="ILogger.hpp"><param name="Local" value="_i_logger_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IModule.hpp"><param name="Local" value="_i_module_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="IModuleManager.hpp"><param name="Local" value="_i_module_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Includes.hpp"><param name="Local" value="_includes_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IObject.hpp"><param name="Local" value="_i_object_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="IParameter.hpp"><param name="Local" value="_i_parameter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -506,6 +610,8 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSLogger.hpp"><param name="Local" value="_v_s_logger_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSModule.cpp"><param name="Local" value="_v_s_module_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSModule.hpp"><param name="Local" value="_v_s_module_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VSModuleManager.cpp"><param name="Local" value="_v_s_module_manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VSModuleManager.hpp"><param name="Local" value="_v_s_module_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSParameter.cpp"><param name="Local" value="_v_s_parameter_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSParameter.hpp"><param name="Local" value="_v_s_parameter_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSParser.cpp"><param name="Local" value="_v_s_parser_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -519,10 +625,13 @@
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Filesystem"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="FileSystem.cpp"><param name="Local" value="_file_system_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="FileSystem.hpp"><param name="Local" value="_file_system_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Filesystem_Version.hpp"><param name="Local" value="_filesystem___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="resource.h"><param name="Local" value="_filesystem_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="WFile.cpp"><param name="Local" value="_w_file_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="WFileImpl.cpp"><param name="Local" value="_w_file_impl_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="WFileSystem.cpp"><param name="Local" value="_w_file_system_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="WImage.cpp"><param name="Local" value="_w_image_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Hook"><param name="ImageNumber" value="1"></OBJECT>
       <UL>

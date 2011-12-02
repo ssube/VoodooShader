@@ -5,7 +5,7 @@
 <title>Voodoo Shader Framework: Variables</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -76,7 +76,7 @@ Variable Values</h3>
 <p>Variable values may contain any characters and embedded variables. Values are parsed when used, using the current state and flags (in contrast to names, which are parsed when added).</p>
 <h3><a class="anchor" id="voodoo_vars_syntax_state"></a>
 Variable States &amp; Recursion</h3>
-<p>Each parsing call creates a state block and uses a discrete depth counter. The depth counter handles recursion and operated very simply. Each time the parser encounters a string that requires parsing, the counter is incremented and passed on. The recursion limit is implementation-defined, with VSParser using 8. When this limit is reached, variables will not be parsed, preventing infinite loops.</p>
+<p>Each parsing call creates a state block and uses a discrete depth counter. The depth counter handles recursion and operated very simply. Each time the parser encounters a string that requires parsing, the counter is incremented and passed on. The recursion limit is implementation-defined, with <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html">VSParser</a> using 8. When this limit is reached, variables will not be parsed, preventing infinite loops.</p>
 <p>State blocks are somewhat more Cthulhic in their logic. When the parser is called, a state block is created and passed on, similar to the depth counter. However, if a variable name containing a ':' character is encountered, the state may change. The variable name in question will be split at the ':' into a new name and value, both of which will be parsed using the current state. The returned values will be inserted into the state block as a new variable (or to overwrite an existing state variable). State variable may then be used in future parsing. While intended for relatively simple dynamic strings, state variables can (with sufficient cleverness and masochism) be used to perform simple logic operations.</p>
 <dl class="user"><dt><b>Examples:</b></dt><dd><div class="fragment"><pre class="fragment"> localroot = M:\VoodooShader\
  gempath = M:\VoodooShader\Gem\
@@ -93,7 +93,7 @@ Variable States &amp; Recursion</h3>
 
  $(basepath)/$($(adapter)_respath) = M:\VoodooShader\resources\frost\
 </pre></div></dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>Repeated consecutive slashes will not cause errors with path parsing, although in some locations they have special meanings. They may cause errors when using the string for other reasons; calling IParser::Parse() with the PF_SingleSlash flag set will attempt to strip these. Finally, state variables and suppression use a variation on the name syntax.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>Repeated consecutive slashes will not cause errors with path parsing, although in some locations they have special meanings. They may cause errors when using the string for other reasons; calling <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807">IParser::Parse()</a> with the PF_SingleSlash flag set will attempt to strip these. Finally, state variables and suppression use a variation on the name syntax.</dd></dl>
 <dl class="user"><dt><b>Examples:</b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\
  game.exe = $(adapter:Gem)
  Gem_Adapter = Voodoo_Gem.dll
@@ -109,7 +109,7 @@ Variable States &amp; Recursion</h3>
 </pre></div></dd></dl>
 <h2><a class="anchor" id="voodoo_vars_sys"></a>
 System Variables</h2>
-<p>Some variables, typically built-ins, are marked as system variables. These may be added once and may not be overwritten or later changed (all other variables may be changed by overwriting the name). The IParser::Remove() method does not remove system variables.</p>
+<p>Some variables, typically built-ins, are marked as system variables. These may be added once and may not be overwritten or later changed (all other variables may be changed by overwriting the name). The <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a9e626cc6bd961e559fb62f0fdf708494">IParser::Remove()</a> method does not remove system variables.</p>
 <h2><a class="anchor" id="voodoo_vars_flags"></a>
 Flags</h2>
 <p>The variable parser provides a small set of flags to control parsing modes.</p>
@@ -167,7 +167,7 @@ Environment Variables</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

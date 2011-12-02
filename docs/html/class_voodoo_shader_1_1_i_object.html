@@ -5,7 +5,7 @@
 <title>Voodoo Shader Framework: VoodooShader::IObject Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -72,6 +72,9 @@
 </div>
 <div class="contents">
 <!-- doxytag: class="VoodooShader::IObject" -->
+<p>Defines a simple interface all Voodoo objects from dynamic modules must inherit.  
+ <a href="class_voodoo_shader_1_1_i_object.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_i_object_8hpp_source.html">IObject.hpp</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for VoodooShader::IObject:</div>
@@ -80,34 +83,80 @@
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_i_object__inherit__graph.png" border="0" usemap="#_voodoo_shader_1_1_i_object_inherit__map" alt="Inheritance graph"/></div>
 <map name="_voodoo_shader_1_1_i_object_inherit__map" id="_voodoo_shader_1_1_i_object_inherit__map">
-<area shape="rect" id="node3" href="class_voodoo_shader_1_1_i_adapter.html" title="VoodooShader::IAdapter" alt="" coords="229,5,392,32"/><area shape="rect" id="node5" href="class_voodoo_shader_1_1_i_core.html" title="VoodooShader::ICore" alt="" coords="238,56,383,83"/><area shape="rect" id="node7" href="class_voodoo_shader_1_1_i_file.html" title="VoodooShader::IFile" alt="" coords="241,107,380,133"/><area shape="rect" id="node9" href="class_voodoo_shader_1_1_i_file_system.html" title="VoodooShader::IFileSystem" alt="" coords="219,157,403,184"/><area shape="rect" id="node11" href="class_voodoo_shader_1_1_i_hook_manager.html" title="VoodooShader::IHookManager" alt="" coords="211,208,410,235"/><area shape="rect" id="node13" href="class_voodoo_shader_1_1_i_image.html" title="VoodooShader::IImage" alt="" coords="234,259,387,285"/><area shape="rect" id="node15" href="class_voodoo_shader_1_1_i_logger.html" title="VoodooShader::ILogger" alt="" coords="232,309,389,336"/><area shape="rect" id="node17" href="class_voodoo_shader_1_1_i_parameter.html" title="VoodooShader::IParameter" alt="" coords="221,360,400,387"/><area shape="rect" id="node19" href="class_voodoo_shader_1_1_i_parser.html" title="VoodooShader::IParser" alt="" coords="233,411,389,437"/><area shape="rect" id="node21" href="class_voodoo_shader_1_1_i_pass.html" title="VoodooShader::IPass" alt="" coords="237,461,385,488"/><area shape="rect" id="node23" href="class_voodoo_shader_1_1_i_shader.html" title="VoodooShader::IShader" alt="" coords="231,512,390,539"/><area shape="rect" id="node25" href="class_voodoo_shader_1_1_i_technique.html" title="VoodooShader::ITechnique" alt="" coords="222,563,399,589"/><area shape="rect" id="node27" href="class_voodoo_shader_1_1_i_texture.html" title="VoodooShader::ITexture" alt="" coords="230,613,391,640"/></map>
+<area shape="rect" id="node3" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API..." alt="" coords="229,19,392,45"/><area shape="rect" id="node7" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="238,81,383,108"/><area shape="rect" id="node11" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access." alt="" coords="241,157,380,184"/><area shape="rect" id="node19" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access." alt="" coords="219,259,403,285"/><area shape="rect" id="node25" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function&#45;level hooks, redirecting existing functions and calls int..." alt="" coords="211,360,410,387"/><area shape="rect" id="node31" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level&#45;filtered messages." alt="" coords="232,461,389,488"/><area shape="rect" id="node37" href="class_voodoo_shader_1_1_i_module.html" title="Contains the handle to a loaded library and function pointers for creation and destruction." alt="" coords="231,512,391,539"/><area shape="rect" id="node41" href="class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)..." alt="" coords="221,563,400,589"/><area shape="rect" id="node45" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing." alt="" coords="233,613,389,640"/><area shape="rect" id="node49" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel..." alt="" coords="237,664,385,691"/><area shape="rect" id="node53" href="class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="231,715,390,741"/><area shape="rect" id="node57" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect." alt="" coords="222,765,399,792"/><area shape="rect" id="node61" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="230,816,391,843"/><area shape="rect" id="node5" href="class_voodoo_shader_1_1_v_s_adapter.html" title="VoodooShader::VSAdapter" alt="" coords="519,5,697,32"/><area shape="rect" id="node9" href="class_voodoo_shader_1_1_v_s_core.html" title="VoodooShader::VSCore" alt="" coords="528,56,688,83"/><area shape="rect" id="node13" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access." alt="" coords="531,107,685,133"/><area shape="rect" id="node17" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html" title="VoodooShader::VoodooWFS::VSWFile" alt="" coords="483,157,733,184"/><area shape="rect" id="node15" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library." alt="" coords="806,107,1069,133"/><area shape="rect" id="node21" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html" title="VoodooShader::VoodooWFS::VSWFileSystem" alt="" coords="461,208,755,235"/><area shape="rect" id="node23" href="class_voodoo_shader_1_1_v_s_file_system.html" title="VoodooShader::VSFileSystem" alt="" coords="509,259,707,285"/><area shape="rect" id="node27" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html" title="Handles function&#45;level hooks, redirecting function calls into new locations." alt="" coords="459,309,757,336"/><area shape="rect" id="node29" href="class_voodoo_shader_1_1_v_s_hook_manager.html" title="VoodooShader::VSHookManager" alt="" coords="501,360,715,387"/><area shape="rect" id="node33" href="class_voodoo_shader_1_1_v_s_logger.html" title="VoodooShader::VSLogger" alt="" coords="522,411,694,437"/><area shape="rect" id="node35" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html" title="Xml logger class, writes neatly formatted logs for use with the log viewer." alt="" coords="477,461,739,488"/><area shape="rect" id="node39" href="class_voodoo_shader_1_1_v_s_module.html" title="VoodooShader::VSModule" alt="" coords="521,512,695,539"/><area shape="rect" id="node43" href="class_voodoo_shader_1_1_v_s_parameter.html" title="VoodooShader::VSParameter" alt="" coords="511,563,705,589"/><area shape="rect" id="node47" href="class_voodoo_shader_1_1_v_s_parser.html" title="VoodooShader::VSParser" alt="" coords="523,613,693,640"/><area shape="rect" id="node51" href="class_voodoo_shader_1_1_v_s_pass.html" title="VoodooShader::VSPass" alt="" coords="527,664,689,691"/><area shape="rect" id="node55" href="class_voodoo_shader_1_1_v_s_shader.html" title="VoodooShader::VSShader" alt="" coords="521,715,695,741"/><area shape="rect" id="node59" href="class_voodoo_shader_1_1_v_s_technique.html" title="VoodooShader::VSTechnique" alt="" coords="512,765,704,792"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_i_object-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#af7e7ce12aebb73a9fdbf23141b8be1b5">VOODOO_METHOD_</a> (uint32_t, AddRef)() const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#af7e7ce12aebb73a9fdbf23141b8be1b5"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#ad0e8115c3e403982af8c50e9357efb20">VOODOO_METHOD_</a> (uint32_t, Release)() const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#ad0e8115c3e403982af8c50e9357efb20"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOODOO_METHOD()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#a4030aef3739632d89b381982920ef0e5">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a4030aef3739632d89b381982920ef0e5"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#a36c43339f1fe55a0b1dce0e9255e7f91">VOODOO_METHOD_</a> (<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string identifying this object.  <a href="#a36c43339f1fe55a0b1dce0e9255e7f91"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#aef6d938e55f1bfc92e13c886f25cb2c4">VOODOO_METHOD_</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *, GetCore)() const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#aef6d938e55f1bfc92e13c886f25cb2c4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de">AddRef</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#ac2068042dc47a035d13e62b3b44689de"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#a25f4c19470849e4679e0afc5ac7bfd02">Release</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a25f4c19470849e4679e0afc5ac7bfd02"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#a24b2f4989b0a5ef2b05df7b8af1e8cfd">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a24b2f4989b0a5ef2b05df7b8af1e8cfd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#a29869a5e16e29398ae21bb925bc9633c">ToString</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string identifying this object.  <a href="#a29869a5e16e29398ae21bb925bc9633c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html#ac04f1b9452f6e8269b77b12df8fa1bc9">GetCore</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#ac04f1b9452f6e8269b77b12df8fa1bc9"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_i_object_8hpp_source.html#l00040">40</a> of file <a class="el" href="_i_object_8hpp_source.html">IObject.hpp</a>.</p>
+<div class="textblock"><p>Defines a simple interface all Voodoo objects from dynamic modules must inherit. </p>
+<p>This interface handles destruction and identification of these objects.</p>
+<dl class="user"><dt><b>IID</b></dt><dd>e6f31287-05af-11e1-9e05-005056c00008 </dd></dl>
+
+<p>Definition at line <a class="el" href="_i_object_8hpp_source.html#l00042">42</a> of file <a class="el" href="_i_object_8hpp_source.html">IObject.hpp</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a4030aef3739632d89b381982920ef0e5"></a><!-- doxytag: member="VoodooShader::IObject::QueryInterface" ref="a4030aef3739632d89b381982920ef0e5" args="(Uuid &amp;clsid, const void **ppOut) const =0" -->
+<a class="anchor" id="ac2068042dc47a035d13e62b3b44689de"></a><!-- doxytag: member="VoodooShader::IObject::AddRef" ref="ac2068042dc47a035d13e62b3b44689de" args="() const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VOODOO_METHOD() VoodooShader::IObject::QueryInterface </td>
+          <td class="memname">virtual uint32_t VoodooShader::IObject::AddRef </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Add a reference to this object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a3c4f877ad406f9b55cbc84810efa3a55">VoodooShader::VoodooWFS::VSWImage</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a5a334d84222ccd4f890e677ccfe96231">VoodooShader::VoodooWFS::VSWFile</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a1382478fdc2e37b693fcad360912bd50">VoodooShader::VoodooWFS::VSWFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a07cc465f5b0d1dcb9a43ee8aea1b01d1">VoodooShader::XmlLogger::VSXmlLogger</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a8d3f91f999dde8bda5247020fc0d0fa3">VoodooShader::VSCore</a>, <a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a870c91e2414317dfb347d163e427a9a3">VoodooShader::EasyHook::VSEHHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a041db62374b6d5ed8a6b0554491357d9">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#acfffc4d06c2d113927334a90897c56ca">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#aeaa03ad70db57b9c41dd42486faf4c7c">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a0b831f10ce73797119f188e502bb6dfd">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ae760179238a64d502fe0fa41f19a67e3">VoodooShader::VSAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#ab79ab85e2bae02542af23f5c222bab55">VoodooShader::VSFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aea1fb5a9bda58e7a7984edde01fbd8b2">VoodooShader::VSHookManager</a>, <a class="el" href="group__voodoo__core__null.html#ga23d12eaae8d34b0f733cb64663f5f4cd">VoodooShader::VSLogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a496ee17d71062dbcd5b2614ba9911e7a">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#a6fe22471eac61572536bf3b38017d753">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a1b3d6b7fd50b9314057d4b2bca337384">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a5c1458f04aec86e313295143a343deca">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#a1efba25faad7d52fe146fd9a483fb846">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_image.html#a8c01fc1faad1301b2e3baa3e73405490">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a1576bf63255ce98d21b172bd47a5805b">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_module.html#a9612f497d8cf3f26290757abd569ea01">VoodooShader::IModule</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#acb88580221c6187d1358f57fe0dbbc64">VoodooShader::IParameter</a>, <a class="el" href="class_voodoo_shader_1_1_i_parser.html#ae445073e0f7b386fd68afb73f024d616">VoodooShader::IParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_module.html#a5f9ff7659279fc3216007eb535703e93">VoodooShader::VSModule</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#add6d73fdfbf51eecad72ec98b6d9d79c">VoodooShader::VSParameter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#a7965676db8b3f6f9cd0307860f1c7b1e">VoodooShader::VSParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#adb705715ab5dc51eda5c95880b737cd3">VoodooShader::VSPass</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a9536fd2cfe885cb5dd7724b901ef3706">VoodooShader::VSShader</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#aaa61412d9e746da3861a7d0dd7f8bb6d">VoodooShader::VSTechnique</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac04f1b9452f6e8269b77b12df8fa1bc9"></a><!-- doxytag: member="VoodooShader::IObject::GetCore" ref="ac04f1b9452f6e8269b77b12df8fa1bc9" args="() const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>* VoodooShader::IObject::GetCore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the core this object was associated with. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The core. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a10617d6a0fbc0c82128112ab6accd327">VoodooShader::VoodooWFS::VSWImage</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#abb17f2a298908105a22e932b5d3f8b3c">VoodooShader::VoodooWFS::VSWFile</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a6f176044528cc78d1bd8901278494091">VoodooShader::VoodooWFS::VSWFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a2a3c5403ba176780579816e7987127fa">VoodooShader::XmlLogger::VSXmlLogger</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a462ac8ae4b9c5f5a07534966d111581a">VoodooShader::VSCore</a>, <a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a0fde0158b2647938631aefb3d6ca65e1">VoodooShader::EasyHook::VSEHHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a40fe7e259eb8f5c32510b1467cac0c04">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a28a6002c06128b1089935824f5bfc65f">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#ab17d69445693f74222b08f02803ca770">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a0a8f6aa58601631886f2815625d11dc9">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#afdd73be1bfc097a328a3df21b7891ca2">VoodooShader::VSAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a32547eae7b83ada7e14adbed41a36489">VoodooShader::VSFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aa32d7675030435cb4a0a0f8e4c9de4c9">VoodooShader::VSHookManager</a>, <a class="el" href="group__voodoo__core__null.html#gaddee5d231a79bb67f21e97b73c22c158">VoodooShader::VSLogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#ac0293f2d5cb6e1c020f9b25023f59731">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#a34fbc64f931b918f4a507b71d7e3e99f">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a359432c2c186611f53c2ac3dc70c5589">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#ad228e1a9184d6e13db78865fd4fa7947">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#a4b79062436dec6e51d562ae4ec32ada7">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_image.html#a09d2b05ae227d9bf17e360977dda346b">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a23a6d15a31e1607cb7f7241b708275ff">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_module.html#a7dcf34d105a53f552414f67fed27becf">VoodooShader::IModule</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#abd7a0e56b4a0a5fe9bfc8ef08e7f4901">VoodooShader::IParameter</a>, <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a9ce55f26710f68464df8afa0384084bc">VoodooShader::IParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_module.html#ae1a3d738812cbcdf7d8c27fba378af11">VoodooShader::VSModule</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#a5d0847a3ca051135a628eb62a355353e">VoodooShader::VSParameter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#a7c9c8067a07242fcc71a86cc36becc6c">VoodooShader::VSParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a4d6a5c49f08098caa5044a8222d57610">VoodooShader::VSPass</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a6c9c4688bf64ed54525c61bab0895f11">VoodooShader::VSShader</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a1a828571544f0f6492adb57f2d9df140">VoodooShader::VSTechnique</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a24b2f4989b0a5ef2b05df7b8af1e8cfd"></a><!-- doxytag: member="VoodooShader::IObject::QueryInterface" ref="a24b2f4989b0a5ef2b05df7b8af1e8cfd" args="(Uuid &amp;clsid, const void **ppOut) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool VoodooShader::IObject::QueryInterface </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
           <td class="paramname"><em>clsid</em>, </td>
@@ -140,63 +189,19 @@ Public Member Functions</h2></td></tr>
 <dd>
 If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_i_image.html#a19ca688ae0a6ef1b4910b1a8172932e4">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#a7f0ae31a013f53617e4837170194b5c4">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a6c9f878016b2a353ad7e7e9c16d97c70">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a6366a191d166e952675dbc5e3d7e879c">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a1307a3fc73717f3894e6031f99096192">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a481cff34173c8f75c8649f03c29e1c24">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a8dd3f0464b2b061b7cd90313354dfb5d">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#a6c9488ca34fe24266ffc83c959a476d5">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#aafb97bd08673a184636af6945a98dffa">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#aef482579a77d55293aea567c8c73ad69">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a79894c540ef8cc6da91fe324748674a1">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a9d8c70fba937e8b289ddc8a4888eca78">VoodooShader::IParameter</a>, and <a class="el" href="class_voodoo_shader_1_1_i_parser.html#abc6c9c9b6df11b92241de8122efcea61">VoodooShader::IParser</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a35603c7551cae514b94357b647baf910">VoodooShader::VoodooWFS::VSWImage</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a18f5e77380badc09bc45f1777ba99540">VoodooShader::VoodooWFS::VSWFile</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a5e903aac656e58698ba89bd70793eb19">VoodooShader::VoodooWFS::VSWFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a37fa0c5fb33e7dc9bbb37197d83d69b5">VoodooShader::XmlLogger::VSXmlLogger</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a90282c74e15b9eb0f32126f89b43acfc">VoodooShader::VSCore</a>, <a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#aed79a0f89329506bb3eb857cf0a487ed">VoodooShader::EasyHook::VSEHHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a7f9bbcfee0103a366b5614a887f40427">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a6d9fc0bd180053cd3c8f3543c67b6f5c">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a7a17e1b6830c201d0ca31eebaea7833a">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a47dd2a7beb77603ae4da092d6165b009">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a4a909fb2c5660fe2aa6404756984397d">VoodooShader::VSAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a40d801b849a7ffc5ea0aa165b36cdd41">VoodooShader::VSFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ab044cf623ce1576622f7a884e2c184ea">VoodooShader::VSHookManager</a>, <a class="el" href="group__voodoo__core__null.html#gabfaf856f1597de56179ce47028bef653">VoodooShader::VSLogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a31d0dee2abdbd2751f8f45ea3785c6b0">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#a0a36ba4f69f6e62e44c5dcca23067d6d">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a379b573b9837077f9684e83e2dd89de5">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a6f95c53b0880ef095645ea08f5723d31">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#a011db9fdd6eed2c7da0c756bde0b1295">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_image.html#a41e82498cc7db73478bd4d4494865010">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a20618af0e9b7786bb309ad409628c792">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_module.html#a2d7bcc647f1a84a674cfaddb765918c0">VoodooShader::IModule</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#ab70e57cf2697100bc014c8b21dd9a7fc">VoodooShader::IParameter</a>, <a class="el" href="class_voodoo_shader_1_1_i_parser.html#abeee9bd5dd6088e7c94b56b45328c5d2">VoodooShader::IParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_module.html#a056380f848d0bcce84eb34f98c8fce6c">VoodooShader::VSModule</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#af3263b690ed85969495844ae27781411">VoodooShader::VSParameter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#a0a639e2272d88260f0228dab07292bc7">VoodooShader::VSParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#aa04ad6527402d630364cff462508e515">VoodooShader::VSPass</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ab32084cab38af222608d7c633c94e908">VoodooShader::VSShader</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#ae84237c295943bbb58fdbbcf76ebd378">VoodooShader::VSTechnique</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af7e7ce12aebb73a9fdbf23141b8be1b5"></a><!-- doxytag: member="VoodooShader::IObject::VOODOO_METHOD_" ref="af7e7ce12aebb73a9fdbf23141b8be1b5" args="(uint32_t, AddRef)() const =0" -->
+<a class="anchor" id="a25f4c19470849e4679e0afc5ac7bfd02"></a><!-- doxytag: member="VoodooShader::IObject::Release" ref="a25f4c19470849e4679e0afc5ac7bfd02" args="() const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VoodooShader::IObject::VOODOO_METHOD_ </td>
+          <td class="memname">virtual uint32_t VoodooShader::IObject::Release </td>
           <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">AddRef&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
-
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_i_image.html#a7672d941ddbce4045845504ad856a6e4">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#a7ab4b8175b9ebdbc2ff7ec3afb1e3073">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#af36c5fad6d99fc982b467eee328462c5">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a14930c71085d341bf5bd4a0a7138810c">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a06bcae497cd3223546e84d5ae394d136">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#aac38fdbe6466d20a9d17bae4a1bac311">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a5707aa9f7f3170d18fabb9ebb535d202">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#a7f8fe2a044bff8abdeae1dd93f058260">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a39f22011f975d5d12df3a4be15c8dfeb">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#ad5f92e744cad30e169db1937ad1ef8bb">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#aa0685374ff878019cb11655d43d3a0b0">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#ab61c204bd909ede35e222cdb169dd43d">VoodooShader::IParameter</a>, and <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a6129d70f9c7561acd8a40fd13de420fd">VoodooShader::IParser</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad0e8115c3e403982af8c50e9357efb20"></a><!-- doxytag: member="VoodooShader::IObject::VOODOO_METHOD_" ref="ad0e8115c3e403982af8c50e9357efb20" args="(uint32_t, Release)() const =0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::IObject::VOODOO_METHOD_ </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Release&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -206,30 +211,19 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_i_image.html#a46372c997542e91715ef15e6569ff0cb">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#ac68639e3895b4fadc6159938c6892984">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#ab5ee1f4c0f98839f133e289020db5945">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a7700d9b509a81f1d71f848484bdec670">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a3f64ef7500b73374ec94492397dc382c">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a1b8f0c5b1cf54fe53345a75e816a8e04">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#abd578f621cc55400330f0d2e7f6c8945">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#afb73b8ee4d99e689399cbfb2ae748851">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#acdd5f61d28b430d5ec65e6f7b90927f6">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a4b8b958a12c64c67a71eb8188e6e9895">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a191c7ac3a9c51bf2f9682ee2459b76e1">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a6b251da2448dfacd41a91e480040b748">VoodooShader::IParameter</a>, and <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a204403ea5bcda369e85053e159e8204b">VoodooShader::IParser</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a47e8875c73e6fa5c9808305704655b21">VoodooShader::VoodooWFS::VSWImage</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#adacd9ab2a7a932f2bcb68e6bd215021a">VoodooShader::VoodooWFS::VSWFile</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#ad885bb5efa69c6102cb4cd334f4f0716">VoodooShader::VoodooWFS::VSWFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a509ac039baf9f5c77088e277f70706a3">VoodooShader::XmlLogger::VSXmlLogger</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#af0a539b4b1b53213d2234bbefbabfaa3">VoodooShader::VSCore</a>, <a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a1cd69fe846d421cefbae824dc5c4cba4">VoodooShader::EasyHook::VSEHHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a57f284a3d8a4ae8608949e41718f01d0">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#afae1a396959cba4d9e570e6c9c50b6ba">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#adaef9fb2de20ad470de0f73ae140a371">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a71439fc3a60c11fae30e2f8025c91a8c">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a53164811898da13e4858a614dfb14cdf">VoodooShader::VSAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a2b83880e3f8be39071fc4701582073b9">VoodooShader::VSFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a401d0a016344c6ffd7a516701dd02478">VoodooShader::VSHookManager</a>, <a class="el" href="group__voodoo__core__null.html#gad76429fa4c3bc42226a48ecf59be9351">VoodooShader::VSLogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#aae7f21600bcad1fcf015a16741a06b7f">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#a8914e5c32ac0d0976d55bf76a5815524">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a5e3e49b5f6f921328ab1e24624453d64">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#ad954c17d6d39587025beef461ed8be25">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#abec100e2a98fb827301a78d49115547c">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_image.html#afe87fd4356c7ed1c6540e2a3a43ea1fd">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#aa032cd6fe212a71a36240d7ca43d36c2">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_module.html#abc37694b6b65c4019d4ff31c295f6091">VoodooShader::IModule</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#ab0c70d2a2a8ce35e8ed998c820cb45cc">VoodooShader::IParameter</a>, <a class="el" href="class_voodoo_shader_1_1_i_parser.html#ad60eb88d1058213a77e6c383433fec2d">VoodooShader::IParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_module.html#ab20e17fff875b1e876a30f389f56b464">VoodooShader::VSModule</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#a3f5d5c468085553824bbc26db617713e">VoodooShader::VSParameter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#a39efb8b7e852ff61ae667c4525a7709e">VoodooShader::VSParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a662bee8121814deaee21daf846c65f38">VoodooShader::VSPass</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ab51394993bcf1a309d21871c2bcc159c">VoodooShader::VSShader</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#ad4f44f8690ecb10d63653ca405105a8e">VoodooShader::VSTechnique</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a36c43339f1fe55a0b1dce0e9255e7f91"></a><!-- doxytag: member="VoodooShader::IObject::VOODOO_METHOD_" ref="a36c43339f1fe55a0b1dce0e9255e7f91" args="(String, ToString)() const =0" -->
+<a class="anchor" id="a29869a5e16e29398ae21bb925bc9633c"></a><!-- doxytag: member="VoodooShader::IObject::ToString" ref="a29869a5e16e29398ae21bb925bc9633c" args="() const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VoodooShader::IObject::VOODOO_METHOD_ </td>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::IObject::ToString </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ToString&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -239,50 +233,18 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <p>This must follow the form given in <a class="el" href="voodoo_spec_module.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The identifier. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_i_image.html#a18ac7968dc7afc32d84aebd09f4ef9a1">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#aec9e153484688645dd0b976127828c11">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a95bc6b347b6689b04c114ceb9f894fe1">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a3f1f15b0a6d3c4ba24bf3d66a20cb8d7">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a7581863f72421f2938feb952c7550cd2">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#ac6c27bd2cce00064932074118d6893d2">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a8b06e7298caf74d90f47dc2f08d2f002">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#a28d3a6b1179068cc8371ce3ec58b0f42">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a31462a0c11897baed87084bfb3e3bf37">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a734fae391e7d9cd4fa01e067b605f950">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a813a4570b66b7600a61a8c22e9316266">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a4844267f6053f78f5f01698b5651bf8b">VoodooShader::IParameter</a>, and <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a3080e723496db072b7b0cc46578b6944">VoodooShader::IParser</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aef6d938e55f1bfc92e13c886f25cb2c4"></a><!-- doxytag: member="VoodooShader::IObject::VOODOO_METHOD_" ref="aef6d938e55f1bfc92e13c886f25cb2c4" args="(ICore *, GetCore)() const =0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::IObject::VOODOO_METHOD_ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GetCore&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the core this object was associated with. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The core. </dd></dl>
-
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_i_image.html#a0a772c4fec66126706fb4c8571d0237e">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#adba56b7979fdb020e2e0c59e1bf2ce9c">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a689cf4176add414bd589d32c0c39ebd1">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a407b44a4351516fa5e8f2b253d63ab02">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a231a16fd4badc38857d5fcb4b6e58f75">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#a2f1e43fdcf303e4ea9612de30881fa18">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a9aa5ee6a6da69c2900d00f173c62ee62">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#a6b812815ee81a3dc08aaac8f7501215a">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a7daded7ce17ff31d3702d0bdd7436759">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a5ca3125fc18073dadb88d8d5aba40d92">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#aed3aa1ec06ad46cfe4a146ce4b1c978e">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a47a3b7b3d87318f1e9d42e38f7408b99">VoodooShader::IParameter</a>, and <a class="el" href="class_voodoo_shader_1_1_i_parser.html#aa584614d66e3869dba2d9aa54f11f31f">VoodooShader::IParser</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a940740321af7964309479e98beaeeff1">VoodooShader::VoodooWFS::VSWImage</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a0c9a3f28acd272781162b9cfd4afdf9c">VoodooShader::VoodooWFS::VSWFile</a>, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#ae2d64644b4dbd7023467466e568aae99">VoodooShader::VoodooWFS::VSWFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ac5e05c4ca4484f4a24ff74efb38c7a75">VoodooShader::XmlLogger::VSXmlLogger</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#aabd6995214189552b11be6a1f0f1d2a6">VoodooShader::VSCore</a>, <a class="el" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a25b0be3da8c999dc679a7b20b214322d">VoodooShader::EasyHook::VSEHHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_shader.html#ac7eaeae9423e2fc0e5fb0e5f85c6edd1">VoodooShader::IShader</a>, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a806f066936b415ff0597469dd6d15504">VoodooShader::IAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a56ab42fd6d763ec6fd2a4fd764be4a2a">VoodooShader::IPass</a>, <a class="el" href="class_voodoo_shader_1_1_i_technique.html#a4e05d505299f2d5a6217f2de0a591767">VoodooShader::ITechnique</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#af98fc9ac978dba2956ce224a55b0ec0e">VoodooShader::VSAdapter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a8ccc3e6aa819dc73cb8ce97a3a6be585">VoodooShader::VSFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7c96044488b84178e9cf4c6ebb9bff8b">VoodooShader::VSHookManager</a>, <a class="el" href="group__voodoo__core__null.html#ga0250d2f5782274f7ce1a2c092ec8fcd9">VoodooShader::VSLogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a4005f744f2c9059b45632e8bb803dbf3">VoodooShader::ITexture</a>, <a class="el" href="class_voodoo_shader_1_1_i_core.html#afbc161221b57174068778ccd1ae275be">VoodooShader::ICore</a>, <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a2e9d241c2120d06ac3fcb660748cd117">VoodooShader::IFileSystem</a>, <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a3c9c865341f3279a2dbe9a9f399b2546">VoodooShader::IHookManager</a>, <a class="el" href="class_voodoo_shader_1_1_i_file.html#a5e4d5675fc38a574277a14fcf50c0515">VoodooShader::IFile</a>, <a class="el" href="class_voodoo_shader_1_1_i_image.html#aa0043d8d8a12203a18b5f07308963d7a">VoodooShader::IImage</a>, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#ace127bad7cdc5b29e7f0842914a517bc">VoodooShader::ILogger</a>, <a class="el" href="class_voodoo_shader_1_1_i_module.html#a0d1e6e6dcc25a4a15901ad89a491d795">VoodooShader::IModule</a>, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#aee70aff83a671b72b9e6eb0d7ed63343">VoodooShader::IParameter</a>, <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a041eb223ef636501ee486f0cfd40fe06">VoodooShader::IParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_module.html#ab5cc866f1f33d43d129c5a67738bf5ec">VoodooShader::VSModule</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#a1abc456d2f2e75f68e777a34fdd85238">VoodooShader::VSParameter</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_parser.html#ad2905cad0da143f8124396c163db655d">VoodooShader::VSParser</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a5ea28b8544024bc0a2b7c7261174084f">VoodooShader::VSPass</a>, <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a1d79b04b72ea74b77b313a5ff9e84656">VoodooShader::VSShader</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_technique.html#a08b18b92b13e5a235f144abf722c880d">VoodooShader::VSTechnique</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/Code/VoodooShader/Framework/Core/<a class="el" href="_i_object_8hpp_source.html">IObject.hpp</a></li>
+<li>Framework/Core/<a class="el" href="_i_object_8hpp_source.html">IObject.hpp</a></li>
 </ul>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

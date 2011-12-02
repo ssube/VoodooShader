@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Voodoo Shader Framework: D:/Code/VoodooShader/Framework/Core/VSHookManager.cpp Source File</title>
+<title>Voodoo Shader Framework: Framework/Core/VSHookManager.cpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -57,8 +57,8 @@
   </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="dir_c16df085c44558d172d971f9e77068f0.html">Framework</a>      </li>
-      <li class="navelem"><a class="el" href="dir_18e810e4117992965d590bf395a39555.html">Core</a>      </li>
+      <li class="navelem"><a class="el" href="dir_5016d2c55f760ce9fb99cb5412b1b3be.html">Framework</a>      </li>
+      <li class="navelem"><a class="el" href="dir_01e264dd7619ef20c2be8f77dd731219.html">Core</a>      </li>
     </ul>
   </div>
 </div>
@@ -91,69 +91,69 @@
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <span class="keyword">namespace </span>VoodooShader
 <a name="l00024"></a>00024 {
-<a name="l00025"></a>00025     VSHookManager::VSHookManager(_In_ ICore * pCore) :
+<a name="l00025"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2f2c618cac78d3aa27e069c43471f0ff">00025</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2f2c618cac78d3aa27e069c43471f0ff">VSHookManager::VSHookManager</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore) :
 <a name="l00026"></a>00026         m_Refs(0), m_Core(pCore)
 <a name="l00027"></a>00027     { }
 <a name="l00028"></a>00028 
-<a name="l00029"></a>00029     VSHookManager::~VSHookManager()
+<a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a1ccf33c3a9c5128406b4edaf5a755041">00029</a>     <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a1ccf33c3a9c5128406b4edaf5a755041">VSHookManager::~VSHookManager</a>()
 <a name="l00030"></a>00030     { }
 <a name="l00031"></a>00031 
-<a name="l00032"></a>00032     uint32_t <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> VSHookManager::AddRef() CONST
+<a name="l00032"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aea1fb5a9bda58e7a7984edde01fbd8b2">00032</a>     uint32_t <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aea1fb5a9bda58e7a7984edde01fbd8b2" title="Add a reference to this object.">VSHookManager::AddRef</a>() CONST
 <a name="l00033"></a>00033     {
-<a name="l00034"></a>00034         <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(m_Refs);
+<a name="l00034"></a>00034         <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7637723233224204491f7bba49999a49">m_Refs</a>);
 <a name="l00035"></a>00035     }
 <a name="l00036"></a>00036 
-<a name="l00037"></a>00037     uint32_t <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> VSHookManager::Release() CONST
+<a name="l00037"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a401d0a016344c6ffd7a516701dd02478">00037</a>     uint32_t <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a401d0a016344c6ffd7a516701dd02478" title="Release a reference from this object.">VSHookManager::Release</a>() CONST
 <a name="l00038"></a>00038     {
-<a name="l00039"></a>00039         <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(m_Refs) == 0)
+<a name="l00039"></a>00039         <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7637723233224204491f7bba49999a49">m_Refs</a>) == 0)
 <a name="l00040"></a>00040         {
 <a name="l00041"></a>00041             <span class="keyword">delete</span> <span class="keyword">this</span>;
 <a name="l00042"></a>00042             <span class="keywordflow">return</span> 0;
 <a name="l00043"></a>00043         } <span class="keywordflow">else</span> {
-<a name="l00044"></a>00044             <span class="keywordflow">return</span> m_Refs;
+<a name="l00044"></a>00044             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7637723233224204491f7bba49999a49">m_Refs</a>;
 <a name="l00045"></a>00045         }
 <a name="l00046"></a>00046     }
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> VSHookManager::QueryInterface(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
+<a name="l00048"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ab044cf623ce1576622f7a884e2c184ea">00048</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ab044cf623ce1576622f7a884e2c184ea" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">VSHookManager::QueryInterface</a>(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST
 <a name="l00049"></a>00049     {
 <a name="l00050"></a>00050         <span class="keywordflow">if</span> (!ppOut)
 <a name="l00051"></a>00051         {
 <a name="l00052"></a>00052             <span class="keywordflow">if</span> (clsid.is_nil())
 <a name="l00053"></a>00053             {
-<a name="l00054"></a>00054                 clsid = CLSID_VSHookManager;
+<a name="l00054"></a>00054                 clsid = <a class="code" href="group__voodoo__core__null.html#ga7c948212c3d1566d96cac701ad95f430" title="Voodoo Shader null hook manager implementation.">CLSID_VSHookManager</a>;
 <a name="l00055"></a>00055                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00056"></a>00056             } <span class="keywordflow">else</span> {
 <a name="l00057"></a>00057                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00058"></a>00058             }
 <a name="l00059"></a>00059         } <span class="keywordflow">else</span> {
-<a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IID_IObject</a>)
+<a name="l00060"></a>00060             <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817">IID_IObject</a>)
 <a name="l00061"></a>00061             {
-<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga883d95d0c83b89aaba5f4af425748c1e" title="Defines the interface for handling function-level hooks, redirecting existing functions and calls int...">IID_IHookManager</a>) {
-<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IHookManager*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSHookManager) {
-<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>VSHookManager*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00062"></a>00062                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00063"></a>00063             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga883d95d0c83b89aaba5f4af425748c1e">IID_IHookManager</a>) {
+<a name="l00064"></a>00064                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function-level hooks, redirecting existing functions and calls int...">IHookManager</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00065"></a>00065             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__core__null.html#ga7c948212c3d1566d96cac701ad95f430" title="Voodoo Shader null hook manager implementation.">CLSID_VSHookManager</a>) {
+<a name="l00066"></a>00066                 *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html">VSHookManager</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
 <a name="l00067"></a>00067             } <span class="keywordflow">else</span> {
 <a name="l00068"></a>00068                 *ppOut = <span class="keyword">nullptr</span>;
 <a name="l00069"></a>00069                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00070"></a>00070             }
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(*ppOut)-&gt;AddRef();
+<a name="l00072"></a>00072             <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>*<span class="keyword">&gt;</span>(*ppOut)-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de" title="Add a reference to this object.">AddRef</a>();
 <a name="l00073"></a>00073             <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00074"></a>00074         }
 <a name="l00075"></a>00075     }
 <a name="l00076"></a>00076 
-<a name="l00077"></a>00077     String <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> VSHookManager::ToString() CONST
+<a name="l00077"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7c96044488b84178e9cf4c6ebb9bff8b">00077</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7c96044488b84178e9cf4c6ebb9bff8b" title="Get a string identifying this object.">VSHookManager::ToString</a>() CONST
 <a name="l00078"></a>00078     {
 <a name="l00079"></a>00079         <span class="keywordflow">return</span> L<span class="stringliteral">&quot;VSHookManager()&quot;</span>;
 <a name="l00080"></a>00080     }
 <a name="l00081"></a>00081 
-<a name="l00082"></a>00082     ICore * <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> VSHookManager::GetCore() CONST
+<a name="l00082"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aa32d7675030435cb4a0a0f8e4c9de4c9">00082</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aa32d7675030435cb4a0a0f8e4c9de4c9" title="Get the core this object was associated with.">VSHookManager::GetCore</a>() CONST
 <a name="l00083"></a>00083     {
-<a name="l00084"></a>00084         <span class="keywordflow">return</span> m_Core;
+<a name="l00084"></a>00084         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ad9356d6877ef39c1b8bd69122b96a190">m_Core</a>;
 <a name="l00085"></a>00085     }
 <a name="l00086"></a>00086 
-<a name="l00087"></a>00087     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> VSHookManager::Add(_In_ <span class="keyword">const</span> String &amp; name, _In_ <span class="keywordtype">void</span> * pSrc, _In_ <span class="keywordtype">void</span> * pDest)
+<a name="l00087"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#acef31a90a69ab978c687a0400506dc26">00087</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#acef31a90a69ab978c687a0400506dc26" title="Install a single hook at the specified point.">VSHookManager::Add</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keywordtype">void</span> * pSrc, _In_ <span class="keywordtype">void</span> * pDest)
 <a name="l00088"></a>00088     {
 <a name="l00089"></a>00089         UNREFERENCED_PARAMETER(name);
 <a name="l00090"></a>00090         UNREFERENCED_PARAMETER(pSrc);
@@ -162,14 +162,14 @@
 <a name="l00093"></a>00093         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00094"></a>00094     }
 <a name="l00095"></a>00095 
-<a name="l00096"></a>00096     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> VSHookManager::Remove(_In_ <span class="keyword">const</span> String &amp; name)
+<a name="l00096"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a68afa83936e6ccf86bbd83521c150260">00096</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a68afa83936e6ccf86bbd83521c150260" title="Removes a single hook.">VSHookManager::Remove</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name)
 <a name="l00097"></a>00097     {
 <a name="l00098"></a>00098         UNREFERENCED_PARAMETER(name);
 <a name="l00099"></a>00099 
 <a name="l00100"></a>00100         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00101"></a>00101     }
 <a name="l00102"></a>00102 
-<a name="l00103"></a>00103     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> VSHookManager::RemoveAll()
+<a name="l00103"></a><a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2c381ed3f164626663c520ddda10fd18">00103</a>     <span class="keywordtype">bool</span> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2c381ed3f164626663c520ddda10fd18" title="Removes all hooks created by this hook manager.">VSHookManager::RemoveAll</a>()
 <a name="l00104"></a>00104     {
 <a name="l00105"></a>00105         <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00106"></a>00106     }
@@ -179,7 +179,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:11 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

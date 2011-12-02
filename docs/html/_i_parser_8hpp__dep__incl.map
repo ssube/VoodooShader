@@ -1,7 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_v_s_parser_8hpp.html" title="D:/Code/VoodooShader/Framework/Core/VSParser.hpp" alt="" coords="179,80,521,107"/>
-<area shape="rect" id="node9" href="$_v_s_module_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSModule.cpp" alt="" coords="547,80,893,107"/>
-<area shape="rect" id="node11" href="$_v_s_shader_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSShader.cpp" alt="" coords="918,80,1263,107"/>
-<area shape="rect" id="node5" href="$_v_s_core_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSCore.cpp" alt="" coords="5,155,336,181"/>
-<area shape="rect" id="node7" href="$_v_s_parser_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSParser.cpp" alt="" coords="361,155,703,181"/>
+<area shape="rect" id="node3" href="$_v_s_parser_8hpp.html" title="Framework/Core/VSParser.hpp" alt="" coords="109,80,312,107"/>
+<area shape="rect" id="node9" href="$_v_s_module_8cpp.html" title="Framework/Core/VSModule.cpp" alt="" coords="337,80,543,107"/>
+<area shape="rect" id="node11" href="$_v_s_module_manager_8cpp.html" title="Framework/Core/VSModuleManager.cpp" alt="" coords="568,80,824,107"/>
+<area shape="rect" id="node13" href="$_v_s_shader_8cpp.html" title="Framework/Core/VSShader.cpp" alt="" coords="848,80,1053,107"/>
+<area shape="rect" id="node5" href="$_v_s_core_8cpp.html" title="Framework/Core/VSCore.cpp" alt="" coords="5,155,195,181"/>
+<area shape="rect" id="node7" href="$_v_s_parser_8cpp.html" title="Framework/Core/VSParser.cpp" alt="" coords="220,155,423,181"/>
 </map>

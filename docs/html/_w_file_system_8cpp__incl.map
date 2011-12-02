@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_file_system_8hpp.html" title="FileSystem.hpp" alt="" coords="556,80,669,107"/>
+<area shape="rect" id="node83" href="$_filesystem___version_8hpp.html" title="Filesystem_Version.hpp" alt="" coords="1032,155,1194,181"/>
+<area shape="rect" id="node5" href="$_voodoo_framework_8hpp.html" title="VoodooFramework.hpp" alt="" coords="536,155,690,181"/>
+<area shape="rect" id="node7" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="599,528,693,555"/>
+<area shape="rect" id="node27" href="$_converter_8hpp.html" title="Converter.hpp" alt="" coords="856,453,957,480"/>
+<area shape="rect" id="node30" href="$_exception_8hpp.html" title="Exception.hpp" alt="" coords="594,379,698,405"/>
+<area shape="rect" id="node32" href="$_string_8hpp.html" title="String.hpp" alt="" coords="263,453,344,480"/>
+<area shape="rect" id="node39" href="$_regex_8hpp.html" title="Regex.hpp" alt="" coords="250,379,333,405"/>
+<area shape="rect" id="node44" href="$_version_8hpp.html" title="Version.hpp" alt="" coords="1058,229,1149,256"/>
+<area shape="rect" id="node48" href="$_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="355,304,449,331"/>
+<area shape="rect" id="node54" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="474,304,552,331"/>
+<area shape="rect" id="node57" href="$_i_file_8hpp.html" title="IFile.hpp" alt="" coords="576,304,646,331"/>
+<area shape="rect" id="node60" href="$_i_file_system_8hpp.html" title="IFilesystem.hpp" alt="" coords="672,304,786,331"/>
+<area shape="rect" id="node63" href="$_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="48,304,178,331"/>
+<area shape="rect" id="node66" href="$_i_image_8hpp.html" title="IImage.hpp" alt="" coords="650,229,736,256"/>
+<area shape="rect" id="node69" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="102,229,190,256"/>
+<area shape="rect" id="node72" href="$_i_module_8hpp.html" title="IModule.hpp" alt="" coords="215,229,306,256"/>
+<area shape="rect" id="node75" href="$_i_module_manager_8hpp.html" title="IModuleManager.hpp" alt="" coords="331,229,473,256"/>
+<area shape="rect" id="node46" href="$_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="1040,304,1166,331"/>
+<area shape="rect" id="node50" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="358,379,446,405"/>
+</map>

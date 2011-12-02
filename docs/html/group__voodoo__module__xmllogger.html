@@ -5,7 +5,7 @@
 <title>Voodoo Shader Framework: Voodoo/XmlLogger</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -52,16 +52,19 @@
 </div>
 <div class="header">
   <div class="summary">
-<a href="#define-members">Defines</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Defines</a>  </div>
   <div class="headertitle">
 <div class="title">Voodoo/XmlLogger</div>  </div>
 </div>
 <div class="contents">
 
-<p>Provides a simple implementation of <a class="el" href="class_voodoo_shader_1_1_i_logger.html">ILogger</a>, printing a neatly-formatted Xml log.  
+<p>Provides a simple implementation of <a class="el" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a>, printing a neatly-formatted Xml log.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader_1_1_xml_logger.html">VoodooShader::XmlLogger</a></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#gac62a9585402526846fc9dec5b7809a3b">VOODOO_LOGGER_LIBID</a>&#160;&#160;&#160;{0xCC, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
@@ -73,17 +76,9 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#gaa1b524e75f5c061db327fc9f702a204d">VOODOO_LOGGER_VERSION_PATCH</a>&#160;&#160;&#160;0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga9c33775e9a566d327282ae9fc16e024d">VOODOO_LOGGER_VERSION_BUILD</a>&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_BUILD</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga9fa5f8793e3731fd6ee2f7b94290685b">VOODOO_LOGGER_VERSION_ID</a>&#160;&#160;&#160;VOODOO_GLOBAL_VERSION_ID</td></tr>
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const Version *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga052640155aad0d3d6464764e4df90afd">VoodooShader::XmlLogger::API_ModuleVersion</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#gaa376280850da89afd1db03d7a7b5b05b">VoodooShader::XmlLogger::API_ClassCount</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga07f4c121cbfad3e9c0c7a3b5a98ad5e0">VoodooShader::XmlLogger::API_ClassInfo</a> (const uint32_t index, Uuid *pUuid)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">IObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga3454ead5354533a1c821968e814567cb">VoodooShader::XmlLogger::API_ClassCreate</a> (const uint32_t number, ICore *pCore)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__module__xmllogger.html#ga05bab7914907160f88b81198608dadd3">VoodooShader::XmlLogger::VOODOO_CLASS</a> (VSXmlLogger, ILogger,{0xB7, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Xml logger class, writes neatly formatted logs for use with the log viewer.  <a href="#ga05bab7914907160f88b81198608dadd3"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<p>Provides a simple implementation of <a class="el" href="class_voodoo_shader_1_1_i_logger.html">ILogger</a>, printing a neatly-formatted Xml log. </p>
+<p>Provides a simple implementation of <a class="el" href="class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level-filtered messages.">ILogger</a>, printing a neatly-formatted Xml log. </p>
 <p>These logs can be opened with the standard log viewer and support all features.</p>
 <dl class="note"><dt><b>Note:</b></dt><dd>In debug builds, this logger also prints all messages to cout. If a debugger is attached, warnings and errors are printed to its output window. </dd></dl>
 <hr/><h2>Define Documentation</h2>
@@ -222,190 +217,11 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gaa376280850da89afd1db03d7a7b5b05b"></a><!-- doxytag: member="VoodooShader::XmlLogger::API_ClassCount" ref="gaa376280850da89afd1db03d7a7b5b05b" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint32_t VoodooShader::XmlLogger::API_ClassCount </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00052">52</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga3454ead5354533a1c821968e814567cb"></a><!-- doxytag: member="VoodooShader::XmlLogger::API_ClassCreate" ref="ga3454ead5354533a1c821968e814567cb" args="(const uint32_t number, ICore *pCore)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">IObject * VoodooShader::XmlLogger::API_ClassCreate </td>
-          <td>(</td>
-          <td class="paramtype">const uint32_t&#160;</td>
-          <td class="paramname"><em>number</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ICore *&#160;</td>
-          <td class="paramname"><em>pCore</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00073">73</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga07f4c121cbfad3e9c0c7a3b5a98ad5e0"></a><!-- doxytag: member="VoodooShader::XmlLogger::API_ClassInfo" ref="ga07f4c121cbfad3e9c0c7a3b5a98ad5e0" args="(const uint32_t index, Uuid *pUuid)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const wchar_t * VoodooShader::XmlLogger::API_ClassInfo </td>
-          <td>(</td>
-          <td class="paramtype">const uint32_t&#160;</td>
-          <td class="paramname"><em>index</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Uuid *&#160;</td>
-          <td class="paramname"><em>pUuid</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00057">57</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga052640155aad0d3d6464764e4df90afd"></a><!-- doxytag: member="VoodooShader::XmlLogger::API_ModuleVersion" ref="ga052640155aad0d3d6464764e4df90afd" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const Version * VoodooShader::XmlLogger::API_ModuleVersion </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_logger_8cpp_source.html#l00047">47</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga05bab7914907160f88b81198608dadd3"></a><!-- doxytag: member="VoodooShader::XmlLogger::VOODOO_CLASS" ref="ga05bab7914907160f88b81198608dadd3" args="(VSXmlLogger, ILogger,{0xB7, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::XmlLogger::VOODOO_CLASS </td>
-          <td>(</td>
-          <td class="paramtype">VSXmlLogger&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ILogger&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Xml logger class, writes neatly formatted logs for use with the log viewer. </p>
-<p>Supports all Voodoo <a class="el" href="class_voodoo_shader_1_1_i_logger.html">ILogger</a> features and debug logging (with no buffer).</p>
-<dl class="user"><dt><b>CLSID</b></dt><dd>e6f312b7-05af-11e1-9e05-005056c00008</dd></dl>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>If the logger isn't destroyed properly, the main tag of the log file won't be closed and the log won't be valid XML. </dd></dl>
-<p>Default constructor, opens a log file with the given name and mode.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pCore</td><td>The core to bind this logger to.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Default destructor, flushes and closes the log file (if open).</p>
-<p>Opens a file for use by this Logger.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pFile</td><td>The name of the file to open (may contain an absolute or relative path). </td></tr>
-    <tr><td class="paramname">append</td><td>Flag specifying the open mode; if true, any existing log is truncated. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the open operation.</dd></dl>
-<p>Closes the log file, if one is open.</p>
-<p>Immediately writes all pending data to disk.</p>
-<dl class="note"><dt><b>Note:</b></dt><dd>This is useful for catchable errors which may have fatal consequences (<a class="el" href="class_voodoo_shader_1_1_exception.html" title="Generic exception class for Voodoo applications.">Exception</a> calls this in case the exception is uncaught).</dd></dl>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>This may not (probably will not) be any good in case of a segfault or other crash. If you need complete debug logging, call Logger::SetBufferSize(unsigned int) with a buffer size of 0 and all logged messages <em>should</em> make it to disk, even during fatal crashes</dd></dl>
-<p>Set the default minimum message level. Messages below this level will not be logged. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">level</td><td>The minimum log level.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Writes a module stamp to the log. This records the name and version info for a select module (used to log what modules were present during a logging session).</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pModule</td><td>The module version info to log.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Log a message, may be formatted with printf syntax. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">level</td><td>The level for this message.</td></tr>
-    <tr><td class="paramname">module</td><td>The logging module's name. </td></tr>
-    <tr><td class="paramname">msg</td><td>The message format string. </td></tr>
-    <tr><td class="paramname">...</td><td>The parameters to insert.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Formats a timestamp for the log. The timestamp will have the form <code>HHMMSS</code>. Leading zeros are guaranteed to be present, so the timestamp length is 6 chars.</p>
-<dl class="note"><dt><b>Note:</b></dt><dd>If the system time cannot be retrieved, an equal-length error stamp of <code>000000</code> will be returned.</dd></dl>
-<p>Formats a date for the log. The date will have the form <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present, so the date length is 8 chars.</p>
-<dl class="note"><dt><b>Note:</b></dt><dd>If the system time cannot be retrieved, an equal-length error stamp of <code>00000000</code> will be returned.</dd></dl>
-<p>Formats the system's current tick count. The stamp will have the form <code>xxxxxxxxx</code>, with a potentially varying length. This records ticks, usually ms since system start.</p>
-
-<p>Definition at line <a class="el" href="_logger_8hpp_source.html#l00062">62</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
-
-</div>
-</div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

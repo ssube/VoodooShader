@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_v_s_pass_8hpp.html" title="D:/Code/VoodooShader/Framework/Core/VSPass.hpp" alt="" coords="191,80,525,107"/>
-<area shape="rect" id="node5" href="$_v_s_pass_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSPass.cpp" alt="" coords="5,155,339,181"/>
-<area shape="rect" id="node7" href="$_v_s_technique_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSTechnique.cpp" alt="" coords="364,155,727,181"/>
+<area shape="rect" id="node3" href="$_v_s_pass_8hpp.html" title="Framework/Core/VSPass.hpp" alt="" coords="121,80,316,107"/>
+<area shape="rect" id="node5" href="$_v_s_pass_8cpp.html" title="Framework/Core/VSPass.cpp" alt="" coords="5,155,200,181"/>
+<area shape="rect" id="node7" href="$_v_s_technique_8cpp.html" title="Framework/Core/VSTechnique.cpp" alt="" coords="225,155,447,181"/>
 </map>

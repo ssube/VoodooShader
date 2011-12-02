@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_adapter.html" title="VoodooShader::IAdapter" alt="" coords="5,83,168,109"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="115,5,271,32"/>
-<area shape="rect" id="node8" href="$class_voodoo_shader_1_1_i_core.html" title="VoodooShader::ICore" alt="" coords="193,83,337,109"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API..." alt="" coords="5,83,168,109"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="115,5,271,32"/>
+<area shape="rect" id="node8" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="193,83,337,109"/>
 </map>

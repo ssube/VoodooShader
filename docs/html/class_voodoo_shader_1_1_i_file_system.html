@@ -5,7 +5,7 @@
 <title>Voodoo Shader Framework: VoodooShader::IFileSystem Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -72,7 +72,10 @@
 </div>
 <div class="contents">
 <!-- doxytag: class="VoodooShader::IFileSystem" --><!-- doxytag: inherits="VoodooShader::IObject" -->
-<p><code>#include &lt;<a class="el" href="_i_filesystem_8hpp_source.html">IFilesystem.hpp</a>&gt;</code></p>
+<p>Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.  
+ <a href="class_voodoo_shader_1_1_i_file_system.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_i_file_system_8hpp_source.html">IFileSystem.hpp</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for VoodooShader::IFileSystem:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -80,7 +83,7 @@
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_i_file_system__inherit__graph.png" border="0" usemap="#_voodoo_shader_1_1_i_file_system_inherit__map" alt="Inheritance graph"/></div>
 <map name="_voodoo_shader_1_1_i_file_system_inherit__map" id="_voodoo_shader_1_1_i_file_system_inherit__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="19,5,175,32"/></map>
+<area shape="rect" id="node5" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html" title="VoodooShader::VoodooWFS::VSWFileSystem" alt="" coords="5,155,299,181"/><area shape="rect" id="node7" href="class_voodoo_shader_1_1_v_s_file_system.html" title="VoodooShader::VSFileSystem" alt="" coords="323,155,521,181"/><area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="209,5,364,32"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for VoodooShader::IFileSystem:</div>
@@ -89,40 +92,43 @@
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_i_file_system__coll__graph.png" border="0" usemap="#_voodoo_shader_1_1_i_file_system_coll__map" alt="Collaboration graph"/></div>
 <map name="_voodoo_shader_1_1_i_file_system_coll__map" id="_voodoo_shader_1_1_i_file_system_coll__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="19,5,175,32"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="19,5,175,32"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_i_file_system-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a39f22011f975d5d12df3a4be15c8dfeb">VOODOO_METHOD_</a> (uint32_t, AddRef)() const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a39f22011f975d5d12df3a4be15c8dfeb"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#acdd5f61d28b430d5ec65e6f7b90927f6">VOODOO_METHOD_</a> (uint32_t, Release)() const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#acdd5f61d28b430d5ec65e6f7b90927f6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOODOO_METHOD()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#aafb97bd08673a184636af6945a98dffa">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#aafb97bd08673a184636af6945a98dffa"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a31462a0c11897baed87084bfb3e3bf37">VOODOO_METHOD_</a> (<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string identifying this object.  <a href="#a31462a0c11897baed87084bfb3e3bf37"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a7daded7ce17ff31d3702d0bdd7436759">VOODOO_METHOD_</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *, GetCore)() const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a7daded7ce17ff31d3702d0bdd7436759"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOODOO_METHOD()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a30f12df341ca918c2f48ba06ab2885dd">AddPath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a directory to this file system's search path.  <a href="#a30f12df341ca918c2f48ba06ab2885dd"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOODOO_METHOD()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a6a487ca96b754279fd3b6c211571bcf5">RemovePath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a directory from the search path, following the same rules as adding (adding a string then removing the same string will always work).  <a href="#a6a487ca96b754279fd3b6c211571bcf5"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a1bd5fa08ed23fa06e0b57d507805b45c">VOODOO_METHOD_</a> (<a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *, FindFile)(const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a relative filename (usually just filename and extension, but may include directories) into an absolute filename by searching the list of resource directories registered with this manager.  <a href="#a1bd5fa08ed23fa06e0b57d507805b45c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a1b3d6b7fd50b9314057d4b2bca337384">AddRef</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a1b3d6b7fd50b9314057d4b2bca337384"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a5e3e49b5f6f921328ab1e24624453d64">Release</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a5e3e49b5f6f921328ab1e24624453d64"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a379b573b9837077f9684e83e2dd89de5">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a379b573b9837077f9684e83e2dd89de5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a2e9d241c2120d06ac3fcb660748cd117">ToString</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string identifying this object.  <a href="#a2e9d241c2120d06ac3fcb660748cd117"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a359432c2c186611f53c2ac3dc70c5589">GetCore</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a359432c2c186611f53c2ac3dc70c5589"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a6c87a93af54f338d4037544461ac39d1">AddPath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a directory to this file system's search path.  <a href="#a6c87a93af54f338d4037544461ac39d1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a444e8092295bad976a4113e04498485e">RemovePath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a directory from the search path, following the same rules as adding (adding a string then removing the same string will always work).  <a href="#a444e8092295bad976a4113e04498485e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a39318c5088c9def47eb036547b140932">GetFile</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, const <a class="el" href="namespace_voodoo_shader.html#a3e5dcf65468c74a45648090d2f82bfb5">GetFileMode</a> mode=FF_OpenOnly) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a relative filename (usually just filename and extension, but may include directories) into an absolute filename by searching the list of resource directories registered with this manager.  <a href="#a39318c5088c9def47eb036547b140932"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_i_filesystem_8hpp_source.html#l00038">38</a> of file <a class="el" href="_i_filesystem_8hpp_source.html">IFilesystem.hpp</a>.</p>
+<div class="textblock"><p>Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access. </p>
+<p>Currently provides a readonly filesystem.</p>
+<dl class="user"><dt><b>IID</b></dt><dd>e6f31288-05af-11e1-9e05-005056c00008 </dd></dl>
+
+<p>Definition at line <a class="el" href="_i_file_system_8hpp_source.html#l00040">40</a> of file <a class="el" href="_i_file_system_8hpp_source.html">IFileSystem.hpp</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a30f12df341ca918c2f48ba06ab2885dd"></a><!-- doxytag: member="VoodooShader::IFileSystem::AddPath" ref="a30f12df341ca918c2f48ba06ab2885dd" args="(const String &amp;path)=0" -->
+<a class="anchor" id="a6c87a93af54f338d4037544461ac39d1"></a><!-- doxytag: member="VoodooShader::IFileSystem::AddPath" ref="a6c87a93af54f338d4037544461ac39d1" args="(const String &amp;path)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VOODOO_METHOD() VoodooShader::IFileSystem::AddPath </td>
+          <td class="memname">virtual bool VoodooShader::IFileSystem::AddPath </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -141,14 +147,103 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>This does not check for duplicates, so care should be taken not to add the same directory repeatedly. Directory search order is important for file priority. </dd></dl>
 
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#af50d200f10d74688d4c7c765ac6a148c">VoodooShader::VoodooWFS::VSWFileSystem</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a3e8337cc7f0d920a7da88870764fb6c2">VoodooShader::VSFileSystem</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="aafb97bd08673a184636af6945a98dffa"></a><!-- doxytag: member="VoodooShader::IFileSystem::QueryInterface" ref="aafb97bd08673a184636af6945a98dffa" args="(Uuid &amp;clsid, const void **ppOut) const =0" -->
+<a class="anchor" id="a1b3d6b7fd50b9314057d4b2bca337384"></a><!-- doxytag: member="VoodooShader::IFileSystem::AddRef" ref="a1b3d6b7fd50b9314057d4b2bca337384" args="() const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VOODOO_METHOD() VoodooShader::IFileSystem::QueryInterface </td>
+          <td class="memname">virtual uint32_t VoodooShader::IFileSystem::AddRef </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Add a reference to this object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de">VoodooShader::IObject</a>.</p>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a1382478fdc2e37b693fcad360912bd50">VoodooShader::VoodooWFS::VSWFileSystem</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#ab79ab85e2bae02542af23f5c222bab55">VoodooShader::VSFileSystem</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a359432c2c186611f53c2ac3dc70c5589"></a><!-- doxytag: member="VoodooShader::IFileSystem::GetCore" ref="a359432c2c186611f53c2ac3dc70c5589" args="() const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>* VoodooShader::IFileSystem::GetCore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the core this object was associated with. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The core. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#ac04f1b9452f6e8269b77b12df8fa1bc9">VoodooShader::IObject</a>.</p>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a6f176044528cc78d1bd8901278494091">VoodooShader::VoodooWFS::VSWFileSystem</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a32547eae7b83ada7e14adbed41a36489">VoodooShader::VSFileSystem</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a39318c5088c9def47eb036547b140932"></a><!-- doxytag: member="VoodooShader::IFileSystem::GetFile" ref="a39318c5088c9def47eb036547b140932" args="(const String &amp;name, const GetFileMode mode=FF_OpenOnly) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a>* VoodooShader::IFileSystem::GetFile </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_voodoo_shader.html#a3e5dcf65468c74a45648090d2f82bfb5">GetFileMode</a>&#160;</td>
+          <td class="paramname"><em>mode</em> = <code>FF_OpenOnly</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Resolves a relative filename (usually just filename and extension, but may include directories) into an absolute filename by searching the list of resource directories registered with this manager. </p>
+<p>Depending on the mode given, the file may be opened or created.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The file name to find. </td></tr>
+    <tr><td class="paramname">mode</td><td>The file mode to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The file, if found. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a7faa037f99e98cab942a693f07b50218">VoodooShader::VoodooWFS::VSWFileSystem</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a2a3cb21de93689950f4f579e55740f1a">VoodooShader::VSFileSystem</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a379b573b9837077f9684e83e2dd89de5"></a><!-- doxytag: member="VoodooShader::IFileSystem::QueryInterface" ref="a379b573b9837077f9684e83e2dd89de5" args="(Uuid &amp;clsid, const void **ppOut) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool VoodooShader::IFileSystem::QueryInterface </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
           <td class="paramname"><em>clsid</em>, </td>
@@ -181,16 +276,42 @@ Public Member Functions</h2></td></tr>
 <dd>
 If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a4030aef3739632d89b381982920ef0e5">VoodooShader::IObject</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a24b2f4989b0a5ef2b05df7b8af1e8cfd">VoodooShader::IObject</a>.</p>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a5e903aac656e58698ba89bd70793eb19">VoodooShader::VoodooWFS::VSWFileSystem</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a40d801b849a7ffc5ea0aa165b36cdd41">VoodooShader::VSFileSystem</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a6a487ca96b754279fd3b6c211571bcf5"></a><!-- doxytag: member="VoodooShader::IFileSystem::RemovePath" ref="a6a487ca96b754279fd3b6c211571bcf5" args="(const String &amp;path)=0" -->
+<a class="anchor" id="a5e3e49b5f6f921328ab1e24624453d64"></a><!-- doxytag: member="VoodooShader::IFileSystem::Release" ref="a5e3e49b5f6f921328ab1e24624453d64" args="() const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VOODOO_METHOD() VoodooShader::IFileSystem::RemovePath </td>
+          <td class="memname">virtual uint32_t VoodooShader::IFileSystem::Release </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Release a reference from this object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
+
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a25f4c19470849e4679e0afc5ac7bfd02">VoodooShader::IObject</a>.</p>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#ad885bb5efa69c6102cb4cd334f4f0716">VoodooShader::VoodooWFS::VSWFileSystem</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a2b83880e3f8be39071fc4701582073b9">VoodooShader::VSFileSystem</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a444e8092295bad976a4113e04498485e"></a><!-- doxytag: member="VoodooShader::IFileSystem::RemovePath" ref="a444e8092295bad976a4113e04498485e" args="(const String &amp;path)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool VoodooShader::IFileSystem::RemovePath </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -208,94 +329,19 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
   </dd>
 </dl>
 
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#aabd861d7a1925a4bb9032d2a57308041">VoodooShader::VoodooWFS::VSWFileSystem</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a624e60d4171e83078e91fdc22ff399bb">VoodooShader::VSFileSystem</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="a39f22011f975d5d12df3a4be15c8dfeb"></a><!-- doxytag: member="VoodooShader::IFileSystem::VOODOO_METHOD_" ref="a39f22011f975d5d12df3a4be15c8dfeb" args="(uint32_t, AddRef)() const =0" -->
+<a class="anchor" id="a2e9d241c2120d06ac3fcb660748cd117"></a><!-- doxytag: member="VoodooShader::IFileSystem::ToString" ref="a2e9d241c2120d06ac3fcb660748cd117" args="() const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VoodooShader::IFileSystem::VOODOO_METHOD_ </td>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> VoodooShader::IFileSystem::ToString </td>
           <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">AddRef&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Add a reference to this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::AddRef. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#af7e7ce12aebb73a9fdbf23141b8be1b5">VoodooShader::IObject</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acdd5f61d28b430d5ec65e6f7b90927f6"></a><!-- doxytag: member="VoodooShader::IFileSystem::VOODOO_METHOD_" ref="acdd5f61d28b430d5ec65e6f7b90927f6" args="(uint32_t, Release)() const =0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::IFileSystem::VOODOO_METHOD_ </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Release&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Release a reference from this object. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new reference count.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This function is equivalent to COM's IUnknown::Release. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#ad0e8115c3e403982af8c50e9357efb20">VoodooShader::IObject</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a31462a0c11897baed87084bfb3e3bf37"></a><!-- doxytag: member="VoodooShader::IFileSystem::VOODOO_METHOD_" ref="a31462a0c11897baed87084bfb3e3bf37" args="(String, ToString)() const =0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::IFileSystem::VOODOO_METHOD_ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ToString&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -305,86 +351,20 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <p>This must follow the form given in <a class="el" href="voodoo_spec_module.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The identifier. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a36c43339f1fe55a0b1dce0e9255e7f91">VoodooShader::IObject</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a29869a5e16e29398ae21bb925bc9633c">VoodooShader::IObject</a>.</p>
 
-</div>
-</div>
-<a class="anchor" id="a7daded7ce17ff31d3702d0bdd7436759"></a><!-- doxytag: member="VoodooShader::IFileSystem::VOODOO_METHOD_" ref="a7daded7ce17ff31d3702d0bdd7436759" args="(ICore *, GetCore)() const =0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::IFileSystem::VOODOO_METHOD_ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GetCore&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the core this object was associated with. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The core. </dd></dl>
-
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#aef6d938e55f1bfc92e13c886f25cb2c4">VoodooShader::IObject</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1bd5fa08ed23fa06e0b57d507805b45c"></a><!-- doxytag: member="VoodooShader::IFileSystem::VOODOO_METHOD_" ref="a1bd5fa08ed23fa06e0b57d507805b45c" args="(IFile *, FindFile)(const String &amp;name) const =0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VoodooShader::IFileSystem::VOODOO_METHOD_ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FindFile&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Resolves a relative filename (usually just filename and extension, but may include directories) into an absolute filename by searching the list of resource directories registered with this manager. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">name</td><td>The file name to find. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The file, if found. </dd></dl>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#ae2d64644b4dbd7023467466e568aae99">VoodooShader::VoodooWFS::VSWFileSystem</a>, and <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a8ccc3e6aa819dc73cb8ce97a3a6be585">VoodooShader::VSFileSystem</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/Code/VoodooShader/Framework/Core/<a class="el" href="_i_filesystem_8hpp_source.html">IFilesystem.hpp</a></li>
+<li>Framework/Core/<a class="el" href="_i_file_system_8hpp_source.html">IFileSystem.hpp</a></li>
 </ul>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

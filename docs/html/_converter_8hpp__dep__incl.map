@@ -1,13 +1,16 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_converter_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/Converter.cpp" alt="" coords="42,80,381,107"/>
-<area shape="rect" id="node5" href="$_voodoo_framework_8hpp.html" title="D:/Code/VoodooShader/Framework/Core/VoodooFramework.hpp" alt="" coords="407,80,801,107"/>
-<area shape="rect" id="node19" href="$_v_s_core_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSCore.cpp" alt="" coords="825,80,1156,107"/>
-<area shape="rect" id="node21" href="$_v_s_parameter_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSParameter.cpp" alt="" coords="1181,80,1544,107"/>
-<area shape="rect" id="node23" href="$_v_s_shader_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSShader.cpp" alt="" coords="1569,80,1913,107"/>
-<area shape="rect" id="node7" href="$_file_system_8hpp.html" title="D:/Code/VoodooShader/Framework/Filesystem/FileSystem.hpp" alt="" coords="5,155,395,181"/>
-<area shape="rect" id="node11" href="$_hook_manager_8hpp.html" title="D:/Code/VoodooShader/Framework/Hook/HookManager.hpp" alt="" coords="419,155,788,181"/>
-<area shape="rect" id="node15" href="$_logger_8hpp.html" title="D:/Code/VoodooShader/Framework/Logger/Logger.hpp" alt="" coords="813,155,1149,181"/>
-<area shape="rect" id="node9" href="$_file_system_8cpp.html" title="D:/Code/VoodooShader/Framework/Filesystem/FileSystem.cpp" alt="" coords="5,229,395,256"/>
-<area shape="rect" id="node13" href="$_hook_manager_8cpp.html" title="D:/Code/VoodooShader/Framework/Hook/HookManager.cpp" alt="" coords="419,229,788,256"/>
-<area shape="rect" id="node17" href="$_logger_8cpp.html" title="D:/Code/VoodooShader/Framework/Logger/Logger.cpp" alt="" coords="813,229,1149,256"/>
+<area shape="rect" id="node3" href="$_converter_8cpp.html" title="Framework/Core/Converter.cpp" alt="" coords="816,80,1016,107"/>
+<area shape="rect" id="node5" href="$_voodoo_framework_8hpp.html" title="Framework/Core/VoodooFramework.hpp" alt="" coords="1041,80,1295,107"/>
+<area shape="rect" id="node25" href="$_v_s_core_8cpp.html" title="Framework/Core/VSCore.cpp" alt="" coords="1319,80,1509,107"/>
+<area shape="rect" id="node27" href="$_v_s_parameter_8cpp.html" title="Framework/Core/VSParameter.cpp" alt="" coords="1535,80,1759,107"/>
+<area shape="rect" id="node29" href="$_v_s_shader_8cpp.html" title="Framework/Core/VSShader.cpp" alt="" coords="1783,80,1988,107"/>
+<area shape="rect" id="node7" href="$_file_system_8hpp.html" title="Framework/Filesystem/FileSystem.hpp" alt="" coords="518,155,767,181"/>
+<area shape="rect" id="node17" href="$_hook_manager_8hpp.html" title="Framework/Hook/HookManager.hpp" alt="" coords="1053,155,1283,181"/>
+<area shape="rect" id="node21" href="$_logger_8hpp.html" title="Framework/Logger/Logger.hpp" alt="" coords="1307,155,1504,181"/>
+<area shape="rect" id="node9" href="$_w_file_8cpp.html" title="Framework/Filesystem/WFile.cpp" alt="" coords="5,229,221,256"/>
+<area shape="rect" id="node11" href="$_w_file_impl_8cpp.html" title="Framework/Filesystem/WFileImpl.cpp" alt="" coords="246,229,487,256"/>
+<area shape="rect" id="node13" href="$_w_file_system_8cpp.html" title="Framework/Filesystem/WFileSystem.cpp" alt="" coords="511,229,773,256"/>
+<area shape="rect" id="node15" href="$_w_image_8cpp.html" title="Framework/Filesystem/WImage.cpp" alt="" coords="798,229,1028,256"/>
+<area shape="rect" id="node19" href="$_hook_manager_8cpp.html" title="Framework/Hook/HookManager.cpp" alt="" coords="1053,229,1283,256"/>
+<area shape="rect" id="node23" href="$_logger_8cpp.html" title="Framework/Logger/Logger.cpp" alt="" coords="1307,229,1504,256"/>
 </map>

@@ -5,7 +5,7 @@
 <title>Voodoo Shader Framework: Voodoo Module Specifications</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -83,43 +83,43 @@ ClassCreate</h3>
 Any class provided by this module that may be created externally must be listed by this function and and ClassInfo, using the same index.</dd></dl>
 <h2><a class="anchor" id="voodoo_spec_iobject"></a>
 IObject Interface</h2>
-<p>Every class used in Voodoo <em>must</em> derive from the <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> interface. The methods provided are vital for object lifetime management and garbage collection. This is performed in a manner very much like COM, with each object managing reference count internally.</p>
-<p>Every object, except one which implements <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>, must hold a non-incremented reference to its parent. This allows tracking up without causing circular references. The object may both temporarily increment the reference, when it needs a short-term guarantee of validity, or pass the reference (where it may be incremented).</p>
+<p>Every class used in Voodoo <em>must</em> derive from the <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> interface. The methods provided are vital for object lifetime management and garbage collection. This is performed in a manner very much like COM, with each object managing reference count internally.</p>
+<p>Every object, except one which implements <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>, must hold a non-incremented reference to its parent. This allows tracking up without causing circular references. The object may both temporarily increment the reference, when it needs a short-term guarantee of validity, or pass the reference (where it may be incremented).</p>
 <h3><a class="anchor" id="voodoo_spec_iobject_addref"></a>
 IObject::AddRef</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> uint32_t IObject::AddRef() const  
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_object.html#ac2068042dc47a035d13e62b3b44689de" title="Add a reference to this object.">IObject::AddRef</a>() const  
 </pre></div><p>Increments the internal reference count by 1 and returns the new count, no other effects shall be caused.</p>
 <h3><a class="anchor" id="voodoo_spec_iobject_release"></a>
 IObject::Release</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> uint32_t IObject::Release() const  
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_i_object.html#a25f4c19470849e4679e0afc5ac7bfd02" title="Release a reference from this object.">IObject::Release</a>() const  
 </pre></div><p>Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object must be deleted (<code>delete this;</code>), no other effects shall be caused. This guarantees correct memory allocation and deallocation, safe from compiler or module boundaries.</p>
 <dl class="note"><dt><b>Note:</b></dt><dd>As AddRef and Release require no other effects, it may be necessary to provide initialization and/or reset functions. This additionally helps provide safer setup/teardown, outside of process startup and termination.</dd></dl>
 <h3><a class="anchor" id="voodoo_spec_iobject_query"></a>
 IObject::QueryInterface</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html#a4030aef3739632d89b381982920ef0e5" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">IObject::QueryInterface</a>(<a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; refid, <span class="keywordtype">void</span> ** ppOut) <span class="keyword">const</span>  
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html#a24b2f4989b0a5ef2b05df7b8af1e8cfd" title="Performs type checking internally, then provides a pointer to this object with the desired interface ...">IObject::QueryInterface</a>(<a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; refid, <span class="keywordtype">void</span> ** ppOut) <span class="keyword">const</span>  
 </pre></div><p>Queries the object for a particular interface.</p>
 <p>If refid is a not-null IID and the object implements the interface passed in refid or if refid is the object's CLSID, it must place a pointer to itself providing that interface into ppOut and return true. The pointer must evaluate equal to any other pointer to the same object, regardless of interface. The object's reference count must be incremented, from the pointer to be returned.</p>
 <p>If ppOut is a nullptr and refid is a null Uuid (all zeroes), refid must be filled must the object's CLSID and the method must return true. The object's reference count must not change in this case.</p>
 <p>If the object does not implement the class or interface in refid, or refid and ppOut are not both null, it must return false. The object's reference count must not change in this case.</p>
-<p>All IObject-derived classes must provide interfaces for <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>, their parent interface(s), and their class. Calls to QueryInterface must be symmetric (if <code>QI(A)-&gt;B</code> succeeds, then <code>QI(QI(A)-&gt;B)-&gt;A</code> must as well), transitive (if <code>QI(QI(A)-&gt;B)-&gt;C</code> succeeds, then <code>QI(A)-&gt;C</code> must as well), and reflexive (<code>QI(A)-&gt;A</code> must always succeed).</p>
-<p>This is not to say that all objects of type <code>A</code> must behave the same; these guarantees must hold for any single object throughout its lifetime. Two objects of type <code>A</code> may be unable to provide an interface based on internal conditions (for example, if <code>A1</code> is an <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> queried from an <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> and <code>A2</code> is an <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> queried from an <a class="el" href="class_voodoo_shader_1_1_i_parser.html">IParser</a>, <code>A2</code> will not be able to provide an interface to <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>, but must be able to do so for <a class="el" href="class_voodoo_shader_1_1_i_parser.html">IParser</a>).</p>
-<p>For VSCore (which implements <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> and <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>) an example QueryInterface may be:</p>
+<p>All IObject-derived classes must provide interfaces for <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>, their parent interface(s), and their class. Calls to QueryInterface must be symmetric (if <code>QI(A)-&gt;B</code> succeeds, then <code>QI(QI(A)-&gt;B)-&gt;A</code> must as well), transitive (if <code>QI(QI(A)-&gt;B)-&gt;C</code> succeeds, then <code>QI(A)-&gt;C</code> must as well), and reflexive (<code>QI(A)-&gt;A</code> must always succeed).</p>
+<p>This is not to say that all objects of type <code>A</code> must behave the same; these guarantees must hold for any single object throughout its lifetime. Two objects of type <code>A</code> may be unable to provide an interface based on internal conditions (for example, if <code>A1</code> is an <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> queried from an <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> and <code>A2</code> is an <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> queried from an <a class="el" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>, <code>A2</code> will not be able to provide an interface to <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a>, but must be able to do so for <a class="el" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>).</p>
+<p>For <a class="el" href="class_voodoo_shader_1_1_v_s_core.html">VSCore</a> (which implements <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> and <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>) an example QueryInterface may be:</p>
 <div class="fragment"><pre class="fragment"> <span class="keywordflow">if</span> (!ppOut)
  {
      <span class="keywordflow">if</span> (clsid.is_nil())
      {
-         clsid = <a class="code" href="group__voodoo__framework__interfaces.html#ga6ae0f2c64cbfa194d74ded2df76eb719" title="ICore engine class for the Voodoo Shader Framework.">IID_ICore</a>;
+         clsid = <a class="code" href="group__voodoo__framework__interfaces.html#ga6ae0f2c64cbfa194d74ded2df76eb719">IID_ICore</a>;
          <span class="keywordflow">return</span> <span class="keyword">true</span>;
      } <span class="keywordflow">else</span> {
          <span class="keywordflow">return</span> <span class="keyword">false</span>;
      }
  } <span class="keywordflow">else</span> {
-     <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IID_IObject</a>)
+     <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817">IID_IObject</a>)
      {
          *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga6ae0f2c64cbfa194d74ded2df76eb719" title="ICore engine class for the Voodoo Shader Framework.">IID_ICore</a>) {
+     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga6ae0f2c64cbfa194d74ded2df76eb719">IID_ICore</a>) {
          *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>ICore*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSCore) {
+     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="namespace_voodoo_shader.html#a6652e64c0b89642758fcf645575cf44e" title="ICore engine class for the Voodoo Shader Framework.">CLSID_VSCore</a>) {
          *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>VSCore*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
      } <span class="keywordflow">else</span> {
          *ppOut = <span class="keyword">nullptr</span>;
@@ -130,18 +130,18 @@ IObject::QueryInterface</h3>
  }
 </pre></div><h3><a class="anchor" id="voodoo_spec_iobject_tostring"></a>
 IObject::ToString</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> String IObject::ToString() const  
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> String <a class="code" href="class_voodoo_shader_1_1_i_object.html#a29869a5e16e29398ae21bb925bc9633c" title="Get a string identifying this object.">IObject::ToString</a>() const  
 </pre></div><p>Returns a formatted string made up of the object's type <em>name</em> (which may be the object's CLSID, although this is not recommended) and optionally some data. This string must follow the form:</p>
 <div class="fragment"><pre class="fragment"> ImplName()
  ImplName(Data, Data)
 </pre></div><p>If no data is provided, the data section inside the parentheses must be empty but the parentheses must be present. If data is provided, it must be in a <code>(key: value[, ...])</code> form with all colons and commas escaped.</p>
 <h3><a class="anchor" id="voodoo_spec_iobject_getcore"></a>
 IObject::GetCore</h3>
-<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> ICore * IObject::GetCore() const  
+<div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> ICore * <a class="code" href="class_voodoo_shader_1_1_i_object.html#ac04f1b9452f6e8269b77b12df8fa1bc9" title="Get the core this object was associated with.">IObject::GetCore</a>() const  
 </pre></div><p>Returns a reference to the object's parent core.</p>
 <h3><a class="anchor" id="voodoo_spec_module_throw"></a>
 throw()</h3>
-<p><b>Methods and functions in any class or interface derived from <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> shall not throw exceptions or allow them to propogate out from the function.</b> If error reporting is necessary, an error value should be returned and the exception logged. This is a necessary safety precaution, as modules may be created with different compilers or languages and it may not be possible to safely pass exceptions.</p>
+<p><b>Methods and functions in any class or interface derived from <a class="el" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> shall not throw exceptions or allow them to propogate out from the function.</b> If error reporting is necessary, an error value should be returned and the exception logged. This is a necessary safety precaution, as modules may be created with different compilers or languages and it may not be possible to safely pass exceptions.</p>
 <p>Methods which call other functions that may throw (such as standard library functions) must catch and handle any potential exception and prevent it from propagating. Constructors may throw, and all calls to <code>new</code> should be wrapped in try/catch blocks to handle both exceptions from the ctor and various other exceptions (such as memory).</p>
 <h2><a class="anchor" id="voodoo_spec_module_docs"></a>
 Documentation</h2>
@@ -151,7 +151,7 @@ Documentation</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

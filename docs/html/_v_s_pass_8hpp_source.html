@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Voodoo Shader Framework: D:/Code/VoodooShader/Framework/Core/VSPass.hpp Source File</title>
+<title>Voodoo Shader Framework: Framework/Core/VSPass.hpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -57,8 +57,8 @@
   </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="dir_c16df085c44558d172d971f9e77068f0.html">Framework</a>      </li>
-      <li class="navelem"><a class="el" href="dir_18e810e4117992965d590bf395a39555.html">Core</a>      </li>
+      <li class="navelem"><a class="el" href="dir_5016d2c55f760ce9fb99cb5412b1b3be.html">Framework</a>      </li>
+      <li class="navelem"><a class="el" href="dir_01e264dd7619ef20c2be8f77dd731219.html">Core</a>      </li>
     </ul>
   </div>
 </div>
@@ -92,7 +92,7 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00030"></a><a class="code" href="namespace_voodoo_shader.html#a3bfa63265c58a5cd683aafe7eca06cf5">00030</a>     <a class="code" href="group__voodoo__core__null.html#ga455a1cd7409632d9324428850018fcc4" title="Voodoo Shader null adapter implementation.">VOODOO_CLASS</a>(VSPass, <a class="code" href="class_voodoo_shader_1_1_i_pass.html">IPass</a>, {0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
+<a name="l00030"></a><a class="code" href="namespace_voodoo_shader.html#a8c56c3891ecccb6d59df720b9da5e6db">00030</a>     <a class="code" href="_includes_8hpp.html#aa84497f368d5929ecfa0e288a9243066">VOODOO_CLASS</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_pass.html">VSPass</a>, <a class="code" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a>, {0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
 <a name="l00031"></a>00031     {
 <a name="l00032"></a>00032     <span class="keyword">public</span>:
 <a name="l00033"></a>00033         VSPass(_In_ ITechnique * pTechnique, _In_ CGpass pCgPass);
@@ -113,20 +113,20 @@
 <a name="l00048"></a>00048     <span class="keyword">private</span>:
 <a name="l00049"></a>00049         <span class="keywordtype">void</span> Link();
 <a name="l00050"></a>00050 
-<a name="l00051"></a>00051         <span class="keyword">mutable</span> uint32_t m_Refs;
-<a name="l00052"></a>00052         ICore * m_Core;
-<a name="l00053"></a>00053         String m_Name;
+<a name="l00051"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#ae483d017edaa34c5c13b8f773bf08368">00051</a>         <span class="keyword">mutable</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#ae483d017edaa34c5c13b8f773bf08368">m_Refs</a>;
+<a name="l00052"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">00052</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>;
+<a name="l00053"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8f5a1d749b61feb661e6f87c14302b40">00053</a>         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8f5a1d749b61feb661e6f87c14302b40">m_Name</a>;
 <a name="l00054"></a>00054 
-<a name="l00055"></a>00055         ITechnique * m_Technique;
-<a name="l00056"></a>00056         <a class="code" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a> m_Target;
+<a name="l00055"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#af4f4eb7109186d3b4dc9099ab8659afc">00055</a>         <a class="code" href="class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect.">ITechnique</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#af4f4eb7109186d3b4dc9099ab8659afc">m_Technique</a>;
+<a name="l00056"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a26e28dda2508165af1964f133d277fdd">00056</a>         <a class="code" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a> <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a26e28dda2508165af1964f133d277fdd">m_Target</a>;
 <a name="l00057"></a>00057 
-<a name="l00058"></a>00058         CGpass m_CgPass;
+<a name="l00058"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a5a6ea433986d3e59b7d7acdf7c53ab3b">00058</a>         CGpass <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a5a6ea433986d3e59b7d7acdf7c53ab3b">m_CgPass</a>;
 <a name="l00059"></a>00059 
-<a name="l00060"></a>00060         CGprogram m_GeometryProgram;
-<a name="l00061"></a>00061         CGprogram m_VertexProgram;
-<a name="l00062"></a>00062         CGprogram m_FragmentProgram;
-<a name="l00063"></a>00063         CGprogram m_DomainProgram;
-<a name="l00064"></a>00064         CGprogram m_HullProgram;
+<a name="l00060"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a6b32a79404e7dc4877923b38d93755e4">00060</a>         CGprogram <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a6b32a79404e7dc4877923b38d93755e4">m_GeometryProgram</a>;
+<a name="l00061"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a1c09f0e8f0f6d3bec0f2fb8166ce8c32">00061</a>         CGprogram <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a1c09f0e8f0f6d3bec0f2fb8166ce8c32">m_VertexProgram</a>;
+<a name="l00062"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a53ee34d29519ab316c4c5a2c86fbf0d3">00062</a>         CGprogram <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a53ee34d29519ab316c4c5a2c86fbf0d3">m_FragmentProgram</a>;
+<a name="l00063"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a5b9b5e3c03a6e50bf6bebac0027f88c2">00063</a>         CGprogram <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a5b9b5e3c03a6e50bf6bebac0027f88c2">m_DomainProgram</a>;
+<a name="l00064"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a39cab097609483cdf4324ce4f964d320">00064</a>         CGprogram <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a39cab097609483cdf4324ce4f964d320">m_HullProgram</a>;
 <a name="l00065"></a>00065     };
 <a name="l00066"></a>00066 }
 </pre></div></div>
@@ -134,7 +134,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:11 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

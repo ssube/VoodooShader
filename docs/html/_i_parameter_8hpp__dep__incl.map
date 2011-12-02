@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_v_s_parameter_8hpp.html" title="D:/Code/VoodooShader/Framework/Core/VSParameter.hpp" alt="" coords="361,80,724,107"/>
-<area shape="rect" id="node5" href="$_v_s_core_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSCore.cpp" alt="" coords="5,155,336,181"/>
-<area shape="rect" id="node7" href="$_v_s_parameter_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSParameter.cpp" alt="" coords="361,155,724,181"/>
-<area shape="rect" id="node9" href="$_v_s_shader_8cpp.html" title="D:/Code/VoodooShader/Framework/Core/VSShader.cpp" alt="" coords="749,155,1093,181"/>
+<area shape="rect" id="node3" href="$_v_s_parameter_8hpp.html" title="Framework/Core/VSParameter.hpp" alt="" coords="220,80,444,107"/>
+<area shape="rect" id="node5" href="$_v_s_core_8cpp.html" title="Framework/Core/VSCore.cpp" alt="" coords="5,155,195,181"/>
+<area shape="rect" id="node7" href="$_v_s_parameter_8cpp.html" title="Framework/Core/VSParameter.cpp" alt="" coords="220,155,444,181"/>
+<area shape="rect" id="node9" href="$_v_s_shader_8cpp.html" title="Framework/Core/VSShader.cpp" alt="" coords="468,155,673,181"/>
 </map>

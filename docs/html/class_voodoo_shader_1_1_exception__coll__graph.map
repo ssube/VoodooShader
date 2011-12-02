@@ -1,13 +1,9 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" title="STL class." alt="" coords="1191,5,1295,32"/>
-<area shape="rect" id="node8" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="1168,157,1317,184"/>
-<area shape="rect" id="node10" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="849,88,1063,115"/>
-<area shape="rect" id="node12" title="STL class." alt="" coords="562,88,651,115"/>
-<area shape="rect" id="node14" title="STL class." alt="" coords="159,88,345,115"/>
-<area shape="rect" id="node26" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; uint32_t \&gt;" alt="" coords="491,485,722,512"/>
-<area shape="rect" id="node18" href="$class_voodoo_shader_1_1_i_core.html" title="VoodooShader::ICore" alt="" coords="1170,264,1315,291"/>
-<area shape="rect" id="node20" href="$class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="529,312,685,339"/>
-<area shape="rect" id="node37" href="$class_voodoo_shader_1_1_i_texture.html" title="VoodooShader::ITexture" alt="" coords="875,291,1037,317"/>
-<area shape="rect" id="node24" href="$struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="862,392,1050,419"/>
-<area shape="rect" id="node29" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; ValType \&gt;" alt="" coords="137,485,367,512"/>
+<area shape="rect" id="node2" title="STL class." alt="" coords="5,264,109,291"/>
+<area shape="rect" id="node8" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="297,264,447,291"/>
+<area shape="rect" id="node10" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="118,173,332,200"/>
+<area shape="rect" id="node12" title="STL class." alt="" coords="181,83,269,109"/>
+<area shape="rect" id="node14" title="STL class." alt="" coords="132,5,319,32"/>
+<area shape="rect" id="node18" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="471,264,616,291"/>
+<area shape="rect" id="node20" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="466,173,621,200"/>
 </map>

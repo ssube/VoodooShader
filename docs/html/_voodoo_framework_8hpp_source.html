@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Voodoo Shader Framework: D:/Code/VoodooShader/Framework/Core/VoodooFramework.hpp Source File</title>
+<title>Voodoo Shader Framework: Framework/Core/VoodooFramework.hpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -57,8 +57,8 @@
   </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="dir_c16df085c44558d172d971f9e77068f0.html">Framework</a>      </li>
-      <li class="navelem"><a class="el" href="dir_18e810e4117992965d590bf395a39555.html">Core</a>      </li>
+      <li class="navelem"><a class="el" href="dir_5016d2c55f760ce9fb99cb5412b1b3be.html">Framework</a>      </li>
+      <li class="navelem"><a class="el" href="dir_01e264dd7619ef20c2be8f77dd731219.html">Core</a>      </li>
     </ul>
   </div>
 </div>
@@ -100,23 +100,26 @@
 <a name="l00031"></a>00031 
 <a name="l00032"></a>00032 <span class="preprocessor">#include &quot;<a class="code" href="_i_adapter_8hpp.html">IAdapter.hpp</a>&quot;</span>
 <a name="l00033"></a>00033 <span class="preprocessor">#include &quot;<a class="code" href="_i_core_8hpp.html">ICore.hpp</a>&quot;</span>
-<a name="l00034"></a>00034 <span class="preprocessor">#include &quot;<a class="code" href="_i_filesystem_8hpp.html">IFilesystem.hpp</a>&quot;</span>
-<a name="l00035"></a>00035 <span class="preprocessor">#include &quot;<a class="code" href="_i_hook_manager_8hpp.html">IHookManager.hpp</a>&quot;</span>
-<a name="l00036"></a>00036 <span class="preprocessor">#include &quot;<a class="code" href="_i_logger_8hpp.html">ILogger.hpp</a>&quot;</span>
-<a name="l00037"></a>00037 <span class="preprocessor">#include &quot;<a class="code" href="_i_module_8hpp.html">IModule.hpp</a>&quot;</span>
-<a name="l00038"></a>00038 <span class="preprocessor">#include &quot;<a class="code" href="_i_object_8hpp.html">IObject.hpp</a>&quot;</span>
-<a name="l00039"></a>00039 <span class="preprocessor">#include &quot;<a class="code" href="_i_parameter_8hpp.html">IParameter.hpp</a>&quot;</span>
-<a name="l00040"></a>00040 <span class="preprocessor">#include &quot;<a class="code" href="_i_parser_8hpp.html">IParser.hpp</a>&quot;</span>
-<a name="l00041"></a>00041 <span class="preprocessor">#include &quot;<a class="code" href="_i_pass_8hpp.html">IPass.hpp</a>&quot;</span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="_i_shader_8hpp.html">IShader.hpp</a>&quot;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="_i_technique_8hpp.html">ITechnique.hpp</a>&quot;</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;<a class="code" href="_i_texture_8hpp.html">ITexture.hpp</a>&quot;</span>
+<a name="l00034"></a>00034 <span class="preprocessor">#include &quot;<a class="code" href="_i_file_8hpp.html">IFile.hpp</a>&quot;</span>
+<a name="l00035"></a>00035 <span class="preprocessor">#include &quot;<a class="code" href="_i_file_system_8hpp.html">IFilesystem.hpp</a>&quot;</span>
+<a name="l00036"></a>00036 <span class="preprocessor">#include &quot;<a class="code" href="_i_hook_manager_8hpp.html">IHookManager.hpp</a>&quot;</span>
+<a name="l00037"></a>00037 <span class="preprocessor">#include &quot;<a class="code" href="_i_image_8hpp.html">IImage.hpp</a>&quot;</span>
+<a name="l00038"></a>00038 <span class="preprocessor">#include &quot;<a class="code" href="_i_logger_8hpp.html">ILogger.hpp</a>&quot;</span>
+<a name="l00039"></a>00039 <span class="preprocessor">#include &quot;<a class="code" href="_i_module_8hpp.html">IModule.hpp</a>&quot;</span>
+<a name="l00040"></a>00040 <span class="preprocessor">#include &quot;<a class="code" href="_i_module_manager_8hpp.html">IModuleManager.hpp</a>&quot;</span>
+<a name="l00041"></a>00041 <span class="preprocessor">#include &quot;<a class="code" href="_i_object_8hpp.html">IObject.hpp</a>&quot;</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="_i_parameter_8hpp.html">IParameter.hpp</a>&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="_i_parser_8hpp.html">IParser.hpp</a>&quot;</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;<a class="code" href="_i_pass_8hpp.html">IPass.hpp</a>&quot;</span>
+<a name="l00045"></a>00045 <span class="preprocessor">#include &quot;<a class="code" href="_i_shader_8hpp.html">IShader.hpp</a>&quot;</span>
+<a name="l00046"></a>00046 <span class="preprocessor">#include &quot;<a class="code" href="_i_technique_8hpp.html">ITechnique.hpp</a>&quot;</span>
+<a name="l00047"></a>00047 <span class="preprocessor">#include &quot;<a class="code" href="_i_texture_8hpp.html">ITexture.hpp</a>&quot;</span>
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:11 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

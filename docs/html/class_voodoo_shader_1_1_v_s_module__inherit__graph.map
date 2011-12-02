@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_i_module.html" title="IModule" alt="" coords="59,5,125,32"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_module.html" title="Contains the handle to a loaded library and function pointers for creation and destruction." alt="" coords="12,80,172,107"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="14,5,169,32"/>
 </map>

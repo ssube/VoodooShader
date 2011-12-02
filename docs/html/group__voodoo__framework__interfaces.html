@@ -5,7 +5,7 @@
 <title>Voodoo Shader Framework: Voodoo Framework interfaces</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -62,46 +62,52 @@
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_adapter.html">VoodooShader::IAdapter</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API.  <a href="class_voodoo_shader_1_1_i_adapter.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> engine class for the Voodoo Shader Framework.  <a href="class_voodoo_shader_1_1_i_core.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file.html">VoodooShader::IFile</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html">VoodooShader::IImage</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides abstraction to a single file, for basic access.  <a href="class_voodoo_shader_1_1_i_file.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.  <a href="class_voodoo_shader_1_1_i_file_system.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html">VoodooShader::IHookManager</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the interface for handling function-level hooks, redirecting existing functions and calls into new locations.  <a href="class_voodoo_shader_1_1_i_hook_manager.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html">VoodooShader::IImage</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides abstraction to an image for specialized access.  <a href="class_voodoo_shader_1_1_i_image.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html">VoodooShader::ILogger</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides structured and formatted logging for module listing and level-filtered messages.  <a href="class_voodoo_shader_1_1_i_logger.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module.html">VoodooShader::IModule</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the handle to a loaded library and function pointers for creation and destruction.  <a href="class_voodoo_shader_1_1_i_module.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_object.html">VoodooShader::IObject</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a simple interface all Voodoo objects from dynamic modules must inherit.  <a href="class_voodoo_shader_1_1_i_object.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parameter.html">VoodooShader::IParameter</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to shader parameters, with attach/detach and value set (for most data types).  <a href="class_voodoo_shader_1_1_i_parameter.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_parser.html">VoodooShader::IParser</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides extensive variable handling and string parsing.  <a href="class_voodoo_shader_1_1_i_parser.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Each <a class="el" href="class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel...">IPass</a> contains a single set of programs, each operating on a different stage of the render pipeline.  <a href="class_voodoo_shader_1_1_i_pass.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_shader.html">VoodooShader::IShader</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete shader class, managing techniques, passes and metadata.  <a href="class_voodoo_shader_1_1_i_shader.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains a set of passes, designed to be used sequentially to create a shader effect.  <a href="class_voodoo_shader_1_1_i_technique.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains a hardware texture, for use with Voodoo shaders and effects.  <a href="class_voodoo_shader_1_1_i_texture.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga42738af6f1d3f616067ab307013aa8cf">VoodooShader::IID_IAdapter</a> = {0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API.  <a href="#ga42738af6f1d3f616067ab307013aa8cf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga6ae0f2c64cbfa194d74ded2df76eb719">VoodooShader::IID_ICore</a> = {0x89, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> engine class for the Voodoo Shader Framework.  <a href="#ga6ae0f2c64cbfa194d74ded2df76eb719"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga3f091607cc9033f65e6f0cbc542270b2">VoodooShader::IID_IFileSystem</a> = {0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.  <a href="#ga3f091607cc9033f65e6f0cbc542270b2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gae30a8fb1c4b453c0ff175ded89398597">VoodooShader::IID_IFile</a> = {0x8a, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides abstraction to a single file, for basic access.  <a href="#gae30a8fb1c4b453c0ff175ded89398597"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaaaf4d9dc04301324ce1a7f60d370883c">VoodooShader::IID_IImage</a> = {0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides abstraction to an image for specialized access.  <a href="#gaaaf4d9dc04301324ce1a7f60d370883c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga3f091607cc9033f65e6f0cbc542270b2">VoodooShader::IID_IFileSystem</a> = {0x8b, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga883d95d0c83b89aaba5f4af425748c1e">VoodooShader::IID_IHookManager</a> = {0x8c, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the interface for handling function-level hooks, redirecting existing functions and calls into new locations.  <a href="#ga883d95d0c83b89aaba5f4af425748c1e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaaaf4d9dc04301324ce1a7f60d370883c">VoodooShader::IID_IImage</a> = {0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaca11032ec6621cdd20a1cd242d9c9e18">VoodooShader::IID_ILogger</a> = {0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides structured and formatted logging for module listing and level-filtered messages.  <a href="#gaca11032ec6621cdd20a1cd242d9c9e18"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaab89fdeca94c9c4f7b237729b707c51e">VoodooShader::IID_IModule</a> = {0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817">VoodooShader::IID_IObject</a> = {0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a simple interface all Voodoo objects from dynamic modules must inherit.  <a href="#ga62817948333934d8276718972fd0e817"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gab5e3bcc2e2cf1bccfbe5752cde45bada">VoodooShader::IID_IParameter</a> = {0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to shader parameters, with attach/detach and value set (for most data types).  <a href="#gab5e3bcc2e2cf1bccfbe5752cde45bada"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga87fc2a608dadaa1f57b48bbd5fa29d4c">VoodooShader::IID_IParser</a> = {0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides extensive variable handling and string parsing.  <a href="#ga87fc2a608dadaa1f57b48bbd5fa29d4c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaa3efc59ba5eac917d4b6b1adae0ce192">VoodooShader::IID_IPass</a> = {0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Each <a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a> contains a single set of programs, each operating on a different stage of the render pipeline.  <a href="#gaa3efc59ba5eac917d4b6b1adae0ce192"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaec9b596ec85df707b2418aa64e990458">VoodooShader::IID_IShader</a> = {0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga28056687c5094eaf2ae5d6aea19365ac">VoodooShader::IID_ITechnique</a> = {0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains a set of passes, designed to be used sequentially to create a shader effect.  <a href="#ga28056687c5094eaf2ae5d6aea19365ac"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaa98e9fe0b83957213195757fdd8ffbab">VoodooShader::IID_ITexture</a> = {0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains a hardware texture, for use with Voodoo shaders and effects.  <a href="#gaa98e9fe0b83957213195757fdd8ffbab"></a><br/></td></tr>
 </table>
 <hr/><h2>Variable Documentation</h2>
 <a class="anchor" id="ga42738af6f1d3f616067ab307013aa8cf"></a><!-- doxytag: member="VoodooShader::IID_IAdapter" ref="ga42738af6f1d3f616067ab307013aa8cf" args="" -->
@@ -115,12 +121,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API. </p>
-<dl class="note"><dt><b>Note:</b></dt><dd>This class should be implemented for each specific graphics application; some generic adapters are provided for major APIs, but in most cases application-specific behavior will make these only partially helpful.</dd></dl>
-<dl class="see"><dt><b>See also:</b></dt><dd>See the <a class="el" href="voodoo_spec_adapter.html">adapter specifications</a> for details on what is required of adapter modules and classes.</dd></dl>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f31288-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_adapter_8hpp_source.html#l00043">43</a> of file <a class="el" href="_i_adapter_8hpp_source.html">IAdapter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_adapter_8hpp_source.html#l00045">45</a> of file <a class="el" href="_i_adapter_8hpp_source.html">IAdapter.hpp</a>.</p>
 
 </div>
 </div>
@@ -135,11 +136,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> engine class for the Voodoo Shader Framework. </p>
-<p>Provides centralized management and handling for shaders, textures, plugins and variable/configuration mechanics.</p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f31289-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_core_8hpp_source.html#l00038">38</a> of file <a class="el" href="_i_core_8hpp_source.html">ICore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_core_8hpp_source.html#l00040">40</a> of file <a class="el" href="_i_core_8hpp_source.html">ICore.hpp</a>.</p>
 
 </div>
 </div>
@@ -154,10 +151,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Provides abstraction to a single file, for basic access. </p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f3128a-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_filesystem_8hpp_source.html#l00079">79</a> of file <a class="el" href="_i_filesystem_8hpp_source.html">IFilesystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_file_8hpp_source.html#l00039">39</a> of file <a class="el" href="_i_file_8hpp_source.html">IFile.hpp</a>.</p>
 
 </div>
 </div>
@@ -172,11 +166,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access. </p>
-<p>Currently provides a readonly filesystem.</p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f31288-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_filesystem_8hpp_source.html#l00038">38</a> of file <a class="el" href="_i_filesystem_8hpp_source.html">IFilesystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_file_system_8hpp_source.html#l00040">40</a> of file <a class="el" href="_i_file_system_8hpp_source.html">IFileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -191,11 +181,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Defines the interface for handling function-level hooks, redirecting existing functions and calls into new locations. </p>
-<p>Each Core owns a HookManager implementation.</p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f3128c-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_hook_manager_8hpp_source.html#l00038">38</a> of file <a class="el" href="_i_hook_manager_8hpp_source.html">IHookManager.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_hook_manager_8hpp_source.html#l00040">40</a> of file <a class="el" href="_i_hook_manager_8hpp_source.html">IHookManager.hpp</a>.</p>
 
 </div>
 </div>
@@ -210,10 +196,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Provides abstraction to an image for specialized access. </p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f3128d-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_filesystem_8hpp_source.html#l00105">105</a> of file <a class="el" href="_i_filesystem_8hpp_source.html">IFilesystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_image_8hpp_source.html#l00039">39</a> of file <a class="el" href="_i_image_8hpp_source.html">IImage.hpp</a>.</p>
 
 </div>
 </div>
@@ -228,10 +211,22 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Provides structured and formatted logging for module listing and level-filtered messages. </p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f3128e-05af-11e1-9e05-005056c00008 </dd></dl>
+<p>Definition at line <a class="el" href="_i_logger_8hpp_source.html#l00039">39</a> of file <a class="el" href="_i_logger_8hpp_source.html">ILogger.hpp</a>.</p>
 
-<p>Definition at line <a class="el" href="_i_logger_8hpp_source.html#l00037">37</a> of file <a class="el" href="_i_logger_8hpp_source.html">ILogger.hpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="gaab89fdeca94c9c4f7b237729b707c51e"></a><!-- doxytag: member="VoodooShader::IID_IModule" ref="gaab89fdeca94c9c4f7b237729b707c51e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EXTERN_C const Uuid <a class="el" href="group__voodoo__framework__interfaces.html#gaab89fdeca94c9c4f7b237729b707c51e">VoodooShader::IID_IModule</a> = {0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_i_module_8hpp_source.html#l00039">39</a> of file <a class="el" href="_i_module_8hpp_source.html">IModule.hpp</a>.</p>
 
 </div>
 </div>
@@ -246,11 +241,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Defines a simple interface all Voodoo objects from dynamic modules must inherit. </p>
-<p>This interface handles destruction and identification of these objects.</p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f31287-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_object_8hpp_source.html#l00040">40</a> of file <a class="el" href="_i_object_8hpp_source.html">IObject.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_object_8hpp_source.html#l00042">42</a> of file <a class="el" href="_i_object_8hpp_source.html">IObject.hpp</a>.</p>
 
 </div>
 </div>
@@ -265,10 +256,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Provides access to shader parameters, with attach/detach and value set (for most data types). </p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f31291-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_parameter_8hpp_source.html#l00037">37</a> of file <a class="el" href="_i_parameter_8hpp_source.html">IParameter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_parameter_8hpp_source.html#l00039">39</a> of file <a class="el" href="_i_parameter_8hpp_source.html">IParameter.hpp</a>.</p>
 
 </div>
 </div>
@@ -283,10 +271,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Provides extensive variable handling and string parsing. </p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f31292-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_parser_8hpp_source.html#l00037">37</a> of file <a class="el" href="_i_parser_8hpp_source.html">IParser.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_parser_8hpp_source.html#l00039">39</a> of file <a class="el" href="_i_parser_8hpp_source.html">IParser.hpp</a>.</p>
 
 </div>
 </div>
@@ -301,12 +286,22 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Each <a class="el" href="class_voodoo_shader_1_1_i_pass.html">IPass</a> contains a single set of programs, each operating on a different stage of the render pipeline. </p>
-<dl class="note"><dt><b>Note:</b></dt><dd>A pass may contain programs for each stage. Valid stages vary by underlying API and version. In OpenGL and DirectX 9 and earlier, stages may be left to the fixed-function pipeline by not specifying any program to be used. Later APIs require the vertex and pixel shaders to be specified in each pass.</dd></dl>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>Some adapters may require programs to be provided for certain stages.</dd></dl>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f31293-05af-11e1-9e05-005056c00008 </dd></dl>
+<p>Definition at line <a class="el" href="_i_pass_8hpp_source.html#l00045">45</a> of file <a class="el" href="_i_pass_8hpp_source.html">IPass.hpp</a>.</p>
 
-<p>Definition at line <a class="el" href="_i_pass_8hpp_source.html#l00043">43</a> of file <a class="el" href="_i_pass_8hpp_source.html">IPass.hpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="gaec9b596ec85df707b2418aa64e990458"></a><!-- doxytag: member="VoodooShader::IID_IShader" ref="gaec9b596ec85df707b2418aa64e990458" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EXTERN_C const Uuid <a class="el" href="group__voodoo__framework__interfaces.html#gaec9b596ec85df707b2418aa64e990458">VoodooShader::IID_IShader</a> = {0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_i_shader_8hpp_source.html#l00047">47</a> of file <a class="el" href="_i_shader_8hpp_source.html">IShader.hpp</a>.</p>
 
 </div>
 </div>
@@ -321,13 +316,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Contains a set of passes, designed to be used sequentially to create a shader effect. </p>
-<p>Typically, a single technique will be used, although shaders may contain multiple techniques. Each technique may contain a number of passes and some technique-level metadata.</p>
-<dl class="note"><dt><b>Note:</b></dt><dd>All passes in a valid technique are guaranteed to be valid. </dd></dl>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>While a shader may contain a number of techniques, not all are guaranteed to be valid. Techniques are typically validated when the Shader is created and loaded.</dd></dl>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f31295-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_technique_8hpp_source.html#l00043">43</a> of file <a class="el" href="_i_technique_8hpp_source.html">ITechnique.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_technique_8hpp_source.html#l00045">45</a> of file <a class="el" href="_i_technique_8hpp_source.html">ITechnique.hpp</a>.</p>
 
 </div>
 </div>
@@ -342,11 +331,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Contains a hardware texture, for use with Voodoo shaders and effects. </p>
-<p>These textures may usually be bound to parameters and shaders can sample pixels within them to create the on-screen images. Textures may be used to represent various other surfaces, including render targets or even the backbuffer.</p>
-<dl class="user"><dt><b>IID</b></dt><dd>e6f31296-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_i_texture_8hpp_source.html#l00039">39</a> of file <a class="el" href="_i_texture_8hpp_source.html">ITexture.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_i_texture_8hpp_source.html#l00041">41</a> of file <a class="el" href="_i_texture_8hpp_source.html">ITexture.hpp</a>.</p>
 
 </div>
 </div>
@@ -354,7 +339,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

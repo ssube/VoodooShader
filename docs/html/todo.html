@@ -5,7 +5,7 @@
 <title>Voodoo Shader Framework: Todo List</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -62,16 +62,24 @@
 <dd>Error checking on pos.  </dd>
 <dt><a class="anchor" id="_todo000003"></a>Member <a class="el" href="class_voodoo_shader_1_1_string.html#a9deb5ea3a4522d0f63543b1b9090585e">VoodooShader::String::SetAt</a>  (uint32_t pos, wchar_t data)</dt>
 <dd>Error checking on pos.  </dd>
-<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#a02c111f45c6378fec6f3f74aa3795e35">VoodooShader::VoodooWFS::VOODOO_CLASS</a>  (VSWImage, IImage,{0xB2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})</dt>
+<dt><a class="anchor" id="_todo000007"></a>Class <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html">VoodooShader::VoodooWFS::VSWImage</a>  </dt>
 <dd><p class="startdd">Provide layer, cubemap and animation handling. </p>
-<p class="enddd">Provide image saving. </p>
+<p class="enddd">Provide image saving.  </p>
 </dd>
+<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#af279f0fdfa947a2f4b5208dd1ba87e5e">VoodooShader::VoodooWFS::VSWImage::GetData</a>  (const TextureRegion desc, const int32_t size, _In_opt_count_(size) void *const pBuffer) const </dt>
+<dd>Add a buffer size check.  </dd>
+<dt><a class="anchor" id="_todo000004"></a>Member <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#ab0527a1dbf3e5a0ec15d55ffe1da92bb">VoodooShader::VSCore::Reset</a>  ()</dt>
+<dd>Actually reset stuff.  </dd>
+<dt><a class="anchor" id="_todo000005"></a>Member <a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#a8426d648749031f459f94d90e933a02a">VoodooShader::VSParameter::VSParameter</a>  (_Pre_notnull_ ICore *const pCore, const String &amp;name, const ParameterType type)</dt>
+<dd>Get rid of this throw  </dd>
+<dt><a class="anchor" id="_todo000006"></a>Member <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ab9a107b8e757d91b8e8e5f51c2e6c8e5">VoodooShader::VSShader::VSShader</a>  (_Pre_notnull_ ICore *const pCore, const String &amp;Path, const char **ppArgs=nullptr)</dt>
+<dd>PREfast fails if the input core here has an _In_ annotation. This needs fixed. </dd>
 </dl>
 </div></div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

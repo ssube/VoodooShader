@@ -10,7 +10,7 @@
 <area shape="rect" id="node25" href="$_string_8hpp.html" title="String.hpp" alt="" coords="702,304,783,331"/>
 <area shape="rect" id="node33" href="$_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="357,155,451,181"/>
 <area shape="rect" id="node35" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="569,229,657,256"/>
-<area shape="rect" id="node41" href="$_i_filesystem_8hpp.html" title="IFileSystem.hpp" alt="" coords="478,155,593,181"/>
+<area shape="rect" id="node41" href="$_i_file_system_8hpp.html" title="IFileSystem.hpp" alt="" coords="478,155,593,181"/>
 <area shape="rect" id="node46" href="$_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="625,155,756,181"/>
 <area shape="rect" id="node51" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="794,155,883,181"/>
 <area shape="rect" id="node59" href="$_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="969,155,1095,181"/>

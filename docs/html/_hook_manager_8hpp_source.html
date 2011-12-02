@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Voodoo Shader Framework: D:/Code/VoodooShader/Framework/Hook/HookManager.hpp Source File</title>
+<title>Voodoo Shader Framework: Framework/Hook/HookManager.hpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="voodoo.css" rel="stylesheet" type="text/css" />
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.0-0-g9be7db9</span>
+   &#160;<span id="projectnumber">framework-4.2-130-g7e7b98d</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -57,8 +57,8 @@
   </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="dir_c16df085c44558d172d971f9e77068f0.html">Framework</a>      </li>
-      <li class="navelem"><a class="el" href="dir_b2b1d916e94ef13250317becd61c3347.html">Hook</a>      </li>
+      <li class="navelem"><a class="el" href="dir_5016d2c55f760ce9fb99cb5412b1b3be.html">Framework</a>      </li>
+      <li class="navelem"><a class="el" href="dir_291e22e9186a54abc821d813b7e37e9f.html">Hook</a>      </li>
     </ul>
   </div>
 </div>
@@ -97,53 +97,53 @@
 <a name="l00028"></a>00028 
 <a name="l00029"></a>00029 <span class="keyword">namespace </span>VoodooShader
 <a name="l00030"></a>00030 {
-<a name="l00031"></a>00031     <span class="keyword">namespace </span>EasyHook
-<a name="l00032"></a>00032     {
-<a name="l00039"></a><a class="code" href="group__voodoo__module__ehhook.html#ga1ece99ebf0836a5af70d9922c5409824">00039</a>         <span class="keyword">typedef</span> std::map&lt;String, TRACED_HOOK_HANDLE&gt; <a class="code" href="group__voodoo__module__ehhook.html#ga1ece99ebf0836a5af70d9922c5409824">HookMap</a>;
+<a name="l00037"></a>00037     <span class="keyword">namespace </span>EasyHook
+<a name="l00038"></a>00038     {
+<a name="l00039"></a><a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a1ece99ebf0836a5af70d9922c5409824">00039</a>         <span class="keyword">typedef</span> std::map&lt;String, TRACED_HOOK_HANDLE&gt; <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a1ece99ebf0836a5af70d9922c5409824">HookMap</a>;
 <a name="l00040"></a>00040 
-<a name="l00041"></a>00041         <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="group__voodoo__module__ehhook.html#gabcf87a179f84eeb5e5f4d55ac803d4ae">API_ModuleVersion</a>();
-<a name="l00042"></a>00042         <span class="keyword">const</span> uint32_t  <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="group__voodoo__module__ehhook.html#ga65a1f42e4ddc732d381c2c15c01bd451">API_ClassCount</a>();
-<a name="l00043"></a>00043         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="group__voodoo__module__ehhook.html#gae99b845a110539b943449b868d4d12ee">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t index, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid);
-<a name="l00044"></a>00044         <a class="code" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *       <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="group__voodoo__module__ehhook.html#gae5b449a0df06633ca9b63a1016ec2d31">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t index, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html">ICore</a> * pCore);
+<a name="l00041"></a>00041         <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#abcf87a179f84eeb5e5f4d55ac803d4ae">API_ModuleVersion</a>();
+<a name="l00042"></a>00042         <span class="keyword">const</span> uint32_t  <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a65a1f42e4ddc732d381c2c15c01bd451">API_ClassCount</a>();
+<a name="l00043"></a>00043         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#ae99b845a110539b943449b868d4d12ee">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t index, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid);
+<a name="l00044"></a>00044         <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> *       <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#ae5b449a0df06633ca9b63a1016ec2d31">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t index, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore);
 <a name="l00045"></a>00045 
-<a name="l00052"></a><a class="code" href="group__voodoo__module__ehhook.html#ga5ffd9981817afbdc5e1c87ff4c0813cf">00052</a>         <a class="code" href="group__voodoo__module__ehhook.html#ga5ffd9981817afbdc5e1c87ff4c0813cf" title="Handles function-level hooks, redirecting function calls into new locations.">VOODOO_CLASS</a>(VSEHHookManager, <a class="code" href="class_voodoo_shader_1_1_i_hook_manager.html">IHookManager</a>, {0xB5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
-<a name="l00053"></a>00053         {
-<a name="l00054"></a>00054         <span class="keyword">public</span>:
-<a name="l00055"></a>00055             <span class="comment">/* Creates a new VSEHHookManager bound to the current process. */</span>
-<a name="l00056"></a>00056             VSEHHookManager(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html">ICore</a> * pCore);
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058             <span class="comment">/* Removes all hooks and cleans up the VSEHHookManager. */</span>
-<a name="l00059"></a>00059             <span class="keyword">virtual</span> ~VSEHHookManager();
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
-<a name="l00062"></a>00062             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
-<a name="l00063"></a>00063             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
-<a name="l00064"></a>00064             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
-<a name="l00065"></a>00065             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *, GetCore)() CONST;
-<a name="l00066"></a>00066 
-<a name="l00080"></a>00080             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Add)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keywordtype">void</span> * pSrc, _In_ <span class="keywordtype">void</span> * pDest);
-<a name="l00081"></a>00081 
-<a name="l00091"></a>00091             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Remove)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name);
-<a name="l00092"></a>00092 
-<a name="l00096"></a>00096             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(RemoveAll)();
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098         <span class="keyword">private</span>:
-<a name="l00099"></a>00099             <span class="keyword">mutable</span> uint32_t m_Refs;
-<a name="l00100"></a>00100             <a class="code" href="class_voodoo_shader_1_1_i_core.html">ICore</a> * m_Core;
-<a name="l00101"></a>00101 
-<a name="l00102"></a>00102             <a class="code" href="group__voodoo__module__ehhook.html#ga1ece99ebf0836a5af70d9922c5409824">HookMap</a> m_Hooks;
+<a name="l00054"></a><a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a883f1875e839b916e8fbd9b808fc105a">00054</a>         <a class="code" href="_includes_8hpp.html#aa84497f368d5929ecfa0e288a9243066">VOODOO_CLASS</a>(<a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html" title="Handles function-level hooks, redirecting function calls into new locations.">VSEHHookManager</a>, <a class="code" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function-level hooks, redirecting existing functions and calls int...">IHookManager</a>, {0xB5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
+<a name="l00055"></a>00055         {
+<a name="l00056"></a>00056         <span class="keyword">public</span>:
+<a name="l00057"></a>00057             <span class="comment">/* Creates a new VSEHHookManager bound to the current process. */</span>
+<a name="l00058"></a>00058             VSEHHookManager(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore);
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060             <span class="comment">/* Removes all hooks and cleans up the VSEHHookManager. */</span>
+<a name="l00061"></a>00061             <span class="keyword">virtual</span> ~VSEHHookManager();
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
+<a name="l00064"></a>00064             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
+<a name="l00065"></a>00065             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
+<a name="l00066"></a>00066             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
+<a name="l00067"></a>00067             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
+<a name="l00068"></a>00068 
+<a name="l00082"></a>00082             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Add)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keywordtype">void</span> * pSrc, _In_ <span class="keywordtype">void</span> * pDest);
+<a name="l00083"></a>00083 
+<a name="l00093"></a>00093             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Remove)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name);
+<a name="l00094"></a>00094 
+<a name="l00098"></a>00098             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(RemoveAll)();
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100         <span class="keyword">private</span>:
+<a name="l00101"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a832983566ed865d1eeb3e9949e29e8f7">00101</a>             <span class="keyword">mutable</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a832983566ed865d1eeb3e9949e29e8f7">m_Refs</a>;
+<a name="l00102"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">00102</a>             <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#ae665e355693ecd727e7641cdf8a4bc96">m_Core</a>;
 <a name="l00103"></a>00103 
-<a name="l00104"></a>00104             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> m_ThreadCount;
-<a name="l00105"></a>00105             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> * m_ThreadIDs;
-<a name="l00106"></a>00106         };
-<a name="l00110"></a>00110     }
-<a name="l00111"></a>00111 }
+<a name="l00104"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a67a0afd73fcf19ad743a9bb75d5e3e4b">00104</a>             <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a1ece99ebf0836a5af70d9922c5409824">HookMap</a> <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#a67a0afd73fcf19ad743a9bb75d5e3e4b">m_Hooks</a>;
+<a name="l00105"></a>00105 
+<a name="l00106"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#abfb245755be6dea8478a5ac2780f94a9">00106</a>             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#abfb245755be6dea8478a5ac2780f94a9">m_ThreadCount</a>;
+<a name="l00107"></a><a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#af018c0cc07b056c54de58ed33bfff15b">00107</a>             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> * <a class="code" href="class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html#af018c0cc07b056c54de58ed33bfff15b">m_ThreadIDs</a>;
+<a name="l00108"></a>00108         };
+<a name="l00109"></a>00109     }
+<a name="l00113"></a>00113 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 28 2011 19:46:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2011 01:16:11 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

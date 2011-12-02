@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_i_module.html" title="IModule" alt="" coords="300,5,367,32"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="6,73,162,100"/>
-<area shape="rect" id="node18" href="$class_voodoo_shader_1_1_i_core.html" title="VoodooShader::ICore" alt="" coords="261,119,406,145"/>
-<area shape="rect" id="node8" href="$struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status." alt="" coords="254,229,413,256"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_module.html" title="Contains the handle to a loaded library and function pointers for creation and destruction." alt="" coords="253,43,413,69"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="6,39,162,65"/>
+<area shape="rect" id="node19" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="261,93,406,120"/>
+<area shape="rect" id="node9" href="$struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status." alt="" coords="254,211,413,237"/>
 </map>

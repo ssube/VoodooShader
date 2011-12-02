@@ -1,8 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_technique.html" title="VoodooShader::ITechnique" alt="" coords="787,5,965,32"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="470,56,626,83"/>
-<area shape="rect" id="node6" href="$class_voodoo_shader_1_1_i_shader.html" title="VoodooShader::IShader" alt="" coords="797,56,955,83"/>
-<area shape="rect" id="node30" href="$class_voodoo_shader_1_1_i_core.html" title="VoodooShader::ICore" alt="" coords="803,107,949,133"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect." alt="" coords="787,5,965,32"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="470,56,626,83"/>
+<area shape="rect" id="node6" href="$class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="797,56,955,83"/>
+<area shape="rect" id="node30" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="803,107,949,133"/>
 <area shape="rect" id="node21" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="801,220,951,247"/>
 <area shape="rect" id="node17" title="STL class." alt="" coords="491,356,605,383"/>
 <area shape="rect" id="node23" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="441,239,655,265"/>

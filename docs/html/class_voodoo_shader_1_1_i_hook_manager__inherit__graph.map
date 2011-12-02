@@ -1,3 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_object.html" title="VoodooShader::IObject" alt="" coords="26,5,181,32"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html" title="Handles function&#45;level hooks, redirecting function calls into new locations." alt="" coords="5,155,304,181"/>
+<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_v_s_hook_manager.html" title="VoodooShader::VSHookManager" alt="" coords="328,155,541,181"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="217,5,372,32"/>
 </map>
