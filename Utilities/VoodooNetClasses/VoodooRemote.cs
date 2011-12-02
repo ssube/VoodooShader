@@ -26,61 +26,46 @@ using Microsoft.Win32;
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooDefault : VoodooObject, INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    public class VoodooRemote : VoodooObject, INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        Guid m_DefID;
-        String m_Name, m_Target, m_Config;
+        String m_Uri;
 
-        public VoodooDefault()
+        public VoodooRemote()
         {
 
         }
 
-        public VoodooDefault(Guid DefID, String Name, String Target, String Config)
+        public VoodooRemote(String Uri)
         {
-            m_DefID  = DefID;
-            m_Name   = Name;
-            m_Target = Target;
-            m_Config = Config;
+            m_Uri = Uri;
         }
 
-        protected VoodooDefault(SerializationInfo info, StreamingContext context)
+        protected VoodooRemote(SerializationInfo info, StreamingContext context)
         {
-            m_DefID  = new Guid(info.GetString("DefID"));
-            m_Name   = info.GetString("Name");
-            m_Target = info.GetString("Target");
-            m_Config = info.GetString("Config");
+            m_Uri = info.GetString("Uri");
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("DefID",  m_DefID.ToString("D"));
-            info.AddValue("Name",   m_Name);
-            info.AddValue("Target", m_Target);
-            info.AddValue("Config", m_Config);
+            info.AddValue("Uri", m_Uri);
         }
 
         public override String GetID()
         {
-            return m_DefID.ToString("D");
+            return m_Uri;
         }
 
         public void FromRegistryKey(RegistryKey key)
         {
-            String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
-
-            m_DefID = new Guid(name);
-            m_Name   = key.GetValue("Name") as String;
-            m_Target = key.GetValue("Target") as String;
-            m_Config = key.GetValue("Config") as String;
+            m_Uri = key.GetValue("Uri") as String;
         }
 
         public void ToRegistryKey(RegistryKey parent)
         {
-            String keyName = m_DefID.ToString("D");
+            String keyName = VoodooHash.Hash(m_Uri);
 
             RegistryKey key = parent.OpenSubKey(keyName);
             if (key != null)
@@ -91,29 +76,15 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            key.SetValue("Name", m_Name);
-            key.SetValue("Target", m_Target);
-            key.SetValue("Config", m_Config);
+            key.SetValue("Uri", m_Uri);
 
             key.Close();
         }
 
-        public String Name
+        public String Uri
         {
-            get { return m_Name; }
-            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-        }
-
-        public String Target
-        {
-            get { return m_Target; }
-            set { m_Target = value; this.NotifyPropertyChanged("Target"); }
-        }
-
-        public String Config
-        {
-            get { return m_Config; }
-            set { m_Config = value; this.NotifyPropertyChanged("Config"); }
+            get { return m_Uri; }
+            set { m_Uri = value; this.NotifyPropertyChanged("Uri"); }
         }
 
         private void NotifyPropertyChanged(String name)

@@ -17,487 +17,177 @@
  * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
-
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    namespace VoodooRegistry
+    public class VoodooRegistry : ISerializable, IVoodooRegistryObject
     {
-        public class VoodooElement
-        {
-            protected List<VoodooProperty> m_Props;
+        private String m_Path, m_BinPrefix;
 
-            public List<VoodooProperty> Properties
+        private List<VoodooRemote> m_Remotes;
+        private List<VoodooPackage> m_Packages;
+        private List<VoodooModule> m_Modules;
+        private List<VoodooClass> m_Classes;
+        private List<VoodooHook> m_Hooks;
+        private List<VoodooDefault> m_Defaults;
+
+        public VoodooRegistry()
+        {
+            m_Remotes = new List<VoodooRemote>();
+            m_Packages = new List<VoodooPackage>();
+            m_Modules = new List<VoodooModule>();
+            m_Classes = new List<VoodooClass>();
+            m_Hooks = new List<VoodooHook>();
+            m_Defaults = new List<VoodooDefault>();
+        }
+
+        protected VoodooRegistry(SerializationInfo info, StreamingContext context)
+        {
+            m_Path = info.GetString("Path");
+            m_BinPrefix = info.GetString("BinPrefix");
+
+            m_Remotes = (List<VoodooRemote>)info.GetValue("Remotes", typeof(List<VoodooRemote>));
+            m_Packages = (List<VoodooPackage>)info.GetValue("Packages", typeof(List<VoodooPackage>));
+            m_Modules = (List<VoodooModule>)info.GetValue("Modules", typeof(List<VoodooModule>));
+            m_Classes = (List<VoodooClass>)info.GetValue("Classes", typeof(List<VoodooClass>));
+            m_Hooks = (List<VoodooHook>)info.GetValue("Hooks", typeof(List<VoodooHook>));
+            m_Defaults = (List<VoodooDefault>)info.GetValue("Defaults", typeof(List<VoodooDefault>));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Path", m_Path);
+            info.AddValue("BinPrefix", m_BinPrefix);
+
+            info.AddValue("Remotes", m_Remotes);
+            info.AddValue("Packages", m_Packages);
+            info.AddValue("Modules", m_Modules);
+            info.AddValue("Classes", m_Classes);
+            info.AddValue("Hooks", m_Hooks);
+            info.AddValue("Defaults", m_Defaults);
+        }
+
+        public String GetID()
+        {
+            return "Voodoo Shader";
+        }
+
+        public void FromRegistryKey(RegistryKey key)
+        {
+            try
             {
-                get { return m_Props; }
-                set { m_Props = value; }
+                m_Path = key.GetValue("Path") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Path = String.Empty;	
+            }
+            try
+            {
+                m_BinPrefix = key.GetValue("BinPrefix") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_BinPrefix = String.Empty;	            	
             }
 
-            public VoodooElement()
+            FromRegistryKey_GetList(key, "Remotes", ref m_Remotes);
+            FromRegistryKey_GetList(key, "Packages", ref m_Packages);
+            FromRegistryKey_GetList(key, "Modules", ref m_Modules);
+            FromRegistryKey_GetList(key, "Classes", ref m_Classes);
+            FromRegistryKey_GetList(key, "Hooks", ref m_Hooks);
+            FromRegistryKey_GetList(key, "Defaults", ref m_Defaults);
+        }
+
+        private void FromRegistryKey_GetList<T>(RegistryKey key, String subkey, ref List<T> outlist) where T : IVoodooRegistryObject, new()
+        {
+            try
             {
-                m_Props = new List<VoodooProperty>();
+                RegistryKey listRoot = key.OpenSubKey(subkey);
+                foreach (String listItem in listRoot.GetSubKeyNames())
+                {
+                    T item = new T();
+                    item.FromRegistryKey(listRoot.OpenSubKey(listItem));
+                    outlist.Add(item);
+                }
+            }
+            catch (System.Exception)
+            {
+            	
             }
         }
 
-        public class VoodooModule : VoodooElement
+        public void ToRegistryKey(RegistryKey parent)
         {
-            Guid m_LIBID;
+            String keyName = "VoodooShader";
 
-            public VoodooModule(Guid libid, List<VoodooProperty> props)
-                : base()
+            RegistryKey key = parent.OpenSubKey(keyName);
+            if (key != null)
             {
-                m_LIBID = libid;
-                m_Props = props;
+                key.Close();
+                parent.DeleteSubKeyTree(keyName);
             }
 
-            public Guid LIBID
+            key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
+
+            key.SetValue("Path", m_Path);
+            key.SetValue("BinPrefix", m_BinPrefix);
+
+            ToRegistryKey_MakeList(key, "Remotes", ref m_Remotes);
+            ToRegistryKey_MakeList(key, "Packages", ref m_Packages);
+            ToRegistryKey_MakeList(key, "Modules", ref m_Modules);
+            ToRegistryKey_MakeList(key, "Classes", ref m_Classes);
+            ToRegistryKey_MakeList(key, "Hooks", ref m_Hooks);
+            ToRegistryKey_MakeList(key, "Defaults", ref m_Defaults);
+
+            key.Close();
+        }
+
+        private void ToRegistryKey_MakeList<T>(RegistryKey key, String subkey, ref List<T> inlist) where T : IVoodooRegistryObject, new()
+        {
+            RegistryKey listKey = key.CreateSubKey(subkey, RegistryKeyPermissionCheck.ReadWriteSubTree);
+            foreach (T listItem in inlist)
             {
-                get { return m_LIBID; }
-                set { m_LIBID = value; }
+                listItem.ToRegistryKey(listKey);
             }
         }
 
-        public class VoodooClass : VoodooElement
+        public List<VoodooRemote> Remotes
         {
-            Guid m_CLSID;
-
-            public VoodooClass(Guid clsid, List<VoodooProperty> props)
-                : base()
-            {
-                m_CLSID = clsid;
-                m_Props = props;
-            }
-
-            public Guid CLSID
-            {
-                get { return m_CLSID; }
-                set { m_CLSID = value; }
-            }
+            get { return m_Remotes; }
         }
 
-        public class VoodooHook : VoodooElement
+        public List<VoodooPackage> Packages
         {
-            String m_ID;
-
-            public VoodooHook(String id, List<VoodooProperty> props)
-                : base()
-            {
-                m_ID = id;
-                m_Props = props;
-            }
-
-            public String ID
-            {
-                get { return m_ID; }
-                set { m_ID = value; }
-            }
+            get { return m_Packages; }
         }
 
-        public class VoodooRegistry : VoodooElement
+        public List<VoodooModule> Modules
         {
-            private List<String> m_Remotes;
-            private Dictionary<Guid, VoodooPackage> m_Packages;
-            private Dictionary<Guid, VoodooModule> m_Modules;
-            private Dictionary<Guid, VoodooClass> m_Classes;
-            private Dictionary<String, VoodooHook> m_Hooks;
+            get { return m_Modules; }
+        }
 
-            public List<String> Remotes
-            {
-                get { return m_Remotes; }
-            }
+        public List<VoodooClass> Classes
+        {
+            get { return m_Classes; }
+        }
 
-            public Dictionary<Guid, VoodooPackage> Packages
-            {
-                get { return m_Packages; }
-            }
+        public List<VoodooHook> Hooks
+        {
+            get { return m_Hooks; }
+        }
 
-            public Dictionary<Guid, VoodooModule> Modules
-            {
-                get { return m_Modules; }
-            }
-
-            public Dictionary<Guid, VoodooClass> Classes
-            {
-                get { return m_Classes; }
-            }
-
-            public Dictionary<String, VoodooHook> Hooks
-            {
-                get { return m_Hooks; }
-            }
-
-            public VoodooRegistry()
-                : base()
-            {
-                m_Remotes = new List<string>();
-                m_Packages = new Dictionary<Guid, VoodooPackage>();
-                m_Modules = new Dictionary<Guid, VoodooModule>();
-                m_Classes = new Dictionary<Guid, VoodooClass>();
-                m_Hooks = new Dictionary<String, VoodooHook>();
-            }
-
-            public static VoodooRegistry FromRegistryKey(RegistryKey root)
-            {
-                if (root == null)
-                {
-                    throw new Exception("Invalid registry key.");
-                }
-
-                VoodooRegistry vreg = new VoodooRegistry();
-
-                foreach (String propName in root.GetValueNames())
-                {
-                    vreg.m_Props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(root.GetValue(propName))));
-                }
-
-                RegistryKey remotesKey = root.OpenSubKey("remotes");
-                if (remotesKey != null)
-                {
-                    foreach (String remoteID in remotesKey.GetValueNames())
-                    {
-                        vreg.m_Remotes.Add(Convert.ToString(remotesKey.GetValue(remoteID)));
-                    }
-                }
-
-                RegistryKey packagesKey = root.OpenSubKey("packages");
-                if (packagesKey != null)
-                {
-                    foreach (String packageKeyName in packagesKey.GetSubKeyNames())
-                    {
-                        RegistryKey packageKey = packagesKey.OpenSubKey(packageKeyName);
-                        if (packageKey != null)
-                        {
-                            Guid libid = new Guid(packageKeyName);
-
-                            List<VoodooProperty> props = new List<VoodooProperty>(packageKey.ValueCount);
-
-                            foreach (String propName in packageKey.GetValueNames())
-                            {
-                                props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(packageKey.GetValue(propName))));
-                            }
-
-                            vreg.m_Packages.Add(libid, new VoodooPackage(libid, props));
-                        }
-                    }
-                }
-
-                RegistryKey modulesKey = root.OpenSubKey("modules");
-                if (modulesKey != null)
-                {
-                    foreach (String moduleKeyName in modulesKey.GetSubKeyNames())
-                    {
-                        RegistryKey moduleKey = modulesKey.OpenSubKey(moduleKeyName);
-                        if (moduleKey != null)
-                        {
-                            Guid libid = new Guid(moduleKeyName);
-
-                            List<VoodooProperty> props = new List<VoodooProperty>(moduleKey.ValueCount);
-
-                            foreach (String propName in moduleKey.GetValueNames())
-                            {
-                                props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(moduleKey.GetValue(propName))));
-                            }
-
-                            vreg.m_Modules.Add(libid, new VoodooModule(libid, props));
-                        }
-                    }
-                }
-
-                RegistryKey classesKey = root.OpenSubKey("classes");
-                if (classesKey != null)
-                {
-                    foreach (String classKeyName in classesKey.GetSubKeyNames())
-                    {
-                        RegistryKey classKey = classesKey.OpenSubKey(classKeyName);
-                        if (classKey != null)
-                        {
-                            Guid clsid = new Guid(classKeyName);
-
-                            List<VoodooProperty> props = new List<VoodooProperty>(classKey.ValueCount);
-
-                            foreach (String propName in classKey.GetValueNames())
-                            {
-                                props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(classKey.GetValue(propName))));
-                            }
-
-                            vreg.m_Classes.Add(clsid, new VoodooClass(clsid, props));
-                        }
-                    }
-                }
-
-                RegistryKey hooksKey = root.OpenSubKey("hooks");
-                if (hooksKey != null)
-                {
-                    foreach (String hookKeyName in hooksKey.GetSubKeyNames())
-                    {
-                        RegistryKey hookKey = classesKey.OpenSubKey(hookKeyName);
-                        if (hookKey != null)
-                        {
-                            List<VoodooProperty> props = new List<VoodooProperty>(hookKey.ValueCount);
-
-                            foreach (String propName in hookKey.GetValueNames())
-                            {
-                                props.Add(new VoodooProperty(propName.ToLower(), Convert.ToString(hookKey.GetValue(propName))));
-                            }
-
-                            vreg.m_Hooks.Add(hookKeyName, new VoodooHook(hookKeyName, props));
-                        }
-                    }
-                }
-
-                return vreg;
-            }
-
-            public static VoodooRegistry FromTreeNode(TreeNode node)
-            {
-                if (node == null)
-                {
-                    throw new Exception("Invalid tree node.");
-                }
-
-                VoodooRegistry vreg = new VoodooRegistry();
-
-                vreg.m_Props = node.Tag as List<VoodooProperty>;
-
-                TreeNode remotesNode = node.Nodes["remotes"];
-                if (remotesNode != null)
-                {
-                    vreg.m_Remotes = remotesNode.Tag as List<String>;
-                }
-
-                TreeNode packagesNode = node.Nodes["packages"];
-                if (packagesNode != null)
-                {
-                    foreach (TreeNode packageNode in packagesNode.Nodes)
-                    {
-                        Guid libid = new Guid(packageNode.Name);
-                        if (!vreg.m_Packages.ContainsKey(libid))
-                        {
-                            vreg.m_Packages.Add(libid, new VoodooPackage(libid, packageNode.Tag as List<VoodooProperty>));
-                        }
-                    }
-                }
-
-                TreeNode modulesNode = node.Nodes["modules"];
-                if (modulesNode != null)
-                {
-                    foreach (TreeNode moduleNode in modulesNode.Nodes)
-                    {
-                        Guid libid = new Guid(moduleNode.Name);
-                        if (!vreg.m_Modules.ContainsKey(libid))
-                        {
-                            vreg.m_Modules.Add(libid, new VoodooModule(libid, moduleNode.Tag as List<VoodooProperty>));
-                        }
-                    }
-                }
-
-                TreeNode classesNode = node.Nodes["classes"];
-                if (classesNode != null)
-                {
-                    foreach (TreeNode classNode in classesNode.Nodes)
-                    {
-                        Guid clsid = new Guid(classNode.Name);
-                        if (!vreg.m_Classes.ContainsKey(clsid))
-                        {
-                            vreg.m_Classes.Add(clsid, new VoodooClass(clsid, classNode.Tag as List<VoodooProperty>));
-                        }
-                    }
-                }
-
-                TreeNode hooksNode = node.Nodes["hooks"];
-                if (hooksNode != null)
-                {
-                    foreach (TreeNode hookNode in hooksNode.Nodes)
-                    {
-                        if (!vreg.m_Hooks.ContainsKey(hookNode.Name))
-                        {
-                            vreg.m_Hooks.Add(hookNode.Name, new VoodooHook(hookNode.Name, hookNode.Tag as List<VoodooProperty>));
-                        }
-                    }
-                }
-
-                return vreg;
-            }
-
-            public static VoodooRegistry FromXmlNode()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void ToRegistryKey(RegistryKey root)
-            {
-                foreach (String sub in root.GetSubKeyNames())
-                {
-                    root.DeleteSubKeyTree(sub);
-                }
-
-                foreach (String val in root.GetValueNames())
-                {
-                    root.DeleteValue(val);
-                }
-
-                foreach (VoodooProperty prop in m_Props)
-                {
-                    root.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
-                }
-
-                RegistryKey remotesKey = root.CreateSubKey("remotes");
-                int counter = 0;
-                foreach (String remote in m_Remotes)
-                {
-                    remotesKey.SetValue(Convert.ToString(counter++), remote, RegistryValueKind.String);
-                }
-
-                RegistryKey packagesKey = root.CreateSubKey("packages");
-                foreach (KeyValuePair<Guid, VoodooPackage> packagePair in m_Packages)
-                {
-                    RegistryKey packageKey = packagesKey.CreateSubKey(Convert.ToString(packagePair.Key));
-
-                    foreach (VoodooProperty prop in packagePair.Value.Properties)
-                    {
-                        packageKey.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
-                    }
-                }
-
-                RegistryKey modulesKey = root.CreateSubKey("modules");
-                foreach (KeyValuePair<Guid, VoodooModule> modulePair in m_Modules)
-                {
-                    RegistryKey moduleKey = modulesKey.CreateSubKey(Convert.ToString(modulePair.Key));
-
-                    foreach (VoodooProperty prop in modulePair.Value.Properties)
-                    {
-                        moduleKey.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
-                    }
-                }
-
-                RegistryKey classesKey = root.CreateSubKey("classes");
-                foreach (KeyValuePair<Guid, VoodooClass> classPair in m_Classes)
-                {
-                    RegistryKey classKey = classesKey.CreateSubKey(Convert.ToString(classPair.Key));
-
-                    foreach (VoodooProperty prop in classPair.Value.Properties)
-                    {
-                        classKey.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
-                    }
-                }
-
-                RegistryKey hooksKey = root.CreateSubKey("hooks");
-                foreach (KeyValuePair<String, VoodooHook> hookPair in m_Hooks)
-                {
-                    RegistryKey hookKey = hooksKey.CreateSubKey(hookPair.Key);
-
-                    foreach (VoodooProperty prop in hookPair.Value.Properties)
-                    {
-                        hookKey.SetValue(prop.Name, prop.Value, RegistryValueKind.String);
-                    }
-                }
-            }
-
-            public TreeNode ToTreeNode()
-            {
-                TreeNode node = new TreeNode("Voodoo Registry");
-                node.Tag = m_Props;
-
-                TreeNode remotesNode = node.Nodes.Add("remotes", "Remotes");
-                remotesNode.Tag = m_Remotes;
-
-                TreeNode packagesNode = node.Nodes.Add("packages", "Packages");
-                foreach (KeyValuePair<Guid, VoodooPackage> vpackage in m_Packages)
-                {
-                    String name = Convert.ToString(vpackage.Key);
-                    packagesNode.Nodes.Add(name, name).Tag = vpackage.Value.Properties;
-                }
-
-                TreeNode modulesNode = node.Nodes.Add("modules", "Modules");
-                foreach (KeyValuePair<Guid, VoodooModule> vmodule in m_Modules)
-                {
-                    String name = Convert.ToString(vmodule.Key);
-                    modulesNode.Nodes.Add(name, name).Tag = vmodule.Value.Properties;
-                }
-
-                TreeNode classesNode = node.Nodes.Add("classes", "Classes");
-                foreach (KeyValuePair<Guid, VoodooClass> vclass in m_Classes)
-                {
-                    String name = Convert.ToString(vclass.Key);
-                    classesNode.Nodes.Add(name, name).Tag = vclass.Value.Properties;
-                }
-
-                TreeNode hooksNode = node.Nodes.Add("hooks", "Hooks");
-                foreach (KeyValuePair<String, VoodooHook> vhook in m_Hooks)
-                {
-                    hooksNode.Nodes.Add(vhook.Key, vhook.Key).Tag = vhook.Value.Properties;
-                }
-
-                return node;
-            }
-
-            /// <summary>
-            /// Adds all modules, classes and hooks from the given VoodooRegistry into this one, as if the appropriate add
-            /// element function was called for each (and following the same rules). This does not do any processing of
-            /// properties or merge elements, names are considered exclusive.
-            /// </summary>
-            /// <param name="other">Registry to append to this one.</param>
-            public void Append(VoodooRegistry other)
-            {
-                foreach (KeyValuePair<Guid, VoodooModule> vmodule in other.m_Modules)
-                {
-                    this.AddModule(vmodule.Value);
-                }
-
-                foreach (KeyValuePair<Guid, VoodooClass> vclass in other.m_Classes)
-                {
-                    this.AddClass(vclass.Value);
-                }
-
-                foreach (KeyValuePair<String, VoodooHook> vhook in other.m_Hooks)
-                {
-                    this.AddHook(vhook.Value);
-                }
-            }
-
-            public bool AddModule(VoodooModule vmodule)
-            {
-                if (!m_Modules.ContainsKey(vmodule.LIBID))
-                {
-                    m_Modules.Add(vmodule.LIBID, vmodule);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            public bool AddClass(VoodooClass vclass)
-            {
-                if (!m_Classes.ContainsKey(vclass.CLSID))
-                {
-                    m_Classes.Add(vclass.CLSID, vclass);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            public bool AddHook(VoodooHook vhook)
-            {
-                if (!m_Hooks.ContainsKey(vhook.ID))
-                {
-                    m_Hooks.Add(vhook.ID, vhook);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+        public List<VoodooDefault> Defaults
+        {
+            get { return m_Defaults; }
         }
     }
 }

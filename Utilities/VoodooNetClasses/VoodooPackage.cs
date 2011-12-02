@@ -20,11 +20,13 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
+using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooPackage : INotifyPropertyChanged, ISerializable
+    public class VoodooPackage : VoodooObject, INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,32 +34,108 @@ namespace VoodooNetClasses
         String m_Name, m_Version, m_Props;
         DateTime m_Date;
 
+        public VoodooPackage()
+        {
+
+        }
+
         public VoodooPackage(Guid PackID, String Name, String Version, DateTime Date, String Props)
         {
-            m_PackID = PackID;
-            m_Name = Name;
+            m_PackID  = PackID;
+            m_Name    = Name;
             m_Version = Version;
-            m_Date = Date;
-            m_Props = Props;
+            m_Date    = Date;
+            m_Props   = Props;
         }
 
         protected VoodooPackage(SerializationInfo info, StreamingContext context)
         {
-            m_PackID = new Guid(info.GetString("PackID"));
-            m_Name = info.GetString("Name");
+            m_PackID  = new Guid(info.GetString("PackID"));
+            m_Name    = info.GetString("Name");
             m_Version = info.GetString("Version");
-            m_Date = info.GetDateTime("Date");
-            m_Props = info.GetString("Props");
+            m_Date    = info.GetDateTime("Date");
+            m_Props   = info.GetString("Props");
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("PackID", m_PackID.ToString("D"));
-            info.AddValue("Name", m_Name);
+            info.AddValue("PackID",  m_PackID.ToString("D"));
+            info.AddValue("Name",    m_Name);
             info.AddValue("Version", m_Version);
-            info.AddValue("Date", m_Date);
-            info.AddValue("Props", m_Props);
+            info.AddValue("Date",    m_Date);
+            info.AddValue("Props",   m_Props);
+        }
+
+        public override String GetID()
+        {
+            return m_PackID.ToString("D");
+        }
+
+        public void FromRegistryKey(RegistryKey key)
+        {
+            try
+            {
+                String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
+                m_PackID = new Guid(name);
+            }
+            catch (System.Exception ex)
+            {
+                m_PackID = Guid.Empty;
+            }
+            try
+            {
+                m_Name = key.GetValue("Name") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Name = String.Empty;
+            }
+            try
+            {
+                m_Version = key.GetValue("Version") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Version = String.Empty;
+            }
+            try
+            {
+                m_Date = Convert.ToDateTime(key.GetValue("Date") as String);
+            }
+            catch (System.Exception ex)
+            {
+                m_Date = DateTime.MinValue;
+            }
+            try
+            {
+                m_Props = key.GetValue("Props") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Props = String.Empty;            	
+            }
+        }
+
+        public void ToRegistryKey(RegistryKey parent)
+        {
+            String keyName = m_PackID.ToString("D");
+
+            RegistryKey key = parent.OpenSubKey(keyName);
+            if (key != null)
+            {
+                key.Close();
+                parent.DeleteSubKeyTree(keyName);
+            }
+
+            key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
+
+            key.SetValue("Name",    m_Name);
+            key.SetValue("Version", m_Version);
+            key.SetValue("Date",    m_Date);
+            key.SetValue("Props",   m_Props);
+
+            key.Close();
         }
 
         public Guid PackID

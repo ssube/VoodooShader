@@ -18,36 +18,15 @@
  *   peachykeen@voodooshader.com
  */
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    public class VoodooProperty : INotifyPropertyChanged
+    interface IVoodooRegistryObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public String m_Name, m_Value;
-
-        public VoodooProperty(String n, String v)
-        {
-            m_Name = n; m_Value = v;
-        }
-
-        public String Name
-        {
-            get { return m_Name; }
-            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-        }
-
-        public String Value
-        {
-            get { return m_Value; }
-            set { m_Value = value; this.NotifyPropertyChanged("Value"); }
-        }
-
-        private void NotifyPropertyChanged(String name)
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
-        }
+        void FromRegistryKey(RegistryKey key);
+        void ToRegistryKey(RegistryKey parent);
     }
 }

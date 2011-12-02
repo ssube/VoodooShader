@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Security.Principal;
 using VoodooNetClasses;
-using VoodooNetClasses.VoodooRegistry;
 
 namespace VoodooRegedit
 {
@@ -63,10 +62,6 @@ namespace VoodooRegedit
 
         public void ImportRegistry(object sender, EventArgs e)
         {
-            m_RegistryTree.Nodes.Clear();
-
-            RootNode = new TreeNode("Voodoo Registry Root");
-
             RegistryKey hive = Registry.CurrentUser;
             if (menu_Button_Hive.Checked)
             {
@@ -85,23 +80,20 @@ namespace VoodooRegedit
             }
             else
             {
-                m_Registry = VoodooRegistry.FromRegistryKey(voodooRoot);
-                RootNode = m_Registry.ToTreeNode();
-                m_RegistryTree.Nodes.Add(RootNode);
+                m_Registry = new VoodooRegistry();
+                m_Registry.FromRegistryKey(voodooRoot);
             }
         }
 
         public void ExportRegistry(object sender, EventArgs e)
         {
             // Actually export to the registry
-            m_Registry = VoodooRegistry.FromTreeNode(RootNode);
-
             RegistryKey voodooRoot;
             if (menu_Button_Hive.Checked)
             {
-                voodooRoot = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\VoodooShader", true);
+                voodooRoot = Registry.LocalMachine.OpenSubKey(@"SOFTWARE", true);
             } else {
-                voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader", true);
+                voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE", true);
             }
 
             m_Registry.ToRegistryKey(voodooRoot);
@@ -112,69 +104,37 @@ namespace VoodooRegedit
         private void SelectNode(object sender, TreeViewCancelEventArgs e)
         {
             m_KeyGrid.AutoGenerateColumns = true;
-            m_KeyGrid.DataSource = e.Node.Tag;
-        }
-
-        private void Menu_Node_Edit(object sender, EventArgs e)
-        {
-            KeyEdit dialog = new KeyEdit();
-            dialog.Value = m_RegistryTree.SelectedNode.Text;
-
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (e.Node.Name == "Node_Root")
             {
-                m_RegistryTree.SelectedNode.Text = dialog.Value;
+                m_KeyGrid.DataSource = m_Registry;
+            } else if (e.Node.Name == "Node_Remotes")
+            {
+                m_KeyGrid.DataSource = m_Registry.Remotes;
+            } else if (e.Node.Name == "Node_Packages")
+            {
+                m_KeyGrid.DataSource = m_Registry.Packages;
+            } else if (e.Node.Name == "Node_Modules")
+            {
+                m_KeyGrid.DataSource = m_Registry.Modules;
+            } else if (e.Node.Name == "Node_Classes")
+            {
+                m_KeyGrid.DataSource = m_Registry.Classes;
+            } else if (e.Node.Name == "Node_Hooks")
+            {
+                m_KeyGrid.DataSource = m_Registry.Hooks;
             }
-        }
-
-        private void Menu_Node_AddChild(object sender, EventArgs e)
-        {
-            TreeNode node = m_RegistryTree.SelectedNode;
-            if (node != null)
+            else if (e.Node.Name == "Node_Defaults")
             {
-                AddNodeTo(node);
-            }
-        }
-
-        private void Menu_Node_AddSibling(object sender, EventArgs e)
-        {
-            TreeNode node = m_RegistryTree.SelectedNode;
-            if (node != null && node != RootNode)
-            {
-                node = node.Parent;
-                if (node != null)
-                {
-                    AddNodeTo(node);
-                }
-            }
-        }
-
-        private TreeNode AddNodeTo(TreeNode parent, String text = null)
-        {
-            if (text == null)
-            {
-                KeyEdit dialog = new KeyEdit();
-
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    text = dialog.Value;
-                }
-            }
-
-            return parent.Nodes.Add(text, text);
-        }
-
-        private void Menu_Node_Remove(object sender, EventArgs e)
-        {
-            TreeNode node = m_RegistryTree.SelectedNode;
-            if (node != null && node != RootNode)
-            {
-                node.Parent.Nodes.Remove(node);
+                m_KeyGrid.DataSource = m_Registry.Defaults;
             }
         }
 
         private void Menu_Key_Add(object sender, EventArgs e)
         {
-            m_KeyGrid.Rows.Add();
+            object source = m_KeyGrid.DataSource;
+            Type ot = source.GetType().GetGenericArguments()[0];
+            Type lt = typeof(List<ot>);
+            ((lt)source).Add(Activator.CreateInstance(ot));
         }
 
         private void Menu_Key_Delete(object sender, EventArgs e)
@@ -191,8 +151,6 @@ namespace VoodooRegedit
             {
                 String[] files = openFileDialog1.FileNames;
 
-                m_Registry = VoodooRegistry.FromTreeNode(RootNode);
-
                 foreach (String moduleFile in files)
                 {
                     try
@@ -202,27 +160,14 @@ namespace VoodooRegedit
                         String libid = Convert.ToString(version.LibID);
 
                         // Add module
-
-                        List<VoodooProperty> moduledata = new List<VoodooProperty>(4);
-
-                        moduledata.Add(new VoodooProperty("modulePath", moduleFile));
-                        moduledata.Add(new VoodooProperty("configPath", String.Empty));
-                        moduledata.Add(new VoodooProperty("remotePath", String.Empty));
-                        moduledata.Add(new VoodooProperty("name", version.Name));
-
-                        m_Registry.AddModule(new VoodooModule(version.LibID, moduledata));
+                        m_Registry.Modules.Add(new VoodooModule(version.LibID, Guid.Empty, version.Name, moduleFile, String.Empty, String.Empty));
 
                         // Add classes
                         for (UInt32 i = 0; i < module.Count; ++i)
                         {
                             ClassInfo classinfo = module[i];
 
-                            List<VoodooProperty> classdata = new List<VoodooProperty>(2);
-
-                            classdata.Add(new VoodooProperty("module", libid));
-                            classdata.Add(new VoodooProperty("name", classinfo.Name));
-
-                            m_Registry.AddClass(new VoodooClass(classinfo.ClsID, classdata));
+                            m_Registry.Classes.Add(new VoodooClass(classinfo.ClsID, version.LibID, classinfo.Name, String.Empty));
                         }
 
                         // Export again
@@ -232,8 +177,6 @@ namespace VoodooRegedit
                         MessageBox.Show("Unable to load module:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-
-                m_RegistryTree.Nodes[0] = RootNode = m_Registry.ToTreeNode();
             }
         }
 

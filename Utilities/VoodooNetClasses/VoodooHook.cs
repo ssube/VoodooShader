@@ -20,21 +20,28 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
+using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooHook : INotifyPropertyChanged, ISerializable
+    public class VoodooHook : VoodooObject, INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        bool m_Active;
+        Boolean m_Active;
         String m_Name, m_Target, m_Config;
+
+        public VoodooHook()
+        {
+
+        }
 
         public VoodooHook(bool Active, String Name, String Target, String Config)
         {
             m_Active = Active;
-            m_Name = Name;
+            m_Name   = Name;
             m_Target = Target;
             m_Config = Config;
         }
@@ -42,7 +49,7 @@ namespace VoodooNetClasses
         protected VoodooHook(SerializationInfo info, StreamingContext context)
         {
             m_Active = info.GetBoolean("Active");
-            m_Name = info.GetString("Name");
+            m_Name   = info.GetString("Name");
             m_Target = info.GetString("Target");
             m_Config = info.GetString("Config");
         }
@@ -51,9 +58,71 @@ namespace VoodooNetClasses
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Active", m_Active);
-            info.AddValue("Name", m_Name);
+            info.AddValue("Name",   m_Name);
             info.AddValue("Target", m_Target);
             info.AddValue("Config", m_Config);
+        }
+
+        public override String GetID()
+        {
+            return m_Name;
+        }
+
+        public void FromRegistryKey(RegistryKey key)
+        {
+            try
+            {
+                m_Active = Convert.ToBoolean(key.GetValue("Active") as String);
+            }
+            catch (System.Exception ex)
+            {
+                m_Active = false;
+            }
+            try
+            {
+                m_Name = key.GetValue("Name") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Name = String.Empty;
+            }
+            try
+            {
+                m_Target = key.GetValue("Target") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Target = String.Empty;            	
+            }
+            try
+            {
+                m_Config = key.GetValue("Config") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Config = String.Empty;            	
+            }
+        }
+
+        public void ToRegistryKey(RegistryKey parent)
+        {
+            String keyName = new Guid().ToString("D");
+
+            RegistryKey key = parent.OpenSubKey(keyName);
+            if (key != null)
+            {
+                key.Close();
+                parent.DeleteSubKeyTree(keyName);
+            }
+
+            key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
+
+            key.SetValue("Active", m_Active);
+            key.SetValue("Name",   m_Name);
+            key.SetValue("Target", m_Target);
+            key.SetValue("Config", m_Config);
+
+            key.Close();
         }
 
         public bool Active

@@ -20,40 +20,109 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
+using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooClass : INotifyPropertyChanged, ISerializable
+    public class VoodooClass : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         Guid m_ClassID, m_PackID;
         String m_Name, m_Props;
 
+        public VoodooClass()
+        {
+
+        }
+
         public VoodooClass(Guid ClassID, Guid PackID, String Name, String Props)
         {
             m_ClassID = ClassID;
-            m_PackID = PackID;
-            m_Name = Name;
-            m_Props = Props;
+            m_PackID  = PackID;
+            m_Name    = Name;
+            m_Props   = Props;
         }
 
         protected VoodooClass(SerializationInfo info, StreamingContext context)
         {
             m_ClassID = new Guid(info.GetString("ClassID"));
-            m_PackID = new Guid(info.GetString("PackID"));
-            m_Name = info.GetString("Name");
-            m_Props = info.GetString("Props");
+            m_PackID  = new Guid(info.GetString("PackID"));
+            m_Name    = info.GetString("Name");
+            m_Props   = info.GetString("Props");
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("ClassID", m_ClassID.ToString("D"));
-            info.AddValue("PackID", m_PackID.ToString("D"));
-            info.AddValue("Name", m_Name);
-            info.AddValue("Props", m_Props);
+            info.AddValue("PackID",  m_PackID.ToString("D"));
+            info.AddValue("Name",    m_Name);
+            info.AddValue("Props",   m_Props);
+        }
+
+        public String GetID()
+        {
+            return m_ClassID.ToString("D");
+        }
+
+        public void FromRegistryKey(RegistryKey key)
+        {
+            try
+            {
+                String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
+                m_ClassID = new Guid(name);
+            }
+            catch (System.Exception ex)
+            {
+                m_ClassID = Guid.Empty;
+            }
+            try
+            {
+                m_PackID = new Guid(key.GetValue("PackID") as String);
+            }
+            catch (System.Exception ex)
+            {
+                m_PackID = Guid.Empty;
+            }
+            try
+            {
+                m_Name = key.GetValue("Name") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Name = String.Empty;
+            }
+            try
+            {
+                m_Props = key.GetValue("Props") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Props = String.Empty;
+            }
+        }
+
+        public void ToRegistryKey(RegistryKey parent)
+        {
+            String keyName = m_ClassID.ToString("D");
+
+            RegistryKey key = parent.OpenSubKey(keyName);
+            if (key != null)
+            {
+                key.Close();
+                parent.DeleteSubKeyTree(keyName);
+            }
+
+            key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
+
+            key.SetValue("Name",   m_Name);
+            key.SetValue("PackID", m_PackID.ToString("D"));
+            key.SetValue("Props",  m_Props);
+
+            key.Close();
         }
 
         public Guid ClassID

@@ -20,46 +20,135 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
+using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooModule : INotifyPropertyChanged, ISerializable
+    public class VoodooModule : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         Guid m_LibID, m_PackID;
         String m_Name, m_Path, m_Config, m_Props;
 
-        public VoodooModule(Guid LibID, Guid PackID, String Name, String Path, String Config, String Props)
+        public VoodooModule()
         {
-            m_LibID = LibID;
-            m_PackID = PackID;
-            m_Name = Name;
-            m_Path = Path;
-            m_Config = Config;
-            m_Props = Props;
+
         }
 
+        public VoodooModule(Guid LibID, Guid PackID, String Name, String Path, String Config, String Props)
+        {
+            m_LibID  = LibID;
+            m_PackID = PackID;
+            m_Name   = Name;
+            m_Path   = Path;
+            m_Config = Config;
+            m_Props  = Props;
+        }
+
+        // ISerializable
         protected VoodooModule(SerializationInfo info, StreamingContext context)
         {
-            m_LibID = new Guid(info.GetString("LibID"));
+            m_LibID  = new Guid(info.GetString("LibID"));
             m_PackID = new Guid(info.GetString("PackID"));
-            m_Name = info.GetString("Name");
-            m_Path = info.GetString("Path");
+            m_Name   = info.GetString("Name");
+            m_Path   = info.GetString("Path");
             m_Config = info.GetString("Config");
-            m_Props = info.GetString("Props");
+            m_Props  = info.GetString("Props");
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("LibID", m_LibID.ToString("D"));
+            info.AddValue("LibID",  m_LibID.ToString("D"));
             info.AddValue("PackID", m_PackID.ToString("D"));
-            info.AddValue("Name", m_Name);
-            info.AddValue("Path", m_Path);
+            info.AddValue("Name",   m_Name);
+            info.AddValue("Path",   m_Path);
             info.AddValue("Config", m_Config);
-            info.AddValue("Props", m_Props);
+            info.AddValue("Props",  m_Props);
+        }
+
+        // IVoodooRegistryObject
+        public String GetID()
+        {
+            return m_LibID.ToString("D");
+        }
+
+        public void FromRegistryKey(RegistryKey key)
+        {
+            try
+            {
+                String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
+                m_LibID = new Guid(name);
+            }
+            catch (System.Exception ex)
+            {
+                m_LibID = Guid.Empty;            	
+            }
+            try
+            {
+                m_PackID = new Guid(key.GetValue("PackID") as String);
+            }
+            catch (System.Exception ex)
+            {
+                m_PackID = Guid.Empty;
+            }
+            try
+            {
+                m_Name = key.GetValue("Name") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Name = String.Empty;
+            }
+            try
+            {
+                m_Path = key.GetValue("Path") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Path = String.Empty;            	
+            }
+            try
+            {
+                m_Config = key.GetValue("Config") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Config = String.Empty;             	
+            }
+            try
+            {
+                m_Props = key.GetValue("Props") as String;
+            }
+            catch (System.Exception ex)
+            {
+                m_Props = String.Empty;             	
+            }
+        }
+
+        public void ToRegistryKey(RegistryKey parent)
+        {
+            String keyName = m_LibID.ToString("D");
+
+            RegistryKey key = parent.OpenSubKey(keyName);
+            if (key != null)
+            {
+                key.Close();
+                parent.DeleteSubKeyTree(keyName);
+            }
+
+            key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
+
+            key.SetValue("PackID", m_PackID.ToString("D"));
+            key.SetValue("Name",   m_Name);
+            key.SetValue("Path",   m_Path);
+            key.SetValue("Config", m_Config);
+            key.SetValue("Props",  m_Props);
+
+            key.Close();
         }
 
         public Guid LibID
