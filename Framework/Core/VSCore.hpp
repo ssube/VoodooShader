@@ -27,11 +27,7 @@ namespace VoodooShader
      * Creates a new core. This function is exported and meant for use by the loader.
      *
      * @param pInitParams Setup parameters for this core.
-     * @param catchErrors If true, all exceptions thrown by the core ctor are caught within the function. Otherwise, they
-     *      are returned.
-     * @return A new ICore object.
-     *
-     * @throws std::exception in case of errors, if catchErrors is false.
+     * @return A new ICore object, if one was created successfully.
      */
     _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams);
 

@@ -142,7 +142,7 @@ namespace VoodooShader
      *
      * @note Repeated consecutive slashes will not cause errors with path parsing, although in some locations they
      *     have special meanings. They may cause errors when using the string for other reasons; calling
-     *     @ref IParser::Parse() with the @ref PF_SingleSlash flag set will attempt to strip these. Finally, state
+     *     @ref IParser::Parse() with the @ref PF_SlashSingle flag set will attempt to strip these. Finally, state
      *     variables and suppression use a variation on the name syntax.
      *
      * @par Examples:

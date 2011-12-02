@@ -147,7 +147,7 @@ namespace VoodooShader
          * Textures will not be used by the shader linker unless they have been registered with the core.
          *
          * @param name The texture name (must be unique).
-         * @param pDesc Information for the texture to be created.
+         * @param desc Information for the texture to be created.
          * @return A shared pointer to the newly created Texture object, if successful.
          *
          * @note This method calls IAdapter::CreateTexture() to handle the actual creation, then registers

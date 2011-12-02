@@ -142,6 +142,7 @@
     <ResourceCompile Include="Voodoo_Core.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Docs_MainPage.dox" />
     <None Include="Voodoo_Core.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -98,7 +98,7 @@ namespace VoodooShader
          *
          * @param level The level for this message.
          * @param source The source of the log message, usually the calling module's name.
-         * @param msg The message format string.
+         * @param format The message format string. Make sure to insert Unicode strings with %s and ASCII with %S.
          * @param ... The parameters to insert.
          */
         virtual void Log

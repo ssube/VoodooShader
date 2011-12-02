@@ -91,9 +91,6 @@ namespace VoodooShader
              * Add a directory to the search path. Directories are pushed to the front of the list, which is searched in
              * order (last added has highest priority).
              *
-             * @note This function uses Parser::ParseString() for all paths. Variables are evaluated when the path is added.
-             * @note This function will split paths at the ';' character, similar to how Windows treats the path variable.
-             *      This (combined with env vars) allows regular-form environment vars to be added to the file system.
              */
             VOODOO_METHOD(AddPath)(_In_ const String & path);
             /**

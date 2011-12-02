@@ -77,7 +77,7 @@ namespace VoodooShader
          *      Absolute: Canonicalize("$(globalroot)\\bin\\../Library.dll");
          *      Parsed: Canonicalize("C:\\Voodoo\\bin\\../Library.dll");
          *      Final: "C:\\Voodoo\\Library.dll";
-         *      @code
+         *      @endcode
          *      Among other things, this guarantees an absolute path for use when searching for dependencies.
          *
          * @note The module's directory is used in the search path for required DLLs. The search path, through this method,

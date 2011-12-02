@@ -203,12 +203,13 @@ namespace VoodooShader
       * follow the @ref voodoo_spec_module as any other module. However, adapter classes must fit a very specific set of
       * behavior rules and perform exactly as expected by the core, and only one adapter object is created at a time.
       *
-      * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter itself. Adapter
-      * modules may even provide more than one adapter class. It is recommended that the adapter class be of the form
-      * <tt>name_Adapter</tt> and each supporting class use <tt>name_classname</tt>, to easily identify them. If the adapter
-      * or module is part of the framework, the name scheme extends to the module's name (<tt>Voodoo/name</tt>) and often
-      * filename (<tt>Voodoo_name.dll</tt>). Each framework Voodoo adapter is given a short one word somewhat-game-related
-      * name.
+      * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter itself. The adapter
+      * must provide at least one implementation each of IAdapter and ITexture. 
+      *
+      * It is recommended that the adapter name be of the form <tt>[Name]Adapter</tt> and each supporting class use 
+      * <tt>[Name]classname</tt>, to easily identify them. If the adapter or module is part of the framework, the name 
+      * scheme extends to the module's name (<tt>Voodoo/[Name]</tt>) and filename (<tt>Voodoo_[Name].dll</tt>). Each 
+      * framework Voodoo adapter is given a short one word somewhat-game-related name.
       *
       * For further details on the behavior required of adapters, please refer to the IAdapter interface documentation.
       *
@@ -218,11 +219,12 @@ namespace VoodooShader
       *     ICore now exposes methods to get and set the active context and no longer creates a context of its own. This
       *     allows more flexibility within adapters, but is a breaking change. Adapters compiled for earlier versions will
       *     find themselves without a context at all.
-      * @since 0.2
+      * @since 0.2.0
       *
       * This can avoid some crashes with certain adapters due to context lifespan, and allows adapters to handle cleanup. If
       * at all possible, the Cg context should be created in the adapter's constructor and destroyed in the adapter's
-      * destructor, but this is left up to the discretion of the adapter.
+      * destructor, but this is left up to the discretion of the adapter. The core releases and invalidates all objects when
+      * the core is reset and all Cg-derived resources are released when the context is set to null.
       *
       * @warning Adapters must not create any shaders or parameters until they have provided the core with a valid context.
       *     Errors will be returned if this is attempted. To fully support Voodoo features, adapter's must not directly use

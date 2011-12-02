@@ -53,6 +53,10 @@ namespace VoodooShader
          *
          * @note This does not check for duplicates, so care should be taken not to add the same directory repeatedly.
          *     Directory search order is important for file priority.
+         *
+         * @note This function uses Parser::ParseString() for all paths. Variables are evaluated when the path is added.
+         * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This 
+         *      combined with parser environment access allows regular-form environment vars to be added to the file system.
          */
         VOODOO_METHOD(AddPath)(_In_ const String & path) PURE;
         /**
@@ -60,6 +64,10 @@ namespace VoodooShader
          * same string will always work).
          *
          * @param path The path to remove.
+         *
+         * @note This function must Parser::ParseString() for all paths. Variables are evaluated when the path is added.
+         * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This 
+         *      combined with parser environment access allows regular-form environment vars to be added to the file system.
          */
         VOODOO_METHOD(RemovePath)(_In_ const String & path) PURE;
         /**
@@ -67,9 +75,9 @@ namespace VoodooShader
          * absolute filename by searching the list of resource directories registered with this manager. Depending on the
          * mode given, the file may be opened or created.
          *
-         * @param name The file name to find.
+         * @param name The file name to find (must be parsed).
          * @param mode The file mode to use.
-         * @return The file, if found.
+         * @return The file, if found or created (depending on mode).
          */
         VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, _In_ const GetFileMode mode = FF_OpenOnly) CONST PURE;
     };

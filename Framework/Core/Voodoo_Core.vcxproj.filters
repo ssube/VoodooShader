@@ -216,5 +216,8 @@
     <None Include="Voodoo_Core.def">
       <Filter>Resources</Filter>
     </None>
+    <None Include="Docs_MainPage.dox">
+      <Filter>Docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

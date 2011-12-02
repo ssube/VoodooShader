@@ -141,14 +141,15 @@ namespace VoodooShader
          * format of the image given must match. Texture size is bounded by the texture, as are mipmap and render target
          * settings. Texture origin is determined by the region provided here.
          *
-         * @param pImage The image to load.
-         * @param pRegion The region of the file that will be used.
-         * @return The texture, if successfully created. A nullptr otherwise.
+         * @param pImage The image to load data from.
+         * @param region The region of the image to be used.
+         * @param pTexture The texture to load the data into.
+         * @return Success of the texture load.
          *
          * @note As TextureRegion derives from TextureDesc, it may be simpler to use the same struct for both this and the
          *      call to IAdapter::CreateTexture().
          */
-        VOODOO_METHOD(LoadTexture)(_In_ IImage * const pImage, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture) PURE;
+        VOODOO_METHOD(LoadTexture)(_In_ IImage * const pImage, _In_ const TextureRegion region, _Inout_ ITexture * const pTexture) PURE;
         /**
          * Draws geometry from system memory.
          *
