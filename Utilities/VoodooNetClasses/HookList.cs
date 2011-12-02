@@ -6,51 +6,6 @@ using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    public class VoodooHook : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        bool m_Active;
-        String m_Name, m_Target, m_Config;
-
-        public VoodooHook(bool a, String n, String t, String c)
-        {
-            m_Active = a;
-            m_Name = n;
-            m_Target = t;
-            m_Config = c;
-        }
-
-        public bool Active
-        {
-            get { return m_Active; }
-            set { m_Active = value; this.NotifyPropertyChanged("Active"); }
-        }
-
-        public String Name
-        {
-            get { return m_Name; }
-            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-        }
-
-        public String Target
-        {
-            get { return m_Target; }
-            set { m_Target = value; this.NotifyPropertyChanged("Target"); }
-        }
-
-        public String Config
-        {
-            get { return m_Config; }
-            set { m_Config = value; this.NotifyPropertyChanged("Config"); }
-        }
-
-        private void NotifyPropertyChanged(String name)
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
-        }
-    }
-
     public class HookList
     {
         List<VoodooHook> m_Hooks;

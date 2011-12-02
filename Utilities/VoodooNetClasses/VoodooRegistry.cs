@@ -23,41 +23,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
-using System.ComponentModel;
 
 namespace VoodooNetClasses
 {
     namespace VoodooRegistry
     {
-        public class VoodooProperty : INotifyPropertyChanged
-        {
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            public String m_Name, m_Value;
-
-            public VoodooProperty(String n, String v)
-            {
-                m_Name = n; m_Value = v;
-            }
-
-            public String Name
-            {
-                get { return m_Name; }
-                set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-            }
-
-            public String Value
-            {
-                get { return m_Value; }
-                set { m_Value = value; this.NotifyPropertyChanged("Value"); }
-            }
-
-            private void NotifyPropertyChanged(String name)
-            {
-                if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
-            }
-        }
-
         public class VoodooElement
         {
             protected List<VoodooProperty> m_Props;
@@ -71,24 +41,6 @@ namespace VoodooNetClasses
             public VoodooElement()
             {
                 m_Props = new List<VoodooProperty>();
-            }
-        }
-
-        public class VoodooPackage : VoodooElement
-        {
-            Guid m_PACKID;
-
-            public VoodooPackage(Guid packid, List<VoodooProperty> props)
-                : base()
-            {
-                m_PACKID = packid;
-                m_Props = props;
-            }
-
-            public Guid PACKID
-            {
-                get { return m_PACKID; }
-                set { m_PACKID = value; }
             }
         }
 
