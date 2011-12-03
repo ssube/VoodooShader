@@ -113,7 +113,7 @@ namespace VoodooNetClasses
 
         public void ToRegistryKey(RegistryKey parent)
         {
-            String keyName = Guid.NewGuid().ToString("D");
+            String keyName = Guid.NewGuid().ToString("N");
 
             RegistryKey key = parent.OpenSubKey(keyName);
             if (key != null)
@@ -124,7 +124,7 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            key.SetValue("Active", m_Active);
+            key.SetValue("Active", m_Active.ToString().ToLower());
             key.SetValue("Name",   m_Name);
             key.SetValue("Target", m_Target);
             key.SetValue("Config", m_Config);

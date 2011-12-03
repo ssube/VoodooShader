@@ -73,17 +73,17 @@ namespace VoodooGUI
         private void Menu_Hook_Add(object sender, EventArgs e)
         {
             m_Hooks.Add(new VoodooHook(false, String.Empty, String.Empty, String.Empty));
-            cHook_Table.Refresh();
+
+            cHook_Table.DataSource = null;
+            cHook_Table.DataSource = m_Hooks;
         }
 
         private void Menu_Hook_Remove(object sender, EventArgs e)
         {
             m_Hooks.RemoveAt(cHook_Table.SelectedRows[0].Index);
-            cHook_Table.Refresh();
-        }
 
-        private void SyncHookList()
-        {
+            cHook_Table.DataSource = null;
+            cHook_Table.DataSource = m_Hooks;
         }
 
         private void Form_OnResize(object sender, EventArgs e)
@@ -93,21 +93,22 @@ namespace VoodooGUI
                 Hide();
 
                 cTrayIcon.BalloonTipTitle = "Voodoo UI Hidden";
-                cTrayIcon.BalloonTipText = "Voodoo will remain active and will be loaded by hooks while the UI is hidden.";
-                cTrayIcon.ShowBalloonTip(5000);
+                cTrayIcon.BalloonTipText = "Voodoo hooks will remain active while the UI is hidden.";
+                cTrayIcon.ShowBalloonTip(2500);
             }
-        }
-
-        private void Notify_OnDblClick(object sender, EventArgs e)
-        {
-            Show();
-            WindowState = FormWindowState.Normal;
         }
 
         private void Notify_OnClick(object sender, EventArgs e)
         {
-            Show();
-            WindowState = FormWindowState.Normal;
+            if (!this.Visible)
+            {
+                Show();
+                WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.Activate();
+            }
         }
 
         private void Menu_Hook_Enable(object sender, EventArgs e)
@@ -142,16 +143,6 @@ namespace VoodooGUI
             }
         }
 
-        private void HookTable_Selection(object sender, EventArgs e)
-        {
-            UpdateHookDetails();
-        }
-
-        private void UpdateHookDetails()
-        {
-
-        }
-
         private void RowChange(object sender, DataGridViewCellEventArgs e)
         {
             cHook_Active.Checked = (bool)cHook_Table.Rows[e.RowIndex].Cells["colActive"].Value;
@@ -162,12 +153,15 @@ namespace VoodooGUI
 
         private void SaveHookDetails(object sender, EventArgs e)
         {
-            cHook_Table.SelectedRows[0].Cells["colActive"].Value = cHook_Active.Checked;
-            cHook_Table.SelectedRows[0].Cells["colName"].Value = cHook_Name.Text;
-            cHook_Table.SelectedRows[0].Cells["colTarget"].Value = cHook_Target.Text;
-            cHook_Table.SelectedRows[0].Cells["colConfig"].Value = cHook_Config.Text;
+            if (cHook_Table.SelectedRows.Count > 0)
+            {
+                cHook_Table.SelectedRows[0].Cells["colActive"].Value = cHook_Active.Checked;
+                cHook_Table.SelectedRows[0].Cells["colName"].Value = cHook_Name.Text;
+                cHook_Table.SelectedRows[0].Cells["colTarget"].Value = cHook_Target.Text;
+                cHook_Table.SelectedRows[0].Cells["colConfig"].Value = cHook_Config.Text;
 
-            CommitHooks();
+                CommitHooks();
+            }
         }
 
         private void LoadHooks()
@@ -195,6 +189,28 @@ namespace VoodooGUI
             foreach (VoodooHook hook in m_Hooks)
             {
                 hook.ToRegistryKey(hookRoot);
+            }
+        }
+
+        private void FindTarget(object sender, EventArgs e)
+        {
+            dOpenFile.FilterIndex = 0;
+            dOpenFile.Title = "Select Target Program";
+
+            if (dOpenFile.ShowDialog() == DialogResult.OK)
+            {
+                cHook_Target.Text = dOpenFile.FileName;
+            }
+        }
+
+        private void FindConfig(object sender, EventArgs e)
+        {
+            dOpenFile.FilterIndex = 1;
+            dOpenFile.Title = "Select Config File";
+
+            if (dOpenFile.ShowDialog() == DialogResult.OK)
+            {
+                cHook_Config.Text = dOpenFile.FileName;
             }
         }
     }
