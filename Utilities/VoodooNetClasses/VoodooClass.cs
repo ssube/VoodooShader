@@ -30,7 +30,7 @@ namespace VoodooNetClasses
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        Guid m_ClassID, m_PackID;
+        Guid m_ClassID, m_LibID;
         String m_Name, m_Props;
 
         public VoodooClass()
@@ -38,10 +38,10 @@ namespace VoodooNetClasses
 
         }
 
-        public VoodooClass(Guid ClassID, Guid PackID, String Name, String Props)
+        public VoodooClass(Guid ClassID, Guid LibID, String Name, String Props)
         {
             m_ClassID = ClassID;
-            m_PackID  = PackID;
+            m_LibID   = LibID;
             m_Name    = Name;
             m_Props   = Props;
         }
@@ -49,7 +49,7 @@ namespace VoodooNetClasses
         protected VoodooClass(SerializationInfo info, StreamingContext context)
         {
             m_ClassID = new Guid(info.GetString("ClassID"));
-            m_PackID  = new Guid(info.GetString("PackID"));
+            m_LibID = new Guid(info.GetString("LibID"));
             m_Name    = info.GetString("Name");
             m_Props   = info.GetString("Props");
         }
@@ -58,7 +58,7 @@ namespace VoodooNetClasses
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("ClassID", m_ClassID.ToString("D"));
-            info.AddValue("PackID",  m_PackID.ToString("D"));
+            info.AddValue("LibID",   m_LibID.ToString("D"));
             info.AddValue("Name",    m_Name);
             info.AddValue("Props",   m_Props);
         }
@@ -81,11 +81,11 @@ namespace VoodooNetClasses
             }
             try
             {
-                m_PackID = new Guid(key.GetValue("PackID") as String);
+                m_LibID = new Guid(key.GetValue("LibID") as String);
             }
             catch (System.Exception ex)
             {
-                m_PackID = Guid.Empty;
+                m_LibID = Guid.Empty;
             }
             try
             {
@@ -119,7 +119,7 @@ namespace VoodooNetClasses
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
             key.SetValue("Name",   m_Name);
-            key.SetValue("PackID", m_PackID.ToString("D"));
+            key.SetValue("PackID", m_LibID.ToString("D"));
             key.SetValue("Props",  m_Props);
 
             key.Close();
@@ -131,10 +131,10 @@ namespace VoodooNetClasses
             set { m_ClassID = value; this.NotifyPropertyChanged("ClassID"); }
         }
 
-        public Guid PackID
+        public Guid LibID
         {
-            get { return m_PackID; }
-            set { m_PackID = value; this.NotifyPropertyChanged("PackID"); }
+            get { return m_LibID; }
+            set { m_LibID = value; this.NotifyPropertyChanged("LibID"); }
         }
 
         public String Name

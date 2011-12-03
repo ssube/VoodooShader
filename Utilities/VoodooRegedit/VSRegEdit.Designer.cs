@@ -141,6 +141,7 @@
             this.m_KeyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_KeyGrid.GridColor = System.Drawing.SystemColors.ControlLight;
             this.m_KeyGrid.Location = new System.Drawing.Point(0, 0);
+            this.m_KeyGrid.MultiSelect = false;
             this.m_KeyGrid.Name = "m_KeyGrid";
             this.m_KeyGrid.RowHeadersVisible = false;
             this.m_KeyGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -164,7 +165,7 @@
             this.toolStripButton11});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(245, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(214, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // menu_Button_Hive
