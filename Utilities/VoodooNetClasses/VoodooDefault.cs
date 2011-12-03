@@ -26,7 +26,7 @@ using Microsoft.Win32;
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooDefault : VoodooObject, INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    public class VoodooDefault : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -63,19 +63,57 @@ namespace VoodooNetClasses
             info.AddValue("Config", m_Config);
         }
 
-        public override String GetID()
-        {
-            return m_DefID.ToString("D");
-        }
-
         public void FromRegistryKey(RegistryKey key)
         {
-            String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
-
-            m_DefID = new Guid(name);
-            m_Name   = key.GetValue("Name") as String;
-            m_Target = key.GetValue("Target") as String;
-            m_Config = key.GetValue("Config") as String;
+            try
+            {
+                String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
+                m_DefID = new Guid(name);
+                if (m_DefID == null)
+                {
+                    m_DefID = Guid.Empty;
+                }
+            }
+            catch (System.Exception)
+            {
+                m_DefID = Guid.Empty;
+            }
+            try
+            {
+                m_Name = key.GetValue("Name") as String;
+                if (m_Name == null)
+                {
+                    m_Name = String.Empty;
+                }
+            }
+            catch (System.Exception)
+            {
+                m_Name = String.Empty;
+            }
+            try
+            {
+                m_Target = key.GetValue("Target") as String;
+                if (m_Target == null)
+                {
+                    m_Target = String.Empty;
+                }
+            }
+            catch (System.Exception)
+            {
+                m_Target = String.Empty;
+            }
+            try
+            {
+                m_Config = key.GetValue("Config") as String;
+                if (m_Config == null)
+                {
+                    m_Config = String.Empty;
+                }
+            }
+            catch (System.Exception)
+            {
+                m_Config = String.Empty;
+            }
         }
 
         public void ToRegistryKey(RegistryKey parent)

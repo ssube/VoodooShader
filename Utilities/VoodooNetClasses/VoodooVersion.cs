@@ -19,12 +19,43 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace VoodooNetClasses
 {
-    class VoodooVersion
+    class VoodooVersion : ISerializable
     {
+        String m_Name;
+        VoodooRegistry m_Remove, m_Create;
 
+        public VoodooVersion()
+        {
+            m_Name = String.Empty;
+            m_Remove = new VoodooRegistry();
+            m_Create = new VoodooRegistry();
+        }
+
+        public VoodooVersion(String Name, VoodooRegistry Remove, VoodooRegistry Create)
+        {
+            m_Name = Name;
+            m_Remove  = Remove;
+            m_Create  = Create;
+        }
+
+        protected VoodooVersion(SerializationInfo info, StreamingContext context)
+        {
+            m_Name = info.GetString("Name");
+            m_Remove = (VoodooRegistry)info.GetValue("Remove", typeof(VoodooRegistry));
+            m_Create = (VoodooRegistry)info.GetValue("Create", typeof(VoodooRegistry));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Name", m_Name);
+            info.AddValue("Remove", m_Remove);
+            info.AddValue("Create", m_Create);
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using VoodooNetClasses;
 
 namespace VoodooGUI
@@ -30,15 +31,15 @@ namespace VoodooGUI
         private InstallGlobalHook m_InstallFunc;
         private RemoveGlobalHook m_RemoveFunc;
 
-        private HookList m_Hooks;
+        private List<VoodooHook> m_Hooks;
 
         public MainForm()
         {
             InitializeComponent();
 
-            m_Hooks = new HookList();
+            LoadHooks();
             cHook_Table.AutoGenerateColumns = false;
-            cHook_Table.DataSource = m_Hooks.List;
+            cHook_Table.DataSource = m_Hooks;
 
             m_NativeModule = LoadLibrary("Voodoo_HookStub.dll");
             if (m_NativeModule != IntPtr.Zero)
@@ -71,12 +72,14 @@ namespace VoodooGUI
 
         private void Menu_Hook_Add(object sender, EventArgs e)
         {
-            m_Hooks.List.Add(new VoodooHook(false, String.Empty, String.Empty, String.Empty));
+            m_Hooks.Add(new VoodooHook(false, String.Empty, String.Empty, String.Empty));
+            cHook_Table.Refresh();
         }
 
         private void Menu_Hook_Remove(object sender, EventArgs e)
         {
-            cHook_Table.Rows.Remove(cHook_Table.SelectedRows[0]);
+            m_Hooks.RemoveAt(cHook_Table.SelectedRows[0].Index);
+            cHook_Table.Refresh();
         }
 
         private void SyncHookList()
@@ -164,7 +167,35 @@ namespace VoodooGUI
             cHook_Table.SelectedRows[0].Cells["colTarget"].Value = cHook_Target.Text;
             cHook_Table.SelectedRows[0].Cells["colConfig"].Value = cHook_Config.Text;
 
-            m_Hooks.Commit();
+            CommitHooks();
+        }
+
+        private void LoadHooks()
+        {
+            m_Hooks = new List<VoodooHook>();
+
+            RegistryKey hookRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader\Hooks", RegistryKeyPermissionCheck.ReadSubTree);
+            foreach (String hooKeyName in hookRoot.GetSubKeyNames())
+            {
+                RegistryKey hookKey = hookRoot.OpenSubKey(hooKeyName);
+                VoodooHook hook = new VoodooHook();
+                hook.FromRegistryKey(hookKey);
+                m_Hooks.Add(hook);
+            }
+        }
+
+        private void CommitHooks()
+        {
+            RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader", RegistryKeyPermissionCheck.ReadWriteSubTree);
+            if (voodooRoot.OpenSubKey("Hooks") != null)
+            {
+                voodooRoot.DeleteSubKeyTree("Hooks");
+            }
+            RegistryKey hookRoot = voodooRoot.CreateSubKey("Hooks");
+            foreach (VoodooHook hook in m_Hooks)
+            {
+                hook.ToRegistryKey(hookRoot);
+            }
         }
     }
 }

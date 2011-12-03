@@ -63,43 +63,54 @@ namespace VoodooNetClasses
             info.AddValue("Props",   m_Props);
         }
 
-        public String GetID()
-        {
-            return m_ClassID.ToString("D");
-        }
-
         public void FromRegistryKey(RegistryKey key)
         {
             try
             {
                 String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
                 m_ClassID = new Guid(name);
+                if (m_ClassID == null)
+                {
+                    m_ClassID = Guid.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_ClassID = Guid.Empty;
             }
             try
             {
                 m_LibID = new Guid(key.GetValue("LibID") as String);
+                if (m_LibID == null)
+                {
+                    m_LibID = Guid.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_LibID = Guid.Empty;
             }
             try
             {
                 m_Name = key.GetValue("Name") as String;
+                if (m_Name == null)
+                {
+                    m_Name = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Name = String.Empty;
             }
             try
             {
                 m_Props = key.GetValue("Props") as String;
+                if (m_Props == null)
+                {
+                    m_Props = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Props = String.Empty;
             }

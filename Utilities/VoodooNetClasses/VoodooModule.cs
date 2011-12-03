@@ -71,59 +71,78 @@ namespace VoodooNetClasses
         }
 
         // IVoodooRegistryObject
-        public String GetID()
-        {
-            return m_LibID.ToString("D");
-        }
-
         public void FromRegistryKey(RegistryKey key)
         {
             try
             {
                 String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
                 m_LibID = new Guid(name);
+                if (m_LibID == null)
+                {
+                    m_LibID = Guid.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_LibID = Guid.Empty;            	
             }
             try
             {
                 m_PackID = new Guid(key.GetValue("PackID") as String);
+                if (m_PackID == null)
+                {
+                    m_PackID = Guid.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_PackID = Guid.Empty;
             }
             try
             {
                 m_Name = key.GetValue("Name") as String;
+                if (m_Name == null)
+                {
+                    m_Name = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Name = String.Empty;
             }
             try
             {
                 m_Path = key.GetValue("Path") as String;
+                if (m_Path == null)
+                {
+                    m_Path = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Path = String.Empty;            	
             }
             try
             {
                 m_Config = key.GetValue("Config") as String;
+                if (m_Config == null)
+                {
+                    m_Config = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Config = String.Empty;             	
             }
             try
             {
                 m_Props = key.GetValue("Props") as String;
+                if (m_Props == null)
+                {
+                    m_Props = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Props = String.Empty;             	
             }

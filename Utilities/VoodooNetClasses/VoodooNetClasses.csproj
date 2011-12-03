@@ -33,7 +33,8 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>voodoo-support.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -42,9 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HookList.cs" />
     <Compile Include="IVoodooRegistryObject.cs" />
-    <Compile Include="ManifestHandler.cs" />
     <Compile Include="NativeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VoodooClass.cs" />
@@ -52,19 +51,15 @@
     <Compile Include="VoodooHash.cs" />
     <Compile Include="VoodooHook.cs" />
     <Compile Include="VoodooModule.cs" />
-    <Compile Include="VoodooObject.cs" />
     <Compile Include="VoodooPackage.cs" />
     <Compile Include="VoodooRegistry.cs" />
     <Compile Include="VoodooRemote.cs" />
     <Compile Include="VoodooVersion.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="voodoo-support.ico" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

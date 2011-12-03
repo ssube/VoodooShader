@@ -26,7 +26,7 @@ using Microsoft.Win32;
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooRemote : VoodooObject, INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    public class VoodooRemote : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -53,14 +53,20 @@ namespace VoodooNetClasses
             info.AddValue("Uri", m_Uri);
         }
 
-        public override String GetID()
-        {
-            return m_Uri;
-        }
-
         public void FromRegistryKey(RegistryKey key)
         {
-            m_Uri = key.GetValue("Uri") as String;
+            try
+            {
+                m_Uri = key.GetValue("Uri") as String;
+                if (m_Uri == null)
+                {
+                    m_Uri = String.Empty;
+                }
+            }
+            catch (Exception)
+            {
+                m_Uri = String.Empty;
+            }
         }
 
         public void ToRegistryKey(RegistryKey parent)

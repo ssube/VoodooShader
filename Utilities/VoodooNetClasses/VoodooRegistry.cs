@@ -40,6 +40,9 @@ namespace VoodooNetClasses
 
         public VoodooRegistry()
         {
+            m_Path = String.Empty;
+            m_BinPrefix = String.Empty;
+
             m_Remotes = new List<VoodooRemote>();
             m_Packages = new List<VoodooPackage>();
             m_Modules = new List<VoodooModule>();
@@ -75,26 +78,29 @@ namespace VoodooNetClasses
             info.AddValue("Defaults", m_Defaults);
         }
 
-        public String GetID()
-        {
-            return "Voodoo Shader";
-        }
-
         public void FromRegistryKey(RegistryKey key)
         {
             try
             {
                 m_Path = key.GetValue("Path") as String;
+                if (m_Path == null)
+                {
+                    m_Path = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Path = String.Empty;	
             }
             try
             {
                 m_BinPrefix = key.GetValue("BinPrefix") as String;
+                if (m_BinPrefix == null)
+                {
+                    m_BinPrefix = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_BinPrefix = String.Empty;	            	
             }
@@ -138,8 +144,8 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            key.SetValue("Path", m_Path);
-            key.SetValue("BinPrefix", m_BinPrefix);
+            key.SetValue("Path", m_Path, RegistryValueKind.String);
+            key.SetValue("BinPrefix", m_BinPrefix, RegistryValueKind.String);
 
             ToRegistryKey_MakeList(key, "Remotes", ref m_Remotes);
             ToRegistryKey_MakeList(key, "Packages", ref m_Packages);

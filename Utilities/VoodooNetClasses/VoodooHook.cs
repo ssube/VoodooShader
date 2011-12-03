@@ -26,7 +26,7 @@ using Microsoft.Win32;
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooHook : VoodooObject, INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    public class VoodooHook : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -63,42 +63,49 @@ namespace VoodooNetClasses
             info.AddValue("Config", m_Config);
         }
 
-        public override String GetID()
-        {
-            return m_Name;
-        }
-
         public void FromRegistryKey(RegistryKey key)
         {
             try
             {
                 m_Active = Convert.ToBoolean(key.GetValue("Active") as String);
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Active = false;
             }
             try
             {
                 m_Name = key.GetValue("Name") as String;
+                if (m_Name == null)
+                {
+                    m_Name = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Name = String.Empty;
             }
             try
             {
                 m_Target = key.GetValue("Target") as String;
+                if (m_Target == null)
+                {
+                    m_Target = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Target = String.Empty;            	
             }
             try
             {
                 m_Config = key.GetValue("Config") as String;
+                if (m_Config == null)
+                {
+                    m_Config = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Config = String.Empty;            	
             }
@@ -106,7 +113,7 @@ namespace VoodooNetClasses
 
         public void ToRegistryKey(RegistryKey parent)
         {
-            String keyName = new Guid().ToString("D");
+            String keyName = Guid.NewGuid().ToString("D");
 
             RegistryKey key = parent.OpenSubKey(keyName);
             if (key != null)

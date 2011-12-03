@@ -26,7 +26,7 @@ using Microsoft.Win32;
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooPackage : VoodooObject, INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    public class VoodooPackage : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -67,51 +67,66 @@ namespace VoodooNetClasses
             info.AddValue("Props",   m_Props);
         }
 
-        public override String GetID()
-        {
-            return m_PackID.ToString("D");
-        }
-
         public void FromRegistryKey(RegistryKey key)
         {
             try
             {
                 String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
                 m_PackID = new Guid(name);
+                if (m_PackID == null)
+                {
+                    m_PackID = Guid.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_PackID = Guid.Empty;
             }
             try
             {
                 m_Name = key.GetValue("Name") as String;
+                if (m_Name == null)
+                {
+                    m_Name = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Name = String.Empty;
             }
             try
             {
                 m_Version = key.GetValue("Version") as String;
+                if (m_Version == null)
+                {
+                    m_Version = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Version = String.Empty;
             }
             try
             {
                 m_Date = Convert.ToDateTime(key.GetValue("Date") as String);
+                if (m_Date == null)
+                {
+                    m_Date = DateTime.MinValue;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Date = DateTime.MinValue;
             }
             try
             {
                 m_Props = key.GetValue("Props") as String;
+                if (m_Props == null)
+                {
+                    m_Props = String.Empty;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 m_Props = String.Empty;            	
             }
