@@ -37,6 +37,8 @@ namespace VoodooGUI
         {
             InitializeComponent();
 
+            // Do the installation check
+
             LoadHooks();
             cHook_Table.AutoGenerateColumns = false;
             cHook_Table.DataSource = m_Hooks;
@@ -80,10 +82,13 @@ namespace VoodooGUI
 
         private void Menu_Hook_Remove(object sender, EventArgs e)
         {
-            m_Hooks.RemoveAt(cHook_Table.SelectedRows[0].Index);
+            if (cHook_Table.SelectedRows.Count > 0)
+            {
+                m_Hooks.RemoveAt(cHook_Table.SelectedRows[0].Index);
 
-            cHook_Table.DataSource = null;
-            cHook_Table.DataSource = m_Hooks;
+                cHook_Table.DataSource = null;
+                cHook_Table.DataSource = m_Hooks;
+            }
         }
 
         private void Form_OnResize(object sender, EventArgs e)
@@ -137,30 +142,11 @@ namespace VoodooGUI
 
         private void MainForm_Close(object sender, FormClosedEventArgs e)
         {
+            CommitHooks();
+
             if (m_GlobalHook != IntPtr.Zero)
             {
                 Menu_Hook_Disable(null, null);
-            }
-        }
-
-        private void RowChange(object sender, DataGridViewCellEventArgs e)
-        {
-            cHook_Active.Checked = (bool)cHook_Table.Rows[e.RowIndex].Cells["colActive"].Value;
-            cHook_Name.Text   = cHook_Table.Rows[e.RowIndex].Cells["colName"].Value as String;
-            cHook_Target.Text = cHook_Table.Rows[e.RowIndex].Cells["colTarget"].Value as String;
-            cHook_Config.Text = cHook_Table.Rows[e.RowIndex].Cells["colConfig"].Value as String;
-        }
-
-        private void SaveHookDetails(object sender, EventArgs e)
-        {
-            if (cHook_Table.SelectedRows.Count > 0)
-            {
-                cHook_Table.SelectedRows[0].Cells["colActive"].Value = cHook_Active.Checked;
-                cHook_Table.SelectedRows[0].Cells["colName"].Value = cHook_Name.Text;
-                cHook_Table.SelectedRows[0].Cells["colTarget"].Value = cHook_Target.Text;
-                cHook_Table.SelectedRows[0].Cells["colConfig"].Value = cHook_Config.Text;
-
-                CommitHooks();
             }
         }
 
@@ -169,22 +155,31 @@ namespace VoodooGUI
             m_Hooks = new List<VoodooHook>();
 
             RegistryKey hookRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader\Hooks", RegistryKeyPermissionCheck.ReadSubTree);
-            foreach (String hooKeyName in hookRoot.GetSubKeyNames())
+            if (hookRoot != null)
             {
-                RegistryKey hookKey = hookRoot.OpenSubKey(hooKeyName);
-                VoodooHook hook = new VoodooHook();
-                hook.FromRegistryKey(hookKey);
-                m_Hooks.Add(hook);
+                foreach (String hooKeyName in hookRoot.GetSubKeyNames())
+                {
+                    RegistryKey hookKey = hookRoot.OpenSubKey(hooKeyName);
+                    VoodooHook hook = new VoodooHook();
+                    hook.FromRegistryKey(hookKey);
+                    m_Hooks.Add(hook);
+                }
             }
         }
 
         private void CommitHooks()
         {
             RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader", RegistryKeyPermissionCheck.ReadWriteSubTree);
+            if (voodooRoot == null)
+            {
+                voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
+            }
+
             if (voodooRoot.OpenSubKey("Hooks") != null)
             {
                 voodooRoot.DeleteSubKeyTree("Hooks");
             }
+
             RegistryKey hookRoot = voodooRoot.CreateSubKey("Hooks");
             foreach (VoodooHook hook in m_Hooks)
             {
@@ -192,26 +187,35 @@ namespace VoodooGUI
             }
         }
 
-        private void FindTarget(object sender, EventArgs e)
+        private void CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dOpenFile.FilterIndex = 0;
-            dOpenFile.Title = "Select Target Program";
-
-            if (dOpenFile.ShowDialog() == DialogResult.OK)
+            if (cHook_Table.Columns[e.ColumnIndex] == col_TargetFind)
             {
-                cHook_Target.Text = dOpenFile.FileName;
+                dOpenFile.FilterIndex = 0;
+                dOpenFile.Title = "Select Target Program";
+
+                if (dOpenFile.ShowDialog() == DialogResult.OK)
+                {
+                    cHook_Table.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = dOpenFile.FileName;
+                    CommitHooks();
+                }
+            }
+            else if (cHook_Table.Columns[e.ColumnIndex] == col_ConfigFind)
+            {
+                dOpenFile.FilterIndex = 1;
+                dOpenFile.Title = "Select Config File";
+
+                if (dOpenFile.ShowDialog() == DialogResult.OK)
+                {
+                    cHook_Table.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = dOpenFile.FileName;
+                    CommitHooks();
+                }
             }
         }
 
-        private void FindConfig(object sender, EventArgs e)
+        private void CellChanged(object sender, DataGridViewCellEventArgs e)
         {
-            dOpenFile.FilterIndex = 1;
-            dOpenFile.Title = "Select Config File";
-
-            if (dOpenFile.ShowDialog() == DialogResult.OK)
-            {
-                cHook_Config.Text = dOpenFile.FileName;
-            }
+            CommitHooks();
         }
     }
 }

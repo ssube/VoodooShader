@@ -154,20 +154,26 @@ bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key)
             DWORD valueType = 0, valueSize = 1024;
             TCHAR valueBuffer[1024];
 
-            if (RegQueryValueEx(hookKey, TEXT("target"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
+            if (RegQueryValueEx(hookKey, TEXT("active"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
             {
-                FILE * pf = nullptr;
-                if (_tfopen_s(&pf, gFilePath, TEXT("a")) == 0)
+                if (valueBuffer[0] == TEXT('1') || _tcsicmp(valueBuffer, TEXT("true")) == 0)
                 {
-                    found = _tcscmp(moduleName, valueBuffer) == 0;
-                    const TCHAR * match = TEXT("!=");
-                    if (found)
+                    if (RegQueryValueEx(hookKey, TEXT("target"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
                     {
-                        match = TEXT(" == ");
+                        found = _tcscmp(moduleName, valueBuffer) == 0;
 
+                        FILE * pf = nullptr;
+                        if (_tfopen_s(&pf, gFilePath, TEXT("a")) == 0)
+                        {
+                            const TCHAR * match = TEXT("!=");
+                            if (found)
+                            {
+                                match = TEXT(" == ");
+                            }
+                            _ftprintf_s(pf, TEXT("%s %s %s\n"), moduleName, match, valueBuffer);
+                            fclose(pf);
+                        }
                     }
-                    _ftprintf_s(pf, TEXT("%s %s %s\n"), moduleName, match, valueBuffer);
-                    fclose(pf);
                 }
             }
 

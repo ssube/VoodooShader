@@ -73,18 +73,7 @@ namespace VoodooNetClasses
         {
             String keyName = VoodooHash.Hash(m_Uri);
 
-            RegistryKey key = parent.OpenSubKey(keyName);
-            if (key != null)
-            {
-                key.Close();
-                parent.DeleteSubKeyTree(keyName);
-            }
-
-            key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
-
-            key.SetValue("Uri", m_Uri);
-
-            key.Close();
+            parent.SetValue(keyName, m_Uri);
         }
 
         public String Uri

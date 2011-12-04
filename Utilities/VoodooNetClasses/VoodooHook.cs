@@ -19,6 +19,7 @@
  */
 using System;
 using System.ComponentModel;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 using Microsoft.Win32;
@@ -35,7 +36,8 @@ namespace VoodooNetClasses
 
         public VoodooHook()
         {
-
+            m_Active = false;
+            m_Name = m_Target = m_Config = String.Empty;
         }
 
         public VoodooHook(bool Active, String Name, String Target, String Config)
@@ -113,7 +115,23 @@ namespace VoodooNetClasses
 
         public void ToRegistryKey(RegistryKey parent)
         {
-            String keyName = Guid.NewGuid().ToString("N");
+            String keyName = null;
+
+            List<String> otherNames = new List<String>(parent.GetSubKeyNames());
+            int i = 0;
+            while (++i < 100)
+            {
+                if (!otherNames.Contains(i.ToString()))
+                {
+                    keyName = i.ToString();
+                    break;
+                }
+            }
+
+            if (keyName == null)
+            {
+                keyName = Guid.NewGuid().ToString("N");
+            }
 
             RegistryKey key = parent.OpenSubKey(keyName);
             if (key != null)
@@ -124,7 +142,11 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            key.SetValue("Active", m_Active.ToString().ToLower());
+            if (m_Active)
+            {
+                key.SetValue("Active", m_Active.ToString().ToLower());
+            }
+
             key.SetValue("Name",   m_Name);
             key.SetValue("Target", m_Target);
             key.SetValue("Config", m_Config);

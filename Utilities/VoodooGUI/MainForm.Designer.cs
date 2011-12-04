@@ -29,26 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.cHook_Table = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.cHook_Config = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.cHook_Name = new System.Windows.Forms.TextBox();
-            this.cHook_Target = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cHook_Active = new System.Windows.Forms.CheckBox();
+            this.colActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_TargetFind = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colConfig = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ConfigFind = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.col_ConfigEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.cMenu = new System.Windows.Forms.ToolStrip();
             this.cMenu_Hook_On = new System.Windows.Forms.ToolStripButton();
             this.cMenu_Hook_Off = new System.Windows.Forms.ToolStripButton();
@@ -64,19 +55,10 @@
             this.cMenu_Downloads = new System.Windows.Forms.ToolStripButton();
             this.cTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.dOpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.colActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colConfig = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cHook_Table)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.cMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +67,7 @@
             // 
             // toolStripContainer1.ContentPanel
             // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.cHook_Table);
             resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
             resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
             this.toolStripContainer1.Name = "toolStripContainer1";
@@ -94,27 +76,12 @@
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.cMenu);
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.splitContainer1, "splitContainer1");
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.cHook_Table);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
-            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
-            // 
             // cHook_Table
             // 
             this.cHook_Table.AllowUserToAddRows = false;
             this.cHook_Table.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.cHook_Table.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.cHook_Table.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.cHook_Table.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.cHook_Table.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cHook_Table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -122,116 +89,71 @@
             this.colActive,
             this.colName,
             this.colTarget,
-            this.colConfig});
+            this.col_TargetFind,
+            this.colConfig,
+            this.col_ConfigFind,
+            this.col_ConfigEdit});
             resources.ApplyResources(this.cHook_Table, "cHook_Table");
             this.cHook_Table.MultiSelect = false;
             this.cHook_Table.Name = "cHook_Table";
-            this.cHook_Table.ReadOnly = true;
             this.cHook_Table.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.cHook_Table.RowHeadersVisible = false;
             this.cHook_Table.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.cHook_Table.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.RowChange);
+            this.cHook_Table.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellClick);
+            this.cHook_Table.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellChanged);
             // 
-            // tableLayoutPanel1
+            // colActive
             // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.cHook_Config, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listBox1, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.cHook_Name, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cHook_Target, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cHook_Active, 2, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.colActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colActive.DataPropertyName = "Active";
+            resources.ApplyResources(this.colActive, "colActive");
+            this.colActive.Name = "colActive";
             // 
-            // label4
+            // colName
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "Name";
+            resources.ApplyResources(this.colName, "colName");
+            this.colName.Name = "colName";
             // 
-            // label3
+            // colTarget
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            this.colTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTarget.DataPropertyName = "Target";
+            this.colTarget.FillWeight = 140F;
+            resources.ApplyResources(this.colTarget, "colTarget");
+            this.colTarget.Name = "colTarget";
             // 
-            // button2
+            // col_TargetFind
             // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.FindConfig);
+            this.col_TargetFind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.col_TargetFind, "col_TargetFind");
+            this.col_TargetFind.Name = "col_TargetFind";
+            this.col_TargetFind.Text = "...";
+            this.col_TargetFind.UseColumnTextForButtonValue = true;
             // 
-            // cHook_Config
+            // colConfig
             // 
-            resources.ApplyResources(this.cHook_Config, "cHook_Config");
-            this.cHook_Config.Name = "cHook_Config";
+            this.colConfig.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colConfig.DataPropertyName = "Config";
+            resources.ApplyResources(this.colConfig, "colConfig");
+            this.colConfig.Name = "colConfig";
             // 
-            // button1
+            // col_ConfigFind
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.FindTarget);
+            this.col_ConfigFind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.col_ConfigFind, "col_ConfigFind");
+            this.col_ConfigFind.Name = "col_ConfigFind";
+            this.col_ConfigFind.Text = "...";
+            this.col_ConfigFind.UseColumnTextForButtonValue = true;
             // 
-            // listBox1
+            // col_ConfigEdit
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.listBox1, 3);
-            resources.ApplyResources(this.listBox1, "listBox1");
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Name = "listBox1";
-            // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 3);
-            this.tableLayoutPanel2.Controls.Add(this.button3, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.button4, 1, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // button3
-            // 
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.Name = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.SaveHookDetails);
-            // 
-            // button4
-            // 
-            resources.ApplyResources(this.button4, "button4");
-            this.button4.Name = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // cHook_Name
-            // 
-            resources.ApplyResources(this.cHook_Name, "cHook_Name");
-            this.cHook_Name.Name = "cHook_Name";
-            // 
-            // cHook_Target
-            // 
-            resources.ApplyResources(this.cHook_Target, "cHook_Target");
-            this.cHook_Target.Name = "cHook_Target";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
-            this.label1.Name = "label1";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // cHook_Active
-            // 
-            resources.ApplyResources(this.cHook_Active, "cHook_Active");
-            this.cHook_Active.Name = "cHook_Active";
-            this.cHook_Active.UseVisualStyleBackColor = true;
+            this.col_ConfigEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.col_ConfigEdit, "col_ConfigEdit");
+            this.col_ConfigEdit.Name = "col_ConfigEdit";
+            this.col_ConfigEdit.Text = "Edit";
+            this.col_ConfigEdit.UseColumnTextForButtonValue = true;
             // 
             // cMenu
             // 
@@ -334,39 +256,6 @@
             resources.ApplyResources(this.dOpenFile, "dOpenFile");
             this.dOpenFile.RestoreDirectory = true;
             // 
-            // colActive
-            // 
-            this.colActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colActive.DataPropertyName = "Active";
-            resources.ApplyResources(this.colActive, "colActive");
-            this.colActive.Name = "colActive";
-            this.colActive.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "Name";
-            resources.ApplyResources(this.colName, "colName");
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colTarget
-            // 
-            this.colTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTarget.DataPropertyName = "Target";
-            this.colTarget.FillWeight = 140F;
-            resources.ApplyResources(this.colTarget, "colTarget");
-            this.colTarget.Name = "colTarget";
-            this.colTarget.ReadOnly = true;
-            // 
-            // colConfig
-            // 
-            this.colConfig.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colConfig.DataPropertyName = "Config";
-            resources.ApplyResources(this.colConfig, "colConfig");
-            this.colConfig.Name = "colConfig";
-            this.colConfig.ReadOnly = true;
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -380,13 +269,7 @@
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cHook_Table)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
             this.cMenu.ResumeLayout(false);
             this.cMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -397,21 +280,6 @@
 
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStrip cMenu;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox cHook_Config;
-        private System.Windows.Forms.TextBox cHook_Target;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox cHook_Name;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripButton cMenu_Hook_Wizard;
         private System.Windows.Forms.ToolStripButton cMenu_FindGames;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -422,16 +290,18 @@
         private System.Windows.Forms.ToolStripButton cMenu_Hook_On;
         private System.Windows.Forms.ToolStripButton cMenu_Hook_Off;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.CheckBox cHook_Active;
-        private System.Windows.Forms.DataGridView cHook_Table;
         private System.Windows.Forms.ToolStripButton cMenu_Hook_Add;
         private System.Windows.Forms.ToolStripButton cMenu_Hook_Remove;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.OpenFileDialog dOpenFile;
+        private System.Windows.Forms.DataGridView cHook_Table;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colActive;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTarget;
+        private System.Windows.Forms.DataGridViewButtonColumn col_TargetFind;
         private System.Windows.Forms.DataGridViewTextBoxColumn colConfig;
+        private System.Windows.Forms.DataGridViewButtonColumn col_ConfigFind;
+        private System.Windows.Forms.DataGridViewButtonColumn col_ConfigEdit;
 
     }
 }
