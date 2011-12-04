@@ -18,6 +18,7 @@
  *   peachykeen@voodooshader.com
  */
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Microsoft.Win32;
 
@@ -159,6 +160,25 @@ namespace VoodooNetClasses
             key.SetValue("Props",  Props);
 
             key.Close();
+        }
+
+        public List<VoodooClass> GetClasses(String rootpath)
+        {
+            try
+            {
+                NativeModule native = new NativeModule(rootpath + "\\" + Path);
+                List<VoodooClass> classes = new List<VoodooClass>();
+                for (UInt32 i = 0; i < native.Count; ++i)
+                {
+                    ClassInfo info = native[i];
+                    classes.Add(new VoodooClass(info.ClassID, LibID, info.Name, String.Empty));
+                }
+                return classes;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }
