@@ -19,6 +19,8 @@
  */
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Text;
 
 namespace VoodooNetClasses
@@ -30,21 +32,49 @@ namespace VoodooNetClasses
         public VoodooManifestCache(String iPath)
         {
             Path = iPath;
-        }
 
-        public void Sync(VoodooRemote remote)
-        {
-            VoodooRemoteManifest remotemanifest = remote.GetManifest(Path);
-
-            foreach (VoodooPackage package in remotemanifest.Packages)
+            if (!Directory.Exists(Path))
             {
-                package.GetManifest(Path);
+                Directory.CreateDirectory(Path);
             }
         }
 
-        public void Sync(IEnumerable<VoodooRemote> remotes)
+        public void Sync(Remote remote)
+        {            
+            try
+            {
+                WebClient client = new WebClient();
+                String remotefile = Path + "\\remote_" + VoodooHash.Hash(remote.Uri) + ".xml";
+
+                client.DownloadFile(remote.Uri, remotefile);
+
+                RemoteManifest remotemanifest = (RemoteManifest)VoodooDeserialize.ValidateDeserialize(remotefile, typeof(RemoteManifest));
+
+                foreach (Package package in remotemanifest.Packages)
+                {
+                    try
+                    {
+                        String packagefile = Path + "\\package_" + package.PackId.ToString("N") + ".xml";
+
+                        client.DownloadFile(package.ManifestUri, packagefile);
+
+                        PackageManifest packagemanifest = (PackageManifest)VoodooDeserialize.ValidateDeserialize(packagefile, typeof(PackageManifest));
+                    }
+                    catch (System.Exception ex)
+                    {
+                        return;                    	
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                return;
+            }
+        }
+
+        public void Sync(IEnumerable<Remote> remotes)
         {
-            foreach (VoodooRemote remote in remotes)
+            foreach (Remote remote in remotes)
             {
                 Sync(remote);
             }

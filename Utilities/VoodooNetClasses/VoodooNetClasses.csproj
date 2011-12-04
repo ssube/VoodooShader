@@ -47,18 +47,8 @@
     <Compile Include="VoodooManifestCache.cs" />
     <Compile Include="NativeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VoodooClass.cs" />
-    <Compile Include="VoodooDefault.cs" />
     <Compile Include="VoodooHash.cs" />
-    <Compile Include="VoodooHook.cs" />
-    <Compile Include="VoodooMessages.cs" />
-    <Compile Include="VoodooModule.cs" />
-    <Compile Include="VoodooPackage.cs" />
-    <Compile Include="VoodooPackageManifest.cs" />
-    <Compile Include="VoodooRegistry.cs" />
-    <Compile Include="VoodooRemote.cs" />
-    <Compile Include="VoodooRemoteManifest.cs" />
-    <Compile Include="VoodooVersion.cs" />
+    <Compile Include="VoodooSchema.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

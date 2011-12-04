@@ -20,10 +20,44 @@
 using System;
 using System.Text;
 using System.Security.Cryptography;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace VoodooNetClasses
 {
-    class VoodooHash
+    public class VoodooDeserialize
+    {
+        public static object ValidateDeserialize(String filename, Type objtype)
+        {
+            // Set the validation settings.
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.ValidationType = ValidationType.Schema;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
+            settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBack);
+
+            // Create the XmlReader object.
+            XmlReader reader = XmlReader.Create(filename, settings);
+            
+            XmlSerializer manifestMaker = new XmlSerializer(objtype);
+
+            return manifestMaker.Deserialize(reader);
+        }
+
+        // Display any warnings or errors.
+        private static void ValidationCallBack(object sender, ValidationEventArgs args)
+        {
+            if (args.Severity == XmlSeverityType.Warning)
+                Console.WriteLine("\tValidation warning: " + args.Message);
+            else
+                Console.WriteLine("\tValidation error: " + args.Message);
+
+        }
+    }
+
+    public class VoodooHash
     {
         public static String Hash(String str)
         {

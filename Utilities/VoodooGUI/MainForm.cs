@@ -31,14 +31,16 @@ namespace VoodooGUI
         private InstallGlobalHook m_InstallFunc;
         private RemoveGlobalHook m_RemoveFunc;
 
-        private List<VoodooHook> m_Hooks;
+        private List<Hook> m_Hooks;
 
         public MainForm()
         {
             InitializeComponent();
 
             // Do the installation check
-            VoodooRemote home = new VoodooRemote("Home", "http://www.voodooshader.com/manifests/example/ExampleRemoteManifest.xml");
+            Remote home = new Remote();
+            home.Name = "Home";
+            home.Uri = "http://www.voodooshader.com/manifests/example/ExampleRemoteManifest.xml";
             VoodooManifestCache cache = new VoodooManifestCache(".\\manifest_cache\\");
             cache.Sync(home);
 
