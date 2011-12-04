@@ -47,8 +47,8 @@ namespace VoodooGUI
             {
                 m_InstallFunc = (InstallGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "InstallGlobalHook"), typeof(InstallGlobalHook));
                 m_RemoveFunc = (RemoveGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "RemoveGlobalHook"), typeof(RemoveGlobalHook));
-                Menu_Hook_Enable(null, null);
             }
+            Menu_Hook_Enable(null, null);
         }
 
         /// <summary>
@@ -134,6 +134,11 @@ namespace VoodooGUI
                     cMenu_Hook_On.Visible = true;
                 }
             }
+            else
+            {
+                cMenu_Hook_Off.Visible = true;
+                cMenu_Hook_On.Visible = false;
+            }
         }
 
         private void Menu_Hook_Disable(object sender, EventArgs e)
@@ -142,9 +147,10 @@ namespace VoodooGUI
             {
                 m_RemoveFunc(m_GlobalHook);
                 m_GlobalHook = IntPtr.Zero;
-                cMenu_Hook_Off.Visible = true;
-                cMenu_Hook_On.Visible = false;
             }
+
+            cMenu_Hook_Off.Visible = true;
+            cMenu_Hook_On.Visible = false;
         }
 
         private void MainForm_Close(object sender, FormClosedEventArgs e)
