@@ -24,12 +24,14 @@ using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    class VoodooRegistry
+    public class VoodooRegistry
     {
         private static char[] ArrayDelims = { ';' };
 
+        public static char ArraysDelim { get { return ArrayDelims[0]; } }
+
         #region Write Methods
-        static void Write(GlobalRegistry full)
+        public static void Write(GlobalRegistry full)
         {
             if (Registry.CurrentUser.OpenSubKey(@"Software\VoodooShader") != null)
             {
@@ -52,7 +54,7 @@ namespace VoodooNetClasses
             root.Close();
         }
         #region Remotes
-        static void Write(Remote[] remotes, RegistryKey root)
+        public static void Write(IEnumerable<Remote> remotes, RegistryKey root)
         {
             try
             {
@@ -67,11 +69,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing remotes.", exc);
+                throw new Exception("Error writing remotes: " + exc.Message, exc);
             }
         }
 
-        static void Write(Remote remote, RegistryKey remoteKey)
+        public static void Write(Remote remote, RegistryKey remoteKey)
         {
             try
             {
@@ -85,7 +87,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Packages
-        static void Write(Package[] packages, RegistryKey root)
+        public static void Write(IEnumerable<Package> packages, RegistryKey root)
         {
             try
             {
@@ -100,11 +102,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing packages.", exc);
+                throw new Exception("Error writing packages: " + exc.Message, exc);
             }
         }
 
-        static void Write(Package package, RegistryKey packageKey)
+        public static void Write(Package package, RegistryKey packageKey)
         {
             try
             {
@@ -119,7 +121,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Modules
-        static void Write(Module[] modules, RegistryKey root)
+        public static void Write(IEnumerable<Module> modules, RegistryKey root)
         {
             try
             {
@@ -134,11 +136,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing modules.", exc);
+                throw new Exception("Error writing modules: " + exc.Message, exc);
             }
         }
 
-        static void Write(Module module, RegistryKey moduleKey)
+        public static void Write(Module module, RegistryKey moduleKey)
         {
             try
             {
@@ -154,7 +156,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Classes
-        static void Write(Class[] classes, RegistryKey root)
+        public static void Write(IEnumerable<Class> classes, RegistryKey root)
         {
             try
             {
@@ -169,11 +171,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing classes.", exc);
+                throw new Exception("Error writing classes: " + exc.Message, exc);
             }
         }
 
-        static void Write(Class vclass, RegistryKey classKey)
+        public static void Write(Class vclass, RegistryKey classKey)
         {
             try
             {
@@ -187,7 +189,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Hooks
-        static void Write(Hook[] hooks, RegistryKey root)
+        public static void Write(IEnumerable<Hook> hooks, RegistryKey root)
         {
             try
             {
@@ -203,11 +205,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing hooks.", exc);
+                throw new Exception("Error writing hooks: " + exc.Message, exc);
             }
         }
 
-        static void Write(Hook hook, RegistryKey hookKey)
+        public static void Write(Hook hook, RegistryKey hookKey)
         {
             try
             {
@@ -222,7 +224,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Defaults
-        static void Write(Default[] defaults, RegistryKey root)
+        public static void Write(IEnumerable<Default> defaults, RegistryKey root)
         {
             try
             {
@@ -237,11 +239,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing defaults.", exc);
+                throw new Exception("Error writing defaults: " + exc.Message, exc);
             }
         }
 
-        static void Write(Default vdefault, RegistryKey defaultKey)
+        public static void Write(Default vdefault, RegistryKey defaultKey)
         {
             try
             {
@@ -265,7 +267,7 @@ namespace VoodooNetClasses
         #endregion
 
         #region Read Methods
-        static GlobalRegistry Read()
+        public static GlobalRegistry Read()
         {
             GlobalRegistry full = new GlobalRegistry();
 
@@ -285,7 +287,7 @@ namespace VoodooNetClasses
             return full;
         }
         #region Remotes
-        static List<Remote> ReadRemotes(RegistryKey root)
+        public static List<Remote> ReadRemotes(RegistryKey root)
         {
             try
             {
@@ -300,11 +302,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading remotes.", exc);
+                throw new Exception("Error reading remotes: " + exc.Message, exc);
             }
         }
 
-        static Remote ReadRemote(RegistryKey remoteKey)
+        public static Remote ReadRemote(RegistryKey remoteKey)
         {
             try
             {
@@ -322,7 +324,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Packages
-        static List<Package> ReadPackages(RegistryKey root)
+        public static List<Package> ReadPackages(RegistryKey root)
         {
             try
             {
@@ -337,11 +339,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading packages.", exc);
+                throw new Exception("Error reading packages: " + exc.Message, exc);
             }
         }
 
-        static Package ReadPackage(RegistryKey packageKey)
+        public static Package ReadPackage(RegistryKey packageKey)
         {
             try
             {
@@ -362,7 +364,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Modules
-        static List<Module> ReadModules(RegistryKey root)
+        public static List<Module> ReadModules(RegistryKey root)
         {
             try
             {
@@ -377,11 +379,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading modules.", exc);
+                throw new Exception("Error reading modules: " + exc.Message, exc);
             }
         }
 
-        static Module ReadModule(RegistryKey moduleKey)
+        public static Module ReadModule(RegistryKey moduleKey)
         {
             try
             {
@@ -403,7 +405,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Classes
-        static List<Class> ReadClasses(RegistryKey root)
+        public static List<Class> ReadClasses(RegistryKey root)
         {
             try
             {
@@ -418,11 +420,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading classes.", exc);
+                throw new Exception("Error reading classes: " + exc.Message, exc);
             }
         }
 
-        static Class ReadClass(RegistryKey ClassKey)
+        public static Class ReadClass(RegistryKey ClassKey)
         {
             try
             {
@@ -442,7 +444,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Hooks
-        static List<Hook> ReadHooks(RegistryKey root)
+        public static List<Hook> ReadHooks(RegistryKey root)
         {
             try
             {
@@ -457,11 +459,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading hooks.", exc);
+                throw new Exception("Error reading hooks: " + exc.Message, exc);
             }
         }
 
-        static Hook ReadHook(RegistryKey HookKey)
+        public static Hook ReadHook(RegistryKey HookKey)
         {
             try
             {
@@ -481,7 +483,7 @@ namespace VoodooNetClasses
         }
         #endregion
         #region Defaults
-        static List<Default> ReadDefaults(RegistryKey root)
+        public static List<Default> ReadDefaults(RegistryKey root)
         {
             try
             {
@@ -496,11 +498,11 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading defaults.", exc);
+                throw new Exception("Error reading defaults: " + exc.Message, exc);
             }
         }
 
-        static Default ReadDefault(RegistryKey DefaultKey)
+        public static Default ReadDefault(RegistryKey DefaultKey)
         {
             try
             {

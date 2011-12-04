@@ -38,12 +38,6 @@ namespace VoodooGUI
             InitializeComponent();
 
             // Do the installation check
-            Remote home = new Remote();
-            home.Name = "Home";
-            home.Uri = "http://www.voodooshader.com/manifests/example/ExampleRemoteManifest.xml";
-            VoodooManifestCache cache = new VoodooManifestCache(".\\manifest_cache\\");
-            cache.Sync(home);
-
             LoadHooks();
             cHook_Table.AutoGenerateColumns = false;
             cHook_Table.DataSource = m_Hooks;
@@ -79,20 +73,28 @@ namespace VoodooGUI
 
         private void Menu_Hook_Add(object sender, EventArgs e)
         {
-            m_Hooks.Add(new VoodooHook(false, String.Empty, String.Empty, String.Empty));
+            Hook hook = new Hook();
+            hook.Active = false;
+            hook.Name = hook.Target = hook.Config = String.Empty;
 
+            cHook_Table.EndEdit();
+            this.BindingContext[cHook_Table.DataSource].SuspendBinding();
+            m_Hooks.Add(hook);
             cHook_Table.DataSource = null;
             cHook_Table.DataSource = m_Hooks;
+            this.BindingContext[cHook_Table.DataSource].ResumeBinding();
         }
 
         private void Menu_Hook_Remove(object sender, EventArgs e)
         {
             if (cHook_Table.SelectedRows.Count > 0)
             {
+                cHook_Table.EndEdit();
+                this.BindingContext[cHook_Table.DataSource].SuspendBinding();
                 m_Hooks.RemoveAt(cHook_Table.SelectedRows[0].Index);
-
                 cHook_Table.DataSource = null;
                 cHook_Table.DataSource = m_Hooks;
+                this.BindingContext[cHook_Table.DataSource].ResumeBinding();
             }
         }
 
@@ -157,43 +159,55 @@ namespace VoodooGUI
 
         private void LoadHooks()
         {
-            m_Hooks = new List<VoodooHook>();
-
-            RegistryKey hookRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader\Hooks", RegistryKeyPermissionCheck.ReadSubTree);
-            if (hookRoot != null)
+            try
             {
-                foreach (String hooKeyName in hookRoot.GetSubKeyNames())
+                RegistryKey hookRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader\Hooks", RegistryKeyPermissionCheck.ReadSubTree);
+                if (hookRoot != null)
                 {
-                    RegistryKey hookKey = hookRoot.OpenSubKey(hooKeyName);
-                    VoodooHook hook = new VoodooHook();
-                    hook.FromRegistryKey(hookKey);
-                    m_Hooks.Add(hook);
+                    m_Hooks = VoodooRegistry.ReadHooks(hookRoot);
+                    hookRoot.Close();
                 }
+                else
+                {
+                    m_Hooks = new List<Hook>();
+                }
+            }
+            catch (System.Exception exc)
+            {
+                System.Windows.Forms.MessageBox.Show(exc.Message, "Error Reading Hooks", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                m_Hooks = new List<Hook>();
             }
         }
 
         private void CommitHooks()
         {
-            RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader", RegistryKeyPermissionCheck.ReadWriteSubTree);
-            if (voodooRoot == null)
+            try
             {
-                voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
-            }
+                RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader", RegistryKeyPermissionCheck.ReadWriteSubTree);
+                if (voodooRoot == null)
+                {
+                    voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
+                }
 
-            if (voodooRoot.OpenSubKey("Hooks") != null)
-            {
-                voodooRoot.DeleteSubKeyTree("Hooks");
-            }
+                if (voodooRoot.OpenSubKey("Hooks") != null)
+                {
+                    voodooRoot.DeleteSubKeyTree("Hooks");
+                }
 
-            RegistryKey hookRoot = voodooRoot.CreateSubKey("Hooks");
-            foreach (VoodooHook hook in m_Hooks)
+                VoodooRegistry.Write(m_Hooks, voodooRoot);
+
+                voodooRoot.Close();
+            }
+            catch (System.Exception exc)
             {
-                hook.ToRegistryKey(hookRoot);
+                System.Windows.Forms.MessageBox.Show(exc.Message, "Error Writing Hooks", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
             if (cHook_Table.Columns[e.ColumnIndex] == col_TargetFind)
             {
                 dOpenFile.FilterIndex = 0;
@@ -220,6 +234,8 @@ namespace VoodooGUI
 
         private void CellChanged(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
             CommitHooks();
         }
     }

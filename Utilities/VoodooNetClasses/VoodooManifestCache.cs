@@ -60,15 +60,15 @@ namespace VoodooNetClasses
 
                         PackageManifest packagemanifest = (PackageManifest)VoodooXml.ValidateObject(packagefile, typeof(PackageManifest));
                     }
-                    catch (System.Exception ex)
+                    catch (System.Exception exc)
                     {
-                        return;                    	
+                        throw new Exception(String.Format("Error syncing manifest for package '{0}'.", package.PackId), exc);                   	
                     }
                 }
             }
             catch (Exception exc)
             {
-                return;
+                throw new Exception("Error syncing manifests.", exc);
             }
         }
 
