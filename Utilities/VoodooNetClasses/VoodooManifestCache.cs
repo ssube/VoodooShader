@@ -48,7 +48,7 @@ namespace VoodooNetClasses
 
                 client.DownloadFile(remote.Uri, remotefile);
 
-                RemoteManifest remotemanifest = (RemoteManifest)VoodooDeserialize.ValidateDeserialize(remotefile, typeof(RemoteManifest));
+                RemoteManifest remotemanifest = (RemoteManifest)VoodooXml.ValidateObject(remotefile, typeof(RemoteManifest));
 
                 foreach (Package package in remotemanifest.Packages)
                 {
@@ -58,7 +58,7 @@ namespace VoodooNetClasses
 
                         client.DownloadFile(package.ManifestUri, packagefile);
 
-                        PackageManifest packagemanifest = (PackageManifest)VoodooDeserialize.ValidateDeserialize(packagefile, typeof(PackageManifest));
+                        PackageManifest packagemanifest = (PackageManifest)VoodooXml.ValidateObject(packagefile, typeof(PackageManifest));
                     }
                     catch (System.Exception ex)
                     {

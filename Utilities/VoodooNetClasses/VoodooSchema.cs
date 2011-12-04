@@ -197,7 +197,7 @@ namespace VoodooNetClasses
     {
         private Guid classIdField;
         private string nameField;
-        private string moduleField;
+        private Guid moduleField;
         public Guid ClassId
         {
             get
@@ -220,7 +220,7 @@ namespace VoodooNetClasses
                 this.nameField = value;
             }
         }
-        public string Module
+        public Guid Module
         {
             get
             {
@@ -270,7 +270,7 @@ namespace VoodooNetClasses
         private string nameField;
         private string pathField;
         private string configField;
-        private string packageField;
+        private Guid packageField;
         public Guid LibId
         {
             get
@@ -315,7 +315,7 @@ namespace VoodooNetClasses
                 this.configField = value;
             }
         }
-        public string Package
+        public Guid Package
         {
             get
             {
