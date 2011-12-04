@@ -25,7 +25,7 @@ namespace VoodooRegedit
             RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader");
             if (voodooRoot == null)
             {
-                voodooRoot = hive.CreateSubKey(@"SOFTWARE\VoodooShader");
+                voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
                 if (voodooRoot == null)
                 {
                     MessageBox.Show("Unable to open or create Voodoo root key.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -293,7 +293,7 @@ namespace VoodooRegedit
                         {
                             ClassInfo classinfo = module[i];
 
-                            m_Registry.Classes.Add(new VoodooClass(classinfo.ClsID, version.LibID, classinfo.Name, String.Empty));
+                            m_Registry.Classes.Add(new VoodooClass(classinfo.ClassID, version.LibID, classinfo.Name, String.Empty));
                         }
 
                         // Export again

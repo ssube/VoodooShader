@@ -42,36 +42,6 @@ namespace VoodooNetClasses
             Defaults = new List<VoodooDefault>();
             Files = new List<String>();
         }
-
-        public void AddModules(VoodooModule[] modules)
-        {
-            Modules.AddRange(modules);
-        }
-
-        public void AddClasses(VoodooDefault[] defaults)
-        {
-            Defaults.AddRange(defaults);
-        }
-
-        public void AddFiles(String[] files)
-        {
-            Files.AddRange(files);
-        }
-
-        public void RemoveModules(Predicate<VoodooModule> filter)
-        {
-            Modules.RemoveAll(filter);
-        }
-
-        public void RemoveClasses(Predicate<VoodooDefault> filter)
-        {
-            Defaults.RemoveAll(filter);
-        }
-
-        public void RemoveFiles(Predicate<String> filter)
-        {
-            Files.RemoveAll(filter);
-        }
     }
 
     [XmlType("Version", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]

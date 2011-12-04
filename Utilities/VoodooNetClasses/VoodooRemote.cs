@@ -40,9 +40,10 @@ namespace VoodooNetClasses
             Uri = String.Empty;
         }
 
-        public VoodooRemote(String iUri)
+        public VoodooRemote(String iName, String iUri)
         {
-            Uri = Uri;
+            Name = iName;
+            Uri = iUri;
         }
 
         public void FromRegistryKey(RegistryKey key)

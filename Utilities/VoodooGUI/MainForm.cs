@@ -38,6 +38,9 @@ namespace VoodooGUI
             InitializeComponent();
 
             // Do the installation check
+            VoodooRemote home = new VoodooRemote("Home", "http://www.voodooshader.com/manifests/example/ExampleRemoteManifest.xml");
+            VoodooManifestCache cache = new VoodooManifestCache(".\\manifest_cache\\");
+            cache.Sync(home);
 
             LoadHooks();
             cHook_Table.AutoGenerateColumns = false;

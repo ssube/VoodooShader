@@ -32,16 +32,21 @@ namespace VoodooNetClasses
             Path = iPath;
         }
 
+        public void Sync(VoodooRemote remote)
+        {
+            VoodooRemoteManifest remotemanifest = remote.GetManifest(Path);
+
+            foreach (VoodooPackage package in remotemanifest.Packages)
+            {
+                package.GetManifest(Path);
+            }
+        }
+
         public void Sync(IEnumerable<VoodooRemote> remotes)
         {
             foreach (VoodooRemote remote in remotes)
             {
-                VoodooRemoteManifest remotemanifest = remote.GetManifest(Path);
-
-                foreach (VoodooPackage package in remotemanifest.Packages)
-                {
-                    package.GetManifest(Path);
-                }
+                Sync(remote);
             }
         }
     }
