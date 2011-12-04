@@ -54,7 +54,7 @@ namespace VoodooNetClasses
                 {
                     try
                     {
-                        String packagefile = Path + "\\package_" + package.PackId.ToString("N") + ".xml";
+                        String packagefile = Path + "\\package_" + package.PackId.ToString() + ".xml";
 
                         client.DownloadFile(package.ManifestUri, packagefile);
 
