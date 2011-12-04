@@ -30,10 +30,10 @@ namespace VoodooNetClasses
         public Guid ClassID;
         public String Name;
 
-        public ClassInfo(Guid ClassID, String name)
+        public ClassInfo(Guid iClassID, String iName)
         {
-            ClassID = ClassID;
-            Name = name;
+            ClassID = iClassID;
+            Name = iName;
         }
     }
 

@@ -18,6 +18,7 @@
  *   peachykeen@voodooshader.com
  */
 using System;
+using System.IO;
 using System.Net;
 using System.Xml.Serialization;
 using Microsoft.Win32;
@@ -74,7 +75,9 @@ namespace VoodooNetClasses
             WebClient client = new WebClient();
             client.DownloadFile(Uri, filename);
 
-            return new VoodooRemoteManifest(filename);
+            XmlSerializer manifestMaker = new XmlSerializer(typeof(VoodooRemoteManifest));
+
+            return (VoodooRemoteManifest)manifestMaker.Deserialize(new StringReader(filename));
         }
     }
 }

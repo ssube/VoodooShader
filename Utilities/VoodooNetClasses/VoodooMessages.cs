@@ -23,17 +23,42 @@ using System.Xml.Serialization;
 
 namespace VoodooNetClasses
 {
-    public struct VoodooMessageSet
+    [XmlType("MessageSet", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("MessageSet", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooMessageSet
     {
-        String Pre, Post;
+        [XmlAttribute("id", DataType = "language")]
+        public String Language { get; set; }
+
+        [XmlElement("Pre")]
+        public String Pre { get; set; }
+        
+        [XmlElement("Post")]
+        public String Post { get; set; }
+
+        public VoodooMessageSet()
+        {
+            Language = Pre = Post = String.Empty;
+        }
+
+        public VoodooMessageSet(String iLanguage, String iPre, String iPost)
+        {
+            Language = iLanguage;
+            Pre = iPre;
+            Post = iPost;
+        }
     }
 
-    public class VoodooMessages
+    [XmlType("TranslationSet", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("TranslationSet", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooTranslationSet
     {
-        public Dictionary<String, VoodooMessageSet> Languages
+        [XmlElement("Language")]
+        public List<VoodooMessageSet> Languages { get; set; }
+
+        public VoodooMessageSet this[String id]
         {
-            get;
-            set;
+            get { return Languages.Find(t => t.Language == id); }
         }
     }
 }

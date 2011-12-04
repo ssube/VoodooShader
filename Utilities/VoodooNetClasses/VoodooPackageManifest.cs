@@ -20,40 +20,27 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Xml.XPath;
-using System.Xml;
+using System.Xml.Serialization;
 
 namespace VoodooNetClasses
 {
-    class VoodooPackageManifest
+    [XmlType("VoodooPackage", Namespace = "http://www.voodooshader.com/manifests/PackageManifest.xsd")]
+    [XmlRoot("VoodooPackage", Namespace = "http://www.voodooshader.com/manifests/PackageManifest.xsd", IsNullable = false)]
+    public class VoodooPackageManifest
     {
+        [XmlElement("Package", DataType = "Package")]
         public VoodooPackage Package { get; set; }
 
-        public VoodooMessages Messages { get; set; }
+        [XmlElement("Messages", DataType = "TranslationSet")]
+        public VoodooTranslationSet Messages { get; set; }
 
         public List<VoodooVersion> Versions { get; set; }
 
         public VoodooPackageManifest()
         {
             Package = new VoodooPackage();
-            Messages = new VoodooMessages();
+            Messages = new VoodooTranslationSet();
             Versions = new List<VoodooVersion>();
-        }
-
-        public VoodooPackageManifest(String filename)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(filename);
-
-            XmlElement rootElem = doc.DocumentElement;
-            XmlElement packElem = rootElem.SelectSingleNode("./Package");
-
-            Package = new VoodooPackage(new Guid(packElem.SelectSingleNode("PackID").Value), packElem.SelectSingleNode("Name").Value, packElem.SelectSingleNode("Version"), )
-
-            foreach (XmlElement versionElem in rootElem.SelectNodes("./Versions/Version"))
-            {
-
-            }
         }
     }
 }

@@ -25,6 +25,24 @@ namespace VoodooNetClasses
 {
     public class VoodooManifestCache
     {
-        String m_Path;
+        public String Path { get; set; }
+
+        public VoodooManifestCache(String iPath)
+        {
+            Path = iPath;
+        }
+
+        public void Sync(IEnumerable<VoodooRemote> remotes)
+        {
+            foreach (VoodooRemote remote in remotes)
+            {
+                VoodooRemoteManifest remotemanifest = remote.GetManifest(Path);
+
+                foreach (VoodooPackage package in remotemanifest.Packages)
+                {
+                    package.GetManifest(Path);
+                }
+            }
+        }
     }
 }

@@ -19,128 +19,123 @@
  */
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
+using System.Text;
 using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    [Serializable]
-    public class VoodooDefault : INotifyPropertyChanged, ISerializable, IXmlSerializable, IVoodooRegistryObject
+    [XmlType("Class", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("Class", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooDefault : IVoodooRegistryObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        Guid m_DefID;
-        String m_Name, m_Target, m_Config;
-        List<Guid> m_Packages;
-
         [XmlElement("DefID", DataType = "Uuid")]
-        public Guid DefID
-        {
-            get { return m_DefID; }
-            set { m_DefID = value; this.NotifyPropertyChanged("DefID"); }
-        }
+        public Guid DefID { get; set; }
 
         [XmlElement("Name")]
-        public String Name
-        {
-            get { return m_Name; }
-            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-        }
+        public String Name { get; set; }
 
-        [XmlElement("Target")]
-        public String Target
-        {
-            get { return m_Target; }
-            set { m_Target = value; this.NotifyPropertyChanged("Target"); }
-        }
+        [XmlElement("Filter")]
+        public String Filter { get; set; }
 
         [XmlElement("Config")]
-        public String Config
-        {
-            get { return m_Config; }
-            set { m_Config = value; this.NotifyPropertyChanged("Config"); }
-        }
+        public String Config { get; set; }
 
         [XmlArray("Packages")]
         [XmlArrayItem("Package")]
-        public List<Guid> Packages
-        {
-            get { return m_Packages; }
-            set { m_Packages = value; this.NotifyPropertyChanged("Packages"); }
-        }
-
+        public List<Guid> Packages { get; set; }
+        
         public VoodooDefault()
         {
-            m_Packages = new List<Guid>();
+            DefID = Guid.Empty;
+            Name = Filter = Config = String.Empty;
+            Packages = new List<Guid>();
         }
 
-        public VoodooDefault(Guid DefID, String Name, String Target, String Config)
+        public VoodooDefault(Guid iDefID, String iName, String iFilter, String iConfig, Guid[] iPackages = null)
         {
-            m_DefID  = DefID;
-            m_Name   = Name;
-            m_Target = Target;
-            m_Config = Config;
+            DefID  = iDefID;
+            Name   = iName;
+            Filter = iFilter;
+            Config = iConfig;
+
+            Packages = new List<Guid>();
+            if (iPackages != null)
+            {
+                Packages.AddRange(iPackages);
+            }
         }
 
         public void FromRegistryKey(RegistryKey key)
         {
+            Packages = new List<Guid>();
+
             try
             {
-                String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
-                m_DefID = new Guid(name);
-                if (m_DefID == null)
+                DefID = new Guid(key.GetValue("DefID") as String);
+                if (DefID == null)
                 {
-                    m_DefID = Guid.Empty;
+                    DefID = Guid.Empty;
                 }
             }
-            catch (System.Exception)
+            catch (Exception)
             {
-                m_DefID = Guid.Empty;
-            }
-            try
-            {
-                m_Name = key.GetValue("Name") as String;
-                if (m_Name == null)
-                {
-                    m_Name = String.Empty;
-                }
-            }
-            catch (System.Exception)
-            {
-                m_Name = String.Empty;
+                DefID = Guid.Empty;
             }
             try
             {
-                m_Target = key.GetValue("Target") as String;
-                if (m_Target == null)
+                Name = key.GetValue("Name") as String;
+                if (Name == null)
                 {
-                    m_Target = String.Empty;
+                    Name = String.Empty;
                 }
             }
-            catch (System.Exception)
+            catch (Exception)
             {
-                m_Target = String.Empty;
+                Name = String.Empty;
             }
             try
             {
-                m_Config = key.GetValue("Config") as String;
-                if (m_Config == null)
+                Filter = key.GetValue("Filter") as String;
+                if (Filter == null)
                 {
-                    m_Config = String.Empty;
+                    Filter = String.Empty;
                 }
             }
-            catch (System.Exception)
+            catch (Exception)
             {
-                m_Config = String.Empty;
+                Filter = String.Empty;
+            }
+            try
+            {
+                Config = key.GetValue("Config") as String;
+                if (Config == null)
+                {
+                    Config = String.Empty;
+                }
+            }
+            catch (Exception)
+            {
+                Config = String.Empty;
+            }
+            try
+            {
+                String packListCat = key.GetValue("Packages") as String;
+                String[] packages = packListCat.Split(';');
+                foreach (String package in packages)
+                {
+                    Packages.Add(new Guid(package));
+                }
+            }
+            catch (Exception)
+            {
+                Config = String.Empty;
             }
         }
 
         public void ToRegistryKey(RegistryKey parent)
         {
-            String keyName = m_DefID.ToString("D");
+            String keyName = DefID.ToString("D");
 
             RegistryKey key = parent.OpenSubKey(keyName);
             if (key != null)
@@ -151,16 +146,15 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            key.SetValue("Name", m_Name);
-            key.SetValue("Target", m_Target);
-            key.SetValue("Config", m_Config);
+            key.SetValue("Name", Name);
+            key.SetValue("Filter", Filter);
+            key.SetValue("Config", Config);
+
+            StringBuilder sb = new StringBuilder();
+            Packages.ForEach(t => sb.Append(t.ToString("D") + ";"));
+            key.SetValue("Packages", sb.ToString());
 
             key.Close();
-        }
-
-        private void NotifyPropertyChanged(String name)
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
         }
     }
 }

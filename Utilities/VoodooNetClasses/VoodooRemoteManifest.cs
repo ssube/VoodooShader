@@ -27,7 +27,9 @@ using System.Xml.Serialization;
 
 namespace VoodooNetClasses
 {
-    class VoodooRemoteManifest
+    [XmlType("VoodooRemote", Namespace = "http://www.voodooshader.com/manifests/RemoteManifest.xsd")]
+    [XmlRoot("VoodooRemote", Namespace = "http://www.voodooshader.com/manifests/RemoteManifest.xsd", IsNullable = false)]
+    public class VoodooRemoteManifest
     {
         [XmlElement("Package")]
         public List<VoodooPackage> Packages { get; set; }

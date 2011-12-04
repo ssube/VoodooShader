@@ -19,25 +19,28 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Security.Permissions;
 using System.Xml.Serialization;
 
 namespace VoodooNetClasses
 {
-    public class VoodooVersionChangeSet : IXmlSerializable
+    [XmlType("ChangeSet", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("ChangeSet", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooChangeSet
     {
-        List<VoodooClass> m_Classes;
-        List<String> m_Files;
+        [XmlElement("Module")]
+        public List<VoodooModule> Modules { get; set; }
 
-        [XmlArray("Modules")]
-        [XmlArrayElement("Module")]
-        List<VoodooModule> Modules { get; set; }
+        [XmlElement("Default")]
+        public List<VoodooDefault> Defaults { get; set; }
 
-        public VoodooVersionChangeSet()
+        [XmlElement("File")]
+        public List<String> Files { get; set; }
+
+        public VoodooChangeSet()
         {
             Modules = new List<VoodooModule>();
-            m_Classes = new List<VoodooClass>();
-            m_Files = new List<String>();
+            Defaults = new List<VoodooDefault>();
+            Files = new List<String>();
         }
 
         public void AddModules(VoodooModule[] modules)
@@ -45,14 +48,14 @@ namespace VoodooNetClasses
             Modules.AddRange(modules);
         }
 
-        public void AddClasses(VoodooClass[] classes)
+        public void AddClasses(VoodooDefault[] defaults)
         {
-            m_Classes.AddRange(classes);
+            Defaults.AddRange(defaults);
         }
 
         public void AddFiles(String[] files)
         {
-            m_Files.AddRange(files);
+            Files.AddRange(files);
         }
 
         public void RemoveModules(Predicate<VoodooModule> filter)
@@ -60,53 +63,42 @@ namespace VoodooNetClasses
             Modules.RemoveAll(filter);
         }
 
-        public void RemoveClasses(Predicate<VoodooClass> filter)
+        public void RemoveClasses(Predicate<VoodooDefault> filter)
         {
-            m_Classes.RemoveAll(filter);
+            Defaults.RemoveAll(filter);
         }
 
         public void RemoveFiles(Predicate<String> filter)
         {
-            m_Files.RemoveAll(filter);
+            Files.RemoveAll(filter);
         }
     }
 
-    public class VoodooVersion : IXmlSerializable
+    [XmlType("Version", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("Version", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooVersion
     {
-        String m_Name;
-        VoodooVersionChangeSet m_Remove, m_Create;
-        VoodooMessages m_Messages;
+        [XmlAttribute("id")]
+        public String Name { get; set; }
 
-        [XmlAttribute("name")]
-        public String Name
-        {
-            get { return m_Name; }
-        }
-
+        [XmlAttribute("parent")]
+        public String Parent { get; set; }
+        
         [XmlElement("Remove")]
-        public VoodooVersionChangeSet RemoveSet
-        {
-            get { return m_Remove; }
-        }
-
+        public VoodooChangeSet Remove { get; set; }
+        
         [XmlElement("Create")]
-        public VoodooVersionChangeSet CreateSet
-        {
-            get { return m_Create; }
-        }
+        public VoodooChangeSet Create { get; set; }
 
         [XmlElement("Messages")]
-        public VoodooMessages Messages
-        {
-            get { return m_Messages; }
-        }
-
+        public VoodooTranslationSet Messages { get; set; }
+        
         public VoodooVersion()
         {
-            m_Name = String.Empty;
-            m_Remove = new VoodooVersionChangeSet();
-            m_Create = new VoodooVersionChangeSet();
-            m_Messages = new VoodooMessages();
+            Name = String.Empty;
+            Remove = new VoodooChangeSet();
+            Create = new VoodooChangeSet();
+            Messages = new VoodooTranslationSet();
         }
     }
 }

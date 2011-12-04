@@ -21,6 +21,7 @@ using System;
 using System.Net;
 using System.Xml.Serialization;
 using Microsoft.Win32;
+using System.IO;
 
 namespace VoodooNetClasses
 {
@@ -169,7 +170,9 @@ namespace VoodooNetClasses
             WebClient client = new WebClient();
             client.DownloadFile(ManifestUri, filename);
 
-            return new VoodooPackageManifest(filename);
+            XmlSerializer manifestMaker = new XmlSerializer(typeof(VoodooPackageManifest));
+
+            return (VoodooPackageManifest)manifestMaker.Deserialize(new StringReader(filename));
         }
     }
 }

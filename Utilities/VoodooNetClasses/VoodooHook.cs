@@ -28,12 +28,15 @@ namespace VoodooNetClasses
     [XmlRoot("Class", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
     public class VoodooHook : IVoodooRegistryObject
     {
-        [XmlElement("Active", DataType = "xs:boolean")]
+        [XmlElement("Active", DataType = "boolean")]
         public Boolean Active { get; set; }
+
         [XmlElement("Name")]
         public String Name { get; set; }
+
         [XmlElement("Target")]
         public String Target { get; set; }
+
         [XmlElement("Config")]
         public String Config { get; set; }
 
