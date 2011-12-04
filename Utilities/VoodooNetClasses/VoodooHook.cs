@@ -18,98 +18,84 @@
  *   peachykeen@voodooshader.com
  */
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    [Serializable]
-    public class VoodooHook : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    [XmlType("Class", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("Class", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooHook : IVoodooRegistryObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        Boolean m_Active;
-        String m_Name, m_Target, m_Config;
+        [XmlElement("Active", DataType = "xs:boolean")]
+        public Boolean Active { get; set; }
+        [XmlElement("Name")]
+        public String Name { get; set; }
+        [XmlElement("Target")]
+        public String Target { get; set; }
+        [XmlElement("Config")]
+        public String Config { get; set; }
 
         public VoodooHook()
         {
-            m_Active = false;
-            m_Name = m_Target = m_Config = String.Empty;
+            Active = false;
+            Name = Target = Config = String.Empty;
         }
 
-        public VoodooHook(bool Active, String Name, String Target, String Config)
+        public VoodooHook(bool iActive, String iName, String iTarget, String iConfig)
         {
-            m_Active = Active;
-            m_Name   = Name;
-            m_Target = Target;
-            m_Config = Config;
+            Active = iActive;
+            Name   = iName;
+            Target = iTarget;
+            Config = iConfig;
         }
-
-        protected VoodooHook(SerializationInfo info, StreamingContext context)
-        {
-            m_Active = info.GetBoolean("Active");
-            m_Name   = info.GetString("Name");
-            m_Target = info.GetString("Target");
-            m_Config = info.GetString("Config");
-        }
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Active", m_Active);
-            info.AddValue("Name",   m_Name);
-            info.AddValue("Target", m_Target);
-            info.AddValue("Config", m_Config);
-        }
-
+        
         public void FromRegistryKey(RegistryKey key)
         {
             try
             {
-                m_Active = Convert.ToBoolean(key.GetValue("Active") as String);
+                Active = Convert.ToBoolean(key.GetValue("Active") as String);
             }
             catch (System.Exception)
             {
-                m_Active = false;
+                Active = false;
             }
             try
             {
-                m_Name = key.GetValue("Name") as String;
-                if (m_Name == null)
+                Name = key.GetValue("Name") as String;
+                if (Name == null)
                 {
-                    m_Name = String.Empty;
+                    Name = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Name = String.Empty;
+                Name = String.Empty;
             }
             try
             {
-                m_Target = key.GetValue("Target") as String;
-                if (m_Target == null)
+                Target = key.GetValue("Target") as String;
+                if (Target == null)
                 {
-                    m_Target = String.Empty;
+                    Target = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Target = String.Empty;            	
+                Target = String.Empty;            	
             }
             try
             {
-                m_Config = key.GetValue("Config") as String;
-                if (m_Config == null)
+                Config = key.GetValue("Config") as String;
+                if (Config == null)
                 {
-                    m_Config = String.Empty;
+                    Config = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Config = String.Empty;            	
+                Config = String.Empty;            	
             }
         }
 
@@ -142,45 +128,16 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            if (m_Active)
+            if (Active)
             {
-                key.SetValue("Active", m_Active.ToString().ToLower());
+                key.SetValue("Active", Active.ToString().ToLower());
             }
 
-            key.SetValue("Name",   m_Name);
-            key.SetValue("Target", m_Target);
-            key.SetValue("Config", m_Config);
+            key.SetValue("Name",   Name);
+            key.SetValue("Target", Target);
+            key.SetValue("Config", Config);
 
             key.Close();
-        }
-
-        public bool Active
-        {
-            get { return m_Active; }
-            set { m_Active = value; this.NotifyPropertyChanged("Active"); }
-        }
-
-        public String Name
-        {
-            get { return m_Name; }
-            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-        }
-
-        public String Target
-        {
-            get { return m_Target; }
-            set { m_Target = value; this.NotifyPropertyChanged("Target"); }
-        }
-
-        public String Config
-        {
-            get { return m_Config; }
-            set { m_Config = value; this.NotifyPropertyChanged("Config"); }
-        }
-
-        private void NotifyPropertyChanged(String name)
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
         }
     }
 }

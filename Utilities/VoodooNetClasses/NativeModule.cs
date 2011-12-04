@@ -27,12 +27,12 @@ namespace VoodooNetClasses
 {
     public struct ClassInfo
     {
-        public Guid ClsID;
+        public Guid ClassID;
         public String Name;
 
-        public ClassInfo(Guid clsid, String name)
+        public ClassInfo(Guid ClassID, String name)
         {
-            ClsID = clsid;
+            ClassID = ClassID;
             Name = name;
         }
     }
@@ -59,7 +59,7 @@ namespace VoodooNetClasses
     delegate UInt32 NativeModule_ModuleCountFunc();
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    delegate IntPtr NativeModule_ModuleInfoFunc(UInt32 index, out Guid clsid);
+    delegate IntPtr NativeModule_ModuleInfoFunc(UInt32 index, out Guid ClassID);
 
     public class NativeModule
     {
@@ -119,12 +119,12 @@ namespace VoodooNetClasses
 
             for (UInt32 i = 0; i < m_Count; ++i)
             {
-                Guid tclsid = Guid.Empty;
-                IntPtr nameptr = m_ModuleInfoFunc(i, out tclsid);
+                Guid tClassID = Guid.Empty;
+                IntPtr nameptr = m_ModuleInfoFunc(i, out tClassID);
                 if (nameptr != null)
                 {
                     String tname = Marshal.PtrToStringUni(nameptr);
-                    m_Classes.Add(i, new ClassInfo(tclsid, tname));
+                    m_Classes.Add(i, new ClassInfo(tClassID, tname));
                 }
             }
         }

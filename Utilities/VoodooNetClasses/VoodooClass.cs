@@ -18,49 +18,39 @@
  *   peachykeen@voodooshader.com
  */
 using System;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    [Serializable]
-    public class VoodooClass : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    [XmlType("Class", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("Class", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooClass : IVoodooRegistryObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        [XmlElement("ClassID", DataType = "Uuid")]
+        public Guid ClassID { get; set; }
 
-        Guid m_ClassID, m_LibID;
-        String m_Name, m_Props;
+        [XmlElement("LibID", DataType = "Uuid")]
+        public Guid LibID { get; set; }
+
+        [XmlElement("Name")]
+        public String Name { get; set; }
+
+        [XmlElement("Props", IsNullable = true)]
+        public String Props { get; set; }
 
         public VoodooClass()
         {
-
+            ClassID = LibID = Guid.Empty;
+            Name = Props = String.Empty;
         }
 
-        public VoodooClass(Guid ClassID, Guid LibID, String Name, String Props)
+        public VoodooClass(Guid iClassID, Guid iLibID, String iName, String iProps)
         {
-            m_ClassID = ClassID;
-            m_LibID   = LibID;
-            m_Name    = Name;
-            m_Props   = Props;
-        }
-
-        protected VoodooClass(SerializationInfo info, StreamingContext context)
-        {
-            m_ClassID = new Guid(info.GetString("ClassID"));
-            m_LibID = new Guid(info.GetString("LibID"));
-            m_Name    = info.GetString("Name");
-            m_Props   = info.GetString("Props");
-        }
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("ClassID", m_ClassID.ToString("D"));
-            info.AddValue("LibID",   m_LibID.ToString("D"));
-            info.AddValue("Name",    m_Name);
-            info.AddValue("Props",   m_Props);
+            ClassID = iClassID;
+            LibID   = iLibID;
+            Name    = iName;
+            Props   = iProps;
         }
 
         public void FromRegistryKey(RegistryKey key)
@@ -68,57 +58,57 @@ namespace VoodooNetClasses
             try
             {
                 String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
-                m_ClassID = new Guid(name);
-                if (m_ClassID == null)
+                ClassID = new Guid(name);
+                if (ClassID == null)
                 {
-                    m_ClassID = Guid.Empty;
+                    ClassID = Guid.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_ClassID = Guid.Empty;
+                ClassID = Guid.Empty;
             }
             try
             {
-                m_LibID = new Guid(key.GetValue("LibID") as String);
-                if (m_LibID == null)
+                LibID = new Guid(key.GetValue("LibID") as String);
+                if (LibID == null)
                 {
-                    m_LibID = Guid.Empty;
+                    LibID = Guid.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_LibID = Guid.Empty;
+                LibID = Guid.Empty;
             }
             try
             {
-                m_Name = key.GetValue("Name") as String;
-                if (m_Name == null)
+                Name = key.GetValue("Name") as String;
+                if (Name == null)
                 {
-                    m_Name = String.Empty;
+                    Name = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Name = String.Empty;
+                Name = String.Empty;
             }
             try
             {
-                m_Props = key.GetValue("Props") as String;
-                if (m_Props == null)
+                Props = key.GetValue("Props") as String;
+                if (Props == null)
                 {
-                    m_Props = String.Empty;
+                    Props = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Props = String.Empty;
+                Props = String.Empty;
             }
         }
 
         public void ToRegistryKey(RegistryKey parent)
         {
-            String keyName = m_ClassID.ToString("D");
+            String keyName = ClassID.ToString("D");
 
             RegistryKey key = parent.OpenSubKey(keyName);
             if (key != null)
@@ -129,40 +119,11 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            key.SetValue("Name",   m_Name);
-            key.SetValue("PackID", m_LibID.ToString("D"));
-            key.SetValue("Props",  m_Props);
+            key.SetValue("Name",   Name);
+            key.SetValue("PackID", LibID.ToString("D"));
+            key.SetValue("Props",  Props);
 
             key.Close();
-        }
-
-        public Guid ClassID
-        {
-            get { return m_ClassID; }
-            set { m_ClassID = value; this.NotifyPropertyChanged("ClassID"); }
-        }
-
-        public Guid LibID
-        {
-            get { return m_LibID; }
-            set { m_LibID = value; this.NotifyPropertyChanged("LibID"); }
-        }
-
-        public String Name
-        {
-            get { return m_Name; }
-            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-        }
-
-        public String Props
-        {
-            get { return m_Props; }
-            set { m_Props = value; this.NotifyPropertyChanged("Props"); }
-        }
-
-        private void NotifyPropertyChanged(String name)
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
         }
     }
 }

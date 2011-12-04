@@ -29,7 +29,7 @@ namespace VoodooNetClasses
 {
     public class VoodooRegistry : ISerializable, IVoodooRegistryObject
     {
-        private String m_Path, m_BinPrefix;
+        private String m_Path, m_BinPrefix, m_Language;
 
         private List<VoodooRemote> m_Remotes;
         private List<VoodooPackage> m_Packages;
@@ -42,6 +42,7 @@ namespace VoodooNetClasses
         {
             m_Path = String.Empty;
             m_BinPrefix = String.Empty;
+            m_Language = String.Empty;
 
             m_Remotes = new List<VoodooRemote>();
             m_Packages = new List<VoodooPackage>();
@@ -55,6 +56,7 @@ namespace VoodooNetClasses
         {
             m_Path = info.GetString("Path");
             m_BinPrefix = info.GetString("BinPrefix");
+            m_Language = info.GetString("Language");
 
             m_Remotes = (List<VoodooRemote>)info.GetValue("Remotes", typeof(List<VoodooRemote>));
             m_Packages = (List<VoodooPackage>)info.GetValue("Packages", typeof(List<VoodooPackage>));
@@ -69,6 +71,7 @@ namespace VoodooNetClasses
         {
             info.AddValue("Path", m_Path);
             info.AddValue("BinPrefix", m_BinPrefix);
+            info.AddValue("Language", m_Language);
 
             info.AddValue("Remotes", m_Remotes);
             info.AddValue("Packages", m_Packages);
@@ -102,7 +105,19 @@ namespace VoodooNetClasses
             }
             catch (System.Exception)
             {
-                m_BinPrefix = String.Empty;	            	
+                m_BinPrefix = String.Empty;
+            }
+            try
+            {
+                m_Language = key.GetValue("Language") as String;
+                if (m_Language == null)
+                {
+                    m_Language = String.Empty;
+                }
+            }
+            catch (System.Exception)
+            {
+                m_Language = String.Empty;
             }
 
             FromRegistryKey_GetList(key, "Remotes", ref m_Remotes);
@@ -144,8 +159,9 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            key.SetValue("Path", m_Path, RegistryValueKind.String);
-            key.SetValue("BinPrefix", m_BinPrefix, RegistryValueKind.String);
+            key.SetValue("Path", m_Path);
+            key.SetValue("BinPrefix", m_BinPrefix);
+            key.SetValue("Language", m_Language);
 
             ToRegistryKey_MakeList(key, "Remotes", ref m_Remotes);
             ToRegistryKey_MakeList(key, "Packages", ref m_Packages);

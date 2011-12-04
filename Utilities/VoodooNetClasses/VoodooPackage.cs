@@ -18,53 +18,49 @@
  *   peachykeen@voodooshader.com
  */
 using System;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
+using System.Net;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    [Serializable]
-    public class VoodooPackage : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    [XmlType("Package", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("Package", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooPackage : IVoodooRegistryObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        [XmlElement("PackID", DataType = "Uuid")]
+        public Guid PackID { get; set; }
 
-        Guid m_PackID;
-        String m_Name, m_Version, m_Props;
-        DateTime m_Date;
+        [XmlElement("Name")]
+        public String Name { get; set; }
+
+        [XmlElement("Version")]
+        public String Version { get; set; }
+
+        [XmlElement("Date", DataType = "xs:date")]
+        public DateTime Date { get; set; }
+
+        [XmlElement("ManifestUri")]
+        public String ManifestUri { get; set; }
+
+        [XmlElement("Props")]
+        public String Props { get; set; }
 
         public VoodooPackage()
         {
-
+            PackID = Guid.Empty;
+            Name = Version = ManifestUri = Props = String.Empty;
+            Date = DateTime.MinValue;
         }
 
-        public VoodooPackage(Guid PackID, String Name, String Version, DateTime Date, String Props)
+        public VoodooPackage(Guid iPackID, String iName, String iVersion, DateTime iDate, String iManifestUri, String iProps)
         {
-            m_PackID  = PackID;
-            m_Name    = Name;
-            m_Version = Version;
-            m_Date    = Date;
-            m_Props   = Props;
-        }
-
-        protected VoodooPackage(SerializationInfo info, StreamingContext context)
-        {
-            m_PackID  = new Guid(info.GetString("PackID"));
-            m_Name    = info.GetString("Name");
-            m_Version = info.GetString("Version");
-            m_Date    = info.GetDateTime("Date");
-            m_Props   = info.GetString("Props");
-        }
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("PackID",  m_PackID.ToString("D"));
-            info.AddValue("Name",    m_Name);
-            info.AddValue("Version", m_Version);
-            info.AddValue("Date",    m_Date);
-            info.AddValue("Props",   m_Props);
+            PackID  = iPackID;
+            Name    = iName;
+            Version = iVersion;
+            Date    = iDate;
+            ManifestUri = iManifestUri;
+            Props   = iProps;
         }
 
         public void FromRegistryKey(RegistryKey key)
@@ -72,69 +68,81 @@ namespace VoodooNetClasses
             try
             {
                 String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
-                m_PackID = new Guid(name);
-                if (m_PackID == null)
+                PackID = new Guid(name);
+                if (PackID == null)
                 {
-                    m_PackID = Guid.Empty;
+                    PackID = Guid.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_PackID = Guid.Empty;
+                PackID = Guid.Empty;
             }
             try
             {
-                m_Name = key.GetValue("Name") as String;
-                if (m_Name == null)
+                Name = key.GetValue("Name") as String;
+                if (Name == null)
                 {
-                    m_Name = String.Empty;
+                    Name = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Name = String.Empty;
+                Name = String.Empty;
             }
             try
             {
-                m_Version = key.GetValue("Version") as String;
-                if (m_Version == null)
+                Version = key.GetValue("Version") as String;
+                if (Version == null)
                 {
-                    m_Version = String.Empty;
+                    Version = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Version = String.Empty;
+                Version = String.Empty;
             }
             try
             {
-                m_Date = Convert.ToDateTime(key.GetValue("Date") as String);
-                if (m_Date == null)
+                Date = Convert.ToDateTime(key.GetValue("Date") as String);
+                if (Date == null)
                 {
-                    m_Date = DateTime.MinValue;
+                    Date = DateTime.MinValue;
                 }
             }
             catch (System.Exception)
             {
-                m_Date = DateTime.MinValue;
+                Date = DateTime.MinValue;
             }
             try
             {
-                m_Props = key.GetValue("Props") as String;
-                if (m_Props == null)
+                ManifestUri = key.GetValue("ManifestUri") as String;
+                if (ManifestUri == null)
                 {
-                    m_Props = String.Empty;
+                    ManifestUri = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Props = String.Empty;            	
+                ManifestUri = String.Empty;
+            }
+            try
+            {
+                Props = key.GetValue("Props") as String;
+                if (Props == null)
+                {
+                    Props = String.Empty;
+                }
+            }
+            catch (System.Exception)
+            {
+                Props = String.Empty;            	
             }
         }
 
         public void ToRegistryKey(RegistryKey parent)
         {
-            String keyName = m_PackID.ToString("D");
+            String keyName = PackID.ToString("D");
 
             RegistryKey key = parent.OpenSubKey(keyName);
             if (key != null)
@@ -145,47 +153,23 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            key.SetValue("Name",    m_Name);
-            key.SetValue("Version", m_Version);
-            key.SetValue("Date",    m_Date);
-            key.SetValue("Props",   m_Props);
+            key.SetValue("Name",    Name);
+            key.SetValue("Version", Version);
+            key.SetValue("Date", Date);
+            key.SetValue("ManifestUri", ManifestUri);
+            key.SetValue("Props",   Props);
 
             key.Close();
         }
 
-        public Guid PackID
+        public VoodooPackageManifest GetManifest(String path)
         {
-            get { return m_PackID; }
-            set { m_PackID = value; this.NotifyPropertyChanged("PackID"); }
-        }
+            String filename = path + "\\packages\\" + PackID.ToString("D") + ".xml";
 
-        public String Name
-        {
-            get { return m_Name; }
-            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-        }
+            WebClient client = new WebClient();
+            client.DownloadFile(ManifestUri, filename);
 
-        public String Version
-        {
-            get { return m_Version; }
-            set { m_Version = value; this.NotifyPropertyChanged("Version"); }
-        }
-
-        public DateTime Date
-        {
-            get { return m_Date; }
-            set { m_Date = value; this.NotifyPropertyChanged("Date"); }
-        }
-
-        public String Props
-        {
-            get { return m_Props; }
-            set { m_Props = value; this.NotifyPropertyChanged("Props"); }
-        }
-
-        private void NotifyPropertyChanged(String name)
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
+            return new VoodooPackageManifest(filename);
         }
     }
 }

@@ -19,43 +19,94 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Xml.Serialization;
 
 namespace VoodooNetClasses
 {
-    class VoodooVersion : ISerializable
+    public class VoodooVersionChangeSet : IXmlSerializable
+    {
+        List<VoodooClass> m_Classes;
+        List<String> m_Files;
+
+        [XmlArray("Modules")]
+        [XmlArrayElement("Module")]
+        List<VoodooModule> Modules { get; set; }
+
+        public VoodooVersionChangeSet()
+        {
+            Modules = new List<VoodooModule>();
+            m_Classes = new List<VoodooClass>();
+            m_Files = new List<String>();
+        }
+
+        public void AddModules(VoodooModule[] modules)
+        {
+            Modules.AddRange(modules);
+        }
+
+        public void AddClasses(VoodooClass[] classes)
+        {
+            m_Classes.AddRange(classes);
+        }
+
+        public void AddFiles(String[] files)
+        {
+            m_Files.AddRange(files);
+        }
+
+        public void RemoveModules(Predicate<VoodooModule> filter)
+        {
+            Modules.RemoveAll(filter);
+        }
+
+        public void RemoveClasses(Predicate<VoodooClass> filter)
+        {
+            m_Classes.RemoveAll(filter);
+        }
+
+        public void RemoveFiles(Predicate<String> filter)
+        {
+            m_Files.RemoveAll(filter);
+        }
+    }
+
+    public class VoodooVersion : IXmlSerializable
     {
         String m_Name;
-        VoodooRegistry m_Remove, m_Create;
+        VoodooVersionChangeSet m_Remove, m_Create;
+        VoodooMessages m_Messages;
+
+        [XmlAttribute("name")]
+        public String Name
+        {
+            get { return m_Name; }
+        }
+
+        [XmlElement("Remove")]
+        public VoodooVersionChangeSet RemoveSet
+        {
+            get { return m_Remove; }
+        }
+
+        [XmlElement("Create")]
+        public VoodooVersionChangeSet CreateSet
+        {
+            get { return m_Create; }
+        }
+
+        [XmlElement("Messages")]
+        public VoodooMessages Messages
+        {
+            get { return m_Messages; }
+        }
 
         public VoodooVersion()
         {
             m_Name = String.Empty;
-            m_Remove = new VoodooRegistry();
-            m_Create = new VoodooRegistry();
-        }
-
-        public VoodooVersion(String Name, VoodooRegistry Remove, VoodooRegistry Create)
-        {
-            m_Name = Name;
-            m_Remove  = Remove;
-            m_Create  = Create;
-        }
-
-        protected VoodooVersion(SerializationInfo info, StreamingContext context)
-        {
-            m_Name = info.GetString("Name");
-            m_Remove = (VoodooRegistry)info.GetValue("Remove", typeof(VoodooRegistry));
-            m_Create = (VoodooRegistry)info.GetValue("Create", typeof(VoodooRegistry));
-        }
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Name", m_Name);
-            info.AddValue("Remove", m_Remove);
-            info.AddValue("Create", m_Create);
+            m_Remove = new VoodooVersionChangeSet();
+            m_Create = new VoodooVersionChangeSet();
+            m_Messages = new VoodooMessages();
         }
     }
 }

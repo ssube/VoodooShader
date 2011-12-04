@@ -29,17 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.cHook_Table = new System.Windows.Forms.DataGridView();
-            this.colActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_TargetFind = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.colConfig = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ConfigFind = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.col_ConfigEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.cMenu = new System.Windows.Forms.ToolStrip();
             this.cMenu_Hook_On = new System.Windows.Forms.ToolStripButton();
             this.cMenu_Hook_Off = new System.Windows.Forms.ToolStripButton();
@@ -55,6 +48,13 @@
             this.cMenu_Downloads = new System.Windows.Forms.ToolStripButton();
             this.cTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.dOpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.colActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_TargetFind = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colConfig = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ConfigFind = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.col_ConfigEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -80,8 +80,8 @@
             // 
             this.cHook_Table.AllowUserToAddRows = false;
             this.cHook_Table.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.cHook_Table.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.cHook_Table.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.cHook_Table.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.cHook_Table.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cHook_Table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -101,59 +101,6 @@
             this.cHook_Table.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.cHook_Table.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellClick);
             this.cHook_Table.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellChanged);
-            // 
-            // colActive
-            // 
-            this.colActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colActive.DataPropertyName = "Active";
-            resources.ApplyResources(this.colActive, "colActive");
-            this.colActive.Name = "colActive";
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "Name";
-            resources.ApplyResources(this.colName, "colName");
-            this.colName.Name = "colName";
-            // 
-            // colTarget
-            // 
-            this.colTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTarget.DataPropertyName = "Target";
-            this.colTarget.FillWeight = 140F;
-            resources.ApplyResources(this.colTarget, "colTarget");
-            this.colTarget.Name = "colTarget";
-            // 
-            // col_TargetFind
-            // 
-            this.col_TargetFind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.col_TargetFind, "col_TargetFind");
-            this.col_TargetFind.Name = "col_TargetFind";
-            this.col_TargetFind.Text = "...";
-            this.col_TargetFind.UseColumnTextForButtonValue = true;
-            // 
-            // colConfig
-            // 
-            this.colConfig.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colConfig.DataPropertyName = "Config";
-            resources.ApplyResources(this.colConfig, "colConfig");
-            this.colConfig.Name = "colConfig";
-            // 
-            // col_ConfigFind
-            // 
-            this.col_ConfigFind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.col_ConfigFind, "col_ConfigFind");
-            this.col_ConfigFind.Name = "col_ConfigFind";
-            this.col_ConfigFind.Text = "...";
-            this.col_ConfigFind.UseColumnTextForButtonValue = true;
-            // 
-            // col_ConfigEdit
-            // 
-            this.col_ConfigEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.col_ConfigEdit, "col_ConfigEdit");
-            this.col_ConfigEdit.Name = "col_ConfigEdit";
-            this.col_ConfigEdit.Text = "Edit";
-            this.col_ConfigEdit.UseColumnTextForButtonValue = true;
             // 
             // cMenu
             // 
@@ -255,6 +202,62 @@
             // 
             resources.ApplyResources(this.dOpenFile, "dOpenFile");
             this.dOpenFile.RestoreDirectory = true;
+            // 
+            // colActive
+            // 
+            this.colActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colActive.DataPropertyName = "Active";
+            resources.ApplyResources(this.colActive, "colActive");
+            this.colActive.Name = "colActive";
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "Name";
+            resources.ApplyResources(this.colName, "colName");
+            this.colName.Name = "colName";
+            this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colTarget
+            // 
+            this.colTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTarget.DataPropertyName = "Target";
+            this.colTarget.FillWeight = 140F;
+            resources.ApplyResources(this.colTarget, "colTarget");
+            this.colTarget.Name = "colTarget";
+            this.colTarget.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // col_TargetFind
+            // 
+            this.col_TargetFind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            resources.ApplyResources(this.col_TargetFind, "col_TargetFind");
+            this.col_TargetFind.Name = "col_TargetFind";
+            this.col_TargetFind.Text = "...";
+            this.col_TargetFind.UseColumnTextForButtonValue = true;
+            // 
+            // colConfig
+            // 
+            this.colConfig.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colConfig.DataPropertyName = "Config";
+            resources.ApplyResources(this.colConfig, "colConfig");
+            this.colConfig.Name = "colConfig";
+            this.colConfig.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // col_ConfigFind
+            // 
+            this.col_ConfigFind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            resources.ApplyResources(this.col_ConfigFind, "col_ConfigFind");
+            this.col_ConfigFind.Name = "col_ConfigFind";
+            this.col_ConfigFind.Text = "...";
+            this.col_ConfigFind.UseColumnTextForButtonValue = true;
+            // 
+            // col_ConfigEdit
+            // 
+            this.col_ConfigEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.col_ConfigEdit, "col_ConfigEdit");
+            this.col_ConfigEdit.Name = "col_ConfigEdit";
+            this.col_ConfigEdit.Text = "Edit";
+            this.col_ConfigEdit.UseColumnTextForButtonValue = true;
             // 
             // MainForm
             // 

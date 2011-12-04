@@ -18,73 +18,63 @@
  *   peachykeen@voodooshader.com
  */
 using System;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
+using System.Net;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    [Serializable]
-    public class VoodooRemote : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    [XmlType("Remote", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("Remote", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooRemote : IVoodooRegistryObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        [XmlElement("Name")]
+        public String Name { get; set; }
 
-        String m_Uri;
+        [XmlElement("Uri")]
+        public String Uri { get; set; }
 
         public VoodooRemote()
         {
-
+            Uri = String.Empty;
         }
 
-        public VoodooRemote(String Uri)
+        public VoodooRemote(String iUri)
         {
-            m_Uri = Uri;
-        }
-
-        protected VoodooRemote(SerializationInfo info, StreamingContext context)
-        {
-            m_Uri = info.GetString("Uri");
-        }
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Uri", m_Uri);
+            Uri = Uri;
         }
 
         public void FromRegistryKey(RegistryKey key)
         {
             try
             {
-                m_Uri = key.GetValue("Uri") as String;
-                if (m_Uri == null)
+                Uri = key.GetValue("Uri") as String;
+                if (Uri == null)
                 {
-                    m_Uri = String.Empty;
+                    Uri = String.Empty;
                 }
             }
             catch (Exception)
             {
-                m_Uri = String.Empty;
+                Uri = String.Empty;
             }
         }
 
         public void ToRegistryKey(RegistryKey parent)
         {
-            String keyName = VoodooHash.Hash(m_Uri);
+            String keyName = VoodooHash.Hash(Uri);
 
-            parent.SetValue(keyName, m_Uri);
+            parent.SetValue(keyName, Uri);
         }
 
-        public String Uri
+        public VoodooRemoteManifest GetManifest(String path)
         {
-            get { return m_Uri; }
-            set { m_Uri = value; this.NotifyPropertyChanged("Uri"); }
-        }
+            String filename = path + "\\" + VoodooHash.Hash(Uri) + ".xml";
 
-        private void NotifyPropertyChanged(String name)
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
+            WebClient client = new WebClient();
+            client.DownloadFile(Uri, filename);
+
+            return new VoodooRemoteManifest(filename);
         }
     }
 }

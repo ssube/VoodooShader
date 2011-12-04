@@ -42,12 +42,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KeyEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KeyEdit.Designer.cs">
-      <DependentUpon>KeyEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="VSRegEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,9 +50,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="KeyEdit.resx">
-      <DependentUpon>KeyEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="VSRegEdit.resx">
       <DependentUpon>VSRegEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,7 +134,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,24 +18,63 @@
  *   peachykeen@voodooshader.com
  */
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
     [Serializable]
-    public class VoodooDefault : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    public class VoodooDefault : INotifyPropertyChanged, ISerializable, IXmlSerializable, IVoodooRegistryObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         Guid m_DefID;
         String m_Name, m_Target, m_Config;
+        List<Guid> m_Packages;
+
+        [XmlElement("DefID", DataType = "Uuid")]
+        public Guid DefID
+        {
+            get { return m_DefID; }
+            set { m_DefID = value; this.NotifyPropertyChanged("DefID"); }
+        }
+
+        [XmlElement("Name")]
+        public String Name
+        {
+            get { return m_Name; }
+            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
+        }
+
+        [XmlElement("Target")]
+        public String Target
+        {
+            get { return m_Target; }
+            set { m_Target = value; this.NotifyPropertyChanged("Target"); }
+        }
+
+        [XmlElement("Config")]
+        public String Config
+        {
+            get { return m_Config; }
+            set { m_Config = value; this.NotifyPropertyChanged("Config"); }
+        }
+
+        [XmlArray("Packages")]
+        [XmlArrayItem("Package")]
+        public List<Guid> Packages
+        {
+            get { return m_Packages; }
+            set { m_Packages = value; this.NotifyPropertyChanged("Packages"); }
+        }
 
         public VoodooDefault()
         {
-
+            m_Packages = new List<Guid>();
         }
 
         public VoodooDefault(Guid DefID, String Name, String Target, String Config)
@@ -44,23 +83,6 @@ namespace VoodooNetClasses
             m_Name   = Name;
             m_Target = Target;
             m_Config = Config;
-        }
-
-        protected VoodooDefault(SerializationInfo info, StreamingContext context)
-        {
-            m_DefID  = new Guid(info.GetString("DefID"));
-            m_Name   = info.GetString("Name");
-            m_Target = info.GetString("Target");
-            m_Config = info.GetString("Config");
-        }
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("DefID",  m_DefID.ToString("D"));
-            info.AddValue("Name",   m_Name);
-            info.AddValue("Target", m_Target);
-            info.AddValue("Config", m_Config);
         }
 
         public void FromRegistryKey(RegistryKey key)
@@ -134,24 +156,6 @@ namespace VoodooNetClasses
             key.SetValue("Config", m_Config);
 
             key.Close();
-        }
-
-        public String Name
-        {
-            get { return m_Name; }
-            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-        }
-
-        public String Target
-        {
-            get { return m_Target; }
-            set { m_Target = value; this.NotifyPropertyChanged("Target"); }
-        }
-
-        public String Config
-        {
-            get { return m_Config; }
-            set { m_Config = value; this.NotifyPropertyChanged("Config"); }
         }
 
         private void NotifyPropertyChanged(String name)

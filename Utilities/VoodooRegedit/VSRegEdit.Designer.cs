@@ -48,7 +48,6 @@
             this.m_RegistryTree = new System.Windows.Forms.TreeView();
             this.m_KeyGrid = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.menu_Button_Hive = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -152,7 +151,6 @@
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menu_Button_Hive,
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripSeparator1,
@@ -165,18 +163,8 @@
             this.toolStripButton11});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(214, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(222, 25);
             this.toolStrip1.TabIndex = 0;
-            // 
-            // menu_Button_Hive
-            // 
-            this.menu_Button_Hive.CheckOnClick = true;
-            this.menu_Button_Hive.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.menu_Button_Hive.Image = global::VoodooRegedit.Properties.Resources.computer_network;
-            this.menu_Button_Hive.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.menu_Button_Hive.Name = "menu_Button_Hive";
-            this.menu_Button_Hive.Size = new System.Drawing.Size(23, 22);
-            this.menu_Button_Hive.Text = "Use Machine Hive";
             // 
             // toolStripButton1
             // 
@@ -307,7 +295,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ToolStripButton menu_Button_Hive;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButton10;
         private System.Windows.Forms.ToolStripButton toolStripButton11;

@@ -18,56 +18,47 @@
  *   peachykeen@voodooshader.com
  */
 using System;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace VoodooNetClasses
 {
-    [Serializable]
-    public class VoodooModule : INotifyPropertyChanged, ISerializable, IVoodooRegistryObject
+    [XmlType("Module", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd")]
+    [XmlRoot("Module", Namespace = "http://www.voodooshader.com/manifests/Voodoo.xsd", IsNullable = false)]
+    public class VoodooModule : IVoodooRegistryObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        [XmlElement("LibID", DataType = "Uuid")]
+        public Guid LibID { get; set; }
 
-        Guid m_LibID, m_PackID;
-        String m_Name, m_Path, m_Config, m_Props;
+        [XmlElement("PackID", DataType = "Uuid")]
+        public Guid PackID { get; set; }
+
+        [XmlElement("Name")]
+        public String Name { get; set; }
+
+        [XmlElement("Path")]
+        public String Path { get; set; }
+
+        [XmlElement("Config")]
+        public String Config { get; set; }
+
+        [XmlElement("Props")]
+        public String Props { get; set; }
 
         public VoodooModule()
         {
-
+            LibID = PackID = Guid.Empty;
+            Name = Path = Config = Props = String.Empty;
         }
 
-        public VoodooModule(Guid LibID, Guid PackID, String Name, String Path, String Config, String Props)
+        public VoodooModule(Guid iLibID, Guid iPackID, String iName, String iPath, String iConfig, String iProps)
         {
-            m_LibID  = LibID;
-            m_PackID = PackID;
-            m_Name   = Name;
-            m_Path   = Path;
-            m_Config = Config;
-            m_Props  = Props;
-        }
-
-        // ISerializable
-        protected VoodooModule(SerializationInfo info, StreamingContext context)
-        {
-            m_LibID  = new Guid(info.GetString("LibID"));
-            m_PackID = new Guid(info.GetString("PackID"));
-            m_Name   = info.GetString("Name");
-            m_Path   = info.GetString("Path");
-            m_Config = info.GetString("Config");
-            m_Props  = info.GetString("Props");
-        }
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("LibID",  m_LibID.ToString("D"));
-            info.AddValue("PackID", m_PackID.ToString("D"));
-            info.AddValue("Name",   m_Name);
-            info.AddValue("Path",   m_Path);
-            info.AddValue("Config", m_Config);
-            info.AddValue("Props",  m_Props);
+            LibID  = iLibID;
+            PackID = iPackID;
+            Name   = iName;
+            Path   = iPath;
+            Config = iConfig;
+            Props  = iProps;
         }
 
         // IVoodooRegistryObject
@@ -76,81 +67,81 @@ namespace VoodooNetClasses
             try
             {
                 String name = key.Name.Substring(key.Name.LastIndexOf('\\') + 1);
-                m_LibID = new Guid(name);
-                if (m_LibID == null)
+                LibID = new Guid(name);
+                if (LibID == null)
                 {
-                    m_LibID = Guid.Empty;
+                    LibID = Guid.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_LibID = Guid.Empty;            	
+                LibID = Guid.Empty;            	
             }
             try
             {
-                m_PackID = new Guid(key.GetValue("PackID") as String);
-                if (m_PackID == null)
+                PackID = new Guid(key.GetValue("PackID") as String);
+                if (PackID == null)
                 {
-                    m_PackID = Guid.Empty;
+                    PackID = Guid.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_PackID = Guid.Empty;
+                PackID = Guid.Empty;
             }
             try
             {
-                m_Name = key.GetValue("Name") as String;
-                if (m_Name == null)
+                Name = key.GetValue("Name") as String;
+                if (Name == null)
                 {
-                    m_Name = String.Empty;
+                    Name = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Name = String.Empty;
+                Name = String.Empty;
             }
             try
             {
-                m_Path = key.GetValue("Path") as String;
-                if (m_Path == null)
+                Path = key.GetValue("Path") as String;
+                if (Path == null)
                 {
-                    m_Path = String.Empty;
+                    Path = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Path = String.Empty;            	
+                Path = String.Empty;            	
             }
             try
             {
-                m_Config = key.GetValue("Config") as String;
-                if (m_Config == null)
+                Config = key.GetValue("Config") as String;
+                if (Config == null)
                 {
-                    m_Config = String.Empty;
+                    Config = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Config = String.Empty;             	
+                Config = String.Empty;             	
             }
             try
             {
-                m_Props = key.GetValue("Props") as String;
-                if (m_Props == null)
+                Props = key.GetValue("Props") as String;
+                if (Props == null)
                 {
-                    m_Props = String.Empty;
+                    Props = String.Empty;
                 }
             }
             catch (System.Exception)
             {
-                m_Props = String.Empty;             	
+                Props = String.Empty;             	
             }
         }
 
         public void ToRegistryKey(RegistryKey parent)
         {
-            String keyName = m_LibID.ToString("D");
+            String keyName = LibID.ToString("D");
 
             RegistryKey key = parent.OpenSubKey(keyName);
             if (key != null)
@@ -161,54 +152,13 @@ namespace VoodooNetClasses
 
             key = parent.CreateSubKey(keyName, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            key.SetValue("PackID", m_PackID.ToString("D"));
-            key.SetValue("Name",   m_Name);
-            key.SetValue("Path",   m_Path);
-            key.SetValue("Config", m_Config);
-            key.SetValue("Props",  m_Props);
+            key.SetValue("PackID", PackID.ToString("D"));
+            key.SetValue("Name",   Name);
+            key.SetValue("Path",   Path);
+            key.SetValue("Config", Config);
+            key.SetValue("Props",  Props);
 
             key.Close();
-        }
-
-        public Guid LibID
-        {
-            get { return m_LibID; }
-            set { m_LibID = value; this.NotifyPropertyChanged("LibID"); }
-        }
-
-        public Guid PackID
-        {
-            get { return m_PackID; }
-            set { m_PackID = value; this.NotifyPropertyChanged("PackID"); }
-        }
-
-        public String Name
-        {
-            get { return m_Name; }
-            set { m_Name = value; this.NotifyPropertyChanged("Name"); }
-        }
-
-        public String Path
-        {
-            get { return m_Path; }
-            set { m_Path = value; this.NotifyPropertyChanged("Path"); }
-        }
-
-        public String Config
-        {
-            get { return m_Config; }
-            set { m_Config = value; this.NotifyPropertyChanged("Config"); }
-        }
-
-        public String Props
-        {
-            get { return m_Props; }
-            set { m_Props = value; this.NotifyPropertyChanged("Props"); }
-        }
-
-        private void NotifyPropertyChanged(String name)
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
         }
     }
 }

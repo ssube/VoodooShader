@@ -155,7 +155,7 @@
     <value>True</value>
   </metadata>
   <data name="col_TargetFind.HeaderText" xml:space="preserve">
-    <value />
+    <value>Browse</value>
   </data>
   <data name="col_TargetFind.ToolTipText" xml:space="preserve">
     <value>Browse Target</value>
@@ -173,7 +173,7 @@
     <value>True</value>
   </metadata>
   <data name="col_ConfigFind.HeaderText" xml:space="preserve">
-    <value />
+    <value>Browse</value>
   </data>
   <data name="col_ConfigFind.ToolTipText" xml:space="preserve">
     <value>Browse Config</value>
@@ -185,13 +185,13 @@
     <value>True</value>
   </metadata>
   <data name="col_ConfigEdit.HeaderText" xml:space="preserve">
-    <value />
+    <value>Edit Config</value>
   </data>
   <data name="col_ConfigEdit.ToolTipText" xml:space="preserve">
     <value>Edit Config</value>
   </data>
   <data name="col_ConfigEdit.Width" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>64</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cHook_Table.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -278,51 +278,6 @@
   </metadata>
   <data name="cMenu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
-  </data>
-  <data name="cMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="cMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>784, 25</value>
-  </data>
-  <data name="cMenu.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cMenu.Name" xml:space="preserve">
-    <value>cMenu</value>
-  </data>
-  <data name="&gt;&gt;cMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cMenu.Parent" xml:space="preserve">
-    <value>toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;cMenu.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
-    <value>toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="cMenu_Hook_On.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -571,6 +526,51 @@
   </data>
   <data name="cMenu_Downloads.ToolTipText" xml:space="preserve">
     <value>Voodoo Downloads and Updates</value>
+  </data>
+  <data name="cMenu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="cMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>784, 25</value>
+  </data>
+  <data name="cMenu.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cMenu.Name" xml:space="preserve">
+    <value>cMenu</value>
+  </data>
+  <data name="&gt;&gt;cMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cMenu.Parent" xml:space="preserve">
+    <value>toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;cMenu.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
+    <value>toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="cTrayIcon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>122, 17</value>
@@ -12627,48 +12627,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Voodoo UI</value>
   </data>
-  <data name="&gt;&gt;colActive.Name" xml:space="preserve">
-    <value>colActive</value>
-  </data>
-  <data name="&gt;&gt;colActive.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colName.Name" xml:space="preserve">
-    <value>colName</value>
-  </data>
-  <data name="&gt;&gt;colName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colTarget.Name" xml:space="preserve">
-    <value>colTarget</value>
-  </data>
-  <data name="&gt;&gt;colTarget.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;col_TargetFind.Name" xml:space="preserve">
-    <value>col_TargetFind</value>
-  </data>
-  <data name="&gt;&gt;col_TargetFind.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colConfig.Name" xml:space="preserve">
-    <value>colConfig</value>
-  </data>
-  <data name="&gt;&gt;colConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;col_ConfigFind.Name" xml:space="preserve">
-    <value>col_ConfigFind</value>
-  </data>
-  <data name="&gt;&gt;col_ConfigFind.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;col_ConfigEdit.Name" xml:space="preserve">
-    <value>col_ConfigEdit</value>
-  </data>
-  <data name="&gt;&gt;col_ConfigEdit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;cMenu_Hook_On.Name" xml:space="preserve">
     <value>cMenu_Hook_On</value>
   </data>
@@ -12752,6 +12710,48 @@
   </data>
   <data name="&gt;&gt;dOpenFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colActive.Name" xml:space="preserve">
+    <value>colActive</value>
+  </data>
+  <data name="&gt;&gt;colActive.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colName.Name" xml:space="preserve">
+    <value>colName</value>
+  </data>
+  <data name="&gt;&gt;colName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colTarget.Name" xml:space="preserve">
+    <value>colTarget</value>
+  </data>
+  <data name="&gt;&gt;colTarget.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;col_TargetFind.Name" xml:space="preserve">
+    <value>col_TargetFind</value>
+  </data>
+  <data name="&gt;&gt;col_TargetFind.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colConfig.Name" xml:space="preserve">
+    <value>colConfig</value>
+  </data>
+  <data name="&gt;&gt;colConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;col_ConfigFind.Name" xml:space="preserve">
+    <value>col_ConfigFind</value>
+  </data>
+  <data name="&gt;&gt;col_ConfigFind.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;col_ConfigEdit.Name" xml:space="preserve">
+    <value>col_ConfigEdit</value>
+  </data>
+  <data name="&gt;&gt;col_ConfigEdit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

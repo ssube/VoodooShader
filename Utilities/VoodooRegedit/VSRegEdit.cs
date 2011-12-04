@@ -6,23 +6,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
-using System.Security.Principal;
 using VoodooNetClasses;
 
 namespace VoodooRegedit
 {
-    public struct KeyRow
-    {
-        public String Name, Type, Value;
-
-        public KeyRow(String name, String type, String value)
-        {
-            Name = name;
-            Type = type;
-            Value = value;
-        }
-    }
-
     public partial class VSRegEdit : Form
     {
         VoodooRegistry m_Registry;
@@ -31,44 +18,11 @@ namespace VoodooRegedit
         public VSRegEdit()
         {
             InitializeComponent();
-
-            if (!IsUserAdministrator())
-            {
-                menu_Button_Hive.Enabled = false;
-            }
-        }
-
-        public bool IsUserAdministrator()
-        {
-            //bool value to hold our return value
-            bool isAdmin;
-            try
-            {
-                //get the currently logged in user
-                WindowsIdentity user = WindowsIdentity.GetCurrent();
-                WindowsPrincipal principal = new WindowsPrincipal(user);
-                isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
-            }
-            catch (UnauthorizedAccessException)
-            {
-                isAdmin = false;
-            }
-            catch (Exception)
-            {
-                isAdmin = false;
-            }
-            return isAdmin;
         }
 
         public void ImportRegistry(object sender, EventArgs e)
         {
-            RegistryKey hive = Registry.CurrentUser;
-            if (menu_Button_Hive.Checked)
-            {
-                hive = Registry.LocalMachine;
-            }
-
-            RegistryKey voodooRoot = hive.OpenSubKey(@"SOFTWARE\VoodooShader");
+            RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader");
             if (voodooRoot == null)
             {
                 voodooRoot = hive.CreateSubKey(@"SOFTWARE\VoodooShader");
@@ -88,13 +42,7 @@ namespace VoodooRegedit
         public void ExportRegistry(object sender, EventArgs e)
         {
             // Actually export to the registry
-            RegistryKey voodooRoot;
-            if (menu_Button_Hive.Checked)
-            {
-                voodooRoot = Registry.LocalMachine.OpenSubKey(@"SOFTWARE", true);
-            } else {
-                voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE", true);
-            }
+            RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE", true);
 
             m_Registry.ToRegistryKey(voodooRoot);
 
