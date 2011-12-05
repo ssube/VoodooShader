@@ -30,6 +30,30 @@ namespace VoodooNetClasses
 
         public static char ArraysDelim { get { return ArrayDelims[0]; } }
 
+        public static String GetRootPath()
+        {
+            String defaultRoot = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\VoodooShader\";
+
+            try
+            {
+                String regPath = Registry.CurrentUser.GetValue(@"Software\VoodooShader\Path") as String;
+
+                if (regPath == null)
+                {
+                    Registry.CurrentUser.SetValue(@"Software\VoodooShader\Path", defaultRoot);
+                    return defaultRoot;
+                }
+                else
+                {
+                    return regPath;
+                }
+            }
+            catch (Exception)
+            {
+                return defaultRoot;
+            }
+        }
+
         #region Write Methods
         public static void Write(GlobalRegistry full)
         {

@@ -1,7 +1,7 @@
 # Voodoo Framework UUID list
 
 ### Module UUIDs (LIBIDs)
-* __Voodoo Shader Framework (global UUID)__
+* __Voodoo Shader Framework (global UUID, PackId)__
   * a687cfca-063c-11e1-b22e-005056c00008
   * {0xCA, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
 * __Voodoo/Core__

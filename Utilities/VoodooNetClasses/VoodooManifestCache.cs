@@ -28,9 +28,14 @@ namespace VoodooNetClasses
     public class VoodooManifestCache
     {
         public String Path { get; set; }
+        public List<RemoteManifest> RemoteManifests { get; set; }
+        public List<PackageManifest> PackageManifests { get; set; }
 
         public VoodooManifestCache(String iPath)
         {
+            RemoteManifests = new List<RemoteManifest>();
+            PackageManifests = new List<PackageManifest>();
+
             Path = iPath;
 
             if (!Directory.Exists(Path))
@@ -49,6 +54,7 @@ namespace VoodooNetClasses
                 client.DownloadFile(remote.Uri, remotefile);
 
                 RemoteManifest remotemanifest = (RemoteManifest)VoodooXml.ValidateObject(remotefile, typeof(RemoteManifest));
+                RemoteManifests.Add(remotemanifest);
 
                 foreach (Package package in remotemanifest.Packages)
                 {
@@ -59,6 +65,7 @@ namespace VoodooNetClasses
                         client.DownloadFile(package.ManifestUri, packagefile);
 
                         PackageManifest packagemanifest = (PackageManifest)VoodooXml.ValidateObject(packagefile, typeof(PackageManifest));
+                        PackageManifests.Add(packagemanifest);
                     }
                     catch (System.Exception exc)
                     {

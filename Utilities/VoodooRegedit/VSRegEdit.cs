@@ -12,7 +12,7 @@ namespace VoodooRegedit
 {
     public partial class VSRegEdit : Form
     {
-        VoodooRegistry m_Registry;
+        GlobalRegistry m_Registry;
         public TreeNode RootNode;
 
         public VSRegEdit()
@@ -22,29 +22,13 @@ namespace VoodooRegedit
 
         public void ImportRegistry(object sender, EventArgs e)
         {
-            RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader");
-            if (voodooRoot == null)
-            {
-                voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
-                if (voodooRoot == null)
-                {
-                    MessageBox.Show("Unable to open or create Voodoo root key.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-            else
-            {
-                m_Registry = new VoodooRegistry();
-                m_Registry.FromRegistryKey(voodooRoot);
-            }
+            m_Registry = VoodooRegistry.Read();
         }
 
         public void ExportRegistry(object sender, EventArgs e)
         {
             // Actually export to the registry
-            RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE", true);
-
-            m_Registry.ToRegistryKey(voodooRoot);
+            VoodooRegistry.Write(m_Registry);
 
             ImportRegistry(null, null);
         }

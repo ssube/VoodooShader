@@ -364,6 +364,7 @@
             // 
             resources.ApplyResources(this.cMenu_Downloads, "cMenu_Downloads");
             this.cMenu_Downloads.Name = "cMenu_Downloads";
+            this.cMenu_Downloads.Click += new System.EventHandler(this.DownloadWindow);
             // 
             // cTrayIcon
             // 

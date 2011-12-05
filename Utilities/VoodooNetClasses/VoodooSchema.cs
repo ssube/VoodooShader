@@ -553,6 +553,7 @@ namespace VoodooNetClasses
     public partial class PackageManifest
     {
         private Package packageField;
+        private string dscriptionField;
         private MessageSet[] messagesField;
         private Version[] versionsField;
         public Package Package
@@ -564,6 +565,17 @@ namespace VoodooNetClasses
             set
             {
                 this.packageField = value;
+            }
+        }
+        public string Description
+        {
+            get
+            {
+                return this.dscriptionField;
+            }
+            set
+            {
+                this.dscriptionField = value;
             }
         }
         [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]
