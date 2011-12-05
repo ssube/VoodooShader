@@ -54,20 +54,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cHook_Active = new System.Windows.Forms.CheckBox();
             this.cMenu = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.cTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.dOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.cMenu_Hook_On = new System.Windows.Forms.ToolStripButton();
             this.cMenu_Hook_Off = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMenu_Hook_Add = new System.Windows.Forms.ToolStripButton();
             this.cMenu_Hook_Remove = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cMenu_Hook_Wizard = new System.Windows.Forms.ToolStripButton();
             this.cMenu_FindGames = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.cMenu_Downloads = new System.Windows.Forms.ToolStripButton();
+            this.cTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.dOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -124,6 +124,7 @@
             resources.ApplyResources(this.cHook_Table, "cHook_Table");
             this.cHook_Table.MultiSelect = false;
             this.cHook_Table.Name = "cHook_Table";
+            this.cHook_Table.ReadOnly = true;
             this.cHook_Table.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.cHook_Table.RowHeadersVisible = false;
             this.cHook_Table.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -136,6 +137,7 @@
             this.colActive.DataPropertyName = "Active";
             resources.ApplyResources(this.colActive, "colActive");
             this.colActive.Name = "colActive";
+            this.colActive.ReadOnly = true;
             // 
             // colName
             // 
@@ -291,32 +293,6 @@
             this.cMenu.Name = "cMenu";
             this.cMenu.Stretch = true;
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // cTrayIcon
-            // 
-            this.cTrayIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            resources.ApplyResources(this.cTrayIcon, "cTrayIcon");
-            this.cTrayIcon.Click += new System.EventHandler(this.Notify_OnClick);
-            // 
-            // dOpenFile
-            // 
-            resources.ApplyResources(this.dOpenFile, "dOpenFile");
-            this.dOpenFile.RestoreDirectory = true;
-            // 
             // cMenu_Hook_On
             // 
             this.cMenu_Hook_On.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -331,6 +307,11 @@
             this.cMenu_Hook_Off.Name = "cMenu_Hook_Off";
             this.cMenu_Hook_Off.Click += new System.EventHandler(this.Menu_Hook_Enable);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
             // cMenu_Hook_Add
             // 
             resources.ApplyResources(this.cMenu_Hook_Add, "cMenu_Hook_Add");
@@ -343,6 +324,11 @@
             this.cMenu_Hook_Remove.Name = "cMenu_Hook_Remove";
             this.cMenu_Hook_Remove.Click += new System.EventHandler(this.Menu_Hook_Remove);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
             // cMenu_Hook_Wizard
             // 
             resources.ApplyResources(this.cMenu_Hook_Wizard, "cMenu_Hook_Wizard");
@@ -353,6 +339,11 @@
             resources.ApplyResources(this.cMenu_FindGames, "cMenu_FindGames");
             this.cMenu_FindGames.Name = "cMenu_FindGames";
             this.cMenu_FindGames.Click += new System.EventHandler(this.SearchSupported);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // toolStripButton6
             // 
@@ -373,6 +364,17 @@
             // 
             resources.ApplyResources(this.cMenu_Downloads, "cMenu_Downloads");
             this.cMenu_Downloads.Name = "cMenu_Downloads";
+            // 
+            // cTrayIcon
+            // 
+            this.cTrayIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            resources.ApplyResources(this.cTrayIcon, "cTrayIcon");
+            this.cTrayIcon.Click += new System.EventHandler(this.Notify_OnClick);
+            // 
+            // dOpenFile
+            // 
+            resources.ApplyResources(this.dOpenFile, "dOpenFile");
+            this.dOpenFile.RestoreDirectory = true;
             // 
             // MainForm
             // 
