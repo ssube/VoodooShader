@@ -40,31 +40,25 @@ namespace VoodooNetClasses
             // Find the first common parent
             Dictionary<Version, Boolean> searched = new Dictionary<Version, Boolean>();
             Version c_from = v_from, c_to = v_to;
+            
+            String parent_id = null;
 
             while (true)
             {
-                if (c_to.Parent == null || searched.ContainsKey(c_from))
-                {
-                    break;
-                }
+                if (c_to.Parent == null) { parent_id = c_to.Id; break; }
+                else if (searched.ContainsKey(c_to)) { parent_id = c_to.Id; break; }
+
                 c_to = versions.Find(v => v.Id == c_to.Parent);
+                
+                if (c_from.Parent == null ) {parent_id = c_from.Id; break;}
+                else if (searched.ContainsKey(c_from)) {parent_id = c_from.Id; break;}
 
-                if (c_from.Parent == null || searched.ContainsKey(c_from))
-                {
-                    break;
-                }
                 c_from = versions.Find(v => v.Id == c_from.Parent);
-            }
-
-            String parent_id = null;
-            if (c_check != null)
-            {
-                parent_id = c_check.Id;
             }
 
             // Get the change stack
             Stack<Version> changechain = new Stack<Version>();
-            for (c_check = c_to; c_check.Parent != parent_id; versions.Find(v => v.Id == c_check.Parent))
+            for (Version c_check = c_to; c_check.Parent != parent_id; versions.Find(v => v.Id == c_check.Parent))
             {
                 changechain.Push(c_check);
             }

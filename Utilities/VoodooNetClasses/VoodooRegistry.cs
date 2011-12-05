@@ -213,6 +213,7 @@ namespace VoodooNetClasses
         {
             try
             {
+                hookKey.SetValue("Active", hook.Active.ToString().ToLower());
                 hookKey.SetValue("Name", hook.Name);
                 hookKey.SetValue("Target", hook.Target);
                 hookKey.SetValue("Config", hook.Config);

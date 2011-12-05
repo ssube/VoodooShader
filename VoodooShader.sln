@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{093207D3-DF56-4F72-BD00-ACACD9476FA8}"
 	ProjectSection(SolutionItems) = preProject
 		CREDITS.md = CREDITS.md
-		doxyfile = doxyfile
 		LICENSE = LICENSE
 		README.md = README.md
 		voodoo_uuids.md = voodoo_uuids.md

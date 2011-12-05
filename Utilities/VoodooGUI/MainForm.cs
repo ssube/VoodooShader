@@ -32,6 +32,8 @@ namespace VoodooGUI
         private RemoveGlobalHook m_RemoveFunc;
 
         private List<Hook> m_Hooks;
+        bool m_DetailsDirty = false, m_DoNotUpdate = false;
+        int m_LastEnter = -1;
 
         public MainForm()
         {
@@ -76,7 +78,7 @@ namespace VoodooGUI
             Hook hook = new Hook();
             hook.Active = false;
             hook.Name = hook.Target = hook.Config = String.Empty;
-
+            
             cHook_Table.EndEdit();
             this.BindingContext[cHook_Table.DataSource].SuspendBinding();
             m_Hooks.Add(hook);
@@ -155,7 +157,7 @@ namespace VoodooGUI
 
         private void MainForm_Close(object sender, FormClosedEventArgs e)
         {
-            CommitHooks();
+            HookSaveCheck();
 
             if (m_GlobalHook != IntPtr.Zero)
             {
@@ -165,6 +167,8 @@ namespace VoodooGUI
 
         private void LoadHooks()
         {
+            m_DetailsDirty = false;
+
             try
             {
                 RegistryKey hookRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader\Hooks", RegistryKeyPermissionCheck.ReadSubTree);
@@ -190,16 +194,16 @@ namespace VoodooGUI
             try
             {
                 RegistryKey voodooRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader", RegistryKeyPermissionCheck.ReadWriteSubTree);
-                if (voodooRoot == null)
+                if (voodooRoot != null)
                 {
+                    if (voodooRoot.OpenSubKey("Hooks") != null)
+                    {
+                        voodooRoot.DeleteSubKeyTree("Hooks");
+                    }
+                } else {
                     voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
                 }
-
-                if (voodooRoot.OpenSubKey("Hooks") != null)
-                {
-                    voodooRoot.DeleteSubKeyTree("Hooks");
-                }
-
+                
                 VoodooRegistry.Write(m_Hooks, voodooRoot);
 
                 voodooRoot.Close();
@@ -210,39 +214,107 @@ namespace VoodooGUI
             }
         }
 
-        private void CellClick(object sender, DataGridViewCellEventArgs e)
+        private void SaveHook(object sender, EventArgs e)
         {
-            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (cHook_Table.SelectedRows.Count == 0) return;
 
-            if (cHook_Table.Columns[e.ColumnIndex] == col_TargetFind)
+            cHook_Table.SelectedRows[0].Cells["colActive"].Value = cHook_Active.Checked;
+            cHook_Table.SelectedRows[0].Cells["colName"].Value = cHook_Name.Text;
+            cHook_Table.SelectedRows[0].Cells["colTarget"].Value = cHook_Target.Text;
+            cHook_Table.SelectedRows[0].Cells["colConfig"].Value = cHook_Config.Text;
+
+            m_DetailsDirty = false;
+
+            CommitHooks();
+        }
+
+        private void RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (m_DoNotUpdate || m_LastEnter == e.RowIndex || e.RowIndex < 0 || e.RowIndex > m_Hooks.Count) return;
+
+            m_DetailsDirty = false;
+            m_DoNotUpdate = true;
+
+            cHook_Active.Checked = m_Hooks[e.RowIndex].Active;
+            cHook_Name.Text = m_Hooks[e.RowIndex].Name;
+            cHook_Target.Text = m_Hooks[e.RowIndex].Target;
+            cHook_Config.Text = m_Hooks[e.RowIndex].Config;
+
+            m_DoNotUpdate = false;
+
+            m_LastEnter = e.RowIndex;
+        }
+
+        private void FindTarget(object sender, EventArgs e)
+        {
+            dOpenFile.FilterIndex = 1;
+            dOpenFile.Title = "Find Target Program";
+
+            try
             {
-                dOpenFile.FilterIndex = 0;
-                dOpenFile.Title = "Select Target Program";
-
-                if (dOpenFile.ShowDialog() == DialogResult.OK)
-                {
-                    cHook_Table.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = dOpenFile.FileName;
-                    CommitHooks();
-                }
+                dOpenFile.InitialDirectory = System.IO.Path.GetDirectoryName(cHook_Target.Text);
             }
-            else if (cHook_Table.Columns[e.ColumnIndex] == col_ConfigFind)
-            {
-                dOpenFile.FilterIndex = 1;
-                dOpenFile.Title = "Select Config File";
+            catch (Exception) { }
 
-                if (dOpenFile.ShowDialog() == DialogResult.OK)
-                {
-                    cHook_Table.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = dOpenFile.FileName;
-                    CommitHooks();
-                }
+            if (dOpenFile.ShowDialog() == DialogResult.OK)
+            {
+                cHook_Target.Text = dOpenFile.FileName;
             }
         }
 
-        private void CellChanged(object sender, DataGridViewCellEventArgs e)
+        private void FindConfig(object sender, EventArgs e)
         {
-            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            dOpenFile.FilterIndex = 2;
+            dOpenFile.Title = "Find Config File";
+            try
+            {
+                dOpenFile.InitialDirectory = System.IO.Path.GetDirectoryName(cHook_Config.Text);
+            }
+            catch (Exception) { }
 
-            CommitHooks();
+            if (dOpenFile.ShowDialog() == DialogResult.OK)
+            {
+                cHook_Config.Text = dOpenFile.FileName;
+            }
+        }
+
+        private void HookDetailChanged(object sender, EventArgs e)
+        {
+            if (!m_DoNotUpdate) m_DetailsDirty = true;
+        }
+
+        private bool HookSaveCheck()
+        {
+            if (m_DetailsDirty)
+            {
+                DialogResult result = MessageBox.Show("The hook details have been modified. Would you like to save them?", "Save Hook", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.Cancel)
+                {
+                    return false;
+                } else if (result == DialogResult.Yes)
+                {
+                    SaveHook(null, null);
+                }
+
+                m_DetailsDirty = false;
+            }
+
+            return true;
+        }
+
+        private void RowChange(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            m_DoNotUpdate = true;
+            if (cHook_Table.ContainsFocus && !HookSaveCheck())
+            {
+                e.Cancel = true;
+            }
+            m_DoNotUpdate = false;
+        }
+
+        private void OpenAboutBox(object sender, EventArgs e)
+        {
+            new AboutVoodoo().ShowDialog();
         }
     }
 }

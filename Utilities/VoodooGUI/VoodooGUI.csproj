@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutVoodoo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutVoodoo.Designer.cs">
+      <DependentUpon>AboutVoodoo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     <Compile Include="UpdateManager.Designer.cs">
       <DependentUpon>UpdateManager.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AboutVoodoo.resx">
+      <DependentUpon>AboutVoodoo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConfigEdit.resx">
       <DependentUpon>ConfigEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +121,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\about.rtf" />
     <None Include="Resources\drive-download.png" />
     <None Include="Resources\drive--minus.png" />
     <None Include="Resources\application-browser.png" />
@@ -126,7 +136,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
