@@ -25,6 +25,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using MarkdownSharp;
 using VoodooNetClasses;
@@ -48,11 +49,8 @@ namespace VoodooGUI
             String cachePath = VoodooRegistry.GetRootPath() + @"\manifests\";
             m_Cache = new VoodooManifestCache(cachePath);
 
-            // Sync remotes
-            Remote testRemote = new Remote();
-            testRemote.Name = "VoodooShader.com";
-            testRemote.Uri = "https://www.voodooshader.com/manifests/Remote.xml";
-            m_Cache.Sync(testRemote);
+            m_Cache.OnFetchManifest += new VoodooManifestCache.FetchManifest(m_Cache_OnFetchManifest);
+            m_Cache.Sync();
 
             // Load and list packages
             foreach (PackageManifest pm in m_Cache.PackageManifests)
@@ -60,7 +58,12 @@ namespace VoodooGUI
                 int index = cPackageGrid.Rows.Add();
                 cPackageGrid.Rows[index].Cells[1].Value = pm.Package.Name;
                 cPackageGrid.Rows[index].Cells[2].Value = pm.Package.Version;
-            }
+            }  
+        }
+
+        void m_Cache_OnFetchManifest(string name, string uri)
+        {
+            MessageBox.Show(String.Format("Fetching {0} from: {1}", name, uri));
         }
 
         void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)

@@ -27,8 +27,7 @@ namespace VoodooNetClasses
     public partial class RemoteManifest
     {
         private Package[] packagesField;
-        private Default[] defaultsField;
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
+        [System.Xml.Serialization.XmlElementAttribute("Package", IsNullable = false)]
         public Package[] Packages
         {
             get
@@ -38,18 +37,6 @@ namespace VoodooNetClasses
             set
             {
                 this.packagesField = value;
-            }
-        }
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
-        public Default[] Defaults
-        {
-            get
-            {
-                return this.defaultsField;
-            }
-            set
-            {
-                this.defaultsField = value;
             }
         }
     }
