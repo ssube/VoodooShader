@@ -1,21 +1,27 @@
 Voodoo relies on a number of third-party libraries for various functions. This directory contains 
-the necessary files for of these.
+the necessary files for most of these.
 
-Two significant (not included) dependencies also exist:
- - Boost 1.48.0
- - nVidia's Cg Toolkit (February 2011)
- - DirectX 9.0c SDK (August 2010)
+Significant (not included) dependencies include:
 
-These cannot be included due to license terms, but may be downloaded from http://www.nvidia.com and
-http://www.microsoft.com, respectively.
+ * Boost 1.48.0
+ * nVidia's Cg Toolkit (February 2011)
+ * DirectX 9.0c SDK (August 2010)
+
+These cannot be included due to license terms or size, but may be downloaded from:
+
+ * http://www.boost.org
+ * http://www.microsoft.com
+ * http://www.nvidia.com
 
 The dependencies are in a ZIP archive and must be extracted before use (having them loose greatly 
 increases the repo size). Win32 builds are included (DLL and LIB files) and the projects are set up 
-to use this dir for most dependencies.
+to use this dir for most dependencies. The archive should be extracted into this directory.
 
 Included are:
- - DevIL 1.7.8 (32-bit)
- - EasyHook 2.6
- - Glew 1.5.7
- - pugixml 1.0 (32-bit)
- - NDesk.Options 0.2.1
+
+ * DevIL 1.7.8 (32-bit)
+ * EasyHook 2.6
+ * Glew 1.5.7
+ * MarkdownSharp 1.13
+ * NDesk.Options 0.2.1
+ * pugixml 1.0 (32-bit)

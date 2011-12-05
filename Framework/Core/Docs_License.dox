@@ -60,20 +60,19 @@ namespace VoodooShader
      * Any trademarks or company names used in this documentation or the Voodoo framework are the property of their
      * respective owner(s). This includes nVidia, Cg, Windows and any other such content.
      *
-     * @section voodoo_license_fugueicons Fugue Icons License
+     * @section voodoo_license_boost Boost Software License
      *
-     * Some icons are taken from <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane's Fugue icon pack</a>. All
-     * rights reserved. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution
-     * 3.0 license</a>.
+     * The Voodoo Shader Framework uses portions of the <a href="http://www.boost.org">Boost C++ Libraries</a> in a number
+     * of areas. Libraries used include Lexical Cast, Smart Pointers, String Algorithms, and Uuid. Thanks to the authors
+     * of these libraries, and the Boost project as a whole. These libraries are used under the terms of the
+     * @ref voodoo_license_terms_boost.
      *
-     * @section voodoo_license_pugixml pugixml License
+     * @section voodoo_license_cg Cg Framework License
      *
-     * The Voodoo Shader Framework uses the <a href="http://pugixml.org/">pugixml library</a> to handle XML
-     * parsing and data retrieval. This library is used under the terms of the MIT license, detailed at
-     * @ref voodoo_license_terms_pugixml.
+     * The Voodoo Shader Framework uses nVidia's Cg Toolkit for shader compiling and handling. This library is used under
+     * the terms given in the @ref voodoo_license_terms_cg.
      *
-     * Thanks are given to Arseny Kapoulkine and all others involved for this excellent library, it has made config files a
-     * @em lot easier to work with and the API is very nice.
+     * Voodoo would not be particularly possible without Cg, so many thanks are given to the Cg team for their work.
 
      * @section voodoo_license_easyhook EasyHook License
      *
@@ -84,44 +83,35 @@ namespace VoodooShader
      * EasyHook is used under the terms of the GNU Lesser GPL, version 3. This is the same license as the Voodoo framework,
      * so the terms are included once, later in this document. Please see @ref voodoo_license_terms_lgpl3 for details.
      *
-     * @section voodoo_license_boost Boost Software License
+     * @section voodoo_license_fugueicons Fugue Icons License
      *
-     * The Voodoo Shader Framework uses portions of the <a href="http://www.boost.org">Boost C++ Libraries</a> in a number
-     * of areas. Libraries used include Lexical Cast, Smart Pointers, String Algorithms, and Uuid. Thanks to the authors
-     * of these libraries, and the Boost project as a whole. These libraries are used under the terms of the
-     * @ref voodoo_license_terms_boost.
-     *
-     * @section voodoo_license_ndeskoptions NDesk.Options License
-     *
-     * The Voodoo Shader Framework uses the NDesk.Options library for command-line processing. This library is used under
-     * the terms given in the @ref voodoo_license_terms_ndeskoptions.
+     * Some icons are taken from <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane's Fugue icon pack</a>. All
+     * rights reserved. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution
+     * 3.0 license</a>.
      *
      * @section voodoo_license_glew GLEW License
      *
      * The Voodoo Shader Framework uses The OpenGL Extension Wrangler Library in some components. This library is used under
      * the terms included in @ref voodoo_license_terms_glew.
      *
-     * @section voodoo_license_cg Cg Framework License
+     * @section voodoo_license_markdownsharp MarkdownSharp License
      *
-     * The Voodoo Shader Framework uses nVidia's Cg Toolkit for shader compiling and handling. This library is used under
-     * the terms given in the @ref voodoo_license_terms_cg.
+     * The Voodoo Shader Framework uses the MarkdownSharp library for text formatting. This library is used under the terms
+     * given in @ref voodoo_license_terms_markdownsharp.
      *
-     * Voodoo would not be particularly possible without Cg, so many thanks are given to the Cg team for their work.
+     * @section voodoo_license_ndeskoptions NDesk.Options License
      *
-     * @section voodoo_license_terms_pugixml Pugixml License Terms
+     * The Voodoo Shader Framework uses the NDesk.Options library for command-line processing. This library is used under
+     * the terms given in the @ref voodoo_license_terms_ndeskoptions.
      *
-     * Copyright (c) 2006-2010 Arseny Kapoulkine
+     * @section voodoo_license_pugixml pugixml License
      *
-     * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-     * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
-     * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
-     * permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright
-     * notice and this permission notice shall be included in all copies or substantial portions of the Software.
+     * The Voodoo Shader Framework uses the <a href="http://pugixml.org/">pugixml library</a> to handle XML
+     * parsing and data retrieval. This library is used under the terms of the MIT license, detailed at
+     * @ref voodoo_license_terms_pugixml.
      *
-     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-     * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-     * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-     * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+     * Thanks are given to Arseny Kapoulkine and all others involved for this excellent library, it has made config files a
+     * @em lot easier to work with and the API is very nice.
      *
      * @section voodoo_license_terms_boost Boost Software License Terms
      *
@@ -149,6 +139,61 @@ namespace VoodooShader
      * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
      * DEALINGS IN THE SOFTWARE.
      *
+     * @section voodoo_license_terms_markdownsharp MarkdownSharp License Terms
+     * 
+     * Copyright (c) 2009 - 2010 Jeff Atwood
+     * 
+     * http://www.opensource.org/licenses/mit-license.php
+     * 
+     * Permission is hereby granted, free of charge, to any person obtaining a copy
+     * of this software and associated documentation files (the "Software"), to deal
+     * in the Software without restriction, including without limitation the rights
+     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     * copies of the Software, and to permit persons to whom the Software is
+     * furnished to do so, subject to the following conditions:
+     * 
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     * 
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+     * THE SOFTWARE.
+     * 
+     * Copyright (c) 2003-2004 John Gruber
+     * &gt;http://daringfireball.net/&lt;
+     * All rights reserved.
+     * 
+     * Redistribution and use in source and binary forms, with or without
+     * modification, are permitted provided that the following conditions are
+     * met:
+     * 
+     * * Redistributions of source code must retain the above copyright notice,
+     *   this list of conditions and the following disclaimer.
+     * 
+     * * Redistributions in binary form must reproduce the above copyright
+     *   notice, this list of conditions and the following disclaimer in the
+     *   documentation and/or other materials provided with the distribution.
+     * 
+     * * Neither the name "Markdown" nor the names of its contributors may
+     *   be used to endorse or promote products derived from this software
+     *   without specific prior written permission.
+     * 
+     * This software is provided by the copyright holders and contributors "as
+     * is" and any express or implied warranties, including, but not limited
+     * to, the implied warranties of merchantability and fitness for a
+     * particular purpose are disclaimed. In no event shall the copyright owner
+     * or contributors be liable for any direct, indirect, incidental, special,
+     * exemplary, or consequential damages (including, but not limited to,
+     * procurement of substitute goods or services; loss of use, data, or
+     * profits; or business interruption) however caused and on any theory of
+     * liability, whether in contract, strict liability, or tort (including
+     * negligence or otherwise) arising in any way out of the use of this
+     * software, even if advised of the possibility of such damage.
+     *
      * @section voodoo_license_terms_ndeskoptions NDesk.Options License Terms
      *
      * Copyright (C) 2008 Novell (http://www.novell.com)
@@ -171,6 +216,21 @@ namespace VoodooShader
      * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
      * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
      * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+     *
+     * @section voodoo_license_terms_pugixml Pugixml License Terms
+     *
+     * Copyright (c) 2006-2010 Arseny Kapoulkine
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+     * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+     * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+     * permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright
+     * notice and this permission notice shall be included in all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+     * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+     * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+     * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      *
      * @section voodoo_license_terms_glew Glew License Terms
      *
