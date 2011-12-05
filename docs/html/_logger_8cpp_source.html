@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -258,7 +258,7 @@
 <a name="l00189"></a>00189 <span class="preprocessor">#endif</span>
 <a name="l00190"></a>00190 <span class="preprocessor"></span>                <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a2953ef04a3a9ae8114258ca8ac9455f6">m_LogFile</a> &lt;&lt; logMsg.str();
 <a name="l00191"></a>00191 
-<a name="l00192"></a>00192                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a10901a52fb6f53c52043942fd9b4df3b" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaf38b6ab75c151a62d89e452a44bae6eb">LL_ModInfo</a>, <a class="code" href="group__voodoo__module__xmllogger.html#gaed5f040d6abd714329b7143fa69ed1f1">VOODOO_LOGGER_NAME</a>, L<span class="stringliteral">&quot;Log file opened by VSXmlLogger::Open.&quot;</span>);
+<a name="l00192"></a>00192                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a9b905dcc7549e5f71249d100112a6268" title="Log a message, may be formatted with printf syntax.">Log</a>(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daaf38b6ab75c151a62d89e452a44bae6eb">LL_ModInfo</a>, <a class="code" href="group__voodoo__module__xmllogger.html#gaed5f040d6abd714329b7143fa69ed1f1">VOODOO_LOGGER_NAME</a>, L<span class="stringliteral">&quot;Log file opened by VSXmlLogger::Open.&quot;</span>);
 <a name="l00193"></a>00193 
 <a name="l00194"></a>00194                 this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a78508c2017f5c2c2d4f25719613ba7bf" title="Writes a module stamp to the log.">LogModule</a>(<a class="code" href="namespace_voodoo_shader_1_1_xml_logger.html#a052640155aad0d3d6464764e4df90afd">API_ModuleVersion</a>());
 <a name="l00195"></a>00195 
@@ -324,7 +324,7 @@
 <a name="l00255"></a>00255             }
 <a name="l00256"></a>00256         }
 <a name="l00257"></a>00257 
-<a name="l00258"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a10901a52fb6f53c52043942fd9b4df3b">00258</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a10901a52fb6f53c52043942fd9b4df3b" title="Log a message, may be formatted with printf syntax.">VSXmlLogger::Log</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * source, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * format, ...)
+<a name="l00258"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a9b905dcc7549e5f71249d100112a6268">00258</a>         <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a9b905dcc7549e5f71249d100112a6268" title="Log a message, may be formatted with printf syntax.">VSXmlLogger::Log</a>(<span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> level, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * source, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * format, ...)
 <a name="l00259"></a>00259         {
 <a name="l00260"></a>00260             <span class="keywordflow">if</span> (!this-&gt;<a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#a2953ef04a3a9ae8114258ca8ac9455f6">m_LogFile</a>.is_open()) <span class="keywordflow">return</span>;
 <a name="l00261"></a>00261 
@@ -335,7 +335,7 @@
 <a name="l00266"></a>00266             va_list args;
 <a name="l00267"></a>00267 
 <a name="l00268"></a>00268             va_start(args, format);
-<a name="l00269"></a>00269             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> fmtmsg = <a class="code" href="group__voodoo__utility__string__format.html#gaf19f157a14862373fc38c6070aabd1a1">String::FormatV</a>(format, args);
+<a name="l00269"></a>00269             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> fmtmsg = <a class="code" href="group__voodoo__utility__string__format.html#ga890d6d7780b2d9c84ec6d7d8b521e504">String::FormatV</a>(format, args);
 <a name="l00270"></a>00270             va_end(args);
 <a name="l00271"></a>00271 
 <a name="l00272"></a>00272             <span class="keywordflow">try</span>
@@ -439,7 +439,7 @@
 <a name="l00370"></a>00370 
 <a name="l00371"></a><a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ad9e868156fb41333908fae9138bb8230">00371</a>         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html#ad9e868156fb41333908fae9138bb8230" title="Formats the system&#39;s current tick count.">VSXmlLogger::LogTicks</a>()<span class="keyword"> const</span>
 <a name="l00372"></a>00372 <span class="keyword">        </span>{
-<a name="l00373"></a>00373             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">String::Format</a>(L<span class="stringliteral">&quot; ticks=\&quot;%d\&quot; &quot;</span>, GetTickCount());
+<a name="l00373"></a>00373             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__utility__string__format.html#ga40f51111ed73a680d7b66dea57722870">String::Format</a>(L<span class="stringliteral">&quot; ticks=\&quot;%d\&quot; &quot;</span>, GetTickCount());
 <a name="l00374"></a>00374         }
 <a name="l00375"></a>00375     }
 <a name="l00376"></a>00376 }
@@ -448,7 +448,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -92,25 +92,25 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00040"></a>00040     <a class="code" href="_includes_8hpp.html#aa57e2755684db0c7873c4fca9798071d">VOODOO_INTERFACE</a>(<a class="code" href="class_i_module_manager.html">IModuleManager</a>, IObject, {0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
+<a name="l00040"></a><a class="code" href="group__voodoo__framework__interfaces.html#gae8bba91e0f8a338bb14c44002eea6cc1">00040</a>     <a class="code" href="_includes_8hpp.html#aa57e2755684db0c7873c4fca9798071d">VOODOO_INTERFACE</a>(<a class="code" href="class_voodoo_shader_1_1_i_module_manager.html" title="Provides a framework for loading and unloading modules in core, as well as retrieving symbols and mod...">IModuleManager</a>, <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a>, {0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
 <a name="l00041"></a>00041     {
 <a name="l00042"></a>00042     <span class="keyword">public</span>:
-<a name="l00043"></a>00043         <span class="keyword">virtual</span> ~<a class="code" href="class_i_module_manager.html">IModuleManager</a>()  {};
+<a name="l00043"></a><a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#ab6211133f50377249e0d2b033f780ac9">00043</a>         <span class="keyword">virtual</span> <a class="code" href="class_voodoo_shader_1_1_i_module_manager.html#ab6211133f50377249e0d2b033f780ac9">~IModuleManager</a>()  {};
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST PURE;
 <a name="l00046"></a>00046         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, Release)() CONST PURE;
 <a name="l00047"></a>00047         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST PURE;
-<a name="l00048"></a>00048         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(String, ToString)() CONST PURE;
-<a name="l00049"></a>00049         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(ICore *, GetCore)() CONST PURE;
+<a name="l00048"></a>00048         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST PURE;
+<a name="l00049"></a>00049         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST PURE;
 <a name="l00050"></a>00050 
-<a name="l00059"></a>00059         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(LoadPath)(_In_ <span class="keyword">const</span> String &amp; path, _In_ <span class="keyword">const</span> String &amp; filter) PURE;
-<a name="l00067"></a>00067         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(LoadFile)(_In_ <span class="keyword">const</span> IFile * pFile) PURE;
-<a name="l00093"></a>00093         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(LoadFile)(_In_ <span class="keyword">const</span> String &amp; filename) PURE;
+<a name="l00059"></a>00059         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(LoadPath)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; filter) PURE;
+<a name="l00067"></a>00067         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(LoadFile)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> * pFile) PURE;
+<a name="l00093"></a>00093         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(LoadFile)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; filename) PURE;
 <a name="l00100"></a>00100         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(ClassExists)(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid) CONST PURE;
-<a name="l00111"></a>00111         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(ClassExists)(_In_ <span class="keyword">const</span> String &amp; name) CONST PURE;
-<a name="l00119"></a>00119         _Check_return_ <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(IObject *, CreateObject)(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid) CONST PURE;
-<a name="l00132"></a>00132         _Check_return_ <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(IObject *, CreateObject)(_In_ <span class="keyword">const</span> String &amp; name) CONST PURE;
-<a name="l00142"></a>00142         _Check_return_ <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<span class="keywordtype">void</span> *, FindFunction)(_In_ <span class="keyword">const</span> String &amp; module, _In_ <span class="keyword">const</span> String &amp; name) CONST PURE;
+<a name="l00111"></a>00111         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(ClassExists)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) CONST PURE;
+<a name="l00119"></a>00119         _Check_return_ <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> *, CreateObject)(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid) CONST PURE;
+<a name="l00132"></a>00132         _Check_return_ <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> *, CreateObject)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) CONST PURE;
+<a name="l00142"></a>00142         _Check_return_ <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<span class="keywordtype">void</span> *, FindFunction)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; module, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name) CONST PURE;
 <a name="l00143"></a>00143     };
 <a name="l00147"></a>00147 }
 </pre></div></div>
@@ -118,7 +118,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

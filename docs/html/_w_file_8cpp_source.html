@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -197,14 +197,14 @@
 <a name="l00128"></a>00128             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a49443b34cc6af8f452f06e5b40536786" title="Get the position of the given stream.">VSWFileImpl::Tell</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3e2c562aa77cff79cfe3a12316f51359">m_File</a>, stream);
 <a name="l00129"></a>00129         }
 <a name="l00130"></a>00130 
-<a name="l00131"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a066b9b0e2aefc1b69a58e677920c1c05">00131</a>         <span class="keywordtype">int</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a4264439d27948d3005fbe2b5ed8ee60c">VSWFile::Read</a>(_In_ <span class="keywordtype">int</span> count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> *buffer)
+<a name="l00131"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a5cd117f201ede69030d73798f5ae1098">00131</a>         <span class="keywordtype">int</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#aab7539cfee1f606096e432900589e0a2" title="Read the given number of bytes from the file, starting at the current position.">VSWFile::Read</a>(_In_ <span class="keywordtype">int</span> count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> *buffer)
 <a name="l00132"></a>00132         {
-<a name="l00133"></a>00133             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a4264439d27948d3005fbe2b5ed8ee60c">VSWFileImpl::Read</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>, <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3e2c562aa77cff79cfe3a12316f51359">m_File</a>, count, buffer);
+<a name="l00133"></a>00133             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#aab7539cfee1f606096e432900589e0a2" title="Read the given number of bytes from the file, starting at the current position.">VSWFileImpl::Read</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>, <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3e2c562aa77cff79cfe3a12316f51359">m_File</a>, count, buffer);
 <a name="l00134"></a>00134         }
 <a name="l00135"></a>00135 
-<a name="l00136"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a97a2a01f66cc30811448340e869f7e35">00136</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a97a2a01f66cc30811448340e869f7e35">VSWFile::Write</a>(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * buffer)
+<a name="l00136"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#aceca8130748211205428b867eef7bee1">00136</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#aceca8130748211205428b867eef7bee1" title="Write the given number of bytes to the file, starting at the current position.">VSWFile::Write</a>(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * buffer)
 <a name="l00137"></a>00137         {
-<a name="l00138"></a>00138             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a97a2a01f66cc30811448340e869f7e35">VSWFileImpl::Write</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>, <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3e2c562aa77cff79cfe3a12316f51359">m_File</a>, count, buffer);
+<a name="l00138"></a>00138             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#aceca8130748211205428b867eef7bee1" title="Write the given number of bytes to the file, starting at the current position.">VSWFileImpl::Write</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a2725a45bfa7ca7ae981eaf40dc34af2b">m_Core</a>, <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3e2c562aa77cff79cfe3a12316f51359">m_File</a>, count, buffer);
 <a name="l00139"></a>00139         }
 <a name="l00140"></a>00140     }
 <a name="l00141"></a>00141 }
@@ -213,7 +213,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

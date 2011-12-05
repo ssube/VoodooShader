@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -83,8 +83,8 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a348678ae78f065407756723619c55f14">Close</a> (std::fstream &amp;m_File)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a469e578a536277db222c1dbf63f77362">Seek</a> (std::fstream &amp;m_File, <a class="el" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465">StreamType</a> stream, <a class="el" href="namespace_voodoo_shader.html#a68a5aa1e8d5ddc2a43a629cd036264db">SeekMode</a> mode, int32_t offset)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#adee0f4566c34499406650145cf68893f">Tell</a> (std::fstream &amp;m_File, <a class="el" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465">StreamType</a> stream)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a9282e687f41936c7670361f0de184a2e">Read</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *m_Core, std::fstream &amp;m_File, const int32_t count, _In_opt_bytecount_(count) void *const pBuffer)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a311991beadd3e446b0569d3ee03ce549">Write</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *m_Core, std::fstream &amp;m_File, const int32_t count, _In_opt_bytecount_(count) void *const pBuffer)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#aee43536c68e09722006c9b4d7fb78fab">Read</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *m_Core, std::fstream &amp;m_File, const int32_t count, void *const pBuffer)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a14b815cd4db0d4cab8ec8a50f71e73bb">Write</a> (<a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *m_Core, std::fstream &amp;m_File, const int32_t count, void *const pBuffer)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
@@ -150,7 +150,7 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9282e687f41936c7670361f0de184a2e"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFileImpl::Read" ref="a9282e687f41936c7670361f0de184a2e" args="(ICore *m_Core, std::fstream &amp;m_File, const int32_t count, _In_opt_bytecount_(count) void *const pBuffer)" -->
+<a class="anchor" id="aee43536c68e09722006c9b4d7fb78fab"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFileImpl::Read" ref="aee43536c68e09722006c9b4d7fb78fab" args="(ICore *m_Core, std::fstream &amp;m_File, const int32_t count, void *const pBuffer)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -175,7 +175,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_opt_bytecount_(count) void *const&#160;</td>
+          <td class="paramtype">void *const&#160;</td>
           <td class="paramname"><em>pBuffer</em>&#160;</td>
         </tr>
         <tr>
@@ -261,7 +261,7 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a311991beadd3e446b0569d3ee03ce549"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFileImpl::Write" ref="a311991beadd3e446b0569d3ee03ce549" args="(ICore *m_Core, std::fstream &amp;m_File, const int32_t count, _In_opt_bytecount_(count) void *const pBuffer)" -->
+<a class="anchor" id="a14b815cd4db0d4cab8ec8a50f71e73bb"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFileImpl::Write" ref="a14b815cd4db0d4cab8ec8a50f71e73bb" args="(ICore *m_Core, std::fstream &amp;m_File, const int32_t count, void *const pBuffer)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -286,7 +286,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_opt_bytecount_(count) void *const&#160;</td>
+          <td class="paramtype">void *const&#160;</td>
           <td class="paramname"><em>pBuffer</em>&#160;</td>
         </tr>
         <tr>
@@ -310,7 +310,7 @@ Static Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:18 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

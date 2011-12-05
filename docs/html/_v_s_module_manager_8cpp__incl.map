@@ -4,7 +4,7 @@
 <area shape="rect" id="node35" href="$_v_s_module_8hpp.html" title="VSModule.hpp" alt="" coords="479,80,585,107"/>
 <area shape="rect" id="node40" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="573,155,651,181"/>
 <area shape="rect" id="node43" href="$_i_file_8hpp.html" title="IFile.hpp" alt="" coords="675,155,745,181"/>
-<area shape="rect" id="node46" href="$_i_file_system_8hpp.html" title="IFilesystem.hpp" alt="" coords="771,155,885,181"/>
+<area shape="rect" id="node46" href="$_i_filesystem_8hpp.html" title="IFilesystem.hpp" alt="" coords="771,155,885,181"/>
 <area shape="rect" id="node49" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="785,80,873,107"/>
 <area shape="rect" id="node53" href="$_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="899,80,987,107"/>
 <area shape="rect" id="node56" href="$_exception_8hpp.html" title="Exception.hpp" alt="" coords="487,229,592,256"/>

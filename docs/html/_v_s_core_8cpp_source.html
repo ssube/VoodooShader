@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -97,7 +97,7 @@
 <a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="_i_adapter_8hpp.html">IAdapter.hpp</a>&quot;</span>
 <a name="l00029"></a>00029 <span class="preprocessor">#include &quot;<a class="code" href="_i_core_8hpp.html">ICore.hpp</a>&quot;</span>
 <a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="_i_file_8hpp.html">IFile.hpp</a>&quot;</span>
-<a name="l00031"></a>00031 <span class="preprocessor">#include &quot;<a class="code" href="_i_file_system_8hpp.html">IFilesystem.hpp</a>&quot;</span>
+<a name="l00031"></a>00031 <span class="preprocessor">#include &quot;<a class="code" href="_i_filesystem_8hpp.html">IFilesystem.hpp</a>&quot;</span>
 <a name="l00032"></a>00032 <span class="preprocessor">#include &quot;<a class="code" href="_i_hook_manager_8hpp.html">IHookManager.hpp</a>&quot;</span>
 <a name="l00033"></a>00033 <span class="preprocessor">#include &quot;<a class="code" href="_i_logger_8hpp.html">ILogger.hpp</a>&quot;</span>
 <a name="l00034"></a>00034 <span class="preprocessor">#include &quot;<a class="code" href="_i_texture_8hpp.html">ITexture.hpp</a>&quot;</span>
@@ -204,10 +204,10 @@
 <a name="l00135"></a>00135 
 <a name="l00136"></a>00136         <span class="keywordtype">int</span> cmdargc = 0;
 <a name="l00137"></a>00137         LPWSTR * cmdargv = CommandLineToArgvW(cmdline, &amp;cmdargc);
-<a name="l00138"></a>00138         <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Add(<span class="stringliteral">&quot;cmd_count&quot;</span>, <a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">String::Format</a>(<span class="stringliteral">&quot;%d&quot;</span>, cmdargc), <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080">VT_System</a>);
+<a name="l00138"></a>00138         <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Add(<span class="stringliteral">&quot;cmd_count&quot;</span>, <a class="code" href="group__voodoo__utility__string__format.html#ga40f51111ed73a680d7b66dea57722870">String::Format</a>(<span class="stringliteral">&quot;%d&quot;</span>, cmdargc), <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080">VT_System</a>);
 <a name="l00139"></a>00139         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cmdargc; ++i)
 <a name="l00140"></a>00140         {
-<a name="l00141"></a>00141             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Add(<a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">String::Format</a>(<span class="stringliteral">&quot;cmd_%d&quot;</span>), cmdargv[i], <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080">VT_System</a>);
+<a name="l00141"></a>00141             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Add(<a class="code" href="group__voodoo__utility__string__format.html#ga40f51111ed73a680d7b66dea57722870">String::Format</a>(<span class="stringliteral">&quot;cmd_%d&quot;</span>), cmdargv[i], <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080">VT_System</a>);
 <a name="l00142"></a>00142         }
 <a name="l00143"></a>00143 
 <a name="l00144"></a>00144         <span class="comment">// Load the config</span>
@@ -244,10 +244,10 @@
 <a name="l00175"></a>00175 
 <a name="l00176"></a>00176             <span class="comment">// Start setting things up</span>
 <a name="l00177"></a>00177             pugi::xml_node configRoot = <span class="keyword">static_cast&lt;</span>pugi::xml_node<span class="keyword">&gt;</span>(*m_ConfigFile);
-<a name="l00178"></a>00178             pugi::xml_node coreNode = configRoot.select_single_node(L<span class="stringliteral">&quot;/VoodooConfig/Core&quot;</span>).node();
-<a name="l00179"></a>00179             <span class="keywordflow">if</span> (!coreNode)
+<a name="l00178"></a>00178             pugi::xml_node globalNode = configRoot.select_single_node(L<span class="stringliteral">&quot;/VoodooConfig/Global&quot;</span>).node();
+<a name="l00179"></a>00179             <span class="keywordflow">if</span> (!globalNode)
 <a name="l00180"></a>00180             {
-<a name="l00181"></a>00181                 <a class="code" href="group__voodoo__utility.html#ga091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Could not find core config node.&quot;</span>, <span class="keyword">nullptr</span>);
+<a name="l00181"></a>00181                 <a class="code" href="group__voodoo__utility.html#ga091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Could not find global config node.&quot;</span>, <span class="keyword">nullptr</span>);
 <a name="l00182"></a>00182             }
 <a name="l00183"></a>00183 
 <a name="l00184"></a>00184             <span class="comment">// Create query for node text, used multiple times</span>
@@ -256,8 +256,8 @@
 <a name="l00187"></a>00187 
 <a name="l00188"></a>00188             <span class="comment">// Load variables</span>
 <a name="l00189"></a>00189             {
-<a name="l00190"></a>00190                 pugi::xpath_query xpq_getVariables(L<span class="stringliteral">&quot;/VoodooConfig/Variables/Variable&quot;</span>);
-<a name="l00191"></a>00191                 pugi::xpath_node_set nodes = xpq_getVariables.evaluate_node_set(configRoot);
+<a name="l00190"></a>00190                 pugi::xpath_query xpq_getVariables(L<span class="stringliteral">&quot;./Variables/Variable&quot;</span>);
+<a name="l00191"></a>00191                 pugi::xpath_node_set nodes = xpq_getVariables.evaluate_node_set(globalNode);
 <a name="l00192"></a>00192                 pugi::xpath_node_set::const_iterator iter = nodes.begin();
 <a name="l00193"></a>00193 
 <a name="l00194"></a>00194                 <span class="keywordflow">while</span> (iter != nodes.end())
@@ -273,9 +273,9 @@
 <a name="l00204"></a>00204 
 <a name="l00205"></a>00205             <span class="comment">// Load plugins</span>
 <a name="l00206"></a>00206             {
-<a name="l00207"></a>00207                 pugi::xpath_query xpq_getPluginPaths(L<span class="stringliteral">&quot;/VoodooConfig/Plugins/Path&quot;</span>);
+<a name="l00207"></a>00207                 pugi::xpath_query xpq_getPluginPaths(L<span class="stringliteral">&quot;./Plugins/Path&quot;</span>);
 <a name="l00208"></a>00208                 pugi::xpath_query xpq_getFilter(L<span class="stringliteral">&quot;./@filter&quot;</span>);
-<a name="l00209"></a>00209                 pugi::xpath_node_set nodes = xpq_getPluginPaths.evaluate_node_set(configRoot);
+<a name="l00209"></a>00209                 pugi::xpath_node_set nodes = xpq_getPluginPaths.evaluate_node_set(globalNode);
 <a name="l00210"></a>00210                 pugi::xpath_node_set::const_iterator iter = nodes.begin();
 <a name="l00211"></a>00211 
 <a name="l00212"></a>00212                 <span class="keywordflow">while</span> (iter != nodes.end())
@@ -290,8 +290,8 @@
 <a name="l00221"></a>00221             }
 <a name="l00222"></a>00222 
 <a name="l00223"></a>00223             {
-<a name="l00224"></a>00224                 pugi::xpath_query xpq_getPluginFiles(L<span class="stringliteral">&quot;/VoodooConfig/Plugins/File&quot;</span>);
-<a name="l00225"></a>00225                 pugi::xpath_node_set nodes = xpq_getPluginFiles.evaluate_node_set(configRoot);
+<a name="l00224"></a>00224                 pugi::xpath_query xpq_getPluginFiles(L<span class="stringliteral">&quot;./Plugins/File&quot;</span>);
+<a name="l00225"></a>00225                 pugi::xpath_node_set nodes = xpq_getPluginFiles.evaluate_node_set(globalNode);
 <a name="l00226"></a>00226                 pugi::xpath_node_set::const_iterator iter = nodes.begin();
 <a name="l00227"></a>00227 
 <a name="l00228"></a>00228                 <span class="keywordflow">while</span> (iter != nodes.end())
@@ -305,10 +305,10 @@
 <a name="l00236"></a>00236             }
 <a name="l00237"></a>00237 
 <a name="l00238"></a>00238             <span class="comment">// Lookup classes</span>
-<a name="l00239"></a>00239             pugi::xpath_query logQuery(L<span class="stringliteral">&quot;/VoodooConfig/Core/Class/Logger/text()&quot;</span>);
-<a name="l00240"></a>00240             pugi::xpath_query fsQuery(L<span class="stringliteral">&quot;/VoodooConfig/Core/Class/FileSystem/text()&quot;</span>);
-<a name="l00241"></a>00241             pugi::xpath_query hookQuery(L<span class="stringliteral">&quot;/VoodooConfig/Core/Class/HookManager/text()&quot;</span>);
-<a name="l00242"></a>00242             pugi::xpath_query adpQuery(L<span class="stringliteral">&quot;/VoodooConfig/Core/Class/Adapter/text()&quot;</span>);
+<a name="l00239"></a>00239             pugi::xpath_query logQuery(L<span class="stringliteral">&quot;./Classes/Logger/text()&quot;</span>);
+<a name="l00240"></a>00240             pugi::xpath_query fsQuery(L<span class="stringliteral">&quot;./Classes/FileSystem/text()&quot;</span>);
+<a name="l00241"></a>00241             pugi::xpath_query hookQuery(L<span class="stringliteral">&quot;./Classes/HookManager/text()&quot;</span>);
+<a name="l00242"></a>00242             pugi::xpath_query adpQuery(L<span class="stringliteral">&quot;./Classes/Adapter/text()&quot;</span>);
 <a name="l00243"></a>00243             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> logClass = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(logQuery.evaluate_string(configRoot).c_str());
 <a name="l00244"></a>00244             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> fsClass = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(fsQuery.evaluate_string(configRoot).c_str());
 <a name="l00245"></a>00245             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> hookClass = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(hookQuery.evaluate_string(configRoot).c_str());
@@ -321,8 +321,8 @@
 <a name="l00252"></a>00252                 <a class="code" href="group__voodoo__utility.html#ga091b737d9aeea07d84a2c465beee6d38" title="Macro to throw Voodoo exceptions with extended debug info, particularly function, filename and line...">Throw</a>(<a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>, L<span class="stringliteral">&quot;Unable to create logger.&quot;</span>, <span class="keyword">nullptr</span>);
 <a name="l00253"></a>00253             }
 <a name="l00254"></a>00254 
-<a name="l00255"></a>00255             pugi::xpath_query logfQuery(L<span class="stringliteral">&quot;/VoodooConfig/Logger/File/text()&quot;</span>);
-<a name="l00256"></a>00256             pugi::xpath_query loglQuery(L<span class="stringliteral">&quot;/VoodooConfig/Logger/Level/text()&quot;</span>);
+<a name="l00255"></a>00255             pugi::xpath_query logfQuery(L<span class="stringliteral">&quot;./Log/File/text()&quot;</span>);
+<a name="l00256"></a>00256             pugi::xpath_query loglQuery(L<span class="stringliteral">&quot;./Log/Level/text()&quot;</span>);
 <a name="l00257"></a>00257 
 <a name="l00258"></a>00258             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> logFile  = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(logfQuery.evaluate_string(configRoot).c_str());
 <a name="l00259"></a>00259             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> logLevelStr = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(loglQuery.evaluate_string(configRoot).c_str());
@@ -759,7 +759,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

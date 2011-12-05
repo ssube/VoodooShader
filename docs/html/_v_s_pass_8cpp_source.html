@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -117,7 +117,7 @@
 <a name="l00048"></a>00048         {
 <a name="l00049"></a>00049             <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8f5a1d749b61feb661e6f87c14302b40">m_Name</a> += passName;
 <a name="l00050"></a>00050         } <span class="keywordflow">else</span> {
-<a name="l00051"></a>00051             <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8f5a1d749b61feb661e6f87c14302b40">m_Name</a> += <a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">String::Format</a>(L<span class="stringliteral">&quot;pass_%p&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a5a6ea433986d3e59b7d7acdf7c53ab3b">m_CgPass</a>);
+<a name="l00051"></a>00051             <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8f5a1d749b61feb661e6f87c14302b40">m_Name</a> += <a class="code" href="group__voodoo__utility__string__format.html#ga40f51111ed73a680d7b66dea57722870">String::Format</a>(L<span class="stringliteral">&quot;pass_%p&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a5a6ea433986d3e59b7d7acdf7c53ab3b">m_CgPass</a>);
 <a name="l00052"></a>00052         }
 <a name="l00053"></a>00053 
 <a name="l00054"></a>00054         ++this-&gt;<a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#ae483d017edaa34c5c13b8f773bf08368">m_Refs</a>;
@@ -186,7 +186,7 @@
 <a name="l00117"></a>00117 
 <a name="l00118"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a5ea28b8544024bc0a2b7c7261174084f">00118</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a5ea28b8544024bc0a2b7c7261174084f" title="Get a string identifying this object.">VSPass::ToString</a>() CONST
 <a name="l00119"></a>00119     {
-<a name="l00120"></a>00120         <span class="keywordflow">return</span> <a class="code" href="group__voodoo__utility__string__format.html#gaa60102c456cb8a63019f3cc8253605eb">String::Format</a>(L<span class="stringliteral">&quot;VSPass(%s)&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8f5a1d749b61feb661e6f87c14302b40">m_Name</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
+<a name="l00120"></a>00120         <span class="keywordflow">return</span> <a class="code" href="group__voodoo__utility__string__format.html#ga40f51111ed73a680d7b66dea57722870">String::Format</a>(L<span class="stringliteral">&quot;VSPass(%s)&quot;</span>, <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8f5a1d749b61feb661e6f87c14302b40">m_Name</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00121"></a>00121     }
 <a name="l00122"></a>00122 
 <a name="l00123"></a><a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a4d6a5c49f08098caa5044a8222d57610">00123</a>     <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="_includes_8hpp.html#af530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a4d6a5c49f08098caa5044a8222d57610" title="Get the core this object was associated with.">VSPass::GetCore</a>() CONST
@@ -256,7 +256,7 @@
 <a name="l00187"></a>00187 
 <a name="l00188"></a>00188                 <span class="keywordflow">if</span> (!<a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a26e28dda2508165af1964f133d277fdd">m_Target</a>.get())
 <a name="l00189"></a>00189                 {
-<a name="l00190"></a>00190                     <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00190"></a>00190                     <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a92256c24005bd39b03e8d60d02c9c23f" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00191"></a>00191                     (
 <a name="l00192"></a>00192                         <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa375468e182c0cec3dd68417f34cfa6fc">LL_CoreWarn</a>,
 <a name="l00193"></a>00193                         <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -268,7 +268,7 @@
 <a name="l00199"></a>00199                     <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a26e28dda2508165af1964f133d277fdd">m_Target</a> = <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a3d8670b7d4e66222ef78e566c28273ed" title="Retrieves a texture from the ICore&#39;s texture map by stage.">GetStageTexture</a>(<a class="code" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55ace31af68276d51480248cc254b1025ce">TS_Pass</a>);
 <a name="l00200"></a>00200                 }
 <a name="l00201"></a>00201             } <span class="keywordflow">else</span> {
-<a name="l00202"></a>00202                 <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00202"></a>00202                 <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a92256c24005bd39b03e8d60d02c9c23f" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00203"></a>00203                 (
 <a name="l00204"></a>00204                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa375468e182c0cec3dd68417f34cfa6fc">LL_CoreWarn</a>,
 <a name="l00205"></a>00205                     <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -279,7 +279,7 @@
 <a name="l00210"></a>00210                 <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a26e28dda2508165af1964f133d277fdd">m_Target</a> = <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a3d8670b7d4e66222ef78e566c28273ed" title="Retrieves a texture from the ICore&#39;s texture map by stage.">GetStageTexture</a>(<a class="code" href="namespace_voodoo_shader.html#a557f6a3f9454eb519cd10323d082df55ace31af68276d51480248cc254b1025ce">TS_Pass</a>);
 <a name="l00211"></a>00211             }
 <a name="l00212"></a>00212         } <span class="keywordflow">else</span> {
-<a name="l00213"></a>00213             <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00213"></a>00213             <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a92256c24005bd39b03e8d60d02c9c23f" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00214"></a>00214             (
 <a name="l00215"></a>00215                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa6de8f5e5091e63eac05776ecae8ea8d8">LL_CoreDebug</a>,
 <a name="l00216"></a>00216                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -296,7 +296,7 @@
 <a name="l00227"></a>00227 
 <a name="l00228"></a>00228         <span class="keywordflow">if</span> (!adapter)
 <a name="l00229"></a>00229         {
-<a name="l00230"></a>00230             <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00230"></a>00230             <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a92256c24005bd39b03e8d60d02c9c23f" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00231"></a>00231             (
 <a name="l00232"></a>00232                 <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa375468e182c0cec3dd68417f34cfa6fc">LL_CoreWarn</a>,
 <a name="l00233"></a>00233                 <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -308,7 +308,7 @@
 <a name="l00239"></a>00239         {
 <a name="l00240"></a>00240             <span class="keywordflow">if</span> (!adapter-&gt;<a class="code" href="class_voodoo_shader_1_1_i_adapter.html#a78ef790d6fa03b0abd4b43d1d2602915" title="Loads a pass in a manner that is compatible with the adapter&#39;s underlying API.">LoadPass</a>(<span class="keyword">this</span>))
 <a name="l00241"></a>00241             {
-<a name="l00242"></a>00242                 <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00242"></a>00242                 <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a92256c24005bd39b03e8d60d02c9c23f" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00243"></a>00243                 (
 <a name="l00244"></a>00244                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b">LL_CoreError</a>,
 <a name="l00245"></a>00245                     <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -318,7 +318,7 @@
 <a name="l00249"></a>00249             }
 <a name="l00250"></a>00250             <span class="keywordflow">else</span>
 <a name="l00251"></a>00251             {
-<a name="l00252"></a>00252                 <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00252"></a>00252                 <a class="code" href="class_voodoo_shader_1_1_v_s_pass.html#a8fc042974366b72987ae64a86cec7fa1">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a92256c24005bd39b03e8d60d02c9c23f" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00253"></a>00253                 (
 <a name="l00254"></a>00254                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daac49f2cfafbe8c7b0b8c05bcb5eb4c5aa">LL_CoreInfo</a>,
 <a name="l00255"></a>00255                     <a class="code" href="_version_8hpp.html#a2201c7d8fc8d561bce9719a4bb72245d">VOODOO_CORE_NAME</a>,
@@ -334,7 +334,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

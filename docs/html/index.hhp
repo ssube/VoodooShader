@@ -25,7 +25,7 @@ _exports_8hpp_source.html
 _i_adapter_8hpp_source.html
 _i_core_8hpp_source.html
 _i_file_8hpp_source.html
-_i_file_system_8hpp_source.html
+_i_filesystem_8hpp_source.html
 _i_hook_manager_8hpp_source.html
 _i_image_8hpp_source.html
 _i_logger_8hpp_source.html
@@ -91,6 +91,7 @@ _converter_8hpp.html
 _docs___code_8dox.html
 _docs___graphics_8dox.html
 _docs___license_8dox.html
+_docs___main_page_8dox.html
 _exception_8cpp.html
 _exception_8hpp.html
 _exports_8cpp.html
@@ -98,7 +99,7 @@ _exports_8hpp.html
 _i_adapter_8hpp.html
 _i_core_8hpp.html
 _i_file_8hpp.html
-_i_file_system_8hpp.html
+_i_filesystem_8hpp.html
 _i_hook_manager_8hpp.html
 _i_image_8hpp.html
 _i_logger_8hpp.html
@@ -238,7 +239,6 @@ functions_func_0x77.html
 functions_func_0x7e.html
 functions_vars.html
 functions_rela.html
-class_i_module_manager.html
 inherits.html
 namespaces.html
 namespace_voodoo_shader.html
@@ -262,6 +262,8 @@ class_voodoo_shader_1_1_i_logger.html
 class_voodoo_shader_1_1_i_logger-members.html
 class_voodoo_shader_1_1_i_module.html
 class_voodoo_shader_1_1_i_module-members.html
+class_voodoo_shader_1_1_i_module_manager.html
+class_voodoo_shader_1_1_i_module_manager-members.html
 struct_voodoo_shader_1_1_init_params.html
 struct_voodoo_shader_1_1_init_params-members.html
 struct_voodoo_shader_1_1_version.html
@@ -422,8 +424,8 @@ _i_core_8hpp__incl.png
 _i_core_8hpp__dep__incl.png
 _i_file_8hpp__incl.png
 _i_file_8hpp__dep__incl.png
-_i_file_system_8hpp__incl.png
-_i_file_system_8hpp__dep__incl.png
+_i_filesystem_8hpp__incl.png
+_i_filesystem_8hpp__dep__incl.png
 _i_hook_manager_8hpp__incl.png
 _i_hook_manager_8hpp__dep__incl.png
 _i_image_8hpp__incl.png
@@ -515,7 +517,6 @@ _logger_8hpp__incl.png
 _logger_8hpp__dep__incl.png
 _logger___version_8hpp__incl.png
 _logger___version_8hpp__dep__incl.png
-class_i_module_manager__inherit__graph.png
 inherit_graph_0.png
 inherit_graph_1.png
 inherit_graph_2.png
@@ -535,7 +536,6 @@ inherit_graph_15.png
 inherit_graph_16.png
 inherit_graph_17.png
 inherit_graph_18.png
-inherit_graph_19.png
 class_voodoo_shader_1_1_exception__inherit__graph.png
 class_voodoo_shader_1_1_exception__coll__graph.png
 class_voodoo_shader_1_1_i_adapter__inherit__graph.png
@@ -554,6 +554,8 @@ class_voodoo_shader_1_1_i_logger__inherit__graph.png
 class_voodoo_shader_1_1_i_logger__coll__graph.png
 class_voodoo_shader_1_1_i_module__inherit__graph.png
 class_voodoo_shader_1_1_i_module__coll__graph.png
+class_voodoo_shader_1_1_i_module_manager__inherit__graph.png
+class_voodoo_shader_1_1_i_module_manager__coll__graph.png
 struct_voodoo_shader_1_1_init_params__coll__graph.png
 struct_voodoo_shader_1_1_version__coll__graph.png
 struct_voodoo_shader_1_1_variant__coll__graph.png

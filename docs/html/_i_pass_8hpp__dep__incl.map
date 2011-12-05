@@ -1,5 +1,15 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_v_s_pass_8hpp.html" title="Framework/Core/VSPass.hpp" alt="" coords="121,80,316,107"/>
-<area shape="rect" id="node5" href="$_v_s_pass_8cpp.html" title="Framework/Core/VSPass.cpp" alt="" coords="5,155,200,181"/>
-<area shape="rect" id="node7" href="$_v_s_technique_8cpp.html" title="Framework/Core/VSTechnique.cpp" alt="" coords="225,155,447,181"/>
+<area shape="rect" id="node3" href="$_voodoo_framework_8hpp.html" title="Framework/Core/VoodooFramework.hpp" alt="" coords="1145,80,1399,107"/>
+<area shape="rect" id="node23" href="$_v_s_pass_8hpp.html" title="Framework/Core/VSPass.hpp" alt="" coords="1528,80,1723,107"/>
+<area shape="rect" id="node5" href="$_file_system_8hpp.html" title="Framework/Filesystem/FileSystem.hpp" alt="" coords="518,155,767,181"/>
+<area shape="rect" id="node15" href="$_hook_manager_8hpp.html" title="Framework/Hook/HookManager.hpp" alt="" coords="1053,155,1283,181"/>
+<area shape="rect" id="node19" href="$_logger_8hpp.html" title="Framework/Logger/Logger.hpp" alt="" coords="1307,155,1504,181"/>
+<area shape="rect" id="node7" href="$_w_file_8cpp.html" title="Framework/Filesystem/WFile.cpp" alt="" coords="5,229,221,256"/>
+<area shape="rect" id="node9" href="$_w_file_impl_8cpp.html" title="Framework/Filesystem/WFileImpl.cpp" alt="" coords="246,229,487,256"/>
+<area shape="rect" id="node11" href="$_w_file_system_8cpp.html" title="Framework/Filesystem/WFileSystem.cpp" alt="" coords="511,229,773,256"/>
+<area shape="rect" id="node13" href="$_w_image_8cpp.html" title="Framework/Filesystem/WImage.cpp" alt="" coords="798,229,1028,256"/>
+<area shape="rect" id="node17" href="$_hook_manager_8cpp.html" title="Framework/Hook/HookManager.cpp" alt="" coords="1053,229,1283,256"/>
+<area shape="rect" id="node21" href="$_logger_8cpp.html" title="Framework/Logger/Logger.cpp" alt="" coords="1307,229,1504,256"/>
+<area shape="rect" id="node25" href="$_v_s_pass_8cpp.html" title="Framework/Core/VSPass.cpp" alt="" coords="1528,155,1723,181"/>
+<area shape="rect" id="node27" href="$_v_s_technique_8cpp.html" title="Framework/Core/VSTechnique.cpp" alt="" coords="1747,155,1969,181"/>
 </map>

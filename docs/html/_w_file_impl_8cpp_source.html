@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -185,7 +185,7 @@
 <a name="l00116"></a>00116             <span class="keywordflow">if</span> (stream == <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465ac8c870a36301314e7afdadd48abc095c">ST_Get</a>)
 <a name="l00117"></a>00117             {
 <a name="l00118"></a>00118                 m_File.seekg(offset, dir);
-<a name="l00119"></a>00119             } 
+<a name="l00119"></a>00119             }
 <a name="l00120"></a>00120             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (stream == <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465aceba9e204c8cd745660989856760eae3">ST_Put</a>)
 <a name="l00121"></a>00121             {
 <a name="l00122"></a>00122                 m_File.seekp(offset, dir);
@@ -199,7 +199,7 @@
 <a name="l00130"></a>00130             <span class="keywordflow">if</span> (stream == <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465ac8c870a36301314e7afdadd48abc095c">ST_Get</a>)
 <a name="l00131"></a>00131             {
 <a name="l00132"></a>00132                 <span class="keywordflow">return</span> (int32_t)m_File.tellg();
-<a name="l00133"></a>00133             } 
+<a name="l00133"></a>00133             }
 <a name="l00134"></a>00134             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (stream == <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465aceba9e204c8cd745660989856760eae3">ST_Put</a>)
 <a name="l00135"></a>00135             {
 <a name="l00136"></a>00136                 <span class="keywordflow">return</span> (int32_t)m_File.tellp();
@@ -210,7 +210,7 @@
 <a name="l00141"></a>00141             }
 <a name="l00142"></a>00142         }
 <a name="l00143"></a>00143 
-<a name="l00144"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a9282e687f41936c7670361f0de184a2e">00144</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a9282e687f41936c7670361f0de184a2e">VSWFileImpl::Read</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core, _In_ std::fstream &amp; m_File, _In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer)
+<a name="l00144"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#aee43536c68e09722006c9b4d7fb78fab">00144</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#aee43536c68e09722006c9b4d7fb78fab">VSWFileImpl::Read</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core, _In_ std::fstream &amp; m_File, _In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer)
 <a name="l00145"></a>00145         {
 <a name="l00146"></a>00146             UNREFERENCED_PARAMETER(m_Core);
 <a name="l00147"></a>00147 
@@ -230,7 +230,7 @@
 <a name="l00161"></a>00161             }
 <a name="l00162"></a>00162         }
 <a name="l00163"></a>00163 
-<a name="l00164"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a311991beadd3e446b0569d3ee03ce549">00164</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a311991beadd3e446b0569d3ee03ce549">VSWFileImpl::Write</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core, _In_ std::fstream &amp; m_File, _In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer)
+<a name="l00164"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a14b815cd4db0d4cab8ec8a50f71e73bb">00164</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a14b815cd4db0d4cab8ec8a50f71e73bb">VSWFileImpl::Write</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core, _In_ std::fstream &amp; m_File, _In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer)
 <a name="l00165"></a>00165         {
 <a name="l00166"></a>00166             UNREFERENCED_PARAMETER(m_Core);
 <a name="l00167"></a>00167 
@@ -255,7 +255,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

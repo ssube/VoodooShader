@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -121,14 +121,12 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Seek to the given position in the file.  <a href="#a2795431d99d28fe982fee4d1d8c7f5fd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a49443b34cc6af8f452f06e5b40536786">Tell</a> (<a class="el" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465">StreamType</a> stream)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the position of the given stream.  <a href="#a49443b34cc6af8f452f06e5b40536786"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a4264439d27948d3005fbe2b5ed8ee60c">Read</a> (const int32_t count, _In_opt_bytecount_(count) void *const pBuffer)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a97a2a01f66cc30811448340e869f7e35">Write</a> (const int32_t count, _In_opt_bytecount_(count) void *const pBuffer)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#aab7539cfee1f606096e432900589e0a2">Read</a> (const int32_t count, void *const pBuffer)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the given number of bytes from the file, starting at the current position.  <a href="#aab7539cfee1f606096e432900589e0a2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#aceca8130748211205428b867eef7bee1">Write</a> (const int32_t count, void *const pBuffer)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the given number of bytes to the file, starting at the current position.  <a href="#aceca8130748211205428b867eef7bee1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_image.html">IImage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#ac67f00a7e6a95d3da16fd17a72a5ae22">OpenImage</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to open the file as an image.  <a href="#ac67f00a7e6a95d3da16fd17a72a5ae22"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file.html#a2f7b4e668875037306f5bc84151ca2e9">Read</a> (const int32_t size, _In_opt_count_(size) void *const pBuffer)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the given number of bytes from the file, starting at the current position.  <a href="#a2f7b4e668875037306f5bc84151ca2e9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file.html#aad0dc4250ad634c8f7c90ddcabf4698d">Write</a> (const int32_t size, _In_opt_count_(size) void *const pBuffer)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the given number of bytes to the file, starting at the current position.  <a href="#aad0dc4250ad634c8f7c90ddcabf4698d"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3fc85936fc8b8d540e4179d1993e46e4">m_Refs</a></td></tr>
@@ -139,7 +137,7 @@ Private Attributes</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><dl class="user"><dt><b>CLSID</b></dt><dd>e6f312b0-05af-11e1-9e05-005056c00008 </dd></dl>
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00136">136</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00112">112</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a454b93a28d3e46aaa74582cea965496e"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFile::VSWFile" ref="a454b93a28d3e46aaa74582cea965496e" args="(ICore *pCore, const String &amp;path)" -->
 <div class="memitem">
@@ -381,12 +379,12 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 </div>
 </div>
-<a class="anchor" id="a2f7b4e668875037306f5bc84151ca2e9"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFile::Read" ref="a2f7b4e668875037306f5bc84151ca2e9" args="(const int32_t size, _In_opt_count_(size) void *const pBuffer)=0" -->
+<a class="anchor" id="aab7539cfee1f606096e432900589e0a2"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFile::Read" ref="aab7539cfee1f606096e432900589e0a2" args="(const int32_t count, void *const pBuffer)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int32_t VoodooShader::IFile::Read </td>
+          <td class="memname">virtual int32_t VoodooShader::VoodooWFS::VSWFile::Read </td>
           <td>(</td>
           <td class="paramtype">const int32_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -394,13 +392,13 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_opt_count_(size) void *const&#160;</td>
+          <td class="paramtype">void *const&#160;</td>
           <td class="paramname"><em>pBuffer</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [pure virtual, inherited]</code></td>
+          <td></td><td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -422,34 +420,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </ul>
 </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_i_image.html#a5d6a58f80a9166e0c54e0d72eb06d711">VoodooShader::IImage</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4264439d27948d3005fbe2b5ed8ee60c"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFile::Read" ref="a4264439d27948d3005fbe2b5ed8ee60c" args="(const int32_t count, _In_opt_bytecount_(count) void *const pBuffer)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int32_t VoodooShader::VoodooWFS::VSWFile::Read </td>
-          <td>(</td>
-          <td class="paramtype">const int32_t&#160;</td>
-          <td class="paramname"><em>count</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_opt_bytecount_(count) void *const&#160;</td>
-          <td class="paramname"><em>pBuffer</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file.html#a191fe9ad27b3006d25a73eb68dbf0f04">VoodooShader::IFile</a>.</p>
 
 </div>
 </div>
@@ -579,12 +550,12 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 </div>
 </div>
-<a class="anchor" id="aad0dc4250ad634c8f7c90ddcabf4698d"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFile::Write" ref="aad0dc4250ad634c8f7c90ddcabf4698d" args="(const int32_t size, _In_opt_count_(size) void *const pBuffer)=0" -->
+<a class="anchor" id="aceca8130748211205428b867eef7bee1"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFile::Write" ref="aceca8130748211205428b867eef7bee1" args="(const int32_t count, void *const pBuffer)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int32_t VoodooShader::IFile::Write </td>
+          <td class="memname">int32_t VoodooShader::VoodooWFS::VSWFile::Write </td>
           <td>(</td>
           <td class="paramtype">const int32_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -592,13 +563,13 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_In_opt_count_(size) void *const&#160;</td>
+          <td class="paramtype">void *const&#160;</td>
           <td class="paramname"><em>pBuffer</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [pure virtual, inherited]</code></td>
+          <td></td><td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -615,34 +586,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <dl class="return"><dt><b>Returns:</b></dt><dd>The number of bytes written, or -1 on error.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>If <code>buffer</code> is nullptr, <code>count</code> zeros are written into the file. This is useful for padding binary formats. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_i_image.html#a45c4e4fa11d7a90846ededf1ab299cb4">VoodooShader::IImage</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a97a2a01f66cc30811448340e869f7e35"></a><!-- doxytag: member="VoodooShader::VoodooWFS::VSWFile::Write" ref="a97a2a01f66cc30811448340e869f7e35" args="(const int32_t count, _In_opt_bytecount_(count) void *const pBuffer)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t VoodooShader::VoodooWFS::VSWFile::Write </td>
-          <td>(</td>
-          <td class="paramtype">const int32_t&#160;</td>
-          <td class="paramname"><em>count</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_In_opt_bytecount_(count) void *const&#160;</td>
-          <td class="paramname"><em>pBuffer</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file.html#aa8879db9ea11126763f23fa9f731ed6c">VoodooShader::IFile</a>.</p>
 
 <p>Definition at line <a class="el" href="_w_file_8cpp_source.html#l00136">136</a> of file <a class="el" href="_w_file_8cpp_source.html">WFile.cpp</a>.</p>
 
@@ -660,7 +604,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00163">163</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00139">139</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -675,7 +619,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00166">166</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00142">142</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -690,7 +634,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00164">164</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00140">140</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -705,7 +649,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00162">162</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00138">138</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -717,7 +661,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:18 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

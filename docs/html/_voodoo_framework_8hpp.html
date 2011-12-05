@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -78,12 +78,19 @@
 <code>#include &quot;<a class="el" href="_i_adapter_8hpp_source.html">IAdapter.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_i_core_8hpp_source.html">ICore.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_i_file_8hpp_source.html">IFile.hpp</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="_i_file_system_8hpp_source.html">IFilesystem.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_i_filesystem_8hpp_source.html">IFilesystem.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_i_hook_manager_8hpp_source.html">IHookManager.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_i_image_8hpp_source.html">IImage.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_i_logger_8hpp_source.html">ILogger.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_i_module_8hpp_source.html">IModule.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_i_module_manager_8hpp_source.html">IModuleManager.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_i_object_8hpp_source.html">IObject.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_i_parameter_8hpp_source.html">IParameter.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_i_parser_8hpp_source.html">IParser.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_i_pass_8hpp_source.html">IPass.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_i_shader_8hpp_source.html">IShader.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_i_technique_8hpp_source.html">ITechnique.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_i_texture_8hpp_source.html">ITexture.hpp</a>&quot;</code><br/>
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for VoodooFramework.hpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -91,7 +98,7 @@
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_voodoo_framework_8hpp__incl.png" border="0" usemap="#_framework_2_core_2_voodoo_framework_8hpp" alt=""/></div>
 <map name="_framework_2_core_2_voodoo_framework_8hpp" id="_framework_2_core_2_voodoo_framework_8hpp">
-<area shape="rect" id="node3" href="_includes_8hpp.html" title="Includes.hpp" alt="" coords="546,379,640,405"/><area shape="rect" id="node23" href="_converter_8hpp.html" title="Converter.hpp" alt="" coords="364,304,465,331"/><area shape="rect" id="node26" href="_exception_8hpp.html" title="Exception.hpp" alt="" coords="541,229,645,256"/><area shape="rect" id="node28" href="_string_8hpp.html" title="String.hpp" alt="" coords="822,304,903,331"/><area shape="rect" id="node35" href="_regex_8hpp.html" title="Regex.hpp" alt="" coords="670,229,753,256"/><area shape="rect" id="node40" href="_version_8hpp.html" title="Version.hpp" alt="" coords="1548,80,1639,107"/><area shape="rect" id="node44" href="_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="878,155,972,181"/><area shape="rect" id="node50" href="_i_core_8hpp.html" title="ICore.hpp" alt="" coords="997,155,1075,181"/><area shape="rect" id="node53" href="_i_file_8hpp.html" title="IFile.hpp" alt="" coords="1099,155,1169,181"/><area shape="rect" id="node56" href="_i_file_system_8hpp.html" title="IFilesystem.hpp" alt="" coords="1195,155,1309,181"/><area shape="rect" id="node59" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="1333,155,1464,181"/><area shape="rect" id="node62" href="_i_image_8hpp.html" title="IImage.hpp" alt="" coords="1191,80,1276,107"/><area shape="rect" id="node65" href="_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="642,80,731,107"/><area shape="rect" id="node68" href="_i_module_8hpp.html" title="IModule.hpp" alt="" coords="755,80,847,107"/><area shape="rect" id="node71" href="_i_module_manager_8hpp.html" title="IModuleManager.hpp" alt="" coords="871,80,1013,107"/><area shape="rect" id="node42" href="_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="1539,155,1665,181"/><area shape="rect" id="node46" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="839,229,927,256"/></map>
+<area shape="rect" id="node3" href="_includes_8hpp.html" title="Includes.hpp" alt="" coords="522,379,616,405"/><area shape="rect" id="node23" href="_converter_8hpp.html" title="Converter.hpp" alt="" coords="340,304,441,331"/><area shape="rect" id="node26" href="_exception_8hpp.html" title="Exception.hpp" alt="" coords="517,229,621,256"/><area shape="rect" id="node28" href="_string_8hpp.html" title="String.hpp" alt="" coords="846,304,927,331"/><area shape="rect" id="node35" href="_regex_8hpp.html" title="Regex.hpp" alt="" coords="646,229,729,256"/><area shape="rect" id="node40" href="_version_8hpp.html" title="Version.hpp" alt="" coords="2040,80,2131,107"/><area shape="rect" id="node44" href="_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="1525,155,1619,181"/><area shape="rect" id="node46" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="1240,229,1328,256"/><area shape="rect" id="node50" href="_i_core_8hpp.html" title="ICore.hpp" alt="" coords="1644,155,1721,181"/><area shape="rect" id="node53" href="_i_file_8hpp.html" title="IFile.hpp" alt="" coords="1746,155,1816,181"/><area shape="rect" id="node56" href="_i_filesystem_8hpp.html" title="IFilesystem.hpp" alt="" coords="1841,155,1956,181"/><area shape="rect" id="node59" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="617,155,748,181"/><area shape="rect" id="node62" href="_i_image_8hpp.html" title="IImage.hpp" alt="" coords="1725,80,1811,107"/><area shape="rect" id="node65" href="_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="773,155,861,181"/><area shape="rect" id="node68" href="_i_module_8hpp.html" title="IModule.hpp" alt="" coords="886,155,977,181"/><area shape="rect" id="node71" href="_i_module_manager_8hpp.html" title="IModuleManager.hpp" alt="" coords="1002,155,1144,181"/><area shape="rect" id="node75" href="_i_parameter_8hpp.html" title="IParameter.hpp" alt="" coords="857,80,967,107"/><area shape="rect" id="node78" href="_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="992,80,1080,107"/><area shape="rect" id="node81" href="_i_pass_8hpp.html" title="IPass.hpp" alt="" coords="1104,80,1184,107"/><area shape="rect" id="node84" href="_i_shader_8hpp.html" title="IShader.hpp" alt="" coords="1208,80,1299,107"/><area shape="rect" id="node87" href="_i_technique_8hpp.html" title="ITechnique.hpp" alt="" coords="1323,80,1432,107"/><area shape="rect" id="node90" href="_i_texture_8hpp.html" title="ITexture.hpp" alt="" coords="1456,80,1549,107"/><area shape="rect" id="node42" href="_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="2031,155,2157,181"/></map>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
@@ -129,7 +136,7 @@ Defines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:17 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

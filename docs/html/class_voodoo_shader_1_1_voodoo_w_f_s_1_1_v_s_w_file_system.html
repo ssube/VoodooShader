@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -111,7 +111,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a6f176044528cc78d1bd8901278494091">GetCore</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a6f176044528cc78d1bd8901278494091"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#af50d200f10d74688d4c7c765ac6a148c">AddPath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a directory to the search path.  <a href="#af50d200f10d74688d4c7c765ac6a148c"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a directory to this file system's search path.  <a href="#af50d200f10d74688d4c7c765ac6a148c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#aabd861d7a1925a4bb9032d2a57308041">RemovePath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a directory from the search path, following the same rules as adding (adding a string then removing the same string will always work).  <a href="#aabd861d7a1925a4bb9032d2a57308041"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a7faa037f99e98cab942a693f07b50218">GetFile</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, const <a class="el" href="namespace_voodoo_shader.html#a3e5dcf65468c74a45648090d2f82bfb5">GetFileMode</a> mode) const </td></tr>
@@ -179,11 +179,18 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Add a directory to the search path. </p>
-<p>Directories are pushed to the front of the list, which is searched in order (last added has highest priority).</p>
-<dl class="note"><dt><b>Note:</b></dt><dd>This function uses Parser::ParseString() for all paths. Variables are evaluated when the path is added. </dd>
+<p>Adds a directory to this file system's search path. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The path to add (may include variables, will be parsed, may be absolute or relative).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This does not check for duplicates, so care should be taken not to add the same directory repeatedly. Directory search order is important for file priority.</dd>
 <dd>
-This function will split paths at the ';' character, similar to how Windows treats the path variable. This (combined with env vars) allows regular-form environment vars to be added to the file system. </dd></dl>
+This function uses Parser::ParseString() for all paths. Variables are evaluated when the path is added. </dd>
+<dd>
+This function will split paths at the ';' character, similar to how Windows treats the path variable. This combined with parser environment access allows regular-form environment vars to be added to the file system. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a6c87a93af54f338d4037544461ac39d1">VoodooShader::IFileSystem</a>.</p>
 
@@ -264,14 +271,15 @@ This function will split paths at the ';' character, similar to how Windows trea
 <div class="memdoc">
 
 <p>Resolves a relative filename (usually just filename and extension, but may include directories) into an absolute filename by searching the list of resource directories registered with this manager. </p>
+<p>Depending on the mode given, the file may be opened or created.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>The filename to search for. </td></tr>
+    <tr><td class="paramname">name</td><td>The file name to find (must be parsed). </td></tr>
+    <tr><td class="paramname">mode</td><td>The file mode to use. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>If the file is found, a reference to an unopened file object is returned.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This functions uses Parser::ParseString() on the path. It is evaluated once when the function enters, then appended to each stored path until a valid file is found. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The file, if found or created (depending on mode). </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a39318c5088c9def47eb036547b140932">VoodooShader::IFileSystem</a>.</p>
 
@@ -365,10 +373,13 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <p>Removes a directory from the search path, following the same rules as adding (adding a string then removing the same string will always work). </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>The path to remove. </td></tr>
+    <tr><td class="paramname">path</td><td>The path to remove.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function must Parser::ParseString() for all paths. Variables are evaluated when the path is added. </dd>
+<dd>
+This function will split paths at the ';' character, similar to how Windows treats the path variable. This combined with parser environment access allows regular-form environment vars to be added to the file system. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a444e8092295bad976a4113e04498485e">VoodooShader::IFileSystem</a>.</p>
 
@@ -412,7 +423,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00120">120</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00096">96</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -427,7 +438,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00122">122</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00098">98</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -442,7 +453,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00119">119</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_file_system_8hpp_source.html#l00095">95</a> of file <a class="el" href="_file_system_8hpp_source.html">FileSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -454,7 +465,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:18 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

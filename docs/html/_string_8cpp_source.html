@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -129,7 +129,7 @@
 <a name="l00060"></a>00060         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a>(1, wch);
 <a name="l00061"></a>00061     }
 <a name="l00062"></a>00062 
-<a name="l00063"></a>00063     <a class="code" href="group__voodoo__utility__string__ctors.html#ga799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * str) :
+<a name="l00063"></a><a class="code" href="group__voodoo__utility__string__ctors.html#gaf4979795f7cbba3ec1dc73ad2d2abaa9">00063</a>     <a class="code" href="group__voodoo__utility__string__ctors.html#ga799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * str) :
 <a name="l00064"></a>00064         m_Impl(<a class="code" href="_includes_8hpp.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>)
 <a name="l00065"></a>00065     {
 <a name="l00066"></a>00066         this-&gt;<a class="code" href="class_voodoo_shader_1_1_string.html#adfd4a1d08e9ebd5407c27d1ef72d1cbf">CInit</a>(0, str);
@@ -155,10 +155,10 @@
 <a name="l00086"></a>00086         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a>(1, ch);
 <a name="l00087"></a>00087     }
 <a name="l00088"></a>00088 
-<a name="l00089"></a>00089     <a class="code" href="group__voodoo__utility__string__ctors.html#ga799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) :
+<a name="l00089"></a><a class="code" href="group__voodoo__utility__string__ctors.html#ga06d416ff9230612a155e057717c3449e">00089</a>     <a class="code" href="group__voodoo__utility__string__ctors.html#ga799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) :
 <a name="l00090"></a>00090         m_Impl(<a class="code" href="_includes_8hpp.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>)
 <a name="l00091"></a>00091     {
-<a name="l00092"></a>00092         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> StringImpl(str);
+<a name="l00092"></a>00092         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a>(str);
 <a name="l00093"></a>00093     }
 <a name="l00094"></a>00094 
 <a name="l00095"></a><a class="code" href="group__voodoo__utility__string__ctors.html#ga20c644a1713912013ef99afa135f4b49">00095</a>     <a class="code" href="group__voodoo__utility__string__ctors.html#ga799f5322d9efc12a1ee8515305cc2944" title="Creates an empty string.">String::String</a>(<span class="keyword">const</span> uint32_t size, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch) :
@@ -329,7 +329,7 @@
 <a name="l00260"></a>00260         <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
 <a name="l00261"></a>00261     }
 <a name="l00262"></a>00262 
-<a name="l00263"></a>00263     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; <a class="code" href="group__voodoo__utility__string__mod.html#gac60d3aa21afdf97faec1913be87bae87">String::Prepend</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
+<a name="l00263"></a><a class="code" href="group__voodoo__utility__string__mod.html#ga3d0309eb5f84b4d5827d8eb302acbf03">00263</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; <a class="code" href="group__voodoo__utility__string__mod.html#gac60d3aa21afdf97faec1913be87bae87">String::Prepend</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
 <a name="l00264"></a>00264     {
 <a name="l00265"></a>00265         <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a> = std::wstring(str) + <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>;
 <a name="l00266"></a>00266         <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
@@ -398,7 +398,7 @@
 <a name="l00329"></a>00329         }
 <a name="l00330"></a>00330     }
 <a name="l00331"></a>00331 
-<a name="l00332"></a>00332     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__utility__string__pred.html#ga38cc428cc159a70b6e1e83974b28afab">String::Compare</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
+<a name="l00332"></a><a class="code" href="group__voodoo__utility__string__pred.html#gaf99bc4cee5044d6978c5ffc0903dd6e0">00332</a>     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__utility__string__pred.html#ga38cc428cc159a70b6e1e83974b28afab">String::Compare</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
 <a name="l00333"></a>00333 <span class="keyword">    </span>{
 <a name="l00334"></a>00334         <span class="keywordflow">if</span> (useCase)
 <a name="l00335"></a>00335         {
@@ -428,7 +428,7 @@
 <a name="l00359"></a>00359         }
 <a name="l00360"></a>00360     }
 <a name="l00361"></a>00361 
-<a name="l00362"></a>00362     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__utility__string__pred.html#ga401c79742b120d9bcdfb6596a11788d4">String::StartsWith</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
+<a name="l00362"></a><a class="code" href="group__voodoo__utility__string__pred.html#gacf90d9193cfcd15e52bf5247c3b8845c">00362</a>     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__utility__string__pred.html#ga401c79742b120d9bcdfb6596a11788d4">String::StartsWith</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
 <a name="l00363"></a>00363 <span class="keyword">    </span>{
 <a name="l00364"></a>00364         <span class="keywordflow">if</span> (useCase)
 <a name="l00365"></a>00365         {
@@ -458,7 +458,7 @@
 <a name="l00389"></a>00389         }
 <a name="l00390"></a>00390     }
 <a name="l00391"></a>00391 
-<a name="l00392"></a>00392     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__utility__string__pred.html#ga2385dae504f4881630e429515b95771c">String::EndsWith</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
+<a name="l00392"></a><a class="code" href="group__voodoo__utility__string__pred.html#ga94a8cdb41f058f225203a4f75af11f82">00392</a>     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__utility__string__pred.html#ga2385dae504f4881630e429515b95771c">String::EndsWith</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
 <a name="l00393"></a>00393 <span class="keyword">    </span>{
 <a name="l00394"></a>00394         <span class="keywordflow">if</span> (useCase)
 <a name="l00395"></a>00395         {
@@ -488,7 +488,7 @@
 <a name="l00419"></a>00419         }
 <a name="l00420"></a>00420     }
 <a name="l00421"></a>00421 
-<a name="l00422"></a>00422     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__utility__string__pred.html#gab5560cc07e441d00f560dc0422c6199e">String::Contains</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
+<a name="l00422"></a><a class="code" href="group__voodoo__utility__string__pred.html#ga2b37ade03ce184d953fc5b79f2f6f2a5">00422</a>     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__utility__string__pred.html#gab5560cc07e441d00f560dc0422c6199e">String::Contains</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
 <a name="l00423"></a>00423 <span class="keyword">    </span>{
 <a name="l00424"></a>00424         <span class="keywordflow">if</span> (useCase)
 <a name="l00425"></a>00425         {
@@ -520,7 +520,7 @@
 <a name="l00451"></a>00451         }
 <a name="l00452"></a>00452     }
 <a name="l00453"></a>00453 
-<a name="l00454"></a>00454     uint32_t <a class="code" href="group__voodoo__utility__string__find.html#gaa17a786c594e28c8d1f701e4305bd288">String::Find</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
+<a name="l00454"></a><a class="code" href="group__voodoo__utility__string__find.html#ga46c55ce159ad722290cba535e31ba03a">00454</a>     uint32_t <a class="code" href="group__voodoo__utility__string__find.html#gaa17a786c594e28c8d1f701e4305bd288">String::Find</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
 <a name="l00455"></a>00455 <span class="keyword">    </span>{
 <a name="l00456"></a>00456         <span class="keywordflow">if</span> (useCase)
 <a name="l00457"></a>00457         {
@@ -557,7 +557,7 @@
 <a name="l00488"></a>00488         }
 <a name="l00489"></a>00489     }
 <a name="l00490"></a>00490 
-<a name="l00491"></a>00491     uint32_t <a class="code" href="group__voodoo__utility__string__find.html#ga7c6baede94c67fb66d36d3aa4bfbcdae">String::ReverseFind</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
+<a name="l00491"></a><a class="code" href="group__voodoo__utility__string__find.html#gad9efe528afe8cddce56ce36a22f5a9bd">00491</a>     uint32_t <a class="code" href="group__voodoo__utility__string__find.html#ga7c6baede94c67fb66d36d3aa4bfbcdae">String::ReverseFind</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, <span class="keywordtype">bool</span> useCase)<span class="keyword"> const</span>
 <a name="l00492"></a>00492 <span class="keyword">    </span>{
 <a name="l00493"></a>00493         <span class="keywordflow">if</span> (useCase)
 <a name="l00494"></a>00494         {
@@ -593,7 +593,7 @@
 <a name="l00524"></a>00524         <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
 <a name="l00525"></a>00525     }
 <a name="l00526"></a>00526 
-<a name="l00527"></a>00527     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; <a class="code" href="group__voodoo__utility__string__find.html#ga09b51fff33fb02b37dbaea6fcf0b5e1e">String::Replace</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * rstr, <span class="keywordtype">bool</span> useCase)
+<a name="l00527"></a><a class="code" href="group__voodoo__utility__string__find.html#ga6416faf27f03b856743fff2fc3a8ce28">00527</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; <a class="code" href="group__voodoo__utility__string__find.html#ga09b51fff33fb02b37dbaea6fcf0b5e1e">String::Replace</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * rstr, <span class="keywordtype">bool</span> useCase)
 <a name="l00528"></a>00528     {
 <a name="l00529"></a>00529         <span class="keywordflow">if</span> (useCase)
 <a name="l00530"></a>00530         {
@@ -626,7 +626,7 @@
 <a name="l00557"></a>00557         <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
 <a name="l00558"></a>00558     }
 <a name="l00559"></a>00559 
-<a name="l00560"></a>00560     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; <a class="code" href="group__voodoo__utility__string__find.html#gac76c4321c74c994d0e0e603d2784f9e9">String::Remove</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, <span class="keywordtype">bool</span> useCase)
+<a name="l00560"></a><a class="code" href="group__voodoo__utility__string__find.html#gae6d43c9366c6a020659c1db45a9d5cdc">00560</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; <a class="code" href="group__voodoo__utility__string__find.html#gac76c4321c74c994d0e0e603d2784f9e9">String::Remove</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, <span class="keywordtype">bool</span> useCase)
 <a name="l00561"></a>00561     {
 <a name="l00562"></a>00562         <span class="keywordflow">if</span> (useCase)
 <a name="l00563"></a>00563         {
@@ -648,7 +648,7 @@
 <a name="l00579"></a>00579         <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
 <a name="l00580"></a>00580     }
 <a name="l00581"></a>00581 
-<a name="l00582"></a>00582     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="group__voodoo__utility__string__format.html#gaf19f157a14862373fc38c6070aabd1a1">String::FormatV</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, va_list args)
+<a name="l00582"></a><a class="code" href="group__voodoo__utility__string__format.html#ga890d6d7780b2d9c84ec6d7d8b521e504">00582</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="group__voodoo__utility__string__format.html#ga890d6d7780b2d9c84ec6d7d8b521e504">String::FormatV</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt, va_list args)
 <a name="l00583"></a>00583     {
 <a name="l00584"></a>00584         <span class="keywordtype">int</span> bufsize = _vscwprintf(fmt, args) + 1;
 <a name="l00585"></a>00585         std::vector&lt;wchar_t&gt; buffer(bufsize);
@@ -693,22 +693,22 @@
 <a name="l00627"></a>00627         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>.c_str();
 <a name="l00628"></a>00628     }
 <a name="l00629"></a>00629 
-<a name="l00630"></a>00630     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#ad069a7fa2374b9aa80d2f3b6ed25368a">String::operator&lt;</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00630"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ab7e56f40374fcf2a537f259ab9d0d38d">00630</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#ab7e56f40374fcf2a537f259ab9d0d38d">String::operator&lt;</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
 <a name="l00631"></a>00631 <span class="keyword">    </span>{
 <a name="l00632"></a>00632         <span class="keywordflow">return</span> (<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a> &lt; str);
 <a name="l00633"></a>00633     }
 <a name="l00634"></a>00634 
-<a name="l00635"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a4085f778cb189eb3c5547e43d7149b32">00635</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#ad069a7fa2374b9aa80d2f3b6ed25368a">String::operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00635"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a4085f778cb189eb3c5547e43d7149b32">00635</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#ab7e56f40374fcf2a537f259ab9d0d38d">String::operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
 <a name="l00636"></a>00636 <span class="keyword">    </span>{
 <a name="l00637"></a>00637         <span class="keywordflow">return</span> (<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a> &lt; str.<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>);
 <a name="l00638"></a>00638     }
 <a name="l00639"></a>00639 
-<a name="l00640"></a>00640     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a95a2c77e7fd5d90a15c961d17e25b0fe">String::operator&gt;</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00640"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ac7cfcff10fc590090e067051a1e72317">00640</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#ac7cfcff10fc590090e067051a1e72317">String::operator&gt;</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
 <a name="l00641"></a>00641 <span class="keyword">    </span>{
 <a name="l00642"></a>00642         <span class="keywordflow">return</span> (<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a> &gt; str);
 <a name="l00643"></a>00643     }
 <a name="l00644"></a>00644 
-<a name="l00645"></a><a class="code" href="class_voodoo_shader_1_1_string.html#acc3f0dfcbac66ea3c80a7d67db024c8b">00645</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#a95a2c77e7fd5d90a15c961d17e25b0fe">String::operator&gt;</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00645"></a><a class="code" href="class_voodoo_shader_1_1_string.html#acc3f0dfcbac66ea3c80a7d67db024c8b">00645</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_string.html#ac7cfcff10fc590090e067051a1e72317">String::operator&gt;</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; str)<span class="keyword"> const</span>
 <a name="l00646"></a>00646 <span class="keyword">    </span>{
 <a name="l00647"></a>00647         <span class="keywordflow">return</span> (<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a> &gt; str.<a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#ac2ba358bcc2511850a4405683ce5af33">m_Str</a>);
 <a name="l00648"></a>00648     }
@@ -718,7 +718,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

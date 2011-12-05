@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -99,6 +99,8 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides structured and formatted logging for module listing and level-filtered messages.  <a href="class_voodoo_shader_1_1_i_logger.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the handle to a loaded library and function pointers for creation and destruction.  <a href="class_voodoo_shader_1_1_i_module.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html">IModuleManager</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a framework for loading and unloading modules in core, as well as retrieving symbols and modules from memory.  <a href="class_voodoo_shader_1_1_i_module_manager.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization parameters.  <a href="struct_voodoo_shader_1_1_init_params.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a></td></tr>
@@ -166,7 +168,7 @@ Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
 &lt; <a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
-&lt; <a class="el" href="class_i_module_manager.html">IModuleManager</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3fdb003455025cb3d3e56d7afcbb7e73">IModuleManagerRef</a></td></tr>
+&lt; <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html">IModuleManager</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3fdb003455025cb3d3e56d7afcbb7e73">IModuleManagerRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
 &lt; <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#adb1e29e50a55690336179fa4322d34f7">IObjectRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef boost::intrusive_ptr<br class="typebreak"/>
@@ -565,6 +567,7 @@ Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaaaf4d9dc04301324ce1a7f60d370883c">IID_IImage</a> = {0x8d, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaca11032ec6621cdd20a1cd242d9c9e18">IID_ILogger</a> = {0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gaab89fdeca94c9c4f7b237729b707c51e">IID_IModule</a> = {0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gae8bba91e0f8a338bb14c44002eea6cc1">IID_IModuleManager</a> = {0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817">IID_IObject</a> = {0x87, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#gab5e3bcc2e2cf1bccfbe5752cde45bada">IID_IParameter</a> = {0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__framework__interfaces.html#ga87fc2a608dadaa1f57b48bbd5fa29d4c">IID_IParser</a> = {0x92, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
@@ -851,7 +854,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::intrusive_ptr&lt;<a class="el" href="class_i_module_manager.html">IModuleManager</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a3fdb003455025cb3d3e56d7afcbb7e73">VoodooShader::IModuleManagerRef</a></td>
+          <td class="memname">typedef boost::intrusive_ptr&lt;<a class="el" href="class_voodoo_shader_1_1_i_module_manager.html">IModuleManager</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a3fdb003455025cb3d3e56d7afcbb7e73">VoodooShader::IModuleManagerRef</a></td>
         </tr>
       </table>
 </div>
@@ -2134,17 +2137,10 @@ Variables</h2></td></tr>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">pInitParams</td><td>Setup parameters for this core. </td></tr>
-    <tr><td class="paramname">catchErrors</td><td>If true, all exceptions thrown by the core ctor are caught within the function. Otherwise, they are returned. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A new <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> object.</dd></dl>
-<dl><dt><b>Exceptions:</b></dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::exception</td><td>in case of errors, if catchErrors is false. </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A new <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> object, if one was created successfully. </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
@@ -2264,7 +2260,7 @@ Variables</h2></td></tr>
 <p>Provides centralized management and handling for shaders, textures, plugins and variable/configuration mechanics.</p>
 <dl class="user"><dt><b>CLSID</b></dt><dd>e6f3129b-05af-11e1-9e05-005056c00008 </dd></dl>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00054">54</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00050">50</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -2534,7 +2530,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:17 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

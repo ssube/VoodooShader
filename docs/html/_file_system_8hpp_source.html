@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -115,8 +115,8 @@
 <a name="l00060"></a>00060             <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a348678ae78f065407756723619c55f14">Close</a>(_In_ std::fstream &amp; m_File);
 <a name="l00061"></a>00061             <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a469e578a536277db222c1dbf63f77362">Seek</a>(_In_ std::fstream &amp; m_File, _In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream, _In_ <a class="code" href="namespace_voodoo_shader.html#a68a5aa1e8d5ddc2a43a629cd036264db" title="File seek offset modes.">SeekMode</a> mode, _In_ int32_t offset);
 <a name="l00062"></a>00062             <span class="keyword">static</span> int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#adee0f4566c34499406650145cf68893f">Tell</a>(_In_ std::fstream &amp; m_File, _In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream);
-<a name="l00063"></a>00063             <span class="keyword">static</span> int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a9282e687f41936c7670361f0de184a2e">Read</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core, _In_ std::fstream &amp; m_File, _In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer);
-<a name="l00064"></a>00064             <span class="keyword">static</span> int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a311991beadd3e446b0569d3ee03ce549">Write</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core, _In_ std::fstream &amp; m_File, _In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer);
+<a name="l00063"></a>00063             <span class="keyword">static</span> int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#aee43536c68e09722006c9b4d7fb78fab">Read</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core, _In_ std::fstream &amp; m_File, _In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer);
+<a name="l00064"></a>00064             <span class="keyword">static</span> int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a14b815cd4db0d4cab8ec8a50f71e73bb">Write</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core, _In_ std::fstream &amp; m_File, _In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer);
 <a name="l00065"></a>00065         };
 <a name="l00066"></a>00066 
 <a name="l00077"></a><a class="code" href="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#a1e11f389653a94745ac9be708b0c490c">00077</a>         <a class="code" href="_includes_8hpp.html#aa84497f368d5929ecfa0e288a9243066">VOODOO_CLASS</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html">VSWFileSystem</a>, <a class="code" href="class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access.">IFileSystem</a>, {0xB1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
@@ -132,93 +132,92 @@
 <a name="l00087"></a>00087             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
 <a name="l00088"></a>00088             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
 <a name="l00089"></a>00089 
-<a name="l00098"></a>00098             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(AddPath)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path);
-<a name="l00105"></a>00105             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(RemovePath)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path);
-<a name="l00116"></a>00116             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> *, GetFile)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3e5dcf65468c74a45648090d2f82bfb5" title="File find modes.">GetFileMode</a> mode) CONST;
-<a name="l00117"></a>00117 
-<a name="l00118"></a>00118         <span class="keyword">private</span>:
-<a name="l00119"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a9799becbd7a6650667690f453d69c4a5">00119</a>             <span class="keyword">mutable</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a9799becbd7a6650667690f453d69c4a5">m_Refs</a>;
-<a name="l00120"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a8af43eea353aaa393b198d7d20eb3cd8">00120</a>             <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>;
+<a name="l00090"></a>00090             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(AddPath)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path);
+<a name="l00091"></a>00091             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(RemovePath)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path);
+<a name="l00092"></a>00092             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> *, GetFile)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a3e5dcf65468c74a45648090d2f82bfb5" title="File find modes.">GetFileMode</a> mode) CONST;
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094         <span class="keyword">private</span>:
+<a name="l00095"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a9799becbd7a6650667690f453d69c4a5">00095</a>             <span class="keyword">mutable</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a9799becbd7a6650667690f453d69c4a5">m_Refs</a>;
+<a name="l00096"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a8af43eea353aaa393b198d7d20eb3cd8">00096</a>             <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#a8af43eea353aaa393b198d7d20eb3cd8">m_Core</a>;
+<a name="l00097"></a>00097 
+<a name="l00098"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#ad793bcadfe3a7e9a2c0e22015cf185a4">00098</a>             <a class="code" href="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#a7801af454e9dd1ad00cf912ca3d9997d">StringList</a> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#ad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>;
+<a name="l00099"></a>00099         };
+<a name="l00100"></a>00100 
+<a name="l00104"></a>00104         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html">VSWFileImpl</a>;
+<a name="l00105"></a>00105 
+<a name="l00112"></a><a class="code" href="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#a4230aad57e4c533ff480a03a5679ee2c">00112</a>         <a class="code" href="_includes_8hpp.html#aa84497f368d5929ecfa0e288a9243066">VOODOO_CLASS</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html">VSWFile</a>, <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a>, {0xB0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
+<a name="l00113"></a>00113         {
+<a name="l00114"></a>00114         <span class="keyword">public</span>:
+<a name="l00118"></a>00118             VSWFile(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path);
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120             <span class="keyword">virtual</span> ~VSWFile();
 <a name="l00121"></a>00121 
-<a name="l00122"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#ad793bcadfe3a7e9a2c0e22015cf185a4">00122</a>             <a class="code" href="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#a7801af454e9dd1ad00cf912ca3d9997d">StringList</a> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html#ad793bcadfe3a7e9a2c0e22015cf185a4">m_Directories</a>;
-<a name="l00123"></a>00123         };
-<a name="l00124"></a>00124 
-<a name="l00128"></a>00128         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html">VSWFileImpl</a>;
-<a name="l00129"></a>00129 
-<a name="l00136"></a><a class="code" href="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#a4230aad57e4c533ff480a03a5679ee2c">00136</a>         <a class="code" href="_includes_8hpp.html#aa84497f368d5929ecfa0e288a9243066">VOODOO_CLASS</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html">VSWFile</a>, <a class="code" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a>, {0xB0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
-<a name="l00137"></a>00137         {
-<a name="l00138"></a>00138         <span class="keyword">public</span>:
-<a name="l00142"></a>00142             VSWFile(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path);
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144             <span class="keyword">virtual</span> ~VSWFile();
-<a name="l00145"></a>00145 
-<a name="l00146"></a>00146             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
-<a name="l00147"></a>00147             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
-<a name="l00148"></a>00148             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
-<a name="l00149"></a>00149             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
-<a name="l00150"></a>00150             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
-<a name="l00151"></a>00151 
-<a name="l00152"></a>00152             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, GetPath)() CONST;
-<a name="l00153"></a>00153             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Open)(_In_ <a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6" title="File open access modes.">FileOpenMode</a> mode);
-<a name="l00154"></a>00154             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Close)();
-<a name="l00155"></a>00155             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Seek)(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream, _In_ <a class="code" href="namespace_voodoo_shader.html#a68a5aa1e8d5ddc2a43a629cd036264db" title="File seek offset modes.">SeekMode</a> mode, _In_ int32_t offset);
-<a name="l00156"></a>00156             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Tell)(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream);
-<a name="l00157"></a>00157             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Read)(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
-<a name="l00158"></a>00158             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * const pBuffer);
-<a name="l00159"></a>00159             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> *, OpenImage)() CONST;
-<a name="l00160"></a>00160 
-<a name="l00161"></a>00161         private:
-<a name="l00162"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3fc85936fc8b8d540e4179d1993e46e4">00162</a>             mutable uint32_t m_Refs;
-<a name="l00163"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a2725a45bfa7ca7ae981eaf40dc34af2b">00163</a>             <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core;
-<a name="l00164"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a417860d4ba326b8d95856ac50d720752">00164</a>             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> m_Path;
-<a name="l00165"></a>00165 
-<a name="l00166"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3e2c562aa77cff79cfe3a12316f51359">00166</a>             std::fstream m_File;
-<a name="l00167"></a>00167         };
-<a name="l00168"></a>00168 
-<a name="l00181"></a><a class="code" href="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#af7e0c836f870cb70c76539c1b1dcba93">00181</a>         <a class="code" href="_includes_8hpp.html#aa84497f368d5929ecfa0e288a9243066">VOODOO_CLASS</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library.">VSWImage</a>, IImage, {0xB2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
-<a name="l00182"></a>00182         {
-<a name="l00183"></a>00183         <span class="keyword">public</span>:
-<a name="l00184"></a>00184             <span class="keyword">static</span> VSWImage * Load(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name);
-<a name="l00185"></a>00185             VSWImage(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *core, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> image);
-<a name="l00186"></a>00186             <span class="keyword">virtual</span> ~VSWImage();
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
-<a name="l00189"></a>00189             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
-<a name="l00190"></a>00190             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
-<a name="l00191"></a>00191             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
-<a name="l00192"></a>00192             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
-<a name="l00193"></a>00193 
-<a name="l00194"></a>00194             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, GetPath)() CONST;
-<a name="l00195"></a>00195             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Open)(_In_ <a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6" title="File open access modes.">FileOpenMode</a> mode);
-<a name="l00196"></a>00196             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Close)();
-<a name="l00197"></a>00197             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Seek)(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream, _In_ <a class="code" href="namespace_voodoo_shader.html#a68a5aa1e8d5ddc2a43a629cd036264db" title="File seek offset modes.">SeekMode</a> mode, _In_ int32_t offset);
-<a name="l00198"></a>00198             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Tell)(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream);
-<a name="l00199"></a>00199             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Read)(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
-<a name="l00200"></a>00200             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * const pBuffer);
-<a name="l00206"></a>00206             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> *, OpenImage)() CONST;
+<a name="l00122"></a>00122             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
+<a name="l00123"></a>00123             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
+<a name="l00124"></a>00124             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
+<a name="l00125"></a>00125             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
+<a name="l00126"></a>00126             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, GetPath)() CONST;
+<a name="l00129"></a>00129             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Open)(_In_ <a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6" title="File open access modes.">FileOpenMode</a> mode);
+<a name="l00130"></a>00130             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Close)();
+<a name="l00131"></a>00131             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Seek)(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream, _In_ <a class="code" href="namespace_voodoo_shader.html#a68a5aa1e8d5ddc2a43a629cd036264db" title="File seek offset modes.">SeekMode</a> mode, _In_ int32_t offset);
+<a name="l00132"></a>00132             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Tell)(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream);
+<a name="l00133"></a>00133             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Read)(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
+<a name="l00134"></a>00134             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * const pBuffer);
+<a name="l00135"></a>00135             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> *, OpenImage)() CONST;
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137         private:
+<a name="l00138"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3fc85936fc8b8d540e4179d1993e46e4">00138</a>             mutable uint32_t m_Refs;
+<a name="l00139"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a2725a45bfa7ca7ae981eaf40dc34af2b">00139</a>             <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core;
+<a name="l00140"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a417860d4ba326b8d95856ac50d720752">00140</a>             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> m_Path;
+<a name="l00141"></a>00141 
+<a name="l00142"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html#a3e2c562aa77cff79cfe3a12316f51359">00142</a>             std::fstream m_File;
+<a name="l00143"></a>00143         };
+<a name="l00144"></a>00144 
+<a name="l00157"></a><a class="code" href="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#af7e0c836f870cb70c76539c1b1dcba93">00157</a>         <a class="code" href="_includes_8hpp.html#aa84497f368d5929ecfa0e288a9243066">VOODOO_CLASS</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library.">VSWImage</a>, IImage, {0xB2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
+<a name="l00158"></a>00158         {
+<a name="l00159"></a>00159         <span class="keyword">public</span>:
+<a name="l00160"></a>00160             <span class="keyword">static</span> VSWImage * Load(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name);
+<a name="l00161"></a>00161             VSWImage(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *core, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; path, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> image);
+<a name="l00162"></a>00162             <span class="keyword">virtual</span> ~VSWImage();
+<a name="l00163"></a>00163 
+<a name="l00164"></a>00164             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
+<a name="l00165"></a>00165             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
+<a name="l00166"></a>00166             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
+<a name="l00167"></a>00167             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
+<a name="l00168"></a>00168             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, GetPath)() CONST;
+<a name="l00171"></a>00171             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Open)(_In_ <a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6" title="File open access modes.">FileOpenMode</a> mode);
+<a name="l00172"></a>00172             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Close)();
+<a name="l00173"></a>00173             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Seek)(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream, _In_ <a class="code" href="namespace_voodoo_shader.html#a68a5aa1e8d5ddc2a43a629cd036264db" title="File seek offset modes.">SeekMode</a> mode, _In_ int32_t offset);
+<a name="l00174"></a>00174             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Tell)(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream);
+<a name="l00175"></a>00175             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Read)(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
+<a name="l00176"></a>00176             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * const pBuffer);
+<a name="l00182"></a>00182             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> *, OpenImage)() CONST;
+<a name="l00183"></a>00183             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a>, GetDesc)() CONST;
+<a name="l00201"></a>00201             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, GetData)(_In_ const <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> desc, _In_ const int32_t size, _In_opt_count_(size) <span class="keywordtype">void</span> * const pBuffer) CONST;
+<a name="l00202"></a>00202 
+<a name="l00203"></a>00203         private:
+<a name="l00204"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a71b051f1d1e6afe1a20233e9b4fdc587">00204</a>             mutable uint32_t m_Refs;
+<a name="l00205"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">00205</a>             <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core;
+<a name="l00206"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#ae51e466417ebd38c4e5a7bdf9713aa87">00206</a>             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> m_Path;
 <a name="l00207"></a>00207 
-<a name="l00208"></a>00208             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a>, GetDesc)() CONST;
-<a name="l00226"></a>00226             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(int32_t, GetData)(_In_ const <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> desc, _In_ const int32_t size, _In_opt_count_(size) <span class="keywordtype">void</span> * const pBuffer) CONST;
-<a name="l00227"></a>00227 
-<a name="l00228"></a>00228         private:
-<a name="l00229"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a71b051f1d1e6afe1a20233e9b4fdc587">00229</a>             mutable uint32_t m_Refs;
-<a name="l00230"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">00230</a>             <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core;
-<a name="l00231"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#ae51e466417ebd38c4e5a7bdf9713aa87">00231</a>             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> m_Path;
-<a name="l00232"></a>00232 
-<a name="l00233"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a817b3478e18a66f013f6b28ef3eb0638">00233</a>             std::fstream m_File;
-<a name="l00234"></a>00234 
-<a name="l00235"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a23fd0cd0bc7dc21ee92349926e1bad43">00235</a>             <a class="code" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a> * m_Parser;
-<a name="l00236"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a0ffb4af3f42edc1265ccbed02fc22235">00236</a>             <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m_Image;
-<a name="l00237"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a1741045ab06c009b1e76213caee3d747">00237</a>             TextureDesc m_Desc;
-<a name="l00238"></a>00238         };
-<a name="l00239"></a>00239     }
-<a name="l00243"></a>00243 }
+<a name="l00208"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a817b3478e18a66f013f6b28ef3eb0638">00208</a>             std::fstream m_File;
+<a name="l00209"></a>00209 
+<a name="l00210"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a23fd0cd0bc7dc21ee92349926e1bad43">00210</a>             <a class="code" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a> * m_Parser;
+<a name="l00211"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a0ffb4af3f42edc1265ccbed02fc22235">00211</a>             <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m_Image;
+<a name="l00212"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a1741045ab06c009b1e76213caee3d747">00212</a>             TextureDesc m_Desc;
+<a name="l00213"></a>00213         };
+<a name="l00214"></a>00214     }
+<a name="l00218"></a>00218 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

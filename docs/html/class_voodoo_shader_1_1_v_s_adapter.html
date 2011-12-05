@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -123,10 +123,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a render target for the adapter.  <a href="#ac14ab60be5ffe82ba253e53f4352b5a8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a01ec00f18d471f478f389e1bd18fb738">GetTarget</a> (const uint32_t index) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a render target from the adapter.  <a href="#a01ec00f18d471f478f389e1bd18fb738"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ad46aef00d4870c814534d97746dc82b0">CreateTexture</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, const <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a> pDesc)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a texture within the adapter.  <a href="#ad46aef00d4870c814534d97746dc82b0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#aaad6d1071b376c512b4c0fd826802c27">LoadTexture</a> (<a class="el" href="class_voodoo_shader_1_1_i_image.html">IImage</a> *const pFile, const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> pRegion, _Inout_ <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const pTexture)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a texture data from an image into an existing texture.  <a href="#aaad6d1071b376c512b4c0fd826802c27"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#af8198591501149edcd517183e6ba94f5">CreateTexture</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, const <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html">TextureDesc</a> desc)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a texture within the adapter.  <a href="#af8198591501149edcd517183e6ba94f5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a7e790c2b8d514972f607a308adab30f5">LoadTexture</a> (<a class="el" href="class_voodoo_shader_1_1_i_image.html">IImage</a> *const pFile, const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a> region, <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const pTexture)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a texture data from an image into an existing texture.  <a href="#a7e790c2b8d514972f607a308adab30f5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a7266e2561f87b93a5f8314301df35bf7">DrawGeometry</a> (const uint32_t offset, const uint32_t count, void *const pData, const <a class="el" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws geometry from system memory.  <a href="#a7266e2561f87b93a5f8314301df35bf7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a6ff5dd5d3c3649466682ecf8b38b4ba8">ApplyParameter</a> (<a class="el" href="class_voodoo_shader_1_1_i_parameter.html">IParameter</a> *const pParam)</td></tr>
@@ -281,7 +281,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad46aef00d4870c814534d97746dc82b0"></a><!-- doxytag: member="VoodooShader::VSAdapter::CreateTexture" ref="ad46aef00d4870c814534d97746dc82b0" args="(const String &amp;name, const TextureDesc pDesc)" -->
+<a class="anchor" id="af8198591501149edcd517183e6ba94f5"></a><!-- doxytag: member="VoodooShader::VSAdapter::CreateTexture" ref="af8198591501149edcd517183e6ba94f5" args="(const String &amp;name, const TextureDesc desc)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -576,7 +576,7 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 
 </div>
 </div>
-<a class="anchor" id="aaad6d1071b376c512b4c0fd826802c27"></a><!-- doxytag: member="VoodooShader::VSAdapter::LoadTexture" ref="aaad6d1071b376c512b4c0fd826802c27" args="(IImage *const pFile, const TextureRegion pRegion, _Inout_ ITexture *const pTexture)" -->
+<a class="anchor" id="a7e790c2b8d514972f607a308adab30f5"></a><!-- doxytag: member="VoodooShader::VSAdapter::LoadTexture" ref="a7e790c2b8d514972f607a308adab30f5" args="(IImage *const pFile, const TextureRegion region, ITexture *const pTexture)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -590,12 +590,12 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="struct_voodoo_shader_1_1_texture_region.html">TextureRegion</a>&#160;</td>
-          <td class="paramname"><em>pRegion</em>, </td>
+          <td class="paramname"><em>region</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_Inout_ <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *const&#160;</td>
           <td class="paramname"><em>pTexture</em>&#160;</td>
         </tr>
         <tr>
@@ -611,15 +611,16 @@ In the case of compiler errors, the exact messages can be gotten by calling cgGe
 <p>The texture format the texture was created with and format of the image given must match. Texture size is bounded by the texture, as are mipmap and render target settings. Texture origin is determined by the region provided here.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">pImage</td><td>The image to load. </td></tr>
-    <tr><td class="paramname">pRegion</td><td>The region of the file that will be used. </td></tr>
+    <tr><td class="paramname">pImage</td><td>The image to load data from. </td></tr>
+    <tr><td class="paramname">region</td><td>The region of the image to be used. </td></tr>
+    <tr><td class="paramname">pTexture</td><td>The texture to load the data into. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The texture, if successfully created. A nullptr otherwise.</dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the texture load.</dd></dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>As <a class="el" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> derives from <a class="el" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a>, it may be simpler to use the same struct for both this and the call to <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#adbedc54c3ff43825fd85ca4dd69c28a6" title="Creates a texture within the adapter.">IAdapter::CreateTexture()</a>. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#abdb47086dc38a2106c1c868c65bbbc7d">VoodooShader::IAdapter</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#ab500d86a3b85052777cde087654f0be4">VoodooShader::IAdapter</a>.</p>
 
 <p>Definition at line <a class="el" href="_v_s_adapter_8cpp_source.html#l00143">143</a> of file <a class="el" href="_v_s_adapter_8cpp_source.html">VSAdapter.cpp</a>.</p>
 
@@ -932,7 +933,7 @@ To allow for significant variations in property setups and allow for use outside
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:18 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

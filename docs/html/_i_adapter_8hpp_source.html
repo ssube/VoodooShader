@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -109,21 +109,21 @@
 <a name="l00115"></a>00115         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(SetTarget)(_In_ <span class="keyword">const</span> uint32_t index, _In_opt_ ITexture * <span class="keyword">const</span> pTarget = <span class="keyword">nullptr</span>) PURE;
 <a name="l00122"></a>00122         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(ITexture *, GetTarget)(_In_ <span class="keyword">const</span> uint32_t index) CONST PURE;
 <a name="l00138"></a>00138         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(ITexture *, CreateTexture)(_In_ <span class="keyword">const</span> String &amp; name, _In_ <span class="keyword">const</span> TextureDesc pDesc) PURE;
-<a name="l00151"></a>00151         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(LoadTexture)(_In_ IImage * <span class="keyword">const</span> pImage, _In_ <span class="keyword">const</span> TextureRegion pRegion, _Inout_ ITexture * <span class="keyword">const</span> pTexture) PURE;
-<a name="l00165"></a>00165         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(DrawGeometry)(_In_ <span class="keyword">const</span> uint32_t offset, _In_ <span class="keyword">const</span> uint32_t count, _In_ <span class="keywordtype">void</span> * <span class="keyword">const</span> pData, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags) PURE;
-<a name="l00173"></a>00173         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(ApplyParameter)(_In_ IParameter * <span class="keyword">const</span> pParameter) PURE;
-<a name="l00189"></a>00189         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(SetProperty)(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name, _In_ Variant * <span class="keyword">const</span> pValue) PURE;
-<a name="l00198"></a>00198         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(GetProperty)(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name, _Out_ Variant * <span class="keyword">const</span> pValue) CONST PURE;
-<a name="l00208"></a>00208         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(ConnectTexture)(_In_ IParameter * <span class="keyword">const</span> pParam, _In_ ITexture * <span class="keyword">const</span> pTexture) PURE;
-<a name="l00226"></a>00226         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(HandleError)(_In_ CGcontext <span class="keyword">const</span> pContext, _In_ uint32_t error) PURE;
-<a name="l00227"></a>00227     };
-<a name="l00231"></a>00231 }
+<a name="l00152"></a>00152         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(LoadTexture)(_In_ IImage * <span class="keyword">const</span> pImage, _In_ <span class="keyword">const</span> TextureRegion region, _Inout_ ITexture * <span class="keyword">const</span> pTexture) PURE;
+<a name="l00166"></a>00166         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(DrawGeometry)(_In_ <span class="keyword">const</span> uint32_t offset, _In_ <span class="keyword">const</span> uint32_t count, _In_ <span class="keywordtype">void</span> * <span class="keyword">const</span> pData, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#acdb884b8b87f5f32b2990a019dbd6f89">VertexFlags</a> flags) PURE;
+<a name="l00174"></a>00174         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(ApplyParameter)(_In_ IParameter * <span class="keyword">const</span> pParameter) PURE;
+<a name="l00190"></a>00190         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(SetProperty)(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name, _In_ Variant * <span class="keyword">const</span> pValue) PURE;
+<a name="l00199"></a>00199         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(GetProperty)(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * name, _Out_ Variant * <span class="keyword">const</span> pValue) CONST PURE;
+<a name="l00209"></a>00209         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(ConnectTexture)(_In_ IParameter * <span class="keyword">const</span> pParam, _In_ ITexture * <span class="keyword">const</span> pTexture) PURE;
+<a name="l00227"></a>00227         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(HandleError)(_In_ CGcontext <span class="keyword">const</span> pContext, _In_ uint32_t error) PURE;
+<a name="l00228"></a>00228     };
+<a name="l00232"></a>00232 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

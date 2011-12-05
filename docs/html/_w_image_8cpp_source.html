@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -160,7 +160,7 @@
 <a name="l00091"></a>00091 
 <a name="l00092"></a>00092             <span class="keywordflow">if</span> (<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a1741045ab06c009b1e76213caee3d747">m_Desc</a>.<a class="code" href="struct_voodoo_shader_1_1_texture_desc.html#afd6806ff71ac342f7c7ca4f8a69928dd">Format</a> == <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>)
 <a name="l00093"></a>00093             {
-<a name="l00094"></a>00094                 <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00094"></a>00094                 <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a92256c24005bd39b03e8d60d02c9c23f" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00095"></a>00095                 (
 <a name="l00096"></a>00096                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa01fa7ae42c468be0d8854c46b6dd0f67">LL_ModWarn</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
 <a name="l00097"></a>00097                     L<span class="stringliteral">&quot;Unable to resolve format for image %s (%u).&quot;</span>,
@@ -259,14 +259,14 @@
 <a name="l00190"></a>00190             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a03fd2bb8c143dac5dd705f51fbb439bb" title="Get the position of the given stream.">VSWFileImpl::Tell</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a817b3478e18a66f013f6b28ef3eb0638">m_File</a>, stream);
 <a name="l00191"></a>00191         }
 <a name="l00192"></a>00192 
-<a name="l00193"></a>00193         <span class="keywordtype">int</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a066b9b0e2aefc1b69a58e677920c1c05">VSWImage::Read</a>(_In_ <span class="keywordtype">int</span> count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> *buffer)
+<a name="l00193"></a>00193         <span class="keywordtype">int</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a5cd117f201ede69030d73798f5ae1098" title="Read the given number of bytes from the file, starting at the current position.">VSWImage::Read</a>(_In_ <span class="keywordtype">int</span> count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> *buffer)
 <a name="l00194"></a>00194         {
-<a name="l00195"></a>00195             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a066b9b0e2aefc1b69a58e677920c1c05">VSWFileImpl::Read</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">m_Core</a>, <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a817b3478e18a66f013f6b28ef3eb0638">m_File</a>, count, buffer);
+<a name="l00195"></a>00195             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a5cd117f201ede69030d73798f5ae1098" title="Read the given number of bytes from the file, starting at the current position.">VSWFileImpl::Read</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">m_Core</a>, <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a817b3478e18a66f013f6b28ef3eb0638">m_File</a>, count, buffer);
 <a name="l00196"></a>00196         }
 <a name="l00197"></a>00197 
-<a name="l00198"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a176587ec78ab90a625844f9b082c6005">00198</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a176587ec78ab90a625844f9b082c6005">VSWImage::Write</a>(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * buffer)
+<a name="l00198"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a876573d95b1a50b36e5e057e6612cf65">00198</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a876573d95b1a50b36e5e057e6612cf65" title="Write the given number of bytes to the file, starting at the current position.">VSWImage::Write</a>(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * buffer)
 <a name="l00199"></a>00199         {
-<a name="l00200"></a>00200             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a176587ec78ab90a625844f9b082c6005">VSWFileImpl::Write</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">m_Core</a>, <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a817b3478e18a66f013f6b28ef3eb0638">m_File</a>, count, buffer);
+<a name="l00200"></a>00200             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a876573d95b1a50b36e5e057e6612cf65" title="Write the given number of bytes to the file, starting at the current position.">VSWFileImpl::Write</a>(<a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">m_Core</a>, <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a817b3478e18a66f013f6b28ef3eb0638">m_File</a>, count, buffer);
 <a name="l00201"></a>00201         }
 <a name="l00202"></a>00202 
 <a name="l00203"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a91e3179946288b5ef07c8c7daa926f6b">00203</a>         <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a91e3179946288b5ef07c8c7daa926f6b" title="Get the texture description.">VSWImage::GetDesc</a>()<span class="keyword"> const</span>
@@ -274,7 +274,7 @@
 <a name="l00205"></a>00205             <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a1741045ab06c009b1e76213caee3d747">m_Desc</a>;
 <a name="l00206"></a>00206         }
 <a name="l00207"></a>00207 
-<a name="l00208"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#af279f0fdfa947a2f4b5208dd1ba87e5e">00208</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#af279f0fdfa947a2f4b5208dd1ba87e5e" title="Retrieves a portion of the texture data from the image.">VSWImage::GetData</a>(_In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> pDesc, _In_ <span class="keyword">const</span> int32_t size, _In_opt_count_(size) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer)<span class="keyword"> const</span>
+<a name="l00208"></a><a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a3c72c7117c1c55083dd321e5123106d5">00208</a>         int32_t <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a3c72c7117c1c55083dd321e5123106d5" title="Retrieves a portion of the texture data from the image.">VSWImage::GetData</a>(_In_ <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> pDesc, _In_ <span class="keyword">const</span> int32_t size, _In_opt_count_(size) <span class="keywordtype">void</span> * <span class="keyword">const</span> pBuffer)<span class="keyword"> const</span>
 <a name="l00209"></a>00209 <span class="keyword">        </span>{
 <a name="l00211"></a>00211             UNREFERENCED_PARAMETER(size);
 <a name="l00212"></a>00212 
@@ -301,7 +301,7 @@
 <a name="l00233"></a>00233                 <span class="keywordflow">break</span>;
 <a name="l00234"></a>00234             <span class="keywordflow">case</span> <a class="code" href="namespace_voodoo_shader.html#ac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">TF_Unknown</a>:
 <a name="l00235"></a>00235             <span class="keywordflow">default</span>:
-<a name="l00236"></a>00236                 <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a304df9363c3e0955047cdb10d46d277e" title="Log a message, may be formatted with printf syntax.">Log</a>
+<a name="l00236"></a>00236                 <a class="code" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html#a85be6f129caf9164ac5241b89fe4f498">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_logger.html#a92256c24005bd39b03e8d60d02c9c23f" title="Log a message, may be formatted with printf syntax.">Log</a>
 <a name="l00237"></a>00237                     (
 <a name="l00238"></a>00238                     <a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa01fa7ae42c468be0d8854c46b6dd0f67">LL_ModWarn</a>, <a class="code" href="group__voodoo__module__wfilesystem.html#ga5e1d47733ace176ed1aca161b6d166d1">VOODOO_FILESYSTEM_NAME</a>,
 <a name="l00239"></a>00239                     L<span class="stringliteral">&quot;Invalid texture format for getting image data (%X).&quot;</span>,
@@ -324,7 +324,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:15 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

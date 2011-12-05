@@ -1,10 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_i_module_manager.html" title="IModuleManager" alt="" coords="1128,93,1245,120"/>
-<area shape="rect" id="node10" title="STL class." alt="" coords="762,189,883,216"/>
-<area shape="rect" id="node21" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="748,317,897,344"/>
-<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,317,637,344"/>
-<area shape="rect" id="node25" title="STL class." alt="" coords="243,317,333,344"/>
-<area shape="rect" id="node27" title="STL class." alt="" coords="5,317,192,344"/>
-<area shape="rect" id="node31" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1114,469,1259,496"/>
-<area shape="rect" id="node33" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="745,469,901,496"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_module_manager.html" title="Provides a framework for loading and unloading modules in core, as well as retrieving symbols and mod..." alt="" coords="1085,5,1296,32"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="745,7,901,33"/>
+<area shape="rect" id="node33" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1118,69,1263,96"/>
+<area shape="rect" id="node12" title="STL class." alt="" coords="762,247,883,273"/>
+<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="748,377,897,404"/>
+<area shape="rect" id="node25" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,377,637,404"/>
+<area shape="rect" id="node27" title="STL class." alt="" coords="243,377,333,404"/>
+<area shape="rect" id="node29" title="STL class." alt="" coords="5,377,192,404"/>
 </map>

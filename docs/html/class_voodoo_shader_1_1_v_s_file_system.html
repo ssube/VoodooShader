@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-4.2-133-g8f25d03</span>
+   &#160;<span id="projectnumber">framework-4.2-153-g43328c0</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -184,7 +184,11 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This does not check for duplicates, so care should be taken not to add the same directory repeatedly. Directory search order is important for file priority. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This does not check for duplicates, so care should be taken not to add the same directory repeatedly. Directory search order is important for file priority.</dd>
+<dd>
+This function uses Parser::ParseString() for all paths. Variables are evaluated when the path is added. </dd>
+<dd>
+This function will split paths at the ';' character, similar to how Windows treats the path variable. This combined with parser environment access allows regular-form environment vars to be added to the file system. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a6c87a93af54f338d4037544461ac39d1">VoodooShader::IFileSystem</a>.</p>
 
@@ -268,12 +272,12 @@ Private Attributes</h2></td></tr>
 <p>Depending on the mode given, the file may be opened or created.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>The file name to find. </td></tr>
+    <tr><td class="paramname">name</td><td>The file name to find (must be parsed). </td></tr>
     <tr><td class="paramname">mode</td><td>The file mode to use. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The file, if found. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The file, if found or created (depending on mode). </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a39318c5088c9def47eb036547b140932">VoodooShader::IFileSystem</a>.</p>
 
@@ -367,10 +371,13 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <p>Removes a directory from the search path, following the same rules as adding (adding a string then removing the same string will always work). </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>The path to remove. </td></tr>
+    <tr><td class="paramname">path</td><td>The path to remove.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>This function must Parser::ParseString() for all paths. Variables are evaluated when the path is added. </dd>
+<dd>
+This function will split paths at the ';' character, similar to how Windows treats the path variable. This combined with parser environment access allows regular-form environment vars to be added to the file system. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a444e8092295bad976a4113e04498485e">VoodooShader::IFileSystem</a>.</p>
 
@@ -441,7 +448,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 2 2011 01:23:16 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2011 04:07:18 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

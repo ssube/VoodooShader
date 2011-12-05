@@ -1,15 +1,19 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_v_s_filesystem_8hpp.html" title="Framework/Core/VSFilesystem.hpp" alt="" coords="219,80,447,107"/>
-<area shape="rect" id="node9" href="$_voodoo_framework_8hpp.html" title="Framework/Core/VoodooFramework.hpp" alt="" coords="602,80,856,107"/>
-<area shape="rect" id="node23" href="$_v_s_core_8cpp.html" title="Framework/Core/VSCore.cpp" alt="" coords="881,80,1071,107"/>
-<area shape="rect" id="node25" href="$_v_s_module_8cpp.html" title="Framework/Core/VSModule.cpp" alt="" coords="1095,80,1301,107"/>
-<area shape="rect" id="node27" href="$_v_s_shader_8cpp.html" title="Framework/Core/VSShader.cpp" alt="" coords="1327,80,1532,107"/>
-<area shape="rect" id="node5" href="$_exports_8cpp.html" title="Framework/Core/Exports.cpp" alt="" coords="5,155,195,181"/>
-<area shape="rect" id="node7" href="$_v_s_filesystem_8cpp.html" title="Framework/Core/VSFilesystem.cpp" alt="" coords="219,155,447,181"/>
-<area shape="rect" id="node11" href="$_file_system_8hpp.html" title="Framework/Filesystem/FileSystem.hpp" alt="" coords="471,155,720,181"/>
-<area shape="rect" id="node15" href="$_hook_manager_8hpp.html" title="Framework/Hook/HookManager.hpp" alt="" coords="745,155,975,181"/>
-<area shape="rect" id="node19" href="$_logger_8hpp.html" title="Framework/Logger/Logger.hpp" alt="" coords="999,155,1196,181"/>
-<area shape="rect" id="node13" href="$_file_system_8cpp.html" title="Framework/Filesystem/FileSystem.cpp" alt="" coords="471,229,720,256"/>
-<area shape="rect" id="node17" href="$_hook_manager_8cpp.html" title="Framework/Hook/HookManager.cpp" alt="" coords="745,229,975,256"/>
-<area shape="rect" id="node21" href="$_logger_8cpp.html" title="Framework/Logger/Logger.cpp" alt="" coords="999,229,1196,256"/>
+<area shape="rect" id="node3" href="$_v_s_filesystem_8hpp.html" title="Framework/Core/VSFilesystem.hpp" alt="" coords="299,80,527,107"/>
+<area shape="rect" id="node9" href="$_voodoo_framework_8hpp.html" title="Framework/Core/VoodooFramework.hpp" alt="" coords="714,80,968,107"/>
+<area shape="rect" id="node29" href="$_v_s_core_8cpp.html" title="Framework/Core/VSCore.cpp" alt="" coords="993,80,1183,107"/>
+<area shape="rect" id="node31" href="$_v_s_module_8cpp.html" title="Framework/Core/VSModule.cpp" alt="" coords="1207,80,1413,107"/>
+<area shape="rect" id="node33" href="$_v_s_module_manager_8cpp.html" title="Framework/Core/VSModuleManager.cpp" alt="" coords="1439,80,1695,107"/>
+<area shape="rect" id="node35" href="$_v_s_shader_8cpp.html" title="Framework/Core/VSShader.cpp" alt="" coords="1719,80,1924,107"/>
+<area shape="rect" id="node5" href="$_exports_8cpp.html" title="Framework/Core/Exports.cpp" alt="" coords="85,155,275,181"/>
+<area shape="rect" id="node7" href="$_v_s_filesystem_8cpp.html" title="Framework/Core/VSFilesystem.cpp" alt="" coords="299,155,527,181"/>
+<area shape="rect" id="node11" href="$_file_system_8hpp.html" title="Framework/Filesystem/FileSystem.hpp" alt="" coords="551,155,800,181"/>
+<area shape="rect" id="node21" href="$_hook_manager_8hpp.html" title="Framework/Hook/HookManager.hpp" alt="" coords="891,155,1120,181"/>
+<area shape="rect" id="node25" href="$_logger_8hpp.html" title="Framework/Logger/Logger.hpp" alt="" coords="1176,155,1373,181"/>
+<area shape="rect" id="node13" href="$_w_file_8cpp.html" title="Framework/Filesystem/WFile.cpp" alt="" coords="5,229,221,256"/>
+<area shape="rect" id="node15" href="$_w_file_impl_8cpp.html" title="Framework/Filesystem/WFileImpl.cpp" alt="" coords="246,229,487,256"/>
+<area shape="rect" id="node17" href="$_w_file_system_8cpp.html" title="Framework/Filesystem/WFileSystem.cpp" alt="" coords="511,229,773,256"/>
+<area shape="rect" id="node19" href="$_w_image_8cpp.html" title="Framework/Filesystem/WImage.cpp" alt="" coords="798,229,1028,256"/>
+<area shape="rect" id="node23" href="$_hook_manager_8cpp.html" title="Framework/Hook/HookManager.cpp" alt="" coords="1053,229,1283,256"/>
+<area shape="rect" id="node27" href="$_logger_8cpp.html" title="Framework/Logger/Logger.cpp" alt="" coords="1307,229,1504,256"/>
 </map>
