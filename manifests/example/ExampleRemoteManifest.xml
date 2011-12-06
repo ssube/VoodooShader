@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoodooRemote xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.voodooshader.com/manifests/VoodooSchema.xsd">
+    <Packages>
+        <Package>
+            <PackId>01234567-0123-0123-0123-0123456789AB</PackId>
+            <Name>Package 1 Name</Name>
+            <Version>Version String</Version>
+            <ManifestUri>http://www.voodooshader.com/manifests/example/ExamplePackageManifest.xml</ManifestUri>
+        </Package>
+    </Packages>
+</VoodooRemote>

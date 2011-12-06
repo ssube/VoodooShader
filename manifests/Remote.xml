@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoodooRemote xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.voodooshader.com/manifests/VoodooSchema.xsd">
+        <Package>
+            <PackId>a687cfca-063c-11e1-b22e-005056c00008</PackId>
+            <Name>Voodoo Shader Framework</Name>
+            <Version>0.5.2</Version>
+            <ManifestUri>https://www.voodooshader.com/manifests/packages/Framework.xml</ManifestUri>
+        </Package>
+        <Package>
+            <PackId>f84ac3c4-073f-11e1-83d4-005056c00008</PackId>
+            <Name>Voodoo/Generic_DX89</Name>
+            <Version>0.5.2</Version>
+            <ManifestUri>https://www.voodooshader.com/manifests/packages/Generic_DX89.xml</ManifestUri>
+        </Package>
+</VoodooRemote>

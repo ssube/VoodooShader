@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoodooPackage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.voodooshader.com/manifests/VoodooSchema.xsd">
+    <Package>
+        <PackId>01234567-0123-0123-0123-0123456789AB</PackId>
+        <Name>Package 1 Name</Name>
+        <Version>Version String</Version>
+        <ManifestUri>http://www.voodooshader.com/manifests/example/ExamplePackageManifest.xml</ManifestUri>
+    </Package>
+    <Messages>
+        <Language Id="en-US">
+            <Pre>You are about to install a test package.</Pre>
+            <Post>Thank you for installing the test package.</Post>
+        </Language>
+    </Messages>
+    <Versions>
+        <Version Id="Version String">
+            <Messages>
+                <Language Id="en-US">
+                    <Pre>This is version n.</Pre>
+                </Language>
+            </Messages>
+            <Create>
+                <File>test.txt</File>
+            </Create>
+        </Version>
+    </Versions>
+</VoodooPackage>

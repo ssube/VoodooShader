@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoodooPackage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.voodooshader.com/manifests/VoodooSchema.xsd">
+    <Package>
+        <PackId>f84ac3c4-073f-11e1-83d4-005056c00008</PackId>
+        <Name>Voodoo/Generic_DX89</Name>
+        <Version>0.5.2</Version>
+        <ManifestUri>https://www.voodooshader.com/manifests/packages/Generic_DX89.xml</ManifestUri>
+    </Package>
+    <Description>Voodoo Generic DX8 and DX9 adapter</Description>
+    <Messages>
+        <Language Id="en-US">
+            <Pre></Pre>
+            <Post></Post>
+        </Language>
+    </Messages>
+    <Versions>
+        <!-- First manifest version. -->
+        <Version Id="0.5.2">
+            <Description>Test version for DX89.</Description>
+            <Create>
+                <Module>
+                    <LibId>a687cfcb-063c-11e1-b22e-005056c00008</LibId>
+                    <Name>Voodoo/Generic_DX89</Name>
+                    <Path>Voodoo_Generic_DX89.dll</Path>
+                    <Config>VoodooCfg_Generic_DX89.dll</Config>
+                    <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
+                </Module>
+                <File>config\VoodooCfg_Generic_DX89.dll</File>
+            </Create>
+        </Version>
+    </Versions>
+</VoodooPackage>

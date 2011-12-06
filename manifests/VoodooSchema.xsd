@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+    attributeFormDefault="unqualified" elementFormDefault="qualified" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <xs:simpleType name="Uuid">
+        <xs:annotation>
+            <xs:documentation>Basic Uuid type, in uppercase hex with no braces.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern
+                value="[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}">
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="NamedString">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="Name" type="xs:string" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="Remote">
+        <xs:annotation>
+            <xs:documentation>Remote manifest source, with readable name and manifest Uri.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Uri" type="xs:anyURI" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Package">
+        <xs:annotation>
+            <xs:documentation>Package with Identifying PackId, readable name, and provIding manifest. Optionally, the latest version may be given.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="PackId" type="Uuid" />
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Version" type="xs:string" minOccurs="0" />
+            <xs:element name="ManifestUri" type="xs:anyURI" />            
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Module">
+        <xs:annotation>
+            <xs:documentation>Module with Identifying LibId, readable name and parent package for a module (Package is the PackId of the package provIding this module). 
+                Optionally, install paths for the module and config module may be provIded.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="LibId" type="Uuid" />
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Path" type="xs:string" minOccurs="0" />
+            <xs:element name="Config" type="xs:string" minOccurs="0" />
+            <xs:element name="Package" type="Uuid" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Class">
+        <xs:annotation>
+            <xs:documentation>Class with Identifying ClassId, readable name and provIder module for a class (Module is the LibId of the module implementing this class).</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ClassId" type="Uuid" />
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Module" type="Uuid" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Hook">
+        <xs:annotation>
+            <xs:documentation>Hook with target and config files, readable name and activity flag for an installed hook.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Active" type="xs:boolean" />
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Target" type="xs:string" />
+            <xs:element name="Config" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Default">
+        <xs:annotation>
+            <xs:documentation>Default hook template with target filter, default config file and required packages for a hook. Used by the hook wizard to create hooks.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="DefId" type="Uuid" />
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Filter" type="xs:string" />
+            <xs:element name="Config" type="xs:string" />
+            <xs:element name="Packages" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="Package" type="Uuid" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MessageSet">
+        <xs:annotation>
+            <xs:documentation>Set of standard messages for a single language.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Pre" type="xs:string" />
+            <xs:element minOccurs="0" name="Post" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:language" use="required" />
+    </xs:complexType>
+    <xs:complexType name="TranslationSet">
+        <xs:annotation>
+            <xs:documentation>Set of standard messages with various language translations.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Language" type="MessageSet" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ChangeSet">
+        <xs:annotation>
+            <xs:documentation>Objects modified by this set of changes. File paths should be relative.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Module" type="Module" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Default" type="Default" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="File" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PackageVersion">
+        <xs:annotation>
+            <xs:documentation>Single version of package files, with version-specific messages and parent version.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="1" name="Description" type="xs:string" />
+            <xs:element minOccurs="0" name="Messages" type="TranslationSet" />
+            <xs:element minOccurs="0" name="Remove" type="ChangeSet" />
+            <xs:element minOccurs="0" name="Create" type="ChangeSet" />
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:string" />
+        <xs:attribute name="Parent" type="xs:string" use="optional" />
+    </xs:complexType>
+    <xs:complexType name="PackageManifest">
+        <xs:sequence>
+            <xs:element name="Package" type="Package" />
+            <xs:element name="Description" type="xs:string" />
+            <xs:element name="Messages" type="TranslationSet" />
+            <xs:element name="Versions">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="Version" type="PackageVersion" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RemoteManifest">
+        <xs:sequence>
+            <xs:element name="Package" type="Package" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GlobalRegistry">
+        <xs:sequence>
+            <xs:element name="Remotes">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Remote" type="Remote" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Packages">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Package" type="Package" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modules">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Module" type="Module" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Classes">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Class" type="Class" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Hooks">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Hook" type="Hook" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Defaults">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Default" type="Default" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Path" type="xs:string" />
+        <xs:attribute name="Language" type="xs:language" />
+        <xs:attribute name="BinPrefix" type="xs:string" use="optional" />
+    </xs:complexType>
+    <xs:complexType name="ConfigFile">
+        <xs:sequence>
+            <xs:element name="Global">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="Variables" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Variable" maxOccurs="unbounded" type="NamedString" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Plugins" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="File"  minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+                                    <xs:element name="Path"  minOccurs="0" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:simpleContent>
+                                                <xs:extension base="xs:string">
+                                                    <xs:attribute name="Filter" type="xs:string" />
+                                                </xs:extension>
+                                            </xs:simpleContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Classes">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="Adapter" type="xs:string" />
+                                    <xs:element name="FileSystem" type="xs:string" />
+                                    <xs:element name="HookManager" type="xs:string" />
+                                    <xs:element name="Logger" type="xs:string" />
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Log">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="File" type="xs:string" />
+                                    <xs:element name="Level" type="xs:string" />
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Classes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Class" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:any maxOccurs="unbounded" processContents="lax" />
+                                </xs:sequence>
+                                <xs:attribute name="Name" type="xs:string" />
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="VoodooRemote" type="RemoteManifest">
+        <xs:annotation>
+            <xs:documentation>ProvIdes a list of packages and defaults available on this server.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="VoodooPackage" type="PackageManifest">
+        <xs:annotation>
+            <xs:documentation>ProvIdes version information on a package.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="VoodooRegistry" type="GlobalRegistry">
+        <xs:annotation>
+            <xs:documentation>An Xml representation of the Voodoo registry key.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="VoodooConfig" type="ConfigFile">
+        <xs:annotation>
+            <xs:documentation>A configuration file with framework bootstrap information.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

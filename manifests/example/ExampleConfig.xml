@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoodooConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://www.voodooshader.com/manifests/VoodooSchema.xsd">
+    <Global>
+        <Variables>
+            <Variable Name="adapter">VSAdapter</Variable>
+        </Variables>
+        <Plugins>
+            <File>Voodoo_Core.dll</File>
+        </Plugins>
+        <Classes>
+            <Adapter>$(adapter)</Adapter>
+            <FileSystem>VSFileSystem</FileSystem>
+            <HookManager>VSHookManager</HookManager>
+            <Logger>VSLogger</Logger>
+        </Classes>
+        <Log>
+            <File>ExampleLog.xml</File>
+            <Level>255</Level>
+        </Log>
+    </Global>
+    <Classes>
+        <Class Name="VSCore">
+            <Tag Id="unknown" />
+        </Class>
+    </Classes>
+</VoodooConfig>

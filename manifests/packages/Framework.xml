@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoodooPackage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.voodooshader.com/manifests/VoodooSchema.xsd">
+    <Package>
+        <PackId>a687cfca-063c-11e1-b22e-005056c00008</PackId>
+        <Name>Voodoo Shader Framework</Name>
+        <Version>0.5.2</Version>
+        <ManifestUri>https://www.voodooshader.com/manifests/packages/Framework.xml</ManifestUri>
+    </Package>
+    <Description>### Voodoo Shader Framework, _version 0.5.2_
+    This is a test of the Voodoo update system. If you can see this text, then it hasn't failed miserably.
+    
+    You should be able to see some formatting _here_ and **here**, as well as [a link](http://www.google.com) which you can't follow. 
+    
+    This is all done with magic.
+    </Description>
+    <Messages>
+        <Language Id="en-US">
+            <Pre>
+                ### You are about to install the Voodoo Shader Framework.
+                This package contains all necessary files to use Voodoo.
+                This package is distributed under the terms of the Lesser GNU General Public License, version 3. By clicking
+                'OK', you agree to these terms. Details may be found at: http://www.opensource.org/licenses/LGPL-3.0
+            </Pre>
+            <Post>
+                ### Thank you for the Voodoo Shader Framework.
+                To begin using Voodoo, you can install more packages or create hooks for your games.
+                If you have any problems, questions or suggestions, please visit the project site at: 
+                https://www.github.com/peachykeen/VoodooShader
+                Enjoy!
+            </Post>
+        </Language>
+    </Messages>
+    <Versions>
+        <!-- First manifest version. -->
+        <Version Id="0.5.2">
+            <Description>Test version. _This is just a test._</Description>
+            <Create>
+                <Module>
+                    <LibId>a687cfcb-063c-11e1-b22e-005056c00008</LibId>
+                    <Name>Voodoo/Core</Name>
+                    <Path>Voodoo_Core.dll</Path>
+                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
+                </Module>
+                <Module>
+                    <LibId>a687cfcc-063c-11e1-b22e-005056c00008</LibId>
+                    <Name>Voodoo/XmlLogger</Name>
+                    <Path>Voodoo_XmlLogger.dll</Path>
+                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
+                </Module>
+                <Module>
+                    <LibId>a687cfcd-063c-11e1-b22e-005056c00008</LibId>
+                    <Name>Voodoo/WFileSystem</Name>
+                    <Path>Voodoo_WFileSystem.dll</Path>
+                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
+                </Module>
+                <Module>
+                    <LibId>a687cfce-063c-11e1-b22e-005056c00008</LibId>
+                    <Name>Voodoo/EHHookManager</Name>
+                    <Path>Voodoo_EHHookManager.dll</Path>
+                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
+                </Module>
+                <Module>
+                    <LibId>f84ac3b3-073f-11e1-83d4-005056c00008</LibId>
+                    <Name>Voodoo/HookStub</Name>
+                    <Path>Voodoo_HookStub.dll</Path>
+                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
+                </Module>
+                <Module>
+                    <LibId>f84ac3b4-073f-11e1-83d4-005056c00008</LibId>
+                    <Name>Voodoo/FullLoader</Name>
+                    <Path>Voodoo_FullLoader.dll</Path>
+                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
+                </Module>
+                <File>config\VoodooCfg_Framework.dll</File>
+            </Create>
+        </Version>
+    </Versions>
+</VoodooPackage>
