@@ -1,128 +1,154 @@
 /* CSS Document */
-
-@font-face { font-family: GhostTheory; src: url('ghost-theory.ttf'); }
-	
+    
 *
 {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 html, body
 {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 body
 {	
-	color: #B0B0B0;
-	
-	background: url(../images/bg.png) repeat #303030;
-	
-	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 75%, rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(75%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.5))) fixed no-repeat, url(../images/bg.png) repeat #303030;
-	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 75%, rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
-	background: -o-linear-gradient(top,  rgba(0,0,0,0) 75%,rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
-	background: -ms-linear-gradient(top,  rgba(0,0,0,0) 75%,rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
-	background: linear-gradient(top,  rgba(0,0,0,0) 75%,rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#80000000',GradientType=0 );
+    color: #B0B0B0;
+    
+    background: #303030;
+    background: url(../images/bg.png) repeat #303030;    
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 75%, rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(75%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.5))) fixed no-repeat, url(../images/bg.png) repeat #303030;
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 75%, rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
+    background: -o-linear-gradient(top, rgba(0,0,0,0) 75%,rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
+    background: -ms-linear-gradient(top, rgba(0,0,0,0) 75%,rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
+    background: linear-gradient(top, rgba(0,0,0,0) 75%,rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#80000000',GradientType=0 );
+}
+
+p
+{
+    margin: 1em 0.5em;
 }
 
 #container
 {
-	position: absolute;
-	
-	left: 20%;
-	right: 20%;
-	min-width: 600px;
-	max-width: 1024px;
-	
-	z-index: 1;	
+    position: absolute;
+    
+    left: 20%;
+    right: 20%;
+    min-width: 600px;
+    max-width: 1024px;
+    
+    z-index: 1;	
 }
 
 #logo
 {
-	z-index: 2;	
+    z-index: 2;	
 }
 
 #navbar
 {	
-	margin-top: -55px;
-	height: 40px;	
-	line-height: 40px;
-	
-	color: #CCC;
-	font-size: larger;
-	font-family: GhostTheory, Cambria, serif;
-	
-	border-top: 1px rgb(128, 128, 128) solid;
-	border-bottom: 1px rgb(48, 48, 48) solid;
-	border-radius: 8px 8px 0px 0px;
-	-moz-border-radius: 8px 8px 0px 0px;
-	-webkit-border-radius: 8px 8px 0px 0px;
-	background: url(../images/navbar.png) repeat-x;
+    margin-top: -55px;
+    height: 40px;	
+    line-height: 40px;
+    
+    color: #CCC;
+    font-size: larger;
+    font-family: Cambria, serif;
+    
+    border-top: 1px #808080 solid;
+    border-bottom: 1px #181818 solid;
+    
+    border-radius: 8px 8px 0px 0px;
+    -moz-border-radius: 8px 8px 0px 0px;
+    -webkit-border-radius: 8px 8px 0px 0px;
+    background: url(../images/navbar.png) repeat-x;
 }
 
 #navbar ul
 {		
-	margin-right: 20px;
-	min-height: 100%;
-	list-style: none;	
+    display: inline-block;
+    margin-right: 20px;
+    list-style: none;	
+    
+    border-left: 1px ridge #202020;
+    border-left: 1px ridge rgba(32, 32, 32, 0.25); 
+    border-right: 1px ridge #606060;
+    border-right: 1px ridge rgba(96, 96, 96, 0.25); 
 }
 
 #navbar ul li
 {
-	height: 100%;
-	vertical-align: middle;	
-	display: table-cell; 
-	
-	border-left: 2px ridge #666 ; 
+    height: 100%;
+    vertical-align: middle;	
+    display: table-cell; 
+    
+    border-left: 1px ridge #606060;
+    border-left: 1px ridge rgba(96, 96, 96, 0.25); 
+    border-right: 1px ridge #202020;
+    border-right: 1px ridge rgba(32, 32, 32, 0.25); 
+}
+
+#navbar ul li:hover
+{
+    background: rgba(128, 128, 128, 0.25);
 }
 
 #navbar ul li a
 {
-	height: 100%;
-	padding: 0px 16px;
-	
-	color: #CCC;
-	font-weight: bold;
-	text-decoration: none;
+    padding: 0px 16px;
+    
+    color: #CCC;
+    text-decoration: none;
 }
 
 #navbar ul li a:hover 
 {
-	color: #ffffff;
-	background: rgba(128, 128, 128, 0.25);
+    color: #FFFFFF;
 }
 
 #content
 {	
-	padding: 1em;
-	
-	background: rgba(0, 0, 0, 0.25);
+    padding: 1em;
+    
+    background: #202020;
+    background: url(../images/bg.png) repeat #202020;    
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.25) 5%, rgba(0,0,0,0.25) 95%, rgba(0,0,0,0.5) 100%) no-repeat, url(../images/bg.png) repeat #202020;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.4)), color-stop(5%,rgba(0,0,0,0.25)), color-stop(95%,rgba(0,0,0,0.25)), color-stop(100%,rgba(0,0,0,0.5))) no-repeat, url(../images/bg.png) repeat #202020;
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.25) 5%, rgba(0,0,0,0.25) 95%, rgba(0,0,0,0.5) 100%) no-repeat, url(../images/bg.png) repeat #202020;
+    background: -o-linear-gradient(top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.25) 5%, rgba(0,0,0,0.25) 95%,rgba(0,0,0,0.5) 100%) no-repeat, url(../images/bg.png) repeat #202020;
+    background: -ms-linear-gradient(top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.25) 5%, rgba(0,0,0,0.25) 95%,rgba(0,0,0,0.5) 100%) no-repeat, url(../images/bg.png) repeat #202020;
+    background: linear-gradient(top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.25) 5%, rgba(0,0,0,0.25) 95%,rgba(0,0,0,0.5) 100%) no-repeat, url(../images/bg.png) repeat #202020;
+}
+
+.em
+{
+    color: #D0D0D0;
 }
 
 #footer
 {
-	padding: 16px 0 16px 0;
-	margin-bottom: 2em;
-	
-	font-size: smaller;
-		
-	border-top: 1px rgb(64, 64, 64) solid;
-	border-bottom: 1px rgb(16, 16, 16) solid;
-	border-radius: 0px 0px 8px 8px;
-	-moz-border-radius: 0px 0px 8px 8px;
-	-webkit-border-radius: 0px 0px 8px 8px;
-	
-	background: rgba(64, 64, 64, 0.25);
-	background: -moz-linear-gradient(top, rgba(96, 96, 96, 0.5) 0%, rgba(48, 48, 48, 0.5) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96, 96, 96, 0.5)), color-stop(100%,rgba(48, 48, 48, 0.5)));
-	background: -webkit-linear-gradient(top,  rgba(96, 96, 96, 0.5) 0%,rgba(48, 48, 48, 0.5) 100%);
-	background: -o-linear-gradient(top,  rgba(96, 96, 96, 0.5) 0%,rgba(48, 48, 48, 0.5) 100%);
-	background: -ms-linear-gradient(top,  rgba(96, 96, 96, 0.5) 0%,rgba(48, 48, 48, 0.5) 100%);
-	background: linear-gradient(top,  rgba(96, 96, 96, 0.5) 0%,rgba(48, 48, 48, 0.5) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40606060', endColorstr='#40303030',GradientType=0 );
+    padding: 16px 0 16px 0;
+    margin-bottom: 2em;
+    
+    font-size: smaller;
+        
+    border-top: 1px rgb(96, 96, 96) solid;
+    border-bottom: 1px rgb(16, 16, 16) solid;
+    border-radius: 0px 0px 8px 8px;
+    -moz-border-radius: 0px 0px 8px 8px;
+    -webkit-border-radius: 0px 0px 8px 8px;
+    
+    background: rgba(64, 64, 64, 0.25);
+    background: -moz-linear-gradient(top, rgba(96, 96, 96, 0.5) 0%, rgba(48, 48, 48, 0.5) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96, 96, 96, 0.5)), color-stop(100%,rgba(48, 48, 48, 0.5)));
+    background: -webkit-linear-gradient(top,  rgba(96, 96, 96, 0.5) 0%,rgba(48, 48, 48, 0.5) 100%);
+    background: -o-linear-gradient(top,  rgba(96, 96, 96, 0.5) 0%,rgba(48, 48, 48, 0.5) 100%);
+    background: -ms-linear-gradient(top,  rgba(96, 96, 96, 0.5) 0%,rgba(48, 48, 48, 0.5) 100%);
+    background: linear-gradient(top,  rgba(96, 96, 96, 0.5) 0%,rgba(48, 48, 48, 0.5) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40606060', endColorstr='#40303030',GradientType=0 );
 }
-	
+    
