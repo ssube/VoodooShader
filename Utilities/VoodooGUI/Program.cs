@@ -22,16 +22,14 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using NDesk.Options;
+using VoodooNetClasses;
+using System.Globalization;
+using System.Threading;
 
 namespace VoodooGUI
 {
     static class Program
     {
-        struct HookDef
-        {
-            String Target, Config, Name;
-        }
-
         [DllImport("user32.dll")]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
@@ -50,6 +48,19 @@ namespace VoodooGUI
             {
                 ConsoleVisible(Console.Title, false);
 
+                // Get the culture
+                string languageID = VoodooRegistry.Instance.Language;
+                try
+                {
+                    CultureInfo culture = new CultureInfo(languageID);
+                    Thread.CurrentThread.CurrentCulture = culture;
+                    Thread.CurrentThread.CurrentUICulture = culture;
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(String.Format("Error setting language to {0}, defaulting to en-US.\n{1}", languageID, ex.Message), "Language Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new MainForm());
@@ -64,15 +75,14 @@ namespace VoodooGUI
             List<String> install = new List<String>();
             List<String> update = new List<String>();
             List<String> remove = new List<String>();
-            List<HookDef> hooks_add = new List<HookDef>();
 
             OptionSet options = new OptionSet();
             options.Add("v|verbose", "display detailed messages", v => { verbose = true; });
-            options.Add("n|no|nologo", "hide version info", v => nologo = v != null);
+            options.Add("n|nologo", "hide version info", v => nologo = v != null);
             options.Add("version", "show the version info and exit", v => version = v != null);
             options.Add("logo", "show the version info and exit", v => logo = v != null);
             options.Add("h|?|help", "show help and exit", v => help = v != null);
-            options.Add("s|sync:", "download manifests from the given {URI}, or all listed remotes if none specified", v => sync.Add(v));
+            options.Add("s|sync:", "download manifests from the given {URI}, or all known remotes if none specified", v => sync.Add(v));
             options.Add("r|remove=", "removes the given {PACKAGE}", v => remove.Add(v));
             options.Add("i|install=", "install the given {PACKAGE}", v => install.Add(v));
             options.Add("u|update:", "updates the given {PACKAGE} or the gui if {PACKAGE}='this', or all installed packages if none specified", 

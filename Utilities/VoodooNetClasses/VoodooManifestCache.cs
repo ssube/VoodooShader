@@ -31,16 +31,32 @@ namespace VoodooNetClasses
         public delegate void FetchManifest(String name, String uri);
 
         public String Path { get; set; }
+
         public List<RemoteManifest> RemoteManifests { get; set; }
         public List<PackageManifest> PackageManifests { get; set; }
+
         public event FetchManifest OnFetchManifest;
 
-        public VoodooManifestCache(String iPath)
+        private static VoodooManifestCache instance;
+
+        public static VoodooManifestCache Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new VoodooManifestCache();
+                }
+                return instance;
+            }
+        }
+
+        private VoodooManifestCache()
         {
             RemoteManifests = new List<RemoteManifest>();
             PackageManifests = new List<PackageManifest>();
 
-            Path = iPath;
+            Path = VoodooRegistry.Instance.Path + @"\manifests\";
 
             if (!Directory.Exists(Path))
             {
@@ -48,7 +64,7 @@ namespace VoodooNetClasses
             }
         }
 
-        public void Sync(Remote remote)
+        public void Fetch(Remote remote)
         {            
             try
             {
@@ -85,29 +101,24 @@ namespace VoodooNetClasses
             }
         }
 
-        public void Sync(IEnumerable<Remote> remotes)
+        public void Fetch(IEnumerable<Remote> remotes)
         {
             foreach (Remote remote in remotes)
             {
-                Sync(remote);
+                Fetch(remote);
             }
         }
 
-        public void Sync()
+        public void FetchAll()
         {
             // Sync user remotes
-            RegistryKey remotesKey = Registry.CurrentUser.OpenSubKey(@"Software\VoodooShader\Remotes");
-            if (remotesKey != null)
-            {
-                List<Remote> remotes = VoodooRegistry.ReadRemotes(remotesKey);
-                Sync(remotes);
-            }
+            Fetch(VoodooRegistry.Instance.Remotes);
 
             // Sync root remote
             Remote testRemote = new Remote();
             testRemote.Name = "Voodoo Remote";
             testRemote.Uri = "https://www.voodooshader.com/manifests/Remote.xml";
-            Sync(testRemote);
+            Fetch(testRemote);
         }
     }
 }

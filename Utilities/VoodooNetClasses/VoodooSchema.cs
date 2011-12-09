@@ -433,6 +433,18 @@ namespace VoodooNetClasses
         private ChangeSet createField;
         private String idField;
         private string parentField;
+        private String descriptionField;
+        public string Description
+        {
+            get
+            {
+                return this.descriptionField;
+            }
+            set
+            {
+                this.descriptionField = value;
+            }
+        }
         [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]
         public MessageSet[] Messages
         {
@@ -593,7 +605,7 @@ namespace VoodooNetClasses
 
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute("VoodooRegistry", Namespace = "", IsNullable = false)]
-    public partial class GlobalRegistry
+    public partial class RegistryChunk
     {
         private Remote[] remotesField;
         private Package[] packagesField;

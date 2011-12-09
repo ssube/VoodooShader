@@ -23,46 +23,65 @@ using System.Text;
 
 namespace VoodooNetClasses
 {
-    class ChangeSetHandler
+    public class ChangeSetHandler
     {
         PackageManifest m_Package;
+        List<Version> m_Versions;
         List<String> m_File_Create, m_File_Remove;
 
         public ChangeSetHandler(PackageManifest p)
         {
             m_Package = p;
+            if (m_Package != null)
+            {
+                m_Versions = new List<Version>(m_Package.Versions);
+            }
         }
 
-        public void CollateChanges(Version v_from, Version v_to)
+        public Version CollateChanges(Version v_from, Version v_to)
         {
-            List<Version> versions = new List<Version>(m_Package.Versions);
-
-            // Find the first common parent
-            Dictionary<Version, Boolean> searched = new Dictionary<Version, Boolean>();
-            Version c_from = v_from, c_to = v_to;
-            
-            String parent_id = null;
-
-            while (true)
+            // If from is the direct parent of to, we can simply return to.
+            if (v_from != null && v_to != null && v_to.Parent == v_from.Id)
             {
-                if (c_to.Parent == null) { parent_id = c_to.Id; break; }
-                else if (searched.ContainsKey(c_to)) { parent_id = c_to.Id; break; }
-
-                c_to = versions.Find(v => v.Id == c_to.Parent);
-                
-                if (c_from.Parent == null ) {parent_id = c_from.Id; break;}
-                else if (searched.ContainsKey(c_from)) {parent_id = c_from.Id; break;}
-
-                c_from = versions.Find(v => v.Id == c_from.Parent);
+                return v_to;
             }
 
-            // Get the change stack
             Stack<Version> changechain = new Stack<Version>();
-            for (Version c_check = c_to; c_check.Parent != parent_id; versions.Find(v => v.Id == c_check.Parent))
-            {
-                changechain.Push(c_check);
-            }
 
+            if (v_to == null)
+            {
+                // If to is null, we're uninstalling everything (file create in remove, ignore remove)
+                foreach (Version v in m_Versions)
+                {
+                    Version v2 = new Version();
+                    v2.Description = v.Description;
+                    v2.Id = String.Format("Remove {0}", v.Id);
+                    v2.Messages = v.Messages;
+                    v2.Parent = v.Parent;
+                    v2.Create = v.Remove;
+
+                    changechain.Push(v2);
+                }
+            }
+            else
+            {
+                // Otherwise, we're installing something, so walk up.
+                //! @todo This assumes a linear chain and is not optimal for branches.
+                Version check = v_to;
+                while (check != null)
+                {
+                    changechain.Push(check);
+                    if ((v_from != null && check.Parent == v_from.Id) || check.Parent == null)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        check = m_Versions.Find(v => v.Id == check.Parent);
+                    }
+                }
+            }
+            
             // Compile the stack into a final changeset
             m_File_Create = new List<String>();
             m_File_Remove = new List<String>();
@@ -71,16 +90,34 @@ namespace VoodooNetClasses
             {
                 Version c_change = changechain.Pop();
 
-                foreach (String removal in c_change.Remove.File)
+                if (c_change.Remove != null && c_change.Remove.File != null)
                 {
-                    if (m_File_Create.RemoveAll(s => s == removal) == 0)
+                    foreach (String removal in c_change.Remove.File)
                     {
-                        m_File_Remove.Add(removal);
+                        if (m_File_Create.RemoveAll(s => s == removal) == 0)
+                        {
+                            m_File_Remove.Add(removal);
+                        }
                     }
                 }
 
-                m_File_Create.AddRange(c_change.Create.File);
+                if (c_change.Create != null && c_change.Create.File != null)
+                {
+                    m_File_Create.AddRange(c_change.Create.File);
+                }
             }
+
+            String sourceID = v_from == null ? null : v_from.Id;
+            String destID = v_to == null ? null : v_to.Id;
+
+            Version finalversion = new Version();
+            finalversion.Id = Guid.NewGuid().ToString();
+            finalversion.Description = String.Format("__{0} to {1}__", sourceID, destID);
+            finalversion.Create = new ChangeSet();
+            finalversion.Create.File = m_File_Create.ToArray();
+            finalversion.Remove = new ChangeSet();
+            finalversion.Remove.File = m_File_Remove.ToArray();
+            return finalversion;
         }
     }
 }

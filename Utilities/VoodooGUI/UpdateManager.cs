@@ -34,36 +34,23 @@ namespace VoodooGUI
 {
     public partial class UpdateManager : Form
     {
-        VoodooManifestCache m_Cache;
         Markdown m_Parser;
         bool m_CancelNav;
+        Regex m_ParserRegex;
 
         public UpdateManager()
         {
             InitializeComponent();
 
-            webBrowser1.Navigating += new WebBrowserNavigatingEventHandler(webBrowser1_Navigating);
+            cBrowserDesc.Navigating += new WebBrowserNavigatingEventHandler(webBrowser1_Navigating);
 
             m_Parser = new Markdown();
-
-            String cachePath = VoodooRegistry.GetRootPath() + @"\manifests\";
-            m_Cache = new VoodooManifestCache(cachePath);
-
-            m_Cache.OnFetchManifest += new VoodooManifestCache.FetchManifest(m_Cache_OnFetchManifest);
-            m_Cache.Sync();
-
-            // Load and list packages
-            foreach (PackageManifest pm in m_Cache.PackageManifests)
-            {
-                int index = cPackageGrid.Rows.Add();
-                cPackageGrid.Rows[index].Cells[1].Value = pm.Package.Name;
-                cPackageGrid.Rows[index].Cells[2].Value = pm.Package.Version;
-            }  
+            m_ParserRegex = new Regex("[ ]{2,}");
         }
 
         void m_Cache_OnFetchManifest(string name, string uri)
         {
-            MessageBox.Show(String.Format("Fetching {0} from: {1}", name, uri));
+            textBox1.Text += String.Format("Fetching {0} from: {1}\n", name, uri);
         }
 
         void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
@@ -72,17 +59,43 @@ namespace VoodooGUI
             m_CancelNav = true;
         }
 
-        private void RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void NodeChanged(object sender, TreeViewEventArgs e)
         {
-            String desc = m_Cache.PackageManifests[e.RowIndex].Description;
-            desc = desc.Replace("  ", " ");
-            desc = m_Parser.Transform(desc);
-            m_CancelNav = false;
-            webBrowser1.DocumentText = desc;
+            String desc = e.Node.Tag as String;
+            if (desc != null)
+            {
+                desc = m_ParserRegex.Replace(desc, " ");
+                desc = m_Parser.Transform(desc);
+                m_CancelNav = false;
+                cBrowserDesc.DocumentText = desc;
+            }
         }
 
-        private void SelectionChanged(object sender, EventArgs e)
+        private void FetchRemotes(object sender, EventArgs e)
         {
+            String cachePath = VoodooRegistry.Instance.Path + @"\manifests\";
+            
+            VoodooManifestCache.Instance.OnFetchManifest += new VoodooManifestCache.FetchManifest(m_Cache_OnFetchManifest);
+            VoodooManifestCache.Instance.FetchAll();
+
+            // Load and list packages
+            foreach (PackageManifest pm in VoodooManifestCache.Instance.PackageManifests)
+            {
+                TreeNode packageNode = cPackageTree.Nodes.Add(pm.Package.PackId.ToString(), pm.Package.Name);
+                packageNode.Tag = pm.Description;
+                foreach (VoodooNetClasses.Version v in pm.Versions)
+                {
+                    packageNode.Nodes.Add(v.Id, v.Id).Tag = v.Description;
+                }
+            }          
+        }
+
+        private void InstallSelected(object sender, EventArgs e)
+        {
+            // Version test
+            ChangeSetHandler csh = new ChangeSetHandler(VoodooManifestCache.Instance.PackageManifests[1]);
+            VoodooNetClasses.Version changes = csh.CollateChanges(null, VoodooManifestCache.Instance.PackageManifests[1].Versions[1]);   
+
         }
     }
 }

@@ -26,37 +26,54 @@ namespace VoodooNetClasses
 {
     public class VoodooRegistry
     {
-        private static char[] ArrayDelims = { ';' };
+        // Singleton/meta objects
+        private static VoodooRegistry m_Instance;
+        private static char[] m_Delims = { ';' };
 
-        public static char ArraysDelim { get { return ArrayDelims[0]; } }
+        // Registry data
+        public List<Remote> Remotes { get; set; }
+        public List<Package> Packages { get; set; }
+        public List<Module> Modules { get; set; }
+        public List<Class> Classes { get; set; }
+        public List<Hook> Hooks { get; set; }
+        public List<Default> Defaults { get; set; }
 
-        public static String GetRootPath()
+        public string Path { get; set; }
+        public string Language { get; set; }
+        public string BinPrefix { get; set; }
+
+        public static string Errors { get; set; }
+
+        private VoodooRegistry()
         {
-            String defaultRoot = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\VoodooShader\";
+        }
 
-            try
+        public static VoodooRegistry Instance
+        {
+            get
             {
-                String regPath = Registry.CurrentUser.GetValue(@"Software\VoodooShader\Path") as String;
-
-                if (regPath == null)
+                if (m_Instance == null)
                 {
-                    Registry.CurrentUser.SetValue(@"Software\VoodooShader\Path", defaultRoot);
-                    return defaultRoot;
+                    m_Instance = new VoodooRegistry();
+                    m_Instance.Update();
                 }
-                else
-                {
-                    return regPath;
-                }
-            }
-            catch (Exception)
-            {
-                return defaultRoot;
+                return m_Instance;
             }
         }
 
+        public static char ArraysDelim 
+        { 
+            get 
+            {
+                return m_Delims[0]; 
+            } 
+        }
+
         #region Write Methods
-        public static void Write(GlobalRegistry full)
+        public void Write()
         {
+            Errors = null;
+
             if (Registry.CurrentUser.OpenSubKey(@"Software\VoodooShader") != null)
             {
                 Registry.CurrentUser.DeleteSubKeyTree(@"Software\VoodooShader");
@@ -64,18 +81,16 @@ namespace VoodooNetClasses
 
             RegistryKey root = Registry.CurrentUser.CreateSubKey(@"Software\VoodooShader", RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-            root.SetValue("Path", full.Path);
-            root.SetValue("Language", full.Language);
-            root.SetValue("BinPrefix", full.BinPrefix);
+            root.SetValue("Path", Path);
+            root.SetValue("Language", Language);
+            root.SetValue("BinPrefix", BinPrefix);
 
-            VoodooRegistry.Write(full.Remotes, root);
-            VoodooRegistry.Write(full.Packages, root);
-            VoodooRegistry.Write(full.Modules, root);
-            VoodooRegistry.Write(full.Classes, root);
-            VoodooRegistry.Write(full.Hooks, root);
-            VoodooRegistry.Write(full.Defaults, root);
-
-            root.Close();
+            Write(Remotes, root);
+            Write(Packages, root);
+            Write(Modules, root);
+            Write(Classes, root);
+            Write(Hooks, root);
+            Write(Defaults, root);
         }
         #region Remotes
         public static void Write(IEnumerable<Remote> remotes, RegistryKey root)
@@ -86,14 +101,14 @@ namespace VoodooNetClasses
                 foreach (Remote remote in remotes)
                 {
                     RegistryKey remoteKey = remoteRootKey.CreateSubKey(VoodooHash.Hash(remote.Uri), RegistryKeyPermissionCheck.ReadWriteSubTree);
-                    VoodooRegistry.Write(remote, remoteKey);
+                    Write(remote, remoteKey);
                     remoteKey.Close();
                 }
                 remoteRootKey.Close();
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing remotes: " + exc.Message, exc);
+                Errors += String.Format("Error writing remotes:\n{0}\n", exc.Message);
             }
         }
 
@@ -106,7 +121,7 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error writing remote '{0}'.", remote.Name), exc);
+                Errors += String.Format("Error writing remote '{0}': {1}\n", remote.Name, exc.Message);
             }
         }
         #endregion
@@ -119,14 +134,14 @@ namespace VoodooNetClasses
                 foreach (Package package in packages)
                 {
                     RegistryKey packageKey = packageRootKey.CreateSubKey(package.PackId.ToString(), RegistryKeyPermissionCheck.ReadWriteSubTree);
-                    VoodooRegistry.Write(package, packageKey);
+                    Write(package, packageKey);
                     packageKey.Close();
                 }
                 packageRootKey.Close();
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing packages: " + exc.Message, exc);
+                Errors += String.Format("Error writing packages:\n{0}\n", exc.Message);
             }
         }
 
@@ -140,7 +155,7 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error writing package '{0}'.", package.PackId), exc);
+                Errors += String.Format("Error writing package '{0}': {1}\n", package.PackId, exc.Message);
             }
         }
         #endregion
@@ -153,14 +168,14 @@ namespace VoodooNetClasses
                 foreach (Module module in modules)
                 {
                     RegistryKey moduleKey = moduleRootKey.CreateSubKey(module.LibId.ToString(), RegistryKeyPermissionCheck.ReadWriteSubTree);
-                    VoodooRegistry.Write(module, moduleKey);
+                    Write(module, moduleKey);
                     moduleKey.Close();
                 }
                 moduleRootKey.Close();
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing modules: " + exc.Message, exc);
+                Errors += String.Format("Error writing modules:\n{0}\n" + exc.Message);
             }
         }
 
@@ -175,7 +190,7 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error writing module '{0}'.", module.LibId), exc);
+                Errors += String.Format("Error writing module '{0}': {1}\n", module.LibId, exc.Message);
             }
         }
         #endregion
@@ -188,14 +203,14 @@ namespace VoodooNetClasses
                 foreach (Class vclass in classes)
                 {
                     RegistryKey classKey = classRootKey.CreateSubKey(vclass.ClassId.ToString(), RegistryKeyPermissionCheck.ReadWriteSubTree);
-                    VoodooRegistry.Write(vclass, classKey);
+                    Write(vclass, classKey);
                     classKey.Close();
                 }
                 classRootKey.Close();
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing classes: " + exc.Message, exc);
+                Errors += String.Format("Error writing classes:\n{0}\n" + exc.Message);
             }
         }
 
@@ -208,7 +223,7 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error writing class '{0}'.", vclass.ClassId), exc);
+                Errors += String.Format("Error writing class '{0}': {1}\n", vclass.ClassId, exc.Message);
             }
         }
         #endregion
@@ -222,14 +237,14 @@ namespace VoodooNetClasses
                 foreach (Hook hook in hooks)
                 {
                     RegistryKey hookKey = hookRootKey.CreateSubKey(counter++.ToString(), RegistryKeyPermissionCheck.ReadWriteSubTree);
-                    VoodooRegistry.Write(hook, hookKey);
+                    Write(hook, hookKey);
                     hookKey.Close();
                 }
                 hookRootKey.Close();
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing hooks: " + exc.Message, exc);
+                Errors += String.Format("Error writing hooks:\n{0}\n" + exc.Message);
             }
         }
 
@@ -244,7 +259,7 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error writing hook '{0}'.", hook.Name), exc);
+                Errors += String.Format("Error writing hook '{0}': {1}\n", hook.Name, exc.Message);
             }
         }
         #endregion
@@ -257,14 +272,14 @@ namespace VoodooNetClasses
                 foreach (Default vdefault in defaults)
                 {
                     RegistryKey defaultKey = defaultRootKey.CreateSubKey(vdefault.DefId.ToString(), RegistryKeyPermissionCheck.ReadWriteSubTree);
-                    VoodooRegistry.Write(vdefault, defaultKey);
+                    Write(vdefault, defaultKey);
                     defaultKey.Close();
                 }
                 defaultRootKey.Close();
             }
             catch (Exception exc)
             {
-                throw new Exception("Error writing defaults: " + exc.Message, exc);
+                Errors += String.Format("Error writing defaults:\n{0}\n", exc.Message);
             }
         }
 
@@ -279,37 +294,36 @@ namespace VoodooNetClasses
                 StringBuilder sb = new StringBuilder();
                 foreach (Guid package in vdefault.Packages)
                 {
-                    sb.Append(package.ToString() + ArrayDelims[0]);
+                    sb.Append(package.ToString() + m_Delims[0]);
                 }
                 defaultKey.SetValue("Packages", sb.ToString());
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error writing default '{0}'.", vdefault.DefId), exc);
+                Errors += String.Format("Error writing default '{0}': {1}\n", vdefault.DefId, exc.Message);
             }
         }
         #endregion
         #endregion
 
         #region Read Methods
-        public static GlobalRegistry Read()
+        public void Update()
         {
-            GlobalRegistry full = new GlobalRegistry();
+            Errors = null;
 
             RegistryKey root = Registry.CurrentUser.OpenSubKey(@"Software\VoodooShader");
+            String defaultRoot = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\VoodooShader\";
 
-            full.Path = root.GetValue("Path") as String;
-            full.Language = root.GetValue("Language") as String;
-            full.BinPrefix = root.GetValue("BinPrefix") as String;
+            Path = root.GetValue("Path", defaultRoot) as String;
+            Language = root.GetValue("Language", "en-US") as String;
+            BinPrefix = root.GetValue("BinPrefix", String.Empty) as String;
 
-            full.Remotes = VoodooRegistry.ReadRemotes(root.OpenSubKey("Remotes")).ToArray();
-            full.Packages = VoodooRegistry.ReadPackages(root.OpenSubKey("Packages")).ToArray();
-            full.Modules = VoodooRegistry.ReadModules(root.OpenSubKey("Modules")).ToArray();
-            full.Classes = VoodooRegistry.ReadClasses(root.OpenSubKey("Classes")).ToArray();
-            full.Hooks = VoodooRegistry.ReadHooks(root.OpenSubKey("Hooks")).ToArray();
-            full.Defaults = VoodooRegistry.ReadDefaults(root.OpenSubKey("Defaults")).ToArray();
-
-            return full;
+            Remotes = ReadRemotes(root.OpenSubKey("Remotes")); if (Remotes == null) Remotes = new List<Remote>();
+            Packages = ReadPackages(root.OpenSubKey("Packages")); if (Packages == null) Packages = new List<Package>();
+            Modules = ReadModules(root.OpenSubKey("Modules")); if (Modules == null) Modules = new List<Module>();
+            Classes = ReadClasses(root.OpenSubKey("Classes")); if (Classes == null) Classes = new List<Class>();
+            Hooks = ReadHooks(root.OpenSubKey("Hooks")); if (Hooks == null) Hooks = new List<Hook>();
+            Defaults = ReadDefaults(root.OpenSubKey("Defaults")); if (Defaults == null) Defaults = new List<Default>();
         }
         #region Remotes
         public static List<Remote> ReadRemotes(RegistryKey root)
@@ -320,14 +334,16 @@ namespace VoodooNetClasses
                 foreach (String remoteKeyName in root.GetSubKeyNames())
                 {
                     RegistryKey remoteKey = root.OpenSubKey(remoteKeyName);
-                    Remote remote = VoodooRegistry.ReadRemote(remoteKey);
+                    Remote remote = ReadRemote(remoteKey);
                     remotes.Add(remote);
                 }
+
                 return remotes;
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading remotes: " + exc.Message, exc);
+                Errors += String.Format("Error reading remotes:\n{0}\n", exc.Message);
+                return null;
             }
         }
 
@@ -344,7 +360,8 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error reading remote from '{0}'.", remoteKey.Name), exc);
+                Errors += String.Format("Error reading remote from '{0}': {1}\n", remoteKey.Name, exc.Message);
+                return null;
             }
         }
         #endregion
@@ -357,14 +374,15 @@ namespace VoodooNetClasses
                 foreach (String packageKeyName in root.GetSubKeyNames())
                 {
                     RegistryKey packageKey = root.OpenSubKey(packageKeyName);
-                    Package package = VoodooRegistry.ReadPackage(packageKey);
+                    Package package = ReadPackage(packageKey);
                     packages.Add(package);
                 }
                 return packages;
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading packages: " + exc.Message, exc);
+                Errors += String.Format("Error reading packages:\n{0}\n", exc.Message);
+                return null;
             }
         }
 
@@ -384,7 +402,8 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error reading package from '{0}'.", packageKey.Name), exc);
+                Errors += String.Format("Error reading package from '{0}': {1}.\n", packageKey.Name, exc.Message);
+                return null;
             }
         }
         #endregion
@@ -397,14 +416,15 @@ namespace VoodooNetClasses
                 foreach (String moduleKeyName in root.GetSubKeyNames())
                 {
                     RegistryKey moduleKey = root.OpenSubKey(moduleKeyName);
-                    Module module = VoodooRegistry.ReadModule(moduleKey);
+                    Module module = ReadModule(moduleKey);
                     modules.Add(module);
                 }
                 return modules;
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading modules: " + exc.Message, exc);
+                Errors += String.Format("Error reading modules:\n{0}\n", exc.Message);
+                return null;
             }
         }
 
@@ -425,7 +445,8 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error reading module from '{0}'.", moduleKey.Name), exc);
+                Errors += String.Format("Error reading module from '{0}': {1}\n", moduleKey.Name, exc.Message);
+                return null;
             }
         }
         #endregion
@@ -438,14 +459,15 @@ namespace VoodooNetClasses
                 foreach (String ClassKeyName in root.GetSubKeyNames())
                 {
                     RegistryKey ClassKey = root.OpenSubKey(ClassKeyName);
-                    Class vclass = VoodooRegistry.ReadClass(ClassKey);
+                    Class vclass = ReadClass(ClassKey);
                     Classes.Add(vclass);
                 }
                 return Classes;
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading classes: " + exc.Message, exc);
+                Errors += String.Format("Error reading classes:\n{0}\n", exc.Message);
+                return null;
             }
         }
 
@@ -464,7 +486,8 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error reading class from '{0}'.", ClassKey.Name), exc);
+                Errors += String.Format("Error reading class from '{0}': {1}\n", ClassKey.Name, exc.Message);
+                return null;
             }
         }
         #endregion
@@ -477,14 +500,15 @@ namespace VoodooNetClasses
                 foreach (String HookKeyName in root.GetSubKeyNames())
                 {
                     RegistryKey HookKey = root.OpenSubKey(HookKeyName);
-                    Hook vHook = VoodooRegistry.ReadHook(HookKey);
+                    Hook vHook = ReadHook(HookKey);
                     Hooks.Add(vHook);
                 }
                 return Hooks;
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading hooks: " + exc.Message, exc);
+                Errors += String.Format("Error reading hooks:\n{0}\n", exc.Message);
+                return null;
             }
         }
 
@@ -503,7 +527,8 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error reading hook from '{0}'.", HookKey.Name), exc);
+                Errors += String.Format("Error reading hook from '{0}': {1}\n", HookKey.Name, exc.Message);
+                return null;
             }
         }
         #endregion
@@ -516,14 +541,15 @@ namespace VoodooNetClasses
                 foreach (String DefaultKeyName in root.GetSubKeyNames())
                 {
                     RegistryKey DefaultKey = root.OpenSubKey(DefaultKeyName);
-                    Default vDefault = VoodooRegistry.ReadDefault(DefaultKey);
+                    Default vDefault = ReadDefault(DefaultKey);
                     Defaults.Add(vDefault);
                 }
                 return Defaults;
             }
             catch (Exception exc)
             {
-                throw new Exception("Error reading defaults: " + exc.Message, exc);
+                Errors += String.Format("Error reading defaults:\n{0}\n", exc.Message);
+                return null;
             }
         }
 
@@ -539,7 +565,7 @@ namespace VoodooNetClasses
                 vdefault.Filter = DefaultKey.GetValue("Filter") as String;
                 vdefault.Config = DefaultKey.GetValue("Config") as String;
 
-                String[] packagesStr = (DefaultKey.GetValue("Packages") as String).Split(ArrayDelims, StringSplitOptions.RemoveEmptyEntries);
+                String[] packagesStr = (DefaultKey.GetValue("Packages") as String).Split(m_Delims, StringSplitOptions.RemoveEmptyEntries);
                 vdefault.Packages = new Guid[packagesStr.Length];
                 for (int i = 0; i < vdefault.Packages.Length; ++i)
                 {
@@ -550,10 +576,44 @@ namespace VoodooNetClasses
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error reading default from '{0}'.", DefaultKey.Name), exc);
+                Errors += String.Format("Error reading default from '{0}': {1}\n", DefaultKey.Name, exc.Message);
+                return null;
             }
         }
         #endregion
+        #endregion
+
+        #region Xml Methods
+        public RegistryChunk Export()
+        {
+            RegistryChunk chunk = new RegistryChunk();
+
+            chunk.BinPrefix = BinPrefix;
+            chunk.Language = Language;
+            chunk.Path = Path;
+
+            chunk.Classes = Classes.ToArray();
+            chunk.Defaults = Defaults.ToArray();
+            chunk.Hooks = Hooks.ToArray();
+            chunk.Modules = Modules.ToArray();
+            chunk.Packages = Packages.ToArray();
+            chunk.Remotes = Remotes.ToArray();
+
+            return chunk;
+        }
+        public void Import(RegistryChunk chunk)
+        {
+            if (chunk.BinPrefix != null) BinPrefix = chunk.BinPrefix;
+            if (chunk.Language != null) Language = chunk.Language;
+            if (chunk.Path != null) Path = chunk.Path;
+
+            if (chunk.Classes != null) Classes.AddRange(chunk.Classes);
+            if (chunk.Defaults != null) Defaults.AddRange(chunk.Defaults);
+            if (chunk.Hooks != null) Hooks.AddRange(chunk.Hooks);
+            if (chunk.Modules != null) Modules.AddRange(chunk.Modules);
+            if (chunk.Packages != null) Packages.AddRange(chunk.Packages);
+            if (chunk.Remotes != null) Remotes.AddRange(chunk.Remotes);
+        }
         #endregion
     }
 }
