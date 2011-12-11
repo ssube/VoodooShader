@@ -79,14 +79,8 @@ namespace VoodooGUI
             List<String> remove = new List<String>();
 
             OptionSet options = new OptionSet();
-            options.Add("v|verbose",    "display detailed messages",
-                v => verbose = true);
-            options.Add("n|nologo",     "hide version info",
-                v => nologo = v != null);
-            options.Add("version",      "show the version info and exit",
+            options.Add("v|version",      "show the version info and exit",
                 v => version = v != null);
-            options.Add("logo",         "show the version info and exit",
-                v => logo = v != null);
             options.Add("h|help",       "show help and exit",
                 v => help = v != null);
             options.Add("l|list",       "list installed packages",

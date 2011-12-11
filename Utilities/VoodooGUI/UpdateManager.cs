@@ -46,6 +46,8 @@ namespace VoodooGUI
 
             m_Parser = new Markdown();
             m_ParserRegex = new Regex("[ ]{2,}");
+
+            RefreshTree();
         }
 
         void m_Cache_OnFetchManifest(string name, string uri)
@@ -74,10 +76,19 @@ namespace VoodooGUI
         private void FetchRemotes(object sender, EventArgs e)
         {            
             VoodooManifestCache.Instance.OnFetchManifest += new VoodooManifestCache.FetchManifest(m_Cache_OnFetchManifest);
-
             VoodooManifestCache.Instance.FetchAll();
 
-            // Load and list packages
+            RefreshTree();
+        }
+
+        private void InstallSelected(object sender, EventArgs e)
+        {
+            // Version test
+            ChangeSetHandler.Update(VoodooManifestCache.Instance.PackageManifests[1], null, "0.5.2");
+        }
+
+        private void RefreshTree()
+        {
             foreach (PackageManifest pm in VoodooManifestCache.Instance.PackageManifests)
             {
                 TreeNode packageNode = cPackageTree.Nodes.Add(pm.Package.PackId.ToString(), pm.Package.Name);
@@ -86,14 +97,7 @@ namespace VoodooGUI
                 {
                     packageNode.Nodes.Add(v.Id, v.Id).Tag = v.Description;
                 }
-            }          
-        }
-
-        private void InstallSelected(object sender, EventArgs e)
-        {
-            // Version test
-            VoodooSharp.MinimalVersion changes = ChangeSetHandler.CollateChanges(VoodooManifestCache.Instance.PackageManifests[1], null, "0.5.2");
-            ChangeSetHandler.ApplyVersion(changes);
+            }  
         }
     }
 }

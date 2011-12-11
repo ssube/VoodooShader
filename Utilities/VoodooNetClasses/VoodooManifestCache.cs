@@ -62,6 +62,16 @@ namespace VoodooSharp
             {
                 Directory.CreateDirectory(Path);
             }
+            else
+            {
+                foreach (String file in Directory.GetFiles(Path, "package_*.xml"))
+                {
+                    if (OnFetchManifest != null) OnFetchManifest.Invoke("Local manifest", file);
+
+                    PackageManifest packagemanifest = VoodooXml.ValidateObject<PackageManifest>(Path + @"\" + file);
+                    PackageManifests.Add(packagemanifest);
+                }
+            }
         }
 
         public void Fetch(Remote remote)
@@ -75,7 +85,6 @@ namespace VoodooSharp
 
             try
             {
-
                 if (OnFetchManifest != null) OnFetchManifest.Invoke(remote.Name, remoteUri);
                 client.DownloadFile(remoteUri, remoteFile);
 
@@ -89,7 +98,6 @@ namespace VoodooSharp
 
                     try
                     {
-
                         if (OnFetchManifest != null) OnFetchManifest.Invoke(String.Format("{0}; package {1}", remote.Name, i), packageUri);
                         client.DownloadFile(packageUri, packageFile);
 
@@ -104,7 +112,9 @@ namespace VoodooSharp
             }
             catch (Exception exc)
             {
-                throw new Exception(String.Format("Error syncing manifests for remote '{0}'.", remoteUri), exc);
+                Console.WriteLine("Error syncing manifests.");
+                Console.WriteLine("  Remote: {0}", remoteUri);
+                Console.WriteLine("  Error: {0}", exc.Message);
             }
         }
 
@@ -112,14 +122,7 @@ namespace VoodooSharp
         {
             foreach (Remote remote in remotes)
             {
-                try
-                {
-                    Fetch(remote);
-                }
-                catch (Exception exc)
-                {
-
-                }
+                Fetch(remote);
             }
         }
 

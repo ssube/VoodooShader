@@ -26,253 +26,174 @@ using System.Net;
 
 namespace VoodooSharp
 {
-    public class MinimalVersion
-    {
-        public PackageManifest Source;
-        public String Id, VersionUri;
-        public List<String> CreateFile, RemoveFile;
-        public List<Module> CreateModule, RemoveModule;
-        public List<Default> CreateDefault, RemoveDefault;
-
-        public MinimalVersion(PackageManifest s)
-        {
-            Source = s;
-            CreateFile = new List<String>(); RemoveFile = new List<String>();
-            CreateModule = new List<Module>(); RemoveModule = new List<Module>();
-            CreateDefault = new List<Default>(); RemoveDefault = new List<Default>();
-        }
-
-        public MinimalVersion(PackageManifest s, Version v)
-        {
-            Source = s;
-            Id = v.Id;
-            VersionUri = v.VersionUri;
-            if (v.Create != null)
-            {
-                CreateFile = new List<String>(v.Create.File);
-                CreateModule = new List<Module>(v.Create.Module);
-                CreateDefault = new List<Default>(v.Create.Default);
-            }
-            if (v.Remove != null)
-            {
-                RemoveFile = new List<String>(v.Remove.File);
-                RemoveModule = new List<Module>(v.Remove.Module);
-                RemoveDefault = new List<Default>(v.Remove.Default);
-            }
-        }
-    }
-
     public class ChangeSetHandler
     {
-        public static MinimalVersion CollateChanges(PackageManifest package, String id_from, String id_to)
+        public static bool Update(PackageManifest pm, String sfrom, String sto)
         {
-            if (package == null || package.Versions == null) return null;
-
-            List<Version> versions = new List<Version>(package.Versions);
-
-            Version v_from = versions.Find(v => v.Id == id_from);
-            Version v_to = versions.Find(v => v.Id == id_to);
-
-            // If from is the direct parent of to, we can simply return to.
-            if (v_from != null && v_to != null && v_to.Parent == v_from.Id)
+            if (pm == null)
             {
-                return new MinimalVersion(package, v_to);
+                return false;
+            }
+            else if (sfrom == null && sto == null)
+            {
+                return false;
             }
 
-            Stack<Version> changechain = new Stack<Version>();
+            Console.WriteLine("Beginning update procedure.");
+            Console.WriteLine("  Package: {0}", pm.Package.Name);
 
-            Version check = null;
-            if (v_to == null)
+            List<Version> versions = new List<Version>(pm.Versions);
+            Version v_from = sfrom == null ? null : versions.Find(v => v.Id == sfrom);
+            Version v_to   = sto   == null ? null : versions.Find(v => v.Id == sto  );
+
+            if (v_from == null && v_to == null)
             {
-                check = v_from;
-            }
-            else
-            {
-                check = v_to;
+                return false;
             }
 
-            // Otherwise, we're installing something, so walk up.
-            //! @todo This assumes a linear chain and is not optimal for branches.
-            while (check != null)
+            Stack<Version> workingSet = new Stack<Version>();
+            Version check = v_to;
+
+            while (check != null && check.Id != sfrom)
             {
-                changechain.Push(check);
-                if ((v_from != null && check.Parent == v_from.Id) || check.Parent == null)
+                workingSet.Push(check);
+                check = versions.Find(v => v.Id == check.Parent);
+            }
+
+            if (workingSet.Count == 0)
+            {
+                return false;
+            }
+
+            while (workingSet.Count > 0)
+            {
+                Console.WriteLine("{0} updates to be applied.", workingSet.Count);
+                if (!ApplyVersion(pm.PackageUri, workingSet.Pop()))
                 {
-                    break;
-                }
-                else
-                {
-                    check = versions.Find(v => v.Id == check.Parent);
+                    return false;
                 }
             }
 
-            // Compile the stack into a final changeset:
-            MinimalVersion finalmv = new MinimalVersion(package);
-
-            String sourceID = v_from == null ? "(null)" : v_from.Id;
-            String destID = v_to == null ? "(null)" : v_to.Id;
-            finalmv.Id = String.Format("__{0} to {1}__", sourceID, destID);
-
-            List<MinimalVersion> workingSet = new List<MinimalVersion>(changechain.Count);
-
-            while (changechain.Count > 0)
-            {
-                Version c_change = changechain.Pop();
-
-                MinimalVersion mv = new MinimalVersion(null);
-                mv.Id = c_change.Id;
-                mv.VersionUri = c_change.VersionUri;
-
-                if (c_change.Remove != null)
-                {
-                    if (c_change.Remove.File != null)
-                    {
-                        foreach (String removal in c_change.Remove.File)
-                        {
-                            if (workingSet.Find(v => v.CreateFile.RemoveAll(s => s == removal) > 0) == null)
-                            {
-                                finalmv.RemoveFile.Add(removal);
-                            }
-                        }
-                    }
-                    
-                    if (c_change.Remove.Module != null)
-                    {
-                        foreach (Module removal in c_change.Remove.Module)
-                        {
-                            if (finalmv.CreateModule.RemoveAll(s => s.LibId == removal.LibId) > 0)
-                            {
-                                finalmv.RemoveModule.Add(removal);
-                            }
-                        }
-                    }
-
-                    if (c_change.Remove.Default != null)
-                    {
-                        foreach (Default removal in c_change.Remove.Default)
-                        {
-                            if (finalmv.CreateDefault.RemoveAll(s => s.DefId == removal.DefId) > 0)
-                            {
-                                finalmv.RemoveDefault.Add(removal);
-                            }
-                        }
-                    }
-                }
-
-                if (c_change.Create != null)
-                {
-                    if (c_change.Create.File != null) mv.CreateFile.AddRange(c_change.Create.File);
-                    if (c_change.Create.Module != null) finalmv.CreateModule.AddRange(c_change.Create.Module);
-                    if (c_change.Create.Default != null) finalmv.CreateDefault.AddRange(c_change.Create.Default);
-                }
-
-                workingSet.Add(mv);
-            }
-
-            foreach (MinimalVersion mv in workingSet)
-            {
-                if (mv.CreateFile != null) mv.CreateFile.ForEach(cf => finalmv.CreateFile.Add(mv.VersionUri + "/" + cf));
-            }
-
-            if (v_to == null)
-            {
-                finalmv.RemoveFile = finalmv.CreateFile;
-                finalmv.CreateFile = null;
-                finalmv.RemoveModule = finalmv.CreateModule;
-                finalmv.CreateModule = null;
-                finalmv.RemoveDefault = finalmv.CreateDefault;
-                finalmv.CreateDefault = null;
-            }
-
-            return finalmv;
+            return true;
         }
 
-        public static void ApplyVersion(MinimalVersion mv)
+        public static bool ApplyVersion(String root, Version mv)
         {
             VoodooRegistry.Instance.Write();
             VoodooRegistry.Instance.Update();
-            
-            if (mv.RemoveFile != null)
+
+            if (mv.Remove != null)
             {
-                foreach (String basename in mv.RemoveFile)
+                if (mv.Remove.File != null)
                 {
-                    try
+                    foreach (String basename in mv.Remove.File)
                     {
-                        String fullpath = Path.GetFullPath(Path.Combine(VoodooRegistry.Instance.Path, basename));
-                        if (!fullpath.StartsWith(VoodooRegistry.Instance.Path))
+                        try
                         {
-                            Console.WriteLine("Illegal path for file '{0}', aborting version change. This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.", fullpath);
-                            return;
+                            String fullpath = Path.GetFullPath(Path.Combine(VoodooRegistry.Instance.Path, basename));
+                            if (!fullpath.StartsWith(VoodooRegistry.Instance.Path))
+                            {
+                                Console.WriteLine("Illegal file path, aborting version change.", fullpath);
+                                Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
+                                Console.WriteLine("  File: {0}", basename);
+                                return false;
+                            }
+                            File.Delete(fullpath);
                         }
-                        File.Delete(fullpath);
-                    }
-                    catch (Exception exc)
-                    {
-                        Console.WriteLine("Error removing file. This file may need to be removed manually.\n\tFile: {0}\n\tError: {1}", basename, exc.Message);
-                    }
-                }
-            }
-
-            if (mv.CreateFile != null)
-            {
-                foreach (String basename in mv.CreateFile)
-                {
-                    try
-                    {
-                        String localpath = Path.GetFullPath(Path.Combine(VoodooRegistry.Instance.Path, basename));
-                        if (!localpath.StartsWith(VoodooRegistry.Instance.Path))
+                        catch (Exception exc)
                         {
-                            Console.WriteLine("Illegal path for file '{0}', aborting version change. This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.", localpath);
-                            return;
+                            Console.WriteLine("Error removing file. This file may need to be removed manually.");
+                            Console.WriteLine("  File: {0}", basename);
+                            Console.WriteLine("  Error: {0}", exc.Message);
                         }
-
-                        String source = Path.Combine(mv.Source.PackageUri, basename);
-                        WebClient wc = new WebClient();
-                        wc.DownloadFile(source.ToString(), localpath);
                     }
-                    catch (Exception exc)
+                }
+
+                if (mv.Remove.Default != null)
+                {
+                    foreach (Default def in mv.Remove.Default)
                     {
-                        Console.WriteLine("Error removing file. This file may need to be removed manually.\n\tFile: {0}\n\tError: {1}", basename, exc.Message);
+                        Console.WriteLine("Removing Default: {0}", def.Name);
+                        if (VoodooRegistry.Instance.Defaults.RemoveAll(pdef => pdef.DefId == def.DefId) == 0)
+                        {
+                            Console.WriteLine("  Default not found for removal.", def.DefId);
+                        }
                     }
                 }
-            }
 
-            if (mv.RemoveDefault != null)
-            {
-                foreach (Default def in mv.RemoveDefault)
+                if (mv.Remove.Module != null)
                 {
-                    if (VoodooRegistry.Instance.Defaults.RemoveAll(pdef => pdef.DefId == def.DefId) == 0)
+                    foreach (Module mod in mv.Remove.Module)
                     {
-                        Console.WriteLine("Default {0} not found for removal.", def.DefId);
+                        Console.WriteLine("Removing Module: {0}", mod.Name);
+                        VoodooRegistry.Instance.Modules.RemoveAll(pmod => pmod.LibId == mod.LibId);
                     }
                 }
             }
 
-            if (mv.RemoveModule != null)
+            if (mv.Create != null)
             {
-                foreach (Module mod in mv.RemoveModule)
+                if (mv.Create.File != null)
                 {
-                    VoodooRegistry.Instance.Modules.RemoveAll(pmod => pmod.LibId == mod.LibId);
-                }
-            }
+                    WebClient wc = new WebClient();
+                    wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
+                    foreach (String basename in mv.Create.File)
+                    {
+                        try
+                        {
+                            String localpath = Path.GetFullPath(Path.Combine(VoodooRegistry.Instance.Path, basename));
+                            if (!localpath.StartsWith(VoodooRegistry.Instance.Path))
+                            {
+                                Console.WriteLine("Illegal file path, aborting version change.", localpath);
+                                Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
+                                Console.WriteLine("  File: {0}", basename);
+                                return false;
+                            }
 
-            if (mv.CreateDefault != null)
-            {
-                foreach (Default def in mv.CreateDefault)
-                {
-                    VoodooRegistry.Instance.Defaults.Add(def);
+                            String source = root + "/" + mv.VersionUri + "/" + basename;
+                            Console.WriteLine("Downloading: {0}", localpath);
+                            wc.DownloadFile(source.ToString(), localpath);
+                            Console.WriteLine(" done.");
+                        }
+                        catch (Exception exc)
+                        {
+                            Console.WriteLine("Error removing file. This file may need to be removed manually.");
+                            Console.WriteLine("  File: {0}", basename);
+                            Console.WriteLine("  Error: {1}", exc.Message);
+                        }
+                    }
                 }
-            }
 
-            if (mv.CreateModule != null)
-            {
-                foreach (Module mod in mv.CreateModule)
+                if (mv.Create.Default != null)
                 {
-                    VoodooRegistry.Instance.Modules.Add(mod);
+                    foreach (Default def in mv.Create.Default)
+                    {
+                        Console.WriteLine("Creating Default: {0}", def.Name);
+                        VoodooRegistry.Instance.Defaults.Add(def);
+                    }
+                }
+
+                if (mv.Create.Module != null)
+                {
+                    foreach (Module mod in mv.Create.Module)
+                    {
+                        Console.WriteLine("Creating Module: {0}", mod.Name);
+                        VoodooRegistry.Instance.Modules.Add(mod);
+                    }
                 }
             }
 
             VoodooRegistry.Instance.Write();
+
+            return true;
+        }
+
+        static void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            if (e.ProgressPercentage % 10 == 0)
+            {
+                Console.Write(".");
+            }
         }
     }
 }
