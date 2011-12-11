@@ -22,11 +22,11 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace VoodooNetClasses
+namespace VoodooSharp
 {
     class VoodooXml
     {
-        public static object ValidateObject(String filename, Type objtype)
+        public static T ValidateObject<T>(String filename)
         {
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
@@ -36,9 +36,9 @@ namespace VoodooNetClasses
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBack);
 
             XmlReader reader = XmlReader.Create(filename, settings);
-            XmlSerializer manifestMaker = new XmlSerializer(objtype);
+            XmlSerializer manifestMaker = new XmlSerializer(typeof(T));
 
-            return manifestMaker.Deserialize(reader);
+            return (T)manifestMaker.Deserialize(reader);
         }
 
         // Display any warnings or errors.

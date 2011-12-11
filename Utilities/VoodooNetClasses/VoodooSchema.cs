@@ -20,15 +20,15 @@
 using System;
 using System.Xml.Serialization;
 
-namespace VoodooNetClasses
+namespace VoodooSharp
 {
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute("VoodooRemote", Namespace = "", IsNullable = false)]
     public partial class RemoteManifest
     {
-        private Package[] packagesField;
+        private string[] packagesField;
         [System.Xml.Serialization.XmlElementAttribute("Package", IsNullable = false)]
-        public Package[] Packages
+        public string[] Packages
         {
             get
             {
@@ -47,7 +47,7 @@ namespace VoodooNetClasses
         private Guid packIdField;
         private string nameField;
         private string versionField;
-        private string manifestUriField;
+        private string homeUriField;
         public Guid PackId
         {
             get
@@ -82,15 +82,15 @@ namespace VoodooNetClasses
             }
         }
         [System.Xml.Serialization.XmlElementAttribute(DataType = "anyURI")]
-        public string ManifestUri
+        public string HomeUri
         {
             get
             {
-                return this.manifestUriField;
+                return this.homeUriField;
             }
             set
             {
-                this.manifestUriField = value;
+                this.homeUriField = value;
             }
         }
     }
@@ -434,6 +434,7 @@ namespace VoodooNetClasses
         private String idField;
         private string parentField;
         private String descriptionField;
+        private String versionuriField;
         public string Description
         {
             get
@@ -443,6 +444,17 @@ namespace VoodooNetClasses
             set
             {
                 this.descriptionField = value;
+            }
+        }
+        public string VersionUri
+        {
+            get
+            {
+                return this.versionuriField;
+            }
+            set
+            {
+                this.versionuriField = value;
             }
         }
         [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]
@@ -553,6 +565,7 @@ namespace VoodooNetClasses
     {
         private Package packageField;
         private string dscriptionField;
+        private string packageUriField;
         private MessageSet[] messagesField;
         private Version[] versionsField;
         public Package Package
@@ -575,6 +588,17 @@ namespace VoodooNetClasses
             set
             {
                 this.dscriptionField = value;
+            }
+        }
+        public string PackageUri
+        {
+            get
+            {
+                return this.packageUriField;
+            }
+            set
+            {
+                this.packageUriField = value;
             }
         }
         [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]

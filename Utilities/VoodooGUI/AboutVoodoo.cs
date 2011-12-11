@@ -12,6 +12,8 @@ namespace VoodooGUI
 {
     public partial class AboutVoodoo : Form
     {
+        private bool m_NoNav = false;
+
         public AboutVoodoo()
         {
             InitializeComponent();
@@ -19,20 +21,31 @@ namespace VoodooGUI
             try
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
-                Stream textStream = assembly.GetManifestResourceStream("VoodooGUI.Resources.about.rtf");
+                Stream textStream = assembly.GetManifestResourceStream("VoodooGUI.Resources.about.md");
                 StreamReader textStreamReader = new StreamReader(textStream);
-                richTextBox1.LoadFile(textStream, RichTextBoxStreamType.RichText);
+
+                String text = new StreamReader(textStream).ReadToEnd();
+                MarkdownSharp.Markdown parser = new MarkdownSharp.Markdown();
+                text = parser.Transform(text);
+                webBrowser1.DocumentText = text;
+
                 textStreamReader.Close();
             }
             catch (Exception exc)
             {
-                richTextBox1.Text = "Voodoo Shader Framework\nCopyright (c) 2010-2011 by Sean Sube, All Rights Reserved.\n\nError loading info:\n\t" + exc.Message;
+                webBrowser1.DocumentText = "Voodoo Shader Framework<br>\nCopyright (c) 2010-2011 by Sean Sube, All Rights Reserved.<br>\n<br>\nError loading info:<br>\n\t" + exc.Message;
             }
+
+            m_NoNav = true;
         }
 
-        private void LinkClicked(object sender, LinkClickedEventArgs e)
+        private void WebNavigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            System.Diagnostics.Process.Start(e.LinkText);
+            if (m_NoNav)
+            {
+                System.Diagnostics.Process.Start(e.Url.ToString());
+                e.Cancel = true;
+            }
         }
     }
 }

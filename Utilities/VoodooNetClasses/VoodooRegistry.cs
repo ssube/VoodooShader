@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Win32;
 
-namespace VoodooNetClasses
+namespace VoodooSharp
 {
     public class VoodooRegistry
     {
@@ -151,7 +151,7 @@ namespace VoodooNetClasses
             {
                 packageKey.SetValue("Name", package.Name);
                 packageKey.SetValue("Version", package.Version);
-                packageKey.SetValue("ManifestUri", package.ManifestUri);
+                packageKey.SetValue("HomeUri", package.HomeUri);
             }
             catch (Exception exc)
             {
@@ -396,7 +396,7 @@ namespace VoodooNetClasses
                 package.PackId = new Guid(id);
                 package.Name = packageKey.GetValue("Name") as String;
                 package.Version = packageKey.GetValue("Version") as String;
-                package.ManifestUri = packageKey.GetValue("ManifestUri") as String;
+                package.HomeUri = packageKey.GetValue("HomeUri") as String;
 
                 return package;
             }
@@ -615,5 +615,18 @@ namespace VoodooNetClasses
             if (chunk.Remotes != null) Remotes.AddRange(chunk.Remotes);
         }
         #endregion
+
+        String PackageVersion(String PackageName)
+        {
+            Package fp = Packages.Find(p => p.Name == PackageName);
+            if (fp != null)
+            {
+                return fp.Version;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

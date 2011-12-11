@@ -28,7 +28,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using MarkdownSharp;
-using VoodooNetClasses;
+using VoodooSharp;
 
 namespace VoodooGUI
 {
@@ -72,10 +72,9 @@ namespace VoodooGUI
         }
 
         private void FetchRemotes(object sender, EventArgs e)
-        {
-            String cachePath = VoodooRegistry.Instance.Path + @"\manifests\";
-            
+        {            
             VoodooManifestCache.Instance.OnFetchManifest += new VoodooManifestCache.FetchManifest(m_Cache_OnFetchManifest);
+
             VoodooManifestCache.Instance.FetchAll();
 
             // Load and list packages
@@ -83,7 +82,7 @@ namespace VoodooGUI
             {
                 TreeNode packageNode = cPackageTree.Nodes.Add(pm.Package.PackId.ToString(), pm.Package.Name);
                 packageNode.Tag = pm.Description;
-                foreach (VoodooNetClasses.Version v in pm.Versions)
+                foreach (VoodooSharp.Version v in pm.Versions)
                 {
                     packageNode.Nodes.Add(v.Id, v.Id).Tag = v.Description;
                 }
@@ -93,9 +92,8 @@ namespace VoodooGUI
         private void InstallSelected(object sender, EventArgs e)
         {
             // Version test
-            ChangeSetHandler csh = new ChangeSetHandler(VoodooManifestCache.Instance.PackageManifests[1]);
-            VoodooNetClasses.Version changes = csh.CollateChanges(null, VoodooManifestCache.Instance.PackageManifests[1].Versions[1]);   
-
+            VoodooSharp.MinimalVersion changes = ChangeSetHandler.CollateChanges(VoodooManifestCache.Instance.PackageManifests[1], null, "0.5.2");
+            ChangeSetHandler.ApplyVersion(changes);
         }
     }
 }

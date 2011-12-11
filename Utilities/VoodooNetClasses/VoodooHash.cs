@@ -21,7 +21,7 @@ using System;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace VoodooNetClasses
+namespace VoodooSharp
 {
     public class VoodooHash
     {
