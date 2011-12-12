@@ -30,11 +30,7 @@ namespace VoodooSharp
     {
         public static bool Update(PackageManifest pm, String sfrom, String sto)
         {
-            if (pm == null)
-            {
-                return false;
-            }
-            else if (sfrom == null && sto == null)
+            if (pm == null || sto == null || (sfrom == null && sto == null))
             {
                 return false;
             }
@@ -65,14 +61,26 @@ namespace VoodooSharp
                 return false;
             }
 
+            Package pack = new Package();
+            pack.HomeUri = pm.Package.HomeUri;
+            pack.Name = pm.Package.Name;
+            pack.PackId = pm.Package.PackId;
+            pack.Version = sto;
+
+            Console.WriteLine("{0} updates to be applied.", workingSet.Count);
             while (workingSet.Count > 0)
             {
-                Console.WriteLine("{0} updates to be applied.", workingSet.Count);
-                if (!ApplyVersion(pm.PackageUri, workingSet.Pop()))
+                Version wv = workingSet.Pop();
+                if (!ApplyVersion(pm.PackageUri, wv))
                 {
+                    VoodooRegistry.Instance.Packages.Add(pack);
                     return false;
                 }
+                pack.Version = wv.Id;
             }
+
+            VoodooRegistry.Instance.Packages.Add(pack);
+            VoodooRegistry.Instance.Write();
 
             return true;
         }

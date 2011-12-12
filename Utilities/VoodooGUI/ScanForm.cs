@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace VoodooGUI
+namespace VoodooUI
 {
     public partial class ScanForm : Form
     {

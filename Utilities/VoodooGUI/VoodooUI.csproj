@@ -8,8 +8,8 @@
     <ProjectGuid>{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VoodooGUI</RootNamespace>
-    <AssemblyName>VoodooGUI</AssemblyName>
+    <RootNamespace>VoodooUI</RootNamespace>
+    <AssemblyName>VoodooUI</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>

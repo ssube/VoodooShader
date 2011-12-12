@@ -31,16 +31,16 @@ using System.Windows.Forms;
 using MarkdownSharp;
 using VoodooSharp;
 
-namespace VoodooGUI
+namespace VoodooUI
 {
-    public partial class UpdateManager : Form
+    public partial class PackageManager : Form
     {
         Markdown m_Parser;
         bool m_CancelNav;
         Regex m_ParserRegex;
         ConsoleRedirect m_Redir;
 
-        public UpdateManager()
+        public PackageManager()
         {
             InitializeComponent();
 
@@ -118,7 +118,12 @@ namespace VoodooGUI
                 }
             }
 
-            source = VoodooRegistry.Instance.PackageVersion(pm.Package.PackId);
+            Package installedPack = VoodooRegistry.Instance.GetPackage(pm.Package.PackId);
+            if (installedPack != null)
+            {
+                source = installedPack.Version;
+            }
+
             String msg;
             if (source == null)
             {
@@ -161,7 +166,7 @@ namespace VoodooGUI
 
         private void UninstallSelected(object sender, EventArgs e)
         {
-            // Get the version
+            /*// Get the version
             PackageManifest pm = null;
 
             TreeNode node = cPackageTree.SelectedNode;
@@ -188,7 +193,7 @@ namespace VoodooGUI
                 "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 ChangeSetHandler.Update(pm, source, null);
-            }
+            }*/
         }
     }
 }

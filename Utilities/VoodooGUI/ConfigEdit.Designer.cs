@@ -1,4 +1,4 @@
-﻿namespace VoodooGUI
+﻿namespace VoodooUI
 {
     partial class ConfigEdit
     {

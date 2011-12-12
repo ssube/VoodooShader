@@ -8,7 +8,7 @@ using System.Text;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace VoodooGUI
+namespace VoodooUI
 {
     public partial class AboutVoodoo : Form
     {
@@ -21,7 +21,7 @@ namespace VoodooGUI
             try
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
-                Stream textStream = assembly.GetManifestResourceStream("VoodooGUI.Resources.about.md");
+                Stream textStream = assembly.GetManifestResourceStream("VoodooUI.Resources.about.md");
                 StreamReader textStreamReader = new StreamReader(textStream);
 
                 String text = new StreamReader(textStream).ReadToEnd();
@@ -46,6 +46,11 @@ namespace VoodooGUI
                 System.Diagnostics.Process.Start(e.Url.ToString());
                 e.Cancel = true;
             }
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
         }
     }
 }

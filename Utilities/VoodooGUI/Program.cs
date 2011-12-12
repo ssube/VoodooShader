@@ -27,7 +27,7 @@ using System.Globalization;
 using System.Threading;
 using System.Deployment.Application;
 
-namespace VoodooGUI
+namespace VoodooUI
 {
     static class Program
     {
@@ -147,33 +147,6 @@ namespace VoodooGUI
 
             if (sync.Count > 0 || sync_all)
             {
-                Console.WriteLine("Checking for Voodoo UI updates...");
-
-                try
-                {
-                    ApplicationDeployment updateCheck = ApplicationDeployment.CurrentDeployment;
-                    UpdateCheckInfo info = updateCheck.CheckForDetailedUpdate();
-                    if (info.UpdateAvailable)
-                    {
-                        if (info.IsUpdateRequired)
-                        {
-                            Console.WriteLine("A critical update to the Voodoo UI is available.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("An optional update to the Voodoo UI is available.");
-                        }
-
-                        updateCheck.Update();
-                        Application.Restart();
-                    }
-                }
-                catch (Exception exc)
-                {
-                    Console.WriteLine("An error occurred while updating the UI.");
-                    Console.WriteLine(exc.Message);
-                }
-
                 if (sync_all)
                 {
                     VoodooManifestCache.Instance.FetchAll();
@@ -192,7 +165,28 @@ namespace VoodooGUI
             {
                 foreach (String key in install.Keys)
                 {
-                    Console.WriteLine("Install: {0}: {1}", key, install[key]);
+                    String target = install[key];
+                    Console.WriteLine("Install: {0}: {1}", key, target);
+
+                    // Get the version
+                    PackageManifest pm = VoodooManifestCache.Instance.PackageManifests.Find(p => p.Package.PackId.ToString() == key);
+
+                    if (pm == null)
+                    {
+                        Console.WriteLine("  Package not found.");
+                    }
+                    else
+                    {
+                        String source = null;
+                        
+                        Package installedPack = VoodooRegistry.Instance.GetPackage(key);
+                        if (installedPack != null)
+                        {
+                            source = installedPack.Version;
+                        }
+
+                        ChangeSetHandler.Update(pm, source, target);
+                    }
                 }
             }
 
@@ -200,7 +194,7 @@ namespace VoodooGUI
             {
                 foreach (String key in installzip.Keys)
                 {
-                    Console.WriteLine("Install Zip: {0}: {1}", key, installzip[key]);
+                    Console.WriteLine("Install Zip [NOT IMPLEMENTED]: {0}: {1}", key, installzip[key]);
                 }
             }
 
@@ -220,6 +214,13 @@ namespace VoodooGUI
             if (run_hook != null)
             {
                 Console.WriteLine("Run Hook: {0}", run_hook);
+                return;
+            }
+
+            if (run_file != null)
+            {
+                Console.WriteLine("Run File: {0}", run_file);
+                return;
             }
         }
 

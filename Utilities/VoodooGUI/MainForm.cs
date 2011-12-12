@@ -28,7 +28,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using VoodooSharp;
 
-namespace VoodooGUI
+namespace VoodooUI
 {
     public partial class MainForm : Form
     {
@@ -338,7 +338,7 @@ namespace VoodooGUI
 
         private void DownloadWindow(object sender, EventArgs e)
         {
-            new UpdateManager().ShowDialog();
+            new PackageManager().ShowDialog();
         }
     }
 }

@@ -46,6 +46,12 @@ namespace VoodooSharp
 
         private VoodooRegistry()
         {
+            Remotes = new List<Remote>();
+            Packages = new List<Package>();
+            Modules = new List<Module>();
+            Classes = new List<Class>();
+            Hooks = new List<Hook>();
+            Defaults = new List<Default>();
         }
 
         public static VoodooRegistry Instance
@@ -68,6 +74,80 @@ namespace VoodooSharp
                 return m_Delims[0]; 
             } 
         }
+        
+        #region Public Methods
+        public Remote GetRemote(String name)
+        {
+            return Remotes.Find(r => r.Name == name);
+        }
+        public void SetRemote(Remote remote)
+        {
+            Remotes.RemoveAll(r => r.Uri == remote.Uri);
+            Remotes.Add(remote);
+        }
+
+        public Package GetPackage(Guid id)
+        {
+            return Packages.Find(p => p.PackId == id);
+        }
+        public Package GetPackage(String name)
+        {
+            return Packages.Find(p => p.Name == name);
+        }
+        public void SetPackage(Package pack)
+        {
+            Packages.RemoveAll(p => p.PackId == pack.PackId);
+            Packages.Add(pack);
+        }
+
+        public Module GetModule(Guid id)
+        {
+            return Modules.Find(m => m.LibId == id);
+        }
+        public Module GetModule(String name)
+        {
+            return Modules.Find(m => m.Name == name);
+        }
+        public void SetModule(Module mod)
+        {
+            Modules.RemoveAll(m => m.LibId == mod.LibId);
+            Modules.Add(mod);
+        }
+
+        public Module GetClass(String name)
+        {
+            return Modules.Find(m => m.Name == name);
+        }
+        public void SetClass(Module mod)
+        {
+            Modules.RemoveAll(m => m.LibId == mod.LibId);
+            Modules.Add(mod);
+        }
+
+        public Hook GetHook(String name)
+        {
+            return Hooks.Find(m => m.Name == name);
+        }
+        public void SetHook(Hook hook)
+        {
+            Hooks.RemoveAll(h => h.Name == hook.Name);
+            Hooks.Add(hook);
+        }
+
+        public Default GetDefault(Guid id)
+        {
+            return Defaults.Find(d => d.DefId == id);
+        }
+        public Default GetDefault(String name)
+        {
+            return Defaults.Find(d => d.Name == name);
+        }
+        public void SetDefault(Default def)
+        {
+            Defaults.RemoveAll(d => d.DefId == def.DefId);
+            Defaults.Add(def);
+        }
+        #endregion
 
         #region Write Methods
         public void Write()
@@ -615,31 +695,5 @@ namespace VoodooSharp
             if (chunk.Remotes != null) Remotes.AddRange(chunk.Remotes);
         }
         #endregion
-
-        public String PackageVersion(String PackageName)
-        {
-            Package fp = Packages.Find(p => p.Name == PackageName);
-            if (fp != null)
-            {
-                return fp.Version;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public String PackageVersion(Guid PackageId)
-        {
-            Package fp = Packages.Find(p => p.PackId == PackageId);
-            if (fp != null)
-            {
-                return fp.Version;
-            }
-            else
-            {
-                return null;
-            }
-        }
     }
 }

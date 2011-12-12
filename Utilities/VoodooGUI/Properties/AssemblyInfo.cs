@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Voodoo UI")]
-[assembly: AssemblyDescription("Voodoo Shader Framework User Interface")]
+[assembly: AssemblyDescription("Voodoo Shader User Interface")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sean Sube, et al.")]
-[assembly: AssemblyProduct("Voodoo Shader Framework")]
+[assembly: AssemblyProduct("Voodoo Shader")]
 [assembly: AssemblyCopyright("Copyright ©  2010-2011 by Sean Sube")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
