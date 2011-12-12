@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChangeSetHandler.cs" />
+    <Compile Include="ConsoleRedirect.cs" />
     <Compile Include="VoodooManifestCache.cs" />
     <Compile Include="NativeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

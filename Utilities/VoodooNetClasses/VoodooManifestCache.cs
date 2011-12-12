@@ -128,17 +128,7 @@ namespace VoodooSharp
 
         public void FetchAll()
         {
-            // Reset the cache
-            foreach (String file in Directory.GetFiles(Path, "package_*.xml"))
-            {
-                File.Delete(file);
-            }
-            foreach (String file in Directory.GetFiles(Path, "remote_*.xml"))
-            {
-                File.Delete(file);
-            }
-            RemoteManifests.Clear();
-            PackageManifests.Clear();
+            Clear();
 
             // Sync user remotes
             Fetch(VoodooRegistry.Instance.Remotes);
@@ -148,6 +138,23 @@ namespace VoodooSharp
             testRemote.Name = "Voodoo Remote";
             testRemote.Uri = "https://www.voodooshader.com/manifests";
             Fetch(testRemote);
+        }
+
+        public void Clear()
+        {
+            // Reset the cache
+            foreach (String file in Directory.GetFiles(Path, "package_*.xml"))
+            {
+                File.Delete(file);
+            }
+
+            foreach (String file in Directory.GetFiles(Path, "remote_*.xml"))
+            {
+                File.Delete(file);
+            }
+
+            RemoteManifests.Clear();
+            PackageManifests.Clear();
         }
     }
 }

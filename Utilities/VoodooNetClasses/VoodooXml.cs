@@ -35,19 +35,31 @@ namespace VoodooSharp
             settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBack);
 
-            XmlReader reader = XmlReader.Create(filename, settings);
-            XmlSerializer manifestMaker = new XmlSerializer(typeof(T));
+            try
+            {
+                XmlReader reader = XmlReader.Create(filename, settings);
+                XmlSerializer manifestMaker = new XmlSerializer(typeof(T));
 
-            return (T)manifestMaker.Deserialize(reader);
+                T obj = (T)manifestMaker.Deserialize(reader);
+
+                reader.Close();
+
+                return obj;
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Error validating object: " + exc.Message);
+                return default(T);
+            }
         }
 
         // Display any warnings or errors.
         private static void ValidationCallBack(object sender, ValidationEventArgs args)
         {
             if (args.Severity == XmlSeverityType.Warning)
-                Console.WriteLine("\tValidation warning: " + args.Message);
+                Console.WriteLine("  Validation warning: " + args.Message);
             else
-                Console.WriteLine("\tValidation error: " + args.Message);
+                Console.WriteLine("  Validation error: " + args.Message);
 
         }
     }

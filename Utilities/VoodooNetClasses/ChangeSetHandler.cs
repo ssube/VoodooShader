@@ -82,6 +82,10 @@ namespace VoodooSharp
             VoodooRegistry.Instance.Write();
             VoodooRegistry.Instance.Update();
 
+            if (mv == null) return false;
+
+            Console.WriteLine("Applying version: " + mv.Id);
+
             if (mv.Remove != null)
             {
                 if (mv.Remove.File != null)
@@ -126,7 +130,10 @@ namespace VoodooSharp
                     foreach (Module mod in mv.Remove.Module)
                     {
                         Console.WriteLine("Removing Module: {0}", mod.Name);
-                        VoodooRegistry.Instance.Modules.RemoveAll(pmod => pmod.LibId == mod.LibId);
+                        if (VoodooRegistry.Instance.Modules.RemoveAll(pmod => pmod.LibId == mod.LibId) == 0)
+                        {
+                            Console.WriteLine("  Module not found for removal.", mod.LibId);
+                        }
                     }
                 }
             }
@@ -159,7 +166,7 @@ namespace VoodooSharp
                         {
                             Console.WriteLine("Error removing file. This file may need to be removed manually.");
                             Console.WriteLine("  File: {0}", basename);
-                            Console.WriteLine("  Error: {1}", exc.Message);
+                            Console.WriteLine("  Error: {0}", exc.Message);
                         }
                     }
                 }

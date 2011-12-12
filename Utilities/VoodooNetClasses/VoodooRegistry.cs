@@ -616,9 +616,22 @@ namespace VoodooSharp
         }
         #endregion
 
-        String PackageVersion(String PackageName)
+        public String PackageVersion(String PackageName)
         {
             Package fp = Packages.Find(p => p.Name == PackageName);
+            if (fp != null)
+            {
+                return fp.Version;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public String PackageVersion(Guid PackageId)
+        {
+            Package fp = Packages.Find(p => p.PackId == PackageId);
             if (fp != null)
             {
                 return fp.Version;

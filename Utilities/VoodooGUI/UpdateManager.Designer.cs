@@ -143,7 +143,6 @@
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(513, 505);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
             // 
             // tabPage3
             // 
@@ -197,12 +196,12 @@
             // 
             // toolStripButton3
             // 
-            this.toolStripButton3.Enabled = false;
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(70, 22);
             this.toolStripButton3.Text = "Remove";
+            this.toolStripButton3.Click += new System.EventHandler(this.UninstallSelected);
             // 
             // toolStripButton4
             // 

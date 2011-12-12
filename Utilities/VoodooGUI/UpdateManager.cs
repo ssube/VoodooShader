@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -29,7 +30,6 @@ using System.Threading;
 using System.Windows.Forms;
 using MarkdownSharp;
 using VoodooSharp;
-using System.Diagnostics;
 
 namespace VoodooGUI
 {
@@ -38,6 +38,7 @@ namespace VoodooGUI
         Markdown m_Parser;
         bool m_CancelNav;
         Regex m_ParserRegex;
+        ConsoleRedirect m_Redir;
 
         public UpdateManager()
         {
@@ -45,6 +46,7 @@ namespace VoodooGUI
 
             cBrowserDesc.Navigating += new WebBrowserNavigatingEventHandler(webBrowser1_Navigating);
 
+            m_Redir = new ConsoleRedirect(textBox1);
             m_Parser = new Markdown();
             m_ParserRegex = new Regex("[ ]{2,}");
 
@@ -53,7 +55,7 @@ namespace VoodooGUI
 
         void m_Cache_OnFetchManifest(string name, string uri)
         {
-            textBox1.Text += String.Format("Fetching {0} from: {1}\n", name, uri);
+            Console.WriteLine("Fetching {0} from: {1}", name, uri);
         }
 
         void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
@@ -94,8 +96,41 @@ namespace VoodooGUI
 
         private void InstallSelected(object sender, EventArgs e)
         {
-            // Version test
-            ChangeSetHandler.Update(VoodooManifestCache.Instance.PackageManifests[1], null, "0.5.2");
+            // Get the version
+            PackageManifest pm = null;
+            String source = null;
+            String target = null;
+                        
+            TreeNode node = cPackageTree.SelectedNode;
+            if (node == null)
+            {
+                return;
+            } else {
+                if (node.Tag.GetType() == typeof(VoodooSharp.Version))
+                {
+                    target = (node.Tag as VoodooSharp.Version).Id;
+                    pm = node.Parent.Tag as PackageManifest;
+                }
+                else if (node.Tag.GetType() == typeof(VoodooSharp.PackageManifest))
+                {
+                    pm = node.Tag as PackageManifest;
+                    target = pm.Package.Version;
+                }
+            }
+
+            source = VoodooRegistry.Instance.PackageVersion(pm.Package.PackId);
+            String msg;
+            if (source == null)
+            {
+                msg = String.Format("Install package {0} to {1}.\nContinue?", pm.Package.Name, target);
+            } else {
+                msg = String.Format("Update package {0} from {1} to {2}.\nContinue?", pm.Package.Name, source, target);
+            }
+            
+            if (MessageBox.Show(msg, "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                ChangeSetHandler.Update(pm, source, target);
+            }
         }
 
         private void RefreshTree()
@@ -121,6 +156,38 @@ namespace VoodooGUI
                 while (node.Parent != null) node = node.Parent;
 
                 Process.Start((node.Tag as PackageManifest).Package.HomeUri);
+            }
+        }
+
+        private void UninstallSelected(object sender, EventArgs e)
+        {
+            // Get the version
+            PackageManifest pm = null;
+
+            TreeNode node = cPackageTree.SelectedNode;
+            if (node == null)
+            {
+                return;
+            }
+            else
+            {
+                if (node.Tag.GetType() == typeof(VoodooSharp.Version))
+                {
+                    pm = node.Parent.Tag as PackageManifest;
+                }
+                else if (node.Tag.GetType() == typeof(VoodooSharp.PackageManifest))
+                {
+                    pm = node.Tag as PackageManifest;
+                }
+            }
+
+            String source = VoodooRegistry.Instance.PackageVersion(pm.Package.PackId);
+
+            if (MessageBox.Show(
+                String.Format("Uninstall package {0} from {1}.\nContinue?", pm.Package.Name, source),
+                "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                ChangeSetHandler.Update(pm, source, null);
             }
         }
     }
