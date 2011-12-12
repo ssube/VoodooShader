@@ -71,7 +71,7 @@ namespace VoodooGUI
 
             // Command line mode
             string run_hook = null, run_file = null;
-            bool verbose = false, help = false, version = false, logo = false, nologo = false, sync_all = false, update_all = false, list = false;
+            bool help = false, version = false, logo = false, nologo = false, sync_all = false, update_all = false, list = false;
             List<String> sync = new List<String>();
             Dictionary<String, String> install = new Dictionary<String, String>();
             Dictionary<String, String> installzip = new Dictionary<String, String>();
@@ -79,7 +79,7 @@ namespace VoodooGUI
             List<String> remove = new List<String>();
 
             OptionSet options = new OptionSet();
-            options.Add("v|version",      "show the version info and exit",
+            options.Add("v|version",    "show the version info and exit",
                 v => version = v != null);
             options.Add("h|help",       "show help and exit",
                 v => help = v != null);
@@ -108,8 +108,7 @@ namespace VoodooGUI
             catch (OptionException e)
             {
                 Console.WriteLine("Voodoo Shader Framework GUI");
-                Console.WriteLine("Arguments error: ");
-                Console.WriteLine("\t" + e.Message);
+                Console.WriteLine("  Error: {0}", e.Message);
                 Console.WriteLine("Try voodoo_ui --help for more information.");
                 return;
             }
@@ -171,16 +170,21 @@ namespace VoodooGUI
                 }
                 catch (Exception exc)
                 {
-                    Console.WriteLine("An error occurred while updating the UI:\n\t{0}", exc.Message);
+                    Console.WriteLine("An error occurred while updating the UI.");
+                    Console.WriteLine(exc.Message);
                 }
 
                 if (sync_all)
                 {
-
+                    VoodooManifestCache.Instance.FetchAll();
                 }
                 foreach (String s in sync)
                 {
                     Console.WriteLine("Sync: {0}", s);
+
+                    Remote rem = new Remote();
+                    rem.Name = rem.Uri = s;
+                    VoodooManifestCache.Instance.Fetch(rem);
                 }
             }
 

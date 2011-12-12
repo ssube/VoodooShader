@@ -68,7 +68,7 @@ namespace VoodooSharp
                 {
                     if (OnFetchManifest != null) OnFetchManifest.Invoke("Local manifest", file);
 
-                    PackageManifest packagemanifest = VoodooXml.ValidateObject<PackageManifest>(Path + @"\" + file);
+                    PackageManifest packagemanifest = VoodooXml.ValidateObject<PackageManifest>(file);
                     PackageManifests.Add(packagemanifest);
                 }
             }
@@ -128,6 +128,18 @@ namespace VoodooSharp
 
         public void FetchAll()
         {
+            // Reset the cache
+            foreach (String file in Directory.GetFiles(Path, "package_*.xml"))
+            {
+                File.Delete(file);
+            }
+            foreach (String file in Directory.GetFiles(Path, "remote_*.xml"))
+            {
+                File.Delete(file);
+            }
+            RemoteManifests.Clear();
+            PackageManifests.Clear();
+
             // Sync user remotes
             Fetch(VoodooRegistry.Instance.Remotes);
 

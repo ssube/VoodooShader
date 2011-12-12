@@ -29,6 +29,7 @@ using System.Threading;
 using System.Windows.Forms;
 using MarkdownSharp;
 using VoodooSharp;
+using System.Diagnostics;
 
 namespace VoodooGUI
 {
@@ -63,7 +64,17 @@ namespace VoodooGUI
 
         private void NodeChanged(object sender, TreeViewEventArgs e)
         {
-            String desc = e.Node.Tag as String;
+            // Update description
+            String desc = null;
+            if (e.Node.Tag.GetType() == typeof(PackageManifest))
+            {
+                desc = (e.Node.Tag as PackageManifest).Description;
+            }
+            else if (e.Node.Tag.GetType() == typeof(VoodooSharp.Version))
+            {
+                desc = (e.Node.Tag as VoodooSharp.Version).Description;
+            }
+
             if (desc != null)
             {
                 desc = m_ParserRegex.Replace(desc, " ");
@@ -89,15 +100,28 @@ namespace VoodooGUI
 
         private void RefreshTree()
         {
+            cPackageTree.Nodes.Clear();
+
             foreach (PackageManifest pm in VoodooManifestCache.Instance.PackageManifests)
             {
                 TreeNode packageNode = cPackageTree.Nodes.Add(pm.Package.PackId.ToString(), pm.Package.Name);
-                packageNode.Tag = pm.Description;
+                packageNode.Tag = pm;
                 foreach (VoodooSharp.Version v in pm.Versions)
                 {
-                    packageNode.Nodes.Add(v.Id, v.Id).Tag = v.Description;
+                    packageNode.Nodes.Add(v.Id, v.Id).Tag = v;
                 }
             }  
+        }
+
+        private void PackageHome(object sender, EventArgs e)
+        {
+            TreeNode node = cPackageTree.SelectedNode;
+            if (node != null)
+            {
+                while (node.Parent != null) node = node.Parent;
+
+                Process.Start((node.Tag as PackageManifest).Package.HomeUri);
+            }
         }
     }
 }

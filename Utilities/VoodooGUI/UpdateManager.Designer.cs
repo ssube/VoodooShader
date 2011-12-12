@@ -197,6 +197,7 @@
             // 
             // toolStripButton3
             // 
+            this.toolStripButton3.Enabled = false;
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
@@ -210,6 +211,7 @@
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(107, 22);
             this.toolStripButton4.Text = "Package Home";
+            this.toolStripButton4.Click += new System.EventHandler(this.PackageHome);
             // 
             // UpdateManager
             // 
