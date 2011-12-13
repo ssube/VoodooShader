@@ -34,7 +34,8 @@ namespace VoodooSharp
         [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]
         public List<MessageSet> Messages { get; set; }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayAttribute("Versions", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Version", IsNullable = false)]
         public List<PackageVersion> Versions { get; set; }
 
         public bool Update(String sfrom, String sto)

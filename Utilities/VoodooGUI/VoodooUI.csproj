@@ -125,11 +125,11 @@
     <Compile Include="ScanForm.Designer.cs">
       <DependentUpon>ScanForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateManager.cs">
+    <Compile Include="PackageManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateManager.Designer.cs">
-      <DependentUpon>UpdateManager.cs</DependentUpon>
+    <Compile Include="PackageManager.Designer.cs">
+      <DependentUpon>PackageManager.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AboutVoodoo.resx">
       <DependentUpon>AboutVoodoo.cs</DependentUpon>
@@ -156,8 +156,8 @@
     <EmbeddedResource Include="ScanForm.resx">
       <DependentUpon>ScanForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateManager.resx">
-      <DependentUpon>UpdateManager.cs</DependentUpon>
+    <EmbeddedResource Include="PackageManager.resx">
+      <DependentUpon>PackageManager.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\app.manifest" />
@@ -201,7 +201,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

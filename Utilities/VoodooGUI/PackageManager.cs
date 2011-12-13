@@ -72,9 +72,9 @@ namespace VoodooUI
             {
                 desc = (e.Node.Tag as PackageManifest).Description;
             }
-            else if (e.Node.Tag.GetType() == typeof(VoodooSharp.Version))
+            else if (e.Node.Tag.GetType() == typeof(PackageVersion))
             {
-                desc = (e.Node.Tag as VoodooSharp.Version).Description;
+                desc = (e.Node.Tag as PackageVersion).Description;
             }
 
             if (desc != null)
@@ -88,8 +88,8 @@ namespace VoodooUI
 
         private void FetchRemotes(object sender, EventArgs e)
         {            
-            VSManifestCache.Instance.OnFetchManifest += new VSManifestCache.FetchManifest(m_Cache_OnFetchManifest);
-            VSManifestCache.Instance.FetchAll();
+            ManifestCache.Instance.OnFetchManifest += new ManifestCache.FetchManifest(m_Cache_OnFetchManifest);
+            ManifestCache.Instance.FetchAll();
 
             RefreshTree();
         }
@@ -106,19 +106,19 @@ namespace VoodooUI
             {
                 return;
             } else {
-                if (node.Tag.GetType() == typeof(VoodooSharp.Version))
+                if (node.Tag.GetType() == typeof(PackageVersion))
                 {
-                    target = (node.Tag as VoodooSharp.Version).Id;
+                    target = (node.Tag as PackageVersion).Id;
                     pm = node.Parent.Tag as PackageManifest;
                 }
-                else if (node.Tag.GetType() == typeof(VoodooSharp.PackageManifest))
+                else if (node.Tag.GetType() == typeof(PackageManifest))
                 {
                     pm = node.Tag as PackageManifest;
                     target = pm.Package.Version;
                 }
             }
 
-            VSPackage installedPack = VSRegistry.Instance.GetPackage(pm.Package.PackId);
+            Package installedPack = GlobalRegistry.Instance.GetPackage(pm.Package.PackId);
             if (installedPack != null)
             {
                 source = installedPack.Version;
@@ -134,7 +134,7 @@ namespace VoodooUI
             
             if (MessageBox.Show(msg, "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                ChangeSetHandler.Update(pm, source, target);
+                pm.Update(source, target);
             }
         }
 
@@ -142,11 +142,11 @@ namespace VoodooUI
         {
             cPackageTree.Nodes.Clear();
 
-            foreach (PackageManifest pm in VSManifestCache.Instance.PackageManifests)
+            foreach (PackageManifest pm in ManifestCache.Instance.PackageManifests)
             {
                 TreeNode packageNode = cPackageTree.Nodes.Add(pm.Package.PackId.ToString(), pm.Package.Name);
                 packageNode.Tag = pm;
-                foreach (VoodooSharp.Version v in pm.Versions)
+                foreach (PackageVersion v in pm.Versions)
                 {
                     packageNode.Nodes.Add(v.Id, v.Id).Tag = v;
                 }
@@ -176,17 +176,17 @@ namespace VoodooUI
             }
             else
             {
-                if (node.Tag.GetType() == typeof(VoodooSharp.Version))
+                if (node.Tag.GetType() == typeof(PackageVersion))
                 {
                     pm = node.Parent.Tag as PackageManifest;
                 }
-                else if (node.Tag.GetType() == typeof(VoodooSharp.PackageManifest))
+                else if (node.Tag.GetType() == typeof(PackageManifest))
                 {
                     pm = node.Tag as PackageManifest;
                 }
             }
 
-            VSPackage installedPack = VSRegistry.Instance.GetPackage(pm.Package.PackId);
+            Package installedPack = GlobalRegistry.Instance.GetPackage(pm.Package.PackId);
             if (installedPack == null)
             {
                 return;
@@ -198,7 +198,7 @@ namespace VoodooUI
                 String.Format("Uninstall package {0} from {1}.\nContinue?", pm.Package.Name, source),
                 "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                ChangeSetHandler.Update(pm, source, null);
+                pm.Update(source, null);
             }
         }
     }
