@@ -14,6 +14,7 @@
     <ProjectGuid>{758A3040-38D6-4573-8C1B-74B35ECCAA6E}</ProjectGuid>
     <RootNamespace>DX9_Module</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <ProjectName>Voodoo_Generic_DX89</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
