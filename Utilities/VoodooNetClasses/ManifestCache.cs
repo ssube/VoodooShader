@@ -56,7 +56,7 @@ namespace VoodooSharp
             RemoteManifests = new List<RemoteManifest>();
             PackageManifests = new List<PackageManifest>();
 
-            Path = Registry.Instance.Path + @"\manifests\";
+            Path = GlobalRegistry.Instance.Path + @"\manifests\";
 
             if (!Directory.Exists(Path))
             {
@@ -68,8 +68,12 @@ namespace VoodooSharp
                 {
                     if (OnFetchManifest != null) OnFetchManifest.Invoke("Local manifest", file);
 
-                    PackageManifest packagemanifest = Xml.ValidateObject<PackageManifest>(file);
-                    PackageManifests.Add(packagemanifest);
+                    XmlValidator xv = new XmlValidator();
+                    PackageManifest pm = xv.ValidateObject<PackageManifest>(file);
+                    if (pm != null && !xv.Errors)
+                    {
+                        PackageManifests.Add(pm);
+                    }
                 }
             }
         }
@@ -88,12 +92,16 @@ namespace VoodooSharp
                 if (OnFetchManifest != null) OnFetchManifest.Invoke(remote.Name, remoteUri);
                 client.DownloadFile(remoteUri, remoteFile);
 
-                RemoteManifest remotemanifest = Xml.ValidateObject<RemoteManifest>(remoteFile);
-                RemoteManifests.Add(remotemanifest);
-
-                for (int i = 0; i < remotemanifest.Packages.Length; ++i)
+                XmlValidator xv = new XmlValidator();
+                RemoteManifest rm = xv.ValidateObject<RemoteManifest>(remoteFile);
+                if (rm != null && !xv.Errors)
                 {
-                    String packageUri = remote.Uri + "/" + remotemanifest.Packages[i];
+                    RemoteManifests.Add(rm);
+                }
+
+                for (int i = 0; i < rm.Packages.Length; ++i)
+                {
+                    String packageUri = remote.Uri + "/" + rm.Packages[i];
                     String packageFile = Path + "\\package_" + VoodooHash.Hash(packageUri) + ".xml";
 
                     try
@@ -101,8 +109,11 @@ namespace VoodooSharp
                         if (OnFetchManifest != null) OnFetchManifest.Invoke(String.Format("{0}; package {1}", remote.Name, i), packageUri);
                         client.DownloadFile(packageUri, packageFile);
 
-                        PackageManifest packagemanifest = Xml.ValidateObject<PackageManifest>(packageFile);
-                        PackageManifests.Add(packagemanifest);
+                        PackageManifest pm = xv.ValidateObject<PackageManifest>(packageFile);
+                        if (pm != null && !xv.Errors)
+                        {
+                            PackageManifests.Add(pm);
+                        }
                     }
                     catch (Exception exc)
                     {
@@ -131,7 +142,7 @@ namespace VoodooSharp
             Clear();
 
             // Sync user remotes
-            Fetch(Registry.Instance.Remotes);
+            Fetch(GlobalRegistry.Instance.Remotes);
 
             // Sync root remote
             Remote testRemote = new Remote();

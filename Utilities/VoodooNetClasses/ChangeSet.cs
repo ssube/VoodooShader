@@ -19,22 +19,17 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlRootAttribute("VoodooPackage", Namespace = "", IsNullable = false)]
-    public partial class PackageManifest
+    public partial class ChangeSet
     {
-        public Package Package { get; set; }
-        public string Description { get; set; }
-        public string PackageUri { get; set; }
-
-        [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]
-        public List<MessageSet> Messages { get; set; }
-
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
-        public List<PackageVersion> Versions { get; set; }
+        [System.Xml.Serialization.XmlElementAttribute("Module")]
+        public Module[] Module { get; set; }
+        [System.Xml.Serialization.XmlElementAttribute("Default")]
+        public Default[] Default { get; set; }
+        [System.Xml.Serialization.XmlElementAttribute("File")]
+        public string[] File { get; set; }
     }
 }

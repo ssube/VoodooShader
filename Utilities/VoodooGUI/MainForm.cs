@@ -193,7 +193,7 @@ namespace VoodooUI
                 RegistryKey hookRoot = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\VoodooShader\Hooks", RegistryKeyPermissionCheck.ReadSubTree);
                 if (hookRoot != null)
                 {
-                    m_Hooks = VSRegistry.ReadHooks(hookRoot);
+                    m_Hooks = GlobalRegistry.ReadHooks(hookRoot);
                     hookRoot.Close();
                 }
                 else
@@ -223,7 +223,7 @@ namespace VoodooUI
                     voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
                 }
                 
-                VSRegistry.Write(m_Hooks, voodooRoot);
+                GlobalRegistry.Write(m_Hooks, voodooRoot);
 
                 voodooRoot.Close();
             }

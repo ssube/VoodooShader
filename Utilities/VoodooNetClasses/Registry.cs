@@ -27,7 +27,7 @@ namespace VoodooSharp
 {
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute("VoodooRegistry", Namespace = "", IsNullable = false)]
-    public partial class RegistryChunk
+    public partial class RegistryShard
     {
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
         public List<Remote> Remotes { get; set; }
@@ -57,10 +57,10 @@ namespace VoodooSharp
         public string BinPrefix { get; set; }
     }
 
-    public class Registry
+    public class GlobalRegistry
     {
         // Singleton/meta objects
-        private static Registry m_Instance;
+        private static GlobalRegistry m_Instance;
         private static char[] m_Delims = { ';' };
 
         // Registry data
@@ -77,7 +77,7 @@ namespace VoodooSharp
 
         public static string Errors { get; set; }
 
-        private Registry()
+        private GlobalRegistry()
         {
             Remotes = new List<Remote>();
             Packages = new List<Package>();
@@ -87,13 +87,13 @@ namespace VoodooSharp
             Defaults = new List<Default>();
         }
 
-        public static Registry Instance
+        public static GlobalRegistry Instance
         {
             get
             {
                 if (m_Instance == null)
                 {
-                    m_Instance = new Registry();
+                    m_Instance = new GlobalRegistry();
                     m_Instance.Update();
                 }
                 return m_Instance;
@@ -725,35 +725,35 @@ namespace VoodooSharp
         #endregion
 
         #region Xml Methods
-        public RegistryChunk Export()
+        public RegistryShard Export()
         {
-            RegistryChunk chunk = new RegistryChunk();
+            RegistryShard shard = new RegistryShard();
 
-            chunk.BinPrefix = BinPrefix;
-            chunk.Language = Language;
-            chunk.Path = Path;
+            shard.BinPrefix = BinPrefix;
+            shard.Language = Language;
+            shard.Path = Path;
 
-            chunk.Classes = Classes;
-            chunk.Defaults = Defaults;
-            chunk.Hooks = Hooks;
-            chunk.Modules = Modules;
-            chunk.Packages = Packages;
-            chunk.Remotes = Remotes;
+            shard.Classes = Classes;
+            shard.Defaults = Defaults;
+            shard.Hooks = Hooks;
+            shard.Modules = Modules;
+            shard.Packages = Packages;
+            shard.Remotes = Remotes;
 
-            return chunk;
+            return shard;
         }
-        public void Import(RegistryChunk chunk)
+        public void Import(RegistryShard shard)
         {
-            if (chunk.BinPrefix != null) BinPrefix = chunk.BinPrefix;
-            if (chunk.Language != null) Language = chunk.Language;
-            if (chunk.Path != null) Path = chunk.Path;
+            if (shard.BinPrefix != null) BinPrefix = shard.BinPrefix;
+            if (shard.Language != null) Language = shard.Language;
+            if (shard.Path != null) Path = shard.Path;
 
-            if (chunk.Classes != null) Classes.AddRange(chunk.Classes);
-            if (chunk.Defaults != null) Defaults.AddRange(chunk.Defaults);
-            if (chunk.Hooks != null) Hooks.AddRange(chunk.Hooks);
-            if (chunk.Modules != null) Modules.AddRange(chunk.Modules);
-            if (chunk.Packages != null) Packages.AddRange(chunk.Packages);
-            if (chunk.Remotes != null) Remotes.AddRange(chunk.Remotes);
+            if (shard.Classes != null) Classes.AddRange(shard.Classes);
+            if (shard.Defaults != null) Defaults.AddRange(shard.Defaults);
+            if (shard.Hooks != null) Hooks.AddRange(shard.Hooks);
+            if (shard.Modules != null) Modules.AddRange(shard.Modules);
+            if (shard.Packages != null) Packages.AddRange(shard.Packages);
+            if (shard.Remotes != null) Remotes.AddRange(shard.Remotes);
         }
         #endregion
     }

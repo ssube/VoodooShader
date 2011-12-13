@@ -18,16 +18,44 @@
  *   peachykeen@voodooshader.com
  */
 using System;
+using System.Text;
+using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace VoodooSharp
 {
-    class Xml
+    public class VoodooHash
     {
-        public static T ValidateObject<T>(String filename)
+        public static String Hash(String str)
         {
+            byte[] bytes = System.Text.Encoding.Unicode.GetBytes(str);
+            return VoodooHash.Hash(bytes);
+        }
+
+        public static String Hash(byte[] bytes)
+        {
+            MD5 hasher = System.Security.Cryptography.MD5.Create();
+            byte[] hashBytes = hasher.ComputeHash(bytes);
+
+            StringBuilder sb = new StringBuilder(hashBytes.Length * 2);
+            foreach (byte b in hashBytes)
+            {
+                sb.Append(b.ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
+    }
+
+    class XmlValidator
+    {
+        public bool Errors { get; set; }
+
+        public T ValidateObject<T>(String filename)
+        {
+            Errors = false;
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
             settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
@@ -54,13 +82,27 @@ namespace VoodooSharp
         }
 
         // Display any warnings or errors.
-        private static void ValidationCallBack(object sender, ValidationEventArgs args)
+        private void ValidationCallBack(object sender, ValidationEventArgs args)
         {
             if (args.Severity == XmlSeverityType.Warning)
+            {
                 Console.WriteLine("  Validation warning: " + args.Message);
+            }
             else
+            {
                 Console.WriteLine("  Validation error: " + args.Message);
-
+                Errors = true;
+            }
         }
+    }
+
+    [System.SerializableAttribute()]
+    public partial class NamedString
+    {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public String Name { get; set; }
+
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value { get; set; }
     }
 }

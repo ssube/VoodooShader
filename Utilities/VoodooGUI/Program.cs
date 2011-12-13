@@ -50,7 +50,7 @@ namespace VoodooUI
                 ConsoleVisible(Console.Title, false);
 
                 // Get the culture
-                string languageID = VSRegistry.Instance.Language;
+                string languageID = GlobalRegistry.Instance.Language;
                 try
                 {
                     CultureInfo culture = new CultureInfo(languageID);
@@ -149,7 +149,7 @@ namespace VoodooUI
             {
                 if (sync_all)
                 {
-                    VSManifestCache.Instance.FetchAll();
+                    ManifestCache.Instance.FetchAll();
                 }
                 foreach (String s in sync)
                 {
@@ -157,7 +157,7 @@ namespace VoodooUI
 
                     Remote rem = new Remote();
                     rem.Name = rem.Uri = s;
-                    VSManifestCache.Instance.Fetch(rem);
+                    ManifestCache.Instance.Fetch(rem);
                 }
             }
 
@@ -169,7 +169,7 @@ namespace VoodooUI
                     Console.WriteLine("Install: {0}: {1}", key, target);
 
                     // Get the version
-                    PackageManifest pm = VSManifestCache.Instance.PackageManifests.Find(p => p.Package.PackId.ToString() == key);
+                    PackageManifest pm = ManifestCache.Instance.PackageManifests.Find(p => p.Package.PackId.ToString() == key);
 
                     if (pm == null)
                     {
@@ -178,14 +178,14 @@ namespace VoodooUI
                     else
                     {
                         String source = null;
-                        
-                        VSPackage installedPack = VSRegistry.Instance.GetPackage(key);
+
+                        Package installedPack = GlobalRegistry.Instance.GetPackage(key);
                         if (installedPack != null)
                         {
                             source = installedPack.Version;
                         }
 
-                        ChangeSetHandler.Update(pm, source, target);
+                        pm.Update(source, target);
                     }
                 }
             }
