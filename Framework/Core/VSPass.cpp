@@ -66,8 +66,6 @@ namespace VoodooShader
                 pAdapter->UnloadPass(this);
             }
         }
-
-        m_Target = nullptr;
     }
 
     uint32_t VOODOO_METHODTYPE VSPass::AddRef() CONST
@@ -130,9 +128,25 @@ namespace VoodooShader
         return m_Name;
     }
 
-    ITexture * VOODOO_METHODTYPE VSPass::GetTarget() CONST
+    ITexture * VOODOO_METHODTYPE VSPass::GetTarget(uint32_t index) CONST
     {
-        return m_Target.get();
+        if (index < 4)
+        {
+            return m_Target[index].get();
+        } else {
+            return nullptr;
+        }
+    }
+
+    bool VOODOO_METHODTYPE VSPass::SetTarget(uint32_t index, ITexture * pTarget)
+    {
+        if (index < 4)
+        {
+            m_Target[index] = pTarget;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     CGprogram VOODOO_METHODTYPE VSPass::GetProgram(ProgramStage stage) CONST
@@ -172,55 +186,68 @@ namespace VoodooShader
         m_GeometryProgram = cgGetPassProgram(m_CgPass, CG_GEOMETRY_DOMAIN);
         m_DomainProgram = cgGetPassProgram(m_CgPass, CG_TESSELLATION_CONTROL_DOMAIN);
         m_HullProgram = cgGetPassProgram(m_CgPass, CG_TESSELLATION_EVALUATION_DOMAIN);
+        
+        char * targetAnnotationName = "target0";
 
-        m_Target = nullptr;
-
-        CGannotation targetAnnotation = cgGetNamedPassAnnotation(m_CgPass, "target");
-
-        if (cgIsAnnotation(targetAnnotation))
+        for (uint8_t i = 0; i < 4; ++i)
         {
-            if (cgGetAnnotationType(targetAnnotation) == CG_STRING)
+            targetAnnotationName[6] = '0' + i;
+
+            CGannotation targetAnnotation = cgGetNamedPassAnnotation(m_CgPass, targetAnnotationName);
+
+            if (cgIsAnnotation(targetAnnotation))
             {
-                const char *targetName = cgGetStringAnnotationValue(targetAnnotation);
-
-                m_Target = m_Core->GetTexture(targetName);
-
-                if (!m_Target.get())
+                if (cgGetAnnotationType(targetAnnotation) == CG_STRING)
                 {
+                    const char *targetName = cgGetStringAnnotationValue(targetAnnotation);
+
+                    m_Target[i] = m_Core->GetTexture(targetName);
+
+                    if (!m_Target[i])
+                    {
+                        m_Core->GetLogger()->Log
+                        (
+                            LL_CoreWarn,
+                            VOODOO_CORE_NAME,
+                            L"Pass %s cannot find target %S.",
+                            this->ToString().GetData(),
+                            targetName
+                        );
+
+                        if (i == 0)
+                        {
+                            m_Target[i] = m_Core->GetStageTexture(TS_Pass);
+                        }
+                    }
+                } else {
                     m_Core->GetLogger()->Log
                     (
                         LL_CoreWarn,
                         VOODOO_CORE_NAME,
-                        L"Pass %s cannot find target %S.",
-                        this->ToString().GetData(),
-                        targetName
+                        L"Pass %s has target annotation of invalid type.",
+                        this->ToString().GetData()
                     );
 
-                    m_Target = m_Core->GetStageTexture(TS_Pass);
+                    if (i == 0)
+                    {
+                        m_Target[i] = m_Core->GetStageTexture(TS_Pass);
+                    }
                 }
             } else {
                 m_Core->GetLogger()->Log
                 (
-                    LL_CoreWarn,
+                    LL_CoreDebug,
                     VOODOO_CORE_NAME,
-                    L"Pass %s has target annotation of invalid type.",
+                    L"Pass %s has no target annotation.",
                     this->ToString().GetData()
                 );
 
-                m_Target = m_Core->GetStageTexture(TS_Pass);
+                if (i == 0)
+                {
+                    m_Target[i] = m_Core->GetStageTexture(TS_Pass);
+                }
             }
-        } else {
-            m_Core->GetLogger()->Log
-            (
-                LL_CoreDebug,
-                VOODOO_CORE_NAME,
-                L"Pass %s has no target annotation.",
-                this->ToString().GetData()
-            );
-
-            m_Target = m_Core->GetStageTexture(TS_Pass);
         }
-
 
         // Load the programs
         IAdapter * adapter = m_Core->GetAdapter();

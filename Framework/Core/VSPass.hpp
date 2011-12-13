@@ -40,7 +40,8 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD_(ITexture *, GetTarget)() CONST;
+        VOODOO_METHOD_(ITexture *, GetTarget)(uint32_t index) CONST;
+        VOODOO_METHOD(SetTarget)(uint32_t index, ITexture * pTarget);
         VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST;
         VOODOO_METHOD_(CGprogram, GetProgram)(_In_ const ProgramStage stage) CONST;
         VOODOO_METHOD_(CGpass, GetCgPass)() CONST;
@@ -53,7 +54,7 @@ namespace VoodooShader
         String m_Name;
 
         ITechnique * m_Technique;
-        ITextureRef m_Target;
+        ITextureRef m_Target[4];
 
         CGpass m_CgPass;
 

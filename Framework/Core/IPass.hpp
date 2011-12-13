@@ -53,12 +53,22 @@ namespace VoodooShader
 
         VOODOO_METHOD_(String, GetName)() CONST PURE;
         /**
-         * Retrieve the target texture buffer this pass should render to. This must be a texture created with the render
+         * Retrieve a the target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
          *
+         * @param index The target index.
          * @return The target texture.
          */
-        VOODOO_METHOD_(ITexture *, GetTarget)() CONST PURE;
+        VOODOO_METHOD_(ITexture *, GetTarget)(uint32_t index) CONST PURE;
+        /**
+         * Set the target texture buffer this pass should render to. This must be a texture created with the render
+         * target flag set.
+         *
+         * @param index The target index.
+         * @param pTarget The target texture.
+         * @return The target texture.
+         */
+        VOODOO_METHOD(SetTarget)(uint32_t index, ITexture * pTarget) PURE;
         /**
          * Retrieve the parent technique of this pass.
          *

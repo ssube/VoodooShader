@@ -234,7 +234,10 @@ namespace VoodooShader
             assert(cgd3derr == D3D_OK);
 
             // Bind render targets
-            //this->SetTarget(0, m_BoundPass->GetTarget());
+            for (uint32_t i = 0; i < 4; ++i)
+            {
+                this->SetTarget(0, m_BoundPass->GetTarget(i));
+            }
 
             m_BoundPass = pPass;
 

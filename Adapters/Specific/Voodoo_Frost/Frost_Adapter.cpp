@@ -436,11 +436,10 @@ namespace VoodooShader
                 this->DrawGeometry(0, 0, nullptr, VF_None);
                 this->ResetPass(pass.get());
 
-                ITextureRef target = pass->GetTarget();
+                ITextureRef target = pass->GetTarget(0);
 
                 if (target.get())
                 {
-
                     GLuint passtarget = (GLuint) target->GetData();
 
                     glBindTexture(GL_TEXTURE_2D, passtarget);
