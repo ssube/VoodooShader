@@ -18,291 +18,80 @@
  *   peachykeen@voodooshader.com
  */
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute("VoodooConfig", Namespace = "", IsNullable = false)]
-    public partial class VSConfig
+    public partial class Config
     {
-        private VSConfigGlobal globalField;
-        private VSConfigClass[] classesField;
-
-        public VSConfigGlobal Global
-        {
-            get
-            {
-                return this.globalField;
-            }
-            set
-            {
-                this.globalField = value;
-            }
-        }
+        public ConfigGlobal Global { get; set; }
 
         [System.Xml.Serialization.XmlArrayItemAttribute("Class", IsNullable = false)]
-        public VSConfigClass[] Classes
-        {
-            get
-            {
-                return this.classesField;
-            }
-            set
-            {
-                this.classesField = value;
-            }
-        }
+        public ConfigClass[] Classes { get; set; }
     }
 
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class VSConfigGlobal
+    public partial class ConfigGlobal
     {
-        private NamedString[] variablesField;
-        private VSConfigGlobalPlugins pluginsField;
-        private VSConfigGlobalClasses classesField;
-        private VSConfigGlobalLog logField;
-
         [System.Xml.Serialization.XmlArrayItemAttribute("Variable", IsNullable = false)]
-        public NamedString[] Variables
-        {
-            get
-            {
-                return this.variablesField;
-            }
-            set
-            {
-                this.variablesField = value;
-            }
-        }
-
-        public VSConfigGlobalPlugins Plugins
-        {
-            get
-            {
-                return this.pluginsField;
-            }
-            set
-            {
-                this.pluginsField = value;
-            }
-        }
-
-        public VSConfigGlobalClasses Classes
-        {
-            get
-            {
-                return this.classesField;
-            }
-            set
-            {
-                this.classesField = value;
-            }
-        }
-
-        public VSConfigGlobalLog Log
-        {
-            get
-            {
-                return this.logField;
-            }
-            set
-            {
-                this.logField = value;
-            }
-        }
+        public NamedString[] Variables { get; set; }
+        public ConfigGlobalPlugins Plugins { get; set; }
+        public ConfigGlobalLog Log { get; set; }
+        public ConfigGlobalClasses Classes { get; set; }
     }
 
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class VSConfigGlobalPlugins
+    public partial class ConfigGlobalPlugins
     {
-        private string[] fileField;
-        private VSConfigGlobalPluginsPath[] pathField;
-
         [System.Xml.Serialization.XmlElementAttribute("File")]
-        public string[] File
-        {
-            get
-            {
-                return this.fileField;
-            }
-            set
-            {
-                this.fileField = value;
-            }
-        }
+        public string[] File { get; set; }
 
         [System.Xml.Serialization.XmlElementAttribute("Path")]
-        public VSConfigGlobalPluginsPath[] Path
-        {
-            get
-            {
-                return this.pathField;
-            }
-            set
-            {
-                this.pathField = value;
-            }
-        }
+        public ConfigGlobalPluginsPath[] Path { get; set; }
     }
 
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class VSConfigGlobalPluginsPath
+    public partial class ConfigGlobalPluginsPath
     {
-        private string filterField;
-        private string valueField;
-
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Filter
-        {
-            get
-            {
-                return this.filterField;
-            }
-            set
-            {
-                this.filterField = value;
-            }
-        }
+        public string Filter { get; set; }
 
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
+        public string Value { get; set; }
     }
 
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class VSConfigGlobalClasses
+    public partial class ConfigGlobalClasses
     {
-        private string adapterField;
-        private string fileSystemField;
-        private string hookManagerField;
-        private string loggerField;
-
-        public string Adapter
-        {
-            get
-            {
-                return this.adapterField;
-            }
-            set
-            {
-                this.adapterField = value;
-            }
-        }
-
-        public string FileSystem
-        {
-            get
-            {
-                return this.fileSystemField;
-            }
-            set
-            {
-                this.fileSystemField = value;
-            }
-        }
-
-        public string HookManager
-        {
-            get
-            {
-                return this.hookManagerField;
-            }
-            set
-            {
-                this.hookManagerField = value;
-            }
-        }
-
-        public string Logger
-        {
-            get
-            {
-                return this.loggerField;
-            }
-            set
-            {
-                this.loggerField = value;
-            }
-        }
+        public string Adapter { get; set; }
+        public string FileSystem { get; set; }
+        public string HookManager { get; set; }
+        public string Logger { get; set; }
     }
 
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class VSConfigGlobalLog
+    public partial class ConfigGlobalLog
     {
-        private string fileField;
-        private string levelField;
-
-        public string File
-        {
-            get
-            {
-                return this.fileField;
-            }
-            set
-            {
-                this.fileField = value;
-            }
-        }
-
-        public string Level
-        {
-            get
-            {
-                return this.levelField;
-            }
-            set
-            {
-                this.levelField = value;
-            }
-        }
+        public string File { get; set; }
+        public string Level { get; set; }
     }
 
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class VSConfigClass
+    public partial class ConfigClass
     {
-        private System.Xml.XmlElement[] anyField;
-        private string nameField;
-
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any
-        {
-            get
-            {
-                return this.anyField;
-            }
-            set
-            {
-                this.anyField = value;
-            }
-        }
+        public System.Xml.XmlElement[] Any { get; set; }
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
+        public string Name { get; set; }
     }
 }

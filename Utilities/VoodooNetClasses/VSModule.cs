@@ -23,67 +23,12 @@ using System.Xml.Serialization;
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
-    public partial class VSModule
+    public partial class Module
     {
-        private Guid libIdField;
-        private string nameField;
-        private string pathField;
-        private string configField;
-        private Guid packageField;
-        public Guid LibId
-        {
-            get
-            {
-                return this.libIdField;
-            }
-            set
-            {
-                this.libIdField = value;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-        public string Path
-        {
-            get
-            {
-                return this.pathField;
-            }
-            set
-            {
-                this.pathField = value;
-            }
-        }
-        public string Config
-        {
-            get
-            {
-                return this.configField;
-            }
-            set
-            {
-                this.configField = value;
-            }
-        }
-        public Guid Package
-        {
-            get
-            {
-                return this.packageField;
-            }
-            set
-            {
-                this.packageField = value;
-            }
-        }
+        public Guid LibId { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public string Config { get; set; }
+        public Guid Package { get; set; }
     }
 }

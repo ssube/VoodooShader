@@ -27,47 +27,14 @@ using System.Net;
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
-    public partial class VSChangeSet
+    public partial class ChangeSet
     {
-        private VSModule[] moduleField;
-        private VSDefault[] defaultField;
-        private string[] fileField;
         [System.Xml.Serialization.XmlElementAttribute("Module")]
-        public VSModule[] Module
-        {
-            get
-            {
-                return this.moduleField;
-            }
-            set
-            {
-                this.moduleField = value;
-            }
-        }
+        public Module[] Module { get; set; }
         [System.Xml.Serialization.XmlElementAttribute("Default")]
-        public VSDefault[] Default
-        {
-            get
-            {
-                return this.defaultField;
-            }
-            set
-            {
-                this.defaultField = value;
-            }
-        }
+        public Default[] Default { get; set; }
         [System.Xml.Serialization.XmlElementAttribute("File")]
-        public string[] File
-        {
-            get
-            {
-                return this.fileField;
-            }
-            set
-            {
-                this.fileField = value;
-            }
-        }
+        public string[] File { get; set; }
     }
 
     public class ChangeSetHandler
@@ -82,33 +49,32 @@ namespace VoodooSharp
             Console.WriteLine("Beginning update procedure.");
             Console.WriteLine("  Package: {0}", pm.Package.Name);
 
-            List<Version> versions = new List<Version>(pm.Versions);
-            Version v_from = sfrom == null ? null : versions.Find(v => v.Id == sfrom);
-            Version v_to   = sto   == null ? null : versions.Find(v => v.Id == sto  );
+            PackageVersion v_from = sfrom == null ? null : pm.Versions.Find(v => v.Id == sfrom);
+            PackageVersion v_to = sto == null ? null : pm.Versions.Find(v => v.Id == sto);
 
             if (v_from == null && v_to == null)
             {
                 return false;
             }
 
-            Stack<Version> workingSet = new Stack<Version>();
-            Version check = v_to == null ? v_from : v_to;
+            Stack<PackageVersion> workingSet = new Stack<PackageVersion>();
+            PackageVersion check = v_to == null ? v_from : v_to;
 
             while (check != null && check.Id != sfrom)
             {
                 workingSet.Push(check);
-                check = versions.Find(v => v.Id == check.Parent);
+                check = pm.Versions.Find(v => v.Id == check.Prev);
             }
 
             if (v_to == null)
             {
-                VSRegistry.Instance.RemovePackage(pm.Package.PackId);
+                Registry.Instance.RemovePackage(pm.Package.PackId);
             } else if (workingSet.Count == 0)
             {
                 return false;
             }
 
-            VSPackage pack = new VSPackage();
+            Package pack = new Package();
             pack.HomeUri = pm.Package.HomeUri;
             pack.Name = pm.Package.Name;
             pack.PackId = pm.Package.PackId;
@@ -117,14 +83,14 @@ namespace VoodooSharp
             Console.WriteLine("{0} updates to be applied.", workingSet.Count);
             while (workingSet.Count > 0)
             {
-                Version wv = workingSet.Pop();
+                PackageVersion wv = workingSet.Pop();
                 pack.Version = wv.Id;
 
                 if (v_to == null)
                 {
                     if (!UninstallVersion(wv))
                     {
-                        VSRegistry.Instance.SetPackage(pack);
+                        Registry.Instance.SetPackage(pack);
                         return false;
                     }
                 }
@@ -132,7 +98,7 @@ namespace VoodooSharp
                 {
                     if (!InstallVersion(pm.PackageUri, wv))
                     {
-                        VSRegistry.Instance.SetPackage(pack);
+                        Registry.Instance.SetPackage(pack);
                         return false;
                     }
                 }
@@ -140,22 +106,22 @@ namespace VoodooSharp
 
             if (v_to == null)
             {
-                VSRegistry.Instance.RemovePackage(pm.Package.PackId);
+                Registry.Instance.RemovePackage(pm.Package.PackId);
             }
             else
             {
-                VSRegistry.Instance.SetPackage(pack);
+                Registry.Instance.SetPackage(pack);
             }
 
-            VSRegistry.Instance.Write();
+            Registry.Instance.Write();
 
             return true;
         }
 
-        public static bool InstallVersion(String root, Version mv)
+        public static bool InstallVersion(String root, PackageVersion mv)
         {
-            VSRegistry.Instance.Write();
-            VSRegistry.Instance.Update();
+            Registry.Instance.Write();
+            Registry.Instance.Update();
 
             if (mv == null) return false;
 
@@ -169,8 +135,8 @@ namespace VoodooSharp
                     {
                         try
                         {
-                            String fullpath = Path.GetFullPath(Path.Combine(VSRegistry.Instance.Path, basename));
-                            if (!fullpath.StartsWith(VSRegistry.Instance.Path))
+                            String fullpath = Path.GetFullPath(Path.Combine(Registry.Instance.Path, basename));
+                            if (!fullpath.StartsWith(Registry.Instance.Path))
                             {
                                 Console.WriteLine("Illegal file path, aborting version change.", fullpath);
                                 Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
@@ -193,7 +159,7 @@ namespace VoodooSharp
                     foreach (Default def in mv.Remove.Default)
                     {
                         Console.WriteLine("Removing Default: {0}", def.Name);
-                        if (VSRegistry.Instance.RemoveDefault(def.DefId) == 0)
+                        if (Registry.Instance.RemoveDefault(def.DefId) == 0)
                         {
                             Console.WriteLine("  Default not found for removal.", def.DefId);
                         }
@@ -205,7 +171,7 @@ namespace VoodooSharp
                     foreach (Module mod in mv.Remove.Module)
                     {
                         Console.WriteLine("Removing Module: {0}", mod.Name);
-                        if (VSRegistry.Instance.RemoveModule(mod.LibId) == 0)
+                        if (Registry.Instance.RemoveModule(mod.LibId) == 0)
                         {
                             Console.WriteLine("  Module not found for removal.", mod.LibId);
                         }
@@ -223,8 +189,8 @@ namespace VoodooSharp
                     {
                         try
                         {
-                            String localpath = Path.GetFullPath(Path.Combine(VSRegistry.Instance.Path, basename));
-                            if (!localpath.StartsWith(VSRegistry.Instance.Path))
+                            String localpath = Path.GetFullPath(Path.Combine(Registry.Instance.Path, basename));
+                            if (!localpath.StartsWith(Registry.Instance.Path))
                             {
                                 Console.WriteLine("Illegal file path, aborting version change.", localpath);
                                 Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
@@ -251,7 +217,7 @@ namespace VoodooSharp
                     foreach (Default def in mv.Create.Default)
                     {
                         Console.WriteLine("Creating Default: {0}", def.Name);
-                        VSRegistry.Instance.SetDefault(def);
+                        Registry.Instance.SetDefault(def);
                     }
                 }
 
@@ -260,20 +226,20 @@ namespace VoodooSharp
                     foreach (Module mod in mv.Create.Module)
                     {
                         Console.WriteLine("Creating Module: {0}", mod.Name);
-                        VSRegistry.Instance.SetModule(mod);
+                        Registry.Instance.SetModule(mod);
                     }
                 }
             }
 
-            VSRegistry.Instance.Write();
+            Registry.Instance.Write();
 
             return true;
         }
 
-        public static bool UninstallVersion(Version mv)
+        public static bool UninstallVersion(PackageVersion mv)
         {
-            VSRegistry.Instance.Write();
-            VSRegistry.Instance.Update();
+            Registry.Instance.Write();
+            Registry.Instance.Update();
 
             if (mv == null) return false;
 
@@ -287,8 +253,8 @@ namespace VoodooSharp
                     {
                         try
                         {
-                            String fullpath = Path.GetFullPath(Path.Combine(VSRegistry.Instance.Path, basename));
-                            if (!fullpath.StartsWith(VSRegistry.Instance.Path))
+                            String fullpath = Path.GetFullPath(Path.Combine(Registry.Instance.Path, basename));
+                            if (!fullpath.StartsWith(Registry.Instance.Path))
                             {
                                 Console.WriteLine("Illegal file path, aborting version change.", fullpath);
                                 Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
@@ -311,7 +277,7 @@ namespace VoodooSharp
                     foreach (Default def in mv.Remove.Default)
                     {
                         Console.WriteLine("Removing Default: {0}", def.Name);
-                        if (VSRegistry.Instance.RemoveDefault(def.DefId) == 0)
+                        if (Registry.Instance.RemoveDefault(def.DefId) == 0)
                         {
                             Console.WriteLine("  Default not found for removal.", def.DefId);
                         }
@@ -323,7 +289,7 @@ namespace VoodooSharp
                     foreach (Module mod in mv.Remove.Module)
                     {
                         Console.WriteLine("Removing Module: {0}", mod.Name);
-                        if (VSRegistry.Instance.RemoveModule(mod.LibId) == 0)
+                        if (Registry.Instance.RemoveModule(mod.LibId) == 0)
                         {
                             Console.WriteLine("  Module not found for removal.", mod.LibId);
                         }
@@ -331,7 +297,7 @@ namespace VoodooSharp
                 }
             }
 
-            VSRegistry.Instance.Write();
+            Registry.Instance.Write();
 
             return true;
         }

@@ -18,15 +18,26 @@
  *   peachykeen@voodooshader.com
  */
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
-    public partial class Remote
+    public partial class PackageVersion
     {
-        public string Name { get; set; }
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "anyURI")]
-        public string Uri { get; set; }
+        [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]
+        public List<MessageSet> Messages { get; set; }
+
+        public string Description { get; set; }
+        public string VersionUri { get; set; }
+        public ChangeSet Remove { get; set; }
+        public ChangeSet Create { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Id { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Prev { get; set; }
     }
 }

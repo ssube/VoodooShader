@@ -26,19 +26,7 @@ namespace VoodooSharp
     [System.Xml.Serialization.XmlRootAttribute("VoodooRemote", Namespace = "", IsNullable = false)]
     public partial class RemoteManifest
     {
-        private string[] packagesField;
-
         [System.Xml.Serialization.XmlElementAttribute("Package", IsNullable = false)]
-        public string[] Packages
-        {
-            get
-            {
-                return this.packagesField;
-            }
-            set
-            {
-                this.packagesField = value;
-            }
-        }
+        public string[] Packages { get; set; }
     }
 }

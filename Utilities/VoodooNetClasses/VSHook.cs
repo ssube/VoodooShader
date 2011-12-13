@@ -25,57 +25,9 @@ namespace VoodooSharp
     [System.SerializableAttribute()]
     public partial class Hook
     {
-        private bool activeField;
-        private string nameField;
-        private string targetField;
-        private string configField;
-
-        public bool Active
-        {
-            get
-            {
-                return this.activeField;
-            }
-            set
-            {
-                this.activeField = value;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-
-        public string Target
-        {
-            get
-            {
-                return this.targetField;
-            }
-            set
-            {
-                this.targetField = value;
-            }
-        }
-
-        public string Config
-        {
-            get
-            {
-                return this.configField;
-            }
-            set
-            {
-                this.configField = value;
-            }
-        }
+        public bool Active { get; set; }
+        public string Name { get; set; }
+        public string Target { get; set; }
+        public string Config { get; set; }
     }
 }

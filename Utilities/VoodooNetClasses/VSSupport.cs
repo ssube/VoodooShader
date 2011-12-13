@@ -23,12 +23,12 @@ using System.Security.Cryptography;
 
 namespace VoodooSharp
 {
-    public class VSHash
+    public class VoodooHash
     {
         public static String Hash(String str)
         {
             byte[] bytes = System.Text.Encoding.Unicode.GetBytes(str);
-            return VSHash.Hash(bytes);
+            return VoodooHash.Hash(bytes);
         }
 
         public static String Hash(byte[] bytes)
@@ -36,7 +36,7 @@ namespace VoodooSharp
             MD5 hasher = System.Security.Cryptography.MD5.Create();
             byte[] hashBytes = hasher.ComputeHash(bytes);
 
-            StringBuilder sb = new StringBuilder(hashBytes.Length);
+            StringBuilder sb = new StringBuilder(hashBytes.Length * 2);
             foreach (byte b in hashBytes)
             {
                 sb.Append(b.ToString("X2"));
@@ -47,7 +47,7 @@ namespace VoodooSharp
     }
 
     [System.SerializableAttribute()]
-    public partial class VSNamedString
+    public partial class NamedString
     {
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public String Name { get; set; }

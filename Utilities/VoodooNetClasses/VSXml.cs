@@ -24,7 +24,7 @@ using System.Xml.Serialization;
 
 namespace VoodooSharp
 {
-    class VSXml
+    class Xml
     {
         public static T ValidateObject<T>(String filename)
         {

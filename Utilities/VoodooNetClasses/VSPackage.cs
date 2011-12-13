@@ -23,56 +23,12 @@ using System.Xml.Serialization;
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
-    public partial class VSPackage
+    public partial class Package
     {
-        private Guid packIdField;
-        private string nameField;
-        private string versionField;
-        private string homeUriField;
-        public Guid PackId
-        {
-            get
-            {
-                return this.packIdField;
-            }
-            set
-            {
-                this.packIdField = value;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-        public string Version
-        {
-            get
-            {
-                return this.versionField;
-            }
-            set
-            {
-                this.versionField = value;
-            }
-        }
+        public Guid PackId { get; set; }
+        public string Name { get; set; }
+        public string Version { get; set; }
         [System.Xml.Serialization.XmlElementAttribute(DataType = "anyURI")]
-        public string HomeUri
-        {
-            get
-            {
-                return this.homeUriField;
-            }
-            set
-            {
-                this.homeUriField = value;
-            }
-        }
+        public string HomeUri { get; set; }
     }
 }

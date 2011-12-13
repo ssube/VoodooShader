@@ -63,7 +63,7 @@
     <Compile Include="VSRegistry.cs" />
     <Compile Include="VSRemote.cs" />
     <Compile Include="VSRemoteManifest.cs" />
-    <Compile Include="VSVersion.cs" />
+    <Compile Include="VSPackageVersion.cs" />
     <Compile Include="VSXml.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

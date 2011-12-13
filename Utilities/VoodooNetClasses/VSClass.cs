@@ -23,44 +23,10 @@ using System.Xml.Serialization;
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
-    public partial class VSClass
+    public partial class Class
     {
-        private Guid classIdField;
-        private string nameField;
-        private Guid moduleField;
-
-        public Guid ClassId
-        {
-            get
-            {
-                return this.classIdField;
-            }
-            set
-            {
-                this.classIdField = value;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-        public Guid Module
-        {
-            get
-            {
-                return this.moduleField;
-            }
-            set
-            {
-                this.moduleField = value;
-            }
-        }
+        public Guid ClassId { get; set; }
+        public string Name { get; set; }
+        public Guid Module { get; set; }
     }
 }

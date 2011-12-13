@@ -18,77 +18,23 @@
  *   peachykeen@voodooshader.com
  */
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace VoodooSharp
 {
-
-
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute("VoodooPackage", Namespace = "", IsNullable = false)]
     public partial class PackageManifest
     {
-        private Package packageField;
-        private string dscriptionField;
-        private string packageUriField;
-        private MessageSet[] messagesField;
-        private Version[] versionsField;
-        public Package Package
-        {
-            get
-            {
-                return this.packageField;
-            }
-            set
-            {
-                this.packageField = value;
-            }
-        }
-        public string Description
-        {
-            get
-            {
-                return this.dscriptionField;
-            }
-            set
-            {
-                this.dscriptionField = value;
-            }
-        }
-        public string PackageUri
-        {
-            get
-            {
-                return this.packageUriField;
-            }
-            set
-            {
-                this.packageUriField = value;
-            }
-        }
+        public Package Package { get; set; }
+        public string Description { get; set; }
+        public string PackageUri { get; set; }
+
         [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]
-        public MessageSet[] Messages
-        {
-            get
-            {
-                return this.messagesField;
-            }
-            set
-            {
-                this.messagesField = value;
-            }
-        }
+        public List<MessageSet> Messages { get; set; }
+
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
-        public Version[] Versions
-        {
-            get
-            {
-                return this.versionsField;
-            }
-            set
-            {
-                this.versionsField = value;
-            }
-        }
+        public List<PackageVersion> Versions { get; set; }
     }
 }

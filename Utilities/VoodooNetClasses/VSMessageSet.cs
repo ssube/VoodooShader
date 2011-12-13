@@ -23,45 +23,12 @@ using System.Xml.Serialization;
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
-    public partial class VSMessageSet
+    public partial class MessageSet
     {
-        private String preField;
-        private String postField;
-        private String idField;
-        public String Pre
-        {
-            get
-            {
-                return this.preField;
-            }
-            set
-            {
-                this.preField = value;
-            }
-        }
-        public String Post
-        {
-            get
-            {
-                return this.postField;
-            }
-            set
-            {
-                this.postField = value;
-            }
-        }
+        public String Pre { get; set; }
+        public String Post { get; set; }
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "language")]
-        public String Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
+        public String Id { get; set; }
     }
 
 }

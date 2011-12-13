@@ -18,73 +18,21 @@
  *   peachykeen@voodooshader.com
  */
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
-    public partial class VSDefault
+    public partial class Default
     {
-        private Guid defIdField;
-        private string nameField;
-        private string filterField;
-        private string configField;
-        private Guid[] packagesField;
-        public Guid DefId
-        {
-            get
-            {
-                return this.defIdField;
-            }
-            set
-            {
-                this.defIdField = value;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-        public string Filter
-        {
-            get
-            {
-                return this.filterField;
-            }
-            set
-            {
-                this.filterField = value;
-            }
-        }
-        public string Config
-        {
-            get
-            {
-                return this.configField;
-            }
-            set
-            {
-                this.configField = value;
-            }
-        }
-        [System.Xml.Serialization.XmlArrayItemAttribute("Package", IsNullable = false)]
-        public Guid[] Packages
-        {
-            get
-            {
-                return this.packagesField;
-            }
-            set
-            {
-                this.packagesField = value;
-            }
-        }
+        public Guid DefId { get; set; }
+        public string Name { get; set; }
+        public string Filter { get; set; }
+        public string Config { get; set; }
+
+        [System.Xml.Serialization.XmlArrayAttribute("Dependencies", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("PackId", IsNullable = false)]
+        public List<Guid> Packages { get; set; }
     }
 }
