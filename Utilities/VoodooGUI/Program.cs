@@ -50,7 +50,7 @@ namespace VoodooUI
                 ConsoleVisible(Console.Title, false);
 
                 // Get the culture
-                string languageID = VoodooRegistry.Instance.Language;
+                string languageID = VSRegistry.Instance.Language;
                 try
                 {
                     CultureInfo culture = new CultureInfo(languageID);
@@ -149,7 +149,7 @@ namespace VoodooUI
             {
                 if (sync_all)
                 {
-                    VoodooManifestCache.Instance.FetchAll();
+                    VSManifestCache.Instance.FetchAll();
                 }
                 foreach (String s in sync)
                 {
@@ -157,7 +157,7 @@ namespace VoodooUI
 
                     Remote rem = new Remote();
                     rem.Name = rem.Uri = s;
-                    VoodooManifestCache.Instance.Fetch(rem);
+                    VSManifestCache.Instance.Fetch(rem);
                 }
             }
 
@@ -169,7 +169,7 @@ namespace VoodooUI
                     Console.WriteLine("Install: {0}: {1}", key, target);
 
                     // Get the version
-                    PackageManifest pm = VoodooManifestCache.Instance.PackageManifests.Find(p => p.Package.PackId.ToString() == key);
+                    PackageManifest pm = VSManifestCache.Instance.PackageManifests.Find(p => p.Package.PackId.ToString() == key);
 
                     if (pm == null)
                     {
@@ -179,7 +179,7 @@ namespace VoodooUI
                     {
                         String source = null;
                         
-                        Package installedPack = VoodooRegistry.Instance.GetPackage(key);
+                        VSPackage installedPack = VSRegistry.Instance.GetPackage(key);
                         if (installedPack != null)
                         {
                             source = installedPack.Version;

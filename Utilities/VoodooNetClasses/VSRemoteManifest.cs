@@ -18,31 +18,27 @@
  *   peachykeen@voodooshader.com
  */
 using System;
-using System.Text;
-using System.Security.Cryptography;
+using System.Xml.Serialization;
 
 namespace VoodooSharp
 {
-    public class VoodooHash
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute("VoodooRemote", Namespace = "", IsNullable = false)]
+    public partial class RemoteManifest
     {
-        public static String Hash(String str)
-        {
-            byte[] bytes = System.Text.Encoding.Unicode.GetBytes(str);
-            return VoodooHash.Hash(bytes);
-        }
+        private string[] packagesField;
 
-        public static String Hash(byte[] bytes)
+        [System.Xml.Serialization.XmlElementAttribute("Package", IsNullable = false)]
+        public string[] Packages
         {
-            MD5 hasher = System.Security.Cryptography.MD5.Create();
-            byte[] hashBytes = hasher.ComputeHash(bytes);
-
-            StringBuilder sb = new StringBuilder(hashBytes.Length);
-            foreach (byte b in hashBytes)
+            get
             {
-                sb.Append(b.ToString("X2"));
+                return this.packagesField;
             }
-
-            return sb.ToString();
+            set
+            {
+                this.packagesField = value;
+            }
         }
     }
 }

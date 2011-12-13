@@ -88,8 +88,8 @@ namespace VoodooUI
 
         private void FetchRemotes(object sender, EventArgs e)
         {            
-            VoodooManifestCache.Instance.OnFetchManifest += new VoodooManifestCache.FetchManifest(m_Cache_OnFetchManifest);
-            VoodooManifestCache.Instance.FetchAll();
+            VSManifestCache.Instance.OnFetchManifest += new VSManifestCache.FetchManifest(m_Cache_OnFetchManifest);
+            VSManifestCache.Instance.FetchAll();
 
             RefreshTree();
         }
@@ -118,7 +118,7 @@ namespace VoodooUI
                 }
             }
 
-            Package installedPack = VoodooRegistry.Instance.GetPackage(pm.Package.PackId);
+            VSPackage installedPack = VSRegistry.Instance.GetPackage(pm.Package.PackId);
             if (installedPack != null)
             {
                 source = installedPack.Version;
@@ -142,7 +142,7 @@ namespace VoodooUI
         {
             cPackageTree.Nodes.Clear();
 
-            foreach (PackageManifest pm in VoodooManifestCache.Instance.PackageManifests)
+            foreach (PackageManifest pm in VSManifestCache.Instance.PackageManifests)
             {
                 TreeNode packageNode = cPackageTree.Nodes.Add(pm.Package.PackId.ToString(), pm.Package.Name);
                 packageNode.Tag = pm;
@@ -186,7 +186,7 @@ namespace VoodooUI
                 }
             }
 
-            Package installedPack = VoodooRegistry.Instance.GetPackage(pm.Package.PackId);
+            VSPackage installedPack = VSRegistry.Instance.GetPackage(pm.Package.PackId);
             if (installedPack == null)
             {
                 return;

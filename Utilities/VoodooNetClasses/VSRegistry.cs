@@ -19,22 +19,154 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace VoodooSharp
 {
-    public class VoodooRegistry
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute("VoodooRegistry", Namespace = "", IsNullable = false)]
+    public partial class RegistryChunk
+    {
+        private Remote[] remotesField;
+        private VSPackage[] packagesField;
+        private Module[] modulesField;
+        private VSClass[] classesField;
+        private Hook[] hooksField;
+        private Default[] defaultsField;
+        private string pathField;
+        private string languageField;
+        private string binPrefixField;
+
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
+        public Remote[] Remotes
+        {
+            get
+            {
+                return this.remotesField;
+            }
+            set
+            {
+                this.remotesField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
+        public VSPackage[] Packages
+        {
+            get
+            {
+                return this.packagesField;
+            }
+            set
+            {
+                this.packagesField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
+        public Module[] Modules
+        {
+            get
+            {
+                return this.modulesField;
+            }
+            set
+            {
+                this.modulesField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
+        public VSClass[] Classes
+        {
+            get
+            {
+                return this.classesField;
+            }
+            set
+            {
+                this.classesField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
+        public Hook[] Hooks
+        {
+            get
+            {
+                return this.hooksField;
+            }
+            set
+            {
+                this.hooksField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
+        public Default[] Defaults
+        {
+            get
+            {
+                return this.defaultsField;
+            }
+            set
+            {
+                this.defaultsField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Path
+        {
+            get
+            {
+                return this.pathField;
+            }
+            set
+            {
+                this.pathField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "language")]
+        public string Language
+        {
+            get
+            {
+                return this.languageField;
+            }
+            set
+            {
+                this.languageField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string BinPrefix
+        {
+            get
+            {
+                return this.binPrefixField;
+            }
+            set
+            {
+                this.binPrefixField = value;
+            }
+        }
+    }
+
+    public class VSRegistry
     {
         // Singleton/meta objects
-        private static VoodooRegistry m_Instance;
+        private static VSRegistry m_Instance;
         private static char[] m_Delims = { ';' };
 
         // Registry data
         public List<Remote> Remotes { get; set; }
-        public List<Package> Packages { get; set; }
+        public List<VSPackage> Packages { get; set; }
         public List<Module> Modules { get; set; }
-        public List<Class> Classes { get; set; }
+        public List<VSClass> Classes { get; set; }
         public List<Hook> Hooks { get; set; }
         public List<Default> Defaults { get; set; }
 
@@ -44,23 +176,23 @@ namespace VoodooSharp
 
         public static string Errors { get; set; }
 
-        private VoodooRegistry()
+        private VSRegistry()
         {
             Remotes = new List<Remote>();
-            Packages = new List<Package>();
+            Packages = new List<VSPackage>();
             Modules = new List<Module>();
-            Classes = new List<Class>();
+            Classes = new List<VSClass>();
             Hooks = new List<Hook>();
             Defaults = new List<Default>();
         }
 
-        public static VoodooRegistry Instance
+        public static VSRegistry Instance
         {
             get
             {
                 if (m_Instance == null)
                 {
-                    m_Instance = new VoodooRegistry();
+                    m_Instance = new VSRegistry();
                     m_Instance.Update();
                 }
                 return m_Instance;
@@ -90,15 +222,15 @@ namespace VoodooSharp
             return Remotes.RemoveAll(r => r.Name == name);
         }
 
-        public Package GetPackage(Guid id)
+        public VSPackage GetPackage(Guid id)
         {
             return Packages.Find(p => p.PackId == id);
         }
-        public Package GetPackage(String name)
+        public VSPackage GetPackage(String name)
         {
             return Packages.Find(p => p.Name == name);
         }
-        public void SetPackage(Package pack)
+        public void SetPackage(VSPackage pack)
         {
             Packages.RemoveAll(p => p.PackId == pack.PackId);
             Packages.Add(pack);
@@ -126,11 +258,11 @@ namespace VoodooSharp
             return Modules.RemoveAll(m => m.LibId == id);
         }
 
-        public Class GetClass(Guid id)
+        public VSClass GetClass(Guid id)
         {
             return Classes.Find(m => m.ClassId == id);
         }
-        public Class GetClass(String name)
+        public VSClass GetClass(String name)
         {
             return Classes.Find(m => m.Name == name);
         }
@@ -208,7 +340,7 @@ namespace VoodooSharp
                 RegistryKey remoteRootKey = root.CreateSubKey("Remotes", RegistryKeyPermissionCheck.ReadWriteSubTree);
                 foreach (Remote remote in remotes)
                 {
-                    RegistryKey remoteKey = remoteRootKey.CreateSubKey(VoodooHash.Hash(remote.Uri), RegistryKeyPermissionCheck.ReadWriteSubTree);
+                    RegistryKey remoteKey = remoteRootKey.CreateSubKey(VSHash.Hash(remote.Uri), RegistryKeyPermissionCheck.ReadWriteSubTree);
                     Write(remote, remoteKey);
                     remoteKey.Close();
                 }
@@ -234,12 +366,12 @@ namespace VoodooSharp
         }
         #endregion
         #region Packages
-        public static void Write(IEnumerable<Package> packages, RegistryKey root)
+        public static void Write(IEnumerable<VSPackage> packages, RegistryKey root)
         {
             try
             {
                 RegistryKey packageRootKey = root.CreateSubKey("Packages", RegistryKeyPermissionCheck.ReadWriteSubTree);
-                foreach (Package package in packages)
+                foreach (VSPackage package in packages)
                 {
                     RegistryKey packageKey = packageRootKey.CreateSubKey(package.PackId.ToString(), RegistryKeyPermissionCheck.ReadWriteSubTree);
                     Write(package, packageKey);
@@ -253,7 +385,7 @@ namespace VoodooSharp
             }
         }
 
-        public static void Write(Package package, RegistryKey packageKey)
+        public static void Write(VSPackage package, RegistryKey packageKey)
         {
             try
             {
@@ -303,12 +435,12 @@ namespace VoodooSharp
         }
         #endregion
         #region Classes
-        public static void Write(IEnumerable<Class> classes, RegistryKey root)
+        public static void Write(IEnumerable<VSClass> classes, RegistryKey root)
         {
             try
             {
                 RegistryKey classRootKey = root.CreateSubKey("Classes", RegistryKeyPermissionCheck.ReadWriteSubTree);
-                foreach (Class vclass in classes)
+                foreach (VSClass vclass in classes)
                 {
                     RegistryKey classKey = classRootKey.CreateSubKey(vclass.ClassId.ToString(), RegistryKeyPermissionCheck.ReadWriteSubTree);
                     Write(vclass, classKey);
@@ -322,7 +454,7 @@ namespace VoodooSharp
             }
         }
 
-        public static void Write(Class vclass, RegistryKey classKey)
+        public static void Write(VSClass vclass, RegistryKey classKey)
         {
             try
             {
@@ -427,9 +559,9 @@ namespace VoodooSharp
             BinPrefix = root.GetValue("BinPrefix", String.Empty) as String;
 
             Remotes = ReadRemotes(root.OpenSubKey("Remotes")); if (Remotes == null) Remotes = new List<Remote>();
-            Packages = ReadPackages(root.OpenSubKey("Packages")); if (Packages == null) Packages = new List<Package>();
+            Packages = ReadPackages(root.OpenSubKey("Packages")); if (Packages == null) Packages = new List<VSPackage>();
             Modules = ReadModules(root.OpenSubKey("Modules")); if (Modules == null) Modules = new List<Module>();
-            Classes = ReadClasses(root.OpenSubKey("Classes")); if (Classes == null) Classes = new List<Class>();
+            Classes = ReadClasses(root.OpenSubKey("Classes")); if (Classes == null) Classes = new List<VSClass>();
             Hooks = ReadHooks(root.OpenSubKey("Hooks")); if (Hooks == null) Hooks = new List<Hook>();
             Defaults = ReadDefaults(root.OpenSubKey("Defaults")); if (Defaults == null) Defaults = new List<Default>();
         }
@@ -474,15 +606,15 @@ namespace VoodooSharp
         }
         #endregion
         #region Packages
-        public static List<Package> ReadPackages(RegistryKey root)
+        public static List<VSPackage> ReadPackages(RegistryKey root)
         {
             try
             {
-                List<Package> packages = new List<Package>(root.SubKeyCount);
+                List<VSPackage> packages = new List<VSPackage>(root.SubKeyCount);
                 foreach (String packageKeyName in root.GetSubKeyNames())
                 {
                     RegistryKey packageKey = root.OpenSubKey(packageKeyName);
-                    Package package = ReadPackage(packageKey);
+                    VSPackage package = ReadPackage(packageKey);
                     packages.Add(package);
                 }
                 return packages;
@@ -494,11 +626,11 @@ namespace VoodooSharp
             }
         }
 
-        public static Package ReadPackage(RegistryKey packageKey)
+        public static VSPackage ReadPackage(RegistryKey packageKey)
         {
             try
             {
-                Package package = new Package();
+                VSPackage package = new VSPackage();
 
                 String id = packageKey.Name.Substring(packageKey.Name.LastIndexOf('\\') + 1);
                 package.PackId = new Guid(id);
@@ -559,15 +691,15 @@ namespace VoodooSharp
         }
         #endregion
         #region Classes
-        public static List<Class> ReadClasses(RegistryKey root)
+        public static List<VSClass> ReadClasses(RegistryKey root)
         {
             try
             {
-                List<Class> Classes = new List<Class>(root.SubKeyCount);
+                List<VSClass> Classes = new List<VSClass>(root.SubKeyCount);
                 foreach (String ClassKeyName in root.GetSubKeyNames())
                 {
                     RegistryKey ClassKey = root.OpenSubKey(ClassKeyName);
-                    Class vclass = ReadClass(ClassKey);
+                    VSClass vclass = ReadClass(ClassKey);
                     Classes.Add(vclass);
                 }
                 return Classes;
@@ -579,11 +711,11 @@ namespace VoodooSharp
             }
         }
 
-        public static Class ReadClass(RegistryKey ClassKey)
+        public static VSClass ReadClass(RegistryKey ClassKey)
         {
             try
             {
-                Class vclass = new Class();
+                VSClass vclass = new VSClass();
 
                 String id = ClassKey.Name.Substring(ClassKey.Name.LastIndexOf('\\') + 1);
                 vclass.ClassId = new Guid(id);

@@ -26,7 +26,7 @@ using Microsoft.Win32;
 
 namespace VoodooSharp
 {
-    public class VoodooManifestCache
+    public class VSManifestCache
     {
         public delegate void FetchManifest(String name, String uri);
 
@@ -37,26 +37,26 @@ namespace VoodooSharp
 
         public event FetchManifest OnFetchManifest;
 
-        private static VoodooManifestCache instance;
+        private static VSManifestCache instance;
 
-        public static VoodooManifestCache Instance
+        public static VSManifestCache Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new VoodooManifestCache();
+                    instance = new VSManifestCache();
                 }
                 return instance;
             }
         }
 
-        private VoodooManifestCache()
+        private VSManifestCache()
         {
             RemoteManifests = new List<RemoteManifest>();
             PackageManifests = new List<PackageManifest>();
 
-            Path = VoodooRegistry.Instance.Path + @"\manifests\";
+            Path = VSRegistry.Instance.Path + @"\manifests\";
 
             if (!Directory.Exists(Path))
             {
@@ -68,7 +68,7 @@ namespace VoodooSharp
                 {
                     if (OnFetchManifest != null) OnFetchManifest.Invoke("Local manifest", file);
 
-                    PackageManifest packagemanifest = VoodooXml.ValidateObject<PackageManifest>(file);
+                    PackageManifest packagemanifest = VSXml.ValidateObject<PackageManifest>(file);
                     PackageManifests.Add(packagemanifest);
                 }
             }
@@ -81,27 +81,27 @@ namespace VoodooSharp
             WebClient client = new WebClient();
 
             String remoteUri = remote.Uri + "/remote.xml";
-            String remoteFile = Path + "\\remote_" + VoodooHash.Hash(remoteUri) + ".xml";
+            String remoteFile = Path + "\\remote_" + VSHash.Hash(remoteUri) + ".xml";
 
             try
             {
                 if (OnFetchManifest != null) OnFetchManifest.Invoke(remote.Name, remoteUri);
                 client.DownloadFile(remoteUri, remoteFile);
 
-                RemoteManifest remotemanifest = VoodooXml.ValidateObject<RemoteManifest>(remoteFile);
+                RemoteManifest remotemanifest = VSXml.ValidateObject<RemoteManifest>(remoteFile);
                 RemoteManifests.Add(remotemanifest);
 
                 for (int i = 0; i < remotemanifest.Packages.Length; ++i)
                 {
                     String packageUri = remote.Uri + "/" + remotemanifest.Packages[i];
-                    String packageFile = Path + "\\package_" + VoodooHash.Hash(packageUri) + ".xml";
+                    String packageFile = Path + "\\package_" + VSHash.Hash(packageUri) + ".xml";
 
                     try
                     {
                         if (OnFetchManifest != null) OnFetchManifest.Invoke(String.Format("{0}; package {1}", remote.Name, i), packageUri);
                         client.DownloadFile(packageUri, packageFile);
 
-                        PackageManifest packagemanifest = VoodooXml.ValidateObject<PackageManifest>(packageFile);
+                        PackageManifest packagemanifest = VSXml.ValidateObject<PackageManifest>(packageFile);
                         PackageManifests.Add(packagemanifest);
                     }
                     catch (Exception exc)
@@ -131,7 +131,7 @@ namespace VoodooSharp
             Clear();
 
             // Sync user remotes
-            Fetch(VoodooRegistry.Instance.Remotes);
+            Fetch(VSRegistry.Instance.Remotes);
 
             // Sync root remote
             Remote testRemote = new Remote();
