@@ -166,7 +166,7 @@ namespace VoodooUI
 
         private void UninstallSelected(object sender, EventArgs e)
         {
-            /*// Get the version
+            // Get the version
             PackageManifest pm = null;
 
             TreeNode node = cPackageTree.SelectedNode;
@@ -186,14 +186,20 @@ namespace VoodooUI
                 }
             }
 
-            String source = VoodooRegistry.Instance.PackageVersion(pm.Package.PackId);
+            Package installedPack = VoodooRegistry.Instance.GetPackage(pm.Package.PackId);
+            if (installedPack == null)
+            {
+                return;
+            }
+
+            String source = installedPack.Version;
 
             if (MessageBox.Show(
                 String.Format("Uninstall package {0} from {1}.\nContinue?", pm.Package.Name, source),
                 "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 ChangeSetHandler.Update(pm, source, null);
-            }*/
+            }
         }
     }
 }

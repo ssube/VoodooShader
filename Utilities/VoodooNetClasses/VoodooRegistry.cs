@@ -85,6 +85,10 @@ namespace VoodooSharp
             Remotes.RemoveAll(r => r.Uri == remote.Uri);
             Remotes.Add(remote);
         }
+        public int RemoveRemote(String name)
+        {
+            return Remotes.RemoveAll(r => r.Name == name);
+        }
 
         public Package GetPackage(Guid id)
         {
@@ -98,6 +102,10 @@ namespace VoodooSharp
         {
             Packages.RemoveAll(p => p.PackId == pack.PackId);
             Packages.Add(pack);
+        }
+        public int RemovePackage(Guid id)
+        {
+            return Packages.RemoveAll(p => p.PackId == id);
         }
 
         public Module GetModule(Guid id)
@@ -113,15 +121,27 @@ namespace VoodooSharp
             Modules.RemoveAll(m => m.LibId == mod.LibId);
             Modules.Add(mod);
         }
-
-        public Module GetClass(String name)
+        public int RemoveModule(Guid id)
         {
-            return Modules.Find(m => m.Name == name);
+            return Modules.RemoveAll(m => m.LibId == id);
+        }
+
+        public Class GetClass(Guid id)
+        {
+            return Classes.Find(m => m.ClassId == id);
+        }
+        public Class GetClass(String name)
+        {
+            return Classes.Find(m => m.Name == name);
         }
         public void SetClass(Module mod)
         {
             Modules.RemoveAll(m => m.LibId == mod.LibId);
             Modules.Add(mod);
+        }
+        public int RemoveClass(Guid id)
+        {
+            return Classes.RemoveAll(c => c.ClassId == id);
         }
 
         public Hook GetHook(String name)
@@ -132,6 +152,10 @@ namespace VoodooSharp
         {
             Hooks.RemoveAll(h => h.Name == hook.Name);
             Hooks.Add(hook);
+        }
+        public int RemoveHook(String name)
+        {
+            return Hooks.RemoveAll(h => h.Name == name);
         }
 
         public Default GetDefault(Guid id)
@@ -146,6 +170,10 @@ namespace VoodooSharp
         {
             Defaults.RemoveAll(d => d.DefId == def.DefId);
             Defaults.Add(def);
+        }
+        public int RemoveDefault(Guid id)
+        {
+            return Defaults.RemoveAll(d => d.DefId == id);
         }
         #endregion
 
