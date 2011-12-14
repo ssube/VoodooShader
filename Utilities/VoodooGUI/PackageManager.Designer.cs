@@ -92,6 +92,7 @@
             // cPackageTree
             // 
             this.cPackageTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cPackageTree.FullRowSelect = true;
             this.cPackageTree.Location = new System.Drawing.Point(0, 0);
             this.cPackageTree.Name = "cPackageTree";
             this.cPackageTree.Size = new System.Drawing.Size(253, 537);
@@ -160,7 +161,7 @@
             this.toolStripButton4});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(373, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(342, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // toolStripButton1

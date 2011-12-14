@@ -38,9 +38,12 @@ namespace VoodooSharp
         [System.Xml.Serialization.XmlArrayItemAttribute("Version", IsNullable = false)]
         public List<PackageVersion> Versions { get; set; }
 
-        public bool Update(String sfrom, String sto)
+        public bool Update(String id_to)
         {
-            if (sto == null || (sfrom == null && sto == null))
+            Package installedPack = GlobalRegistry.Instance.GetPackage(Package.PackId);
+            String id_from = installedPack == null ? null : installedPack.Version;
+
+            if (id_to == null || (id_from == null && id_to == null))
             {
                 return false;
             }
@@ -48,8 +51,8 @@ namespace VoodooSharp
             Console.WriteLine("Beginning update procedure.");
             Console.WriteLine("  Package: {0}", Package.Name);
 
-            PackageVersion v_from = sfrom == null ? null : Versions.Find(v => v.Id == sfrom);
-            PackageVersion v_to = sto == null ? null : Versions.Find(v => v.Id == sto);
+            PackageVersion v_from = id_from == null ? null : Versions.Find(v => v.Id == id_from);
+            PackageVersion v_to = id_to == null ? null : Versions.Find(v => v.Id == id_to);
 
             if (v_from == null && v_to == null)
             {
@@ -59,7 +62,7 @@ namespace VoodooSharp
             Stack<PackageVersion> workingSet = new Stack<PackageVersion>();
             PackageVersion check = v_to == null ? v_from : v_to;
 
-            while (check != null && check.Id != sfrom)
+            while (check != null && check.Id != id_from)
             {
                 workingSet.Push(check);
                 check = Versions.Find(v => v.Id == check.Prev);
@@ -78,7 +81,7 @@ namespace VoodooSharp
             pack.HomeUri = Package.HomeUri;
             pack.Name = Package.Name;
             pack.PackId = Package.PackId;
-            pack.Version = sto;
+            pack.Version = id_to;
 
             Console.WriteLine("{0} updates to be applied.", workingSet.Count);
             while (workingSet.Count > 0)

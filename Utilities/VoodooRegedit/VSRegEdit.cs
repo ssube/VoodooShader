@@ -6,13 +6,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
-using VoodooNetClasses;
+using VoodooSharp;
 
 namespace VoodooRegedit
 {
     public partial class VSRegEdit : Form
     {
-        GlobalRegistry m_Registry;
         public TreeNode RootNode;
 
         public VSRegEdit()
@@ -22,13 +21,13 @@ namespace VoodooRegedit
 
         public void ImportRegistry(object sender, EventArgs e)
         {
-            m_Registry = VoodooRegistry.Read();
+            GlobalRegistry.Instance.Update();
         }
 
         public void ExportRegistry(object sender, EventArgs e)
         {
             // Actually export to the registry
-            VoodooRegistry.Write(m_Registry);
+            GlobalRegistry.Instance.Write();
 
             ImportRegistry(null, null);
         }
@@ -39,7 +38,7 @@ namespace VoodooRegedit
 
             if (e.Node.Name == "Node_Root")
             {
-                m_KeyGrid.DataSource = m_Registry;
+                m_KeyGrid.DataSource = GlobalRegistry.Instance;
             } else if (e.Node.Name == "Node_Remotes")
             {
                 m_KeyGrid.Columns.Clear();
@@ -50,7 +49,7 @@ namespace VoodooRegedit
 
                 m_KeyGrid.Columns.Add(col_Uri);
 
-                m_KeyGrid.DataSource = m_Registry.Remotes;
+                m_KeyGrid.DataSource = GlobalRegistry.Instance.Remotes;
             } else if (e.Node.Name == "Node_Packages")
             {
                 m_KeyGrid.Columns.Clear();
@@ -81,7 +80,7 @@ namespace VoodooRegedit
                 m_KeyGrid.Columns.Add(col_Date);
                 m_KeyGrid.Columns.Add(col_Props);
 
-                m_KeyGrid.DataSource = m_Registry.Packages;
+                m_KeyGrid.DataSource = GlobalRegistry.Instance.Packages;
             } else if (e.Node.Name == "Node_Modules")
             {
                 m_KeyGrid.Columns.Clear();
@@ -107,7 +106,7 @@ namespace VoodooRegedit
                 m_KeyGrid.Columns.Add(col_LibID);
                 m_KeyGrid.Columns.Add(col_Props);
 
-                m_KeyGrid.DataSource = m_Registry.Modules;
+                m_KeyGrid.DataSource = GlobalRegistry.Instance.Modules;
             } else if (e.Node.Name == "Node_Classes")
             {
                 m_KeyGrid.Columns.Clear();
@@ -133,7 +132,7 @@ namespace VoodooRegedit
                 m_KeyGrid.Columns.Add(col_LibID);
                 m_KeyGrid.Columns.Add(col_Props);
 
-                m_KeyGrid.DataSource = m_Registry.Classes;
+                m_KeyGrid.DataSource = GlobalRegistry.Instance.Classes;
             } else if (e.Node.Name == "Node_Hooks")
             {
                 m_KeyGrid.Columns.Clear();
@@ -159,7 +158,7 @@ namespace VoodooRegedit
                 m_KeyGrid.Columns.Add(col_Target);
                 m_KeyGrid.Columns.Add(col_Config);
 
-                m_KeyGrid.DataSource = m_Registry.Hooks;
+                m_KeyGrid.DataSource = GlobalRegistry.Instance.Hooks;
             }
             else if (e.Node.Name == "Node_Defaults")
             {
@@ -186,36 +185,36 @@ namespace VoodooRegedit
                 m_KeyGrid.Columns.Add(col_Target);
                 m_KeyGrid.Columns.Add(col_Config);
 
-                m_KeyGrid.DataSource = m_Registry.Defaults;
+                m_KeyGrid.DataSource = GlobalRegistry.Instance.Defaults;
             }
         }
 
         private void Menu_Key_Add(object sender, EventArgs e)
         {
             object source = m_KeyGrid.DataSource;
-            if (source.GetType() == typeof(List<VoodooRemote>))
+            if (source.GetType() == typeof(List<Remote>))
             {
-                ((List<VoodooRemote>)source).Add(new VoodooRemote());
+                ((List<Remote>)source).Add(new Remote());
             }
-            else if (source.GetType() == typeof(List<VoodooPackage>))
+            else if (source.GetType() == typeof(List<Package>))
             {
-                ((List<VoodooPackage>)source).Add(new VoodooPackage());
+                ((List<Package>)source).Add(new Package());
             }
-            else if (source.GetType() == typeof(List<VoodooModule>))
+            else if (source.GetType() == typeof(List<Module>))
             {
-                ((List<VoodooModule>)source).Add(new VoodooModule());
+                ((List<Module>)source).Add(new Module());
             }
-            else if (source.GetType() == typeof(List<VoodooClass>))
+            else if (source.GetType() == typeof(List<Class>))
             {
-                ((List<VoodooClass>)source).Add(new VoodooClass());
+                ((List<Class>)source).Add(new Class());
             }
-            else if (source.GetType() == typeof(List<VoodooHook>))
+            else if (source.GetType() == typeof(List<Hook>))
             {
-                ((List<VoodooHook>)source).Add(new VoodooHook());
+                ((List<Hook>)source).Add(new Hook());
             }
-            else if (source.GetType() == typeof(List<VoodooDefault>))
+            else if (source.GetType() == typeof(List<Default>))
             {
-                ((List<VoodooDefault>)source).Add(new VoodooDefault());
+                ((List<Default>)source).Add(new Default());
             }
             m_KeyGrid.Refresh();
         }
@@ -228,29 +227,29 @@ namespace VoodooRegedit
             }
 
             object source = m_KeyGrid.DataSource;
-            if (source.GetType() == typeof(List<VoodooRemote>))
+            if (source.GetType() == typeof(List<Remote>))
             {
-                ((List<VoodooRemote>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
+                ((List<Remote>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
             }
-            else if (source.GetType() == typeof(List<VoodooPackage>))
+            else if (source.GetType() == typeof(List<Package>))
             {
-                ((List<VoodooPackage>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
+                ((List<Package>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
             }
-            else if (source.GetType() == typeof(List<VoodooModule>))
+            else if (source.GetType() == typeof(List<Module>))
             {
-                ((List<VoodooModule>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
+                ((List<Module>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
             }
-            else if (source.GetType() == typeof(List<VoodooClass>))
+            else if (source.GetType() == typeof(List<Class>))
             {
-                ((List<VoodooClass>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
+                ((List<Class>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
             }
-            else if (source.GetType() == typeof(List<VoodooHook>))
+            else if (source.GetType() == typeof(List<Hook>))
             {
-                ((List<VoodooHook>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
+                ((List<Hook>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
             }
-            else if (source.GetType() == typeof(List<VoodooDefault>))
+            else if (source.GetType() == typeof(List<Default>))
             {
-                ((List<VoodooDefault>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
+                ((List<Default>)source).RemoveAt(m_KeyGrid.SelectedRows[0].Index);
             }
             m_KeyGrid.Refresh();
         }
@@ -270,14 +269,22 @@ namespace VoodooRegedit
                         String libid = Convert.ToString(version.LibID);
 
                         // Add module
-                        m_Registry.Modules.Add(new VoodooModule(version.LibID, Guid.Empty, version.Name, moduleFile, String.Empty, String.Empty));
+                        Module mod = new Module();
+                        mod.LibId = version.LibID;
+                        mod.Name = version.Name;
+                        mod.Path = moduleFile;
+                        GlobalRegistry.Instance.Modules.Add(mod);
 
                         // Add classes
                         for (UInt32 i = 0; i < module.Count; ++i)
                         {
                             ClassInfo classinfo = module[i];
 
-                            m_Registry.Classes.Add(new VoodooClass(classinfo.ClassID, version.LibID, classinfo.Name, String.Empty));
+                            Class cls = new Class();
+                            cls.ClassId = classinfo.ClassID;
+                            cls.Module = version.LibID;
+                            cls.Name = classinfo.Name;
+                            GlobalRegistry.Instance.Classes.Add(cls);
                         }
 
                         // Export again

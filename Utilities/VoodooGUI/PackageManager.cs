@@ -38,7 +38,6 @@ namespace VoodooUI
         Markdown m_Parser;
         bool m_CancelNav;
         Regex m_ParserRegex;
-        ConsoleRedirect m_Redir;
 
         public PackageManager()
         {
@@ -46,8 +45,10 @@ namespace VoodooUI
 
             cBrowserDesc.Navigating += new WebBrowserNavigatingEventHandler(webBrowser1_Navigating);
 
-            m_Redir = new ConsoleRedirect(textBox1);
-            m_Parser = new Markdown();
+            MarkdownOptions mdopt = new MarkdownOptions();
+            mdopt.AutoHyperlink = true; mdopt.LinkEmails = true;
+            m_Parser = new Markdown(mdopt);
+
             m_ParserRegex = new Regex("[ ]{2,}");
 
             RefreshTree();
@@ -61,6 +62,10 @@ namespace VoodooUI
         void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             e.Cancel = m_CancelNav;
+            if (m_CancelNav)
+            {
+                System.Diagnostics.Process.Start(e.Url.ToString());
+            }
             m_CancelNav = true;
         }
 
@@ -118,12 +123,6 @@ namespace VoodooUI
                 }
             }
 
-            Package installedPack = GlobalRegistry.Instance.GetPackage(pm.Package.PackId);
-            if (installedPack != null)
-            {
-                source = installedPack.Version;
-            }
-
             String msg;
             if (source == null)
             {
@@ -134,7 +133,7 @@ namespace VoodooUI
             
             if (MessageBox.Show(msg, "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                pm.Update(source, target);
+                pm.Update(target);
             }
         }
 
@@ -146,9 +145,22 @@ namespace VoodooUI
             {
                 TreeNode packageNode = cPackageTree.Nodes.Add(pm.Package.PackId.ToString(), pm.Package.Name);
                 packageNode.Tag = pm;
+
+                Package installedPack = GlobalRegistry.Instance.GetPackage(pm.Package.PackId);
+                if (installedPack != null)
+                {
+                    packageNode.BackColor = System.Drawing.Color.PowderBlue;
+                }
+
                 foreach (PackageVersion v in pm.Versions)
                 {
-                    packageNode.Nodes.Add(v.Id, v.Id).Tag = v;
+                    TreeNode node = packageNode.Nodes.Add(v.Id, v.Id);
+                    node.Tag = v;
+
+                    if (installedPack != null && installedPack.Version == v.Id)
+                    {
+                        node.BackColor = System.Drawing.Color.Honeydew;
+                    }
                 }
             }  
         }
@@ -198,7 +210,7 @@ namespace VoodooUI
                 String.Format("Uninstall package {0} from {1}.\nContinue?", pm.Package.Name, source),
                 "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                pm.Update(source, null);
+                pm.Update(null);
             }
         }
     }

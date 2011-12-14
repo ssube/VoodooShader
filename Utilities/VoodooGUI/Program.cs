@@ -177,15 +177,7 @@ namespace VoodooUI
                     }
                     else
                     {
-                        String source = null;
-
-                        Package installedPack = GlobalRegistry.Instance.GetPackage(key);
-                        if (installedPack != null)
-                        {
-                            source = installedPack.Version;
-                        }
-
-                        pm.Update(source, target);
+                        pm.Update(target);
                     }
                 }
             }

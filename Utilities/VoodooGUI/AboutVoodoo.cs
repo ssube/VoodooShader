@@ -25,7 +25,11 @@ namespace VoodooUI
                 StreamReader textStreamReader = new StreamReader(textStream);
 
                 String text = new StreamReader(textStream).ReadToEnd();
-                MarkdownSharp.Markdown parser = new MarkdownSharp.Markdown();
+
+                MarkdownSharp.MarkdownOptions mdopt = new MarkdownSharp.MarkdownOptions();
+                mdopt.AutoHyperlink = true; mdopt.LinkEmails = true;
+                MarkdownSharp.Markdown parser = new MarkdownSharp.Markdown(mdopt);
+
                 text = parser.Transform(text);
                 webBrowser1.DocumentText = text;
 
