@@ -6,6 +6,8 @@
         <Version>Version String</Version>
         <ManifestUri>http://www.voodooshader.com/manifests/example/ExamplePackageManifest.xml</ManifestUri>
     </Package>
+    <Description>Example package manifest.</Description>
+    <PackageUri>example_package</PackageUri>
     <Messages>
         <Language Id="en-US">
             <Pre>You are about to install a test package.</Pre>
@@ -14,9 +16,11 @@
     </Messages>
     <Versions>
         <Version Id="Version String">
+            <Description>Test version for example package.</Description>
+            <VersionUri>vstr</VersionUri>
             <Messages>
                 <Language Id="en-US">
-                    <Pre>This is version n.</Pre>
+                    <Pre>This is a version.</Pre>
                 </Language>
             </Messages>
             <Create>

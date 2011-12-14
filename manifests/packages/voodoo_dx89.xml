@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoodooPackage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.voodooshader.com/manifests/VoodooSchema.xsd">
+    <Package>
+        <PackId>f84ac3c4-073f-11e1-83d4-005056c00008</PackId>
+        <Name>Voodoo/Generic_DX89</Name>
+        <Version>0.5.3</Version>
+        <HomeUri>http://www.voodooshader.com</HomeUri>
+    </Package>
+    <Description>Voodoo generic DX8 and DX9 adapter.</Description>
+    <PackageUri>http://www.voodooshader.com/manifests/packages/voodoo_dx89</PackageUri>
+    <Messages>
+        <Language Id="en-US">
+            <Pre></Pre>
+            <Post></Post>
+        </Language>
+    </Messages>
+    <Versions>
+        <Version Id="0.5.3">
+            <Description>Base testing version for Voodoo/Generic_DX89.</Description>
+            <VersionUri>0_5_3</VersionUri>
+            <Messages>
+                <Language Id="en-us">
+                    <Pre>Removes the test file from the test version.</Pre>
+                </Language>
+            </Messages>
+            <Create>
+                <Module>
+                    <LibId>a687cfcb-063c-11e1-b22e-005056c00008</LibId>
+                    <Name>Voodoo/Generic_DX89</Name>
+                    <Path>Voodoo_DX89.dll</Path>
+                    <Config></Config>
+                    <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
+                </Module>
+                <File Checksum="02915f9b715339989831c2ce0afbab6a">bin\Voodoo_DX89.dll</File>
+                <File Checksum="86366842cee97b5581060a33be68fc8e">bin\cgD3D9.dll</File>
+            </Create>
+        </Version>
+    </Versions>
+</VoodooPackage>

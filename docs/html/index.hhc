@@ -520,6 +520,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/resource.h"><param name="Local" value="_core_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/String.cpp"><param name="Local" value="_string_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/String.hpp"><param name="Local" value="_string_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Support.inl"><param name="Local" value="_support_8inl.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Version.hpp"><param name="Local" value="_version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/Version_Build.hpp"><param name="Local" value="_version___build_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VoodooFramework.hpp"><param name="Local" value="_voodoo_framework_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -597,6 +598,7 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="resource.h"><param name="Local" value="_core_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="String.cpp"><param name="Local" value="_string_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="String.hpp"><param name="Local" value="_string_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Support.inl"><param name="Local" value="_support_8inl.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Version.hpp"><param name="Local" value="_version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Version_Build.hpp"><param name="Local" value="_version___build_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooFramework.hpp"><param name="Local" value="_voodoo_framework_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>

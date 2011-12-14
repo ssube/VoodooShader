@@ -69,8 +69,8 @@ h3.version {
 }
 
 div.qindex, div.navtab{
-	background-color: #EAE4F7;
-	border: 1px solid #A081DE;
+	background-color: #F1F1F1;
+	border: 1px solid #BDBDBD;
 	text-align: center;
 }
 
@@ -86,13 +86,13 @@ div.navtab {
 /* @group Link Styling */
 
 a {
-	color: #40207F;
+	color: #646464;
 	font-weight: normal;
 	text-decoration: none;
 }
 
 .contents a:visited {
-	color: #4D2798;
+	color: #747474;
 }
 
 a:hover {
@@ -105,9 +105,9 @@ a.qindex {
 
 a.qindexHL {
 	font-weight: bold;
-	background-color: #9977DC;
+	background-color: #B8B8B8;
 	color: #ffffff;
-	border: 1px double #835BD4;
+	border: 1px double #A8A8A8;
 }
 
 .contents a.qindexHL:visited {
@@ -122,11 +122,11 @@ a.elRef {
 }
 
 a.code {
-	color: #4D2798;
+	color: #747474;
 }
 
 a.codeRef {
-	color: #4D2798;
+	color: #747474;
 }
 
 /* @end */
@@ -141,8 +141,8 @@ dl.el {
 }
 
 pre.fragment {
-	border: 1px solid #C2AEE9;
-	background-color: #FBFAFD;
+	border: 1px solid #D5D5D5;
+	background-color: #FCFCFC;
 	padding: 4px 6px;
 	margin: 4px 8px 4px 2px;
 	overflow: auto;
@@ -193,22 +193,22 @@ div.contents {
 }
 
 td.indexkey {
-	background-color: #EAE4F7;
+	background-color: #F1F1F1;
 	font-weight: bold;
-	border: 1px solid #C2AEE9;
+	border: 1px solid #D5D5D5;
 	margin: 2px 0px 2px 0;
 	padding: 2px 10px;
 }
 
 td.indexvalue {
-	background-color: #EAE4F7;
-	border: 1px solid #C2AEE9;
+	background-color: #F1F1F1;
+	border: 1px solid #D5D5D5;
 	padding: 2px 10px;
 	margin: 2px 0px;
 }
 
 tr.memlist {
-	background-color: #EDE7F8;
+	background-color: #F2F2F2;
 }
 
 p.formulaDsp {
@@ -318,18 +318,18 @@ td.tiny {
 .dirtab {
 	padding: 4px;
 	border-collapse: collapse;
-	border: 1px solid #A081DE;
+	border: 1px solid #BDBDBD;
 }
 
 th.dirtab {
-	background: #EAE4F7;
+	background: #F1F1F1;
 	font-weight: bold;
 }
 
 hr {
 	height: 0px;
 	border: none;
-	border-top: 1px solid #5129A2;
+	border-top: 1px solid #7A7A7A;
 }
 
 hr.footer {
@@ -346,7 +346,7 @@ table.memberdecls {
 .mdescLeft, .mdescRight,
 .memItemLeft, .memItemRight,
 .memTemplItemLeft, .memTemplItemRight, .memTemplParams {
-	background-color: #F9F7FC;
+	background-color: #FAFAFA;
 	border: none;
 	margin: 4px;
 	padding: 1px 0 0 8px;
@@ -358,7 +358,7 @@ table.memberdecls {
 }
 
 .memItemLeft, .memItemRight, .memTemplParams {
-	border-top: 1px solid #C2AEE9;
+	border-top: 1px solid #D5D5D5;
 }
 
 .memItemLeft, .memTemplItemLeft {
@@ -370,7 +370,7 @@ table.memberdecls {
 }
 
 .memTemplParams {
-	color: #4D2798;
+	color: #747474;
         white-space: nowrap;
 }
 
@@ -382,14 +382,14 @@ table.memberdecls {
 
 .memtemplate {
 	font-size: 80%;
-	color: #4D2798;
+	color: #747474;
 	font-weight: normal;
 	margin-left: 9px;
 }
 
 .memnav {
-	background-color: #EAE4F7;
-	border: 1px solid #A081DE;
+	background-color: #F1F1F1;
+	border: 1px solid #BDBDBD;
 	text-align: center;
 	margin: 2px;
 	margin-right: 15px;
@@ -413,11 +413,11 @@ table.memberdecls {
 }
 
 .memproto, dl.reflist dt {
-        border-top: 1px solid #A587E0;
-        border-left: 1px solid #A587E0;
-        border-right: 1px solid #A587E0;
+        border-top: 1px solid #C0C0C0;
+        border-left: 1px solid #C0C0C0;
+        border-right: 1px solid #C0C0C0;
         padding: 6px 0px 6px 0px;
-        color: #221144;
+        color: #3D3D3D;
         font-weight: bold;
         text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.9);
         /* opera specific markup */
@@ -434,16 +434,16 @@ table.memberdecls {
         -webkit-border-top-left-radius: 8px;
         background-image:url('nav_f.png');
         background-repeat:repeat-x;
-        background-color: #E1D7F4;
+        background-color: #EAEAEA;
 
 }
 
 .memdoc, dl.reflist dd {
-        border-bottom: 1px solid #A587E0;      
-        border-left: 1px solid #A587E0;      
-        border-right: 1px solid #A587E0; 
+        border-bottom: 1px solid #C0C0C0;      
+        border-left: 1px solid #C0C0C0;      
+        border-right: 1px solid #C0C0C0; 
         padding: 2px 5px;
-        background-color: #FBFAFD;
+        background-color: #FCFCFC;
         border-top-width: 0;
         /* opera specific markup */
         border-bottom-left-radius: 8px;
@@ -453,12 +453,12 @@ table.memberdecls {
         -moz-border-radius-bottomleft: 8px;
         -moz-border-radius-bottomright: 8px;
         -moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
-        background-image: -moz-linear-gradient(center top, #FFFFFF 0%, #FFFFFF 60%, #F6F3FC 95%, #EDE7F8);
+        background-image: -moz-linear-gradient(center top, #FFFFFF 0%, #FFFFFF 60%, #F9F9F9 95%, #F2F2F2);
         /* webkit specific markup */
         -webkit-border-bottom-left-radius: 8px;
         -webkit-border-bottom-right-radius: 8px;
         -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
-        background-image: -webkit-gradient(linear,center top,center bottom,from(#FFFFFF), color-stop(0.6,#FFFFFF), color-stop(0.60,#FFFFFF), color-stop(0.95,#F6F3FC), to(#EDE7F8));
+        background-image: -webkit-gradient(linear,center top,center bottom,from(#FFFFFF), color-stop(0.6,#FFFFFF), color-stop(0.60,#FFFFFF), color-stop(0.95,#F9F9F9), to(#F2F2F2));
 }
 
 dl.reflist dt {
@@ -608,7 +608,7 @@ div.dynheader {
 
 address {
 	font-style: normal;
-	color: #281451;
+	color: #464646;
 }
 
 table.doxtable {
@@ -616,12 +616,12 @@ table.doxtable {
 }
 
 table.doxtable td, table.doxtable th {
-	border: 1px solid #2C1657;
+	border: 1px solid #4A4A4A;
 	padding: 3px 7px 2px;
 }
 
 table.doxtable th {
-	background-color: #391D70;
+	background-color: #5B5B5B;
 	color: #FFFFFF;
 	font-size: 110%;
 	padding-bottom: 4px;
@@ -632,7 +632,7 @@ table.doxtable th {
 table.fieldtable {
         width: 100%;
         margin-bottom: 10px;
-        border: 1px solid #A587E0;
+        border: 1px solid #C0C0C0;
         border-spacing: 0px;
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
@@ -648,13 +648,13 @@ table.fieldtable {
 
 .fieldtable td.fieldtype, .fieldtable td.fieldname {
         white-space: nowrap;
-        border-right: 1px solid #A587E0;
-        border-bottom: 1px solid #A587E0;
+        border-right: 1px solid #C0C0C0;
+        border-bottom: 1px solid #C0C0C0;
         vertical-align: top;
 }
 
 .fieldtable td.fielddoc {
-        border-bottom: 1px solid #A587E0;
+        border-bottom: 1px solid #C0C0C0;
         width: 100%;
 }
 
@@ -665,9 +665,9 @@ table.fieldtable {
 .fieldtable th {
         background-image:url('nav_f.png');
         background-repeat:repeat-x;
-        background-color: #E1D7F4;
+        background-color: #EAEAEA;
         font-size: 90%;
-        color: #221144;
+        color: #3D3D3D;
         padding-bottom: 4px;
         padding-top: 5px;
         text-align:left;
@@ -677,7 +677,7 @@ table.fieldtable {
         -webkit-border-top-right-radius: 4px;
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
-        border-bottom: 1px solid #A587E0;
+        border-bottom: 1px solid #C0C0C0;
 }
 
 
@@ -698,8 +698,8 @@ table.fieldtable {
 	background-repeat:repeat-x;
 	height:30px;
 	line-height:30px;
-	color:#8760D5;
-	border:solid 1px #BFAAE9;
+	color:#ABABAB;
+	border:solid 1px #D3D3D3;
 	overflow:hidden;
 	margin:0px;
 	padding:0px;
@@ -714,7 +714,7 @@ table.fieldtable {
 	background-image:url('bc_s.png');
 	background-repeat:no-repeat;
 	background-position:right;
-	color:#371C6D;
+	color:#595959;
 }
 
 .navpath li.navelem a
@@ -727,7 +727,7 @@ table.fieldtable {
 
 .navpath li.navelem a:hover
 {
-	color:#6735CA;
+	color:#929292;
 }
 
 .navpath li.footer
@@ -739,7 +739,7 @@ table.fieldtable {
         background-image:none;
         background-repeat:no-repeat;
         background-position:right;
-        color:#371C6D;
+        color:#595959;
         font-size: 8pt;
 }
 
@@ -776,9 +776,9 @@ div.header
 {
         background-image:url('nav_h.png');
         background-repeat:repeat-x;
-	background-color: #F9F7FC;
+	background-color: #FAFAFA;
 	margin:  0px;
-	border-bottom: 1px solid #C2AEE9;
+	border-bottom: 1px solid #D5D5D5;
 }
 
 div.headertitle
@@ -870,7 +870,7 @@ dl.bug
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
-	border-bottom: 1px solid #5A2EB1;
+	border-bottom: 1px solid #848484;
 }
 
 .image
@@ -895,7 +895,7 @@ dl.bug
 
 div.zoom
 {
-	border: 1px solid #8D68D7;
+	border: 1px solid #AFAFAF;
 }
 
 dl.citelist {
@@ -903,7 +903,7 @@ dl.citelist {
 }
 
 dl.citelist dt {
-        color:#331A65;
+        color:#545454;
         float:left;
         font-weight:bold;
         margin-right:10px;

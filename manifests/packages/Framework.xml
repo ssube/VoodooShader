@@ -3,81 +3,94 @@
     <Package>
         <PackId>a687cfca-063c-11e1-b22e-005056c00008</PackId>
         <Name>Voodoo Shader Framework</Name>
-        <Version>0.5.2</Version>
-        <ManifestUri>https://www.voodooshader.com/manifests/packages/Framework.xml</ManifestUri>
+        <Version>0.5.3</Version>
+        <HomeUri>http://www.voodooshader.com</HomeUri>
     </Package>
-    <Description>### Voodoo Shader Framework, _version 0.5.2_
-    This is a test of the Voodoo update system. If you can see this text, then it hasn't failed miserably.
-    
-    You should be able to see some formatting _here_ and **here**, as well as [a link](http://www.google.com) which you can't follow. 
-    
-    This is all done with magic.
+    <Description>### Voodoo Shader Framework, _version 0.5.3_
+
+        This package contains all necessary files to use Voodoo.
+
+        This package is distributed under the terms of the Lesser GNU General Public License, version 3. Details may be
+        found at: http://www.opensource.org/licenses/LGPL-3.0
+        
+        To begin using Voodoo, you can install more packages or create hooks for your games. 
+        
+        If you have any problems, questions or suggestions, please visit the project site at: 
+        https://www.github.com/peachykeen/VoodooShader
     </Description>
+    <PackageUri>http://www.voodooshader.com/manifests/packages/framework</PackageUri>
     <Messages>
         <Language Id="en-US">
-            <Pre>
-                ### You are about to install the Voodoo Shader Framework.
-                This package contains all necessary files to use Voodoo.
-                This package is distributed under the terms of the Lesser GNU General Public License, version 3. By clicking
-                'OK', you agree to these terms. Details may be found at: http://www.opensource.org/licenses/LGPL-3.0
-            </Pre>
-            <Post>
-                ### Thank you for the Voodoo Shader Framework.
-                To begin using Voodoo, you can install more packages or create hooks for your games.
-                If you have any problems, questions or suggestions, please visit the project site at: 
-                https://www.github.com/peachykeen/VoodooShader
-                Enjoy!
-            </Post>
+            <Pre></Pre>
+            <Post></Post>
         </Language>
     </Messages>
     <Versions>
         <!-- First manifest version. -->
-        <Version Id="0.5.2">
-            <Description>Test version. _This is just a test._</Description>
+        <Version Id="0.5.3">
+            <Description>Base test version for the framework, alpha 5.3.</Description>
+            <VersionUri>0_5_3</VersionUri>
             <Create>
                 <Module>
                     <LibId>a687cfcb-063c-11e1-b22e-005056c00008</LibId>
                     <Name>Voodoo/Core</Name>
                     <Path>Voodoo_Core.dll</Path>
-                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Config></Config>
                     <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
                 </Module>
                 <Module>
                     <LibId>a687cfcc-063c-11e1-b22e-005056c00008</LibId>
                     <Name>Voodoo/XmlLogger</Name>
                     <Path>Voodoo_XmlLogger.dll</Path>
-                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Config></Config>
                     <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
                 </Module>
                 <Module>
                     <LibId>a687cfcd-063c-11e1-b22e-005056c00008</LibId>
                     <Name>Voodoo/WFileSystem</Name>
                     <Path>Voodoo_WFileSystem.dll</Path>
-                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Config></Config>
                     <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
                 </Module>
                 <Module>
                     <LibId>a687cfce-063c-11e1-b22e-005056c00008</LibId>
                     <Name>Voodoo/EHHookManager</Name>
                     <Path>Voodoo_EHHookManager.dll</Path>
-                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Config></Config>
                     <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
                 </Module>
                 <Module>
                     <LibId>f84ac3b3-073f-11e1-83d4-005056c00008</LibId>
                     <Name>Voodoo/HookStub</Name>
                     <Path>Voodoo_HookStub.dll</Path>
-                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Config></Config>
                     <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
                 </Module>
                 <Module>
                     <LibId>f84ac3b4-073f-11e1-83d4-005056c00008</LibId>
-                    <Name>Voodoo/FullLoader</Name>
-                    <Path>Voodoo_FullLoader.dll</Path>
-                    <Config>VoodooCfg_Framework.dll</Config>
+                    <Name>Voodoo/Loader</Name>
+                    <Path>Voodoo_Loader.dll</Path>
+                    <Config></Config>
                     <Package>a687cfca-063c-11e1-b22e-005056c00008</Package>
                 </Module>
-                <File>config\VoodooCfg_Framework.dll</File>
+                
+                <!-- Framework modules -->
+                <File Checksum="ceb437821d07586c44a587e32dabb9b8">bin/Voodoo_Core.dll</File>
+                <File Checksum="59b7ffde03d278e542b23ba7e150697f">bin/Voodoo_EHHookManager.dll</File>
+                <File Checksum="e98b412d6b08cac1c47e98734c8ea5d6">bin/Voodoo_WFileSystem.dll</File>
+                <File Checksum="59b7ffde03d278e542b23ba7e150697f">bin/Voodoo_XmlLogger.dll</File>
+                <File Checksum="7fab5aa06ae50b3712fca1bd4ddf4a57">bin/Voodoo_HookStub.dll</File>
+                <File Checksum="ab28da56cbe48370d64d2f01ecbb6d5b">bin/Voodoo_Loader.dll</File>
+                
+                <!-- Dependencies -->
+                <File Checksum="e376c5e1feda387a97c7e2fd738b4bcf">bin/cg.dll</File>
+                <File Checksum="59e291838ae2c88f5f71108e4845a84b">bin/DevIL.dll</File>
+                <File Checksum="86a7b1535194628a2b5859aed61ef0f8">bin/EasyHook32.dll</File>
+                <File Checksum="5179df2ebbdb44b23f6ea6c22bd13c7b">bin/pugixml.dll</File>
+
+                <!-- Resources -->
+                <File Checksum="f78d9a3a7745c1044eee67015f06bac6">resources/common/test.cgfx</File>
+                <File Checksum="8a4a2a0068f65bdc3bad9032a880ff36">Voodoo_Config.xml</File>
             </Create>
         </Version>
     </Versions>

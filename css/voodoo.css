@@ -26,6 +26,17 @@ body
     background: linear-gradient(top, rgba(0,0,0,0) 75%,rgba(0,0,0,0.5) 100%) fixed no-repeat, url(../images/bg.png) repeat #303030;
 }
 
+a
+{	
+    color: #CCC;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #FFF;
+}
+
 a img
 {
     border: none;
@@ -34,6 +45,32 @@ a img
 p
 {
     margin: 1em 0.5em;
+}
+
+b
+{
+    color: #D0D0D0;
+    font-weight: 200;
+}
+
+h1, h2, h3, h4, #header, #navbar
+{
+    color: #CCC;
+    font-family: 'Droid Serif', serif;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.25), 0 -1px 0 rgba(0,0,0,0.75);
+}
+
+h4
+{
+    font-size: 90%;
+    text-transform: uppercase;
+}
+
+blockquote
+{
+    border: 2px solid rgba(128, 128, 128, 0.1);
+    border-left: 16px solid rgba(128, 128, 128, 0.1);
+    padding: 0.25em 1em;
 }
 
 #container
@@ -60,13 +97,9 @@ p
 
 #navbar
 {	
-    margin-top: -50px;
+    margin-top: -51px;
     height: 40px;	
     line-height: 40px;
-    
-    color: #CCC;
-    font-size: larger;
-    font-family: Cambria, serif;
     
     border-top: 1px #808080 solid;
     border-bottom: 1px #181818 solid;
@@ -81,7 +114,7 @@ p
 {		
     display: inline-block;
     margin-right: 20px;
-    list-style: none;	
+    list-style: none;
     
     border-left: 1px ridge #202020;
     border-left: 1px ridge rgba(32, 32, 32, 0.25); 
@@ -93,9 +126,7 @@ p
 {
     height: 100%;
     vertical-align: middle;	
-    display: table-cell; 
-    
-    text-shadow: 0 1px 1px rgba(255,255,255,0.25), 0 -1px 0 rgba(0,0,0,0.75);
+    display: table-cell;    
     
     border-left: 1px ridge #606060;
     border-left: 1px ridge rgba(96, 96, 96, 0.25); 
@@ -104,11 +135,12 @@ p
 }
 
 #navbar ul li:hover
-{
+{    
+    background: #606060;
     background: rgba(128, 128, 128, 0.1);
     
-    border-left: 1px ridge #404040;
-    border-left: 1px ridge rgba(64, 64, 64, 0.25); 
+    border-left: 1px ridge #606060;
+    border-left: 1px ridge rgba(96, 96, 96, 0.5); 
     border-right: 1px ridge #000000;
     border-right: 1px ridge rgba(0, 0, 0, 0.25); 
 }
@@ -116,19 +148,11 @@ p
 #navbar ul li a
 {
     padding: 0px 16px;
-    
-    color: #CCC;
-    text-decoration: none;
-}
-
-#navbar ul li a:hover 
-{
-    color: #FFFFFF;
 }
 
 #content
 {	
-    padding: 1em;
+    padding: 2%;
     
     background: #202020;
     background: rgba(0,0,0,0.25), url(../images/bg.png) repeat #202020;    
@@ -140,14 +164,19 @@ p
     background: linear-gradient(top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.25) 5%, rgba(0,0,0,0.25) 95%,rgba(0,0,0,0.5) 100%) no-repeat, url(../images/bg.png) repeat #202020;
 }
 
-#content h1, h2, h3
+#content a
 {
-     text-shadow: 0 1px 1px rgba(255,255,255,0.25), 0 -1px 0 rgba(0,0,0,0.75);
+    border-bottom: 1px solid rgba(96, 96, 96, 0.5);
 }
 
-.em
+#content a:hover
 {
-    color: #D0D0D0;
+    background: #606060;
+    background: rgba(128, 128, 128, 0.1);
+    
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
 }
 
 #footer

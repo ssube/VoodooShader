@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.2-2-g7ab8ed9</span>
+   &#160;<span id="projectnumber">framework-5.3-4-gdfb1181</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -110,8 +110,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_pass.html#ab17d69445693f74222b08f02803ca770">GetCore</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#ab17d69445693f74222b08f02803ca770"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_pass.html#ae069851b79c1aa17fc717c32f6582d4b">GetName</a> () const =0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a364ec3584dd0df16719f607a27a537e1">GetTarget</a> () const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the target texture buffer this pass should render to.  <a href="#a364ec3584dd0df16719f607a27a537e1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a180b95c0b148572b8e89d97416d3da0c">GetTarget</a> (uint32_t index) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a the target texture buffer this pass should render to.  <a href="#a180b95c0b148572b8e89d97416d3da0c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a8c2df738a93efa7d4754ca6794f765a3">SetTarget</a> (uint32_t index, <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *pTarget)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the target texture buffer this pass should render to.  <a href="#a8c2df738a93efa7d4754ca6794f765a3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_technique.html">ITechnique</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a3360cb1e1f836ef906b128aa96e8ec4d">GetTechnique</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the parent technique of this pass.  <a href="#a3360cb1e1f836ef906b128aa96e8ec4d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual CGprogram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a9539b6bc7eb39e0e19125383b3782fde">GetProgram</a> (const <a class="el" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a> stage) const =0</td></tr>
@@ -241,25 +243,32 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a364ec3584dd0df16719f607a27a537e1"></a><!-- doxytag: member="VoodooShader::IPass::GetTarget" ref="a364ec3584dd0df16719f607a27a537e1" args="() const =0" -->
+<a class="anchor" id="a180b95c0b148572b8e89d97416d3da0c"></a><!-- doxytag: member="VoodooShader::IPass::GetTarget" ref="a180b95c0b148572b8e89d97416d3da0c" args="(uint32_t index) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a>* VoodooShader::IPass::GetTarget </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
           <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Retrieve the target texture buffer this pass should render to. </p>
+<p>Retrieve a the target texture buffer this pass should render to. </p>
 <p>This must be a texture created with the render target flag set.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The target index. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The target texture. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a478582e2565ff03ef0bc061bed08d8b4">VoodooShader::VSPass</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#adaa8786bbbdc6630797b94e7ebdc4f59">VoodooShader::VSPass</a>.</p>
 
 </div>
 </div>
@@ -352,6 +361,46 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 </div>
 </div>
+<a class="anchor" id="a8c2df738a93efa7d4754ca6794f765a3"></a><!-- doxytag: member="VoodooShader::IPass::SetTarget" ref="a8c2df738a93efa7d4754ca6794f765a3" args="(uint32_t index, ITexture *pTarget)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool VoodooShader::IPass::SetTarget </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_texture.html">ITexture</a> *&#160;</td>
+          <td class="paramname"><em>pTarget</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the target texture buffer this pass should render to. </p>
+<p>This must be a texture created with the render target flag set.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The target index. </td></tr>
+    <tr><td class="paramname">pTarget</td><td>The target texture. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The target texture. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a2b5bbb88e912614e4271b740319e75c8">VoodooShader::VSPass</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a56ab42fd6d763ec6fd2a4fd764be4a2a"></a><!-- doxytag: member="VoodooShader::IPass::ToString" ref="a56ab42fd6d763ec6fd2a4fd764be4a2a" args="() const =0" -->
 <div class="memitem">
 <div class="memproto">
@@ -383,7 +432,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 6 2011 08:38:59 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 14 2011 14:04:52 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

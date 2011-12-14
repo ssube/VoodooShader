@@ -6,7 +6,7 @@
     <meta name="author" content="Sean Sube" />
     <meta name="description" content="Voodoo Shader is a comprehensive graphics framework for powering shaders in multiple programs, during development or after release. Voodoo uses plugins and a shared core to support many games and other applications and is compatible with Direct3D and OpenGL." />
     <meta name="keywords" content="shader, shaders, voodoo, gem, frost, sigil, shard, storm, direct3d, opengl, post processing, graphics, morrowind, oblivion, skyrim, neverwinter nights, mge, obge, nwshader, enbseries" />
-    <title>Voodoo Shader Framework</title>
+    <title>Voodoo Shader Framework - Universal Graphics Extender</title>
     <link rel="stylesheet" href="css/voodoo.css" type="text/css" media="all" />
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -23,7 +23,7 @@
   </head>
   <body>
   <div id="container"> 
-    <div id="logo"><a href="http://www.voodooshader.com"><img src="images/voodoo.png" alt="Voodoo Shader" /></a></div>
+    <div id="logo"><a href="https://www.voodooshader.com"><img src="images/voodoo.png" alt="Voodoo Shader" /></a></div>
     <div id="navbar" align="right">
         <ul>
             <li><a href="http://blog.voodooshader.com">Blog</a></li>
@@ -34,83 +34,35 @@
         </ul>
     </div>
     <div id="content">
-        <p class="em">
-            Voodoo Shader is a comprehensive graphics framework for powering shaders in multiple programs, during development or after release. 
-            Voodoo uses plugins and a shared core to support many games and other applications and is compatible with Direct3D and OpenGL.
-        </p>
-        <p>
-            Voodoo uses a system of core modules and adapters to provide the widest compatibility and best performance possible
-            across a wide range of applications and APIs. Voodoo supports both OpenGL and DirectX, using nVidia's Cg language.
-            In addition, Voodoo provides a second processing step to provide shaders with easy access to other resources,
-            especially textures.
-        </p>
-        <p>
-            The Voodoo core and supported shaders remain constant between target applications and adapters, providing a unified
-            set of features and single target for shaders.
-        </p>
-        <h3>Shader Support</h3>
-        <p>
-            Voodoo uses nVidia's Cg Toolkit to provide a common, simple shader language and cross-API compiler for widely
-            supported shaders. Voodoo shaders run under both OpenGL and DirectX and can scale over a great variety of hardware,
-            from OpenGL 1.1 to 4.0 and DirectX 8 to 11. Applications using any of the supported APIs are supported within Voodoo,
-            with a near-identical feature set provided across the board.
-        </p>
-        <p>
-            In addition to fully supporting the Cg language, Voodoo implements a second, internal linking stage to offer more
-            powerful features such as deferred rendering and material shaders, with or without original application support.
-            Voodoo uses features such as semantics and annotations to provide these features without adding complexity to the
-            language or breaking compatibility with other shader tools. Voodoo provides a set of compiler options to allow
-            shaders to conditionally compile various levels of support. Voodoo fully supports techniques and passes within a
-            shader, as well as various program stages.
-        </p>
-        <p>
-            Access to hardware textures and render information is provided through application-specific adapters, allowing Voodoo
-            to be tied tightly into a huge number of new and existing programs.
-     
-        </p>
-        <h3>Support Libraries</h3>
-        <p>
-            Voodoo provides a number of support libraries, many used within Voodoo. These include the Voodoo dynamic loader
-            (capable to dynamically loading the Voodoo core and an adapter into a running process), a simple file system manager
-            to streamline resource loading, EasyHook-based function intercept library, comprehensive Unicode string handling, and
-            other useful code. These libraries are available for use by code within and outside of the Voodoo project and
-            simplify a number of common or complex tasks.
-        </p>
-        <h3>Testing and Code Quality</h3>
-        <p>
-            The Voodoo framework covers an immense scope and tackles an intriguing and often complex task. To maximize stability,
-            speed and code quality, all code within the Voodoo Shader Framework must meet a strict set of quality-control standards
-            and be fully tested before release. Tests are carried out within specialized test suites and target applications.
-        </p>
-        <h3>Logs and Debugging</h3>
-        <p>
-            In addition to code testing, Voodoo provides logging libraries to record all actions in detail. The verbosity of the
-            log can be customized, with the highest levels recording API calls and their parameters. Errors and warnings
-            originating within Voodoo code are always logged, and safeguards are put in place to make sure log data is written to
-            disk, even in the event of a fatal error or loss of power.
-        </p>
-        <p>
-            Debug builds of Voodoo are available, as is source code, to aid debugging. Debug builds are built with full symbols
-            and additional error checking.
-        </p>
-        <p>
-            Voodoo is also fully compatible with your favorite graphics debugger, including PIX for Windows (DirectX) and
-            GLintercept (OpenGL). This also extends to screen capture programs and system tools, and code debuggers. In some
-            cases, Voodoo's logging may be able to augment the information from these tools.
-        </p>
-        <p>
-            On the Github project, a tracker for bugs and features is available and open to all users to submit bugs and logs.
-        </p>
-        <h3>Documentation</h3>
-        <p>
-            The entire Voodoo project is heavily documented using doxygen notation. These docs are compiled and uploaded along
-            with each code push and release. Everything from the variable syntax to texture load formats to the adapter interface
-            are documented in depth, cross-referenced and any potential issues are noted. The documentation is interwoven in the
-            source, so it is kept up-to-date and extensive and new code is documented as it's written.
-        </p>
+        <h4>Improve graphics in your favorite games with Voodoo Shader.</h4>
+
+        <p>The Voodoo Shader Framework extends and improves graphics in old and new games. Better yet, it allows you to use the 
+        same effects in all your games and tweak them when you want to. It's fast, stable, and comes with a simple UI. It runs on 
+        ATi/AMD and nVidia, in DirectX and OpenGL games. Voodoo Shader is free and open-source, so you can change it if you want or 
+        check out the details.</p>
+
+        <p>More technically, Voodoo Shader is a comprehensive graphics framework designed to power shaders across multiple programs, 
+        during development or after release. Voodoo uses a single core with plugins supporting many games and other applications.</p>
+
+        <p>Designed so effects can be loaded into any game, Voodoo Shader uses plugins to fine-tune each game individually for the best
+        speed and stability possible. A simple UI helps you manage which plugins run in each game. The UI allows you to set up games, 
+        download and update plugins, and change the settings for each game. Games have a config file associated with them, which Voodoo 
+        Shader checks for when the game starts. If the config is found, Voodoo Shader loads using the settings you've chosen.</p>
+
+        <p>Right now, Voodoo Shader is in alpha testing. It is functional, but not complete. A public alpha test is being set up; the 
+        process will be simple: download the UI and demo package then make sure Voodoo Shader runs properly. If you are able, please 
+        get in touch (info below).</p>
+
+        <p>For more information about Voodoo Shader, <a href="https://github.com/peachykeen/VoodooShader/wiki/FAQ">the FAQ page</a>
+        has details for a variety of common questions. If you are interested in more specific information, have comments, want to
+        help test or develop, please <a href="mailto:peachykeen@voodooshader.com">send an email</a>, 
+        <a href="http://mibbit.com/?channel=%23voodoo,%23morrowind&amp;server=irc.chatspike.net">drop by the chat</a>, or
+        <a href="https://github.com/peachykeen/VoodooShader/issues">check the tracker</a> for information (or create a new entry). Even more
+        info is available through navbar at the top of this page, including the <a href="http://wiki.voodooshader.com">wiki</a>, 
+        <a href="http://blog.voodooshader.com">blog</a> and <a href="https://github.com/peachykeen/VoodooShader">project site</a>.</p>
     </div>
     <div id="footer" align="center">
-        Copyright &copy; 2010-2011 by Sean Sube, All Rights Reserved.
+        <p>Copyright &copy; 2010-2011 by Sean Sube, All Rights Reserved.</p>
     </div>
     </div>
   </body>

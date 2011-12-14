@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.2-2-g7ab8ed9</span>
+   &#160;<span id="projectnumber">framework-5.3-4-gdfb1181</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -219,20 +219,20 @@
 <a name="l00150"></a>00150             <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a221c995f8eea5ccc87628d24d2f53f08" title="Config file.">m_ConfigFile</a> = <span class="keyword">new</span> pugi::xml_document();
 <a name="l00151"></a>00151 
 <a name="l00152"></a>00152             <span class="comment">// Try loading the config file from each major location</span>
-<a name="l00153"></a>00153             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> configPath = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(L<span class="stringliteral">&quot;$(runroot)\\$(config)&quot;</span>, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">PF_PathCanon</a>);
+<a name="l00153"></a>00153             <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> configPath = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(L<span class="stringliteral">&quot;$(config)&quot;</span>, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">PF_PathCanon</a>);
 <a name="l00154"></a>00154             pugi::xml_parse_result result = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a221c995f8eea5ccc87628d24d2f53f08" title="Config file.">m_ConfigFile</a>-&gt;load_file(configPath.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00155"></a>00155 
 <a name="l00156"></a>00156             <span class="keywordflow">if</span> (!result)
 <a name="l00157"></a>00157             {
-<a name="l00158"></a>00158                 configPath = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(L<span class="stringliteral">&quot;$(localroot)\\$(config)&quot;</span>);
+<a name="l00158"></a>00158                 configPath = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(L<span class="stringliteral">&quot;$(runroot)\\$(config)&quot;</span>, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">PF_PathCanon</a>);
 <a name="l00159"></a>00159                 result = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a221c995f8eea5ccc87628d24d2f53f08" title="Config file.">m_ConfigFile</a>-&gt;load_file(configPath.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00160"></a>00160                 <span class="keywordflow">if</span> (!result)
 <a name="l00161"></a>00161                 {
-<a name="l00162"></a>00162                     configPath = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(L<span class="stringliteral">&quot;$(globalroot)\\$(config)&quot;</span>);
+<a name="l00162"></a>00162                     configPath = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(L<span class="stringliteral">&quot;$(localroot)\\$(config)&quot;</span>, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">PF_PathCanon</a>);
 <a name="l00163"></a>00163                     result = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a221c995f8eea5ccc87628d24d2f53f08" title="Config file.">m_ConfigFile</a>-&gt;load_file(configPath.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00164"></a>00164                     <span class="keywordflow">if</span> (!result)
 <a name="l00165"></a>00165                     {
-<a name="l00166"></a>00166                         configPath = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(L<span class="stringliteral">&quot;$(config)&quot;</span>);
+<a name="l00166"></a>00166                         configPath = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a08f023c0a7624000f2136b33abc07456" title="The current variable parser.">m_Parser</a>-&gt;Parse(L<span class="stringliteral">&quot;$(globalroot)\\$(config)&quot;</span>, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">PF_PathCanon</a>);
 <a name="l00167"></a>00167                         result = <a class="code" href="class_voodoo_shader_1_1_v_s_core.html#a221c995f8eea5ccc87628d24d2f53f08" title="Config file.">m_ConfigFile</a>-&gt;load_file(configPath.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>());
 <a name="l00168"></a>00168                         <span class="keywordflow">if</span> (!result)
 <a name="l00169"></a>00169                         {
@@ -759,7 +759,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 6 2011 08:38:58 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 14 2011 14:04:50 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

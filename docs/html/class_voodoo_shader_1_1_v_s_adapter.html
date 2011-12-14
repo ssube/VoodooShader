@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.2-2-g7ab8ed9</span>
+   &#160;<span id="projectnumber">framework-5.3-4-gdfb1181</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -832,7 +832,7 @@ To allow for significant variations in property setups and allow for use outside
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if the target was successfully bound.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>Some texture formats, combinations of formats, textures and indices may be invalid for use as a render target. Many cards allow up to 4 targets, but most do not allow mixing formats. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>Some texture formats, combinations of formats, textures and indices may be invalid for use as a render target. Many cards allow up to 4 targets, but most do not allow mixing formats. Voodoo only guarantees one target, the adapter should be queried for the actual count (property 'TargetMax'). </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a4bb845db9ba362ced25c6dfc7652bd55">VoodooShader::IAdapter</a>.</p>
 
@@ -933,7 +933,7 @@ To allow for significant variations in property setups and allow for use outside
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 6 2011 08:39:00 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 14 2011 14:04:52 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.2-2-g7ab8ed9</span>
+   &#160;<span id="projectnumber">framework-5.3-4-gdfb1181</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -102,18 +102,19 @@
 <a name="l00052"></a>00052         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(ICore *, GetCore)() CONST PURE;
 <a name="l00053"></a>00053 
 <a name="l00054"></a>00054         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(String, GetName)() CONST PURE;
-<a name="l00061"></a>00061         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(ITexture *, GetTarget)() CONST PURE;
-<a name="l00067"></a>00067         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(ITechnique *, GetTechnique)() CONST PURE;
-<a name="l00074"></a>00074         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(CGprogram, GetProgram)(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a> stage) CONST PURE;
-<a name="l00080"></a>00080         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(CGpass, GetCgPass)() CONST PURE;
-<a name="l00081"></a>00081     };
-<a name="l00085"></a>00085 }
+<a name="l00062"></a>00062         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(ITexture *, GetTarget)(uint32_t index) CONST PURE;
+<a name="l00071"></a>00071         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(SetTarget)(uint32_t index, ITexture * pTarget) PURE;
+<a name="l00077"></a>00077         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(ITechnique *, GetTechnique)() CONST PURE;
+<a name="l00084"></a>00084         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(CGprogram, GetProgram)(_In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0aaa128fef0ad63eafc60e11da58cb82">ProgramStage</a> stage) CONST PURE;
+<a name="l00090"></a>00090         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(CGpass, GetCgPass)() CONST PURE;
+<a name="l00091"></a>00091     };
+<a name="l00095"></a>00095 }
 </pre></div></div>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 6 2011 08:38:58 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 14 2011 14:04:50 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.2-2-g7ab8ed9</span>
+   &#160;<span id="projectnumber">framework-5.3-4-gdfb1181</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -65,12 +65,47 @@ Cg Context</h2>
 <dl class="attention"><dt><b>Attention:</b></dt><dd>Due to varying needs between adapters regarding the management, and destruction, of the Cg context, <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> now exposes methods to get and set the active context and no longer creates a context of its own. This allows more flexibility within adapters, but is a breaking change. Adapters compiled for earlier versions will find themselves without a context at all. </dd></dl>
 <dl class="since"><dt><b>Since:</b></dt><dd>0.2.0</dd></dl>
 <p>This can avoid some crashes with certain adapters due to context lifespan, and allows adapters to handle cleanup. If at all possible, the Cg context should be created in the adapter's constructor and destroyed in the adapter's destructor, but this is left up to the discretion of the adapter. The core releases and invalidates all objects when the core is reset and all Cg-derived resources are released when the context is set to null.</p>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>Adapters must not create any shaders or parameters until they have provided the core with a valid context. Errors will be returned if this is attempted. To fully support Voodoo features, adapter's must not directly use the context where the core provides methods to handle a particular feature. </dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>Adapters must not create any shaders or parameters until they have provided the core with a valid context. Errors will be returned if this is attempted. To fully support Voodoo features, adapter's must not directly use the context where the core provides methods to handle a particular feature.</dd></dl>
+<h2><a class="anchor" id="voodoo_spec_adapter_caps"></a>
+Capabilities</h2>
+<p>Voodoo provides a mechanism for shaders to verify the hardware has certain capabilities, for the shader in general or a particular technique. If the hardware does not meet these caps, as reported by the adapter, the shader will fail to load or the technique fail to validate. Adapters must provide accurate values for all given caps, and may provide more.</p>
+<p>Capabilities are validated as a minimum and true is considered greater than false, thus a target requirement of 4 will succeed with 4 or more, and a flow control requirement of false will succeed on true or false.</p>
+<p>Most instruction and type errors, including instruction count, will cause the shader or technique to fail during compilation or validation. These caps are primarily for requirements not fatal in the compiler.</p>
+<h3><a class="anchor" id="voodoo_graphics_shaders_caps_textures"></a>
+CapsTextures</h3>
+<p>Reports the maximum number of textures which may be bound at a time. </p>
+<dl class="user"><dt><b>Type</b></dt><dd>uint/UT_UInt32 </dd></dl>
+<dl class="user"><dt><b>Value</b></dt><dd>Typically 8, may be lower for especially old hardware.</dd></dl>
+<h3><a class="anchor" id="voodoo_graphics_shaders_caps_targets"></a>
+CapsTargets</h3>
+<p>Reports the maximum number of render targets which may be bound at a time. </p>
+<dl class="user"><dt><b>Type</b></dt><dd>uint/UT_UInt32 </dd></dl>
+<dl class="user"><dt><b>Value</b></dt><dd>Typically 4, may be lower for old hardware.</dd></dl>
+<h3><a class="anchor" id="voodoo_graphics_shaders_caps_lights"></a>
+CapsLights</h3>
+<p>Reports the maximum number of hardware lights available. </p>
+<dl class="user"><dt><b>Type</b></dt><dd>uint/UT_UInt32 </dd></dl>
+<dl class="user"><dt><b>Value</b></dt><dd>Typically 8, may be lower for especially old hardware.</dd></dl>
+<h3><a class="anchor" id="voodoo_graphics_shaders_caps_instructions"></a>
+CapsInstructions</h3>
+<p>Reports the maximum number of instructions that may be run in a single program. The first pair are vertex, the second pixel; the first value of each pair is arithmetic instructions, the second is texture. If vertex textures are not available, the second value will be 0, otherwise it will represent. </p>
+<dl class="user"><dt><b>Type</b></dt><dd>uint4/UT_UInt32[4] </dd></dl>
+<dl class="user"><dt><b>Value</b></dt><dd>The first pair will typically be 65536/0 for VS2.0 and earlier, 65536/4 for VS3.0 or better. The second pair will typically be 8/4 for PS1.0-1.3, 6/8 per phase for PS1.4, 32/64 for PS2.0, 512/512 for PS2.0x, 65536/65536 for 3.0, and unlimited for 4.0 and better.</dd></dl>
+<h3><a class="anchor" id="voodoo_graphics_shaders_caps_registers"></a>
+CapsRegisterCount</h3>
+<p>Reports how many registers are available, and what varieties. The first pair of values are vertex, the second are pixel; the first value in each pair is temporary registers, the second is static. </p>
+<dl class="user"><dt><b>Type</b></dt><dd>uint4/UT_UInt32[4] </dd></dl>
+<dl class="user"><dt><b>Value</b></dt><dd>Typically 12/96/2/8 for SM1.1-1.4, 12/256/12/32 for SM2.0, 32/256/32/224 for SM3.0, and 4096/16x4096/4096/16x4096 for SM4.0 and better.</dd></dl>
+<h3><a class="anchor" id="voodoo_graphics_shaders_caps_flowcontrol"></a>
+CapsFlowControl</h3>
+<p>Reports whether flow control is available, and what varieties. The first pair of values are vertex, the second are pixel; the first value in each pair is static flow control, second is dynamic. </p>
+<dl class="user"><dt><b>Type</b></dt><dd>bool4/UT_Bool[4] </dd></dl>
+<dl class="user"><dt><b>Value</b></dt><dd>Typically no/no in both pairs for SM1.0-1.4, yes/no for SM2.0, and yes/yes for SM3.0 and better. </dd></dl>
 </div></div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 6 2011 08:38:59 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 14 2011 14:04:51 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

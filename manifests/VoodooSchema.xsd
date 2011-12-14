@@ -3,6 +3,7 @@
     attributeFormDefault="unqualified" elementFormDefault="qualified" 
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
+    <!-- Basic types: -->
     <xs:simpleType name="Uuid">
         <xs:annotation>
             <xs:documentation>Basic Uuid type, in uppercase hex with no braces.</xs:documentation>
@@ -13,6 +14,7 @@
             </xs:pattern>
         </xs:restriction>
     </xs:simpleType>
+    
     <xs:complexType name="NamedString">
         <xs:simpleContent>
             <xs:extension base="xs:string">
@@ -20,6 +22,8 @@
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
+
+    <!-- Framework types: -->
     <xs:complexType name="Remote">
         <xs:annotation>
             <xs:documentation>Remote manifest source, with readable name and manifest Uri.</xs:documentation>
@@ -29,21 +33,23 @@
             <xs:element name="Uri" type="xs:anyURI" />
         </xs:sequence>
     </xs:complexType>
+    
     <xs:complexType name="Package">
         <xs:annotation>
-            <xs:documentation>Package with Identifying PackId, readable name, and provIding manifest. Optionally, the latest version may be given.</xs:documentation>
+            <xs:documentation>Package with identifying PackId, readable name, and providing manifest. Optionally, the latest version may be given.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="PackId" type="Uuid" />
             <xs:element name="Name" type="xs:string" />
             <xs:element name="Version" type="xs:string" minOccurs="0" />
-            <xs:element name="ManifestUri" type="xs:anyURI" />            
+            <xs:element name="HomeUri" type="xs:anyURI" />            
         </xs:sequence>
     </xs:complexType>
+    
     <xs:complexType name="Module">
         <xs:annotation>
-            <xs:documentation>Module with Identifying LibId, readable name and parent package for a module (Package is the PackId of the package provIding this module). 
-                Optionally, install paths for the module and config module may be provIded.</xs:documentation>
+            <xs:documentation>Module with identifying LibId, readable name and parent package for a module (Package is the PackId of the package providing this module). 
+                Optionally, install paths for the module and config module may be provided.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="LibId" type="Uuid" />
@@ -53,9 +59,10 @@
             <xs:element name="Package" type="Uuid" />
         </xs:sequence>
     </xs:complexType>
+    
     <xs:complexType name="Class">
         <xs:annotation>
-            <xs:documentation>Class with Identifying ClassId, readable name and provIder module for a class (Module is the LibId of the module implementing this class).</xs:documentation>
+            <xs:documentation>Class with identifying ClassId, readable name and provider module for a class (Module is the LibId of the module implementing this class).</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="ClassId" type="Uuid" />
@@ -63,6 +70,7 @@
             <xs:element name="Module" type="Uuid" />
         </xs:sequence>
     </xs:complexType>
+    
     <xs:complexType name="Hook">
         <xs:annotation>
             <xs:documentation>Hook with target and config files, readable name and activity flag for an installed hook.</xs:documentation>
@@ -74,6 +82,7 @@
             <xs:element name="Config" type="xs:string" />
         </xs:sequence>
     </xs:complexType>
+    
     <xs:complexType name="Default">
         <xs:annotation>
             <xs:documentation>Default hook template with target filter, default config file and required packages for a hook. Used by the hook wizard to create hooks.</xs:documentation>
@@ -86,22 +95,25 @@
             <xs:element name="Packages" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" name="Package" type="Uuid" />
+                        <xs:element name="PackId" type="Uuid" maxOccurs="unbounded" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+
+    <!-- Management/packaging types: -->
     <xs:complexType name="MessageSet">
         <xs:annotation>
             <xs:documentation>Set of standard messages for a single language.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element minOccurs="0" name="Pre" type="xs:string" />
-            <xs:element minOccurs="0" name="Post" type="xs:string" />
+            <xs:element name="Pre" type="xs:string" minOccurs="0" />
+            <xs:element name="Post" type="xs:string" minOccurs="0" />
         </xs:sequence>
         <xs:attribute name="Id" type="xs:language" use="required" />
     </xs:complexType>
+    
     <xs:complexType name="TranslationSet">
         <xs:annotation>
             <xs:documentation>Set of standard messages with various language translations.</xs:documentation>
@@ -115,28 +127,56 @@
             <xs:documentation>Objects modified by this set of changes. File paths should be relative.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded" name="Module" type="Module" />
-            <xs:element minOccurs="0" maxOccurs="unbounded" name="Default" type="Default" />
-            <xs:element minOccurs="0" maxOccurs="unbounded" name="File" type="xs:string" />
+            <xs:element name="Module" type="Module" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Default" type="Default" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="File" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="Checksum" type="xs:string" />
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
+    
     <xs:complexType name="PackageVersion">
         <xs:annotation>
             <xs:documentation>Single version of package files, with version-specific messages and parent version.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element minOccurs="1" name="Description" type="xs:string" />
-            <xs:element minOccurs="0" name="Messages" type="TranslationSet" />
-            <xs:element minOccurs="0" name="Remove" type="ChangeSet" />
-            <xs:element minOccurs="0" name="Create" type="ChangeSet" />
+            <xs:element name="Description" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Description for this version, Markdown formatted.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VersionUri" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Root Uri for version resources. All paths must be relative to both this and the Voodoo root path.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Messages" type="TranslationSet" minOccurs="0" />
+            <xs:element name="Remove" type="ChangeSet" minOccurs="0" />
+            <xs:element name="Create" type="ChangeSet" minOccurs="0" />
         </xs:sequence>
         <xs:attribute name="Id" type="xs:string" />
-        <xs:attribute name="Parent" type="xs:string" use="optional" />
+        <xs:attribute name="Prev" type="xs:string" use="optional" />
     </xs:complexType>
+    
     <xs:complexType name="PackageManifest">
         <xs:sequence>
             <xs:element name="Package" type="Package" />
-            <xs:element name="Description" type="xs:string" />
+            <xs:element name="Description" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Description for this package, Markdown formatted.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PackageUri" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Root Uri for package resources. Package resources are located at $(RemoteUri)/$(PackageUri)/$(VersionUri)/$(GivenPath).</xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="Messages" type="TranslationSet" />
             <xs:element name="Versions">
                 <xs:complexType>
@@ -147,12 +187,14 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+    
     <xs:complexType name="RemoteManifest">
         <xs:sequence>
-            <xs:element name="Package" type="Package" maxOccurs="unbounded" />
+            <xs:element name="Package" type="xs:string" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="GlobalRegistry">
+    
+    <xs:complexType name="RegistryChunk">
         <xs:sequence>
             <xs:element name="Remotes">
                 <xs:complexType>
@@ -201,6 +243,7 @@
         <xs:attribute name="Language" type="xs:language" />
         <xs:attribute name="BinPrefix" type="xs:string" use="optional" />
     </xs:complexType>
+    
     <xs:complexType name="ConfigFile">
         <xs:sequence>
             <xs:element name="Global">
@@ -266,19 +309,21 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+
+    <!-- Possible roots for a Voodoo Xml document: -->
     <xs:element name="VoodooRemote" type="RemoteManifest">
         <xs:annotation>
-            <xs:documentation>ProvIdes a list of packages and defaults available on this server.</xs:documentation>
+            <xs:documentation>Provides a list of packages and defaults available on this server.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="VoodooPackage" type="PackageManifest">
         <xs:annotation>
-            <xs:documentation>ProvIdes version information on a package.</xs:documentation>
+            <xs:documentation>Provides version information on a package.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="VoodooRegistry" type="GlobalRegistry">
+    <xs:element name="VoodooRegistry" type="RegistryChunk">
         <xs:annotation>
-            <xs:documentation>An Xml representation of the Voodoo registry key.</xs:documentation>
+            <xs:documentation>An Xml representation of the Voodoo registry key. Can be imported into the registry, or created by exporting it.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="VoodooConfig" type="ConfigFile">

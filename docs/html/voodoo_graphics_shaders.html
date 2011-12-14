@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.2-2-g7ab8ed9</span>
+   &#160;<span id="projectnumber">framework-5.3-4-gdfb1181</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -58,7 +58,15 @@
 <div class="textblock"><p>Shaders are complete effects designed to be run on programmable graphics hardware.</p>
 <p>They control almost all aspects of how a piece of geometry is displayed.</p>
 <p>Each shader may have one or more techniques. A technique describes a full rendering process, and may have one or more passes. Each pass describes a particular way to render the given geometry, and may have multiple programs. Each program controls a particular part of the render process. In addition, shaders, techniques and passes contain some metadata used by the system to control how and where they are rendered. For any given piece of geometry, one technique is in use and the geometry is drawn once with each pass of that technique.</p>
-<h2><a class="anchor" id="voodoo_graphics_shaders_stages"></a>
+<h2><a class="anchor" id="voodoo_graphics_shaders_caps"></a>
+Capabilities</h2>
+<p>Voodoo shaders and techniques may specify capability requirements in their annotations. Caps are listed in <a class="el" href="voodoo_spec_adapter.html#voodoo_spec_adapter_caps">Capabilities</a>. Capability requirements are given like so:</p>
+<div class="fragment"><pre class="fragment"> technique MultiDraw
+     &lt; uint CapTarget = 4; &gt;
+ {
+     ...
+ }
+</pre></div><h2><a class="anchor" id="voodoo_graphics_shaders_stages"></a>
 Program Stages</h2>
 <p>Each program is designed to control a single specific stage of the render pipeline, typically handling how a data type is transformed (geometry, vertex, fragment/pixel). The two most common stages, vertex and fragment, work with existing data and transform it. Both have been supported since OpenGL 1.4 and DirectX 8 in some form, and almost all systems today support both. Given Voodoo's focus, it is safe to assume both stages are supported (the exact level of support may vary, however).</p>
 <p>The fragment stage handles each pixel (or fragment) as it is rendered. The fragment program handles lighting in per-pixel lighting solutions, as well applying and blending texture stages, blending vertex colors, and any other operations that may vary for each pixel rendered.</p>
@@ -101,7 +109,7 @@ Shader Targets</h3>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 6 2011 08:38:59 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 14 2011 14:04:51 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
