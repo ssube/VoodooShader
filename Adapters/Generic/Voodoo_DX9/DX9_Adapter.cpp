@@ -236,7 +236,7 @@ namespace VoodooShader
             // Bind render targets
             for (uint32_t i = 0; i < 4; ++i)
             {
-                this->SetTarget(0, m_BoundPass->GetTarget(i));
+                this->SetTarget(0, pPass->GetTarget(i));
             }
 
             m_BoundPass = pPass;

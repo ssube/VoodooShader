@@ -187,7 +187,7 @@ namespace VoodooShader
         m_DomainProgram = cgGetPassProgram(m_CgPass, CG_TESSELLATION_CONTROL_DOMAIN);
         m_HullProgram = cgGetPassProgram(m_CgPass, CG_TESSELLATION_EVALUATION_DOMAIN);
         
-        char * targetAnnotationName = "target0";
+        char targetAnnotationName[] = "target0";
 
         for (uint8_t i = 0; i < 4; ++i)
         {
