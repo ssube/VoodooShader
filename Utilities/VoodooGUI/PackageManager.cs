@@ -103,7 +103,6 @@ namespace VoodooUI
         {
             // Get the version
             PackageManifest pm = null;
-            String source = null;
             String target = null;
                         
             TreeNode node = cPackageTree.SelectedNode;
@@ -122,16 +121,8 @@ namespace VoodooUI
                     target = pm.Package.Version;
                 }
             }
-
-            String msg;
-            if (source == null)
-            {
-                msg = String.Format("Install package {0} to {1}.\nContinue?", pm.Package.Name, target);
-            } else {
-                msg = String.Format("Update package {0} from {1} to {2}.\nContinue?", pm.Package.Name, source, target);
-            }
             
-            if (MessageBox.Show(msg, "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show(String.Format("Update package {0} to version {2}.\nContinue?", pm.Package.Name, target), "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 pm.Update(target);
             }

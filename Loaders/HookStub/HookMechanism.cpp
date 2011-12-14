@@ -20,7 +20,8 @@
 
 #include "HookMechanism.hpp"
 
-#include <tchar.h>
+#include "Support.inl"
+
 #include <stdio.h>
 
 HINSTANCE gHookLoader = nullptr;
@@ -116,78 +117,6 @@ void WINAPI RemoveGlobalHook(HHOOK hook)
     }
 }
 
-#define MAX_KEY_LENGTH 255
-
-bool WINAPI SearchHooks(_In_z_ TCHAR * moduleName)
-{
-    HKEY hookRoot = nullptr;
-
-    if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader\\Hooks"), 0, KEY_READ, &hookRoot) == ERROR_SUCCESS && hookRoot != nullptr)
-    {
-        bool found = SearchHooksInKey(moduleName, hookRoot);
-        RegCloseKey(hookRoot);
-        if (found) return found;
-    }
-
-    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("Software\\VoodooShader\\Hooks"), 0, KEY_READ, &hookRoot) == ERROR_SUCCESS && hookRoot != nullptr)
-    {
-        bool found = SearchHooksInKey(moduleName, hookRoot);
-        RegCloseKey(hookRoot);
-        if (found) return found;
-    }
-
-    return false;
-}
-
-bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key)
-{
-    DWORD index = 0, nameSize = MAX_KEY_LENGTH;
-    TCHAR hookID[MAX_KEY_LENGTH];
-
-    while (RegEnumKeyEx(key, index++, hookID, &nameSize, NULL, NULL, NULL, NULL) == ERROR_SUCCESS && nameSize > 0)
-    {
-        HKEY hookKey = nullptr;
-
-        if (RegOpenKeyEx(key, hookID, 0, KEY_READ, &hookKey) == ERROR_SUCCESS)
-        {
-            bool found = false;
-            DWORD valueType = 0, valueSize = 1024;
-            TCHAR valueBuffer[1024];
-
-            if (RegQueryValueEx(hookKey, TEXT("active"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
-            {
-                if (valueBuffer[0] == TEXT('1') || _tcsicmp(valueBuffer, TEXT("true")) == 0)
-                {
-                    if (RegQueryValueEx(hookKey, TEXT("target"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
-                    {
-                        found = _tcscmp(moduleName, valueBuffer) == 0;
-
-                        FILE * pf = nullptr;
-                        if (_tfopen_s(&pf, gFilePath, TEXT("a")) == 0)
-                        {
-                            const TCHAR * match = TEXT("!=");
-                            if (found)
-                            {
-                                match = TEXT(" == ");
-                            }
-                            _ftprintf_s(pf, TEXT("%s %s %s\n"), moduleName, match, valueBuffer);
-                            fclose(pf);
-                        }
-                    }
-                }
-            }
-
-            RegCloseKey(hookKey);
-
-            if (found) return found;
-        }
-
-        nameSize = MAX_KEY_LENGTH;
-    }
-
-    return false;
-}
-
 bool WINAPI LoadFullLoader()
 {
     int result = 0;
@@ -198,12 +127,22 @@ bool WINAPI LoadFullLoader()
         DWORD valueType = 0, valueSize = 1024;
         TCHAR valueBuffer[1024];
 
-        if (RegQueryValueEx(rootPath, TEXT("path"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
+        if (RegQueryValueEx(rootPath, TEXT("Path"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
         {
             OutputDebugString(valueBuffer);
             OutputDebugString(TEXT("\n"));
 
-            _tcscat(valueBuffer, TEXT("\\bin\\Voodoo_Loader.dll"));
+            DWORD prefixType = 0, prefixSize = 1024;
+            TCHAR prefixBuffer[1024];
+
+            if (RegQueryValueEx(rootPath, TEXT("BinPrefix"), NULL, &prefixType, (BYTE*)prefixBuffer, &prefixSize) == ERROR_SUCCESS)
+            {
+                StringCchCat(valueBuffer, 1024, prefixBuffer);
+            } else {
+                StringCchCat(valueBuffer, 1024, TEXT("\\bin\\"));
+            }
+
+            StringCchCat(valueBuffer, 1024, TEXT("\\Voodoo_Loader.dll"));
 
             gFullLoader = LoadLibraryEx(valueBuffer, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 

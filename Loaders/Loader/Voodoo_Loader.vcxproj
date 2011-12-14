@@ -71,7 +71,6 @@
     <ClCompile Include="Exports_D3D9.cpp" />
     <ClCompile Include="Exports_DInput.cpp" />
     <ClCompile Include="Exports_DSound8.cpp" />
-    <ClCompile Include="SysAPIHandler.cpp" />
     <ClCompile Include="FunctionIntercept.cpp" />
     <ClCompile Include="VoodooTie.cpp" />
   </ItemGroup>
@@ -81,7 +80,6 @@
     <ClInclude Include="VoodooTie.hpp" />
     <ClInclude Include="Loader_Version.hpp" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="SysAPIHandler.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Loader.rc" />

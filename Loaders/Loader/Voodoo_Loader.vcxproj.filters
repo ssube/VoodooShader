@@ -13,9 +13,6 @@
     <ClInclude Include="ExportLoadpoints.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="SysAPIHandler.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="VoodooTie.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -36,9 +33,6 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="VoodooTie.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="SysAPIHandler.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Exports_D3D9.cpp">

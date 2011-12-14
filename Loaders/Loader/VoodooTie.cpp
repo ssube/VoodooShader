@@ -20,9 +20,9 @@
 
 #include "VoodooTie.hpp"
 
-#include "SysAPIHandler.hpp"
-
 #include "Loader_Version.hpp"
+
+#include "Support.inl"
 
 #include <string>
 
@@ -30,7 +30,9 @@ VoodooShader::ICore * gVoodooCore = nullptr;
 VoodooShader::IAdapter * gVoodooAdapter = nullptr;
 VoodooShader::InitParams gInitParams;
 HINSTANCE gLoaderHandle = nullptr;
-TCHAR gVoodooPath[MAX_PATH] = {0};
+TCHAR gVoodooPath[MAX_PATH] = { 0 };
+TCHAR gVoodooBinPrefix[MAX_PATH] = { 0 };
+TCHAR gVoodooBinPath[MAX_PATH] = { 0 };
 
 const VoodooShader::Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOADER);
 
@@ -72,46 +74,6 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
     }
 
     return TRUE;
-}
-
-bool WINAPI GetVoodooPath()
-{
-    if (gVoodooPath[0] != 0) return true;
-
-    bool result = false;
-    HKEY rootPath = nullptr;
-
-    if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader"), 0, KEY_READ, &rootPath) == ERROR_SUCCESS && rootPath != nullptr)
-    {
-        DWORD valueType = 0, valueSize = MAX_PATH;
-
-        if (RegQueryValueEx(rootPath, TEXT("path"), NULL, &valueType, (BYTE*)gVoodooPath, &valueSize) == ERROR_SUCCESS)
-        {
-            OutputDebugString(gVoodooPath);
-            OutputDebugString(TEXT("\n"));
-            result = true;
-        }
-
-        RegCloseKey(rootPath);
-        if (result) return result;
-    }
-
-    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("Software\\VoodooShader"), 0, KEY_READ, &rootPath) == ERROR_SUCCESS && rootPath != nullptr)
-    {
-        DWORD valueType = 0, valueSize = MAX_PATH;
-
-        if (RegQueryValueEx(rootPath, TEXT("path"), NULL, &valueType, (BYTE*)gVoodooPath, &valueSize) == ERROR_SUCCESS)
-        {
-            OutputDebugString(gVoodooPath);
-            OutputDebugString(TEXT("\n"));
-            result = true;
-        }
-
-        RegCloseKey(rootPath);
-        if (result) return result;
-    }
-
-    return result;
 }
 
 /**
@@ -181,12 +143,12 @@ bool WINAPI LoadVoodoo()
     wcscpy_s(pathLocalRoot, targetPath.c_str());
 
     // Get the global root
-    GetVoodooPath();
+    GetVoodooPath(MAX_PATH, gVoodooPath);
 
     HMODULE coreLibrary = nullptr;
 
-    wcscpy_s(pathCoreLib, gVoodooPath);
-    wcscat_s(pathCoreLib, L"\\bin\\Voodoo_Core.dll");
+    wcscpy_s(pathCoreLib, gVoodooBinPath);
+    wcscat_s(pathCoreLib, L"\\Voodoo_Core.dll");
 
     coreLibrary = LoadLibraryEx(pathCoreLib, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
 

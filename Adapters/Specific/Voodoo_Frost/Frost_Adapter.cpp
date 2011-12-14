@@ -383,8 +383,15 @@ namespace VoodooShader
 
         bool VOODOO_METHODTYPE FrostAdapter::ConnectTexture(_In_ IParameter* const pParam, _In_opt_ ITexture* const pTexture)
         {
+            if (!pParam) return false;
+
             pParam->SetTexture(pTexture);
-            cgGLSetupSampler(pParam->GetCgParameter(), (GLuint) pTexture->GetData());
+            if (pTexture)
+            {
+                cgGLSetupSampler(pParam->GetCgParameter(), (GLuint) pTexture->GetData());
+            } else {
+                cgGLSetupSampler(pParam->GetCgParameter(), 0);
+            }
             return true;
         }
 
@@ -433,7 +440,7 @@ namespace VoodooShader
                 IPassRef pass = tech->GetPass(curpass);
 
                 this->SetPass(pass.get());
-                this->DrawGeometry(0, 0, nullptr, VF_None);
+                //this->DrawGeometry(0, 0, nullptr, VF_None);
                 this->ResetPass(pass.get());
 
                 ITextureRef target = pass->GetTarget(0);

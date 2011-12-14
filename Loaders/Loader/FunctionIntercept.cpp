@@ -21,8 +21,9 @@
 #include "FunctionIntercept.hpp"
 
 #include "ExportLoadpoints.hpp"
-#include "SysAPIHandler.hpp"
 #include "VoodooTie.hpp"
+
+#include "Support.inl"
 
 #include <strsafe.h>
 #include <map>

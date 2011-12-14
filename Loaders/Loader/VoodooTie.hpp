@@ -48,8 +48,6 @@ VoodooShader::IObject *         VOODOO_CALLTYPE API_ClassCreate(_In_ const uint3
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
 
-bool WINAPI GetVoodooPath();
-
 bool WINAPI LoadVoodoo();
 bool WINAPI UnloadVoodoo();
 /**

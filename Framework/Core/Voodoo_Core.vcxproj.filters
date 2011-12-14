@@ -219,5 +219,8 @@
     <None Include="Docs_MainPage.dox">
       <Filter>Docs</Filter>
     </None>
+    <None Include="Support.inl">
+      <Filter>Headers</Filter>
+    </None>
   </ItemGroup>
 </Project>
