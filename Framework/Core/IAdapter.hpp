@@ -110,7 +110,8 @@ namespace VoodooShader
          * @return True if the target was successfully bound.
          *
          * @note Some texture formats, combinations of formats, textures and indices may be invalid for use as a render
-         *     target. Many cards allow up to 4 targets, but most do not allow mixing formats.
+         *     target. Many cards allow up to 4 targets, but most do not allow mixing formats. Voodoo only guarantees one
+         *     target, the adapter should be queried for the actual count (property 'TargetMax').
          */
         VOODOO_METHOD(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget = nullptr) PURE;
         /**

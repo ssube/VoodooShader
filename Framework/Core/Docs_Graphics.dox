@@ -34,6 +34,19 @@ namespace VoodooShader
       * metadata used by the system to control how and where they are rendered. For any given piece of geometry, one
       * technique is in use and the geometry is drawn once with each pass of that technique.
       *
+      * @section voodoo_graphics_shaders_caps Capabilities
+      *
+      * Voodoo shaders and techniques may specify capability requirements in their annotations. Caps are listed in
+      * @ref voodoo_spec_adapter_caps. Capability requirements are given like so:
+      *
+      * @code
+      * technique MultiDraw
+      *     < uint CapTarget = 4; >
+      * {
+      *     ...
+      * }
+      * @endcode
+      *
       * @section voodoo_graphics_shaders_stages Program Stages
       *
       * Each program is designed to control a single specific stage of the render pipeline, typically handling how a data

@@ -504,7 +504,7 @@ namespace VoodooShader
 
             if (strname == L"SdkVersion" && value->Type == UT_UInt32)
             {
-                m_SdkVersion = value->VUInt32;
+                m_SdkVersion = value->VUInt32[0];
                 return true;
             } else if (strname == L"IDirect3D8" && value->Type == UT_PVoid) {
                 using VoodooShader::VoodooDX8::CVoodoo3D8;
@@ -536,7 +536,7 @@ namespace VoodooShader
             if (strname == L"SdkVersion")
             {
                 value->Type = UT_UInt32;
-                value->VUInt32 = m_SdkVersion;
+                value->VUInt32[0] = m_SdkVersion;
                 return true;
             }
 

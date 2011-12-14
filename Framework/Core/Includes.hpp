@@ -551,17 +551,19 @@ namespace VoodooShader
      */
     struct Variant
     {
-        UnionType Type;
+        UnionType   Type;
+        uint32_t    Components;
+
         union
         {
-            bool        VBool;
-            int8_t      VInt8;
-            uint8_t     VUInt8;
-            int16_t     VInt16;
-            uint16_t    VUInt16;
-            int32_t     VInt32;
-            uint32_t    VUInt32;
-            float       VFloat;
+            bool        VBool[4];
+            int8_t      VInt8[4];
+            uint8_t     VUInt8[4];
+            int16_t     VInt16[4];
+            uint16_t    VUInt16[4];
+            int32_t     VInt32[4];
+            uint32_t    VUInt32[4];
+            float       VFloat[4];
             double      VDouble;
             Uuid *      VUuid;
             String *    VString;

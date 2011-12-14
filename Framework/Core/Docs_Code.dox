@@ -230,6 +230,68 @@ namespace VoodooShader
       *     Errors will be returned if this is attempted. To fully support Voodoo features, adapter's must not directly use
       *     the context where the core provides methods to handle a particular feature.
       *
+      * @section voodoo_spec_adapter_caps Capabilities
+      *
+      * Voodoo provides a mechanism for shaders to verify the hardware has certain capabilities, for the shader in general
+      * or a particular technique. If the hardware does not meet these caps, as reported by the adapter, the shader will
+      * fail to load or the technique fail to validate. Adapters must provide accurate values for all given caps, and may
+      * provide more.
+      *
+      * Capabilities are validated as a minimum and true is considered greater than false, thus a target requirement of 4 
+      * will succeed with 4 or more, and a flow control requirement of false will succeed on true or false.
+      *
+      * Most instruction and type errors, including instruction count, will cause the shader or technique to fail during 
+      * compilation or validation. These caps are primarily for requirements not fatal in the compiler.
+      *
+      * @subsection voodoo_graphics_shaders_caps_textures CapsTextures
+      * Reports the maximum number of textures which may be bound at a time. 
+      * @par Type
+      *     uint/UT_UInt32
+      * @par Value
+      *     Typically 8, may be lower for especially old hardware.
+      *
+      * @subsection voodoo_graphics_shaders_caps_targets CapsTargets
+      * Reports the maximum number of render targets which may be bound at a time. 
+      * @par Type
+      *     uint/UT_UInt32
+      * @par Value
+      *     Typically 4, may be lower for old hardware.
+      *
+      * @subsection voodoo_graphics_shaders_caps_lights CapsLights
+      * Reports the maximum number of hardware lights available. 
+      * @par Type
+      *     uint/UT_UInt32
+      * @par Value
+      *     Typically 8, may be lower for especially old hardware.
+      *
+      * @subsection voodoo_graphics_shaders_caps_instructions CapsInstructions
+      * Reports the maximum number of instructions that may be run in a single program. The first pair are vertex, the
+      * second pixel; the first value of each pair is arithmetic instructions, the second is texture. If vertex textures
+      * are not available, the second value will be 0, otherwise it will represent.
+      * @par Type
+      *     uint4/UT_UInt32[4]
+      * @par Value
+      *     The first pair will typically be 65536/0 for VS2.0 and earlier, 65536/4 for VS3.0 or better. The second pair
+      *     will typically be 8/4 for PS1.0-1.3, 6/8 per phase for PS1.4, 32/64 for PS2.0, 512/512 for PS2.0x, 
+      *     65536/65536 for 3.0, and unlimited for 4.0 and better.
+      *
+      * @subsection voodoo_graphics_shaders_caps_registers CapsRegisterCount
+      * Reports how many registers are available, and what varieties. The first pair of values are vertex, the second are
+      * pixel; the first value in each pair is temporary registers, the second is static.
+      * @par Type
+      *     uint4/UT_UInt32[4]
+      * @par Value
+      *     Typically 12/96/2/8 for SM1.1-1.4, 12/256/12/32 for SM2.0, 32/256/32/224 for SM3.0, and 
+      *     4096/16x4096/4096/16x4096 for SM4.0 and better.
+      *
+      * @subsection voodoo_graphics_shaders_caps_flowcontrol CapsFlowControl
+      * Reports whether flow control is available, and what varieties. The first pair of values are vertex, the second are
+      * pixel; the first value in each pair is static flow control, second is dynamic.
+      * @par Type
+      *     bool4/UT_Bool[4]
+      * @par Value
+      *     Typically no/no in both pairs for SM1.0-1.4, yes/no for SM2.0, and yes/yes for SM3.0 and better.
+      *
       * @page voodoo_quality Quality (Code and Testing)
       *
       * The Voodoo Shader Framework is designed to work across many games, created across a wide variety of compilers,

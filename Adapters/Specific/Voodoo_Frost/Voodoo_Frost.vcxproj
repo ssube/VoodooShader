@@ -42,7 +42,7 @@
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(BoostInclude);$(CgInclude);$(GlewInclude);$(IncludePath)</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(CgLib);$(GlewLib);$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(CgInclude);$(GlewInclude);$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(BoostInclude);$(CgInclude);$(GlewInclude);$(IncludePath)</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(CgLib);$(GlewLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

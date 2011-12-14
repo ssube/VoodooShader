@@ -172,6 +172,8 @@ namespace VoodooShader
             cgSetPassState(cgpass);
 
             m_BoundPass = pPass;
+
+            return true;
         }
 
         IPass * VOODOO_METHODTYPE FrostAdapter::GetPass() CONST
@@ -181,7 +183,10 @@ namespace VoodooShader
 
         bool VOODOO_METHODTYPE FrostAdapter::ResetPass(_In_ IPass * pPass)
         {
+            if (!pPass) return false;
+
             cgResetPassState(pPass->GetCgPass());
+            return true;
         }
 
         bool VOODOO_METHODTYPE FrostAdapter::SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget)
@@ -354,7 +359,6 @@ namespace VoodooShader
             }
             else if (pc == PC_Sampler)
             {
-
                 GLuint textureID = (GLuint) pParam->GetTexture()->GetData();
 
                 cgGLSetupSampler(cgparam, textureID);
@@ -362,7 +366,10 @@ namespace VoodooShader
             else
             {
                 m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to apply parameter %s.", pParam->ToString().GetData());
+                return false;
             }
+
+            return true;
         }
 
         bool VOODOO_METHODTYPE FrostAdapter::SetProperty(const wchar_t * name, Variant * pValue)
