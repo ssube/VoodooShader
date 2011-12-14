@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{88003ADC-5DD3-4CF7-B636-9F7F16DECEB3}</ProjectGuid>
     <RootNamespace>Filesystem</RootNamespace>
-    <ProjectName>Voodoo_Filesystem</ProjectName>
+    <ProjectName>Voodoo_WFilesystem</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

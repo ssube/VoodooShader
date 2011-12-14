@@ -150,20 +150,20 @@ namespace VoodooShader
             m_ConfigFile = new pugi::xml_document();
 
             // Try loading the config file from each major location
-            String configPath = m_Parser->Parse(L"$(runroot)\\$(config)", PF_PathCanon);
+            String configPath = m_Parser->Parse(L"$(config)", PF_PathCanon);
             pugi::xml_parse_result result = m_ConfigFile->load_file(configPath.GetData());
 
             if (!result)
             {
-                configPath = m_Parser->Parse(L"$(localroot)\\$(config)");
+                configPath = m_Parser->Parse(L"$(runroot)\\$(config)", PF_PathCanon);
                 result = m_ConfigFile->load_file(configPath.GetData());
                 if (!result)
                 {
-                    configPath = m_Parser->Parse(L"$(globalroot)\\$(config)");
+                    configPath = m_Parser->Parse(L"$(localroot)\\$(config)", PF_PathCanon);
                     result = m_ConfigFile->load_file(configPath.GetData());
                     if (!result)
                     {
-                        configPath = m_Parser->Parse(L"$(config)");
+                        configPath = m_Parser->Parse(L"$(globalroot)\\$(config)", PF_PathCanon);
                         result = m_ConfigFile->load_file(configPath.GetData());
                         if (!result)
                         {

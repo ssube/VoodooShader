@@ -30,6 +30,6 @@ namespace VoodooSharp
         [System.Xml.Serialization.XmlElementAttribute("Default")]
         public Default[] Default { get; set; }
         [System.Xml.Serialization.XmlElementAttribute("File")]
-        public string[] File { get; set; }
+        public CheckedFile[] File { get; set; }
     }
 }

@@ -54,11 +54,11 @@ namespace VoodooSharp
             {
                 if (Remove.File != null)
                 {
-                    foreach (String basename in Remove.File)
+                    foreach (CheckedFile basename in Remove.File)
                     {
                         try
                         {
-                            String fullpath = Path.GetFullPath(Path.Combine(GlobalRegistry.Instance.Path, basename));
+                            String fullpath = Path.GetFullPath(Path.Combine(GlobalRegistry.Instance.Path, basename.Filename));
                             if (!fullpath.StartsWith(GlobalRegistry.Instance.Path))
                             {
                                 Console.WriteLine("Illegal file path, aborting version change.", fullpath);
@@ -108,28 +108,41 @@ namespace VoodooSharp
                 {
                     WebClient wc = new WebClient();
                     wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
-                    foreach (String basename in Create.File)
+                    foreach (CheckedFile file in Create.File)
                     {
                         try
                         {
-                            String localpath = Path.GetFullPath(Path.Combine(GlobalRegistry.Instance.Path, basename));
+                            String localpath = Path.GetFullPath(Path.Combine(GlobalRegistry.Instance.Path, file.Filename));
+
                             if (!localpath.StartsWith(GlobalRegistry.Instance.Path))
                             {
                                 Console.WriteLine("Illegal file path, aborting version change.", localpath);
                                 Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
-                                Console.WriteLine("  File: {0}", basename);
+                                Console.WriteLine("  File: {0}", file);
                                 return false;
                             }
 
-                            String source = root + "/" + VersionUri + "/" + basename;
+                            String path = Path.GetDirectoryName(localpath);
+                            Directory.CreateDirectory(path);
+
+                            String source = root + "/" + VersionUri + "/" + file.Filename;
                             Console.WriteLine("Downloading: {0}", localpath);
                             wc.DownloadFile(source.ToString(), localpath);
-                            Console.WriteLine(" done.");
+                            Console.Write(" done. Verifying... ");
+                            String actualSum = VoodooHash.HashFile(localpath);
+                            if (actualSum.ToUpper() == file.Checksum.ToUpper())
+                            {
+                                Console.WriteLine("checksum succeeded.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("checksum failed!");
+                            }
                         }
                         catch (Exception exc)
                         {
                             Console.WriteLine("Error removing file. This file may need to be removed manually.");
-                            Console.WriteLine("  File: {0}", basename);
+                            Console.WriteLine("  File: {0}", file);
                             Console.WriteLine("  Error: {0}", exc.Message);
                         }
                     }
@@ -170,16 +183,16 @@ namespace VoodooSharp
             {
                 if (Create.File != null)
                 {
-                    foreach (String basename in Create.File)
+                    foreach (CheckedFile file in Create.File)
                     {
                         try
                         {
-                            String fullpath = Path.GetFullPath(Path.Combine(GlobalRegistry.Instance.Path, basename));
+                            String fullpath = Path.GetFullPath(Path.Combine(GlobalRegistry.Instance.Path, file.Filename));
                             if (!fullpath.StartsWith(GlobalRegistry.Instance.Path))
                             {
                                 Console.WriteLine("Illegal file path, aborting version change.", fullpath);
                                 Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
-                                Console.WriteLine("  File: {0}", basename);
+                                Console.WriteLine("  File: {0}", file);
                                 return false;
                             }
                             File.Delete(fullpath);
@@ -187,7 +200,7 @@ namespace VoodooSharp
                         catch (Exception exc)
                         {
                             Console.WriteLine("Error removing file. This file may need to be removed manually.");
-                            Console.WriteLine("  File: {0}", basename);
+                            Console.WriteLine("  File: {0}", file);
                             Console.WriteLine("  Error: {0}", exc.Message);
                         }
                     }

@@ -74,11 +74,25 @@ namespace VoodooSharp
         public string Path { get; set; }
         public string Language { get; set; }
         public string BinPrefix { get; set; }
+        public string DefaultRoot { get; set; }
+
+        public string BinPath
+        {
+            get
+            {
+                return System.IO.Path.Combine(Path, BinPrefix) + System.IO.Path.DirectorySeparatorChar;
+            }
+        }
 
         public static string Errors { get; set; }
 
         private GlobalRegistry()
         {
+            DefaultRoot = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VoodooShader\";
+            Path = DefaultRoot;
+            Language = "en-US";
+            BinPrefix = "bin\\";
+
             Remotes = new List<Remote>();
             Packages = new List<Package>();
             Modules = new List<Module>();
@@ -453,11 +467,16 @@ namespace VoodooSharp
             Errors = null;
 
             RegistryKey root = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\VoodooShader");
-            String defaultRoot = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\VoodooShader\";
 
-            Path = root.GetValue("Path", defaultRoot) as String;
+            if (root == null)
+            {
+                Errors = "Root does not exist.";
+                return;
+            }
+
+            Path = root.GetValue("Path", DefaultRoot) as String;
             Language = root.GetValue("Language", "en-US") as String;
-            BinPrefix = root.GetValue("BinPrefix", String.Empty) as String;
+            BinPrefix = root.GetValue("BinPrefix", "bin\\") as String;
 
             Remotes = ReadRemotes(root.OpenSubKey("Remotes")); if (Remotes == null) Remotes = new List<Remote>();
             Packages = ReadPackages(root.OpenSubKey("Packages")); if (Packages == null) Packages = new List<Package>();

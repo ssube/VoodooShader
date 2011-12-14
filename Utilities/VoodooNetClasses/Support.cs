@@ -18,6 +18,7 @@
  *   peachykeen@voodooshader.com
  */
 using System;
+using System.IO;
 using System.Text;
 using System.Security.Cryptography;
 using System.Xml;
@@ -46,6 +47,19 @@ namespace VoodooSharp
             }
 
             return sb.ToString();
+        }
+
+        public static String HashFile(String filename)
+        {
+            try
+            {
+                byte[] filedata = File.ReadAllBytes(filename);
+                return VoodooHash.Hash(filedata);
+            }
+            catch (Exception)
+            {
+                return String.Empty;
+            }
         }
     }
 
@@ -103,6 +117,21 @@ namespace VoodooSharp
         public String Name { get; set; }
 
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value { get; set; }
+        public String Value { get; set; }
+    }
+
+    [System.SerializableAttribute()]
+    public partial class CheckedFile
+    {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public String Checksum { get; set; }
+
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public String Filename { get; set; }
+
+        public override String ToString()
+        {
+            return String.Format("{0} ({1})", Filename, Checksum);
+        }
     }
 }

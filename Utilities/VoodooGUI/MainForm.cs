@@ -63,12 +63,18 @@ namespace VoodooUI
             cHook_Table.AutoGenerateColumns = false;
             cHook_Table.DataSource = m_Hooks;
 
-            m_NativeModule = LoadLibrary("Voodoo_HookStub.dll");
+            String stubPath = VoodooSharp.GlobalRegistry.Instance.BinPath + "\\Voodoo_HookStub.dll";
+            m_NativeModule = LoadLibrary(stubPath);
             if (m_NativeModule != IntPtr.Zero)
             {
                 m_InstallFunc = (InstallGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "InstallGlobalHook"), typeof(InstallGlobalHook));
                 m_RemoveFunc = (RemoveGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "RemoveGlobalHook"), typeof(RemoveGlobalHook));
             }
+            else
+            {
+                MessageBox.Show("Unable to load hook stub from:\n" + stubPath, "Hook Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             Menu_Hook_Enable(null, null);
         }
 

@@ -163,31 +163,30 @@ namespace VoodooShader
                 ILoggerRef logger = gpVoodooCore->GetLogger();
                 IAdapterRef adapter = gpVoodooCore->GetAdapter();
 
-                // IDirect3DBaseTexture9 * tex;
-                // IDirect3DSurface9 * rts;
-                // ;
-                // m_RealDevice->GetTexture(0, &tex);
-                // m_RealDevice->GetRenderTarget(0, &rts);
                 HRESULT hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_ThisFrame, nullptr, D3DTEXF_NONE);
                 if (FAILED(hr))
                 {
                     logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to stretch backbuffer to scratch texture.");
                 }
 
-                /*hr = m_RealDevice->SetRenderTarget(0, backbufferSurf);
-                if (FAILED(hr))
-                {
-                    logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to set render target.");
-                }*/
-
                 VoodooShader::ITechniqueRef tech = testShader->GetDefaultTechnique();
-                VoodooShader::IPassRef pass = tech->GetPass(0);
+                uint32_t passCount = tech->GetPassCount();
+                for (uint32_t i = 0; i < passCount; ++i)
+                {
+                    VoodooShader::IPassRef pass = tech->GetPass(i);
+                    if (pass)
+                    {
+                        hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_ThisFrame, nullptr, D3DTEXF_NONE);
+                        if (FAILED(hr))
+                        {
+                            logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to stretch backbuffer to scratch texture.");
+                        }
 
-                adapter->SetPass(pass.get());
-
-                adapter->DrawGeometry(0, 2, gpFSQuadVerts, (VertexFlags)(VF_Buffer|VF_Transformed));
-
-                adapter->ResetPass(pass.get());
+                        adapter->SetPass(pass.get());
+                        adapter->DrawGeometry(0, 2, gpFSQuadVerts, (VertexFlags)(VF_Buffer|VF_Transformed));
+                        adapter->ResetPass(pass.get());
+                    }
+                }
             }
 
             return m_RealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
