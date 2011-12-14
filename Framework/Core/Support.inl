@@ -144,9 +144,12 @@ inline static bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY 
             {
                 if (valueBuffer[0] == TEXT('1') || _tcsicmp(valueBuffer, TEXT("true")) == 0)
                 {
+                    valueType = 0;
+                    valueSize = 1024;
+
                     if (RegQueryValueEx(hookKey, TEXT("Target"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
                     {
-                        if (_tcscmp(moduleName, valueBuffer) == 0)
+                        if (_tcsicmp(moduleName, valueBuffer) == 0)
                         {
                             RegCloseKey(hookKey);
                             return true;

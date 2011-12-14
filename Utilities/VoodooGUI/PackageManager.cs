@@ -122,7 +122,7 @@ namespace VoodooUI
                 }
             }
             
-            if (MessageBox.Show(String.Format("Update package {0} to version {2}.\nContinue?", pm.Package.Name, target), "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show(String.Format("Update package {0} to version {1}.\nContinue?", pm.Package.Name, target), "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 pm.Update(target);
             }

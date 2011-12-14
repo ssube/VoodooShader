@@ -63,18 +63,6 @@ namespace VoodooUI
             cHook_Table.AutoGenerateColumns = false;
             cHook_Table.DataSource = m_Hooks;
 
-            String stubPath = VoodooSharp.GlobalRegistry.Instance.BinPath + "\\Voodoo_HookStub.dll";
-            m_NativeModule = LoadLibrary(stubPath);
-            if (m_NativeModule != IntPtr.Zero)
-            {
-                m_InstallFunc = (InstallGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "InstallGlobalHook"), typeof(InstallGlobalHook));
-                m_RemoveFunc = (RemoveGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "RemoveGlobalHook"), typeof(RemoveGlobalHook));
-            }
-            else
-            {
-                MessageBox.Show("Unable to load hook stub from:\n" + stubPath, "Hook Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
             Menu_Hook_Enable(null, null);
         }
 
@@ -152,6 +140,18 @@ namespace VoodooUI
 
         private void Menu_Hook_Enable(object sender, EventArgs e)
         {
+            String stubPath = VoodooSharp.GlobalRegistry.Instance.BinPath + "\\Voodoo_HookStub.dll";
+            m_NativeModule = LoadLibrary(stubPath);
+            if (m_NativeModule != IntPtr.Zero)
+            {
+                m_InstallFunc = (InstallGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "InstallGlobalHook"), typeof(InstallGlobalHook));
+                m_RemoveFunc = (RemoveGlobalHook)Marshal.GetDelegateForFunctionPointer(GetProcAddress(m_NativeModule, "RemoveGlobalHook"), typeof(RemoveGlobalHook));
+            }
+            else
+            {
+                MessageBox.Show("Unable to load hook stub from:\n" + stubPath, "Hook Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             if (m_InstallFunc != null)
             {
                 m_GlobalHook = m_InstallFunc();
@@ -174,6 +174,11 @@ namespace VoodooUI
             {
                 m_RemoveFunc(m_GlobalHook);
                 m_GlobalHook = IntPtr.Zero;
+            }
+
+            if (m_NativeModule != IntPtr.Zero)
+            {
+                FreeLibrary(m_NativeModule);
             }
 
             cMenu_Hook_Off.Visible = true;

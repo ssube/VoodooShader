@@ -213,8 +213,7 @@ namespace VoodooShader
             switch (pDesc.Format)
             {
             case TF_RGBA8:
-                texFmt = GL_RGBA; // Frost::Converter::ToGLFormat(desc.Format);
-                ///
+                texFmt = GL_RGBA;
                 texIFmt = GL_RGBA8;
                 texType = GL_UNSIGNED_BYTE;
                 break;
@@ -423,12 +422,12 @@ namespace VoodooShader
             if (tech.get() == nullptr)
             {
                 m_Core->GetLogger()->Log
-                    (
+                (
                     LL_ModError,
                     VOODOO_FROST_NAME,
                     L"No default technique given for shader %s.",
                     shader->ToString().GetData()
-                    );
+                );
                 return;
             }
 
@@ -479,16 +478,16 @@ namespace VoodooShader
         }
 
         /**
-        * Frost
-        */
+         * Frost
+         */
         void FrostAdapter::SetDC(_In_opt_ HDC hdc)
         {
             m_DC = hdc;
         }
 
         /**
-        *
-        */
+         *
+         */
         void FrostAdapter::SetGLRC(_In_opt_ HGLRC hglrc)
         {
             m_GLRC = hglrc;

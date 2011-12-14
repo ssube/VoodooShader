@@ -144,6 +144,9 @@ bool WINAPI LoadVoodoo()
 
     // Get the global root
     GetVoodooPath(MAX_PATH, gVoodooPath);
+    GetVoodooBinPrefix(MAX_PATH, gVoodooBinPrefix);
+    StringCchCopy(gVoodooBinPath, MAX_PATH, gVoodooPath);
+    StringCchCat(gVoodooBinPath, MAX_PATH, gVoodooBinPrefix);
 
     HMODULE coreLibrary = nullptr;
 
@@ -173,18 +176,21 @@ bool WINAPI LoadVoodoo()
     gInitParams.RunRoot = pathRunRoot;
     gInitParams.Target = pathTarget;
 
-    try
+    gVoodooCore = createFunc();
+    
+    if (!gVoodooCore)
     {
-        gVoodooCore = createFunc(&gInitParams);
-    }
-    catch(const std::exception & exc)
-    {
-        ErrorMessage(L"Error details: %S", exc.what());
+        ErrorMessage(L"Unable to launch Voodoo core.");
+    } else {
+        gVoodooCore->AddRef();
 
-        gVoodooCore = nullptr;
+        if (!gVoodooCore->Initialize(&gInitParams))
+        {
+            ErrorMessage(L"Unable to initialize Voodoo core.");
+            gVoodooCore->Release();
+            gVoodooCore = nullptr;
+        }
     }
-
-    if (gVoodooCore) gVoodooCore->AddRef();
 
     return (gVoodooCore != nullptr);
 }

@@ -161,7 +161,7 @@ namespace VoodooShader
         // Check for relative
         if (PathIsRelative(fullname.GetData()))
         {
-            fullname = m_Core->GetParser()->Parse(String(L"$(globalroot)\\bin\\") + fullname, PF_PathCanon);
+            fullname = m_Core->GetParser()->Parse(String(L"$(globalroot)\\$(binprefix)\\") + fullname, PF_PathCanon);
         }
 
         // Check for already loaded

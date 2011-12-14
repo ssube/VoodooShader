@@ -106,7 +106,7 @@ namespace VoodooShader
 
             // Load paths from the config
             xml_document *config = (xml_document *) m_Core->GetConfig();
-            xpath_query pathsQuery(L"/VoodooConfig/VSWFileSystem/SearchPaths/Path");
+            xpath_query pathsQuery(L"/VoodooConfig/Classes/Class[@Name = \"VSWFileSystem\"]/SearchPaths/Path");
             xpath_query pathValueQuery(L"./text()");
             xpath_node_set pathNodes = pathsQuery.evaluate_node_set(*config);
             xpath_node_set::const_iterator pathIter = pathNodes.begin();

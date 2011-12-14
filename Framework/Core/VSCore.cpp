@@ -37,9 +37,9 @@
 #include "Exception.hpp"
 #include "Version.hpp"
 
-#include "shellapi.h"
+#include "Support.inl"
 
-#include <boost/lexical_cast.hpp>
+#include "shellapi.h"
 
 namespace VoodooShader
 {
@@ -52,7 +52,7 @@ namespace VoodooShader
         }
     }
 
-    ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams)
+    ICore * VOODOO_CALLTYPE CreateCore()
     {
         static VSCore * pCore = nullptr;
 
@@ -61,7 +61,6 @@ namespace VoodooShader
             try
             {
                 pCore = new VSCore();
-                pCore->Initialize(pInitParams);
             } catch(const std::exception & exc) {
                 UNREFERENCED_PARAMETER(exc);
                 pCore = nullptr;
@@ -123,7 +122,12 @@ namespace VoodooShader
         }
 
         // Load variables, built-in first
-        m_Parser->Add(L"globalroot", pInitParams->GlobalRoot, VT_System);
+        wchar_t buffer[MAX_PATH];
+        GetVoodooPath(MAX_PATH, buffer);
+        m_Parser->Add(L"globalroot", buffer, VT_System);
+        GetVoodooBinPrefix(MAX_PATH, buffer);
+        m_Parser->Add(L"binprefix", buffer, VT_System);
+
         m_Parser->Add(L"localroot", pInitParams->LocalRoot, VT_System);
         m_Parser->Add(L"runroot", pInitParams->RunRoot, VT_System);
         m_Parser->Add(L"target", pInitParams->Target, VT_System);
@@ -240,10 +244,10 @@ namespace VoodooShader
             pugi::xpath_query fsQuery(L"./Classes/FileSystem/text()");
             pugi::xpath_query hookQuery(L"./Classes/HookManager/text()");
             pugi::xpath_query adpQuery(L"./Classes/Adapter/text()");
-            String logClass = m_Parser->Parse(logQuery.evaluate_string(configRoot).c_str());
-            String fsClass = m_Parser->Parse(fsQuery.evaluate_string(configRoot).c_str());
-            String hookClass = m_Parser->Parse(hookQuery.evaluate_string(configRoot).c_str());
-            String adpClass = m_Parser->Parse(adpQuery.evaluate_string(configRoot).c_str());
+            String logClass = m_Parser->Parse(logQuery.evaluate_string(globalNode).c_str());
+            String fsClass = m_Parser->Parse(fsQuery.evaluate_string(globalNode).c_str());
+            String hookClass = m_Parser->Parse(hookQuery.evaluate_string(globalNode).c_str());
+            String adpClass = m_Parser->Parse(adpQuery.evaluate_string(globalNode).c_str());
 
             // Make sure a logger was loaded
             m_Logger = dynamic_cast<ILogger*>(m_ModuleManager->CreateObject(logClass));
@@ -255,14 +259,14 @@ namespace VoodooShader
             pugi::xpath_query logfQuery(L"./Log/File/text()");
             pugi::xpath_query loglQuery(L"./Log/Level/text()");
 
-            String logFile  = m_Parser->Parse(logfQuery.evaluate_string(configRoot).c_str());
-            String logLevelStr = m_Parser->Parse(loglQuery.evaluate_string(configRoot).c_str());
+            String logFile  = m_Parser->Parse(logfQuery.evaluate_string(globalNode).c_str());
+            String logLevelStr = m_Parser->Parse(loglQuery.evaluate_string(globalNode).c_str());
 
             LogLevel logLevel = LL_Initial;
             try
             {
-                logLevel = (LogLevel)boost::lexical_cast<int32_t>(logLevelStr.GetData());
-            } catch (const boost::bad_lexical_cast & exc) {
+                logLevel = (LogLevel)stoi(logLevelStr.ToStdString());
+            } catch (const std::exception & exc) {
                 UNREFERENCED_PARAMETER(exc);
             }
 
