@@ -166,7 +166,7 @@ namespace VoodooShader
                 HRESULT hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_ThisFrame, nullptr, D3DTEXF_NONE);
                 if (FAILED(hr))
                 {
-                    logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to stretch backbuffer to scratch texture.");
+                    logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to stretch backbuffer to scratch texture.");
                 }
 
                 VoodooShader::ITechniqueRef tech = testShader->GetDefaultTechnique();
@@ -179,7 +179,7 @@ namespace VoodooShader
                         hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_ThisFrame, nullptr, D3DTEXF_NONE);
                         if (FAILED(hr))
                         {
-                            logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to stretch backbuffer to scratch texture.");
+                            logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to stretch backbuffer to scratch texture.");
                         }
 
                         adapter->SetPass(pass.get());

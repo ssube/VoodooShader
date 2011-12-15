@@ -224,11 +224,11 @@ namespace VoodooShader
 
                 if (SUCCEEDED(hrt))
                 {
-                    logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Cached backbuffer surface.");
+                    logger->Log(LL_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
                 }
                 else
                 {
-                    logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to retrieve backbuffer surface.");
+                    logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
                 }
 
                 TextureDesc bufferTextureDesc;
@@ -247,11 +247,11 @@ namespace VoodooShader
                     hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
                     if (SUCCEEDED(hrt))
                     {
-                        logger->Log(LL_ModInfo, VOODOO_DX9_NAME, L"Cached :thisframe surface.");
+                        logger->Log(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :thisframe surface.");
                     }
                     else
                     {
-                        logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Failed to :thisframe scratch surface.");
+                        logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to :thisframe scratch surface.");
                     }
                 }
 
@@ -265,7 +265,7 @@ namespace VoodooShader
                 }
                 catch(std::exception & exc)
                 {
-                    logger->Log(LL_ModError, VOODOO_DX9_NAME, L"Error loading shader: %S", exc.what());
+                    logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Error loading shader: %S", exc.what());
                 }
             }
 

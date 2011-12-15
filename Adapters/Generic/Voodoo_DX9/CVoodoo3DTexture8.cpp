@@ -34,7 +34,7 @@ namespace VoodooShader
         {
             gpVoodooLogger->Log
             (
-                LL_ModDebug, VOODOO_DX9_NAME,
+                LL_ModDebug, VOODOO_DX89_NAME,
                 L"CVoodoo3DTexture8::CVoodoo3DTexture8(%p, %p) == %p",
                 pDevice, pTexture, this
             );

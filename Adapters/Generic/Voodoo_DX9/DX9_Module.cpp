@@ -36,7 +36,7 @@ VoodooShader::ITexture* texture_ThisFrame;
 
 const VoodooShader::Version * VOODOO_CALLTYPE API_ModuleVersion()
 {
-    static const VoodooShader::Version dx9version = VOODOO_META_VERSION_STRUCT(DX9);
+    static const VoodooShader::Version dx9version = VOODOO_META_VERSION_STRUCT(DX89);
     return &dx9version;
 }
 
