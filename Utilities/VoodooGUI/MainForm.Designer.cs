@@ -34,10 +34,6 @@
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.cHook_Table = new System.Windows.Forms.DataGridView();
-            this.colActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colConfig = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -68,6 +64,10 @@
             this.cMenu_Downloads = new System.Windows.Forms.ToolStripButton();
             this.cTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.dOpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.colActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colConfig = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -130,40 +130,6 @@
             this.cHook_Table.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.cHook_Table.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.RowEnter);
             this.cHook_Table.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.RowChange);
-            // 
-            // colActive
-            // 
-            this.colActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colActive.DataPropertyName = "Active";
-            resources.ApplyResources(this.colActive, "colActive");
-            this.colActive.Name = "colActive";
-            this.colActive.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "Name";
-            resources.ApplyResources(this.colName, "colName");
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colTarget
-            // 
-            this.colTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTarget.DataPropertyName = "Target";
-            this.colTarget.FillWeight = 80F;
-            resources.ApplyResources(this.colTarget, "colTarget");
-            this.colTarget.Name = "colTarget";
-            this.colTarget.ReadOnly = true;
-            this.colTarget.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colConfig
-            // 
-            this.colConfig.DataPropertyName = "Config";
-            resources.ApplyResources(this.colConfig, "colConfig");
-            this.colConfig.Name = "colConfig";
-            this.colConfig.ReadOnly = true;
             // 
             // tableLayoutPanel1
             // 
@@ -376,6 +342,40 @@
             // 
             resources.ApplyResources(this.dOpenFile, "dOpenFile");
             this.dOpenFile.RestoreDirectory = true;
+            // 
+            // colActive
+            // 
+            this.colActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colActive.DataPropertyName = "Active";
+            resources.ApplyResources(this.colActive, "colActive");
+            this.colActive.Name = "colActive";
+            this.colActive.ReadOnly = true;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "Name";
+            this.colName.FillWeight = 60F;
+            resources.ApplyResources(this.colName, "colName");
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colTarget
+            // 
+            this.colTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTarget.DataPropertyName = "Target";
+            resources.ApplyResources(this.colTarget, "colTarget");
+            this.colTarget.Name = "colTarget";
+            this.colTarget.ReadOnly = true;
+            this.colTarget.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colConfig
+            // 
+            this.colConfig.DataPropertyName = "Config";
+            resources.ApplyResources(this.colConfig, "colConfig");
+            this.colConfig.Name = "colConfig";
+            this.colConfig.ReadOnly = true;
             // 
             // MainForm
             // 

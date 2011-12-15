@@ -29,6 +29,9 @@ namespace VoodooSharp
     [System.SerializableAttribute()]
     public partial class PackageVersion
     {
+        public delegate void LogCallback(String msg, params object[] args);
+        public event LogCallback OnLogEvent;
+
         [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]
         public List<MessageSet> Messages { get; set; }
 
@@ -48,7 +51,7 @@ namespace VoodooSharp
             GlobalRegistry.Instance.Write();
             GlobalRegistry.Instance.Update();
 
-            Console.WriteLine("Installing version: " + Id);
+            if (OnLogEvent != null) OnLogEvent.Invoke("Installing version: " + Id);
 
             if (Remove != null)
             {
@@ -61,18 +64,18 @@ namespace VoodooSharp
                             String fullpath = Path.GetFullPath(Path.Combine(GlobalRegistry.Instance.Path, basename.Filename));
                             if (!fullpath.StartsWith(GlobalRegistry.Instance.Path))
                             {
-                                Console.WriteLine("Illegal file path, aborting version change.", fullpath);
-                                Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
-                                Console.WriteLine("  File: {0}", basename);
+                                if (OnLogEvent != null) OnLogEvent.Invoke("Illegal file path, aborting version change.", fullpath);
+                                if (OnLogEvent != null) OnLogEvent.Invoke("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
+                                if (OnLogEvent != null) OnLogEvent.Invoke("  File: {0}", basename);
                                 return false;
                             }
                             File.Delete(fullpath);
                         }
                         catch (Exception exc)
                         {
-                            Console.WriteLine("Error removing file. This file may need to be removed manually.");
-                            Console.WriteLine("  File: {0}", basename);
-                            Console.WriteLine("  Error: {0}", exc.Message);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("Error removing file. This file may need to be removed manually.");
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  File: {0}", basename);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  Error: {0}", exc.Message);
                         }
                     }
                 }
@@ -81,10 +84,10 @@ namespace VoodooSharp
                 {
                     foreach (Default def in Remove.Default)
                     {
-                        Console.WriteLine("Removing Default: {0}", def.Name);
+                        if (OnLogEvent != null) OnLogEvent.Invoke("Removing Default: {0}", def.Name);
                         if (GlobalRegistry.Instance.RemoveDefault(def.DefId) == 0)
                         {
-                            Console.WriteLine("  Default not found for removal.", def.DefId);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  Default not found for removal.", def.DefId);
                         }
                     }
                 }
@@ -93,10 +96,10 @@ namespace VoodooSharp
                 {
                     foreach (Module mod in Remove.Module)
                     {
-                        Console.WriteLine("Removing Module: {0}", mod.Name);
+                        if (OnLogEvent != null) OnLogEvent.Invoke("Removing Module: {0}", mod.Name);
                         if (GlobalRegistry.Instance.RemoveModule(mod.LibId) == 0)
                         {
-                            Console.WriteLine("  Module not found for removal.", mod.LibId);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  Module not found for removal.", mod.LibId);
                         }
                     }
                 }
@@ -116,9 +119,9 @@ namespace VoodooSharp
 
                             if (!localpath.StartsWith(GlobalRegistry.Instance.Path))
                             {
-                                Console.WriteLine("Illegal file path, aborting version change.", localpath);
-                                Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
-                                Console.WriteLine("  File: {0}", file);
+                                if (OnLogEvent != null) OnLogEvent.Invoke("Illegal file path, aborting version change.", localpath);
+                                if (OnLogEvent != null) OnLogEvent.Invoke("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
+                                if (OnLogEvent != null) OnLogEvent.Invoke("  File: {0}", file);
                                 return false;
                             }
 
@@ -126,24 +129,24 @@ namespace VoodooSharp
                             Directory.CreateDirectory(path);
 
                             String source = root + "/" + VersionUri + "/" + file.Filename;
-                            Console.WriteLine("Downloading: {0}", localpath);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("Downloading: {0}", localpath);
                             wc.DownloadFile(source.ToString(), localpath);
-                            Console.Write(" done. Verifying... ");
+                            if (OnLogEvent != null) OnLogEvent.Invoke(" done. Verifying... ");
                             String actualSum = VoodooHash.HashFile(localpath);
                             if (actualSum.ToUpper() == file.Checksum.ToUpper())
                             {
-                                Console.WriteLine("checksum succeeded.");
+                                if (OnLogEvent != null) OnLogEvent.Invoke("checksum succeeded.");
                             }
                             else
                             {
-                                Console.WriteLine("checksum failed!");
+                                if (OnLogEvent != null) OnLogEvent.Invoke("checksum failed!");
                             }
                         }
                         catch (Exception exc)
                         {
-                            Console.WriteLine("Error removing file. This file may need to be removed manually.");
-                            Console.WriteLine("  File: {0}", file);
-                            Console.WriteLine("  Error: {0}", exc.Message);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("Error removing file. This file may need to be removed manually.");
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  File: {0}", file);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  Error: {0}", exc.Message);
                         }
                     }
                 }
@@ -152,7 +155,7 @@ namespace VoodooSharp
                 {
                     foreach (Default def in Create.Default)
                     {
-                        Console.WriteLine("Creating Default: {0}", def.Name);
+                        if (OnLogEvent != null) OnLogEvent.Invoke("Creating Default: {0}", def.Name);
                         GlobalRegistry.Instance.SetDefault(def);
                     }
                 }
@@ -161,7 +164,7 @@ namespace VoodooSharp
                 {
                     foreach (Module mod in Create.Module)
                     {
-                        Console.WriteLine("Creating Module: {0}", mod.Name);
+                        if (OnLogEvent != null) OnLogEvent.Invoke("Creating Module: {0}", mod.Name);
                         GlobalRegistry.Instance.SetModule(mod);
                     }
                 }
@@ -177,7 +180,7 @@ namespace VoodooSharp
             GlobalRegistry.Instance.Write();
             GlobalRegistry.Instance.Update();
 
-            Console.WriteLine("Installing version: " + Id);
+            if (OnLogEvent != null) OnLogEvent.Invoke("Installing version: " + Id);
 
             if (Create != null)
             {
@@ -190,18 +193,18 @@ namespace VoodooSharp
                             String fullpath = Path.GetFullPath(Path.Combine(GlobalRegistry.Instance.Path, file.Filename));
                             if (!fullpath.StartsWith(GlobalRegistry.Instance.Path))
                             {
-                                Console.WriteLine("Illegal file path, aborting version change.", fullpath);
-                                Console.WriteLine("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
-                                Console.WriteLine("  File: {0}", file);
+                                if (OnLogEvent != null) OnLogEvent.Invoke("Illegal file path, aborting version change.", fullpath);
+                                if (OnLogEvent != null) OnLogEvent.Invoke("This may be a security risk, please contact the package developers and notify the Voodoo Shader developers.");
+                                if (OnLogEvent != null) OnLogEvent.Invoke("  File: {0}", file);
                                 return false;
                             }
                             File.Delete(fullpath);
                         }
                         catch (Exception exc)
                         {
-                            Console.WriteLine("Error removing file. This file may need to be removed manually.");
-                            Console.WriteLine("  File: {0}", file);
-                            Console.WriteLine("  Error: {0}", exc.Message);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("Error removing file. This file may need to be removed manually.");
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  File: {0}", file);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  Error: {0}", exc.Message);
                         }
                     }
                 }
@@ -210,10 +213,10 @@ namespace VoodooSharp
                 {
                     foreach (Default def in Remove.Default)
                     {
-                        Console.WriteLine("Removing Default: {0}", def.Name);
+                        if (OnLogEvent != null) OnLogEvent.Invoke("Removing Default: {0}", def.Name);
                         if (GlobalRegistry.Instance.RemoveDefault(def.DefId) == 0)
                         {
-                            Console.WriteLine("  Default not found for removal.", def.DefId);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  Default not found for removal.", def.DefId);
                         }
                     }
                 }
@@ -222,10 +225,10 @@ namespace VoodooSharp
                 {
                     foreach (Module mod in Remove.Module)
                     {
-                        Console.WriteLine("Removing Module: {0}", mod.Name);
+                        if (OnLogEvent != null) OnLogEvent.Invoke("Removing Module: {0}", mod.Name);
                         if (GlobalRegistry.Instance.RemoveModule(mod.LibId) == 0)
                         {
-                            Console.WriteLine("  Module not found for removal.", mod.LibId);
+                            if (OnLogEvent != null) OnLogEvent.Invoke("  Module not found for removal.", mod.LibId);
                         }
                     }
                 }
@@ -236,11 +239,11 @@ namespace VoodooSharp
             return true;
         }
 
-        static void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             if (e.ProgressPercentage % 10 == 0)
             {
-                Console.Write(".");
+                if (OnLogEvent != null) OnLogEvent.Invoke(".");
             }
         }
     }

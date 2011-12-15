@@ -33,11 +33,19 @@ using VoodooSharp;
 
 namespace VoodooUI
 {
+    struct InstallParams
+    {
+        public PackageManifest Manifest;
+        public String Version;
+    }
+
     public partial class PackageManager : Form
     {
         Markdown m_Parser;
         bool m_CancelNav;
         Regex m_ParserRegex;
+        ProgressDialog m_ProgressForm;
+        BackgroundWorker m_FetchWorker, m_InstallWorker;
 
         public PackageManager()
         {
@@ -51,12 +59,19 @@ namespace VoodooUI
 
             m_ParserRegex = new Regex("[ ]{2,}");
 
-            RefreshTree();
-        }
+            m_FetchWorker = new BackgroundWorker();
+            m_FetchWorker.WorkerReportsProgress = true;
+            m_FetchWorker.DoWork += new DoWorkEventHandler(worker_DoFetch);
+            m_FetchWorker.ProgressChanged += new ProgressChangedEventHandler(worker_FetchProgress);
+            m_FetchWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_FetchCompleted);
 
-        void m_Cache_OnFetchManifest(string name, string uri)
-        {
-            Console.WriteLine("Fetching {0} from: {1}", name, uri);
+            m_InstallWorker = new BackgroundWorker();
+            m_InstallWorker.WorkerReportsProgress = true;
+            m_InstallWorker.DoWork += new DoWorkEventHandler(worker_DoInstall);
+            m_InstallWorker.ProgressChanged += new ProgressChangedEventHandler(worker_InstallProgress);
+            m_InstallWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_InstallCompleted);
+
+            RefreshTree();
         }
 
         void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
@@ -92,10 +107,37 @@ namespace VoodooUI
         }
 
         private void FetchRemotes(object sender, EventArgs e)
-        {            
-            ManifestCache.Instance.OnFetchManifest += new ManifestCache.FetchManifest(m_Cache_OnFetchManifest);
-            ManifestCache.Instance.FetchAll();
+        {
+            m_ProgressForm = new ProgressDialog();
+            m_ProgressForm.Text = "Progress - Fetch";
+            m_ProgressForm.Show(this);
+            this.Enabled = false;
 
+            m_FetchWorker.RunWorkerAsync();
+        }
+
+        void worker_DoFetch(object sender, DoWorkEventArgs e)
+        {
+            ManifestCache.Instance.OnLogEvent += worker_FetchProgressFilter;
+            ManifestCache.Instance.FetchAll();
+            ManifestCache.Instance.OnLogEvent -= worker_FetchProgressFilter;
+        }
+
+        void worker_FetchProgressFilter(String msg, params object[] args)
+        {
+            m_FetchWorker.ReportProgress(0, String.Format(msg, args));
+        }
+
+        void worker_FetchProgress(object sender, ProgressChangedEventArgs e)
+        {
+            m_ProgressForm.WriteLine(e.UserState as String);
+        }
+
+        void worker_FetchCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            m_ProgressForm.AllowClose = true;
+
+            this.Enabled = true;
             RefreshTree();
         }
 
@@ -124,8 +166,43 @@ namespace VoodooUI
             
             if (MessageBox.Show(String.Format("Update package {0} to version {1}.\nContinue?", pm.Package.Name, target), "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                pm.Update(target);
+                m_ProgressForm = new ProgressDialog();
+                m_ProgressForm.Text = "Progress - Install";
+                m_ProgressForm.Show(this);
+                this.Enabled = false;
+
+                InstallParams installParams = new InstallParams();
+                installParams.Manifest = pm;
+                installParams.Version = target;
+                m_InstallWorker.RunWorkerAsync(installParams);
             }
+        }
+
+        void worker_DoInstall(object sender, DoWorkEventArgs e)
+        {
+            InstallParams installParams = (InstallParams)e.Argument;
+
+            installParams.Manifest.OnLogEvent += worker_InstallProgressFilter;
+            installParams.Manifest.Update(installParams.Version);
+            installParams.Manifest.OnLogEvent -= worker_InstallProgressFilter;
+        }
+
+        void worker_InstallProgressFilter(String msg, params object[] args)
+        {
+            m_InstallWorker.ReportProgress(0, String.Format(msg, args));
+        }
+
+        void worker_InstallProgress(object sender, ProgressChangedEventArgs e)
+        {
+            m_ProgressForm.WriteLine(e.UserState as String);
+        }
+
+        void worker_InstallCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            m_ProgressForm.AllowClose = true;
+            this.Enabled = true;
+
+            RefreshTree();
         }
 
         private void RefreshTree()
@@ -140,7 +217,7 @@ namespace VoodooUI
                 Package installedPack = GlobalRegistry.Instance.GetPackage(pm.Package.PackId);
                 if (installedPack != null)
                 {
-                    packageNode.BackColor = System.Drawing.Color.PowderBlue;
+                    packageNode.Checked = true;
                 }
 
                 foreach (PackageVersion v in pm.Versions)
@@ -150,7 +227,7 @@ namespace VoodooUI
 
                     if (installedPack != null && installedPack.Version == v.Id)
                     {
-                        node.BackColor = System.Drawing.Color.Honeydew;
+                        node.Checked = true;
                     }
                 }
             }  
@@ -201,7 +278,15 @@ namespace VoodooUI
                 String.Format("Uninstall package {0} from {1}.\nContinue?", pm.Package.Name, source),
                 "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                pm.Update(null);
+                m_ProgressForm = new ProgressDialog();
+                m_ProgressForm.Text = "Progress - Uninstall";
+                m_ProgressForm.Show(this);
+                this.Enabled = false;
+
+                InstallParams installParams = new InstallParams();
+                installParams.Manifest = pm;
+                installParams.Version = null;
+                m_InstallWorker.RunWorkerAsync(installParams);
             }
         }
     }

@@ -27,6 +27,9 @@ namespace VoodooSharp
     [System.Xml.Serialization.XmlRootAttribute("VoodooPackage", Namespace = "", IsNullable = false)]
     public partial class PackageManifest
     {
+        public delegate void LogCallback(String msg, params object[] args);
+        public event LogCallback OnLogEvent;
+
         public Package Package { get; set; }
         public string Description { get; set; }
         public string PackageUri { get; set; }
@@ -40,22 +43,33 @@ namespace VoodooSharp
 
         public bool Update(String id_to)
         {
+            if (OnLogEvent != null) OnLogEvent.Invoke("Beginning update procedure.");
+            if (OnLogEvent != null) OnLogEvent.Invoke("  Package: {0}", Package.Name);
+
             Package installedPack = GlobalRegistry.Instance.GetPackage(Package.PackId);
             String id_from = installedPack == null ? null : installedPack.Version;
 
-            if (id_to == null || (id_from == null && id_to == null))
+            if (id_from == null)
             {
-                return false;
+                if (OnLogEvent != null) OnLogEvent.Invoke("  No installed version.");
+            }
+            else
+            {
+                if (OnLogEvent != null) OnLogEvent.Invoke("  Installed version: " + id_from);
             }
 
-            Console.WriteLine("Beginning update procedure.");
-            Console.WriteLine("  Package: {0}", Package.Name);
+            if (id_from == null && id_to == null)
+            {
+                if (OnLogEvent != null) OnLogEvent.Invoke("  Both versions are null, no changes needed.");
+                return false;
+            }
 
             PackageVersion v_from = id_from == null ? null : Versions.Find(v => v.Id == id_from);
             PackageVersion v_to = id_to == null ? null : Versions.Find(v => v.Id == id_to);
 
             if (v_from == null && v_to == null)
             {
+                if (OnLogEvent != null) OnLogEvent.Invoke("  Unable to locate versions.");
                 return false;
             }
 
@@ -83,17 +97,19 @@ namespace VoodooSharp
             pack.PackId = Package.PackId;
             pack.Version = id_to;
 
-            Console.WriteLine("{0} updates to be applied.", workingSet.Count);
+            if (OnLogEvent != null) OnLogEvent.Invoke("  {0} updates to be applied.", workingSet.Count);
             while (workingSet.Count > 0)
             {
                 PackageVersion wv = workingSet.Pop();
                 pack.Version = wv.Id;
+                wv.OnLogEvent += new PackageVersion.LogCallback(wv_OnLogEvent);
 
                 if (v_to == null)
                 {
                     if (!wv.Uninstall())
                     {
                         GlobalRegistry.Instance.SetPackage(pack);
+                        wv.OnLogEvent -= new PackageVersion.LogCallback(wv_OnLogEvent);
                         return false;
                     }
                 }
@@ -102,9 +118,12 @@ namespace VoodooSharp
                     if (!wv.Install(PackageUri))
                     {
                         GlobalRegistry.Instance.SetPackage(pack);
+                        wv.OnLogEvent -= new PackageVersion.LogCallback(wv_OnLogEvent);
                         return false;
                     }
                 }
+
+                wv.OnLogEvent -= new PackageVersion.LogCallback(wv_OnLogEvent);
             }
 
             if (v_to == null)
@@ -119,6 +138,11 @@ namespace VoodooSharp
             GlobalRegistry.Instance.Write();
 
             return true;
+        }
+
+        void wv_OnLogEvent(string msg, params object[] args)
+        {
+            if (OnLogEvent != null) OnLogEvent.Invoke(msg, args);            
         }
     }
 }

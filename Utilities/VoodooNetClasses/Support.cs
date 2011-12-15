@@ -65,6 +65,9 @@ namespace VoodooSharp
 
     class XmlValidator
     {
+        public delegate void LogCallback(String msg, params object[] args);
+        public event LogCallback OnLogEvent;
+
         public bool Errors { get; set; }
 
         public T ValidateObject<T>(String filename)
@@ -90,7 +93,7 @@ namespace VoodooSharp
             }
             catch (Exception exc)
             {
-                Console.WriteLine("Error validating object: " + exc.Message);
+                if (OnLogEvent != null) OnLogEvent.Invoke("Error validating object: " + exc.Message);
                 return default(T);
             }
         }
@@ -100,11 +103,11 @@ namespace VoodooSharp
         {
             if (args.Severity == XmlSeverityType.Warning)
             {
-                Console.WriteLine("  Validation warning: " + args.Message);
+                if (OnLogEvent != null) OnLogEvent.Invoke("  Validation warning: " + args.Message);
             }
             else
             {
-                Console.WriteLine("  Validation error: " + args.Message);
+                if (OnLogEvent != null) OnLogEvent.Invoke("  Validation error: " + args.Message);
                 Errors = true;
             }
         }

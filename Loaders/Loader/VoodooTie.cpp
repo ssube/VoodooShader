@@ -148,12 +148,10 @@ bool WINAPI LoadVoodoo()
     StringCchCopy(gVoodooBinPath, MAX_PATH, gVoodooPath);
     StringCchCat(gVoodooBinPath, MAX_PATH, gVoodooBinPrefix);
 
-    HMODULE coreLibrary = nullptr;
-
     wcscpy_s(pathCoreLib, gVoodooBinPath);
     wcscat_s(pathCoreLib, L"\\Voodoo_Core.dll");
 
-    coreLibrary = LoadLibraryEx(pathCoreLib, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
+    HMODULE coreLibrary = LoadLibraryEx(pathCoreLib, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
 
     if (!coreLibrary)
     {

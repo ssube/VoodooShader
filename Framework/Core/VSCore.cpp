@@ -251,9 +251,10 @@ namespace VoodooShader
 
             // Make sure a logger was loaded
             m_Logger = dynamic_cast<ILogger*>(m_ModuleManager->CreateObject(logClass));
-            if (m_Logger.get() == nullptr)
+            if (!m_Logger)
             {
-                Throw(VOODOO_CORE_NAME, L"Unable to create logger.", nullptr);
+                String error = String::Format(L"Unable to create logger (class %s).", logClass.GetData());
+                Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
             pugi::xpath_query logfQuery(L"./Log/File/text()");
@@ -289,19 +290,22 @@ namespace VoodooShader
             m_FileSystem = dynamic_cast<IFileSystem*>(m_ModuleManager->CreateObject(fsClass));
             if (!m_FileSystem)
             {
-                Throw(VOODOO_CORE_NAME, L"Unable to create file system.", nullptr);
+                String error = String::Format(L"Unable to create file system (class %s).", fsClass.GetData());
+                Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
             m_HookManager = dynamic_cast<IHookManager*>(m_ModuleManager->CreateObject(hookClass));
             if (!m_HookManager)
             {
-                Throw(VOODOO_CORE_NAME, L"Unable to create hook manager.", nullptr);
+                String error = String::Format(L"Unable to create hook manager (class %s).", hookClass.GetData());
+                Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
             m_Adapter = dynamic_cast<IAdapter*>(m_ModuleManager->CreateObject(adpClass));
             if (!m_Adapter)
             {
-                Throw(VOODOO_CORE_NAME, L"Unable to create adapter.", nullptr);
+                String error = String::Format(L"Unable to create adapter (class %s).", adpClass.GetData());
+                Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
             // ICore done loading

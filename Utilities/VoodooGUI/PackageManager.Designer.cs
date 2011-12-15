@@ -91,6 +91,7 @@
             // 
             // cPackageTree
             // 
+            this.cPackageTree.CheckBoxes = true;
             this.cPackageTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cPackageTree.FullRowSelect = true;
             this.cPackageTree.Location = new System.Drawing.Point(0, 0);

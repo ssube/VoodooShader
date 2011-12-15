@@ -28,14 +28,14 @@ namespace VoodooSharp
 {
     public class ManifestCache
     {
-        public delegate void FetchManifest(String name, String uri);
+        public delegate void LogCallback(String msg, params object[] args);
+        public event LogCallback OnLogEvent;
 
         public String Path { get; set; }
 
         public List<RemoteManifest> RemoteManifests { get; set; }
         public List<PackageManifest> PackageManifests { get; set; }
 
-        public event FetchManifest OnFetchManifest;
 
         private static ManifestCache instance;
 
@@ -66,7 +66,7 @@ namespace VoodooSharp
             {
                 foreach (String file in Directory.GetFiles(Path, "package_*.xml"))
                 {
-                    if (OnFetchManifest != null) OnFetchManifest.Invoke("Local manifest", file);
+                    if (OnLogEvent != null) OnLogEvent.Invoke("Loading local manifest: " + file);
 
                     XmlValidator xv = new XmlValidator();
                     PackageManifest pm = xv.ValidateObject<PackageManifest>(file);
@@ -89,7 +89,7 @@ namespace VoodooSharp
 
             try
             {
-                if (OnFetchManifest != null) OnFetchManifest.Invoke(remote.Name, remoteUri);
+                if (OnLogEvent != null) OnLogEvent.Invoke("Fetching remote manifest {0} from: {1}", remote.Name, remoteUri);
                 client.DownloadFile(remoteUri, remoteFile);
 
                 XmlValidator xv = new XmlValidator();
@@ -106,7 +106,7 @@ namespace VoodooSharp
 
                     try
                     {
-                        if (OnFetchManifest != null) OnFetchManifest.Invoke(String.Format("{0}; package {1}", remote.Name, i), packageUri);
+                        if (OnLogEvent != null) OnLogEvent.Invoke("Fetching package manifest for {0}::{1} from: {2}", remote.Name, i, packageUri);
                         client.DownloadFile(packageUri, packageFile);
 
                         PackageManifest pm = xv.ValidateObject<PackageManifest>(packageFile);
@@ -123,9 +123,9 @@ namespace VoodooSharp
             }
             catch (Exception exc)
             {
-                Console.WriteLine("Error syncing manifests.");
-                Console.WriteLine("  Remote: {0}", remoteUri);
-                Console.WriteLine("  Error: {0}", exc.Message);
+                if (OnLogEvent != null) OnLogEvent.Invoke("Error syncing manifests.");
+                if (OnLogEvent != null) OnLogEvent.Invoke("  Remote: {0}", remoteUri);
+                if (OnLogEvent != null) OnLogEvent.Invoke("  Error: {0}", exc.Message);
             }
         }
 
