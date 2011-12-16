@@ -320,8 +320,6 @@ namespace VoodooShader
             HRESULT hr = D3DERR_INVALIDCALL;
 
             // If not a render-target, attempt to create it as one
-            BOOL rtt = true;
-
             if (!(Usage & D3DUSAGE_RENDERTARGET))
             {
                 hr = m_RealDevice->CreateTexture(Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format, Pool, &rTexture, nullptr);
@@ -330,14 +328,14 @@ namespace VoodooShader
             // That failed, create as a standard texture
             if (FAILED(hr))
             {
-                rtt = false;
                 hr = m_RealDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, &rTexture, nullptr);
             }
+
             gpVoodooLogger->Log
-                (
+            (
                 LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::CreateTexture(%u, %u, %u, %u, %u, %u, %p) == %d", Width,
                 Height, Levels, Usage, Format, Pool, *ppTexture, hr
-                );
+            );
 
             // One succeeded, the texture exists. We need to register it with the Voodoo core.
             if (SUCCEEDED(hr))
@@ -1162,9 +1160,8 @@ namespace VoodooShader
         /* D3D9 has no equivalent function. */
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::DeleteVertexShader(DWORD Handle)
         {
-            HRESULT hr = D3D_OK; // m_RealDevice->DeleteVertexShader(DWORD
-            ///Handle);
-            ///
+            HRESULT hr = D3D_OK; // m_RealDevice->DeleteVertexShader(DWORD Handle);
+
             std::set<DWORD>::iterator vShader = m_VertexShaders.find(Handle);
             if (vShader != m_VertexShaders.end())
             {
@@ -1177,7 +1174,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::DeleteVertexShader(%d) == %d", Handle, hr);
 #endif
-            return D3D_OK;
+            return hr;
         }
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::SetVertexShaderConstant(DWORD Register, CONST void *pConstantData, DWORD ConstantCount)
         {

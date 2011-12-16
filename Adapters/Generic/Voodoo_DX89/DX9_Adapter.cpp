@@ -212,8 +212,8 @@ namespace VoodooShader
         {
             ILoggerRef logger = m_Core->GetLogger();
 
-            HRESULT hr = m_Device->CreateStateBlock(D3DSBT_ALL, &m_PassState);
-            hr = m_CleanState->Apply();
+            m_Device->CreateStateBlock(D3DSBT_ALL, &m_PassState);
+            m_CleanState->Apply();
 
             if (!pPass)
             {
@@ -228,10 +228,12 @@ namespace VoodooShader
 
             cgSetPassState(pPass->GetCgPass());
 
+#ifdef _DEBUG
             CGerror cgerr = cgGetError();
             assert(cgerr == CG_NO_ERROR);
             HRESULT cgd3derr = cgD3D9GetLastError();
             assert(cgd3derr == D3D_OK);
+#endif
 
             // Bind render targets
             for (uint32_t i = 0; i < 4; ++i)
@@ -266,15 +268,17 @@ namespace VoodooShader
 
             cgResetPassState(pPass->GetCgPass());
 
+#ifdef _DEBUG
             CGerror cgerr = cgGetError();
             assert(cgerr == CG_NO_ERROR);
             HRESULT cgd3derr = cgD3D9GetLastError();
             assert(cgd3derr == D3D_OK);
+#endif
 
             m_BoundPass = nullptr;
 
-            HRESULT hr = m_PassState->Apply();
-            hr = m_PassState->Release();
+            m_PassState->Apply();
+            m_PassState->Release();
 
             return true;
         }

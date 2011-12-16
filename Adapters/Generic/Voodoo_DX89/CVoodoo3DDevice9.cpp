@@ -28,7 +28,7 @@ namespace VoodooShader
     namespace VoodooDX9
     {
         CVoodoo3DDevice9::CVoodoo3DDevice9(IDirect3D9 * pVoodooObject, IDirect3DDevice9 * pRealDevice) :
-            m_ParentObj(pVoodooObject), m_RealDevice(pRealDevice)
+            m_RealDevice(pRealDevice), m_ParentObj(pVoodooObject)
         { };
 
         CVoodoo3DDevice9::~CVoodoo3DDevice9()
