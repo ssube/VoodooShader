@@ -99,7 +99,7 @@ bool WINAPI LoadVoodoo()
     // Get the loader
     if (GetModuleFileName(gLoaderHandle, buffer, MAX_PATH) == 0)
     {
-        ErrorMessage(L"Voodoo Loader: Unable to retrieve loader path.");
+        ErrorMessage(0x2001, L"Voodoo Loader: Unable to retrieve loader path.");
         return false;
     }
 
@@ -107,7 +107,7 @@ bool WINAPI LoadVoodoo()
     std::wstring::size_type pos = loaderPath.rfind(L'\\');
     if (pos == std::wstring::npos)
     {
-        ErrorMessage(L"Voodoo Loader: Unable to parse loader path.");
+        ErrorMessage(0x2002, L"Voodoo Loader: Unable to parse loader path.");
         return false;
     }
 
@@ -119,13 +119,13 @@ bool WINAPI LoadVoodoo()
 
     if (hModule == nullptr)
     {
-        ErrorMessage(L"Unable to retrieve target module.");
+        ErrorMessage(0x2003, L"Unable to retrieve target module.");
         return false;
     }
 
     if (GetModuleFileName(hModule, buffer, MAX_PATH) == 0)
     {
-        ErrorMessage(L"Unable to retrieve target path.");
+        ErrorMessage(0x2004, L"Unable to retrieve target path.");
         return false;
     }
 
@@ -133,7 +133,7 @@ bool WINAPI LoadVoodoo()
     pos = targetPath.rfind(L'\\');
     if (pos == std::wstring::npos)
     {
-        ErrorMessage(L"Voodoo Loader: Unable to parse target path.");
+        ErrorMessage(0x2005, L"Voodoo Loader: Unable to parse target path.");
         return false;
     }
 
@@ -155,7 +155,7 @@ bool WINAPI LoadVoodoo()
 
     if (!coreLibrary)
     {
-        ErrorMessage(L"Voodoo Loader: Unable to load core DLL.");
+        ErrorMessage(0x2006, L"Voodoo Loader: Unable to load core DLL.");
         return false;
     }
 
@@ -163,7 +163,7 @@ bool WINAPI LoadVoodoo()
 
     if (createFunc == nullptr)
     {
-        ErrorMessage(L"Voodoo Loader: Unable to find core create function.");
+        ErrorMessage(0x2007, L"Voodoo Loader: Unable to find core create function.");
         return false;
     }
 
@@ -178,13 +178,13 @@ bool WINAPI LoadVoodoo()
     
     if (!gVoodooCore)
     {
-        ErrorMessage(L"Unable to launch Voodoo core.");
+        ErrorMessage(0x2008, L"Unable to create Voodoo core.");
     } else {
         gVoodooCore->AddRef();
 
         if (!gVoodooCore->Initialize(&gInitParams))
         {
-            ErrorMessage(L"Unable to initialize Voodoo core.");
+            ErrorMessage(0x2009, L"Unable to initialize Voodoo core.");
             gVoodooCore->Release();
             gVoodooCore = nullptr;
         }

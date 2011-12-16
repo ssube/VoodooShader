@@ -91,7 +91,9 @@ HHOOK WINAPI InstallGlobalHook()
         TCHAR buffer[1024];
         if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER, 0, error, LANG_USER_DEFAULT, buffer, 1024, NULL) > 0)
         {
-            MessageBox(NULL, buffer, TEXT("Voodoo Stub Error (IGH)"), MB_OK);
+            ErrorMessage(0x1001, buffer);
+        } else {
+            ErrorMessage(0x1002, TEXT("Error setting global hook."));
         }
         return false;
     }
@@ -111,7 +113,9 @@ void WINAPI RemoveGlobalHook(HHOOK hook)
             TCHAR buffer[1024];
             if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER, 0, error, LANG_USER_DEFAULT, buffer, 1024, NULL) > 0)
             {
-                MessageBox(NULL, buffer, TEXT("Voodoo Stub Error (RGH)"), MB_OK);
+                ErrorMessage(0x1003, buffer);
+            } else {
+                ErrorMessage(0x1004, TEXT("Error removing global hook."));
             }
         }
     }
@@ -120,40 +124,24 @@ void WINAPI RemoveGlobalHook(HHOOK hook)
 bool WINAPI LoadFullLoader()
 {
     int result = 0;
-    HKEY rootPath = nullptr;
+    TCHAR binPath[MAX_PATH];
 
-    if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader"), 0, KEY_READ, &rootPath) == ERROR_SUCCESS && rootPath != nullptr)
+    GetVoodooBinPath(MAX_PATH, binPath);
+    StringCchCat(binPath, MAX_PATH, TEXT("\\Voodoo_Loader.dll"));
+
+    gFullLoader = LoadLibraryEx(binPath, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+
+    if (gFullLoader)
     {
-        DWORD valueType = 0, valueSize = 1024;
-        TCHAR valueBuffer[1024];
-
-        if (RegQueryValueEx(rootPath, TEXT("Path"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
+        FARPROC hookFunc = GetProcAddress(gFullLoader, "InstallKnownHooks");
+        if (hookFunc)
         {
-            OutputDebugString(valueBuffer);
-            OutputDebugString(TEXT("\n"));
-
-            DWORD prefixType = 0, prefixSize = 1024;
-            TCHAR prefixBuffer[1024];
-
-            if (RegQueryValueEx(rootPath, TEXT("BinPrefix"), NULL, &prefixType, (BYTE*)prefixBuffer, &prefixSize) == ERROR_SUCCESS)
-            {
-                StringCchCat(valueBuffer, 1024, prefixBuffer);
-            } else {
-                StringCchCat(valueBuffer, 1024, TEXT("\\bin\\"));
-            }
-
-            StringCchCat(valueBuffer, 1024, TEXT("\\Voodoo_Loader.dll"));
-
-            gFullLoader = LoadLibraryEx(valueBuffer, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-
-            if (gFullLoader)
-            {
-                FARPROC hookFunc = GetProcAddress(gFullLoader, "InstallKnownHooks");
-                result = hookFunc();
-            }
+            result = hookFunc();
+        } else {
+            ErrorMessage(0x1006, TEXT("Unable to launch Voodoo loader."));
         }
-
-        RegCloseKey(rootPath);
+    } else {
+        ErrorMessage(0x1005, TEXT("Unable to load Voodoo loader."));
     }
 
     return result > 0;

@@ -67,7 +67,7 @@ bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFun
         return true;
     } else {
         PWCHAR estr = RtlGetLastErrorString();
-        ErrorMessage(TEXT("EasyHook Error: %s"), estr);
+        ErrorMessage(0x200A, TEXT("EasyHook Error: %s"), estr);
         return false;
     }
 }

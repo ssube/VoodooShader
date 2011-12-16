@@ -25,7 +25,13 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-inline static void WINAPI ErrorMessage(const LPTSTR msg, ...)
+/**
+ * Display a formatted error message.
+ * 
+ * @param msg Format string for the message.
+ * @param ... Format arguments.
+ */
+inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format_string_ LPTSTR msg, ...)
 {
     va_list args;
     va_start(args, msg);
@@ -37,7 +43,10 @@ inline static void WINAPI ErrorMessage(const LPTSTR msg, ...)
 
     va_end(args);
 
-    MessageBox(nullptr, &buffer[0], TEXT("Voodoo Loader Error"), MB_OK | MB_ICONWARNING);
+    TCHAR title[32];
+    _tprintf_s(TEXT("Voodoo Error %06X"), errorCode);
+
+    MessageBox(nullptr, &buffer[0], title, MB_OK | MB_ICONWARNING);
 }
 
 /**
@@ -124,6 +133,22 @@ inline static bool WINAPI GetVoodooBinPrefix(int size, _In_count_(size) TCHAR * 
     }
 }
 
+inline static bool WINAPI GetVoodooBinPath(int size, _In_count_(size) TCHAR * pBuffer)
+{
+    if (!pBuffer) return false;
+
+    TCHAR path[MAX_PATH];
+    TCHAR prefix[MAX_PATH];
+
+    GetVoodooPath(MAX_PATH, path);
+    GetVoodooBinPrefix(MAX_PATH, prefix);
+
+    _tcscpy_s(pBuffer, size, path);
+    _tcscat_s(pBuffer, size, prefix);
+
+    return true;
+}
+
 #define MAX_KEY_LENGTH 255
 
 inline static bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key)
@@ -173,9 +198,13 @@ inline static bool WINAPI SearchHooks(_In_z_ TCHAR * moduleName)
 
     if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader\\Hooks"), 0, KEY_READ, &hookRoot) == ERROR_SUCCESS && hookRoot != nullptr)
     {
-        bool found = SearchHooksInKey(moduleName, hookRoot);
-        RegCloseKey(hookRoot);
-        if (found) return found;
+        if (SearchHooksInKey(moduleName, hookRoot))
+        {
+            RegCloseKey(hookRoot);
+            return true;
+        } else {
+            RegCloseKey(hookRoot);
+        }
     }
 
     return false;

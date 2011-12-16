@@ -43,28 +43,26 @@ namespace VoodooBuild
             {
                 ++buildCount;
                 timestamp = String.Format("// {0}", DateTime.Now);
+
+                Process p = new Process();
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.FileName = "cmd";
+                p.StartInfo.Arguments = "/c git describe";
+                p.Start();
+                String gitDesc = p.StandardOutput.ReadToEnd();
+                p.WaitForExit();
+
+                Console.WriteLine("Time since last counted build: {0}", DateTime.Now - lastRun);
+                Console.WriteLine("Build number: {0}", buildCount);
+                Console.WriteLine("Git ID: {0}", gitDesc);
+
+                lines = new String[3];
+                lines[0] = timestamp;
+                lines[1] = String.Format("#define VOODOO_GLOBAL_VERSION_BUILD {0}", buildCount);
+                lines[2] = String.Format("#define VOODOO_GLOBAL_VERSION_ID VOODOO_META_STRING(\"{0}\")", gitDesc.TrimEnd('\n'));
+                File.WriteAllLines(buildFile, lines);
             }
-            else
-            {
-                timestamp = lines[0];
-            }
-
-            Process p = new Process();
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.FileName = "cmd";
-            p.StartInfo.Arguments = "/c git describe";
-            p.Start();
-            String gitDesc = p.StandardOutput.ReadToEnd();
-            p.WaitForExit();
-
-            Console.Write("Time since last counted build: {0}\nBuild number: {1}\nGit ID: {2}", DateTime.Now - lastRun, buildCount, gitDesc);
-
-            lines = new String[3];
-            lines[0] = timestamp;
-            lines[1] = String.Format("#define VOODOO_GLOBAL_VERSION_BUILD {0}", buildCount);
-            lines[2] = String.Format("#define VOODOO_GLOBAL_VERSION_ID VOODOO_META_STRING(\"{0}\")", gitDesc.TrimEnd('\n'));
-            File.WriteAllLines(buildFile, lines);
         }
     }
 }

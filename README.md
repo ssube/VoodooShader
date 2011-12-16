@@ -1,13 +1,13 @@
 ## Voodoo Shader Framework
-### version 0.5.0 - alpha
+### version 0.5.2 - alpha
 #### [VoodooShader.com](http://www.voodooshader.com)
 
 -----
 
 ### 1. Summary
 
-The Voodoo Shader Framework is a comprehensive graphics framework for adding and extending shaders during development or
-after release. Voodoo works with both Direct3D and OpenGL, in games and other applications.
+Voodoo Shader improves and extends graphics in old and new games. It's fast, stable, open-source, and runs on ATi/AMD and 
+nVidia with DirectX or OpenGL.
 
 Voodoo uses a system of core modules and adapters to provide the widest compatibility and best performance possible across a
 wide range of applications and APIs. This core framework remains constant between target applications and adapters,
