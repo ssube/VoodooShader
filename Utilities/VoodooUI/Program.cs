@@ -177,7 +177,10 @@ namespace VoodooUI
                     }
                     else
                     {
+                        PackageManifest.LogCallback cb = new PackageManifest.LogCallback(pm_OnLogEvent);
+                        pm.OnLogEvent += cb;
                         pm.Update(target);
+                        pm.OnLogEvent -= cb;
                     }
                 }
             }
@@ -214,6 +217,11 @@ namespace VoodooUI
                 Console.WriteLine("Run File: {0}", run_file);
                 return;
             }
+        }
+
+        static void pm_OnLogEvent(string msg, params object[] args)
+        {
+            Console.WriteLine(msg, args);
         }
 
         static void ConsoleVisible(String title, bool visible)
