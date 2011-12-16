@@ -28,12 +28,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Voodoo_Hook.def">
+    <None Include="Voodoo_HookManager.def">
       <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Voodoo_Hook.rc">
+    <ResourceCompile Include="Voodoo_HookManager.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
   </ItemGroup>

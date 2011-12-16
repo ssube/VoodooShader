@@ -185,7 +185,7 @@
     <Content Include="voodoo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VoodooNetClasses\VoodooSharp.csproj">
+    <ProjectReference Include="..\VoodooSharp\VoodooSharp.csproj">
       <Project>{455FAD6F-58B6-41FF-AA04-6DB9168A234C}</Project>
       <Name>VoodooSharp</Name>
     </ProjectReference>
@@ -210,7 +210,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
