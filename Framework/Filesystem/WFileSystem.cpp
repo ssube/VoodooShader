@@ -265,7 +265,7 @@ namespace VoodooShader
 
             if ((mode & FF_CreateOnly) == FF_CreateOnly)
             {
-                String fullname = (*m_Directories.begin()) + L"\\" + filename;
+                String fullname = m_Directories[0] + L"\\" + filename;
 
                 m_Core->GetLogger()->Log
                 (

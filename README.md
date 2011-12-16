@@ -1,5 +1,5 @@
 ## Voodoo Shader Framework
-### version 0.5.2 - alpha
+### version 0.5.3 - alpha
 #### [VoodooShader.com](http://www.voodooshader.com)
 
 -----

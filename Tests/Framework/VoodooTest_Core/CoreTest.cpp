@@ -1,8 +1,8 @@
 // Voodoo Shader Framework Unit Tests: Voodoo/ICore:VoodooShader::ICore
 #include "WinUnit.h"
 
+#define VOODOO_STATIC_LINK
 #include "VoodooFramework.hpp"
-#pragma comment(lib, "Voodoo_Core.lib")
 
 using namespace VoodooShader;
 

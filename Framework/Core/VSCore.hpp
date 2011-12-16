@@ -24,14 +24,6 @@
 namespace VoodooShader
 {
     /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     *
-     * @param pInitParams Setup parameters for this core.
-     * @return A new ICore object, if one was created successfully.
-     */
-    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams);
-
-    /**
      * Non-member function provided to Cg as an error handling callback.
      *
      * @param pContext The Cg context throwing the error.

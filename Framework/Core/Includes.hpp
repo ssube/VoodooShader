@@ -666,4 +666,16 @@ namespace VoodooShader
         typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(_In_ const uint32_t, _In_ ICore *);
         typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)();
     }
+
+#ifdef VOODOO_STATIC_LINK
+#pragma comment(lib, "Voodoo_Core.lib")
+
+    /**
+     * Creates a new core. This function is exported and meant for use by the loader.
+     *
+     * @param pInitParams Setup parameters for this core.
+     * @return A new ICore object, if one was created successfully.
+     */
+    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams);
+#endif
 }
