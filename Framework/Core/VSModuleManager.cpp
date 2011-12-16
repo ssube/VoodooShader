@@ -215,7 +215,7 @@ namespace VoodooShader
 
             if (classname)
             {
-                m_Classes.insert(std::pair<Uuid, ClassID>(clsid, ClassID(module, curClass)));
+                m_Classes.insert(std::pair<Uuid, ClassSource>(clsid, ClassSource(module, curClass)));
                 m_ClassNames.insert(std::pair<String, Uuid>(classname, clsid));
             }
         }

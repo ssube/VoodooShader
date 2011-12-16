@@ -230,7 +230,7 @@ namespace VoodooShader
             wstringstream logMsg;
 
             logMsg <<
-                L"    <Module uuid=\"" << pVersion->LibID << L"\" " <<
+                L"    <Module uuid=\"" << pVersion->LibId << L"\" " <<
                 L" major=\"" << pVersion->Major << L"\" " <<
                 L" minor=\"" << pVersion->Minor << L"\" " <<
                 L" patch=\"" << pVersion->Patch << L"\" " <<
@@ -238,7 +238,7 @@ namespace VoodooShader
                 L" debug=\"" << pVersion->Debug << L"\" ";
 
             if (pVersion->Name) logMsg << L" name=\"" << pVersion->Name << L"\" ";
-            if (pVersion->RevID) logMsg << L" revid=\"" << pVersion->RevID << L"\" ";
+            if (pVersion->RevId) logMsg << L" revid=\"" << pVersion->RevId << L"\" ";
 
             logMsg << L" />\n";
 

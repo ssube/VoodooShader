@@ -33,7 +33,7 @@ namespace VoodooShader
     /**
      * Voodoo Shader null logger implementation. Does not format or log messages or access any files.
      *
-     * @par CLSID:
+     * @par ClassId
      *      e6f3129e-05af-11e1-9e05-005056c00008
      */
     VOODOO_CLASS(VSLogger, ILogger, {0x9E, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})

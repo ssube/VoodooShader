@@ -54,7 +54,7 @@ namespace VoodooShader
          * Xml logger class, writes neatly formatted logs for use with the log viewer. Supports all Voodoo ILogger features
          * and debug logging (with no buffer).
          *
-         * @par CLSID
+         * @par ClassId
          *      e6f312b7-05af-11e1-9e05-005056c00008
          *
          * @warning If the logger isn't destroyed properly, the main tag of the log file won't be closed and the log won't

@@ -71,7 +71,7 @@ namespace VoodooShader
          * implementation is a thin wrapper for the Windows API, adding only a few nonstandard functions (directory
          * searching and path variables).
          *
-         * @par CLSID
+         * @par ClassId
          *      e6f312b1-05af-11e1-9e05-005056c00008
          */
         VOODOO_CLASS(VSWFileSystem, IFileSystem, {0xB1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
@@ -106,7 +106,7 @@ namespace VoodooShader
         /**
          * @class VSWFile
          *
-         * @par CLSID
+         * @par ClassId
          *      e6f312b0-05af-11e1-9e05-005056c00008
          */
         VOODOO_CLASS(VSWFile, IFile, {0xB0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
@@ -148,7 +148,7 @@ namespace VoodooShader
          * Provides image loading, using the DevIL library. This class provides internal loading and conversion, and can
          * manage 1-3 dimensional images (regular textures and volumes).
          *
-         * @par CLSID
+         * @par ClassId
          *      e6f312b2-05af-11e1-9e05-005056c00008
          *
          * @todo Provide layer, cubemap and animation handling.

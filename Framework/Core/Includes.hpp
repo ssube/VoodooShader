@@ -265,8 +265,8 @@ namespace VoodooShader
 
     typedef StringMap                            Dictionary;
 
-    typedef std::pair<IModuleRef, int32_t>       ClassID;
-    typedef std::map<Uuid, ClassID>              ClassMap;
+    typedef std::pair<IModuleRef, int32_t>       ClassSource;
+    typedef std::map<Uuid, ClassSource>          ClassMap;
     typedef std::map<String, Uuid>               ClassNameMap;
 
     typedef std::map<ITextureRef, IShaderRef>    MaterialMap;
@@ -536,14 +536,14 @@ namespace VoodooShader
      */
     struct Version
     {
-        Uuid            LibID;
+        Uuid            LibId;
         int32_t         Major;
         int32_t         Minor;
         int32_t         Patch;
         int32_t         Build;
         bool            Debug;
         const wchar_t * Name;
-        const wchar_t * RevID;
+        const wchar_t * RevId;
     };
 
     /**

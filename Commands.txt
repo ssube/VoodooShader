@@ -1,0 +1,2 @@
+kwstyle: kwstyle -R -d Framework/*pp -html Analysis/kwstyle/output -xml Analysis/kwstyle/config.xml
+readme: ./Markdown.pl --html4tags /d/Code/VoodooShader/Framework/README.md > /d/Code/VoodooShader/Framework/README.html

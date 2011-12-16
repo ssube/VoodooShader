@@ -26,7 +26,7 @@ namespace VoodooShader
     namespace VoodooDX9
     {
         /**
-         * @par CLSID
+         * @par ClassId
          *      f84ac3c2-073f-11e1-83d4-005056c00008
          */
         VOODOO_CLASS(DX9Texture, ITexture, {0xC2, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
