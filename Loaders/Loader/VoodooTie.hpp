@@ -39,7 +39,6 @@ extern VoodooShader::IAdapter * gVoodooAdapter;
 extern VoodooShader::InitParams gInitParams;
 
 extern HINSTANCE gLoaderHandle;
-extern TCHAR gVoodooPath[MAX_PATH];
 
 const VoodooShader::Version *   VOODOO_CALLTYPE API_ModuleVersion();
 const uint32_t                  VOODOO_CALLTYPE API_ClassCount();

@@ -26,9 +26,9 @@
 
 struct ModuleHook
 {
-    TCHAR * name;
-    const char * symbol;
-    void * func;
+    TCHAR * Name;
+    const char * Symbol;
+    void * Func;
 };
 
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc);

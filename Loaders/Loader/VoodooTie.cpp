@@ -30,9 +30,6 @@ VoodooShader::ICore * gVoodooCore = nullptr;
 VoodooShader::IAdapter * gVoodooAdapter = nullptr;
 VoodooShader::InitParams gInitParams;
 HINSTANCE gLoaderHandle = nullptr;
-TCHAR gVoodooPath[MAX_PATH] = { 0 };
-TCHAR gVoodooBinPrefix[MAX_PATH] = { 0 };
-TCHAR gVoodooBinPath[MAX_PATH] = { 0 };
 
 const VoodooShader::Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOADER);
 
@@ -81,77 +78,51 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
  */
 bool WINAPI LoadVoodoo()
 {
-    wchar_t pathConfig[MAX_PATH];
-    wchar_t pathLoader[MAX_PATH];
-    wchar_t pathLocalRoot[MAX_PATH];
-    wchar_t pathRunRoot[MAX_PATH];
-    wchar_t pathTarget[MAX_PATH];
+    ZeroMemory(&gInitParams, sizeof(gInitParams));
 
-    wchar_t pathCoreLib[MAX_PATH];
-    TCHAR buffer[MAX_PATH];
-
-    //! @todo Get the config file
-    wcscpy_s(pathConfig, L"voodoo_config.xml");
-
-    // Get the run root
-    GetCurrentDirectory(MAX_PATH, pathRunRoot);
-
-    // Get the loader
-    if (GetModuleFileName(gLoaderHandle, buffer, MAX_PATH) == 0)
-    {
-        ErrorMessage(0x2001, L"Voodoo Loader: Unable to retrieve loader path.");
-        return false;
-    }
-
-    std::wstring loaderPath(buffer);
-    std::wstring::size_type pos = loaderPath.rfind(L'\\');
-    if (pos == std::wstring::npos)
-    {
-        ErrorMessage(0x2002, L"Voodoo Loader: Unable to parse loader path.");
-        return false;
-    }
-
-    loaderPath = loaderPath.substr(0, pos);
-    wcscpy_s(pathLoader, loaderPath.c_str());
-
-    // Get the local root and target
-    HMODULE hModule = GetModuleHandle(nullptr);
-
-    if (hModule == nullptr)
+    // Get the target
+    HMODULE targetModule = GetModuleHandle(nullptr);
+    if (targetModule == nullptr)
     {
         ErrorMessage(0x2003, L"Unable to retrieve target module.");
         return false;
     }
+    gInitParams.Target = new wchar_t[MAX_PATH];
+    GetModuleFileName(targetModule, gInitParams.Target, MAX_PATH);
 
-    if (GetModuleFileName(hModule, buffer, MAX_PATH) == 0)
+    // Get the hook
+    HHOOKDEF hook = SearchHooks(gInitParams.Target);
+    if (!hook)
     {
-        ErrorMessage(0x2004, L"Unable to retrieve target path.");
-        return false;
+        ErrorMessage(0xFFFF, TEXT("Unable to locate hook for target: %s"), gInitParams.Target);
     }
 
-    std::wstring targetPath(buffer);
-    pos = targetPath.rfind(L'\\');
-    if (pos == std::wstring::npos)
-    {
-        ErrorMessage(0x2005, L"Voodoo Loader: Unable to parse target path.");
-        return false;
-    }
+    // Set the config
+    gInitParams.Config = new wchar_t[MAX_PATH];
+    StringCchCopy(gInitParams.Config, MAX_PATH, hook->Config);
 
-    std::wstring targetModule = targetPath.substr(pos+1);
-    targetPath = targetPath.substr(0, pos);
-    wcscpy_s(pathTarget, targetModule.c_str());
-    wcscpy_s(pathLocalRoot, targetPath.c_str());
+    // Set the run root
+    gInitParams.RunRoot = new wchar_t[MAX_PATH];
+    GetCurrentDirectory(MAX_PATH, gInitParams.RunRoot);
+
+    // Set the loader
+    gInitParams.Loader = new wchar_t[MAX_PATH];
+    GetModuleFileName(gLoaderHandle, gInitParams.Loader, MAX_PATH);
+
+    // Get the local root and target
+    gInitParams.LocalRoot = new wchar_t[MAX_PATH];
+    StringCchCopy(gInitParams.LocalRoot, MAX_PATH, gInitParams.Target);
+    PathRemoveFileSpec(gInitParams.LocalRoot);
+    PathAddBackslash(gInitParams.LocalRoot);
 
     // Get the global root
-    GetVoodooPath(MAX_PATH, gVoodooPath);
-    GetVoodooBinPrefix(MAX_PATH, gVoodooBinPrefix);
-    StringCchCopy(gVoodooBinPath, MAX_PATH, gVoodooPath);
-    StringCchCat(gVoodooBinPath, MAX_PATH, gVoodooBinPrefix);
+    gInitParams.GlobalRoot = new wchar_t[MAX_PATH];
+    GetVoodooBinPath(gInitParams.GlobalRoot);
 
-    wcscpy_s(pathCoreLib, gVoodooBinPath);
-    wcscat_s(pathCoreLib, L"\\Voodoo_Core.dll");
+    TCHAR corePath[MAX_PATH];
+    PathCombine(corePath, gInitParams.GlobalRoot, TEXT("Voodoo_Core.dll"));
 
-    HMODULE coreLibrary = LoadLibraryEx(pathCoreLib, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
+    HMODULE coreLibrary = LoadLibraryEx(corePath, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
 
     if (!coreLibrary)
     {
@@ -166,13 +137,6 @@ bool WINAPI LoadVoodoo()
         ErrorMessage(0x2007, L"Voodoo Loader: Unable to find core create function.");
         return false;
     }
-
-    gInitParams.Config = pathConfig;
-    gInitParams.GlobalRoot = gVoodooPath;
-    gInitParams.Loader = pathLoader;
-    gInitParams.LocalRoot = pathLocalRoot;
-    gInitParams.RunRoot = pathRunRoot;
-    gInitParams.Target = pathTarget;
 
     gVoodooCore = createFunc();
     

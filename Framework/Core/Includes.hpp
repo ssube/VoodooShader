@@ -523,12 +523,12 @@ namespace VoodooShader
      */
     struct InitParams
     {
-        const wchar_t * GlobalRoot;
-        const wchar_t * LocalRoot;
-        const wchar_t * RunRoot;
-        const wchar_t * Target;
-        const wchar_t * Loader;
-        const wchar_t * Config;
+        wchar_t * GlobalRoot;
+        wchar_t * LocalRoot;
+        wchar_t * RunRoot;
+        wchar_t * Target;
+        wchar_t * Loader;
+        wchar_t * Config;
     };
 
     /**
@@ -564,7 +564,7 @@ namespace VoodooShader
             int32_t     VInt32[4];
             uint32_t    VUInt32[4];
             float       VFloat[4];
-            double      VDouble;
+            double      VDouble[4];
             Uuid *      VUuid;
             String *    VString;
             IObject *   VIObject;
@@ -676,6 +676,6 @@ namespace VoodooShader
      * @param pInitParams Setup parameters for this core.
      * @return A new ICore object, if one was created successfully.
      */
-    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(_In_ const InitParams * const pInitParams);
+    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore();
 #endif
 }

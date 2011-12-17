@@ -25,6 +25,18 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
+#include "Shlwapi.h"
+#pragma comment(lib, "Shlwapi.lib")
+
+struct HookDef
+{
+    TCHAR Name[MAX_PATH];
+    TCHAR Target[MAX_PATH];
+    TCHAR Config[MAX_PATH];
+};
+
+typedef HookDef * HHOOKDEF;
+
 /**
  * Display a formatted error message.
  * 
@@ -44,7 +56,7 @@ inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format
     va_end(args);
 
     TCHAR title[32];
-    _tprintf_s(TEXT("Voodoo Error %06X"), errorCode);
+    _tprintf_s(TEXT("Voodoo Error 0X%04X"), errorCode);
 
     MessageBox(nullptr, &buffer[0], title, MB_OK | MB_ICONWARNING);
 }
@@ -77,7 +89,7 @@ inline static void * WINAPI FindFunction(const LPTSTR libname, const LPCSTR func
     return GetProcAddress(*pModule, funcname);
 }
 
-inline static bool WINAPI GetVoodooPath(int size, _In_count_(size) TCHAR * pBuffer)
+inline static bool WINAPI GetVoodooPath(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
 {
     if (!pBuffer) return false;
 
@@ -92,7 +104,7 @@ inline static bool WINAPI GetVoodooPath(int size, _In_count_(size) TCHAR * pBuff
             OutputDebugString(pBuffer);
             OutputDebugString(TEXT("\n"));
 
-            _tcscat_s(pBuffer, size, TEXT("\\"));
+            PathAddBackslash(pBuffer);
 
             RegCloseKey(rootPath);
             return true;
@@ -105,7 +117,7 @@ inline static bool WINAPI GetVoodooPath(int size, _In_count_(size) TCHAR * pBuff
     }
 }
 
-inline static bool WINAPI GetVoodooBinPrefix(int size, _In_count_(size) TCHAR * pBuffer)
+inline static bool WINAPI GetVoodooBinPrefix(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
 {
     if (!pBuffer) return false;
 
@@ -120,7 +132,7 @@ inline static bool WINAPI GetVoodooBinPrefix(int size, _In_count_(size) TCHAR * 
             OutputDebugString(pBuffer);
             OutputDebugString(TEXT("\n"));
 
-            _tcscat_s(pBuffer, size, TEXT("\\"));
+            PathAddBackslash(pBuffer);
 
             RegCloseKey(rootPath);
             return true;
@@ -133,79 +145,86 @@ inline static bool WINAPI GetVoodooBinPrefix(int size, _In_count_(size) TCHAR * 
     }
 }
 
-inline static bool WINAPI GetVoodooBinPath(int size, _In_count_(size) TCHAR * pBuffer)
+inline static bool WINAPI GetVoodooBinPath(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
 {
     if (!pBuffer) return false;
 
     TCHAR path[MAX_PATH];
     TCHAR prefix[MAX_PATH];
 
-    GetVoodooPath(MAX_PATH, path);
-    GetVoodooBinPrefix(MAX_PATH, prefix);
+    GetVoodooPath(path);
+    GetVoodooBinPrefix(prefix);
 
-    _tcscpy_s(pBuffer, size, path);
-    _tcscat_s(pBuffer, size, prefix);
+    PathCombine(pBuffer, path, prefix);
+    PathAddBackslash(pBuffer);
 
     return true;
 }
 
-#define MAX_KEY_LENGTH 255
-
-inline static bool WINAPI SearchHooksInKey(_In_z_ TCHAR * moduleName, _In_ HKEY key)
+inline static bool WINAPI MatchHook(_In_z_ TCHAR * module, _In_z_ TCHAR * target)
 {
-    DWORD index = 0, nameSize = MAX_KEY_LENGTH;
-    TCHAR hookID[MAX_KEY_LENGTH];
+    if (!module || !target) return false;
 
-    while (RegEnumKeyEx(key, index++, hookID, &nameSize, NULL, NULL, NULL, NULL) == ERROR_SUCCESS && nameSize > 0)
-    {
-        HKEY hookKey = nullptr;
-
-        if (RegOpenKeyEx(key, hookID, 0, KEY_READ, &hookKey) == ERROR_SUCCESS)
-        {
-            DWORD valueType = 0, valueSize = 1024;
-            TCHAR valueBuffer[1024];
-
-            if (RegQueryValueEx(hookKey, TEXT("Active"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
-            {
-                if (valueBuffer[0] == TEXT('1') || _tcsicmp(valueBuffer, TEXT("true")) == 0)
-                {
-                    valueType = 0;
-                    valueSize = 1024;
-
-                    if (RegQueryValueEx(hookKey, TEXT("Target"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
-                    {
-                        if (_tcsicmp(moduleName, valueBuffer) == 0)
-                        {
-                            RegCloseKey(hookKey);
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            RegCloseKey(hookKey);
-        }
-
-        nameSize = MAX_KEY_LENGTH;
-    }
-
-    return false;
+    return (PathMatchSpec(module, target) == TRUE);
 }
 
-inline static bool WINAPI SearchHooks(_In_z_ TCHAR * moduleName)
+#define MAX_KEY_LENGTH 255
+
+inline static HHOOKDEF WINAPI SearchHooks(_In_z_ TCHAR * moduleName)
 {
     HKEY hookRoot = nullptr;
 
     if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader\\Hooks"), 0, KEY_READ, &hookRoot) == ERROR_SUCCESS && hookRoot != nullptr)
     {
-        if (SearchHooksInKey(moduleName, hookRoot))
+        DWORD index = 0, nameSize = MAX_KEY_LENGTH;
+        TCHAR hookID[MAX_KEY_LENGTH];
+
+        while (RegEnumKeyEx(hookRoot, index++, hookID, &nameSize, NULL, NULL, NULL, NULL) == ERROR_SUCCESS && nameSize > 0)
         {
-            RegCloseKey(hookRoot);
-            return true;
-        } else {
-            RegCloseKey(hookRoot);
+            HKEY hookKey = nullptr;
+
+            if (RegOpenKeyEx(hookRoot, hookID, 0, KEY_READ, &hookKey) == ERROR_SUCCESS)
+            {
+                DWORD valueType = 0, valueSize = MAX_PATH;
+                TCHAR valueBuffer[MAX_PATH];
+
+                if (RegQueryValueEx(hookKey, TEXT("Active"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
+                {
+                    if (valueBuffer[0] == TEXT('1') || _tcsicmp(valueBuffer, TEXT("true")) == 0)
+                    {
+                        valueType = 0, valueSize = MAX_PATH;
+
+                        if (RegQueryValueEx(hookKey, TEXT("Target"), NULL, &valueType, (BYTE*)valueBuffer, &valueSize) == ERROR_SUCCESS)
+                        {
+                            if (MatchHook(moduleName, valueBuffer))
+                            {
+                                HookDef * hook = new HookDef();
+
+                                StringCchCopy(hook->Target, MAX_PATH, valueBuffer);
+
+                                valueType = 0, valueSize = MAX_PATH;
+                                RegQueryValueEx(hookKey, TEXT("Name"), NULL, &valueType, (BYTE*)hook->Name, &valueSize);
+
+                                valueType = 0, valueSize = MAX_PATH;
+                                RegQueryValueEx(hookKey, TEXT("Config"), NULL, &valueType, (BYTE*)hook->Config, &valueSize);
+
+                                RegCloseKey(hookKey);
+                                RegCloseKey(hookRoot);
+
+                                return hook;
+                            }
+                        }
+                    }
+                }
+
+                RegCloseKey(hookKey);
+            }
+
+            nameSize = MAX_KEY_LENGTH;
         }
     }
+
+    RegCloseKey(hookRoot);
 
     return false;
 }

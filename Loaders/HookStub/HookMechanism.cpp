@@ -58,18 +58,17 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
                 TCHAR moduleName[MAX_PATH];
                 GetModuleFileName(GetModuleHandle(NULL), moduleName, MAX_PATH);
 
+                HHOOKDEF hook = SearchHooks(moduleName);
+
                 ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\processes.log"), gFilePath, MAX_PATH);
-
-                bool doHook = SearchHooks(moduleName);
-
                 FILE * pf = nullptr;
                 if (_tfopen_s(&pf, gFilePath, TEXT("a")) == 0)
                 {
-                    _ftprintf_s(pf, TEXT("%s = %s\n"), moduleName, ((doHook)?TEXT("true"):TEXT("false")));
+                    _ftprintf_s(pf, TEXT("%s = %s\n"), moduleName, ((hook)?TEXT("true"):TEXT("false")));
                     fclose(pf);
                 }
 
-                if (doHook)
+                if (hook)
                 {
                     LoadFullLoader();
                 }
@@ -126,8 +125,8 @@ bool WINAPI LoadFullLoader()
     int result = 0;
     TCHAR binPath[MAX_PATH];
 
-    GetVoodooBinPath(MAX_PATH, binPath);
-    StringCchCat(binPath, MAX_PATH, TEXT("\\Voodoo_Loader.dll"));
+    GetVoodooBinPath(binPath);
+    PathCombine(binPath, binPath, TEXT("Voodoo_Loader.dll"));
 
     gFullLoader = LoadLibraryEx(binPath, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 

@@ -107,10 +107,10 @@ int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHook 
 
     for (int i = 0; i < hookCount; ++i)
     {
-        if (hooks[i].name) module = hooks[i].name;
+        if (hooks[i].Name) module = hooks[i].Name;
         if (module)
         {
-            if (InstallDllHook(hooks[i].name, hooks[i].symbol, hooks[i].func))
+            if (InstallDllHook(hooks[i].Name, hooks[i].Symbol, hooks[i].Func))
             {
                 ++success;
             }

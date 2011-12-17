@@ -234,7 +234,7 @@ namespace VoodooShader
                 L" major=\"" << pVersion->Major << L"\" " <<
                 L" minor=\"" << pVersion->Minor << L"\" " <<
                 L" patch=\"" << pVersion->Patch << L"\" " <<
-                L" build=\""   << pVersion->Build << L"\" " <<
+                L" build=\"" << pVersion->Build << L"\" " <<
                 L" debug=\"" << pVersion->Debug << L"\" ";
 
             if (pVersion->Name) logMsg << L" name=\"" << pVersion->Name << L"\" ";

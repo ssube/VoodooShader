@@ -123,9 +123,9 @@ namespace VoodooShader
 
         // Load variables, built-in first
         wchar_t buffer[MAX_PATH];
-        GetVoodooPath(MAX_PATH, buffer);
+        GetVoodooPath(buffer);
         m_Parser->Add(L"globalroot", buffer, VT_System);
-        GetVoodooBinPrefix(MAX_PATH, buffer);
+        GetVoodooBinPrefix(buffer);
         m_Parser->Add(L"binprefix", buffer, VT_System);
 
         m_Parser->Add(L"localroot", pInitParams->LocalRoot, VT_System);
