@@ -59,25 +59,13 @@ VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t numb
     return nullptr;
 }
 
-BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
-{
-    UNREFERENCED_PARAMETER(lpvReserved);
-
-    if (fdwReason == DLL_PROCESS_ATTACH)
-    {
-        DisableThreadLibraryCalls(hinstDLL);
-
-        gLoaderHandle = hinstDLL;
-    }
-
-    return TRUE;
-}
-
 /**
  * Locate and load the Voodoo core, verify the functions and initialize the framework.
  */
 bool WINAPI LoadVoodoo()
 {
+    if (gVoodooCore) return true;
+
     ZeroMemory(&gInitParams, sizeof(gInitParams));
 
     // Get the target
@@ -117,10 +105,11 @@ bool WINAPI LoadVoodoo()
 
     // Get the global root
     gInitParams.GlobalRoot = new wchar_t[MAX_PATH];
-    GetVoodooBinPath(gInitParams.GlobalRoot);
+    GetVoodooPath(gInitParams.GlobalRoot);
 
     TCHAR corePath[MAX_PATH];
-    PathCombine(corePath, gInitParams.GlobalRoot, TEXT("Voodoo_Core.dll"));
+    GetVoodooBinPath(corePath);
+    PathCombine(corePath, corePath, TEXT("Voodoo_Core.dll"));
 
     HMODULE coreLibrary = LoadLibraryEx(corePath, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
 
@@ -153,6 +142,15 @@ bool WINAPI LoadVoodoo()
             gVoodooCore = nullptr;
         }
     }
+
+    delete[] gInitParams.Config;
+    delete[] gInitParams.GlobalRoot;
+    delete[] gInitParams.Loader;
+    delete[] gInitParams.LocalRoot;
+    delete[] gInitParams.RunRoot;
+    delete[] gInitParams.Target;
+
+    if (hook) delete hook;
 
     return (gVoodooCore != nullptr);
 }

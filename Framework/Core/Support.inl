@@ -74,8 +74,7 @@ inline static HMODULE WINAPI LoadSystemLibrary(const LPTSTR libname)
     TCHAR path[MAX_PATH];
 
     GetSystemDirectory(path, MAX_PATH);
-    StringCchCat(path, MAX_PATH, TEXT("\\"));
-    StringCchCat(path, MAX_PATH, libname);
+    PathCombine(path, path, libname);
 
     return LoadLibrary(path);
 }
@@ -90,46 +89,72 @@ inline static void * WINAPI FindFunction(const LPTSTR libname, const LPCSTR func
     return GetProcAddress(*pModule, funcname);
 }
 
+inline static HKEY WINAPI GetVoodooKey()
+{
+    HKEY root = nullptr;
+
+    if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader"), NULL, KEY_READ, &root) == ERROR_SUCCESS)
+    {
+        return root;
+    } else {
+        return nullptr;
+    }
+}
+
 inline static bool WINAPI GetVoodooPath(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
 {
     if (!pBuffer) return false;
 
-    DWORD valueType = 0, valueSize = MAX_PATH;
-
-    if (RegQueryValueEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader\\Path"), NULL, &valueType, (BYTE*)pBuffer, &valueSize) == ERROR_SUCCESS)
+    HKEY root = GetVoodooKey();
+    if (root)
     {
-        pBuffer[MAX_PATH-1] = 0;
+        DWORD valueType = REG_SZ, valueSize = MAX_PATH;
 
-        OutputDebugString(pBuffer);
-        OutputDebugString(TEXT("\n"));
+        if (RegQueryValueEx(root, TEXT("Path"), NULL, &valueType, (BYTE*)pBuffer, &valueSize) == ERROR_SUCCESS)
+        {
+            pBuffer[valueSize - 1] = 0;
 
-        PathAddBackslash(pBuffer);
+            OutputDebugString(pBuffer);
+            OutputDebugString(TEXT("\n"));
 
-        return true;
-    } else {
-        return false;
+            PathAddBackslash(pBuffer);
+
+            RegCloseKey(root);
+            return true;
+        }
+
+        RegCloseKey(root);
     }
+
+    return false;
 }
 
 inline static bool WINAPI GetVoodooBinPrefix(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
 {
     if (!pBuffer) return false;
 
-    DWORD valueType = 0, valueSize = MAX_PATH;
-
-    if (RegQueryValueEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader\\BinPrefix"), NULL, &valueType, (BYTE*)pBuffer, &valueSize) == ERROR_SUCCESS)
+    HKEY root = GetVoodooKey();
+    if (root)
     {
-        pBuffer[MAX_PATH-1] = 0;
+        DWORD valueType = REG_SZ, valueSize = MAX_PATH;
 
-        OutputDebugString(pBuffer);
-        OutputDebugString(TEXT("\n"));
+        if (RegQueryValueEx(root, TEXT("BinPrefix"), NULL, &valueType, (BYTE*)pBuffer, &valueSize) == ERROR_SUCCESS)
+        {
+            pBuffer[valueSize - 1] = 0;
 
-        PathAddBackslash(pBuffer);
+            OutputDebugString(pBuffer);
+            OutputDebugString(TEXT("\n"));
 
-        return true;
-    } else {
-        return false;
+            PathAddBackslash(pBuffer);
+
+            RegCloseKey(root);
+            return true;
+        }
+
+        RegCloseKey(root);
     }
+
+    return false;
 }
 
 inline static bool WINAPI GetVoodooBinPath(_In_count_c_(MAX_PATH) TCHAR * pBuffer)

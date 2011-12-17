@@ -604,6 +604,13 @@ namespace VoodooShader
                 if (m_VertDecl) m_VertDecl->Release();
                 if (m_VertDeclT) m_VertDeclT->Release();
 
+                CGcontext context = m_Core->GetCgContext();
+                if (cgIsContext(context))
+                {
+                    cgD3D9UnloadAllPrograms();
+                    m_Core->SetCgContext(nullptr);
+                }
+
                 if (!pDevice) return true;
             }
 

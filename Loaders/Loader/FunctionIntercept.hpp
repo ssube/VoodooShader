@@ -26,10 +26,13 @@
 
 struct ModuleHook
 {
+    bool Installed;
     TCHAR * Name;
     const char * Symbol;
     void * Func;
 };
+
+BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
 
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc);
 bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol);
@@ -39,3 +42,9 @@ int WINAPI InstallKnownHooks();
 
 bool WINAPI LoadEasyHook();
 bool WINAPI UnloadEasyHook();
+
+bool WINAPI InstallSystemHooks();
+HMODULE WINAPI VSLoadLibraryA(_In_ LPCSTR lpFileName);
+HMODULE WINAPI VSLoadLibraryW(_In_ LPCWSTR lpFileName);
+HMODULE WINAPI VSLoadLibraryExA(_In_ LPCSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags);
+HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags);

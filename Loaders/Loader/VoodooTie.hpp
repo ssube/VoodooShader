@@ -45,8 +45,6 @@ const uint32_t                  VOODOO_CALLTYPE API_ClassCount();
 const wchar_t *                 VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * pUuid);
 VoodooShader::IObject *         VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);
 
-BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved);
-
 bool WINAPI LoadVoodoo();
 bool WINAPI UnloadVoodoo();
 /**

@@ -34,18 +34,33 @@ ULONG threadList[] = {0};
 
 ModuleHook hookList[] =
 {
-    { L"d3d8.dll",      "Direct3DCreate8",      &VSDirect3DCreate8 },
-    { L"d3d9.dll",      "Direct3DCreate9",      &VSDirect3DCreate9 },
-    { L"d3d9.dll",      "Direct3DCreate9Ex",    &VSDirect3DCreate9Ex },
-    { L"d3d10.dll",     "D3D10CreateDevice",    &VSD3D10CreateDevice },
-    { L"dinput8.dll",   "DirectInput8Create",   &VSDirectInput8Create },
-    { L"dinput.dll",    "DirectInputCreateA",   &VSDirectInputCreateA },
-    { L"dinput.dll",    "DirectInputCreateW",   &VSDirectInputCreateW },
-    { L"dsound8.dll",   "DirectSoundCreate8",   &VSDirectSoundCreate8 },
-    { nullptr,          nullptr,                nullptr }
+    { false, L"d3d8.dll",      "Direct3DCreate8",      &VSDirect3DCreate8 },
+    { false, L"d3d9.dll",      "Direct3DCreate9",      &VSDirect3DCreate9 },
+    { false, L"d3d9.dll",      "Direct3DCreate9Ex",    &VSDirect3DCreate9Ex },
+    { false, L"d3d10.dll",     "D3D10CreateDevice",    &VSD3D10CreateDevice },
+    { false, L"dinput8.dll",   "DirectInput8Create",   &VSDirectInput8Create },
+    { false, L"dinput.dll",    "DirectInputCreateA",   &VSDirectInputCreateA },
+    { false, L"dinput.dll",    "DirectInputCreateW",   &VSDirectInputCreateW },
+    { false, L"dsound8.dll",   "DirectSoundCreate8",   &VSDirectSoundCreate8 },
+    { false, nullptr,          nullptr,                nullptr }
 };
 
 TCHAR moduleName[MAX_PATH];
+
+BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
+{
+    UNREFERENCED_PARAMETER(lpvReserved);
+
+    if (fdwReason == DLL_PROCESS_ATTACH)
+    {
+        DisableThreadLibraryCalls(hinstDLL);
+        InstallSystemHooks();
+
+        gLoaderHandle = hinstDLL;
+    }
+
+    return TRUE;
+}
 
 bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFunc)
 {
@@ -103,17 +118,13 @@ int WINAPI InstallHookList(_In_ int hookCount, _In_count_(hookCount) ModuleHook 
     }
 
     int success = 0;
-    TCHAR * module = nullptr;
 
     for (int i = 0; i < hookCount; ++i)
     {
-        if (hooks[i].Name) module = hooks[i].Name;
-        if (module)
+        if (!hooks[i].Installed && InstallDllHook(hooks[i].Name, hooks[i].Symbol, hooks[i].Func))
         {
-            if (InstallDllHook(hooks[i].Name, hooks[i].Symbol, hooks[i].Func))
-            {
-                ++success;
-            }
+            hooks[i].Installed = true;
+            ++success;
         }
     }
 
@@ -137,4 +148,62 @@ bool WINAPI UnloadEasyHook()
     LhUninstallAllHooks();
 
     return true;
+}
+
+// Intercept library loading to trigger hook installation
+bool WINAPI InstallSystemHooks()
+{
+    if (!InstallDllHook(TEXT("kernel32.dll"), "LoadLibraryA", &VSLoadLibraryA)) return false;
+    if (!InstallDllHook(TEXT("kernel32.dll"), "LoadLibraryW", &VSLoadLibraryW)) return false;
+    if (!InstallDllHook(TEXT("kernel32.dll"), "LoadLibraryExA", &VSLoadLibraryExA)) return false;
+    if (!InstallDllHook(TEXT("kernel32.dll"), "LoadLibraryExW", &VSLoadLibraryExW)) return false;
+    return true;
+}
+
+HMODULE WINAPI VSLoadLibraryA(_In_ LPCSTR lpFileName)
+{
+    HMODULE retval = LoadLibraryA(lpFileName);
+
+    if (retval)
+    {
+        InstallKnownHooks();
+    }
+
+    return retval;
+}
+
+HMODULE WINAPI VSLoadLibraryW(_In_ LPCWSTR lpFileName)
+{
+    HMODULE retval = LoadLibraryW(lpFileName);
+
+    if (retval)
+    {
+        InstallKnownHooks();
+    }
+
+    return retval;
+}
+
+HMODULE WINAPI VSLoadLibraryExA(_In_ LPCSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags)
+{
+    HMODULE retval = LoadLibraryExA(lpFileName, hFile, dwFlags);
+
+    if (retval)
+    {
+        InstallKnownHooks();
+    }
+
+    return retval;
+}
+
+HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags)
+{
+    HMODULE retval = LoadLibraryExW(lpFileName, hFile, dwFlags);
+
+    if (retval)
+    {
+        InstallKnownHooks();
+    }
+
+    return retval;
 }
