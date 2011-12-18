@@ -26,12 +26,6 @@
 
 #include <stdlib.h>
 
-#ifdef _DEBUG
-#   define VOODOO_DEBUGBREAK DebugBreak()
-#else
-#   define VOODOO_DEBUGBREAK
-#endif
-
 /**
  * Direct3D 8
  */

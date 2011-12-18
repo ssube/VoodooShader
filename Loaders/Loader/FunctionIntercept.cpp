@@ -72,6 +72,14 @@ bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFun
 
     if (gHooks.find(offset) != gHooks.end()) return false;
 
+#ifdef _DEBUG
+    FILE * pf = GetVoodooGlobalLog();
+    if (pf)
+    {
+        _ftprintf(pf, TEXT("InstallDllHook(%s, %S, %p) == "), name, symbol, pFunc);
+    }
+#endif
+
     TRACED_HOOK_HANDLE tracer = new HOOK_TRACE_INFO();
     NTSTATUS result = LhInstallHook(offset, pFunc, nullptr, tracer);
 
@@ -79,10 +87,28 @@ bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFun
     {
         LhSetInclusiveACL(threadList, 1, tracer);
         gHooks[offset] = tracer;
+
+#ifdef _DEBUG
+        if (pf)
+        {
+            _ftprintf(pf, TEXT("true\n"));
+            fclose(pf);
+        }
+#endif
+
         return true;
     } else {
         PWCHAR estr = RtlGetLastErrorString();
         ErrorMessage(0x200A, TEXT("EasyHook Error: %s"), estr);
+
+#ifdef _DEBUG
+        if (pf)
+        {
+            _ftprintf(pf, TEXT("false\n"));
+            fclose(pf);
+        }
+#endif
+
         return false;
     }
 }
@@ -164,6 +190,15 @@ HMODULE WINAPI VSLoadLibraryA(_In_ LPCSTR lpFileName)
 {
     HMODULE retval = LoadLibraryA(lpFileName);
 
+#ifdef _DEBUG
+    FILE * pf = GetVoodooGlobalLog();
+    if (pf)
+    {
+        _ftprintf(pf, TEXT("DETOUR: VSLoadLibraryA(%S)\n"), lpFileName);
+        fclose(pf);
+    }
+#endif
+
     if (retval)
     {
         InstallKnownHooks();
@@ -175,6 +210,15 @@ HMODULE WINAPI VSLoadLibraryA(_In_ LPCSTR lpFileName)
 HMODULE WINAPI VSLoadLibraryW(_In_ LPCWSTR lpFileName)
 {
     HMODULE retval = LoadLibraryW(lpFileName);
+
+#ifdef _DEBUG
+    FILE * pf = GetVoodooGlobalLog();
+    if (pf)
+    {
+        _ftprintf(pf, TEXT("DETOUR: VSLoadLibraryW(%s)\n"), lpFileName);
+        fclose(pf);
+    }
+#endif
 
     if (retval)
     {
@@ -188,6 +232,15 @@ HMODULE WINAPI VSLoadLibraryExA(_In_ LPCSTR lpFileName, HANDLE hFile, _In_ DWORD
 {
     HMODULE retval = LoadLibraryExA(lpFileName, hFile, dwFlags);
 
+#ifdef _DEBUG
+    FILE * pf = GetVoodooGlobalLog();
+    if (pf)
+    {
+        _ftprintf(pf, TEXT("DETOUR: VSLoadLibraryExA(%S, %p, %d)\n"), lpFileName, hFile, dwFlags);
+        fclose(pf);
+    }
+#endif
+
     if (retval)
     {
         InstallKnownHooks();
@@ -199,6 +252,15 @@ HMODULE WINAPI VSLoadLibraryExA(_In_ LPCSTR lpFileName, HANDLE hFile, _In_ DWORD
 HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags)
 {
     HMODULE retval = LoadLibraryExW(lpFileName, hFile, dwFlags);
+
+#ifdef _DEBUG
+    FILE * pf = GetVoodooGlobalLog();
+    if (pf)
+    {
+        _ftprintf(pf, TEXT("DETOUR: VSLoadLibraryExW(%s, %p, %d)\n"), lpFileName, hFile, dwFlags);
+        fclose(pf);
+    }
+#endif
 
     if (retval)
     {

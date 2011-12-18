@@ -25,12 +25,6 @@
 
 #include <stdlib.h>
 
-#ifdef _DEBUG
-#   define VOODOO_DEBUGBREAK DebugBreak()
-#else
-#   define VOODOO_DEBUGBREAK
-#endif
-
 typedef DWORD (WINAPI * Type_DirectSoundCreate8)(LPCGUID, LPVOID *, LPVOID);
 
 HMODULE gModule_DS8;

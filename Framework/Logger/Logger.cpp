@@ -274,17 +274,12 @@ namespace VoodooShader
                 // Format the message in memory to prevent partial messages from being dumped
                 wstringstream logMsg;
 
-                logMsg << "    <Message severity=\"";
-                logMsg << level;
-                logMsg << "\" ";
-                logMsg << this->LogTime().GetData();
+                logMsg << "    <Message severity=\"" << level << "\" ";
                 logMsg << this->LogTicks().GetData();
 
-                if (source) logMsg << " source=\"" << source;
+                if (source) logMsg << " source=\"" << source << "\"";
 
-                logMsg << "\">";
-                logMsg << fmtmsg.GetData();
-                logMsg << "</Message>\n";
+                logMsg << ">" << fmtmsg.GetData() << "</Message>\n";
 
 #ifdef _DEBUG
                 if (level & (LL_ModWarn | LL_ModError))

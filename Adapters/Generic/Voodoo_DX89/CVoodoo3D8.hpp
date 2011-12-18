@@ -40,7 +40,7 @@ namespace VoodooShader
         {
         public:
             CVoodoo3D8(UINT sdkVersion, IDirect3D9 * pRealObj);
-            virtual STDMETHODCALLTYPE ~CVoodoo3D8();
+            ~CVoodoo3D8();
 
             // IUnknown methods
             STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);

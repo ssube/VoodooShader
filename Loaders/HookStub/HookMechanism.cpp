@@ -22,12 +22,10 @@
 
 #include "Support.inl"
 
-#include <stdio.h>
-
 HINSTANCE gHookLoader = nullptr;
 unsigned int gLoadOnce = 1;
-HMODULE gFullLoader;
-TCHAR gFilePath[MAX_PATH];
+HMODULE gFullLoader = nullptr;
+HHOOK gSystemHook = nullptr;
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
 {
@@ -49,7 +47,7 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
     {
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     } else {
-        if (nCode == HCBT_CREATEWND)
+        if (nCode == HCBT_CREATEWND || nCode == HCBT_ACTIVATE)
         {
             if (InterlockedCompareExchange(&gLoadOnce, 0, 1) == 1)
             {
@@ -60,11 +58,10 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
 
                 HHOOKDEF hook = SearchHooks(moduleName);
 
-                ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\processes.log"), gFilePath, MAX_PATH);
-                FILE * pf = nullptr;
-                if (_tfopen_s(&pf, gFilePath, TEXT("a")) == 0)
+                FILE * pf = GetVoodooGlobalLog();
+                if (pf)
                 {
-                    _ftprintf_s(pf, TEXT("%s = %s\n"), moduleName, ((hook)?TEXT("true"):TEXT("false")));
+                    _ftprintf_s(pf, TEXT("%s = %s\n"), moduleName, (hook ? hook->Target : TEXT("false")));
                     fclose(pf);
                 }
 
@@ -81,9 +78,11 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
 
 HHOOK WINAPI InstallGlobalHook()
 {
-    HHOOK hook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
+    if (gSystemHook) return gSystemHook;
+    
+    gSystemHook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
 
-    if (!hook)
+    if (!gSystemHook)
     {
         DWORD error = GetLastError();
 
@@ -97,7 +96,7 @@ HHOOK WINAPI InstallGlobalHook()
         return false;
     }
 
-    return hook;
+    return gSystemHook;
 }
 
 void WINAPI RemoveGlobalHook(HHOOK hook)

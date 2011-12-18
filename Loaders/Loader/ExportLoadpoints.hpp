@@ -22,6 +22,12 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
+#ifdef _DEBUG
+#   define VOODOO_DEBUGBREAK //DebugBreak()
+#else
+#   define VOODOO_DEBUGBREAK
+#endif
+
 // Direct3D8 Exports
 void * WINAPI VSDirect3DCreate8(UINT sdkVersion);
 

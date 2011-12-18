@@ -342,6 +342,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::GetAdapterModeCount(%d) == %d", Adapter, r);
 #endif
+
             return r;
         }
 

@@ -22,6 +22,8 @@
 #include <tchar.h>
 #include <strsafe.h>
 
+#include <stdio.h>
+
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
@@ -171,6 +173,19 @@ inline static bool WINAPI GetVoodooBinPath(_In_count_c_(MAX_PATH) TCHAR * pBuffe
     PathAddBackslash(pBuffer);
 
     return true;
+}
+
+inline static FILE * WINAPI GetVoodooGlobalLog()
+{
+    TCHAR path[MAX_PATH];
+    ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\VoodooShader.log"), path, MAX_PATH);
+    FILE * pf = nullptr;
+    if (_tfopen_s(&pf, path, TEXT("a")) == 0)
+    {
+        return pf;
+    } else {
+        return nullptr;
+    }
 }
 
 inline static bool WINAPI MatchHook(_In_z_ TCHAR * module, _In_ HHOOKDEF pHook)

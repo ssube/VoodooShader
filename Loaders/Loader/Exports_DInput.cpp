@@ -26,12 +26,6 @@
 
 #include <stdlib.h>
 
-#ifdef _DEBUG
-#   define VOODOO_DEBUGBREAK DebugBreak()
-#else
-#   define VOODOO_DEBUGBREAK
-#endif
-
 typedef DWORD (WINAPI * Type_DirectInput8Create)(HINSTANCE, DWORD, REFIID, LPVOID *, LPVOID);
 typedef DWORD (WINAPI * Type_DirectInputCreate)(HINSTANCE, DWORD, LPVOID, LPVOID);
 

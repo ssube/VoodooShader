@@ -26,12 +26,6 @@
 
 #include <stdlib.h>
 
-#ifdef _DEBUG
-#   define VOODOO_DEBUGBREAK DebugBreak()
-#else
-#   define VOODOO_DEBUGBREAK
-#endif
-
 typedef DWORD (WINAPI * Type_D3D10CreateDevice)(LPVOID pAdapter, DWORD DriverType, HMODULE Software, UINT Flags, UINT SDKVersion, LPVOID *ppDevice);
 typedef DWORD (WINAPI * Type_D3D10CreateDeviceAndSwapChain)(LPVOID pAdapter, DWORD DriverType, HMODULE Software, UINT Flags, UINT SDKVersion, LPVOID pSwapChainDesc, LPVOID *ppSwapChain, LPVOID *ppDevice);
 typedef DWORD (WINAPI * Type_D3D10CreateBlob)(SIZE_T NumBytes, LPVOID *ppBuffer);

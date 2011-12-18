@@ -42,14 +42,14 @@
     <IncludePath>d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\;D:\Code\WinUnit\Include;$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\bin\$(Configuration);D:\Code\Cg_July2010\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\build\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>d:\Code\Cg_July2010\include\;d:\Code\pugixml-1.0\include\;D:\Code\WinUnit\Include;$(SolutionDir)\Framework\Core\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\bin\$(Configuration);D:\Code\Cg_July2010\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\build\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

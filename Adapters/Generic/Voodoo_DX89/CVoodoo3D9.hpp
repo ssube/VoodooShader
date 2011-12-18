@@ -30,25 +30,25 @@ namespace VoodooShader
         {
         public:
             CVoodoo3D9(UINT sdkVersion, IDirect3D9 * pD3D);
-            virtual STDMETHODCALLTYPE ~CVoodoo3D9();
+            ~CVoodoo3D9();
 
             /**
             * IUnknown methods
             */
             STDMETHOD(QueryInterface)(THIS_ REFIID riid, void **ppvObj);
-            ULONG STDMETHODCALLTYPE AddRef();
-            ULONG STDMETHODCALLTYPE Release();
+            STDMETHOD_(ULONG, AddRef)();
+            STDMETHOD_(ULONG, Release)();
 
             /**
              * IDirect3D9 methods
              */
-            HRESULT STDMETHODCALLTYPE RegisterSoftwareDevice(void * pInitializeFunction);
-            UINT STDMETHODCALLTYPE GetAdapterCount();
-            HRESULT STDMETHODCALLTYPE GetAdapterIdentifier(UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER9 *pIdentifier);
-            UINT STDMETHODCALLTYPE GetAdapterModeCount(UINT Adapter, D3DFORMAT Format);
-            HRESULT STDMETHODCALLTYPE EnumAdapterModes(UINT Adapter, D3DFORMAT Format, UINT Mode, D3DDISPLAYMODE *pMode);
-            HRESULT STDMETHODCALLTYPE GetAdapterDisplayMode(UINT Adapter, D3DDISPLAYMODE *pMode);
-            HRESULT STDMETHODCALLTYPE CheckDeviceType
+            STDMETHOD(RegisterSoftwareDevice)(void * pInitializeFunction);
+            STDMETHOD_(UINT, GetAdapterCount)();
+            STDMETHOD(GetAdapterIdentifier)(UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER9 *pIdentifier);
+            STDMETHOD_(UINT, GetAdapterModeCount)(UINT Adapter, D3DFORMAT Format);
+            STDMETHOD(EnumAdapterModes)(UINT Adapter, D3DFORMAT Format, UINT Mode, D3DDISPLAYMODE *pMode);
+            STDMETHOD(GetAdapterDisplayMode)(UINT Adapter, D3DDISPLAYMODE *pMode);
+            STDMETHOD(CheckDeviceType)
             (
                 UINT Adapter,
                 D3DDEVTYPE DevType,
@@ -56,7 +56,7 @@ namespace VoodooShader
                 D3DFORMAT BackBufferFormat,
                 BOOL bWindowed
             );
-            HRESULT STDMETHODCALLTYPE CheckDeviceFormat
+            STDMETHOD(CheckDeviceFormat)
             (
                 UINT Adapter,
                 D3DDEVTYPE DeviceType,
@@ -65,7 +65,7 @@ namespace VoodooShader
                 D3DRESOURCETYPE RType,
                 D3DFORMAT CheckFormat
             );
-            HRESULT STDMETHODCALLTYPE CheckDeviceMultiSampleType
+            STDMETHOD(CheckDeviceMultiSampleType)
             (
                 UINT Adapter,
                 D3DDEVTYPE DeviceType,
@@ -74,7 +74,7 @@ namespace VoodooShader
                 D3DMULTISAMPLE_TYPE MultiSampleType,
                 DWORD *pQualityLevels
             );
-            HRESULT STDMETHODCALLTYPE CheckDepthStencilMatch
+            STDMETHOD(CheckDepthStencilMatch)
             (
                 UINT Adapter,
                 D3DDEVTYPE DeviceType,
@@ -82,16 +82,16 @@ namespace VoodooShader
                 D3DFORMAT RenderTargetFormat,
                 D3DFORMAT DepthStencilFormat
             );
-            HRESULT STDMETHODCALLTYPE CheckDeviceFormatConversion
+            STDMETHOD(CheckDeviceFormatConversion)
             (
                 UINT Adapter,
                 D3DDEVTYPE DeviceType,
                 D3DFORMAT SourceFormat,
                 D3DFORMAT TargetFormat
             );
-            HRESULT STDMETHODCALLTYPE GetDeviceCaps(UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS9 *pCaps);
-            HMONITOR STDMETHODCALLTYPE GetAdapterMonitor(UINT Adapter);
-            HRESULT STDMETHODCALLTYPE CreateDevice
+            STDMETHOD(GetDeviceCaps)(UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS9 *pCaps);
+            STDMETHOD_(HMONITOR, GetAdapterMonitor)(UINT Adapter);
+            STDMETHOD(CreateDevice)
             (
                 UINT Adapter,
                 D3DDEVTYPE DeviceType,
