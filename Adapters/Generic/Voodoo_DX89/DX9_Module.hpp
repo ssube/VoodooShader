@@ -63,6 +63,8 @@ extern IDirect3DSurface9 *backbufferSurf;
 
 extern IDirect3DSurface9 *surface_ThisFrame;
 extern VoodooShader::ITexture* texture_ThisFrame;
+extern IDirect3DSurface9 *surface_LastPass;
+extern VoodooShader::ITexture* texture_LastPass;
 
 typedef IDirect3D9 * (__stdcall * D3DFunc9) (UINT);
 

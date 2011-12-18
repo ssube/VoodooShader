@@ -163,25 +163,24 @@ namespace VoodooShader
             );
 
             /**
-            * Creates a D3D8 image surface, a sort of placeholder surface. Because D3D9 has
-            * no equivalent, this is redirected to CreateOffscreenPlainSurface at some point.
-            * @warning This uses a different call than the D3D8 original, and may not perform
-            * exactly the same. <em>(non-standard behavior)</em> @todo Test the pool these
-            * should be created in. May be default, managed or sysmem, not sure yet.
-            */
-            STDMETHOD(CreateImageSurface) (UINT Width, UINT Height, D3DFORMAT Format, IDirect3DSurface8 **ppSurface);
+             * Creates a D3D8 image surface, a sort of placeholder surface. Because D3D9 has no equivalent, this is 
+             * redirected to CreateOffscreenPlainSurface at some point.
+             * 
+             * @warning This uses a different call than the D3D8 original, and may not perform exactly the same. 
+             * @todo Test the pool these should be created in. May be default, managed or sysmem, not sure yet.
+             */
+            STDMETHOD(CreateImageSurface)(UINT Width, UINT Height, D3DFORMAT Format, IDirect3DSurface8 **ppSurface);
 
             /**
-            * Copies rectangular areas of data from one surface to another. There is no such
-            * function in D3D9, it instead requires each texture to be stretched separately.
-            * It is, however, possible to translate the call as D3D8 applies some very
-            * specific restrictions, including a lack of stretching (means the rectangles
-            * must be the same dimensions, but at different points) and the same format and
-            * surface properties. @warning For testing purposes, this only copies the first
-            * given rectangle. This is easy enough to fix, but I want to do more testing
-            * first. <em>(non-standard behavior)</em> @todo Test and then make this perform
-            * identical to the D3D8 version.
-            */
+             * Copies rectangular areas of data from one surface to another. There is no such function in D3D9, it instead 
+             * requires each texture to be stretched separately. It is, however, possible to translate the call as D3D8 
+             * applies some very specific restrictions, including a lack of stretching and the same format and surface 
+             * properties.
+             * 
+             * @warning For testing purposes, this only copies the first given rectangle. This is easy enough to fix, but I 
+             *      want to do more testing first.
+             * @todo Test and then make this perform identical to the D3D8 version.
+             */
             STDMETHOD(CopyRects)
             (
                 IDirect3DSurface8  *pSourceSurface,
@@ -193,16 +192,14 @@ namespace VoodooShader
             STDMETHOD(UpdateTexture) (IDirect3DBaseTexture8 *pSourceTexture, IDirect3DBaseTexture8 *pDestinationTexture);
 
             /**
-            * Retrieves the front-buffer surface from the D3D8 device. D3D9 has no equivalent
-            * call (kinda).
-            */
+             * Retrieves the front-buffer surface from the D3D8 device. D3D9 has no equivalent.
+             */
             STDMETHOD(GetFrontBuffer) (IDirect3DSurface8 *pDestSurface);
 
             /**
-            * Sets a new render-target surface and depth/stencil buffer. D3D9 does not
-            * combine these calls, so this automatically splits the calls and returns the
-            * combined results.
-            */
+             * Sets a new render-target surface and depth/stencil buffer. D3D9 does not combine these calls, so this 
+             * automatically splits the calls and returns the combined results.
+             */
             STDMETHOD(SetRenderTarget) (IDirect3DSurface8 *pRenderTarget, IDirect3DSurface8  *pNewZStencil);
             STDMETHOD(GetRenderTarget) (IDirect3DSurface8 **ppRenderTarget);
             STDMETHOD(GetDepthStencilSurface) (IDirect3DSurface8 **ppZStencilSurface);
@@ -224,18 +221,16 @@ namespace VoodooShader
             STDMETHOD(GetRenderState) (D3DRENDERSTATETYPE State, DWORD *pValue);
 
             /**
-            * Due to differences between the D3D8 and D3D9 APIs, this function is currently
-            * non- functional.
-            */
+             * Due to differences between the D3D8 and D3D9 APIs, this function is currently a nop.
+             */
             STDMETHOD(EndStateBlock) (DWORD *pToken);
 
             /* This function does not exist in the D3D9 API. */
             STDMETHOD(DeleteStateBlock) (DWORD Token);
 
             /**
-            * Due to differences between the D3D8 and D3D9 APIs, this function is currently
-            * non- functional
-            */
+             * Due to differences between the D3D8 and D3D9 APIs, this function is currently a nop.
+             */
             STDMETHOD(CreateStateBlock) (D3DSTATEBLOCKTYPE Type, DWORD *pToken);
             STDMETHOD(SetClipStatus) (CONST D3DCLIPSTATUS8 *pClipStatus);
             STDMETHOD(GetClipStatus) (D3DCLIPSTATUS8 *pClipStatus);
@@ -281,7 +276,7 @@ namespace VoodooShader
                 UINT VertexStreamZeroStride
             );
             // ! @todo Check the parameter of the vertex decl in the D3D9 call. Taken from MGE, so...
-            STDMETHOD(ProcessVertices)(UINT, UINT, UINT, void*, DWORD);
+            STDMETHOD(ProcessVertices)(UINT, UINT, UINT, IDirect3DVertexBuffer8*, DWORD);
             STDMETHOD(CreateVertexShader)(CONST DWORD *pDeclaration, CONST DWORD *pFunction, DWORD  *pHandle, DWORD Usage);
             STDMETHOD(SetVertexShader)(DWORD Handle);
             STDMETHOD(GetVertexShader)(DWORD *pHandle);

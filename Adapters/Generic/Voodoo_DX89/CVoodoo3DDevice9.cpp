@@ -176,7 +176,7 @@ namespace VoodooShader
                     VoodooShader::IPassRef pass = tech->GetPass(i);
                     if (pass)
                     {
-                        hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_ThisFrame, nullptr, D3DTEXF_NONE);
+                        hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_LastPass, nullptr, D3DTEXF_NONE);
                         if (FAILED(hr))
                         {
                             logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to stretch backbuffer to scratch texture.");

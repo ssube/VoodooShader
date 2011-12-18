@@ -365,29 +365,29 @@ namespace VoodooShader
                 (Width, Height, Depth, Levels, Usage, Format, Pool, &rTexture, nullptr);
 
             gpVoodooLogger->Log
-                (
+            (
                 LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::CreateVolumeTexture(%u, %u, %u, %u, %u, %u, %u, %p) == %d",
                 Width, Height, Depth, Levels, Usage, Format, Pool, *ppVolumeTexture, hr
-                );
+            );
 
             // ! @todo Set up the core volume texture registration for Voodoo DX8.9
             if (SUCCEEDED(hr))
             {
                 CVoodoo3DTexture8 *wTexture = new CVoodoo3DTexture8(this, (IDirect3DTexture9 *) rTexture);
-                (*ppVolumeTexture) = (IDirect3DCubeTexture8 *) wTexture;
+                (*ppVolumeTexture) = (IDirect3DVolumeTexture8 *) wTexture;
             }
             return hr;
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::CreateCubeTexture
-            (
+        (
             UINT EdgeLength,
             UINT Levels,
             DWORD Usage,
             D3DFORMAT Format,
             D3DPOOL Pool,
             IDirect3DCubeTexture8 **ppCubeTexture
-            )
+        )
         {
             IDirect3DCubeTexture9 *rTexture;
             HRESULT hr = m_RealDevice->CreateCubeTexture(EdgeLength, Levels, Usage, Format, Pool, &rTexture, nullptr);

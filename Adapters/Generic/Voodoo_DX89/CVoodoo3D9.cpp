@@ -255,6 +255,22 @@ namespace VoodooShader
                     }
                 }
 
+                texture_LastPass = gpVoodooCore->CreateTexture(L":lastpass", bufferTextureDesc);
+                if (texture_LastPass)
+                {
+                    IDirect3DTexture9 * texture = reinterpret_cast<IDirect3DTexture9 *>(texture_LastPass->GetData());
+
+                    hrt = texture->GetSurfaceLevel(0, &surface_LastPass);
+                    if (SUCCEEDED(hrt))
+                    {
+                        logger->Log(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :lastpass surface.");
+                    }
+                    else
+                    {
+                        logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to :lastpass scratch surface.");
+                    }
+                }
+
                 try
                 {
                     IFile * shaderFile = gpVoodooCore->GetFileSystem()->GetFile(L"test.cgfx");

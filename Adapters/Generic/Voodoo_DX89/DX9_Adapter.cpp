@@ -301,17 +301,26 @@ namespace VoodooShader
                 if (index == 0)
                 {
                     result = m_Device->SetRenderTarget(index, m_BackBuffer);
+
+                    if (SUCCEEDED(result))
+                    {
+                        logger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"Bound backbuffer to render target %d: %d", index, result);
+                        return true;
+                    } else {
+                        logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Device failed to bind backbuffer to render target %d: %d", index, result);
+                        return false;
+                    }
                 } else {
                     result = m_Device->SetRenderTarget(index, nullptr);
-                }
 
-                if (SUCCEEDED(result))
-                {
-                    logger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"Bound null texture to render target %d: %d", index, result);
-                    return true;
-                } else {
-                    logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Device failed to bind null texture to render target %d: %d", index, result);
-                    return false;
+                    if (SUCCEEDED(result))
+                    {
+                        logger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"Bound null texture to render target %d: %d", index, result);
+                        return true;
+                    } else {
+                        logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Device failed to bind null texture to render target %d: %d", index, result);
+                        return false;
+                    }
                 }
             } else {
                 IDirect3DTexture9 * pD3D9Tex = reinterpret_cast<IDirect3DTexture9*>(pTarget->GetData());

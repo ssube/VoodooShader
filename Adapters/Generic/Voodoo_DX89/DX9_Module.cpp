@@ -33,6 +33,8 @@ IDirect3DSurface9 *backbufferSurf = nullptr;
 
 IDirect3DSurface9 *surface_ThisFrame = nullptr;
 VoodooShader::ITexture* texture_ThisFrame;
+IDirect3DSurface9 *surface_LastPass = nullptr;
+VoodooShader::ITexture* texture_LastPass;
 
 const VoodooShader::Version * VOODOO_CALLTYPE API_ModuleVersion()
 {

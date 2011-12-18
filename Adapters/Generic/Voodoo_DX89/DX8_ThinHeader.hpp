@@ -19,40 +19,35 @@
  */
 #pragma once
 
-typedef IDirect3DVertexBuffer9 IDirect3DVertexBuffer;
-typedef IDirect3DIndexBuffer9 IDirect3DIndexBuffer;
-typedef IDirect3DSurface9 IDirect3DSurface;
-typedef IDirect3DTexture9 IDirect3DTexture;
-typedef IDirect3D9 IDirect3D;
-typedef IDirect3DDevice9 IDirect3DDevice;
-typedef D3DLIGHT9 D3DLIGHT8;
-typedef D3DMATERIAL9 D3DMATERIAL8;
-typedef D3DVIEWPORT9 D3DVIEWPORT8;
-typedef D3DCLIPSTATUS9 D3DCLIPSTATUS8;
-
-// Some defines to get everything to compile nicely
-#define IDirect3DIndexBuffer8 void
-#define IDirect3DVertexBuffer8 void
-#define IDirect3DSwapChain8  void
-#define IDirect3DVolumeTexture8 void
-#define IDirect3DCubeTexture8 void
-
-interface IDirect3D8;
-interface IDirect3DDevice8;
-interface IDirect3DTexture8;
-interface IDirect3DSurface8;
-
-// DX8 enums
-#define D3DTSS_ADDRESSU   13
-#define D3DTSS_ADDRESSV   14
+// DX8 enum values
+#define D3DTSS_ADDRESSU     13
+#define D3DTSS_ADDRESSV     14
 #define D3DTSS_BORDERCOLOR  15
-#define D3DTSS_MAGFILTER  16
-#define D3DTSS_MINFILTER  17
-#define D3DTSS_MIPFILTER  18
+#define D3DTSS_MAGFILTER    16
+#define D3DTSS_MINFILTER    17
+#define D3DTSS_MIPFILTER    18
 #define D3DTSS_MIPMAPLODBIAS 19
 #define D3DTSS_MAXMIPLEVEL  20
 #define D3DTSS_MAXANISOTROPY 21
-#define D3DTSS_ADDRESSW   25
+#define D3DTSS_ADDRESSW     25
+
+typedef D3DLIGHT9               D3DLIGHT8;
+typedef D3DMATERIAL9            D3DMATERIAL8;
+typedef D3DVIEWPORT9            D3DVIEWPORT8;
+typedef D3DCLIPSTATUS9          D3DCLIPSTATUS8;
+
+interface IDirect3D8;
+interface IDirect3DBaseTexture8;
+interface IDirect3DCubeTexture8;
+interface IDirect3DDevice8;
+interface IDirect3DIndexBuffer8;
+interface IDirect3DResource8;
+interface IDirect3DSurface8;
+interface IDirect3DSwapChain8;
+interface IDirect3DTexture8;
+interface IDirect3DVertexBuffer8;
+interface IDirect3DVolume8;
+interface IDirect3DVolumeTexture8;
 
 // Object creation functions
 typedef IDirect3D8 * (*D3DProc8) (UINT);
@@ -60,8 +55,8 @@ typedef IDirect3D8 * (*D3DProc8) (UINT);
 #pragma pack(4)
 
 /**
-* DX8 structs
-*/
+ * DX8 structs
+ */
 typedef struct _D3DCAPS8
 {
     /* Device Info */
@@ -197,93 +192,27 @@ typedef struct _D3DSURFACE_DESC8
     UINT                Height;
 } D3DSURFACE_DESC8;
 
-DECLARE_INTERFACE_(IDirect3DSurface8, IUnknown)
+DECLARE_INTERFACE_(IDirect3D8, IUnknown)
 {
     /*** IUnknown methods ***/
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
     STDMETHOD_(ULONG,AddRef)(THIS) PURE;
     STDMETHOD_(ULONG,Release)(THIS) PURE;
 
-    /*** IDirect3DSurface8 methods ***/
-    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
-    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
-    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
-    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
-    STDMETHOD(GetContainer)(THIS_ REFIID riid,void** ppContainer) PURE;
-    STDMETHOD(GetDesc)(THIS_ D3DSURFACE_DESC8 *pDesc) PURE;
-    STDMETHOD(LockRect)(THIS_ D3DLOCKED_RECT* pLockedRect,CONST RECT* pRect,DWORD Flags) PURE;
-    STDMETHOD(UnlockRect)(THIS) PURE;
-};
-
-DECLARE_INTERFACE_(IDirect3DResource8, IUnknown)
-{
-    /*** IUnknown methods ***/
-    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
-    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG,Release)(THIS) PURE;
-
-    /*** IDirect3DResource8 methods ***/
-    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
-    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
-    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
-    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
-    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
-    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
-    STDMETHOD_(void, PreLoad)(THIS) PURE;
-    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
-};
-
-DECLARE_INTERFACE_(IDirect3DBaseTexture8, IDirect3DResource8)
-{
-    /*** IUnknown methods ***/
-    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
-    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG,Release)(THIS) PURE;
-
-    /*** IDirect3DResource8 methods ***/
-    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
-    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
-    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
-    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
-    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
-    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
-    STDMETHOD_(void, PreLoad)(THIS) PURE;
-    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
-
-    /*** IDirect3DBaseTexture8 ***/
-    STDMETHOD_(DWORD, SetLOD)(THIS_ DWORD LODNew) PURE;
-    STDMETHOD_(DWORD, GetLOD)(THIS) PURE;
-    STDMETHOD_(DWORD, GetLevelCount)(THIS) PURE;
-};
-
-DECLARE_INTERFACE_(IDirect3DTexture8, IDirect3DBaseTexture8)
-{
-    /*** IUnknown methods ***/
-    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
-    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG,Release)(THIS) PURE;
-
-    /*** IDirect3DBaseTexture8 methods ***/
-    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
-    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
-    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
-    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
-    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
-    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
-    STDMETHOD_(void, PreLoad)(THIS) PURE;
-    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
-
-    /*** IDirect3DBaseTexture8 ***/
-    STDMETHOD_(DWORD, SetLOD)(THIS_ DWORD LODNew) PURE;
-    STDMETHOD_(DWORD, GetLOD)(THIS) PURE;
-    STDMETHOD_(DWORD, GetLevelCount)(THIS) PURE;
-
-    /*** IDirect3DTexture8 ***/
-    STDMETHOD(GetLevelDesc)(THIS_ UINT Level,D3DSURFACE_DESC8 *pDesc) PURE;
-    STDMETHOD(GetSurfaceLevel)(THIS_ UINT Level,IDirect3DSurface8** ppSurfaceLevel) PURE;
-    STDMETHOD(LockRect)(THIS_ UINT Level,D3DLOCKED_RECT* pLockedRect,CONST RECT* pRect,DWORD Flags) PURE;
-    STDMETHOD(UnlockRect)(THIS_ UINT Level) PURE;
-    STDMETHOD(AddDirtyRect)(THIS_ CONST RECT* pDirtyRect) PURE;
+    /*** IDirect3D8 methods ***/
+    STDMETHOD(RegisterSoftwareDevice)(THIS_ void* pInitializeFunction) PURE;
+    STDMETHOD_(UINT, GetAdapterCount)(THIS) PURE;
+    STDMETHOD(GetAdapterIdentifier)(THIS_ UINT Adapter,DWORD Flags,D3DADAPTER_IDENTIFIER8* pIdentifier) PURE;
+    STDMETHOD_(UINT, GetAdapterModeCount)(THIS_ UINT Adapter) PURE;
+    STDMETHOD(EnumAdapterModes)(THIS_ UINT Adapter,UINT Mode,D3DDISPLAYMODE* pMode) PURE;
+    STDMETHOD(GetAdapterDisplayMode)(THIS_ UINT Adapter,D3DDISPLAYMODE* pMode) PURE;
+    STDMETHOD(CheckDeviceType)(THIS_ UINT Adapter,D3DDEVTYPE CheckType,D3DFORMAT DisplayFormat,D3DFORMAT BackBufferFormat,BOOL Windowed) PURE;
+    STDMETHOD(CheckDeviceFormat)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,D3DFORMAT AdapterFormat,DWORD Usage,D3DRESOURCETYPE RType,D3DFORMAT CheckFormat) PURE;
+    STDMETHOD(CheckDeviceMultiSampleType)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,D3DFORMAT SurfaceFormat,BOOL Windowed,D3DMULTISAMPLE_TYPE MultiSampleType) PURE;
+    STDMETHOD(CheckDepthStencilMatch)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,D3DFORMAT AdapterFormat,D3DFORMAT RenderTargetFormat,D3DFORMAT DepthStencilFormat) PURE;
+    STDMETHOD(GetDeviceCaps)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,D3DCAPS8* pCaps) PURE;
+    STDMETHOD_(HMONITOR, GetAdapterMonitor)(THIS_ UINT Adapter) PURE;
+    STDMETHOD(CreateDevice)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,HWND hFocusWindow,DWORD BehaviorFlags,D3DPRESENT_PARAMETERS8* pPresentationParameters,IDirect3DDevice8** ppReturnedDeviceInterface) PURE;
 };
 
 DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
@@ -390,25 +319,215 @@ DECLARE_INTERFACE_(IDirect3DDevice8, IUnknown)
     STDMETHOD(DeletePatch)(THIS_ UINT Handle) PURE;
 };
 
-DECLARE_INTERFACE_(IDirect3D8, IUnknown)
+DECLARE_INTERFACE_(IDirect3DSwapChain8, IUnknown)
 {
     /*** IUnknown methods ***/
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
     STDMETHOD_(ULONG,AddRef)(THIS) PURE;
     STDMETHOD_(ULONG,Release)(THIS) PURE;
 
-    /*** IDirect3D8 methods ***/
-    STDMETHOD(RegisterSoftwareDevice)(THIS_ void* pInitializeFunction) PURE;
-    STDMETHOD_(UINT, GetAdapterCount)(THIS) PURE;
-    STDMETHOD(GetAdapterIdentifier)(THIS_ UINT Adapter,DWORD Flags,D3DADAPTER_IDENTIFIER8* pIdentifier) PURE;
-    STDMETHOD_(UINT, GetAdapterModeCount)(THIS_ UINT Adapter) PURE;
-    STDMETHOD(EnumAdapterModes)(THIS_ UINT Adapter,UINT Mode,D3DDISPLAYMODE* pMode) PURE;
-    STDMETHOD(GetAdapterDisplayMode)(THIS_ UINT Adapter,D3DDISPLAYMODE* pMode) PURE;
-    STDMETHOD(CheckDeviceType)(THIS_ UINT Adapter,D3DDEVTYPE CheckType,D3DFORMAT DisplayFormat,D3DFORMAT BackBufferFormat,BOOL Windowed) PURE;
-    STDMETHOD(CheckDeviceFormat)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,D3DFORMAT AdapterFormat,DWORD Usage,D3DRESOURCETYPE RType,D3DFORMAT CheckFormat) PURE;
-    STDMETHOD(CheckDeviceMultiSampleType)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,D3DFORMAT SurfaceFormat,BOOL Windowed,D3DMULTISAMPLE_TYPE MultiSampleType) PURE;
-    STDMETHOD(CheckDepthStencilMatch)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,D3DFORMAT AdapterFormat,D3DFORMAT RenderTargetFormat,D3DFORMAT DepthStencilFormat) PURE;
-    STDMETHOD(GetDeviceCaps)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,D3DCAPS8* pCaps) PURE;
-    STDMETHOD_(HMONITOR, GetAdapterMonitor)(THIS_ UINT Adapter) PURE;
-    STDMETHOD(CreateDevice)(THIS_ UINT Adapter,D3DDEVTYPE DeviceType,HWND hFocusWindow,DWORD BehaviorFlags,D3DPRESENT_PARAMETERS8* pPresentationParameters,IDirect3DDevice8** ppReturnedDeviceInterface) PURE;
+    /*** IDirect3DSwapChain8 methods ***/
+    STDMETHOD(Present)(THIS_ CONST RECT* pSourceRect,CONST RECT* pDestRect,HWND hDestWindowOverride,CONST RGNDATA* pDirtyRegion) PURE;
+    STDMETHOD(GetBackBuffer)(THIS_ UINT BackBuffer,D3DBACKBUFFER_TYPE Type,IDirect3DSurface8** ppBackBuffer) PURE;
+};
+
+DECLARE_INTERFACE_(IDirect3DResource8, IUnknown)
+{
+    /*** IUnknown methods ***/
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    /*** IDirect3DResource8 methods ***/
+    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
+    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
+    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
+    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
+    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
+    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
+    STDMETHOD_(void, PreLoad)(THIS) PURE;
+    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
+};
+
+DECLARE_INTERFACE_(IDirect3DBaseTexture8, IDirect3DResource8)
+{
+    /*** IUnknown methods ***/
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    /*** IDirect3DResource8 methods ***/
+    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
+    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
+    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
+    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
+    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
+    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
+    STDMETHOD_(void, PreLoad)(THIS) PURE;
+    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
+
+    /*** IDirect3DBaseTexture8 ***/
+    STDMETHOD_(DWORD, SetLOD)(THIS_ DWORD LODNew) PURE;
+    STDMETHOD_(DWORD, GetLOD)(THIS) PURE;
+    STDMETHOD_(DWORD, GetLevelCount)(THIS) PURE;
+};
+
+DECLARE_INTERFACE_(IDirect3DTexture8, IDirect3DBaseTexture8)
+{
+    /*** IUnknown methods ***/
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    /*** IDirect3DBaseTexture8 methods ***/
+    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
+    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
+    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
+    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
+    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
+    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
+    STDMETHOD_(void, PreLoad)(THIS) PURE;
+    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
+
+    /*** IDirect3DBaseTexture8 ***/
+    STDMETHOD_(DWORD, SetLOD)(THIS_ DWORD LODNew) PURE;
+    STDMETHOD_(DWORD, GetLOD)(THIS) PURE;
+    STDMETHOD_(DWORD, GetLevelCount)(THIS) PURE;
+
+    /*** IDirect3DTexture8 ***/
+    STDMETHOD(GetLevelDesc)(THIS_ UINT Level,D3DSURFACE_DESC8 *pDesc) PURE;
+    STDMETHOD(GetSurfaceLevel)(THIS_ UINT Level,IDirect3DSurface8** ppSurfaceLevel) PURE;
+    STDMETHOD(LockRect)(THIS_ UINT Level,D3DLOCKED_RECT* pLockedRect,CONST RECT* pRect,DWORD Flags) PURE;
+    STDMETHOD(UnlockRect)(THIS_ UINT Level) PURE;
+    STDMETHOD(AddDirtyRect)(THIS_ CONST RECT* pDirtyRect) PURE;
+};
+
+DECLARE_INTERFACE_(IDirect3DVolumeTexture8, IDirect3DBaseTexture8)
+{
+    /*** IUnknown methods ***/
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    /*** IDirect3DBaseTexture8 methods ***/
+    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
+    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
+    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
+    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
+    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
+    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
+    STDMETHOD_(void, PreLoad)(THIS) PURE;
+    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
+    STDMETHOD_(DWORD, SetLOD)(THIS_ DWORD LODNew) PURE;
+    STDMETHOD_(DWORD, GetLOD)(THIS) PURE;
+    STDMETHOD_(DWORD, GetLevelCount)(THIS) PURE;
+    STDMETHOD(GetLevelDesc)(THIS_ UINT Level,D3DVOLUME_DESC *pDesc) PURE;
+    STDMETHOD(GetVolumeLevel)(THIS_ UINT Level,IDirect3DVolume8** ppVolumeLevel) PURE;
+    STDMETHOD(LockBox)(THIS_ UINT Level,D3DLOCKED_BOX* pLockedVolume,CONST D3DBOX* pBox,DWORD Flags) PURE;
+    STDMETHOD(UnlockBox)(THIS_ UINT Level) PURE;
+    STDMETHOD(AddDirtyBox)(THIS_ CONST D3DBOX* pDirtyBox) PURE;
+};
+
+DECLARE_INTERFACE_(IDirect3DCubeTexture8, IDirect3DBaseTexture8)
+{
+    /*** IUnknown methods ***/
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    /*** IDirect3DBaseTexture8 methods ***/
+    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
+    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
+    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
+    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
+    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
+    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
+    STDMETHOD_(void, PreLoad)(THIS) PURE;
+    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
+    STDMETHOD_(DWORD, SetLOD)(THIS_ DWORD LODNew) PURE;
+    STDMETHOD_(DWORD, GetLOD)(THIS) PURE;
+    STDMETHOD_(DWORD, GetLevelCount)(THIS) PURE;
+    STDMETHOD(GetLevelDesc)(THIS_ UINT Level,D3DSURFACE_DESC *pDesc) PURE;
+    STDMETHOD(GetCubeMapSurface)(THIS_ D3DCUBEMAP_FACES FaceType,UINT Level,IDirect3DSurface8** ppCubeMapSurface) PURE;
+    STDMETHOD(LockRect)(THIS_ D3DCUBEMAP_FACES FaceType,UINT Level,D3DLOCKED_RECT* pLockedRect,CONST RECT* pRect,DWORD Flags) PURE;
+    STDMETHOD(UnlockRect)(THIS_ D3DCUBEMAP_FACES FaceType,UINT Level) PURE;
+    STDMETHOD(AddDirtyRect)(THIS_ D3DCUBEMAP_FACES FaceType,CONST RECT* pDirtyRect) PURE;
+};
+
+DECLARE_INTERFACE_(IDirect3DVertexBuffer8, IDirect3DResource8)
+{
+    /*** IUnknown methods ***/
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    /*** IDirect3DResource8 methods ***/
+    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
+    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
+    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
+    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
+    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
+    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
+    STDMETHOD_(void, PreLoad)(THIS) PURE;
+    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
+    STDMETHOD(Lock)(THIS_ UINT OffsetToLock,UINT SizeToLock,BYTE** ppbData,DWORD Flags) PURE;
+    STDMETHOD(Unlock)(THIS) PURE;
+    STDMETHOD(GetDesc)(THIS_ D3DVERTEXBUFFER_DESC *pDesc) PURE;
+};
+
+DECLARE_INTERFACE_(IDirect3DIndexBuffer8, IDirect3DResource8)
+{
+    /*** IUnknown methods ***/
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    /*** IDirect3DResource8 methods ***/
+    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
+    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
+    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
+    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
+    STDMETHOD_(DWORD, SetPriority)(THIS_ DWORD PriorityNew) PURE;
+    STDMETHOD_(DWORD, GetPriority)(THIS) PURE;
+    STDMETHOD_(void, PreLoad)(THIS) PURE;
+    STDMETHOD_(D3DRESOURCETYPE, GetType)(THIS) PURE;
+    STDMETHOD(Lock)(THIS_ UINT OffsetToLock,UINT SizeToLock,BYTE** ppbData,DWORD Flags) PURE;
+    STDMETHOD(Unlock)(THIS) PURE;
+    STDMETHOD(GetDesc)(THIS_ D3DINDEXBUFFER_DESC *pDesc) PURE;
+};
+
+DECLARE_INTERFACE_(IDirect3DSurface8, IUnknown)
+{
+    /*** IUnknown methods ***/
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    /*** IDirect3DSurface8 methods ***/
+    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
+    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
+    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
+    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
+    STDMETHOD(GetContainer)(THIS_ REFIID riid,void** ppContainer) PURE;
+    STDMETHOD(GetDesc)(THIS_ D3DSURFACE_DESC8 *pDesc) PURE;
+    STDMETHOD(LockRect)(THIS_ D3DLOCKED_RECT* pLockedRect,CONST RECT* pRect,DWORD Flags) PURE;
+    STDMETHOD(UnlockRect)(THIS) PURE;
+};
+
+DECLARE_INTERFACE_(IDirect3DVolume8, IUnknown)
+{
+    /*** IUnknown methods ***/
+    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    /*** IDirect3DVolume8 methods ***/
+    STDMETHOD(GetDevice)(THIS_ IDirect3DDevice8** ppDevice) PURE;
+    STDMETHOD(SetPrivateData)(THIS_ REFGUID refguid,CONST void* pData,DWORD SizeOfData,DWORD Flags) PURE;
+    STDMETHOD(GetPrivateData)(THIS_ REFGUID refguid,void* pData,DWORD* pSizeOfData) PURE;
+    STDMETHOD(FreePrivateData)(THIS_ REFGUID refguid) PURE;
+    STDMETHOD(GetContainer)(THIS_ REFIID riid,void** ppContainer) PURE;
+    STDMETHOD(GetDesc)(THIS_ D3DVOLUME_DESC *pDesc) PURE;
+    STDMETHOD(LockBox)(THIS_ D3DLOCKED_BOX * pLockedVolume,CONST D3DBOX* pBox,DWORD Flags) PURE;
+    STDMETHOD(UnlockBox)(THIS) PURE;
 };

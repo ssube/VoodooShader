@@ -294,6 +294,8 @@ namespace VoodooShader
             return false;
         }
 
+#pragma warning(push)
+#pragma warning(disable : 6385)
         bool VOODOO_METHODTYPE FrostAdapter::DrawGeometry(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags)
         {
             UNREFERENCED_PARAMETER(flags);
@@ -326,6 +328,7 @@ namespace VoodooShader
 
             return true;
         }
+#pragma warning(pop)
 
         bool VOODOO_METHODTYPE FrostAdapter::ApplyParameter(_In_ IParameter * pParam)
         {
