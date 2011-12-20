@@ -40,8 +40,6 @@ namespace VoodooUI
             InitializeComponent();
 
             cBrowserDesc.Navigating += new WebBrowserNavigatingEventHandler(webBrowser1_Navigating);
-
-            RefreshTree();
         }
 
         void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
@@ -89,7 +87,7 @@ namespace VoodooUI
 
                 if (Directory.Exists(fullpath))
                 {
-                    MessageBox.Show(String.Format("Unable to install package {0}, directory already exists.", package));
+                    MessageBox.Show(String.Format("Unable to install package {0}, directory already exists.", package), "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } else {
                     m_ProgressForm = new ProgressDialog();
                     m_ProgressForm.Show(this);
@@ -104,7 +102,7 @@ namespace VoodooUI
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Error installing package:\n" + exc.Message);
+                MessageBox.Show("Error installing package:\n" + exc.Message, "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -116,7 +114,7 @@ namespace VoodooUI
 
                 if (!Directory.Exists(fullpath))
                 {
-                    MessageBox.Show(String.Format("Unable to update package {0}, directory does not exist.", package));
+                    MessageBox.Show(String.Format("Unable to update package {0}, directory does not exist.", package), "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -131,7 +129,7 @@ namespace VoodooUI
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Error updating package:\n" + exc.Message);
+                MessageBox.Show("Error updating package:\n" + exc.Message, "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -148,7 +146,7 @@ namespace VoodooUI
             }
             catch (System.Exception exc)
             {
-                MessageBox.Show("Error removing package:\n" + exc.Message);            	
+                MessageBox.Show("Error removing package:\n" + exc.Message, "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);            	
             }
         }
 
@@ -159,8 +157,27 @@ namespace VoodooUI
                 dFolderBrowser.Description = "Select Voodoo Shader installation path.";
                 if (dFolderBrowser.ShowDialog() == DialogResult.OK)
                 {
-                    GlobalRegistry.Instance.Path = dFolderBrowser.SelectedPath;
-                    GlobalRegistry.Instance.Write();
+                    try
+                    {
+                        Directory.CreateDirectory(dFolderBrowser.SelectedPath);
+                        GlobalRegistry.Instance.Path = dFolderBrowser.SelectedPath;
+                        GlobalRegistry.Instance.Write();
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show(String.Format("Error accessing root directory {0}:\n{1}", dFolderBrowser.SelectedPath, exc.Message), "Root Directory Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else if (!Directory.Exists(GlobalRegistry.Instance.Path))
+            {
+                try
+                {
+                    Directory.CreateDirectory(GlobalRegistry.Instance.Path);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(String.Format("Root directory was not found. Error creating root directory {0}:\n{1}", dFolderBrowser.SelectedPath, exc.Message), "Root Directory Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -175,7 +192,6 @@ namespace VoodooUI
 
                 client.DownloadFileAsync(new Uri("http://msysgit.googlecode.com/files/Git-1.7.8-preview20111206.exe"), "msysgit.exe");
                 m_ProgressForm.Show(this);
-                this.Enabled = false;
                 m_ProgressForm.WriteLine("Downloading git installer...");
             }
         }
@@ -205,7 +221,6 @@ namespace VoodooUI
                 Process.Start("http://code.google.com/p/msysgit/downloads/detail?name=Git-1.7.8-preview20111206.exe");
 
                 m_ProgressForm.AllowClose = true;
-                this.Enabled = true;
             }
             else
             {
@@ -214,7 +229,6 @@ namespace VoodooUI
                 m_ProgressForm.WriteLine("Git installer has completed.");
 
                 m_ProgressForm.AllowClose = true;
-                this.Enabled = true;
             }
         }
 
@@ -243,6 +257,7 @@ namespace VoodooUI
         private void FormShown(object sender, EventArgs e)
         {
             StartupCheck();
+            RefreshTree();
         }
 
         private void PackageSelect(object sender, TreeViewEventArgs e)
@@ -277,7 +292,7 @@ namespace VoodooUI
             {
                 if (String.Compare(details.Path, "user") == 0)
                 {
-                    MessageBox.Show(String.Format("Unable to install package {0}, illegal path.", details.Path));
+                    MessageBox.Show(String.Format("Unable to install package {0}, illegal path.", details.Path), "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {

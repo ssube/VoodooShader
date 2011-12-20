@@ -60,7 +60,7 @@ namespace VoodooSharp
         {
             get
             {
-                return System.IO.Path.Combine(Path, BinPrefix);
+                return System.IO.Path.Combine(System.IO.Path.Combine(Path, "framework"), BinPrefix);
             }
         }
 

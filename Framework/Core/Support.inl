@@ -169,7 +169,8 @@ inline static bool WINAPI GetVoodooBinPath(_In_count_c_(MAX_PATH) TCHAR * pBuffe
     GetVoodooPath(path);
     GetVoodooBinPrefix(prefix);
 
-    PathCombine(pBuffer, path, prefix);
+    PathCombine(pBuffer, path, TEXT("framework"));
+    PathCombine(pBuffer, pBuffer, prefix);
     PathAddBackslash(pBuffer);
 
     return true;
