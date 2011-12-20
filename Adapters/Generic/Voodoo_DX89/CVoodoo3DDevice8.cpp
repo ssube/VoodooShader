@@ -36,6 +36,11 @@ namespace VoodooShader
             gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::CVoodoo3DDevice8(%p) == %p", realDevice, this);
         }
 
+        CVoodoo3DDevice8::~CVoodoo3DDevice8()
+        {
+            m_RealDevice = nullptr;
+        }
+
         // IUnknown methods
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::QueryInterface(REFIID riid, void **ppvObj)
         {

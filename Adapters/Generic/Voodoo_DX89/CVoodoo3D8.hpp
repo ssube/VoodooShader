@@ -42,75 +42,38 @@ namespace VoodooShader
             CVoodoo3D8(UINT sdkVersion, IDirect3D9 * pRealObj);
             ~CVoodoo3D8();
 
-            // IUnknown methods
-            STDMETHOD(QueryInterface)(REFIID riid, void ** ppvObj);
-            STDMETHOD_(ULONG, AddRef)();
-            STDMETHOD_(ULONG, Release)();
+            /*** IUnknown methods ***/
+            STDMETHOD(QueryInterface)(REFIID riid, void** ppvObj);
+            STDMETHOD_(ULONG,AddRef)();
+            STDMETHOD_(ULONG,Release)();
 
-            // IDirect3D8 methods
-            STDMETHOD(CheckDepthStencilMatch)
-            (
-                UINT Adapter,
-                D3DDEVTYPE DeviceType,
-                D3DFORMAT AdapterFormat,
-                D3DFORMAT RenderTargetFormat,
-                D3DFORMAT DepthStencilFormat
-            );
-            STDMETHOD(CheckDeviceFormat)
-            (
-                UINT Adapter,
-                D3DDEVTYPE DeviceType,
-                D3DFORMAT AdapterFormat,
-                DWORD Usage,
-                D3DRESOURCETYPE RType,
-                D3DFORMAT CheckFormat
-            );
-            /**
-             * @note Direct3D8 doesn't seem to support the concept of multisampling quality levels, or won't recognize them
-             *      in this function. They are not passed back because of this.
-             */
-            STDMETHOD(CheckDeviceMultiSampleType)
-            (
-                UINT Adapter,
-                D3DDEVTYPE DeviceType,
-                D3DFORMAT SurfaceFormat,
-                BOOL Windowed,
-                D3DMULTISAMPLE_TYPE MultiSampleType
-            );
-            STDMETHOD(CheckDeviceType)
-            (
-                UINT Adapter,
-                D3DDEVTYPE CheckType,
-                D3DFORMAT DisplayFormat,
-                D3DFORMAT BackBufferFormat,
-                BOOL Windowed
-            );
-            STDMETHOD(CreateDevice)
-            (
-                UINT Adapter,
-                D3DDEVTYPE DeviceType,
-                HWND hFocusWindow,
-                DWORD BehaviorFlags,
-                D3DPRESENT_PARAMETERS8 * pPresentationParameters,
-                IDirect3DDevice8 **ppReturnedDeviceInterface
-            );
-            STDMETHOD(EnumAdapterModes)(UINT Adapter, UINT Mode, D3DDISPLAYMODE * pMode);
-            STDMETHOD_(UINT, GetAdapterCount)();
-            STDMETHOD(GetAdapterDisplayMode)(UINT Adapter, D3DDISPLAYMODE * pMode);
-            /**
-             * @note This function forcibly ignores WHQL levels
-             */
-            STDMETHOD(GetAdapterIdentifier)(UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER8 * pIdentifier);
-            STDMETHOD_(UINT, GetAdapterModeCount)(UINT Adapter);
-            STDMETHOD_(HMONITOR, GetAdapterMonitor)(UINT Adapter);
-            STDMETHOD(GetDeviceCaps)(UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS8 * pCaps);
+            /*** IDirect3D8 methods ***/
             /**
              * This is a legacy function to register a software renderer into the DX8 system; however, the DX8 docs state
              * that it is unsupported. The DX9 reintroduces support for it. Since the Voodoo CVoodoo3D8 layer targets DX9,
              * the function is callable and will target the appropriate DX9 function. It will log a warning message, due to
              * technically being illegal.
              */
-            STDMETHOD(RegisterSoftwareDevice)(void *pInitializeFunction);
+            STDMETHOD(RegisterSoftwareDevice)(void* pInitializeFunction);
+            STDMETHOD_(UINT, GetAdapterCount)();
+            /**
+             * @note This function forcibly ignores WHQL levels
+             */
+            STDMETHOD(GetAdapterIdentifier)(UINT Adapter,DWORD Flags,D3DADAPTER_IDENTIFIER8* pIdentifier);
+            STDMETHOD_(UINT, GetAdapterModeCount)(UINT Adapter);
+            STDMETHOD(EnumAdapterModes)(UINT Adapter,UINT Mode,D3DDISPLAYMODE* pMode);
+            STDMETHOD(GetAdapterDisplayMode)(UINT Adapter,D3DDISPLAYMODE* pMode);
+            STDMETHOD(CheckDeviceType)(UINT Adapter,D3DDEVTYPE CheckType,D3DFORMAT DisplayFormat,D3DFORMAT BackBufferFormat,BOOL Windowed);
+            STDMETHOD(CheckDeviceFormat)(UINT Adapter,D3DDEVTYPE DeviceType,D3DFORMAT AdapterFormat,DWORD Usage,D3DRESOURCETYPE RType,D3DFORMAT CheckFormat);
+            /**
+             * @note Direct3D8 doesn't seem to support the concept of multisampling quality levels, or won't recognize them
+             *      in this function. They are not passed back because of this.
+             */
+            STDMETHOD(CheckDeviceMultiSampleType)(UINT Adapter,D3DDEVTYPE DeviceType,D3DFORMAT SurfaceFormat,BOOL Windowed,D3DMULTISAMPLE_TYPE MultiSampleType);
+            STDMETHOD(CheckDepthStencilMatch)(UINT Adapter,D3DDEVTYPE DeviceType,D3DFORMAT AdapterFormat,D3DFORMAT RenderTargetFormat,D3DFORMAT DepthStencilFormat);
+            STDMETHOD(GetDeviceCaps)(UINT Adapter,D3DDEVTYPE DeviceType,D3DCAPS8* pCaps);
+            STDMETHOD_(HMONITOR, GetAdapterMonitor)(UINT Adapter);
+            STDMETHOD(CreateDevice)(UINT Adapter,D3DDEVTYPE DeviceType,HWND hFocusWindow,DWORD BehaviorFlags,D3DPRESENT_PARAMETERS8* pPresentationParameters,IDirect3DDevice8** ppReturnedDeviceInterface);
 
         private:
             UINT m_SdkVersion;
