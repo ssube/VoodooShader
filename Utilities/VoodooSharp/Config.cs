@@ -24,6 +24,15 @@ using System.Xml.Serialization;
 namespace VoodooSharp
 {
     [System.SerializableAttribute()]
+    public partial class NamedString
+    {
+        [XmlAttributeAttribute("Name")]
+        public string Name { get; set; }
+        [XmlTextAttribute]
+        public string Value { get; set; }
+    }
+
+    [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute("VoodooConfig", Namespace = "", IsNullable = false)]
     public partial class Config
     {

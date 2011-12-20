@@ -46,29 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeSet.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="Class.cs" />
-    <Compile Include="ConsoleRedirect.cs" />
-    <Compile Include="Default.cs" />
     <Compile Include="Hook.cs" />
-    <Compile Include="ManifestCache.cs" />
     <Compile Include="NativeModule.cs" />
+    <Compile Include="Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support.cs" />
-    <Compile Include="MessageSet.cs" />
-    <Compile Include="Module.cs" />
-    <Compile Include="Package.cs" />
-    <Compile Include="PackageManifest.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="Remote.cs" />
-    <Compile Include="RemoteManifest.cs" />
-    <Compile Include="PackageVersion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

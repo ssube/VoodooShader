@@ -117,6 +117,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PackageManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PackageManager.Designer.cs">
+      <DependentUpon>PackageManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgressDialog.cs">
       <SubType>Form</SubType>
@@ -131,12 +137,6 @@
     <Compile Include="ScanForm.Designer.cs">
       <DependentUpon>ScanForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PackageManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PackageManager.Designer.cs">
-      <DependentUpon>PackageManager.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AboutVoodoo.resx">
       <DependentUpon>AboutVoodoo.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PackageManager.resx">
+      <DependentUpon>PackageManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProgressDialog.resx">
       <DependentUpon>ProgressDialog.cs</DependentUpon>
@@ -164,9 +167,6 @@
     </Compile>
     <EmbeddedResource Include="ScanForm.resx">
       <DependentUpon>ScanForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PackageManager.resx">
-      <DependentUpon>PackageManager.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\app.manifest" />
@@ -210,7 +210,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,59 +19,27 @@
  */
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
+using System.Net;
+using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using MarkdownSharp;
 using VoodooSharp;
 
 namespace VoodooUI
 {
-    struct InstallParams
-    {
-        public PackageManifest Manifest;
-        public String Version;
-    }
-
     public partial class PackageManager : Form
     {
-        Markdown m_Parser;
         bool m_CancelNav;
-        Regex m_ParserRegex;
         ProgressDialog m_ProgressForm;
-        BackgroundWorker m_FetchWorker, m_InstallWorker;
 
         public PackageManager()
         {
             InitializeComponent();
 
             cBrowserDesc.Navigating += new WebBrowserNavigatingEventHandler(webBrowser1_Navigating);
-
-            MarkdownOptions mdopt = new MarkdownOptions();
-            mdopt.AutoHyperlink = true; mdopt.LinkEmails = true;
-            m_Parser = new Markdown(mdopt);
-
-            m_ParserRegex = new Regex("[ ]{2,}");
-
-            m_FetchWorker = new BackgroundWorker();
-            m_FetchWorker.WorkerReportsProgress = true;
-            m_FetchWorker.DoWork += new DoWorkEventHandler(worker_DoFetch);
-            m_FetchWorker.ProgressChanged += new ProgressChangedEventHandler(worker_FetchProgress);
-            m_FetchWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_FetchCompleted);
-
-            m_InstallWorker = new BackgroundWorker();
-            m_InstallWorker.WorkerReportsProgress = true;
-            m_InstallWorker.DoWork += new DoWorkEventHandler(worker_DoInstall);
-            m_InstallWorker.ProgressChanged += new ProgressChangedEventHandler(worker_InstallProgress);
-            m_InstallWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_InstallCompleted);
-
-            RefreshTree();
         }
 
         void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
@@ -84,209 +52,182 @@ namespace VoodooUI
             m_CancelNav = true;
         }
 
-        private void NodeChanged(object sender, TreeViewEventArgs e)
+        void RefreshTree()
         {
-            // Update description
-            String desc = null;
-            if (e.Node.Tag.GetType() == typeof(PackageManifest))
-            {
-                desc = (e.Node.Tag as PackageManifest).Description;
-            }
-            else if (e.Node.Tag.GetType() == typeof(PackageVersion))
-            {
-                desc = (e.Node.Tag as PackageVersion).Description;
-            }
+            List<String> packages = FindPackages(GlobalRegistry.Instance.Path);
 
-            if (desc != null)
+            foreach (String package in packages)
             {
-                desc = m_ParserRegex.Replace(desc, " ");
-                desc = m_Parser.Transform(desc);
-                m_CancelNav = false;
-                cBrowserDesc.DocumentText = desc;
+                cPackageTree.Nodes.Add(package);
             }
         }
 
-        private void FetchRemotes(object sender, EventArgs e)
+        List<String> FindPackages(String root)
         {
-            m_ProgressForm = new ProgressDialog();
-            m_ProgressForm.Text = "Progress - Fetch";
-            m_ProgressForm.Show(this);
-            this.Enabled = false;
+            List<String> packages = new List<String>();
+            string[] subdirs = Directory.GetDirectories(root);
 
-            m_FetchWorker.RunWorkerAsync();
-        }
-
-        void worker_DoFetch(object sender, DoWorkEventArgs e)
-        {
-            ManifestCache.Instance.OnLogEvent += worker_FetchProgressFilter;
-            ManifestCache.Instance.FetchAll();
-            ManifestCache.Instance.OnLogEvent -= worker_FetchProgressFilter;
-        }
-
-        void worker_FetchProgressFilter(String msg, params object[] args)
-        {
-            m_FetchWorker.ReportProgress(0, String.Format(msg, args));
-        }
-
-        void worker_FetchProgress(object sender, ProgressChangedEventArgs e)
-        {
-            m_ProgressForm.WriteLine(e.UserState as String);
-        }
-
-        void worker_FetchCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            m_ProgressForm.AllowClose = true;
-
-            this.Enabled = true;
-            RefreshTree();
-        }
-
-        private void InstallSelected(object sender, EventArgs e)
-        {
-            // Get the version
-            PackageManifest pm = null;
-            String target = null;
-                        
-            TreeNode node = cPackageTree.SelectedNode;
-            if (node == null)
+            foreach (string subdir in subdirs)
             {
-                return;
-            } else {
-                if (node.Tag.GetType() == typeof(PackageVersion))
+                if (String.Compare(subdir, "user", true) != 0 && Directory.Exists(Path.Combine(subdir, ".git")))
                 {
-                    target = (node.Tag as PackageVersion).Id;
-                    pm = node.Parent.Tag as PackageManifest;
-                }
-                else if (node.Tag.GetType() == typeof(PackageManifest))
-                {
-                    pm = node.Tag as PackageManifest;
-                    target = pm.Package.Version;
+                    packages.Add(Path.GetDirectoryName(subdir));
                 }
             }
-            
-            if (MessageBox.Show(String.Format("Update package {0} to version {1}.\nContinue?", pm.Package.Name, target), "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+
+            return packages;
+        }
+
+        void ClonePackage(String source, String branch, String path)
+        {
+            try
+            {
+                String fullpath = Path.Combine(GlobalRegistry.Instance.Path, path);
+
+                String command = String.Format("clone {0} {1}", source, fullpath);
+                RunGitCommand(command);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error downloading package:\n" + exc.Message);
+            }
+        }
+
+        void UpdatePackage(String package)
+        {
+            try
+            {
+                String fullpath = Path.Combine(GlobalRegistry.Instance.Path, package);
+
+                RunGitCommand("reset --hard");
+                RunGitCommand("pull");
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error updating package:\n" + exc.Message);
+            }
+        }
+
+        void StartupCheck()
+        {
+            if (!GlobalRegistry.Exists)
+            {
+                dFolderBrowser.Description = "Select Voodoo Shader installation path.";
+                if (dFolderBrowser.ShowDialog() == DialogResult.OK)
+                {
+                    GlobalRegistry.Instance.Path = dFolderBrowser.SelectedPath;
+                    GlobalRegistry.Instance.Write();
+                }
+            }
+
+            if (!ExistsInPath("git.exe") && !ExistsInPath("git.cmd"))
             {
                 m_ProgressForm = new ProgressDialog();
-                m_ProgressForm.Text = "Progress - Install";
+                m_ProgressForm.WriteLine("Unable to locate git for package management.");
+
+                WebClient client = new WebClient();
+                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
+                client.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(client_DownloadFileCompleted);
+
+                client.DownloadFileAsync(new Uri("http://msysgit.googlecode.com/files/Git-1.7.8-preview20111206.exe"), "msysgit.exe");
                 m_ProgressForm.Show(this);
                 this.Enabled = false;
-
-                InstallParams installParams = new InstallParams();
-                installParams.Manifest = pm;
-                installParams.Version = target;
-                m_InstallWorker.RunWorkerAsync(installParams);
+                m_ProgressForm.WriteLine("Downloading git installer...");
             }
+
+            ClonePackage("git://github.com/peachykeen/VoodooShader.git", "master", Path.Combine(GlobalRegistry.Instance.Path, "example"));
         }
 
-        void worker_DoInstall(object sender, DoWorkEventArgs e)
+        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            InstallParams installParams = (InstallParams)e.Argument;
-
-            installParams.Manifest.OnLogEvent += worker_InstallProgressFilter;
-            installParams.Manifest.Update(installParams.Version);
-            installParams.Manifest.OnLogEvent -= worker_InstallProgressFilter;
+            m_ProgressForm.Progress = e.ProgressPercentage;
         }
 
-        void worker_InstallProgressFilter(String msg, params object[] args)
+        void client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            m_InstallWorker.ReportProgress(0, String.Format(msg, args));
-        }
+            m_ProgressForm.WriteLine("Done downloading git installer.");
 
-        void worker_InstallProgress(object sender, ProgressChangedEventArgs e)
-        {
-            m_ProgressForm.WriteLine(e.UserState as String);
-        }
-
-        void worker_InstallCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            m_ProgressForm.AllowClose = true;
-            this.Enabled = true;
-
-            RefreshTree();
-        }
-
-        private void RefreshTree()
-        {
-            cPackageTree.Nodes.Clear();
-
-            foreach (PackageManifest pm in ManifestCache.Instance.PackageManifests)
+            SHA1 verify = SHA1.Create();
+            byte[] hash = verify.ComputeHash(File.ReadAllBytes("msysgit.exe"));
+            byte[] goal = { 0x75, 0x8b, 0xd1, 0xbb, 0xb9, 0x12, 0x73, 0x24, 0x87, 0xd7, 0xb4, 0x24, 0x0f, 0x7d, 0xe3, 0x3b, 0xbb, 0xab, 0x18, 0x48 };
+            bool valid = true;
+            for (int i = 0; i < hash.Length; ++i)
             {
-                TreeNode packageNode = cPackageTree.Nodes.Add(pm.Package.PackId.ToString(), pm.Package.Name);
-                packageNode.Tag = pm;
-
-                Package installedPack = GlobalRegistry.Instance.GetPackage(pm.Package.PackId);
-                if (installedPack != null)
-                {
-                    packageNode.Checked = true;
-                }
-
-                foreach (PackageVersion v in pm.Versions)
-                {
-                    TreeNode node = packageNode.Nodes.Add(v.Id, v.Id);
-                    node.Tag = v;
-
-                    if (installedPack != null && installedPack.Version == v.Id)
-                    {
-                        node.Checked = true;
-                    }
-                }
-            }  
-        }
-
-        private void PackageHome(object sender, EventArgs e)
-        {
-            TreeNode node = cPackageTree.SelectedNode;
-            if (node != null)
-            {
-                while (node.Parent != null) node = node.Parent;
-
-                Process.Start((node.Tag as PackageManifest).Package.HomeUri);
+                if (goal[i] != hash[i]) valid = false;
             }
-        }
 
-        private void UninstallSelected(object sender, EventArgs e)
-        {
-            // Get the version
-            PackageManifest pm = null;
-
-            TreeNode node = cPackageTree.SelectedNode;
-            if (node == null)
+            if (!valid)
             {
-                return;
+                m_ProgressForm.WriteLine("The git installer appears to be corrupt.");
+                m_ProgressForm.WriteLine("You will need to download and install git manually.");
+                Process.Start("http://code.google.com/p/msysgit/downloads/detail?name=Git-1.7.8-preview20111206.exe");
+
+                m_ProgressForm.AllowClose = true;
+                this.Enabled = true;
             }
             else
             {
-                if (node.Tag.GetType() == typeof(PackageVersion))
-                {
-                    pm = node.Parent.Tag as PackageManifest;
-                }
-                else if (node.Tag.GetType() == typeof(PackageManifest))
-                {
-                    pm = node.Tag as PackageManifest;
-                }
+                m_ProgressForm.WriteLine("Launching git installer...");
+                Process.Start("msysgit.exe").WaitForExit();
+                m_ProgressForm.WriteLine("Git installer has completed.");
+
+                m_ProgressForm.AllowClose = true;
+                this.Enabled = true;
             }
+        }
 
-            Package installedPack = GlobalRegistry.Instance.GetPackage(pm.Package.PackId);
-            if (installedPack == null)
+        public static bool ExistsInPath(string fileName)
+        {
+            if (GetFullPath(fileName) != null)
+                return true;
+            return false;
+        }
+
+        public static string GetFullPath(string fileName)
+        {
+            if (File.Exists(fileName))
+                return Path.GetFullPath(fileName);
+
+            var values = Environment.GetEnvironmentVariable("PATH");
+            foreach (var path in values.Split(';'))
             {
-                return;
+                var fullPath = Path.Combine(path, fileName);
+                if (File.Exists(fullPath))
+                    return fullPath;
             }
+            return null;
+        }
 
-            String source = installedPack.Version;
+        private void FormShown(object sender, EventArgs e)
+        {
+            StartupCheck();
+        }
 
-            if (MessageBox.Show(
-                String.Format("Uninstall package {0} from {1}.\nContinue?", pm.Package.Name, source),
-                "Confirm Package Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+        public void RunGitCommand(String command)
+        {
+            m_ProgressForm = new ProgressDialog();
+            m_ProgressForm.ShellExecute(this, "git " + command);
+        }
+
+        private void PackageSelect(object sender, TreeViewEventArgs e)
+        {
+            String pack = e.Node.Text;
+            String fullpath = Path.Combine(GlobalRegistry.Instance.Path, pack);
+            String manifest = Path.Combine(fullpath, "package.xml");
+            if (File.Exists(manifest))
             {
-                m_ProgressForm = new ProgressDialog();
-                m_ProgressForm.Text = "Progress - Uninstall";
-                m_ProgressForm.Show(this);
-                this.Enabled = false;
+                XmlValidator xv = new XmlValidator();
+                Package package = xv.ValidateObject<Package>(manifest);
 
-                InstallParams installParams = new InstallParams();
-                installParams.Manifest = pm;
-                installParams.Version = null;
-                m_InstallWorker.RunWorkerAsync(installParams);
+                m_CancelNav = false;
+                if (package != null)
+                {
+                    cBrowserDesc.DocumentText = package.Languages[0].Description;
+                }
+                else
+                {
+                    cBrowserDesc.DocumentText = "Unable to load package info.";
+                }
             }
         }
     }

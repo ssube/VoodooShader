@@ -63,7 +63,7 @@ namespace VoodooSharp
         }
     }
 
-    class XmlValidator
+    public class XmlValidator
     {
         public delegate void LogCallback(String msg, params object[] args);
         public event LogCallback OnLogEvent;
@@ -110,31 +110,6 @@ namespace VoodooSharp
                 if (OnLogEvent != null) OnLogEvent.Invoke("  Validation error: " + args.Message);
                 Errors = true;
             }
-        }
-    }
-
-    [System.SerializableAttribute()]
-    public partial class NamedString
-    {
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public String Name { get; set; }
-
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public String Value { get; set; }
-    }
-
-    [System.SerializableAttribute()]
-    public partial class CheckedFile
-    {
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public String Checksum { get; set; }
-
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public String Filename { get; set; }
-
-        public override String ToString()
-        {
-            return String.Format("{0} ({1})", Filename, Checksum);
         }
     }
 }

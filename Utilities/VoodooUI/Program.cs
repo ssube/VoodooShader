@@ -71,7 +71,7 @@ namespace VoodooUI
 
             // Command line mode
             string run_hook = null, run_file = null;
-            bool help = false, version = false, logo = false, nologo = false, sync_all = false, update_all = false, list = false;
+            bool help = false, version = false, logo = false, nologo = false, update_all = false, list = false;
             List<String> sync = new List<String>();
             Dictionary<String, String> install = new Dictionary<String, String>();
             Dictionary<String, String> installzip = new Dictionary<String, String>();
@@ -87,8 +87,6 @@ namespace VoodooUI
                 v => list = v != null);
             options.Add("r|remove=",    "removes the given {PACKAGE}",
                 v => remove.Add(v));
-            options.Add("s|sync:",      "download manifests from the given {URI}, or all known remotes if none specified",
-                v => { if (v == null) { sync_all = true; } else { sync.Add(v); } });
             options.Add("i|install=",   "install the given {PACKAGE}, at the optional version",
                 v => { int la = v.LastIndexOf('@'); if (la == -1) { install[v] = null; } else { install[v.Substring(0, la)] = v.Substring(la + 1); } });
             options.Add("z|zip=",       "install a valid zip {ARCHIVE} as a package, at the optional version",
@@ -145,22 +143,6 @@ namespace VoodooUI
                 }
             }
 
-            if (sync.Count > 0 || sync_all)
-            {
-                if (sync_all)
-                {
-                    ManifestCache.Instance.FetchAll();
-                }
-                foreach (String s in sync)
-                {
-                    Console.WriteLine("Sync: {0}", s);
-
-                    Remote rem = new Remote();
-                    rem.Name = rem.Uri = s;
-                    ManifestCache.Instance.Fetch(rem);
-                }
-            }
-
             if (install.Count > 0)
             {
                 foreach (String key in install.Keys)
@@ -168,20 +150,6 @@ namespace VoodooUI
                     String target = install[key];
                     Console.WriteLine("Install: {0}: {1}", key, target);
 
-                    // Get the version
-                    PackageManifest pm = ManifestCache.Instance.PackageManifests.Find(p => p.Package.PackId.ToString() == key);
-
-                    if (pm == null)
-                    {
-                        Console.WriteLine("  Package not found.");
-                    }
-                    else
-                    {
-                        PackageManifest.LogCallback cb = new PackageManifest.LogCallback(pm_OnLogEvent);
-                        pm.OnLogEvent += cb;
-                        pm.Update(target);
-                        pm.OnLogEvent -= cb;
-                    }
                 }
             }
 

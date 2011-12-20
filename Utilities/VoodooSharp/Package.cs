@@ -18,17 +18,35 @@
  *   peachykeen@voodooshader.com
  */
 using System;
-using System.Xml.Serialization;
+using System.Collections.Generic;
+using System.Text;
 
 namespace VoodooSharp
 {
-    [System.SerializableAttribute()]
-    public partial class Package
+    public class MessageSet
     {
-        public Guid PackId { get; set; }
-        public string Name { get; set; }
-        public string Version { get; set; }
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "anyURI")]
-        public string HomeUri { get; set; }
+        public String Description { get; set; }
+        [System.Xml.Serialization.XmlAttributeAttribute("Id", DataType = "language")]
+        public String Language { get; set; }
+    }
+
+    public class Default
+    {
+        public String Name { get; set; }
+        public String Filter { get; set; }
+        public String Config { get; set; }
+    }
+
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute("VoodooPackage", Namespace = "", IsNullable = false)]
+    public class Package
+    {
+        [System.Xml.Serialization.XmlArrayAttribute("Languages")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Language")]
+        public List<MessageSet> Languages { get; set; }
+
+        [System.Xml.Serialization.XmlArrayAttribute("Defaults")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Default")]
+        public List<Default> Defaults { get; set; }
     }
 }

@@ -25,8 +25,20 @@ namespace VoodooSharp
     [System.SerializableAttribute()]
     public partial class Remote
     {
-        public string Name { get; set; }
+        /// <summary>
+        /// Remote source (git repository Uri).
+        /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(DataType = "anyURI")]
         public string Uri { get; set; }
+
+        /// <summary>
+        /// Remote branch name.
+        /// </summary>
+        public string Branch { get; set; }
+
+        /// <summary>
+        /// Local path.
+        /// </summary>
+        public string Path { get; set; }
     }
 }
