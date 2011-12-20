@@ -117,6 +117,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PackageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PackageDialog.Designer.cs">
+      <DependentUpon>PackageDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="PackageManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PackageDialog.resx">
+      <DependentUpon>PackageDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PackageManager.resx">
       <DependentUpon>PackageManager.cs</DependentUpon>

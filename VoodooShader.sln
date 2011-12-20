@@ -55,14 +55,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Logger", "Framework\
 		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Hook", "Framework\HookManager\Voodoo_HookManager.vcxproj", "{089DE4CD-7134-42A8-9673-2EE03832AEF6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_HookManager", "Framework\HookManager\Voodoo_HookManager.vcxproj", "{089DE4CD-7134-42A8-9673-2EE03832AEF6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{6F835D16-DF88-4950-A9AA-422CBEB3F3CF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Filesystem", "Framework\FileSystem\Voodoo_FileSystem.vcxproj", "{88003ADC-5DD3-4CF7-B636-9F7F16DECEB3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_FileSystem", "Framework\FileSystem\Voodoo_FileSystem.vcxproj", "{88003ADC-5DD3-4CF7-B636-9F7F16DECEB3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
 	EndProjectSection

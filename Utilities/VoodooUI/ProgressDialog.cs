@@ -24,6 +24,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace VoodooUI
@@ -31,6 +32,7 @@ namespace VoodooUI
     public partial class ProgressDialog : Form
     {
         Process m_ShellProcess;
+        object m_Lock = new object();
 
         public ProgressDialog()
         {
@@ -42,7 +44,8 @@ namespace VoodooUI
         {
             if (cDetails.InvokeRequired)
             {
-                this.Invoke(new ClearDelegate(Clear));
+                ClearDelegate d = new ClearDelegate(Clear);
+                this.Invoke(d);
             }
             else
             {
@@ -57,7 +60,8 @@ namespace VoodooUI
             {
                 if (cDetails.InvokeRequired)
                 {
-                    this.Invoke(new WriteDelegate(WriteLine), msg, args);
+                    WriteDelegate d = new WriteDelegate(WriteLine);
+                    this.Invoke(d, msg, args);
                 }
                 else
                 {
@@ -72,6 +76,7 @@ namespace VoodooUI
             {
                 if (cDetails.InvokeRequired)
                 {
+                    WriteDelegate d = new WriteDelegate(Write);
                     this.Invoke(new WriteDelegate(Write), msg, args);
                 }
                 else
@@ -86,7 +91,8 @@ namespace VoodooUI
         {
             if (bOK.InvokeRequired)
             {
-                this.Invoke(new AllowCloseDelegate(SetAllowClose), mode);
+                AllowCloseDelegate d = new AllowCloseDelegate(SetAllowClose);
+                this.Invoke(d, mode);
             } else {
                 bOK.Enabled = mode;
             }
@@ -103,7 +109,8 @@ namespace VoodooUI
         {
             if (cProgressBar.InvokeRequired)
             {
-                this.Invoke(new ProgressDelegate(SetProgress), percent);
+                ProgressDelegate d = new ProgressDelegate(SetProgress);
+                this.Invoke(d, percent);
             }
             else
             {
@@ -122,7 +129,8 @@ namespace VoodooUI
         {
             if (cProgressBar.InvokeRequired)
             {
-                this.Invoke(new StyleDelegate(SetStyle), style);
+                StyleDelegate d = new StyleDelegate(SetStyle);
+                this.Invoke(d, style);
             }
             else
             {
@@ -141,7 +149,8 @@ namespace VoodooUI
         {
             if (cProgressBar.InvokeRequired)
             {
-                this.Invoke(new ProgressVisibleDelegate(SetProgressVisible), visible);
+                ProgressVisibleDelegate d = new ProgressVisibleDelegate(SetProgressVisible);
+                this.Invoke(d, visible);
             }
             else
             {
@@ -155,38 +164,46 @@ namespace VoodooUI
             set { SetProgressVisible(value); }
         }
 
-        public void ShellExecute(Form parent, string command)
+        public DialogResult ShellExecute(string command)
         {
-            WriteLine(command);
-            Style = ProgressBarStyle.Marquee;
-
-            ProcessStartInfo info = new ProcessStartInfo
+            lock (m_Lock)
             {
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WindowStyle = ProcessWindowStyle.Normal,
-                LoadUserProfile = true,
-                ErrorDialog = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
+                WriteLine(command);
+                Style = ProgressBarStyle.Marquee;
 
-                FileName = "cmd.exe",
-                Arguments = "/c " + command,
-                WorkingDirectory = VoodooSharp.GlobalRegistry.Instance.Path,
-            };
+                ProcessStartInfo info = new ProcessStartInfo
+                {
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Normal,
+                    LoadUserProfile = true,
+                    ErrorDialog = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
 
-            m_ShellProcess = new Process();
-            m_ShellProcess.StartInfo = info;
-            m_ShellProcess.EnableRaisingEvents = true;
-            m_ShellProcess.ErrorDataReceived += new DataReceivedEventHandler(ShellErrorDataReceived);
-            m_ShellProcess.OutputDataReceived += new DataReceivedEventHandler(ShellOutputDataReceived);
-            m_ShellProcess.Exited += new EventHandler(ShellExited);
+                    FileName = "cmd.exe",
+                    Arguments = "/c " + command
+                };
 
-            Show(parent);
+                m_ShellProcess = new Process();
+                m_ShellProcess.StartInfo = info;
+                m_ShellProcess.EnableRaisingEvents = true;
+                m_ShellProcess.ErrorDataReceived += new DataReceivedEventHandler(ShellErrorDataReceived);
+                m_ShellProcess.OutputDataReceived += new DataReceivedEventHandler(ShellOutputDataReceived);
+                m_ShellProcess.Exited += new EventHandler(ShellExited);
 
-            m_ShellProcess.Start();
-            m_ShellProcess.BeginErrorReadLine();
-            m_ShellProcess.BeginOutputReadLine();
+                m_ShellProcess.Start();
+                m_ShellProcess.BeginErrorReadLine();
+                m_ShellProcess.BeginOutputReadLine();
+
+                while (m_ShellProcess != null && !m_ShellProcess.HasExited)
+                {
+                    Application.DoEvents();
+                    Thread.Sleep(100);
+                }
+
+                return DialogResult.OK;
+            }
         }
 
         void ShellExited(object sender, EventArgs e)
@@ -198,12 +215,18 @@ namespace VoodooUI
 
         void ShellOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            WriteLine(e.Data);
+            if (!String.IsNullOrEmpty(e.Data as String))
+            {
+                WriteLine(e.Data);
+            }
         }
 
         void ShellErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
-            WriteLine("Error: " + e.Data);
+            if (!String.IsNullOrEmpty(e.Data as String))
+            {
+                WriteLine(e.Data);
+            }
         }
 
         private void ButtonOK(object sender, EventArgs e)
