@@ -95,9 +95,9 @@ namespace VoodooUI
                     m_ProgressForm.Show(this);
                     m_ProgressForm.WriteLine("Installing package {0}", package);
 
-                    m_ProgressForm.ShellExecute(String.Format("git clone \"{0}\" \"{1}\"", source, fullpath));
-
                     String wd = Directory.GetCurrentDirectory();
+                    Directory.SetCurrentDirectory(GlobalRegistry.Instance.Path);
+                    m_ProgressForm.ShellExecute(String.Format("git clone {0}.git {1}", source, fullpath));
                     Directory.SetCurrentDirectory(fullpath);
                     m_ProgressForm.ShellExecute(String.Format("git checkout \"{0}\"", branch));
                     Directory.SetCurrentDirectory(wd);
@@ -105,6 +105,7 @@ namespace VoodooUI
                     // Copy all binaries
                     //m_ProgressForm.WriteLine("Copying all binaries from package {0}", package);
                     //CopyToGlobal(fullpath, "bin");
+                    m_ProgressForm.WriteLine("Done installing package {0}.", package);
                 }
             }
             catch (Exception exc)
@@ -138,6 +139,7 @@ namespace VoodooUI
                     // Copy all binaries
                     //m_ProgressForm.WriteLine("Copying all binaries from package {0}", package);
                     //CopyToGlobal(fullpath, "bin");
+                    m_ProgressForm.WriteLine("Done updating package {0}.", package);
                 }
             }
             catch (Exception exc)
@@ -156,6 +158,7 @@ namespace VoodooUI
                 {
                     Directory.Delete(fullpath, true);
                 }
+                m_ProgressForm.WriteLine("Done removing package {0}.", package);
             }
             catch (System.Exception exc)
             {

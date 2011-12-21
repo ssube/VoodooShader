@@ -174,12 +174,14 @@ namespace VoodooUI
                 ProcessStartInfo info = new ProcessStartInfo
                 {
                     UseShellExecute = false,
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Normal,
                     LoadUserProfile = true,
                     ErrorDialog = false,
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
                     RedirectStandardOutput = true,
+                    StandardOutputEncoding = Encoding.UTF8,
                     RedirectStandardError = true,
+                    StandardErrorEncoding = Encoding.UTF8,
 
                     FileName = "cmd.exe",
                     Arguments = "/c " + command
