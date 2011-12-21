@@ -156,12 +156,12 @@ namespace VoodooShader
     {
         ILoggerRef logger = m_Core->GetLogger();
 
-        String fullname = m_Core->GetParser()->Parse(filename);
+        String fullname = m_Core->GetParser()->Parse(filename, PF_PathCanon);
 
         // Check for relative
         if (PathIsRelative(fullname.GetData()))
         {
-            fullname = m_Core->GetParser()->Parse(String(L"$(globalroot)\\$(binprefix)\\") + fullname, PF_PathCanon);
+            fullname = m_Core->GetParser()->Parse(String(L"$(globalroot)\\") + fullname, PF_PathCanon);
         }
 
         // Check for already loaded

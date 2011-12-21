@@ -70,7 +70,9 @@ namespace VoodooUI
 
             foreach (string subdir in subdirs)
             {
-                if (String.Compare(subdir, "user", true) != 0 && Directory.Exists(Path.Combine(subdir, ".git")))
+                if (String.Compare(subdir, "bin", true) != 0 && 
+                    String.Compare(subdir, "user", true) != 0 && 
+                    Directory.Exists(Path.Combine(subdir, ".git")))
                 {
                     packages.Add(Path.GetFileName(subdir));
                 }
@@ -91,6 +93,7 @@ namespace VoodooUI
                 } else {
                     m_ProgressForm = new ProgressDialog();
                     m_ProgressForm.Show(this);
+                    m_ProgressForm.WriteLine("Installing package {0}", package);
 
                     m_ProgressForm.ShellExecute(String.Format("git clone \"{0}\" \"{1}\"", source, fullpath));
 
@@ -98,6 +101,10 @@ namespace VoodooUI
                     Directory.SetCurrentDirectory(fullpath);
                     m_ProgressForm.ShellExecute(String.Format("git checkout \"{0}\"", branch));
                     Directory.SetCurrentDirectory(wd);
+
+                    // Copy all binaries
+                    //m_ProgressForm.WriteLine("Copying all binaries from package {0}", package);
+                    //CopyToGlobal(fullpath, "bin");
                 }
             }
             catch (Exception exc)
@@ -118,13 +125,19 @@ namespace VoodooUI
                 }
                 else
                 {
-                    String wd = Directory.GetCurrentDirectory();
-                    Directory.SetCurrentDirectory(fullpath);
                     m_ProgressForm = new ProgressDialog();
                     m_ProgressForm.Show(this);
+                    m_ProgressForm.WriteLine("Updating package {0}", package);
+
+                    String wd = Directory.GetCurrentDirectory();
+                    Directory.SetCurrentDirectory(fullpath);
                     m_ProgressForm.ShellExecute("git reset --hard");
                     m_ProgressForm.ShellExecute("git pull");
                     Directory.SetCurrentDirectory(wd);
+
+                    // Copy all binaries
+                    //m_ProgressForm.WriteLine("Copying all binaries from package {0}", package);
+                    //CopyToGlobal(fullpath, "bin");
                 }
             }
             catch (Exception exc)
@@ -147,6 +160,48 @@ namespace VoodooUI
             catch (System.Exception exc)
             {
                 MessageBox.Show("Error removing package:\n" + exc.Message, "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);            	
+            }
+        }
+
+        void CopyToGlobal(String local, String subdir)
+        {
+            String dest = Path.Combine(GlobalRegistry.Instance.Path, subdir);
+            String source = Path.Combine(local, subdir);
+
+            CopyRecursive(source, dest);
+        }
+
+        void CopyRecursive(String source, String dest)
+        {
+            if (!Directory.Exists(dest))
+            {
+                Directory.CreateDirectory(dest);
+            }
+
+            foreach (String file in Directory.GetFiles(source))
+            {
+                String destfile = Path.Combine(dest, Path.GetFileName(file));
+                try
+                {
+                    File.Copy(file, destfile, true);
+                }
+                catch (Exception exc)
+                {
+                    m_ProgressForm.WriteLine("Error copying file {0}: {1}", file, exc.Message);
+                }
+            }
+
+            foreach (String subdir in Directory.GetDirectories(source))
+            {
+                String destdir = Path.Combine(dest, Path.GetFileName(subdir));
+                try
+                {
+                    CopyRecursive(subdir, destdir);
+                }
+                catch (Exception exc)
+                {
+                    m_ProgressForm.WriteLine("Error copying directory {0}: {1}", subdir, exc.Message);
+                }
             }
         }
 
@@ -290,7 +345,7 @@ namespace VoodooUI
             PackageDialog details = new PackageDialog();
             if (details.ShowDialog() == DialogResult.OK)
             {
-                if (String.Compare(details.Path, "user") == 0)
+                if (String.Compare(details.Path, "user") == 0 || String.Compare(details.Path, "bin") == 0)
                 {
                     MessageBox.Show(String.Format("Unable to install package {0}, illegal path.", details.Path), "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

@@ -151,10 +151,6 @@
             this.toolStripButton3.Text = "Remove";
             this.toolStripButton3.Click += new System.EventHandler(this.ButtonRemove);
             // 
-            // dFolderBrowser
-            // 
-            this.dFolderBrowser.RootFolder = System.Environment.SpecialFolder.Personal;
-            // 
             // toolStripComboBox1
             // 
             this.toolStripComboBox1.Items.AddRange(new object[] {

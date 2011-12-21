@@ -265,7 +265,7 @@ namespace VoodooShader
 
     typedef StringMap                            Dictionary;
 
-    typedef std::pair<IModuleRef, int32_t>       ClassSource;
+    typedef std::pair<IModuleRef, uint32_t>      ClassSource;
     typedef std::map<Uuid, ClassSource>          ClassMap;
     typedef std::map<String, Uuid>               ClassNameMap;
 

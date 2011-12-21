@@ -102,6 +102,7 @@ namespace VoodooShader
         if (m_FmtMsg)
         {
             delete[] m_FmtMsg;
+            m_FmtMsg = nullptr;
         }
     }
 

@@ -140,7 +140,7 @@ namespace VoodooUI
 
         private void Menu_Hook_Enable(object sender, EventArgs e)
         {
-            String stubPath = VoodooSharp.GlobalRegistry.Instance.BinPath + "\\Voodoo_HookStub.dll";
+            String stubPath = System.IO.Path.Combine(VoodooSharp.GlobalRegistry.Instance.BinPath, "Voodoo_HookStub.dll");
             m_NativeModule = LoadLibrary(stubPath);
             if (m_NativeModule != IntPtr.Zero)
             {
