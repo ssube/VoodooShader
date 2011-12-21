@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-4-gdfb1181</span>
+   &#160;<span id="projectnumber">framework-5.3-25-g2ef8626</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -212,8 +212,9 @@ Typedefs</h2></td></tr>
 <a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a097b2176ce897e369195b5f5fb1572c0">ModuleMap</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="namespace_voodoo_shader.html#aee143c00fbcb3e0013d9ba096d1f028f">StringMap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#adaa8796ed261f04b74da95372e194a0b">Dictionary</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; <a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a>, <br class="typebreak"/>
-int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a191fb6d4faa3937aa2593b02ccf75a5b">ClassID</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>, <a class="el" href="namespace_voodoo_shader.html#a191fb6d4faa3937aa2593b02ccf75a5b">ClassID</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a4e64b441776953bc703310c8ad956c67">ClassMap</a></td></tr>
+uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a9303cd867e533d54b10a6fa701c66cc9">ClassSource</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>, <br class="typebreak"/>
+<a class="el" href="namespace_voodoo_shader.html#a9303cd867e533d54b10a6fa701c66cc9">ClassSource</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a76dcd54ddf9ac246fa1c57847f01ed93">ClassMap</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, <a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#abac1b9a62a9994da3415dc0e7f8f44de">ClassNameMap</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="namespace_voodoo_shader.html#a0a6be5cd922e63d1aa89b37601f1af62">ITextureRef</a>, <br class="typebreak"/>
 <a class="el" href="namespace_voodoo_shader.html#a58e3dd0a9a412da7d0f938a0782cdebd">IShaderRef</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a245635b57ed38aab9c5f2bfdf02e9c13">MaterialMap</a></td></tr>
@@ -544,8 +545,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void VOODOO_API VOODOO_CALLTYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#aea103157e023cfb4887c769a76463e52">intrusive_ptr_release</a> (<a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3462403cf46011b17870e0dd8b464232">Voodoo_CgErrorHandler_Func</a> (CGcontext pContext, CGerror error, void *pCore)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-member function provided to Cg as an error handling callback.  <a href="#a3462403cf46011b17870e0dd8b464232"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#adc6b9b09e69e7b0bede019afc5a01922">CreateCore</a> (const <a class="el" href="struct_voodoo_shader_1_1_init_params.html">InitParams</a> *const pInitParams)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new core.  <a href="#adc6b9b09e69e7b0bede019afc5a01922"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a06ddee86027e49fbfb6e0237569c895e">CreateCore</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a> = &quot;Exception in file %s at %s (line %d): %s&quot;</td></tr>
@@ -639,27 +639,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a191fb6d4faa3937aa2593b02ccf75a5b"></a><!-- doxytag: member="VoodooShader::ClassID" ref="a191fb6d4faa3937aa2593b02ccf75a5b" args="" -->
+<a class="anchor" id="a76dcd54ddf9ac246fa1c57847f01ed93"></a><!-- doxytag: member="VoodooShader::ClassMap" ref="a76dcd54ddf9ac246fa1c57847f01ed93" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::pair&lt;<a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a>, int32_t&gt; <a class="el" href="namespace_voodoo_shader.html#a191fb6d4faa3937aa2593b02ccf75a5b">VoodooShader::ClassID</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00268">268</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4e64b441776953bc703310c8ad956c67"></a><!-- doxytag: member="VoodooShader::ClassMap" ref="a4e64b441776953bc703310c8ad956c67" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef std::map&lt;<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>, <a class="el" href="namespace_voodoo_shader.html#a191fb6d4faa3937aa2593b02ccf75a5b">ClassID</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a4e64b441776953bc703310c8ad956c67">VoodooShader::ClassMap</a></td>
+          <td class="memname">typedef std::map&lt;<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>, <a class="el" href="namespace_voodoo_shader.html#a9303cd867e533d54b10a6fa701c66cc9">ClassSource</a>&gt; <a class="el" href="namespace_voodoo_shader.html#a76dcd54ddf9ac246fa1c57847f01ed93">VoodooShader::ClassMap</a></td>
         </tr>
       </table>
 </div>
@@ -681,6 +666,21 @@ Variables</h2></td></tr>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00270">270</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9303cd867e533d54b10a6fa701c66cc9"></a><!-- doxytag: member="VoodooShader::ClassSource" ref="a9303cd867e533d54b10a6fa701c66cc9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::pair&lt;<a class="el" href="namespace_voodoo_shader.html#a8ea114dad3bd9318881684149210e502">IModuleRef</a>, uint32_t&gt; <a class="el" href="namespace_voodoo_shader.html#a9303cd867e533d54b10a6fa701c66cc9">VoodooShader::ClassSource</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_includes_8hpp_source.html#l00268">268</a> of file <a class="el" href="_includes_8hpp_source.html">Includes.hpp</a>.</p>
 
 </div>
 </div>
@@ -2117,30 +2117,19 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adc6b9b09e69e7b0bede019afc5a01922"></a><!-- doxytag: member="VoodooShader::CreateCore" ref="adc6b9b09e69e7b0bede019afc5a01922" args="(const InitParams *const pInitParams)" -->
+<a class="anchor" id="a06ddee86027e49fbfb6e0237569c895e"></a><!-- doxytag: member="VoodooShader::CreateCore" ref="a06ddee86027e49fbfb6e0237569c895e" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> * VoodooShader::CreateCore </td>
+          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a>* VoodooShader::CreateCore </td>
           <td>(</td>
-          <td class="paramtype">const InitParams *const&#160;</td>
-          <td class="paramname"><em>pInitParams</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Creates a new core. </p>
-<p>This function is exported and meant for use by the loader.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pInitParams</td><td>Setup parameters for this core. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A new <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> object, if one was created successfully. </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_core_8cpp_source.html#l00055">55</a> of file <a class="el" href="_v_s_core_8cpp_source.html">VSCore.cpp</a>.</p>
 
@@ -2258,9 +2247,9 @@ Variables</h2></td></tr>
 
 <p><a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> engine class for the Voodoo Shader Framework. </p>
 <p>Provides centralized management and handling for shaders, textures, plugins and variable/configuration mechanics.</p>
-<dl class="user"><dt><b>CLSID</b></dt><dd>e6f3129b-05af-11e1-9e05-005056c00008 </dd></dl>
+<dl class="user"><dt><b>ClassId</b></dt><dd>e6f3129b-05af-11e1-9e05-005056c00008 </dd></dl>
 
-<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00050">50</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_core_8hpp_source.html#l00042">42</a> of file <a class="el" href="_v_s_core_8hpp_source.html">VSCore.hpp</a>.</p>
 
 </div>
 </div>
@@ -2319,7 +2308,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<dl class="user"><dt><b>CLSID</b></dt><dd>e6f3129f-05af-11e1-9e05-005056c00008 </dd></dl>
+<dl class="user"><dt><b>ClassId</b></dt><dd>e6f3129f-05af-11e1-9e05-005056c00008 </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_module_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_module_8hpp_source.html">VSModule.hpp</a>.</p>
 
@@ -2335,7 +2324,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<dl class="user"><dt><b>CLSID</b></dt><dd>e6f312a0-05af-11e1-9e05-005056c00008 </dd></dl>
+<dl class="user"><dt><b>ClassId</b></dt><dd>e6f312a0-05af-11e1-9e05-005056c00008 </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_module_manager_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_module_manager_8hpp_source.html">VSModuleManager.hpp</a>.</p>
 
@@ -2351,7 +2340,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<dl class="user"><dt><b>CLSID</b></dt><dd>e6f312a1-05af-11e1-9e05-005056c00008 </dd></dl>
+<dl class="user"><dt><b>ClassId</b></dt><dd>e6f312a1-05af-11e1-9e05-005056c00008 </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_parameter_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_parameter_8hpp_source.html">VSParameter.hpp</a>.</p>
 
@@ -2367,7 +2356,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<dl class="user"><dt><b>CLSID</b></dt><dd>e6f312a2-05af-11e1-9e05-005056c00008 </dd></dl>
+<dl class="user"><dt><b>ClassId</b></dt><dd>e6f312a2-05af-11e1-9e05-005056c00008 </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_parser_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_parser_8hpp_source.html">VSParser.hpp</a>.</p>
 
@@ -2383,7 +2372,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<dl class="user"><dt><b>CLSID</b></dt><dd>e6f312a3-05af-11e1-9e05-005056c00008 </dd></dl>
+<dl class="user"><dt><b>ClassId</b></dt><dd>e6f312a3-05af-11e1-9e05-005056c00008 </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_pass_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_pass_8hpp_source.html">VSPass.hpp</a>.</p>
 
@@ -2399,7 +2388,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<dl class="user"><dt><b>CLSID</b></dt><dd>e6f312a4-05af-11e1-9e05-005056c00008 </dd></dl>
+<dl class="user"><dt><b>ClassId</b></dt><dd>e6f312a4-05af-11e1-9e05-005056c00008 </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_shader_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_shader_8hpp_source.html">VSShader.hpp</a>.</p>
 
@@ -2415,7 +2404,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<dl class="user"><dt><b>CLSID</b></dt><dd>e6f312a5-05af-11e1-9e05-005056c00008 </dd></dl>
+<dl class="user"><dt><b>ClassId</b></dt><dd>e6f312a5-05af-11e1-9e05-005056c00008 </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_technique_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_s_technique_8hpp_source.html">VSTechnique.hpp</a>.</p>
 
@@ -2530,7 +2519,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 14 2011 14:04:52 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 21 2011 12:12:19 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

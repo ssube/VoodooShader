@@ -1,11 +1,11 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_file_system_8hpp.html" title="Framework/Filesystem/FileSystem.hpp" alt="" coords="518,80,767,107"/>
-<area shape="rect" id="node13" href="$_hook_manager_8hpp.html" title="Framework/Hook/HookManager.hpp" alt="" coords="1053,80,1283,107"/>
-<area shape="rect" id="node17" href="$_logger_8hpp.html" title="Framework/Logger/Logger.hpp" alt="" coords="1307,80,1504,107"/>
-<area shape="rect" id="node5" href="$_w_file_8cpp.html" title="Framework/Filesystem/WFile.cpp" alt="" coords="5,155,221,181"/>
-<area shape="rect" id="node7" href="$_w_file_impl_8cpp.html" title="Framework/Filesystem/WFileImpl.cpp" alt="" coords="246,155,487,181"/>
-<area shape="rect" id="node9" href="$_w_file_system_8cpp.html" title="Framework/Filesystem/WFileSystem.cpp" alt="" coords="511,155,773,181"/>
-<area shape="rect" id="node11" href="$_w_image_8cpp.html" title="Framework/Filesystem/WImage.cpp" alt="" coords="798,155,1028,181"/>
-<area shape="rect" id="node15" href="$_hook_manager_8cpp.html" title="Framework/Hook/HookManager.cpp" alt="" coords="1053,155,1283,181"/>
-<area shape="rect" id="node19" href="$_logger_8cpp.html" title="Framework/Logger/Logger.cpp" alt="" coords="1307,155,1504,181"/>
+<area shape="rect" id="node3" href="$_file_system_8hpp.html" title="Framework/FileSystem/FileSystem.hpp" alt="" coords="521,80,772,107"/>
+<area shape="rect" id="node13" href="$_hook_manager_8hpp.html" title="Framework/HookManager/HookManager.hpp" alt="" coords="1061,80,1339,107"/>
+<area shape="rect" id="node17" href="$_logger_8hpp.html" title="Framework/Logger/Logger.hpp" alt="" coords="1364,80,1561,107"/>
+<area shape="rect" id="node5" href="$_w_file_8cpp.html" title="Framework/FileSystem/WFile.cpp" alt="" coords="5,155,224,181"/>
+<area shape="rect" id="node7" href="$_w_file_impl_8cpp.html" title="Framework/FileSystem/WFileImpl.cpp" alt="" coords="248,155,491,181"/>
+<area shape="rect" id="node9" href="$_w_file_system_8cpp.html" title="Framework/FileSystem/WFileSystem.cpp" alt="" coords="515,155,779,181"/>
+<area shape="rect" id="node11" href="$_w_image_8cpp.html" title="Framework/FileSystem/WImage.cpp" alt="" coords="803,155,1036,181"/>
+<area shape="rect" id="node15" href="$_hook_manager_8cpp.html" title="Framework/HookManager/HookManager.cpp" alt="" coords="1061,155,1339,181"/>
+<area shape="rect" id="node19" href="$_logger_8cpp.html" title="Framework/Logger/Logger.cpp" alt="" coords="1364,155,1561,181"/>
 </map>

@@ -88,6 +88,10 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="DEFINE_UUID"><param name="Local" value="group__voodoo__uuids.html#ga365f3eb268141d78896f958ea5049fc0"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Tutorials"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Basics"><param name="Local" value="group__voodoo__tutorials.html#voodoo_tut_basics"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo Utility"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Voodoo Regex"><param name="ImageNumber" value="1"></OBJECT>
@@ -341,6 +345,7 @@
   <UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Converter"><param name="Local" value="class_voodoo_shader_1_1_converter.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Exception"><param name="Local" value="class_voodoo_shader_1_1_exception.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="HookDef"><param name="Local" value="struct_hook_def.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IAdapter"><param name="Local" value="class_voodoo_shader_1_1_i_adapter.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::ICore"><param name="Local" value="class_voodoo_shader_1_1_i_core.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IFile"><param name="Local" value="class_voodoo_shader_1_1_i_file.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -397,6 +402,7 @@
   <UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Converter"><param name="Local" value="class_voodoo_shader_1_1_converter.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::Exception"><param name="Local" value="class_voodoo_shader_1_1_exception.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="HookDef"><param name="Local" value="struct_hook_def.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::InitParams"><param name="Local" value="struct_voodoo_shader_1_1_init_params.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="VoodooShader::IObject"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
@@ -548,17 +554,17 @@
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSShader.hpp"><param name="Local" value="_v_s_shader_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSTechnique.cpp"><param name="Local" value="_v_s_technique_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Core/VSTechnique.hpp"><param name="Local" value="_v_s_technique_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/FileSystem.hpp"><param name="Local" value="_file_system_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/Filesystem_Version.hpp"><param name="Local" value="_filesystem___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/resource.h"><param name="Local" value="_filesystem_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/WFile.cpp"><param name="Local" value="_w_file_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/WFileImpl.cpp"><param name="Local" value="_w_file_impl_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/WFileSystem.cpp"><param name="Local" value="_w_file_system_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Filesystem/WImage.cpp"><param name="Local" value="_w_image_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Hook/Hook_Version.hpp"><param name="Local" value="_hook___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Hook/HookManager.cpp"><param name="Local" value="_hook_manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Hook/HookManager.hpp"><param name="Local" value="_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Hook/resource.h"><param name="Local" value="_hook_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/FileSystem/FileSystem.hpp"><param name="Local" value="_file_system_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/FileSystem/FileSystem_Version.hpp"><param name="Local" value="_file_system___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/FileSystem/resource.h"><param name="Local" value="_file_system_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/FileSystem/WFile.cpp"><param name="Local" value="_w_file_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/FileSystem/WFileImpl.cpp"><param name="Local" value="_w_file_impl_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/FileSystem/WFileSystem.cpp"><param name="Local" value="_w_file_system_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/FileSystem/WImage.cpp"><param name="Local" value="_w_image_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/HookManager/Hook_Version.hpp"><param name="Local" value="_hook___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/HookManager/HookManager.cpp"><param name="Local" value="_hook_manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/HookManager/HookManager.hpp"><param name="Local" value="_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/HookManager/resource.h"><param name="Local" value="_hook_manager_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Logger/Logger.cpp"><param name="Local" value="_logger_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Logger/Logger.hpp"><param name="Local" value="_logger_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Framework/Logger/Logger_Version.hpp"><param name="Local" value="_logger___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -627,22 +633,22 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSTechnique.cpp"><param name="Local" value="_v_s_technique_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="VSTechnique.hpp"><param name="Local" value="_v_s_technique_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="Filesystem"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="FileSystem"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="FileSystem.hpp"><param name="Local" value="_file_system_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Filesystem_Version.hpp"><param name="Local" value="_filesystem___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="resource.h"><param name="Local" value="_filesystem_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="FileSystem_Version.hpp"><param name="Local" value="_file_system___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="resource.h"><param name="Local" value="_file_system_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="WFile.cpp"><param name="Local" value="_w_file_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="WFileImpl.cpp"><param name="Local" value="_w_file_impl_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="WFileSystem.cpp"><param name="Local" value="_w_file_system_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="WImage.cpp"><param name="Local" value="_w_image_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="Hook"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="HookManager"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Hook_Version.hpp"><param name="Local" value="_hook___version_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="HookManager.cpp"><param name="Local" value="_hook_manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="HookManager.hpp"><param name="Local" value="_hook_manager_8hpp.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="resource.h"><param name="Local" value="_hook_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="resource.h"><param name="Local" value="_hook_manager_2resource_8h.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Logger"><param name="ImageNumber" value="1"></OBJECT>
       <UL>

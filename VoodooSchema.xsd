@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+    attributeFormDefault="unqualified" elementFormDefault="qualified" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <!-- Basic types: -->
+    <xs:simpleType name="Uuid">
+        <xs:annotation>
+            <xs:documentation>Basic Uuid type, in uppercase hex with no braces.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern
+                value="[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}">
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="NamedString">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="Name" type="xs:string" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Framework types: -->    
+    <xs:complexType name="Hook">
+        <xs:annotation>
+            <xs:documentation>Hook with target and config files, readable name and activity flag for an installed hook.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Active" type="xs:boolean" />
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Target" type="xs:string" />
+            <xs:element name="Config" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Default">
+        <xs:annotation>
+            <xs:documentation>Default hook template with target filter, default config file and required packages for a hook. Used by the hook wizard to create hooks.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Filter" type="xs:string" />
+            <xs:element name="Config" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MessageSet">
+        <xs:annotation>
+            <xs:documentation>Multiligual message set.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Description" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Description for this package, Markdown formatted.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:language" />
+    </xs:complexType>
+    
+    <xs:complexType name="Package">
+        <xs:sequence>
+            <xs:element name="Languages">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Language" type="MessageSet" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Defaults" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Default" type="Default" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="RegistryChunk">
+        <xs:sequence>
+            <xs:element name="Hooks">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Hook" type="Hook" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Path" type="xs:string" />
+        <xs:attribute name="Language" type="xs:language" />
+        <xs:attribute name="BinPrefix" type="xs:string" use="optional" />
+    </xs:complexType>
+    
+    <xs:complexType name="ConfigFile">
+        <xs:sequence>
+            <xs:element name="Global">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="Variables" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Variable" maxOccurs="unbounded" type="NamedString" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Plugins" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="File"  minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+                                    <xs:element name="Path"  minOccurs="0" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:simpleContent>
+                                                <xs:extension base="xs:string">
+                                                    <xs:attribute name="Filter" type="xs:string" />
+                                                </xs:extension>
+                                            </xs:simpleContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Classes">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="Adapter" type="xs:string" />
+                                    <xs:element name="FileSystem" type="xs:string" />
+                                    <xs:element name="HookManager" type="xs:string" />
+                                    <xs:element name="Logger" type="xs:string" />
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Log">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="File" type="xs:string" />
+                                    <xs:element name="Level" type="xs:string" />
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Classes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Class" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:any maxOccurs="unbounded" processContents="lax" />
+                                </xs:sequence>
+                                <xs:attribute name="Name" type="xs:string" />
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Possible roots for a Voodoo Xml document: -->
+    <xs:element name="VoodooPackage" type="Package">
+        <xs:annotation>
+            <xs:documentation>Provides information on a package.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="VoodooRegistry" type="RegistryChunk">
+        <xs:annotation>
+            <xs:documentation>An Xml representation of the Voodoo registry key. Can be imported into the registry, or created by exporting it.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="VoodooConfig" type="ConfigFile">
+        <xs:annotation>
+            <xs:documentation>A configuration file with framework bootstrap information.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

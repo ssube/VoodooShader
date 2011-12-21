@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-4-gdfb1181</span>
+   &#160;<span id="projectnumber">framework-5.3-25-g2ef8626</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -225,12 +225,12 @@
 <a name="l00156"></a>00156     {
 <a name="l00157"></a>00157         <a class="code" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3" title="Retrieve the ILogger attached to this ICore.">GetLogger</a>();
 <a name="l00158"></a>00158 
-<a name="l00159"></a>00159         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> fullname = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a0625fa5c3a31a57f07831af4ca62679c" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values.">Parse</a>(filename);
+<a name="l00159"></a>00159         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> fullname = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a0625fa5c3a31a57f07831af4ca62679c" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values.">Parse</a>(filename, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">PF_PathCanon</a>);
 <a name="l00160"></a>00160 
 <a name="l00161"></a>00161         <span class="comment">// Check for relative</span>
 <a name="l00162"></a>00162         <span class="keywordflow">if</span> (PathIsRelative(fullname.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13">GetData</a>()))
 <a name="l00163"></a>00163         {
-<a name="l00164"></a>00164             fullname = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a0625fa5c3a31a57f07831af4ca62679c" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values.">Parse</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(L<span class="stringliteral">&quot;$(globalroot)\\bin\\&quot;</span>) + fullname, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">PF_PathCanon</a>);
+<a name="l00164"></a>00164             fullname = <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#af4aa5f5b499ecad91daea55581ae3c00">m_Core</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_i_core.html#a0625fa5c3a31a57f07831af4ca62679c" title="Retrieves this core&#39;s variable parser.">GetParser</a>()-&gt;<a class="code" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807" title="Parses a string, replacing any variables with their values.">Parse</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(L<span class="stringliteral">&quot;$(globalroot)\\&quot;</span>) + fullname, <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">PF_PathCanon</a>);
 <a name="l00165"></a>00165         }
 <a name="l00166"></a>00166 
 <a name="l00167"></a>00167         <span class="comment">// Check for already loaded</span>
@@ -284,7 +284,7 @@
 <a name="l00215"></a>00215 
 <a name="l00216"></a>00216             <span class="keywordflow">if</span> (classname)
 <a name="l00217"></a>00217             {
-<a name="l00218"></a>00218                 <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#a4992e609451524ef7a4004336d46ecdf">m_Classes</a>.insert(std::pair&lt;Uuid, ClassID&gt;(clsid, <a class="code" href="namespace_voodoo_shader.html#a191fb6d4faa3937aa2593b02ccf75a5b">ClassID</a>(module, curClass)));
+<a name="l00218"></a>00218                 <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#a4992e609451524ef7a4004336d46ecdf">m_Classes</a>.insert(std::pair&lt;Uuid, ClassSource&gt;(clsid, <a class="code" href="namespace_voodoo_shader.html#a9303cd867e533d54b10a6fa701c66cc9">ClassSource</a>(module, curClass)));
 <a name="l00219"></a>00219                 <a class="code" href="class_voodoo_shader_1_1_v_s_module_manager.html#a3570f18f7ef786834c3256bf7a945c0e">m_ClassNames</a>.insert(std::pair&lt;String, Uuid&gt;(classname, clsid));
 <a name="l00220"></a>00220             }
 <a name="l00221"></a>00221         }
@@ -401,7 +401,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 14 2011 14:04:50 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 21 2011 12:12:18 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

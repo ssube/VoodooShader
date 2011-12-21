@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<VoodooRemote xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.voodooshader.com/manifests/VoodooSchema.xsd">
-    <Package>packages/framework.xml</Package>
-    <Package>packages/voodoo_dx89.xml</Package>
-</VoodooRemote>

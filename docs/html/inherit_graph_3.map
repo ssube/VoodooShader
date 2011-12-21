@@ -1,35 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="6,537,162,564"/>
-<area shape="rect" id="node3" href="$class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API..." alt="" coords="235,19,397,45"/>
-<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="243,81,389,108"/>
-<area shape="rect" id="node11" href="$class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access." alt="" coords="247,157,385,184"/>
-<area shape="rect" id="node19" href="$class_voodoo_shader_1_1_i_file_system.html" title="Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access." alt="" coords="224,259,408,285"/>
-<area shape="rect" id="node25" href="$class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function&#45;level hooks, redirecting existing functions and calls int..." alt="" coords="217,360,415,387"/>
-<area shape="rect" id="node31" href="$class_voodoo_shader_1_1_i_logger.html" title="Provides structured and formatted logging for module listing and level&#45;filtered messages." alt="" coords="237,461,395,488"/>
-<area shape="rect" id="node37" href="$class_voodoo_shader_1_1_i_module.html" title="Contains the handle to a loaded library and function pointers for creation and destruction." alt="" coords="236,512,396,539"/>
-<area shape="rect" id="node41" href="$class_voodoo_shader_1_1_i_module_manager.html" title="Provides a framework for loading and unloading modules in core, as well as retrieving symbols and mod..." alt="" coords="211,563,421,589"/>
-<area shape="rect" id="node45" href="$class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)..." alt="" coords="227,613,405,640"/>
-<area shape="rect" id="node49" href="$class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing." alt="" coords="238,664,394,691"/>
-<area shape="rect" id="node53" href="$class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel..." alt="" coords="242,715,390,741"/>
-<area shape="rect" id="node57" href="$class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="237,765,395,792"/>
-<area shape="rect" id="node61" href="$class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect." alt="" coords="227,816,405,843"/>
-<area shape="rect" id="node65" href="$class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="235,867,397,893"/>
-<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_v_s_adapter.html" title="VoodooShader::VSAdapter" alt="" coords="529,5,708,32"/>
-<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_v_s_core.html" title="VoodooShader::VSCore" alt="" coords="539,56,699,83"/>
-<area shape="rect" id="node13" href="$class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access." alt="" coords="542,107,695,133"/>
-<area shape="rect" id="node17" href="$class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html" title="VoodooShader::VoodooWFS::VSWFile" alt="" coords="494,157,743,184"/>
-<area shape="rect" id="node15" href="$class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library." alt="" coords="817,107,1079,133"/>
-<area shape="rect" id="node21" href="$class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_system.html" title="VoodooShader::VoodooWFS::VSWFileSystem" alt="" coords="471,208,766,235"/>
-<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_v_s_file_system.html" title="VoodooShader::VSFileSystem" alt="" coords="519,259,718,285"/>
-<area shape="rect" id="node27" href="$class_voodoo_shader_1_1_easy_hook_1_1_v_s_e_h_hook_manager.html" title="Handles function&#45;level hooks, redirecting function calls into new locations." alt="" coords="469,309,768,336"/>
-<area shape="rect" id="node29" href="$class_voodoo_shader_1_1_v_s_hook_manager.html" title="VoodooShader::VSHookManager" alt="" coords="512,360,725,387"/>
-<area shape="rect" id="node33" href="$class_voodoo_shader_1_1_v_s_logger.html" title="VoodooShader::VSLogger" alt="" coords="533,411,705,437"/>
-<area shape="rect" id="node35" href="$class_voodoo_shader_1_1_xml_logger_1_1_v_s_xml_logger.html" title="Xml logger class, writes neatly formatted logs for use with the log viewer." alt="" coords="488,461,749,488"/>
-<area shape="rect" id="node39" href="$class_voodoo_shader_1_1_v_s_module.html" title="VoodooShader::VSModule" alt="" coords="531,512,706,539"/>
-<area shape="rect" id="node43" href="$class_voodoo_shader_1_1_v_s_module_manager.html" title="VoodooShader::VSModuleManager" alt="" coords="506,563,731,589"/>
-<area shape="rect" id="node47" href="$class_voodoo_shader_1_1_v_s_parameter.html" title="VoodooShader::VSParameter" alt="" coords="522,613,715,640"/>
-<area shape="rect" id="node51" href="$class_voodoo_shader_1_1_v_s_parser.html" title="VoodooShader::VSParser" alt="" coords="533,664,704,691"/>
-<area shape="rect" id="node55" href="$class_voodoo_shader_1_1_v_s_pass.html" title="VoodooShader::VSPass" alt="" coords="537,715,700,741"/>
-<area shape="rect" id="node59" href="$class_voodoo_shader_1_1_v_s_shader.html" title="VoodooShader::VSShader" alt="" coords="531,765,706,792"/>
-<area shape="rect" id="node63" href="$class_voodoo_shader_1_1_v_s_technique.html" title="VoodooShader::VSTechnique" alt="" coords="523,816,715,843"/>
+<area shape="rect" id="node1" href="$struct_voodoo_shader_1_1_init_params.html" title="Initialization parameters." alt="" coords="6,5,183,32"/>
 </map>

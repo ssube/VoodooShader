@@ -24,7 +24,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-4-gdfb1181</span>
+   &#160;<span id="projectnumber">framework-5.3-25-g2ef8626</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -85,8 +85,8 @@
 <code>#include &quot;<a class="el" href="_converter_8hpp_source.html">Converter.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_exception_8hpp_source.html">Exception.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_version_8hpp_source.html">Version.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_support_8inl_source.html">Support.inl</a>&quot;</code><br/>
 <code>#include &quot;shellapi.h&quot;</code><br/>
-<code>#include &lt;boost/lexical_cast.hpp&gt;</code><br/>
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for VSCore.cpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -94,7 +94,7 @@
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_v_s_core_8cpp__incl.png" border="0" usemap="#_framework_2_core_2_v_s_core_8cpp" alt=""/></div>
 <map name="_framework_2_core_2_v_s_core_8cpp" id="_framework_2_core_2_v_s_core_8cpp">
-<area shape="rect" id="node3" href="_v_s_core_8hpp.html" title="VSCore.hpp" alt="" coords="305,80,397,107"/><area shape="rect" id="node5" href="_i_core_8hpp.html" title="ICore.hpp" alt="" coords="278,155,355,181"/><area shape="rect" id="node35" href="_v_s_module_manager_8hpp.html" title="VSModuleManager.hpp" alt="" coords="473,80,630,107"/><area shape="rect" id="node40" href="_v_s_parameter_8hpp.html" title="VSParameter.hpp" alt="" coords="654,80,779,107"/><area shape="rect" id="node45" href="_v_s_parser_8hpp.html" title="VSParser.hpp" alt="" coords="804,80,906,107"/><area shape="rect" id="node50" href="_v_s_shader_8hpp.html" title="VSShader.hpp" alt="" coords="931,80,1038,107"/><area shape="rect" id="node55" href="_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="909,155,1003,181"/><area shape="rect" id="node59" href="_i_file_8hpp.html" title="IFile.hpp" alt="" coords="1028,155,1098,181"/><area shape="rect" id="node62" href="_i_filesystem_8hpp.html" title="IFilesystem.hpp" alt="" coords="1123,155,1238,181"/><area shape="rect" id="node65" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="22,155,153,181"/><area shape="rect" id="node68" href="_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="73,80,162,107"/><area shape="rect" id="node71" href="_i_texture_8hpp.html" title="ITexture.hpp" alt="" coords="187,80,281,107"/><area shape="rect" id="node74" href="_converter_8hpp.html" title="Converter.hpp" alt="" coords="934,304,1035,331"/><area shape="rect" id="node77" href="_exception_8hpp.html" title="Exception.hpp" alt="" coords="424,229,529,256"/><area shape="rect" id="node81" href="_version_8hpp.html" title="Version.hpp" alt="" coords="1313,80,1403,107"/><area shape="rect" id="node7" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="558,229,646,256"/><area shape="rect" id="node9" href="_includes_8hpp.html" title="Includes.hpp" alt="" coords="559,379,653,405"/><area shape="rect" id="node29" href="_string_8hpp.html" title="String.hpp" alt="" coords="436,304,517,331"/><area shape="rect" id="node37" href="_i_module_manager_8hpp.html" title="IModuleManager.hpp" alt="" coords="380,155,522,181"/><area shape="rect" id="node42" href="_i_parameter_8hpp.html" title="IParameter.hpp" alt="" coords="547,155,657,181"/><area shape="rect" id="node47" href="_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="682,155,770,181"/><area shape="rect" id="node52" href="_i_shader_8hpp.html" title="IShader.hpp" alt="" coords="794,155,885,181"/><area shape="rect" id="node83" href="_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="1313,155,1439,181"/></map>
+<area shape="rect" id="node3" href="_v_s_core_8hpp.html" title="VSCore.hpp" alt="" coords="55,80,146,107"/><area shape="rect" id="node5" href="_i_core_8hpp.html" title="ICore.hpp" alt="" coords="54,155,131,181"/><area shape="rect" id="node35" href="_v_s_module_manager_8hpp.html" title="VSModuleManager.hpp" alt="" coords="222,80,379,107"/><area shape="rect" id="node40" href="_v_s_parameter_8hpp.html" title="VSParameter.hpp" alt="" coords="403,80,529,107"/><area shape="rect" id="node45" href="_v_s_parser_8hpp.html" title="VSParser.hpp" alt="" coords="553,80,655,107"/><area shape="rect" id="node50" href="_v_s_shader_8hpp.html" title="VSShader.hpp" alt="" coords="681,80,787,107"/><area shape="rect" id="node55" href="_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="685,155,779,181"/><area shape="rect" id="node59" href="_i_file_8hpp.html" title="IFile.hpp" alt="" coords="804,155,874,181"/><area shape="rect" id="node62" href="_i_filesystem_8hpp.html" title="IFilesystem.hpp" alt="" coords="899,155,1014,181"/><area shape="rect" id="node65" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="1038,155,1169,181"/><area shape="rect" id="node68" href="_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="1035,80,1123,107"/><area shape="rect" id="node71" href="_i_texture_8hpp.html" title="ITexture.hpp" alt="" coords="1173,80,1266,107"/><area shape="rect" id="node74" href="_converter_8hpp.html" title="Converter.hpp" alt="" coords="161,304,262,331"/><area shape="rect" id="node77" href="_exception_8hpp.html" title="Exception.hpp" alt="" coords="492,229,597,256"/><area shape="rect" id="node81" href="_version_8hpp.html" title="Version.hpp" alt="" coords="1345,80,1435,107"/><area shape="rect" id="node85" href="_support_8inl.html" title="Support.inl" alt="" coords="1059,379,1142,405"/><area shape="rect" id="node7" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="630,229,718,256"/><area shape="rect" id="node9" href="_includes_8hpp.html" title="Includes.hpp" alt="" coords="512,379,606,405"/><area shape="rect" id="node29" href="_string_8hpp.html" title="String.hpp" alt="" coords="633,304,714,331"/><area shape="rect" id="node37" href="_i_module_manager_8hpp.html" title="IModuleManager.hpp" alt="" coords="156,155,298,181"/><area shape="rect" id="node42" href="_i_parameter_8hpp.html" title="IParameter.hpp" alt="" coords="323,155,433,181"/><area shape="rect" id="node47" href="_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="458,155,546,181"/><area shape="rect" id="node52" href="_i_shader_8hpp.html" title="IShader.hpp" alt="" coords="570,155,661,181"/><area shape="rect" id="node83" href="_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="1345,155,1471,181"/></map>
 </div>
 </div>
 <p><a href="_v_s_core_8cpp_source.html">Go to the source code of this file.</a></p>
@@ -106,14 +106,13 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3462403cf46011b17870e0dd8b464232">VoodooShader::Voodoo_CgErrorHandler_Func</a> (CGcontext pContext, CGerror error, void *pCore)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-member function provided to Cg as an error handling callback.  <a href="#a3462403cf46011b17870e0dd8b464232"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ICore *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#adc6b9b09e69e7b0bede019afc5a01922">VoodooShader::CreateCore</a> (const InitParams *const pInitParams)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new core.  <a href="#adc6b9b09e69e7b0bede019afc5a01922"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ICore *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a06ddee86027e49fbfb6e0237569c895e">VoodooShader::CreateCore</a> ()</td></tr>
 </table>
 </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 14 2011 14:04:51 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 21 2011 12:12:18 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
