@@ -217,7 +217,7 @@ namespace VoodooUI
         {
             if (!String.IsNullOrEmpty(e.Data as String))
             {
-                WriteLine(e.Data);
+                WriteLine("{0}", e.Data);
             }
         }
 
@@ -225,7 +225,7 @@ namespace VoodooUI
         {
             if (!String.IsNullOrEmpty(e.Data as String))
             {
-                WriteLine(e.Data);
+                WriteLine("{0}", e.Data);
             }
         }
 
