@@ -92,20 +92,18 @@ namespace VoodooUI
                     MessageBox.Show(String.Format("Unable to install package {0}, directory already exists.", package), "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } else {
                     m_ProgressForm = new ProgressDialog();
-                    m_ProgressForm.Show(this);
                     m_ProgressForm.WriteLine("Installing package {0}", package);
 
                     String wd = Directory.GetCurrentDirectory();
                     Directory.SetCurrentDirectory(GlobalRegistry.Instance.Path);
-                    m_ProgressForm.ShellExecute(String.Format("git clone {0}.git {1}", source, fullpath));
-                    Directory.SetCurrentDirectory(fullpath);
-                    m_ProgressForm.ShellExecute(String.Format("git checkout \"{0}\"", branch));
-                    Directory.SetCurrentDirectory(wd);
-
-                    // Copy all binaries
-                    //m_ProgressForm.WriteLine("Copying all binaries from package {0}", package);
-                    //CopyToGlobal(fullpath, "bin");
-                    m_ProgressForm.WriteLine("Done installing package {0}.", package);
+                    m_ProgressForm.QueueCommand(String.Format("git clone {0}.git {1}", source, fullpath));
+                    m_ProgressForm.QueueCommand
+                    (
+                        delegate() { Directory.SetCurrentDirectory(fullpath); },
+                        String.Format("git checkout \"{0}\"", branch),
+                        delegate() { Directory.SetCurrentDirectory(wd); }
+                    );
+                    m_ProgressForm.ShowDialog();
                 }
             }
             catch (Exception exc)
@@ -127,13 +125,13 @@ namespace VoodooUI
                 else
                 {
                     m_ProgressForm = new ProgressDialog();
-                    m_ProgressForm.Show(this);
                     m_ProgressForm.WriteLine("Updating package {0}", package);
 
                     String wd = Directory.GetCurrentDirectory();
                     Directory.SetCurrentDirectory(fullpath);
-                    m_ProgressForm.ShellExecute("git reset --hard");
-                    m_ProgressForm.ShellExecute("git pull");
+                    m_ProgressForm.QueueCommand("git reset --hard");
+                    m_ProgressForm.QueueCommand("git pull");
+                    m_ProgressForm.ShowDialog();
                     Directory.SetCurrentDirectory(wd);
 
                     // Copy all binaries

@@ -29,14 +29,41 @@ using System.Windows.Forms;
 
 namespace VoodooUI
 {
+    public struct StagedCommand
+    {
+        public ProgressDialog.StageDelegate Pre, Post;
+        public String Command;
+
+        public StagedCommand(ProgressDialog.StageDelegate pre, String cmd, ProgressDialog.StageDelegate post)
+        {
+            Pre = pre;
+            Post = post;
+            Command = cmd;
+        }
+    };
+
     public partial class ProgressDialog : Form
     {
-        Process m_ShellProcess;
+        BackgroundWorker m_Worker;
         object m_Lock = new object();
+        public delegate void StageDelegate();
+
+        public Queue<StagedCommand> CommandQueue { get; set; }
+
+        public void QueueCommand(String command)
+        {
+            CommandQueue.Enqueue(new StagedCommand(null, command, null));
+        }
+
+        public void QueueCommand(StageDelegate pre, String cmd, StageDelegate post)
+        {
+            CommandQueue.Enqueue(new StagedCommand(pre, cmd, post));
+        }
 
         public ProgressDialog()
         {
             InitializeComponent();
+            CommandQueue = new Queue<StagedCommand>();
         }
 
         delegate void ClearDelegate();
@@ -164,55 +191,105 @@ namespace VoodooUI
             set { SetProgressVisible(value); }
         }
 
-        public DialogResult ShellExecute(string command)
+        void m_Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (CommandQueue.Count > 0)
+            {
+                if (e.Cancel)
+                {
+                    e.Result = 1;
+                    return;
+
+                }
+
+                StagedCommand command = CommandQueue.Peek();
+                try
+                {
+                    if (command.Pre != null) command.Pre();
+                    int result = ShellExec(command.Command);
+                    if (command.Post != null) command.Post();
+                    CommandQueue.Dequeue();
+                    if (result != 0)
+                    {
+                        e.Result = result;
+                        return;
+                    }
+                }
+                catch (Exception exc)
+                {
+                    WriteLine("Error: {0}", exc.Message);
+                    e.Result = 1;
+                    return;
+                }
+            }
+
+            WriteLine("All commands executed successfully.");
+            e.Result = 0;
+            return;
+        }
+
+        int ShellExec(String command)
+        {
+            WriteLine(command);
+            Style = ProgressBarStyle.Marquee;
+
+            ProcessStartInfo info = new ProcessStartInfo
+            {
+                UseShellExecute = false,
+                LoadUserProfile = true,
+                ErrorDialog = false,
+                CreateNoWindow = true,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                RedirectStandardOutput = true,
+                StandardOutputEncoding = Encoding.UTF8,
+                RedirectStandardError = true,
+                StandardErrorEncoding = Encoding.UTF8,
+
+                FileName = "cmd.exe",
+                Arguments = "/c " + command
+            };
+
+            Process shell = new Process();
+            shell.StartInfo = info;
+            shell.EnableRaisingEvents = true;
+            shell.ErrorDataReceived += new DataReceivedEventHandler(ShellErrorDataReceived);
+            shell.OutputDataReceived += new DataReceivedEventHandler(ShellOutputDataReceived);
+
+            shell.Start();
+            shell.BeginErrorReadLine();
+            shell.BeginOutputReadLine();
+            shell.WaitForExit();
+
+            return shell.ExitCode;
+        }
+
+        void m_Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             lock (m_Lock)
             {
-                WriteLine(command);
-                Style = ProgressBarStyle.Marquee;
-
-                ProcessStartInfo info = new ProcessStartInfo
+                int exitCode = (int)e.Result;
+                
+                if (e.Cancelled)
                 {
-                    UseShellExecute = false,
-                    LoadUserProfile = true,
-                    ErrorDialog = false,
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    RedirectStandardOutput = true,
-                    StandardOutputEncoding = Encoding.UTF8,
-                    RedirectStandardError = true,
-                    StandardErrorEncoding = Encoding.UTF8,
-
-                    FileName = "cmd.exe",
-                    Arguments = "/c " + command
-                };
-
-                m_ShellProcess = new Process();
-                m_ShellProcess.StartInfo = info;
-                m_ShellProcess.EnableRaisingEvents = true;
-                m_ShellProcess.ErrorDataReceived += new DataReceivedEventHandler(ShellErrorDataReceived);
-                m_ShellProcess.OutputDataReceived += new DataReceivedEventHandler(ShellOutputDataReceived);
-                m_ShellProcess.Exited += new EventHandler(ShellExited);
-
-                m_ShellProcess.Start();
-                m_ShellProcess.BeginErrorReadLine();
-                m_ShellProcess.BeginOutputReadLine();
-
-                while (m_ShellProcess != null && !m_ShellProcess.HasExited)
+                    WriteLine("Command canceled.");
+                }
+                else if (exitCode != 0)
                 {
-                    Application.DoEvents();
-                    Thread.Sleep(100);
+                    WriteLine("Command returned error code {0}.", exitCode);
+                }
+                else
+                {
+                    WriteLine("Command finished successfully.");
+                    if (CommandQueue.Count > 0)
+                    {
+                        (sender as BackgroundWorker).RunWorkerAsync();
+                        return;
+                    }
                 }
 
-                return DialogResult.OK;
+                SetAllowClose(true);
+                SetProgressVisible(false);
             }
-        }
-
-        void ShellExited(object sender, EventArgs e)
-        {
-            SetAllowClose(true);
-            SetProgressVisible(false);
-            m_ShellProcess = null;
         }
 
         void ShellOutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -239,13 +316,27 @@ namespace VoodooUI
 
         private void ButtonCancel(object sender, EventArgs e)
         {
-            if (m_ShellProcess != null)
+            if (m_Worker != null)
             {
-                m_ShellProcess.Kill();
+                m_Worker.CancelAsync();
             }
 
-            this.DialogResult = DialogResult.Cancel;
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Close();
+        }
+
+        private void OnShow(object sender, EventArgs e)
+        {
+            lock (m_Lock)
+            {
+                m_Worker = new BackgroundWorker();
+                m_Worker.WorkerReportsProgress = true;
+                m_Worker.WorkerSupportsCancellation = true;
+                m_Worker.DoWork += new DoWorkEventHandler(m_Worker_DoWork);
+                m_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(m_Worker_RunWorkerCompleted);
+
+                m_Worker.RunWorkerAsync();
+            }
         }
     }
 }

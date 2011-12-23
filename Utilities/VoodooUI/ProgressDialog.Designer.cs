@@ -96,6 +96,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Progress";
+            this.Shown += new System.EventHandler(this.OnShow);
             this.ResumeLayout(false);
 
         }
