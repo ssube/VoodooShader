@@ -28,7 +28,6 @@
 
 VoodooShader::ICore * gVoodooCore = nullptr;
 VoodooShader::IAdapter * gVoodooAdapter = nullptr;
-VoodooShader::InitParams gInitParams;
 HINSTANCE gLoaderHandle = nullptr;
 
 const VoodooShader::Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOADER);
@@ -66,46 +65,24 @@ bool WINAPI LoadVoodoo()
 {
     if (gVoodooCore) return true;
 
-    ZeroMemory(&gInitParams, sizeof(gInitParams));
-
     // Get the target
     HMODULE targetModule = GetModuleHandle(nullptr);
     if (targetModule == nullptr)
     {
-        ErrorMessage(0x2003, L"Unable to retrieve target module.");
+        ErrorMessage(0x2003, TEXT("Unable to retrieve target module."));
         return false;
     }
-    gInitParams.Target = new wchar_t[MAX_PATH];
-    GetModuleFileName(targetModule, gInitParams.Target, MAX_PATH);
+
+    TCHAR targetName[MAX_PATH];
+    GetModuleFileName(targetModule, targetName, MAX_PATH);
 
     // Get the hook
-    HHOOKDEF hook = SearchHooks(gInitParams.Target);
+    HHOOKDEF hook = SearchHooks(targetName);
     if (!hook)
     {
-        ErrorMessage(0xFFFF, TEXT("Unable to locate hook for target: %s"), gInitParams.Target);
+        ErrorMessage(0xFFFF, TEXT("Unable to locate hook for target: %s"), targetName);
+        return false;
     }
-
-    // Set the config
-    gInitParams.Config = new wchar_t[MAX_PATH];
-    StringCchCopy(gInitParams.Config, MAX_PATH, hook->Config);
-
-    // Set the run root
-    gInitParams.RunRoot = new wchar_t[MAX_PATH];
-    GetCurrentDirectory(MAX_PATH, gInitParams.RunRoot);
-
-    // Set the loader
-    gInitParams.Loader = new wchar_t[MAX_PATH];
-    GetModuleFileName(gLoaderHandle, gInitParams.Loader, MAX_PATH);
-
-    // Get the local root and target
-    gInitParams.LocalRoot = new wchar_t[MAX_PATH];
-    StringCchCopy(gInitParams.LocalRoot, MAX_PATH, gInitParams.Target);
-    PathRemoveFileSpec(gInitParams.LocalRoot);
-    PathAddBackslash(gInitParams.LocalRoot);
-
-    // Get the global root
-    gInitParams.GlobalRoot = new wchar_t[MAX_PATH];
-    GetVoodooPath(gInitParams.GlobalRoot);
 
     TCHAR corePath[MAX_PATH];
     GetVoodooBinPath(corePath);
@@ -135,20 +112,13 @@ bool WINAPI LoadVoodoo()
     } else {
         gVoodooCore->AddRef();
 
-        if (!gVoodooCore->Initialize(&gInitParams))
+        if (!gVoodooCore->Initialize(hook->Config))
         {
             ErrorMessage(0x2009, L"Unable to initialize Voodoo core.");
             gVoodooCore->Release();
             gVoodooCore = nullptr;
         }
     }
-
-    delete[] gInitParams.Config;
-    delete[] gInitParams.GlobalRoot;
-    delete[] gInitParams.Loader;
-    delete[] gInitParams.LocalRoot;
-    delete[] gInitParams.RunRoot;
-    delete[] gInitParams.Target;
 
     if (hook) delete hook;
 

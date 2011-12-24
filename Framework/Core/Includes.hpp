@@ -43,12 +43,20 @@
 
 #ifndef VOODOO_STRING_MACROS
 #   define VOODOO_STRING_MACROS
+// String type macros
 #   define VOODOO_META_STRING_ARG(arg)  L ## #arg
 #   define VOODOO_META_STRING_STR(arg)  L ## arg
-
+// String printf macros
+#   define VOODOO_META_PRINTF_CSTR      VOODOO_META_STRING_STR("%S")
+#   define VOODOO_META_PRINTF_USTR      VOODOO_META_STRING_STR("%s")
+#   define VOODOO_META_PRINTF_VSTR      VOODOO_META_PRINTF_USTR
+// String meta macros
 #   define VOODOO_META_TOSTRING(arg)    VOODOO_META_STRING_ARG(arg)
 #   define VOODOO_META_STRING(arg)      VOODOO_META_STRING_STR(arg)
 #   define VSTR(arg)                    VOODOO_META_STRING_STR(arg)
+#   define VPFCSTR                      VOODOO_META_PRINTF_CSTR
+#   define VPFUSTR                      VOODOO_META_PRINTF_USTR
+#   define VPFVSTR                      VOODOO_META_PRINTF_VSTR
 #endif
 
 #include <cstdint>
@@ -518,58 +526,10 @@ namespace VoodooShader
      * @}
      */
 
-    /**
-     * Initialization parameters.
-     */
-    struct InitParams
+    template <typename ValType>
+    struct Vector1
     {
-        wchar_t * GlobalRoot;
-        wchar_t * LocalRoot;
-        wchar_t * RunRoot;
-        wchar_t * Target;
-        wchar_t * Loader;
-        wchar_t * Config;
-    };
-
-    /**
-     * Describes the precise version of a particular library, including name, main version, revision and debug status.
-     */
-    struct Version
-    {
-        Uuid            LibId;
-        int32_t         Major;
-        int32_t         Minor;
-        int32_t         Patch;
-        int32_t         Build;
-        bool            Debug;
-        const wchar_t * Name;
-        const wchar_t * RevId;
-    };
-
-    /**
-     * Property variant type.
-     */
-    struct Variant
-    {
-        UnionType   Type;
-        uint32_t    Components;
-
-        union
-        {
-            bool        VBool[4];
-            int8_t      VInt8[4];
-            uint8_t     VUInt8[4];
-            int16_t     VInt16[4];
-            uint16_t    VUInt16[4];
-            int32_t     VInt32[4];
-            uint32_t    VUInt32[4];
-            float       VFloat[4];
-            double      VDouble[4];
-            Uuid *      VUuid;
-            String *    VString;
-            IObject *   VIObject;
-            void *      VPVoid;
-        };
+        ValType X;
     };
 
     template <typename ValType>
@@ -590,22 +550,82 @@ namespace VoodooShader
         ValType X, Y, Z, W;
     };
 
-    typedef Vector2<float>      Float2;
-    typedef Vector3<float>      Float3;
-    typedef Vector4<float>      Float4;
+    typedef Vector1<int8_t>     Byte1;
     typedef Vector2<int8_t>     Byte2;
     typedef Vector3<int8_t>     Byte3;
     typedef Vector4<int8_t>     Byte4;
+    typedef Vector1<uint8_t>    UByte1;
     typedef Vector2<uint8_t>    UByte2;
     typedef Vector3<uint8_t>    UByte3;
     typedef Vector4<uint8_t>    UByte4;
+    typedef Vector1<int16_t>    Short1;
+    typedef Vector2<int16_t>    Short2;
+    typedef Vector3<int16_t>    Short3;
+    typedef Vector4<int16_t>    Short4;
+    typedef Vector1<uint16_t>   UShort1;
+    typedef Vector2<uint16_t>   UShort2;
+    typedef Vector3<uint16_t>   UShort3;
+    typedef Vector4<uint16_t>   UShort4;
+    typedef Vector1<int32_t>    Int1;
     typedef Vector2<int32_t>    Int2;
     typedef Vector3<int32_t>    Int3;
     typedef Vector4<int32_t>    Int4;
+    typedef Vector1<uint32_t>   UInt1;
     typedef Vector2<uint32_t>   UInt2;
     typedef Vector3<uint32_t>   UInt3;
     typedef Vector4<uint32_t>   UInt4;
+    typedef Vector1<float>      Float1;
+    typedef Vector2<float>      Float2;
+    typedef Vector3<float>      Float3;
+    typedef Vector4<float>      Float4;
+    typedef Vector1<double>     Double1;
+    typedef Vector2<double>     Double2;
+    typedef Vector3<double>     Double3;
+    typedef Vector4<double>     Double4;
 
+    /**
+     * Describes the precise version of a particular library, including name, main version, revision and debug status.
+     */
+    struct Version
+    {
+        Uuid            LibId;
+        int32_t         Major;
+        int32_t         Minor;
+        int32_t         Patch;
+        int32_t         Build;
+        bool            Debug;
+        const wchar_t * Name;
+        const wchar_t * RevId;
+    };
+
+    /**
+     * Property variant type. Consists of the value type (filled union field), components in the value (for vector
+     * fields), and the value union capable of containing all common basic, vector and pointer types used in the
+     * library.
+     */
+    struct Variant
+    {
+        UnionType   Type;
+        uint32_t    Components;
+
+        union
+        {
+            bool        VBool;
+            Byte4       VInt8;
+            UByte4      VUInt8;
+            Short4      VInt16;
+            UShort4     VUInt16;
+            Int4        VInt32;
+            UInt4       VUInt32;
+            Float4      VFloat;
+            Double4     VDouble;
+            Uuid *      VUuid;
+            String *    VString;
+            IObject *   VIObject;
+            void *      VPVoid;
+        };
+    };
+    
     /**
      * Describes a texture, including size and format.
      */
@@ -642,17 +662,17 @@ namespace VoodooShader
      */
     struct LightStruct
     {
-        int32_t Type;
-        Float4  Diffuse;
-        Float4  Specular;
-        Float4  Ambient;
-        Float3  Position;
-        Float3  Direction;
-        float   Range;
-        float   Falloff;
-        Float3  Attenuation;
-        float   Theta;
-        float   Phi;
+        uint32_t Type;
+        Float4   Diffuse;
+        Float4   Specular;
+        Float4   Ambient;
+        Float3   Position;
+        Float3   Direction;
+        float    Range;
+        float    Falloff;
+        Float3   Attenuation;
+        float    Theta;
+        float    Phi;
     };
 
     /**
@@ -673,9 +693,9 @@ namespace VoodooShader
     /**
      * Creates a new core. This function is exported and meant for use by the loader.
      *
-     * @param pInitParams Setup parameters for this core.
+     * @param version Version identifier for this core, should be 0.
      * @return A new ICore object, if one was created successfully.
      */
-    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore();
+    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(uint32_t version);
 #endif
 }

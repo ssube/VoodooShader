@@ -190,7 +190,7 @@ namespace VoodooShader
      * @section voodoo_vars_error Errors
      * If a variable cannot be resolved, an error value will be used in place of the variable. This value is designed
      * to cause the path to fail in any operations. The error value will replace @p varname with
-     * <code>--badvar:varname--</code>.
+     * <code>badvar:varname</code>.
      *
      * @section voodoo_vars_builtin Built-In Variables
      * A small assortment of built-in variables are provided for use. These represent system or environment paths that
@@ -198,10 +198,19 @@ namespace VoodooShader
      * are provided. Adapters and other modules may also add system variables, but these can never overwrite other
      * system variables.
      *
-     * @subsection voodoo_vars_builtin_local $(localroot)
-     * The local root path is the location of the target executable, that is, the program that Voodoo is loaded into.
-     * This is the absolute path to the file. This path is retrieved from the Windows API during startup. The value is
-     * \\-terminated.
+     * @subsection voodoo_vars_builtin_path $(path)
+     * The global root path of Voodoo. This is the main Voodoo folder, containing most global resources and binaries.
+     * This path is retrieved from the registry by the Voodoo loader. The value is \\-terminated.
+     *
+     * @par Example:
+     * @code
+     * $(path)\framework\bin\ = Voodoo binary path
+     * @endcode
+     *
+     * @subsection voodoo_vars_builtin_local $(local)
+     * The path of the target executable, that is, the program that Voodoo is loaded into.
+     * This is the absolute path to the file, without the filename. This path is retrieved from the Windows API during 
+     * startup. The value is \\-terminated.
      *
      * @par Example:
      * @code
@@ -209,17 +218,8 @@ namespace VoodooShader
      * $(localroot) = H:\Program\
      * @endcode
      *
-     * @subsection voodoo_vars_builtin_global $(globalroot)
-     * The global root path of Voodoo. This is the main Voodoo folder, containing most global resources and binaries.
-     * This path is retrieved from the registry by the Voodoo loader. The value is \\-terminated.
-     *
-     * @par Example:
-     * @code
-     * $(globalroot)\bin\ = Voodoo binary path
-     * @endcode
-     *
-     * @subsection voodoo_vars_builtin_run $(runroot)
-     * The running root of Voodoo. This is the directory that the target was started in (the startup working
+     * @subsection voodoo_vars_builtin_startup $(startup)
+     * The initial working path for Voodoo. This is the directory that the target was started in (the startup working
      * directory). This path is retrieved from the Windows API by the loader during startup. This is the most variable
      * of the builtin variables; it may change each run, depending on how the target is started. The value is
      * \\-terminated.

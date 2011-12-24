@@ -164,28 +164,28 @@ namespace VoodooShader
 
     TextureFormat Converter::ToTextureFormat(_In_ const wchar_t * format)
     {
-        if (_wcsnicmp(format, L"TF_", 3) != 0)
+        if (_wcsnicmp(format, VSTR("TF_"), 3) != 0)
         {
             return TF_Unknown;
         }
 
         const wchar_t * formatBody = format + 3;
 
-        if (formatBody[0] == L'D')
+        if (formatBody[0] == VSTR('D'))
         {
             // Depth format
-            if (_wcsnicmp(formatBody, L"D16", 3) == 0) return TF_D16;
-            if (_wcsnicmp(formatBody, L"D32", 3) == 0) return TF_D32;
+            if (_wcsnicmp(formatBody, VSTR("D16"), 3) == 0) return TF_D16;
+            if (_wcsnicmp(formatBody, VSTR("D32"), 3) == 0) return TF_D32;
         }
         else
         {
-            if (_wcsnicmp(formatBody, L"RGB5", 4) == 0) return TF_RGB5;
-            if (_wcsnicmp(formatBody, L"RGB5A1", 6) == 0) return TF_RGB5A1;
-            if (_wcsnicmp(formatBody, L"RGB8", 4) == 0) return TF_RGB8;
-            if (_wcsnicmp(formatBody, L"RGBA8", 5) == 0) return TF_RGBA8;
-            if (_wcsnicmp(formatBody, L"RGB10A2", 7) == 0) return TF_RGB10A2;
-            if (_wcsnicmp(formatBody, L"RGBA16F", 7) == 0) return TF_RGBA16F;
-            if (_wcsnicmp(formatBody, L"RGBA32F", 7) == 0) return TF_RGBA32F;
+            if (_wcsnicmp(formatBody, VSTR("RGB5"),    4) == 0) return TF_RGB5;
+            if (_wcsnicmp(formatBody, VSTR("RGB5A1"),  6) == 0) return TF_RGB5A1;
+            if (_wcsnicmp(formatBody, VSTR("RGB8"),    4) == 0) return TF_RGB8;
+            if (_wcsnicmp(formatBody, VSTR("RGBA8"),   5) == 0) return TF_RGBA8;
+            if (_wcsnicmp(formatBody, VSTR("RGB10A2"), 7) == 0) return TF_RGB10A2;
+            if (_wcsnicmp(formatBody, VSTR("RGBA16F"), 7) == 0) return TF_RGBA16F;
+            if (_wcsnicmp(formatBody, VSTR("RGBA32F"), 7) == 0) return TF_RGBA32F;
         }
 
         return TF_Unknown;
@@ -230,10 +230,7 @@ namespace VoodooShader
         }
     }
 
-#define CASESTRING(x) \
-    \
- case x: \
- return VOODOO_META_TOSTRING(x)
+#define CASESTRING(x) case x: return VOODOO_META_TOSTRING(x)
 
     const wchar_t * Converter::ToString(_In_ TextureFormat tf)
     {
@@ -250,7 +247,7 @@ namespace VoodooShader
             CASESTRING(TF_D32);
         case TF_Unknown:
         default:
-            return L"TF_Unknown";
+            return VSTR("TF_Unknown");
         }
     }
 
@@ -280,7 +277,7 @@ namespace VoodooShader
             CASESTRING(PT_Struct);
         case PT_Unknown:
         default:
-            return L"PT_Unknown";
+            return VSTR("PT_Unknown");
         }
     }
 
@@ -293,7 +290,7 @@ namespace VoodooShader
             CASESTRING(PC_Struct);
         case PC_Unknown:
         default:
-            return L"PC_Unknown";
+            return VSTR("PC_Unknown");
         }
     }
 

@@ -158,7 +158,6 @@ namespace VoodooShader
 
             LogLevel m_LogLevel;
             std::wfstream m_LogFile;
-            std::unique_ptr<tm> m_LocalTime;
             LogFlags m_Flags;
         };
     }

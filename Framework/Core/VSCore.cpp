@@ -52,8 +52,10 @@ namespace VoodooShader
         }
     }
 
-    ICore * VOODOO_CALLTYPE CreateCore()
+    ICore * VOODOO_CALLTYPE CreateCore(_In_ uint32_t version)
     {
+        UNREFERENCED_PARAMETER(version);
+
         static VSCore * pCore = nullptr;
 
         if (!pCore)
@@ -114,24 +116,46 @@ namespace VoodooShader
 #endif
     }
 
-    bool VOODOO_METHODTYPE VSCore::Initialize(_In_ const InitParams * const pInitParams)
+    bool VOODOO_METHODTYPE VSCore::Initialize(_In_ const wchar_t * const config)
     {
-        if (!pInitParams)
+        if (config)
         {
-            return false;
+            m_Parser->Add(VSTR("config"), config, VT_System);
+        } else {
+            m_Parser->Add(VSTR("config"), VSTR("VoodooShader.xml"), VT_System);
         }
 
         // Load variables, built-in first
-        wchar_t buffer[MAX_PATH];
-        GetVoodooPath(buffer);
-        m_Parser->Add(L"globalroot", buffer, VT_System);
-        GetVoodooBinPrefix(buffer);
-        m_Parser->Add(L"binprefix", buffer, VT_System);
+        {
+            wchar_t buffer[MAX_PATH];
 
-        m_Parser->Add(L"localroot", pInitParams->LocalRoot, VT_System);
-        m_Parser->Add(L"runroot", pInitParams->RunRoot, VT_System);
-        m_Parser->Add(L"target", pInitParams->Target, VT_System);
-        m_Parser->Add(L"loader", pInitParams->Loader, VT_System);
+            // Global path
+            GetVoodooPath(buffer);
+            m_Parser->Add(VSTR("path"), buffer, VT_System);
+
+            // Bin prefix
+            GetVoodooBinPrefix(buffer);
+            m_Parser->Add(VSTR("prefix"), buffer, VT_System);
+
+            // Framework bin path
+            GetVoodooBinPath(buffer);
+            m_Parser->Add(VSTR("binpath"), buffer, VT_System);
+
+            // Target
+            HMODULE pTarget = GetModuleHandle(NULL);
+            GetModuleFileName(pTarget, buffer, MAX_PATH);
+            m_Parser->Add(VSTR("target"), buffer, VT_System);
+
+            // Local path
+            PathRemoveFileSpec(buffer);
+            PathAddBackslash(buffer);
+            m_Parser->Add(VSTR("local"), buffer, VT_System);
+
+            // Startup path
+            GetCurrentDirectory(MAX_PATH, buffer);
+            PathAddBackslash(buffer);
+            m_Parser->Add(VSTR("startup"), buffer, VT_System);
+        }
 
         // Command line processing
         LPWSTR cmdline = GetCommandLine();
@@ -146,9 +170,6 @@ namespace VoodooShader
         }
 
         // Load the config
-        String Config = m_Parser->Parse(pInitParams->Config);
-        m_Parser->Add(L"config", Config, VT_System);
-
         try
         {
             m_ConfigFile = new pugi::xml_document();
@@ -159,15 +180,15 @@ namespace VoodooShader
 
             if (!result)
             {
-                configPath = m_Parser->Parse(L"$(runroot)\\$(config)", PF_PathCanon);
+                configPath = m_Parser->Parse(L"$(startup)\\$(config)", PF_PathCanon);
                 result = m_ConfigFile->load_file(configPath.GetData());
                 if (!result)
                 {
-                    configPath = m_Parser->Parse(L"$(localroot)\\$(config)", PF_PathCanon);
+                    configPath = m_Parser->Parse(L"$(local)\\$(config)", PF_PathCanon);
                     result = m_ConfigFile->load_file(configPath.GetData());
                     if (!result)
                     {
-                        configPath = m_Parser->Parse(L"$(globalroot)\\$(config)", PF_PathCanon);
+                        configPath = m_Parser->Parse(L"$(path)\\$(config)", PF_PathCanon);
                         result = m_ConfigFile->load_file(configPath.GetData());
                         if (!result)
                         {
@@ -275,7 +296,8 @@ namespace VoodooShader
             m_Logger->SetLogLevel(logLevel);
 
             // Log extended build information
-            m_Logger->Log(LL_CoreInfo, VOODOO_CORE_NAME, L"Config loaded from '%s'.", Config.GetData());
+            String configMsg = m_Parser->Parse(VSTR("Config loaded from '$(config)'."));
+            m_Logger->Log(LL_CoreInfo, VOODOO_CORE_NAME, configMsg.GetData());
             m_Logger->Log(LL_CoreInfo, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
             Version vfver = VOODOO_META_VERSION_STRUCT(CORE);

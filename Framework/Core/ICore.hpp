@@ -55,10 +55,10 @@ namespace VoodooShader
         /**
          * Initializes the core, loading the config file and all required modules and creating objects.
          *
-         * @param pInitParams Parameters to be used during the initialization process.
+         * @param config Name of the configuration file used to initialize this core.
          * @return Success of the initialization.
          */
-        _Check_return_ VOODOO_METHOD(Initialize)(_In_ const InitParams * const pInitParams) PURE;
+        _Check_return_ VOODOO_METHOD(Initialize)(_In_ const wchar_t * const config) PURE;
         /**
          * Cleans up all modules and objects, as much as possible. Invalidates all objects created by this core. This method
          * provides an early cleanup (in cases where process-termination cleanup may cause crashes). If successful, this

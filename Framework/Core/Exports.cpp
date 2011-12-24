@@ -32,10 +32,11 @@
 namespace VoodooShader
 {
     static const Version coreVersion = VOODOO_META_VERSION_STRUCT(CORE);
-    static const wchar_t * name_VSAdapter = L"VSAdapter";
-    static const wchar_t * name_VSFileSystem = L"VSFileSystem";
-    static const wchar_t * name_VSHookManager = L"VSHookManager";
-    static const wchar_t * name_VSLogger = L"VSLogger";
+
+    static const wchar_t * name_VSAdapter = VSTR("VSAdapter");
+    static const wchar_t * name_VSFileSystem = VSTR("VSFileSystem");
+    static const wchar_t * name_VSHookManager = VSTR("VSHookManager");
+    static const wchar_t * name_VSLogger = VSTR("VSLogger");
     static const Uuid clsid_VSAdapter = CLSID_VSAdapter;
     static const Uuid clsid_VSFileSystem = CLSID_VSFileSystem;
     static const Uuid clsid_VSHookManager = CLSID_VSHookManager;
@@ -101,7 +102,7 @@ namespace VoodooShader
         uint32_t refs = obj->AddRef();
         if (obj && obj->GetCore() && obj->GetCore()->GetLogger())
         {
-            obj->GetCore()->GetLogger()->Log(LL_CoreError, L"VOODOO_DEBUG_MEMORY", L"intrusive_ptr_add_ref(%p) = %d", obj, refs);
+            obj->GetCore()->GetLogger()->Log(LL_CoreError, VSTR("VOODOO_DEBUG_MEMORY"), VSTR("intrusive_ptr_add_ref(%p) = %d"), obj, refs);
         }
 #else
         obj->AddRef();
@@ -115,7 +116,7 @@ namespace VoodooShader
         {
             obj->AddRef();
             uint32_t refs = obj->Release() - 1;
-            obj->GetCore()->GetLogger()->Log(LL_CoreError, L"VOODOO_DEBUG_MEMORY", L"intrusive_ptr_release(%p) = %d", obj, refs);
+            obj->GetCore()->GetLogger()->Log(LL_CoreError, VSTR("VOODOO_DEBUG_MEMORY"), VSTR("intrusive_ptr_release(%p) = %d"), obj, refs);
         }
 #else
         obj->Release();

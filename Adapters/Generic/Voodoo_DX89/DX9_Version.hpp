@@ -24,8 +24,8 @@
 // DX9 defs
 #define VOODOO_DX89_LIBID            {0xC0, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
 #define VOODOO_DX89_AUTHOR           VOODOO_GLOBAL_AUTHOR
-#define VOODOO_DX89_NAME             L"Voodoo/Generic_DX89"
-#define VOODOO_DX89_PRETTYNAME       L"Voodoo/Generic DX89"
+#define VOODOO_DX89_NAME             VSTR("Voodoo/Generic_DX89")
+#define VOODOO_DX89_PRETTYNAME       VSTR("Voodoo/Generic DX89")
 #define VOODOO_DX89_VERSION_MAJOR    0
 #define VOODOO_DX89_VERSION_MINOR    4
 #define VOODOO_DX89_VERSION_PATCH    0

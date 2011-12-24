@@ -25,7 +25,7 @@
 
 namespace VoodooShader
 {
-    const wchar_t * ExceptionLogMsg = L"Exception in file %s at %s (line %d): %s";
+    const wchar_t * ExceptionLogMsg = VSTR("Exception in file ") VPFVSTR VSTR(" at ") VPFVSTR VSTR(" (line %d):") VPFVSTR;
     const char * ExceptionFmtMsg = "VoodooShader::Exception in module %S, file %S at %S (line %d): %S";
 
     Exception::Exception

@@ -76,7 +76,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSAdapter::ToString() CONST
     {
-        return L"VSAdapter()";
+        return VSTR("VSAdapter()");
     }
 
     ICore * VOODOO_METHODTYPE VSAdapter::GetCore() CONST

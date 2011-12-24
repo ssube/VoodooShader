@@ -83,7 +83,7 @@ namespace VoodooShader
         }
 
         VSXmlLogger::VSXmlLogger(_In_ ICore * pCore) :
-            m_Core(pCore), m_LogLevel(LL_Initial), m_LocalTime(new tm())
+            m_Core(pCore), m_LogLevel(LL_Initial)
         {
         }
 
@@ -285,10 +285,11 @@ namespace VoodooShader
                 if (level & (LL_ModWarn | LL_ModError))
                 {
                     OutputDebugString(logMsg.str().c_str());
-                }
+
 #   ifdef VOODOO_DEBUG_CONSOLE
-                cout << logMsg.str();
+                    cout << logMsg.str();
 #   endif
+                }
 #endif
                 m_LogFile << logMsg.str();
 
@@ -332,12 +333,13 @@ namespace VoodooShader
         String VSXmlLogger::LogTime() const
         {
             time_t now = time(nullptr);
+            tm localTime;
 
-            if (localtime_s(this->m_LocalTime.get(), &now) == 0)
+            if (localtime_s(&localTime, &now) == 0)
             {
                 wstringstream stamp;
 
-                stamp << L" time=\"" << put_time(m_LocalTime.get(), L"%H%M%S") << L"\" ";
+                stamp << L" time=\"" << put_time(&localTime, L"%H%M%S") << L"\" ";
                 return stamp.str();
             }
             else
@@ -349,23 +351,24 @@ namespace VoodooShader
         String VSXmlLogger::LogDate() const
         {
             time_t now = time(nullptr);
+            tm localTime;
 
-            if (localtime_s(this->m_LocalTime.get(), &now) == 0)
+            if (localtime_s(&localTime, &now) == 0)
             {
                 wstringstream stamp;
 
-                stamp << L" date=\"" << put_time(m_LocalTime.get(), L"%Y%m%d") << L"\" ";
+                stamp << VSTR(" date=\"") << put_time(&localTime, VSTR("%Y%m%d")) << VSTR("\" ");
                 return stamp.str();
             }
             else
             {
-                return String(L" date=\"00000000\" ");
+                return String(VSTR(" date=\"00000000\" "));
             }
         }
 
         String VSXmlLogger::LogTicks() const
         {
-            return String::Format(L" ticks=\"%d\" ", GetTickCount());
+            return String::Format(VSTR(" ticks=\"%d\" "), GetTickCount());
         }
     }
 }
