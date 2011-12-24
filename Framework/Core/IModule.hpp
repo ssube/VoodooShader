@@ -55,10 +55,10 @@ namespace VoodooShader
          * Get the current version of this module. @return The version, including name and
          * debug attribute.
          */
-        VOODOO_METHOD_(Version *, ModuleVersion)() CONST PURE;
+        VOODOO_METHOD_(const Version *, ModuleVersion)() CONST PURE;
         /** Get the class count from this module. */
         VOODOO_METHOD_(uint32_t, ClassCount)() CONST PURE;
-        VOODOO_METHOD_(wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST PURE;
+        VOODOO_METHOD_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST PURE;
         VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST PURE;
     };
     /**

@@ -59,7 +59,7 @@ inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format
     va_end(args);
 
     TCHAR title[32];
-    _tprintf_s(TEXT("Voodoo Error 0X%04X"), errorCode);
+    _stprintf_s(title, TEXT("Voodoo Error 0X%04X"), errorCode);
 
     MessageBox(nullptr, &buffer[0], title, MB_OK | MB_ICONWARNING);
 }

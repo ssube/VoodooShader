@@ -314,7 +314,7 @@ namespace VoodooShader
             m_Flags = flags;
         }
 
-        const LogFlags VSXmlLogger::GetFlags() const
+        LogFlags VSXmlLogger::GetFlags() const
         {
             return m_Flags;
         }
@@ -324,7 +324,7 @@ namespace VoodooShader
             m_LogLevel = level;
         }
 
-        const LogLevel VSXmlLogger::GetLogLevel() const
+        LogLevel VSXmlLogger::GetLogLevel() const
         {
             return m_LogLevel;
         }

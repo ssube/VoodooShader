@@ -193,7 +193,7 @@ namespace VoodooUI
         void m_Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             int exec = 1;
-            while (CommandQueue.Count > 0)
+            while (CommandQueue != null && CommandQueue.Count > 0)
             {
                 if (e.Cancel)
                 {
@@ -323,13 +323,16 @@ namespace VoodooUI
 
         private void OnShow(object sender, EventArgs e)
         {
-            m_Worker = new BackgroundWorker();
-            m_Worker.WorkerReportsProgress = true;
-            m_Worker.WorkerSupportsCancellation = true;
-            m_Worker.DoWork += new DoWorkEventHandler(m_Worker_DoWork);
-            m_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(m_Worker_RunWorkerCompleted);
+            if (CommandQueue != null && CommandQueue.Count > 0)
+            {
+                m_Worker = new BackgroundWorker();
+                m_Worker.WorkerReportsProgress = true;
+                m_Worker.WorkerSupportsCancellation = true;
+                m_Worker.DoWork += new DoWorkEventHandler(m_Worker_DoWork);
+                m_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(m_Worker_RunWorkerCompleted);
 
-            m_Worker.RunWorkerAsync();
+                m_Worker.RunWorkerAsync();
+            }
         }
     }
 }

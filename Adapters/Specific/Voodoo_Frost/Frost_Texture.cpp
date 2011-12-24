@@ -110,7 +110,7 @@ namespace VoodooShader
             return reinterpret_cast<void*>(oldData);
         }
 
-        const TextureDesc VOODOO_METHODTYPE FrostTexture::GetDesc() CONST
+        TextureDesc VOODOO_METHODTYPE FrostTexture::GetDesc() CONST
         {
             return m_Desc;
         }

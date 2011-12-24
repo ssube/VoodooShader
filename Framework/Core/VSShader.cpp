@@ -142,7 +142,7 @@ namespace VoodooShader
         return m_Name;
     }
 
-    const uint32_t VOODOO_METHODTYPE VSShader::GetTechniqueCount() CONST
+    uint32_t VOODOO_METHODTYPE VSShader::GetTechniqueCount() CONST
     {
         return m_Techniques.size();
     }
@@ -188,7 +188,7 @@ namespace VoodooShader
         return false;
     }
 
-    const uint32_t VOODOO_METHODTYPE VSShader::GetParameterCount() CONST
+    uint32_t VOODOO_METHODTYPE VSShader::GetParameterCount() CONST
     {
         return m_Parameters.size();
     }

@@ -168,7 +168,7 @@ namespace VoodooShader
         return true;
     }
 
-    const uint32_t VOODOO_METHODTYPE VSParameter::GetComponents() CONST
+    uint32_t VOODOO_METHODTYPE VSParameter::GetComponents() CONST
     {
         return Converter::ToComponents(m_Type);
     }

@@ -111,7 +111,7 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(level);
     }
 
-    const LogLevel VOODOO_METHODTYPE VSLogger::GetLogLevel() CONST
+    LogLevel VOODOO_METHODTYPE VSLogger::GetLogLevel() CONST
     {
         return LL_Unknown;
     }
@@ -139,7 +139,7 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(flush);
     }
 
-    const LogFlags VOODOO_METHODTYPE VSLogger::GetFlags() CONST
+    LogFlags VOODOO_METHODTYPE VSLogger::GetFlags() CONST
     {
         return LF_Unknown;
     }

@@ -118,7 +118,7 @@ namespace VoodooShader
             return oldData;
         }
 
-        const TextureDesc VOODOO_METHODTYPE DX9Texture::GetDesc() CONST
+        TextureDesc VOODOO_METHODTYPE DX9Texture::GetDesc() CONST
         {
             return m_Desc;
         }

@@ -19,7 +19,7 @@
  */
 #pragma once
 
-#include "IObject.hpp"
+#include "IResource.hpp"
 
 namespace VoodooShader
 {

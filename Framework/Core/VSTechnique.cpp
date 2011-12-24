@@ -132,7 +132,7 @@ namespace VoodooShader
         return m_Target.get();
     }
 
-    const uint32_t VOODOO_METHODTYPE VSTechnique::GetPassCount() CONST
+    uint32_t VOODOO_METHODTYPE VSTechnique::GetPassCount() CONST
     {
         return m_Passes.size();
     }

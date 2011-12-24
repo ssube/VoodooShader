@@ -44,7 +44,7 @@ namespace VoodooShader
             VOODOO_METHOD_(String, GetName)() CONST;
             VOODOO_METHOD_(void *, GetData)() CONST;
             VOODOO_METHOD_(void *, SetData)(_In_ void * pData);
-            VOODOO_METHOD_(const TextureDesc, GetDesc)() CONST;
+            VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;
 
         private:
             void GetTexDesc();

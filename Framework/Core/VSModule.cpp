@@ -138,7 +138,7 @@ namespace VoodooShader
         return m_ModuleVersion();
     }
 
-    const uint32_t VOODOO_METHODTYPE VSModule::ClassCount() CONST
+    uint32_t VOODOO_METHODTYPE VSModule::ClassCount() CONST
     {
         return m_ClassCount();
     }

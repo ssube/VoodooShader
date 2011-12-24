@@ -40,9 +40,9 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD_(Version *, ModuleVersion)() CONST;
+        VOODOO_METHOD_(const Version *, ModuleVersion)() CONST;
         VOODOO_METHOD_(uint32_t, ClassCount)() CONST;
-        VOODOO_METHOD_(wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST;
+        VOODOO_METHOD_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST;
         VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST;
 
     private:
