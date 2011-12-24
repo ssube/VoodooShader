@@ -34,14 +34,13 @@ namespace VoodooShader
      * Voodoo Shader null adapter implementation. Requires no graphics API and does not call core methods, simply
      * returning true or nullptr for methods. Does not perform logging or parameter validation.
      *
-     * @par ClassId
-     *      e6f3129a-05af-11e1-9e05-005056c00008
+     * @clsid e6f3129a-05af-11e1-9e05-005056c00008
      */
     VOODOO_CLASS(VSAdapter, IAdapter, {0x9A, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         VSAdapter(ICore * pCore);
-        virtual ~VSAdapter();
+        ~VSAdapter();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;

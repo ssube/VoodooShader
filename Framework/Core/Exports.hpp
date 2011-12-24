@@ -21,8 +21,6 @@
 
 #include "Includes.hpp"
 
-#include "String.hpp"
-
 namespace VoodooShader
 {
     /* Plugin exports. */

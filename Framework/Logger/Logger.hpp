@@ -111,7 +111,7 @@ namespace VoodooShader
              * @param level The minimum log level.
              */
             VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level);
-            VOODOO_METHOD_(const LogLevel, GetLogLevel)() CONST;
+            VOODOO_METHOD_(LogLevel, GetLogLevel)() CONST;
             /**
              * Writes a module stamp to the log. This records the name and version info for a select module (used to log
              * what modules were present during a logging session).
@@ -128,7 +128,7 @@ namespace VoodooShader
              */
             VOODOO_METHOD_(void, Log)(_In_ const LogLevel level, _In_ const wchar_t * source, _In_ _Printf_format_string_ const wchar_t * format, ...);
             VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags);
-            VOODOO_METHOD_(const LogFlags, GetFlags)() CONST;
+            VOODOO_METHOD_(LogFlags, GetFlags)() CONST;
 
         private:
             /**

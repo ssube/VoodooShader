@@ -100,6 +100,7 @@
     <ClInclude Include="IFile.hpp" />
     <ClInclude Include="IImage.hpp" />
     <ClInclude Include="IModuleManager.hpp" />
+    <ClInclude Include="IResource.hpp" />
     <ClInclude Include="Version_Build.hpp" />
     <ClInclude Include="VSAdapter.hpp" />
     <ClInclude Include="VSCore.hpp" />

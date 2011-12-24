@@ -34,14 +34,13 @@ namespace VoodooShader
      * Voodoo Shader null file system implementation. Returns true/nullptr as needed. <em>Does not have associated IFile or
      * IImage implementations, as they will never be returned.</em>
      *
-     * @par ClassId
-     *      e6f3129c-05af-11e1-9e05-005056c00008
+     * @clsid e6f3129c-05af-11e1-9e05-005056c00008
      */
     VOODOO_CLASS(VSFileSystem, IFileSystem, {0x9C, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         VSFileSystem(_In_ ICore * pCore);
-        virtual ~VSFileSystem();
+        ~VSFileSystem();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;

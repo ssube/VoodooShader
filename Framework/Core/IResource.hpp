@@ -29,13 +29,13 @@ namespace VoodooShader
      */
 
     /**
-     * @class IModule
+     * @class IResource
      *
-     * Contains the handle to a loaded library and function pointers for creation and destruction.
+     * Describes a Cg or graphics API-backed resource, managed or indexed by the core and adapter.
      *
-     * @iid e6f3128f-05af-11e1-9e05-005056c00008
+     * @iid e6f31297-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IModule, IObject, {0x8f, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
+    VOODOO_INTERFACE(IResource, IObject, {0x97, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         /**
@@ -52,16 +52,11 @@ namespace VoodooShader
          */
 
         /**
-         * Get the current version of this module. @return The version, including name and
-         * debug attribute.
+         * Returns the name of the object, as defined by the object and resource type. This may be texture
+         * name or filename, shader filename, technique name, pass name, etc.
+         *
+         * @return Name in resource-defined format.
          */
-        VOODOO_METHOD_(Version *, ModuleVersion)() CONST PURE;
-        /** Get the class count from this module. */
-        VOODOO_METHOD_(uint32_t, ClassCount)() CONST PURE;
-        VOODOO_METHOD_(wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST PURE;
-        VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST PURE;
+        VOODOO_METHOD_(String, GetName)() CONST PURE;
     };
-    /**
-     * @}
-     */
 }

@@ -42,16 +42,27 @@ namespace VoodooShader
      *     only techniques valid on the current hardware will be usable in the shader.
      *
      * @warning For any technique in a shader to be valid, the entire shader must compile without errors. This
-     *     <em>does not</em> mean that all techniques will be valid.
+     *     <em>does not</em> mean that all techniques will be valid. Care must be taken when using the latest profile
+     *     keyword, as this may cause unsupported techniques to generate compile errors, preventing all techniques
+     *     from being used.
+     *
+     * @iid e6f31294-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IShader, IObject, {0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
+    VOODOO_INTERFACE(IShader, IResource, {0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
+        /**
+         * @name IObject Methods
+         * @{
+         */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
         VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
+        /**
+         * @}
+         */
 
         VOODOO_METHOD_(String, GetName)() CONST PURE;
         /**
@@ -59,7 +70,7 @@ namespace VoodooShader
          *
          * @return The number of techniques.
          */
-        VOODOO_METHOD_(const uint32_t, GetTechniqueCount)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, GetTechniqueCount)() CONST PURE;
         /**
          * Retrieve a technique from the shader by name. Most cases should use the default technique, but some specific
          * applications may want a particular technique.
@@ -95,7 +106,7 @@ namespace VoodooShader
          *
          * @return The parameter count.
          */
-        VOODOO_METHOD_(const uint32_t, GetParameterCount)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST PURE;
         /**
          * Retrieve a specific parameter from the shader. These may be modified at runtime and will automatically update Cg
          * and the GPU with their value (in most cases).

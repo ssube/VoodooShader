@@ -177,6 +177,9 @@
     <ClInclude Include="VSModuleManager.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
+    <ClInclude Include="IResource.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">

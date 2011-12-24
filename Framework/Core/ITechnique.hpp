@@ -39,17 +39,23 @@ namespace VoodooShader
      * @warning While a shader may contain a number of techniques, not all are guaranteed to be valid. Techniques are
      *     typically validated when the Shader is created and loaded.
      *
-     * @par IID
-     *      e6f31295-05af-11e1-9e05-005056c00008
+     * @iid e6f31295-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(ITechnique, IObject, {0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
+    VOODOO_INTERFACE(ITechnique, IResource, {0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
+        /**
+         * @name IObject Methods
+         * @{
+         */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
         VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
+        /**
+         * @}
+         */
 
         VOODOO_METHOD_(String, GetName)() CONST PURE;
         /**
@@ -64,7 +70,7 @@ namespace VoodooShader
          *
          * @return The number of passes
          */
-        VOODOO_METHOD_(const uint32_t, GetPassCount)() CONST PURE;
+        VOODOO_METHOD_(uint32_t, GetPassCount)() CONST PURE;
         /**
          * Retrieve a specific pass from this technique.
          *

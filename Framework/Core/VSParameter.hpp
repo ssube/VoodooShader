@@ -24,15 +24,14 @@
 namespace VoodooShader
 {
     /**
-     * @par ClassId
-     *      e6f312a1-05af-11e1-9e05-005056c00008
+     * @clsid e6f312a1-05af-11e1-9e05-005056c00008
      */
     VOODOO_CLASS(VSParameter, IParameter, {0xA1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
         VSParameter(_Pre_notnull_ ICore * const pCore, _In_ const String & name, _In_ const ParameterType type);
         VSParameter(_In_ IShader * const pShader, _In_ CGparameter const pParam);
-        virtual ~VSParameter();
+        ~VSParameter();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -45,7 +44,7 @@ namespace VoodooShader
         VOODOO_METHOD(IsVirtual)() CONST;
         VOODOO_METHOD(AttachParameter)(_In_ IParameter * const pParam);
         VOODOO_METHOD(DetachParameter)();
-        VOODOO_METHOD_(const uint32_t, GetComponents)() CONST;
+        VOODOO_METHOD_(uint32_t, GetComponents)() CONST;
         VOODOO_METHOD_(ITexture *, GetTexture)() CONST;
         VOODOO_METHOD_(void, SetTexture)(_In_opt_ ITexture * const pTexture);
         _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetScalar)();

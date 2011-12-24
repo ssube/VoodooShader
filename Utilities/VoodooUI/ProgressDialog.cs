@@ -45,9 +45,8 @@ namespace VoodooUI
     public partial class ProgressDialog : Form
     {
         BackgroundWorker m_Worker;
-        object m_Lock = new object();
-        public delegate void StageDelegate();
 
+        public delegate void StageDelegate();
         public Queue<StagedCommand> CommandQueue { get; set; }
 
         public void QueueCommand(String command)
@@ -193,26 +192,31 @@ namespace VoodooUI
 
         void m_Worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            int exec = 1;
             while (CommandQueue.Count > 0)
             {
                 if (e.Cancel)
                 {
                     e.Result = 1;
                     return;
-
                 }
 
+                WriteLine("Running command {0}, {1} remaining.", exec++, CommandQueue.Count);
                 StagedCommand command = CommandQueue.Peek();
                 try
                 {
                     if (command.Pre != null) command.Pre();
                     int result = ShellExec(command.Command);
                     if (command.Post != null) command.Post();
-                    CommandQueue.Dequeue();
+
                     if (result != 0)
                     {
                         e.Result = result;
                         return;
+                    }
+                    else
+                    {
+                        CommandQueue.Dequeue();
                     }
                 }
                 catch (Exception exc)
@@ -265,31 +269,23 @@ namespace VoodooUI
 
         void m_Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            lock (m_Lock)
-            {
-                int exitCode = (int)e.Result;
+            int exitCode = (int)e.Result;
                 
-                if (e.Cancelled)
-                {
-                    WriteLine("Command canceled.");
-                }
-                else if (exitCode != 0)
-                {
-                    WriteLine("Command returned error code {0}.", exitCode);
-                }
-                else
-                {
-                    WriteLine("Command finished successfully.");
-                    if (CommandQueue.Count > 0)
-                    {
-                        (sender as BackgroundWorker).RunWorkerAsync();
-                        return;
-                    }
-                }
-
-                SetAllowClose(true);
-                SetProgressVisible(false);
+            if (e.Cancelled)
+            {
+                WriteLine("Command canceled.");
             }
+            else if (exitCode != 0)
+            {
+                WriteLine("Command returned exit code {0}.", exitCode);
+            }
+            else
+            {
+                WriteLine("Command returned successful exit code.");
+            }
+
+            SetAllowClose(true);
+            SetProgressVisible(false);
         }
 
         void ShellOutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -327,16 +323,13 @@ namespace VoodooUI
 
         private void OnShow(object sender, EventArgs e)
         {
-            lock (m_Lock)
-            {
-                m_Worker = new BackgroundWorker();
-                m_Worker.WorkerReportsProgress = true;
-                m_Worker.WorkerSupportsCancellation = true;
-                m_Worker.DoWork += new DoWorkEventHandler(m_Worker_DoWork);
-                m_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(m_Worker_RunWorkerCompleted);
+            m_Worker = new BackgroundWorker();
+            m_Worker.WorkerReportsProgress = true;
+            m_Worker.WorkerSupportsCancellation = true;
+            m_Worker.DoWork += new DoWorkEventHandler(m_Worker_DoWork);
+            m_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(m_Worker_RunWorkerCompleted);
 
-                m_Worker.RunWorkerAsync();
-            }
+            m_Worker.RunWorkerAsync();
         }
     }
 }

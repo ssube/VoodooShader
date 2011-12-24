@@ -33,17 +33,23 @@ namespace VoodooShader
      *
      * Provides structured and formatted logging for module listing and level-filtered messages.
      *
-     * @par IID
-     *      e6f3128e-05af-11e1-9e05-005056c00008
+     * @iid e6f3128e-05af-11e1-9e05-005056c00008
      */
     VOODOO_INTERFACE(ILogger, IObject, {0x8e, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
     public:
+        /**
+         * @name IObject Methods
+         * @{
+         */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
         VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
+        /**
+         * @}
+         */
 
         /**
          * Opens a file for use by this logger.
@@ -85,7 +91,7 @@ namespace VoodooShader
          *
          * @return The log level.
          */
-        VOODOO_METHOD_(const LogLevel, GetLogLevel)() CONST PURE;
+        VOODOO_METHOD_(LogLevel, GetLogLevel)() CONST PURE;
         /**
          * Writes a module stamp to the log. This records the name and version info for a select module (used to log what
          * modules were present during a logging session).
@@ -119,7 +125,7 @@ namespace VoodooShader
          *
          * @return Current flags.
          */
-        VOODOO_METHOD_(const LogFlags, GetFlags)() CONST PURE;
+        VOODOO_METHOD_(LogFlags, GetFlags)() CONST PURE;
     };
     /**
      * @}

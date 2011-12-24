@@ -24,8 +24,7 @@
 namespace VoodooShader
 {
     /**
-     * @par ClassId
-     *      e6f3129f-05af-11e1-9e05-005056c00008
+     * @clsid e6f3129f-05af-11e1-9e05-005056c00008
      */
     VOODOO_CLASS(VSModule, IModule, {0x9F, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
     {
@@ -33,7 +32,7 @@ namespace VoodooShader
         static VSModule * Load(_In_ ICore * const pCore, _In_ const String & path);
 
         VSModule(_In_ ICore * pCore, _In_ HMODULE hmodule);
-        virtual ~VSModule();
+        ~VSModule();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -41,9 +40,9 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD_(const Version *, ModuleVersion)() CONST;
-        VOODOO_METHOD_(const uint32_t, ClassCount)() CONST;
-        VOODOO_METHOD_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST;
+        VOODOO_METHOD_(Version *, ModuleVersion)() CONST;
+        VOODOO_METHOD_(uint32_t, ClassCount)() CONST;
+        VOODOO_METHOD_(wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST;
         VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST;
 
     private:
