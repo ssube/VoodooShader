@@ -76,7 +76,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSFileSystem::ToString() CONST
     {
-        return L"VSFileSystem()";
+        return VSTR("VSFileSystem()");
     }
 
     ICore * VOODOO_METHODTYPE VSFileSystem::GetCore() CONST

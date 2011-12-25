@@ -40,7 +40,6 @@ namespace VoodooShader
     VOODOO_METHODTYPE VSParser::~VSParser()
     {
         m_Variables.clear();
-        m_SysVariables.clear();
     }
 
     uint32_t VOODOO_METHODTYPE VSParser::AddRef() CONST
@@ -90,7 +89,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSParser::ToString() CONST
     {
-        return L"VSParser()";
+        return VSTR("VSParser()");
     }
 
     ICore * VOODOO_METHODTYPE VSParser::GetCore() CONST
@@ -98,7 +97,7 @@ namespace VoodooShader
         return m_Core;
     }
 
-    void VOODOO_METHODTYPE VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType Type)
+    void VOODOO_METHODTYPE VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType type)
     {
         ILoggerRef logger = m_Core->GetLogger();
 
@@ -106,41 +105,35 @@ namespace VoodooShader
         {
             logger->Log
             (
-                LL_CoreDebug,
-                VOODOO_CORE_NAME,
-                L"Adding variable \"%s\" with value \"%s\".",
-                name.GetData(),
-                value.GetData()
+                LL_CoreDebug, VOODOO_CORE_NAME,
+                VSTR("Adding variable '") VPFVSTR VSTR("' with value '") VPFVSTR VSTR("'."),
+                name.GetData(), value.GetData()
             );
         }
 
-        String finalname = this->Parse(name);
+        String finalname = this->Parse(name);        
+        VariableMap::iterator varIter = m_Variables.find(finalname);
 
-        if (Type == VT_System)
+        if (varIter == m_Variables.end())
         {
-            Dictionary::iterator varIter = m_SysVariables.find(finalname);
-
-            if (varIter == m_SysVariables.end())
-            {
-                m_SysVariables[finalname] = value;
-            }
-            else
+            m_Variables[finalname] = Variable(value, type);
+        }
+        else
+        {
+            if (varIter->second.second == VT_System)
             {
                 if (logger)
                 {
                     logger->Log
                     (
-                        LL_CoreWarn,
-                        VOODOO_CORE_NAME,
-                        L"Unable to add duplicate system variable \"%s\".",
+                        LL_CoreWarn, VOODOO_CORE_NAME,
+                        VSTR("Unable to add duplicate system variable '") VPFVSTR VSTR("'."),
                         finalname.GetData()
                     );
                 }
+            } else {
+                m_Variables[finalname] = Variable(value, type);
             }
-        }
-        else
-        {
-            m_Variables[finalname] = value;
         }
     }
 
@@ -150,13 +143,14 @@ namespace VoodooShader
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Removing variable \"%s\".", name.GetData());
+            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, 
+                VSTR("Removing variable '") VPFVSTR VSTR("'."), name.GetData());
         }
 
         String finalname = this->Parse(name, PF_None);
-        Dictionary::iterator varIter = m_Variables.find(finalname);
+        VariableMap::iterator varIter = m_Variables.find(finalname);
 
-        if (varIter != m_Variables.end())
+        if (varIter != m_Variables.end() && varIter->second.second != VT_System)
         {
             m_Variables.erase(varIter);
         }
@@ -164,18 +158,19 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSParser::Parse(_In_ const String & input, _In_ const ParseFlags flags) CONST
     {
-        Dictionary parseState;
+        StringMap parseState;
 
         return this->ParseStringRaw(input, flags, 0, parseState);
     }
 
-    String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ Dictionary & state) CONST
+    String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) CONST
     {
         ILoggerRef logger(m_Core->GetLogger());
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Parsing string \"%s\" (%X).", input.GetData(), flags);
+            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, 
+                VSTR("Parsing string '") VPFVSTR VSTR("' (%X)."), input.GetData(), flags);
         }
 
         if (depth > VSParser::VarMaxDepth || input.GetLength() < 3)
@@ -278,34 +273,27 @@ namespace VoodooShader
             // Lookup and replace the variable
             bool foundvar = true;
             String varvalue;
-            Dictionary::const_iterator variter = m_SysVariables.find(varname);
-
-            if (variter != m_SysVariables.end())
+            StringMap::const_iterator stateiter = state.find(varname);
+            if (stateiter != state.end())
             {
-                varvalue = variter->second;
+                varvalue = stateiter->second;
             } else {
-                variter = state.find(varname);
-                if (variter != state.end())
+                VariableMap::const_iterator variter = m_Variables.find(varname);
+                if (variter != m_Variables.end())
                 {
-                    varvalue = variter->second;
+                    varvalue = variter->second.first;
                 } else {
-                    variter = m_Variables.find(varname);
-                    if (variter != m_Variables.end())
-                    {
-                        varvalue = variter->second;
-                    } else {
-                        // Unrecognized variable, try env
-                        size_t reqSize = 0;
+                    // Unrecognized variable, try env
+                    size_t reqSize = 0;
 
-                        _wgetenv_s(&reqSize, nullptr, 0, varname.GetData());
-                        if (reqSize != 0)
-                        {
-                            std::vector<wchar_t> buffer(reqSize);
-                            _wgetenv_s(&reqSize, &buffer[0], reqSize, varname.GetData());
-                            varvalue = String(buffer);
-                        } else {
-                            foundvar = false;
-                        }
+                    _wgetenv_s(&reqSize, nullptr, 0, varname.GetData());
+                    if (reqSize != 0)
+                    {
+                        std::vector<wchar_t> buffer(reqSize);
+                        _wgetenv_s(&reqSize, &buffer[0], reqSize, varname.GetData());
+                        varvalue = String(buffer);
+                    } else {
+                        foundvar = false;
                     }
                 }
             }
@@ -319,7 +307,7 @@ namespace VoodooShader
             }
             else if (!foundvar && !supress)
             {
-                output << L"--badvar:" << varname.GetData() << L"--";
+                output << VSTR("badvar:") << varname.GetData();
             }
 
             output << iteration.Substr(endpos + 1).GetData();
@@ -339,22 +327,22 @@ namespace VoodooShader
             bool doubleslash = (flags & PF_SlashDouble) == PF_SlashDouble;
             bool prevslash = false;
             bool slashrewrite = false;
-            char slashchar = L' ';
+            char slashchar = VSTR(' ');
 
             if (flags & PF_SlashTrail)
             {
-                iteration += L"\\";
+                iteration += VSTR("\\");
             }
 
             if (flags & PF_SlashOnly)
             {
                 slashrewrite = true;
-                slashchar = L'/';
+                slashchar = VSTR('/');
             }
             else if (flags & PF_SlashBack)
             {
                 slashrewrite = true;
-                slashchar = L'\\';
+                slashchar = VSTR('\\');
             }
 
             std::wstringstream output;

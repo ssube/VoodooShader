@@ -178,18 +178,19 @@ namespace VoodooShader
 
                 wstringstream logMsg;
 
-                logMsg << L"<?xml version='1.0'?>\n<VoodooLog ";
-                logMsg << this->LogDate().GetData();
-                logMsg << this->LogTime().GetData();
-                logMsg << this->LogTicks().GetData();
-                logMsg << L">\n";
+                logMsg << VSTR("<?xml version='1.0'?>\n");
+                logMsg << VSTR("<VoodooLog ");
+                logMsg << this->LogDate().GetData() << VSTR(" ");
+                logMsg << this->LogTime().GetData() << VSTR(" ");
+                logMsg << this->LogTicks().GetData() << VSTR(" ");
+                logMsg << VSTR(">\n");
 
 #ifdef _DEBUG
                 std::wcout << logMsg.str();
 #endif
                 m_LogFile << logMsg.str();
 
-                this->Log(LL_ModInfo, VOODOO_LOGGER_NAME, L"Log file opened by VSXmlLogger::Open.");
+                this->Log(LL_ModInfo, VOODOO_LOGGER_NAME, VSTR("Log file opened by VSXmlLogger::Open."));
 
                 this->LogModule(API_ModuleVersion());
 
@@ -210,7 +211,7 @@ namespace VoodooShader
         {
             if (this->m_LogFile.is_open())
             {
-                this->m_LogFile << L"</VoodooLog>\n";
+                this->m_LogFile << VSTR("</VoodooLog>\n");
                 this->m_LogFile.close();
             }
         }
@@ -225,22 +226,22 @@ namespace VoodooShader
 
         void VSXmlLogger::LogModule(const Version * const pVersion)
         {
-            if (!this->m_LogFile.is_open()) return;
+            if (!pVersion || !this->m_LogFile.is_open()) return;
 
             wstringstream logMsg;
 
             logMsg <<
-                L"    <Module uuid=\"" << pVersion->LibId << L"\" " <<
-                L" major=\"" << pVersion->Major << L"\" " <<
-                L" minor=\"" << pVersion->Minor << L"\" " <<
-                L" patch=\"" << pVersion->Patch << L"\" " <<
-                L" build=\"" << pVersion->Build << L"\" " <<
-                L" debug=\"" << pVersion->Debug << L"\" ";
+                VSTR("    <Module uuid=\"") << pVersion->LibId << VSTR("\" ") <<
+                VSTR(" major=\"") << pVersion->Major << VSTR("\" ") <<
+                VSTR(" minor=\"") << pVersion->Minor << VSTR("\" ") <<
+                VSTR(" patch=\"") << pVersion->Patch << VSTR("\" ") <<
+                VSTR(" build=\"") << pVersion->Build << VSTR("\" ") <<
+                VSTR(" debug=\"") << pVersion->Debug << VSTR("\" ");
 
-            if (pVersion->Name) logMsg << L" name=\"" << pVersion->Name << L"\" ";
-            if (pVersion->RevId) logMsg << L" revid=\"" << pVersion->RevId << L"\" ";
+            if (pVersion->Name)  logMsg << VSTR(" name=\"")  << pVersion->Name  << VSTR("\" ");
+            if (pVersion->RevId) logMsg << VSTR(" revid=\"") << pVersion->RevId << VSTR("\" ");
 
-            logMsg << L" />\n";
+            logMsg << VSTR(" />\n");
 
 #ifdef VOODOO_DEBUG_CONSOLE
             cout << logMsg.str();
@@ -274,12 +275,12 @@ namespace VoodooShader
                 // Format the message in memory to prevent partial messages from being dumped
                 wstringstream logMsg;
 
-                logMsg << "    <Message severity=\"" << level << "\" ";
+                logMsg << VSTR("    <Message severity=\"") << level << VSTR("\" ");
                 logMsg << this->LogTicks().GetData();
 
-                if (source) logMsg << " source=\"" << source << "\"";
+                if (source) logMsg << VSTR(" source=\"") << source << VSTR("\"");
 
-                logMsg << ">" << fmtmsg.GetData() << "</Message>\n";
+                logMsg << VSTR(">") << fmtmsg.GetData() << VSTR("</Message>\n");
 
 #ifdef _DEBUG
                 if (level & (LL_ModWarn | LL_ModError))
@@ -339,12 +340,12 @@ namespace VoodooShader
             {
                 wstringstream stamp;
 
-                stamp << L" time=\"" << put_time(&localTime, L"%H%M%S") << L"\" ";
+                stamp << VSTR("time=\"") << put_time(&localTime, VSTR("%H%M%S")) << VSTR("\"");
                 return stamp.str();
             }
             else
             {
-                return String(L" time=\"000000\" ");
+                return String(VSTR("time=\"000000\""));
             }
         }
 
@@ -357,18 +358,18 @@ namespace VoodooShader
             {
                 wstringstream stamp;
 
-                stamp << VSTR(" date=\"") << put_time(&localTime, VSTR("%Y%m%d")) << VSTR("\" ");
+                stamp << VSTR("date=\"") << put_time(&localTime, VSTR("%Y%m%d")) << VSTR("\"");
                 return stamp.str();
             }
             else
             {
-                return String(VSTR(" date=\"00000000\" "));
+                return String(VSTR("date=\"00000000\""));
             }
         }
 
         String VSXmlLogger::LogTicks() const
         {
-            return String::Format(VSTR(" ticks=\"%d\" "), GetTickCount());
+            return String::Format(VSTR("ticks=\"%d\""), GetTickCount());
         }
     }
 }

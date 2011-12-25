@@ -93,7 +93,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSModuleManager::ToString() CONST
     {
-        return L"VSModuleManager()";
+        return VSTR("VSModuleManager()");
     }
 
     ICore * VOODOO_METHODTYPE VSModuleManager::GetCore() CONST
@@ -103,7 +103,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
     {
-        String mask = m_Core->GetParser()->Parse(path) + L"\\*";
+        String mask = m_Core->GetParser()->Parse(path) + VSTR("\\*");
 
         WIN32_FIND_DATA findFile;
         HANDLE searchHandle = FindFirstFile(mask.GetData(), &findFile);
@@ -115,16 +115,19 @@ namespace VoodooShader
             if (error == ERROR_FILE_NOT_FOUND)
             {
                 m_Core->GetLogger()->Log
-                    (
-                    LL_CoreWarn,
-                    VOODOO_CORE_NAME,
-                    L"No files found in directory %s.",
+                (
+                    LL_CoreWarn, VOODOO_CORE_NAME,
+                    VSTR("No plugins found in directory '") VPFVSTR VSTR("'."),
                     path.GetData()
-                    );
+                );
 
                 return false;
             } else {
-                m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, L"Error searching directory %s.", path.GetData());
+                m_Core->GetLogger()->Log
+                (
+                    LL_CoreWarn, VOODOO_CORE_NAME, 
+                    VSTR("Error searching directory '") VPFVSTR VSTR("'."), path.GetData()
+                );
 
                 return false;
             }
@@ -133,7 +136,7 @@ namespace VoodooShader
         Regex compfilter;
         if (filter.IsEmpty())
         {
-            compfilter.SetExpr(L".*\\.dll");
+            compfilter.SetExpr(VSTR(".*\\.dll"));
         } else {
             compfilter.SetExpr(filter);
         }
@@ -161,7 +164,7 @@ namespace VoodooShader
         // Check for relative
         if (PathIsRelative(fullname.GetData()))
         {
-            fullname = m_Core->GetParser()->Parse(String(L"$(globalroot)\\") + fullname, PF_PathCanon);
+            fullname = m_Core->GetParser()->Parse(String(VSTR("$(path)\\")) + fullname, PF_PathCanon);
         }
 
         // Check for already loaded
@@ -177,7 +180,7 @@ namespace VoodooShader
         {
             if (logger.get())
             {
-                logger->Log(LL_CoreError, VOODOO_CORE_NAME, L"Unable to load module %s.", filename.GetData());
+                logger->Log(LL_CoreError, VOODOO_CORE_NAME, VSTR("Unable to load module '") VPFVSTR VSTR("'."), filename.GetData());
             }
 
             return false;
@@ -194,7 +197,7 @@ namespace VoodooShader
                 (
                 LL_CoreWarn,
                 VOODOO_CORE_NAME,
-                L"Debug build mismatch with module %s.",
+                VSTR("Debug build mismatch with module '") VPFVSTR VSTR("'."),
                 moduleversion->Name
                 );
         }
@@ -290,12 +293,11 @@ namespace VoodooShader
                 if (logger)
                 {
                     logger->Log
-                        (
-                        LL_CoreError,
-                        VOODOO_CORE_NAME,
-                        L"Error creating instance of class %s.",
+                    (
+                        LL_CoreError, VOODOO_CORE_NAME,
+                        VSTR("Error creating instance of class '") VPFVSTR VSTR("'."),
                         String(clsid).GetData()
-                        );
+                    );
                 }
             }
 
@@ -303,7 +305,8 @@ namespace VoodooShader
         } else {
             if (logger)
             {
-                logger->Log(LL_CoreError, VOODOO_CORE_NAME, L"Class %s not found.", String(clsid).GetData());
+                logger->Log(LL_CoreError, VOODOO_CORE_NAME, 
+                    VSTR("Class '") VPFVSTR VSTR("' not found."), String(clsid).GetData());
             }
 
             return nullptr;

@@ -125,7 +125,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSModule::ToString() CONST
     {
-        return L"VSModule()";
+        return VSTR("VSModule()");
     }
 
     ICore * VOODOO_METHODTYPE VSModule::GetCore() CONST

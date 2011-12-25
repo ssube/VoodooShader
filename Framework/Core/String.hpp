@@ -189,7 +189,7 @@ namespace VoodooShader
          * @li <code>01234567-89ab-cdef-0123-456789abcdef</code>
          * @li <code>0123456789abcdef0123456789abcdef</code>
          *
-         * The first format is preferred, and matches the COM-standard 4/2/2/2/12 format, supported by most tools and
+         * The second format is preferred, and matches the COM-standard 4/2/2/2/12 format, supported by most tools and
          * common interfaces. Wherever possible, UUIDs should be embedded in code using the appropriate Voodoo macros to
          * avoid string conversion costs.
          *
@@ -246,6 +246,7 @@ namespace VoodooShader
         String & Prepend(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
         String & Prepend(_In_ const String & str);
         String & Truncate(_In_ uint32_t size);
+        uint32_t Split(_In_ const uint32_t count, _In_count_(size) String * pStrings, bool stripEmpty = false);
         /**
          * @}
          */

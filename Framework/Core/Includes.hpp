@@ -247,10 +247,9 @@ namespace VoodooShader
     typedef boost::intrusive_ptr<IShader>        IShaderRef;
     typedef boost::intrusive_ptr<ITechnique>     ITechniqueRef;
     typedef boost::intrusive_ptr<ITexture>       ITextureRef;
-#endif
 
     /* Collections */
-#if !defined(VOODOO_NO_COLLECTIONS) && !defined(VOODOO_NO_BOOST)
+#ifndef VOODOO_NO_COLLECTIONS
     typedef std::map<String, String>             StringMap;
     typedef std::list<String>                    StringList;
     typedef std::vector<String>                  StringVector;
@@ -271,13 +270,15 @@ namespace VoodooShader
     typedef std::vector<ITextureRef>             TextureVector;
     typedef std::map<String, IModuleRef>         ModuleMap;
 
-    typedef StringMap                            Dictionary;
+    typedef std::pair<String, uint32_t>          Variable;
+    typedef std::map<String, Variable>           VariableMap;
 
     typedef std::pair<IModuleRef, uint32_t>      ClassSource;
     typedef std::map<Uuid, ClassSource>          ClassMap;
     typedef std::map<String, Uuid>               ClassNameMap;
 
     typedef std::map<ITextureRef, IShaderRef>    MaterialMap;
+#endif
 #endif
 
 #pragma warning(push)

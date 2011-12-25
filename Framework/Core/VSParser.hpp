@@ -51,12 +51,11 @@ namespace VoodooShader
         static const wchar_t  VarMarkerSupp  = L'?';
 
     private:
-        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ Dictionary & state) const;
+        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) const;
 
         mutable uint32_t m_Refs;
         ICore * m_Core;
 
-        Dictionary m_Variables;
-        Dictionary m_SysVariables;
+        VariableMap m_Variables;
     };
 }

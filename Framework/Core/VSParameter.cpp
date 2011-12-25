@@ -37,9 +37,8 @@ namespace VoodooShader
     {
         m_Core->GetLogger()->Log
         (
-            LL_CoreDebug,
-            VOODOO_CORE_NAME,
-            L"Creating a virtual parameter (%s, core %p) of type %s.",
+            LL_CoreDebug, VOODOO_CORE_NAME,
+            VSTR("Creating a virtual parameter '") VPFVSTR VSTR("' from core %p of type ") VPFVSTR VSTR("."),
             name.GetData(), m_Core, Converter::ToString(type)
         );
 
@@ -48,7 +47,7 @@ namespace VoodooShader
         if (!context || !cgIsContext(context))
         {
             //! @todo Get rid of this throw
-            Throw(VOODOO_CORE_NAME, L"Unable to create parameter (core has no context).", m_Core);
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create parameter (core has no context)."), m_Core);
         }
 
         m_Param = cgCreateParameter(context, Converter::ToCGType(m_Type));
@@ -67,7 +66,7 @@ namespace VoodooShader
 
     VOODOO_METHODTYPE VSParameter::~VSParameter()
     {
-        m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Destroying parameter %s.", m_Name.GetData());
+        m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("Destroying parameter '") VPFVSTR VSTR("'."), m_Name.GetData());
 
         if (m_Virtual && cgIsParameter(m_Param))
         {
@@ -122,7 +121,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSParameter::ToString() CONST
     {
-        return String::Format(L"VSParameter(%s)", m_Name.GetData());
+        return String::Format(VSTR("VSParameter(") VPFVSTR VSTR(")"), m_Name.GetData());
     }
 
     ICore * VOODOO_METHODTYPE VSParameter::GetCore() CONST
@@ -152,7 +151,9 @@ namespace VoodooShader
             return false;
         } else if (!m_Virtual)
         {
-            m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, L"Cannot attach to a non-virtual parameter (%s to %s).", pParam->ToString().GetData(), this->ToString().GetData());
+            m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, 
+                VSTR("Cannot attach to a non-virtual parameter (") VPFVSTR VSTR(" to ") VPFVSTR VSTR(")."),
+                pParam->ToString().GetData(), this->ToString().GetData());
             return false;
         }
 
