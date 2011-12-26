@@ -55,17 +55,16 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Technique Data Methods
+         * Access technique information and passes.
+         * @{
          */
-
-        VOODOO_METHOD_(String, GetName)() CONST PURE;
         /**
-         * Retrieve the technique's final target. This is the surface the technique expects the results of the final pass to
-         * end up in. The technique may render to scratch textures, but the final result should go into this texture (not,
-         * for example, the lastshader texture).
-         *
-         * @return A reference to the target texture
+         * Retrieve the technique's name, as given in the shader.
+         * 
+         * @return The name.
          */
-        VOODOO_METHOD_(ITexture *, GetTarget)() CONST PURE;
+        VOODOO_METHOD_(String, GetName)() CONST PURE;
         /* Retrieve the number of passes in this technique.
          *
          * @return The number of passes
@@ -90,6 +89,9 @@ namespace VoodooShader
          * @return A pointer to the Cg technique.
          */
         VOODOO_METHOD_(CGtechnique, GetCgTechnique)() CONST PURE;
+        /**
+         * @}
+         */
     };
     /**
      * @}

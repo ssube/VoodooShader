@@ -28,7 +28,7 @@ namespace VoodooShader
      *
      * @param pContext The Cg context throwing the error.
      * @param error    The error code.
-     * @param pCore    If non-nullptr, the core associated with the error
+     * @param pCore    The core associated with the error, if any.
      */
     void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void * pCore);
 
@@ -115,5 +115,11 @@ namespace VoodooShader
 
         /** Default technique target for shader linker. */
         ITextureRef m_LastShader;
+
+#if defined(VOODOO_MEMORY_TRACK) || defined(VOODOO_MEMORY_DEBUG)
+        ShaderList m_Dbg_Shaders;
+        TextureList m_Dbg_Textures;
+        ParameterList m_Dbg_Parameters;
+#endif
     };
 }

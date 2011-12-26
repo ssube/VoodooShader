@@ -36,19 +36,19 @@ namespace VoodooShader
     {
         if (!m_Technique)
         {
-            Throw(VOODOO_CORE_NAME, L"Cannot create a pass with no technique.", m_Core);
+            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no technique."), m_Core);
         }
 
         m_Core = m_Technique->GetCore();
 
         const char * passName = cgGetPassName(m_CgPass);
 
-        m_Name = m_Technique->GetName() + L"::";
+        m_Name = m_Technique->GetName() + VSTR("::");
         if (passName)
         {
             m_Name += passName;
         } else {
-            m_Name += String::Format(L"pass_%p", m_CgPass);
+            m_Name += String::Format(VSTR("pass_%p"), m_CgPass);
         }
 
         ++this->m_Refs;
@@ -115,7 +115,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSPass::ToString() CONST
     {
-        return String::Format(L"VSPass(%s)", m_Name.GetData());
+        return String::Format(VSTR("VSPass(") VPFVSTR VSTR(")"), m_Name.GetData());
     }
 
     ICore * VOODOO_METHODTYPE VSPass::GetCore() CONST
@@ -209,7 +209,7 @@ namespace VoodooShader
                         (
                             LL_CoreWarn,
                             VOODOO_CORE_NAME,
-                            L"Pass %s cannot find target %S.",
+                            VSTR("Pass '") VPFVSTR VSTR("' cannot find target '") VPFCSTR VSTR("'."),
                             this->ToString().GetData(),
                             targetName
                         );
@@ -224,7 +224,7 @@ namespace VoodooShader
                     (
                         LL_CoreWarn,
                         VOODOO_CORE_NAME,
-                        L"Pass %s has target annotation of invalid type.",
+                        VSTR("Pass '") VPFVSTR VSTR("' has target annotation of invalid type."),
                         this->ToString().GetData()
                     );
 
@@ -238,7 +238,7 @@ namespace VoodooShader
                 (
                     LL_CoreDebug,
                     VOODOO_CORE_NAME,
-                    L"Pass %s has no target annotation.",
+                    VSTR("Pass '") VPFVSTR VSTR("' has no target annotation."),
                     this->ToString().GetData()
                 );
 
@@ -258,7 +258,7 @@ namespace VoodooShader
             (
                 LL_CoreWarn,
                 VOODOO_CORE_NAME,
-                L"No adapter found, pass %s must be explicitly loaded later.",
+                VSTR("No adapter found, pass '") VPFVSTR VSTR("' must be explicitly loaded later."),
                 this->ToString().GetData()
             );
         }
@@ -270,7 +270,7 @@ namespace VoodooShader
                 (
                     LL_CoreError,
                     VOODOO_CORE_NAME,
-                    L"Failed to load pass %s.",
+                    VSTR("Failed to load pass '") VPFVSTR VSTR("'."),
                     this->ToString().GetData()
                 );
             }
@@ -280,7 +280,7 @@ namespace VoodooShader
                 (
                     LL_CoreInfo,
                     VOODOO_CORE_NAME,
-                    L"Successfully loaded pass %s.",
+                    VSTR("Successfully loaded pass '") VPFVSTR VSTR("'."),
                     this->ToString().GetData()
                 );
             }

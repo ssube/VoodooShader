@@ -424,7 +424,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Returning string %s from parser.", iteration.GetData());
+            logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("Returning string '") VPFVSTR VSTR("' from parser."), iteration.GetData());
         }
 
         return iteration;

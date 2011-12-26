@@ -55,8 +55,9 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Pass Methods
+         * @{
          */
-
         /**
          * Loads a pass in a manner that is compatible with the adapter's underlying API. For Cg-supported APIs, this may
          * use the appropriate module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc). This may involve
@@ -119,6 +120,11 @@ namespace VoodooShader
          *     target. Many cards allow up to 4 targets, but most do not allow mixing formats. Voodoo only guarantees one
          *     target, the adapter should be queried for the actual count (property 'TargetMax').
          */
+        /**
+         * @}
+         * @name Target Methods
+         * @{
+         */
         VOODOO_METHOD(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget = nullptr) PURE;
         /**
          * Gets a render target from the adapter.
@@ -142,6 +148,11 @@ namespace VoodooShader
          * @warning You should not call this method directly; it should only be used via Core::CreateTexture(). This method
          *     does not set up the texture for use with the core.
          */
+        /**
+         * @}
+         * @name Texture Methods
+         * @{
+         */
         VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc pDesc) PURE;
         /**
          * Loads a texture data from an image into an existing texture. The texture format the texture was created with and
@@ -157,6 +168,19 @@ namespace VoodooShader
          *      call to IAdapter::CreateTexture().
          */
         VOODOO_METHOD(LoadTexture)(_In_ IImage * const pImage, _In_ const TextureRegion region, _Inout_ ITexture * const pTexture) PURE;
+        /**
+         * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses
+         * Cg-provided functions (in OpenGL, cgGLSetTextureParameter). The parameter and texture should be connected for the
+         * duration of the shader's life or until a different texture is bound to the parameter.
+         *
+         * @param pParam The parameter to bind to (must be a sampler type).
+         * @param pTexture The texture to be bound.
+         * @return Whether or not the binding was successful
+         */
+        VOODOO_METHOD(ConnectTexture)(_In_ IParameter * const pParam, _In_ ITexture * const pTexture) PURE;
+        /**
+         * @}
+         */
         /**
          * Draws geometry from system memory.
          *
@@ -204,16 +228,6 @@ namespace VoodooShader
          * @return Success of the property get.
          */
         VOODOO_METHOD(GetProperty)(_In_ const wchar_t * name, _Out_ Variant * const pValue) CONST PURE;
-        /**
-         * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses
-         * Cg-provided functions (in OpenGL, cgGLSetTextureParameter). The parameter and texture should be connected for the
-         * duration of the shader's life or until a different texture is bound to the parameter.
-         *
-         * @param pParam The parameter to bind to (must be a sampler type).
-         * @param pTexture The texture to be bound.
-         * @return Whether or not the binding was successful
-         */
-        VOODOO_METHOD(ConnectTexture)(_In_ IParameter * const pParam, _In_ ITexture * const pTexture) PURE;
         /**
          * A generic error-handling callback provided to the Cg runtime. This will be called by Core::CgErrorHandler() in
          * the event of a error. This allows the adapter to internally handle any cleanup or other state changes that become

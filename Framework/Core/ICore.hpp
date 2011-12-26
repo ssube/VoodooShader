@@ -50,8 +50,9 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Startup/Shutdown Methods
+         * @{
          */
-
         /**
          * Initializes the core, loading the config file and all required modules and creating objects.
          *
@@ -70,6 +71,12 @@ namespace VoodooShader
          *      from it are considered invalid.
          */
         _Check_return_ VOODOO_METHOD(Reset)() PURE;
+        /**
+         * @}
+         * @name Core Field Methods
+         * Getters and setters for core fields.
+         * @{
+         */
         /**
          * Retrieves this core's variable parser.
          *
@@ -123,6 +130,30 @@ namespace VoodooShader
          *     unbound.
          */
         VOODOO_METHOD(SetCgContext)(_In_opt_ CGcontext const pContext) PURE;
+        /**
+         * Retrieves a texture from the ICore's texture map by stage. Each specialized texture stage
+         * may have a single texture bound to it for use by the shader linker.
+         *
+         * @param stage The stage whose bound texture should be returned.
+         * @return A reference to the Texture if one is bound, empty otherwise.
+         *
+         * @sa To bind a texture to one of the special functions, use ICore::SetStageTexture().
+         */
+        VOODOO_METHOD_(ITexture *, GetStageTexture)(_In_ const TextureStage stage) CONST PURE;
+        /**
+         * Binds a texture to a specialized stage for the shader linker.
+         *
+         * @param stage The texture stage to set.
+         * @param pTexture The texture to bind.
+         */
+        VOODOO_METHOD_(void, SetStageTexture)(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture) PURE;
+        /**
+         * @}
+         * @name Resource Methods
+         * Creator methods for the core's resource factory aspect, and retrieval and removal methods for the internal
+         * resource indices.
+         * @{
+         */
         /**
          * Loads and compiles an effect from file, using the current file system and search paths.
          *
@@ -195,22 +226,8 @@ namespace VoodooShader
          */
         VOODOO_METHOD(RemoveTexture)(_In_ const String & name) PURE;
         /**
-         * Retrieves a texture from the ICore's texture map by stage. Each specialized texture stage
-         * may have a single texture bound to it for use by the shader linker.
-         *
-         * @param stage The stage whose bound texture should be returned.
-         * @return A reference to the Texture if one is bound, empty otherwise.
-         *
-         * @sa To bind a texture to one of the special functions, use ICore::SetStageTexture().
+         * @}
          */
-        VOODOO_METHOD_(ITexture *, GetStageTexture)(_In_ const TextureStage stage) CONST PURE;
-        /**
-         * Binds a texture to a specialized stage for the shader linker.
-         *
-         * @param stage The texture stage to set.
-         * @param pTexture The texture to bind.
-         */
-        VOODOO_METHOD_(void, SetStageTexture)(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture) PURE;
     };
     /**
      * @}

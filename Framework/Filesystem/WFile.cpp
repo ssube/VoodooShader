@@ -90,7 +90,7 @@ namespace VoodooShader
 
         String VSWFile::ToString() const
         {
-            return L"VSWFile";
+            return VSTR("VSWFile()");
         }
 
         ICore * VSWFile::GetCore() const

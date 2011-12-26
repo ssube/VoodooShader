@@ -49,12 +49,22 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Open/Close Methods
+         * Open or close the underlying file/stream, validate as an image or get the path to the stream.
+         * @{
          */
-
         /**
          * Gets the absolute path of this file.
          */
         VOODOO_METHOD_(String, GetPath)() CONST PURE;
+        /**
+         * Attempt to open the file as an image. This first validates the format; if no suitable image codec is found, it
+         * will fail. If the file appears to be an image, it will be opened and an IImage interface to the underlying file
+         * provided (@em not an IImage to this IFile).
+         *
+         * @return Image object if successful, nullptr otherwise.
+         */
+        VOODOO_METHOD_(IImage *, OpenImage)() CONST PURE;
         /**
          * Open the file with the given access mode.
          *
@@ -68,6 +78,12 @@ namespace VoodooShader
          * @return Success of file close.
          */
         VOODOO_METHOD(Close)() PURE;
+        /**
+         * @}
+         * @name Access Methods
+         * Manipulate the underlying file or stream.
+         * @{
+         */
         /**
          * Seek to the given position in the file.
          *
@@ -108,13 +124,8 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
         /**
-         * Attempt to open the file as an image. This first validates the format; if no suitable image codec is found, it
-         * will fail. If the file appears to be an image, it will be opened and an IImage interface to the underlying file
-         * provided (@em not an IImage to this IFile).
-         *
-         * @return Image object if successful, nullptr otherwise.
+         * @}
          */
-        VOODOO_METHOD_(IImage *, OpenImage)() CONST PURE;
     };
     /**
      * @}

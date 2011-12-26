@@ -50,8 +50,9 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Module Load Methods
+         * @{
          */
-
         /**
          * Loads a set of modules from a given path.
          *
@@ -62,7 +63,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD(LoadPath)(_In_ const String & path, _In_ const String & filter) PURE;
         /**
-         * Loads a single module, using an absolute or relative filename.
+         * Loads a single module, from an already-existing file.
          *
          * @param pFile The file to load, a file system reference.
          *
@@ -78,7 +79,7 @@ namespace VoodooShader
          *      example, the call will be loaded as:
          *      @code
          *      Call: IModuleManager->LoadFile("../Library.dll");
-         *      Absolute: Canonicalize("$(globalroot)\\bin\\../Library.dll");
+         *      Absolute: Canonicalize("$(path)\\bin\\../Library.dll");
          *      Parsed: Canonicalize("C:\\Voodoo\\bin\\../Library.dll");
          *      Final: "C:\\Voodoo\\Library.dll";
          *      @endcode
@@ -87,26 +88,31 @@ namespace VoodooShader
          * @note The module's directory is used in the search path for required DLLs. The search path, through this method,
          *      is:
          *      @li The directory given with the filename, or Voodoo's global root if a relative path was given.
+         *      @li The target application's directory.
          *      @li The current directory.
          *      @li The system directory.
-         *      @li The 16-bit system directory.
          *      @li The Windows directory.
          *      @li All directories listed in the PATH environment variable, in order.
          *
          */
         VOODOO_METHOD(LoadFile)(_In_ const String & filename) PURE;
         /**
+         * @}
+         * @name Class Methods
+         * @{
+         */
+        /**
          * Tests to see if a class exists in the list provided by all loaded modules.
          *
-         * @param clsid The class UUID.
+         * @param clsid The class Uuid.
          * @return Existence of the class.
          */
         VOODOO_METHOD(ClassExists)(_In_ const Uuid & clsid) CONST PURE;
         /**
          * Tests to see if a class exists in the list provided by all loaded modules.
          *
-         * This first attempts to convert the name string to a UUID (String::ToUuid()), and failing that, looks up the name
-         * in the internal map and checks for a corresponding UUID. The name lookup is imprecise, only the first-loaded
+         * This first attempts to convert the name string to a Uuid (String::ToUuid()), and failing that, looks up the name
+         * in the internal map and checks for a corresponding Uuid. The name lookup is imprecise, only the last-loaded
          * class with a given name will be registered.
          *
          * @param name The class name.
@@ -114,18 +120,18 @@ namespace VoodooShader
          */
         VOODOO_METHOD(ClassExists)(_In_ const String & name) CONST PURE;
         /**
-        * Create a new instance of the given class, using specific class UUID. This requires a precise match and will fail
+        * Create a new instance of the given class, using specific class Uuid. This requires a precise match and will fail
         * if no class is available.
         *
-        * @param clsid The class UUID to create.
+        * @param clsid The class Uuid to create.
         * @return New object or nullptr if the class wasn't found or couldn't be created.
          */
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid & clsid) CONST PURE;
         /**
-         * Create a new instance of the given class, using a class name or UUID in string form.
+         * Create a new instance of the given class, using a class name or Uuid in string form.
          *
-         * This first attempts to convert the name string to a UUID (String::ToUuid()), and failing that, looks up the name
-         * in the internal map and checks for a corresponding UUID. The name lookup is imprecise, only the first-loaded
+         * This first attempts to convert the name string to a Uuid (String::ToUuid()), and failing that, looks up the name
+         * in the internal map and checks for a corresponding Uuid. The name lookup is imprecise, only the first-loaded
          * class with a given name will be registered.
          *
          * @param name The class name or uuid to create.
@@ -135,15 +141,8 @@ namespace VoodooShader
          */
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const String & name) CONST PURE;
         /**
-         * Finds the address of a function in a module. The module must be loaded into the process and export the symbol,
-         * otherwise this will return nullptr. If the module name does not have an extension, ".dll" will be appended during
-         * the lookup. It is recommended you <em>do not</em> use an absolute path here.
-         *
-         * @param module The module name to look up.
-         * @param name The function name to find.
-         * @return The function's address if found, nullptr otherwise.
+         * @}
          */
-        _Check_return_ VOODOO_METHOD_(void *, FindFunction)(_In_ const String & module, _In_ const String & name) CONST PURE;
     };
     /**
      * @}

@@ -64,6 +64,12 @@ namespace VoodooShader
          */
         VOODOO_METHOD(IsVirtual)() CONST PURE;
         /**
+         * Gets the parent shader if the parameter is not virtual.
+         * 
+         * @return Parent shader.
+         */
+        VOODOO_METHOD_(IShader * const, GetShader)() CONST PURE;
+        /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value is changed.
          *
          * @param pParam The parameter to bind to this one.
@@ -94,6 +100,11 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, GetComponents)() CONST PURE;
         /**
+         * @name Data Access Methods
+         * Get and set the underlying data fields.
+         * @{
+         */
+        /**
          * Retrieves the texture source for this parameter.
          *
          * @return The texture source, if this parameter has a texture.
@@ -107,7 +118,9 @@ namespace VoodooShader
          */
         _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetScalar)() PURE;
         VOODOO_METHOD_(void, SetScalar)(_In_ const uint32_t count, _In_count_(count) float * const pValues) PURE;
-        VOODOO_METHOD_(IShader * const, GetShader)() CONST PURE;
+        /**
+         * @}
+         */
         /**
          * Retrieves the underlying Cg parameter object.
          *

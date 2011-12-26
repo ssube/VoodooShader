@@ -274,7 +274,7 @@ namespace VoodooShader
             m_Logger = dynamic_cast<ILogger*>(m_ModuleManager->CreateObject(logClass));
             if (!m_Logger)
             {
-                String error = String::Format(VSTR("Unable to create logger (class %s)."), logClass.GetData());
+                String error = String::Format(VSTR("Unable to create logger (class ") VPFVSTR VSTR(")."), logClass.GetData());
                 Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
@@ -312,21 +312,21 @@ namespace VoodooShader
             m_FileSystem = dynamic_cast<IFileSystem*>(m_ModuleManager->CreateObject(fsClass));
             if (!m_FileSystem)
             {
-                String error = String::Format(VSTR("Unable to create file system (class %s)."), fsClass.GetData());
+                String error = String::Format(VSTR("Unable to create file system (class ") VPFVSTR VSTR(")."), fsClass.GetData());
                 Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
             m_HookManager = dynamic_cast<IHookManager*>(m_ModuleManager->CreateObject(hookClass));
             if (!m_HookManager)
             {
-                String error = String::Format(VSTR("Unable to create hook manager (class %s)."), hookClass.GetData());
+                String error = String::Format(VSTR("Unable to create hook manager (class ") VPFVSTR VSTR(")."), hookClass.GetData());
                 Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
             m_Adapter = dynamic_cast<IAdapter*>(m_ModuleManager->CreateObject(adpClass));
             if (!m_Adapter)
             {
-                String error = String::Format(VSTR("Unable to create adapter (class %s)."), adpClass.GetData());
+                String error = String::Format(VSTR("Unable to create adapter (class ") VPFVSTR VSTR(")."), adpClass.GetData());
                 Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
@@ -517,6 +517,10 @@ namespace VoodooShader
             );
         }
 
+#if defined(VOODOO_DEBUG_TRACK) || defined(VOODOO_DEBUG_MEMORY)
+        m_Dbg_Shaders.push_back(shader);
+#endif
+
         return shader;
     }
 
@@ -536,7 +540,7 @@ namespace VoodooShader
         }
         else
         {
-            IParameterRef parameter = nullptr;
+            IParameter * parameter = nullptr;
 
             try
             {
@@ -548,7 +552,7 @@ namespace VoodooShader
                 (
                     LL_CoreDebug, VOODOO_CORE_NAME,
                     VSTR("Created parameter named ") VPFVSTR VSTR(" with type ") VPFVSTR VSTR(", returning shared pointer to %p."), 
-                    name.GetData(), Converter::ToString(type), parameter.get()
+                    name.GetData(), Converter::ToString(type), parameter
                 );
             } catch (const std::exception & exc) {
                 m_Logger->Log
@@ -559,7 +563,11 @@ namespace VoodooShader
                 );
             }
 
-            return parameter.get();
+#if defined(VOODOO_DEBUG_TRACK) || defined(VOODOO_DEBUG_MEMORY)
+            m_Dbg_Parameters.push_back(parameter);
+#endif
+
+            return parameter;
         }
     }
 
@@ -579,13 +587,17 @@ namespace VoodooShader
         }
         else
         {
-            ITextureRef texture = m_Adapter->CreateTexture(name, pDesc);
+            ITexture * texture = m_Adapter->CreateTexture(name, pDesc);
 
             m_Textures[name] = texture;
 
             m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("Created texture '") VPFVSTR VSTR("'."), name.GetData());
 
-            return texture.get();
+#if defined(VOODOO_DEBUG_TRACK) || defined(VOODOO_DEBUG_MEMORY)
+            m_Dbg_Textures.push_back(texture);
+#endif
+
+            return texture;
         }
     }
 
@@ -595,7 +607,7 @@ namespace VoodooShader
 
         if (parameter != m_Parameters.end())
         {
-            m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("Got parameter %s, returning shared pointer to %p."),
+            m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("Got parameter ") VPFVSTR VSTR(", returning shared pointer to %p."),
                 name.GetData(), parameter->second.get());
 
             if (type == PT_Unknown)

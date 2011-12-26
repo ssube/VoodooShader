@@ -50,8 +50,10 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Search Path Methods
+         * Add or remove directories from the search path.
+         * @{
          */
-
         /**
          * Adds a directory to this file system's search path.
          *
@@ -77,6 +79,12 @@ namespace VoodooShader
          */
         VOODOO_METHOD(RemovePath)(_In_ const String & path) PURE;
         /**
+         * @}
+         * @name Search Methods
+         * File search methods.
+         * @{
+         */
+        /**
          * Resolves a relative filename (usually just filename and extension, but may include directories) into an
          * absolute filename by searching the list of resource directories registered with this manager. Depending on the
          * mode given, the file may be opened or created.
@@ -86,6 +94,9 @@ namespace VoodooShader
          * @return The file, if found or created (depending on mode).
          */
         VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, _In_ const GetFileMode mode = FF_OpenOnly) CONST PURE;
+        /**
+         * @}
+         */
     };
     /**
      * @}

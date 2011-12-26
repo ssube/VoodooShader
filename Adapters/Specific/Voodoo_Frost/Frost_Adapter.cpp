@@ -416,7 +416,7 @@ namespace VoodooShader
         {
             if (!shader)
             {
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to draw nullptr shader.");
+                m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to draw null shader.");
                 return;
             }
 

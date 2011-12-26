@@ -38,12 +38,12 @@ namespace VoodooShader
     {
         const char * techName = cgGetTechniqueName(m_CgTechnique);
 
-        m_Name = m_Shader->GetName() + L"::";
+        m_Name = m_Shader->GetName() + VSTR("::");
         if (techName)
         {
             m_Name += techName;
         } else {
-            m_Name += String::Format(L"tech_%p", m_CgTechnique);
+            m_Name += String::Format(VSTR("tech_%p"), m_CgTechnique);
         }
 
         ++this->m_Refs;
@@ -104,7 +104,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSTechnique::ToString() CONST
     {
-        return String::Format(L"VSTechnique(%s)", m_Name.GetData());
+        return String::Format(VSTR("VSTechnique(") VPFVSTR VSTR(")"), m_Name.GetData());
     }
 
     ICore * VOODOO_METHODTYPE VSTechnique::GetCore() CONST
@@ -181,7 +181,7 @@ namespace VoodooShader
                 (
                     LL_CoreWarn,
                     VOODOO_CORE_NAME,
-                    L"Technique %s has annotation \"target\" of invalid type.",
+                    L"Technique %s has target annotation of invalid type.",
                     this->ToString().GetData()
                 );
 

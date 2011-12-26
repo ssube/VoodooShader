@@ -94,7 +94,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->Log
                 (
                     LL_ModWarn, VOODOO_FILESYSTEM_NAME,
-                    L"Unable to resolve format for image %s (%u).",
+                    VSTR("Unable to resolve format for image '") VPFVSTR VSTR("' (%u).",
                     m_Path.GetData(), image
                 );
             }
@@ -152,7 +152,7 @@ namespace VoodooShader
 
         String VSWImage::ToString() const
         {
-            return L"VSWImage";
+            return VSTR("VSWImage()");
         }
 
         ICore * VSWImage::GetCore() const
@@ -236,7 +236,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->Log
                     (
                     LL_ModWarn, VOODOO_FILESYSTEM_NAME,
-                    L"Invalid texture format for getting image data (%X).",
+                    VSTR("Invalid texture format for getting image data (%X)."),
                     pDesc.Format
                     );
                 return 0;

@@ -68,7 +68,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->Log
                     (
                     LL_ModWarn, VOODOO_FILESYSTEM_NAME,
-                    L"Attempted to open file '%s' with unknown mode (%X).",
+                    VSTR("Attempted to open file '") VPFVSTR VSTR("' with unknown mode (%X)."),
                     m_Path.GetData(), mode
                     );
                 return false;
@@ -79,7 +79,7 @@ namespace VoodooShader
             m_Core->GetLogger()->Log
                 (
                 LL_ModDebug, VOODOO_FILESYSTEM_NAME,
-                L"Opening file %s with mode %u (underlying %u).",
+                VSTR("Opening file ") VPFVSTR VSTR("with mode %u (underlying %u)."),
                 m_Path.GetData(), mode, access
                 );
 
@@ -87,7 +87,8 @@ namespace VoodooShader
 
             if (!m_File.is_open())
             {
-                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FILESYSTEM_NAME, L"Unable to open file %s.", m_Path.GetData());
+                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FILESYSTEM_NAME, 
+                    VSTR("Unable to open file '") VPFVSTR VSTR("'."), m_Path.GetData());
                 return false;
             } else {
                 return true;

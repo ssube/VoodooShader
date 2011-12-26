@@ -51,8 +51,13 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Texture Data
+         * Access texture information.
+         * @{
          */
-
+        /**
+         * 
+         */
         VOODOO_METHOD_(String, GetName)() CONST PURE;
         /**
          * Gets the data.
@@ -73,6 +78,9 @@ namespace VoodooShader
          * @return The description.
          */
         VOODOO_METHOD_(TextureDesc, GetDesc)() CONST PURE;
+        /**
+         * @}
+         */
     };
     /**
      * @}

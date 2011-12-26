@@ -122,30 +122,6 @@ namespace VoodooShader
         m_Impl = nullptr;
     }
 
-    bool String::ToUuid(Uuid * pUuid) const
-    {
-        if (!pUuid)
-        {
-            return false;
-        }
-
-        try
-        {
-            boost::uuids::string_generator gen;
-            *pUuid = gen(m_Impl->m_Str);
-            return true;
-        } catch (const boost::exception & exc) {
-            UNREFERENCED_PARAMETER(exc);
-
-            return false;
-        }
-    }
-
-    int32_t String::ToCharStr(int32_t size, char * const pBuffer) const
-    {
-        return WideCharToMultiByte(CP_UTF8, NULL, m_Impl->m_Str.c_str(), -1, pBuffer, size, NULL, NULL);
-    }
-
     void String::CInit(const uint32_t size, const char * str)
     {
         if (m_Impl) delete m_Impl;
@@ -180,6 +156,31 @@ namespace VoodooShader
         } else {
             m_Impl = new StringImpl(size, str);
         }
+    }
+
+    bool String::ToUuid(Uuid * pUuid) const
+    {
+        if (!pUuid)
+        {
+            return false;
+        }
+
+        try
+        {
+            boost::uuids::string_generator gen;
+            *pUuid = gen(m_Impl->m_Str);
+            return true;
+        } catch (const boost::exception & exc) {
+            UNREFERENCED_PARAMETER(exc);
+
+            ZeroMemory(pUuid, sizeof(Uuid));
+            return false;
+        }
+    }
+
+    int32_t String::ToCharStr(int32_t size, char * const pBuffer) const
+    {
+        return WideCharToMultiByte(CP_UTF8, NULL, m_Impl->m_Str.c_str(), -1, pBuffer, size, NULL, NULL);
     }
 
     String & String::Append(const wchar_t ch)
@@ -282,6 +283,42 @@ namespace VoodooShader
     {
         m_Impl->m_Str = m_Impl->m_Str.substr(size);
         return (*this);
+    }
+
+    void String::Reserve(uint32_t size)
+    {
+        m_Impl->m_Str.reserve(size);
+    }
+
+    uint32_t String::Split(const String & delims, const uint32_t count, String * pStrings, bool stripEmpty) const
+    {
+        String buffer;
+        uint32_t index = 0;
+
+        for (std::wstring::size_type i = 0; i < m_Impl->m_Str.length(); ++i)
+        {
+            if (delims.Find(m_Impl->m_Str[i]) != String::Npos)
+            {
+                if (!stripEmpty || buffer.GetLength() > 0)
+                {
+                    if (pStrings)
+                    {
+                        if (index < count)
+                        {
+                            pStrings[index] = buffer;
+                        } else {
+                            pStrings[count-1].Append(m_Impl->m_Str[i]).Append(buffer);
+                        }
+                    }
+                }
+                buffer.Clear().Reserve(m_Impl->m_Str.length() - i);
+                ++index;
+            } else {
+                buffer.Append(m_Impl->m_Str[i]);
+            }
+        }
+
+        return index;
     }
 
     String String::ToLower() const

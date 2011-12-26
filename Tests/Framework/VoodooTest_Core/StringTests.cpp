@@ -83,7 +83,7 @@ BEGIN_TEST(String_ToUuid)
     ZeroMemory(&uuid, sizeof(Uuid));
     String str(uuid);
     WIN_ASSERT_TRUE(str.ToUuid(&ouuid), L"ToUuid failed.");
-    WIN_ASSERT_EQUAL(uuid, ouuid, L"UUIDs are not equal.");
+    WIN_ASSERT_EQUAL(uuid, ouuid, L"Uuids are not equal.");
 }
 END_TEST;
 

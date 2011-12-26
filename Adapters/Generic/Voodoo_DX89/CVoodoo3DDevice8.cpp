@@ -327,13 +327,13 @@ namespace VoodooShader
             // If not a render-target, attempt to create it as one
             if (!(Usage & D3DUSAGE_RENDERTARGET))
             {
-                hr = m_RealDevice->CreateTexture(Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format, Pool, &rTexture, nullptr);
+                hr = m_RealDevice->CreateTexture(Width, Height, Levels, Usage | D3DUSAGE_RENDERTARGET, Format, Pool, &rTexture, NULL);
             }
 
             // That failed, create as a standard texture
             if (FAILED(hr))
             {
-                hr = m_RealDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, &rTexture, nullptr);
+                hr = m_RealDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, &rTexture, NULL);
             }
 
             gpVoodooLogger->Log
@@ -367,7 +367,7 @@ namespace VoodooShader
         {
             IDirect3DVolumeTexture9 *rTexture;
             HRESULT hr = m_RealDevice->CreateVolumeTexture
-                (Width, Height, Depth, Levels, Usage, Format, Pool, &rTexture, nullptr);
+                (Width, Height, Depth, Levels, Usage, Format, Pool, &rTexture, NULL);
 
             gpVoodooLogger->Log
             (
@@ -395,7 +395,7 @@ namespace VoodooShader
         )
         {
             IDirect3DCubeTexture9 *rTexture;
-            HRESULT hr = m_RealDevice->CreateCubeTexture(EdgeLength, Levels, Usage, Format, Pool, &rTexture, nullptr);
+            HRESULT hr = m_RealDevice->CreateCubeTexture(EdgeLength, Levels, Usage, Format, Pool, &rTexture, NULL);
 
             gpVoodooLogger->Log
                 (
@@ -421,7 +421,7 @@ namespace VoodooShader
             )
         {
             HRESULT hr = m_RealDevice->CreateVertexBuffer
-                (Length, Usage, FVF, Pool, (IDirect3DVertexBuffer9 **) ppVertexBuffer, nullptr);
+                (Length, Usage, FVF, Pool, (IDirect3DVertexBuffer9 **) ppVertexBuffer, NULL);
 
             gpVoodooLogger->Log
                 (

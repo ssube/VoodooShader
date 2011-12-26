@@ -45,7 +45,7 @@ namespace VoodooShader
 
         if (!context || !cgIsContext(context))
         {
-            Throw(VOODOO_CORE_NAME, L"Unable to create parameter (core has no context).", m_Core);
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create parameter (core has no context)."), m_Core);
         }
 
         int32_t len = m_Name.ToCharStr(0, nullptr);
@@ -56,7 +56,7 @@ namespace VoodooShader
 
         if (!cgIsEffect(m_CgEffect))
         {
-            Throw(VOODOO_CORE_NAME, L"Failed to create shader.", m_Core);
+            Throw(VOODOO_CORE_NAME, VSTR("Failed to create shader."), m_Core);
         }
         else
         {
@@ -70,8 +70,6 @@ namespace VoodooShader
 
     VSShader::~VSShader()
     {
-        m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"Destroying shader %s.", m_Name.GetData());
-
         m_DefaultTechnique = nullptr;
         m_Techniques.clear();
         m_Parameters.clear();
@@ -129,7 +127,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSShader::ToString() CONST
     {
-        return String::Format(L"VSShader(%s)", m_Name.GetData());
+        return String::Format(VSTR("VSShader(") VPFVSTR VSTR(")"), m_Name.GetData());
     }
 
     ICore * VOODOO_METHODTYPE VSShader::GetCore() CONST
@@ -179,7 +177,7 @@ namespace VoodooShader
                 (
                     LL_CoreError,
                     VOODOO_CORE_NAME,
-                    L"Technique %s cannot be set as default for shader %s (not technique for this shader).",
+                    VSTR("Technique '") VPFVSTR VSTR("' cannot be set as default for shader '") VPFVSTR VSTR("' (not technique for this shader)."),
                     pTechnique->ToString().GetData(), this->ToString().GetData()
                 );
             }
@@ -236,7 +234,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->Log
                     (
                     LL_CoreDebug, VOODOO_CORE_NAME,
-                    L"Error creating linking parameter '%S': %S", name, exc.what()
+                    VSTR("Error creating linking parameter '") VPFCSTR VSTR("': ") VPFCSTR, name, exc.what()
                     );
             }
 
@@ -275,7 +273,7 @@ namespace VoodooShader
                     (
                         LL_CoreWarn,
                         VOODOO_CORE_NAME,
-                        L"Unable to find global param %S for parameter %s.",
+                        VSTR("Unable to find global param '") VPFCSTR VSTR("' for parameter '") VPFVSTR VSTR("'."),
                         globalName, param->ToString().GetData()
                     );
                 }
@@ -286,7 +284,7 @@ namespace VoodooShader
                 (
                     LL_CoreWarn,
                     VOODOO_CORE_NAME,
-                    L"Unable to read global annotation for parameter %s.",
+                    VSTR("Unable to read global annotation for parameter '") VPFVSTR VSTR("'."),
                     param->ToString().GetData()
                 );
             }
@@ -315,7 +313,7 @@ namespace VoodooShader
             (
                 LL_CoreWarn,
                 VOODOO_CORE_NAME,
-                L"Could not retrieve texture annotation for parameter %s.",
+                VSTR("Could not retrieve texture annotation for parameter '") VPFVSTR VSTR("'."),
                 param->ToString().GetData()
             );
 
@@ -330,7 +328,7 @@ namespace VoodooShader
             (
                 LL_CoreWarn,
                 VOODOO_CORE_NAME,
-                L"Could not retrieve texture name for parameter %s.",
+                VSTR("Could not retrieve texture name for parameter '") VPFVSTR VSTR("'."),
                 param->ToString().GetData()
             );
 
@@ -350,7 +348,7 @@ namespace VoodooShader
             (
                 LL_CoreWarn,
                 VOODOO_CORE_NAME,
-                L"Could not find texture %S for parameter %s, attempting to load.",
+                VSTR("Could not find texture '") VPFCSTR VSTR("' for parameter '") VPFVSTR VSTR("', attempting to load."),
                 textureName,
                 param->ToString().GetData()
             );
@@ -371,7 +369,7 @@ namespace VoodooShader
             (
                 LL_CoreError,
                 VOODOO_CORE_NAME,
-                L"Could not create parameter texture for unknown parameter."
+                VSTR("Could not create parameter texture for unknown parameter.")
             );
 
             return;
@@ -385,7 +383,7 @@ namespace VoodooShader
             (
                 LL_CoreError,
                 VOODOO_CORE_NAME,
-                L"Invalid or missing texture name for parameter %s.",
+                VSTR("Invalid or missing texture name for parameter '") VPFVSTR VSTR("'."),
                 param->ToString().GetData()
             );
 
@@ -400,7 +398,7 @@ namespace VoodooShader
             (
                 LL_CoreError,
                 VOODOO_CORE_NAME,
-                L"Invalid texture name annotation type in %s.",
+                VSTR("Invalid texture name annotation type in '") VPFVSTR VSTR("'."),
                 param->ToString().GetData()
             );
 
@@ -434,20 +432,20 @@ namespace VoodooShader
             switch (sizeType)
             {
             case CG_INT:
-                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"1-dimensional texture size found.");
+                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("1-dimensional texture size found."));
 
                 texRegion.Size.X = texSize[0];
                 texRegion.Size.Y = texRegion.Size.Z = 1;
                 break;
             case CG_INT2:
-                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"2-dimensional texture size found.");
+                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME,VSTR("2-dimensional texture size found."));
 
                 texRegion.Size.X = texSize[0];
                 texRegion.Size.Y = texSize[1];
                 texRegion.Size.Z = 1;
                 break;
             case CG_INT3:
-                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"3-dimensional texture size found.");
+                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("3-dimensional texture size found."));
 
                 texRegion.Size.X = texSize[0];
                 texRegion.Size.Y = texSize[1];
@@ -458,21 +456,21 @@ namespace VoodooShader
                 (
                     LL_CoreError,
                     VOODOO_CORE_NAME,
-                    L"4-dimensional texture size found. Creating quantum texture..."
+                    VSTR("4-dimensional texture size found (creating quantum texture).")
                 );
             default:
                 m_Core->GetLogger()->Log
                 (
                     LL_CoreError,
                     VOODOO_CORE_NAME,
-                    L"Invalid texture size annotation type for parameter %s.",
+                    VSTR("Invalid texture size annotation type for parameter '") VPFVSTR VSTR("'."),
                     param->ToString().GetData()
                 );
 
                 return;
             }
         } else {
-            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"No texture size found.");
+            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("No texture size found."));
             texRegion.Size.X = texRegion.Size.Y = texRegion.Size.Z = 0;
         }
 
@@ -486,20 +484,20 @@ namespace VoodooShader
             switch (originType)
             {
             case CG_INT:
-                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"1-dimensional texture origin found.");
+                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("1-dimensional texture origin found."));
 
                 texRegion.Origin.X = texOrigin[0];
                 texRegion.Origin.Y = texRegion.Size.Z = 1;
                 break;
             case CG_INT2:
-                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"2-dimensional texture origin found.");
+                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("2-dimensional texture origin found."));
 
                 texRegion.Origin.X = texOrigin[0];
                 texRegion.Origin.Y = texOrigin[1];
                 texRegion.Origin.Z = 1;
                 break;
             case CG_INT3:
-                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"3-dimensional texture origin found.");
+                m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("3-dimensional texture origin found."));
 
                 texRegion.Origin.X = texOrigin[0];
                 texRegion.Origin.Y = texOrigin[1];
@@ -510,14 +508,14 @@ namespace VoodooShader
                 (
                     LL_CoreError,
                     VOODOO_CORE_NAME,
-                    L"Invalid texture size annotation type for parameter %s.",
+                    VSTR("Invalid texture size annotation type for parameter '") VPFVSTR VSTR("'."),
                     param->ToString().GetData()
                 );
 
                 return;
             }
         } else {
-            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, L"No texture origin found.");
+            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("No texture origin found."));
             texRegion.Origin.X = texRegion.Origin.Y = texRegion.Origin.Z = 0;
         }
 
@@ -549,7 +547,7 @@ namespace VoodooShader
             (
                 LL_CoreError,
                 VOODOO_CORE_NAME,
-                L"Invalid texture format annotation type in %s.",
+                VSTR("Invalid texture format annotation type in '") VPFVSTR VSTR("'."),
                 param->ToString().GetData()
             );
 
@@ -576,13 +574,13 @@ namespace VoodooShader
 
                 if (!texture)
                 {
-                    m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, L"Adapter was unable to load texture from file '%s'.", texFile->GetPath().GetData());
+                    m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, VSTR("Adapter was unable to load texture from file '") VPFVSTR VSTR("'."), texFile->GetPath().GetData());
                 }
             } else {
-                m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, L"File '%s' is not a valid image.", texFile->GetPath().GetData());
+                m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, VSTR("File '") VPFVSTR VSTR("' is not a valid image."), texFile->GetPath().GetData());
             }
         } else {
-            m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, L"Unable to find texture file '%s'.", texName.GetData());
+            m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, VSTR("Unable to find texture file '") VPFVSTR VSTR("'."), texName.GetData());
         }
 
         param->SetTexture(texture.get());
@@ -602,7 +600,7 @@ namespace VoodooShader
                 (
                     LL_CoreDebug,
                     VOODOO_CORE_NAME,
-                    L"Validated technique %S.",
+                    VSTR("Validated technique '") VPFCSTR VSTR("'."),
                     cgGetTechniqueName(cTech)
                 );
 
@@ -623,7 +621,7 @@ namespace VoodooShader
                 (
                     LL_CoreWarn,
                     VOODOO_CORE_NAME,
-                    L"ITechnique failed to validate: %S.",
+                    VSTR("Technique '") VPFCSTR VSTR("' failed to validate."),
                     cgGetTechniqueName(cTech)
                 );
             }

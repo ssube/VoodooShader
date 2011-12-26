@@ -237,23 +237,6 @@ namespace VoodooShader
         }
     }
 
-    void * VOODOO_METHODTYPE VSModuleManager::FindFunction(_In_ const String & module, _In_ const String & name) CONST
-    {
-        HMODULE hmodule = GetModuleHandle(module.GetData());
-
-        if (hmodule)
-        {
-            int32_t len = name.ToCharStr(0, nullptr);
-            std::vector<char> buffer(len);
-            len = name.ToCharStr(len, &buffer[0]);
-            return GetProcAddress(hmodule, &buffer[0]);
-        }
-        else
-        {
-            return nullptr;
-        }
-    }
-
     bool VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const Uuid & clsid) CONST
     {
         return (m_Classes.find(clsid) != m_Classes.end());

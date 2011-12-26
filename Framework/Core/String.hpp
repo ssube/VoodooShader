@@ -124,7 +124,7 @@ namespace VoodooShader
          *
          * @code 01234567-89ab-cdef-0123-456789abcdef @endcode
          *
-         * This is considered the standard form for Voodoo UUIDs, and is used in the registry and most other locations.
+         * This is considered the standard form for Voodoo Uuids, and is used in the registry and most other locations.
          */
         String(_In_ const Uuid & uuid);
 
@@ -190,10 +190,11 @@ namespace VoodooShader
          * @li <code>0123456789abcdef0123456789abcdef</code>
          *
          * The second format is preferred, and matches the COM-standard 4/2/2/2/12 format, supported by most tools and
-         * common interfaces. Wherever possible, UUIDs should be embedded in code using the appropriate Voodoo macros to
+         * common interfaces. Wherever possible, Uuids should be embedded in code using the appropriate Voodoo macros to
          * avoid string conversion costs.
          *
-         * @param pUuid Pointer to the Uuid to be filled, if conversion succeeds. If conversion fails, this is not modified.
+         * @param pUuid Pointer to the Uuid to be filled, if conversion succeeds. If conversion fails, this is set to the
+         *      null Uuid.
          * @return Success of conversion.
          */
         bool ToUuid(_Out_ Uuid * pUuid) const;
@@ -246,10 +247,28 @@ namespace VoodooShader
         String & Prepend(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
         String & Prepend(_In_ const String & str);
         String & Truncate(_In_ uint32_t size);
-        uint32_t Split(_In_ const uint32_t count, _In_count_(size) String * pStrings, bool stripEmpty = false);
         /**
          * @}
          */
+
+        /**
+         * Splits the string into tokens based on the delimeters given. The remainder of the string,
+         * after the maximum number of tokens is reached, will be appended to the end of the final
+         * token. The delimeter characters will not be included in the split strings.
+         *
+         * @param delims The list of delimeter characters.
+         * @param count The maximum number of tokens.
+         * @param pStrings The destination array of strings to be filled with split tokens.
+         * @param stripEmpty If set, empty (0-length) tokens will be discarded.
+         * @return The final number of tokens.
+         */
+        uint32_t Split
+        (
+            _In_ const String & delims, 
+            _In_ const uint32_t count, 
+            _In_count_(count) String * pStrings, 
+            _In_ bool stripEmpty = false
+        ) const;
 
         /**
          * @addtogroup voodoo_utility_string_case String case conversion
@@ -372,6 +391,7 @@ namespace VoodooShader
 
         // Buffer info/access
         uint32_t GetLength() const;
+        void Reserve(uint32_t size);
         bool IsEmpty() const;
 
         wchar_t GetAt(_In_ uint32_t pos) const;

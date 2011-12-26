@@ -79,7 +79,9 @@
   <ItemGroup>
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="VSAdapter.cpp" />
-    <ClCompile Include="VSCore.cpp" />
+    <ClCompile Include="VSCore.cpp">
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
+    </ClCompile>
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Exports.cpp" />
     <ClCompile Include="VSFilesystem.cpp" />

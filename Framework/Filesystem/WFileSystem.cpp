@@ -22,6 +22,8 @@
 
 #include "Filesystem_Version.hpp"
 
+#include "Support.inl"
+
 // The MS shlobj header contains a few functions that cause errors in analysis under /W4 (and cause the build to fail
 // under /WX). This disables the warning for only that header.
 #pragma warning(push)
@@ -35,7 +37,7 @@ namespace VoodooShader
     namespace VoodooWFS
     {
         static const Version version = VOODOO_META_VERSION_STRUCT(FILESYSTEM);
-        static const wchar_t * name_VSWFileSystem = L"VSWFileSystem";
+        static const wchar_t * name_VSWFileSystem = VSTR("VSWFileSystem");
         static const Uuid clsid_VSWFileSystem = CLSID_VSWFileSystem;
 
         const Version * VOODOO_CALLTYPE API_ModuleVersion()
@@ -86,19 +88,22 @@ namespace VoodooShader
 
             if (SHGetFolderPath(nullptr, CSIDL_COMMON_DOCUMENTS, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
             {
-                StringCchCat(cvar, MAX_PATH, L"\\My Games\\");
-                parser->Add(L"allgames", cvar, VT_System);
+                PathCombine(cvar, cvar, VSTR("My Games"));
+                PathAddBackslash(cvar);
+                parser->Add(VSTR("allgames"), cvar, VT_System);
             }
 
             if (SHGetFolderPath(nullptr, CSIDL_PERSONAL, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
             {
-                StringCchCat(cvar, MAX_PATH, L"\\My Games\\");
-                parser->Add(L"mygames", cvar, VT_System);
+                PathCombine(cvar, cvar, VSTR("My Games"));
+                PathAddBackslash(cvar);
+                parser->Add(VSTR("mygames"), cvar, VT_System);
             }
 
             if (SHGetFolderPath(nullptr, CSIDL_SYSTEM, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
             {
-                parser->Add(L"systemroot", cvar, VT_System);
+                PathAddBackslash(cvar);
+                parser->Add(VSTR("systemroot"), cvar, VT_System);
             }
 
             // Init DevIL
@@ -173,7 +178,7 @@ namespace VoodooShader
 
         String VSWFileSystem::ToString() const
         {
-            return L"VSWFileSystem";
+            return VSTR("VSWFileSystem()");
         }
 
         ICore * VSWFileSystem::GetCore() const
@@ -183,31 +188,28 @@ namespace VoodooShader
 
         bool VSWFileSystem::AddPath(const String & name)
         {
-            String realname = m_Core->GetParser()->Parse(name);
-            size_t splitter = realname.Find(L';');
+            size_t splitter = name.Find(VSTR(';'));
 
             while (splitter != String::Npos)
             {
-                String partname = realname.Substr(0, splitter);
+                String partname = name.Substr(0, splitter);
 
                 this->m_Directories.push_front(partname);
-                realname = realname.Substr(splitter + 1);
-                splitter = realname.Find(L';');
+                name = name.Substr(splitter + 1);
+                splitter = name.Find(VSTR(';'));
             }
 
-            this->m_Directories.push_front(realname);
+            this->m_Directories.push_front(name);
 
             return true;
         }
 
         bool VSWFileSystem::RemovePath(const String & name)
         {
-            String realname = m_Core->GetParser()->Parse(name) + L"\\";
-
             this->m_Directories.remove_if(
                 [&](const String & current)
                 {
-                    return (current == realname);
+                    return (current == name);
                 }
             );
 
@@ -216,7 +218,8 @@ namespace VoodooShader
 
         IFile * VSWFileSystem::GetFile(const String & name, const GetFileMode mode) const
         {
-            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FILESYSTEM_NAME, L"Searching for raw file '%s'.", name.GetData());
+            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FILESYSTEM_NAME, 
+                VSTR("Searching for raw file '") VPFVSTR VSTR("'."), name.GetData());
 
             String filename = m_Core->GetParser()->Parse(name);
 
@@ -224,7 +227,7 @@ namespace VoodooShader
             (
                 LL_ModDebug,
                 VOODOO_FILESYSTEM_NAME,
-                L"Searching for parsed file '%s'.",
+                VSTR("Searching for parsed file '") VPFVSTR VSTR("'."),
                 filename.GetData()
             );
 
@@ -233,12 +236,12 @@ namespace VoodooShader
             while (curDir != m_Directories.end())
             {
                 // Try to find the file in each registered dir
-                String fullname = (*curDir) + L"\\" + filename;
+                String fullname = m_Core->GetParser()->Parse(*curDir, PF_SlashTrail) + filename;
 
                 m_Core->GetLogger()->Log
                 (
                     LL_ModDebug, VOODOO_CORE_NAME,
-                    L"Checking file '%s'.",
+                    VSTR("Checking file '") VPFVSTR VSTR("'."),
                     fullname.GetData()
                 );
 
@@ -251,7 +254,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->Log
                     (
                         LL_ModDebug, VOODOO_CORE_NAME,
-                        L"File '%s' found in directory '%s'.",
+                        VSTR("File '") VPFVSTR VSTR("' found in directory '") VPFVSTR VSTR("'."),
                         name.GetData(), (*curDir).GetData()
                     );
 
@@ -261,16 +264,16 @@ namespace VoodooShader
                 ++curDir;
             }
 
-            m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_CORE_NAME, L"Unable to find file '%s'.", name.GetData());
+            m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_CORE_NAME, VSTR("Unable to find file '") VPFVSTR VSTR("'."), name.GetData());
 
             if ((mode & FF_CreateOnly) == FF_CreateOnly)
             {
-                String fullname = (*m_Directories.begin()) + L"\\" + filename;
+                String fullname = m_Core->GetParser()->Parse(*m_Directories.begin(), PF_SlashTrail) + filename;
 
                 m_Core->GetLogger()->Log
                 (
                     LL_ModInfo, VOODOO_CORE_NAME,
-                    L"Creating file '%s'.",
+                    VSTR("Creating file '") VPFVSTR VSTR("'."),
                     fullname.GetData()
                 );
 
@@ -283,7 +286,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->Log
                     (
                         LL_ModDebug, VOODOO_CORE_NAME,
-                        L"File '%s' created in directory '%s'.",
+                        VSTR("File '") VPFVSTR VSTR("' created in directory '") VPFVSTR VSTR("'."),
                         name.GetData(), (*curDir).GetData()
                     );
 

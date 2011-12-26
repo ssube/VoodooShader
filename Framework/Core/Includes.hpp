@@ -214,7 +214,7 @@ namespace VoodooShader
 #endif
 
     /**
-     * @defgroup voodoo_uuids Voodoo UUIDs
+     * @defgroup voodoo_uuids Voodoo Uuids
      * @{
      */
 #define DEFINE_UUID(name)     EXTERN_C CONST Uuid DECLSPEC_SELECTANY name

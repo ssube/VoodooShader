@@ -45,7 +45,6 @@ namespace VoodooShader
         VOODOO_METHOD(ClassExists)(_In_ const String & name) const;
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid & clsid) const;
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const String & name) const;
-        _Check_return_ VOODOO_METHOD_(void *, FindFunction)(_In_ const String & module, _In_ const String & name) const;
 
     private:
         mutable uint32_t m_Refs;

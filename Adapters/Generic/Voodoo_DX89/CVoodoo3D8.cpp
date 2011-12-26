@@ -122,7 +122,7 @@ namespace VoodooShader
             )
         {
             HRESULT hr = m_RealObject->CheckDeviceMultiSampleType
-                (Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, nullptr);
+                (Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
 
 #ifdef _DEBUG
             gpVoodooLogger->Log
