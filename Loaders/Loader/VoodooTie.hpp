@@ -36,7 +36,6 @@
  */
 extern VoodooShader::ICore * gVoodooCore;
 extern VoodooShader::IAdapter * gVoodooAdapter;
-extern VoodooShader::InitParams gInitParams;
 
 extern HINSTANCE gLoaderHandle;
 

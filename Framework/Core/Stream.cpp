@@ -96,21 +96,19 @@ namespace VoodooShader
 
     Stream & Stream::operator<<(const Exception & val)
     {
-        m_Impl->m_Stream << VSTR("Exception(") << val.what() << VSTR(")");
+        m_Impl->m_Stream << val;
         return (*this);
     }
 
     Stream & Stream::operator<<(const Regex & val)
     {
-        m_Impl->m_Stream << VSTR("Regex(");
-        this->operator<<(val.GetExpr());
-        m_Impl->m_Stream << VSTR(")");
+        m_Impl->m_Stream << val;
         return (*this);
     }
 
     Stream & Stream::operator<<(const String & val)
     {
-        m_Impl->m_Stream << val.GetData();
+        m_Impl->m_Stream << val;
         return (*this);
     }
 
@@ -122,65 +120,64 @@ namespace VoodooShader
 
     Stream & Stream::operator<<(const TextureDesc & val)
     {
-        m_Impl->m_Stream << VSTR("TextureDesc(") << val.Format << VSTR(", ") << val.Mipmaps << 
-            VSTR(", ") << val.RenderTarget << VSTR(", ") << val.Size << VSTR(")");
+        m_Impl->m_Stream << val;
         return (*this);
     }
 
     Stream & Stream::operator<<(const TextureRegion & val)
     {
-        m_Impl->m_Stream << VSTR("TextureRegion(") << val.Format << VSTR(", ") << val.Mipmaps << 
-            VSTR(", ") << val.RenderTarget << VSTR(", ") << val.Size << VSTR(", ") << val.Origin << VSTR(")");
+        m_Impl->m_Stream << val;
         return (*this);
     }
 
     Stream & Stream::operator<<(const Variant & val)
     {
-        m_Impl->m_Stream << VSTR("Variant(") << val.Type << VSTR(", ") << val.Components << VSTR(", ");
-        /*switch (val.Type)
-        {
-        case UT_None:
-
-        }*/
+        m_Impl->m_Stream << val;
         return (*this);
     }
 
     Stream & Stream::operator<<(const Version & val)
     {
-        m_Impl->m_Stream << VSTR("Version(uuid=") << val.LibId << 
-            VSTR("; major=") << val.Major << VSTR("; minor=") << val.Minor <<
-            VSTR("; patch=") << val.Patch << VSTR("; build=") << val.Build <<
-            VSTR("; debug=") << val.Debug <<
-            VSTR("; name=")  << val.Name << VSTR("; revid=") << val.RevId << VSTR(")");
+        m_Impl->m_Stream << val;
         return (*this);
     }
 
-    Stream & operator<<(Stream & out, const char val)
+    Stream & Stream::operator<<(const char val)
     {
-        out.m_Impl->m_Stream << val;
-        return out;
+        m_Impl->m_Stream << val;
+        return (*this);
     }
 
-    Stream & operator<<(Stream & out, const char * val)
+    Stream & Stream::operator<<(const char * val)
     {
-        out.m_Impl->m_Stream << val;
-        return out;
+        m_Impl->m_Stream << val;
+        return (*this);
     }
 
-    Stream & operator<<(Stream & out, const wchar_t val)
+    Stream & Stream::operator<<(const wchar_t val)
     {
-        out.m_Impl->m_Stream << val;
-        return out;
+        m_Impl->m_Stream << val;
+        return (*this);
     }
 
-    Stream & operator<<(Stream & out, const wchar_t * val)
+    Stream & Stream::operator<<(const wchar_t * val)
     {
         if (val)
         {
-            out.m_Impl->m_Stream << val;
+            m_Impl->m_Stream << val;
         } else {
-            out.m_Impl->m_Stream << VSTR("(null)");
+            m_Impl->m_Stream << VSTR("(null)");
         }
-        return out;
+        return (*this);
+    }
+    
+    Stream & Stream::operator<<(const IObject * val)
+    {
+        if (val)
+        {
+            this->operator<<(val->ToString());
+        } else {
+            this->operator<<(VSTR("IObject(null)"));
+        }
     }
 }

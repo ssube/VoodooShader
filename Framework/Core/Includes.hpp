@@ -173,9 +173,9 @@ namespace VoodooShader
 #endif
 
     /* Basic structs */
-    struct InitParams;
     struct TextureDesc;
     struct TextureRegion;
+    struct Variant;
     struct Version;
 
     /* Geometry-related structs */
@@ -318,10 +318,10 @@ namespace VoodooShader
     {
         PT_Unknown      = 0x00,     /* !< Unknown parameter type. */
         // floats
-        PT_Float1       = 0x11,     /* !< Single-component float vector. */
-        PT_Float2       = 0x12,     /* !< Two-component float vector. */
-        PT_Float3       = 0x13,     /* !< Three-component float vector. */
-        PT_Float4       = 0x14,     /* !< Four-component float vector. */
+        PT_Float1       = 0x11,     /* !< Single-component float. */
+        PT_Float2       = 0x12,     /* !< Two-component float. */
+        PT_Float3       = 0x13,     /* !< Three-component float. */
+        PT_Float4       = 0x14,     /* !< Four-component float. */
         PT_Float1x1     = 0x11,
         PT_Float1x2     = 0x12,
         PT_Float1x3     = 0x13,

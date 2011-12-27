@@ -180,9 +180,9 @@ namespace VoodooShader
 
                 logMsg << VSTR("<?xml version='1.0'?>\n");
                 logMsg << VSTR("<VoodooLog ");
-                logMsg << this->LogDate().GetData() << VSTR(" ");
-                logMsg << this->LogTime().GetData() << VSTR(" ");
-                logMsg << this->LogTicks().GetData() << VSTR(" ");
+                logMsg << String::Data() << VSTR(" ");
+                logMsg << String::Time().GetData() << VSTR(" ");
+                logMsg << String::Ticks().GetData() << VSTR(" ");
                 logMsg << VSTR(">\n");
 
 #ifdef _DEBUG
@@ -207,20 +207,25 @@ namespace VoodooShader
             return this->Open(pFile->GetPath(), append);
         }
 
-        void VSXmlLogger::Close()
+        bool VSXmlLogger::Close()
         {
             if (this->m_LogFile.is_open())
             {
-                this->m_LogFile << VSTR("</VoodooLog>\n");
                 this->m_LogFile.close();
+                return true;
+            } else {
+                return false;
             }
         }
 
-        void VSXmlLogger::Flush()
+        bool VSXmlLogger::Flush()
         {
             if (this->m_LogFile.is_open())
             {
                 this->m_LogFile.flush();
+                return true;
+            } else {
+                return false;
             }
         }
 
@@ -256,36 +261,24 @@ namespace VoodooShader
             }
         }
 
-        void VSXmlLogger::Log(const LogLevel level, const wchar_t * source, const wchar_t * format, ...)
+        void VSXmlLogger::Log(const LogLevel level, const String & source, const String & msg)
         {
             if (!this->m_LogFile.is_open()) return;
 
-            LogLevel mask = (LogLevel) (level & m_LogLevel);
-            UNREFERENCED_PARAMETER(mask);
+            LogLevel mask = (LogLevel) (level & m_Filter);
             if (!(mask & LL_Severity) || !(mask & LL_Origin)) return;
-
-            va_list args;
-
-            va_start(args, format);
-            String fmtmsg = String::FormatV(format, args);
-            va_end(args);
 
             try
             {
                 // Format the message in memory to prevent partial messages from being dumped
-                wstringstream logMsg;
-
-                logMsg << VSTR("    <Message severity=\"") << level << VSTR("\" ");
-                logMsg << this->LogTicks().GetData();
-
-                if (source) logMsg << VSTR(" source=\"") << source << VSTR("\"");
-
-                logMsg << VSTR(">") << fmtmsg.GetData() << VSTR("</Message>\n");
+                Stream logMsg;
+                logMsg << VSTR("Message(Level: ") << level << VSTR("; Ticks: ") << String::Ticks() <<
+                    VSTR("Source: ") << source << VSTR("; Message: ") << msg << VSTR(")");
 
 #ifdef _DEBUG
                 if (level & (LL_ModWarn | LL_ModError))
                 {
-                    OutputDebugString(logMsg.str().c_str());
+                    OutputDebugString(logMsg.To);
 
 #   ifdef VOODOO_DEBUG_CONSOLE
                     cout << logMsg.str();

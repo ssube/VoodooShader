@@ -44,10 +44,15 @@ namespace VoodooShader
         class FormatImpl;
 
     public:
+        Format(_In_ const wchar_t * fmt);
         Format(_In_ const String & fmt);
         ~Format();
         
         String ToString() const;
+        operator String() const
+        {
+            return this->ToString();
+        }
 
         Format & operator<<(bool val);
         Format & operator<<(uint8_t val);
@@ -60,17 +65,19 @@ namespace VoodooShader
         Format & operator<<(double val);
         Format & operator<<(const void *& val);
 
+        Format & operator<<(const char val);
         Format & operator<<(const char * val);
+        Format & operator<<(const wchar_t val);
         Format & operator<<(const wchar_t * val);
 
         Format & operator<<(const Exception & val);
         Format & operator<<(const Regex & val);
         Format & operator<<(const Stream & val);
         Format & operator<<(const String & val);
-        Format & operator<<(const Uuid & val);
 
         Format & operator<<(const TextureDesc & val);
         Format & operator<<(const TextureRegion & val);
+        Format & operator<<(const Uuid & val);
         Format & operator<<(const Variant & val);
         Format & operator<<(const Version & val);
         

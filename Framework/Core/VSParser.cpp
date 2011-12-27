@@ -23,6 +23,7 @@
 #include "ICore.hpp"
 #include "ILogger.hpp"
 
+#include "Format.hpp"
 #include "Version.hpp"
 
 #include "shlwapi.h"
@@ -103,11 +104,9 @@ namespace VoodooShader
 
         if (logger)
         {
-            logger->LogMessage
-            (
-                LL_CoreDebug, VOODOO_CORE_NAME,
-                Stream() << VSTR("Adding variable '") << name << VSTR("' with value '") << value << VSTR("'.") << Print
-            );
+            Format msg(VSTR("Adding variable '%1%' with value '%2%'."));
+            msg << name << value;
+            logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, msg);
         }
 
         String finalname = this->Parse(name);        
@@ -123,11 +122,9 @@ namespace VoodooShader
             {
                 if (logger)
                 {
-                    logger->LogMessage
-                    (
-                        LL_CoreWarn, VOODOO_CORE_NAME,
-                        Stream() << VSTR("Unable to add duplicate system variable '") << finalname << VSTR("'.") << Print
-                    );
+                    Format msg(VSTR("Unable to add duplicate variable '%1%' (system variable already exists)."));
+                    msg << finalname;
+                    logger->LogMessage(LL_CoreWarn, VOODOO_CORE_NAME, msg);
                 }
             } else {
                 m_Variables[finalname] = Variable(value, type);
@@ -141,11 +138,9 @@ namespace VoodooShader
 
         if (logger)
         {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreDebug, VOODOO_CORE_NAME, 
-                Stream() << VSTR("Removing variable '") << name << VSTR("'.")
-            );
+            Format msg(VSTR("Removing variable '%1%'."));
+            msg << name;
+            m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, msg);
         }
 
         String finalname = this->Parse(name, PF_None);

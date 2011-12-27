@@ -608,21 +608,6 @@ namespace VoodooShader
         return (*this);
     }
 
-    String String::FormatV(const wchar_t * fmt, va_list args)
-    {
-        int bufsize = _vscwprintf(fmt, args) + 1;
-        std::vector<wchar_t> buffer(bufsize);
-
-        int len = _vsnwprintf_s(&buffer[0], bufsize, bufsize, fmt, args);
-
-        if (len == -1)
-        {
-            return String();
-        } else {
-            return String(buffer);
-        }
-    }
-
     uint32_t String::GetLength() const
     {
         return m_Impl->m_Str.size();

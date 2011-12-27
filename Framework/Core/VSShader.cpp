@@ -33,7 +33,7 @@
 
 #include "Converter.hpp"
 #include "Exception.hpp"
-#include "Stream.hpp"
+#include "Format.hpp"
 #include "Version.hpp"
 
 namespace VoodooShader
@@ -128,7 +128,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSShader::ToString() CONST
     {
-        return String::Format(VSTR("VSShader(") VPFVSTR VSTR(")"), m_Name.GetData());
+        return Format(VSTR("VSShader(%1%)")) << m_Name;
     }
 
     ICore * VOODOO_METHODTYPE VSShader::GetCore() CONST
@@ -176,10 +176,9 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreError,
-                    VOODOO_CORE_NAME,
-                    Stream() << VSTR("Technique '") << pTechnique << VSTR("' cannot be set as default for shader '") << 
-                        this << VSTR("' (technique originated from another shader).") << Print
+                    LL_CoreError, VOODOO_CORE_NAME,
+                    Format(VSTR("Technique %1% cannot be set as default (technique originated from another shader)."))
+                    << pTechnique
                 );
             }
         }
@@ -233,10 +232,10 @@ namespace VoodooShader
                 const char * name = cgGetParameterName(cParam);
 
                 m_Core->GetLogger()->LogMessage
-                    (
+                (
                     LL_CoreDebug, VOODOO_CORE_NAME,
-                    Stream() << VSTR("Error creating linking parameter '") << name << VSTR("': ") << exc.what() << Print
-                    );
+                    Format(VSTR("Error creating linking parameter %1%: %2%")) << name << exc.what()
+                );
             }
 
             cParam = cgGetNextParameter(cParam);

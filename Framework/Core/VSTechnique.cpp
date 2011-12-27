@@ -29,7 +29,7 @@
 #include "ITexture.hpp"
 
 #include "Exception.hpp"
-#include "Stream.hpp"
+#include "Format.hpp"
 #include "Version.hpp"
 
 namespace VoodooShader
@@ -44,7 +44,7 @@ namespace VoodooShader
         {
             m_Name += techName;
         } else {
-            m_Name += String::Format(VSTR("tech_%p"), m_CgTechnique);
+            m_Name += Format(VSTR("tech_%p")) << m_CgTechnique;
         }
 
         ++this->m_Refs;
@@ -105,7 +105,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSTechnique::ToString() CONST
     {
-        return String::Format(VSTR("VSTechnique(") VPFVSTR VSTR(")"), m_Name.GetData());
+        return Format(VSTR("VSTechnique(%1%)")) << m_Name;
     }
 
     ICore * VOODOO_METHODTYPE VSTechnique::GetCore() CONST
@@ -166,9 +166,8 @@ namespace VoodooShader
                 {
                     m_Core->GetLogger()->LogMessage
                     (
-                        LL_CoreWarn,
-                        VOODOO_CORE_NAME,
-                        Stream() << VSTR("Technique ") << this << VSTR(" cannot find target ") << targetName << VSTR(".") << Print
+                        LL_CoreWarn, VOODOO_CORE_NAME,
+                        Format(VSTR("Technique %1% cannot find target %2%.")) << this << targetName
                     );
 
                     m_Target = m_Core->GetStageTexture(TS_Shader);
@@ -178,9 +177,8 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreWarn,
-                    VOODOO_CORE_NAME,
-                    Stream() << VSTR("Technique ") << this << VSTR(" has target annotation of invalid type.") << Print
+                    LL_CoreWarn, VOODOO_CORE_NAME,
+                    Format(VSTR("Technique %1% has target annotation of invalid type.")) << this
                 );
 
                 m_Target = m_Core->GetStageTexture(TS_Shader);
@@ -190,9 +188,8 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->LogMessage
             (
-                LL_CoreDebug,
-                VOODOO_CORE_NAME,
-                Stream() << VSTR("Technique '") << this << VSTR("' has no target annotation.") << Print
+                LL_CoreDebug, VOODOO_CORE_NAME,
+                Format(VSTR("Technique %1% has no target annotation.")) << this
             );
 
             m_Target = m_Core->GetStageTexture(TS_Shader);
@@ -216,7 +213,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreDebug, VOODOO_CORE_NAME,
-                    Stream() << VSTR("Error linking pass '") << name << VSTR("': ") << exc.what() << Print
+                    Format(VSTR("Error linking pass %1%: %2%")) << name << exc.what()
                 );
             }
 

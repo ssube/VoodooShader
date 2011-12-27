@@ -27,7 +27,7 @@
 #include "ITexture.hpp"
 
 #include "Exception.hpp"
-#include "Stream.hpp"
+#include "Format.hpp"
 #include "Version.hpp"
 
 namespace VoodooShader
@@ -37,7 +37,7 @@ namespace VoodooShader
     {
         if (!m_Technique)
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no technique."), m_Core);
+            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no parent technique."), m_Core);
         }
 
         m_Core = m_Technique->GetCore();
@@ -49,7 +49,7 @@ namespace VoodooShader
         {
             m_Name += passName;
         } else {
-            m_Name += String::Format(VSTR("pass_%p"), m_CgPass);
+            m_Name += Format(VSTR("pass_%p")) << m_CgPass;
         }
 
         ++this->m_Refs;
@@ -116,7 +116,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSPass::ToString() CONST
     {
-        return String::Format(VSTR("VSPass(") VPFVSTR VSTR(")"), m_Name.GetData());
+        return Format(VSTR("VSPass(%1%)")) << m_Name;
     }
 
     ICore * VOODOO_METHODTYPE VSPass::GetCore() CONST
@@ -209,7 +209,7 @@ namespace VoodooShader
                         m_Core->GetLogger()->LogMessage
                         (
                             LL_CoreWarn, VOODOO_CORE_NAME,
-                            Stream() << this << VSTR(" cannot find target '") << targetName << VSTR("'.") << Print
+                            Format(VSTR("%1% cannot find target '%2%'.")) << this << targetName 
                         );
 
                         if (i == 0)
@@ -221,7 +221,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_CoreWarn, VOODOO_CORE_NAME,
-                        Stream() << this << VSTR(" has target annotation of invalid type."), << Print
+                        Format(VSTR("%1% has target annotation of invalid type.")) << this
                     );
 
                     if (i == 0)
@@ -233,7 +233,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreDebug, VOODOO_CORE_NAME,
-                    Stream() << this << VSTR(" has no target annotation.") << Print
+                    Format(VSTR("%1% has no target annotation.")) << this
                 );
 
                 if (i == 0)
@@ -251,7 +251,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreWarn, VOODOO_CORE_NAME,
-                Stream() << VSTR("No adapter found, ") << this << VSTR(" must be explicitly loaded later.") << Print
+                Format(VSTR("No adapter found, %1% must be explicitly loaded later.")) << this
             );
         }
         else
@@ -261,7 +261,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreError, VOODOO_CORE_NAME,
-                    Stream() << VSTR("Failed to load ") << this << VSTR(".") << Print
+                    Format(VSTR("Failed to load %1%.")) << this
                 );
             }
             else
@@ -269,7 +269,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreInfo, VOODOO_CORE_NAME,
-                    Stream() << VSTR("Successfully loaded ") << this << VSTR(".") << Print
+                    Format(VSTR("Successfully loaded %1%.")) << this
                 );
             }
         }

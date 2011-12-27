@@ -332,55 +332,6 @@ namespace VoodooShader
         String & Remove(_In_ const String & fstr, _In_ bool useCase = true);
         /**
          * @}
-         * @name String Format
-         * Use the system's wide-string printf to format these strings. This may vary between systems, precise details
-         * should be in the system documentation (<a href="http://msdn.microsoft.com/en-us/library/56e442dc.aspx">Windows
-         * details here</a>).
-         * @{
-         */
-        static String FormatV(_In_z_ _Printf_format_string_ const wchar_t * fmt, _In_opt_ va_list args);
-        inline static String FormatV(_In_ _Printf_format_string_ const String & fmt, va_list args)
-        {
-            return FormatV(fmt.GetData(), args);
-        };
-
-        inline static String Format(_In_z_ _Printf_format_string_ const wchar_t * fmt, ...)
-        {
-            va_list args;
-            va_start(args, fmt);
-            String str = FormatV(fmt, args);
-            va_end(args);
-            return str;
-        };
-
-        inline static String Format(_In_ _Printf_format_string_ const String & fmt, ...)
-        {
-            va_list args;
-            va_start(args, fmt);
-            String str = FormatV(fmt.GetData(), args);
-            va_end(args);
-            return str;
-        };
-
-        inline String & AppendFormat(_In_z_ _Printf_format_string_ const wchar_t * fmt, ...)
-        {
-            va_list args;
-            va_start(args, fmt);
-            this->Append(String::FormatV(fmt, args));
-            va_end(args);
-            return (*this);
-        };
-
-        inline String & AppendFormat(_In_ _Printf_format_string_ const String & fmt, ...)
-        {
-            va_list args;
-            va_start(args, fmt);
-            this->Append(String::FormatV(fmt.GetData(), args));
-            va_end(args);
-            return (*this);
-        };
-        /**
-         * @}
          * @name Data Methods
          * Underlying data access methods.
          * @{
