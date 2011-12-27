@@ -175,8 +175,25 @@ namespace VoodooShader
          * @name Static Creation Methods
          * @{
          */
+            
+        /**
+         * Formats a timestamp as <code>Time(HHMMSS)</code>. Leading zeros are guaranteed to be present.
+         *
+         * @note If the system time cannot be retrieved, an equal-length error stamp of <code>Time(000000)</code> will be
+         *      returned.
+         */
         static String Time(time_t * pTime = nullptr);
+        /**
+         * Formats a date as <code>Date(YYYYMMDD)</code>. Leading zeros are guaranteed to be present.
+         *
+         * @note If the system time cannot be retrieved, an equal-length error stamp of <code>Date(00000000)</code> will be
+         *      returned.
+         */
         static String Date(time_t * pTime = nullptr);
+        /**
+         * Formats the system's current tick count as <code>Ticks(n)</code>, with a varying length. This records ms since 
+         * system start.
+         */
         static String Ticks();
         /**
          * @}
@@ -219,8 +236,9 @@ namespace VoodooShader
          * token. The delimeter characters will not be included in the split strings.
          *
          * @param delims The list of delimeter characters.
-         * @param count The maximum number of tokens.
-         * @param pStrings The destination array of strings to be filled with split tokens.
+         * @param count The maximum number of tokens. Must be 0 if pStrings is null.
+         * @param pStrings The destination array of strings to be filled with split tokens. If null, the number of tokens
+         *      that would be split is counted and returned without any strings being copied.
          * @param stripEmpty If set, empty (0-length) tokens will be discarded.
          * @return The final number of tokens.
          */
@@ -367,7 +385,6 @@ namespace VoodooShader
          * Underlying data access methods.
          * @{
          */
-
         /**
          * Get the current length of the string, in characters.
          */
@@ -525,7 +542,7 @@ namespace VoodooShader
         void CInit(_In_ const uint32_t size, _In_z_count_(size) const char * str);
         void WInit(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
 
-        std::unique_ptr<StringImpl> m_Impl;
+        StringImpl * m_Impl;
     };
     /**
      * @}

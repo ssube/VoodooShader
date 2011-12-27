@@ -80,6 +80,18 @@ namespace VoodooShader
             }
         }
 
+        String operator<<(String (*pf)(Stream &))
+        {
+            if (pf)
+            {
+                return pf(*this);
+            } else {
+                return this->ToString();
+            }
+        }
+        
+        friend Stream & operator<<(Stream & out, const char val);
+        friend Stream & operator<<(Stream & out, const char * val);
         friend Stream & operator<<(Stream & out, const wchar_t val);
         friend Stream & operator<<(Stream & out, const wchar_t * val);
         friend Stream & operator<<(Stream & out, const IObject * val);
@@ -94,26 +106,13 @@ namespace VoodooShader
         friend Stream & operator<<(Stream & out, const Vector4<T> & val);
         /**
          * @}
-         * @name Finalization Operators
-         * These operators finalize the stream, returning it in string form with an optional trailing newline.
-         * @{
-         */
-        String operator!()
-        {
-            this->operator<<(VSTR("\n"));
-            return this->operator~();
-        }
-        String operator~()
-        {
-            return this->ToString();
-        }
-        /**
-         * @}
          */
     private:
-        std::unique_ptr<StreamImpl> m_Impl;
+        StreamImpl * m_Impl;
     };
-
+    
+    Stream & operator<<(Stream & out, const char val);
+    Stream & operator<<(Stream & out, const char * val);
     Stream & operator<<(Stream & out, const wchar_t val);
     Stream & operator<<(Stream & out, const wchar_t * val);
 

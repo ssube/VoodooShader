@@ -78,6 +78,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Converter.cpp" />
+    <ClCompile Include="Format.cpp" />
+    <ClCompile Include="Stream.cpp" />
     <ClCompile Include="VSAdapter.cpp" />
     <ClCompile Include="VSCore.cpp">
       <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
@@ -99,10 +101,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Converter.hpp" />
+    <ClInclude Include="Format.hpp" />
     <ClInclude Include="IFile.hpp" />
     <ClInclude Include="IImage.hpp" />
     <ClInclude Include="IModuleManager.hpp" />
     <ClInclude Include="IResource.hpp" />
+    <ClInclude Include="Stream.hpp" />
     <ClInclude Include="Version_Build.hpp" />
     <ClInclude Include="VSAdapter.hpp" />
     <ClInclude Include="VSCore.hpp" />

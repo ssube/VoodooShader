@@ -27,6 +27,7 @@
 #include "ITexture.hpp"
 
 #include "Exception.hpp"
+#include "Stream.hpp"
 #include "Version.hpp"
 
 namespace VoodooShader
@@ -205,13 +206,10 @@ namespace VoodooShader
 
                     if (!m_Target[i])
                     {
-                        m_Core->GetLogger()->Log
+                        m_Core->GetLogger()->LogMessage
                         (
-                            LL_CoreWarn,
-                            VOODOO_CORE_NAME,
-                            VSTR("Pass '") VPFVSTR VSTR("' cannot find target '") VPFCSTR VSTR("'."),
-                            this->ToString().GetData(),
-                            targetName
+                            LL_CoreWarn, VOODOO_CORE_NAME,
+                            Stream() << this << VSTR(" cannot find target '") << targetName << VSTR("'.") << Print
                         );
 
                         if (i == 0)
@@ -220,12 +218,10 @@ namespace VoodooShader
                         }
                     }
                 } else {
-                    m_Core->GetLogger()->Log
+                    m_Core->GetLogger()->LogMessage
                     (
-                        LL_CoreWarn,
-                        VOODOO_CORE_NAME,
-                        VSTR("Pass '") VPFVSTR VSTR("' has target annotation of invalid type."),
-                        this->ToString().GetData()
+                        LL_CoreWarn, VOODOO_CORE_NAME,
+                        Stream() << this << VSTR(" has target annotation of invalid type."), << Print
                     );
 
                     if (i == 0)
@@ -234,12 +230,10 @@ namespace VoodooShader
                     }
                 }
             } else {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreDebug,
-                    VOODOO_CORE_NAME,
-                    VSTR("Pass '") VPFVSTR VSTR("' has no target annotation."),
-                    this->ToString().GetData()
+                    LL_CoreDebug, VOODOO_CORE_NAME,
+                    Stream() << this << VSTR(" has no target annotation.") << Print
                 );
 
                 if (i == 0)
@@ -254,34 +248,28 @@ namespace VoodooShader
 
         if (!adapter)
         {
-            m_Core->GetLogger()->Log
+            m_Core->GetLogger()->LogMessage
             (
-                LL_CoreWarn,
-                VOODOO_CORE_NAME,
-                VSTR("No adapter found, pass '") VPFVSTR VSTR("' must be explicitly loaded later."),
-                this->ToString().GetData()
+                LL_CoreWarn, VOODOO_CORE_NAME,
+                Stream() << VSTR("No adapter found, ") << this << VSTR(" must be explicitly loaded later.") << Print
             );
         }
         else
         {
             if (!adapter->LoadPass(this))
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreError,
-                    VOODOO_CORE_NAME,
-                    VSTR("Failed to load pass '") VPFVSTR VSTR("'."),
-                    this->ToString().GetData()
+                    LL_CoreError, VOODOO_CORE_NAME,
+                    Stream() << VSTR("Failed to load ") << this << VSTR(".") << Print
                 );
             }
             else
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreInfo,
-                    VOODOO_CORE_NAME,
-                    VSTR("Successfully loaded pass '") VPFVSTR VSTR("'."),
-                    this->ToString().GetData()
+                    LL_CoreInfo, VOODOO_CORE_NAME,
+                    Stream() << VSTR("Successfully loaded ") << this << VSTR(".") << Print
                 );
             }
         }

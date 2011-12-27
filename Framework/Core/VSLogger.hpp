@@ -49,20 +49,15 @@ namespace VoodooShader
 
         VOODOO_METHOD(Open)(_In_ const String & filename, _In_ const bool append);
         VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append);
-        VOODOO_METHOD_(void, Close)();
-        VOODOO_METHOD_(void, Flush)();
-        VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level);
-        VOODOO_METHOD_(LogLevel, GetLogLevel)() const;
-        VOODOO_METHOD_(void, LogModule)(_In_ const Version * const pModule);
-        virtual void Log
-        (
-            _In_ const LogLevel level,
-            _In_ const wchar_t * source,
-            _In_ _Printf_format_string_ const wchar_t * format,
-            ...
-        );
+        VOODOO_METHOD(IsOpen)() CONST;
+        VOODOO_METHOD(Close)();
+        VOODOO_METHOD(Flush)();
+        VOODOO_METHOD_(void, SetFilter)(_In_ const LogLevel level);
+        VOODOO_METHOD_(LogLevel, GetFilter)() const;
         VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flush);
         VOODOO_METHOD_(LogFlags, GetFlags)() const;
+        VOODOO_METHOD(LogModule)(_In_ const Version * const pModule);
+        VOODOO_METHOD(LogMessage)(_In_ const LogLevel level, _In_ const String & source, _In_ const String & msg);
 
     private:
         mutable uint32_t m_Refs;

@@ -35,6 +35,7 @@
 
 #include "Converter.hpp"
 #include "Exception.hpp"
+#include "Stream.hpp"
 #include "Version.hpp"
 
 #include "Support.inl"
@@ -287,18 +288,18 @@ namespace VoodooShader
             LogLevel logLevel = LL_Initial;
             try
             {
-                logLevel = (LogLevel)stoi(logLevelStr.ToStdString());
+                logLevel = (LogLevel)stoi(logLevelStr.ToString());
             } catch (const std::exception & exc) {
                 UNREFERENCED_PARAMETER(exc);
             }
 
             m_Logger->Open(logFile, false);
-            m_Logger->SetLogLevel(logLevel);
+            m_Logger->SetFilter(logLevel);
 
             // Log extended build information
             String configMsg = m_Parser->Parse(VSTR("Config loaded from '$(config)'."));
-            m_Logger->Log(LL_CoreInfo, VOODOO_CORE_NAME, configMsg.GetData());
-            m_Logger->Log(LL_CoreInfo, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
+            m_Logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, configMsg);
+            m_Logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
             Version vfver = VOODOO_META_VERSION_STRUCT(CORE);
             Version vsver = VOODOO_META_VERSION_STRUCT(VC);
@@ -312,26 +313,29 @@ namespace VoodooShader
             m_FileSystem = dynamic_cast<IFileSystem*>(m_ModuleManager->CreateObject(fsClass));
             if (!m_FileSystem)
             {
-                String error = String::Format(VSTR("Unable to create file system (class ") VPFVSTR VSTR(")."), fsClass.GetData());
-                Throw(VOODOO_CORE_NAME, error.GetData(), this);
+                Stream error;
+                error << VSTR("Unable to create file system (class ") << fsClass << VSTR(").");
+                Throw(VOODOO_CORE_NAME, error.ToString(), this);
             }
 
             m_HookManager = dynamic_cast<IHookManager*>(m_ModuleManager->CreateObject(hookClass));
             if (!m_HookManager)
             {
-                String error = String::Format(VSTR("Unable to create hook manager (class ") VPFVSTR VSTR(")."), hookClass.GetData());
-                Throw(VOODOO_CORE_NAME, error.GetData(), this);
+                Stream error;
+                error << VSTR("Unable to create hook manager (class ") << hookClass << VSTR(").");
+                Throw(VOODOO_CORE_NAME, error.ToString(), this);
             }
 
             m_Adapter = dynamic_cast<IAdapter*>(m_ModuleManager->CreateObject(adpClass));
             if (!m_Adapter)
             {
-                String error = String::Format(VSTR("Unable to create adapter (class ") VPFVSTR VSTR(")."), adpClass.GetData());
-                Throw(VOODOO_CORE_NAME, error.GetData(), this);
+                Stream error;
+                error << VSTR("Unable to create adapter (class ") << adpClass << VSTR(").");
+                Throw(VOODOO_CORE_NAME, error.ToString(), this);
             }
 
             // ICore done loading
-            m_Logger->Log(LL_CoreInfo, VOODOO_CORE_NAME, VSTR("Core initialization complete."));
+            m_Logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, VSTR("Core initialization complete."));
 
             // Return
         }
@@ -469,11 +473,11 @@ namespace VoodooShader
         }
         else if (m_CgContext != nullptr)
         {
-            m_Logger->Log
+            m_Logger->LogMessage
             (
                 LL_CoreError, VOODOO_CORE_NAME,
-                VSTR("Error: Attempting to set Cg context (%p) over existing context (%p)."), 
-                pContext, m_CgContext
+                Stream() << VSTR("Error: Attempting to set Cg context ") << pContext << VSTR(" over existing context ") << 
+                    m_CgContext << VSTR(".") << Print
             );
 
             return false;
@@ -482,7 +486,11 @@ namespace VoodooShader
         {
             m_CgContext = pContext;
             cgSetErrorHandler(Voodoo_CgErrorHandler_Func, this);
-            m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("Set Cg context (%p)."), pContext);
+            m_Logger->LogMessage
+            (
+                LL_CoreDebug, VOODOO_CORE_NAME, 
+                Stream() << VSTR("Set Cg context (") << pContext << VSTR(").") << Print
+            );
             return true;
         }
     }

@@ -188,18 +188,14 @@ namespace VoodooShader
 
         bool VSWFileSystem::AddPath(const String & name)
         {
-            size_t splitter = name.Find(VSTR(';'));
+            uint32_t count = name.Split(VSTR(";"), 0, nullptr);
 
-            while (splitter != String::Npos)
+            std::vector<String> paths(count);
+            name.Split(VSTR(";"), count, &paths[0]);
+            for (std::vector<String>::iterator i = paths.begin(); i != paths.end(); ++i)
             {
-                String partname = name.Substr(0, splitter);
-
-                this->m_Directories.push_front(partname);
-                name = name.Substr(splitter + 1);
-                splitter = name.Find(VSTR(';'));
+                this->m_Directories.push_front(*i);
             }
-
-            this->m_Directories.push_front(name);
 
             return true;
         }

@@ -93,7 +93,7 @@ namespace VoodooShader
             /**
              * Closes the log file, if one is open.
              */
-            VOODOO_METHOD_(void, Close)();
+            VOODOO_METHOD(Close)();
             /**
              * Immediately writes all pending data to disk.
              *
@@ -104,21 +104,23 @@ namespace VoodooShader
              *      complete debug logging, call Logger::SetBufferSize(unsigned int) with a buffer size of 0 and all logged
              *      messages @em should make it to disk, even during fatal crashes
              */
-            VOODOO_METHOD_(void, Flush)();
+            VOODOO_METHOD(Flush)();
             /**
              * Set the default minimum message level. Messages below this level will not be logged.
              *
              * @param level The minimum log level.
              */
-            VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level);
-            VOODOO_METHOD_(LogLevel, GetLogLevel)() CONST;
+            VOODOO_METHOD_(void, SetFilter)(_In_ const LogLevel level);
+            VOODOO_METHOD_(LogLevel, GetFilter)() CONST;
+            VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags);
+            VOODOO_METHOD_(LogFlags, GetFlags)() CONST;
             /**
              * Writes a module stamp to the log. This records the name and version info for a select module (used to log
              * what modules were present during a logging session).
              *
              * @param pModule The module version info to log.
              */
-            VOODOO_METHOD_(void, LogModule)(_In_ const Version * const pModule);
+            VOODOO_METHOD(LogModule)(_In_ const Version * const pModule);
             /**
              * Log a message, may be formatted with printf syntax. @param level The level for this message.
              *
@@ -126,33 +128,9 @@ namespace VoodooShader
              * @param format The message format string.
              * @param ... The parameters to insert.
              */
-            VOODOO_METHOD_(void, Log)(_In_ const LogLevel level, _In_ const wchar_t * source, _In_ _Printf_format_string_ const wchar_t * format, ...);
-            VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags);
-            VOODOO_METHOD_(LogFlags, GetFlags)() CONST;
-
+            VOODOO_METHOD(LogMessage)(_In_ const LogLevel level, _In_ const wchar_t * source, _In_ _Printf_format_string_ const wchar_t * format, ...);
+            
         private:
-            /**
-             * Formats a timestamp for the log. The timestamp will have the form <code>HHMMSS</code>. Leading zeros are
-             * guaranteed to be present, so the timestamp length is 6 chars.
-             *
-             * @note If the system time cannot be retrieved, an equal-length error stamp of <code>000000</code> will be
-             *      returned.
-             */
-            String LogTime() const;
-            /**
-             * Formats a date for the log. The date will have the form <code>YYYYMMDD</code>. Leading zeros are guaranteed
-             * to be present, so the date length is 8 chars.
-             *
-             * @note If the system time cannot be retrieved, an equal-length error stamp of <code>00000000</code> will be
-             *      returned.
-             */
-            String LogDate() const;
-            /**
-             * Formats the system's current tick count. The stamp will have the form <code>xxxxxxxxx</code>, with a
-             * potentially varying length. This records ticks, usually ms since system start.
-             */
-            String LogTicks() const;
-
             mutable uint32_t m_Refs;
             ICore * m_Core;
 

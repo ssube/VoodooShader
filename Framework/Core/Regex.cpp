@@ -89,7 +89,7 @@ namespace VoodooShader
         RegexMatch match;
         boost::wsmatch mr;
 
-        if (boost::regex_match(string.ToStdString(), mr, m_Impl->m_Regex))
+        if (boost::regex_match(string.ToString(), mr, m_Impl->m_Regex))
         {
             match.m_Impl->m_Match = mr;
         }
@@ -99,12 +99,12 @@ namespace VoodooShader
 
     bool Regex::Find(const String & find) const
     {
-        return boost::regex_search(find.ToStdString(), m_Impl->m_Regex);
+        return boost::regex_search(find.ToString(), m_Impl->m_Regex);
     }
 
     String Regex::Replace(const String & find, const String & replace) const
     {
-        return boost::regex_replace(find.ToStdString(), m_Impl->m_Regex, replace.ToStdString());
+        return boost::regex_replace(find.ToString(), m_Impl->m_Regex, replace.ToString());
     }
 
     RegexMatch::RegexMatch()

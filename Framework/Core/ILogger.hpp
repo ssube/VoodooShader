@@ -49,8 +49,9 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Status Methods
+         * @{
          */
-
         /**
          * Opens a file for use by this logger.
          *
@@ -68,9 +69,13 @@ namespace VoodooShader
          */
         VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append) PURE;
         /**
+         * Checks if this logger has an open file.
+         */
+        VOODOO_METHOD(IsOpen)() CONST PURE;
+        /**
          * Closes the log file, if one is open.
          */
-        VOODOO_METHOD_(void, Close)() PURE;
+        VOODOO_METHOD(Close)() PURE;
         /**
          * Immediately writes all pending data to disk. @note This is useful for catchable errors which may have fatal
          * consequences (Exception calls this in case the exception is uncaught).
@@ -79,41 +84,24 @@ namespace VoodooShader
          *     debug logging, call Logger::SetBufferSize(int32_t) with a buffer size of 0 and all logged messages @e should
          *     make it to disk, even during fatal crashes.
          */
-        VOODOO_METHOD_(void, Flush)() PURE;
+        VOODOO_METHOD(Flush)() PURE;
+        /**
+         * @}
+         * @name Field Methods
+         * @{
+         */
         /**
          * Set the default minimum message level. Messages below this level will not be logged.
          *
          * @param level The minimum log level.
          */
-        VOODOO_METHOD_(void, SetLogLevel)(_In_ const LogLevel level) PURE;
+        VOODOO_METHOD_(void, SetFilter)(_In_ const LogLevel level) PURE;
         /**
          * Get the current log level.
          *
          * @return The log level.
          */
-        VOODOO_METHOD_(LogLevel, GetLogLevel)() CONST PURE;
-        /**
-         * Writes a module stamp to the log. This records the name and version info for a select module (used to log what
-         * modules were present during a logging session).
-         *
-         * @param pModule The module version info to log.
-         */
-        VOODOO_METHOD_(void, LogModule)(_In_ const Version * const pModule) PURE;
-        /**
-         * Log a message, may be formatted with printf syntax.
-         *
-         * @param level The level for this message.
-         * @param source The source of the log message, usually the calling module's name.
-         * @param format The message format string. Make sure to insert Unicode strings with %s and ASCII with %S.
-         * @param ... The parameters to insert.
-         */
-        virtual void Log
-        (
-            _In_ const LogLevel level,
-            _In_ const wchar_t * source,
-            _In_ _Printf_format_string_ const wchar_t * format,
-            ...
-        ) PURE;
+        VOODOO_METHOD_(LogLevel, GetFilter)() CONST PURE;
         /**
          * Set log flags, controls handling of the file (flush after message, formatting, etc).
          *
@@ -126,6 +114,30 @@ namespace VoodooShader
          * @return Current flags.
          */
         VOODOO_METHOD_(LogFlags, GetFlags)() CONST PURE;
+        /**
+         * @}
+         * @name Logging Methods
+         * @{
+         */
+        /**
+         * Writes a module stamp to the log. This records the name and version info for a select module (used to log what
+         * modules were present during a logging session).
+         *
+         * @param pModule The module version info to log.
+         */
+        VOODOO_METHOD(LogModule)(_In_ const Version * const pModule) PURE;
+        /**
+         * Log a pre-formatted message.
+         *
+         * @param level The level for this message.
+         * @param source The source of the log message, usually the calling module's name.
+         * @param format The message format string. Make sure to insert Unicode strings with %s and ASCII with %S.
+         * @param ... The parameters to insert.
+         */
+        VOODOO_METHOD(LogMessage)(_In_ const LogLevel level, _In_ const String & source, _In_ const String & msg) PURE;
+        /**
+         * @}
+         */
     };
     /**
      * @}

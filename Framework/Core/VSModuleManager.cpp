@@ -31,6 +31,7 @@
 
 #include "Exception.hpp"
 #include "Regex.hpp"
+#include "Stream.hpp"
 #include "Version.hpp"
 
 #include "shlwapi.h"
@@ -114,19 +115,18 @@ namespace VoodooShader
 
             if (error == ERROR_FILE_NOT_FOUND)
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarn, VOODOO_CORE_NAME,
-                    VSTR("No plugins found in directory '") VPFVSTR VSTR("'."),
-                    path.GetData()
+                    Stream() << VSTR("No plugins found in directory '") << path << VSTR("'.") << Print
                 );
 
                 return false;
             } else {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarn, VOODOO_CORE_NAME, 
-                    VSTR("Error searching directory '") VPFVSTR VSTR("'."), path.GetData()
+                    Stream() << VSTR("Error searching directory '") << path << VSTR("'.") << Print
                 );
 
                 return false;
@@ -180,7 +180,11 @@ namespace VoodooShader
         {
             if (logger.get())
             {
-                logger->Log(LL_CoreError, VOODOO_CORE_NAME, VSTR("Unable to load module '") VPFVSTR VSTR("'."), filename.GetData());
+                logger->LogMessage
+                (
+                    LL_CoreError, VOODOO_CORE_NAME, 
+                    Stream() << VSTR("Unable to load module '") << filename << VSTR("'.") << Print
+                );
             }
 
             return false;
@@ -193,13 +197,11 @@ namespace VoodooShader
 
         if (moduleversion->Debug != VOODOO_META_DEBUG_BOOL && logger.get())
         {
-            logger->Log
-                (
-                LL_CoreWarn,
-                VOODOO_CORE_NAME,
-                VSTR("Debug build mismatch with module '") VPFVSTR VSTR("'."),
-                moduleversion->Name
-                );
+            logger->LogMessage
+            (
+                LL_CoreWarn, VOODOO_CORE_NAME,
+                Stream() << VSTR("Debug build mismatch with module '") << moduleversion->Name << VSTR("'.") << Print
+            );
         }
 
         if (logger.get())
@@ -275,11 +277,10 @@ namespace VoodooShader
             {
                 if (logger)
                 {
-                    logger->Log
+                    logger->LogMessage
                     (
                         LL_CoreError, VOODOO_CORE_NAME,
-                        VSTR("Error creating instance of class '") VPFVSTR VSTR("'."),
-                        String(clsid).GetData()
+                        Stream() << VSTR("Error creating instance of class ") << clsid << VSTR("'.") << Print
                     );
                 }
             }
@@ -288,8 +289,11 @@ namespace VoodooShader
         } else {
             if (logger)
             {
-                logger->Log(LL_CoreError, VOODOO_CORE_NAME, 
-                    VSTR("Class '") VPFVSTR VSTR("' not found."), String(clsid).GetData());
+                logger->LogMessage
+                (
+                    LL_CoreError, VOODOO_CORE_NAME, 
+                    Stream() << VSTR("Class ") << clsid << VSTR(" not found.") << Print
+                );
             }
 
             return nullptr;

@@ -102,8 +102,11 @@
 #   include <stdlib.h>
 #   include <crtdbg.h>
 
-#   define DBG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#   define new DBG_NEW
+#   define vnew new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#   define vdelete delete
+#else
+#   define vnew new
+#   define vdelete delete
 #endif
 
 #ifndef VOODOO_IMPORT

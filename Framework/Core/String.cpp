@@ -57,7 +57,7 @@ namespace VoodooShader
     {
         wchar_t wch = 0;
         mbtowc(&wch, &ch, 1);
-        m_Impl.reset(new StringImpl(1, wch));
+        m_Impl = new StringImpl(1, wch);
     }
 
     String::String(const char * str) :
@@ -71,7 +71,7 @@ namespace VoodooShader
     {
         wchar_t wch = 0;
         mbtowc(&wch, &ch, 1);
-        m_Impl.reset(new StringImpl(size, wch));
+        m_Impl = new StringImpl(size, wch);
     }
 
     String::String(const uint32_t size, const char * str) :
@@ -116,9 +116,11 @@ namespace VoodooShader
 
     void String::CInit(const uint32_t size, const char * str)
     {
+        if (m_Impl) delete m_Impl;
+
         if (!str)
         {
-            m_Impl.reset(new StringImpl());
+            m_Impl = new StringImpl();
         } else {
             int len = MultiByteToWideChar(CP_UTF8, NULL, str, -1, NULL, 0);
             std::vector<wchar_t> wstr(len);
@@ -126,23 +128,25 @@ namespace VoodooShader
 
             if (size == 0)
             {
-                m_Impl.reset(new StringImpl(&wstr[0]));
+                m_Impl = new StringImpl(&wstr[0]);
             } else {
-                m_Impl.reset(new StringImpl(size, &wstr[0]));
+                m_Impl = new StringImpl(size, &wstr[0]);
             }
         }
     }
 
     void String::WInit(const uint32_t size, const wchar_t * str)
     {
-        if (str == nullptr)
+        if (m_Impl) delete m_Impl;
+
+        if (!str)
         {
-            m_Impl.reset(new StringImpl());
+            m_Impl = new StringImpl();
         } else if (size == 0)
         {
-            m_Impl.reset(new StringImpl(str));
+            m_Impl = new StringImpl(str);
         } else {
-            m_Impl.reset(new StringImpl(size, str));
+            m_Impl = new StringImpl(size, str);
         }
     }
 
@@ -682,7 +686,7 @@ namespace VoodooShader
                 return String(VSTR("Time(------)"));
             }
         } else {
-            time_t now = time_t(nullptr);
+            time_t now = time(nullptr);
             if (localtime_s(&localTime, &now) != 0)
             {
                 return String(VSTR("Time(------)"));
@@ -704,7 +708,7 @@ namespace VoodooShader
                 return String(VSTR("Date(--------)"));
             }
         } else {
-            time_t now = time_t(nullptr);
+            time_t now = time(nullptr);
             if (localtime_s(&localTime, &now) != 0)
             {
                 return String(VSTR("Date(--------)"));

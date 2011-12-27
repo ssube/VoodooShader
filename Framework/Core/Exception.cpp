@@ -23,6 +23,8 @@
 #include "ICore.hpp"
 #include "ILogger.hpp"
 
+#include "Format.hpp"
+
 namespace VoodooShader
 {
     const wchar_t * ExceptionLogMsg = VSTR("Exception in file ") VPFVSTR VSTR(" at ") VPFVSTR VSTR(" (line %d):") VPFVSTR;
@@ -51,7 +53,9 @@ namespace VoodooShader
 
             if (logger)
             {
-                logger->Log(LL_CoreError, module, ExceptionLogMsg, file, function, line, message);
+                Format msg(ExceptionLogMsg);
+                msg << file << function << line << message;
+                logger->LogMessage(LL_CoreError, module, msg.ToString());
             }
         }
 
@@ -81,16 +85,9 @@ namespace VoodooShader
 
             if (logger)
             {
-                logger->Log
-                (
-                    LL_CoreError,
-                    module.GetData(),
-                    ExceptionLogMsg,
-                    file,
-                    function,
-                    line,
-                    message.GetData()
-                );
+                Format msg(ExceptionLogMsg);
+                msg << file << function << line << message;
+                logger->LogMessage(LL_CoreError, module, msg.ToString());
             }
         }
 

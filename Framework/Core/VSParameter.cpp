@@ -28,6 +28,7 @@
 
 #include "Converter.hpp"
 #include "Exception.hpp"
+#include "Stream.hpp"
 #include "Version.hpp"
 
 namespace VoodooShader
@@ -35,18 +36,17 @@ namespace VoodooShader
     VSParameter::VSParameter(_Pre_notnull_ ICore * const pCore, _In_ const String & name, _In_ const ParameterType type) :
          m_Refs(0), m_Core(pCore), m_Shader(nullptr), m_Virtual(true), m_Type(type)
     {
-        m_Core->GetLogger()->Log
+        m_Core->GetLogger()->LogMessage
         (
             LL_CoreDebug, VOODOO_CORE_NAME,
-            VSTR("Creating a virtual parameter '") VPFVSTR VSTR("' from core %p of type ") VPFVSTR VSTR("."),
-            name.GetData(), m_Core, Converter::ToString(type)
+            Stream() << VSTR("Creating a virtual parameter '") << name << VSTR("' from core ") << m_Core << 
+                VSTR(" of type ") << type << VSTR(".") << Print
         );
 
         CGcontext context = m_Core->GetCgContext();
 
         if (!context || !cgIsContext(context))
         {
-            //! @todo Get rid of this throw
             Throw(VOODOO_CORE_NAME, VSTR("Unable to create parameter (core has no context)."), m_Core);
         }
 
@@ -66,8 +66,6 @@ namespace VoodooShader
 
     VOODOO_METHODTYPE VSParameter::~VSParameter()
     {
-        m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("Destroying parameter '") VPFVSTR VSTR("'."), m_Name.GetData());
-
         if (m_Virtual && cgIsParameter(m_Param))
         {
             cgDestroyParameter(m_Param);
@@ -121,7 +119,9 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSParameter::ToString() CONST
     {
-        return String::Format(VSTR("VSParameter(") VPFVSTR VSTR(")"), m_Name.GetData());
+        Stream stringRep;
+        stringRep << VSTR("VSParameter(") << m_Name << VSTR(")");
+        return stringRep.ToString();
     }
 
     ICore * VOODOO_METHODTYPE VSParameter::GetCore() CONST
@@ -151,9 +151,12 @@ namespace VoodooShader
             return false;
         } else if (!m_Virtual)
         {
-            m_Core->GetLogger()->Log(LL_CoreWarn, VOODOO_CORE_NAME, 
-                VSTR("Cannot attach to a non-virtual parameter (") VPFVSTR VSTR(" to ") VPFVSTR VSTR(")."),
-                pParam->ToString().GetData(), this->ToString().GetData());
+            m_Core->GetLogger()->LogMessage
+            (
+                LL_CoreWarn, VOODOO_CORE_NAME, 
+                Stream() << VSTR("Cannot attach to a non-virtual parameter (") << pParam << VSTR(" to ") << this << 
+                    VSTR(").") << Print
+            );
             return false;
         }
 

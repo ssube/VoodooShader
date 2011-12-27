@@ -100,38 +100,29 @@ namespace VoodooShader
         return true;
     }
 
-    void VOODOO_METHODTYPE VSLogger::Close()
-    { }
+    bool VOODOO_METHODTYPE VSLogger::IsOpen() const
+    {
+        return true;
+    }
 
-    void VOODOO_METHODTYPE VSLogger::Flush()
-    { }
+    bool VOODOO_METHODTYPE VSLogger::Close()
+    {
+        return true;
+    }
 
-    void VOODOO_METHODTYPE VSLogger::SetLogLevel(_In_ const LogLevel level)
+    bool VOODOO_METHODTYPE VSLogger::Flush()
+    {
+        return true;
+    }
+
+    void VOODOO_METHODTYPE VSLogger::SetFilter(_In_ const LogLevel level)
     {
         UNREFERENCED_PARAMETER(level);
     }
 
-    LogLevel VOODOO_METHODTYPE VSLogger::GetLogLevel() CONST
+    LogLevel VOODOO_METHODTYPE VSLogger::GetFilter() CONST
     {
         return LL_Unknown;
-    }
-
-    void VOODOO_METHODTYPE VSLogger::LogModule(_In_ const Version * const pModule)
-    {
-        UNREFERENCED_PARAMETER(pModule);
-    }
-
-    void VOODOO_METHODTYPE VSLogger::Log
-    (
-        _In_ const LogLevel level,
-        _In_ const wchar_t * source,
-        _In_ _Printf_format_string_ const wchar_t * format,
-        ...
-    )
-    {
-        UNREFERENCED_PARAMETER(level);
-        UNREFERENCED_PARAMETER(source);
-        UNREFERENCED_PARAMETER(format);
     }
 
     void VOODOO_METHODTYPE VSLogger::SetFlags(_In_ const LogFlags flush)
@@ -142,5 +133,22 @@ namespace VoodooShader
     LogFlags VOODOO_METHODTYPE VSLogger::GetFlags() CONST
     {
         return LF_Unknown;
+    }
+
+    bool VOODOO_METHODTYPE VSLogger::LogModule(_In_ const Version * const pModule)
+    {
+        UNREFERENCED_PARAMETER(pModule);
+    }
+
+    bool VOODOO_METHODTYPE VSLogger::LogMessage
+    (
+        _In_ const LogLevel level,
+        _In_ const String & source,
+        _In_ const String & msg
+    )
+    {
+        UNREFERENCED_PARAMETER(level);
+        UNREFERENCED_PARAMETER(source);
+        UNREFERENCED_PARAMETER(msg);
     }
 }

@@ -102,7 +102,9 @@ namespace VoodooShader
 
     Stream & Stream::operator<<(const Regex & val)
     {
-        m_Impl->m_Stream << VSTR("Regex(") << val.GetExpr() << VSTR(")");
+        m_Impl->m_Stream << VSTR("Regex(");
+        this->operator<<(val.GetExpr());
+        m_Impl->m_Stream << VSTR(")");
         return (*this);
     }
 
@@ -128,18 +130,18 @@ namespace VoodooShader
     Stream & Stream::operator<<(const TextureRegion & val)
     {
         m_Impl->m_Stream << VSTR("TextureRegion(") << val.Format << VSTR(", ") << val.Mipmaps << 
-            VSTR(", ") << val.RenderTarget << VSTR(", ") << val.Size << VSTR(", ") << val.Region << VSTR(")");
+            VSTR(", ") << val.RenderTarget << VSTR(", ") << val.Size << VSTR(", ") << val.Origin << VSTR(")");
         return (*this);
     }
 
     Stream & Stream::operator<<(const Variant & val)
     {
         m_Impl->m_Stream << VSTR("Variant(") << val.Type << VSTR(", ") << val.Components << VSTR(", ");
-        switch (val.Type)
+        /*switch (val.Type)
         {
         case UT_None:
 
-        }
+        }*/
         return (*this);
     }
 
@@ -151,6 +153,18 @@ namespace VoodooShader
             VSTR("; debug=") << val.Debug <<
             VSTR("; name=")  << val.Name << VSTR("; revid=") << val.RevId << VSTR(")");
         return (*this);
+    }
+
+    Stream & operator<<(Stream & out, const char val)
+    {
+        out.m_Impl->m_Stream << val;
+        return out;
+    }
+
+    Stream & operator<<(Stream & out, const char * val)
+    {
+        out.m_Impl->m_Stream << val;
+        return out;
     }
 
     Stream & operator<<(Stream & out, const wchar_t val)
@@ -169,3 +183,4 @@ namespace VoodooShader
         }
         return out;
     }
+}

@@ -52,6 +52,12 @@
     <ClCompile Include="VSModuleManager.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
+    <ClCompile Include="Stream.cpp">
+      <Filter>Source\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Format.cpp">
+      <Filter>Source\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -179,6 +185,12 @@
     </ClInclude>
     <ClInclude Include="IResource.hpp">
       <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream.hpp">
+      <Filter>Headers\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Format.hpp">
+      <Filter>Headers\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

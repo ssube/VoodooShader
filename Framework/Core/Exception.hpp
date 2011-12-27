@@ -43,22 +43,22 @@ namespace VoodooShader
     public:
         Exception
         (
-            _In_ wchar_t * module,
-            _In_ wchar_t * message,
-            _In_opt_ ICore * pCore,
             _In_z_ wchar_t * file,
             _In_z_ wchar_t * function,
-            _In_ int line
+            _In_ int line,
+            _In_ wchar_t * module,
+            _In_ wchar_t * message,
+            _In_opt_ ICore * pCore
         );
 
         Exception
         (
-            _In_ String module,
-            _In_ String Message,
-            _In_opt_ ICore * pCore,
             _In_z_ wchar_t * file,
             _In_z_ wchar_t * function,
-            _In_ int line
+            _In_ int line,
+            _In_ String module,
+            _In_ String Message,
+            _In_opt_ ICore * pCore
         );
 
         virtual ~Exception();
@@ -79,10 +79,10 @@ namespace VoodooShader
 
     /**
      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, particularly function,
-     * filename and line. These exceptions are also logged if possible (requires a valid core to be given). The Exception
+     * filename and line. These exceptions are also logged if possible (requires a valid core be given). The Exception
      * class derives from std::exception, so these are simple to handle.
      */
-#   define Throw(module, msg, core) throw Exception(module, msg, core, VSTR(__FILE__), VSTR(__FUNCTION__), __LINE__)
+#   define Throw(module, msg, core) throw Exception(VSTR(__FILE__), VSTR(__FUNCTION__), __LINE__, module, msg, core)
 
     /**
      * @}

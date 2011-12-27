@@ -29,6 +29,7 @@
 #include "ITexture.hpp"
 
 #include "Exception.hpp"
+#include "Stream.hpp"
 #include "Version.hpp"
 
 namespace VoodooShader
@@ -163,13 +164,11 @@ namespace VoodooShader
 
                 if (!m_Target.get())
                 {
-                    m_Core->GetLogger()->Log
+                    m_Core->GetLogger()->LogMessage
                     (
                         LL_CoreWarn,
                         VOODOO_CORE_NAME,
-                        L"Technique %s cannot find target %S.",
-                        this->ToString().GetData(),
-                        targetName
+                        Stream() << VSTR("Technique ") << this << VSTR(" cannot find target ") << targetName << VSTR(".") << Print
                     );
 
                     m_Target = m_Core->GetStageTexture(TS_Shader);
@@ -177,12 +176,11 @@ namespace VoodooShader
             }
             else
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarn,
                     VOODOO_CORE_NAME,
-                    L"Technique %s has target annotation of invalid type.",
-                    this->ToString().GetData()
+                    Stream() << VSTR("Technique ") << this << VSTR(" has target annotation of invalid type.") << Print
                 );
 
                 m_Target = m_Core->GetStageTexture(TS_Shader);
@@ -190,12 +188,11 @@ namespace VoodooShader
         }
         else
         {
-            m_Core->GetLogger()->Log
+            m_Core->GetLogger()->LogMessage
             (
                 LL_CoreDebug,
                 VOODOO_CORE_NAME,
-                L"Technique %s has no target annotation.",
-                this->ToString().GetData()
+                Stream() << VSTR("Technique '") << this << VSTR("' has no target annotation.") << Print
             );
 
             m_Target = m_Core->GetStageTexture(TS_Shader);
@@ -216,10 +213,10 @@ namespace VoodooShader
             } catch (const std::exception & exc) {
                 const char * name = cgGetPassName(cPass);
 
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreDebug, VOODOO_CORE_NAME,
-                    L"Error linking pass '%S': %S", name, exc.what()
+                    Stream() << VSTR("Error linking pass '") << name << VSTR("': ") << exc.what() << Print
                 );
             }
 

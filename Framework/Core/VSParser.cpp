@@ -103,11 +103,10 @@ namespace VoodooShader
 
         if (logger)
         {
-            logger->Log
+            logger->LogMessage
             (
                 LL_CoreDebug, VOODOO_CORE_NAME,
-                VSTR("Adding variable '") VPFVSTR VSTR("' with value '") VPFVSTR VSTR("'."),
-                name.GetData(), value.GetData()
+                Stream() << VSTR("Adding variable '") << name << VSTR("' with value '") << value << VSTR("'.") << Print
             );
         }
 
@@ -124,11 +123,10 @@ namespace VoodooShader
             {
                 if (logger)
                 {
-                    logger->Log
+                    logger->LogMessage
                     (
                         LL_CoreWarn, VOODOO_CORE_NAME,
-                        VSTR("Unable to add duplicate system variable '") VPFVSTR VSTR("'."),
-                        finalname.GetData()
+                        Stream() << VSTR("Unable to add duplicate system variable '") << finalname << VSTR("'.") << Print
                     );
                 }
             } else {
@@ -143,8 +141,11 @@ namespace VoodooShader
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, 
-                VSTR("Removing variable '") VPFVSTR VSTR("'."), name.GetData());
+            m_Core->GetLogger()->LogMessage
+            (
+                LL_CoreDebug, VOODOO_CORE_NAME, 
+                Stream() << VSTR("Removing variable '") << name << VSTR("'.")
+            );
         }
 
         String finalname = this->Parse(name, PF_None);
@@ -169,8 +170,11 @@ namespace VoodooShader
 
         if (logger)
         {
-            m_Core->GetLogger()->Log(LL_CoreDebug, VOODOO_CORE_NAME, 
-                VSTR("Parsing string '") VPFVSTR VSTR("' (%X)."), input.GetData(), flags);
+            logger->LogMessage
+            (
+                LL_CoreDebug, VOODOO_CORE_NAME, 
+                Stream() << VSTR("Parsing string '") << input << VSTR("' (") << flags << VSTR(").") << Print
+            );
         }
 
         if (depth > VSParser::VarMaxDepth || input.GetLength() < 3)
@@ -298,7 +302,7 @@ namespace VoodooShader
                 }
             }
 
-            std::wstringstream output;
+            Stream output;
 
             output << iteration.Substr(0, startpos - 1).GetData();
             if (parse && varvalue.GetLength() > 0)
@@ -312,7 +316,7 @@ namespace VoodooShader
 
             output << iteration.Substr(endpos + 1).GetData();
 
-            iteration = output.str();
+            iteration = output.ToString();
         }
 
         // Handle slash replacement
@@ -424,7 +428,11 @@ namespace VoodooShader
 
         if (logger)
         {
-            logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("Returning string '") VPFVSTR VSTR("' from parser."), iteration.GetData());
+            logger->LogMessage
+            (
+                LL_CoreDebug, VOODOO_CORE_NAME,
+                Stream() << VSTR("Returning string '") << iteration << VSTR("' from parser.") << Print
+            );
         }
 
         return iteration;
