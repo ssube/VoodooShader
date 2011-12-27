@@ -50,8 +50,7 @@ namespace VoodooShader
 
     public:
         /**
-         * @addtogroup voodoo_utility_string_ctors String constructors
-         * @ingroup voodoo_utility_string
+         * @name String Constructors
          * @{
          */
 
@@ -173,16 +172,65 @@ namespace VoodooShader
 #endif
         /**
          * @}
+         * @name Static Creation Methods
+         * @{
+         */
+        static String Time(time_t * pTime = nullptr);
+        static String Date(time_t * pTime = nullptr);
+        static String Ticks();
+        /**
+         * @}
          */
 
         ~String();
 
         /**
-         * @addtogroup voodoo_utility_string_conv String conversion
-         * @ingroup voodoo_utility_string
+         * @}
+         * @name String Modification
          * @{
          */
-
+        String & Append(_In_ const wchar_t ch);
+        String & Append(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String & Append(_In_ const wchar_t * str);
+        String & Append(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
+        String & Append(_In_ const String & str);
+        String & Assign(_In_ const wchar_t ch);
+        String & Assign(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String & Assign(_In_ const wchar_t * str);
+        String & Assign(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
+        String & Assign(_In_ const String & str);
+        String & Clear();
+        String & Prepend(_In_ const wchar_t ch);
+        String & Prepend(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String & Prepend(_In_z_ const wchar_t * str);
+        String & Prepend(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
+        String & Prepend(_In_ const String & str);
+        String & Truncate(_In_ uint32_t size);
+        /**
+         * @}
+         * @name 
+         * @{
+         */
+        String ToLower() const;
+        String ToUpper() const;
+        /**
+         * Splits the string into tokens based on the delimeters given. The remainder of the string,
+         * after the maximum number of tokens is reached, will be appended to the end of the final
+         * token. The delimeter characters will not be included in the split strings.
+         *
+         * @param delims The list of delimeter characters.
+         * @param count The maximum number of tokens.
+         * @param pStrings The destination array of strings to be filled with split tokens.
+         * @param stripEmpty If set, empty (0-length) tokens will be discarded.
+         * @return The final number of tokens.
+         */
+        uint32_t Split
+        (
+            _In_ const String & delims, 
+            _In_ const uint32_t count, 
+            _In_count_(count) String * pStrings, 
+            _In_ bool stripEmpty = false
+        ) const;
         /**
          * Attempts to convert this String to a Uuid. The string must be of one of the following forms:
          * @li <code>{01234567-89ab-cdef-0123-456789abcdef}</code>
@@ -223,67 +271,7 @@ namespace VoodooShader
 #endif
         /**
          * @}
-         */
-
-        /**
-         * @addtogroup voodoo_utility_string_mod String modification
-         * @ingroup voodoo_utility_string
-         * @{
-         */
-        String & Append(_In_ const wchar_t ch);
-        String & Append(_In_ const uint32_t size, _In_ const wchar_t ch);
-        String & Append(_In_ const wchar_t * str);
-        String & Append(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
-        String & Append(_In_ const String & str);
-        String & Assign(_In_ const wchar_t ch);
-        String & Assign(_In_ const uint32_t size, _In_ const wchar_t ch);
-        String & Assign(_In_ const wchar_t * str);
-        String & Assign(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
-        String & Assign(_In_ const String & str);
-        String & Clear();
-        String & Prepend(_In_ const wchar_t ch);
-        String & Prepend(_In_ const uint32_t size, _In_ const wchar_t ch);
-        String & Prepend(_In_z_ const wchar_t * str);
-        String & Prepend(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
-        String & Prepend(_In_ const String & str);
-        String & Truncate(_In_ uint32_t size);
-        /**
-         * @}
-         */
-
-        /**
-         * Splits the string into tokens based on the delimeters given. The remainder of the string,
-         * after the maximum number of tokens is reached, will be appended to the end of the final
-         * token. The delimeter characters will not be included in the split strings.
-         *
-         * @param delims The list of delimeter characters.
-         * @param count The maximum number of tokens.
-         * @param pStrings The destination array of strings to be filled with split tokens.
-         * @param stripEmpty If set, empty (0-length) tokens will be discarded.
-         * @return The final number of tokens.
-         */
-        uint32_t Split
-        (
-            _In_ const String & delims, 
-            _In_ const uint32_t count, 
-            _In_count_(count) String * pStrings, 
-            _In_ bool stripEmpty = false
-        ) const;
-
-        /**
-         * @addtogroup voodoo_utility_string_case String case conversion
-         * @ingroup voodoo_utility_string
-         * @{
-         */
-        String ToLower() const;
-        String ToUpper() const;
-        /**
-         * @}
-         */
-
-        /**
-         * @addtogroup voodoo_utility_string_part String partial copy
-         * @ingroup voodoo_utility_string
+         * @name String Partial Copy
          * @{
          */
         String Left(_In_ uint32_t count) const;
@@ -291,32 +279,24 @@ namespace VoodooShader
         String Substr(_In_ uint32_t start, _In_ uint32_t count = String::Npos) const;
         /**
          * @}
-         */
-
-        /**
-         * @addtogroup voodoo_utility_string_pred String predicates
-         * @ingroup voodoo_utility_string
+         * @name String Predicates
          * @{
          */
         bool Compare(_In_ const wchar_t ch, _In_ bool useCase = true) const;
         bool Compare(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         bool Compare(_In_ const String & str, _In_ bool useCase = true) const;
+        bool Contains(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        bool Contains(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
+        bool Contains(_In_ const String & str, _In_ bool useCase = true) const;
         bool StartsWith(_In_ const wchar_t ch, _In_ bool useCase = true) const;
         bool StartsWith(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         bool StartsWith(_In_ const String & str, _In_ bool useCase = true) const;
         bool EndsWith(_In_ const wchar_t ch, _In_ bool useCase = true) const;
         bool EndsWith(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         bool EndsWith(_In_ const String & str, _In_ bool useCase = true) const;
-        bool Contains(_In_ const wchar_t ch, _In_ bool useCase = true) const;
-        bool Contains(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
-        bool Contains(_In_ const String & str, _In_ bool useCase = true) const;
         /**
          * @}
-         */
-
-        /**
-         * @addtogroup voodoo_utility_string_find String find and replace
-         * @ingroup voodoo_utility_string
+         * @name String Find and Replace
          * @{
          */
         uint32_t Find(_In_ const wchar_t ch, _In_ bool useCase = true) const;
@@ -334,12 +314,8 @@ namespace VoodooShader
         String & Remove(_In_ const String & fstr, _In_ bool useCase = true);
         /**
          * @}
-         */
-
-        /**
-         * @addtogroup voodoo_utility_string_format String format
-         * @ingroup voodoo_utility_string
-         * Uses the system's wide-string printf to format these strings. This may vary between systems, precise details
+         * @name String Format
+         * Use the system's wide-string printf to format these strings. This may vary between systems, precise details
          * should be in the system documentation (<a href="http://msdn.microsoft.com/en-us/library/56e442dc.aspx">Windows
          * details here</a>).
          * @{
@@ -387,26 +363,52 @@ namespace VoodooShader
         };
         /**
          * @}
+         * @name Data Methods
+         * Underlying data access methods.
+         * @{
          */
 
-        // Buffer info/access
+        /**
+         * Get the current length of the string, in characters.
+         */
         uint32_t GetLength() const;
-        void Reserve(uint32_t size);
+        /**
+         * Get whether the string's length is 0 characters.
+         */
         bool IsEmpty() const;
-
+        /**
+         * Reserve the given number of characters, minimizing string reallocations.
+         *
+         * @param size Characters to reserve.
+         */
+        void Reserve(uint32_t size);
+        /**
+         * Get a single character from the string.
+         * @param pos Position to retrieve.
+         */
         wchar_t GetAt(_In_ uint32_t pos) const;
-        wchar_t & operator[](_In_ uint32_t pos);
+        /**
+         * Sets a single character in the string.
+         * @param pos Position to assign.
+         * @param data Character to assign.
+         */
         void SetAt(_In_ uint32_t pos, _In_ wchar_t data);
-
+        /**
+         * Get a reference to a character in the string, allowing it to be changed.
+         * @param pos Position to retrieve.
+         */
+        wchar_t & operator[](_In_ uint32_t pos);
+        /**
+         * Get a pointer to the data of the string, often for use as a LPWSTR.
+         *
+         * @warning The C-string returned may be read-only, attempting to write is undefined.
+         */
         const wchar_t * GetData() const;
-
-#ifdef _STRING_
-        inline std::wstring ToStdString() const
-        {
-            return std::wstring(this->GetData());
-        };
-#endif
-
+        /**
+         * @}
+         * @name Assignment and Concatenation Operators
+         * @{
+         */
         inline String & operator=(_In_ const wchar_t ch)
         {
             this->Assign(ch);
@@ -463,7 +465,11 @@ namespace VoodooShader
             c += str;
             return c;
         };
-
+        /**
+         * @}
+         * @name Comparison Operators
+         * @{
+         */
         inline bool operator==(_In_z_ const wchar_t * str) const
         {
             return this->Compare(str);
@@ -508,6 +514,10 @@ namespace VoodooShader
         {
             return !(this->operator<(str));
         };
+        /**
+         * @}
+         * @
+         */
 
         static const uint32_t Npos = (uint32_t)-1;
 
@@ -515,7 +525,7 @@ namespace VoodooShader
         void CInit(_In_ const uint32_t size, _In_z_count_(size) const char * str);
         void WInit(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
 
-        StringImpl * m_Impl;
+        std::unique_ptr<StringImpl> m_Impl;
     };
     /**
      * @}

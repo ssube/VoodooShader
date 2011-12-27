@@ -18,12 +18,13 @@
  *   peachykeen@voodooshader.com
  */
 
+#include "String.hpp"
+
 #include <string>
+#include <sstream>
 #include <boost/algorithm/string.hpp>
 #include <boost/uuid/string_generator.hpp>
 #include <boost/uuid/uuid_io.hpp>
-
-#include "String.hpp"
 
 namespace VoodooShader
 {
@@ -47,9 +48,8 @@ namespace VoodooShader
     };
 
     String::String() :
-        m_Impl(nullptr)
+        m_Impl()
     {
-        m_Impl = new StringImpl();
     }
 
     String::String(const char ch) :
@@ -57,7 +57,7 @@ namespace VoodooShader
     {
         wchar_t wch = 0;
         mbtowc(&wch, &ch, 1);
-        m_Impl = new StringImpl(1, wch);
+        m_Impl.reset(new StringImpl(1, wch));
     }
 
     String::String(const char * str) :
@@ -71,7 +71,7 @@ namespace VoodooShader
     {
         wchar_t wch = 0;
         mbtowc(&wch, &ch, 1);
-        m_Impl = new StringImpl(size, wch);
+        m_Impl.reset(new StringImpl(size, wch));
     }
 
     String::String(const uint32_t size, const char * str) :
@@ -81,54 +81,44 @@ namespace VoodooShader
     }
 
     String::String(const wchar_t ch) :
-        m_Impl(nullptr)
+        m_Impl(new StringImpl(1, ch))
     {
-        m_Impl = new StringImpl(1, ch);
     }
 
     String::String(const wchar_t * str) :
-        m_Impl(nullptr)
+        m_Impl(new StringImpl(str))
     {
-        m_Impl = new StringImpl(str);
     }
 
     String::String(const uint32_t size, const wchar_t ch) :
-        m_Impl(nullptr)
+        m_Impl(new StringImpl(size, ch))
     {
-        m_Impl = new StringImpl(size, ch);
     }
 
     String::String(const uint32_t size, const wchar_t * str) :
-        m_Impl(nullptr)
+        m_Impl(new StringImpl(size, str))
     {
-        m_Impl = new StringImpl(size, str);
     }
 
     String::String(const String & other) :
-        m_Impl(nullptr)
+        m_Impl(new StringImpl(other.m_Impl->m_Str))
     {
-        m_Impl = new StringImpl(other.m_Impl->m_Str);
     }
 
     String::String(const Uuid & uuid) :
-        m_Impl(nullptr)
+        m_Impl(new StringImpl(boost::uuids::to_wstring(uuid)))
     {
-        m_Impl = new StringImpl(boost::uuids::to_wstring(uuid));
     }
 
     String::~String()
     {
-        delete m_Impl;
-        m_Impl = nullptr;
     }
 
     void String::CInit(const uint32_t size, const char * str)
     {
-        if (m_Impl) delete m_Impl;
-
-        if (str == nullptr)
+        if (!str)
         {
-            m_Impl = new StringImpl();
+            m_Impl.reset(new StringImpl());
         } else {
             int len = MultiByteToWideChar(CP_UTF8, NULL, str, -1, NULL, 0);
             std::vector<wchar_t> wstr(len);
@@ -136,25 +126,23 @@ namespace VoodooShader
 
             if (size == 0)
             {
-                m_Impl = new StringImpl(&wstr[0]);
+                m_Impl.reset(new StringImpl(&wstr[0]));
             } else {
-                m_Impl = new StringImpl(size, &wstr[0]);
+                m_Impl.reset(new StringImpl(size, &wstr[0]));
             }
         }
     }
 
     void String::WInit(const uint32_t size, const wchar_t * str)
     {
-        if (m_Impl) delete m_Impl;
-
         if (str == nullptr)
         {
-            m_Impl = new StringImpl();
+            m_Impl.reset(new StringImpl());
         } else if (size == 0)
         {
-            m_Impl = new StringImpl(str);
+            m_Impl.reset(new StringImpl(str));
         } else {
-            m_Impl = new StringImpl(size, str);
+            m_Impl.reset(new StringImpl(size, str));
         }
     }
 
@@ -682,5 +670,56 @@ namespace VoodooShader
     bool String::operator>(const String & str) const
     {
         return (m_Impl->m_Str > str.m_Impl->m_Str);
+    }
+
+    String String::Time(time_t * pTime)
+    {
+        tm localTime;
+        if (pTime)
+        {
+            if (localtime_s(&localTime, pTime) != 0)
+            {
+                return String(VSTR("Time(------)"));
+            }
+        } else {
+            time_t now = time_t(nullptr);
+            if (localtime_s(&localTime, &now) != 0)
+            {
+                return String(VSTR("Time(------)"));
+            }
+        }
+
+        std::wstringstream stamp;
+        stamp << VSTR("Time(") << std::put_time(&localTime, VSTR("%H%M%S")) << VSTR(")");
+        return stamp.str();
+    }
+
+    String String::Date(time_t * pTime)
+    {
+        tm localTime;
+        if (pTime)
+        {
+            if (localtime_s(&localTime, pTime) != 0)
+            {
+                return String(VSTR("Date(--------)"));
+            }
+        } else {
+            time_t now = time_t(nullptr);
+            if (localtime_s(&localTime, &now) != 0)
+            {
+                return String(VSTR("Date(--------)"));
+            }
+        }
+
+        std::wstringstream stamp;
+        stamp << VSTR("Date(") << std::put_time(&localTime, VSTR("%Y%m%d")) << VSTR(")");
+        return stamp.str();
+    }
+
+    String String::Ticks()
+    {
+        std::wstringstream stamp;
+        stamp << VSTR("Ticks(") << GetTickCount() << VSTR(")");
+        return  stamp.str();
     }
 }
