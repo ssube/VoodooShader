@@ -24,10 +24,10 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/uuid/string_generator.hpp>
-#include <boost/uuid/uuid_io.hpp>
 
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 namespace VoodooShader
 {
@@ -109,8 +109,11 @@ namespace VoodooShader
     }
 
     String::String(const Uuid & uuid) :
-        m_Impl(new StringImpl(boost::uuids::to_wstring(uuid)))
+        m_Impl(new StringImpl())
     {
+        Stream stream;
+        stream << uuid;
+        this->Assign(stream.ToString());
     }
 
     String::~String()

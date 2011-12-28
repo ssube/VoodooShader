@@ -19,13 +19,17 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using NDesk.Options;
 using VoodooSharp;
-using System.Globalization;
-using System.Threading;
-using System.Deployment.Application;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace VoodooUI
 {
@@ -40,9 +44,15 @@ namespace VoodooUI
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
+        [STAThread, SecurityPermission(SecurityAction.Demand, Flags=SecurityPermissionFlag.ControlAppDomain)]
         static void Main(string[] args)
         {
+            AppDomain domain = AppDomain.CurrentDomain;
+            if (domain != null)
+            {
+                domain.UnhandledException += new UnhandledExceptionEventHandler(domain_UnhandledException);
+            }
+
             Console.Title = "Voodoo GUI";
 
             if (args == null || args.Length == 0)
@@ -59,7 +69,7 @@ namespace VoodooUI
                 }
                 catch (System.Exception ex)
                 {
-                    MessageBox.Show(String.Format("Error setting language to {0}, defaulting to en-US.\n{1}", languageID, ex.Message), "Language Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(String.Format("Error setting language to {0}, defaulting to en-US.", languageID), "Language Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 Application.EnableVisualStyles();
@@ -187,6 +197,19 @@ namespace VoodooUI
             }
         }
 
+        static void domain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception exc = (Exception)e.ExceptionObject;
+            String report = CreateExceptionReport(exc);
+
+            MessageBox.Show("The Voodoo Shader UI has encountered a problem and needs to close.\n" +
+             "To prevent this error from occurring in the future, please file a bug reports with the details.\n" +
+             "Full error details can be found in the file: " + report, 
+             "Voodoo UI Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            Environment.Exit(1);
+        }
+
         static void pm_OnLogEvent(string msg, params object[] args)
         {
             Console.WriteLine(msg, args);
@@ -198,6 +221,52 @@ namespace VoodooUI
             if (hWnd != IntPtr.Zero)
             {
                 ShowWindow(hWnd, visible ? 1 : 0);
+            }
+        }
+
+        static String CreateExceptionReport(Exception e)
+        {
+            StringBuilder data = new StringBuilder();
+            data.AppendLine("### Voodoo UI Exception Report");
+
+            try
+            {
+                Assembly asm = Assembly.GetExecutingAssembly();
+                data.AppendLine("Voodoo UI File: " + asm.Location);
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(asm.Location);
+                data.AppendLine("Voodoo UI Version: " + fvi);
+            } 
+            catch (Exception exc)
+            {
+                data.AppendLine("Voodoo UI Version: Error: " + exc.Message);
+            }
+
+            data.AppendLine("CLR Version: " + Environment.Version);
+            data.AppendLine("OS Version: " + Environment.OSVersion);
+
+            data.AppendLine("Error Time: " + DateTime.Now);
+
+            int level = 0;
+            Exception re = e;
+            while (re != null)
+            {
+                data.AppendLine("#### Error Level: " + level++);
+                data.AppendLine("Error Message: " + e.Message);
+                data.AppendLine("Error Stack:");
+                data.AppendLine(e.StackTrace);
+                re = re.InnerException;
+            }
+
+            try
+            {
+                String report = Path.GetTempFileName();
+                File.WriteAllText(report, data.ToString(), Encoding.UTF8);
+                Process.Start("notepad.exe", report);
+                return report;
+            }
+            catch (Exception)
+            {
+                return "(error writing report)";
             }
         }
     }

@@ -272,7 +272,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_CoreWarn, VOODOO_CORE_NAME,
-                        Stream() << VSTR("Unable to find global param '") << globalName << VSTR("' for parameter '") << param << VSTR("'.") << Print
+                        Format(VSTR("Unable to find global param '%1%' for parameter '%2%'.")) << globalName << param
                     );
                 }
             }
@@ -281,7 +281,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarn, VOODOO_CORE_NAME,
-                    Stream() << VSTR("Unable to read global annotation for parameter '") << param << VSTR("'.") << Print
+                    Format(VSTR("Unable to read global annotation for parameter '%1%'.")) << param
                 );
             }
 
@@ -308,7 +308,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreWarn, VOODOO_CORE_NAME,
-                Stream() << VSTR("Could not retrieve texture annotation for parameter '") << param << VSTR("'.") << Print
+                Format(VSTR("Could not retrieve texture annotation for parameter '%1%'.")) << param
             );
 
             return;
@@ -321,7 +321,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreWarn, VOODOO_CORE_NAME,
-                Stream() << VSTR("Could not retrieve texture name for parameter '") << param << VSTR("'.") << Print
+                Format(VSTR("Could not retrieve texture name for parameter '%1%'.")) << param
             );
 
             return;
@@ -339,8 +339,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreWarn, VOODOO_CORE_NAME,
-                Stream() << VSTR("Could not find texture '") << textureName << VSTR("' for parameter '") << param << 
-                    VSTR("', attempting to load.") << Print
+                Format(VSTR("Could not find texture '%1%' for parameter '%1%', attempting to load."))  << textureName << param
             );
 
             this->CreateParameterTexture(param.get());
@@ -371,7 +370,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreError, VOODOO_CORE_NAME,
-                Stream() << VSTR("Invalid or missing texture name for parameter '") << param << VSTR("'.") << Print
+                Format(VSTR("Invalid or missing texture name for parameter '%1%'.")) << param
             );
 
             return;
@@ -384,7 +383,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreError, VOODOO_CORE_NAME,
-                Stream() << VSTR("Invalid texture name annotation type in '") << param << VSTR("'.") << Print
+                Format(VSTR("Invalid texture name annotation type in '%1%'.")) << param
             );
 
             return;
@@ -448,7 +447,7 @@ namespace VoodooShader
                 (
                     LL_CoreError,
                     VOODOO_CORE_NAME,
-                    Stream() << VSTR("Invalid texture size annotation type for parameter '") << param << VSTR("'.") << Print
+                    Format(VSTR("Invalid texture size annotation type for parameter '%1%'.")) << param
                 );
 
                 return;
@@ -492,7 +491,7 @@ namespace VoodooShader
                 (
                     LL_CoreError,
                     VOODOO_CORE_NAME,
-                    Stream() << VSTR("Invalid texture size annotation type for parameter '") << param << VSTR("'.") << Print
+                    Format(VSTR("Invalid texture size annotation type for parameter '%1%'.")) << param
                 );
 
                 return;
@@ -529,7 +528,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreError, VOODOO_CORE_NAME,
-                Stream() << VSTR("Invalid texture format annotation type in '") << param << VSTR("'.") << Print
+                Format(VSTR("Invalid texture format annotation type in '%1%'.")) << param
             );
 
             return;
@@ -558,21 +557,21 @@ namespace VoodooShader
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_CoreWarn, VOODOO_CORE_NAME, 
-                        Stream() << VSTR("Adapter was unable to load texture from file '") << texFile << VSTR("'.") << Print
+                        Format(VSTR("Adapter was unable to load texture from file '%1%'.")) << texFile
                     );
                 }
             } else {
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarn, VOODOO_CORE_NAME, 
-                    Stream() << VSTR("File '") << texFile << VSTR("' is not a valid image.") << Print
+                    Format(VSTR("File '%1%' is not a valid image.")) << texFile
                 );
             }
         } else {
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreWarn, VOODOO_CORE_NAME, 
-                Stream() << VSTR("Unable to find texture file '") << texName << VSTR("'.") << Print
+                Format(VSTR("Unable to find texture file '%1%'.")) << texName
             );
         }
 
@@ -592,7 +591,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreDebug, VOODOO_CORE_NAME,
-                    Stream() << VSTR("Validated technique '") << cgGetTechniqueName(cTech) << VSTR("'.") << Print
+                    Format(VSTR("Validated technique '%1%'.")) << cgGetTechniqueName(cTech)
                 );
 
                 // Insert the technique into the map
@@ -611,7 +610,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarn, VOODOO_CORE_NAME,
-                    Stream() << VSTR("Technique '") << cgGetTechniqueName(cTech) << VSTR("' failed to validate.") << Print
+                    Format(VSTR("Technique '%1%' failed to validate.")) << cgGetTechniqueName(cTech)
                 );
             }
 

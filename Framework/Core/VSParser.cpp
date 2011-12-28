@@ -168,7 +168,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 LL_CoreDebug, VOODOO_CORE_NAME, 
-                Stream() << VSTR("Parsing string '") << input << VSTR("' (") << flags << VSTR(").") << Print
+                Format(VSTR("Parsing string '%1%' (%2%).")) << input << flags
             );
         }
 
@@ -426,7 +426,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 LL_CoreDebug, VOODOO_CORE_NAME,
-                Stream() << VSTR("Returning string '") << iteration << VSTR("' from parser.") << Print
+                Format(VSTR("Returning string '%1%' from parser.") << iteration
             );
         }
 

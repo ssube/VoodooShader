@@ -20,6 +20,7 @@
 #pragma once
 
 #include "Format.hpp"
+#include "Stream.hpp"
 
 #include <boost/format.hpp>
 
@@ -150,12 +151,6 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const Stream & val)
-    {
-        m_Impl->m_Format % val;
-        return (*this);
-    }
-
     Format & Format::operator<<(const String & val)
     {
         m_Impl->m_Format % val;
@@ -189,6 +184,17 @@ namespace VoodooShader
     Format & Format::operator<<(const Version & val)
     {
         m_Impl->m_Format % val;
+        return (*this);
+    }
+
+    Format & Format::operator<<(const IObject * val)
+    {
+        if (val)
+        {
+            m_Impl->m_Format % val->ToString();
+        } else {
+            m_Impl->m_Format % VSTR("IObject(null)");
+        }
         return (*this);
     }
 }

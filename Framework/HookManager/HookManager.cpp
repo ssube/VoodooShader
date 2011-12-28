@@ -182,7 +182,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_HOOK_NAME,
-                    Format(VSTR("Error %1 creating hook %s.")) << result << name
+                    Format(VSTR("Error %1 creating hook %s.")) << (uint32_t)result << name
                 );
 
                 return false;
@@ -201,7 +201,7 @@ namespace VoodooShader
         {
             HookMap::iterator hook = m_Hooks.find(name);
 
-            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_HOOK_NAME, Format(VSTR("Removing hook %1%.")) << name);
+            m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_HOOK_NAME, Format(VSTR("Removing hook %1%.")) << name);
 
             if (hook != m_Hooks.end())
             {
@@ -212,7 +212,7 @@ namespace VoodooShader
 
                 if (result != 0)
                 {
-                    m_Core->GetLogger()->Log
+                    m_Core->GetLogger()->LogMessage
                     (
                         LL_ModError, VOODOO_HOOK_NAME,
                         Format(VSTR("Error %1% removing hook %2%.")) << result << name
@@ -229,7 +229,7 @@ namespace VoodooShader
             }
             else
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_ModDebug, VOODOO_HOOK_NAME,
                     Format(VSTR("Trying to remove hook %1% (does not exist).")) << name.GetData()

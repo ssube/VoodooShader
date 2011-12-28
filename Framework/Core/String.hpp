@@ -121,7 +121,7 @@ namespace VoodooShader
         String(_In_ const String & str);
 
         /**
-         * Creates a string from a Uuid, converting to a string. This takes the unbraced 8/2/2/2/12 format, like so:
+         * Creates a string from a Uuid, converting to a string with the unbraced 4/2/2/2/6 format, like so:
          *
          * @code 01234567-89ab-cdef-0123-456789abcdef @endcode
          *

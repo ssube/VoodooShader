@@ -22,13 +22,6 @@
 
 #include <string>
 #include <sstream>
-#include <boost/algorithm/string.hpp>
-#include <boost/uuid/string_generator.hpp>
-
-#pragma warning(push)
-#pragma warning(disable: 6246)
-#include <boost/uuid/uuid_io.hpp>
-#pragma warning(pop)
 
 #include <iomanip>
 

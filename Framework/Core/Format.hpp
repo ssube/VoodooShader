@@ -23,7 +23,6 @@
 
 #include "Exception.hpp"
 #include "Regex.hpp"
-#include "Stream.hpp"
 #include "String.hpp"
 
 #include "IObject.hpp"
@@ -73,7 +72,6 @@ namespace VoodooShader
         Format & operator<<(const Exception & val);
         Format & operator<<(const Format & val);
         Format & operator<<(const Regex & val);
-        Format & operator<<(const Stream & val);
         Format & operator<<(const String & val);
 
         Format & operator<<(const TextureDesc & val);
@@ -82,15 +80,7 @@ namespace VoodooShader
         Format & operator<<(const Variant & val);
         Format & operator<<(const Version & val);
         
-        Format & operator<<(const IObject * val)
-        {
-            if (val)
-            {
-                return this->operator<<(val->ToString());
-            } else {
-                return this->operator<<(VSTR("IObject(null)"));
-            }
-        }
+        Format & operator<<(const IObject * val);
 
         template<typename T>
         Format & operator<<(const Vector1<T> & val)

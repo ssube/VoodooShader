@@ -286,7 +286,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_ModDebug, VOODOO_CORE_NAME,
-                        Format(VSTR("File '%1%' created in directory '%2%'.") << name << (*curDir)
+                        Format(VSTR("File '%1%' created in directory '%2%'.")) << name << (*curDir)
                     );
 
                     return new VSWFile(m_Core, fullname);

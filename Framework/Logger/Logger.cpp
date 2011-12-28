@@ -83,7 +83,7 @@ namespace VoodooShader
         }
 
         VSXmlLogger::VSXmlLogger(_In_ ICore * pCore) :
-            m_Core(pCore), m_LogLevel(LL_Initial)
+            m_Core(pCore), m_Filter(LL_Initial)
         {
         }
 
@@ -207,9 +207,14 @@ namespace VoodooShader
             return this->Open(pFile->GetPath(), append);
         }
 
+        bool VSXmlLogger::IsOpen() const
+        {
+            return m_LogFile.is_open();
+        }
+
         bool VSXmlLogger::Close()
         {
-            if (this->m_LogFile.is_open())
+            if (this->IsOpen())
             {
                 this->m_LogFile.close();
                 return true;
@@ -220,7 +225,7 @@ namespace VoodooShader
 
         bool VSXmlLogger::Flush()
         {
-            if (this->m_LogFile.is_open())
+            if (this->IsOpen())
             {
                 this->m_LogFile.flush();
                 return true;
@@ -251,16 +256,15 @@ namespace VoodooShader
 
         bool VSXmlLogger::LogModule(const Version * const pVersion)
         {
-            if (!pVersion || !this->m_LogFile.is_open()) return;
+            if (!pVersion || !this->IsOpen()) return;
 
             Stream stream;
             stream << VSTR("Loaded") << (*pVersion) << VSTR("\n");
-
         }
 
         bool VSXmlLogger::Log(const LogLevel level, const String & source, const String & msg)
         {
-            if (!this->m_LogFile.is_open()) return;
+            if (!this->IsOpen()) return;
 
             LogLevel mask = (LogLevel) (level & m_Filter);
             if (!(mask & LL_Severity) || !(mask & LL_Origin)) return;
