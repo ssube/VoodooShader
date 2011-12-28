@@ -118,7 +118,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarn, VOODOO_CORE_NAME,
-                    Stream() << VSTR("No plugins found in directory '") << path << VSTR("'.") << Print
+                    Format("No plugins found in directory '%1%'.") << path
                 );
 
                 return false;
@@ -126,7 +126,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarn, VOODOO_CORE_NAME, 
-                    Stream() << VSTR("Error searching directory '") << path << VSTR("'.") << Print
+                    Format("Error searching directory '%1%'.") << path
                 );
 
                 return false;
@@ -183,7 +183,7 @@ namespace VoodooShader
                 logger->LogMessage
                 (
                     LL_CoreError, VOODOO_CORE_NAME, 
-                    Stream() << VSTR("Unable to load module '") << filename << VSTR("'.") << Print
+                    Format("Unable to load module '%1%'.") << filename
                 );
             }
 
@@ -200,7 +200,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 LL_CoreWarn, VOODOO_CORE_NAME,
-                Stream() << VSTR("Debug build mismatch with module '") << moduleversion->Name << VSTR("'.") << Print
+                Format("Debug build mismatch with module '%1%'.") << moduleversion->Name
             );
         }
 
@@ -216,7 +216,7 @@ namespace VoodooShader
             Uuid clsid;
             ZeroMemory(&clsid, sizeof(Uuid));
 
-            const vchar_t * classname = module->ClassInfo(curClass, &clsid);
+            const wchar_t * classname = module->ClassInfo(curClass, &clsid);
 
             if (classname)
             {
@@ -280,7 +280,7 @@ namespace VoodooShader
                     logger->LogMessage
                     (
                         LL_CoreError, VOODOO_CORE_NAME,
-                        Stream() << VSTR("Error creating instance of class ") << clsid << VSTR("'.") << Print
+                        Format("Error creating instance of class %1%.") << clsid
                     );
                 }
             }
@@ -292,7 +292,7 @@ namespace VoodooShader
                 logger->LogMessage
                 (
                     LL_CoreError, VOODOO_CORE_NAME, 
-                    Stream() << VSTR("Class ") << clsid << VSTR(" not found.") << Print
+                    Format("Class %1% not found.") << clsid
                 );
             }
 

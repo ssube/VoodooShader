@@ -22,16 +22,53 @@
 
 #include <string>
 #include <sstream>
-
 #include <iomanip>
+
+#pragma warning(push)
+#pragma warning(disable: 6246)
+#include <boost/uuid/uuid_io.hpp>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
     class Stream::StreamImpl
     {
     public:
+        StreamImpl() : m_Stream() { };
+        StreamImpl(const wchar_t * str) : m_Stream(str) { };
+
         std::wstringstream m_Stream;
     };
+
+    Stream::Stream() :
+        m_Impl(new StreamImpl())
+    {
+
+    }
+
+    Stream::Stream(_In_ const String & str)
+        : m_Impl(new StreamImpl(str.GetData()))
+    {
+
+    }
+
+    Stream::~Stream()
+    {
+        if (m_Impl)
+        {
+            delete m_Impl;
+        }
+    }
+
+    void Stream::Clear()
+    {
+        m_Impl->m_Stream.clear();
+    }
+
+    String Stream::ToString() const
+    {
+        return m_Impl->m_Stream.str();
+    }
 
     Stream & Stream::operator<<(uint8_t val)
     {
@@ -76,12 +113,6 @@ namespace VoodooShader
     }
 
     Stream & Stream::operator<<(double val)
-    {
-        m_Impl->m_Stream << val;
-        return (*this);
-    }
-
-    Stream & Stream::operator<<(const void *& val)
     {
         m_Impl->m_Stream << val;
         return (*this);
@@ -141,36 +172,38 @@ namespace VoodooShader
         return (*this);
     }
 
-    Stream & Stream::operator<<(const char * val)
-    {
-        m_Impl->m_Stream << val;
-        return (*this);
-    }
-
     Stream & Stream::operator<<(const wchar_t val)
     {
         m_Impl->m_Stream << val;
         return (*this);
     }
 
-    Stream & Stream::operator<<(const wchar_t * val)
+    Stream & Stream::insertPtr(const void * val)
     {
-        if (val)
-        {
-            m_Impl->m_Stream << val;
-        } else {
-            m_Impl->m_Stream << VSTR("(null)");
-        }
+        m_Impl->m_Stream << val;
         return (*this);
     }
-    
-    Stream & Stream::operator<<(const IObject * val)
+
+    Stream & Stream::insertPtr(const char * val)
     {
-        if (val)
-        {
-            this->operator<<(val->ToString());
-        } else {
-            this->operator<<(VSTR("IObject(null)"));
-        }
+        m_Impl->m_Stream << val;
+        return (*this);
+    }
+
+    Stream & Stream::insertPtr(const wchar_t * val)
+    {
+        m_Impl->m_Stream << val;
+        return (*this);
+    }
+
+    Stream & Hex(Stream & val)
+    {
+        val.m_Impl->m_Stream << std::ios_base::hex;
+        return val;
+    }
+
+    String Print(Stream & val)
+    {
+        return val.ToString();
     }
 }

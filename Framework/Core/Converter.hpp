@@ -54,7 +54,7 @@ namespace VoodooShader
 
         static ParameterCategory ToParameterCategory(_In_ ParameterType type);
 
-        static TextureFormat ToTextureFormat(_In_ const vchar_t * format);
+        static TextureFormat ToTextureFormat(_In_ const wchar_t * format);
 
         static int ToComponents(_In_ ParameterType Type);
 
@@ -65,7 +65,7 @@ namespace VoodooShader
          * @param format The texture format to find the name of.
          * @return A string with the name (usually identical to the identifier).
          */
-        static const vchar_t * ToString(_In_ TextureFormat format);
+        static const wchar_t * ToString(_In_ TextureFormat format);
 
         /**
          * Helper function to convert enum values into readable strings used in logging;
@@ -74,7 +74,7 @@ namespace VoodooShader
          * @param type The parameter type to find the name of.
          * @return A string with the name (usually identical to the identifier).
          */
-        static const vchar_t * ToString(_In_ ParameterType type);
+        static const wchar_t * ToString(_In_ ParameterType type);
 
         /**
          * Helper function to convert enum values into readable strings used in logging;
@@ -83,6 +83,6 @@ namespace VoodooShader
          * @param category The parameter type to find the name of.
          * @return A string with the name (usually identical to the identifier).
          */
-        static const vchar_t * ToString(_In_ ParameterCategory category);
+        static const wchar_t * ToString(_In_ ParameterCategory category);
     };
 }

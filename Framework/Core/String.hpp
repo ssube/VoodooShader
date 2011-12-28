@@ -42,9 +42,9 @@ namespace VoodooShader
      *
      * Voodoo internal string class, providing constant and compiler-safe string passing between various modules.
      *
-     * @warning If built with Unicode, vchar_t must be a wide character meeting the size and behavior of Visual Studio's
+     * @warning If built with Unicode, wchar_t must be a wide character meeting the size and behavior of Visual Studio's
      *      wchar_t. Otherwise, it must be a character meeting the size and behavior of the standard 8-bit ASCII char. The
-     *      vchar_t type is used to allow future porting to proper C++11 UTF character types.
+     *      wchar_t type is used to allow future porting to proper C++11 UTF character types.
      */
     class VOODOO_API String
     {
@@ -208,21 +208,21 @@ namespace VoodooShader
          * @name String Modification
          * @{
          */
-        String & Append(_In_ const vchar_t ch);
-        String & Append(_In_ const uint32_t size, _In_ const vchar_t ch);
-        String & Append(_In_ const vchar_t * str);
-        String & Append(_In_ const uint32_t size, _In_z_count_(size) const vchar_t * str);
+        String & Append(_In_ const wchar_t ch);
+        String & Append(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String & Append(_In_ const wchar_t * str);
+        String & Append(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
         String & Append(_In_ const String & str);
-        String & Assign(_In_ const vchar_t ch);
-        String & Assign(_In_ const uint32_t size, _In_ const vchar_t ch);
-        String & Assign(_In_ const vchar_t * str);
-        String & Assign(_In_ const uint32_t size, _In_z_count_(size) const vchar_t * str);
+        String & Assign(_In_ const wchar_t ch);
+        String & Assign(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String & Assign(_In_ const wchar_t * str);
+        String & Assign(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
         String & Assign(_In_ const String & str);
         String & Clear();
-        String & Prepend(_In_ const vchar_t ch);
-        String & Prepend(_In_ const uint32_t size, _In_ const vchar_t ch);
-        String & Prepend(_In_z_ const vchar_t * str);
-        String & Prepend(_In_ const uint32_t size, _In_z_count_(size) const vchar_t * str);
+        String & Prepend(_In_ const wchar_t ch);
+        String & Prepend(_In_ const uint32_t size, _In_ const wchar_t ch);
+        String & Prepend(_In_z_ const wchar_t * str);
+        String & Prepend(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
         String & Prepend(_In_ const String & str);
         String & Truncate(_In_ uint32_t size);
         /**
@@ -302,35 +302,35 @@ namespace VoodooShader
          * @name String Predicates
          * @{
          */
-        bool Compare(_In_ const vchar_t ch, _In_ bool useCase = true) const;
-        bool Compare(_In_z_ const vchar_t * str, _In_ bool useCase = true) const;
+        bool Compare(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        bool Compare(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         bool Compare(_In_ const String & str, _In_ bool useCase = true) const;
-        bool Contains(_In_ const vchar_t ch, _In_ bool useCase = true) const;
-        bool Contains(_In_z_ const vchar_t * str, _In_ bool useCase = true) const;
+        bool Contains(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        bool Contains(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         bool Contains(_In_ const String & str, _In_ bool useCase = true) const;
-        bool StartsWith(_In_ const vchar_t ch, _In_ bool useCase = true) const;
-        bool StartsWith(_In_z_ const vchar_t * str, _In_ bool useCase = true) const;
+        bool StartsWith(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        bool StartsWith(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         bool StartsWith(_In_ const String & str, _In_ bool useCase = true) const;
-        bool EndsWith(_In_ const vchar_t ch, _In_ bool useCase = true) const;
-        bool EndsWith(_In_z_ const vchar_t * str, _In_ bool useCase = true) const;
+        bool EndsWith(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        bool EndsWith(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         bool EndsWith(_In_ const String & str, _In_ bool useCase = true) const;
         /**
          * @}
          * @name String Find and Replace
          * @{
          */
-        uint32_t Find(_In_ const vchar_t ch, _In_ bool useCase = true) const;
-        uint32_t Find(_In_z_ const vchar_t * str, _In_ bool useCase = true) const;
+        uint32_t Find(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        uint32_t Find(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         uint32_t Find(_In_ const String & str, _In_ bool useCase = true) const;
-        uint32_t ReverseFind(_In_ const vchar_t ch, _In_ bool useCase = true) const;
-        uint32_t ReverseFind(_In_z_ const vchar_t * str, _In_ bool useCase = true) const;
+        uint32_t ReverseFind(_In_ const wchar_t ch, _In_ bool useCase = true) const;
+        uint32_t ReverseFind(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         uint32_t ReverseFind(_In_ const String & str, _In_ bool useCase = true) const;
 
-        String & Replace(_In_ const vchar_t fch, _In_ const wchar_t rch, _In_ bool useCase = true);
-        String & Replace(_In_z_ const vchar_t * fstr, _In_z_ const wchar_t * rstr, _In_ bool useCase = true);
+        String & Replace(_In_ const wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase = true);
+        String & Replace(_In_z_ const wchar_t * fstr, _In_z_ const wchar_t * rstr, _In_ bool useCase = true);
         String & Replace(_In_ const String & fstr, _In_ const String & rstr, _In_ bool caseSensitive = true);
-        String & Remove(_In_ const vchar_t fch, _In_ bool useCase = true);
-        String & Remove(_In_z_ const vchar_t * fstr, _In_ bool useCase = true);
+        String & Remove(_In_ const wchar_t fch, _In_ bool useCase = true);
+        String & Remove(_In_z_ const wchar_t * fstr, _In_ bool useCase = true);
         String & Remove(_In_ const String & fstr, _In_ bool useCase = true);
         /**
          * @}
@@ -362,30 +362,30 @@ namespace VoodooShader
          * @param pos Position to assign.
          * @param data Character to assign.
          */
-        void SetAt(_In_ uint32_t pos, _In_ vchar_t data);
+        void SetAt(_In_ uint32_t pos, _In_ wchar_t data);
         /**
          * Get a reference to a character in the string, allowing it to be changed.
          * @param pos Position to retrieve.
          */
-        vchar_t & operator[](_In_ uint32_t pos);
+        wchar_t & operator[](_In_ uint32_t pos);
         /**
          * Get a pointer to the data of the string, often for use as a LPWSTR.
          *
          * @warning The C-string returned may be read-only, attempting to write is undefined.
          */
-        const vchar_t * GetData() const;
+        const wchar_t * GetData() const;
         /**
          * @}
          * @name Assignment and Concatenation Operators
          * @{
          */
-        inline String & operator=(_In_ const vchar_t ch)
+        inline String & operator=(_In_ const wchar_t ch)
         {
             this->Assign(ch);
             return (*this);
         };
 
-        inline String & operator=(_In_z_ const vchar_t * str)
+        inline String & operator=(_In_z_ const wchar_t * str)
         {
             this->Assign(str);
             return (*this);
@@ -397,13 +397,13 @@ namespace VoodooShader
             return (*this);
         };
 
-        inline String & operator+=(_In_ const vchar_t ch)
+        inline String & operator+=(_In_ const wchar_t ch)
         {
             this->Append(ch);
             return (*this);
         };
 
-        inline String & operator+=(_In_z_ const vchar_t * str)
+        inline String & operator+=(_In_z_ const wchar_t * str)
         {
             this->Append(str);
             return (*this);
@@ -415,14 +415,14 @@ namespace VoodooShader
             return (*this);
         };
 
-        inline const String operator+(_In_ const vchar_t ch) const
+        inline const String operator+(_In_ const wchar_t ch) const
         {
             String c = (*this);
             c += ch;
             return c;
         };
 
-        inline const String operator+(_In_z_ const vchar_t * str) const
+        inline const String operator+(_In_z_ const wchar_t * str) const
         {
             String c = (*this);
             c += str;
@@ -440,7 +440,7 @@ namespace VoodooShader
          * @name Comparison Operators
          * @{
          */
-        inline bool operator==(_In_z_ const vchar_t * str) const
+        inline bool operator==(_In_z_ const wchar_t * str) const
         {
             return this->Compare(str);
         };
@@ -450,7 +450,7 @@ namespace VoodooShader
             return this->Compare(str);
         };
 
-        inline bool operator!=(_In_z_ const vchar_t * str) const
+        inline bool operator!=(_In_z_ const wchar_t * str) const
         {
             return !(this->operator==(str));
         };
@@ -460,12 +460,12 @@ namespace VoodooShader
             return !(this->operator==(str));
         };
 
-        bool operator<(_In_z_ const vchar_t * str) const;
+        bool operator<(_In_z_ const wchar_t * str) const;
         bool operator<(_In_ const String & str) const;
-        bool operator>(_In_z_ const vchar_t * str) const;
+        bool operator>(_In_z_ const wchar_t * str) const;
         bool operator>(_In_ const String & str) const;
 
-        inline bool operator<=(_In_z_ const vchar_t * str) const
+        inline bool operator<=(_In_z_ const wchar_t * str) const
         {
             return !(this->operator>(str));
         };
@@ -475,7 +475,7 @@ namespace VoodooShader
             return !(this->operator>(str));
         };
 
-        inline bool operator>=(_In_z_ const vchar_t * str) const
+        inline bool operator>=(_In_z_ const wchar_t * str) const
         {
             return !(this->operator<(str));
         };

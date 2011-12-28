@@ -143,7 +143,7 @@ namespace VoodooShader
         return m_ClassCount();
     }
 
-    const vchar_t * VOODOO_METHODTYPE VSModule::ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST
+    const wchar_t * VOODOO_METHODTYPE VSModule::ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST
     {
         return m_ClassInfo(number, pUuid);
     }

@@ -33,10 +33,10 @@ namespace VoodooShader
 {
     static const Version coreVersion = VOODOO_META_VERSION_STRUCT(CORE);
 
-    static const vchar_t * name_VSAdapter = VSTR("VSAdapter");
-    static const vchar_t * name_VSFileSystem = VSTR("VSFileSystem");
-    static const vchar_t * name_VSHookManager = VSTR("VSHookManager");
-    static const vchar_t * name_VSLogger = VSTR("VSLogger");
+    static const wchar_t * name_VSAdapter = VSTR("VSAdapter");
+    static const wchar_t * name_VSFileSystem = VSTR("VSFileSystem");
+    static const wchar_t * name_VSHookManager = VSTR("VSHookManager");
+    static const wchar_t * name_VSLogger = VSTR("VSLogger");
     static const Uuid clsid_VSAdapter = CLSID_VSAdapter;
     static const Uuid clsid_VSFileSystem = CLSID_VSFileSystem;
     static const Uuid clsid_VSHookManager = CLSID_VSHookManager;
@@ -52,7 +52,7 @@ namespace VoodooShader
         return 4;
     }
 
-    const vchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid)
+    const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid)
     {
         if (!pUuid)
         {

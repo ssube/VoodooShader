@@ -297,7 +297,7 @@ namespace VoodooShader
                 }
             }
 
-            Stream output;
+            std::basic_stringstream<wchar_t> output;
 
             output << iteration.Substr(0, startpos - 1).GetData();
             if (parse && varvalue.GetLength() > 0)
@@ -311,7 +311,7 @@ namespace VoodooShader
 
             output << iteration.Substr(endpos + 1).GetData();
 
-            iteration = output.ToString();
+            iteration = output.str();
         }
 
         // Handle slash replacement
@@ -350,7 +350,7 @@ namespace VoodooShader
 
             while (cur < total)
             {
-                vchar_t inchar = iteration[cur++];
+                wchar_t inchar = iteration[cur++];
 
                 if (inchar == L'/' || inchar == L'\\')
                 {
@@ -426,7 +426,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 LL_CoreDebug, VOODOO_CORE_NAME,
-                Format(VSTR("Returning string '%1%' from parser.") << iteration
+                Format(VSTR("Returning string '%1%' from parser.")) << iteration
             );
         }
 

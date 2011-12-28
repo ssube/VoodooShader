@@ -66,7 +66,6 @@ namespace VoodooShader
         Stream & operator<<(int32_t val);
         Stream & operator<<(float val);
         Stream & operator<<(double val);
-        Stream & operator<<(const void *& pVal);
 
         Stream & operator<<(const Exception & val);
         Stream & operator<<(const Regex & val);
@@ -80,10 +79,38 @@ namespace VoodooShader
         Stream & operator<<(const Version & val);
         
         Stream & operator<<(const char val);
-        Stream & operator<<(const char * val);
         Stream & operator<<(const wchar_t val);
-        Stream & operator<<(const wchar_t * val);
-        Stream & operator<<(const IObject * val);
+
+        // Pointer overloads
+        Stream & insertPtr(const void * val);
+        Stream & insertPtr(const char * val);
+        Stream & insertPtr(const wchar_t * val);
+
+        template<typename T>
+        Stream & operator<<(const T * val)
+        {
+            return this->insertPtr((void*)val);
+        }
+
+        Stream & operator<<(const char * val)
+        {
+            return this->insertPtr(val);
+        }
+
+        Stream & operator<<(const wchar_t * val)
+        {
+            return this->insertPtr(val);
+        }
+
+        Stream & operator<<(const IObject * val)
+        {
+            if (val)
+            {
+                return this->operator<<(val->ToString());
+            } else {
+                return this->operator<<(VSTR("IObject(null)"));
+            }
+        }
 
         Stream & operator<<(Stream & (*pf)(Stream &))
         {
@@ -135,6 +162,9 @@ namespace VoodooShader
         /**
          * @}
          */
+
+        friend Stream & Hex(Stream & val);
+        friend String Print(Stream & val);
     private:
         StreamImpl * m_Impl;
     };
@@ -219,20 +249,6 @@ namespace VoodooShader
     {
         os << VSTR("TextureRegion(Format: ") << v.Format << VSTR("; Mipmaps: ") << v.Mipmaps << VSTR("; RenderTarget: ") <<
               v.RenderTarget << VSTR("; Size: ") << v.Size << VSTR("; Origin: ") << v.Origin << VSTR(")");
-        return os;
-    }
-
-    template<typename Elem>
-    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & os, const Uuid & v)
-    {
-        std::ios_base::fmtflags flags = os.flags(std::ios_base::hex);
-        for (int i = 0; i < 16; ++i)
-        {
-            os << v.data[i];
-            if (i == 3 || i == 5 || i == 7 || i == 9) os << VSTR("-");
-        }
-        os.flags(flags);
-
         return os;
     }
 

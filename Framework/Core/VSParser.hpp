@@ -43,12 +43,12 @@ namespace VoodooShader
         VOODOO_METHOD_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = PF_None) CONST;
 
         static const uint32_t VarMaxDepth    = 8;
-        static const vchar_t  VarDelimPre    = VSTR('$');
-        static const vchar_t  VarDelimStart  = VSTR('(');
-        static const vchar_t  VarDelimEnd    = VSTR(')');
-        static const vchar_t  VarMarkerState = VSTR(':');
-        static const vchar_t  VarMarkerRaw   = VSTR('!');
-        static const vchar_t  VarMarkerSupp  = VSTR('?');
+        static const wchar_t  VarDelimPre    = VSTR('$');
+        static const wchar_t  VarDelimStart  = VSTR('(');
+        static const wchar_t  VarDelimEnd    = VSTR(')');
+        static const wchar_t  VarMarkerState = VSTR(':');
+        static const wchar_t  VarMarkerRaw   = VSTR('!');
+        static const wchar_t  VarMarkerSupp  = VSTR('?');
 
     private:
         String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) const;

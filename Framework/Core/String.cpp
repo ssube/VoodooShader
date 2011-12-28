@@ -21,9 +21,14 @@
 #include "String.hpp"
 
 #include "Format.hpp"
+#include "Stream.hpp"
 
 #include <boost/algorithm/string.hpp>
 #include <boost/uuid/string_generator.hpp>
+#pragma warning(push)
+#pragma warning(disable: 6246)
+#include <boost/uuid/uuid_io.hpp>
+#pragma warning(pop)
 
 #include <string>
 #include <sstream>
@@ -35,19 +40,19 @@ namespace VoodooShader
     {
     public:
         StringImpl() : m_Str() {};
-        StringImpl(const uint32_t size, const vchar_t ch) : m_Str(size, ch) {};
-        StringImpl(const vchar_t * str)
+        StringImpl(const uint32_t size, const wchar_t ch) : m_Str(size, ch) {};
+        StringImpl(const wchar_t * str)
         {
             if (str) m_Str = (str);
         };
-        StringImpl(const uint32_t size, const vchar_t * str)
+        StringImpl(const uint32_t size, const wchar_t * str)
         {
             if (str) m_Str = std::wstring(str, size);
         };
         StringImpl(const std::wstring & str) : m_Str(str) {};
 
     public:
-        std::basic_string<vchar_t, std::char_traits<vchar_t>> m_Str;
+        std::basic_string<wchar_t, std::char_traits<wchar_t>> m_Str;
     };
 
     String::String() :
@@ -109,11 +114,8 @@ namespace VoodooShader
     }
 
     String::String(const Uuid & uuid) :
-        m_Impl(new StringImpl())
+        m_Impl(new StringImpl(boost::uuids::to_wstring(uuid)))
     {
-        Stream stream;
-        stream << uuid;
-        this->Assign(stream.ToString());
     }
 
     String::~String()
@@ -684,7 +686,7 @@ namespace VoodooShader
             }
         }
 
-        std::basic_stringstream<vchar_t, std::char_traits<vchar_t>> stamp;
+        std::basic_stringstream<wchar_t, std::char_traits<wchar_t>> stamp;
         stamp << VSTR("Time(") << std::put_time(&localTime, VSTR("%H%M%S")) << VSTR(")");
         return stamp.str();
     }
@@ -708,7 +710,7 @@ namespace VoodooShader
             }
         }
 
-        std::basic_stringstream<vchar_t, std::char_traits<vchar_t>> stamp;
+        std::basic_stringstream<wchar_t, std::char_traits<wchar_t>> stamp;
         stamp << VSTR("Date(") << std::put_time(&localTime, VSTR("%Y%m%d")) << VSTR(")");
         return stamp.str();
     }

@@ -164,14 +164,14 @@ namespace VoodooShader
         }
     }
 
-    TextureFormat Converter::ToTextureFormat(_In_ const vchar_t * format)
+    TextureFormat Converter::ToTextureFormat(_In_ const wchar_t * format)
     {
         if (_tcsnicmp(format, VSTR("TF_"), 3) != 0)
         {
             return TF_Unknown;
         }
 
-        const vchar_t * formatBody = format + 3;
+        const wchar_t * formatBody = format + 3;
 
         if (formatBody[0] == VSTR('D'))
         {
@@ -234,7 +234,7 @@ namespace VoodooShader
 
 #define CASESTRING(x) case x: return VOODOO_META_TOSTRING(x)
 
-    const vchar_t * Converter::ToString(_In_ TextureFormat tf)
+    const wchar_t * Converter::ToString(_In_ TextureFormat tf)
     {
         switch (tf)
         {
@@ -253,7 +253,7 @@ namespace VoodooShader
         }
     }
 
-    const vchar_t * Converter::ToString(_In_ ParameterType pt)
+    const wchar_t * Converter::ToString(_In_ ParameterType pt)
     {
         switch (pt)
         {
@@ -283,7 +283,7 @@ namespace VoodooShader
         }
     }
 
-    const vchar_t * Converter::ToString(_In_ ParameterCategory cat)
+    const wchar_t * Converter::ToString(_In_ ParameterCategory cat)
     {
         switch (cat)
         {

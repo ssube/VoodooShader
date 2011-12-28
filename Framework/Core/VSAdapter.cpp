@@ -166,7 +166,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODTYPE VSAdapter::SetProperty(const vchar_t * name, Variant * const value)
+    bool VOODOO_METHODTYPE VSAdapter::SetProperty(const wchar_t * name, Variant * const value)
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);
@@ -174,7 +174,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODTYPE VSAdapter::GetProperty(const vchar_t * name, Variant * const value) CONST
+    bool VOODOO_METHODTYPE VSAdapter::GetProperty(const wchar_t * name, Variant * const value) CONST
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);

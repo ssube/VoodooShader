@@ -39,8 +39,7 @@ namespace VoodooShader
         m_Core->GetLogger()->LogMessage
         (
             LL_CoreDebug, VOODOO_CORE_NAME,
-            Stream() << VSTR("Creating a virtual parameter '") << name << VSTR("' from core ") << m_Core << 
-                VSTR(" of type ") << type << VSTR(".") << Print
+            Format("Creating virtual parameter '%1%' from core %2% of type %3%.") << name << m_Core << type
         );
 
         CGcontext context = m_Core->GetCgContext();
@@ -154,8 +153,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreWarn, VOODOO_CORE_NAME, 
-                Stream() << VSTR("Cannot attach to a non-virtual parameter (") << pParam << VSTR(" to ") << this << 
-                    VSTR(").") << Print
+                Format("Cannot attach parameter '%1%' to non-virtual parameter '%2%'.") << pParam << this
             );
             return false;
         }

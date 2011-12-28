@@ -43,18 +43,18 @@ namespace VoodooShader
     public:
         Exception
         (
-            _In_z_ vchar_t * file,
-            _In_z_ vchar_t * function,
+            _In_z_ wchar_t * file,
+            _In_z_ wchar_t * function,
             _In_ int line,
-            _In_ vchar_t * module,
-            _In_ vchar_t * message,
+            _In_ wchar_t * module,
+            _In_ wchar_t * message,
             _In_opt_ ICore * pCore
         );
 
         Exception
         (
-            _In_z_ vchar_t * file,
-            _In_z_ vchar_t * function,
+            _In_z_ wchar_t * file,
+            _In_z_ wchar_t * function,
             _In_ int line,
             _In_ String module,
             _In_ String Message,

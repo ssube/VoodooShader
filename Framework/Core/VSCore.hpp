@@ -54,7 +54,7 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         // ICore
-        VOODOO_METHOD(Initialize)(_In_ const vchar_t * const config);
+        VOODOO_METHOD(Initialize)(_In_ const wchar_t * const config);
         VOODOO_METHOD(Reset)();
         VOODOO_METHOD_(IParser *, GetParser)() CONST;
         VOODOO_METHOD_(IHookManager *, GetHookManager)() CONST;

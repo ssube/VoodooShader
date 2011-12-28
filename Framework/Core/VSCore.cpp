@@ -117,7 +117,7 @@ namespace VoodooShader
 #endif
     }
 
-    bool VOODOO_METHODTYPE VSCore::Initialize(_In_ const vchar_t * const config)
+    bool VOODOO_METHODTYPE VSCore::Initialize(_In_ const wchar_t * const config)
     {
         if (config)
         {
@@ -128,7 +128,7 @@ namespace VoodooShader
 
         // Load variables, built-in first
         {
-            vchar_t buffer[MAX_PATH];
+            wchar_t buffer[MAX_PATH];
 
             // Global path
             GetVoodooPath(buffer);

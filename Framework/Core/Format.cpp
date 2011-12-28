@@ -23,6 +23,10 @@
 #include "Stream.hpp"
 
 #include <boost/format.hpp>
+#pragma warning(push)
+#pragma warning(disable: 6246)
+#include <boost/uuid/uuid_io.hpp>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -30,12 +34,12 @@ namespace VoodooShader
     {
     public:
         FormatImpl() : m_Format() { };
-        FormatImpl(const vchar_t * fmt) : m_Format(fmt) { };
+        FormatImpl(const wchar_t * fmt) : m_Format(fmt) { };
 
-        boost::basic_format<vchar_t> m_Format;
+        boost::basic_format<wchar_t> m_Format;
     };
 
-    Format::Format(_In_ const vchar_t * fmt) :
+    Format::Format(_In_ const wchar_t * fmt) :
         m_Impl(new FormatImpl(fmt))
     {}
 
@@ -51,7 +55,7 @@ namespace VoodooShader
 
     String Format::ToString() const
     {
-        std::basic_string<vchar_t, std::char_traits<vchar_t>> str(m_Impl->m_Format.str());
+        std::basic_string<wchar_t, std::char_traits<wchar_t>> str(m_Impl->m_Format.str());
         return String(str);
     }
 
@@ -109,31 +113,13 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const void *& val)
-    {
-        m_Impl->m_Format % val;
-        return (*this);
-    }
-
     Format & Format::operator<<(const char val)
     {
         m_Impl->m_Format % val;
         return (*this);
     }
 
-    Format & Format::operator<<(const char * val)
-    {
-        m_Impl->m_Format % val;
-        return (*this);
-    }
-
     Format & Format::operator<<(const wchar_t val)
-    {
-        m_Impl->m_Format % val;
-        return (*this);
-    }
-
-    Format & Format::operator<<(const wchar_t * val)
     {
         m_Impl->m_Format % val;
         return (*this);
@@ -187,14 +173,21 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const IObject * val)
+    Format & Format::insertPtr(const void * val)
     {
-        if (val)
-        {
-            m_Impl->m_Format % val->ToString();
-        } else {
-            m_Impl->m_Format % VSTR("IObject(null)");
-        }
+        m_Impl->m_Format % val;
+        return (*this);
+    }
+
+    Format & Format::insertPtr(const char * val)
+    {
+        m_Impl->m_Format % val;
+        return (*this);
+    }
+
+    Format & Format::insertPtr(const wchar_t * val)
+    {
+        m_Impl->m_Format % val;
         return (*this);
     }
 }

@@ -20,17 +20,16 @@
 #pragma once
 
 #ifndef VOODOO_STRING_MACROS
-#   ifdef VSTR
-#       error VSTR already defined.
-#   endif
 #   define VOODOO_STRING_MACROS
+// String type macros
 #   ifdef _UNICODE
-#       define VOODOO_META_STRING_ARG(arg) L ## #arg
-#       define VOODOO_META_STRING_STR(arg) L ## arg
+#       define VOODOO_META_STRING_ARG(arg)  L ## #arg
+#       define VOODOO_META_STRING_STR(arg)  L ## arg
 #   else
-#       define VOODOO_META_STRING_ARG(arg) #arg
-#       define VOODOO_META_STRING_STR(arg) arg
+#       define VOODOO_META_STRING_ARG(arg)  #arg
+#       define VOODOO_META_STRING_STR(arg)  arg
 #   endif
+// String meta macros
 #   define VOODOO_META_TOSTRING(arg)    VOODOO_META_STRING_ARG(arg)
 #   define VOODOO_META_STRING(arg)      VOODOO_META_STRING_STR(arg)
 #   define VSTR(arg)                    VOODOO_META_STRING_STR(arg)
